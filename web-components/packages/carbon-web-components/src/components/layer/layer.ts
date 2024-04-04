@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,12 +10,14 @@
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import styles from './layer.scss?lit';
+import styles from './layer.scss';
 
 /**
  * Basic layer
  *
  * @element cds-layer
+ * @fires cds-use-layer
+ *   The name of the custom event fired when the "use layer" action occurs.
  * @slot children - The elements contained within the component.
  */
 @customElement(`${prefix}-layer`)

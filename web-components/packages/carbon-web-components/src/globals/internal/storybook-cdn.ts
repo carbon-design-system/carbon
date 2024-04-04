@@ -19,13 +19,11 @@ import packageJson from '../../../package.json';
  *
  * @param {Array} components array of component names
  * @param {string} tag tag folder
- * @param {boolean} isRTL flag to show rtl version
  */
-function _renderScript(components, tag, isRTL = false) {
+function _renderScript(components, tag) {
   let scripts = '';
-  const rtl = isRTL ? '.rtl' : '';
   components.forEach((component) => {
-    scripts += `<script type="module" src="https://1.www.s81c.com/common/carbon/web-components/${tag}/${component}${rtl}.min.js"></script>\n`;
+    scripts += `<script type="module" src="https://1.www.s81c.com/common/carbon/web-components/${tag}/${component}.min.js"></script>\n`;
   });
   return scripts;
 }
@@ -34,34 +32,26 @@ function _renderScript(components, tag, isRTL = false) {
  * This is the markdown block for JS via CDN
  *
  * @param {Array} components array of components to render
+ * @param components.components components to render
  */
 export const cdnJs = ({ components }) => {
   return `
 ### JS (via CDN)
 
+ > NOTE: Only one version of artifacts should be used. Mixing versions will cause rendering issues.
+
  \`\`\`html
-// SPECIFIC VERSION (available starting v1.6.0)
-${_renderScript(components, `version/v${packageJson.version}`)}
+ // SPECIFIC VERSION (available starting v2.0.0)
+ ${_renderScript(components, `version/v${packageJson.version}`)}
+ \`\`\`
 
-// LATEST tag
-${_renderScript(components, 'tag/v2/latest')}
-\`\`\`
+ #### Right-to-left (RTL) versions
 
-> NOTE: The latest tag is a moving version. While beneficial to
-> always stay on the most recent version, it is recommended to choose a specific
-> version and properly test your application when upgrading to a newer version.
-
-
-#### Right-to-left (RTL) versions
-
-\`\`\`html
-// SPECIFIC VERSION (available starting v1.6.0)
-${_renderScript(components, `version/v${packageJson.version}`, true)}
-
-// LATEST tag
-${_renderScript(components, 'tag/v2/latest', true)}
-\`\`\`
-  `;
+ \`\`\`html
+ // SPECIFIC VERSION (available starting v2.0.0)
+ ${_renderScript(components, `version/v${packageJson.version}`)}
+ \`\`\`
+   `;
 };
 
 /**

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,13 +13,10 @@ const header = require('gulp-header');
 const path = require('path');
 const prettier = require('gulp-prettier');
 const through2 = require('through2');
-
 const { promisify } = require('util');
 const { readFile } = require('fs');
-
 const config = require('../../config');
 const createSVGResultFromCarbonIcon = require('../../../tools/svg-result-carbon-icon');
-
 const readFileAsync = promisify(readFile);
 const promisifyStream = promisify(asyncDone);
 

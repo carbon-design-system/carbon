@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,7 +14,7 @@ import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
-import styles from './file-uploader.scss?lit';
+import styles from './file-uploader.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { FORM_ELEMENT_COLOR_SCHEME as TILE_COLOR_SCHEME } from '../../globals/shared-enums';
@@ -48,10 +48,11 @@ class CDSFileUploaderDropContainer extends HostListenerMixin(LitElement) {
   private _handleChange(event: Event | DragEvent) {
     const { eventChange, selectorInput } = this
       .constructor as typeof CDSFileUploaderDropContainer;
-    const addedFiles = this._getFiles(
-      event,
-      (this.shadowRoot?.querySelector(selectorInput) as HTMLInputElement).files
-    );
+    const { files } =
+      (event.type === 'drop'
+        ? (event as DragEvent).dataTransfer
+        : (event.target as HTMLInputElement)) ?? {};
+    const addedFiles = this._getFiles(event, files);
 
     this.dispatchEvent(
       new CustomEvent(eventChange, {

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -42,6 +42,8 @@ const THUMB_DIRECTION = {
  * Slider.
  *
  * @element cds-slider
+ * @fires cds-slider-input-changed
+ *   The name of the custom event fired after the value is changed in `<cds-slider-input>` by user gesture.
  * @slot label-text - The label text.
  * @slot max-text - The text for maximum value.
  * @slot min-text - The text for minimum value.

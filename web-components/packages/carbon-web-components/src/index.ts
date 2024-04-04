@@ -9,11 +9,15 @@
 
 export { default as CDSAccordion } from './components/accordion/accordion';
 export { default as CDSAccordionItem } from './components/accordion/accordion-item';
+export { default as CDSAISkeletonIcon } from './components/ai-skeleton/ai-skeleton-icon';
+export { default as CDSAISkeletonPlaceholder } from './components/ai-skeleton/ai-skeleton-placeholder';
+export { default as CDSAISkeletonText } from './components/ai-skeleton/ai-skeleton-text';
 export { default as CDSButton } from './components/button/button';
 export { default as CDSButtonSkeleton } from './components/button/button-skeleton';
 export { default as CDSBreadcrumb } from './components/breadcrumb/breadcrumb';
 export { default as CDSBreadcrumbItem } from './components/breadcrumb/breadcrumb-item';
 export { default as CDSBreadcrumbLink } from './components/breadcrumb/breadcrumb-link';
+export { default as CDSChatButton } from './components/chat-button/chat-button';
 export { default as CDSCheckbox } from './components/checkbox/checkbox';
 export { default as CDSCodeSnippet } from './components/code-snippet/code-snippet';
 export { default as CDSCodeSnippetSkeleton } from './components/code-snippet/code-snippet-skeleton';

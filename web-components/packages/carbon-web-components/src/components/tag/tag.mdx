@@ -2,7 +2,7 @@ import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as TagStories from './tag.stories';
 
-<Meta of={TagStories} /> 
+<Meta of={TagStories} />
 
 # Tag
 
@@ -68,9 +68,9 @@ icon and insert it within the tag element as such:
 import Download16 from '@carbon/web-components/es/icons/download/16';
 
 function App() {
-  return (
-    html`  <cds-tag filter type="gray" title="Clear selection">This is a tag ${Download16({ slot: 'icon' })}</cds-tag>`
-  );
+  return html` <cds-tag filter type="gray" title="Clear selection"
+    >This is a tag ${Download16({ slot: 'icon' })}</cds-tag
+  >`;
 }
 ```
 

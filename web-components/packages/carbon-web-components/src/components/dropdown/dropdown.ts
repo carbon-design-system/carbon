@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,7 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html, TemplateResult } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
@@ -71,10 +71,8 @@ class CDSDropdown extends ValidityMixin(
    */
   protected _hasSlug = false;
 
-  /**
-   * The latest status of this dropdown, for screen reader to accounce.
-   */
-  protected _assistiveStatusText?: string;
+  @state()
+  protected _activeDescendant?: string;
 
   /**
    * The content of the selected item.
@@ -123,16 +121,18 @@ class CDSDropdown extends ValidityMixin(
   protected _selectionDidChange(itemToSelect?: CDSDropdownItem) {
     if (itemToSelect) {
       this.value = itemToSelect.value;
+      this._activeDescendant = itemToSelect.id;
       forEach(
         this.querySelectorAll(
           (this.constructor as typeof CDSDropdown).selectorItemSelected
         ),
         (item) => {
           (item as CDSDropdownItem).selected = false;
+          item.setAttribute('aria-selected', 'false');
         }
       );
       itemToSelect.selected = true;
-      this._assistiveStatusText = this.selectedItemAssistiveText;
+      itemToSelect.setAttribute('aria-selected', 'true');
       this._handleUserInitiatedToggle(false);
     }
   }
@@ -306,7 +306,7 @@ class CDSDropdown extends ValidityMixin(
    *
    * @param [force] If specified, forces the open state to the given one.
    */
-  protected _handleUserInitiatedToggle(force: boolean = !this.open) {
+  protected _handleUserInitiatedToggle(force = !this.open) {
     const { eventBeforeToggle, eventToggle } = this
       .constructor as typeof CDSDropdown;
 
@@ -322,23 +322,7 @@ class CDSDropdown extends ValidityMixin(
     if (!disabled) {
       if (this.dispatchEvent(new CustomEvent(eventBeforeToggle, init))) {
         this.open = force;
-        if (this.open) {
-          this._assistiveStatusText = this.selectingItemsAssistiveText;
-        } else {
-          const {
-            selectedItemAssistiveText,
-            label,
-            _assistiveStatusText: assistiveStatusText,
-            _selectedItemContent: selectedItemContent,
-          } = this;
-          const selectedItemText =
-            (selectedItemContent && selectedItemContent.textContent) || label;
-          if (
-            selectedItemText &&
-            assistiveStatusText !== selectedItemAssistiveText
-          ) {
-            this._assistiveStatusText = selectedItemText;
-          }
+        if (!this.open) {
           forEach(
             this.querySelectorAll(
               (this.constructor as typeof CDSDropdown).selectorItemHighlighted
@@ -401,11 +385,10 @@ class CDSDropdown extends ValidityMixin(
     // IE falls back to the old behavior.
     nextItem.scrollIntoView({ block: 'nearest' });
 
-    const nextItemText = nextItem.textContent;
-    if (nextItemText) {
-      this._assistiveStatusText = nextItemText;
+    const nextItemId = nextItem.id;
+    if (nextItemId) {
+      this._activeDescendant = nextItemId;
     }
-    this.requestUpdate();
   }
 
   /* eslint-disable class-methods-use-this */
@@ -453,8 +436,10 @@ class CDSDropdown extends ValidityMixin(
 
     return html`
       <label
+        id="dropdown-label"
         part="title-text"
         class="${labelClasses}"
+        for="trigger-button"
         ?hidden="${!hasTitleText}">
         <slot name="title-text" @slotchange="${handleSlotchangeLabelText}"
           >${titleText}</slot
@@ -565,19 +550,6 @@ class CDSDropdown extends ValidityMixin(
   requiredValidityMessage = 'Please fill out this field.';
 
   /**
-   * An assistive text for screen reader to announce, telling the open state.
-   */
-  @property({ attribute: 'selecting-items-assistive-text' })
-  selectingItemsAssistiveText =
-    'Selecting items. Use up and down arrow keys to navigate.';
-
-  /**
-   * An assistive text for screen reader to announce, telling that an item is selected.
-   */
-  @property({ attribute: 'selected-item-assistive-text' })
-  selectedItemAssistiveText = 'Selected an item.';
-
-  /**
    * Dropdown size.
    */
   @property({ reflect: true })
@@ -676,6 +648,13 @@ class CDSDropdown extends ValidityMixin(
     this._hasSlug
       ? this.setAttribute('slug', '')
       : this.removeAttribute('slug');
+
+    this.shadowRoot
+      ?.querySelector("slot[name='slug']")
+      ?.classList.toggle(
+        `${prefix}--slug--revert`,
+        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+      );
   }
 
   /**
@@ -717,7 +696,7 @@ class CDSDropdown extends ValidityMixin(
       type,
       warn,
       warnText,
-      _assistiveStatusText: assistiveStatusText,
+      _activeDescendant: activeDescendant,
       _shouldTriggerBeFocusable: shouldTriggerBeFocusable,
       _handleClickInner: handleClickInner,
       _handleKeydownInner: handleKeydownInner,
@@ -727,6 +706,13 @@ class CDSDropdown extends ValidityMixin(
       _slotHelperTextNode: slotHelperTextNode,
     } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
+
+    let activeDescendantFallback: string | undefined;
+    if (open && !activeDescendant) {
+      const constructor = this.constructor as typeof CDSDropdown;
+      const items = this.querySelectorAll(constructor.selectorItem);
+      activeDescendantFallback = items[0]?.id;
+    }
 
     const helperClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
@@ -740,6 +726,8 @@ class CDSDropdown extends ValidityMixin(
       (open ? toggleLabelOpen : toggleLabelClosed) || undefined;
     const hasHelperText =
       helperText ||
+      invalidText ||
+      warnText ||
       (slotHelperTextNode && slotHelperTextNode.assignedNodes().length > 0);
     const validityIcon = !invalid
       ? undefined
@@ -755,38 +743,56 @@ class CDSDropdown extends ValidityMixin(
             'aria-label': toggleLabel,
           });
     const helperMessage = invalid ? invalidText : warn ? warnText : helperText;
-    const menuBody = !open
-      ? undefined
-      : html`
-          <div
-            aria-label="${ariaLabel}"
-            id="menu-body"
-            part="menu-body"
-            class="${prefix}--list-box__menu"
-            role="listbox"
-            tabindex="-1">
-            <slot></slot>
-          </div>
-        `;
+    const menuBody = html`
+      <div
+        aria-labelledby="${ifDefined(ariaLabel ? undefined : 'dropdown-label')}"
+        aria-label="${ifDefined(ariaLabel ? ariaLabel : undefined)}"
+        id="menu-body"
+        part="menu-body"
+        class="${prefix}--list-box__menu"
+        role="listbox"
+        tabindex="-1"
+        ?hidden=${!open}>
+        <slot></slot>
+      </div>
+    `;
     return html`
       ${this._renderTitleLabel()}
       <div
-        role="listbox"
         class="${classes}"
         ?data-invalid=${invalid}
         @click=${handleClickInner}
         @keydown=${handleKeydownInner}
         @keypress=${handleKeypressInner}>
         <div
-          part="trigger-button"
-          role="${ifDefined(!shouldTriggerBeFocusable ? undefined : 'button')}"
+          id="${ifDefined(
+            !shouldTriggerBeFocusable ? undefined : 'trigger-button'
+          )}"
           class="${prefix}--list-box__field"
+          part="trigger-button"
           tabindex="${ifDefined(!shouldTriggerBeFocusable ? undefined : '0')}"
-          aria-labelledby="trigger-label"
-          aria-expanded="${String(open)}"
-          aria-haspopup="listbox"
-          aria-owns="menu-body"
-          aria-controls="menu-body">
+          role="${ifDefined(
+            !shouldTriggerBeFocusable ? undefined : 'combobox'
+          )}"
+          aria-labelledby="${ifDefined(
+            !shouldTriggerBeFocusable ? undefined : 'dropdown-label'
+          )}"
+          aria-expanded="${ifDefined(
+            !shouldTriggerBeFocusable ? undefined : String(open)
+          )}"
+          aria-haspopup="${ifDefined(
+            !shouldTriggerBeFocusable ? undefined : 'listbox'
+          )}"
+          aria-controls="${ifDefined(
+            !shouldTriggerBeFocusable ? undefined : 'menu-body'
+          )}"
+          aria-activedescendant="${ifDefined(
+            !shouldTriggerBeFocusable
+              ? undefined
+              : open
+              ? activeDescendant ?? activeDescendantFallback
+              : ''
+          )}">
           ${this._renderPrecedingLabel()}${this._renderLabel()}${validityIcon}${warningIcon}${this._renderFollowingLabel()}
           <div id="trigger-caret" class="${iconContainerClasses}">
             ${ChevronDown16({ 'aria-label': toggleLabel })}
@@ -802,13 +808,6 @@ class CDSDropdown extends ValidityMixin(
         <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
           >${helperMessage}</slot
         >
-      </div>
-      <div
-        class="${prefix}--assistive-text"
-        role="status"
-        aria-live="assertive"
-        aria-relevant="additions text">
-        ${assistiveStatusText}
       </div>
     `;
   }
@@ -880,6 +879,7 @@ class CDSDropdown extends ValidityMixin(
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
+
   static styles = styles;
 
   /**

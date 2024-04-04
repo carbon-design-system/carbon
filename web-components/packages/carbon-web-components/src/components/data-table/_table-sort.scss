@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2023
+// Copyright IBM Corp. 2019, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -16,19 +16,18 @@
 
 :host(#{$prefix}-table-header-row)
   ::slotted(#{$prefix}-table-header-cell[sort-direction]) {
-  height: $spacing-09;
-  padding-left: 0;
-  padding-right: 0;
+  block-size: $spacing-09;
+  padding-inline: 0;
 }
 
 :host(#{$prefix}-table-header-cell[sort-direction]:first-of-type)
   .#{$prefix}--table-sort {
-  padding-left: $spacing-05;
+  padding-inline-start: $spacing-05;
 }
 
 :host(#{$prefix}-table-header-cell[sort-direction][expandable][selection-name])
   .#{$prefix}--table-sort {
-  padding-left: 0;
+  padding-inline-start: 0;
 }
 
 //
@@ -58,9 +57,14 @@
   transform: rotate(180deg);
 }
 
-:host(#{$prefix}-table-header-cell[sort-direction]) {
+// places slug near sorting icon in header
+:host(#{$prefix}-table-header-cell[sort-direction][slug]) {
+  .#{$prefix}--table-sort__icon-unsorted,
+  .#{$prefix}--table-sort__icon {
+    margin-inline: auto $spacing-03;
+  }
+
   ::slotted(#{$prefix}-slug) {
-    margin-inline-end: auto;
-    margin-inline-start: $spacing-03;
+    margin-inline-end: $spacing-03;
   }
 }

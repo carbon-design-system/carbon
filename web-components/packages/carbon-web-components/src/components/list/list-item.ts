@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import styles from './list.scss?lit';
+import styles from './list.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
@@ -30,6 +30,7 @@ class CDSListItem extends LitElement {
    * Handles `slotchange` event for the `<slot>` for the nested child list.
    *
    * @param event The event.
+   * @param event.target The event target.
    */
   private _handleSlotChangeNested({ target }: Event) {
     this._hasNestedChild =

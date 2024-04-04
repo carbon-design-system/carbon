@@ -84,7 +84,7 @@ const actions = html`
     ${Folders16({ slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
-  <cds-slug-action-button>View Literature</cds-slug-action-button>
+  <cds-slug-action-button>View details</cds-slug-action-button>
 `;
 
 export const _Checkbox = {
@@ -243,6 +243,91 @@ export const _Dropdown = {
           )}
         </cds-dropdown>
       </div>`;
+  },
+};
+
+export const _Modal = {
+  args: {
+    hasScrollingContent: true,
+    showButtons: true,
+  },
+  argTypes: {
+    hasScrollingContent: {
+      control: 'boolean',
+      description: 'Specify whether modal has scrolling content',
+    },
+    showButtons: {
+      control: 'boolean',
+      description: 'Specify whether to show or hide modal buttons',
+    },
+  },
+  render: (args) => {
+    const { hasScrollingContent, showButtons } = args ?? {};
+
+    return html`
+    <style>
+      ${styles}
+    </style>
+    <cds-modal open prevent-close ?has-scrolling-content="${hasScrollingContent}">
+      <cds-modal-header>
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        <cds-modal-close-button></cds-modal-close-button>
+        <cds-modal-label>Account resources</cds-modal-label>
+        <cds-modal-heading>Add a custom domain</cds-modal-heading>
+      </cds-modal-header>
+      <cds-modal-body>
+        <cds-modal-body-content description>
+        <p style="margin-bottom: 1rem">
+        Custom domains direct requests for your apps in this Cloud Foundry
+        organization to a URL that you own. A custom domain can be a shared
+        domain, a shared subdomain, or a shared domain and host.
+      </p>
+      <p style="margin-bottom: 1rem">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+        eu nibh odio. Nunc a consequat est, id porttitor sapien. Proin vitae
+        leo vitae orci tincidunt auctor eget eget libero. Ut tincidunt
+        ultricies fringilla. Aliquam erat volutpat. Aenean arcu odio,
+        elementum vel vehicula vitae, porttitor ac lorem. Sed viverra elit
+        ac risus tincidunt fermentum. Ut sollicitudin nibh id risus ornare
+        ornare. Etiam gravida orci ut lectus dictum, quis ultricies felis
+        mollis. Mauris nec commodo est, nec faucibus nibh. Nunc commodo ante
+        quis pretium consectetur. Ut ac nisl vitae mi mattis vulputate a at
+        elit. Nullam porttitor ex eget mi feugiat mattis. Nunc non sodales
+        magna. Proin ornare tellus quis hendrerit egestas. Donec pharetra
+        leo nec molestie sollicitudin.
+      </p>
+        </cds-modal-body-content>
+        <cds-form-item>
+          <cds-text-input placeholder="e.g. github.com" label="Domain name">
+          </cds-text-input>
+        </cds-form-item>
+
+        <cds-form-item>
+          <cds-select placeholder="US South" label-text="Region">
+            <cds-select-item value="us-south">US South</cds-select-item>
+            <cds-select-item value="us-east">US East</cds-select-item>
+          </cds-select>
+        </cds-form-item>
+        <cds-form-item>
+        <cds-textarea label="Comments" >
+        </cds-form-item>
+      </cds-textarea>
+      </cds-modal-body>
+      ${
+        showButtons
+          ? html`
+              <cds-modal-footer>
+                <cds-modal-footer-button kind="secondary"
+                  >Cancel</cds-modal-footer-button
+                >
+                <cds-modal-footer-button>Add</cds-modal-footer-button>
+              </cds-modal-footer>
+            `
+          : ``
+      }
+
+    </cds-modal>
+  `;
   },
 };
 
@@ -451,66 +536,29 @@ export const _Select = {
   },
 };
 
-const tagTypes = [
-  'red',
-  'magenta',
-  'purple',
-  'blue',
-  'cyan',
-  'teal',
-  'green',
-  'gray',
-  'cool-gray',
-  'warm-gray',
-  'high-contrast',
-  'outline',
-];
-
 export const _Tag = {
   render: () => {
-    return html`
-      <style>
+    return html` <style>
         ${styles}
       </style>
-      <div class="slug-tag-container">
-        ${tagTypes.map(
-          (e) => html`<cds-tag type="${e}"
-            >Tag
-            <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
-          </cds-tag>`
-        )}
-      </div>
+      <cds-tag type="red"
+        >Tag
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+      </cds-tag>
 
-      <div class="slug-tag-container">
-        ${tagTypes.map(
-          (e) =>
-            html`<cds-tag filter type="${e}">
-              Tag
-              <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
-            </cds-tag>`
-        )}
-      </div>
+      <cds-tag filter type="purple">
+        Tag
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+      </cds-tag>
 
-      <div class="slug-tag-container">
-        ${tagTypes.map(
-          (e) =>
-            html`<cds-tag type="${e}">
-              ${Asleep16({ slot: 'icon' })} Tag
-              <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
-            </cds-tag>`
-        )}
-      </div>
-
-      <div class="slug-tag-container">
-        ${tagTypes.map(
-          (e) =>
-            html`<cds-tag filter type="${e}">
-              ${Asleep16({ slot: 'icon' })} Tag
-              <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
-            </cds-tag>`
-        )}
-      </div>
-    `;
+      <cds-tag type="blue">
+        ${Asleep16({ slot: 'icon' })} Tag
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+      </cds-tag>
+      <cds-tag filter type="green">
+        ${Asleep16({ slot: 'icon' })} Tag
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+      </cds-tag>`;
   },
 };
 

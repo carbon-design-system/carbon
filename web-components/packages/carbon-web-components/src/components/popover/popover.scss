@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -92,38 +92,38 @@ $popover-caret-height: custom-property.get-var(
   );
 }
 
-:host(#{$prefix}-tooltip-content[align^='bottom']),
-:host(#{$prefix}-popover-content[align^='bottom']),
-:host(#{$prefix}-toggletip[alignment^='bottom']),
-:host(#{$prefix}-slug[alignment^='bottom']) {
+:host(#{$prefix}-tooltip-content[align^='bottom']:not([autoalign])),
+:host(#{$prefix}-popover-content[align^='bottom']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment^='bottom']:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='bottom']:not([autoalign])) {
   .#{$prefix}--popover-caret {
-    bottom: 0;
-    left: 50%;
-    width: $popover-caret-width;
-    height: $popover-caret-height;
+    block-size: $popover-caret-height;
     clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+    inline-size: $popover-caret-width;
+    inset-block-end: 0;
+    inset-inline-start: 50%;
     transform: translate(-50%, $popover-offset);
   }
 }
 
-:host(#{$prefix}-tooltip-content[align='bottom']),
-:host(#{$prefix}-popover-content[align='bottom']),
-:host(#{$prefix}-toggletip[alignment='bottom']),
-:host(#{$prefix}-slug[alignment='bottom']) {
+:host(#{$prefix}-tooltip-content[align='bottom']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='bottom']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='bottom']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='bottom']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    bottom: 0;
-    left: 50%;
+    inset-block-end: 0;
+    inset-inline-start: 50%;
     transform: translate(-50%, calc(100% + $popover-offset));
   }
 }
 
-:host(#{$prefix}-tooltip-content[align='bottom-left']),
-:host(#{$prefix}-popover-content[align='bottom-left']),
-:host(#{$prefix}-toggletip[alignment='bottom-left']),
-:host(#{$prefix}-slug[alignment='bottom-left']) {
+:host(#{$prefix}-tooltip-content[align='bottom-left']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='bottom-left']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='bottom-left']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='bottom-left']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    bottom: 0;
-    left: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
     transform: translate(
       calc(-1 * $popover-offset),
       calc(100% + $popover-offset)
@@ -131,121 +131,121 @@ $popover-caret-height: custom-property.get-var(
   }
 }
 
-:host(#{$prefix}-tooltip-content[align='bottom-right']),
-:host(#{$prefix}-popover-content[align='bottom-right']),
-:host(#{$prefix}-toggletip[alignment='bottom-right']),
-:host(#{$prefix}-slug[alignment='bottom-right']) {
+:host(#{$prefix}-tooltip-content[align='bottom-right']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='bottom-right']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='bottom-right']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='bottom-right']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    right: 0;
-    bottom: 0;
+    inset-block-end: 0;
+    inset-inline-end: 0;
     transform: translate($popover-offset, calc(100% + $popover-offset));
   }
 }
 
-:host(#{$prefix}-tooltip-content[align^='left']),
-:host(#{$prefix}-popover-content[align^='left']),
-:host(#{$prefix}-toggletip[alignment^='left']),
-:host(#{$prefix}-slug[alignment^='left']) {
+:host(#{$prefix}-tooltip-content[align^='left']:not([autoalign])),
+:host(#{$prefix}-popover-content[align^='left']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment^='left']:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='left']:not([autoalign])) {
   .#{$prefix}--popover-caret {
-    top: 50%;
-    right: 100%;
-    width: $popover-caret-height;
-    height: $popover-caret-width;
+    block-size: $popover-caret-width;
     clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+    inline-size: $popover-caret-height;
+    inset-block-start: 50%;
+    inset-inline-end: 100%;
     transform: translate(calc(-1 * $popover-offset + 100%), -50%);
   }
 }
 
-:host(#{$prefix}-tooltip-content[align='left']),
-:host(#{$prefix}-popover-content[align='left']),
-:host(#{$prefix}-toggletip[alignment='left']),
-:host(#{$prefix}-slug[alignment='left']) {
+:host(#{$prefix}-tooltip-content[align='left']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='left']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='left']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='left']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    top: 50%;
-    right: 100%;
+    inset-block-start: 50%;
+    inset-inline-end: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
     transform: translate(calc(-1 * $popover-offset + 0.1px), -50%);
   }
 }
 
-:host(#{$prefix}-tooltip-content[align='left-bottom']),
-:host(#{$prefix}-popover-content[align='left-bottom']),
-:host(#{$prefix}-toggletip[alignment='left-bottom']),
-:host(#{$prefix}-slug[alignment='left-bottom']) {
+:host(#{$prefix}-tooltip-content[align='left-bottom']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='left-bottom']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='left-bottom']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='left-bottom']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    right: 100%;
-    bottom: -50%;
+    inset-block-end: 50%;
+    inset-inline-end: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
     transform: translate(
       calc(-1 * $popover-offset),
-      calc(0.5 * $popover-offset - 16px)
+      calc(0.5 * $popover-offset + $spacing-05)
     );
   }
 }
 
-:host(#{$prefix}-tooltip-content[align='left-top']),
-:host(#{$prefix}-popover-content[align='left-top']),
-:host(#{$prefix}-toggletip[alignment='left-top']),
-:host(#{$prefix}-slug[alignment='left-top']) {
+:host(#{$prefix}-tooltip-content[align='left-top']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='left-top']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='left-top']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='left-top']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    top: -50%;
-    right: 100%;
+    inset-block-start: 50%;
+    inset-inline-end: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
     transform: translate(
       calc(-1 * $popover-offset),
-      calc(-1 * 0.5 * $popover-offset + 16px)
+      calc(-1 * 0.5 * $popover-offset - $spacing-05)
     );
   }
 }
 
-:host(#{$prefix}-tooltip-content[align^='right']),
-:host(#{$prefix}-popover-content[align^='right']),
-:host(#{$prefix}-toggletip[alignment^='right']),
-:host(#{$prefix}-slug[alignment^='right']) {
+:host(#{$prefix}-tooltip-content[align^='right']:not([autoalign])),
+:host(#{$prefix}-popover-content[align^='right']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment^='right']:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='right']:not([autoalign])) {
   .#{$prefix}--popover-caret {
-    top: 50%;
-    left: 100%;
-    width: $popover-caret-height;
-    height: $popover-caret-width;
+    block-size: $popover-caret-width;
     clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+    inline-size: $popover-caret-height;
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
     transform: translate(calc($popover-offset - 100%), -50%);
   }
 }
 
-:host(#{$prefix}-tooltip-content[align='right']),
-:host(#{$prefix}-popover-content[align='right']),
-:host(#{$prefix}-toggletip[alignment='right']),
-:host(#{$prefix}-slug[alignment='right']) {
+:host(#{$prefix}-tooltip-content[align='right']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='right']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='right']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='right']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    top: 50%;
-    left: 100%;
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
     transform: translate($popover-offset, -50%);
   }
 }
 
-:host(#{$prefix}-tooltip-content[align='right-bottom']),
-:host(#{$prefix}-popover-content[align='right-bottom']),
-:host(#{$prefix}-toggletip[alignment='right-bottom']),
-:host(#{$prefix}-slug[alignment='right-bottom']) {
+:host(#{$prefix}-tooltip-content[align='right-bottom']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='right-bottom']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='right-bottom']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='right-bottom']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    bottom: 50%;
-    left: 100%;
+    inset-block-end: 50%;
+    inset-inline-start: 100%;
     transform: translate($popover-offset, calc(0.5 * $popover-offset + 16px));
   }
 }
 
-:host(#{$prefix}-tooltip-content[align='right-top']),
-:host(#{$prefix}-popover-content[align='right-top']),
-:host(#{$prefix}-toggletip[alignment='right-top']),
-:host(#{$prefix}-slug[alignment='right-top']) {
+:host(#{$prefix}-tooltip-content[align='right-top']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='right-top']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='right-top']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='right-top']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    top: 50%;
-    left: 100%;
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
     transform: translate(
       $popover-offset,
       calc(0.5 * $popover-offset * -1 - 16px)
@@ -253,38 +253,38 @@ $popover-caret-height: custom-property.get-var(
   }
 }
 
-:host(#{$prefix}-tooltip-content[align^='top']),
-:host(#{$prefix}-popover-content[align^='top']),
-:host(#{$prefix}-toggletip[alignment^='top']),
-:host(#{$prefix}-slug[alignment^='top']) {
+:host(#{$prefix}-tooltip-content[align^='top']:not([autoalign])),
+:host(#{$prefix}-popover-content[align^='top']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment^='top']:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='top']:not([autoalign])) {
   .#{$prefix}--popover-caret {
-    top: 0;
-    left: 50%;
-    width: $popover-caret-width;
-    height: $popover-caret-height;
+    block-size: $popover-caret-height;
     clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+    inline-size: $popover-caret-width;
+    inset-block-start: 0;
+    inset-inline-start: 50%;
     transform: translate(-50%, calc(-1 * $popover-offset));
   }
 }
 
-:host(#{$prefix}-tooltip-content[align='top']),
-:host(#{$prefix}-popover-content[align='top']),
-:host(#{$prefix}-toggletip[alignment='top']),
-:host(#{$prefix}-slug[alignment='top']) {
+:host(#{$prefix}-tooltip-content[align='top']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='top']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='top']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='top']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    top: 0;
-    left: 50%;
+    inset-block-start: 0;
+    inset-inline-start: 50%;
     transform: translate(-50%, calc(-100% - $popover-offset));
   }
 }
 
-:host(#{$prefix}-tooltip-content[align='top-left']),
-:host(#{$prefix}-popover-content[align='top-left']),
-:host(#{$prefix}-toggletip[alignment='top-left']),
-:host(#{$prefix}-slug[alignment='top-left']) {
+:host(#{$prefix}-tooltip-content[align='top-left']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='top-left']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='top-left']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='top-left']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    top: 0;
-    left: 0;
+    inset-block-start: 0;
+    inset-inline-start: 0;
     transform: translate(
       calc(-1 * $popover-offset),
       calc(-100% - $popover-offset)
@@ -292,13 +292,32 @@ $popover-caret-height: custom-property.get-var(
   }
 }
 
-:host(#{$prefix}-tooltip-content[align='top-right']),
-:host(#{$prefix}-popover-content[align='top-right']),
-:host(#{$prefix}-toggletip[alignment='top-right']),
-:host(#{$prefix}-slug[alignment='top-right']) {
+:host(#{$prefix}-tooltip-content[align='top-right']:not([autoalign])),
+:host(#{$prefix}-popover-content[align='top-right']:not([autoalign])),
+:host(#{$prefix}-toggletip[alignment='top-right']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='top-right']:not([autoalign])) {
   .#{$prefix}--popover-content {
-    top: 0;
-    right: 0;
+    inset-block-start: 0;
+    inset-inline-end: 0;
     transform: translate($popover-offset, calc(-100% - $popover-offset));
+  }
+}
+
+:host(#{$prefix}-toggletip[autoalign]),
+:host(#{$prefix}-tooltip-content[autoalign]),
+:host(#{$prefix}-popover-content[autoalign]) {
+  .#{$prefix}--popover-caret {
+    block-size: 8px;
+    inline-size: 8px;
+    transform: rotate(45deg);
+  }
+}
+
+:host(#{$prefix}-slug[autoalign]),
+:host(#{$prefix}-tooltip[autoalign]),
+:host(#{$prefix}-toggletip[autoalign]),
+:host(#{$prefix}-popover[autoalign]) {
+  .#{$prefix}--popover-container {
+    position: static;
   }
 }

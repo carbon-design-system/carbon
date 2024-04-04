@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,6 +29,12 @@ class CDSIconButton extends CDSButton {
    */
   @property({ reflect: true, type: String })
   align = 'top';
+
+  /**
+   * Specify whether a auto align functionality should be applied
+   */
+  @property({ type: Boolean, reflect: true })
+  autoalign = false;
 
   /**
    * Determines whether the tooltip should close when inner content is activated (click, Enter or Space)
@@ -89,6 +95,7 @@ class CDSIconButton extends CDSButton {
   render() {
     const {
       align,
+      autoalign,
       closeOnActivation,
       defaultOpen,
       enterDelayMs,
@@ -96,6 +103,7 @@ class CDSIconButton extends CDSButton {
     } = this;
     return html`
       <cds-tooltip
+        ?autoalign=${autoalign}
         align=${align}
         ?defaultOpen=${defaultOpen}
         close-on-activation="${closeOnActivation}"

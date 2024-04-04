@@ -1,0 +1,16 @@
+//
+// Copyright IBM Corp. 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$feature-flags: (
+  enable-css-custom-properties: true,
+  grid-columns-16: true,
+);
+
+@use '@carbon/grid';
+
+// Emit the css-grid styles
+@include grid.css-grid();

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -76,6 +76,10 @@ const defaultArgs = {
 };
 
 const controls = {
+  ariaLabel: {
+    control: 'text',
+    description: 'aria-label',
+  },
   disabled: {
     control: 'boolean',
     description: `Specify if the dropdown should be disabled, or not.`,
@@ -225,6 +229,7 @@ export const Playground = {
   argTypes: controls,
   args: defaultArgs,
   render: ({
+    ariaLabel,
     open,
     direction,
     disabled,
@@ -243,6 +248,7 @@ export const Playground = {
   }) =>
     html`
       <cds-dropdown
+        aria-label=${ifDefined(ariaLabel)}
         ?open=${open}
         ?disabled="${disabled}"
         ?hide-label=${hideLabel}

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,6 +30,12 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
    */
   @property({ reflect: true, type: String })
   align = 'top';
+
+  /**
+   * Specify whether a auto align functionality should be applied
+   */
+  @property({ type: Boolean, reflect: true })
+  autoalign = false;
 
   /**
    * `true` if this tooltip is in a data table row
@@ -68,6 +74,12 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
   size = false;
 
   /**
+   * Specify the timeout reference for the tooltip
+   */
+  @property({ reflect: true })
+  timeoutId = 0;
+
+  /**
    * Specify whether the tooltip should be open when it first renders
    */
   @property({ reflect: true, attribute: 'toolbar-action', type: Boolean })
@@ -77,7 +89,8 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
    * Handles `mouseover` event on this element.
    */
   private _handleHover = async () => {
-    setTimeout(async () => {
+    window.clearTimeout(this.timeoutId);
+    this.timeoutId = window.setTimeout(async () => {
       this.open = true;
       const { open, updateComplete } = this;
       if (open) {
@@ -93,7 +106,8 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
    * Handles `mouseleave` event on this element.
    */
   private _handleHoverOut = async () => {
-    setTimeout(async () => {
+    window.clearTimeout(this.timeoutId);
+    this.timeoutId = window.setTimeout(async () => {
       const { open } = this;
       if (open) {
         this.open = false;
@@ -175,7 +189,7 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
         : toolTipContent?.removeAttribute('open');
     }
 
-    ['align', 'caret'].forEach((name) => {
+    ['align', 'caret', 'autoalign'].forEach((name) => {
       if (changedProperties.has(name)) {
         const { [name as keyof CDSTooltip]: value } = this;
         (toolTipContent as CDSTooltipContent)[name] = value;
@@ -185,6 +199,8 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
     this.shadowRoot
       ?.querySelector(`.${prefix}--popover-container`)
       ?.classList.add(`${prefix}--tooltip`);
+
+    super.updated(changedProperties);
   }
 
   /**

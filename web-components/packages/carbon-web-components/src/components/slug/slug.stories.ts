@@ -76,7 +76,7 @@ const actions = html`
     ${Folders16({ slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
-  <cds-slug-action-button>View Literature</cds-slug-action-button>
+  <cds-slug-action-button>View details</cds-slug-action-button>
 `;
 
 const args = {
@@ -85,7 +85,7 @@ const args = {
   dotType: 'default',
   kind: 'inline',
   revertActive: false,
-  size: SLUG_SIZE.MEDIUM,
+  size: SLUG_SIZE.EXTRA_SMALL,
 };
 
 const argTypes = {
@@ -256,6 +256,37 @@ export const Playground = {
           ?revert-active="${revertActive}">
           ${kind === 'hollow' || dotType === 'hollow' ? hollowContent : content}
           ${kind === 'hollow' || dotType === 'hollow' ? '' : actions}
+        </cds-slug>
+      </div>
+    `;
+  },
+};
+
+export const Callout = {
+  args: {
+    alignment: tooltipAlignments.bottom,
+    showActions: false,
+  },
+  argTypes: {
+    alignment: {
+      control: 'select',
+      description: 'Specify how the popover should align with the button.',
+      options: tooltipAlignments,
+    },
+    showActions: {
+      control: 'boolean',
+      description: 'Specify whether to show action items in slug callout',
+    },
+  },
+  render: (args) => {
+    const { alignment, showActions } = args ?? {};
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div class="slug-container-example slug-container centered">
+        <cds-slug open alignment="${alignment}" size="${SLUG_SIZE.EXTRA_SMALL}">
+          ${content} ${showActions ? actions : ''}
         </cds-slug>
       </div>
     `;

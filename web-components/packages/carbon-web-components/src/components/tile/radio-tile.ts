@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,6 +19,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * Single-selectable tile.
  *
  * @element cds-radio-tile
+ * @fires cds-radio-tile-selected
+ *   The name of the custom event fired after this selectable tile changes its selected state.
  */
 @customElement(`${prefix}-radio-tile`)
 class CDSRadioTile extends SelectableTile {

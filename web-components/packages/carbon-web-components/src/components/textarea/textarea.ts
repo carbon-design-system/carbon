@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,6 +33,7 @@ class CDSTextarea extends CDSTextInput {
    * Handles `oninput` event on the `<input>`.
    *
    * @param event The event.
+   * @param event.target The event target.
    */
   protected _handleInput({ target }: Event) {
     this.value = (target as HTMLTextAreaElement).value;

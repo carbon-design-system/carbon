@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2023
+// Copyright IBM Corp. 2019, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -44,8 +44,8 @@ $css--plex: true !default;
 
   .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label::after {
-    background-color: transparent;
     border-color: transparent;
+    background-color: transparent;
   }
 }
 
@@ -68,14 +68,12 @@ $css--plex: true !default;
 
 :host(#{$prefix}-checkbox[slug]) {
   flex-direction: row;
+
+  .#{$prefix}--checkbox-label-text {
+    display: flex;
+  }
 }
 
 :host(#{$prefix}-checkbox[slug]) ::slotted(#{$prefix}-slug) {
   align-self: center;
-}
-
-:host(#{$prefix}-checkbox[slug]) {
-  .#{$prefix}--checkbox-label-text {
-    display: flex;
-  }
 }

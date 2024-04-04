@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,6 +27,8 @@ export { NUMBER_INPUT_VALIDATION_STATUS };
  * Number input.
  *
  * @element cds-number-input
+ * @fires cds-number-input
+ *   The name of the custom event fired after the value is changed upon a user gesture.
  * @slot helper-text - The helper text.
  * @slot label-text - The label text.
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.
@@ -221,7 +223,7 @@ class CDSNumberInput extends CDSTextInput {
       class: `${prefix}--number__invalid ${prefix}--number__invalid--warning`,
     });
 
-    let normalizedProps = {
+    const normalizedProps = {
       disabled: !this.readonly && this.disabled,
       invalid: !this.readonly && !isValid,
       warn: !this.readonly && isValid && this.warn,

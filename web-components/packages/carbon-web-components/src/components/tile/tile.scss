@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2023
+// Copyright IBM Corp. 2019, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -69,22 +69,27 @@ $css--plex: true !default;
       color: inherit;
     }
   }
+
+  ::slotted(#{$prefix}-slug) {
+    pointer-events: none;
+  }
 }
 
 :host(#{$prefix}-radio-tile) {
   @include emit-layout-tokens();
 
   display: block;
-  outline: none;
 
-  margin-bottom: $spacing-03;
+  margin-block-end: $spacing-03;
+  outline: none;
 }
 
 :host(#{$prefix}-selectable-tile) {
   @include emit-layout-tokens();
 
-  display: content;
   position: relative;
+
+  display: content;
   outline: none;
 
   .#{$prefix}--tile__chevron {
@@ -113,16 +118,12 @@ $css--plex: true !default;
   @extend .#{$prefix}--tile--expandable;
   @include emit-layout-tokens();
 
-  ::slotted(#{$prefix}-tile-above-the-fold-content) {
-    @extend .#{$prefix}--tile-content__above-the-fold;
-  }
-
   ::slotted(#{$prefix}-tile-below-the-fold-content) {
     @extend .#{$prefix}--tile-content__below-the-fold;
   }
 
   .#{$prefix}-ce--expandable-tile--below-the-fold-content {
-    max-height: 0;
+    max-block-size: 0;
     transition: max-height $duration-fast-02 motion(standard, productive);
   }
 }
@@ -152,10 +153,10 @@ $css--plex: true !default;
 
 :host(#{$prefix}-expandable-tile:not([with-interactive])) {
   .#{$prefix}--tile__chevron {
-    background: none;
     border: none;
-    outline: none;
+    background: none;
     cursor: pointer;
+    outline: none;
   }
 }
 
@@ -169,9 +170,11 @@ $css--plex: true !default;
 :host(#{$prefix}-expandable-tile[slug]),
 :host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile,
 :host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile {
-  @include callout-gradient();
+  @include ai-popover-gradient('default', 0, 'layer');
 
-  border: 1px solid $border-tile;
+  border: 1px solid transparent;
+  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+    0 4px 10px 2px $ai-drop-shadow;
 }
 
 :host(#{$prefix}-tile),
@@ -185,8 +188,12 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-selectable-tile) ::slotted(#{$prefix}-slug) {
+  inset-inline-end: $spacing-08;
+}
+
 :host(#{$prefix}-expandable-tile[slug]):hover {
-  @include callout-gradient();
+  @include ai-popover-gradient('default', 0, 'layer');
 }
 
 :host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile::before,
@@ -205,18 +212,14 @@ $css--plex: true !default;
 
 :host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile::before,
 :host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile::before {
-  @include callout-gradient('hover');
+  @include ai-popover-gradient('hover', 0, 'layer');
+
+  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
 }
 
 :host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile:hover::before,
 :host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile:hover::before {
   opacity: 1;
-}
-
-:host(#{$prefix}-selectable-tile) {
-  ::slotted(#{$prefix}-slug) {
-    inset-inline-end: $spacing-08;
-  }
 }
 
 :host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected {
@@ -227,17 +230,9 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected::after {
-  @include callout-gradient('selected');
-}
+  @include ai-popover-gradient('selected', 0, 'layer');
 
-:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected::after {
-  opacity: 1;
-}
-
-:host(#{$prefix}-clickable-tile) {
-  ::slotted(#{$prefix}-slug) {
-    pointer-events: none;
-  }
+  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
 }
 
 :host(#{$prefix}-expandable-tile[slug]) {
@@ -251,6 +246,6 @@ $css--plex: true !default;
   @extend .#{$prefix}--tile--slug-rounded;
 
   .#{$prefix}--tile__chevron {
-    border-bottom-right-radius: $spacing-05;
+    border-end-end-radius: $spacing-03;
   }
 }

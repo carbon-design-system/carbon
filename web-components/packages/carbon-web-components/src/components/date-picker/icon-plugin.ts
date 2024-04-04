@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,7 +14,6 @@ import ChevronLeft16 from '@carbon/icons/lib/chevron--left/16';
 import ChevronRight16 from '@carbon/icons/lib/chevron--right/16';
 
 /**
- * @param config Plugin configuration.
  * @returns A Flatpickr plugin to set the right icons in the design system.
  */
 export default (): Plugin => (fp: FlatpickrInstance) => {
@@ -39,7 +38,6 @@ export default (): Plugin => (fp: FlatpickrInstance) => {
   /**
    * Registers this Flatpickr plugin.
    *
-   * @param calendar The Flatpickr instance.
    */
   const register = () => {
     fp.loadedPlugins.push('carbonFlatpickrIconPlugin');

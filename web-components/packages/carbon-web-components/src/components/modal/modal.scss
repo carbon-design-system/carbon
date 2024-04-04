@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2023
+// Copyright IBM Corp. 2019, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,6 +13,7 @@
 @use '@carbon/styles/scss/layer' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/components/modal' as *;
 @use '@carbon/styles/scss/components/button' as *;
 
@@ -40,9 +41,14 @@
 
 :host(#{$prefix}-modal[full-width]) {
   ::slotted(#{$prefix}-modal-body) {
-    margin: 0;
     padding: 0;
+    margin: 0;
   }
+}
+
+:host(#{$prefix}-modal[has-scrolling-content])
+  ::slotted(#{$prefix}-modal-body) {
+  @extend .#{$prefix}--modal-scroll-content;
 }
 
 :host(#{$prefix}-modal-header) {
@@ -50,6 +56,8 @@
 }
 
 :host(#{$prefix}-modal-close-button) {
+  @extend .#{$prefix}--modal-close-button;
+
   outline: none;
 }
 
@@ -71,15 +79,15 @@
   @extend .#{$prefix}--layer-two;
 
   ::slotted(#{$prefix}-form-item) {
-    margin-bottom: $spacing-05;
+    margin-block-end: $spacing-05;
   }
 
   ::slotted(#{$prefix}-select:last-of-type) {
-    padding-bottom: 0;
+    padding-block-end: 0;
   }
 
   ::slotted(*:last-child) {
-    padding-bottom: $spacing-07;
+    padding-block-end: $spacing-07;
   }
 }
 
@@ -87,11 +95,11 @@
   @include type-style('body-01');
 
   display: block;
-  padding-right: calc(20% - #{$spacing-07});
+  padding-inline-end: calc(20% - #{$spacing-07});
 }
 
 :host(#{$prefix}-modal-body-content[description]) {
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 }
 
 :host(#{$prefix}-modal-footer) {
@@ -112,13 +120,12 @@
 
 :host(#{$prefix}-modal-footer-button) {
   .#{$prefix}--btn {
-    height: 100%;
-    width: 100%;
-    max-width: none;
-
-    padding-top: $spacing-05;
-    padding-bottom: $spacing-07;
+    block-size: 100%;
     box-shadow: rem(-1px) 0 0 0 $button-separator;
+    inline-size: 100%;
+    max-inline-size: none;
+
+    padding-block: $spacing-05 $spacing-07;
 
     &:focus {
       box-shadow: inset 0 0 0 $button-outline-width $focus,
@@ -130,8 +137,60 @@
 :host(#{$prefix}-modal-footer) ::slotted(#{$prefix}-button),
 :host(#{$prefix}-modal-footer-button) {
   flex: 0 1 50%;
-  max-width: none;
-  width: 50%;
-  height: $spacing-10;
   margin: 0;
+  block-size: $spacing-10;
+  inline-size: 50%;
+  max-inline-size: none;
+}
+
+// Slug
+
+:host(#{$prefix}-modal[slug]) {
+  background-color: $ai-overlay;
+}
+
+:host(#{$prefix}-modal[slug]) .#{$prefix}--modal-container {
+  @include ai-popover-gradient('default', 0, 'layer');
+
+  border: 1px solid transparent;
+  background-color: $layer;
+  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+    0 4px 10px 2px $ai-drop-shadow;
+}
+
+:host(#{$prefix}-modal[slug][has-footer]) .#{$prefix}--modal-container {
+  @include ai-popover-gradient('default', 64px, 'layer');
+
+  box-shadow: inset 0 -80px 0 -16px $layer,
+    inset 0 -160px 70px -65px $ai-inner-shadow, 0 4px 10px 2px $ai-drop-shadow;
+}
+
+:host(#{$prefix}-modal[slug][has-scrolling-content]) {
+  ::slotted(#{$prefix}-modal-body) {
+    mask-image: linear-gradient(
+        to bottom,
+        $layer calc(100% - 80px),
+        transparent calc(100% - 48px),
+        transparent 100%
+      ),
+      linear-gradient(to left, $layer 0, 16px, transparent 16px),
+      linear-gradient(to right, $layer 0, 2px, transparent 2px),
+      linear-gradient(to top, $layer 0, 2px, transparent 2px);
+  }
+}
+
+:host(#{$prefix}-modal[slug])
+  .#{$prefix}--modal-content--overflow-indicator::before,
+:host(#{$prefix}-modal[slug]) .#{$prefix}--modal-content--overflow-indicator {
+  display: none;
+}
+
+:host(#{$prefix}-modal-header) ::slotted(#{$prefix}-slug) {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+:host(#{$prefix}-modal-header[close-button]) ::slotted(#{$prefix}-slug) {
+  inset-inline-end: $spacing-09;
 }

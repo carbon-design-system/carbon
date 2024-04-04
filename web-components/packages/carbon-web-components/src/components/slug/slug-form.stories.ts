@@ -82,7 +82,7 @@ const actions = html`
     ${Folders16({ slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
-  <cds-slug-action-button>View Literature</cds-slug-action-button>
+  <cds-slug-action-button>View details</cds-slug-action-button>
 `;
 
 export const _AIForm = {

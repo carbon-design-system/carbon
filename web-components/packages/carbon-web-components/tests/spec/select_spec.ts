@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -240,6 +240,7 @@ xdescribe('cds-select', function () {
             try {
               // TODO: See if we can get around TS2683
               // @ts-ignore
+              // eslint-disable-next-line prefer-rest-params
               origAttributeToProperty.apply(this, arguments);
             } catch (error) {
               caught = error;

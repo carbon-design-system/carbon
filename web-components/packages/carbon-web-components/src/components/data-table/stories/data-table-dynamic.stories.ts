@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -85,7 +85,7 @@ const addRow = () => {
     status: 'Starting',
   };
 
-  for (let key in templateRow) {
+  for (const key in templateRow) {
     if (Object.prototype.hasOwnProperty.call(templateRow, key)) {
       const cell = document.createElement('cds-table-cell');
       cell.textContent = templateRow[key];

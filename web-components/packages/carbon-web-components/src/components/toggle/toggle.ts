@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -40,7 +40,9 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
    */
   protected _handleChange() {
     const { checked, indeterminate } = this._checkboxNode;
-    if (this.disabled || this.readOnly) return;
+    if (this.disabled || this.readOnly) {
+      return;
+    }
     this.checked = !checked;
     this.indeterminate = indeterminate;
     const { eventChange } = this.constructor as typeof CDSCheckbox;

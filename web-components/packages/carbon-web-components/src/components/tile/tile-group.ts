@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,6 +30,10 @@ const navigationDirectionForKey = {
  * Tile group.
  *
  * @element cds-tile-group
+ * @fires cds-current-radio-tile-selection
+ *   The name of the custom event fired after a radio tile changes its selected state.
+ * @fires cds-current-selectable-tile-selections
+ *   The name of the custom event fired after a selectable tile changes its selected state.
  */
 @customElement(`${prefix}-tile-group`)
 class CDSTileGroup extends HostListenerMixin(LitElement) {
@@ -172,7 +176,7 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
     const { radioTiles, selectableTiles } = this;
     const navigationDirection = navigationDirectionForKey[key];
 
-    let tiles = radioTiles.length ? radioTiles : selectableTiles;
+    const tiles = radioTiles.length ? radioTiles : selectableTiles;
     const currentIndex = [...tiles].findIndex((e) => e == target);
     const nextIndex = currentIndex + navigationDirection;
     const nextSibling =

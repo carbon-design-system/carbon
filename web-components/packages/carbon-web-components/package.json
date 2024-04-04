@@ -1,7 +1,6 @@
 {
   "name": "@carbon/web-components",
-  "private": true,
-  "version": "2.1.0",
+  "version": "2.7.0-rc.0",
   "publishConfig": {
     "access": "public"
   },
@@ -13,11 +12,9 @@
   "module": "es/index.js",
   "exports": {
     "./es/components/*": {
-      "node": "./lib/components/*",
       "default": "./es/components/*"
     },
     "./es/globals/": {
-      "node": "./lib/globals/",
       "default": "./es/globals/"
     },
     "./es": "./es/index.js",
@@ -36,6 +33,7 @@
     "build-storybook": "storybook build",
     "ci-check": "yarn wca && yarn typecheck && yarn build && yarn test:unit",
     "clean": "gulp clean",
+    "postinstall": "ibmtelemetry --config=telemetry.yml",
     "reset": "yarn cache clean && yarn clean && rimraf node_modules && yarn install && yarn build",
     "start": "yarn storybook",
     "storybook": "storybook dev -p 6006",
@@ -43,10 +41,10 @@
     "test:integration": "yarn test:integration:build && yarn test:integration:ui",
     "test:integration:build": "jest -c tests/integration/build/jest.config.js --runInBand",
     "test:integration:ui": "jest -c tests/integration/ui/jest.config.js --runInBand",
-    "test:unit": "cross-env NODE_OPTIONS=--openssl-legacy-provider gulp test:unit",
-    "test:unit:updateSnapshot": "NODE_OPTIONS=--openssl-legacy-provider gulp test:unit --update-snapshot",
+    "test:unit": "gulp test:unit",
+    "test:unit:updateSnapshot": "gulp test:unit --update-snapshot",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "visual-snapshot": "yarn build-storybook && percy storybook:start ./storybook-static",
+    "visual-snapshot": "yarn percy storybook:start ./storybook-static",
     "wca": "web-component-analyzer analyze src --outFile custom-elements.json"
   },
   "files": [
@@ -54,7 +52,8 @@
     "dist/**/*",
     "es/**/*",
     "lib/**/*",
-    "scss/**/*"
+    "scss/**/*",
+    "telemetry.yml"
   ],
   "keywords": [
     "carbon",
@@ -68,8 +67,11 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.16.3",
-    "@carbon/styles": "^1.45.0",
-    "flatpickr": "4.6.1",
+    "@carbon/ibm-products-styles": "^2.30.1",
+    "@carbon/styles": "1.53.0",
+    "@floating-ui/dom": "^1.6.3",
+    "@ibm/telemetry-js": "^1.3.0",
+    "flatpickr": "4.6.13",
     "lit": "^3.1.0",
     "lodash-es": "^4.17.21"
   },
@@ -87,8 +89,8 @@
     "@babel/preset-env": "~7.23.2",
     "@babel/preset-modules": "^0.1.5",
     "@babel/template": "~7.12.0",
-    "@babel/traverse": "~7.23.0",
-    "@carbon/icon-helpers": "^10.45.1",
+    "@babel/traverse": "~7.23.7",
+    "@carbon/icon-helpers": "10.47.0",
     "@carbon/icons": "^11.31.0",
     "@mordech/vite-lit-loader": "^0.31.3",
     "@open-wc/semantic-dom-diff": "~0.18.0",
@@ -101,7 +103,7 @@
     "@rollup/plugin-commonjs": "^21.0.3",
     "@rollup/plugin-node-resolve": "^8.4.0",
     "@rollup/plugin-replace": "^4.0.0",
-    "@rollup/plugin-terser": "^0.4.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/pluginutils": "^4.2.0",
     "@storybook/addon-essentials": "^7.6.4",
     "@storybook/addon-links": "^7.6.4",
@@ -124,7 +126,6 @@
     "@webcomponents/webcomponents-platform": "^1.0.1",
     "async-done": "^1.3.0",
     "autoprefixer": "^9.8.8",
-    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-template-html-minifier": "^4.1.0",
     "child-process-promise": "^2.2.1",
@@ -179,13 +180,12 @@
     "postcss-selector-parser": "^6.0.0",
     "prop-types": "^15.7.2",
     "puppeteer": "^13.0.0",
-    "read-pkg-up": "^7.0.0",
+    "read-package-up": "^11.0.0",
     "replace-ext": "^2.0.0",
     "resize-observer-polyfill": "^1.5.0",
     "rollup": "^2.55.1",
     "rollup-plugin-multi-input": "^1.3.1",
-    "rtlcss": "^3.0.0",
-    "sass": "~1.69.0",
+    "sass": "~1.72.0",
     "sass-loader": "^10.0.0",
     "storybook": "^7.6.4",
     "storybook-addon-accessibility-checker": "^3.1.61-rc.2",

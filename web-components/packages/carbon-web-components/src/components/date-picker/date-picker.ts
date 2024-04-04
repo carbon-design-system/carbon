@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,7 +31,7 @@ import monthSelectPlugin from './month-select-plugin';
 import rangePlugin from './range-plugin';
 import shadowDOMEventPlugin from './shadow-dom-events-plugin';
 import stateHandshakePlugin from './state-handshake-plugin';
-import styles from './date-picker.scss?lit';
+import styles from './date-picker.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
@@ -69,6 +69,8 @@ flatpickr!.l10ns!.en!.weekdays.shorthand.forEach((_day, index) => {
  *
  * @element cds-date-picker
  * @fires cds-date-picker-changed - The custom event fired on this element when Flatpickr updates its value.
+ * @fires cds-date-picker-flatpickr-error
+ *   The name of the custom event when Flatpickr throws an error.
  */
 @customElement(`${prefix}-date-picker`)
 class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {

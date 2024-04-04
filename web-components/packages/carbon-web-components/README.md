@@ -28,16 +28,6 @@ with no framework tax, no framework silo.
 `@carbon/web-components` is a variant of Carbon Design System with Custom
 Elements v1 and Shadow DOM v1 specs.
 
-> The original repository, `carbon-web-components`, has been archived. All
-> future work for the package will take place in this monorepo. Please visit the
-> [original repository](https://github.com/carbon-design-system/carbon-web-components)
-> for full history of the files.
-
-The effort stems from
-https://github.com/carbon-design-system/issue-tracking/issues/121. If you are
-interested in this project, adding 👍 to the description of that GH issue, or
-even contributing, will be greatly appreciated!
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -88,7 +78,8 @@ version `v1.16.0`):
   src="https://1.www.s81c.com/common/carbon/web-components/version/v2.0.0/accordion.min.js"></script>
 ```
 
-These are the list of available components via CDN:
+<details>
+  <summary>See full list of available components via CDN</summary>
 
 - accordion.min.js
 - breadcrumb.min.js
@@ -132,21 +123,7 @@ These are the list of available components via CDN:
 - toggle.min.js
 - tooltip.min.js
 - ui-shell.min.js
-
-To use the right-to-left (RTL) version of the artifacts, change the file
-extention from `.min.js` to `.rtl.min.js`. For example:
-
-```html
-<!-- By `latest` tag (RTL) -->
-<script
-  type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/accordion.rtl.min.js"></script>
-
-<!-- By specific version (RTL) -->
-<script
-  type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/version/v2.0.0/accordion.rtl.min.js"></script>
-```
+</details>
 
 #### Basic usage
 
@@ -185,7 +162,7 @@ directly used once the script tag has been added to the page. For example:
 Our example at [CodeSandbox](https://codesandbox.io) shows usage with only CDN
 artifacts:
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/cdn)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/cdn)
 
 ### Using ES imports
 
@@ -205,27 +182,11 @@ instead:
 yarn add @carbon/web-components
 ```
 
-> NOTE: Carbon and Lit dependencies will be managed by Carbon Web Components
-> starting in `v1.19.0`. For earlier versions, these dependencies will have to
-> be installed separately:
->
-> npm:
->
-> ```bash
-> npm install --save carbon-components lit-html lit-element
-> ```
->
-> Yarn:
->
-> ```bash
-> yarn add carbon-components lit-html lit-element
-> ```
-
 #### Basic usage
 
 Our example at [CodeSandbox](https://codesandbox.io) shows the most basic usage:
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic)
 
 The first thing you need is **setting up a module bundler** to resolve
 ECMAScript `import`s. The above example uses [Webpack](https://webpack.js.org),
@@ -260,9 +221,9 @@ same manner as native HTML tags, for example:
 
 ## JavaScript framework support
 
-This package can also be used within other JavaScript frameworks such as Angular
-and Vue. This is achievable since web components are the modern browser
-standard, and work well with other front-end frameworks that exist in the
+This package also supports integration with other JavaScript frameworks like
+Angular and Vue. This is achievable since Web Components is the modern browser
+standard, and works well with other front-end frameworks that exist in the
 application. In turn, this also comes with the benefits of encapsulation within
 the Shadow DOM:
 
@@ -303,7 +264,7 @@ application can use those `.d.ts` files:
 
 ### Vue
 
-[![Edit carbon-web-components with Vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/vue)
+[![Edit carbon-web-components with Vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/vue)
 
 Vue users can use our components in the same manner as native HTML tags, without
 any additional steps!
@@ -333,21 +294,7 @@ information in several ways:
 
 ## Browser support
 
-- Latest Chrome/Safari/FF ESR
-- IE/Edge support is bast-effort basis
-  - Some components may not be supported
-
-To support IE, you need a couple additional setups:
-
-- Toolstack to re-transpile our code to ES5 (e.g. by specifying IE11 in
-  [`@babel/preset-env`](https://babeljs.io/docs/en/babel-preset-env)
-  configuration)
-- Polyfills, listed
-  [here](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/blob/main/packages/carbon-web-components/src/polyfills/index.ts)
-
-Here's an example code that shows such setup:
-
-[![Edit carbon-web-components with IE](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/ie)
+- Latest Chrome/Safari/FF
 
 ## Coding conventions
 
@@ -361,3 +308,12 @@ Can be found at [here](./src/coding-conventions.md).
 ```
 
 You'll see the build artifacts in `/path/to/carbon-web-components/es` directory.
+
+## <picture><source height="20" width="20" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-dark.svg"><source height="20" width="20" media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-light.svg"><img height="20" width="20" alt="IBM Telemetry" src="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-light.svg"></picture> IBM Telemetry
+
+This package uses IBM Telemetry to collect metrics data. By installing this
+package as a dependency you are agreeing to telemetry collection. To opt out,
+see
+[Opting out of IBM Telemetry data collection](https://github.com/ibm-telemetry/telemetry-js/tree/main#opting-out-of-ibm-telemetry-data-collection).
+For more information on the data being collected, please see the
+[IBM Telemetry documentation](https://github.com/ibm-telemetry/telemetry-js/tree/main#ibm-telemetry-collection-basics).

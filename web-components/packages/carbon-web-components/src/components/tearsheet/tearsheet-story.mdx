@@ -1,0 +1,75 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Tearsheet
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/main/packages/carbon-web-components/examples/codesandbox/basic/components/tearsheet)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/main/packages/carbon-web-components/examples/codesandbox/basic/components/tearsheet)
+
+Tearsheets keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/tearsheet/index.js';
+// The following are used for slotted fields
+import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/textarea/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['tearsheet'] })}`} />
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+  <cds-tearsheet >
+    <!-- Content -->
+    <h5>Tearsheet content</h5>
+    <div class="${storyPrefix}text-inputs">
+      <cds-text-input label="Input A" id="tearsheet-story-text-input-a"></cds-text-input>
+      <cds-text-input label="Input B" id="tearsheet-story-text-input-b"></cds-text-input>
+    </div>
+    <div class="${storyPrefix}text-inputs">
+      <cds-text-input label="Input C" id="tearsheet-story-text-input-c"></cds-text-input>
+      <cds-text-input label="Input D" id="tearsheet-story-text-input-d"></cds-text-input>
+    </div>
+    <div class="${storyPrefix}textarea-container">
+      <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+      <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+      <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+    </div>
+
+    <!-- subtitle optional -->
+    <div slot="subtitle">Subtitle text which can provide more detail on the content being displayed.</div>
+
+    <!-- Action toolbar optional -->
+    <cds-button slot="action-toolbar">Copy</cds-button>
+    <cds-button slot="action-toolbar" aria-label="Settings" has-icon-only="true" kind=${BUTTON_KIND.GHOST} size="sm" tooltip-text="Settings">
+      ${Settings({ slot: 'icon' })}
+    </cds-button>
+    <cds-button slot="action-toolbar" aria-label="Delete" has-icon-only="true" kind=${BUTTON_KIND.GHOST} size="sm" tooltip-text="Delete">
+      ${Trashcan({ slot: 'icon' })}
+    </cds-button>
+
+    <!-- Tearsheet actions optional -->
+    <cds-button slot="actions" kind=${BUTTON_KIND.GHOST}>Ghost</cds-button>
+    <cds-button slot="actions" kind=${BUTTON_KIND.PRIMARY}></cds-button>
+  </cds-tearsheet>
+```
+
+## `<cds-tearsheet>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-tearsheet open>`) and `false` means not setting the attribute (e.g.
+`<cds-tearsheet>` without `open` attribute).
+
+<Props of="cds-tearsheet" />

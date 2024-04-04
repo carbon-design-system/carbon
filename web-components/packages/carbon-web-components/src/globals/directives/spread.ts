@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -36,7 +36,6 @@ class SpreadDirective extends Directive {
    * The update function that handles the attribute setting.
    *
    * @param part an object with an API to manage the element's DOM
-   * @param attributesInfo The key-value pair to be set as the attribute name/value pairs.
    * @returns the render function
    */
   update(part: AttributePart, [attributesInfo]: DirectiveParameters<this>) {

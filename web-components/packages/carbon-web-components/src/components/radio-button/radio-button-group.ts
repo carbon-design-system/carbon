@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,6 +29,8 @@ export { RADIO_BUTTON_ORIENTATION };
  *
  * @element cds-radio-button-group
  * @fires cds-radio-button-group-changed - The custom event fired after this radio button group changes its selected item.
+ * @fires cds-radio-button-changed
+ *   The name of the custom event fired after a radio button changes its checked state.
  */
 @customElement(`${prefix}-radio-button-group`)
 class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {

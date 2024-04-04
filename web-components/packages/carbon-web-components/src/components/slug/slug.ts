@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -120,11 +120,12 @@ export default class CDSSlug extends CDSToggleTip {
   };
 
   protected _renderInnerContent = () => {
-    const { revertActive, revertLabel } = this;
+    const { autoalign, revertActive, revertLabel } = this;
     return html`
       ${revertActive
         ? html`
             <cds-icon-button
+              ?autoalign=${autoalign}
               kind="ghost"
               size="sm"
               @click="${this._handleClick}">
@@ -138,8 +139,15 @@ export default class CDSSlug extends CDSToggleTip {
     `;
   };
 
-  updated(changedProperties) {
-    super.updated(changedProperties);
+  attributeChangedCallback(name, old, newValue) {
+    super.attributeChangedCallback(name, old, newValue);
+
+    //@ts-ignore typescript does not think requestUpdate() exists on parentElement
+    name === 'revert-active' ? this.parentElement?.requestUpdate() : ``;
+  }
+
+  updated() {
+    super.updated();
     if (
       this.kind !== SLUG_KIND.HOLLOW &&
       this.dotType !== SLUG_DOT_TYPE.HOLLOW

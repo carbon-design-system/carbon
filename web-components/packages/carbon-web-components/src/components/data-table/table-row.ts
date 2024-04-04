@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,14 +13,12 @@ import { prefix } from '../../globals/settings';
 import ChevronRight16 from '@carbon/icons/lib/chevron--right/16';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
-import styles from './data-table.scss?lit';
+import styles from './data-table.scss';
 
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import CDSTableExpandedRow from './table-expanded-row';
 import CDSTableCell from './table-cell';
-import '../checkbox';
-import '../radio-button';
 
 /**
  * Data table row.
@@ -31,6 +29,15 @@ import '../radio-button';
  * @fires cds-table-row-change-selection
  *   The custom event fired before this row is selected/unselected upon a user gesture.
  *   Cancellation of this event stops the user-initiated change in selection.
+ * @fires cds-radio-button-changed
+ *   The name of the custom event fired after this radio button changes its checked state.
+ * @fires cds-checkbox-changed
+ *   The name of the custom event fired after this checkbox changes its checked state.
+ * @fires cds-table-row-expando-beingtoggled
+ *   The name of the custom event fired before the expanded state of this row is being toggled upon a user gesture.
+ *   Cancellation of this event stops the user-initiated action of toggling the expanded state.
+ * @fires cds-table-row-expando-toggled
+ *   The name of the custom event fired after the expanded state of this row is toggled upon a user gesture.
  */
 @customElement(`${prefix}-table-row`)
 class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {

@@ -1,0 +1,309 @@
+/*
+* Copyright IBM Corp. 2023, 2024
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+
+/* Other Carbon settings. */
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use 'sass:map';
+
+$pkg-prefix: 'cds';
+
+@use '@carbon/ibm-products-styles/scss/config' with (
+  $pkg-prefix: #{$pkg-prefix}
+);
+@use '@carbon/ibm-products-styles/scss/components/ActionSet/index' as *;
+@use '@carbon/ibm-products-styles/scss/components/SidePanel/index' as *;
+@use '@carbon/ibm-products-styles/scss/components/SidePanel/side-panel-variables'
+  as spv;
+
+$block-class: #{$pkg-prefix}--side-panel;
+$block-class-action-set: #{$pkg-prefix}--action-set;
+
+:host(#{$prefix}-side-panel) {
+  /* Replaces use of Framer for slide in / out animation */
+  --#{$block-class}--displaced: 100%;
+
+  * {
+    /* not sure why things are coming out as content-box */
+    box-sizing: border-box;
+  }
+
+  .#{$block-class} {
+    @extend .#{$block-class};
+
+    /* for actions container query - note this changes the size calculation */
+    container-name: side-panel;
+    container-type: inline-size;
+
+    &[placement='left'] {
+      --#{$block-class}--displaced: -100%;
+    }
+
+    &[opening] {
+      transform: translateX(var(--#{$block-class}--displaced));
+    }
+
+    &[open] {
+      transform: translateX(0);
+      transition: all $duration-moderate-02 motion(standard, productive);
+    }
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      &[open] {
+        transition: none;
+      }
+    }
+
+    &[closing] {
+      transform: translateX(var(--#{$block-class}--displaced));
+      transition: all $duration-moderate-01 motion(exit, productive);
+    }
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      &[closing] {
+        transition: none;
+      }
+    }
+
+    &[placement='right'] {
+      @extend .#{$block-class}--right-placement;
+
+      /* remove if https://github.com/carbon-design-system/ibm-products/pull/3983 merged */
+      border-inline-end: 1px solid $border-subtle-02;
+      inset-inline-end: 0;
+    }
+
+    /* stylelint-disable-next-line no-duplicate-selectors -- disabled to keep close to 'right' setting */
+    &[placement='left'] {
+      @extend .#{$block-class}--left-placement;
+
+      /* remove if https://github.com/carbon-design-system/ibm-products/pull/3983 merged */
+      border-inline-end: 1px solid $border-subtle-02;
+      inset-inline-start: 0;
+    }
+
+    @each $size, $size_value in spv.$side-panel-sizes {
+      &[size='#{$size}'] {
+        @extend .#{$block-class}--#{$size};
+      }
+    }
+
+    &[condensed-actions] {
+      @extend .#{$block-class}--condensed-actions;
+    }
+  }
+
+  #{$prefix}-layer {
+    display: contents;
+  }
+
+  .#{$block-class}__overlay {
+    &[opening] {
+      opacity: 0;
+    }
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      &[open] {
+        opacity: 1;
+        transition: none;
+      }
+    }
+
+    &[open] {
+      opacity: 1;
+      transition: all $duration-moderate-02 motion(standard, productive);
+    }
+    @media screen and (prefers-reduced-motion: reduce) {
+      &[closing] {
+        opacity: 0;
+        transition: none;
+      }
+    }
+
+    &[closing] {
+      opacity: 0;
+      transition: all $duration-moderate-01 motion(exit, productive);
+    }
+  }
+
+  .#{$block-class}__header {
+    &::before {
+      z-index: 99; /* must be higher than action toolbar */
+    }
+
+    &[detail-step] {
+      @extend .#{$block-class}__header--on-detail-step;
+    }
+
+    &[no-title-animation] {
+      @extend .#{$block-class}__header--no-title-animation;
+      // inset-block-start: 0;
+    }
+
+    &[reduced-motion] {
+      @extend .#{$block-class}__header--reduced-motion;
+    }
+
+    &[has-action-toolbar] {
+      margin-block-end: $spacing-03;
+      padding-block-end: 0;
+    }
+  }
+
+  .#{$block-class} .#{$block-class}__header[has-action-toolbar]::before {
+    content: initial; /* remove border below */
+  }
+
+  .#{$block-class}__subtitle-text {
+    &[hidden] {
+      @extend .#{$prefix}--visually-hidden;
+    }
+  }
+
+  .#{$block-class}__action-toolbar {
+    margin-block-end: 0;
+    padding-inline-start: 0;
+
+    &[hidden] {
+      @extend .#{$prefix}--visually-hidden;
+    }
+  }
+
+  .#{$block-class} .#{$block-class}__action-toolbar[hidden] {
+    @extend .#{$prefix}--visually-hidden;
+  }
+
+  .#{$block-class}[has-slug] {
+    @extend .#{$block-class}--has-slug;
+  }
+
+  [scrolls] {
+    @extend .#{$block-class}--scrolls;
+  }
+
+  .#{$block-class}__body-content {
+    @extend .#{$block-class}__body-content;
+  }
+
+  @mixin actions-placement() {
+    --flex-direction: row;
+    /* non carbon for IBM Products adjustment */
+    flex-direction: var(--flex-direction);
+
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    ::slotted(#{$prefix}-button) {
+      flex: 0 1 25%;
+      max-inline-size: to-rem(232px);
+    }
+
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    ::slotted(#{$prefix}-button[kind='ghost']) {
+      flex: 1 1 25%;
+      max-inline-size: none;
+    }
+
+    ::slotted(#{$prefix}-button[hidden]) {
+      @extend .#{$prefix}--visually-hidden;
+
+      display: none;
+    }
+
+    // -1 in @container query is for 1px left border
+    @container (width <= #{map.get(spv.$side-panel-sizes, lg)}) {
+      /* stylelint-disable-next-line selector-type-no-unknown */
+      &:not([actions-multiple='triple']) ::slotted(#{$prefix}-button) {
+        // double and single on lg use 50%
+        flex: 0 1 50%;
+        max-inline-size: none;
+      }
+    }
+
+    // -1 in @container query is for 1px left border
+    @container (width <= #{map.get(spv.$side-panel-sizes, md)}) {
+      // md is 50% for two and 100% for one
+      // column for triple
+      /* stylelint-disable-next-line selector-type-no-unknown */
+      &[actions-multiple] ::slotted(#{$prefix}-button) {
+        flex: 0 0 100%;
+        max-inline-size: none;
+      }
+
+      /* stylelint-disable-next-line selector-type-no-unknown */
+      &[actions-multiple='double'] ::slotted(#{$prefix}-button) {
+        flex: 0 1 50%;
+        max-inline-size: none;
+      }
+
+      &[actions-multiple='triple'] {
+        --flex-direction: column;
+
+        /* stylelint-disable-next-line selector-type-no-unknown */
+        ::slotted(#{$prefix}-button) {
+          flex: initial;
+          inline-size: 100%;
+          max-inline-size: none;
+        }
+      }
+    }
+
+    // -1 in @container query is for 1px left border
+    @container (width <= #{map.get(spv.$side-panel-sizes, sm)}) {
+      --flex-direction: column;
+
+      /* stylelint-disable-next-line selector-type-no-unknown */
+      ::slotted(#{$prefix}-button) {
+        flex: initial;
+        inline-size: 100%;
+        max-inline-size: none;
+      }
+    }
+  }
+
+  .#{$block-class}__actions-container {
+    @extend .#{$block-class-action-set};
+    @include actions-placement();
+
+    display: flex;
+    inline-size: 100%;
+
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    ::slotted(#{$prefix}-button) {
+      @extend .#{$block-class-action-set}__action-button;
+    }
+
+    &[hidden] {
+      @extend .#{$prefix}--visually-hidden;
+
+      display: none;
+    }
+
+    $multiples: 'single' 'double' 'triple';
+    @each $m in $multiples {
+      &[actions-multiple='#{$m}'] {
+        @extend .#{$prefix}--action-set--row-#{$m};
+      }
+    }
+
+    $sizes: 'xs' 'sm';
+    @each $s in $sizes {
+      &[size='#{$s}'] {
+        @extend .#{$block-class-action-set}--#{$s} !optional;
+      }
+    }
+  }
+
+  .sentinel {
+    @extend .#{$prefix}--visually-hidden;
+  }
+}

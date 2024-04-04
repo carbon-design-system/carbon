@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,8 +13,8 @@ import LOADING_TYPE from './types';
 
 /**
  * @param Object options The options.
- * @param [options.assistiveText] The assistive text for the spinner icon.
- * @param [options.type] The spinner type.
+ * @param [Object.assistiveText] The assistive text for the spinner icon.
+ * @param [Object.type] The spinner type.
  * @returns The spinner icon.
  */
 export default ({

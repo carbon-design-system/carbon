@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,6 +16,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
+import PopoverController from '../../globals/controllers/popover-controller';
 import styles from './toggletip.scss?lit';
 
 /**
@@ -26,13 +27,37 @@ import styles from './toggletip.scss?lit';
 @customElement(`${prefix}-toggletip`)
 class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
+   * Create popover controller instance
+   */
+  private popoverController = new PopoverController(this);
+
+  /**
    * How the tooltip is aligned to the trigger button.
    */
   @property({ reflect: true })
   alignment = POPOVER_ALIGNMENT.TOP;
 
+  /**
+   * Specify whether a auto align functionality should be applied
+   */
+  @property({ type: Boolean, reflect: true })
+  autoalign = false;
+
+  /**
+   * Set whether toggletip is open
+   */
   @property({ type: Boolean, reflect: true })
   open = false;
+
+  /**
+   * Handles `slotchange` event.
+   */
+  private _handleActionsSlotChange({ target }: Event) {
+    const hasContent = (target as HTMLSlotElement).assignedNodes();
+    hasContent
+      ? this.setAttribute('has-actions', '')
+      : this.removeAttribute('has-actions');
+  }
 
   protected _handleClick = () => {
     this.open = !this.open;
@@ -82,19 +107,35 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   };
 
   protected _renderTooltipContent = () => {
-    return html`
-      <span class="${prefix}--popover">
-        <span class="${prefix}--popover-content">
-          <div class="${prefix}--toggletip-content">
-            <slot name="body-text"></slot>
-            <div class="${prefix}--toggletip-actions">
-              <slot name="actions"></slot>
+    return this.autoalign
+      ? html`
+          <span class="${prefix}--popover-content">
+            <div class="${prefix}--toggletip-content">
+              <slot name="body-text"></slot>
+              <div class="${prefix}--toggletip-actions">
+                <slot
+                  name="actions"
+                  @slotchange="${this._handleActionsSlotChange}"></slot>
+              </div>
             </div>
-          </div>
-        </span>
-      </span>
-      <span class="${prefix}--popover-caret"></span>
-    `;
+            <span class="${prefix}--popover-caret"></span>
+          </span>
+        `
+      : html`
+          <span class="${prefix}--popover">
+            <span class="${prefix}--popover-content">
+              <div class="${prefix}--toggletip-content">
+                <slot name="body-text"></slot>
+                <div class="${prefix}--toggletip-actions">
+                  <slot
+                    name="actions"
+                    @slotchange="${this._handleActionsSlotChange}"></slot>
+                </div>
+              </div>
+            </span>
+            <span class="${prefix}--popover-caret"></span>
+          </span>
+        `;
   };
 
   protected _renderInnerContent = () => {
@@ -102,6 +143,33 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
       ${this._renderTooltipButton()} ${this._renderTooltipContent()}
     `;
   };
+
+  updated() {
+    if (this.autoalign && this.open) {
+      // auto align functionality with @floating-ui/dom library
+      const button = this.shadowRoot?.querySelector(
+        CDSToggletip.selectorToggletipButton
+      );
+
+      const tooltip = this.shadowRoot?.querySelector(
+        CDSToggletip.selectorToggletipContent
+      );
+      const arrowElement = this.shadowRoot?.querySelector(
+        CDSToggletip.selectorToggletipCaret
+      );
+
+      if (button && tooltip) {
+        this.popoverController?.setPlacement({
+          trigger: button as HTMLElement,
+          target: tooltip as HTMLElement,
+          arrowElement: arrowElement as HTMLElement,
+          caret: true,
+          flip: true,
+          alignment: this.alignment,
+        });
+      }
+    }
+  }
 
   render() {
     const { alignment, open } = this;
@@ -121,6 +189,27 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
       </span>
     </span>
     `;
+  }
+
+  /**
+   * A selector that will return the toggletip content.
+   */
+  static get selectorToggletipContent() {
+    return `.${prefix}--popover-content`;
+  }
+
+  /**
+   * A selector that will return the toggletip caret.
+   */
+  static get selectorToggletipCaret() {
+    return `.${prefix}--popover-caret`;
+  }
+
+  /**
+   * A selector that will return the trigger element.
+   */
+  static get selectorToggletipButton() {
+    return `.${prefix}--toggletip-button`;
   }
 
   static shadowRootOptions = {

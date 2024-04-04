@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -75,6 +75,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    * Handles `input` event on `<input>` in the shadow DOM.
    *
    * @param event The event.
+   * @param event.target The event target.
    */
   private _handleInput({ target }: Event) {
     const { value } = target as HTMLInputElement;
@@ -253,7 +254,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       class: `${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`,
     });
 
-    let normalizedProps = {
+    const normalizedProps = {
       disabled: !readonly && disabled,
       invalid: !readonly && invalid,
       warn: !readonly && !invalid && warn,
@@ -329,6 +330,15 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
         <slot name="helper-text" @slotchange="${this._handleSlotChange}"></slot>
       </div>
     `;
+  }
+
+  updated() {
+    this.shadowRoot
+      ?.querySelector("slot[name='slug']")
+      ?.classList.toggle(
+        `${prefix}--slug--revert`,
+        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+      );
   }
 
   /**

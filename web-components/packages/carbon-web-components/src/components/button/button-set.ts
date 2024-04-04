@@ -1,17 +1,18 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { BUTTON_KIND } from './defs';
 import styles from './button.scss?lit';
 import { prefix } from '../../globals/settings';
+import CDSButtonSetBase from './button-set-base';
 
 /**
  * Button set.
@@ -19,13 +20,13 @@ import { prefix } from '../../globals/settings';
  * @element cds-button-set
  */
 @customElement(`${prefix}-button-set`)
-class CDSButtonSet extends LitElement {
+class CDSButtonSet extends CDSButtonSetBase {
   /**
    * Handler for @slotchange, set the first cds-button to kind secondary and primary for the remaining ones
    *
    * @private
    */
-  private _handleSlotChange(event: Event) {
+  protected _handleSlotChange(event: Event) {
     const childItems = (event.target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
@@ -55,12 +56,6 @@ class CDSButtonSet extends LitElement {
   render() {
     return html` <slot @slotchange="${this._handleSlotChange}"></slot> `;
   }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.setAttribute('role', 'list');
-  }
-
   /**
    * A selector that will return the child items.
    */

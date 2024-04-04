@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -65,7 +65,7 @@ class CDSHeaderNavItem extends FocusMixin(LitElement) {
    * As child of <ul>, this element must have role of listitem
    */
   @property({ reflect: true })
-  role: string = 'listitem';
+  role = 'listitem';
 
   render() {
     const { ariaCurrent, href, isActive, title, rel, target } = this;

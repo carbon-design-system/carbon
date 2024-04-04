@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,6 +28,8 @@ export { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE };
  * Side nav.
  *
  * @element cds-side-nav
+ * @fires cds-header-menu-button-toggled
+ *   The name of the custom event fired after the header menu button in the document is toggled upon a user gesture.
  */
 @customElement(`${prefix}-side-nav`)
 class CDSSideNav extends HostListenerMixin(LitElement) {
@@ -200,6 +202,7 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
    * Handles `blur` event handler on this element.
    *
    * @param event The event.
+   * @param event.relatedTarget The event relatedTarget.
    */
   @HostListener('focusout')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
@@ -215,7 +218,6 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
   /**
    * Handles `focus` event handler on this element.
    *
-   * @param event The event.
    */
   @HostListener('focusin')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to

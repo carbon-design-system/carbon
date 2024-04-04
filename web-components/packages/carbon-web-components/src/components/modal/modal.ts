@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -34,10 +34,7 @@ const FOLLOWING =
  * @param reverse `true` to go through the list in reverse order.
  * @returns `true` if one of the attempts is successful, `false` otherwise.
  */
-function tryFocusElems(
-  elems: NodeListOf<HTMLElement>,
-  reverse: boolean = false
-) {
+function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse = false) {
   if (!reverse) {
     for (let i = 0; i < elems.length; ++i) {
       const elem = elems[i];
@@ -107,6 +104,8 @@ class CDSModal extends HostListenerMixin(LitElement) {
    * Handles `blur` event on this element.
    *
    * @param event The event.
+   * @param event.target The event target.
+   * @param event.relatedTarget The event relatedTarget.
    */
   @HostListener('shadowRoot:focusout')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
@@ -218,6 +217,15 @@ class CDSModal extends HostListenerMixin(LitElement) {
   }
 
   /**
+   * Handles `slotchange` event.
+   */
+  private _handleSlotChange() {
+    this.querySelector(`${prefix}-modal-footer`)
+      ? this.setAttribute('has-footer', '')
+      : this.removeAttribute('has-footer');
+  }
+
+  /**
    * Specify whether the Modal is displaying an alert, error or warning.
    * Should go hand in hand with the danger prop.
    */
@@ -313,7 +321,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
         role="${alert ? 'alert' : 'dialog'}"
         tabindex="-1"
         @click=${this._handleClickContainer}>
-        <slot></slot>
+        <slot @slotchange="${this._handleSlotChange}"></slot>
         ${hasScrollingContent
           ? html` <div class="cds--modal-content--overflow-indicator"></div> `
           : ``}
@@ -362,7 +370,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
    * @param ms The number of milliseconds.
    * @returns A promise that is resolves after the given milliseconds.
    */
-  private static _delay(ms: number = 0) {
+  private static _delay(ms = 0) {
     return new Promise((resolve) => {
       setTimeout(resolve, ms);
     });

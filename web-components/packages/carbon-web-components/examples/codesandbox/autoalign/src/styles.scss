@@ -1,0 +1,62 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use "@carbon/styles/scss/reset";
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/themes";
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/spacing" as *;
+@use "@carbon/styles/scss/utilities/button-reset";
+
+:root {
+  @include theme.theme(themes.$white);
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6rem 0;
+}
+
+.p-3 {
+  padding: $spacing-05;
+}
+
+.popover-title {
+  @include type.type-style("heading-compact-01");
+
+  margin-block-end: $spacing-01;
+}
+
+.popover-details {
+  @include type.type-style("body-compact-01");
+}
+
+.playground-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid theme.$border-subtle;
+  block-size: $spacing-07;
+  inline-size: $spacing-07;
+}
+
+.sb-tooltip-trigger {
+  @include button-reset.reset();
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid theme.$border-subtle;
+  block-size: $spacing-07;
+  inline-size: $spacing-07;
+}

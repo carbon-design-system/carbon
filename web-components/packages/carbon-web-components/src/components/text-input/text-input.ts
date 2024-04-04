@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -83,6 +83,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
    * Handles `oninput` event on the `<input>`.
    *
    * @param event The event.
+   * @param event.target The event target.
    */
   protected _handleInput({ target }: Event) {
     this.value = (target as HTMLInputElement).value;
@@ -329,7 +330,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       class: `${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`,
     });
 
-    let normalizedProps = {
+    const normalizedProps = {
       disabled: !readonly && disabled,
       invalid: !readonly && invalid,
       warn: !readonly && !invalid && warn,
@@ -499,6 +500,15 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
         </div>
       </div>
     `;
+  }
+
+  updated() {
+    this.shadowRoot
+      ?.querySelector("slot[name='slug']")
+      ?.classList.toggle(
+        `${prefix}--slug--revert`,
+        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+      );
   }
 
   /**
