@@ -111,11 +111,6 @@
     }
   }
 
-  .#{$prefix}--interactive--tag-children {
-    display: inline-flex;
-    place-items: center;
-  }
-
   .#{$prefix}--tag--selectable {
     border: 1px solid $border-inverse;
     background-color: $layer;

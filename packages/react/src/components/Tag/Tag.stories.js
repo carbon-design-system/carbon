@@ -61,7 +61,7 @@ export const ReadOnly = () => {
 export const Playground = (args) => {
   return (
     <Tag renderIcon={Asleep} {...args}>
-      {'Tag contentcontent content content content'}
+      {'Tag content'}
     </Tag>
   );
 };

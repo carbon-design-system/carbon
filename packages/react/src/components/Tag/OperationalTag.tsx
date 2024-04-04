@@ -111,9 +111,7 @@ const OperationalTag = <T extends React.ElementType>({
       id={tagId}
       text={text}
       {...other}>
-      <div className={`${prefix}--interactive--tag-children`}>
-        {normalizedSlug}
-      </div>
+      {normalizedSlug}
     </Tag>
   );
 };

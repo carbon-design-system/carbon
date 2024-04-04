@@ -105,9 +105,7 @@ const SelectableTag = <T extends React.ElementType>({
       text={text}
       onClick={() => setSelectedTag(!selectedTag)}
       {...otherProps}>
-      <div className={`${prefix}--interactive--tag-children`}>
-        {normalizedSlug}
-      </div>
+      {normalizedSlug}
     </Tag>
   );
 };
