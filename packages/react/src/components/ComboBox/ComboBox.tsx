@@ -677,7 +677,6 @@ const ComboBox = forwardRef(
             <ListBoxTrigger
               {...buttonProps}
               isOpen={isOpen}
-              ref={textInput.current} // todo: to check again
               translateWithId={translateWithId}
             />
           </div>
