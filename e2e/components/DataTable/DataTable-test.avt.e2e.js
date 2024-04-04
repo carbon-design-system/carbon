@@ -233,13 +233,16 @@ test.describe('@avt DataTable', () => {
     test('@avt-advanced-states with-radio-expansion', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
-        id: 'components-datatable-selection--with-radio-expansion',
+        id: 'components-datatable-dynamic--playground',
         globals: {
           theme: 'white',
         },
+        args: {
+          radio: true,
+        },
       });
       await expect(page).toHaveNoACViolations(
-        'components-datatable-selection--with-radio-expansion'
+        'components-datatable-with-radio-expansion'
       );
     });
     test('@avt-advanced-states with-selection-and-sorting', async ({

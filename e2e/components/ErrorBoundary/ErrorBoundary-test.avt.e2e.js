@@ -25,7 +25,7 @@ test.describe('@avt ErrorBoundary', () => {
   test('@avt-advanced-states with Custom context', async ({ page }) => {
     await visitStory(page, {
       component: 'ErrorBoundary',
-      id: 'components-errorboundary--skeleton',
+      id: 'components-errorboundary--with-custom-context',
       globals: {
         theme: 'white',
       },
