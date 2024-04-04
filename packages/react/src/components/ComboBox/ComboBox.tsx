@@ -6,7 +6,7 @@
  */
 
 import cx from 'classnames';
-import { useCombobox } from 'downshift';
+import { useCombobox, UseComboboxProps } from 'downshift';
 import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, {
   useContext,
@@ -14,7 +14,6 @@ import React, {
   useState,
   useRef,
   forwardRef,
-  type ComponentProps,
   type ReactNode,
   type ComponentType,
   type ForwardedRef,
@@ -160,7 +159,7 @@ export interface ComboBoxProps<ItemType>
   /**
    * Additional props passed to Downshift
    */
-  downshiftProps?: ComponentProps<any>;
+  downshiftProps?: Partial<UseComboboxProps<ItemType>>;
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -508,7 +507,7 @@ const ComboBox = forwardRef(
       ...downshiftProps,
       items,
       inputValue: inputValue,
-      itemToString: (item: ItemType) => {
+      itemToString: (item) => {
         return itemToString(item);
       },
       onInputValueChange({ inputValue }) {
@@ -516,7 +515,7 @@ const ComboBox = forwardRef(
         setHighlightedIndex(indexToHighlight(inputValue));
       },
 
-      onSelectedItemChange({ selectedItem }: OnChangeData<ItemType>) {
+      onSelectedItemChange({ selectedItem }) {
         onChange({ selectedItem });
       },
 
@@ -775,8 +774,9 @@ ComboBox.propTypes = {
   /**
    * Additional props passed to Downshift
    */
-  // @ts-ignore
-  // downshiftProps: PropTypes.shape(Downshift.propTypes),
+  downshiftProps: PropTypes.object as React.Validator<
+    UseComboboxProps<unknown>
+  >,
   /**
    * Provide helper text that is used alongside the control label for
    * additional help
