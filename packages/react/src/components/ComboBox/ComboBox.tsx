@@ -20,7 +20,7 @@ import React, {
   type ReactElement,
   type RefAttributes,
   type PropsWithChildren,
-  type PropsWithoutRef,
+  type PropsWithRef,
   type InputHTMLAttributes,
   type MouseEvent,
   type KeyboardEvent,
@@ -925,7 +925,7 @@ ComboBox.propTypes = {
   warnText: PropTypes.node,
 };
 
-type ComboboxComponentProps<ItemType> = PropsWithoutRef<
+type ComboboxComponentProps<ItemType> = PropsWithRef<
   PropsWithChildren<ComboBoxProps<ItemType>> & RefAttributes<HTMLInputElement>
 >;
 
