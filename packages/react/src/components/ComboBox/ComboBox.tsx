@@ -24,7 +24,7 @@ import React, {
   type ReactElement,
   type RefAttributes,
   type PropsWithChildren,
-  type PropsWithoutRef,
+  type PropsWithRef,
   type InputHTMLAttributes,
   type MouseEvent,
   type KeyboardEvent,
@@ -53,9 +53,11 @@ const {
   keyDownArrowUp,
   keyDownEscape,
   clickButton,
+  clickItem,
   blurButton,
   changeInput,
   blurInput,
+  unknown,
 } = Downshift.stateChangeTypes;
 
 const defaultItemToString = <ItemType,>(item: ItemType | null) => {
@@ -450,13 +452,14 @@ const ComboBox = forwardRef(
       switch (type) {
         case keyDownArrowDown:
         case keyDownArrowUp:
-          setHighlightedIndex(changes.highlightedIndex);
+          if (changes.isOpen) {
+            updateHighlightedIndex(getHighlightedIndex(changes));
+          } else {
+            setHighlightedIndex(changes.highlightedIndex);
+          }
           break;
         case blurButton:
         case keyDownEscape:
-          setHighlightedIndex(changes.highlightedIndex);
-          break;
-        case clickButton:
           setHighlightedIndex(changes.highlightedIndex);
           break;
         case changeInput:
@@ -469,6 +472,11 @@ const ComboBox = forwardRef(
               onChange({ selectedItem, inputValue });
             }
           }
+          break;
+        case clickButton:
+        case clickItem:
+        case unknown:
+          setHighlightedIndex(getHighlightedIndex(changes));
           break;
       }
     };
@@ -991,7 +999,7 @@ ComboBox.propTypes = {
   warnText: PropTypes.node,
 };
 
-type ComboboxComponentProps<ItemType> = PropsWithoutRef<
+type ComboboxComponentProps<ItemType> = PropsWithRef<
   PropsWithChildren<ComboBoxProps<ItemType>> & RefAttributes<HTMLInputElement>
 >;
 
