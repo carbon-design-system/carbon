@@ -37,6 +37,29 @@ describe('MultiSelect', () => {
       await expect(container).toHaveNoACViolations('MultiSelect');
     });
   });
+  it('does not render items with undefined values', async () => {
+    const items = [{ text: 'joey' }, { text: 'johnny' }, { text: undefined }];
+    const label = 'test-label';
+    const { container } = render(
+      <MultiSelect
+        id="custom-id"
+        label={label}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+      />
+    );
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const labelNode = getByText(container, label);
+
+    await userEvent.click(labelNode);
+
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    expect(getByText(container, 'joey')).toBeInTheDocument();
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    expect(getByText(container, 'johnny')).toBeInTheDocument();
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    expect(getByText(container, 'undefined')).not.toBeInTheDocument();
+  });
 
   it('should initially render with a given label', () => {
     const items = generateItems(4, generateGenericItem);
