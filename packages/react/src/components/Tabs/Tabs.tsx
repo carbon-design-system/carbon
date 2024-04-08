@@ -851,7 +851,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
     evt.stopPropagation();
     onTabCloseRequest?.(index);
 
-    // set focus to corret tab after removing tab
+    // set focus after removing tab
     if (tabRef.current && tabRef.current.parentElement) {
       // determine number of tabs, excluding disabled
       const tabCount = Array.from(
