@@ -50,6 +50,9 @@ const config: StorybookConfig = {
         include: ['@storybook/web-components'],
         exclude: ['lit', 'lit-html'],
       },
+      define: {
+        'process.env': process.env,
+      },
     });
   },
   docs: {

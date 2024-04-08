@@ -14,7 +14,7 @@ import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
-import styles from './file-uploader.scss';
+import styles from './file-uploader.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { FORM_ELEMENT_COLOR_SCHEME as TILE_COLOR_SCHEME } from '../../globals/shared-enums';

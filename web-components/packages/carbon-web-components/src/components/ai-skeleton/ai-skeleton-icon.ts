@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import { property } from 'lit/decorators.js';
-import styles from './ai-skeleton.scss';
+import styles from './ai-skeleton.scss?lit';
 import '../skeleton-icon/skeleton-icon';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
