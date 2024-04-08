@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as AISkeletonStories from './ai-skeleton-placeholder.stories';
+
+<Meta of={AISkeletonStories} />
 
 # AI Skeleton placeholder
 
@@ -19,8 +22,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/ai-skeleton/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['ai-skeleton'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['ai-skeleton'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -28,17 +31,16 @@ import '@carbon/web-components/es/components/ai-skeleton/index.js';
 <cds-ai-skeleton-placeholder></cds-ai-skeleton-placeholder>
 <cds-ai-skeleton-icon></cds-ai-skeleton-icon>
 <cds-ai-skeleton-text></cds-ai-skeleton-text>
-
 ```
 
 ## `<cds-skeleton-placeholder>` attributes, properties and events
 
-<Props of="cds-skeleton-placeholder" />
+<ArgsTable of="cds-skeleton-placeholder" />
 
 ## `<cds-skeleton-icon>` attributes, properties and events
 
-<Props of="cds-skeleton-icon" />
+<ArgsTable of="cds-skeleton-icon" />
 
 ## `<cds-skeleton-text>` attributes, properties and events
 
-<Props of="cds-skeleton-text" />
+<ArgsTable of="cds-skeleton-text" />

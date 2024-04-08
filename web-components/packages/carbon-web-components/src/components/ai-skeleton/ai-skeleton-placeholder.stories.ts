@@ -9,21 +9,24 @@
 
 import { html } from 'lit';
 import './ai-skeleton-placeholder';
-import storyDocs from './ai-skeleton-story.mdx';
 
-export const Default = () =>
-  html`<cds-ai-skeleton-placeholder
-    class="test"></cds-ai-skeleton-placeholder>`;
-
-Default.parameters = {
-  percy: {
-    skip: true,
-  },
-};
-
-export default {
-  title: 'Experimental/AISkeleton/AISkeletonPlaceholder',
+export const Default = {
+  // This story doesn't accept any args.
+  args: {},
+  argTypes: {},
   parameters: {
-    ...storyDocs.parameters,
+    percy: {
+      skip: true,
+    },
+  },
+  render: () => {
+    html`<cds-ai-skeleton-placeholder
+      class="test"></cds-ai-skeleton-placeholder>`;
   },
 };
+
+const meta = {
+  title: 'Experimental/AISkeleton/AISkeletonPlaceholder',
+};
+
+export default meta;

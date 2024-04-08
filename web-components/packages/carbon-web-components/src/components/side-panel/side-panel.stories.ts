@@ -1,26 +1,25 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { TemplateResult, html } from 'lit';
-import { boolean, select, text } from '@storybook/addon-knobs';
+import { html } from 'lit';
 import '../button/button';
 import { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT } from './side-panel';
 import './index';
 import '../text-input/index';
 import '../textarea/index';
-import storyDocs from './side-panel-story.mdx';
 import Settings from '@carbon/icons/lib/settings/16';
 import Trashcan from '@carbon/icons/lib/trash-can/16';
 import { prefix } from '../../globals/settings';
 
-import styles from './story-styles.scss';
+import styles from './story-styles.scss?lit';
 import { BUTTON_KIND } from '../button/button';
+
 const toggleButton = () => {
   document.querySelector(`${prefix}-side-panel`)?.toggleAttribute('open');
 };
@@ -291,177 +290,225 @@ const getSlug = (index) => {
   }
 };
 
-export default {
-  title: 'Experimental/SidePanel',
-  decorators: [(story) => html` ${story()} `],
-  parameters: {
-    ...storyDocs.parameters,
+const defaultTemplate = {
+  args: {
+    actionItems: getActionItems(1),
+    actionToolbarItems: getActionToolbarItems(0),
+    animateTitle: true,
+    class: 'a-user-class',
+    closeIconDescription: 'Close panel',
+    condensedActions: false,
+    content: getContent(2),
+    includeOverlay: true,
+    label: getLabel(2),
+    open: false,
+    placement: SIDE_PANEL_PLACEMENT.RIGHT,
+    preventCloseOnClickOutside: false,
+    selectorPageContent: '#page-content-selector',
+    selectorInitialFocus: '',
+    size: SIDE_PANEL_SIZE.MEDIUM,
+    slideIn: false,
+    slug: getSlug(0),
+    subtitle: getSubTitle(1),
+    title:
+      'This title is testing a very long title to see how this behaves with a longer title. It needs to be long enough to trigger overflow when collapsed.',
   },
-};
-
-const DefaultTemplate = (argsIn) => {
-  const args = {
-    actionItems: getActionItems(select('Slot (actions)', actionItems, 1)),
-    actionToolbarItems: getActionToolbarItems(
-      select('Slot (action-toolbar)', actionToolbarItems, 0)
-    ),
-    animateTitle: boolean('animate-title (Title animates on scroll)', true),
-    class: text('class', 'a-user-class'),
-    closeIconDescription: text('Close icon description', 'Close panel'),
-    condensedActions: boolean('condensed-actions', false),
-    content: getContent(select('Slot (default), panel contents', contents, 2)),
-    includeOverlay: boolean('include-overlay', true),
-    label: getLabel(select('label', labels, 2)),
-    open: boolean('open', false),
-    placement: select('placement', placements, SIDE_PANEL_PLACEMENT.RIGHT),
-    preventCloseOnClickOutside: boolean(
-      'prevent-close-on-click-outside',
-      false
-    ),
-    selectorPageContent: text(
-      'selector-page-content',
-      '#page-content-selector'
-    ),
-    selectorInitialFocus: text('selector-initial-focus', ''),
-    size: select('size', sizes, SIDE_PANEL_SIZE.MEDIUM),
-    slideIn: boolean('slide-in', false),
-    slug: getSlug(select('slug (AI slug)', slugs, 0)),
-    subtitle: getSubTitle(select('Slot (subtitle)', subtitles, 1)),
-    title: text(
-      'title',
-      'This title is testing a very long title to see how this behaves with a longer title. It needs to be long enough to trigger overflow when collapsed.'
-    ),
-
-    ...(argsIn?.['cds-side-panel'] ?? {}),
-  };
-
-  return html`
-    <div class="${storyPrefix}story-container">
-      <div class="${storyPrefix}story-header"></div>
-      <div id="page-content-selector" class="${storyPrefix}story-content">
-        <cds-button @click="${toggleButton}">Toggle side-panel</cds-button>
+  argTypes: {
+    actionItems: {
+      control: 'select',
+      description: 'Slot (actions)',
+      options: actionItems,
+    },
+    actionToolbarItems: {
+      control: 'select',
+      description: 'Slot (action-toolbar)',
+      options: actionToolbarItems,
+    },
+    animateTitle: {
+      control: 'boolean',
+      description: 'animate-title (Title animates on scroll)',
+    },
+    class: {
+      control: 'text',
+      description: 'class',
+    },
+    closeIconDescription: {
+      control: 'text',
+      description: 'Close icon description',
+    },
+    condensedActions: {
+      control: 'boolean',
+      description: 'condensed-actions',
+    },
+    content: {
+      control: 'select',
+      description: 'Slot (default), panel contents',
+      options: contents,
+    },
+    includeOverlay: {
+      control: 'boolean',
+      description: 'include-overlay',
+    },
+    label: {
+      control: 'select',
+      description: 'label',
+      options: labels,
+    },
+    open: {
+      control: 'boolean',
+      description: 'open',
+    },
+    placement: {
+      control: 'select',
+      description: 'placement',
+      options: placements,
+    },
+    preventCloseOnClickOutside: {
+      control: 'boolean',
+      description: 'prevent-close-on-click-outside',
+    },
+    selectorPageContent: {
+      control: 'text',
+      description: 'selector-page-content',
+    },
+    selectorInitialFocus: {
+      control: 'text',
+      description: 'selector-initial-focus',
+    },
+    size: {
+      control: 'select',
+      description: 'size',
+      options: sizes,
+    },
+    slideIn: {
+      control: 'boolean',
+      description: 'slide-in',
+    },
+    slug: {
+      control: 'select',
+      description: 'slug (AI slug)',
+      options: slugs,
+    },
+    subtitle: {
+      control: 'select',
+      description: 'Slot (subtitle)',
+      options: subtitles,
+    },
+    title: {
+      control: 'text',
+      description: 'title',
+    },
+  },
+  render: (args) => {
+    return html`
+      <div class="${storyPrefix}story-container">
+        <div class="${storyPrefix}story-header"></div>
+        <div id="page-content-selector" class="${storyPrefix}story-content">
+          <cds-button @click="${toggleButton}">Toggle side-panel</cds-button>
+        </div>
       </div>
-    </div>
-    <cds-side-panel
-      ?animate-title=${args.animateTitle}
-      class=${args.class}
-      ?condensed-actions=${args.condensedActions}
-      current-step="0"
-      ?include-overlay=${args.includeOverlay}
-      selector-initial-focus=${args.selectorInitialFocus}
-      label-text="${args.label}"
-      ?open=${args.open}
-      placement=${args.placement}
-      ?prevent-close-on-click-outside=${args.preventCloseOnClickOutside}
-      selector-page-content=${args.selectorPageContent}
-      size=${args.size}
-      ?slide-in=${args.slideIn}
-      title=${args.title}
-      @cds-side-panel-navigate-back=${prevStep}>
-      <!-- default slotted content -->
-      ${args.content}
-      <cds-button @click="${nextStep}">Step two</cds-button>
+      <cds-side-panel
+        ?animate-title=${args.animateTitle}
+        class=${args.class}
+        ?condensed-actions=${args.condensedActions}
+        current-step="0"
+        ?include-overlay=${args.includeOverlay}
+        selector-initial-focus=${args.selectorInitialFocus}
+        label-text="${args.label}"
+        ?open=${args.open}
+        placement=${args.placement}
+        ?prevent-close-on-click-outside=${args.preventCloseOnClickOutside}
+        selector-page-content=${args.selectorPageContent}
+        size=${args.size}
+        ?slide-in=${args.slideIn}
+        title=${args.title}
+        @cds-side-panel-navigate-back=${prevStep}>
+        <!-- default slotted content -->
+        ${args.content}
+        <cds-button @click="${nextStep}">Step two</cds-button>
 
-      <!-- slotted subtitle slotted content -->
-      ${args.subtitle}
+        <!-- slotted subtitle slotted content -->
+        ${args.subtitle}
 
-      <!-- slotted action toolbar cds-buttons -->
-      ${args.actionToolbarItems}
+        <!-- slotted action toolbar cds-buttons -->
+        ${args.actionToolbarItems}
 
-      <!-- slotted action items cds-buttons -->
-      ${args.actionItems}
+        <!-- slotted action items cds-buttons -->
+        ${args.actionItems}
 
-      <!-- slotted slug -->
-      ${args.slug}
-    </cds-side-panel>
-  `;
-};
-
-type TemplateType = {
-  (args: any): TemplateResult<1>;
-  parameters: { knobs: { [key: string]: any } };
-};
-
-export const SlideOver = DefaultTemplate.bind({}) as TemplateType;
-SlideOver.parameters = {
-  ...storyDocs.parameters,
-  knobs: {
-    'cds-side-panel': () => ({}),
+        <!-- slotted slug -->
+        ${args.slug}
+      </cds-side-panel>
+    `;
   },
 };
 
-export const SlideIn = DefaultTemplate.bind({}) as TemplateType;
-SlideIn.parameters = {
-  ...storyDocs.parameters,
-  knobs: {
-    'cds-side-panel': () => ({
-      slideIn: boolean('slide-in', true),
-    }),
+export const SlideOver = {
+  ...defaultTemplate,
+};
+
+export const SlideIn = {
+  ...defaultTemplate,
+  args: {
+    ...defaultTemplate.args,
+    slideIn: true,
   },
 };
 
-export const WithActionToolbar = DefaultTemplate.bind({}) as TemplateType;
-WithActionToolbar.parameters = {
-  ...storyDocs.parameters,
-  knobs: {
-    'cds-side-panel': () => ({
-      actionToolbarItems: getActionToolbarItems(
-        select('Action toolbar slot', actionToolbarItems, 1)
-      ),
-    }),
+export const WithActionToolbar = {
+  ...defaultTemplate,
+  args: {
+    ...defaultTemplate.args,
+    actionToolbarItems: getActionToolbarItems(1),
   },
 };
 
-export const SpecifyElementToHaveFocus = DefaultTemplate.bind(
-  {}
-) as TemplateType;
-SpecifyElementToHaveFocus.parameters = {
-  ...storyDocs.parameters,
-  knobs: {
-    'cds-side-panel': () => ({
-      focusSelector: text(
-        'selector-primary-focus',
-        '#side-panel-story-text-input-a'
-      ),
-      label: getLabel(select('label', labels, 0)),
-    }),
+export const SpecifyElementToHaveFocus = {
+  ...defaultTemplate,
+  args: {
+    ...defaultTemplate.args,
+    focusSelector: '#side-panel-story-text-input-a',
+    label: getLabel(0),
+  },
+  argTypes: {
+    ...defaultTemplate.argTypes,
+    focusSelector: {
+      control: 'text',
+      description: 'selector-primary-focus',
+    },
   },
 };
 
-export const WithStaticTitle = DefaultTemplate.bind({}) as TemplateType;
-WithStaticTitle.parameters = {
-  ...storyDocs.parameters,
-  knobs: {
-    'cds-side-panel': () => ({
-      animateTitle: boolean('animate-title (Title animates on scroll)', false),
-      label: getLabel(select('label', labels, 0)),
-    }),
+export const WithStaticTitle = {
+  ...defaultTemplate,
+  args: {
+    ...defaultTemplate.args,
+    animateTitle: false,
+    label: getLabel(0),
   },
 };
 
-export const WithStaticTitleAndActionToolbar = DefaultTemplate.bind(
-  {}
-) as TemplateType;
-WithStaticTitleAndActionToolbar.parameters = {
-  ...storyDocs.parameters,
-  knobs: {
-    'cds-side-panel': () => ({
-      actionToolbarItems: getActionToolbarItems(
-        select('Action toolbar slot', actionToolbarItems, 1)
-      ),
-      animateTitle: boolean('animate-title (Title animates on scroll)', false),
-      label: getLabel(select('label', labels, 0)),
-    }),
+export const WithStaticTitleAndActionToolbar = {
+  ...defaultTemplate,
+  args: {
+    ...defaultTemplate.args,
+    actionToolbarItems: getActionToolbarItems(1),
+    animateTitle: false,
+    label: getLabel(0),
   },
 };
 
-export const WithoutTitle = DefaultTemplate.bind({}) as TemplateType;
-WithoutTitle.parameters = {
-  ...storyDocs.parameters,
-  knobs: {
-    'cds-side-panel': () => ({
-      label: getLabel(select('label', labels, 0)),
-      title: text('title', ''),
-    }),
+export const WithoutTitle = {
+  ...defaultTemplate,
+  args: {
+    ...defaultTemplate.args,
+    label: getLabel(0),
+    title: '',
   },
 };
+
+const meta = {
+  title: 'Experimental/SidePanel',
+};
+
+export default meta;

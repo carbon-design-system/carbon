@@ -117,24 +117,24 @@ $colorMap: (
   }
 }
 
-:host(#{$prefix}-slug[dot-type='hollow']),
-:host(#{$prefix}-slug[kind='hollow']) {
-  @extend .#{$prefix}--slug--hollow;
+// :host(#{$prefix}-slug[dot-type='hollow']),
+// :host(#{$prefix}-slug[kind='hollow']) {
+//   @extend .#{$prefix}--slug--hollow;
 
-  .#{$prefix}--slug__button--hollow:hover {
-    border-color: $slug-hollow-hover;
-    color: $slug-hollow-hover;
-  }
+//   .#{$prefix}--slug__button--hollow:hover {
+//     border-color: $slug-hollow-hover;
+//     color: $slug-hollow-hover;
+//   }
 
-  .#{$prefix}--toggletip-content {
-    row-gap: 0;
-  }
+//   .#{$prefix}--toggletip-content {
+//     row-gap: 0;
+//   }
 
-  .#{$prefix}--slug__button--lg .#{$prefix}--slug__text::before {
-    block-size: $spacing-03;
-    inline-size: $spacing-03;
-  }
-}
+//   .#{$prefix}--slug__button--lg .#{$prefix}--slug__text::before {
+//     block-size: $spacing-03;
+//     inline-size: $spacing-03;
+//   }
+//}
 
 :host(#{$prefix}-slug:not([kind='inline'])) {
   .#{$prefix}--slug__button:focus {

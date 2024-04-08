@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as AutoAlignStories from './autoalign.stories';
+
+<Meta of={AutoAlignStories} />
 
 # Auto Align
 
@@ -42,8 +45,8 @@ import '@carbon/web-components/es/components/popover/index.js';
 import Checkbox16 from '@carbon/icons/lib/checkbox/16';
 ```
 
-<Description markdown={`${cdnJs({ components: ['popover'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['popover'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -69,8 +72,8 @@ import Checkbox16 from '@carbon/icons/lib/checkbox/16';
 import '@carbon/web-components/es/components/toggle-tip/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['toggle-tip'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['toogle-tip'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -93,8 +96,8 @@ import '@carbon/web-components/es/components/tooltip/index.js';
 import Information16 from '@carbon/icons/lib/information/16';
 ```
 
-<Description markdown={`${cdnJs({ components: ['tooltip'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['tooltip'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -116,8 +119,8 @@ import Information16 from '@carbon/icons/lib/information/16';
 import '@carbon/web-components/es/components/slug/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['slug'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['slug'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
