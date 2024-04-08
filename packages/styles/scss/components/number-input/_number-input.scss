@@ -173,7 +173,7 @@
 
     &:hover {
       background-color: $field-hover;
-      box-shadow: 0 -1px 0 var(--cds-border-strong) inset;
+      box-shadow: 0 -1px 0 $border-strong inset;
       color: $icon-primary;
       cursor: pointer;
     }
@@ -207,9 +207,8 @@
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
     border-width: 2px 0;
-
     border-style: solid;
-    border-color: var(--cds-focus, #0f62fe);
+    border-color: $focus;
     box-shadow: none;
     outline-offset: -2px;
   }
@@ -218,7 +217,7 @@
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type:hover {
-    box-shadow: -4px 0 0 -2px #0f62fe inset;
+    box-shadow: -4px 0 0 -2px $focus inset;
   }
 
   // add invalid box-shadow to number controls only when invalid input is not focused
@@ -226,7 +225,7 @@
     input[type='number'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type:hover {
-    box-shadow: -4px 0 0 -2px #da1e28 inset;
+    box-shadow: -4px 0 0 -2px $support-error inset;
   }
 
   .#{$prefix}--number
@@ -235,8 +234,7 @@
     .#{$prefix}--number__control-btn:hover {
     border-width: 2px 0;
     border-style: solid;
-
-    border-color: var(--cds-support-error, #da1e28);
+    border-color: $support-error;
     box-shadow: none;
     outline-offset: -2px;
   }
@@ -539,7 +537,7 @@
 
 .#{$prefix}--number__input-wrapper--slug
   .#{$prefix}--number__control-btn:hover {
-  box-shadow: 0 -1px 0 var(--cds-ai-border-strong, #4589ff) inset;
+  box-shadow: 0 -1px 0 $ai-border-strong inset;
 }
 //hide dividers on button focus
 .#{$prefix}--number__controls:focus-within
