@@ -6,7 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, {
+  PropsWithChildren,
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+} from 'react';
 import classNames from 'classnames';
 import useResizeObserver from 'use-resize-observer/polyfilled';
 import { ChevronDown } from '@carbon/icons-react';
@@ -22,7 +28,125 @@ const rowHeightInPixels = 16;
 const defaultMaxCollapsedNumberOfRows = 15;
 const defaultMaxExpandedNumberOfRows = 0;
 const defaultMinCollapsedNumberOfRows = 3;
-const defaultMinExpandedNumberOfRows = 0;
+const defaultMinExpandedNumberOfRows = 16;
+
+export interface CodeSnippetProps {
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  align?:
+    | 'top'
+    | 'top-left'
+    | 'top-right'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'left'
+    | 'right';
+
+  /**
+   * Specify a label to be read by screen readers on the containing textbox
+   * node
+   */
+  ['aria-label']?: string;
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the containing textbox
+   * node
+   */
+  ariaLabel?: string;
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify the description for the Copy Button
+   */
+  copyButtonDescription?: string;
+
+  /**
+   * Optional text to copy. If not specified, the `children` node's `innerText`
+   * will be used as the copy value.
+   */
+  copyText?: string;
+
+  /**
+   * Specify whether or not the CodeSnippet should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify the string displayed when the snippet is copied
+   */
+  feedback?: string;
+
+  /**
+   * Specify the time it takes for the feedback message to timeout
+   */
+  feedbackTimeout?: number;
+
+  /**
+   * Specify whether or not a copy button should be used/rendered.
+   */
+  hideCopyButton?: boolean;
+
+  /**
+   * Specify whether you are using the light variant of the Code Snippet,
+   * typically used for inline snippet to display an alternate color
+   */
+
+  light?: boolean;
+
+  /**
+   * Specify the maximum number of rows to be shown when in collapsed view
+   */
+  maxCollapsedNumberOfRows?: number;
+
+  /**
+   * Specify the maximum number of rows to be shown when in expanded view
+   */
+  maxExpandedNumberOfRows?: number;
+
+  /**
+   * Specify the minimum number of rows to be shown when in collapsed view
+   */
+  minCollapsedNumberOfRows?: number;
+
+  /**
+   * Specify the minimum number of rows to be shown when in expanded view
+   */
+  minExpandedNumberOfRows?: number;
+  /**
+   * An optional handler to listen to the `onClick` even fired by the Copy
+   * Button
+   */
+  onClick?: (e: MouseEvent) => void;
+
+  /**
+   * Specify a string that is displayed when the Code Snippet has been
+   * interacted with to show more lines
+   */
+  showLessText?: string;
+
+  /**
+   * Specify a string that is displayed when the Code Snippet text is more
+   * than 15 lines
+   */
+  showMoreText?: string;
+
+  /**
+   * Provide the type of Code Snippet
+   */
+  type?: 'single' | 'inline' | 'multi';
+
+  /**
+   * Specify whether or not to wrap the text.
+   */
+  wrapText?: boolean;
+}
 
 function CodeSnippet({
   align = 'bottom',
@@ -47,13 +171,13 @@ function CodeSnippet({
   minCollapsedNumberOfRows = defaultMinCollapsedNumberOfRows,
   minExpandedNumberOfRows = defaultMinExpandedNumberOfRows,
   ...rest
-}) {
+}: PropsWithChildren<CodeSnippetProps>) {
   const [expandedCode, setExpandedCode] = useState(false);
   const [shouldShowMoreLessBtn, setShouldShowMoreLessBtn] = useState(false);
   const { current: uid } = useRef(getUniqueId());
-  const codeContentRef = useRef();
-  const codeContainerRef = useRef();
-  const innerCodeRef = useRef();
+  const codeContentRef = useRef<HTMLPreElement>(null);
+  const codeContainerRef = useRef<HTMLDivElement>(null);
+  const innerCodeRef = useRef<HTMLElement>(null);
   const [hasLeftOverflow, setHasLeftOverflow] = useState(false);
   const [hasRightOverflow, setHasRightOverflow] = useState(false);
   const getCodeRef = useCallback(() => {
@@ -62,16 +186,18 @@ function CodeSnippet({
     }
     if (type === 'multi') {
       return codeContentRef;
+    } else {
+      return innerCodeRef;
     }
   }, [type]);
   const prefix = usePrefix();
 
   const getCodeRefDimensions = useCallback(() => {
     const {
-      clientWidth: codeClientWidth,
-      scrollLeft: codeScrollLeft,
-      scrollWidth: codeScrollWidth,
-    } = getCodeRef().current;
+      clientWidth: codeClientWidth = 0,
+      scrollLeft: codeScrollLeft = 0,
+      scrollWidth: codeScrollWidth = 0,
+    } = getCodeRef().current || {};
 
     return {
       horizontalOverflow: codeScrollWidth > codeClientWidth,
@@ -103,46 +229,38 @@ function CodeSnippet({
     );
   }, [type, getCodeRefDimensions]);
 
-  useResizeObserver(
-    {
-      ref: getCodeRef(),
-      onResize: () => {
-        if (codeContentRef?.current && type === 'multi') {
-          const { height } = innerCodeRef.current.getBoundingClientRect();
-          if (
-            maxCollapsedNumberOfRows > 0 &&
-            (maxExpandedNumberOfRows <= 0 ||
-              maxExpandedNumberOfRows > maxCollapsedNumberOfRows) &&
-            height > maxCollapsedNumberOfRows * rowHeightInPixels
-          ) {
-            setShouldShowMoreLessBtn(true);
-          } else {
-            setShouldShowMoreLessBtn(false);
-          }
-          if (
-            expandedCode &&
-            minExpandedNumberOfRows > 0 &&
-            height <= minExpandedNumberOfRows * rowHeightInPixels
-          ) {
-            setExpandedCode(false);
-          }
+  useResizeObserver({
+    ref: getCodeRef(),
+    onResize: () => {
+      if (codeContentRef?.current && type === 'multi') {
+        const { height } = codeContentRef.current.getBoundingClientRect();
+
+        if (
+          maxCollapsedNumberOfRows > 0 &&
+          (maxExpandedNumberOfRows <= 0 ||
+            maxExpandedNumberOfRows > maxCollapsedNumberOfRows) &&
+          height > maxCollapsedNumberOfRows * rowHeightInPixels
+        ) {
+          setShouldShowMoreLessBtn(true);
+        } else {
+          setShouldShowMoreLessBtn(false);
         }
         if (
-          (codeContentRef?.current && type === 'multi') ||
-          (codeContainerRef?.current && type === 'single')
+          expandedCode &&
+          minExpandedNumberOfRows > 0 &&
+          height <= minExpandedNumberOfRows * rowHeightInPixels
         ) {
-          handleScroll();
+          setExpandedCode(false);
         }
-      },
+      }
+      if (
+        (codeContentRef?.current && type === 'multi') ||
+        (codeContainerRef?.current && type === 'single')
+      ) {
+        handleScroll();
+      }
     },
-    [
-      type,
-      maxCollapsedNumberOfRows,
-      maxExpandedNumberOfRows,
-      minExpandedNumberOfRows,
-      rowHeightInPixels,
-    ]
-  );
+  });
 
   useEffect(() => {
     handleScroll();
@@ -150,7 +268,7 @@ function CodeSnippet({
 
   const handleCopyClick = (evt) => {
     if (copyText || innerCodeRef?.current) {
-      copy(copyText ?? innerCodeRef?.current?.innerText);
+      copy(copyText ?? innerCodeRef?.current?.innerText ?? '');
     }
 
     if (onClick) {
@@ -192,16 +310,18 @@ function CodeSnippet({
         className={codeSnippetClasses}
         feedback={feedback}
         feedbackTimeout={feedbackTimeout}>
-        <code aria-live="assertive" id={uid} ref={innerCodeRef}>
+        <code id={uid} ref={innerCodeRef}>
           {children}
         </code>
       </Copy>
     );
   }
 
-  let containerStyle = {};
+  type stylesType = { maxHeight?: number; minHeight?: number };
+  type containerStyleType = { style?: stylesType };
+  const containerStyle: containerStyleType = {};
   if (type === 'multi') {
-    const styles = {};
+    const styles: stylesType = {};
 
     if (expandedCode) {
       if (maxExpandedNumberOfRows > 0) {
@@ -228,19 +348,19 @@ function CodeSnippet({
     <div {...rest} className={codeSnippetClasses}>
       <div
         ref={codeContainerRef}
-        role={type === 'single' || type === 'multi' ? 'textbox' : null}
+        role={type === 'single' || type === 'multi' ? 'textbox' : undefined}
         tabIndex={
-          (type === 'single' || type === 'multi') && !disabled ? 0 : null
+          (type === 'single' || type === 'multi') && !disabled ? 0 : undefined
         }
         className={`${prefix}--snippet-container`}
         aria-label={deprecatedAriaLabel || ariaLabel || 'code-snippet'}
-        aria-readonly={type === 'single' || type === 'multi' ? true : null}
-        aria-multiline={type === 'multi' ? true : null}
-        onScroll={(type === 'single' && handleScroll) || null}
+        aria-readonly={type === 'single' || type === 'multi' ? true : undefined}
+        aria-multiline={type === 'multi' ? true : undefined}
+        onScroll={(type === 'single' && handleScroll) || undefined}
         {...containerStyle}>
         <pre
           ref={codeContentRef}
-          onScroll={(type === 'multi' && handleScroll) || null}>
+          onScroll={(type === 'multi' && handleScroll) || undefined}>
           <code ref={innerCodeRef}>{children}</code>
         </pre>
       </div>
