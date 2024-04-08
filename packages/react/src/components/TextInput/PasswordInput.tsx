@@ -10,6 +10,8 @@ import { View, ViewOff } from '@carbon/icons-react';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
+import { Tooltip } from '../Tooltip';
+import { PopoverAlignment } from '../Popover';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -309,6 +311,24 @@ const PasswordInput = React.forwardRef(function PasswordInput(
       [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
     }
   );
+
+  let align: PopoverAlignment | undefined = undefined;
+
+  if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
+    if (tooltipAlignment === 'center') {
+      align = tooltipPosition;
+    }
+    if (tooltipAlignment === 'end') {
+      align = `${tooltipPosition}-right`;
+    }
+    if (tooltipAlignment === 'start') {
+      align = `${tooltipPosition}-left`;
+    }
+  }
+
+  if (tooltipPosition === 'right' || tooltipPosition === 'left') {
+    align = tooltipPosition;
+  }
   const input = (
     <>
       <input
@@ -329,18 +349,18 @@ const PasswordInput = React.forwardRef(function PasswordInput(
         data-toggle-password-visibility={inputType === 'password'}
       />
       {isFluid && <hr className={`${prefix}--text-input__divider`} />}
-      <button
-        type="button"
-        className={passwordVisibilityToggleClasses}
-        disabled={disabled}
-        onClick={handleTogglePasswordVisibility}>
-        {!disabled && (
-          <span className={`${prefix}--assistive-text`}>
-            {passwordIsVisible ? hidePasswordLabel : showPasswordLabel}
-          </span>
-        )}
-        {passwordVisibilityIcon}
-      </button>
+      <Tooltip
+        align={align}
+        className={`${prefix}--toggle-password-tooltip`}
+        label={passwordIsVisible ? hidePasswordLabel : showPasswordLabel}>
+        <button
+          type="button"
+          className={passwordVisibilityToggleClasses}
+          disabled={disabled}
+          onClick={handleTogglePasswordVisibility}>
+          {passwordVisibilityIcon}
+        </button>
+      </Tooltip>
     </>
   );
 
