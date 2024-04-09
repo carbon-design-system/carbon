@@ -1,8 +1,8 @@
-import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as LinkStories from './link.stories';
 
-<Meta of={LinkStories} /> 
+<Meta of={LinkStories} />
 
 # Link
 
@@ -54,4 +54,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-link disabled>`) and `false` means not setting the attribute (e.g.
 `<cds-link>` without `disabled` attribute).
 
-<ArgsTable of="cds-link" />
+<ArgTypes of="cds-link" />
