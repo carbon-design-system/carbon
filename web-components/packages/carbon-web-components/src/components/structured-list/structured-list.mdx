@@ -1,8 +1,10 @@
-import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import * as StructuredList from './structured-list.stories';
+import * as StructuredListStories from './structured-list.stories';
 
-<Meta of={StructuredList} /># Structured list
+<Meta of={StructuredListStories} />
+
+# Structured list
 
 > 💡 Check our
 > [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/web-components/examples/stackblitz/basic/components/structured-list)
@@ -109,7 +111,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-structured-list has-selection>`) and `false` means not setting the
 attribute (e.g. `<cds-structured-list>` without `has-selection` attribute).
 
-<ArgsTable of="cds-structured-list" />
+<ArgTypes of="cds-structured-list" />
 
 ## `<cds-structured-list-row>` attributes and properties
 
@@ -117,4 +119,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-structured-list-row selected>`) and `false` means not setting the
 attribute (e.g. `<cds-structured-list-row>` without `selected` attribute).
 
-<ArgsTable of="cds-structured-list-row" />
+<ArgTypes of="cds-structured-list-row" />

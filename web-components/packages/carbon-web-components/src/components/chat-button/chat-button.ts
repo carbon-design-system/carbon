@@ -12,7 +12,7 @@ import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import '../button/button';
 import { CHAT_BUTTON_SIZE, CHAT_BUTTON_KIND } from './defs';
-import styles from './chat-button.scss';
+import styles from './chat-button.scss?lit';
 
 export { CHAT_BUTTON_SIZE, CHAT_BUTTON_KIND };
 
