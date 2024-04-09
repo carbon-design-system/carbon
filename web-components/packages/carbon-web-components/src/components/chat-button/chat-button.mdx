@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as ChatButtonStories from './chat-button.stories';
+
+<Meta of={ChatButtonStories} />
 
 # Chat Button
 
@@ -19,8 +22,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/chat-button/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['chat-button'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['chat-button'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ```javascript
 import '@carbon/web-components/es/components/chat-button/index.js';
@@ -28,12 +31,12 @@ import Add16 from '@carbon/web-components/es/icons/add/16';
 
 function App() {
   return html`<cds-chat-button>
-      Primary ${Add16({ slot: 'icon' })}
+    Primary ${Add16({ slot: 'icon' })}
   </cds-chat-button>`;
 }
 ```
 
 ## `<cds-chat-button>` attributes and properties
 
-<Props of="cds-chat-button" />
+<ArgsTable of="cds-chat-button" />
 ````

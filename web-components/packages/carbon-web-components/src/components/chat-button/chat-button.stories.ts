@@ -9,9 +9,8 @@
 
 import { html } from 'lit';
 import './index';
-import storyDocs from './chat-button-story.mdx';
 import Add16 from '@carbon/icons/lib/add/16';
-import styles from './chat-button-story.scss';
+import styles from './chat-button-story.scss?lit';
 
 export const Default = () => {
   return html`
@@ -100,10 +99,8 @@ export const Default = () => {
   `;
 };
 
-export default {
-  parameters: {
-    ...storyDocs.parameters,
-  },
+const meta = {
   title: 'Experimental/Chat button',
-  decorators: [(story) => html` ${story()} `],
 };
+
+export default meta;
