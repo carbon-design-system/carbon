@@ -9,6 +9,7 @@ import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import cx from 'classnames';
 import Downshift, {
   useCombobox,
+  useMultipleSelection,
   type UseComboboxProps,
   type UseMultipleSelectionProps,
 } from 'downshift';
@@ -23,6 +24,8 @@ import React, {
   FunctionComponent,
   ForwardedRef,
   type FocusEvent,
+  type KeyboardEvent,
+  ReactElement,
 } from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import {
@@ -33,7 +36,6 @@ import {
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
-import Selection from '../../internal/Selection';
 import { defaultItemToString } from './tools/itemToString';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
@@ -282,10 +284,14 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   const [inputValue, setInputValue] = useState<string>('');
   const [topItems, setTopItems] = useState<Item[]>(initialSelectedItems ?? []);
   const [inputFocused, setInputFocused] = useState<boolean>(false);
-  const [highlightedIndex, setHighlightedIndex] = useState(0);
-  const [currentSelectedItems, setCurrentSelectedItems] = useState(
-    initialSelectedItems ?? []
-  );
+
+  const $selectionState = useState(initialSelectedItems ?? []);
+  const selectedItems = $selectionState[0];
+  const setSelectedItems = (items: Item[]) => {
+    $selectionState[1](items);
+    onChange?.({ selectedItems: items });
+  };
+
   const textInput = useRef<HTMLInputElement>(null);
   const filterableMultiSelectInstanceId = useId();
 
@@ -343,106 +349,128 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
 
   useEffect(() => {
     if (!isOpen) {
-      setTopItems(currentSelectedItems);
+      setTopItems(selectedItems);
     }
-  }, [currentSelectedItems, isOpen, setTopItems]);
+  }, [selectedItems, isOpen, setTopItems]);
 
-  function handleOnChange(changes) {
-    setCurrentSelectedItems(changes.selectedItems);
-    if (onChange) {
-      onChange(changes);
-    }
-  }
-
-  function handleOnMenuChange(forceIsOpen) {
+  function handleMenuChange(forceIsOpen: boolean): void {
     const nextIsOpen = forceIsOpen ?? !isOpen;
     setIsOpen(nextIsOpen);
     if (onMenuChange) {
       onMenuChange(nextIsOpen);
     }
-
-    if (!isOpen) {
-      setHighlightedIndex(0);
-    }
   }
 
-  function handleOnOuterClick() {
-    handleOnMenuChange(false);
-  }
+  // function handleOnOuterClick() {
+  //   handleOnMenuChange(false);
+  // }
 
-  function handleOnStateChange(changes) {
-    const { type } = changes;
-    const { stateChangeTypes } = Downshift;
-
-    switch (type) {
-      case stateChangeTypes.keyDownArrowDown:
-      case stateChangeTypes.keyDownArrowUp:
-      case useCombobox.stateChangeTypes.InputKeyDownHome:
-      case useCombobox.stateChangeTypes.InputKeyDownEnd:
-        setHighlightedIndex(
-          changes.highlightedIndex !== undefined ? changes.highlightedIndex : 0
-        );
-        if (stateChangeTypes.keyDownArrowDown === type && !isOpen) {
-          handleOnMenuChange(true);
+  const {
+    getToggleButtonProps,
+    getLabelProps,
+    getMenuProps,
+    getInputProps,
+    highlightedIndex,
+    getItemProps,
+    openMenu,
+    isOpen: isMenuOpen,
+  } = useCombobox<Item>({
+    isOpen,
+    items,
+    itemToString,
+    defaultHighlightedIndex: 0, // after selection, highlight the first item.
+    id,
+    labelId,
+    menuId,
+    inputId,
+    inputValue,
+    stateReducer(state, actionAndChanges) {
+      const { changes, type } = actionAndChanges;
+      switch (type) {
+        case useCombobox.stateChangeTypes.InputKeyDownEnter:
+        case useCombobox.stateChangeTypes.ItemClick:
+          return {
+            ...changes,
+            isOpen: true, // keep the menu open after selection.
+            highlightedIndex: 0, // with the first option highlighted.
+          };
+        default:
+          return changes;
+      }
+    },
+    onStateChange(changes) {
+      switch (changes.type) {
+        case useCombobox.stateChangeTypes.InputKeyDownEnter:
+        case useCombobox.stateChangeTypes.ItemClick:
+        case useCombobox.stateChangeTypes.InputBlur: {
+          if (changes.selectedItem) {
+            setSelectedItems([...selectedItems, changes.selectedItem]);
+            setInputValue('');
+          }
+          break;
         }
-        break;
-      case stateChangeTypes.keyDownEscape:
-        handleOnMenuChange(false);
-        setHighlightedIndex(0);
-        break;
-      case stateChangeTypes.changeInput:
-        setHighlightedIndex(0);
-        break;
-      case stateChangeTypes.keyDownEnter:
-        if (!isOpen) {
-          setHighlightedIndex(0);
+
+        case useCombobox.stateChangeTypes.InputChange: {
+          setInputValue(changes.inputValue ?? '');
+          break;
         }
-        break;
-      case stateChangeTypes.clickItem:
-        if (isOpen) {
-          const sortedItems = sortItems(
-            filterItems(items, { itemToString, inputValue }),
-            {
-              selectedItems: {
-                top: changes.selectedItems,
-                fixed: [],
-                'top-after-reopen': topItems,
-              }[selectionFeedback],
-              itemToString,
-              compareItems,
-              locale,
-            }
-          );
-          const sortedSelectedIndex = sortedItems.indexOf(changes.selectedItem);
-          setHighlightedIndex(sortedSelectedIndex);
+
+        case useCombobox.stateChangeTypes.InputKeyDownArrowDown: {
+          if (!isOpen) {
+            handleMenuChange(true);
+          }
+          break;
         }
-        break;
-    }
-  }
+        case useCombobox.stateChangeTypes.InputKeyDownEscape: {
+          handleMenuChange(false);
+          break;
+        }
+      }
+    },
+    onInputValueChange(changes) {
+      onInputValueChange?.(changes);
 
-  function handleOnInputValueChange(inputValue: string, { type }: any) {
-    if (onInputValueChange) {
-      onInputValueChange(inputValue);
-    }
+      if (Array.isArray(inputValue)) {
+        clearInputValue();
+      } else {
+        setInputValue(inputValue);
+      }
 
-    if (type !== Downshift.stateChangeTypes.changeInput) {
-      return;
-    }
+      if (inputValue && !isOpen) {
+        handleMenuChange(true);
+      } else if (!inputValue && isOpen) {
+        handleMenuChange(false);
+      }
+    },
+  });
 
-    if (Array.isArray(inputValue)) {
-      clearInputValue();
-    } else {
-      setInputValue(inputValue);
-    }
+  const { getDropdownProps } = useMultipleSelection<Item>({
+    ...downshiftProps,
+    activeIndex: highlightedIndex,
+    initialSelectedItems,
+    selectedItems: selectedItems,
+    itemToString,
+    onStateChange(changes) {
+      switch (changes.type) {
+        case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownBackspace:
+        case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownDelete:
+        case useMultipleSelection.stateChangeTypes.DropdownKeyDownBackspace:
+        case useMultipleSelection.stateChangeTypes.FunctionRemoveSelectedItem: {
+          setSelectedItems(changes.selectedItems ?? []);
+          break;
+        }
+      }
+    },
+    // FIXME: missing `onOuterClick: () => handleOnMenuChange(false)`
+  });
 
-    if (inputValue && !isOpen) {
-      handleOnMenuChange(true);
-    } else if (!inputValue && isOpen) {
-      handleOnMenuChange(false);
+  useEffect(() => {
+    if (isOpen && !isMenuOpen) {
+      openMenu();
     }
-  }
+  });
 
-  function clearInputValue(event?: React.KeyboardEvent | undefined) {
+  function clearInputValue(event?: KeyboardEvent | undefined) {
     const value = textInput.current?.value;
     if (value?.length === 1 || (event && match(event, keys.Escape))) {
       setInputValue('');
@@ -463,317 +491,260 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     });
   }
 
-  return (
-    <Selection
-      disabled={disabled}
-      onChange={handleOnChange}
-      initialSelectedItems={initialSelectedItems}
-      render={({ selectedItems, onItemChange, clearSelection }) => (
-        <Downshift
-          {...downshiftProps}
-          highlightedIndex={highlightedIndex}
-          id={id}
-          isOpen={isOpen}
-          inputValue={inputValue}
-          onInputValueChange={handleOnInputValueChange}
-          onChange={(selectedItem) => {
-            if (selectedItem !== null) {
-              onItemChange(selectedItem);
+  const className = cx(
+    `${prefix}--multi-select`,
+    `${prefix}--combo-box`,
+    `${prefix}--multi-select--filterable`,
+    {
+      [`${prefix}--multi-select--invalid`]: invalid,
+      [`${prefix}--multi-select--invalid--focused`]: invalid && inputFocused,
+      [`${prefix}--multi-select--open`]: isOpen,
+      [`${prefix}--multi-select--inline`]: inline,
+      [`${prefix}--multi-select--selected`]: selectedItems?.length > 0,
+      [`${prefix}--multi-select--filterable--input-focused`]: inputFocused,
+    }
+  );
+
+  const labelProps = getLabelProps();
+
+  const buttonProps = getToggleButtonProps({
+    disabled,
+    onClick: () => {
+      handleMenuChange(!isOpen);
+      textInput.current?.focus();
+    },
+    // When we moved the "root node" of Downshift to the <input> for
+    // ARIA 1.2 compliance, we unfortunately hit this branch for the
+    // "mouseup" event that downshift listens to:
+    // https://github.com/downshift-js/downshift/blob/v5.2.1/src/downshift.js#L1051-L1065
+    //
+    // As a result, it will reset the state of the component and so we
+    // stop the event from propagating to prevent this. This allows the
+    // toggleMenu behavior for the toggleButton to correctly open and
+    // close the menu.
+    onMouseUp(event) {
+      if (isOpen) {
+        event.stopPropagation();
+      }
+    },
+  });
+
+  const inputProps = getInputProps(
+    getDropdownProps({
+      'aria-controls': isOpen ? menuId : undefined,
+      'aria-describedby': helperText ? helperId : undefined,
+      // Remove excess aria `aria-labelledby`. HTML <label for>
+      // provides this aria information.
+      'aria-labelledby': undefined,
+      disabled,
+      placeholder,
+      preventKeyAction: isOpen,
+
+      onClick: () => handleMenuChange(true),
+      onKeyDown(event: KeyboardEvent<HTMLElement>) {
+        const $input = event.target as HTMLInputElement;
+        const $value = $input.value;
+
+        if (match(event, keys.Space)) {
+          event.stopPropagation();
+        }
+
+        if (match(event, keys.Enter)) {
+          handleMenuChange(true);
+        }
+
+        if (!disabled) {
+          if (match(event, keys.Delete) || match(event, keys.Escape)) {
+            if (isOpen) {
+              handleMenuChange(true);
+              clearInputValue(event);
+              event.stopPropagation();
+            } else if (!isOpen) {
+              clearInputValue(event);
+              setSelectedItems([]);
+              event.stopPropagation();
             }
-          }}
-          itemToString={itemToString}
-          onStateChange={handleOnStateChange}
-          onOuterClick={handleOnOuterClick}
-          selectedItem={selectedItems}
-          labelId={labelId}
-          menuId={menuId}
-          inputId={inputId}>
-          {({
-            getInputProps,
-            getItemProps,
-            getLabelProps,
-            getMenuProps,
-            getRootProps,
-            getToggleButtonProps,
-            isOpen,
-            inputValue,
-            selectedItem,
-          }) => {
-            const _selectedItems = (selectedItem || []) as Item[];
+          }
+        }
 
-            const className = cx(
-              `${prefix}--multi-select`,
-              `${prefix}--combo-box`,
-              `${prefix}--multi-select--filterable`,
-              {
-                [`${prefix}--multi-select--invalid`]: invalid,
-                [`${prefix}--multi-select--invalid--focused`]:
-                  invalid && inputFocused,
-                [`${prefix}--multi-select--open`]: isOpen,
-                [`${prefix}--multi-select--inline`]: inline,
-                [`${prefix}--multi-select--selected`]:
-                  _selectedItems?.length > 0,
-                [`${prefix}--multi-select--filterable--input-focused`]:
-                  inputFocused,
-              }
-            );
-            const rootProps = getRootProps(
-              {},
-              {
-                suppressRefError: true,
-              }
-            );
+        if (match(event, keys.Tab)) {
+          handleMenuChange(false);
+        }
 
-            const labelProps = getLabelProps();
+        if (match(event, keys.Home)) {
+          $input.setSelectionRange(0, 0);
+        }
 
-            const buttonProps = getToggleButtonProps({
-              disabled,
-              onClick: () => {
-                handleOnMenuChange(!isOpen);
+        if (match(event, keys.End)) {
+          $input.setSelectionRange($value.length, $value.length);
+        }
+      },
+      onFocus: () => setInputFocused(true),
+      onBlur() {
+        setInputFocused(false);
+        setInputValue('');
+      },
+    })
+  );
+  const menuProps = getMenuProps({}, { suppressRefError: true });
+
+  const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {
+    if (
+      evt?.target.classList.contains(`${prefix}--tag__close-icon`) ||
+      evt?.target.classList.contains(`${prefix}--list-box__selection`)
+    ) {
+      setIsFocused(false);
+    } else {
+      setIsFocused(evt?.type === 'focus' ? true : false);
+    }
+  };
+
+  const clearSelectionContent =
+    selectedItems.length > 0 ? (
+      <span className={`${prefix}--visually-hidden`}>
+        {clearSelectionDescription} {selectedItems.length},{clearSelectionText}
+      </span>
+    ) : (
+      <span className={`${prefix}--visually-hidden`}>
+        {clearSelectionDescription}: 0
+      </span>
+    );
+
+  return (
+    <div className={wrapperClasses}>
+      {titleText ? (
+        <label className={titleClasses} {...labelProps}>
+          {titleText}
+          <span className={`${prefix}--visually-hidden`}>
+            {clearSelectionContent}
+          </span>
+        </label>
+      ) : null}
+      <ListBox
+        onFocus={isFluid ? handleFocus : undefined}
+        onBlur={isFluid ? handleFocus : undefined}
+        className={className}
+        disabled={disabled}
+        light={light}
+        ref={ref}
+        invalid={invalid}
+        invalidText={invalidText}
+        warn={warn}
+        warnText={warnText}
+        isOpen={isOpen}
+        size={size}>
+        <div className={`${prefix}--list-box__field`}>
+          {selectedItems.length > 0 && (
+            // @ts-expect-error: It is expecting a non-required prop called: "onClearSelection"
+            <ListBoxSelection
+              clearSelection={() => {
+                setSelectedItems([]);
                 if (textInput.current) {
                   textInput.current.focus();
                 }
-              },
-              // When we moved the "root node" of Downshift to the <input> for
-              // ARIA 1.2 compliance, we unfortunately hit this branch for the
-              // "mouseup" event that downshift listens to:
-              // https://github.com/downshift-js/downshift/blob/v5.2.1/src/downshift.js#L1051-L1065
-              //
-              // As a result, it will reset the state of the component and so we
-              // stop the event from propagating to prevent this. This allows the
-              // toggleMenu behavior for the toggleButton to correctly open and
-              // close the menu.
-              onMouseUp(event) {
-                if (isOpen) {
-                  event.stopPropagation();
-                }
-              },
-            });
+              }}
+              selectionCount={selectedItems.length}
+              translateWithId={translateWithId}
+              disabled={disabled}
+            />
+          )}
+          <input
+            className={inputClasses}
+            {...inputProps}
+            ref={mergeRefs(textInput, inputProps.ref)}
+          />
+          {invalid && (
+            <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
+          )}
+          {showWarning && (
+            <WarningAltFilled
+              className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
+            />
+          )}
+          {inputValue && (
+            // @ts-expect-error: It is expecting two non-required prop called: "onClearSelection" & "selectionCount"
+            <ListBoxSelection
+              clearSelection={clearInputValue}
+              disabled={disabled}
+              translateWithId={translateWithId}
+              onMouseUp={(event: MouseEvent) => {
+                // If we do not stop this event from propagating,
+                // it seems like Downshift takes our event and
+                // prevents us from getting `onClick` /
+                // `clearSelection` from the underlying <button> in
+                // ListBoxSelection
+                event.stopPropagation();
+              }}
+            />
+          )}
+          <ListBoxTrigger
+            {...buttonProps}
+            isOpen={isOpen}
+            translateWithId={translateWithId}
+          />
+        </div>
+        {normalizedSlug}
+        {isOpen ? (
+          <ListBox.Menu {...menuProps}>
+            {sortItems(filterItems(items, { itemToString, inputValue }), {
+              selectedItems: {
+                top: selectedItems,
+                fixed: [],
+                'top-after-reopen': topItems,
+              }[selectionFeedback],
+              itemToString,
+              compareItems,
+              locale,
+            }).map((item, index) => {
+              const isChecked =
+                selectedItems.filter((selected) => isEqual(selected, item))
+                  .length > 0;
+              const itemProps = getItemProps({
+                item,
+                disabled: item.disabled,
+                ['aria-selected']: isChecked,
+              });
+              const itemText = itemToString(item);
 
-            const inputProps: object = getInputProps({
-              'aria-controls': isOpen ? menuId : undefined,
-              'aria-describedby': helperText ? helperId : undefined,
-              // Remove excess aria `aria-labelledby`. HTML <label for>
-              // provides this aria information.
-              'aria-labelledby': undefined,
-              disabled,
-              placeholder,
-              onClick: () => {
-                handleOnMenuChange(true);
-              },
-              onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
-                const $input = event.target as HTMLInputElement;
-                const $value = $input.value;
-
-                if (match(event, keys.Space)) {
-                  event.stopPropagation();
-                }
-
-                if (match(event, keys.Enter)) {
-                  handleOnMenuChange(true);
-                }
-
-                if (!disabled) {
-                  if (match(event, keys.Delete) || match(event, keys.Escape)) {
-                    if (isOpen) {
-                      handleOnMenuChange(true);
-                      clearInputValue(event);
-                      event.stopPropagation();
-                    } else if (!isOpen) {
-                      clearInputValue(event);
-                      clearSelection();
-                      event.stopPropagation();
-                    }
-                  }
-                }
-
-                if (match(event, keys.Tab)) {
-                  handleOnMenuChange(false);
-                }
-
-                if (match(event, keys.Home) && event.code !== 'Numpad7') {
-                  $input.setSelectionRange(0, 0);
-                }
-
-                if (match(event, keys.End) && event.code !== 'Numpad1') {
-                  $input.setSelectionRange($value.length, $value.length);
-                }
-              },
-              onFocus: () => {
-                setInputFocused(true);
-              },
-              onBlur: () => {
-                setInputFocused(false);
-                setInputValue('');
-              },
-            });
-
-            const menuProps = getMenuProps({}, { suppressRefError: true });
-
-            const handleFocus = (
-              evt: FocusEvent<HTMLDivElement> | undefined
-            ) => {
-              if (
-                evt?.target.classList.contains(`${prefix}--tag__close-icon`) ||
-                evt?.target.classList.contains(`${prefix}--list-box__selection`)
-              ) {
-                setIsFocused(false);
-              } else {
-                setIsFocused(evt?.type === 'focus' ? true : false);
-              }
-            };
-
-            const clearSelectionContent =
-              selectedItems.length > 0 ? (
-                <span className={`${prefix}--visually-hidden`}>
-                  {clearSelectionDescription} {selectedItems.length},
-                  {clearSelectionText}
-                </span>
-              ) : (
-                <span className={`${prefix}--visually-hidden`}>
-                  {clearSelectionDescription}: 0
-                </span>
-              );
-
-            return (
-              <div className={wrapperClasses}>
-                {titleText ? (
-                  <label className={titleClasses} {...labelProps}>
-                    {titleText}
-                    <span className={`${prefix}--visually-hidden`}>
-                      {clearSelectionContent}
+              return (
+                <ListBox.MenuItem
+                  key={itemProps.id}
+                  aria-label={itemText}
+                  isActive={isChecked}
+                  isHighlighted={highlightedIndex === index}
+                  title={itemText}
+                  {...itemProps}>
+                  <div className={`${prefix}--checkbox-wrapper`}>
+                    <span
+                      title={useTitleInItem ? itemText : undefined}
+                      className={`${prefix}--checkbox-label`}
+                      data-contained-checkbox-state={isChecked}
+                      id={`${itemProps.id}-item`}>
+                      {ItemToElement ? (
+                        <ItemToElement key={itemProps.id} {...item} />
+                      ) : (
+                        itemText
+                      )}
                     </span>
-                  </label>
-                ) : null}
-                <ListBox
-                  onFocus={isFluid ? handleFocus : undefined}
-                  onBlur={isFluid ? handleFocus : undefined}
-                  className={className}
-                  disabled={disabled}
-                  light={light}
-                  ref={ref}
-                  invalid={invalid}
-                  invalidText={invalidText}
-                  warn={warn}
-                  warnText={warnText}
-                  isOpen={isOpen}
-                  size={size}>
-                  <div className={`${prefix}--list-box__field`}>
-                    {_selectedItems.length > 0 && (
-                      // @ts-expect-error: It is expecting a non-required prop called: "onClearSelection"
-                      <ListBoxSelection
-                        clearSelection={() => {
-                          clearSelection();
-                          if (textInput.current) {
-                            textInput.current.focus();
-                          }
-                        }}
-                        selectionCount={_selectedItems.length}
-                        translateWithId={translateWithId}
-                        disabled={disabled}
-                      />
-                    )}
-                    <input
-                      className={inputClasses}
-                      {...rootProps}
-                      {...inputProps}
-                      ref={mergeRefs(textInput, rootProps.ref)}
-                    />
-                    {invalid && (
-                      <WarningFilled
-                        className={`${prefix}--list-box__invalid-icon`}
-                      />
-                    )}
-                    {showWarning && (
-                      <WarningAltFilled
-                        className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
-                      />
-                    )}
-                    {inputValue && (
-                      // @ts-expect-error: It is expecting two non-required prop called: "onClearSelection" & "selectionCount"
-                      <ListBoxSelection
-                        clearSelection={clearInputValue}
-                        disabled={disabled}
-                        translateWithId={translateWithId}
-                        onMouseUp={(event: MouseEvent) => {
-                          // If we do not stop this event from propagating,
-                          // it seems like Downshift takes our event and
-                          // prevents us from getting `onClick` /
-                          // `clearSelection` from the underlying <button> in
-                          // ListBoxSelection
-                          event.stopPropagation();
-                        }}
-                      />
-                    )}
-                    <ListBoxTrigger
-                      {...buttonProps}
-                      isOpen={isOpen}
-                      translateWithId={translateWithId}
-                    />
                   </div>
-                  {normalizedSlug}
-                  {isOpen ? (
-                    <ListBox.Menu {...menuProps}>
-                      {sortItems(
-                        filterItems(items, { itemToString, inputValue }),
-                        {
-                          selectedItems: {
-                            top: selectedItems,
-                            fixed: [],
-                            'top-after-reopen': topItems,
-                          }[selectionFeedback],
-                          itemToString,
-                          compareItems,
-                          locale,
-                        }
-                      ).map((item, index) => {
-                        const isChecked =
-                          _selectedItems.filter((selected) =>
-                            isEqual(selected, item)
-                          ).length > 0;
-                        const itemProps = getItemProps({
-                          item,
-                          disabled: item.disabled,
-                          ['aria-selected']: isChecked,
-                        });
-                        const itemText = itemToString(item);
-
-                        return (
-                          <ListBox.MenuItem
-                            key={itemProps.id}
-                            aria-label={itemText}
-                            isActive={isChecked}
-                            isHighlighted={highlightedIndex === index}
-                            title={itemText}
-                            {...itemProps}>
-                            <div className={`${prefix}--checkbox-wrapper`}>
-                              <span
-                                title={useTitleInItem ? itemText : undefined}
-                                className={`${prefix}--checkbox-label`}
-                                data-contained-checkbox-state={isChecked}
-                                id={`${itemProps.id}-item`}>
-                                {ItemToElement ? (
-                                  <ItemToElement key={itemProps.id} {...item} />
-                                ) : (
-                                  itemText
-                                )}
-                              </span>
-                            </div>
-                          </ListBox.MenuItem>
-                        );
-                      })}
-                    </ListBox.Menu>
-                  ) : null}
-                </ListBox>
-                {!inline && !invalid && !warn ? helper : null}
-              </div>
-            );
-          }}
-        </Downshift>
-      )}
-    />
+                </ListBox.MenuItem>
+              );
+            })}
+          </ListBox.Menu>
+        ) : null}
+      </ListBox>
+      {!inline && !invalid && !warn ? helper : null}
+    </div>
   );
-});
+}) as {
+  <Item extends ItemBase>(
+    props: FilterableMultiSelectProps<Item>
+  ): ReactElement;
+  propTypes?: any;
+  contextTypes?: any;
+  defaultProps?: any;
+  displayName?: any;
+};
 
 FilterableMultiSelect.propTypes = {
   /**
