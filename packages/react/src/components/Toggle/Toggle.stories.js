@@ -92,9 +92,9 @@ export const WithAccessibleLabels = () => (
 
     <div>
       <div id="toggle-6-label" style={{ marginBlockEnd: '0.5rem' }}>
-        External toggle label
+        Internal aria-label toggle
       </div>
-      <Toggle aria-label="aria-label toggle label" id="toggle-6" hideLabel />
+      <Toggle aria-label="Internal aria-label toggle" id="toggle-6" hideLabel />
     </div>
 
     <div>
