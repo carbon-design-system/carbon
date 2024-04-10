@@ -17,8 +17,7 @@ export default {
 
 export const Default = () => (
   <Toggle
-    // labelText="Toggle element label"
-    aria-label="aaa"
+    labelText="Toggle element label"
     labelA="Off"
     labelB="On"
     defaultToggled
