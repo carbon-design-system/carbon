@@ -12,7 +12,9 @@ import { LayoutConstraint } from '../Layout';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 
-const variants: ('on-page' | 'disclosed')[] = ['on-page', 'disclosed'];
+const variants = ['on-page', 'disclosed'] as const;
+
+type Variants = (typeof variants)[number];
 
 interface ContainedListProps {
   /**
@@ -38,12 +40,12 @@ interface ContainedListProps {
   /**
    * The kind of ContainedList you want to display
    */
-  kind?: 'on-page' | 'disclosed';
+  kind?: Variants;
 
   /**
    * A label describing the contained list.
    */
-  label: ReactNode;
+  label: string | ReactNode;
 
   /**
    * Specify the size of the contained list.
@@ -113,14 +115,21 @@ const ContainedList: React.FC<ContainedListProps> = ({
 
   const filteredChildren = filterChildren(children);
 
-  const isActionSearch =
-    React.isValidElement(action) &&
-    (typeof action.type === 'string'
-      ? ['Search', 'ExpandableSearch'].includes(action.type)
-      : typeof action.type === 'function' &&
-        'displayName' in action.type &&
-        (action.type.displayName === 'Search' ||
-          action.type.displayName === 'ExpandableSearch'));
+  function isSearchAction(action: React.ReactNode): boolean {
+    if (!React.isValidElement(action)) {
+      return false;
+    }
+
+    const actionTypes = ['Search', 'ExpandableSearch'];
+    let actionType = '';
+    if (typeof action.type === 'string') {
+      actionType = action.type;
+    } else {
+      actionType = (action.type as { displayName?: string }).displayName || '';
+    }
+    return actionTypes.includes(actionType);
+  }
+  const isActionSearch = isSearchAction(action);
 
   const renderedChildren = renderChildren(children);
 
