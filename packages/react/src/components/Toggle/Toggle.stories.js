@@ -17,7 +17,8 @@ export default {
 
 export const Default = () => (
   <Toggle
-    labelText="Toggle element label"
+    // labelText="Toggle element label"
+    aria-label="aaa"
     labelA="Off"
     labelB="On"
     defaultToggled
@@ -93,7 +94,7 @@ export const WithAccessibleLabels = () => (
       <div id="toggle-6-label" style={{ marginBlockEnd: '0.5rem' }}>
         External toggle label
       </div>
-      <Toggle id="toggle-6" hideLabel />
+      <Toggle aria-label="aria-label toggle label" id="toggle-6" hideLabel />
     </div>
 
     <div>
