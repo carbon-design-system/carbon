@@ -102,27 +102,118 @@ interface Offset {
 }
 
 interface OverflowMenuProps {
+  /**
+   * Specify a label to be read by screen readers on the container node
+   */
   ['aria-label']: string;
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container note.
+   * @deprecated
+   * */
   ariaLabel: string;
+
+  /**
+   * The child nodes.
+   * */
   children: React.ReactNode;
+
+  /**
+   *  The CSS class names.
+   *  */
   className?: string;
+
+  /**
+   * The menu direction.
+   */
   direction?: string;
+
+  /**
+   * `true` if the menu alignment should be flipped.
+   */
   flipped?: boolean;
+
+  /**
+   * Enable or disable focus trap behavior
+   */
   focusTrap?: boolean;
+
+  /**
+   * The CSS class for the icon.
+   */
   iconClass?: string;
+
+  /**
+   * The element ID.
+   */
   id?: string;
+
+  /**
+   * The icon description.
+   */
   iconDescription?: string;
+
+  /**
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make OverflowMenu background color same as container background color.
+   */
   light?: boolean;
+
+  /**
+   * The adjustment in position applied to the floating menu.
+   */
   menuOffset?: Offset | (() => void);
+
+  /**
+   * The adjustment in position applied to the floating menu.
+   */
   menuOffsetFlip?: Offset | (() => void);
+
+  /**
+   * The class to apply to the menu options
+   */
   menuOptionsClass?: string;
+
+  /**
+   * The event handler for the `click` event.
+   */
   onClick?: () => void;
+
+  /**
+   * Function called when menu is closed
+   */
   onClose?: () => void;
+
+  /**
+   * Function called when menu is opened
+   */
   onOpen?: () => void;
+
+  /**
+   * `true` if the menu should be open.
+   */
   open?: boolean;
+
+  /**
+   * Function called to override icon rendering.
+   */
   renderIcon?: React.ElementType;
+
+  /**
+   * Specify a CSS selector that matches the DOM element that should
+   * be focused when the OverflowMenu opens
+   */
   selectorPrimaryFocus?: string;
+
+  /**
+   * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   */
   size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * The ref to the HTML element that should receive focus when the OverflowMenu opens
+   */
   innerRef?: React.Ref<any>;
 }
 
