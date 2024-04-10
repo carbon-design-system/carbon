@@ -1,7 +1,8 @@
+/* eslint-disable prefer-spread */
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +18,6 @@ import './structured-list-body';
 import './structured-list-row';
 import './structured-list-cell';
 import './structured-list-header-cell-skeleton';
-import storyDocs from './structured-list.mdx';
 
 const defaultArgs = {
   condensed: false,
@@ -241,11 +241,8 @@ export const skeleton = {
   `,
 };
 
-export default {
+const meta = {
   title: 'Components/Structured list',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
+
+export default meta;
