@@ -28,7 +28,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #4.1.1
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 #4.1.2
       - name: Use Node.js 20.x
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 #v4.0.2
         with:
@@ -42,7 +42,7 @@ jobs:
           cd packages/react
           yarn storybook:build
       - name: Setup Pages
-        uses: actions/configure-pages@1f0c5cde4bc74cd7e1254d0cb4de8d49e9068c7d #v4.0.0
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b #v5.0.0
       - name: Fix permissions
         run: |
           chmod -v -R +rX "_site/" | while read line; do
@@ -63,4 +63,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@decdde0ac072f6dcbe43649d82d9c635fff5b4e4 #v4.0.4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e #v4.0.5

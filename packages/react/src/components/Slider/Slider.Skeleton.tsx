@@ -6,9 +6,10 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, useState } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import classNames from 'classnames';
 import { LowerHandle, UpperHandle } from './SliderHandles';
 
@@ -36,7 +37,12 @@ const SliderSkeleton = ({
   ...rest
 }: SliderSkeletonProps) => {
   const prefix = usePrefix();
-  const isRtl = document?.dir === 'rtl';
+  const [isRtl, setIsRtl] = useState(false);
+
+  useIsomorphicEffect(() => {
+    setIsRtl(document ? document.dir === 'rtl' : false);
+  }, []);
+
   const containerClasses = classNames(
     `${prefix}--slider-container`,
     `${prefix}--skeleton`,

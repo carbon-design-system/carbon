@@ -461,7 +461,7 @@
     border: 1px solid transparent;
     background-color: $layer;
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
-      0 4px 10px 2px $ai-drop-shadow;
+      0 24px 40px -24px $ai-drop-shadow;
   }
 
   .#{$prefix}--modal--slug
@@ -469,13 +469,8 @@
     @include ai-popover-gradient('default', 64px, 'layer');
 
     box-shadow: inset 0 -80px 0 -16px $layer,
-      inset 0 -160px 70px -65px $ai-inner-shadow, 0 4px 10px 2px $ai-drop-shadow;
-  }
-
-  .#{$prefix}--modal--slug .#{$prefix}--slug {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-end: 0;
+      inset 0 -160px 70px -65px $ai-inner-shadow,
+      0 24px 40px -24px $ai-drop-shadow;
   }
 
   .#{$prefix}--modal--slug
@@ -499,6 +494,8 @@
   .#{$prefix}--modal--slug
     .#{$prefix}--modal-container-body
     > .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: convert.to-rem(10px);
     inset-inline-end: convert.to-rem(48px);
   }
 
