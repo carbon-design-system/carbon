@@ -400,7 +400,7 @@ synonymous - `@carbon/react` re-exports everything from `@carbon/styles`.**
 | treeview              | `@use '@carbon/styles/scss/components/treeview';`              | [`scss/components/treeview`](../scss/components/treeview)                           |
 | ui-shell              | `@use '@carbon/styles/scss/components/ui-shell';`              | [`scss/components/ui-shell`](../scss/components/ui-shell)                           |
 
-**Component tokens**
+#### Component tokens
 
 In some situations, you may want to change the tokens for a specific component.
 To do so you will need to configure the modules and provide the tokens you would
