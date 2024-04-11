@@ -2102,7 +2102,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@^0.20.21, @carbon/react@workspace:packages/carbon-react":
+"@carbon/react@^0.20.22, @carbon/react@workspace:packages/carbon-react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/carbon-react"
   dependencies:
@@ -2136,7 +2136,7 @@ __metadata:
     babel-preset-carbon: ^0.2.0
     browserslist-config-carbon: ^10.6.1
     carbon-components: ^10.58.14
-    carbon-components-react: ^7.59.21
+    carbon-components-react: ^7.59.22
     carbon-icons: ^7.0.7
     css-loader: ^6.5.1
     fast-glob: ^3.2.7
@@ -11523,7 +11523,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components-react@^7.59.21, carbon-components-react@workspace:packages/react":
+"carbon-components-react@^7.59.22, carbon-components-react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "carbon-components-react@workspace:packages/react"
   dependencies:
@@ -12649,7 +12649,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox@workspace:examples/codesandbox"
   dependencies:
-    "@carbon/react": ^0.20.21
+    "@carbon/react": ^0.20.22
     "@vitejs/plugin-react": ^1.0.7
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -38873,7 +38873,7 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": ^0.20.21
+    "@carbon/react": ^0.20.22
     "@octokit/core": ^3.5.1
     "@octokit/plugin-retry": ^3.0.9
     "@octokit/plugin-throttling": ^3.5.2
