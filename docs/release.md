@@ -162,7 +162,7 @@ git push upstream v11.2.0
       [Release Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/release.yml)
 
 The packages that have been published will be switched to latest on the last
-Wednesday Friday of a sprint. To make the switch, you will need to:
+Friday of a sprint. To make the switch, you will need to:
 
 - [ ] Run the
       [Promotion Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/promote.yml)
