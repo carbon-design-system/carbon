@@ -258,12 +258,13 @@
     outline-offset: -1px;
   }
 
-  .#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--disabled:not(.#{$prefix}--tag--operational),
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled,
   .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
     @include tag-theme($layer, $text-disabled);
 
     box-shadow: none;
+    outline: none;
 
     &:hover {
       cursor: not-allowed;

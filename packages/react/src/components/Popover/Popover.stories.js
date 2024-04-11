@@ -98,6 +98,7 @@ export const TabTip = () => {
         <button
           aria-label="Settings"
           type="button"
+          aria-expanded={open}
           onClick={() => {
             setOpen(!open);
           }}>
@@ -134,6 +135,7 @@ export const TabTip = () => {
         <button
           aria-label="Settings"
           type="button"
+          aria-expanded={open}
           onClick={() => {
             setOpenTwo(!openTwo);
           }}>
@@ -150,7 +152,7 @@ export const TabTip = () => {
           </RadioButtonGroup>
           <hr />
           <fieldset className={`${prefix}--fieldset`}>
-            <legend className={`${prefix}--label`}>Edit columns</legend>
+            <legend className={`${prefix}--label`}>Testing</legend>
             <Checkbox defaultChecked labelText="Name" id="checkbox-label-8" />
             <Checkbox defaultChecked labelText="Type" id="checkbox-label-9" />
             <Checkbox
