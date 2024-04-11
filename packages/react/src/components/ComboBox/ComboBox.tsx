@@ -44,7 +44,8 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 
-const { InputBlur, InputKeyDownEnter } = useCombobox.stateChangeTypes;
+const { InputBlur, InputKeyDownEnter, FunctionToggleMenu } =
+  useCombobox.stateChangeTypes;
 
 const defaultItemToString = <ItemType,>(item: ItemType | null) => {
   if (typeof item === 'string') {
@@ -407,31 +408,33 @@ const ComboBox = forwardRef(
         inputValue
       );
 
-    const stateReducer = React.useCallback(
-      (state, actionAndChanges) => {
-        const { type, changes } = actionAndChanges;
-
-        switch (type) {
-          case InputBlur:
-          case InputKeyDownEnter:
-            if (allowCustomValue) {
-              setInputValue(inputValue);
-              if (onChange) {
-                onChange({ selectedItem: changes.selectedItem });
-              }
-              return changes;
-            } else if (changes.selectedItem && !allowCustomValue) {
-              return changes;
-            } else {
-              return { ...changes, inputValue: '' };
+    const stateReducer = React.useCallback((state, actionAndChanges) => {
+      const { type, changes } = actionAndChanges;
+      switch (type) {
+        case InputBlur:
+        case InputKeyDownEnter:
+          if (allowCustomValue) {
+            setInputValue(inputValue);
+            if (onChange) {
+              onChange({ selectedItem: changes.selectedItem });
             }
-            break;
-          default:
             return changes;
-        }
-      },
-      [allowCustomValue, inputValue, onChange]
-    );
+          } else if (changes.selectedItem && !allowCustomValue) {
+            return changes;
+          } else {
+            return { ...changes, inputValue: '' };
+          }
+          break;
+        case FunctionToggleMenu:
+          if (changes.isOpen && !changes.selectedItem) {
+            return { ...changes, highlightedIndex: 0 };
+          }
+          return changes;
+
+        default:
+          return changes;
+      }
+    }, []);
 
     const handleToggleClick =
       (isOpen: boolean) =>

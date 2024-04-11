@@ -81,6 +81,7 @@ export const AllowCustomValue = () => {
   return (
     <div style={{ width: 300 }}>
       <ComboBox
+        onChange={() => {}}
         allowCustomValue
         shouldFilterItem={filterItems}
         id="carbon-combobox"
