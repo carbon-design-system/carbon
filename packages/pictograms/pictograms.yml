@@ -709,8 +709,8 @@
     - Bucharest
     - Romania
     - theatre
-    - cultural 
-    - institution 
+    - cultural
+    - institution
 - name: bucharest--romanian-athenaeum
   friendly_name: Bucharest Romanian Athenaeum
   aliases:
@@ -4308,7 +4308,7 @@
     - city
     - Backwater
     - Houseboat
-    - Kochi,
+    - Kochi
     - Cochin
     - Travel
     - Coconut tree
