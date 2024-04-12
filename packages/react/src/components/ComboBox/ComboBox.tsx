@@ -44,8 +44,13 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 
-const { InputBlur, InputKeyDownEnter, FunctionToggleMenu } =
-  useCombobox.stateChangeTypes;
+const {
+  InputBlur,
+  InputKeyDownEnter,
+  FunctionToggleMenu,
+  ToggleButtonClick,
+  InputClick,
+} = useCombobox.stateChangeTypes;
 
 const defaultItemToString = <ItemType,>(item: ItemType | null) => {
   if (typeof item === 'string') {
@@ -408,33 +413,40 @@ const ComboBox = forwardRef(
         inputValue
       );
 
-    const stateReducer = React.useCallback((state, actionAndChanges) => {
-      const { type, changes } = actionAndChanges;
-      switch (type) {
-        case InputBlur:
-        case InputKeyDownEnter:
-          if (allowCustomValue) {
-            setInputValue(inputValue);
-            if (onChange) {
-              onChange({ selectedItem: changes.selectedItem });
+    const stateReducer = React.useCallback(
+      (state, actionAndChanges) => {
+        const { type, changes } = actionAndChanges;
+        switch (type) {
+          case InputBlur:
+          case InputKeyDownEnter:
+            if (allowCustomValue) {
+              setInputValue(inputValue);
+              if (onChange) {
+                onChange({ selectedItem: changes.selectedItem });
+              }
+              return changes;
+            } else if (changes.selectedItem && !allowCustomValue) {
+              return changes;
+            } else {
+              return { ...changes, inputValue: '' };
+            }
+            break;
+          case FunctionToggleMenu:
+          case ToggleButtonClick:
+            if (changes.isOpen && !changes.selectedItem) {
+              return { ...changes, highlightedIndex: 0 };
             }
             return changes;
-          } else if (changes.selectedItem && !allowCustomValue) {
-            return changes;
-          } else {
-            return { ...changes, inputValue: '' };
-          }
-          break;
-        case FunctionToggleMenu:
-          if (changes.isOpen && !changes.selectedItem) {
-            return { ...changes, highlightedIndex: 0 };
-          }
-          return changes;
 
-        default:
-          return changes;
-      }
-    }, []);
+          case InputClick:
+            return { ...changes, isOpen: false };
+
+          default:
+            return changes;
+        }
+      },
+      [allowCustomValue, inputValue, onChange]
+    );
 
     const handleToggleClick =
       (isOpen: boolean) =>
@@ -606,7 +618,6 @@ const ComboBox = forwardRef(
               {...getInputProps({
                 placeholder,
                 ref: { ...mergeRefs(textInput, ref) },
-
                 onKeyDown: (
                   event: KeyboardEvent<HTMLInputElement> & {
                     preventDownshiftDefault: boolean;
@@ -624,6 +635,13 @@ const ComboBox = forwardRef(
                     (!inputValue || allowCustomValue)
                   ) {
                     toggleMenu();
+
+                    if (highlightedIndex !== -1) {
+                      selectItem(items[highlightedIndex]);
+                    }
+
+                    event.preventDownshiftDefault = true;
+                    event?.persist?.();
                   }
 
                   if (match(event, keys.Escape) && inputValue) {
