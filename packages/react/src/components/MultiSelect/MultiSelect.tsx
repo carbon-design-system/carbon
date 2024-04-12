@@ -15,7 +15,13 @@ import {
 } from 'downshift';
 import isEqual from 'lodash.isequal';
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { ForwardedRef, useContext, useRef, useState } from 'react';
+import React, {
+  ForwardedRef,
+  useContext,
+  useRef,
+  useState,
+  useMemo,
+} from 'react';
 import ListBox, {
   ListBoxSize,
   ListBoxType,
@@ -374,19 +380,18 @@ const MultiSelect = React.forwardRef(
     });
 
     // Filter out items with an object having undefined values
-    const filteredItems = items.filter((item) => {
-      if (typeof item === 'object' && item !== null) {
-        for (const key in item) {
-          if (
-            Object.prototype.hasOwnProperty.call(item, key) &&
-            item[key] === undefined
-          ) {
-            return false; // Return false if any property has an undefined value
+    const filteredItems = useMemo(() => {
+      return items.filter((item) => {
+        if (typeof item === 'object' && item !== null) {
+          for (const key in item) {
+            if (Object.hasOwn(item, key) && item[key] === undefined) {
+              return false; // Return false if any property has an undefined value
+            }
           }
         }
-      }
-      return true; // Return true if item is not an object with undefined values
-    });
+        return true; // Return true if item is not an object with undefined values
+      });
+    }, [items]);
 
     const selectProps: UseSelectProps<ItemType> = {
       ...downshiftProps,
