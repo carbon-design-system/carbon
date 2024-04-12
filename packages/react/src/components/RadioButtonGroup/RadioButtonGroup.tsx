@@ -81,7 +81,7 @@ export interface RadioButtonGroupProps
    * the group changes
    */
   onChange?: (
-    selection: string | number,
+    selection: any,
     name: string,
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
