@@ -725,13 +725,25 @@ const ComboBox = forwardRef(
                       item,
                       index,
                     });
+
+                    // The initial implementation using <Downshift> would place the disabled attribute
+                    // on disabled menu items. Conversely, useCombobox places aria-disabled instead.
+                    // To avoid any potential breaking changes, we avoid placing aria-disabled and
+                    // instead match the old behavior of placing the disabled attribute.
+                    const disabled = itemProps['aria-disabled'];
+                    const {
+                      'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
+                      ...modifiedItemProps
+                    } = itemProps;
+
                     return (
                       <ListBox.MenuItem
                         key={itemProps.id}
                         isActive={selectedItem === item}
                         isHighlighted={highlightedIndex === index}
                         title={title}
-                        {...itemProps}>
+                        disabled={disabled}
+                        {...modifiedItemProps}>
                         {ItemToElement ? (
                           <ItemToElement key={itemProps.id} {...item} />
                         ) : (
