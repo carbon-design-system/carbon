@@ -6502,14 +6502,6 @@
     - source
   sizes:
     - 32
-- name: diamond-fill
-  friendly_name: Diamond fill
-  aliases:
-    - diamond
-    - fill
-    - status
-  sizes:
-    - glyph
 - name: diamond--outline
   friendly_name: Diamond outline
   aliases:
@@ -6535,6 +6527,14 @@
     - geometry
   sizes:
     - 32
+- name: diamond-fill
+  friendly_name: Diamond fill
+  aliases:
+    - diamond
+    - fill
+    - status
+  sizes:
+    - glyph
 - name: dicom--6000
   friendly_name: DICOM 6000
   sizes:
@@ -9437,16 +9437,6 @@
     - help
   sizes:
     - 32
-- name: hinton-plot
-  friendly_name: Hinton plot
-  aliases:
-    - Q
-    - hinton
-    - plot
-    - grid
-    - Hinton plot
-  sizes:
-    - 32
 - name: hexagon--outline
   friendly_name: Hexagon outline
   aliases:
@@ -9495,6 +9485,16 @@
     - shape
     - geometry
     - vertical
+  sizes:
+    - 32
+- name: hinton-plot
+  friendly_name: Hinton plot
+  aliases:
+    - Q
+    - hinton
+    - plot
+    - grid
+    - Hinton plot
   sizes:
     - 32
 - name: HL7-attributes
@@ -19380,14 +19380,6 @@
     - query
   sizes:
     - 32
-- name: square-fill
-  friendly_name: Square fill
-  aliases:
-    - square
-    - filled
-    - box
-  sizes:
-    - glyph
 - name: square--outline
   friendly_name: Square outline
   aliases:
@@ -19413,6 +19405,14 @@
     - geometry
   sizes:
     - 32
+- name: square-fill
+  friendly_name: Square fill
+  aliases:
+    - square
+    - filled
+    - box
+  sizes:
+    - glyph
 - name: stack-limitation
   friendly_name: Stack limitation
   aliases:
