@@ -28,7 +28,10 @@ Sass.
 In Sass, you can import the files individual by doing:
 
 ```scss
-@import '@carbon/colors/scss/colors';
+@use '@carbon/colors';
+
+// Another way if using `@carbon/react
+@use '@carbon/react/scss/colors';
 ```
 
 This file automatically includes the `carbon--colors` mixin which initializes
