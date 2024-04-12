@@ -410,6 +410,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
             setSelectedItems([...selectedItems, changes.selectedItem]);
             setInputValue('');
           }
+          setIsOpen(false);
           break;
         }
 
@@ -707,7 +708,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
                 ['aria-selected']: isChecked,
               });
               const itemText = itemToString(item);
-              console.log('highlightedIndex', highlightedIndex);
               return (
                 <ListBox.MenuItem
                   key={itemProps.id}
