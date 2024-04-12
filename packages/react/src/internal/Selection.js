@@ -85,7 +85,7 @@ export function useSelection({
       isMounted: isMounted.current,
       onChangeHandlerControlled: savedOnChange.current,
       onChangeHandlerUncontrolled: setUncontrolledItems,
-      selectedItems: setSelectedItems([]),
+      selectedItems: [],
     });
   }, [disabled, isControlled]);
 
