@@ -398,6 +398,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           return changes;
       }
     },
+    isItemDisabled(item, _index) {
+      return (item as any).disabled;
+    },
     onStateChange(changes) {
       switch (changes.type) {
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
@@ -701,11 +704,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
                   .length > 0;
               const itemProps = getItemProps({
                 item,
-                disabled: item.disabled,
                 ['aria-selected']: isChecked,
               });
               const itemText = itemToString(item);
-
+              console.log('highlightedIndex', highlightedIndex);
               return (
                 <ListBox.MenuItem
                   key={itemProps.id}
