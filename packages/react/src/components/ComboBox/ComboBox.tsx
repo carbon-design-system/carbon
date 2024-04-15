@@ -445,10 +445,7 @@ const ComboBox = forwardRef(
             return changes;
 
           case InputClick:
-            if (!changes.selectedItem) {
-              return {...changes, highlightedIndex: 0}
-            } 
-            return changes;
+            return {...changes, isOpen:false}
 
             case MenuMouseLeave:
               return { ...changes, highlightedIndex: state.highlightedIndex };
@@ -551,7 +548,6 @@ const ComboBox = forwardRef(
         return itemToString(item);
       },
       onInputValueChange({ inputValue }) {
-        console.log({inputValue})
         setInputValue(inputValue || '');
         setHighlightedIndex(indexToHighlight(inputValue));
       },
