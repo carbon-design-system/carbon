@@ -708,6 +708,17 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
                 ['aria-selected']: isChecked,
               });
               const itemText = itemToString(item);
+
+              // The initial implementation using <Downshift> would place the disabled attribute
+              // on disabled menu items. Conversely, useCombobox places aria-disabled instead.
+              // To avoid any potential breaking changes, we avoid placing aria-disabled and
+              // instead match the old behavior of placing the disabled attribute.
+              const disabled = itemProps['aria-disabled'];
+              const {
+                'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
+                ...modifiedItemProps
+              } = itemProps;
+
               return (
                 <ListBox.MenuItem
                   key={itemProps.id}
@@ -715,7 +726,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
                   isActive={isChecked}
                   isHighlighted={highlightedIndex === index}
                   title={itemText}
-                  {...itemProps}>
+                  disabled={disabled}
+                  {...modifiedItemProps}>
                   <div className={`${prefix}--checkbox-wrapper`}>
                     <span
                       title={useTitleInItem ? itemText : undefined}
