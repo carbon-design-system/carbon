@@ -315,10 +315,10 @@ const Modal = React.forwardRef(function Modal(
     const target = evt.target as Node;
     evt.stopPropagation();
     if (
-      innerModal.current &&
-      !innerModal.current.contains(target) &&
+      !preventCloseOnClickOutside &&
       !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
-      !preventCloseOnClickOutside
+      innerModal.current &&
+      !innerModal.current.contains(target)
     ) {
       onRequestClose(evt);
     }
