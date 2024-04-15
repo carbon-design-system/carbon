@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -57,27 +57,7 @@ export enum SLUG_KIND {
   DEFAULT = '',
 
   /**
-   * Hollow kind.
-   */
-  HOLLOW = 'hollow',
-
-  /**
    * Inline kind.
    */
   INLINE = 'inline',
-}
-
-/**
- * Slug dot type.
- */
-export enum SLUG_DOT_TYPE {
-  /**
-   * Default dot type.
-   */
-  DEFAULT = '',
-
-  /**
-   * Hollow dot type.
-   */
-  HOLLOW = 'hollow',
 }

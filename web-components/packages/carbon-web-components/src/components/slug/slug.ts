@@ -14,7 +14,7 @@ import { prefix } from '../../globals/settings';
 import CDSToggleTip from '../toggle-tip/toggletip';
 import styles from './slug.scss';
 import Undo16 from '@carbon/icons/lib/undo/16';
-import { SLUG_SIZE, SLUG_KIND, SLUG_DOT_TYPE } from './defs';
+import { SLUG_SIZE, SLUG_KIND } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
@@ -39,13 +39,7 @@ export default class CDSSlug extends CDSToggleTip {
   aiTextLabel = '';
 
   /**
-   * Specify the type of dot that should be rendered in front of the inline variant: (default, hollow)
-   */
-  @property({ reflect: true, attribute: 'dot-type' })
-  dotType = SLUG_DOT_TYPE.DEFAULT;
-
-  /**
-   * Specify the type of Slug, from the following list of types: (default, hollow, inline)
+   * Specify the type of Slug, from the following list of types: (default, inline)
    */
   @property({ reflect: true })
   kind = SLUG_KIND.DEFAULT;
@@ -144,18 +138,6 @@ export default class CDSSlug extends CDSToggleTip {
 
     //@ts-ignore typescript does not think requestUpdate() exists on parentElement
     name === 'revert-active' ? this.parentElement?.requestUpdate() : ``;
-  }
-
-  updated() {
-    super.updated();
-    if (
-      this.kind !== SLUG_KIND.HOLLOW &&
-      this.dotType !== SLUG_DOT_TYPE.HOLLOW
-    ) {
-      this.setAttribute('enabled', '');
-    } else {
-      this.removeAttribute('enabled');
-    }
   }
 
   static styles = styles;

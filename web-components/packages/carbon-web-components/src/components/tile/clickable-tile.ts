@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,7 +18,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 // To Do: Replace with an an icon from `@carbon/icons`
 // since the hollow slug in `ClickableTile` is not interactive
-const hollowSlugIcon = html` <svg
+const slugIcon = html` <svg
   class="${prefix}--tile--slug-icon"
   width="24"
   height="24"
@@ -75,7 +75,7 @@ class CDSClickableTile extends CDSLink {
    * @returns The inner content.
    */
   protected _renderInner() {
-    return html` ${super._renderInner()} ${this.slug ? hollowSlugIcon : ''} `;
+    return html` ${super._renderInner()} ${this.slug ? slugIcon : ''} `;
   }
 
   /**
