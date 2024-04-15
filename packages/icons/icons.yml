@@ -4286,12 +4286,29 @@
     - data
   sizes:
     - 32
+- name: circle--outline
+  friendly_name: Circle outline
+  aliases:
+    - circle outlined
+    - outlined circle
+    - stroke
+    - border
+    - circle
+    - round
+    - shape
+    - geometry
+  sizes:
+    - 32
 - name: circle--solid
   friendly_name: Circle solid
   aliases:
     - circle filled
     - filled circle
+    - solid
     - circle
+    - round
+    - shape
+    - geometry
     - data
   sizes:
     - 32
@@ -6483,6 +6500,31 @@
     - reference
     - citation
     - source
+  sizes:
+    - 32
+- name: diamond--outline
+  friendly_name: Diamond outline
+  aliases:
+    - diamond outlined
+    - outlined diamond
+    - stroke
+    - border
+    - diamond
+    - rectangle
+    - shape
+    - geometry
+  sizes:
+    - 32
+- name: diamond--solid
+  friendly_name: Diamond solid
+  aliases:
+    - diamond filled
+    - filled diamond
+    - solid
+    - diamond
+    - rectangle
+    - shape
+    - geometry
   sizes:
     - 32
 - name: diamond-fill
@@ -9393,6 +9435,56 @@
     - help desk
     - tech support
     - help
+  sizes:
+    - 32
+- name: hexagon--outline
+  friendly_name: Hexagon outline
+  aliases:
+    - hexagon outlined
+    - outlined hexagon
+    - stroke
+    - border
+    - hexagon
+    - shape
+    - geometry
+    - horizontal
+  sizes:
+    - 32
+- name: hexagon--solid
+  friendly_name: Hexagon solid
+  aliases:
+    - hexagon filled
+    - filled hexagon
+    - solid
+    - hexagon
+    - shape
+    - geometry
+    - horizontal
+  sizes:
+    - 32
+- name: hexagon--vertical--outline
+  friendly_name: Hexagon vertical outline
+  aliases:
+    - hexagon outlined
+    - outlined hexagon
+    - stroke
+    - border
+    - hexagon
+    - shape
+    - geometry
+    - vertical
+  sizes:
+    - 32
+- name: hexagon--vertical--solid
+  friendly_name: Hexagon vertical solid
+  aliases:
+    - hexagon filled
+    - filled hexagon
+    - solid
+    - hexagon
+    - shape
+    - geometry
+    - vertical
   sizes:
     - 32
 - name: hinton-plot
@@ -15950,6 +16042,104 @@
     - pending
   sizes:
     - 32
+- name: pentagon--down--outline
+  friendly_name: Pentagon down outline
+  aliases:
+    - pentagon outlined
+    - outlined pentagon
+    - stroke
+    - border
+    - pentagon
+    - shape
+    - geometry
+    - down
+  sizes:
+    - 32
+- name: pentagon--down--solid
+  friendly_name: Pentagon down solid
+  aliases:
+    - pentagon filled
+    - filled pentagon
+    - solid
+    - pentagon
+    - shape
+    - geometry
+    - down
+  sizes:
+    - 32
+- name: pentagon--left--outline
+  friendly_name: Pentagon left outline
+  aliases:
+    - pentagon outlined
+    - outlined pentagon
+    - stroke
+    - border
+    - pentagon
+    - shape
+    - geometry
+    - left
+  sizes:
+    - 32
+- name: pentagon--left--solid
+  friendly_name: Pentagon left solid
+  aliases:
+    - pentagon filled
+    - filled pentagon
+    - solid
+    - pentagon
+    - shape
+    - geometry
+    - left
+  sizes:
+    - 32
+- name: pentagon--outline
+  friendly_name: Pentagon outline
+  aliases:
+    - pentagon outlined
+    - outlined pentagon
+    - stroke
+    - border
+    - pentagon
+    - shape
+    - geometry
+  sizes:
+    - 32
+- name: pentagon--right--outline
+  friendly_name: Pentagon right outline
+  aliases:
+    - pentagon outlined
+    - outlined pentagon
+    - stroke
+    - border
+    - pentagon
+    - shape
+    - geometry
+    - right
+  sizes:
+    - 32
+- name: pentagon--right--solid
+  friendly_name: Pentagon right solid
+  aliases:
+    - pentagon filled
+    - filled pentagon
+    - solid
+    - pentagon
+    - shape
+    - geometry
+    - right
+  sizes:
+    - 32
+- name: pentagon--solid
+  friendly_name: Pentagon solid
+  aliases:
+    - pentagon filled
+    - filled pentagon
+    - solid
+    - pentagon
+    - shape
+    - geometry
+  sizes:
+    - 32
 - name: percentage
   friendly_name: Percentage
   aliases:
@@ -19190,6 +19380,31 @@
     - query
   sizes:
     - 32
+- name: square--outline
+  friendly_name: Square outline
+  aliases:
+    - square outlined
+    - outlined square
+    - stroke
+    - border
+    - square
+    - rectangle
+    - shape
+    - geometry
+  sizes:
+    - 32
+- name: square--solid
+  friendly_name: Square solid
+  aliases:
+    - square filled
+    - filled square
+    - solid
+    - square
+    - rectangle
+    - shape
+    - geometry
+  sizes:
+    - 32
 - name: square-fill
   friendly_name: Square fill
   aliases:
@@ -21183,12 +21398,110 @@
     - 32
 - name: tree-view--alt
   friendly_name: Tree view alt
-  sizes:
-    - 32
   aliases:
     - flow chart
     - data analytics
     - chart
+  sizes:
+    - 32
+- name: triangle--down--outline
+  friendly_name: Triangle down outline
+  aliases:
+    - triangle outlined
+    - outlined triangle
+    - stroke
+    - border
+    - triangle
+    - shape
+    - geometry
+    - down
+  sizes:
+    - 32
+- name: triangle--down--solid
+  friendly_name: Triangle down solid
+  aliases:
+    - triangle filled
+    - filled triangle
+    - solid
+    - triangle
+    - shape
+    - geometry
+    - down
+  sizes:
+    - 32
+- name: triangle--left--outline
+  friendly_name: Triangle left outline
+  aliases:
+    - triangle outlined
+    - outlined triangle
+    - stroke
+    - border
+    - triangle
+    - shape
+    - geometry
+    - left
+  sizes:
+    - 32
+- name: triangle--left--solid
+  friendly_name: Triangle left solid
+  aliases:
+    - triangle filled
+    - filled triangle
+    - solid
+    - triangle
+    - shape
+    - geometry
+    - left
+  sizes:
+    - 32
+- name: triangle--outline
+  friendly_name: Triangle outline
+  aliases:
+    - triangle outlined
+    - outlined triangle
+    - stroke
+    - border
+    - triangle
+    - shape
+    - geometry
+  sizes:
+    - 32
+- name: triangle--right--outline
+  friendly_name: Triangle right outline
+  aliases:
+    - triangle outlined
+    - outlined triangle
+    - stroke
+    - border
+    - triangle
+    - shape
+    - geometry
+    - right
+  sizes:
+    - 32
+- name: triangle--right--solid
+  friendly_name: Triangle right solid
+  aliases:
+    - triangle filled
+    - filled triangle
+    - solid
+    - triangle
+    - shape
+    - geometry
+    - right
+  sizes:
+    - 32
+- name: triangle--solid
+  friendly_name: Triangle solid
+  aliases:
+    - triangle filled
+    - filled triangle
+    - solid
+    - triangle
+    - shape
+    - geometry
+  sizes:
+    - 32
 - name: trophy
   friendly_name: Trophy
   aliases:
