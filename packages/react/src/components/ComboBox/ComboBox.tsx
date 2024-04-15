@@ -50,6 +50,10 @@ const {
   FunctionToggleMenu,
   ToggleButtonClick,
   InputClick,
+  ItemMouseMove,
+  InputKeyDownArrowUp,
+  InputKeyDownArrowDown,
+  MenuMouseLeave
 } = useCombobox.stateChangeTypes;
 
 const defaultItemToString = <ItemType,>(item: ItemType | null) => {
@@ -416,11 +420,13 @@ const ComboBox = forwardRef(
     const stateReducer = React.useCallback(
       (state, actionAndChanges) => {
         const { type, changes } = actionAndChanges;
+        const { highlightedIndex } = changes;
         switch (type) {
           case InputBlur:
           case InputKeyDownEnter:
             if (allowCustomValue) {
               setInputValue(inputValue);
+              setHighlightedIndex(changes.selectedItem);
               if (onChange) {
                 onChange({ selectedItem: changes.selectedItem });
               }
@@ -439,7 +445,26 @@ const ComboBox = forwardRef(
             return changes;
 
           case InputClick:
-            return { ...changes, isOpen: false };
+            if (!changes.selectedItem) {
+              return {...changes, highlightedIndex: 0}
+            } 
+            return changes;
+
+            case MenuMouseLeave:
+              return { ...changes, highlightedIndex: state.highlightedIndex };
+
+            case InputKeyDownArrowUp:
+              case InputKeyDownArrowDown:
+                if (highlightedIndex === -1) {
+                  return {
+                    ...changes,
+                    highlightedIndex: 0,
+                  };
+                }
+                return changes;
+
+            case ItemMouseMove:
+          return { ...changes, highlightedIndex: state.highlightedIndex };
 
           default:
             return changes;
@@ -526,6 +551,7 @@ const ComboBox = forwardRef(
         return itemToString(item);
       },
       onInputValueChange({ inputValue }) {
+        console.log({inputValue})
         setInputValue(inputValue || '');
         setHighlightedIndex(indexToHighlight(inputValue));
       },
