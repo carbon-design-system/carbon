@@ -186,6 +186,7 @@
 
   .#{$prefix}--structured-list-svg {
     display: inline-block;
+    margin-block-start: 2px;
     transition: all motion.$duration-fast-02 motion.motion(standard, productive);
     vertical-align: top;
   }
@@ -260,5 +261,10 @@
     + .#{$prefix}--structured-list-td
     .#{$prefix}--structured-list-svg {
     @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--structured-list-icons {
+    margin-block-start: 2px;
+    vertical-align: top;
   }
 }

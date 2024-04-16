@@ -316,7 +316,13 @@ export function StructuredListRow(props: StructuredListRowProps) {
       <GridRowContext.Provider value={value}>
         {selection && (
           <StructuredListCell>
-            {selectedRow === id ? <RadioButtonChecked /> : <RadioButton />}
+            {selectedRow === id ? (
+              <RadioButtonChecked
+                className={`${prefix}--structured-list-icons`}
+              />
+            ) : (
+              <RadioButton className={`${prefix}--structured-list-icons`} />
+            )}
           </StructuredListCell>
         )}
 
