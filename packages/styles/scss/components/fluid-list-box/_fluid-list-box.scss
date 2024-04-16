@@ -191,9 +191,10 @@
   }
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__invalid-icon,
   .#{$prefix}--list-box__wrapper--fluid
-    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box.#{$prefix}--list-box--warning
     .#{$prefix}--list-box__invalid-icon {
     inset-block-start: convert.to-rem(81px);
     inset-inline-end: $spacing-05;
@@ -355,11 +356,21 @@
 
   .#{$prefix}--list-box__wrapper--fluid:has(.#{$prefix}--multi-select)
     .#{$prefix}--list-box__menu-icon {
-    inset-inline-end: calc($spacing-04);
+    inset-inline-end: $spacing-04;
   }
 
   .#{$prefix}--list-box__wrapper--fluid:has(.#{$prefix}--dropdown)
     .#{$prefix}--list-box__menu-icon {
-    inset-inline-end: calc($spacing-04);
+    inset-inline-end: $spacing-04;
+  }
+
+  // remove slug divider when element is invalid and fluid
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--slug::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--slug::before {
+    display: none;
   }
 }
