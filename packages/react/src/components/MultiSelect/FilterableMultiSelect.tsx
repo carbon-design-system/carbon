@@ -12,6 +12,9 @@ import Downshift, {
   useMultipleSelection,
   type UseComboboxProps,
   type UseMultipleSelectionProps,
+  UseComboboxInterface,
+  UseComboboxStateChangeTypes,
+  UseMultipleSelectionInterface,
 } from 'downshift';
 import isEqual from 'lodash.isequal';
 import PropTypes, { ReactNodeLike } from 'prop-types';
@@ -43,6 +46,32 @@ import { useId } from '../../internal/useId';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
+import { useSelection } from '../../internal/Selection';
+
+const {
+  InputBlur,
+  InputKeyDownEnter,
+  ItemClick,
+  MenuMouseLeave,
+  InputKeyDownArrowUp,
+  InputKeyDownArrowDown,
+  ItemMouseMove,
+  InputClick,
+  ToggleButtonClick,
+  FunctionToggleMenu,
+  InputChange,
+  InputKeyDownEscape,
+} = useCombobox.stateChangeTypes as UseComboboxInterface['stateChangeTypes'] & {
+  ToggleButtonClick: UseComboboxStateChangeTypes.ToggleButtonClick;
+};
+
+const {
+  SelectedItemKeyDownBackspace,
+  SelectedItemKeyDownDelete,
+  DropdownKeyDownBackspace,
+  FunctionRemoveSelectedItem,
+} =
+  useMultipleSelection.stateChangeTypes as UseMultipleSelectionInterface['stateChangeTypes'];
 
 export interface FilterableMultiSelectProps<Item extends ItemBase>
   extends SortingPropTypes<Item> {
@@ -197,6 +226,11 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
   selectionFeedback?: 'top' | 'fixed' | 'top-after-reopen';
 
   /**
+   * For full control of the selected items
+   */
+  selectedItems?: Item[];
+
+  /**
    * Specify the size of the ListBox.
    * Currently, supports either `sm`, `md` or `lg` as an option.
    */
@@ -259,7 +293,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     itemToString = defaultItemToString,
     light,
     locale = 'en',
-    onInputValueChange,
+    // onInputValueChange,
     open = false,
     onChange,
     onMenuChange,
@@ -267,6 +301,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     titleText,
     type,
     selectionFeedback = 'top-after-reopen',
+    selectedItems: selected,
     size,
     sortItems = defaultSortItems,
     translateWithId,
@@ -284,6 +319,17 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   const [inputValue, setInputValue] = useState<string>('');
   const [topItems, setTopItems] = useState<Item[]>(initialSelectedItems ?? []);
   const [inputFocused, setInputFocused] = useState<boolean>(false);
+
+  const {
+    selectedItems: controlledSelectedItems,
+    onItemChange,
+    // clearSelection,
+  } = useSelection({
+    disabled,
+    initialSelectedItems,
+    onChange,
+    selectedItems: selected,
+  });
 
   const $selectionState = useState(initialSelectedItems ?? []);
   const selectedItems = $selectionState[0];
@@ -371,6 +417,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     getMenuProps,
     getInputProps,
     highlightedIndex,
+    setHighlightedIndex,
     getItemProps,
     openMenu,
     isOpen: isMenuOpen,
@@ -384,82 +431,92 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     menuId,
     inputId,
     inputValue,
-    stateReducer(state, actionAndChanges) {
-      const { changes, type } = actionAndChanges;
-      switch (type) {
-        case useCombobox.stateChangeTypes.InputKeyDownEnter:
-        case useCombobox.stateChangeTypes.ItemClick:
-          return {
-            ...changes,
-            isOpen: true, // keep the menu open after selection.
-            highlightedIndex: 0, // with the first option highlighted.
-          };
-        default:
-          return changes;
-      }
-    },
+    stateReducer,
     isItemDisabled(item, _index) {
       return (item as any).disabled;
     },
-    onStateChange(changes) {
-      switch (changes.type) {
-        case useCombobox.stateChangeTypes.InputKeyDownEnter:
-        case useCombobox.stateChangeTypes.ItemClick:
-        case useCombobox.stateChangeTypes.InputBlur: {
-          if (changes.selectedItem) {
-            setSelectedItems([...selectedItems, changes.selectedItem]);
-            setInputValue('');
-          }
-          setIsOpen(false);
-          break;
-        }
 
-        case useCombobox.stateChangeTypes.InputChange: {
-          setInputValue(changes.inputValue ?? '');
-          break;
-        }
-
-        case useCombobox.stateChangeTypes.InputKeyDownArrowDown: {
-          if (!isOpen) {
-            handleMenuChange(true);
-          }
-          break;
-        }
-        case useCombobox.stateChangeTypes.InputKeyDownEscape: {
-          handleMenuChange(false);
-          break;
-        }
-      }
+    onSelectedItemChange({ selectedItem }) {
+      console.log({ selectedItem });
+      onItemChange(selectedItem);
     },
-    onInputValueChange(changes) {
-      onInputValueChange?.(changes);
+    // onInputValueChange(changes) {
+    //   onInputValueChange?.(changes);
 
-      if (Array.isArray(inputValue)) {
-        clearInputValue();
-      } else {
-        setInputValue(inputValue);
-      }
+    //   if (Array.isArray(inputValue)) {
+    //     clearInputValue();
+    //   } else {
+    //     setInputValue(inputValue);
+    //   }
 
-      if (inputValue && !isOpen) {
-        handleMenuChange(true);
-      } else if (!inputValue && isOpen) {
-        handleMenuChange(false);
-      }
-    },
+    //   if (inputValue && !isOpen) {
+    //     handleMenuChange(true);
+    //   } else if (!inputValue && isOpen) {
+    //     handleMenuChange(false);
+    //   }
+    // },
   });
 
+  function stateReducer(state, actionAndChanges) {
+    const { type, changes } = actionAndChanges;
+    const { highlightedIndex } = changes;
+    switch (type) {
+      case InputKeyDownEnter:
+      case ItemClick:
+        if (changes.selectedItem) {
+          // setSelectedItems([...selectedItems, changes.selectedItem]);
+          onItemChange(changes.selectedItem);
+          setInputValue('');
+        }
+        setHighlightedIndex(changes.selectedItem);
+        return changes;
+      case InputBlur:
+      case InputKeyDownEscape:
+        console.log({ changes });
+        setIsOpen(false);
+        return changes;
+      case FunctionToggleMenu:
+      case ToggleButtonClick:
+        if (changes.isOpen && !changes.selectedItem) {
+          return { ...changes, highlightedIndex: 0 };
+        }
+        return changes;
+      case InputChange:
+        return setInputValue(changes.inputValue ?? '');
+
+      case InputClick:
+        return { ...changes, isOpen: false };
+      case MenuMouseLeave:
+        return { ...changes, highlightedIndex: state.highlightedIndex };
+      case InputKeyDownArrowUp:
+      case InputKeyDownArrowDown:
+        if (highlightedIndex === -1) {
+          return {
+            ...changes,
+            highlightedIndex: 0,
+          };
+        }
+        return changes;
+      case ItemMouseMove:
+        return { ...changes, highlightedIndex: state.highlightedIndex };
+      default:
+        return changes;
+    }
+  }
+  // console.log({ controlledSelectedItems });
   const { getDropdownProps } = useMultipleSelection<Item>({
     ...downshiftProps,
     activeIndex: highlightedIndex,
     initialSelectedItems,
-    selectedItems: selectedItems,
+    selectedItems: controlledSelectedItems,
     itemToString,
     onStateChange(changes) {
+      console.log({ changes });
       switch (changes.type) {
-        case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownBackspace:
-        case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownDelete:
-        case useMultipleSelection.stateChangeTypes.DropdownKeyDownBackspace:
-        case useMultipleSelection.stateChangeTypes.FunctionRemoveSelectedItem: {
+        case SelectedItemKeyDownBackspace:
+        case SelectedItemKeyDownDelete:
+        case DropdownKeyDownBackspace:
+        case FunctionRemoveSelectedItem: {
           setSelectedItems(changes.selectedItems ?? []);
           break;
         }
