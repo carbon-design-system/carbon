@@ -293,7 +293,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     itemToString = defaultItemToString,
     light,
     locale = 'en',
-    // onInputValueChange,
+    onInputValueChange,
     open = false,
     onChange,
     onMenuChange,
@@ -323,7 +323,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   const {
     selectedItems: controlledSelectedItems,
     onItemChange,
-    // clearSelection,
+    clearSelection,
   } = useSelection({
     disabled,
     initialSelectedItems,
@@ -331,12 +331,12 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     selectedItems: selected,
   });
 
-  const $selectionState = useState(initialSelectedItems ?? []);
-  const selectedItems = $selectionState[0];
-  const setSelectedItems = (items: Item[]) => {
-    $selectionState[1](items);
-    onChange?.({ selectedItems: items });
-  };
+  // const $selectionState = useState(initialSelectedItems ?? []);
+  // const selectedItems = $selectionState[0];
+  // const setSelectedItems = (items: Item[]) => {
+  //   $selectionState[1](items);
+  //   onChange?.({ selectedItems: items });
+  // };
 
   const textInput = useRef<HTMLInputElement>(null);
   const filterableMultiSelectInstanceId = useId();
@@ -395,9 +395,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
 
   useEffect(() => {
     if (!isOpen) {
-      setTopItems(selectedItems);
+      setTopItems(controlledSelectedItems);
     }
-  }, [selectedItems, isOpen, setTopItems]);
+  }, [controlledSelectedItems, isOpen, setTopItems]);
 
   function handleMenuChange(forceIsOpen: boolean): void {
     const nextIsOpen = forceIsOpen ?? !isOpen;
@@ -435,26 +435,21 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     isItemDisabled(item, _index) {
       return (item as any).disabled;
     },
+    onInputValueChange(changes) {
+      onInputValueChange?.(changes);
 
-    onSelectedItemChange({ selectedItem }) {
-      console.log({ selectedItem });
-      onItemChange(selectedItem);
+      if (Array.isArray(inputValue)) {
+        clearInputValue();
+      } else {
+        setInputValue(inputValue);
+      }
+
+      if (inputValue && !isOpen) {
+        handleMenuChange(true);
+      } else if (!inputValue && isOpen) {
+        handleMenuChange(false);
+      }
     },
-    // onInputValueChange(changes) {
-    //   onInputValueChange?.(changes);
-
-    //   if (Array.isArray(inputValue)) {
-    //     clearInputValue();
-    //   } else {
-    //     setInputValue(inputValue);
-    //   }
-
-    //   if (inputValue && !isOpen) {
-    //     handleMenuChange(true);
-    //   } else if (!inputValue && isOpen) {
-    //     handleMenuChange(false);
-    //   }
-    // },
   });
 
   function stateReducer(state, actionAndChanges) {
@@ -464,7 +459,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       case InputKeyDownEnter:
       case ItemClick:
         if (changes.selectedItem) {
-          // setSelectedItems([...selectedItems, changes.selectedItem]);
           onItemChange(changes.selectedItem);
           setInputValue('');
         }
@@ -472,7 +466,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return changes;
       case InputBlur:
       case InputKeyDownEscape:
-        console.log({ changes });
         setIsOpen(false);
         return changes;
       case FunctionToggleMenu:
@@ -503,7 +496,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return changes;
     }
   }
-  // console.log({ controlledSelectedItems });
+
   const { getDropdownProps } = useMultipleSelection<Item>({
     ...downshiftProps,
     activeIndex: highlightedIndex,
@@ -511,13 +504,12 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     selectedItems: controlledSelectedItems,
     itemToString,
     onStateChange(changes) {
-      console.log({ changes });
       switch (changes.type) {
         case SelectedItemKeyDownBackspace:
         case SelectedItemKeyDownDelete:
         case DropdownKeyDownBackspace:
         case FunctionRemoveSelectedItem: {
-          setSelectedItems(changes.selectedItems ?? []);
+          clearSelection();
           break;
         }
       }
@@ -561,7 +553,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       [`${prefix}--multi-select--invalid--focused`]: invalid && inputFocused,
       [`${prefix}--multi-select--open`]: isOpen,
       [`${prefix}--multi-select--inline`]: inline,
-      [`${prefix}--multi-select--selected`]: selectedItems?.length > 0,
+      [`${prefix}--multi-select--selected`]:
+        controlledSelectedItems?.length > 0,
       [`${prefix}--multi-select--filterable--input-focused`]: inputFocused,
     }
   );
@@ -622,7 +615,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
               event.stopPropagation();
             } else if (!isOpen) {
               clearInputValue(event);
-              setSelectedItems([]);
+              clearSelection();
               event.stopPropagation();
             }
           }
@@ -661,9 +654,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   };
 
   const clearSelectionContent =
-    selectedItems.length > 0 ? (
+    controlledSelectedItems.length > 0 ? (
       <span className={`${prefix}--visually-hidden`}>
-        {clearSelectionDescription} {selectedItems.length},{clearSelectionText}
+        {clearSelectionDescription} {controlledSelectedItems.length},
+        {clearSelectionText}
       </span>
     ) : (
       <span className={`${prefix}--visually-hidden`}>
@@ -695,16 +689,16 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         isOpen={isOpen}
         size={size}>
         <div className={`${prefix}--list-box__field`}>
-          {selectedItems.length > 0 && (
+          {controlledSelectedItems.length > 0 && (
             // @ts-expect-error: It is expecting a non-required prop called: "onClearSelection"
             <ListBoxSelection
               clearSelection={() => {
-                setSelectedItems([]);
+                clearSelection();
                 if (textInput.current) {
                   textInput.current.focus();
                 }
               }}
-              selectionCount={selectedItems.length}
+              selectionCount={controlledSelectedItems.length}
               translateWithId={translateWithId}
               disabled={disabled}
             />
@@ -749,7 +743,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           <ListBox.Menu {...menuProps}>
             {sortItems(filterItems(items, { itemToString, inputValue }), {
               selectedItems: {
-                top: selectedItems,
+                top: controlledSelectedItems,
                 fixed: [],
                 'top-after-reopen': topItems,
               }[selectionFeedback],
@@ -758,8 +752,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
               locale,
             }).map((item, index) => {
               const isChecked =
-                selectedItems.filter((selected) => isEqual(selected, item))
-                  .length > 0;
+                controlledSelectedItems.filter((selected) =>
+                  isEqual(selected, item)
+                ).length > 0;
               const itemProps = getItemProps({
                 item,
                 ['aria-selected']: isChecked,
