@@ -65,10 +65,6 @@ const content = html`
   </div>
 `;
 
-const hollowContent = html`<span slot="body-text"
-  >AI was used to generate this content</span
->`;
-
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
     ${View16({ slot: 'icon' })}
@@ -277,15 +273,7 @@ export const Slug = {
     kind: {
       control: 'select',
       description: 'Kind (kind)',
-      options: ['default', 'hollow', 'inline'],
-    },
-    dotType: {
-      if: {
-        arg: 'kind',
-      },
-      control: 'select',
-      description: 'DotType (dotType)',
-      options: ['default', 'hollow'],
+      options: ['default', 'inline'],
     },
     aiTextLabel: {
       control: 'text',
@@ -297,8 +285,7 @@ export const Slug = {
     },
   },
   render: (args) => {
-    const { alignment, aiTextLabel, size, kind, dotType, revertActive } =
-      args ?? {};
+    const { alignment, aiTextLabel, size, kind, revertActive } = args ?? {};
     return html`
       <style>
         ${slugStyles}
@@ -309,11 +296,9 @@ export const Slug = {
           alignment="${alignment}"
           size="${size}"
           kind="${kind}"
-          dot-type="${dotType}"
           ai-text-label="${aiTextLabel}"
           ?revert-active="${revertActive}">
-          ${kind === 'hollow' || dotType === 'hollow' ? hollowContent : content}
-          ${kind === 'hollow' || dotType === 'hollow' ? '' : actions}
+          ${content} ${actions}
         </cds-slug>
       </div>
     `;

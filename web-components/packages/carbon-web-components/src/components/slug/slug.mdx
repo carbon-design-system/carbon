@@ -91,27 +91,12 @@ the `ai-text-label` prop.
 </cds-slug>
 ```
 
-### Slug `dotType`
-
-When using the `inline` variant, you can switch between the `hollow` slug for
-content that does not need additional explainability or the `default` variant
-that will render the AI callout.
-
-```html
-<cds-slug kind="inline" dot-type="hollow" ai-text-label="Text goes here">
-  <div slot="body-text">Explanation of AI-generated content</div>
-</cds-slug>
-```
-
 ### Slug `kind`
 
-The `Slug` component has three variants, `default`, `hollow`, and `inline`. The
-`hollow` slugs represent items that don’t have any additional explainability.
-Therefore they don’t use the AI callout and instead use the standard Carbon
-tooltip, with a simple message.
+The `Slug` component has two variants, `default` and `inline`.
 
 ```html
-<cds-slug kind="hollow" size="xs">
+<cds-slug size="xs">
   <div slot="body-text">AI was used to generate this content</div>
 </cds-slug>
 ```

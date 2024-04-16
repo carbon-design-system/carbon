@@ -59,10 +59,6 @@ const content = html`
   </div>
 `;
 
-const hollowContent = html`<span slot="body-text"
-  >AI was used to generate this content</span
->`;
-
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
     ${View16({ slot: 'icon' })}
@@ -82,7 +78,6 @@ const actions = html`
 const args = {
   aiTextLabel: '',
   alignment: POPOVER_ALIGNMENT.BOTTOM,
-  dotType: 'default',
   kind: 'inline',
   revertActive: false,
   size: SLUG_SIZE.EXTRA_SMALL,
@@ -99,17 +94,11 @@ const argTypes = {
     description: 'Specify how the popover should align with the button.',
     options: tooltipAlignments,
   },
-  dotType: {
-    control: 'radio',
-    description:
-      'Specify the type of dot that should be rendered in front of the inline variant.',
-    options: ['default', 'hollow'],
-  },
   kind: {
     control: 'radio',
     description:
       'Specify the type of Slug, from the following list of types: <code>default</code>, <code>hollow</code>, or <code>inline</code>.',
-    options: ['default', 'hollow', 'inline'],
+    options: ['default', 'inline'],
   },
   size: {
     control: 'select',
@@ -130,34 +119,37 @@ export const Default = {
         ${styles}
       </style>
       <div class="slug-container">
-        <cds-slug size="mini" alignment="bottom-left"> ${content} </cds-slug>
-        <cds-slug size="2xs" alignment="bottom-left"> ${content} </cds-slug>
-        <cds-slug size="xs" alignment="bottom-left"> ${content} </cds-slug>
-        <cds-slug size="sm" alignment="bottom-left"> ${content} </cds-slug>
-        <cds-slug size="md" alignment="bottom-left"> ${content} </cds-slug>
-        <cds-slug size="lg" alignment="bottom-left"> ${content} </cds-slug>
-        <cds-slug size="xl" alignment="bottom-left"> ${content} </cds-slug>
-      </div>
-      <div class="slug-container">
-        <cds-slug size="mini" kind="hollow" alignment="bottom-left">
-          ${hollowContent}
+        <cds-slug size="mini" alignment="bottom-left">
+          ${content}${actions}
         </cds-slug>
-        <cds-slug size="2xs" kind="hollow" alignment="bottom-left">
-          ${hollowContent}
+        <cds-slug size="2xs" alignment="bottom-left">
+          ${content}${actions}
         </cds-slug>
-        <cds-slug size="xs" kind="hollow" alignment="bottom-left">
-          ${hollowContent}
+        <cds-slug size="xs" alignment="bottom-left">
+          ${content}${actions}
         </cds-slug>
+        <cds-slug size="sm" alignment="bottom-left">
+          ${content}${actions}
+        </cds-slug>
+        <cds-slug size="md" alignment="bottom-left" open>
+          ${content} ${actions}</cds-slug
+        >
+        <cds-slug size="lg" alignment="bottom-left">
+          ${content} ${actions}</cds-slug
+        >
+        <cds-slug size="xl" alignment="bottom-left">
+          ${content} ${actions}</cds-slug
+        >
       </div>
       <div class="slug-container">
         <cds-slug size="sm" kind="inline" alignment="bottom-left">
-          ${content}
+          ${content}${actions}
         </cds-slug>
         <cds-slug size="md" kind="inline" alignment="bottom-left">
-          ${content}
+          ${content}${actions}
         </cds-slug>
         <cds-slug size="lg" kind="inline" alignment="bottom-left">
-          ${content}
+          ${content}${actions}
         </cds-slug>
       </div>
       <div class="slug-container">
@@ -166,70 +158,21 @@ export const Default = {
           kind="inline"
           ai-text-label="Text goes here"
           alignment="bottom-left">
-          ${content}
+          ${content}${actions}
         </cds-slug>
         <cds-slug
           size="md"
           kind="inline"
           ai-text-label="Text goes here"
           alignment="bottom-left">
-          ${content}
+          ${content}${actions}
         </cds-slug>
         <cds-slug
           size="lg"
           kind="inline"
           ai-text-label="Text goes here"
           alignment="bottom-left">
-          ${content}
-        </cds-slug>
-      </div>
-      <div class="slug-container">
-        <cds-slug
-          size="sm"
-          kind="inline"
-          dot-type="hollow"
-          alignment="bottom-left">
-          ${hollowContent}
-        </cds-slug>
-        <cds-slug
-          size="md"
-          kind="inline"
-          dot-type="hollow"
-          alignment="bottom-left">
-          ${hollowContent}
-        </cds-slug>
-        <cds-slug
-          size="lg"
-          kind="inline"
-          dot-type="hollow"
-          alignment="bottom-left">
-          ${hollowContent}
-        </cds-slug>
-      </div>
-      <div class="slug-container">
-        <cds-slug
-          size="sm"
-          kind="inline"
-          dot-type="hollow"
-          ai-text-label="Text goes here"
-          alignment="bottom-left">
-          ${hollowContent}
-        </cds-slug>
-        <cds-slug
-          size="md"
-          kind="inline"
-          dot-type="hollow"
-          ai-text-label="Text goes here"
-          alignment="bottom-left">
-          ${hollowContent}
-        </cds-slug>
-        <cds-slug
-          size="lg"
-          kind="inline"
-          dot-type="hollow"
-          ai-text-label="Text goes here"
-          alignment="bottom-left">
-          ${hollowContent}
+          ${content}${actions}
         </cds-slug>
       </div>
     `;
@@ -240,8 +183,7 @@ export const Playground = {
   args,
   argTypes,
   render: (args) => {
-    const { alignment, aiTextLabel, dotType, kind, revertActive, size } =
-      args ?? {};
+    const { alignment, aiTextLabel, kind, revertActive, size } = args ?? {};
     return html`
       <style>
         ${styles}
@@ -251,11 +193,9 @@ export const Playground = {
           alignment="${ifDefined(alignment)}"
           size="${size}"
           kind="${kind}"
-          dot-type="${dotType}"
           ai-text-label="${aiTextLabel}"
           ?revert-active="${revertActive}">
-          ${kind === 'hollow' || dotType === 'hollow' ? hollowContent : content}
-          ${kind === 'hollow' || dotType === 'hollow' ? '' : actions}
+          ${content} ${actions}
         </cds-slug>
       </div>
     `;
