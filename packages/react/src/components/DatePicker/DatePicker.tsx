@@ -443,6 +443,8 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   // fix datepicker deleting the selectedDate when the calendar closes
   const onCalendarClose = (selectedDates, dateStr) => {
+    endInputField?.current?.focus();
+    calendarRef.current.calendarContainer.classList.remove('open');
     setTimeout(() => {
       if (
         lastStartValue.current &&
@@ -669,6 +671,9 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
 
       if (match(event, keys.ArrowDown)) {
+        if (event.target == endInputField.current) {
+          calendar.calendarContainer.classList.add('open');
+        }
         const {
           calendarContainer,
           selectedDateElem: fpSelectedDateElem,
