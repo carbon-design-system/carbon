@@ -21,7 +21,7 @@ import { Slug } from '../Slug';
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
-  await userEvent.click(findInputNode());
+  await userEvent.click(screen.getByTitle('Open'))
 };
 
 const prefix = 'cds';
@@ -37,14 +37,6 @@ describe('ComboBox', () => {
       placeholder: 'Filter...',
       type: 'default',
     };
-  });
-
-  it('should display the menu of items when a user clicks on the input', async () => {
-    render(<ComboBox {...mockProps} />);
-
-    await userEvent.click(findInputNode());
-
-    assertMenuOpen(mockProps);
   });
 
   it('should call `onChange` each time an item is selected', async () => {

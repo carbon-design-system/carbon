@@ -86,7 +86,6 @@ test.describe('@avt ComboBox', () => {
     await expect(menu).toBeVisible();
     // Navigation inside the menu
     // move to first option
-    await page.keyboard.press('ArrowDown');
     await expect(optionOne).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
     );
@@ -123,14 +122,12 @@ test.describe('@avt ComboBox', () => {
     // should open and select option 1
     await page.keyboard.press('Enter');
     await page.keyboard.press('ArrowDown');
-    await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     await expect(combobox).toHaveValue('Option 1');
     await page.keyboard.press('Escape');
 
     // should open and select option 2
     await page.keyboard.press('Enter');
-    await page.keyboard.press('ArrowDown');
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
