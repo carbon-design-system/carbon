@@ -3234,16 +3234,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibm/telemetry-js@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@ibm/telemetry-js@npm:1.2.1"
-  bin:
-    ibmtelemetry: dist/collect.js
-  checksum: 10/672a116f050f89160015c370f49ce1b7478f21d2686252df3456d62f41a4c4f170ed345a6454c1de3005e03397492ed3aee8d98cf7b5cf27d13b054306dcc21b
-  languageName: node
-  linkType: hard
-
-"@ibm/telemetry-js@npm:^1.4.0":
+"@ibm/telemetry-js@npm:^1.2.1, @ibm/telemetry-js@npm:^1.4.0":
   version: 1.4.0
   resolution: "@ibm/telemetry-js@npm:1.4.0"
   bin:
