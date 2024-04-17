@@ -815,5 +815,5 @@ collect:
       - 'default' 
       - 'hollow'
   js:
-    tokens: 
+    tokens: null
     functions: {}
