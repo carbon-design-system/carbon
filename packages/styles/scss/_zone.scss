@@ -26,6 +26,24 @@ $zones: (
   g10: themes.$g10,
   g90: themes.$g90,
   g100: themes.$g100,
+  system: (
+    white-g90: (
+      light: themes.$white,
+      dark: themes.$g90,
+    ),
+    white-g100: (
+      light: themes.$white,
+      dark: themes.$g100,
+    ),
+    g10-g90: (
+      light: themes.$g10,
+      dark: themes.$g90,
+    ),
+    g10-g100: (
+      light: themes.$g10,
+      dark: themes.$g100,
+    ),
+  ),
 ) !default;
 
 $-components: (
@@ -34,66 +52,93 @@ $-components: (
   tag.$tag-tokens
 );
 
-@each $name, $theme in $zones {
-  .#{config.$prefix}--#{'' + $name} {
-    background-color: custom-property.get-var('background');
-    color: custom-property.get-var('text-primary');
+@mixin apply-theme-map($theme) {
+  background-color: custom-property.get-var('background');
+  color: custom-property.get-var('text-primary');
+  @each $key, $value in $theme {
+    @if type-of($value) == color {
+      @include custom-property.declaration($key, $value);
+    }
+  }
 
-    @each $key, $value in $theme {
-      @if type-of($value) == color {
+  // Note: we need to re-emit the contextual layer tokens as part of the theme
+  // mixin. Otherwise, the layer tokens are defined at the :root level and will
+  // not pick up the theme-specific, or zone-specific, value from the first
+  // layer.
+  //
+  // For example, in this situation:
+  //
+  // ```
+  // :root {
+  //   --layer-one: #000000;
+  //   --layer: var(--layer-one);
+  // }
+  // ```
+  //
+  // This will always evaluate to the value of `--layer-one` at the `:root`
+  // selector, even if `--layer-one` is redefined layer on in the cascade.
+  //
+  // ```
+  // .zone {
+  //   --layer-one: #ffffff;
+  // }
+  // ```
+  //
+  // Even though you would expect `--layer` to be redefined, it will keep the
+  // value defined at the `:root` level.
+  //
+  // @see https://github.com/carbon-design-system/carbon/issues/11138
+  @include layer-tokens.emit-layer-tokens(1);
+
+  @each $group in $-components {
+    @each $key, $value in $group {
+      @if meta.type-of($value) == map {
+        $fallback: map.get($value, fallback);
+        $theme-values: map.get($value, values);
+
+        @each $theme-value in $theme-values {
+          $value: map.get($theme-value, value);
+
+          @if theme.matches(map.get($theme-value, theme), $theme) and
+            meta.type-of($value) ==
+            color
+          {
+            @include custom-property.declaration($key, $value);
+          }
+        }
+      } @else if meta.type-of($value) == color {
         @include custom-property.declaration($key, $value);
       }
     }
+  }
+}
 
-    // Note: we need to re-emit the contextual layer tokens as part of the theme
-    // mixin. Otherwise, the layer tokens are defined at the :root level and will
-    // not pick up the theme-specific, or zone-specific, value from the first
-    // layer.
-    //
-    // For example, in this situation:
-    //
-    // ```
-    // :root {
-    //   --layer-one: #000000;
-    //   --layer: var(--layer-one);
-    // }
-    // ```
-    //
-    // This will always evaluate to the value of `--layer-one` at the `:root`
-    // selector, even if `--layer-one` is redefined layer on in the cascade.
-    //
-    // ```
-    // .zone {
-    //   --layer-one: #ffffff;
-    // }
-    // ```
-    //
-    // Even though you would expect `--layer` to be redefined, it will keep the
-    // value defined at the `:root` level.
-    //
-    // @see https://github.com/carbon-design-system/carbon/issues/11138
-    @include layer-tokens.emit-layer-tokens(1);
+@each $name, $theme in $zones {
+  @if $name == 'system' {
+    @each $inner-name, $inner-theme in $theme {
+      $light: map.get($inner-theme, 'light');
+      $dark: map.get($inner-theme, 'dark');
 
-    @each $group in $-components {
-      @each $key, $value in $group {
-        @if meta.type-of($value) == map {
-          $fallback: map.get($value, fallback);
-          $theme-values: map.get($value, values);
-
-          @each $theme-value in $theme-values {
-            $value: map.get($theme-value, value);
-
-            @if theme.matches(map.get($theme-value, theme), $theme) and
-              meta.type-of($value) ==
-              color
-            {
-              @include custom-property.declaration($key, $value);
-            }
-          }
-        } @else if meta.type-of($value) == color {
-          @include custom-property.declaration($key, $value);
+      @media (prefers-color-scheme: light) {
+        .#{config.$prefix}--#{'' + $name}-#{$inner-name} {
+          @include apply-theme-map($light);
+        }
+        .#{config.$prefix}--#{'' + $name}-#{$inner-name}--compliment {
+          @include apply-theme-map($dark);
         }
       }
+      @media (prefers-color-scheme: dark) {
+        .#{config.$prefix}--#{'' + $name}-#{$inner-name} {
+          @include apply-theme-map($dark);
+        }
+        .#{config.$prefix}--#{'' + $name}-#{$inner-name}--compliment {
+          @include apply-theme-map($light);
+        }
+      }
+    }
+  } @else {
+    .#{config.$prefix}--#{'' + $name} {
+      @include apply-theme-map($theme);
     }
   }
 }

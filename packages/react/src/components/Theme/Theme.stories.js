@@ -68,6 +68,38 @@ export const Default = () => {
           <p>white theme</p>
         </section>
       </Theme>
+      <Theme theme="system-white-g90">
+        <section className="theme-section">
+          <p>System preferences white/g90 themes</p>
+          <Theme theme="system-white-g90" compliment>
+            <p>&nbsp;Compliment of system theme&nbsp;</p>
+          </Theme>
+        </section>
+      </Theme>
+      <Theme theme="system-white-g100">
+        <section className="theme-section">
+          <p>System preferences white/g100 themes</p>
+          <Theme theme="system-white-g100" compliment>
+            <p>&nbsp;Compliment of system theme&nbsp;</p>
+          </Theme>
+        </section>
+      </Theme>
+      <Theme theme="system-g10-g90">
+        <section className="theme-section">
+          <p>System preferences g10/g90 themes</p>
+          <Theme theme="system-g10-g90" compliment>
+            <p>&nbsp;Compliment of system theme&nbsp;</p>
+          </Theme>
+        </section>
+      </Theme>
+      <Theme theme="system-g10-g100">
+        <section className="theme-section">
+          <p>System preferences g10/g100 themes</p>
+          <Theme theme="system-g10-g100" compliment>
+            <p>&nbsp;Compliment of system theme&nbsp;</p>
+          </Theme>
+        </section>
+      </Theme>
     </>
   );
 };
@@ -114,6 +146,11 @@ const PlaygroundStory = (args) => {
     <Theme {...args}>
       <section className="theme-section">
         <p>{args.theme} theme</p>
+        {args.theme.startsWith('system') ? (
+          <Theme {...args} compliment>
+            <p>&nbsp;Compliment of system theme&nbsp;</p>
+          </Theme>
+        ) : null}
       </section>
     </Theme>
   );

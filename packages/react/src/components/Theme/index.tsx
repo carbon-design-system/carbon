@@ -13,8 +13,17 @@ import { PolymorphicProps } from '../../types/common';
 import { LayerContext } from '../Layer/LayerContext';
 
 interface GlobalThemeProps {
-  theme?: 'white' | 'g10' | 'g90' | 'g100';
+  theme?:
+    | 'white'
+    | 'g10'
+    | 'g90'
+    | 'g100'
+    | 'system-white-g90'
+    | 'system-white-g100'
+    | 'system-g10-g90'
+    | 'system-g10-g100';
   children?: React.ReactNode;
+  compliment?: boolean;
 }
 
 export const ThemeContext = React.createContext<GlobalThemeProps>({
@@ -50,10 +59,22 @@ GlobalTheme.propTypes = {
    */
   children: PropTypes.node,
 
+  /** select the compliment of a system theme */
+  compliment: PropTypes.bool,
+
   /**
    * Specify the global theme for your app
    */
-  theme: PropTypes.oneOf(['white', 'g10', 'g90', 'g100']),
+  theme: PropTypes.oneOf([
+    'white',
+    'g10',
+    'g90',
+    'g100',
+    'system-white-g90',
+    'system-white-g100',
+    'system-g10-g90',
+    'system-g10-g100',
+  ]),
 };
 
 type ThemeBaseProps = GlobalThemeProps & {
@@ -68,6 +89,7 @@ type ThemeProps<E extends ElementType> = PolymorphicProps<E, ThemeBaseProps>;
 export function Theme<E extends ElementType = 'div'>({
   as: BaseComponent = 'div' as E,
   className: customClassName,
+  compliment,
   theme,
   ...rest
 }: ThemeProps<E>) {
@@ -77,6 +99,18 @@ export function Theme<E extends ElementType = 'div'>({
     [`${prefix}--g10`]: theme === 'g10',
     [`${prefix}--g90`]: theme === 'g90',
     [`${prefix}--g100`]: theme === 'g100',
+    [`${prefix}--system-white-g90`]: theme === 'system-white-g90',
+    [`${prefix}--system-white-g100`]: theme === 'system-white-g100',
+    [`${prefix}--system-g10-g90`]: theme === 'system-g10-g90',
+    [`${prefix}--system-g10-g100`]: theme === 'system-g10-g100',
+    [`${prefix}--system-white-g90--compliment`]:
+      theme === 'system-white-g90' && compliment,
+    [`${prefix}--system-white-g100--compliment`]:
+      theme === 'system-white-g100' && compliment,
+    [`${prefix}--system-g10-g90--compliment`]:
+      theme === 'system-g10-g90' && compliment,
+    [`${prefix}--system-g10-g100--compliment`]:
+      theme === 'system-g10-g100' && compliment,
     [`${prefix}--layer-one`]: true,
   });
   const value = React.useMemo(() => {
@@ -120,7 +154,16 @@ Theme.propTypes = {
   /**
    * Specify the theme
    */
-  theme: PropTypes.oneOf(['white', 'g10', 'g90', 'g100']),
+  theme: PropTypes.oneOf([
+    'white',
+    'g10',
+    'g90',
+    'g100',
+    'system-white-g90',
+    'system-white-g100',
+    'system-g10-g90',
+    'system-g10-g100',
+  ]),
 };
 
 /**

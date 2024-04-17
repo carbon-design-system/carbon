@@ -9,6 +9,8 @@
 @use '@carbon/styles/scss/theme';
 
 .theme-section {
+  display: flex;
+  gap: 1rem;
   padding: 1rem;
   background: theme.$background;
   color: theme.$text-primary;
