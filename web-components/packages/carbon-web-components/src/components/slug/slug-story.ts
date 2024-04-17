@@ -146,7 +146,7 @@ export const Default = () => {
 };
 
 export const Playground = (args) => {
-  const { alignment, aiTextLabel, size, kind, dotType, revertActive } =
+  const { alignment, aiTextLabel, size, kind, revertActive } =
     args?.[`${prefix}-slug`] ?? {};
   return html`
     <style>
@@ -157,7 +157,6 @@ export const Playground = (args) => {
         alignment="${ifDefined(alignment)}"
         size="${size}"
         kind="${kind}"
-        dot-type="${dotType}"
         ai-text-label="${aiTextLabel}"
         ?revert-active="${revertActive}">
         ${content} ${actions}
