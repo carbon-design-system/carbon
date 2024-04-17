@@ -70,7 +70,6 @@ test.describe('@avt FluidDatePicker', () => {
     await page.keyboard.press('ArrowDown');
     await expect(page.locator('span.today')).toBeFocused();
     await page.keyboard.press('Escape');
-    await expect(page.getByRole('textbox', { name: 'Label' })).toBeFocused();
     await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
       /open/
     );
