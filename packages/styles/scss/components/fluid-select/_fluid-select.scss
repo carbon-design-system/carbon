@@ -153,9 +153,11 @@
 
   .#{$prefix}--select--fluid
     .#{$prefix}--select--invalid
+    .#{$prefix}--select-input__wrapper[data-invalid]
     .#{$prefix}--select__invalid-icon,
   .#{$prefix}--select--fluid
     .#{$prefix}--select--warning
+    .#{$prefix}--select-input__wrapper
     .#{$prefix}--select__invalid-icon {
     inset-block-start: convert.to-rem(73px);
     inset-inline-end: $spacing-05;
@@ -207,5 +209,12 @@
     .#{$prefix}--select--slug
     .#{$prefix}--select-input {
     padding-inline-end: $spacing-10;
+  }
+
+  // remove slug divider when element is invalid and fluid
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--slug::before {
+    display: none;
   }
 }

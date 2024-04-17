@@ -1479,6 +1479,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "hollyos",
+      "name": "Holly Springsteen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4097509?v=4",
+      "profile": "https://hollyos.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
