@@ -186,7 +186,7 @@
 
   .#{$prefix}--structured-list-svg {
     display: inline-block;
-    margin-block-start: 2px;
+    margin-block-start: $spacing-01;
     transition: all motion.$duration-fast-02 motion.motion(standard, productive);
     vertical-align: top;
   }
@@ -264,7 +264,7 @@
   }
 
   .#{$prefix}--structured-list-icons {
-    margin-block-start: 2px;
+    margin-block-start: $spacing-01;
     vertical-align: top;
   }
 }
