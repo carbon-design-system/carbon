@@ -132,7 +132,6 @@
   }
 
   .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover {
-    position: absolute;
     inset-inline-start: -(convert.to-rem(40px));
   }
 

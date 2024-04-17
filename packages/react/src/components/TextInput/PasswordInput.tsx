@@ -302,11 +302,9 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   const passwordVisibilityToggleClasses = classNames(
     `${prefix}--text-input--password__visibility__toggle`,
     `${prefix}--btn`,
-    `${prefix}--btn--icon-only`,
     `${prefix}--tooltip__trigger`,
     `${prefix}--tooltip--a11y`,
     {
-      [`${prefix}--btn--disabled`]: disabled,
       [`${prefix}--tooltip--${tooltipPosition}`]: tooltipPosition,
       [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
     }
