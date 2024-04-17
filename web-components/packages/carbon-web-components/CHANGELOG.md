@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.7.0...@carbon/web-components@2.8.0-rc.0) (2024-04-17)
+
+
+### Features
+
+* **slug:** ai slug updates ([#11716](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11716)) ([e9fa12f](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/e9fa12fd8cd3973aa7279a9d69582139937934d9))
+* **slug:** remove no longer needed dot-type prop ([#11726](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11726)) ([2cca4b3](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/2cca4b38955d738104c60739ee09052ae4625c7d))
+
+
+
+
+
 # [2.7.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.7.0-rc.0...@carbon/web-components@2.7.0) (2024-04-09)
 
 **Note:** Version bump only for package @carbon/web-components
