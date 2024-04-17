@@ -674,3 +674,6 @@ collect:
       - 'g100' 
       - 'g90' 
       - 'white'
+  js:
+    tokens: null
+    functions: {}
