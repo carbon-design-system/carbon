@@ -80,8 +80,11 @@ export interface RadioButtonGroupProps
    * Provide an optional `onChange` hook that is called whenever the value of
    * the group changes
    */
-  onChange?: (selection: unknown, name: string, evt: unknown) => void;
-
+  onChange?: (
+    selection: React.ReactNode,
+    name: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
   /**
    * Provide where radio buttons should be placed
    */

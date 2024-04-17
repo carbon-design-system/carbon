@@ -372,7 +372,11 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * The empty handler of the `<input>`.
    */
-  onChange?(event: ChangeEvent<HTMLDivElement>): void;
+  onChange?(
+    event: ChangeEvent<HTMLDivElement>,
+    selected?: boolean,
+    id?: string
+  ): void;
 
   /**
    * Specify the function to run when the SelectableTile is clicked
@@ -463,7 +467,7 @@ export const SelectableTile = React.forwardRef<
     }
     setIsSelected(!isSelected);
     clickHandler(evt);
-    onChange(evt);
+    onChange(evt, isSelected, id);
   }
 
   // TODO: rename to handleKeyDown when handleKeyDown prop is deprecated
@@ -472,14 +476,14 @@ export const SelectableTile = React.forwardRef<
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
       setIsSelected(!isSelected);
-      onChange(evt);
+      onChange(evt, isSelected, id);
     }
     keyDownHandler(evt);
   }
 
   function handleChange(event) {
     setIsSelected(event.target.checked);
-    onChange(event);
+    onChange(event, isSelected, id);
   }
 
   if (selected !== prevSelected) {
