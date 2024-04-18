@@ -639,7 +639,9 @@ const MultiSelect = React.forwardRef(
     const itemsSelectedText =
       selectedItems.length > 0 &&
       selectedItems.map((item) => (item as selectedItemType).text);
+      console.log(selectedItems)
 
+    const selectedItemsWithoutSelectAll = selectedItems.filter((item: any) => item.id !== "select-all-option");
     return (
       <div className={wrapperClasses}>
         <label className={titleClasses} {...getLabelProps()}>
@@ -680,7 +682,7 @@ const MultiSelect = React.forwardRef(
                 clearSelection={
                   !disabled && !readOnly ? clearSelection : noopFn
                 }
-                selectionCount={selectedItems.length}
+                selectionCount={selectedItemsWithoutSelectAll.length}
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 translateWithId={translateWithId!}
                 disabled={disabled}

@@ -57,7 +57,7 @@ export function useSelection({
       }
       //select all option
       if(item && item.id === 'select-all-option') {
-        setSelectedItems(itemsWithSelectAll);
+        setSelectedItems(itemsWithSelectAll.filter(item => !item.disabled));
         return;
       }
 
