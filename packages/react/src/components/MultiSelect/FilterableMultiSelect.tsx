@@ -61,6 +61,7 @@ const {
   FunctionToggleMenu,
   InputChange,
   InputKeyDownEscape,
+  FunctionSetHighlightedIndex,
 } = useCombobox.stateChangeTypes as UseComboboxInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseComboboxStateChangeTypes.ToggleButtonClick;
 };
@@ -303,7 +304,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     selectionFeedback = 'top-after-reopen',
     selectedItems: selected,
     size,
-    sortItems = defaultSortItems,
+    sortItems = defaultSortItems as FilterableMultiSelectProps<Item>['sortItems'],
     translateWithId,
     useTitleInItem,
     warn,
@@ -330,13 +331,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     onChange,
     selectedItems: selected,
   });
-
-  // const $selectionState = useState(initialSelectedItems ?? []);
-  // const selectedItems = $selectionState[0];
-  // const setSelectedItems = (items: Item[]) => {
-  //   $selectionState[1](items);
-  //   onChange?.({ selectedItems: items });
-  // };
 
   const textInput = useRef<HTMLInputElement>(null);
   const filterableMultiSelectInstanceId = useId();
@@ -452,11 +446,24 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     },
   });
 
+  console.log({ items });
+
   function stateReducer(state, actionAndChanges) {
-    const { type, changes } = actionAndChanges;
+    const { type, props, changes } = actionAndChanges;
     const { highlightedIndex } = changes;
+
+    if (changes.isOpen && !isOpen) {
+      setTopItems(controlledSelectedItems);
+    }
+
     switch (type) {
       case InputKeyDownEnter:
+        if (changes.selectedItem) {
+          onItemChange(changes.selectedItem);
+          setInputValue('');
+        }
+        setHighlightedIndex(changes.selectedItem);
+        return { ...changes, highlightedIndex: state.highlightedIndex };
       case ItemClick:
         if (changes.selectedItem) {
           onItemChange(changes.selectedItem);
@@ -475,7 +482,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         }
         return changes;
       case InputChange:
-        return setInputValue(changes.inputValue ?? '');
+        setInputValue(changes.inputValue ?? '');
+        return changes;
 
       case InputClick:
         return { ...changes, isOpen: false };
@@ -483,6 +491,12 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return { ...changes, highlightedIndex: state.highlightedIndex };
       case InputKeyDownArrowUp:
       case InputKeyDownArrowDown:
+        if (highlightedIndex > -1) {
+          const itemArray = document.querySelectorAll(
+            `li.${prefix}--list-box__menu-item[role="option"]`
+          );
+          props.scrollIntoView(itemArray[highlightedIndex]);
+        }
         if (highlightedIndex === -1) {
           return {
             ...changes,
@@ -492,6 +506,18 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return changes;
       case ItemMouseMove:
         return { ...changes, highlightedIndex: state.highlightedIndex };
+      case FunctionSetHighlightedIndex:
+        if (!isOpen) {
+          return {
+            ...changes,
+            highlightedIndex: 0,
+          };
+        } else {
+          return {
+            ...changes,
+            highlightedIndex: props.items.indexOf(highlightedIndex),
+          };
+        }
       default:
         return changes;
     }
@@ -514,7 +540,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         }
       }
     },
-    // FIXME: missing `onOuterClick: () => handleOnMenuChange(false)`
   });
 
   useEffect(() => {

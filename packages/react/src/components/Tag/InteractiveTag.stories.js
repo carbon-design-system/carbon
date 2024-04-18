@@ -89,8 +89,6 @@ export const Operational = (args) => {
           type="red"
           className="some-class"
           renderIcon={Asleep}
-          as="a"
-          href="www.google.com"
           {...args}>
           {'Tag content'}
         </OperationalTag>

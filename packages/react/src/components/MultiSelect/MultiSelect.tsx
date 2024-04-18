@@ -517,6 +517,8 @@ const MultiSelect = React.forwardRef(
       sortOptions.selectedItems = topItems;
     }
 
+    console.log({ items });
+
     function stateReducer(state, actionAndChanges) {
       const { changes, props, type } = actionAndChanges;
       const { highlightedIndex } = changes;
