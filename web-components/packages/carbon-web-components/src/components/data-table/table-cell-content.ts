@@ -8,9 +8,9 @@
  */
 
 import { LitElement, html } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss?lit';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Data table cell content.

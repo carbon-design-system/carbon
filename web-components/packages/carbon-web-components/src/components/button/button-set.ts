@@ -8,11 +8,11 @@
  */
 
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
 import { BUTTON_KIND } from './defs';
 import styles from './button.scss?lit';
 import { prefix } from '../../globals/settings';
 import CDSButtonSetBase from './button-set-base';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Button set.
