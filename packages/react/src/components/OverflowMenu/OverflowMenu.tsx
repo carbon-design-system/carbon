@@ -722,7 +722,7 @@ class OverflowMenu extends React.Component<
             type="button"
             aria-haspopup
             aria-expanded={open}
-            aria-controls={open ? menuBodyId : ''}
+            aria-controls={open ? menuBodyId : undefined}
             className={overflowMenuClasses}
             onClick={this.handleClick}
             id={id}
