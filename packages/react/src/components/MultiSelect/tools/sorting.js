@@ -16,7 +16,7 @@
  * @returns {number}
  */
 export const defaultCompareItems = (itemA, itemB, { locale }) =>
-  itemA?.localeCompare(itemB, locale, {
+  itemA.localeCompare(itemB, locale, {
     numeric: true,
   });
 
