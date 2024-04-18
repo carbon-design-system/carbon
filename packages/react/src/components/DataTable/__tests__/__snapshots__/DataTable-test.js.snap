@@ -572,7 +572,6 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               class="cds--tooltip-trigger__wrapper"
             >
               <button
-                aria-controls=""
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-labelledby="tooltip-:r2f:"
@@ -1007,7 +1006,6 @@ exports[`DataTable renders as expected - Component API should render and match s
               class="cds--tooltip-trigger__wrapper"
             >
               <button
-                aria-controls=""
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-labelledby="tooltip-:ri:"
