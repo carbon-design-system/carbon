@@ -318,10 +318,10 @@ export function StructuredListRow(props: StructuredListRowProps) {
           <StructuredListCell>
             {selectedRow === id ? (
               <RadioButtonChecked
-                className={`${prefix}--structured-list-icons`}
+                className={`${prefix}--structured-list-icon`}
               />
             ) : (
-              <RadioButton className={`${prefix}--structured-list-icons`} />
+              <RadioButton className={`${prefix}--structured-list-icon`} />
             )}
           </StructuredListCell>
         )}
