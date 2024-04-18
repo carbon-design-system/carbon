@@ -43,6 +43,12 @@ export interface RadioTileProps {
   disabled?: boolean;
 
   /**
+   * **Experimental**: Specify if the `ExpandableTile` component should be rendered with rounded corners.
+   * Only valid when `slug` prop is present
+   */
+  hasRoundedCorners?: boolean;
+
+  /**
    * Provide a unique id for the underlying `<input>`.
    */
   id?: string;
@@ -73,6 +79,11 @@ export interface RadioTileProps {
   ) => void;
 
   /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
+   */
+  slug?: React.ReactNode;
+
+  /**
    * Specify the tab index of the underlying `<input>`.
    */
   tabIndex?: number;
@@ -95,6 +106,8 @@ const RadioTile = React.forwardRef(function RadioTile(
     id,
     onChange = noopFn,
     tabIndex = 0,
+    hasRoundedCorners,
+    slug,
     ...rest
   }: RadioTileProps,
   ref: React.Ref<HTMLInputElement>
@@ -105,10 +118,13 @@ const RadioTile = React.forwardRef(function RadioTile(
     customClassName,
     `${prefix}--tile`,
     `${prefix}--tile--selectable`,
+    `${prefix}--tile--radio`,
     {
       [`${prefix}--tile--is-selected`]: checked,
       [`${prefix}--tile--light`]: light,
       [`${prefix}--tile--disabled`]: disabled,
+      [`${prefix}--tile--slug`]: slug,
+      [`${prefix}--tile--slug-rounded`]: slug && hasRoundedCorners,
     }
   );
   const v12TileRadioIcons = useFeatureFlag('enable-v12-tile-radio-icons');
@@ -139,6 +155,14 @@ const RadioTile = React.forwardRef(function RadioTile(
     }
   }
 
+  // Slug is always size `xs`
+  let normalizedSlug;
+  if (slug && slug['type']?.displayName === 'Slug') {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'xs',
+    });
+  }
+
   return (
     <div>
       <input
@@ -157,6 +181,7 @@ const RadioTile = React.forwardRef(function RadioTile(
       <label {...rest} htmlFor={inputId} className={className}>
         <span className={`${prefix}--tile__checkmark`}>{icon()}</span>
         <Text className={`${prefix}--tile-content`}>{children}</Text>
+        {normalizedSlug}
       </label>
     </div>
   );
@@ -186,6 +211,12 @@ RadioTile.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Specify if the `ExpandableTile` component should be rendered with rounded corners.
+   * Only valid when `slug` prop is present
+   */
+  hasRoundedCorners: PropTypes.bool,
+
+  /**
    * Provide a unique id for the underlying `<input>`.
    */
   id: PropTypes.string,
@@ -210,6 +241,11 @@ RadioTile.propTypes = {
    * the underlying `<input>` changes.
    */
   onChange: PropTypes.func,
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Specify the tab index of the underlying `<input>`.
