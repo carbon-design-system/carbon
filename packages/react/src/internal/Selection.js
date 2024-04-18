@@ -30,6 +30,7 @@ export function useSelection({
   onChange,
   initialSelectedItems = [],
   selectedItems: controlledItems,
+  itemsWithSelectAll
 }) {
   const isMounted = useRef(false);
   const savedOnChange = useRef(onChange);
@@ -54,6 +55,12 @@ export function useSelection({
       if (disabled) {
         return;
       }
+      //select all option
+      if(item && item.id === 'select-all-option') {
+        setSelectedItems(itemsWithSelectAll);
+        return;
+      }
+
       let selectedIndex;
       selectedItems.forEach((selectedItem, index) => {
         if (isEqual(selectedItem, item)) {

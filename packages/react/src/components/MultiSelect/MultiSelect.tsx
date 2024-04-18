@@ -220,6 +220,8 @@ export interface MultiSelectProps<ItemType>
    */
   items: ItemType[];
 
+  itemsWithSelectAll: ItemType[];
+
   /**
    * Generic `label` that will be used as the textual representation of what
    * this field is for
@@ -362,6 +364,14 @@ const MultiSelect = React.forwardRef(
     const [prevOpenProp, setPrevOpenProp] = useState(open);
     const [topItems, setTopItems] = useState([]);
     const [itemsCleared, setItemsCleared] = useState(false);
+
+    const selectAllOption = {
+      id: 'select-all-option',
+      text: 'All'
+    };
+
+    const itemsWithSelectAll = [selectAllOption, ...items];
+
     const {
       selectedItems: controlledSelectedItems,
       onItemChange,
@@ -371,6 +381,7 @@ const MultiSelect = React.forwardRef(
       initialSelectedItems,
       onChange,
       selectedItems: selected,
+      itemsWithSelectAll
     });
 
     const selectProps: UseSelectProps<ItemType> = {
@@ -389,7 +400,7 @@ const MultiSelect = React.forwardRef(
         );
       },
       selectedItem: controlledSelectedItems,
-      items,
+      items: itemsWithSelectAll,
       isItemDisabled(item, _index) {
         return (item as any).disabled;
       },
@@ -558,7 +569,7 @@ const MultiSelect = React.forwardRef(
           } else {
             return {
               ...changes,
-              highlightedIndex: props.items.indexOf(highlightedIndex),
+              highlightedIndex: itemsWithSelectAll.indexOf(highlightedIndex),
             };
           }
         case ToggleButtonKeyDownArrowDown:
@@ -701,7 +712,7 @@ const MultiSelect = React.forwardRef(
           <ListBox.Menu {...getMenuProps()}>
             {isOpen &&
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              sortItems!(items, sortOptions as SortItemsOptions<ItemType>).map(
+              sortItems!(itemsWithSelectAll, sortOptions as SortItemsOptions<ItemType>).map(
                 (item, index) => {
                   const isChecked =
                     selectedItems.filter((selected) => isEqual(selected, item))
