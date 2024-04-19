@@ -11,7 +11,7 @@ import React, { useEffect } from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { VStack } from '../Stack';
 
-import { GlobalTheme, Theme, useTheme } from '../Theme';
+import { GlobalTheme, Theme, ThemeCompliment, useTheme } from '../Theme';
 import mdx from './Theme.mdx';
 
 export default {
@@ -46,11 +46,14 @@ export default {
 };
 
 const ThemeText = ({ before, after }) => {
-  const { theme } = useTheme();
+  const { theme, themeCompliment, isDark } = useTheme();
 
   return (
     <p>
-      {before} `{theme}` {after}
+      {before} `{theme}` {after} It is
+      {isDark ? ' `dark` ' : ' `light` '} and has a compliment of `
+      {themeCompliment}
+      `.
     </p>
   );
 };
@@ -94,11 +97,13 @@ export const Default = () => {
 
 export const UseTheme = () => {
   const Example = ({ after }) => {
-    const { theme } = useTheme();
+    const { theme, themeCompliment, isDark } = useTheme();
 
     return (
       <div className="theme-section">
-        The current theme is: `{theme}` {after}
+        The current theme is: `{theme}` {after}. It is
+        {isDark ? ' `dark` ' : ' `light` '} and has a compliment of `
+        {themeCompliment}`.
       </div>
     );
   };
@@ -139,6 +144,33 @@ export const _WithLayer = () => {
     </VStack>
   );
 };
+
+const ThemeComplimentStory = (args) => {
+  return (
+    <Theme {...args}>
+      <section className="theme-section">
+        <ThemeText before="Theme" />
+        <ThemeCompliment>
+          <section className="theme-section">
+            <ThemeText before="Compliment" />
+            <ThemeCompliment>
+              <section className="theme-section">
+                <ThemeText before="Compliment twice" />
+                <ThemeCompliment>
+                  <section className="theme-section">
+                    <ThemeText before="Compliment thrice" />
+                  </section>
+                </ThemeCompliment>
+              </section>
+            </ThemeCompliment>
+          </section>
+        </ThemeCompliment>
+      </section>
+    </Theme>
+  );
+};
+
+export const _ThemeCompliment = ThemeComplimentStory.bind({});
 
 const PlaygroundStory = (args) => {
   return (
