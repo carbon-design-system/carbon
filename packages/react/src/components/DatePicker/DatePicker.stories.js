@@ -58,7 +58,7 @@ export const SingleWithCalendar = () => (
 
 export const RangeWithCalendar = () => {
   return (
-    <DatePicker allowInput={false} datePickerType="range">
+    <DatePicker datePickerType="range">
       <DatePickerInput
         id="date-picker-input-id-start"
         placeholder="mm/dd/yyyy"
@@ -108,7 +108,7 @@ export const SingleWithCalendarWithLayer = () => (
 export const RangeWithCalendarWithLayer = () => (
   <WithLayer>
     {(layer) => (
-      <DatePicker allowInput={false} datePickerType="range">
+      <DatePicker datePickerType="range">
         <DatePickerInput
           id={`date-picker-input-id-start-${layer}`}
           placeholder="mm/dd/yyyy"
