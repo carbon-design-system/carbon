@@ -342,6 +342,17 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     setPrevOpen(open);
   }
 
+  const sortedItems = sortItems(filterItems(items, { itemToString, inputValue }), {
+    selectedItems: {
+      top: controlledSelectedItems,
+      fixed: [],
+      'top-after-reopen': topItems,
+    }[selectionFeedback],
+    itemToString,
+    compareItems,
+    locale,
+  })
+
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
 
@@ -417,7 +428,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     isOpen: isMenuOpen,
   } = useCombobox<Item>({
     isOpen,
-    items,
+    items: sortedItems,
     itemToString,
     defaultHighlightedIndex: 0, // after selection, highlight the first item.
     id,
@@ -429,25 +440,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     isItemDisabled(item, _index) {
       return (item as any).disabled;
     },
-    onInputValueChange(changes) {
-      onInputValueChange?.(changes);
-
-      if (Array.isArray(inputValue)) {
-        clearInputValue();
-      } else {
-        setInputValue(inputValue);
-      }
-
-      if (inputValue && !isOpen) {
-        handleMenuChange(true);
-      } else if (!inputValue && isOpen) {
-        handleMenuChange(false);
-      }
-    },
   });
-
-  console.log({ items });
-
+ 
   function stateReducer(state, actionAndChanges) {
     const { type, props, changes } = actionAndChanges;
     const { highlightedIndex } = changes;
@@ -541,7 +535,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       }
     },
   });
-
+ 
   useEffect(() => {
     if (isOpen && !isMenuOpen) {
       openMenu();
@@ -766,16 +760,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         {normalizedSlug}
         {isOpen ? (
           <ListBox.Menu {...menuProps}>
-            {sortItems(filterItems(items, { itemToString, inputValue }), {
-              selectedItems: {
-                top: controlledSelectedItems,
-                fixed: [],
-                'top-after-reopen': topItems,
-              }[selectionFeedback],
-              itemToString,
-              compareItems,
-              locale,
-            }).map((item, index) => {
+            {sortedItems.map((item, index) => {
               const isChecked =
                 controlledSelectedItems.filter((selected) =>
                   isEqual(selected, item)
