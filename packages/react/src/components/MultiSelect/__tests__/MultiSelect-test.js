@@ -37,6 +37,27 @@ describe('MultiSelect', () => {
       await expect(container).toHaveNoACViolations('MultiSelect');
     });
   });
+  it('does not render items with undefined values', async () => {
+    const items = [{ text: 'joey' }, { text: 'johnny' }, { text: undefined }];
+    const label = 'test-label';
+    render(
+      <MultiSelect
+        id="custom-id"
+        label={label}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+      />
+    );
+
+    const labelNode = screen.getByRole('combobox');
+    await userEvent.click(labelNode);
+
+    expect(screen.getByRole('option', { name: 'joey' })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'johnny' })).toBeInTheDocument();
+    expect(
+      screen.queryByRole('option', { name: 'undefined' })
+    ).not.toBeInTheDocument();
+  });
 
   it('should initially render with a given label', () => {
     const items = generateItems(4, generateGenericItem);
