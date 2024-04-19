@@ -220,6 +220,7 @@ describe('Carbon Components React', () => {
         "TextInput",
         "TextInputSkeleton",
         "Theme",
+        "ThemeCompliment",
         "ThemeContext",
         "Tile",
         "TileAboveTheFoldContent",
