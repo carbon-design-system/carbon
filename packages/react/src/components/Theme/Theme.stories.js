@@ -6,7 +6,7 @@
  */
 
 import './Theme-story.scss';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { VStack } from '../Stack';
@@ -45,27 +45,47 @@ export default {
   },
 };
 
+const ThemeText = ({ before, after }) => {
+  const { theme } = useTheme();
+
+  return (
+    <p>
+      {before} `{theme}` {after}
+    </p>
+  );
+};
+
 export const Default = () => {
   return (
     <>
       <Theme theme="g100">
         <section className="theme-section">
-          <p>g100 theme</p>
+          <ThemeText before="Theme" after="selected" />
         </section>
       </Theme>
       <Theme theme="g90">
         <section className="theme-section">
-          <p>g90 theme</p>
+          <ThemeText before="Theme" after="selected" />
         </section>
       </Theme>
       <Theme theme="g10">
         <section className="theme-section">
-          <p>g10 theme</p>
+          <ThemeText before="Theme" after="selected" />
         </section>
       </Theme>
       <Theme theme="white">
         <section className="theme-section">
-          <p>white theme</p>
+          <ThemeText before="Theme" after="selected" />
+        </section>
+      </Theme>
+      <Theme theme="system">
+        <section className="theme-section">
+          <ThemeText before="Theme" after="based on system settings" />
+        </section>
+      </Theme>
+      <Theme theme="system" themeSystemLight="g10" themeSystemDark="g100">
+        <section className="theme-section">
+          <ThemeText before="Theme" after="based on system settings" />
         </section>
       </Theme>
     </>
@@ -73,16 +93,27 @@ export const Default = () => {
 };
 
 export const UseTheme = () => {
-  function Example() {
+  const Example = ({ after }) => {
     const { theme } = useTheme();
-    return <div className="theme-section">The current theme is: {theme}</div>;
-  }
+
+    return (
+      <div className="theme-section">
+        The current theme is: `{theme}` {after}
+      </div>
+    );
+  };
 
   return (
     <div>
       <Example />
       <Theme theme="g100">
         <Example />
+      </Theme>
+      <Theme theme="system">
+        <Example after="based on system settings" />
+      </Theme>
+      <Theme theme="system" themeSystemLight="g10" themeSystemDark="g100">
+        <Example after="based on system settings" />
       </Theme>
     </div>
   );
@@ -113,7 +144,7 @@ const PlaygroundStory = (args) => {
   return (
     <Theme {...args}>
       <section className="theme-section">
-        <p>{args.theme} theme</p>
+        <ThemeText />
       </section>
     </Theme>
   );
