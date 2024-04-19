@@ -2061,7 +2061,7 @@ __metadata:
     "@carbon/test-utils": "npm:^10.30.0"
     "@carbon/themes": "npm:^11.34.0"
     "@floating-ui/react": "npm:^0.26.0"
-    "@ibm/telemetry-js": "npm:^1.2.1"
+    "@ibm/telemetry-js": "npm:^1.4.0"
     "@rollup/plugin-babel": "npm:^6.0.0"
     "@rollup/plugin-commonjs": "npm:^25.0.0"
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
@@ -3234,12 +3234,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibm/telemetry-js@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@ibm/telemetry-js@npm:1.2.1"
+"@ibm/telemetry-js@npm:^1.2.1, @ibm/telemetry-js@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@ibm/telemetry-js@npm:1.4.0"
   bin:
     ibmtelemetry: dist/collect.js
-  checksum: 10/672a116f050f89160015c370f49ce1b7478f21d2686252df3456d62f41a4c4f170ed345a6454c1de3005e03397492ed3aee8d98cf7b5cf27d13b054306dcc21b
+  checksum: 10/a6e7f56a90983967150768ed39f2765297717feba18e3ff15b6086197577c488895a45739b9a6f72830927ee0220cecfac1e3a9ad7e5e0806cc80af0864168cd
   languageName: node
   linkType: hard
 
