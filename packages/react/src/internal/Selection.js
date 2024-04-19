@@ -52,11 +52,12 @@ export function useSelection({
 
   const onItemChange = useCallback(
     (item) => {
+      const isAllSelected = selectedItems.find(item => item.id === 'select-all-option');
       if (disabled) {
         return;
       }
       //select all option
-      if(item && item.id === 'select-all-option') {
+      if(item && item.id === 'select-all-option' && !isAllSelected) {
         setSelectedItems(itemsWithSelectAll.filter(item => !item.disabled));
         return;
       }
@@ -67,10 +68,15 @@ export function useSelection({
           selectedIndex = index;
         }
       });
+      if(isAllSelected && item.id ==="select-all-option"){
+        setSelectedItems([]);
+        return;
+      }
       if (selectedIndex === undefined) {
         setSelectedItems((selectedItems) => selectedItems.concat(item));
         return;
       }
+      
       setSelectedItems((selectedItems) =>
         removeAtIndex(selectedItems, selectedIndex)
       );
