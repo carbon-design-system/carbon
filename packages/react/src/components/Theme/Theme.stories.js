@@ -144,7 +144,7 @@ const PlaygroundStory = (args) => {
   return (
     <Theme {...args}>
       <section className="theme-section">
-        <ThemeText />
+        <ThemeText before="Theme" />
       </section>
     </Theme>
   );
