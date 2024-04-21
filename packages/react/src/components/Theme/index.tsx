@@ -17,7 +17,7 @@ import React, {
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import { LayerContext } from '../Layer/LayerContext';
-import { usePrefersDarkScheme } from '../../internal/usePrefersDarkScheme';
+import { useMatchMedia } from '../../internal/useMatchMedia';
 
 type themesType = 'white' | 'g10' | 'g90' | 'g100';
 interface GlobalThemeProps {
@@ -52,7 +52,7 @@ export const GlobalTheme = React.forwardRef(function GlobalTheme(
   }: PropsWithChildren<GlobalThemeProps>,
   ref: React.Ref<unknown>
 ) {
-  const prefersDarkScheme = usePrefersDarkScheme();
+  const prefersDarkScheme = useMatchMedia('(prefers-color-scheme: dark)');
 
   const value = useMemo(() => {
     if (theme === 'system') {
@@ -141,7 +141,7 @@ export function Theme<E extends ElementType = 'div'>({
   themeSystemLight = 'white',
   ...rest
 }: ThemeProps<E>) {
-  const prefersDarkScheme = usePrefersDarkScheme();
+  const prefersDarkScheme = useMatchMedia('(prefers-color-scheme: dark)');
   const prefix = usePrefix();
   const [actualTheme, setActualTheme] = useState('white');
   const [actualCompliment, setActualCompliment] = useState(
