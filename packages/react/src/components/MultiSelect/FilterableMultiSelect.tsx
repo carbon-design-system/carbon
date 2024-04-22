@@ -342,16 +342,19 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     setPrevOpen(open);
   }
 
-  const sortedItems = sortItems(filterItems(items, { itemToString, inputValue }), {
-    selectedItems: {
-      top: controlledSelectedItems,
-      fixed: [],
-      'top-after-reopen': topItems,
-    }[selectionFeedback],
-    itemToString,
-    compareItems,
-    locale,
-  })
+  const sortedItems = sortItems(
+    filterItems(items, { itemToString, inputValue }),
+    {
+      selectedItems: {
+        top: controlledSelectedItems,
+        fixed: [],
+        'top-after-reopen': topItems,
+      }[selectionFeedback],
+      itemToString,
+      compareItems,
+      locale,
+    }
+  );
 
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
@@ -441,7 +444,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       return (item as any).disabled;
     },
   });
- 
+
   function stateReducer(state, actionAndChanges) {
     const { type, props, changes } = actionAndChanges;
     const { highlightedIndex } = changes;
@@ -454,14 +457,12 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       case InputKeyDownEnter:
         if (changes.selectedItem) {
           onItemChange(changes.selectedItem);
-          setInputValue('');
         }
         setHighlightedIndex(changes.selectedItem);
         return { ...changes, highlightedIndex: state.highlightedIndex };
       case ItemClick:
         if (changes.selectedItem) {
           onItemChange(changes.selectedItem);
-          setInputValue('');
         }
         setHighlightedIndex(changes.selectedItem);
         return changes;
@@ -476,7 +477,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         }
         return changes;
       case InputChange:
+        if (onInputValueChange) {
+          onInputValueChange(changes.inputValue);
+        }
         setInputValue(changes.inputValue ?? '');
+        setIsOpen(true);
         return changes;
 
       case InputClick:
@@ -535,7 +540,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       }
     },
   });
- 
+
   useEffect(() => {
     if (isOpen && !isMenuOpen) {
       openMenu();

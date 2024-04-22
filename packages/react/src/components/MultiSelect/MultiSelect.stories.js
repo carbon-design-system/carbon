@@ -109,14 +109,6 @@ const items = [
   },
   {
     id: 'downshift-1-item-5',
-    text: 'An example option that is really long to show what should be done to handle long text',
-  },
-  {
-    id: 'downshift-1-item-6',
-    text: 'An example option that is really long to show what should be done to handle long text',
-  },
-  {
-    id: 'downshift-1-item-7',
     text: 'Option 5',
   },
 ];
