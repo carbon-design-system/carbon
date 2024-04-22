@@ -188,7 +188,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     size = 'md',
     showPasswordLabel = 'Show password',
     tooltipPosition = 'bottom',
-    tooltipAlignment = 'center',
+    tooltipAlignment = 'end',
     type = 'password',
     warn = false,
     warnText,
