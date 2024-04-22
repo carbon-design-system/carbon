@@ -641,6 +641,7 @@ const MultiSelect = React.forwardRef(
       selectedItems.map((item) => (item as selectedItemType).text);
 
     const selectedItemsWithoutSelectAll = selectedItems.filter((item: any) => item.id !== "select-all-option");
+    console.log(selectedItems);
     return (
       <div className={wrapperClasses}>
         <label className={titleClasses} {...getLabelProps()}>

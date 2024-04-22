@@ -57,7 +57,12 @@ export function useSelection({
         return;
       }
       //select all option
+      const disabledItems = itemsWithSelectAll.filter(item => item.disabled);
       if(item && item.id === 'select-all-option' && !isAllSelected) {
+        setSelectedItems(itemsWithSelectAll.filter(item => !item.disabled));
+        return;
+      }
+      if(!isAllSelected && itemsWithSelectAll.length-1 === (selectedItems.length + disabledItems.length) ){
         setSelectedItems(itemsWithSelectAll.filter(item => !item.disabled));
         return;
       }
@@ -77,9 +82,11 @@ export function useSelection({
         return;
       }
       
-      setSelectedItems((selectedItems) =>
-        removeAtIndex(selectedItems, selectedIndex)
-      );
+    setSelectedItems((selectedItems) => {
+      let updatedItems = removeAtIndex(selectedItems, selectedIndex);
+      updatedItems = removeAtIndex(updatedItems, updatedItems.findIndex(item => item.id === 'select-all-option'));
+      return updatedItems;
+    });
     },
     [disabled, selectedItems]
   );
