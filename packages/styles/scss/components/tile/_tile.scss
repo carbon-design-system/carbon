@@ -395,6 +395,13 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     > .#{$prefix}--slug {
     inset-inline-end: $spacing-05;
     transition: inset-inline-end $duration-fast-02 motion(standard, productive);
+
+    @if (
+      enabled('enable-v12-tile-radio-icons') or
+        $enable-experimental-tile-contrast
+    ) {
+      inset-inline-end: $spacing-08;
+    }
   }
 
   .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected

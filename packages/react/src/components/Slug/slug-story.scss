@@ -180,6 +180,9 @@
   height: 200px;
 }
 
-.slug-experimental-selectable-tile-container {
-  @include tile.tile($enable-v12-tile-radio-icons: true);
+.slug-experimental-radio-tile-container {
+  @include tile.tile(
+    $enable-experimental-tile-contrast: true,
+    $enable-v12-tile-radio-icons: true
+  );
 }
