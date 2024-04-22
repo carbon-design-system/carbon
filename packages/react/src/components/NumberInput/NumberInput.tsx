@@ -238,6 +238,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       if (defaultValue !== undefined) {
         return defaultValue;
       }
+      if (allowEmpty) {
+        return '';
+      }
       return 0;
     });
     const [prevControlledValue, setPrevControlledValue] =
@@ -306,7 +309,10 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
 
       const state = {
-        value: Number(event.target.value),
+        value:
+          allowEmpty && event.target.value === ''
+            ? ''
+            : Number(event.target.value),
         direction: value < event.target.value ? 'up' : 'down',
       };
       setValue(state.value);
@@ -344,7 +350,10 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           : inputRef.current.stepDown();
 
         const state = {
-          value: Number(inputRef.current.value),
+          value:
+            allowEmpty && inputRef.current.value === ''
+              ? ''
+              : Number(inputRef.current.value),
           direction: direction,
         };
         setValue(state.value);
