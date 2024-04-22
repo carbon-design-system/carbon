@@ -2991,12 +2991,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibm/telemetry-js@npm:^1.2.1, @ibm/telemetry-js@npm:^1.4.0":
+"@ibm/telemetry-js@npm:^1.2.1":
   version: 1.4.0
   resolution: "@ibm/telemetry-js@npm:1.4.0"
   bin:
     ibmtelemetry: dist/collect.js
   checksum: d847cd4e73a54dd5c0bcbdc5607a360a7911aee421e28102087b8d845eb54c707209dea2788eb9705ba847549df5d309fa36f71f2ecec260ea9b7c1a6ae7de0b
+  languageName: node
+  linkType: hard
+
+"@ibm/telemetry-js@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "@ibm/telemetry-js@npm:1.5.0"
+  bin:
+    ibmtelemetry: dist/collect.js
+  checksum: 7498187a89ad49936233ce933c2cabbf0c437c8c95ac4eae90415d600cfe9d1b2e1e7c5266529d836d1d7fae77932a0010a4863a171720531b52df904dd8b7d4
   languageName: node
   linkType: hard
 
@@ -11546,7 +11555,7 @@ __metadata:
     "@cypress/react": ^5.11.0
     "@cypress/webpack-dev-server": ^1.7.0
     "@cypress/webpack-preprocessor": ^5.11.0
-    "@ibm/telemetry-js": ^1.4.0
+    "@ibm/telemetry-js": ^1.5.0
     "@percy/cypress": ^3.1.1
     "@percy/storybook": ^4.1.0
     "@rollup/plugin-babel": ^5.3.0
