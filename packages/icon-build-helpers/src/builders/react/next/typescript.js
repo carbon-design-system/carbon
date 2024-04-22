@@ -78,7 +78,7 @@ async function writeIndex(buckets, outDir) {
     templates.banner +
     '\n' +
     "export { default as Icon } from './Icon';\n" +
-    "export { CarbonIconProps, CarbonIconType } from './CarbonIcon';\n" +
+    "export type { CarbonIconProps, CarbonIconType } from './CarbonIcon';\n" +
     bucketModules.map((path) => "export * from './" + path + "';").join('\n') +
     '\n';
   await fs.writeFile(path.resolve(outDir, 'index.d.ts'), indexContent);

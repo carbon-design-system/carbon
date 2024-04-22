@@ -93,6 +93,17 @@
     @include focus-outline('outline');
   }
 
+  .#{$prefix}--multi-select.#{$prefix}--list-box--expanded
+    .#{$prefix}--list-box__field--wrapper:has(
+      button[aria-activedescendant]:not([aria-activedescendant=''])
+    ),
+  .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--expanded:has(
+      input[aria-activedescendant]:not([aria-activedescendant=''])
+    ) {
+    outline-offset: convert.to-rem(-1px);
+    outline-width: convert.to-rem(1px);
+  }
+
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--selected
     .#{$prefix}--text-input,
   .#{$prefix}--multi-select.#{$prefix}--multi-select--selected

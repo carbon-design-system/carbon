@@ -29,12 +29,23 @@ interface SideNavMenuItemProps extends HTMLAttributes<HTMLElement> {
    * `aria-current="page"`, as well.
    */
   isActive?: boolean;
+
+  /**
+   * Optionally provide an href for the underlying li`
+   */
+  href?: string;
 }
 
 const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
   function SideNavMenuItem(props, ref: ForwardedRef<HTMLElement>) {
     const prefix = usePrefix();
-    const { children, className: customClassName, isActive, ...rest } = props;
+    const {
+      children,
+      className: customClassName,
+      isActive,
+      href,
+      ...rest
+    } = props;
     const className = cx(`${prefix}--side-nav__menu-item`, customClassName);
     const linkClassName = cx({
       [`${prefix}--side-nav__link`]: true,
@@ -43,7 +54,11 @@ const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
 
     return (
       <li className={className}>
-        <Link {...rest} className={linkClassName} ref={ref as Ref<ElementType>}>
+        <Link
+          href={href}
+          {...rest}
+          className={linkClassName}
+          ref={ref as Ref<ElementType>}>
           <SideNavLinkText>{children}</SideNavLinkText>
         </Link>
       </li>
@@ -62,6 +77,11 @@ SideNavMenuItem.propTypes = {
    * Provide an optional class to be applied to the containing node
    */
   className: PropTypes.string,
+
+  /**
+   * Optionally provide an href for the underlying li`
+   */
+  href: PropTypes.string,
 
   /**
    * Optionally specify whether the link is "active". An active link is one that
