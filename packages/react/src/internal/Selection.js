@@ -30,6 +30,7 @@ export function useSelection({
   onChange,
   initialSelectedItems = [],
   selectedItems: controlledItems,
+  itemsWithSelectAll
 }) {
   const isMounted = useRef(false);
   const savedOnChange = useRef(onChange);
@@ -51,22 +52,41 @@ export function useSelection({
 
   const onItemChange = useCallback(
     (item) => {
+      const isAllSelected = selectedItems.find(item => item.id === 'select-all-option');
       if (disabled) {
         return;
       }
+      //select all option
+      const disabledItems = itemsWithSelectAll.filter(item => item.disabled);
+      if(item && item.id === 'select-all-option' && !isAllSelected) {
+        setSelectedItems(itemsWithSelectAll.filter(item => !item.disabled));
+        return;
+      }
+      if(!isAllSelected && itemsWithSelectAll.length-1 === (selectedItems.length + disabledItems.length) ){
+        setSelectedItems(itemsWithSelectAll.filter(item => !item.disabled));
+        return;
+      }
+
       let selectedIndex;
       selectedItems.forEach((selectedItem, index) => {
         if (isEqual(selectedItem, item)) {
           selectedIndex = index;
         }
       });
+      if(isAllSelected && item.id ==="select-all-option"){
+        setSelectedItems([]);
+        return;
+      }
       if (selectedIndex === undefined) {
         setSelectedItems((selectedItems) => selectedItems.concat(item));
         return;
       }
-      setSelectedItems((selectedItems) =>
-        removeAtIndex(selectedItems, selectedIndex)
-      );
+      
+    setSelectedItems((selectedItems) => {
+      let updatedItems = removeAtIndex(selectedItems, selectedIndex);
+      updatedItems = removeAtIndex(updatedItems, updatedItems.findIndex(item => item.id === 'select-all-option'));
+      return updatedItems;
+    });
     },
     [disabled, selectedItems]
   );

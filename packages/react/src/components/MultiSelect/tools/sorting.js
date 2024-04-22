@@ -32,6 +32,9 @@ export const defaultSortItems = (
     const hasItemB = selectedItems.includes(itemB);
 
     // Prefer whichever item is in the `selectedItems` array first
+    if(itemA.id === 'select-all-option' || itemB.id === 'select-all-option') {
+      return 1
+    }
     if (hasItemA && !hasItemB) {
       return -1;
     }
