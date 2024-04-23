@@ -1515,7 +1515,7 @@ class Slider extends PureComponent<SliderProps> {
                     hasTooltip={hideTextInput}
                     className={lowerThumbWrapperClasses}
                     label={`${value}`}
-                    align={twoHandles ? 'top-right' : 'top'}
+                    align="top"
                     {...lowerThumbWrapperProps}>
                     <div
                       className={lowerThumbClasses}
@@ -1549,7 +1549,7 @@ class Slider extends PureComponent<SliderProps> {
                       hasTooltip={hideTextInput}
                       className={upperThumbWrapperClasses}
                       label={`${valueUpper}`}
-                      align="top-left"
+                      align="top"
                       {...upperThumbWrapperProps}>
                       <div
                         className={upperThumbClasses}
