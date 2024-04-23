@@ -8,12 +8,12 @@ major versions of the Carbon Design System.
 | `main`  | unstable    | unstable        | unstable     | unstable          | unstable    |
 | v9      | End of life | 2018-06-04      | 2018-06-04   | 2019-03-29        | 2022-03-31  |
 | v10     | Maintenance | 2019-03-29      | 2019-03-29   | 2022-03-31        | 2024-09-30  |
-| v11     | Active      | 2021-08-06      | 2022-03-31   | 2025-03-31        | 2027-03-31  |
-| v12     | Unreleased  | 2024-08-01      | 2025-03-31   | 2027-03-31        | 2029-03-31  |
+| v11     | Active      | 2021-08-06      | 2022-03-31   | 2026-03-31        | 2028-03-31  |
+| v12     | Unreleased  | 2025-08-01      | 2026-03-31   | 2028-03-31        | 2029-03-31  |
 
 > Dates are subject to change
 
-![schedule](https://github.com/carbon-design-system/carbon-website/assets/3360588/02d05990-200c-4380-8acd-82dfbc27483d)
+![schedule](https://github.com/carbon-design-system/carbon/assets/3360588/b8014b83-a743-4ace-83a3-ff1c96eef194)
 
 ## Release phases
 
