@@ -3102,7 +3102,7 @@ Map {
     "Provider": "React.Provider",
   },
   "ExpandableSearch" => Object {
-    "displayName": "ExpandableSearch",
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "autoComplete": Object {
         "type": "string",
@@ -3198,6 +3198,7 @@ Map {
         "type": "oneOfType",
       },
     },
+    "render": [Function],
   },
   "ExpandableTile" => Object {
     "$$typeof": Symbol(react.forward_ref),
