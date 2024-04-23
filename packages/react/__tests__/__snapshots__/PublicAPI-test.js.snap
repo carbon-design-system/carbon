@@ -1485,6 +1485,7 @@ Map {
       "selectorsFloatingMenus": Object {
         "args": Array [
           Object {
+            "isRequired": true,
             "type": "string",
           },
         ],
@@ -7253,6 +7254,9 @@ Map {
         "type": "node",
       },
       "className": Object {
+        "type": "string",
+      },
+      "href": Object {
         "type": "string",
       },
       "isActive": Object {
