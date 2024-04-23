@@ -367,7 +367,7 @@ const MultiSelect = React.forwardRef(
 
     const selectAllOption = {
       id: 'select-all-option',
-      text: 'All'
+      text: 'All',
     };
 
     const itemsWithSelectAll = [selectAllOption, ...items];
@@ -381,7 +381,7 @@ const MultiSelect = React.forwardRef(
       initialSelectedItems,
       onChange,
       selectedItems: selected,
-      itemsWithSelectAll
+      itemsWithSelectAll,
     });
 
     const selectProps: UseSelectProps<ItemType> = {
@@ -640,8 +640,9 @@ const MultiSelect = React.forwardRef(
       selectedItems.length > 0 &&
       selectedItems.map((item) => (item as selectedItemType).text);
 
-    const selectedItemsWithoutSelectAll = selectedItems.filter((item: any) => item.id !== "select-all-option");
-    console.log(selectedItems);
+    const selectedItemsWithoutSelectAll = selectedItems.filter(
+      (item: any) => item.id !== 'select-all-option'
+    );
     return (
       <div className={wrapperClasses}>
         <label className={titleClasses} {...getLabelProps()}>
@@ -714,46 +715,47 @@ const MultiSelect = React.forwardRef(
           <ListBox.Menu {...getMenuProps()}>
             {isOpen &&
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              sortItems!(itemsWithSelectAll, sortOptions as SortItemsOptions<ItemType>).map(
-                (item, index) => {
-                  const isChecked =
-                    selectedItems.filter((selected) => isEqual(selected, item))
-                      .length > 0;
+              sortItems!(
+                itemsWithSelectAll,
+                sortOptions as SortItemsOptions<ItemType>
+              ).map((item, index) => {
+                const isChecked =
+                  selectedItems.filter((selected) => isEqual(selected, item))
+                    .length > 0;
 
-                  const itemProps = getItemProps({
-                    item,
-                    // we don't want Downshift to set aria-selected for us
-                    // we also don't want to set 'false' for reader verbosity's sake
-                    ['aria-selected']: isChecked,
-                  });
-                  const itemText = itemToString(item);
+                const itemProps = getItemProps({
+                  item,
+                  // we don't want Downshift to set aria-selected for us
+                  // we also don't want to set 'false' for reader verbosity's sake
+                  ['aria-selected']: isChecked,
+                });
+                const itemText = itemToString(item);
 
-                  return (
-                    <ListBox.MenuItem
-                      key={itemProps.id}
-                      isActive={isChecked}
-                      aria-label={itemText}
-                      isHighlighted={highlightedIndex === index}
-                      title={itemText}
-                      disabled={itemProps['aria-disabled']}
-                      {...itemProps}>
-                      <div className={`${prefix}--checkbox-wrapper`}>
-                        <span
-                          title={useTitleInItem ? itemText : undefined}
-                          className={`${prefix}--checkbox-label`}
-                          data-contained-checkbox-state={isChecked}
-                          id={`${itemProps.id}__checkbox`}>
-                          {itemToElement ? (
-                            <ItemToElement key={itemProps.id} {...item} />
-                          ) : (
-                            itemText
-                          )}
-                        </span>
-                      </div>
-                    </ListBox.MenuItem>
-                  );
-                }
-              )}
+                return (
+                  <ListBox.MenuItem
+                    key={itemProps.id}
+                    isActive={isChecked}
+                    aria-label={itemText}
+                    isHighlighted={highlightedIndex === index}
+                    title={itemText}
+                    disabled={itemProps['aria-disabled']}
+                    {...itemProps}>
+                    <div className={`${prefix}--checkbox-wrapper`}>
+                      <span
+                        title={useTitleInItem ? itemText : undefined}
+                        className={`${prefix}--checkbox-label`}
+                        data-contained-checkbox-state={isChecked}
+                        id={`${itemProps.id}__checkbox`}>
+                        {itemToElement ? (
+                          <ItemToElement key={itemProps.id} {...item} />
+                        ) : (
+                          itemText
+                        )}
+                      </span>
+                    </div>
+                  </ListBox.MenuItem>
+                );
+              })}
           </ListBox.Menu>
           {itemsCleared && (
             <span aria-live="assertive" aria-label={clearAnnouncement} />
