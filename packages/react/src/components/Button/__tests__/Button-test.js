@@ -80,6 +80,11 @@ describe('Button', () => {
     );
   });
 
+  it('should not error on tooltipAlignment even when hasIconOnly=false', () => {
+    render(<Button tooltipAlignment="start" />);
+    expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
   it.each([
     ['primary', 'cds--btn'],
     ['secondary', 'cds--btn--secondary'],

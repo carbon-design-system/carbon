@@ -74,7 +74,7 @@ export interface RadioButtonProps
   onChange?: (
     value: string | number,
     name: string | undefined,
-    event: any
+    event: React.ChangeEvent<HTMLInputElement>
   ) => void;
 
   /**
