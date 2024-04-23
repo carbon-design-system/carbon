@@ -15,7 +15,13 @@ import {
 } from 'downshift';
 import isEqual from 'lodash.isequal';
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { ForwardedRef, useContext, useRef, useState } from 'react';
+import React, {
+  ForwardedRef,
+  useContext,
+  useRef,
+  useState,
+  useMemo,
+} from 'react';
 import ListBox, {
   ListBoxSize,
   ListBoxType,
@@ -45,9 +51,11 @@ const {
   ToggleButtonKeyDownEscape,
   ToggleButtonKeyDownSpaceButton,
   ItemMouseMove,
+  MenuMouseLeave,
   ToggleButtonClick,
-  ToggleButtonKeyDownHome,
-  ToggleButtonKeyDownEnd,
+  ToggleButtonKeyDownPageDown,
+  ToggleButtonKeyDownPageUp,
+  FunctionSetHighlightedIndex,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
 };
@@ -371,14 +379,28 @@ const MultiSelect = React.forwardRef(
       selectedItems: selected,
     });
 
+    // Filter out items with an object having undefined values
+    const filteredItems = useMemo(() => {
+      return items.filter((item) => {
+        if (typeof item === 'object' && item !== null) {
+          for (const key in item) {
+            if (Object.hasOwn(item, key) && item[key] === undefined) {
+              return false; // Return false if any property has an undefined value
+            }
+          }
+        }
+        return true; // Return true if item is not an object with undefined values
+      });
+    }, [items]);
+
     const selectProps: UseSelectProps<ItemType> = {
       ...downshiftProps,
       stateReducer,
       isOpen,
-      itemToString: (items) => {
+      itemToString: (filteredItems) => {
         return (
-          (Array.isArray(items) &&
-            items
+          (Array.isArray(filteredItems) &&
+            filteredItems
               .map(function (item) {
                 return itemToString(item);
               })
@@ -387,7 +409,7 @@ const MultiSelect = React.forwardRef(
         );
       },
       selectedItem: controlledSelectedItems,
-      items,
+      items: filteredItems,
       isItemDisabled(item, _index) {
         return (item as any).disabled;
       },
@@ -400,6 +422,7 @@ const MultiSelect = React.forwardRef(
       getItemProps,
       selectedItem,
       highlightedIndex,
+      setHighlightedIndex,
     } = useSelect<ItemType>(selectProps);
 
     const toggleButtonProps = getToggleButtonProps({
@@ -426,6 +449,7 @@ const MultiSelect = React.forwardRef(
               match(e, keys.Enter)) &&
             !isOpen
           ) {
+            setHighlightedIndex(0);
             setItemsCleared(false);
             setIsOpenWrapper(true);
           }
@@ -522,7 +546,6 @@ const MultiSelect = React.forwardRef(
       }
 
       switch (type) {
-        case ItemClick:
         case ToggleButtonKeyDownSpaceButton:
         case ToggleButtonKeyDownEnter:
           if (changes.selectedItem === undefined) {
@@ -539,11 +562,29 @@ const MultiSelect = React.forwardRef(
           break;
         case ToggleButtonClick:
           setIsOpenWrapper(changes.isOpen || false);
-          break;
+          return { ...changes, highlightedIndex: 0 };
+        case ItemClick:
+          setHighlightedIndex(changes.selectedItem);
+          onItemChange(changes.selectedItem);
+          return { ...changes, highlightedIndex: state.highlightedIndex };
+        case MenuMouseLeave:
+          return { ...changes, highlightedIndex: state.highlightedIndex };
+        case FunctionSetHighlightedIndex:
+          if (!isOpen) {
+            return {
+              ...changes,
+              highlightedIndex: 0,
+            };
+          } else {
+            return {
+              ...changes,
+              highlightedIndex: props.items.indexOf(highlightedIndex),
+            };
+          }
         case ToggleButtonKeyDownArrowDown:
         case ToggleButtonKeyDownArrowUp:
-        case ToggleButtonKeyDownHome:
-        case ToggleButtonKeyDownEnd:
+        case ToggleButtonKeyDownPageDown:
+        case ToggleButtonKeyDownPageUp:
           if (highlightedIndex > -1) {
             const itemArray = document.querySelectorAll(
               `li.${prefix}--list-box__menu-item[role="option"]`
@@ -606,7 +647,7 @@ const MultiSelect = React.forwardRef(
 
     const itemsSelectedText =
       selectedItems.length > 0 &&
-      selectedItems.map((item) => (item as selectedItemType).text);
+      selectedItems.map((item) => (item as selectedItemType)?.text);
 
     return (
       <div className={wrapperClasses}>
@@ -680,46 +721,47 @@ const MultiSelect = React.forwardRef(
           <ListBox.Menu {...getMenuProps()}>
             {isOpen &&
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              sortItems!(items, sortOptions as SortItemsOptions<ItemType>).map(
-                (item, index) => {
-                  const isChecked =
-                    selectedItems.filter((selected) => isEqual(selected, item))
-                      .length > 0;
+              sortItems!(
+                filteredItems,
+                sortOptions as SortItemsOptions<ItemType>
+              ).map((item, index) => {
+                const isChecked =
+                  selectedItems.filter((selected) => isEqual(selected, item))
+                    .length > 0;
 
-                  const itemProps = getItemProps({
-                    item,
-                    // we don't want Downshift to set aria-selected for us
-                    // we also don't want to set 'false' for reader verbosity's sake
-                    ['aria-selected']: isChecked,
-                  });
-                  const itemText = itemToString(item);
+                const itemProps = getItemProps({
+                  item,
+                  // we don't want Downshift to set aria-selected for us
+                  // we also don't want to set 'false' for reader verbosity's sake
+                  ['aria-selected']: isChecked,
+                });
+                const itemText = itemToString(item);
 
-                  return (
-                    <ListBox.MenuItem
-                      key={itemProps.id}
-                      isActive={isChecked}
-                      aria-label={itemText}
-                      isHighlighted={highlightedIndex === index}
-                      title={itemText}
-                      disabled={itemProps['aria-disabled']}
-                      {...itemProps}>
-                      <div className={`${prefix}--checkbox-wrapper`}>
-                        <span
-                          title={useTitleInItem ? itemText : undefined}
-                          className={`${prefix}--checkbox-label`}
-                          data-contained-checkbox-state={isChecked}
-                          id={`${itemProps.id}__checkbox`}>
-                          {itemToElement ? (
-                            <ItemToElement key={itemProps.id} {...item} />
-                          ) : (
-                            itemText
-                          )}
-                        </span>
-                      </div>
-                    </ListBox.MenuItem>
-                  );
-                }
-              )}
+                return (
+                  <ListBox.MenuItem
+                    key={itemProps.id}
+                    isActive={isChecked}
+                    aria-label={itemText}
+                    isHighlighted={highlightedIndex === index}
+                    title={itemText}
+                    disabled={itemProps['aria-disabled']}
+                    {...itemProps}>
+                    <div className={`${prefix}--checkbox-wrapper`}>
+                      <span
+                        title={useTitleInItem ? itemText : undefined}
+                        className={`${prefix}--checkbox-label`}
+                        data-contained-checkbox-state={isChecked}
+                        id={`${itemProps.id}__checkbox`}>
+                        {itemToElement ? (
+                          <ItemToElement key={itemProps.id} {...item} />
+                        ) : (
+                          itemText
+                        )}
+                      </span>
+                    </div>
+                  </ListBox.MenuItem>
+                );
+              })}
           </ListBox.Menu>
           {itemsCleared && (
             <span aria-live="assertive" aria-label={clearAnnouncement} />

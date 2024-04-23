@@ -118,6 +118,7 @@ categories:
           - bring-to-front
           - button--centered
           - button--flush-left
+          - circle--outline
           - circle--solid
           - color-palette
           - color-switch
@@ -128,6 +129,8 @@ categories:
           - crop
           - cut
           - cut-out
+          - diamond--outline
+          - diamond--solid
           - distribute--horizontal-center
           - distribute--horizontal-left
           - distribute--horizontal-right
@@ -148,6 +151,10 @@ categories:
           - group-objects
           - group-objects--new
           - group-objects--save
+          - hexagon--outline
+          - hexagon--solid
+          - hexagon--vertical--outline
+          - hexagon--vertical--solid
           - horizontal-view
           - image
           - image--copy
@@ -174,6 +181,14 @@ categories:
           - paragraph
           - pen
           - pen--fountain
+          - pentagon--down--outline
+          - pentagon--down--solid
+          - pentagon--left--outline
+          - pentagon--left--solid
+          - pentagon--outline
+          - pentagon--right--outline
+          - pentagon--right--solid
+          - pentagon--solid
           - percentage
           - percentage--filled
           - quotes
@@ -201,6 +216,8 @@ categories:
           - shape--unite
           - spell-check
           - spray-paint
+          - square--outline
+          - square--solid
           - text--align--center
           - text--align--left
           - text--align--justify
@@ -236,6 +253,14 @@ categories:
           - text--vertical-alignment
           - text--wrap
           - trash-can
+          - triangle--down--outline
+          - triangle--down--solid
+          - triangle--left--outline
+          - triangle--left--solid
+          - triangle--outline
+          - triangle--right--outline
+          - triangle--right--solid
+          - triangle--solid
           - ungroup-objects
           - unlink
           - unsaved
