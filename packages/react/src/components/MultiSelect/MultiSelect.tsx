@@ -744,7 +744,10 @@ const MultiSelect = React.forwardRef(
                   selectedItems.filter((selected) => isEqual(selected, item))
                     .length > 0;
 
-                    const isIndeterminate = selectedItems.length !== 0 && item.id === 'select-all-option' && !isChecked
+                const isIndeterminate =
+                  selectedItems.length !== 0 &&
+                  item['id'] === 'select-all-option' &&
+                  !isChecked;
 
                 const itemProps = getItemProps({
                   item,
@@ -757,23 +760,27 @@ const MultiSelect = React.forwardRef(
                 return (
                   <ListBox.MenuItem
                     key={itemProps.id}
-                    isActive={isChecked}
+                    isActive={isChecked && item['id'] !== 'select-all-option'}
                     aria-label={itemText}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
                     disabled={itemProps['aria-disabled']}
                     {...itemProps}>
                     <div className={`${prefix}--checkbox-wrapper`}>
-                    <Checkbox 
+                      <Checkbox
                         id={`${itemProps.id}__checkbox`}
-                        labelText={itemToElement ? (
-                          <ItemToElement key={itemProps.id} {...item} />
-                        ) : (
-                          itemText
-                        )}
-                       checked={isChecked}
-                       indeterminate={isIndeterminate}
-                       disabled={disabled}
+                        labelText={
+                          itemToElement ? (
+                            <ItemToElement key={itemProps.id} {...item} />
+                          ) : (
+                            itemText
+                          )
+                        }
+                        checked={isChecked}
+                        title={useTitleInItem ? itemText : undefined}
+                        indeterminate={isIndeterminate}
+                        disabled={disabled}
+                        //  className= {classforSelectAll}
                       />
                     </div>
                   </ListBox.MenuItem>
