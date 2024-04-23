@@ -376,20 +376,6 @@ const MultiSelect = React.forwardRef(
       text: 'All',
     };
 
-    const itemsWithSelectAll = [selectAllOption, ...items];
-
-    const {
-      selectedItems: controlledSelectedItems,
-      onItemChange,
-      clearSelection,
-    } = useSelection({
-      disabled,
-      initialSelectedItems,
-      onChange,
-      selectedItems: selected,
-      itemsWithSelectAll,
-    });
-
     // Filter out items with an object having undefined values
     const filteredItems = useMemo(() => {
       return items.filter((item) => {
@@ -403,6 +389,20 @@ const MultiSelect = React.forwardRef(
         return true; // Return true if item is not an object with undefined values
       });
     }, [items]);
+
+    const itemsWithSelectAll = [selectAllOption, ...filteredItems];
+
+    const {
+      selectedItems: controlledSelectedItems,
+      onItemChange,
+      clearSelection,
+    } = useSelection({
+      disabled,
+      initialSelectedItems,
+      onChange,
+      selectedItems: selected,
+      itemsWithSelectAll,
+    });
 
     const selectProps: UseSelectProps<ItemType> = {
       ...downshiftProps,
