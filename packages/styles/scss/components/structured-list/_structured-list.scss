@@ -264,7 +264,7 @@
     @include high-contrast-mode('icon-fill');
   }
 
-  .#{$prefix}--structured-list-icon {
+  .#{$prefix}--structured-list__icon {
     margin-block-start: $spacing-01;
     vertical-align: top;
   }
