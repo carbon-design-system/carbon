@@ -38,6 +38,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
 import { OnChangeData } from '../Dropdown';
+import Checkbox from '../Checkbox';
 import type { InternationalProps } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 
@@ -743,6 +744,8 @@ const MultiSelect = React.forwardRef(
                   selectedItems.filter((selected) => isEqual(selected, item))
                     .length > 0;
 
+                    const isIndeterminate = selectedItems.length !== 0 && item.id === 'select-all-option' && !isChecked
+
                 const itemProps = getItemProps({
                   item,
                   // we don't want Downshift to set aria-selected for us
@@ -761,17 +764,17 @@ const MultiSelect = React.forwardRef(
                     disabled={itemProps['aria-disabled']}
                     {...itemProps}>
                     <div className={`${prefix}--checkbox-wrapper`}>
-                      <span
-                        title={useTitleInItem ? itemText : undefined}
-                        className={`${prefix}--checkbox-label`}
-                        data-contained-checkbox-state={isChecked}
-                        id={`${itemProps.id}__checkbox`}>
-                        {itemToElement ? (
+                    <Checkbox 
+                        id={`${itemProps.id}__checkbox`}
+                        labelText={itemToElement ? (
                           <ItemToElement key={itemProps.id} {...item} />
                         ) : (
                           itemText
                         )}
-                      </span>
+                       checked={isChecked}
+                       indeterminate={isIndeterminate}
+                       disabled={disabled}
+                      />
                     </div>
                   </ListBox.MenuItem>
                 );
