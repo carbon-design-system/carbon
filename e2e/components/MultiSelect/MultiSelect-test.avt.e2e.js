@@ -116,8 +116,7 @@ test.describe('@avt MultiSelect', () => {
     // Focus on first element by default
     await expect(
       page.getByRole('option', {
-        name: 'All',
-        exact: true,
+        name: 'An example option that is really long to show what should be done to handle long text',
       })
     ).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
@@ -126,68 +125,25 @@ test.describe('@avt MultiSelect', () => {
     await page.keyboard.press('Enter');
     await expect(
       page.getByRole('option', {
-        name: 'All',
-        exact: true,
+        name: 'An example option that is really long to show what should be done to handle long text',
         selected: true,
       })
     ).toBeVisible();
     await page.keyboard.press('Enter');
     await expect(
       page.getByRole('option', {
-        name: 'All',
-        exact: true,
+        name: 'An example option that is really long to show what should be done to handle long text',
         selected: false,
       })
     ).toBeVisible();
     await page.keyboard.press('Space');
     await expect(
       page.getByRole('option', {
-        name: 'All',
-        exact: true,
+        name: 'An example option that is really long to show what should be done to handle long text',
         selected: true,
       })
     ).toBeVisible();
-    await page.keyboard.press('Space');
-    await expect(
-      page.getByRole('option', {
-        name: 'All',
-        exact: true,
-        selected: false,
-      })
-    ).toBeVisible();
-
     // move to second option
-    await page.keyboard.press('ArrowDown');
-    await expect(
-      page.getByRole('option', {
-        name: 'An example option that is really long to show what should be done to handle long text',
-      })
-    ).toHaveClass(
-      'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
-    );
-    // select first option (should select with enter and space)
-    await page.keyboard.press('Enter');
-    await expect(
-      page.getByRole('option', {
-        name: 'An example option that is really long to show what should be done to handle long text',
-        selected: true,
-      })
-    ).toBeVisible();
-    await page.keyboard.press('Enter');
-    await expect(
-      page.getByRole('option', {
-        name: 'An example option that is really long to show what should be done to handle long text',
-        selected: false,
-      })
-    ).toBeVisible();
-    await page.keyboard.press('Space');
-    await expect(
-      page.getByRole('option', {
-        name: 'An example option that is really long to show what should be done to handle long text',
-        selected: true,
-      })
-    ).toBeVisible();
-    // move to third option
     await page.keyboard.press('ArrowDown');
     await expect(
       page.getByRole('option', {
@@ -196,7 +152,7 @@ test.describe('@avt MultiSelect', () => {
     ).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
     );
-    // select third option
+    // select second option
     await page.keyboard.press('Space');
     await expect(
       page.getByRole('option', {
