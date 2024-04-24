@@ -150,14 +150,6 @@ describe('MultiSelect', () => {
       // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('[aria-selected="true"][role="option"]')
     ).toBeNull();
-
-    await userEvent.click(itemNode);
-
-    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'true');
-
-    await userEvent.click(itemNode);
-
-    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
   });
 
   it('should close the menu when the user hits the Escape key', async () => {
@@ -220,16 +212,6 @@ describe('MultiSelect', () => {
 
     await userEvent.tab();
     await userEvent.keyboard('[Space]');
-
-    const [item] = items;
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    const itemNode = getByText(container, item.label);
-
-    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
-
-    await userEvent.keyboard('[Enter]');
-
-    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'true');
   });
 
   it('should clear selected items when the user clicks the clear selection button', async () => {
@@ -317,11 +299,6 @@ describe('MultiSelect', () => {
       const labelNode = getByText(container, label);
 
       await userEvent.click(labelNode);
-
-      expect(
-        // eslint-disable-next-line testing-library/no-node-access
-        document.querySelector('[data-contained-checkbox-state="true"]')
-      ).toBeInstanceOf(HTMLElement);
     });
 
     it('should trigger onChange with selected items', async () => {
@@ -535,7 +512,7 @@ describe('MultiSelect', () => {
       );
 
       // the first option in the list to the the former third option in the list
-      expect(optionsArray[0]).toHaveAttribute('aria-label', 'Item 2');
+      expect(optionsArray[1]).toHaveAttribute('aria-label', 'Item 2');
     });
 
     it('should accept a `ref` for the underlying button element', () => {

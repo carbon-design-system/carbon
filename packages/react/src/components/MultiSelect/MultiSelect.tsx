@@ -421,7 +421,7 @@ const MultiSelect = React.forwardRef(
         );
       },
       selectedItem: controlledSelectedItems,
-      items: itemsWithSelectAll,
+      items: itemsWithSelectAll as ItemType[],
       isItemDisabled(item, _index) {
         return (item as any).disabled;
       },
@@ -737,7 +737,7 @@ const MultiSelect = React.forwardRef(
             {isOpen &&
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               sortItems!(
-                itemsWithSelectAll,
+                itemsWithSelectAll as readonly ItemType[],
                 sortOptions as SortItemsOptions<ItemType>
               ).map((item, index) => {
                 const isChecked =
