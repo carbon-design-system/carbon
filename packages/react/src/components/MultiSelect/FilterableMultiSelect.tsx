@@ -611,6 +611,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     getDropdownProps({
       'aria-controls': isOpen ? menuId : undefined,
       'aria-describedby': helperText ? helperId : undefined,
+      'aria-haspopup': 'listbox',
       // Remove excess aria `aria-labelledby`. HTML <label for>
       // provides this aria information.
       'aria-labelledby': undefined,
