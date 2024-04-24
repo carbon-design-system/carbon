@@ -759,7 +759,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           )}
           <ListBoxTrigger
             {...buttonProps}
-            // @ts-ignore
+            // @ts-expect-error
             isOpen={isOpen}
             translateWithId={translateWithId}
           />
