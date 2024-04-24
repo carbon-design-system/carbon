@@ -1,0 +1,100 @@
+//
+// Copyright IBM Corp. 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@use '@carbon/styles/scss/utilities/convert' as *;
+
+.#{$prefix}--menu-item {
+  display: grid;
+  align-items: center;
+  block-size: 2rem;
+  color: $text-secondary;
+  column-gap: $spacing-03;
+  cursor: pointer;
+  grid-template-columns: var(--child-grid-template-columns, 1fr max-content);
+  padding-inline: $spacing-05;
+  transition: background-color $duration-fast-01 motion(standard, productive);
+  &:focus {
+    @include focus-outline('outline');
+  }
+
+  svg {
+    color: $icon-secondary;
+  }
+}
+
+.#{$prefix}--menu-item:hover {
+  background-color: $layer-hover;
+  color: $text-primary;
+
+  svg {
+    color: $icon-primary;
+  }
+}
+
+$supported-sizes: (
+  'xs': 1.5rem,
+  'sm': 2rem,
+  'md': 2.5rem,
+  'lg': 3rem,
+);
+
+@each $size, $value in $supported-sizes {
+  .#{$prefix}--menu--#{$size} .#{$prefix}--menu-item {
+    block-size: $value;
+  }
+}
+.#{$prefix}--menu-item__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{$prefix}--menu-item__shortcut {
+  display: flex;
+}
+.#{$prefix}--menu-item__icon {
+  display: var(--child-icon-property, none);
+}
+.#{$prefix}--menu-item--disabled {
+  color: $text-disabled;
+  cursor: not-allowed;
+}
+
+.#{$prefix}--menu-item--disabled:hover,
+.#{$prefix}--menu-item--disabled.#{$prefix}--menu-item--danger:hover {
+  background-color: $layer;
+  color: $text-disabled;
+}
+.#{$prefix}--menu-item--danger:focus,
+.#{$prefix}--menu-item--danger:hover {
+  background-color: button-tokens.$button-danger-primary;
+  color: $text-on-color;
+}
+// MenuItemDivider
+
+.#{$prefix}--menu-item-divider {
+  display: block;
+  background-color: $border-subtle;
+  block-size: to-rem(1px);
+  inline-size: 100%;
+  margin-block: $spacing-02;
+}
+.#{$prefix}--menu-item-group > ul,
+.#{$prefix}--menu-item-radio-group > ul {
+  @include component-reset;
+}
+.#{$prefix}--menu-item-group > ul > .#{$prefix}--menu-item {
+  grid-template-columns: var(--child-grid-template-columns, 1fr max-content);
+}
