@@ -24,7 +24,7 @@ import React, {
   type ReactElement,
   type RefAttributes,
   type PropsWithChildren,
-  type PropsWithoutRef,
+  type PropsWithRef,
   type InputHTMLAttributes,
   type MouseEvent,
   type KeyboardEvent,
@@ -53,9 +53,11 @@ const {
   keyDownArrowUp,
   keyDownEscape,
   clickButton,
+  clickItem,
   blurButton,
   changeInput,
   blurInput,
+  unknown,
 } = Downshift.stateChangeTypes;
 
 const defaultItemToString = <ItemType,>(item: ItemType | null) => {
@@ -450,13 +452,14 @@ const ComboBox = forwardRef(
       switch (type) {
         case keyDownArrowDown:
         case keyDownArrowUp:
-          setHighlightedIndex(changes.highlightedIndex);
+          if (changes.isOpen) {
+            updateHighlightedIndex(getHighlightedIndex(changes));
+          } else {
+            setHighlightedIndex(changes.highlightedIndex);
+          }
           break;
         case blurButton:
         case keyDownEscape:
-          setHighlightedIndex(changes.highlightedIndex);
-          break;
-        case clickButton:
           setHighlightedIndex(changes.highlightedIndex);
           break;
         case changeInput:
@@ -469,6 +472,11 @@ const ComboBox = forwardRef(
               onChange({ selectedItem, inputValue });
             }
           }
+          break;
+        case clickButton:
+        case clickItem:
+        case unknown:
+          setHighlightedIndex(getHighlightedIndex(changes));
           break;
       }
     };
@@ -500,9 +508,9 @@ const ComboBox = forwardRef(
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
-    const comboBoxHelperId = !helperText
-      ? undefined
-      : `combobox-helper-text-${comboBoxInstanceId}`;
+    const helperTextId = `combobox-helper-text-${comboBoxInstanceId}`;
+    const warnTextId = `combobox-warn-text-${comboBoxInstanceId}`;
+    const invalidTextId = `combobox-invalid-text-${comboBoxInstanceId}`;
     const helperClasses = cx(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
@@ -666,6 +674,15 @@ const ComboBox = forwardRef(
               }
             : {};
 
+          // The input should be described by the appropriate message text id
+          // when both the message is supplied *and* when the component is in
+          // the matching state (invalid, warn, etc).
+          const ariaDescribedBy =
+            (invalid && invalidText && invalidTextId) ||
+            (warn && warnText && warnTextId) ||
+            (helperText && !isFluid && helperTextId) ||
+            undefined;
+
           return (
             <div className={wrapperClasses}>
               {titleText && (
@@ -680,11 +697,13 @@ const ComboBox = forwardRef(
                 disabled={disabled}
                 invalid={invalid}
                 invalidText={invalidText}
+                invalidTextId={invalidTextId}
                 isOpen={isOpen}
                 light={light}
                 size={size}
                 warn={warn}
-                warnText={warnText}>
+                warnText={warnText}
+                warnTextId={warnTextId}>
                 <div className={`${prefix}--list-box__field`}>
                   <input
                     role="combobox"
@@ -703,11 +722,7 @@ const ComboBox = forwardRef(
                     {...readOnlyEventHandlers}
                     readOnly={readOnly}
                     ref={mergeRefs(textInput, ref)}
-                    aria-describedby={
-                      helperText && !invalid && !warn && !isFluid
-                        ? comboBoxHelperId
-                        : undefined
-                    }
+                    aria-describedby={ariaDescribedBy}
                   />
                   {invalid && (
                     <WarningFilled
@@ -786,7 +801,7 @@ const ComboBox = forwardRef(
                 </ListBox.Menu>
               </ListBox>
               {helperText && !invalid && !warn && !isFluid && (
-                <Text as="div" id={comboBoxHelperId} className={helperClasses}>
+                <Text as="div" id={helperTextId} className={helperClasses}>
                   {helperText}
                 </Text>
               )}
@@ -984,7 +999,7 @@ ComboBox.propTypes = {
   warnText: PropTypes.node,
 };
 
-type ComboboxComponentProps<ItemType> = PropsWithoutRef<
+type ComboboxComponentProps<ItemType> = PropsWithRef<
   PropsWithChildren<ComboBoxProps<ItemType>> & RefAttributes<HTMLInputElement>
 >;
 

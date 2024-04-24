@@ -101,14 +101,14 @@ describe('Toggletip', () => {
       'right',
       'top',
       'bottom',
-      'top-left',
-      'top-right',
-      'bottom-left',
-      'bottom-right',
-      'left-top',
-      'left-top',
-      'right-top',
-      'right-bottom',
+      'top-start',
+      'top-end',
+      'bottom-start',
+      'bottom-end',
+      'left-start',
+      'left-end',
+      'right-start',
+      'right-end',
     ])('should support different alignments with the `align` prop', (align) => {
       const { container } = render(
         <Toggletip data-testid="toggletip" align={align}>

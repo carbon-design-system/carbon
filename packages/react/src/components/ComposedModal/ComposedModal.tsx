@@ -19,7 +19,10 @@ import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
 import toggleClass from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
+import wrapFocus, {
+  elementOrParentIsFloatingMenu,
+  wrapFocusWithoutSentinels,
+} from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -202,7 +205,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   selectorPrimaryFocus?: string;
 
   /** Specify the CSS selectors that match the floating menus. */
-  selectorsFloatingMenus?: Array<string | null | undefined>;
+  selectorsFloatingMenus?: string[];
 
   size?: 'xs' | 'sm' | 'md' | 'lg';
 
@@ -283,10 +286,16 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
       onKeyDown?.(event);
     }
-    function handleMousedown(evt: MouseEvent) {
+
+    function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
+      const target = evt.target as Node;
       evt.stopPropagation();
-      const isInside = innerModal.current?.contains(evt.target as Node);
-      if (!isInside && !preventCloseOnClickOutside) {
+      if (
+        !preventCloseOnClickOutside &&
+        !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
+        innerModal.current &&
+        !innerModal.current.contains(target)
+      ) {
         closeModal(evt);
       }
     }
@@ -397,11 +406,11 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       }
     }, [open, selectorPrimaryFocus, isOpen]);
 
-    // Slug is always size `lg`
+    // Slug is always size `sm`
     let normalizedSlug;
     if (slug && slug['type']?.displayName === 'Slug') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size: 'lg',
+        size: 'sm',
       });
     }
 
@@ -525,7 +534,7 @@ ComposedModal.propTypes = {
   /**
    * Specify the CSS selectors that match the floating menus
    */
-  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
+  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string.isRequired),
 
   /**
    * Specify the size variant.
