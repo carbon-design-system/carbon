@@ -272,6 +272,11 @@ export interface MultiSelectProps<ItemType>
   readOnly?: boolean;
 
   /**
+   * to Show/Hide All option
+   */
+  selectAll?: boolean;
+
+  /**
    * For full control of the selected items
    */
   selectedItems?: ItemType[];
@@ -359,6 +364,7 @@ const MultiSelect = React.forwardRef(
       readOnly,
       locale = 'en',
       slug,
+      selectAll = false,
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
@@ -391,7 +397,9 @@ const MultiSelect = React.forwardRef(
       });
     }, [items]);
 
-    const itemsWithSelectAll = [selectAllOption, ...filteredItems];
+    const itemsWithSelectAll = selectAll
+      ? [selectAllOption, ...filteredItems]
+      : filteredItems;
 
     const {
       selectedItems: controlledSelectedItems,
@@ -402,6 +410,7 @@ const MultiSelect = React.forwardRef(
       initialSelectedItems,
       onChange,
       selectedItems: selected,
+      selectAll,
       itemsWithSelectAll,
     });
 
@@ -765,6 +774,7 @@ const MultiSelect = React.forwardRef(
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
                     disabled={itemProps['aria-disabled']}
+                    isSelectAll={item['id'] === 'select-all-option'}
                     {...itemProps}>
                     <div className={`${prefix}--checkbox-wrapper`}>
                       <Checkbox
@@ -780,7 +790,6 @@ const MultiSelect = React.forwardRef(
                         title={useTitleInItem ? itemText : undefined}
                         indeterminate={isIndeterminate}
                         disabled={disabled}
-                        //  className= {classforSelectAll}
                       />
                     </div>
                   </ListBox.MenuItem>

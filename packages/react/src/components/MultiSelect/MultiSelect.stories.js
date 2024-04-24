@@ -222,6 +222,11 @@ Playground.argTypes = {
   readOnly: {
     control: { type: 'boolean' },
   },
+  selectAll: {
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 export const Default = () => {

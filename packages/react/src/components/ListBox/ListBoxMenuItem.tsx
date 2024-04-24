@@ -39,6 +39,11 @@ export interface ListBoxMenuItemProps extends ReactAttr<HTMLLIElement> {
    * Specify whether the item should be disabled
    */
   disabled?: boolean;
+
+  /**
+   * Specify whether the item is Select All option
+   */
+  isSelectAll?: boolean;
 }
 
 export type ListBoxMenuItemForwardedRef =
@@ -63,6 +68,7 @@ const ListBoxMenuItem = React.forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
       children,
       isActive = false,
       isHighlighted = false,
+      isSelectAll = false,
       title,
       ...rest
     }: ListBoxMenuItemProps,
@@ -74,6 +80,7 @@ const ListBoxMenuItem = React.forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
     const className = cx(`${prefix}--list-box__menu-item`, {
       [`${prefix}--list-box__menu-item--active`]: isActive,
       [`${prefix}--list-box__menu-item--highlighted`]: isHighlighted,
+      [`${prefix}--list-box__menu-item--selectall`]: isSelectAll,
     });
 
     return (

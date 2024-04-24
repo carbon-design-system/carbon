@@ -1057,4 +1057,17 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box__menu-icon {
     inset-inline-end: $spacing-04;
   }
+
+  .#{$prefix}--list-box__menu-item--selectall
+    .#{$prefix}--list-box__menu-item__option {
+    padding: 0.6875rem 1rem;
+    margin: 0;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$prefix}--list-box__menu-item--selectall
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-block-start: none;
+  }
 }
