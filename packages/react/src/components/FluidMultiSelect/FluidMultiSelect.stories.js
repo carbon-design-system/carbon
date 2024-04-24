@@ -82,6 +82,21 @@ export const Default = () => (
   </div>
 );
 
+export const Filterable = () => (
+  <div style={{ width: '400px' }}>
+    <FluidMultiSelect
+      isFilterable
+      onChange={() => {}}
+      initialSelectedItem={items[2]}
+      id="default"
+      titleText="Label"
+      label="Choose an option"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+    />
+  </div>
+);
+
 export const Condensed = () => (
   <div style={{ width: '400px' }}>
     <FluidMultiSelect
