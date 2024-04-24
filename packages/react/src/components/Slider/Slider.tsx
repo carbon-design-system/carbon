@@ -964,6 +964,7 @@ class Slider extends PureComponent<SliderProps> {
   };
 
   processNewInputValue = (input: HTMLInputElement) => {
+    this.setState({ correctedValue: null, correctedPosition: null });
     const targetValue = Number.parseFloat(input.value);
     const validity = !isNaN(targetValue);
 
@@ -1343,14 +1344,16 @@ class Slider extends PureComponent<SliderProps> {
     } = this.state;
 
     const showWarning =
-      (!readOnly && warn && isValid) ||
+      (!readOnly && warn) ||
       (typeof correctedValue !== null &&
-        correctedPosition === HandlePosition.LOWER);
+        correctedPosition === HandlePosition.LOWER &&
+        isValid);
     const showWarningUpper =
-      (!readOnly && warn && (twoHandles ? isValidUpper : isValid)) ||
+      (!readOnly && warn) ||
       (typeof correctedValue !== null &&
         correctedPosition ===
-          (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER));
+          (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER) &&
+        (twoHandles ? isValidUpper : isValid));
 
     return (
       <PrefixContext.Consumer>
