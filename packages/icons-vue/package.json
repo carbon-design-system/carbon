@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@carbon/icon-helpers": "^10.47.0",
-    "@ibm/telemetry-js": "^1.2.1"
+    "@ibm/telemetry-js": "^1.5.0"
   },
   "devDependencies": {
     "@carbon/cli-reporter": "^10.7.0",
