@@ -59,23 +59,26 @@ $content-padding: 0 0 0 $spacing-05 !default;
     display: list-item;
     overflow: visible;
     border-block-start: 1px solid $border-subtle;
+    transition: border-color motion(standard, productive) $duration-fast-02;
 
     &:last-child {
       border-block-end: 1px solid $border-subtle;
     }
+  }
 
+  .#{$prefix}--accordion__item:not(.#{$prefix}--accordion__item--active) {
     &:hover {
-      border-color: transparent;
+      border-block-start-color: transparent;
       /*  Blend border on hover  */
     }
 
     &:hover + .#{$prefix}--accordion__item {
-      border-color: transparent;
+      border-block-start-color: transparent;
       /* Blend top border of the next component on hover */
     }
 
     &:last-child:hover {
-      border-color: transparent;
+      border-block-start-color: transparent;
       /* Blend bottom border of last item on hover */
     }
   }
@@ -304,16 +307,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
 //flush
 
-// .#{$prefix}--accordion--flush .#{$prefix}--accordion__item {
-//   position: relative;
-//   border-color: transparent;
-
-//   &:last-child {
-//     border-color: transparent;
-//   }
-
-// }
-
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__item {
   position: relative;
   border-color: transparent;
@@ -332,14 +325,18 @@ $content-padding: 0 0 0 $spacing-05 !default;
   inline-size: calc(100% - $spacing-05 - $spacing-05);
   inset-block-start: -1px;
   margin-inline-start: $spacing-05;
+  transition: border-color motion(standard, productive) $duration-fast-02;
 }
 
-.#{$prefix}--accordion--flush .#{$prefix}--accordion__item:hover::after {
+.#{$prefix}--accordion--flush
+  .#{$prefix}--accordion__item:hover:not(
+    .#{$prefix}--accordion__item--active
+  )::after {
   border-block-start-color: transparent;
 }
 
 .#{$prefix}--accordion--flush
-  .#{$prefix}--accordion__item:hover
+  .#{$prefix}--accordion__item:hover:not(.#{$prefix}--accordion__item--active)
   + .#{$prefix}--accordion__item::after {
   border-block-start-color: transparent;
 }
@@ -359,17 +356,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__heading {
   z-index: 2;
 }
-
-// .#{$prefix}--accordion--flush .#{$prefix}--accordion__item--active::after {
-//   position: absolute;
-//   display: block;
-//   block-size: layout.size('height');
-//   border-block-start: none;
-//   content: '';
-//   inline-size: calc(100% - $spacing-05 - $spacing-05);
-//   margin-left: 1rem;
-//   top: 0;
-// }
 
 .#{$prefix}--accordion--flush:not(.#{$prefix}--skeleton)
   .#{$prefix}--accordion__heading:hover::before,
