@@ -533,5 +533,34 @@ describe('MultiSelect', () => {
         `${prefix}--list-box__wrapper--slug`
       );
     });
+
+    it('should select all options when selectAll prop is true', async () => {
+      const items = generateItems(4, generateGenericItem);
+      render(
+        <MultiSelect
+          id="test"
+          label={'test-label'}
+          items={items}
+          selectAll={true}
+        />
+      );
+
+      const labelNode = screen.getByRole('combobox');
+      await userEvent.click(labelNode);
+
+      //check that the select all option is present
+      const options = screen.getAllByRole('option');
+      expect(options.length).toBe(items.length + 1);
+      // Verify all options are selected
+      await userEvent.click(options[0]);
+      options.forEach((option) => {
+        expect(option).toHaveAttribute('aria-selected', 'true');
+      });
+      //verify all options are de-selected
+      await userEvent.click(options[0]);
+      options.forEach((option) => {
+        expect(option).toHaveAttribute('aria-selected', 'false');
+      });
+    });
   });
 });
