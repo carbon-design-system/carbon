@@ -765,56 +765,57 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           />
         </div>
         {normalizedSlug}
-        {isOpen ? (
-          <ListBox.Menu {...menuProps}>
-            {sortedItems.map((item, index) => {
-              const isChecked =
-                controlledSelectedItems.filter((selected) =>
-                  isEqual(selected, item)
-                ).length > 0;
-              const itemProps = getItemProps({
-                item,
-                ['aria-selected']: isChecked,
-              });
-              const itemText = itemToString(item);
 
-              // The initial implementation using <Downshift> would place the disabled attribute
-              // on disabled menu items. Conversely, useCombobox places aria-disabled instead.
-              // To avoid any potential breaking changes, we avoid placing aria-disabled and
-              // instead match the old behavior of placing the disabled attribute.
-              const disabled = itemProps['aria-disabled'];
-              const {
-                'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
-                ...modifiedItemProps
-              } = itemProps;
+        <ListBox.Menu {...menuProps}>
+          {isOpen
+            ? sortedItems.map((item, index) => {
+                const isChecked =
+                  controlledSelectedItems.filter((selected) =>
+                    isEqual(selected, item)
+                  ).length > 0;
+                const itemProps = getItemProps({
+                  item,
+                  ['aria-selected']: isChecked,
+                });
+                const itemText = itemToString(item);
 
-              return (
-                <ListBox.MenuItem
-                  key={itemProps.id}
-                  aria-label={itemText}
-                  isActive={isChecked}
-                  isHighlighted={highlightedIndex === index}
-                  title={itemText}
-                  disabled={disabled}
-                  {...modifiedItemProps}>
-                  <div className={`${prefix}--checkbox-wrapper`}>
-                    <span
-                      title={useTitleInItem ? itemText : undefined}
-                      className={`${prefix}--checkbox-label`}
-                      data-contained-checkbox-state={isChecked}
-                      id={`${itemProps.id}-item`}>
-                      {ItemToElement ? (
-                        <ItemToElement key={itemProps.id} {...item} />
-                      ) : (
-                        itemText
-                      )}
-                    </span>
-                  </div>
-                </ListBox.MenuItem>
-              );
-            })}
-          </ListBox.Menu>
-        ) : null}
+                // The initial implementation using <Downshift> would place the disabled attribute
+                // on disabled menu items. Conversely, useCombobox places aria-disabled instead.
+                // To avoid any potential breaking changes, we avoid placing aria-disabled and
+                // instead match the old behavior of placing the disabled attribute.
+                const disabled = itemProps['aria-disabled'];
+                const {
+                  'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
+                  ...modifiedItemProps
+                } = itemProps;
+
+                return (
+                  <ListBox.MenuItem
+                    key={itemProps.id}
+                    aria-label={itemText}
+                    isActive={isChecked}
+                    isHighlighted={highlightedIndex === index}
+                    title={itemText}
+                    disabled={disabled}
+                    {...modifiedItemProps}>
+                    <div className={`${prefix}--checkbox-wrapper`}>
+                      <span
+                        title={useTitleInItem ? itemText : undefined}
+                        className={`${prefix}--checkbox-label`}
+                        data-contained-checkbox-state={isChecked}
+                        id={`${itemProps.id}-item`}>
+                        {ItemToElement ? (
+                          <ItemToElement key={itemProps.id} {...item} />
+                        ) : (
+                          itemText
+                        )}
+                      </span>
+                    </div>
+                  </ListBox.MenuItem>
+                );
+              })
+            : null}
+        </ListBox.Menu>
       </ListBox>
       {!inline && !invalid && !warn ? helper : null}
     </div>
