@@ -14,6 +14,9 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @import './menu-variables.scss';
 
+:host(#{$prefix}-menu) {
+  position: fixed;
+}
 .#{$prefix}--menu {
   @include component-reset;
   @include box-shadow;
