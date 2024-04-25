@@ -703,6 +703,21 @@
     - clean
     - facilities
     - workplace
+- name: bucharest--national-theatre
+  friendly_name: Bucharest National Theatre
+  aliases:
+    - Bucharest
+    - Romania
+    - theatre
+    - cultural
+    - institution
+- name: bucharest--romanian-athenaeum
+  friendly_name: Bucharest Romanian Athenaeum
+  aliases:
+    - Bucharest
+    - Romania
+    - concert hall
+    - landmark
 - name: budapest
   friendly_name: Budapest
   aliases:
@@ -1423,6 +1438,12 @@
     - retail
     - shopping
     - clothing
+- name: cloud
+  friendly_name: Cloud
+  aliases:
+    - cloud
+    - cloud-based computing
+    - cloud services
 - name: cloud--analytics
   friendly_name: Cloud analytics
   aliases:
@@ -3965,6 +3986,14 @@
     - robotic process automation
     - bot
     - automation
+- name: ibm--uk-labs-hursley
+  friendly_name: IBM® UK Labs Hursley
+  aliases:
+    - Hursley House
+    - IBM Hursley
+    - IBM United Kingdom
+    - United Kingdom
+    - UK
 - name: ibm--z
   friendly_name: IBM Z®
   aliases:
@@ -4273,6 +4302,17 @@
     - data
     - watson
     - AI
+- name: kochi-houseboat
+  friendly_name: Kochi (Cochin) houseboat
+  aliases:
+    - city
+    - Backwater
+    - Houseboat
+    - Kochi
+    - Cochin
+    - Travel
+    - Coconut tree
+    - River
 - name: kuala-lumpur
   friendly_name: Kuala Lumpur
   aliases:
@@ -5283,6 +5323,13 @@
     - decoration
     - bauble
     - holiday
+- name: osaka--tsutenkaku-tower
+  friendly_name: NaOsaka Tsutenkaku Towerme
+  aliases:
+    - Osaka
+    - Japan
+    - Tsutenkaku Tower
+    - landmark
 - name: overcast
   friendly_name: Overcast
   aliases:
@@ -6104,6 +6151,13 @@
   aliases:
     - rocket
     - Cloud
+- name: romania--the-gate-of-the-kiss
+  friendly_name: Romania The Gate of the Kiss
+  aliases:
+    - Romania
+    - sculpture
+    - The Gate of the Kiss
+    - landmark
 - name: rome
   friendly_name: Rome
   aliases:
@@ -6433,6 +6487,13 @@
     - tower
     - pearl
     - China
+- name: shanghai--skyline
+  friendly_name: Shanghai skyline
+  aliases:
+    - Shanghai
+    - city
+    - China
+    - skyline
 - name: sharing-data
   friendly_name: Sharing data
   aliases:
@@ -7895,6 +7956,11 @@
     - recognition
     - watson
     - AI
+- name: walldorf-ibm-innovation-studios
+  friendly_name: Walldorf IBM® Innovation Studio
+  aliases:
+    - Walldorf
+    - IBM Innovation Studios
 - name: warning--01
   friendly_name: Warning 01
   aliases:
@@ -8221,3 +8287,7 @@
     - zero trust
     - user security
     - trusted user
+- name: zurich
+  friendly_name: Zurich
+  aliases:
+    - Zurich
