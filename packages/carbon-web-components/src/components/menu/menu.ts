@@ -14,6 +14,12 @@ import { classMap } from 'lit/directives/class-map.js';
  */
 @customElement(`${prefix}-menu`)
 class CDSMenu extends HostListenerMixin(LitElement) {
+  readonly spacing: Number = 8; // distance to keep to window edges, in px
+  /**
+   * Action button width.
+   */
+  @property()
+  actionButtonWidth;
   /**
    * Checks if document direction is rtl.
    */
@@ -49,30 +55,60 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     Number | (Number | null | undefined)[],
     Number | (Number | null | undefined)[]
   ] = [-1, -1];
+  /**
+   * Specify how the menu should align with the button element
+   */
+  @property({ type: String })
+  menuAlignment;
+  /**
+   * Position of the Menu in X axis .
+   */
+  @property()
+  x: Number | Number[] = 0;
+  /**
+   * Position of the Menu in Y axis .
+   */
+  @property()
+  y: Number | Number[] = 0;
 
-  updated() {
+  _notEmpty = (value: Number | null | undefined) => {
+    return value !== null && value !== undefined;
+  };
+
+  updated(changedProperties) {
     this.isOpen = this.open !== 'false';
-    // if (this.open) {
-    //   // this._handleOpen();
-    // } else {
-    //   this.position = [-1, -1];
-    // }
+    if (changedProperties.has('isOpen') && this.isOpen) {
+      this._handleOpen();
+    }
   }
-  // _handleOpen() {
-  //   if (this.isRtl) {
-  //     this.style.insetInlineStart = `initial`;
-  //     this.style.insetInlineEnd = `${this.position[0]}px`;
-  //   } else {
-  //     this.style.insetInlineStart = `${this.position[0]}px`;
-  //     this.style.insetInlineEnd = `initial`;
-  //   }
-  //   this.style.insetBlockStart = `${this.position[1]}px`;
-  // }
+  _xyStringToNumberConversion = (val) => {
+    let res;
+    if (val.includes(',')) {
+      res = val.split(',').map(function (item) {
+        return parseInt(item);
+      });
+    } else {
+      res = parseInt(val);
+    }
+    return res;
+  };
+  _handleOpen = () => {
+    this.x = this._xyStringToNumberConversion(String(this.x));
+    this.y = this._xyStringToNumberConversion(String(this.y));
+    if (this.isRtl) {
+      this.style.insetInlineStart = `initial`;
+      this.style.insetInlineEnd = `${this.x[0]}px`;
+    } else {
+      this.style.insetInlineStart = `${this.x[1]}px`;
+      this.style.insetInlineEnd = `initial`;
+    }
+    this.style.insetBlockStart = `${this.y[1]}px`;
+  };
   firstUpdated() {
     this.isRtl = this.direction === 'rtl';
   }
   render() {
-    const { isOpen } = this;
+    const { isOpen, menuAlignment, x, y } = this;
     const menuClasses = classMap({
       [`${prefix}--menu`]: true,
       [`${prefix}--menu--shown`]: true,
