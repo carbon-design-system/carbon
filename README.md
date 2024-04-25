@@ -283,12 +283,12 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://cuppajoey.com/"><img src="https://avatars.githubusercontent.com/u/14837881?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Joseph Schultz</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=cuppajoey" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/anjaly0606"><img src="https://avatars.githubusercontent.com/u/99959496?v=4?s=100" width="100px;" alt=""/><br /><sub><b>anjaly0606</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=anjaly0606" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/jesnajoseijk"><img src="https://avatars.githubusercontent.com/u/38346258?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jesnajoseijk</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=jesnajoseijk" title="Code">💻</a></td>
- 
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/Jawahars"><img src="https://avatars.githubusercontent.com/u/4353146?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jawahar S</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Jawahars" title="Code">💻</a></td>
     <td align="center"><a href="https://hollyos.com/"><img src="https://avatars.githubusercontent.com/u/4097509?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Holly Springsteen</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=hollyos" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/2nikhiltom"><img src="https://avatars.githubusercontent.com/2nikhiltom?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nikhil Tomar</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=2nikhiltom" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/aninaantony"><img src="https://avatars.githubusercontent.com/u/164350784?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anina Antony</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=aninaantony" title="Code">💻</a></td>
   </tr>
 </table>
 
