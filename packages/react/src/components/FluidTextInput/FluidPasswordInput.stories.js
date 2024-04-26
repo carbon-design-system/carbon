@@ -39,10 +39,12 @@ Playground.args = {
   playgroundWidth: 300,
   className: 'test-class',
   placeholder: 'Placeholder text',
+  hidePasswordLabel: 'Hide password label',
+  showPasswordLabel: 'Show password label',
+  onTogglePasswordVisibility: true,
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
-  isPassword: false,
   disabled: false,
   labelText: 'Label',
   warn: false,
@@ -80,9 +82,17 @@ Playground.argTypes = {
     },
   },
   isPassword: {
-    control: {
-      type: 'boolean',
+    table: {
+      disable: true,
     },
+  },
+  onTogglePasswordVisibility: {
+    table: {
+      disable: false,
+    },
+    control: false,
+    description:
+      'Callback function that is called whenever the toggle password visibility button is clicked `(evt) => void`      ',
   },
   disabled: {
     control: {

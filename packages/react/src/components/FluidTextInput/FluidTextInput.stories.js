@@ -74,7 +74,6 @@ Playground.args = {
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
-  isPassword: false,
   disabled: false,
   labelText: 'Label',
   warn: false,
@@ -112,8 +111,8 @@ Playground.argTypes = {
     },
   },
   isPassword: {
-    control: {
-      type: 'boolean',
+    table: {
+      disable: true,
     },
   },
   disabled: {
