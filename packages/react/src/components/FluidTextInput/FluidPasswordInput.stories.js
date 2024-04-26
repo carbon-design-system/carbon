@@ -6,64 +6,32 @@
  */
 
 import React from 'react';
-import FluidTextInput from '../FluidTextInput';
-import FluidTextInputSkeleton from './FluidTextInput.Skeleton';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
-import { Information } from '@carbon/icons-react';
+import FluidTextInput from '.';
 import './test.scss';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidTextInput',
+  title: 'Experimental/Fluid Components/unstable__FluidPasswordInput',
   component: FluidTextInput,
-  subcomponents: {
-    FluidTextInputSkeleton,
-  },
 };
 
 export const Default = () => (
   <FluidTextInput
+    id="input-1"
     labelText="Label"
     placeholder="Placeholder text"
-    id="input-1"
+    isPassword
   />
-);
-
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Label</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
-
-export const DefaultWithTooltip = () => (
-  <FluidTextInput labelText={ToggleTip} placeholder="Placeholder text" />
-);
-
-export const Skeleton = () => (
-  <div style={{ width: '300px' }}>
-    <FluidTextInputSkeleton
-      labelText="Label"
-      placeholder="Placeholder text"
-      id="input-1"
-    />
-  </div>
 );
 
 export const Playground = (args) => (
   <div style={{ width: args.playgroundWidth }}>
-    <FluidTextInput {...args} />
+    <FluidTextInput
+      {...args}
+      id="input-1"
+      labelText="Label"
+      placeholder="Placeholder text"
+      isPassword
+    />
   </div>
 );
 

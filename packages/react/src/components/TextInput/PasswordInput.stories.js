@@ -6,23 +6,11 @@
  */
 
 import React from 'react';
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
-import FluidForm from '../FluidForm';
-import mdx from './TextInput.mdx';
-
-import { default as TextInput, TextInputSkeleton } from '../TextInput';
+import { PasswordInput } from '../PasswordInput';
 
 export default {
-  title: 'Components/TextInput',
-  component: TextInput,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-  subcomponents: {
-    TextInputSkeleton,
-  },
+  title: 'Components/PasswordInput',
+  component: PasswordInput,
   argTypes: {
     light: {
       table: {
@@ -33,50 +21,23 @@ export default {
 };
 
 export const Default = () => (
-  <TextInput
+  <PasswordInput
     id="text-input-1"
-    type="text"
     labelText="Text input label"
     helperText="Optional help text"
+    autoComplete="true"
   />
 );
 
-export const Fluid = () => (
-  <FluidForm>
-    <TextInput type="text" labelText="Text input label" id="text-input-1" />
-  </FluidForm>
-);
-
-export const ReadOnly = () => {
-  return (
-    <TextInput
-      labelText="Text input label"
-      helperText="Optional help text"
-      value="This is read only, you can't type more."
-      readOnly
-      id="text-input-1"
-    />
-  );
-};
-
-export const _WithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <TextInput
-        type="text"
-        labelText="Text input label"
-        helperText="Optional help text"
-        id={`text-input-${layer}`}
-      />
-    )}
-  </WithLayer>
-);
-
-export const Skeleton = () => <TextInputSkeleton />;
-
 export const Playground = (args) => (
   <div style={{ width: args.playgroundWidth }}>
-    <TextInput {...args} id="text-input-1" type="text" />
+    <PasswordInput
+      {...args}
+      id="text-input-1"
+      labelText="Text input label"
+      helperText="Optional help text"
+      autoComplete="true"
+    />
   </div>
 );
 
