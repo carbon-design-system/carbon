@@ -6,16 +6,16 @@
  */
 
 import React from 'react';
-import FluidTextInput from '.';
+import FluidPasswordInput from '.';
 import './test.scss';
 
 export default {
   title: 'Experimental/Fluid Components/unstable__FluidPasswordInput',
-  component: FluidTextInput,
+  component: FluidPasswordInput,
 };
 
 export const Default = () => (
-  <FluidTextInput
+  <FluidPasswordInput
     id="input-1"
     labelText="Label"
     placeholder="Placeholder text"
@@ -25,7 +25,7 @@ export const Default = () => (
 
 export const Playground = (args) => (
   <div style={{ width: args.playgroundWidth }}>
-    <FluidTextInput
+    <FluidPasswordInput
       {...args}
       id="input-1"
       labelText="Label"
@@ -39,8 +39,8 @@ Playground.args = {
   playgroundWidth: 300,
   className: 'test-class',
   placeholder: 'Placeholder text',
-  hidePasswordLabel: 'Hide password label',
   showPasswordLabel: 'Show password label',
+  hidePasswordLabel: 'Hide password label',
   onTogglePasswordVisibility: true,
   invalid: false,
   invalidText:
@@ -60,6 +60,12 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
+  },
+  showPasswordLabel: {
+    description: 'Show password" tooltip text on password visibility toggle',
+  },
+  hidePasswordLabel: {
+    description: 'Hide password" tooltip text on password visibility toggle',
   },
   defaultValue: {
     control: {
