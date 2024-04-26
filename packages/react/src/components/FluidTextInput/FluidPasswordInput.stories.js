@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import FluidPasswordInput from '.';
+import FluidPasswordInput from './FluidPasswordInput';
+
 import './test.scss';
 
 export default {
