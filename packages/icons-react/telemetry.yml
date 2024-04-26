@@ -20,3 +20,6 @@ collect:
         - viewBox
         - width
         - xmlns
+  js:
+    functions: {}
+    tokens: null

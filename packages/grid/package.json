@@ -36,7 +36,7 @@
   "dependencies": {
     "@carbon/import-once": "^10.7.1",
     "@carbon/layout": "^10.37.3",
-    "@ibm/telemetry-js": "^1.2.1"
+    "@ibm/telemetry-js": "^1.5.0"
   },
   "devDependencies": {
     "@carbon/cli": "^10.34.3",
