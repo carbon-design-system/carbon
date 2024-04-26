@@ -22,6 +22,8 @@ import Checkmark16 from '@carbon/icons/lib/checkmark/16';
  */
 @customElement(`${prefix}-menu-item`)
 class CDSmenuItem extends LitElement {
+  readonly hoverIntentDelay = 150; // in ms
+  hoverIntentTimeout;
   /**
    * Label for the menu item.
    */
@@ -98,7 +100,7 @@ class CDSmenuItem extends LitElement {
       return iconRendered;
     }
   };
-  _handleClick = (e: MouseEvent): void => {
+  _handleClick = (e: MouseEvent | KeyboardEvent): void => {
     if (!this.isDisabled) {
       if (this.hasChildren) {
         this._openSubmenu();
@@ -107,6 +109,18 @@ class CDSmenuItem extends LitElement {
           this.onclick(e);
         }
       }
+    }
+  };
+  _handleMouseEnter = () => {
+    this.hoverIntentTimeout = setTimeout(() => {
+      this._openSubmenu();
+    }, this.hoverIntentDelay);
+  };
+  _handleMouseLeave = () => {
+    if (this.hoverIntentTimeout) {
+      clearTimeout(this.hoverIntentTimeout);
+      this._closeSubmenu();
+      this.focus();
     }
   };
   _openSubmenu = () => {
@@ -123,6 +137,22 @@ class CDSmenuItem extends LitElement {
       };
     }
     this.submenuOpen = true;
+  };
+  _closeSubmenu = () => {
+    this.boundaries = {
+      x: -1,
+      y: -1,
+    };
+    this.submenuOpen = false;
+  };
+  _handleKeyDown = (e: KeyboardEvent) => {
+    if (this.hasChildren && e.key === 'ArrowRight') {
+      this._openSubmenu();
+      e.stopPropagation();
+    }
+    if (e.key === 'Enter' || e.key === 'Space') {
+      this._handleClick(e);
+    }
   };
   firstUpdated() {
     this.hasChildren = this.childNodes.length > 0;
@@ -141,6 +171,9 @@ class CDSmenuItem extends LitElement {
       hasChildren,
       submenuOpen,
       _handleClick: handleClick,
+      _handleMouseEnter: handleMouseEnter,
+      _handleMouseLeave: handleMouseLeave,
+      _handleKeyDown: handleKeyDown,
       isDanger,
       boundaries,
     } = this;
@@ -156,7 +189,10 @@ class CDSmenuItem extends LitElement {
         aria-disabled="${isDisabled ?? undefined}"
         aria-haspopup="${hasChildren ?? undefined}"
         aria-expanded="${hasChildren ? submenuOpen : undefined}"
-        @click="${handleClick}">
+        @click="${handleClick}"
+        @mouseenter="${hasChildren ? handleMouseEnter : undefined}"
+        @mouseleave="${hasChildren ? handleMouseLeave : undefined}"
+        @keydown="${handleKeyDown}">
         <div class="${prefix}--menu-item__icon">
           ${renderIcon ? iconRender() : undefined}
         </div>
