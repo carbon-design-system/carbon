@@ -63,7 +63,7 @@ test.describe('@avt TextInput', () => {
   test('@avt-keyboard-nav for password', async ({ page }) => {
     await visitStory(page, {
       component: 'TextInput',
-      id: 'components-textinput--toggle-password-visibility',
+      id: 'components-passwordinput--default',
       globals: {
         theme: 'white',
       },
