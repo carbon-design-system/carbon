@@ -490,6 +490,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return { ...changes, highlightedIndex: state.highlightedIndex };
       case InputKeyDownArrowUp:
       case InputKeyDownArrowDown:
+        if (InputKeyDownArrowDown === type && !isOpen) {
+          setIsOpen(true);
+        }
         if (highlightedIndex > -1) {
           const itemArray = document.querySelectorAll(
             `li.${prefix}--list-box__menu-item[role="option"]`
