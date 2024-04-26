@@ -19,7 +19,6 @@ export const Default = () => (
     id="input-1"
     labelText="Label"
     placeholder="Placeholder text"
-    isPassword
   />
 );
 
@@ -30,7 +29,6 @@ export const Playground = (args) => (
       id="input-1"
       labelText="Label"
       placeholder="Placeholder text"
-      isPassword
     />
   </div>
 );
