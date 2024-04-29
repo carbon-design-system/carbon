@@ -14,6 +14,8 @@ import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import Checkmark16 from '@carbon/icons/lib/checkmark/16';
+import { consume, provide } from '@lit/context';
+import { MenuContext } from './menu-context';
 
 /**
  * Menu Item.
@@ -22,6 +24,10 @@ import Checkmark16 from '@carbon/icons/lib/checkmark/16';
  */
 @customElement(`${prefix}-menu-item`)
 class CDSmenuItem extends LitElement {
+  @provide({ context: MenuContext })
+  @consume({ context: MenuContext })
+  context;
+
   readonly hoverIntentDelay = 150; // in ms
   hoverIntentTimeout;
   /**
@@ -154,12 +160,23 @@ class CDSmenuItem extends LitElement {
       this._handleClick(e);
     }
   };
+  _registerItem = () => {
+    console.log('test');
+    // this.context = {
+    //   ...this.context,
+    //   items: [...this.context.items, 'test']
+    // }
+    this.context.items.push(
+      this.shadowRoot?.querySelector(`.${prefix}--menu-item`)
+    );
+  };
   firstUpdated() {
     this.hasChildren = this.childNodes.length > 0;
     this.isDisabled = this.disabled && !this.hasChildren;
     this.direction = document.dir;
     this.isRtl = this.direction === 'rtl';
     this.isDanger = this.kind === 'danger';
+    this._registerItem();
   }
   render() {
     const {
