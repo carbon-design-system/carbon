@@ -5,7 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, {
+  type ComponentType,
+  type FunctionComponent,
+  useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
@@ -19,7 +23,55 @@ import { useAttachedMenu } from '../../../internal/useAttachedMenu';
 
 const defaultSize = 'md';
 
-const OverflowMenu = React.forwardRef(function OverflowMenu(
+interface OverflowMenuProps {
+  /**
+   * A collection of MenuItems to be rendered within this OverflowMenu.
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Additional CSS class names for the trigger button.
+   */
+  className?: string;
+
+  /**
+   * A label describing the options available. Is used in the trigger tooltip and as the menu's accessible label.
+   */
+  label?: string;
+
+  /**
+   * Experimental property. Specify how the menu should align with the button element
+   */
+  menuAlignment?: 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end';
+
+  /**
+   * Optionally provide a custom icon to be rendered on the trigger button.
+   */
+  renderIcon?: ComponentType | FunctionComponent;
+
+  /**
+   * Specify the size of the menu, from a list of available sizes.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * Specify how the trigger tooltip should be aligned.
+   */
+  tooltipAlignment?:
+    | 'top'
+    | 'top-left'
+    | 'top-right'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'left'
+    | 'right';
+}
+
+const OverflowMenu: React.ForwardRefRenderFunction<
+  HTMLDivElement,
+  OverflowMenuProps
+> = (
   {
     children,
     className,
@@ -31,11 +83,11 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
     ...rest
   },
   forwardRef
-) {
+) => {
   const id = useId('overflowmenu');
   const prefix = usePrefix();
 
-  const triggerRef = useRef(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
   const {
     open,
     x,
@@ -70,10 +122,10 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
     <div
       {...rest}
       className={containerClasses}
-      aria-owns={open ? id : null}
+      aria-owns={open ? id : undefined}
       ref={forwardRef}>
       <IconButton
-        aria-controls={open ? id : null}
+        aria-controls={open ? id : undefined}
         aria-haspopup
         aria-expanded={open}
         className={triggerClasses}
@@ -99,7 +151,7 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
       </Menu>
     </div>
   );
-});
+};
 
 OverflowMenu.propTypes = {
   /**
@@ -128,7 +180,7 @@ OverflowMenu.propTypes = {
   ]),
 
   /**
-   * Otionally provide a custom icon to be rendered on the trigger button.
+   * Optionally provide a custom icon to be rendered on the trigger button.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
