@@ -70,7 +70,7 @@
     "@carbon/ibm-products-styles": "^2.30.1",
     "@carbon/styles": "1.54.0",
     "@floating-ui/dom": "^1.6.3",
-    "@ibm/telemetry-js": "^1.3.0",
+    "@ibm/telemetry-js": "^1.5.0",
     "flatpickr": "4.6.13",
     "lit": "^3.1.0",
     "lodash-es": "^4.17.21"
