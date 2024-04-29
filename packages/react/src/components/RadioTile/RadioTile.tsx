@@ -81,6 +81,11 @@ export interface RadioTileProps {
    * Specify the value of the underlying `<input>`.
    */
   value: string | number;
+
+  /**
+   * `true` to specify if the input is required.
+   */
+  required?: boolean;
 }
 
 const RadioTile = React.forwardRef(function RadioTile(
@@ -95,6 +100,7 @@ const RadioTile = React.forwardRef(function RadioTile(
     id,
     onChange = noopFn,
     tabIndex = 0,
+    required,
     ...rest
   }: RadioTileProps,
   ref: React.Ref<HTMLInputElement>
@@ -153,6 +159,7 @@ const RadioTile = React.forwardRef(function RadioTile(
         type="radio"
         value={value}
         ref={ref}
+        required={required}
       />
       <label {...rest} htmlFor={inputId} className={className}>
         <span className={`${prefix}--tile__checkmark`}>{icon()}</span>
@@ -210,6 +217,11 @@ RadioTile.propTypes = {
    * the underlying `<input>` changes.
    */
   onChange: PropTypes.func,
+
+  /**
+   * `true` to specify if the control is required.
+   */
+  required: PropTypes.bool,
 
   /**
    * Specify the tab index of the underlying `<input>`.
