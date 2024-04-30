@@ -467,7 +467,8 @@ const ComboBox = forwardRef(
             return changes;
         }
       },
-      [allowCustomValue, inputValue, onChange, setHighlightedIndex]
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [allowCustomValue, inputValue, onChange]
     );
 
     const handleToggleClick =
