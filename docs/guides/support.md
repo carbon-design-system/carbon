@@ -315,7 +315,7 @@ flowchart TD
 
 ### Definitions
 
-Guiding principless -
+Guiding principles -
 https://carbondesignsystem.com/all-about-carbon/what-is-carbon/#our-guiding-principles
 
 DSAG - The Design System Adoption Guild is an expansive group of designers and

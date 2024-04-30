@@ -213,7 +213,11 @@ const TableToolbarSearch = ({
       disabled={disabled}
       className={searchClasses}
       value={value}
-      id={typeof id !== 'undefined' ? id : uniqueId.toString()}
+      id={
+        typeof id !== 'undefined'
+          ? id
+          : `table-toolbar-search-${uniqueId.toString()}`
+      }
       labelText={labelText || t('carbon.table.toolbar.search.label')}
       placeholder={placeholder || t('carbon.table.toolbar.search.placeholder')}
       onChange={onChange}
