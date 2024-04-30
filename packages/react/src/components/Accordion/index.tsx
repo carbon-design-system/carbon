@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Accordion from './Accordion';
+import Accordion, { AccordionProps } from './Accordion';
 
 export default Accordion;
 export { Accordion };
+export type { AccordionProps };
 export { default as AccordionItem } from './AccordionItem';
 export { default as AccordionSkeleton } from './Accordion.Skeleton';
