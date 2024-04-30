@@ -58,6 +58,6 @@
     ]
   },
   "dependencies": {
-    "@ibm/telemetry-js": "^1.2.1"
+    "@ibm/telemetry-js": "^1.5.0"
   }
 }
