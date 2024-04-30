@@ -34,7 +34,7 @@
     "@carbon/colors": "^11.21.0",
     "@carbon/layout": "^11.21.0",
     "@carbon/type": "^11.26.0",
-    "@ibm/telemetry-js": "^1.2.1",
+    "@ibm/telemetry-js": "^1.5.0",
     "color": "^4.0.0"
   },
   "devDependencies": {

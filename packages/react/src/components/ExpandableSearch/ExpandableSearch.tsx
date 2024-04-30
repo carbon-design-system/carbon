@@ -11,16 +11,20 @@ import Search, { type SearchProps } from '../Search';
 import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
 import { match, keys } from '../../internal/keyboard';
+import mergeRefs from '../../tools/mergeRefs';
 
-function ExpandableSearch({
-  onBlur,
-  onChange,
-  onExpand,
-  onKeyDown,
-  defaultValue,
-  isExpanded,
-  ...props
-}: SearchProps) {
+const ExpandableSearch = React.forwardRef(function ExpandableSearch(
+  {
+    onBlur,
+    onChange,
+    onExpand,
+    onKeyDown,
+    defaultValue,
+    isExpanded,
+    ...props
+  }: SearchProps,
+  forwardedRef: React.Ref<HTMLInputElement>
+) {
   const [expanded, setExpanded] = useState(isExpanded || false);
   const [hasContent, setHasContent] = useState(defaultValue ? true : false);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -73,7 +77,7 @@ function ExpandableSearch({
       {...props}
       defaultValue={defaultValue}
       isExpanded={expanded}
-      ref={searchRef}
+      ref={mergeRefs(searchRef, forwardedRef)}
       className={classes}
       onBlur={composeEventHandlers([onBlur, handleBlur])}
       onChange={composeEventHandlers([onChange, handleChange])}
@@ -81,7 +85,7 @@ function ExpandableSearch({
       onKeyDown={composeEventHandlers([onKeyDown, handleKeyDown])}
     />
   );
-}
+});
 
 ExpandableSearch.propTypes = Search.propTypes;
 ExpandableSearch.displayName = 'ExpandableSearch';
