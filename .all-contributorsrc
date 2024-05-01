@@ -1515,6 +1515,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ahmedsemih",
+      "name": "Ahmed Semih Erkan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102798814?v=4",
+      "profile": "https://github.com/ahmedsemih",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

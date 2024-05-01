@@ -7676,6 +7676,9 @@ Map {
       "tabIndex": Object {
         "type": "number",
       },
+      "target": Object {
+        "type": "string",
+      },
     },
     "render": [Function],
   },
