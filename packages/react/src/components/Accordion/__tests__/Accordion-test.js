@@ -49,13 +49,13 @@ describe('Accordion', () => {
         </Accordion>
       );
 
-      await expect(screen.getByText('Heading A')).toHaveNoAxeViolations();
+      await expect(screen.getByText('Panel A')).toHaveNoAxeViolations();
 
       // click to open
-      userEvent.click(screen.getByText('Heading A'));
+      userEvent.click(screen.getByText('Panel A'));
 
       // test when open
-      await expect(screen.getByText('Heading A')).toHaveNoAxeViolations();
+      await expect(screen.getByText('Panel A')).toHaveNoAxeViolations();
     });
 
     it('should have no Accessibility Checker violations', async () => {
@@ -75,15 +75,15 @@ describe('Accordion', () => {
         </main>
       );
 
-      await expect(screen.getByText('Heading A')).toHaveNoACViolations(
+      await expect(screen.getByText('Panel A')).toHaveNoACViolations(
         'Accordion'
       );
 
       // click to open
-      userEvent.click(screen.getByText('Heading A'));
+      userEvent.click(screen.getByText('Panel A'));
 
       // test when open
-      await expect(screen.getByText('Heading A')).toHaveNoACViolations(
+      await expect(screen.getByText('Panel A')).toHaveNoACViolations(
         'Opened Accordion'
       );
     });
