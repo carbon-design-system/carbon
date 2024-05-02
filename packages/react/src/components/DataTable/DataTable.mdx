@@ -278,6 +278,71 @@ the `onInputChange` function provided to you from `DataTable`'s render prop and
 pass it to the `onChange` prop of `TableToolbarSearch` in your `TableToolbar`
 component.
 
+### Filtering with checkboxes
+
+To provide you with more examples, we created a separate file as a template for
+you to implement a filter using checkboxes.
+
+To implement that in your code you first have to copy the
+[`TableToolbarFilter`](https://github.com/carbon-design-system/carbon/blob/15339-datatable/packages/react/src/components/DataTable/stories/examples/TableToolbarFilter.tsx)
+component into your code. Then you just have to import inside the
+`TableToolbarContent` like that:
+
+```jsx
+<TableToolbarFilter
+  onApplyFilter={handleTableFilter}
+  onResetFilter={handleOnResetFilter}
+/>
+```
+
+Now, in the same file where you have your DataTable with your data, you just
+need to write the code to handle the filters. You can use the code below as a
+template and then customize it as needed. Make sure to replace "YOUR_DATA" with
+the initial data you want to pass into the DataTable.
+
+```jsx
+const [renderedRows, setRenderedRows] = useState(YOUR_DATA);
+
+const handleTableFilter = (selectedCheckboxes) => {
+  setRenderedRows([]);
+
+  for (let i = 0; i < selectedCheckboxes.length; i++) {
+    // Filter the items inside the rows list
+    const filteredRows = YOUR_DATA.filter((row) => {
+      return Object.values(row).some((value) =>
+        String(value)
+          .toLowerCase()
+          .includes(selectedCheckboxes[i].toLowerCase())
+      );
+    });
+
+    setRenderedRows((prevData) => {
+      // Filter out duplicate rows
+      const uniqueRows = filteredRows.filter((row) => {
+        return !prevData.some((prevRow) => {
+          return Object.keys(row).every((key) => {
+            return row[key] === prevRow[key];
+          });
+        });
+      });
+      return [...prevData, ...uniqueRows];
+    });
+  }
+};
+
+const handleOnResetFilter = () => {
+  setRenderedRows(rows);
+};
+```
+
+Finally pass in the Datatable props the value from the `useState`.
+
+```jsx
+ <DataTable rows={renderedRows} headers={headers}>
+ ...
+ </Datatable>
+```
+
 ## Batch actions
 
 You can combine batch actions with the `DataTable` component to allow the user
