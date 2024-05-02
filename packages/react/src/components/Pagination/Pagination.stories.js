@@ -81,7 +81,6 @@ export const PaginationUnknownPages = (args) => {
         pagesUnknown={true}
         totalItems={undefined}
         page={1}
-        pageText={(pageNum) => `page ${pageNum}`}
         {...args}
       />
     </div>
