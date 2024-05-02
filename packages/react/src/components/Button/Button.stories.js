@@ -178,3 +178,7 @@ export const SetOfButtonsFluid = {
     );
   },
 };
+
+SetOfButtonsFluid.args = {
+  'Fluid Buttons': 1,
+};
