@@ -91,6 +91,11 @@ export interface RadioButtonProps
    * Specify the value of the `<RadioButton>`
    */
   value?: string | number;
+
+  /**
+   * `true` to specify if the input is required.
+   */
+  required?: boolean;
 }
 
 const RadioButton = React.forwardRef((props: RadioButtonProps, ref) => {
@@ -105,6 +110,7 @@ const RadioButton = React.forwardRef((props: RadioButtonProps, ref) => {
     onChange = () => {},
     value = '',
     slug,
+    required,
     ...rest
   } = props;
 
@@ -152,6 +158,7 @@ const RadioButton = React.forwardRef((props: RadioButtonProps, ref) => {
         disabled={disabled}
         value={value}
         name={name}
+        required={required}
       />
       <label htmlFor={uniqueId} className={`${prefix}--radio-button__label`}>
         <span className={`${prefix}--radio-button__appearance`} />
@@ -226,6 +233,11 @@ RadioButton.propTypes = {
    * Provide a handler that is invoked when a user clicks on the control
    */
   onClick: PropTypes.func,
+
+  /**
+   * `true` to specify if the control is required.
+   */
+  required: PropTypes.bool,
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButton` component
