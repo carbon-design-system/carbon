@@ -455,10 +455,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
 
     switch (type) {
       case InputKeyDownEnter:
-        if (changes.selectedItem) {
+        if (changes.selectedItem && changes.selectedItem.disabled !== true) {
           onItemChange(changes.selectedItem);
         }
         setHighlightedIndex(changes.selectedItem);
+
         return { ...changes, highlightedIndex: state.highlightedIndex };
       case ItemClick:
         if (changes.selectedItem) {
@@ -986,6 +987,12 @@ FilterableMultiSelect.propTypes = {
   slug: PropTypes.node,
 
   ...sortingPropTypes,
+
+  /**
+   * Provide text to be used in a `<label>` element that is tied to the
+   * combobox via ARIA attributes.
+   */
+  titleText: PropTypes.node,
 
   /**
    * Callback function for translating ListBoxMenuIcon SVG title
