@@ -178,7 +178,7 @@ interface OverflowMenuProps {
   /**
    * The event handler for the `click` event.
    */
-  onClick?: () => void;
+  onClick?: (evt?) => void;
 
   /**
    * Function called when menu is closed
@@ -437,7 +437,7 @@ class OverflowMenu extends React.Component<
     evt.stopPropagation();
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
       this.setState({ open: !this.state.open });
-      onClick();
+      onClick(evt);
     }
   };
 
@@ -487,7 +487,7 @@ class OverflowMenu extends React.Component<
       this.state.open &&
       (!this._menuBody || !this._menuBody.contains(evt.target))
     ) {
-      this.closeMenu(); // Fix: Pass the onCloseMenu callback when calling closeMenu
+      this.closeMenu();
     }
   };
 
