@@ -223,6 +223,7 @@
   .#{$prefix}--table-column-checkbox div,
   .#{$prefix}--table-expand div {
     display: flex;
+    align-items: center;
     block-size: 100%;
   }
 }
