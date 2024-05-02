@@ -89,7 +89,13 @@
 
   .#{$prefix}--multi-select--filterable--input-focused,
   .#{$prefix}--multi-select
-    .#{$prefix}--list-box__field--wrapper--input-focused {
+    .#{$prefix}--list-box__field--wrapper--input-focused:has(
+      button[aria-expanded='false']
+    ),
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field--wrapper--input-focused:has(
+      button[aria-expanded='true']
+    ) {
     @include focus-outline('outline');
   }
 
