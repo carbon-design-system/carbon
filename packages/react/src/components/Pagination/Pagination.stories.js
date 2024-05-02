@@ -73,6 +73,23 @@ export const PaginationWithCustomPageSizesLabel = (args) => {
 PaginationWithCustomPageSizesLabel.storyName =
   'Pagination with custom page sizes label';
 
+export const PaginationUnknownPages = (args) => {
+  return (
+    <div>
+      <Pagination
+        {...props()}
+        pagesUnknown={true}
+        totalItems={undefined}
+        page={1}
+        pageText={(pageNum) => `page ${pageNum}`}
+        {...args}
+      />
+    </div>
+  );
+};
+
+PaginationUnknownPages.storyName = 'Unknown pages and items';
+
 export const Playground = (args) => <Pagination {...args} />;
 
 Playground.args = {
