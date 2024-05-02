@@ -6591,6 +6591,9 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "required": Object {
+        "type": "bool",
+      },
       "tabIndex": Object {
         "type": "number",
       },

@@ -1037,7 +1037,7 @@ class Slider extends PureComponent<SliderProps> {
         ? (boundingRect?.right ?? 0) - clientX
         : clientX - (boundingRect?.left ?? 0);
       return leftOffset / width;
-    } else if (value && range) {
+    } else if (value !== null && value !== undefined && range) {
       // Prevent NaN calculation if the range is 0.
       return range === 0 ? 0 : (value - this.props.min) / range;
     }

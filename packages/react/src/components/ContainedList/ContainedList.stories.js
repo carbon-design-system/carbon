@@ -160,6 +160,7 @@ export const WithExpandableSearch = () => {
       action={
         <ExpandableSearch
           placeholder="Filter"
+          labelText="Search"
           value={searchTerm}
           onChange={handleChange}
           closeButtonLabelText="Clear search input"
