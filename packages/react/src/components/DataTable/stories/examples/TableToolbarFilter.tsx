@@ -109,7 +109,7 @@ const TableToolbarFilter = ({
       align={align}
       {...rest}>
       <button
-        aria-label="Settings"
+        aria-label="Filtering"
         type="button"
         aria-expanded={isOpen}
         onClick={() => {
