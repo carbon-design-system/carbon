@@ -157,14 +157,8 @@ export const SetOfButtonsFluid = {
       options: fluidButtonOptions,
       mapping: fluidButtonMapping,
     },
-    Stacked: {
-      control: {
-        type: 'boolean',
-      },
-      description: 'Stacked is ignored when the button set is fluid.',
-    },
   },
-  render: ({ stacked, ...rest }) => {
+  render: ({ ...rest }) => {
     const buttons = rest['Fluid Buttons'];
 
     if (!buttons || buttons === 0) {
@@ -173,7 +167,7 @@ export const SetOfButtonsFluid = {
 
     return (
       <WithDisplayBox>
-        <ButtonSet fluid stacked={stacked}>
+        <ButtonSet fluid>
           {buttons.map(({ label, kind, key }) => (
             <Button key={key} kind={kind}>
               {label}

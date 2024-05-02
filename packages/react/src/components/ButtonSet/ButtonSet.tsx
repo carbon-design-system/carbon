@@ -146,7 +146,7 @@ ButtonSet.propTypes = {
 
   /**
    * Specify the button arrangement of the set (vertically stacked or
-   * horizontal)
+   * horizontal) - ignored when fluid is true
    */
   stacked: PropTypes.bool,
 };
