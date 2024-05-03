@@ -5496,6 +5496,9 @@ Map {
         "isRequired": true,
         "type": "array",
       },
+      "itemsWithSelectAll": Object {
+        "type": "array",
+      },
       "label": Object {
         "isRequired": true,
         "type": "node",
@@ -5514,6 +5517,9 @@ Map {
         "type": "bool",
       },
       "readOnly": Object {
+        "type": "bool",
+      },
+      "selectAll": Object {
         "type": "bool",
       },
       "selectedItems": Object {
