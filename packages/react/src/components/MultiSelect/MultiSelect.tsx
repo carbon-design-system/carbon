@@ -227,6 +227,9 @@ export interface MultiSelectProps<ItemType>
    */
   items: ItemType[];
 
+  /**
+   * This is similar to the items prop, but it is used to render the items when selectAll prop is enabled
+   */
   itemsWithSelectAll: ItemType[];
 
   /**
@@ -914,6 +917,11 @@ MultiSelect.propTypes = {
   items: PropTypes.array.isRequired,
 
   /**
+   * This is similar to the items prop, but it is used to render the items when selectAll prop is enabled
+   */
+  itemsWithSelectAll: PropTypes.array.isRequired,
+
+  /**
    * Generic `label` that will be used as the textual representation of what
    * this field is for
    */
@@ -955,6 +963,11 @@ MultiSelect.propTypes = {
    * Whether or not the Dropdown is readonly
    */
   readOnly: PropTypes.bool,
+
+  /**
+   * to Show/Hide All option
+   */
+  selectAll: PropTypes.bool,
 
   /**
    * For full control of the selected items
