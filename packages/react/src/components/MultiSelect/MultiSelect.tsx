@@ -230,7 +230,7 @@ export interface MultiSelectProps<ItemType>
   /**
    * This is similar to the items prop, but it is used to render the items when selectAll prop is enabled
    */
-  itemsWithSelectAll: ItemType[];
+  itemsWithSelectAll?: ItemType[];
 
   /**
    * Generic `label` that will be used as the textual representation of what
@@ -919,7 +919,7 @@ MultiSelect.propTypes = {
   /**
    * This is similar to the items prop, but it is used to render the items when selectAll prop is enabled
    */
-  itemsWithSelectAll: PropTypes.array.isRequired,
+  itemsWithSelectAll: PropTypes.array,
 
   /**
    * Generic `label` that will be used as the textual representation of what
