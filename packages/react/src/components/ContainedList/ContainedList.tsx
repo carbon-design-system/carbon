@@ -5,14 +5,53 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { LayoutConstraint } from '../Layout';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 
-const variants = ['on-page', 'disclosed'];
+const variants = ['on-page', 'disclosed'] as const;
+
+type Variants = (typeof variants)[number];
+
+interface ContainedListProps {
+  /**
+   * A slot for a possible interactive element to render.
+   */
+  action?: ReactNode;
+
+  /**
+   * A collection of ContainedListItems to be rendered in the ContainedList
+   */
+  children?: ReactNode;
+
+  /**
+   * Additional CSS class names.
+   */
+  className?: string;
+
+  /**
+   * Specify whether the dividing lines in between list items should be inset.
+   */
+  isInset?: boolean;
+
+  /**
+   * The kind of ContainedList you want to display
+   */
+  kind?: Variants;
+
+  /**
+   * A label describing the contained list.
+   */
+  label: string | ReactNode;
+
+  /**
+   * Specify the size of the contained list.
+   */
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+}
 
 function filterChildren(children) {
   if (Array.isArray(children)) {
@@ -50,7 +89,7 @@ function renderChildren(children) {
   return children;
 }
 
-function ContainedList({
+const ContainedList: React.FC<ContainedListProps> = ({
   action,
   children,
   className,
@@ -59,7 +98,7 @@ function ContainedList({
   label,
   size,
   ...rest
-}) {
+}) => {
   const labelId = `${useId('contained-list')}-header`;
   const prefix = usePrefix();
 
@@ -76,9 +115,21 @@ function ContainedList({
 
   const filteredChildren = filterChildren(children);
 
-  const isActionSearch = ['Search', 'ExpandableSearch'].includes(
-    action?.type?.displayName
-  );
+  function isSearchAction(action: React.ReactNode): boolean {
+    if (!React.isValidElement(action)) {
+      return false;
+    }
+
+    const actionTypes = ['Search', 'ExpandableSearch'];
+    let actionType = '';
+    if (typeof action.type === 'string') {
+      actionType = action.type;
+    } else {
+      actionType = (action.type as { displayName?: string }).displayName || '';
+    }
+    return actionTypes.includes(actionType);
+  }
+  const isActionSearch = isSearchAction(action);
 
   const renderedChildren = renderChildren(children);
 
@@ -109,7 +160,7 @@ function ContainedList({
       )}
     </div>
   );
-}
+};
 
 ContainedList.propTypes = {
   /**

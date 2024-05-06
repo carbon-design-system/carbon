@@ -638,6 +638,7 @@ categories:
           - prompt-session
           - prompt-template
           - tuning
+          - watsonx
           - watsonx-ai
           - watsonx-data
           - watsonx-governance
