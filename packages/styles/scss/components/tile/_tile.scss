@@ -453,7 +453,8 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:focus,
-  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable:focus {
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable:focus,
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile--slug.#{$prefix}--tile {
     outline-offset: -1px;
   }
 
