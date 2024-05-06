@@ -997,7 +997,7 @@ class Slider extends PureComponent<SliderProps> {
 
       if (adjustedValue !== targetValue) {
         this.setState({
-          correctedValue: targetValue,
+          correctedValue: targetValue.toString(),
           correctedPosition: handlePosition,
         });
       } else {
