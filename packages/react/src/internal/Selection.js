@@ -39,6 +39,11 @@ export function useSelection({
   const [selectedItems, setSelectedItems] = useState(
     isControlled ? controlledItems : uncontrolledItems
   );
+
+  useEffect(() => {
+    setSelectedItems(isControlled ? controlledItems : uncontrolledItems);
+  }, [isControlled, controlledItems, uncontrolledItems]);
+
   useEffect(() => {
     callOnChangeHandler({
       isControlled,
@@ -80,7 +85,7 @@ export function useSelection({
       isMounted: isMounted.current,
       onChangeHandlerControlled: savedOnChange.current,
       onChangeHandlerUncontrolled: setUncontrolledItems,
-      selectedItems: setSelectedItems([]),
+      selectedItems: [],
     });
   }, [disabled, isControlled]);
 
