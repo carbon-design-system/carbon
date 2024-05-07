@@ -176,7 +176,7 @@
 
   .#{$prefix}--pagination__right
     .#{$prefix}--pagination__text.#{$prefix}--pagination__page-text.#{$prefix}--pagination__unknown-pages-text {
-    margin-inline-end: 1rem;
+    margin-inline-end: $spacing-05;
   }
 
   .#{$prefix}--pagination__right .#{$prefix}--pagination__text:empty {
