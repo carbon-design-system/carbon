@@ -1,0 +1,27 @@
+# Each line is a file pattern followed by one or more owners.
+
+# These owners will be the default owners for everything in the
+# repo. Unless a later match takes precedence, this team will
+# be requested for review when someone opens a pull request.
+* @carbon-design-system/developers-system-reviewers
+
+
+# Core icons and pictograms
+/packages/icons/src/svg/        @laurenmrice @carbon-design-system/brand-icons @carbon-design-system/developers-system-reviewers
+/packages/pictograms/src/svg/   @laurenmrice @carbon-design-system/brand-pictograms @carbon-design-system/developers-system-reviewers
+
+# Order is important; the last matching pattern takes the most
+# precedence. When someone opens a pull request that modifies
+# public api snapshot files, only this team and not the global
+# owner(s) will be requested for a review.
+# The release team should be notified of Public API changes in
+# the system
+**/PublicAPI-test.js        @carbon-design-system/release
+**/PublicAPI-test.js.snap   @carbon-design-system/release
+
+
+# Admins should be notified of changes to CI/CD workflows
+# codeowners, and any other config present in .github.
+# This should always be the last entry in this file.
+/.github/           @carbon-design-system/developers-system-admins
+/.github/CODEOWNERS @carbon-design-system/developers-system-admins

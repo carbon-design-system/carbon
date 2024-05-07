@@ -6,64 +6,31 @@
  */
 
 import React from 'react';
-import FluidTextInput from '../FluidTextInput';
-import FluidTextInputSkeleton from './FluidTextInput.Skeleton';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
-import { Information } from '@carbon/icons-react';
+import FluidPasswordInput from './FluidPasswordInput';
+
 import './test.scss';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidTextInput',
-  component: FluidTextInput,
-  subcomponents: {
-    FluidTextInputSkeleton,
-  },
+  title: 'Experimental/Fluid Components/unstable__FluidPasswordInput',
+  component: FluidPasswordInput,
 };
 
 export const Default = () => (
-  <FluidTextInput
+  <FluidPasswordInput
+    id="input-1"
     labelText="Label"
     placeholder="Placeholder text"
-    id="input-1"
   />
-);
-
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Label</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
-
-export const DefaultWithTooltip = () => (
-  <FluidTextInput labelText={ToggleTip} placeholder="Placeholder text" />
-);
-
-export const Skeleton = () => (
-  <div style={{ width: '300px' }}>
-    <FluidTextInputSkeleton
-      labelText="Label"
-      placeholder="Placeholder text"
-      id="input-1"
-    />
-  </div>
 );
 
 export const Playground = (args) => (
   <div style={{ width: args.playgroundWidth }}>
-    <FluidTextInput {...args} />
+    <FluidPasswordInput
+      {...args}
+      id="input-1"
+      labelText="Label"
+      placeholder="Placeholder text"
+    />
   </div>
 );
 
@@ -71,6 +38,9 @@ Playground.args = {
   playgroundWidth: 300,
   className: 'test-class',
   placeholder: 'Placeholder text',
+  showPasswordLabel: 'Show password label',
+  hidePasswordLabel: 'Hide password label',
+  onTogglePasswordVisibility: true,
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
@@ -89,6 +59,12 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
+  },
+  showPasswordLabel: {
+    description: 'Show password" tooltip text on password visibility toggle',
+  },
+  hidePasswordLabel: {
+    description: 'Hide password" tooltip text on password visibility toggle',
   },
   defaultValue: {
     control: {
@@ -114,6 +90,14 @@ Playground.argTypes = {
     table: {
       disable: true,
     },
+  },
+  onTogglePasswordVisibility: {
+    table: {
+      disable: false,
+    },
+    control: false,
+    description:
+      'Callback function that is called whenever the toggle password visibility button is clicked `(evt) => void`      ',
   },
   disabled: {
     control: {
