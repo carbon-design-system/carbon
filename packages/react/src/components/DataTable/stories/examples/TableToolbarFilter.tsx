@@ -71,6 +71,10 @@ const TableToolbarFilter = ({
     `${prefix}--toolbar-action ${prefix}--overflow-menu`
   );
 
+  const popoverClasses = cx({
+    [`${prefix}--popover-tabletoolbar-filter`]:isOpen
+  })
+
   const handleApplyFilter = () => {
     setIsOpen(false);
     if (onApplyFilter) {
@@ -107,6 +111,7 @@ const TableToolbarFilter = ({
       isTabTip
       onRequestClose={() => setIsOpen(false)}
       align={align}
+      className={popoverClasses}
       {...rest}>
       <button
         aria-label="Filtering"
@@ -118,7 +123,7 @@ const TableToolbarFilter = ({
         className={toolbarActionClasses}>
         <Filter />
       </button>
-      <PopoverContent id="containerCheckbox">
+      <PopoverContent id="containerCheckbox" className={`${prefix}--popover-content-tabletoolbar-filter`}>
         <div className={`${prefix}--container-checkbox`}>
           <fieldset className={`${prefix}--fieldset`}>
             <legend className={`${prefix}--label`}>
