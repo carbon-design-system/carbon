@@ -441,7 +441,7 @@ Popover.propTypes = {
       'right-end',
       'right-start',
     ]),
-    "The alignment values for 'align' prop : 'top-left', 'top-right', 'bottom-left', 'bottom-right', 'left-bottom', 'left-top', 'right-bottom', and 'right-top' are deprecated. Please use 'top-start', 'top-end', 'bottom-start', 'bottom-end', 'left-start', 'left-end', 'right-start', or 'right-end' respectively",
+    "The alignment values for 'align' prop : 'top-left', 'top-right', 'bottom-left', 'bottom-right', 'left-bottom', 'left-top', 'right-bottom', and 'right-top' are deprecated. Please use 'top-start', 'top-end', 'bottom-start', 'bottom-end', 'left-end', 'left-start', 'right-end', or 'right-start' respectively",
     [
       'top',
       'top-start',
