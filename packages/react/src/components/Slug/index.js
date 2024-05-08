@@ -93,7 +93,6 @@ export const Slug = React.forwardRef(function Slug(
     autoAlign = true,
     children,
     className,
-    dotType,
     kind = 'default',
     onRevertClick,
     revertActive,
@@ -105,16 +104,10 @@ export const Slug = React.forwardRef(function Slug(
   ref
 ) {
   const prefix = usePrefix();
-
   const id = useId('slug');
 
   const slugClasses = cx(className, {
     [`${prefix}--slug`]: true,
-    [`${prefix}--slug--hollow`]: kind === 'hollow' || dotType === 'hollow',
-    // Need to come up with a better name; explainable?
-    // Need to be able to target the non-hollow variant another way
-    // other than using `:not` all over the styles
-    [`${prefix}--slug--enabled`]: kind !== 'hollow' && dotType !== 'hollow',
     [`${prefix}--slug--revert`]: revertActive,
   });
 
@@ -181,24 +174,32 @@ Slug.propTypes = {
    */
   align: PropTypes.oneOf([
     'top',
-    'top-left',
-    'top-right',
+    'top-left', // deprecated use top-start instead
+    'top-start',
+    'top-right', // deprecated use top-end instead
+    'top-end',
 
     'bottom',
-    'bottom-left',
-    'bottom-right',
+    'bottom-left', // deprecated use bottom-start instead
+    'bottom-start',
+    'bottom-right', // deprecated use bottom-end instead
+    'bottom-end',
 
     'left',
-    'left-bottom',
-    'left-top',
+    'left-bottom', // deprecated use left-end instead
+    'left-end',
+    'left-top', // deprecated use left-start instead
+    'left-start',
 
     'right',
-    'right-bottom',
-    'right-top',
+    'right-bottom', // deprecated use right-end instead
+    'right-end',
+    'right-top', // deprecated use right-start instead
+    'right-start',
   ]),
 
   /**
-   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   * Will auto-align the popover. This prop is currently experimental and is subject to future changes.
    */
   autoAlign: PropTypes.bool,
 
@@ -213,14 +214,9 @@ Slug.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the type of dot that should be rendered in front of the inline variant
-   */
-  dotType: PropTypes.oneOf(['default', 'hollow']),
-
-  /**
    * Specify the type of Slug, from the following list of types:
    */
-  kind: PropTypes.oneOf(['default', 'hollow', 'inline']),
+  kind: PropTypes.oneOf(['default', 'inline']),
 
   /**
    * Callback function that fires when the revert button is clicked

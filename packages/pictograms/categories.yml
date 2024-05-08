@@ -84,6 +84,8 @@ categories:
       - berlin--cathedral
       - berlin--tower
       - boston--zakim-bridge
+      - bucharest--national-theatre
+      - bucharest--romanian-athenaeum
       - budapest
       - budapest--lab-skyline
       - budapest--citadella
@@ -103,6 +105,8 @@ categories:
       - hamburg--philharmone
       - hong-kong--cityscape
       - hong-kong
+      - ibm--uk-labs-hursley
+      - kochi-houseboat
       - kuala-lumpur
       - london
       - london--big-ben
@@ -124,6 +128,7 @@ categories:
       - nyc--statue-of-liberty
       - nyc--world-trade-center
       - okinawa
+      - osaka--tsutenkaku-tower
       - paris--arc-de-triomphe
       - paris--louvre
       - paris--notre-dame
@@ -135,6 +140,7 @@ categories:
       - prague--dancing-house--02
       - raleigh-nc
       - rio-de-janeiro
+      - romania--the-gate-of-the-kiss
       - rome
       - san-francisco
       - san-francisco--fog
@@ -143,6 +149,7 @@ categories:
       - seoul--gyeongbokgung-palace
       - shanghai--cityscape
       - shanghai--oriental-pearl-tower
+      - shanghai--skyline
       - singapore
       - stockholm
       - taipei--bubble-tea
@@ -156,9 +163,11 @@ categories:
       - uruguay--sol-de-mayo
       - venezuela--national-pantheon-of-venezuela
       - vancouver
+      - walldorf-ibm-innovation-studios
       - washington-dc
       - washington-dc--capitol
       - washington-dc--monument
+      - zurich
   - name: Cloud
     members:
       - accelerating-transformation
@@ -194,6 +203,7 @@ categories:
       - c--language
       - c-plus-plus--language
       - choose-how-to-get-started
+      - cloud
       - cloud--analytics
       - cloud--assets
       - cloud--builder--professional--services

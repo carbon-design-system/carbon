@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('ErrorBoundary @avt', () => {
+test.describe('@avt ErrorBoundary', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ErrorBoundary',
@@ -35,7 +35,7 @@ test.describe('ErrorBoundary @avt', () => {
     );
   });
 
-  test('@avt-keyboard-state', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'ErrorBoundary',
       id: 'components-errorboundary--default',

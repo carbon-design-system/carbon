@@ -7,21 +7,15 @@
 
 import {
   // Blue
-  blue20,
-  blue20Hover,
   blue40,
   blue60,
   blue70,
-  blue70Hover,
   blue80,
-  blue100,
 
   // Gray
   gray10,
   gray10Hover,
-  gray20,
   gray30,
-  gray30Hover,
   gray40,
   gray50,
   gray60,
@@ -214,62 +208,37 @@ export const toggleOff = gray60;
 export const shadow = rgba(black, 0.8);
 
 //// AI - Experimental (Use at your own risk)
-// Slug tokens
-export const slugBackground = gray30;
-export const slugGradient = `${gray50} linear-gradient(135deg, ${gray10} 0%, rgba(${white}, 0) 100%)`;
-export const slugBackgroundHover = gray20;
-export const slugGradientHover = `${gray40} linear-gradient(135deg, ${white} 0%, rgba(${white}, 0) 100%)`;
-export const slugHollowHover = gray30Hover;
-
 //// Phase 2 - new \\\\
 // Shared
-export const aiInnerShadow = rgba(blue50, 0.2);
-export const aiAuraStartTable = rgba(blue50, 0.15);
+export const aiInnerShadow = rgba(blue50, 0.16);
+export const aiAuraStartSm = rgba(blue50, 0.16);
 export const aiAuraStart = rgba(blue50, 0.1);
 export const aiAuraEnd = rgba(black, 0);
 export const aiBorderStrong = blue40;
-export const aiBorderStart = blue50;
-export const aiBorderEnd = rgba(blue30, 0.24);
-export const aiDropShadow = rgba(blue60, 0.32);
+export const aiBorderStart = rgba(blue30, 0.36);
+export const aiBorderEnd = blue50;
+export const aiDropShadow = rgba(black, 0.28);
 export const aiAuraHoverBackground = layerHover01;
 export const aiAuraHoverStart = rgba(blue50, 0.4);
 export const aiAuraHoverEnd = rgba(black, 0);
 
-// Callout
-export const slugCalloutShadowOuter01 = rgba(blue80, 0.25);
-export const slugCalloutShadowOuter02 = rgba(black, 0.65);
+// AI Popover
+export const aiPopoverBackground = gray100;
+export const aiPopoverShadowOuter01 = rgba(black, 0.12);
+export const aiPopoverShadowOuter02 = rgba(black, 0.08);
 
 // AI skeleton
-export const aiSkeletonBackground = blue70Hover;
-export const aiSkeletonElementBackground = blue100;
+export const aiSkeletonBackground = rgba(blue40, 0.5);
+export const aiSkeletonElementBackground = rgba(blue40, 0.3);
 
 // AI Modal tokens
-export const aiOverlay = rgba(blue100, 0.5);
-
-//// Not used in phase 2 / possibly remove?
-export const slugCalloutGradientTop = rgba(gray100, 0.85);
-export const slugCalloutGradientBottom = rgba(gray90, 0.85);
-export const aiGradientStart01 = rgba(blue20, 0.2);
-export const aiGradientStart02 = 'transparent';
-export const aiGradientEnd = 'rgba(38, 38, 38, 0)';
-export const slugCalloutAuraStart = aiAuraStart;
-export const slugCalloutAuraEnd = aiAuraEnd;
-export const slugCalloutGradientTopHover = rgba(gray80, 0.55);
-export const slugCalloutGradientBottomHover = rgba(gray80Hover, 0.55);
-export const slugCalloutAuraStartHover01 = rgba(blue20Hover, 0.3);
-export const slugCalloutAuraEndHover01 = rgba(gray100, 0);
-export const slugCalloutAuraStartHover02 = 'transparent';
-export const slugCalloutAuraEndHover02 = 'transparent';
-export const slugCalloutGradientTopSelected = rgba(gray80, 0.85);
-export const slugCalloutGradientBottomSelected = rgba(gray80Hover, 0.85);
-export const slugCalloutAuraStartSelected = rgba(blue20, 0.2);
-export const slugCalloutAuraEndSelected = rgba(gray100, 0);
+export const aiOverlay = rgba(black, 0.5);
 
 // One off tokens for caret
-export const slugCalloutCaretCenter = '#3F68AF';
-export const slugCalloutCaretBottom = '#3D4655';
-export const slugCalloutCaretBottomBackgroundActions = '#192436';
-export const slugCalloutCaretBottomBackground = '#213250';
+export const aiPopoverCaretCenter = '#4870B5';
+export const aiPopoverCaretBottom = blue50;
+export const aiPopoverCaretBottomBackgroundActions = '#1E283A';
+export const aiPopoverCaretBottomBackground = '#202D45';
 
 // Chat tokens
 export const chatPromptBackground = gray100;
@@ -277,12 +246,20 @@ export const chatPromptBorderStart = gray90;
 export const chatPromptBorderEnd = rgba(gray90, 0);
 export const chatBubbleUser = gray80;
 export const chatBubbleAgent = gray90;
-export const chatBubbleAgentBorder = gray70;
+export const chatBubbleBorder = gray70;
 export const chatAvatarBot = gray50;
 export const chatAvatarAgent = gray30;
 export const chatAvatarUser = blue50;
 export const chatShellBackground = gray90;
 export const chatHeaderBackground = gray90;
+
+// Chat button tokens
+export const chatButton = linkPrimary;
+export const chatButtonHover = backgroundHover;
+export const chatButtonTextHover = linkPrimaryHover;
+export const chatButtonActive = backgroundActive;
+export const chatButtonSelected = backgroundSelected;
+export const chatButtonTextSelected = textSecondary;
 
 export {
   // Type

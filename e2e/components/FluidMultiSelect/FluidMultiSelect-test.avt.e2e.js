@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('FluidMultiSelect @avt', () => {
+test.describe('@avt FluidMultiSelect', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidMultiSelect',
@@ -63,7 +63,7 @@ test.describe('FluidMultiSelect @avt', () => {
     const menu = page.getByRole('listbox');
 
     await expect(toggleButton).toBeVisible();
-    await expect(selection).not.toBeVisible();
+    await expect(selection).toBeHidden();
     // Tab and open the MultiSelect with Arrow Down
     await page.keyboard.press('Tab');
     await expect(toggleButton).toBeFocused();
@@ -71,19 +71,18 @@ test.describe('FluidMultiSelect @avt', () => {
     await expect(menu).toBeVisible();
     // Close with Escape, retain focus, and open with Enter
     await page.keyboard.press('Escape');
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(menu).toBeVisible();
     // Close with Escape, retain focus, and open with Spacebar
     await page.keyboard.press('Escape');
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Space');
     await expect(menu).toBeVisible();
     // Navigation inside the menu
-    // move to first option
-    await page.keyboard.press('ArrowDown');
+    // Focus on first element by default
     await expect(
       page.getByRole('option', {
         name: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
@@ -134,11 +133,11 @@ test.describe('FluidMultiSelect @avt', () => {
     await page.keyboard.press('Escape');
     await expect(toggleButton).toBeFocused();
     // should show count of selected items when closed
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(selection).toBeVisible();
     // should only clear selection when escape is pressed when the menu is closed
     await page.keyboard.press('Escape');
-    await expect(selection).not.toBeVisible();
+    await expect(selection).toBeHidden();
   });
 
   test('@avt-keyboard-nav FluidMultiSelect condensed', async ({ page }) => {
@@ -158,7 +157,7 @@ test.describe('FluidMultiSelect @avt', () => {
     const menu = page.getByRole('listbox');
 
     await expect(toggleButton).toBeVisible();
-    await expect(selection).not.toBeVisible();
+    await expect(selection).toBeHidden();
     // Tab and open the MultiSelect with Arrow Down
     await page.keyboard.press('Tab');
     await expect(toggleButton).toBeFocused();
@@ -166,19 +165,18 @@ test.describe('FluidMultiSelect @avt', () => {
     await expect(menu).toBeVisible();
     // Close with Escape, retain focus, and open with Enter
     await page.keyboard.press('Escape');
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(menu).toBeVisible();
     // Close with Escape, retain focus, and open with Spacebar
     await page.keyboard.press('Escape');
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Space');
     await expect(menu).toBeVisible();
     // Navigation inside the menu
-    // move to first option
-    await page.keyboard.press('ArrowDown');
+    // Focus on first element by default
     await expect(
       page.getByRole('option', {
         name: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
@@ -229,10 +227,10 @@ test.describe('FluidMultiSelect @avt', () => {
     await page.keyboard.press('Escape');
     await expect(toggleButton).toBeFocused();
     // should show count of selected items when closed
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(selection).toBeVisible();
     // should only clear selection when escape is pressed when the menu is closed
     await page.keyboard.press('Escape');
-    await expect(selection).not.toBeVisible();
+    await expect(selection).toBeHidden();
   });
 });

@@ -86,19 +86,19 @@ export const Dismissable = () => {
   const tabs = [
     {
       label: 'Dashboard',
-      panel: <TabPanel>Dashboard</TabPanel>,
+      panel: <TabPanel key={0}>Dashboard</TabPanel>,
     },
     {
       label: 'Monitoring',
-      panel: <TabPanel>Monitoring</TabPanel>,
+      panel: <TabPanel key={1}>Monitoring</TabPanel>,
     },
     {
       label: 'Activity',
-      panel: <TabPanel>Activity</TabPanel>,
+      panel: <TabPanel key={2}>Activity</TabPanel>,
     },
     {
       label: 'Settings',
-      panel: <TabPanel>Settings</TabPanel>,
+      panel: <TabPanel key={3}>Settings</TabPanel>,
       disabled: true,
     },
   ];
@@ -157,19 +157,19 @@ export const DismissableWithIcons = ({ contained }) => {
   const tabs = [
     {
       label: 'Dashboard',
-      panel: <TabPanel>Dashboard</TabPanel>,
+      panel: <TabPanel key={0}>Dashboard</TabPanel>,
     },
     {
       label: 'Monitoring',
-      panel: <TabPanel>Monitoring</TabPanel>,
+      panel: <TabPanel key={1}>Monitoring</TabPanel>,
     },
     {
       label: 'Activity',
-      panel: <TabPanel>Activity</TabPanel>,
+      panel: <TabPanel key={2}>Activity</TabPanel>,
     },
     {
       label: 'Settings',
-      panel: <TabPanel>Settings</TabPanel>,
+      panel: <TabPanel key={3}>Settings</TabPanel>,
       disabled: true,
     },
   ];

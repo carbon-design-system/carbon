@@ -48,7 +48,20 @@ export const WithInteractiveElements = () => (
   </StaticNotification>
 );
 
-export const WithActionButton = () => (
+export const WithActionButtonOnly = () => (
+  <StaticNotification
+    title="Notification title"
+    titleId="notif-1"
+    kind="info"
+    lowContrast
+    actionButtonLabel="Learn More">
+    <div className="cds--inline-notification__subtitle">
+      Here is some important info you might want to know.{' '}
+    </div>
+  </StaticNotification>
+);
+
+export const WithActionButtonAndLinks = () => (
   <StaticNotification
     title="Notification title"
     titleId="notif-1"

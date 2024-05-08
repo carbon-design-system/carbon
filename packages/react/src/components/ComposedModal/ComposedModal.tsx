@@ -19,9 +19,13 @@ import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
 import toggleClass from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import wrapFocus from '../../internal/wrapFocus';
+import wrapFocus, {
+  elementOrParentIsFloatingMenu,
+  wrapFocusWithoutSentinels,
+} from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { useFeatureFlag } from '../FeatureFlags';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -201,7 +205,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   selectorPrimaryFocus?: string;
 
   /** Specify the CSS selectors that match the floating menus. */
-  selectorsFloatingMenus?: Array<string | null | undefined>;
+  selectorsFloatingMenus?: string[];
 
   size?: 'xs' | 'sm' | 'md' | 'lg';
 
@@ -241,6 +245,9 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     const button = useRef<HTMLButtonElement>(null);
     const startSentinel = useRef<HTMLButtonElement>(null);
     const endSentinel = useRef<HTMLButtonElement>(null);
+    const focusTrapWithoutSentinels = useFeatureFlag(
+      'enable-experimental-focus-wrap-without-sentinels'
+    );
 
     // Keep track of modal open/close state
     // and propagate it to the document.body
@@ -258,21 +265,41 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    function handleKeyDown(evt: KeyboardEvent) {
-      evt.stopPropagation();
-      if (match(evt, keys.Escape)) {
-        closeModal(evt);
+    function handleKeyDown(event) {
+      event.stopPropagation();
+      if (match(event, keys.Escape)) {
+        closeModal(event);
       }
 
-      onKeyDown?.(evt);
+      if (
+        focusTrapWithoutSentinels &&
+        open &&
+        match(event, keys.Tab) &&
+        innerModal.current
+      ) {
+        wrapFocusWithoutSentinels({
+          containerNode: innerModal.current,
+          currentActiveNode: event.target,
+          event: event,
+        });
+      }
+
+      onKeyDown?.(event);
     }
-    function handleMousedown(evt: MouseEvent) {
+
+    function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
+      const target = evt.target as Node;
       evt.stopPropagation();
-      const isInside = innerModal.current?.contains(evt.target as Node);
-      if (!isInside && !preventCloseOnClickOutside) {
+      if (
+        !preventCloseOnClickOutside &&
+        !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
+        innerModal.current &&
+        !innerModal.current.contains(target)
+      ) {
         closeModal(evt);
       }
     }
+
     function handleBlur({
       target: oldActiveNode,
       relatedTarget: currentActiveNode,
@@ -379,11 +406,11 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       }
     }, [open, selectorPrimaryFocus, isOpen]);
 
-    // Slug is always size `lg`
+    // Slug is always size `sm`
     let normalizedSlug;
     if (slug && slug['type']?.displayName === 'Slug') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size: 'lg',
+        size: 'sm',
       });
     }
 
@@ -393,7 +420,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         role="presentation"
         ref={ref}
         aria-hidden={!open}
-        onBlur={handleBlur}
+        onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
         onMouseDown={handleMousedown}
         onKeyDown={handleKeyDown}
         className={modalClass}>
@@ -404,24 +431,27 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
           aria-labelledby={ariaLabelledBy}>
           {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
-
-          <button
-            type="button"
-            ref={startSentinel}
-            className={`${prefix}--visually-hidden`}>
-            Focus sentinel
-          </button>
+          {!focusTrapWithoutSentinels && (
+            <button
+              type="button"
+              ref={startSentinel}
+              className={`${prefix}--visually-hidden`}>
+              Focus sentinel
+            </button>
+          )}
           <div ref={innerModal} className={`${prefix}--modal-container-body`}>
             {normalizedSlug}
             {childrenWithProps}
           </div>
           {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
-          <button
-            type="button"
-            ref={endSentinel}
-            className={`${prefix}--visually-hidden`}>
-            Focus sentinel
-          </button>
+          {!focusTrapWithoutSentinels && (
+            <button
+              type="button"
+              ref={endSentinel}
+              className={`${prefix}--visually-hidden`}>
+              Focus sentinel
+            </button>
+          )}
         </div>
       </div>
     );
@@ -504,7 +534,7 @@ ComposedModal.propTypes = {
   /**
    * Specify the CSS selectors that match the floating menus
    */
-  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
+  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string.isRequired),
 
   /**
    * Specify the size variant.

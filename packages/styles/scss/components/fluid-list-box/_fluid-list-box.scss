@@ -114,15 +114,20 @@
     outline-offset: 0;
   }
 
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus:has(
+      .#{$prefix}--list-box--expanded
+    ) {
+    outline-width: convert.to-rem(1px);
+  }
+
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__field:focus {
     outline: none;
     outline-offset: 0;
   }
 
-  .#{$prefix}--list-box__wrapper--fluid
-    :not(.#{$prefix}--list-box--up)
+  .#{$prefix}--list-box__wrapper--fluid:not(.#{$prefix}--list-box--up)
     .#{$prefix}--list-box__menu {
-    inset-block-start: calc(100% + convert.to-rem(1px));
+    inset-block-start: calc(100%);
   }
 
   // Invalid / Warning styles
@@ -186,9 +191,10 @@
   }
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__invalid-icon,
   .#{$prefix}--list-box__wrapper--fluid
-    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box.#{$prefix}--list-box--warning
     .#{$prefix}--list-box__invalid-icon {
     inset-block-start: convert.to-rem(81px);
     inset-inline-end: $spacing-05;
@@ -235,8 +241,7 @@
   }
 
   // direction - top
-  .#{$prefix}--list-box__wrapper--fluid
-    .#{$prefix}--list-box--up
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box--up
     .#{$prefix}--list-box__menu {
     inset-block-end: $spacing-10;
   }
@@ -329,5 +334,43 @@
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
     padding-inline-end: $spacing-12;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__selection {
+    inset-inline-end: convert.to-rem(41px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box--warning,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--invalid[data-invalid] {
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
+      .#{$prefix}--list-box__selection::before {
+      position: absolute;
+      background-color: transparent;
+      block-size: convert.to-rem(16px);
+      content: '';
+      inline-size: convert.to-rem(1px);
+      margin-inline-end: convert.to-rem(33px);
+    }
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid:has(.#{$prefix}--multi-select)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: $spacing-04;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid:has(.#{$prefix}--dropdown)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: $spacing-04;
+  }
+
+  // remove slug divider when element is invalid and fluid
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--slug::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--slug::before {
+    display: none;
   }
 }
