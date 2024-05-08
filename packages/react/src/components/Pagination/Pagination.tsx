@@ -185,10 +185,10 @@ const Pagination = React.forwardRef(function Pagination(
     pageSize: controlledPageSize,
     pageSizeInputDisabled,
     pageSizes: controlledPageSizes,
-    pageText = (page, pagesUnknown) => `page ${pagesUnknown ? '' : page}`,
+    pageText = (page) => `page ${page}`,
     pagesUnknown = false,
     size = 'md',
-    totalItems = 1,
+    totalItems,
     ...rest
   }: PaginationProps,
   ref: React.Ref<HTMLDivElement>
@@ -216,7 +216,9 @@ const Pagination = React.forwardRef(function Pagination(
     [`${prefix}--pagination--${size}`]: size,
     [customClassName]: !!customClassName,
   });
-  const totalPages = Math.max(Math.ceil(totalItems / pageSize), 1);
+  const totalPages = totalItems
+    ? Math.max(Math.ceil(totalItems / pageSize), 1)
+    : NaN;
   const backButtonDisabled = disabled || page === 1;
   const backButtonClasses = cx({
     [`${prefix}--pagination__button`]: true,
@@ -276,7 +278,11 @@ const Pagination = React.forwardRef(function Pagination(
 
   function handlePageInputChange(event) {
     const page = Number(event.target.value);
-    if (page > 0 && page <= Math.max(Math.ceil(totalItems / pageSize), 1)) {
+    if (
+      page > 0 &&
+      totalItems &&
+      page <= Math.max(Math.ceil(totalItems / pageSize), 1)
+    ) {
       setPage(page);
 
       if (onChange) {
@@ -359,7 +365,7 @@ const Pagination = React.forwardRef(function Pagination(
         </Select>
         <span
           className={`${prefix}--pagination__text ${prefix}--pagination__items-count`}>
-          {pagesUnknown
+          {pagesUnknown || !totalItems
             ? itemText(pageSize * (page - 1) + 1, page * pageSize)
             : itemRangeText(
                 Math.min(pageSize * (page - 1) + 1, totalItems),
@@ -371,29 +377,26 @@ const Pagination = React.forwardRef(function Pagination(
       <div className={`${prefix}--pagination__right`}>
         {pagesUnknown ? (
           <span
-            className={`${prefix}--pagination__text ${prefix}--pagination__page-text`}>
-            {pagesUnknown
-              ? pageText(page, pagesUnknown)
-              : pageRangeText(page, totalPages)}
+            className={`${prefix}--pagination__text ${prefix}--pagination__page-text ${prefix}--pagination__unknown-pages-text`}>
+            {pageText(page)}
           </span>
-        ) : null}
-        <Select
-          id={`${prefix}-pagination-select-${inputId}-right`}
-          className={`${prefix}--select__page-number`}
-          labelText={`Page number, of ${totalPages} pages`}
-          inline
-          hideLabel
-          onChange={handlePageInputChange}
-          value={page}
-          disabled={pageInputDisabled || disabled}>
-          {selectItems}
-        </Select>
-        {pagesUnknown ? null : (
-          <span className={`${prefix}--pagination__text`}>
-            {pagesUnknown
-              ? pageText(page, pagesUnknown)
-              : pageRangeText(page, totalPages)}
-          </span>
+        ) : (
+          <>
+            <Select
+              id={`${prefix}-pagination-select-${inputId}-right`}
+              className={`${prefix}--select__page-number`}
+              labelText={`Page number, of ${totalPages} pages`}
+              inline
+              hideLabel
+              onChange={handlePageInputChange}
+              value={page}
+              disabled={pageInputDisabled || disabled}>
+              {selectItems}
+            </Select>
+            <span className={`${prefix}--pagination__text`}>
+              {pageRangeText(page, totalPages)}
+            </span>
+          </>
         )}
         <div className={`${prefix}--pagination__control-buttons`}>
           <IconButton

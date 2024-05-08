@@ -289,6 +289,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://hollyos.com/"><img src="https://avatars.githubusercontent.com/u/4097509?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Holly Springsteen</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=hollyos" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/2nikhiltom"><img src="https://avatars.githubusercontent.com/2nikhiltom?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nikhil Tomar</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=2nikhiltom" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/aninaantony"><img src="https://avatars.githubusercontent.com/u/164350784?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anina Antony</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=aninaantony" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ychavoya"><img src="https://avatars.githubusercontent.com/u/7907338?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Yael Chavoya</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=ychavoya" title="Code">💻</a></td>
   </tr>
 </table>
 
