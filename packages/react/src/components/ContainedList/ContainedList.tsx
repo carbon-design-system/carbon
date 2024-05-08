@@ -205,5 +205,4 @@ ContainedList.propTypes = {
 };
 
 ContainedList.ContainedListItem = ContainedListItem;
-
 export default ContainedList;
