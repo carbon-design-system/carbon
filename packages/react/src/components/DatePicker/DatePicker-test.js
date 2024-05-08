@@ -126,6 +126,8 @@ describe('DatePicker', () => {
     fireEvent.change(endDateInput, { target: { value: '01/07/2023' } });
     // Simulate a click event outside the datepicker
     fireEvent.click(document.body);
+    fireEvent.focus(startDateInput);
+    fireEvent.click(document.body);
     expect(handleChange).not.toHaveBeenCalled();
   });
 
