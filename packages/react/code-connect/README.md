@@ -7,9 +7,8 @@
 Code Connect offers a solution for linking the
 [Carbon v11 All themes](https://carbondesignsystem.com/designing/kits/figma/)
 Figma library components directly to their counterparts inside of @carbon/react.
-By incorporating Code Connect into your workflow, Figma's Dev Mode will showcase
-authentic code snippets derived from your Carbon React design system, bypassing
-generic examples.
+By incorporating Code Connect into your workflow, Figma's Dev Mode will display
+actual code snippets from Carbon React.
 
 Not only does Code Connect establish connections between component definitions,
 but it also facilitates the mapping of properties from Carbon React code to
