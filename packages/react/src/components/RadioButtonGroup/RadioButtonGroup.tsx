@@ -114,6 +114,10 @@ export interface RadioButtonGroupProps
    * Specify the value that is currently selected in the group
    */
   valueSelected?: string | number;
+  /**
+   * `true` to specify if input selection in group is required.
+   */
+  required?: boolean;
 }
 
 const RadioButtonGroup = React.forwardRef(
@@ -136,6 +140,7 @@ const RadioButtonGroup = React.forwardRef(
       warn = false,
       warnText,
       slug,
+      required,
       ...rest
     } = props;
     const prefix = usePrefix();
@@ -164,6 +169,7 @@ const RadioButtonGroup = React.forwardRef(
           value: value,
           onChange: handleOnChange,
           checked: value === selected,
+          required: required,
         };
 
         if (!selected && (radioButton as ReactElementLike)?.props.checked) {
@@ -333,6 +339,11 @@ RadioButtonGroup.propTypes = {
    * Whether the RadioButtonGroup should be read-only
    */
   readOnly: PropTypes.bool,
+
+  /**
+   * `true` to specify if radio selection in group is required.
+   */
+  required: PropTypes.bool,
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
