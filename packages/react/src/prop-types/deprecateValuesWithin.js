@@ -32,7 +32,7 @@ export default function deprecateValuesWithin(
         warning(
           false,
           message ||
-            `The value for \`${propName}\` prop has been deprecated, It will be removed in the next major release. Allowed values is/are: ${allowedValues.join(
+            `In \`${componentName}\` component value for \`${propName}\` prop has been deprecated, It will be removed in the next major release. Allowed values is/are: ${allowedValues.join(
               ', '
             )}`
         );
