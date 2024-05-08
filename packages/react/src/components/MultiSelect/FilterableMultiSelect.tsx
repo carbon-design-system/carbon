@@ -415,10 +415,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   }
 
-  // function handleOnOuterClick() {
-  //   handleOnMenuChange(false);
-  // }
-
   const {
     getToggleButtonProps,
     getLabelProps,
