@@ -83,8 +83,7 @@ may shift and types could become outdated.
 
 If a typing is out of date or incorrect, please let us know by opening an issue
 or even better, propose a fix via PR! We appreciate the community's involvement
-in this effort to keep component types up to date and as correct as possible!
-🙏
+in this effort to keep component types up to date and as correct as possible! 🙏
 
 #### A new prop is added to a component
 
