@@ -8,6 +8,7 @@ import { usePrefix } from '../../../../internal/usePrefix';
 import { Popover, PopoverContent } from '../../../Popover';
 import Button from '../../../Button';
 import Checkbox from '../../../Checkbox';
+import { Layer } from '../../../Layer';
 
 export type PopoverAlignment =
   | 'top'
@@ -106,6 +107,7 @@ const TableToolbarFilter = ({
   }
 
   return (
+    <Layer>
     <Popover<any>
       open={isOpen}
       isTabTip
@@ -149,6 +151,7 @@ const TableToolbarFilter = ({
         </Button>
       </PopoverContent>
     </Popover>
+    </Layer>
   );
 };
 
