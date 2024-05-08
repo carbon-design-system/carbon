@@ -3755,6 +3755,9 @@ Map {
       "sortItems": Object {
         "type": "func",
       },
+      "titleText": Object {
+        "type": "node",
+      },
       "translateWithId": Object {
         "type": "func",
       },
@@ -5424,6 +5427,9 @@ Map {
         },
         "sortItems": Object {
           "type": "func",
+        },
+        "titleText": Object {
+          "type": "node",
         },
         "translateWithId": Object {
           "type": "func",
