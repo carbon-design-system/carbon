@@ -3102,7 +3102,7 @@ Map {
     "Provider": "React.Provider",
   },
   "ExpandableSearch" => Object {
-    "displayName": "ExpandableSearch",
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "autoComplete": Object {
         "type": "string",
@@ -3198,6 +3198,7 @@ Map {
         "type": "oneOfType",
       },
     },
+    "render": [Function],
   },
   "ExpandableTile" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -6455,6 +6456,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "required": Object {
+        "type": "bool",
+      },
       "slug": Object {
         "type": "node",
       },
@@ -6539,6 +6543,9 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
+      "required": Object {
+        "type": "bool",
+      },
       "slug": Object {
         "type": "node",
       },
@@ -6595,6 +6602,9 @@ Map {
       },
       "onChange": Object {
         "type": "func",
+      },
+      "required": Object {
+        "type": "bool",
       },
       "tabIndex": Object {
         "type": "number",
