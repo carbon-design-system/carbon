@@ -109,8 +109,8 @@ test.describe('@avt FluidTextInput', () => {
 
   test('@avt-keyboard-nav for password', async ({ page }) => {
     await visitStory(page, {
-      component: 'TextInput',
-      id: 'experimental-fluid-components-unstable-fluidtextinput--password-input',
+      component: 'FluidPasswordInput',
+      id: 'experimental-fluid-components-unstable-fluidpasswordinput--default',
       globals: {
         theme: 'white',
       },

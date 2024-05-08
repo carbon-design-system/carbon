@@ -12,6 +12,7 @@
 @use '../../motion';
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../spacing' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/high-contrast-mode' as *;
@@ -186,6 +187,7 @@
 
   .#{$prefix}--structured-list-svg {
     display: inline-block;
+    margin-block-start: $spacing-01;
     transition: all motion.$duration-fast-02 motion.motion(standard, productive);
     vertical-align: top;
   }
@@ -260,5 +262,10 @@
     + .#{$prefix}--structured-list-td
     .#{$prefix}--structured-list-svg {
     @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--structured-list__icon {
+    margin-block-start: $spacing-01;
+    vertical-align: top;
   }
 }
