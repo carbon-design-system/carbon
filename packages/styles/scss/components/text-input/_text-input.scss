@@ -131,6 +131,10 @@
     transition: outline $duration-fast-01 motion(standard, productive);
   }
 
+  .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover {
+    inset-inline-start: -(convert.to-rem(40px));
+  }
+
   .#{$prefix}--text-input--sm
     + .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     inline-size: convert.to-rem(32px);

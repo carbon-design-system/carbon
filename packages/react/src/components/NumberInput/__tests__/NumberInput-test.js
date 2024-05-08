@@ -373,4 +373,36 @@ describe('NumberInput', () => {
 
     expect(onChange).toHaveBeenCalledTimes(0);
   });
+
+  it('should update value to empty when allowEmpty is true & input value becomes empty', async () => {
+    const onChange = jest.fn();
+    render(
+      <NumberInput
+        id="carbon-number"
+        min={-100}
+        max={100}
+        value={50}
+        label="NumberInput label"
+        helperText="Optional helper text."
+        invalidText="Number is not valid"
+        allowEmpty={true}
+        onChange={onChange}
+      />
+    );
+
+    const input = screen.getByLabelText('NumberInput label');
+
+    await userEvent.clear(input);
+
+    userEvent.type(input, '{backspace}');
+    expect(input.value).toBe('');
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.any(Object),
+      }),
+      expect.objectContaining({
+        value: '',
+      })
+    );
+  });
 });

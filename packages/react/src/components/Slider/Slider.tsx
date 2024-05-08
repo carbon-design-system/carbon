@@ -964,6 +964,7 @@ class Slider extends PureComponent<SliderProps> {
   };
 
   processNewInputValue = (input: HTMLInputElement) => {
+    this.setState({ correctedValue: null, correctedPosition: null });
     const targetValue = Number.parseFloat(input.value);
     const validity = !isNaN(targetValue);
 
@@ -1036,7 +1037,7 @@ class Slider extends PureComponent<SliderProps> {
         ? (boundingRect?.right ?? 0) - clientX
         : clientX - (boundingRect?.left ?? 0);
       return leftOffset / width;
-    } else if (value && range) {
+    } else if (value !== null && value !== undefined && range) {
       // Prevent NaN calculation if the range is 0.
       return range === 0 ? 0 : (value - this.props.min) / range;
     }
@@ -1343,14 +1344,16 @@ class Slider extends PureComponent<SliderProps> {
     } = this.state;
 
     const showWarning =
-      (!readOnly && warn && isValid) ||
+      (!readOnly && warn) ||
       (typeof correctedValue !== null &&
-        correctedPosition === HandlePosition.LOWER);
+        correctedPosition === HandlePosition.LOWER &&
+        isValid);
     const showWarningUpper =
-      (!readOnly && warn && (twoHandles ? isValidUpper : isValid)) ||
+      (!readOnly && warn) ||
       (typeof correctedValue !== null &&
         correctedPosition ===
-          (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER));
+          (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER) &&
+        (twoHandles ? isValidUpper : isValid));
 
     return (
       <PrefixContext.Consumer>
@@ -1515,7 +1518,7 @@ class Slider extends PureComponent<SliderProps> {
                     hasTooltip={hideTextInput}
                     className={lowerThumbWrapperClasses}
                     label={`${value}`}
-                    align={twoHandles ? 'top-right' : 'top'}
+                    align="top"
                     {...lowerThumbWrapperProps}>
                     <div
                       className={lowerThumbClasses}
@@ -1549,7 +1552,7 @@ class Slider extends PureComponent<SliderProps> {
                       hasTooltip={hideTextInput}
                       className={upperThumbWrapperClasses}
                       label={`${valueUpper}`}
-                      align="top-left"
+                      align="top"
                       {...upperThumbWrapperProps}>
                       <div
                         className={upperThumbClasses}

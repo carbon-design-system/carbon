@@ -1,4 +1,8 @@
-import { ArgsTable } from '@storybook/blocks';
+import { ArgsTable, Canvas, Story, Meta } from '@storybook/blocks';
+import * as TextInputStories from './TextInput.stories';
+import * as PasswordInputStories from './PasswordInput.stories';
+
+<Meta of={TextInputStories} />
 
 # TextInput
 
@@ -8,9 +12,47 @@ import { ArgsTable } from '@storybook/blocks';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/text-input/accessibility)
 
-## Table of Contents
+<Canvas>
+  <Story of={TextInputStories.Default} />
+</Canvas>
 
 ## Overview
+
+Text inputs enable users to enter free-form text data. The type of text field
+used should reflect the length of the content you expect the user to enter. The
+default text input is for short, one-line content.
+
+### Fluid
+
+<Canvas>
+  <Story of={TextInputStories.Fluid} />
+</Canvas>
+
+### Read Only
+
+<Canvas>
+  <Story of={TextInputStories.ReadOnly} />
+</Canvas>
+
+### With Layer
+
+<Canvas>
+  <Story of={TextInputStories._WithLayer} />
+</Canvas>
+
+### Password Input
+
+Password input is a variant of text input in it's on story called
+[PasswordInput](https://react.carbondesignsystem.com/?path=/story/components-passwordinput--default).
+It is used to collect private data and will hide the characters as a user enters
+them. A user can choose to toggle on the character visibility by clicking the
+view icon on the far right of the input field. When using a password input be
+sure to provide detailed helper text listing any requirements related to the
+data format, such as types of characters allowed or date structure.
+
+`TextInput.Password` is deprecated, use
+[PasswordInput](https://react.carbondesignsystem.com/?path=/story/components-passwordinput--default)
+component instead.
 
 ## Component API
 
@@ -20,4 +62,4 @@ import { ArgsTable } from '@storybook/blocks';
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/TextInput/TextInput.mdx).
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/TextInput/TextInput.mdx).TextInputStories,
