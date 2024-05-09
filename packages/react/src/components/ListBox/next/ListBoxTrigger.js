@@ -27,11 +27,10 @@ const defaultTranslateWithId = (id) => defaultTranslations[id];
  * `ListBoxTrigger` is used to orient the icon up or down depending on the
  * state of the menu for a given `ListBox`
  */
-const ListBoxTrigger = ({
-  isOpen,
-  translateWithId: t = defaultTranslateWithId,
-  ...rest
-}) => {
+const ListBoxTrigger = React.forwardRef(function ListBoxTrigger(
+  { isOpen, translateWithId: t = defaultTranslateWithId, ...rest },
+  ref
+) {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--list-box__menu-icon`]: true,
@@ -45,11 +44,12 @@ const ListBoxTrigger = ({
       title={description}
       className={className}
       type="button"
-      tabIndex="-1">
+      tabIndex="-1"
+      ref={ref}>
       <ChevronDown />
     </button>
   );
-};
+});
 
 ListBoxTrigger.propTypes = {
   /**
