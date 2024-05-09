@@ -264,7 +264,8 @@ describe('Tab', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      screen.getAllByLabelText('Press delete to close tab')[0].parentElement
+      screen.getAllByLabelText('Press delete to remove Tab Label 1 tab')[0]
+        .parentElement
     ).not.toHaveClass(`${prefix}--visually-hidden`);
   });
 
@@ -286,7 +287,8 @@ describe('Tab', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      screen.queryAllByLabelText('Press delete to close tab')[0].parentElement
+      screen.queryAllByLabelText('Press delete to remove Tab Label 1 tab')[0]
+        .parentElement
     ).toHaveClass(`${prefix}--visually-hidden`);
   });
 
@@ -307,7 +309,7 @@ describe('Tab', () => {
       </Tabs>
     );
     await userEvent.click(
-      screen.getAllByLabelText('Press delete to close tab')[0]
+      screen.getAllByLabelText('Press delete to remove Tab Label 1 tab')[0]
     );
     expect(onTabCloseRequest).toHaveBeenCalledTimes(1);
   });
@@ -329,7 +331,7 @@ describe('Tab', () => {
       </Tabs>
     );
     await userEvent.click(
-      screen.getAllByLabelText('Press delete to close tab')[0]
+      screen.getAllByLabelText('Press delete to remove Tab Label 1 tab')[0]
     );
     expect(onTabCloseRequest).not.toHaveBeenCalled();
   });
@@ -421,7 +423,7 @@ describe('Tab', () => {
     );
 
     expect(
-      screen.getAllByLabelText('Press delete to close tab')[0]
+      screen.getAllByLabelText('Press delete to remove Tab Label 1 tab')[0]
     ).not.toHaveClass(`${prefix}--visaully-hidden`);
   });
 
@@ -442,7 +444,7 @@ describe('Tab', () => {
     );
 
     expect(
-      screen.getAllByLabelText('Press delete to close tab')[0]
+      screen.getAllByLabelText('Press delete to remove Tab Label 1 tab')[0]
     ).not.toHaveClass(`${prefix}--visaully-hidden`);
     expect(screen.getByTestId('svg')).toBeInTheDocument();
     // eslint-disable-next-line testing-library/no-node-access

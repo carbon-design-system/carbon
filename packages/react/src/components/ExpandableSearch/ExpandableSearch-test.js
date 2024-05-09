@@ -90,6 +90,14 @@ describe('ExpandableSearch', () => {
       expect(screen.getByRole('searchbox')).toHaveFocus();
     });
 
+    it('supports a ref on the underlying input element', () => {
+      const ref = jest.fn();
+      const { container } = render(
+        <ExpandableSearch labelText="Search" ref={ref} />
+      );
+      expect(ref).toHaveBeenCalledWith(expect.any(HTMLInputElement));
+    });
+
     it('closes on blur when the input is empty', async () => {
       // Render a button next to the search so that there is another focusable element
       // next to the expandable search to receive focus.

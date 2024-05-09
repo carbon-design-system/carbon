@@ -288,62 +288,6 @@ export const Playground = (args) => (
   </DataTable>
 );
 
-export const Test = () => (
-  <DataTable
-    headers={[
-      {
-        key: 'demo',
-        header: 'Demo',
-      },
-    ]}
-    rows={[{ demo: 'Trigger' }]}>
-    {({
-      rows,
-      headers,
-      getHeaderProps,
-      getRowProps,
-      getTableProps,
-      getTableContainerProps,
-    }) => (
-      <TableContainer {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
-          <TableHead>
-            <TableRow>
-              {headers.map((header) => (
-                <TableHeader key={1} {...getHeaderProps({ header })}>
-                  {header.header}
-                </TableHeader>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row} {...getRowProps({ row })}>
-                {row.cells.map((cell) => (
-                  <TableCell key={row}>
-                    <Toggletip defaultOpen align="right">
-                      <ToggletipButton>{cell.value}</ToggletipButton>
-                      <ToggletipContent>
-                        <p>
-                          Lorem ipsum dolor{' '}
-                          <Link href="www.google.com" inline>
-                            sit amet
-                          </Link>
-                          .
-                        </p>
-                      </ToggletipContent>
-                    </Toggletip>
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    )}
-  </DataTable>
-);
-
 Playground.argTypes = {
   filterRows: {
     table: {

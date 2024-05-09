@@ -1485,6 +1485,7 @@ Map {
       "selectorsFloatingMenus": Object {
         "args": Array [
           Object {
+            "isRequired": true,
             "type": "string",
           },
         ],
@@ -3101,7 +3102,7 @@ Map {
     "Provider": "React.Provider",
   },
   "ExpandableSearch" => Object {
-    "displayName": "ExpandableSearch",
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "autoComplete": Object {
         "type": "string",
@@ -3197,6 +3198,7 @@ Map {
         "type": "oneOfType",
       },
     },
+    "render": [Function],
   },
   "ExpandableTile" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -3752,6 +3754,9 @@ Map {
       },
       "sortItems": Object {
         "type": "func",
+      },
+      "titleText": Object {
+        "type": "node",
       },
       "translateWithId": Object {
         "type": "func",
@@ -5423,6 +5428,9 @@ Map {
         "sortItems": Object {
           "type": "func",
         },
+        "titleText": Object {
+          "type": "node",
+        },
         "translateWithId": Object {
           "type": "func",
         },
@@ -6448,6 +6456,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "required": Object {
+        "type": "bool",
+      },
       "slug": Object {
         "type": "node",
       },
@@ -6532,6 +6543,9 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
+      "required": Object {
+        "type": "bool",
+      },
       "slug": Object {
         "type": "node",
       },
@@ -6588,6 +6602,9 @@ Map {
       },
       "onChange": Object {
         "type": "func",
+      },
+      "required": Object {
+        "type": "bool",
       },
       "tabIndex": Object {
         "type": "number",
