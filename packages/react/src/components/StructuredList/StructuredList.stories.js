@@ -121,7 +121,8 @@ const structuredListBodyRowGenerator = (numRows) => {
         name="row-0"
         aria-label={`row-${i}`}
       />
-      <StructuredListCell>
+      <StructuredListCell
+        className={`${prefix}--structured-list-icon-column-last`}>
         <CheckmarkFilled
           className={`${prefix}--structured-list-svg`}
           aria-label="select an option">

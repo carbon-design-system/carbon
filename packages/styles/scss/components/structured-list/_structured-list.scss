@@ -28,6 +28,17 @@
     @include focus-outline('outline');
   }
 
+  .#{$prefix}--structured-list-row
+    .#{$prefix}--structured-list-td.#{$prefix}--structured-list-icon-column-first {
+    inline-size: $layout-03;
+    padding-inline-end: 0;
+  }
+  .#{$prefix}--structured-list-row
+    .#{$prefix}--structured-list-td.#{$prefix}--structured-list-icon-column-last {
+    inline-size: $layout-03;
+    padding-inline-start: 0;
+  }
+
   .#{$prefix}--structured-list {
     @include component-reset.reset;
 
@@ -220,6 +231,9 @@
       .#{$prefix}--structured-list-svg {
       fill: $icon-primary;
     }
+  }
+  .#{$prefix}--structured-list-td .#{$prefix}--structured-list-icon-row-first {
+    max-inline-size: 1rem;
   }
 
   // Skeleton State
