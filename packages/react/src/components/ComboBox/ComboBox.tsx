@@ -745,6 +745,7 @@ const ComboBox = forwardRef(
                   )}
                   <ListBoxTrigger
                     {...buttonProps}
+                    // @ts-expect-error
                     isOpen={isOpen}
                     translateWithId={translateWithId}
                   />

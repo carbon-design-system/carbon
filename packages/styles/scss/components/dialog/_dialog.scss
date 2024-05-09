@@ -1,0 +1,155 @@
+//
+// Copyright IBM Corp. 2014, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:list';
+@use '../button';
+@use '../../config' as *;
+@use '../../breakpoint' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
+@use '../../utilities/convert';
+@use '../../utilities/component-reset';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/z-index' as *;
+
+/// Dialog styles
+/// @access public
+/// @group dialog
+@mixin dialog {
+  .#{$prefix}--dialog {
+    /* size */
+    padding: 0;
+    border: 1px solid $border-subtle-01;
+    background-color: $layer;
+    color: $text-primary;
+    inline-size: 48rem;
+    max-block-size: 50%;
+    max-inline-size: 100%;
+    opacity: 0;
+    transform: translateY(calc(-1 * #{$spacing-06}));
+
+    /** opening and closing is used in as allow-discrete is not currently supported wide enough
+     * https://caniuse.com/mdn-css_properties_display_is_transitionable
+     */
+    transition: opacity $duration-moderate-02 motion(exit, expressive),
+      transform $duration-moderate-02 motion(exit, expressive),
+      overlay $duration-moderate-02 motion(exit, expressive) allow-discrete,
+      display $duration-moderate-02 motion(exit, expressive) allow-discrete;
+
+    @media (prefers-reduced-motion) {
+      transition: none;
+    }
+
+    @include breakpoint(md) {
+      max-inline-size: 84%;
+    }
+    @include breakpoint(lg) {
+      max-inline-size: 72%;
+    }
+    @include breakpoint(xlg) {
+      max-inline-size: 64%;
+    }
+    @include breakpoint(xlg) {
+      max-inline-size: 60%;
+    }
+
+    &[open] {
+      opacity: 1;
+      transform: translateY(0);
+
+      transition: opacity $duration-moderate-02 motion(entrance, expressive),
+        transform $duration-moderate-02 motion(entrance, expressive),
+        overlay $duration-moderate-02 motion(entrance, expressive)
+          allow-discrete,
+        display $duration-moderate-02 motion(entrance, expressive)
+          allow-discrete;
+
+      @media (prefers-reduced-motion) {
+        transition: none;
+      }
+    }
+
+    /** starting style also not supported widely
+    * https://caniuse.com/mdn-css_at-rules_starting-style
+    */
+    /*   Before-open state  */
+    /* Needs to be after the previous dialog[open] rule to take effect,
+    as the specificity is the same */
+    /* stylelint-disable-next-line scss/at-rule-no-unknown */
+    @starting-style {
+      &[open] {
+        opacity: 0;
+        transform: translateY(calc(-1 * #{$spacing-06}));
+      }
+    }
+  }
+
+  .#{$prefix}--dialog__header {
+    position: relative;
+    overflow: visible;
+    inline-size: 100%;
+    min-block-size: $spacing-09;
+  }
+
+  .#{$prefix}--dialog__content {
+    padding: $spacing-05;
+    block-size: 100%;
+  }
+
+  .#{$prefix}--dialog--modal {
+    border: 1px solid transparent;
+  }
+
+  /* Transition the :backdrop when the dialog modal is promoted to the top layer */
+  .#{$prefix}--dialog::backdrop {
+    background-color: $overlay;
+    opacity: 0;
+    /* opening and closing is used in as allow-discrete is not currently supported wide enough
+     * https://caniuse.com/mdn-css_properties_display_is_transitionable
+     */
+    transition: background-color $duration-moderate-02
+        motion(entrance, expressive),
+      opacity $duration-moderate-02 motion(entrance, expressive);
+
+    @media (prefers-reduced-motion) {
+      transition: none;
+    }
+  }
+
+  .#{$prefix}--dialog[open]::backdrop {
+    opacity: 1;
+
+    transition: background-color $duration-moderate-02 motion(exit, expressive),
+      opacity $duration-moderate-02 motion(exit, expressive);
+
+    @media (prefers-reduced-motion) {
+      transition: none;
+    }
+  }
+
+  /** starting style also not supported widely
+  * https://caniuse.com/mdn-css_at-rules_starting-style
+  */
+  /* This starting-style rule cannot be nested inside the above selector
+because the nesting selector cannot represent pseudo-elements. */
+  /* stylelint-disable-next-line scss/at-rule-no-unknown */
+  @starting-style {
+    .#{$prefix}--dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  .#{$prefix}--dialog__header-controls {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
+}
