@@ -39,6 +39,14 @@ describe('ComboBox', () => {
     };
   });
 
+  it('should display the menu of items when a user clicks on the input', async () => {
+    render(<ComboBox {...mockProps} />);
+
+    await userEvent.click(findInputNode());
+
+    assertMenuOpen(mockProps);
+  });
+
   it('should call `onChange` each time an item is selected', async () => {
     render(<ComboBox {...mockProps} />);
     expect(mockProps.onChange).not.toHaveBeenCalled();
@@ -95,6 +103,29 @@ describe('ComboBox', () => {
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
     });
+  });
+
+  it('should not let the user select an option by clicking on the disabled option node', async () => {
+    mockProps.items[2].disabled = true;
+
+    render(<ComboBox {...mockProps} />);
+    await openMenu();
+
+    await userEvent.click(screen.getAllByRole('option')[2]);
+
+    expect(mockProps.onChange).not.toHaveBeenCalled();
+  });
+
+  it('should not select the disabled option if user type in input and press enter', async () => {
+    mockProps.items[2].disabled = true;
+
+    render(<ComboBox {...mockProps} />);
+    await userEvent.type(findInputNode(), 'Item 2');
+    await userEvent.keyboard('[Enter]');
+
+    expect(mockProps.onChange).not.toHaveBeenCalled();
+    //it should not close the menu if matching element not found and enter is pressed.
+    expect(findListBoxNode()).toHaveClass(`${prefix}--list-box--expanded`);
   });
 
   it('should retain value if custom value is entered and `allowCustomValue` is set', async () => {

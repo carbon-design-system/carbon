@@ -49,7 +49,6 @@ const {
   InputKeyDownEnter,
   FunctionToggleMenu,
   ToggleButtonClick,
-  InputClick,
   ItemMouseMove,
   InputKeyDownArrowUp,
   InputKeyDownArrowDown,
@@ -423,6 +422,14 @@ const ComboBox = forwardRef(
         const { highlightedIndex } = changes;
         switch (type) {
           case InputBlur:
+            if (
+              state.inputValue &&
+              highlightedIndex == '-1' &&
+              !allowCustomValue
+            ) {
+              return { ...changes, inputValue: '' };
+            }
+            return changes;
           case InputKeyDownEnter:
             if (allowCustomValue) {
               setInputValue(inputValue);
@@ -434,18 +441,14 @@ const ComboBox = forwardRef(
             } else if (changes.selectedItem && !allowCustomValue) {
               return changes;
             } else {
-              return { ...changes, inputValue: '' };
+              return { ...changes, isOpen: true };
             }
-            break;
           case FunctionToggleMenu:
           case ToggleButtonClick:
             if (changes.isOpen && !changes.selectedItem) {
               return { ...changes, highlightedIndex: 0 };
             }
             return changes;
-
-          case InputClick:
-            return { ...changes, isOpen: false };
 
           case MenuMouseLeave:
             return { ...changes, highlightedIndex: state.highlightedIndex };
