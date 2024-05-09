@@ -121,7 +121,6 @@
     }
 
     > .#{$prefix}--popover > .#{$prefix}--popover-caret {
-      inset-inline-end: 0;
       inset-inline-start: revert;
       transform: translate(
         50%,
@@ -159,7 +158,6 @@
     }
 
     > .#{$prefix}--popover > .#{$prefix}--popover-caret {
-      inset-inline-start: 0;
       transform: translate(
         -50%,
         calc(-1 * custom-property.get-var('popover-offset', 0rem))
@@ -475,6 +473,11 @@
     .#{$prefix}--slider__thumb-wrapper--upper {
       inset-inline-start: 100%;
     }
+  }
+
+  // With hidden input
+  .#{$prefix}--popover-container.#{$prefix}--slider__thumb-wrapper {
+    position: absolute;
   }
 
   // Windows HCM fix
