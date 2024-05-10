@@ -53,7 +53,8 @@ figma.connect(
     }) => {
       return (
         // Disclaimer: Code Connect is currently in beta and
-        // integration with Carbon React is a work in progress.
+        // integration with Carbon React is in an exploratory phase.
+        // Code sample below may be incomplete.
         <Button
           size={size}
           kind={kind}
@@ -83,7 +84,12 @@ figma.connect(
       }),
     },
     example: ({ size }) => {
-      return <ButtonSkeleton size={size} />;
+      return (
+        // Disclaimer: Code Connect is currently in beta and
+        // integration with Carbon React is in an exploratory phase.
+        // Code sample below may be incomplete.
+        <ButtonSkeleton size={size} />
+      );
     },
   }
 );

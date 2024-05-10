@@ -16,7 +16,8 @@ figma.connect(
     props: { children: figma.children(['Accordion item']) },
     example: ({ children }) => (
       // Disclaimer: Code Connect is currently in beta and
-      // integration with Carbon React is a work in progress.
+      // integration with Carbon React is in an exploratory phase.
+      // Code sample below may be incomplete.
       <Accordion>{children}</Accordion>
     ),
   }

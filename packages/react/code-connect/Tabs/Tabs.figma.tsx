@@ -23,17 +23,22 @@ figma.connect(
       }),
 
       //missing props (available on Tabs items in figma)
-      // dismissable, iconSize
+      // dismissable
+      // iconSize
     },
     example: ({ children, contained, fullWidth }) => (
       // Disclaimer: Code Connect is currently in beta and
       // integration with Carbon React is in an exploratory phase.
+      // Code sample below may be incomplete.
       <Tabs>
-        <TabList contained={contained} fullWidth={fullWidth}>
+        <TabList
+          aria-label="List of tabs"
+          contained={contained}
+          fullWidth={fullWidth}>
           {children}
         </TabList>
         {/* Example code below, not mapped in Figma.
-        There needs to be one TabPanel per Tab */}
+        There needs to be one TabPanel per Tab/IconTab */}
         <TabPanels>
           <TabPanel>Tab Panel 1</TabPanel>
           <TabPanel>Tab Panel 2</TabPanel>

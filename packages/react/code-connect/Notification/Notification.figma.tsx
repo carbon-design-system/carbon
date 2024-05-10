@@ -45,20 +45,18 @@ figma.connect(
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4179-105911&mode=design&t=lJU3KHSU1pTpZ32z-4',
   {
     variant: { Type: 'Inline short' },
-    // variant: { Type: 'Inline short',  Actionable: 'True'} <--doesn't work
+
     props: sharedNotificationProps,
     example: ({ title, kind, subtitle, hideCloseButton }) => (
       // Disclaimer: Code Connect is currently in beta and
       // integration with Carbon React is in an exploratory phase.
-      <>
-        {/* short - actionable: {actionable} */}
-        <InlineNotification
-          title={title}
-          kind={kind}
-          subtitle={subtitle}
-          hideCloseButton={hideCloseButton}
-        />
-      </>
+      // Code sample below may be incomplete.
+      <InlineNotification
+        title={title}
+        kind={kind}
+        subtitle={subtitle}
+        hideCloseButton={hideCloseButton}
+      />
     ),
   }
 );
@@ -68,20 +66,18 @@ figma.connect(
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4179-105911&mode=design&t=lJU3KHSU1pTpZ32z-4',
   {
     variant: { Type: 'Inline long' },
-    // variant: { Type: 'Inline short',  Actionable: 'True'} <--doesn't work
     props: sharedNotificationProps,
-    example: ({ title, kind, subtitle, hideCloseButton, actionable }) => (
+    example: ({ title, kind, subtitle, hideCloseButton, lowContrast }) => (
       // Disclaimer: Code Connect is currently in beta and
       // integration with Carbon React is in an exploratory phase.
-      <>
-        long - actionable: {actionable}
-        <InlineNotification
-          title={title}
-          kind={kind}
-          subtitle={subtitle}
-          hideCloseButton={hideCloseButton}
-        />
-      </>
+      // Code sample below may be incomplete.
+      <InlineNotification
+        title={title}
+        kind={kind}
+        subtitle={subtitle}
+        hideCloseButton={hideCloseButton}
+        lowContrast={lowContrast}
+      />
     ),
   }
 );
@@ -92,14 +88,16 @@ figma.connect(
   {
     variant: { Type: 'Toast' },
     props: sharedNotificationProps,
-    example: ({ title, kind, subtitle, caption }) => (
+    example: ({ title, kind, subtitle, caption, lowContrast }) => (
       // Disclaimer: Code Connect is currently in beta and
       // integration with Carbon React is in an exploratory phase.
+      // Code sample below may be incomplete.
       <ToastNotification
         kind={kind}
         title={title}
         subtitle={subtitle}
         caption={caption}
+        lowContrast={lowContrast}
       />
     ),
   }
@@ -110,7 +108,8 @@ figma.connect(
   ActionableNotification,
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4179-105911&mode=design&t=WhsTspVnawA9vgXk-4',
   {
-    variant: { Actionable: 'True' },
+    variant: { Actionable: 'True' }, // <--doesn't work
+    // variant: { Type: 'Inline short',  Actionable: 'True'} <--doesn't work
     props: sharedNotificationProps,
     example: ({
       title,
@@ -122,6 +121,7 @@ figma.connect(
     }) => (
       // Disclaimer: Code Connect is currently in beta and
       // integration with Carbon React is in an exploratory phase.
+      // Code sample below may be incomplete.
       <>
         actionable: {actionable}
         <ActionableNotification

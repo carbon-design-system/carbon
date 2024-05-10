@@ -20,7 +20,7 @@ figma.connect(
         Medium: 'md',
         Small: 'sm',
       }),
-      titleText: figma.string('Label text'),
+      titleText: figma.string('Label'),
       label: figma.string('Prompt text'),
       hideLabel: figma.boolean('Show label', {
         true: false,
@@ -64,6 +64,7 @@ figma.connect(
     }) => {
       // Disclaimer: Code Connect is currently in beta and
       // integration with Carbon React is in an exploratory phase.
+      // Code sample below may be incomplete.
 
       const items = [
         {

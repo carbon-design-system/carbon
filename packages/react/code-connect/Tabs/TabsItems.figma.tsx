@@ -13,16 +13,23 @@ figma.connect(
   Tab,
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=5658-278361&mode=design&t=ERtuwFdbSumlRYtB-4',
   {
+    variant: { Type: 'Text + Icon' },
     props: {
       label: figma.string('Label text'),
       disabled: figma.enum('State', {
         Disabled: true,
       }),
       renderIcon: figma.instance('Swap icon'),
-      // secondaryLabel: doesn't exist in Figma
+      secondaryLabel: figma.boolean('Show 2nd label', {
+        true: 'Manually add secondary label', // exists as a text node  - on Figma roadmap https://github.com/figma/code-connect/issues/30
+        false: undefined,
+      }),
     },
-    example: ({ label, disabled, renderIcon }) => (
-      <Tab disabled={disabled} renderIcon={renderIcon}>
+    example: ({ label, disabled, renderIcon, secondaryLabel }) => (
+      <Tab
+        disabled={disabled}
+        renderIcon={renderIcon}
+        secondaryLabel={secondaryLabel}>
         {label}
       </Tab>
     ),
@@ -35,13 +42,20 @@ figma.connect(
   {
     variant: { Type: 'Icon only' },
     props: {
+      label: figma.string('Label text'),
+      // iconSize: figma.enum('Size', { //  needs to be set on parent TabList component
+      //   Large: 'lg',
+      //   Medium: undefined,
+      // }),
       disabled: figma.enum('State', {
         Disabled: true,
       }),
       icon: figma.instance('Swap icon'),
     },
-    example: ({ disabled, icon }) => (
-      <IconTab disabled={disabled}>{icon}</IconTab>
+    example: ({ disabled, icon, label }) => (
+      <IconTab disabled={disabled} label={label}>
+        {icon}
+      </IconTab>
     ),
   }
 );

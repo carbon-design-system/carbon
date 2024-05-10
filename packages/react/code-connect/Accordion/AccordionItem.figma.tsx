@@ -21,9 +21,6 @@ figma.connect(
       open: figma.boolean('Expanded'),
       content: figma.string('Content text'),
       children: figma.instance('Swap slot'),
-
-      // Accordion props
-      // <Accordion size={size} isFlush={isFlush} align={align}>
       size: figma.enum('Size', {
         Large: 'lg',
         Medium: 'md',
@@ -40,9 +37,9 @@ figma.connect(
       open,
       content,
       children,
-      // size,
-      // isFlush,
-      // align,
+      // size, needs to be set on Accordion
+      // isFlush, needs to be set on Accordion
+      // align, needs to be set on Accordion
     }) => (
       <AccordionItem title={title} disabled={disabled} open={open}>
         {content}
