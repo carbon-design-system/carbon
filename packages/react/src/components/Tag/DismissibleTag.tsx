@@ -153,9 +153,6 @@ const DismissibleTag = <T extends React.ElementType>({
           leaveDelayMs={0}
           closeOnActivation>
           <button
-            // onFocus={(event) => {
-            //   event.stopPropagation();
-            // }}
             type="button"
             className={`${prefix}--tag__close-icon`}
             onClick={handleClose}
