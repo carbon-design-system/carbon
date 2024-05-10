@@ -30,12 +30,12 @@
 
   .#{$prefix}--structured-list-row
     .#{$prefix}--structured-list-td.#{$prefix}--structured-list-icon-column-first {
-    inline-size: $layout-03;
+    inline-size: $spacing-07;
     padding-inline-end: 0;
   }
   .#{$prefix}--structured-list-row
     .#{$prefix}--structured-list-td.#{$prefix}--structured-list-icon-column-last {
-    inline-size: $layout-03;
+    inline-size: $spacing-07;
     padding-inline-start: 0;
   }
 
