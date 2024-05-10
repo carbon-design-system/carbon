@@ -11,12 +11,17 @@ import classNames from 'classnames';
 import { LayoutConstraint } from '../Layout';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import ContainedListItem from './ContainedListItem';
 
 const variants = ['on-page', 'disclosed'] as const;
 
-type Variants = (typeof variants)[number];
+interface ContainedListType extends React.FC<ContainedListProps> {
+  ContainedListItem: typeof ContainedListItem;
+}
 
-interface ContainedListProps {
+export type Variants = (typeof variants)[number];
+
+export interface ContainedListProps {
   /**
    * A slot for a possible interactive element to render.
    */
@@ -89,7 +94,7 @@ function renderChildren(children) {
   return children;
 }
 
-const ContainedList: React.FC<ContainedListProps> = ({
+const ContainedList: ContainedListType = ({
   action,
   children,
   className,
@@ -199,4 +204,5 @@ ContainedList.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 };
 
+ContainedList.ContainedListItem = ContainedListItem;
 export default ContainedList;
