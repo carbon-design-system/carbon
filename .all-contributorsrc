@@ -1515,6 +1515,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ychavoya",
+      "name": "Yael Chavoya",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7907338?v=4",
+      "profile": "https://github.com/ychavoya",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

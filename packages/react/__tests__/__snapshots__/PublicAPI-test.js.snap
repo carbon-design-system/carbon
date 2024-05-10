@@ -3621,6 +3621,9 @@ Map {
       "sortItems": Object {
         "type": "func",
       },
+      "titleText": Object {
+        "type": "node",
+      },
       "translateWithId": Object {
         "type": "func",
       },
@@ -5291,6 +5294,9 @@ Map {
         "sortItems": Object {
           "type": "func",
         },
+        "titleText": Object {
+          "type": "node",
+        },
         "translateWithId": Object {
           "type": "func",
         },
@@ -6316,6 +6322,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "required": Object {
+        "type": "bool",
+      },
       "slug": Object {
         "type": "node",
       },
@@ -6398,6 +6407,9 @@ Map {
         "type": "oneOf",
       },
       "readOnly": Object {
+        "type": "bool",
+      },
+      "required": Object {
         "type": "bool",
       },
       "slug": Object {

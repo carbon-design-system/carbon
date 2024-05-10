@@ -11,6 +11,8 @@ import MultiSelect from './MultiSelect';
 import { default as FilterableMultiSelect } from './FilterableMultiSelect';
 
 FilterableMultiSelect.displayName = 'MultiSelect.Filterable';
+// @ts-expect-error: The attribute indeed does not exist on the object,
+// but since it is already deprecated, we do not have to fix it.
 MultiSelect.Filterable = FilterableMultiSelect;
 
 if (__DEV__) {

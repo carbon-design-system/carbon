@@ -150,4 +150,16 @@ describe('RadioButton', () => {
       `${prefix}--radio-button-wrapper--slug`
     );
   });
+
+  it('should set the "required" attribute on the <input> by default', () => {
+    render(
+      <RadioButton
+        name="test-name"
+        value="test-value"
+        labelText="test-label"
+        required
+      />
+    );
+    expect(screen.getByRole('radio')).toHaveAttribute('required');
+  });
 });
