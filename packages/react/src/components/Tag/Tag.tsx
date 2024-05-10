@@ -14,7 +14,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
-import { Tooltip } from '../Tooltip';
+import { DefinitionTooltip } from '../Tooltip';
 
 const getInstanceId = setupGetInstanceId();
 export const TYPES = {
@@ -87,11 +87,6 @@ export interface TagBaseProps {
   slug?: ReactNodeLike;
 
   /**
-   * Provide text to be rendered inside of a the tag.
-   */
-  text?: string;
-
-  /**
    * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.
    */
   title?: string;
@@ -118,7 +113,6 @@ const Tag = <T extends React.ElementType>({
   disabled,
   onClose, // remove onClose in next major release - V12
   size,
-  text,
   as: BaseComponent,
   slug,
   ...other
@@ -138,7 +132,7 @@ const Tag = <T extends React.ElementType>({
       `${prefix}--tag__label`
     )[0];
     isEllipsisActive(newElement);
-  }, [prefix, children, tagId]);
+  }, [prefix, tagId]);
 
   const conditions = [
     `${prefix}--tag--selectable`,
@@ -210,53 +204,13 @@ const Tag = <T extends React.ElementType>({
 
   const ComponentTag =
     BaseComponent ??
-    (other.onClick ||
-    className?.includes(`${prefix}--tag--operational`) ||
-    isEllipsisApplied
+    (other.onClick || className?.includes(`${prefix}--tag--operational`)
       ? 'button'
       : 'div');
 
-  let tagText = text;
-
-  if (typeof children === 'string' && tagText === undefined) {
-    tagText = children;
-  }
-
-  const tooltipClasses = classNames(
-    `${prefix}--icon-tooltip`,
-    `${prefix}--tooltip-disabled-onmouseenter`,
-    `${prefix}--tag-label-tooltip`
-  );
-
-  if (isEllipsisApplied) {
-    return (
-      <Tooltip
-        label={tagText}
-        align="bottom"
-        className={tooltipClasses}
-        leaveDelayMs={0}
-        closeOnActivation>
-        <ComponentTag
-          disabled={disabled}
-          className={tagClasses}
-          id={tagId}
-          {...other}>
-          {CustomIconElement && size !== 'sm' ? (
-            <div className={`${prefix}--tag__custom-icon`}>
-              <CustomIconElement />
-            </div>
-          ) : (
-            ''
-          )}
-          <Text title={tagText} className={`${prefix}--tag__label`}>
-            {tagText ? tagText : typeText}
-          </Text>
-          {text !== undefined ? children : null}
-          {normalizedSlug}
-        </ComponentTag>
-      </Tooltip>
-    );
-  }
+  const labelClasses = classNames({
+    [`${prefix}--tag__label`]: !isInteractiveTag,
+  });
 
   return (
     <ComponentTag
@@ -271,14 +225,22 @@ const Tag = <T extends React.ElementType>({
       ) : (
         ''
       )}
-      <Text title={tagText} className={`${prefix}--tag__label`}>
-        {tagText ? tagText : typeText}
-      </Text>
-      {text !== undefined ? (
-        <Text title={tagText} className={`${prefix}--tag__label`}>
-          {children}
+      {isEllipsisApplied && !isInteractiveTag ? (
+        <DefinitionTooltip
+          openOnHover={false}
+          definition={
+            children !== null && children !== undefined ? children : typeText
+          }>
+          <Text className={labelClasses}>
+            {children !== null && children !== undefined ? children : typeText}
+          </Text>
+        </DefinitionTooltip>
+      ) : (
+        <Text className={labelClasses}>
+          {children !== null && children !== undefined ? children : typeText}
         </Text>
-      ) : null}
+      )}
+
       {normalizedSlug}
     </ComponentTag>
   );
@@ -343,11 +305,6 @@ Tag.propTypes = {
    * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
    */
   slug: PropTypes.node,
-
-  /**
-   * Provide text to be rendered inside of a the tag.
-   */
-  text: PropTypes.string,
 
   /**
    * Text to show on clear filters

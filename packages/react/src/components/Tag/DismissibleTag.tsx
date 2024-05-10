@@ -6,13 +6,15 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import classNames from 'classnames';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import Tag, { SIZES, TYPES } from './Tag';
 import { Close } from '@carbon/icons-react';
+import { Tooltip } from '../Tooltip';
+import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -80,7 +82,7 @@ const DismissibleTag = <T extends React.ElementType>({
   disabled,
   id,
   renderIcon,
-  title = 'Clear filter',
+  title = 'Dismiss',
   onClose,
   slug,
   size,
@@ -91,7 +93,20 @@ const DismissibleTag = <T extends React.ElementType>({
   const prefix = usePrefix();
   const tagId = id || `tag-${getInstanceId()}`;
   const tagClasses = classNames(`${prefix}--tag--filter`, className);
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
+  const isEllipsisActive = (element: any) => {
+    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
+    return element.offsetWidth < element.scrollWidth;
+  };
+
+  useLayoutEffect(() => {
+    const elementTagId = document.querySelector(`#${tagId}`);
+    const newElement = elementTagId?.getElementsByClassName(
+      `${prefix}--tag__label`
+    )[0];
+    isEllipsisActive(newElement);
+  }, [prefix, tagId]);
   const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (onClose) {
       event.stopPropagation();
@@ -107,9 +122,16 @@ const DismissibleTag = <T extends React.ElementType>({
     });
   }
 
+  const tooltipClasses = classNames(
+    `${prefix}--icon-tooltip`,
+    `${prefix}--tag-label-tooltip`
+  );
+
   // Removing onClick from the spread operator
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { onClick, ...otherProps } = other;
+
+  const dismissLabel = `Dismiss "${text}"`;
 
   return (
     <Tag<any>
@@ -118,22 +140,33 @@ const DismissibleTag = <T extends React.ElementType>({
       renderIcon={renderIcon}
       disabled={disabled}
       className={tagClasses}
-      text={text}
       id={tagId}
       {...otherProps}>
-      {normalizedSlug}
-      <button
-        onFocus={(event) => {
-          event.stopPropagation();
-        }}
-        type="button"
-        className={`${prefix}--tag__close-icon`}
-        onClick={handleClose}
-        disabled={disabled}
-        aria-label={title}
-        title={title}>
-        <Close />
-      </button>
+      <div className={`${prefix}--interactive--tag-children`}>
+        <Text title={text} className={`${prefix}--tag__label`}>
+          {text}
+        </Text>
+        <Tooltip
+          label={isEllipsisApplied ? dismissLabel : title}
+          align="bottom"
+          className={tooltipClasses}
+          leaveDelayMs={0}
+          closeOnActivation>
+          <button
+            // onFocus={(event) => {
+            //   event.stopPropagation();
+            // }}
+            type="button"
+            className={`${prefix}--tag__close-icon`}
+            onClick={handleClose}
+            disabled={disabled}
+            aria-label={title}
+            title={title}>
+            <Close />
+          </button>
+        </Tooltip>
+        {normalizedSlug}
+      </div>
     </Tag>
   );
 };

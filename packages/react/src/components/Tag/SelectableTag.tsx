@@ -6,12 +6,14 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import classNames from 'classnames';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import Tag, { SIZES } from './Tag';
+import { Tooltip } from '../Tooltip';
+import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -81,6 +83,20 @@ const SelectableTag = <T extends React.ElementType>({
   const tagClasses = classNames(`${prefix}--tag--selectable`, className, {
     [`${prefix}--tag--selectable-selected`]: selectedTag,
   });
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+
+  const isEllipsisActive = (element: any) => {
+    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
+    return element.offsetWidth < element.scrollWidth;
+  };
+
+  useLayoutEffect(() => {
+    const elementTagId = document.querySelector(`#${tagId}`);
+    const newElement = elementTagId?.getElementsByClassName(
+      `${prefix}--tag__label`
+    )[0];
+    isEllipsisActive(newElement);
+  }, [prefix, tagId]);
 
   let normalizedSlug;
   if (slug && slug['type']?.displayName === 'Slug') {
@@ -90,9 +106,40 @@ const SelectableTag = <T extends React.ElementType>({
     });
   }
 
+  const tooltipClasses = classNames(
+    `${prefix}--icon-tooltip`,
+    `${prefix}--tag-label-tooltip`
+  );
+
   // Removing onClick from the spread operator
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { onClick, ...otherProps } = other;
+
+  if (isEllipsisApplied) {
+    return (
+      <Tooltip
+        label={text}
+        align="bottom"
+        className={tooltipClasses}
+        leaveDelayMs={0}
+        onMouseEnter={false}>
+        <Tag<any>
+          slug={slug}
+          size={size}
+          renderIcon={renderIcon}
+          disabled={disabled}
+          className={tagClasses}
+          id={tagId}
+          onClick={() => setSelectedTag(!selectedTag)}
+          {...otherProps}>
+          <Text title={text} className={`${prefix}--tag__label`}>
+            {text}
+          </Text>
+          {normalizedSlug}
+        </Tag>
+      </Tooltip>
+    );
+  }
 
   return (
     <Tag<any>
@@ -102,10 +149,12 @@ const SelectableTag = <T extends React.ElementType>({
       disabled={disabled}
       className={tagClasses}
       id={tagId}
-      text={text}
       onClick={() => setSelectedTag(!selectedTag)}
       {...otherProps}>
       {normalizedSlug}
+      <Text title={text} className={`${prefix}--tag__label`}>
+        {text}
+      </Text>
     </Tag>
   );
 };

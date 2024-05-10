@@ -6,12 +6,14 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { MouseEventHandler } from 'react';
+import React, { MouseEventHandler, useLayoutEffect, useState } from 'react';
 import classNames from 'classnames';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import Tag, { SIZES } from './Tag';
+import { Tooltip } from '../Tooltip';
+import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -92,6 +94,21 @@ const OperationalTag = <T extends React.ElementType>({
   const prefix = usePrefix();
   const tagId = id || `tag-${getInstanceId()}`;
   const tagClasses = classNames(`${prefix}--tag--operational`, className);
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+
+  const isEllipsisActive = (element: any) => {
+    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
+    return element.offsetWidth < element.scrollWidth;
+  };
+
+  useLayoutEffect(() => {
+    const elementTagId = document.querySelector(`#${tagId}`);
+    const newElement = elementTagId?.getElementsByClassName(
+      `${prefix}--tag__label`
+    )[0];
+
+    isEllipsisActive(newElement);
+  }, [prefix, tagId]);
 
   let normalizedSlug;
   if (slug && slug['type']?.displayName === 'Slug') {
@@ -99,6 +116,37 @@ const OperationalTag = <T extends React.ElementType>({
       size: 'sm',
       kind: 'inline',
     });
+  }
+
+  const tooltipClasses = classNames(
+    `${prefix}--icon-tooltip`,
+    `${prefix}--tag-label-tooltip`
+  );
+
+  if (isEllipsisApplied) {
+    return (
+      <Tooltip
+        label={text}
+        align="bottom"
+        className={tooltipClasses}
+        leaveDelayMs={0}
+        onMouseEnter={false}
+        closeOnActivation>
+        <Tag<any>
+          type={type}
+          size={size}
+          renderIcon={renderIcon}
+          disabled={disabled}
+          className={tagClasses}
+          id={tagId}
+          {...other}>
+          <Text title="aaa" className={`${prefix}--tag__label`}>
+            {text}
+          </Text>
+          {normalizedSlug}
+        </Tag>
+      </Tooltip>
+    );
   }
 
   return (
@@ -109,9 +157,11 @@ const OperationalTag = <T extends React.ElementType>({
       disabled={disabled}
       className={tagClasses}
       id={tagId}
-      text={text}
       {...other}>
       {normalizedSlug}
+      <Text title="bbb" className={`${prefix}--tag__label`}>
+        {text}
+      </Text>
     </Tag>
   );
 };

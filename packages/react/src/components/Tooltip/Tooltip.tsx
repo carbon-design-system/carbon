@@ -156,10 +156,7 @@ function Tooltip<T extends React.ElementType>({
 
   function onMouseEnter() {
     // Interactive Tags should not support onMouseEnter
-    const isMouseOnEnterDisabled = customClassName?.includes(
-      `${prefix}--tooltip-disabled-onmouseenter`
-    );
-    if (!isMouseOnEnterDisabled) {
+    if (!rest?.onMouseEnter?.()) {
       setIsPointerIntersecting(true);
       setOpen(true, enterDelayMs);
     }
@@ -215,7 +212,7 @@ function Tooltip<T extends React.ElementType>({
   }, [isDragging, onDragStop]);
 
   return (
-    <Popover
+    <Popover<any>
       {...rest}
       align={align}
       className={cx(`${prefix}--tooltip`, customClassName)}

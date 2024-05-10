@@ -296,7 +296,6 @@ export const Dismissible = (args) => {
       <DismissibleTag
         type="red"
         className="some-class"
-        title="Clear Filter"
         renderIcon={Asleep}
         text="Tag content with a long text description"
         {...args}
@@ -304,7 +303,6 @@ export const Dismissible = (args) => {
       <DismissibleTag
         type="magenta"
         className="some-class"
-        title="Clear Filter"
         text="Tag content"
         renderIcon={Asleep}
         {...args}
@@ -312,7 +310,6 @@ export const Dismissible = (args) => {
       <DismissibleTag
         type="purple"
         className="some-class"
-        title="Clear Filter"
         text="Tag content"
         renderIcon={Asleep}
         {...args}
@@ -320,7 +317,6 @@ export const Dismissible = (args) => {
       <DismissibleTag
         type="blue"
         className="some-class"
-        title="Clear Filter"
         renderIcon={Asleep}
         text="Tag content"
         {...args}
@@ -328,7 +324,6 @@ export const Dismissible = (args) => {
       <DismissibleTag
         type="cyan"
         className="some-class"
-        title="Clear Filter"
         renderIcon={Asleep}
         text="Tag content"
         {...args}
@@ -336,7 +331,6 @@ export const Dismissible = (args) => {
       <DismissibleTag
         type="teal"
         className="some-class"
-        title="Clear Filter"
         renderIcon={Asleep}
         text="Tag content"
         {...args}
@@ -344,7 +338,6 @@ export const Dismissible = (args) => {
       <DismissibleTag
         type="green"
         className="some-class"
-        title="Clear Filter"
         renderIcon={Asleep}
         text="Tag content"
         {...args}
@@ -352,7 +345,6 @@ export const Dismissible = (args) => {
       <DismissibleTag
         type="gray"
         className="some-class"
-        title="Clear Filter"
         renderIcon={Asleep}
         text="Tag content"
         {...args}
@@ -360,7 +352,6 @@ export const Dismissible = (args) => {
       <DismissibleTag
         type="cool-gray"
         className="some-class"
-        title="Clear Filter"
         renderIcon={Asleep}
         text="Tag content"
         {...args}
@@ -368,7 +359,6 @@ export const Dismissible = (args) => {
       <DismissibleTag
         type="warm-gray"
         className="some-class"
-        title="Clear Filter"
         renderIcon={Asleep}
         text="Tag content"
         {...args}
@@ -376,7 +366,6 @@ export const Dismissible = (args) => {
       <DismissibleTag
         type="high-contrast"
         className="some-class"
-        title="Clear Filter"
         renderIcon={Asleep}
         text="Tag content"
         {...args}
@@ -384,7 +373,6 @@ export const Dismissible = (args) => {
       <DismissibleTag
         type="outline"
         className="some-class"
-        title="Clear Filter"
         renderIcon={Asleep}
         text="Tag content"
         {...args}

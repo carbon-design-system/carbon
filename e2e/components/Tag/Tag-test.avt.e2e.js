@@ -45,10 +45,10 @@ test.describe('@avt Tag', () => {
     await expect(button).toBeVisible();
     await page.keyboard.press('Tab');
     await expect(button).toBeFocused();
-    // Expect Tooltip to be visible
-    await expect(page.getByRole('tooltip')).toHaveAttribute(
-      'aria-hidden',
-      'false'
+    // Expect DefinitionTooltip to be visible
+    await expect(page.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'true'
     );
   });
 });

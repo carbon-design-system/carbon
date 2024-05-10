@@ -81,6 +81,8 @@
     }
   }
 
+  .#{$prefix}--tag--operational > span,
+  .#{$prefix}--tag--selectable > span,
   .#{$prefix}--tag__label {
     display: block;
     overflow: hidden;
@@ -424,4 +426,30 @@
     max-inline-size: convert.to-rem(158px);
   }
   /* stylelint-enable */
+
+  .#{$prefix}--interactive--tag-children {
+    display: inline-flex;
+    max-inline-size: convert.to-rem(200px);
+    place-items: center;
+  }
+
+  .#{$prefix}--tag--filter
+    .#{$prefix}--tag__custom-icon
+    + span
+    > .#{$prefix}--interactive--tag-children {
+    max-inline-size: convert.to-rem(184px);
+  }
+
+  .#{$prefix}--tag .#{$prefix}--definition-term {
+    -webkit-border-after: none;
+    border-block-end: none;
+    max-inline-size: convert.to-rem(192px);
+  }
+
+  .#{$prefix}--tag
+    .#{$prefix}--tag__custom-icon
+    + span
+    > .#{$prefix}--definition-term {
+    max-inline-size: convert.to-rem(176px);
+  }
 }

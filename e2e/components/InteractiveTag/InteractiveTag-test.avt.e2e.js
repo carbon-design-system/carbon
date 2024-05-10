@@ -109,11 +109,11 @@ test.describe('@avt InteractiveTag', () => {
     await page.keyboard.press('Tab');
     await expect(tag).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(tag).toHaveClass(/cds--tag--selectable-selected/);
-    await page.keyboard.press('Tab');
     await expect(page.getByRole('tooltip')).toHaveAttribute(
       'aria-hidden',
       'false'
     );
+    await expect(tag).toHaveClass(/cds--tag--selectable-selected/);
+    await page.keyboard.press('Tab');
   });
 });
