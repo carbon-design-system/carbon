@@ -260,7 +260,7 @@ export const WithInitialSelectedItems = () => {
   );
 };
 
-export const Filterable = () => {
+export const Filterable = (args) => {
   return (
     <div style={{ width: 300 }}>
       <FilterableMultiSelect
@@ -270,9 +270,16 @@ export const Filterable = () => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
     </div>
   );
+};
+
+Filterable.argTypes = {
+  onChange: {
+    action: 'onChange',
+  },
 };
 
 export const WithLayerMultiSelect = () => (
