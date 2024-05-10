@@ -86,7 +86,6 @@ test.describe('@avt FluidComboBox', () => {
     await expect(menu).toBeVisible();
     // Navigation inside the menu
     // move to first option
-    await page.keyboard.press('ArrowDown');
     await expect(optionOne).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
     );
