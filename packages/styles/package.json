@@ -1,7 +1,7 @@
 {
   "name": "@carbon/styles",
   "description": "Styles for the Carbon Design System",
-  "version": "0.19.8",
+  "version": "0.19.9",
   "private": true,
   "license": "Apache-2.0",
   "repository": {
@@ -24,13 +24,13 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
-    "@carbon/colors": "^10.37.3",
-    "@carbon/feature-flags": "^0.7.1",
-    "@carbon/grid": "^10.43.3",
-    "@carbon/layout": "^10.37.3",
-    "@carbon/motion": "^10.29.3",
-    "@carbon/themes": "^10.55.4",
-    "@carbon/type": "^10.45.4",
+    "@carbon/colors": "^10.37.4",
+    "@carbon/feature-flags": "^0.7.2",
+    "@carbon/grid": "^10.43.4",
+    "@carbon/layout": "^10.37.4",
+    "@carbon/motion": "^10.29.4",
+    "@carbon/themes": "^10.55.5",
+    "@carbon/type": "^10.45.5",
     "@ibm/plex": "6.0.0-next.6",
     "@ibm/telemetry-js": "^1.5.0"
   },
