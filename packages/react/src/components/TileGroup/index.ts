@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { createClassWrapper } from '../../internal/createClassWrapper';
-import TileGroupCarbon from './TileGroup';
+import TileGroup from './TileGroup';
 
-const TileGroup = createClassWrapper(TileGroupCarbon);
 export default TileGroup;
 export { TileGroup };

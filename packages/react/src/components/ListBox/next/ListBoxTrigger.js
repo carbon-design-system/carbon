@@ -27,6 +27,7 @@ const defaultTranslateWithId = (id) => defaultTranslations[id];
  * `ListBoxTrigger` is used to orient the icon up or down depending on the
  * state of the menu for a given `ListBox`
  */
+
 const ListBoxTrigger = React.forwardRef(function ListBoxTrigger(
   { isOpen, translateWithId: t = defaultTranslateWithId, ...rest },
   ref

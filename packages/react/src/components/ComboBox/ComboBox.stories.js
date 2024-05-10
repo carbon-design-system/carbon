@@ -67,11 +67,6 @@ export const Default = () => (
       onChange={() => {}}
       id="carbon-combobox"
       items={items}
-      downshiftProps={{
-        onStateChange: () => {
-          console.log('the state has changed');
-        },
-      }}
       itemToString={(item) => (item ? item.text : '')}
       titleText="ComboBox title"
       helperText="Combobox helper text"
@@ -88,16 +83,9 @@ export const AllowCustomValue = () => {
       <ComboBox
         allowCustomValue
         shouldFilterItem={filterItems}
-        onChange={(e) => {
-          console.log(e);
-        }}
+        onChange={() => {}}
         id="carbon-combobox"
         items={['Apple', 'Orange', 'Banana', 'Pineapple', 'Raspberry', 'Lime']}
-        downshiftProps={{
-          onStateChange: () => {
-            console.log('the state has changed');
-          },
-        }}
         titleText="ComboBox title"
         helperText="Combobox helper text"
       />
@@ -127,11 +115,6 @@ export const Playground = (args) => (
     <ComboBox
       id="carbon-combobox"
       items={items}
-      downshiftProps={{
-        onStateChange: () => {
-          console.log('the state has changed');
-        },
-      }}
       itemToString={(item) => (item ? item.text : '')}
       titleText="ComboBox title"
       helperText="Combobox helper text"
@@ -192,15 +175,10 @@ Playground.argTypes = {
   onChange: {
     action: 'changed',
   },
-  onClick: {
+  onToggleClick: {
     action: 'clicked',
   },
   onInputChange: {
-    table: {
-      disable: true,
-    },
-  },
-  onToggleClick: {
     table: {
       disable: true,
     },
