@@ -9,7 +9,7 @@ import React, {
   type ChangeEvent,
   type ComponentType,
 } from 'react';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
   Checkbox,
@@ -48,7 +48,7 @@ export interface TileProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 }
 
 export const Tile = React.forwardRef<HTMLDivElement, TileProps>(function Tile(
@@ -396,7 +396,7 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Specify the tab index of the wrapper element
@@ -641,7 +641,7 @@ export interface ExpandableTileProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `ExpandableTile` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * The `tabindex` attribute.
