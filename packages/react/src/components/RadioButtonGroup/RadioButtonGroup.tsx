@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactElementLike, ReactNodeLike } from 'prop-types';
-import React, { createContext, useRef, useState } from 'react';
+import PropTypes, { ReactElementLike } from 'prop-types';
+import React, { createContext, ReactNode, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { Legend } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
@@ -28,7 +28,7 @@ export interface RadioButtonGroupProps
   /**
    * Provide a collection of `<RadioButton>` components to render in the group
    */
-  children?: ReactNodeLike;
+  children?: ReactNode;
 
   /**
    * Provide an optional className to be applied to the container node
@@ -48,7 +48,7 @@ export interface RadioButtonGroupProps
   /**
    * Provide text that is used alongside the control label for additional help
    */
-  helperText?: ReactNodeLike;
+  helperText?: ReactNode;
 
   /**
    * Specify whether the control is currently invalid
@@ -58,7 +58,7 @@ export interface RadioButtonGroupProps
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * Provide where label text should be placed
@@ -69,7 +69,7 @@ export interface RadioButtonGroupProps
    * Provide a legend to the RadioButtonGroup input that you are
    * exposing to the user
    */
-  legendText?: ReactNodeLike;
+  legendText?: ReactNode;
 
   /**
    * Specify the name of the underlying `<input>` nodes
@@ -98,7 +98,7 @@ export interface RadioButtonGroupProps
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Specify whether the control is currently in warning state
@@ -108,7 +108,7 @@ export interface RadioButtonGroupProps
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 
   /**
    * Specify the value that is currently selected in the group
