@@ -5,8 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactElementLike } from 'prop-types';
-import React, { createContext, ReactNode, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import React, {
+  createContext,
+  ReactElement,
+  ReactNode,
+  useRef,
+  useState,
+} from 'react';
 import classNames from 'classnames';
 import { Legend } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
@@ -161,7 +167,7 @@ const RadioButtonGroup = React.forwardRef(
 
     function getRadioButtons() {
       const mappedChildren = React.Children.map(children, (radioButton) => {
-        const { value } = (radioButton as ReactElementLike)?.props ?? undefined;
+        const { value } = (radioButton as ReactElement)?.props ?? undefined;
 
         const newProps = {
           name: name,
@@ -172,11 +178,11 @@ const RadioButtonGroup = React.forwardRef(
           required: required,
         };
 
-        if (!selected && (radioButton as ReactElementLike)?.props.checked) {
+        if (!selected && (radioButton as ReactElement)?.props.checked) {
           newProps.checked = true;
         }
         if (radioButton) {
-          return React.cloneElement(radioButton as ReactElementLike, newProps);
+          return React.cloneElement(radioButton as ReactElement, newProps);
         }
       });
 
