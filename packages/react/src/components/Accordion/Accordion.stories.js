@@ -33,6 +33,71 @@ export default {
   },
 };
 
+// Remove before mergingexport const TestStory = () => (
+export const Test = () => (
+  <div style={{ display: 'flex' }}>
+    <div style={{ flex: 1 }}>
+      <Accordion>
+        <AccordionItem title="Section 1 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </AccordionItem>
+        <AccordionItem title="Section 2 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </AccordionItem>
+        <AccordionItem title="Section 3 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </AccordionItem>
+      </Accordion>
+      <br />
+      {/* <AccordionSkeleton open count={2} /> */}
+    </div>
+    <div style={{ flex: 1 }}>
+      <Accordion isFlush>
+        <AccordionItem title="Section 1 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </AccordionItem>
+        <AccordionItem title="Section 2 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </AccordionItem>
+        <AccordionItem title="Section 3 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </AccordionItem>
+      </Accordion>
+      <br />
+      {/* <AccordionSkeleton open count={2} isFlush /> */}
+    </div>
+  </div>
+);
 export const Default = () => (
   <Accordion>
     <AccordionItem title="Section 1 title">

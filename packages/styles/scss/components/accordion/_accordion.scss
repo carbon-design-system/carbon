@@ -67,19 +67,16 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion__item:not(.#{$prefix}--accordion__item--active) {
-    &:hover {
-      border-block-start-color: transparent;
-      /*  Blend border on hover  */
-    }
-
+    // Blend border on hover
+    &:hover,
+    // Blend top border of the next component on hover
     &:hover + .#{$prefix}--accordion__item {
-      border-block-start-color: transparent;
-      /* Blend top border of the next component on hover */
+      border-block-start-color: $layer-hover;
     }
 
+    // Blend bottom border of last item on hover
     &:last-child:hover {
-      border-block-start-color: transparent;
-      /* Blend bottom border of last item on hover */
+      border-block-end-color: $layer-hover;
     }
   }
 
@@ -105,6 +102,8 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
 
     &:focus {
+      position: relative;
+      z-index: 2;
       box-shadow:
         /* Border top */ 0 -1px 0 0 $focus,
         inset 0 1px 0 0 $focus, /* Border right */ inset 2px 0 0 0 $focus,
@@ -233,6 +232,79 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
   }
 
+  // flush
+  .#{$prefix}--accordion--flush .#{$prefix}--accordion__item {
+    position: relative;
+    border-color: transparent;
+
+    &:last-child,
+    &:hover,
+    &:last-child:hover,
+    &:hover + .#{$prefix}--accordion__item {
+      border-color: transparent;
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      display: block;
+      block-size: 1px;
+      content: '';
+      inline-size: calc(100% - $spacing-05 - $spacing-05);
+      margin-inline-start: $spacing-05;
+      transition: background motion(standard, productive) $duration-fast-02;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    &::before {
+      background: $border-subtle;
+      inset-block-start: -1px;
+    }
+
+    &:last-child::after {
+      background: $border-subtle;
+      inset-block-end: -1px;
+    }
+  }
+
+  .#{$prefix}--accordion--flush .#{$prefix}--accordion__heading:hover {
+    position: relative;
+    z-index: 1;
+
+    // blend top/bottom border into heading hover state
+    &::before,
+    &::after {
+      position: absolute;
+      display: block;
+      background: $layer-hover;
+      block-size: 1px;
+      content: '';
+      inline-size: 100%;
+      inset-inline-start: 0;
+      transition: background motion(standard, productive) $duration-fast-02;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    &::before {
+      inset-block-start: -1px;
+    }
+
+    &::after {
+      inset-block-end: -1px;
+    }
+
+    &:focus::after,
+    &:focus::before {
+      background: none;
+    }
+  }
+
   // Skeleton state
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__heading,
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__button {
@@ -254,7 +326,9 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion.#{$prefix}--skeleton
-    .#{$prefix}--accordion__heading:hover::before {
+    .#{$prefix}--accordion__heading:hover::before,
+  .#{$prefix}--accordion.#{$prefix}--skeleton
+    .#{$prefix}--accordion__heading:hover {
     background-color: transparent;
   }
 
@@ -273,6 +347,10 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
   .#{$prefix}--accordion__title.#{$prefix}--skeleton__text {
     margin-block-end: 0;
+  }
+
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__title {
+    margin-inline-start: $spacing-05;
   }
 
   // Windows HCM fix
@@ -303,64 +381,4 @@ $content-padding: 0 0 0 $spacing-05 !default;
   block-size: 0;
   opacity: 0;
   visibility: hidden;
-}
-
-//flush
-
-.#{$prefix}--accordion--flush .#{$prefix}--accordion__item {
-  position: relative;
-  border-color: transparent;
-}
-
-.#{$prefix}--accordion--flush .#{$prefix}--accordion__item:last-child {
-  border-color: transparent;
-}
-
-.#{$prefix}--accordion--flush .#{$prefix}--accordion__item::after {
-  position: absolute;
-  display: block;
-  block-size: 100%;
-  border-block-start: 1px solid $border-subtle;
-  content: '';
-  inline-size: calc(100% - $spacing-05 - $spacing-05);
-  inset-block-start: -1px;
-  margin-inline-start: $spacing-05;
-  transition: border-color motion(standard, productive) $duration-fast-02;
-}
-
-.#{$prefix}--accordion--flush
-  .#{$prefix}--accordion__item:hover:not(
-    .#{$prefix}--accordion__item--active
-  )::after {
-  border-block-start-color: transparent;
-}
-
-.#{$prefix}--accordion--flush
-  .#{$prefix}--accordion__item:hover:not(.#{$prefix}--accordion__item--active)
-  + .#{$prefix}--accordion__item::after {
-  border-block-start-color: transparent;
-}
-
-.#{$prefix}--accordion--flush .#{$prefix}--accordion__item:last-child:after {
-  position: absolute;
-  display: block;
-  block-size: 100%;
-  border-block-end: 1px solid $border-subtle;
-  border-block-start: 1px solid $border-subtle;
-  content: '';
-  inline-size: calc(100% - $spacing-05 - $spacing-05);
-  inset-block-start: 0;
-  margin-inline-start: 1rem;
-}
-
-.#{$prefix}--accordion--flush .#{$prefix}--accordion__heading {
-  z-index: 2;
-}
-
-.#{$prefix}--accordion--flush:not(.#{$prefix}--skeleton)
-  .#{$prefix}--accordion__heading:hover::before,
-.#{$prefix}--accordion--flush:not(.#{$prefix}--skeleton)
-  .#{$prefix}--accordion__heading:focus::before {
-  inline-size: calc(100% + 32px);
-  inset-inline-start: -1rem;
 }
