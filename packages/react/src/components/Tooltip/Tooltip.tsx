@@ -111,13 +111,14 @@ function Tooltip<T extends React.ElementType>({
     onBlur: () => setOpen(false),
     onClick: () => closeOnActivation && setOpen(false),
     // This should be placed on the trigger in case the element is disabled
-    onMouseEnter,
+    // onMouseEnter,
     onMouseLeave,
     onMouseDown: onDragStart,
     onMouseMove: onMouseMove,
     onTouchStart: onDragStart,
   };
 
+  console.log({ open });
   function getChildEventHandlers(childProps: any) {
     const eventHandlerFunctions = Object.keys(triggerProps).filter((prop) =>
       prop.startsWith('on')
@@ -140,21 +141,41 @@ function Tooltip<T extends React.ElementType>({
     triggerProps['aria-describedby'] = id;
   }
 
-  function onKeyDown(event: React.KeyboardEvent) {
-    if (open && match(event, keys.Escape)) {
-      event.stopPropagation();
-      setOpen(false);
-    }
-    if (
-      open &&
-      closeOnActivation &&
-      (match(event, keys.Enter) || match(event, keys.Space))
-    ) {
-      setOpen(false);
-    }
-  }
+  const onKeyDown = useCallback(
+    (event: React.SyntheticEvent | Event) => {
+      if (open && match(event, keys.Escape)) {
+        setOpen(false);
+      }
+      if (
+        open &&
+        closeOnActivation &&
+        (match(event, keys.Enter) || match(event, keys.Space))
+      ) {
+        setOpen(false);
+      }
+    },
+    [closeOnActivation, open, setOpen]
+  );
 
-  function onMouseEnter() {
+  useEffect(() => {
+    if (!open) {
+      return undefined;
+    }
+
+    function handleKeyDown(event: any) {
+      if (match(event, keys.Escape)) {
+        onKeyDown(event);
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [open, onKeyDown]);
+
+  function handleOnMouseEnter() {
     setIsPointerIntersecting(true);
     setOpen(true, enterDelayMs);
   }
@@ -209,6 +230,7 @@ function Tooltip<T extends React.ElementType>({
   }, [isDragging, onDragStop]);
 
   return (
+    // @ts-ignore-error Popover throws a TS error everytime is imported
     <Popover
       {...rest}
       align={align}
@@ -216,6 +238,7 @@ function Tooltip<T extends React.ElementType>({
       dropShadow={false}
       highContrast
       onKeyDown={onKeyDown}
+      onMouseEnter={handleOnMouseEnter}
       onMouseLeave={onMouseLeave}
       open={open}>
       <div className={`${prefix}--tooltip-trigger__wrapper`}>
