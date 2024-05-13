@@ -14,6 +14,7 @@ import React, {
   useRef,
   useState,
   useEffect,
+  FC,
 } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
@@ -635,7 +636,7 @@ export interface Label {
   id?: string;
   label?: ReactNode;
 }
-function Label({ disabled, id, hideLabel, label }: Label) {
+const Label: FC<Label> = ({ disabled, id, hideLabel, label }) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--label`]: true,
@@ -651,7 +652,7 @@ function Label({ disabled, id, hideLabel, label }: Label) {
     );
   }
   return null;
-}
+};
 
 Label.propTypes = {
   disabled: PropTypes.bool,
