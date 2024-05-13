@@ -315,8 +315,7 @@ export function StructuredListRow(props: StructuredListRowProps) {
       onKeyDown={onKeyDown}>
       <GridRowContext.Provider value={value}>
         {selection && (
-          <StructuredListCell
-            className={`${prefix}--structured-list-icon-column-first`}>
+          <StructuredListCell>
             {selectedRow === id ? (
               <RadioButtonChecked
                 className={`${prefix}--structured-list__icon`}
