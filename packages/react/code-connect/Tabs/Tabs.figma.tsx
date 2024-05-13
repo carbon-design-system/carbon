@@ -27,9 +27,8 @@ figma.connect(
       // iconSize
     },
     example: ({ children, contained, fullWidth }) => (
-      // Disclaimer: Code Connect is currently in beta and
-      // integration with Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
+      // Disclaimer: Code Connect is currently in beta and integration with Carbon
+      // React is in an exploratory phase. Code sample below may be incomplete.
       <Tabs>
         <TabList
           aria-label="List of tabs"

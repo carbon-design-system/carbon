@@ -50,9 +50,8 @@ figma.connect(
       skeleton: figma.boolean('Skeleton'),
     },
     example: () => {
-      // Disclaimer: Code Connect is currently in beta and
-      // integration with Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
+      // Disclaimer: Code Connect is currently in beta and integration with Carbon
+      // React is in an exploratory phase. Code sample below is incomplete.
       return <DataTable></DataTable>;
     },
   }

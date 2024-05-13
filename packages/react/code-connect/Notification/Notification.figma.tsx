@@ -48,9 +48,8 @@ figma.connect(
 
     props: sharedNotificationProps,
     example: ({ title, kind, subtitle, hideCloseButton }) => (
-      // Disclaimer: Code Connect is currently in beta and
-      // integration with Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
+      // Disclaimer: Code Connect is currently in beta and integration with Carbon
+      // React is in an exploratory phase. Code sample below may be incomplete.
       <InlineNotification
         title={title}
         kind={kind}
@@ -68,9 +67,8 @@ figma.connect(
     variant: { Type: 'Inline long' },
     props: sharedNotificationProps,
     example: ({ title, kind, subtitle, hideCloseButton, lowContrast }) => (
-      // Disclaimer: Code Connect is currently in beta and
-      // integration with Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
+      // Disclaimer: Code Connect is currently in beta and integration with Carbon
+      // React is in an exploratory phase. Code sample below may be incomplete.
       <InlineNotification
         title={title}
         kind={kind}
@@ -89,9 +87,8 @@ figma.connect(
     variant: { Type: 'Toast' },
     props: sharedNotificationProps,
     example: ({ title, kind, subtitle, caption, lowContrast }) => (
-      // Disclaimer: Code Connect is currently in beta and
-      // integration with Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
+      // Disclaimer: Code Connect is currently in beta and integration with Carbon
+      // React is in an exploratory phase. Code sample below may be incomplete.
       <ToastNotification
         kind={kind}
         title={title}
@@ -119,9 +116,8 @@ figma.connect(
       actionable,
       lowContrast,
     }) => (
-      // Disclaimer: Code Connect is currently in beta and
-      // integration with Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
+      // Disclaimer: Code Connect is currently in beta and integration with Carbon
+      // React is in an exploratory phase. Code sample below may be incomplete.
       <>
         actionable: {actionable}
         <ActionableNotification
