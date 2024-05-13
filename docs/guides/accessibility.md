@@ -177,8 +177,8 @@ can dig into those points further:
    Depending on hover as a mouse action to trigger a dialogue or tooltip isn't
    accessible. Commonly a screen magnifier shows a zoomed in view of the page
    relative to the cursor position. This means that unless the tooltip or
-   dialogue is quite small the user can't trigger the component _and_ scroll
-   its content into view.
+   dialogue is quite small the user can't trigger the component _and_ scroll its
+   content into view.
 
 3. Don't obscure content on mouse hover
 
