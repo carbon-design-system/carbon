@@ -8877,7 +8877,57 @@ Map {
     "render": [Function],
   },
   "TileGroup" => Object {
-    "displayName": "ClassWrapper(TileGroup)",
+    "displayName": "TileGroup",
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultSelected": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "legend": Object {
+        "type": "string",
+      },
+      "name": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "required": Object {
+        "type": "bool",
+      },
+      "valueSelected": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
   },
   "TimePicker" => Object {
     "$$typeof": Symbol(react.forward_ref),
