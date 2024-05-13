@@ -220,7 +220,6 @@ describe('Carbon Components React', () => {
         "TextInput",
         "TextInputSkeleton",
         "Theme",
-        "ThemeCompliment",
         "ThemeContext",
         "Tile",
         "TileAboveTheFoldContent",
@@ -282,6 +281,7 @@ describe('Carbon Components React', () => {
         "useContextMenu",
         "useIdPrefix",
         "useLayer",
+        "usePrefersDarkScheme",
         "usePrefix",
         "useTheme",
       ]

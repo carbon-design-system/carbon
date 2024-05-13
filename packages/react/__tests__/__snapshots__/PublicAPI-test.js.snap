@@ -3889,36 +3889,6 @@ Map {
             "g10",
             "g90",
             "g100",
-            "system",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "themeCompliment": Object {
-        "args": Array [
-          Array [
-            "white",
-            "g10",
-            "g90",
-            "g100",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "themeSystemDark": Object {
-        "args": Array [
-          Array [
-            "g90",
-            "g100",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "themeSystemLight": Object {
-        "args": Array [
-          Array [
-            "white",
-            "g10",
           ],
         ],
         "type": "oneOf",
@@ -8980,46 +8950,9 @@ Map {
             "g10",
             "g90",
             "g100",
-            "system",
           ],
         ],
         "type": "oneOf",
-      },
-      "themeCompliment": Object {
-        "args": Array [
-          Array [
-            "white",
-            "g10",
-            "g90",
-            "g100",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "themeSystemDark": Object {
-        "args": Array [
-          Array [
-            "g90",
-            "g100",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "themeSystemLight": Object {
-        "args": Array [
-          Array [
-            "white",
-            "g10",
-          ],
-        ],
-        "type": "oneOf",
-      },
-    },
-  },
-  "ThemeCompliment" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
       },
     },
   },
@@ -10869,6 +10802,7 @@ Map {
   "useContextMenu" => Object {},
   "useIdPrefix" => Object {},
   "useLayer" => Object {},
+  "usePrefersDarkScheme" => Object {},
   "usePrefix" => Object {},
   "useTheme" => Object {},
 }

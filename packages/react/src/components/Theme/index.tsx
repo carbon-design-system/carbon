@@ -7,81 +7,30 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, {
-  ElementType,
-  useEffect,
-  useMemo,
-  useState,
-  type PropsWithChildren,
-} from 'react';
+import React, { ElementType, useMemo, type PropsWithChildren } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import { LayerContext } from '../Layer/LayerContext';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 
-type themesType = 'white' | 'g10' | 'g90' | 'g100';
 interface GlobalThemeProps {
-  theme?: themesType | 'system';
-  themeCompliment?: themesType | 'system';
-  themeSystemDark?: 'g90' | 'g100';
-  themeSystemLight?: 'white' | 'g10';
+  theme?: 'white' | 'g10' | 'g90' | 'g100';
   children?: React.ReactNode;
 }
 
-const defaultCompliment = {
-  white: 'g90',
-  g10: 'g100',
-  g90: 'white',
-  g100: 'g10',
-};
-
 export const ThemeContext = React.createContext<GlobalThemeProps>({
-  theme: 'system',
-  themeCompliment: undefined,
-  themeSystemLight: 'white',
-  themeSystemDark: 'g90',
+  theme: 'white',
 });
 
 export const GlobalTheme = React.forwardRef(function GlobalTheme(
-  {
-    children,
-    themeCompliment,
-    theme = 'white',
-    themeSystemLight = 'white',
-    themeSystemDark = 'g90',
-  }: PropsWithChildren<GlobalThemeProps>,
+  { children, theme }: PropsWithChildren<GlobalThemeProps>,
   ref: React.Ref<unknown>
 ) {
-  const prefersDarkScheme = useMatchMedia('(prefers-color-scheme: dark)');
-
   const value = useMemo(() => {
-    if (theme === 'system') {
-      return prefersDarkScheme
-        ? {
-            theme: themeSystemLight,
-            themeCompliment: themeSystemDark,
-            isDark: true,
-          }
-        : {
-            theme: themeSystemDark,
-            themeCompliment: themeSystemLight,
-            isDark: true,
-          };
-    }
-
     return {
-      theme: theme,
-      themeCompliment: (themeCompliment ||
-        defaultCompliment[theme]) as themesType,
-      isDark: ['g90', 'g100'].includes(theme),
+      theme,
     };
-  }, [
-    prefersDarkScheme,
-    theme,
-    themeCompliment,
-    themeSystemDark,
-    themeSystemLight,
-  ]);
+  }, [theme]);
 
   const childrenWithProps = React.cloneElement(
     children as React.ReactElement<any>,
@@ -105,22 +54,7 @@ GlobalTheme.propTypes = {
   /**
    * Specify the global theme for your app
    */
-  theme: PropTypes.oneOf(['white', 'g10', 'g90', 'g100', 'system']),
-
-  /**
-   * Optional complimentary when not using `system`
-   */
-  themeCompliment: PropTypes.oneOf(['white', 'g10', 'g90', 'g100']),
-
-  /**
-   * Specify the `system` theme dark
-   */
-  themeSystemDark: PropTypes.oneOf(['g90', 'g100']),
-
-  /**
-   * Specify the `system` theme light
-   */
-  themeSystemLight: PropTypes.oneOf(['white', 'g10']),
+  theme: PropTypes.oneOf(['white', 'g10', 'g90', 'g100']),
 };
 
 type ThemeBaseProps = GlobalThemeProps & {
@@ -135,54 +69,25 @@ type ThemeProps<E extends ElementType> = PolymorphicProps<E, ThemeBaseProps>;
 export function Theme<E extends ElementType = 'div'>({
   as: BaseComponent = 'div' as E,
   className: customClassName,
-  theme = 'white',
-  themeCompliment,
-  themeSystemDark = 'g90',
-  themeSystemLight = 'white',
+  theme,
   ...rest
 }: ThemeProps<E>) {
-  const prefersDarkScheme = useMatchMedia('(prefers-color-scheme: dark)');
   const prefix = usePrefix();
-  const [actualTheme, setActualTheme] = useState('white');
-  const [actualCompliment, setActualCompliment] = useState(
-    defaultCompliment['white']
-  );
-  useEffect(() => {
-    if (theme === 'system') {
-      const newTheme =
-        (prefersDarkScheme ? themeSystemDark : themeSystemLight) ?? 'white';
-      const newCompliment =
-        (prefersDarkScheme ? themeSystemLight : themeSystemDark) ??
-        defaultCompliment[newTheme];
-
-      setActualTheme(newTheme);
-      setActualCompliment(newCompliment);
-    } else {
-      setActualTheme(theme ?? 'white');
-      setActualCompliment(themeCompliment ?? defaultCompliment[theme]);
-    }
-  }, [
-    theme,
-    themeCompliment,
-    themeSystemLight,
-    themeSystemDark,
-    prefersDarkScheme,
-  ]);
-
   const className = cx(customClassName, {
-    [`${prefix}--white`]: actualTheme === 'white',
-    [`${prefix}--g10`]: actualTheme === 'g10',
-    [`${prefix}--g90`]: actualTheme === 'g90',
-    [`${prefix}--g100`]: actualTheme === 'g100',
+    [`${prefix}--white`]: theme === 'white',
+    [`${prefix}--g10`]: theme === 'g10',
+    [`${prefix}--g90`]: theme === 'g90',
+    [`${prefix}--g100`]: theme === 'g100',
     [`${prefix}--layer-one`]: true,
   });
   const value = React.useMemo(() => {
+    const isDark = theme && ['g90', 'g100'].includes(theme);
+
     return {
-      theme: actualTheme as themesType,
-      themeCompliment: actualCompliment as themesType,
-      isDark: ['g90', 'g100'].includes(actualTheme),
+      theme,
+      isDark,
     };
-  }, [actualTheme, actualCompliment]);
+  }, [theme]);
   const BaseComponentAsAny = BaseComponent as any;
 
   return (
@@ -217,42 +122,9 @@ Theme.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the theme. A theme of `system` selects `themeSystemLight` or `themeSystemDark` based
-   * on the user system preferences.
+   * Specify the theme
    */
-  theme: PropTypes.oneOf(['white', 'g10', 'g90', 'g100', 'system']),
-
-  /**
-   * Switches to this theme inside `<ThemeCompliment />`
-   */
-  themeCompliment: PropTypes.oneOf(['white', 'g10', 'g90', 'g100']),
-
-  /**
-   * Specify the `system` theme dark defaults to `g90`
-   */
-  themeSystemDark: PropTypes.oneOf(['g90', 'g100']),
-
-  /**
-   * Specify the `system` theme light defaults to `white`
-   */
-  themeSystemLight: PropTypes.oneOf(['white', 'g10']),
-};
-
-export function ThemeCompliment({ children, ...rest }) {
-  const { theme, themeCompliment } = useTheme();
-
-  return (
-    <Theme theme={themeCompliment} themeCompliment={theme} {...rest}>
-      {children}
-    </Theme>
-  );
-}
-
-ThemeCompliment.propTypes = {
-  /**
-   * Provide child elements to be rendered inside of `Theme`
-   */
-  children: PropTypes.node,
+  theme: PropTypes.oneOf(['white', 'g10', 'g90', 'g100']),
 };
 
 /**
@@ -260,4 +132,8 @@ ThemeCompliment.propTypes = {
  */
 export function useTheme() {
   return React.useContext(ThemeContext);
+}
+
+export function usePrefersDarkScheme() {
+  return useMatchMedia('(prefers-color-scheme: dark)');
 }

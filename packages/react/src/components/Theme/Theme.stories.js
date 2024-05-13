@@ -11,7 +11,7 @@ import React, { useEffect } from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { VStack } from '../Stack';
 
-import { GlobalTheme, Theme, ThemeCompliment, useTheme } from '../Theme';
+import { GlobalTheme, Theme, usePrefersDarkScheme, useTheme } from '../Theme';
 import mdx from './Theme.mdx';
 
 export default {
@@ -45,15 +45,15 @@ export default {
   },
 };
 
-const ThemeText = ({ before, after }) => {
-  const { theme, themeCompliment, isDark } = useTheme();
+const ThemeText = ({ children, showIsDark }) => {
+  const { theme, isDark } = useTheme();
 
   return (
     <p>
-      {before} `{theme}` {after} It is
-      {isDark ? ' `dark` ' : ' `light` '} and has a compliment of `
-      {themeCompliment}
-      `.
+      {children}
+      {showIsDark
+        ? ` useTheme reveals... { theme: '${theme}', isDark: '${isDark}'}`
+        : theme}
     </p>
   );
 };
@@ -63,32 +63,22 @@ export const Default = () => {
     <>
       <Theme theme="g100">
         <section className="theme-section">
-          <ThemeText before="Theme" after="selected" />
+          <ThemeText />
         </section>
       </Theme>
       <Theme theme="g90">
         <section className="theme-section">
-          <ThemeText before="Theme" after="selected" />
+          <ThemeText />
         </section>
       </Theme>
       <Theme theme="g10">
         <section className="theme-section">
-          <ThemeText before="Theme" after="selected" />
+          <ThemeText />
         </section>
       </Theme>
       <Theme theme="white">
         <section className="theme-section">
-          <ThemeText before="Theme" after="selected" />
-        </section>
-      </Theme>
-      <Theme theme="system">
-        <section className="theme-section">
-          <ThemeText before="Theme" after="based on system settings" />
-        </section>
-      </Theme>
-      <Theme theme="system" themeSystemLight="g10" themeSystemDark="g100">
-        <section className="theme-section">
-          <ThemeText before="Theme" after="based on system settings" />
+          <ThemeText />
         </section>
       </Theme>
     </>
@@ -96,35 +86,66 @@ export const Default = () => {
 };
 
 export const UseTheme = () => {
-  const Example = ({ after }) => {
-    const { theme, themeCompliment, isDark } = useTheme();
-
-    return (
-      <div className="theme-section">
-        The current theme is: `{theme}` {after}. It is
-        {isDark ? ' `dark` ' : ' `light` '} and has a compliment of `
-        {themeCompliment}`.
-      </div>
-    );
-  };
-
   return (
     <div>
-      <Example />
+      <section className="theme-section">
+        <ThemeText showIsDark={true} />
+      </section>
       <Theme theme="g100">
-        <Example />
-      </Theme>
-      <Theme theme="system">
-        <Example after="based on system settings" />
-      </Theme>
-      <Theme theme="system" themeSystemLight="g10" themeSystemDark="g100">
-        <Example after="based on system settings" />
+        <section className="theme-section">
+          <ThemeText showIsDark={true} />
+        </section>
       </Theme>
     </div>
   );
 };
 
 UseTheme.storyName = 'useTheme';
+
+export const UsePrefersDarkScheme = () => {
+  const prefersDark = usePrefersDarkScheme();
+
+  const theme1 = prefersDark ? 'g100' : 'white';
+  const theme2 = prefersDark ? 'white' : 'g100';
+  const theme3 = prefersDark ? 'g90' : 'g10';
+  const theme4 = prefersDark ? 'g10' : 'g90';
+
+  return (
+    <Theme theme={theme1}>
+      <section className="theme-section">
+        <ThemeText showIsDark={true}>
+          usePrefersDarkScheme() is {prefersDark ? '`true`' : '`false`'}. Theme
+          set to `{theme1}`.
+        </ThemeText>
+      </section>
+      <Theme theme={theme2}>
+        <section className="theme-section">
+          <ThemeText showIsDark={true}>
+            usePrefersDarkScheme() is {prefersDark ? '`true`' : '`false`'}. An
+            alternative theme set of `{theme2}`.
+          </ThemeText>
+        </section>
+      </Theme>
+      <Theme theme={theme3}>
+        <section className="theme-section">
+          <ThemeText showIsDark={true}>
+            usePrefersDarkScheme() is {prefersDark ? '`true`' : '`false`'}.
+            Theme set to `{theme3}`.
+          </ThemeText>
+        </section>
+      </Theme>
+      <Theme theme={theme4}>
+        <section className="theme-section">
+          <ThemeText showIsDark={true}>
+            usePrefersDarkScheme() is {prefersDark ? '`true`' : '`false`'}. An
+            alternative theme set of `{theme4}`.
+          </ThemeText>
+        </section>
+      </Theme>
+    </Theme>
+  );
+};
+UsePrefersDarkScheme.storyName = 'usePrefersDarkScheme';
 
 export const _WithLayer = () => {
   const themes = ['white', 'g10', 'g90', 'g100'];
@@ -144,33 +165,6 @@ export const _WithLayer = () => {
     </VStack>
   );
 };
-
-const ThemeComplimentStory = (args) => {
-  return (
-    <Theme {...args}>
-      <section className="theme-section">
-        <ThemeText before="Theme" />
-        <ThemeCompliment>
-          <section className="theme-section">
-            <ThemeText before="Compliment" />
-            <ThemeCompliment>
-              <section className="theme-section">
-                <ThemeText before="Compliment twice" />
-                <ThemeCompliment>
-                  <section className="theme-section">
-                    <ThemeText before="Compliment thrice" />
-                  </section>
-                </ThemeCompliment>
-              </section>
-            </ThemeCompliment>
-          </section>
-        </ThemeCompliment>
-      </section>
-    </Theme>
-  );
-};
-
-export const _ThemeCompliment = ThemeComplimentStory.bind({});
 
 const PlaygroundStory = (args) => {
   return (
