@@ -2114,7 +2114,7 @@ __metadata:
     sass: "npm:^1.51.0"
     sass-loader: "npm:^14.0.0"
     storybook: "npm:^7.1.0"
-    storybook-addon-accessibility-checker: "npm:^3.1.61-rc.2"
+    storybook-addon-accessibility-checker: "npm:^3.1.61-rc.3"
     stream-browserify: "npm:^3.0.0"
     style-loader: "npm:^3.3.1"
     tabbable: "npm:^6.2.0"
@@ -25467,9 +25467,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-accessibility-checker@npm:^3.1.61-rc.2":
-  version: 3.1.61-rc.2
-  resolution: "storybook-addon-accessibility-checker@npm:3.1.61-rc.2"
+"storybook-addon-accessibility-checker@npm:^3.1.61-rc.3":
+  version: 3.1.61-rc.3
+  resolution: "storybook-addon-accessibility-checker@npm:3.1.61-rc.3"
   dependencies:
     "@storybook/addon-highlight": "npm:7.4.5"
     "@storybook/channels": "npm:7.4.5"
@@ -25493,7 +25493,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10/a6be62591d5b03efec70210ee6a3ec133a56ca3d09156e010540a23b0d8458a23d796e4472dc0a69d50a8b48d8824676b41cda90970645d82d8691947508d624
+  checksum: 10/11096a1dd694eb9d2f5eb8d870c76062251ff4d197328b24fecb437625e4d8eae7de3a2e2192a71ff9c51a7870a862aa47cd7430c719e10b5f42cefbcb35fca5
   languageName: node
   linkType: hard
 
