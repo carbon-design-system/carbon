@@ -1116,141 +1116,7 @@ Map {
         "type": "bool",
       },
       "downshiftProps": Object {
-        "args": Array [
-          Object {
-            "children": Object {
-              "type": "func",
-            },
-            "defaultHighlightedIndex": Object {
-              "type": "number",
-            },
-            "defaultIsOpen": Object {
-              "type": "bool",
-            },
-            "environment": Object {
-              "args": Array [
-                Object {
-                  "Node": Object {
-                    "isRequired": true,
-                    "type": "func",
-                  },
-                  "addEventListener": Object {
-                    "isRequired": true,
-                    "type": "func",
-                  },
-                  "document": Object {
-                    "args": Array [
-                      Object {
-                        "activeElement": Object {
-                          "isRequired": true,
-                          "type": "any",
-                        },
-                        "body": Object {
-                          "isRequired": true,
-                          "type": "any",
-                        },
-                        "createElement": Object {
-                          "isRequired": true,
-                          "type": "func",
-                        },
-                        "getElementById": Object {
-                          "isRequired": true,
-                          "type": "func",
-                        },
-                      },
-                    ],
-                    "isRequired": true,
-                    "type": "shape",
-                  },
-                  "removeEventListener": Object {
-                    "isRequired": true,
-                    "type": "func",
-                  },
-                },
-              ],
-              "type": "shape",
-            },
-            "getA11yStatusMessage": Object {
-              "type": "func",
-            },
-            "getItemId": Object {
-              "type": "func",
-            },
-            "highlightedIndex": Object {
-              "type": "number",
-            },
-            "id": Object {
-              "type": "string",
-            },
-            "initialHighlightedIndex": Object {
-              "type": "number",
-            },
-            "initialInputValue": Object {
-              "type": "string",
-            },
-            "initialIsOpen": Object {
-              "type": "bool",
-            },
-            "initialSelectedItem": Object {
-              "type": "any",
-            },
-            "inputId": Object {
-              "type": "string",
-            },
-            "inputValue": Object {
-              "type": "string",
-            },
-            "isOpen": Object {
-              "type": "bool",
-            },
-            "itemCount": Object {
-              "type": "number",
-            },
-            "itemToString": Object {
-              "type": "func",
-            },
-            "labelId": Object {
-              "type": "string",
-            },
-            "menuId": Object {
-              "type": "string",
-            },
-            "onChange": Object {
-              "type": "func",
-            },
-            "onInputValueChange": Object {
-              "type": "func",
-            },
-            "onOuterClick": Object {
-              "type": "func",
-            },
-            "onSelect": Object {
-              "type": "func",
-            },
-            "onStateChange": Object {
-              "type": "func",
-            },
-            "onUserAction": Object {
-              "type": "func",
-            },
-            "scrollIntoView": Object {
-              "type": "func",
-            },
-            "selectedItem": Object {
-              "type": "any",
-            },
-            "selectedItemChanged": Object {
-              "type": "func",
-            },
-            "stateReducer": Object {
-              "type": "func",
-            },
-            "suppressRefError": Object {
-              "type": "bool",
-            },
-          },
-        ],
-        "type": "shape",
+        "type": "object",
       },
       "helperText": Object {
         "type": "node",
@@ -3755,6 +3621,9 @@ Map {
       "sortItems": Object {
         "type": "func",
       },
+      "titleText": Object {
+        "type": "node",
+      },
       "translateWithId": Object {
         "type": "func",
       },
@@ -5425,6 +5294,9 @@ Map {
         "sortItems": Object {
           "type": "func",
         },
+        "titleText": Object {
+          "type": "node",
+        },
         "translateWithId": Object {
           "type": "func",
         },
@@ -6450,6 +6322,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "required": Object {
+        "type": "bool",
+      },
       "slug": Object {
         "type": "node",
       },
@@ -6532,6 +6407,9 @@ Map {
         "type": "oneOf",
       },
       "readOnly": Object {
+        "type": "bool",
+      },
+      "required": Object {
         "type": "bool",
       },
       "slug": Object {
@@ -8999,7 +8877,57 @@ Map {
     "render": [Function],
   },
   "TileGroup" => Object {
-    "displayName": "ClassWrapper(TileGroup)",
+    "displayName": "TileGroup",
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultSelected": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "legend": Object {
+        "type": "string",
+      },
+      "name": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "required": Object {
+        "type": "bool",
+      },
+      "valueSelected": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
   },
   "TimePicker" => Object {
     "$$typeof": Symbol(react.forward_ref),

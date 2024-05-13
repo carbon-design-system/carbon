@@ -6,7 +6,7 @@
  */
 
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import React from 'react';
 import MultiSelect from '../';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
@@ -455,7 +455,7 @@ describe('MultiSelect', () => {
       expect(translateWithId).toHaveBeenCalled();
     });
 
-    it('should call onChange when the selection changes', async () => {
+    it('should call onChange when the selection changes from user selection', async () => {
       const testFunction = jest.fn();
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
@@ -480,6 +480,30 @@ describe('MultiSelect', () => {
       await userEvent.click(itemNode);
 
       expect(testFunction).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call onChange when the selection changes outside of the component', () => {
+      const handleChange = jest.fn();
+      const items = generateItems(4, generateGenericItem);
+      const props = {
+        id: 'custom-id',
+        onChange: handleChange,
+        selectedItems: [],
+        label: 'test-label',
+        items,
+      };
+      const { rerender } = render(<MultiSelect {...props} />);
+
+      expect(handleChange).not.toHaveBeenCalled();
+
+      act(() => {
+        rerender(<MultiSelect {...props} selectedItems={[items[0]]} />);
+      });
+
+      expect(handleChange).toHaveBeenCalledTimes(1);
+      expect(handleChange.mock.lastCall[0]).toMatchObject({
+        selectedItems: [items[0]],
+      });
     });
 
     it('should support an invalid state with invalidText that describes the field', () => {
