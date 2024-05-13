@@ -629,7 +629,7 @@ NumberInput.propTypes = {
   warnText: PropTypes.node,
 };
 
-interface Label {
+export interface Label {
   disabled?: boolean;
   hideLabel?: boolean;
   id?: string;
@@ -660,7 +660,7 @@ Label.propTypes = {
   label: PropTypes.node,
 };
 
-interface HelperTextProps {
+export interface HelperTextProps {
   id?: string;
   description?: ReactNode;
   disabled?: boolean;
