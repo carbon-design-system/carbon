@@ -34,7 +34,7 @@ features and fixes. The work we deliver into `main` every day is considered
 unstable. Every two weeks we package up these changes into a new minor version
 that is published from `main` to the current Active major.
 
-For a look at what types of changes consitute patch, minor, or major version
+For a look at what types of changes constitute patch, minor, or major version
 bumps, see the
 [versioning documentation](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/versioning.md).
 
@@ -47,9 +47,9 @@ within the monorepo, see the
 For a release in the Maintenance phase, patch releases are published containing
 security patches and critical bug fixes. When a version moves from Active to
 Maintenance, consuming projects should begin migrating to the new Active major
-version.  During Maintenance we also consider adding non-critical bug fixes on
-an ad hoc basis, by request only. To request a fix be back-ported to a
-Maintenance release, please
+version. During Maintenance we also consider adding non-critical bug fixes on an
+ad hoc basis, by request only. To request a fix be back-ported to a Maintenance
+release, please
 [open an issue](https://github.com/carbon-design-system/carbon/issues/new?assignees=&labels=type%3A+bug+%F0%9F%90%9B&projects=&template=BUG_REPORT.yaml&title=%5BBug%5D%3A+)
 and include a link to the v11 fix pull request.
 
