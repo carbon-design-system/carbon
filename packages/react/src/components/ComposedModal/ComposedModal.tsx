@@ -10,7 +10,7 @@ import React, {
   type RefObject,
 } from 'react';
 import { isElement } from 'react-is';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
 import debounce from 'lodash.debounce';
@@ -212,7 +212,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `ComposedModal` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 }
 
 const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
