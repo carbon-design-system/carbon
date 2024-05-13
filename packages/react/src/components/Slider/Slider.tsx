@@ -5,8 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { type KeyboardEventHandler, PureComponent } from 'react';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import React, {
+  type KeyboardEventHandler,
+  PureComponent,
+  ReactNode,
+} from 'react';
+import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
 import throttle from 'lodash.throttle';
@@ -136,7 +140,7 @@ export interface SliderProps
   /**
    * The child nodes.
    */
-  children?: ReactNodeLike;
+  children?: ReactNode;
 
   /**
    * The CSS class name for the slider, set on the wrapping div.
@@ -176,12 +180,12 @@ export interface SliderProps
   /**
    * Provide the text that is displayed when the Slider is in an invalid state
    */
-  invalidText?: React.ReactNode;
+  invalidText?: ReactNode;
 
   /**
    * The label for the slider.
    */
-  labelText?: ReactNodeLike;
+  labelText?: ReactNode;
 
   /**
    * @deprecated
