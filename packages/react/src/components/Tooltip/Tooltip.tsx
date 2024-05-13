@@ -111,7 +111,7 @@ function Tooltip<T extends React.ElementType>({
     onBlur: () => setOpen(false),
     onClick: () => closeOnActivation && setOpen(false),
     // This should be placed on the trigger in case the element is disabled
-    // onMouseEnter,
+    onMouseEnter,
     onMouseLeave,
     onMouseDown: onDragStart,
     onMouseMove: onMouseMove,
@@ -175,7 +175,7 @@ function Tooltip<T extends React.ElementType>({
     };
   }, [open, onKeyDown]);
 
-  function handleOnMouseEnter() {
+  function onMouseEnter() {
     setIsPointerIntersecting(true);
     setOpen(true, enterDelayMs);
   }
@@ -238,7 +238,6 @@ function Tooltip<T extends React.ElementType>({
       dropShadow={false}
       highContrast
       onKeyDown={onKeyDown}
-      onMouseEnter={handleOnMouseEnter}
       onMouseLeave={onMouseLeave}
       open={open}>
       <div className={`${prefix}--tooltip-trigger__wrapper`}>
