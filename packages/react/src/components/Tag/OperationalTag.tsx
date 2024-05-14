@@ -6,7 +6,12 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { MouseEventHandler, useLayoutEffect, useState, ReactNode } from 'react';
+import React, {
+  MouseEventHandler,
+  useLayoutEffect,
+  useState,
+  ReactNode,
+} from 'react';
 import classNames from 'classnames';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
