@@ -191,7 +191,7 @@ export function Toggle({
         role="switch"
         type="button"
         aria-checked={checked}
-        aria-labelledby={ariaLabelledby ?? labelId}
+        aria-labelledby={ariaLabelledby ?? (labelText ? labelId : undefined)}
         disabled={disabled}
         onClick={handleClick}
       />

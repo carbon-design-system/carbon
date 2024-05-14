@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { MouseEventHandler, useLayoutEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { MouseEventHandler, useLayoutEffect, useState, ReactNode } from 'react';
 import classNames from 'classnames';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -62,7 +62,7 @@ export interface OperationalTagBaseProps {
   /**
    * **Experimental:** Provide a `Slug` component to be rendered inside the `OperationalTag` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Provide text to be rendered inside of a the tag.

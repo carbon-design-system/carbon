@@ -37,7 +37,6 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
-import { OnChangeData } from '../Dropdown';
 import type { InternationalProps } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 
@@ -136,6 +135,10 @@ interface MultiSelectSortingProps<ItemType> {
     items: ReadonlyArray<ItemType>,
     options: SortItemsOptions<ItemType>
   ): ItemType[];
+}
+
+interface OnChangeData<ItemType> {
+  selectedItems: ItemType[] | null;
 }
 
 export interface MultiSelectProps<ItemType>
