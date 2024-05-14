@@ -255,7 +255,6 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
         aria-disabled={isDisabled ?? undefined}
         aria-haspopup={hasChildren ?? undefined}
         aria-expanded={hasChildren ? submenuOpen : undefined}
-        aria-label={label}
         onClick={handleClick}
         onMouseEnter={hasChildren ? handleMouseEnter : undefined}
         onMouseLeave={hasChildren ? handleMouseLeave : undefined}
