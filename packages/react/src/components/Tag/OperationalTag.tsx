@@ -140,7 +140,7 @@ const OperationalTag = <T extends React.ElementType>({
           className={tagClasses}
           id={tagId}
           {...other}>
-          <Text title="aaa" className={`${prefix}--tag__label`}>
+          <Text title={text} className={`${prefix}--tag__label`}>
             {text}
           </Text>
           {normalizedSlug}
@@ -159,7 +159,7 @@ const OperationalTag = <T extends React.ElementType>({
       id={tagId}
       {...other}>
       {normalizedSlug}
-      <Text title="bbb" className={`${prefix}--tag__label`}>
+      <Text title={text} className={`${prefix}--tag__label`}>
         {text}
       </Text>
     </Tag>

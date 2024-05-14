@@ -149,7 +149,7 @@ const Tag = <T extends React.ElementType>({
     [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--tag--${type}`]: type,
     [`${prefix}--tag--interactive`]:
-      (other.onClick && !isInteractiveTag) || isEllipsisApplied,
+      other.onClick && !isInteractiveTag && isEllipsisApplied,
   });
 
   const typeText =
@@ -210,6 +210,7 @@ const Tag = <T extends React.ElementType>({
 
   const labelClasses = classNames({
     [`${prefix}--tag__label`]: !isInteractiveTag,
+    [`${prefix}--tag--${type}`]: type && !isInteractiveTag,
   });
 
   return (
@@ -230,7 +231,8 @@ const Tag = <T extends React.ElementType>({
           openOnHover={false}
           definition={
             children !== null && children !== undefined ? children : typeText
-          }>
+          }
+          className={`${prefix}--definition--tooltip--tag`}>
           <Text className={labelClasses}>
             {children !== null && children !== undefined ? children : typeText}
           </Text>
