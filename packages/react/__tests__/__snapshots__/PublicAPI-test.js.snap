@@ -4566,6 +4566,9 @@ Map {
   "MenuItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "aria-label": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
