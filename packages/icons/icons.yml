@@ -1064,23 +1064,6 @@
     - file
   sizes:
     - 32
-  aliases:
-    - Application programming interface
-    - tool
-    - application
-    - programming
-    - interface
-    - file
-    - file type
-    - program
-    - tool
-    - format
-    - protocol
-    - connect
-    - group
-    - network
-    - programming interface
-    - computing interface
 - name: app
   friendly_name: App
   aliases:
