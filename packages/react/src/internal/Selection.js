@@ -30,7 +30,7 @@ export function useSelection({
   onChange,
   initialSelectedItems = [],
   selectedItems: controlledItems,
-  selectAll = false,
+  hasSelectAll = false,
   itemsWithSelectAll = [],
 }) {
   const isMounted = useRef(false);
@@ -62,22 +62,20 @@ export function useSelection({
         return;
       }
 
-      const isAllSelected = selectedItems.find(
-        (item) => item.id === 'select-all-option'
-      );
+      const isAllSelected = selectedItems.find((item) => item.selectAllFlag);
       const AllSelectableItems = itemsWithSelectAll.filter(
         (item) => !item.disabled
       );
       const disabledItems = itemsWithSelectAll.filter((item) => item.disabled);
 
       //select all option
-      if (item && item.id === 'select-all-option' && !isAllSelected) {
+      if (item && item.selectAllFlag && !isAllSelected) {
         setSelectedItems(AllSelectableItems);
         return;
       }
 
       //deselect all on click to All option
-      if (isAllSelected && item.id === 'select-all-option') {
+      if (isAllSelected && item.selectAllFlag) {
         setSelectedItems([]);
         return;
       }
@@ -94,7 +92,7 @@ export function useSelection({
 
         // checking if all items are selected then We should select mark the 'select All' option as well
         if (
-          selectAll &&
+          hasSelectAll &&
           !isAllSelected &&
           itemsWithSelectAll.length - 1 ===
             selectedItems.length + disabledItems.length + 1
@@ -106,10 +104,10 @@ export function useSelection({
 
       setSelectedItems((selectedItems) => {
         const updatedItems = removeAtIndex(selectedItems, selectedIndex);
-        return updatedItems.filter((item) => item.id != 'select-all-option');
+        return updatedItems.filter((item) => !item.selectAllFlag);
       });
     },
-    [disabled, selectedItems, itemsWithSelectAll, selectAll]
+    [disabled, selectedItems, itemsWithSelectAll, hasSelectAll]
   );
 
   const clearSelection = useCallback(() => {

@@ -177,6 +177,11 @@ export interface MultiSelectProps<ItemType>
   downshiftProps?: Partial<UseSelectProps<ItemType>>;
 
   /**
+   * to Show/Hide All option
+   */
+  hasSelectAll?: boolean;
+
+  /**
    * Provide helper text that is used alongside the control label for
    * additional help
    */
@@ -228,11 +233,6 @@ export interface MultiSelectProps<ItemType>
   items: ItemType[];
 
   /**
-   * This is similar to the items prop, but it is used to render the items when selectAll prop is enabled
-   */
-  itemsWithSelectAll?: ItemType[];
-
-  /**
    * Generic `label` that will be used as the textual representation of what
    * this field is for
    */
@@ -273,11 +273,6 @@ export interface MultiSelectProps<ItemType>
    * Whether or not the Dropdown is readonly
    */
   readOnly?: boolean;
-
-  /**
-   * to Show/Hide All option
-   */
-  selectAll?: boolean;
 
   /**
    * For full control of the selected items
@@ -367,7 +362,7 @@ const MultiSelect = React.forwardRef(
       readOnly,
       locale = 'en',
       slug,
-      selectAll = false,
+      hasSelectAll = false,
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
@@ -384,6 +379,7 @@ const MultiSelect = React.forwardRef(
     const selectAllOption = {
       id: 'select-all-option',
       text: 'All',
+      selectAllFlag: true,
     };
 
     // Filter out items with an object having undefined values
@@ -400,7 +396,7 @@ const MultiSelect = React.forwardRef(
       });
     }, [items]);
 
-    const itemsWithSelectAll = selectAll
+    const itemsWithSelectAll = hasSelectAll
       ? [selectAllOption, ...filteredItems]
       : filteredItems;
 
@@ -413,7 +409,7 @@ const MultiSelect = React.forwardRef(
       initialSelectedItems,
       onChange,
       selectedItems: selected,
-      selectAll,
+      hasSelectAll,
       itemsWithSelectAll,
     });
 
@@ -674,7 +670,7 @@ const MultiSelect = React.forwardRef(
       selectedItems.map((item) => (item as selectedItemType)?.text);
 
     const selectedItemsWithoutSelectAll = selectedItems.filter(
-      (item: any) => item.id !== 'select-all-option'
+      (item: any) => !item.selectAllFlag
     );
     return (
       <div className={wrapperClasses}>
@@ -758,7 +754,7 @@ const MultiSelect = React.forwardRef(
 
                 const isIndeterminate =
                   selectedItems.length !== 0 &&
-                  item['id'] === 'select-all-option' &&
+                  item['selectAllFlag'] &&
                   !isChecked;
 
                 const itemProps = getItemProps({
@@ -772,12 +768,12 @@ const MultiSelect = React.forwardRef(
                 return (
                   <ListBox.MenuItem
                     key={itemProps.id}
-                    isActive={isChecked && item['id'] !== 'select-all-option'}
+                    isActive={isChecked && item['selectAllFlag']}
                     aria-label={itemText}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
                     disabled={itemProps['aria-disabled']}
-                    isSelectAll={item['id'] === 'select-all-option'}
+                    isSelectAll={item['selectAllFlag']}
                     {...itemProps}>
                     <div className={`${prefix}--checkbox-wrapper`}>
                       <Checkbox
@@ -866,6 +862,11 @@ MultiSelect.propTypes = {
   downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
 
   /**
+   * to Show/Hide All option
+   */
+  hasSelectAll: PropTypes.bool,
+
+  /**
    * Provide helper text that is used alongside the control label for
    * additional help
    */
@@ -917,11 +918,6 @@ MultiSelect.propTypes = {
   items: PropTypes.array.isRequired,
 
   /**
-   * This is similar to the items prop, but it is used to render the items when selectAll prop is enabled
-   */
-  itemsWithSelectAll: PropTypes.array,
-
-  /**
    * Generic `label` that will be used as the textual representation of what
    * this field is for
    */
@@ -963,11 +959,6 @@ MultiSelect.propTypes = {
    * Whether or not the Dropdown is readonly
    */
   readOnly: PropTypes.bool,
-
-  /**
-   * to Show/Hide All option
-   */
-  selectAll: PropTypes.bool,
 
   /**
    * For full control of the selected items
