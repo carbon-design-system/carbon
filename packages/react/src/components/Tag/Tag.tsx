@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -83,7 +83,7 @@ export interface TagBaseProps {
   /**
    * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.
