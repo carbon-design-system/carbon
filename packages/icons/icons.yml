@@ -303,7 +303,7 @@
     - control
     - sysml
   sizes:
-    - 32    
+    - 32
 - name: action--usage
   friendly_name: Action usage
   aliases:
@@ -317,7 +317,7 @@
     - control
     - sysml
   sizes:
-    - 32 
+    - 32
 - name: activity
   friendly_name: Activity
   aliases:
@@ -965,7 +965,7 @@
     - line
     - dash
     - diagram
-    - diagonal 
+    - diagonal
     - node
     - sysml
   sizes:
@@ -1027,6 +1027,24 @@
     - file
   sizes:
     - 32
+- name: API--1
+  friendly_name: API 1
+  aliases:
+    - program
+    - tool
+    - application
+    - format
+    - interface
+    - protocol
+    - connect
+    - group
+    - network
+    - application programming interface
+    - programming interface
+    - computing interface
+    - file
+  sizes:
+    - 32
 - name: api--key
   friendly_name: API key
   aliases:
@@ -1044,24 +1062,6 @@
     - computing interface
     - file
     - key
-  sizes:
-    - 32
-- name: API--1
-  friendly_name: API 1
-  aliases:
-    - program
-    - tool
-    - application
-    - format
-    - interface
-    - protocol
-    - connect
-    - group
-    - network
-    - application programming interface
-    - programming interface
-    - computing interface
-    - file
   sizes:
     - 32
 - name: app
@@ -4896,19 +4896,6 @@
     - development
   sizes:
     - 32
-- name: code--block
-  friendly_name: Code block
-  aliases:
-    - </>
-    - html
-    - java
-    - css
-    - dev
-    - development
-    - text
-    - block
-  sizes:
-    - 32
 - name: code--hide
   friendly_name: Code hide
   aliases:
@@ -4932,6 +4919,19 @@
     - source
     - reference
     - code
+  sizes:
+    - 32
+- name: code-block
+  friendly_name: Code block
+  aliases:
+    - </>
+    - html
+    - java
+    - css
+    - dev
+    - development
+    - text
+    - block
   sizes:
     - 32
 - name: code-signing-service
@@ -5169,6 +5169,14 @@
     - output
   sizes:
     - 32
+- name: connection--two-way
+  friendly_name: Connection two-way
+  aliases:
+    - connection
+    - input
+    - output
+  sizes:
+    - 32
 - name: connection--usage
   friendly_name: Connection usage
   aliases:
@@ -5179,14 +5187,6 @@
     - line
     - flow
     - sysml
-  sizes:
-    - 32
-- name: connection--two-way
-  friendly_name: Connection two-way
-  aliases:
-    - connection
-    - input
-    - output
   sizes:
     - 32
 - name: connection-flow--usage
@@ -5240,7 +5240,7 @@
     - square
     - sysml
   sizes:
-    - 32  
+    - 32
 - name: construction
   friendly_name: Construction
   aliases:
@@ -5312,6 +5312,19 @@
     - square
   sizes:
     - 32
+- name: container-image--push
+  friendly_name: Container image push
+  aliases:
+    - container
+    - registry
+    - Kubernetes
+    - cloud
+    - directory
+    - push
+    - arrow
+    - square
+  sizes:
+    - 32
 - name: container-image--push-pull
   friendly_name: Container image push pull
   aliases:
@@ -5322,19 +5335,6 @@
     - directory
     - push
     - pull
-    - arrow
-    - square
-  sizes:
-    - 32
-- name: container-image--push
-  friendly_name: Container image push
-  aliases:
-    - container
-    - registry
-    - Kubernetes
-    - cloud
-    - directory
-    - push
     - arrow
     - square
   sizes:
@@ -10282,7 +10282,7 @@
     - car
     - check
     - checkmark
-    - vehicle 
+    - vehicle
   sizes:
     - 32
 - name: ibm--elo--engineering-insights
@@ -12687,6 +12687,15 @@
   sizes:
     - 16
     - 32
+- name: interactive-segmentation-cursor
+  friendly_name: Interactive segmentation cursor
+  aliases:
+    - interactive segmentation cursor
+    - healthcare
+    - segmentation
+    - cursor
+  sizes:
+    - 32
 - name: interface--usage
   friendly_name: Interactive usage
   aliases:
@@ -12695,15 +12704,6 @@
     - diagram
     - sysml
     - usage
-  sizes:
-    - 32
-- name: interactive-segmentation-cursor
-  friendly_name: Interactive segmentation cursor
-  aliases:
-    - interactive segmentation cursor
-    - healthcare
-    - segmentation
-    - cursor
   sizes:
     - 32
 - name: intersect
@@ -12827,18 +12827,6 @@
     - file set
     - ISO
     - outline
-- name: join-node
-  friendly_name: Join node
-  aliases:
-    - join
-    - node
-    - sysml
-    - diagram
-    - connector
-    - synchronize
-    - collect
-  sizes:
-    - 32
 - name: join--full
   friendly_name: Join full
   aliases:
@@ -12872,6 +12860,18 @@
   aliases:
     - join
     - right
+  sizes:
+    - 32
+- name: join-node
+  friendly_name: Join node
+  aliases:
+    - join
+    - node
+    - sysml
+    - diagram
+    - connector
+    - synchronize
+    - collect
   sizes:
     - 32
 - name: JPG
@@ -13017,7 +13017,7 @@
     - hybrid
     - control
     - plane
-    - node 
+    - node
     - zos
     - software
   sizes:
@@ -13039,7 +13039,7 @@
     - cloud
     - hybrid
     - operator
-    - node 
+    - node
     - zos
     - software
   sizes:
@@ -13063,7 +13063,7 @@
     - cloud
     - hybrid
     - worker
-    - node 
+    - node
     - zos
     - software
   sizes:
@@ -16509,6 +16509,15 @@
     - operations
   sizes:
     - 32
+- name: package--text-analysis
+  friendly_name: Package text analysis
+  aliases:
+    - file
+    - package
+    - text
+    - analysis
+  sizes:
+    - 32
 - name: package-node
   friendly_name: Package node
   aliases:
@@ -16520,15 +16529,6 @@
     - diagram
     - folder
     - sysml
-  sizes:
-    - 32
-- name: package--text-analysis
-  friendly_name: Package text analysis
-  aliases:
-    - file
-    - package
-    - text
-    - analysis
   sizes:
     - 32
 - name: page--first
@@ -17876,7 +17876,7 @@
     - Watson Health®
   sizes:
     - 32
-  - name: qiskit
+- name: qiskit
   friendly_name: Qiskit
   aliases:
     - Qiskit
@@ -17890,7 +17890,7 @@
     - Quantum systems
     - Research
   sizes:
-    - 32  
+    - 32
 - name: qq-plot
   friendly_name: QQ plot
   aliases:
@@ -21207,7 +21207,7 @@
     - data
   sizes:
     - 32
-- name: sysplex-distributor
+- name: sysplex--distributor
   friendly_name: Sysplex distributor
   aliases:
     - sysplex
@@ -23269,21 +23269,6 @@
     - profile
     - account
     - my account
-- name: user--feedback
-  friendly_name: User feedback
-  aliases:
-    - person
-    - avatar
-    - man
-    - woman
-    - figure
-    - account
-    - feedback
-    - comment
-    - design
-    - testing
-  sizes:
-    - 32
 - name: user--favorite
   friendly_name: User favorite
   sizes:
@@ -23323,6 +23308,21 @@
     - profile
     - account
     - my account
+- name: user--feedback
+  friendly_name: User feedback
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - account
+    - feedback
+    - comment
+    - design
+    - testing
+  sizes:
+    - 32
 - name: user--filled
   friendly_name: User filled
   sizes:
