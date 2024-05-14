@@ -76,6 +76,19 @@ export type NewPopoverAlignment =
 
 export type PopoverAlignment = DeprecatedPopoverAlignment | NewPopoverAlignment;
 
+const propMappingFunction = (deprecatedValue) => {
+  const mapping = {
+    'top-left': 'top-start',
+    'top-right': 'top-end',
+    'bottom-left': 'bottom-start',
+    'bottom-right': 'bottom-end',
+    'left-bottom': 'left-end',
+    'left-top': 'left-start',
+    'right-bottom': 'right-end',
+    'right-top': 'right-start',
+  };
+  return mapping[deprecatedValue];
+};
 interface PopoverBaseProps {
   /**
    * Specify how the popover should align with the trigger element.
@@ -441,7 +454,7 @@ Popover.propTypes = {
       'right-end',
       'right-start',
     ]),
-    "The alignment values for 'align' prop : 'top-left', 'top-right', 'bottom-left', 'bottom-right', 'left-bottom', 'left-top', 'right-bottom', and 'right-top' are deprecated. Please use 'top-start', 'top-end', 'bottom-start', 'bottom-end', 'left-end', 'left-start', 'right-end', or 'right-start' respectively",
+    //allowed prop values
     [
       'top',
       'top-start',
@@ -455,7 +468,9 @@ Popover.propTypes = {
       'right',
       'right-start',
       'right-end',
-    ]
+    ],
+    //optional mapper function
+    propMappingFunction
   ),
 
   /**

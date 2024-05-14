@@ -11,8 +11,8 @@ const didWarnAboutDeprecation = {};
 
 export default function deprecateValuesWithin(
   propType,
-  message,
-  allowedValues
+  allowedValues,
+  propMappingFunction
 ) {
   return function checker(props, propName, componentName, ...rest) {
     if (props[propName] === undefined) {
@@ -28,14 +28,19 @@ export default function deprecateValuesWithin(
         [propName]: true,
       };
 
-      if (allowedValues && !allowedValues.includes(props[propName])) {
-        warning(
-          false,
-          message ||
-            `In \`${componentName}\` component value for \`${propName}\` prop has been deprecated, It will be removed in the next major release. Allowed values is/are: ${allowedValues.join(
+      const deprecatedValue = props[propName];
+      const newValue = propMappingFunction
+        ? propMappingFunction(deprecatedValue)
+        : null;
+
+      if (allowedValues && !allowedValues.includes(deprecatedValue)) {
+        const message = propMappingFunction
+          ? `"${deprecatedValue}" is a deprecated value for the "${propName}" prop on the "${componentName}" component. Use "${newValue}" instead. "${deprecatedValue}" will be removed in the next major release.`
+          : `"${deprecatedValue}" is a deprecated value for the "${propName}" prop on the "${componentName}" component. Allowed values is/are: ${allowedValues.join(
               ', '
-            )}`
-        );
+            )}.  "${deprecatedValue}" will be removed in the next major release. `;
+
+        warning(false, message);
       }
     }
     return propType(props, propName, componentName, ...rest);
