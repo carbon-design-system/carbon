@@ -7,7 +7,13 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+  useLayoutEffect,
+} from 'react';
 import { Popover, PopoverAlignment, PopoverContent } from '../Popover';
 import { keys, match } from '../../internal/keyboard';
 import { useDelayedState } from '../../internal/useDelayedState';
@@ -156,7 +162,7 @@ function Tooltip<T extends React.ElementType>({
     [closeOnActivation, open, setOpen]
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!open) {
       return undefined;
     }
