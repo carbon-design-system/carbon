@@ -42,7 +42,7 @@ figma.connect(
       // align, needs to be set on Accordion
     }) => (
       <AccordionItem title={title} disabled={disabled} open={open}>
-        {content}
+        <p>{content}</p>
         {children}
       </AccordionItem>
     ),

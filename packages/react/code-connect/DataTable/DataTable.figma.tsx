@@ -52,7 +52,11 @@ figma.connect(
     example: () => {
       // Disclaimer: Code Connect is currently in beta and integration with Carbon
       // React is in an exploratory phase. Code sample below is incomplete.
-      return <DataTable></DataTable>;
+      return (
+        <DataTable>
+          {/* This code is not executed, we can add sample code here. */}
+        </DataTable>
+      );
     },
   }
 );
