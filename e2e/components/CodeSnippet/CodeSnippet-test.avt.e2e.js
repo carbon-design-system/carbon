@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('CodeSnippet @avt', () => {
+test.describe('@avt CodeSnippet', () => {
   test('@avt-default-state inline', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
@@ -84,7 +84,7 @@ test.describe('CodeSnippet @avt', () => {
     await expect(page).toHaveNoACViolations('CodeSnippet skeleton');
   });
 
-  test('inline @avt-keyboard-nav', async ({ page }) => {
+  test('@avt-keyboard-nav inline', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--inline',
@@ -103,7 +103,7 @@ test.describe('CodeSnippet @avt', () => {
     await expect(page.getByRole('tooltip')).toHaveText('Copied to clipboard');
   });
 
-  test('multiline @avt-keyboard-nav', async ({ page }) => {
+  test('@avt-keyboard-nav multiline', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--multiline',
@@ -127,10 +127,10 @@ test.describe('CodeSnippet @avt', () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Enter');
     await expect(page.getByText('Show less')).toBeVisible();
-    await expect(page.getByText('Show more')).not.toBeVisible();
+    await expect(page.getByText('Show more')).toBeHidden();
   });
 
-  test('singleline @avt-keyboard-nav', async ({ page }) => {
+  test('@avt-keyboard-nav singleline', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--singleline',

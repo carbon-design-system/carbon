@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('NumberInput @avt', () => {
+test.describe('@avt NumberInput', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'NumberInput',
@@ -81,8 +81,8 @@ test.describe('NumberInput @avt', () => {
     await expect(input).toHaveAttribute('data-invalid', 'true');
 
     // Allow setting value under `min`, but should cause input to be invalid
-    await input.fill('-1');
-    await expect(input).toHaveValue('-1');
+    await input.fill('-101');
+    await expect(input).toHaveValue('-101');
     await expect(input).toHaveAttribute('data-invalid', 'true');
   });
 });

@@ -7,7 +7,7 @@
 
 import './story.scss';
 import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Popover, PopoverContent } from '../Popover';
 import RadioButton from '../RadioButton';
 import RadioButtonGroup from '../RadioButtonGroup';
@@ -98,6 +98,7 @@ export const TabTip = () => {
         <button
           aria-label="Settings"
           type="button"
+          aria-expanded={open}
           onClick={() => {
             setOpen(!open);
           }}>
@@ -134,6 +135,7 @@ export const TabTip = () => {
         <button
           aria-label="Settings"
           type="button"
+          aria-expanded={open}
           onClick={() => {
             setOpenTwo(!openTwo);
           }}>
@@ -150,7 +152,7 @@ export const TabTip = () => {
           </RadioButtonGroup>
           <hr />
           <fieldset className={`${prefix}--fieldset`}>
-            <legend className={`${prefix}--label`}>Edit columns</legend>
+            <legend className={`${prefix}--label`}>Testing</legend>
             <Checkbox defaultChecked labelText="Name" id="checkbox-label-8" />
             <Checkbox defaultChecked labelText="Type" id="checkbox-label-9" />
             <Checkbox
@@ -178,20 +180,20 @@ Playground.argTypes = {
   align: {
     options: [
       'top',
-      'top-left',
-      'top-right',
+      'top-start',
+      'top-end',
 
       'bottom',
-      'bottom-left',
-      'bottom-right',
+      'bottom-start',
+      'bottom-end',
 
       'left',
-      'left-bottom',
-      'left-top',
+      'left-end',
+      'left-start',
 
       'right',
-      'right-bottom',
-      'right-top',
+      'right-end',
+      'right-start',
     ],
     control: {
       type: 'select',
@@ -225,19 +227,23 @@ Playground.story = {
   ],
 };
 
-export const AutoAlign = () => {
-  const [open, setOpen] = useState(false);
+export const ExperimentalAutoAlign = () => {
+  const [open, setOpen] = useState(true);
+  const ref = useRef();
+
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
+
   return (
-    <div>
+    <div style={{ width: '5000px', height: '5000px' }}>
       <div
         style={{
           position: 'absolute',
-          insetBlockEnd: 0,
-          insetInlineEnd: '50%',
-          marginBlock: '3rem',
-          marginInline: '3rem',
+          top: '2500px',
+          left: '2500px',
         }}>
-        <Popover open={open} autoAlign>
+        <Popover open={open} align="top" autoAlign ref={ref}>
           <div className="playground-trigger">
             <CheckboxIcon
               onClick={() => {
@@ -246,81 +252,58 @@ export const AutoAlign = () => {
             />
           </div>
           <PopoverContent className="p-3">
-            <h2 className="popover-title">Available storage</h2>
-            <p className="popover-details">
-              This server has 150 GB of block storage remaining.
-            </p>
+            <div>
+              <p className="popover-title">This popover uses autoAlign</p>
+              <p className="popover-details">
+                Scroll the container up, down, left or right to observe how the
+                popover will automatically change its position in attempt to
+                stay within the viewport. This works on initial render in
+                addition to on scroll.
+              </p>
+            </div>
           </PopoverContent>
         </Popover>
       </div>
-      <Popover open autoAlign>
-        <div className="playground-trigger">
-          <CheckboxIcon />
-        </div>
-        <PopoverContent className="p-3">
-          <h2 className="popover-title">Available storage</h2>
-          <p className="popover-details">
-            This server has 150 GB of block storage remaining.
-          </p>
-        </PopoverContent>
-      </Popover>
+    </div>
+  );
+};
+
+export const TabTipExperimentalAutoAlign = () => {
+  const [open, setOpen] = useState(true);
+  const ref = useRef();
+
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
+
+  return (
+    <div style={{ width: '5000px', height: '5000px' }}>
       <div
         style={{
           position: 'absolute',
-          insetBlockStart: 0,
-          insetInlineEnd: 0,
-          marginBlock: '3rem',
-          marginInline: '3rem',
+          top: '2500px',
+          left: '2500px',
         }}>
-        <Popover open autoAlign>
+        <Popover open={open} align="bottom-right" autoAlign ref={ref} isTabTip>
           <div className="playground-trigger">
-            <CheckboxIcon />
+            <CheckboxIcon
+              onClick={() => {
+                setOpen(!open);
+              }}
+            />
           </div>
           <PopoverContent className="p-3">
-            <h2 className="popover-title">Available storage</h2>
-            <p className="popover-details">
-              This server has 350 GB of block storage remaining.
-            </p>
-          </PopoverContent>
-        </Popover>
-      </div>
-      <div
-        style={{
-          position: 'absolute',
-          insetBlockEnd: 0,
-          insetInlineEnd: 0,
-          marginBlock: '3rem',
-          marginInline: '3rem',
-        }}>
-        <Popover open autoAlign>
-          <div className="playground-trigger">
-            <CheckboxIcon />
-          </div>
-          <PopoverContent className="p-3">
-            <h2 className="popover-title">Available storage</h2>
-            <p className="popover-details">
-              This server has 150 GB of block storage remaining.
-            </p>
-          </PopoverContent>
-        </Popover>
-      </div>
-      <div
-        style={{
-          position: 'absolute',
-          insetBlockEnd: 0,
-          insetInlineStart: 0,
-          marginBlock: '3rem',
-          marginInline: '3rem',
-        }}>
-        <Popover open autoAlign>
-          <div className="playground-trigger">
-            <CheckboxIcon />
-          </div>
-          <PopoverContent className="p-3">
-            <h2 className="popover-title">Available storage</h2>
-            <p className="popover-details">
-              This server has 150 GB of block storage remaining.
-            </p>
+            <div>
+              <p className="popover-title">
+                This popover uses autoAlign with isTabTip
+              </p>
+              <p className="popover-details">
+                Scroll the container up, down, left or right to observe how the
+                popover will automatically change its position in attempt to
+                stay within the viewport. This works on initial render in
+                addition to on scroll.
+              </p>
+            </div>
           </PopoverContent>
         </Popover>
       </div>

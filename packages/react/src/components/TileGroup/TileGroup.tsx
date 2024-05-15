@@ -5,10 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactElementLike, ReactNodeLike } from 'prop-types';
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { ReactNode, useState } from 'react';
 import RadioTile from '../RadioTile';
-import { warning } from '../../internal/warning';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
@@ -20,7 +19,7 @@ export interface TileGroupProps
   /**
    * Provide a collection of <RadioTile> components to render in the group
    */
-  children?: ReactNodeLike;
+  children?: ReactNode;
 
   /**
    * Provide an optional className to be applied to the container node
@@ -56,6 +55,10 @@ export interface TileGroupProps
    * Specify the value that is currently selected in the group
    */
   valueSelected?: string | number;
+  /**
+   * `true` to specify if input selection in group is required.
+   */
+  required?: boolean;
 }
 
 const TileGroup = (props) => {
@@ -68,9 +71,10 @@ const TileGroup = (props) => {
     name,
     onChange = noopFn,
     valueSelected,
+    required,
   } = props;
-  const prefix = usePrefix();
 
+  const prefix = usePrefix();
   const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
   const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
 
@@ -83,33 +87,37 @@ const TileGroup = (props) => {
     setPrevValueSelected(valueSelected);
   }
 
-  const getRadioTiles = () => {
-    const childrenArray = React.Children.toArray(children);
-    const radioTiles = childrenArray.map((tileRadio) => {
-      const tileRadioProps = (tileRadio as ReactElementLike).props ?? undefined;
-      const { value, ...other } = tileRadioProps;
-      /* istanbul ignore if */
-      if (typeof tileRadioProps.checked !== 'undefined') {
-        warning(
-          false,
-          `Instead of using the checked property on the RadioTile, set
-            the defaultSelected property or valueSelected property on the TileGroup.`
-        );
-      }
+  const getRadioTilesWithWrappers = (children) => {
+    const traverseAndModifyChildren = (children) => {
+      return React.Children.map(children, (child) => {
+        // If RadioTile found, return it with necessary props
+        if (child.type === RadioTile) {
+          const { value, ...otherProps } = child.props;
+          return (
+            <RadioTile
+              {...otherProps}
+              required={required}
+              name={name}
+              key={value}
+              value={value}
+              onChange={handleChange}
+              checked={value === selected}
+            />
+          );
+        } else if (child.props && child.props.children) {
+          // If the child is not RadioTile and has children, recheck the children
+          return React.cloneElement(child, {
+            ...child.props,
+            children: traverseAndModifyChildren(child.props.children),
+          });
+        } else {
+          // If the child is neither a RadioTile nor has children, return it as is
+          return child;
+        }
+      });
+    };
 
-      return (
-        <RadioTile
-          {...other}
-          name={name}
-          key={value}
-          value={value}
-          onChange={handleChange}
-          checked={value === selected}
-        />
-      );
-    });
-
-    return radioTiles;
+    return <>{traverseAndModifyChildren(children)}</>;
   };
 
   const handleChange = (newSelection, value, evt) => {
@@ -130,7 +138,7 @@ const TileGroup = (props) => {
       className={className ?? `${prefix}--tile-group`}
       disabled={disabled}>
       {renderLegend(legend)}
-      <div>{getRadioTiles()}</div>
+      <div>{getRadioTilesWithWrappers(children)}</div>
     </fieldset>
   );
 };
@@ -171,6 +179,11 @@ TileGroup.propTypes = {
    * the group changes
    */
   onChange: PropTypes.func,
+
+  /**
+   * `true` to specify if input selection in group is required.
+   */
+  required: PropTypes.bool,
 
   /**
    * Specify the value that is currently selected in the group

@@ -112,6 +112,8 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     onOpen,
     open,
     size = 'sm',
+    // TODO: #16004
+    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
     target = document.body,
     x = 0,
     y = 0,
@@ -232,7 +234,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
   function focusItem(e?: React.KeyboardEvent<HTMLUListElement>) {
     const currentItem = focusableItems.findIndex((item) =>
-      item.ref.current.contains(document.activeElement)
+      item.ref?.current?.contains(document.activeElement)
     );
     let indexToFocus = currentItem;
 

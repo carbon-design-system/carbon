@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('FluidDropdown @avt', () => {
+test.describe('@avt FluidDropdown', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDropdown',
@@ -67,7 +67,7 @@ test.describe('FluidDropdown @avt', () => {
     await expect(menu).toBeVisible();
     // Close with Escape, retain focus, and open with Enter
     await page.keyboard.press('Escape');
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
     // Should focus on selected item by default

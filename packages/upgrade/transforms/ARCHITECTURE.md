@@ -27,7 +27,7 @@ Transforms are written in the `transforms` directory with their tests and
 fixtures written in the `__tests__` and `__testfixtures__` directories,
 accordingly.
 
-As an example, to add a transform called `sort-prop-types` oone would create the
+As an example, to add a transform called `sort-prop-types` one would create the
 following files:
 
 ```

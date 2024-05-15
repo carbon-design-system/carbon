@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('MultiSelect @avt', () => {
+test.describe('@avt MultiSelect', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'MultiSelect',
@@ -51,7 +51,7 @@ test.describe('MultiSelect @avt', () => {
     await page.keyboard.press('Tab');
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(page.getByRole('combobox', { expanded: true })).toBeVisible;
+    await expect(page.getByRole('combobox', { expanded: true })).toBeVisible();
 
     await expect(page).toHaveNoACViolations('MultiSelect-open');
   });
@@ -72,7 +72,7 @@ test.describe('MultiSelect @avt', () => {
     await page.keyboard.press('Tab');
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(page.getByRole('combobox', { expanded: true })).toBeVisible;
+    await expect(page.getByRole('combobox', { expanded: true })).toBeVisible();
 
     await expect(page).toHaveNoACViolations('MultiSelect-open');
   });
@@ -94,7 +94,7 @@ test.describe('MultiSelect @avt', () => {
     const menu = page.getByRole('listbox');
 
     await expect(toggleButton).toBeVisible();
-    await expect(selection).not.toBeVisible();
+    await expect(selection).toBeHidden();
     // Tab and open the MultiSelect with Arrow Down
     await page.keyboard.press('Tab');
     await expect(toggleButton).toBeFocused();
@@ -102,19 +102,18 @@ test.describe('MultiSelect @avt', () => {
     await expect(menu).toBeVisible();
     // Close with Escape, retain focus, and open with Enter
     await page.keyboard.press('Escape');
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(menu).toBeVisible();
     // Close with Escape, retain focus, and open with Spacebar
     await page.keyboard.press('Escape');
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Space');
     await expect(menu).toBeVisible();
     // Navigation inside the menu
-    // move to first option
-    await page.keyboard.press('ArrowDown');
+    // Focus on first element by default
     await expect(
       page.getByRole('option', {
         name: 'An example option that is really long to show what should be done to handle long text',
@@ -165,14 +164,14 @@ test.describe('MultiSelect @avt', () => {
     await page.keyboard.press('Escape');
     await expect(toggleButton).toBeFocused();
     // should show count of selected items when closed
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(selection).toBeVisible();
     // should only clear selection when escape is pressed when the menu is closed
     await page.keyboard.press('Escape');
-    await expect(selection).not.toBeVisible();
+    await expect(selection).toBeHidden();
   });
 
-  test.slow('@avt-keyboard-nav filterable multiselect', async ({ page }) => {
+  test('@avt-keyboard-nav filterable multiselect', async ({ page }) => {
     await visitStory(page, {
       component: 'FilterableMultiSelect',
       id: 'components-multiselect--filterable',
@@ -187,7 +186,7 @@ test.describe('MultiSelect @avt', () => {
     const menu = page.getByRole('listbox');
 
     await expect(toggleButton).toBeVisible();
-    await expect(selection).not.toBeVisible();
+    await expect(selection).toBeHidden();
     // Tab and open the MultiSelect with Arrow Down
     await page.keyboard.press('Tab');
     await expect(toggleButton).toBeFocused();
@@ -195,19 +194,18 @@ test.describe('MultiSelect @avt', () => {
     await expect(menu).toBeVisible();
     // Close with Escape, retain focus, and open with Enter
     await page.keyboard.press('Escape');
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(menu).toBeVisible();
     // Close with Escape, retain focus, and open with Spacebar
     await page.keyboard.press('Escape');
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Space');
     await expect(menu).toBeVisible();
     // Navigation inside the menu
-    // move to first option
-    await page.keyboard.press('ArrowDown');
+    // Focus on first element by default
     await expect(
       page.getByRole('option', {
         name: 'An example option that is really long to show what should be done to handle long text',
@@ -244,11 +242,11 @@ test.describe('MultiSelect @avt', () => {
     await page.keyboard.press('Escape');
     await expect(toggleButton).toBeFocused();
     // should show count of selected items when closed
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(selection).toBeVisible();
     // should only clear selection when escape is pressed when the menu is closed
     await page.keyboard.press('Escape');
-    await expect(selection).not.toBeVisible();
+    await expect(selection).toBeHidden();
 
     // should filter menu items based on text input
     await page.keyboard.press('2');
@@ -264,6 +262,6 @@ test.describe('MultiSelect @avt', () => {
         name: 'Option 1',
         selected: false,
       })
-    ).not.toBeVisible();
+    ).toBeHidden();
   });
 });

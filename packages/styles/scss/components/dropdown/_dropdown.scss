@@ -93,6 +93,10 @@
     border-block-end-color: $border-subtle;
   }
 
+  .#{$prefix}--dropdown--open .cds--list-box__field {
+    outline: none;
+  }
+
   .#{$prefix}--dropdown--invalid {
     @include focus-outline('invalid');
 

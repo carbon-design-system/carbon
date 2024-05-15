@@ -123,6 +123,10 @@ $radio-border-width: 1px !default;
       @include high-contrast-mode('icon-fill') {
         background-color: ButtonText;
       }
+
+      @media print {
+        print-color-adjust: exact;
+      }
     }
   }
 

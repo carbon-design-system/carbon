@@ -6,7 +6,7 @@
  */
 
 import '../../../../scss/components/accordion/_index.scss';
-
+import Button from '../../Button';
 import React from 'react';
 import { default as Accordion, AccordionItem } from '../';
 import { render, screen } from '@testing-library/react';
@@ -195,6 +195,63 @@ describe('Accordion', () => {
       expect(screen.getByTestId('accordion-2')).not.toHaveClass(
         'cds--accordion--flush'
       );
+    });
+  });
+
+  describe('Expand/Collapse All', () => {
+    const ControlledAccordion = () => {
+      const [expandAll, setExpandAll] = React.useState(false);
+      return (
+        <>
+          <Button onClick={() => setExpandAll(true)}>
+            Click to expand all
+          </Button>
+          <Button
+            onClick={() => {
+              expandAll || expandAll === null
+                ? setExpandAll(false)
+                : setExpandAll(null);
+            }}>
+            Click to collapse all
+          </Button>
+
+          <Accordion className="extra-class">
+            <AccordionItem className="child" title="Heading A" open={expandAll}>
+              Panel A
+            </AccordionItem>
+            <AccordionItem className="child" title="Heading B" open={expandAll}>
+              Panel B
+            </AccordionItem>
+            <AccordionItem className="child" title="Heading C" open={expandAll}>
+              Panel C
+            </AccordionItem>
+          </Accordion>
+        </>
+      );
+    };
+
+    it('should expand All on click to button', async () => {
+      render(<ControlledAccordion />);
+
+      // click to open
+      await userEvent.click(screen.getByText('Click to expand all'));
+
+      // test when open
+      expect(screen.getByText('Panel A')).toBeVisible();
+      expect(screen.getByText('Panel B')).toBeVisible();
+      expect(screen.getByText('Panel C')).toBeVisible();
+    });
+
+    it('should Collapse All on click to button', async () => {
+      render(<ControlledAccordion />);
+
+      // click to close
+      await userEvent.click(screen.getByText('Click to collapse all'));
+
+      // test when close
+      expect(screen.getByText('Panel A')).not.toBeVisible();
+      expect(screen.getByText('Panel B')).not.toBeVisible();
+      expect(screen.getByText('Panel C')).not.toBeVisible();
     });
   });
 });

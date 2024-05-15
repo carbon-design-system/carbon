@@ -70,7 +70,7 @@ export interface DefinitionTooltipProps
 }
 
 const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
-  align = 'bottom-left',
+  align = 'bottom-start',
   className,
   children,
   definition,
@@ -103,6 +103,9 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
       }}
       onMouseEnter={() => {
         openOnHover ? setOpen(true) : null;
+      }}
+      onFocus={() => {
+        setOpen(true);
       }}
       open={isOpen}>
       <button
