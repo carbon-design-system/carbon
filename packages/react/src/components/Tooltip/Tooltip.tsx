@@ -251,7 +251,7 @@ function Tooltip<T extends React.ElementType>({
         aria-hidden={open ? 'false' : 'true'}
         className={`${prefix}--tooltip-content`}
         id={id}
-        // onMouseEnter={onMouseEnter}
+        onMouseEnter={onMouseEnter}
         role="tooltip">
         {label || description}
       </PopoverContent>
