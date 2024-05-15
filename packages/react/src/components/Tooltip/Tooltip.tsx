@@ -7,13 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, {
-  useRef,
-  useEffect,
-  useState,
-  useCallback,
-  useLayoutEffect,
-} from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { Popover, PopoverAlignment, PopoverContent } from '../Popover';
 import { keys, match } from '../../internal/keyboard';
 import { useDelayedState } from '../../internal/useDelayedState';
@@ -21,6 +15,7 @@ import { useId } from '../../internal/useId';
 import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { type PolymorphicProps } from '../../types/common';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 /**
  * Event types that trigger a "drag" to stop.
@@ -162,7 +157,7 @@ function Tooltip<T extends React.ElementType>({
     [closeOnActivation, open, setOpen]
   );
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (!open) {
       return undefined;
     }
