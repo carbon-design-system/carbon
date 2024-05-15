@@ -6062,33 +6062,7 @@ Map {
   "Popover" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-right",
-            "bottom",
-            "bottom-left",
-            "bottom-right",
-            "left",
-            "left-bottom",
-            "left-top",
-            "right",
-            "right-bottom",
-            "right-top",
-            "top-start",
-            "top-end",
-            "bottom-start",
-            "bottom-end",
-            "left-end",
-            "left-start",
-            "right-end",
-            "right-start",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "as": Object {
         "args": Array [
           Array [
