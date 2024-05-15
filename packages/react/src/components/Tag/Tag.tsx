@@ -233,12 +233,20 @@ const Tag = <T extends React.ElementType>({
             children !== null && children !== undefined ? children : typeText
           }
           className={`${prefix}--definition--tooltip--tag`}>
-          <Text className={labelClasses}>
+          <Text
+            title={
+              children !== null && children !== undefined ? children : typeText
+            }
+            className={labelClasses}>
             {children !== null && children !== undefined ? children : typeText}
           </Text>
         </DefinitionTooltip>
       ) : (
-        <Text className={labelClasses}>
+        <Text
+          title={
+            children !== null && children !== undefined ? children : typeText
+          }
+          className={labelClasses}>
           {children !== null && children !== undefined ? children : typeText}
         </Text>
       )}
