@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, {
   useContext,
   useEffect,
@@ -14,6 +14,7 @@ import React, {
   useCallback,
   useState,
   ForwardedRef,
+  ReactNode,
 } from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
@@ -215,7 +216,7 @@ interface DatePickerProps {
   /**
    * The child nodes.
    */
-  children: React.ReactNode | object;
+  children: ReactNode | object;
 
   /**
    * The CSS class names.
@@ -264,7 +265,7 @@ interface DatePickerProps {
   /**
    * Provide the text that is displayed when the control is in error state (Fluid Only)
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * `true` to use the light version.
@@ -396,7 +397,7 @@ interface DatePickerProps {
   /**
    * Provide the text that is displayed when the control is in warning state (Fluid only)
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 }
 
 const DatePicker = React.forwardRef(function DatePicker(

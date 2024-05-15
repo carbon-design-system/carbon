@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useRef, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { useRef, useEffect, useState, ReactNode } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
@@ -37,7 +37,7 @@ export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 export type ModalSize = (typeof ModalSizes)[number];
 
 export interface ModalSecondaryButton {
-  buttonText?: string | React.ReactNode;
+  buttonText?: string | ReactNode;
 
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -57,7 +57,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * Provide the contents of your Modal
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * Specify an optional className to be applied to the modal root node
@@ -117,12 +117,12 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * Specify the content of the modal header title.
    */
-  modalHeading?: React.ReactNode;
+  modalHeading?: ReactNode;
 
   /**
    * Specify the content of the modal header label.
    */
-  modalLabel?: React.ReactNode;
+  modalLabel?: ReactNode;
 
   /**
    * Specify a handler for keypresses.
@@ -177,12 +177,12 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * Specify the text for the primary button
    */
-  primaryButtonText?: React.ReactNode;
+  primaryButtonText?: ReactNode;
 
   /**
    * Specify the text for the secondary button
    */
-  secondaryButtonText?: React.ReactNode;
+  secondaryButtonText?: ReactNode;
 
   /**
    * Specify an array of config objects for secondary buttons
@@ -214,7 +214,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Modal` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 }
 
 const Modal = React.forwardRef(function Modal(
@@ -372,7 +372,7 @@ const Modal = React.forwardRef(function Modal(
       Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
   });
 
-  const asStringOrUndefined = (node: React.ReactNode): string | undefined => {
+  const asStringOrUndefined = (node: ReactNode): string | undefined => {
     return typeof node === 'string' ? node : undefined;
   };
   const modalLabelStr = asStringOrUndefined(modalLabel);
