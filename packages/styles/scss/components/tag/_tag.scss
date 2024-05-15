@@ -452,4 +452,10 @@
   .#{$prefix}--tag > .#{$prefix}--popover-container {
     display: flex;
   }
+
+  .#{$prefix}--toggletip-button:has(
+      .#{$prefix}--tag--operational.#{$prefix}--tag--disabled
+    ) {
+    pointer-events: none;
+  }
 }
