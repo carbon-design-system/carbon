@@ -161,7 +161,7 @@ function Tooltip<T extends React.ElementType>({
       return undefined;
     }
 
-    function handleKeyDown(event: any) {
+    function handleKeyDown(event: KeyboardEvent) {
       if (match(event, keys.Escape)) {
         onKeyDown(event);
       }
@@ -251,7 +251,7 @@ function Tooltip<T extends React.ElementType>({
         aria-hidden={open ? 'false' : 'true'}
         className={`${prefix}--tooltip-content`}
         id={id}
-        onMouseEnter={onMouseEnter}
+        // onMouseEnter={onMouseEnter}
         role="tooltip">
         {label || description}
       </PopoverContent>

@@ -45,7 +45,7 @@ test.describe('@avt Tooltip', () => {
   });
 
   // Prevent timeout
-  test.slow('@avt-keyboard-nav - tooltip default', async ({ page }) => {
+  test('@avt-keyboard-nav - tooltip default', async ({ page }) => {
     await visitStory(page, {
       component: 'Tooltip',
       id: 'components-tooltip--default',
@@ -61,5 +61,30 @@ test.describe('@avt Tooltip', () => {
     await expect(page.getByRole('button')).toBeFocused();
     // Expect tooltip content to be visible
     await expect(page.locator('.cds--popover-container')).toBeVisible();
+  });
+
+  test('@avt-keyboard-nav - tooltip default Escape key on hover', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'Tooltip',
+      id: 'components-tooltip--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    const tooltipTrigger = page.getByRole('button');
+    await expect(tooltipTrigger).toBeVisible();
+
+    await tooltipTrigger.hover();
+
+    const tooltipContent = page.getByText(
+      'Occasionally, services are updated in a specified time window to ensure no down time for customers.'
+    );
+    await expect(tooltipContent).toBeVisible();
+    // Press ESCAPE key while hover is active
+    await page.keyboard.press('Escape');
+    await expect(tooltipContent).toBeHidden();
   });
 });
