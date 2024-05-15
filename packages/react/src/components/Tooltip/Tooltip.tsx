@@ -118,7 +118,6 @@ function Tooltip<T extends React.ElementType>({
     onTouchStart: onDragStart,
   };
 
-  console.log({ open });
   function getChildEventHandlers(childProps: any) {
     const eventHandlerFunctions = Object.keys(triggerProps).filter((prop) =>
       prop.startsWith('on')
@@ -252,6 +251,7 @@ function Tooltip<T extends React.ElementType>({
         aria-hidden={open ? 'false' : 'true'}
         className={`${prefix}--tooltip-content`}
         id={id}
+        onMouseEnter={onMouseEnter}
         role="tooltip">
         {label || description}
       </PopoverContent>
