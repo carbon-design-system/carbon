@@ -10704,6 +10704,7 @@ Map {
   "useContextMenu" => Object {},
   "useIdPrefix" => Object {},
   "useLayer" => Object {},
+  "usePrefersDarkScheme" => Object {},
   "usePrefix" => Object {},
   "useTheme" => Object {},
 }
