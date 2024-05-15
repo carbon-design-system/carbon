@@ -1,11 +1,12 @@
 import React, {
   InputHTMLAttributes,
+  ReactNode,
   useContext,
   useEffect,
   useState,
 } from 'react';
 import classNames from 'classnames';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import { View, ViewOff } from '@carbon/icons-react';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { textInputProps } from './util';
@@ -42,7 +43,7 @@ export interface PasswordInputProps
   /**
    * Provide text that is used alongside the control label for additional help
    */
-  helperText?: ReactNodeLike;
+  helperText?: ReactNode;
 
   /**
    * Specify whether or not the underlying label is visually hidden
@@ -72,12 +73,12 @@ export interface PasswordInputProps
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * Provide the text that will be read by a screen reader when visiting this control
    */
-  labelText: ReactNodeLike;
+  labelText: ReactNode;
 
   /**
    * @deprecated The `light` prop for `PasswordInput` has been deprecated in favor of the new `Layer` component. It will be removed in the next major release.
@@ -164,7 +165,7 @@ export interface PasswordInputProps
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 }
 
 const PasswordInput = React.forwardRef(function PasswordInput(
