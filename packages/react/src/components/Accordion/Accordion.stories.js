@@ -32,6 +32,7 @@ export default {
     },
   },
 };
+
 export const Default = () => (
   <Accordion>
     <AccordionItem title="Section 1 title">
