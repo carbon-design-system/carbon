@@ -85,7 +85,6 @@ const leaveIntentDelay = 300; // in ms
 export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
   function MenuItem(
     {
-      ['aria-label']: ariaLabel,
       children,
       className,
       disabled,
@@ -256,7 +255,6 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
         aria-disabled={isDisabled ?? undefined}
         aria-haspopup={hasChildren ?? undefined}
         aria-expanded={hasChildren ? submenuOpen : undefined}
-        aria-label={ariaLabel || label}
         onClick={handleClick}
         onMouseEnter={hasChildren ? handleMouseEnter : undefined}
         onMouseLeave={hasChildren ? handleMouseLeave : undefined}
@@ -294,11 +292,6 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
 );
 
 MenuItem.propTypes = {
-  /**
-   * Specify the aria-label for li element
-   */
-  ['aria-label']: PropTypes.string,
-
   /**
    * Optionally provide another Menu to create a submenu. props.children can't be used to specify the content of the MenuItem itself. Use props.label instead.
    */

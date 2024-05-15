@@ -123,7 +123,9 @@ describe('Menu', () => {
     it('should show sub menu when hovered for hoverIntentDelay', async () => {
       const menus = screen.getAllByRole('menu');
       await act(() =>
-        fireEvent.mouseEnter(screen.getByRole('menuitem', { name: 'Submenu' }))
+        fireEvent.mouseEnter(
+          screen.getByRole('menuitem', { name: 'Submenu Submenu' })
+        )
       );
       expect(menus[0]).toHaveClass('cds--menu--open');
       expect(menus[1]).not.toHaveClass('cds--menu--open');
@@ -136,14 +138,18 @@ describe('Menu', () => {
     it('should close sub menu on leave after leaveIntentDelay', async () => {
       const menus = screen.getAllByRole('menu');
       await act(() => {
-        fireEvent.mouseEnter(screen.getByRole('menuitem', { name: 'Submenu' }));
+        fireEvent.mouseEnter(
+          screen.getByRole('menuitem', { name: 'Submenu Submenu' })
+        );
         jest.runOnlyPendingTimers();
       });
       expect(menus[0]).toHaveClass('cds--menu--open');
       expect(menus[1]).toHaveClass('cds--menu--open');
 
       await act(() => {
-        fireEvent.mouseLeave(screen.getByRole('menuitem', { name: 'Submenu' }));
+        fireEvent.mouseLeave(
+          screen.getByRole('menuitem', { name: 'Submenu Submenu' })
+        );
         jest.runOnlyPendingTimers();
       });
       expect(menus[0]).toHaveClass('cds--menu--open');
@@ -153,15 +159,21 @@ describe('Menu', () => {
     it('should cancel close sub menu on leave and reenter before leaveIntentDelay', async () => {
       const menus = screen.getAllByRole('menu');
       await act(() => {
-        fireEvent.mouseEnter(screen.getByRole('menuitem', { name: 'Submenu' }));
+        fireEvent.mouseEnter(
+          screen.getByRole('menuitem', { name: 'Submenu Submenu' })
+        );
         jest.runOnlyPendingTimers();
       });
       expect(menus[0]).toHaveClass('cds--menu--open');
       expect(menus[1]).toHaveClass('cds--menu--open');
 
       await act(() => {
-        fireEvent.mouseLeave(screen.getByRole('menuitem', { name: 'Submenu' }));
-        fireEvent.mouseEnter(screen.getByRole('menuitem', { name: 'Submenu' }));
+        fireEvent.mouseLeave(
+          screen.getByRole('menuitem', { name: 'Submenu Submenu' })
+        );
+        fireEvent.mouseEnter(
+          screen.getByRole('menuitem', { name: 'Submenu Submenu' })
+        );
         jest.runOnlyPendingTimers();
       });
       expect(menus[0]).toHaveClass('cds--menu--open');
