@@ -366,6 +366,12 @@ const MultiSelect = React.forwardRef(
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    if ((selected ?? []).length > 0 && hasSelectAll) {
+      console.warn(
+        'Warning: `hasSelectAll` should not be used when `selectedItems` is provided. Please pass either `hasSelectAll` or `selectedItems`, not both.'
+      );
+      hasSelectAll = false;
+    }
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const { current: multiSelectInstanceId } = useRef(getInstanceId());
