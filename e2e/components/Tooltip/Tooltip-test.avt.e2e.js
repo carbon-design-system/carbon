@@ -44,7 +44,6 @@ test.describe('@avt Tooltip', () => {
     await expect(page).toHaveNoACViolations('Tooltip - duration');
   });
 
-  // Prevent timeout
   test('@avt-keyboard-nav - tooltip default', async ({ page }) => {
     await visitStory(page, {
       component: 'Tooltip',
@@ -54,8 +53,8 @@ test.describe('@avt Tooltip', () => {
       },
     });
 
-    await page.keyboard.press('Tab');
     await expect(page.getByRole('button')).toBeVisible();
+    await page.keyboard.press('Tab');
     // Expect tooltip to be focused
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button')).toBeFocused();
