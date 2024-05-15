@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { ReactNode, useState } from 'react';
 import classNames from 'classnames';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -56,7 +56,7 @@ export interface SelectableTagBaseProps {
   /**
    * **Experimental:** Provide a `Slug` component to be rendered inside the `SelectableTag` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 }
 
 export type SelectableTagProps<T extends React.ElementType> = PolymorphicProps<
