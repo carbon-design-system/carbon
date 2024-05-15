@@ -318,10 +318,10 @@ const PasswordInput = React.forwardRef(function PasswordInput(
       align = tooltipPosition;
     }
     if (tooltipAlignment === 'end') {
-      align = `${tooltipPosition}-right`;
+      align = `${tooltipPosition}-end`;
     }
     if (tooltipAlignment === 'start') {
-      align = `${tooltipPosition}-left`;
+      align = `${tooltipPosition}-start`;
     }
   }
 
