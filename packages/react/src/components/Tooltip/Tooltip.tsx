@@ -144,6 +144,7 @@ function Tooltip<T extends React.ElementType>({
   const onKeyDown = useCallback(
     (event: React.SyntheticEvent | Event) => {
       if (open && match(event, keys.Escape)) {
+        event.stopPropagation();
         setOpen(false);
       }
       if (
