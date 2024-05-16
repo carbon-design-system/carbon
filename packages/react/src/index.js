@@ -300,7 +300,12 @@ export {
   TextDirection as unstable_TextDirection,
 } from './components/Text';
 export { DefinitionTooltip } from './components/Tooltip/DefinitionTooltip';
-export { GlobalTheme, Theme, usePrefersDarkScheme } from './components/Theme';
+export {
+  GlobalTheme,
+  Theme,
+  usePrefersDarkScheme,
+  useTheme,
+} from './components/Theme';
 export { usePrefix } from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';
 export {
