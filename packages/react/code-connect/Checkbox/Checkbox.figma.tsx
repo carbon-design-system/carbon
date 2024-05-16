@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 import { Checkbox, CheckboxSkeleton } from '@carbon/react';
 import figma from '@figma/code-connect';
@@ -9,6 +16,8 @@ figma.connect(
     props: {
       // indented: figma.boolean('Indented'), //doesn't exist in code
       // label: figma.boolean('Label'), //label only exists on checkbox group in code
+      // warnMessage: figma.boolean('Warning message'), // you can have a component in a warn state while hiding warning message in Figma, not supported in code
+      // errorMessage: figma.boolean('Error message'), // you can have a component in a error state while hiding error message in Figma, not supported in code
 
       hideLabel: figma.boolean('Value', {
         true: false,
@@ -21,20 +30,20 @@ figma.connect(
       checked: figma.enum('Selection', {
         Checked: true,
       }),
-      warnText: figma.boolean('Warning text'),
-      invalidText: figma.string('Error text'),
       helperText: figma.string('Helper text'),
+      invalid: figma.enum('State', {
+        Invalid: true,
+      }),
+      invalidText: figma.string('Error text'),
+      warn: figma.enum('State', {
+        Warning: true,
+      }),
+      warnText: figma.string('Warning text'),
       disabled: figma.enum('State', {
         Disabled: true,
       }),
       readOnly: figma.enum('State', {
         'Read-only': true,
-      }),
-      invalid: figma.enum('State', {
-        Invalid: true,
-      }),
-      warn: figma.enum('State', {
-        Warning: true,
       }),
     },
     example: ({
@@ -50,9 +59,7 @@ figma.connect(
       warn,
       hideLabel,
     }) => (
-      // Disclaimer: Code Connect is currently in beta and
-      // integration with Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
+      // Label needs to be set on <CheckboxGroup /> or <FormLabel />
       <Checkbox
         id="your_checkbox_id"
         labelText={labelText}
