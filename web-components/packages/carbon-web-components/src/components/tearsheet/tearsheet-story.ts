@@ -9,13 +9,13 @@
 
 import { TemplateResult, html } from 'lit';
 import { boolean, select, text } from '@storybook/addon-knobs';
-import '../button/button';
 import {
   TEARSHEET_INFLUENCER_PLACEMENT,
   TEARSHEET_INFLUENCER_WIDTH,
   TEARSHEET_WIDTH,
 } from './tearsheet';
 import './index';
+import '../button/button';
 import '../text-input/index';
 import '../textarea/index';
 import storyDocs from './tearsheet-story.mdx';
