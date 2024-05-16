@@ -300,14 +300,8 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   ) : (
     <View className={`${prefix}--icon-visibility-on`} />
   );
-  const passwordVisibilityToggleClasses = classNames(
-    `${prefix}--btn-reset`,
-    `${prefix}--text-input--password__visibility__toggle`,
-    `${prefix}--tooltip__trigger`,
-    `${prefix}--tooltip--a11y`
-  );
 
-  const tooltipClasses = classNames(
+  const passwordVisibilityToggleClasses = classNames(
     `${prefix}--text-input--password__visibility__toggle`,
     `${prefix}--btn`,
     `${prefix}--tooltip__trigger`,
@@ -357,11 +351,11 @@ const PasswordInput = React.forwardRef(function PasswordInput(
       {isFluid && <hr className={`${prefix}--text-input__divider`} />}
       <Tooltip
         align={align}
-        className={tooltipClasses}
+        className={passwordVisibilityToggleClasses}
         label={passwordIsVisible ? hidePasswordLabel : showPasswordLabel}>
         <button
           type="button"
-          className={passwordVisibilityToggleClasses}
+          className={`${prefix}--btn-reset`}
           disabled={disabled}
           onClick={handleTogglePasswordVisibility}>
           {passwordVisibilityIcon}
