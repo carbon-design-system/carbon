@@ -14,13 +14,14 @@ import {
   UseSelectStateChangeTypes,
 } from 'downshift';
 import isEqual from 'lodash.isequal';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, {
   ForwardedRef,
   useContext,
   useRef,
   useState,
   useMemo,
+  ReactNode,
 } from 'react';
 import ListBox, {
   ListBoxSize,
@@ -182,7 +183,7 @@ export interface MultiSelectProps<ItemType>
    * Provide helper text that is used alongside the control label for
    * additional help
    */
-  helperText?: React.ReactNode;
+  helperText?: ReactNode;
 
   /**
    * Specify whether the title text should be hidden or not
@@ -208,7 +209,7 @@ export interface MultiSelectProps<ItemType>
   /**
    * If invalid, what is the error?
    */
-  invalidText?: React.ReactNode;
+  invalidText?: ReactNode;
 
   /**
    * Function to render items as custom components instead of strings.
@@ -233,7 +234,7 @@ export interface MultiSelectProps<ItemType>
    * Generic `label` that will be used as the textual representation of what
    * this field is for
    */
-  label: NonNullable<React.ReactNode>;
+  label: NonNullable<ReactNode>;
 
   /**
    * `true` to use the light version.
@@ -292,13 +293,13 @@ export interface MultiSelectProps<ItemType>
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the
    * multiselect via ARIA attributes.
    */
-  titleText?: React.ReactNode;
+  titleText?: ReactNode;
 
   /**
    * Specify 'inline' to create an inline multi-select.
@@ -318,7 +319,7 @@ export interface MultiSelectProps<ItemType>
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: React.ReactNode;
+  warnText?: ReactNode;
 }
 
 const MultiSelect = React.forwardRef(
