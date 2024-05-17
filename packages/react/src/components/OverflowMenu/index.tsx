@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
+import { type OverflowMenuProps } from './OverflowMenu';
 
 import { OverflowMenu as OverflowMenuV12 } from './next';
 
@@ -30,4 +31,4 @@ function OverflowMenu(props) {
 OverflowMenu.displayName = 'OverflowMenu';
 
 export default OverflowMenu;
-export { OverflowMenu };
+export { OverflowMenu, type OverflowMenuProps };

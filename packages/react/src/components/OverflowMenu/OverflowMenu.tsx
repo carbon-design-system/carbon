@@ -106,7 +106,7 @@ type IconProps = {
   'aria-label'?: string;
 };
 
-interface OverflowMenuProps {
+export interface OverflowMenuProps {
   /**
    * Specify a label to be read by screen readers on the container node
    */
