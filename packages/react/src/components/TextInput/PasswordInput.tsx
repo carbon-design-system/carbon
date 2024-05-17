@@ -305,6 +305,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     `${prefix}--text-input--password__visibility__toggle`,
     `${prefix}--btn`,
     `${prefix}--tooltip__trigger`,
+    `${prefix}--tooltip--a11y`,
     {
       [`${prefix}--tooltip--${tooltipPosition}`]: tooltipPosition,
       [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
