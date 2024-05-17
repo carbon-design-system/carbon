@@ -154,7 +154,7 @@
   }
 
   .#{$prefix}--text-input--fluid
-    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+    .#{$prefix}--toggle-password-tooltip.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     block-size: convert.to-rem(32px);
     inline-size: convert.to-rem(32px);
     inset-block-start: convert.to-rem(26px);
