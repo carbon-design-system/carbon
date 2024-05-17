@@ -41,6 +41,8 @@ import { FormContext } from '../FluidForm';
 import { ReactAttr } from '../../types/common';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
+import { useFloating, flip, autoUpdate } from '@floating-ui/react';
+
 const getInstanceId = setupGetInstanceId();
 
 const {
@@ -91,6 +93,11 @@ export interface DropdownProps<ItemType>
    * Specify a label to be read by screen readers on the container note.
    */
   ariaLabel?: string;
+
+  /**
+   * Will auto-align the dropdown on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlign?: boolean;
 
   /**
    * Specify the direction of the dropdown. Can be either top or bottom.
@@ -238,6 +245,7 @@ export type DropdownTranslationKey = ListBoxMenuIconTranslationKey;
 const Dropdown = React.forwardRef(
   <ItemType,>(
     {
+      autoAlign = false,
       className: containerClassName,
       disabled = false,
       direction = 'bottom',
@@ -270,6 +278,28 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const { refs, placement } = useFloating(
+      autoAlign
+        ? {
+            placement: direction,
+
+            // The floating element is positioned relative to its nearest
+            // containing block (usually the viewport). It will in many cases also
+            // “break” the floating element out of a clipping ancestor.
+            // https://floating-ui.com/docs/misc#clipping
+            strategy: 'fixed',
+
+            // Middleware order matters, arrow should be last
+            middleware: [
+              flip({
+                fallbackAxisSideDirection: 'start',
+              }),
+            ],
+            whileElementsMounted: autoUpdate,
+          }
+        : {} // When autoAlign is turned off, floating-ui will not be used
+    );
+
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
 
@@ -330,6 +360,9 @@ const Dropdown = React.forwardRef(
 
     const [isFocused, setIsFocused] = useState(false);
 
+    const currentAlignment =
+      autoAlign && placement !== direction ? placement : direction;
+
     const className = cx(`${prefix}--dropdown`, {
       [`${prefix}--dropdown--invalid`]: invalid,
       [`${prefix}--dropdown--warning`]: showWarning,
@@ -339,7 +372,7 @@ const Dropdown = React.forwardRef(
       [`${prefix}--dropdown--light`]: light,
       [`${prefix}--dropdown--readonly`]: readOnly,
       [`${prefix}--dropdown--${size}`]: size,
-      [`${prefix}--list-box--up`]: direction === 'top',
+      [`${prefix}--list-box--up`]: currentAlignment === 'top',
     });
 
     const titleClasses = cx(`${prefix}--label`, {
@@ -447,6 +480,7 @@ const Dropdown = React.forwardRef(
         };
 
     const menuProps = getMenuProps();
+    const menuRef = mergeRefs(menuProps.ref, refs.setFloating);
 
     // Slug is always size `mini`
     let normalizedSlug;
@@ -475,6 +509,7 @@ const Dropdown = React.forwardRef(
           warnText={warnText}
           light={light}
           isOpen={isOpen}
+          ref={refs.setReference}
           id={id}>
           {invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
@@ -514,7 +549,7 @@ const Dropdown = React.forwardRef(
             />
           </button>
           {normalizedSlug}
-          <ListBox.Menu {...menuProps}>
+          <ListBox.Menu {...menuProps} ref={menuRef}>
             {isOpen &&
               items.map((item, index) => {
                 const isObject = item !== null && typeof item === 'object';
@@ -591,6 +626,11 @@ Dropdown.propTypes = {
     PropTypes.string,
     'This prop syntax has been deprecated. Please use the new `aria-label`.'
   ),
+
+  /**
+   * Will auto-align the dropdown on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Provide a custom className to be applied on the cds--dropdown node
