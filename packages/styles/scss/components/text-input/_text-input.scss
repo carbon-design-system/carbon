@@ -117,7 +117,7 @@
     position: absolute;
   }
 
-  .#{$prefix}--btn {
+  .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     @include focus-outline('reset');
 
     display: flex;
