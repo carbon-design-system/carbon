@@ -15,18 +15,17 @@
 
 import React from 'react';
 import {
-  DataTable,
-  // Table,
-  // TableHead,
-  // TableRow,
-  // TableHeader,
-  // TableBody,
-  // TableCell,
+  Table,
+  TableHead,
+  TableRow,
+  TableHeader,
+  TableBody,
+  TableCell,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(
-  DataTable,
+  Table,
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
   {
     props: {
@@ -52,10 +51,57 @@ figma.connect(
     example: () => {
       // Disclaimer: Code Connect is currently in beta and integration with Carbon
       // React is in an exploratory phase. Code sample below is incomplete.
+      // This is sample code for a basic Table
+      // See storybook for for detailed implementation docs
+      // https://react.carbondesignsystem.com/?path=/docs/components-datatable-basic--overview
+      const rows = [
+        {
+          id: 'load-balancer-1',
+          name: 'Load Balancer 1',
+          rule: 'Round robin',
+          Status: 'Starting',
+          other: 'Test',
+          example: '22',
+        },
+        {
+          id: 'load-balancer-2',
+          name: 'Load Balancer 2',
+          rule: 'DNS delegation',
+          status: 'Active',
+          other: 'Test',
+          example: '22',
+        },
+        {
+          id: 'load-balancer-3',
+          name: 'Load Balancer 3',
+          rule: 'Round robin',
+          status: 'Disabled',
+          other: 'Test',
+          example: '22',
+        },
+      ];
+      const headers = ['Name', 'Rule', 'Status'];
       return (
-        <DataTable>
-          {/* This code is not executed, we can add sample code here. */}
-        </DataTable>
+        <Table aria-label="sample table">
+          <TableHead>
+            <TableRow>
+              {headers.map((header) => (
+                <TableHeader key={header}>{header}</TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
+                {Object.keys(row)
+                  .filter((key) => key !== 'id')
+                  .map((key) => {
+                    return <TableCell key={key}>{row[key]}</TableCell>;
+                  })}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       );
     },
   }

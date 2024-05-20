@@ -13,4 +13,4 @@ actual code snippets from Carbon React.
 Not only does Code Connect establish connections between component definitions,
 but it also facilitates the mapping of properties from Carbon React code to
 Figma. This capability enables the creation of dynamic and accurate examples,
-promoting consistentcy across both design and engineering.
+promoting consistency across both design and engineering.

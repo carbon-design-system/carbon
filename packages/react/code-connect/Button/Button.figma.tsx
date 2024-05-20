@@ -84,9 +84,8 @@ figma.connect(
     },
     example: ({ size }) => {
       return (
-        // Disclaimer: Code Connect is currently in beta and
-        // integration with Carbon React is in an exploratory phase.
-        // Code sample below may be incomplete.
+        // Disclaimer: Code Connect is currently in beta and integration with Carbon
+        // React is in an exploratory phase. Code sample below may be incomplete.
         <ButtonSkeleton size={size} />
       );
     },

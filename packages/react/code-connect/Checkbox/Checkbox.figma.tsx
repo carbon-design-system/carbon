@@ -15,7 +15,7 @@ figma.connect(
   {
     props: {
       // indented: figma.boolean('Indented'), //doesn't exist in code
-      // label: figma.boolean('Label'), //label only exists on checkbox group in code
+      // label: figma.boolean('Label'), // Label needs to be set on <CheckboxGroup /> or <FormLabel />
       // warnMessage: figma.boolean('Warning message'), // you can have a component in a warn state while hiding warning message in Figma, not supported in code
       // errorMessage: figma.boolean('Error message'), // you can have a component in a error state while hiding error message in Figma, not supported in code
 
@@ -59,7 +59,6 @@ figma.connect(
       warn,
       hideLabel,
     }) => (
-      // Label needs to be set on <CheckboxGroup /> or <FormLabel />
       <Checkbox
         id="your_checkbox_id"
         labelText={labelText}
