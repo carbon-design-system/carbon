@@ -113,25 +113,26 @@
     @include tooltip--placement('icon', 'bottom', 'center');
   }
 
-  .#{$prefix}--toggle-password-tooltip.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
-    position: absolute;
-  }
-
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     @include focus-outline('reset');
 
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     border: 0;
     background: none;
-    block-size: convert.to-rem(32px);
+    block-size: 100%;
     cursor: pointer;
-    inline-size: convert.to-rem(32px);
+    inline-size: convert.to-rem(40px);
     inset-inline-end: 0;
     min-block-size: auto;
     transition: outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover {
+    inset-inline-start: -(convert.to-rem(40px));
   }
 
   .#{$prefix}--text-input--sm
