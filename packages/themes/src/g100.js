@@ -40,6 +40,7 @@ import {
   red60,
   purple40,
   purple50,
+  purple60,
 
   // Constants
   white,
@@ -166,6 +167,7 @@ export const linkPrimaryHover = blue30;
 export const linkSecondary = blue30;
 export const linkInverse = blue60;
 export const linkVisited = purple40;
+export const linkInverseVisited = purple60;
 export const linkInverseActive = gray100;
 export const linkInverseHover = blue70;
 
