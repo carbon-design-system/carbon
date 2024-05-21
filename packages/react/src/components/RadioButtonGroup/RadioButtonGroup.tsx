@@ -5,8 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactElementLike, ReactNodeLike } from 'prop-types';
-import React, { createContext, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import React, {
+  createContext,
+  ReactElement,
+  ReactNode,
+  useRef,
+  useState,
+} from 'react';
 import classNames from 'classnames';
 import { Legend } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
@@ -28,7 +34,7 @@ export interface RadioButtonGroupProps
   /**
    * Provide a collection of `<RadioButton>` components to render in the group
    */
-  children?: ReactNodeLike;
+  children?: ReactNode;
 
   /**
    * Provide an optional className to be applied to the container node
@@ -48,7 +54,7 @@ export interface RadioButtonGroupProps
   /**
    * Provide text that is used alongside the control label for additional help
    */
-  helperText?: ReactNodeLike;
+  helperText?: ReactNode;
 
   /**
    * Specify whether the control is currently invalid
@@ -58,7 +64,7 @@ export interface RadioButtonGroupProps
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * Provide where label text should be placed
@@ -69,7 +75,7 @@ export interface RadioButtonGroupProps
    * Provide a legend to the RadioButtonGroup input that you are
    * exposing to the user
    */
-  legendText?: ReactNodeLike;
+  legendText?: ReactNode;
 
   /**
    * Specify the name of the underlying `<input>` nodes
@@ -98,7 +104,7 @@ export interface RadioButtonGroupProps
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Specify whether the control is currently in warning state
@@ -108,12 +114,16 @@ export interface RadioButtonGroupProps
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 
   /**
    * Specify the value that is currently selected in the group
    */
   valueSelected?: string | number;
+  /**
+   * `true` to specify if input selection in group is required.
+   */
+  required?: boolean;
 }
 
 const RadioButtonGroup = React.forwardRef(
@@ -136,6 +146,7 @@ const RadioButtonGroup = React.forwardRef(
       warn = false,
       warnText,
       slug,
+      required,
       ...rest
     } = props;
     const prefix = usePrefix();
@@ -156,7 +167,7 @@ const RadioButtonGroup = React.forwardRef(
 
     function getRadioButtons() {
       const mappedChildren = React.Children.map(children, (radioButton) => {
-        const { value } = (radioButton as ReactElementLike)?.props ?? undefined;
+        const { value } = (radioButton as ReactElement)?.props ?? undefined;
 
         const newProps = {
           name: name,
@@ -164,13 +175,14 @@ const RadioButtonGroup = React.forwardRef(
           value: value,
           onChange: handleOnChange,
           checked: value === selected,
+          required: required,
         };
 
-        if (!selected && (radioButton as ReactElementLike)?.props.checked) {
+        if (!selected && (radioButton as ReactElement)?.props.checked) {
           newProps.checked = true;
         }
         if (radioButton) {
-          return React.cloneElement(radioButton as ReactElementLike, newProps);
+          return React.cloneElement(radioButton as ReactElement, newProps);
         }
       });
 
@@ -333,6 +345,11 @@ RadioButtonGroup.propTypes = {
    * Whether the RadioButtonGroup should be read-only
    */
   readOnly: PropTypes.bool,
+
+  /**
+   * `true` to specify if radio selection in group is required.
+   */
+  required: PropTypes.bool,
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
