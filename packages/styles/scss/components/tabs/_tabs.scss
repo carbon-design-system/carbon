@@ -137,6 +137,14 @@
       &:focus {
         @include focus-outline('outline');
       }
+
+      &:active {
+        background-color: $background-active;
+      }
+
+      &:hover {
+        background-color: $background-hover;
+      }
     }
 
     .#{$prefix}--tab--overflow-nav-button--hidden {
@@ -147,11 +155,24 @@
       margin: 0;
       background-color: $layer-accent;
       inline-size: $spacing-09;
+
+      &:active {
+        background-color: $layer-accent-active;
+      }
+
+      &:hover {
+        background-color: $layer-accent-hover;
+      }
     }
 
     .#{$prefix}--tab--overflow-nav-button svg {
       z-index: 2;
       fill: $icon-primary;
+
+      &:active,
+      &:hover {
+        fill: $icon-primary;
+      }
     }
 
     .#{$prefix}--tab--overflow-nav-button--next {
@@ -525,7 +546,7 @@
       .#{$prefix}--tabs__nav-item:not(
         .#{$prefix}--tabs__nav-item--selected
       ):not(.#{$prefix}--tabs__nav-item--disabled):hover {
-      border-block-end: $tab-underline-color-hover;
+      border-block-end: 'red';
       color: $text-primary;
     }
 
