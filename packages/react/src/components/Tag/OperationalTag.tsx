@@ -6,12 +6,19 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { MouseEventHandler, ReactNode } from 'react';
+import React, {
+  MouseEventHandler,
+  useLayoutEffect,
+  useState,
+  ReactNode,
+} from 'react';
 import classNames from 'classnames';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import Tag, { SIZES } from './Tag';
+import { Tooltip } from '../Tooltip';
+import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -29,11 +36,6 @@ const TYPES = {
 };
 
 export interface OperationalTagBaseProps {
-  /**
-   * Provide content to be rendered inside of a `OperationalTag`
-   */
-  children?: React.ReactNode;
-
   /**
    * Provide a custom className that is applied to the containing <span>
    */
@@ -68,6 +70,11 @@ export interface OperationalTagBaseProps {
   slug?: ReactNode;
 
   /**
+   * Provide text to be rendered inside of a the tag.
+   */
+  text?: string;
+
+  /**
    * Specify the type of the `Tag`
    */
   type?: keyof typeof TYPES;
@@ -79,19 +86,34 @@ export type OperationalTagProps<T extends React.ElementType> = PolymorphicProps<
 >;
 
 const OperationalTag = <T extends React.ElementType>({
-  children,
   className,
   disabled,
   id,
   renderIcon,
   slug,
   size,
+  text,
   type = 'gray',
   ...other
 }: OperationalTagProps<T>) => {
   const prefix = usePrefix();
   const tagId = id || `tag-${getInstanceId()}`;
   const tagClasses = classNames(`${prefix}--tag--operational`, className);
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+
+  const isEllipsisActive = (element: any) => {
+    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
+    return element.offsetWidth < element.scrollWidth;
+  };
+
+  useLayoutEffect(() => {
+    const elementTagId = document.querySelector(`#${tagId}`);
+    const newElement = elementTagId?.getElementsByClassName(
+      `${prefix}--tag__label`
+    )[0];
+
+    isEllipsisActive(newElement);
+  }, [prefix, tagId]);
 
   let normalizedSlug;
   if (slug && slug['type']?.displayName === 'Slug') {
@@ -99,6 +121,37 @@ const OperationalTag = <T extends React.ElementType>({
       size: 'sm',
       kind: 'inline',
     });
+  }
+
+  const tooltipClasses = classNames(
+    `${prefix}--icon-tooltip`,
+    `${prefix}--tag-label-tooltip`
+  );
+
+  if (isEllipsisApplied) {
+    return (
+      <Tooltip
+        label={text}
+        align="bottom"
+        className={tooltipClasses}
+        leaveDelayMs={0}
+        onMouseEnter={false}
+        closeOnActivation>
+        <Tag<any>
+          type={type}
+          size={size}
+          renderIcon={renderIcon}
+          disabled={disabled}
+          className={tagClasses}
+          id={tagId}
+          {...other}>
+          <Text title={text} className={`${prefix}--tag__label`}>
+            {text}
+          </Text>
+          {normalizedSlug}
+        </Tag>
+      </Tooltip>
+    );
   }
 
   return (
@@ -110,20 +163,15 @@ const OperationalTag = <T extends React.ElementType>({
       className={tagClasses}
       id={tagId}
       {...other}>
-      <div className={`${prefix}--interactive--tag-children`}>
-        {children}
-        {normalizedSlug}
-      </div>
+      {normalizedSlug}
+      <Text title={text} className={`${prefix}--tag__label`}>
+        {text}
+      </Text>
     </Tag>
   );
 };
 
 OperationalTag.propTypes = {
-  /**
-   * Provide content to be rendered inside of a `OperationalTag`
-   */
-  children: PropTypes.node,
-
   /**
    * Provide a custom className that is applied to the containing <span>
    */
@@ -155,6 +203,11 @@ OperationalTag.propTypes = {
    * **Experimental:** Provide a `Slug` component to be rendered inside the `OperationalTag` component
    */
   slug: PropTypes.node,
+
+  /**
+   * Provide text to be rendered inside of a the tag.
+   */
+  text: PropTypes.string,
 
   /**
    * Specify the type of the `Tag`

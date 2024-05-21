@@ -53,10 +53,12 @@ test.describe('@avt InteractiveTag', () => {
         theme: 'white',
       },
     });
+    const tooltip = page.getByRole('tooltip');
     const button = page.getByRole('button').first();
     await expect(button).toBeVisible();
     await page.keyboard.press('Tab');
     await expect(button).toBeFocused();
+    await expect(tooltip).toHaveAttribute('aria-hidden', 'false');
   });
 
   test('@avt-keyboard-nav OperationalTag', async ({ page }) => {
@@ -71,6 +73,10 @@ test.describe('@avt InteractiveTag', () => {
     await expect(button).toBeVisible();
     await page.keyboard.press('Tab');
     await expect(button).toBeFocused();
+    await expect(page.getByRole('tooltip')).toHaveAttribute(
+      'aria-hidden',
+      'false'
+    );
     await expect(button).toHaveClass(/cds--tag--red/);
 
     await page.keyboard.press('Tab');
@@ -87,7 +93,7 @@ test.describe('@avt InteractiveTag', () => {
     // Expecte the OperationalTag with tooltip be focusable and visible
     await expect(page.getByRole('button').nth(10)).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(page.getByText('View More')).toBeVisible();
+    await expect(page.getByText('Tag 1 name').first()).toBeVisible();
   });
 
   test('@avt-keyboard-nav SelectableTag', async ({ page }) => {
@@ -103,6 +109,11 @@ test.describe('@avt InteractiveTag', () => {
     await page.keyboard.press('Tab');
     await expect(tag).toBeFocused();
     await page.keyboard.press('Enter');
+    await expect(page.getByRole('tooltip')).toHaveAttribute(
+      'aria-hidden',
+      'false'
+    );
     await expect(tag).toHaveClass(/cds--tag--selectable-selected/);
+    await page.keyboard.press('Tab');
   });
 });

@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode } from 'react';
+import React, { useLayoutEffect, useState, ReactNode } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -14,6 +14,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
+import { DefinitionTooltip } from '../Tooltip';
 
 const getInstanceId = setupGetInstanceId();
 export const TYPES = {
@@ -118,6 +119,20 @@ const Tag = <T extends React.ElementType>({
 }: TagProps<T>) => {
   const prefix = usePrefix();
   const tagId = id || `tag-${getInstanceId()}`;
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+
+  const isEllipsisActive = (element: any) => {
+    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
+    return element.offsetWidth < element.scrollWidth;
+  };
+
+  useLayoutEffect(() => {
+    const elementTagId = document.querySelector(`#${tagId}`);
+    const newElement = elementTagId?.getElementsByClassName(
+      `${prefix}--tag__label`
+    )[0];
+    isEllipsisActive(newElement);
+  }, [prefix, tagId]);
 
   const conditions = [
     `${prefix}--tag--selectable`,
@@ -133,7 +148,8 @@ const Tag = <T extends React.ElementType>({
     [`${prefix}--tag--${size}`]: size, // TODO: V12 - Remove this class
     [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--tag--${type}`]: type,
-    [`${prefix}--tag--interactive`]: other.onClick && !isInteractiveTag,
+    [`${prefix}--tag--interactive`]:
+      other.onClick && !isInteractiveTag && isEllipsisApplied,
   });
 
   const typeText =
@@ -166,9 +182,10 @@ const Tag = <T extends React.ElementType>({
         ) : (
           ''
         )}
+
         <Text
-          className={`${prefix}--tag__label`}
-          title={typeof children === 'string' ? children : undefined}>
+          title={typeof children === 'string' ? children : undefined}
+          className={`${prefix}--tag__label`}>
           {children !== null && children !== undefined ? children : typeText}
         </Text>
         {normalizedSlug}
@@ -191,6 +208,11 @@ const Tag = <T extends React.ElementType>({
       ? 'button'
       : 'div');
 
+  const labelClasses = classNames({
+    [`${prefix}--tag__label`]: !isInteractiveTag,
+    [`${prefix}--tag--${type}`]: type && !isInteractiveTag,
+  });
+
   return (
     <ComponentTag
       disabled={disabled}
@@ -204,9 +226,31 @@ const Tag = <T extends React.ElementType>({
       ) : (
         ''
       )}
-      <Text>
-        {children !== null && children !== undefined ? children : typeText}
-      </Text>
+      {isEllipsisApplied && !isInteractiveTag ? (
+        <DefinitionTooltip
+          openOnHover={false}
+          definition={
+            children !== null && children !== undefined ? children : typeText
+          }
+          className={`${prefix}--definition--tooltip--tag`}>
+          <Text
+            title={
+              children !== null && children !== undefined ? children : typeText
+            }
+            className={labelClasses}>
+            {children !== null && children !== undefined ? children : typeText}
+          </Text>
+        </DefinitionTooltip>
+      ) : (
+        <Text
+          title={
+            children !== null && children !== undefined ? children : typeText
+          }
+          className={labelClasses}>
+          {children !== null && children !== undefined ? children : typeText}
+        </Text>
+      )}
+
       {normalizedSlug}
     </ComponentTag>
   );

@@ -19,7 +19,7 @@ export const ReadOnly = () => {
   return (
     <>
       <Tag className="some-class" type="red">
-        {'Tag content'}
+        {'Tag content with a long text description'}
       </Tag>
       <Tag className="some-class" type="magenta">
         {'Tag content'}

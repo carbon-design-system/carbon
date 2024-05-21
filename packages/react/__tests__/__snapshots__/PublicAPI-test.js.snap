@@ -2729,9 +2729,6 @@ Map {
   },
   "DismissibleTag" => Object {
     "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
       "className": Object {
         "type": "string",
       },
@@ -2769,6 +2766,9 @@ Map {
       },
       "slug": Object {
         "type": "node",
+      },
+      "text": Object {
+        "type": "string",
       },
       "title": Object {
         "type": "string",
@@ -5626,9 +5626,6 @@ Map {
   },
   "OperationalTag" => Object {
     "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
       "className": Object {
         "type": "string",
       },
@@ -5663,6 +5660,9 @@ Map {
       },
       "slug": Object {
         "type": "node",
+      },
+      "text": Object {
+        "type": "string",
       },
       "type": Object {
         "args": Array [
@@ -6742,9 +6742,6 @@ Map {
   },
   "SelectableTag" => Object {
     "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
       "className": Object {
         "type": "string",
       },
@@ -6782,6 +6779,9 @@ Map {
       },
       "slug": Object {
         "type": "node",
+      },
+      "text": Object {
+        "type": "string",
       },
     },
   },

@@ -6,22 +6,19 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode } from 'react';
+import React, { useLayoutEffect, useState, ReactNode } from 'react';
 import classNames from 'classnames';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import Tag, { SIZES, TYPES } from './Tag';
 import { Close } from '@carbon/icons-react';
+import { Tooltip } from '../Tooltip';
+import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
 
 export interface DismissibleTagBaseProps {
-  /**
-   * Provide content to be rendered inside of a `DismissibleTag`
-   */
-  children?: React.ReactNode;
-
   /**
    * Provide a custom className that is applied to the containing <span>
    */
@@ -60,6 +57,11 @@ export interface DismissibleTagBaseProps {
   slug?: ReactNode;
 
   /**
+   * Provide text to be rendered inside of a the tag.
+   */
+  text?: string;
+
+  /**
    * Text to show on clear filters
    */
   title?: string;
@@ -76,22 +78,35 @@ export type DismissibleTagProps<T extends React.ElementType> = PolymorphicProps<
 >;
 
 const DismissibleTag = <T extends React.ElementType>({
-  children,
   className,
   disabled,
   id,
   renderIcon,
-  title = 'Clear filter',
+  title = 'Dismiss',
   onClose,
   slug,
   size,
+  text,
   type,
   ...other
 }: DismissibleTagProps<T>) => {
   const prefix = usePrefix();
   const tagId = id || `tag-${getInstanceId()}`;
   const tagClasses = classNames(`${prefix}--tag--filter`, className);
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
+  const isEllipsisActive = (element: any) => {
+    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
+    return element.offsetWidth < element.scrollWidth;
+  };
+
+  useLayoutEffect(() => {
+    const elementTagId = document.querySelector(`#${tagId}`);
+    const newElement = elementTagId?.getElementsByClassName(
+      `${prefix}--tag__label`
+    )[0];
+    isEllipsisActive(newElement);
+  }, [prefix, tagId]);
   const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (onClose) {
       event.stopPropagation();
@@ -107,9 +122,16 @@ const DismissibleTag = <T extends React.ElementType>({
     });
   }
 
+  const tooltipClasses = classNames(
+    `${prefix}--icon-tooltip`,
+    `${prefix}--tag-label-tooltip`
+  );
+
   // Removing onClick from the spread operator
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { onClick, ...otherProps } = other;
+
+  const dismissLabel = `Dismiss "${text}"`;
 
   return (
     <Tag<any>
@@ -121,27 +143,31 @@ const DismissibleTag = <T extends React.ElementType>({
       id={tagId}
       {...otherProps}>
       <div className={`${prefix}--interactive--tag-children`}>
-        {children}
+        <Text title={text} className={`${prefix}--tag__label`}>
+          {text}
+        </Text>
+        <Tooltip
+          label={isEllipsisApplied ? dismissLabel : title}
+          align="bottom"
+          className={tooltipClasses}
+          leaveDelayMs={0}
+          closeOnActivation>
+          <button
+            type="button"
+            className={`${prefix}--tag__close-icon`}
+            onClick={handleClose}
+            disabled={disabled}
+            aria-label={title}
+            title={title}>
+            <Close />
+          </button>
+        </Tooltip>
         {normalizedSlug}
-        <button
-          type="button"
-          className={`${prefix}--tag__close-icon`}
-          onClick={handleClose}
-          disabled={disabled}
-          aria-label={title}
-          title={title}>
-          <Close />
-        </button>
       </div>
     </Tag>
   );
 };
 DismissibleTag.propTypes = {
-  /**
-   * Provide content to be rendered inside of a `DismissibleTag`
-   */
-  children: PropTypes.node,
-
   /**
    * Provide a custom className that is applied to the containing <span>
    */
@@ -178,6 +204,11 @@ DismissibleTag.propTypes = {
    * **Experimental:** Provide a `Slug` component to be rendered inside the `DismissibleTag` component
    */
   slug: PropTypes.node,
+
+  /**
+   * Provide text to be rendered inside of a the tag.
+   */
+  text: PropTypes.string,
 
   /**
    * Text to show on clear filters
