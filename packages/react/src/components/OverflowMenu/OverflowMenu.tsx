@@ -7,7 +7,7 @@
 
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ComponentType } from 'react';
 import classNames from 'classnames';
 import ClickListener from '../../internal/ClickListener';
 import FloatingMenu, {
@@ -97,15 +97,20 @@ export const getMenuOffset = (menuBody, direction, trigger, flip) => {
 };
 
 interface Offset {
-  top: number;
-  left: number;
+  top?: number | null | undefined;
+  left?: number | null | undefined;
 }
 
-interface OverflowMenuProps {
+type IconProps = {
+  className?: string;
+  'aria-label'?: string;
+};
+
+export interface OverflowMenuProps {
   /**
    * Specify a label to be read by screen readers on the container node
    */
-  ['aria-label']: string;
+  ['aria-label']?: string;
 
   /**
    * Deprecated, please use `aria-label` instead.
@@ -198,7 +203,7 @@ interface OverflowMenuProps {
   /**
    * Function called to override icon rendering.
    */
-  renderIcon?: React.ElementType;
+  renderIcon?: ComponentType<IconProps>;
 
   /**
    * Specify a CSS selector that matches the DOM element that should
