@@ -54,7 +54,7 @@ tools <span aria-label="hammer and wrench">🛠</span>.
    upper left.
 6. Navigate back to the 'Options' menu for the DAP plugin and paste that copied
    token into the input and hit 'Apply'.
-7. Select the latest ruleset (it should have a month and a date in it's title).
+7. Select the latest ruleset (it should have a month and a date in its title).
 
 ## AVT1
 
@@ -78,12 +78,12 @@ before you push a PR, feel free to disregard them.
 
 If the component fails or has a violation an issue should be made so that
 someone can fix the problem. Feel free to include in the issue any relevant
-information you think would helpful, but make sure to at least include these
+information you think would be helpful, but make sure to at least include these
 points:
 
 1. The environment where the failure happened. The browser make and version as
    well as the ruleset and operating system.
-2. A description of the failure (copy an pasted from DAP's logs is fine).
+2. A description of the failure (copy and pasted from DAP's logs is fine).
 3. A screenshot of the particular offending code.
 4. Steps to reproduce the violation for anyone who may want to tackle the issue
    but may not have read this guide.
@@ -113,7 +113,7 @@ release. To do that:
 ["Keyboard accessibility is one of the most important aspects of web accessibility."](https://webaim.org/techniques/keyboard/)
 and it's the focus of part 1 of our AVT2 testing!
 
-Here's what we're looking for during our AVT2 audit. Therea are two main parts:
+Here's what we're looking for during our AVT2 audit. There are two main parts:
 
 ### Keyboard accessibility testing⌨️
 
@@ -130,7 +130,7 @@ Here's what we're looking for during our AVT2 audit. Therea are two main parts:
      _Any variance on these standardized keystrokes should be outlined clearly
      to the user beforehand_
 
-3. If an element can receive keyboard focus it should reflect that in it's
+3. If an element can receive keyboard focus it should reflect that in its
    styling with a focused state.
 4. If you can move focus to an element with the keyboard you should be able to
    move focus away from that element with a keyboard.
@@ -176,14 +176,14 @@ can dig into those points further:
 
    Depending on hover as a mouse action to trigger a dialogue or tooltip isn't
    accessible. Commonly a screen magnifier shows a zoomed in view of the page
-   relative to the cursor position. This means that unless then tooltip or
-   dialogue is quite small the user can't trigger the component _and_ scroll
-   it's content into view.
+   relative to the cursor position. This means that unless the tooltip or
+   dialogue is quite small the user can't trigger the component _and_ scroll its
+   content into view.
 
 3. Don't obscure content on mouse hover
 
    Obscuring all or some of the page on mouse hover with an overlay or blur is a
-   problem for user of screen magnifiers. Maintain required contrast ration and
+   problem for user of screen magnifiers. Maintain required contrast ratio and
    instead signal to your users with some other visual distinction.
 
 #### How to test
@@ -198,7 +198,7 @@ impairment every day.
 
 ##### Using DAP👷
 
-Let's DAP! It's pretty straight forward, but there are a few gotchas. For
+Let's DAP! It's pretty straightforward, but there are a few gotchas. For
 consistency's sake we'll use DAP on the
 [Dynamic Assessment Plug-in Homepage](https://ibm.biz/BdYkM9).
 

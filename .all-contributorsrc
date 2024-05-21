@@ -1524,6 +1524,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Kilian-Collender",
+      "name": "Kilian Collender",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37899503?v=4",
+      "profile": "https://github.com/Kilian-Collender",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

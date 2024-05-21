@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "develop": "next",
-    "build": "next build && next export -o build"
+    "build": "next build"
   },
   "dependencies": {
     "@carbon/colors": "link:../../../colors",
