@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import React, { PropsWithChildren } from 'react';
 import { AccordionProvider } from './AccordionProvider';
 
-interface AccordionProps {
+export interface AccordionProps {
   /**
    * Specify the alignment of the accordion heading
    * title and chevron. Defaults to `end`.
