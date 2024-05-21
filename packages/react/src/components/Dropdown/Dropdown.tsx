@@ -13,6 +13,7 @@ import React, {
   ForwardedRef,
   MouseEvent,
   ReactNode,
+  useEffect,
 } from 'react';
 import {
   useSelect,
@@ -22,7 +23,7 @@ import {
   UseSelectStateChangeTypes,
 } from 'downshift';
 import cx from 'classnames';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import {
   Checkmark,
   WarningAltFilled,
@@ -40,7 +41,6 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ReactAttr } from '../../types/common';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
-
 import { useFloating, flip, autoUpdate } from '@floating-ui/react';
 
 const getInstanceId = setupGetInstanceId();
@@ -118,7 +118,7 @@ export interface DropdownProps<ItemType>
    * Provide helper text that is used alongside the control label for
    * additional help
    */
-  helperText?: React.ReactNode;
+  helperText?: ReactNode;
 
   /**
    * Specify whether the title text should be hidden or not
@@ -144,7 +144,7 @@ export interface DropdownProps<ItemType>
   /**
    * Message which is displayed if the value is invalid.
    */
-  invalidText?: React.ReactNode;
+  invalidText?: ReactNode;
 
   /**
    * Function to render items as custom components instead of strings.
@@ -208,13 +208,13 @@ export interface DropdownProps<ItemType>
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Provide the title text that will be read by a screen reader when
    * visiting this control
    */
-  titleText?: React.ReactNode;
+  titleText?: ReactNode;
 
   /**
    * Callback function for translating ListBoxMenuIcon SVG title
@@ -237,7 +237,7 @@ export interface DropdownProps<ItemType>
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: React.ReactNode;
+  warnText?: ReactNode;
 }
 
 export type DropdownTranslationKey = ListBoxMenuIconTranslationKey;
@@ -278,10 +278,10 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
-    const { refs, placement } = useFloating(
+    const { refs, floatingStyles } = useFloating(
       autoAlign
         ? {
-            placement: direction,
+            // placement: direction,
 
             // The floating element is positioned relative to its nearest
             // containing block (usually the viewport). It will in many cases also
@@ -292,13 +292,31 @@ const Dropdown = React.forwardRef(
             // Middleware order matters, arrow should be last
             middleware: [
               flip({
-                fallbackAxisSideDirection: 'start',
+                fallbackAxisSideDirection: 'none',
               }),
             ],
             whileElementsMounted: autoUpdate,
           }
         : {} // When autoAlign is turned off, floating-ui will not be used
     );
+
+    const parentWidth = (refs?.reference?.current as HTMLElement)?.clientWidth;
+
+    useEffect(() => {
+      if (autoAlign) {
+        Object.keys(floatingStyles).forEach((style) => {
+          if (refs.floating.current) {
+            refs.floating.current.style[style] = floatingStyles[style];
+
+            // refs.floating.current.style.width = parentWidth + 'px';
+          }
+        });
+
+        if (parentWidth && refs.floating.current) {
+          refs.floating.current.style.width = parentWidth + 'px';
+        }
+      }
+    }, [floatingStyles, autoAlign, refs.floating, parentWidth]);
 
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
@@ -360,9 +378,6 @@ const Dropdown = React.forwardRef(
 
     const [isFocused, setIsFocused] = useState(false);
 
-    const currentAlignment =
-      autoAlign && placement !== direction ? placement : direction;
-
     const className = cx(`${prefix}--dropdown`, {
       [`${prefix}--dropdown--invalid`]: invalid,
       [`${prefix}--dropdown--warning`]: showWarning,
@@ -372,7 +387,7 @@ const Dropdown = React.forwardRef(
       [`${prefix}--dropdown--light`]: light,
       [`${prefix}--dropdown--readonly`]: readOnly,
       [`${prefix}--dropdown--${size}`]: size,
-      [`${prefix}--list-box--up`]: currentAlignment === 'top',
+      [`${prefix}--list-box--up`]: direction === 'top',
     });
 
     const titleClasses = cx(`${prefix}--label`, {
