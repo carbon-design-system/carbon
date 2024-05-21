@@ -546,7 +546,7 @@
       .#{$prefix}--tabs__nav-item:not(
         .#{$prefix}--tabs__nav-item--selected
       ):not(.#{$prefix}--tabs__nav-item--disabled):hover {
-      border-block-end: 'red';
+      border-block-end: $tab-underline-color-hover;
       color: $text-primary;
     }
 
