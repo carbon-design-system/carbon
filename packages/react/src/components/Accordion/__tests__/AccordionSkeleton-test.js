@@ -60,9 +60,9 @@ describe('AccordionSkeleton', () => {
     it('should respect ordered prop', () => {
       const { container } = render(<AccordionSkeleton ordered={true} />);
       const ol = container.querySelector('ol');
-      expect(ol).not.toBeInTheDocument();
+      expect(ol).toBeInTheDocument();
       const ul = container.querySelector('ul');
-      expect(ul).toBeInTheDocument();
+      expect(ul).not.toBeInTheDocument();
     });
   });
 
