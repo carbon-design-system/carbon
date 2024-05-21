@@ -312,12 +312,6 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     }
   );
 
-  const tooltipClasses = classNames(
-    `${prefix}--text-input--password__visibility__toggle`,
-    `${prefix}--toggle-password-tooltip`,
-    `${prefix}--tooltip__trigger`
-  );
-
   let align: PopoverAlignment | undefined = undefined;
 
   if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
@@ -357,7 +351,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
       {isFluid && <hr className={`${prefix}--text-input__divider`} />}
       <Tooltip
         align={align}
-        className={tooltipClasses}
+        className={`${prefix}--toggle-password-tooltip`}
         label={passwordIsVisible ? hidePasswordLabel : showPasswordLabel}>
         <button
           type="button"

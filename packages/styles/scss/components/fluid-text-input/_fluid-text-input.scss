@@ -153,8 +153,7 @@
     inset-inline-end: $spacing-05;
   }
 
-  .#{$prefix}--text-input--fluid
-    .#{$prefix}--toggle-password-tooltip.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+  .#{$prefix}--text-input--fluid .#{$prefix}--toggle-password-tooltip {
     @include focus-outline('reset');
 
     position: absolute;
