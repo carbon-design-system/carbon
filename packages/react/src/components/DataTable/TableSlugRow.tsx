@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -19,7 +19,7 @@ export interface TableSlugRowProps {
   /**
    * Provide a `Slug` component to be rendered inside the `TableSlugRow` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 }
 
 const TableSlugRow = ({ className, slug }: TableSlugRowProps) => {

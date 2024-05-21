@@ -71,9 +71,6 @@ export default {
     open: {
       table: { disable: true },
     },
-    readOnly: {
-      control: { type: 'boolean' },
-    },
     titleText: {
       table: { disable: true },
     },
@@ -341,7 +338,11 @@ export const _Controlled = () => {
       />
       <br />
       <ButtonSet>
-        <Button id="all" onClick={() => setSelectedItems(items)}>
+        <Button
+          id="all"
+          onClick={() =>
+            setSelectedItems(items.filter((item) => !item.disabled))
+          }>
           Select all
         </Button>
         <Button

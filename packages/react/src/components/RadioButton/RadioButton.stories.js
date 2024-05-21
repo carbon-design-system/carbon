@@ -39,7 +39,9 @@ export default {
 
 export const Default = () => {
   return (
-    <RadioButtonGroup legendText="Group label" name="radio-button-group">
+    <RadioButtonGroup
+      legendText="Group label"
+      name="radio-button-default-group">
       <RadioButton
         labelText="Radio button label"
         value="radio-1"
@@ -64,7 +66,7 @@ export const Vertical = () => {
   return (
     <RadioButtonGroup
       legendText="Group label"
-      name="radio-button-group"
+      name="radio-button-vertical-group"
       defaultSelected="radio-1"
       orientation="vertical">
       <RadioButton
@@ -95,7 +97,7 @@ export const Playground = (args) => {
   return (
     <RadioButtonGroup
       legendText="Radio Button group"
-      name="radio-button-group"
+      name="radio-button-playground-group"
       {...args}>
       <RadioButton
         labelText="Radio button label"

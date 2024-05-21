@@ -80,6 +80,7 @@ export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
 }
 
 const hoverIntentDelay = 150; // in ms
+const leaveIntentDelay = 300; // in ms
 
 export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
   function MenuItem(
@@ -110,6 +111,10 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const hasChildren = Boolean(children);
     const [submenuOpen, setSubmenuOpen] = useState(false);
     const hoverIntentTimeout = useRef<ReturnType<typeof setTimeout> | null>(
+      null
+    );
+
+    const leaveIntentTimeout = useRef<ReturnType<typeof setTimeout> | null>(
       null
     );
 
@@ -169,6 +174,11 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     }
 
     function handleMouseEnter() {
+      if (leaveIntentTimeout.current) {
+        // When mouse reenters before closing keep sub menu open
+        clearTimeout(leaveIntentTimeout.current);
+        leaveIntentTimeout.current = null;
+      }
       hoverIntentTimeout.current = setTimeout(() => {
         openSubmenu();
       }, hoverIntentDelay);
@@ -177,8 +187,12 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     function handleMouseLeave() {
       if (hoverIntentTimeout.current) {
         clearTimeout(hoverIntentTimeout.current);
-        closeSubmenu();
-        menuItem.current?.focus();
+        // Avoid closing the sub menu as soon as mouse leaves
+        // prevents accidental closure due to scroll bar
+        leaveIntentTimeout.current = setTimeout(() => {
+          closeSubmenu();
+          menuItem.current?.focus();
+        }, leaveIntentDelay);
       }
     }
 

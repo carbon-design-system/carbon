@@ -281,6 +281,7 @@ describe('Carbon Components React', () => {
         "useContextMenu",
         "useIdPrefix",
         "useLayer",
+        "usePrefersDarkScheme",
         "usePrefix",
         "useTheme",
       ]

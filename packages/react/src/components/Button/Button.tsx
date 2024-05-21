@@ -165,10 +165,10 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
         align = tooltipPosition;
       }
       if (tooltipAlignment === 'end') {
-        align = `${tooltipPosition}-right`;
+        align = `${tooltipPosition}-end`;
       }
       if (tooltipAlignment === 'start') {
-        align = `${tooltipPosition}-left`;
+        align = `${tooltipPosition}-start`;
       }
     }
 

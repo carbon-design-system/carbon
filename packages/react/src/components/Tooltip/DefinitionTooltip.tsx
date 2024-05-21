@@ -70,7 +70,7 @@ export interface DefinitionTooltipProps
 }
 
 const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
-  align = 'bottom-left',
+  align = 'bottom-start',
   className,
   children,
   definition,

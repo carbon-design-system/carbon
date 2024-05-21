@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import { useCombobox, UseComboboxProps } from 'downshift';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, {
   useContext,
   useEffect,
@@ -280,7 +280,7 @@ export interface ComboBoxProps<ItemType>
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `ComboBox` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the

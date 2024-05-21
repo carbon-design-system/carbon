@@ -156,6 +156,21 @@
     - HD
     - high definition
     - file size
+- name: accept-action--usage
+  friendly_name: Accept action usage
+  aliases:
+    - accept
+    - action
+    - usage
+    - node
+    - diagram
+    - flow
+    - input
+    - output
+    - control
+    - sysml
+  sizes:
+    - 32
 - name: accessibility
   friendly_name: Accessibility
   aliases:
@@ -275,6 +290,34 @@
     - snow
   sizes:
     - 32
+- name: action--definition
+  friendly_name: Action definition
+  aliases:
+    - action
+    - node
+    - definition
+    - diagram
+    - flow
+    - input
+    - output
+    - control
+    - sysml
+  sizes:
+    - 32
+- name: action--usage
+  friendly_name: Action usage
+  aliases:
+    - action
+    - node
+    - usage
+    - diagram
+    - flow
+    - input
+    - output
+    - control
+    - sysml
+  sizes:
+    - 32
 - name: activity
   friendly_name: Activity
   aliases:
@@ -371,6 +414,18 @@
     - assistant
     - enterprise
     - Plex
+  sizes:
+    - 32
+- name: ai-financial-sustainability-check
+  friendly_name: AI Financial Sustainability Check
+  aliases:
+    - automation
+    - artificial intelligence
+    - finance
+    - sustainability
+    - check
+    - AI
+    - money
   sizes:
     - 32
 - name: ai-governance--lifecycle
@@ -903,6 +958,18 @@
     - arrow graph
   sizes:
     - 32
+- name: anchor
+  friendly_name: Anchor
+  aliases:
+    - anchor
+    - line
+    - dash
+    - diagram
+    - diagonal
+    - node
+    - sysml
+  sizes:
+    - 32
 - name: angle
   friendly_name: Angle
   aliases:
@@ -962,25 +1029,41 @@
     - 32
 - name: API--1
   friendly_name: API 1
-  sizes:
-    - 32
   aliases:
-    - Application programming interface
-    - tool
-    - application
-    - programming
-    - interface
-    - file
-    - file type
     - program
     - tool
+    - application
     - format
+    - interface
     - protocol
     - connect
     - group
     - network
+    - application programming interface
     - programming interface
     - computing interface
+    - file
+  sizes:
+    - 32
+- name: api--key
+  friendly_name: API key
+  aliases:
+    - program
+    - tool
+    - application
+    - format
+    - interface
+    - protocol
+    - connect
+    - group
+    - network
+    - application programming interface
+    - programming interface
+    - computing interface
+    - file
+    - key
+  sizes:
+    - 32
 - name: app
   friendly_name: App
   aliases:
@@ -1138,6 +1221,26 @@
     - x
     - data
     - math
+  sizes:
+    - 32
+- name: arrange--horizontal
+  friendly_name: Arrange horizontal
+  aliases:
+    - horizontal
+    - arrange
+    - sort
+    - objects
+    - action
+  sizes:
+    - 32
+- name: arrange--vertical
+  friendly_name: Arrange vertical
+  aliases:
+    - vertical
+    - arrange
+    - sort
+    - objects
+    - action
   sizes:
     - 32
 - name: arrival
@@ -1750,6 +1853,30 @@
     - travel
   sizes:
     - 32
+- name: binding--01
+  friendly_name: Binding 1
+  aliases:
+    - binding
+    - connecter
+    - diagram
+    - node
+    - relationship
+    - lines
+    - sysml
+  sizes:
+    - 32
+- name: binding--02
+  friendly_name: Binding 2
+  aliases:
+    - binding
+    - connecter
+    - diagram
+    - node
+    - relationship
+    - arrows
+    - sysml
+  sizes:
+    - 32
 - name: binoculars
   friendly_name: Binoculars
   aliases:
@@ -2022,6 +2149,54 @@
     - stock
     - container
     - case
+  sizes:
+    - 32
+- name: bottom-panel--close
+  friendly_name: Bottom panel close
+  aliases:
+    - panel
+    - bottom
+    - action
+    - close
+    - UI
+    - interface
+  sizes:
+    - 32
+- name: bottom-panel--close--filled
+  friendly_name: Bottom panel close filled
+  aliases:
+    - panel
+    - bottom
+    - action
+    - close
+    - UI
+    - interface
+    - filled
+    - solid
+  sizes:
+    - 32
+- name: bottom-panel--open
+  friendly_name: Bottom panel open
+  aliases:
+    - panel
+    - bottom
+    - action
+    - open
+    - UI
+    - interface
+  sizes:
+    - 32
+- name: bottom-panel--open--filled
+  friendly_name: Bottom panel open filled
+  aliases:
+    - panel
+    - bottom
+    - action
+    - open
+    - UI
+    - interface
+    - filled
+    - solid
   sizes:
     - 32
 - name: box
@@ -2619,6 +2794,20 @@
     - CO2
     - footprint
     - weather
+  sizes:
+    - 32
+- name: carbon-for-AEM
+  friendly_name: Carbon for AEM
+  aliases:
+    - carbon
+    - IBM
+    - digital
+    - web
+    - IBM Carbon
+    - web design system
+    - IBM digital design system
+    - design
+    - hexagon
   sizes:
     - 32
 - name: carbon-for-ibm-dotcom
@@ -4732,6 +4921,19 @@
     - code
   sizes:
     - 32
+- name: code-block
+  friendly_name: Code block
+  aliases:
+    - </>
+    - html
+    - java
+    - css
+    - dev
+    - development
+    - text
+    - block
+  sizes:
+    - 32
 - name: code-signing-service
   friendly_name: Code signing service
   aliases:
@@ -4975,6 +5177,31 @@
     - output
   sizes:
     - 32
+- name: connection--usage
+  friendly_name: Connection usage
+  aliases:
+    - connection
+    - diagram
+    - node
+    - relationship
+    - line
+    - flow
+    - sysml
+  sizes:
+    - 32
+- name: connection-flow--usage
+  friendly_name: Connection flow usage
+  aliases:
+    - connection
+    - diagram
+    - node
+    - relationship
+    - line
+    - flow
+    - arrow
+    - sysml
+  sizes:
+    - 32
 - name: connection-signal
   friendly_name: Connection signal
   aliases:
@@ -5003,6 +5230,17 @@
     - signal loss
   sizes:
     - 32
+- name: constraint
+  friendly_name: Constraint
+  aliases:
+    - brackets
+    - diagram
+    - flow
+    - connect
+    - square
+    - sysml
+  sizes:
+    - 32
 - name: construction
   friendly_name: Construction
   aliases:
@@ -5010,6 +5248,95 @@
     - transportation
     - travel
     - roadwork
+  sizes:
+    - 32
+- name: container--engine
+  friendly_name: Container engine
+  aliases:
+    - container
+    - registry
+    - Kubernetes
+    - cloud
+    - directory
+    - engine
+    - square
+  sizes:
+    - 32
+- name: container--image
+  friendly_name: Container image
+  aliases:
+    - container
+    - registry
+    - Kubernetes
+    - cloud
+    - directory
+    - image
+    - square
+  sizes:
+    - 32
+- name: container--runtime
+  friendly_name: Container runtime
+  aliases:
+    - container
+    - registry
+    - Kubernetes
+    - cloud
+    - directory
+    - runtime
+    - square
+  sizes:
+    - 32
+- name: container--runtime-monitor
+  friendly_name: Container runtime monitor
+  aliases:
+    - container
+    - registry
+    - Kubernetes
+    - cloud
+    - directory
+    - runtime
+    - monitor
+    - square
+  sizes:
+    - 32
+- name: container-image--pull
+  friendly_name: Container image pull
+  aliases:
+    - container
+    - registry
+    - Kubernetes
+    - cloud
+    - directory
+    - pull
+    - arrow
+    - square
+  sizes:
+    - 32
+- name: container-image--push
+  friendly_name: Container image push
+  aliases:
+    - container
+    - registry
+    - Kubernetes
+    - cloud
+    - directory
+    - push
+    - arrow
+    - square
+  sizes:
+    - 32
+- name: container-image--push-pull
+  friendly_name: Container image push pull
+  aliases:
+    - container
+    - registry
+    - Kubernetes
+    - cloud
+    - directory
+    - push
+    - pull
+    - arrow
+    - square
   sizes:
     - 32
 - name: container-registry
@@ -6217,6 +6544,17 @@
     - code bug
   sizes:
     - 32
+- name: decision-node
+  friendly_name: Decision node
+  aliases:
+    - decision
+    - node
+    - diagram
+    - connection
+    - flow
+    - sysml
+  sizes:
+    - 32
 - name: decision-tree
   friendly_name: Decision tree
   aliases:
@@ -6941,12 +7279,31 @@
     - 32
 - name: document--blank
   friendly_name: Document blank
-  sizes:
-    - 32
   aliases:
     - file
     - doc
     - paper
+  sizes:
+    - 32
+- name: document--comment
+  friendly_name: Document comment
+  aliases:
+    - file
+    - doc
+    - paper
+    - chat
+    - comment
+  sizes:
+    - 32
+- name: document--configuration
+  friendly_name: Document configuration
+  aliases:
+    - file
+    - doc
+    - paper
+    - configure
+  sizes:
+    - 32
 - name: document--download
   friendly_name: Document download
   aliases:
@@ -7047,6 +7404,15 @@
     - lock
   sizes:
     - 32
+- name: document--requirements
+  friendly_name: Document requirements
+  aliases:
+    - file
+    - doc
+    - paper
+    - require
+  sizes:
+    - 32
 - name: document--security
   friendly_name: Document security
   aliases:
@@ -7075,6 +7441,16 @@
     - file
     - Sketch
     - wireframe
+  sizes:
+    - 32
+- name: document--subject
+  friendly_name: Document subject
+  aliases:
+    - doc
+    - file
+    - subject
+    - letter
+    - s
   sizes:
     - 32
 - name: document--subtract
@@ -7653,6 +8029,32 @@
     - company
   sizes:
     - 32
+- name: enumeration--definition
+  friendly_name: Enumeration definition
+  aliases:
+    - enumerate
+    - definition
+    - Plex
+    - container
+    - diagram
+    - flow
+    - node
+    - sysml
+  sizes:
+    - 32
+- name: enumeration--usage
+  friendly_name: Enumeration usage
+  aliases:
+    - enumerate
+    - usage
+    - Plex
+    - container
+    - diagram
+    - flow
+    - node
+    - sysml
+  sizes:
+    - 32
 - name: equal--approximately
   friendly_name: Equal approximately
   aliases:
@@ -8170,6 +8572,43 @@
     - fave
     - bookmark
     - favorite half
+  sizes:
+    - 32
+- name: feature-membership
+  friendly_name: Feature membership
+  aliases:
+    - feature
+    - membership
+    - relationship
+    - connector
+    - arrow
+    - sysml
+  sizes:
+    - 32
+- name: feature-membership--filled
+  friendly_name: Feature membership filled
+  aliases:
+    - feature
+    - membership
+    - relationship
+    - connector
+    - arrow
+    - filled
+    - solid
+    - sysml
+  sizes:
+    - 32
+- name: feature-typing
+  friendly_name: Feature typing
+  aliases:
+    - feature
+    - typing
+    - relationship
+    - connector
+    - arrow
+    - filled
+    - solid
+    - sysml
   sizes:
     - 32
 - name: fetch-upload
@@ -8744,6 +9183,16 @@
     - split
   sizes:
     - 32
+- name: fork-node
+  friendly_name: Fork node
+  aliases:
+    - fork
+    - operations
+    - split
+    - node
+    - sysml
+  sizes:
+    - 32
 - name: forum
   friendly_name: Forum
   aliases:
@@ -8979,6 +9428,16 @@
     - virtual
     - private
     - network
+  sizes:
+    - 32
+- name: gears
+  friendly_name: Gears
+  aliases:
+    - gear
+    - cogs
+    - machine
+    - action
+    - industry
   sizes:
     - 32
 - name: gender--female
@@ -9807,6 +10266,142 @@
     - server
   sizes:
     - 32
+- name: ibm--elo--automotive-compliance
+  friendly_name: IBM® Engineering Lifecycle Optimization Automotive Compliance
+  aliases:
+    - software
+    - sustainability
+    - SSW
+    - web
+    - engineering
+    - ELM
+    - product
+    - automotive
+    - compliance
+    - agile
+    - car
+    - check
+    - checkmark
+    - vehicle
+  sizes:
+    - 32
+- name: ibm--elo--engineering-insights
+  friendly_name: IBM® Engineering Lifecycle Optimization Engineering Insights
+  aliases:
+    - software
+    - sustainability software
+    - SSW
+    - web
+    - engineering
+    - ELO
+    - ENI
+    - product
+    - manage
+    - insights
+    - lifecycle
+    - agile
+    - analytics
+    - optimization
+    - compliance
+    - regulatory
+    - share
+    - connect
+    - hexagon
+  sizes:
+    - 32
+- name: ibm--elo--method-composer
+  friendly_name: IBM® Engineering Lifecycle Optimization Method Composer
+  aliases:
+    - software
+    - sustainability software
+    - SSW
+    - web
+    - engineering
+    - ELO
+    - MEC
+    - product
+    - process
+    - platform
+    - lifecycle
+    - workflow
+    - publish
+    - process
+    - documentation
+    - versioning
+    - cycle
+    - write
+    - pen
+    - pencil
+    - edit
+    - create
+  sizes:
+    - 32
+- name: ibm--elo--publishing
+  friendly_name: IBM® Engineering Lifecycle Optimization Publishing
+  aliases:
+    - software
+    - sustainability software
+    - SSW
+    - web
+    - engineering
+    - ELO
+    - PUB
+    - product
+    - publish
+    - automation
+    - review
+    - contract
+    - regulatory
+    - format
+    - document
+    - page
+    - file
+    - requirements
+    - template
+    - file
+    - arrow
+  sizes:
+    - 32
+- name: ibm--engineering-lifecycle-mgmt
+  friendly_name: IBM® Engineering Lifecycle Management
+  aliases:
+    - software
+    - engineering
+    - lifecycle
+    - collaboration
+    - productivity
+    - transparency
+    - ELM
+    - AI
+    - cloud
+  sizes:
+    - 32
+- name: ibm--engineering-requirements-doors-next
+  friendly_name: IBM® Engineering Requirements DOORS Next
+  aliases:
+    - software
+    - engineering
+    - requirements
+    - next
+    - DOORS
+    - ELM
+    - AI
+    - cloud
+  sizes:
+    - 32
+- name: ibm--engineering-systems-design-rhapsody
+  friendly_name: IBM® Engineering Systems Design Rhapsody
+  aliases:
+    - data
+    - systems
+    - design
+    - rhapsody
+    - cloud
+    - ELM
+    - AI
+    - software
+  sizes:
+    - 32
 - name: ibm--engineering-systems-design-rhapsody-model-manager
   friendly_name: IBM® Engineering Systems Design Rhapsody Model Manager
   aliases:
@@ -9843,6 +10438,34 @@
     - R
     - workflow management
     - sn2
+  sizes:
+    - 32
+- name: ibm--engineering-test-mgmt
+  friendly_name: IBM® Engineering Test Management
+  aliases:
+    - data
+    - systems
+    - management
+    - engineering
+    - test
+    - cloud
+    - ELM
+    - AI
+    - software
+  sizes:
+    - 32
+- name: ibm--engineering-workflow-mgmt
+  friendly_name: IBM® Engineering Workflow Management
+  aliases:
+    - data
+    - systems
+    - management
+    - engineering
+    - workflow
+    - cloud
+    - ELM
+    - AI
+    - software
   sizes:
     - 32
 - name: ibm--event-automation
@@ -9905,6 +10528,27 @@
     - metrics
   sizes:
     - 32
+- name: ibm--gcm
+  friendly_name: IBM® Global Configuration Management
+  aliases:
+    - software
+    - sustainability
+    - SSW
+    - web
+    - engineering
+    - GCM
+    - ELM
+    - product
+    - global
+    - configure
+    - management
+    - requirements
+    - artifacts
+    - lifecycle
+    - hexagon
+    - arrow
+  sizes:
+    - 32
 - name: ibm--ibv
   friendly_name: IBM® Institute for Business Value
   aliases:
@@ -9925,6 +10569,85 @@
     - observability
     - data
     - performance
+  sizes:
+    - 32
+- name: ibm--jrs
+  friendly_name: IBM® Jazz Reporting Service
+  aliases:
+    - tool
+    - reporting
+    - ELM
+    - management
+    - engineering
+    - product
+    - components
+    - service
+  sizes:
+    - 32
+- name: ibm--launchpad-s4
+  friendly_name: IBM® Launchpad
+  aliases:
+    - tool
+    - reporting
+    - web front end
+    - browser
+    - SAP
+    - SAP S4
+    - Fiori
+    - financial
+    - fulfillment
+    - SAP data
+    - SAP applications
+    - online
+  sizes:
+    - 32
+- name: ibm--lpa
+  friendly_name: IBM® Lifecycle Project Administrator
+  aliases:
+    - software
+    - sustainability
+    - SSW
+    - web
+    - engineering
+    - product
+    - LPA
+    - lifecycle
+    - project
+    - manage
+    - admin
+    - schedule
+    - plan
+    - requirements
+    - buils
+    - dashboard
+    - administrator
+    - clipboard
+    - user
+    - person
+    - avatar
+    - tasks
+    - list
+  sizes:
+    - 32
+- name: ibm--lqe
+  friendly_name: IBM® Lifecycle Query Engine
+  aliases:
+    - software
+    - sustainability
+    - SSW
+    - web
+    - product
+    - LQE
+    - project
+    - engineering
+    - query
+    - engine
+    - lifecycle
+    - data
+    - index
+    - consolidation
+    - Jazz
+    - server
   sizes:
     - 32
 - name: ibm--match-360
@@ -11576,6 +12299,18 @@
     - service
   sizes:
     - 32
+- name: image-store--local
+  friendly_name: Image store local
+  aliases:
+    - container
+    - kubernetes
+    - machine
+    - local
+    - data
+    - software
+    - zos
+  sizes:
+    - 32
 - name: import-export
   friendly_name: Import export
   aliases:
@@ -11961,6 +12696,16 @@
     - cursor
   sizes:
     - 32
+- name: interface--usage
+  friendly_name: Interactive usage
+  aliases:
+    - interface
+    - node
+    - diagram
+    - sysml
+    - usage
+  sizes:
+    - 32
 - name: intersect
   friendly_name: Intersect
   aliases:
@@ -12117,6 +12862,18 @@
     - right
   sizes:
     - 32
+- name: join-node
+  friendly_name: Join node
+  aliases:
+    - join
+    - node
+    - sysml
+    - diagram
+    - connector
+    - synchronize
+    - collect
+  sizes:
+    - 32
 - name: JPG
   friendly_name: JPG
   aliases:
@@ -12192,6 +12949,19 @@
     - handling
   sizes:
     - 32
+- name: KEY
+  friendly_name: KEY
+  aliases:
+    - keynote
+    - text
+    - document
+    - file
+    - presentation
+    - deck
+    - slides
+    - build
+  sizes:
+    - 32
 - name: keyboard
   friendly_name: Keyboard
   aliases:
@@ -12218,6 +12988,17 @@
     - unavailable
   sizes:
     - 32
+- name: kubelet
+  friendly_name: Kubelet
+  aliases:
+    - Kubernetes
+    - container
+    - cloud
+    - hybrid
+    - zos
+    - software
+  sizes:
+    - 32
 - name: kubernetes
   friendly_name: Kubernetes
   aliases:
@@ -12225,6 +13006,20 @@
     - container
     - cloud
     - hybrid
+  sizes:
+    - 32
+- name: kubernetes--control-plane-node
+  friendly_name: Kubernetes Control Plane Node
+  aliases:
+    - Kubernetes
+    - container
+    - cloud
+    - hybrid
+    - control
+    - plane
+    - node
+    - zos
+    - software
   sizes:
     - 32
 - name: kubernetes--ip-address
@@ -12236,6 +13031,19 @@
     - node
   sizes:
     - 32
+- name: kubernetes--operator
+  friendly_name: Kubernetes operator
+  aliases:
+    - Kubernetes
+    - container
+    - cloud
+    - hybrid
+    - operator
+    - node
+    - zos
+    - software
+  sizes:
+    - 32
 - name: kubernetes--pod
   friendly_name: Kubernetes pod
   aliases:
@@ -12245,6 +13053,19 @@
     - node
     - hexagon
     - cube
+  sizes:
+    - 32
+- name: kubernetes--worker-node
+  friendly_name: Kubernetes worker node
+  aliases:
+    - Kubernetes
+    - container
+    - cloud
+    - hybrid
+    - worker
+    - node
+    - zos
+    - software
   sizes:
     - 32
 - name: label
@@ -12330,6 +13151,16 @@
   aliases:
     - operations
     - layers
+  sizes:
+    - 32
+- name: layers--external
+  friendly_name: Layers external
+  aliases:
+    - operations
+    - layers
+    - arrow
+    - node
+    - canvas
   sizes:
     - 32
 - name: legend
@@ -12683,6 +13514,17 @@
     - OS
   sizes:
     - 32
+- name: linux--namespace
+  friendly_name: Linux® namespace
+  aliases:
+    - linux
+    - OS
+    - namespace
+    - container
+    - software
+    - zos
+  sizes:
+    - 32
 - name: list
   friendly_name: List
   aliases:
@@ -13023,6 +13865,41 @@
     - legend
     - location
     - heart
+    - travel
+    - filled
+  sizes:
+    - 32
+- name: location--info
+  friendly_name: Location info
+  aliases:
+    - place
+    - locate
+    - gps
+    - destination
+    - map
+    - pin
+    - site
+    - area
+    - legend
+    - location
+    - info
+    - travel
+  sizes:
+    - 32
+- name: location--info--filled
+  friendly_name: Location info filled
+  aliases:
+    - place
+    - locate
+    - gps
+    - destination
+    - map
+    - pin
+    - site
+    - area
+    - legend
+    - location
+    - info
     - travel
     - filled
   sizes:
@@ -14062,6 +14939,29 @@
     - 16
     - 20
     - 24
+    - 32
+- name: merge
+  friendly_name: Merge
+  aliases:
+    - git
+    - merge
+    - code
+    - repository
+    - pull request
+    - PR
+    - issue
+  sizes:
+    - 32
+- name: merge-node
+  friendly_name: Merge node
+  aliases:
+    - join
+    - merge
+    - synch
+    - node
+    - connector
+    - sysml
+  sizes:
     - 32
 - name: message-queue
   friendly_name: Message queue
@@ -15110,6 +16010,17 @@
     - toggle
     - notify
     - filled
+- name: notification-counter
+  friendly_name: Notification counter
+  aliases:
+    - notification
+    - dot
+    - UI
+    - interface
+    - counter
+    - alert
+  sizes:
+    - 32
 - name: number--0
   friendly_name: Number 0
   sizes:
@@ -15607,6 +16518,19 @@
     - analysis
   sizes:
     - 32
+- name: package-node
+  friendly_name: Package node
+  aliases:
+    - package
+    - node
+    - packet
+    - assortment
+    - node
+    - diagram
+    - folder
+    - sysml
+  sizes:
+    - 32
 - name: page--first
   friendly_name: Page first
   sizes:
@@ -15745,6 +16669,30 @@
     - org
     - data
     - hierarchy
+  sizes:
+    - 32
+- name: part--definition
+  friendly_name: Part definition
+  aliases:
+    - part
+    - definition
+    - node
+    - PU
+    - PD
+    - sysml
+    - diagram
+  sizes:
+    - 32
+- name: part--usage
+  friendly_name: Part usage
+  aliases:
+    - part
+    - usage
+    - node
+    - PU
+    - PD
+    - sysml
+    - diagram
   sizes:
     - 32
 - name: partition--auto
@@ -16646,6 +17594,18 @@
     - file
   sizes:
     - 32
+- name: port--definition
+  friendly_name: Port definition
+  aliases:
+    - port
+    - definition
+    - PD
+    - PU
+    - node
+    - diagram
+    - sysml
+  sizes:
+    - 32
 - name: port--input
   friendly_name: Port input
   aliases:
@@ -16662,6 +17622,18 @@
     - circle
     - port
     - output
+  sizes:
+    - 32
+- name: port--usage
+  friendly_name: Port usage
+  aliases:
+    - port
+    - usage
+    - PD
+    - PU
+    - node
+    - diagram
+    - sysml
   sizes:
     - 32
 - name: portfolio
@@ -16732,6 +17704,57 @@
   aliases:
     - previous outline
     - previous
+  sizes:
+    - 32
+- name: pricing--consumption
+  friendly_name: Pricing consumption
+  aliases:
+    - pricing
+    - consumption
+    - consume
+    - price
+    - ESW
+  sizes:
+    - 32
+- name: pricing--container
+  friendly_name: Pricing container
+  aliases:
+    - pricing
+    - container
+    - contain
+    - price
+    - ESW
+  sizes:
+    - 32
+- name: pricing--quick-proposal
+  friendly_name: Pricing quick proposal
+  aliases:
+    - pricing
+    - tool
+    - quick
+    - proposal
+    - price
+    - ESW
+  sizes:
+    - 32
+- name: pricing--tailored
+  friendly_name: Pricing tailored
+  aliases:
+    - pricing
+    - tailor
+    - tailored
+    - fit
+    - price
+    - ESW
+  sizes:
+    - 32
+- name: pricing--traditional
+  friendly_name: Pricing traditional
+  aliases:
+    - pricing
+    - traditional
+    - price
+    - ESW
   sizes:
     - 32
 - name: printer
@@ -16821,6 +17844,21 @@
     - systems
   sizes:
     - 32
+- name: pull-request
+  friendly_name: Pull request
+  aliases:
+    - PR
+    - pull
+    - request
+    - code
+    - git
+    - repository
+    - merge
+    - review
+    - main
+    - branch
+  sizes:
+    - 32
 - name: purchase
   friendly_name: Purchase
   aliases:
@@ -16836,6 +17874,21 @@
     - QC
     - launch
     - Watson Health®
+  sizes:
+    - 32
+- name: qiskit
+  friendly_name: Qiskit
+  aliases:
+    - Qiskit
+    - Qiskit Runtime
+    - Qiskit SDK
+    - SDK
+    - Runtime
+    - Primitives
+    - Quantum
+    - Quantum software
+    - Quantum systems
+    - Research
   sizes:
     - 32
 - name: qq-plot
@@ -16871,6 +17924,19 @@
   friendly_name: Query queue
   aliases:
     - list
+  sizes:
+    - 32
+- name: question-answering
+  friendly_name: Question answering
+  aliases:
+    - question
+    - answer
+    - answering
+    - AI
+    - generative
+    - foundation model
+    - generative
+    - data
   sizes:
     - 32
 - name: queued
@@ -16956,6 +18022,19 @@
     - circle
     - travel
     - case
+- name: RAG
+  friendly_name: Retrieval-Augmented Generation
+  aliases:
+    - RAG
+    - retrieval
+    - augmented
+    - generation
+    - generative
+    - AI
+    - model
+    - data
+  sizes:
+    - 32
 - name: rain
   friendly_name: Rain
   aliases:
@@ -17236,6 +18315,34 @@
     - pencil
     - paper
     - modify
+  sizes:
+    - 32
+- name: requirement--definition
+  friendly_name: Requirement definition
+  aliases:
+    - requirement
+    - definition
+    - plex
+    - node
+    - RD
+    - RU
+    - diagram
+    - flow
+    - sysml
+  sizes:
+    - 32
+- name: requirement--usage
+  friendly_name: Requirement usage
+  aliases:
+    - requirement
+    - usage
+    - plex
+    - node
+    - RD
+    - RU
+    - diagram
+    - flow
+    - sysml
   sizes:
     - 32
 - name: reset
@@ -17917,6 +19024,32 @@
     - weather
   sizes:
     - 32
+- name: satisfy--definition
+  friendly_name: Satisfy definition
+  aliases:
+    - satisfy
+    - definition
+    - SD
+    - SU
+    - node
+    - diagram
+    - flow
+    - sysml
+  sizes:
+    - 32
+- name: satisfy--usage
+  friendly_name: Satisfy usage
+  aliases:
+    - satisfy
+    - usage
+    - SD
+    - SU
+    - node
+    - diagram
+    - flow
+    - sysml
+  sizes:
+    - 32
 - name: save
   friendly_name: Save
   aliases:
@@ -18360,6 +19493,19 @@
     - deliver
     - letter
     - email
+- name: send-action--usage
+  friendly_name: Send action usage
+  aliases:
+    - send
+    - action
+    - usage
+    - flow
+    - diagram
+    - input
+    - output
+    - sysml
+  sizes:
+    - 32
 - name: send-backward
   friendly_name: Send backward
   aliases:
@@ -18544,6 +19690,17 @@
   aliases:
     - shape unite
     - format
+  sizes:
+    - 32
+- name: shapes
+  friendly_name: Shapes
+  aliases:
+    - shape
+    - shapes
+    - flow
+    - diagram
+    - connector
+    - sysml
   sizes:
     - 32
 - name: share
@@ -19691,6 +20848,17 @@
     - weather
   sizes:
     - 32
+- name: strategy-play
+  friendly_name: Strategy play
+  aliases:
+    - strategy
+    - game
+    - play
+    - X
+    - O
+    - arrows
+  sizes:
+    - 32
 - name: strawberry
   friendly_name: Strawberry
   aliases:
@@ -19790,6 +20958,17 @@
     - layers
   sizes:
     - 32
+- name: subclassification
+  friendly_name: Subclassification
+  aliases:
+    - sub
+    - arrow
+    - subclassification
+    - connector
+    - sysml
+    - relationship
+  sizes:
+    - 32
 - name: subdirectory
   friendly_name: Subdirectory
   aliases:
@@ -19814,6 +20993,32 @@
     - local
     - node
     - integration
+  sizes:
+    - 32
+- name: subject--definition
+  friendly_name: Subject definition
+  aliases:
+    - subject
+    - definition
+    - SD
+    - SU
+    - flow
+    - diagram
+    - node
+    - sysml
+  sizes:
+    - 32
+- name: subject--usage
+  friendly_name: Subject usage
+  aliases:
+    - subject
+    - usage
+    - SD
+    - SU
+    - flow
+    - diagram
+    - node
+    - sysml
   sizes:
     - 32
 - name: subnet-acl-rules
@@ -19878,6 +21083,22 @@
     - discount
     - take
     - delete
+  sizes:
+    - 32
+- name: succession
+  friendly_name: Succession
+  aliases:
+    - succession
+    - usage
+    - SD
+    - SU
+    - flow
+    - diagram
+    - node
+    - arrow
+    - dash
+    - connector
+    - sysml
   sizes:
     - 32
 - name: summary--KPI
@@ -19984,6 +21205,18 @@
   friendly_name: Sys provision
   aliases:
     - data
+  sizes:
+    - 32
+- name: sysplex--distributor
+  friendly_name: Sysplex distributor
+  aliases:
+    - sysplex
+    - distributor
+    - load
+    - balancer
+    - container
+    - software
+    - zos
   sizes:
     - 32
 - name: T
@@ -20491,6 +21724,25 @@
   friendly_name: Term
   aliases:
     - term
+    - AI
+    - brackets
+    - prompt
+    - template
+    - reference
+    - generative
+  sizes:
+    - 32
+- name: term--reference
+  friendly_name: Term reference
+  aliases:
+    - term
+    - AI
+    - arrow
+    - brackets
+    - prompt
+    - template
+    - reference
+    - generative
   sizes:
     - 32
 - name: terminal
@@ -21031,6 +22283,16 @@
     - stop watch
   sizes:
     - 32
+- name: timing-belt
+  friendly_name: Timing belt
+  aliases:
+    - timing
+    - belt
+    - engine
+    - machine
+    - vehicle
+  sizes:
+    - 32
 - name: tool-box
   friendly_name: Tool box
   aliases:
@@ -21301,6 +22563,18 @@
     - data transformation
     - binary
     - code
+    - circle
+    - dash
+  sizes:
+    - 32
+- name: transform--code
+  friendly_name: Transform code
+  aliases:
+    - data transformation
+    - transform
+    - code
+    - circle
+    - dash
   sizes:
     - 32
 - name: transform--instructions
@@ -21796,6 +23070,17 @@
     - file
   sizes:
     - 32
+- name: usage--included-use-case
+  friendly_name: Usage included use case
+  aliases:
+    - usage
+    - use case
+    - flow
+    - diagram
+    - node
+    - sysml
+  sizes:
+    - 32
 - name: USB
   friendly_name: USB
   aliases:
@@ -21804,6 +23089,34 @@
     - connection
     - bus
     - port
+  sizes:
+    - 32
+- name: use-case--definition
+  friendly_name: Use case definition
+  aliases:
+    - usage
+    - use case
+    - definition
+    - UD
+    - UU
+    - plex
+    - diagram
+    - node
+    - sysml
+  sizes:
+    - 32
+- name: use-case--usage
+  friendly_name: Use case usage
+  aliases:
+    - usage
+    - use case
+    - definition
+    - UD
+    - UU
+    - plex
+    - diagram
+    - node
+    - sysml
   sizes:
     - 32
 - name: user
@@ -21832,6 +23145,36 @@
     - account
     - my account
     - access
+  sizes:
+    - 32
+- name: user--access-locked
+  friendly_name: User access locked
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+    - access
+    - locked
+  sizes:
+    - 32
+- name: user--access-unlocked
+  friendly_name: User access unlocked
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - my account
+    - access
+    - unlocked
   sizes:
     - 32
 - name: user--activity
@@ -21965,6 +23308,21 @@
     - profile
     - account
     - my account
+- name: user--feedback
+  friendly_name: User feedback
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - account
+    - feedback
+    - comment
+    - design
+    - testing
+  sizes:
+    - 32
 - name: user--filled
   friendly_name: User filled
   sizes:
@@ -22064,6 +23422,20 @@
     - profile
     - account
     - my account
+- name: user--service
+  friendly_name: User service
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - service
+    - tool
+  sizes:
+    - 32
 - name: user--service-desk
   friendly_name: User service desk
   aliases:

@@ -5,8 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useState, useContext, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import React, {
+  ReactNode,
+  useState,
+  useContext,
+  useRef,
+  useEffect,
+} from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
@@ -52,7 +58,7 @@ export interface TextAreaProps
   /**
    * Provide text that is used alongside the control label for additional help
    */
-  helperText?: ReactNodeLike;
+  helperText?: ReactNode;
 
   /**
    * Specify whether you want the underlying label to be visually hidden
@@ -72,13 +78,13 @@ export interface TextAreaProps
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
    * control
    */
-  labelText: ReactNodeLike;
+  labelText: ReactNode;
 
   /**
    * @deprecated
@@ -128,7 +134,7 @@ export interface TextAreaProps
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextArea` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Provide the current value of the `<textarea>`
@@ -143,7 +149,7 @@ export interface TextAreaProps
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 
   /**
    * Specify the method used for calculating the counter number

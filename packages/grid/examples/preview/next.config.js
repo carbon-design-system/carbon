@@ -4,6 +4,8 @@ module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_PRODUCTION_BUILD) {
     return {
         basePath: '/grid/examples/preview',
+        output: 'export',
+        distDir: 'build',
     }
   }
 

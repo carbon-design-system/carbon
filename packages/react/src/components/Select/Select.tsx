@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, {
   ChangeEventHandler,
   ComponentPropsWithRef,
@@ -122,7 +122,7 @@ interface SelectProps
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Specify whether the control is currently in warning state

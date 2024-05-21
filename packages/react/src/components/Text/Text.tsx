@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import React, { ReactNode, useContext } from 'react';
 import { PolymorphicProps } from '../../types/common';
 import { TextDir } from './TextDirection';
 import { TextDirectionContext } from './TextDirectionContext';
@@ -88,7 +88,7 @@ Text.propTypes = {
   dir: PropTypes.oneOf(['ltr', 'rtl', 'auto']),
 };
 
-function getTextFromChildren(children: ReactNodeLike) {
+function getTextFromChildren(children: ReactNode) {
   if (typeof children === 'string') {
     return children;
   }

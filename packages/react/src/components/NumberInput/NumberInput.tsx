@@ -7,7 +7,7 @@
 
 import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, {
   ReactNode,
   useContext,
@@ -168,7 +168,7 @@ export interface NumberInputProps
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Specify how much the values should increase/decrease upon clicking on up/down button

@@ -6,8 +6,8 @@
  */
 
 import cx from 'classnames';
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { type MouseEventHandler, useRef } from 'react';
+import PropTypes from 'prop-types';
+import React, { type MouseEventHandler, useRef, ReactNode } from 'react';
 import {
   ArrowUp as Arrow,
   ArrowsVertical as Arrows,
@@ -24,7 +24,7 @@ const defaultScope = 'col';
 export type TableHeaderTranslationKey = 'carbon.table.header.icon.description';
 
 export interface TableHeaderTranslationArgs {
-  header: React.ReactNode;
+  header: ReactNode;
   isSortHeader?: boolean;
   sortDirection?: DataTableSortState;
   sortStates: typeof sortStates;
@@ -68,7 +68,7 @@ interface TableHeaderProps
   /**
    * Pass in children that will be embedded in the table header label
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * Specify an optional className to be applied to the container node
@@ -112,7 +112,7 @@ interface TableHeaderProps
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TableSlugRow` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Specify which direction we are currently sorting by, should be one of DESC,

@@ -8,6 +8,7 @@
 import React from 'react';
 import { Theme, useTheme } from '../../Theme';
 import { screen, render } from '@testing-library/react';
+import * as hooks from '../../../internal/useMatchMedia';
 
 describe('Theme', () => {
   it('should render the children passed in as a prop', () => {
@@ -36,5 +37,57 @@ describe('Theme', () => {
 
     expect(screen.getByTestId('default')).toHaveTextContent('white');
     expect(screen.getByTestId('nested')).toHaveTextContent('g100');
+  });
+});
+
+function DarkTestComponent({ id }) {
+  const { isDark } = useTheme();
+  return <span data-testid={id}>{isDark ? 'dark' : 'light'}</span>;
+}
+
+describe('usePrefersDarkScheme', () => {
+  it('should set see white as light', () => {
+    jest.resetModules();
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => false);
+    render(
+      <Theme theme="white">
+        <DarkTestComponent id="default" />
+      </Theme>
+    );
+
+    expect(screen.getByTestId('default')).toHaveTextContent('light');
+  });
+  it('should set see g10 as light', () => {
+    jest.resetModules();
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => false);
+    render(
+      <Theme theme="g10">
+        <DarkTestComponent id="default" />
+      </Theme>
+    );
+
+    expect(screen.getByTestId('default')).toHaveTextContent('light');
+  });
+  it('should set see g90 as light', () => {
+    jest.resetModules();
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+    render(
+      <Theme theme="g90">
+        <DarkTestComponent id="default" />
+      </Theme>
+    );
+
+    expect(screen.getByTestId('default')).toHaveTextContent('dark');
+  });
+  it('should set see g100 as light', () => {
+    jest.resetModules();
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+    render(
+      <Theme theme="g100">
+        <DarkTestComponent id="default" />
+      </Theme>
+    );
+
+    expect(screen.getByTestId('default')).toHaveTextContent('dark');
   });
 });
