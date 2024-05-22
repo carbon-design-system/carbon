@@ -322,6 +322,45 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           <SelectItem value="us-south" text="US South" />
           <SelectItem value="us-east" text="US East" />
         </Select>
+
+        <Dropdown
+          autoAlign={true}
+          id="default"
+          titleText="Dropdown label"
+          helperText="This is some helper text"
+          // initialSelectedItem={items[1]}
+          label="Option 1"
+          items={[
+            {
+              id: 'option-0',
+              text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+            },
+            {
+              id: 'option-1',
+              text: 'Option 1',
+            },
+            {
+              id: 'option-2',
+              text: 'Option 2',
+            },
+            {
+              id: 'option-3',
+              text: 'Option 3 - a disabled item',
+              disabled: true,
+            },
+            {
+              id: 'option-4',
+              text: 'Option 4',
+            },
+            {
+              id: 'option-5',
+              text: 'Option 5',
+            },
+          ]}
+          itemToString={(item) => (item ? item.text : '')}
+          direction="top"
+        />
+
         {args.hasScrollingContent && (
           <>
             <p>
