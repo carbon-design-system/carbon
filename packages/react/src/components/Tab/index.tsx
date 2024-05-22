@@ -6,6 +6,7 @@
  */
 
 import { Tab } from '../Tabs/Tabs';
+import { type TabProps } from '../Tabs/Tabs';
 
 export default Tab;
-export { Tab };
+export { Tab, type TabProps };

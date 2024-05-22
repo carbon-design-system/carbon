@@ -102,19 +102,23 @@ function Tooltip<T extends React.ElementType>({
   const tooltipRef = useRef<HTMLSpanElement>(null);
   const [open, setOpen] = useDelayedState(defaultOpen);
   const [isDragging, setIsDragging] = useState(false);
+  const [focusByMouse, setFocusByMouse] = useState(false);
   const [isPointerIntersecting, setIsPointerIntersecting] = useState(false);
   const id = useId('tooltip');
   const prefix = usePrefix();
   const child = React.Children.only(children);
 
   const triggerProps = {
-    onFocus: () => setOpen(true),
-    onBlur: () => setOpen(false),
+    onFocus: () => !focusByMouse && setOpen(true),
+    onBlur: () => {
+      setOpen(false);
+      setFocusByMouse(false);
+    },
     onClick: () => closeOnActivation && setOpen(false),
     // This should be placed on the trigger in case the element is disabled
     onMouseEnter,
     onMouseLeave,
-    onMouseDown: onDragStart,
+    onMouseDown,
     onMouseMove: onMouseMove,
     onTouchStart: onDragStart,
   };
@@ -177,8 +181,16 @@ function Tooltip<T extends React.ElementType>({
   }, [open, onKeyDown]);
 
   function onMouseEnter() {
-    setIsPointerIntersecting(true);
-    setOpen(true, enterDelayMs);
+    // Interactive Tags should not support onMouseEnter
+    if (!rest?.onMouseEnter?.()) {
+      setIsPointerIntersecting(true);
+      setOpen(true, enterDelayMs);
+    }
+  }
+
+  function onMouseDown() {
+    setFocusByMouse(true);
+    onDragStart();
   }
 
   function onMouseLeave() {
