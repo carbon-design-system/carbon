@@ -620,7 +620,7 @@ type DropdownComponentProps<ItemType> = React.PropsWithoutRef<
     React.RefAttributes<HTMLButtonElement>
 >;
 
-interface DropdownComponent {
+export interface DropdownComponent {
   <ItemType>(
     props: DropdownComponentProps<ItemType>
   ): React.ReactElement | null;

@@ -235,6 +235,7 @@ Array [
   "linkInverse",
   "linkInverseActive",
   "linkInverseHover",
+  "linkInverseVisited",
   "linkPrimary",
   "linkPrimaryHover",
   "linkSecondary",

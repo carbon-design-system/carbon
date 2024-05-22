@@ -2729,9 +2729,6 @@ Map {
   },
   "DismissibleTag" => Object {
     "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
       "className": Object {
         "type": "string",
       },
@@ -2769,6 +2766,9 @@ Map {
       },
       "slug": Object {
         "type": "node",
+      },
+      "text": Object {
+        "type": "string",
       },
       "title": Object {
         "type": "string",
@@ -5629,9 +5629,6 @@ Map {
   },
   "OperationalTag" => Object {
     "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
       "className": Object {
         "type": "string",
       },
@@ -5666,6 +5663,9 @@ Map {
       },
       "slug": Object {
         "type": "node",
+      },
+      "text": Object {
+        "type": "string",
       },
       "type": Object {
         "args": Array [
@@ -6065,33 +6065,7 @@ Map {
   "Popover" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-right",
-            "bottom",
-            "bottom-left",
-            "bottom-right",
-            "left",
-            "left-bottom",
-            "left-top",
-            "right",
-            "right-bottom",
-            "right-top",
-            "top-start",
-            "top-end",
-            "bottom-start",
-            "bottom-end",
-            "left-end",
-            "left-start",
-            "right-end",
-            "right-start",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "as": Object {
         "args": Array [
           Array [
@@ -6771,9 +6745,6 @@ Map {
   },
   "SelectableTag" => Object {
     "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
       "className": Object {
         "type": "string",
       },
@@ -6811,6 +6782,9 @@ Map {
       },
       "slug": Object {
         "type": "node",
+      },
+      "text": Object {
+        "type": "string",
       },
     },
   },
@@ -10733,6 +10707,7 @@ Map {
   "useContextMenu" => Object {},
   "useIdPrefix" => Object {},
   "useLayer" => Object {},
+  "usePrefersDarkScheme" => Object {},
   "usePrefix" => Object {},
   "useTheme" => Object {},
 }
