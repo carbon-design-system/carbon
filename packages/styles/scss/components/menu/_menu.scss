@@ -44,6 +44,7 @@
   }
 
   .#{$prefix}--menu--open {
+    inline-size: fit-content;
     visibility: visible;
 
     &:focus {
