@@ -17,7 +17,7 @@ import Downshift, {
   UseMultipleSelectionInterface,
 } from 'downshift';
 import isEqual from 'lodash.isequal';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, {
   useContext,
   useState,
@@ -240,7 +240,7 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the

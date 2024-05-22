@@ -300,6 +300,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   ) : (
     <View className={`${prefix}--icon-visibility-on`} />
   );
+
   const passwordVisibilityToggleClasses = classNames(
     `${prefix}--text-input--password__visibility__toggle`,
     `${prefix}--btn`,
@@ -318,10 +319,10 @@ const PasswordInput = React.forwardRef(function PasswordInput(
       align = tooltipPosition;
     }
     if (tooltipAlignment === 'end') {
-      align = `${tooltipPosition}-right`;
+      align = `${tooltipPosition}-end`;
     }
     if (tooltipAlignment === 'start') {
-      align = `${tooltipPosition}-left`;
+      align = `${tooltipPosition}-start`;
     }
   }
 
