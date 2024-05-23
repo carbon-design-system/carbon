@@ -111,7 +111,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
 
       // Middleware order matters, arrow should be last
       middleware: [
-        flip({ fallbackAxisSideDirection: 'start' }),
+        flip({ crossAxis: false }),
         floatingSize({
           apply({ rects, elements }) {
             Object.assign(elements.floating.style, {
