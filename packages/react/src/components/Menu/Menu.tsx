@@ -27,7 +27,7 @@ import { warning } from '../../internal/warning.js';
 
 import { MenuContext, menuReducer } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { canUseDOM } from '../../internal/environment';
 
 const spacing = 8; // distance to keep to window edges, in px
 
@@ -113,7 +113,8 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     onOpen,
     open,
     size = 'sm',
-    target,
+    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+    target = canUseDOM && document.body,
     x = 0,
     y = 0,
     ...rest
@@ -123,8 +124,6 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const prefix = usePrefix();
 
   const focusReturn = useRef<HTMLElement | null>(null);
-
-  const [targetDOM, setTargetDOM] = useState<Element>();
 
   const context = useContext(MenuContext);
 
@@ -387,11 +386,6 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     return [fitValue(ranges.x, 'x') ?? -1, fitValue(ranges.y, 'y') ?? -1];
   }
 
-  useIsomorphicEffect(() => {
-    // If `target` prop is not provided, we want to render our content in the document.body. That prevents SSR issues
-    setTargetDOM(document.body);
-  }, [target]);
-
   useEffect(() => {
     if (open && focusableItems.length > 0) {
       focusItem();
@@ -447,9 +441,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     return rendered;
   }
 
-  return isRoot
-    ? (open && createPortal(rendered, target ?? targetDOM)) || null
-    : rendered;
+  return isRoot ? (open && createPortal(rendered, target)) || null : rendered;
 });
 
 Menu.propTypes = {
