@@ -25,6 +25,9 @@ Map {
       "isFlush": Object {
         "type": "bool",
       },
+      "ordered": Object {
+        "type": "bool",
+      },
       "size": Object {
         "args": Array [
           Array [
