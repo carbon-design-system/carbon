@@ -27,6 +27,7 @@ import { warning } from '../../internal/warning.js';
 
 import { MenuContext, menuReducer } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const spacing = 8; // distance to keep to window edges, in px
 
@@ -87,7 +88,7 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
-  target?: HTMLElement;
+  target?: Element;
 
   /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
@@ -112,9 +113,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     onOpen,
     open,
     size = 'sm',
-    // TODO: #16004
-    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-    target = document.body,
+    target,
     x = 0,
     y = 0,
     ...rest
@@ -124,6 +123,8 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const prefix = usePrefix();
 
   const focusReturn = useRef<HTMLElement | null>(null);
+
+  const [targetDOM, setTargetDOM] = useState<Element>();
 
   const context = useContext(MenuContext);
 
@@ -386,6 +387,11 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     return [fitValue(ranges.x, 'x') ?? -1, fitValue(ranges.y, 'y') ?? -1];
   }
 
+  useIsomorphicEffect(() => {
+    // If `target` prop is not provided, we want to render our content in the document.body. That prevents SSR issues
+    setTargetDOM(document.body);
+  }, [target]);
+
   useEffect(() => {
     if (open && focusableItems.length > 0) {
       focusItem();
@@ -437,7 +443,13 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     </MenuContext.Provider>
   );
 
-  return isRoot ? (open && createPortal(rendered, target)) || null : rendered;
+  if (!target) {
+    return rendered;
+  }
+
+  return isRoot
+    ? (open && createPortal(rendered, target ?? targetDOM)) || null
+    : rendered;
 });
 
 Menu.propTypes = {
