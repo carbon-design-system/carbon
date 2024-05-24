@@ -119,7 +119,7 @@ const SelectableTag = <T extends React.ElementType>({
         className={tooltipClasses}
         leaveDelayMs={0}
         onMouseEnter={false}>
-        {/* @ts-ignore-error Popover throws a TS error everytime is imported */}
+        {/* @ts-ignore-error Tag throws a TS error everytime is imported */}
 
         <Tag
           ref={tagRef}
@@ -141,7 +141,7 @@ const SelectableTag = <T extends React.ElementType>({
   }
 
   return (
-    // @ts-ignore-error Popover throws a TS error everytime is imported
+    // @ts-ignore-error Tag throws a TS error everytime is imported
     <Tag
       ref={tagRef}
       slug={slug}

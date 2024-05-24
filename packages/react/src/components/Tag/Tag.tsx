@@ -181,7 +181,7 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
   if (filter) {
     const ComponentTag = (BaseComponent as React.ElementType) ?? 'div';
     return (
-      <ComponentTag ref={tagRef} className={tagClasses} id={tagId} {...other}>
+      <ComponentTag className={tagClasses} id={tagId} {...other}>
         {CustomIconElement && size !== 'sm' ? (
           <div className={`${prefix}--tag__custom-icon`}>
             <CustomIconElement />

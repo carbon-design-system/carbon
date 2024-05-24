@@ -134,7 +134,7 @@ const OperationalTag = <T extends React.ElementType>({
         leaveDelayMs={0}
         onMouseEnter={false}
         closeOnActivation>
-        {/* @ts-ignore-error Popover throws a TS error everytime is imported */}
+        {/* @ts-ignore-error Tag throws a TS error everytime is imported */}
         <Tag
           ref={tagRef}
           type={type}
@@ -154,7 +154,7 @@ const OperationalTag = <T extends React.ElementType>({
   }
 
   return (
-    // @ts-ignore-error Popover throws a TS error everytime is imported
+    // @ts-ignore-error Tag throws a TS error everytime is imported
     <Tag
       ref={tagRef}
       type={type}
