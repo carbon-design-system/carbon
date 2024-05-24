@@ -6,7 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
+import React, {
+  useLayoutEffect,
+  useState,
+  ReactNode,
+  useRef,
+  ForwardedRef,
+} from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -16,6 +22,7 @@ import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
 import { DefinitionTooltip } from '../Tooltip';
 import { isEllipsisActive } from './isEllipsisActive';
+import { useMergeRefs } from '@floating-ui/react';
 
 const getInstanceId = setupGetInstanceId();
 export const TYPES = {
@@ -103,23 +110,27 @@ export type TagProps<T extends React.ElementType> = PolymorphicProps<
   TagBaseProps
 >;
 
-const Tag = <T extends React.ElementType>({
-  children,
-  className,
-  id,
-  type,
-  filter, // remove filter in next major release - V12
-  renderIcon: CustomIconElement,
-  title = 'Clear filter', // remove title in next major release - V12
-  disabled,
-  onClose, // remove onClose in next major release - V12
-  size,
-  as: BaseComponent,
-  slug,
-  ...other
-}: TagProps<T>) => {
+const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
+  {
+    children,
+    className,
+    id,
+    type,
+    filter, // remove filter in next major release - V12
+    renderIcon: CustomIconElement,
+    title = 'Clear filter', // remove title in next major release - V12
+    disabled,
+    onClose, // remove onClose in next major release - V12
+    size,
+    as: BaseComponent,
+    slug,
+    ...other
+  }: TagProps<T>,
+  forwardRef: ForwardedRef<Element>
+) {
   const prefix = usePrefix();
   const tagRef = useRef<HTMLElement>();
+  const ref = useMergeRefs([forwardRef, tagRef]);
   const tagId = id || `tag-${getInstanceId()}`;
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
@@ -211,7 +222,7 @@ const Tag = <T extends React.ElementType>({
 
   return (
     <ComponentTag
-      ref={tagRef}
+      ref={ref}
       disabled={disabled}
       className={tagClasses}
       id={tagId}
@@ -251,7 +262,7 @@ const Tag = <T extends React.ElementType>({
       {normalizedSlug}
     </ComponentTag>
   );
-};
+});
 
 Tag.propTypes = {
   /**

@@ -130,7 +130,8 @@ const DismissibleTag = <T extends React.ElementType>({
   const dismissLabel = `Dismiss "${text}"`;
 
   return (
-    <Tag<any>
+    // @ts-ignore-error Popover throws a TS error everytime is imported
+    <Tag
       ref={tagLabelRef}
       type={type}
       size={size}
