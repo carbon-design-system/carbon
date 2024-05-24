@@ -43,6 +43,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
+import { useFloating, flip, autoUpdate } from '@floating-ui/react';
 
 const {
   InputBlur,
@@ -149,6 +150,11 @@ export interface ComboBoxProps<ItemType>
    * 'aria-label' of the ListBox component.
    */
   ariaLabel?: string;
+
+  /**
+   * Will auto-align the dropdown on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlign?: boolean;
 
   /**
    * An optional className to add to the container node
@@ -313,6 +319,7 @@ const ComboBox = forwardRef(
     const {
       ['aria-label']: ariaLabel = 'Choose an item',
       ariaLabel: deprecatedAriaLabel,
+      autoAlign = false,
       className: containerClassName,
       direction = 'bottom',
       disabled = false,
@@ -342,6 +349,43 @@ const ComboBox = forwardRef(
       slug,
       ...rest
     } = props;
+    const { refs, floatingStyles } = useFloating(
+      autoAlign
+        ? {
+            // placement: direction,
+
+            // The floating element is positioned relative to its nearest
+            // containing block (usually the viewport). It will in many cases also
+            // “break” the floating element out of a clipping ancestor.
+            // https://floating-ui.com/docs/misc#clipping
+            strategy: 'fixed',
+
+            // Middleware order matters, arrow should be last
+            middleware: [
+              flip({
+                fallbackAxisSideDirection: 'none',
+              }),
+            ],
+            whileElementsMounted: autoUpdate,
+          }
+        : {} // When autoAlign is turned off, floating-ui will not be used
+    );
+    const parentWidth = (refs?.reference?.current as HTMLElement)?.clientWidth;
+    useEffect(() => {
+      if (autoAlign) {
+        Object.keys(floatingStyles).forEach((style) => {
+          if (refs.floating.current) {
+            refs.floating.current.style[style] = floatingStyles[style];
+
+            // refs.floating.current.style.width = parentWidth + 'px';
+          }
+        });
+
+        if (parentWidth && refs.floating.current) {
+          refs.floating.current.style.width = parentWidth + 'px';
+        }
+      }
+    }, [floatingStyles, autoAlign, refs.floating, parentWidth]);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
