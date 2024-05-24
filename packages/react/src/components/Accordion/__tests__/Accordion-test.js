@@ -254,4 +254,45 @@ describe('Accordion', () => {
       expect(screen.getByText('Panel C')).not.toBeVisible();
     });
   });
+  describe('Ordered List', () => {
+    it('should be an ol if prop ordered is passed as true', () => {
+      const { container } = render(
+        <Accordion data-testid="accordion" ordered={true}>
+          <AccordionItem className="child" title="Heading A">
+            Panel A
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading B">
+            Panel B
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading C">
+            Panel C
+          </AccordionItem>
+        </Accordion>
+      );
+      const ol = container.querySelector('ol');
+      expect(ol).toBeInTheDocument();
+      const ul = container.querySelector('ul');
+      expect(ul).not.toBeInTheDocument();
+    });
+
+    it('should be a ul if prop ordered is passed as false', () => {
+      const { container } = render(
+        <Accordion data-testid="accordion" ordered={false}>
+          <AccordionItem className="child" title="Heading A">
+            Panel A
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading B">
+            Panel B
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading C">
+            Panel C
+          </AccordionItem>
+        </Accordion>
+      );
+      const ol = container.querySelector('ol');
+      expect(ol).not.toBeInTheDocument();
+      const ul = container.querySelector('ul');
+      expect(ul).toBeInTheDocument();
+    });
+  });
 });

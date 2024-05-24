@@ -270,5 +270,28 @@ describe('RadioButtonGroup', () => {
         expect(screen.getByLabelText('Option two')).toBeChecked();
       });
     });
+    it('should place required on every child <RadioButton>', () => {
+      render(
+        <RadioButtonGroup name="test" required>
+          <RadioButton labelText="Option 1" value="option-1" />
+          <RadioButton labelText="Option 2" value="option-2" />
+        </RadioButtonGroup>
+      );
+
+      expect(screen.getByDisplayValue('option-1')).toBeRequired();
+      expect(screen.getByDisplayValue('option-2')).toBeRequired();
+    });
+
+    it('should override required on every child <RadioButton>', () => {
+      render(
+        <RadioButtonGroup name="test" required>
+          <RadioButton labelText="Option 1" value="option-1" required={false} />
+          <RadioButton labelText="Option 2" value="option-2" />
+        </RadioButtonGroup>
+      );
+
+      expect(screen.getByDisplayValue('option-1')).toBeRequired();
+      expect(screen.getByDisplayValue('option-2')).toBeRequired();
+    });
   });
 });

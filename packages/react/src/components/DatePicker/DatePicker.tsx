@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, {
   useContext,
   useEffect,
@@ -14,6 +14,7 @@ import React, {
   useCallback,
   useState,
   ForwardedRef,
+  ReactNode,
 } from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
@@ -28,6 +29,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
 import { FormContext } from '../FluidForm';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { DateLimit, DateOption } from 'flatpickr/dist/types/options';
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((_day, index) => {
@@ -214,7 +216,7 @@ interface DatePickerProps {
   /**
    * The child nodes.
    */
-  children: React.ReactNode | object;
+  children: ReactNode | object;
 
   /**
    * The CSS class names.
@@ -243,12 +245,12 @@ interface DatePickerProps {
   /**
    * The flatpickr `disable` option that allows a user to disable certain dates.
    */
-  disable?: string[];
+  disable?: DateLimit<DateOption>[];
 
   /**
    * The flatpickr `enable` option that allows a user to enable certain dates.
    */
-  enable?: string[];
+  enable?: DateLimit<DateOption>[];
 
   /**
    * The flatpickr `inline` option.
@@ -263,7 +265,7 @@ interface DatePickerProps {
   /**
    * Provide the text that is displayed when the control is in error state (Fluid Only)
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * `true` to use the light version.
@@ -342,12 +344,12 @@ interface DatePickerProps {
   /**
    * The maximum date that a user can pick to.
    */
-  maxDate?: string | number;
+  maxDate?: DateOption;
 
   /**
    * The minimum date that a user can start picking from.
    */
-  minDate?: string | number;
+  minDate?: DateOption;
 
   /**
    * The `change` event handler.
@@ -395,7 +397,7 @@ interface DatePickerProps {
   /**
    * Provide the text that is displayed when the control is in warning state (Fluid only)
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 }
 
 const DatePicker = React.forwardRef(function DatePicker(
