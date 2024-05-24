@@ -132,7 +132,7 @@ const OperationalTag = <T extends React.ElementType>({
         align="bottom"
         className={tooltipClasses}
         leaveDelayMs={0}
-        onMouseEnter={false}
+        onMouseEnter={() => false}
         closeOnActivation>
         {/* @ts-ignore-error Tag throws a TS error everytime is imported */}
         <Tag
