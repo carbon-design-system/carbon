@@ -126,7 +126,7 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
     slug,
     ...other
   }: TagProps<T>,
-  forwardRef: ForwardedRef<Element>
+  forwardRef: ForwardedRef<HTMLElement | undefined>
 ) {
   const prefix = usePrefix();
   const tagRef = useRef<HTMLElement>();

@@ -130,7 +130,6 @@ const DismissibleTag = <T extends React.ElementType>({
   const dismissLabel = `Dismiss "${text}"`;
 
   return (
-    // @ts-ignore-error Tag throws a TS error everytime is imported
     <Tag
       ref={tagLabelRef}
       type={type}

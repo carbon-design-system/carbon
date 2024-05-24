@@ -119,7 +119,6 @@ const SelectableTag = <T extends React.ElementType>({
         className={tooltipClasses}
         leaveDelayMs={0}
         onMouseEnter={() => false}>
-        {/* @ts-ignore-error Tag throws a TS error everytime is imported */}
         <Tag
           ref={tagRef}
           slug={slug}
@@ -140,7 +139,6 @@ const SelectableTag = <T extends React.ElementType>({
   }
 
   return (
-    // @ts-ignore-error Tag throws a TS error everytime is imported
     <Tag
       ref={tagRef}
       slug={slug}
