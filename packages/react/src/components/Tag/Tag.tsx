@@ -168,7 +168,7 @@ const Tag = <T extends React.ElementType>({
   }
 
   if (filter) {
-    const ComponentTag = BaseComponent ?? 'div';
+    const ComponentTag = (BaseComponent as React.ElementType) ?? 'div';
     return (
       <ComponentTag ref={tagRef} className={tagClasses} id={tagId} {...other}>
         {CustomIconElement && size !== 'sm' ? (
