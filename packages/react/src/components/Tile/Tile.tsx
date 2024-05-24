@@ -9,7 +9,7 @@ import React, {
   type ChangeEvent,
   type ComponentType,
 } from 'react';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
   Checkbox,
@@ -48,7 +48,7 @@ export interface TileProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 }
 
 export const Tile = React.forwardRef<HTMLDivElement, TileProps>(function Tile(
@@ -372,7 +372,11 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * The empty handler of the `<input>`.
    */
-  onChange?(event: ChangeEvent<HTMLDivElement>): void;
+  onChange?(
+    event: ChangeEvent<HTMLDivElement>,
+    selected?: boolean,
+    id?: string
+  ): void;
 
   /**
    * Specify the function to run when the SelectableTile is clicked
@@ -392,7 +396,7 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Specify the tab index of the wrapper element
@@ -463,7 +467,7 @@ export const SelectableTile = React.forwardRef<
     }
     setIsSelected(!isSelected);
     clickHandler(evt);
-    onChange(evt);
+    onChange(evt, isSelected, id);
   }
 
   // TODO: rename to handleKeyDown when handleKeyDown prop is deprecated
@@ -472,14 +476,14 @@ export const SelectableTile = React.forwardRef<
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
       setIsSelected(!isSelected);
-      onChange(evt);
+      onChange(evt, isSelected, id);
     }
     keyDownHandler(evt);
   }
 
   function handleChange(event) {
     setIsSelected(event.target.checked);
-    onChange(event);
+    onChange(event, isSelected, id);
   }
 
   if (selected !== prevSelected) {
@@ -637,7 +641,7 @@ export interface ExpandableTileProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `ExpandableTile` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * The `tabindex` attribute.

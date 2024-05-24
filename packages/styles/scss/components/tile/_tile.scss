@@ -85,6 +85,8 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
     &:focus {
       @include focus-outline('outline');
+
+      text-decoration: none;
     }
 
     &:hover,
@@ -398,7 +400,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
     border: 1px solid transparent;
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
-      0 24px 40px -24px $ai-drop-shadow;
+      0 4px 8px 0 $ai-drop-shadow;
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--expandable:hover {
@@ -423,7 +425,8 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--slug.#{$prefix}--tile--clickable::before {
     @include ai-popover-gradient('hover', 0, 'layer');
 
-    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+      0 4px 10px 2px $ai-drop-shadow;
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:hover::before,
@@ -431,10 +434,16 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     opacity: 1;
   }
 
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:focus,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable:focus {
+    outline-offset: -1px;
+  }
+
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::after {
     @include ai-popover-gradient('selected', 0, 'layer');
 
-    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+      0 4px 8px 0 $ai-drop-shadow;
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:hover::after {

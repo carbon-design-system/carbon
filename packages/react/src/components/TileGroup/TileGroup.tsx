@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { ReactNode, useState } from 'react';
 import RadioTile from '../RadioTile';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
@@ -19,7 +19,7 @@ export interface TileGroupProps
   /**
    * Provide a collection of <RadioTile> components to render in the group
    */
-  children?: ReactNodeLike;
+  children?: ReactNode;
 
   /**
    * Provide an optional className to be applied to the container node
@@ -55,6 +55,10 @@ export interface TileGroupProps
    * Specify the value that is currently selected in the group
    */
   valueSelected?: string | number;
+  /**
+   * `true` to specify if input selection in group is required.
+   */
+  required?: boolean;
 }
 
 const TileGroup = (props) => {
@@ -67,9 +71,10 @@ const TileGroup = (props) => {
     name,
     onChange = noopFn,
     valueSelected,
+    required,
   } = props;
-  const prefix = usePrefix();
 
+  const prefix = usePrefix();
   const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
   const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
 
@@ -91,6 +96,7 @@ const TileGroup = (props) => {
           return (
             <RadioTile
               {...otherProps}
+              required={required}
               name={name}
               key={value}
               value={value}
@@ -173,6 +179,11 @@ TileGroup.propTypes = {
    * the group changes
    */
   onChange: PropTypes.func,
+
+  /**
+   * `true` to specify if input selection in group is required.
+   */
+  required: PropTypes.bool,
 
   /**
    * Specify the value that is currently selected in the group

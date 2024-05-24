@@ -363,7 +363,7 @@
 
   // Required so overflow-indicator disappears at end of content
   .#{$prefix}--modal-scroll-content > *:last-child {
-    padding-block-end: $spacing-06;
+    margin-block-end: $spacing-06;
   }
 
   // -----------------------------
