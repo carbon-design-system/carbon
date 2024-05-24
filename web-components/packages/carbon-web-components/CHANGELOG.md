@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.9.0-rc.0...@carbon/web-components@2.9.0) (2024-05-16)
+
+**Note:** Version bump only for package @carbon/web-components
+
+
+
+
+
+# [2.9.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.8.0...@carbon/web-components@2.9.0-rc.0) (2024-05-06)
+
+
+### Bug Fixes
+
+* **data-table:** center align checkboxes ([#11743](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11743)) ([3c045f5](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/3c045f51578f10c9fc0f03bd71441fa098c1d52c)), closes [#11742](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11742)
+
+
+### Features
+
+* instrument with telemetry JS scope ([#11747](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11747)) ([650739e](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/650739e4d23677dd4891c781be20d76060170533))
+
+
+
+
+
 # [2.8.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.8.0-rc.0...@carbon/web-components@2.8.0) (2024-04-23)
 
 **Note:** Version bump only for package @carbon/web-components

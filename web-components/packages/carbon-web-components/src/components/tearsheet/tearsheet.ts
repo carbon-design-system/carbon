@@ -23,6 +23,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import '../button/index';
 import '../layer/index';
 import '../button/button-set-base';
+import '../modal/index';
 import {
   TEARSHEET_INFLUENCER_PLACEMENT,
   TEARSHEET_INFLUENCER_WIDTH,
