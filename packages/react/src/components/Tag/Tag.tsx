@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useState, ReactNode } from 'react';
+import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -15,6 +15,7 @@ import { PolymorphicProps } from '../../types/common';
 import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
 import { DefinitionTooltip } from '../Tooltip';
+import { isEllipsisActive } from './isEllipsisActive';
 
 const getInstanceId = setupGetInstanceId();
 export const TYPES = {
@@ -118,21 +119,16 @@ const Tag = <T extends React.ElementType>({
   ...other
 }: TagProps<T>) => {
   const prefix = usePrefix();
+  const tagRef = useRef<HTMLElement>();
   const tagId = id || `tag-${getInstanceId()}`;
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-  const isEllipsisActive = (element: any) => {
-    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
-    return element.offsetWidth < element.scrollWidth;
-  };
-
   useLayoutEffect(() => {
-    const elementTagId = document.querySelector(`#${tagId}`);
-    const newElement = elementTagId?.getElementsByClassName(
+    const newElement = tagRef.current?.getElementsByClassName(
       `${prefix}--tag__label`
     )[0];
-    isEllipsisActive(newElement);
-  }, [prefix, tagId]);
+    setIsEllipsisApplied(isEllipsisActive(newElement));
+  }, [prefix, tagRef]);
 
   const conditions = [
     `${prefix}--tag--selectable`,
@@ -174,7 +170,7 @@ const Tag = <T extends React.ElementType>({
   if (filter) {
     const ComponentTag = BaseComponent ?? 'div';
     return (
-      <ComponentTag className={tagClasses} id={tagId} {...other}>
+      <ComponentTag ref={tagRef} className={tagClasses} id={tagId} {...other}>
         {CustomIconElement && size !== 'sm' ? (
           <div className={`${prefix}--tag__custom-icon`}>
             <CustomIconElement />
@@ -215,6 +211,7 @@ const Tag = <T extends React.ElementType>({
 
   return (
     <ComponentTag
+      ref={tagRef}
       disabled={disabled}
       className={tagClasses}
       id={tagId}
