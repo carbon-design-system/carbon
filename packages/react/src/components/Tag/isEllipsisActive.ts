@@ -7,7 +7,6 @@
 
 export const isEllipsisActive = (element: any) => {
   if (element) {
-    console.log('element offste', element?.offsetWidth < element?.scrollWidth);
     return element?.offsetWidth < element?.scrollWidth;
   }
   return false;
