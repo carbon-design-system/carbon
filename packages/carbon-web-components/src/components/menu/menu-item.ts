@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -27,6 +27,9 @@ class CDSmenuItem extends LitElement {
   @provide({ context: MenuContext })
   @consume({ context: MenuContext })
   context;
+  // @provide({ context: MenuContext })
+  // @consume({ context: MenuContext, subscribe: true })
+  // contextChild;
 
   readonly hoverIntentDelay = 150; // in ms
   hoverIntentTimeout;
@@ -35,6 +38,16 @@ class CDSmenuItem extends LitElement {
    */
   @property({ type: String })
   label;
+  /**
+   * Children - Sub menu items.
+   */
+  @property({ type: Array })
+  childElements: Element[] | undefined;
+  /**
+   * Child context.
+   */
+  @property()
+  childContext;
   /**
    * Shortcut for the menu item.
    */
@@ -94,6 +107,72 @@ class CDSmenuItem extends LitElement {
     x: number | [number, number];
     y: number | [number, number];
   } = { x: -1, y: -1 };
+  firstUpdated() {
+    this.hasChildren = this.childNodes.length > 0;
+    this.isDisabled = this.disabled && !this.hasChildren;
+    this.direction = document.dir;
+    this.isRtl = this.direction === 'rtl';
+    this.isDanger = this.kind === 'danger';
+    setTimeout(() => {
+      this.childElements = Object.values(this.children);
+    }, 100);
+  }
+  render() {
+    const {
+      label,
+      shortcut,
+      renderIcon,
+      _iconRender: iconRender,
+      isDisabled,
+      hasChildren,
+      submenuOpen,
+      _handleClick: handleClick,
+      _handleMouseEnter: handleMouseEnter,
+      _handleMouseLeave: handleMouseLeave,
+      _handleKeyDown: handleKeyDown,
+      _closeSubmenu: closeSubmenu,
+      isDanger,
+      boundaries,
+      childElements,
+    } = this;
+    const menuItemClasses = classMap({
+      [`${prefix}--menu-item`]: true,
+      [`${prefix}--menu-item--disabled`]: isDisabled,
+      [`${prefix}--menu-item--danger`]: isDanger,
+    });
+    return html`
+      <li
+        role="menuitem"
+        tabindex="0"
+        class="${menuItemClasses}"
+        aria-disabled="${isDisabled ?? undefined}"
+        aria-haspopup="${hasChildren ?? undefined}"
+        aria-expanded="${hasChildren ? submenuOpen : undefined}"
+        @click="${handleClick}"
+        @mouseenter="${hasChildren ? handleMouseEnter : undefined}"
+        @mouseleave="${hasChildren ? handleMouseLeave : undefined}"
+        @keydown="${handleKeyDown}">
+        <div class="${prefix}--menu-item__icon">
+          ${renderIcon ? iconRender() : undefined}
+        </div>
+        <div class="${prefix}--menu-item__label">${label}</div>
+        <div class="${prefix}--menu-item__shortcut">${shortcut}</div>
+        ${hasChildren
+          ? html`
+              <cds-menu
+                isChild="${hasChildren}"
+                label="${label}"
+                open="${submenuOpen}"
+                .onClose="${closeSubmenu}"
+                x="${boundaries.x}"
+                y="${boundaries.y}">
+                ${childElements}
+              </cds-menu>
+            `
+          : html``}
+      </li>
+    `;
+  }
 
   _iconRender = () => {
     if (this.renderIcon) {
@@ -150,85 +229,33 @@ class CDSmenuItem extends LitElement {
       y: -1,
     };
     this.submenuOpen = false;
+    (
+      this.shadowRoot?.querySelector('.cds--menu-item') as HTMLLIElement
+    )?.focus();
   };
   _handleKeyDown = (e: KeyboardEvent) => {
     if (this.hasChildren && e.key === 'ArrowRight') {
       this._openSubmenu();
-      e.stopPropagation();
+      console.log('here');
+      setTimeout(() => {
+        let subMenuItems = this.shadowRoot
+          ?.querySelector('cds-menu')
+          ?.shadowRoot?.querySelector('slot')
+          ?.assignedElements();
+        if (subMenuItems?.length && subMenuItems?.length > 0) {
+          (
+            subMenuItems[0].shadowRoot?.querySelector(
+              '.cds--menu-item'
+            ) as HTMLLIElement
+          ).focus();
+        }
+        e.stopPropagation();
+      }, 100);
     }
     if (e.key === 'Enter' || e.key === 'Space') {
       this._handleClick(e);
     }
   };
-  _registerItem = () => {
-    console.log('test');
-    // this.context = {
-    //   ...this.context,
-    //   items: [...this.context.items, 'test']
-    // }
-    this.context.items.push(
-      this.shadowRoot?.querySelector(`.${prefix}--menu-item`)
-    );
-  };
-  firstUpdated() {
-    this.hasChildren = this.childNodes.length > 0;
-    this.isDisabled = this.disabled && !this.hasChildren;
-    this.direction = document.dir;
-    this.isRtl = this.direction === 'rtl';
-    this.isDanger = this.kind === 'danger';
-    this._registerItem();
-  }
-  render() {
-    const {
-      label,
-      shortcut,
-      renderIcon,
-      _iconRender: iconRender,
-      isDisabled,
-      hasChildren,
-      submenuOpen,
-      _handleClick: handleClick,
-      _handleMouseEnter: handleMouseEnter,
-      _handleMouseLeave: handleMouseLeave,
-      _handleKeyDown: handleKeyDown,
-      isDanger,
-      boundaries,
-    } = this;
-    const menuItemClasses = classMap({
-      [`${prefix}--menu-item`]: true,
-      [`${prefix}--menu-item--disabled`]: isDisabled,
-      [`${prefix}--menu-item--danger`]: isDanger,
-    });
-    return html`
-      <li
-        role="menuitem"
-        class="${menuItemClasses}"
-        aria-disabled="${isDisabled ?? undefined}"
-        aria-haspopup="${hasChildren ?? undefined}"
-        aria-expanded="${hasChildren ? submenuOpen : undefined}"
-        @click="${handleClick}"
-        @mouseenter="${hasChildren ? handleMouseEnter : undefined}"
-        @mouseleave="${hasChildren ? handleMouseLeave : undefined}"
-        @keydown="${handleKeyDown}">
-        <div class="${prefix}--menu-item__icon">
-          ${renderIcon ? iconRender() : undefined}
-        </div>
-        <div class="${prefix}--menu-item__label">${label}</div>
-        <div class="${prefix}--menu-item__shortcut">${shortcut}</div>
-        ${hasChildren
-          ? html`
-              <cds-menu
-                label="${label}"
-                open="${submenuOpen}"
-                x="${boundaries.x}"
-                y="${boundaries.y}">
-                <slot></slot>
-              </cds-menu>
-            `
-          : html``}
-      </li>
-    `;
-  }
 
   static styles = styles; // `styles` here is a `CSSResult` generated by custom Vite loader
 }
