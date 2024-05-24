@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -35,7 +35,7 @@ const icon = (descriptor) => {
       '...': '${spread(attrs)}', // eslint-disable-line no-template-curly-in-string
     })
   );
-  descriptor.content.unshift('${children}'); // eslint-disable-line no-template-curly-in-string
+  descriptor?.content?.unshift('${children}'); // eslint-disable-line no-template-curly-in-string
   return `({ children, ...attrs } = {}) => svg\`${toString(descriptor)}\``;
 };
 
