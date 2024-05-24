@@ -391,6 +391,24 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     inset-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
+    > .#{$prefix}--slug {
+    inset-inline-end: $spacing-05;
+    transition: inset-inline-end $duration-fast-02 motion(standard, productive);
+
+    @if (
+      enabled('enable-v12-tile-radio-icons') or
+        $enable-experimental-tile-contrast
+    ) {
+      inset-inline-end: $spacing-08;
+    }
+  }
+
+  .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
+    > .#{$prefix}--slug {
+    inset-inline-end: $spacing-08;
+  }
+
   .#{$prefix}--tile.#{$prefix}--tile--clickable > .#{$prefix}--slug {
     pointer-events: none;
   }
@@ -435,7 +453,8 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:focus,
-  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable:focus {
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable:focus,
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile--slug.#{$prefix}--tile {
     outline-offset: -1px;
   }
 
@@ -463,8 +482,21 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--slug.#{$prefix}--tile--clickable
     .#{$prefix}--tile-content {
     position: relative;
-    z-index: 1;
     cursor: pointer;
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
+    .#{$prefix}--tile-content,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable .#{$prefix}--tile-content,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
+    > .#{$prefix}--tile__checkmark,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--is-selected .#{$prefix}--slug {
+    z-index: 1;
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
+    .#{$prefix}--slug:has(> .cds--popover--open) {
+    z-index: 2;
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable > .#{$prefix}--slug,
