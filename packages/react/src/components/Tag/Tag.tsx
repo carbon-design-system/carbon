@@ -56,7 +56,7 @@ export interface TagBaseProps {
   disabled?: boolean;
 
   /**
-   * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.
+   * @deprecated The `filter` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.
    */
   filter?: boolean;
 
@@ -66,7 +66,7 @@ export interface TagBaseProps {
   id?: string;
 
   /**
-   * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.
+   * @deprecated The `onClose` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.
    */
   onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 
@@ -88,7 +88,7 @@ export interface TagBaseProps {
   slug?: ReactNode;
 
   /**
-   * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.
+   * @deprecated The `title` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.
    */
   title?: string;
 
@@ -280,7 +280,7 @@ Tag.propTypes = {
    */
   filter: deprecate(
     PropTypes.bool,
-    'This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.'
+    'The `filter` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
   ),
 
   /**
@@ -293,7 +293,7 @@ Tag.propTypes = {
    */
   onClose: deprecate(
     PropTypes.func,
-    'This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.'
+    'The `onClose` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
   ),
 
   /**
@@ -318,7 +318,7 @@ Tag.propTypes = {
    */
   title: deprecate(
     PropTypes.string,
-    'This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.'
+    'The `title` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
   ),
 
   /**
