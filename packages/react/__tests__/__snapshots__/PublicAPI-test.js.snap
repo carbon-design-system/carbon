@@ -8240,6 +8240,7 @@ Map {
     },
   },
   "Tag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
         "type": "elementType",
@@ -8305,6 +8306,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "TagSkeleton" => Object {
     "propTypes": Object {
