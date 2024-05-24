@@ -160,7 +160,7 @@ function Tooltip<T extends React.ElementType>({
 
   function onMouseEnter() {
     // Interactive Tags should not support onMouseEnter
-    if (!rest?.onMouseEnter?.()) {
+    if (!rest?.onMouseEnter) {
       setIsPointerIntersecting(true);
       setOpen(true, enterDelayMs);
     }
