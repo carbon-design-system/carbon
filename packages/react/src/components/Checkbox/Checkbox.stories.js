@@ -43,6 +43,16 @@ export const Default = () => {
   );
 };
 
+export const Horizontal = () => {
+  return (
+    <CheckboxGroup orientation="horizontal" {...fieldsetCheckboxProps()}>
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
+    </CheckboxGroup>
+  );
+};
+
 export const Single = () => {
   return (
     <>
