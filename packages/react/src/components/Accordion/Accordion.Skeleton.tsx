@@ -39,6 +39,12 @@ interface AccordionSkeletonProps {
    * `false` to not display the first item opened.
    */
   open?: boolean;
+
+  /**
+   * Specify if the Accordion should be an ordered list,
+   * default is `false`
+   */
+  ordered?: boolean;
 }
 
 function AccordionSkeleton({
@@ -47,6 +53,7 @@ function AccordionSkeleton({
   count = 4,
   isFlush,
   open = true,
+  ordered = false,
   ...rest
 }: AccordionSkeletonProps) {
   const prefix = usePrefix();
@@ -55,8 +62,9 @@ function AccordionSkeleton({
     [`${prefix}--accordion--flush`]: isFlush && align !== 'start',
   });
   const numSkeletonItems = open ? count - 1 : count;
+  const ListTag = ordered ? 'ol' : 'ul';
   return (
-    <ul className={classes} {...rest}>
+    <ListTag className={classes} {...rest}>
       {open && (
         <li
           className={`${prefix}--accordion__item ${prefix}--accordion__item--active`}>
@@ -74,7 +82,7 @@ function AccordionSkeleton({
       {Array.from({ length: numSkeletonItems }).map((_, i) => (
         <AccordionSkeletonItem key={i} />
       ))}
-    </ul>
+    </ListTag>
   );
 }
 
