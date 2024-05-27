@@ -74,6 +74,22 @@ export const Default = () => (
   </div>
 );
 
+export const ExperimentalAutoAlign = () => (
+  <div style={{ width: 400 }}>
+    <div style={{ height: 300 }}></div>
+    <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+      autoAlign={true}
+    />
+    <div style={{ height: 800 }}></div>
+  </div>
+);
+
 export const AllowCustomValue = () => {
   const filterItems = (menu) => {
     return menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase());

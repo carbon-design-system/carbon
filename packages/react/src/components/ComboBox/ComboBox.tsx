@@ -376,8 +376,6 @@ const ComboBox = forwardRef(
         Object.keys(floatingStyles).forEach((style) => {
           if (refs.floating.current) {
             refs.floating.current.style[style] = floatingStyles[style];
-
-            // refs.floating.current.style.width = parentWidth + 'px';
           }
         });
 
@@ -675,6 +673,7 @@ const ComboBox = forwardRef(
           size={size}
           warn={warn}
           warnText={warnText}
+          ref={refs.setReference}
           warnTextId={warnTextId}>
           <div className={`${prefix}--list-box__field`}>
             <input
@@ -781,6 +780,7 @@ const ComboBox = forwardRef(
           </div>
           {normalizedSlug}
           <ListBox.Menu
+            ref={mergeRefs(getMenuProps().ref, refs.setFloating)}
             {...getMenuProps({
               'aria-label': deprecatedAriaLabel || ariaLabel,
             })}>
@@ -865,6 +865,11 @@ ComboBox.propTypes = {
     PropTypes.string,
     'This prop syntax has been deprecated. Please use the new `aria-label`.'
   ),
+
+  /**
+   * Will auto-align the dropdown on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * An optional className to add to the container node
