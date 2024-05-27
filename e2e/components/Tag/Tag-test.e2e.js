@@ -17,7 +17,7 @@ test.describe('Tag', () => {
       test('default @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tag',
-          id: 'components-tag--default',
+          id: 'components-tag--read-only',
           theme,
         });
       });

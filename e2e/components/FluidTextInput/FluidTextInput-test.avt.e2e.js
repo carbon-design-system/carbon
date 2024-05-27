@@ -25,7 +25,7 @@ test.describe('@avt FluidTextInput', () => {
   test('@avt-advanced-states password input', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTextInput',
-      id: 'experimental-fluid-components-unstable-fluidtextinput--password-input',
+      id: 'experimental-fluid-components-unstable-fluidpasswordinput--default',
       globals: {
         theme: 'white',
       },
