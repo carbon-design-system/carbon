@@ -160,12 +160,12 @@ class CDSmenuItem extends LitElement {
         ${hasChildren
           ? html`
               <cds-menu
-                isChild="${hasChildren}"
+                .isChild="${hasChildren}"
                 label="${label}"
-                open="${submenuOpen}"
+                .open="${submenuOpen}"
                 .onClose="${closeSubmenu}"
-                x="${boundaries.x}"
-                y="${boundaries.y}">
+                .x="${boundaries.x}"
+                .y="${boundaries.y}">
                 ${childElements}
               </cds-menu>
             `
