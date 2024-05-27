@@ -77,19 +77,11 @@
     &:focus {
       @include focus-outline('outline');
     }
-
-    svg {
-      color: $icon-secondary;
-    }
   }
 
   .#{$prefix}--menu-item:hover {
     background-color: $layer-hover;
     color: $text-primary;
-
-    svg {
-      color: $icon-primary;
-    }
   }
 
   $supported-sizes: (

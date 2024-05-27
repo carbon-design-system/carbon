@@ -7,7 +7,7 @@
 
 import { PolymorphicProps } from '../../types/common';
 
-interface GridBaseProps {
+export interface GridBaseProps {
   /**
    * Pass in content that will be rendered within the `Grid`
    */

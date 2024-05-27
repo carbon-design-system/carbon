@@ -8,7 +8,8 @@ import { deprecateFieldOnObject } from '../../internal/deprecateFieldOnObject';
 
 import ControlledPasswordInput from './ControlledPasswordInput';
 import PasswordInput from './PasswordInput';
-import TextInput from './TextInput';
+import TextInput, { type TextInputProps } from './TextInput';
+import { type TextInputSkeletonProps } from './TextInput.Skeleton';
 
 if (__DEV__) {
   deprecateFieldOnObject(
@@ -21,4 +22,5 @@ if (__DEV__) {
 
 export { default as TextInputSkeleton } from './TextInput.Skeleton';
 export default TextInput;
-export { TextInput };
+export { type TextInputSkeletonProps };
+export { TextInput, type TextInputProps };

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import TextArea from './TextArea';
+import TextArea, { type TextAreaProps } from './TextArea';
 
 export { default as TextAreaSkeleton } from './TextArea.Skeleton';
 export default TextArea;
-export { TextArea };
+export { TextArea, type TextAreaProps };

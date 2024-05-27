@@ -7,13 +7,16 @@
 
 import React from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
+import { type OverflowMenuProps } from './OverflowMenu';
 
 import { OverflowMenu as OverflowMenuV12 } from './next';
 
 import { OverflowMenu as OverflowMenuComponent } from './OverflowMenu';
 import { createClassWrapper } from '../../internal/createClassWrapper';
 
-const OverflowMenuV11 = createClassWrapper(OverflowMenuComponent);
+const OverflowMenuV11 = createClassWrapper(
+  OverflowMenuComponent as typeof React.Component
+);
 
 function OverflowMenu(props) {
   const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
@@ -28,4 +31,4 @@ function OverflowMenu(props) {
 OverflowMenu.displayName = 'OverflowMenu';
 
 export default OverflowMenu;
-export { OverflowMenu };
+export { OverflowMenu, type OverflowMenuProps };

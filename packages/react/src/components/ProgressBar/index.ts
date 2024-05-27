@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import ProgressBar from './ProgressBar';
+import ProgressBar, { type ProgressBarProps } from './ProgressBar';
 
 export default ProgressBar;
-export { ProgressBar };
+export { ProgressBar, type ProgressBarProps };

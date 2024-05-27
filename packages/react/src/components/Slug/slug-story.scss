@@ -1,5 +1,6 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/theme';
+@use '@carbon/react/scss/components/tile';
 
 .slug-container-example {
   display: flex;
@@ -163,4 +164,25 @@
 
 .sbdocs-slug .cds--toggletip-content {
   font-size: 0.875rem;
+}
+
+.slug-selectable-tile-container .cds--tile-group > div {
+  display: flex;
+}
+
+.slug-selectable-tile-container .cds--tile-group > div > div {
+  width: 33%;
+}
+
+.slug-selectable-tile-container .cds--tile-group .slug-radio-tile,
+.slug-selectable-tile-container .cds--tile-group .slug-selectable-tile {
+  margin-inline-end: 1rem;
+  height: 200px;
+}
+
+.slug-experimental-radio-tile-container {
+  @include tile.tile(
+    $enable-experimental-tile-contrast: true,
+    $enable-v12-tile-radio-icons: true
+  );
 }

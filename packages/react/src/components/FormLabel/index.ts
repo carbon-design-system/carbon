@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import FormLabel from './FormLabel';
+import FormLabel, { type FormLabelProps } from './FormLabel';
 
 export default FormLabel;
-export { FormLabel };
+export { FormLabel, type FormLabelProps };

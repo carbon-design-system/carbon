@@ -838,6 +838,10 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "link-inverse-visited",
+          "type": "color",
+        },
+        Object {
           "name": "link-visited",
           "type": "color",
         },

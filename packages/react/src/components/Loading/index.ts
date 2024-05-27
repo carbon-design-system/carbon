@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Loading from './Loading';
+import Loading, { type LoadingProps } from './Loading';
 
 export default Loading;
-export { Loading };
+export { Loading, type LoadingProps };

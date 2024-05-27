@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import TileGroup from './TileGroup';
+import TileGroup, { type TileGroupProps } from './TileGroup';
 
 export default TileGroup;
-export { TileGroup };
+export { TileGroup, type TileGroupProps };

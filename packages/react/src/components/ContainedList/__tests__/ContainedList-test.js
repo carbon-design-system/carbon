@@ -44,6 +44,7 @@ function TestComponent({ list, item }) {
 
 beforeEach(() => {
   // eslint-disable-next-line testing-library/no-render-in-lifecycle
+  jest.mock('../../../internal/deprecateFieldOnObject');
   wrapper = render(<TestComponent />);
 });
 

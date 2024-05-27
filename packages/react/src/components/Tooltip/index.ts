@@ -6,6 +6,6 @@
  */
 
 import { DefinitionTooltip } from './DefinitionTooltip';
-import { Tooltip } from './Tooltip';
+import { Tooltip, type TooltipProps } from './Tooltip';
 
-export { DefinitionTooltip, Tooltip };
+export { DefinitionTooltip, Tooltip, type TooltipProps };

@@ -300,6 +300,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   ) : (
     <View className={`${prefix}--icon-visibility-on`} />
   );
+
   const passwordVisibilityToggleClasses = classNames(
     `${prefix}--text-input--password__visibility__toggle`,
     `${prefix}--btn`,

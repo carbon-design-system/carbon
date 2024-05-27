@@ -17,7 +17,7 @@ type ColumnSpanPercent = '25%' | '50%' | '75%' | '100%';
 
 type ColumnSpanSimple = boolean | number | ColumnSpanPercent;
 
-interface ColumnSpanObject {
+export interface ColumnSpanObject {
   span?: ColumnSpanSimple;
 
   offset?: number;
@@ -29,7 +29,7 @@ interface ColumnSpanObject {
 
 export type ColumnSpan = ColumnSpanSimple | ColumnSpanObject;
 
-interface ColumnBaseProps {
+export interface ColumnBaseProps {
   /**
    * Pass in content that will be rendered within the `Column`
    */

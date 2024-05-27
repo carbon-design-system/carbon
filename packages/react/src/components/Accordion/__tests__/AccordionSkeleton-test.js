@@ -56,6 +56,14 @@ describe('AccordionSkeleton', () => {
         'cds--accordion__item--active'
       );
     });
+
+    it('should respect ordered prop', () => {
+      const { container } = render(<AccordionSkeleton ordered={true} />);
+      const ol = container.querySelector('ol');
+      expect(ol).toBeInTheDocument();
+      const ul = container.querySelector('ul');
+      expect(ul).not.toBeInTheDocument();
+    });
   });
 
   describe('behaves as expected', () => {

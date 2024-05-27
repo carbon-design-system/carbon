@@ -260,8 +260,9 @@ export const link = TokenGroup.create({
     'link-secondary',
     {
       state: 'visited',
-      name: 'link-visited',
+      name: 'link-inverse-visited',
     },
+    'link-visited',
     'link-inverse',
     'link-inverse-active',
     'link-inverse-hover',

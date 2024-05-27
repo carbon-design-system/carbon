@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Switch from './Switch';
+import Switch, { type SwitchProps } from './Switch';
 import IconSwitch from './IconSwitch';
 
 export default Switch;
-export { Switch, IconSwitch };
+export { Switch, IconSwitch, type SwitchProps };
