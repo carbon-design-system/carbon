@@ -30,8 +30,8 @@ class CDSmenuItemRadioGroup extends LitElement {
   /**
    * List of items in the radio group.
    */
-  @property()
-  items;
+  @property({ type: Array })
+  items = [];
 
   /**
    * Selected item in the radio group.
@@ -63,24 +63,20 @@ class CDSmenuItemRadioGroup extends LitElement {
       selectedItem,
       _handleClick: handleClick,
     } = this;
-    let parsedItems = JSON.parse(items);
     return html`
       <li class="${prefix}--menu-item-radio-group" role="none">
         <ul role="group" label="${label}">
-          ${parsedItems.map(
-            (item) =>
-              html`
-                <cds-menu-item
-                  label="${itemToString(item)}"
-                  role="menuitemradio"
-                  aria-checked="${item === selectedItem}"
-                  renderIcon="${item === selectedItem
-                    ? 'checkMark'
-                    : undefined}"
-                  @click="${(e) => {
-                    handleClick(item, e);
-                  }}"></cds-menu-item>
-              `
+          ${items.map(
+            (item) => html`
+              <cds-menu-item
+                label="${itemToString(item)}"
+                role="menuitemradio"
+                aria-checked="${item === selectedItem}"
+                renderIcon="${item === selectedItem ? 'checkMark' : undefined}"
+                @click="${(e) => {
+                  handleClick(item, e);
+                }}"></cds-menu-item>
+            `
           )}
         </ul>
       </li>

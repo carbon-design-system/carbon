@@ -3,7 +3,6 @@ import { prefix } from '../../globals/settings';
 import { property, state } from 'lit/decorators.js';
 import styles from './menu.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { classMap } from 'lit/directives/class-map.js';
 import { consume, provide } from '@lit/context';
@@ -88,13 +87,8 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   /**
    * Open value for the menu .
    */
-  @property({ type: String })
-  open;
-  /**
-   * Open value for the menu .
-   */
   @property({ type: Boolean })
-  isOpen = true;
+  open = true;
   /**
    * Active element in the DOM .
    */
@@ -146,14 +140,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   onClose?: () => void;
 
   updated(changedProperties) {
-    this.isOpen = this.open !== 'false';
-    if (changedProperties.has('isOpen') && this.isOpen) {
+    if (changedProperties.has('open') && this.open) {
       this._handleOpen();
     }
   }
   firstUpdated() {
     this.isRtl = this.direction === 'rtl';
-    this.isChild = Boolean(this.isChild);
     this.isRoot = this.context.isRoot;
     if (this.context.mode === 'basic' && !this.isRoot) {
       throw new Error(
@@ -176,13 +168,9 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   }
   render() {
     const {
-      isOpen,
+      open,
       menuAlignment,
       label,
-      x,
-      y,
-      isChild,
-      size,
       menuSize,
       position,
       _handleKeyDown: handleKeyDown,
@@ -193,7 +181,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       [`${prefix}--menu--${menuSize}`]: true,
       [`${prefix}--menu--box-shadow-top`]:
         menuAlignment && menuAlignment.slice(0, 3) === 'top',
-      [`${prefix}--menu--open`]: isOpen,
+      [`${prefix}--menu--open`]: open,
       [`${prefix}--menu--shown`]: position[0] >= 0 && position[1] >= 0,
       [`${prefix}--menu--with-icons`]: this.context.hasIcons,
     });
@@ -289,17 +277,6 @@ class CDSMenu extends HostListenerMixin(LitElement) {
 
   _notEmpty = (value: number | null | undefined) => {
     return value !== null && value !== undefined;
-  };
-  _xyStringToNumberConversion = (val) => {
-    let res;
-    if (val.includes(',')) {
-      res = val.split(',').map(function (item) {
-        return parseInt(item);
-      });
-    } else {
-      res = parseInt(val);
-    }
-    return res;
   };
   _fitValue = (range: number[], axis: 'x' | 'y') => {
     const { isRoot } = this.context;
@@ -405,13 +382,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       return [-1, -1];
     }
     return [
-      this._fitValue(ranges.x, 'x') ?? -1,
-      this._fitValue(ranges.y, 'y') ?? -1,
+      this._fitValue(ranges.x as number[], 'x') ?? -1,
+      this._fitValue(ranges.y as number[], 'y') ?? -1,
     ];
   };
   _handleOpen = () => {
-    this.x = this._xyStringToNumberConversion(String(this.x));
-    this.y = this._xyStringToNumberConversion(String(this.y));
+    const pos = this._calculatePosition();
     if (this.isRtl) {
       this.style.insetInlineStart = `initial`;
       this.style.insetInlineEnd = `${this.x[0]}px`;
@@ -454,12 +430,14 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       switch (item.tagName) {
         case 'CDS-MENU-ITEM-RADIO-GROUP': {
           let slotElements = item.shadowRoot?.querySelectorAll('cds-menu-item');
-          for (const entry of slotElements.entries()) {
-            activeItem = {
-              item: entry[1] as CDSmenuItem,
-              parent: item as HTMLElement,
-            };
-            this.activeitems = [...this.activeitems, activeItem];
+          if (slotElements?.length) {
+            for (const entry of slotElements.entries()) {
+              activeItem = {
+                item: entry[1] as CDSmenuItem,
+                parent: item as HTMLElement,
+              };
+              this.activeitems = [...this.activeitems, activeItem];
+            }
           }
           break;
         }

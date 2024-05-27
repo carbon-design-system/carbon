@@ -12,6 +12,7 @@ import './index';
 
 export const Default = {
   render: () => {
+    const itemlist = ['One', 'Two', 'Three'];
     return html`
       <cds-menu>
         <cds-menu-item label="Item 1" kind="danger"></cds-menu-item>
@@ -32,7 +33,7 @@ export const Default = {
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-radio-group
           label="samples"
-          items='["One", "Two", "Three"]'
+          .items="${itemlist}"
           selectedItem="One"></cds-menu-item-radio-group>
       </cds-menu>
     `;
