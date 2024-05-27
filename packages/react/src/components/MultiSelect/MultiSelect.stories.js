@@ -226,16 +226,24 @@ Playground.argTypes = {
 
 export const Default = () => {
   return (
-    <div style={{ width: 300 }}>
-      <MultiSelect
-        label="Multiselect Label"
-        id="carbon-multiselect-example"
-        titleText="Multiselect title"
-        helperText="This is helper text"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        selectionFeedback="top-after-reopen"
-      />
+    <div
+      style={{
+        width: 2000,
+        height: 2000,
+        display: 'flex',
+        placeItems: 'center',
+      }}>
+      <div style={{ width: 300 }}>
+        <MultiSelect
+          label="Multiselect Label"
+          id="carbon-multiselect-example"
+          titleText="Multiselect title"
+          helperText="This is helper text"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          selectionFeedback="top-after-reopen"
+        />
+      </div>
     </div>
   );
 };
@@ -259,16 +267,24 @@ export const WithInitialSelectedItems = () => {
 
 export const Filterable = (args) => {
   return (
-    <div style={{ width: 300 }}>
-      <FilterableMultiSelect
-        id="carbon-multiselect-example-3"
-        titleText="Multiselect title"
-        helperText="This is helper text"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        selectionFeedback="top-after-reopen"
-        {...args}
-      />
+    <div
+      style={{
+        width: 2000,
+        height: 2000,
+        display: 'flex',
+        placeItems: 'center',
+      }}>
+      <div style={{ width: 300 }}>
+        <FilterableMultiSelect
+          id="carbon-multiselect-example-3"
+          titleText="Multiselect title"
+          helperText="This is helper text"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          selectionFeedback="top-after-reopen"
+          {...args}
+        />
+      </div>
     </div>
   );
 };

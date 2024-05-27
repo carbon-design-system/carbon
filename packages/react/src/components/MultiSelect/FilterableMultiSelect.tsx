@@ -29,6 +29,7 @@ import React, {
   type FocusEvent,
   type KeyboardEvent,
   ReactElement,
+  useLayoutEffect,
 } from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import {
@@ -47,6 +48,12 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useSelection } from '../../internal/Selection';
+import {
+  useFloating,
+  flip,
+  size as floatingSize,
+  autoUpdate,
+} from '@floating-ui/react';
 
 const {
   InputBlur,
@@ -331,6 +338,37 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     onChange,
     selectedItems: selected,
   });
+
+  const { refs, floatingStyles, middlewareData } = useFloating({
+    placement: direction,
+
+    // The floating element is positioned relative to its nearest
+    // containing block (usually the viewport). It will in many cases also
+    // “break” the floating element out of a clipping ancestor.
+    // https://floating-ui.com/docs/misc#clipping
+    strategy: 'fixed',
+
+    // Middleware order matters, arrow should be last
+    middleware: [
+      flip({ crossAxis: false }),
+      floatingSize({
+        apply({ rects, elements }) {
+          Object.assign(elements.floating.style, {
+            width: `${rects.reference.width}px`,
+          });
+        },
+      }),
+    ],
+    whileElementsMounted: autoUpdate,
+  });
+
+  useLayoutEffect(() => {
+    Object.keys(floatingStyles).forEach((style) => {
+      if (refs.floating.current) {
+        refs.floating.current.style[style] = floatingStyles[style];
+      }
+    });
+  }, [floatingStyles, refs.floating, middlewareData, open]);
 
   const textInput = useRef<HTMLInputElement>(null);
   const filterableMultiSelectInstanceId = useId();
@@ -665,7 +703,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       },
     })
   );
-  const menuProps = getMenuProps({}, { suppressRefError: true });
+  const menuProps = getMenuProps({
+    ...getMenuProps({
+      ref: refs.setFloating,
+    }),
+  });
 
   const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {
     if (
@@ -713,7 +755,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         warnText={warnText}
         isOpen={isOpen}
         size={size}>
-        <div className={`${prefix}--list-box__field`}>
+        <div className={`${prefix}--list-box__field`} ref={refs.setReference}>
           {controlledSelectedItems.length > 0 && (
             // @ts-expect-error: It is expecting a non-required prop called: "onClearSelection"
             <ListBoxSelection
@@ -766,7 +808,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         </div>
         {normalizedSlug}
 
-        <ListBox.Menu {...menuProps}>
+        <ListBox.Menu {...menuProps} ref={refs.setFloating}>
           {isOpen
             ? sortedItems.map((item, index) => {
                 const isChecked =
