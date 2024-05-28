@@ -410,11 +410,4 @@
       margin-block-start: 0;
     }
 
-    .#{$prefix}--checkbox-group__validation-msg,
-    .#{$prefix}--form__helper-text {
-      position: absolute;
-      inset-block-end: -($spacing-02 + $spacing-05);
-      inset-inline-start: 0;
-    }
-  }
 }
