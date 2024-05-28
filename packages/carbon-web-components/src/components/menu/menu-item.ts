@@ -74,6 +74,11 @@ class CDSmenuItem extends LitElement {
   @property({ type: Boolean })
   submenuOpen = false;
   /**
+   * Whether the menu submen for an item is open or not.
+   */
+  @property({ type: Array })
+  submenuList: HTMLLIElement[] = [];
+  /**
    * Document direction.
    */
   @property({ type: String })
@@ -116,6 +121,7 @@ class CDSmenuItem extends LitElement {
     setTimeout(() => {
       this.childElements = Object.values(this.children);
     }, 100);
+    this._registerSubMenuItems();
   }
   render() {
     const {
@@ -223,6 +229,21 @@ class CDSmenuItem extends LitElement {
     }
     this.submenuOpen = true;
   };
+  _registerSubMenuItems = () => {
+    const observer = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          this.submenuList = this.childElements?.map((item) => {
+            return item.shadowRoot?.querySelector('li');
+          });
+        }
+      }
+    });
+    observer.observe(this.shadowRoot as Node, {
+      childList: true,
+      subtree: true,
+    });
+  };
   _closeSubmenu = () => {
     this.boundaries = {
       x: -1,
@@ -237,19 +258,9 @@ class CDSmenuItem extends LitElement {
     if (this.hasChildren && e.key === 'ArrowRight') {
       this._openSubmenu();
       setTimeout(() => {
-        let subMenuItems = this.shadowRoot
-          ?.querySelector('cds-menu')
-          ?.shadowRoot?.querySelector('slot')
-          ?.assignedElements();
-        if (subMenuItems?.length && subMenuItems?.length > 0) {
-          (
-            subMenuItems[0].shadowRoot?.querySelector(
-              '.cds--menu-item'
-            ) as HTMLLIElement
-          ).focus();
-        }
-        e.stopPropagation();
-      }, 100);
+        this.submenuList[0].focus();
+      });
+      e.stopPropagation();
     }
     if (e.key === 'Enter' || e.key === 'Space') {
       this._handleClick(e);
