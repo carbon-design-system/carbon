@@ -138,7 +138,7 @@ CheckboxGroup.propTypes = {
   legendText: PropTypes.node.isRequired,
 
   /**
-   * Provide where checkbox should be placed
+   * Provide the orientation for how the checkbox should be displayed
    */
   orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
