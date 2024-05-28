@@ -43,6 +43,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
+import { useFloating, flip, autoUpdate } from '@floating-ui/react';
 
 const {
   InputBlur,
@@ -342,6 +343,27 @@ const ComboBox = forwardRef(
       slug,
       ...rest
     } = props;
+    const { refs, floatingStyles } = useFloating({
+      strategy: 'fixed',
+      middleware: [
+        flip({
+          fallbackAxisSideDirection: 'none',
+        }),
+      ],
+      whileElementsMounted: autoUpdate,
+    });
+    const parentWidth = (refs?.reference?.current as HTMLElement)?.clientWidth;
+
+    useEffect(() => {
+      Object.keys(floatingStyles).forEach((style) => {
+        if (refs.floating.current) {
+          refs.floating.current.style[style] = floatingStyles[style];
+        }
+      });
+      if (parentWidth && refs.floating.current) {
+        refs.floating.current.style.width = parentWidth + 'px';
+      }
+    }, [floatingStyles, refs.floating, parentWidth]);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
@@ -630,6 +652,7 @@ const ComboBox = forwardRef(
           light={light}
           size={size}
           warn={warn}
+          ref={refs.setReference}
           warnText={warnText}
           warnTextId={warnTextId}>
           <div className={`${prefix}--list-box__field`}>
@@ -739,7 +762,8 @@ const ComboBox = forwardRef(
           <ListBox.Menu
             {...getMenuProps({
               'aria-label': deprecatedAriaLabel || ariaLabel,
-            })}>
+            })}
+            ref={mergeRefs(getMenuProps().ref, refs.setFloating)}>
             {isOpen
               ? filterItems(items, itemToString, inputValue).map(
                   (item, index) => {
