@@ -152,6 +152,11 @@ export interface ComboBoxProps<ItemType>
   ariaLabel?: string;
 
   /**
+   * Will auto-align the dropdown on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlign?: boolean;
+
+  /**
    * An optional className to add to the container node
    */
   className?: string;
@@ -314,6 +319,7 @@ const ComboBox = forwardRef(
     const {
       ['aria-label']: ariaLabel = 'Choose an item',
       ariaLabel: deprecatedAriaLabel,
+      autoAlign = false,
       className: containerClassName,
       direction = 'bottom',
       disabled = false,
@@ -343,27 +349,33 @@ const ComboBox = forwardRef(
       slug,
       ...rest
     } = props;
-    const { refs, floatingStyles } = useFloating({
-      strategy: 'fixed',
-      middleware: [
-        flip({
-          fallbackAxisSideDirection: 'none',
-        }),
-      ],
-      whileElementsMounted: autoUpdate,
-    });
+    const { refs, floatingStyles } = useFloating(
+      autoAlign
+        ? {
+            strategy: 'fixed',
+            middleware: [
+              flip({
+                fallbackAxisSideDirection: 'none',
+              }),
+            ],
+            whileElementsMounted: autoUpdate,
+          }
+        : {}
+    );
     const parentWidth = (refs?.reference?.current as HTMLElement)?.clientWidth;
 
     useEffect(() => {
-      Object.keys(floatingStyles).forEach((style) => {
-        if (refs.floating.current) {
-          refs.floating.current.style[style] = floatingStyles[style];
+      if (autoAlign) {
+        Object.keys(floatingStyles).forEach((style) => {
+          if (refs.floating.current) {
+            refs.floating.current.style[style] = floatingStyles[style];
+          }
+        });
+        if (parentWidth && refs.floating.current) {
+          refs.floating.current.style.width = parentWidth + 'px';
         }
-      });
-      if (parentWidth && refs.floating.current) {
-        refs.floating.current.style.width = parentWidth + 'px';
       }
-    }, [floatingStyles, refs.floating, parentWidth]);
+    }, [autoAlign, floatingStyles, refs.floating, parentWidth]);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
@@ -845,6 +857,10 @@ ComboBox.propTypes = {
     PropTypes.string,
     'This prop syntax has been deprecated. Please use the new `aria-label`.'
   ),
+  /**
+   * Will auto-align the dropdown on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * An optional className to add to the container node
