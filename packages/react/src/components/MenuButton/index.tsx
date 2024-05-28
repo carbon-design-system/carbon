@@ -100,6 +100,19 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
     const id = useId('MenuButton');
     const prefix = usePrefix();
     const triggerRef = useRef<HTMLDivElement>(null);
+    const middlewares = [flip({ crossAxis: false })];
+
+    if (menuAlignment === 'bottom' || menuAlignment === 'top') {
+      middlewares.push(
+        floatingSize({
+          apply({ rects, elements }) {
+            Object.assign(elements.floating.style, {
+              width: `${rects.reference.width}px`,
+            });
+          },
+        })
+      );
+    }
     const { refs, floatingStyles, placement, middlewareData } = useFloating({
       placement: menuAlignment,
 
@@ -110,16 +123,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       strategy: 'fixed',
 
       // Middleware order matters, arrow should be last
-      middleware: [
-        flip({ crossAxis: false }),
-        floatingSize({
-          apply({ rects, elements }) {
-            Object.assign(elements.floating.style, {
-              width: `${rects.reference.width}px`,
-            });
-          },
-        }),
-      ],
+      middleware: middlewares,
       whileElementsMounted: autoUpdate,
     });
     const ref = mergeRefs(forwardRef, triggerRef);
