@@ -7,7 +7,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '@carbon/web-components/es/components/side-panel/index.js';
+import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/textarea/index.js';
-import '@carbon/web-components/es/components/button/index.js';
-import '@carbon/web-components/es/components/side-panel/index.js';
+import '@carbon/web-components/es/components/slug/index.js';
+import '@carbon/web-components/es/components/tabs/index.js';

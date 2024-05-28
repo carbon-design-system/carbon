@@ -25,6 +25,7 @@ import ArrowLeft16 from '@carbon/icons/lib/arrow--left/16';
 import Close20 from '@carbon/icons/lib/close/20';
 import { moderate02 } from '@carbon/motion';
 import '../button/index';
+import '../icon-button/index';
 import '../layer/index';
 import Handle from '../../globals/internal/handle';
 import '../button/button-set-base';
