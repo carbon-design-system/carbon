@@ -388,6 +388,7 @@
 
   // horizontal checkbox group
   .#{$prefix}--checkbox-group--horizontal {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -400,9 +401,17 @@
         margin-inline-end: $spacing-05;
       }
     }
-
+    .#{$prefix}--checkbox-label-text {
+      padding-inline-start: $spacing-03;
+    }
     .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
       margin-block-start: 0;
+    }
+    .#{$prefix}--checkbox-group__validation-msg,
+    .#{$prefix}--form__helper-text {
+      position: absolute;
+      inset-block-end: -($spacing-02 + $spacing-05);
+      inset-inline-start: 0;
     }
   }
 }
