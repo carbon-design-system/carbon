@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.9.0-rc.0...@carbon/web-components@2.10.0-rc.0) (2024-05-28)
+
+
+### Bug Fixes
+
+* **side-panel:** import missing icon-button and codesandbox example ([#11821](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11821)) ([3c51597](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/3c51597f48ffd6a18201f56fe740322b9e15127c))
+* **tearsheet:** tearsheet styles and codesandbox example ([#11792](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11792)) ([f0ddd6e](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/f0ddd6e22c5298e8c612ae113301dc4e2b5292f2))
+
+
+
+
+
 # [2.9.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.9.0-rc.0...@carbon/web-components@2.9.0) (2024-05-16)
 
 **Note:** Version bump only for package @carbon/web-components
