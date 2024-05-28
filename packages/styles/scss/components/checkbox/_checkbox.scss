@@ -390,7 +390,7 @@
   .#{$prefix}--checkbox-group--horizontal {
     position: relative;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: flex-start;
 
     .#{$prefix}--form-item {
@@ -409,5 +409,5 @@
     .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
       margin-block-start: 0;
     }
-}
+  }
 }
