@@ -9898,7 +9898,7 @@ __metadata:
     cross-spawn: "npm:^7.0.0"
     doctoc: "npm:^2.0.0"
     eslint: "npm:^8.40.0"
-    eslint-plugin-playwright: "npm:^0.22.1"
+    eslint-plugin-playwright: "npm:^1.0.0"
     fs-extra: "npm:^11.0.0"
     glob: "npm:^10.0.0"
     husky: "npm:^9.0.0"
@@ -13334,18 +13334,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-playwright@npm:^0.22.1":
-  version: 0.22.1
-  resolution: "eslint-plugin-playwright@npm:0.22.1"
+"eslint-plugin-playwright@npm:^1.0.0":
+  version: 1.6.2
+  resolution: "eslint-plugin-playwright@npm:1.6.2"
   dependencies:
     globals: "npm:^13.23.0"
   peerDependencies:
-    eslint: ">=7"
+    eslint: ">=8.40.0"
     eslint-plugin-jest: ">=25"
   peerDependenciesMeta:
     eslint-plugin-jest:
       optional: true
-  checksum: 10/4833fe0c7b8bb1da9ecdff085011fbfb46b595b284453049c16be3f22fe329b05453f8ad57bcc001cda7495f96573a3f7df77d4e34b7d8a0f96d46f884ad460c
+  checksum: 10/cd3ed38a768f91f37894b8db7d0c6b87d26d49bc548a9fa4f1a1d20f0386570486c16925033938c8f0a56c412409e86f0b6c29832f308dfe13b3237af40d94f9
   languageName: node
   linkType: hard
 
