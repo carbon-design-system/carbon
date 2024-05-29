@@ -4,6 +4,7 @@
   "version": "1.17.0",
   "license": "Apache-2.0",
   "main": "index.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/carbon.git",
@@ -39,7 +40,7 @@
     "stylelint-use-logical": "^2.1.0"
   },
   "devDependencies": {
-    "prettier": "^2.8.8",
-    "stylelint": "^15.0.0"
+    "prettier": "^3.2.5",
+    "stylelint": "^16.0.0"
   }
 }

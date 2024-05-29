@@ -7,7 +7,7 @@
 
 'use strict';
 
-module.exports = {
+export default {
   plugins: ['@double-great/stylelint-a11y'],
   rules: {
     'a11y/media-prefers-reduced-motion': true,
