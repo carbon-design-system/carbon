@@ -622,9 +622,9 @@ Example:
 #### Layout constraints
 
 Naturally, with component-based development there will be scenarios where you
-want to re-use an exising component within a new one. These two components might
-not always share the same constraints (default, min, max) though. In order to
-control the child component's constraints but still participate in layout
+want to re-use an existing component within a new one. These two components
+might not always share the same constraints (default, min, max) though. In order
+to control the child component's constraints but still participate in layout
 contexts, you can use some utility classes.
 
 Let's assume `my-component` supports sizes from `sm` to `lg` with a default of
@@ -635,7 +635,7 @@ Let's assume `my-component` supports sizes from `sm` to `lg` with a default of
   ...
   <div
     class="cds--layout-constraint--size__default-md cds--layout-constraint--size__min-sm cds--layout-constraint--size__max-lg">
-    <!-- The button component will now be constrainted to the minimum size of 'sm', the maximum of 'lg' and default to 'md' -->
+    <!-- The button component will now be constrained to the minimum size of 'sm', the maximum of 'lg' and default to 'md' -->
     <div class="button">...</div>
   </div>
 </div>
