@@ -14,6 +14,8 @@ import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import Checkmark16 from '@carbon/icons/lib/checkmark/16';
+import CaretLeft16 from '@carbon/icons/lib/caret--left/16';
+import CaretRight16 from '@carbon/icons/lib/caret--right/16';
 import { consume, provide } from '@lit/context';
 import { MenuContext } from './menu-context';
 
@@ -162,9 +164,14 @@ class CDSmenuItem extends LitElement {
           ${renderIcon ? iconRender() : undefined}
         </div>
         <div class="${prefix}--menu-item__label">${label}</div>
+        ${shortcut && !hasChildren && html `
         <div class="${prefix}--menu-item__shortcut">${shortcut}</div>
+        `}
         ${hasChildren
           ? html`
+          <div class="{${prefix}--menu-item__shortcut">
+              ${this.isRtl ? CaretLeft16() : CaretRight16()}
+            </div>
               <cds-menu
                 .isChild="${hasChildren}"
                 label="${label}"

@@ -20,7 +20,7 @@ export type StateType = {
 export const menuDefaultState: StateType = {
   isRoot: true,
   mode: 'full',
-  hasIcons: false,
+  hasIcons: true,
   size: null,
   items: [],
   requestCloseRoot: () => {},

@@ -12,29 +12,31 @@ import './index';
 
 export const Default = {
   render: () => {
-    const itemlist = ['One', 'Two', 'Three'];
+    const itemlist = ['None', 'Overline', 'Line-through', 'Underline'];
     return html`
       <cds-menu>
-        <cds-menu-item label="Item 1" kind="danger"></cds-menu-item>
-        <cds-menu-item label="Item 2" shortcut="⌘X"></cds-menu-item>
-        <cds-menu-item label="Item 3" shortcut="⌘V">
-          <cds-menu-item label="Sub 1"></cds-menu-item>
-          <cds-menu-item label="Sub 2"></cds-menu-item>
-          <cds-menu-item label="Sub 3"></cds-menu-item>
+        <cds-menu-item label="Share with">
+          <cds-menu-item label="None"></cds-menu-item>
+          <cds-menu-item label="Product team"></cds-menu-item>
+          <cds-menu-item label="Organization"></cds-menu-item>
+          <cds-menu-item label="Company"></cds-menu-item>
         </cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
-        <cds-menu-item label="Item 4" disabled></cds-menu-item>
-        <cds-menu-item label="Item 5"></cds-menu-item>
+        <cds-menu-item label="Cut" shortcut="⌘X"></cds-menu-item>
+        <cds-menu-item label="Copy" shortcut="⌘C"></cds-menu-item>
+        <cds-menu-item label="Paste" shortcut="⌘V" disabled></cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-group>
-          <cds-menu-item-selectable label="Item 6"></cds-menu-item-selectable>
-          <cds-menu-item-selectable label="Item 7"></cds-menu-item-selectable>
+          <cds-menu-item-selectable label="Bold" selected></cds-menu-item-selectable>
+          <cds-menu-item-selectable label="Italic"></cds-menu-item-selectable>
         </cds-menu-item-group>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-radio-group
           label="samples"
           .items="${itemlist}"
-          selectedItem="One"></cds-menu-item-radio-group>
+          selectedItem="None"></cds-menu-item-radio-group>
+        <cds-menu-item-divider></cds-menu-item-divider>
+        <cds-menu-item label="Delete" shortcut="⌫" kind="danger"></cds-menu-item>
       </cds-menu>
     `;
   },
