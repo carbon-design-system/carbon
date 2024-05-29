@@ -153,7 +153,7 @@ export interface SliderProps
   disabled?: boolean;
 
   /**
-   * The callback to format the label associated with the minimum/maximum value.
+   * The callback to format the label associated with the minimum/maximum value and the value tooltip when hideTextInput is true.
    */
   formatLabel?: (value: number, label: string | undefined) => string;
 
@@ -1521,7 +1521,7 @@ class Slider extends PureComponent<SliderProps> {
                   <ThumbWrapper
                     hasTooltip={hideTextInput}
                     className={lowerThumbWrapperClasses}
-                    label={`${value}`}
+                    label={`${formatLabel(value, '')}`}
                     align="top"
                     {...lowerThumbWrapperProps}>
                     <div
@@ -1555,7 +1555,7 @@ class Slider extends PureComponent<SliderProps> {
                     <ThumbWrapper
                       hasTooltip={hideTextInput}
                       className={upperThumbWrapperClasses}
-                      label={`${valueUpper}`}
+                      label={`${formatLabel(valueUpper || 0, '')}`}
                       align="top"
                       {...upperThumbWrapperProps}>
                       <div
