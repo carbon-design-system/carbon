@@ -26,6 +26,7 @@ function CheckboxGroup({
   warn,
   warnText,
   slug,
+  orientation = 'vertical',
   ...rest
 }) {
   const prefix = usePrefix();
@@ -46,6 +47,7 @@ function CheckboxGroup({
   ) : null;
 
   const fieldsetClasses = cx(`${prefix}--checkbox-group`, className, {
+    [`${prefix}--checkbox-group--${orientation}`]: orientation === 'horizontal',
     [`${prefix}--checkbox-group--readonly`]: readOnly,
     [`${prefix}--checkbox-group--invalid`]: !readOnly && invalid,
     [`${prefix}--checkbox-group--warning`]: showWarning,
@@ -67,6 +69,7 @@ function CheckboxGroup({
       data-invalid={invalid ? true : undefined}
       aria-labelledby={rest['aria-labelledby'] || legendId}
       aria-readonly={readOnly}
+      orientation="vertical"
       aria-describedby={!invalid && !warn && helper ? helperId : undefined}
       {...rest}>
       <legend
@@ -133,6 +136,11 @@ CheckboxGroup.propTypes = {
    * Provide the text to be rendered inside of the fieldset <legend>
    */
   legendText: PropTypes.node.isRequired,
+
+  /**
+   * Provide the orientation for how the checkbox should be displayed
+   */
+  orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
   /**
    * Whether the CheckboxGroup should be read-only
