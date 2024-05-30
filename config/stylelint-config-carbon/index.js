@@ -17,7 +17,6 @@ export default {
     './rules/limit-language-features',
     './rules/stylistic-issues',
     './plugins/a11y',
-    './plugins/prettier',
     './plugins/scss',
   ],
 };
