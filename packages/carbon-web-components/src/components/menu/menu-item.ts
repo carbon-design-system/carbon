@@ -186,7 +186,7 @@ class CDSmenuItem extends LitElement {
         html` <div class="${prefix}--menu-item__shortcut">${shortcut}</div> `}
         ${hasChildren
           ? html`
-              <div class="{${prefix}--menu-item__shortcut">
+              <div class="${prefix}--menu-item__shortcut">
                 ${isRtl ? CaretLeft16() : CaretRight16()}
               </div>
               <cds-menu
