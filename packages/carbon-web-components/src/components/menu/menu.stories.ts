@@ -13,13 +13,14 @@ import './index';
 export const Default = {
   render: () => {
     const itemlist = ['None', 'Overline', 'Line-through', 'Underline'];
+    const subitemlist = ['None', 'Product team', 'Organization', 'Company'];
     return html`
       <cds-menu>
         <cds-menu-item label="Share with">
-          <cds-menu-item label="None"></cds-menu-item>
-          <cds-menu-item label="Product team"></cds-menu-item>
-          <cds-menu-item label="Organization"></cds-menu-item>
-          <cds-menu-item label="Company"></cds-menu-item>
+          <cds-menu-item-radio-group
+            label="Share with list"
+            .items="${subitemlist}"
+            selectedItem="None"></cds-menu-item-radio-group>
         </cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item label="Cut" shortcut="⌘X"></cds-menu-item>
@@ -27,7 +28,9 @@ export const Default = {
         <cds-menu-item label="Paste" shortcut="⌘V" disabled></cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-group>
-          <cds-menu-item-selectable label="Bold" selected></cds-menu-item-selectable>
+          <cds-menu-item-selectable
+            label="Bold"
+            selected></cds-menu-item-selectable>
           <cds-menu-item-selectable label="Italic"></cds-menu-item-selectable>
         </cds-menu-item-group>
         <cds-menu-item-divider></cds-menu-item-divider>
@@ -36,7 +39,10 @@ export const Default = {
           .items="${itemlist}"
           selectedItem="None"></cds-menu-item-radio-group>
         <cds-menu-item-divider></cds-menu-item-divider>
-        <cds-menu-item label="Delete" shortcut="⌫" kind="danger"></cds-menu-item>
+        <cds-menu-item
+          label="Delete"
+          shortcut="⌫"
+          kind="danger"></cds-menu-item>
       </cds-menu>
     `;
   },

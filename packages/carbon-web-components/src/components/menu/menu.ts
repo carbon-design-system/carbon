@@ -226,7 +226,16 @@ class CDSMenu extends HostListenerMixin(LitElement) {
             activeItem.item.shadowRoot?.querySelector('.cds--menu-item')
           );
         } else {
-          return activeItem.parent.contains(document.activeElement);
+          let shadowRootActiveEl =
+            this._findActiveElementInShadowRoot(document);
+          if (activeItem.parent.tagName === 'CDS-MENU-ITEM-SELECTABLE') {
+            return (
+              shadowRootActiveEl ===
+              activeItem.item.shadowRoot?.querySelector('.cds--menu-item')
+            );
+          } else {
+            return activeItem.parent.contains(document.activeElement);
+          }
         }
       });
     } else {
