@@ -241,9 +241,6 @@ class CDSmenuItem extends LitElement {
       };
     }
     this.submenuOpen = true;
-    setTimeout(() => {
-      this.submenuEntry.focus();
-    });
   };
   _registerSubMenuItems = () => {
     const observer = new MutationObserver((mutationsList) => {
@@ -296,6 +293,9 @@ class CDSmenuItem extends LitElement {
   _handleKeyDown = (e: KeyboardEvent) => {
     if (this.hasChildren && e.key === 'ArrowRight') {
       this._openSubmenu();
+      setTimeout(() => {
+        this.submenuEntry.focus();
+      });
       e.stopPropagation();
     }
     if (e.key === 'Enter' || e.key === 'Space') {
