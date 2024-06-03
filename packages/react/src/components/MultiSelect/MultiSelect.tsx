@@ -177,7 +177,7 @@ export interface MultiSelectProps<ItemType>
   downshiftProps?: Partial<UseSelectProps<ItemType>>;
 
   /**
-   * to Show/Hide All option
+   * experimental prop to Show/Hide All option
    */
   hasSelectAll?: boolean;
 
@@ -868,7 +868,7 @@ MultiSelect.propTypes = {
   downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
 
   /**
-   * to Show/Hide All option
+   * experimental prop to Show/Hide All option
    */
   hasSelectAll: PropTypes.bool,
 
