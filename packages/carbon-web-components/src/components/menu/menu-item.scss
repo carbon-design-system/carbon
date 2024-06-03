@@ -8,6 +8,7 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/motion' as *;
@@ -16,6 +17,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 
 .#{$prefix}--menu-item {
+  @include type-style('body-short-01');
   display: grid;
   align-items: center;
   block-size: 2rem;
@@ -61,12 +63,34 @@ $supported-sizes: (
   white-space: nowrap;
 }
 
+.#{$prefix}--menu-item__icon {
+  display: none;
+}
+
+.#{$prefix}--menu--with-icons .#{$prefix}--menu-item__icon {
+  display: flex;
+}
+
 .#{$prefix}--menu-item__shortcut {
   display: flex;
 }
+
 .#{$prefix}--menu-item__icon {
   display: var(--child-icon-property, none);
 }
+
+.#{$prefix}--menu--with-icons > .#{$prefix}--menu-item,
+.#{$prefix}--menu--with-icons
+  > .#{$prefix}--menu-item-group
+  > ul
+  > .#{$prefix}--menu-item,
+.#{$prefix}--menu--with-icons
+  > .#{$prefix}--menu-item-radio-group
+  > ul
+  > .#{$prefix}--menu-item {
+  grid-template-columns: 1rem 1fr max-content;
+}
+
 .#{$prefix}--menu-item--disabled {
   color: $text-disabled;
   cursor: not-allowed;
@@ -95,6 +119,8 @@ $supported-sizes: (
 .#{$prefix}--menu-item-radio-group > ul {
   @include component-reset;
 }
+.#{$prefix}--menu-item,
+.#{$prefix}--menu-item-radio-group> ul > .#{$prefix}--menu-item,
 .#{$prefix}--menu-item-group > ul > .#{$prefix}--menu-item {
   grid-template-columns: var(--child-grid-template-columns, 1fr max-content);
 }
