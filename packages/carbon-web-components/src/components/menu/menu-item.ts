@@ -58,8 +58,8 @@ class CDSmenuItem extends LitElement {
   /**
    * ICON type to be rendered for the menu item.
    */
-  @property({ type: String })
-  renderIcon;
+  @property()
+  renderIcon?: () => void;
   /**
    * Disabled property for the menu item.
    */
@@ -79,7 +79,12 @@ class CDSmenuItem extends LitElement {
    * Whether the menu submen for an item is open or not.
    */
   @property({ type: Array })
-  submenuList: HTMLLIElement[] = [];
+  submenuList;
+  /**
+   * Entrypoint.
+   */
+  @property()
+  submenuEntry;
   /**
    * Document direction.
    */
@@ -114,6 +119,18 @@ class CDSmenuItem extends LitElement {
     x: number | [number, number];
     y: number | [number, number];
   } = { x: -1, y: -1 };
+  /**
+   * Checks if document direction is rtl.
+   */
+  @property()
+  onKeyDown?: (e: KeyboardEvent) => void;
+
+  /**
+   * Provide an optional function to be called when the MenuItem is clicked.
+   */
+  @property()
+  onClick?: (event: KeyboardEvent | MouseEvent) => void;
+
   firstUpdated() {
     this.hasChildren = this.childNodes.length > 0;
     this.isDisabled = this.disabled && !this.hasChildren;
@@ -130,7 +147,6 @@ class CDSmenuItem extends LitElement {
       label,
       shortcut,
       renderIcon,
-      _iconRender: iconRender,
       isDisabled,
       hasChildren,
       submenuOpen,
@@ -142,6 +158,7 @@ class CDSmenuItem extends LitElement {
       isDanger,
       boundaries,
       childElements,
+      isRtl,
     } = this;
     const menuItemClasses = classMap({
       [`${prefix}--menu-item`]: true,
@@ -161,17 +178,17 @@ class CDSmenuItem extends LitElement {
         @mouseleave="${hasChildren ? handleMouseLeave : undefined}"
         @keydown="${handleKeyDown}">
         <div class="${prefix}--menu-item__icon">
-          ${renderIcon ? iconRender() : undefined}
+          ${renderIcon ? renderIcon() : html``}
         </div>
         <div class="${prefix}--menu-item__label">${label}</div>
-        ${shortcut && !hasChildren && html `
-        <div class="${prefix}--menu-item__shortcut">${shortcut}</div>
-        `}
+        ${shortcut &&
+        !hasChildren &&
+        html` <div class="${prefix}--menu-item__shortcut">${shortcut}</div> `}
         ${hasChildren
           ? html`
-          <div class="{${prefix}--menu-item__shortcut">
-              ${this.isRtl ? CaretLeft16() : CaretRight16()}
-            </div>
+              <div class="{${prefix}--menu-item__shortcut">
+                ${isRtl ? CaretLeft16() : CaretRight16()}
+              </div>
               <cds-menu
                 .isChild="${hasChildren}"
                 label="${label}"
@@ -187,24 +204,13 @@ class CDSmenuItem extends LitElement {
     `;
   }
 
-  _iconRender = () => {
-    if (this.renderIcon) {
-      let iconRendered;
-      switch (this.renderIcon) {
-        case 'checkMark':
-          iconRendered = Checkmark16();
-          break;
-      }
-      return iconRendered;
-    }
-  };
   _handleClick = (e: MouseEvent | KeyboardEvent): void => {
     if (!this.isDisabled) {
       if (this.hasChildren) {
         this._openSubmenu();
       } else {
-        if (this.onclick) {
-          this.onclick(e);
+        if (this.onClick) {
+          this.onClick(e);
         }
       }
     }
@@ -235,14 +241,40 @@ class CDSmenuItem extends LitElement {
       };
     }
     this.submenuOpen = true;
+    setTimeout(() => {
+      this.submenuEntry.focus();
+    });
   };
   _registerSubMenuItems = () => {
     const observer = new MutationObserver((mutationsList) => {
       for (const mutation of mutationsList) {
         if (mutation.type === 'childList') {
-          this.submenuList = this.childElements?.map((item) => {
-            return item.shadowRoot?.querySelector('li');
-          });
+          const item = this.childElements?.length && this.childElements[0];
+          if (item) {
+            switch (item.tagName) {
+              case 'CDS-MENU-ITEM-RADIO-GROUP':
+                this.submenuEntry = item.shadowRoot
+                  ?.querySelector('cds-menu-item')
+                  ?.shadowRoot?.querySelector('.cds--menu-item');
+                break;
+              case 'CDS-MENU-ITEM-GROUP': {
+                const slotElements = item.shadowRoot
+                  ?.querySelector('slot')
+                  ?.assignedElements();
+                const firstElement =
+                  slotElements?.length &&
+                  slotElements[0].shadowRoot?.querySelector('cds-menu-item');
+                this.submenuEntry =
+                  firstElement &&
+                  firstElement.shadowRoot?.querySelector('.cds--menu-item');
+                break;
+              }
+              case 'CDS-MENU-ITEM':
+                this.submenuEntry =
+                  item.shadowRoot?.querySelector('.cds--menu-item');
+                break;
+            }
+          }
         }
       }
     });
@@ -264,13 +296,13 @@ class CDSmenuItem extends LitElement {
   _handleKeyDown = (e: KeyboardEvent) => {
     if (this.hasChildren && e.key === 'ArrowRight') {
       this._openSubmenu();
-      setTimeout(() => {
-        this.submenuList[0].focus();
-      });
       e.stopPropagation();
     }
     if (e.key === 'Enter' || e.key === 'Space') {
       this._handleClick(e);
+    }
+    if (this.onKeyDown) {
+      this.onKeyDown(e);
     }
   };
 
