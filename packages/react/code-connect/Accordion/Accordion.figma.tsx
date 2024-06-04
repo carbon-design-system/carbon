@@ -13,7 +13,13 @@ figma.connect(
   Accordion,
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=2490-17019&mode=design&t=0hF8pirV0i9mofd1-4',
   {
-    props: { children: figma.children(['Accordion item']) },
+    props: {
+      // missing props, set on Accordion item within Figma
+      // size
+      // isFlush
+      // align
+      children: figma.children(['Accordion item']),
+    },
     example: ({ children }) => (
       // Disclaimer: Code Connect is currently in beta and integration with Carbon
       // React is in an exploratory phase. Code sample below may be incomplete.
