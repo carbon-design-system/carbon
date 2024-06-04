@@ -450,7 +450,7 @@ function TabList({
         setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
       }
     }
-  }, [scrollLeft, children, dismissable]);
+  }, [scrollLeft, children, dismissable, isScrollable]);
 
   useEffectOnce(() => {
     if (tabs.current[selectedIndex]?.disabled) {
