@@ -24,7 +24,7 @@ $css--plex: true !default;
   color: $text-secondary;
   column-gap: $spacing-03;
   cursor: pointer;
-  grid-template-columns: var(--child-grid-template-columns, 1fr max-content);
+  grid-template-columns: 1fr max-content;
   padding-inline: $spacing-05;
   transition: background-color $duration-fast-01 motion(standard, productive);
   &:focus {
@@ -120,7 +120,8 @@ $supported-sizes: (
   @include component-reset;
 }
 .#{$prefix}--menu-item,
-.#{$prefix}--menu-item-radio-group> ul > .#{$prefix}--menu-item,
+.#{$prefix}--menu-item-radio-group > ul > .#{$prefix}--menu-item,
 .#{$prefix}--menu-item-group > ul > .#{$prefix}--menu-item {
-  grid-template-columns: var(--child-grid-template-columns, 1fr max-content);
+  // grid-template-columns: var(--child-grid-template-columns, 1fr max-content);
+  grid-template-columns: 1rem 1fr max-content;
 }
