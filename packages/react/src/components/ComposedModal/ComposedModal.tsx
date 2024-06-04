@@ -289,7 +289,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
       const target = evt.target as Node;
-      evt.stopPropagation();
+      //  evt.stopPropagation();
       if (
         !preventCloseOnClickOutside &&
         !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&

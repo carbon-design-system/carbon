@@ -16,6 +16,8 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import Button from '../Button';
+import DatePicker from '../DatePicker';
+import DatePickerInput from '../DatePickerInput';
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -60,6 +62,15 @@ export const Default = () => {
             placeholder="e.g. github.com"
             style={{ marginBottom: '1rem' }}
           />
+          <DatePicker datePickerType="single">
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              id={`date-picker-single`}
+              size="md"
+            />
+          </DatePicker>
+
           <Select id="select-1" defaultValue="us-south" labelText="Region">
             <SelectItem value="us-south" text="US South" />
             <SelectItem value="us-east" text="US East" />
@@ -330,6 +341,20 @@ export const WithInlineLoading = () => {
             placeholder="e.g. github.com"
             style={{ marginBottom: '1rem' }}
           />
+          <DatePicker datePickerType="range">
+            <DatePickerInput
+              id="outside-date-picker-input-id-start"
+              placeholder="mm/dd/yyyy"
+              labelText="Start date"
+              size="md"
+            />
+            <DatePickerInput
+              id="outside-date-picker-input-id-finish"
+              placeholder="mm/dd/yyyy"
+              labelText="End date"
+              size="md"
+            />
+          </DatePicker>
           <Select id="select-1" defaultValue="us-south" labelText="Region">
             <SelectItem value="us-south" text="US South" />
             <SelectItem value="us-east" text="US East" />
