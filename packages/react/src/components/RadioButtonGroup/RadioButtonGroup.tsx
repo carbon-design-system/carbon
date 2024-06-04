@@ -167,7 +167,11 @@ const RadioButtonGroup = React.forwardRef(
 
     function getRadioButtons() {
       const mappedChildren = React.Children.map(children, (radioButton) => {
-        const { value } = (radioButton as ReactElement)?.props ?? undefined;
+        if (!(radioButton as ReactElement)?.props) {
+          // Ignore null, undefined, or non-ReactElement children
+          return radioButton;
+        }
+        const { value } = (radioButton as ReactElement).props;
 
         const newProps = {
           name: name,
@@ -181,9 +185,7 @@ const RadioButtonGroup = React.forwardRef(
         if (!selected && (radioButton as ReactElement)?.props.checked) {
           newProps.checked = true;
         }
-        if (radioButton) {
-          return React.cloneElement(radioButton as ReactElement, newProps);
-        }
+        return React.cloneElement(radioButton as ReactElement, newProps);
       });
 
       return mappedChildren;
