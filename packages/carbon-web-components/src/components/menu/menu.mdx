@@ -1,0 +1,178 @@
+import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as MenuStories from './menu.stories';
+
+<Meta of={MenuStories} /> 
+
+# Menu
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Menu)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+- [Overview](#overview)
+- [Positioning](#positioning)
+- [Subcomponents](#subcomponents)
+  - [cds-menu-item](#cds-menu-item)
+  - [cds-menu-item-divider](#cds-menu-item-divider)
+  - [cds-menu-item-group](#cds-menu-item-group)
+  - [cds-menu-item-selectable](#cds-menu-item-selectable)
+  - [cds-menu-item-radio-group](#cds-menu-item-radio-group)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+`cds-menu` is a versatile component that can be used in a variety of situations. It
+implements the
+[menu design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) defined
+in the ARIA Authoring Practices Guide (APG).
+
+The `cds-menu` component's `children` must be a collection of any of these
+subcomponents:
+
+- [cds-menu-item](#cds-menu-item)
+- [cds-menu-item-divider](#cds-menu-item-divider)
+- [cds-menu-item-group](#cds-menu-item-group)
+- [cds-menu-item-selectable](#cds-menu-item-selectable)
+- [cds-menu-item-radio-group](#cds-menu-item-radio-group)
+
+## Positioning
+
+You must provide a reference point for the `cds-menu` to position itself at. The
+props `x` and `y` either accept a single number each or an array of two numbers.
+
+The latter option is used to specify the trigger boundaries. For example, Carbon
+uses this for the
+[next version of OverflowMenu](/story/experimental-feature-flags-overflowmenu--overflow-menu)
+where we pass `[x, x + width]` and `[y, y + height]` of the trigger button. This
+way, the `cds-menu` is able to automatically determine its ideal position on the
+screen (which side to open at and in which direction) while always staying
+visually attached to the trigger. Each `cds-menu-item` that has `children` and
+therfore a submenu uses the same approach under the hood to correctly position
+the submenu.
+
+## Subcomponents
+
+### cds-menu-item
+
+A `cds-menu-item` renders a basic menu item with a label an optionally a shortcut
+hint (_note: the component only renders this hint and doesn't actually register
+the shortcut in the browser_). Each `cds-menu-item` can be clicked unless it's marked
+as `disabled`. If it triggers a destructive action, you can pass it
+`kind="danger"` to highlight it specially on hover and focus.
+
+```jsx
+<cds-menu>
+  <cds-menu-item label="Cut" shortcut="⌘X"></cds-menu-item>
+  <cds-menu-item label="Copy" shortcut="⌘C"></cds-menu-item>
+  <cds-menu-item label="Paste" shortcut="⌘V" disabled></cds-menu-item>
+</cds-menu>
+```
+
+In order to render a submenu, you can pass any of the above mentioned
+subcomponents as `children` of a `cds-menu-item`.
+
+```jsx
+<cds-menu>
+  <cds-menu-item label="Open"></cds-menu-item>
+  <cds-menu-item label="Save"></cds-menu-item>
+  <cds-menu-item label="Import">
+    <cds-menu-item label="Image"></cds-menu-item>
+    <cds-menu-item label="Movie"></cds-menu-item>
+    <cds-menu-item label="Text"></cds-menu-item>
+  </cds-menu-item>
+</cds-menu>
+```
+
+### cds-menu-item-divider
+
+The `cds-menu-item-divider` renders a thin dividing line, visually separating menu
+items. Use this to enhance grouping of related items.
+
+```jsx
+<cds-menu>
+  <cds-menu-item label="Cut"></cds-menu-item>
+  <cds-menu-item label="Copy"></cds-menu-item>
+  <cds-menu-item label="Paste"></cds-menu-item>
+  <cds-menu-item-divider></cds-menu-item-divider>
+  <cds-menu-item label="Delete" kind="danger"></cds-menu-item>
+</cds-menu>
+```
+
+### cds-menu-item-group
+
+You can logically group multiple menu items by wrapping them inside a
+`cds-menu-item-group`. This doesn't affect the visual rendering but can tremendously
+improve the experience for assistive technology users. You'll always want to use
+a `cds-menu-item-group` if you have multiple
+[`cds-menu-item-selectable`](#menuitemselectable) that are relatd to each other.
+
+### cds-menu-item-selectable
+
+`cds-menu-item-selectable` is a checkbox in a menu context. Each `cds-menu-item-selectable`
+can be checked and unchecked unrelated to other items. If multiple items are
+related to each other, you'll want to wrap them in a `cds-menu-item-group` for
+improved accessibility.
+
+```jsx
+<cds-menu>
+  <cds-menu-item-group label="Font style">
+    <cds-menu-item-selectable label="Bold" selected></cds-menu-item-selectable>
+    <cds-menu-item-selectable label="Italic"></cds-menu-item-selectable>
+  </cds-menu-item-group>
+</cds-menu>
+```
+
+### cds-menu-item-radio-group
+
+`cds-menu-item-radio-group` is a radio button group in a menu context. Only one item
+can be selected at a time. The component automatically wraps itself in a
+`cds-menu-item-group`, so you won't have to nest it manually.
+
+```jsx
+<cds-menu>
+  <cds-menu-item-radio-group
+    label="Font family"
+    items={['Sans', 'Serif', 'Mono']}
+    selectedItem="Sans"
+  ></cds-menu-item-radio-group>
+  <cds-menu-item-divider></cds-menu-item-divider>
+  <cds-menu-item-radio-group
+    label="Text decoration"
+    items={['None', 'Overline', 'Line-through', 'Underline']}
+    selectedItem="None"
+  ></cds-menu-item-radio-group>
+</cds-menu>
+```
+
+The `items` prop is designed to accept arbitrary items to best match your data
+structure. If you pass your items as anything that doesn't support `.toString()`
+out of the box, you'll need to pass a custom `itemToString` function that will
+be used for rendering the labels.
+
+```jsx
+const items = [
+  { weight: 100, label: 'Thin' },
+  { weight: 200, label: 'Extralight' },
+  { weight: 300, label: 'Light' },
+  { weight: 400, label: 'Regular' },
+  { weight: 500, label: 'Medium' },
+  { weight: 600, label: 'Semibold' },
+  { weight: 700, label: 'Bold' },
+];
+
+<cds-menu-item-radio-group
+  label="Font weight"
+  items={items}
+  selectedItem={items[3]}
+  itemToString={(item) => item.label}
+/>;
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Menu/Menu.mdx).
