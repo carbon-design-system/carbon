@@ -59,6 +59,7 @@
     inline-size: 100%;
     max-block-size: custom-property.get-var('layout-size-height-xl');
     min-block-size: layout.size('height');
+    overflow-x: hidden;
 
     &.#{$prefix}--tabs--contained {
       @include layout.use('size', $min: 'sm', $max: 'xl', $default: 'lg');
@@ -74,6 +75,39 @@
 
       &::-webkit-scrollbar {
         display: none;
+      }
+    }
+
+    &.#{$prefix}--tabs--vertical {
+      background: $layer;
+      border-inline-end: 1px solid $border-subtle;
+      float: inline-start;
+      inline-size: 25%;
+      max-block-size: none;
+
+      .#{$prefix}--tab--list {
+        flex-direction: column;
+        inline-size: 100%;
+        overflow-x: visible;
+        overflow-y: auto;
+      }
+
+      .#{$prefix}--tab--list-gradient_bottom {
+        position: absolute;
+        background: linear-gradient(to bottom, transparent, $layer);
+        block-size: $spacing-10;
+        inset-block-end: 0;
+        inset-inline: 0;
+        pointer-events: none;
+      }
+
+      .#{$prefix}--tab--list-gradient_top {
+        position: absolute;
+        background: linear-gradient(to top, transparent, $layer);
+        block-size: $spacing-10;
+        inset-block-start: 0;
+        inset-inline: 0;
+        pointer-events: none;
       }
     }
 
@@ -282,7 +316,17 @@
       margin-inline-start: 0;
     }
 
-    &.#{$prefix}--tabs--contained
+    &.#{$prefix}--tabs--vertical .#{$prefix}--tabs__nav-item {
+      flex: none;
+      background-color: $layer-01;
+      block-size: $spacing-10;
+      border-block-end: 1px solid $border-subtle;
+      box-shadow: inset 3px 0 0 0 $border-subtle;
+      inline-size: 100%;
+      margin-inline-start: 0;
+    }
+
+    &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--vertical)
       .#{$prefix}--tabs__nav-item--selected
       + div
       + .#{$prefix}--tabs__nav-item {
@@ -431,7 +475,8 @@
       }
     }
 
-    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-link {
+    &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--vertical)
+      .#{$prefix}--tabs__nav-link {
       border-block-end: 0;
       padding-inline: layout.density('padding-inline');
     }
@@ -446,6 +491,11 @@
       @include type-style('label-01');
 
       min-block-size: convert.to-rem(16px);
+    }
+
+    &.#{$prefix}--tabs--vertical:not(.#{$prefix}--tabs--tall)
+      .#{$prefix}--tabs__nav-item-label {
+      line-height: var(--cds-body-compact-01-line-height);
     }
 
     //-----------------------------
@@ -511,6 +561,13 @@
       box-shadow: inset 0 2px 0 0 $border-interactive;
     }
 
+    &.#{$prefix}--tabs--vertical
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected {
+      border-inline-start: none;
+      // Draws the border without affecting the inner-content
+      box-shadow: inset 3px 0 0 0 $border-interactive;
+    }
+
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected,
     .#{$prefix}--tabs__nav-item--selected,
     .#{$prefix}--tabs__nav-item--selected:focus
@@ -571,6 +628,15 @@
       background-color: button.$button-disabled;
     }
 
+    &.#{$prefix}--tabs--vertical
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
+    &.#{$prefix}--tabs--vertical
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
+      background-color: $layer;
+      border-block-end: 1px solid $border-subtle;
+      box-shadow: inset 3px 0 0 0 $border-disabled;
+    }
+
     .#{$prefix}--tabs__nav-item--disabled:focus,
     .#{$prefix}--tabs__nav-item--disabled:active {
       border-block-end: $tab-underline-disabled;
@@ -599,7 +665,8 @@
       border-block-end-color: $border-subtle;
     }
 
-    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--disabled {
+    &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--vertical)
+      .#{$prefix}--tabs__nav-item--disabled {
       border-block-end: none;
       color: $text-on-color-disabled;
     }
@@ -617,6 +684,11 @@
 
   .#{$prefix}--tabs--contained ~ .#{$prefix}--tab-content {
     background: $layer;
+  }
+
+  .#{$prefix}--tabs--vertical ~ .#{$prefix}--tab-content {
+    float: inline-start;
+    inline-size: 75%;
   }
 
   .#{$prefix}--tab-content--interactive {
@@ -686,6 +758,19 @@
     }
     .#{$prefix}--tabs__nav-item--icon {
       margin-inline-start: auto;
+    }
+  }
+}
+
+.#{$prefix}--tabs.#{$prefix}--tabs--vertical {
+  .#{$prefix}--tabs__nav-link {
+    .#{$prefix}--tabs__nav-item-label {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      text-overflow: ellipsis;
+      white-space: normal;
     }
   }
 }
