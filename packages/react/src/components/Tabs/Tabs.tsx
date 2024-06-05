@@ -829,7 +829,7 @@ function TabListVertical({
 
   if (isSm) {
     return (
-      <TabList {...rest} aria-label={label}>
+      <TabList {...rest} aria-label={label} contained>
         {children}
       </TabList>
     );
