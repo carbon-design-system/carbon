@@ -14,3 +14,17 @@ Not only does Code Connect establish connections between component definitions,
 but it also facilitates the mapping of properties from Carbon React code to
 Figma. This capability enables the creation of dynamic and accurate examples,
 promoting consistency across both design and engineering.
+
+## Conecting components
+
+You will need a Figma license with dev mode to work on code connect within
+Carbon.
+
+To connect your first component go to Dev Mode in Figma and right-click on the
+component you want to connect, then choose `Copy link to selection` from the
+menu. Make sure you are copying the link to a main component and not an instance
+of the component.
+
+```sh
+npx figma connect create "https://..."
+```
