@@ -29,7 +29,7 @@ function translateWithId(messageId) {
   return defaultTranslations[messageId];
 }
 
-interface ProgressIndicatorProps
+export interface ProgressIndicatorProps
   extends Omit<React.HTMLAttributes<HTMLUListElement>, 'onChange'> {
   /**
    * Provide `<ProgressStep>` components to be rendered in the
@@ -156,7 +156,7 @@ ProgressIndicator.propTypes = {
   vertical: PropTypes.bool,
 };
 
-interface ProgressStepProps {
+export interface ProgressStepProps {
   /**
    * Provide an optional className to be applied to the containing `<li>` node
    */

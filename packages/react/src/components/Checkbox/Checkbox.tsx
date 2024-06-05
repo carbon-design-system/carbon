@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
@@ -32,7 +32,7 @@ export interface CheckboxProps
    * Provide a label to provide a description of the Checkbox input that you are
    * exposing to the user
    */
-  labelText: NonNullable<ReactNodeLike>;
+  labelText: NonNullable<ReactNode>;
 
   /**
    * Specify whether the underlying input should be checked by default
@@ -47,7 +47,7 @@ export interface CheckboxProps
   /**
    * Provide text for the form group for additional help
    */
-  helperText?: React.ReactNode;
+  helperText?: ReactNode;
 
   /**
    * Specify whether the label should be hidden, or not
@@ -67,12 +67,12 @@ export interface CheckboxProps
   /**
    * Provide the text that is displayed when the Checkbox is in an invalid state
    */
-  invalidText?: React.ReactNode;
+  invalidText?: ReactNode;
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Specify whether the Checkbox is currently invalid
@@ -82,7 +82,7 @@ export interface CheckboxProps
   /**
    * Provide the text that is displayed when the Checkbox is in an invalid state
    */
-  warnText?: React.ReactNode;
+  warnText?: ReactNode;
 
   /**
    * Provide an optional handler that is called when the internal state of

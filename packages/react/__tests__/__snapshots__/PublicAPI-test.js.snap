@@ -25,6 +25,9 @@ Map {
       "isFlush": Object {
         "type": "bool",
       },
+      "ordered": Object {
+        "type": "bool",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -540,6 +543,15 @@ Map {
       "legendText": Object {
         "isRequired": true,
         "type": "node",
+      },
+      "orientation": Object {
+        "args": Array [
+          Array [
+            "horizontal",
+            "vertical",
+          ],
+        ],
+        "type": "oneOf",
       },
       "readOnly": Object {
         "type": "bool",
@@ -2729,9 +2741,6 @@ Map {
   },
   "DismissibleTag" => Object {
     "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
       "className": Object {
         "type": "string",
       },
@@ -2769,6 +2778,9 @@ Map {
       },
       "slug": Object {
         "type": "node",
+      },
+      "text": Object {
+        "type": "string",
       },
       "title": Object {
         "type": "string",
@@ -5629,9 +5641,6 @@ Map {
   },
   "OperationalTag" => Object {
     "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
       "className": Object {
         "type": "string",
       },
@@ -5666,6 +5675,9 @@ Map {
       },
       "slug": Object {
         "type": "node",
+      },
+      "text": Object {
+        "type": "string",
       },
       "type": Object {
         "args": Array [
@@ -6065,33 +6077,7 @@ Map {
   "Popover" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-right",
-            "bottom",
-            "bottom-left",
-            "bottom-right",
-            "left",
-            "left-bottom",
-            "left-top",
-            "right",
-            "right-bottom",
-            "right-top",
-            "top-start",
-            "top-end",
-            "bottom-start",
-            "bottom-end",
-            "left-end",
-            "left-start",
-            "right-end",
-            "right-start",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "as": Object {
         "args": Array [
           Array [
@@ -6462,6 +6448,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "hasRoundedCorners": Object {
+        "type": "bool",
+      },
       "id": Object {
         "type": "string",
       },
@@ -6474,6 +6463,9 @@ Map {
       },
       "required": Object {
         "type": "bool",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "tabIndex": Object {
         "type": "number",
@@ -6771,9 +6763,6 @@ Map {
   },
   "SelectableTag" => Object {
     "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
       "className": Object {
         "type": "string",
       },
@@ -6811,6 +6800,9 @@ Map {
       },
       "slug": Object {
         "type": "node",
+      },
+      "text": Object {
+        "type": "string",
       },
     },
   },
@@ -7557,6 +7549,9 @@ Map {
       "tabIndex": Object {
         "type": "number",
       },
+      "target": Object {
+        "type": "string",
+      },
     },
     "render": [Function],
   },
@@ -8263,6 +8258,7 @@ Map {
     },
   },
   "Tag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
         "type": "elementType",
@@ -8328,6 +8324,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "TagSkeleton" => Object {
     "propTypes": Object {
@@ -10733,6 +10730,7 @@ Map {
   "useContextMenu" => Object {},
   "useIdPrefix" => Object {},
   "useLayer" => Object {},
+  "usePrefersDarkScheme" => Object {},
   "usePrefix" => Object {},
   "useTheme" => Object {},
 }
