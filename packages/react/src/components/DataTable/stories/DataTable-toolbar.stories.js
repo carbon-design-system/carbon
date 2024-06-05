@@ -10,7 +10,6 @@ import React from 'react';
 import Button from '../../Button';
 import OverflowMenu from '../../OverflowMenu';
 import OverflowMenuItem from '../../OverflowMenuItem';
-import Dropdown from '../../Dropdown';
 import {
   default as DataTable,
   TableContainer,
@@ -94,49 +93,9 @@ export const Default = () => (
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.id} {...getRowProps({ row })}>
-                {row.cells.map((cell) => {
-                  return cell.id == 'b:port' ? (
-                    <Dropdown
-                      autoAlign={true}
-                      id="default"
-                      titleText="Dropdown label"
-                      helperText="This is some helper text"
-                      // initialSelectedItem={items[1]}
-                      label="Option 1"
-                      items={[
-                        {
-                          id: 'option-0',
-                          text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-                        },
-                        {
-                          id: 'option-1',
-                          text: 'Option 1',
-                        },
-                        {
-                          id: 'option-2',
-                          text: 'Option 2',
-                        },
-                        {
-                          id: 'option-3',
-                          text: 'Option 3 - a disabled item',
-                          disabled: true,
-                        },
-                        {
-                          id: 'option-4',
-                          text: 'Option 4',
-                        },
-                        {
-                          id: 'option-5',
-                          text: 'Option 5',
-                        },
-                      ]}
-                      itemToString={(item) => (item ? item.text : '')}
-                      direction="top"
-                    />
-                  ) : (
-                    <TableCell key={cell.id}>{cell.value}</TableCell>
-                  );
-                })}
+                {row.cells.map((cell) => (
+                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                ))}
               </TableRow>
             ))}
           </TableBody>
