@@ -25,6 +25,9 @@ Map {
       "isFlush": Object {
         "type": "bool",
       },
+      "ordered": Object {
+        "type": "bool",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -540,6 +543,15 @@ Map {
       "legendText": Object {
         "isRequired": true,
         "type": "node",
+      },
+      "orientation": Object {
+        "args": Array [
+          Array [
+            "horizontal",
+            "vertical",
+          ],
+        ],
+        "type": "oneOf",
       },
       "readOnly": Object {
         "type": "bool",
@@ -6436,6 +6448,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "hasRoundedCorners": Object {
+        "type": "bool",
+      },
       "id": Object {
         "type": "string",
       },
@@ -6448,6 +6463,9 @@ Map {
       },
       "required": Object {
         "type": "bool",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "tabIndex": Object {
         "type": "number",
@@ -7531,6 +7549,9 @@ Map {
       "tabIndex": Object {
         "type": "number",
       },
+      "target": Object {
+        "type": "string",
+      },
     },
     "render": [Function],
   },
@@ -8237,6 +8258,7 @@ Map {
     },
   },
   "Tag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
         "type": "elementType",
@@ -8302,6 +8324,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "TagSkeleton" => Object {
     "propTypes": Object {

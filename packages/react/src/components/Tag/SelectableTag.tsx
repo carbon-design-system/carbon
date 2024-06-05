@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useState, ReactNode } from 'react';
+import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
 import classNames from 'classnames';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -14,6 +14,7 @@ import { PolymorphicProps } from '../../types/common';
 import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
+import { isEllipsisActive } from './isEllipsisActive';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -78,6 +79,7 @@ const SelectableTag = <T extends React.ElementType>({
   ...other
 }: SelectableTagProps<T>) => {
   const prefix = usePrefix();
+  const tagRef = useRef<HTMLElement>();
   const tagId = id || `tag-${getInstanceId()}`;
   const [selectedTag, setSelectedTag] = useState(selected);
   const tagClasses = classNames(`${prefix}--tag--selectable`, className, {
@@ -85,18 +87,12 @@ const SelectableTag = <T extends React.ElementType>({
   });
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-  const isEllipsisActive = (element: any) => {
-    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
-    return element.offsetWidth < element.scrollWidth;
-  };
-
   useLayoutEffect(() => {
-    const elementTagId = document.querySelector(`#${tagId}`);
-    const newElement = elementTagId?.getElementsByClassName(
+    const newElement = tagRef.current?.getElementsByClassName(
       `${prefix}--tag__label`
     )[0];
-    isEllipsisActive(newElement);
-  }, [prefix, tagId]);
+    setIsEllipsisApplied(isEllipsisActive(newElement));
+  }, [prefix, tagRef]);
 
   let normalizedSlug;
   if (slug && slug['type']?.displayName === 'Slug') {
@@ -122,8 +118,9 @@ const SelectableTag = <T extends React.ElementType>({
         align="bottom"
         className={tooltipClasses}
         leaveDelayMs={0}
-        onMouseEnter={false}>
-        <Tag<any>
+        onMouseEnter={() => false}>
+        <Tag
+          ref={tagRef}
           slug={slug}
           size={size}
           renderIcon={renderIcon}
@@ -142,7 +139,8 @@ const SelectableTag = <T extends React.ElementType>({
   }
 
   return (
-    <Tag<any>
+    <Tag
+      ref={tagRef}
       slug={slug}
       size={size}
       renderIcon={renderIcon}
