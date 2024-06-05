@@ -43,6 +43,19 @@ export const Default = () => {
   );
 };
 
+export const Horizontal = () => {
+  return (
+    <CheckboxGroup
+      orientation="horizontal"
+      {...fieldsetCheckboxProps()}
+      helperText="Helper text goes here">
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
+    </CheckboxGroup>
+  );
+};
+
 export const Single = () => {
   return (
     <>
@@ -185,5 +198,10 @@ Playground.argTypes = {
     table: {
       disable: true,
     },
+  },
+  orientation: {
+    description: 'Provide how checkbox should be displayed',
+    control: 'select',
+    options: ['horizontal', 'vertical'],
   },
 };
