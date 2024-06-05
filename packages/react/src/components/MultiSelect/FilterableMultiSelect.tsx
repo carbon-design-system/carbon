@@ -703,11 +703,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       },
     })
   );
-  const menuProps = getMenuProps({
-    ...getMenuProps({
-      ref: refs.setFloating,
-    }),
-  });
+  const menuProps = getMenuProps({}, { suppressRefError: true });
 
   const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {
     if (
