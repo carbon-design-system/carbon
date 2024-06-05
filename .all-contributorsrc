@@ -1326,10 +1326,10 @@
       ]
     },
     {
-      "login": "Tresau-IBM",
-      "name": "Tresau-IBM",
+      "login": "Tresau",
+      "name": "Tresau",
       "avatar_url": "https://avatars.githubusercontent.com/u/148357638?v=4",
-      "profile": "https://github.com/Tresau-IBM",
+      "profile": "https://github.com/Tresau",
       "contributions": [
         "code"
       ]
@@ -1517,10 +1517,28 @@
       ]
     },
     {
+      "login": "ahmedsemih",
+      "name": "Ahmed Semih Erkan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102798814?v=4",
+      "profile": "https://github.com/ahmedsemih",
+      "contributions": [
+        "code"
+      ]
+     },
+    {  
       "login": "ychavoya",
       "name": "Yael Chavoya",
       "avatar_url": "https://avatars.githubusercontent.com/u/7907338?v=4",
       "profile": "https://github.com/ychavoya",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Kilian-Collender",
+      "name": "Kilian Collender",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37899503?v=4",
+      "profile": "https://github.com/Kilian-Collender",
       "contributions": [
         "code"
       ]

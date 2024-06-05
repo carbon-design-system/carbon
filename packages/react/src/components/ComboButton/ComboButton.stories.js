@@ -36,6 +36,22 @@ export const Default = () => (
   </ComboButton>
 );
 
+export const ExperimentalAutoAlign = () => (
+  <div style={{ width: '5000px', height: '5000px' }}>
+    <div
+      style={{
+        position: 'absolute',
+        bottom: '20px',
+      }}>
+      <ComboButton label="Primary action">
+        <MenuItem label="Second action with a long label description" />
+        <MenuItem label="Third action" />
+        <MenuItem label="Fourth action" disabled />
+      </ComboButton>
+    </div>{' '}
+  </div>
+);
+
 export const WithDanger = () => (
   <ComboButton label="Primary action">
     <MenuItem label="Second action with a long label description" />
