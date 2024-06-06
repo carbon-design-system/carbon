@@ -737,6 +737,12 @@ export interface TabListVerticalProps extends DivAttributes {
    * Specify an optional className to be added to the container node
    */
   className?: string;
+
+  /**
+   * Choose whether to automatically scroll to newly selected tabs
+   * on component rerender
+   */
+  scrollIntoView?: boolean;
 }
 // type TabElement = HTMLElement & { disabled?: boolean };
 
@@ -745,6 +751,7 @@ function TabListVertical({
   'aria-label': label,
   children,
   className: customClassName,
+  scrollIntoView,
   ...rest
 }: TabListVerticalProps) {
   const { activeIndex, selectedIndex, setSelectedIndex, setActiveIndex } =
@@ -803,6 +810,25 @@ function TabListVertical({
       }
     }
   });
+
+  useEffect(() => {
+    function handler() {
+      const tab = tabs.current[selectedIndex];
+      if (scrollIntoView && tab) {
+        tab.scrollIntoView({
+          block: 'nearest',
+          inline: 'nearest',
+        });
+      }
+    }
+    window.addEventListener('resize', handler);
+
+    handler();
+
+    return () => {
+      window.removeEventListener('resize', handler);
+    };
+  }, [selectedIndex, scrollIntoView]);
 
   useEffect(() => {
     const element = ref.current;
