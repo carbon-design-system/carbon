@@ -189,14 +189,13 @@ describe('Pagination', () => {
       expect(screen.getByText(`página ${page}`)).toBeInTheDocument();
     });
 
-    it('should not include page count when pagesUnknown', () => {
+    it('should include only current page when pagesUnknown', () => {
       const page = 1;
       render(
         <Pagination pageSizes={[10, 20]} page={page} pagesUnknown={true} />
       );
 
-      expect(screen.getByText(`page`)).toBeInTheDocument();
-      expect(screen.queryByText(`page ${page}`)).not.toBeInTheDocument();
+      expect(screen.queryByText(`page ${page}`)).toBeInTheDocument();
     });
 
     it('should respect size prop', () => {
@@ -210,6 +209,17 @@ describe('Pagination', () => {
       render(<Pagination totalItems={total} pageSizes={[10]} />);
 
       expect(screen.getByText(`1–10 of ${total} items`)).toBeInTheDocument();
+    });
+    it('should allow totalItems undefined', () => {
+      render(<Pagination pagesUnknown={true} pageSizes={[10]} />);
+
+      expect(screen.getByText(`page 1`)).toBeInTheDocument();
+      expect(
+        document.querySelector('.cds--pagination__unknown-pages-text')
+      ).toBeInTheDocument();
+      expect(
+        document.querySelector('.cds--select__page-number')
+      ).not.toBeInTheDocument();
     });
   });
 });

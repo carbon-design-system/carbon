@@ -71,9 +71,6 @@ export default {
     open: {
       table: { disable: true },
     },
-    readOnly: {
-      control: { type: 'boolean' },
-    },
     titleText: {
       table: { disable: true },
     },
@@ -265,7 +262,7 @@ export const WithInitialSelectedItems = () => {
   );
 };
 
-export const Filterable = () => {
+export const Filterable = (args) => {
   return (
     <div style={{ width: 300 }}>
       <FilterableMultiSelect
@@ -275,9 +272,16 @@ export const Filterable = () => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
     </div>
   );
+};
+
+Filterable.argTypes = {
+  onChange: {
+    action: 'onChange',
+  },
 };
 
 export const WithLayerMultiSelect = () => (
@@ -339,7 +343,11 @@ export const _Controlled = () => {
       />
       <br />
       <ButtonSet>
-        <Button id="all" onClick={() => setSelectedItems(items)}>
+        <Button
+          id="all"
+          onClick={() =>
+            setSelectedItems(items.filter((item) => !item.disabled))
+          }>
           Select all
         </Button>
         <Button
