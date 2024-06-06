@@ -152,7 +152,9 @@ export interface ComboBoxProps<ItemType>
   ariaLabel?: string;
 
   /**
-   * Will auto-align the dropdown on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
    */
   autoAlign?: boolean;
 
