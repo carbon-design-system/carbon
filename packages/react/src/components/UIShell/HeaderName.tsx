@@ -24,7 +24,6 @@ export default function HeaderName<E extends ElementType = 'a'>({
   const selectorPrefix = usePrefix();
   const className = cx(`${selectorPrefix}--header__name`, customClassName);
   return (
-    // @ts-ignore
     <Link {...rest} className={className}>
       {prefix && (
         <>

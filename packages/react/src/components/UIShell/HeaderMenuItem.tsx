@@ -36,7 +36,7 @@ export interface HeaderMenuItemComponent {
   displayName?: string;
   propTypes?: WeakValidationMap<HeaderMenuItemProps<any>>;
 }
-// @ts-ignore
+
 const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
   function HeaderMenuItemRenderFunction<E extends ElementType = 'a'>(
     {
@@ -75,7 +75,7 @@ const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
       </li>
     );
   }
-);
+) as HeaderMenuItemComponent;
 
 HeaderMenuItem.displayName = 'HeaderMenuItem';
 HeaderMenuItem.propTypes = {
