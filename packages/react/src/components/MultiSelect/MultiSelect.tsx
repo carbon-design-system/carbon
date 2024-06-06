@@ -38,7 +38,6 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
-import { OnChangeData } from '../Dropdown';
 import Checkbox from '../Checkbox';
 import type { InternationalProps } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
