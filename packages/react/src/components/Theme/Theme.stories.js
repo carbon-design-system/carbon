@@ -6,12 +6,12 @@
  */
 
 import './Theme-story.scss';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { VStack } from '../Stack';
 
-import { GlobalTheme, Theme, useTheme } from '../Theme';
+import { GlobalTheme, Theme, usePrefersDarkScheme, useTheme } from '../Theme';
 import mdx from './Theme.mdx';
 
 export default {
@@ -45,27 +45,40 @@ export default {
   },
 };
 
+const ThemeText = ({ children, showIsDark }) => {
+  const { theme, isDark } = useTheme();
+
+  return (
+    <p>
+      {children}
+      {showIsDark
+        ? ` useTheme reveals... { theme: '${theme}', isDark: '${isDark}'}`
+        : theme}
+    </p>
+  );
+};
+
 export const Default = () => {
   return (
     <>
       <Theme theme="g100">
         <section className="theme-section">
-          <p>g100 theme</p>
+          <ThemeText />
         </section>
       </Theme>
       <Theme theme="g90">
         <section className="theme-section">
-          <p>g90 theme</p>
+          <ThemeText />
         </section>
       </Theme>
       <Theme theme="g10">
         <section className="theme-section">
-          <p>g10 theme</p>
+          <ThemeText />
         </section>
       </Theme>
       <Theme theme="white">
         <section className="theme-section">
-          <p>white theme</p>
+          <ThemeText />
         </section>
       </Theme>
     </>
@@ -73,22 +86,66 @@ export const Default = () => {
 };
 
 export const UseTheme = () => {
-  function Example() {
-    const { theme } = useTheme();
-    return <div className="theme-section">The current theme is: {theme}</div>;
-  }
-
   return (
     <div>
-      <Example />
+      <section className="theme-section">
+        <ThemeText showIsDark={true} />
+      </section>
       <Theme theme="g100">
-        <Example />
+        <section className="theme-section">
+          <ThemeText showIsDark={true} />
+        </section>
       </Theme>
     </div>
   );
 };
 
 UseTheme.storyName = 'useTheme';
+
+export const UsePrefersDarkScheme = () => {
+  const prefersDark = usePrefersDarkScheme();
+
+  const theme1 = prefersDark ? 'g100' : 'white';
+  const theme2 = prefersDark ? 'white' : 'g100';
+  const theme3 = prefersDark ? 'g90' : 'g10';
+  const theme4 = prefersDark ? 'g10' : 'g90';
+
+  return (
+    <Theme theme={theme1}>
+      <section className="theme-section">
+        <ThemeText showIsDark={true}>
+          usePrefersDarkScheme() is {prefersDark ? '`true`' : '`false`'}. Theme
+          set to `{theme1}`.
+        </ThemeText>
+      </section>
+      <Theme theme={theme2}>
+        <section className="theme-section">
+          <ThemeText showIsDark={true}>
+            usePrefersDarkScheme() is {prefersDark ? '`true`' : '`false`'}. An
+            alternative theme set of `{theme2}`.
+          </ThemeText>
+        </section>
+      </Theme>
+      <Theme theme={theme3}>
+        <section className="theme-section">
+          <ThemeText showIsDark={true}>
+            usePrefersDarkScheme() is {prefersDark ? '`true`' : '`false`'}.
+            Theme set to `{theme3}`.
+          </ThemeText>
+        </section>
+      </Theme>
+      <Theme theme={theme4}>
+        <section className="theme-section">
+          <ThemeText showIsDark={true}>
+            usePrefersDarkScheme() is {prefersDark ? '`true`' : '`false`'}. An
+            alternative theme set of `{theme4}`.
+          </ThemeText>
+        </section>
+      </Theme>
+    </Theme>
+  );
+};
+UsePrefersDarkScheme.storyName = 'usePrefersDarkScheme';
 
 export const _WithLayer = () => {
   const themes = ['white', 'g10', 'g90', 'g100'];
@@ -113,7 +170,7 @@ const PlaygroundStory = (args) => {
   return (
     <Theme {...args}>
       <section className="theme-section">
-        <p>{args.theme} theme</p>
+        <ThemeText before="Theme" />
       </section>
     </Theme>
   );

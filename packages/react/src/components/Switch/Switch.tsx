@@ -16,7 +16,7 @@ import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 
-interface SwitchEventHandlersParams {
+export interface SwitchEventHandlersParams {
   index?: number;
   name?: string | number;
   text?: string;

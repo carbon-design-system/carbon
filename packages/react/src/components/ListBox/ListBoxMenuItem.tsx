@@ -16,8 +16,7 @@ function useIsTruncated(ref) {
 
   useEffect(() => {
     const element = ref.current;
-    const { offsetWidth, scrollWidth } =
-      element.lastElementChild?.lastElementChild || element;
+    const { offsetWidth, scrollWidth } = element;
     setIsTruncated(offsetWidth < scrollWidth);
   }, [ref, setIsTruncated]);
 

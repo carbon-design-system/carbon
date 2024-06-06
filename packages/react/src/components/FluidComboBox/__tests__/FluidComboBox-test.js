@@ -21,7 +21,7 @@ const prefix = 'cds';
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
-  await userEvent.click(findInputNode());
+  await userEvent.click(screen.getByTitle('Open'));
 };
 
 describe('FluidComboBox', () => {
@@ -55,7 +55,7 @@ describe('FluidComboBox', () => {
   it('should display the menu of items when a user clicks on the input', async () => {
     render(<FluidComboBox {...mockProps} />);
 
-    await userEvent.click(findInputNode());
+    await openMenu();
 
     assertMenuOpen(mockProps);
   });
