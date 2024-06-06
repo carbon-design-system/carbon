@@ -354,6 +354,7 @@ const ComboBox = forwardRef(
     const { refs, floatingStyles } = useFloating(
       autoAlign
         ? {
+            placement: direction,
             strategy: 'fixed',
             middleware: [
               flip(),
