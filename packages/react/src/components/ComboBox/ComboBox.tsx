@@ -356,9 +356,7 @@ const ComboBox = forwardRef(
         ? {
             placement: direction,
             strategy: 'fixed',
-            middleware: [
-              flip(),
-            ],
+            middleware: [flip()],
             whileElementsMounted: autoUpdate,
           }
         : {}
