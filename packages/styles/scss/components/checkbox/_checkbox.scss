@@ -385,4 +385,29 @@
     line-height: inherit;
     margin-block-start: convert.to-rem(-1px);
   }
+
+  // horizontal checkbox group
+  .#{$prefix}--checkbox-group--horizontal {
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+
+    .#{$prefix}--form-item {
+      flex: none;
+      margin-block-end: 0;
+
+      &:not(:last-of-type) {
+        margin-inline-end: $spacing-05;
+      }
+    }
+
+    .#{$prefix}--checkbox-label-text {
+      padding-inline-start: $spacing-03;
+    }
+
+    .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+      margin-block-start: 0;
+    }
+  }
 }

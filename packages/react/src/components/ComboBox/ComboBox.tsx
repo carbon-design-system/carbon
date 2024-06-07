@@ -673,9 +673,9 @@ const ComboBox = forwardRef(
               type="text"
               tabIndex={0}
               aria-haspopup="listbox"
-              aria-owns={getMenuProps().id}
               title={textInput?.current?.value}
               {...getInputProps({
+                'aria-controls': isOpen ? undefined : getMenuProps().id,
                 placeholder,
                 ref: { ...mergeRefs(textInput, ref) },
                 onKeyDown: (
