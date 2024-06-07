@@ -153,6 +153,24 @@
     inset-inline-end: $spacing-05;
   }
 
+  .#{$prefix}--text-input--fluid .#{$prefix}--toggle-password-tooltip {
+    @include focus-outline('reset');
+
+    position: absolute;
+    block-size: convert.to-rem(64px);
+    cursor: pointer;
+    inline-size: convert.to-rem(48px);
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    transition: outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--toggle-password-tooltip
+    .#{$prefix}--popover {
+    inset-inline-start: 0;
+  }
+
   .#{$prefix}--text-input--fluid
     .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     block-size: convert.to-rem(32px);

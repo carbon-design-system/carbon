@@ -171,7 +171,7 @@ test.describe('@avt MultiSelect', () => {
     await expect(selection).toBeHidden();
   });
 
-  test.slow('@avt-keyboard-nav filterable multiselect', async ({ page }) => {
+  test('@avt-keyboard-nav filterable multiselect', async ({ page }) => {
     await visitStory(page, {
       component: 'FilterableMultiSelect',
       id: 'components-multiselect--filterable',

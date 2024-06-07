@@ -5,8 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { type StructuredListWrapperProps } from './StructuredList';
 export * from './StructuredList';
 export {
   default as StructuredListSkeleton,
   type StructuredListSkeletonProps,
 } from './StructuredList.Skeleton';
+export { type StructuredListWrapperProps };
