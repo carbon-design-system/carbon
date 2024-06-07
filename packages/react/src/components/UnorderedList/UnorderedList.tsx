@@ -10,7 +10,7 @@ import React, { type ComponentProps } from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface UnorderedListProps extends ComponentProps<'ul'> {
+export interface UnorderedListProps extends ComponentProps<'ul'> {
   nested?: boolean | undefined;
   isExpressive?: boolean | undefined;
 }

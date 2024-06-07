@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { ReactNode, useState } from 'react';
 import RadioTile from '../RadioTile';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
@@ -19,7 +19,7 @@ export interface TileGroupProps
   /**
    * Provide a collection of <RadioTile> components to render in the group
    */
-  children?: ReactNodeLike;
+  children?: ReactNode;
 
   /**
    * Provide an optional className to be applied to the container node

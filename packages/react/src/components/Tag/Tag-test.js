@@ -30,11 +30,8 @@ describe('Tag', () => {
   });
 
   it('should have an appropriate aria-label when (filterable)', () => {
-    const children = 'tag-3';
     const { container } = render(
-      <DismissibleTag type="red" title="Close tag">
-        {children}
-      </DismissibleTag>
+      <DismissibleTag type="red" title="Close tag" text="Tag content" />
     );
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const button = container.querySelector('[aria-label]');
