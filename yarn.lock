@@ -2060,7 +2060,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/feature-flags@npm:^0.20.0, @carbon/feature-flags@npm:^0.20.0-rc.0, @carbon/feature-flags@workspace:packages/feature-flags":
+"@carbon/feature-flags@npm:^0.20.0, @carbon/feature-flags@workspace:packages/feature-flags":
   version: 0.0.0-use.local
   resolution: "@carbon/feature-flags@workspace:packages/feature-flags"
   dependencies:
@@ -2169,7 +2169,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icons-react@npm:^11.41.0-rc.0, @carbon/icons-react@npm:^11.43.0, @carbon/icons-react@workspace:packages/icons-react":
+"@carbon/icons-react@npm:^11.43.0, @carbon/icons-react@workspace:packages/icons-react":
   version: 0.0.0-use.local
   resolution: "@carbon/icons-react@workspace:packages/icons-react"
   dependencies:
@@ -2218,7 +2218,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/layout@npm:^11.22.0, @carbon/layout@npm:^11.22.0-rc.0, @carbon/layout@workspace:packages/layout":
+"@carbon/layout@npm:^11.22.0, @carbon/layout@workspace:packages/layout":
   version: 0.0.0-use.local
   resolution: "@carbon/layout@workspace:packages/layout"
   dependencies:
@@ -2315,12 +2315,12 @@ __metadata:
     "@babel/preset-react": "npm:^7.22.3"
     "@babel/preset-typescript": "npm:^7.21.5"
     "@babel/runtime": "npm:^7.18.3"
-    "@carbon/feature-flags": "npm:^0.20.0-rc.0"
-    "@carbon/icons-react": "npm:^11.41.0-rc.0"
-    "@carbon/layout": "npm:^11.22.0-rc.0"
-    "@carbon/styles": "npm:^1.57.0-rc.0"
+    "@carbon/feature-flags": "npm:^0.20.0"
+    "@carbon/icons-react": "npm:^11.43.0"
+    "@carbon/layout": "npm:^11.22.0"
+    "@carbon/styles": "npm:^1.59.0"
     "@carbon/test-utils": "npm:^10.30.0"
-    "@carbon/themes": "npm:^11.35.0-rc.0"
+    "@carbon/themes": "npm:^11.36.0"
     "@figma/code-connect": "npm:^0.1.2"
     "@floating-ui/react": "npm:^0.26.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
@@ -2376,7 +2376,7 @@ __metadata:
     sass: "npm:^1.51.0"
     sass-loader: "npm:^14.0.0"
     storybook: "npm:^7.1.0"
-    storybook-addon-accessibility-checker: "npm:^3.1.61-rc.2"
+    storybook-addon-accessibility-checker: "npm:^3.1.61-rc.3"
     stream-browserify: "npm:^3.0.0"
     style-loader: "npm:^3.3.1"
     tabbable: "npm:^6.2.0"
@@ -2401,7 +2401,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.57.0-rc.0, @carbon/styles@npm:^1.59.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@npm:^1.59.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -2455,7 +2455,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@npm:^11.35.0-rc.0, @carbon/themes@npm:^11.36.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@npm:^11.36.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
@@ -25889,9 +25889,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-accessibility-checker@npm:^3.1.61-rc.2":
-  version: 3.1.61-rc.2
-  resolution: "storybook-addon-accessibility-checker@npm:3.1.61-rc.2"
+"storybook-addon-accessibility-checker@npm:^3.1.61-rc.3":
+  version: 3.1.61-rc.3
+  resolution: "storybook-addon-accessibility-checker@npm:3.1.61-rc.3"
   dependencies:
     "@storybook/addon-highlight": "npm:7.4.5"
     "@storybook/channels": "npm:7.4.5"
@@ -25915,7 +25915,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10/a6be62591d5b03efec70210ee6a3ec133a56ca3d09156e010540a23b0d8458a23d796e4472dc0a69d50a8b48d8824676b41cda90970645d82d8691947508d624
+  checksum: 10/11096a1dd694eb9d2f5eb8d870c76062251ff4d197328b24fecb437625e4d8eae7de3a2e2192a71ff9c51a7870a862aa47cd7430c719e10b5f42cefbcb35fca5
   languageName: node
   linkType: hard
 
