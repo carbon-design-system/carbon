@@ -58,6 +58,11 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   @property({ type: String })
   label;
   /**
+   * class for the menu.
+   */
+  @property({ type: String })
+  className='';
+  /**
    * Parent state.
    */
   @property({ type: Boolean })
@@ -169,6 +174,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   render() {
     const {
       open,
+      className,
       menuAlignment,
       label,
       menuSize,
@@ -177,6 +183,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       _handleBlur: handleBlur,
     } = this;
     const menuClasses = classMap({
+      [`${className}`]: true,
       [`${prefix}--menu`]: true,
       [`${prefix}--menu--${menuSize}`]: true,
       [`${prefix}--menu--box-shadow-top`]:
@@ -191,7 +198,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
         aria-label="${label}"
         tabindex="1"
         @keydown="${handleKeyDown}"
-        @onblur="${handleBlur}">
+        @blur="${handleBlur}">
         <slot></slot>
       </ul>
     `;
@@ -280,8 +287,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     }
     return activeElement;
   };
-  _handleBlur = () => {
-    console.log('blur');
+  _handleBlur = (e: FocusEvent) => {
+    console.log(this.contains(e.relatedTarget),'tar');
+    
+    if (this.open && this.onClose && this.isRoot && this.contains(e.relatedTarget)) {
+      this._handleClose(e);
+    }
   };
 
   _notEmpty = (value: number | null | undefined) => {
@@ -407,7 +418,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     this.style.insetBlockStart = `${pos[1]}px`;
     this.position = pos;
   };
-  _handleClose = (e: KeyboardEvent) => {
+  _handleClose = (e: KeyboardEvent | FocusEvent) => {
     if (this.onClose) {
       this.onClose();
     }
