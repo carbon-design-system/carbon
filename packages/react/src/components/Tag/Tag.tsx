@@ -6,7 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode } from 'react';
+import React, {
+  useLayoutEffect,
+  useState,
+  ReactNode,
+  useRef,
+  ForwardedRef,
+} from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -14,6 +20,9 @@ import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
+import { DefinitionTooltip } from '../Tooltip';
+import { isEllipsisActive } from './isEllipsisActive';
+import { useMergeRefs } from '@floating-ui/react';
 
 const getInstanceId = setupGetInstanceId();
 export const TYPES = {
@@ -54,7 +63,7 @@ export interface TagBaseProps {
   disabled?: boolean;
 
   /**
-   * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.
+   * @deprecated The `filter` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.
    */
   filter?: boolean;
 
@@ -64,7 +73,7 @@ export interface TagBaseProps {
   id?: string;
 
   /**
-   * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.
+   * @deprecated The `onClose` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.
    */
   onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 
@@ -86,7 +95,7 @@ export interface TagBaseProps {
   slug?: ReactNode;
 
   /**
-   * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.
+   * @deprecated The `title` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.
    */
   title?: string;
 
@@ -101,23 +110,36 @@ export type TagProps<T extends React.ElementType> = PolymorphicProps<
   TagBaseProps
 >;
 
-const Tag = <T extends React.ElementType>({
-  children,
-  className,
-  id,
-  type,
-  filter, // remove filter in next major release - V12
-  renderIcon: CustomIconElement,
-  title = 'Clear filter', // remove title in next major release - V12
-  disabled,
-  onClose, // remove onClose in next major release - V12
-  size,
-  as: BaseComponent,
-  slug,
-  ...other
-}: TagProps<T>) => {
+const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
+  {
+    children,
+    className,
+    id,
+    type,
+    filter, // remove filter in next major release - V12
+    renderIcon: CustomIconElement,
+    title = 'Clear filter', // remove title in next major release - V12
+    disabled,
+    onClose, // remove onClose in next major release - V12
+    size,
+    as: BaseComponent,
+    slug,
+    ...other
+  }: TagProps<T>,
+  forwardRef: ForwardedRef<HTMLElement | undefined>
+) {
   const prefix = usePrefix();
+  const tagRef = useRef<HTMLElement>();
+  const ref = useMergeRefs([forwardRef, tagRef]);
   const tagId = id || `tag-${getInstanceId()}`;
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+
+  useLayoutEffect(() => {
+    const newElement = tagRef.current?.getElementsByClassName(
+      `${prefix}--tag__label`
+    )[0];
+    setIsEllipsisApplied(isEllipsisActive(newElement));
+  }, [prefix, tagRef]);
 
   const conditions = [
     `${prefix}--tag--selectable`,
@@ -133,7 +155,8 @@ const Tag = <T extends React.ElementType>({
     [`${prefix}--tag--${size}`]: size, // TODO: V12 - Remove this class
     [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--tag--${type}`]: type,
-    [`${prefix}--tag--interactive`]: other.onClick && !isInteractiveTag,
+    [`${prefix}--tag--interactive`]:
+      other.onClick && !isInteractiveTag && isEllipsisApplied,
   });
 
   const typeText =
@@ -156,7 +179,7 @@ const Tag = <T extends React.ElementType>({
   }
 
   if (filter) {
-    const ComponentTag = BaseComponent ?? 'div';
+    const ComponentTag = (BaseComponent as React.ElementType) ?? 'div';
     return (
       <ComponentTag className={tagClasses} id={tagId} {...other}>
         {CustomIconElement && size !== 'sm' ? (
@@ -166,9 +189,10 @@ const Tag = <T extends React.ElementType>({
         ) : (
           ''
         )}
+
         <Text
-          className={`${prefix}--tag__label`}
-          title={typeof children === 'string' ? children : undefined}>
+          title={typeof children === 'string' ? children : undefined}
+          className={`${prefix}--tag__label`}>
           {children !== null && children !== undefined ? children : typeText}
         </Text>
         {normalizedSlug}
@@ -191,8 +215,14 @@ const Tag = <T extends React.ElementType>({
       ? 'button'
       : 'div');
 
+  const labelClasses = classNames({
+    [`${prefix}--tag__label`]: !isInteractiveTag,
+    [`${prefix}--tag--${type}`]: type && !isInteractiveTag,
+  });
+
   return (
     <ComponentTag
+      ref={ref}
       disabled={disabled}
       className={tagClasses}
       id={tagId}
@@ -204,13 +234,35 @@ const Tag = <T extends React.ElementType>({
       ) : (
         ''
       )}
-      <Text>
-        {children !== null && children !== undefined ? children : typeText}
-      </Text>
+      {isEllipsisApplied && !isInteractiveTag ? (
+        <DefinitionTooltip
+          openOnHover={false}
+          definition={
+            children !== null && children !== undefined ? children : typeText
+          }
+          className={`${prefix}--definition--tooltip--tag`}>
+          <Text
+            title={
+              children !== null && children !== undefined ? children : typeText
+            }
+            className={labelClasses}>
+            {children !== null && children !== undefined ? children : typeText}
+          </Text>
+        </DefinitionTooltip>
+      ) : (
+        <Text
+          title={
+            children !== null && children !== undefined ? children : typeText
+          }
+          className={labelClasses}>
+          {children !== null && children !== undefined ? children : typeText}
+        </Text>
+      )}
+
       {normalizedSlug}
     </ComponentTag>
   );
-};
+});
 
 Tag.propTypes = {
   /**
@@ -239,7 +291,7 @@ Tag.propTypes = {
    */
   filter: deprecate(
     PropTypes.bool,
-    'This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.'
+    'The `filter` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
   ),
 
   /**
@@ -252,7 +304,7 @@ Tag.propTypes = {
    */
   onClose: deprecate(
     PropTypes.func,
-    'This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.'
+    'The `onClose` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
   ),
 
   /**
@@ -277,7 +329,7 @@ Tag.propTypes = {
    */
   title: deprecate(
     PropTypes.string,
-    'This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.'
+    'The `title` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
   ),
 
   /**
