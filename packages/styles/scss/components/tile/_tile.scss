@@ -232,6 +232,12 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     inline-size: $-icon-container-size;
     inset-block-end: 0;
     inset-inline-end: 0;
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $enable-experimental-tile-contrast
+    ) {
+      border: 1px solid $border-disabled;
+    }
 
     &:focus {
       outline: 2px solid $focus;
@@ -271,6 +277,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile--expandable.#{$prefix}--tile--expandable--interactive {
+    border: none;
     cursor: default;
     transition: max-height $duration-moderate-01 motion(standard, productive);
 
