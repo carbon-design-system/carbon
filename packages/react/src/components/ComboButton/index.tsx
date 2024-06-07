@@ -5,24 +5,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
 import { ChevronDown } from '@carbon/icons-react';
 import { IconButton } from '../IconButton';
 import Button from '../Button';
 import { Menu } from '../Menu';
-
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
 import { useId } from '../../internal/useId';
-import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
+import {
+  useFloating,
+  flip,
+  size as floatingSize,
+  autoUpdate,
+} from '@floating-ui/react';
+import mergeRefs from '../../tools/mergeRefs';
 
-const spacing = 0; // top and bottom spacing between the button and the menu. in px
 const defaultTranslations = {
   'carbon.combo-button.additional-actions': 'Additional actions',
 };
+
+export type MenuAlignment =
+  | 'top'
+  | 'top-start'
+  | 'top-end'
+  | 'bottom'
+  | 'bottom-start'
+  | 'bottom-end';
 
 function defaultTranslateWithId(messageId: string) {
   return defaultTranslations[messageId];
@@ -52,7 +63,7 @@ interface ComboButtonProps {
   /**
    * Experimental property. Specify how the menu should align with the button element
    */
-  menuAlignment?: React.ComponentProps<typeof Menu>['menuAlignment'];
+  menuAlignment?: MenuAlignment;
 
   /**
    * Provide an optional function to be called when the primary action element is clicked.
@@ -95,22 +106,49 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     const id = useId('combobutton');
     const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement>(null);
-    const menuRef = useRef<React.ComponentRef<typeof Menu>>(null);
-    const ref = useMergedRefs([forwardRef, containerRef]);
-    const [width, setWidth] = useState(0);
+    const middlewares = [flip({ crossAxis: false })];
+
+    if (menuAlignment === 'bottom' || menuAlignment === 'top') {
+      middlewares.push(
+        floatingSize({
+          apply({ rects, elements }) {
+            Object.assign(elements.floating.style, {
+              width: `${rects.reference.width}px`,
+            });
+          },
+        })
+      );
+    }
+    const { refs, floatingStyles, placement, middlewareData } = useFloating({
+      placement: menuAlignment,
+
+      // The floating element is positioned relative to its nearest
+      // containing block (usually the viewport). It will in many cases also
+      // “break” the floating element out of a clipping ancestor.
+      // https://floating-ui.com/docs/misc#clipping
+      strategy: 'fixed',
+
+      // Middleware order matters, arrow should be last
+      middleware: middlewares,
+      whileElementsMounted: autoUpdate,
+    });
+    const ref = mergeRefs(forwardRef, containerRef, refs.setReference);
     const {
       open,
-      x,
-      y,
       handleClick: hookOnClick,
       handleMousedown: handleTriggerMousedown,
       handleClose,
     } = useAttachedMenu(containerRef);
 
+    useLayoutEffect(() => {
+      Object.keys(floatingStyles).forEach((style) => {
+        if (refs.floating.current) {
+          refs.floating.current.style[style] = floatingStyles[style];
+        }
+      });
+    }, [floatingStyles, refs.floating, middlewareData, placement, open]);
     function handleTriggerClick() {
       if (containerRef.current) {
-        const { width: w } = containerRef.current.getBoundingClientRect();
-        setWidth(w);
         hookOnClick();
       }
     }
@@ -118,17 +156,6 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     function handlePrimaryActionClick(e: React.MouseEvent<HTMLButtonElement>) {
       if (onClick) {
         onClick(e);
-      }
-    }
-
-    function handleOpen() {
-      if (menuRef.current) {
-        menuRef.current.style.inlineSize = `${width}px`;
-        menuRef.current.style.minInlineSize = `${width}px`;
-
-        if (menuAlignment !== 'bottom' && menuAlignment !== 'top') {
-          menuRef.current.style.inlineSize = `fit-content`;
-        }
       }
     }
 
@@ -164,6 +191,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           </Button>
         </div>
         <IconButton
+          ref={refs.setReference}
           className={triggerClasses}
           label={t('carbon.combo-button.additional-actions')}
           size={size}
@@ -180,16 +208,13 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           containerRef={containerRef}
           menuAlignment={menuAlignment}
           className={menuClasses}
-          ref={menuRef}
+          ref={refs.setFloating}
           id={id}
           label={t('carbon.combo-button.additional-actions')}
           mode="basic"
           size={size}
           open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          x={x}
-          y={[y[0] - spacing, y[1] + spacing]}>
+          onClose={handleClose}>
           {children}
         </Menu>
       </div>
