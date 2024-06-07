@@ -1,0 +1,5 @@
+{
+  "codeConnect": {
+    "include": ["packages/react/code-connect/**"]
+  }
+}
