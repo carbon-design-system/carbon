@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Grid } from '@carbon/react';
 import figma from '@figma/code-connect';

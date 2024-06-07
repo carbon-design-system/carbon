@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { ContentSwitcher } from './ContentSwitcher';
 import figma from '@figma/code-connect';

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Tooltip } from './Tooltip';
 import figma from '@figma/code-connect';

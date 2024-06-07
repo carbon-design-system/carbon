@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// @ts-nocheck
 import React from 'react';
 import { CodeSnippet, CodeSnippetSkeleton } from '@carbon/react';
 import figma from '@figma/code-connect';

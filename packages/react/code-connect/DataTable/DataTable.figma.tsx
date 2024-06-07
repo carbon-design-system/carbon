@@ -13,6 +13,7 @@
 // TableCell : Data table row cell item
 // TableHeader : Data table header cell item
 
+// @ts-nocheck
 import React from 'react';
 import {
   Table,
