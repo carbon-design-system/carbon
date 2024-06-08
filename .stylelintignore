@@ -9,6 +9,7 @@
 **/packages/colors/**/*.scss
 **/packages/elements/scss/**/*.scss
 **/packages/themes/**/*.scss
+**/packages/**/generated/**/*.scss
 
 # packages/components
 packages/components/demo/**

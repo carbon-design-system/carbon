@@ -75,7 +75,7 @@ async function build() {
     await fs.ensureFile(filepath);
 
     const { code } = generate(builder());
-    await fs.writeFile(filepath, code);
+    await fs.writeFile(filepath, await code);
   }
 
   reporter.success('Done! 🎉');

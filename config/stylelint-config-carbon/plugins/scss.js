@@ -9,7 +9,7 @@
 
 const OFF = null;
 
-module.exports = {
+export default {
   plugins: ['stylelint-scss', 'stylelint-use-logical'],
   rules: {
     // @-else
