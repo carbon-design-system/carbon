@@ -200,8 +200,6 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
 );
 
 MenuButton.propTypes = {
-  autoAlign: PropTypes.bool,
-
   /**
    * A collection of MenuItems to be rendered as actions for this MenuButton.
    */
