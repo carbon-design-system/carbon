@@ -5,6 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+
 .#{$prefix}--menu--with-icons {
   --child-icon-property: flex;
   --child-grid-template-columns: 1rem 1fr max-content;

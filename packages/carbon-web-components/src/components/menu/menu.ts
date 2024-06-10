@@ -180,7 +180,6 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       menuSize,
       position,
       _handleKeyDown: handleKeyDown,
-      _handleBlur: handleBlur,
     } = this;
     const menuClasses = classMap({
       [`${className}`]: true,
@@ -197,8 +196,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
         class="${menuClasses}"
         aria-label="${label}"
         tabindex="1"
-        @keydown="${handleKeyDown}"
-        @blur="${handleBlur}">
+        @keydown="${handleKeyDown}">
         <slot></slot>
       </ul>
     `;
@@ -286,13 +284,6 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       activeElement = activeElement.shadowRoot.activeElement;
     }
     return activeElement;
-  };
-  _handleBlur = (e: FocusEvent) => {
-    console.log(this.contains(e.relatedTarget),'tar');
-    
-    if (this.open && this.onClose && this.isRoot && this.contains(e.relatedTarget)) {
-      this._handleClose(e);
-    }
   };
 
   _notEmpty = (value: number | null | undefined) => {
