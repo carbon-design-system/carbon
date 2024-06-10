@@ -355,3 +355,33 @@ export const _Controlled = () => {
     </div>
   );
 };
+
+export const SelectAll = () => {
+  const [label, setLabel] = useState('Choose options');
+
+  const onChange = (value) => {
+    if (value.selectedItems.length == 1) {
+      setLabel('Option selected');
+    } else if (value.selectedItems.length > 1) {
+      setLabel('Options selected');
+    } else {
+      setLabel('Choose options');
+    }
+  };
+
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        label={label}
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        hasSelectAll={true}
+        onChange={onChange}
+      />
+    </div>
+  );
+};

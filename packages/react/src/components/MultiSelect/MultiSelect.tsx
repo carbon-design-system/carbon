@@ -186,6 +186,11 @@ export interface MultiSelectProps<ItemType>
   hasSelectAll?: boolean;
 
   /**
+   * Provide Label for Select All option
+   */
+  labelforSelectAll?: string;
+
+  /**
    * Provide helper text that is used alongside the control label for
    * additional help
    */
@@ -367,6 +372,7 @@ const MultiSelect = React.forwardRef(
       locale = 'en',
       slug,
       hasSelectAll = false,
+      labelforSelectAll = 'All',
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
@@ -388,7 +394,7 @@ const MultiSelect = React.forwardRef(
 
     const selectAllOption = {
       id: 'select-all-option',
-      text: 'All',
+      text: labelforSelectAll,
       selectAllFlag: true,
     };
 
@@ -932,6 +938,11 @@ MultiSelect.propTypes = {
    * this field is for
    */
   label: PropTypes.node.isRequired,
+
+  /**
+   * Provide Label for Select All option.
+   */
+  labelforSelectAll: PropTypes.string,
 
   /**
    * `true` to use the light version.
