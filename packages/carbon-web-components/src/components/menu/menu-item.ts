@@ -250,8 +250,8 @@ class CDSmenuItem extends LitElement {
             switch (item.tagName) {
               case 'CDS-MENU-ITEM-RADIO-GROUP':
                 this.submenuEntry = item.shadowRoot
-                  ?.querySelector('cds-menu-item')
-                  ?.shadowRoot?.querySelector('.cds--menu-item');
+                  ?.querySelector(`${prefix}-menu-item`)
+                  ?.shadowRoot?.querySelector(`.${prefix}--menu-item`);
                 break;
               case 'CDS-MENU-ITEM-GROUP': {
                 const slotElements = item.shadowRoot
@@ -259,15 +259,20 @@ class CDSmenuItem extends LitElement {
                   ?.assignedElements();
                 const firstElement =
                   slotElements?.length &&
-                  slotElements[0].shadowRoot?.querySelector('cds-menu-item');
+                  slotElements[0].shadowRoot?.querySelector(
+                    `${prefix}-menu-item`
+                  );
                 this.submenuEntry =
                   firstElement &&
-                  firstElement.shadowRoot?.querySelector('.cds--menu-item');
+                  firstElement.shadowRoot?.querySelector(
+                    `.${prefix}--menu-item`
+                  );
                 break;
               }
               case 'CDS-MENU-ITEM':
-                this.submenuEntry =
-                  item.shadowRoot?.querySelector('.cds--menu-item');
+                this.submenuEntry = item.shadowRoot?.querySelector(
+                  `.${prefix}--menu-itemz`
+                );
                 break;
             }
           }
@@ -286,7 +291,7 @@ class CDSmenuItem extends LitElement {
     };
     this.submenuOpen = false;
     (
-      this.shadowRoot?.querySelector('.cds--menu-item') as HTMLLIElement
+      this.shadowRoot?.querySelector(`.${prefix}--menu-item`) as HTMLLIElement
     )?.focus();
   };
   _handleKeyDown = (e: KeyboardEvent) => {
