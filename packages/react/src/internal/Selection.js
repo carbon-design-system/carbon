@@ -62,21 +62,20 @@ export function useSelection({
         return;
       }
 
-      const isAllSelected = selectedItems.find((item) => item.selectAllFlag);
       const AllSelectableItems = itemsWithSelectAll.filter(
         (item) => !item.disabled
       );
       const disabledItems = itemsWithSelectAll.filter((item) => item.disabled);
 
-      //select all option
-      if (item && item.selectAllFlag && !isAllSelected) {
-        setSelectedItems(AllSelectableItems);
+      //deselect all on click to All/indeterminate option
+      if (item && item.selectAllFlag && selectedItems.length > 0) {
+        setSelectedItems([]);
         return;
       }
 
-      //deselect all on click to All option
-      if (isAllSelected && item.selectAllFlag) {
-        setSelectedItems([]);
+      //select all option
+      if (item && item.selectAllFlag && selectedItems.length == 0) {
+        setSelectedItems(AllSelectableItems);
         return;
       }
 
@@ -93,7 +92,6 @@ export function useSelection({
         // checking if all items are selected then We should select mark the 'select All' option as well
         if (
           hasSelectAll &&
-          !isAllSelected &&
           itemsWithSelectAll.length - 1 ===
             selectedItems.length + disabledItems.length + 1
         ) {
