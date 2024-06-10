@@ -5388,6 +5388,9 @@ Map {
         "isRequired": true,
         "type": "node",
       },
+      "labelforSelectAll": Object {
+        "type": "string",
+      },
       "light": [Function],
       "locale": Object {
         "type": "string",
