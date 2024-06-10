@@ -61,7 +61,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
    * class for the menu.
    */
   @property({ type: String })
-  className='';
+  className = '';
   /**
    * Parent state.
    */
@@ -409,7 +409,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     this.style.insetBlockStart = `${pos[1]}px`;
     this.position = pos;
   };
-  _handleClose = (e: KeyboardEvent | FocusEvent) => {
+  _handleClose = () => {
     if (this.onClose) {
       this.onClose();
     }

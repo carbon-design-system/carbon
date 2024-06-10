@@ -13,7 +13,6 @@ import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
-import Checkmark16 from '@carbon/icons/lib/checkmark/16';
 import CaretLeft16 from '@carbon/icons/lib/caret--left/16';
 import CaretRight16 from '@carbon/icons/lib/caret--right/16';
 import { consume, provide } from '@lit/context';
