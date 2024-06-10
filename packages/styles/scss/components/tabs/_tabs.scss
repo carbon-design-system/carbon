@@ -541,6 +541,15 @@
       color: $text-primary;
     }
 
+    &.#{$prefix}--tabs--vertical
+      .#{$prefix}--tabs__nav-item:not(
+        .#{$prefix}--tabs__nav-item--selected
+      ):not(.#{$prefix}--tabs__nav-item--disabled):not(
+        .#{$prefix}--tabs__nav-item--hover-off
+      ):hover {
+      background-color: $layer-hover;
+    }
+
     //-----------------------------
     // Item Selected
     //-----------------------------
@@ -634,7 +643,6 @@
       .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
       background-color: $layer;
       border-block-end: 1px solid $border-subtle;
-      box-shadow: inset 3px 0 0 0 $border-disabled;
     }
 
     .#{$prefix}--tabs__nav-item--disabled:focus,
