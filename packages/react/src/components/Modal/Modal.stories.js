@@ -322,7 +322,6 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           <SelectItem value="us-south" text="US South" />
           <SelectItem value="us-east" text="US East" />
         </Select>
-
         {args.hasScrollingContent && (
           <>
             <p>
