@@ -18,7 +18,6 @@ import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import mdx from './Accordion.mdx';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-import Dropdown from '../Dropdown';
 
 export default {
   title: 'Components/Accordion',
@@ -34,49 +33,23 @@ export default {
   },
 };
 
-const items = [
-  {
-    id: 'option-0',
-    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-  },
-  {
-    id: 'option-1',
-    text: 'Option 1',
-  },
-  {
-    id: 'option-2',
-    text: 'Option 2',
-  },
-  {
-    id: 'option-3',
-    text: 'Option 3 - a disabled item',
-    disabled: true,
-  },
-  {
-    id: 'option-4',
-    text: 'Option 4',
-  },
-  {
-    id: 'option-5',
-    text: 'Option 5',
-  },
-];
-
 export const Default = () => (
   <Accordion>
-    <AccordionItem title="Section 1 title"></AccordionItem>
+    <AccordionItem title="Section 1 title">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.
+      </p>
+    </AccordionItem>
     <AccordionItem title="Section 2 title">
-      <Dropdown
-        autoAlign={true}
-        id="default"
-        titleText="Dropdown label"
-        helperText="This is some helper text"
-        initialSelectedItem={items[1]}
-        label="Option 1"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        direction="top"
-      />
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.
+      </p>
     </AccordionItem>
     <AccordionItem title="Section 3 title">
       <p>
