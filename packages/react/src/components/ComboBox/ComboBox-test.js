@@ -63,6 +63,32 @@ describe('ComboBox', () => {
     }
   });
 
+  it.only('should call `onChange` with the proper item when `shouldFilterItem` is provided', async () => {
+    const filterItems = (menu) => {
+      return menu?.item?.label
+        ?.toLowerCase()
+        .includes(menu?.inputValue?.toLowerCase());
+    };
+    const onInputChange = jest.fn();
+
+    render(
+      <ComboBox
+        {...mockProps}
+        shouldFilterItem={filterItems}
+        onInputChange={onInputChange}
+      />
+    );
+
+    await userEvent.type(findInputNode(), 'Item 2');
+    expect(onInputChange).toHaveBeenCalledWith('Item 2');
+
+    await userEvent.click(screen.getAllByRole('option')[0]);
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: mockProps.items[2],
+    });
+  });
+
   it('capture filter text events', async () => {
     const onInputChange = jest.fn();
     render(<ComboBox {...mockProps} onInputChange={onInputChange} />);
