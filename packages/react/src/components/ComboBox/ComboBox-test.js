@@ -16,7 +16,8 @@ import {
   generateGenericItem,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
+
 import { Slug } from '../Slug';
 
 const findInputNode = () => screen.getByRole('combobox');
