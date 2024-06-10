@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
@@ -14,7 +14,27 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const getInstanceId = setupGetInstanceId();
 
-function CheckboxGroup({
+export interface CheckboxGroupProps {
+  children?: ReactNode;
+  className?: string;
+  helperText?: ReactNode;
+  invalid?: boolean;
+  invalidText?: ReactNode;
+  legendId?: ReactNode;
+  orientation?: 'horizontal' | 'vertical';
+  legendText: ReactNode;
+  readOnly?: boolean;
+  slug?: ReactNode;
+  warn?: boolean;
+  warnText?: ReactNode;
+}
+
+export interface CustomType {
+  size: string;
+  kind: string;
+}
+
+const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   children,
   className,
   helperText,
@@ -28,7 +48,7 @@ function CheckboxGroup({
   slug,
   orientation = 'vertical',
   ...rest
-}) {
+}) => {
   const prefix = usePrefix();
 
   const showWarning = !readOnly && !invalid && warn;
@@ -56,20 +76,21 @@ function CheckboxGroup({
 
   // Slug is always size `mini`
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (
+    React.isValidElement(slug) &&
+    (slug['type'] as any)?.displayName === 'Slug'
+  ) {
     normalizedSlug = React.cloneElement(slug, {
       size: 'mini',
       kind: 'default',
-    });
+    } as CustomType);
   }
-
   return (
     <fieldset
       className={fieldsetClasses}
       data-invalid={invalid ? true : undefined}
       aria-labelledby={rest['aria-labelledby'] || legendId}
       aria-readonly={readOnly}
-      orientation="vertical"
       aria-describedby={!invalid && !warn && helper ? helperId : undefined}
       {...rest}>
       <legend
@@ -98,7 +119,7 @@ function CheckboxGroup({
       {showHelper && helper}
     </fieldset>
   );
-}
+};
 
 CheckboxGroup.propTypes = {
   /**
@@ -141,7 +162,6 @@ CheckboxGroup.propTypes = {
    * Provide the orientation for how the checkbox should be displayed
    */
   orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-
   /**
    * Whether the CheckboxGroup should be read-only
    */
