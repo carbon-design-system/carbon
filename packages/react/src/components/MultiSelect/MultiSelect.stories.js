@@ -15,6 +15,7 @@ import MultiSelect from '.';
 import FilterableMultiSelect from './FilterableMultiSelect';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
+import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
 
 export default {
   title: 'Components/MultiSelect',
@@ -270,6 +271,45 @@ export const Filterable = (args) => {
         {...args}
       />
     </div>
+  );
+};
+
+export const Test = (args) => {
+  return (
+    <Tabs>
+      <TabList aria-label="List of tabs">
+        <Tab>Overview</Tab>
+      </TabList>
+
+      <TabPanels>
+        <TabPanel>
+          <FilterableMultiSelect
+            style={{ marginTop: '3rem' }}
+            key={'t1'}
+            helperText="INTABS"
+            label="label"
+            titleText={'Title'}
+            itemToString={(item) => item}
+            items={[
+              'AAAB1',
+              'AAAB2',
+              'AAAB3',
+              'AAAB4',
+              'AAAB5',
+              'AAAB6',
+              'AAAB7',
+              'AAAB8',
+              'AAAB9',
+              'AAABA',
+              'AAABB',
+              'AAABC',
+              'AAABD',
+              'AAABF',
+            ]}
+          />
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
   );
 };
 
