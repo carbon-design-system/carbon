@@ -211,7 +211,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       (e.key === 'Escape' || (!isRoot && e.key === 'ArrowLeft')) &&
       this.onClose
     ) {
-      this._handleClose(e);
+      this._handleClose();
     } else {
       this._focusItem(e);
     }
