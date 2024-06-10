@@ -448,7 +448,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     if (changes.isOpen && !isOpen) {
       setTopItems(controlledSelectedItems);
     }
-    console.log(type);
     switch (type) {
       case InputKeyDownEnter:
         if (changes.selectedItem && changes.selectedItem.disabled !== true) {
@@ -479,7 +478,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         if (onInputValueChange) {
           onInputValueChange(changes.inputValue);
         }
-        console.log('valueee');
         setInputValue(changes.inputValue ?? '');
         setIsOpen(true);
         return changes;
@@ -551,7 +549,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   });
 
   function clearInputValue(event?: KeyboardEvent | undefined) {
-    console.log('clear');
     const value = textInput.current?.value;
     if (value?.length === 1 || (event && match(event, keys.Escape))) {
       setInputValue('');
