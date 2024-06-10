@@ -548,6 +548,7 @@
         .#{$prefix}--tabs__nav-item--hover-off
       ):hover {
       background-color: $layer-hover;
+      box-shadow: inset 3px 0 0 0 $border-strong;
     }
 
     //-----------------------------
