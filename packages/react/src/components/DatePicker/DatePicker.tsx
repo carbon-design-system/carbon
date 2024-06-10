@@ -201,7 +201,7 @@ export type CalRef = {
   plugins: [];
   clickOpens: any;
 };
-interface DatePickerProps {
+export interface DatePickerProps {
   /**
    * Flatpickr prop passthrough enables direct date input, and when set to false,
    * we must clear dates manually by resetting the value prop to empty string making it a controlled input.
