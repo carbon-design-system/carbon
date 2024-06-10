@@ -1584,9 +1584,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/styles@npm:1.58.0":
-  version: 1.58.0
-  resolution: "@carbon/styles@npm:1.58.0"
+"@carbon/styles@npm:1.59.0":
+  version: 1.59.0
+  resolution: "@carbon/styles@npm:1.59.0"
   dependencies:
     "@carbon/colors": "npm:^11.22.0"
     "@carbon/feature-flags": "npm:^0.20.0"
@@ -1602,7 +1602,7 @@ __metadata:
   peerDependenciesMeta:
     sass:
       optional: true
-  checksum: 10/b4dd73035fecbd87a360242ea2c06edbdb1657f4ecf05713bab01e472dae5bc729ed46c6fd1c42a49fa44e93dd975ba78ac7abaf7639c005bdce76a79feb3046
+  checksum: 10/3d6766481e747ef25a778c14fc932c13b98018810060c90241175ffef5830d829129f47c4dd9aa8bdb96355762bd9f508881ff2e95d4113c1fe39c032dd19476
   languageName: node
   linkType: hard
 
@@ -1650,7 +1650,7 @@ __metadata:
     "@carbon/ibm-products-styles": "npm:^2.30.1"
     "@carbon/icon-helpers": "npm:10.47.0"
     "@carbon/icons": "npm:^11.31.0"
-    "@carbon/styles": "npm:1.58.0"
+    "@carbon/styles": "npm:1.59.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@mdx-js/esbuild": "npm:^3.0.1"

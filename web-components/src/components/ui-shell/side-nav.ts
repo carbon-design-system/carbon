@@ -10,7 +10,6 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import on from '../../globals/mixins/on';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
@@ -44,18 +43,6 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
   private _hTransition: Handle | null = null;
 
   /**
-   * A promise that is resolved when the transition is complete.
-   */
-  private _transitionPromise = Promise.resolve();
-
-  /**
-   * A promise that is resolved when the transition upon proprety update is complete.
-   */
-  private get _updateAndTransitionPromise() {
-    return this.updateComplete.then(() => this._transitionPromise);
-  }
-
-  /**
    * Cleans the handle for `transitionend` event listener.
    */
   private _cleanHTransition() {
@@ -69,19 +56,8 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
    */
   @HostListener('parentRoot:eventButtonToggle')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleButtonToggle = async (event: CustomEvent) => {
+  protected _handleButtonToggle = async (event: CustomEvent) => {
     this.expanded = event.detail.active;
-    if (this.expanded) {
-      await this._updateAndTransitionPromise;
-      // Checks if the side nav is not collapsed during the animation
-      if (this.expanded) {
-        (
-          this.querySelector(
-            (this.constructor as typeof CDSSideNav).selectorNavItems
-          ) as HTMLElement
-        )?.focus();
-      }
-    }
   };
 
   /**
@@ -138,19 +114,6 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
     super.disconnectedCallback();
   }
 
-  shouldUpdate(changedProperties) {
-    if (changedProperties.has('expanded')) {
-      this._transitionPromise = new Promise((resolve) => {
-        this._cleanHTransition();
-        this._hTransition = on(this, 'transitionend', () => {
-          this._cleanHTransition();
-          resolve();
-        });
-      });
-    }
-    return true;
-  }
-
   updated(changedProperties) {
     const doc = this.getRootNode() as Document;
     if (changedProperties.has('collapseMode')) {
@@ -179,6 +142,11 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
         forEach(headerItems, (item) => {
           item.setAttribute('tabindex', '-1');
         });
+        (
+          this.querySelector(
+            (this.constructor as typeof CDSSideNav).selectorNavItems
+          ) as HTMLElement
+        )?.focus();
       } else {
         forEach(headerItems, (item) => {
           item.removeAttribute('tabindex');
