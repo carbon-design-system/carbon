@@ -784,7 +784,7 @@ const MultiSelect = React.forwardRef(
                 return (
                   <ListBox.MenuItem
                     key={itemProps.id}
-                    isActive={isChecked && item['selectAllFlag']}
+                    isActive={isChecked && !item['selectAllFlag']}
                     aria-label={itemText}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
