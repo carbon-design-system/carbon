@@ -13,7 +13,7 @@ import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import Checkmark16 from '@carbon/icons/lib/checkmark/16';
-import { ChangeEventHandler, EventHandler } from 'react';
+import { ChangeEventHandler } from 'react';
 
 /**
  * Menu Item.

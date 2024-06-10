@@ -13,8 +13,6 @@ import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import Checkmark16 from '@carbon/icons/lib/checkmark/16';
-import { classMap } from 'lit/directives/class-map.js';
-import Checkmark16 from '@carbon/icons/lib/checkmark/16';
 /**
  * Menu Item.
  *
@@ -46,7 +44,6 @@ class CDSmenuItemSelectable extends LitElement {
   };
   render() {
     const { label, selected, _handleClick: handleClick } = this;
-    let checked = true;
     return html`
       <cds-menu-item
         label="${label}"
