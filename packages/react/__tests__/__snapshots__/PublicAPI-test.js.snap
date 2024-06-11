@@ -4522,9 +4522,6 @@ Map {
   "MenuButton" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
-      "autoAlign": Object {
-        "type": "bool",
-      },
       "children": Object {
         "isRequired": true,
         "type": "node",
