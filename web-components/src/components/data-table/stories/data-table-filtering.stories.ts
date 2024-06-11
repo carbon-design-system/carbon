@@ -11,7 +11,7 @@ import { html } from 'lit';
 import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
 // @ts-ignore
-import Settings16 from '@carbon/web-components/es/icons/settings/16';
+import Settings16 from '@carbon/icons/es/settings/16';
 import '../index';
 import storyDocs from './data-table.mdx';
 

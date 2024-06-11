@@ -11,7 +11,7 @@ import { html, render } from 'lit';
 // Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Fade16 from '@carbon/web-components/es/icons/fade/16';
+import Fade16 from '@carbon/icons/es/fade/16';
 import EventManager from '../utils/event-manager';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import CDSHeaderMenu from '../../src/components/ui-shell/header-menu';

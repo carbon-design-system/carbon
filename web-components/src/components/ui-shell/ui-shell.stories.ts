@@ -11,10 +11,10 @@ import { html } from 'lit';
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Fade16 from '@carbon/web-components/es/icons/fade/16';
-import Search20 from '@carbon/web-components/es/icons/search/20';
-import Notification20 from '@carbon/web-components/es/icons/notification/20';
-import SwitcherIcon20 from '@carbon/web-components/es/icons/switcher/20';
+import Fade16 from '@carbon/icons/es/fade/16';
+import Search20 from '@carbon/icons/es/search/20';
+import Notification20 from '@carbon/icons/es/notification/20';
+import SwitcherIcon20 from '@carbon/icons/es/switcher/20';
 import contentStyles from '@carbon/styles/scss/components/ui-shell/content/_content.scss?lit';
 import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from './side-nav';
 import { classMap } from 'lit/directives/class-map.js';

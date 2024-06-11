@@ -12,13 +12,13 @@ import { html, svg } from 'lit';
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Add16 from '@carbon/web-components/es/icons/add/16';
+import Add16 from '@carbon/icons/es/add/16';
 // @ts-ignore
-import Add20 from '@carbon/web-components/es/icons/add/20';
+import Add20 from '@carbon/icons/es/add/20';
 // @ts-ignore
-import Add24 from '@carbon/web-components/es/icons/add/24';
+import Add24 from '@carbon/icons/es/add/24';
 // @ts-ignore
-import Add32 from '@carbon/web-components/es/icons/add/32';
+import Add32 from '@carbon/icons/es/add/32';
 
 export const Default = {
   render: () => html` ${Add16()} ${Add20()} ${Add24()} ${Add32()} `,
