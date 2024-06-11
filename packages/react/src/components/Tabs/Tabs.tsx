@@ -27,6 +27,7 @@ import React, {
   type ReactHTML,
   type ElementType,
 } from 'react';
+import { Grid } from '../Grid';
 import { isElement } from 'react-is';
 import { Tooltip } from '../Tooltip';
 import { useControllableState } from '../../internal/useControllableState';
@@ -43,6 +44,8 @@ import { Close } from '@carbon/icons-react';
 import { useEvent } from '../../internal/useEvent';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
+
+const verticalTabHeight = 64;
 
 // Used to manage the overall state of the Tabs
 type TabsContextType = {
@@ -107,6 +110,11 @@ export interface TabsProps {
   dismissable?: boolean;
 
   /**
+   * Option to set a height style only if using vertical variation
+   */
+  height?: string;
+
+  /**
    * Provide an optional function which is called
    * whenever the state of the `Tabs` changes
    */
@@ -123,15 +131,22 @@ export interface TabsProps {
    * in a controlled mode and should be used along with `onChange`
    */
   selectedIndex?: number;
+
+  /**
+   * Whether or not the Tabs are being rendered vertically or not
+   */
+  vertical?: boolean;
 }
 
 function Tabs({
   children,
   defaultSelectedIndex = 0,
+  height,
   onChange,
   selectedIndex: controlledSelectedIndex,
   dismissable,
   onTabCloseRequest,
+  vertical,
 }: TabsProps) {
   const baseId = useId('ccs');
   // The active index is used to track the element which has focus in our tablist
@@ -153,7 +168,16 @@ function Tabs({
     selectedIndex,
     setSelectedIndex,
   };
+  const isSm = useMatchMedia(smMediaQuery);
 
+  if (vertical && !isSm) {
+    return (
+      // eslint-disable-next-line react/forbid-component-props
+      <Grid style={{ height: height }}>
+        <TabsContext.Provider value={value}>{children}</TabsContext.Provider>
+      </Grid>
+    );
+  }
   return <TabsContext.Provider value={value}>{children}</TabsContext.Provider>;
 }
 
@@ -813,14 +837,30 @@ function TabListVertical({
 
   useEffect(() => {
     function handler() {
-      const tab = tabs.current[selectedIndex];
-      if (scrollIntoView && tab) {
-        tab.scrollIntoView({
-          block: 'nearest',
-          inline: 'nearest',
-        });
+      const containerHeight = ref.current?.offsetHeight;
+      const containerTop = ref.current?.getBoundingClientRect().top;
+      const selectedPositionTop =
+        tabs.current[selectedIndex]?.getBoundingClientRect().top;
+
+      const halfTabHeight = verticalTabHeight / 2;
+      if (containerTop && containerHeight) {
+        // scrolls so selected tab is in view
+        if (
+          selectedPositionTop - halfTabHeight < containerTop ||
+          selectedPositionTop -
+            containerTop +
+            verticalTabHeight +
+            halfTabHeight >
+            containerHeight
+        ) {
+          ref.current.scrollTo({
+            top: (selectedIndex - 1) * verticalTabHeight,
+            behavior: 'smooth',
+          });
+        }
       }
     }
+
     window.addEventListener('resize', handler);
 
     handler();
@@ -837,10 +877,12 @@ function TabListVertical({
     }
 
     const handler = () => {
+      const halfTabHeight = verticalTabHeight / 2;
       setIsOverflowingBottom(
-        element.scrollTop + element.clientHeight + 32 <= element.scrollHeight
+        element.scrollTop + element.clientHeight + halfTabHeight <=
+          element.scrollHeight
       );
-      setIsOverflowingTop(element.scrollTop > 32);
+      setIsOverflowingTop(element.scrollTop > halfTabHeight);
     };
 
     const resizeObserver = new ResizeObserver(() => handler());
@@ -1551,58 +1593,12 @@ export interface TabPanelsProps {
 }
 
 function TabPanels({ children }: TabPanelsProps) {
-  const prefix = usePrefix();
-  const refs = useRef<(HTMLDivElement | null)[]>([]);
-  const hiddenStates = useRef<boolean[]>([]);
-
-  useEffect(() => {
-    function handler() {
-      const tabContainer = refs.current[0]?.previousElementSibling;
-
-      // Should only apply same height to vertical Tab Panels
-      if (tabContainer?.classList.contains(`${prefix}--tabs--vertical`)) {
-        hiddenStates.current = refs.current.map((ref) => ref?.hidden || false);
-
-        // un-hide hidden Tab Panels to get heights
-        refs.current.forEach((ref) => {
-          if (ref) {
-            ref.hidden = false;
-          }
-        });
-
-        // set the height for each Tab Panel and the container of the Tabs to the max height
-        const heights = refs.current.map((ref) => ref?.offsetHeight || 0);
-        const max = Math.max(...heights);
-        (tabContainer as HTMLElement).style.height = max + 'px';
-        refs.current.forEach((ref, index) => {
-          if (ref) {
-            ref.hidden = hiddenStates.current[index];
-            ref.style.height = max + 'px';
-          }
-        });
-      } else {
-        refs.current.forEach((ref) => ref?.removeAttribute('style'));
-      }
-    }
-    window.addEventListener('resize', handler);
-
-    handler();
-
-    return () => {
-      window.removeEventListener('resize', handler);
-    };
-  }, [children, prefix]);
-
   return (
     <>
       {React.Children.map(children, (child, index) => {
         return (
           <TabPanelContext.Provider value={index}>
-            {React.cloneElement(child as React.ReactElement<any>, {
-              ref: (element: HTMLDivElement) => {
-                refs.current[index] = element;
-              },
-            })}
+            {child}
           </TabPanelContext.Provider>
         );
       })}

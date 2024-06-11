@@ -81,9 +81,12 @@
     &.#{$prefix}--tabs--vertical {
       background: $layer;
       border-inline-end: 1px solid $border-subtle;
-      float: inline-start;
-      inline-size: 25%;
+      grid-column: span 2;
       max-block-size: none;
+
+      @include breakpoint(lg) {
+        grid-column: span 4;
+      }
 
       .#{$prefix}--tab--list {
         flex-direction: column;
@@ -109,6 +112,10 @@
         inset-inline: 0;
         pointer-events: none;
       }
+    }
+
+    &.#{$prefix}--tabs--vertical__small {
+      grid-column: 1/-1;
     }
 
     .#{$prefix}--tabs__nav {
@@ -696,8 +703,16 @@
   }
 
   .#{$prefix}--tabs--vertical ~ .#{$prefix}--tab-content {
-    float: inline-start;
-    inline-size: 75%;
+    grid-column: 3/-1;
+    overflow-y: auto;
+
+    @include breakpoint(lg) {
+      grid-column: 5/-1;
+    }
+  }
+
+  .#{$prefix}--tabs--vertical__small ~ .#{$prefix}--tab-content {
+    grid-column: 1/-1;
   }
 
   .#{$prefix}--tab-content--interactive {

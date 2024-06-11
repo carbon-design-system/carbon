@@ -552,47 +552,45 @@ export const ContainedFullWidth = () => (
 );
 
 export const Vertical = () => (
-  <div>
-    <Tabs>
-      <TabListVertical aria-label="List of tabs">
-        <Tab>Dashboard</Tab>
-        <Tab>
-          Extra long label that will go two lines then truncate when it goes
-          beyond the Tab length
-        </Tab>
-        <Tab>Activity</Tab>
-        <Tab>Analyze</Tab>
-        <Tab>Investigate </Tab>
-        <Tab>Learn</Tab>
-        <Tab disabled>Settings</Tab>
-      </TabListVertical>
-      <TabPanels>
-        <TabPanel>Tab Panel 1</TabPanel>
-        <TabPanel>
-          <form style={{ margin: '2em' }}>
-            <legend className={`cds--label`}>Validation example</legend>
-            <Checkbox id="cb" labelText="Accept privacy policy" />
-            <Button
-              style={{ marginTop: '1rem', marginBottom: '1rem' }}
-              type="submit">
-              Submit
-            </Button>
-            <TextInput
-              type="text"
-              labelText="Text input label"
-              helperText="Optional help text"
-              id="text-input-1"
-            />
-          </form>
-        </TabPanel>
-        <TabPanel>Tab Panel 3</TabPanel>
-        <TabPanel>Tab Panel 4</TabPanel>
-        <TabPanel>Tab Panel 5</TabPanel>
-        <TabPanel>Tab Panel 6</TabPanel>
-        <TabPanel>Tab Panel 7</TabPanel>
-      </TabPanels>
-    </Tabs>
-  </div>
+  <Tabs vertical height="300px">
+    <TabListVertical aria-label="List of tabs">
+      <Tab>Dashboard</Tab>
+      <Tab>
+        Extra long label that will go two lines then truncate when it goes
+        beyond the Tab length
+      </Tab>
+      <Tab>Activity</Tab>
+      <Tab>Analyze</Tab>
+      <Tab>Investigate </Tab>
+      <Tab>Learn</Tab>
+      <Tab disabled>Settings</Tab>
+    </TabListVertical>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>
+        <form style={{ margin: '2em' }}>
+          <legend className={`cds--label`}>Validation example</legend>
+          <Checkbox id="cb" labelText="Accept privacy policy" />
+          <Button
+            style={{ marginTop: '1rem', marginBottom: '1rem' }}
+            type="submit">
+            Submit
+          </Button>
+          <TextInput
+            type="text"
+            labelText="Text input label"
+            helperText="Optional help text"
+            id="text-input-1"
+          />
+        </form>
+      </TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
+      <TabPanel>Tab Panel 5</TabPanel>
+      <TabPanel>Tab Panel 6</TabPanel>
+      <TabPanel>Tab Panel 7</TabPanel>
+    </TabPanels>
+  </Tabs>
 );
 
 export const Skeleton = () => {
