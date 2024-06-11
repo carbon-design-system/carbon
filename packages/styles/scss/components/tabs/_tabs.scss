@@ -165,7 +165,7 @@
 
     &.#{$prefix}--tabs--contained
       .#{$prefix}--tab--overflow-nav-button--previous::before {
-      background-image: linear-gradient(
+      background: linear-gradient(
         to left,
         rgba(255, 255, 255, 0),
         $layer-accent
