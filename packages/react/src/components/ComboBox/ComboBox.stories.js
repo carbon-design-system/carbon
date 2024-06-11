@@ -74,7 +74,7 @@ export const Default = () => (
   </div>
 );
 
-export const AllowCustomValue = () => {
+export const AllowCustomValue = (args) => {
   const filterItems = (menu) => {
     return menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase());
   };
@@ -83,7 +83,7 @@ export const AllowCustomValue = () => {
       <ComboBox
         allowCustomValue
         shouldFilterItem={filterItems}
-        onChange={() => {}}
+        onChange={args.onChange}
         id="carbon-combobox"
         items={['Apple', 'Orange', 'Banana', 'Pineapple', 'Raspberry', 'Lime']}
         titleText="ComboBox title"
@@ -91,6 +91,10 @@ export const AllowCustomValue = () => {
       />
     </div>
   );
+};
+
+AllowCustomValue.argTypes = {
+  onChange: { action: 'onChange' },
 };
 
 export const _WithLayer = () => (
