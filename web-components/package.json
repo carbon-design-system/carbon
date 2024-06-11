@@ -109,6 +109,7 @@
     "@storybook/addon-links": "^8.0.6",
     "@storybook/addon-mdx-gfm": "^8.0.6",
     "@storybook/addon-storysource": "^8.0.6",
+    "@storybook/addons": "7.6.17",
     "@storybook/blocks": "^8.0.6",
     "@storybook/web-components": "^8.0.6",
     "@storybook/web-components-vite": "^8.0.6",
@@ -128,6 +129,7 @@
     "autoprefixer": "^9.8.8",
     "babel-loader": "^8.0.4",
     "babel-plugin-template-html-minifier": "^4.1.0",
+    "bluebird": "3.7.2",
     "child-process-promise": "^2.2.1",
     "commander": "^4.1.0",
     "core-js": "^3.19.1",
@@ -198,5 +200,6 @@
     "vite": "^5.0.7",
     "web-component-analyzer": "1.2.0-next.0"
   },
-  "typings": "es/index.d.ts"
+  "typings": "es/index.d.ts",
+  "packageManager": "yarn@4.3.0"
 }
