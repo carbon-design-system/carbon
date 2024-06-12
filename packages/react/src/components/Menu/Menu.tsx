@@ -98,6 +98,8 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
    * Specify the y position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([y1, y2])
    */
   y?: number | [number, number];
+
+  legacyAutoalign?: boolean;
 }
 
 const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
@@ -112,6 +114,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     onOpen,
     open,
     size = 'sm',
+    legacyAutoalign = 'true',
     // TODO: #16004
     // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
     target = document.body,
@@ -179,21 +182,22 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   function handleOpen() {
     if (menu.current) {
       focusReturn.current = document.activeElement as HTMLElement;
+      if (legacyAutoalign) {
+        const pos = calculatePosition();
+        if (
+          (document?.dir === 'rtl' || direction === 'rtl') &&
+          !rest?.id?.includes('MenuButton')
+        ) {
+          menu.current.style.insetInlineStart = `initial`;
+          menu.current.style.insetInlineEnd = `${pos[0]}px`;
+        } else {
+          menu.current.style.insetInlineStart = `${pos[0]}px`;
+          menu.current.style.insetInlineEnd = `initial`;
+        }
 
-      const pos = calculatePosition();
-      if (
-        (document?.dir === 'rtl' || direction === 'rtl') &&
-        !rest?.id?.includes('MenuButton')
-      ) {
-        menu.current.style.insetInlineStart = `initial`;
-        menu.current.style.insetInlineEnd = `${pos[0]}px`;
-      } else {
-        menu.current.style.insetInlineStart = `${pos[0]}px`;
-        menu.current.style.insetInlineEnd = `initial`;
+        menu.current.style.insetBlockStart = `${pos[1]}px`;
+        setPosition(pos);
       }
-
-      menu.current.style.insetBlockStart = `${pos[1]}px`;
-      setPosition(pos);
 
       menu.current.focus();
 
@@ -416,7 +420,8 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       [`${prefix}--menu--box-shadow-top`]:
         menuAlignment && menuAlignment.slice(0, 3) === 'top',
       [`${prefix}--menu--open`]: open,
-      [`${prefix}--menu--shown`]: position[0] >= 0 && position[1] >= 0,
+      [`${prefix}--menu--shown`]:
+        (open && !legacyAutoalign) || (position[0] >= 0 && position[1] >= 0),
       [`${prefix}--menu--with-icons`]: childContext.state.hasIcons,
     }
   );

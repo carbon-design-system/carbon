@@ -14,6 +14,7 @@ import {
   assertMenuClosed,
   generateItems,
   generateGenericItem,
+  waitForPosition,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
 import { Slug } from '../Slug';
@@ -142,23 +143,24 @@ describe('ComboBox', () => {
     expect(findInputNode()).toHaveDisplayValue('Apple');
   });
 
-  it('should respect slug prop', () => {
+  it('should respect slug prop', async () => {
     const { container } = render(<ComboBox {...mockProps} slug={<Slug />} />);
-
+    await waitForPosition();
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--slug`
     );
   });
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {
-    it('using an object type for the `initialSelectedItem` prop', () => {
+    it('using an object type for the `initialSelectedItem` prop', async () => {
       render(
         <ComboBox {...mockProps} initialSelectedItem={mockProps.items[0]} />
       );
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
 
-    it('using a string type for the `initialSelectedItem` prop', () => {
+    it('using a string type for the `initialSelectedItem` prop', async () => {
       // Replace the 'items' property in mockProps with a list of strings
       mockProps = {
         ...mockProps,
@@ -168,19 +170,19 @@ describe('ComboBox', () => {
       render(
         <ComboBox {...mockProps} initialSelectedItem={mockProps.items[1]} />
       );
-
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
     });
   });
 
   describe('should display selected item found in `selectedItem`', () => {
-    it('using an object type for the `selectedItem` prop', () => {
+    it('using an object type for the `selectedItem` prop', async () => {
       render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
-
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
 
-    it('using a string type for the `selectedItem` prop', () => {
+    it('using a string type for the `selectedItem` prop', async () => {
       // Replace the 'items' property in mockProps with a list of strings
       mockProps = {
         ...mockProps,
@@ -188,7 +190,7 @@ describe('ComboBox', () => {
       };
 
       render(<ComboBox {...mockProps} selectedItem={mockProps.items[1]} />);
-
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
     });
   });
@@ -196,7 +198,7 @@ describe('ComboBox', () => {
   describe('when disabled', () => {
     it('should not let the user edit the input node', async () => {
       render(<ComboBox {...mockProps} disabled={true} />);
-
+      await waitForPosition();
       expect(findInputNode()).toHaveAttribute('disabled');
 
       expect(findInputNode()).toHaveDisplayValue('');
@@ -208,6 +210,7 @@ describe('ComboBox', () => {
 
     it('should not let the user expand the menu', async () => {
       render(<ComboBox {...mockProps} disabled={true} />);
+      await waitForPosition();
       await openMenu();
       expect(findListBoxNode()).not.toHaveClass(
         `${prefix}--list-box--expanded`
@@ -218,7 +221,7 @@ describe('ComboBox', () => {
   describe('when readonly', () => {
     it('should not let the user edit the input node', async () => {
       render(<ComboBox {...mockProps} readOnly={true} />);
-
+      await waitForPosition();
       expect(findInputNode()).toHaveAttribute('readonly');
 
       expect(findInputNode()).toHaveDisplayValue('');
@@ -230,6 +233,7 @@ describe('ComboBox', () => {
 
     it('should not let the user expand the menu', async () => {
       render(<ComboBox {...mockProps} disabled={true} />);
+      await waitForPosition();
       await openMenu();
       expect(findListBoxNode()).not.toHaveClass(
         `${prefix}--list-box--expanded`
@@ -238,9 +242,9 @@ describe('ComboBox', () => {
   });
 
   describe('downshift quirks', () => {
-    it('should set `inputValue` to an empty string if a false-y value is given', () => {
+    it('should set `inputValue` to an empty string if a false-y value is given', async () => {
       render(<ComboBox {...mockProps} />);
-
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue('');
     });
 
@@ -255,6 +259,7 @@ describe('ComboBox', () => {
           </div>
         </>
       );
+      await waitForPosition();
       const firstCombobox = screen.getByTestId('combobox-1');
       const secondCombobox = screen.getByTestId('combobox-2');
 
@@ -289,6 +294,7 @@ describe('ComboBox', () => {
     });
     it('should open menu without moving focus on pressing Alt+ DownArrow', async () => {
       render(<ComboBox {...mockProps} />);
+      await waitForPosition();
       act(() => {
         screen.getByRole('combobox').focus();
       });
@@ -298,6 +304,7 @@ describe('ComboBox', () => {
 
     it('should close menu and return focus to combobox on pressing Alt+ UpArrow', async () => {
       render(<ComboBox {...mockProps} />);
+      await waitForPosition();
       await openMenu();
       await userEvent.keyboard('{Alt>}{ArrowUp}');
       assertMenuClosed(mockProps);
