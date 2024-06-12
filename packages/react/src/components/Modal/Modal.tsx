@@ -289,9 +289,7 @@ const Modal = React.forwardRef(function Modal(
   }
 
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
-    if (isNested) {
-      evt.stopPropagation();
-    }
+    isNested && evt.stopPropagation();
 
     if (open) {
       if (match(evt, keys.Escape)) {
@@ -322,9 +320,7 @@ const Modal = React.forwardRef(function Modal(
 
   function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
     const target = evt.target as Node;
-    if (isNested) {
-      evt.stopPropagation();
-    }
+    isNested && evt.stopPropagation();
 
     if (
       !preventCloseOnClickOutside &&
