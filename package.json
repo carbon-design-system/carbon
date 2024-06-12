@@ -29,13 +29,13 @@
     "postinstall": "husky"
   },
   "resolutions": {
-    "@types/react": "~18.2.33",
+    "@types/react": "~18.3.0",
     "@types/prop-types": "15.7.12",
     "ast-types": "^0.14.0",
     "node-sass": "^9.0.0",
-    "react": "~18.2.0",
-    "react-dom": "~18.2.0",
-    "react-is": "~18.2.0"
+    "react": "~18.3.0",
+    "react-dom": "~18.3.0",
+    "react-is": "~18.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
@@ -53,7 +53,7 @@
     "@percy/playwright": "^1.0.4",
     "@playwright/test": "^1.36.2",
     "@testing-library/jest-dom": "^6.0.0",
-    "@testing-library/react": "^15.0.0",
+    "@testing-library/react": "^15.0.6",
     "@testing-library/user-event": "^14.4.3",
     "@types/react-is": "~18.2.0",
     "accessibility-checker": "^3.1.48",
