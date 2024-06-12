@@ -11,7 +11,7 @@ const args = parseArgs(process.argv.slice(2), {
 
 (async () => {
   const { globby } = await import('globby');
-  const destinationPath = 'dist';
+  const destinationPath = 'es';
   const isRelease = process.env.RELEASE || false;
 
   /* This is for using inside Storybook for demonstration purposes. */
@@ -42,10 +42,10 @@ const args = parseArgs(process.argv.slice(2), {
 
   cssTransformers.push(cssCleaner);
 
-  const cssPluginOptions = {
-    filter: /components\/.*\.css$/,
-    transform: (content) => cssTransformers.reduce((result, transformer) => transformer(result), content)
-  };
+  // const cssPluginOptions = {
+  //   filter: /components\/.*\.css$/,
+  //   transform: (content) => cssTransformers.reduce((result, transformer) => transformer(result), content)
+  // };
 
   try {
     const buildOptions = {
@@ -134,7 +134,6 @@ const args = parseArgs(process.argv.slice(2), {
     })
 
     del(`${destinationPath}/components/icon/icons`);
-
     console.table(analyzeResult, ['fileName', 'size']);
 
     console.info('Build Done!');
