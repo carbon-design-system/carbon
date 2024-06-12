@@ -4725,6 +4725,9 @@ Map {
       "isFullWidth": Object {
         "type": "bool",
       },
+      "isNested": Object {
+        "type": "bool",
+      },
       "launcherButtonRef": Object {
         "args": Array [
           Array [
