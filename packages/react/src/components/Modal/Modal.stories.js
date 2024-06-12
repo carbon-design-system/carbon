@@ -47,10 +47,10 @@ export const Default = () => {
         modalHeading="Add a custom domain"
         modalLabel="Account resources"
         primaryButtonText="Add"
-        // isNested
+        //isNested
         secondaryButtonText="Cancel">
         <p style={{ marginBottom: '1rem' }}>
-          nikhil domains direct requests for your apps in this Cloud Foundry
+          Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
           domain, a shared subdomain, or a shared domain and host.
         </p>

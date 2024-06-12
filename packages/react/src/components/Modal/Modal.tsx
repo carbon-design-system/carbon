@@ -290,7 +290,6 @@ const Modal = React.forwardRef(function Modal(
 
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
     if (isNested) {
-      console.log('isNested', isNested);
       evt.stopPropagation();
     }
 
@@ -324,7 +323,6 @@ const Modal = React.forwardRef(function Modal(
   function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
     const target = evt.target as Node;
     if (isNested) {
-      console.log('isNested', isNested);
       evt.stopPropagation();
     }
 
