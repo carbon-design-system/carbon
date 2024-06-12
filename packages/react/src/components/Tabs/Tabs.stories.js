@@ -556,6 +556,7 @@ export const ContainedFullWidth = () => (
 
 export const Vertical = () => (
   <>
+    <h4>Tabs with height set to "300px"</h4>
     <Tabs vertical height="300px">
       <TabListVertical aria-label="List of tabs">
         <Tab>Dashboard</Tab>
@@ -612,6 +613,7 @@ export const Vertical = () => (
     </Tabs>
     <br />
     <br />
+    <h4>Tabs with no set height</h4>
     <Tabs vertical>
       <TabListVertical aria-label="List of tabs">
         <Tab>Dashboard</Tab>
