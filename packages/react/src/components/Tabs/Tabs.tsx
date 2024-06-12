@@ -1593,12 +1593,52 @@ export interface TabPanelsProps {
 }
 
 function TabPanels({ children }: TabPanelsProps) {
+  const prefix = usePrefix();
+  const refs = useRef<(HTMLDivElement | null)[]>([]);
+  const hiddenStates = useRef<boolean[]>([]);
+
+  useLayoutEffect(() => {
+    const tabContainer = refs.current[0]?.previousElementSibling;
+    const isVertical = tabContainer?.classList.contains(
+      `${prefix}--tabs--vertical`
+    );
+    const parentHasHeight = tabContainer?.parentElement?.style.height;
+
+    // Should only apply same height to vertical Tab Panels without a given height
+    if (isVertical && !parentHasHeight) {
+      hiddenStates.current = refs.current.map((ref) => ref?.hidden || false);
+
+      // un-hide hidden Tab Panels to get heights
+      refs.current.forEach((ref) => {
+        if (ref) {
+          ref.hidden = false;
+        }
+      });
+
+      // set max height to TabList
+      const heights = refs.current.map((ref) => ref?.offsetHeight || 0);
+      const max = Math.max(...heights);
+      (tabContainer as HTMLElement).style.height = max + 'px';
+
+      // re-hide hidden Tab Panels
+      refs.current.forEach((ref, index) => {
+        if (ref) {
+          ref.hidden = hiddenStates.current[index];
+        }
+      });
+    }
+  });
+
   return (
     <>
       {React.Children.map(children, (child, index) => {
         return (
           <TabPanelContext.Provider value={index}>
-            {child}
+            {React.cloneElement(child as React.ReactElement<any>, {
+              ref: (element: HTMLDivElement) => {
+                refs.current[index] = element;
+              },
+            })}
           </TabPanelContext.Provider>
         );
       })}
