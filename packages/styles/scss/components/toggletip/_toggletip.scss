@@ -61,11 +61,11 @@
     );
     @include custom-property.declaration(
       'link-hover-text-color',
-      theme.$link-inverse
+      theme.$link-inverse-hover
     );
     @include custom-property.declaration(
       'link-visited-text-color',
-      theme.$link-inverse
+      theme.$link-inverse-visited
     );
     @include custom-property.declaration(
       'link-focus-text-color',

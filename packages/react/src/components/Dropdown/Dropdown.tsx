@@ -22,7 +22,7 @@ import {
   UseSelectStateChangeTypes,
 } from 'downshift';
 import cx from 'classnames';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import {
   Checkmark,
   WarningAltFilled,
@@ -49,6 +49,7 @@ const {
   ToggleButtonKeyDownHome,
   ToggleButtonKeyDownEnd,
   ItemMouseMove,
+  MenuMouseLeave,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
 };
@@ -110,7 +111,7 @@ export interface DropdownProps<ItemType>
    * Provide helper text that is used alongside the control label for
    * additional help
    */
-  helperText?: React.ReactNode;
+  helperText?: ReactNode;
 
   /**
    * Specify whether the title text should be hidden or not
@@ -136,7 +137,7 @@ export interface DropdownProps<ItemType>
   /**
    * Message which is displayed if the value is invalid.
    */
-  invalidText?: React.ReactNode;
+  invalidText?: ReactNode;
 
   /**
    * Function to render items as custom components instead of strings.
@@ -200,13 +201,13 @@ export interface DropdownProps<ItemType>
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Provide the title text that will be read by a screen reader when
    * visiting this control
    */
-  titleText?: React.ReactNode;
+  titleText?: ReactNode;
 
   /**
    * Callback function for translating ListBoxMenuIcon SVG title
@@ -229,7 +230,7 @@ export interface DropdownProps<ItemType>
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: React.ReactNode;
+  warnText?: ReactNode;
 }
 
 export type DropdownTranslationKey = ListBoxMenuIconTranslationKey;
@@ -303,6 +304,7 @@ const Dropdown = React.forwardRef(
           }
           return changes;
         case ItemMouseMove:
+        case MenuMouseLeave:
           return { ...changes, highlightedIndex: state.highlightedIndex };
       }
       return changes;
@@ -567,7 +569,7 @@ type DropdownComponentProps<ItemType> = React.PropsWithoutRef<
     React.RefAttributes<HTMLButtonElement>
 >;
 
-interface DropdownComponent {
+export interface DropdownComponent {
   <ItemType>(
     props: DropdownComponentProps<ItemType>
   ): React.ReactElement | null;

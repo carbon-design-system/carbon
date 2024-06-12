@@ -8,12 +8,12 @@ major versions of the Carbon Design System.
 | `main`  | unstable    | unstable        | unstable     | unstable          | unstable    |
 | v9      | End of life | 2018-06-04      | 2018-06-04   | 2019-03-29        | 2022-03-31  |
 | v10     | Maintenance | 2019-03-29      | 2019-03-29   | 2022-03-31        | 2024-09-30  |
-| v11     | Active      | 2021-08-06      | 2022-03-31   | 2025-03-31        | 2027-03-31  |
-| v12     | Unreleased  | 2024-08-01      | 2025-03-31   | 2027-03-31        | 2029-03-31  |
+| v11     | Active      | 2021-08-06      | 2022-03-31   | 2026-03-31        | 2028-03-31  |
+| v12     | Unreleased  | 2025-08-01      | 2026-03-31   | 2028-03-31        | 2029-03-31  |
 
 > Dates are subject to change
 
-![schedule](https://github.com/carbon-design-system/carbon-website/assets/3360588/02d05990-200c-4380-8acd-82dfbc27483d)
+![schedule](https://github.com/carbon-design-system/carbon/assets/3360588/b8014b83-a743-4ace-83a3-ff1c96eef194)
 
 ## Release phases
 
@@ -34,7 +34,7 @@ features and fixes. The work we deliver into `main` every day is considered
 unstable. Every two weeks we package up these changes into a new minor version
 that is published from `main` to the current Active major.
 
-For a look at what types of changes consitute patch, minor, or major version
+For a look at what types of changes constitute patch, minor, or major version
 bumps, see the
 [versioning documentation](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/versioning.md).
 
@@ -47,9 +47,9 @@ within the monorepo, see the
 For a release in the Maintenance phase, patch releases are published containing
 security patches and critical bug fixes. When a version moves from Active to
 Maintenance, consuming projects should begin migrating to the new Active major
-version.  During Maintenance we also consider adding non-critical bug fixes on
-an ad hoc basis, by request only. To request a fix be back-ported to a
-Maintenance release, please
+version. During Maintenance we also consider adding non-critical bug fixes on an
+ad hoc basis, by request only. To request a fix be back-ported to a Maintenance
+release, please
 [open an issue](https://github.com/carbon-design-system/carbon/issues/new?assignees=&labels=type%3A+bug+%F0%9F%90%9B&projects=&template=BUG_REPORT.yaml&title=%5BBug%5D%3A+)
 and include a link to the v11 fix pull request.
 

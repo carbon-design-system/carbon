@@ -6,7 +6,7 @@
  */
 
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import React from 'react';
 import MultiSelect from '../';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
@@ -36,6 +36,27 @@ describe('MultiSelect', () => {
       );
       await expect(container).toHaveNoACViolations('MultiSelect');
     });
+  });
+  it('does not render items with undefined values', async () => {
+    const items = [{ text: 'joey' }, { text: 'johnny' }, { text: undefined }];
+    const label = 'test-label';
+    render(
+      <MultiSelect
+        id="custom-id"
+        label={label}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+      />
+    );
+
+    const labelNode = screen.getByRole('combobox');
+    await userEvent.click(labelNode);
+
+    expect(screen.getByRole('option', { name: 'joey' })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'johnny' })).toBeInTheDocument();
+    expect(
+      screen.queryByRole('option', { name: 'undefined' })
+    ).not.toBeInTheDocument();
   });
 
   it('should initially render with a given label', () => {
@@ -206,7 +227,6 @@ describe('MultiSelect', () => {
 
     expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
 
-    await userEvent.keyboard('[ArrowDown]');
     await userEvent.keyboard('[Enter]');
 
     expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'true');
@@ -435,7 +455,7 @@ describe('MultiSelect', () => {
       expect(translateWithId).toHaveBeenCalled();
     });
 
-    it('should call onChange when the selection changes', async () => {
+    it('should call onChange when the selection changes from user selection', async () => {
       const testFunction = jest.fn();
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
@@ -460,6 +480,30 @@ describe('MultiSelect', () => {
       await userEvent.click(itemNode);
 
       expect(testFunction).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call onChange when the selection changes outside of the component', () => {
+      const handleChange = jest.fn();
+      const items = generateItems(4, generateGenericItem);
+      const props = {
+        id: 'custom-id',
+        onChange: handleChange,
+        selectedItems: [],
+        label: 'test-label',
+        items,
+      };
+      const { rerender } = render(<MultiSelect {...props} />);
+
+      expect(handleChange).not.toHaveBeenCalled();
+
+      act(() => {
+        rerender(<MultiSelect {...props} selectedItems={[items[0]]} />);
+      });
+
+      expect(handleChange).toHaveBeenCalledTimes(1);
+      expect(handleChange.mock.lastCall[0]).toMatchObject({
+        selectedItems: [items[0]],
+      });
     });
 
     it('should support an invalid state with invalidText that describes the field', () => {

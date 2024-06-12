@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import DatePicker from './DatePicker';
 import DatePickerInput from '../DatePickerInput';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Slug } from '../Slug';
 
@@ -98,6 +98,37 @@ describe('DatePicker', () => {
       // eslint-disable-next-line testing-library/no-node-access
       document.querySelector(`.${prefix}--date-picker--range`)
     ).toBeInTheDocument();
+  });
+
+  it('should not fire onChange handler when clicking outside the datepicker in range mode', () => {
+    const handleChange = jest.fn();
+    const { getByLabelText, getByText } = render(
+      <DatePicker
+        onChange={handleChange}
+        dateFormat="m/d/Y"
+        datePickerType="range">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
+      </DatePicker>
+    );
+    const startDateInput = getByLabelText('Start date');
+    const endDateInput = getByLabelText('End date');
+    // Change the dates
+    fireEvent.change(startDateInput, { target: { value: '01/01/2023' } });
+    fireEvent.change(endDateInput, { target: { value: '01/07/2023' } });
+    // Simulate a click event outside the datepicker
+    fireEvent.click(document.body);
+    fireEvent.focus(startDateInput);
+    fireEvent.click(document.body);
+    expect(handleChange).not.toHaveBeenCalled();
   });
 
   it('should render the children as expected', () => {

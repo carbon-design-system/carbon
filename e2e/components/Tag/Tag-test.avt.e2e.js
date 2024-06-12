@@ -32,4 +32,23 @@ test.describe('@avt Tag', () => {
     });
     await expect(page).toHaveNoACViolations('Tag-skeleton');
   });
+
+  test('@avt-keyboard-nav Tag', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tag',
+      id: 'components-tag--read-only',
+      globals: {
+        theme: 'white',
+      },
+    });
+    const button = page.getByRole('button').first();
+    await expect(button).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(button).toBeFocused();
+    // Expect DefinitionTooltip to be visible
+    await expect(page.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+  });
 });

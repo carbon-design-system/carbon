@@ -154,7 +154,9 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
   const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
 
   if (!isIconOnlyButton(hasIconOnly, kind)) {
-    return <ButtonBase ref={ref} {...props} />;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { tooltipAlignment, ...propsWithoutTooltipAlignment } = props;
+    return <ButtonBase ref={ref} {...propsWithoutTooltipAlignment} />;
   } else {
     let align: PopoverAlignment | undefined = undefined;
 
@@ -163,10 +165,10 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
         align = tooltipPosition;
       }
       if (tooltipAlignment === 'end') {
-        align = `${tooltipPosition}-right`;
+        align = `${tooltipPosition}-end`;
       }
       if (tooltipAlignment === 'start') {
-        align = `${tooltipPosition}-left`;
+        align = `${tooltipPosition}-start`;
       }
     }
 
