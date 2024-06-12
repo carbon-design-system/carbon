@@ -422,13 +422,11 @@ const ComboBox = forwardRef(
         const { highlightedIndex } = changes;
         switch (type) {
           case InputBlur:
-            console.log('blur');
             if (
               state.inputValue &&
               highlightedIndex == '-1' &&
               changes.selectedItem
             ) {
-              console.log('-1');
               return {
                 ...changes,
                 inputValue: itemToString(changes.selectedItem),
