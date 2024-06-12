@@ -58,7 +58,11 @@ export const SingleWithCalendar = () => (
 
 export const RangeWithCalendar = () => {
   return (
-    <DatePicker datePickerType="range">
+    <DatePicker
+      datePickerType="range"
+      onChange={(e) => {
+        console.log('testing onchange bugs', e);
+      }}>
       <DatePickerInput
         id="date-picker-input-id-start"
         placeholder="mm/dd/yyyy"
