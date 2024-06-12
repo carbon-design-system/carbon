@@ -72,8 +72,8 @@ export interface RadioButtonProps
    * the underlying `<input>` changes
    */
   onChange?: (
-    value: string | number,
-    name: string | undefined,
+    value: RadioButtonProps['value'],
+    name: RadioButtonProps['name'],
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
 
@@ -98,80 +98,85 @@ export interface RadioButtonProps
   required?: boolean;
 }
 
-const RadioButton = React.forwardRef((props: RadioButtonProps, ref) => {
-  const {
-    className,
-    disabled,
-    hideLabel,
-    id,
-    labelPosition = 'right',
-    labelText = '',
-    name,
-    onChange = () => {},
-    value = '',
-    slug,
-    required,
-    ...rest
-  } = props;
+const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
+  (props, ref) => {
+    const {
+      className,
+      disabled,
+      hideLabel,
+      id,
+      labelPosition = 'right',
+      labelText = '',
+      name,
+      onChange = () => {},
+      value = '',
+      slug,
+      required,
+      ...rest
+    } = props;
 
-  const prefix = usePrefix();
-  const uid = useId('radio-button');
-  const uniqueId = id || uid;
+    const prefix = usePrefix();
+    const uid = useId('radio-button');
+    const uniqueId = id || uid;
 
-  function handleOnChange(event) {
-    onChange(value, name, event);
-  }
-
-  const innerLabelClasses = classNames(`${prefix}--radio-button__label-text`, {
-    [`${prefix}--visually-hidden`]: hideLabel,
-  });
-
-  const wrapperClasses = classNames(
-    className,
-    `${prefix}--radio-button-wrapper`,
-    {
-      [`${prefix}--radio-button-wrapper--label-${labelPosition}`]:
-        labelPosition !== 'right',
-      [`${prefix}--radio-button-wrapper--slug`]: slug,
+    function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
+      onChange(value, name, event);
     }
-  );
 
-  const inputRef = useRef<HTMLInputElement>(null);
+    const innerLabelClasses = classNames(
+      `${prefix}--radio-button__label-text`,
+      {
+        [`${prefix}--visually-hidden`]: hideLabel,
+      }
+    );
 
-  let normalizedSlug;
-  if (slug && React.isValidElement(slug)) {
-    const size = slug.props?.['kind'] === 'inline' ? 'md' : 'mini';
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size,
-    });
+    const wrapperClasses = classNames(
+      className,
+      `${prefix}--radio-button-wrapper`,
+      {
+        [`${prefix}--radio-button-wrapper--label-${labelPosition}`]:
+          labelPosition !== 'right',
+        [`${prefix}--radio-button-wrapper--slug`]: slug,
+      }
+    );
+
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    let normalizedSlug: React.ReactElement | undefined;
+    if (slug && React.isValidElement(slug)) {
+      const size = slug.props?.['kind'] === 'inline' ? 'md' : 'mini';
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size,
+      });
+    }
+
+    return (
+      <div className={wrapperClasses}>
+        <input
+          {...rest}
+          type="radio"
+          className={`${prefix}--radio-button`}
+          onChange={handleOnChange}
+          id={uniqueId}
+          ref={mergeRefs(inputRef, ref)}
+          disabled={disabled}
+          value={value}
+          name={name}
+          required={required}
+        />
+        <label htmlFor={uniqueId} className={`${prefix}--radio-button__label`}>
+          <span className={`${prefix}--radio-button__appearance`} />
+          {labelText && (
+            <Text className={innerLabelClasses}>
+              {labelText}
+              {normalizedSlug}
+            </Text>
+          )}
+        </label>
+      </div>
+    );
   }
-
-  return (
-    <div className={wrapperClasses}>
-      <input
-        {...rest}
-        type="radio"
-        className={`${prefix}--radio-button`}
-        onChange={handleOnChange}
-        id={uniqueId}
-        ref={mergeRefs(inputRef, ref)}
-        disabled={disabled}
-        value={value}
-        name={name}
-        required={required}
-      />
-      <label htmlFor={uniqueId} className={`${prefix}--radio-button__label`}>
-        <span className={`${prefix}--radio-button__appearance`} />
-        {labelText && (
-          <Text className={innerLabelClasses}>
-            {labelText}
-            {normalizedSlug}
-          </Text>
-        )}
-      </label>
-    </div>
-  );
-});
+);
 
 RadioButton.displayName = 'RadioButton';
 

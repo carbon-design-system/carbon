@@ -544,6 +544,15 @@ Map {
         "isRequired": true,
         "type": "node",
       },
+      "orientation": Object {
+        "args": Array [
+          Array [
+            "horizontal",
+            "vertical",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "readOnly": Object {
         "type": "bool",
       },
@@ -1103,6 +1112,9 @@ Map {
         "type": "string",
       },
       "ariaLabel": [Function],
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "className": Object {
         "type": "string",
       },
@@ -2700,6 +2712,14 @@ Map {
             "right",
             "right-bottom",
             "right-top",
+            "top-start",
+            "top-end",
+            "bottom-start",
+            "bottom-end",
+            "left-end",
+            "left-start",
+            "right-end",
+            "right-start",
           ],
         ],
         "type": "oneOf",
