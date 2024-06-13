@@ -96,7 +96,7 @@
     "@storybook/react": "^7.1.0",
     "@storybook/react-webpack5": "^7.1.0",
     "@storybook/theming": "^7.1.0",
-    "@types/react-is": "~18.2.0",
+    "@types/react-is": "~18.3.0",
     "autoprefixer": "^10.4.0",
     "babel-loader": "^9.0.0",
     "babel-plugin-dev-expression": "^0.2.3",

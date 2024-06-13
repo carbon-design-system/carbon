@@ -2078,7 +2078,7 @@ __metadata:
     "@storybook/react": "npm:^7.1.0"
     "@storybook/react-webpack5": "npm:^7.1.0"
     "@storybook/theming": "npm:^7.1.0"
-    "@types/react-is": "npm:~18.2.0"
+    "@types/react-is": "npm:~18.3.0"
     autoprefixer: "npm:^10.4.0"
     babel-loader: "npm:^9.0.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
@@ -7444,12 +7444,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-is@npm:~18.2.0":
-  version: 18.2.0
-  resolution: "@types/react-is@npm:18.2.0"
+"@types/react-is@npm:~18.3.0":
+  version: 18.3.0
+  resolution: "@types/react-is@npm:18.3.0"
   dependencies:
     "@types/react": "npm:*"
-  checksum: 10/bceec20a57c91fa9b6b63898a228f6074b8d62dce29b7069a7e986bc7f8cd910ffd197808b559b0a0dd53221e6058db13622a1d1f1faa708557e8c41af1326e4
+  checksum: 10/c7c9303a76902ecc2bd38a27047da8ffb9d5a19fe6e1f785e13698e7641e7afff0c6a49ddf1c22fb20b58f4fb689d83a887641f62db4ec2fdea3d04124a84023
   languageName: node
   linkType: hard
 
@@ -9989,7 +9989,7 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.0.0"
     "@testing-library/react": "npm:^15.0.6"
     "@testing-library/user-event": "npm:^14.4.3"
-    "@types/react-is": "npm:~18.2.0"
+    "@types/react-is": "npm:~18.3.0"
     accessibility-checker: "npm:^3.1.48"
     all-contributors-cli: "npm:^6.19.0"
     cross-env: "npm:^7.0.0"
