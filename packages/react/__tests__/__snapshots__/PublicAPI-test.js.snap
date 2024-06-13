@@ -2004,10 +2004,10 @@ Map {
     },
     "TableSelectAll": Object {
       "propTypes": Object {
-        "ariaLabel": Object {
-          "isRequired": true,
+        "aria-label": Object {
           "type": "string",
         },
+        "ariaLabel": [Function],
         "checked": Object {
           "isRequired": true,
           "type": "bool",
@@ -2037,10 +2037,10 @@ Map {
     },
     "TableSelectRow": Object {
       "propTypes": Object {
-        "ariaLabel": Object {
-          "isRequired": true,
+        "aria-label": Object {
           "type": "string",
         },
+        "ariaLabel": [Function],
         "checked": Object {
           "isRequired": true,
           "type": "bool",
@@ -8006,10 +8006,10 @@ Map {
   },
   "TableSelectAll" => Object {
     "propTypes": Object {
-      "ariaLabel": Object {
-        "isRequired": true,
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "checked": Object {
         "isRequired": true,
         "type": "bool",
@@ -8039,10 +8039,10 @@ Map {
   },
   "TableSelectRow" => Object {
     "propTypes": Object {
-      "ariaLabel": Object {
-        "isRequired": true,
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "checked": Object {
         "isRequired": true,
         "type": "bool",

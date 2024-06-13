@@ -154,6 +154,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     [key: string]: unknown;
   }) => {
     ariaLabel: string;
+    'aria-label': string;
     checked: boolean | undefined;
     disabled?: boolean | undefined;
     id: string;
@@ -630,7 +631,8 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
         ]),
         id: `${this.getTablePrefix()}__select-row-${row.id}`,
         name: `select-row`,
-        ariaLabel: t(translationKey),
+        ariaLabel: t(translationKey), // TODO remove in v12
+        'aria-label': t(translationKey),
         disabled: row.disabled,
         radio: this.props.radio || null,
       };
@@ -650,7 +652,8 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
 
     return {
       ...rest,
-      ariaLabel: t(translationKey),
+      ariaLabel: t(translationKey), // TODO remove in v12
+      'aria-label': t(translationKey),
       checked,
       id: `${this.getTablePrefix()}__select-all`,
       indeterminate,
