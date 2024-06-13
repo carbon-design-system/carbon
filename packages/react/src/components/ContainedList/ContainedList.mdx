@@ -100,6 +100,7 @@ render inline to the Contained List title, please see the
 also remain persistent under the title, so that it remains visible on scroll,
 when there are many list items passed in.
 
+
 ```js
 export const WithPersistentSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -138,6 +139,10 @@ export const WithPersistentSearch = () => {
   );
 };
 ```
+
+`ContainedList.ContainedListItem` is deprecated, use
+`import { ContainedListItem } from '@carbon/react`
+import instead.
 
 <Canvas>
   <Story of={ContainedListStories.WithPersistentSearch} />
