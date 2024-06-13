@@ -52,6 +52,7 @@
     "@carbon/icons-react": "^11.43.0",
     "@carbon/layout": "^11.22.0",
     "@carbon/styles": "^1.59.0",
+    "@figma/code-connect": "^0.1.2",
     "@floating-ui/react": "^0.26.0",
     "@ibm/telemetry-js": "^1.5.0",
     "classnames": "2.5.1",
