@@ -2088,7 +2088,7 @@ __metadata:
     classnames: "npm:2.5.1"
     clipboardy: "npm:^2.1.0"
     copy-to-clipboard: "npm:^3.3.1"
-    css-loader: "npm:^6.5.1"
+    css-loader: "npm:^7.0.0"
     downshift: "npm:8.5.0"
     enquirer: "npm:^2.3.6"
     fast-glob: "npm:^3.2.7"
@@ -11381,7 +11381,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:^6.5.1, css-loader@npm:^6.7.1":
+"css-loader@npm:^6.7.1":
   version: 6.8.1
   resolution: "css-loader@npm:6.8.1"
   dependencies:
@@ -11396,6 +11396,30 @@ __metadata:
   peerDependencies:
     webpack: ^5.0.0
   checksum: 10/f20bb2a181c64d2f49586ab3922cae884519cfc8ae9ba8513065032255ed7bbdb4de75362f99d641d39d36d3732b7932884cd0e6fc71c8b0fb8b99a654f9cd08
+  languageName: node
+  linkType: hard
+
+"css-loader@npm:^7.0.0":
+  version: 7.1.1
+  resolution: "css-loader@npm:7.1.1"
+  dependencies:
+    icss-utils: "npm:^5.1.0"
+    postcss: "npm:^8.4.33"
+    postcss-modules-extract-imports: "npm:^3.1.0"
+    postcss-modules-local-by-default: "npm:^4.0.5"
+    postcss-modules-scope: "npm:^3.2.0"
+    postcss-modules-values: "npm:^4.0.0"
+    postcss-value-parser: "npm:^4.2.0"
+    semver: "npm:^7.5.4"
+  peerDependencies:
+    "@rspack/core": 0.x || 1.x
+    webpack: ^5.27.0
+  peerDependenciesMeta:
+    "@rspack/core":
+      optional: true
+    webpack:
+      optional: true
+  checksum: 10/435a21f19594f89e4d5da51f4d6d2de4d25d6f882117890875f6529e99fbe931ea258662fb680b70e7ccab2fd723084f2c3fff022c76d45c38893ae50ab6f08e
   languageName: node
   linkType: hard
 
@@ -22360,36 +22384,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-modules-extract-imports@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "postcss-modules-extract-imports@npm:3.0.0"
+"postcss-modules-extract-imports@npm:^3.0.0, postcss-modules-extract-imports@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "postcss-modules-extract-imports@npm:3.1.0"
   peerDependencies:
     postcss: ^8.1.0
-  checksum: 10/8d68bb735cef4d43f9cdc1053581e6c1c864860b77fcfb670372b39c5feeee018dc5ddb2be4b07fef9bcd601edded4262418bbaeaf1bd4af744446300cebe358
+  checksum: 10/00bfd3aff045fc13ded8e3bbfd8dfc73eff9a9708db1b2a132266aef6544c8d2aee7a5d7e021885f6f9bbd5565a9a9ab52990316e21ad9468a2534f87df8e849
   languageName: node
   linkType: hard
 
-"postcss-modules-local-by-default@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "postcss-modules-local-by-default@npm:4.0.3"
+"postcss-modules-local-by-default@npm:^4.0.3, postcss-modules-local-by-default@npm:^4.0.5":
+  version: 4.0.5
+  resolution: "postcss-modules-local-by-default@npm:4.0.5"
   dependencies:
     icss-utils: "npm:^5.0.0"
     postcss-selector-parser: "npm:^6.0.2"
     postcss-value-parser: "npm:^4.1.0"
   peerDependencies:
     postcss: ^8.1.0
-  checksum: 10/4f671d77cb6a025c8be09540fea00ce2d3dbf3375a3a15b48f927325c7418d7c3c87a83bacbf81c5de6ef8bd1660d5f6f2542b98de5877355a23b739379f8c79
+  checksum: 10/b08b01aa7f3d1a80bb1a5508ba3a208578fdd2fb6e54e5613fac244a4e014aa7ca639a614859fec93b399e5a6f86938f7690ca60f7e57c4e35b75621d3c07734
   languageName: node
   linkType: hard
 
-"postcss-modules-scope@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "postcss-modules-scope@npm:3.0.0"
+"postcss-modules-scope@npm:^3.0.0, postcss-modules-scope@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "postcss-modules-scope@npm:3.2.0"
   dependencies:
     postcss-selector-parser: "npm:^6.0.4"
   peerDependencies:
     postcss: ^8.1.0
-  checksum: 10/cc36b8111c6160a1c21ca0e82de9daf0147be95f3b5403aedd83bcaee44ee425cb62b77f677fc53d0c8d51f7981018c1c8f0a4ad3d6f0138b09326ac48c2b297
+  checksum: 10/17c293ad13355ba456498aa5815ddb7a4a736f7b781d89b294e1602a53b8d0e336131175f82460e290a0d672642f9039540042edc361d9000b682c44e766925b
   languageName: node
   linkType: hard
 
@@ -22622,14 +22646,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.14, postcss@npm:^8.4.16, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.24, postcss@npm:^8.4.32, postcss@npm:^8.4.5":
-  version: 8.4.33
-  resolution: "postcss@npm:8.4.33"
+"postcss@npm:^8.4.14, postcss@npm:^8.4.16, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.24, postcss@npm:^8.4.32, postcss@npm:^8.4.33, postcss@npm:^8.4.5":
+  version: 8.4.38
+  resolution: "postcss@npm:8.4.38"
   dependencies:
     nanoid: "npm:^3.3.7"
     picocolors: "npm:^1.0.0"
-    source-map-js: "npm:^1.0.2"
-  checksum: 10/e22a4594c255f26117f38419fb494d7ecab0f596cd409f7aadc8a6173abf180ed7ea970cd13fd366ab12b5840be901d2a09b25197700c2ebcb5a8077326bf519
+    source-map-js: "npm:^1.2.0"
+  checksum: 10/6e44a7ed835ffa9a2b096e8d3e5dfc6bcf331a25c48aeb862dd54e3aaecadf814fa22be224fd308f87d08adf2299164f88c5fd5ab1c4ef6cbd693ceb295377f4
   languageName: node
   linkType: hard
 
@@ -25016,10 +25040,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-js@npm:>=0.6.2 <2.0.0, source-map-js@npm:^1.0.1, source-map-js@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "source-map-js@npm:1.0.2"
-  checksum: 10/38e2d2dd18d2e331522001fc51b54127ef4a5d473f53b1349c5cca2123562400e0986648b52e9407e348eaaed53bce49248b6e2641e6d793ca57cb2c360d6d51
+"source-map-js@npm:>=0.6.2 <2.0.0, source-map-js@npm:^1.0.1, source-map-js@npm:^1.0.2, source-map-js@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "source-map-js@npm:1.2.0"
+  checksum: 10/74f331cfd2d121c50790c8dd6d3c9de6be21926de80583b23b37029b0f37aefc3e019fa91f9a10a5e120c08135297e1ecf312d561459c45908cb1e0e365f49e5
   languageName: node
   linkType: hard
 

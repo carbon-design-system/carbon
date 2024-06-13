@@ -104,7 +104,7 @@
     "browserify-zlib": "^0.2.0",
     "browserslist-config-carbon": "^11.2.0",
     "clipboardy": "^2.1.0",
-    "css-loader": "^6.5.1",
+    "css-loader": "^7.0.0",
     "enquirer": "^2.3.6",
     "fast-glob": "^3.2.7",
     "fs-extra": "^11.0.0",
