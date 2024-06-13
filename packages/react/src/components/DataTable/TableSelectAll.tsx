@@ -20,7 +20,7 @@ interface TableSelectAllProps {
   ['aria-label']?: string;
 
   /**
-   * Deprecated, please use `aria-label` instead.
+   * @deprecated please use `aria-label` instead.
    * Specify the aria label for the underlying input control
    */
   ariaLabel?: string;

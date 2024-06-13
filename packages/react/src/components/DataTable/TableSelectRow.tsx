@@ -21,7 +21,7 @@ export interface TableSelectRowProps {
   ['aria-label']?: string;
 
   /**
-   * Deprecated, please use `aria-label` instead.
+   * @deprecated please use `aria-label` instead.
    * Specify a label to be read by screen readers on the containing textbox
    * node
    */

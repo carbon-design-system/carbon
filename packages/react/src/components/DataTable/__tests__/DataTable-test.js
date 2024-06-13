@@ -299,7 +299,7 @@ describe('DataTable', () => {
       let spy;
 
       beforeEach(() => {
-        // TODO: Remove the mock of console.warn once we remove ariaLabel from DataTable
+        // v12 TODO: Remove the mock of console.warn once we remove ariaLabel from DataTable
         spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
         mockProps = {
           rows: [
