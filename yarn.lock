@@ -27062,11 +27062,11 @@ __metadata:
   linkType: hard
 
 "undici@npm:^5.25.4":
-  version: 5.26.3
-  resolution: "undici@npm:5.26.3"
+  version: 5.28.4
+  resolution: "undici@npm:5.28.4"
   dependencies:
     "@fastify/busboy": "npm:^2.0.0"
-  checksum: 10/7280135e89c6f96f17f02fa99b8dcf5c64511d36de31b5cea0e1a858c8a16f07ea22aba524d5b8f574e9341a543d295aebb20cb715545829f2e959329149a638
+  checksum: 10/a666a9f5ac4270c659fafc33d78b6b5039a0adbae3e28f934774c85dcc66ea91da907896f12b414bd6f578508b44d5dc206fa636afa0e49a4e1c9e99831ff065
   languageName: node
   linkType: hard
 
