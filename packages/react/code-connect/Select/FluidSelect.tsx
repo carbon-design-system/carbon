@@ -21,7 +21,7 @@ figma.connect(
       disabled: figma.enum('State', {
         Disabled: true,
       }),
-      // labelText: figma.string('Label text'),
+      labelText: figma.string('Label text'),
       warn: figma.enum('State', {
         Warning: true,
       }),
@@ -30,12 +30,11 @@ figma.connect(
         Error: true,
       }),
       invalidText: figma.string('Error text'),
-      // showtooltip: figma.boolean('Show tooltip'),
-
-      labelText: figma.boolean('Show tooltip', {
-        true: figma.string('Label text') + 'add tooltip icon code here ',
-        false: figma.string('Label text'),
-      }),
+      // showtooltip: figma.boolean('Show tooltip'), // not supported in react
+      // labelText: figma.boolean('Show tooltip', {
+      //   true: 'add tooltip icon code here ',
+      //   false: figma.string('Label text'),
+      // }),
     },
     example: ({
       labelText,
