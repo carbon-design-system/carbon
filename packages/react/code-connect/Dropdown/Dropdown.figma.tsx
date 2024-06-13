@@ -15,7 +15,9 @@ figma.connect(
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=14032-290635&mode=dev',
   {
     props: {
-      helperText: figma.string('Helper text'),
+      helperText: figma.boolean('Show helper', {
+        true: figma.string('Helper text'),
+      }),
       size: figma.enum('Size', {
         Large: 'lg',
         Medium: 'md',
@@ -45,7 +47,6 @@ figma.connect(
         // Fixed: 'fixed',
         Inline: 'inline',
       }),
-      // showhelper: figma.boolean('Show helper'), // this doesn't exist in code, if helperText exists it will display
       // selectedtext: figma.string('Selected text'), // what is this used for in Figma?
       // unselectedtext: figma.string('Unselected text'),// what is this used for in Figma?
     },

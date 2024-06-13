@@ -16,11 +16,12 @@ figma.connect(
   {
     props: {
       // horizontal: figma.boolean('Horizontal'), // missing in React
-      //helpermessage: figma.boolean('Helper message'), show/hide helper text in figma, in react if message is there it displays
       // warnMessage: figma.boolean('Warning message'), // you can have a component in a warn state while hiding warning message in Figma, not supported in code
       // errorMessage: figma.boolean('Error message'), // you can have a component in a error state while hiding error message in Figma, not supported in code
       children: figma.children(['Checkbox']),
-      helperText: figma.string('Helper text'),
+      helperText: figma.boolean('Helper message', {
+        true: figma.string('Helper text'),
+      }),
       readOnly: figma.enum('State', {
         'Read-only': true,
       }),
