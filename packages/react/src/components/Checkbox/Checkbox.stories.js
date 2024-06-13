@@ -93,6 +93,15 @@ export const Nested = () => {
       <NestedCheckbox labelText={`Parent label`} id="parent-checkbox-label-1">
         <Checkbox labelText={`Child label 1`} id="checkbox-label-1" />
         <Checkbox labelText={`Child label 2`} id="checkbox-label-2" />
+        <NestedCheckbox
+          labelText={`Parent label 2`}
+          id="parent-checkbox-label-2">
+          <Checkbox labelText={`Child label 5`} id="checkbox-label-5" />
+          <Checkbox labelText={`Child label 6`} id="checkbox-label-6" />
+          <Checkbox labelText={`Child label 7`} id="checkbox-label-7" />
+        </NestedCheckbox>
+        <Checkbox labelText={`Child label 3`} id="checkbox-label-3" />
+        <Checkbox labelText={`Child label 4`} id="checkbox-label-4" />
       </NestedCheckbox>
     </CheckboxGroup>
   );

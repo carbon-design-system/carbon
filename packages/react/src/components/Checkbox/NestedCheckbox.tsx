@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState, ReactElement, ReactNode } from 'react';
+import React, { useEffect, useState, ReactElement, ReactNode } from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import Checkbox, { CheckboxProps } from './Checkbox';
@@ -31,10 +31,25 @@ const NestedCheckbox = React.forwardRef(
     slug,
     ...rest
   }: NestedCheckboxProps) => {
-    const [checkState, setCheckState] = useState(
-      checked || defaultChecked
-        ? NestedCheckboxStates.Checked
-        : NestedCheckboxStates.Unchecked
+    const [childrenCheckState, setChildrenCheckState] = useState(() => {
+      const map = new Map();
+      React.Children.forEach(children, (child) => {
+        const { id } = (child as ReactElement)?.props ?? undefined;
+        map.set(id, checked ?? false);
+      });
+      return map;
+    });
+    useEffect(() => {
+      const map = new Map();
+      React.Children.forEach(children, (child) => {
+        const { id } = (child as ReactElement)?.props ?? undefined;
+        map.set(id, checked ?? false);
+      });
+      setChildrenCheckState(map);
+    }, [checked, children]);
+    let childrenCheckedCount = 0;
+    childrenCheckState.forEach(
+      (value) => (childrenCheckedCount += value ? 1 : 0)
     );
     const prefix = usePrefix();
     const showWarning = !readOnly && !invalid && warn;
@@ -51,12 +66,12 @@ const NestedCheckbox = React.forwardRef(
     );
 
     const handleOnChange = (event, { checked, id }) => {
-      setCheckState((prev) => {
-        return prev === NestedCheckboxStates.Checked ||
-          prev === NestedCheckboxStates.Indeterminate
-          ? NestedCheckboxStates.Unchecked
-          : NestedCheckboxStates.Checked;
+      const map = new Map();
+      React.Children.forEach(children, (child) => {
+        const { id } = (child as ReactElement)?.props ?? undefined;
+        map.set(id, checked);
       });
+      setChildrenCheckState(map);
       if (typeof onChange === 'function') {
         onChange(event, { checked, id });
       }
@@ -65,21 +80,16 @@ const NestedCheckbox = React.forwardRef(
     function getCheckboxes() {
       const mappedChildren = React.Children.map(children, (checkbox) => {
         if (checkbox) {
-          const { checked, onChange } =
+          const { id, onChange } =
             (checkbox as ReactElement)?.props ?? undefined;
           const handleChildChange = (event, { checked, id }) => {
-            setCheckState(
-              checked
-                ? NestedCheckboxStates.Indeterminate
-                : NestedCheckboxStates.Unchecked
-            );
+            setChildrenCheckState(new Map(childrenCheckState.set(id, checked)));
             if (typeof onChange === 'function') {
               onChange(event, { checked, id });
             }
           };
           const newProps = {
-            checked:
-              checkState === NestedCheckboxStates.Checked ? true : checked,
+            checked: childrenCheckState.get(id),
             onChange: handleChildChange,
           };
           return React.cloneElement(checkbox as ReactElement, newProps);
@@ -92,9 +102,12 @@ const NestedCheckbox = React.forwardRef(
     return (
       <div className={wrapperClasses}>
         <Checkbox
-          checked={checkState === NestedCheckboxStates.Checked}
+          checked={childrenCheckedCount === React.Children.count(children)}
           defaultChecked={defaultChecked}
-          indeterminate={checkState === NestedCheckboxStates.Indeterminate}
+          indeterminate={
+            childrenCheckedCount > 0 &&
+            childrenCheckedCount < React.Children.count(children)
+          }
           invalid={invalid}
           onChange={handleOnChange}
           readOnly={readOnly}
