@@ -41,7 +41,12 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ReactAttr } from '../../types/common';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
-import { useFloating, flip, autoUpdate } from '@floating-ui/react';
+import {
+  useFloating,
+  flip,
+  autoUpdate,
+  size as floatingSize,
+} from '@floating-ui/react';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -95,7 +100,7 @@ export interface DropdownProps<ItemType>
   ariaLabel?: string;
 
   /**
-   * Will auto-align the dropdown on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
    */
   autoAlign?: boolean;
 
@@ -281,7 +286,7 @@ const Dropdown = React.forwardRef(
     const { refs, floatingStyles } = useFloating(
       autoAlign
         ? {
-            // placement: direction,
+            placement: direction,
 
             // The floating element is positioned relative to its nearest
             // containing block (usually the viewport). It will in many cases also
@@ -291,32 +296,29 @@ const Dropdown = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
-              flip({
-                fallbackAxisSideDirection: 'none',
+              floatingSize({
+                apply({ rects, elements }) {
+                  Object.assign(elements.floating.style, {
+                    width: `${rects.reference.width}px`,
+                  });
+                },
               }),
+              flip(),
             ],
             whileElementsMounted: autoUpdate,
           }
         : {} // When autoAlign is turned off, floating-ui will not be used
     );
 
-    const parentWidth = (refs?.reference?.current as HTMLElement)?.clientWidth;
-
     useEffect(() => {
       if (autoAlign) {
         Object.keys(floatingStyles).forEach((style) => {
           if (refs.floating.current) {
             refs.floating.current.style[style] = floatingStyles[style];
-
-            // refs.floating.current.style.width = parentWidth + 'px';
           }
         });
-
-        if (parentWidth && refs.floating.current) {
-          refs.floating.current.style.width = parentWidth + 'px';
-        }
       }
-    }, [floatingStyles, autoAlign, refs.floating, parentWidth]);
+    }, [floatingStyles, autoAlign, refs.floating]);
 
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
@@ -644,7 +646,7 @@ Dropdown.propTypes = {
   ),
 
   /**
-   * Will auto-align the dropdown on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
    */
   autoAlign: PropTypes.bool,
 
