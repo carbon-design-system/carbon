@@ -429,7 +429,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     isOpen,
     items: sortedItems,
     itemToString,
-    defaultHighlightedIndex: 0, // after selection, highlight the first item.
     id,
     labelId,
     menuId,
