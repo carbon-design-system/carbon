@@ -1141,11 +1141,18 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
   useEvent(dismissIconRef, 'mouseleave', onDismissIconMouseLeave);
 
   useLayoutEffect(() => {
-    const elementTabId = document.getElementById(`${id}`);
-    const newElement = elementTabId?.getElementsByClassName(
-      `${prefix}--tabs__nav-item-label`
-    )[0];
-    isEllipsisActive(newElement);
+    function handler() {
+      const elementTabId = document.getElementById(`${id}`);
+      const newElement = elementTabId?.getElementsByClassName(
+        `${prefix}--tabs__nav-item-label`
+      )[0];
+      isEllipsisActive(newElement);
+    }
+    handler();
+    window.addEventListener('resize', handler);
+    return () => {
+      window.removeEventListener('resize', handler);
+    };
   }, [prefix, id]);
 
   const handleClose = (evt) => {

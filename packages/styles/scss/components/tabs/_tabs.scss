@@ -80,7 +80,7 @@
 
     &.#{$prefix}--tabs--vertical {
       background: $layer;
-      border-inline-end: 1px solid $border-subtle;
+      box-shadow: inset -1px 0 $border-subtle;
       grid-column: span 2;
       max-block-size: none;
 
@@ -329,6 +329,7 @@
       background-color: $layer-01;
       block-size: $spacing-10;
       border-block-end: 1px solid $border-subtle;
+      border-inline-end: 1px solid $border-subtle;
       box-shadow: inset 3px 0 0 0 $border-subtle;
       inline-size: 100%;
       margin-inline-start: 0;
@@ -581,7 +582,7 @@
 
     &.#{$prefix}--tabs--vertical
       .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected {
-      border-inline-start: none;
+      border-inline: none;
       // Draws the border without affecting the inner-content
       box-shadow: inset 3px 0 0 0 $border-interactive;
     }
