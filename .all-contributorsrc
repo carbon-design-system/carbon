@@ -1542,6 +1542,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "digiacomo-a",
+      "name": "Andrea DG",
+      "avatar_url": "https://avatars.githubusercontent.com/u/117646602?v=4",
+      "profile": "https://github.com/digiacomo-a",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
