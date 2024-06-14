@@ -91,6 +91,13 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
   /** @deprecated */
   ariaLabel?: string;
 
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign?: boolean;
+
   className?: string;
 
   /**
@@ -282,6 +289,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   Item extends ItemBase
 >(
   {
+    autoAlign = false,
     className: containerClassName,
     clearSelectionDescription = 'Total items selected: ',
     clearSelectionText = 'To clear selection, press Delete or Backspace',
@@ -339,36 +347,42 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     selectedItems: selected,
   });
 
-  const { refs, floatingStyles, middlewareData } = useFloating({
-    placement: direction,
+  const { refs, floatingStyles, middlewareData } = useFloating(
+    autoAlign
+      ? {
+          placement: direction,
 
-    // The floating element is positioned relative to its nearest
-    // containing block (usually the viewport). It will in many cases also
-    // “break” the floating element out of a clipping ancestor.
-    // https://floating-ui.com/docs/misc#clipping
-    strategy: 'fixed',
+          // The floating element is positioned relative to its nearest
+          // containing block (usually the viewport). It will in many cases also
+          // “break” the floating element out of a clipping ancestor.
+          // https://floating-ui.com/docs/misc#clipping
+          strategy: 'fixed',
 
-    // Middleware order matters, arrow should be last
-    middleware: [
-      flip({ crossAxis: false }),
-      floatingSize({
-        apply({ rects, elements }) {
-          Object.assign(elements.floating.style, {
-            width: `${rects.reference.width}px`,
-          });
-        },
-      }),
-    ],
-    whileElementsMounted: autoUpdate,
-  });
+          // Middleware order matters, arrow should be last
+          middleware: [
+            flip({ crossAxis: false }),
+            floatingSize({
+              apply({ rects, elements }) {
+                Object.assign(elements.floating.style, {
+                  width: `${rects.reference.width}px`,
+                });
+              },
+            }),
+          ],
+          whileElementsMounted: autoUpdate,
+        }
+      : {}
+  );
 
   useLayoutEffect(() => {
-    Object.keys(floatingStyles).forEach((style) => {
-      if (refs.floating.current) {
-        refs.floating.current.style[style] = floatingStyles[style];
-      }
-    });
-  }, [floatingStyles, refs.floating, middlewareData, open]);
+    if (autoAlign) {
+      Object.keys(floatingStyles).forEach((style) => {
+        if (refs.floating.current) {
+          refs.floating.current.style[style] = floatingStyles[style];
+        }
+      });
+    }
+  }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
 
   const textInput = useRef<HTMLInputElement>(null);
   const filterableMultiSelectInstanceId = useId();
@@ -886,6 +900,13 @@ FilterableMultiSelect.propTypes = {
     PropTypes.string,
     'ariaLabel / aria-label props are no longer required for FilterableMultiSelect'
   ),
+
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Specify the text that should be read for screen readers that describes total items selected
