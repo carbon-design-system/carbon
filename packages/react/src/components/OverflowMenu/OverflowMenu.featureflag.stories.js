@@ -62,6 +62,70 @@ export const _OverflowMenu = () => {
   );
 };
 
+export const AutoAlign = (args) => {
+  const onClick = action('onClick (MenuItem)');
+
+  return (
+    <>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <OverflowMenu {...args} autoAlign={true} menuAlignment="bottom-start">
+          <MenuItem label="bottom-start Stop app" />
+          <MenuItem label="Restart app" />
+          <MenuItem label="Rename app" />
+          <MenuItem label="Edit routes and access" />
+          <MenuItemDivider />
+          <MenuItem label="Delete app" kind="danger" />
+        </OverflowMenu>
+
+        <OverflowMenu {...args} menuAlignment="bottom-end">
+          <MenuItem label="bottom-end Stop app" />
+          <MenuItem label="Restart app" />
+          <MenuItem label="Rename app" />
+          <MenuItem label="Edit routes and access" />
+          <MenuItemDivider />
+          <MenuItem label="Delete app" kind="danger" />
+        </OverflowMenu>
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          marginTop: '15rem',
+          justifyContent: 'space-between',
+        }}>
+        <OverflowMenu {...args} menuAlignment="top-start">
+          <MenuItem label="top-start Stop app" />
+          <MenuItem label="Restart app" />
+          <MenuItem label="Rename app" />
+          <MenuItem label="Edit routes and access" />
+          <MenuItemDivider />
+          <MenuItem label="Delete app" kind="danger" />
+        </OverflowMenu>
+
+        <OverflowMenu {...args} menuAlignment="top-end">
+          <MenuItem label="top-end Stop app" />
+          <MenuItem label="Restart app" />
+          <MenuItem label="Rename app" />
+          <MenuItem label="Edit routes and access" />
+          <MenuItemDivider />
+          <MenuItem label="Delete app" kind="danger" />
+        </OverflowMenu>
+      </div>
+
+      <div style={{ width: 2000, height: 800 }}>
+        {/* <OverflowMenu autoAlign={true}>
+      <MenuItem label="Stop app" onClick={onClick} />
+      <MenuItem label="Restart app" onClick={onClick} />
+      <MenuItem label="Rename app" onClick={onClick} />
+      <MenuItem label="Edit routes and access" onClick={onClick} />
+      <MenuItemDivider />
+      <MenuItem label="Delete app" kind="danger" onClick={onClick} />
+    </OverflowMenu> */}
+      </div>
+    </>
+  );
+};
+
 export const Nested = () => {
   return (
     <OverflowMenu>
