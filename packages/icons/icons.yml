@@ -428,6 +428,19 @@
     - money
   sizes:
     - 32
+- name: ai-generate
+  friendly_name: Generate AI
+  aliases:
+    - ai
+    - automation
+    - artificial intelligence
+    - enterprise
+    - explainability
+    - ai interactivity
+    - generate
+    - generative
+  sizes:
+    - 32
 - name: ai-governance--lifecycle
   friendly_name: AI governance lifecycle
   aliases:
@@ -468,19 +481,6 @@
     - unsecure
     - secure
     - uncontrolled
-  sizes:
-    - 32
-- name: ai-generate
-  friendly_name: Generate AI
-  aliases:
-    - ai
-    - automation
-    - artificial intelligence
-    - enterprise
-    - explainability
-    - ai interactivity
-    - generate
-    - generative
   sizes:
     - 32
 - name: ai-launch
