@@ -110,7 +110,6 @@ function DirectionButton({
         disabled={disabled}
         kind="ghost"
         label={label}
-        aria-label={label}
         onClick={onClick}>
         {direction === 'forward' ? <CaretRight /> : <CaretLeft />}
       </IconButton>
