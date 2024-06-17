@@ -408,13 +408,15 @@
 
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker-input__wrapper--slug:not(
-      :has(~ .#{$prefix}--slug--revert)
+      :has(.#{$prefix}--slug--revert)
     ) {
     @include ai-gradient;
   }
 
   .#{$prefix}--date-picker--fluid
-    .#{$prefix}--date-picker-input__wrapper--slug
+    .#{$prefix}--date-picker-input__wrapper--slug:not(
+      :has(.#{$prefix}--slug--revert)
+    )
     .#{$prefix}--date-picker__input:not(.cds--date-picker__input--invalid) {
     border-block-end-color: $ai-border-strong;
   }

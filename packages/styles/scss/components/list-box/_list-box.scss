@@ -917,6 +917,11 @@ $list-box-menu-width: convert.to-rem(300px);
     inset-inline-end: convert.to-rem(-9px);
   }
 
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug--revert::after {
+    inset-block-start: convert.to-rem(8px);
+    inset-inline-end: convert.to-rem(-1px);
+  }
+
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box:not(:has(.#{$prefix}--slug--revert)) {
     @include ai-gradient;

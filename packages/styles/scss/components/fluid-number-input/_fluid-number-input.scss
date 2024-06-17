@@ -305,7 +305,7 @@
 
   .#{$prefix}--number-input--fluid
     .#{$prefix}--number__input-wrapper--slug:not(
-      :has(~ .#{$prefix}--slug--revert)
+      :has(.#{$prefix}--slug--revert)
     ) {
     @include ai-gradient;
   }

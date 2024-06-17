@@ -313,7 +313,7 @@ export const withAILabel = (args) => {
               labelText="Date Picker label"
               size="md"
               id="date-picker"
-              slug={AILabel}
+              slug={aiLabel}
               {...rest}
             />
           </DatePicker>
