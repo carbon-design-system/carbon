@@ -17,7 +17,6 @@ figma.connect(
     props: {
       labelText: figma.string('Value text'),
       labelPosition: figma.enum('Position', {
-        Left: 'left',
         Right: 'right',
       }),
       hideLabel: figma.boolean('Value', {
@@ -51,8 +50,6 @@ figma.connect(
       disabled,
       defaultChecked,
     }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
       <RadioButton
         labelText={labelText}
         labelPosition={labelPosition}
