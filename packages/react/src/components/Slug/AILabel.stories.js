@@ -9,7 +9,7 @@
 
 import React from 'react';
 
-import { Slug, SlugContent, SlugActions } from '.';
+import { AILabel, AILabelContent, AILabelActions } from '.';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { IconButton } from '../IconButton';
@@ -17,8 +17,8 @@ import mdx from './Slug.mdx';
 import './slug-story.scss';
 
 export default {
-  title: 'Experimental/unstable__Slug',
-  component: Slug,
+  title: 'Components/AILabel',
+  component: AILabel,
   parameters: {
     docs: {
       page: mdx,
@@ -44,16 +44,16 @@ const aiContent = (
 export const Default = () => (
   <>
     <div className="slug-container slug-container-example">
-      <Slug autoAlign size="mini">
-        <SlugContent>{aiContent}</SlugContent>
-      </Slug>
-      <Slug autoAlign size="2xs">
-        <SlugContent>{aiContent}</SlugContent>
-      </Slug>
-      <Slug autoAlign size="xs">
-        <SlugContent>
+      <AILabel autoAlign size="mini">
+        <AILabelContent>{aiContent}</AILabelContent>
+      </AILabel>
+      <AILabel autoAlign size="2xs">
+        <AILabelContent>{aiContent}</AILabelContent>
+      </AILabel>
+      <AILabel autoAlign size="xs">
+        <AILabelContent>
           {aiContent}
-          <SlugActions>
+          <AILabelActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -64,13 +64,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
-      <Slug autoAlign size="sm">
-        <SlugContent>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
+      <AILabel autoAlign size="sm">
+        <AILabelContent>
           {aiContent}
-          <SlugActions>
+          <AILabelActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -81,13 +81,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
-      <Slug autoAlign size="md">
-        <SlugContent>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
+      <AILabel autoAlign size="md">
+        <AILabelContent>
           {aiContent}
-          <SlugActions>
+          <AILabelActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -98,13 +98,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
-      <Slug autoAlign size="lg">
-        <SlugContent>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
+      <AILabel autoAlign size="lg">
+        <AILabelContent>
           {aiContent}
-          <SlugActions>
+          <AILabelActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -115,13 +115,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
-      <Slug autoAlign size="xl">
-        <SlugContent>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
+      <AILabel autoAlign size="xl">
+        <AILabelContent>
           {aiContent}
-          <SlugActions>
+          <AILabelActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -132,15 +132,15 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
     </div>
     <div className="slug-container-example slug-container">
-      <Slug autoAlign kind="inline" size="sm">
-        <SlugContent>
+      <AILabel autoAlign kind="inline" size="sm">
+        <AILabelContent>
           {aiContent}
-          <SlugActions>
+          <AILabelActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -151,13 +151,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
-      <Slug autoAlign kind="inline" size="md">
-        <SlugContent>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
+      <AILabel autoAlign kind="inline" size="md">
+        <AILabelContent>
           {aiContent}
-          <SlugActions>
+          <AILabelActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -168,13 +168,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
-      <Slug autoAlign kind="inline" size="lg">
-        <SlugContent>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
+      <AILabel autoAlign kind="inline" size="lg">
+        <AILabelContent>
           {aiContent}
-          <SlugActions>
+          <AILabelActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -185,15 +185,15 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
     </div>
     <div className="slug-container-example slug-container">
-      <Slug autoAlign kind="inline" size="sm" aiTextLabel="Text goes here">
-        <SlugContent>
+      <AILabel autoAlign kind="inline" size="sm" aiTextLabel="Text goes here">
+        <AILabelContent>
           {aiContent}
-          <SlugActions>
+          <AILabelActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -204,13 +204,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
-      <Slug autoAlign kind="inline" size="md" aiTextLabel="Text goes here">
-        <SlugContent>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
+      <AILabel autoAlign kind="inline" size="md" aiTextLabel="Text goes here">
+        <AILabelContent>
           {aiContent}
-          <SlugActions>
+          <AILabelActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -221,13 +221,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
-      <Slug autoAlign kind="inline" size="lg" aiTextLabel="Text goes here">
-        <SlugContent>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
+      <AILabel autoAlign kind="inline" size="lg" aiTextLabel="Text goes here">
+        <AILabelContent>
           {aiContent}
-          <SlugActions>
+          <AILabelActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -238,9 +238,9 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
     </div>
   </>
 );
@@ -250,8 +250,8 @@ export const Callout = (args) => {
 
   return (
     <div className="slug-container-example slug-container centered">
-      <Slug autoAlign={false} defaultOpen {...args}>
-        <SlugContent>
+      <AILabel autoAlign={false} defaultOpen {...args}>
+        <AILabelContent>
           {' '}
           <div>
             <p className="secondary">AI Explained</p>
@@ -267,7 +267,7 @@ export const Callout = (args) => {
             <p className="bold">Foundation model</p>
           </div>
           {showSlugActions && (
-            <SlugActions>
+            <AILabelActions>
               <IconButton kind="ghost" label="View">
                 <View />
               </IconButton>
@@ -278,10 +278,10 @@ export const Callout = (args) => {
                 <Folders />
               </IconButton>
               <Button>View details</Button>
-            </SlugActions>
+            </AILabelActions>
           )}
-        </SlugContent>
-      </Slug>
+        </AILabelContent>
+      </AILabel>
     </div>
   );
 };
@@ -393,7 +393,7 @@ export const Playground = (args) => {
         <p className="bold">Foundation model</p>
       </div>
       {showSlugActions && (
-        <SlugActions>
+        <AILabelActions>
           <IconButton kind="ghost" label="View">
             <View />
           </IconButton>
@@ -404,7 +404,7 @@ export const Playground = (args) => {
             <Folders />
           </IconButton>
           <Button>View details</Button>
-        </SlugActions>
+        </AILabelActions>
       )}
     </>
   );
@@ -412,9 +412,9 @@ export const Playground = (args) => {
   return (
     <>
       <div className="slug-container slug-container-example">
-        <Slug {...args}>
-          <SlugContent>{renderedContent}</SlugContent>
-        </Slug>
+        <AILabel {...args}>
+          <AILabelContent>{renderedContent}</AILabelContent>
+        </AILabel>
       </div>
       <Button>Test</Button>
       <Button kind="danger">Test</Button>
