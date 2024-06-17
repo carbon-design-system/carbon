@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { SkeletonText } from '../SkeletonText';
 
-interface AiSkeletonTextProps {
+interface AISkeletonTextProps {
   /**
    * Specify an optional className to be applied to the container node.
    */
@@ -38,7 +38,7 @@ interface AiSkeletonTextProps {
   width?: string;
 }
 
-const AiSkeletonText = ({ className, ...rest }: AiSkeletonTextProps) => {
+const AISkeletonText = ({ className, ...rest }: AISkeletonTextProps) => {
   const prefix = usePrefix();
   const aiSkeletonTextClasses = classNames(className, {
     [`${prefix}--skeleton__text--ai`]: true,
@@ -47,7 +47,7 @@ const AiSkeletonText = ({ className, ...rest }: AiSkeletonTextProps) => {
   return <SkeletonText className={aiSkeletonTextClasses} {...rest} />;
 };
 
-AiSkeletonText.propTypes = {
+AISkeletonText.propTypes = {
   /**
    * Specify an optional className to be applied to the container node
    */
@@ -70,4 +70,4 @@ AiSkeletonText.propTypes = {
   width: PropTypes.string,
 };
 
-export default AiSkeletonText;
+export default AISkeletonText;

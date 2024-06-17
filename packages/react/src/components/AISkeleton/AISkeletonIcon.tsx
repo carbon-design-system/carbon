@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { SkeletonIcon } from '../SkeletonIcon';
 
-interface AiSkeletonIconProps {
+interface AISkeletonIconProps {
   /**
    * Specify an optional className to add.
    */
@@ -23,16 +23,16 @@ interface AiSkeletonIconProps {
   style?: React.CSSProperties;
 }
 
-const AiSkeletonIcon = ({ className, ...rest }: AiSkeletonIconProps) => {
+const AISkeletonIcon = ({ className, ...rest }: AISkeletonIconProps) => {
   const prefix = usePrefix();
-  const AiSkeletonIconClasses = classNames(className, {
+  const AISkeletonIconClasses = classNames(className, {
     [`${prefix}--skeleton__icon--ai`]: true,
   });
 
-  return <SkeletonIcon className={AiSkeletonIconClasses} {...rest} />;
+  return <SkeletonIcon className={AISkeletonIconClasses} {...rest} />;
 };
 
-AiSkeletonIcon.propTypes = {
+AISkeletonIcon.propTypes = {
   /**
    * Specify an optional className to add.
    */
@@ -44,4 +44,4 @@ AiSkeletonIcon.propTypes = {
   style: PropTypes.object,
 };
 
-export default AiSkeletonIcon;
+export default AISkeletonIcon;
