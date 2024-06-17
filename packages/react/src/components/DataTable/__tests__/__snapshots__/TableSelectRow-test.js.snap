@@ -30,7 +30,7 @@ exports[`DataTable.TableSelectRow renders as expected - Component API should ren
                 <span
                   class="cds--visually-hidden"
                 >
-                  Aria label
+                  New Aria label
                 </span>
               </label>
             </div>

@@ -649,6 +649,8 @@ categories:
           - ai-launch
           - machine-learning
           - machine-learning-model
+          - model
+          - model--reference
           - model--tuned
           - prompt-session
           - prompt-template
@@ -1448,8 +1450,10 @@ categories:
           - folder--shared
           - folders
           - gamification
-          - GIF
+          - gem
+          - gem--reference
           - generate-pdf
+          - GIF
           - HD
           - HD--filled
           - HDR
@@ -1477,9 +1481,7 @@ categories:
           - MAC
           - media--library
           - media--library--filled
-          - model
           - model--alt
-          - model--reference
           - MOV
           - MP3
           - MP4
