@@ -50,7 +50,19 @@ interface OverflowMenuProps {
   /**
    * Experimental property. Specify how the menu should align with the button element
    */
-  menuAlignment?: 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end';
+  menuAlignment?:
+    | 'top'
+    | 'bottom'
+    | 'left'
+    | 'right'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left-end'
+    | 'left-start'
+    | 'right-end'
+    | 'right-start';
 
   /**
    * Optionally provide a custom icon to be rendered on the trigger button.
@@ -225,10 +237,18 @@ OverflowMenu.propTypes = {
    * Experimental property. Specify how the menu should align with the button element
    */
   menuAlignment: PropTypes.oneOf([
+    'top',
     'top-start',
     'top-end',
+    'bottom',
     'bottom-start',
     'bottom-end',
+    'left',
+    'left-start',
+    'left-end',
+    'right',
+    'right-start',
+    'right-end',
   ]),
 
   /**
