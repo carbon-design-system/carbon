@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import '../AILabel/ailabel-story.scss';
 import { default as Checkbox, CheckboxSkeleton } from './';
 import mdx from './Checkbox.mdx';
 import CheckboxGroup from '../CheckboxGroup';
@@ -91,7 +92,7 @@ export const Single = () => {
 export const Skeleton = () => <CheckboxSkeleton />;
 
 const slugFunc = (kind) => (
-  <AILabel kind={kind}>
+  <AILabel className="slug-container" kind={kind}>
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>

@@ -12,6 +12,10 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { default as Select, SelectSkeleton } from '../Select';
 import SelectItem from '../SelectItem';
 import SelectItemGroup from '../SelectItemGroup';
+import Button from '../Button';
+import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
+import { IconButton } from '../IconButton';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './Select.mdx';
 
 export default {
@@ -128,6 +132,56 @@ export const _WithLayer = () => (
       </Select>
     )}
   </WithLayer>
+);
+
+const aiLabel = (
+  <AILabel className="slug-container">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+export const withAILabel = () => (
+  <div style={{ width: 400 }}>
+    <Select
+      id="select-1"
+      labelText="Select an option"
+      helperText="Optional helper text"
+      slug={aiLabel}>
+      <SelectItem value="" text="" />
+      <SelectItem
+        value="An example option that is really long to show what should be done to handle long text"
+        text="An example option that is really long to show what should be done to handle long text"
+      />
+      <SelectItem value="Option 2" text="Option 2" />
+      <SelectItem value="Option 3" text="Option 3" />
+      <SelectItem value="Option 4" text="Option 4" />
+    </Select>
+  </div>
 );
 
 export const Playground = (args) => {
