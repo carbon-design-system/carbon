@@ -10,6 +10,7 @@ import { default as Checkbox, CheckboxSkeleton } from './';
 import mdx from './Checkbox.mdx';
 import CheckboxGroup from '../CheckboxGroup';
 import NestedCheckbox from './NestedCheckbox';
+import { useState } from 'react';
 
 const checkboxEvents = {
   className: 'some-class',
@@ -88,15 +89,28 @@ export const Single = () => {
 export const Skeleton = () => <CheckboxSkeleton />;
 
 export const Nested = () => {
+  const [test, setTest] = useState(true);
+  const updater = (a, up) => {
+    setTest(up.checked);
+  };
   return (
     <CheckboxGroup {...fieldsetCheckboxProps()}>
       <NestedCheckbox labelText={`Parent label`} id="parent-checkbox-label-1">
-        <Checkbox labelText={`Child label 1`} id="checkbox-label-1" />
+        <Checkbox
+          checked={test}
+          onChange={updater}
+          labelText={`Child label 1`}
+          id="checkbox-label-1"
+        />
         <Checkbox labelText={`Child label 2`} id="checkbox-label-2" />
         <NestedCheckbox
           labelText={`Parent label 2`}
           id="parent-checkbox-label-2">
-          <Checkbox labelText={`Child label 5`} id="checkbox-label-5" />
+          <Checkbox
+            checked={true}
+            labelText={`Child label 5`}
+            id="checkbox-label-5"
+          />
           <Checkbox labelText={`Child label 6`} id="checkbox-label-6" />
           <Checkbox labelText={`Child label 7`} id="checkbox-label-7" />
         </NestedCheckbox>

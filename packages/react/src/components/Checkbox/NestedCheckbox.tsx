@@ -41,16 +41,24 @@ const NestedCheckbox = React.forwardRef(
     const [childrenCheckState, setChildrenCheckState] = useState(() => {
       const map = new Map();
       React.Children.forEach(children, (child) => {
-        const { id } = (child as ReactElement)?.props ?? undefined;
-        map.set(id, checked ?? false);
+        const { checked: childChecked, id } =
+          (child as ReactElement)?.props ?? undefined;
+        map.set(id, checked ?? childChecked ?? false);
       });
       return map;
     });
     useEffect(() => {
       const map = new Map();
       React.Children.forEach(children, (child) => {
-        const { id } = (child as ReactElement)?.props ?? undefined;
-        map.set(id, checked ?? false);
+        const {
+          checked: childChecked,
+          id,
+          onChange,
+        } = (child as ReactElement)?.props ?? undefined;
+        map.set(id, checked ?? childChecked ?? false);
+        if (typeof onChange === 'function' && checked) {
+          onChange(null, { checked, id });
+        }
       });
       setChildrenCheckState(map);
     }, [checked, children]);
