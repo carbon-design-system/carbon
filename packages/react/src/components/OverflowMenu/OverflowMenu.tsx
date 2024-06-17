@@ -439,7 +439,6 @@ class OverflowMenu extends React.Component<
   handleClick = (evt) => {
     const { onClick = noopFn } = this.props;
     this.setState({ click: true });
-    evt.stopPropagation();
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
       this.setState({ open: !this.state.open });
       onClick(evt);

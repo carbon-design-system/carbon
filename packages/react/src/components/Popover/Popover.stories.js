@@ -15,6 +15,8 @@ import { default as Checkbox } from '../Checkbox';
 import mdx from './Popover.mdx';
 import { Settings } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
+import OverflowMenu from '../OverflowMenu/OverflowMenu';
+import OverflowMenuItem from '../OverflowMenuItem';
 
 const prefix = 'cds';
 
@@ -264,6 +266,67 @@ export const ExperimentalAutoAlign = () => {
           </PopoverContent>
         </Popover>
       </div>
+    </div>
+  );
+};
+export const Test = () => {
+  const [open, setOpen] = useState();
+  const align = document?.dir === 'rtl' ? 'bottom-right' : 'bottom-left';
+  const alignTwo = document?.dir === 'rtl' ? 'bottom-left' : 'bottom-right';
+  return (
+    <div style={{ display: 'flex', gap: '8rem' }}>
+      <OverflowMenu
+        flipped={document?.dir === 'rtl'}
+        aria-label="overflow-menu">
+        <OverflowMenuItem itemText="Stop app" />
+        <OverflowMenuItem itemText="Restart app" />
+        <OverflowMenuItem itemText="Rename app" />
+        <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
+        <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+        <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+      </OverflowMenu>
+
+      <Popover
+        align={align}
+        open={open}
+        onKeyDown={(evt) => {
+          if (match(evt, keys.Escape)) {
+            setOpen(false);
+          }
+        }}
+        isTabTip
+        onRequestClose={() => setOpen(false)}>
+        <button
+          aria-label="Settings"
+          type="button"
+          aria-expanded={open}
+          onClick={() => {
+            setOpen(!open);
+          }}>
+          <Settings />
+        </button>
+        <PopoverContent className="p-3">
+          <RadioButtonGroup
+            style={{ alignItems: 'flex-start', flexDirection: 'column' }}
+            legendText="Row height"
+            name="radio-button-group"
+            defaultSelected="small">
+            <RadioButton labelText="Small" value="small" id="radio-small" />
+            <RadioButton labelText="Large" value="large" id="radio-large" />
+          </RadioButtonGroup>
+          <hr />
+          <fieldset className={`cds--fieldset`}>
+            <legend className={`cds--label`}>Edit columns</legend>
+            <Checkbox defaultChecked labelText="Name" id="checkbox-label-1" />
+            <Checkbox defaultChecked labelText="Type" id="checkbox-label-2" />
+            <Checkbox
+              defaultChecked
+              labelText="Location"
+              id="checkbox-label-3"
+            />
+          </fieldset>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };
