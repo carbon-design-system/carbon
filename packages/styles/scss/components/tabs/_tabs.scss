@@ -32,6 +32,7 @@
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert';
 @use '../../utilities/layout';
+@use '../../utilities/update_fields_on_layer' as *;
 
 /// Tabs styles
 /// @access public
@@ -705,6 +706,8 @@
   }
 
   .#{$prefix}--tabs--vertical ~ .#{$prefix}--tab-content {
+    @include update_fields_on_layer;
+
     grid-column: 3/-1;
     overflow-y: auto;
 
