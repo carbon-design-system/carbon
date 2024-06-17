@@ -19,7 +19,7 @@ export enum NestedCheckboxStates {
 
 export interface NestedCheckboxProps extends CheckboxProps {
   /**
-   * Provide a collection of `<Checkbox>` components to render in the group
+   * Provide a collection of `<Checkbox> and <NestedCheckbox>` components to render in the group
    */
   children?: ReactNode;
 }
@@ -30,6 +30,7 @@ const NestedCheckbox = React.forwardRef(
     children,
     className,
     defaultChecked,
+    id,
     invalid,
     onChange = noopFn,
     readOnly,
@@ -86,13 +87,32 @@ const NestedCheckbox = React.forwardRef(
       }
     };
 
+    const propagateChange = (event, count) => {
+      if (checked && count === 0) {
+        onChange(event, { checked: false, id });
+      } else if (!checked && count === React.Children.count(children)) {
+        onChange(event, { checked: true, id });
+      }
+    };
+
     function getCheckboxes() {
       const mappedChildren = React.Children.map(children, (checkbox) => {
+        // const nestedCheckbox = checkbox as React.FunctionComponentElement<any>;
+        // if (nestedCheckbox.type &&
+        //   nestedCheckbox.type.displayName !== undefined &&
+        //   nestedCheckbox.type.displayName.includes('NestedCheckbox')) {
+        //   return React.cloneElement(nestedCheckbox as ReactElement, {});
+        // } else
         if (checkbox) {
           const { id, onChange } =
             (checkbox as ReactElement)?.props ?? undefined;
           const handleChildChange = (event, { checked, id }) => {
-            setChildrenCheckState(new Map(childrenCheckState.set(id, checked)));
+            const map = new Map(childrenCheckState.set(id, checked));
+            setChildrenCheckState(map);
+            const inc = checked ? 1 : -1;
+            const updatedCheckedCount = childrenCheckedCount + inc;
+            propagateChange(event, updatedCheckedCount);
+
             if (typeof onChange === 'function') {
               onChange(event, { checked, id });
             }
@@ -113,6 +133,7 @@ const NestedCheckbox = React.forwardRef(
         <Checkbox
           checked={childrenCheckedCount === React.Children.count(children)}
           defaultChecked={defaultChecked}
+          id={id}
           indeterminate={
             childrenCheckedCount > 0 &&
             childrenCheckedCount < React.Children.count(children)
