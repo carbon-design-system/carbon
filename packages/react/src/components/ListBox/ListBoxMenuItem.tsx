@@ -6,7 +6,13 @@
  */
 
 import cx from 'classnames';
-import React, { ForwardedRef, useEffect, useRef, useState } from 'react';
+import React, {
+  ForwardedRef,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 import { ForwardRefReturn, ReactAttr } from '../../types/common';
@@ -25,6 +31,11 @@ function useIsTruncated(ref) {
 
 export interface ListBoxMenuItemProps extends ReactAttr<HTMLLIElement> {
   /**
+   * Specify any children nodes that should be rendered inside of the ListBox
+   * Menu Item
+   */
+  children?: ReactNode;
+  /**
    * Specify whether the current menu item is "active".
    */
   isActive?: boolean;
@@ -38,6 +49,16 @@ export interface ListBoxMenuItemProps extends ReactAttr<HTMLLIElement> {
    * Specify whether the item should be disabled
    */
   disabled?: boolean;
+
+  /**
+   * Specify whether the item is Select All option
+   */
+  isSelectAll?: boolean;
+
+  /**
+   * Provide an optional tooltip for the ListBoxMenuItem
+   */
+  title?: string;
 }
 
 export type ListBoxMenuItemForwardedRef =
@@ -62,6 +83,7 @@ const ListBoxMenuItem = React.forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
       children,
       isActive = false,
       isHighlighted = false,
+      isSelectAll = false,
       title,
       ...rest
     }: ListBoxMenuItemProps,
@@ -73,6 +95,7 @@ const ListBoxMenuItem = React.forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
     const className = cx(`${prefix}--list-box__menu-item`, {
       [`${prefix}--list-box__menu-item--active`]: isActive,
       [`${prefix}--list-box__menu-item--highlighted`]: isHighlighted,
+      [`${prefix}--list-box__menu-item--selectall`]: isSelectAll,
     });
 
     return (
@@ -112,6 +135,11 @@ ListBoxMenuItem.propTypes = {
    * Specify whether the current menu item is "highlighted".
    */
   isHighlighted: PropTypes.bool,
+
+  /**
+   * Specify whether the item is Select All option
+   */
+  isSelectAll: PropTypes.bool,
 
   /**
    * Provide an optional tooltip for the ListBoxMenuItem

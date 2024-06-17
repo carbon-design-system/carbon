@@ -30,6 +30,8 @@ export function useSelection({
   onChange,
   initialSelectedItems = [],
   selectedItems: controlledItems,
+  hasSelectAll = false,
+  itemsWithSelectAll = [],
 }) {
   const isMounted = useRef(false);
   const savedOnChange = useRef(onChange);
@@ -59,21 +61,51 @@ export function useSelection({
       if (disabled) {
         return;
       }
+
+      const AllSelectableItems = itemsWithSelectAll.filter(
+        (item) => !item.disabled
+      );
+      const disabledItems = itemsWithSelectAll.filter((item) => item.disabled);
+
+      //deselect all on click to All/indeterminate option
+      if (item && item.selectAllFlag && selectedItems.length > 0) {
+        setSelectedItems([]);
+        return;
+      }
+
+      //select all option
+      if (item && item.selectAllFlag && selectedItems.length == 0) {
+        setSelectedItems(AllSelectableItems);
+        return;
+      }
+
       let selectedIndex;
       selectedItems.forEach((selectedItem, index) => {
         if (isEqual(selectedItem, item)) {
           selectedIndex = index;
         }
       });
+
       if (selectedIndex === undefined) {
         setSelectedItems((selectedItems) => selectedItems.concat(item));
+
+        // checking if all items are selected then We should select mark the 'select All' option as well
+        if (
+          hasSelectAll &&
+          itemsWithSelectAll.length - 1 ===
+            selectedItems.length + disabledItems.length + 1
+        ) {
+          setSelectedItems(AllSelectableItems);
+        }
         return;
       }
-      setSelectedItems((selectedItems) =>
-        removeAtIndex(selectedItems, selectedIndex)
-      );
+
+      setSelectedItems((selectedItems) => {
+        const updatedItems = removeAtIndex(selectedItems, selectedIndex);
+        return updatedItems.filter((item) => !item.selectAllFlag);
+      });
     },
-    [disabled, selectedItems]
+    [disabled, selectedItems, itemsWithSelectAll, hasSelectAll]
   );
 
   const clearSelection = useCallback(() => {

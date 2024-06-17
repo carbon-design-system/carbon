@@ -38,6 +38,7 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
+import Checkbox from '../Checkbox';
 import type { InternationalProps } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 
@@ -178,6 +179,16 @@ export interface MultiSelectProps<ItemType>
    * Additional props passed to Downshift
    */
   downshiftProps?: Partial<UseSelectProps<ItemType>>;
+
+  /**
+   * experimental prop to Show/Hide All option
+   */
+  hasSelectAll?: boolean;
+
+  /**
+   * Provide Label for Select All option
+   */
+  labelforSelectAll?: string;
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -360,9 +371,17 @@ const MultiSelect = React.forwardRef(
       readOnly,
       locale = 'en',
       slug,
+      hasSelectAll = false,
+      labelforSelectAll = 'All',
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    if ((selected ?? []).length > 0 && hasSelectAll) {
+      console.warn(
+        'Warning: `hasSelectAll` should not be used when `selectedItems` is provided. Please pass either `hasSelectAll` or `selectedItems`, not both.'
+      );
+      hasSelectAll = false;
+    }
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const { current: multiSelectInstanceId } = useRef(getInstanceId());
@@ -372,16 +391,12 @@ const MultiSelect = React.forwardRef(
     const [prevOpenProp, setPrevOpenProp] = useState(open);
     const [topItems, setTopItems] = useState([]);
     const [itemsCleared, setItemsCleared] = useState(false);
-    const {
-      selectedItems: controlledSelectedItems,
-      onItemChange,
-      clearSelection,
-    } = useSelection({
-      disabled,
-      initialSelectedItems,
-      onChange,
-      selectedItems: selected,
-    });
+
+    const selectAllOption = {
+      id: 'select-all-option',
+      text: labelforSelectAll,
+      selectAllFlag: true,
+    };
 
     // Filter out items with an object having undefined values
     const filteredItems = useMemo(() => {
@@ -396,6 +411,23 @@ const MultiSelect = React.forwardRef(
         return true; // Return true if item is not an object with undefined values
       });
     }, [items]);
+
+    const itemsWithSelectAll = hasSelectAll
+      ? [selectAllOption, ...filteredItems]
+      : filteredItems;
+
+    const {
+      selectedItems: controlledSelectedItems,
+      onItemChange,
+      clearSelection,
+    } = useSelection({
+      disabled,
+      initialSelectedItems,
+      onChange,
+      selectedItems: selected,
+      hasSelectAll,
+      itemsWithSelectAll,
+    });
 
     const selectProps: UseSelectProps<ItemType> = {
       ...downshiftProps,
@@ -413,7 +445,7 @@ const MultiSelect = React.forwardRef(
         );
       },
       selectedItem: controlledSelectedItems,
-      items: filteredItems,
+      items: itemsWithSelectAll as ItemType[],
       isItemDisabled(item, _index) {
         return (item as any).disabled;
       },
@@ -582,7 +614,7 @@ const MultiSelect = React.forwardRef(
           } else {
             return {
               ...changes,
-              highlightedIndex: props.items.indexOf(highlightedIndex),
+              highlightedIndex: itemsWithSelectAll.indexOf(highlightedIndex),
             };
           }
         case ToggleButtonKeyDownArrowDown:
@@ -653,6 +685,9 @@ const MultiSelect = React.forwardRef(
       selectedItems.length > 0 &&
       selectedItems.map((item) => (item as selectedItemType)?.text);
 
+    const selectedItemsWithoutSelectAll = selectedItems.filter(
+      (item: any) => !item.selectAllFlag
+    );
     return (
       <div className={wrapperClasses}>
         <label className={titleClasses} {...getLabelProps()}>
@@ -693,7 +728,7 @@ const MultiSelect = React.forwardRef(
                 clearSelection={
                   !disabled && !readOnly ? clearSelection : noopFn
                 }
-                selectionCount={selectedItems.length}
+                selectionCount={selectedItemsWithoutSelectAll.length}
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 translateWithId={translateWithId!}
                 disabled={disabled}
@@ -726,12 +761,17 @@ const MultiSelect = React.forwardRef(
             {isOpen &&
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               sortItems!(
-                filteredItems,
+                itemsWithSelectAll as readonly ItemType[],
                 sortOptions as SortItemsOptions<ItemType>
               ).map((item, index) => {
                 const isChecked =
                   selectedItems.filter((selected) => isEqual(selected, item))
                     .length > 0;
+
+                const isIndeterminate =
+                  selectedItems.length !== 0 &&
+                  item['selectAllFlag'] &&
+                  !isChecked;
 
                 const itemProps = getItemProps({
                   item,
@@ -744,24 +784,28 @@ const MultiSelect = React.forwardRef(
                 return (
                   <ListBox.MenuItem
                     key={itemProps.id}
-                    isActive={isChecked}
+                    isActive={isChecked && !item['selectAllFlag']}
                     aria-label={itemText}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
                     disabled={itemProps['aria-disabled']}
+                    isSelectAll={item['selectAllFlag']}
                     {...itemProps}>
                     <div className={`${prefix}--checkbox-wrapper`}>
-                      <span
+                      <Checkbox
+                        id={`${itemProps.id}__checkbox`}
+                        labelText={
+                          itemToElement ? (
+                            <ItemToElement key={itemProps.id} {...item} />
+                          ) : (
+                            itemText
+                          )
+                        }
+                        checked={isChecked}
                         title={useTitleInItem ? itemText : undefined}
-                        className={`${prefix}--checkbox-label`}
-                        data-contained-checkbox-state={isChecked}
-                        id={`${itemProps.id}__checkbox`}>
-                        {itemToElement ? (
-                          <ItemToElement key={itemProps.id} {...item} />
-                        ) : (
-                          itemText
-                        )}
-                      </span>
+                        indeterminate={isIndeterminate}
+                        disabled={disabled}
+                      />
                     </div>
                   </ListBox.MenuItem>
                 );
@@ -834,6 +878,11 @@ MultiSelect.propTypes = {
   downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
 
   /**
+   * experimental prop to Show/Hide All option
+   */
+  hasSelectAll: PropTypes.bool,
+
+  /**
    * Provide helper text that is used alongside the control label for
    * additional help
    */
@@ -889,6 +938,11 @@ MultiSelect.propTypes = {
    * this field is for
    */
   label: PropTypes.node.isRequired,
+
+  /**
+   * Provide Label for Select All option.
+   */
+  labelforSelectAll: PropTypes.string,
 
   /**
    * `true` to use the light version.

@@ -5363,6 +5363,9 @@ Map {
       "downshiftProps": Object {
         "type": "object",
       },
+      "hasSelectAll": Object {
+        "type": "bool",
+      },
       "helperText": Object {
         "type": "node",
       },
@@ -5395,6 +5398,9 @@ Map {
       "label": Object {
         "isRequired": true,
         "type": "node",
+      },
+      "labelforSelectAll": Object {
+        "type": "string",
       },
       "light": [Function],
       "locale": Object {
