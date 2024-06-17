@@ -22,11 +22,11 @@ import DataTable, {
   TableExpandedRow,
 } from '..';
 import { rows, headers } from './shared';
-import mdx from '../../Slug/SlugDatatable.mdx';
+import mdx from '../../AILabel/SlugDatatable.mdx';
 import Button from '../../Button';
 import { IconButton } from '../../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import { Slug, SlugContent, SlugActions } from '../../Slug';
+import { AILabel, AILabelContent, AILabelActions } from '../../AILabel';
 import './datatable-story.scss';
 
 export default {
@@ -72,8 +72,11 @@ const columnSlugHeaders = [
     key: 'attached_groups',
     header: 'Attached groups',
     slug: (
-      <Slug className="slug-container" autoAlign={false} align="bottom-right">
-        <SlugContent>
+      <AILabel
+        className="slug-container"
+        autoAlign={false}
+        align="bottom-right">
+        <AILabelContent>
           <div>
             <p className="secondary">AI Explained</p>
             <h1>84%</h1>
@@ -87,7 +90,7 @@ const columnSlugHeaders = [
             <p className="secondary">Model type</p>
             <p className="bold">Foundation model</p>
           </div>
-          <SlugActions>
+          <AILabelActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -98,9 +101,9 @@ const columnSlugHeaders = [
               <Folders />
             </IconButton>
             <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
     ),
   },
   {
@@ -109,9 +112,9 @@ const columnSlugHeaders = [
   },
 ];
 
-const slug = (
-  <Slug className="slug-container">
-    <SlugContent>
+const aiLabel = (
+  <AILabel className="slug-container">
+    <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
         <h1>84%</h1>
@@ -124,7 +127,7 @@ const slug = (
         <p className="secondary">Model type</p>
         <p className="bold">Foundation model</p>
       </div>
-      <SlugActions>
+      <AILabelActions>
         <IconButton kind="ghost" label="View">
           <View />
         </IconButton>
@@ -135,12 +138,12 @@ const slug = (
           <Folders />
         </IconButton>
         <Button>View details</Button>
-      </SlugActions>
-    </SlugContent>
-  </Slug>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
 );
 
-export const SlugWithSelection = () => (
+export const AILabelWithSelection = () => (
   <DataTable rows={rows} headers={headers}>
     {({
       rows,
@@ -171,7 +174,7 @@ export const SlugWithSelection = () => (
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
                 <TableSlugRow
-                  slug={i === 3 || i === 4 || i === 1 ? slug : null}
+                  slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
                 />
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
@@ -186,7 +189,7 @@ export const SlugWithSelection = () => (
   </DataTable>
 );
 
-export const SlugWithRadioSelection = () => (
+export const AILabelWithRadioSelection = () => (
   <DataTable rows={rows} headers={headers} radio>
     {({
       rows,
@@ -217,7 +220,7 @@ export const SlugWithRadioSelection = () => (
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
                 <TableSlugRow
-                  slug={i === 3 || i === 4 || i === 1 ? slug : null}
+                  slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
                 />
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
@@ -270,7 +273,7 @@ export const SlugWithSelectionAndExpansion = () => (
               <React.Fragment key={row.id}>
                 <TableExpandRow {...getRowProps({ row })}>
                   <TableSlugRow
-                    slug={i === 3 || i === 4 || i === 1 ? slug : null}
+                    slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
                   />
                   <TableSelectRow {...getSelectionProps({ row })} />
                   {row.cells.map((cell) => (
@@ -329,7 +332,7 @@ export const SlugWithExpansion = () => (
               <React.Fragment key={row.id}>
                 <TableExpandRow {...getRowProps({ row })}>
                   <TableSlugRow
-                    slug={i === 3 || i === 4 || i === 1 ? slug : null}
+                    slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
                   />
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>

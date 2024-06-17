@@ -13,8 +13,8 @@ import { AILabel, AILabelContent, AILabelActions } from '.';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { IconButton } from '../IconButton';
-import mdx from './Slug.mdx';
-import './slug-story.scss';
+import mdx from './AILabel.mdx';
+import './ailabel-story.scss';
 
 export default {
   title: 'Components/AILabel',

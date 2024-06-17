@@ -42,7 +42,7 @@ import {
   Asleep,
 } from '@carbon/icons-react';
 import { AILabel, AILabelContent, AILabelActions } from '.';
-import './slug-story.scss';
+import './ailabel-story.scss';
 import mdx from './SlugExamples.mdx';
 
 export default {
@@ -161,9 +161,9 @@ const items = [
   },
 ];
 
-const slug = (
-  <Slug className="slug-container">
-    <SlugContent>
+const aiLabel = (
+  <AILabel className="slug-container">
+    <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
         <h1>84%</h1>
@@ -176,7 +176,7 @@ const slug = (
         <p className="secondary">Model type</p>
         <p className="bold">Foundation model</p>
       </div>
-      <SlugActions>
+      <AILabelActions>
         <IconButton kind="ghost" label="View">
           <View />
         </IconButton>
@@ -187,14 +187,14 @@ const slug = (
           <Folders />
         </IconButton>
         <Button>View details</Button>
-      </SlugActions>
-    </SlugContent>
-  </Slug>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
 );
 
 const slugFunc = (kind) => (
-  <Slug kind={kind}>
-    <SlugContent>
+  <AILabel kind={kind}>
+    <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
         <h1>84%</h1>
@@ -207,7 +207,7 @@ const slugFunc = (kind) => (
         <p className="secondary">Model type</p>
         <p className="bold">Foundation model</p>
       </div>
-      <SlugActions>
+      <AILabelActions>
         <IconButton kind="ghost" label="View">
           <View />
         </IconButton>
@@ -218,9 +218,9 @@ const slugFunc = (kind) => (
           <Folders />
         </IconButton>
         <Button>View details</Button>
-      </SlugActions>
-    </SlugContent>
-  </Slug>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
 );
 
 export const _Checkbox = {

@@ -25,7 +25,7 @@ import { Stack } from '../Stack';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { Slug, SlugContent, SlugActions } from '.';
-import './slug-story.scss';
+import './ailabel-story.scss';
 import mdx from './SlugForm.mdx';
 
 export default {

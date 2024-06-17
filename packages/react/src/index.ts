@@ -153,11 +153,13 @@ export {
 } from './components/Pagination/experimental';
 export * from './components/Popover';
 export * from './components/ProgressBar';
+export { AILabel, AILabelContent, AILabelActions } from './components/AILabel';
+// Keep until V12
 export {
-  Slug as unstable__Slug,
-  SlugContent as unstable__SlugContent,
-  SlugActions as unstable__SlugActions,
-} from './components/Slug';
+  AILabel as unstable__Slug,
+  AILabelContent as unstable__SlugContent,
+  AILabelActions as unstable__SlugActions,
+} from './components/AILabel';
 export {
   ChatButton as unstable__ChatButton,
   ChatButtonSkeleton as unstable__ChatButtonSkeleton,

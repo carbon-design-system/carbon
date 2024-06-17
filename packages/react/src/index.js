@@ -308,11 +308,14 @@ export {
 } from './components/Theme';
 export { usePrefix } from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';
+
+export { AILabel, AILabelContent, AILabelActions } from './components/AILabel';
+// Keep until V12
 export {
-  Slug as unstable__Slug,
-  SlugContent as unstable__SlugContent,
-  SlugActions as unstable__SlugActions,
-} from './components/Slug';
+  AILabel as unstable__Slug,
+  AILabelContent as unstable__SlugContent,
+  AILabelActions as unstable__SlugActions,
+} from './components/AILabel';
 
 export {
   AiSkeletonText as unstable__AiSkeletonText,
