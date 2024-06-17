@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Slug } from '../../Slug';
+import { AILabel } from '../';
 import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
@@ -14,7 +14,7 @@ const prefix = 'cds';
 describe('Slug', () => {
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto the popover element', () => {
-      const { container } = render(<Slug data-testid="test" />);
+      const { container } = render(<AILabel data-testid="test" />);
 
       expect(container.firstChild.firstChild).toHaveAttribute(
         'data-testid',
@@ -23,32 +23,32 @@ describe('Slug', () => {
     });
 
     it('should render children as expected', () => {
-      render(<Slug>Children test</Slug>);
+      render(<AILabel>Children test</AILabel>);
 
       expect(screen.getByText('Children test')).toBeInTheDocument();
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
-      const { container } = render(<Slug className="custom-class" />);
+      const { container } = render(<AILabel className="custom-class" />);
 
       expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('should respect aiText prop', () => {
-      render(<Slug aiText="IA" />);
+      render(<AILabel aiText="IA" />);
 
       expect(screen.getByText('IA')).toBeInTheDocument();
     });
 
     it('should respect aiTextLabel prop', () => {
-      render(<Slug aiTextLabel="Test text" />);
+      render(<AILabel aiTextLabel="Test text" />);
 
       expect(screen.getByText('Test text')).toBeInTheDocument();
     });
 
     it('should respect align prop when autoAlign is false', () => {
       render(
-        <Slug data-testid="test" autoAlign={false} align="bottom-start" />
+        <AILabel data-testid="test" autoAlign={false} align="bottom-start" />
       );
 
       expect(screen.getByTestId('test')).not.toHaveClass(
@@ -60,7 +60,7 @@ describe('Slug', () => {
     });
 
     it('should apply align prop classes even when autoAlign is true', () => {
-      render(<Slug data-testid="test" align="bottom-start" />);
+      render(<AILabel data-testid="test" align="bottom-start" />);
 
       expect(screen.getByTestId('test')).toHaveClass(
         `${prefix}--popover--auto-align`
@@ -71,7 +71,7 @@ describe('Slug', () => {
     });
 
     it('should respect kind prop', () => {
-      render(<Slug kind="inline" />);
+      render(<AILabel kind="inline" />);
 
       expect(screen.getByRole('button')).toHaveClass(
         `${prefix}--slug__button--inline`
@@ -79,7 +79,7 @@ describe('Slug', () => {
     });
 
     it('should respect revertActive prop', () => {
-      const { container } = render(<Slug revertActive />);
+      const { container } = render(<AILabel revertActive />);
 
       expect(container.firstChild).toHaveClass(`${prefix}--slug--revert`);
       expect(container.firstChild.firstChild).toHaveClass(
@@ -88,13 +88,13 @@ describe('Slug', () => {
     });
 
     it('should respect revertLabel prop', () => {
-      render(<Slug revertActive revertLabel="Test revert label" />);
+      render(<AILabel revertActive revertLabel="Test revert label" />);
 
       expect(screen.getByText('Test revert label')).toBeInTheDocument();
     });
 
     it('should respect size prop', () => {
-      render(<Slug size="xl" />);
+      render(<AILabel size="xl" />);
 
       expect(screen.getByRole('button')).toHaveClass(
         `${prefix}--slug__button--xl`

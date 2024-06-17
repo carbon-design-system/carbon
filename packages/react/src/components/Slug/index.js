@@ -20,30 +20,30 @@ import { IconButton } from '../IconButton';
 import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 
-export const SlugContent = React.forwardRef(function SlugContent(
+export const AILabelContent = React.forwardRef(function AILabelContent(
   { children, className },
   ref
 ) {
   const prefix = usePrefix();
 
-  const hasSlugActions = React.Children.toArray(children).some(
-    (child) => child.type?.displayName === 'SlugActions'
+  const hasAILabelActions = React.Children.toArray(children).some(
+    (child) => child.type?.displayName === 'AILabelActions'
   );
 
-  const slugContentClasses = cx(className, {
+  const aiLabelContentClasses = cx(className, {
     [`${prefix}--slug-content`]: true,
-    [`${prefix}--slug-content--with-actions`]: hasSlugActions,
+    [`${prefix}--slug-content--with-actions`]: hasAILabelActions,
   });
 
   return (
-    <ToggletipContent className={slugContentClasses} ref={ref}>
+    <ToggletipContent className={aiLabelContentClasses} ref={ref}>
       {children}
     </ToggletipContent>
   );
 });
 
-SlugContent.displayName = 'SlugContent';
-SlugContent.propTypes = {
+AILabelContent.displayName = 'AILabelContent';
+AILabelContent.propTypes = {
   /**
    * Specify the content you want rendered inside the slug ToggleTip
    */
@@ -55,25 +55,25 @@ SlugContent.propTypes = {
   className: PropTypes.string,
 };
 
-export const SlugActions = React.forwardRef(function SlugActions(
+export const AILabelActions = React.forwardRef(function AILabelActions(
   { children, className },
   ref
 ) {
   const prefix = usePrefix();
 
-  const slugActionBarClasses = cx(className, {
+  const aiLabelActionsClasses = cx(className, {
     [`${prefix}--slug-actions`]: true,
   });
 
   return (
-    <ToggletipActions className={slugActionBarClasses} ref={ref}>
+    <ToggletipActions className={aiLabelActionsClasses} ref={ref}>
       {children}
     </ToggletipActions>
   );
 });
 
-SlugActions.displayName = 'SlugActions';
-SlugActions.propTypes = {
+AILabelActions.displayName = 'AILabelActions';
+AILabelActions.propTypes = {
   /**
    * Specify the content you want rendered inside the slug callout toolbar
    */
@@ -85,7 +85,7 @@ SlugActions.propTypes = {
   className: PropTypes.string,
 };
 
-export const Slug = React.forwardRef(function Slug(
+export const AILabel = React.forwardRef(function AILabel(
   {
     aiText = 'AI',
     aiTextLabel,
@@ -104,14 +104,14 @@ export const Slug = React.forwardRef(function Slug(
   ref
 ) {
   const prefix = usePrefix();
-  const id = useId('slug');
+  const id = useId('AILabel');
 
-  const slugClasses = cx(className, {
+  const aiLabelClasses = cx(className, {
     [`${prefix}--slug`]: true,
     [`${prefix}--slug--revert`]: revertActive,
   });
 
-  const slugButtonClasses = cx({
+  const aiLabelButtonClasses = cx({
     [`${prefix}--slug__button`]: true,
     [`${prefix}--slug__button--${size}`]: size,
     [`${prefix}--slug__button--${kind}`]: kind,
@@ -130,7 +130,7 @@ export const Slug = React.forwardRef(function Slug(
     : `${aiText} - ${aiTextLabel}`;
 
   return (
-    <div className={slugClasses} ref={ref} id={id}>
+    <div className={aiLabelClasses} ref={ref} id={id}>
       {revertActive ? (
         <IconButton
           onClick={handleOnRevertClick}
@@ -142,7 +142,7 @@ export const Slug = React.forwardRef(function Slug(
         </IconButton>
       ) : (
         <Toggletip align={align} autoAlign={autoAlign} {...rest}>
-          <ToggletipButton className={slugButtonClasses} label={ariaLabel}>
+          <ToggletipButton className={aiLabelButtonClasses} label={ariaLabel}>
             <span className={`${prefix}--slug__text`}>{aiText}</span>
             {aiTextLabel && (
               <span className={`${prefix}--slug__additional-text`}>
@@ -157,8 +157,13 @@ export const Slug = React.forwardRef(function Slug(
   );
 });
 
-Slug.displayName = 'Slug';
-Slug.propTypes = {
+AILabel.displayName = 'AILabel';
+AILabel.propTypes = {
+  /**
+   * Specify the content you want rendered inside the `AILabel` ToggleTip
+   */
+  AILabelContent: PropTypes.node,
+
   /**
    * Specify the correct translation of the AI text
    */
@@ -204,17 +209,17 @@ Slug.propTypes = {
   autoAlign: PropTypes.bool,
 
   /**
-   * Specify the content you want rendered inside the slug ToggleTip
+   * Specify the content you want rendered inside the `AILabel` ToggleTip
    */
   children: PropTypes.node,
 
   /**
-   * Specify an optional className to be added to the AI slug
+   * Specify an optional className to be added to the `AILabel`
    */
   className: PropTypes.string,
 
   /**
-   * Specify the type of Slug, from the following list of types:
+   * Specify the type of `AILabel`, from the following list of types:
    */
   kind: PropTypes.oneOf(['default', 'inline']),
 
@@ -239,12 +244,7 @@ Slug.propTypes = {
   size: PropTypes.oneOf(['mini', '2xs', 'xs', 'sm', 'md', 'lg', 'xl']),
 
   /**
-   * Specify the content you want rendered inside the slug ToggleTip
-   */
-  slugContent: PropTypes.node,
-
-  /**
-   * Specify the text that will be provided to the aria-label of the `Slug` button
+   * Specify the text that will be provided to the aria-label of the `AILabel` button
    */
   slugLabel: PropTypes.string,
 };

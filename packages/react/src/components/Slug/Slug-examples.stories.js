@@ -41,7 +41,7 @@ import {
   Folders,
   Asleep,
 } from '@carbon/icons-react';
-import { Slug, SlugContent, SlugActions } from '../Slug';
+import { AILabel, AILabelContent, AILabelActions } from '.';
 import './slug-story.scss';
 import mdx from './SlugExamples.mdx';
 
