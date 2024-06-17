@@ -190,7 +190,7 @@ describe('OverflowMenu', () => {
       const button = screen.getByRole('button');
 
       // Click the OverflowMenu button
-      fireEvent.click(button);
+      userEvent.click(button);
 
       // Check that the click handler was called only once
       expect(handleClick).toHaveBeenCalledTimes(1);
