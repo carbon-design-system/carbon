@@ -22,7 +22,7 @@ import DataTable, {
   TableExpandedRow,
 } from '..';
 import { rows, headers } from './shared';
-import mdx from '../../AILabel/SlugDatatable.mdx';
+import mdx from '../../AILabel/AILabelDatatable.mdx';
 import Button from '../../Button';
 import { IconButton } from '../../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
@@ -30,7 +30,7 @@ import { AILabel, AILabelContent, AILabelActions } from '../../AILabel';
 import './datatable-story.scss';
 
 export default {
-  title: 'Experimental/unstable__Slug/DataTable',
+  title: 'Components/DataTable/WithAILabel',
   component: DataTable,
   subcomponents: {
     TableSelectAll,
@@ -51,7 +51,7 @@ export default {
   },
 };
 
-const columnSlugHeaders = [
+const columnAILabelHeaders = [
   {
     key: 'name',
     header: 'Name',
@@ -235,7 +235,7 @@ export const AILabelWithRadioSelection = () => (
   </DataTable>
 );
 
-export const SlugWithSelectionAndExpansion = () => (
+export const AILabelWithSelectionAndExpansion = () => (
   <DataTable rows={rows} headers={headers}>
     {({
       rows,
@@ -296,7 +296,7 @@ export const SlugWithSelectionAndExpansion = () => (
   </DataTable>
 );
 
-export const SlugWithExpansion = () => (
+export const AILabelWithExpansion = () => (
   <DataTable rows={rows} headers={headers}>
     {({
       rows,
@@ -354,8 +354,8 @@ export const SlugWithExpansion = () => (
   </DataTable>
 );
 
-export const ColumnSlugWithSelectionAndExpansion = () => (
-  <DataTable rows={rows} headers={columnSlugHeaders}>
+export const ColumnAILabelWithSelectionAndExpansion = () => (
+  <DataTable rows={rows} headers={columnAILabelHeaders}>
     {({
       rows,
       headers,
@@ -423,8 +423,8 @@ export const ColumnSlugWithSelectionAndExpansion = () => (
   </DataTable>
 );
 
-export const ColumnSlugSort = () => (
-  <DataTable rows={rows} headers={columnSlugHeaders}>
+export const ColumnAILabelSort = () => (
+  <DataTable rows={rows} headers={columnAILabelHeaders}>
     {({
       rows,
       headers,

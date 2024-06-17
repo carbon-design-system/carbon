@@ -16,7 +16,7 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import '../AILabel/ailabel-story.scss';
+
 import mdx from './DatePicker.mdx';
 
 export default {
