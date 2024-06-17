@@ -93,7 +93,7 @@
     border-block-end-color: $border-subtle;
   }
 
-  .#{$prefix}--dropdown--open .cds--list-box__field {
+  .#{$prefix}--dropdown--open .#{$prefix}--list-box__field {
     outline: none;
   }
 

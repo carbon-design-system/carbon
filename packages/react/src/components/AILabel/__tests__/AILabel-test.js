@@ -11,7 +11,7 @@ import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
 
-describe('Slug', () => {
+describe('AILabel', () => {
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto the popover element', () => {
       const { container } = render(<AILabel data-testid="test" />);

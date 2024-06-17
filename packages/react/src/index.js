@@ -318,10 +318,17 @@ export {
 } from './components/AILabel';
 
 export {
-  AiSkeletonText as unstable__AiSkeletonText,
-  AiSkeletonIcon as unstable__AiSkeletonIcon,
-  AiSkeletonPlaceholder as unstable__AiSkeletonPlaceholder,
-} from './components/AiSkeleton';
+  AISkeletonText,
+  AISkeletonIcon,
+  AISkeletonPlaceholder,
+} from './components/AISkeleton';
+// Keep until V12
+export {
+  AISkeletonText as unstable__AiSkeletonText,
+  AISkeletonIcon as unstable__AiSkeletonIcon,
+  AISkeletonPlaceholder as unstable__AiSkeletonPlaceholder,
+} from './components/AISkeleton';
+
 export {
   ChatButton as unstable__ChatButton,
   ChatButtonSkeleton as unstable__ChatButtonSkeleton,

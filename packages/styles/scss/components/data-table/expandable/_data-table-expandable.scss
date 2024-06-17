@@ -464,7 +464,7 @@
   .#{$prefix}--parent-row .#{$prefix}--table-column-slug,
   .#{$prefix}--parent-row
     .#{$prefix}--table-column-slug
-    + td.cds--table-expand[data-previous-value='collapsed'] {
+    + td.#{$prefix}--table-expand[data-previous-value='collapsed'] {
     box-shadow: none;
   }
 
@@ -472,7 +472,7 @@
     .#{$prefix}--table-column-slug,
   .#{$prefix}--parent-row.#{$prefix}--expandable-row
     .#{$prefix}--table-column-slug
-    + td.cds--table-expand[data-previous-value='collapsed'] {
+    + td.#{$prefix}--table-expand[data-previous-value='collapsed'] {
     border-block-end: 1px solid transparent;
   }
 
