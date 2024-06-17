@@ -1,5 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState, ReactElement, ReactNode } from 'react';
+import React, {
+  useEffect,
+  useMemo,
+  useState,
+  ReactElement,
+  ReactNode,
+} from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import Checkbox, { CheckboxProps } from './Checkbox';
@@ -47,10 +53,13 @@ const NestedCheckbox = React.forwardRef(
       });
       setChildrenCheckState(map);
     }, [checked, children]);
-    let childrenCheckedCount = 0;
-    childrenCheckState.forEach(
-      (value) => (childrenCheckedCount += value ? 1 : 0)
-    );
+
+    const childrenCheckedCount = useMemo(() => {
+      let counter = 0;
+      childrenCheckState.forEach((value) => (counter += value ? 1 : 0));
+      return counter;
+    }, [childrenCheckState]);
+
     const prefix = usePrefix();
     const showWarning = !readOnly && !invalid && warn;
     const wrapperClasses = classNames(
