@@ -21,7 +21,7 @@ describe('DataTable.TableSelectRow', () => {
       onChange: jest.fn(),
       onSelect: jest.fn(),
       className: 'custom-class-name',
-      ariaLabel: 'Aria label',
+      'aria-label': 'New Aria label',
     };
   });
 
@@ -51,6 +51,52 @@ describe('DataTable.TableSelectRow', () => {
       );
 
       expect(screen.getByRole('checkbox')).toBeChecked();
+    });
+
+    it('should respect deprecated ariaLabel prop if aria-label is not defined', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      render(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableSelectRow
+                {...mockProps}
+                aria-label={null}
+                ariaLabel="Aria label"
+                checked
+              />
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(screen.getByLabelText('Aria label')).toBeInTheDocument();
+      spy.mockRestore();
+    });
+
+    it('should give priority to new aria-label compared to old ariaLabel', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      spy.mockRestore();
+      render(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableSelectRow
+                {...mockProps}
+                ariaLabel="Deprecated aria label"
+                checked
+              />
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(screen.getByLabelText('New Aria label')).toBeInTheDocument();
+      expect(
+        screen.queryByLabelText('Deprecated aria label')
+      ).not.toBeInTheDocument();
+
+      spy.mockRestore();
     });
 
     it('should support a custom `className` prop on the outermost element', () => {

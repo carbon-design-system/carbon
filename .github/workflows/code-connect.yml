@@ -1,0 +1,13 @@
+on:
+  push:
+    paths:
+      - src/packages/react/code-connect/**/*.figma.tsx
+    branches:
+      - main
+
+jobs:
+  code-connect:
+    name: Code Connect
+    runs-on: ubuntu-latest
+    steps:
+      - run: npx figma connect publish

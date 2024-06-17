@@ -296,8 +296,11 @@ describe('DataTable', () => {
 
     describe('selection', () => {
       let mockProps;
+      let spy;
 
       beforeEach(() => {
+        // v12 TODO: Remove the mock of console.warn once we remove ariaLabel from DataTable
+        spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
         mockProps = {
           rows: [
             {
@@ -400,6 +403,10 @@ describe('DataTable', () => {
             )
           ),
         };
+      });
+
+      afterEach(() => {
+        spy.mockRestore();
       });
 
       it('should render and match snapshot', () => {

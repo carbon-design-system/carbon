@@ -45,7 +45,7 @@ new Vue({
 ```
 
 _Note: if you would like to find the import path for an icon, you can reference
-our [icon preview](https://carbon-elements.netlify.com/icons/examples/preview/)_
+our [icon preview](https://carbon-elements.netlify.app/icons/examples/preview/)_
 
 Using `CarbonIconsVue` we can pass in any of the icon components that we'd like
 to use. In our application, we can then use them by doing:

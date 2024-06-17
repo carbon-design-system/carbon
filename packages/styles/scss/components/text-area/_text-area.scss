@@ -69,6 +69,11 @@
     position: relative;
     display: flex;
     inline-size: 100%;
+    max-inline-size: 100%;
+  }
+
+  .#{$prefix}--text-area__wrapper--cols {
+    inline-size: auto;
   }
 
   .#{$prefix}--text-area__invalid-icon {

@@ -20,7 +20,6 @@ export default (config) => {
         if (!triggerChange) {
           const { _input: inputDates } = fp;
           const inputDatesArray = inputDates.value.split(' ');
-          fp.close();
           [inputDatesArray[0], inputDatesArray[2]].forEach((input, i) => {
             if (input) {
               input = !dates[i]

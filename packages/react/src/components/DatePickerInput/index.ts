@@ -5,6 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import DatePickerInput from './DatePickerInput';
+import DatePickerInput, { type DatePickerInputProps } from './DatePickerInput';
 export default DatePickerInput;
-export { DatePickerInput };
+export { DatePickerInput, type DatePickerInputProps };

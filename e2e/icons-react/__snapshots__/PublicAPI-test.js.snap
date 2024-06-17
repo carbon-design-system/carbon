@@ -836,6 +836,8 @@ Array [
   "GatewayUserAccess",
   "GatewayVpn",
   "Gears",
+  "Gem",
+  "GemReference",
   "GenderFemale",
   "GenderMale",
   "GeneratePdf",

@@ -4,5 +4,6 @@
     // TODO: Turn back on once stricter typings for internal utitlies are complete
     "noImplicitAny": false
   },
-  "include": ["src/**/*", "icons/src/index.ts"]
+  "include": ["src/**/*", "icons/src/index.ts"],
+  "exclude": ["**/*.figma.tsx"]
 }
