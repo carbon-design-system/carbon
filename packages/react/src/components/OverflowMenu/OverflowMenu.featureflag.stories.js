@@ -67,9 +67,14 @@ export const AutoAlign = (args) => {
 
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <OverflowMenu {...args} autoAlign={true} menuAlignment="bottom-start">
-          <MenuItem label="bottom-start Stop app" />
+      <div
+        style={{
+          marginTop: '200px',
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}>
+        <OverflowMenu {...args} autoAlign={true}>
+          <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />
           <MenuItem label="Edit routes and access" />
@@ -77,8 +82,8 @@ export const AutoAlign = (args) => {
           <MenuItem label="Delete app" kind="danger" />
         </OverflowMenu>
 
-        <OverflowMenu {...args} menuAlignment="bottom-end">
-          <MenuItem label="bottom-end Stop app" />
+        <OverflowMenu {...args} autoAlign={true} menuAlignment="bottom-end">
+          <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />
           <MenuItem label="Edit routes and access" />
@@ -93,8 +98,8 @@ export const AutoAlign = (args) => {
           marginTop: '15rem',
           justifyContent: 'space-between',
         }}>
-        <OverflowMenu {...args} menuAlignment="top-start">
-          <MenuItem label="top-start Stop app" />
+        <OverflowMenu {...args} autoAlign={true} menuAlignment="top-start">
+          <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />
           <MenuItem label="Edit routes and access" />
@@ -102,8 +107,8 @@ export const AutoAlign = (args) => {
           <MenuItem label="Delete app" kind="danger" />
         </OverflowMenu>
 
-        <OverflowMenu {...args} menuAlignment="top-end">
-          <MenuItem label="top-end Stop app" />
+        <OverflowMenu {...args} autoAlign={true} menuAlignment="top-end">
+          <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />
           <MenuItem label="Edit routes and access" />
@@ -112,16 +117,7 @@ export const AutoAlign = (args) => {
         </OverflowMenu>
       </div>
 
-      <div style={{ width: 2000, height: 800 }}>
-        {/* <OverflowMenu autoAlign={true}>
-      <MenuItem label="Stop app" onClick={onClick} />
-      <MenuItem label="Restart app" onClick={onClick} />
-      <MenuItem label="Rename app" onClick={onClick} />
-      <MenuItem label="Edit routes and access" onClick={onClick} />
-      <MenuItemDivider />
-      <MenuItem label="Delete app" kind="danger" onClick={onClick} />
-    </OverflowMenu> */}
-      </div>
+      <div style={{ width: 2000, height: 800 }}></div>
     </>
   );
 };

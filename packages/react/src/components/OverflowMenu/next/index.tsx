@@ -14,12 +14,7 @@ import React, {
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
-import {
-  useFloating,
-  flip,
-  autoUpdate,
-  size as floatingSize,
-} from '@floating-ui/react';
+import { useFloating, flip, autoUpdate } from '@floating-ui/react';
 
 import { IconButton } from '../../IconButton';
 import { Menu } from '../../Menu';
@@ -96,20 +91,6 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
     },
     forwardRef
   ) {
-    const middlewares = [flip({ crossAxis: false })];
-
-    if (menuAlignment === 'bottom' || menuAlignment === 'top') {
-      middlewares.push(
-        floatingSize({
-          apply({ rects, elements }) {
-            Object.assign(elements.floating.style, {
-              width: `${rects.reference.width}px`,
-            });
-          },
-        })
-      );
-    }
-
     const { refs, floatingStyles, placement, middlewareData } = useFloating(
       autoAlign
         ? {
@@ -122,7 +103,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
             strategy: 'fixed',
 
             // Middleware order matters, arrow should be last
-            middleware: middlewares,
+            middleware: [flip({ fallbackAxisSideDirection: 'start' })],
             whileElementsMounted: autoUpdate,
           }
         : {} // When autoAlign is turned off, floating-ui will not be used
@@ -181,7 +162,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       size !== defaultSize && `${prefix}--overflow-menu--${size}`
     );
 
-    const menuRef = mergeRefs(triggerRef, refs.setFloating);
+    const menuRef = mergeRefs(triggerRef, refs.setReference);
 
     return (
       <div
