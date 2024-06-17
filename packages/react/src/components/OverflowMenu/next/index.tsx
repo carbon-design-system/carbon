@@ -162,7 +162,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       size !== defaultSize && `${prefix}--overflow-menu--${size}`
     );
 
-    const menuRef = mergeRefs(triggerRef, refs.setReference);
+    const floatingRef = mergeRefs(triggerRef, refs.setReference);
 
     return (
       <div
@@ -177,7 +177,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
           className={triggerClasses}
           onClick={handleTriggerClick}
           onMouseDown={handleMousedown}
-          ref={menuRef}
+          ref={floatingRef}
           label={label}
           align={tooltipAlignment}>
           <IconElement className={`${prefix}--overflow-menu__icon`} />
