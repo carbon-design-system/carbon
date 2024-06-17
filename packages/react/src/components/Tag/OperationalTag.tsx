@@ -11,6 +11,7 @@ import React, {
   useLayoutEffect,
   useState,
   ReactNode,
+  useRef,
 } from 'react';
 import classNames from 'classnames';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -19,6 +20,7 @@ import { PolymorphicProps } from '../../types/common';
 import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
+import { isEllipsisActive } from './isEllipsisActive';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -97,23 +99,18 @@ const OperationalTag = <T extends React.ElementType>({
   ...other
 }: OperationalTagProps<T>) => {
   const prefix = usePrefix();
+  const tagRef = useRef<HTMLElement>();
   const tagId = id || `tag-${getInstanceId()}`;
   const tagClasses = classNames(`${prefix}--tag--operational`, className);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-  const isEllipsisActive = (element: any) => {
-    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
-    return element.offsetWidth < element.scrollWidth;
-  };
-
   useLayoutEffect(() => {
-    const elementTagId = document.querySelector(`#${tagId}`);
-    const newElement = elementTagId?.getElementsByClassName(
+    const newElement = tagRef.current?.getElementsByClassName(
       `${prefix}--tag__label`
     )[0];
 
-    isEllipsisActive(newElement);
-  }, [prefix, tagId]);
+    setIsEllipsisApplied(isEllipsisActive(newElement));
+  }, [prefix, tagRef]);
 
   let normalizedSlug;
   if (slug && slug['type']?.displayName === 'Slug') {
@@ -135,9 +132,10 @@ const OperationalTag = <T extends React.ElementType>({
         align="bottom"
         className={tooltipClasses}
         leaveDelayMs={0}
-        onMouseEnter={false}
+        onMouseEnter={() => false}
         closeOnActivation>
-        <Tag<any>
+        <Tag
+          ref={tagRef}
           type={type}
           size={size}
           renderIcon={renderIcon}
@@ -155,7 +153,8 @@ const OperationalTag = <T extends React.ElementType>({
   }
 
   return (
-    <Tag<any>
+    <Tag
+      ref={tagRef}
       type={type}
       size={size}
       renderIcon={renderIcon}

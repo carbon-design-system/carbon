@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useState, ReactNode } from 'react';
+import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
 import classNames from 'classnames';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -15,6 +15,7 @@ import Tag, { SIZES, TYPES } from './Tag';
 import { Close } from '@carbon/icons-react';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
+import { isEllipsisActive } from './isEllipsisActive';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -91,22 +92,17 @@ const DismissibleTag = <T extends React.ElementType>({
   ...other
 }: DismissibleTagProps<T>) => {
   const prefix = usePrefix();
+  const tagLabelRef = useRef<HTMLElement>();
   const tagId = id || `tag-${getInstanceId()}`;
   const tagClasses = classNames(`${prefix}--tag--filter`, className);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-  const isEllipsisActive = (element: any) => {
-    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
-    return element.offsetWidth < element.scrollWidth;
-  };
-
   useLayoutEffect(() => {
-    const elementTagId = document.querySelector(`#${tagId}`);
-    const newElement = elementTagId?.getElementsByClassName(
+    const newElement = tagLabelRef.current?.getElementsByClassName(
       `${prefix}--tag__label`
     )[0];
-    isEllipsisActive(newElement);
-  }, [prefix, tagId]);
+    setIsEllipsisApplied(isEllipsisActive(newElement));
+  }, [prefix, tagLabelRef]);
   const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (onClose) {
       event.stopPropagation();
@@ -134,7 +130,8 @@ const DismissibleTag = <T extends React.ElementType>({
   const dismissLabel = `Dismiss "${text}"`;
 
   return (
-    <Tag<any>
+    <Tag
+      ref={tagLabelRef}
       type={type}
       size={size}
       renderIcon={renderIcon}

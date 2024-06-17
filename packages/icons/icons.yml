@@ -9440,6 +9440,33 @@
     - industry
   sizes:
     - 32
+- name: gem
+  friendly_name: Gem
+  aliases:
+    - 3d
+    - prototype
+    - sketch
+    - illustrate
+    - assemble
+    - fabricate
+    - manufacture
+    - construct
+  sizes:
+    - 32
+- name: gem--reference
+  friendly_name: Gem reference
+  aliases:
+    - reference
+    - 3d
+    - prototype
+    - sketch
+    - illustrate
+    - assemble
+    - fabricate
+    - manufacture
+    - construct
+  sizes:
+    - 32
 - name: gender--female
   friendly_name: Gender female
   aliases:
@@ -15305,15 +15332,10 @@
 - name: model
   friendly_name: Model
   aliases:
-    - reference
-    - 3d
-    - prototype
-    - sketch
-    - illustrate
-    - assemble
-    - fabricate
-    - manufacture
-    - construct
+    - AI
+    - generative
+    - watsonx
+    - deep learning
     - foundation
     - foundation model
   sizes:
@@ -15334,25 +15356,25 @@
     - 32
 - name: model--reference
   friendly_name: Model reference
+  aliases:
+    - AI
+    - model
+    - foundation model
+    - generative
+    - deep learning
+    - watsonx
   sizes:
     - 32
-  aliases:
-    - reference
-    - 3d
-    - prototype
-    - sketch
-    - illustrate
-    - assemble
-    - fabricate
-    - manufacture
-    - construct
 - name: model--tuned
   friendly_name: Model tuned
   aliases:
     - tuning
     - foundation model
+    - model
     - AI
     - adjust
+    - watsonx
+    - deep learning
   sizes:
     - 32
 - name: model-builder
