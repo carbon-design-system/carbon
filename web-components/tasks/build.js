@@ -1,9 +1,10 @@
 import mdx from "@mdx-js/esbuild";
-import { context, build } from "esbuild";
+import { build } from "esbuild";
 import CleanCSS from "clean-css";
 import del from "del";
 import parseArgs from "minimist";
 import { sassPlugin } from "esbuild-sass-plugin";
+// import rollupPluginIcons from "./rollup-plugin-icons";
 
 const args = parseArgs(process.argv.slice(2), {
   boolean: true,
@@ -56,9 +57,6 @@ const args = parseArgs(process.argv.slice(2), {
   try {
     const buildOptions = {
       entryPoints: [
-        // 'src/baklava.ts',
-        // 'src/baklava-react.ts',
-        // 'src/localization.ts',
         "src/index.ts",
         ...(await globby([
           // 'src/generated/**/*.ts',
@@ -70,7 +68,7 @@ const args = parseArgs(process.argv.slice(2), {
       loader: {
         ".woff": "file",
         ".woff2": "file",
-        ".svg": "file",
+        ".svg": "text",
       },
       outdir: destinationPath,
       assetNames: "assets/[name]",
@@ -82,33 +80,14 @@ const args = parseArgs(process.argv.slice(2), {
       metafile: true,
       minify: true,
       plugins: [
-        // litCssPlugin(cssPluginOptions),
         mdx(),
         sassPlugin({
+          filter: /\.scss$/,
           type: "lit-css",
         }),
+        // rollupPluginIcons(),
       ],
     };
-
-    // if (args.serve) {
-    //   const servedir = 'playground';
-
-    //   let ctx = await context({
-    //     ...buildOptions,
-    //     outdir: `${servedir}/dist`
-    //   });
-
-    //   const { host, port } = await ctx.serve(
-    //     {
-    //       servedir,
-    //       host: 'localhost',
-    //     }
-    //   );
-
-    //   console.log(`Playground is served on http://${host}:${port}`);
-
-    //   return;
-    // }
 
     const { errors, warnings, metafile } = await build(buildOptions);
 
@@ -140,7 +119,7 @@ const args = parseArgs(process.argv.slice(2), {
       size: `${(analyzeResult.reduce((acc, { bytes }) => acc + bytes, 0) / 1024).toFixed(2)} KB`,
     });
 
-    del(`${destinationPath}/components/icon/icons`);
+    // del(`${destinationPath}/components/icon/icons`);
     console.table(analyzeResult, ["fileName", "size"]);
 
     console.info("Build Done!");
