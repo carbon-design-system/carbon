@@ -103,7 +103,17 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
             strategy: 'fixed',
 
             // Middleware order matters, arrow should be last
-            middleware: [flip({ fallbackAxisSideDirection: 'start' })],
+            middleware: [
+              flip({
+                fallbackAxisSideDirection: 'start',
+                fallbackPlacements: [
+                  'top-start',
+                  'top-end',
+                  'bottom-start',
+                  'bottom-end',
+                ],
+              }),
+            ],
             whileElementsMounted: autoUpdate,
           }
         : {} // When autoAlign is turned off, floating-ui will not be used

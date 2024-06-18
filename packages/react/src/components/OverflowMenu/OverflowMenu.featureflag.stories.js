@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { ArrowsVertical } from '@carbon/icons-react';
@@ -62,27 +62,24 @@ export const _OverflowMenu = () => {
   );
 };
 
-export const AutoAlign = (args) => {
-  const onClick = action('onClick (MenuItem)');
+export const AutoAlign = () => {
+  const ref = useRef();
+
+  useEffect(() => {
+    console.log(ref);
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
 
   return (
-    <>
+    <div style={{ width: '5000px', height: '5000px' }}>
       <div
         style={{
-          marginTop: '200px',
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}>
-        <OverflowMenu {...args} autoAlign={true}>
-          <MenuItem label="Stop app" />
-          <MenuItem label="Restart app" />
-          <MenuItem label="Rename app" />
-          <MenuItem label="Edit routes and access" />
-          <MenuItemDivider />
-          <MenuItem label="Delete app" kind="danger" />
-        </OverflowMenu>
-
-        <OverflowMenu {...args} autoAlign={true} menuAlignment="bottom-end">
+          position: 'absolute',
+          top: '2500px',
+          left: '2500px',
+        }}
+        ref={ref}>
+        <OverflowMenu autoAlign={true}>
           <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />
@@ -91,34 +88,7 @@ export const AutoAlign = (args) => {
           <MenuItem label="Delete app" kind="danger" />
         </OverflowMenu>
       </div>
-
-      <div
-        style={{
-          display: 'flex',
-          marginTop: '15rem',
-          justifyContent: 'space-between',
-        }}>
-        <OverflowMenu {...args} autoAlign={true} menuAlignment="top-start">
-          <MenuItem label="Stop app" />
-          <MenuItem label="Restart app" />
-          <MenuItem label="Rename app" />
-          <MenuItem label="Edit routes and access" />
-          <MenuItemDivider />
-          <MenuItem label="Delete app" kind="danger" />
-        </OverflowMenu>
-
-        <OverflowMenu {...args} autoAlign={true} menuAlignment="top-end">
-          <MenuItem label="Stop app" />
-          <MenuItem label="Restart app" />
-          <MenuItem label="Rename app" />
-          <MenuItem label="Edit routes and access" />
-          <MenuItemDivider />
-          <MenuItem label="Delete app" kind="danger" />
-        </OverflowMenu>
-      </div>
-
-      <div style={{ width: 2000, height: 800 }}></div>
-    </>
+    </div>
   );
 };
 
