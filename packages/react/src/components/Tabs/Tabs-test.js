@@ -1,5 +1,13 @@
 import React from 'react';
-import { Tabs, Tab, TabPanel, TabPanels, TabList } from './Tabs';
+import {
+  Tabs,
+  TabsVertical,
+  Tab,
+  TabPanel,
+  TabPanels,
+  TabList,
+  TabListVertical,
+} from './Tabs';
 import { act } from 'react';
 
 import { render, screen } from '@testing-library/react';
@@ -648,5 +656,52 @@ describe('TabList', () => {
     );
 
     expect(container.firstChild).not.toHaveClass(`${prefix}--tabs--full-width`);
+  });
+});
+
+describe('TabListVertical', () => {
+  it('should render TabList if screen smaller than md', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => false);
+    const { container } = render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel className="custom-class">
+            Tab Panel 1<button type="button">Submit</button>
+          </TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.firstChild).not.toHaveClass(`${prefix}--tabs--vertical`);
+  });
+
+  it('should have set height', () => {
+    const { container } = render(
+      <TabsVertical height="100px">
+        <TabListVertical aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+          <Tab>Tab Label 4</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel className="custom-class">
+            Tab Panel 1<button type="button">Submit</button>
+          </TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.firstChild).toHaveAttribute('style', 'height: 100px;');
   });
 });
