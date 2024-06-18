@@ -12327,14 +12327,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dom-accessibility-api@npm:^0.5.6":
-  version: 0.5.10
-  resolution: "dom-accessibility-api@npm:0.5.10"
-  checksum: 10/3ce183680c598392f89ec13fd04f495f95890c09d3da45909123ff549a10621ca21eee0258f929e4ed16a2cc73255d649174402b5fb7cd790983aa33b5a6fa3f
-  languageName: node
-  linkType: hard
-
-"dom-accessibility-api@npm:^0.5.9":
+"dom-accessibility-api@npm:^0.5.6, dom-accessibility-api@npm:^0.5.9":
   version: 0.5.16
   resolution: "dom-accessibility-api@npm:0.5.16"
   checksum: 10/377b4a7f9eae0a5d72e1068c369c99e0e4ca17fdfd5219f3abd32a73a590749a267475a59d7b03a891f9b673c27429133a818c44b2e47e32fec024b34274e2ca
