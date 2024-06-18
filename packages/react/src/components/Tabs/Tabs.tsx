@@ -110,11 +110,6 @@ export interface TabsProps {
   dismissable?: boolean;
 
   /**
-   * Option to set a height style only if using vertical variation
-   */
-  height?: string;
-
-  /**
    * Provide an optional function which is called
    * whenever the state of the `Tabs` changes
    */
@@ -131,22 +126,15 @@ export interface TabsProps {
    * in a controlled mode and should be used along with `onChange`
    */
   selectedIndex?: number;
-
-  /**
-   * Whether or not the Tabs are being rendered vertically or not
-   */
-  vertical?: boolean;
 }
 
 function Tabs({
   children,
   defaultSelectedIndex = 0,
-  height,
   onChange,
   selectedIndex: controlledSelectedIndex,
   dismissable,
   onTabCloseRequest,
-  vertical,
 }: TabsProps) {
   const baseId = useId('ccs');
   // The active index is used to track the element which has focus in our tablist
@@ -168,16 +156,7 @@ function Tabs({
     selectedIndex,
     setSelectedIndex,
   };
-  const isSm = useMatchMedia(smMediaQuery);
 
-  if (vertical && !isSm) {
-    return (
-      // eslint-disable-next-line react/forbid-component-props
-      <Grid style={{ height: height }}>
-        <TabsContext.Provider value={value}>{children}</TabsContext.Provider>
-      </Grid>
-    );
-  }
   return <TabsContext.Provider value={value}>{children}</TabsContext.Provider>;
 }
 
@@ -217,6 +196,82 @@ Tabs.propTypes = {
     }
     return undefined;
   },
+
+  /**
+   * Control which content panel is currently selected. This puts the component
+   * in a controlled mode and should be used along with `onChange`
+   */
+  selectedIndex: PropTypes.number,
+};
+
+export interface TabsVerticalProps {
+  /**
+   * Provide child elements to be rendered inside the `TabsVertical`.
+   * These elements should render either `TabsListVertical` or `TabsPanels`
+   */
+  children?: ReactNode;
+
+  /**
+   * Specify which content tab should be initially selected when the component
+   * is first rendered
+   */
+  defaultSelectedIndex?: number;
+
+  /**
+   * Option to set a height style only if using vertical variation
+   */
+  height?: string;
+
+  /**
+   * Provide an optional function which is called
+   * whenever the state of the `Tabs` changes
+   */
+  onChange?(state: { selectedIndex: number }): void;
+
+  /**
+   * Control which content panel is currently selected. This puts the component
+   * in a controlled mode and should be used along with `onChange`
+   */
+  selectedIndex?: number;
+}
+
+function TabsVertical({ children, height, ...rest }: TabsVerticalProps) {
+  const isSm = useMatchMedia(smMediaQuery);
+
+  if (!isSm) {
+    return (
+      // eslint-disable-next-line react/forbid-component-props
+      <Grid style={{ height: height }}>
+        <Tabs {...rest}>{children}</Tabs>
+      </Grid>
+    );
+  }
+  return <Tabs {...rest}>{children}</Tabs>;
+}
+
+TabsVertical.propTypes = {
+  /**
+   * Provide child elements to be rendered inside the `TabsVertical`.
+   * These elements should render either `TabsListVertical` or `TabsPanels`
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify which content tab should be initially selected when the component
+   * is first rendered
+   */
+  defaultSelectedIndex: PropTypes.number,
+
+  /**
+   * Option to set a height style only if using vertical variation
+   */
+  height: PropTypes.string,
+
+  /**
+   * Provide an optional function which is called whenever the state of the
+   * `Tabs` changes
+   */
+  onChange: PropTypes.func,
 
   /**
    * Control which content panel is currently selected. This puts the component
@@ -1663,4 +1718,13 @@ TabPanels.propTypes = {
   children: PropTypes.node,
 };
 
-export { Tabs, Tab, IconTab, TabPanel, TabPanels, TabList, TabListVertical };
+export {
+  Tabs,
+  TabsVertical,
+  Tab,
+  IconTab,
+  TabPanel,
+  TabPanels,
+  TabList,
+  TabListVertical,
+};
