@@ -1,11 +1,9 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-/* eslint-disable no-console */
 
 import React from 'react';
 
@@ -318,6 +316,11 @@ Callout.argTypes = {
       disable: true,
     },
   },
+  AILabelContent: {
+    table: {
+      disable: true,
+    },
+  },
   aiText: {
     table: {
       disable: true,
@@ -448,5 +451,35 @@ Playground.argTypes = {
       'right-start',
     ],
     control: { type: 'select' },
+  },
+  AILabelContent: {
+    table: {
+      disable: true,
+    },
+  },
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  onRevertClick: {
+    table: {
+      disable: true,
+    },
+  },
+  revertActive: {
+    table: {
+      disable: true,
+    },
+  },
+  revertLabel: {
+    table: {
+      disable: true,
+    },
   },
 };

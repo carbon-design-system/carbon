@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -146,7 +146,7 @@ export const AILabel = React.forwardRef(function AILabel(
             <span className={`${prefix}--slug__text`}>{aiText}</span>
             {aiTextLabel && (
               <span className={`${prefix}--slug__additional-text`}>
-                {aiTextLabel}
+                {kind === 'inline' && aiTextLabel}
               </span>
             )}
           </ToggletipButton>
