@@ -16,7 +16,7 @@ import {
   generateItems,
   generateGenericItem,
 } from '../../ListBox/test-helpers';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
 
@@ -153,7 +153,7 @@ describe('FilterableMultiSelect', () => {
 
   it('should respect slug prop', () => {
     const { container } = render(
-      <FilterableMultiSelect {...mockProps} slug={<Slug />} />
+      <FilterableMultiSelect {...mockProps} slug={<AILabel />} />
     );
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--slug`

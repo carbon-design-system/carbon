@@ -11,7 +11,7 @@ import userEvent from '@testing-library/user-event';
 
 import Modal from './Modal';
 import TextInput from '../TextInput';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -374,7 +374,7 @@ describe('Modal', () => {
         danger
         primaryButtonText="Danger button text"
         data-testid="modal-5"
-        slug={<Slug />}
+        slug={<AILabel />}
       />
     );
 

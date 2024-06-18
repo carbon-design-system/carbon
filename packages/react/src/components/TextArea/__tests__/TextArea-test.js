@@ -10,7 +10,7 @@ import TextArea from '../TextArea';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, waitFor } from '@testing-library/react';
 import { render, screen, createEvent } from '@testing-library/react';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
 
@@ -197,7 +197,11 @@ describe('TextArea', () => {
 
     it('should respect slug prop', () => {
       render(
-        <TextArea id="textarea-1" labelText="TextArea label" slug={<Slug />} />
+        <TextArea
+          id="textarea-1"
+          labelText="TextArea label"
+          slug={<AILabel />}
+        />
       );
       expect(
         screen.getByRole('button', { name: 'AI - Show information' })

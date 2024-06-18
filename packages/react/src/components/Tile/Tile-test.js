@@ -18,7 +18,7 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import Link from '../Link';
 import { Add } from '@carbon/icons-react';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -49,7 +49,7 @@ describe('Tile', () => {
     });
 
     it('should respect slug prop', () => {
-      render(<Tile slug={<Slug />}>Default tile</Tile>);
+      render(<Tile slug={<AILabel />}>Default tile</Tile>);
       expect(
         screen.getByRole('button', { name: 'AI - Show information' })
       ).toBeInTheDocument();
@@ -91,7 +91,7 @@ describe('Tile', () => {
     });
 
     it('should respect slug prop', () => {
-      render(<ClickableTile slug={<Slug />}>Default tile</ClickableTile>);
+      render(<ClickableTile slug={<AILabel />}>Default tile</ClickableTile>);
 
       // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('svg')).toHaveClass(
@@ -174,7 +174,11 @@ describe('Tile', () => {
 
     it('should respect slug prop', () => {
       render(
-        <SelectableTile slug={<Slug />} id="tile-1" name="tiles" value="value">
+        <SelectableTile
+          slug={<AILabel />}
+          id="tile-1"
+          name="tiles"
+          value="value">
           Default tile
         </SelectableTile>
       );
@@ -311,7 +315,7 @@ describe('Tile', () => {
 
     it('should respect slug prop', () => {
       render(
-        <ExpandableTile slug={<Slug />}>
+        <ExpandableTile slug={<AILabel />}>
           <TileAboveTheFoldContent>
             <div>TestAbove</div>
           </TileAboveTheFoldContent>

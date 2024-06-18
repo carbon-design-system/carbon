@@ -19,7 +19,7 @@ import {
 import ComboBox from '../ComboBox';
 import { act } from 'react';
 
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
@@ -146,7 +146,9 @@ describe('ComboBox', () => {
   });
 
   it('should respect slug prop', async () => {
-    const { container } = render(<ComboBox {...mockProps} slug={<Slug />} />);
+    const { container } = render(
+      <ComboBox {...mockProps} slug={<AILabel />} />
+    );
     await waitForPosition();
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--slug`

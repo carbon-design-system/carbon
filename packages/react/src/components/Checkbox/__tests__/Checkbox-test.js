@@ -9,7 +9,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import Checkbox from '../Checkbox';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
 
@@ -205,7 +205,7 @@ describe('Checkbox', () => {
         defaultChecked
         labelText="Checkbox label"
         id="checkbox-label-1"
-        slug={<Slug />}
+        slug={<AILabel />}
       />
     );
 
