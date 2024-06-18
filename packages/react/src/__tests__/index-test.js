@@ -15,6 +15,12 @@ describe('Carbon Components React', () => {
   it('should export components', () => {
     expect(Object.keys(Carbon).sort()).toMatchInlineSnapshot(`
       Array [
+        "AILabel",
+        "AILabelActions",
+        "AILabelContent",
+        "AISkeletonIcon",
+        "AISkeletonPlaceholder",
+        "AISkeletonText",
         "Accordion",
         "AccordionItem",
         "AccordionSkeleton",

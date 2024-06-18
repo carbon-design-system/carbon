@@ -40,10 +40,23 @@ describe('AILabel', () => {
       expect(screen.getByText('IA')).toBeInTheDocument();
     });
 
-    it('should respect aiTextLabel prop', () => {
-      render(<AILabel aiTextLabel="Test text" />);
+    it('should respect aiTextLabel prop when kind is inline', () => {
+      const wrapper = render(<AILabel kind="inline" aiTextLabel="Test text" />);
 
-      expect(screen.getByText('Test text')).toBeInTheDocument();
+      const additionalTextSpan = wrapper.container.querySelector(
+        `.${prefix}--slug__additional-text`
+      );
+      expect(additionalTextSpan).toBeInTheDocument();
+      expect(additionalTextSpan).toHaveTextContent('Test text');
+    });
+
+    it('should not populate aiTextLabel prop when kind is not inline', () => {
+      const wrapper = render(<AILabel aiTextLabel="Test text" />);
+
+      const additionalTextSpan = wrapper.container.querySelector(
+        `.${prefix}--slug__additional-text`
+      );
+      expect(additionalTextSpan).not.toBeInTheDocument();
     });
 
     it('should respect align prop when autoAlign is false', () => {
