@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem, Tabs, Tab } from 'carbon-components-react';
-import { Routes, Route, Link, useNavigate, Navigate } from 'react-router-dom';
+import React from 'react';
+import { Breadcrumb, BreadcrumbItem, Tabs, Tab, TabList, TabPanel, TabPanels, Content } from '@carbon/react';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import './App.scss';
 
 const LandingPage = ({ children }) => (
@@ -27,11 +27,17 @@ const LandingPage = ({ children }) => (
 const TabOne = () => {
   let navigate = useNavigate();
   return (
-  <Tabs selected={0}>
-    <Tab onClick={() => navigate('/')} label="Tab 1">
-      <div>Tab 1 content.</div>
-    </Tab>
-    <Tab onClick={() => navigate('/tab-two')} label="Tab 2" />
+  <Tabs selectedIndex={0}>
+        <TabList aria-label='Tab list'>
+      <Tab onClick={() => navigate('/')}>Tab 1</Tab>
+      <Tab onClick={() => navigate('/tab-two')}>Tab 2</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>
+        <div>Tab 1 content.</div>
+      </TabPanel>
+      <TabPanel/>
+    </TabPanels>
   </Tabs>
 )};
 
@@ -39,11 +45,17 @@ const TabTwo = () => {
   let navigate = useNavigate();
   
   return (
-  <Tabs selected={1}>
-    <Tab onClick={() => navigate('/')} label="Tab 1" />
-    <Tab onClick={() => navigate('/tab-two')} label="Tab 2">
-      <div>Tab 2 content.</div>
-    </Tab>
+  <Tabs selectedIndex={1}>
+    <TabList aria-label='Tab list'>
+      <Tab onClick={() => navigate('/')}>Tab 1</Tab>
+      <Tab onClick={() => navigate('/tab-two')}>Tab 2</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel/>
+      <TabPanel>
+        <div>Tab 2 content.</div>
+      </TabPanel>
+    </TabPanels>
   </Tabs>
 )};
 
@@ -89,20 +101,17 @@ const PageTwo = () => (
   </div>
 );
 
-class App extends Component {
-  render() {
-    return (
-      <div className="page-content">
-        <Routes>
-          <Route exact={true} path="/" element={<TabOneContent />} />
-          <Route exact={true} path="/page-one" element={<PageOne />} />
-          <Route exact={true} path="/page-two" element={<PageTwo />} />
-          <Route exact={true} path="/tab-two" element={<TabTwoContent />} />
-          <Navigate to="/" />
-          </Routes>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <Content className='page-content'>
+      <Routes>
+        <Route path="/" element={<TabOneContent />} />
+        <Route path="/page-one" element={<PageOne />} />
+        <Route path="/page-two" element={<PageTwo />} />
+        <Route path="/tab-two" element={<TabTwoContent />} />
+      </Routes>
+    </Content>
+  );
 }
 
 export default App;
