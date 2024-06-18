@@ -115,10 +115,6 @@
       }
     }
 
-    &.#{$prefix}--tabs--vertical__small {
-      grid-column: 1/-1;
-    }
-
     .#{$prefix}--tabs__nav {
       @include component-reset.reset;
 
@@ -714,10 +710,6 @@
     @include breakpoint(lg) {
       grid-column: 5/-1;
     }
-  }
-
-  .#{$prefix}--tabs--vertical__small ~ .#{$prefix}--tab-content {
-    grid-column: 1/-1;
   }
 
   .#{$prefix}--tab-content--interactive {
