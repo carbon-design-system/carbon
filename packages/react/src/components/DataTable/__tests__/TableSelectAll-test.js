@@ -20,7 +20,7 @@ describe('TableSelectAll', () => {
           <TableHead>
             <TableRow>
               <TableSelectAll
-                ariaLabel="Select all rows"
+                aria-label="Select all rows"
                 checked={false}
                 id="select-all"
                 name="select-all"
@@ -39,7 +39,8 @@ describe('TableSelectAll', () => {
       );
     });
 
-    it('should respect ariaLabel prop', () => {
+    it('should respect the deprecated ariaLabel prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       render(
         <Table>
           <TableHead>
@@ -57,6 +58,50 @@ describe('TableSelectAll', () => {
       );
 
       expect(screen.getByLabelText('Select all rows')).toBeInTheDocument();
+      spy.mockRestore();
+    });
+
+    it('should respect aria-label prop', () => {
+      render(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableSelectAll
+                aria-label="Select all rows"
+                checked={false}
+                id="select-all"
+                name="select-all"
+                onSelect={() => {}}
+              />
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(screen.getByLabelText('Select all rows')).toBeInTheDocument();
+    });
+
+    it('should give priority to new aria-label compared to old ariaLabel', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      render(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableSelectAll
+                aria-label="Select all rows"
+                ariaLabel="Skipped in favor of aria-label"
+                checked={false}
+                id="select-all"
+                name="select-all"
+                onSelect={() => {}}
+              />
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(screen.getByLabelText('Select all rows')).toBeInTheDocument();
+      spy.mockRestore();
     });
 
     it('should respect checked prop', () => {
@@ -65,7 +110,7 @@ describe('TableSelectAll', () => {
           <TableHead>
             <TableRow>
               <TableSelectAll
-                ariaLabel="Select all rows"
+                aria-label="Select all rows"
                 checked={true}
                 id="select-all"
                 name="select-all"
@@ -85,7 +130,7 @@ describe('TableSelectAll', () => {
           <TableHead>
             <TableRow>
               <TableSelectAll
-                ariaLabel="Select all rows"
+                aria-label="Select all rows"
                 checked={false}
                 id="select-all"
                 name="select-all"
@@ -106,7 +151,7 @@ describe('TableSelectAll', () => {
           <TableHead>
             <TableRow>
               <TableSelectAll
-                ariaLabel="Select all rows"
+                aria-label="Select all rows"
                 checked={false}
                 id="select-all"
                 name="select-all"
@@ -127,7 +172,7 @@ describe('TableSelectAll', () => {
           <TableHead>
             <TableRow>
               <TableSelectAll
-                ariaLabel="Select all rows"
+                aria-label="Select all rows"
                 checked={false}
                 id="select-all"
                 name="select-all"
@@ -148,7 +193,7 @@ describe('TableSelectAll', () => {
           <TableHead>
             <TableRow>
               <TableSelectAll
-                ariaLabel="Select all rows"
+                aria-label="Select all rows"
                 checked={true}
                 id="select-all"
                 name="select-all"
@@ -169,7 +214,7 @@ describe('TableSelectAll', () => {
           <TableHead>
             <TableRow>
               <TableSelectAll
-                ariaLabel="Select all rows"
+                aria-label="Select all rows"
                 checked={true}
                 id="select-all"
                 name="select-all-input"
@@ -193,7 +238,7 @@ describe('TableSelectAll', () => {
           <TableHead>
             <TableRow>
               <TableSelectAll
-                ariaLabel="Select all rows"
+                aria-label="Select all rows"
                 checked={true}
                 id="select-all"
                 name="select-all-input"
