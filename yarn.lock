@@ -1921,16 +1921,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icon-helpers@npm:^10.28.0":
-  version: 10.48.0
-  resolution: "@carbon/icon-helpers@npm:10.48.0"
-  dependencies:
-    "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 10/361b72df213c72f5f052a2da53bf3e673f92ee205404baa44e2a1d08d138d763f3660bc1fdc52f63345ed744bcb6d89568b54f4e129df8cb9cd3745e178930f2
-  languageName: node
-  linkType: hard
-
-"@carbon/icon-helpers@npm:^10.49.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
+"@carbon/icon-helpers@npm:^10.28.0, @carbon/icon-helpers@npm:^10.49.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-helpers@workspace:packages/icon-helpers"
   dependencies:
