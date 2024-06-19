@@ -553,7 +553,7 @@ const ComboBox = forwardRef(
       setHighlightedIndex,
     } = useCombobox({
       ...downshiftProps,
-      items,
+      items: filterItems(items, itemToString, inputValue),
       inputValue: inputValue,
       itemToString: (item) => {
         return itemToString(item);
