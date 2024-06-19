@@ -27,6 +27,7 @@ import { warning } from '../../internal/warning.js';
 
 import { MenuContext, menuReducer } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
+import { canUseDOM } from '../../internal/environment';
 
 const spacing = 8; // distance to keep to window edges, in px
 
@@ -87,7 +88,7 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
-  target?: HTMLElement;
+  target?: Element;
 
   /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
@@ -115,9 +116,8 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     open,
     size = 'sm',
     legacyAutoalign = 'true',
-    // TODO: #16004
     // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-    target = document.body,
+    target = canUseDOM && document.body,
     x = 0,
     y = 0,
     ...rest
@@ -441,6 +441,10 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       </ul>
     </MenuContext.Provider>
   );
+
+  if (!target) {
+    return rendered;
+  }
 
   return isRoot ? (open && createPortal(rendered, target)) || null : rendered;
 });
