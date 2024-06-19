@@ -32,7 +32,7 @@ for various frameworks:
 We also support using icons in Vanilla JavaScript.
 
 In order to use an icon, it may be helpful to reference our
-[Icon library](https://carbon-elements.netlify.com/icons/examples/preview/)
+[Icon library](https://carbon-elements.netlify.app/icons/examples/preview/)
 reference page in order to find the specific icon you would like to use.
 
 ### Vanilla
@@ -45,7 +45,7 @@ import IconName from '@carbon/icons/<module-type>/path-to-icon/size';
 ```
 
 For example, if I wanted to import the 16x16
-[`add`](https://carbon-elements.netlify.com/icons/examples/preview/#16%2Fadd)
+[`add`](https://carbon-elements.netlify.app/icons/examples/preview/#16%2Fadd)
 icon, I would write:
 
 ```js
@@ -77,7 +77,7 @@ const addIconNode = toSVG({
 
 Certain icons in the library support an alternate fill inside of the icon, for
 example
-[`warning--filled`](https://carbon-elements.netlify.com/icons/examples/preview/#16%2Fwarning--filled)
+[`warning--filled`](https://carbon-elements.netlify.app/icons/examples/preview/#16%2Fwarning--filled)
 supports styling the inner `!` path.
 
 In order to style the inner path, you will need to target the SVG using CSS. In
@@ -98,7 +98,7 @@ in order to get this inner path to be visible on the page.
 ### Reference
 
 You can view a full reference of our icons
-[here](https://carbon-elements.netlify.com/icons/examples/preview/) . This is
+[here](https://carbon-elements.netlify.app/icons/examples/preview/) . This is
 useful for finding the path information in order to import an icon.
 
 ## 🙌 Contributing
