@@ -108,7 +108,7 @@ describe('ComposedModal', () => {
         </ComposedModal>
       );
 
-      await userEvent.click(screen.getByTitle('Close'));
+      await userEvent.click(screen.getByLabelText('Close'));
 
       expect(onClose).toHaveBeenCalled();
     });
@@ -122,7 +122,7 @@ describe('ComposedModal', () => {
         </ComposedModal>
       );
 
-      await userEvent.click(screen.getByTitle('Close'));
+      await userEvent.click(screen.getByLabelText('Close'));
 
       expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
         'is-visible'
