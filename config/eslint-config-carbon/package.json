@@ -30,7 +30,7 @@
     "provenance": true
   },
   "peerDependencies": {
-    "eslint": "^8.0.0"
+    "eslint": "^9.0.0"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.19.1",
