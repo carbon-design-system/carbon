@@ -14459,6 +14459,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"flatted@npm:^3.2.9":
+  version: 3.3.1
+  resolution: "flatted@npm:3.3.1"
+  checksum: 10/7b8376061d5be6e0d3658bbab8bde587647f68797cf6bfeae9dea0e5137d9f27547ab92aaff3512dd9d1299086a6d61be98e9d48a56d17531b634f77faadbc49
+  languageName: node
+  linkType: hard
+
 "flow-parser@npm:0.*":
   version: 0.169.0
   resolution: "flow-parser@npm:0.169.0"
