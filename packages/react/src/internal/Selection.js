@@ -36,24 +36,7 @@ export function useSelection({
   const [uncontrolledItems, setUncontrolledItems] =
     useState(initialSelectedItems);
   const isControlled = !!controlledItems;
-  const [selectedItems, setSelectedItems] = useState(
-    isControlled ? controlledItems : uncontrolledItems
-  );
-
-  useEffect(() => {
-    setSelectedItems(isControlled ? controlledItems : uncontrolledItems);
-  }, [isControlled, controlledItems, uncontrolledItems]);
-
-  useEffect(() => {
-    callOnChangeHandler({
-      isControlled,
-      isMounted: isMounted.current,
-      onChangeHandlerControlled: savedOnChange.current,
-      onChangeHandlerUncontrolled: setUncontrolledItems,
-      selectedItems: selectedItems,
-    });
-  }, [isControlled, isMounted, selectedItems]);
-
+  const selectedItems = isControlled ? controlledItems : uncontrolledItems;
   const onItemChange = useCallback(
     (item) => {
       if (disabled) {
@@ -65,15 +48,28 @@ export function useSelection({
           selectedIndex = index;
         }
       });
+      let newSelectedItems;
       if (selectedIndex === undefined) {
-        setSelectedItems((selectedItems) => selectedItems.concat(item));
+        newSelectedItems = selectedItems.concat(item);
+        callOnChangeHandler({
+          isControlled,
+          isMounted: isMounted.current,
+          onChangeHandlerControlled: savedOnChange.current,
+          onChangeHandlerUncontrolled: setUncontrolledItems,
+          selectedItems: newSelectedItems,
+        });
         return;
       }
-      setSelectedItems((selectedItems) =>
-        removeAtIndex(selectedItems, selectedIndex)
-      );
+      newSelectedItems = removeAtIndex(selectedItems, selectedIndex);
+      callOnChangeHandler({
+        isControlled,
+        isMounted: isMounted.current,
+        onChangeHandlerControlled: savedOnChange.current,
+        onChangeHandlerUncontrolled: setUncontrolledItems,
+        selectedItems: newSelectedItems,
+      });
     },
-    [disabled, selectedItems]
+    [disabled, isControlled, selectedItems]
   );
 
   const clearSelection = useCallback(() => {

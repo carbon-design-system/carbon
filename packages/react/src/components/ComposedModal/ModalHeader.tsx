@@ -133,7 +133,6 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
             className={closeClass}
             label={iconDescription}
             onClick={handleCloseButtonClick}
-            title={iconDescription}
             aria-label={iconDescription}
             align="left">
             <Close
