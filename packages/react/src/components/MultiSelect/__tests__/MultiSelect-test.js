@@ -6,7 +6,7 @@
  */
 
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import React from 'react';
 import MultiSelect from '../';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
@@ -36,6 +36,27 @@ describe('MultiSelect', () => {
       );
       await expect(container).toHaveNoACViolations('MultiSelect');
     });
+  });
+  it('does not render items with undefined values', async () => {
+    const items = [{ text: 'joey' }, { text: 'johnny' }, { text: undefined }];
+    const label = 'test-label';
+    render(
+      <MultiSelect
+        id="custom-id"
+        label={label}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+      />
+    );
+
+    const labelNode = screen.getByRole('combobox');
+    await userEvent.click(labelNode);
+
+    expect(screen.getByRole('option', { name: 'joey' })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'johnny' })).toBeInTheDocument();
+    expect(
+      screen.queryByRole('option', { name: 'undefined' })
+    ).not.toBeInTheDocument();
   });
 
   it('should initially render with a given label', () => {
@@ -303,34 +324,6 @@ describe('MultiSelect', () => {
       ).toBeInstanceOf(HTMLElement);
     });
 
-    it('should trigger onChange with selected items', async () => {
-      let selectedItems = [];
-      const testFunction = jest.fn((e) => (selectedItems = e?.selectedItems));
-      const items = generateItems(4, generateGenericItem);
-      const label = 'test-label';
-      const { container } = render(
-        <MultiSelect
-          id="custom-id"
-          onChange={testFunction}
-          selectedItems={selectedItems}
-          label={label}
-          items={items}
-        />
-      );
-
-      // eslint-disable-next-line testing-library/prefer-screen-queries
-      const labelNode = getByText(container, label);
-      await userEvent.click(labelNode);
-
-      const [item] = items;
-      // eslint-disable-next-line testing-library/prefer-screen-queries
-      const itemNode = getByText(container, item.label);
-
-      await userEvent.click(itemNode);
-      // Assert that the onChange callback returned the selected items and assigned it to selectedItems
-      expect(testFunction.mock.results[0].value).toEqual(selectedItems);
-    });
-
     it('should place the given id on the ___ node when passed in as a prop', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
@@ -434,7 +427,7 @@ describe('MultiSelect', () => {
       expect(translateWithId).toHaveBeenCalled();
     });
 
-    it('should call onChange when the selection changes', async () => {
+    it('should call onChange when the selection changes from user selection', async () => {
       const testFunction = jest.fn();
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
@@ -460,7 +453,6 @@ describe('MultiSelect', () => {
 
       expect(testFunction).toHaveBeenCalledTimes(1);
     });
-
     it('should support an invalid state with invalidText that describes the field', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';

@@ -10,6 +10,8 @@ module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_PRODUCTION_BUILD) {
     return {
       basePath: '/themes/examples/preview-v10',
+      output: 'export',
+      distDir: 'build',
     };
   }
 
