@@ -10,7 +10,7 @@
   "workspaces": [
     "actions/*",
     "config/*",
-    "examples/*",
+    "examples/!(incremental-migration-vite)",
     "packages/*",
     "www"
   ],
