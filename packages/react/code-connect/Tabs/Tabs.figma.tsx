@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* eslint-disable react/jsx-no-duplicate-props */
 // @ts-nocheck
 import React from 'react';
 import { Tabs, TabList, TabPanels, TabPanel } from '@carbon/react';
@@ -22,19 +23,23 @@ figma.connect(
       fullWidth: figma.enum('Alignment', {
         'Grid aware': true,
       }),
-
-      //missing props (available on Tabs items in figma)
-      // dismissable
-      // iconSize
+      tab: figma.nestedProps('_Tabs items', {
+        size: figma.enum('Size', {
+          Large: 'lg',
+        }),
+        dismissable: figma.boolean('Dismissible'),
+        dismissablePlusIcon: figma.boolean('Dismissible + Icon'),
+      }),
     },
-    example: ({ children, contained, fullWidth }) => (
+    example: ({ children, contained, fullWidth, tab }) => (
       // Disclaimer: Code Connect is currently in beta and integration with Carbon
       // React is in an exploratory phase. Code sample below may be incomplete.
-      <Tabs>
+      <Tabs dismissable={tab.dismissable} dismissable={tab.dismissablePlusIcon}>
         <TabList
           aria-label="List of tabs"
           contained={contained}
-          fullWidth={fullWidth}>
+          fullWidth={fullWidth}
+          size={tab.size}>
           {children}
         </TabList>
         {/* Example code below, not mapped in Figma.
