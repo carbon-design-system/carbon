@@ -50,7 +50,6 @@ const {
   FunctionToggleMenu,
   ToggleButtonClick,
   ItemMouseMove,
-  ItemClick,
   InputKeyDownArrowUp,
   InputKeyDownArrowDown,
   MenuMouseLeave,
@@ -467,12 +466,6 @@ const ComboBox = forwardRef(
           case ItemMouseMove:
             return { ...changes, highlightedIndex: state.highlightedIndex };
 
-          case ItemClick:
-            if (onChange) {
-              onChange({ selectedItem: changes.selectedItem });
-            }
-            return changes;
-
           default:
             return changes;
         }
@@ -563,9 +556,9 @@ const ComboBox = forwardRef(
         setHighlightedIndex(indexToHighlight(inputValue));
       },
 
-      // onSelectedItemChange({ selectedItem }) {
-      //   onChange({ selectedItem });
-      // },
+      onSelectedItemChange({ selectedItem }) {
+        onChange({ selectedItem });
+      },
 
       initialSelectedItem: initialSelectedItem,
       inputId: id,
@@ -670,7 +663,11 @@ const ComboBox = forwardRef(
                     toggleMenu();
 
                     if (highlightedIndex !== -1) {
-                      selectItem(items[highlightedIndex]);
+                      selectItem(
+                        filterItems(items, itemToString, inputValue)[
+                          highlightedIndex
+                        ]
+                      );
                     }
 
                     event.preventDownshiftDefault = true;

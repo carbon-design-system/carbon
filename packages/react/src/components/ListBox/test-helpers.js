@@ -105,3 +105,45 @@ export const generateItems = (amount, generator) =>
     .map((_, i) => generator(i));
 
 export const customItemToString = ({ field }) => field;
+
+/**
+ * This object contains two sets of three items that share the same root
+ * word in different portions of the string (beginning, middle, end):
+ *
+ *  - 'struct'
+ *  - 'port'
+ *
+ * Separated by a disabled item, these derivative words are helpful when
+ * testing fuzzy search functions and components that do substring filtering.
+ */
+export const cognateItems = [
+  {
+    id: 'structure',
+    text: 'Structure',
+  },
+  {
+    id: 'construct',
+    text: 'Construct',
+  },
+  {
+    id: 'instruction',
+    text: 'Instruction',
+  },
+  {
+    id: 'disabled-item',
+    text: 'A disabled item',
+    disabled: true,
+  },
+  {
+    id: 'transport',
+    text: 'Transport',
+  },
+  {
+    id: 'portable',
+    text: 'Portable',
+  },
+  {
+    id: 'import',
+    text: 'Import',
+  },
+];

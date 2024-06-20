@@ -14,6 +14,7 @@ import {
   assertMenuClosed,
   generateItems,
   generateGenericItem,
+  cognateItems,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
 import { act } from 'react-dom/test-utils';
@@ -63,7 +64,7 @@ describe('ComboBox', () => {
     }
   });
 
-  it.only('should call `onChange` with the proper item when `shouldFilterItem` is provided', async () => {
+  it('should call `onChange` with the proper item when `shouldFilterItem` is provided', async () => {
     const filterItems = (menu) => {
       return menu?.item?.label
         ?.toLowerCase()
@@ -89,7 +90,45 @@ describe('ComboBox', () => {
     });
   });
 
-  it('capture filter text events', async () => {
+  it('should select the correct item from the filtered list after text input on click', async () => {
+    const user = userEvent.setup();
+
+    render(<ComboBox {...mockProps} items={cognateItems} />);
+
+    await user.type(findInputNode(), 'struct');
+
+    await user.click(screen.getAllByRole('option')[1]);
+
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: {
+        id: 'construct',
+        text: 'Construct',
+      },
+    });
+  });
+
+  it('should select the correct item from the filtered list after text input on [Enter]', async () => {
+    const user = userEvent.setup();
+
+    render(<ComboBox {...mockProps} items={cognateItems} />);
+
+    await user.type(findInputNode(), 'struct');
+
+    await userEvent.keyboard('{ArrowDown}');
+    await userEvent.keyboard('{ArrowDown}');
+    await userEvent.keyboard('[Enter]');
+
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: {
+        id: 'construct',
+        text: 'Construct',
+      },
+    });
+  });
+
+  it('capture filter text event onInputChange', async () => {
     const onInputChange = jest.fn();
     render(<ComboBox {...mockProps} onInputChange={onInputChange} />);
 
@@ -129,6 +168,7 @@ describe('ComboBox', () => {
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
     });
+    expect(screen.getByRole('combobox')).toHaveDisplayValue('Item 1');
   });
 
   it('should not let the user select an option by clicking on the disabled option node', async () => {
