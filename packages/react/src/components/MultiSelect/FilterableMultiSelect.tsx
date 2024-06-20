@@ -32,8 +32,7 @@ import React, {
 } from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import {
-  type ItemBase,
-  type SortingPropTypes,
+  type MultiSelectSortingProps,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
@@ -74,8 +73,8 @@ const {
 } =
   useMultipleSelection.stateChangeTypes as UseMultipleSelectionInterface['stateChangeTypes'];
 
-export interface FilterableMultiSelectProps<Item extends ItemBase>
-  extends SortingPropTypes<Item> {
+export interface FilterableMultiSelectProps<ItemType>
+  extends MultiSelectSortingProps<ItemType> {
   /**
    * Specify a label to be read by screen readers on the container node
    * @deprecated
@@ -109,20 +108,20 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
   /**
    * Additional props passed to Downshift
    */
-  downshiftProps?: UseMultipleSelectionProps<Item>;
+  downshiftProps?: UseMultipleSelectionProps<ItemType>;
 
   /**
    * Default sorter is assigned if not provided.
    */
   filterItems(
-    items: readonly Item[],
+    items: readonly ItemType[],
     extra: {
       inputValue: string | null;
       itemToString: NonNullable<
-        UseMultipleSelectionProps<Item>['itemToString']
+        UseMultipleSelectionProps<ItemType>['itemToString']
       >;
     }
-  ): Item[];
+  ): ItemType[];
 
   /**
    * Specify whether the title text should be hidden or not
@@ -144,7 +143,7 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
    * Allow users to pass in arbitrary items from their collection that are
    * pre-selected
    */
-  initialSelectedItems?: Item[];
+  initialSelectedItems?: ItemType[];
 
   /**
    * Is the current selection invalid?
@@ -160,7 +159,7 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
    * Function to render items as custom components instead of strings.
    * Defaults to null and is overridden by a getter
    */
-  itemToElement?: FunctionComponent<Item>;
+  itemToElement?: FunctionComponent<ItemType>;
 
   /**
    * Helper function passed to downshift that allows the library to render
@@ -169,13 +168,13 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
    * By default, it extracts the `label` field from a given item
    * to serve as the item label in the list.
    */
-  itemToString?(item: Item | null): string;
+  itemToString?(item: ItemType | null): string;
 
   /**
    * We try to stay as generic as possible here to allow individuals to pass
    * in a collection of whatever kind of data structure they prefer
    */
-  items: Item[];
+  items: ItemType[];
 
   /**
    * @deprecated `true` to use the light version.
@@ -193,13 +192,13 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
    * `onChange` is a utility for this controlled component to communicate to a
    * consuming component what kind of internal state changes are occurring.
    */
-  onChange?(changes: { selectedItems: Item[] }): void;
+  onChange?(changes: { selectedItems: ItemType[] }): void;
 
   /**
    * A utility for this controlled component
    * to communicate to the currently typed input.
    */
-  onInputValueChange?: UseComboboxProps<Item>['onInputValueChange'];
+  onInputValueChange?: UseComboboxProps<ItemType>['onInputValueChange'];
 
   /**
    * `onMenuChange` is a utility for this controlled component to communicate to a
@@ -229,7 +228,7 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
   /**
    * For full control of the selected items
    */
-  selectedItems?: Item[];
+  selectedItems?: ItemType[];
 
   /**
    * Specify the size of the ListBox.
@@ -272,7 +271,7 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
 }
 
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
-  Item extends ItemBase
+  ItemType
 >(
   {
     className: containerClassName,
@@ -304,13 +303,13 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     selectionFeedback = 'top-after-reopen',
     selectedItems: selected,
     size,
-    sortItems = defaultSortItems as FilterableMultiSelectProps<Item>['sortItems'],
+    sortItems = defaultSortItems as FilterableMultiSelectProps<ItemType>['sortItems'],
     translateWithId,
     useTitleInItem,
     warn,
     warnText,
     slug,
-  }: FilterableMultiSelectProps<Item>,
+  }: FilterableMultiSelectProps<ItemType>,
   ref: ForwardedRef<HTMLDivElement>
 ) {
   const { isFluid } = useContext(FormContext);
@@ -318,7 +317,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
   const [prevOpen, setPrevOpen] = useState<boolean>(!!open);
   const [inputValue, setInputValue] = useState<string>('');
-  const [topItems, setTopItems] = useState<Item[]>(initialSelectedItems ?? []);
+  const [topItems, setTopItems] = useState<ItemType[]>(
+    initialSelectedItems ?? []
+  );
   const [inputFocused, setInputFocused] = useState<boolean>(false);
 
   const {
@@ -342,7 +343,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     setPrevOpen(open);
   }
 
-  const sortedItems = sortItems(
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const sortedItems = sortItems!(
     filterItems(items, { itemToString, inputValue }),
     {
       selectedItems: {
@@ -425,7 +427,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     getItemProps,
     openMenu,
     isOpen: isMenuOpen,
-  } = useCombobox<Item>({
+  } = useCombobox<ItemType>({
     isOpen,
     items: sortedItems,
     itemToString,
@@ -523,7 +525,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   }
 
-  const { getDropdownProps } = useMultipleSelection<Item>({
+  const { getDropdownProps } = useMultipleSelection<ItemType>({
     ...downshiftProps,
     activeIndex: highlightedIndex,
     initialSelectedItems,
@@ -818,9 +820,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     </div>
   );
 }) as {
-  <Item extends ItemBase>(
-    props: FilterableMultiSelectProps<Item>
-  ): ReactElement;
+  <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement;
   propTypes?: any;
   contextTypes?: any;
   defaultProps?: any;
