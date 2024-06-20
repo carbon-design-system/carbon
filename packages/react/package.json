@@ -49,9 +49,9 @@
   "dependencies": {
     "@babel/runtime": "^7.18.3",
     "@carbon/feature-flags": "^0.20.0",
-    "@carbon/icons-react": "^11.44.0-rc.0",
-    "@carbon/layout": "^11.23.0-rc.0",
-    "@carbon/styles": "^1.60.0-rc.0",
+    "@carbon/icons-react": "^11.44.1",
+    "@carbon/layout": "^11.23.1",
+    "@carbon/styles": "^1.60.1",
     "@figma/code-connect": "^1.0.1",
     "@floating-ui/react": "^0.26.0",
     "@ibm/telemetry-js": "^1.5.0",
