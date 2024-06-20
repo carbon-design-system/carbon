@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import RadioButtonGroup from './RadioButtonGroup';
+import RadioButtonGroup, { RadioButtonGroupProps } from './RadioButtonGroup';
 
 export default RadioButtonGroup;
 export { RadioButtonGroup };
+
+export type { RadioButtonGroupProps };

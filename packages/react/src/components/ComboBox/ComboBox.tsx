@@ -43,6 +43,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
+import { useFloating, flip, autoUpdate } from '@floating-ui/react';
 
 const {
   InputBlur,
@@ -149,6 +150,13 @@ export interface ComboBoxProps<ItemType>
    * 'aria-label' of the ListBox component.
    */
   ariaLabel?: string;
+
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign?: boolean;
 
   /**
    * An optional className to add to the container node
@@ -313,6 +321,7 @@ const ComboBox = forwardRef(
     const {
       ['aria-label']: ariaLabel = 'Choose an item',
       ariaLabel: deprecatedAriaLabel,
+      autoAlign = false,
       className: containerClassName,
       direction = 'bottom',
       disabled = false,
@@ -342,6 +351,30 @@ const ComboBox = forwardRef(
       slug,
       ...rest
     } = props;
+    const { refs, floatingStyles } = useFloating(
+      autoAlign
+        ? {
+            placement: direction,
+            strategy: 'fixed',
+            middleware: [flip()],
+            whileElementsMounted: autoUpdate,
+          }
+        : {}
+    );
+    const parentWidth = (refs?.reference?.current as HTMLElement)?.clientWidth;
+
+    useEffect(() => {
+      if (autoAlign) {
+        Object.keys(floatingStyles).forEach((style) => {
+          if (refs.floating.current) {
+            refs.floating.current.style[style] = floatingStyles[style];
+          }
+        });
+        if (parentWidth && refs.floating.current) {
+          refs.floating.current.style.width = parentWidth + 'px';
+        }
+      }
+    }, [autoAlign, floatingStyles, refs.floating, parentWidth]);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
@@ -630,6 +663,7 @@ const ComboBox = forwardRef(
           light={light}
           size={size}
           warn={warn}
+          ref={refs.setReference}
           warnText={warnText}
           warnTextId={warnTextId}>
           <div className={`${prefix}--list-box__field`}>
@@ -739,7 +773,8 @@ const ComboBox = forwardRef(
           <ListBox.Menu
             {...getMenuProps({
               'aria-label': deprecatedAriaLabel || ariaLabel,
-            })}>
+            })}
+            ref={mergeRefs(getMenuProps().ref, refs.setFloating)}>
             {isOpen
               ? filterItems(items, itemToString, inputValue).map(
                   (item, index) => {
@@ -821,6 +856,12 @@ ComboBox.propTypes = {
     PropTypes.string,
     'This prop syntax has been deprecated. Please use the new `aria-label`.'
   ),
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * An optional className to add to the container node

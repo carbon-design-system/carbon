@@ -445,6 +445,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
         <ul className={`${prefix}--pagination-nav__list`}>
           <DirectionButton
             direction="backward"
+            aria-label={t('carbon.pagination-nav.previous')}
             label={t('carbon.pagination-nav.previous')}
             disabled={backwardButtonDisabled}
             onClick={jumpToPrevious}
@@ -516,6 +517,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
 
           <DirectionButton
             direction="forward"
+            aria-label={t('carbon.pagination-nav.next')}
             label={t('carbon.pagination-nav.next')}
             disabled={forwardButtonDisabled}
             onClick={jumpToNext}
