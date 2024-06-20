@@ -36,7 +36,21 @@ export const Default = () => (
     <MenuItem label="Third action" disabled />
   </MenuButton>
 );
-
+export const ExperimentalAutoAlign = () => (
+  <div style={{ width: '5000px', height: '5000px' }}>
+    <div
+      style={{
+        position: 'absolute',
+        bottom: '20px',
+      }}>
+      <MenuButton label="Actions">
+        <MenuItem label="First action" />
+        <MenuItem label="Second action that is a longer item to test overflow and title." />
+        <MenuItem label="Third action" disabled />
+      </MenuButton>
+    </div>
+  </div>
+);
 export const WithDanger = () => (
   <MenuButton label="Actions">
     <MenuItem label="First action" />

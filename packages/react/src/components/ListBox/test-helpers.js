@@ -7,6 +7,7 @@
 
 const prefix = 'cds';
 import userEvent from '@testing-library/user-event';
+import { act } from '@testing-library/react';
 
 // Finding nodes in a ListBox
 export const findListBoxNode = () => {
@@ -147,3 +148,10 @@ export const cognateItems = [
     text: 'Import',
   },
 ];
+
+/**
+ * Flushes microtasks to ensure element position state is settled
+ * From https://floating-ui.com/docs/react#testing
+ * More context here: https://github.com/floating-ui/react-popper/issues/368#issuecomment-1340413010
+ */
+export const waitForPosition = () => act(async () => {});

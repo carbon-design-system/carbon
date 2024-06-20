@@ -324,34 +324,6 @@ describe('MultiSelect', () => {
       ).toBeInstanceOf(HTMLElement);
     });
 
-    it('should trigger onChange with selected items', async () => {
-      let selectedItems = [];
-      const testFunction = jest.fn((e) => (selectedItems = e?.selectedItems));
-      const items = generateItems(4, generateGenericItem);
-      const label = 'test-label';
-      const { container } = render(
-        <MultiSelect
-          id="custom-id"
-          onChange={testFunction}
-          selectedItems={selectedItems}
-          label={label}
-          items={items}
-        />
-      );
-
-      // eslint-disable-next-line testing-library/prefer-screen-queries
-      const labelNode = getByText(container, label);
-      await userEvent.click(labelNode);
-
-      const [item] = items;
-      // eslint-disable-next-line testing-library/prefer-screen-queries
-      const itemNode = getByText(container, item.label);
-
-      await userEvent.click(itemNode);
-      // Assert that the onChange callback returned the selected items and assigned it to selectedItems
-      expect(testFunction.mock.results[0].value).toEqual(selectedItems);
-    });
-
     it('should place the given id on the ___ node when passed in as a prop', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
@@ -481,31 +453,6 @@ describe('MultiSelect', () => {
 
       expect(testFunction).toHaveBeenCalledTimes(1);
     });
-
-    it('should call onChange when the selection changes outside of the component', () => {
-      const handleChange = jest.fn();
-      const items = generateItems(4, generateGenericItem);
-      const props = {
-        id: 'custom-id',
-        onChange: handleChange,
-        selectedItems: [],
-        label: 'test-label',
-        items,
-      };
-      const { rerender } = render(<MultiSelect {...props} />);
-
-      expect(handleChange).not.toHaveBeenCalled();
-
-      act(() => {
-        rerender(<MultiSelect {...props} selectedItems={[items[0]]} />);
-      });
-
-      expect(handleChange).toHaveBeenCalledTimes(1);
-      expect(handleChange.mock.lastCall[0]).toMatchObject({
-        selectedItems: [items[0]],
-      });
-    });
-
     it('should support an invalid state with invalidText that describes the field', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';

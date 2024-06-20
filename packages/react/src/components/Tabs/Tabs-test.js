@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tabs, Tab, TabPanel, TabPanels, TabList } from './Tabs';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
+
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as hooks from '../../internal/useMatchMedia';

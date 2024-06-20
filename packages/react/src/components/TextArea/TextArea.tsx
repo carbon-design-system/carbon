@@ -324,6 +324,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const formItemClasses = classNames(`${prefix}--form-item`, className);
 
   const textAreaWrapperClasses = classNames(`${prefix}--text-area__wrapper`, {
+    [`${prefix}--text-area__wrapper--cols`]: other.cols,
     [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
     [`${prefix}--text-area__wrapper--warn`]: warn,
     [`${prefix}--text-area__wrapper--slug`]: slug,
