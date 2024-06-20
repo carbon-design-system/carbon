@@ -235,18 +235,37 @@ export interface TabsVerticalProps {
   selectedIndex?: number;
 }
 
-function TabsVertical({ children, height, ...rest }: TabsVerticalProps) {
+function TabsVertical({
+  children,
+  height,
+  defaultSelectedIndex = 0,
+  onChange,
+  selectedIndex: controlledSelectedIndex,
+  ...rest
+}: TabsVerticalProps) {
+  const [selectedIndex, setSelectedIndex] = useControllableState({
+    value: controlledSelectedIndex,
+    defaultValue: defaultSelectedIndex,
+    onChange: (value) => onChange?.({ selectedIndex: value }),
+  });
+
+  const props = {
+    ...rest,
+    selectedIndex,
+    onChange: ({ selectedIndex }) => setSelectedIndex(selectedIndex),
+  };
+
   const isSm = useMatchMedia(smMediaQuery);
 
   if (!isSm) {
     return (
       // eslint-disable-next-line react/forbid-component-props
       <Grid style={{ height: height }}>
-        <Tabs {...rest}>{children}</Tabs>
+        <Tabs {...props}>{children}</Tabs>
       </Grid>
     );
   }
-  return <Tabs {...rest}>{children}</Tabs>;
+  return <Tabs {...props}>{children}</Tabs>;
 }
 
 TabsVertical.propTypes = {
