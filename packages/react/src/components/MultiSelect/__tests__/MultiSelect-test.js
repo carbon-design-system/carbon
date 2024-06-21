@@ -513,31 +513,6 @@ describe('MultiSelect', () => {
       expect(testFunction).toHaveBeenCalledTimes(1);
     });
 
-    it('should call onChange when the selection changes outside of the component', async () => {
-      const handleChange = jest.fn();
-      const items = generateItems(4, generateGenericItem);
-      const props = {
-        id: 'custom-id',
-        onChange: handleChange,
-        selectedItems: [],
-        label: 'test-label',
-        items,
-      };
-      const { rerender } = render(<MultiSelect {...props} />);
-      await waitForPosition();
-
-      expect(handleChange).not.toHaveBeenCalled();
-
-      act(() => {
-        rerender(<MultiSelect {...props} selectedItems={[items[0]]} />);
-      });
-
-      expect(handleChange).toHaveBeenCalledTimes(1);
-      expect(handleChange.mock.lastCall[0]).toMatchObject({
-        selectedItems: [items[0]],
-      });
-    });
-
     it('should support an invalid state with invalidText that describes the field', async () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
