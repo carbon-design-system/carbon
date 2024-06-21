@@ -540,18 +540,15 @@ describe('MultiSelect', () => {
         action('changed items')(value);
         setSelectedItems(value);
       };
-
-      const label = 'test-label';
       return (
         <>
           <MultiSelect
-            id="carbon-multiselect-example-controlled"
+            id="test"
             titleText="Multiselect title"
             label="test-label"
             items={items}
             selectedItems={selectedItems}
             onChange={(data) => onSelectionChanged(data.selectedItems)}
-            itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
           />
           <br />
@@ -594,14 +591,23 @@ describe('MultiSelect', () => {
       const { container } = render(<ControlledMultiselect />);
       const labelNode = getByText(container, label);
       expect(isElementVisible(labelNode)).toBe(true);
+      //select all the items
       await userEvent.click(screen.getByText('Select all'));
-      // Open the MultiSelect dropdown
-      await userEvent.click(labelNode);
-
+      const dropwdownNode = screen.getByRole('combobox');
+      await userEvent.click(dropwdownNode);
       // Check if all items are selected
+      const options = screen.getAllByRole('option');
+      options.forEach((option) => {
+        expect(option).toHaveAttribute('aria-selected', 'true');
+      });
+
+      //clear the selection
+      await userEvent.click(screen.getByText('Clear'));
+      await userEvent.click(dropwdownNode);
+      //check if all items are cleared
       const items = screen.getAllByRole('option');
-      items.forEach((item) => {
-        expect(item).toHaveAttribute('data-contained-checkbox-state', 'true');
+      items.forEach((option) => {
+        expect(option).toHaveAttribute('aria-selected', 'false');
       });
     });
   });
