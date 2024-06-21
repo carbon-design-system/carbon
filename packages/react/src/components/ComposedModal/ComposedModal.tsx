@@ -287,7 +287,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       onKeyDown?.(event);
     }
 
-    function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
+    function handleClick(evt: React.MouseEvent<HTMLDivElement>) {
       const target = evt.target as Node;
       evt.stopPropagation();
       if (
@@ -421,7 +421,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         ref={ref}
         aria-hidden={!open}
         onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
-        onMouseDown={handleMousedown}
+        onClick={handleClick}
         onKeyDown={handleKeyDown}
         className={modalClass}>
         <div

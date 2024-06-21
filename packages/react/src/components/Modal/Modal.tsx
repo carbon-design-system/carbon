@@ -311,7 +311,7 @@ const Modal = React.forwardRef(function Modal(
     }
   }
 
-  function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
+  function handleOnclick(evt: React.MouseEvent<HTMLDivElement>) {
     const target = evt.target as Node;
     evt.stopPropagation();
     if (
@@ -584,7 +584,7 @@ const Modal = React.forwardRef(function Modal(
     <div
       {...rest}
       onKeyDown={handleKeyDown}
-      onMouseDown={handleMousedown}
+      onClick={handleOnclick}
       onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
       className={modalClasses}
       role="presentation"
