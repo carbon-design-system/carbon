@@ -586,7 +586,7 @@ describe('MultiSelect', () => {
         )
       ).toBeNull();
     });
-    it('should respect selectedItems prop', async () => {
+    it('should allow the items to be controlled from external state', async () => {
       const label = 'test-label';
       const { container } = render(<ControlledMultiselect />);
       const labelNode = getByText(container, label);
