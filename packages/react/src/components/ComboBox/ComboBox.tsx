@@ -458,11 +458,22 @@ const ComboBox = forwardRef(
             if (
               state.inputValue &&
               highlightedIndex == '-1' &&
-              !allowCustomValue
+              changes.selectedItem
+            ) {
+              return {
+                ...changes,
+                inputValue: itemToString(changes.selectedItem),
+              };
+            } else if (
+              state.inputValue &&
+              highlightedIndex == '-1' &&
+              !allowCustomValue &&
+              !changes.selectedItem
             ) {
               return { ...changes, inputValue: '' };
+            } else {
+              return changes;
             }
-            return changes;
           case InputKeyDownEnter:
             if (allowCustomValue) {
               setInputValue(inputValue);
@@ -579,7 +590,7 @@ const ComboBox = forwardRef(
       setHighlightedIndex,
     } = useCombobox({
       ...downshiftProps,
-      items,
+      items: filterItems(items, itemToString, inputValue),
       inputValue: inputValue,
       itemToString: (item) => {
         return itemToString(item);
@@ -697,7 +708,11 @@ const ComboBox = forwardRef(
                     toggleMenu();
 
                     if (highlightedIndex !== -1) {
-                      selectItem(items[highlightedIndex]);
+                      selectItem(
+                        filterItems(items, itemToString, inputValue)[
+                          highlightedIndex
+                        ]
+                      );
                     }
 
                     event.preventDownshiftDefault = true;
