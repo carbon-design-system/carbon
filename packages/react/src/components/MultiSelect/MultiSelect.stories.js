@@ -15,6 +15,7 @@ import MultiSelect from '.';
 import FilterableMultiSelect from './FilterableMultiSelect';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
+import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
 
 export default {
   title: 'Components/MultiSelect',

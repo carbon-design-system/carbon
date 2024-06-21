@@ -7,6 +7,7 @@
 
 const prefix = 'cds';
 import userEvent from '@testing-library/user-event';
+import { act } from '@testing-library/react';
 
 // Finding nodes in a ListBox
 export const findListBoxNode = () => {
@@ -105,3 +106,5 @@ export const generateItems = (amount, generator) =>
     .map((_, i) => generator(i));
 
 export const customItemToString = ({ field }) => field;
+
+export const waitForPosition = () => act(async () => {}); // Flush microtasks. Position state is ready by this line.

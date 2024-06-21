@@ -211,7 +211,7 @@ function getBugTemplate(name, source) {
     'body',
     `<!-- Feel free to remove sections that aren't relevant. -->
 
-There is an issue for the \`${name}\` icon when viewing [the elements demo](https://carbon-elements.netlify.com/icons/examples/preview/).
+There is an issue for the \`${name}\` icon when viewing [the elements demo](https://carbon-elements.netlify.app/icons/examples/preview/).
 
 The source for this icon is available [here](${source}).
 
