@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, within, fireEvent, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   findListBoxNode,
@@ -17,8 +17,6 @@ import {
   waitForPosition,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
-import { act } from 'react';
-
 import { Slug } from '../Slug';
 
 const findInputNode = () => screen.getByRole('combobox');
@@ -310,6 +308,53 @@ describe('ComboBox', () => {
       await openMenu();
       await userEvent.keyboard('{Alt>}{ArrowUp}');
       assertMenuClosed(mockProps);
+    });
+  });
+
+  describe('Highlights', () => {
+    it('should highlight the matched element', async () => {
+      render(<ComboBox {...mockProps} allowCustomValue={false} />);
+      await userEvent.type(findInputNode(), '1');
+      expect(screen.getAllByRole('option')[1]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
+    });
+
+    it('should highlight the selected element', async () => {
+      render(<ComboBox {...mockProps} allowCustomValue={false} />);
+      await openMenu();
+      await userEvent.type(findInputNode(), 'Item 1');
+      await userEvent.keyboard('[Enter]');
+      await openMenu();
+      expect(screen.getAllByRole('option')[1]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
+    });
+
+    it('should highlight the selected element if user enter some other value click outside of combobox', async () => {
+      render(<ComboBox {...mockProps} allowCustomValue={false} />);
+      await openMenu();
+      await userEvent.type(findInputNode(), 'Item 1');
+      await userEvent.keyboard('[Enter]');
+      await openMenu();
+      expect(screen.getAllByRole('option')[1]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
+
+      await userEvent.clear(findInputNode());
+      await userEvent.type(findInputNode(), 'Item');
+      //should match the loosely match element
+      expect(screen.getAllByRole('option')[0]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
+
+      fireEvent.blur(findInputNode());
+      await openMenu();
+      // on blur, it should retain the selected value
+      expect(findInputNode()).toHaveDisplayValue('Item 1');
+      expect(screen.getAllByRole('option')[1]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
     });
   });
 });
