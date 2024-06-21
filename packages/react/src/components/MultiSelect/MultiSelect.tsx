@@ -28,7 +28,11 @@ import ListBox, {
   ListBoxType,
   PropTypes as ListBoxPropTypes,
 } from '../ListBox';
-import { sortingPropTypes } from './MultiSelectPropTypes';
+import {
+  MultiSelectSortingProps,
+  SortItemsOptions,
+  sortingPropTypes,
+} from './MultiSelectPropTypes';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -78,64 +82,8 @@ const defaultItemToString = <ItemType,>(item?: ItemType): string => {
   return '';
 };
 
-interface SharedOptions {
-  locale: string;
-}
-
-interface DownshiftTypedProps<ItemType> {
-  itemToString?(item: ItemType): string;
-}
-
-interface SortItemsOptions<ItemType>
-  extends SharedOptions,
-    DownshiftTypedProps<ItemType> {
-  compareItems(
-    item1: ItemType,
-    item2: ItemType,
-    options: SharedOptions
-  ): number;
-  selectedItems: ItemType[];
-}
-
 interface selectedItemType {
   text: string;
-}
-
-interface MultiSelectSortingProps<ItemType> {
-  /**
-   * Provide a compare function that is used to determine the ordering of
-   * options. See 'sortItems' for more control.
-   */
-  compareItems?(
-    item1: ItemType,
-    item2: ItemType,
-    options: SharedOptions
-  ): number;
-
-  /**
-   * Provide a method that sorts all options in the control. Overriding this
-   * prop means that you also have to handle the sort logic for selected versus
-   * un-selected items. If you just want to control ordering, consider the
-   * `compareItems` prop instead.
-   *
-   * The return value should be a number whose sign indicates the relative order
-   * of the two elements: negative if a is less than b, positive if a is greater
-   * than b, and zero if they are equal.
-   *
-   * sortItems :
-   *   (items: Array<Item>, {
-   *     selectedItems: Array<Item>,
-   *     itemToString: Item => string,
-   *     compareItems: (itemA: string, itemB: string, {
-   *       locale: string
-   *     }) => number,
-   *     locale: string,
-   *   }) => Array<Item>
-   */
-  sortItems?(
-    items: ReadonlyArray<ItemType>,
-    options: SortItemsOptions<ItemType>
-  ): ItemType[];
 }
 
 interface OnChangeData<ItemType> {
