@@ -662,6 +662,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         }
       },
       onFocus: () => setInputFocused(true),
+      onBlur: () => setInputFocused(false),
     })
   );
   const menuProps = getMenuProps({}, { suppressRefError: true });
