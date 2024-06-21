@@ -7,11 +7,13 @@
 
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 import { act, render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { useState } from 'react';
 import MultiSelect from '../';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
 import userEvent from '@testing-library/user-event';
 import { Slug } from '../../Slug';
+import Button from '../../Button';
+import ButtonSet from '../../ButtonSet';
 
 const prefix = 'cds';
 
@@ -526,6 +528,81 @@ describe('MultiSelect', () => {
       expect(container.firstChild).toHaveClass(
         `${prefix}--list-box__wrapper--slug`
       );
+    });
+  });
+
+  describe('Controlled', () => {
+    const ControlledMultiselect = () => {
+      const items = generateItems(4, generateGenericItem);
+      const [selectedItems, setSelectedItems] = useState([]);
+
+      const onSelectionChanged = (value) => {
+        action('changed items')(value);
+        setSelectedItems(value);
+      };
+
+      const label = 'test-label';
+      return (
+        <>
+          <MultiSelect
+            id="carbon-multiselect-example-controlled"
+            titleText="Multiselect title"
+            label="test-label"
+            items={items}
+            selectedItems={selectedItems}
+            onChange={(data) => onSelectionChanged(data.selectedItems)}
+            itemToString={(item) => (item ? item.text : '')}
+            selectionFeedback="top-after-reopen"
+          />
+          <br />
+          <ButtonSet>
+            <Button
+              id="all"
+              onClick={() =>
+                setSelectedItems(items.filter((item) => !item.disabled))
+              }>
+              Select all
+            </Button>
+            <Button
+              id="clear"
+              kind="secondary"
+              onClick={() => setSelectedItems([])}>
+              Clear
+            </Button>
+          </ButtonSet>
+        </>
+      );
+    };
+
+    it('should initially render controlled multiselect with a given label', () => {
+      const label = 'test-label';
+      const { container } = render(<ControlledMultiselect />);
+
+      // eslint-disable-next-line testing-library/prefer-screen-queries
+      const labelNode = getByText(container, label);
+      expect(isElementVisible(labelNode)).toBe(true);
+
+      expect(
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+        container.querySelector(
+          '[aria-expanded="true"][aria-haspopup="listbox"]'
+        )
+      ).toBeNull();
+    });
+    it('should respect selectedItems prop', async () => {
+      const label = 'test-label';
+      const { container } = render(<ControlledMultiselect />);
+      const labelNode = getByText(container, label);
+      expect(isElementVisible(labelNode)).toBe(true);
+      await userEvent.click(screen.getByText('Select all'));
+      // Open the MultiSelect dropdown
+      await userEvent.click(labelNode);
+
+      // Check if all items are selected
+      const items = screen.getAllByRole('option');
+      items.forEach((item) => {
+        expect(item).toHaveAttribute('data-contained-checkbox-state', 'true');
+      });
     });
   });
 });
