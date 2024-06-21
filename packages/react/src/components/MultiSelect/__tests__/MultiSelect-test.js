@@ -537,7 +537,6 @@ describe('MultiSelect', () => {
       const [selectedItems, setSelectedItems] = useState([]);
 
       const onSelectionChanged = (value) => {
-        action('changed items')(value);
         setSelectedItems(value);
       };
       return (
