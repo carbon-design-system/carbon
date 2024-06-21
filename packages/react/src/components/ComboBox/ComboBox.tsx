@@ -458,11 +458,22 @@ const ComboBox = forwardRef(
             if (
               state.inputValue &&
               highlightedIndex == '-1' &&
-              !allowCustomValue
+              changes.selectedItem
+            ) {
+              return {
+                ...changes,
+                inputValue: itemToString(changes.selectedItem),
+              };
+            } else if (
+              state.inputValue &&
+              highlightedIndex == '-1' &&
+              !allowCustomValue &&
+              !changes.selectedItem
             ) {
               return { ...changes, inputValue: '' };
+            } else {
+              return changes;
             }
-            return changes;
           case InputKeyDownEnter:
             if (allowCustomValue) {
               setInputValue(inputValue);
