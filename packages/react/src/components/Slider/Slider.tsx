@@ -1529,6 +1529,7 @@ class Slider extends PureComponent<SliderProps> {
                       role="slider"
                       id={twoHandles ? undefined : id}
                       tabIndex={!readOnly ? 0 : -1}
+                      aria-valuetext={`${formatLabel(value, '')}`}
                       aria-valuemax={twoHandles ? valueUpper : max}
                       aria-valuemin={min}
                       aria-valuenow={value}

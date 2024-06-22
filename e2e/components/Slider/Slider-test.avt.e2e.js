@@ -92,6 +92,20 @@ test.describe('@avt Slider', () => {
     await expect(page).toHaveNoACViolations('Slider-with-layer');
   });
 
+  test('@avt-advanced-states slider with custom format', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Slider',
+      id: 'components-slider--slider-with-custom-value-label',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('slider')).toHaveValue('Medium');
+    await expect(page).toHaveNoACViolations('Slider-with-custom-value-label');
+  });
+
   // Prevent timeout
   test.slow('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {

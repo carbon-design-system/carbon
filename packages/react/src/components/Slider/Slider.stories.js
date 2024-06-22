@@ -67,7 +67,7 @@ export const SliderWithHiddenInputsAndFormatLabel = () => (
   />
 );
 
-export const SliderWithHiddenInputsAndCustomFormat = () => (
+export const SliderWithCustomValueLabel = () => (
   <Slider
     labelText="Slider label with low/medium/high"
     value={50}
