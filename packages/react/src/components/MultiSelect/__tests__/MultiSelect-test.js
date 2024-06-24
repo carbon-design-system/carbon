@@ -9,7 +9,11 @@ import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 import { act, render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
 import MultiSelect from '../';
-import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
+import {
+  generateItems,
+  generateGenericItem,
+  waitForPosition,
+} from '../../ListBox/test-helpers';
 import userEvent from '@testing-library/user-event';
 import { Slug } from '../../Slug';
 import Button from '../../Button';
@@ -28,6 +32,8 @@ describe('MultiSelect', () => {
       const { container } = render(
         <MultiSelect id="test" label="Field" items={items} />
       );
+      await waitForPosition();
+
       await expect(container).toHaveNoAxeViolations();
     });
 
@@ -36,6 +42,8 @@ describe('MultiSelect', () => {
       const { container } = render(
         <MultiSelect id="test" label="Field" items={items} />
       );
+      await waitForPosition();
+
       await expect(container).toHaveNoACViolations('MultiSelect');
     });
   });
@@ -50,6 +58,7 @@ describe('MultiSelect', () => {
         itemToString={(item) => (item ? item.text : '')}
       />
     );
+    await waitForPosition();
 
     const labelNode = screen.getByRole('combobox');
     await userEvent.click(labelNode);
@@ -61,12 +70,13 @@ describe('MultiSelect', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('should initially render with a given label', () => {
+  it('should initially render with a given label', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
       <MultiSelect id="test" label={label} items={items} />
     );
+    await waitForPosition();
 
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
@@ -84,6 +94,7 @@ describe('MultiSelect', () => {
     const { container } = render(
       <MultiSelect id="test" label={label} items={items} />
     );
+    await waitForPosition();
 
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
@@ -102,6 +113,7 @@ describe('MultiSelect', () => {
   it('should open the menu when a user hits space while the field is focused', async () => {
     const items = generateItems(4, generateGenericItem);
     render(<MultiSelect id="test" label="test-label" items={items} />);
+    await waitForPosition();
 
     await userEvent.tab();
     await userEvent.keyboard('[Space]');
@@ -119,6 +131,7 @@ describe('MultiSelect', () => {
   it('should open the menu when a user hits enter while the field is focused', async () => {
     const items = generateItems(4, generateGenericItem);
     render(<MultiSelect id="test" label="test-label" items={items} />);
+    await waitForPosition();
 
     await userEvent.tab();
     await userEvent.keyboard('[Enter]');
@@ -139,6 +152,7 @@ describe('MultiSelect', () => {
     const { container } = render(
       <MultiSelect id="test" label={label} items={items} />
     );
+    await waitForPosition();
 
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
@@ -190,6 +204,8 @@ describe('MultiSelect', () => {
     const { container } = render(
       <MultiSelect id="test" label={label} items={items} />
     );
+    await waitForPosition();
+
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
 
@@ -219,6 +235,7 @@ describe('MultiSelect', () => {
     const { container } = render(
       <MultiSelect id="test" label={label} items={items} />
     );
+    await waitForPosition();
 
     await userEvent.tab();
     await userEvent.keyboard('[Space]');
@@ -240,6 +257,8 @@ describe('MultiSelect', () => {
     const { container } = render(
       <MultiSelect id="test" label={label} items={items} />
     );
+    await waitForPosition();
+
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
     await userEvent.click(labelNode);
@@ -271,6 +290,8 @@ describe('MultiSelect', () => {
     const { container } = render(
       <MultiSelect id="test" disabled label={label} items={items} />
     );
+    await waitForPosition();
+
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
     await userEvent.click(labelNode);
@@ -287,6 +308,8 @@ describe('MultiSelect', () => {
     const { container } = render(
       <MultiSelect id="test" readOnly={true} label={label} items={items} />
     );
+    await waitForPosition();
+
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
     await userEvent.click(labelNode);
@@ -309,6 +332,7 @@ describe('MultiSelect', () => {
           initialSelectedItems={[items[0], items[1]]}
         />
       );
+      await waitForPosition();
 
       expect(
         // eslint-disable-next-line testing-library/no-node-access
@@ -326,7 +350,36 @@ describe('MultiSelect', () => {
       ).toBeInstanceOf(HTMLElement);
     });
 
-    it('should place the given id on the ___ node when passed in as a prop', () => {
+    it('should trigger onChange with selected items', async () => {
+      let selectedItems = [];
+      const testFunction = jest.fn((e) => (selectedItems = e?.selectedItems));
+      const items = generateItems(4, generateGenericItem);
+      const label = 'test-label';
+      const { container } = render(
+        <MultiSelect
+          id="custom-id"
+          onChange={testFunction}
+          selectedItems={selectedItems}
+          label={label}
+          items={items}
+        />
+      );
+      await waitForPosition();
+
+      // eslint-disable-next-line testing-library/prefer-screen-queries
+      const labelNode = getByText(container, label);
+      await userEvent.click(labelNode);
+
+      const [item] = items;
+      // eslint-disable-next-line testing-library/prefer-screen-queries
+      const itemNode = getByText(container, item.label);
+
+      await userEvent.click(itemNode);
+      // Assert that the onChange callback returned the selected items and assigned it to selectedItems
+      expect(testFunction.mock.results[0].value).toEqual(selectedItems);
+    });
+
+    it('should place the given id on the ___ node when passed in as a prop', async () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
 
@@ -338,6 +391,7 @@ describe('MultiSelect', () => {
           initialSelectedItems={[items[0], items[1]]}
         />
       );
+      await waitForPosition();
 
       // eslint-disable-next-line testing-library/no-node-access
       expect(document.getElementById('custom-id')).toBeTruthy();
@@ -360,6 +414,8 @@ describe('MultiSelect', () => {
           itemToString={(item) => (item ? item.text : '')}
         />
       );
+      await waitForPosition();
+
       // eslint-disable-next-line testing-library/prefer-screen-queries
       const labelNode = getByText(container, label);
 
@@ -401,6 +457,7 @@ describe('MultiSelect', () => {
           }
         />
       );
+      await waitForPosition();
 
       // eslint-disable-next-line testing-library/prefer-screen-queries
       const labelNode = getByText(container, label);
@@ -412,7 +469,7 @@ describe('MultiSelect', () => {
       expect(document.querySelector('span[role="img"]')).toBeTruthy();
     });
 
-    it('should support custom translation with translateWithId', () => {
+    it('should support custom translation with translateWithId', async () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       const translateWithId = jest.fn(() => 'message');
@@ -425,6 +482,7 @@ describe('MultiSelect', () => {
           items={items}
         />
       );
+      await waitForPosition();
 
       expect(translateWithId).toHaveBeenCalled();
     });
@@ -442,6 +500,7 @@ describe('MultiSelect', () => {
           items={items}
         />
       );
+      await waitForPosition();
 
       // eslint-disable-next-line testing-library/prefer-screen-queries
       const labelNode = getByText(container, label);
@@ -455,7 +514,8 @@ describe('MultiSelect', () => {
 
       expect(testFunction).toHaveBeenCalledTimes(1);
     });
-    it('should support an invalid state with invalidText that describes the field', () => {
+
+    it('should support an invalid state with invalidText that describes the field', async () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
 
@@ -468,6 +528,7 @@ describe('MultiSelect', () => {
           items={items}
         />
       );
+      await waitForPosition();
 
       // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(getByText(container, 'Fool of a Took!')).toBeInTheDocument();
@@ -490,6 +551,7 @@ describe('MultiSelect', () => {
           items={items}
         />
       );
+      await waitForPosition();
 
       // click the label to open the multiselect options menu
       // eslint-disable-next-line testing-library/prefer-screen-queries
@@ -511,20 +573,24 @@ describe('MultiSelect', () => {
       expect(optionsArray[0]).toHaveAttribute('aria-label', 'Item 2');
     });
 
-    it('should accept a `ref` for the underlying button element', () => {
+    it('should accept a `ref` for the underlying button element', async () => {
       const ref = React.createRef();
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       render(<MultiSelect id="test" label={label} items={items} ref={ref} />);
+      await waitForPosition();
+
       expect(ref.current).toHaveAttribute('aria-haspopup', 'listbox');
     });
 
-    it('should respect slug prop', () => {
+    it('should respect slug prop', async () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       const { container } = render(
         <MultiSelect id="test" label={label} items={items} slug={<Slug />} />
       );
+      await waitForPosition();
+
       expect(container.firstChild).toHaveClass(
         `${prefix}--list-box__wrapper--slug`
       );
