@@ -22,6 +22,7 @@ import React, {
   useState,
   useMemo,
   ReactNode,
+  useLayoutEffect,
 } from 'react';
 import ListBox, {
   ListBoxSize,
@@ -44,6 +45,12 @@ import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
 import type { InternationalProps } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
+import {
+  useFloating,
+  flip,
+  size as floatingSize,
+  autoUpdate,
+} from '@floating-ui/react';
 
 const getInstanceId = setupGetInstanceId();
 const {
@@ -95,6 +102,13 @@ export interface MultiSelectProps<ItemType>
     InternationalProps<
       'close.menu' | 'open.menu' | 'clear.all' | 'clear.selection'
     > {
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign?: boolean;
+
   className?: string;
 
   /**
@@ -273,6 +287,7 @@ export interface MultiSelectProps<ItemType>
 const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
+      autoAlign = false,
       className: containerClassName,
       id,
       items,
@@ -330,6 +345,43 @@ const MultiSelect = React.forwardRef(
       onChange,
       selectedItems: selected,
     });
+
+    const { refs, floatingStyles, middlewareData } = useFloating(
+      autoAlign
+        ? {
+            placement: direction,
+
+            // The floating element is positioned relative to its nearest
+            // containing block (usually the viewport). It will in many cases also
+            // “break” the floating element out of a clipping ancestor.
+            // https://floating-ui.com/docs/misc#clipping
+            strategy: 'fixed',
+
+            // Middleware order matters, arrow should be last
+            middleware: [
+              flip({ crossAxis: false }),
+              floatingSize({
+                apply({ rects, elements }) {
+                  Object.assign(elements.floating.style, {
+                    width: `${rects.reference.width}px`,
+                  });
+                },
+              }),
+            ],
+            whileElementsMounted: autoUpdate,
+          }
+        : {}
+    );
+
+    useLayoutEffect(() => {
+      if (autoAlign) {
+        Object.keys(floatingStyles).forEach((style) => {
+          if (refs.floating.current) {
+            refs.floating.current.style[style] = floatingStyles[style];
+          }
+        });
+      }
+    }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
 
     // Filter out items with an object having undefined values
     const filteredItems = useMemo(() => {
@@ -634,7 +686,9 @@ const MultiSelect = React.forwardRef(
               className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
             />
           )}
-          <div className={multiSelectFieldWrapperClasses}>
+          <div
+            className={multiSelectFieldWrapperClasses}
+            ref={refs.setReference}>
             {selectedItems.length > 0 && (
               <ListBox.Selection
                 readOnly={readOnly}
@@ -670,7 +724,10 @@ const MultiSelect = React.forwardRef(
             </button>
             {normalizedSlug}
           </div>
-          <ListBox.Menu {...getMenuProps()}>
+          <ListBox.Menu
+            {...getMenuProps({
+              ref: refs.setFloating,
+            })}>
             {isOpen &&
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               sortItems!(
@@ -743,6 +800,13 @@ interface MultiSelectComponent {
 MultiSelect.displayName = 'MultiSelect';
 MultiSelect.propTypes = {
   ...sortingPropTypes,
+
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Provide a custom class name to be added to the outermost node in the
