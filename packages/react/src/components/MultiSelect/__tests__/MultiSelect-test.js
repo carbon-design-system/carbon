@@ -636,10 +636,10 @@ describe('MultiSelect', () => {
       );
     };
 
-    it('should initially render controlled multiselect with a given label', () => {
+    it('should initially render controlled multiselect with a given label', async () => {
       const label = 'test-label';
       const { container } = render(<ControlledMultiselect />);
-
+      await waitForPosition();
       // eslint-disable-next-line testing-library/prefer-screen-queries
       const labelNode = getByText(container, label);
       expect(isElementVisible(labelNode)).toBe(true);
