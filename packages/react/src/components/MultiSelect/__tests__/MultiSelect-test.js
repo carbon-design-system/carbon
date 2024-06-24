@@ -592,6 +592,7 @@ describe('MultiSelect', () => {
       expect(isElementVisible(labelNode)).toBe(true);
       //select all the items
       await userEvent.click(screen.getByText('Select all'));
+      //open the dropdown to check
       const dropwdownNode = screen.getByRole('combobox');
       await userEvent.click(dropwdownNode);
       // Check if all items are selected
@@ -608,6 +609,62 @@ describe('MultiSelect', () => {
       items.forEach((option) => {
         expect(option).toHaveAttribute('aria-selected', 'false');
       });
+    });
+    it('should support controlled component functionality with selectedItems and onChange', async () => {
+      const onChange = jest.fn();
+      const items = generateItems(4, generateGenericItem);
+      const { rerender } = render(
+        <MultiSelect
+          items={items}
+          label="test-label"
+          id="test-id"
+          selectedItems={[items[0]]}
+          onChange={onChange}
+        />
+      );
+
+      // The selected items should match what's passed into selectedItems
+      const dropwdownNode = screen.getByRole('combobox');
+      await userEvent.click(dropwdownNode);
+      expect(screen.getAllByRole('option')[0]).toHaveAttribute(
+        'aria-selected',
+        'true'
+      );
+
+      // onChange should fire for interactions
+      await userEvent.click(screen.getAllByRole('option')[1]);
+      expect(onChange).toHaveBeenCalledTimes(1);
+
+      // If the onChange event data is not used to update selectedItems, the selection should remain as it was before
+      expect(screen.getAllByRole('option')[0]).toHaveAttribute(
+        'aria-selected',
+        'true'
+      );
+      expect(screen.getAllByRole('option')[1]).toHaveAttribute(
+        'aria-selected',
+        'false'
+      );
+
+      // Force a re-render with updated selectedItems matching the initial selection and the onChange event data
+      rerender(
+        <MultiSelect
+          items={items}
+          label="test-label"
+          id="test-id"
+          selectedItems={[items[0], items[1]]}
+          onChange={onChange}
+        />
+      );
+
+      // Now both should be selected
+      expect(screen.getAllByRole('option')[0]).toHaveAttribute(
+        'aria-selected',
+        'true'
+      );
+      expect(screen.getAllByRole('option')[1]).toHaveAttribute(
+        'aria-selected',
+        'true'
+      );
     });
   });
 });
