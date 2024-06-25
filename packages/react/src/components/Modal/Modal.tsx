@@ -13,6 +13,7 @@ import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import InlineLoading from '../InlineLoading';
+import { Layer } from '../Layer';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
   wrapFocusWithoutSentinels,
@@ -529,13 +530,13 @@ const Modal = React.forwardRef(function Modal(
         {normalizedSlug}
         {!passiveModal && modalButton}
       </div>
-      <div
+      <Layer
         ref={contentRef}
         id={modalBodyId}
         className={contentClasses}
         {...hasScrollingContentProps}>
         {children}
-      </div>
+      </Layer>
       {!passiveModal && (
         <ButtonSet className={footerClasses} aria-busy={loadingActive}>
           {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
@@ -582,8 +583,9 @@ const Modal = React.forwardRef(function Modal(
   );
 
   return (
-    <div
+    <Layer
       {...rest}
+      level={0}
       onKeyDown={handleKeyDown}
       onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
       onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
@@ -611,7 +613,7 @@ const Modal = React.forwardRef(function Modal(
           Focus sentinel
         </span>
       )}
-    </div>
+    </Layer>
   );
 });
 
