@@ -405,6 +405,7 @@ const Pagination = React.forwardRef(function Pagination(
             kind="ghost"
             className={backButtonClasses}
             label={backwardText}
+            aria-label={backwardText}
             onClick={decrementPage}
             ref={backBtnRef}>
             <CaretLeft />
@@ -415,6 +416,7 @@ const Pagination = React.forwardRef(function Pagination(
             kind="ghost"
             className={forwardButtonClasses}
             label={forwardText}
+            aria-label={forwardText}
             onClick={incrementPage}
             ref={forwardBtnRef}>
             <CaretRight />

@@ -409,6 +409,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               data-invalid={normalizedProps.invalid ? true : undefined}
               aria-invalid={normalizedProps.invalid}
               aria-describedby={ariaDescribedBy}
+              aria-readonly={readOnly}
               disabled={normalizedProps.disabled}
               ref={ref}
               id={id}
