@@ -15,6 +15,7 @@ import {
   findMenuIconNode,
   generateItems,
   generateGenericItem,
+  waitForPosition,
 } from '../../ListBox/test-helpers';
 import { Slug } from '../../Slug';
 
@@ -41,17 +42,23 @@ describe('FilterableMultiSelect', () => {
 
   it('should display all items when the menu is open', async () => {
     render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
     await openMenu();
     expect(screen.getAllByRole('option').length).toBe(mockProps.items.length);
   });
 
-  it('should initially have the menu open when open prop is provided', () => {
+  it('should initially have the menu open when open prop is provided', async () => {
     render(<FilterableMultiSelect {...mockProps} open />);
+    await waitForPosition();
+
     assertMenuOpen(mockProps);
   });
 
   it('should open the menu with a down arrow', async () => {
     render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
     const menuIconNode = findMenuIconNode();
 
     await userEvent.type(menuIconNode, '{arrowdown}');
@@ -60,6 +67,8 @@ describe('FilterableMultiSelect', () => {
 
   it('should let the user toggle the menu by the menu icon', async () => {
     render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
     await userEvent.click(findMenuIconNode());
 
     assertMenuOpen(mockProps);
@@ -70,6 +79,8 @@ describe('FilterableMultiSelect', () => {
 
   it('should not close the menu after a user makes a selection', async () => {
     render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
     await openMenu();
 
     await userEvent.click(screen.getAllByRole('option')[0]);
@@ -79,6 +90,8 @@ describe('FilterableMultiSelect', () => {
 
   it('should filter a list of items by the input value', async () => {
     render(<FilterableMultiSelect {...mockProps} placeholder="test" />);
+    await waitForPosition();
+
     await openMenu();
     expect(screen.getAllByRole('option').length).toBe(mockProps.items.length);
 
@@ -89,6 +102,8 @@ describe('FilterableMultiSelect', () => {
 
   it('should call `onChange` with each update to selected items', async () => {
     render(<FilterableMultiSelect {...mockProps} selectionFeedback="top" />);
+    await waitForPosition();
+
     await openMenu();
 
     // Select the first two items
@@ -122,6 +137,8 @@ describe('FilterableMultiSelect', () => {
 
   it('should let items stay at their position after selecting', async () => {
     render(<FilterableMultiSelect {...mockProps} selectionFeedback="fixed" />);
+    await waitForPosition();
+
     await openMenu();
 
     // Select the first two items
@@ -142,6 +159,8 @@ describe('FilterableMultiSelect', () => {
 
   it('should not clear input value after a user makes a selection', async () => {
     render(<FilterableMultiSelect {...mockProps} placeholder="test" />);
+    await waitForPosition();
+
     await openMenu();
 
     await userEvent.type(screen.getByPlaceholderText('test'), '3');
@@ -151,10 +170,12 @@ describe('FilterableMultiSelect', () => {
     expect(screen.getByPlaceholderText('test')).toHaveDisplayValue(3);
   });
 
-  it('should respect slug prop', () => {
+  it('should respect slug prop', async () => {
     const { container } = render(
       <FilterableMultiSelect {...mockProps} slug={<Slug />} />
     );
+    await waitForPosition();
+
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--slug`
     );

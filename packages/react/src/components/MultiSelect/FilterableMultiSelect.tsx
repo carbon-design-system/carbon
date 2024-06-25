@@ -29,11 +29,11 @@ import React, {
   type FocusEvent,
   type KeyboardEvent,
   ReactElement,
+  useLayoutEffect,
 } from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import {
-  type ItemBase,
-  type SortingPropTypes,
+  type MultiSelectSortingProps,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
@@ -47,6 +47,12 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useSelection } from '../../internal/Selection';
+import {
+  useFloating,
+  flip,
+  size as floatingSize,
+  autoUpdate,
+} from '@floating-ui/react';
 
 const {
   InputBlur,
@@ -74,8 +80,8 @@ const {
 } =
   useMultipleSelection.stateChangeTypes as UseMultipleSelectionInterface['stateChangeTypes'];
 
-export interface FilterableMultiSelectProps<Item extends ItemBase>
-  extends SortingPropTypes<Item> {
+export interface FilterableMultiSelectProps<ItemType>
+  extends MultiSelectSortingProps<ItemType> {
   /**
    * Specify a label to be read by screen readers on the container node
    * @deprecated
@@ -83,6 +89,13 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
   'aria-label'?: string;
   /** @deprecated */
   ariaLabel?: string;
+
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign?: boolean;
 
   className?: string;
 
@@ -109,20 +122,20 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
   /**
    * Additional props passed to Downshift
    */
-  downshiftProps?: UseMultipleSelectionProps<Item>;
+  downshiftProps?: UseMultipleSelectionProps<ItemType>;
 
   /**
    * Default sorter is assigned if not provided.
    */
   filterItems(
-    items: readonly Item[],
+    items: readonly ItemType[],
     extra: {
       inputValue: string | null;
       itemToString: NonNullable<
-        UseMultipleSelectionProps<Item>['itemToString']
+        UseMultipleSelectionProps<ItemType>['itemToString']
       >;
     }
-  ): Item[];
+  ): ItemType[];
 
   /**
    * Specify whether the title text should be hidden or not
@@ -144,7 +157,7 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
    * Allow users to pass in arbitrary items from their collection that are
    * pre-selected
    */
-  initialSelectedItems?: Item[];
+  initialSelectedItems?: ItemType[];
 
   /**
    * Is the current selection invalid?
@@ -160,7 +173,7 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
    * Function to render items as custom components instead of strings.
    * Defaults to null and is overridden by a getter
    */
-  itemToElement?: FunctionComponent<Item>;
+  itemToElement?: FunctionComponent<ItemType>;
 
   /**
    * Helper function passed to downshift that allows the library to render
@@ -169,13 +182,13 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
    * By default, it extracts the `label` field from a given item
    * to serve as the item label in the list.
    */
-  itemToString?(item: Item | null): string;
+  itemToString?(item: ItemType | null): string;
 
   /**
    * We try to stay as generic as possible here to allow individuals to pass
    * in a collection of whatever kind of data structure they prefer
    */
-  items: Item[];
+  items: ItemType[];
 
   /**
    * @deprecated `true` to use the light version.
@@ -193,13 +206,13 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
    * `onChange` is a utility for this controlled component to communicate to a
    * consuming component what kind of internal state changes are occurring.
    */
-  onChange?(changes: { selectedItems: Item[] }): void;
+  onChange?(changes: { selectedItems: ItemType[] }): void;
 
   /**
    * A utility for this controlled component
    * to communicate to the currently typed input.
    */
-  onInputValueChange?: UseComboboxProps<Item>['onInputValueChange'];
+  onInputValueChange?: UseComboboxProps<ItemType>['onInputValueChange'];
 
   /**
    * `onMenuChange` is a utility for this controlled component to communicate to a
@@ -229,7 +242,7 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
   /**
    * For full control of the selected items
    */
-  selectedItems?: Item[];
+  selectedItems?: ItemType[];
 
   /**
    * Specify the size of the ListBox.
@@ -272,9 +285,10 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
 }
 
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
-  Item extends ItemBase
+  ItemType
 >(
   {
+    autoAlign = false,
     className: containerClassName,
     clearSelectionDescription = 'Total items selected: ',
     clearSelectionText = 'To clear selection, press Delete or Backspace',
@@ -304,13 +318,13 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     selectionFeedback = 'top-after-reopen',
     selectedItems: selected,
     size,
-    sortItems = defaultSortItems as FilterableMultiSelectProps<Item>['sortItems'],
+    sortItems = defaultSortItems as FilterableMultiSelectProps<ItemType>['sortItems'],
     translateWithId,
     useTitleInItem,
     warn,
     warnText,
     slug,
-  }: FilterableMultiSelectProps<Item>,
+  }: FilterableMultiSelectProps<ItemType>,
   ref: ForwardedRef<HTMLDivElement>
 ) {
   const { isFluid } = useContext(FormContext);
@@ -318,7 +332,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
   const [prevOpen, setPrevOpen] = useState<boolean>(!!open);
   const [inputValue, setInputValue] = useState<string>('');
-  const [topItems, setTopItems] = useState<Item[]>(initialSelectedItems ?? []);
+  const [topItems, setTopItems] = useState<ItemType[]>(
+    initialSelectedItems ?? []
+  );
   const [inputFocused, setInputFocused] = useState<boolean>(false);
 
   const {
@@ -332,6 +348,43 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     selectedItems: selected,
   });
 
+  const { refs, floatingStyles, middlewareData } = useFloating(
+    autoAlign
+      ? {
+          placement: direction,
+
+          // The floating element is positioned relative to its nearest
+          // containing block (usually the viewport). It will in many cases also
+          // “break” the floating element out of a clipping ancestor.
+          // https://floating-ui.com/docs/misc#clipping
+          strategy: 'fixed',
+
+          // Middleware order matters, arrow should be last
+          middleware: [
+            flip({ crossAxis: false }),
+            floatingSize({
+              apply({ rects, elements }) {
+                Object.assign(elements.floating.style, {
+                  width: `${rects.reference.width}px`,
+                });
+              },
+            }),
+          ],
+          whileElementsMounted: autoUpdate,
+        }
+      : {}
+  );
+
+  useLayoutEffect(() => {
+    if (autoAlign) {
+      Object.keys(floatingStyles).forEach((style) => {
+        if (refs.floating.current) {
+          refs.floating.current.style[style] = floatingStyles[style];
+        }
+      });
+    }
+  }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
+
   const textInput = useRef<HTMLInputElement>(null);
   const filterableMultiSelectInstanceId = useId();
 
@@ -342,7 +395,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     setPrevOpen(open);
   }
 
-  const sortedItems = sortItems(
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const sortedItems = sortItems!(
     filterItems(items, { itemToString, inputValue }),
     {
       selectedItems: {
@@ -425,7 +479,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     getItemProps,
     openMenu,
     isOpen: isMenuOpen,
-  } = useCombobox<Item>({
+  } = useCombobox<ItemType>({
     isOpen,
     items: sortedItems,
     itemToString,
@@ -523,7 +577,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   }
 
-  const { getDropdownProps } = useMultipleSelection<Item>({
+  const { getDropdownProps } = useMultipleSelection<ItemType>({
     ...downshiftProps,
     activeIndex: highlightedIndex,
     initialSelectedItems,
@@ -710,7 +764,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         warnText={warnText}
         isOpen={isOpen}
         size={size}>
-        <div className={`${prefix}--list-box__field`}>
+        <div className={`${prefix}--list-box__field`} ref={refs.setReference}>
           {controlledSelectedItems.length > 0 && (
             // @ts-expect-error: It is expecting a non-required prop called: "onClearSelection"
             <ListBoxSelection
@@ -763,7 +817,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         </div>
         {normalizedSlug}
 
-        <ListBox.Menu {...menuProps}>
+        <ListBox.Menu {...menuProps} ref={refs.setFloating}>
           {isOpen
             ? sortedItems.map((item, index) => {
                 const isChecked =
@@ -818,9 +872,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     </div>
   );
 }) as {
-  <Item extends ItemBase>(
-    props: FilterableMultiSelectProps<Item>
-  ): ReactElement;
+  <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement;
   propTypes?: any;
   contextTypes?: any;
   defaultProps?: any;
@@ -845,6 +897,13 @@ FilterableMultiSelect.propTypes = {
     PropTypes.string,
     'ariaLabel / aria-label props are no longer required for FilterableMultiSelect'
   ),
+
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Specify the text that should be read for screen readers that describes total items selected

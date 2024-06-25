@@ -18,7 +18,9 @@ figma.connect(
       disabled: figma.enum('State', {
         Disabled: true,
       }),
-      helperText: figma.string('Helper text'),
+      helperText: figma.boolean('Show helper', {
+        true: figma.string('Helper text'),
+      }),
       hideLabel: figma.boolean('Show label', {
         true: false,
         false: true,
@@ -41,7 +43,6 @@ figma.connect(
       }),
       warnText: figma.string('Warning text'),
       // value, text field in Figma
-      // showhelper: figma.boolean('Show helper'), // this doesn't exist in code, if helperText exists it will display
     },
     example: ({
       disabled,

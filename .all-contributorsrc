@@ -1524,8 +1524,8 @@
       "contributions": [
         "code"
       ]
-     },
-    {  
+    },
+    {
       "login": "ychavoya",
       "name": "Yael Chavoya",
       "avatar_url": "https://avatars.githubusercontent.com/u/7907338?v=4",
@@ -1556,6 +1556,15 @@
       "name": "Andrea DG",
       "avatar_url": "https://avatars.githubusercontent.com/u/117646602?v=4",
       "profile": "https://github.com/digiacomo-a",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "lluisrojass",
+      "name": "Luis",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15043356?v=4",
+      "profile": "https://github.com/lluisrojass",
       "contributions": [
         "code"
       ]
