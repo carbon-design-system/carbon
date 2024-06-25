@@ -19,7 +19,11 @@ figma.connect(
         Small: true,
       }),
     },
-    example: ({ small }) => <Loading withOverlay={false} small={small} />,
+    example: ({ small }) => (
+      // Disclaimer: Code Connect is currently in beta and integration with Carbon
+      // React is in an exploratory phase. Code sample below may be incomplete.
+      <Loading withOverlay={false} small={small} />
+    ),
   }
 );
 
@@ -38,6 +42,8 @@ figma.connect(
       }),
     },
     example: ({ status, description }) => (
+      // Disclaimer: Code Connect is currently in beta and integration with Carbon
+      // React is in an exploratory phase. Code sample below may be incomplete.
       <InlineLoading
         iconDescription="Loading"
         status={status}
