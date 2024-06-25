@@ -172,7 +172,7 @@ describe('OverflowMenu', () => {
       );
     });
 
-    it('should call onClick handler only once per click', async() => {
+    it('should call onClick handler only once per click', async () => {
       const handleClick = jest.fn();
 
       render(
