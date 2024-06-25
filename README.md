@@ -291,11 +291,12 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/aninaantony"><img src="https://avatars.githubusercontent.com/u/164350784?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anina Antony</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=aninaantony" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/ahmedsemih"><img src="https://avatars.githubusercontent.com/u/102798814?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ahmed Semih Erkan</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=ahmedsemih" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/ychavoya"><img src="https://avatars.githubusercontent.com/u/7907338?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Yael Chavoya</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=ychavoya" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/digiacomo-a"><img src="https://avatars.githubusercontent.com/u/117646602?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Andrea DG</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=digiacomo-a" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/Kilian-Collender"><img src="https://avatars.githubusercontent.com/u/37899503?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kilian Collender</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Kilian-Collender" title="Code">💻</a></td>
+    <td align="center"><img src="https://avatars.githubusercontent.com/u/37899503?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kilian Collender</b></sub><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Kilian-Collender" title="Code">💻</a></td>
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/nandininarayanofficial"><img src="https://avatars.githubusercontent.com/u/165769075?v=4?s=100" width="100px;" alt=""/><br /><sub><b>nandininarayanofficial</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=nandininarayanofficial" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/digiacomo-a"><img src="https://avatars.githubusercontent.com/u/117646602?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Andrea DG</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=digiacomo-a" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/lluisrojass"><img src="https://avatars.githubusercontent.com/u/15043356?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Luis</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=lluisrojass" title="Code">💻</a></td>
   </tr>
 </table>
 
