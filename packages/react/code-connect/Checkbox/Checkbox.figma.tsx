@@ -31,7 +31,9 @@ figma.connect(
       checked: figma.enum('Selection', {
         Checked: true,
       }),
-      helperText: figma.string('Helper text'),
+      helperText: figma.boolean('Helper message', {
+        true: figma.string('Helper text'),
+      }),
       invalid: figma.enum('State', {
         Invalid: true,
       }),
