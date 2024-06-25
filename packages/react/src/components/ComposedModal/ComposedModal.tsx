@@ -26,6 +26,7 @@ import wrapFocus, {
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
+import { composeEventHandlers } from '../../tools/events';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -287,7 +288,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       onKeyDown?.(event);
     }
 
-    function handleClick(evt: React.MouseEvent<HTMLDivElement>) {
+    function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
       const target = evt.target as Node;
       evt.stopPropagation();
       if (
@@ -421,7 +422,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         ref={ref}
         aria-hidden={!open}
         onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
-        onClick={handleClick}
+        onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
         onKeyDown={handleKeyDown}
         className={modalClass}>
         <div
