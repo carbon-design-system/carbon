@@ -172,7 +172,7 @@ describe('OverflowMenu', () => {
       );
     });
 
-    it('should call onClick handler only once per click', () => {
+    it('should call onClick handler only once per click', async() => {
       const handleClick = jest.fn();
 
       render(
@@ -190,7 +190,7 @@ describe('OverflowMenu', () => {
       const button = screen.getByRole('button');
 
       // Click the OverflowMenu button
-      userEvent.click(button);
+      await userEvent.click(button);
 
       // Check that the click handler was called only once
       expect(handleClick).toHaveBeenCalledTimes(1);
