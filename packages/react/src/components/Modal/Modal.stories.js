@@ -322,6 +322,61 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           <SelectItem value="us-south" text="US South" />
           <SelectItem value="us-east" text="US East" />
         </Select>
+
+        <Dropdown
+          autoAlign={true}
+          id="default"
+          style={{ margin: '1rem 0' }}
+          titleText="Dropdown Example of Floating ui"
+          helperText="This is some helper text"
+          // initialSelectedItem={items[1]}
+          label="Option 1"
+          items={[
+            {
+              id: 'option-0',
+              text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+            },
+            {
+              id: 'option-1',
+              text: 'Option 1',
+            },
+            {
+              id: 'option-2',
+              text: 'Option 2',
+            },
+            {
+              id: 'option-3',
+              text: 'Option 3 - a disabled item',
+              disabled: true,
+            },
+            {
+              id: 'option-4',
+              text: 'Option 4',
+            },
+            {
+              id: 'option-5',
+              text: 'Option 5',
+            },
+          ]}
+          itemToString={(item) => (item ? item.text : '')}
+          direction="top"
+        />
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+
         {args.hasScrollingContent && (
           <>
             <p>
