@@ -175,6 +175,9 @@ describe('FilterableMultiSelect', () => {
     await openMenu();
 
     const menuList = screen.getByRole('listbox');
+
+    expect(menuList).toBeInTheDocument();
+    
     await userEvent.click(menuList);
 
     assertMenuOpen(mockProps);
