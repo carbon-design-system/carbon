@@ -35,6 +35,11 @@ export interface ContentSwitcherProps
   className?: string;
 
   /**
+   * changes the animation when icon only from pop up to sideways slide
+   */
+  iconOnlySlide?: boolean;
+
+  /**
    * `true` to use the light version.
    *
    * @deprecated The `light` prop for `ContentSwitcher` has
@@ -66,6 +71,7 @@ export interface ContentSwitcherProps
 
 interface ContentSwitcherState {
   selectedIndex?: number;
+  prevSelectedIndex?: number;
 }
 
 export default class ContentSwitcher extends React.Component<
@@ -81,6 +87,7 @@ export default class ContentSwitcher extends React.Component<
 
   state = {
     selectedIndex: undefined,
+    prevSelectedIndex: undefined,
   };
 
   static propTypes = {
@@ -128,12 +135,11 @@ export default class ContentSwitcher extends React.Component<
   static contextType = PrefixContext;
 
   static getDerivedStateFromProps({ selectedIndex = 0 }, state) {
-    const { prevSelectedIndex } = state;
-    return prevSelectedIndex === selectedIndex
+    return selectedIndex === state.prevPropSelectedIndex
       ? null
       : {
           selectedIndex,
-          prevSelectedIndex: selectedIndex,
+          prevPropSelectedIndex: selectedIndex,
         };
   }
 
@@ -162,6 +168,7 @@ export default class ContentSwitcher extends React.Component<
       } else {
         this.setState(
           {
+            prevSelectedIndex: selectedIndex,
             selectedIndex: nextIndex,
           },
           () => {
@@ -182,11 +189,14 @@ export default class ContentSwitcher extends React.Component<
         );
       }
     } else if (selectedIndex !== index) {
-      this.setState({ selectedIndex: index }, () => {
-        const switchRef = this._switchRefs[index];
-        switchRef && switchRef.focus();
-        this.props.onChange(data);
-      });
+      this.setState(
+        { selectedIndex: index, prevSelectedIndex: selectedIndex },
+        () => {
+          const switchRef = this._switchRefs[index];
+          switchRef && switchRef.focus();
+          this.props.onChange(data);
+        }
+      );
     }
   };
 
@@ -195,6 +205,7 @@ export default class ContentSwitcher extends React.Component<
     const {
       children,
       className,
+      iconOnlySlide,
       light,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       selectedIndex = 0,
@@ -215,7 +226,21 @@ export default class ContentSwitcher extends React.Component<
       [`${prefix}--content-switcher--${size}`]: size, // TODO: V12 - Remove this class
       [`${prefix}--layout--size-${size}`]: size,
       [`${prefix}--content-switcher--icon-only`]: isIconOnly,
+      [`${prefix}--content-switcher--icon-only-slide`]: iconOnlySlide,
     });
+
+    const style = {
+      // '--duration': `${
+      //   250 +
+      //   83.33 *
+      //     Math.abs(
+      //       (this.state?.selectedIndex ?? 0) -
+      //         (this.state?.prevSelectedIndex ?? 0)
+      //     )
+      // }ms`,
+      '--prev-selected-index': this.state?.prevSelectedIndex ?? 0,
+      '--selected-index': this.state?.selectedIndex ?? 0,
+    };
 
     return (
       <LayoutConstraint
@@ -223,7 +248,9 @@ export default class ContentSwitcher extends React.Component<
         {...other}
         className={classes}
         role="tablist"
-        onChange={undefined}>
+        onChange={undefined}
+        // eslint-disable-next-line react/forbid-component-props
+        style={style}>
         {children &&
           React.Children.toArray(children).map((child, index) =>
             React.cloneElement(child as ReactElement, {
@@ -236,6 +263,7 @@ export default class ContentSwitcher extends React.Component<
               selected: index === this.state.selectedIndex,
               ref: this.handleItemRef(index),
               size,
+              iconOnlySlide,
             })
           )}
       </LayoutConstraint>

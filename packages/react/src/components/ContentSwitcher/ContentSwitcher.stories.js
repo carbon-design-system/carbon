@@ -66,6 +66,40 @@ export const IconOnly = (args) => (
   </ContentSwitcher>
 );
 
+export const IconOnlySlide = (args) => (
+  <ContentSwitcher onChange={() => {}} {...args} iconOnlySlide>
+    <IconSwitch name="one" text="Table of Contents">
+      <TableOfContents />
+    </IconSwitch>
+    <IconSwitch name="two" text="Workspace Test">
+      <Workspace />
+    </IconSwitch>
+    <IconSwitch name="three" text="View Mode">
+      <ViewMode_2 />
+    </IconSwitch>
+  </ContentSwitcher>
+);
+
+export const IconOnlySlide5 = (args) => (
+  <ContentSwitcher onChange={() => {}} {...args} iconOnlySlide>
+    <IconSwitch name="one" text="Table of Contents">
+      <TableOfContents />
+    </IconSwitch>
+    <IconSwitch name="two" text="Workspace Test">
+      <Workspace />
+    </IconSwitch>
+    <IconSwitch name="three" text="View Mode">
+      <ViewMode_2 />
+    </IconSwitch>
+    <IconSwitch name="four" text="View Mode">
+      <ViewMode_2 />
+    </IconSwitch>
+    <IconSwitch name="five" text="View Mode">
+      <ViewMode_2 />
+    </IconSwitch>
+  </ContentSwitcher>
+);
+
 export const IconOnlyWithLayer = (args) => (
   <WithLayer>
     <ContentSwitcher onChange={() => {}} {...args}>

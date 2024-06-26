@@ -20,6 +20,7 @@ const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
     className,
     disabled,
     enterDelayMs,
+    iconOnlySlide,
     index,
     leaveDelayMs = 0,
     name,
@@ -75,6 +76,8 @@ const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
     size,
   };
 
+  const styleIndex = { '--index': index };
+
   return (
     <IconButton
       label={text}
@@ -89,9 +92,17 @@ const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
       aria-selected={selected}
       aria-label={text}
       wrapperClasses={iconButtonClasses}
+      {...styleIndex}
       {...other}
       {...commonProps}>
       {children}
+      {iconOnlySlide ? (
+        <div
+          className={`${prefix}--content-switcher-btn__selection-indicator`}
+          aria-hidden="true">
+          {children}
+        </div>
+      ) : null}
     </IconButton>
   );
 });
@@ -132,6 +143,11 @@ IconSwitch.propTypes = {
    * Specify the duration in milliseconds to delay before displaying the tooltip
    */
   enterDelayMs: PropTypes.number,
+
+  /**
+   * changes the animation when icon only from pop up to sideways slide
+   */
+  iconOnlySlide: PropTypes.bool,
 
   /**
    * The index of your Switch in your ContentSwitcher that is used for event handlers.
