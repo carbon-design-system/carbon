@@ -715,7 +715,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       onBlur: () => {
         !isOpen && setInputFocused(false);
         setInputValue('');
-        // setIsOpen(false);
       },
     })
   );
