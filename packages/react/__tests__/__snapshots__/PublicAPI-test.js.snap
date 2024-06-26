@@ -3418,6 +3418,9 @@ Map {
     "propTypes": Object {
       "aria-label": [Function],
       "ariaLabel": [Function],
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "clearSelectionDescription": Object {
         "type": "string",
       },
@@ -5091,6 +5094,9 @@ Map {
       "propTypes": Object {
         "aria-label": [Function],
         "ariaLabel": [Function],
+        "autoAlign": Object {
+          "type": "bool",
+        },
         "clearSelectionDescription": Object {
           "type": "string",
         },
@@ -5339,6 +5345,9 @@ Map {
       "render": [Function],
     },
     "propTypes": Object {
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "className": Object {
         "type": "string",
       },

@@ -51,47 +51,6 @@
       }
     }
 
-    // V11: Question for design: do we have an updated tokens for fields that exist on `layer`?
-    .#{$prefix}--pagination,
-    .#{$prefix}--pagination__control-buttons,
-    .#{$prefix}--text-input,
-    .#{$prefix}--text-area,
-    .#{$prefix}--search-input,
-    .#{$prefix}--select-input,
-    .#{$prefix}--dropdown,
-    .#{$prefix}--dropdown-list,
-    .#{$prefix}--number input[type='number'],
-    .#{$prefix}--date-picker__input,
-    .#{$prefix}--multi-select,
-    .#{$prefix}--number__control-btn::before,
-    .#{$prefix}--number__control-btn::after,
-    .#{$prefix}--list-box input[role='combobox'] {
-      background-color: $field-02;
-    }
-
-    // Override to align layer token with field
-    .#{$prefix}--list-box__menu {
-      background-color: $layer-02;
-    }
-
-    .#{$prefix}--number__rule-divider {
-      background-color: $border-subtle-02;
-    }
-
-    .#{$prefix}--list-box__menu-item__option {
-      border-block-start-color: $border-subtle-02;
-    }
-
-    .#{$prefix}--list-box__menu-item:hover
-      .#{$prefix}--list-box__menu-item__option {
-      border-block-start-color: $layer-hover-02;
-    }
-
-    .#{$prefix}--list-box__menu-item--active:hover
-      .#{$prefix}--list-box__menu-item__option {
-      border-block-start-color: $layer-selected-hover-02;
-    }
-
     // Fluid inputs
     .#{$prefix}--text-input--fluid .#{$prefix}--text-input,
     .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper,

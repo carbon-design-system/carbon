@@ -590,7 +590,7 @@ const ComboBox = forwardRef(
       setHighlightedIndex,
     } = useCombobox({
       ...downshiftProps,
-      items,
+      items: filterItems(items, itemToString, inputValue),
       inputValue: inputValue,
       itemToString: (item) => {
         return itemToString(item);
@@ -708,7 +708,11 @@ const ComboBox = forwardRef(
                     toggleMenu();
 
                     if (highlightedIndex !== -1) {
-                      selectItem(items[highlightedIndex]);
+                      selectItem(
+                        filterItems(items, itemToString, inputValue)[
+                          highlightedIndex
+                        ]
+                      );
                     }
 
                     event.preventDownshiftDefault = true;
