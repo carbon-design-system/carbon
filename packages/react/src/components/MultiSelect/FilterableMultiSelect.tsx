@@ -466,7 +466,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return changes;
       case InputBlur:
       case InputKeyDownEscape:
-        setInputValue('');
         setIsOpen(false);
         return changes;
       case FunctionToggleMenu:
@@ -661,7 +660,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         }
       },
       onFocus: () => setInputFocused(true),
-      onBlur: () => setInputFocused(false),
+      onBlur: () => {
+        !isOpen && setInputFocused(false);
+        setInputValue('');
+        // setIsOpen(false);
+      },
     })
   );
   const menuProps = getMenuProps({}, { suppressRefError: true });
