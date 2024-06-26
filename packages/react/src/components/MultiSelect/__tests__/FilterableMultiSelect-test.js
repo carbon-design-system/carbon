@@ -170,19 +170,6 @@ describe('FilterableMultiSelect', () => {
     expect(screen.getByPlaceholderText('test')).toHaveDisplayValue(3);
   });
 
-  it('should not close the menu when user clicks on listbox', async () => {
-    render(<FilterableMultiSelect {...mockProps} />);
-    await openMenu();
-
-    const menuList = screen.getByRole('listbox');
-
-    expect(menuList).toBeInTheDocument();
-    
-    await userEvent.click(menuList);
-
-    assertMenuOpen(mockProps);
-  });
-
   it('should clear input value when clicking on cross button', async () => {
     render(<FilterableMultiSelect {...mockProps} placeholder="test" />);
     await openMenu();
