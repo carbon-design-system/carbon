@@ -26,18 +26,12 @@ export const defaultCompareItems = (itemA, itemB, { locale }) =>
 export const defaultSortItems = (
   items,
   { selectedItems = [], itemToString, compareItems, locale = 'en' }
-) =>
-  items.sort((itemA, itemB) => {
+) => {
+  items.filter((item) => item.id == 'select-all-option');
+  return items.sort((itemA, itemB) => {
     const hasItemA = selectedItems.includes(itemA);
     const hasItemB = selectedItems.includes(itemB);
 
-    // Prefer whichever item is in the `selectedItems` array first
-    if (
-      itemA['id'] === 'select-all-option' ||
-      itemB['id'] === 'select-all-option'
-    ) {
-      return 1;
-    }
     if (hasItemA && !hasItemB) {
       return -1;
     }
@@ -50,3 +44,4 @@ export const defaultSortItems = (
       locale,
     });
   });
+};
