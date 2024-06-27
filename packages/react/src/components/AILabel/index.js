@@ -150,9 +150,9 @@ export const AILabel = React.forwardRef(function AILabel(
             className={aiLabelButtonClasses}
             label={ariaLabelText}>
             <span className={`${prefix}--slug__text`}>{aiText}</span>
-            {kind === 'inline' && aiTextLabel && (
+            {kind === 'inline' && (aiTextLabel || textLabel) && (
               <span className={`${prefix}--slug__additional-text`}>
-                {aiTextLabel}
+                {aiTextLabel || textLabel}
               </span>
             )}
           </ToggletipButton>

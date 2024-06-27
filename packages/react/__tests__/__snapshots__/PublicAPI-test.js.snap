@@ -11,9 +11,7 @@ Map {
       "aiText": Object {
         "type": "string",
       },
-      "aiTextLabel": Object {
-        "type": "string",
-      },
+      "aiTextLabel": [Function],
       "align": Object {
         "args": Array [
           Array [
@@ -40,6 +38,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "aria-label": Object {
+        "type": "string",
       },
       "autoAlign": Object {
         "type": "bool",
@@ -82,7 +83,8 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slugLabel": Object {
+      "slugLabel": [Function],
+      "textLabel": Object {
         "type": "string",
       },
     },
@@ -10789,9 +10791,7 @@ Map {
       "aiText": Object {
         "type": "string",
       },
-      "aiTextLabel": Object {
-        "type": "string",
-      },
+      "aiTextLabel": [Function],
       "align": Object {
         "args": Array [
           Array [
@@ -10818,6 +10818,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "aria-label": Object {
+        "type": "string",
       },
       "autoAlign": Object {
         "type": "bool",
@@ -10860,7 +10863,8 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slugLabel": Object {
+      "slugLabel": [Function],
+      "textLabel": Object {
         "type": "string",
       },
     },

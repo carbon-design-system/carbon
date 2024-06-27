@@ -40,7 +40,7 @@ describe('AILabel', () => {
       expect(screen.getByText('IA')).toBeInTheDocument();
     });
 
-    it('should respect aiTextLabel prop when kind is inline', () => {
+    it('should respect textLabel prop when kind is inline', () => {
       const wrapper = render(<AILabel kind="inline" textLabel="Test text" />);
 
       const additionalTextSpan = wrapper.container.querySelector(
@@ -50,7 +50,7 @@ describe('AILabel', () => {
       expect(additionalTextSpan).toHaveTextContent('Test text');
     });
 
-    it('should not populate aiTextLabel prop when kind is not inline', () => {
+    it('should not populate textLabel prop when kind is not inline', () => {
       const wrapper = render(<AILabel textLabel="Test text" />);
 
       const additionalTextSpan = wrapper.container.querySelector(
