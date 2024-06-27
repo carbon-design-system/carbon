@@ -242,6 +242,11 @@ export default class ContentSwitcher extends React.Component<
       '--selected-index': this.state?.selectedIndex ?? 0,
     };
 
+    const iconOnlyProps: { iconOnlySlide?: boolean } = {};
+    if (isIconOnly && iconOnlySlide) {
+      iconOnlyProps.iconOnlySlide = iconOnlySlide;
+    }
+
     return (
       <LayoutConstraint
         size={{ default: 'md', min: 'sm', max: 'lg' }}
@@ -263,7 +268,7 @@ export default class ContentSwitcher extends React.Component<
               selected: index === this.state.selectedIndex,
               ref: this.handleItemRef(index),
               size,
-              iconOnlySlide,
+              ...iconOnlyProps,
             })
           )}
       </LayoutConstraint>
