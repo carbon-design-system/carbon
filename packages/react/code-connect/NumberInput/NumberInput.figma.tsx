@@ -42,7 +42,9 @@ figma.connect(
         Warning: true,
       }),
       warnText: figma.string('Warning text'),
-      // value, text field in Figma
+      numberInputbase: figma.nestedProps('_Number input base', {
+        value: figma.textContent('Text'),
+      }),
     },
     example: ({
       disabled,
@@ -55,6 +57,7 @@ figma.connect(
       size,
       warn,
       warnText,
+      numberInputbase,
     }) => (
       // Disclaimer: Code Connect is currently in beta and integration with Carbon
       // React is in an exploratory phase. Code sample below may be incomplete.
@@ -69,7 +72,7 @@ figma.connect(
         size={size}
         warn={warn}
         warnText={warnText}
-        value="1000"
+        value={numberInputbase.value}
       />
     ),
   }

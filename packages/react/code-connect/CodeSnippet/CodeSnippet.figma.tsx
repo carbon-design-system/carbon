@@ -30,7 +30,7 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4266-104960&t=cMvnFTYLPEhzhIpj-4',
   {
     props: {
-      children: figma.string('Code text'),
+      children: figma.textContent('node -v'),
     },
     example: ({ children }) => {
       return (
@@ -49,14 +49,18 @@ figma.connect(
   CodeSnippet,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4266-103999&t=cMvnFTYLPEhzhIpj-4',
   {
-    example: () => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
-      <CodeSnippet type="single" feedback="Copied to clipboard">
-        yarn add carbon-components@latest carbon-components-react@latest
-        @carbon/icons-react@latest carbon-icons@latest
-      </CodeSnippet>
-    ),
+    props: {
+      children: figma.textContent('$ npm install --save carbon-components'),
+    },
+    example: ({ children }) => {
+      return (
+        // Disclaimer: Code Connect is currently in beta and integration with Carbon
+        // React is in an exploratory phase. Code sample below may be incomplete.
+        <CodeSnippet type="single" feedback="Copied to clipboard">
+          {children}
+        </CodeSnippet>
+      );
+    },
   }
 );
 
@@ -99,19 +103,3 @@ figma.connect(
     ),
   }
 );
-
-// // Skeleton state (multiline only)
-// figma.connect(
-//   CodeSnippetSkeleton,
-//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4257-168802&t=cMvnFTYLPEhzhIpj-4',
-//   {
-//     variant: { State: 'Skeleton' },
-//     example: () => {
-//       return (
-//         // Disclaimer: Code Connect is currently in beta and integration with Carbon
-//         // React is in an exploratory phase. Code sample below may be incomplete.
-//         <CodeSnippetSkeleton type="multi" />
-//       );
-//     },
-//   }
-// );
