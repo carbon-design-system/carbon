@@ -320,6 +320,11 @@
       linear-gradient(to top, $layer 0, 2px, transparent 2px);
   }
 
+  //removing mask image in case we have dropdown in modal
+  .#{$prefix}--modal-scroll-content:has(.#{$prefix}--dropdown--autoalign) {
+    mask-image: none;
+  }
+
   // Required so overflow-indicator disappears at end of content
   .#{$prefix}--modal-scroll-content > *:last-child {
     margin-block-end: $spacing-06;
