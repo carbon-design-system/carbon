@@ -15,7 +15,7 @@ but it also facilitates the mapping of properties from Carbon React code to
 Figma. This capability enables the creation of dynamic and accurate examples,
 promoting consistency across both design and engineering.
 
-## Conecting components
+## Connecting components
 
 You will need a Figma license with dev mode to work on code connect within
 Carbon.
