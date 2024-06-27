@@ -188,7 +188,7 @@ export const Default = () => (
       </AILabel>
     </div>
     <div className="slug-container-example slug-container">
-      <AILabel autoAlign kind="inline" size="sm" aiTextLabel="Text goes here">
+      <AILabel autoAlign kind="inline" size="sm" textLabel="Text goes here">
         <AILabelContent>
           {aiContent}
           <AILabelActions>
@@ -205,7 +205,7 @@ export const Default = () => (
           </AILabelActions>
         </AILabelContent>
       </AILabel>
-      <AILabel autoAlign kind="inline" size="md" aiTextLabel="Text goes here">
+      <AILabel autoAlign kind="inline" size="md" textLabel="Text goes here">
         <AILabelContent>
           {aiContent}
           <AILabelActions>
@@ -222,7 +222,7 @@ export const Default = () => (
           </AILabelActions>
         </AILabelContent>
       </AILabel>
-      <AILabel autoAlign kind="inline" size="lg" aiTextLabel="Text goes here">
+      <AILabel autoAlign kind="inline" size="lg" textLabel="Text goes here">
         <AILabelContent>
           {aiContent}
           <AILabelActions>
@@ -376,6 +376,11 @@ Callout.argTypes = {
       disable: true,
     },
   },
+  textLabel: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 export const Playground = (args) => {
@@ -415,7 +420,7 @@ export const Playground = (args) => {
   return (
     <>
       <div className="slug-container slug-container-example">
-        <AILabel {...args}>
+        <AILabel aria-label="Test" {...args}>
           <AILabelContent>{renderedContent}</AILabelContent>
         </AILabel>
       </div>

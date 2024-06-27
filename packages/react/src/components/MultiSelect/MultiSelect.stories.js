@@ -15,13 +15,10 @@ import MultiSelect from '.';
 import FilterableMultiSelect from './FilterableMultiSelect';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
-<<<<<<< HEAD
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
-=======
 import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
->>>>>>> main
 
 export default {
   title: 'Components/MultiSelect',

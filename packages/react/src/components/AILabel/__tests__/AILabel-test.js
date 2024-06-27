@@ -41,7 +41,7 @@ describe('AILabel', () => {
     });
 
     it('should respect aiTextLabel prop when kind is inline', () => {
-      const wrapper = render(<AILabel kind="inline" aiTextLabel="Test text" />);
+      const wrapper = render(<AILabel kind="inline" textLabel="Test text" />);
 
       const additionalTextSpan = wrapper.container.querySelector(
         `.${prefix}--slug__additional-text`
@@ -51,7 +51,7 @@ describe('AILabel', () => {
     });
 
     it('should not populate aiTextLabel prop when kind is not inline', () => {
-      const wrapper = render(<AILabel aiTextLabel="Test text" />);
+      const wrapper = render(<AILabel textLabel="Test text" />);
 
       const additionalTextSpan = wrapper.container.querySelector(
         `.${prefix}--slug__additional-text`

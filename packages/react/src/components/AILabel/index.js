@@ -19,6 +19,7 @@ import {
 import { IconButton } from '../IconButton';
 import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
+import deprecate from '../../prop-types/deprecate';
 
 export const AILabelContent = React.forwardRef(function AILabelContent(
   { children, className },
@@ -36,7 +37,7 @@ export const AILabelContent = React.forwardRef(function AILabelContent(
   });
 
   return (
-    <ToggletipContent className={aiLabelContentClasses} ref={ref}>
+    <ToggletipContent className={aiLabelContentClasses}>
       {children}
     </ToggletipContent>
   );
@@ -89,6 +90,7 @@ export const AILabel = React.forwardRef(function AILabel(
   {
     aiText = 'AI',
     aiTextLabel,
+    textLabel,
     align,
     autoAlign = true,
     children,
@@ -98,6 +100,7 @@ export const AILabel = React.forwardRef(function AILabel(
     revertActive,
     revertLabel = 'Revert to AI input',
     slugLabel = 'Show information',
+    ['aria-label']: ariaLabel = 'Show information',
     size = 'xs',
     ...rest
   },
@@ -125,9 +128,10 @@ export const AILabel = React.forwardRef(function AILabel(
     }
   };
 
-  const ariaLabel = !aiTextLabel
-    ? `${aiText} - ${slugLabel}`
-    : `${aiText} - ${aiTextLabel}`;
+  const ariaLabelText =
+    !aiTextLabel && !textLabel
+      ? `${aiText} - ${slugLabel || ariaLabel}`
+      : `${aiText} - ${aiTextLabel || textLabel}`;
 
   return (
     <div className={aiLabelClasses} ref={ref} id={id}>
@@ -142,7 +146,9 @@ export const AILabel = React.forwardRef(function AILabel(
         </IconButton>
       ) : (
         <Toggletip align={align} autoAlign={autoAlign} {...rest}>
-          <ToggletipButton className={aiLabelButtonClasses} label={ariaLabel}>
+          <ToggletipButton
+            className={aiLabelButtonClasses}
+            label={ariaLabelText}>
             <span className={`${prefix}--slug__text`}>{aiText}</span>
             {kind === 'inline' && aiTextLabel && (
               <span className={`${prefix}--slug__additional-text`}>
@@ -170,9 +176,13 @@ AILabel.propTypes = {
   aiText: PropTypes.string,
 
   /**
+   * @deprecated
    * Specify additional text to be rendered next to the AI label in the inline variant
    */
-  aiTextLabel: PropTypes.string,
+  aiTextLabel: deprecate(
+    PropTypes.string,
+    '`aiTextLabel` on `AILabel` has been deprecated - Please use the `textLabel` prop instead'
+  ),
 
   /**
    * Specify how the popover should align with the button
@@ -202,6 +212,11 @@ AILabel.propTypes = {
     'right-top', // deprecated use right-start instead
     'right-start',
   ]),
+
+  /**
+   * Specify the text that will be provided to the aria-label of the `AILabel` button
+   */
+  'aria-label': PropTypes.string,
 
   /**
    * Will auto-align the popover. This prop is currently experimental and is subject to future changes.
@@ -244,7 +259,16 @@ AILabel.propTypes = {
   size: PropTypes.oneOf(['mini', '2xs', 'xs', 'sm', 'md', 'lg', 'xl']),
 
   /**
+   * @deprecated
    * Specify the text that will be provided to the aria-label of the `AILabel` button
    */
-  slugLabel: PropTypes.string,
+  slugLabel: deprecate(
+    PropTypes.string,
+    '`slugLabel` on `AILabel` has been deprecated - Please use the `ariaLabel` prop instead'
+  ),
+
+  /**
+   * Specify additional text to be rendered next to the AI label in the inline variant
+   */
+  textLabel: PropTypes.string,
 };
