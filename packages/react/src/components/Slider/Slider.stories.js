@@ -53,27 +53,13 @@ export const SliderWithHiddenInputs = () => (
   />
 );
 
-export const SliderWithHiddenInputsAndFormatLabel = () => (
-  <Slider
-    labelText="Slider label with percentage"
-    value={50}
-    min={0}
-    max={100}
-    stepMultiplier={10}
-    step={1}
-    noValidate
-    hideTextInput
-    formatLabel={(val) => `${val}%`}
-  />
-);
-
 export const SliderWithCustomValueLabel = () => (
   <Slider
     labelText="Slider label with low/medium/high"
     value={50}
     min={0}
     max={100}
-    stepMultiplier={10}
+    stepMultiplier={50}
     step={1}
     noValidate
     hideTextInput
