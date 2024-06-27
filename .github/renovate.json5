@@ -13,7 +13,7 @@
     'npm:unpublishSafe',
 
     // https://docs.renovatebot.com/presets-schedule/#scheduledaily
-    'schedule:weekday',
+    'schedule:every weekday',
   ],
   vulnerabilityAlerts: {
     enabled: true,

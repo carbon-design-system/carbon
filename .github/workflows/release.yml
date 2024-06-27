@@ -80,9 +80,9 @@ jobs:
           script: |
             github.rest.repos.createRelease({
               tag_name: context.ref,
-              name: ${{ github.ref_name }},
+              name: '${{ github.ref_name }}',
               draft: false,
               prerelease: true,
               owner: context.repo.owner,
               repo: context.repo.repo,
-            });
+            })
