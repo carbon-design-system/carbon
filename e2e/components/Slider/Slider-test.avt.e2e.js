@@ -92,45 +92,44 @@ test.describe('@avt Slider', () => {
     await expect(page).toHaveNoACViolations('Slider-with-layer');
   });
 
-  test.slow(
-    '@avt-advanced-states slider with custom format',
-    async ({ page }) => {
-      await visitStory(page, {
-        component: 'Slider',
-        id: 'components-slider--slider-with-custom-value-label',
-        globals: {
-          theme: 'white',
-        },
-      });
+  test('@avt-advanced-states slider with custom format', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Slider',
+      id: 'components-slider--slider-with-custom-value-label',
+      globals: {
+        theme: 'white',
+      },
+    });
 
-      // Test for label changes
-      // Initial value
-      await page.keyboard.press('Tab');
-      await expect(page.getByRole('slider')).toBeVisible();
-      await page.keyboard.press('Tab');
+    await expect(page).toHaveNoACViolations('Slider-with-custom-value-label');
+  });
 
-      await expect(page.getByRole('slider')).toHaveAttribute(
-        'aria-valuetext',
-        'Medium'
-      );
-      // Move to high
-      await page.keyboard.press('Shift+ArrowRight');
-      await expect(page.getByRole('slider')).toHaveAttribute(
-        'aria-valuetext',
-        'High'
-      );
+  test.slow('@avt-keyboard-nav slider with custom format', async ({ page }) => {
+    // Test for label changes
+    // Initial value
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('slider')).toBeVisible();
+    await page.keyboard.press('Tab');
 
-      // Move to Low
-      await page.keyboard.press('Shift+ArrowLeft');
-      await page.keyboard.press('Shift+ArrowLeft');
-      await expect(page.getByRole('slider')).toHaveAttribute(
-        'aria-valuetext',
-        'Low'
-      );
+    await expect(page.getByRole('slider')).toHaveAttribute(
+      'aria-valuetext',
+      'Medium'
+    );
+    // Move to high
+    await page.keyboard.press('Shift+ArrowRight');
+    await expect(page.getByRole('slider')).toHaveAttribute(
+      'aria-valuetext',
+      'High'
+    );
 
-      await expect(page).toHaveNoACViolations('Slider-with-custom-value-label');
-    }
-  );
+    // Move to Low
+    await page.keyboard.press('Shift+ArrowLeft');
+    await page.keyboard.press('Shift+ArrowLeft');
+    await expect(page.getByRole('slider')).toHaveAttribute(
+      'aria-valuetext',
+      'Low'
+    );
+  });
 
   // Prevent timeout
   test.slow('@avt-keyboard-nav', async ({ page }) => {
