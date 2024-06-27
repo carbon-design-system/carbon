@@ -13,6 +13,7 @@ import React, {
   useEffect,
   useState,
   useRef,
+  useMemo,
   forwardRef,
   type ReactNode,
   type ComponentType,
@@ -655,6 +656,15 @@ const ComboBox = forwardRef(
       (helperText && !isFluid && helperTextId) ||
       undefined;
 
+    const menuProps = useMemo(
+      () =>
+        getMenuProps({
+          'aria-label': deprecatedAriaLabel || ariaLabel,
+          ref: autoAlign ? refs.setFloating : null,
+        }),
+      [autoAlign, deprecatedAriaLabel, ariaLabel]
+    );
+
     return (
       <div className={wrapperClasses}>
         {titleText && (
@@ -674,7 +684,7 @@ const ComboBox = forwardRef(
           light={light}
           size={size}
           warn={warn}
-          ref={refs.setReference}
+          ref={autoAlign ? refs.setReference : null}
           warnText={warnText}
           warnTextId={warnTextId}>
           <div className={`${prefix}--list-box__field`}>
@@ -686,7 +696,7 @@ const ComboBox = forwardRef(
               aria-haspopup="listbox"
               title={textInput?.current?.value}
               {...getInputProps({
-                'aria-controls': isOpen ? undefined : getMenuProps().id,
+                'aria-controls': isOpen ? undefined : menuProps.id,
                 placeholder,
                 ref: { ...mergeRefs(textInput, ref) },
                 onKeyDown: (
@@ -785,11 +795,7 @@ const ComboBox = forwardRef(
             />
           </div>
           {normalizedSlug}
-          <ListBox.Menu
-            {...getMenuProps({
-              'aria-label': deprecatedAriaLabel || ariaLabel,
-            })}
-            ref={mergeRefs(getMenuProps().ref, refs.setFloating)}>
+          <ListBox.Menu {...menuProps}>
             {isOpen
               ? filterItems(items, itemToString, inputValue).map(
                   (item, index) => {
