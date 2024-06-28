@@ -20,6 +20,7 @@
 @use '../../spacing' as *;
 @use '../../motion' as *;
 @use '../../layer' as *;
+@use '../../layer/layer-tokens';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/rotate' as *;
 @use '../../utilities/box-shadow' as *;
@@ -699,6 +700,10 @@
 
   .#{$prefix}--tabs--contained ~ .#{$prefix}--tab-content {
     background: $layer;
+
+    > * {
+      @include layer-tokens.emit-layer-tokens(2);
+    }
   }
 
   .#{$prefix}--tabs--vertical ~ .#{$prefix}--tab-content {
