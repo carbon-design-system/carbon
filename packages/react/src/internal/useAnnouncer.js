@@ -7,6 +7,9 @@
 
 export function useAnnouncer(textCount, maxCount, entityName = 'characters') {
   const lastTen = maxCount - 10;
+  if (textCount == maxCount) {
+    return `Maximum ${entityName} reached.`;
+  }
   if (textCount >= lastTen) {
     return `${maxCount - textCount} ${entityName} left.`;
   }

@@ -459,7 +459,12 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
         )}
         {input}
         {normalizedSlug}
-        <span className={`${prefix}--text-area__counter-alert`} role="alert">
+        <span
+          className={`${prefix}--text-area__counter-alert`}
+          role="alert"
+          aria-atomic="true"
+          // aria-live="polite"
+        >
           {ariaAnnouncement}
         </span>
         {isFluid && <hr className={`${prefix}--text-area__divider`} />}
