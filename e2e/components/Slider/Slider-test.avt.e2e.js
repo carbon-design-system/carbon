@@ -105,6 +105,14 @@ test.describe('@avt Slider', () => {
   });
 
   test.slow('@avt-keyboard-nav slider with custom format', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Slider',
+      id: 'components-slider--slider-with-custom-value-label',
+      globals: {
+        theme: 'white',
+      },
+    });
+
     // Test for label changes
     // Initial value
     await page.keyboard.press('Tab');
