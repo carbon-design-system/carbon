@@ -316,7 +316,6 @@ const TextInput = React.forwardRef(function TextInput(
   );
 
   const { isFluid } = useContext(FormContext);
-  // const ariaAnnouncement = useAnnouncer(textCount, maxCount);
   const announcerRef = useRef(null);
   const [prevAnnouncement, setPrevAnnouncement] = useState('');
   const ariaAnnouncement = useAnnouncer(textCount, maxCount);
@@ -326,7 +325,6 @@ const TextInput = React.forwardRef(function TextInput(
       if (announcer) {
         // Clear the content first
         announcer.textContent = '';
-
         // Set the new content after a small delay
         setTimeout(() => {
           if (announcer) {

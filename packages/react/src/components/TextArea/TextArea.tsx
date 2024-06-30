@@ -427,7 +427,6 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       if (announcer) {
         // Clear the content first
         announcer.textContent = '';
-
         // Set the new content after a small delay
         setTimeout(
           () => {
