@@ -4,7 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 // @ts-nocheck
 import React from 'react';
 import { Button, ButtonSkeleton } from '@carbon/react';
@@ -43,27 +42,11 @@ figma.connect(
       }),
       renderIcon: figma.instance('Swap icon'),
     },
-    example: ({
-      size,
-      kind,
-      isExpressive,
-      hasIconOnly,
-      renderIcon,
-      disabled,
-      buttonText,
-    }) => {
+    example: ({ ...props, buttonText }) => {
       return (
-        // Disclaimer: Code Connect is currently in beta and integration with Carbon
-        // React is in an exploratory phase. Code sample below may be incomplete.
-        <Button
-          size={size}
-          kind={kind}
-          isExpressive={isExpressive}
-          hasIconOnly={hasIconOnly}
-          renderIcon={renderIcon}
-          disabled={disabled}>
-          {buttonText}
-        </Button>
+        // Code Connect integration for Carbon React is in an exploratory phase.
+        // Code sample below may be incomplete.
+        <Button {...props}>{buttonText}</Button>
       );
     },
   }
@@ -85,8 +68,8 @@ figma.connect(
     },
     example: ({ size }) => {
       return (
-        // Disclaimer: Code Connect is currently in beta and integration with Carbon
-        // React is in an exploratory phase. Code sample below may be incomplete.
+        // Code Connect integration for Carbon React is in an exploratory phase.
+        // Code sample below may be incomplete.
         <ButtonSkeleton size={size} />
       );
     },

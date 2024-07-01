@@ -4,7 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 // @ts-nocheck
 import React from 'react';
 import { CodeSnippet, CodeSnippetSkeleton } from '@carbon/react';
@@ -16,8 +15,8 @@ figma.connect(
   {
     example: () => {
       return (
-        // Disclaimer: Code Connect is currently in beta and integration with Carbon
-        // React is in an exploratory phase. Code sample below may be incomplete.
+        // Code Connect integration for Carbon React is in an exploratory phase.
+        // Code sample below may be incomplete.
         <div>{/* To view CodeSnippet code, view inner component */}</div>
       );
     },
@@ -34,8 +33,8 @@ figma.connect(
     },
     example: ({ children }) => {
       return (
-        // Disclaimer: Code Connect is currently in beta and integration with Carbon
-        // React is in an exploratory phase. Code sample below may be incomplete.
+        // Code Connect integration for Carbon React is in an exploratory phase.
+        // Code sample below may be incomplete.
         <CodeSnippet type="inline" feedback="Copied to clipboard">
           {children}
         </CodeSnippet>
@@ -54,8 +53,8 @@ figma.connect(
     },
     example: ({ children }) => {
       return (
-        // Disclaimer: Code Connect is currently in beta and integration with Carbon
-        // React is in an exploratory phase. Code sample below may be incomplete.
+        // Code Connect integration for Carbon React is in an exploratory phase.
+        // Code sample below may be incomplete.
         <CodeSnippet type="single" feedback="Copied to clipboard">
           {children}
         </CodeSnippet>
@@ -78,8 +77,8 @@ figma.connect(
       expanded: figma.boolean('Expanded'),
     },
     example: ({ hideCopyButton }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
+      // Code Connect integration for Carbon React is in an exploratory phase.
+      // Code sample below may be incomplete.
       <CodeSnippet
         type="multi"
         feedback="Copied to clipboard"
@@ -97,8 +96,8 @@ figma.connect(
   {
     variant: { State: 'Skeleton' },
     example: () => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
+      // Code Connect integration for Carbon React is in an exploratory phase.
+      // Code sample below may be incomplete.
       <CodeSnippetSkeleton type="multi" />
     ),
   }

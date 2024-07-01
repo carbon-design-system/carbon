@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// @ts-nocheck
 import React from 'react';
 import {
   InlineNotification,
@@ -61,8 +60,8 @@ figma.connect(
       lowContrast,
       inline,
     }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
+      // Code Connect integration for Carbon React is in an exploratory phase.
+      // Code sample below may be incomplete.
       <ActionableNotification
         inline={inline}
         kind={kind}
@@ -87,8 +86,8 @@ figma.connect(
 
     props: sharedNotificationProps,
     example: ({ title, kind, subtitle, hideCloseButton }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
+      // Code Connect integration for Carbon React is in an exploratory phase.
+      // Code sample below may be incomplete.
       <InlineNotification
         title={title}
         kind={kind}
@@ -106,8 +105,8 @@ figma.connect(
     variant: { Type: 'Inline long' },
     props: sharedNotificationProps,
     example: ({ title, kind, subtitle, hideCloseButton, lowContrast }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
+      // Code Connect integration for Carbon React is in an exploratory phase.
+      // Code sample below may be incomplete.
       <InlineNotification
         title={title}
         kind={kind}
@@ -126,8 +125,8 @@ figma.connect(
     variant: { Type: 'Toast' },
     props: sharedNotificationProps,
     example: ({ title, kind, subtitle, caption, lowContrast }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
+      // Code Connect integration for Carbon React is in an exploratory phase.
+      // Code sample below may be incomplete.
       <ToastNotification
         kind={kind}
         title={title}

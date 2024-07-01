@@ -49,34 +49,7 @@ figma.connect(
         'Read-only': true,
       }),
     },
-    example: ({
-      helperText,
-      labelText,
-      indeterminate,
-      checked,
-      invalidText,
-      warnText,
-      disabled,
-      readOnly,
-      invalid,
-      warn,
-      hideLabel,
-    }) => (
-      <Checkbox
-        id="your_checkbox_id"
-        labelText={labelText}
-        helperText={helperText}
-        indeterminate={indeterminate}
-        checked={checked}
-        warnText={warnText}
-        invalidText={invalidText}
-        disabled={disabled}
-        readOnly={readOnly}
-        invalid={invalid}
-        warn={warn}
-        hideLabel={hideLabel}
-      />
-    ),
+    example: ({ ...props }) => <Checkbox id="your_checkbox_id" {...props} />,
   }
 );
 
@@ -86,8 +59,7 @@ figma.connect(
   {
     variant: { State: 'Skeleton' },
     example: () => (
-      // Disclaimer: Code Connect is currently in beta and
-      // integration with Carbon React is in an exploratory phase.
+      // Code Connect integration for Carbon React is in an exploratory phase.
       // Code sample below may be incomplete.
       <CheckboxSkeleton />
     ),
