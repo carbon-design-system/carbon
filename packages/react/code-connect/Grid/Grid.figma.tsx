@@ -18,11 +18,12 @@ figma.connect(
         Breakpoint7: 'breakpoint7',
         Breakpoint8: 'breakpoint8',
       }),
+      children: figma.children('*'),
     },
-    example: () => (
+    example: ({ children }) => (
       // Disclaimer: Code Connect is currently in beta and integration with Carbon
       // React is in an exploratory phase. Code sample below is incomplete.
-      <Grid></Grid>
+      <Grid>{children}</Grid>
     ),
   }
 );

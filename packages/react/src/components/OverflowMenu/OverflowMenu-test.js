@@ -10,7 +10,7 @@ import OverflowMenu from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import { Filter } from '@carbon/icons-react';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
@@ -170,6 +170,30 @@ describe('OverflowMenu', () => {
         'aria-expanded',
         'true'
       );
+    });
+
+    it('should call onClick handler only once per click', async () => {
+      const handleClick = jest.fn();
+
+      render(
+        <OverflowMenu
+          open
+          aria-label="Overflow menu"
+          className="extra-class"
+          onClick={handleClick}>
+          <OverflowMenuItem className="test-child" itemText="one" />
+          <OverflowMenuItem className="test-child" itemText="two" />
+        </OverflowMenu>
+      );
+
+      // Find the OverflowMenu button
+      const button = screen.getByRole('button');
+
+      // Click the OverflowMenu button
+      await userEvent.click(button);
+
+      // Check that the click handler was called only once
+      expect(handleClick).toHaveBeenCalledTimes(1);
     });
   });
 });
