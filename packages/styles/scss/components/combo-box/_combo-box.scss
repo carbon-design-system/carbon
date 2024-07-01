@@ -38,7 +38,9 @@
   }
 
   .#{$prefix}--list-box--expanded
-    .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
+    .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input:not(
+      .#{$prefix}--text-input--empty
+    ) {
     outline-offset: convert.to-rem(-1px);
     outline-width: convert.to-rem(1px);
   }
