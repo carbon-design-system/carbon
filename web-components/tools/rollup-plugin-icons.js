@@ -7,9 +7,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const path = require('path');
-const { createFilter } = require('@rollup/pluginutils');
-const createSVGResultCarbonIcon = require('./svg-result-carbon-icon');
+import path from 'path';
+import { createFilter } from '@rollup/pluginutils'
+import icon from './svg-result-carbon-icon.js';
 
 /**
  * @param {object} [options] The options.
@@ -17,7 +17,7 @@ const createSVGResultCarbonIcon = require('./svg-result-carbon-icon');
  * @param {RegExp} [options.exclude] The files to exclude.
  * @returns {object} The rollup plugin to transform an `.svg` file to a `lit-html` template.
  */
-function rollupPluginIcons({
+export default function rollupPluginIcons({
   include = /@carbon[\\/]icons[\\/]/i,
   exclude,
 } = {}) {
@@ -57,7 +57,7 @@ function rollupPluginIcons({
           __dirname,
           '../src/globals/directives/spread'
         )}';`,
-        `const svgResultCarbonIcon = ${createSVGResultCarbonIcon(svg)};`,
+        `const svgResultCarbonIcon = ${icon(svg)};`,
         `export default svgResultCarbonIcon;`,
       ].join(';');
 
@@ -71,4 +71,3 @@ function rollupPluginIcons({
   };
 }
 
-module.exports = rollupPluginIcons;

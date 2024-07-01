@@ -7,10 +7,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const path = require('path');
-const { promisify } = require('util');
-const sass = require('sass');
-const { createFilter } = require('@rollup/pluginutils');
+import path from 'path';
+import { promisify }from 'util';
+import * as sass from 'sass';
+import { createFilter } from '@rollup/pluginutils';
 
 const renderSass = promisify(sass.render);
 const noop = (s) => s;
@@ -32,7 +32,7 @@ function transformToTemplate(css) {
  * @param {Function} [options.preprocessor] The CSS preprocessor to use.
  * @returns {object} The rollup plugin to transform an `.scss` file to a `lit-html` template.
  */
-function rollupPluginLitSCSS({
+export default function LitSCSS({
   include = /\.scss$/i,
   exclude,
   preprocessor = noop,
@@ -87,5 +87,3 @@ function rollupPluginLitSCSS({
     },
   };
 }
-
-module.exports = rollupPluginLitSCSS;
