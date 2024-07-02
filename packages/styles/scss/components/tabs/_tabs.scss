@@ -20,6 +20,7 @@
 @use '../../spacing' as *;
 @use '../../motion' as *;
 @use '../../layer' as *;
+@use '../../layer/layer-tokens';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/rotate' as *;
 @use '../../utilities/box-shadow' as *;
@@ -32,6 +33,7 @@
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert';
 @use '../../utilities/layout';
+@use '../../utilities/update_fields_on_layer' as *;
 
 /// Tabs styles
 /// @access public
@@ -59,6 +61,7 @@
     inline-size: 100%;
     max-block-size: custom-property.get-var('layout-size-height-xl');
     min-block-size: layout.size('height');
+    overflow-x: hidden;
 
     &.#{$prefix}--tabs--contained {
       @include layout.use('size', $min: 'sm', $max: 'xl', $default: 'lg');
@@ -74,6 +77,42 @@
 
       &::-webkit-scrollbar {
         display: none;
+      }
+    }
+
+    &.#{$prefix}--tabs--vertical {
+      background: $layer;
+      box-shadow: inset -1px 0 $border-subtle;
+      grid-column: span 2;
+      max-block-size: none;
+
+      @include breakpoint(lg) {
+        grid-column: span 4;
+      }
+
+      .#{$prefix}--tab--list {
+        flex-direction: column;
+        inline-size: 100%;
+        overflow-x: visible;
+        overflow-y: auto;
+      }
+
+      .#{$prefix}--tab--list-gradient_bottom {
+        position: absolute;
+        background: linear-gradient(to bottom, transparent, $layer);
+        block-size: $spacing-10;
+        inset-block-end: 0;
+        inset-inline: 0;
+        pointer-events: none;
+      }
+
+      .#{$prefix}--tab--list-gradient_top {
+        position: absolute;
+        background: linear-gradient(to top, transparent, $layer);
+        block-size: $spacing-10;
+        inset-block-start: 0;
+        inset-inline: 0;
+        pointer-events: none;
       }
     }
 
@@ -283,7 +322,18 @@
       margin-inline-start: 0;
     }
 
-    &.#{$prefix}--tabs--contained
+    &.#{$prefix}--tabs--vertical .#{$prefix}--tabs__nav-item {
+      flex: none;
+      background-color: $layer-01;
+      block-size: $spacing-10;
+      border-block-end: 1px solid $border-subtle;
+      border-inline-end: 1px solid $border-subtle;
+      box-shadow: inset 3px 0 0 0 $border-subtle;
+      inline-size: 100%;
+      margin-inline-start: 0;
+    }
+
+    &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--vertical)
       .#{$prefix}--tabs__nav-item--selected
       + div
       + .#{$prefix}--tabs__nav-item {
@@ -432,7 +482,8 @@
       }
     }
 
-    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-link {
+    &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--vertical)
+      .#{$prefix}--tabs__nav-link {
       border-block-end: 0;
       padding-inline: layout.density('padding-inline');
     }
@@ -447,6 +498,11 @@
       @include type-style('label-01');
 
       min-block-size: convert.to-rem(16px);
+    }
+
+    &.#{$prefix}--tabs--vertical:not(.#{$prefix}--tabs--tall)
+      .#{$prefix}--tabs__nav-item-label {
+      line-height: var(--cds-body-compact-01-line-height);
     }
 
     //-----------------------------
@@ -492,6 +548,16 @@
       color: $text-primary;
     }
 
+    &.#{$prefix}--tabs--vertical
+      .#{$prefix}--tabs__nav-item:not(
+        .#{$prefix}--tabs__nav-item--selected
+      ):not(.#{$prefix}--tabs__nav-item--disabled):not(
+        .#{$prefix}--tabs__nav-item--hover-off
+      ):hover {
+      background-color: $layer-hover;
+      box-shadow: inset 3px 0 0 0 $border-strong;
+    }
+
     //-----------------------------
     // Item Selected
     //-----------------------------
@@ -510,6 +576,13 @@
       .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected {
       // Draws the border without affecting the inner-content
       box-shadow: inset 0 2px 0 0 $border-interactive;
+    }
+
+    &.#{$prefix}--tabs--vertical
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected {
+      border-inline: none;
+      // Draws the border without affecting the inner-content
+      box-shadow: inset 3px 0 0 0 $border-interactive;
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected,
@@ -572,6 +645,14 @@
       background-color: button.$button-disabled;
     }
 
+    &.#{$prefix}--tabs--vertical
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
+    &.#{$prefix}--tabs--vertical
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
+      background-color: $layer;
+      border-block-end: 1px solid $border-subtle;
+    }
+
     .#{$prefix}--tabs__nav-item--disabled:focus,
     .#{$prefix}--tabs__nav-item--disabled:active {
       border-block-end: $tab-underline-disabled;
@@ -600,7 +681,8 @@
       border-block-end-color: $border-subtle;
     }
 
-    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--disabled {
+    &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--vertical)
+      .#{$prefix}--tabs__nav-item--disabled {
       border-block-end: none;
       color: $text-on-color-disabled;
     }
@@ -618,6 +700,21 @@
 
   .#{$prefix}--tabs--contained ~ .#{$prefix}--tab-content {
     background: $layer;
+
+    > * {
+      @include layer-tokens.emit-layer-tokens(2);
+    }
+  }
+
+  .#{$prefix}--tabs--vertical ~ .#{$prefix}--tab-content {
+    @include update_fields_on_layer;
+
+    grid-column: 3/-1;
+    overflow-y: auto;
+
+    @include breakpoint(lg) {
+      grid-column: 5/-1;
+    }
   }
 
   .#{$prefix}--tab-content--interactive {
@@ -687,6 +784,19 @@
     }
     .#{$prefix}--tabs__nav-item--icon {
       margin-inline-start: auto;
+    }
+  }
+}
+
+.#{$prefix}--tabs.#{$prefix}--tabs--vertical {
+  .#{$prefix}--tabs__nav-link {
+    .#{$prefix}--tabs__nav-item-label {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      text-overflow: ellipsis;
+      white-space: normal;
     }
   }
 }
