@@ -480,7 +480,7 @@ const ComboBox = forwardRef(
               setInputValue(inputValue);
               setHighlightedIndex(changes.selectedItem);
               if (onChange) {
-                onChange({ selectedItem: changes.selectedItem });
+                onChange({ selectedItem: changes.selectedItem, inputValue });
               }
               return changes;
             } else if (changes.selectedItem && !allowCustomValue) {
@@ -723,6 +723,13 @@ const ComboBox = forwardRef(
                           highlightedIndex
                         ]
                       );
+                    }
+
+                    // Since `onChange` does not normally fire when the menu is closed, we should
+                    // manually fire it when `allowCustomValue` is provided, the menu is closing,
+                    // and there is a value.
+                    if (allowCustomValue && isOpen && inputValue) {
+                      onChange({ selectedItem, inputValue });
                     }
 
                     event.preventDownshiftDefault = true;
