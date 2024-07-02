@@ -89,19 +89,10 @@ export const Single = () => {
 export const Skeleton = () => <CheckboxSkeleton />;
 
 export const Nested = () => {
-  const [test, setTest] = useState(true);
-  const updater = (a, up) => {
-    setTest(up.checked);
-  };
   return (
     <CheckboxGroup {...fieldsetCheckboxProps()}>
       <NestedCheckbox labelText={`Parent label`} id="parent-checkbox-label-1">
-        <Checkbox
-          checked={test}
-          onChange={updater}
-          labelText={`Child label 1`}
-          id="checkbox-label-1"
-        />
+        <Checkbox labelText={`Child label 1`} id="checkbox-label-1" />
         <Checkbox labelText={`Child label 2`} id="checkbox-label-2" />
         <NestedCheckbox
           labelText={`Parent label 2`}
