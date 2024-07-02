@@ -238,8 +238,8 @@ export default class ContentSwitcher extends React.Component<
       //         (this.state?.prevSelectedIndex ?? 0)
       //     )
       // }ms`,
-      '--prev-selected-index': this.state?.prevSelectedIndex ?? 0,
-      '--selected-index': this.state?.selectedIndex ?? 0,
+      [`--${prefix}-prev-selected-index`]: this.state?.prevSelectedIndex ?? 0,
+      [`--${prefix}-selected-index`]: this.state?.selectedIndex ?? 0,
     };
 
     const iconOnlyProps: { iconOnlySlide?: boolean } = {};

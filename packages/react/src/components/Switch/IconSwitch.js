@@ -76,7 +76,7 @@ const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
     size,
   };
 
-  const styleIndex = { style: { '--index': index } };
+  const styleIndex = { style: { [`--${prefix}-index`]: index } };
 
   return (
     <IconButton
