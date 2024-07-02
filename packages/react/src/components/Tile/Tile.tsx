@@ -707,6 +707,7 @@ export const ExpandableTile = React.forwardRef<
   const [interactive, setInteractive] = useState<boolean>(true);
   const aboveTheFold = useRef<HTMLDivElement>(null);
   const belowTheFold = useRef<HTMLDivElement>(null);
+  const chevronInteractiveRef = useRef<HTMLButtonElement>(null);
   const tileContent = useRef<HTMLDivElement>(null);
   const tile = useRef<HTMLElement>(null);
   const ref = useMergedRefs([forwardRef, tile]);
@@ -745,7 +746,10 @@ export const ExpandableTile = React.forwardRef<
   }
 
   function handleKeyUp(evt: KeyboardEvent) {
-    if (evt.target !== tile.current) {
+    if (
+      evt.target !== tile.current &&
+      evt.target !== chevronInteractiveRef.current
+    ) {
       if (matches(evt, [keys.Enter, keys.Space])) {
         evt.preventDefault();
       }
@@ -876,6 +880,7 @@ export const ExpandableTile = React.forwardRef<
           onKeyUp={composeEventHandlers([onKeyUp, handleKeyUp])}
           onClick={composeEventHandlers([onClick, handleClick])}
           aria-label={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
+          ref={chevronInteractiveRef}
           className={chevronInteractiveClassNames}>
           <ChevronDown />
         </button>
