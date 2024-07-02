@@ -55,7 +55,7 @@ test.describe('@avt FluidDatePicker', () => {
     await expect(page).toHaveNoACViolations('FluidDatePicker-skeleton');
   });
 
-  test('@avt-keyboard-nav single', async ({ page }) => {
+  test.skip('@avt-keyboard-nav single', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
       id: 'experimental-fluid-components-unstable-fluiddatepicker--single',

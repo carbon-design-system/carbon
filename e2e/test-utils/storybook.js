@@ -6,6 +6,7 @@
  */
 
 const { snapshot } = require('./snapshot');
+const { expect } = require('@playwright/test');
 
 async function visitStory(page, options) {
   const { component, story, id, globals, args } = options;
@@ -34,6 +35,7 @@ async function visitStory(page, options) {
   }
 
   await page.goto(url);
+  await expect(page).toContainAStory(options);
 }
 
 function getStoryUrl({ component, story, id }) {

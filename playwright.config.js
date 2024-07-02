@@ -118,4 +118,43 @@ expect.extend({
   },
 });
 
+expect.extend({
+  async toContainAStory(page, options) {
+    let pass;
+    try {
+      /**
+       * This isn't a foolproof way to determine that an actual story
+       * has been rendered, but it should determine if a storybook
+       * error page is present or not.
+       */
+      await expect(page.locator('css=.cds--layout')).toBeInViewport();
+      pass = true;
+    } catch (e) {
+      pass = false;
+    }
+
+    if (pass) {
+      return {
+        pass: true,
+      };
+    } else {
+      return {
+        pass: false,
+        message:
+          () => `An element with the "cds--layout" class was not found at url:
+          ${page.url()}
+
+          The url is probably invalid and does not render a story.
+          Check the url locally, and verify the parameters passed to visitStory are correct.
+
+          component: ${options.component} 
+          story: ${options.story} 
+          id: ${options.id} 
+          globals: ${JSON.stringify(options.globals)} 
+          args: ${JSON.stringify(options.args)}`,
+      };
+    }
+  },
+});
+
 module.exports = config;
