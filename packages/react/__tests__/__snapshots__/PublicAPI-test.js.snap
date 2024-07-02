@@ -1115,6 +1115,9 @@ Map {
       "autoAlign": Object {
         "type": "bool",
       },
+      "autocomplete": Object {
+        "type": "bool",
+      },
       "className": Object {
         "type": "string",
       },

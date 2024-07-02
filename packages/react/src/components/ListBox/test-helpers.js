@@ -7,7 +7,7 @@
 
 const prefix = 'cds';
 import userEvent from '@testing-library/user-event';
-import { act } from 'react';
+import { act } from '@testing-library/react';
 
 // Finding nodes in a ListBox
 export const findListBoxNode = () => {
