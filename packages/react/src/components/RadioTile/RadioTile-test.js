@@ -123,5 +123,13 @@ describe('RadioTile', () => {
       expect(ref.current.type).toEqual('radio');
       expect(ref.current.value).toEqual('some test value');
     });
+    it('should pass "required" prop to the input element', () => {
+      render(
+        <RadioTile required value="some test value">
+          Option 1
+        </RadioTile>
+      );
+      expect(screen.getByRole('radio')).toHaveAttribute('required');
+    });
   });
 });

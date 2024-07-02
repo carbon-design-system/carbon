@@ -1,0 +1,89 @@
+import { Canvas, Story } from '@storybook/blocks';
+import * as InteractiveTagStories from './InteractiveTag.stories';
+
+# Interactive Tag
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Tag)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tag/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tag/accessibility)
+
+## Overview
+
+Tags can be used to categorize items. Use short labels for easy scanning. Use
+two words only if necessary to describe the status and differentiate it from
+other tags.
+
+## Dismissible
+
+Dismissible tags are used to remove tags that can be filtered out by the user.
+
+When to use:
+
+- Use DismissibleTag when you want to allow users to easily clear or dismiss
+  specific filters applied to items.
+
+<Canvas>
+  <Story of={InteractiveTagStories.Dismissible} />
+</Canvas>
+
+```jsx
+<DismissibleTag
+  type="red"
+  className="some-class"
+  title="Clear Filter"
+  renderIcon={AsSleep}>
+  {'Tag content'}
+</DismissibleTag>
+```
+
+## Selectable
+
+Selectable tags are used to select or unselect single or multiple items.
+Selectable tags can also be used in filtering by label scenarios when they do
+not need to be dismissed.
+
+When to use:
+
+- Use selectable tags to toggle between a selected or unselected state.
+- Use when needing to filter without an explicit dismissable functionality. (We
+  need to be a little more specific around filtering for selectable versus
+  dismissable tags).
+
+<Canvas>
+  <Story of={InteractiveTagStories.Selectable} />
+</Canvas>
+
+```jsx
+<SelectableTag className="some-class" renderIcon={Asleep}>
+  {'Tag content'}
+</SelectableTag>
+```
+
+## Operational
+
+Operational tags enable the user to view a list of all items associated with a
+given tag in different ways.
+
+When to use:
+
+- Use to view a list of items with the same tag in a toggletip, popover, or
+  breadcrumb detail view.
+
+When not to use:
+
+- Do not use operational tags as a replacement for links that direct you to an
+  entirely different page or launch you out to another tab.
+- Do not use in combination with Dismissable tags. Instead, consider letting the
+  user enter an "edit mode" to dismiss tags.
+
+<Canvas>
+  <Story of={InteractiveTagStories.Operational} />
+</Canvas>
+
+```jsx
+<OperationalTag type="red" className="some-class" renderIcon={Asleep}>
+  {'Tag content'}
+</OperationalTag>
+```

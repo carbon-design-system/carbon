@@ -9,6 +9,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import RadioButton from '../RadioButton';
+import { Slug } from '../../Slug';
+
+const prefix = 'cds';
 
 describe('RadioButton', () => {
   it('should render an input with type="radio"', () => {
@@ -131,5 +134,32 @@ describe('RadioButton', () => {
       />
     );
     expect(ref).toHaveBeenCalledWith(screen.getByRole('radio'));
+  });
+
+  it('should respect slug prop', () => {
+    const { container } = render(
+      <RadioButton
+        name="test-name"
+        value="test-value"
+        labelText="test-label"
+        slug={<Slug />}
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--radio-button-wrapper--slug`
+    );
+  });
+
+  it('should set the "required" attribute on the <input> by default', () => {
+    render(
+      <RadioButton
+        name="test-name"
+        value="test-value"
+        labelText="test-label"
+        required
+      />
+    );
+    expect(screen.getByRole('radio')).toHaveAttribute('required');
   });
 });

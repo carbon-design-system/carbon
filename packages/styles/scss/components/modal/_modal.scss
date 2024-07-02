@@ -17,6 +17,7 @@
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/update_fields_on_layer' as *;
 @use '../../utilities/z-index' as *;
 
 /// Modal styles
@@ -51,98 +52,7 @@
       }
     }
 
-    // V11: Question for design: do we have an updated tokens for fields that exist on `layer`?
-    .#{$prefix}--pagination,
-    .#{$prefix}--pagination__control-buttons,
-    .#{$prefix}--text-input,
-    .#{$prefix}--text-area,
-    .#{$prefix}--search-input,
-    .#{$prefix}--select-input,
-    .#{$prefix}--dropdown,
-    .#{$prefix}--dropdown-list,
-    .#{$prefix}--number input[type='number'],
-    .#{$prefix}--date-picker__input,
-    .#{$prefix}--multi-select,
-    .#{$prefix}--number__control-btn::before,
-    .#{$prefix}--number__control-btn::after,
-    .#{$prefix}--list-box input[role='combobox'] {
-      background-color: $field-02;
-    }
-
-    // Override to align layer token with field
-    .#{$prefix}--list-box__menu {
-      background-color: $layer-02;
-    }
-
-    .#{$prefix}--number__rule-divider {
-      background-color: $border-subtle-02;
-    }
-
-    .#{$prefix}--list-box__menu-item__option {
-      border-block-start-color: $border-subtle-02;
-    }
-
-    .#{$prefix}--list-box__menu-item:hover
-      .#{$prefix}--list-box__menu-item__option {
-      border-block-start-color: $layer-hover-02;
-    }
-
-    .#{$prefix}--list-box__menu-item--active:hover
-      .#{$prefix}--list-box__menu-item__option {
-      border-block-start-color: $layer-selected-hover-02;
-    }
-
-    // Fluid inputs
-    .#{$prefix}--text-input--fluid .#{$prefix}--text-input,
-    .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper,
-    .#{$prefix}--text-area--fluid .#{$prefix}--text-area,
-    .#{$prefix}--search--fluid .#{$prefix}--search-input,
-    .#{$prefix}--select--fluid .#{$prefix}--select-input,
-    .#{$prefix}--text-area--fluid
-      .#{$prefix}--text-area__wrapper[data-invalid]
-      .#{$prefix}--text-area__divider
-      + .#{$prefix}--form-requirement,
-    .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box,
-    .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper,
-    .#{$prefix}--number-input--fluid input[type='number'],
-    .#{$prefix}--number-input--fluid .#{$prefix}--number__control-btn::before,
-    .#{$prefix}--number-input--fluid .#{$prefix}--number__control-btn::after,
-    .#{$prefix}--date-picker--fluid
-      .c#{$prefix}ds--date-picker-input__wrapper
-      .#{$prefix}--date-picker__input {
-      background-color: $field-01;
-    }
-
-    // Override to align layer token with field
-    .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__menu {
-      background-color: $layer-01;
-    }
-
-    .#{$prefix}--list-box__menu-item:hover {
-      background-color: $layer-hover-02;
-    }
-
-    .#{$prefix}--list-box__menu-item--active {
-      background-color: $layer-selected-02;
-    }
-
-    .#{$prefix}--list-box__menu-item--active:hover {
-      background-color: $layer-selected-hover-02;
-    }
-
-    .#{$prefix}--number-input--fluid
-      .#{$prefix}--number__control-btn:hover::before,
-    .#{$prefix}--number-input--fluid
-      .#{$prefix}--number__control-btn:hover::after {
-      background-color: $field-hover;
-    }
-
-    .#{$prefix}--number-input--fluid
-      .#{$prefix}--number__control-btn:focus::before,
-    .#{$prefix}--number-input--fluid
-      .#{$prefix}--number__control-btn:focus::after {
-      border-inline-start: 2px solid $focus;
-    }
+    @include update_fields_on_layer;
   }
 
   .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
@@ -350,58 +260,25 @@
   .#{$prefix}--modal-scroll-content {
     // Required to accommodate focus outline's negative offset when scrolling in Chrome
     border-block-end: 2px solid transparent;
+    mask-image: linear-gradient(
+        to bottom,
+        $layer calc(100% - 80px),
+        transparent calc(100% - 48px),
+        transparent 100%
+      ),
+      linear-gradient(to left, $layer 0, 16px, transparent 16px),
+      linear-gradient(to right, $layer 0, 2px, transparent 2px),
+      linear-gradient(to top, $layer 0, 2px, transparent 2px);
   }
+
+  //removing mask image in case we have dropdown in modal
+  .#{$prefix}--modal-scroll-content:has(.#{$prefix}--dropdown--autoalign) {
+    mask-image: none;
+  }
+
   // Required so overflow-indicator disappears at end of content
   .#{$prefix}--modal-scroll-content > *:last-child {
-    padding-block-end: $spacing-06;
-  }
-
-  .#{$prefix}--modal-content--overflow-indicator {
-    position: absolute;
-    background: $layer;
-    block-size: convert.to-rem(48px);
-    grid-column: 1/-1;
-    grid-row: 2/-2;
-    inline-size: calc(100% - $spacing-05);
-    inset-block-end: 0;
-    inset-inline-start: 0;
-    pointer-events: none;
-
-    &::before {
-      position: absolute;
-      background-image: linear-gradient(to bottom, transparent, $layer);
-      block-size: convert.to-rem(32px);
-      content: '';
-      inline-size: 100%;
-      inset-block-start: -32px;
-      pointer-events: none;
-    }
-  }
-
-  // Safari-only media query
-  // won't appear correctly with CSS custom properties
-  // see: code snippet and tabs overflow indicators
-  @media not all and (min-resolution >= 0.001dpcm) {
-    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-      .#{$prefix}--modal-content--overflow-indicator {
-        background-image: linear-gradient(to bottom, rgba($layer, 0), $layer);
-      }
-    }
-  }
-
-  .#{$prefix}--modal-content:focus
-    ~ .#{$prefix}--modal-content--overflow-indicator {
-    margin: 0 2px 2px;
-  }
-
-  @media screen and (-ms-high-contrast: active) {
-    .#{$prefix}--modal-scroll-content > *:last-child {
-      padding-block-end: 0;
-    }
-
-    .#{$prefix}--modal-content--overflow-indicator {
-      display: none;
-    }
+    margin-block-end: $spacing-06;
   }
 
   // -----------------------------
@@ -477,7 +354,8 @@
   .#{$prefix}--body--with-modal-open .#{$prefix}--modal .#{$prefix}--tooltip,
   .#{$prefix}--body--with-modal-open
     .#{$prefix}--modal
-    .#{$prefix}--overflow-menu-options {
+    .#{$prefix}--overflow-menu-options,
+  .#{$prefix}--body--with-modal-open .#{$prefix}--overflow-menu-options {
     z-index: z('modal');
   }
 
@@ -488,27 +366,39 @@
   }
 
   // Slug styles
+  .#{$prefix}--modal--slug.#{$prefix}--modal {
+    background-color: $ai-overlay;
+  }
+
   .#{$prefix}--modal--slug .#{$prefix}--modal-container {
-    @include callout-gradient();
+    @include ai-popover-gradient('default', 0, 'layer');
 
+    border: 1px solid transparent;
     background-color: $layer;
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+      0 24px 40px -24px $ai-drop-shadow;
   }
 
-  // Start the gradient 64px from bottom only when two buttons are present
   .#{$prefix}--modal--slug
-    .#{$prefix}--modal-container:has(
-      .#{$prefix}--btn-set:not(.#{$prefix}--modal-footer--three-button)
-        > button:not(:only-child)
-    ) {
-    @include callout-gradient('default', 64px);
+    .#{$prefix}--modal-container:has(.#{$prefix}--modal-footer) {
+    @include ai-popover-gradient('default', 64px, 'layer');
 
-    background-color: $layer;
+    box-shadow: inset 0 -80px 0 -16px $layer,
+      inset 0 -160px 70px -65px $ai-inner-shadow,
+      0 24px 40px -24px $ai-drop-shadow;
   }
 
-  .#{$prefix}--modal--slug .#{$prefix}--slug {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-end: 0;
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content {
+    mask-image: linear-gradient(
+        to bottom,
+        $layer calc(100% - 80px),
+        transparent calc(100% - 48px),
+        transparent 100%
+      ),
+      linear-gradient(to left, $layer 0, 16px, transparent 16px),
+      linear-gradient(to right, $layer 0, 2px, transparent 2px),
+      linear-gradient(to top, $layer 0, 2px, transparent 2px);
   }
 
   .#{$prefix}--modal-header
@@ -519,11 +409,19 @@
   .#{$prefix}--modal--slug
     .#{$prefix}--modal-container-body
     > .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: convert.to-rem(10px);
     inset-inline-end: convert.to-rem(48px);
   }
 
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-content--overflow-indicator::before,
+  .#{$prefix}--modal--slug .#{$prefix}--modal-content--overflow-indicator {
+    display: none;
+  }
+
   // Windows HCM fix
-  /* stylelint-disable */
+  /* stylelint-disable no-duplicate-selectors */
   .#{$prefix}--modal-close__icon {
     @include high-contrast-mode('icon-fill');
   }
@@ -531,5 +429,5 @@
   .#{$prefix}--modal-close:focus {
     @include high-contrast-mode('focus');
   }
-  /* stylelint-enable */
+  /* stylelint-enable no-duplicate-selectors */
 }

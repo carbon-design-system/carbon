@@ -42,7 +42,6 @@ export function useSelection({
       if (disabled) {
         return;
       }
-
       let selectedIndex;
       selectedItems.forEach((selectedItem, index) => {
         if (isEqual(selectedItem, item)) {
@@ -61,7 +60,6 @@ export function useSelection({
         });
         return;
       }
-
       newSelectedItems = removeAtIndex(selectedItems, selectedIndex);
       callOnChangeHandler({
         isControlled,
@@ -186,7 +184,6 @@ export default class Selection extends React.Component {
       onItemChange: this.handleOnItemChange,
       clearSelection: this.handleClearSelection,
     };
-
     if (render !== undefined) {
       return render(renderProps);
     }

@@ -11,6 +11,9 @@ import userEvent from '@testing-library/user-event';
 
 import Modal from './Modal';
 import TextInput from '../TextInput';
+import { Slug } from '../Slug';
+
+const prefix = 'cds';
 
 describe('Modal', () => {
   it('should add extra classes that are passed via className', () => {
@@ -86,7 +89,7 @@ describe('Modal', () => {
       </Modal>
     );
 
-    expect(screen.getByTestId('modal-2')).toHaveClass('cds--modal-tall');
+    expect(screen.getByTestId('modal-2')).toHaveClass(`${prefix}--modal-tall`);
   });
 
   it('should be a passive modal when passiveModal is passed', () => {
@@ -105,7 +108,9 @@ describe('Modal', () => {
       </Modal>
     );
 
-    expect(screen.getByTestId('modal-3')).not.toHaveClass('cds--modal-tall');
+    expect(screen.getByTestId('modal-3')).not.toHaveClass(
+      `${prefix}--modal-tall`
+    );
   });
 
   it('should set id if one is passed via props', () => {
@@ -146,11 +151,10 @@ describe('Modal', () => {
       </Modal>
     );
 
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(document.querySelector('.cds--modal-close__icon')).toHaveAttribute(
-      'aria-hidden',
-      'true'
-    );
+    expect(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.querySelector(`.${prefix}--modal-close__icon`)
+    ).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('should not make the icon tabbable', () => {
@@ -169,11 +173,10 @@ describe('Modal', () => {
       </Modal>
     );
 
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(document.querySelector('.cds--modal-close__icon')).toHaveAttribute(
-      'focusable',
-      'false'
-    );
+    expect(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.querySelector(`.${prefix}--modal-close__icon`)
+    ).toHaveAttribute('focusable', 'false');
   });
 
   it('enables primary button by default', () => {
@@ -328,9 +331,11 @@ describe('Modal', () => {
       </Modal>
     );
 
-    expect(screen.getByTestId('modal-5')).toHaveClass('cds--modal--danger');
+    expect(screen.getByTestId('modal-5')).toHaveClass(
+      `${prefix}--modal--danger`
+    );
     expect(screen.getByText('Danger button text')).toHaveClass(
-      'cds--btn--danger'
+      `${prefix}--btn--danger`
     );
   });
 
@@ -361,6 +366,19 @@ describe('Modal', () => {
       screen.getByRole('button', { name: 'loading loading...' })
     ).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
+  });
+
+  it('should respect slug prop', () => {
+    const { container } = render(
+      <Modal
+        danger
+        primaryButtonText="Danger button text"
+        data-testid="modal-5"
+        slug={<Slug />}
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(`${prefix}--modal--slug`);
   });
 });
 

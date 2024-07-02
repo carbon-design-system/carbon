@@ -61,7 +61,7 @@ $-loading-gap-small: 110;
   .#{$prefix}--inline-loading__checkmark {
     animation-duration: 250ms;
     animation-fill-mode: forwards;
-    animation-name: stroke;
+    animation-name: #{$prefix}--stroke;
     fill: none;
     stroke: $interactive;
     stroke-dasharray: 12;

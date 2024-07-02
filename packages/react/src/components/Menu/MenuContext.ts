@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { createContext, KeyboardEvent, RefObject } from 'react';
 
 type ActionType = {
   type: 'enableIcons' | 'registerItem';
@@ -18,9 +18,7 @@ type StateType = {
   hasIcons: boolean;
   size: 'xs' | 'sm' | 'md' | 'lg' | null;
   items: any[];
-  requestCloseRoot: (
-    e: Pick<React.KeyboardEvent<HTMLUListElement>, 'type'>
-  ) => void;
+  requestCloseRoot: (e: Pick<KeyboardEvent<HTMLUListElement>, 'type'>) => void;
 };
 
 const menuDefaultState: StateType = {
@@ -49,13 +47,23 @@ function menuReducer(state: StateType, action: ActionType) {
   }
 }
 
-const MenuContext = React.createContext<{
+type DispatchFuncProps = {
+  type: 'registerItem' | 'enableIcons';
+  payload: {
+    ref: RefObject<HTMLLIElement>;
+    disabled: boolean;
+  };
+};
+
+type MenuContextProps = {
   state: StateType;
-  dispatch: React.Dispatch<any>;
-}>({
+  dispatch: (props: DispatchFuncProps) => void;
+};
+
+const MenuContext = createContext<MenuContextProps>({
   state: menuDefaultState,
   // 'dispatch' is populated by the root menu
-  dispatch: () => {},
+  dispatch: (_: DispatchFuncProps) => {},
 });
 
 export { MenuContext, menuReducer };

@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ThHTMLAttributes } from 'react';
+import { ThHTMLAttributes } from 'react';
 import wrapComponent from '../../tools/wrapComponent';
 
 export type TableHeadProps = ThHTMLAttributes<HTMLTableSectionElement>;
 
-const TableHead: React.FC<TableHeadProps> = wrapComponent({
+const TableHead = wrapComponent({
   name: 'TableHead',
   type: 'thead',
 });

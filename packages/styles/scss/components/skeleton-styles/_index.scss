@@ -6,6 +6,9 @@
 //
 
 @forward 'skeleton-styles';
+@forward 'ai-skeleton-styles';
 @use 'skeleton-styles';
+@use 'ai-skeleton-styles';
 
 @include skeleton-styles.skeleton-styles;
+@include ai-skeleton-styles.ai-skeleton-styles;

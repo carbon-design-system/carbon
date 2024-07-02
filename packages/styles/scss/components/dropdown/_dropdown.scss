@@ -93,6 +93,10 @@
     border-block-end-color: $border-subtle;
   }
 
+  .#{$prefix}--dropdown--open .cds--list-box__field {
+    outline: none;
+  }
+
   .#{$prefix}--dropdown--invalid {
     @include focus-outline('invalid');
 
@@ -480,6 +484,9 @@
   .#{$prefix}--dropdown--readonly:hover {
     background-color: transparent;
     border-block-end-color: $border-subtle;
+  }
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--readonly {
+    border-block-end-color: transparent;
   }
 
   .#{$prefix}--dropdown--readonly .#{$prefix}--list-box__field,

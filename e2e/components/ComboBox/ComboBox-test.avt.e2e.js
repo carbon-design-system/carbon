@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('ComboBox @avt', () => {
+test.describe('@avt ComboBox', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ComboBox',
@@ -38,7 +38,7 @@ test.describe('ComboBox @avt', () => {
     await page.keyboard.press('Tab');
     await expect(combobox).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(page.getByRole('combobox', { expanded: true })).toBeVisible;
+    await expect(page.getByRole('combobox', { expanded: true })).toBeVisible();
     await expect(combobox).toBeFocused();
 
     await expect(page).toHaveNoACViolations('ComboBox-open');
@@ -65,7 +65,7 @@ test.describe('ComboBox @avt', () => {
     });
 
     await expect(combobox).toBeVisible();
-    await expect(clearButton).not.toBeVisible();
+    await expect(clearButton).toBeHidden();
     // Tab and open the ComboBox with Arrow Down
     await page.keyboard.press('Tab');
     await expect(combobox).toBeFocused();
@@ -73,20 +73,19 @@ test.describe('ComboBox @avt', () => {
     await expect(menu).toBeVisible();
     // Close with Escape, retain focus, and open with Spacebar
     await page.keyboard.press('Escape');
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(combobox).toBeFocused();
     await page.keyboard.press('Space');
     await expect(menu).toBeVisible();
     // Close and clear with Escape, retain focus, and open with Enter
     await page.keyboard.press('Escape');
     await page.keyboard.press('Escape');
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(combobox).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(menu).toBeVisible();
     // Navigation inside the menu
     // move to first option
-    await page.keyboard.press('ArrowDown');
     await expect(optionOne).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
     );
@@ -99,11 +98,11 @@ test.describe('ComboBox @avt', () => {
     );
     // focus comes back to the toggle button after selecting
     await expect(combobox).toBeFocused();
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(clearButton).toBeVisible();
     // should only clear selection when escape is pressed when the menu is closed
     await page.keyboard.press('Escape');
-    await expect(clearButton).not.toBeVisible();
+    await expect(clearButton).toBeHidden();
     await expect(combobox).toHaveValue('');
     // should highlight menu items based on text input
     await page.keyboard.press('2');
@@ -114,5 +113,24 @@ test.describe('ComboBox @avt', () => {
     // Should select and populate combobox with current filtered item
     await page.keyboard.press('Enter');
     await expect(combobox).toHaveValue('Option 2');
+    // clear to prep for general selection
+    await page.keyboard.press('Escape');
+    await expect(clearButton).toBeHidden();
+    await expect(combobox).toHaveValue('');
+
+    // should open and select option 1
+    await page.keyboard.press('Enter');
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
+    await expect(combobox).toHaveValue('Option 1');
+    await page.keyboard.press('Escape');
+
+    // should open and select option 2
+    await page.keyboard.press('Enter');
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
+    await expect(combobox).toHaveValue('Option 2');
+    await page.keyboard.press('Escape');
   });
 });

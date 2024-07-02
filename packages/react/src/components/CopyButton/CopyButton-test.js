@@ -12,6 +12,7 @@ import CopyButton from '../CopyButton';
 
 jest.useFakeTimers();
 const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+const prefix = 'cds';
 
 describe('CopyButton', () => {
   it('should set tabIndex if one is passed via props', () => {
@@ -77,12 +78,12 @@ describe('Feedback', () => {
     const button = screen.getByTestId('copy-btn-5');
     await user.click(button);
 
-    expect(button).toHaveClass('cds--copy-btn--animating');
+    expect(button).toHaveClass(`${prefix}--copy-btn--animating`);
     // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       jest.runAllTimers();
       fireEvent.animationEnd(screen.getByTestId('copy-btn-5'), {
-        animationName: 'hide-feedback',
+        animationName: `${prefix}--hide-feedback`,
       });
     });
   });
@@ -113,12 +114,12 @@ describe('Feedback', () => {
     const button = screen.getByTestId('copy-btn-7');
     await user.click(button);
 
-    expect(button).toHaveClass('cds--copy-btn--animating');
+    expect(button).toHaveClass(`${prefix}--copy-btn--animating`);
     // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       jest.runAllTimers();
       fireEvent.animationEnd(screen.getByTestId('copy-btn-7'), {
-        animationName: 'hide-feedback',
+        animationName: `${prefix}--hide-feedback`,
       });
     });
   });

@@ -1,0 +1,153 @@
+import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import { Slug, SlugContent, SlugActions } from '.';
+import * as SlugStories from '../DataTable/stories/DataTable-slug.stories';
+
+# Slug
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Slug)
+|
+[Slug release status](https://airtable.com/appCAqlGVN8tRUbAp/shr71ZyLlIGORz3Vh/tblHqPusgkK8hIeHo)
+|
+[Using AI-enhanced components in V10](https://github.com/carbon-design-system/carbon-for-ai/blob/main/docs/support-for-carbon-v10.md)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Slug anatomy](#slug-anatomy)
+- [Using Slug in DataTable](#using-slug-in-datatable)
+  - [Using as a column header](#using-as-a-column-header)
+  - [Using in a row](#using-in-a-row)
+- [Feedback](#feedback)
+
+## Overview
+
+The `DataTable` supports placing a `slug` in both the column header and row.
+
+<Canvas>
+  <Story of={SlugStories.ColumnSlugWithSelectionAndExpansion} />
+  <Story of={SlugStories.SlugWithSelection} />
+</Canvas>
+
+## Slug anatomy
+
+The `Slug` itself is a button that acts as a `Toggletip` trigger. To construct
+the contents of the `Slug` callout, you can place the desired elements as a
+child of `Slug` in `SlugContent`, like so:
+
+```jsx
+<Slug>
+  <SlugContent>
+    {Content Here}
+  </SlugContent>
+</Slug>
+```
+
+The `Slug` also supports the rendering of an action bar at the bottom of the
+callout. To achieve this, you can pass in `SlugActions` as a child of `Slug`,
+placed inside the `SlugContent`
+
+```jsx
+<Slug>
+  <SlugContent>
+    {Content Here}
+    {Optional Slug action bar}
+    <SlugActions>
+      <IconButton kind="ghost" label="View">
+        <View />
+      </IconButton>
+      <IconButton kind="ghost" label="Open Folder">
+        <FolderOpen />
+      </IconButton>
+      <IconButton kind="ghost" label="Folders">
+        <Folders />
+      </IconButton>
+      <Button>View details</Button>
+    </SlugActions>
+  </SlugContent>
+</Slug>
+```
+
+## Using `slug` in `DataTable`
+
+### Using as a column header
+
+To use a `Slug` inside a column header, you'll need to add a `slug` to the
+appropriate column data.
+
+```jsx
+const columnSlugHeaders = [
+  {
+    key: 'name',
+    header: 'Name',
+  },
+  {
+    key: 'attached_groups',
+    header: 'Attached groups',
+    slug: (
+      <Slug className="slug-container" autoAlign={false} align="bottom-right">
+        <SlugContent>
+          <div>
+            <p className="secondary">AI Explained</p>
+            <h1>84%</h1>
+            <p className="secondary bold">Confidence score</p>
+            <p className="secondary">
+              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+              do eiusmod tempor incididunt ut fsil labore et dolore magna
+              aliqua.
+            </p>
+            <hr />
+            <p className="secondary">Model type</p>
+            <p className="bold">Foundation model</p>
+          </div>
+          <SlugActions>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View details</Button>
+          </SlugActions>
+        </SlugContent>
+      </Slug>
+    ),
+  },
+];
+```
+
+To ensure the table cells are styled appropriately, you'll need to use the new
+`getCellProps` prop getter, like so:
+
+```jsx
+<TableCell {...getCellProps({ cell })} key={cell.id}>
+  {cell.value}
+</TableCell>
+```
+
+### Using in a row
+
+To use a `Slug` inside a `DataTable` row, you'll need to pass in your `Slug`
+component to `TableSlugRow`:
+
+```jsx
+<TableBody>
+  {rows.map((row, i) => (
+    <TableRow key={i} {...getRowProps({ row })}>
+      <TableSlugRow slug={slug} />
+      <TableSelectRow {...getSelectionProps({ row })} />
+      {row.cells.map((cell) => (
+        <TableCell key={cell.id}>{cell.value}</TableCell>
+      ))}
+    </TableRow>
+  ))}
+</TableBody>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Slug/SlugDatatable.mdx).

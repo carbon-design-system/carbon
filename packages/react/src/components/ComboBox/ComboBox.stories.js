@@ -67,11 +67,6 @@ export const Default = () => (
       onChange={() => {}}
       id="carbon-combobox"
       items={items}
-      downshiftProps={{
-        onStateChange: () => {
-          console.log('the state has changed');
-        },
-      }}
       itemToString={(item) => (item ? item.text : '')}
       titleText="ComboBox title"
       helperText="Combobox helper text"
@@ -79,7 +74,7 @@ export const Default = () => (
   </div>
 );
 
-export const AllowCustomValue = () => {
+export const AllowCustomValue = (args) => {
   const filterItems = (menu) => {
     return menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase());
   };
@@ -88,21 +83,33 @@ export const AllowCustomValue = () => {
       <ComboBox
         allowCustomValue
         shouldFilterItem={filterItems}
-        onChange={(e) => {
-          console.log(e);
-        }}
+        onChange={args.onChange}
         id="carbon-combobox"
         items={['Apple', 'Orange', 'Banana', 'Pineapple', 'Raspberry', 'Lime']}
-        downshiftProps={{
-          onStateChange: () => {
-            console.log('the state has changed');
-          },
-        }}
         titleText="ComboBox title"
         helperText="Combobox helper text"
       />
     </div>
   );
+};
+export const ExperimentalAutoAlign = () => (
+  <div style={{ width: 400 }}>
+    <div style={{ height: 300 }}></div>
+    <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+      autoAlign={true}
+    />
+    <div style={{ height: 800 }}></div>
+  </div>
+);
+
+AllowCustomValue.argTypes = {
+  onChange: { action: 'onChange' },
 };
 
 export const _WithLayer = () => (
@@ -127,11 +134,6 @@ export const Playground = (args) => (
     <ComboBox
       id="carbon-combobox"
       items={items}
-      downshiftProps={{
-        onStateChange: () => {
-          console.log('the state has changed');
-        },
-      }}
       itemToString={(item) => (item ? item.text : '')}
       titleText="ComboBox title"
       helperText="Combobox helper text"
@@ -192,15 +194,10 @@ Playground.argTypes = {
   onChange: {
     action: 'changed',
   },
-  onClick: {
+  onToggleClick: {
     action: 'clicked',
   },
   onInputChange: {
-    table: {
-      disable: true,
-    },
-  },
-  onToggleClick: {
     table: {
       disable: true,
     },

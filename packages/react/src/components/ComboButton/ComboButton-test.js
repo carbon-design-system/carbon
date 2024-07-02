@@ -90,11 +90,11 @@ describe('ComboButton', () => {
     describe('supports props.tooltipAlignment', () => {
       const alignments = [
         'top',
-        'top-left',
-        'top-right',
+        'top-start',
+        'top-end',
         'bottom',
-        'bottom-left',
-        'bottom-right',
+        'bottom-start',
+        'bottom-end',
         'left',
         'right',
       ];

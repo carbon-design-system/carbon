@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('FluidDatePicker @avt', () => {
+test.describe('@avt FluidDatePicker', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
@@ -70,7 +70,6 @@ test.describe('FluidDatePicker @avt', () => {
     await page.keyboard.press('ArrowDown');
     await expect(page.locator('span.today')).toBeFocused();
     await page.keyboard.press('Escape');
-    await expect(page.getByRole('textbox', { name: 'Label' })).toBeFocused();
     await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
       /open/
     );
@@ -99,19 +98,7 @@ test.describe('FluidDatePicker @avt', () => {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     await expect(
-      page.locator('input#date-picker-input-id-start')
-    ).toBeFocused();
-    await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
-      /open/
-    );
-    await page.keyboard.press('Tab');
-    await expect(
       page.locator('input#date-picker-input-id-finish')
-    ).toBeFocused();
-    await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
-    await page.keyboard.press('Escape');
-    await expect(
-      page.locator('input#date-picker-input-id-start')
     ).toBeFocused();
     await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
       /open/

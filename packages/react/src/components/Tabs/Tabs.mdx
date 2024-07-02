@@ -1,5 +1,5 @@
 import { ArgsTable, Canvas, Story } from '@storybook/blocks';
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
+import { Tabs, TabList, TabListVertical, Tab, TabPanels, TabPanel } from './Tabs';
 import * as TabsStories from './Tabs.stories';
 import { Grid, Column } from '../Grid';
 
@@ -20,6 +20,7 @@ import { Grid, Column } from '../Grid';
   - [Contained Tabs](#contained-tabs)
   - [Icon Tabs](#icon-tabs)
   - [Dismissable Tabs](#dismissable-tabs)
+  - [Vertical Tabs](#vertical-tabs)
 - [Component API](#component-api)
   - [Tab - render content on click](#tab---render-content-on-click)
   - [Tabs and the Grid - fullWidth prop](#tabs-and-the-grid---fullwidth-prop)
@@ -181,6 +182,12 @@ And there you have it! Working dismissable tabs.
 
 <Canvas>
   <Story of={TabsStories.Dismissable} />
+</Canvas>
+
+### Vertical tabs
+
+<Canvas>
+  <Story of={TabsStories.Vertical} />
 </Canvas>
 
 ## Component API

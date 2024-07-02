@@ -18,7 +18,7 @@ import {
   TableToolbarMenu,
   TableBatchActions,
   TableBatchAction,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import {
   useFilteredRows,
   usePageInfo,
@@ -204,7 +204,7 @@ const CustomDataTable = ({
                 indeterminate={
                   selectedRowsCountInFiltered > 0 && !selectedAllInFiltered
                 }
-                ariaLabel="Select all rows"
+                aria-label="Select all rows"
                 name={selectionAllName}
                 onSelect={handleChangeSelectionAll}
               />
@@ -247,7 +247,7 @@ const CustomDataTable = ({
                     id={`${elementId}--select-${rowId}`}
                     checked={Boolean(selected)}
                     name={selectionName}
-                    ariaLabel="Select row"
+                    aria-label="Select row"
                     onSelect={handleChangeSelection}
                   />
                 )}

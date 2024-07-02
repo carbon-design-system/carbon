@@ -8,6 +8,8 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
+  forwardRef,
+  ReactNode,
   useContext,
   useEffect,
   useMemo,
@@ -25,6 +27,7 @@ import { warning } from '../../internal/warning.js';
 
 import { MenuContext, menuReducer } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
+import { canUseDOM } from '../../internal/environment';
 
 const spacing = 8; // distance to keep to window edges, in px
 
@@ -36,7 +39,7 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * A collection of MenuItems to be rendered within this Menu.
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * Additional CSS class names.
@@ -46,7 +49,7 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * A label describing the Menu.
    */
-  label?: string;
+  label: string;
 
   /**
    * Specify how the menu should align with the button element
@@ -85,20 +88,22 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
-  target?: any;
+  target?: Element;
 
   /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
    */
-  x?: number | (number | null | undefined)[];
+  x?: number | [number, number];
 
   /**
    * Specify the y position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([y1, y2])
    */
-  y?: number | (number | null | undefined)[];
+  y?: number | [number, number];
+
+  legacyAutoalign?: boolean;
 }
 
-const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
+const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   {
     children,
     className,
@@ -110,7 +115,9 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     onOpen,
     open,
     size = 'sm',
-    target = document.body,
+    legacyAutoalign = 'true',
+    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+    target = canUseDOM && document.body,
     x = 0,
     y = 0,
     ...rest
@@ -149,7 +156,7 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }, [childState, childDispatch]);
 
   const menu = useRef<HTMLUListElement>(null);
-  const ref = useMergedRefs([forwardRef, menu]);
+  const ref = useMergedRefs<HTMLUListElement>([forwardRef, menu]);
 
   const [position, setPosition] = useState([-1, -1]);
   const focusableItems = childContext.state.items.filter(
@@ -163,7 +170,7 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     actionButtonWidth = w;
   }
 
-  // Set RTL based on document direction or `LayoutDirection`
+  // Set RTL based on the document direction or `LayoutDirection`
   const { direction } = useLayoutDirection();
 
   function returnFocus() {
@@ -175,21 +182,22 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   function handleOpen() {
     if (menu.current) {
       focusReturn.current = document.activeElement as HTMLElement;
+      if (legacyAutoalign) {
+        const pos = calculatePosition();
+        if (
+          (document?.dir === 'rtl' || direction === 'rtl') &&
+          !rest?.id?.includes('MenuButton')
+        ) {
+          menu.current.style.insetInlineStart = `initial`;
+          menu.current.style.insetInlineEnd = `${pos[0]}px`;
+        } else {
+          menu.current.style.insetInlineStart = `${pos[0]}px`;
+          menu.current.style.insetInlineEnd = `initial`;
+        }
 
-      const pos = calculatePosition();
-      if (
-        (document?.dir === 'rtl' || direction === 'rtl') &&
-        !rest?.id?.includes('MenuButton')
-      ) {
-        menu.current.style.insetInlineStart = `initial`;
-        menu.current.style.insetInlineEnd = `${pos[0]}px`;
-      } else {
-        menu.current.style.insetInlineStart = `${pos[0]}px`;
-        menu.current.style.insetInlineEnd = `initial`;
+        menu.current.style.insetBlockStart = `${pos[1]}px`;
+        setPosition(pos);
       }
-
-      menu.current.style.insetBlockStart = `${pos[1]}px`;
-      setPosition(pos);
 
       menu.current.focus();
 
@@ -230,7 +238,7 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
   function focusItem(e?: React.KeyboardEvent<HTMLUListElement>) {
     const currentItem = focusableItems.findIndex((item) =>
-      item.ref.current.contains(document.activeElement)
+      item.ref?.current?.contains(document.activeElement)
     );
     let indexToFocus = currentItem;
 
@@ -412,7 +420,8 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
       [`${prefix}--menu--box-shadow-top`]:
         menuAlignment && menuAlignment.slice(0, 3) === 'top',
       [`${prefix}--menu--open`]: open,
-      [`${prefix}--menu--shown`]: position[0] >= 0 && position[1] >= 0,
+      [`${prefix}--menu--shown`]:
+        (open && !legacyAutoalign) || (position[0] >= 0 && position[1] >= 0),
       [`${prefix}--menu--with-icons`]: childContext.state.hasIcons,
     }
   );
@@ -433,6 +442,10 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     </MenuContext.Provider>
   );
 
+  if (!target) {
+    return rendered;
+  }
+
   return isRoot ? (open && createPortal(rendered, target)) || null : rendered;
 });
 
@@ -450,6 +463,7 @@ Menu.propTypes = {
   /**
    * A label describing the Menu.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   label: PropTypes.string,
 
   /**
@@ -489,11 +503,13 @@ Menu.propTypes = {
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   target: PropTypes.object,
 
   /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   x: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number),
@@ -502,6 +518,7 @@ Menu.propTypes = {
   /**
    * Specify the y position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([y1, y2])
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   y: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number),

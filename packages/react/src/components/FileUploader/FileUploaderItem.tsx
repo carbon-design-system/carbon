@@ -83,12 +83,13 @@ function FileUploaderItem({
   errorSubject,
   errorBody,
   size,
+  className,
   ...other
 }: FileUploaderItemProps) {
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
   const prefix = usePrefix();
   const { current: id } = useRef(uuid || uid());
-  const classes = cx(`${prefix}--file__selected-file`, {
+  const classes = cx(`${prefix}--file__selected-file`, className, {
     [`${prefix}--file__selected-file--invalid`]: invalid,
     [`${prefix}--file__selected-file--md`]: size === 'md',
     [`${prefix}--file__selected-file--sm`]: size === 'sm',
@@ -96,6 +97,10 @@ function FileUploaderItem({
   const isInvalid = invalid
     ? `${prefix}--file-filename-container-wrap-invalid`
     : `${prefix}--file-filename-container-wrap`;
+
+  const filterSpaceName = (name: string | undefined) => {
+    return name?.replace(/\s+/g, '');
+  };
 
   const isEllipsisActive = (element: any) => {
     setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
@@ -120,7 +125,7 @@ function FileUploaderItem({
                 as="p"
                 title={name}
                 className={`${prefix}--file-filename-button`}
-                id={name}>
+                id={filterSpaceName(name)}>
                 {name}
               </Text>
             </button>
@@ -131,7 +136,7 @@ function FileUploaderItem({
           as="p"
           title={name}
           className={`${prefix}--file-filename`}
-          id={name}>
+          id={filterSpaceName(name)}>
           {name}
         </Text>
       )}
@@ -143,7 +148,11 @@ function FileUploaderItem({
             iconDescription={iconDescription}
             status={status}
             invalid={invalid}
-            aria-describedby={`${name}-id-error`}
+            aria-describedby={
+              invalid && errorSubject
+                ? `${filterSpaceName(name)}-id-error`
+                : undefined
+            }
             onKeyDown={(evt) => {
               if (matches(evt as unknown as Event, [keys.Enter, keys.Space])) {
                 if (status === 'edit') {
@@ -164,7 +173,7 @@ function FileUploaderItem({
         <div
           className={`${prefix}--form-requirement`}
           role="alert"
-          id={`${name}-id-error`}>
+          id={`${filterSpaceName(name)}-id-error`}>
           <Text as="div" className={`${prefix}--form-requirement__title`}>
             {errorSubject}
           </Text>

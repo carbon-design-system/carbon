@@ -9,6 +9,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import Checkbox from '../Checkbox';
+import { Slug } from '../../Slug';
+
+const prefix = 'cds';
 
 describe('Checkbox', () => {
   it('should set the `id` on the <input> element', () => {
@@ -57,7 +60,9 @@ describe('Checkbox', () => {
 
   it('should hide the label if hideLabel is provided as a prop', () => {
     render(<Checkbox id="test" labelText="test-label" hideLabel />);
-    expect(screen.getByText('test-label')).toHaveClass('cds--visually-hidden');
+    expect(screen.getByText('test-label')).toHaveClass(
+      `${prefix}--visually-hidden`
+    );
   });
 
   it('should render helperText', () => {
@@ -113,7 +118,9 @@ describe('Checkbox', () => {
       />
     );
 
-    expect(container.firstChild).toHaveClass(`cds--checkbox-wrapper--readonly`);
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--checkbox-wrapper--readonly`
+    );
   });
 
   it('should respect warn prop', () => {
@@ -128,10 +135,12 @@ describe('Checkbox', () => {
 
     // eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
     const warnIcon = container.querySelector(
-      `svg.cds--checkbox__invalid-icon--warning`
+      `svg.${prefix}--checkbox__invalid-icon--warning`
     );
 
-    expect(container.firstChild).toHaveClass(`cds--checkbox-wrapper--warning`);
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--checkbox-wrapper--warning`
+    );
     expect(warnIcon).toBeInTheDocument();
   });
 
@@ -147,7 +156,9 @@ describe('Checkbox', () => {
     );
 
     expect(screen.getByText('Warn text')).toBeInTheDocument();
-    expect(screen.getByText('Warn text')).toHaveClass(`cds--form-requirement`);
+    expect(screen.getByText('Warn text')).toHaveClass(
+      `${prefix}--form-requirement`
+    );
   });
 
   it('should call the `onChange` prop when the <input> value changes', async () => {
@@ -186,5 +197,20 @@ describe('Checkbox', () => {
     await userEvent.click(screen.getByRole('checkbox'));
     expect(onClick).toHaveBeenCalled();
     expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('should respect slug prop', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        slug={<Slug />}
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--checkbox-wrapper--slug`
+    );
   });
 });

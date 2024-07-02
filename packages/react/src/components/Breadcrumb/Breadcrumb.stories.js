@@ -34,12 +34,12 @@ export const Default = () => (
     </BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-    <BreadcrumbItem>Breadcrumb 4</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 4</BreadcrumbItem>
   </Breadcrumb>
 );
 
 export const BreadcrumbWithOverflowMenu = () => (
-  <Breadcrumb>
+  <Breadcrumb noTrailingSlash>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
     </BreadcrumbItem>
@@ -51,7 +51,7 @@ export const BreadcrumbWithOverflowMenu = () => (
       </OverflowMenu>
     </BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
-    <BreadcrumbItem>Breadcrumb 6</BreadcrumbItem>
+    <BreadcrumbItem isCurrentPage>Breadcrumb 6</BreadcrumbItem>
   </Breadcrumb>
 );
 
@@ -64,7 +64,7 @@ export const Playground = (args) => (
     </BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-    <BreadcrumbItem>Breadcrumb 4</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 4</BreadcrumbItem>
   </Breadcrumb>
 );
 

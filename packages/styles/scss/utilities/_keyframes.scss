@@ -4,6 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+@use '../config' as *;
 
 @mixin content-visible {
   opacity: 1;
@@ -15,7 +16,7 @@
   visibility: hidden;
 }
 
-@keyframes hide-feedback {
+@keyframes #{$prefix}--hide-feedback {
   0% {
     @include content-visible;
   }
@@ -25,7 +26,7 @@
   }
 }
 
-@keyframes show-feedback {
+@keyframes #{$prefix}--show-feedback {
   0% {
     @include content-hidden;
   }
@@ -35,7 +36,7 @@
   }
 }
 
-@keyframes skeleton {
+@keyframes #{$prefix}--skeleton {
   0% {
     opacity: 0.3;
     transform: scaleX(0);

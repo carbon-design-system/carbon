@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Toggle @avt', () => {
+test.describe('@avt Toggle', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Toggle',
@@ -66,8 +66,8 @@ test.describe('Toggle @avt', () => {
     await page.keyboard.press('Tab');
     await expect(page.getByRole('switch')).toBeVisible();
     await page.keyboard.press('Space');
-    await page.getByText('Off');
+    page.getByText('Off');
     await page.keyboard.press('Space');
-    await page.getByText('On');
+    page.getByText('On');
   });
 });

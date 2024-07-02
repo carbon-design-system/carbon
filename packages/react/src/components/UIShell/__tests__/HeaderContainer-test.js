@@ -7,7 +7,8 @@
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
+
 import { HeaderContainer } from '../';
 
 describe('HeaderContainer', () => {
@@ -48,6 +49,25 @@ describe('HeaderContainer', () => {
       {
         isSideNavExpanded: false,
         onClickSideNavExpand: expect.any(Function),
+      },
+      {}
+    );
+  });
+
+  it('should pass through rest props', () => {
+    const rest = {
+      foo: 'foo',
+      bar: /bar/,
+    };
+    const Test = jest.fn(() => <div />);
+
+    render(<HeaderContainer render={Test} {...rest} />);
+
+    expect(Test).toHaveBeenCalledWith(
+      {
+        isSideNavExpanded: false,
+        onClickSideNavExpand: expect.any(Function),
+        ...rest,
       },
       {}
     );

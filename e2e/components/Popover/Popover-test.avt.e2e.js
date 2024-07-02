@@ -10,11 +10,11 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('Popover @avt', () => {
+test.describe('@avt Popover', () => {
   test('@avt-advanced-states auto align', async ({ page }) => {
     await visitStory(page, {
       component: 'Popover',
-      id: 'components-popover--auto-align',
+      id: 'components-popover--experimental-auto-align',
       globals: {
         theme: 'white',
       },
@@ -52,19 +52,19 @@ test.describe('Popover @avt', () => {
     // Checking popover state and interaction with Enter key
     await expect(page.locator('.cds--popover--open')).toBeVisible();
     await page.keyboard.press('Enter');
-    await expect(page.locator('.cds--popover--open')).not.toBeVisible();
+    await expect(page.locator('.cds--popover--open')).toBeHidden();
 
     // Checking popover state and interaction with Space key
     await page.keyboard.press('Space');
     await expect(page.locator('.cds--popover--open')).toBeVisible();
     await page.keyboard.press('Space');
-    await expect(page.locator('.cds--popover--open')).not.toBeVisible();
+    await expect(page.locator('.cds--popover--open')).toBeHidden();
 
     // Checking popover state and interaction with Escape key
     await page.keyboard.press('Space');
     await expect(page.locator('.cds--popover--open')).toBeVisible();
     await page.keyboard.press('Escape');
-    await expect(page.locator('.cds--popover--open')).not.toBeVisible();
+    await expect(page.locator('.cds--popover--open')).toBeHidden();
 
     // Testing right popover
     await page.keyboard.press('Tab');
@@ -74,13 +74,13 @@ test.describe('Popover @avt', () => {
     await page.keyboard.press('Enter');
     await expect(page.locator('.cds--popover--open')).toBeVisible();
     await page.keyboard.press('Enter');
-    await expect(page.locator('.cds--popover--open')).not.toBeVisible();
+    await expect(page.locator('.cds--popover--open')).toBeHidden();
 
     // Checking popover state and interaction with Space key
     await page.keyboard.press('Space');
     await expect(page.locator('.cds--popover--open')).toBeVisible();
     await page.keyboard.press('Space');
-    await expect(page.locator('.cds--popover--open')).not.toBeVisible();
+    await expect(page.locator('.cds--popover--open')).toBeHidden();
 
     // Checking popover state and interaction with Escape key (it should not close)
     await page.keyboard.press('Space');

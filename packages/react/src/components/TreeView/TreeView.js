@@ -11,6 +11,8 @@ import classNames from 'classnames';
 import { keys, match, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
+import { useControllableState } from '../../internal/useControllableState';
+import { useFeatureFlag } from '../FeatureFlags';
 
 export default function TreeView({
   active: prespecifiedActive,
@@ -19,11 +21,16 @@ export default function TreeView({
   hideLabel = false,
   label,
   multiselect = false,
+  onActivate,
   onSelect,
-  selected: preselected = [],
+  selected: preselected,
   size = 'sm',
   ...rest
 }) {
+  const enableTreeviewControllable = useFeatureFlag(
+    'enable-treeview-controllable'
+  );
+
   const { current: treeId } = useRef(rest.id || uniqueId());
   const prefix = usePrefix();
   const treeClasses = classNames(className, `${prefix}--tree`, {
@@ -31,8 +38,27 @@ export default function TreeView({
   });
   const treeRootRef = useRef(null);
   const treeWalker = useRef(treeRootRef?.current);
-  const [selected, setSelected] = useState(preselected);
-  const [active, setActive] = useState(prespecifiedActive);
+
+  const controllableSelectionState = useControllableState({
+    value: preselected,
+    onChange: onSelect,
+    defaultValue: [],
+  });
+  const uncontrollableSelectionState = useState(preselected ?? []);
+  const [selected, setSelected] = enableTreeviewControllable
+    ? controllableSelectionState
+    : uncontrollableSelectionState;
+
+  const controllableActiveState = useControllableState({
+    value: prespecifiedActive,
+    onChange: onActivate,
+    defaultValue: undefined,
+  });
+  const uncontrollableActiveState = useState(prespecifiedActive);
+  const [active, setActive] = enableTreeviewControllable
+    ? controllableActiveState
+    : uncontrollableActiveState;
+
   function resetNodeTabIndices() {
     Array.prototype.forEach.call(
       treeRootRef?.current?.querySelectorAll('[tabIndex="0"]') ?? [],
@@ -50,11 +76,17 @@ export default function TreeView({
       } else {
         setSelected(selected.filter((selectedId) => selectedId !== nodeId));
       }
-      onSelect?.(event, node);
+
+      if (!enableTreeviewControllable) {
+        onSelect?.(event, node);
+      }
     } else {
       setSelected([nodeId]);
       setActive(nodeId);
-      onSelect?.(event, { activeNodeId: nodeId, ...node });
+
+      if (!enableTreeviewControllable) {
+        onSelect?.(event, { activeNodeId: nodeId, ...node });
+      }
     }
   }
 
@@ -185,11 +217,13 @@ export default function TreeView({
 
   const useActiveAndSelectedOnMount = () =>
     useEffect(() => {
-      if (preselected.length) {
-        setSelected(preselected);
-      }
-      if (prespecifiedActive) {
-        setActive(prespecifiedActive);
+      if (!enableTreeviewControllable) {
+        if (preselected?.length) {
+          setSelected(preselected);
+        }
+        if (prespecifiedActive) {
+          setActive(prespecifiedActive);
+        }
       }
     }, []);
 
@@ -252,6 +286,12 @@ TreeView.propTypes = {
    * If `multiselect` is `false` then only one node can be selected at a time
    */
   multiselect: PropTypes.bool,
+
+  /**
+   * **[Experimental]** Callback function that is called when any node is activated.
+   * *This is only supported with the `enable-treeview-controllable` feature flag!*
+   */
+  onActivate: PropTypes.func,
 
   /**
    * Callback function that is called when any node is selected

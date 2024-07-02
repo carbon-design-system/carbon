@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { ReactNode, useContext, useState } from 'react';
 import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
@@ -124,7 +124,7 @@ export interface TextInputProps
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Specify the type of the `<input>`

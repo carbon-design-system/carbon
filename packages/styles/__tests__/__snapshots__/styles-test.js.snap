@@ -618,6 +618,11 @@ Array [
     "relativePath": "scss/components/skeleton-styles/skeleton-styles",
   },
   Object {
+    "filepath": "scss/components/skeleton-styles/_ai-skeleton-styles.scss",
+    "importPath": "@carbon/styles/scss/components/skeleton-styles/ai-skeleton-styles",
+    "relativePath": "scss/components/skeleton-styles/ai-skeleton-styles",
+  },
+  Object {
     "filepath": "scss/components/slider/_index.scss",
     "importPath": "@carbon/styles/scss/components/slider",
     "relativePath": "scss/components/slider",

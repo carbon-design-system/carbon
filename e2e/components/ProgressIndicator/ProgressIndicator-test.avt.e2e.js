@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('ProgressIndicator', () => {
+test.describe('@avt ProgressIndicator', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressIndicator',

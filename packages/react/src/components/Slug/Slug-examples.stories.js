@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../Button';
 import Checkbox from '../Checkbox';
 import CheckboxGroup from '../CheckboxGroup';
@@ -30,6 +30,9 @@ import {
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from '../Tile';
+import { default as RadioTile } from '../RadioTile';
+import TileGroup from '../TileGroup/TileGroup';
+import { FeatureFlags } from '../FeatureFlags';
 import { IconButton } from '../IconButton';
 import {
   ArrowRight,
@@ -40,10 +43,16 @@ import {
 } from '@carbon/icons-react';
 import { Slug, SlugContent, SlugActions } from '../Slug';
 import './slug-story.scss';
+import mdx from './SlugExamples.mdx';
 
 export default {
   title: 'Experimental/unstable__Slug/Examples',
   component: null,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 const args = {
@@ -276,44 +285,84 @@ export const _Combobox = {
 };
 
 export const _ComposedModal = {
+  args: {
+    showButtons: true,
+  },
   argTypes: {
     slug: {
       description:
         '**Experimental**: Provide a `Slug` component to be rendered inside the component',
     },
+    showButtons: {
+      description: 'Show or hide the Modal buttons',
+    },
   },
-  render: () => (
-    <div className="slug-modal">
-      <ComposedModal slug={slug} open>
-        <ModalHeader label="Account resources" title="Add a custom domain" />
-        <ModalBody>
-          <p style={{ marginBottom: '1rem' }}>
-            Custom domains direct requests for your apps in this Cloud Foundry
-            organization to a URL that you own. A custom domain can be a shared
-            domain, a shared subdomain, or a shared domain and host.
-          </p>
-          <TextInput
-            data-modal-primary-focus
-            id="text-input-1"
-            labelText="Domain name"
-            placeholder="e.g. github.com"
-            style={{ marginBottom: '1rem' }}
-          />
-          <Select id="select-1" defaultValue="us-south" labelText="Region">
-            <SelectItem value="us-south" text="US South" />
-            <SelectItem value="us-east" text="US East" />
-          </Select>
-        </ModalBody>
-        <ModalFooter
-          primaryButtonText="Add"
-          secondaryButtons={[
-            { buttonText: 'Keep both' },
-            { buttonText: 'Rename' },
-          ]}
-        />
-      </ComposedModal>
-    </div>
-  ),
+  render: (args) => {
+    const [open, setOpen] = useState(true); // eslint-disable-line
+    return (
+      <div className="slug-modal">
+        <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
+        <ComposedModal open={open} onClose={() => setOpen(false)} slug={slug}>
+          <ModalHeader label="Account resources" title="Add a custom domain" />
+          <ModalBody>
+            <p style={{ marginBottom: '1rem' }}>
+              Custom domains direct requests for your apps in this Cloud Foundry
+              organization to a URL that you own. A custom domain can be a
+              shared domain, a shared subdomain, or a shared domain and host.
+            </p>
+            <p style={{ marginBottom: '1rem' }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+              eu nibh odio. Nunc a consequat est, id porttitor sapien. Proin
+              vitae leo vitae orci tincidunt auctor eget eget libero. Ut
+              tincidunt ultricies fringilla. Aliquam erat volutpat. Aenean arcu
+              odio, elementum vel vehicula vitae, porttitor ac lorem. Sed
+              viverra elit ac risus tincidunt fermentum. Ut sollicitudin nibh id
+              risus ornare ornare. Etiam gravida orci ut lectus dictum, quis
+              ultricies felis mollis. Mauris nec commodo est, nec faucibus nibh.
+              Nunc commodo ante quis pretium consectetur. Ut ac nisl vitae mi
+              mattis vulputate a at elit. Nullam porttitor ex eget mi feugiat
+              mattis. Nunc non sodales magna. Proin ornare tellus quis hendrerit
+              egestas. Donec pharetra leo nec molestie sollicitudin.
+            </p>
+
+            <TextInput
+              data-modal-primary-focus
+              id="text-input-1"
+              labelText="Domain name"
+              placeholder="e.g. github.com"
+              style={{ marginBottom: '1rem' }}
+            />
+            <Select id="select-1" defaultValue="us-south" labelText="Region">
+              <SelectItem value="us-south" text="US South" />
+              <SelectItem value="us-east" text="US East" />
+            </Select>
+            <p style={{ marginBlock: '1rem' }}>
+              Custom domains direct requests for your apps in this Cloud Foundry
+              organization to a URL that you own. A custom domain can be a
+              shared domain, a shared subdomain, or a shared domain and host.
+            </p>
+            <TextInput
+              data-modal-primary-focus
+              id="text-input-1"
+              labelText="Domain name"
+              placeholder="e.g. github.com"
+              style={{ marginBottom: '1rem' }}
+            />
+          </ModalBody>
+
+          {args.showButtons && (
+            <ModalFooter
+              primaryButtonText="Add"
+              secondaryButtons={[
+                { buttonText: 'Keep both' },
+                { buttonText: 'Rename' },
+              ]}
+            />
+          )}
+        </ComposedModal>
+      </div>
+    );
+  },
 };
 
 export const _DatePicker = {
@@ -376,40 +425,66 @@ export const _FilterableMultiselect = {
 };
 
 export const _Modal = {
+  args: {
+    showButtons: true,
+  },
   argTypes: {
     slug: {
       description:
         '**Experimental**: Provide a `Slug` component to be rendered inside the component',
     },
+    showButtons: {
+      description: 'Show or hide the Modal buttons',
+    },
   },
-  render: () => (
-    <div className="slug-modal">
-      <Modal
-        open
-        modalHeading="Add a custom domain"
-        modalLabel="Account resources"
-        primaryButtonText="Add"
-        secondaryButtonText="Cancel"
-        slug={slug}>
-        <p>
-          Custom domains direct requests for your apps in this Cloud Foundry
-          organization to a URL that you own. A custom domain can be a shared
-          domain, a shared subdomain, or a shared domain and host.
-        </p>
-        <TextInput
-          data-modal-primary-focus
-          id="text-input-1"
-          labelText="Domain name"
-          placeholder="e.g. github.com"
-        />
-        <Select id="select-1" defaultValue="us-south" labelText="Region">
-          <SelectItem value="us-south" text="US South" />
-          <SelectItem value="us-east" text="US East" />
-        </Select>
-        <TextArea labelText="Comments" />
-      </Modal>
-    </div>
-  ),
+  render: (args) => {
+    const [open, setOpen] = useState(true); // eslint-disable-line
+    return (
+      <div className="slug-modal">
+        <Button onClick={() => setOpen(true)}>Launch modal</Button>
+        <Modal
+          open={open}
+          onRequestClose={() => setOpen(false)}
+          modalHeading="Add a custom domain"
+          modalLabel="Account resources"
+          primaryButtonText="Add"
+          secondaryButtonText="Cancel"
+          passiveModal={!args.showButtons}
+          slug={slug}>
+          <p style={{ marginBottom: '1rem' }}>
+            Custom domains direct requests for your apps in this Cloud Foundry
+            organization to a URL that you own. A custom domain can be a shared
+            domain, a shared subdomain, or a shared domain and host.
+          </p>
+          <p style={{ marginBottom: '1rem' }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+            eu nibh odio. Nunc a consequat est, id porttitor sapien. Proin vitae
+            leo vitae orci tincidunt auctor eget eget libero. Ut tincidunt
+            ultricies fringilla. Aliquam erat volutpat. Aenean arcu odio,
+            elementum vel vehicula vitae, porttitor ac lorem. Sed viverra elit
+            ac risus tincidunt fermentum. Ut sollicitudin nibh id risus ornare
+            ornare. Etiam gravida orci ut lectus dictum, quis ultricies felis
+            mollis. Mauris nec commodo est, nec faucibus nibh. Nunc commodo ante
+            quis pretium consectetur. Ut ac nisl vitae mi mattis vulputate a at
+            elit. Nullam porttitor ex eget mi feugiat mattis. Nunc non sodales
+            magna. Proin ornare tellus quis hendrerit egestas. Donec pharetra
+            leo nec molestie sollicitudin.
+          </p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+            placeholder="e.g. github.com"
+          />
+          <Select id="select-1" defaultValue="us-south" labelText="Region">
+            <SelectItem value="us-south" text="US South" />
+            <SelectItem value="us-east" text="US East" />
+          </Select>
+          <TextArea labelText="Comments" />
+        </Modal>
+      </div>
+    );
+  },
 };
 
 export const _Multiselect = {
@@ -625,75 +700,9 @@ export const _Tile = {
     },
   },
   render: (args) => (
-    <div className="slug-tile-container">
-      <Tile slug={slug} id="tile-1" {...args}>
-        <h4>Title</h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit at
-          consectetur turpis mauris gravida penatibus.
-        </p>
-        <div className="ai-data">
-          <div className="data-container">
-            <p>Data Quality</p>
-            <h3>85%</h3>
-          </div>
-          <div className="data-container">
-            <p>Label text</p>
-            <h3>16%</h3>
-          </div>
-        </div>
-      </Tile>
-      <ClickableTile
-        href="https://www.carbondesignsystem.com/"
-        slug
-        id="tile-click"
-        renderIcon={ArrowRight}
-        {...args}>
-        <h4>Title</h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit at
-          consectetur turpis mauris gravida penatibus.
-        </p>
-        <div className="ai-data">
-          <div className="data-container">
-            <p>Data Quality</p>
-            <h3>85%</h3>
-          </div>
-          <div className="data-container">
-            <p>Label text</p>
-            <h3>16%</h3>
-          </div>
-        </div>
-      </ClickableTile>
-      <SelectableTile
-        id="selectable-tile-1"
-        name="tiles"
-        value="selectable"
-        slug={slug}
-        {...args}>
-        <h4>Title</h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit at
-          consectetur turpis mauris gravida penatibus.
-        </p>
-        <div className="ai-data">
-          <div className="data-container">
-            <p>Data Quality</p>
-            <h3>85%</h3>
-          </div>
-          <div className="data-container">
-            <p>Label text</p>
-            <h3>16%</h3>
-          </div>
-        </div>
-      </SelectableTile>
-      <ExpandableTile
-        id="expandable-tile-1"
-        tileCollapsedIconText="Interact to Expand tile"
-        tileExpandedIconText="Interact to Collapse tile"
-        slug={slug}
-        {...args}>
-        <TileAboveTheFoldContent>
+    <>
+      <div className="slug-tile-container">
+        <Tile slug={slug} id="tile-1" {...args}>
           <h4>Title</h4>
           <p>
             Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
@@ -709,15 +718,171 @@ export const _Tile = {
               <h3>16%</h3>
             </div>
           </div>
-        </TileAboveTheFoldContent>
-        <TileBelowTheFoldContent>
-          <h6>Expanded Section</h6>
+        </Tile>
+        <ClickableTile
+          href="https://www.carbondesignsystem.com/"
+          slug
+          id="tile-click"
+          renderIcon={ArrowRight}
+          {...args}>
+          <h4>Title</h4>
           <p>
             Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
-            at consectetur turpis mauris.
+            at consectetur turpis mauris gravida penatibus.
           </p>
-        </TileBelowTheFoldContent>
-      </ExpandableTile>
-    </div>
+          <div className="ai-data">
+            <div className="data-container">
+              <p>Data Quality</p>
+              <h3>85%</h3>
+            </div>
+            <div className="data-container">
+              <p>Label text</p>
+              <h3>16%</h3>
+            </div>
+          </div>
+        </ClickableTile>
+
+        <ExpandableTile
+          id="expandable-tile-1"
+          tileCollapsedIconText="Interact to Expand tile"
+          tileExpandedIconText="Interact to Collapse tile"
+          slug={slug}
+          {...args}>
+          <TileAboveTheFoldContent>
+            <h4>Title</h4>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+              at consectetur turpis mauris gravida penatibus.
+            </p>
+            <div className="ai-data">
+              <div className="data-container">
+                <p>Data Quality</p>
+                <h3>85%</h3>
+              </div>
+              <div className="data-container">
+                <p>Label text</p>
+                <h3>16%</h3>
+              </div>
+            </div>
+          </TileAboveTheFoldContent>
+          <TileBelowTheFoldContent>
+            <h6>Expanded Section</h6>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+              at consectetur turpis mauris.
+            </p>
+          </TileBelowTheFoldContent>
+        </ExpandableTile>
+      </div>
+
+      <div className="slug-selectable-tile-container">
+        <TileGroup
+          defaultSelected="default-selected"
+          legend="Selectable Tile Group"
+          name="selectable tile group"
+          {...args}>
+          <div>
+            <SelectableTile
+              className="slug-selectable-tile"
+              id="selectable-tile-1"
+              slug={slug}
+              {...args}>
+              Option 1
+            </SelectableTile>
+          </div>
+          <div>
+            <SelectableTile
+              className="slug-selectable-tile"
+              slug={slug}
+              id="selectable-tile-2"
+              {...args}>
+              Option 2
+            </SelectableTile>
+          </div>
+          <div>
+            <SelectableTile
+              className="slug-selectable-tile"
+              slug={slug}
+              id="selectable-tile-3"
+              {...args}>
+              Option 3
+            </SelectableTile>
+          </div>
+        </TileGroup>
+      </div>
+      <br />
+      <br />
+      <div className="slug-selectable-tile-container">
+        <TileGroup
+          defaultSelected="default-selected"
+          legend="Radio Tile Group"
+          name="radio tile group"
+          {...args}>
+          <RadioTile
+            className="slug-radio-tile"
+            id="radio-tile-1"
+            value="standard"
+            slug={slug}
+            {...args}>
+            Option 1
+          </RadioTile>
+          <RadioTile
+            className="slug-radio-tile"
+            id="radio-tile-2"
+            value="default-selected"
+            slug={slug}
+            {...args}>
+            Option 2
+          </RadioTile>
+          <RadioTile
+            className="slug-radio-tile"
+            id="radio-tile-3"
+            value="selected"
+            slug={slug}
+            {...args}>
+            Option 3
+          </RadioTile>
+        </TileGroup>
+      </div>
+      <br />
+      <br />
+      <div className="slug-selectable-tile-container slug-experimental-radio-tile-container">
+        <FeatureFlags
+          flags={{
+            'enable-v12-tile-radio-icons': true,
+          }}>
+          <TileGroup
+            defaultSelected="default-selected"
+            legend="Radio Tile Group - Feature Flags enabled"
+            name="radio tile group two"
+            {...args}>
+            <RadioTile
+              className="slug-radio-tile"
+              id="radio-tile-4"
+              value="standard"
+              slug={slug}
+              {...args}>
+              Option 1
+            </RadioTile>
+            <RadioTile
+              className="slug-radio-tile"
+              id="radio-tile-5"
+              value="default-selected"
+              slug={slug}
+              {...args}>
+              Option 2
+            </RadioTile>
+            <RadioTile
+              className="slug-radio-tile"
+              id="radio-tile-6"
+              value="selected"
+              slug={slug}
+              {...args}>
+              Option 3
+            </RadioTile>
+          </TileGroup>
+        </FeatureFlags>
+      </div>
+    </>
   ),
 };

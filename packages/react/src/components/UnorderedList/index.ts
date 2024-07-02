@@ -6,3 +6,4 @@
  */
 
 export { default, default as UnorderedList } from './UnorderedList';
+export { type UnorderedListProps } from './UnorderedList';

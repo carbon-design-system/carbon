@@ -26,16 +26,16 @@
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
-    "postinstall": "husky install"
+    "postinstall": "husky"
   },
   "resolutions": {
-    "@types/react": "~18.2.33",
-    "@types/prop-types": "15.7.11",
+    "@types/react": "~18.3.0",
+    "@types/prop-types": "15.7.12",
     "ast-types": "^0.14.0",
     "node-sass": "^9.0.0",
-    "react": "~18.2.0",
-    "react-dom": "~18.2.0",
-    "react-is": "~18.2.0"
+    "react": "~18.3.0",
+    "react-dom": "~18.3.0",
+    "react-is": "~18.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
@@ -52,19 +52,21 @@
     "@percy/cli": "^1.27.0",
     "@percy/playwright": "^1.0.4",
     "@playwright/test": "^1.36.2",
+    "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^6.0.0",
-    "@testing-library/react": "^14.0.0",
+    "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/react-is": "~18.2.0",
+    "@types/react-is": "~18.3.0",
     "accessibility-checker": "^3.1.48",
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^7.0.0",
     "cross-spawn": "^7.0.0",
     "doctoc": "^2.0.0",
-    "eslint": "^8.40.0",
+    "eslint": "^9.0.0",
+    "eslint-plugin-playwright": "^1.0.0",
     "fs-extra": "^11.0.0",
     "glob": "^10.0.0",
-    "husky": "^8.0.0",
+    "husky": "^9.0.0",
     "jest": "^28.1.0",
     "jest-junit": "^16.0.0",
     "lerna": "^8.0.0",
@@ -143,5 +145,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@4.0.2"
+  "packageManager": "yarn@4.2.2"
 }

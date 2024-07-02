@@ -1,0 +1,66 @@
+//
+// Copyright IBM Corp. 2016, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../theme';
+@use '../../utilities/convert';
+
+@keyframes ai-skeleton-animation {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/// AI Skeleton styles
+/// @access public
+/// @group skeleton
+@mixin ai-skeleton-styles {
+  .#{$prefix}--skeleton__text--ai,
+  .#{$prefix}--skeleton__placeholder--ai,
+  .#{$prefix}--skeleton__icon--ai {
+    overflow: hidden;
+    background: theme.$ai-skeleton-background;
+  }
+
+  .#{$prefix}--skeleton__text--ai::before,
+  .#{$prefix}--skeleton__placeholder--ai::before,
+  .#{$prefix}--skeleton__icon--ai::before {
+    animation: 1250ms ease-in-out ai-skeleton-animation infinite;
+    background: linear-gradient(
+      to right,
+      rgba(theme.get('ai-skeleton-element-background'), 0) 0%,
+      rgba(theme.get('ai-skeleton-element-background'), 0.5) 50%,
+      rgba(theme.get('ai-skeleton-element-background'), 0) 100%
+    );
+  }
+
+  .#{$prefix}--skeleton__placeholder--ai::before,
+  .#{$prefix}--skeleton__icon--ai::before {
+    inline-size: 200%;
+  }
+
+  // //skeleton placeholder
+  .#{$prefix}--skeleton__placeholder--ai {
+    border-radius: convert.to-rem(8px);
+  }
+
+  //skeleton text
+  .#{$prefix}--skeleton__text--ai {
+    border-radius: convert.to-rem(16px);
+  }
+
+  //skeleton icon
+  .#{$prefix}--skeleton__icon--ai {
+    border-radius: convert.to-rem(2px);
+  }
+}
+
+// rgba($ai-skeleton-element-background, 1)

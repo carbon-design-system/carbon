@@ -337,6 +337,7 @@
       @include focus-outline('reset');
 
       background-color: $layer;
+      color: $text-disabled;
     }
   }
 

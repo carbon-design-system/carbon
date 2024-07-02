@@ -9,6 +9,7 @@ import React from 'react';
 import TextInput from '../TextInput';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
+import { Slug } from '../../Slug';
 
 const prefix = 'cds';
 
@@ -223,6 +224,15 @@ describe('TextInput', () => {
       expect(screen.getByText('This is warning text')).toHaveClass(
         `${prefix}--form-requirement`
       );
+    });
+
+    it('should respect slug prop', () => {
+      render(
+        <TextInput id="textarea-1" labelText="TextArea label" slug={<Slug />} />
+      );
+      expect(
+        screen.getByRole('button', { name: 'AI - Show information' })
+      ).toBeInTheDocument();
     });
   });
 

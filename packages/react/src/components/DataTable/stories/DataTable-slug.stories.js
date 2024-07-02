@@ -22,7 +22,7 @@ import DataTable, {
   TableExpandedRow,
 } from '..';
 import { rows, headers } from './shared';
-import mdx from '../DataTable.mdx';
+import mdx from '../../Slug/SlugDatatable.mdx';
 import Button from '../../Button';
 import { IconButton } from '../../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';

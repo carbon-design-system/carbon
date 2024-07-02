@@ -1,0 +1,33 @@
+# TreeView controllable API
+
+The new controllable API of TreeView allows you to synchronize the state of `selected` and `active` with your application.
+
+You can opt-in to this by enabling the `enable-treeview-controllable` feature flag. This changes the following behaviour:
+
+- `TreeView`
+  - `props.onActivate` will be called with a node's ID whenever it is activated.
+  - The signature of `props.onSelect` changes from `(event, selectedIDs)` to `(selectedIDs)`.
+  - Whenever you update `props.selected` or `props.active`, the internal state will be updated accordingly and the component re-renders.
+- `TreeNode`
+  - The signature of `props.onToggle` changes from `(event, { id, isExpanded, label, value })` to `(isExpanded)`.
+  - `props.defaultIsExpanded` is added to allow for a default state in uncontrolled mode.
+
+## Example
+
+```jsx
+function SynchronizedTreeView() {
+  const [selected, setSelected] = useState([]);
+  const [active, setActive] = useState(null);
+
+  return (
+    <TreeView
+      selected={selected}
+      onSelect={setSelected}
+      active={active}
+      onActivate={setActive}
+    >
+      ...
+    </TreeView>
+  );
+}
+```

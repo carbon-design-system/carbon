@@ -182,7 +182,7 @@
       opacity: 1;
     }
 
-    @keyframes tooltip-fade {
+    @keyframes #{$prefix}--tooltip-fade {
       from {
         opacity: 0;
       }
@@ -202,7 +202,8 @@
     .#{$prefix}--assistive-text,
     + .#{$prefix}--assistive-text,
     &.#{$prefix}--tooltip--a11y::before {
-      animation: tooltip-fade $duration-fast-01 motion(standard, productive);
+      animation: #{$prefix}--tooltip-fade $duration-fast-01
+        motion(standard, productive);
     }
   }
 

@@ -19,6 +19,7 @@ const ChatButton = React.forwardRef(function ChatButton(
     isQuickAction,
     isSelected,
     kind,
+    renderIcon,
     size,
     ...other
   },
@@ -27,6 +28,7 @@ const ChatButton = React.forwardRef(function ChatButton(
   const prefix = usePrefix();
   const classNames = classnames(className, {
     [`${prefix}--chat-btn`]: true,
+    [`${prefix}--chat-btn--with-icon`]: renderIcon,
     [`${prefix}--chat-btn--quick-action`]: isQuickAction,
     [`${prefix}--chat-btn--quick-action--selected`]: isSelected,
   });
@@ -48,6 +50,7 @@ const ChatButton = React.forwardRef(function ChatButton(
       kind={kind}
       ref={ref}
       size={size}
+      renderIcon={renderIcon}
       {...other}>
       {children}
     </Button>
@@ -90,6 +93,12 @@ ChatButton.propTypes = {
     'ghost',
     'tertiary',
   ]),
+
+  /**
+   * Optional prop to specify an icon to be rendered.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * Specify the size of the `ChatButton`, from the following list of sizes:

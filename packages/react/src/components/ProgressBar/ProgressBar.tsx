@@ -13,7 +13,7 @@ import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
-interface ProgressBarProps {
+export interface ProgressBarProps {
   /**
    * Additional CSS class names.
    */
