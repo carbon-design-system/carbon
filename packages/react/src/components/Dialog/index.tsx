@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'wicg-inert';
 import PropTypes from 'prop-types';
 import React, { MutableRefObject, useEffect, useRef } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
