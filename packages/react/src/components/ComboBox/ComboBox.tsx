@@ -160,6 +160,10 @@ export interface ComboBoxProps<ItemType>
   autoAlign?: boolean;
 
   /**
+   * **Experimental**: will enable autcomplete and typeahead for the input field
+   */
+  autocomplete?: boolean;
+  /**
    * An optional className to add to the container node
    */
   className?: string;
@@ -323,6 +327,7 @@ const ComboBox = forwardRef(
       ['aria-label']: ariaLabel = 'Choose an item',
       ariaLabel: deprecatedAriaLabel,
       autoAlign = false,
+      autocomplete = false,
       className: containerClassName,
       direction = 'bottom',
       disabled = false,
@@ -406,14 +411,32 @@ const ComboBox = forwardRef(
         })
       );
     }
+    const autocompleteCustomFilter = (menu) => {
+      if (
+        !menu ||
+        typeof menu.item !== 'string' ||
+        typeof menu.inputValue !== 'string'
+      ) {
+        return false;
+      }
+      const item = menu.item.toLowerCase();
+      const input = menu.inputValue.toLowerCase();
 
+      if (input.length > item.length) {
+        return false;
+      }
+
+      return input.split('').every((char, index) => item[index] === char);
+    };
     const filterItems = (
       items: ItemType[],
       itemToString: ItemToStringHandler<ItemType>,
       inputValue: string | null
     ) =>
       items.filter((item) =>
-        shouldFilterItem
+        autocomplete
+          ? autocompleteCustomFilter({ item: itemToString(item), inputValue })
+          : shouldFilterItem
           ? shouldFilterItem({
               item,
               itemToString,
@@ -662,7 +685,13 @@ const ComboBox = forwardRef(
           'aria-label': deprecatedAriaLabel || ariaLabel,
           ref: autoAlign ? refs.setFloating : null,
         }),
-      [autoAlign, deprecatedAriaLabel, ariaLabel]
+      [
+        getMenuProps,
+        deprecatedAriaLabel,
+        ariaLabel,
+        autoAlign,
+        refs.setFloating,
+      ]
     );
 
     return (
@@ -883,6 +912,11 @@ ComboBox.propTypes = {
    * ancestor elements.
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * **Experimental**: will enable autcomplete and typeahead for the input field
+   */
+  autocomplete: PropTypes.bool,
 
   /**
    * An optional className to add to the container node
