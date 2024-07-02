@@ -16,6 +16,8 @@ import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import mdx from './Modal.mdx';
+import DatePicker from '../DatePicker';
+import DatePickerInput from '../DatePickerInput';
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -45,6 +47,7 @@ export const Default = () => {
         modalHeading="Add a custom domain"
         modalLabel="Account resources"
         primaryButtonText="Add"
+        //isNested
         secondaryButtonText="Cancel">
         <p style={{ marginBottom: '1rem' }}>
           Custom domains direct requests for your apps in this Cloud Foundry
@@ -87,6 +90,20 @@ export const Default = () => {
           ]}
           itemToString={(item) => (item ? item.text : '')}
         />
+        <DatePicker datePickerType="range">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Start date"
+            size="md"
+          />
+          <DatePickerInput
+            id="date-picker-input-id-finish"
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+            size="md"
+          />
+        </DatePicker>
       </Modal>
     </>
   );
