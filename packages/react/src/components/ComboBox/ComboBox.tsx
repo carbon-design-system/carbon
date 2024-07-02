@@ -491,7 +491,7 @@ const ComboBox = forwardRef(
           case FunctionToggleMenu:
           case ToggleButtonClick:
             if (changes.isOpen && !changes.selectedItem) {
-              return { ...changes, highlightedIndex: 0 };
+              return { ...changes };
             }
             return changes;
 

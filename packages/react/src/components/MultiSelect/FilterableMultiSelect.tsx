@@ -483,7 +483,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     isOpen,
     items: sortedItems,
     itemToString,
-    defaultHighlightedIndex: 0, // after selection, highlight the first item.
     id,
     labelId,
     menuId,
@@ -523,7 +522,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       case FunctionToggleMenu:
       case ToggleButtonClick:
         if (changes.isOpen && !changes.selectedItem) {
-          return { ...changes, highlightedIndex: 0 };
+          return { ...changes };
         }
         return changes;
       case InputChange:

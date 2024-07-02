@@ -84,6 +84,7 @@ test.describe('@avt ComboBox', () => {
     await expect(combobox).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(menu).toBeVisible();
+    await page.keyboard.press('ArrowDown');
     // Navigation inside the menu
     // move to first option
     await expect(optionOne).toHaveClass(
@@ -122,7 +123,9 @@ test.describe('@avt ComboBox', () => {
     await page.keyboard.press('Enter');
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
-    await expect(combobox).toHaveValue('Option 1');
+    await expect(combobox).toHaveValue(
+      'An example option that is really long to show what should be done to handle long text'
+    );
     await page.keyboard.press('Escape');
 
     // should open and select option 2
@@ -130,7 +133,7 @@ test.describe('@avt ComboBox', () => {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
-    await expect(combobox).toHaveValue('Option 2');
+    await expect(combobox).toHaveValue('Option 1');
     await page.keyboard.press('Escape');
   });
 });
