@@ -382,8 +382,8 @@
   }
 
   .#{$prefix}--content-switcher--icon-only-slide {
-    --selected-index: 0;
-    --index: 0;
+    --#{$prefix}-selected-index: 0;
+    --#{$prefix}-index: 0;
   }
 
   .#{$prefix}--content-switcher--icon-only-slide
@@ -412,15 +412,16 @@
 
   .#{$prefix}--content-switcher--icon-only-slide
     .#{$prefix}--content-switcher-btn__selection-indicator {
+    $prev-selected: var(--#{$prefix}-prev-selected-index);
+    $selected: var(--#{$prefix}-selected-index);
+    $index: var(--#{$prefix}-index);
+
     z-index: 10;
     opacity: 0;
-    transform: translateX(calc((var(--selected-index) - var(--index)) * 100%));
+    transform: translateX(calc(($selected - $index) * 100%));
     transition-duration: calc(
       250ms + 83.33ms *
-        (
-          max(var(--prev-selected-index), var(--selected-index)) -
-            min(var(--prev-selected-index), var(--selected-index))
-        )
+        (max($prev-selected, $selected) - min($prev-selected, $selected))
     );
     // transition-duration: var(--duration, 250ms);
     transition-property: transform, opacity;
@@ -437,6 +438,14 @@
     .#{$prefix}--content-switcher-popover--selected
     .#{$prefix}--content-switcher-btn__selection-indicator {
     opacity: 1;
+  }
+
+  .#{$prefix}--content-switcher--icon-only-slide
+    .#{$prefix}--content-switcher-btn:focus
+    .#{$prefix}--content-switcher-btn__selection-indicator {
+    border-color: $focus;
+    box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $focus-inset;
+    clip-path: inset(3px 3px 3px 3px);
   }
 
   .#{$prefix}--content-switcher--icon-only-slide
