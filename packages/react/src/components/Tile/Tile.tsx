@@ -494,7 +494,7 @@ export const SelectableTile = React.forwardRef<
   // Slug is always size `xs`
   const slugRef = useRef<HTMLInputElement>(null);
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'xs',
       ref: slugRef,
@@ -852,7 +852,7 @@ export const ExpandableTile = React.forwardRef<
 
   // Slug is always size `xs`
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'xs',
     });

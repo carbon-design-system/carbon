@@ -9,7 +9,7 @@ import React from 'react';
 import TextInput from '../TextInput';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
 
@@ -228,7 +228,11 @@ describe('TextInput', () => {
 
     it('should respect slug prop', () => {
       render(
-        <TextInput id="textarea-1" labelText="TextArea label" slug={<Slug />} />
+        <TextInput
+          id="textarea-1"
+          labelText="TextArea label"
+          slug={<AILabel />}
+        />
       );
       expect(
         screen.getByRole('button', { name: 'AI - Show information' })

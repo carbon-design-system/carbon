@@ -9,7 +9,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import RadioButton from '../RadioButton';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
 
@@ -142,7 +142,7 @@ describe('RadioButton', () => {
         name="test-name"
         value="test-value"
         labelText="test-label"
-        slug={<Slug />}
+        slug={<AILabel />}
       />
     );
 

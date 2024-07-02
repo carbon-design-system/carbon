@@ -11,7 +11,7 @@ import SelectItem from '../../SelectItem';
 import SelectSkeleton from '../../Select/Select.Skeleton';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
 
@@ -243,7 +243,7 @@ describe('Select', () => {
 
     it('should respect slug prop', () => {
       const { container } = render(
-        <Select id="select" labelText="Select" slug={<Slug />} />
+        <Select id="select" labelText="Select" slug={<AILabel />} />
       );
 
       expect(container.firstChild.firstChild).toHaveClass(

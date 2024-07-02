@@ -10,7 +10,7 @@ import DatePicker from './DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -203,7 +203,7 @@ describe('DatePicker', () => {
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"
         data-testid="input-value"
-        slug={<Slug />}
+        slug={<AILabel />}
       />
     );
 

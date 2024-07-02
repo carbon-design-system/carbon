@@ -15,6 +15,9 @@ import MultiSelect from '.';
 import FilterableMultiSelect from './FilterableMultiSelect';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
+import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
+import { IconButton } from '../IconButton';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
 
 export default {
@@ -379,6 +382,67 @@ export const _Controlled = () => {
     </div>
   );
 };
+
+const aiLabel = (
+  <AILabel className="slug-container">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+export const withAILabel = () => (
+  <div style={{ width: 400 }}>
+    <MultiSelect
+      label="Multiselect Label"
+      id="carbon-multiselect-example"
+      titleText="Multiselect title"
+      helperText="This is helper text"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      selectionFeedback="top-after-reopen"
+      slug={aiLabel}
+    />
+  </div>
+);
+
+export const FilterableWithAILabel = () => (
+  <div style={{ width: 400 }}>
+    <FilterableMultiSelect
+      label="Multiselect Label"
+      id="carbon-multiselect-example"
+      titleText="Multiselect title"
+      helperText="This is helper text"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      selectionFeedback="top-after-reopen"
+      slug={aiLabel}
+    />
+  </div>
+);
 
 export const ExperimentalAutoAlign = () => {
   const ref = useRef();

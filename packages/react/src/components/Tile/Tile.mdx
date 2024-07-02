@@ -1,6 +1,6 @@
 import { Story, ArgsTable, Canvas, Meta } from '@storybook/blocks';
 import * as TileStories from './Tile.stories';
-import * as TileFeatureFlagStories from './Tile.featureflag.stories'
+import * as TileFeatureFlagStories from './Tile.featureflag.stories';
 
 <Meta of={TileStories} />
 
@@ -76,19 +76,31 @@ or if you have multiple feature flags you can enable them this way.
 
 <Canvas>
   <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story of={TileFeatureFlagStories.Clickable} meta={TileFeatureFlagStories} />
+    <Story
+      of={TileFeatureFlagStories.Clickable}
+      meta={TileFeatureFlagStories}
+    />
   </div>
   <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story of={TileFeatureFlagStories.Expandable} meta={TileFeatureFlagStories} />
+    <Story
+      of={TileFeatureFlagStories.Expandable}
+      meta={TileFeatureFlagStories}
+    />
   </div>
   <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story of={TileFeatureFlagStories.MultiSelect} meta={TileFeatureFlagStories} />
+    <Story
+      of={TileFeatureFlagStories.MultiSelect}
+      meta={TileFeatureFlagStories}
+    />
   </div>
   <div style={{ width: '1018px', maxWidth: '100%' }}>
     <Story of={TileFeatureFlagStories.Radio} meta={TileFeatureFlagStories} />
   </div>
   <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story of={TileFeatureFlagStories.Selectable} meta={TileFeatureFlagStories} />
+    <Story
+      of={TileFeatureFlagStories.Selectable}
+      meta={TileFeatureFlagStories}
+    />
   </div>
 </Canvas>
 

@@ -6,6 +6,7 @@
  */
 
 import './tile-story.scss';
+import '../AILabel/ailabel-story.scss';
 import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
@@ -23,7 +24,15 @@ import {
   TileBelowTheFoldContent,
 } from './';
 import TileGroup from '../TileGroup/TileGroup';
-import { Launch } from '@carbon/icons-react';
+import {
+  Launch,
+  ArrowRight,
+  View,
+  FolderOpen,
+  Folders,
+} from '@carbon/icons-react';
+import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
+import { IconButton } from '../IconButton';
 
 export default {
   title: 'Components/Tile',
@@ -302,3 +311,195 @@ export const ExpandableWithLayer = () => (
     )}
   </WithLayer>
 );
+
+const aiLabel = (
+  <AILabel className="slug-container">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+export const withAILabel = {
+  argTypes: {
+    hasRoundedCorners: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    slug: {
+      description:
+        '**Experimental**: Provide an `AILabel` component to be rendered inside the component',
+    },
+  },
+  render: (args) => (
+    <>
+      <div className="slug-tile-container">
+        <Tile slug={aiLabel} id="tile-1" {...args}>
+          <h4>Title</h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+            at consectetur turpis mauris gravida penatibus.
+          </p>
+          <div className="ai-data">
+            <div className="data-container">
+              <p>Data Quality</p>
+              <h3>85%</h3>
+            </div>
+            <div className="data-container">
+              <p>Label text</p>
+              <h3>16%</h3>
+            </div>
+          </div>
+        </Tile>
+        <ClickableTile
+          href="https://www.carbondesignsystem.com/"
+          slug
+          id="tile-click"
+          renderIcon={ArrowRight}
+          {...args}>
+          <h4>Title</h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+            at consectetur turpis mauris gravida penatibus.
+          </p>
+          <div className="ai-data">
+            <div className="data-container">
+              <p>Data Quality</p>
+              <h3>85%</h3>
+            </div>
+            <div className="data-container">
+              <p>Label text</p>
+              <h3>16%</h3>
+            </div>
+          </div>
+        </ClickableTile>
+
+        <ExpandableTile
+          id="expandable-tile-1"
+          tileCollapsedIconText="Interact to Expand tile"
+          tileExpandedIconText="Interact to Collapse tile"
+          slug={aiLabel}
+          {...args}>
+          <TileAboveTheFoldContent>
+            <h4>Title</h4>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+              at consectetur turpis mauris gravida penatibus.
+            </p>
+            <div className="ai-data">
+              <div className="data-container">
+                <p>Data Quality</p>
+                <h3>85%</h3>
+              </div>
+              <div className="data-container">
+                <p>Label text</p>
+                <h3>16%</h3>
+              </div>
+            </div>
+          </TileAboveTheFoldContent>
+          <TileBelowTheFoldContent>
+            <h6>Expanded Section</h6>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+              at consectetur turpis mauris.
+            </p>
+          </TileBelowTheFoldContent>
+        </ExpandableTile>
+      </div>
+
+      <div className="slug-selectable-tile-container">
+        <TileGroup
+          defaultSelected="default-selected"
+          legend="Selectable Tile Group"
+          name="selectable tile group"
+          {...args}>
+          <div>
+            <SelectableTile
+              className="slug-selectable-tile"
+              id="selectable-tile-1"
+              slug={aiLabel}
+              {...args}>
+              Option 1
+            </SelectableTile>
+          </div>
+          <div>
+            <SelectableTile
+              className="slug-selectable-tile"
+              slug={aiLabel}
+              id="selectable-tile-2"
+              {...args}>
+              Option 2
+            </SelectableTile>
+          </div>
+          <div>
+            <SelectableTile
+              className="slug-selectable-tile"
+              slug={aiLabel}
+              id="selectable-tile-3"
+              {...args}>
+              Option 3
+            </SelectableTile>
+          </div>
+        </TileGroup>
+      </div>
+      <br />
+      <br />
+      <div className="slug-selectable-tile-container">
+        <TileGroup
+          defaultSelected="default-selected"
+          legend="Radio Tile Group"
+          name="radio tile group"
+          {...args}>
+          <RadioTile
+            className="slug-radio-tile"
+            id="radio-tile-1"
+            value="standard"
+            slug={aiLabel}
+            {...args}>
+            Option 1
+          </RadioTile>
+          <RadioTile
+            className="slug-radio-tile"
+            id="radio-tile-2"
+            value="default-selected"
+            slug={aiLabel}
+            {...args}>
+            Option 2
+          </RadioTile>
+          <RadioTile
+            className="slug-radio-tile"
+            id="radio-tile-3"
+            value="selected"
+            slug={aiLabel}
+            {...args}>
+            Option 3
+          </RadioTile>
+        </TileGroup>
+      </div>
+    </>
+  ),
+};

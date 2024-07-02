@@ -11,29 +11,29 @@ import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { SkeletonPlaceholder } from '../SkeletonPlaceholder';
 
-export interface AiSkeletonPlaceholderProps {
+export interface AISkeletonPlaceholderProps {
   /**
    * Add a custom class to the component to set the height and width
    */
   className?: string;
 }
 
-const AiSkeletonPlaceholder = ({
+const AISkeletonPlaceholder = ({
   className,
   ...other
-}: AiSkeletonPlaceholderProps) => {
+}: AISkeletonPlaceholderProps) => {
   const prefix = usePrefix();
-  const AiSkeletonPlaceholderClasses = classNames(
+  const AISkeletonPlaceholderClasses = classNames(
     { className, [`${prefix}--skeleton__placeholder--ai`]: true },
     className
   );
 
   return (
-    <SkeletonPlaceholder className={AiSkeletonPlaceholderClasses} {...other} />
+    <SkeletonPlaceholder className={AISkeletonPlaceholderClasses} {...other} />
   );
 };
 
-AiSkeletonPlaceholder.propTypes = {
+AISkeletonPlaceholder.propTypes = {
   /**
    * Add a custom class to the component
    * to set the height and width
@@ -41,4 +41,4 @@ AiSkeletonPlaceholder.propTypes = {
   className: PropTypes.string,
 };
 
-export default AiSkeletonPlaceholder;
+export default AISkeletonPlaceholder;
