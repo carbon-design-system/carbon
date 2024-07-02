@@ -130,7 +130,23 @@ interface OnChangeData<ItemType> {
   selectedItem: ItemType | null | undefined;
   inputValue?: string | null;
 }
+const autocompleteCustomFilter = (menu) => {
+  if (
+    !menu ||
+    typeof menu.item !== 'string' ||
+    typeof menu.inputValue !== 'string'
+  ) {
+    return false;
+  }
+  const item = menu.item.toLowerCase();
+  const input = menu.inputValue.toLowerCase();
 
+  if (input.length > item.length) {
+    return false;
+  }
+
+  return input.split('').every((char, index) => item[index] === char);
+};
 type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
 export interface ComboBoxProps<ItemType>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
@@ -411,23 +427,7 @@ const ComboBox = forwardRef(
         })
       );
     }
-    const autocompleteCustomFilter = (menu) => {
-      if (
-        !menu ||
-        typeof menu.item !== 'string' ||
-        typeof menu.inputValue !== 'string'
-      ) {
-        return false;
-      }
-      const item = menu.item.toLowerCase();
-      const input = menu.inputValue.toLowerCase();
 
-      if (input.length > item.length) {
-        return false;
-      }
-
-      return input.split('').every((char, index) => item[index] === char);
-    };
     const filterItems = (
       items: ItemType[],
       itemToString: ItemToStringHandler<ItemType>,
