@@ -37,7 +37,7 @@ export interface DialogProps extends ReactAttr<HTMLDialogElement> {
   open?: boolean;
 }
 
-const Dialog = React.forwardRef(
+const unstable__Dialog = React.forwardRef(
   (
     {
       children,
@@ -120,9 +120,9 @@ const Dialog = React.forwardRef(
   }
 );
 
-Dialog.displayName = 'Dialog';
+unstable__Dialog.displayName = 'Dialog';
 
-Dialog.propTypes = {
+unstable__Dialog.propTypes = {
   /**
    * Provide children to be rendered inside of the Dialog
    */
@@ -145,5 +145,5 @@ Dialog.propTypes = {
   open: PropTypes.bool,
 };
 
-export { Dialog };
-export default Dialog;
+export { unstable__Dialog };
+export default unstable__Dialog;
