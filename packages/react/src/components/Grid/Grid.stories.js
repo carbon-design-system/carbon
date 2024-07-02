@@ -274,6 +274,23 @@ export const GridStartEnd = () => (
   </Grid>
 );
 
+export const GridStartEndSomeBreakpoints = () => (
+  <Grid>
+    <Column
+      sm={{ span: 4, start: 1 }}
+      md={{ span: 6, start: 2 }}
+      lg={{ span: 7, start: 2 }}>
+      span, start
+    </Column>
+    <Column
+      sm={{ span: 4, start: 1 }}
+      md={{ span: 6, start: 2 }}
+      lg={{ span: 7, start: 0 }}>
+      span, start
+    </Column>
+  </Grid>
+);
+
 export const Offset = () => (
   <Grid>
     <Column
@@ -296,6 +313,21 @@ export const Offset = () => (
       sm={{ span: '25%', offset: 1 }}
       md={{ span: '50%', offset: 2 }}
       lg={{ span: '75%', offset: 4 }}
+    />
+  </Grid>
+);
+
+export const OffsetSomeBreakpoints = () => (
+  <Grid>
+    <Column
+      sm={{ span: 4 }}
+      md={{ span: 6, offset: 1 }}
+      lg={{ span: 7, offset: 1 }}
+    />
+    <Column
+      sm={{ span: 4 }}
+      md={{ span: 6, offset: 1 }}
+      lg={{ span: 7, offset: 0 }}
     />
   </Grid>
 );
