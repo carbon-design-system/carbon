@@ -12,6 +12,7 @@ import React, {
   ForwardedRef,
   ReactNode,
   useContext,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -157,6 +158,7 @@ const Select = React.forwardRef(function Select(
     warnText,
     onChange,
     slug,
+    defaultValue,
     ...other
   }: SelectProps,
   ref: ForwardedRef<HTMLSelectElement>
@@ -227,7 +229,8 @@ const Select = React.forwardRef(function Select(
   };
 
   const handleChange = (evt) => {
-    setTitle(evt?.target?.value);
+    const selectedIndex = evt?.target?.selectedIndex;
+    setTitle(evt?.target?.options[selectedIndex]?.text);
   };
 
   const readOnlyEventHandlers = {
@@ -255,6 +258,13 @@ const Select = React.forwardRef(function Select(
       size: 'mini',
     });
   }
+  useEffect(() => {
+    const selectElement = document.getElementById(
+      id
+    ) as HTMLSelectElement | null;
+    setTitle(selectElement?.options[selectElement?.selectedIndex]?.text || '');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const input = (() => {
     return (
@@ -263,6 +273,7 @@ const Select = React.forwardRef(function Select(
           {...other}
           {...ariaProps}
           id={id}
+          defaultValue={defaultValue}
           className={inputClasses}
           disabled={disabled || undefined}
           aria-invalid={invalid || undefined}
