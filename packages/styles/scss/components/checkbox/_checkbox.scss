@@ -351,6 +351,13 @@
     position: relative;
   }
 
+  //-----------------------------------------------
+  // NestedCheckbox
+  //-----------------------------------------------
+  .#{$prefix}--nested-checkbox__children {
+    margin-inline-start: convert.to-rem(28px);
+  }
+
   // RTL overrides
   [dir='rtl'] .#{$prefix}--checkbox-label::after {
     margin-block-start: 0;
