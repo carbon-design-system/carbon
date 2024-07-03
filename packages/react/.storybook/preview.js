@@ -9,8 +9,8 @@ import {
   Subtitle,
   Description,
   Primary,
-  Controls,
   Stories,
+  ArgTypes,
 } from '@storybook/blocks';
 
 import './styles.scss';
@@ -191,7 +191,7 @@ const parameters = {
         <Subtitle />
         <Description />
         <Primary />
-        <Controls />
+        <ArgTypes />
         <Stories includePrimary={false} />
       </>
     ),
