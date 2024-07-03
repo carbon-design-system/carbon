@@ -15,23 +15,16 @@ const path = require('path');
 
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
 // MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
-const storyGlobs =
-  // [
-  //   '../src/**/*.stories.js',
-  //   '../src/**/next/*.stories.js',
-  //   '../src/**/next/**/*.stories.js',
-  //   '../src/**/*-story.js',
-  // ];
-  [
-    './Welcome/Welcome.mdx',
-    '../src/**/*.stories.js',
-    '../src/**/*.stories.mdx',
-    '../src/components/Tile/Tile.mdx',
-    '../src/**/next/*.stories.js',
-    '../src/**/next/**/*.stories.js',
-    '../src/**/next/*.stories.mdx',
-    '../src/**/*-story.js',
-  ];
+const storyGlobs = [
+  './Welcome/Welcome.mdx',
+  '../src/**/*.stories.js',
+  '../src/**/*.stories.mdx',
+  '../src/components/Tile/Tile.mdx',
+  '../src/**/next/*.stories.js',
+  '../src/**/next/**/*.stories.js',
+  '../src/**/next/*.stories.mdx',
+  '../src/**/*-story.js',
+];
 
 const stories = glob
   .sync(storyGlobs, {
