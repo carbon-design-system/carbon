@@ -9,7 +9,7 @@ import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
-import ComboBox from '../ComboBox';
+import ComboBox from '.';
 import mdx from './ComboBox.mdx';
 
 const items = [

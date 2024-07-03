@@ -16,23 +16,22 @@ const path = require('path');
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
 // MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
 const storyGlobs =
-  process.env.STORYBOOK_STORE_7 === 'false'
-    ? [
-        '../src/**/*.stories.js',
-        '../src/**/next/*.stories.js',
-        '../src/**/next/**/*.stories.js',
-        '../src/**/*-story.js',
-      ]
-    : [
-        './Welcome/Welcome.mdx',
-        '../src/**/*.stories.js',
-        '../src/**/*.stories.mdx',
-        '../src/components/Tile/Tile.mdx',
-        '../src/**/next/*.stories.js',
-        '../src/**/next/**/*.stories.js',
-        '../src/**/next/*.stories.mdx',
-        '../src/**/*-story.js',
-      ];
+  // [
+  //   '../src/**/*.stories.js',
+  //   '../src/**/next/*.stories.js',
+  //   '../src/**/next/**/*.stories.js',
+  //   '../src/**/*-story.js',
+  // ];
+  [
+    './Welcome/Welcome.mdx',
+    '../src/**/*.stories.js',
+    '../src/**/*.stories.mdx',
+    '../src/components/Tile/Tile.mdx',
+    '../src/**/next/*.stories.js',
+    '../src/**/next/**/*.stories.js',
+    '../src/**/next/*.stories.mdx',
+    '../src/**/*-story.js',
+  ];
 
 const stories = glob
   .sync(storyGlobs, {
@@ -108,93 +107,42 @@ const config = {
   features: {
     previewCsfV3: true,
     buildStoriesJson: true,
-    storyStoreV7: process.env.STORYBOOK_STORE_7 !== 'false',
   },
   framework: {
-    name: '@storybook/react-webpack5',
+    name: '@storybook/react-vite',
     options: {},
   },
   stories,
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
+  core: {
+    builder: '@storybook/builder-vite', // 👈 The builder enabled here.
+  },
 
-  webpack(config) {
-    const babelLoader = config.module.rules.find((rule) => {
-      return rule.use?.some(({ loader }) => {
-        return loader.includes('babel-loader');
-      });
-    });
+  async viteFinal(config) {
+    // Merge custom configuration into the default config
+    const { mergeConfig } = await import('vite');
 
-    // This is a temporary trick to get `babel-loader` to ignore packages that
-    // are brought in that have an es, lib, or umd directory.
-    //
-    // Typically this is covered by /node_modules/ (which is the default), but
-    // in our case it seems like these dependencies are resolving to where their
-    // symlink points to. In other words, `@carbon/icons-react` becomes
-    // `../icons-react/es/index.js`.
-    //
-    // This results in these files being included in `babel-loader` and causing
-    // the build times to increase dramatically
-    babelLoader.exclude = [
-      /node_modules/,
-      /packages\/.*\/(es|lib|umd)/,
-      /packages\/icons-react\/next/,
-    ];
-    config.module.rules.push({
-      test: /\.s?css$/,
-      sideEffects: true,
-      use: [
-        {
-          loader:
-            process.env.NODE_ENV === 'production'
-              ? MiniCssExtractPlugin.loader
-              : 'style-loader',
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 2,
-            sourceMap: true,
+    return mergeConfig(config, {
+      // Add dependencies to pre-optimization
+      define: {
+        __DEV__: JSON.stringify(process.env.NODE_ENV === 'development'),
+      },
+
+      esbuild: {
+        include: /\.[jt]sx?$/,
+        exclude: [],
+        loader: 'tsx',
+      },
+      optimizeDeps: {
+        esbuildOptions: {
+          loader: {
+            '.js': 'jsx',
           },
         },
-        {
-          loader: 'postcss-loader',
-          options: {
-            postcssOptions: {
-              plugins: [
-                require('autoprefixer')({
-                  overrideBrowserslist: ['last 1 version'],
-                }),
-              ],
-            },
-            sourceMap: true,
-          },
-        },
-        {
-          loader: 'sass-loader',
-          options: {
-            implementation: require('sass'),
-            sassOptions: {
-              includePaths: [
-                path.resolve(__dirname, '..', 'node_modules'),
-                path.resolve(__dirname, '..', '..', '..', 'node_modules'),
-              ],
-            },
-            warnRuleAsWarning: true,
-            sourceMap: true,
-          },
-        },
-      ],
+      },
     });
-    if (process.env.NODE_ENV === 'production') {
-      config.plugins.push(
-        new MiniCssExtractPlugin({
-          filename: '[name].[contenthash].css',
-        })
-      );
-    }
-    return config;
   },
   docs: {
     autodocs: true,

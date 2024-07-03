@@ -1,4 +1,4 @@
-import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import { ArgTypes, Canvas, Story } from '@storybook/blocks';
 import { Slug, SlugContent, SlugActions } from '.';
 import * as SlugStories from '../DataTable/stories/DataTable-slug.stories';
 
@@ -23,10 +23,8 @@ import * as SlugStories from '../DataTable/stories/DataTable-slug.stories';
 
 The `DataTable` supports placing a `slug` in both the column header and row.
 
-<Canvas>
-  <Story of={SlugStories.ColumnSlugWithSelectionAndExpansion} />
-  <Story of={SlugStories.SlugWithSelection} />
-</Canvas>
+<Canvas of={SlugStories.ColumnSlugWithSelectionAndExpansion} />
+<Canvas of={SlugStories.SlugWithSelection} />
 
 ## Slug anatomy
 

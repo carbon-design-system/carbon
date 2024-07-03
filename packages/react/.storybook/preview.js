@@ -9,7 +9,7 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
+  Controls,
   Stories,
 } from '@storybook/blocks';
 
@@ -191,7 +191,7 @@ const parameters = {
         <Subtitle />
         <Description />
         <Primary />
-        <ArgsTable />
+        <Controls />
         <Stories includePrimary={false} />
       </>
     ),
