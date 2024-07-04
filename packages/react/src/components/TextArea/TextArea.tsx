@@ -456,7 +456,6 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       disabled={disabled}
       rows={rows}
       readOnly={other.readOnly}
-      aria-readonly={other.readOnly ? true : false}
       ref={ref}
     />
   );
