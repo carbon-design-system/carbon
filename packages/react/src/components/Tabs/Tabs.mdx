@@ -210,22 +210,24 @@ extra large screen sizes. The prop is a no-op for smaller screens and will also
 be ignored for `TabList`s with more than 8 tabs. `fullWidth` paired up with a
 wrapping `Grid` component will allow for "grid-aware" tabs:
 
-<Grid condensed>
-  <Column lg={16} md={8} sm={4}>
-    <Tabs>
-      <TabList aria-label="List of tabs" contained fullWidth>
-        <Tab>Tab Label 1</Tab>
-        <Tab>Tab Label 2</Tab>
-        <Tab disabled>Tab Label 3</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>Tab Panel 1</TabPanel>
-        <TabPanel>Tab Panel 2</TabPanel>
-        <TabPanel>Tab Panel 3</TabPanel>
-      </TabPanels>
-    </Tabs>
-  </Column>
-</Grid>
+<Canvas>
+  <Grid condensed>
+    <Column lg={16} md={8} sm={4}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+</Canvas>
 
 ```jsx
 <Grid condensed>
@@ -254,26 +256,28 @@ the `TabList`.
 
 For example, to have 5 tabs and each tab span exactly two columns:
 
-<Grid condensed>
-  <Column lg={10}>
-    <Tabs>
-      <TabList aria-label="List of tabs" contained fullWidth>
-        <Tab>Tab Label 1</Tab>
-        <Tab>Tab Label 2</Tab>
-        <Tab disabled>Tab Label 3</Tab>
-        <Tab>Tab Label 4</Tab>
-        <Tab>Tab Label 5</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>Tab Panel 1</TabPanel>
-        <TabPanel>Tab Panel 2</TabPanel>
-        <TabPanel>Tab Panel 3</TabPanel>
-        <TabPanel>Tab Panel 4</TabPanel>
-        <TabPanel>Tab Panel 5</TabPanel>
-      </TabPanels>
-    </Tabs>
-  </Column>
-</Grid>
+<Canvas>
+  <Grid condensed>
+    <Column lg={10}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+          <Tab>Tab Label 4</Tab>
+          <Tab>Tab Label 5</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+</Canvas>
 
 ```jsx
 <Grid condensed>
@@ -300,26 +304,28 @@ For example, to have 5 tabs and each tab span exactly two columns:
 
 Or, to have 5 tabs and each tab span exactly three columns:
 
-<Grid condensed>
-  <Column lg={15}>
-    <Tabs>
-      <TabList aria-label="List of tabs" contained fullWidth>
-        <Tab>Tab Label 1</Tab>
-        <Tab>Tab Label 2</Tab>
-        <Tab disabled>Tab Label 3</Tab>
-        <Tab>Tab Label 4</Tab>
-        <Tab>Tab Label 5</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>Tab Panel 1</TabPanel>
-        <TabPanel>Tab Panel 2</TabPanel>
-        <TabPanel>Tab Panel 3</TabPanel>
-        <TabPanel>Tab Panel 4</TabPanel>
-        <TabPanel>Tab Panel 5</TabPanel>
-      </TabPanels>
-    </Tabs>
-  </Column>
-</Grid>
+<Canvas>
+  <Grid condensed>
+    <Column lg={15}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+          <Tab>Tab Label 4</Tab>
+          <Tab>Tab Label 5</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+</Canvas>
 
 ```jsx
 <Grid condensed>
