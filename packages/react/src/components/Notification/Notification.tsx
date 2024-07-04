@@ -378,7 +378,7 @@ export interface ToastNotificationProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify the subtitle
    */
-  subtitle?: string;
+  subtitle?: ReactNode;
 
   /**
    * Specify an optional duration the notification should be closed in
@@ -574,7 +574,7 @@ ToastNotification.propTypes = {
   /**
    * Specify the subtitle
    */
-  subtitle: PropTypes.string,
+  subtitle: PropTypes.node,
 
   /**
    * Specify an optional duration the notification should be closed in
@@ -654,7 +654,7 @@ export interface InlineNotificationProps
   /**
    * Specify the subtitle
    */
-  subtitle?: string;
+  subtitle?: ReactNode;
 
   /**
    * Specify the title
@@ -806,7 +806,7 @@ InlineNotification.propTypes = {
   /**
    * Specify the subtitle
    */
-  subtitle: PropTypes.string,
+  subtitle: PropTypes.node,
 
   /**
    * Specify the title
