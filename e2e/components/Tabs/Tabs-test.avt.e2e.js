@@ -33,6 +33,17 @@ test.describe('@avt Tabs', () => {
     await expect(page).toHaveNoACViolations('Tabs-contained');
   });
 
+  test('@avt-advanced-states tabs vertical', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tabs',
+      id: 'components-tabs--vertical',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Tabs-vertical');
+  });
+
   test('@avt-advanced-states tabs contained with icons', async ({ page }) => {
     await visitStory(page, {
       component: 'Tabs',
@@ -147,6 +158,53 @@ test.describe('@avt Tabs', () => {
 
     // Continue to nav through the default tab panel via keyboard navigation
     await page.keyboard.press('ArrowRight');
+    await expect(page.getByRole('tab', { name: 'Tab label 4' })).toBeFocused();
+  });
+
+  test.slow('@avt-keyboard-nav', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tabs',
+      id: 'components-tabs--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    // Focus on the first tab via keyboard navigation
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('tab', { name: 'Tab label 1' })).toBeVisible();
+
+    // Focus should be on content within the first Tab
+    await page.keyboard.press('Tab');
+    await expect(
+      page.getByRole('tabpanel', { name: 'Tab Panel 1' })
+    ).toBeFocused();
+
+    // Moving back one tab stop we should back on Tab label 1
+    await page.keyboard.press('Shift+Tab');
+    await expect(page.getByRole('tab', { name: 'Tab label 1' })).toBeFocused();
+
+    // Nav through the default tab panel via keyboard navigation
+    await page.keyboard.press('ArrowDown');
+    await expect(page.getByRole('tab', { name: 'Tab label 2' })).toBeVisible();
+
+    // Move through the actions in the second tab
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('checkbox')).toBeVisible();
+
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('button', { name: 'Submit' })).toBeVisible();
+
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('textbox')).toBeVisible();
+
+    await page.keyboard.press('Shift+Tab');
+    await page.keyboard.press('Shift+Tab');
+    await page.keyboard.press('Shift+Tab');
+    await expect(page.getByRole('tab', { name: 'Tab label 2' })).toBeFocused();
+
+    // Continue to nav through the default tab panel via keyboard navigation
+    await page.keyboard.press('ArrowDown');
     await expect(page.getByRole('tab', { name: 'Tab label 4' })).toBeFocused();
   });
 
