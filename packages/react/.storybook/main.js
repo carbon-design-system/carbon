@@ -10,7 +10,6 @@
 import remarkGfm from 'remark-gfm';
 const fs = require('fs');
 const glob = require('fast-glob');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
@@ -134,6 +133,11 @@ const config = {
           },
         },
       },
+      // resolve: {
+      //   alias: {
+      //     ALIAS_STORY_STYLE_CONFIG: path.resolve('../scss/_config.scss'),
+      //   },
+      // },
     });
   },
   docs: {
