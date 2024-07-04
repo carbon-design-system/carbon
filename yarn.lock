@@ -2098,7 +2098,6 @@ __metadata:
     use-resize-observer: "npm:^6.0.0"
     webpack: "npm:^5.65.0"
     webpack-dev-server: "npm:^4.7.4"
-    wicg-inert: "npm:^3.1.1"
     window-or-global: "npm:^1.0.1"
   peerDependencies:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
@@ -28404,13 +28403,6 @@ __metadata:
   bin:
     node-which: bin/which.js
   checksum: 10/adf720fe9d84be2d9190458194f814b5e9015ae4b88711b150f30d0f4d0b646544794b86f02c7ebeec1db2029bc3e83a7ff156f542d7521447e5496543e26890
-  languageName: node
-  linkType: hard
-
-"wicg-inert@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "wicg-inert@npm:3.1.1"
-  checksum: 10/78710965132ec77d778e7e126cde4a0608a1b4fcbaf9ac1bc01cf7bd84f294b6de4f72a3555d7b3f773bb621a8a659bc9a2cd503cf0019a15385d0846cea9878
   languageName: node
   linkType: hard
 
