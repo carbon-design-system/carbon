@@ -8,6 +8,7 @@
     "declaration": true,
     "rootDir": ".",
     "skipLibCheck": true,
+    "sourceMap": true,
     "stripInternal": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

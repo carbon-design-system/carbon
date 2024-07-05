@@ -24,6 +24,8 @@ import typescript from '@rollup/plugin-typescript';
 import esbuild from 'rollup-plugin-esbuild'
 import litSCSS from '../tools/rollup-plugin-lit-scss.js';
 
+import * as packageJson from '../package.json' assert { type: "json" };
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function build() {
@@ -103,8 +105,22 @@ function getRollupConfig(input, rootDir, outDir) {
   return {
     input,
     output: {
-      sourcemap: true
+      sourcemap: true,
     },
+    // Mark dependencies listed in `package.json` as external so that they are
+    // not included in the output bundle.
+    external: [
+      ...Object.keys(packageJson.default.dependencies),
+      ...Object.keys(packageJson.default.devDependencies),
+    ].map((name) => {
+      // Transform the name of each dependency into a regex so that imports from
+      // nested paths are correctly marked as external.
+      //
+      // Example:
+      // import 'module-name';
+      // import 'module-name/path/to/nested/module';
+      return new RegExp(`^${name}(/.*)?`);
+    }),
     plugins: [
       alias({
         entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
@@ -113,10 +129,10 @@ function getRollupConfig(input, rootDir, outDir) {
         browser: true,
         mainFields: ['jsnext', 'module', 'main'],
         extensions: ['.js', '.ts'],
-        moduleDirectories: ['node_modules']
       }),
       commonjs({
-        include: /node_modules/,
+        include: [/node_modules/],
+        sourceMap: true,
       }),
       litSCSS({
         includePaths: [
@@ -129,13 +145,11 @@ function getRollupConfig(input, rootDir, outDir) {
       }),
       typescript({
         noEmitOnError: true,
-        noForceEmit: true,
-        sourceMap: false,
-        outputToFilesystem: false,
         compilerOptions: {
           rootDir,
           outDir,
         },
+        tsconfig: path.resolve(__dirname, '..', 'tsconfig.json'),
         exclude: ['tests','.storybook', '*.stories.ts'],
       }),
     ],

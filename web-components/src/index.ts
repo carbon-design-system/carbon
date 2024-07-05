@@ -9,6 +9,7 @@
 
 export { default as CDSAccordion } from './components/accordion/accordion';
 export { default as CDSAccordionItem } from './components/accordion/accordion-item';
+export { default as CDSAccordionSkeleton } from './components/accordion/accordion-skeleton';
 export { default as CDSAISkeletonIcon } from './components/ai-skeleton/ai-skeleton-icon';
 export { default as CDSAISkeletonPlaceholder } from './components/ai-skeleton/ai-skeleton-placeholder';
 export { default as CDSAISkeletonText } from './components/ai-skeleton/ai-skeleton-text';
