@@ -140,7 +140,7 @@ test.describe('@avt Tile', () => {
     );
   });
 
-  test.only('@avt-keyboard-nav SelectableTile', async ({ page }) => {
+  test('@avt-keyboard-nav SelectableTile', async ({ page }) => {
     await visitStory(page, {
       component: 'SelectableTile',
       id: 'components-tile--selectable',
@@ -161,7 +161,7 @@ test.describe('@avt Tile', () => {
     );
   });
 
-  test.only('@avt-keyboard-nav RadioTile', async ({ page }) => {
+  test('@avt-keyboard-nav RadioTile', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioTile',
       id: 'components-tile--radio',
