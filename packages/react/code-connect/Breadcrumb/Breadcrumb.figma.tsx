@@ -17,11 +17,7 @@ figma.connect(
       //noTrailingSlash: needs to come from child item component in figma
       children: figma.children(['_Breadcrumb item']),
     },
-    example: ({ children }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
-      <Breadcrumb>{children}</Breadcrumb>
-    ),
+    example: ({ children }) => <Breadcrumb>{children}</Breadcrumb>,
   }
 );
 

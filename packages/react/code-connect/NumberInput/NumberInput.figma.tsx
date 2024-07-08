@@ -58,8 +58,6 @@ figma.connect(
       warnText,
       numberInputbase,
     }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <NumberInput
         disabled={disabled}
         helperText={helperText}
@@ -88,10 +86,6 @@ figma.connect(
         false: true,
       }),
     },
-    example: ({ hideLabel }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
-      <NumberInputSkeleton hideLabel={hideLabel} />
-    ),
+    example: ({ hideLabel }) => <NumberInputSkeleton hideLabel={hideLabel} />,
   }
 );

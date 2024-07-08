@@ -22,8 +22,6 @@ figma.connect(
       }),
     },
     example: ({ size, children }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <ContentSwitcher onChange={function noRefCheck() {}} size={size}>
         {children}
       </ContentSwitcher>
@@ -45,8 +43,6 @@ figma.connect(
       }),
     },
     example: ({ size, children }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <ContentSwitcher onChange={function noRefCheck() {}} size={size}>
         {children}
       </ContentSwitcher>

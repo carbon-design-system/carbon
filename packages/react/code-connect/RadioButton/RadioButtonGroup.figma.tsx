@@ -45,8 +45,6 @@ figma.connect(
       orientation,
       legendText,
     }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <RadioButtonGroup
         disabled={disabled}
         helperText={helperText}

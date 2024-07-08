@@ -51,8 +51,6 @@ figma.connect(
       // readonlyInputtext: figma.string('Read-only Input text'), // doesn't exist in code shows
     },
     example: ({ ...props }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <Select {...props}>
         <SelectItem value="" text="" />
         <SelectItem value="option-1" text="Option 1" />
@@ -75,10 +73,6 @@ figma.connect(
         false: true,
       }),
     },
-    example: () => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
-      <SelectSkeleton hideLabel={hideLabel} />
-    ),
+    example: () => <SelectSkeleton hideLabel={hideLabel} />,
   }
 );

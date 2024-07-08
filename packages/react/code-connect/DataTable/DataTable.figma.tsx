@@ -49,8 +49,6 @@ figma.connect(
       skeleton: figma.boolean('Skeleton'),
     },
     example: () => {
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       // This is sample code for a basic Table
       // See storybook for for detailed implementation docs
       // https://react.carbondesignsystem.com/?path=/docs/components-datatable-basic--overview

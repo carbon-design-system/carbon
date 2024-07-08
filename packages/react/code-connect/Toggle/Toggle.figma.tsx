@@ -33,11 +33,7 @@ figma.connect(
       labelA: figma.string('State text'),
       labelB: figma.string('State text'),
     },
-    example: ({ ...props }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
-      <Toggle id="id" {...props} />
-    ),
+    example: ({ ...props }) => <Toggle id="id" {...props} />,
   }
 );
 
@@ -62,8 +58,6 @@ figma.connect(
       defaultToggled: figma.boolean('Toggled'),
     },
     example: ({ disabled, size, readOnly, defaultToggled }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <Toggle
         id="id"
         size={size}
@@ -111,8 +105,6 @@ figma.connect(
       hideLabel,
       labelText,
     }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <Toggle
         id="id"
         size={size}
@@ -135,11 +127,7 @@ figma.connect(
     variant: { State: 'Skeleton' },
 
     example: () => {
-      return (
-        // Code Connect integration for Carbon React is in an exploratory phase.
-        // Code sample below may be incomplete.
-        <ToggleSkeleton />
-      );
+      return <ToggleSkeleton />;
     },
   }
 );

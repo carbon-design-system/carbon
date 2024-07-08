@@ -18,11 +18,7 @@ figma.connect(
         Small: true,
       }),
     },
-    example: ({ small }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
-      <Loading withOverlay={false} small={small} />
-    ),
+    example: ({ small }) => <Loading withOverlay={false} small={small} />,
   }
 );
 
@@ -41,8 +37,6 @@ figma.connect(
       }),
     },
     example: ({ ...props }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <InlineLoading iconDescription="Loading" {...props} />
     ),
   }

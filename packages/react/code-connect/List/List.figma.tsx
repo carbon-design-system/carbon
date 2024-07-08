@@ -15,11 +15,7 @@ figma.connect(
   {
     variant: { Type: 'Unordered' },
     props: { children: figma.children(['List item']) },
-    example: ({ children }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
-      <UnorderedList>{children}</UnorderedList>
-    ),
+    example: ({ children }) => <UnorderedList>{children}</UnorderedList>,
   }
 );
 
@@ -29,10 +25,6 @@ figma.connect(
   {
     variant: { Type: 'Ordered' },
     props: { children: figma.children(['List item']) },
-    example: ({ children }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
-      <OrderedList>{children}</OrderedList>
-    ),
+    example: ({ children }) => <OrderedList>{children}</OrderedList>,
   }
 );

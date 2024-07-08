@@ -51,9 +51,6 @@ figma.connect(
       // unselectedtext: figma.string('Unselected text'),// what is this used for in Figma?
     },
     example: ({ ...props }) => {
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
-
       const items = [
         {
           id: 'option-0',

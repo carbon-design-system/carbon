@@ -14,11 +14,7 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4266-104904&t=cMvnFTYLPEhzhIpj-4',
   {
     example: () => {
-      return (
-        // Code Connect integration for Carbon React is in an exploratory phase.
-        // Code sample below may be incomplete.
-        <div>{/* To view CodeSnippet code, view inner component */}</div>
-      );
+      return <div>{/* To view CodeSnippet code, view inner component */}</div>;
     },
   }
 );
@@ -33,8 +29,6 @@ figma.connect(
     },
     example: ({ children }) => {
       return (
-        // Code Connect integration for Carbon React is in an exploratory phase.
-        // Code sample below may be incomplete.
         <CodeSnippet type="inline" feedback="Copied to clipboard">
           {children}
         </CodeSnippet>
@@ -53,8 +47,6 @@ figma.connect(
     },
     example: ({ children }) => {
       return (
-        // Code Connect integration for Carbon React is in an exploratory phase.
-        // Code sample below may be incomplete.
         <CodeSnippet type="single" feedback="Copied to clipboard">
           {children}
         </CodeSnippet>
@@ -77,8 +69,6 @@ figma.connect(
       expanded: figma.boolean('Expanded'),
     },
     example: ({ hideCopyButton }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <CodeSnippet
         type="multi"
         feedback="Copied to clipboard"
@@ -95,10 +85,6 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4257-168802&t=cMvnFTYLPEhzhIpj-4',
   {
     variant: { State: 'Skeleton' },
-    example: () => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
-      <CodeSnippetSkeleton type="multi" />
-    ),
+    example: () => <CodeSnippetSkeleton type="multi" />,
   }
 );

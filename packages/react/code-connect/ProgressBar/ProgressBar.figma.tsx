@@ -41,8 +41,6 @@ figma.connect(
   {
     props: sharedProgressBarProps,
     example: ({ label, value, helperText, status, type, size }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <ProgressBar
         label={label}
         value={value}
@@ -62,8 +60,6 @@ figma.connect(
     variant: { State: 'Error' },
     props: sharedProgressBarProps,
     example: ({ label, value, status, type, size, helperTextError }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <ProgressBar
         label={label}
         value={value}
@@ -83,8 +79,6 @@ figma.connect(
     variant: { State: 'Success' },
     props: sharedProgressBarProps,
     example: ({ label, value, status, type, size, helperTextSuccess }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <ProgressBar
         label={label}
         value={value}

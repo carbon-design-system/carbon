@@ -32,8 +32,6 @@ figma.connect(
       }),
     },
     example: ({ children, contained, fullWidth, tab }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <Tabs dismissable={tab.dismissable} dismissable={tab.dismissablePlusIcon}>
         <TabList
           aria-label="List of tabs"

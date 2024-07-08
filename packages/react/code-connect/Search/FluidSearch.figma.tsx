@@ -24,8 +24,6 @@ figma.connect(
       }),
     },
     example: ({ placeholder, labelText, disabled }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <FluidSearch
         placeholder={placeholder}
         labelText={labelText}

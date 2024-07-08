@@ -54,10 +54,6 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2805-21056&t=6KMXKibN414b97hv-4',
   {
     variant: { State: 'Skeleton' },
-    example: () => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
-      <TextInputSkeleton hideLabel />
-    ),
+    example: () => <TextInputSkeleton hideLabel />,
   }
 );

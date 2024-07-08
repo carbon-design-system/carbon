@@ -27,8 +27,6 @@ figma.connect(
       }),
     },
     example: ({ linkText, ...props }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <Link {...props} href="#">
         {linkText}
       </Link>

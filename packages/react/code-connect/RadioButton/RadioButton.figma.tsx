@@ -66,8 +66,6 @@ figma.connect(
   {
     variant: { State: 'Skeleton' },
     example: () => {
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
       <RadioButtonSkeleton />;
     },
   }

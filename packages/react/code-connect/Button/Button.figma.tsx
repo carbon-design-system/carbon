@@ -43,11 +43,7 @@ figma.connect(
       renderIcon: figma.instance('Swap icon'),
     },
     example: ({ ...props, buttonText }) => {
-      return (
-        // Code Connect integration for Carbon React is in an exploratory phase.
-        // Code sample below may be incomplete.
-        <Button {...props}>{buttonText}</Button>
-      );
+      return <Button {...props}>{buttonText}</Button>;
     },
   }
 );
@@ -67,11 +63,7 @@ figma.connect(
       }),
     },
     example: ({ size }) => {
-      return (
-        // Code Connect integration for Carbon React is in an exploratory phase.
-        // Code sample below may be incomplete.
-        <ButtonSkeleton size={size} />
-      );
+      return <ButtonSkeleton size={size} />;
     },
   }
 );

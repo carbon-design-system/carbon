@@ -58,10 +58,6 @@ figma.connect(
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=3193-29303&mode=design&t=QVE44xARq96HRr11-4',
   {
     variant: { State: 'Skeleton' },
-    example: () => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
-      <CheckboxSkeleton />
-    ),
+    example: () => <CheckboxSkeleton />,
   }
 );

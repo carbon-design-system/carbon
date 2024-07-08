@@ -8,122 +8,87 @@
 // @ts-nocheck
 import React from 'react';
 import { ContainedList } from '@carbon/react';
-// import { TitleProps } from ''; // fake component
 import figma from '@figma/code-connect';
+import { title } from 'process';
 
 const sharedContainedListProps = {
-  titleChild: figma.children(['_Contained list title item']),
   children: figma.children(['_Contained list row item']),
-  searchChild: figma.children(['Search - Default']),
+  search: figma.children(['Search - Default']),
   kind: figma.enum('Type', {
     'On page': 'on-page',
     Disclosed: 'disclosed',
   }),
-
   titleItem: figma.nestedProps('_Contained list title item', {
-    label: figma.string('List title text'),
+    action: figma.boolean('Show action', {
+      true: figma.enum('Action type', {
+        Default: '<OverflowMenu/> (code not fully connected with code connect)',
+        'Filterable search': figma.children(['Search - Default']),
+      }),
+    }),
+    label: figma.boolean('Tooltip', {
+      // true: figma.string('List title text') + figma.children('Tooltip'), //https://github.com/figma/code-connect/issues/92
+      true: figma.string('List title text'),
+      false: figma.string('List title text'),
+    }),
+    tooltip: figma.children('Tooltip'),
+  }),
+  rowItem: figma.nestedProps('_Contained list row item', {
     size: figma.enum('Size', {
-      'Large + Extra large': 'lg',
+      'Extra large': 'xl',
       Medium: 'md',
       Small: 'sm',
-      'Default (disclosed)': 'default--disclosed-',
     }),
-    // showaction: figma.boolean('Value', {
-    //   true: '',
-    //   false: true,
-    // }),
-
-    tooltip: figma.boolean('Tooltip'),
-    // style: figma.enum('Style', {
-    //   'On page': 'on-page',
-    //   Disclosed: 'disclosed',
-    // }),
-
-    // action: figma.enum('Action type', {
-    //   Default: '<div>stuf</div>',
-    //   'Filterable search': (
-    //     // view configuration docs in storybook
-    //     // https://react.carbondesignsystem.com/?path=/docs/components-containedlist--overview
-    //     <ExpandableSearch
-    //       placeholder="Filterable search"
-    //       closeButtonLabelText="Clear search input"
-    //       size="lg"
-    //     />
-    //   ),
-    // }),
-
-    expandfilterablesearch: figma.boolean('Expand filterable search'),
   }),
-
-  search: figma.boolean('Search'), // todo: set up as a variant
+  // Need a way to display a variant restriction from nestedProps
+  // so that we can display this component for actions if Action type is
+  // Filterable search or not
+  // https://github.com/figma/code-connect/issues/91
+  //
+  // or combine boolean with nestedProps
+  // https://github.com/figma/code-connect/issues/89
+  //
+  // titleActions: figma.nestedProps('Actions', {
+  //   action: figma.enum('Action', {
+  //     'Overflow menu': figma.children('Overflow'),
+  //     'Ghost icon button': figma.children('Button'),
+  //     'Primary icon button': figma.children('Button'),
+  //     Link: figma.children('Link'),
+  //     Tag: figma.children('Tag'),
+  //   }),
+  // }),
 };
-
-// figma.connect(
-//   TitleProps,
-//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=16193-272755&t=Imym692WuSKiAweW-4',
-//   {
-//     props: {
-//       showaction: figma.boolean('Value', {
-//         true: '',
-//         false: true,
-//       }),
-//       listtitletext: figma.string('List title text'),
-//       tooltip: figma.boolean('Tooltip'),
-//       style: figma.enum('Style', {
-//         'On page': 'on-page',
-//         Disclosed: 'disclosed',
-//       }),
-//       size: figma.enum('Size', {
-//         'Large + Extra large': 'large---extra-large',
-//         Medium: 'medium',
-//         Small: 'small',
-//         'Default (disclosed)': 'default--disclosed-',
-//       }),
-//       actiontype: figma.enum('Action type', {
-//         Default: 'default',
-//         'Filterable search': 'filterable-search',
-//       }),
-//       expandfilterablesearch: figma.boolean('Expand filterable search'),
-//     },
-//     example: (props) => <div>actions here</div>,
-//   }
-// );
 
 figma.connect(
   ContainedList,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=16193-272726&t=cMvnFTYLPEhzhIpj-4',
   {
     props: sharedContainedListProps,
-    example: ({ children, kind, titleItem, titleChild }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
+    example: ({ children, kind, titleItem, rowItem }) => (
       <ContainedList
         label={titleItem.label}
         kind={kind}
-        size={titleItem.size}
-        action={titleChild}>
+        size={rowItem.size}
+        action={titleItem.action}>
         {children}
       </ContainedList>
     ),
   }
 );
 
-// WithPersistentSearch
+WithPersistentSearch;
 figma.connect(
   ContainedList,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=16193-272726&t=cMvnFTYLPEhzhIpj-4',
   {
     variant: { Search: 'True' },
     props: sharedContainedListProps,
-    example: ({ children, kind, titleItem, titleChild, searchChild }) => (
-      // Code Connect integration for Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
+    example: ({ children, kind, titleItem, rowItem, search }) => (
       <ContainedList
         label={titleItem.label}
         kind={kind}
-        size={titleItem.size}
-        action={titleChild}>
-        {searchChild}
+        size={rowItem.size}
+        action={titleActions.action}>
+        {search}
         {children}
       </ContainedList>
     ),
