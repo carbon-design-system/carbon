@@ -1568,6 +1568,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "AliAldobyan",
+      "name": "Ali Al Dobyan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17975825?v=4",
+      "profile": "https://github.com/AliAldobyan",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

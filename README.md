@@ -297,6 +297,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/nandininarayanofficial"><img src="https://avatars.githubusercontent.com/u/165769075?v=4?s=100" width="100px;" alt=""/><br /><sub><b>nandininarayanofficial</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=nandininarayanofficial" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/digiacomo-a"><img src="https://avatars.githubusercontent.com/u/117646602?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Andrea DG</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=digiacomo-a" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/lluisrojass"><img src="https://avatars.githubusercontent.com/u/15043356?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Luis</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=lluisrojass" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/AliAldobyan"><img src="https://avatars.githubusercontent.com/u/17975825?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ali Al Dobyan</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=AliAldobyan" title="Code">💻</a></td>
   </tr>
 </table>
 
