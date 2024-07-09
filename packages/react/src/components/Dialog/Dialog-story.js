@@ -8,7 +8,7 @@
 /* eslint-disable storybook/story-exports */
 
 import React, { useEffect, useState } from 'react';
-import Dialog from './';
+import { unstable__Dialog as Dialog } from './';
 import Button from '../Button';
 import { action } from '@storybook/addon-actions';
 
