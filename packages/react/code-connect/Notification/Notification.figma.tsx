@@ -66,20 +66,18 @@ figma.connect(
       inline,
       button,
     }) => (
-      <>
-        <ActionableNotification
-          inline={inline}
-          kind={kind}
-          title={title}
-          subtitle={subtitle}
-          hideCloseButton={hideCloseButton}
-          lowContrast={lowContrast}
-          actionButtonLabel={button.actionButtonLabel}
-          onActionButtonClick={() => myFunction()}
-          onClose={() => myFunction()}
-          onCloseButtonClick={() => myFunction()}
-        />
-      </>
+      <ActionableNotification
+        inline={inline}
+        kind={kind}
+        title={title}
+        subtitle={subtitle}
+        hideCloseButton={hideCloseButton}
+        lowContrast={lowContrast}
+        actionButtonLabel={button.actionButtonLabel}
+        onActionButtonClick={() => myFunction()}
+        onClose={() => myFunction()}
+        onCloseButtonClick={() => myFunction()}
+      />
     ),
   }
 );
