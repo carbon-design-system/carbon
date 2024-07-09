@@ -27,5 +27,4 @@ deprecated:
       since the watsonx brand launch. Replaced by the icon watsonx
   - name: AI
     reason:
-      Icon is causing confusion and should be removed from the repo and library
-      in favor of product teams using the Carbon for AI slug
+      Icon should not be used. Teams should use the Carbon AILabel component.
