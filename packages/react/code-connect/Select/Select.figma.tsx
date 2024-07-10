@@ -4,7 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 // @ts-nocheck
 import React from 'react';
 import { Select, SelectItem, SelectSkeleton } from '@carbon/react';
@@ -51,33 +50,8 @@ figma.connect(
       }),
       // readonlyInputtext: figma.string('Read-only Input text'), // doesn't exist in code shows
     },
-    example: ({
-      disabled,
-      helperText,
-      hideLabel,
-      inline,
-      readOnly,
-      invalid,
-      invalidText,
-      warn,
-      warnText,
-      labelText,
-      size,
-    }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
-      <Select
-        disabled={disabled}
-        helperText={helperText}
-        hideLabel={hideLabel}
-        inline={inline}
-        readOnly={readOnly}
-        invalid={invalid}
-        invalidText={invalidText}
-        warn={warn}
-        warnText={warnText}
-        labelText={labelText}
-        size={size}>
+    example: ({ ...props }) => (
+      <Select {...props}>
         <SelectItem value="" text="" />
         <SelectItem value="option-1" text="Option 1" />
         <SelectItem value="option-2" text="Option 2" />
@@ -99,11 +73,6 @@ figma.connect(
         false: true,
       }),
     },
-    example: ({ hideLabel }) => {
-      return;
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
-      <SelectSkeleton hideLabel={hideLabel} />;
-    },
+    example: () => <SelectSkeleton hideLabel={hideLabel} />,
   }
 );
