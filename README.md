@@ -4,7 +4,7 @@
   </a>
 </p>
 <h1 align="center">
-   Carbon Design System
+  Carbon Design System
 </h1>
 
 > Carbon is an open-source design system built by IBM. With the IBM Design
