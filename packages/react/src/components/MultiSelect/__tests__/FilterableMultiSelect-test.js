@@ -170,6 +170,20 @@ describe('FilterableMultiSelect', () => {
     expect(screen.getByPlaceholderText('test')).toHaveDisplayValue(3);
   });
 
+  it('should clear input value when clicking on cross button', async () => {
+    render(<FilterableMultiSelect {...mockProps} placeholder="test" />);
+    await openMenu();
+
+    await userEvent.type(screen.getByPlaceholderText('test'), '3');
+
+    const clearButton = screen.getByRole('button', {
+      name: 'Clear selected item',
+    });
+    await userEvent.click(clearButton);
+
+    expect(screen.getByPlaceholderText('test')).toHaveDisplayValue('');
+  });
+
   it('should respect slug prop', async () => {
     const { container } = render(
       <FilterableMultiSelect {...mockProps} slug={<Slug />} />

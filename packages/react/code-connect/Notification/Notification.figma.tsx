@@ -23,7 +23,8 @@ const sharedNotificationProps = {
     Success: 'success',
     Warning: 'warning',
     Error: 'error',
-    // Figma missing info-square and warning-alt
+    // 'Info square': 'info-square', missing from Figma
+    // 'Warning alt': 'warning-alt' missing from Figma
   }),
   hideCloseButton: figma.boolean('Close', {
     true: false,
@@ -33,13 +34,50 @@ const sharedNotificationProps = {
     true: false,
     false: true,
   }),
-  actionable: figma.boolean('Actionable'),
-  // type: figma.enum("Type", {
-  //   "Inline short": "inline-short",
-  //   "Inline long": "inline-long",
-  //   Toast: "toast",
+  inline: figma.enum('Type', {
+    'Inline short': true,
+    'Inline long': true,
+  }),
+  // this doesn't work
+  // button: figma.nestedProps('Notification action button item', {
+  //   actionButtonItem: figma.nestedProps('Button', {
+  //     actionButtonLabel: figma.string('Button text'),
+  //   }),
   // }),
 };
+
+// this isn't working, perhaps a bug? https://github.com/figma/code-connect/issues/45
+figma.connect(
+  ActionableNotification,
+  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4179-105911&mode=design&t=WhsTspVnawA9vgXk-4',
+  {
+    variant: { Actionable: 'True' }, // <--doesn't work
+    props: sharedNotificationProps,
+    example: ({
+      title,
+      kind,
+      subtitle,
+      hideCloseButton,
+      lowContrast,
+      inline,
+    }) => (
+      // Disclaimer: Code Connect is currently in beta and integration with Carbon
+      // React is in an exploratory phase. Code sample below may be incomplete.
+      <ActionableNotification
+        inline={inline}
+        kind={kind}
+        title={title}
+        subtitle={subtitle}
+        hideCloseButton={hideCloseButton}
+        lowContrast={lowContrast}
+        actionButtonLabel="Action"
+        onActionButtonClick={() => myFunction()}
+        onClose={() => myFunction()}
+        onCloseButtonClick={() => myFunction()}
+      />
+    ),
+  }
+);
 
 figma.connect(
   InlineNotification,
@@ -97,43 +135,6 @@ figma.connect(
         caption={caption}
         lowContrast={lowContrast}
       />
-    ),
-  }
-);
-
-// this isn't working, perhaps a bug? https://github.com/figma/code-connect/issues/45
-figma.connect(
-  ActionableNotification,
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4179-105911&mode=design&t=WhsTspVnawA9vgXk-4',
-  {
-    variant: { Actionable: 'True' }, // <--doesn't work
-    // variant: { Type: 'Inline short',  Actionable: 'True'} <--doesn't work
-    props: sharedNotificationProps,
-    example: ({
-      title,
-      kind,
-      subtitle,
-      hideCloseButton,
-      actionable,
-      lowContrast,
-    }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
-      <>
-        actionable: {actionable}
-        <ActionableNotification
-          kind={kind}
-          title={title}
-          subtitle={subtitle}
-          hideCloseButton={hideCloseButton}
-          lowContrast={lowContrast}
-          // actionButtonLabel="Figma treats this as a separate component"
-          // onActionButtonClick={() => myFunction()}
-          // onClose={() => myFunction()}
-          // onCloseButtonClick={() => myFunction()}
-          // statusIconDescription="notification"
-        />
-      </>
     ),
   }
 );
