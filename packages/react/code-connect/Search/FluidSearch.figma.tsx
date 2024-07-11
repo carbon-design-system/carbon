@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// @ts-nocheck
 import React from 'react';
 import {
   unstable__FluidSearch as FluidSearch,
@@ -25,8 +24,6 @@ figma.connect(
       }),
     },
     example: ({ placeholder, labelText, disabled }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
       <FluidSearch
         placeholder={placeholder}
         labelText={labelText}
