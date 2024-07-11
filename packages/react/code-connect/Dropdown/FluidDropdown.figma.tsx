@@ -5,30 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// @ts-nocheck
 import React from 'react';
-import { Dropdown, DropdownSkeleton } from '@carbon/react';
+import {
+  unstable__FluidDropdown as FluidDropdown,
+  unstable__FluidDropdownSkeleto as FluidDropdownSkeleton,
+} from '@carbon/react';
 import figma from '@figma/code-connect';
 
-// @ts-nocheck
 figma.connect(
-  Dropdown,
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=14032-290635&mode=dev',
+  FluidDropdown,
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14505-302528&t=4Ath5JqwaYJZxznq-4',
   {
     props: {
-      helperText: figma.boolean('Show helper', {
-        true: figma.string('Helper text'),
-      }),
-      size: figma.enum('Size', {
-        Large: 'lg',
-        Medium: 'md',
-        Small: 'sm',
-      }),
-      titleText: figma.string('Label'),
+      titleText: figma.string('Label text'),
       label: figma.string('Prompt text'),
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
-      }),
       readOnly: figma.enum('State', {
         'Read-only': true,
       }),
@@ -38,14 +29,11 @@ figma.connect(
       invalid: figma.enum('State', {
         Error: true,
       }),
-      invalidText: figma.string('Error message'),
+      invalidText: figma.string('Error text'),
       warn: figma.enum('State', {
         Warning: true,
       }),
-      warnText: figma.string('Warning message'),
-      type: figma.enum('Style', {
-        Inline: 'inline',
-      }),
+      warnText: figma.string('Warning text'),
     },
     example: ({ ...props }) => {
       const items = [
@@ -60,7 +48,7 @@ figma.connect(
       ];
 
       return (
-        <Dropdown
+        <FluidDropdown
           {...props}
           id="id"
           initialSelectedItem={items[0]}
@@ -72,23 +60,12 @@ figma.connect(
 );
 
 figma.connect(
-  DropdownSkeleton,
+  FluidDropdownSkeleton,
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=14032-290635&mode=dev',
   {
     variant: { State: 'Skeleton' },
-    props: {
-      size: figma.enum('Size', {
-        Large: 'lg',
-        Medium: 'md',
-        Small: 'sm',
-      }),
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
-      }),
-    },
-    example: ({ ...props }) => {
-      return <DropdownSkeleton {...props} />;
+    example: () => {
+      return <FluidDropdownSkeleton />;
     },
   }
 );
