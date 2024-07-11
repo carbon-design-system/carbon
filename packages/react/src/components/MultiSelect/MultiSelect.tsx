@@ -522,6 +522,7 @@ const MultiSelect = React.forwardRef(
         selectedItems && selectedItems.length > 0,
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--multi-select--readonly`]: readOnly,
+      [`${prefix}--autoalign`]: autoAlign,
     });
 
     // needs to be capitalized for react to render it correctly

@@ -540,6 +540,7 @@ const ComboBox = forwardRef(
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--combo-box--warning`]: showWarning,
       [`${prefix}--combo-box--readonly`]: readOnly,
+      [`${prefix}--autoalign`]: autoAlign,
     });
 
     const titleClasses = cx(`${prefix}--label`, {

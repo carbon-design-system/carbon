@@ -15,6 +15,8 @@ import MultiSelect from '../MultiSelect';
 import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
+import ComboBox from '../ComboBox';
+// import {Popover, PopoverContent} from '../Popover';
 import mdx from './Modal.mdx';
 import {
   StructuredListWrapper,
@@ -86,6 +88,22 @@ export const Default = () => {
             },
           ]}
           itemToString={(item) => (item ? item.text : '')}
+        />
+
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+          placeholder="e.g. github.com"
+          style={{ marginBottom: '1rem' }}
+        />
+
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+          placeholder="e.g. github.com"
+          style={{ marginBottom: '1rem' }}
         />
       </Modal>
     </>
@@ -311,6 +329,21 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           organization to a URL that you own. A custom domain can be a shared
           domain, a shared subdomain, or a shared domain and host.
         </p>
+        <p style={{ marginBottom: '1rem' }}>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <p style={{ marginBottom: '1rem' }}>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <p style={{ marginBottom: '1rem' }}>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
         <TextInput
           data-modal-primary-focus
           id="text-input-1"
@@ -322,6 +355,33 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           <SelectItem value="us-south" text="US South" />
           <SelectItem value="us-east" text="US East" />
         </Select>
+        {/* <Popover style={{marginLeft:400}} autoAlign caret dropShadow>
+      <span>I am trigger I am trigger I am trigger</span>
+      <PopoverContent>
+        <div className="popover-example-content">
+          <p className="popover-title">Available storage</p>
+          <p className="popover-details">
+            This server has 150 GB of block storage remaining.
+
+           </p>
+        </div>
+      </PopoverContent>
+    </Popover> */}
+
+        <ComboBox
+          allowCustomValue
+          autoAlign={true}
+          id="carbon-combobox"
+          items={[
+            'Apple',
+            'Orange',
+            'Banana',
+            'Pineapple',
+            'Raspberry',
+            'Lime',
+          ]}
+          titleText="ComboBox Example of Floating ui"
+        />
 
         <Dropdown
           autoAlign={true}
@@ -361,6 +421,23 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           itemToString={(item) => (item ? item.text : '')}
           direction="top"
         />
+        <MultiSelect
+          id="test"
+          label="Multiselect"
+          titleText="Multiselect"
+          autoAlign
+          items={[
+            {
+              id: 'downshift-1-item-0',
+              text: 'Option 1',
+            },
+            {
+              id: 'downshift-1-item-1',
+              text: 'Option 2',
+            },
+          ]}
+          itemToString={(item) => (item ? item.text : '')}
+        />
 
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
@@ -369,6 +446,38 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
           Quisque consectetur non risus eu rutrum.{' '}
         </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
           accumsan augue. Phasellus consequat augue vitae tellus tincidunt
