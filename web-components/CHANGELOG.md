@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.10.0-rc.0...@carbon/web-components@2.11.0-rc.0) (2024-07-12)
+
+
+### Bug Fixes
+
+* **left-nav:** fix focus trapping ([#11842](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11842)) ([5f824ec](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/5f824ecee9f2bb086bdebee41e2271faa7972cbe))
+
+
+
+
+
 # [2.10.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.9.0-rc.0...@carbon/web-components@2.10.0-rc.0) (2024-05-28)
 
 
