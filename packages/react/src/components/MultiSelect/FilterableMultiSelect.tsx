@@ -482,6 +482,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   } = useCombobox<ItemType>({
     isOpen,
     items: sortedItems,
+    defaultHighlightedIndex: topItems.length > 0 ? 0 : undefined, // after selection, highlight the first item.
     itemToString,
     id,
     labelId,
@@ -493,7 +494,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       return (item as any).disabled;
     },
   });
-
   function stateReducer(state, actionAndChanges) {
     const { type, props, changes } = actionAndChanges;
     const { highlightedIndex } = changes;
