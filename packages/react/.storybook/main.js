@@ -8,9 +8,9 @@
 'use strict';
 
 import remarkGfm from 'remark-gfm';
-const fs = require('fs');
-const glob = require('fast-glob');
-const path = require('path');
+import fs from 'fs';
+import glob from 'fast-glob';
+import path from 'path';
 
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
 // MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
