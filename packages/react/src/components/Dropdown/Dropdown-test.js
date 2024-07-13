@@ -14,6 +14,7 @@ import {
   openMenu,
   generateItems,
   generateGenericItem,
+  waitForPosition,
 } from '../ListBox/test-helpers';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from '../Dropdown/Dropdown.Skeleton';
@@ -35,8 +36,9 @@ describe('Dropdown', () => {
     };
   });
 
-  it('should initially render with the menu not open', () => {
+  it('should initially render with the menu not open', async () => {
     render(<Dropdown {...mockProps} />);
+    await waitForPosition();
     assertMenuClosed();
   });
 
@@ -65,7 +67,7 @@ describe('Dropdown', () => {
     expect(itemToElement).toHaveBeenCalled();
   });
 
-  it('should render selectedItem as an element', () => {
+  it('should render selectedItem as an element', async () => {
     render(
       <Dropdown
         {...mockProps}
@@ -81,6 +83,7 @@ describe('Dropdown', () => {
         )}
       />
     );
+    await waitForPosition();
     // custom element should be rendered for the selected item
     expect(
       // eslint-disable-next-line testing-library/no-node-access
@@ -92,24 +95,27 @@ describe('Dropdown', () => {
   });
 
   describe('title', () => {
-    it('renders a title', () => {
+    it('renders a title', async () => {
       render(<Dropdown {...mockProps} titleText="Email Input" />);
+      await waitForPosition();
       expect(screen.getByText('Email Input')).toBeInTheDocument();
     });
 
-    it('has the expected classes', () => {
+    it('has the expected classes', async () => {
       render(<Dropdown {...mockProps} titleText="Email Input" />);
+      await waitForPosition();
       expect(screen.getByText('Email Input')).toHaveClass(`${prefix}--label`);
     });
   });
 
   describe('helper', () => {
-    it('renders a helper', () => {
+    it('renders a helper', async () => {
       render(<Dropdown helperText="Email Input" {...mockProps} />);
+      await waitForPosition();
       expect(screen.getByText('Email Input')).toBeInTheDocument();
     });
 
-    it('renders children as expected', () => {
+    it('renders children as expected', async () => {
       render(
         <Dropdown
           helperText={
@@ -120,6 +126,7 @@ describe('Dropdown', () => {
           {...mockProps}
         />
       );
+      await waitForPosition();
 
       expect(screen.getByRole('link')).toBeInTheDocument();
     });
@@ -128,7 +135,6 @@ describe('Dropdown', () => {
   it('should let the user select an option by clicking on the option node', async () => {
     render(<Dropdown {...mockProps} />);
     await openMenu();
-
     await userEvent.click(screen.getByText('Item 0'));
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
@@ -161,15 +167,16 @@ describe('Dropdown', () => {
   });
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {
-    it('using an object type for the `initialSelectedItem` prop', () => {
+    it('using an object type for the `initialSelectedItem` prop', async () => {
       render(
         <Dropdown {...mockProps} initialSelectedItem={mockProps.items[0]} />
       );
+      await waitForPosition();
 
       expect(screen.getByText(mockProps.items[0].label)).toBeInTheDocument();
     });
 
-    it('using a string type for the `initialSelectedItem` prop', () => {
+    it('using a string type for the `initialSelectedItem` prop', async () => {
       // Replace the 'items' property in mockProps with a list of strings
       mockProps = {
         ...mockProps,
@@ -179,20 +186,23 @@ describe('Dropdown', () => {
       render(
         <Dropdown {...mockProps} initialSelectedItem={mockProps.items[1]} />
       );
+      await waitForPosition();
 
       expect(screen.getByText(mockProps.items[1])).toBeInTheDocument();
     });
   });
 
   describe('Component API', () => {
-    it('should accept a `ref` for the underlying button element', () => {
+    it('should accept a `ref` for the underlying button element', async () => {
       const ref = React.createRef();
       render(<Dropdown {...mockProps} ref={ref} />);
+      await waitForPosition();
       expect(ref.current).toHaveAttribute('aria-haspopup', 'listbox');
     });
 
-    it('should respect slug prop', () => {
+    it('should respect slug prop', async () => {
       const { container } = render(<Dropdown {...mockProps} slug={<Slug />} />);
+      await waitForPosition();
       expect(container.firstChild).toHaveClass(
         `${prefix}--list-box__wrapper--slug`
       );

@@ -221,5 +221,18 @@ describe('Pagination', () => {
         document.querySelector('.cds--select__page-number')
       ).not.toBeInTheDocument();
     });
+
+    it('should handle zero total items', () => {
+      render(
+        <Pagination
+          totalItems={0}
+          pageSizes={[10, 20]}
+          pageSize={10}
+          page={1}
+        />
+      );
+
+      expect(screen.getByText('0–0 of 0 items')).toBeInTheDocument();
+    });
   });
 });

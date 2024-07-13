@@ -646,7 +646,9 @@ categories:
           - ai-governance--lifecycle
           - ai-governance--tracked
           - ai-governance--untracked
+          - ai-generate
           - ai-launch
+          - ai-recommend
           - machine-learning
           - machine-learning-model
           - model

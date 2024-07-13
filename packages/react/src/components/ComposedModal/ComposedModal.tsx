@@ -11,6 +11,7 @@ import React, {
 } from 'react';
 import { isElement } from 'react-is';
 import PropTypes from 'prop-types';
+import { Layer } from '../Layer';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
 import debounce from 'lodash.debounce';
@@ -96,13 +97,13 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
         : {};
 
     return (
-      <div
+      <Layer
         className={contentClass}
         {...hasScrollingContentProps}
         {...rest}
         ref={mergeRefs(contentRef, ref)}>
         {children}
-      </div>
+      </Layer>
     );
   }
 );
@@ -415,8 +416,9 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     }
 
     return (
-      <div
+      <Layer
         {...rest}
+        level={0}
         role="presentation"
         ref={ref}
         aria-hidden={!open}
@@ -453,7 +455,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
             </button>
           )}
         </div>
-      </div>
+      </Layer>
     );
   }
 );

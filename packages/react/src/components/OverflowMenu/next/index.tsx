@@ -9,13 +9,16 @@ import React, {
   type ComponentType,
   type FunctionComponent,
   useRef,
+  useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
+import { useFloating, flip, autoUpdate } from '@floating-ui/react';
 
 import { IconButton } from '../../IconButton';
 import { Menu } from '../../Menu';
+import mergeRefs from '../../../tools/mergeRefs';
 
 import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
@@ -24,6 +27,11 @@ import { useAttachedMenu } from '../../../internal/useAttachedMenu';
 const defaultSize = 'md';
 
 interface OverflowMenuProps {
+  /**
+   * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
+   */
+  autoAlign?: boolean;
+
   /**
    * A collection of MenuItems to be rendered within this OverflowMenu.
    */
@@ -71,6 +79,7 @@ interface OverflowMenuProps {
 const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
   function OverflowMenu(
     {
+      autoAlign = false,
       children,
       className,
       label = 'Options',
@@ -82,10 +91,39 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
     },
     forwardRef
   ) {
+    const { refs, floatingStyles, placement, middlewareData } = useFloating(
+      autoAlign
+        ? {
+            placement: menuAlignment,
+
+            // The floating element is positioned relative to its nearest
+            // containing block (usually the viewport). It will in many cases also
+            // “break” the floating element out of a clipping ancestor.
+            // https://floating-ui.com/docs/misc#clipping
+            strategy: 'fixed',
+
+            // Middleware order matters, arrow should be last
+            middleware: [
+              flip({
+                fallbackAxisSideDirection: 'start',
+                fallbackPlacements: [
+                  'top-start',
+                  'top-end',
+                  'bottom-start',
+                  'bottom-end',
+                ],
+              }),
+            ],
+            whileElementsMounted: autoUpdate,
+          }
+        : {} // When autoAlign is turned off, floating-ui will not be used
+    );
+
     const id = useId('overflowmenu');
     const prefix = usePrefix();
 
     const triggerRef = useRef<HTMLDivElement>(null);
+
     const {
       open,
       x,
@@ -94,6 +132,22 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       handleMousedown,
       handleClose,
     } = useAttachedMenu(triggerRef);
+    useEffect(() => {
+      if (autoAlign) {
+        Object.keys(floatingStyles).forEach((style) => {
+          if (refs.floating.current) {
+            refs.floating.current.style[style] = floatingStyles[style];
+          }
+        });
+      }
+    }, [
+      floatingStyles,
+      autoAlign,
+      refs.floating,
+      open,
+      placement,
+      middlewareData,
+    ]);
 
     function handleTriggerClick() {
       if (triggerRef.current) {
@@ -118,6 +172,8 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       size !== defaultSize && `${prefix}--overflow-menu--${size}`
     );
 
+    const floatingRef = mergeRefs(triggerRef, refs.setReference);
+
     return (
       <div
         {...rest}
@@ -131,17 +187,19 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
           className={triggerClasses}
           onClick={handleTriggerClick}
           onMouseDown={handleMousedown}
-          ref={triggerRef}
+          ref={floatingRef}
           label={label}
           align={tooltipAlignment}>
           <IconElement className={`${prefix}--overflow-menu__icon`} />
         </IconButton>
         <Menu
           containerRef={triggerRef}
+          ref={refs.setFloating}
           menuAlignment={menuAlignment}
           className={menuClasses}
           id={id}
           size={size}
+          legacyAutoalign={!autoAlign}
           open={open}
           onClose={handleClose}
           x={x}
@@ -154,6 +212,10 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
   }
 );
 OverflowMenu.propTypes = {
+  /**
+   * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
+   */
+  autoAlign: PropTypes.bool,
   /**
    * A collection of MenuItems to be rendered within this OverflowMenu.
    */

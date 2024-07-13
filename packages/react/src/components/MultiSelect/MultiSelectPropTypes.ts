@@ -38,33 +38,48 @@ export const sortingPropTypes = {
   sortItems: PropTypes.func,
 };
 
-export interface ItemBase {
-  disabled?: boolean;
+interface DownshiftTypedProps<ItemType> {
+  itemToString?(item: ItemType): string;
 }
-export interface SortingPropTypes<Item extends ItemBase> {
+
+interface SharedOptions {
+  locale: string;
+}
+
+export interface SortItemsOptions<ItemType>
+  extends SharedOptions,
+    DownshiftTypedProps<ItemType> {
+  compareItems(
+    item1: ItemType,
+    item2: ItemType,
+    options: SharedOptions
+  ): number;
+  selectedItems: ItemType[];
+}
+
+export interface MultiSelectSortingProps<ItemType> {
   /**
-   * Provide a compare function that is used
-   * to determine the ordering of options.
+   * Provide a compare function that is used to determine the ordering of
+   * options. See 'sortItems' for more control.
    */
-  compareItems(itemA: string, itemB: string, ctx: { locale: string }): number;
+  compareItems?(
+    item1: ItemType,
+    item2: ItemType,
+    options: SharedOptions
+  ): number;
 
   /**
    * Provide a method that sorts all options in the control. Overriding this
    * prop means that you also have to handle the sort logic for selected versus
    * un-selected items. If you just want to control ordering, consider the
    * `compareItems` prop instead.
+   *
+   * The return value should be a number whose sign indicates the relative order
+   * of the two elements: negative if a is less than b, positive if a is greater
+   * than b, and zero if they are equal.
    */
-  sortItems(
-    items: Item[],
-    state: {
-      selectedItems: Item[];
-      itemToString(item: Item): string;
-      compareItems(
-        itemA: string,
-        itemB: string,
-        ctx: { locale: string }
-      ): number;
-      locale: string;
-    }
-  ): Item[];
+  sortItems?(
+    items: ReadonlyArray<ItemType>,
+    options: SortItemsOptions<ItemType>
+  ): ItemType[];
 }

@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// @ts-nocheck
 import React from 'react';
 import { AccordionItem } from '@carbon/react';
 import figma from '@figma/code-connect';
@@ -22,27 +21,8 @@ figma.connect(
       open: figma.boolean('Expanded'),
       content: figma.string('Content text'),
       children: figma.instance('Swap slot'),
-      // Props below are on accordion item in Figma and accordion in React
-      // size: figma.enum('Size', {
-      //   Large: 'lg',
-      //   Medium: 'md',
-      //   Small: 'sm',
-      // }),
-      // isFlush: figma.boolean('Flush'),
-      // align: figma.enum('Alignment', {
-      //   Left: 'start',
-      // }),
     },
-    example: ({
-      title,
-      disabled,
-      open,
-      content,
-      children,
-      // size, needs to be set on Accordion
-      // isFlush, needs to be set on Accordion
-      // align, needs to be set on Accordion
-    }) => (
+    example: ({ title, disabled, open, content, children }) => (
       <AccordionItem title={title} disabled={disabled} open={open}>
         <p>{content}</p>
         {children}

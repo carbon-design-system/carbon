@@ -466,6 +466,28 @@ describe('Slider', () => {
         expect(rangeLabels[0]).toHaveTextContent('0-min');
         expect(rangeLabels[1]).toHaveTextContent('100-max');
       });
+
+      it('supports custom formatting on the tooltip when input is hidden', () => {
+        const { container } = renderSlider({
+          min: 0,
+          max: 100,
+          value: 50,
+          formatLabel: (value) => `${value}%`,
+          hideTextInput: true,
+        });
+
+        const rangeLabels = container.querySelectorAll(
+          `.${prefix}--slider__range-label`
+        );
+
+        const valueLabel = container.querySelector(
+          `.${prefix}--popover-content.${prefix}--tooltip-content`
+        );
+
+        expect(rangeLabels[0]).toHaveTextContent('0%');
+        expect(rangeLabels[1]).toHaveTextContent('100%');
+        expect(valueLabel).toHaveTextContent('50%');
+      });
     });
 
     describe('Key/mouse event processing', () => {
@@ -742,6 +764,30 @@ describe('Slider', () => {
       );
       expect(lowerInput).toHaveAttribute('type', 'hidden');
       expect(upperInput).toHaveAttribute('type', 'hidden');
+    });
+
+    it('supports custom formatting on the tooltip when input is hidden', () => {
+      const { container } = renderTwoHandleSlider({
+        min: 0,
+        max: 100,
+        value: 50,
+        unstable_valueUpper: 70,
+        formatLabel: (value) => `${value}%`,
+        hideTextInput: true,
+      });
+
+      const rangeLabels = container.querySelectorAll(
+        `.${prefix}--slider__range-label`
+      );
+
+      const valueLabels = container.querySelectorAll(
+        `.${prefix}--popover-content.${prefix}--tooltip-content`
+      );
+
+      expect(rangeLabels[0]).toHaveTextContent('0%');
+      expect(rangeLabels[1]).toHaveTextContent('100%');
+      expect(valueLabels[0]).toHaveTextContent('50%');
+      expect(valueLabels[1]).toHaveTextContent('70%');
     });
 
     it('allows user to set invalid value when typing in input field', async () => {

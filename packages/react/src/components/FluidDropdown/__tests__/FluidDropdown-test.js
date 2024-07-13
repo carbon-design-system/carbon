@@ -14,6 +14,7 @@ import {
   openMenu,
   generateItems,
   generateGenericItem,
+  waitForPosition,
 } from '../../ListBox/test-helpers';
 import FluidDropdown from '../FluidDropdown';
 
@@ -33,22 +34,25 @@ describe('FluidDropdown', () => {
     };
   });
 
-  it('should render with fluid classes', () => {
+  it('should render with fluid classes', async () => {
     const { container } = render(<FluidDropdown {...mockProps} />);
+    await waitForPosition();
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--fluid`
     );
   });
 
-  it('should render with condensed styles if isCondensed is provided', () => {
+  it('should render with condensed styles if isCondensed is provided', async () => {
     const { container } = render(<FluidDropdown isCondensed {...mockProps} />);
+    await waitForPosition();
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--fluid--condensed`
     );
   });
 
-  it('should initially render with the menu not open', () => {
+  it('should initially render with the menu not open', async () => {
     render(<FluidDropdown {...mockProps} />);
+    await waitForPosition();
     assertMenuClosed();
   });
 
@@ -77,7 +81,7 @@ describe('FluidDropdown', () => {
     expect(itemToElement).toHaveBeenCalled();
   });
 
-  it('should render selectedItem as an element', () => {
+  it('should render selectedItem as an element', async () => {
     render(
       <FluidDropdown
         {...mockProps}
@@ -93,6 +97,7 @@ describe('FluidDropdown', () => {
         )}
       />
     );
+    await waitForPosition();
     // custom element should be rendered for the selected item
     expect(
       // eslint-disable-next-line testing-library/no-node-access
@@ -104,13 +109,15 @@ describe('FluidDropdown', () => {
   });
 
   describe('title', () => {
-    it('renders a title', () => {
+    it('renders a title', async () => {
       render(<FluidDropdown {...mockProps} titleText="Email Input" />);
+      await waitForPosition();
       expect(screen.getByText('Email Input')).toBeInTheDocument();
     });
 
-    it('has the expected classes', () => {
+    it('has the expected classes', async () => {
       render(<FluidDropdown {...mockProps} titleText="Email Input" />);
+      await waitForPosition();
       expect(screen.getByText('Email Input')).toHaveClass(`${prefix}--label`);
     });
   });
@@ -138,18 +145,19 @@ describe('FluidDropdown', () => {
   });
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {
-    it('using an object type for the `initialSelectedItem` prop', () => {
+    it('using an object type for the `initialSelectedItem` prop', async () => {
       render(
         <FluidDropdown
           {...mockProps}
           initialSelectedItem={mockProps.items[0]}
         />
       );
+      await waitForPosition();
 
       expect(screen.getByText(mockProps.items[0].label)).toBeInTheDocument();
     });
 
-    it('using a string type for the `initialSelectedItem` prop', () => {
+    it('using a string type for the `initialSelectedItem` prop', async () => {
       // Replace the 'items' property in mockProps with a list of strings
       mockProps = {
         ...mockProps,
@@ -162,15 +170,17 @@ describe('FluidDropdown', () => {
           initialSelectedItem={mockProps.items[1]}
         />
       );
+      await waitForPosition();
 
       expect(screen.getByText(mockProps.items[1])).toBeInTheDocument();
     });
   });
 
   describe('Component API', () => {
-    it('should accept a `ref` for the underlying button element', () => {
+    it('should accept a `ref` for the underlying button element', async () => {
       const ref = React.createRef();
       render(<FluidDropdown {...mockProps} ref={ref} />);
+      await waitForPosition();
       expect(ref.current).toHaveAttribute('aria-haspopup', 'listbox');
     });
   });
