@@ -139,12 +139,12 @@
         @include focus-outline('outline');
       }
 
-      &:active {
-        background-color: $background-active;
-      }
-
       &:hover {
         background-color: $background-hover;
+      }
+
+      &:active {
+        background-color: $background-active;
       }
     }
 
@@ -157,12 +157,12 @@
       background-color: $layer-accent;
       inline-size: $spacing-09;
 
-      &:active {
-        background-color: $layer-accent-active;
-      }
-
       &:hover {
         background-color: $layer-accent-hover;
+      }
+
+      &:active {
+        background-color: $layer-accent-active;
       }
     }
 
