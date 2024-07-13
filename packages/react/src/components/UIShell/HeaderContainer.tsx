@@ -10,20 +10,21 @@ import React, { useState, useCallback } from 'react';
 import { keys, match } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
 
-interface HeaderContainerRenderProps {
+export interface HeaderContainerRenderProps {
   isSideNavExpanded: boolean;
   onClickSideNavExpand: () => void;
 }
 
-export interface HeaderContainerProps {
+export type HeaderContainerProps<P extends HeaderContainerRenderProps> = {
   isSideNavExpanded?: boolean;
-  render: React.ComponentType<HeaderContainerRenderProps>;
-}
+  render: React.ComponentType<P>;
+} & { [K in keyof Omit<P, keyof HeaderContainerRenderProps>]: P[K] };
 
-export default function HeaderContainer({
+export default function HeaderContainer<P extends HeaderContainerRenderProps>({
   render: Children,
   isSideNavExpanded = false,
-}: HeaderContainerProps) {
+  ...rest
+}: HeaderContainerProps<P>) {
   //state for expandable sidenav
   const [isSideNavExpandedState, setIsSideNavExpandedState] =
     useState(isSideNavExpanded);
@@ -42,6 +43,7 @@ export default function HeaderContainer({
 
   return (
     <Children
+      {...(rest as any)}
       isSideNavExpanded={isSideNavExpandedState}
       onClickSideNavExpand={handleHeaderMenuButtonClick}
     />
@@ -55,10 +57,10 @@ HeaderContainer.propTypes = {
   isSideNavExpanded: PropTypes.bool,
 
   /**
-   * A function or component that is passed an object parameter with two
-   * properties: `isSideNavExpanded` and `onClickSideNavExpand`. The function or
-   * component can then use those properties to within the components it
-   * returns, such as with the HeaderMenuButton and SideNav components.
+   * A function or a component that is invoked with `isSideNavExpanded` and `onClickSideNavExpand`.
+   * The function or component can then use those properties to within the components it
+   * returns, such as with the HeaderMenuButton and SideNav components. Additional props will also be passed
+   * into this component for convenience.
    */
   render: PropTypes.elementType.isRequired,
 };

@@ -7,7 +7,7 @@
 
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 import { act, render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { useState } from 'react';
 import MultiSelect from '../';
 import {
   generateItems,
@@ -16,6 +16,8 @@ import {
 } from '../../ListBox/test-helpers';
 import userEvent from '@testing-library/user-event';
 import { Slug } from '../../Slug';
+import Button from '../../Button';
+import ButtonSet from '../../ButtonSet';
 
 const prefix = 'cds';
 
@@ -591,6 +593,143 @@ describe('MultiSelect', () => {
 
       expect(container.firstChild).toHaveClass(
         `${prefix}--list-box__wrapper--slug`
+      );
+    });
+  });
+
+  describe('Controlled', () => {
+    const ControlledMultiselect = () => {
+      const items = generateItems(4, generateGenericItem);
+      const [selectedItems, setSelectedItems] = useState([]);
+
+      const onSelectionChanged = (value) => {
+        setSelectedItems(value);
+      };
+      return (
+        <>
+          <MultiSelect
+            id="test"
+            titleText="Multiselect title"
+            label="test-label"
+            items={items}
+            selectedItems={selectedItems}
+            onChange={(data) => onSelectionChanged(data.selectedItems)}
+            selectionFeedback="top-after-reopen"
+          />
+          <br />
+          <ButtonSet>
+            <Button
+              id="all"
+              onClick={() =>
+                setSelectedItems(items.filter((item) => !item.disabled))
+              }>
+              Select all
+            </Button>
+            <Button
+              id="clear"
+              kind="secondary"
+              onClick={() => setSelectedItems([])}>
+              Clear
+            </Button>
+          </ButtonSet>
+        </>
+      );
+    };
+
+    it('should initially render controlled multiselect with a given label', async () => {
+      const label = 'test-label';
+      const { container } = render(<ControlledMultiselect />);
+      await waitForPosition();
+      // eslint-disable-next-line testing-library/prefer-screen-queries
+      const labelNode = getByText(container, label);
+      expect(isElementVisible(labelNode)).toBe(true);
+
+      expect(
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+        container.querySelector(
+          '[aria-expanded="true"][aria-haspopup="listbox"]'
+        )
+      ).toBeNull();
+    });
+    it('should allow the items to be controlled from external state', async () => {
+      const label = 'test-label';
+      const { container } = render(<ControlledMultiselect />);
+      const labelNode = getByText(container, label);
+      expect(isElementVisible(labelNode)).toBe(true);
+      //select all the items
+      await userEvent.click(screen.getByText('Select all'));
+      //open the dropdown to check
+      const dropwdownNode = screen.getByRole('combobox');
+      await userEvent.click(dropwdownNode);
+      // Check if all items are selected
+      const options = screen.getAllByRole('option');
+      options.forEach((option) => {
+        expect(option).toHaveAttribute('aria-selected', 'true');
+      });
+
+      //clear the selection
+      await userEvent.click(screen.getByText('Clear'));
+      await userEvent.click(dropwdownNode);
+      //check if all items are cleared
+      const items = screen.getAllByRole('option');
+      items.forEach((option) => {
+        expect(option).toHaveAttribute('aria-selected', 'false');
+      });
+    });
+    it('should support controlled component functionality with selectedItems and onChange', async () => {
+      const onChange = jest.fn();
+      const items = generateItems(4, generateGenericItem);
+      const { rerender } = render(
+        <MultiSelect
+          items={items}
+          label="test-label"
+          id="test-id"
+          selectedItems={[items[0]]}
+          onChange={onChange}
+        />
+      );
+
+      // The selected items should match what's passed into selectedItems
+      const dropwdownNode = screen.getByRole('combobox');
+      await userEvent.click(dropwdownNode);
+      expect(screen.getAllByRole('option')[0]).toHaveAttribute(
+        'aria-selected',
+        'true'
+      );
+
+      // onChange should fire for interactions
+      await userEvent.click(screen.getAllByRole('option')[1]);
+      expect(onChange).toHaveBeenCalledTimes(1);
+
+      // If the onChange event data is not used to update selectedItems, the selection should remain as it was before
+      expect(screen.getAllByRole('option')[0]).toHaveAttribute(
+        'aria-selected',
+        'true'
+      );
+      expect(screen.getAllByRole('option')[1]).toHaveAttribute(
+        'aria-selected',
+        'false'
+      );
+
+      // Force a re-render with updated selectedItems matching the initial selection and the onChange event data
+      rerender(
+        <MultiSelect
+          items={items}
+          label="test-label"
+          id="test-id"
+          selectedItems={[items[0], items[1]]}
+          onChange={onChange}
+        />
+      );
+
+      // Now both should be selected
+      expect(screen.getAllByRole('option')[0]).toHaveAttribute(
+        'aria-selected',
+        'true'
+      );
+      expect(screen.getAllByRole('option')[1]).toHaveAttribute(
+        'aria-selected',
+        'true'
       );
     });
   });

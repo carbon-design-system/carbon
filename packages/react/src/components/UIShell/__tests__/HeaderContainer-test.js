@@ -53,4 +53,23 @@ describe('HeaderContainer', () => {
       {}
     );
   });
+
+  it('should pass through rest props', () => {
+    const rest = {
+      foo: 'foo',
+      bar: /bar/,
+    };
+    const Test = jest.fn(() => <div />);
+
+    render(<HeaderContainer render={Test} {...rest} />);
+
+    expect(Test).toHaveBeenCalledWith(
+      {
+        isSideNavExpanded: false,
+        onClickSideNavExpand: expect.any(Function),
+        ...rest,
+      },
+      {}
+    );
+  });
 });

@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// @ts-nocheck
 import React from 'react';
 import { Breadcrumb } from '@carbon/react';
 import figma from '@figma/code-connect';
@@ -18,11 +17,7 @@ figma.connect(
       //noTrailingSlash: needs to come from child item component in figma
       children: figma.children(['_Breadcrumb item']),
     },
-    example: ({ children }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
-      <Breadcrumb>{children}</Breadcrumb>
-    ),
+    example: ({ children }) => <Breadcrumb>{children}</Breadcrumb>,
   }
 );
 

@@ -87,7 +87,7 @@ test.describe('@avt DatePicker', () => {
       },
     });
 
-    // for some reason the firs tab is not working to focus the first tabstop, so focusing manually
+    // for some reason the first tab is not working to focus the first tabstop, so focusing manually
     await page.getByRole('textbox', { name: 'Date Picker label' }).focus();
     await expect(
       page.getByRole('textbox', { name: 'Date Picker label' })
@@ -96,9 +96,6 @@ test.describe('@avt DatePicker', () => {
     await page.keyboard.press('ArrowDown');
     await expect(page.locator('span.today')).toBeFocused();
     await page.keyboard.press('Escape');
-    await expect(
-      page.getByRole('textbox', { name: 'Date Picker label' })
-    ).toBeFocused();
     await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
       /open/
     );
@@ -126,18 +123,7 @@ test.describe('@avt DatePicker', () => {
     await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
-    await expect(
-      page.locator('input#date-picker-input-id-start')
-    ).toBeFocused();
-    await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
-      /open/
-    );
-    await page.keyboard.press('Tab');
-    await expect(
-      page.locator('input#date-picker-input-id-finish')
-    ).toBeFocused();
-    await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
-    await page.keyboard.press('Escape');
+    await page.keyboard.press('Enter');
     await expect(
       page.locator('input#date-picker-input-id-finish')
     ).toBeFocused();

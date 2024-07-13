@@ -209,6 +209,20 @@ describe('ComboBox', () => {
     expect(findInputNode()).toHaveDisplayValue('Apple');
   });
 
+  it('should apply onChange value if custom value is entered and `allowCustomValue` is set', async () => {
+    render(<ComboBox {...mockProps} allowCustomValue />);
+
+    expect(findInputNode()).toHaveDisplayValue('');
+
+    await userEvent.type(findInputNode(), 'Apple');
+    await userEvent.keyboard('[Enter]');
+    assertMenuClosed();
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      inputValue: 'Apple',
+      selectedItem: null,
+    });
+  });
+
   it('should respect slug prop', async () => {
     const { container } = render(<ComboBox {...mockProps} slug={<Slug />} />);
     await waitForPosition();

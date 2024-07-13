@@ -64,6 +64,25 @@ describe('RadioButtonGroup', () => {
     expect(fieldset).toContainElement(screen.getByLabelText('test-2'));
   });
 
+  it('should ignore null children', () => {
+    render(
+      <RadioButtonGroup defaultSelected="test-1" name="test" legendText="test">
+        <RadioButton labelText="test-1" value="test-1" />
+        <RadioButton labelText="test-2" value="test-2" />
+        {null}
+      </RadioButtonGroup>
+    );
+
+    const fieldset = screen
+      .getByText('test', {
+        selector: 'legend',
+      })
+      // eslint-disable-next-line testing-library/no-node-access
+      .closest('fieldset');
+    expect(fieldset).toContainElement(screen.getByLabelText('test-1'));
+    expect(fieldset).toContainElement(screen.getByLabelText('test-2'));
+  });
+
   describe('Component API', () => {
     it('should support a custom className on the outermost element', () => {
       const { container } = render(
