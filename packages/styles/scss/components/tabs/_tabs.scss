@@ -171,6 +171,7 @@
 
     .#{$prefix}--tab--overflow-nav-button--previous {
       position: absolute;
+      z-index: 1;
       inset-block: 0 0;
       inset-inline-start: 0;
     }
