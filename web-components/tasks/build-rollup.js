@@ -25,14 +25,17 @@ import {resourceJSPaths} from '../tools/babel-plugin-resource-js-paths.js';
 import litSCSS from '../tools/rollup-plugin-lit-scss.js';
 import { globby } from 'globby';
 import carbonIcons from '../tools/rollup-plugin-icons.js';
+import json from '@rollup/plugin-json';
 
 import * as packageJson from '../package.json' assert { type: "json" };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function build() {
+  const inputs = await globby([ 'src/**/*.ts', '!src/**/*.stories.ts', '!src/**/*.d.ts']);
+
   const entryPoint = {
-    filepath: path.resolve(__dirname, '..', 'src', 'index.ts'),
+    filepath: inputs,
     rootDir: 'src',
     outputDirectory: path.resolve(__dirname, '..'),
   };
@@ -61,44 +64,44 @@ async function build() {
       format.directory
     );
 
-    const iconsInputConfig = getIconRollupConfig(
-      iconInputs
-    );
-
-    const iconsBundle = await rollup(iconsInputConfig);
-
-    const iconsOutputDir = path.join(
-      iconsEntrypoint.outputDirectory,
-      format.directory, 'icons'
-    );
-
-    // Build @carbon/icons
-    for (const format of formats) {
-      await iconsBundle.write({
-        dir: iconsOutputDir,
-        format: format.type,
-        preserveModules: true,
-        banner,
-        exports: 'named',
-      });
-    }
-
-    const reactInputConfig = getRollupConfig(
-      entryPoint.filepath,
+    const cwcInputConfig = getRollupConfig(
+      inputs,
       entryPoint.rootDir,
       outputDirectory
     );
-    const reactBundle = await rollup(reactInputConfig);
+    const cwcBundle = await rollup(cwcInputConfig);
 
-    await reactBundle.write({
+    await cwcBundle.write({
       dir: outputDirectory,
       format: format.type,
       preserveModules: true,
-      preserveModulesRoot: path.dirname(entryPoint.filepath),
+      preserveModulesRoot: 'src',
       banner,
       exports: 'named',
       sourcemap: true
     });
+
+    // const iconsInputConfig = getIconRollupConfig(
+    //   iconInputs
+    // );
+
+    // const iconsBundle = await rollup(iconsInputConfig);
+
+    // const iconsOutputDir = path.join(
+    //   iconsEntrypoint.outputDirectory,
+    //   format.directory, 'icons'
+    // );
+
+    // // Build @carbon/icons
+    // for (const format of formats) {
+    //   await iconsBundle.write({
+    //     dir: iconsOutputDir,
+    //     format: format.type,
+    //     preserveModules: true,
+    //     banner,
+    //     exports: 'named',
+    //   });
+    // }
   }
 }
 
@@ -128,6 +131,7 @@ function getRollupConfig(input, rootDir, outDir) {
       return new RegExp(`^${name}(/.*)?`);
     }),
     plugins: [
+      json(),
       alias({
         entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
       }),
@@ -138,7 +142,6 @@ function getRollupConfig(input, rootDir, outDir) {
       }),
       commonjs({
         include: [/node_modules/],
-        sourceMap: true,
       }),
       // babel({
       //   babelrc: false,
