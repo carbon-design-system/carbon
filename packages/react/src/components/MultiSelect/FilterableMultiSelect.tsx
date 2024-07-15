@@ -500,6 +500,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
 
     if (changes.isOpen && !isOpen) {
       setTopItems(controlledSelectedItems);
+      return { highlightedIndex: 0 };
     }
     switch (type) {
       case InputKeyDownEnter:

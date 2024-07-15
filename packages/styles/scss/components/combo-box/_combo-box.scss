@@ -37,10 +37,10 @@
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--list-box--expanded
-    .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input:not(
-      .#{$prefix}--text-input--empty
-    ) {
+  .#{$prefix}--combo-box.#{$prefix}--list-box--expanded:has(
+      input[aria-activedescendant]:not([aria-activedescendant=''])
+    )
+    .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
     outline-offset: convert.to-rem(-1px);
     outline-width: convert.to-rem(1px);
   }
