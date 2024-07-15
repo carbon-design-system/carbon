@@ -1615,6 +1615,7 @@ __metadata:
     "@rollup/plugin-alias": "npm:^5.1.0"
     "@rollup/plugin-babel": "npm:^5.3.1"
     "@rollup/plugin-commonjs": "npm:^21.0.3"
+    "@rollup/plugin-json": "npm:^6.1.0"
     "@rollup/plugin-multi-entry": "npm:^6.0.1"
     "@rollup/plugin-node-resolve": "npm:^8.4.0"
     "@rollup/plugin-replace": "npm:^4.0.0"
@@ -3307,6 +3308,20 @@ __metadata:
   peerDependencies:
     rollup: ^2.38.3
   checksum: 10/b33bfc80757f43c53862a8546e1c17cdd0d00945a525c11c4527177cb9d00553334e9decc49b39e7d519d6315144d4a1aa8e8552afd35300c85ba182a2eaf81a
+  languageName: node
+  linkType: hard
+
+"@rollup/plugin-json@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "@rollup/plugin-json@npm:6.1.0"
+  dependencies:
+    "@rollup/pluginutils": "npm:^5.1.0"
+  peerDependencies:
+    rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+  peerDependenciesMeta:
+    rollup:
+      optional: true
+  checksum: 10/cc018d20c80242a2b8b44fae61a968049cf31bb8406218187cc7cda35747616594e79452dd65722e7da6dd825b392e90d4599d43cd4461a02fefa2865945164e
   languageName: node
   linkType: hard
 
