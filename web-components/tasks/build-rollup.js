@@ -7,7 +7,6 @@
 
 'use strict';
 
-// const { babel } = require('@rollup/plugin-babel');
 import path from 'path';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
@@ -16,13 +15,16 @@ import postcss from 'postcss';
 import alias from '@rollup/plugin-alias';
 import { rollup } from 'rollup';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import terser from '@rollup/plugin-terser';
+import { babel } from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import summary from 'rollup-plugin-summary';
 import typescript from '@rollup/plugin-typescript';
 import esbuild from 'rollup-plugin-esbuild'
+import {resourceJSPaths} from '../tools/babel-plugin-resource-js-paths.js';
 import litSCSS from '../tools/rollup-plugin-lit-scss.js';
+import { globby } from 'globby';
+import carbonIcons from '../tools/rollup-plugin-icons.js';
 
 import * as packageJson from '../package.json' assert { type: "json" };
 
@@ -34,11 +36,14 @@ async function build() {
     rootDir: 'src',
     outputDirectory: path.resolve(__dirname, '..'),
   };
-  // const iconsEntrypoint = {
-  //   filepath: path.resolve(__dirname, '..', 'icons', 'src', 'index.ts'),
-  //   rootDir: path.join('icons', 'src'),
-  //   outputDirectory: path.resolve(__dirname, '..', 'icons'),
-  // };
+
+  //grab all the icon files from @carbon/icons as input
+  const iconInputs = await globby(['node_modules/@carbon/icons/lib/**/*.js', '!**/index.js']);
+
+  const iconsEntrypoint = {
+    outputDirectory: path.resolve(__dirname, '..'),
+  };
+
   const formats = [
     {
       type: 'esm',
@@ -56,6 +61,28 @@ async function build() {
       format.directory
     );
 
+    const iconsInputConfig = getIconRollupConfig(
+      iconInputs
+    );
+
+    const iconsBundle = await rollup(iconsInputConfig);
+
+    const iconsOutputDir = path.join(
+      iconsEntrypoint.outputDirectory,
+      format.directory, 'icons'
+    );
+
+    // Build @carbon/icons
+    for (const format of formats) {
+      await iconsBundle.write({
+        dir: iconsOutputDir,
+        format: format.type,
+        preserveModules: true,
+        banner,
+        exports: 'named',
+      });
+    }
+
     const reactInputConfig = getRollupConfig(
       entryPoint.filepath,
       entryPoint.rootDir,
@@ -70,25 +97,8 @@ async function build() {
       preserveModulesRoot: path.dirname(entryPoint.filepath),
       banner,
       exports: 'named',
+      sourcemap: true
     });
-
-    // const iconsInputConfig = getRollupConfig(
-    //   iconsEntrypoint.filepath,
-    //   iconsEntrypoint.rootDir,
-    //   outputDirectory
-    // );
-    // const iconsBundle = await rollup(iconsInputConfig);
-
-    // // Build @carbon/react icons
-    // for (const format of formats) {
-    //   await iconsBundle.write({
-    //     file:
-    //       format.type === 'commonjs' ? 'icons/index.js' : 'icons/index.esm.js',
-    //     format: format.type,
-    //     banner,
-    //     exports: 'named',
-    //   });
-    // }
   }
 }
 
@@ -101,12 +111,8 @@ const banner = `/**
 `;
 
 function getRollupConfig(input, rootDir, outDir) {
-  console.log('input', input);
   return {
     input,
-    output: {
-      sourcemap: true,
-    },
     // Mark dependencies listed in `package.json` as external so that they are
     // not included in the output bundle.
     external: [
@@ -134,6 +140,16 @@ function getRollupConfig(input, rootDir, outDir) {
         include: [/node_modules/],
         sourceMap: true,
       }),
+      // babel({
+      //   babelrc: false,
+      //   exclude: ['node_modules/**'],
+      //   plugins: [
+      //     ['@babel/plugin-transform-runtime', { useESModules: true, version: '7.8.0' }],
+      //     resourceJSPaths
+      //   ],
+      //   babelHelpers: 'runtime',
+      //   extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      // }),
       litSCSS({
         includePaths: [
           path.resolve(__dirname, '../node_modules')
@@ -149,12 +165,35 @@ function getRollupConfig(input, rootDir, outDir) {
           rootDir,
           outDir,
         },
-        tsconfig: path.resolve(__dirname, '..', 'tsconfig.json'),
         exclude: ['tests','.storybook', '*.stories.ts'],
       }),
     ],
   };
 }
+
+function getIconRollupConfig(input) {
+  return {
+    input,
+     // Mark dependencies listed in `package.json` as external so that they are
+    // not included in the output bundle.
+    external: [
+      ...Object.keys(packageJson.default.dependencies),
+      ...Object.keys(packageJson.default.devDependencies),
+    ].map((name) => {
+      // Transform the name of each dependency into a regex so that imports from
+      // nested paths are correctly marked as external.
+      //
+      // Example:
+      // import 'module-name';
+      // import 'module-name/path/to/nested/module';
+      return new RegExp(`^${name}(/.*)?`);
+    }),
+    plugins: [
+      carbonIcons()
+    ]
+  }
+}
+
 
 build().catch((error) => {
   console.log(error);

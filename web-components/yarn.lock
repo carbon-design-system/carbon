@@ -1132,6 +1132,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-transform-runtime@npm:^7.24.7":
+  version: 7.24.7
+  resolution: "@babel/plugin-transform-runtime@npm:7.24.7"
+  dependencies:
+    "@babel/helper-module-imports": "npm:^7.24.7"
+    "@babel/helper-plugin-utils": "npm:^7.24.7"
+    babel-plugin-polyfill-corejs2: "npm:^0.4.10"
+    babel-plugin-polyfill-corejs3: "npm:^0.10.1"
+    babel-plugin-polyfill-regenerator: "npm:^0.6.1"
+    semver: "npm:^6.3.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10/6f82f2104394d6efef3ba5b38474018f1072d524087eb223776dd55cf8ec8885e813a73004c95218f37de7c0dbaa1a136d2e359cee8cf9ffb3f2e130a3aeb99a
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-transform-shorthand-properties@npm:^7.24.7":
   version: 7.24.7
   resolution: "@babel/plugin-transform-shorthand-properties@npm:7.24.7"
@@ -1581,6 +1597,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/web-components@workspace:."
   dependencies:
+    "@babel/plugin-transform-runtime": "npm:^7.24.7"
     "@babel/runtime": "npm:^7.16.3"
     "@carbon/ibm-products-styles": "npm:^2.30.1"
     "@carbon/icon-helpers": "npm:10.47.0"
@@ -1612,6 +1629,7 @@ __metadata:
     "@storybook/blocks": "npm:^8.0.6"
     "@storybook/web-components": "npm:^8.0.6"
     "@storybook/web-components-vite": "npm:^8.0.6"
+    "@types/babel__plugin-transform-runtime": "npm:^7"
     "@types/bluebird": "npm:^3.5.36"
     "@types/jasmine": "npm:^3.10.2"
     "@types/jest": "npm:^29.2.3"
@@ -4615,6 +4633,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/babel__plugin-transform-runtime@npm:^7":
+  version: 7.9.5
+  resolution: "@types/babel__plugin-transform-runtime@npm:7.9.5"
+  checksum: 10/a4b0ec2c48af069c79a7df694ca6d95a96cf1284481e38dfd6817cb0048b9f317703ac8d151041740a8fea7e50153a1d2e6bf0bd0d33ed5a26a7be3412e24224
+  languageName: node
+  linkType: hard
+
 "@types/babel__template@npm:*":
   version: 7.4.4
   resolution: "@types/babel__template@npm:7.4.4"
@@ -5584,7 +5609,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-polyfill-corejs3@npm:^0.10.4":
+"babel-plugin-polyfill-corejs3@npm:^0.10.1, babel-plugin-polyfill-corejs3@npm:^0.10.4":
   version: 0.10.4
   resolution: "babel-plugin-polyfill-corejs3@npm:0.10.4"
   dependencies:

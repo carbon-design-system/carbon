@@ -8,6 +8,7 @@
  */
 
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { createFilter } from '@rollup/pluginutils'
 import icon from './svg-result-carbon-icon.js';
 
@@ -49,7 +50,8 @@ export default function rollupPluginIcons({
         return null;
       }
 
-      const svg = require(id); // eslint-disable-line global-require
+      const svg = await import(id);
+      const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
       const code = [
         `import { svg } from 'lit'`,
@@ -57,7 +59,7 @@ export default function rollupPluginIcons({
           __dirname,
           '../src/globals/directives/spread'
         )}';`,
-        `const svgResultCarbonIcon = ${icon(svg)};`,
+        `const svgResultCarbonIcon = ${icon(svg.default)};`,
         `export default svgResultCarbonIcon;`,
       ].join(';');
 

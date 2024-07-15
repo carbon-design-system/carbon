@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { getAttributes, formatAttributes } = require('@carbon/icon-helpers');
+import { getAttributes, formatAttributes } from '@carbon/icon-helpers';
 
 // TODO: update @carbon/icon-helpers with this version of toString
 const toString = (descriptor) => {
@@ -39,4 +39,4 @@ const icon = (descriptor) => {
   return `({ children, ...attrs } = {}) => svg\`${toString(descriptor)}\``;
 };
 
-module.exports = icon;
+export default icon;

@@ -7,10 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { dirname, relative, resolve } = require('path');
-const replaceExtension = require('replace-ext');
+import { dirname, relative, resolve } from 'path';
+import { fileURLToPath } from 'url';
+import replaceExtension from 'replace-ext';
 
-module.exports = function resourceJSPaths(babel) {
+export function resourceJSPaths(babel) {
   const t = babel.types;
 
   return {
@@ -18,11 +19,14 @@ module.exports = function resourceJSPaths(babel) {
       ImportDeclaration(path, state) {
         const { node } = path;
         const { value: source } = node.source;
-        if (/^\..*\.scss\?lit$/i.test(source)) {
-          const declaration = t.cloneNode(node);
-          declaration.source.value = `./${replaceExtension(source, '.css.js')}`;
-          path.replaceWith(declaration);
-        } else if (/^@carbon\/icons\/lib/i.test(source)) {
+        const __dirname = dirname(fileURLToPath(import.meta.url));
+
+        // if (/^\..*\.scss\?lit$/i.test(source)) {
+        //   const declaration = t.cloneNode(node);
+        //   declaration.source.value = `./${replaceExtension(source, '.css.js')}`;
+        //   path.replaceWith(declaration);
+        // } else
+        if (/^@carbon\/icons\/lib/i.test(source)) {
           const filenameES = state.file.opts.filename.replace(
             /[/\\]src[/\\]/,
             '/es/'
