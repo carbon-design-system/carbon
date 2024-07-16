@@ -144,7 +144,14 @@ export {
 export Tab from './components/Tab';
 export TabContent from './components/TabContent';
 export Tabs from './components/Tabs';
-export { TabPanel, TabPanels, TabList, IconTab } from './components/Tabs';
+export {
+  TabsVertical,
+  TabPanel,
+  TabPanels,
+  TabList,
+  TabListVertical,
+  IconTab,
+} from './components/Tabs';
 export Tag from './components/Tag';
 export DismissibleTag from './components/Tag/DismissibleTag.tsx';
 export OperationalTag from './components/Tag/OperationalTag.tsx';

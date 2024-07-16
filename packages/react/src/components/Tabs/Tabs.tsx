@@ -1216,7 +1216,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
 
   useLayoutEffect(() => {
     function handler() {
-      const elementTabId = document.getElementById(`${id}`);
+      const elementTabId = document.getElementById(`${id}`) || tabRef.current;
       const newElement = elementTabId?.getElementsByClassName(
         `${prefix}--tabs__nav-item-label`
       )[0];

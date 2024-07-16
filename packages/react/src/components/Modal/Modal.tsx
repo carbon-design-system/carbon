@@ -30,6 +30,7 @@ import { Text } from '../Text';
 import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
+import { composeEventHandlers } from '../../tools/events';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -312,7 +313,7 @@ const Modal = React.forwardRef(function Modal(
     }
   }
 
-  function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
+  function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
     const target = evt.target as Node;
     evt.stopPropagation();
     if (
@@ -586,7 +587,7 @@ const Modal = React.forwardRef(function Modal(
       {...rest}
       level={0}
       onKeyDown={handleKeyDown}
-      onMouseDown={handleMousedown}
+      onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
       onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
       className={modalClasses}
       role="presentation"
