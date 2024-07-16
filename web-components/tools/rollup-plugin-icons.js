@@ -25,7 +25,7 @@ export default function rollupPluginIcons({
 } = {}) {
   const filter = createFilter(include, exclude);
   return {
-    name: 'lit-scss',
+    name: 'carbon-icons',
 
     /**
      * Enqueues the module contents for loading.
@@ -50,7 +50,6 @@ export default function rollupPluginIcons({
       if (!filter(id)) {
         return null;
       }
-
       const svg = await import(id);
 
       const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -60,12 +59,20 @@ export default function rollupPluginIcons({
       const iconsESPath = path.resolve('es', 'icons', path.relative(iconsDir, id));
       const spreadModulePath = path.resolve(__dirname, '../es/globals/directives/spread');
 
+      console.log('path', path.relative(path.dirname(iconsESPath), spreadModulePath));
+
       const code = [
         `import { svg } from 'lit'`,
-        `import spread from '${path.relative(path.dirname(iconsESPath), spreadModulePath)}';`,
-        `const svgResultCarbonIcon = ${icon(svg.default)};`,
+        `import spread from '${path.relative(path.dirname(id), spreadModulePath)}'`,
+        `const svgResultCarbonIcon = ${icon(svg.default)}`,
         `export default svgResultCarbonIcon;`,
       ].join(';');
+
+      this.emitFile({
+        type: 'asset',
+        fileName: path.relative(iconsDir, id),
+        source: code
+      });
 
       return {
         code,

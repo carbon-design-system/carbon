@@ -40,22 +40,15 @@ async function build() {
     outputDirectory: path.resolve(__dirname, '..'),
   };
 
-  //grab all the icon files from @carbon/icons as input
-  const iconInputs = await globby(['node_modules/@carbon/icons/lib/**/*.js', '!**/index.js']);
-
-  const iconsEntrypoint = {
-    outputDirectory: path.resolve(__dirname, '..'),
-  };
-
   const formats = [
     {
       type: 'esm',
       directory: 'es',
     },
-    {
-      type: 'commonjs',
-      directory: 'lib',
-    },
+    // {
+    //   type: 'commonjs',
+    //   directory: 'lib',
+    // },
   ];
 
   for (const format of formats) {
@@ -69,6 +62,7 @@ async function build() {
       entryPoint.rootDir,
       outputDirectory
     );
+
     const cwcBundle = await rollup(cwcInputConfig);
 
     await cwcBundle.write({
@@ -80,29 +74,35 @@ async function build() {
       exports: 'named',
       sourcemap: true
     });
-
-    const iconsInputConfig = getIconRollupConfig(
-      iconInputs
-    );
-
-    const iconsBundle = await rollup(iconsInputConfig);
-
-    const iconsOutputDir = path.join(
-      iconsEntrypoint.outputDirectory,
-      format.directory, 'icons'
-    );
-
-    // Build @carbon/icons
-    for (const format of formats) {
-      await iconsBundle.write({
-        dir: iconsOutputDir,
-        format: format.type,
-        preserveModules: true,
-        banner,
-        exports: 'named',
-      });
-    }
   }
+
+  //grab all the icon files from @carbon/icons as input
+  const iconInputs = await globby(['node_modules/@carbon/icons/lib/**/*.js', '!**/index.js']);
+
+  const iconsEntrypoint = {
+    outputDirectory: path.resolve(__dirname, '..'),
+  };
+
+  const iconsInputConfig = getIconRollupConfig(
+    iconInputs
+  );
+
+  const iconsBundle = await rollup(iconsInputConfig);
+
+  const iconsOutputDir = path.join(
+    iconsEntrypoint.outputDirectory,
+    'es', 'icons'
+  );
+
+  // Build @carbon/icons
+  await iconsBundle.write({
+    dir: iconsOutputDir,
+    format: 'esm',
+    preserveModules: true,
+    preserveModulesRoot: 'node_modules/@carbon/icons/lib',
+    // banner,
+    exports: 'named',
+  });
 }
 
 const banner = `/**
@@ -119,17 +119,18 @@ function getRollupConfig(input, rootDir, outDir) {
     // Mark dependencies listed in `package.json` as external so that they are
     // not included in the output bundle.
     external: [
-      ...Object.keys(packageJson.default.dependencies),
-      ...Object.keys(packageJson.default.devDependencies),
-    ].map((name) => {
-      // Transform the name of each dependency into a regex so that imports from
-      // nested paths are correctly marked as external.
-      //
-      // Example:
-      // import 'module-name';
-      // import 'module-name/path/to/nested/module';
-      return new RegExp(`^${name}(/.*)?`);
-    }),
+        ...Object.keys(packageJson.default.dependencies),
+        ...Object.keys(packageJson.default.devDependencies),
+      ].map((name) => {
+        // Transform the name of each dependency into a regex so that imports from
+        // nested paths are correctly marked as external.
+        //
+        // Example:
+        // import 'module-name';
+        // import 'module-name/path/to/nested/module';
+        return new RegExp(`^${name}(/.*)?`);
+      },
+    ),
     plugins: [
       json(),
       alias({
@@ -175,24 +176,26 @@ function getRollupConfig(input, rootDir, outDir) {
 }
 
 function getIconRollupConfig(input) {
+  const dependencies = [
+    ...Object.keys(packageJson.default.dependencies),
+    ...Object.keys(packageJson.default.devDependencies),
+  ].map((name) => {
+    // Transform the name of each dependency into a regex so that imports from
+    // nested paths are correctly marked as external.
+    //
+    // Example:
+    // import 'module-name';
+    // import 'module-name/path/to/nested/module';
+    return new RegExp(`^${name}(/.*)?`);
+  },
+);
   return {
     input,
      // Mark dependencies listed in `package.json` as external so that they are
     // not included in the output bundle.
-    external: [
-      ...Object.keys(packageJson.default.dependencies),
-      ...Object.keys(packageJson.default.devDependencies),
-    ].map((name) => {
-      // Transform the name of each dependency into a regex so that imports from
-      // nested paths are correctly marked as external.
-      //
-      // Example:
-      // import 'module-name';
-      // import 'module-name/path/to/nested/module';
-      return new RegExp(`^${name}(/.*)?`);
-    }),
+    external: [ ...dependencies, fileURLToPath(new URL('../es/globals/directives/spread', import.meta.url))],
     plugins: [
-      carbonIcons()
+      carbonIcons(input)
     ]
   }
 }
