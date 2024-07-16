@@ -81,27 +81,27 @@ async function build() {
       sourcemap: true
     });
 
-    // const iconsInputConfig = getIconRollupConfig(
-    //   iconInputs
-    // );
+    const iconsInputConfig = getIconRollupConfig(
+      iconInputs
+    );
 
-    // const iconsBundle = await rollup(iconsInputConfig);
+    const iconsBundle = await rollup(iconsInputConfig);
 
-    // const iconsOutputDir = path.join(
-    //   iconsEntrypoint.outputDirectory,
-    //   format.directory, 'icons'
-    // );
+    const iconsOutputDir = path.join(
+      iconsEntrypoint.outputDirectory,
+      format.directory, 'icons'
+    );
 
-    // // Build @carbon/icons
-    // for (const format of formats) {
-    //   await iconsBundle.write({
-    //     dir: iconsOutputDir,
-    //     format: format.type,
-    //     preserveModules: true,
-    //     banner,
-    //     exports: 'named',
-    //   });
-    // }
+    // Build @carbon/icons
+    for (const format of formats) {
+      await iconsBundle.write({
+        dir: iconsOutputDir,
+        format: format.type,
+        preserveModules: true,
+        banner,
+        exports: 'named',
+      });
+    }
   }
 }
 

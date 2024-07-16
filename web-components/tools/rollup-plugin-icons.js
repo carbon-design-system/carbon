@@ -8,6 +8,7 @@
  */
 
 import path from 'path';
+import { createRequire } from 'node:module';
 import { fileURLToPath } from 'url';
 import { createFilter } from '@rollup/pluginutils'
 import icon from './svg-result-carbon-icon.js';
@@ -51,14 +52,17 @@ export default function rollupPluginIcons({
       }
 
       const svg = await import(id);
+
       const __dirname = path.dirname(fileURLToPath(import.meta.url));
+      const require = createRequire(import.meta.url);
+
+      const iconsDir = path.dirname(require.resolve('@carbon/icons/lib'));
+      const iconsESPath = path.resolve('es', 'icons', path.relative(iconsDir, id));
+      const spreadModulePath = path.resolve(__dirname, '../es/globals/directives/spread');
 
       const code = [
         `import { svg } from 'lit'`,
-        `import spread from '${path.resolve(
-          __dirname,
-          '../src/globals/directives/spread'
-        )}';`,
+        `import spread from '${path.relative(path.dirname(iconsESPath), spreadModulePath)}';`,
         `const svgResultCarbonIcon = ${icon(svg.default)};`,
         `export default svgResultCarbonIcon;`,
       ].join(';');
