@@ -13,7 +13,6 @@
 // TableCell : Data table row cell item
 // TableHeader : Data table header cell item
 
-// @ts-nocheck
 import React from 'react';
 import {
   Table,
@@ -50,8 +49,6 @@ figma.connect(
       skeleton: figma.boolean('Skeleton'),
     },
     example: () => {
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below is incomplete.
       // This is sample code for a basic Table
       // See storybook for for detailed implementation docs
       // https://react.carbondesignsystem.com/?path=/docs/components-datatable-basic--overview

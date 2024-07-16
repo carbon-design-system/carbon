@@ -13,6 +13,7 @@ import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import InlineLoading from '../InlineLoading';
+import { Layer } from '../Layer';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
   wrapFocusWithoutSentinels,
@@ -29,6 +30,7 @@ import { Text } from '../Text';
 import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
+import { composeEventHandlers } from '../../tools/events';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -311,7 +313,7 @@ const Modal = React.forwardRef(function Modal(
     }
   }
 
-  function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
+  function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
     const target = evt.target as Node;
     evt.stopPropagation();
     if (
@@ -528,13 +530,13 @@ const Modal = React.forwardRef(function Modal(
         {normalizedSlug}
         {!passiveModal && modalButton}
       </div>
-      <div
+      <Layer
         ref={contentRef}
         id={modalBodyId}
         className={contentClasses}
         {...hasScrollingContentProps}>
         {children}
-      </div>
+      </Layer>
       {!passiveModal && (
         <ButtonSet className={footerClasses} aria-busy={loadingActive}>
           {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
@@ -581,10 +583,11 @@ const Modal = React.forwardRef(function Modal(
   );
 
   return (
-    <div
+    <Layer
       {...rest}
+      level={0}
       onKeyDown={handleKeyDown}
-      onMouseDown={handleMousedown}
+      onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
       onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
       className={modalClasses}
       role="presentation"
@@ -610,7 +613,7 @@ const Modal = React.forwardRef(function Modal(
           Focus sentinel
         </span>
       )}
-    </div>
+    </Layer>
   );
 });
 

@@ -111,6 +111,14 @@ test.describe('Tabs', () => {
           theme,
         });
       });
+
+      test('vertical @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Tabs',
+          id: 'components-tabs--vertical',
+          theme,
+        });
+      });
     });
   });
 });

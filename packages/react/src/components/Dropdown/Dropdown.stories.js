@@ -69,6 +69,24 @@ const items = [
   },
 ];
 
+export const ExperimentalAutoAlign = () => (
+  <div style={{ width: 400 }}>
+    <div style={{ height: 300 }}></div>
+    <Dropdown
+      autoAlign={true}
+      id="default"
+      titleText="Dropdown label"
+      helperText="This is some helper text"
+      initialSelectedItem={items[1]}
+      label="Option 1"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      direction="top"
+    />
+    <div style={{ height: 800 }}></div>
+  </div>
+);
+
 export const Playground = (args) => (
   <div style={{ width: 400 }}>
     <Dropdown
