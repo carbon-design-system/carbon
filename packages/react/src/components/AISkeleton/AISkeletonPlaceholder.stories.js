@@ -12,7 +12,7 @@ import React from 'react';
 import AISkeletonPlaceholder from './AISkeletonPlaceholder';
 
 export default {
-  title: 'Components/Skeleton',
+  title: 'Components/Skeleton/AISkeleton',
   component: AISkeletonPlaceholder,
 };
 

@@ -97,13 +97,6 @@ $sizes: (
     box-shadow: inset 0 0 0 1px $focus;
   }
 
-  .#{$prefix}--slug
-    .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus,
-  .#{$prefix}--slug
-    .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus {
-    box-shadow: none;
-  }
-
   .#{$prefix}--slug .#{$prefix}--slug__button:hover {
     background: $border-inverse;
     color: $text-inverse;

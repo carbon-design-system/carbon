@@ -12,7 +12,7 @@ import React from 'react';
 import AISkeletonIcon from './AISkeletonIcon';
 
 export default {
-  title: 'Components/Skeleton',
+  title: 'Components/Skeleton/AISkeleton',
   component: AISkeletonIcon,
 };
 
