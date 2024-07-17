@@ -547,7 +547,6 @@ function PopoverContentRenderFunction(
             className={cx({
               [`${prefix}--popover-caret`]: true,
               [`${prefix}--popover--auto-align`]: true,
-              // [`${prefix}--autoalign`]: true,
             })}
             ref={caretRef}
           />

@@ -16,7 +16,6 @@ import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import ComboBox from '../ComboBox';
-// import {Popover, PopoverContent} from '../Popover';
 import mdx from './Modal.mdx';
 import {
   StructuredListWrapper,
@@ -351,22 +350,14 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           placeholder="e.g. github.com"
           style={{ marginBottom: '1rem' }}
         />
-        <Select id="select-1" defaultValue="us-south" labelText="Region">
+        <Select
+          id="select-1"
+          defaultValue="us-south"
+          labelText="Region"
+          style={{ marginBottom: '1rem' }}>
           <SelectItem value="us-south" text="US South" />
           <SelectItem value="us-east" text="US East" />
         </Select>
-        {/* <Popover style={{marginLeft:400}} autoAlign caret dropShadow>
-      <span>I am trigger I am trigger I am trigger</span>
-      <PopoverContent>
-        <div className="popover-example-content">
-          <p className="popover-title">Available storage</p>
-          <p className="popover-details">
-            This server has 150 GB of block storage remaining.
-
-           </p>
-        </div>
-      </PopoverContent>
-    </Popover> */}
 
         <ComboBox
           allowCustomValue
@@ -389,7 +380,6 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           style={{ margin: '1rem 0' }}
           titleText="Dropdown Example of Floating ui"
           helperText="This is some helper text"
-          // initialSelectedItem={items[1]}
           label="Option 1"
           items={[
             {
@@ -425,6 +415,7 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           id="test"
           label="Multiselect"
           titleText="Multiselect"
+          helperText="This is some helper text"
           autoAlign
           items={[
             {
@@ -438,37 +429,6 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           ]}
           itemToString={(item) => (item ? item.text : '')}
         />
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
-          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
-          Quisque consectetur non risus eu rutrum.{' '}
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
-          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
-          Quisque consectetur non risus eu rutrum.{' '}
-        </p>
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
-          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
-          Quisque consectetur non risus eu rutrum.{' '}
-        </p>
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
-          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
-          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
-          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
-          Quisque consectetur non risus eu rutrum.{' '}
-        </p>
 
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
