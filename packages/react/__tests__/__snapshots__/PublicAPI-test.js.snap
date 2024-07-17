@@ -7692,6 +7692,29 @@ Map {
       },
     },
   },
+  "TabListVertical" => Object {
+    "propTypes": Object {
+      "activation": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "aria-label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "TabPanel" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -8274,6 +8297,25 @@ Map {
       },
       "contained": Object {
         "type": "bool",
+      },
+    },
+  },
+  "TabsVertical" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "defaultSelectedIndex": Object {
+        "type": "number",
+      },
+      "height": Object {
+        "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "selectedIndex": Object {
+        "type": "number",
       },
     },
   },
