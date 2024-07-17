@@ -97,19 +97,6 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-268235&t=hgJuU7m9Y6EM076g-4',
   {
     props: {
-      // state: figma.enum('State', {
-      //   Enabled: 'enabled',
-      //   Hover: 'hover',
-      //   Focus: 'focus',
-      //   Error: 'error',
-      //   Disabled: 'disabled',
-      //   Skeleton: 'skeleton',
-      //   'Read-only': 'read-only',
-      //   Warning: 'warning',
-      // }),
-      // open: figma.boolean('Open'),
-      // datefilled: figma.boolean('Date filled'),
-      // tooltip: figma.boolean('Tooltip'),
       readOnly: figma.enum('State', {
         'Read-only': true,
       }),
