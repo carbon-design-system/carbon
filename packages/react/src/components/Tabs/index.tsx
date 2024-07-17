@@ -18,8 +18,12 @@ export {
   type TabPanelProps,
   TabList,
   type TabListProps,
+  TabListVertical,
+  type TabListVerticalProps,
   IconTab,
   type IconTabProps,
   Tabs,
   type TabsProps,
+  TabsVertical,
+  type TabsVerticalProps,
 } from './Tabs';
