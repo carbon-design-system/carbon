@@ -512,6 +512,22 @@ describe('events', () => {
     expect(onRequestClose).toHaveBeenCalled();
   });
 
+  it('should handle onClick events', async () => {
+    const onClick = jest.fn();
+    render(
+      <Modal open onClick={onClick}>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+      </Modal>
+    );
+    const modal = screen.getByRole('dialog');
+    await userEvent.click(modal);
+    expect(onClick).toHaveBeenCalled();
+  });
+
   it('should handle submit keyDown events with shouldSubmitOnEnter enabled', async () => {
     const onRequestSubmit = jest.fn();
     render(

@@ -37,6 +37,14 @@ test.describe('Slider', () => {
           theme,
         });
       });
+
+      test('slider with formatLabel @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Slider',
+          id: 'components-slider--slider-with-custom-value-label',
+          theme,
+        });
+      });
     });
   });
 });
