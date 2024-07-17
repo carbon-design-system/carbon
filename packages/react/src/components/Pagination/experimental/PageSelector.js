@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { useId } from '../../internal/useId';
+import { useId } from '../../../internal/useId';
 import Select from '../../Select';
 import SelectItem from '../../SelectItem';
 import { usePrefix } from '../../../internal/usePrefix';
