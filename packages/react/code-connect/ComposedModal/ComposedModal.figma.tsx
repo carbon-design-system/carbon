@@ -26,7 +26,6 @@ figma.connect(
         'Extra small': 'xs',
       }),
       progress: figma.boolean('Progress', {
-        // true: <ProgressIndicator />,
         true: figma.children('Progress indicator'),
       }),
       descriptionText: figma.boolean('Description', {
