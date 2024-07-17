@@ -19,68 +19,37 @@ import icon from './svg-result-carbon-icon.js';
  * @param {RegExp} [options.exclude] The files to exclude.
  * @returns {object} The rollup plugin to transform an `.svg` file to a `lit-html` template.
  */
-export default function rollupPluginIcons({
-  include = /@carbon[\\/]icons[\\/]/i,
-  exclude,
-} = {}) {
-  const filter = createFilter(include, exclude);
+export default function rollupPluginIcons(inputs) {
   return {
     name: 'carbon-icons',
 
-    /**
-     * Enqueues the module contents for loading.
-     *
-     * @param {string} id The module ID.
-     */
-    load(id) {
-      if (filter(id)) {
-        this.addWatchFile(path.resolve(id));
-      }
-      return null;
-    },
-
-    /**
-     * Transforms the module contents.
-     *
-     * @param {string} contents The module contents.
-     * @param {string} id The module ID.
-     * @returns {object} The transformed module contents.
-     */
-    async transform(contents, id) {
-      if (!filter(id)) {
-        return null;
-      }
-      const svg = await import(id);
-
+    async buildEnd() {
       const __dirname = path.dirname(fileURLToPath(import.meta.url));
       const require = createRequire(import.meta.url);
 
-      const iconsDir = path.dirname(require.resolve('@carbon/icons/lib'));
-      const iconsESPath = path.resolve('es', 'icons', path.relative(iconsDir, id));
-      const spreadModulePath = path.resolve(__dirname, '../es/globals/directives/spread');
+      for (const input of inputs) {
+        const iconPath = path.resolve(__dirname, `../${input}`);
 
-      console.log('path', path.relative(path.dirname(iconsESPath), spreadModulePath));
+        const svg = await import(iconPath);
 
-      const code = [
-        `import { svg } from 'lit'`,
-        `import spread from '${path.relative(path.dirname(id), spreadModulePath)}'`,
-        `const svgResultCarbonIcon = ${icon(svg.default)}`,
-        `export default svgResultCarbonIcon;`,
-      ].join(';');
+        const iconsDir = path.dirname(require.resolve('@carbon/icons/lib'));
+        const iconsESPath = path.resolve('es', 'icons', path.relative(iconsDir, iconPath));
+        const spreadModulePath = path.resolve(__dirname, '../es/globals/directives/spread');
 
-      this.emitFile({
-        type: 'asset',
-        fileName: path.relative(iconsDir, id),
-        source: code
-      });
+        const code = [
+          `import { svg } from 'lit'`,
+          `import spread from '${path.relative(path.dirname(iconsESPath), spreadModulePath)}'`,
+          `const svgResultCarbonIcon = ${icon(svg.default)}`,
+          `export default svgResultCarbonIcon;`,
+        ].join(';');
 
-      return {
-        code,
-        map: {
-          mappings: '',
-        },
-      };
-    },
+        this.emitFile({
+          type: 'asset',
+          fileName: `icons/${path.relative(iconsDir, iconPath)}`,
+          source: code
+        });
+      }
+    }
   };
 }
 

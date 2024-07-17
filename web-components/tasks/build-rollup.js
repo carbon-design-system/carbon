@@ -25,14 +25,16 @@ import {resourceJSPaths} from '../tools/babel-plugin-resource-js-paths.js';
 import litSCSS from '../tools/rollup-plugin-lit-scss.js';
 import { globby } from 'globby';
 import carbonIcons from '../tools/rollup-plugin-icons.js';
-import json from '@rollup/plugin-json';
 
 import * as packageJson from '../package.json' assert { type: "json" };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function build() {
-  const inputs = await globby([ 'src/**/*.ts', '!src/**/*.stories.ts', '!src/**/*.d.ts']);
+
+  const inputs = await globby([ 'src/**/*.ts', '!src/**/*.stories.ts', '!src/**/*.d.ts', '!src/globals/internal/storybook-cdn.ts']);
+
+  const iconInput = await globby(['node_modules/@carbon/icons/lib/**/*.js', '!**/index.js']);
 
   const entryPoint = {
     filepath: inputs,
@@ -45,13 +47,13 @@ async function build() {
       type: 'esm',
       directory: 'es',
     },
-    // {
-    //   type: 'commonjs',
-    //   directory: 'lib',
-    // },
+    {
+      type: 'commonjs',
+      directory: 'lib',
+    },
   ];
 
-  for (const format of formats) {
+   for (const format of formats) {
     const outputDirectory = path.join(
       entryPoint.outputDirectory,
       format.directory
@@ -60,7 +62,8 @@ async function build() {
     const cwcInputConfig = getRollupConfig(
       inputs,
       entryPoint.rootDir,
-      outputDirectory
+      outputDirectory,
+      iconInput
     );
 
     const cwcBundle = await rollup(cwcInputConfig);
@@ -74,36 +77,10 @@ async function build() {
       exports: 'named',
       sourcemap: true
     });
+   }
   }
 
-  //grab all the icon files from @carbon/icons as input
-  const iconInputs = await globby(['node_modules/@carbon/icons/lib/**/*.js', '!**/index.js']);
 
-  const iconsEntrypoint = {
-    outputDirectory: path.resolve(__dirname, '..'),
-  };
-
-  const iconsInputConfig = getIconRollupConfig(
-    iconInputs
-  );
-
-  const iconsBundle = await rollup(iconsInputConfig);
-
-  const iconsOutputDir = path.join(
-    iconsEntrypoint.outputDirectory,
-    'es', 'icons'
-  );
-
-  // Build @carbon/icons
-  await iconsBundle.write({
-    dir: iconsOutputDir,
-    format: 'esm',
-    preserveModules: true,
-    preserveModulesRoot: 'node_modules/@carbon/icons/lib',
-    // banner,
-    exports: 'named',
-  });
-}
 
 const banner = `/**
  * Copyright IBM Corp. 2024
@@ -113,26 +90,32 @@ const banner = `/**
  */
 `;
 
-function getRollupConfig(input, rootDir, outDir) {
+function getRollupConfig(input, rootDir, outDir, iconInput) {
+
+  const dependencies = [
+    ...Object.keys(packageJson.default.dependencies),
+    ...Object.keys(packageJson.default.devDependencies),
+  ].map((name) => {
+  // Transform the name of each dependency into a regex so that imports from
+  // nested paths are correctly marked as external.
+  //
+  // Example:
+  // import 'module-name';
+  // import 'module-name/path/to/nested/module';
+  return new RegExp(`^${name}(/.*)?`);
+    },
+  );
   return {
     input,
     // Mark dependencies listed in `package.json` as external so that they are
     // not included in the output bundle.
-    external: [
-        ...Object.keys(packageJson.default.dependencies),
-        ...Object.keys(packageJson.default.devDependencies),
-      ].map((name) => {
-        // Transform the name of each dependency into a regex so that imports from
-        // nested paths are correctly marked as external.
-        //
-        // Example:
-        // import 'module-name';
-        // import 'module-name/path/to/nested/module';
-        return new RegExp(`^${name}(/.*)?`);
-      },
-    ),
+    external: [ ...dependencies, fileURLToPath(
+			new URL(
+				'../es/icons',
+				import.meta.url
+			)
+		),],
     plugins: [
-      json(),
       alias({
         entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
       }),
@@ -148,10 +131,10 @@ function getRollupConfig(input, rootDir, outDir) {
       //   babelrc: false,
       //   exclude: ['node_modules/**'],
       //   plugins: [
-      //     ['@babel/plugin-transform-runtime', { useESModules: true, version: '7.8.0' }],
+      //     // ['@babel/plugin-transform-runtime', { useESModules: true, version: '7.8.0' }],
       //     resourceJSPaths
       //   ],
-      //   babelHelpers: 'runtime',
+      //   // babelHelpers: 'runtime',
       //   extensions: ['.ts', '.tsx', '.js', '.jsx'],
       // }),
       litSCSS({
@@ -163,43 +146,17 @@ function getRollupConfig(input, rootDir, outDir) {
             .css;
         },
       }),
+      carbonIcons(iconInput),
       typescript({
         noEmitOnError: true,
         compilerOptions: {
           rootDir,
           outDir,
         },
-        exclude: ['tests','.storybook', '*.stories.ts'],
       }),
     ],
   };
 }
-
-function getIconRollupConfig(input) {
-  const dependencies = [
-    ...Object.keys(packageJson.default.dependencies),
-    ...Object.keys(packageJson.default.devDependencies),
-  ].map((name) => {
-    // Transform the name of each dependency into a regex so that imports from
-    // nested paths are correctly marked as external.
-    //
-    // Example:
-    // import 'module-name';
-    // import 'module-name/path/to/nested/module';
-    return new RegExp(`^${name}(/.*)?`);
-  },
-);
-  return {
-    input,
-     // Mark dependencies listed in `package.json` as external so that they are
-    // not included in the output bundle.
-    external: [ ...dependencies, fileURLToPath(new URL('../es/globals/directives/spread', import.meta.url))],
-    plugins: [
-      carbonIcons(input)
-    ]
-  }
-}
-
 
 build().catch((error) => {
   console.log(error);
