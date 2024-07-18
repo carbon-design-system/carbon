@@ -28,6 +28,7 @@ import {
   autoUpdate,
   arrow,
   offset,
+  type Boundary,
 } from '@floating-ui/react';
 
 interface PopoverContext {
@@ -101,6 +102,11 @@ interface PopoverBaseProps {
   autoAlign?: boolean;
 
   /**
+   * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlignBoundary?: Boundary;
+
+  /**
    * Specify whether a caret should be rendered
    */
   caret?: boolean;
@@ -163,6 +169,7 @@ export const Popover: PopoverComponent = React.forwardRef(
       align: initialAlign = isTabTip ? 'bottom-start' : 'bottom',
       as: BaseComponent = 'span' as E,
       autoAlign = false,
+      autoAlignBoundary,
       caret = isTabTip ? false : true,
       className: customClassName,
       children,
@@ -240,29 +247,35 @@ export const Popover: PopoverComponent = React.forwardRef(
       }
     });
 
-    const { refs, floatingStyles, placement, middlewareData } = useFloating(
-      autoAlign
-        ? {
-            placement: align,
+    const { refs, floatingStyles, placement, middlewareData, ...allTheRest } =
+      useFloating(
+        autoAlign
+          ? {
+              placement: align,
 
-            // The floating element is positioned relative to its nearest
-            // containing block (usually the viewport). It will in many cases also
-            // “break” the floating element out of a clipping ancestor.
-            // https://floating-ui.com/docs/misc#clipping
-            strategy: 'fixed',
+              // The floating element is positioned relative to its nearest
+              // containing block (usually the viewport). It will in many cases also
+              // “break” the floating element out of a clipping ancestor.
+              // https://floating-ui.com/docs/misc#clipping
+              strategy: 'fixed',
 
-            // Middleware order matters, arrow should be last
-            middleware: [
-              offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
-              flip({ fallbackAxisSideDirection: 'start' }),
-              arrow({
-                element: caretRef,
-              }),
-            ],
-            whileElementsMounted: autoUpdate,
-          }
-        : {} // When autoAlign is turned off, floating-ui will not be used
-    );
+              // Middleware order matters, arrow should be last
+              middleware: [
+                offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
+                flip({
+                  fallbackAxisSideDirection: 'start',
+                  boundary: autoAlignBoundary,
+                }),
+                arrow({
+                  element: caretRef,
+                }),
+              ],
+              whileElementsMounted: autoUpdate,
+            }
+          : {} // When autoAlign is turned off, floating-ui will not be used
+      );
+
+    console.log(allTheRest);
 
     const value = useMemo(() => {
       return {
@@ -483,6 +496,21 @@ Popover.propTypes = {
    * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlignBoundary: PropTypes.oneOfType([
+    PropTypes.oneOf(['clippingAncestors']),
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.exact({
+      x: PropTypes.number,
+      y: PropTypes.number,
+      width: PropTypes.number,
+      height: PropTypes.number,
+    }),
+  ]),
 
   /**
    * Specify whether a caret should be rendered

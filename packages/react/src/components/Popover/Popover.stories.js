@@ -269,6 +269,75 @@ export const ExperimentalAutoAlign = () => {
     </div>
   );
 };
+
+export const ExperimentalAutoAlignBoundary = () => {
+  const [open, setOpen] = useState(true);
+  const ref = useRef();
+  const [boundary, setBoundary] = useState();
+
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
+
+  return (
+    <div
+      style={{
+        display: 'grid',
+        placeItems: 'center',
+        overflow: 'scroll',
+        width: '800px',
+        height: '500px',
+        border: '1px',
+        borderStyle: 'dashed',
+        borderColor: 'black',
+        margin: '0 auto',
+      }}
+      ref={setBoundary}>
+      <div
+        style={{
+          width: '2100px',
+          height: '1px',
+          placeItems: 'center',
+        }}
+      />
+      <div style={{ placeItems: 'center', height: '32px', width: '32px' }}>
+        <Popover
+          open={open}
+          align="top"
+          autoAlign
+          autoAlignBoundary={boundary}
+          ref={ref}>
+          <div className="playground-trigger">
+            <CheckboxIcon
+              onClick={() => {
+                setOpen(!open);
+              }}
+            />
+          </div>
+          <PopoverContent className="p-3">
+            <div>
+              <p className="popover-title">This popover uses autoAlign</p>
+              <p className="popover-details">
+                Scroll the container up, down, left or right to observe how the
+                popover will automatically change its position in attempt to
+                stay within the viewport. This works on initial render in
+                addition to on scroll.
+              </p>
+            </div>
+          </PopoverContent>
+        </Popover>
+        <div
+          style={{
+            height: '1000px',
+            width: '1px',
+            placeItems: 'center',
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
 export const Test = () => {
   const [open, setOpen] = useState();
   const align = document?.dir === 'rtl' ? 'bottom-right' : 'bottom-left';
