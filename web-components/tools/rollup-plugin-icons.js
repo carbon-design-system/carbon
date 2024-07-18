@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,14 +10,11 @@
 import path from 'path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'url';
-import { createFilter } from '@rollup/pluginutils'
 import icon from './svg-result-carbon-icon.js';
 
 /**
- * @param {object} [options] The options.
- * @param {RegExp} [options.include=/\.scss/] The files to include.
- * @param {RegExp} [options.exclude] The files to exclude.
- * @returns {object} The rollup plugin to transform an `.svg` file to a `lit-html` template.
+ * @param {Array} [inputs] icon files of the @carbon/icons/lib folder from node_modules
+ * @returns {object} The rollup plugin to generate lit svg template icon files.
  */
 export default function rollupPluginIcons(inputs) {
   return {
