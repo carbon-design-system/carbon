@@ -430,8 +430,9 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       if (announcer) {
         // Clear the content first
         announcer.textContent = '';
+
         // Set the new content after a small delay
-        setTimeout(
+        const timeoutId = setTimeout(
           () => {
             if (announcer) {
               announcer.textContent = ariaAnnouncement;
@@ -440,6 +441,13 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
           },
           counterMode === 'word' ? 2000 : 1000
         );
+
+        //clear the timeout
+        return () => {
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+        };
       }
     }
   }, [ariaAnnouncement, prevAnnouncement, counterMode]);

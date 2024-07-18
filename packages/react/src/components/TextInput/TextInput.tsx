@@ -326,12 +326,18 @@ const TextInput = React.forwardRef(function TextInput(
         // Clear the content first
         announcer.textContent = '';
         // Set the new content after a small delay
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
           if (announcer) {
             announcer.textContent = ariaAnnouncement;
             setPrevAnnouncement(ariaAnnouncement);
           }
         }, 1000);
+        // clear the timeout
+        return () => {
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+        };
       }
     }
   }, [ariaAnnouncement, prevAnnouncement]);
