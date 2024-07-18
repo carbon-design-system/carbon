@@ -36,23 +36,10 @@ figma.connect(
       //   false: figma.string('Label text'),
       // }),
     },
-    example: ({
-      labelText,
-      warnText,
-      invalidText,
-      warn,
-      invalid,
-      disabled,
-    }) => (
+    example: ({ ...props }) => (
       // Disclaimer: Code Connect is currently in beta and integration with Carbon
       // React is in an exploratory phase. Code sample below may be incomplete.
-      <FluidSelect
-        labelText={labelText}
-        warnText={warnText}
-        warn={warn}
-        invalidText={invalidText}
-        invalid={invalid}
-        disabled={disabled}>
+      <FluidSelect {...props}>
         <SelectItem value="" text="" />
         <SelectItem value="option-1" text="Option 1" />
         <SelectItem value="option-2" text="Option 2" />
