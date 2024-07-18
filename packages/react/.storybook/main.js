@@ -118,7 +118,7 @@ const config = {
 
     return mergeConfig(config, {
       define: {
-        __DEV__: JSON.stringify(process.env.NODE_ENV === 'production'),
+        __DEV__: JSON.stringify(process.env.NODE_ENV === 'development'),
       },
 
       esbuild: {
@@ -133,11 +133,6 @@ const config = {
           },
         },
       },
-      // resolve: {
-      //   alias: {
-      //     ALIAS_STORY_STYLE_CONFIG: path.resolve('../scss/_config.scss'),
-      //   },
-      // },
     });
   },
   docs: {
