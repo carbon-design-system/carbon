@@ -15,13 +15,8 @@ import postcss from 'postcss';
 import alias from '@rollup/plugin-alias';
 import { rollup } from 'rollup';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import { babel } from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
-import minifyHTML from 'rollup-plugin-minify-html-literals';
-import summary from 'rollup-plugin-summary';
 import typescript from '@rollup/plugin-typescript';
-import esbuild from 'rollup-plugin-esbuild'
-import {resourceJSPaths} from '../tools/babel-plugin-resource-js-paths.js';
 import litSCSS from '../tools/rollup-plugin-lit-scss.js';
 import { globby } from 'globby';
 import carbonIcons from '../tools/rollup-plugin-icons.js';
@@ -127,16 +122,6 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
       commonjs({
         include: [/node_modules/],
       }),
-      // babel({
-      //   babelrc: false,
-      //   exclude: ['node_modules/**'],
-      //   plugins: [
-      //     // ['@babel/plugin-transform-runtime', { useESModules: true, version: '7.8.0' }],
-      //     resourceJSPaths
-      //   ],
-      //   // babelHelpers: 'runtime',
-      //   extensions: ['.ts', '.tsx', '.js', '.jsx'],
-      // }),
       litSCSS({
         includePaths: [
           path.resolve(__dirname, '../node_modules')
@@ -154,8 +139,26 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
           outDir,
         },
       }),
+      {
+        name: 'transform-icon-paths',
+        generateBundle(options, bundle) {
+          for (const [fileName, fileData] of Object.entries(bundle)) {
+            if (fileData.type === 'chunk') {
+              fileData.code = transformIconPaths(fileName, fileData.code);
+            }
+          }
+        },
+      },
     ],
   };
+}
+
+function transformIconPaths(filePath, content) {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const iconPathRegex = /@carbon\/icons\/lib/g;
+  const filenameES = filePath.replace(/[/\\]src[/\\]/, '/es/');
+  const iconsDir = path.relative(path.dirname(filenameES), path.resolve(__dirname, '../icons'));
+  return content.replace(iconPathRegex,iconsDir);
 }
 
 build().catch((error) => {
