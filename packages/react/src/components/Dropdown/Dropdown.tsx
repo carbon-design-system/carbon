@@ -14,6 +14,7 @@ import React, {
   MouseEvent,
   ReactNode,
   useEffect,
+  useMemo,
 } from 'react';
 import {
   useSelect,
@@ -497,8 +498,13 @@ const Dropdown = React.forwardRef(
           },
         };
 
-    const menuProps = getMenuProps();
-    const menuRef = mergeRefs(menuProps.ref, refs.setFloating);
+    const menuProps = useMemo(
+      () =>
+        getMenuProps({
+          ref: autoAlign ? refs.setFloating : null,
+        }),
+      [autoAlign]
+    );
 
     // Slug is always size `mini`
     let normalizedSlug;
@@ -527,7 +533,7 @@ const Dropdown = React.forwardRef(
           warnText={warnText}
           light={light}
           isOpen={isOpen}
-          ref={refs.setReference}
+          ref={autoAlign ? refs.setReference : null}
           id={id}>
           {invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
@@ -567,7 +573,7 @@ const Dropdown = React.forwardRef(
             />
           </button>
           {normalizedSlug}
-          <ListBox.Menu {...menuProps} ref={menuRef}>
+          <ListBox.Menu {...menuProps}>
             {isOpen &&
               items.map((item, index) => {
                 const isObject = item !== null && typeof item === 'object';
