@@ -406,7 +406,7 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
 
   /**
    * The value of the `<input>`.
-   * @deprecated
+   *
    */
   value: string | number;
 }
@@ -596,7 +596,7 @@ SelectableTile.propTypes = {
 
   /**
    * The value of the `<input>`.
-   * @deprecated
+   *
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
