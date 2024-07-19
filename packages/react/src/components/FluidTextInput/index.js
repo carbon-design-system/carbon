@@ -6,8 +6,10 @@
  */
 
 import FluidTextInput from './FluidTextInput';
+import FluidPasswordInput from './FluidPasswordInput';
 
 export default FluidTextInput;
 export { FluidTextInput };
+export { FluidPasswordInput };
 
 export { default as FluidTextInputSkeleton } from './FluidTextInput.Skeleton';

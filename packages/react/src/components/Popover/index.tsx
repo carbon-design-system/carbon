@@ -7,6 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import React, {
   useRef,
   useMemo,
@@ -45,20 +46,25 @@ const PopoverContext = React.createContext<PopoverContext>({
   autoAlign: null,
 });
 
-export type PopoverAlignment =
+/**
+ * Deprecated popover alignment values.
+ * @deprecated Use NewPopoverAlignment instead.
+ */
+export type DeprecatedPopoverAlignment =
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'left-bottom'
+  | 'left-top'
+  | 'right-bottom'
+  | 'right-top';
+
+export type NewPopoverAlignment =
   | 'top'
-  | 'top-left' // deprecated
-  | 'top-right' // deprecated
   | 'bottom'
-  | 'bottom-left' // deprecated
-  | 'bottom-right' // deprecated
   | 'left'
-  | 'left-bottom' // deprecated
-  | 'left-top' // deprecated
   | 'right'
-  | 'right-bottom' // deprecated
-  | 'right-top' // deprecated
-  // new values to match floating-ui
   | 'top-start'
   | 'top-end'
   | 'bottom-start'
@@ -68,9 +74,24 @@ export type PopoverAlignment =
   | 'right-end'
   | 'right-start';
 
+export type PopoverAlignment = DeprecatedPopoverAlignment | NewPopoverAlignment;
+
+const propMappingFunction = (deprecatedValue) => {
+  const mapping = {
+    'top-left': 'top-start',
+    'top-right': 'top-end',
+    'bottom-left': 'bottom-start',
+    'bottom-right': 'bottom-end',
+    'left-bottom': 'left-end',
+    'left-top': 'left-start',
+    'right-bottom': 'right-end',
+    'right-top': 'right-start',
+  };
+  return mapping[deprecatedValue];
+};
 interface PopoverBaseProps {
   /**
-   * Specify how the popover should align with the trigger element
+   * Specify how the popover should align with the trigger element.
    */
   align?: PopoverAlignment;
 
@@ -157,6 +178,7 @@ export const Popover: PopoverComponent = React.forwardRef(
     const floating = useRef<HTMLSpanElement>(null);
     const caretRef = useRef<HTMLSpanElement>(null);
     const popover = useRef<Element>(null);
+
     let align = mapPopoverAlignProp(initialAlign);
 
     // If the `Popover` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
@@ -402,34 +424,54 @@ if (__DEV__) {
 Popover.propTypes = {
   /**
    * Specify how the popover should align with the trigger element
+   
    */
-  align: PropTypes.oneOf([
-    'top',
-    'top-left', // deprecated use top-start instead
-    'top-right', // deprecated use top-end instead
+  align: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'top',
+      'top-left', // deprecated use top-start instead
+      'top-right', // deprecated use top-end instead
 
-    'bottom',
-    'bottom-left', // deprecated use bottom-start instead
-    'bottom-right', // deprecated use bottom-end instead
+      'bottom',
+      'bottom-left', // deprecated use bottom-start instead
+      'bottom-right', // deprecated use bottom-end instead
 
-    'left',
-    'left-bottom', // deprecated use left-end instead
-    'left-top', // deprecated use left-start instead
+      'left',
+      'left-bottom', // deprecated use left-end instead
+      'left-top', // deprecated use left-start instead
 
-    'right',
-    'right-bottom', // deprecated use right-end instead
-    'right-top', // deprecated use right-start instead
+      'right',
+      'right-bottom', // deprecated use right-end instead
+      'right-top', // deprecated use right-start instead
 
-    // new values to match floating-ui
-    'top-start',
-    'top-end',
-    'bottom-start',
-    'bottom-end',
-    'left-end',
-    'left-start',
-    'right-end',
-    'right-start',
-  ]),
+      // new values to match floating-ui
+      'top-start',
+      'top-end',
+      'bottom-start',
+      'bottom-end',
+      'left-end',
+      'left-start',
+      'right-end',
+      'right-start',
+    ]),
+    //allowed prop values
+    [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+    //optional mapper function
+    propMappingFunction
+  ),
 
   /**
    * Provide a custom element or component to render the top-level node for the

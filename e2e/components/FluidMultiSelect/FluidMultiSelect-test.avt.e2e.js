@@ -82,8 +82,7 @@ test.describe('@avt FluidMultiSelect', () => {
     await page.keyboard.press('Space');
     await expect(menu).toBeVisible();
     // Navigation inside the menu
-    // move to first option
-    await page.keyboard.press('ArrowDown');
+    // Focus on first element by default
     await expect(
       page.getByRole('option', {
         name: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
@@ -177,8 +176,7 @@ test.describe('@avt FluidMultiSelect', () => {
     await page.keyboard.press('Space');
     await expect(menu).toBeVisible();
     // Navigation inside the menu
-    // move to first option
-    await page.keyboard.press('ArrowDown');
+    // Focus on first element by default
     await expect(
       page.getByRole('option', {
         name: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',

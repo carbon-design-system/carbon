@@ -5,12 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { ForwardedRef } from 'react';
-import Button, { ButtonSize } from '../Button';
+import PropTypes from 'prop-types';
+import React, { ForwardedRef, ReactNode } from 'react';
+import { ButtonSize } from '../Button';
 import classNames from 'classnames';
 import { Tooltip } from '../Tooltip';
 import { usePrefix } from '../../internal/usePrefix';
+import ButtonBase from '../Button/ButtonBase';
 
 export const IconButtonKinds = [
   'primary',
@@ -43,7 +44,7 @@ interface IconButtonProps
   /**
    * Provide an icon or asset to be rendered inside of the IconButton
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * Specify an optional className to be added to your Button
@@ -87,7 +88,7 @@ interface IconButtonProps
    * This means that if you have text in the child node it will not be
    * announced to the screen reader.
    */
-  label: ReactNodeLike;
+  label: ReactNode;
 
   /**
    * Specify the duration in milliseconds to delay before hiding the tooltip
@@ -139,7 +140,7 @@ const IconButton = React.forwardRef(function IconButton(
       enterDelayMs={enterDelayMs}
       label={label}
       leaveDelayMs={leaveDelayMs}>
-      <Button
+      <ButtonBase
         {...rest}
         disabled={disabled}
         kind={kind}
@@ -153,7 +154,7 @@ const IconButton = React.forwardRef(function IconButton(
           className
         )}>
         {children}
-      </Button>
+      </ButtonBase>
     </Tooltip>
   );
 });

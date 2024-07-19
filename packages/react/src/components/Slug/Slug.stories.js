@@ -293,6 +293,26 @@ Callout.argTypes = {
     },
     description: 'Playground only - toggle to show the callout toolbar',
   },
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: { type: 'select' },
+  },
   revertActive: {
     table: {
       disable: true,
@@ -392,7 +412,7 @@ export const Playground = (args) => {
   return (
     <>
       <div className="slug-container slug-container-example">
-        <Slug autoAlign {...args}>
+        <Slug {...args}>
           <SlugContent>{renderedContent}</SlugContent>
         </Slug>
       </div>
@@ -408,5 +428,25 @@ Playground.argTypes = {
       type: 'boolean',
     },
     description: 'Playground only - toggle to show the callout toolbar',
+  },
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: { type: 'select' },
   },
 };

@@ -814,3 +814,6 @@ collect:
       # unstable__Slug - dotType 
       - 'default' 
       - 'hollow'
+  js:
+    functions: {}
+    tokens: null

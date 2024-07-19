@@ -1,6 +1,6 @@
 # Architecture
 
-> Reference document for the approach of buildling and testing this package.
+> Reference document for the approach of building and testing this package.
 
 ## CSS Grid
 
@@ -27,7 +27,7 @@ which are in our css-grid preview but should be tested more explicitly in the
 future. These ad-hoc tests include verifying:
 
 - The grid definition itself in `$grid-breakpoints` matches the IDL spec
-- The grid has the correct number of columns per brekapoint
+- The grid has the correct number of columns per breakpoint
 - The margin of the grid correctly changes between breakpoints
 - The various gutter modes work as intended, including
   - Wide

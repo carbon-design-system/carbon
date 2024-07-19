@@ -109,22 +109,21 @@ test.describe('@avt FluidTextInput', () => {
 
   test('@avt-keyboard-nav for password', async ({ page }) => {
     await visitStory(page, {
-      component: 'TextInput',
-      id: 'experimental-fluid-components-unstable-fluidtextinput--password-input',
+      component: 'FluidPasswordInput',
+      id: 'experimental-fluid-components-unstable-fluidpasswordinput--default',
       globals: {
         theme: 'white',
       },
     });
     const input = page.getByRole('textbox');
-    const span = page.locator('span.cds--assistive-text');
 
     await page.keyboard.press('Tab');
     await input.fill('Text');
 
     // Checking toggle interaction
     await page.keyboard.press('Tab');
-    await expect(span).toHaveText('Show password');
+    await expect(page.getByLabel('Show password')).toBeVisible();
     await page.keyboard.press('Enter');
-    await expect(span).toHaveText('Hide password');
+    await expect(page.getByLabel('Hide password')).toBeVisible();
   });
 });

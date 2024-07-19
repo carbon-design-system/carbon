@@ -40,6 +40,7 @@ export const getNextIndex = (key, index, arrayLength) => {
 export const DOCUMENT_POSITION_BROAD_PRECEDING =
   // Checks `typeof Node` for `react-docgen`
   typeof Node !== 'undefined' &&
+  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
   Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
 
 /**
@@ -49,6 +50,7 @@ export const DOCUMENT_POSITION_BROAD_PRECEDING =
 export const DOCUMENT_POSITION_BROAD_FOLLOWING =
   // Checks `typeof Node` for `react-docgen`
   typeof Node !== 'undefined' &&
+  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
   Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
 
 /**

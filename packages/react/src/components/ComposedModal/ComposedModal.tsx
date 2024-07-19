@@ -10,7 +10,8 @@ import React, {
   type RefObject,
 } from 'react';
 import { isElement } from 'react-is';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
+import { Layer } from '../Layer';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
 import debounce from 'lodash.debounce';
@@ -19,10 +20,14 @@ import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
 import toggleClass from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
+import wrapFocus, {
+  elementOrParentIsFloatingMenu,
+  wrapFocusWithoutSentinels,
+} from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
+import { composeEventHandlers } from '../../tools/events';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -93,13 +98,13 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
         : {};
 
     return (
-      <div
+      <Layer
         className={contentClass}
         {...hasScrollingContentProps}
         {...rest}
         ref={mergeRefs(contentRef, ref)}>
         {children}
-      </div>
+      </Layer>
     );
   }
 );
@@ -202,14 +207,14 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   selectorPrimaryFocus?: string;
 
   /** Specify the CSS selectors that match the floating menus. */
-  selectorsFloatingMenus?: Array<string | null | undefined>;
+  selectorsFloatingMenus?: string[];
 
   size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `ComposedModal` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 }
 
 const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
@@ -283,10 +288,16 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
       onKeyDown?.(event);
     }
-    function handleMousedown(evt: MouseEvent) {
+
+    function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
+      const target = evt.target as Node;
       evt.stopPropagation();
-      const isInside = innerModal.current?.contains(evt.target as Node);
-      if (!isInside && !preventCloseOnClickOutside) {
+      if (
+        !preventCloseOnClickOutside &&
+        !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
+        innerModal.current &&
+        !innerModal.current.contains(target)
+      ) {
         closeModal(evt);
       }
     }
@@ -397,22 +408,23 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       }
     }, [open, selectorPrimaryFocus, isOpen]);
 
-    // Slug is always size `lg`
+    // Slug is always size `sm`
     let normalizedSlug;
     if (slug && slug['type']?.displayName === 'Slug') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size: 'lg',
+        size: 'sm',
       });
     }
 
     return (
-      <div
+      <Layer
         {...rest}
+        level={0}
         role="presentation"
         ref={ref}
         aria-hidden={!open}
         onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
-        onMouseDown={handleMousedown}
+        onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
         onKeyDown={handleKeyDown}
         className={modalClass}>
         <div
@@ -444,7 +456,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
             </button>
           )}
         </div>
-      </div>
+      </Layer>
     );
   }
 );
@@ -525,7 +537,7 @@ ComposedModal.propTypes = {
   /**
    * Specify the CSS selectors that match the floating menus
    */
-  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
+  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string.isRequired),
 
   /**
    * Specify the size variant.

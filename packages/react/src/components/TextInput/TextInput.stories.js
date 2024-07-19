@@ -8,14 +8,20 @@
 import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import FluidForm from '../FluidForm';
+import mdx from './TextInput.mdx';
+
 import { default as TextInput, TextInputSkeleton } from '../TextInput';
 
 export default {
   title: 'Components/TextInput',
   component: TextInput,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
   subcomponents: {
     TextInputSkeleton,
-    'TextInput.PasswordInput': TextInput.PasswordInput,
   },
   argTypes: {
     light: {
@@ -40,17 +46,6 @@ export const Fluid = () => (
     <TextInput type="text" labelText="Text input label" id="text-input-1" />
   </FluidForm>
 );
-
-export const TogglePasswordVisibility = () => {
-  return (
-    <TextInput.PasswordInput
-      id="text-input-1"
-      labelText="Text input label"
-      helperText="Optional help text"
-      autoComplete="true"
-    />
-  );
-};
 
 export const ReadOnly = () => {
   return (

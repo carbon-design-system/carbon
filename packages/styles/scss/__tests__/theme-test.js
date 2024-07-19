@@ -105,6 +105,7 @@ describe('@carbon/styles/scss/theme', () => {
         "link-primary",
         "link-primary-hover",
         "link-secondary",
+        "link-inverse-visited",
         "link-visited",
         "link-inverse",
         "link-inverse-active",

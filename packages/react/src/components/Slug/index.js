@@ -175,28 +175,26 @@ Slug.propTypes = {
   align: PropTypes.oneOf([
     'top',
     'top-left', // deprecated use top-start instead
+    'top-start',
     'top-right', // deprecated use top-end instead
+    'top-end',
 
     'bottom',
     'bottom-left', // deprecated use bottom-start instead
+    'bottom-start',
     'bottom-right', // deprecated use bottom-end instead
+    'bottom-end',
 
     'left',
     'left-bottom', // deprecated use left-end instead
+    'left-end',
     'left-top', // deprecated use left-start instead
+    'left-start',
 
     'right',
     'right-bottom', // deprecated use right-end instead
-    'right-top', // deprecated use right-start instead
-
-    // new values to match floating-ui
-    'top-start',
-    'top-end',
-    'bottom-start',
-    'bottom-end',
-    'left-end',
-    'left-start',
     'right-end',
+    'right-top', // deprecated use right-start instead
     'right-start',
   ]),
 

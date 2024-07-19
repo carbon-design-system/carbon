@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import DatePicker from './DatePicker';
+import DatePicker, { type DatePickerProps } from './DatePicker';
 
 export {
   default as DatePickerSkeleton,
   type DatePickerSkeletonProps,
 } from './DatePicker.Skeleton';
 export default DatePicker;
-export { DatePicker };
+export { DatePicker, type DatePickerProps };

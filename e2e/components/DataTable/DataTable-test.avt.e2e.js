@@ -215,6 +215,52 @@ test.describe('@avt DataTable', () => {
         'components-datatable-filtering--default'
       );
     });
+
+    test('@avt-keyboard-nav', async ({ page }) => {
+      await visitStory(page, {
+        component: 'DataTable',
+        id: 'components-datatable-filtering--default',
+        globals: {
+          theme: 'white',
+        },
+      });
+
+      // Start off by manually focusing the filtering input
+      await page.getByLabel('Filtering').focus();
+      await expect(page.getByLabel('Filtering')).toBeFocused();
+
+      await page.keyboard.press('Enter');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Enter');
+      // Selecting the first checkbox
+      await page.keyboard.press('Space');
+
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      // Presisng the primary button Apply Filter
+      await page.keyboard.press('Enter');
+
+      //
+      await expect(page.getByText('443')).not.toBeVisible();
+
+      // Coming back to the filtering button and pressing Enter to open
+      await page.keyboard.press('Shift+Tab');
+      await page.keyboard.press('Enter');
+
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      // Presisng the secondary button Reset Filter
+      await page.keyboard.press('Enter');
+
+      // All elements should be visible now
+      await expect(page.getByText('443').first()).toBeVisible();
+    });
   });
 
   test.describe('@avt selection', () => {

@@ -64,6 +64,25 @@ describe('RadioButtonGroup', () => {
     expect(fieldset).toContainElement(screen.getByLabelText('test-2'));
   });
 
+  it('should ignore null children', () => {
+    render(
+      <RadioButtonGroup defaultSelected="test-1" name="test" legendText="test">
+        <RadioButton labelText="test-1" value="test-1" />
+        <RadioButton labelText="test-2" value="test-2" />
+        {null}
+      </RadioButtonGroup>
+    );
+
+    const fieldset = screen
+      .getByText('test', {
+        selector: 'legend',
+      })
+      // eslint-disable-next-line testing-library/no-node-access
+      .closest('fieldset');
+    expect(fieldset).toContainElement(screen.getByLabelText('test-1'));
+    expect(fieldset).toContainElement(screen.getByLabelText('test-2'));
+  });
+
   describe('Component API', () => {
     it('should support a custom className on the outermost element', () => {
       const { container } = render(
@@ -269,6 +288,29 @@ describe('RadioButtonGroup', () => {
         expect(screen.getByLabelText('Option one')).not.toBeChecked();
         expect(screen.getByLabelText('Option two')).toBeChecked();
       });
+    });
+    it('should place required on every child <RadioButton>', () => {
+      render(
+        <RadioButtonGroup name="test" required>
+          <RadioButton labelText="Option 1" value="option-1" />
+          <RadioButton labelText="Option 2" value="option-2" />
+        </RadioButtonGroup>
+      );
+
+      expect(screen.getByDisplayValue('option-1')).toBeRequired();
+      expect(screen.getByDisplayValue('option-2')).toBeRequired();
+    });
+
+    it('should override required on every child <RadioButton>', () => {
+      render(
+        <RadioButtonGroup name="test" required>
+          <RadioButton labelText="Option 1" value="option-1" required={false} />
+          <RadioButton labelText="Option 2" value="option-2" />
+        </RadioButtonGroup>
+      );
+
+      expect(screen.getByDisplayValue('option-1')).toBeRequired();
+      expect(screen.getByDisplayValue('option-2')).toBeRequired();
     });
   });
 });

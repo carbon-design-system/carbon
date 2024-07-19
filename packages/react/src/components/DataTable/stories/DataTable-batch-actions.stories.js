@@ -29,8 +29,11 @@ import DataTable, {
   TableToolbarMenu,
 } from '..';
 
+import { Toggletip, ToggletipButton, ToggletipContent } from '../../Toggletip';
+
 import { batchActionClick, rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
+import Link from '../../Link';
 
 export default {
   title: 'Components/DataTable/Batch Actions',

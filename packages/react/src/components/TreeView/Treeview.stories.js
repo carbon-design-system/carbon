@@ -262,3 +262,12 @@ Playground.argTypes = {
     control: { type: 'select' },
   },
 };
+
+export const Temp = () => (
+  <TreeView label="Tree View">
+    <TreeNode label="Enabled">
+      <TreeNode label="Disabled" disabled />
+    </TreeNode>
+    <TreeNode label="Disabled" disabled></TreeNode>
+  </TreeView>
+);

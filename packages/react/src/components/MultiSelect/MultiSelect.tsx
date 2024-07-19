@@ -14,14 +14,26 @@ import {
   UseSelectStateChangeTypes,
 } from 'downshift';
 import isEqual from 'lodash.isequal';
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { ForwardedRef, useContext, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import React, {
+  ForwardedRef,
+  useContext,
+  useRef,
+  useState,
+  useMemo,
+  ReactNode,
+  useLayoutEffect,
+} from 'react';
 import ListBox, {
   ListBoxSize,
   ListBoxType,
   PropTypes as ListBoxPropTypes,
 } from '../ListBox';
-import { sortingPropTypes } from './MultiSelectPropTypes';
+import {
+  MultiSelectSortingProps,
+  SortItemsOptions,
+  sortingPropTypes,
+} from './MultiSelectPropTypes';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -31,9 +43,14 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
-import { OnChangeData } from '../Dropdown';
 import type { InternationalProps } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
+import {
+  useFloating,
+  flip,
+  size as floatingSize,
+  autoUpdate,
+} from '@floating-ui/react';
 
 const getInstanceId = setupGetInstanceId();
 const {
@@ -45,9 +62,11 @@ const {
   ToggleButtonKeyDownEscape,
   ToggleButtonKeyDownSpaceButton,
   ItemMouseMove,
+  MenuMouseLeave,
   ToggleButtonClick,
-  ToggleButtonKeyDownHome,
-  ToggleButtonKeyDownEnd,
+  ToggleButtonKeyDownPageDown,
+  ToggleButtonKeyDownPageUp,
+  FunctionSetHighlightedIndex,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
 };
@@ -70,64 +89,12 @@ const defaultItemToString = <ItemType,>(item?: ItemType): string => {
   return '';
 };
 
-interface SharedOptions {
-  locale: string;
-}
-
-interface DownshiftTypedProps<ItemType> {
-  itemToString?(item: ItemType): string;
-}
-
-interface SortItemsOptions<ItemType>
-  extends SharedOptions,
-    DownshiftTypedProps<ItemType> {
-  compareItems(
-    item1: ItemType,
-    item2: ItemType,
-    options: SharedOptions
-  ): number;
-  selectedItems: ItemType[];
-}
-
 interface selectedItemType {
   text: string;
 }
 
-interface MultiSelectSortingProps<ItemType> {
-  /**
-   * Provide a compare function that is used to determine the ordering of
-   * options. See 'sortItems' for more control.
-   */
-  compareItems?(
-    item1: ItemType,
-    item2: ItemType,
-    options: SharedOptions
-  ): number;
-
-  /**
-   * Provide a method that sorts all options in the control. Overriding this
-   * prop means that you also have to handle the sort logic for selected versus
-   * un-selected items. If you just want to control ordering, consider the
-   * `compareItems` prop instead.
-   *
-   * The return value should be a number whose sign indicates the relative order
-   * of the two elements: negative if a is less than b, positive if a is greater
-   * than b, and zero if they are equal.
-   *
-   * sortItems :
-   *   (items: Array<Item>, {
-   *     selectedItems: Array<Item>,
-   *     itemToString: Item => string,
-   *     compareItems: (itemA: string, itemB: string, {
-   *       locale: string
-   *     }) => number,
-   *     locale: string,
-   *   }) => Array<Item>
-   */
-  sortItems?(
-    items: ReadonlyArray<ItemType>,
-    options: SortItemsOptions<ItemType>
-  ): ItemType[];
+interface OnChangeData<ItemType> {
+  selectedItems: ItemType[] | null;
 }
 
 export interface MultiSelectProps<ItemType>
@@ -135,6 +102,13 @@ export interface MultiSelectProps<ItemType>
     InternationalProps<
       'close.menu' | 'open.menu' | 'clear.all' | 'clear.selection'
     > {
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign?: boolean;
+
   className?: string;
 
   /**
@@ -171,7 +145,7 @@ export interface MultiSelectProps<ItemType>
    * Provide helper text that is used alongside the control label for
    * additional help
    */
-  helperText?: React.ReactNode;
+  helperText?: ReactNode;
 
   /**
    * Specify whether the title text should be hidden or not
@@ -197,7 +171,7 @@ export interface MultiSelectProps<ItemType>
   /**
    * If invalid, what is the error?
    */
-  invalidText?: React.ReactNode;
+  invalidText?: ReactNode;
 
   /**
    * Function to render items as custom components instead of strings.
@@ -222,7 +196,7 @@ export interface MultiSelectProps<ItemType>
    * Generic `label` that will be used as the textual representation of what
    * this field is for
    */
-  label: NonNullable<React.ReactNode>;
+  label: NonNullable<ReactNode>;
 
   /**
    * `true` to use the light version.
@@ -281,13 +255,13 @@ export interface MultiSelectProps<ItemType>
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the
    * multiselect via ARIA attributes.
    */
-  titleText?: React.ReactNode;
+  titleText?: ReactNode;
 
   /**
    * Specify 'inline' to create an inline multi-select.
@@ -307,12 +281,13 @@ export interface MultiSelectProps<ItemType>
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: React.ReactNode;
+  warnText?: ReactNode;
 }
 
 const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
+      autoAlign = false,
       className: containerClassName,
       id,
       items,
@@ -371,14 +346,65 @@ const MultiSelect = React.forwardRef(
       selectedItems: selected,
     });
 
+    const { refs, floatingStyles, middlewareData } = useFloating(
+      autoAlign
+        ? {
+            placement: direction,
+
+            // The floating element is positioned relative to its nearest
+            // containing block (usually the viewport). It will in many cases also
+            // “break” the floating element out of a clipping ancestor.
+            // https://floating-ui.com/docs/misc#clipping
+            strategy: 'fixed',
+
+            // Middleware order matters, arrow should be last
+            middleware: [
+              flip({ crossAxis: false }),
+              floatingSize({
+                apply({ rects, elements }) {
+                  Object.assign(elements.floating.style, {
+                    width: `${rects.reference.width}px`,
+                  });
+                },
+              }),
+            ],
+            whileElementsMounted: autoUpdate,
+          }
+        : {}
+    );
+
+    useLayoutEffect(() => {
+      if (autoAlign) {
+        Object.keys(floatingStyles).forEach((style) => {
+          if (refs.floating.current) {
+            refs.floating.current.style[style] = floatingStyles[style];
+          }
+        });
+      }
+    }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
+
+    // Filter out items with an object having undefined values
+    const filteredItems = useMemo(() => {
+      return items.filter((item) => {
+        if (typeof item === 'object' && item !== null) {
+          for (const key in item) {
+            if (Object.hasOwn(item, key) && item[key] === undefined) {
+              return false; // Return false if any property has an undefined value
+            }
+          }
+        }
+        return true; // Return true if item is not an object with undefined values
+      });
+    }, [items]);
+
     const selectProps: UseSelectProps<ItemType> = {
       ...downshiftProps,
       stateReducer,
       isOpen,
-      itemToString: (items) => {
+      itemToString: (filteredItems) => {
         return (
-          (Array.isArray(items) &&
-            items
+          (Array.isArray(filteredItems) &&
+            filteredItems
               .map(function (item) {
                 return itemToString(item);
               })
@@ -387,7 +413,7 @@ const MultiSelect = React.forwardRef(
         );
       },
       selectedItem: controlledSelectedItems,
-      items,
+      items: filteredItems,
       isItemDisabled(item, _index) {
         return (item as any).disabled;
       },
@@ -400,6 +426,7 @@ const MultiSelect = React.forwardRef(
       getItemProps,
       selectedItem,
       highlightedIndex,
+      setHighlightedIndex,
     } = useSelect<ItemType>(selectProps);
 
     const toggleButtonProps = getToggleButtonProps({
@@ -426,6 +453,7 @@ const MultiSelect = React.forwardRef(
               match(e, keys.Enter)) &&
             !isOpen
           ) {
+            setHighlightedIndex(0);
             setItemsCleared(false);
             setIsOpenWrapper(true);
           }
@@ -522,7 +550,6 @@ const MultiSelect = React.forwardRef(
       }
 
       switch (type) {
-        case ItemClick:
         case ToggleButtonKeyDownSpaceButton:
         case ToggleButtonKeyDownEnter:
           if (changes.selectedItem === undefined) {
@@ -539,11 +566,29 @@ const MultiSelect = React.forwardRef(
           break;
         case ToggleButtonClick:
           setIsOpenWrapper(changes.isOpen || false);
-          break;
+          return { ...changes, highlightedIndex: 0 };
+        case ItemClick:
+          setHighlightedIndex(changes.selectedItem);
+          onItemChange(changes.selectedItem);
+          return { ...changes, highlightedIndex: state.highlightedIndex };
+        case MenuMouseLeave:
+          return { ...changes, highlightedIndex: state.highlightedIndex };
+        case FunctionSetHighlightedIndex:
+          if (!isOpen) {
+            return {
+              ...changes,
+              highlightedIndex: 0,
+            };
+          } else {
+            return {
+              ...changes,
+              highlightedIndex: props.items.indexOf(highlightedIndex),
+            };
+          }
         case ToggleButtonKeyDownArrowDown:
         case ToggleButtonKeyDownArrowUp:
-        case ToggleButtonKeyDownHome:
-        case ToggleButtonKeyDownEnd:
+        case ToggleButtonKeyDownPageDown:
+        case ToggleButtonKeyDownPageUp:
           if (highlightedIndex > -1) {
             const itemArray = document.querySelectorAll(
               `li.${prefix}--list-box__menu-item[role="option"]`
@@ -606,7 +651,7 @@ const MultiSelect = React.forwardRef(
 
     const itemsSelectedText =
       selectedItems.length > 0 &&
-      selectedItems.map((item) => (item as selectedItemType).text);
+      selectedItems.map((item) => (item as selectedItemType)?.text);
 
     return (
       <div className={wrapperClasses}>
@@ -641,7 +686,9 @@ const MultiSelect = React.forwardRef(
               className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
             />
           )}
-          <div className={multiSelectFieldWrapperClasses}>
+          <div
+            className={multiSelectFieldWrapperClasses}
+            ref={refs.setReference}>
             {selectedItems.length > 0 && (
               <ListBox.Selection
                 readOnly={readOnly}
@@ -677,49 +724,53 @@ const MultiSelect = React.forwardRef(
             </button>
             {normalizedSlug}
           </div>
-          <ListBox.Menu {...getMenuProps()}>
+          <ListBox.Menu
+            {...getMenuProps({
+              ref: refs.setFloating,
+            })}>
             {isOpen &&
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              sortItems!(items, sortOptions as SortItemsOptions<ItemType>).map(
-                (item, index) => {
-                  const isChecked =
-                    selectedItems.filter((selected) => isEqual(selected, item))
-                      .length > 0;
+              sortItems!(
+                filteredItems,
+                sortOptions as SortItemsOptions<ItemType>
+              ).map((item, index) => {
+                const isChecked =
+                  selectedItems.filter((selected) => isEqual(selected, item))
+                    .length > 0;
 
-                  const itemProps = getItemProps({
-                    item,
-                    // we don't want Downshift to set aria-selected for us
-                    // we also don't want to set 'false' for reader verbosity's sake
-                    ['aria-selected']: isChecked,
-                  });
-                  const itemText = itemToString(item);
+                const itemProps = getItemProps({
+                  item,
+                  // we don't want Downshift to set aria-selected for us
+                  // we also don't want to set 'false' for reader verbosity's sake
+                  ['aria-selected']: isChecked,
+                });
+                const itemText = itemToString(item);
 
-                  return (
-                    <ListBox.MenuItem
-                      key={itemProps.id}
-                      isActive={isChecked}
-                      aria-label={itemText}
-                      isHighlighted={highlightedIndex === index}
-                      title={itemText}
-                      disabled={itemProps['aria-disabled']}
-                      {...itemProps}>
-                      <div className={`${prefix}--checkbox-wrapper`}>
-                        <span
-                          title={useTitleInItem ? itemText : undefined}
-                          className={`${prefix}--checkbox-label`}
-                          data-contained-checkbox-state={isChecked}
-                          id={`${itemProps.id}__checkbox`}>
-                          {itemToElement ? (
-                            <ItemToElement key={itemProps.id} {...item} />
-                          ) : (
-                            itemText
-                          )}
-                        </span>
-                      </div>
-                    </ListBox.MenuItem>
-                  );
-                }
-              )}
+                return (
+                  <ListBox.MenuItem
+                    key={itemProps.id}
+                    isActive={isChecked}
+                    aria-label={itemText}
+                    isHighlighted={highlightedIndex === index}
+                    title={itemText}
+                    disabled={itemProps['aria-disabled']}
+                    {...itemProps}>
+                    <div className={`${prefix}--checkbox-wrapper`}>
+                      <span
+                        title={useTitleInItem ? itemText : undefined}
+                        className={`${prefix}--checkbox-label`}
+                        data-contained-checkbox-state={isChecked}
+                        id={`${itemProps.id}__checkbox`}>
+                        {itemToElement ? (
+                          <ItemToElement key={itemProps.id} {...item} />
+                        ) : (
+                          itemText
+                        )}
+                      </span>
+                    </div>
+                  </ListBox.MenuItem>
+                );
+              })}
           </ListBox.Menu>
           {itemsCleared && (
             <span aria-live="assertive" aria-label={clearAnnouncement} />
@@ -749,6 +800,13 @@ interface MultiSelectComponent {
 MultiSelect.displayName = 'MultiSelect';
 MultiSelect.propTypes = {
   ...sortingPropTypes,
+
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Provide a custom class name to be added to the outermost node in the

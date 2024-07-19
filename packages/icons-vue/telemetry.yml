@@ -5,3 +5,6 @@ endpoint: https://collector-prod.1am6wm210aow.us-south.codeengine.appdomain.clou
 collect:
   npm:
     dependencies: null
+  js:
+    functions: {}
+    tokens: null

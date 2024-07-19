@@ -23,7 +23,7 @@ export const Default = () => {
   return (
     <NumberInput
       id="carbon-number"
-      min={0}
+      min={-100}
       max={100}
       value={50}
       label="NumberInput label"
@@ -38,7 +38,7 @@ export const Playground = (args) => {
   return (
     <NumberInput
       id="carbon-number"
-      min={0}
+      min={-100}
       max={100}
       value={50}
       label="NumberInput label"

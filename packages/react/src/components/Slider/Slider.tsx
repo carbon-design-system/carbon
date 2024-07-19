@@ -5,8 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { type KeyboardEventHandler, PureComponent } from 'react';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import React, {
+  type KeyboardEventHandler,
+  PureComponent,
+  ReactNode,
+} from 'react';
+import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
 import throttle from 'lodash.throttle';
@@ -136,7 +140,7 @@ export interface SliderProps
   /**
    * The child nodes.
    */
-  children?: ReactNodeLike;
+  children?: ReactNode;
 
   /**
    * The CSS class name for the slider, set on the wrapping div.
@@ -149,7 +153,7 @@ export interface SliderProps
   disabled?: boolean;
 
   /**
-   * The callback to format the label associated with the minimum/maximum value.
+   * The callback to format the label associated with the minimum/maximum value and the value tooltip when hideTextInput is true.
    */
   formatLabel?: (value: number, label: string | undefined) => string;
 
@@ -176,12 +180,12 @@ export interface SliderProps
   /**
    * Provide the text that is displayed when the Slider is in an invalid state
    */
-  invalidText?: React.ReactNode;
+  invalidText?: ReactNode;
 
   /**
    * The label for the slider.
    */
-  labelText?: ReactNodeLike;
+  labelText?: ReactNode;
 
   /**
    * @deprecated
@@ -964,6 +968,7 @@ class Slider extends PureComponent<SliderProps> {
   };
 
   processNewInputValue = (input: HTMLInputElement) => {
+    this.setState({ correctedValue: null, correctedPosition: null });
     const targetValue = Number.parseFloat(input.value);
     const validity = !isNaN(targetValue);
 
@@ -997,7 +1002,7 @@ class Slider extends PureComponent<SliderProps> {
 
       if (adjustedValue !== targetValue) {
         this.setState({
-          correctedValue: targetValue,
+          correctedValue: targetValue.toString(),
           correctedPosition: handlePosition,
         });
       } else {
@@ -1036,7 +1041,7 @@ class Slider extends PureComponent<SliderProps> {
         ? (boundingRect?.right ?? 0) - clientX
         : clientX - (boundingRect?.left ?? 0);
       return leftOffset / width;
-    } else if (value && range) {
+    } else if (value !== null && value !== undefined && range) {
       // Prevent NaN calculation if the range is 0.
       return range === 0 ? 0 : (value - this.props.min) / range;
     }
@@ -1343,14 +1348,16 @@ class Slider extends PureComponent<SliderProps> {
     } = this.state;
 
     const showWarning =
-      (!readOnly && warn && isValid) ||
+      (!readOnly && warn) ||
       (typeof correctedValue !== null &&
-        correctedPosition === HandlePosition.LOWER);
+        correctedPosition === HandlePosition.LOWER &&
+        isValid);
     const showWarningUpper =
-      (!readOnly && warn && (twoHandles ? isValidUpper : isValid)) ||
+      (!readOnly && warn) ||
       (typeof correctedValue !== null &&
         correctedPosition ===
-          (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER));
+          (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER) &&
+        (twoHandles ? isValidUpper : isValid));
 
     return (
       <PrefixContext.Consumer>
@@ -1514,14 +1521,15 @@ class Slider extends PureComponent<SliderProps> {
                   <ThumbWrapper
                     hasTooltip={hideTextInput}
                     className={lowerThumbWrapperClasses}
-                    label={`${value}`}
-                    align={twoHandles ? 'top-right' : 'top'}
+                    label={`${formatLabel(value, '')}`}
+                    align="top"
                     {...lowerThumbWrapperProps}>
                     <div
                       className={lowerThumbClasses}
                       role="slider"
                       id={twoHandles ? undefined : id}
                       tabIndex={!readOnly ? 0 : -1}
+                      aria-valuetext={`${formatLabel(value, '')}`}
                       aria-valuemax={twoHandles ? valueUpper : max}
                       aria-valuemin={min}
                       aria-valuenow={value}
@@ -1548,8 +1556,8 @@ class Slider extends PureComponent<SliderProps> {
                     <ThumbWrapper
                       hasTooltip={hideTextInput}
                       className={upperThumbWrapperClasses}
-                      label={`${valueUpper}`}
-                      align="top-left"
+                      label={`${formatLabel(valueUpper || 0, '')}`}
+                      align="top"
                       {...upperThumbWrapperProps}>
                       <div
                         className={upperThumbClasses}

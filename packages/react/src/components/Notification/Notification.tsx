@@ -847,8 +847,8 @@ export interface ActionableNotificationProps
   closeOnEscape?: boolean;
 
   /**
-   * @deprecated use StaticNotification once it's available. Issue #15532
-   * Specify if focus should be moved to the component when the notification contains actions
+   * @deprecated This prop will be removed in the next major version, v12.
+   * Specify if focus should be moved to the component on render. To meet the spec for alertdialog, this must always be true. If you're setting this to false, explore using StaticNotification instead. https://github.com/carbon-design-system/carbon/pull/15532
    */
   hasFocus?: boolean;
 

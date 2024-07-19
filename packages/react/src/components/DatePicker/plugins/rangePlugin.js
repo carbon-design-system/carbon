@@ -17,7 +17,7 @@ export default (config) => {
         origSetDate.call(this, dates, triggerChange, format);
         // If `triggerChange` is `true`, `onValueUpdate` Flatpickr event is fired
         // where Flatpickr's range plugin takes care of fixing the first `<input>`
-        if (!triggerChange) {
+        if (!triggerChange && dates.length === 2) {
           const { _input: inputFrom } = fp;
           const { input: inputTo } = config;
           [inputFrom, inputTo].forEach((input, i) => {

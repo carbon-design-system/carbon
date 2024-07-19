@@ -62,7 +62,7 @@ const TreeNode = React.forwardRef(
         return React.cloneElement(node, {
           active,
           depth: depth + 1,
-          disabled,
+          disabled: disabled || node.props.disabled,
           onTreeSelect,
           selected,
           tabIndex: (!node.props.disabled && -1) || null,
