@@ -9,6 +9,7 @@ import './story.scss';
 
 import React, { useRef, useEffect } from 'react';
 import { Tooltip } from './';
+import Button from './../Button';
 import mdx from './Tooltip.mdx';
 
 export default {
