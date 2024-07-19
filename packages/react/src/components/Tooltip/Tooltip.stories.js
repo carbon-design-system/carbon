@@ -7,7 +7,6 @@
 
 import './story.scss';
 
-import { SquareOutline } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
 import { Tooltip } from './';
 import mdx from './Tooltip.mdx';
@@ -55,9 +54,7 @@ export const Default = () => {
     'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
     <Tooltip align="bottom" label={label}>
-      <button className="sb-tooltip-trigger" type="button">
-        <SquareOutline />
-      </button>
+      <Button className="sb-tooltip-trigger">This button has a tooltip</Button>
     </Tooltip>
   );
 };
@@ -65,9 +62,7 @@ export const Default = () => {
 export const Alignment = () => {
   return (
     <Tooltip label="Tooltip alignment" align="bottom-left">
-      <button className="sb-tooltip-trigger" type="button">
-        <SquareOutline />
-      </button>
+      <Button className="sb-tooltip-trigger">This button has a tooltip</Button>
     </Tooltip>
   );
 };
@@ -89,9 +84,9 @@ export const ExperimentalAutoAlign = () => {
           left: '2500px',
         }}>
         <Tooltip label={tooltipLabel} align="top" autoAlign>
-          <button className="sb-tooltip-trigger" type="button" ref={ref}>
-            <SquareOutline />
-          </button>
+          <Button className="sb-tooltip-trigger" ref={ref}>
+            This button has a tooltip
+          </Button>
         </Tooltip>
       </div>
     </div>
@@ -101,9 +96,7 @@ export const ExperimentalAutoAlign = () => {
 export const Duration = () => {
   return (
     <Tooltip label="Label one" enterDelayMs={0} leaveDelayMs={300}>
-      <button className="sb-tooltip-trigger" type="button">
-        <SquareOutline />
-      </button>
+      <Button className="sb-tooltip-trigger">This button has a tooltip</Button>
     </Tooltip>
   );
 };
