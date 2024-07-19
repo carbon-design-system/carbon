@@ -5,7 +5,7 @@ const baseConfig = {
   plugins: [
     replace({
       values: {
-        'process.env.DEBUG': 'false',
+        'process.env.NODE_ENV': 'false',
       },
     }),
   ],
