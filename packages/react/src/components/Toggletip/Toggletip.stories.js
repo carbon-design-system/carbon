@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Information } from '@carbon/icons-react';
+import { SquareOutline } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
 import { default as Button } from '../Button';
 import { default as Link } from '../Link';
@@ -56,7 +56,7 @@ export const Default = () => {
         <ToggletipLabel>Toggletip label</ToggletipLabel>
         <Toggletip>
           <ToggletipButton label="Show information">
-            <Information />
+            <SquareOutline />
           </ToggletipButton>
           <ToggletipContent>
             <p>
@@ -83,7 +83,7 @@ export const Default = () => {
         </ToggletipLabel>
         <Toggletip defaultOpen>
           <ToggletipButton label="Show information">
-            <Information />
+            <SquareOutline />
           </ToggletipButton>
           <ToggletipContent>
             <p>
@@ -120,7 +120,7 @@ export const ExperimentalAutoAlign = () => {
         <ToggletipLabel>Toggletip label</ToggletipLabel>
         <Toggletip align="bottom" autoAlign defaultOpen>
           <ToggletipButton label="Show information">
-            <Information ref={ref} />
+            <SquareOutline ref={ref} />
           </ToggletipButton>
           <ToggletipContent>
             <p>
@@ -149,7 +149,7 @@ const PlaygroundStory = (controls) => {
       </ToggletipLabel>
       <Toggletip align={align} defaultOpen>
         <ToggletipButton label="Show information">
-          <Information />
+          <SquareOutline />
         </ToggletipButton>
         <ToggletipContent>
           <p>
