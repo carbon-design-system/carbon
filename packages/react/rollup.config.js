@@ -4,8 +4,9 @@ const baseConfig = {
   external: [],
   plugins: [
     replace({
+      preventAssignment: true,
       values: {
-        'process.env.NODE_ENV': 'false',
+        __DEV__: JSON.stringify(process.env.NODE_ENV === 'development'),
       },
     }),
   ],
