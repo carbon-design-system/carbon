@@ -14,9 +14,10 @@ import icon from './svg-result-carbon-icon.js';
 
 /**
  * @param {Array} [inputs] icon files of the @carbon/icons/lib folder from node_modules
+ * @param {String} [banner] license banner to prepend to file
  * @returns {object} The rollup plugin to generate lit svg template icon files.
  */
-export default function rollupPluginIcons(inputs) {
+export default function rollupPluginIcons(inputs, banner) {
   return {
     name: 'carbon-icons',
 
@@ -33,18 +34,34 @@ export default function rollupPluginIcons(inputs) {
         const iconsESPath = path.resolve('es', 'icons', path.relative(iconsDir, iconPath));
         const spreadModulePath = path.resolve(__dirname, '../es/globals/directives/spread');
 
-        const code = [
-          `import { svg } from 'lit'`,
-          `import spread from '${path.relative(path.dirname(iconsESPath), spreadModulePath)}'`,
-          `const svgResultCarbonIcon = ${icon(svg.default)}`,
-          `export default svgResultCarbonIcon;`,
-        ].join(';');
+        const code =
+          `${banner}
+import { svg } from 'lit';
+import spread from '${path.relative(path.dirname(iconsESPath), spreadModulePath)}';
+
+const svgResultCarbonIcon = ${icon(svg.default)};
+export default svgResultCarbonIcon;`;
 
         this.emitFile({
           type: 'asset',
           fileName: `icons/${path.relative(iconsDir, iconPath)}`,
           source: code
         });
+
+        // emit icon type file
+        const typeCode =
+        `${banner}
+import { SVGTemplateResult } from 'lit-html';
+declare const svgResultCarbonIcon: ({ children, ...attrs }?: { children?: SVGTemplateResult; [attr: string]: any }) => SVGTemplateResult;
+export default svgResultCarbonIcon;`;
+
+      const typePath = path.format({ ...path.parse(iconPath), base: '', ext: '.d.ts' })
+
+      this.emitFile({
+        type: 'asset',
+        fileName: `icons/${path.relative(iconsDir, typePath)}`,
+        source: typeCode
+      });
       }
     }
   };

@@ -125,7 +125,7 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
             .css;
         },
       }),
-      carbonIcons(iconInput),
+      carbonIcons(iconInput, banner),
       typescript({
         noEmitOnError: true,
         compilerOptions: {
