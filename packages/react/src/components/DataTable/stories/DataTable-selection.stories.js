@@ -42,6 +42,135 @@ export default {
   },
 };
 
+export const Test = () => {
+  const headers1 = [
+    { key: 'id', header: 'ID' },
+    { key: 'name', header: 'Name' },
+  ];
+  const rows1 = [
+    { id: 'person1', name: 'Ivan' },
+    { id: 'person2', name: 'Salvador' },
+  ];
+
+  const headers2 = [
+    { key: 'id', header: 'ID' },
+    { key: 'country', header: 'Country' },
+  ];
+  const rows2 = [
+    { id: 'country1', country: 'Switzerland' },
+    { id: 'country2', country: 'Mexico' },
+  ];
+
+  return (
+    <div>
+      <DataTable rows={rows1} headers={headers1} radio>
+        {({
+          rows,
+          headers,
+          getHeaderProps,
+          getRowProps,
+          getSelectionProps,
+          getTableProps,
+          getTableContainerProps,
+        }) => (
+          <TableContainer
+            title="DataTable"
+            description="With radio selection"
+            {...getTableContainerProps()}>
+            <Table {...getTableProps()} aria-label="sample table">
+              <TableHead>
+                <TableRow>
+                  <th scope="col" />
+                  {headers.map((header, i) => (
+                    <TableHeader
+                      key={'header1' + i}
+                      {...getHeaderProps({
+                        header,
+                      })}>
+                      {header.header}
+                    </TableHeader>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row, i) => (
+                  <TableRow
+                    key={'row1' + i}
+                    {...getRowProps({
+                      row,
+                    })}>
+                    <TableSelectRow
+                      {...getSelectionProps({
+                        row,
+                      })}
+                      // name="select-1"
+                    />
+                    {row.cells.map((cell) => (
+                      <TableCell key={cell.id}>{cell.value}</TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+      </DataTable>
+      <DataTable rows={rows2} headers={headers2} radio>
+        {({
+          rows,
+          headers,
+          getHeaderProps,
+          getRowProps,
+          getSelectionProps,
+          getTableProps,
+          getTableContainerProps,
+        }) => (
+          <TableContainer
+            title="DataTable"
+            description="With radio selection"
+            {...getTableContainerProps()}>
+            <Table {...getTableProps()} aria-label="sample table">
+              <TableHead>
+                <TableRow>
+                  <th scope="col" />
+                  {headers.map((header, i) => (
+                    <TableHeader
+                      key={'header2' + i}
+                      {...getHeaderProps({
+                        header,
+                      })}>
+                      {header.header}
+                    </TableHeader>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row, i) => (
+                  <TableRow
+                    key={'row2' + i}
+                    {...getRowProps({
+                      row,
+                    })}>
+                    <TableSelectRow
+                      {...getSelectionProps({
+                        row,
+                      })}
+                      name="select-2"
+                    />
+                    {row.cells.map((cell) => (
+                      <TableCell key={cell.id}>{cell.value}</TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+      </DataTable>
+    </div>
+  );
+};
+
 export const Default = () => (
   <DataTable rows={rows} headers={headers}>
     {({
