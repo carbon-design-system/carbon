@@ -21,11 +21,9 @@ import { FormContext } from '../FluidForm';
 import { useAnnouncer } from '../../internal/useAnnouncer';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
-
-const getInstanceId = setupGetInstanceId();
 
 export interface TextAreaProps
   extends React.InputHTMLAttributes<HTMLTextAreaElement> {
@@ -185,7 +183,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const { isFluid } = useContext(FormContext);
   const { defaultValue, value } = other;
 
-  const { current: textAreaInstanceId } = useRef(getInstanceId());
+  const textAreaInstanceId = useId();
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const ref = useMergedRefs([forwardRef, textareaRef]) as
