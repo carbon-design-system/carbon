@@ -566,7 +566,6 @@ const MultiSelect = React.forwardRef(
           break;
         case ToggleButtonClick:
           setIsOpenWrapper(changes.isOpen || false);
-          console.log({ topItems });
           return {
             ...changes,
             highlightedIndex:
