@@ -1,7 +1,7 @@
 {
   "name": "@carbon/react",
   "description": "React components for the Carbon Design System",
-  "version": "1.61.0",
+  "version": "1.62.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -81,7 +81,7 @@
     "@babel/preset-typescript": "^7.24.7",
     "@carbon/test-utils": "^10.30.0",
     "@carbon/themes": "^11.37.0",
-    "@figma/code-connect": "^1.0.1",
+    "@figma/code-connect": "^1.0.2",
     "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-commonjs": "^26.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",

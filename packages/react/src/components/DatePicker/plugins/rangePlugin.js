@@ -17,12 +17,12 @@ export default (config) => {
         origSetDate.call(this, dates, triggerChange, format);
         // If `triggerChange` is `true`, `onValueUpdate` Flatpickr event is fired
         // where Flatpickr's range plugin takes care of fixing the first `<input>`
-        if (!triggerChange) {
-          const { _input: inputDates } = fp;
-          const inputDatesArray = inputDates.value.split(' ');
-          [inputDatesArray[0], inputDatesArray[2]].forEach((input, i) => {
+        if (!triggerChange && dates.length === 2) {
+          const { _input: inputFrom } = fp;
+          const { input: inputTo } = config;
+          [inputFrom, inputTo].forEach((input, i) => {
             if (input) {
-              input = !dates[i]
+              input.value = !dates[i]
                 ? ''
                 : fp.formatDate(new Date(dates[i]), fp.config.dateFormat);
             }
