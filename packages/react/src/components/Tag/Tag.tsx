@@ -15,7 +15,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import { Text } from '../Text';
@@ -24,7 +24,6 @@ import { DefinitionTooltip } from '../Tooltip';
 import { isEllipsisActive } from './isEllipsisActive';
 import { useMergeRefs } from '@floating-ui/react';
 
-const getInstanceId = setupGetInstanceId();
 export const TYPES = {
   red: 'Red',
   magenta: 'Magenta',
@@ -131,7 +130,7 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
   const prefix = usePrefix();
   const tagRef = useRef<HTMLElement>();
   const ref = useMergeRefs([forwardRef, tagRef]);
-  const tagId = id || `tag-${getInstanceId()}`;
+  const tagId = id || `tag-${useId()}`;
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
   useLayoutEffect(() => {
