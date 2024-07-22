@@ -21,7 +21,7 @@ import wrapFocus, {
 } from '../../internal/wrapFocus';
 import debounce from 'lodash.debounce';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { IconButton } from '../IconButton';
@@ -31,8 +31,6 @@ import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
-
-const getInstanceId = setupGetInstanceId();
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 
@@ -264,7 +262,7 @@ const Modal = React.forwardRef(function Modal(
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
   const [isScrollable, setIsScrollable] = useState(false);
-  const modalInstanceId = `modal-${getInstanceId()}`;
+  const modalInstanceId = `modal-${useId()}`;
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
   const modalBodyId = `${prefix}--modal-body--${modalInstanceId}`;
