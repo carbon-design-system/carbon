@@ -9,7 +9,8 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import Information16 from '@carbon/icons/lib/information/16';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';

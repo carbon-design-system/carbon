@@ -8,7 +8,8 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, customElement, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import View16 from '@carbon/icons/lib/view/16';

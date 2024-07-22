@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,8 +13,9 @@ import InformationSquareFilled20 from '@carbon/icons/lib/information--square--fi
 import WarningFilled20 from '@carbon/icons/lib/warning--filled/20';
 import WarningAltFilled20 from '@carbon/icons/lib/warning--alt--filled/20';
 import { html, svg } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { NOTIFICATION_TYPE, NOTIFICATION_KIND } from './defs';
 import CDSInlineNotification from './inline-notification';
 import styles from './actionable-notification.scss?lit';

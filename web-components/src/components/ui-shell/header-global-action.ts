@@ -1,14 +1,15 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { LitElement } from 'lit';
-import { property, customElement, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { BUTTON_TOOLTIP_POSITION } from '../button/button';
 import CDSButton from '../button/button';
 import HostListener from '../../globals/decorators/host-listener';

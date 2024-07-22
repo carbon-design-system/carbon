@@ -9,7 +9,8 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property, customElement, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './popover.scss?lit';
 import CDSPopoverContent from './popover-content';
