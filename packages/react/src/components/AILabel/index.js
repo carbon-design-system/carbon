@@ -119,7 +119,7 @@ export const AILabel = React.forwardRef(function AILabel(
     [`${prefix}--slug__button--${size}`]: size,
     [`${prefix}--slug__button--${kind}`]: kind,
     [`${prefix}--slug__button--inline-with-content`]:
-      kind === 'inline' && aiTextLabel,
+      kind === 'inline' && (aiTextLabel || textLabel),
   });
 
   const handleOnRevertClick = (evt) => {
