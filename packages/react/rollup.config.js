@@ -4,9 +4,9 @@ const baseConfig = {
   external: [],
   plugins: [
     replace({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-      __buildDate__: () => JSON.stringify(new Date()),
-      __buildVersion: 15,
+      values: {
+        'process.env.NODE_ENV': 'true',
+      },
     }),
   ],
 };
