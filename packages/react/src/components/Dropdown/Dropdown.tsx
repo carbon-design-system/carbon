@@ -41,15 +41,13 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ReactAttr } from '../../types/common';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import {
   useFloating,
   flip,
   autoUpdate,
   size as floatingSize,
 } from '@floating-ui/react';
-
-const getInstanceId = setupGetInstanceId();
 
 const {
   ToggleButtonKeyDownArrowDown,
@@ -336,7 +334,7 @@ const Dropdown = React.forwardRef(
         return isObject && 'disabled' in item && item.disabled === true;
       },
     };
-    const { current: dropdownInstanceId } = useRef(getInstanceId());
+    const dropdownInstanceId = useId();
 
     function stateReducer(state, actionAndChanges) {
       const { changes, props, type } = actionAndChanges;
