@@ -2016,7 +2016,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@npm:^1.61.0, @carbon/react@workspace:packages/react":
+"@carbon/react@npm:^1.62.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -2035,7 +2035,7 @@ __metadata:
     "@carbon/styles": "npm:^1.61.0"
     "@carbon/test-utils": "npm:^10.30.0"
     "@carbon/themes": "npm:^11.37.0"
-    "@figma/code-connect": "npm:^1.0.1"
+    "@figma/code-connect": "npm:^1.0.2"
     "@floating-ui/react": "npm:^0.26.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@rollup/plugin-babel": "npm:^6.0.0"
@@ -3085,9 +3085,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/code-connect@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@figma/code-connect@npm:1.0.1"
+"@figma/code-connect@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@figma/code-connect@npm:1.0.2"
   dependencies:
     "@babel/core": "npm:^7.24.7"
     "@babel/generator": "npm:^7.24.7"
@@ -3106,6 +3106,7 @@ __metadata:
     glob: "npm:^10.3.10"
     lodash: "npm:^4.17.21"
     minimatch: "npm:^9.0.3"
+    ora: "npm:^5.4.1"
     prettier: "npm:^2.8.8"
     prompts: "npm:^2.4.2"
     strip-ansi: "npm:^6.0.0"
@@ -3114,7 +3115,7 @@ __metadata:
     zod-validation-error: "npm:^3.2.0"
   bin:
     figma: bin/figma
-  checksum: 10/1fceaee82890955d91806bed145d62a9ffeee4603e266ba908c9bc6ad1fde317fd83fdbaad5ea69e2d8cfe8cc2f6d5f432a376e3299dc21ac255c5b163077331
+  checksum: 10/28de9e30705e987bb2de035bd4033a061edcae094edd37cd0116d1a666369f3fb248164b39c79a648e8a832ccd0ed84873027e8b56cdc9b1832764c80ba06ca0
   languageName: node
   linkType: hard
 
@@ -9906,7 +9907,7 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": "npm:^7.17.12"
     "@babel/preset-env": "npm:^7.18.2"
     "@babel/preset-react": "npm:^7.17.12"
-    "@carbon/react": "npm:^1.61.0"
+    "@carbon/react": "npm:^1.62.0"
     "@carbon/styles": "npm:^1.61.0"
     "@carbon/test-utils": "npm:^10.30.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
@@ -10278,7 +10279,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "class-prefix@workspace:examples/class-prefix"
   dependencies:
-    "@carbon/react": "npm:^1.61.0"
+    "@carbon/react": "npm:^1.62.0"
     "@vitejs/plugin-react": "npm:4.0.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -11651,7 +11652,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "custom-theme@workspace:examples/custom-theme"
   dependencies:
-    "@carbon/react": "npm:^1.61.0"
+    "@carbon/react": "npm:^1.62.0"
     "@vitejs/plugin-react": "npm:4.0.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -13825,7 +13826,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-light-dark@workspace:examples/light-dark-mode"
   dependencies:
-    "@carbon/react": "npm:^1.61.0"
+    "@carbon/react": "npm:^1.62.0"
     eslint: "npm:8.40.0"
     next: "npm:14.1.1"
     react: "npm:18.2.0"
@@ -13838,7 +13839,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-nextjs@workspace:examples/nextjs"
   dependencies:
-    "@carbon/react": "npm:^1.61.0"
+    "@carbon/react": "npm:^1.62.0"
     eslint: "npm:8.40.0"
     eslint-config-next: "npm:13.4.7"
     next: "npm:14.1.1"
@@ -16025,7 +16026,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "id-prefix@workspace:examples/id-prefix"
   dependencies:
-    "@carbon/react": "npm:^1.61.0"
+    "@carbon/react": "npm:^1.62.0"
     "@vitejs/plugin-react": "npm:4.0.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -27751,7 +27752,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "v10-token-compat-in-v11@workspace:examples/v10-token-compat-in-v11"
   dependencies:
-    "@carbon/react": "npm:^1.61.0"
+    "@carbon/react": "npm:^1.62.0"
     "@vitejs/plugin-react": "npm:4.0.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -28037,7 +28038,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vite@workspace:examples/vite"
   dependencies:
-    "@carbon/react": "npm:^1.61.0"
+    "@carbon/react": "npm:^1.62.0"
     "@vitejs/plugin-react": "npm:4.0.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -28591,7 +28592,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": "npm:^1.61.0"
+    "@carbon/react": "npm:^1.62.0"
     "@octokit/core": "npm:^4.0.0"
     "@octokit/plugin-retry": "npm:^3.0.9"
     "@octokit/plugin-throttling": "npm:^4.0.0"

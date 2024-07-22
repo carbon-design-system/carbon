@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react';
 import { Grid } from '@carbon/react';
 import figma from '@figma/code-connect';
@@ -20,10 +19,6 @@ figma.connect(
       }),
       children: figma.children('*'),
     },
-    example: ({ children }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below is incomplete.
-      <Grid>{children}</Grid>
-    ),
+    example: ({ children }) => <Grid>{children}</Grid>,
   }
 );
