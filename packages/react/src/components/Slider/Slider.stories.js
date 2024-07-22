@@ -53,6 +53,27 @@ export const SliderWithHiddenInputs = () => (
   />
 );
 
+export const SliderWithCustomValueLabel = () => (
+  <Slider
+    labelText="Slider label with low/medium/high"
+    value={50}
+    min={0}
+    max={100}
+    stepMultiplier={50}
+    step={1}
+    noValidate
+    hideTextInput
+    formatLabel={(val) => {
+      if (val < 25) {
+        return 'Low';
+      } else if (val > 75) {
+        return 'High';
+      }
+      return 'Medium';
+    }}
+  />
+);
+
 export const ControlledSlider = () => {
   const [val, setVal] = useState(87);
   return (

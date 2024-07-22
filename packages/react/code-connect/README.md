@@ -1,8 +1,8 @@
 # Figma Code Connect for @carbon/react
 
 > [!WARNING]  
-> Figma [Code Connect](https://github.com/figma/code-connect) is currently in
-> beta and integration with Carbon React is in an exploratory phase.
+> Figma [Code Connect](https://github.com/figma/code-connect) for Carbon React
+> is in an exploratory phase.
 
 Code Connect offers a solution for linking the
 [Carbon v11 All themes](https://carbondesignsystem.com/designing/kits/figma/)

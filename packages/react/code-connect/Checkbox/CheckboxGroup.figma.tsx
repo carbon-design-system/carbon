@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// @ts-nocheck
 import React from 'react';
 import { CheckboxGroup } from '@carbon/react';
 import figma from '@figma/code-connect';
@@ -34,25 +33,8 @@ figma.connect(
       }),
       warnText: figma.string('Warning text'),
     },
-    example: ({
-      helperText,
-      readOnly,
-      children,
-      invalid,
-      invalidText,
-      warn,
-      warnText,
-    }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
-      <CheckboxGroup
-        legendText="Checkbox group label"
-        helperText={helperText}
-        readOnly={readOnly}
-        warnText={warnText}
-        invalidText={invalidText}
-        invalid={invalid}
-        warn={warn}>
+    example: ({ children, ...props }) => (
+      <CheckboxGroup legendText="Checkbox group label" {...props}>
         {children}
       </CheckboxGroup>
     ),

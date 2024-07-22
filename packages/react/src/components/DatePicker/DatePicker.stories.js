@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
@@ -44,6 +44,37 @@ export const Simple = () => (
     />
   </DatePicker>
 );
+
+export const Test = () => {
+  const [start, setStart] = useState();
+  const [end, setEnd] = useState();
+
+  const onPeriodChanged = (range) => {
+    setStart(range[0]);
+    setEnd(range[1]);
+    console.log({ range });
+  };
+
+  return (
+    <DatePicker
+      datePickerType="range"
+      value={[start, end]}
+      onChange={onPeriodChanged}>
+      <DatePickerInput
+        id="date-picker-input-id-start"
+        placeholder="mm/dd/yyyy"
+        labelText="Start date"
+        size="md"
+      />
+      <DatePickerInput
+        id="date-picker-input-id-finish"
+        placeholder="mm/dd/yyyy"
+        labelText="End date"
+        size="md"
+      />
+    </DatePicker>
+  );
+};
 
 export const SingleWithCalendar = () => (
   <DatePicker datePickerType="single">

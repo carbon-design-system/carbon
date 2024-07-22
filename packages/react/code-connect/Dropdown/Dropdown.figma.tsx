@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// @ts-nocheck
 import React from 'react';
 import { Dropdown, DropdownSkeleton } from '@carbon/react';
 import figma from '@figma/code-connect';
 
+// @ts-nocheck
 figma.connect(
   Dropdown,
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=14032-290635&mode=dev',
@@ -44,30 +44,10 @@ figma.connect(
       }),
       warnText: figma.string('Warning message'),
       type: figma.enum('Style', {
-        // Fixed: 'fixed',
         Inline: 'inline',
       }),
-      // selectedtext: figma.string('Selected text'), // what is this used for in Figma?
-      // unselectedtext: figma.string('Unselected text'),// what is this used for in Figma?
     },
-    example: ({
-      titleText,
-      helperText,
-      size,
-      warn,
-      warnText,
-      hideLabel,
-      label,
-      readOnly,
-      disabled,
-      invalid,
-      invalidText,
-      type,
-    }) => {
-      // Disclaimer: Code Connect is currently in beta and
-      // integration with Carbon React is in an exploratory phase.
-      // Code sample below may be incomplete.
-
+    example: ({ ...props }) => {
       const items = [
         {
           id: 'option-0',
@@ -81,20 +61,8 @@ figma.connect(
 
       return (
         <Dropdown
+          {...props}
           id="id"
-          size={size}
-          type={type}
-          titleText={titleText}
-          helperText={helperText}
-          label={label}
-          hideLabel={hideLabel}
-          disabled={disabled}
-          readOnly={readOnly}
-          warn={warn}
-          warnText={warnText}
-          invalid={invalid}
-          invalidText={invalidText}
-          items={items}
           initialSelectedItem={items[0]}
           itemToString={(item) => (item ? item.text : '')}
         />
@@ -119,8 +87,8 @@ figma.connect(
         false: true,
       }),
     },
-    example: ({ size, hideLabel }) => {
-      return <DropdownSkeleton hideLabel={hideLabel} size={size} />;
+    example: ({ ...props }) => {
+      return <DropdownSkeleton {...props} />;
     },
   }
 );
