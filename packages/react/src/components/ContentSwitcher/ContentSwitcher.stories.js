@@ -11,7 +11,13 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import ContentSwitcher from './ContentSwitcher';
 import { Switch, IconSwitch } from '../Switch';
 import mdx from './ContentSwitcher.mdx';
-import { TableOfContents, Workspace, ViewMode_2 } from '@carbon/icons-react';
+import {
+  TableOfContents,
+  Workspace,
+  ViewMode_2,
+  Bee,
+  Add,
+} from '@carbon/icons-react';
 
 export default {
   title: 'Components/ContentSwitcher',
@@ -92,10 +98,10 @@ export const IconOnlySlide5 = (args) => (
       <ViewMode_2 />
     </IconSwitch>
     <IconSwitch name="four" text="View Mode">
-      <ViewMode_2 />
+      <Bee />
     </IconSwitch>
     <IconSwitch name="five" text="View Mode">
-      <ViewMode_2 />
+      <Add />
     </IconSwitch>
   </ContentSwitcher>
 );
