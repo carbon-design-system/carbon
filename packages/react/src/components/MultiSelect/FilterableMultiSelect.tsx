@@ -30,6 +30,7 @@ import React, {
   type KeyboardEvent,
   ReactElement,
   useLayoutEffect,
+  useMemo,
 } from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import {
@@ -718,7 +719,18 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       },
     })
   );
-  const menuProps = getMenuProps({}, { suppressRefError: true });
+
+  // Memoize the value of getMenuProps to avoid an infinite loop
+  const menuProps = useMemo(
+    () =>
+      getMenuProps(
+        {
+          ref: autoAlign ? refs.setFloating : null,
+        },
+        { suppressRefError: true }
+      ),
+    [autoAlign]
+  );
 
   const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {
     if (
@@ -766,7 +778,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         warnText={warnText}
         isOpen={isOpen}
         size={size}>
-        <div className={`${prefix}--list-box__field`} ref={refs.setReference}>
+        <div
+          className={`${prefix}--list-box__field`}
+          ref={autoAlign ? refs.setReference : null}>
           {controlledSelectedItems.length > 0 && (
             // @ts-expect-error: It is expecting a non-required prop called: "onClearSelection"
             <ListBoxSelection
@@ -819,7 +833,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         </div>
         {normalizedSlug}
 
-        <ListBox.Menu {...menuProps} ref={refs.setFloating}>
+        <ListBox.Menu {...menuProps}>
           {isOpen
             ? sortedItems.map((item, index) => {
                 const isChecked =
