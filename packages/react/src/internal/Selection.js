@@ -44,14 +44,14 @@ export function useSelection({
       if (disabled) {
         return;
       }
-  
+
       const AllSelectableItems = itemsWithSelectAll.filter(
         (item) => !item.disabled
       );
       const disabledItems = itemsWithSelectAll.filter((item) => item.disabled);
-  
+
       let newSelectedItems;
-  
+
       //deselect all on click to All/indeterminate option
       if (item && item.selectAllFlag && selectedItems.length > 0) {
         newSelectedItems = [];
@@ -59,15 +59,14 @@ export function useSelection({
       //select all option
       else if (item && item.selectAllFlag && selectedItems.length == 0) {
         newSelectedItems = AllSelectableItems;
-      }
-      else {
+      } else {
         let selectedIndex;
         selectedItems.forEach((selectedItem, index) => {
           if (isEqual(selectedItem, item)) {
             selectedIndex = index;
           }
         });
-  
+
         if (selectedIndex === undefined) {
           newSelectedItems = selectedItems.concat(item);
           // checking if all items are selected then We should select mark the 'select All' option as well
@@ -80,10 +79,12 @@ export function useSelection({
           }
         } else {
           newSelectedItems = removeAtIndex(selectedItems, selectedIndex);
-          newSelectedItems = newSelectedItems.filter((item) => !item.selectAllFlag);
+          newSelectedItems = newSelectedItems.filter(
+            (item) => !item.selectAllFlag
+          );
         }
       }
-  
+
       callOnChangeHandler({
         isControlled,
         isMounted: isMounted.current,
