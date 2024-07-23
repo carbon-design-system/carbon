@@ -11,14 +11,14 @@
 @use 'sass:meta';
 
 $-filenames: (
-  IBM-Plex-Mono: 'IBMPlexMono',
-  IBM-Plex-Sans-Arabic: 'IBMPlexSansArabic',
-  IBM-Plex-Sans-Devanagari: 'IBMPlexSansDevanagari',
-  IBM-Plex-Sans-Hebrew: 'IBMPlexSansHebrew',
-  IBM-Plex-Sans-Thai-Looped: 'IBMPlexSansThaiLooped',
-  IBM-Plex-Sans-Thai: 'IBMPlexSansThai',
-  IBM-Plex-Sans: 'IBMPlexSans',
-  IBM-Plex-Serif: 'IBMPlexSerif',
+  mono: 'IBMPlexMono',
+  sans-arabic: 'IBMPlexSansArabic',
+  sans-devanagari: 'IBMPlexSansDevanagari',
+  sans-hebrew: 'IBMPlexSansHebrew',
+  sans-thai-looped: 'IBMPlexSansThaiLooped',
+  sans-thai: 'IBMPlexSansThai',
+  sans: 'IBMPlexSans',
+  serif: 'IBMPlexSerif',
 );
 
 $-akamai-filenames: (
@@ -142,9 +142,9 @@ $-akamai-filenames: (
     @each $format in $formats {
       $url: $filename;
       @if $unicode-range {
-        $url: '#{config.$font-path}/#{$name}/fonts/split/#{$format}/#{$filename}-#{$unicode-range}';
+        $url: '#{config.$font-path}-#{$name}/fonts/split/#{$format}/#{$filename}-#{$unicode-range}';
       } @else {
-        $url: '#{config.$font-path}/#{$name}/fonts/complete/#{$format}/#{$filename}';
+        $url: '#{config.$font-path}-#{$name}/fonts/complete/#{$format}/#{$filename}';
       }
 
       // Add extension
