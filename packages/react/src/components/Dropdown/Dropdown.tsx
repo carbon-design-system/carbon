@@ -14,6 +14,7 @@ import React, {
   MouseEvent,
   ReactNode,
   useEffect,
+  useMemo,
 } from 'react';
 import {
   useSelect,
@@ -40,15 +41,13 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ReactAttr } from '../../types/common';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import {
   useFloating,
   flip,
   autoUpdate,
   size as floatingSize,
 } from '@floating-ui/react';
-
-const getInstanceId = setupGetInstanceId();
 
 const {
   ToggleButtonKeyDownArrowDown,
@@ -335,7 +334,7 @@ const Dropdown = React.forwardRef(
         return isObject && 'disabled' in item && item.disabled === true;
       },
     };
-    const { current: dropdownInstanceId } = useRef(getInstanceId());
+    const dropdownInstanceId = useId();
 
     function stateReducer(state, actionAndChanges) {
       const { changes, props, type } = actionAndChanges;
@@ -497,8 +496,13 @@ const Dropdown = React.forwardRef(
           },
         };
 
-    const menuProps = getMenuProps();
-    const menuRef = mergeRefs(menuProps.ref, refs.setFloating);
+    const menuProps = useMemo(
+      () =>
+        getMenuProps({
+          ref: autoAlign ? refs.setFloating : null,
+        }),
+      [autoAlign]
+    );
 
     // Slug is always size `mini`
     let normalizedSlug;
@@ -527,7 +531,7 @@ const Dropdown = React.forwardRef(
           warnText={warnText}
           light={light}
           isOpen={isOpen}
-          ref={refs.setReference}
+          ref={autoAlign ? refs.setReference : null}
           id={id}>
           {invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
@@ -567,7 +571,7 @@ const Dropdown = React.forwardRef(
             />
           </button>
           {normalizedSlug}
-          <ListBox.Menu {...menuProps} ref={menuRef}>
+          <ListBox.Menu {...menuProps}>
             {isOpen &&
               items.map((item, index) => {
                 const isObject = item !== null && typeof item === 'object';
