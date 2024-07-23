@@ -1112,6 +1112,9 @@ Map {
         "type": "string",
       },
       "ariaLabel": [Function],
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "className": Object {
         "type": "string",
       },
@@ -2001,10 +2004,10 @@ Map {
     },
     "TableSelectAll": Object {
       "propTypes": Object {
-        "ariaLabel": Object {
-          "isRequired": true,
+        "aria-label": Object {
           "type": "string",
         },
+        "ariaLabel": [Function],
         "checked": Object {
           "isRequired": true,
           "type": "bool",
@@ -2034,10 +2037,10 @@ Map {
     },
     "TableSelectRow": Object {
       "propTypes": Object {
-        "ariaLabel": Object {
-          "isRequired": true,
+        "aria-label": Object {
           "type": "string",
         },
+        "ariaLabel": [Function],
         "checked": Object {
           "isRequired": true,
           "type": "bool",
@@ -2709,6 +2712,14 @@ Map {
             "right",
             "right-bottom",
             "right-top",
+            "top-start",
+            "top-end",
+            "bottom-start",
+            "bottom-end",
+            "left-end",
+            "left-start",
+            "right-end",
+            "right-start",
           ],
         ],
         "type": "oneOf",
@@ -2813,6 +2824,9 @@ Map {
         "type": "string",
       },
       "ariaLabel": [Function],
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "className": Object {
         "type": "string",
       },
@@ -3404,6 +3418,9 @@ Map {
     "propTypes": Object {
       "aria-label": [Function],
       "ariaLabel": [Function],
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "clearSelectionDescription": Object {
         "type": "string",
       },
@@ -5077,6 +5094,9 @@ Map {
       "propTypes": Object {
         "aria-label": [Function],
         "ariaLabel": [Function],
+        "autoAlign": Object {
+          "type": "bool",
+        },
         "clearSelectionDescription": Object {
           "type": "string",
         },
@@ -5325,6 +5345,9 @@ Map {
       "render": [Function],
     },
     "propTypes": Object {
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "className": Object {
         "type": "string",
       },
@@ -7675,6 +7698,29 @@ Map {
       },
     },
   },
+  "TabListVertical" => Object {
+    "propTypes": Object {
+      "activation": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "aria-label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "TabPanel" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -8001,10 +8047,10 @@ Map {
   },
   "TableSelectAll" => Object {
     "propTypes": Object {
-      "ariaLabel": Object {
-        "isRequired": true,
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "checked": Object {
         "isRequired": true,
         "type": "bool",
@@ -8034,10 +8080,10 @@ Map {
   },
   "TableSelectRow" => Object {
     "propTypes": Object {
-      "ariaLabel": Object {
-        "isRequired": true,
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "checked": Object {
         "isRequired": true,
         "type": "bool",
@@ -8257,6 +8303,25 @@ Map {
       },
       "contained": Object {
         "type": "bool",
+      },
+    },
+  },
+  "TabsVertical" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "defaultSelectedIndex": Object {
+        "type": "number",
+      },
+      "height": Object {
+        "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "selectedIndex": Object {
+        "type": "number",
       },
     },
   },

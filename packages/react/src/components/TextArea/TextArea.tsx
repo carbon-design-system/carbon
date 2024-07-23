@@ -21,11 +21,9 @@ import { FormContext } from '../FluidForm';
 import { useAnnouncer } from '../../internal/useAnnouncer';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
-
-const getInstanceId = setupGetInstanceId();
 
 export interface TextAreaProps
   extends React.InputHTMLAttributes<HTMLTextAreaElement> {
@@ -185,7 +183,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const { isFluid } = useContext(FormContext);
   const { defaultValue, value } = other;
 
-  const { current: textAreaInstanceId } = useRef(getInstanceId());
+  const textAreaInstanceId = useId();
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const ref = useMergedRefs([forwardRef, textareaRef]) as
@@ -233,7 +231,10 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       if (!disabled && enableCounter && counterMode === 'word') {
         const key = evt.which;
 
-        if (maxCount && textCount >= maxCount && key === 32) {
+        if (
+          (maxCount && textCount >= maxCount && key === 32) ||
+          (maxCount && textCount >= maxCount && key === 13)
+        ) {
           evt.preventDefault();
         }
       }
@@ -324,6 +325,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const formItemClasses = classNames(`${prefix}--form-item`, className);
 
   const textAreaWrapperClasses = classNames(`${prefix}--text-area__wrapper`, {
+    [`${prefix}--text-area__wrapper--cols`]: other.cols,
     [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
     [`${prefix}--text-area__wrapper--warn`]: warn,
     [`${prefix}--text-area__wrapper--slug`]: slug,
@@ -423,6 +425,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       {...other}
       {...textareaProps}
       placeholder={placeholder}
+      aria-readonly={other.readOnly ? true : false}
       className={textareaClasses}
       aria-invalid={invalid}
       aria-describedby={ariaDescribedBy}

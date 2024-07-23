@@ -22,18 +22,11 @@ import {
   autoUpdate,
 } from '@floating-ui/react';
 import mergeRefs from '../../tools/mergeRefs';
+import { MenuAlignment } from '../MenuButton';
 
 const defaultTranslations = {
   'carbon.combo-button.additional-actions': 'Additional actions',
 };
-
-export type MenuAlignment =
-  | 'top'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom'
-  | 'bottom-start'
-  | 'bottom-end';
 
 function defaultTranslateWithId(messageId: string) {
   return defaultTranslations[messageId];

@@ -218,7 +218,7 @@ const Pagination = React.forwardRef(function Pagination(
   });
   const totalPages = totalItems
     ? Math.max(Math.ceil(totalItems / pageSize), 1)
-    : NaN;
+    : 1;
   const backButtonDisabled = disabled || page === 1;
   const backButtonClasses = cx({
     [`${prefix}--pagination__button`]: true,
@@ -366,7 +366,9 @@ const Pagination = React.forwardRef(function Pagination(
         <span
           className={`${prefix}--pagination__text ${prefix}--pagination__items-count`}>
           {pagesUnknown || !totalItems
-            ? itemText(pageSize * (page - 1) + 1, page * pageSize)
+            ? totalItems === 0
+              ? itemRangeText(0, 0, 0)
+              : itemText(pageSize * (page - 1) + 1, page * pageSize)
             : itemRangeText(
                 Math.min(pageSize * (page - 1) + 1, totalItems),
                 Math.min(page * pageSize, totalItems),
@@ -405,6 +407,7 @@ const Pagination = React.forwardRef(function Pagination(
             kind="ghost"
             className={backButtonClasses}
             label={backwardText}
+            aria-label={backwardText}
             onClick={decrementPage}
             ref={backBtnRef}>
             <CaretLeft />
@@ -415,6 +418,7 @@ const Pagination = React.forwardRef(function Pagination(
             kind="ghost"
             className={forwardButtonClasses}
             label={forwardText}
+            aria-label={forwardText}
             onClick={incrementPage}
             ref={forwardBtnRef}>
             <CaretRight />

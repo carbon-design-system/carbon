@@ -123,7 +123,7 @@ const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
       </Link>
     </SideNavItem>
   );
-});
+}) as SideNavLinkComponent;
 
 SideNavLink.displayName = 'SideNavLink';
 SideNavLink.propTypes = {

@@ -38,74 +38,61 @@ export function useSelection({
   const [uncontrolledItems, setUncontrolledItems] =
     useState(initialSelectedItems);
   const isControlled = !!controlledItems;
-  const [selectedItems, setSelectedItems] = useState(
-    isControlled ? controlledItems : uncontrolledItems
-  );
-
-  useEffect(() => {
-    setSelectedItems(isControlled ? controlledItems : uncontrolledItems);
-  }, [isControlled, controlledItems, uncontrolledItems]);
-
-  useEffect(() => {
-    callOnChangeHandler({
-      isControlled,
-      isMounted: isMounted.current,
-      onChangeHandlerControlled: savedOnChange.current,
-      onChangeHandlerUncontrolled: setUncontrolledItems,
-      selectedItems: selectedItems,
-    });
-  }, [isControlled, isMounted, selectedItems]);
-
+  const selectedItems = isControlled ? controlledItems : uncontrolledItems;
   const onItemChange = useCallback(
     (item) => {
       if (disabled) {
         return;
       }
-
+  
       const AllSelectableItems = itemsWithSelectAll.filter(
         (item) => !item.disabled
       );
       const disabledItems = itemsWithSelectAll.filter((item) => item.disabled);
-
+  
+      let newSelectedItems;
+  
       //deselect all on click to All/indeterminate option
       if (item && item.selectAllFlag && selectedItems.length > 0) {
-        setSelectedItems([]);
-        return;
+        newSelectedItems = [];
       }
-
       //select all option
-      if (item && item.selectAllFlag && selectedItems.length == 0) {
-        setSelectedItems(AllSelectableItems);
-        return;
+      else if (item && item.selectAllFlag && selectedItems.length == 0) {
+        newSelectedItems = AllSelectableItems;
       }
-
-      let selectedIndex;
-      selectedItems.forEach((selectedItem, index) => {
-        if (isEqual(selectedItem, item)) {
-          selectedIndex = index;
+      else {
+        let selectedIndex;
+        selectedItems.forEach((selectedItem, index) => {
+          if (isEqual(selectedItem, item)) {
+            selectedIndex = index;
+          }
+        });
+  
+        if (selectedIndex === undefined) {
+          newSelectedItems = selectedItems.concat(item);
+          // checking if all items are selected then We should select mark the 'select All' option as well
+          if (
+            hasSelectAll &&
+            itemsWithSelectAll.length - 1 ===
+              newSelectedItems.length + disabledItems.length
+          ) {
+            newSelectedItems = AllSelectableItems;
+          }
+        } else {
+          newSelectedItems = removeAtIndex(selectedItems, selectedIndex);
+          newSelectedItems = newSelectedItems.filter((item) => !item.selectAllFlag);
         }
-      });
-
-      if (selectedIndex === undefined) {
-        setSelectedItems((selectedItems) => selectedItems.concat(item));
-
-        // checking if all items are selected then We should select mark the 'select All' option as well
-        if (
-          hasSelectAll &&
-          itemsWithSelectAll.length - 1 ===
-            selectedItems.length + disabledItems.length + 1
-        ) {
-          setSelectedItems(AllSelectableItems);
-        }
-        return;
       }
-
-      setSelectedItems((selectedItems) => {
-        const updatedItems = removeAtIndex(selectedItems, selectedIndex);
-        return updatedItems.filter((item) => !item.selectAllFlag);
+  
+      callOnChangeHandler({
+        isControlled,
+        isMounted: isMounted.current,
+        onChangeHandlerControlled: savedOnChange.current,
+        onChangeHandlerUncontrolled: setUncontrolledItems,
+        selectedItems: newSelectedItems,
       });
     },
-    [disabled, selectedItems, itemsWithSelectAll, hasSelectAll]
+    [disabled, selectedItems, itemsWithSelectAll, hasSelectAll, isControlled]
   );
 
   const clearSelection = useCallback(() => {
