@@ -380,7 +380,6 @@ export const _Controlled = () => {
   );
 };
 
-
 export const SelectAll = () => {
   const [label, setLabel] = useState('Choose options');
 
@@ -426,8 +425,10 @@ export const SelectAll = () => {
         onChange={onChange}
         labelforSelectAll="All roles"
       />
-
-export const ExperimentalAutoAlign = () => {
+    </div>
+  );
+};
+export const _ExperimentalAutoAlign = () => {
   const ref = useRef();
   useEffect(() => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
