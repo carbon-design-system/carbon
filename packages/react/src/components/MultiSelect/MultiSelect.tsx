@@ -36,7 +36,7 @@ import {
 } from './MultiSelectPropTypes';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { keys, match } from '../../internal/keyboard';
@@ -52,7 +52,6 @@ import {
   autoUpdate,
 } from '@floating-ui/react';
 
-const getInstanceId = setupGetInstanceId();
 const {
   ItemClick,
   ToggleButtonBlur,
@@ -328,7 +327,7 @@ const MultiSelect = React.forwardRef(
   ) => {
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
-    const { current: multiSelectInstanceId } = useRef(getInstanceId());
+    const multiSelectInstanceId = useId();
     const [isFocused, setIsFocused] = useState(false);
     const [inputFocused, setInputFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(open || false);

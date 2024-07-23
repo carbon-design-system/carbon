@@ -8,15 +8,13 @@
 import PropTypes from 'prop-types';
 import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
 import classNames from 'classnames';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-
-const getInstanceId = setupGetInstanceId();
 
 export interface SelectableTagBaseProps {
   /**
@@ -80,7 +78,7 @@ const SelectableTag = <T extends React.ElementType>({
 }: SelectableTagProps<T>) => {
   const prefix = usePrefix();
   const tagRef = useRef<HTMLElement>();
-  const tagId = id || `tag-${getInstanceId()}`;
+  const tagId = id || `tag-${useId()}`;
   const [selectedTag, setSelectedTag] = useState(selected);
   const tagClasses = classNames(`${prefix}--tag--selectable`, className, {
     [`${prefix}--tag--selectable-selected`]: selectedTag,

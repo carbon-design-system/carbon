@@ -18,12 +18,10 @@ import React, {
   RefObject,
 } from 'react';
 import Search, { SearchProps } from '../Search';
-import setupGetInstanceId from './tools/instanceId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 import { InternationalProps } from '../../types/common';
-
-const getInstanceId = setupGetInstanceId();
 
 export type TableToolbarTranslationKey =
   | 'carbon.table.toolbar.search.label'
@@ -150,7 +148,7 @@ const TableToolbarSearch = ({
 
   const expanded = controlled ? expandedProp : expandedState;
   const [value, setValue] = useState(defaultValue || '');
-  const uniqueId = useMemo(getInstanceId, []);
+  const uniqueId = useId();
   const [focusTarget, setFocusTarget] = useState<RefObject<HTMLElement> | null>(
     null
   );

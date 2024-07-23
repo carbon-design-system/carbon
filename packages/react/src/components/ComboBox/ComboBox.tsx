@@ -39,7 +39,7 @@ import ListBox, {
 } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
@@ -121,8 +121,6 @@ const findHighlightedIndex = <ItemType,>(
 
   return -1;
 };
-
-const getInstanceId = setupGetInstanceId();
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type' | 'size';
 
@@ -379,7 +377,7 @@ const ComboBox = forwardRef(
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
-    const comboBoxInstanceId = getInstanceId();
+    const comboBoxInstanceId = useId();
     const [inputValue, setInputValue] = useState(
       getInputValue({
         initialSelectedItem,

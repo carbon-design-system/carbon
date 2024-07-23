@@ -237,6 +237,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   function focusItem(e?: React.KeyboardEvent<HTMLUListElement>) {
+    e?.preventDefault();
     const currentItem = focusableItems.findIndex((item) =>
       item.ref?.current?.contains(document.activeElement)
     );
