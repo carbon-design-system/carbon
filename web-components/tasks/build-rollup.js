@@ -5,61 +5,77 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+"use strict";
 
-import path from 'path';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
-import { fileURLToPath } from 'url';
-import postcss from 'postcss';
-import alias from '@rollup/plugin-alias';
-import { rollup } from 'rollup';
-import nodeResolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
-import litSCSS from '../tools/rollup-plugin-lit-scss.js';
-import { globby } from 'globby';
-import carbonIcons from '../tools/rollup-plugin-icons.js';
-import carbonIconPaths from '../tools/rollup-plugin-icon-paths.js';
+import path from "path";
+import autoprefixer from "autoprefixer";
+import cssnano from "cssnano";
+import { fileURLToPath } from "url";
+import postcss from "postcss";
+import alias from "@rollup/plugin-alias";
+import { rollup } from "rollup";
+import nodeResolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
+import typescript from "@rollup/plugin-typescript";
+import litSCSS from "../tools/rollup-plugin-lit-scss.js";
+import { globby } from "globby";
+import carbonIcons from "../tools/rollup-plugin-icons.js";
+import carbonIconPaths from "../tools/rollup-plugin-icon-paths.js";
 
-import * as packageJson from '../package.json' assert { type: "json" };
+import * as packageJson from "../package.json" assert { type: "json" };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function build() {
+  const esInputs = await globby([
+    "src/**/*.ts",
+    "!src/**/*.stories.ts",
+    "!src/**/*.d.ts",
+    "!src/globals/internal/storybook-cdn.ts",
+    "!src/polyfills",
+  ]);
 
-  const inputs = await globby([ 'src/**/*.ts', '!src/**/*.stories.ts', '!src/**/*.d.ts', '!src/globals/internal/storybook-cdn.ts', '!src/polyfills']);
+  const libInputs = await globby([
+    "src/components/**/defs.ts",
+    "src/globals/**/*.ts",
+    "!src/globals/decorators/**/*.ts",
+    "!src/globals/directives/**/*.ts",
+    "!src/globals/internal/**/*.ts",
+    "!src/globals/mixins/**/*.ts",
+  ]);
 
-  const iconInput = await globby(['node_modules/@carbon/icons/lib/**/*.js', '!**/index.js']);
+  const iconInput = await globby([
+    "node_modules/@carbon/icons/lib/**/*.js",
+    "!**/index.js",
+  ]);
 
   const entryPoint = {
-    filepath: inputs,
-    rootDir: 'src',
-    outputDirectory: path.resolve(__dirname, '..'),
+    rootDir: "src",
+    outputDirectory: path.resolve(__dirname, ".."),
   };
 
   const formats = [
     {
-      type: 'esm',
-      directory: 'es',
+      type: "esm",
+      directory: "es",
     },
     {
-      type: 'commonjs',
-      directory: 'lib',
+      type: "commonjs",
+      directory: "lib",
     },
   ];
 
-   for (const format of formats) {
+  for (const format of formats) {
     const outputDirectory = path.join(
       entryPoint.outputDirectory,
-      format.directory
+      format.directory,
     );
 
     const cwcInputConfig = getRollupConfig(
-      inputs,
+      format.type === "esm" ? esInputs : libInputs,
       entryPoint.rootDir,
       outputDirectory,
-      iconInput
+      format.type === "esm" ? iconInput : [],
     );
 
     const cwcBundle = await rollup(cwcInputConfig);
@@ -68,15 +84,13 @@ async function build() {
       dir: outputDirectory,
       format: format.type,
       preserveModules: true,
-      preserveModulesRoot: 'src',
+      preserveModulesRoot: "src",
       banner,
-      exports: 'named',
-      sourcemap: true
+      exports: "named",
+      sourcemap: true,
     });
-   }
   }
-
-
+}
 
 const banner = `/**
  * Copyright IBM Corp. 2024
@@ -92,9 +106,9 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
     // Mark dependencies listed in `package.json` as external so that they are
     // not included in the output bundle.
     external: [
-        ...Object.keys(packageJson.default.dependencies),
-        ...Object.keys(packageJson.default.devDependencies),
-      ].map((name) => {
+      ...Object.keys(packageJson.default.dependencies),
+      ...Object.keys(packageJson.default.devDependencies),
+    ].map((name) => {
       // Transform the name of each dependency into a regex so that imports from
       // nested paths are correctly marked as external.
       //
@@ -102,27 +116,27 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
       // import 'module-name';
       // import 'module-name/path/to/nested/module';
       return new RegExp(`^${name}(/.*)?`);
-      },
-    ),
+    }),
     plugins: [
       alias({
-        entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
+        entries: [{ find: /^(.*)\.scss\?lit$/, replacement: "$1.scss" }],
       }),
       nodeResolve({
         browser: true,
-        mainFields: ['jsnext', 'module', 'main'],
-        extensions: ['.js', '.ts'],
+        mainFields: ["jsnext", "module", "main"],
+        extensions: [".js", ".ts"],
       }),
       commonjs({
         include: [/node_modules/],
       }),
       litSCSS({
-        includePaths: [
-          path.resolve(__dirname, '../node_modules')
-        ],
+        includePaths: [path.resolve(__dirname, "../node_modules")],
         async preprocessor(contents, id) {
-          return (await postcss([autoprefixer(), cssnano()]).process(contents, { from: id }))
-            .css;
+          return (
+            await postcss([autoprefixer(), cssnano()]).process(contents, {
+              from: id,
+            })
+          ).css;
         },
       }),
       carbonIcons(iconInput, banner),
