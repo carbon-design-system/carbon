@@ -270,32 +270,6 @@ describe('PasswordInput', () => {
       );
     });
   });
-  it('should render input as read-only when readOnly is true', () => {
-    const { getByPlaceholderText } = render(
-      <PasswordInput
-        id="input-1"
-        labelText="PasswordInput label"
-        placeholder="Enter password"
-        readOnly
-      />
-    );
-    const inputElement = getByPlaceholderText('Enter password');
-    expect(inputElement).toHaveAttribute('readonly');
-  });
-
-  it('should not allow input change when readOnly is true', () => {
-    const { getByPlaceholderText } = render(
-      <PasswordInput
-        id="input-1"
-        labelText="PasswordInput label"
-        placeholder="Enter password"
-        readOnly
-      />
-    );
-    const inputElement = getByPlaceholderText('Enter password');
-    userEvent.type(inputElement, 'newpassword');
-    expect(inputElement.value).toBe('');
-  });
 
   describe('behaves as expected', () => {
     it('should call onChange when expected', async () => {
@@ -388,6 +362,46 @@ describe('PasswordInput', () => {
       expect(ref).toHaveBeenCalledWith(
         screen.getByLabelText('PasswordInput label')
       );
+    });
+
+    it('should render input as read-only when readOnly is true', () => {
+      const { getByPlaceholderText } = render(
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          placeholder="Enter password"
+          readOnly
+        />
+      );
+      const inputElement = getByPlaceholderText('Enter password');
+      expect(inputElement).toHaveAttribute('readonly');
+    });
+
+    it('should disable hide toggle button when readOnly is true', () => {
+      const { getByRole } = render(
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          placeholder="Enter password"
+          readOnly
+        />
+      );
+      const toggleButton = getByRole('button');
+      expect(toggleButton).toBeDisabled();
+    });
+
+    it('should not allow input change when readOnly is true', () => {
+      const { getByPlaceholderText } = render(
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          placeholder="Enter password"
+          readOnly
+        />
+      );
+      const inputElement = getByPlaceholderText('Enter password');
+      userEvent.type(inputElement, 'newpassword');
+      expect(inputElement.value).toBe('');
     });
   });
 });

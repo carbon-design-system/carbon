@@ -358,7 +358,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
         <button
           type="button"
           className={passwordVisibilityToggleClasses}
-          disabled={disabled}
+          disabled={disabled || readOnly}
           onClick={handleTogglePasswordVisibility}>
           {passwordVisibilityIcon}
         </button>
