@@ -6029,6 +6029,9 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "showPasswordLabel": Object {
         "type": "string",
       },
@@ -8683,6 +8686,9 @@ Map {
         },
         "placeholder": Object {
           "type": "string",
+        },
+        "readOnly": Object {
+          "type": "bool",
         },
         "showPasswordLabel": Object {
           "type": "string",
