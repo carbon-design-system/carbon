@@ -684,7 +684,6 @@ const MultiSelect = React.forwardRef(
       selectedItems.length > 0 &&
       selectedItems.map((item) => (item as selectedItemType)?.text);
 
-
     const selectedItemsWithoutSelectAll = selectedItems.filter(
       (item: any) => !item.selectAllFlag
     );
