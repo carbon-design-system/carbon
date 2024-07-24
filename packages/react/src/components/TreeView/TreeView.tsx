@@ -14,7 +14,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import uniqueId from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
 
-type TreeViewProps = {
+export type TreeViewProps = {
   active?: string | number;
   children?: React.ReactNode;
   className?: string;
