@@ -211,7 +211,7 @@ test.describe('@avt MultiSelect', () => {
       page.getByRole('option', {
         name: 'An example option that is really long to show what should be done to handle long text',
       })
-    ).not.toHaveClass(
+    ).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
     );
     // select first option (should only select with enter)
@@ -219,14 +219,14 @@ test.describe('@avt MultiSelect', () => {
     await expect(
       page.getByRole('option', {
         name: 'An example option that is really long to show what should be done to handle long text',
-        selected: false,
+        selected: true,
       })
     ).toBeVisible();
     // move to second option
     await page.keyboard.press('ArrowDown');
     await expect(
       page.getByRole('option', {
-        name: 'An example option that is really long to show what should be done to handle long text',
+        name: 'Option 1',
       })
     ).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
@@ -235,7 +235,7 @@ test.describe('@avt MultiSelect', () => {
     await page.keyboard.press('Enter');
     await expect(
       page.getByRole('option', {
-        name: 'An example option that is really long to show what should be done to handle long text',
+        name: 'Option 1',
         selected: true,
       })
     ).toBeVisible();

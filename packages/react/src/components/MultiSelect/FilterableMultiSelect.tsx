@@ -482,7 +482,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   } = useCombobox<ItemType>({
     isOpen,
     items: sortedItems,
-    defaultHighlightedIndex: 0, // after selection, highlight the first item.
+    // defaultHighlightedIndex: 0, // after selection, highlight the first item.
     itemToString,
     id,
     labelId,
@@ -525,29 +525,20 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           return { ...changes };
         }
 
-        return {
-          ...changes,
-          highlightedIndex:
-            controlledSelectedItems.length > 0 && inputValue === ''
-              ? 0
-              : undefined,
-        };
+        return { ...changes, highlightedIndex: null };
       case InputChange:
         if (onInputValueChange) {
           onInputValueChange(changes.inputValue);
         }
         setInputValue(changes.inputValue ?? '');
         setIsOpen(true);
-        return changes;
+        return { ...changes, highlightedIndex: 0 };
 
       case InputClick:
         return {
           ...changes,
           isOpen: false,
-          highlightedIndex:
-            controlledSelectedItems.length > 0 && inputValue === ''
-              ? 0
-              : undefined,
+          highlightedIndex: null,
         };
       case MenuMouseLeave:
         return { ...changes, highlightedIndex: state.highlightedIndex };
