@@ -38,6 +38,11 @@ const sharedNotificationProps = {
     'Inline short': true,
     'Inline long': true,
   }),
+  button: figma.nestedProps('Button', {
+    // currently grabbing the text from the icon button not the action button
+    // tracking here https://github.com/figma/code-connect/issues/11
+    actionButtonLabel: figma.string('Button text'),
+  }),
   // this doesn't work
   // button: figma.nestedProps('Notification action button item', {
   //   actionButtonItem: figma.nestedProps('Button', {
@@ -46,12 +51,11 @@ const sharedNotificationProps = {
   // }),
 };
 
-// this isn't working, perhaps a bug? https://github.com/figma/code-connect/issues/45
 figma.connect(
   ActionableNotification,
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4179-105911&mode=design&t=WhsTspVnawA9vgXk-4',
   {
-    variant: { Actionable: 'True' }, // <--doesn't work
+    variant: { Actionable: 'True' },
     props: sharedNotificationProps,
     example: ({
       title,
@@ -60,9 +64,8 @@ figma.connect(
       hideCloseButton,
       lowContrast,
       inline,
+      button,
     }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
       <ActionableNotification
         inline={inline}
         kind={kind}
@@ -70,7 +73,7 @@ figma.connect(
         subtitle={subtitle}
         hideCloseButton={hideCloseButton}
         lowContrast={lowContrast}
-        actionButtonLabel="Action"
+        actionButtonLabel={button.actionButtonLabel}
         onActionButtonClick={() => myFunction()}
         onClose={() => myFunction()}
         onCloseButtonClick={() => myFunction()}
@@ -86,14 +89,13 @@ figma.connect(
     variant: { Type: 'Inline short' },
 
     props: sharedNotificationProps,
-    example: ({ title, kind, subtitle, hideCloseButton }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
+    example: ({ title, kind, subtitle, hideCloseButton, lowContrast }) => (
       <InlineNotification
         title={title}
         kind={kind}
         subtitle={subtitle}
         hideCloseButton={hideCloseButton}
+        lowContrast={lowContrast}
       />
     ),
   }
@@ -106,8 +108,6 @@ figma.connect(
     variant: { Type: 'Inline long' },
     props: sharedNotificationProps,
     example: ({ title, kind, subtitle, hideCloseButton, lowContrast }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
       <InlineNotification
         title={title}
         kind={kind}
@@ -126,8 +126,6 @@ figma.connect(
     variant: { Type: 'Toast' },
     props: sharedNotificationProps,
     example: ({ title, kind, subtitle, caption, lowContrast }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
       <ToastNotification
         kind={kind}
         title={title}
