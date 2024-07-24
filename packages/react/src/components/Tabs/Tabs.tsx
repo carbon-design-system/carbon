@@ -1217,10 +1217,12 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
   useLayoutEffect(() => {
     function handler() {
       const elementTabId = document.getElementById(`${id}`) || tabRef.current;
-      const newElement = elementTabId?.getElementsByClassName(
-        `${prefix}--tabs__nav-item-label`
-      )[0];
-      isEllipsisActive(newElement);
+      if (elementTabId?.closest(`.${prefix}--tabs--vertical`)) {
+        const newElement = elementTabId?.getElementsByClassName(
+          `${prefix}--tabs__nav-item-label`
+        )[0];
+        isEllipsisActive(newElement);
+      }
     }
     handler();
     window.addEventListener('resize', handler);
