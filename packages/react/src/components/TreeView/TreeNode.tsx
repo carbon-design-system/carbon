@@ -5,23 +5,58 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { CaretDown } from '@carbon/icons-react';
+import { CarbonIconType, CaretDown } from '@carbon/icons-react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
-import uniqueId from '../../tools/uniqueId';
-import { usePrefix } from '../../internal/usePrefix';
 import { useControllableState } from '../../internal/useControllableState';
+import { usePrefix } from '../../internal/usePrefix';
+import uniqueId from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
 
-const TreeNode = React.forwardRef(
+export type TreeNodeProps = {
+  /**
+   * **Note:** this is controlled by the parent TreeView component, do not set manually.
+   * The ID of the active node in the tree
+   */
+  active?: string | number;
+  children?: React.ReactNode;
+  className?: string;
+  /**
+   * **[Experimental]** The default expansion state of the node.
+   * *This is only supported with the `enable-treeview-controllable` feature flag!*
+   */
+  defaultIsExpanded?: boolean;
+  /**
+   * **Note:** this is controlled by the parent TreeView component, do not set manually.
+   * TreeNode depth to determine spacing
+   */
+  depth?: number;
+  disabled?: boolean;
+  id?: string;
+  isExpanded?: boolean;
+  label: React.ReactNode;
+  onNodeFocusEvent?: (event: React.FocusEvent<HTMLLIElement>) => void;
+  onSelect?: (event: React.MouseEvent, node?: TreeNodeProps) => void;
+  onToggle?: (event: React.MouseEvent, node?: TreeNodeProps) => void;
+  onTreeSelect?: (event: React.MouseEvent, node?: TreeNodeProps) => void;
+  renderIcon?: CarbonIconType;
+  /**
+   * **Note:** this is controlled by the parent TreeView component, do not set manually.
+   * Array containing all selected node IDs in the tree
+   */
+  selected?: Array<string | number>;
+  value?: string;
+} & Omit<React.LiHTMLAttributes<HTMLLIElement>, 'onSelect'>;
+
+const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
   (
     {
       active,
       children,
       className,
-      depth,
+      depth: propDepth,
       disabled,
       id: nodeId,
       isExpanded,
@@ -32,12 +67,14 @@ const TreeNode = React.forwardRef(
       onToggle,
       onTreeSelect,
       renderIcon: Icon,
-      selected,
+      selected: propSelected,
       value,
       ...rest
     },
     ref
   ) => {
+    const depth = propDepth as number;
+    const selected = propSelected as (string | number)[];
     const enableTreeviewControllable = useFeatureFlag(
       'enable-treeview-controllable'
     );
@@ -54,19 +91,20 @@ const TreeNode = React.forwardRef(
       ? controllableExpandedState
       : uncontrollableExpandedState;
 
-    const currentNode = useRef(null);
-    const currentNodeLabel = useRef(null);
+    const currentNode = useRef<HTMLLIElement>(null);
+    const currentNodeLabel = useRef<HTMLDivElement>(null);
     const prefix = usePrefix();
     const nodesWithProps = React.Children.map(children, (node) => {
       if (React.isValidElement(node)) {
         return React.cloneElement(node, {
           active,
+          // @ts-ignore
           depth: depth + 1,
           disabled: disabled || node.props.disabled,
           onTreeSelect,
           selected,
           tabIndex: (!node.props.disabled && -1) || null,
-        });
+        } as TreeNodeProps);
       }
     });
     const isActive = active === id;
@@ -85,7 +123,7 @@ const TreeNode = React.forwardRef(
         [`${prefix}--tree-parent-node__toggle-icon--expanded`]: expanded,
       }
     );
-    function handleToggleClick(event) {
+    function handleToggleClick(event: React.MouseEvent<HTMLSpanElement>) {
       if (disabled) {
         return;
       }
@@ -98,12 +136,12 @@ const TreeNode = React.forwardRef(
       }
       setExpanded(!expanded);
     }
-    function handleClick(event) {
+    function handleClick(event: React.MouseEvent) {
       event.stopPropagation();
       if (!disabled) {
         onTreeSelect?.(event, { id, label, value });
         onNodeSelect?.(event, { id, label, value });
-        rest?.onClick?.(event);
+        rest?.onClick?.(event as React.MouseEvent<HTMLLIElement>);
       }
     }
     function handleKeyDown(event) {
@@ -133,7 +171,7 @@ const TreeNode = React.forwardRef(
            * When focus is on a leaf node or a closed parent node, move focus to
            * its parent node (unless its depth is level 1)
            */
-          findParentTreeNode(currentNode.current.parentNode)?.focus();
+          findParentTreeNode(currentNode.current?.parentNode)?.focus();
         }
       }
       if (children && match(event, keys.ArrowRight)) {
@@ -142,7 +180,7 @@ const TreeNode = React.forwardRef(
            * When focus is on an expanded parent node, move focus to the first
            * child node
            */
-          currentNode.current.lastChild.firstChild.focus();
+          (currentNode.current?.lastChild?.firstChild as HTMLElement).focus();
         } else {
           if (!enableTreeviewControllable) {
             onToggle?.(event, { id, isExpanded: true, label, value });
@@ -213,10 +251,10 @@ const TreeNode = React.forwardRef(
       setExpanded,
     ]);
 
-    const treeNodeProps = {
+    const treeNodeProps: React.LiHTMLAttributes<HTMLLIElement> = {
       ...rest,
-      ['aria-current']: isActive || null,
-      ['aria-selected']: disabled ? null : isSelected,
+      ['aria-current']: isActive || undefined,
+      ['aria-selected']: disabled ? undefined : isSelected,
       ['aria-disabled']: disabled,
       className: treeNodeClasses,
       id,
@@ -224,8 +262,9 @@ const TreeNode = React.forwardRef(
       onClick: handleClick,
       onFocus: handleFocusEvent,
       onKeyDown: handleKeyDown,
-      ref: currentNode,
       role: 'treeitem',
+      // @ts-ignore
+      ref: currentNode,
     };
 
     if (!children) {
@@ -246,6 +285,7 @@ const TreeNode = React.forwardRef(
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
           <span
             className={`${prefix}--tree-parent-node__toggle`}
+            // @ts-ignore
             disabled={disabled}
             onClick={handleToggleClick}>
             <CaretDown className={toggleClasses} />
@@ -338,12 +378,14 @@ TreeNode.propTypes = {
    * Optional prop to allow each node to have an associated icon.
    * Can be a React component class
    */
+  // @ts-ignore
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * Array containing all selected node IDs in the tree
    */
+  // @ts-ignore
   selected: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
