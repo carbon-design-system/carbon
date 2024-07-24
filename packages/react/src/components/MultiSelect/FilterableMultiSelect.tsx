@@ -482,7 +482,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   } = useCombobox<ItemType>({
     isOpen,
     items: sortedItems,
-    defaultHighlightedIndex: topItems.length > 0 ? 0 : undefined, // after selection, highlight the first item.
+    defaultHighlightedIndex: 0, // after selection, highlight the first item.
     itemToString,
     id,
     labelId,
@@ -500,7 +500,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
 
     if (changes.isOpen && !isOpen) {
       setTopItems(controlledSelectedItems);
-      return { highlightedIndex: 0 };
     }
     switch (type) {
       case InputKeyDownEnter:
@@ -525,7 +524,14 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         if (changes.isOpen && !changes.selectedItem) {
           return { ...changes };
         }
-        return changes;
+
+        return {
+          ...changes,
+          highlightedIndex:
+            controlledSelectedItems.length > 0 && inputValue === ''
+              ? 0
+              : undefined,
+        };
       case InputChange:
         if (onInputValueChange) {
           onInputValueChange(changes.inputValue);
@@ -535,7 +541,14 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return changes;
 
       case InputClick:
-        return { ...changes, isOpen: false };
+        return {
+          ...changes,
+          isOpen: false,
+          highlightedIndex:
+            controlledSelectedItems.length > 0 && inputValue === ''
+              ? 0
+              : undefined,
+        };
       case MenuMouseLeave:
         return { ...changes, highlightedIndex: state.highlightedIndex };
       case InputKeyDownArrowUp:
@@ -562,7 +575,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         if (!isOpen) {
           return {
             ...changes,
-            highlightedIndex: 0,
+            highlightedIndex:
+              controlledSelectedItems.length > 0 && inputValue === ''
+                ? 0
+                : undefined,
           };
         } else {
           return {
