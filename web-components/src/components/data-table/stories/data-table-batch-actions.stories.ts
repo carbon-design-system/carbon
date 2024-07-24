@@ -7,19 +7,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
-import { prefix } from '../../../globals/settings';
-import { TABLE_SIZE } from '../table';
-import Add from '@carbon/icons/es/add/16';
-import Save from '@carbon/icons/es/save/16';
-import TrashCan from '@carbon/icons/es/trash-can/16';
+import { html } from "lit";
+import { prefix } from "../../../globals/settings";
+import { TABLE_SIZE } from "../table";
+import Add from "@carbon/icons/lib/add/16";
+import Save from "@carbon/icons/lib/save/16";
+import TrashCan from "@carbon/icons/lib/trash-can/16";
 // @ts-ignore
-import Download16 from '@carbon/icons/es/download/16';
+import Download16 from "@carbon/icons/lib/download/16";
 // @ts-ignore
-import Settings16 from '@carbon/icons/es/settings/16';
-import '../../overflow-menu';
-import '../index';
-import storyDocs from './data-table.mdx';
+import Settings16 from "@carbon/icons/lib/settings/16";
+import "../../overflow-menu";
+import "../index";
+import storyDocs from "./data-table.mdx";
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -31,7 +31,7 @@ const sizes = {
 
 const defaultArgs = {
   isSortable: false,
-  locale: 'en',
+  locale: "en",
   radio: false,
   size: TABLE_SIZE.LG,
   useStaticWidth: false,
@@ -40,29 +40,29 @@ const defaultArgs = {
 
 const controls = {
   isSortable: {
-    control: 'boolean',
-    description: 'Is sortable',
+    control: "boolean",
+    description: "Is sortable",
   },
   locale: {
-    control: 'text',
-    description: 'Locale',
+    control: "text",
+    description: "Locale",
   },
   radio: {
-    control: 'boolean',
-    description: 'Radio',
+    control: "boolean",
+    description: "Radio",
   },
   size: {
-    control: 'radio',
-    description: 'Size',
+    control: "radio",
+    description: "Size",
     options: sizes,
   },
   useStaticWidth: {
-    control: 'boolean',
-    description: 'Use static width',
+    control: "boolean",
+    description: "Use static width",
   },
   useZebraStyles: {
-    control: 'boolean',
-    description: 'Use zebra styles',
+    control: "boolean",
+    description: "Use zebra styles",
   },
 };
 
@@ -79,33 +79,34 @@ export const Default = {
 
       <cds-table-toolbar slot="toolbar">
         <cds-table-batch-actions ?active="true">
-          <cds-button>Delete ${TrashCan({ slot: 'icon' })}</cds-button>
+          <cds-button>Delete ${TrashCan({ slot: "icon" })}</cds-button>
           <cds-button tooltip-position="bottom" tooltip-text="Add"
-            >${Add({ slot: 'icon' })}</cds-button
+            >${Add({ slot: "icon" })}</cds-button
           >
           <cds-button tooltip-position="bottom" tooltip-text="Save"
-            >${Save({ slot: 'icon' })}</cds-button
+            >${Save({ slot: "icon" })}</cds-button
           >
           <cds-button href="javascript:void 0" download="table-data.json">
-            Download ${Download16({ slot: 'icon' })}
+            Download ${Download16({ slot: "icon" })}
           </cds-button>
         </cds-table-batch-actions>
         <cds-table-toolbar-content ?has-batch-actions="true">
           <cds-table-toolbar-search
-            placeholder="Filter table"></cds-table-toolbar-search>
+            placeholder="Filter table"
+          ></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
             ${Settings16({
-              slot: 'icon',
+              slot: "icon",
               class: `${prefix}--overflow-menu__icon`,
             })}
             <cds-overflow-menu-body>
-              <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
+              <cds-overflow-menu-item @click=${() => alert("Alert 1")}>
                 Action 1
               </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 2')}>
+              <cds-overflow-menu-item @click=${() => alert("Alert 2")}>
                 Action 2
               </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 3')}>
+              <cds-overflow-menu-item @click=${() => alert("Alert 3")}>
                 Action 3
               </cds-overflow-menu-item>
             </cds-overflow-menu-body>
@@ -201,7 +202,8 @@ export const Playground = {
       ?radio=${radio}
       size="${size}"
       ?use-static-width="${useStaticWidth}"
-      ?use-zebra-styles="${useZebraStyles}">
+      ?use-zebra-styles="${useZebraStyles}"
+    >
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
         >With batch actions.</cds-table-header-description
@@ -209,28 +211,29 @@ export const Playground = {
 
       <cds-table-toolbar slot="toolbar">
         <cds-table-batch-actions ?active="true">
-          <cds-button>Delete ${TrashCan({ slot: 'icon' })}</cds-button>
-          <cds-button>Save ${Save({ slot: 'icon' })}</cds-button>
+          <cds-button>Delete ${TrashCan({ slot: "icon" })}</cds-button>
+          <cds-button>Save ${Save({ slot: "icon" })}</cds-button>
           <cds-button href="javascript:void 0" download="table-data.json">
-            Download ${Download16({ slot: 'icon' })}
+            Download ${Download16({ slot: "icon" })}
           </cds-button>
         </cds-table-batch-actions>
         <cds-table-toolbar-content ?has-batch-actions="true">
           <cds-table-toolbar-search
-            placeholder="Filter table"></cds-table-toolbar-search>
+            placeholder="Filter table"
+          ></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
             ${Settings16({
-              slot: 'icon',
+              slot: "icon",
               class: `${prefix}--overflow-menu__icon`,
             })}
             <cds-overflow-menu-body>
-              <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
+              <cds-overflow-menu-item @click=${() => alert("Alert 1")}>
                 Action 1
               </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 2')}>
+              <cds-overflow-menu-item @click=${() => alert("Alert 2")}>
                 Action 2
               </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 3')}>
+              <cds-overflow-menu-item @click=${() => alert("Alert 3")}>
                 Action 3
               </cds-overflow-menu-item>
             </cds-overflow-menu-body>
@@ -308,7 +311,7 @@ export const Playground = {
 };
 
 const meta = {
-  title: 'Components/DataTable/Batch Actions',
+  title: "Components/DataTable/Batch Actions",
   parameters: {
     docs: {
       page: storyDocs,

@@ -1,6 +1,6 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import * as TagStories from './tag.stories';
+import { ArgTypes, Markdown, Meta } from "@storybook/blocks";
+import { cdnJs, cdnCss } from "../../globals/internal/storybook-cdn";
+import * as TagStories from "./tag.stories";
 
 <Meta of={TagStories} />
 
@@ -27,10 +27,10 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import '@carbon/web-components/es/components/tag/index.js';
+import "@carbon/web-components/es/components/tag/index.js";
 ```
 
-<Markdown>{`${cdnJs({ components: ['tag'] })}`}</Markdown>
+<Markdown>{`${cdnJs({ components: ["tag"] })}`}</Markdown>
 <Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
@@ -50,7 +50,7 @@ Use the `filter` attribute to turn the tag into a filterable element.
 You can use the events to catch the closing of the tag.
 
 ```js
-document.addEventListener('cds-tag-closed', (event) => {
+document.addEventListener("cds-tag-closed", (event) => {
   // use values here
 });
 ```
@@ -65,11 +65,11 @@ icon and insert it within the tag element as such:
 ```
 
 ```javascript
-import Download16 from '@carbon/icons/es/download/16';
+import Download16 from "@carbon/icons/lib/download/16";
 
 function App() {
   return html` <cds-tag filter type="gray" title="Clear selection"
-    >This is a tag ${Download16({ slot: 'icon' })}</cds-tag
+    >This is a tag ${Download16({ slot: "icon" })}</cds-tag
   >`;
 }
 ```

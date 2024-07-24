@@ -1,7 +1,7 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import Add16 from '@carbon/icons/es/add/16';
-import * as ButtonStories from './button.stories';
+import { ArgTypes, Markdown, Meta } from "@storybook/blocks";
+import { cdnJs, cdnCss } from "../../globals/internal/storybook-cdn";
+import Add16 from "@carbon/icons/lib/add/16";
+import * as ButtonStories from "./button.stories";
 
 <Meta of={ButtonStories} />
 
@@ -27,16 +27,16 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import '@carbon/web-components/es/components/button/index.js';
+import "@carbon/web-components/es/components/button/index.js";
 ```
 
 ### SCSS (must include with JS import)
 
 ```css
-@use '@carbon/styles/scss/components/button';
+@use "@carbon/styles/scss/components/button";
 ```
 
-<Markdown>{`${cdnJs({ components: ['button'] })}`}</Markdown>
+<Markdown>{`${cdnJs({ components: ["button"] })}`}</Markdown>
 <Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
@@ -69,7 +69,7 @@ will be styled as primary or ghost buttons.
 Our Storybook example also shows off the Tooltip feature, explained later.
 
 ````html
-import Add16 from '@carbon/icons/es/add/16';
+import Add16 from '@carbon/icons/lib/add/16';
 
 <cds-button> ${Add16({ slot: 'icon' })} </cds-button>``` ## Set of Buttons You
 can wrap two `Button` elements in a `ButtonSet` when an action required by the

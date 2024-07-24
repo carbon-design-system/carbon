@@ -7,43 +7,43 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { CONTENT_SWITCHER_SIZE } from './content-switcher';
-import './index';
-import { prefix } from '../../globals/settings';
-import TableOfContents16 from '@carbon/icons/es/table-of-contents/16';
-import Workspace16 from '@carbon/icons/es/workspace/16';
-import ViewMode2_16 from '@carbon/icons/es/view--mode-2/16';
-import '../layer/index';
-import '../../../.storybook/templates/with-layer';
+import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { CONTENT_SWITCHER_SIZE } from "./content-switcher";
+import "./index";
+import { prefix } from "../../globals/settings";
+import TableOfContents16 from "@carbon/icons/lib/table-of-contents/16";
+import Workspace16 from "@carbon/icons/lib/workspace/16";
+import ViewMode2_16 from "@carbon/icons/lib/view--mode-2/16";
+import "../layer/index";
+import "../../../.storybook/templates/with-layer";
 
 const noop = () => {};
 
 const sizes = {
-  'Medium (md - default)': null,
+  "Medium (md - default)": null,
   [`Small (${CONTENT_SWITCHER_SIZE.SMALL})`]: CONTENT_SWITCHER_SIZE.SMALL,
   [`Large (${CONTENT_SWITCHER_SIZE.LARGE})`]: CONTENT_SWITCHER_SIZE.LARGE,
 };
 
 const args = {
-  value: '',
+  value: "",
   size: null,
   disableSelection: false,
 };
 
 const argTypes = {
   value: {
-    control: 'text',
-    description: 'The value of the selected item (value)',
+    control: "text",
+    description: "The value of the selected item (value)",
   },
   size: {
-    control: 'select',
+    control: "select",
     options: sizes,
-    description: 'Button size (size)',
+    description: "Button size (size)",
   },
   disableSelection: {
-    control: 'boolean',
+    control: "boolean",
     description: `Disable user-initiated selection change (Call event.preventDefault() in ${prefix}-content-switcher-beingselected event)`,
   },
   onBeforeSelect: {
@@ -151,7 +151,8 @@ export const Playground = {
         value="${ifDefined(value)}"
         @cds-content-switcher-beingselected="${handleBeforeSelected}"
         @cds-content-switcher-selected="${onSelect}"
-        size="${size}">
+        size="${size}"
+      >
         <cds-content-switcher-item value="all">
           First section
         </cds-content-switcher-item>
@@ -167,7 +168,7 @@ export const Playground = {
 };
 
 const meta = {
-  title: 'Components/Content switcher',
+  title: "Components/Content switcher",
 };
 
 export default meta;

@@ -1,6 +1,6 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import * as ChatButtonStories from './chat-button.stories';
+import { ArgTypes, Markdown, Meta } from "@storybook/blocks";
+import { cdnJs, cdnCss } from "../../globals/internal/storybook-cdn";
+import * as ChatButtonStories from "./chat-button.stories";
 
 <Meta of={ChatButtonStories} />
 
@@ -19,19 +19,19 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import '@carbon/web-components/es/components/chat-button/index.js';
+import "@carbon/web-components/es/components/chat-button/index.js";
 ```
 
-<Markdown>{`${cdnJs({ components: ['chat-button'] })}`}</Markdown>
+<Markdown>{`${cdnJs({ components: ["chat-button"] })}`}</Markdown>
 <Markdown>{`${cdnCss()}`}</Markdown>
 
 ```javascript
-import '@carbon/web-components/es/components/chat-button/index.js';
-import Add16 from '@carbon/icons/es/add/16';
+import "@carbon/web-components/es/components/chat-button/index.js";
+import Add16 from "@carbon/icons/lib/add/16";
 
 function App() {
   return html`<cds-chat-button>
-    Primary ${Add16({ slot: 'icon' })}
+    Primary ${Add16({ slot: "icon" })}
   </cds-chat-button>`;
 }
 ```

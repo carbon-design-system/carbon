@@ -7,64 +7,64 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, svg } from 'lit';
+import { html, svg } from "lit";
 
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Add16 from '@carbon/icons/es/add/16';
+import Add16 from "@carbon/icons/lib/add/16";
 // @ts-ignore
-import Add20 from '@carbon/icons/es/add/20';
+import Add20 from "@carbon/icons/lib/add/20";
 // @ts-ignore
-import Add24 from '@carbon/icons/es/add/24';
+import Add24 from "@carbon/icons/lib/add/24";
 // @ts-ignore
-import Add32 from '@carbon/icons/es/add/32';
+import Add32 from "@carbon/icons/lib/add/32";
 
 export const Default = {
   render: () => html` ${Add16()} ${Add20()} ${Add24()} ${Add32()} `,
 };
 
 export const withCustomClass = {
-  name: 'With custom class',
+  name: "With custom class",
   render: () => html`
     <style>
       .test-class {
         fill: #0062ff;
       }
     </style>
-    ${Add16({ class: 'test-class' })} ${Add20({ class: 'test-class' })}
-    ${Add24({ class: 'test-class' })} ${Add32({ class: 'test-class' })}
+    ${Add16({ class: "test-class" })} ${Add20({ class: "test-class" })}
+    ${Add24({ class: "test-class" })} ${Add32({ class: "test-class" })}
   `,
 };
 
 export const withAriaLabel = {
-  name: 'With aria label',
+  name: "With aria label",
   render: () => html`
-    ${Add16({ 'aria-label': 'add' })} ${Add20({ 'aria-label': 'add' })}
-    ${Add24({ 'aria-label': 'add' })} ${Add32({ 'aria-label': 'add' })}
+    ${Add16({ "aria-label": "add" })} ${Add20({ "aria-label": "add" })}
+    ${Add24({ "aria-label": "add" })} ${Add32({ "aria-label": "add" })}
   `,
 };
 
 export const withTitle = {
-  name: 'With title',
+  name: "With title",
   render: () => html`
     ${Add16({
-      'aria-describedby': 'id-title-1',
+      "aria-describedby": "id-title-1",
       // @ts-ignore
       children: svg`<title id="id-title-1">add</title>`,
     })}
     ${Add20({
-      'aria-describedby': 'id-title-2',
+      "aria-describedby": "id-title-2",
       // @ts-ignore
       children: svg`<title id="id-title-2">add</title>`,
     })}
     ${Add24({
-      'aria-describedby': 'id-title-3',
+      "aria-describedby": "id-title-3",
       // @ts-ignore
       children: svg`<title id="id-title-3">add</title>`,
     })}
     ${Add32({
-      'aria-describedby': 'id-title-4',
+      "aria-describedby": "id-title-4",
       // @ts-ignore
       children: svg`<title id="id-title-4">add</title>`,
     })}
@@ -72,7 +72,7 @@ export const withTitle = {
 };
 
 const meta = {
-  title: 'Components/Icon',
+  title: "Components/Icon",
 };
 
 export default meta;
