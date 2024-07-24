@@ -461,9 +461,16 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   }, [controlledSelectedItems, isOpen, setTopItems]);
 
+  const validateHighlightFocus = () => {
+    if (controlledSelectedItems.length > 0) {
+      setHighlightedIndex(0);
+    }
+  };
+
   function handleMenuChange(forceIsOpen: boolean): void {
     const nextIsOpen = forceIsOpen ?? !isOpen;
     setIsOpen(nextIsOpen);
+    validateHighlightFocus();
     if (onMenuChange) {
       onMenuChange(nextIsOpen);
     }
@@ -521,6 +528,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return changes;
       case FunctionToggleMenu:
       case ToggleButtonClick:
+        validateHighlightFocus();
         if (changes.isOpen && !changes.selectedItem) {
           return { ...changes };
         }
@@ -535,6 +543,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return { ...changes, highlightedIndex: 0 };
 
       case InputClick:
+        validateHighlightFocus();
+        if (changes.isOpen && !changes.selectedItem) {
+          return { ...changes };
+        }
         return {
           ...changes,
           isOpen: false,
@@ -566,10 +578,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         if (!isOpen) {
           return {
             ...changes,
-            highlightedIndex:
-              controlledSelectedItems.length > 0 && inputValue === ''
-                ? 0
-                : undefined,
+            highlightedIndex: 0,
           };
         } else {
           return {
