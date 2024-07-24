@@ -1,130 +1,158 @@
-import mdx from "@mdx-js/esbuild";
-import { build } from "esbuild";
-import CleanCSS from "clean-css";
-import del from "del";
-import parseArgs from "minimist";
-import { sassPlugin } from "esbuild-sass-plugin";
-// import rollupPluginIcons from "./rollup-plugin-icons";
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
-const args = parseArgs(process.argv.slice(2), {
-  boolean: true,
-});
+"use strict";
 
-(async () => {
-  const { globby } = await import("globby");
-  const destinationPath = "es";
-  const isRelease = process.env.RELEASE || false;
+import path from "path";
+import autoprefixer from "autoprefixer";
+import cssnano from "cssnano";
+import { fileURLToPath } from "url";
+import postcss from "postcss";
+import alias from "@rollup/plugin-alias";
+import { rollup } from "rollup";
+import nodeResolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
+import typescript from "@rollup/plugin-typescript";
+import litSCSS from "../tools/rollup-plugin-lit-scss.js";
+import { globby } from "globby";
+import carbonIcons from "../tools/rollup-plugin-icons.js";
+import carbonIconPaths from "../tools/rollup-plugin-icon-paths.js";
 
-  /* This is for using inside Storybook for demonstration purposes. */
-  const cssHoverClassAdder = (content) =>
-    content.replace(/.*:hover[^{]*/g, (matched) => {
-      // Replace :hover with special class. (There will be additional classes for focus, etc. Should be implemented in here.)
-      const replacedWithNewClass = matched.replace(
-        /:hover/,
-        ".__ONLY_FOR_STORYBOOK_DEMONSTRATION_HOVER__",
-      );
-      // Concat strings
-      return replacedWithNewClass.concat(", ", matched);
-    });
+import * as packageJson from "../package.json" assert { type: "json" };
 
-  const cssCleaner = (content) => {
-    const { styles, errors, warnings } = new CleanCSS({ level: 0 }).minify(
-      content,
-    );
-    if (errors.length) {
-      console.error(errors);
-    }
-    if (warnings.length) {
-      console.warn(warnings);
-    }
-    return styles;
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+async function build() {
+  const esInputs = await globby([
+    "src/**/*.ts",
+    "!src/**/*.stories.ts",
+    "!src/**/*.d.ts",
+    "!src/globals/internal/storybook-cdn.ts",
+    "!src/polyfills",
+  ]);
+
+  const libInputs = await globby([
+    "src/components/**/defs.ts",
+    "src/globals/**/*.ts",
+    "!src/globals/decorators/**/*.ts",
+    "!src/globals/directives/**/*.ts",
+    "!src/globals/internal/**/*.ts",
+    "!src/globals/mixins/**/*.ts",
+  ]);
+
+  const iconInput = await globby([
+    "node_modules/@carbon/icons/lib/**/*.js",
+    "!**/index.js",
+  ]);
+
+  const entryPoint = {
+    rootDir: "src",
+    outputDirectory: path.resolve(__dirname, ".."),
   };
 
-  const cssTransformers = [];
+  const formats = [
+    {
+      type: "esm",
+      directory: "es",
+    },
+    {
+      type: "commonjs",
+      directory: "lib",
+    },
+  ];
 
-  if (!isRelease) {
-    // Add hover class for demonstration purposes, only if it's not a release build.
-    cssTransformers.push(cssHoverClassAdder);
-  }
+  for (const format of formats) {
+    const outputDirectory = path.join(
+      entryPoint.outputDirectory,
+      format.directory,
+    );
 
-  cssTransformers.push(cssCleaner);
+    const cwcInputConfig = getRollupConfig(
+      format.type === "esm" ? esInputs : libInputs,
+      entryPoint.rootDir,
+      outputDirectory,
+      format.type === "esm" ? iconInput : [],
+    );
 
-  // const cssPluginOptions = {
-  //   filter: /components\/.*\.css$/,
-  //   transform: (content) => cssTransformers.reduce((result, transformer) => transformer(result), content)
-  // };
+    const cwcBundle = await rollup(cwcInputConfig);
 
-  try {
-    const buildOptions = {
-      entryPoints: [
-        "src/index.ts",
-        ...(await globby([
-          // 'src/generated/**/*.ts',
-          "src/components/**/!(*.(stories|test|d)).ts",
-          // 'src/themes/*.css',
-          // 'src/components/**/*.svg',
-        ])),
-      ],
-      loader: {
-        ".woff": "file",
-        ".woff2": "file",
-        ".svg": "text",
-      },
-      outdir: destinationPath,
-      assetNames: "assets/[name]",
-      bundle: true,
+    await cwcBundle.write({
+      dir: outputDirectory,
+      format: format.type,
+      preserveModules: true,
+      preserveModulesRoot: "src",
+      banner,
+      exports: "named",
       sourcemap: true,
-      format: "esm",
-      target: ["es2020", "chrome73", "edge79", "firefox63", "safari12"],
-      splitting: true,
-      metafile: true,
-      minify: true,
-      plugins: [
-        mdx(),
-        sassPlugin({
-          filter: /\.scss$/,
-          type: "lit-css",
-        }),
-        // rollupPluginIcons(),
-      ],
-    };
-
-    const { errors, warnings, metafile } = await build(buildOptions);
-
-    if (errors.length > 0) {
-      console.table(errors);
-      console.error("Build Failed!");
-      return;
-    }
-
-    if (warnings.length > 0) {
-      console.warn("Warnings:");
-      console.table(warnings);
-    }
-
-    const analyzeResult = Object.entries(metafile.outputs)
-      .map(([fileName, data]) => ({
-        fileName,
-        size: `${(data.bytes / 1024).toFixed(2)} KB`,
-        bytes: data.bytes,
-      }))
-      .filter(
-        ({ fileName }) =>
-          !/icon\/icons\/.*\.js/.test(fileName) &&
-          (fileName.endsWith(".js") || fileName.endsWith(".css")),
-      );
-
-    analyzeResult.push({
-      fileName: "TOTAL",
-      size: `${(analyzeResult.reduce((acc, { bytes }) => acc + bytes, 0) / 1024).toFixed(2)} KB`,
     });
-
-    // del(`${destinationPath}/components/icon/icons`);
-    console.table(analyzeResult, ["fileName", "size"]);
-
-    console.info("Build Done!");
-  } catch (error) {
-    console.error(error);
-    process.exit(1);
   }
-})();
+}
+
+const banner = `/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+`;
+
+function getRollupConfig(input, rootDir, outDir, iconInput) {
+  return {
+    input,
+    // Mark dependencies listed in `package.json` as external so that they are
+    // not included in the output bundle.
+    external: [
+      ...Object.keys(packageJson.default.dependencies),
+      ...Object.keys(packageJson.default.devDependencies),
+    ].map((name) => {
+      // Transform the name of each dependency into a regex so that imports from
+      // nested paths are correctly marked as external.
+      //
+      // Example:
+      // import 'module-name';
+      // import 'module-name/path/to/nested/module';
+      return new RegExp(`^${name}(/.*)?`);
+    }),
+    plugins: [
+      alias({
+        entries: [{ find: /^(.*)\.scss\?lit$/, replacement: "$1.scss" }],
+      }),
+      nodeResolve({
+        browser: true,
+        mainFields: ["jsnext", "module", "main"],
+        extensions: [".js", ".ts"],
+      }),
+      commonjs({
+        include: [/node_modules/],
+      }),
+      litSCSS({
+        includePaths: [path.resolve(__dirname, "../node_modules")],
+        async preprocessor(contents, id) {
+          return (
+            await postcss([autoprefixer(), cssnano()]).process(contents, {
+              from: id,
+            })
+          ).css;
+        },
+      }),
+      carbonIcons(iconInput, banner),
+      typescript({
+        noEmitOnError: true,
+        compilerOptions: {
+          rootDir,
+          outDir,
+        },
+      }),
+      carbonIconPaths(),
+    ],
+  };
+}
+
+build().catch((error) => {
+  console.log(error);
+  process.exit(1);
+});

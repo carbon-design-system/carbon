@@ -28,7 +28,7 @@
   },
   "scripts": {
     "prebuild": "node tools/fix-carbon-sass-imports.js",
-    "build": "rm -rf es && rm -rf lib && node tasks/build-rollup.js",
+    "build": "rm -rf es && rm -rf lib && node tasks/build.js",
     "build:dist": "gulp build:dist",
     "build:dist:dev": "gulp build:dist:dev",
     "build-storybook": "storybook build",
