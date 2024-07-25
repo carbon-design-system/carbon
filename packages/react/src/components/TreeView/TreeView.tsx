@@ -13,7 +13,7 @@ import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 import uniqueId from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
-import TreeNode from './TreeNode';
+import TreeNode, { TreeNodeProps } from './TreeNode';
 
 export type TreeViewProps = {
   /**
@@ -86,7 +86,7 @@ const TreeView: TreeViewComponent = ({
   const { current: treeId } = useRef(rest.id || uniqueId());
   const prefix = usePrefix();
   const treeClasses = classNames(className, `${prefix}--tree`, {
-    // @ts-ignore
+    // @ts-ignore - will always be false according to prop types
     [`${prefix}--tree--${size}`]: size !== 'default',
   });
   const treeRootRef = useRef<HTMLUListElement>(null);
@@ -149,7 +149,7 @@ const TreeView: TreeViewComponent = ({
     if (event.type === 'blur') {
       const { relatedTarget: currentFocusedNode, target: prevFocusedNode } =
         event;
-      // @ts-ignore
+
       if (treeRootRef?.current?.contains(currentFocusedNode)) {
         prevFocusedNode.tabIndex = -1;
       }
@@ -158,7 +158,7 @@ const TreeView: TreeViewComponent = ({
       resetNodeTabIndices();
       const { relatedTarget: prevFocusedNode, target: currentFocusedNode } =
         event;
-      // @ts-ignore
+
       if (treeRootRef?.current?.contains(prevFocusedNode)) {
         prevFocusedNode.tabIndex = -1;
       }
@@ -167,16 +167,17 @@ const TreeView: TreeViewComponent = ({
   }
 
   let focusTarget = false;
-  const nodesWithProps = React.Children.map(children, (node) => {
-    const sharedNodeProps = {
+  const nodesWithProps = React.Children.map(children, (_node) => {
+    const node = _node as React.ReactElement<TreeNodeProps>;
+    const sharedNodeProps: Partial<TreeNodeProps> = {
       active,
       depth: 0,
       onNodeFocusEvent: handleFocusEvent,
       onTreeSelect: handleTreeSelect,
       selected,
-      tabIndex: (!(node as React.ReactElement).props.disabled && -1) || null,
+      tabIndex: (!node.props.disabled && -1) || undefined,
     };
-    if (!focusTarget && !(node as React.ReactElement).props.disabled) {
+    if (!focusTarget && !node.props.disabled) {
       sharedNodeProps.tabIndex = 0;
       focusTarget = true;
     }
@@ -193,7 +194,7 @@ const TreeView: TreeViewComponent = ({
         keys.ArrowDown,
         keys.Home,
         keys.End,
-        // @ts-ignore
+        // @ts-ignore - `matches` doesn't like the object syntax without missing properties
         { code: 'KeyA' },
       ])
     ) {
@@ -205,7 +206,7 @@ const TreeView: TreeViewComponent = ({
     }
 
     treeWalker.current.currentNode = event.target;
-    let nextFocusNode;
+    let nextFocusNode: Node | null = null;
 
     if (match(event, keys.ArrowUp)) {
       nextFocusNode = treeWalker.current.previousNode();
@@ -213,7 +214,7 @@ const TreeView: TreeViewComponent = ({
     if (match(event, keys.ArrowDown)) {
       nextFocusNode = treeWalker.current.nextNode();
     }
-    // @ts-ignore
+    // @ts-ignore - `matches` doesn't like the object syntax without missing properties
     if (matches(event, [keys.Home, keys.End, { code: 'KeyA' }])) {
       const nodeIds: string[] = [];
 
@@ -222,11 +223,10 @@ const TreeView: TreeViewComponent = ({
           multiselect &&
           event.shiftKey &&
           event.ctrlKey &&
-          !(treeWalker.current.currentNode as HTMLElement).getAttribute(
-            'aria-disabled'
-          )
+          treeWalker.current.currentNode instanceof Element &&
+          !treeWalker.current.currentNode.getAttribute('aria-disabled')
         ) {
-          nodeIds.push((treeWalker.current.currentNode as HTMLElement)?.id);
+          nodeIds.push(treeWalker.current.currentNode?.id);
         }
         while (
           match(event, keys.Home)
@@ -234,28 +234,27 @@ const TreeView: TreeViewComponent = ({
             : treeWalker.current.nextNode()
         ) {
           nextFocusNode = treeWalker.current.currentNode;
-
           if (
             multiselect &&
             event.shiftKey &&
             event.ctrlKey &&
+            nextFocusNode instanceof Element &&
             !nextFocusNode.getAttribute('aria-disabled')
           ) {
             nodeIds.push(nextFocusNode?.id);
           }
         }
       }
-      // @ts-ignore
+      // @ts-ignore - `matches` doesn't like the object syntax without missing properties
       if (match(event, { code: 'KeyA' }) && event.ctrlKey) {
         treeWalker.current.currentNode = treeWalker.current.root;
 
         while (treeWalker.current.nextNode()) {
           if (
-            !(treeWalker.current.currentNode as HTMLElement).getAttribute(
-              'aria-disabled'
-            )
+            treeWalker.current.currentNode instanceof Element &&
+            !treeWalker.current.currentNode.getAttribute('aria-disabled')
           ) {
-            nodeIds.push((treeWalker.current.currentNode as HTMLElement)?.id);
+            nodeIds.push(treeWalker.current.currentNode?.id);
           }
         }
       }
@@ -263,8 +262,10 @@ const TreeView: TreeViewComponent = ({
     }
     if (nextFocusNode && nextFocusNode !== event.target) {
       resetNodeTabIndices();
-      nextFocusNode.tabIndex = 0;
-      nextFocusNode.focus();
+      if (nextFocusNode instanceof HTMLElement) {
+        nextFocusNode.tabIndex = 0;
+        nextFocusNode.focus();
+      }
     }
     rest?.onKeyDown?.(event);
   }
@@ -277,14 +278,13 @@ const TreeView: TreeViewComponent = ({
         NodeFilter.SHOW_ELEMENT,
         {
           acceptNode: function (node) {
-            if (
-              (node as HTMLElement).classList.contains(
-                `${prefix}--tree-node--disabled`
-              )
-            ) {
+            if (!(node instanceof Element)) {
+              return NodeFilter.FILTER_SKIP;
+            }
+            if (node.classList.contains(`${prefix}--tree-node--disabled`)) {
               return NodeFilter.FILTER_REJECT;
             }
-            if ((node as HTMLElement).matches(`li.${prefix}--tree-node`)) {
+            if (node.matches(`li.${prefix}--tree-node`)) {
               return NodeFilter.FILTER_ACCEPT;
             }
             return NodeFilter.FILTER_SKIP;
