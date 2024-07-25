@@ -117,14 +117,14 @@ const config = {
     const { mergeConfig } = await import('vite');
 
     if (configType === 'DEVELOPMENT') {
-      // Your development configuration goes here
       config.define = {
         __DEV__: process.env.NODE_ENV !== 'production',
       };
     }
     if (configType === 'PRODUCTION') {
-      // Your production configuration goes here.
-      // if __DEV__ is undefined in console we could set it to false
+      config.define = {
+        __DEV__: 'production',
+      };
     }
 
     return mergeConfig(config, {
