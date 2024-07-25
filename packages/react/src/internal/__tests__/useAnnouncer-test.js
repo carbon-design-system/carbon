@@ -12,7 +12,7 @@ describe('useAnnouncer', () => {
     }
 
     render(<TestComponent />);
-    expect(value).toBe('1 characters left.');
+    expect(value).toBe('1 character left.');
   });
 
   it('should emit announcement for words', () => {
@@ -24,6 +24,30 @@ describe('useAnnouncer', () => {
     }
 
     render(<TestComponent />);
-    expect(value).toBe('1 words left.');
+    expect(value).toBe('1 word left.');
+  });
+
+  it('should emit announcement for maximum words reached', () => {
+    let value = null;
+
+    function TestComponent() {
+      value = useAnnouncer(10, 10, 'words');
+      return null;
+    }
+
+    render(<TestComponent />);
+    expect(value).toBe('Maximum words reached.');
+  });
+
+  it('should emit announcement for maximum characters reached', () => {
+    let value = null;
+
+    function TestComponent() {
+      value = useAnnouncer(10, 10, 'characters');
+      return null;
+    }
+
+    render(<TestComponent />);
+    expect(value).toBe('Maximum characters reached.');
   });
 });
