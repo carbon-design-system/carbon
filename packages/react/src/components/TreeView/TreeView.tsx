@@ -13,6 +13,7 @@ import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 import uniqueId from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
+import TreeNode from './TreeNode';
 
 export type TreeViewProps = {
   /**
@@ -59,7 +60,13 @@ export type TreeViewProps = {
   size?: 'xs' | 'sm';
 } & React.HTMLAttributes<HTMLUListElement>;
 
-export default function TreeView({
+type TreeViewComponent = {
+  (props: TreeViewProps): JSX.Element;
+  propTypes?: any;
+  TreeNode: typeof TreeNode;
+};
+
+const TreeView: TreeViewComponent = ({
   active: prespecifiedActive,
   children,
   className,
@@ -71,7 +78,7 @@ export default function TreeView({
   selected: preselected,
   size = 'sm',
   ...rest
-}: TreeViewProps) {
+}: TreeViewProps) => {
   const enableTreeviewControllable = useFeatureFlag(
     'enable-treeview-controllable'
   );
@@ -324,7 +331,7 @@ export default function TreeView({
       </ul>
     </>
   );
-}
+};
 
 TreeView.propTypes = {
   /**
@@ -381,3 +388,6 @@ TreeView.propTypes = {
    */
   size: PropTypes.oneOf(['xs', 'sm']),
 };
+
+TreeView.TreeNode = TreeNode;
+export default TreeView;
