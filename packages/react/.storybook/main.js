@@ -112,15 +112,21 @@ const config = {
     builder: '@storybook/builder-vite', // 👈 The builder enabled here.
   },
 
-  async viteFinal(config) {
+  async viteFinal(config, { configType }) {
     // Merge custom configuration into the default config
     const { mergeConfig } = await import('vite');
 
-    return mergeConfig(config, {
-      define: {
-        __DEV__: JSON.stringify(process.env.NODE_ENV === 'development'),
-      },
+    if (configType === 'DEVELOPMENT') {
+      // Your development configuration goes here
+      config.define = {
+        __DEV__: process.env.NODE_ENV !== 'production',
+      };
+    }
+    if (configType === 'PRODUCTION') {
+      // Your production configuration goes here.
+    }
 
+    return mergeConfig(config, {
       esbuild: {
         include: /\.[jt]sx?$/,
         exclude: [],

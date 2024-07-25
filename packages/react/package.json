@@ -85,7 +85,6 @@
     "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-commonjs": "^26.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
-    "@rollup/plugin-replace": "^5.0.7",
     "@rollup/plugin-typescript": "^11.0.0",
     "@storybook/addon-a11y": "^8.2.4",
     "@storybook/addon-actions": "^8.2.4",
