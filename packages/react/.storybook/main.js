@@ -124,6 +124,7 @@ const config = {
     }
     if (configType === 'PRODUCTION') {
       // Your production configuration goes here.
+      // if __DEV__ is undefined in console we could set it to false
     }
 
     return mergeConfig(config, {
