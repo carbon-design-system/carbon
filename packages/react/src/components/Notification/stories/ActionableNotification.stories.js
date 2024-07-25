@@ -34,6 +34,7 @@ export const Default = () => (
   <ActionableNotification
     title="Notification title"
     subtitle="Subtitle text goes here"
+    kind="warning-alt"
     closeOnEscape
     inline={false}
     actionButtonLabel="Action"

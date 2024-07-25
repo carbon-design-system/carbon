@@ -34,6 +34,7 @@ export const Default = () => (
   <InlineNotification
     title="Notification title"
     subtitle="Subtitle text goes here"
+    kind="warning-alt"
   />
 );
 
