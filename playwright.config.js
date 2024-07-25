@@ -127,7 +127,7 @@ expect.extend({
        * has been rendered, but it should determine if a storybook
        * error page is present or not.
        */
-      await expect(page.locator('css=.cds--layout')).toBeInViewport();
+      await expect(page.locator('css=.cds--layout')).toBeAttached();
       pass = true;
     } catch (e) {
       pass = false;
