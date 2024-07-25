@@ -7,6 +7,9 @@
 
 import React from 'react';
 import { DataTable } from '..';
+import { Information } from '@carbon/icons-react';
+import { Link } from '../../Link';
+import { Toggletip, ToggletipButton, ToggletipContent } from '../../Toggletip';
 
 const {
   Table,
@@ -126,6 +129,107 @@ export const Default = () => {
     </Table>
   );
 };
+
+export const TestWithTooltips = () => (
+  <DataTable
+    rows={[
+      {
+        id: '1',
+        name: (
+          <>
+            <Link href="#">Resource one</Link>
+            <Toggletip
+              align="right"
+              defaultOpen={true}
+              style={{ marginLeft: '0.5rem' }}>
+              <ToggletipButton label="Tooltip">
+                <Information />
+              </ToggletipButton>
+              <ToggletipContent>
+                <span>
+                  Tooltip{' '}
+                  <Link href="#" inline={true} style={{ marginLeft: '0.5rem' }}>
+                    Link
+                  </Link>
+                </span>
+              </ToggletipContent>
+            </Toggletip>
+          </>
+        ),
+        status: (
+          <Link disabled={true} href="#">
+            Disabled
+          </Link>
+        ),
+      },
+      {
+        id: '2',
+        name: <Link href="#">Resource two</Link>,
+        status: (
+          <>
+            {'Starting'}
+            <Toggletip
+              align="right"
+              defaultOpen={true}
+              style={{ marginLeft: '0.5rem' }}>
+              <ToggletipButton label="Tooltip">
+                <Information />
+              </ToggletipButton>
+              <ToggletipContent>
+                <span>
+                  Tooltip{' '}
+                  <Link href="#" inline={true} style={{ marginLeft: '0.5rem' }}>
+                    Link
+                  </Link>
+                </span>
+              </ToggletipContent>
+            </Toggletip>
+          </>
+        ),
+      },
+    ]}
+    headers={[
+      { key: 'name', header: 'Name' },
+      { key: 'status', header: 'Status' },
+    ]}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getTableContainerProps,
+    }) => (
+      <TableContainer
+        description="With tooltips"
+        title="DataTable"
+        {...getTableContainerProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
+          <TableHead>
+            <TableRow>
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <React.Fragment key={row.id}>
+                <TableRow {...getRowProps({ row })}>
+                  {row.cells.map((cell) => (
+                    <TableCell key={cell.id}>{cell.value}</TableCell>
+                  ))}
+                </TableRow>
+              </React.Fragment>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
+);
 
 export const XLWithTwoLines = () => {
   const rows = [
