@@ -12,6 +12,7 @@ import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
 import React, {
   useCallback,
+  useLayoutEffect,
   useState,
   useRef,
   useEffect,
@@ -26,6 +27,7 @@ import React, {
   type ReactHTML,
   type ElementType,
 } from 'react';
+import { Grid } from '../Grid';
 import { isElement } from 'react-is';
 import { Tooltip } from '../Tooltip';
 import { useControllableState } from '../../internal/useControllableState';
@@ -42,6 +44,8 @@ import { Close } from '@carbon/icons-react';
 import { useEvent } from '../../internal/useEvent';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
+
+const verticalTabHeight = 64;
 
 // Used to manage the overall state of the Tabs
 type TabsContextType = {
@@ -76,6 +80,7 @@ const TabContext = React.createContext<{
 });
 
 const lgMediaQuery = `(min-width: ${breakpoints.lg.width})`;
+const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
 
 // Used to keep track of position in a list of tab panels
 const TabPanelContext = React.createContext<number>(0);
@@ -199,6 +204,101 @@ Tabs.propTypes = {
   selectedIndex: PropTypes.number,
 };
 
+export interface TabsVerticalProps {
+  /**
+   * Provide child elements to be rendered inside the `TabsVertical`.
+   * These elements should render either `TabsListVertical` or `TabsPanels`
+   */
+  children?: ReactNode;
+
+  /**
+   * Specify which content tab should be initially selected when the component
+   * is first rendered
+   */
+  defaultSelectedIndex?: number;
+
+  /**
+   * Option to set a height style only if using vertical variation
+   */
+  height?: string;
+
+  /**
+   * Provide an optional function which is called
+   * whenever the state of the `Tabs` changes
+   */
+  onChange?(state: { selectedIndex: number }): void;
+
+  /**
+   * Control which content panel is currently selected. This puts the component
+   * in a controlled mode and should be used along with `onChange`
+   */
+  selectedIndex?: number;
+}
+
+function TabsVertical({
+  children,
+  height,
+  defaultSelectedIndex = 0,
+  onChange,
+  selectedIndex: controlledSelectedIndex,
+  ...rest
+}: TabsVerticalProps) {
+  const [selectedIndex, setSelectedIndex] = useControllableState({
+    value: controlledSelectedIndex,
+    defaultValue: defaultSelectedIndex,
+    onChange: (value) => onChange?.({ selectedIndex: value }),
+  });
+
+  const props = {
+    ...rest,
+    selectedIndex,
+    onChange: ({ selectedIndex }) => setSelectedIndex(selectedIndex),
+  };
+
+  const isSm = useMatchMedia(smMediaQuery);
+
+  if (!isSm) {
+    return (
+      // eslint-disable-next-line react/forbid-component-props
+      <Grid style={{ height: height }}>
+        <Tabs {...props}>{children}</Tabs>
+      </Grid>
+    );
+  }
+  return <Tabs {...props}>{children}</Tabs>;
+}
+
+TabsVertical.propTypes = {
+  /**
+   * Provide child elements to be rendered inside the `TabsVertical`.
+   * These elements should render either `TabsListVertical` or `TabsPanels`
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify which content tab should be initially selected when the component
+   * is first rendered
+   */
+  defaultSelectedIndex: PropTypes.number,
+
+  /**
+   * Option to set a height style only if using vertical variation
+   */
+  height: PropTypes.string,
+
+  /**
+   * Provide an optional function which is called whenever the state of the
+   * `Tabs` changes
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Control which content panel is currently selected. This puts the component
+   * in a controlled mode and should be used along with `onChange`
+   */
+  selectedIndex: PropTypes.number,
+};
+
 /**
  * Get the next index for a given keyboard event
  * given a count of the total items and the current index
@@ -213,6 +313,33 @@ function getNextIndex(
       return (index + 1) % total;
 
     case match(event, keys.ArrowLeft):
+      return (total + index - 1) % total;
+
+    case match(event, keys.Home):
+      return 0;
+
+    case match(event, keys.End):
+      return total - 1;
+
+    default:
+      return index;
+  }
+}
+
+/**
+ * Get the next index for a given keyboard event
+ * given a count of the total items and the current index
+ */
+function getNextIndexVertical(
+  event: SyntheticEvent,
+  total: number,
+  index: number
+): number {
+  switch (true) {
+    case match(event, keys.ArrowDown):
+      return (index + 1) % total;
+
+    case match(event, keys.ArrowUp):
       return (total + index - 1) % total;
 
     case match(event, keys.Home):
@@ -685,6 +812,236 @@ TabList.propTypes = {
 };
 
 /**
+ * TabListVertical
+ */
+
+export interface TabListVerticalProps extends DivAttributes {
+  /**
+   * Specify whether the content tab should be activated automatically or
+   * manually
+   */
+  activation?: 'automatic' | 'manual';
+
+  /**
+   * Provide an accessible label to be read when a user interacts with this
+   * component
+   */
+  'aria-label': string;
+
+  /**
+   * Provide child elements to be rendered inside `ContentTabs`.
+   * These elements should render a `ContentTab`
+   */
+  children?: ReactNode;
+
+  /**
+   * Specify an optional className to be added to the container node
+   */
+  className?: string;
+
+  /**
+   * Choose whether to automatically scroll to newly selected tabs
+   * on component rerender
+   */
+  scrollIntoView?: boolean;
+}
+// type TabElement = HTMLElement & { disabled?: boolean };
+
+function TabListVertical({
+  activation = 'automatic',
+  'aria-label': label,
+  children,
+  className: customClassName,
+  scrollIntoView,
+  ...rest
+}: TabListVerticalProps) {
+  const { activeIndex, selectedIndex, setSelectedIndex, setActiveIndex } =
+    React.useContext(TabsContext);
+  const prefix = usePrefix();
+  const ref = useRef<HTMLDivElement>(null);
+  const [isOverflowingBottom, setIsOverflowingBottom] = useState(false);
+  const [isOverflowingTop, setIsOverflowingTop] = useState(false);
+
+  const isSm = useMatchMedia(smMediaQuery);
+
+  const className = cx(
+    `${prefix}--tabs`,
+    `${prefix}--tabs--vertical`,
+    `${prefix}--tabs--contained`,
+    customClassName
+  );
+
+  const tabs = useRef<TabElement[]>([]);
+
+  function onKeyDown(event: KeyboardEvent) {
+    if (matches(event, [keys.ArrowDown, keys.ArrowUp, keys.Home, keys.End])) {
+      event.preventDefault();
+
+      const filtredTabs = tabs.current.filter((tab) => tab !== null);
+
+      const activeTabs: TabElement[] = filtredTabs.filter(
+        (tab) => !tab.disabled
+      );
+
+      const currentIndex = activeTabs.indexOf(
+        tabs.current[activation === 'automatic' ? selectedIndex : activeIndex]
+      );
+      const nextIndex = tabs.current.indexOf(
+        activeTabs[getNextIndexVertical(event, activeTabs.length, currentIndex)]
+      );
+
+      if (activation === 'automatic') {
+        setSelectedIndex(nextIndex);
+      } else if (activation === 'manual') {
+        setActiveIndex(nextIndex);
+      }
+      tabs.current[nextIndex]?.focus();
+    }
+  }
+
+  useEffectOnce(() => {
+    if (tabs.current[selectedIndex]?.disabled) {
+      const activeTabs = tabs.current.filter((tab) => {
+        return !tab.disabled;
+      });
+
+      if (activeTabs.length > 0) {
+        const tab = activeTabs[0];
+        setSelectedIndex(tabs.current.indexOf(tab));
+      }
+    }
+  });
+
+  useEffect(() => {
+    function handler() {
+      const containerHeight = ref.current?.offsetHeight;
+      const containerTop = ref.current?.getBoundingClientRect().top;
+      const selectedPositionTop =
+        tabs.current[selectedIndex]?.getBoundingClientRect().top;
+
+      const halfTabHeight = verticalTabHeight / 2;
+      if (containerTop && containerHeight) {
+        // scrolls so selected tab is in view
+        if (
+          selectedPositionTop - halfTabHeight < containerTop ||
+          selectedPositionTop -
+            containerTop +
+            verticalTabHeight +
+            halfTabHeight >
+            containerHeight
+        ) {
+          ref.current.scrollTo({
+            top: (selectedIndex - 1) * verticalTabHeight,
+            behavior: 'smooth',
+          });
+        }
+      }
+    }
+
+    window.addEventListener('resize', handler);
+
+    handler();
+
+    return () => {
+      window.removeEventListener('resize', handler);
+    };
+  }, [selectedIndex, scrollIntoView]);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) {
+      return;
+    }
+
+    const handler = () => {
+      const halfTabHeight = verticalTabHeight / 2;
+      setIsOverflowingBottom(
+        element.scrollTop + element.clientHeight + halfTabHeight <=
+          element.scrollHeight
+      );
+      setIsOverflowingTop(element.scrollTop > halfTabHeight);
+    };
+
+    const resizeObserver = new ResizeObserver(() => handler());
+    resizeObserver.observe(element);
+    element.addEventListener('scroll', handler);
+
+    return () => {
+      resizeObserver.disconnect();
+      element.removeEventListener('scroll', handler);
+    };
+  });
+
+  if (isSm) {
+    return (
+      <TabList {...rest} aria-label={label} contained>
+        {children}
+      </TabList>
+    );
+  }
+
+  return (
+    <div className={className}>
+      {isOverflowingTop && (
+        <div className={`${prefix}--tab--list-gradient_top`}></div>
+      )}
+      {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
+      <div
+        {...rest}
+        aria-label={label}
+        ref={ref}
+        role="tablist"
+        className={`${prefix}--tab--list`}
+        onKeyDown={onKeyDown}>
+        {React.Children.map(children, (child, index) => {
+          return !isElement(child) ? null : (
+            <TabContext.Provider
+              value={{
+                index,
+                hasSecondaryLabel: false,
+              }}>
+              {React.cloneElement(child, {
+                ref: (node) => {
+                  tabs.current[index] = node;
+                },
+              })}
+            </TabContext.Provider>
+          );
+        })}
+      </div>
+      {isOverflowingBottom && (
+        <div className={`${prefix}--tab--list-gradient_bottom`}></div>
+      )}
+    </div>
+  );
+}
+
+TabListVertical.propTypes = {
+  /**
+   * Specify whether the content tab should be activated automatically or
+   * manually
+   */
+  activation: PropTypes.oneOf(['automatic', 'manual']),
+
+  /**
+   * Provide an accessible label to be read when a user interacts with this
+   * component
+   */
+  'aria-label': PropTypes.string.isRequired,
+
+  /**
+   * Provide child elements to be rendered inside `ContentTabs`.
+   * These elements should render a `ContentTab`
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be added to the container node
+   */
+  className: PropTypes.string,
+};
+
+/**
  * Helper function to set up the behavior when a button is "long pressed".
  * This function will take a ref to the tablist, a direction, and a setter
  * for scrollLeft and will update the scroll position within a requestAnimationFrame.
@@ -819,6 +1176,13 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
   const [ignoreHover, setIgnoreHover] = useState(false);
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+
+  const isEllipsisActive = (element: any) => {
+    setIsEllipsisApplied(element.offsetHeight < element.scrollHeight);
+    return element.offsetHeight < element.scrollHeight;
+  };
+
   const className = cx(
     `${prefix}--tabs__nav-item`,
     `${prefix}--tabs__nav-link`,
@@ -849,6 +1213,23 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
 
   useEvent(dismissIconRef, 'mouseover', onDismissIconMouseEnter);
   useEvent(dismissIconRef, 'mouseleave', onDismissIconMouseLeave);
+
+  useLayoutEffect(() => {
+    function handler() {
+      const elementTabId = document.getElementById(`${id}`) || tabRef.current;
+      if (elementTabId?.closest(`.${prefix}--tabs--vertical`)) {
+        const newElement = elementTabId?.getElementsByClassName(
+          `${prefix}--tabs__nav-item-label`
+        )[0];
+        isEllipsisActive(newElement);
+      }
+    }
+    handler();
+    window.addEventListener('resize', handler);
+    return () => {
+      window.removeEventListener('resize', handler);
+    };
+  }, [prefix, id]);
 
   const handleClose = (evt) => {
     evt.stopPropagation();
@@ -923,6 +1304,55 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
   );
 
   const hasIcon = Icon ?? dismissable;
+
+  // should only happen for vertical variation, so no dissimisamble icon is needed here
+  if (isEllipsisApplied) {
+    return (
+      <Tooltip
+        label={children}
+        align="top"
+        leaveDelayMs={0}
+        autoAlign
+        onMouseEnter={() => false}
+        closeOnActivation>
+        <BaseComponent
+          {...rest}
+          aria-controls={panelId}
+          aria-disabled={disabled}
+          aria-selected={selectedIndex === index}
+          ref={ref}
+          id={id}
+          role="tab"
+          className={className}
+          disabled={disabled}
+          title={children}
+          onClick={(evt) => {
+            if (disabled) {
+              return;
+            }
+            setSelectedIndex(index);
+            onClick?.(evt);
+          }}
+          onKeyDown={handleKeyDown}
+          tabIndex={selectedIndex === index ? '0' : '-1'}
+          type="button">
+          <div className={`${prefix}--tabs__nav-item-label-wrapper`}>
+            <Text className={`${prefix}--tabs__nav-item-label`}>
+              {children}
+            </Text>
+          </div>
+          {hasSecondaryLabel && secondaryLabel && (
+            <Text
+              as="div"
+              className={`${prefix}--tabs__nav-item-secondary-label`}
+              title={secondaryLabel}>
+              {secondaryLabel}
+            </Text>
+          )}
+        </BaseComponent>
+      </Tooltip>
+    );
+  }
 
   return (
     <>
@@ -1249,12 +1679,52 @@ export interface TabPanelsProps {
 }
 
 function TabPanels({ children }: TabPanelsProps) {
+  const prefix = usePrefix();
+  const refs = useRef<(HTMLDivElement | null)[]>([]);
+  const hiddenStates = useRef<boolean[]>([]);
+
+  useLayoutEffect(() => {
+    const tabContainer = refs.current[0]?.previousElementSibling;
+    const isVertical = tabContainer?.classList.contains(
+      `${prefix}--tabs--vertical`
+    );
+    const parentHasHeight = tabContainer?.parentElement?.style.height;
+
+    // Should only apply same height to vertical Tab Panels without a given height
+    if (isVertical && !parentHasHeight) {
+      hiddenStates.current = refs.current.map((ref) => ref?.hidden || false);
+
+      // un-hide hidden Tab Panels to get heights
+      refs.current.forEach((ref) => {
+        if (ref) {
+          ref.hidden = false;
+        }
+      });
+
+      // set max height to TabList
+      const heights = refs.current.map((ref) => ref?.offsetHeight || 0);
+      const max = Math.max(...heights);
+      (tabContainer as HTMLElement).style.height = max + 'px';
+
+      // re-hide hidden Tab Panels
+      refs.current.forEach((ref, index) => {
+        if (ref) {
+          ref.hidden = hiddenStates.current[index];
+        }
+      });
+    }
+  });
+
   return (
     <>
       {React.Children.map(children, (child, index) => {
         return (
           <TabPanelContext.Provider value={index}>
-            {child}
+            {React.cloneElement(child as React.ReactElement<any>, {
+              ref: (element: HTMLDivElement) => {
+                refs.current[index] = element;
+              },
+            })}
           </TabPanelContext.Provider>
         );
       })}
@@ -1269,4 +1739,13 @@ TabPanels.propTypes = {
   children: PropTypes.node,
 };
 
-export { Tabs, Tab, IconTab, TabPanel, TabPanels, TabList };
+export {
+  Tabs,
+  TabsVertical,
+  Tab,
+  IconTab,
+  TabPanel,
+  TabPanels,
+  TabList,
+  TabListVertical,
+};

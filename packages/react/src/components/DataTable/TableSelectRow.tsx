@@ -6,17 +6,26 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useId } from 'react';
 import classNames from 'classnames';
 import InlineCheckbox from '../InlineCheckbox';
 import RadioButton from '../RadioButton';
 import { usePrefix } from '../../internal/usePrefix';
+import deprecate from '../../prop-types/deprecate';
 
 export interface TableSelectRowProps {
   /**
-   * Specify the aria label for the underlying input control
+   * Specify a label to be read by screen readers on the containing textbox
+   * node
    */
-  ariaLabel: string;
+  ['aria-label']?: string;
+
+  /**
+   * @deprecated please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the containing textbox
+   * node
+   */
+  ariaLabel?: string;
 
   /**
    * Specify whether this row is selected, or not
@@ -64,7 +73,8 @@ export interface TableSelectRowProps {
 }
 
 const TableSelectRow = ({
-  ariaLabel,
+  ariaLabel: deprecatedAriaLabel,
+  ['aria-label']: ariaLabel,
   checked,
   id,
   name,
@@ -75,9 +85,10 @@ const TableSelectRow = ({
   className,
 }: TableSelectRowProps) => {
   const prefix = usePrefix();
+  const uniqueNameId = useId();
   const selectionInputProps = {
     id,
-    name,
+    name: name ? name : uniqueNameId,
     onClick: onSelect,
     onChange,
     checked,
@@ -93,10 +104,10 @@ const TableSelectRow = ({
       <InlineInputComponent
         {...selectionInputProps}
         {...(radio && {
-          labelText: ariaLabel,
+          labelText: ariaLabel || deprecatedAriaLabel,
           hideLabel: true,
         })}
-        {...(!radio && { ['aria-label']: ariaLabel })}
+        {...(!radio && { 'aria-label': ariaLabel || deprecatedAriaLabel })}
       />
     </td>
   );
@@ -105,8 +116,15 @@ TableSelectRow.propTypes = {
   /**
    * Specify the aria label for the underlying input control
    */
-  ariaLabel: PropTypes.string.isRequired,
-
+  ['aria-label']: PropTypes.string,
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify the aria label for the underlying input control
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
   /**
    * Specify whether this row is selected, or not
    */

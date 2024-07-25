@@ -13,6 +13,7 @@ import React, {
   useEffect,
   useState,
   useRef,
+  useMemo,
   forwardRef,
   type ReactNode,
   type ComponentType,
@@ -38,7 +39,7 @@ import ListBox, {
 } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
@@ -120,8 +121,6 @@ const findHighlightedIndex = <ItemType,>(
 
   return -1;
 };
-
-const getInstanceId = setupGetInstanceId();
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type' | 'size';
 
@@ -378,7 +377,7 @@ const ComboBox = forwardRef(
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
-    const comboBoxInstanceId = getInstanceId();
+    const comboBoxInstanceId = useId();
     const [inputValue, setInputValue] = useState(
       getInputValue({
         initialSelectedItem,
@@ -458,17 +457,28 @@ const ComboBox = forwardRef(
             if (
               state.inputValue &&
               highlightedIndex == '-1' &&
-              !allowCustomValue
+              changes.selectedItem
+            ) {
+              return {
+                ...changes,
+                inputValue: itemToString(changes.selectedItem),
+              };
+            } else if (
+              state.inputValue &&
+              highlightedIndex == '-1' &&
+              !allowCustomValue &&
+              !changes.selectedItem
             ) {
               return { ...changes, inputValue: '' };
+            } else {
+              return changes;
             }
-            return changes;
           case InputKeyDownEnter:
             if (allowCustomValue) {
               setInputValue(inputValue);
               setHighlightedIndex(changes.selectedItem);
               if (onChange) {
-                onChange({ selectedItem: changes.selectedItem });
+                onChange({ selectedItem: changes.selectedItem, inputValue });
               }
               return changes;
             } else if (changes.selectedItem && !allowCustomValue) {
@@ -579,7 +589,7 @@ const ComboBox = forwardRef(
       setHighlightedIndex,
     } = useCombobox({
       ...downshiftProps,
-      items,
+      items: filterItems(items, itemToString, inputValue),
       inputValue: inputValue,
       itemToString: (item) => {
         return itemToString(item);
@@ -644,6 +654,16 @@ const ComboBox = forwardRef(
       (helperText && !isFluid && helperTextId) ||
       undefined;
 
+    // Memoize the value of getMenuProps to avoid an infinite loop
+    const menuProps = useMemo(
+      () =>
+        getMenuProps({
+          'aria-label': deprecatedAriaLabel || ariaLabel,
+          ref: autoAlign ? refs.setFloating : null,
+        }),
+      [autoAlign, deprecatedAriaLabel, ariaLabel]
+    );
+
     return (
       <div className={wrapperClasses}>
         {titleText && (
@@ -663,7 +683,7 @@ const ComboBox = forwardRef(
           light={light}
           size={size}
           warn={warn}
-          ref={refs.setReference}
+          ref={autoAlign ? refs.setReference : null}
           warnText={warnText}
           warnTextId={warnTextId}>
           <div className={`${prefix}--list-box__field`}>
@@ -675,7 +695,7 @@ const ComboBox = forwardRef(
               aria-haspopup="listbox"
               title={textInput?.current?.value}
               {...getInputProps({
-                'aria-controls': isOpen ? undefined : getMenuProps().id,
+                'aria-controls': isOpen ? undefined : menuProps.id,
                 placeholder,
                 ref: { ...mergeRefs(textInput, ref) },
                 onKeyDown: (
@@ -697,7 +717,18 @@ const ComboBox = forwardRef(
                     toggleMenu();
 
                     if (highlightedIndex !== -1) {
-                      selectItem(items[highlightedIndex]);
+                      selectItem(
+                        filterItems(items, itemToString, inputValue)[
+                          highlightedIndex
+                        ]
+                      );
+                    }
+
+                    // Since `onChange` does not normally fire when the menu is closed, we should
+                    // manually fire it when `allowCustomValue` is provided, the menu is closing,
+                    // and there is a value.
+                    if (allowCustomValue && isOpen && inputValue) {
+                      onChange({ selectedItem, inputValue });
                     }
 
                     event.preventDownshiftDefault = true;
@@ -770,11 +801,7 @@ const ComboBox = forwardRef(
             />
           </div>
           {normalizedSlug}
-          <ListBox.Menu
-            {...getMenuProps({
-              'aria-label': deprecatedAriaLabel || ariaLabel,
-            })}
-            ref={mergeRefs(getMenuProps().ref, refs.setFloating)}>
+          <ListBox.Menu {...menuProps}>
             {isOpen
               ? filterItems(items, itemToString, inputValue).map(
                   (item, index) => {
