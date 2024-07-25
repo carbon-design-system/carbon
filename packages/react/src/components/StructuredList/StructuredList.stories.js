@@ -181,6 +181,19 @@ export const WithBackgroundLayer = () => {
   );
 };
 
+Selection.argTypes = {
+  isFlush: {
+    table: {
+      disable: true,
+    },
+  },
+  selection: {
+    control: {
+      disable: true,
+    },
+  },
+};
+
 export const Skeleton = (args) => (
   <div style={{ width: '800px' }}>
     <StructuredListSkeleton {...args} />
