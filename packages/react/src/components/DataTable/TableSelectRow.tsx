@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useId } from 'react';
 import classNames from 'classnames';
 import InlineCheckbox from '../InlineCheckbox';
 import RadioButton from '../RadioButton';
@@ -85,9 +85,10 @@ const TableSelectRow = ({
   className,
 }: TableSelectRowProps) => {
   const prefix = usePrefix();
+  const uniqueNameId = useId();
   const selectionInputProps = {
     id,
-    name,
+    name: name ? name : uniqueNameId,
     onClick: onSelect,
     onChange,
     checked,
