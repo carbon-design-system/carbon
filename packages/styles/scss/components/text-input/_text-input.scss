@@ -202,6 +202,16 @@
     }
   }
 
+  .#{$prefix}--text-input--password__visibility__toggle:disabled.#{$prefix}--tooltip__trigger
+    svg {
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--text-input--password__visibility__toggle:disabled.#{$prefix}--tooltip__trigger:hover
+    svg {
+    fill: $icon-disabled;
+  }
+
   .#{$prefix}--text-input__counter-alert {
     position: absolute;
     overflow: hidden;

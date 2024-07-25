@@ -444,7 +444,7 @@ PasswordInput.propTypes = {
    */
   invalid: PropTypes.bool,
 
-   /**
+  /**
    * Whether the PasswordInput should be read-only
    */
   readOnly: PropTypes.bool,
