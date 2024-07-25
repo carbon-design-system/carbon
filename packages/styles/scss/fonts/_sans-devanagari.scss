@@ -11,7 +11,7 @@
 $font-family: 'IBM Plex Sans Devanagari';
 $name: 'IBM-Plex-Sans-Devanagari';
 $styles: (normal);
-$formats: (woff2);
+$formats: (woff2, woff);
 $package-name: 'sans-devanagari';
 
 @mixin thin() {

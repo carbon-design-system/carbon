@@ -11,7 +11,7 @@
 $font-family: 'IBM Plex Sans Hebrew';
 $name: 'IBM-Plex-Sans-Hebrew';
 $styles: (normal);
-$formats: (woff2);
+$formats: (woff2, woff);
 $package-name: 'sans-hebrew';
 
 @mixin thin() {
