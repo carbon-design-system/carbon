@@ -181,7 +181,7 @@ export const WithBackgroundLayer = () => {
   );
 };
 
-Selection.argTypes = {
+WithBackgroundLayer.argTypes = {
   isFlush: {
     table: {
       disable: true,
