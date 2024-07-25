@@ -21,7 +21,13 @@ export type TreeNodeProps = {
    * The ID of the active node in the tree
    */
   active?: string | number;
+  /**
+   * Specify the children of the TreeNode
+   */
   children?: React.ReactNode;
+  /**
+   * Specify an optional className to be applied to the TreeNode
+   */
   className?: string;
   /**
    * **[Experimental]** The default expansion state of the node.
@@ -33,20 +39,51 @@ export type TreeNodeProps = {
    * TreeNode depth to determine spacing
    */
   depth?: number;
+  /**
+   * Specify if the TreeNode is disabled
+   */
   disabled?: boolean;
+  /**
+   * Specify the TreeNode's ID. Must be unique in the DOM and is used for props.active and props.selected
+   */
   id?: string;
+  /**
+   * Specify if the TreeNode is expanded (only applicable to parent nodes)
+   */
   isExpanded?: boolean;
+  /**
+   * Rendered label for the TreeNode
+   */
   label: React.ReactNode;
+  /**
+   * Callback function for when the node receives or loses focus
+   */
   onNodeFocusEvent?: (event: React.FocusEvent<HTMLLIElement>) => void;
+  /**
+   * Callback function for when the node is selected
+   */
   onSelect?: (event: React.MouseEvent, node?: TreeNodeProps) => void;
+  /**
+   * Callback function for when a parent node is expanded or collapsed
+   */
   onToggle?: (event: React.MouseEvent, node?: TreeNodeProps) => void;
+  /**
+   * Callback function for when any node in the tree is selected
+   */
   onTreeSelect?: (event: React.MouseEvent, node?: TreeNodeProps) => void;
+  /**
+   * Optional prop to allow each node to have an associated icon.
+   * Can be a React component class
+   */
   renderIcon?: CarbonIconType;
   /**
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * Array containing all selected node IDs in the tree
    */
   selected?: Array<string | number>;
+  /**
+   * Specify the value of the TreeNode
+   */
   value?: string;
 } & Omit<React.LiHTMLAttributes<HTMLLIElement>, 'onSelect'>;
 

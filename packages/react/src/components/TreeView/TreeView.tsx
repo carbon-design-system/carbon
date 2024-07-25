@@ -15,15 +15,47 @@ import uniqueId from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
 
 export type TreeViewProps = {
+  /**
+   * Mark the active node in the tree, represented by its ID
+   */
   active?: string | number;
+  /**
+   * Specify the children of the TreeView
+   */
   children?: React.ReactNode;
+  /**
+   * Specify an optional className to be applied to the TreeView
+   */
   className?: string;
+  /**
+   * Specify whether or not the label should be hidden
+   */
   hideLabel?: boolean;
+  /**
+   * Provide the label text that will be read by a screen reader
+   */
   label: string;
+  /**
+   * **[Experimental]** Specify the selection mode of the tree.
+   * If `multiselect` is `false` then only one node can be selected at a time
+   */
   multiselect?: boolean;
+  /**
+   * **[Experimental]** Callback function that is called when any node is activated.
+   * *This is only supported with the `enable-treeview-controllable` feature flag!*
+   */
   onActivate?: (activated?: string | number) => void;
+  /**
+   * Callback function that is called when any node is selected
+   */
   onSelect?: (selected: Array<string | number>, payload: any) => void;
+  /**
+   * Array representing all selected node IDs in the tree
+   */
   selected?: Array<string | number>;
+  /**
+   * Specify the size of the tree from a list of available sizes.
+   */
   size?: 'xs' | 'sm';
 } & React.HTMLAttributes<HTMLUListElement>;
 
