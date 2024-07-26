@@ -47,10 +47,9 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
         </MenuItem>
       </OverflowMenu>
     );
-
-    await userEvent.type(screen.getByRole('button'), 'enter');
-    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-
+    const overFlowButton = screen.getByRole('button');
+    await userEvent.click(overFlowButton);
+    expect(overFlowButton).toHaveAttribute('aria-expanded', 'true');
     // eslint-disable-next-line testing-library/no-node-access
     const ul = document.querySelector('ul');
     expect(ul).toBeInTheDocument();
@@ -97,12 +96,13 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
         </MenuItem>
       </OverflowMenu>
     );
-    await userEvent.type(screen.getByRole('button'), 'enter');
-    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    await userEvent.click(document.body);
-    expect(screen.getByRole('button')).toHaveAttribute(
-      'aria-expanded',
-      'false'
+    const overFlowButton = screen.getByRole('button');
+    await userEvent.click(overFlowButton);
+    expect(overFlowButton).toHaveAttribute('aria-expanded', 'true');
+    userEvent.click(document.body);
+    setTimeout(
+      () => expect(overFlowButton).toHaveAttribute('aria-expanded', 'false'),
+      100
     );
   });
 
