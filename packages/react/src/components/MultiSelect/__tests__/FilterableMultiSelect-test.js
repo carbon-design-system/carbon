@@ -194,4 +194,11 @@ describe('FilterableMultiSelect', () => {
       `${prefix}--list-box__wrapper--slug`
     );
   });
+
+  it('should place the given id on the listbox wrapper', async () => {
+    render(<FilterableMultiSelect {...mockProps} id="custom-id" />);
+    await waitForPosition();
+
+    expect(document.querySelector(`.${prefix}--list-box`).id).toBe('custom-id');
+  });
 });
