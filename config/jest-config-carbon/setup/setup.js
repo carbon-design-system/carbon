@@ -7,7 +7,7 @@
 
 'use strict';
 
-// global.__DEV__ = true;
+global.__DEV__ = true;
 
 jest.setTimeout(20000);
 
