@@ -297,19 +297,21 @@ describe('Accordion', () => {
   });
 
   describe('Nested Accordion', () => {
-    it('should not expand inner Accordion item when expanding outer Accordion item', () => {
+    it('should not expand inner Accordion item when expanding outer Accordion item', async () => {
       render(
         <Accordion>
-          <AccordionItem open>
+          <AccordionItem title="outer title">
             <Accordion>
-              <AccordionItem>Panel</AccordionItem>
+              <AccordionItem>inner panel</AccordionItem>
             </Accordion>
           </AccordionItem>
         </Accordion>
       );
 
-      const panel = screen.getByText('Panel');
-      expect(panel).not.toBeVisible();
+      // expand outer
+      await userEvent.click(screen.getByText('outer title'));
+
+      expect(screen.getByText('inner panel')).not.toBeVisible();
     });
 
     it('should not close outer Accordion item when closing inner Accordion item', async () => {
