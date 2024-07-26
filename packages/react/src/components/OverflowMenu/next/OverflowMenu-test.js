@@ -98,12 +98,11 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
     );
     const overFlowButton = screen.getByRole('button');
     await userEvent.click(overFlowButton);
+    const ul = document.querySelector('ul');
+    expect(ul).toBeInTheDocument();
     expect(overFlowButton).toHaveAttribute('aria-expanded', 'true');
     userEvent.click(document.body);
-    setTimeout(
-      () => expect(overFlowButton).toHaveAttribute('aria-expanded', 'false'),
-      100
-    );
+    setTimeout(() => expect(ul).not.toBeInTheDocument(), 100);
   });
 
   describe('supports props.menuAlignment', () => {
