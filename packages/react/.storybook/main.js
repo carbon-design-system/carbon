@@ -11,6 +11,7 @@ import remarkGfm from 'remark-gfm';
 import fs from 'fs';
 import glob from 'fast-glob';
 import path from 'path';
+import react from '@vitejs/plugin-react';
 
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
 // MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
@@ -64,6 +65,7 @@ const stories = glob
     }
     return true;
   });
+
 const config = {
   addons: [
     {
@@ -116,14 +118,6 @@ const config = {
     // Merge custom configuration into the default config
     const { mergeConfig } = await import('vite');
 
-    if (configType === 'DEVELOPMENT') {
-      config.define = {
-        __DEV__: process.env.NODE_ENV !== 'production',
-      };
-    }
-    if (configType === 'PRODUCTION') {
-    }
-
     return mergeConfig(config, {
       esbuild: {
         include: /\.[jt]sx?$/,
@@ -137,6 +131,16 @@ const config = {
           },
         },
       },
+      plugins: [
+        react({
+          babel: {
+            // This instructs Vite to use Babel for the necessary transforms,
+            // including converting __DEV__ to true/false in our code.
+            babelrc: true,
+            configFile: true,
+          },
+        }),
+      ],
     });
   },
   docs: {

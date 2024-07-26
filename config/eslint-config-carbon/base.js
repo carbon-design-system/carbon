@@ -40,6 +40,6 @@ module.exports = {
     jasmine: true,
   },
   globals: {
-    __DEV__: true,
+    // __DEV__: true,
   },
 };
