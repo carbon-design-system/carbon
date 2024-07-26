@@ -8,12 +8,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import setupGetInstanceId from '../../../tools/setupGetInstanceId';
+import { useId } from '../../../internal/useId';
 import Select from '../../Select';
 import SelectItem from '../../SelectItem';
 import { usePrefix } from '../../../internal/usePrefix';
 
-const getInstanceId = setupGetInstanceId();
 function PageSelector({
   className = null,
   currentPage,
@@ -24,7 +23,7 @@ function PageSelector({
 }) {
   const prefix = usePrefix();
   const namespace = `${prefix}--unstable-pagination__page-selector`;
-  const instanceId = `${namespace}__select-${getInstanceId()}`;
+  const instanceId = `${namespace}__select-${useId()}`;
 
   const renderPages = (total) => {
     const pages = [];
