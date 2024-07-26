@@ -122,9 +122,6 @@ const config = {
       };
     }
     if (configType === 'PRODUCTION') {
-      config.define = {
-        __DEV__: 'production',
-      };
     }
 
     return mergeConfig(config, {
