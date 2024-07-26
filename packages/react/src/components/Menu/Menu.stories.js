@@ -49,6 +49,11 @@ export const Playground = (args) => {
 
   return (
     <Menu {...args} target={target} x={document?.dir === 'rtl' ? 250 : 0}>
+      <MenuItem label="Copy" shortcut="⌘C" onClick={itemOnClick} />
+      <MenuItemDivider />
+      <MenuItem label="Cut" shortcut="⌘X" onClick={itemOnClick}>
+        <MenuItem label="Cuts" shortcut="⌘ssX" onClick={itemOnClick} />
+      </MenuItem>
       <MenuItem label="Share with">
         <MenuItemRadioGroup
           label="Share with"
@@ -57,8 +62,6 @@ export const Playground = (args) => {
           onChange={radioOnChange}
         />
       </MenuItem>
-      <MenuItemDivider />
-      <MenuItem label="Cut" shortcut="⌘X" onClick={itemOnClick} />
       <MenuItem label="Copy" shortcut="⌘C" onClick={itemOnClick} />
       <MenuItem label="Paste" shortcut="⌘V" disabled onClick={itemOnClick} />
       <MenuItemDivider />
