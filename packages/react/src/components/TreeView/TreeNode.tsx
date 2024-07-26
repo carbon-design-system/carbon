@@ -5,10 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CarbonIconType, CaretDown } from '@carbon/icons-react';
+import { CaretDown } from '@carbon/icons-react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  ComponentType,
+  FunctionComponent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
@@ -75,7 +81,7 @@ export type TreeNodeProps = {
    * Optional prop to allow each node to have an associated icon.
    * Can be a React component class
    */
-  renderIcon?: CarbonIconType;
+  renderIcon?: ComponentType | FunctionComponent;
   /**
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * Array containing all selected node IDs in the tree
@@ -308,6 +314,7 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
       return (
         <li {...treeNodeProps}>
           <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
+            {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
             {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
             {label}
           </div>
@@ -328,6 +335,7 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
             <CaretDown className={toggleClasses} />
           </span>
           <span className={`${prefix}--tree-node__label__details`}>
+            {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
             {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
             {label}
           </span>
