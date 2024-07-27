@@ -1569,6 +1569,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "lharrison13",
+      "name": "Luke Harrison",
+      "avatar_url": "https://avatars.githubusercontent.com/u/172074450?v=4",
+      "profile": "https://github.com/lharrison13",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
