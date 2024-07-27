@@ -396,10 +396,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     setPrevOpen(open);
   }
 
-  // memoize sorted items to reduce unecessary expensive sort on rerender
+  // memoize sorted items to reduce unnecessary expensive sort on rerender
   const sortedItems = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    console.log('rerender');
     return sortItems!(filterItems(items, { itemToString, inputValue }), {
       selectedItems: {
         top: controlledSelectedItems,
