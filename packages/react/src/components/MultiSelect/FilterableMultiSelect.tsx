@@ -81,6 +81,19 @@ const {
 } =
   useMultipleSelection.stateChangeTypes as UseMultipleSelectionInterface['stateChangeTypes'];
 
+/**
+ * Message ids that will be passed to translateWithId().
+ * Combination of message ids from ListBox/next/ListBoxSelection.js and
+ * ListBox/next/ListBoxTrigger.js, but we can't access those values directly
+ * because those components aren't Typescript.  (If you try, TranslationKey
+ * ends up just being defined as "string".)
+ */
+type TranslationKey =
+  | 'close.menu'
+  | 'open.menu'
+  | 'clear.all'
+  | 'clear.selection';
+
 export interface FilterableMultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType> {
   /**
@@ -265,7 +278,10 @@ export interface FilterableMultiSelectProps<ItemType>
   /**
    * Callback function for translating ListBoxMenuIcon SVG title
    */
-  translateWithId?(messageId: string, args?: Record<string, unknown>): string;
+  translateWithId?(
+    messageId: TranslationKey,
+    args?: Record<string, unknown>
+  ): string;
 
   type?: 'default' | 'inline';
 
@@ -729,7 +745,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         },
         { suppressRefError: true }
       ),
-    [autoAlign]
+    [autoAlign, getMenuProps, refs.setFloating]
   );
 
   const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {

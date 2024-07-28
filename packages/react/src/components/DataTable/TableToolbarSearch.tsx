@@ -9,7 +9,6 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   ChangeEvent,
-  useMemo,
   useRef,
   useState,
   useEffect,
@@ -23,16 +22,19 @@ import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 import { InternationalProps } from '../../types/common';
 
+/**
+ * Message ids that will be passed to translateWithId().
+ */
 export type TableToolbarTranslationKey =
   | 'carbon.table.toolbar.search.label'
   | 'carbon.table.toolbar.search.placeholder';
 
-const translationKeys = {
+const translationKeys: Record<TableToolbarTranslationKey, string> = {
   'carbon.table.toolbar.search.label': 'Filter table',
   'carbon.table.toolbar.search.placeholder': 'Filter table',
 };
 
-const translateWithId = (id: string): string => {
+const translateWithId = (id: TableToolbarTranslationKey): string => {
   return translationKeys[id];
 };
 

@@ -22,7 +22,12 @@ const translationIds = {
   'carbon.pagination-nav.item': 'Page',
   'carbon.pagination-nav.active': 'Active',
   'carbon.pagination-nav.of': 'of',
-};
+} as const;
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = keyof typeof translationIds;
 
 function translateWithId(messageId: string): string {
   return translationIds[messageId];
@@ -137,7 +142,9 @@ interface PaginationItemProps {
    * Specify a custom translation function that takes in a message identifier
    * and returns the localized string for the message
    */
-  translateWithId?: (id: string) => string;
+  translateWithId?: (
+    id: 'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
+  ) => string;
 }
 
 function PaginationItem({
@@ -196,7 +203,9 @@ interface PaginationOverflowProps {
    * Specify a custom translation function that takes in a message identifier
    * and returns the localized string for the message
    */
-  translateWithId?: (id: string) => string;
+  translateWithId?: (
+    id: 'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
+  ) => string;
 }
 
 function PaginationOverflow({
@@ -319,7 +328,7 @@ interface PaginationNavProps
    * Specify a custom translation function that takes in a message identifier
    * and returns the localized string for the message
    */
-  translateWithId?: (id: string) => string;
+  translateWithId?: (id: TranslationKey) => string;
 }
 
 const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(

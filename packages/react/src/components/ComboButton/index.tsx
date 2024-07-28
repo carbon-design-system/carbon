@@ -28,6 +28,11 @@ const defaultTranslations = {
   'carbon.combo-button.additional-actions': 'Additional actions',
 };
 
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = keyof typeof defaultTranslations;
+
 function defaultTranslateWithId(messageId: string) {
   return defaultTranslations[messageId];
 }
@@ -77,7 +82,7 @@ interface ComboButtonProps {
    * Optional method that takes in a message `id` and returns an
    * internationalized string.
    */
-  translateWithId?: (id: string) => string;
+  translateWithId?: (id: TranslationKey) => string;
 }
 
 const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(

@@ -78,16 +78,18 @@ ThumbWrapper.propTypes = {
 
 const translationIds = {
   autoCorrectAnnouncement: 'carbon.slider.auto-correct-announcement',
-};
+} as const;
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = (typeof translationIds)[keyof typeof translationIds];
 
 function translateWithId(
-  translationId,
+  translationId: TranslationKey,
   translationState?: { correctedValue?: string }
 ) {
-  if (
-    translationId === translationIds.autoCorrectAnnouncement &&
-    translationState?.correctedValue
-  ) {
+  if (translationState?.correctedValue) {
     const { correctedValue } = translationState;
     return `The inputted value "${correctedValue}" was corrected to the nearest allowed digit.`;
   }
@@ -281,7 +283,7 @@ export interface SliderProps
    * this component.
    */
   translateWithId?: (
-    translationId: string,
+    translationId: TranslationKey,
     translationState: { correctedValue?: string }
   ) => string;
 

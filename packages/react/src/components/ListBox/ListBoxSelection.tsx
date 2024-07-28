@@ -50,7 +50,10 @@ export interface ListBoxSelectionProps {
    * icon. This function takes in an id defined in `translationIds` and should
    * return a string message for that given message id.
    */
-  translateWithId?(messageId: string, args?: Record<string, unknown>): string;
+  translateWithId?(
+    messageId: TranslationKey,
+    args?: Record<string, unknown>
+  ): string;
 }
 
 export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>;
@@ -58,7 +61,12 @@ export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>;
 export const translationIds = {
   'clear.all': 'clear.all',
   'clear.selection': 'clear.selection',
-};
+} as const;
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = keyof typeof translationIds;
 
 const defaultTranslations = {
   [translationIds['clear.all']]: 'Clear all selected items',

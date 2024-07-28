@@ -129,6 +129,19 @@ interface OnChangeData<ItemType> {
   inputValue?: string | null;
 }
 
+/**
+ * Message ids that will be passed to translateWithId().
+ * Combination of message ids from ListBox/next/ListBoxSelection.js and
+ * ListBox/next/ListBoxTrigger.js, but we can't access those values directly
+ * because those components aren't Typescript.  (If you try, TranslationKey
+ * ends up just being defined as "string".)
+ */
+type TranslationKey =
+  | 'close.menu'
+  | 'open.menu'
+  | 'clear.all'
+  | 'clear.selection';
+
 type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
 export interface ComboBoxProps<ItemType>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
@@ -299,7 +312,7 @@ export interface ComboBoxProps<ItemType>
    * Specify a custom translation function that takes in a message identifier
    * and returns the localized string for the message
    */
-  translateWithId?: (id: string) => string;
+  translateWithId?: (id: TranslationKey) => string;
 
   /**
    * Specify whether the control is currently in warning state
@@ -661,7 +674,13 @@ const ComboBox = forwardRef(
           'aria-label': deprecatedAriaLabel || ariaLabel,
           ref: autoAlign ? refs.setFloating : null,
         }),
-      [autoAlign, deprecatedAriaLabel, ariaLabel]
+      [
+        autoAlign,
+        deprecatedAriaLabel,
+        ariaLabel,
+        getMenuProps,
+        refs.setFloating,
+      ]
     );
 
     return (

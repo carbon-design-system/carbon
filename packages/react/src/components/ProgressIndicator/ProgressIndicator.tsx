@@ -23,7 +23,12 @@ const defaultTranslations = {
   'carbon.progress-step.incomplete': 'Incomplete',
   'carbon.progress-step.current': 'Current',
   'carbon.progress-step.invalid': 'Invalid',
-};
+} as const;
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = keyof typeof defaultTranslations;
 
 function translateWithId(messageId) {
   return defaultTranslations[messageId];
@@ -225,7 +230,7 @@ export interface ProgressStepProps {
    * Optional method that takes in a message id and returns an
    * internationalized string.
    */
-  translateWithId?: (id: string) => string;
+  translateWithId?: (id: TranslationKey) => string;
 }
 
 function ProgressStep({

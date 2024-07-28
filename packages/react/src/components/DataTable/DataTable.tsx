@@ -49,7 +49,12 @@ const translationKeys = {
   unselectAll: 'carbon.table.all.unselect',
   selectRow: 'carbon.table.row.select',
   unselectRow: 'carbon.table.row.unselect',
-};
+} as const;
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = (typeof translationKeys)[keyof typeof translationKeys];
 
 const defaultTranslations = {
   [translationKeys.expandAll]: 'Expand all rows',
@@ -243,7 +248,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]> {
     }
   ) => number;
   stickyHeader?: boolean;
-  translateWithId?: (id: string) => string;
+  translateWithId?: (id: TranslationKey) => string;
   useStaticWidth?: boolean;
   useZebraStyles?: boolean;
 }

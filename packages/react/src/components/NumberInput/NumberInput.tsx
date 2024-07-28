@@ -26,7 +26,12 @@ import { Text } from '../Text';
 export const translationIds = {
   'increment.number': 'increment.number',
   'decrement.number': 'decrement.number',
-};
+} as const;
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = keyof typeof translationIds;
 
 const defaultTranslations = {
   [translationIds['increment.number']]: 'Increment number',
@@ -179,7 +184,7 @@ export interface NumberInputProps
   /**
    * Provide custom text for the component for each translation id
    */
-  translateWithId?: (id: string) => string;
+  translateWithId?: (id: TranslationKey) => string;
 
   /**
    * Specify the value of the input
