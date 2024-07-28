@@ -116,8 +116,10 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
     },
     ref
   ) => {
+    // These are provided by the parent TreeView component
     const depth = propDepth as number;
     const selected = propSelected as (string | number)[];
+
     const enableTreeviewControllable = useFeatureFlag(
       'enable-treeview-controllable'
     );
@@ -141,7 +143,6 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
       if (React.isValidElement(node)) {
         return React.cloneElement(node, {
           active,
-          // @ts-ignore
           depth: depth + 1,
           disabled: disabled || node.props.disabled,
           onTreeSelect,
