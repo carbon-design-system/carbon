@@ -45,6 +45,7 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useFloating, flip, autoUpdate } from '@floating-ui/react';
+import { InternationalProps } from '../../types/common';
 
 const {
   InputBlur,
@@ -144,7 +145,8 @@ type TranslationKey =
 
 type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
 export interface ComboBoxProps<ItemType>
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
+    InternationalProps<TranslationKey> {
   /**
    * Specify whether or not the ComboBox should allow a value that is
    * not in the list to be entered in the input
@@ -307,12 +309,6 @@ export interface ComboBoxProps<ItemType>
    * combobox via ARIA attributes.
    */
   titleText?: ReactNode;
-
-  /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
-   */
-  translateWithId?: (id: TranslationKey) => string;
 
   /**
    * Specify whether the control is currently in warning state

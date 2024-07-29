@@ -15,6 +15,7 @@ import {
 } from '@carbon/icons-react';
 import { IconButton } from '../IconButton';
 import { usePrefix } from '../../internal/usePrefix';
+import { InternationalProps } from '../../types/common';
 
 const translationIds = {
   'carbon.pagination-nav.next': 'Next',
@@ -122,7 +123,10 @@ function DirectionButton({
   );
 }
 
-interface PaginationItemProps {
+interface PaginationItemProps
+  extends InternationalProps<
+    'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
+  > {
   /**
    * Whether or not this is the currently active page.
    */
@@ -137,14 +141,6 @@ interface PaginationItemProps {
    * The page number this item represents.
    */
   page?: number;
-
-  /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
-   */
-  translateWithId?: (
-    id: 'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
-  ) => string;
 }
 
 function PaginationItem({
@@ -177,7 +173,10 @@ function PaginationItem({
   );
 }
 
-interface PaginationOverflowProps {
+interface PaginationOverflowProps
+  extends InternationalProps<
+    'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
+  > {
   /**
    * How many items to display in this overflow.
    */
@@ -198,14 +197,6 @@ interface PaginationOverflowProps {
    * Set this to true if you are having performance problems with large data sets.
    */
   disableOverflow?: boolean;
-
-  /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
-   */
-  translateWithId?: (
-    id: 'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
-  ) => string;
 }
 
 function PaginationOverflow({
@@ -287,7 +278,8 @@ function PaginationOverflow({
 }
 
 interface PaginationNavProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, 'onChange'> {
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'onChange'>,
+    InternationalProps<TranslationKey> {
   /**
    * Additional CSS class names.
    */
@@ -323,12 +315,6 @@ interface PaginationNavProps
    * The total number of items.
    */
   totalItems?: number;
-
-  /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
-   */
-  translateWithId?: (id: TranslationKey) => string;
 }
 
 const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(

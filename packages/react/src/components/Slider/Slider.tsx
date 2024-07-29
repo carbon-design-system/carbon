@@ -29,6 +29,7 @@ import {
   UpperHandle,
   UpperHandleFocus,
 } from './SliderHandles';
+import { InternationalProps } from '../../types/common';
 
 const ThumbWrapper = ({
   hasTooltip = false,
@@ -124,11 +125,10 @@ enum HandlePosition {
 }
 
 type ExcludedAttributes = 'onChange' | 'onBlur';
+
 export interface SliderProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    ExcludedAttributes
-  > {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
+    InternationalProps<TranslationKey, { correctedValue?: string }> {
   /**
    * The `ariaLabel` for the `<input>`.
    */
@@ -276,16 +276,6 @@ export interface SliderProps
    * which will be `(max - min) / stepMultiplier`.
    */
   stepMultiplier?: number;
-
-  /**
-   * Supply a method to translate internal strings with your i18n tool of
-   * choice. Translation keys are available on the `translationIds` field for
-   * this component.
-   */
-  translateWithId?: (
-    translationId: TranslationKey,
-    translationState: { correctedValue?: string }
-  ) => string;
 
   /**
    * The value of the slider. When there are two handles, value is the lower

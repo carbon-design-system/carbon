@@ -37,6 +37,7 @@ import TableToolbarAction from './TableToolbarAction';
 import TableToolbarContent from './TableToolbarContent';
 import TableToolbarSearch from './TableToolbarSearch';
 import TableToolbarMenu from './TableToolbarMenu';
+import { InternationalProps } from '../../types/common';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -216,7 +217,8 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   radio: boolean | undefined;
 }
 
-export interface DataTableProps<RowType, ColTypes extends any[]> {
+export interface DataTableProps<RowType, ColTypes extends any[]>
+  extends InternationalProps<TranslationKey> {
   children?: (
     renderProps: DataTableRenderProps<RowType, ColTypes>
   ) => React.ReactElement;
@@ -248,7 +250,6 @@ export interface DataTableProps<RowType, ColTypes extends any[]> {
     }
   ) => number;
   stickyHeader?: boolean;
-  translateWithId?: (id: TranslationKey) => string;
   useStaticWidth?: boolean;
   useZebraStyles?: boolean;
 }

@@ -23,6 +23,7 @@ import {
 } from '@floating-ui/react';
 import mergeRefs from '../../tools/mergeRefs';
 import { MenuAlignment } from '../MenuButton';
+import { InternationalProps } from '../../types/common';
 
 const defaultTranslations = {
   'carbon.combo-button.additional-actions': 'Additional actions',
@@ -37,7 +38,7 @@ function defaultTranslateWithId(messageId: string) {
   return defaultTranslations[messageId];
 }
 
-interface ComboButtonProps {
+interface ComboButtonProps extends InternationalProps<TranslationKey> {
   /**
    * A collection of `MenuItems` to be rendered as additional actions for this `ComboButton`.
    */
@@ -77,12 +78,6 @@ interface ComboButtonProps {
    * Specify how the trigger tooltip should be aligned.
    */
   tooltipAlignment?: React.ComponentProps<typeof IconButton>['align'];
-
-  /**
-   * Optional method that takes in a message `id` and returns an
-   * internationalized string.
-   */
-  translateWithId?: (id: TranslationKey) => string;
 }
 
 const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(

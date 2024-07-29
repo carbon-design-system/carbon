@@ -17,6 +17,7 @@ import {
 } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
+import { InternationalProps } from '../../types/common';
 
 const defaultTranslations = {
   'carbon.progress-step.complete': 'Complete',
@@ -161,7 +162,7 @@ ProgressIndicator.propTypes = {
   vertical: PropTypes.bool,
 };
 
-export interface ProgressStepProps {
+export interface ProgressStepProps extends InternationalProps<TranslationKey> {
   /**
    * Provide an optional className to be applied to the containing `<li>` node
    */
@@ -225,12 +226,6 @@ export interface ProgressStepProps {
    * The ID of the tooltip content.
    */
   tooltipId?: string;
-
-  /**
-   * Optional method that takes in a message id and returns an
-   * internationalized string.
-   */
-  translateWithId?: (id: TranslationKey) => string;
 }
 
 function ProgressStep({

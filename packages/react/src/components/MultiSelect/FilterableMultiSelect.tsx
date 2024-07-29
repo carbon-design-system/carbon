@@ -37,7 +37,10 @@ import {
   type MultiSelectSortingProps,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
-import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import ListBox, {
+  ListBoxMenuIconTranslationKey,
+  PropTypes as ListBoxPropTypes,
+} from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { defaultItemToString } from './tools/itemToString';
@@ -54,6 +57,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { InternationalProps } from '../../types/common';
 
 const {
   InputBlur,
@@ -95,7 +99,8 @@ type TranslationKey =
   | 'clear.selection';
 
 export interface FilterableMultiSelectProps<ItemType>
-  extends MultiSelectSortingProps<ItemType> {
+  extends MultiSelectSortingProps<ItemType>,
+    InternationalProps<TranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
    * @deprecated
@@ -274,14 +279,6 @@ export interface FilterableMultiSelectProps<ItemType>
    * combobox via ARIA attributes.
    */
   titleText?: ReactNode;
-
-  /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId?(
-    messageId: TranslationKey,
-    args?: Record<string, unknown>
-  ): string;
 
   type?: 'default' | 'inline';
 

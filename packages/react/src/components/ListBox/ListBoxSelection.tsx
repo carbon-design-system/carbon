@@ -11,8 +11,10 @@ import PropTypes from 'prop-types';
 import { Close } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { KeyboardEvent, MouseEvent } from 'react';
+import { InternationalProps } from '../../types/common';
 
-export interface ListBoxSelectionProps {
+export interface ListBoxSelectionProps
+  extends InternationalProps<TranslationKey> {
   /**
    * Specify a function to be invoked when a user interacts with the clear
    * selection element.
@@ -44,16 +46,6 @@ export interface ListBoxSelectionProps {
    * whether the selection should display a badge or a single clear icon.
    */
   selectionCount?: number;
-
-  /**
-   * i18n hook used to provide the appropriate description for the given menu
-   * icon. This function takes in an id defined in `translationIds` and should
-   * return a string message for that given message id.
-   */
-  translateWithId?(
-    messageId: TranslationKey,
-    args?: Record<string, unknown>
-  ): string;
 }
 
 export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>;
