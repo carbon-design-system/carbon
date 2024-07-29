@@ -437,6 +437,54 @@ const ComboBox = forwardRef(
     const [doneInitialSelectedItem, setDoneInitialSelectedItem] =
       useState(false);
     const savedOnInputChange = useRef(onInputChange);
+    const [typeaheadText, setTypeaheadText] = useState('');
+    const [cursorPosition, setCursorPosition] = useState(0);
+
+    useEffect(() => {
+      const getTypeaheadSuggestion = (input: string) => {
+        if (!autocomplete || !input) {
+          return '';
+        }
+
+        const filteredItems = items.filter((item) =>
+          autocompleteCustomFilter({
+            item: itemToString(item),
+            inputValue: input,
+          })
+        );
+
+        if (filteredItems.length > 0) {
+          const suggestion = itemToString(filteredItems[0]);
+          return suggestion.slice(input.length);
+        }
+        return '';
+      };
+
+      if (autocomplete) {
+        const suggestion = getTypeaheadSuggestion(inputValue);
+        setTypeaheadText(suggestion);
+      }
+    }, [inputValue, autocomplete, items, itemToString]);
+
+    // Modify getInputProps to include custom handlers
+    // const getCustomInputProps = (downshiftGetInputProps) => {
+    //   const inputProps = downshiftGetInputProps();
+    //   return {
+    //     ...inputProps,
+    //     onKeyDown: (event: KeyboardEvent<HTMLInputElement>) => {
+    //       inputProps.onKeyDown(event);
+    //       if (autocomplete && event.key === 'Tab' && typeaheadText) {
+    //         event.preventDefault();
+    //         setInputValue((prevValue) => prevValue + typeaheadText);
+    //         setTypeaheadText('');
+    //       }
+    //     },
+    //     onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+    //       inputProps.onChange(event);
+    //       setCursorPosition(event.target.selectionStart || 0);
+    //     },
+    //   };
+    // };
 
     if (!doneInitialSelectedItem || prevSelectedItem !== selectedItemProp) {
       setDoneInitialSelectedItem(true);
@@ -789,7 +837,7 @@ const ComboBox = forwardRef(
           warnText={warnText}
           warnTextId={warnTextId}>
           <div className={`${prefix}--list-box__field`}>
-            <input
+            {/* <input
               disabled={disabled}
               className={inputClasses}
               type="text"
@@ -874,7 +922,104 @@ const ComboBox = forwardRef(
               {...readOnlyEventHandlers}
               readOnly={readOnly}
               aria-describedby={ariaDescribedBy}
+            /> */}
+            <input
+              {...getInputProps({
+                'aria-controls': isOpen ? undefined : menuProps.id,
+                placeholder,
+                ref: mergeRefs(textInput, ref),
+                onKeyDown: (
+                  event: KeyboardEvent<HTMLInputElement> & {
+                    preventDownshiftDefault: boolean;
+                    target: {
+                      value: string;
+                      setSelectionRange: (start: number, end: number) => void;
+                    };
+                  }
+                ): void => {
+                  if (match(event, keys.Space)) {
+                    event.stopPropagation();
+                  }
+                  if (
+                    match(event, keys.Enter) &&
+                    (!inputValue || allowCustomValue)
+                  ) {
+                    toggleMenu();
+                    if (highlightedIndex !== -1) {
+                      selectItem(
+                        filterItems(items, itemToString, inputValue)[
+                          highlightedIndex
+                        ]
+                      );
+                    }
+                    event.preventDownshiftDefault = true;
+                    event?.persist?.();
+                  }
+                  if (match(event, keys.Escape) && inputValue) {
+                    if (event.target === textInput.current && isOpen) {
+                      toggleMenu();
+                      event.preventDownshiftDefault = true;
+                      event?.persist?.();
+                    }
+                  }
+                  if (match(event, keys.Home) && event.code !== 'Numpad7') {
+                    event.target.setSelectionRange(0, 0);
+                  }
+                  if (match(event, keys.End) && event.code !== 'Numpad1') {
+                    event.target.setSelectionRange(
+                      event.target.value.length,
+                      event.target.value.length
+                    );
+                  }
+                  if (event.altKey && event.key == 'ArrowDown') {
+                    event.preventDownshiftDefault = true;
+                    if (!isOpen) {
+                      toggleMenu();
+                    }
+                  }
+                  if (event.altKey && event.key == 'ArrowUp') {
+                    event.preventDownshiftDefault = true;
+                    if (isOpen) {
+                      toggleMenu();
+                    }
+                  }
+                  // Add typeahead completion on Tab
+                  if (autocomplete && event.key === 'Tab' && typeaheadText) {
+                    event.preventDefault();
+                    setInputValue((prevValue) => prevValue + typeaheadText);
+                    setTypeaheadText('');
+                  }
+                },
+                onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+                  setCursorPosition(event.target.selectionStart || 0);
+                },
+              })}
+              disabled={disabled}
+              className={inputClasses}
+              type="text"
+              tabIndex={0}
+              aria-haspopup="listbox"
+              title={textInput?.current?.value}
+              {...rest}
+              {...readOnlyEventHandlers}
+              readOnly={readOnly}
+              aria-describedby={ariaDescribedBy}
             />
+            {autocomplete && typeaheadText && (
+              <div
+                // eslint-disable-next-line react/forbid-dom-props
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  pointerEvents: 'none',
+                  color: 'gray',
+                  zIndex: 1,
+                  paddingLeft: `${cursorPosition * 8}px`, // Adjust based on your font
+                }}>
+                {inputValue + typeaheadText}
+              </div>
+            )}
 
             {invalid && (
               <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
