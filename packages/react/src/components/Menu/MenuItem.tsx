@@ -238,7 +238,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       <FloatingFocusManager
         context={floatingContext}
         order={['reference', 'floating']}
-        visuallyHiddenDismiss>
+        modal={false}>
         <li
           role="menuitem"
           {...rest}

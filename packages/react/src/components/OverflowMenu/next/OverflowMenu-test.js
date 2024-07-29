@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { act } from 'react';
 import { OverflowMenu } from '.';
 import { MenuItem } from '../../Menu';
 import { render, screen } from '@testing-library/react';
@@ -47,9 +47,8 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
         </MenuItem>
       </OverflowMenu>
     );
-    const overFlowButton = screen.getByRole('button');
-    await userEvent.click(overFlowButton);
-    expect(overFlowButton).toHaveAttribute('aria-expanded', 'true');
+    await userEvent.type(screen.getByRole('button'), 'enter');
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
     // eslint-disable-next-line testing-library/no-node-access
     const ul = document.querySelector('ul');
     expect(ul).toBeInTheDocument();
@@ -96,13 +95,17 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
         </MenuItem>
       </OverflowMenu>
     );
-    const overFlowButton = screen.getByRole('button');
-    await userEvent.click(overFlowButton);
-    const ul = document.querySelector('ul');
-    expect(ul).toBeInTheDocument();
-    expect(overFlowButton).toHaveAttribute('aria-expanded', 'true');
-    userEvent.click(document.body);
-    setTimeout(() => expect(ul).not.toBeInTheDocument(), 100);
+    await userEvent.type(screen.getByRole('button'), 'enter');
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+
+    await act(async () => {
+      await userEvent.click(document.body);
+    });
+
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
   });
 
   describe('supports props.menuAlignment', () => {
