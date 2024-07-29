@@ -772,6 +772,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         disabled={disabled}
         light={light}
         ref={ref}
+        id={id}
         invalid={invalid}
         invalidText={invalidText}
         warn={warn}
