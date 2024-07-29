@@ -553,6 +553,7 @@ const MultiSelect = React.forwardRef(
         selectedItems && selectedItems.length > 0,
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--multi-select--readonly`]: readOnly,
+      [`${prefix}--multi-select--selectall`]: hasSelectAll,
     });
 
     // needs to be capitalized for react to render it correctly
@@ -800,7 +801,6 @@ const MultiSelect = React.forwardRef(
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
                     disabled={itemProps['aria-disabled']}
-                    isSelectAll={item['selectAllFlag']}
                     {...itemProps}>
                     <div className={`${prefix}--checkbox-wrapper`}>
                       <Checkbox
