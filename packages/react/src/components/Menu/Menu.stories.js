@@ -49,6 +49,52 @@ export const Playground = (args) => {
 
   return (
     <Menu {...args} target={target} x={document?.dir === 'rtl' ? 250 : 0}>
+      <MenuItem label="Share with">
+        <MenuItemRadioGroup
+          label="Share with"
+          items={['None', 'Product team', 'Organization', 'Company']}
+          defaultSelectedItem="Product team"
+          onChange={radioOnChange}
+        />
+      </MenuItem>
+      <MenuItem label="Copy" shortcut="⌘C" onClick={itemOnClick} />
+      <MenuItem label="Paste" shortcut="⌘V" disabled onClick={itemOnClick} />
+      <MenuItemDivider />
+      <MenuItemGroup label="Font style">
+        <MenuItemSelectable
+          label="Bold"
+          defaultSelected
+          onChange={selectableOnChange}
+        />
+        <MenuItemSelectable label="Italic" onChange={selectableOnChange} />
+      </MenuItemGroup>
+      <MenuItemDivider />
+      <MenuItemRadioGroup
+        label="Text decoration"
+        items={['None', 'Overline', 'Line-through', 'Underline']}
+        defaultSelectedItem="None"
+        onChange={radioOnChange}
+      />
+      <MenuItemDivider />
+      <MenuItem
+        label="Delete"
+        shortcut="⌫"
+        kind="danger"
+        onClick={itemOnClick}
+      />
+    </Menu>
+  );
+};
+
+export const Test = (args) => {
+  const itemOnClick = action('onClick (MenuItem)');
+  const selectableOnChange = action('onChange (MenuItemSelectable)');
+  const radioOnChange = action('onChange (MenuItemRadioGroup)');
+
+  const target = document.getElementById('storybook-root');
+
+  return (
+    <Menu {...args} target={target} x={document?.dir === 'rtl' ? 250 : 0} open>
       <MenuItem label="Copy" shortcut="⌘C" onClick={itemOnClick} />
       <MenuItemDivider />
       <MenuItem label="Cut" shortcut="⌘X" onClick={itemOnClick}>
