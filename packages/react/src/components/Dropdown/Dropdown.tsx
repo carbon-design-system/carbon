@@ -6,7 +6,7 @@
  */
 
 import React, {
-  useRef,
+  // useRef,
   useContext,
   useState,
   FocusEvent,
@@ -47,7 +47,9 @@ import {
   flip,
   autoUpdate,
   size as floatingSize,
+  type Boundary,
 } from '@floating-ui/react';
+// import {hide} from '@floating-ui/dom';
 
 const {
   ToggleButtonKeyDownArrowDown,
@@ -102,6 +104,11 @@ export interface DropdownProps<ItemType>
    * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
    */
   autoAlign?: boolean;
+
+  /**
+   * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlignBoundary?: Boundary;
 
   /**
    * Specify the direction of the dropdown. Can be either top or bottom.
@@ -250,6 +257,7 @@ const Dropdown = React.forwardRef(
   <ItemType,>(
     {
       autoAlign = false,
+      autoAlignBoundary,
       className: containerClassName,
       disabled = false,
       direction = 'bottom',
@@ -302,7 +310,9 @@ const Dropdown = React.forwardRef(
                   });
                 },
               }),
-              flip(),
+              flip({
+                boundary: autoAlignBoundary,
+              }),
             ],
             whileElementsMounted: autoUpdate,
           }
@@ -501,7 +511,7 @@ const Dropdown = React.forwardRef(
         getMenuProps({
           ref: autoAlign ? refs.setFloating : null,
         }),
-      [autoAlign]
+      [autoAlign, getMenuProps, refs.setFloating]
     );
 
     // Slug is always size `mini`
@@ -653,6 +663,21 @@ Dropdown.propTypes = {
    * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlignBoundary: PropTypes.oneOfType([
+    PropTypes.oneOf(['clippingAncestors']),
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.exact({
+      x: PropTypes.number,
+      y: PropTypes.number,
+      width: PropTypes.number,
+      height: PropTypes.number,
+    }),
+  ]),
 
   /**
    * Provide a custom className to be applied on the cds--dropdown node

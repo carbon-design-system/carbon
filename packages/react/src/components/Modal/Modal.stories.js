@@ -291,6 +291,7 @@ export const WithScrollingContent = () => {
 
 export const Playground = ({ numberOfButtons, ...args }) => {
   const [open, setOpen] = useState(true);
+  const [boundary, setBoundary] = useState();
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch modal</Button>
@@ -299,6 +300,7 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           action(e);
           setOpen(false);
         }}
+        ref={setBoundary}
         modalHeading="Add a custom domain"
         primaryButtonText="Add"
         secondaryButtonText="Cancel"
@@ -323,9 +325,53 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           <SelectItem value="us-east" text="US East" />
         </Select>
 
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
         <Dropdown
           autoAlign={true}
           id="default"
+          autoAlignBoundary={boundary}
           style={{ margin: '1rem 0' }}
           titleText="Dropdown Example of Floating ui"
           helperText="This is some helper text"
