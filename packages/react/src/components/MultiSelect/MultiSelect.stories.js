@@ -160,6 +160,8 @@ Playground.args = {
   clearSelectionDescription: 'Total items selected: ',
   useTitleInItem: false,
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
+  selectAll: false,
+  selectAllItemText: 'All options',
 };
 
 Playground.argTypes = {
@@ -421,9 +423,9 @@ export const SelectAll = () => {
         ]}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
-        hasSelectAll={true}
+        selectAll={true}
         onChange={onChange}
-        labelforSelectAll="All roles"
+        selectAllItemText="All roles"
       />
     </div>
   );

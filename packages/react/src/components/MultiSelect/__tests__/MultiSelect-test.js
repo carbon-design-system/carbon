@@ -580,7 +580,7 @@ describe('MultiSelect', () => {
           id="test"
           label={'test-label'}
           items={items}
-          hasSelectAll={true}
+          selectAll={true}
         />
       );
 

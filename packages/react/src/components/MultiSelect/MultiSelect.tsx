@@ -142,16 +142,6 @@ export interface MultiSelectProps<ItemType>
   downshiftProps?: Partial<UseSelectProps<ItemType>>;
 
   /**
-   * experimental prop to Show/Hide All option
-   */
-  hasSelectAll?: boolean;
-
-  /**
-   * Provide Label for Select All option
-   */
-  labelforSelectAll?: string;
-
-  /**
    * Provide helper text that is used alongside the control label for
    * additional help
    */
@@ -245,6 +235,16 @@ export interface MultiSelectProps<ItemType>
   readOnly?: boolean;
 
   /**
+   * **Experimental**: Enable a Select All item in the list
+   */
+  selectAll?: boolean;
+
+  /**
+   * **Experimental**: Provide text for the Select All option in the list. Used when selectAll={true}.
+   */
+  selectAllItemText?: string;
+
+  /**
    * For full control of the selected items
    */
   selectedItems?: ItemType[];
@@ -333,16 +333,16 @@ const MultiSelect = React.forwardRef(
       readOnly,
       locale = 'en',
       slug,
-      hasSelectAll = false,
-      labelforSelectAll = 'All',
+      selectAll = false,
+      selectAllItemText = 'All',
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
-    if ((selected ?? []).length > 0 && hasSelectAll) {
+    if ((selected ?? []).length > 0 && selectAll) {
       console.warn(
-        'Warning: `hasSelectAll` should not be used when `selectedItems` is provided. Please pass either `hasSelectAll` or `selectedItems`, not both.'
+        'Warning: `selectAll` should not be used when `selectedItems` is provided. Please pass either `selectAll` or `selectedItems`, not both.'
       );
-      hasSelectAll = false;
+      selectAll = false;
     }
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
@@ -356,7 +356,7 @@ const MultiSelect = React.forwardRef(
 
     const selectAllOption = {
       id: 'select-all-option',
-      text: labelforSelectAll,
+      text: selectAllItemText,
       selectAllFlag: true,
     };
 
@@ -411,7 +411,7 @@ const MultiSelect = React.forwardRef(
       });
     }, [items]);
 
-    const itemsWithSelectAll = hasSelectAll
+    const itemsWithSelectAll = selectAll
       ? [selectAllOption, ...filteredItems]
       : filteredItems;
 
@@ -424,7 +424,7 @@ const MultiSelect = React.forwardRef(
       initialSelectedItems,
       onChange,
       selectedItems: selected,
-      hasSelectAll,
+      selectAll,
       itemsWithSelectAll,
     });
 
@@ -553,7 +553,7 @@ const MultiSelect = React.forwardRef(
         selectedItems && selectedItems.length > 0,
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--multi-select--readonly`]: readOnly,
-      [`${prefix}--multi-select--selectall`]: hasSelectAll,
+      [`${prefix}--multi-select--selectall`]: selectAll,
     });
 
     // needs to be capitalized for react to render it correctly
@@ -896,11 +896,6 @@ MultiSelect.propTypes = {
   downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
 
   /**
-   * experimental prop to Show/Hide All option
-   */
-  hasSelectAll: PropTypes.bool,
-
-  /**
    * Provide helper text that is used alongside the control label for
    * additional help
    */
@@ -958,11 +953,6 @@ MultiSelect.propTypes = {
   label: PropTypes.node.isRequired,
 
   /**
-   * Provide Label for Select All option.
-   */
-  labelforSelectAll: PropTypes.string,
-
-  /**
    * `true` to use the light version.
    */
   light: deprecate(
@@ -998,6 +988,16 @@ MultiSelect.propTypes = {
    * Whether or not the Dropdown is readonly
    */
   readOnly: PropTypes.bool,
+
+  /**
+   * **Experimental**: Enable a Select All item in the list
+   */
+  selectAll: PropTypes.bool,
+
+  /**
+   * **Experimental**: Provide text for the Select All option in the list. Used when selectAll={true}.
+   */
+  selectAllItemText: PropTypes.string,
 
   /**
    * For full control of the selected items

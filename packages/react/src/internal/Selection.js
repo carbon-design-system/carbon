@@ -30,7 +30,7 @@ export function useSelection({
   onChange,
   initialSelectedItems = [],
   selectedItems: controlledItems,
-  hasSelectAll = false,
+  selectAll = false,
   itemsWithSelectAll = [],
 }) {
   const isMounted = useRef(false);
@@ -71,7 +71,7 @@ export function useSelection({
           newSelectedItems = selectedItems.concat(item);
           // checking if all items are selected then We should select mark the 'select All' option as well
           if (
-            hasSelectAll &&
+            selectAll &&
             itemsWithSelectAll.length - 1 ===
               newSelectedItems.length + disabledItems.length
           ) {
@@ -93,7 +93,7 @@ export function useSelection({
         selectedItems: newSelectedItems,
       });
     },
-    [disabled, selectedItems, itemsWithSelectAll, hasSelectAll, isControlled]
+    [disabled, selectedItems, itemsWithSelectAll, selectAll, isControlled]
   );
 
   const clearSelection = useCallback(() => {
