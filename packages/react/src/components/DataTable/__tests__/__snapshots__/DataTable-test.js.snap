@@ -10,20 +10,20 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
     >
       <h4
         class="cds--data-table-header__title"
-        id="tc-:r63:-title"
+        id="tc-:r71:-title"
       >
         DataTable with selection
       </h4>
       <p
         class="cds--data-table-header__description"
-        id="tc-:r63:-description"
+        id="tc-:r71:-description"
       />
     </div>
     <div
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:r63:-title"
+        aria-labelledby="tc-:r71:-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -182,20 +182,20 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
     >
       <h4
         class="cds--data-table-header__title"
-        id="tc-:r5t:-title"
+        id="tc-:r6o:-title"
       >
         DataTable with selection
       </h4>
       <p
         class="cds--data-table-header__description"
-        id="tc-:r5t:-description"
+        id="tc-:r6o:-description"
       />
     </div>
     <div
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:r5t:-title"
+        aria-labelledby="tc-:r6o:-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
