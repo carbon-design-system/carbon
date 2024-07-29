@@ -28,6 +28,7 @@ import {
   useInteractions,
   safePolygon,
   autoUpdate,
+  offset,
   FloatingFocusManager,
 } from '@floating-ui/react';
 import { CaretRight, CaretLeft, Checkmark } from '@carbon/icons-react';
@@ -113,6 +114,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       onOpenChange: setSubmenuOpen,
       placement: rtl ? 'left-start' : 'right-start',
       whileElementsMounted: autoUpdate,
+      middleware: [offset({ mainAxis: -6, crossAxis: -6 })],
     });
     const { getReferenceProps, getFloatingProps } = useInteractions([
       useHover(floatingContext, {

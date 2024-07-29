@@ -98,7 +98,9 @@ export const Test = (args) => {
       <MenuItem label="Copy" shortcut="⌘C" onClick={itemOnClick} />
       <MenuItemDivider />
       <MenuItem label="Cut" shortcut="⌘X" onClick={itemOnClick}>
-        <MenuItem label="Cuts" shortcut="⌘ssX" onClick={itemOnClick} />
+        <MenuItemSelectable label="Cut" onChange={selectableOnChange} />
+        <MenuItemSelectable label="Copy" onChange={selectableOnChange} />
+        <MenuItemSelectable label="Italic" onChange={selectableOnChange} />
       </MenuItem>
       <MenuItem label="Share with">
         <MenuItemRadioGroup
