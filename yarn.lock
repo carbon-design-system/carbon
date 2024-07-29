@@ -2079,6 +2079,7 @@ __metadata:
     prop-types: "npm:^15.7.2"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
+    react-fast-compare: "npm:^3.2.2"
     react-is: "npm:^18.2.0"
     remark-gfm: "npm:^3.0.1"
     requestanimationframe: "npm:^0.0.23"
@@ -23205,6 +23206,13 @@ __metadata:
     react: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
     react-dom: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
   checksum: 10/9a874b2f16b4624a72c4b766b096d693a382b9dc7f2264f802395852ae3435ccde8e9e47bbe45cf5f30eba70f8126af6aca832190e285b0096af3ecade994df1
+  languageName: node
+  linkType: hard
+
+"react-fast-compare@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "react-fast-compare@npm:3.2.2"
+  checksum: 10/a6826180ba75cefba1c8d3ac539735f9b627ca05d3d307fe155487f5d0228d376dac6c9708d04a283a7b9f9aee599b637446635b79c8c8753d0b4eece56c125c
   languageName: node
   linkType: hard
 
