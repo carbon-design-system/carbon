@@ -61,7 +61,6 @@
     "invariant": "^2.2.3",
     "lodash.debounce": "^4.0.8",
     "lodash.findlast": "^4.5.0",
-    "lodash.isequal": "^4.5.0",
     "lodash.omit": "^4.5.0",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.7.2",
