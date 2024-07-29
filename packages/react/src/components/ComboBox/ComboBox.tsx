@@ -1017,7 +1017,7 @@ const ComboBox = forwardRef(
                   zIndex: 1,
                   paddingLeft: `${cursorPosition * 8}px`, // Adjust based on your font
                 }}>
-                {inputValue + typeaheadText}
+                {typeaheadText}
               </div>
             )}
 
