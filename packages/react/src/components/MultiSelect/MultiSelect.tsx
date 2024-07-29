@@ -357,7 +357,7 @@ const MultiSelect = React.forwardRef(
     const selectAllOption = {
       id: 'select-all-option',
       text: selectAllItemText,
-      selectAllFlag: true,
+      isSelectAll: true,
     };
 
     const { refs, floatingStyles, middlewareData } = useFloating(
@@ -686,7 +686,7 @@ const MultiSelect = React.forwardRef(
       selectedItems.map((item) => (item as selectedItemType)?.text);
 
     const selectedItemsWithoutSelectAll = selectedItems.filter(
-      (item: any) => !item.selectAllFlag
+      (item: any) => !item.isSelectAll
     );
 
     // Memoize the value of getMenuProps to avoid an infinite loop
@@ -782,7 +782,7 @@ const MultiSelect = React.forwardRef(
 
                 const isIndeterminate =
                   selectedItems.length !== 0 &&
-                  item['selectAllFlag'] &&
+                  item['isSelectAll'] &&
                   !isChecked;
 
                 const itemProps = getItemProps({
@@ -796,7 +796,7 @@ const MultiSelect = React.forwardRef(
                 return (
                   <ListBox.MenuItem
                     key={itemProps.id}
-                    isActive={isChecked && !item['selectAllFlag']}
+                    isActive={isChecked && !item['isSelectAll']}
                     aria-label={itemText}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}

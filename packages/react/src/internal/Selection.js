@@ -45,20 +45,22 @@ export function useSelection({
         return;
       }
 
-      const AllSelectableItems = itemsWithSelectAll.filter(
+      const allSelectableItems = itemsWithSelectAll.filter(
         (item) => !item.disabled
       );
-      const disabledItems = itemsWithSelectAll.filter((item) => item.disabled);
+      const disabledItemCount = itemsWithSelectAll.filter(
+        (item) => item.disabled
+      ).length;
 
       let newSelectedItems;
 
       //deselect all on click to All/indeterminate option
-      if (item && item.selectAllFlag && selectedItems.length > 0) {
+      if (item && item.isSelectAll && selectedItems.length > 0) {
         newSelectedItems = [];
       }
       //select all option
-      else if (item && item.selectAllFlag && selectedItems.length == 0) {
-        newSelectedItems = AllSelectableItems;
+      else if (item && item.isSelectAll && selectedItems.length == 0) {
+        newSelectedItems = allSelectableItems;
       } else {
         let selectedIndex;
         selectedItems.forEach((selectedItem, index) => {
@@ -73,14 +75,14 @@ export function useSelection({
           if (
             selectAll &&
             itemsWithSelectAll.length - 1 ===
-              newSelectedItems.length + disabledItems.length
+              newSelectedItems.length + disabledItemCount
           ) {
-            newSelectedItems = AllSelectableItems;
+            newSelectedItems = allSelectableItems;
           }
         } else {
           newSelectedItems = removeAtIndex(selectedItems, selectedIndex);
           newSelectedItems = newSelectedItems.filter(
-            (item) => !item.selectAllFlag
+            (item) => !item.isSelectAll
           );
         }
       }
