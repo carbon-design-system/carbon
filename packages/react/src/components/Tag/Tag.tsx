@@ -216,7 +216,6 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
 
   const labelClasses = classNames({
     [`${prefix}--tag__label`]: !isInteractiveTag,
-    [`${prefix}--tag--${type}`]: type && !isInteractiveTag,
   });
 
   return (

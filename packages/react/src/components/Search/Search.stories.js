@@ -28,22 +28,6 @@ export default {
   },
 };
 
-export const Test = () => {
-  const [isExpanded, setExpanded] = useState(false);
-
-  const handleToggleExpandClick = useCallback(() => {
-    setExpanded(!isExpanded);
-  }, [isExpanded]);
-
-  return (
-    <>
-      <div>isExpanded = {isExpanded.toString()}</div>
-      <ExpandableSearch isExpanded={isExpanded} />
-      <Button onClick={handleToggleExpandClick}>Toggle Expand</Button>
-    </>
-  );
-};
-
 export const Default = () => (
   <Search
     size="lg"
