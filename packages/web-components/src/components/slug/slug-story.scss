@@ -1,0 +1,120 @@
+/**
+* @license
+*
+* Copyright IBM Corp. 2019, 2024
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/config' as *;
+
+.slug-container {
+  display: flex;
+  align-items: flex-start;
+  margin-block-end: $spacing-12;
+
+  > * {
+    margin-inline-start: $spacing-07;
+  }
+}
+
+.slug-container-example.centered {
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  inline-size: calc(100vw - 84px);
+}
+
+p {
+  @include type-style('body-compact-01');
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.secondary {
+  color: $text-secondary;
+}
+
+h1 {
+  margin-block-end: $spacing-05;
+}
+
+hr {
+  border: 0;
+  background: $border-subtle;
+  block-size: 1px;
+  margin-block: $spacing-07;
+}
+
+div #{$prefix}-selectable-tile::-moz-list-bullet {
+  margin-block-end: $spacing-05;
+}
+
+.slug-tile-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+
+  #{$prefix}-expandable-tile,
+  #{$prefix}-selectable-tile,
+  #{$prefix}-clickable-tile,
+  #{$prefix}-tile {
+    margin-block-end: $spacing-09;
+    margin-inline-end: $spacing-09;
+    max-inline-size: 320px;
+  }
+
+  #{$prefix}-expandable-tile,
+  #{$prefix}-selectable-tile .tile-container,
+  #{$prefix}-clickable-tile .tile-container,
+  #{$prefix}-tile {
+    padding-block-end: 90px;
+  }
+}
+
+.slug-tile-container h4 {
+  margin-block-end: $spacing-05;
+}
+
+.slug-tile-container .ai-data {
+  display: flex;
+  padding: $spacing-05 0;
+  margin-block-start: $spacing-05;
+}
+
+.slug-tile-container .data-container {
+  inline-size: 126px;
+}
+
+.slug-tile-container .data-container:first-of-type {
+  margin-inline-end: $spacing-05;
+}
+
+.slug-tile-container p {
+  @include type-style('body-01');
+}
+
+.slug-tile-container .data-container p {
+  @include type-style('label-02');
+}
+
+.slug-tile-container #{$prefix}-tile-below-the-fold-content {
+  padding-block-start: $spacing-05;
+}
+
+.slug-tile-container #{$prefix}-tile-below-the-fold-content p {
+  @include type-style('label-01');
+
+  margin: $spacing-03 0 50px;
+}
+
+#{$prefix}-radio-button-group:not(:first-of-type),
+#{$prefix}-checkbox-group:not(:first-of-type) {
+  margin-block-start: $spacing-07;
+}

@@ -1,0 +1,17 @@
+{
+  "name": "carbon-web-components-next-getting-started",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample project for getting started with the Web Components from the Carbon Design System with Next.js.",
+  "license": "Apache-2",
+  "scripts": {
+    "start": "echo 'Running Next in Node 18.15.0+. If you have such Node version in your system just `next` here will work.' && NODE_OPTIONS=--openssl-legacy-provider ./node_modules/node/node_modules/.bin/node ./node_modules/.bin/next"
+  },
+  "dependencies": {
+    "@carbon/web-components": "latest",
+    "next": "^10.0.0",
+    "node": "^18.15.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  }
+}

@@ -1,0 +1,700 @@
+<!--
+@license
+Copyright IBM Corp. 2020
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/themes.css" /> 
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/accordion.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/breadcrumb.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/button.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/checkbox.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/code-snippet.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/combo-box.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/content-switcher.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/copy-button.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/data-table.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/date-picker.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/dropdown.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/file-uploader.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/floating-menu.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/form.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/inline-loading.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/input.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/layer.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/link.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/list.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/loading.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/modal.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/multi-select.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/notification.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/number-input.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/overflow-menu.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/pagination.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/progress-indicator.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/radio-button.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/search.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/select.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/skeleton-placeholder.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/skeleton-text.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/skip-to-content.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/slider.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/structured-list.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/tabs.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/tag.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/textarea.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/tile.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/toggle.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/tooltip.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/ui-shell.min.js"></script>
+
+  <style>
+    h3 {
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body class="cds-theme-zone-white">
+<cds-header aria-label="IBM Platform Name">
+  <cds-header-menu-button
+    button-label-active="Close menu"
+    button-label-inactive="Open menu"
+  ></cds-header-menu-button>
+  <cds-header-name href="javascript:void 0" prefix="IBM">[Platform]</cds-header-name>
+  <cds-header-nav menu-bar-label="IBM [Platform]">
+    <cds-header-nav-item href="javascript:void 0">Link 1</cds-header-nav-item>
+    <cds-header-nav-item href="javascript:void 0">Link 2</cds-header-nav-item>
+    <cds-header-nav-item href="javascript:void 0">Link 3</cds-header-nav-item>
+    <cds-header-menu menu-label="Link 4" trigger-content="Link 4">
+      <cds-header-menu-item href="javascript:void 0">Sub-link 1</cds-header-menu-item>
+      <cds-header-menu-item href="javascript:void 0">Sub-link 2</cds-header-menu-item>
+      <cds-header-menu-item href="javascript:void 0">Sub-link 3</cds-header-menu-item>
+    </cds-header-menu>
+  </cds-header-nav>
+</cds-header>
+<div class="cds--grid">
+  <div class="cds--row">
+    <div class="cds--col-sm-4 cds--col-lg-12" style="margin: 6rem 0;">
+      <h3>cds-accordion</h3>
+
+      <cds-accordion>
+        <cds-accordion-item title="Section 1 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </cds-accordion-item>
+        <cds-accordion-item title="Section 2 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </cds-accordion-item>
+        <cds-accordion-item title="Section 3 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </cds-accordion-item>
+        <cds-accordion-item title="Section 4 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </cds-accordion-item>
+      </cds-accordion>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-breadcrumb</h3>
+
+      <cds-breadcrumb>
+        <cds-breadcrumb-item>
+          <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
+        </cds-breadcrumb-item>
+        <cds-breadcrumb-item>
+          <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+        </cds-breadcrumb-item>
+        <cds-breadcrumb-item>
+          <cds-breadcrumb-link href="#">Breadcrumb 3</cds-breadcrumb-link>
+        </cds-breadcrumb-item>
+        <cds-breadcrumb-item>
+          <cds-breadcrumb-link>Breadcrumb 4</cds-breadcrumb-link>
+        </cds-breadcrumb-item>
+      </cds-breadcrumb>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-button</h3>
+
+      <cds-button href="https://www.ibm.com">
+        Button
+      </cds-button>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-checkbox</h3>
+
+      <cds-checkbox label-text="Lorem Ipsum"></cds-checkbox>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-code-snippet</h3>
+
+      <cds-code-snippet>
+        node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, veritatis voluptate id incidunt molestiae
+        officia possimus, quasi itaque alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae
+        laboriosam!
+      </cds-code-snippet>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-combo-box</h3>
+
+      <cds-combo-box
+        helper-text="Optional helper text"
+        label-text="Combo box title"
+        trigger-content="Filter..."
+      >
+        <cds-combo-box-item value="all">Option 1</cds-combo-box-item>
+        <cds-combo-box-item value="cloudFoundry">Option 2</cds-combo-box-item>
+        <cds-combo-box-item value="staging">Option 3</cds-combo-box-item>
+        <cds-combo-box-item value="dea">Option 4</cds-combo-box-item>
+        <cds-combo-box-item value="router">Option 5</cds-combo-box-item>
+        <cds-combo-box-item value="support">Option 6</cds-combo-box-item>
+        <cds-combo-box-item value="services">Option 7</cds-combo-box-item>
+        <cds-combo-box-item value="products">Option 8</cds-combo-box-item>
+      </cds-combo-box>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-content-switcher</h3>
+
+      <cds-content-switcher>
+        <cds-content-switcher-item value="all">Option 1</cds-content-switcher-item>
+        <cds-content-switcher-item value="cloudFoundry" disabled>Option 2</cds-content-switcher-item>
+        <cds-content-switcher-item value="staging">Option 3</cds-content-switcher-item>
+        <cds-content-switcher-item value="dea">Option 4</cds-content-switcher-item>
+        <cds-content-switcher-item value="router">Option 5</cds-content-switcher-item>
+      </cds-content-switcher>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-copy-button</h3>
+
+      <div style="position: relative; width: 100%; z-index: 0; padding: 3rem; border: 1px solid black;">
+        <cds-copy-button
+          button-assistive-text="Copy to clipboard"
+          feedback-text="Copied!"
+        ></cds-copy-button>
+      </div>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-data-table</h3>
+
+      <cds-table>
+        <cds-table-head>
+          <cds-table-header-row>
+            <cds-table-header-cell>Foo</cds-table-header-cell>
+            <cds-table-header-cell>Bar</cds-table-header-cell>
+            <cds-table-header-cell>Baz</cds-table-header-cell>
+          </cds-table-header-row>
+        </cds-table-head>
+        <cds-table-body>
+          <cds-table-row>
+            <cds-table-cell>Foo1</cds-table-cell>
+            <cds-table-cell>Bar1</cds-table-cell>
+            <cds-table-cell>Baz1</cds-table-cell>
+          </cds-table-row>
+          <cds-table-row>
+            <cds-table-cell>Foo2</cds-table-cell>
+            <cds-table-cell>Bar2</cds-table-cell>
+            <cds-table-cell>Baz2</cds-table-cell>
+          </cds-table-row>
+          <cds-table-row>
+            <cds-table-cell>Foo3</cds-table-cell>
+            <cds-table-cell>Bar3</cds-table-cell>
+            <cds-table-cell>Baz3</cds-table-cell>
+          </cds-table-row>
+        </cds-table-body>
+      </cds-table>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-date-picker</h3>
+
+      <cds-date-picker>
+        <cds-date-picker-input
+          kind="single"
+          label-text="Date Picker label"
+          placeholder="mm/dd/yyyy"
+        >
+        </cds-date-picker-input>
+      </cds-date-picker>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-dropdown</h3>
+
+      <cds-dropdown value="bar">
+        <cds-dropdown-item value="foo">Foo</cds-dropdown-item>
+        <cds-dropdown-item value="bar">Bar</cds-dropdown-item>
+        <cds-dropdown-item value="baz">Baz</cds-dropdown-item>
+      </cds-dropdown>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-file-uploader</h3>
+
+      <cds-file-uploader helper-text="Only .jpg and .png files. 500kb max file size" label-text="Account photo">
+        <cds-file-drop-container
+          accept="image/jpeg image/png"
+          multiple="true"
+        >
+          Drag and drop files here or click to upload
+        </cds-file-drop-container>
+      </cds-file-uploader>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-inline-loading</h3>
+
+      <cds-inline-loading status="active">Loading data...</cds-inline-loading>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-form-item</h3>
+
+      <cds-form-item>
+        <cds-text-input>
+          <span slot="label-text">Label text</span>
+          <span slot="helper-text">Optional helper text</span>
+          <span slot="validity-message">Something isn't right</span>
+        </cds-text-input>
+      </cds-form-item>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-link</h3>
+
+      <cds-link href="https://www.ibm.com">
+        Link
+      </cds-link>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-ordered-list</h3>
+
+      <cds-ordered-list>
+        <cds-list-item>
+          Ordered List level 1
+          <cds-ordered-list>
+            <cds-list-item>Ordered List level 2</cds-list-item>
+            <cds-list-item>
+              Ordered List level 2
+              <cds-ordered-list>
+                <cds-list-item>Ordered List level 2</cds-list-item>
+                <cds-list-item>Ordered List level 2</cds-list-item>
+              </cds-ordered-list>
+            </cds-list-item>
+          </cds-ordered-list>
+        </cds-list-item>
+        <cds-list-item>Ordered List level 1</cds-list-item>
+        <cds-list-item>Ordered List level 1</cds-list-item>
+      </cds-ordered-list>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-unordered-list</h3>
+
+      <cds-unordered-list>
+        <cds-list-item>
+          Unordered List level 1
+          <cds-unordered-list>
+            <cds-list-item>Unordered List level 2</cds-list-item>
+            <cds-list-item>
+              Unordered List level 2
+              <cds-unordered-list>
+                <cds-list-item>Unordered List level 2</cds-list-item>
+                <cds-list-item>Unordered List level 2</cds-list-item>
+              </cds-unordered-list>
+            </cds-list-item>
+          </cds-unordered-list>
+        </cds-list-item>
+        <cds-list-item>Unordered List level 1</cds-list-item>
+        <cds-list-item>Unordered List level 1</cds-list-item>
+      </cds-unordered-list>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-loading</h3>
+
+      <div style="position: relative; padding: 3rem; display: flex;">
+        <cds-loading></cds-loading>
+      </div>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-modal</h3>
+
+      <cds-button id="modal-example-button">
+        Open Modal
+      </cds-button>
+
+      <cds-layer>
+        <div style="padding: 1rem;">Layer 1</div>
+        <cds-layer>
+          <div style="padding: 1rem;">Layer 2</div>
+          <cds-layer>
+            <div style="padding: 1rem;">Layer 3</div>
+          </cds-layer>
+        </cds-layer>
+      </cds-layer>
+
+      <cds-modal id="modal-example">
+        <cds-modal-header>
+          <cds-modal-close-button></cds-modal-close-button>
+          <cds-modal-label>Label (Optional)</cds-modal-label>
+          <cds-modal-heading>Modal Title</cds-modal-heading>
+        </cds-modal-header>
+        <cds-modal-body><p>Modal text description</p></cds-modal-body>
+        <cds-modal-footer>
+          <cds-modal-footer-button kind="secondary" data-modal-close>Cancel</cds-modal-footer-button>
+          <cds-modal-footer-button kind="primary">Save</cds-modal-footer-button>
+        </cds-modal-footer>
+      </cds-modal>
+
+      <script type="text/javascript">
+        document.getElementById('modal-example-button').addEventListener('click', () => {
+          document.getElementById('modal-example').open = true;
+        });
+      </script>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-multi-select</h3>
+
+      <cds-multi-select
+        helper-text="Optional helper text"
+        label-text="Multiselect title"
+        trigger-content="Select items"
+      >
+        <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
+        <cds-multi-select-item value="cloudFoundry">Option 2</cds-multi-select-item>
+        <cds-multi-select-item value="staging">Option 3</cds-multi-select-item>
+        <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
+        <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
+      </cds-multi-select>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-inline-notification</h3>
+
+      <cds-inline-notification
+        style="min-width: 30rem; margin-bottom: .5rem"
+        title="Notification title"
+        subtitle="Subtitle text goes here."
+      >
+      </cds-inline-notification>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-number-input</h3>
+
+      <cds-number-input></cds-number-input>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-overflow-menu</h3>
+
+      <div data-floating-menu-container style="position: relative; padding: 3rem; display: flex; flex-direction: column; align-items: center;">
+        <cds-overflow-menu>
+          <cds-overflow-menu-body>
+            <cds-overflow-menu-item>Option 1</cds-overflow-menu-item>
+            <cds-overflow-menu-item>Option 2</cds-overflow-menu-item>
+            <cds-overflow-menu-item>Option 3</cds-overflow-menu-item>
+            <cds-overflow-menu-item>Option 4</cds-overflow-menu-item>
+            <cds-overflow-menu-item>Option 5</cds-overflow-menu-item>
+          </cds-overflow-menu-body>
+        </cds-overflow-menu>
+      </div>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-pagination</h3>
+
+      <cds-pagination
+        page-size="10"
+        start="0"
+        total="100"
+      >
+        <cds-page-sizes-select slot="page-sizes-select">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </cds-page-sizes-select>
+        <cds-pages-select></cds-pages-select>
+      </cds-pagination>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-progress-indicator</h3>
+
+      <cds-progress-indicator>
+        <cds-progress-step
+          label-text="Label"
+          secondary-label-text="Secondary label"
+          state="invalid"
+        ></cds-progress-step>
+        <cds-progress-step
+          label-text="Label"
+          secondary-label-text="Secondary label"
+          state="complete"
+        ></cds-progress-step>
+        <cds-progress-step
+          label-text="Label"
+          secondary-label-text="Secondary label"
+          state="current"
+        ></cds-progress-step>
+        <cds-progress-step
+          disabled
+          label-text="Label"
+          secondary-label-text="Secondary label"
+        ></cds-progress-step>
+        <cds-progress-step
+          label-text="Label"
+          secondary-label-text="Secondary label"
+        ></cds-progress-step>
+      </cds-progress-indicator>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-radio-button</h3>
+
+      <cds-radio-button-group
+        label-position="right"
+        orientation="horizontal"
+        name="radio-group"
+      >
+        <cds-radio-button label-text="Radio button" value="all"></cds-radio-button>
+        <cds-radio-button label-text="Radio button" value="cloudFoundry"></cds-radio-button>
+        <cds-radio-button label-text="Radio button" value="staging"></cds-radio-button>
+      </cds-radio-button-group>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-search</h3>
+
+      <cds-search label-text="Search"></cds-search>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-select</h3>
+
+      <cds-select
+        helper-text="Optional helper text"
+        label-text="Select"
+        placeholder="Optional placeholder text"
+      >
+        <cds-select-item-group label="Category 1">
+          <cds-select-item value="all">Option 1</cds-select-item>
+          <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+        </cds-select-item-group>
+        <cds-select-item-group label="Category 2">
+          <cds-select-item value="staging">Option 3</cds-select-item>
+          <cds-select-item value="dea">Option 4</cds-select-item>
+          <cds-select-item value="router">Option 5</cds-select-item>
+        </cds-select-item-group>
+      </cds-select>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-skeleton-placeholder</h3>
+
+      <cds-skeleton-placeholder></cds-skeleton-placeholder>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-skeleton-text</h3>
+
+      <cds-skeleton-text></cds-skeleton-text>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-slider</h3>
+
+      <cds-slider
+        label-text="Slider"
+        max="100"
+        min="0"
+        step="1"
+        value="50"
+      ></cds-slider>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-structured-list</h3>
+
+      <cds-structured-list>
+        <cds-structured-list-head>
+          <cds-structured-list-header-row>
+            <cds-structured-list-header-cell>ColumnA</cds-structured-list-header-cell>
+            <cds-structured-list-header-cell>ColumnB</cds-structured-list-header-cell>
+            <cds-structured-list-header-cell>ColumnC</cds-structured-list-header-cell>
+          </cds-structured-list-header-row>
+        </cds-structured-list-head>
+        <cds-structured-list-body>
+          <cds-structured-list-row>
+            <cds-structured-list-cell>Row 1</cds-structured-list-cell>
+            <cds-structured-list-cell>Row 1</cds-structured-list-cell>
+            <cds-structured-list-cell
+            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum
+              augue. Aenean posuere sem vel euismod dignissim.</cds-structured-list-cell
+            >
+          </cds-structured-list-row>
+          <cds-structured-list-row>
+            <cds-structured-list-cell>Row 2</cds-structured-list-cell>
+            <cds-structured-list-cell>Row 2</cds-structured-list-cell>
+            <cds-structured-list-cell
+            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum
+              augue. Aenean posuere sem vel euismod dignissim.</cds-structured-list-cell
+            >
+          </cds-structured-list-row>
+          <cds-structured-list-row>
+            <cds-structured-list-cell>Row 3</cds-structured-list-cell>
+            <cds-structured-list-cell>Row 3</cds-structured-list-cell>
+            <cds-structured-list-cell
+            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum
+              augue. Aenean posuere sem vel euismod dignissim.</cds-structured-list-cell
+            >
+          </cds-structured-list-row>
+        </cds-structured-list-body>
+      </cds-structured-list>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-tabs</h3>
+
+      <cds-tabs
+        trigger-content="Select an item"
+        value="staging"
+      >
+        <cds-tab id="tab-all" target="panel-all" value="all">Option 1</cds-tab>
+        <cds-tab id="tab-cloudFoundry" target="panel-cloudFoundry" disabled value="cloudFoundry">Option 2</cds-tab>
+        <cds-tab id="tab-staging" target="panel-staging" value="staging">Option 3</cds-tab>
+        <cds-tab id="tab-dea" target="panel-dea" value="dea">Option 4</cds-tab>
+        <cds-tab id="tab-router" target="panel-router" value="router">Option 5</cds-tab>
+      </cds-tabs>
+      <div class="cds-ce-demo-devenv--tab-panels">
+        <div id="panel-all" role="tabpanel" aria-labelledby="tab-all" hidden>
+          <h4>Content for option 1</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <div id="panel-cloudFoundry" role="tabpanel" aria-labelledby="tab-cloudFoundry" hidden>
+          <h4>Content for option 2</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <div id="panel-staging" role="tabpanel" aria-labelledby="tab-staging" hidden>
+          <h4>Content for option 3</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <div id="panel-dea" role="tabpanel" aria-labelledby="tab-dea" hidden>
+          <h4>Content for option 4</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <div id="panel-router" role="tabpanel" aria-labelledby="tab-router" hidden>
+          <h4>Content for option 5</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+      </div>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-tag</h3>
+
+      <cds-tag type="gray" title="Clear selection">
+        This is a tag
+      </cds-tag>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-textarea</h3>
+
+      <cds-textarea placeholder="Optional placeholder text" rows="4" cols="50"></cds-textarea>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-clickable-tile</h3>
+
+      <cds-clickable-tile>
+        Clickable tile
+      </cds-clickable-tile>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-toggle</h3>
+
+      <cds-toggle
+        checked-text="On"
+        label-text="Toggle"
+        unchecked-text="Off"
+      ></cds-toggle>
+
+      <hr style="margin: 3rem 0" />
+
+      <h3>cds-tooltip</h3>
+
+      <div data-floating-menu-container style="position: relative; padding: 3rem; display: flex; flex-direction: column; align-items: center;">
+        <cds-tooltip
+          align="bottom">
+          <div class="sb-tooltip-trigger">
+            <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M17 22L17 14 13 14 13 16 15 16 15 22 12 22 12 24 20 24 20 22 17 22zM16 8a1.5 1.5 0 101.5 1.5A1.5 1.5 0 0016 8z"></path>
+              <path d="M16,30A14,14,0,1,1,30,16,14,14,0,0,1,16,30ZM16,4A12,12,0,1,0,28,16,12,12,0,0,0,16,4Z"></path>
+              <title>Information</title>
+            </svg>
+          </div>
+          <cds-tooltip-content>
+            Occassionally, services are updated in a specified time window to ensure no down time for customers.
+          </cds-tooltip-content>
+        </cds-tooltip>
+      </div>
+
+      <hr style="margin: 3rem 0" />
+    </div>
+  </div>
+</div>
+</body>
+</html>

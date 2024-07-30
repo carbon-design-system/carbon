@@ -1,0 +1,322 @@
+/*
+* Copyright IBM Corp. 2023, 2024
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+
+/* Other Carbon settings. */
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/components/modal' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use 'sass:map';
+
+$pkg-prefix: 'cds';
+
+@use '@carbon/ibm-products-styles/scss/config' with (
+  $pkg-prefix: #{$pkg-prefix}
+);
+@use '@carbon/ibm-products-styles/scss/components/ActionSet/index' as *;
+@use '@carbon/ibm-products-styles/scss/components/Tearsheet/index' as *;
+
+$block-class: #{$pkg-prefix}--tearsheet;
+$block-class-action-set: #{$pkg-prefix}--action-set;
+$motion-duration: $duration-moderate-02;
+
+:host(#{$prefix}-tearsheet) {
+  --content-padding: #{$spacing-05};
+
+  @extend .#{$prefix}--modal;
+  @extend .#{$prefix}--tearsheet;
+
+  .#{$block-class}__header,
+  .#{$block-class}__content,
+  .#{$block-class}__influencer {
+    padding: var(--content-padding);
+  }
+
+  .#{$block-class}__container {
+    /* lower prop is deprecated but the default in ibm products */
+    @extend .#{$block-class}__container--lower;
+
+    max-block-size: calc(100% - (#{$spacing-09} + #{$spacing-08}));
+  }
+
+  .#{$block-class}__container[stack-position='1'][stack-depth='2'],
+  .#{$block-class}__container[stack-position='2'][stack-depth='3'] {
+    max-block-size: calc(
+      100% - (#{$spacing-09} + #{$spacing-08}) + #{$spacing-05}
+    );
+    transform: scale(var(--#{$block-class}--stacking-scale-factor-single));
+  }
+
+  .#{$block-class}__container[stack-position='1'][stack-depth='3'] {
+    max-block-size: calc(
+      100% - (#{$spacing-09} + #{$spacing-08}) + (2 * #{$spacing-05})
+    );
+    transform: scale(var(--#{$block-class}--stacking-scale-factor-double));
+  }
+
+  .#{$block-class}__buttons {
+    @extend .#{$block-class}__button-container;
+    @extend .#{$block-class-action-set};
+
+    display: flex;
+    background: $background;
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__buttons[hidden] {
+    @extend .#{$prefix}--visually-hidden;
+
+    display: none;
+  }
+
+  .#{$block-class}__buttons ::slotted(#{$prefix}-button) {
+    @extend .#{$block-class-action-set}__action-button;
+
+    flex: 0 1 25%;
+    block-size: $spacing-11;
+    max-inline-size: to-rem(232px);
+  }
+
+  .#{$block-class}__buttons ::slotted(#{$prefix}-button[kind='ghost']) {
+    flex: 1 1 25%;
+    max-inline-size: none;
+  }
+
+  .#{$block-class}__buttons ::slotted(#{$prefix}-button[hidden]) {
+    @extend .#{$prefix}--visually-hidden;
+
+    display: none;
+  }
+
+  .#{$block-class}__influencer[wide] {
+    @extend .#{$block-class}__influencer--wide;
+  }
+}
+
+:host(#{$prefix}-tearsheet[open]) {
+  --overlay-color: #{$overlay};
+  --overlay-opacity: 1;
+
+  z-index: utilities.z('modal');
+  align-items: flex-end;
+  background: initial;
+  opacity: 1;
+
+  // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
+  transition: visibility 0s linear;
+  visibility: inherit;
+
+  .#{$prefix}--tearsheet__container {
+    transform: translate3d(0, 0, 0);
+    transition: transform $duration-moderate-02 motion(entrance, expressive);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &::before {
+    position: absolute;
+    display: block;
+    background: var(--overlay-color);
+    content: '';
+    inset: 0;
+    opacity: var(--overlay-opacity);
+
+    transition: background-color $motion-duration motion(exit, expressive),
+      opacity $motion-duration motion(exit, expressive);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    &[stack-position='1'][stack-depth='2'] {
+      --overlay-opacity: 0.67;
+    }
+
+    &[stack-position='1'][stack-depth='3'] {
+      --overlay-opacity: 0.22;
+    }
+
+    &[stack-position='2'][stack-depth='3'] {
+      --overlay-opacity: 0.5;
+    }
+
+    &[stack-position='2'][stack-depth='2'],
+    &[stack-position='3'][stack-depth='3'] {
+      --overlay-opacity: 0.5;
+    }
+  }
+}
+
+:host(#{$prefix}-tearsheet[hidden]) {
+  @extend .#{$prefix}--visually-hidden;
+}
+
+:host(#{$prefix}-tearsheet[slug]) {
+  --overlay-color: #{$ai-overlay};
+
+  .#{$block-class}__container {
+    border: 1px solid transparent;
+
+    /* override carbon ai removing background gradient */
+    background: linear-gradient(to top, var(--cds-layer), var(--cds-layer))
+        padding-box,
+      linear-gradient(
+          to bottom,
+          var(--cds-ai-border-start, #78a9ff),
+          var(--cds-ai-border-end, #d0e2ff)
+        )
+        border-box,
+      linear-gradient(to top, var(--cds-layer), var(--cds-layer)) border-box;
+    border-block-end: 0;
+    box-shadow: 0 24px 40px -24px $ai-drop-shadow;
+  }
+
+  .#{$block-class}__content {
+    @include utilities.ai-popover-gradient('default', 0);
+
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
+  }
+}
+
+:host(#{$prefix}-tearsheet[slug])
+  .#{$prefix}--tearsheet__header[has-actions]
+  ::slotted(#{$prefix}-slug) {
+  inset-inline-end: 0;
+}
+
+:host(#{$prefix}-tearsheet[stack-position='1'][stack-depth='2']),
+:host(#{$prefix}-tearsheet[stack-position='2'][stack-depth='3']) {
+  z-index: utilities.z('modal') - 1;
+}
+
+:host(#{$prefix}-tearsheet[stack-position='1'][stack-depth='3']) {
+  z-index: utilities.z('modal') - 2;
+}
+
+:host(#{$prefix}-tearsheet[width='narrow']) {
+  .#{$block-class}__header {
+    margin: 0;
+    background-color: $layer;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$block-class}__header-description {
+    margin-block-start: $spacing-03;
+    max-inline-size: 80%;
+  }
+
+  .#{$block-class}__main {
+    background-color: $layer;
+  }
+}
+
+:host(#{$prefix}-tearsheet[width='wide']) {
+  --content-padding: #{$spacing-06 $spacing-07};
+
+  .#{$block-class}__header {
+    margin: 0;
+    background-color: $layer;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$block-class}__header[has-navigation] {
+    padding-block-end: 0;
+  }
+
+  .#{$block-class}__container {
+    inline-size: 100%;
+
+    @include breakpoint(md) {
+      inline-size: calc(100% - (2 * #{$spacing-10}));
+    }
+  }
+
+  .#{$prefix}--modal-header__heading.#{$block-class}__heading {
+    @include type.type-style('heading-04');
+  }
+
+  .#{$block-class}__header[has-close-icon],
+  .#{$block-class}__header[has-slug] {
+    padding-inline-end: $spacing-11;
+  }
+
+  .#{$block-class}__header[has-close-icon][has-slug] {
+    padding-inline-end: calc(#{$spacing-11 + $spacing-09});
+  }
+
+  .#{$block-class}__header-navigation {
+    margin-inline-start: calc(-1 * #{$spacing-05});
+    max-block-size: $spacing-08; /* #{$prefix}-tabs too tall */
+  }
+
+  .#{$block-class}__content {
+    // Revert background color overridden by Carbon's modal - https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/modal/_modal.scss#L54
+    .#{$prefix}--pagination,
+    .#{$prefix}--pagination__control-buttons,
+    .#{$prefix}--text-input,
+    .#{$prefix}--text-area,
+    .#{$prefix}--search-input,
+    .#{$prefix}--select-input,
+    .#{$prefix}--dropdown,
+    .#{$prefix}--dropdown-list,
+    .#{$prefix}--number input[type='number'],
+    .#{$prefix}--date-picker__input {
+      background-color: $field;
+    }
+
+    .#{$prefix}--select--inline .#{$prefix}--select-input {
+      background-color: transparent;
+    }
+
+    // and restore the 'light' prop in case light fields are wanted
+    .#{$prefix}--text-input--light,
+  .#{$prefix}--text-area--light,
+  .#{$prefix}--search--light .#{$prefix}--search-input,
+  .#{$prefix}--select--light .#{$prefix}--select-input,
+  .#{$prefix}--dropdown--light,
+  .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list,
+  /* stylelint-disable-next-line prettier/prettier */
+  .#{$prefix}--number--light input[type='number'],
+  .#{$prefix}--date-picker--light
+    .#{$prefix}--date-picker__input {
+      background-color: $field-02;
+    }
+  }
+
+  .#{$pkg-prefix}--action-set
+    .#{$pkg-prefix}--action-set__action-button.#{$pkg-prefix}--action-set__action-button--expressive {
+    block-size: $spacing-11;
+  }
+}
+
+:host(#{$prefix}-tearsheet[width='narrow'])
+  .#{$block-class}__buttons[actions-multiple='single']
+  ::slotted(#{$prefix}-button),
+:host(#{$prefix}-tearsheet[width='narrow'])
+  .#{$block-class}__buttons[actions-multiple='double']
+  ::slotted(#{$prefix}-button) {
+  // double and single on lg use 50%
+  flex: 0 1 50%;
+  max-inline-size: none;
+}
+
+:host(#{$prefix}-tearsheet[width='narrow'])
+  .#{$block-class}__buttons
+  ::slotted(#{$prefix}-button) {
+  block-size: $spacing-10;
+}

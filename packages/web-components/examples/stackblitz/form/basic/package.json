@@ -1,0 +1,19 @@
+{
+  "name": "carbon-web-components-form-getting-started",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample project for getting started with the Web Components from the Carbon Design System.",
+  "license": "Apache-2",
+  "scripts": {
+    "start": "webpack serve"
+  },
+  "dependencies": {
+    "@carbon/web-components": "latest"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^4.5.0",
+    "webpack": "^4.0.0",
+    "webpack-cli": "^4.0.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

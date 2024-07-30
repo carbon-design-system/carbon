@@ -1,0 +1,262 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/components/button/index' as *;
+@use '@carbon/styles/scss/components/tabs/index';
+@use '@carbon/styles/scss/components/tabs/vars' as *;
+@use '@carbon/styles/scss/utilities/button-reset';
+
+$inset-transition: inset 110ms motion(standard, productive);
+
+:host(#{$prefix}-tabs),
+:host(#{$prefix}-tabs-skeleton) {
+  @extend .#{$prefix}--tabs;
+
+  .#{$prefix}--tabs-nav-content-container {
+    position: relative;
+    overflow: scroll;
+    flex: 1 1 0%;
+    // for some reason, overflow: hidden shrinks the content
+    block-size: $spacing-08;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /* Set to zero-specificity so it can be overridden by dynamic stylesheet */
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+  :where(.#{$prefix}--tabs-nav-content) {
+    position: absolute;
+    block-size: 100%;
+    inset-inline-start: 0;
+    transition: $inset-transition;
+  }
+
+  .#{$prefix}--tabs-nav {
+    position: absolute;
+    display: block;
+  }
+
+  .#{$prefix}--tab--overflow-nav-button {
+    z-index: 1;
+  }
+}
+
+:host(#{$prefix}-tabs) {
+  @include focus-outline('reset');
+
+  .#{$prefix}--tabs-trigger svg {
+    block-size: auto;
+    inline-size: auto;
+  }
+}
+
+:host(#{$prefix}-tabs:focus) {
+  .#{$prefix}--tabs-trigger {
+    @include focus-outline('outline');
+  }
+}
+
+:host(#{$prefix}-tab) {
+  display: flex;
+  background: transparent;
+  inline-size: 100%;
+
+  .#{$prefix}--tabs__nav-link {
+    @include button-reset.reset($width: false);
+    @include focus-outline('reset');
+    @include type-style('body-compact-01');
+
+    overflow: hidden;
+
+    align-items: center;
+    padding: $spacing-04 $spacing-05 $spacing-03;
+    border-block-end: $tab-underline-color;
+    color: $text-secondary;
+    inline-size: 100%;
+    text-align: start;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    transition: border $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+    white-space: nowrap;
+
+    &:focus,
+    &:active {
+      @include focus-outline('outline');
+    }
+  }
+
+  outline: none;
+}
+
+:host(#{$prefix}-tab[selected]) {
+  .#{$prefix}--tabs__nav-link {
+    @include type-style('heading-compact-01');
+
+    border-block-end: $spacing-01 solid $border-interactive;
+
+    &,
+    // Need to override Carbon core's non-selected focus color
+    &:focus,
+    &:active {
+      color: $text-primary;
+    }
+  }
+
+  display: flex;
+  background-color: transparent;
+  transition: color $duration-fast-01 motion(standard, productive);
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+:host(#{$prefix}-tab:hover) {
+  background-color: transparent;
+  box-shadow: 0 -1px 0 $background-hover;
+
+  a.#{$prefix}--tabs__nav-link {
+    border-block-end: $tab-underline-color-hover;
+    color: $text-primary;
+  }
+}
+
+:host(#{$prefix}-tabs[type='contained'])
+  .#{$prefix}--tabs-nav-content-container {
+  block-size: $spacing-09;
+}
+
+:host(#{$prefix}-tab[type='contained']) {
+  background-color: $layer-accent-01;
+
+  a.#{$prefix}--tabs__nav-link {
+    padding: $spacing-03 $spacing-05;
+    block-size: $spacing-09;
+    // height - vertical padding
+    /* stylelint-disable declaration-property-unit-allowed-list */
+    line-height: calc(#{$spacing-09} - (#{$spacing-03} * 2));
+  }
+}
+
+:host(#{$prefix}-tab[type='contained']),
+:host(#{$prefix}-tab[type='contained']:hover) {
+  a.#{$prefix}--tabs__nav-link {
+    border-block-end: none;
+    // Draws the border without affecting the inner-content
+    box-shadow: rem(-1px) 0 0 0 $border-strong;
+  }
+}
+
+:host(#{$prefix}-tab[type='contained'][hide-divider])
+  a.#{$prefix}--tabs__nav-link {
+  box-shadow: rem(-1px) 0 0 0 transparent;
+}
+
+// `[role]` is only for specificity.
+// We have `:not()` usage in the corresponding Carbon core style
+// which puts specificity of "specific" scenario though the style is for "regular" scenario
+:host(#{$prefix}-tab[disabled][role]),
+:host(#{$prefix}-tab[disabled][role]:hover) {
+  background-color: transparent;
+  box-shadow: none;
+  cursor: not-allowed;
+  outline: none;
+
+  .#{$prefix}--tabs__nav-link {
+    border-block-end: $tab-underline-disabled;
+    color: $tab-text-disabled;
+    outline: none;
+    pointer-events: none;
+  }
+}
+
+:host(#{$prefix}-tab[type='contained'][disabled][role])
+  .#{$prefix}--tabs__nav-link {
+  background-color: $button-disabled;
+  border-block-end: none;
+  color: $text-on-color-disabled;
+}
+
+:host(#{$prefix}-tab[type='contained'][selected]),
+:host(#{$prefix}-tab[type='contained'][selected]:hover) {
+  background-color: $layer-01;
+
+  .#{$prefix}--tabs__nav-link {
+    border-block-end: none;
+    // Draws the border without affecting the inner-content
+    box-shadow: inset 0 $spacing-01 0 0 $interactive;
+    // height - vertical padding
+    line-height: calc(#{$spacing-09} - (#{$spacing-03} * 2));
+  }
+
+  .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-link:active {
+    box-shadow: none;
+  }
+}
+
+:host(#{$prefix}-tab[type='contained']:hover) {
+  background-color: $layer-accent-hover;
+}
+
+// Disabled tab never gets selected, but we guard for manual addition of `selected` attribute
+:host(#{$prefix}-tab[disabled][selected]),
+:host(#{$prefix}-tab[disabled][selected]:hover),
+:host(#{$prefix}-tab[disabled][in-focus][selected]),
+:host(#{$prefix}-tab[disabled][in-focus][selected]:hover) {
+  display: flex;
+  background-color: transparent;
+  box-shadow: none;
+
+  @include focus-outline('reset');
+
+  .#{$prefix}--tabs__nav-link {
+    @include type-style('body-short-01');
+
+    border-block-end: $tab-underline-disabled;
+
+    color: $tab-text-disabled;
+
+    &:focus,
+    &:active {
+      border-block-end-width: 3px;
+    }
+  }
+}
+
+:host(#{$prefix}-tabs-skeleton) .#{$prefix}--tabs-trigger {
+  @include skeleton;
+
+  inline-size: rem(100px);
+}
+
+:host(#{$prefix}-tab-skeleton) {
+  margin-inline-start: $spacing-01;
+
+  .#{$prefix}--tabs__nav-link {
+    @include skeleton;
+
+    block-size: $spacing-04;
+
+    inline-size: rem(75px);
+  }
+}
+
+:host(#{$prefix}-tab-skeleton:first-of-type) {
+  margin-inline-start: 0;
+}

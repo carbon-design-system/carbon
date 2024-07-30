@@ -1,0 +1,135 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/components/search';
+@use '@carbon/styles/scss/components/data-table/action';
+
+//
+// Table toolbar
+//
+
+:host(#{$prefix}-table-toolbar) {
+  @extend .#{$prefix}--table-toolbar;
+
+  z-index: 1;
+}
+
+:host(#{$prefix}-table-toolbar-content) {
+  @extend .#{$prefix}--toolbar-content;
+
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+
+  ::slotted(#{$prefix}-overflow-menu) {
+    display: flex;
+    block-size: $spacing-09;
+    cursor: pointer;
+    inline-size: $spacing-09;
+    transition: background-color $duration-fast-02 motion(entrance, productive);
+  }
+}
+
+:host(#{$prefix}-table-toolbar-content[has-batch-actions]) {
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  transform: translate3d(0, $spacing-09, 0);
+  transition: transform $duration-fast-02 motion(standard, productive),
+    clip-path $duration-fast-02 motion(standard, productive);
+}
+
+:host(#{$prefix}-table-toolbar-search) {
+  @extend .#{$prefix}--toolbar-action;
+  @extend .#{$prefix}--toolbar-search-container-expandable;
+
+  &:hover {
+    background-color: $field-hover;
+  }
+
+  flex: none;
+  transition: flex 175ms $standard-easing;
+
+  .#{$prefix}--search {
+    block-size: 100%;
+    inline-size: 100%;
+
+    .#{$prefix}--search-magnifier {
+      cursor: pointer;
+      inset-inline-start: 0;
+      pointer-events: all;
+      transition: background $duration-fast-02 motion(entrance, productive);
+
+      &-icon {
+        block-size: auto;
+        inline-size: auto;
+      }
+    }
+
+    .#{$prefix}--search-input {
+      border-block-end: 0;
+    }
+
+    .#{$prefix}--search-close {
+      &::before {
+        background-color: $background-hover;
+        inline-size: 0;
+      }
+
+      :hover {
+        background-color: none;
+      }
+    }
+
+    :hover {
+      background-color: none;
+    }
+  }
+
+  svg {
+    inset-inline-start: 0;
+  }
+}
+
+:host(#{$prefix}-table-toolbar-search[size='xs']),
+:host(#{$prefix}-table-toolbar-search[size='sm']) {
+  svg {
+    padding: 0;
+    inset-inline-start: $spacing-03;
+  }
+}
+
+:host(#{$prefix}-table-toolbar-search[expanded]) {
+  @extend .#{$prefix}--toolbar-search-container-active;
+
+  flex: auto;
+}
+
+:host(#{$prefix}-table-toolbar-search[size='xs'][expanded]),
+:host(#{$prefix}-table-toolbar-search[size='sm'][expanded]) {
+  svg {
+    inset-inline-start: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-table-toolbar-search[persistent]:hover) {
+  .#{$prefix}--search-input {
+    background-color: $field-hover;
+  }
+}
+
+:host(#{$prefix}-table-batch-actions) {
+  @extend .#{$prefix}--batch-actions;
+
+  box-sizing: border-box;
+
+  &[active] {
+    @extend .#{$prefix}--batch-actions--active;
+  }
+}
