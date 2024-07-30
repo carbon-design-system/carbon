@@ -414,11 +414,41 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       textareaProps.maxLength = maxCount;
     }
   }
+
+  const announcerRef = useRef(null);
+  const [prevAnnouncement, setPrevAnnouncement] = useState('');
   const ariaAnnouncement = useAnnouncer(
     textCount,
     maxCount,
     counterMode === 'word' ? 'words' : undefined
   );
+  useEffect(() => {
+    if (ariaAnnouncement && ariaAnnouncement !== prevAnnouncement) {
+      const announcer = announcerRef.current as HTMLSpanElement | null;
+      if (announcer) {
+        // Clear the content first
+        announcer.textContent = '';
+
+        // Set the new content after a small delay
+        const timeoutId = setTimeout(
+          () => {
+            if (announcer) {
+              announcer.textContent = ariaAnnouncement;
+              setPrevAnnouncement(ariaAnnouncement);
+            }
+          },
+          counterMode === 'word' ? 2000 : 1000
+        );
+
+        //clear the timeout
+        return () => {
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+        };
+      }
+    }
+  }, [ariaAnnouncement, prevAnnouncement, counterMode]);
 
   const input = (
     <textarea
@@ -461,7 +491,12 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
         )}
         {input}
         {normalizedSlug}
-        <span className={`${prefix}--text-area__counter-alert`} role="alert">
+        <span
+          className={`${prefix}--text-area__counter-alert`}
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          ref={announcerRef}>
           {ariaAnnouncement}
         </span>
         {isFluid && <hr className={`${prefix}--text-area__divider`} />}

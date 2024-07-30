@@ -654,6 +654,7 @@ const ComboBox = forwardRef(
       (helperText && !isFluid && helperTextId) ||
       undefined;
 
+    // Memoize the value of getMenuProps to avoid an infinite loop
     const menuProps = useMemo(
       () =>
         getMenuProps({

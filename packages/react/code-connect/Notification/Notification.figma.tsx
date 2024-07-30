@@ -89,12 +89,13 @@ figma.connect(
     variant: { Type: 'Inline short' },
 
     props: sharedNotificationProps,
-    example: ({ title, kind, subtitle, hideCloseButton }) => (
+    example: ({ title, kind, subtitle, hideCloseButton, lowContrast }) => (
       <InlineNotification
         title={title}
         kind={kind}
         subtitle={subtitle}
         hideCloseButton={hideCloseButton}
+        lowContrast={lowContrast}
       />
     ),
   }

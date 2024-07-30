@@ -271,6 +271,8 @@ describe('Carbon Components React', () => {
         "unstable__FluidDropdownSkeleton",
         "unstable__FluidMultiSelect",
         "unstable__FluidMultiSelectSkeleton",
+        "unstable__FluidSearch",
+        "unstable__FluidSearchSkeleton",
         "unstable__FluidSelect",
         "unstable__FluidSelectSkeleton",
         "unstable__FluidTextArea",
