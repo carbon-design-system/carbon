@@ -2069,7 +2069,6 @@ __metadata:
     invariant: "npm:^2.2.3"
     lodash.debounce: "npm:^4.0.8"
     lodash.findlast: "npm:^4.5.0"
-    lodash.isequal: "npm:^4.5.0"
     lodash.omit: "npm:^4.5.0"
     lodash.throttle: "npm:^4.1.1"
     mini-css-extract-plugin: "npm:^2.4.5"
