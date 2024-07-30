@@ -16,7 +16,7 @@ import classNames from 'classnames';
 import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { InternationalProps, ReactAttr } from '../../types/common';
+import { TranslateWithId, ReactAttr } from '../../types/common';
 import { DataTableSortState } from './state/sortStates';
 
 const defaultScope = 'col';
@@ -65,7 +65,7 @@ const sortDirections: { [key: string]: 'none' | 'ascending' | 'descending' } = {
 
 interface TableHeaderProps
   extends ReactAttr<HTMLTableCellElement & HTMLButtonElement>,
-    InternationalProps<
+    TranslateWithId<
       TableHeaderTranslationKey,
       { header; sortDirection; isSortHeader; sortStates }
     > {

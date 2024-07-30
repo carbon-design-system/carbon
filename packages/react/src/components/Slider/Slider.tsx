@@ -29,7 +29,7 @@ import {
   UpperHandle,
   UpperHandleFocus,
 } from './SliderHandles';
-import { InternationalProps } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 
 const ThumbWrapper = ({
   hasTooltip = false,
@@ -128,7 +128,7 @@ type ExcludedAttributes = 'onChange' | 'onBlur';
 
 export interface SliderProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
-    InternationalProps<TranslationKey, { correctedValue?: string }> {
+    TranslateWithId<TranslationKey, { correctedValue?: string }> {
   /**
    * The `ariaLabel` for the `<input>`.
    */

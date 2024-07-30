@@ -37,7 +37,7 @@ import TableToolbarAction from './TableToolbarAction';
 import TableToolbarContent from './TableToolbarContent';
 import TableToolbarSearch from './TableToolbarSearch';
 import TableToolbarMenu from './TableToolbarMenu';
-import { InternationalProps } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -218,7 +218,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
 }
 
 export interface DataTableProps<RowType, ColTypes extends any[]>
-  extends InternationalProps<TranslationKey> {
+  extends TranslateWithId<TranslationKey> {
   children?: (
     renderProps: DataTableRenderProps<RowType, ColTypes>
   ) => React.ReactElement;

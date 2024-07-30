@@ -23,7 +23,7 @@ import {
 } from '@floating-ui/react';
 import mergeRefs from '../../tools/mergeRefs';
 import { MenuAlignment } from '../MenuButton';
-import { InternationalProps } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 
 const defaultTranslations = {
   'carbon.combo-button.additional-actions': 'Additional actions',
@@ -38,7 +38,7 @@ function defaultTranslateWithId(messageId: string) {
   return defaultTranslations[messageId];
 }
 
-interface ComboButtonProps extends InternationalProps<TranslationKey> {
+interface ComboButtonProps extends TranslateWithId<TranslationKey> {
   /**
    * A collection of `MenuItems` to be rendered as additional actions for this `ComboButton`.
    */

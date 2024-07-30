@@ -20,7 +20,7 @@ import Search, { SearchProps } from '../Search';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
-import { InternationalProps } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 
 /**
  * Message ids that will be passed to translateWithId().
@@ -54,7 +54,7 @@ export type TableToolbarSearchHandleExpand = (
 
 export interface TableToolbarSearchProps
   extends Omit<SearchProps, ExcludedInheritedProps>,
-    InternationalProps<TableToolbarTranslationKey> {
+    TranslateWithId<TableToolbarTranslationKey> {
   /**
    * Specifies if the search should initially render in an expanded state
    */

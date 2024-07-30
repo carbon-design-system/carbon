@@ -11,10 +11,9 @@ import PropTypes from 'prop-types';
 import { Close } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { KeyboardEvent, MouseEvent } from 'react';
-import { InternationalProps } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 
-export interface ListBoxSelectionProps
-  extends InternationalProps<TranslationKey> {
+export interface ListBoxSelectionProps extends TranslateWithId<TranslationKey> {
   /**
    * Specify a function to be invoked when a user interacts with the clear
    * selection element.

@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ChevronDown } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
-import { InternationalProps } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 
 export type ListBoxMenuIconTranslationKey = 'close.menu' | 'open.menu';
 
@@ -23,7 +23,7 @@ const defaultTranslateWithId = (id: ListBoxMenuIconTranslationKey): string =>
   defaultTranslations[id];
 
 export interface ListBoxMenuIconProps
-  extends InternationalProps<ListBoxMenuIconTranslationKey> {
+  extends TranslateWithId<ListBoxMenuIconTranslationKey> {
   /**
    * Specify whether the menu is currently open, which will influence the
    * direction of the menu icon

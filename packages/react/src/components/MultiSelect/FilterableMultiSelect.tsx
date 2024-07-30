@@ -57,7 +57,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
-import { InternationalProps } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 
 const {
   InputBlur,
@@ -100,7 +100,7 @@ type TranslationKey =
 
 export interface FilterableMultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
-    InternationalProps<TranslationKey> {
+    TranslateWithId<TranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
    * @deprecated

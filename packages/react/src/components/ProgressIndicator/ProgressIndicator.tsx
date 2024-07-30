@@ -17,7 +17,7 @@ import {
 } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
-import { InternationalProps } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 
 const defaultTranslations = {
   'carbon.progress-step.complete': 'Complete',
@@ -162,7 +162,7 @@ ProgressIndicator.propTypes = {
   vertical: PropTypes.bool,
 };
 
-export interface ProgressStepProps extends InternationalProps<TranslationKey> {
+export interface ProgressStepProps extends TranslateWithId<TranslationKey> {
   /**
    * Provide an optional className to be applied to the containing `<li>` node
    */

@@ -22,7 +22,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { Text } from '../Text';
-import { InternationalProps } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 
 export const translationIds = {
   'increment.number': 'increment.number',
@@ -52,7 +52,7 @@ type ExcludedAttributes =
 
 export interface NumberInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
-    InternationalProps<TranslationKey> {
+    TranslateWithId<TranslationKey> {
   /**
    * `true` to allow empty string.
    */

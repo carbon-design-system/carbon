@@ -40,7 +40,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { InternationalProps, ReactAttr } from '../../types/common';
+import { TranslateWithId, ReactAttr } from '../../types/common';
 import { useId } from '../../internal/useId';
 import {
   useFloating,
@@ -86,7 +86,7 @@ export interface OnChangeData<ItemType> {
 
 export interface DropdownProps<ItemType>
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes>,
-    InternationalProps<ListBoxMenuIconTranslationKey> {
+    TranslateWithId<ListBoxMenuIconTranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.

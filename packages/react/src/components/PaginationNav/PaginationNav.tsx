@@ -15,7 +15,7 @@ import {
 } from '@carbon/icons-react';
 import { IconButton } from '../IconButton';
 import { usePrefix } from '../../internal/usePrefix';
-import { InternationalProps } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 
 const translationIds = {
   'carbon.pagination-nav.next': 'Next',
@@ -124,7 +124,7 @@ function DirectionButton({
 }
 
 interface PaginationItemProps
-  extends InternationalProps<
+  extends TranslateWithId<
     'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
   > {
   /**
@@ -174,7 +174,7 @@ function PaginationItem({
 }
 
 interface PaginationOverflowProps
-  extends InternationalProps<
+  extends TranslateWithId<
     'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
   > {
   /**
@@ -279,7 +279,7 @@ function PaginationOverflow({
 
 interface PaginationNavProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'onChange'>,
-    InternationalProps<TranslationKey> {
+    TranslateWithId<TranslationKey> {
   /**
    * Additional CSS class names.
    */
