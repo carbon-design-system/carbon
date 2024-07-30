@@ -108,7 +108,7 @@ describe('ComposedModal', () => {
         </ComposedModal>
       );
 
-      await userEvent.click(screen.getByTitle('Close'));
+      await userEvent.click(screen.getByLabelText('Close'));
 
       expect(onClose).toHaveBeenCalled();
     });
@@ -122,7 +122,7 @@ describe('ComposedModal', () => {
         </ComposedModal>
       );
 
-      await userEvent.click(screen.getByTitle('Close'));
+      await userEvent.click(screen.getByLabelText('Close'));
 
       expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
         'is-visible'
@@ -248,5 +248,21 @@ describe('ComposedModal', () => {
 
       expect(container.firstChild).toHaveClass(`${prefix}--modal--slug`);
     });
+  });
+
+  it('should handle onClick events', async () => {
+    const onClick = jest.fn();
+    render(
+      <ComposedModal open onClick={onClick}>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+      </ComposedModal>
+    );
+    const modal = screen.getByRole('dialog');
+    await userEvent.click(modal);
+    expect(onClick).toHaveBeenCalled();
   });
 });

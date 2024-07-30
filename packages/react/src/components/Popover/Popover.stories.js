@@ -15,6 +15,8 @@ import { default as Checkbox } from '../Checkbox';
 import mdx from './Popover.mdx';
 import { Settings } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
+import OverflowMenu from '../OverflowMenu/OverflowMenu';
+import OverflowMenuItem from '../OverflowMenuItem';
 
 const prefix = 'cds';
 

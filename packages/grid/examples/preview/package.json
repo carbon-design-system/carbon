@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "develop": "next",
-    "build": "next build && next export -o build"
+    "build": "next build"
   },
   "devDependencies": {
     "@carbon/grid": "^11.9.0",

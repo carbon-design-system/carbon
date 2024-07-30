@@ -1,4 +1,8 @@
-import React, { ElementType, forwardRef } from 'react';
+import React, {
+  ElementType,
+  forwardRef,
+  HTMLAttributeAnchorTarget,
+} from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import Link from './Link';
@@ -50,6 +54,10 @@ interface BaseSwitcherItemProps {
    * Optionally provide an href for the underlying li`
    */
   href?: string;
+  /**
+   * Specify where to open the link.
+   */
+  target?: HTMLAttributeAnchorTarget;
 }
 
 interface SwitcherItemWithAriaLabel extends BaseSwitcherItemProps {
@@ -80,6 +88,7 @@ const SwitcherItem = forwardRef<ElementType, SwitcherItemProps>(
       handleSwitcherItemFocus,
       onKeyDown = () => {},
       href,
+      target,
       ...rest
     } = props;
 
@@ -122,6 +131,7 @@ const SwitcherItem = forwardRef<ElementType, SwitcherItemProps>(
             onKeyDown(evt);
           }}
           href={href}
+          target={target}
           ref={forwardRef}
           {...rest}
           className={linkClassName}
@@ -169,6 +179,10 @@ SwitcherItem.propTypes = {
    * Specify the tab index of the Link
    */
   tabIndex: PropTypes.number,
+  /**
+   * Specify where to open the link.
+   */
+  target: PropTypes.string,
 };
 
 export default SwitcherItem;

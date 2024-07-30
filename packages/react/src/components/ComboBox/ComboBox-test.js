@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, within, fireEvent, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   findListBoxNode,
@@ -14,9 +14,10 @@ import {
   assertMenuClosed,
   generateItems,
   generateGenericItem,
+  cognateItems,
+  waitForPosition,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
-import { act } from 'react-dom/test-utils';
 import { Slug } from '../Slug';
 
 const findInputNode = () => screen.getByRole('combobox');
@@ -63,7 +64,71 @@ describe('ComboBox', () => {
     }
   });
 
-  it('capture filter text events', async () => {
+  it('should call `onChange` with the proper item when `shouldFilterItem` is provided', async () => {
+    const filterItems = (menu) => {
+      return menu?.item?.label
+        ?.toLowerCase()
+        .includes(menu?.inputValue?.toLowerCase());
+    };
+    const onInputChange = jest.fn();
+
+    render(
+      <ComboBox
+        {...mockProps}
+        shouldFilterItem={filterItems}
+        onInputChange={onInputChange}
+      />
+    );
+
+    await userEvent.type(findInputNode(), 'Item 2');
+    expect(onInputChange).toHaveBeenCalledWith('Item 2');
+
+    await userEvent.click(screen.getAllByRole('option')[0]);
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: mockProps.items[2],
+    });
+  });
+
+  it('should select the correct item from the filtered list after text input on click', async () => {
+    const user = userEvent.setup();
+
+    render(<ComboBox {...mockProps} items={cognateItems} />);
+
+    await user.type(findInputNode(), 'struct');
+
+    await user.click(screen.getAllByRole('option')[1]);
+
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: {
+        id: 'construct',
+        text: 'Construct',
+      },
+    });
+  });
+
+  it('should select the correct item from the filtered list after text input on [Enter]', async () => {
+    const user = userEvent.setup();
+
+    render(<ComboBox {...mockProps} items={cognateItems} />);
+
+    await user.type(findInputNode(), 'struct');
+
+    await userEvent.keyboard('{ArrowDown}');
+    await userEvent.keyboard('{ArrowDown}');
+    await userEvent.keyboard('[Enter]');
+
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: {
+        id: 'construct',
+        text: 'Construct',
+      },
+    });
+  });
+
+  it('capture filter text event onInputChange', async () => {
     const onInputChange = jest.fn();
     render(<ComboBox {...mockProps} onInputChange={onInputChange} />);
 
@@ -103,6 +168,7 @@ describe('ComboBox', () => {
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
     });
+    expect(screen.getByRole('combobox')).toHaveDisplayValue('Item 1');
   });
 
   it('should not let the user select an option by clicking on the disabled option node', async () => {
@@ -143,23 +209,38 @@ describe('ComboBox', () => {
     expect(findInputNode()).toHaveDisplayValue('Apple');
   });
 
-  it('should respect slug prop', () => {
-    const { container } = render(<ComboBox {...mockProps} slug={<Slug />} />);
+  it('should apply onChange value if custom value is entered and `allowCustomValue` is set', async () => {
+    render(<ComboBox {...mockProps} allowCustomValue />);
 
+    expect(findInputNode()).toHaveDisplayValue('');
+
+    await userEvent.type(findInputNode(), 'Apple');
+    await userEvent.keyboard('[Enter]');
+    assertMenuClosed();
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      inputValue: 'Apple',
+      selectedItem: null,
+    });
+  });
+
+  it('should respect slug prop', async () => {
+    const { container } = render(<ComboBox {...mockProps} slug={<Slug />} />);
+    await waitForPosition();
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--slug`
     );
   });
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {
-    it('using an object type for the `initialSelectedItem` prop', () => {
+    it('using an object type for the `initialSelectedItem` prop', async () => {
       render(
         <ComboBox {...mockProps} initialSelectedItem={mockProps.items[0]} />
       );
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
 
-    it('using a string type for the `initialSelectedItem` prop', () => {
+    it('using a string type for the `initialSelectedItem` prop', async () => {
       // Replace the 'items' property in mockProps with a list of strings
       mockProps = {
         ...mockProps,
@@ -169,19 +250,19 @@ describe('ComboBox', () => {
       render(
         <ComboBox {...mockProps} initialSelectedItem={mockProps.items[1]} />
       );
-
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
     });
   });
 
   describe('should display selected item found in `selectedItem`', () => {
-    it('using an object type for the `selectedItem` prop', () => {
+    it('using an object type for the `selectedItem` prop', async () => {
       render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
-
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
 
-    it('using a string type for the `selectedItem` prop', () => {
+    it('using a string type for the `selectedItem` prop', async () => {
       // Replace the 'items' property in mockProps with a list of strings
       mockProps = {
         ...mockProps,
@@ -189,7 +270,7 @@ describe('ComboBox', () => {
       };
 
       render(<ComboBox {...mockProps} selectedItem={mockProps.items[1]} />);
-
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
     });
   });
@@ -197,7 +278,7 @@ describe('ComboBox', () => {
   describe('when disabled', () => {
     it('should not let the user edit the input node', async () => {
       render(<ComboBox {...mockProps} disabled={true} />);
-
+      await waitForPosition();
       expect(findInputNode()).toHaveAttribute('disabled');
 
       expect(findInputNode()).toHaveDisplayValue('');
@@ -209,6 +290,7 @@ describe('ComboBox', () => {
 
     it('should not let the user expand the menu', async () => {
       render(<ComboBox {...mockProps} disabled={true} />);
+      await waitForPosition();
       await openMenu();
       expect(findListBoxNode()).not.toHaveClass(
         `${prefix}--list-box--expanded`
@@ -219,7 +301,7 @@ describe('ComboBox', () => {
   describe('when readonly', () => {
     it('should not let the user edit the input node', async () => {
       render(<ComboBox {...mockProps} readOnly={true} />);
-
+      await waitForPosition();
       expect(findInputNode()).toHaveAttribute('readonly');
 
       expect(findInputNode()).toHaveDisplayValue('');
@@ -231,6 +313,7 @@ describe('ComboBox', () => {
 
     it('should not let the user expand the menu', async () => {
       render(<ComboBox {...mockProps} disabled={true} />);
+      await waitForPosition();
       await openMenu();
       expect(findListBoxNode()).not.toHaveClass(
         `${prefix}--list-box--expanded`
@@ -239,9 +322,9 @@ describe('ComboBox', () => {
   });
 
   describe('downshift quirks', () => {
-    it('should set `inputValue` to an empty string if a false-y value is given', () => {
+    it('should set `inputValue` to an empty string if a false-y value is given', async () => {
       render(<ComboBox {...mockProps} />);
-
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue('');
     });
 
@@ -256,6 +339,7 @@ describe('ComboBox', () => {
           </div>
         </>
       );
+      await waitForPosition();
       const firstCombobox = screen.getByTestId('combobox-1');
       const secondCombobox = screen.getByTestId('combobox-2');
 
@@ -290,6 +374,7 @@ describe('ComboBox', () => {
     });
     it('should open menu without moving focus on pressing Alt+ DownArrow', async () => {
       render(<ComboBox {...mockProps} />);
+      await waitForPosition();
       act(() => {
         screen.getByRole('combobox').focus();
       });
@@ -299,9 +384,57 @@ describe('ComboBox', () => {
 
     it('should close menu and return focus to combobox on pressing Alt+ UpArrow', async () => {
       render(<ComboBox {...mockProps} />);
+      await waitForPosition();
       await openMenu();
       await userEvent.keyboard('{Alt>}{ArrowUp}');
       assertMenuClosed(mockProps);
+    });
+  });
+
+  describe('Highlights', () => {
+    it('should highlight the matched element', async () => {
+      render(<ComboBox {...mockProps} allowCustomValue={false} />);
+      await userEvent.type(findInputNode(), '1');
+      expect(screen.getAllByRole('option')[1]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
+    });
+
+    it('should highlight the selected element', async () => {
+      render(<ComboBox {...mockProps} allowCustomValue={false} />);
+      await openMenu();
+      await userEvent.type(findInputNode(), 'Item 1');
+      await userEvent.keyboard('[Enter]');
+      await openMenu();
+      expect(screen.getAllByRole('option')[1]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
+    });
+
+    it('should highlight the selected element if user enter some other value click outside of combobox', async () => {
+      render(<ComboBox {...mockProps} allowCustomValue={false} />);
+      await openMenu();
+      await userEvent.type(findInputNode(), 'Item 1');
+      await userEvent.keyboard('[Enter]');
+      await openMenu();
+      expect(screen.getAllByRole('option')[1]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
+
+      await userEvent.clear(findInputNode());
+      await userEvent.type(findInputNode(), 'Item');
+      //should match the loosely match element
+      expect(screen.getAllByRole('option')[0]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
+
+      fireEvent.blur(findInputNode());
+      await openMenu();
+      // on blur, it should retain the selected value
+      expect(findInputNode()).toHaveDisplayValue('Item 1');
+      expect(screen.getAllByRole('option')[1]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
     });
   });
 });

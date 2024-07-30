@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, {
   useContext,
   useEffect,
@@ -14,6 +14,7 @@ import React, {
   useCallback,
   useState,
   ForwardedRef,
+  ReactNode,
 } from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
@@ -200,7 +201,7 @@ export type CalRef = {
   plugins: [];
   clickOpens: any;
 };
-interface DatePickerProps {
+export interface DatePickerProps {
   /**
    * Flatpickr prop passthrough enables direct date input, and when set to false,
    * we must clear dates manually by resetting the value prop to empty string making it a controlled input.
@@ -215,7 +216,7 @@ interface DatePickerProps {
   /**
    * The child nodes.
    */
-  children: React.ReactNode | object;
+  children: ReactNode | object;
 
   /**
    * The CSS class names.
@@ -264,7 +265,7 @@ interface DatePickerProps {
   /**
    * Provide the text that is displayed when the control is in error state (Fluid Only)
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * `true` to use the light version.
@@ -396,7 +397,7 @@ interface DatePickerProps {
   /**
    * Provide the text that is displayed when the control is in warning state (Fluid only)
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 }
 
 const DatePicker = React.forwardRef(function DatePicker(
@@ -444,6 +445,8 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   // fix datepicker deleting the selectedDate when the calendar closes
   const onCalendarClose = (selectedDates, dateStr) => {
+    endInputField?.current?.focus();
+    calendarRef?.current?.calendarContainer?.classList.remove('open');
     setTimeout(() => {
       if (
         lastStartValue.current &&
@@ -666,10 +669,13 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     function handleArrowDown(event) {
       if (match(event, keys.Escape)) {
-        calendar.calendarContainer.classList.remove('open');
+        calendar?.calendarContainer?.classList.remove('open');
       }
 
       if (match(event, keys.ArrowDown)) {
+        if (event.target == endInputField.current) {
+          calendar?.calendarContainer?.classList.add('open');
+        }
         const {
           calendarContainer,
           selectedDateElem: fpSelectedDateElem,

@@ -14,6 +14,7 @@ import {
   assertMenuClosed,
   generateItems,
   generateGenericItem,
+  waitForPosition,
 } from '../../ListBox/test-helpers';
 import FluidComboBox from '../FluidComboBox';
 
@@ -38,15 +39,17 @@ describe('FluidComboBox', () => {
     };
   });
 
-  it('should render with fluid classes', () => {
+  it('should render with fluid classes', async () => {
     const { container } = render(<FluidComboBox {...mockProps} />);
+    await waitForPosition();
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--fluid`
     );
   });
 
-  it('should render with condensed styles if isCondensed is provided', () => {
+  it('should render with condensed styles if isCondensed is provided', async () => {
     const { container } = render(<FluidComboBox isCondensed {...mockProps} />);
+    await waitForPosition();
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--fluid--condensed`
     );
@@ -54,7 +57,7 @@ describe('FluidComboBox', () => {
 
   it('should display the menu of items when a user clicks on the input', async () => {
     render(<FluidComboBox {...mockProps} />);
-
+    await waitForPosition();
     await openMenu();
 
     assertMenuOpen(mockProps);
@@ -62,6 +65,7 @@ describe('FluidComboBox', () => {
 
   it('should call `onChange` each time an item is selected', async () => {
     render(<FluidComboBox {...mockProps} />);
+    await waitForPosition();
     expect(mockProps.onChange).not.toHaveBeenCalled();
 
     for (let i = 0; i < mockProps.items.length; i++) {
@@ -79,7 +83,7 @@ describe('FluidComboBox', () => {
   it('capture filter text events', async () => {
     const onInputChange = jest.fn();
     render(<FluidComboBox {...mockProps} onInputChange={onInputChange} />);
-
+    await waitForPosition();
     await userEvent.type(findInputNode(), 'something');
 
     expect(onInputChange).toHaveBeenCalledWith('something');
@@ -90,6 +94,7 @@ describe('FluidComboBox', () => {
       return <div className="mock-item">{item.text}</div>;
     });
     render(<FluidComboBox {...mockProps} itemToElement={itemToElement} />);
+    await waitForPosition();
     await openMenu();
 
     expect(itemToElement).toHaveBeenCalled();
@@ -97,6 +102,7 @@ describe('FluidComboBox', () => {
 
   it('should let the user select an option by clicking on the option node', async () => {
     render(<FluidComboBox {...mockProps} />);
+    await waitForPosition();
     await openMenu();
 
     await userEvent.click(screen.getAllByRole('option')[0]);
@@ -119,17 +125,18 @@ describe('FluidComboBox', () => {
   });
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {
-    it('using an object type for the `initialSelectedItem` prop', () => {
+    it('using an object type for the `initialSelectedItem` prop', async () => {
       render(
         <FluidComboBox
           {...mockProps}
           initialSelectedItem={mockProps.items[0]}
         />
       );
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
 
-    it('using a string type for the `initialSelectedItem` prop', () => {
+    it('using a string type for the `initialSelectedItem` prop', async () => {
       // Replace the 'items' property in mockProps with a list of strings
       mockProps = {
         ...mockProps,
@@ -142,21 +149,22 @@ describe('FluidComboBox', () => {
           initialSelectedItem={mockProps.items[1]}
         />
       );
+      await waitForPosition();
 
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
     });
   });
 
   describe('should display selected item found in `selectedItem`', () => {
-    it('using an object type for the `selectedItem` prop', () => {
+    it('using an object type for the `selectedItem` prop', async () => {
       render(
         <FluidComboBox {...mockProps} selectedItem={mockProps.items[0]} />
       );
-
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
 
-    it('using a string type for the `selectedItem` prop', () => {
+    it('using a string type for the `selectedItem` prop', async () => {
       // Replace the 'items' property in mockProps with a list of strings
       mockProps = {
         ...mockProps,
@@ -166,7 +174,7 @@ describe('FluidComboBox', () => {
       render(
         <FluidComboBox {...mockProps} selectedItem={mockProps.items[1]} />
       );
-
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
     });
   });
@@ -174,7 +182,7 @@ describe('FluidComboBox', () => {
   describe('when disabled', () => {
     it('should not let the user edit the input node', async () => {
       render(<FluidComboBox {...mockProps} disabled={true} />);
-
+      await waitForPosition();
       expect(findInputNode()).toHaveAttribute('disabled');
 
       expect(findInputNode()).toHaveDisplayValue('');
@@ -186,15 +194,16 @@ describe('FluidComboBox', () => {
 
     it('should not let the user expand the menu', async () => {
       render(<FluidComboBox {...mockProps} disabled={true} />);
+      await waitForPosition();
       await openMenu();
       expect(findListBoxNode()).not.toHaveClass('cds--list-box--expanded');
     });
   });
 
   describe('downshift quirks', () => {
-    it('should set `inputValue` to an empty string if a false-y value is given', () => {
+    it('should set `inputValue` to an empty string if a false-y value is given', async () => {
       render(<FluidComboBox {...mockProps} />);
-
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue('');
     });
 
@@ -209,6 +218,7 @@ describe('FluidComboBox', () => {
           </div>
         </>
       );
+      await waitForPosition();
       const firstFluidComboBox = screen.getByTestId('fluidcombobox-1');
       const secondFluidComboBox = screen.getByTestId('fluidcombobox-2');
 

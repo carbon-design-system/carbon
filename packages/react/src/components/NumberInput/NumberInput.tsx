@@ -14,6 +14,7 @@ import React, {
   useRef,
   useState,
   useEffect,
+  FC,
 } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
@@ -408,6 +409,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               data-invalid={normalizedProps.invalid ? true : undefined}
               aria-invalid={normalizedProps.invalid}
               aria-describedby={ariaDescribedBy}
+              aria-readonly={readOnly}
               disabled={normalizedProps.disabled}
               ref={ref}
               id={id}
@@ -629,13 +631,13 @@ NumberInput.propTypes = {
   warnText: PropTypes.node,
 };
 
-interface Label {
+export interface Label {
   disabled?: boolean;
   hideLabel?: boolean;
   id?: string;
   label?: ReactNode;
 }
-function Label({ disabled, id, hideLabel, label }: Label) {
+const Label: FC<Label> = ({ disabled, id, hideLabel, label }) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--label`]: true,
@@ -651,7 +653,7 @@ function Label({ disabled, id, hideLabel, label }: Label) {
     );
   }
   return null;
-}
+};
 
 Label.propTypes = {
   disabled: PropTypes.bool,
@@ -660,7 +662,7 @@ Label.propTypes = {
   label: PropTypes.node,
 };
 
-interface HelperTextProps {
+export interface HelperTextProps {
   id?: string;
   description?: ReactNode;
   disabled?: boolean;

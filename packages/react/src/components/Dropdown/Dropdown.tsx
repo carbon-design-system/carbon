@@ -13,6 +13,8 @@ import React, {
   ForwardedRef,
   MouseEvent,
   ReactNode,
+  useEffect,
+  useMemo,
 } from 'react';
 import {
   useSelect,
@@ -22,7 +24,7 @@ import {
   UseSelectStateChangeTypes,
 } from 'downshift';
 import cx from 'classnames';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import {
   Checkmark,
   WarningAltFilled,
@@ -39,9 +41,13 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ReactAttr } from '../../types/common';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
-
-const getInstanceId = setupGetInstanceId();
+import { useId } from '../../internal/useId';
+import {
+  useFloating,
+  flip,
+  autoUpdate,
+  size as floatingSize,
+} from '@floating-ui/react';
 
 const {
   ToggleButtonKeyDownArrowDown,
@@ -93,6 +99,11 @@ export interface DropdownProps<ItemType>
   ariaLabel?: string;
 
   /**
+   * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
+   */
+  autoAlign?: boolean;
+
+  /**
    * Specify the direction of the dropdown. Can be either top or bottom.
    */
   direction?: 'top' | 'bottom';
@@ -111,7 +122,7 @@ export interface DropdownProps<ItemType>
    * Provide helper text that is used alongside the control label for
    * additional help
    */
-  helperText?: React.ReactNode;
+  helperText?: ReactNode;
 
   /**
    * Specify whether the title text should be hidden or not
@@ -137,7 +148,7 @@ export interface DropdownProps<ItemType>
   /**
    * Message which is displayed if the value is invalid.
    */
-  invalidText?: React.ReactNode;
+  invalidText?: ReactNode;
 
   /**
    * Function to render items as custom components instead of strings.
@@ -201,13 +212,13 @@ export interface DropdownProps<ItemType>
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Provide the title text that will be read by a screen reader when
    * visiting this control
    */
-  titleText?: React.ReactNode;
+  titleText?: ReactNode;
 
   /**
    * Callback function for translating ListBoxMenuIcon SVG title
@@ -230,7 +241,7 @@ export interface DropdownProps<ItemType>
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: React.ReactNode;
+  warnText?: ReactNode;
 }
 
 export type DropdownTranslationKey = ListBoxMenuIconTranslationKey;
@@ -238,6 +249,7 @@ export type DropdownTranslationKey = ListBoxMenuIconTranslationKey;
 const Dropdown = React.forwardRef(
   <ItemType,>(
     {
+      autoAlign = false,
       className: containerClassName,
       disabled = false,
       direction = 'bottom',
@@ -270,6 +282,43 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const { refs, floatingStyles } = useFloating(
+      autoAlign
+        ? {
+            placement: direction,
+
+            // The floating element is positioned relative to its nearest
+            // containing block (usually the viewport). It will in many cases also
+            // “break” the floating element out of a clipping ancestor.
+            // https://floating-ui.com/docs/misc#clipping
+            strategy: 'fixed',
+
+            // Middleware order matters, arrow should be last
+            middleware: [
+              floatingSize({
+                apply({ rects, elements }) {
+                  Object.assign(elements.floating.style, {
+                    width: `${rects.reference.width}px`,
+                  });
+                },
+              }),
+              flip(),
+            ],
+            whileElementsMounted: autoUpdate,
+          }
+        : {} // When autoAlign is turned off, floating-ui will not be used
+    );
+
+    useEffect(() => {
+      if (autoAlign) {
+        Object.keys(floatingStyles).forEach((style) => {
+          if (refs.floating.current) {
+            refs.floating.current.style[style] = floatingStyles[style];
+          }
+        });
+      }
+    }, [floatingStyles, autoAlign, refs.floating]);
+
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
 
@@ -285,7 +334,7 @@ const Dropdown = React.forwardRef(
         return isObject && 'disabled' in item && item.disabled === true;
       },
     };
-    const { current: dropdownInstanceId } = useRef(getInstanceId());
+    const dropdownInstanceId = useId();
 
     function stateReducer(state, actionAndChanges) {
       const { changes, props, type } = actionAndChanges;
@@ -340,6 +389,7 @@ const Dropdown = React.forwardRef(
       [`${prefix}--dropdown--readonly`]: readOnly,
       [`${prefix}--dropdown--${size}`]: size,
       [`${prefix}--list-box--up`]: direction === 'top',
+      [`${prefix}--dropdown--autoalign`]: autoAlign,
     });
 
     const titleClasses = cx(`${prefix}--label`, {
@@ -446,7 +496,13 @@ const Dropdown = React.forwardRef(
           },
         };
 
-    const menuProps = getMenuProps();
+    const menuProps = useMemo(
+      () =>
+        getMenuProps({
+          ref: autoAlign ? refs.setFloating : null,
+        }),
+      [autoAlign]
+    );
 
     // Slug is always size `mini`
     let normalizedSlug;
@@ -475,6 +531,7 @@ const Dropdown = React.forwardRef(
           warnText={warnText}
           light={light}
           isOpen={isOpen}
+          ref={autoAlign ? refs.setReference : null}
           id={id}>
           {invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
@@ -569,7 +626,7 @@ type DropdownComponentProps<ItemType> = React.PropsWithoutRef<
     React.RefAttributes<HTMLButtonElement>
 >;
 
-interface DropdownComponent {
+export interface DropdownComponent {
   <ItemType>(
     props: DropdownComponentProps<ItemType>
   ): React.ReactElement | null;
@@ -591,6 +648,11 @@ Dropdown.propTypes = {
     PropTypes.string,
     'This prop syntax has been deprecated. Please use the new `aria-label`.'
   ),
+
+  /**
+   * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Provide a custom className to be applied on the cds--dropdown node

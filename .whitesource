@@ -1,0 +1,6 @@
+{
+  "settingsInheritedFrom": "ibm-mend-config/mend-config@main",
+  "issueSettings": {
+    "minSeverityLevel": "NONE"
+  }
+}

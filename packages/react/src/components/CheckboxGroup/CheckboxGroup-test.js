@@ -161,4 +161,17 @@ describe('CheckboxGroup', () => {
 
     expect(container.firstChild).toHaveClass(`${prefix}--checkbox-group--slug`);
   });
+  it('should render checkboxes horizontally', () => {
+    const { container } = render(
+      <CheckboxGroup orientation="horizontal" legendText="test-horizental-prop">
+        <Checkbox labelText="Checkbox label 1" id="checkbox-label-1" />
+        <Checkbox labelText="Checkbox label 2" id="checkbox-label-2" />
+        <Checkbox labelText="Checkbox label 3" id="checkbox-label-3" />
+      </CheckboxGroup>
+    );
+
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--checkbox-group--horizontal`
+    );
+  });
 });

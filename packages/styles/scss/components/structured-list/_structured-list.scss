@@ -209,8 +209,12 @@
     .#{$prefix}--structured-list-svg {
       fill: transparent;
     }
+    .#{$prefix}--structured-list--selection
+      .#{$prefix}--structured-list-td:last-child {
+      inline-size: $spacing-07;
+      padding-inline-start: 0;
+    }
   }
-
   @if (
     enabled('enable-v12-structured-list-visible-icons') or
       $enable-v12-structured-list-visible-icons
@@ -267,5 +271,13 @@
   .#{$prefix}--structured-list__icon {
     margin-block-start: $spacing-01;
     vertical-align: top;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-td:first-child:has(
+      .#{$prefix}--structured-list__icon
+    ) {
+    inline-size: $spacing-07;
+    padding-inline-end: 0;
   }
 }

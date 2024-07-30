@@ -5,14 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useRef, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { useRef, useEffect, useState, ReactNode } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import InlineLoading from '../InlineLoading';
+import { Layer } from '../Layer';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
   wrapFocusWithoutSentinels,
@@ -20,7 +21,7 @@ import wrapFocus, {
 } from '../../internal/wrapFocus';
 import debounce from 'lodash.debounce';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { IconButton } from '../IconButton';
@@ -29,15 +30,14 @@ import { Text } from '../Text';
 import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
-
-const getInstanceId = setupGetInstanceId();
+import { composeEventHandlers } from '../../tools/events';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 
 export type ModalSize = (typeof ModalSizes)[number];
 
 export interface ModalSecondaryButton {
-  buttonText?: string | React.ReactNode;
+  buttonText?: string | ReactNode;
 
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -57,7 +57,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * Provide the contents of your Modal
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * Specify an optional className to be applied to the modal root node
@@ -117,12 +117,12 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * Specify the content of the modal header title.
    */
-  modalHeading?: React.ReactNode;
+  modalHeading?: ReactNode;
 
   /**
    * Specify the content of the modal header label.
    */
-  modalLabel?: React.ReactNode;
+  modalLabel?: ReactNode;
 
   /**
    * Specify a handler for keypresses.
@@ -177,12 +177,12 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * Specify the text for the primary button
    */
-  primaryButtonText?: React.ReactNode;
+  primaryButtonText?: ReactNode;
 
   /**
    * Specify the text for the secondary button
    */
-  secondaryButtonText?: React.ReactNode;
+  secondaryButtonText?: ReactNode;
 
   /**
    * Specify an array of config objects for secondary buttons
@@ -214,7 +214,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Modal` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 }
 
 const Modal = React.forwardRef(function Modal(
@@ -262,7 +262,7 @@ const Modal = React.forwardRef(function Modal(
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
   const [isScrollable, setIsScrollable] = useState(false);
-  const modalInstanceId = `modal-${getInstanceId()}`;
+  const modalInstanceId = `modal-${useId()}`;
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
   const modalBodyId = `${prefix}--modal-body--${modalInstanceId}`;
@@ -311,7 +311,7 @@ const Modal = React.forwardRef(function Modal(
     }
   }
 
-  function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
+  function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
     const target = evt.target as Node;
     evt.stopPropagation();
     if (
@@ -372,7 +372,7 @@ const Modal = React.forwardRef(function Modal(
       Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
   });
 
-  const asStringOrUndefined = (node: React.ReactNode): string | undefined => {
+  const asStringOrUndefined = (node: ReactNode): string | undefined => {
     return typeof node === 'string' ? node : undefined;
   };
   const modalLabelStr = asStringOrUndefined(modalLabel);
@@ -528,13 +528,13 @@ const Modal = React.forwardRef(function Modal(
         {normalizedSlug}
         {!passiveModal && modalButton}
       </div>
-      <div
+      <Layer
         ref={contentRef}
         id={modalBodyId}
         className={contentClasses}
         {...hasScrollingContentProps}>
         {children}
-      </div>
+      </Layer>
       {!passiveModal && (
         <ButtonSet className={footerClasses} aria-busy={loadingActive}>
           {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
@@ -581,10 +581,11 @@ const Modal = React.forwardRef(function Modal(
   );
 
   return (
-    <div
+    <Layer
       {...rest}
+      level={0}
       onKeyDown={handleKeyDown}
-      onMouseDown={handleMousedown}
+      onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
       onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
       className={modalClasses}
       role="presentation"
@@ -610,7 +611,7 @@ const Modal = React.forwardRef(function Modal(
           Focus sentinel
         </span>
       )}
-    </div>
+    </Layer>
   );
 });
 
