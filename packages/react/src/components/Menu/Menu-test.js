@@ -130,7 +130,7 @@ describe('Menu', () => {
         )
       );
       expect(menus[0]).toHaveClass('cds--menu--open');
-      expect(menus[1]).toHaveClass('cds--menu--open');
+      expect(menus[1]).not.toHaveClass('cds--menu--open');
 
       await act(() => jest.runOnlyPendingTimers());
       expect(menus[0]).toHaveClass('cds--menu--open');

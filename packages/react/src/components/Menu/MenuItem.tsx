@@ -118,9 +118,10 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     });
     const { getReferenceProps, getFloatingProps } = useInteractions([
       useHover(floatingContext, {
+        delay: 100,
         enabled: true,
         handleClose: safePolygon({
-          requireIntent: true,
+          requireIntent: false,
         }),
       }),
     ]);
@@ -167,7 +168,6 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     ) {
       if (!isDisabled) {
         if (hasChildren) {
-          setSubmenuOpen(true);
           openSubmenu();
         } else {
           context.state.requestCloseRoot(e);
