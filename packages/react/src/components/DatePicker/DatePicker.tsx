@@ -444,9 +444,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   const lastStartValue = useRef('');
 
   // fix datepicker deleting the selectedDate when the calendar closes
-  const onCalendarClose = (selectedDates, dateStr) => {
-    endInputField?.current?.focus();
-    calendarRef?.current?.calendarContainer?.classList.remove('open');
+  const onCalendarClose = (selectedDates, dateStr, instance, e) => {
     setTimeout(() => {
       if (
         lastStartValue.current &&
@@ -459,6 +457,13 @@ const DatePicker = React.forwardRef(function DatePicker(
           true,
           calendarRef.current.config.dateFormat
         );
+      }
+      if (
+        e &&
+        e.type === 'click' &&
+        !instance.config._input.contains(e.target)
+      ) {
+        calendarRef.current.close();
       }
       if (onClose) {
         onClose(
@@ -610,6 +615,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     const { current: end } = endInputField;
     const flatpickerconfig: any = {
       inline: inline ?? false,
+      onClose: onCalendarClose,
       disableMobile: true,
       defaultDate: value,
       closeOnSelect: closeOnSelect,
@@ -831,6 +837,25 @@ const DatePicker = React.forwardRef(function DatePicker(
       calendarRef.current.set('inline', inline);
     }
   }, [inline]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.calendarContainer.contains(event.target) &&
+        !startInputField.current.contains(event.target) &&
+        (!endInputField.current ||
+          !endInputField.current.contains(event.target))
+      ) {
+        calendarRef.current.close();
+      }
+    };
+    document.addEventListener('click', handleClickOutside, true);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, []);
 
   useEffect(() => {
     if (calendarRef?.current?.set) {
