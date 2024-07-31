@@ -13,17 +13,17 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   Tabs,
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=3890-50605&mode=design&t=ERtuwFdbSumlRYtB-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3890-50605&t=wcK3P98b09VsrxXF-4',
   {
     props: {
-      children: figma.children(['_Tabs button item']),
+      children: figma.children(['_Horizontal tabs items']),
       contained: figma.enum('Style', {
         Contained: true,
       }),
       fullWidth: figma.enum('Alignment', {
         'Grid aware': true,
       }),
-      tab: figma.nestedProps('_Tabs button item', {
+      tab: figma.nestedProps('_Horizontal tabs items', {
         size: figma.enum('Size', {
           Large: 'lg',
         }),
