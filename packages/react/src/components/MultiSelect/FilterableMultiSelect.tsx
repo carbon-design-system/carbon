@@ -16,7 +16,7 @@ import Downshift, {
   UseComboboxStateChangeTypes,
   UseMultipleSelectionInterface,
 } from 'downshift';
-import isEqual from 'lodash.isequal';
+import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   useContext,
