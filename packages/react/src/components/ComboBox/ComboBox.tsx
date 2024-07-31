@@ -450,8 +450,22 @@ const ComboBox = forwardRef(
 
     const stateReducer = React.useCallback(
       (state, actionAndChanges) => {
-        const { type, changes } = actionAndChanges;
+        const { type, props, changes } = actionAndChanges;
         const { highlightedIndex } = changes;
+
+        // This function enables scrolling into view when navigating items and
+        // focuses on the selected item when the dropdown is open
+        const scrollNavigation = () => {
+          Promise.resolve().then(() => {
+            if (highlightedIndex > -1) {
+              const itemArray = document.querySelectorAll(
+                `li.${prefix}--list-box__menu-item[role="option"]`
+              );
+              props.scrollIntoView(itemArray[highlightedIndex]);
+            }
+          });
+        };
+
         switch (type) {
           case InputBlur:
             if (
@@ -488,6 +502,7 @@ const ComboBox = forwardRef(
             }
           case FunctionToggleMenu:
           case ToggleButtonClick:
+            scrollNavigation();
             if (changes.isOpen && !changes.selectedItem) {
               return { ...changes, highlightedIndex: 0 };
             }
@@ -498,6 +513,7 @@ const ComboBox = forwardRef(
 
           case InputKeyDownArrowUp:
           case InputKeyDownArrowDown:
+            scrollNavigation();
             if (highlightedIndex === -1) {
               return {
                 ...changes,
@@ -598,7 +614,6 @@ const ComboBox = forwardRef(
         setInputValue(inputValue || '');
         setHighlightedIndex(indexToHighlight(inputValue));
       },
-
       onSelectedItemChange({ selectedItem }) {
         onChange({ selectedItem });
       },

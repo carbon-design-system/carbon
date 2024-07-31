@@ -56,6 +56,7 @@ const {
   ToggleButtonKeyDownEnd,
   ItemMouseMove,
   MenuMouseLeave,
+  ToggleButtonClick,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
 };
@@ -340,17 +341,27 @@ const Dropdown = React.forwardRef(
       const { changes, props, type } = actionAndChanges;
       const { highlightedIndex } = changes;
 
-      switch (type) {
-        case ToggleButtonKeyDownArrowDown:
-        case ToggleButtonKeyDownArrowUp:
-        case ToggleButtonKeyDownHome:
-        case ToggleButtonKeyDownEnd:
+      // This function enables scrolling into view when navigating items and
+      // focuses on the selected item when the dropdown is open
+      const scrollNavigation = () => {
+        Promise.resolve().then(() => {
           if (highlightedIndex > -1) {
             const itemArray = document.querySelectorAll(
               `li.${prefix}--list-box__menu-item[role="option"]`
             );
             props.scrollIntoView(itemArray[highlightedIndex]);
           }
+        });
+      };
+
+      switch (type) {
+        case ToggleButtonKeyDownArrowDown:
+        case ToggleButtonKeyDownArrowUp:
+        case ToggleButtonKeyDownHome:
+        case ToggleButtonKeyDownEnd:
+        case ToggleButtonClick:
+          scrollNavigation();
+
           return changes;
         case ItemMouseMove:
         case MenuMouseLeave:
