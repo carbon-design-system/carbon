@@ -49,17 +49,10 @@ import {
   size as floatingSize,
 } from '@floating-ui/react';
 
-const {
-  ToggleButtonKeyDownArrowDown,
-  ToggleButtonKeyDownArrowUp,
-  ToggleButtonKeyDownHome,
-  ToggleButtonKeyDownEnd,
-  ItemMouseMove,
-  MenuMouseLeave,
-  ToggleButtonClick,
-} = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
-  ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
-};
+const { ItemMouseMove, MenuMouseLeave } =
+  useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
+    ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
+  };
 
 const defaultItemToString = <ItemType,>(item?: ItemType | null): string => {
   if (typeof item === 'string') {
@@ -334,35 +327,27 @@ const Dropdown = React.forwardRef(
         const isObject = item !== null && typeof item === 'object';
         return isObject && 'disabled' in item && item.disabled === true;
       },
+      onHighlightedIndexChange: ({ highlightedIndex }) => {
+        if (highlightedIndex! > -1) {
+          const itemArray = document.querySelectorAll(
+            `li.${prefix}--list-box__menu-item[role="option"]`
+          );
+          const selectedItem = itemArray[highlightedIndex!];
+          if (selectedItem) {
+            selectedItem.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+            });
+          }
+        }
+      },
     };
     const dropdownInstanceId = useId();
 
     function stateReducer(state, actionAndChanges) {
-      const { changes, props, type } = actionAndChanges;
-      const { highlightedIndex } = changes;
-
-      // This function enables scrolling into view when navigating items and
-      // focuses on the selected item when the dropdown is open
-      const scrollNavigation = () => {
-        Promise.resolve().then(() => {
-          if (highlightedIndex > -1) {
-            const itemArray = document.querySelectorAll(
-              `li.${prefix}--list-box__menu-item[role="option"]`
-            );
-            props.scrollIntoView(itemArray[highlightedIndex]);
-          }
-        });
-      };
+      const { changes, type } = actionAndChanges;
 
       switch (type) {
-        case ToggleButtonKeyDownArrowDown:
-        case ToggleButtonKeyDownArrowUp:
-        case ToggleButtonKeyDownHome:
-        case ToggleButtonKeyDownEnd:
-        case ToggleButtonClick:
-          scrollNavigation();
-
-          return changes;
         case ItemMouseMove:
         case MenuMouseLeave:
           return { ...changes, highlightedIndex: state.highlightedIndex };
