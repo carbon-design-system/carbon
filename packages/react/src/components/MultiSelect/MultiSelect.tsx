@@ -43,7 +43,7 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
-import type { InternationalProps } from '../../types/common';
+import type { TranslateWithId } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 import {
   useFloating,
@@ -98,7 +98,7 @@ interface OnChangeData<ItemType> {
 
 export interface MultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
-    InternationalProps<
+    TranslateWithId<
       'close.menu' | 'open.menu' | 'clear.all' | 'clear.selection'
     > {
   /**

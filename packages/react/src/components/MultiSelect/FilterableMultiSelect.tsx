@@ -37,7 +37,10 @@ import {
   type MultiSelectSortingProps,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
-import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import ListBox, {
+  ListBoxMenuIconTranslationKey,
+  PropTypes as ListBoxPropTypes,
+} from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { defaultItemToString } from './tools/itemToString';
@@ -54,6 +57,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { TranslateWithId } from '../../types/common';
 
 const {
   InputBlur,
@@ -81,8 +85,22 @@ const {
 } =
   useMultipleSelection.stateChangeTypes as UseMultipleSelectionInterface['stateChangeTypes'];
 
+/**
+ * Message ids that will be passed to translateWithId().
+ * Combination of message ids from ListBox/next/ListBoxSelection.js and
+ * ListBox/next/ListBoxTrigger.js, but we can't access those values directly
+ * because those components aren't Typescript.  (If you try, TranslationKey
+ * ends up just being defined as "string".)
+ */
+type TranslationKey =
+  | 'close.menu'
+  | 'open.menu'
+  | 'clear.all'
+  | 'clear.selection';
+
 export interface FilterableMultiSelectProps<ItemType>
-  extends MultiSelectSortingProps<ItemType> {
+  extends MultiSelectSortingProps<ItemType>,
+    TranslateWithId<TranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
    * @deprecated
@@ -261,11 +279,6 @@ export interface FilterableMultiSelectProps<ItemType>
    * combobox via ARIA attributes.
    */
   titleText?: ReactNode;
-
-  /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId?(messageId: string, args?: Record<string, unknown>): string;
 
   type?: 'default' | 'inline';
 
@@ -729,7 +742,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         },
         { suppressRefError: true }
       ),
-    [autoAlign]
+    [autoAlign, getMenuProps, refs.setFloating]
   );
 
   const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {
