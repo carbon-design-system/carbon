@@ -126,6 +126,10 @@ export {
   FluidSelectSkeleton as unstable__FluidSelectSkeleton,
 } from './components/FluidSelect';
 export {
+  FluidSearch as unstable__FluidSearch,
+  FluidSearchSkeleton as unstable__FluidSearchSkeleton,
+} from './components/FluidSearch';
+export {
   FluidTextArea as unstable__FluidTextArea,
   FluidTextAreaSkeleton as unstable__FluidTextAreaSkeleton,
 } from './components/FluidTextArea';

@@ -40,7 +40,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { ReactAttr } from '../../types/common';
+import { TranslateWithId, ReactAttr } from '../../types/common';
 import { useId } from '../../internal/useId';
 import {
   useFloating,
@@ -85,7 +85,8 @@ export interface OnChangeData<ItemType> {
 }
 
 export interface DropdownProps<ItemType>
-  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
+  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes>,
+    TranslateWithId<ListBoxMenuIconTranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
@@ -219,14 +220,6 @@ export interface DropdownProps<ItemType>
    * visiting this control
    */
   titleText?: ReactNode;
-
-  /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId?(
-    messageId: ListBoxMenuIconTranslationKey,
-    args?: Record<string, unknown>
-  ): string;
 
   /**
    * The dropdown type, `default` or `inline`
