@@ -12,7 +12,7 @@ import Button from '../Button';
 import TableActionList from './TableActionList';
 import { Text } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
-import type { InternationalProps } from '../../types/common';
+import type { TranslateWithId } from '../../types/common';
 
 const TableBatchActionsTranslationKeys = [
   'carbon.table.batch.cancel',
@@ -31,7 +31,7 @@ export interface TableBatchActionsTranslationArgs {
 
 export interface TableBatchActionsProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    InternationalProps<
+    TranslateWithId<
       TableBatchActionsTranslationKey,
       TableBatchActionsTranslationArgs
     > {

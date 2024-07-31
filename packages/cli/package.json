@@ -1,7 +1,7 @@
 {
   "name": "@carbon/cli",
   "description": "Task automation for working with the Carbon Design System",
-  "version": "11.18.0",
+  "version": "11.19.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
@@ -27,7 +27,7 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
-    "@babel/core": "^7.18.2",
+    "@babel/core": "^7.24.7",
     "@carbon/cli-reporter": "^10.7.0",
     "@ibm/telemetry-js": "^1.5.0",
     "@octokit/plugin-retry": "^3.0.7",

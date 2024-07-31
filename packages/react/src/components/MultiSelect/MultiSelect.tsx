@@ -13,7 +13,7 @@ import {
   UseSelectProps,
   UseSelectStateChangeTypes,
 } from 'downshift';
-import isEqual from 'lodash.isequal';
+import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   ForwardedRef,
@@ -43,7 +43,7 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
-import type { InternationalProps } from '../../types/common';
+import type { TranslateWithId } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 import {
   useFloating,
@@ -98,7 +98,7 @@ interface OnChangeData<ItemType> {
 
 export interface MultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
-    InternationalProps<
+    TranslateWithId<
       'close.menu' | 'open.menu' | 'clear.all' | 'clear.selection'
     > {
   /**
@@ -652,6 +652,15 @@ const MultiSelect = React.forwardRef(
       selectedItems.length > 0 &&
       selectedItems.map((item) => (item as selectedItemType)?.text);
 
+    // Memoize the value of getMenuProps to avoid an infinite loop
+    const menuProps = useMemo(
+      () =>
+        getMenuProps({
+          ref: autoAlign ? refs.setFloating : null,
+        }),
+      [autoAlign]
+    );
+
     return (
       <div className={wrapperClasses}>
         <label className={titleClasses} {...getLabelProps()}>
@@ -687,7 +696,7 @@ const MultiSelect = React.forwardRef(
           )}
           <div
             className={multiSelectFieldWrapperClasses}
-            ref={refs.setReference}>
+            ref={autoAlign ? refs.setReference : null}>
             {selectedItems.length > 0 && (
               <ListBox.Selection
                 readOnly={readOnly}
@@ -723,10 +732,7 @@ const MultiSelect = React.forwardRef(
             </button>
             {normalizedSlug}
           </div>
-          <ListBox.Menu
-            {...getMenuProps({
-              ref: refs.setFloating,
-            })}>
+          <ListBox.Menu {...menuProps}>
             {isOpen &&
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               sortItems!(

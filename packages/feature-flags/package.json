@@ -1,7 +1,7 @@
 {
   "name": "@carbon/feature-flags",
   "description": "Build with feature flags in Carbon",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -36,11 +36,11 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.2",
-    "@babel/generator": "^7.18.2",
-    "@babel/preset-env": "^7.18.2",
-    "@babel/template": "^7.16.7",
-    "@babel/types": "^7.18.4",
+    "@babel/core": "^7.24.7",
+    "@babel/generator": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/template": "^7.24.7",
+    "@babel/types": "^7.24.7",
     "@carbon/scss-generator": "^10.18.0",
     "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",

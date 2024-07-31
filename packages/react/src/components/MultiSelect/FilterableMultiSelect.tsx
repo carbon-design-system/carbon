@@ -16,7 +16,7 @@ import Downshift, {
   UseComboboxStateChangeTypes,
   UseMultipleSelectionInterface,
 } from 'downshift';
-import isEqual from 'lodash.isequal';
+import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   useContext,
@@ -30,13 +30,17 @@ import React, {
   type KeyboardEvent,
   ReactElement,
   useLayoutEffect,
+  useMemo,
 } from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import {
   type MultiSelectSortingProps,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
-import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import ListBox, {
+  ListBoxMenuIconTranslationKey,
+  PropTypes as ListBoxPropTypes,
+} from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { defaultItemToString } from './tools/itemToString';
@@ -53,6 +57,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { TranslateWithId } from '../../types/common';
 
 const {
   InputBlur,
@@ -80,8 +85,22 @@ const {
 } =
   useMultipleSelection.stateChangeTypes as UseMultipleSelectionInterface['stateChangeTypes'];
 
+/**
+ * Message ids that will be passed to translateWithId().
+ * Combination of message ids from ListBox/next/ListBoxSelection.js and
+ * ListBox/next/ListBoxTrigger.js, but we can't access those values directly
+ * because those components aren't Typescript.  (If you try, TranslationKey
+ * ends up just being defined as "string".)
+ */
+type TranslationKey =
+  | 'close.menu'
+  | 'open.menu'
+  | 'clear.all'
+  | 'clear.selection';
+
 export interface FilterableMultiSelectProps<ItemType>
-  extends MultiSelectSortingProps<ItemType> {
+  extends MultiSelectSortingProps<ItemType>,
+    TranslateWithId<TranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
    * @deprecated
@@ -260,11 +279,6 @@ export interface FilterableMultiSelectProps<ItemType>
    * combobox via ARIA attributes.
    */
   titleText?: ReactNode;
-
-  /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId?(messageId: string, args?: Record<string, unknown>): string;
 
   type?: 'default' | 'inline';
 
@@ -718,7 +732,18 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       },
     })
   );
-  const menuProps = getMenuProps({}, { suppressRefError: true });
+
+  // Memoize the value of getMenuProps to avoid an infinite loop
+  const menuProps = useMemo(
+    () =>
+      getMenuProps(
+        {
+          ref: autoAlign ? refs.setFloating : null,
+        },
+        { suppressRefError: true }
+      ),
+    [autoAlign, getMenuProps, refs.setFloating]
+  );
 
   const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {
     if (
@@ -760,13 +785,16 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         disabled={disabled}
         light={light}
         ref={ref}
+        id={id}
         invalid={invalid}
         invalidText={invalidText}
         warn={warn}
         warnText={warnText}
         isOpen={isOpen}
         size={size}>
-        <div className={`${prefix}--list-box__field`} ref={refs.setReference}>
+        <div
+          className={`${prefix}--list-box__field`}
+          ref={autoAlign ? refs.setReference : null}>
           {controlledSelectedItems.length > 0 && (
             // @ts-expect-error: It is expecting a non-required prop called: "onClearSelection"
             <ListBoxSelection
@@ -819,7 +847,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         </div>
         {normalizedSlug}
 
-        <ListBox.Menu {...menuProps} ref={refs.setFloating}>
+        <ListBox.Menu {...menuProps}>
           {isOpen
             ? sortedItems.map((item, index) => {
                 const isChecked =
