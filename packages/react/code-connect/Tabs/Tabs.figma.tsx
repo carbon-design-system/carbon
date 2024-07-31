@@ -16,14 +16,14 @@ figma.connect(
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=3890-50605&mode=design&t=ERtuwFdbSumlRYtB-4',
   {
     props: {
-      children: figma.children(['_Tabs items']),
+      children: figma.children(['_Tabs button item']),
       contained: figma.enum('Style', {
         Contained: true,
       }),
       fullWidth: figma.enum('Alignment', {
         'Grid aware': true,
       }),
-      tab: figma.nestedProps('_Tabs items', {
+      tab: figma.nestedProps('_Tabs button item', {
         size: figma.enum('Size', {
           Large: 'lg',
         }),
