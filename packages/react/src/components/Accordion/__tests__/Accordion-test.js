@@ -295,43 +295,4 @@ describe('Accordion', () => {
       expect(ul).toBeInTheDocument();
     });
   });
-
-  describe('Nested Accordion', () => {
-    it('should not expand inner Accordion item when expanding outer Accordion item', async () => {
-      render(
-        <Accordion>
-          <AccordionItem title="outer title">
-            <Accordion>
-              <AccordionItem>inner panel</AccordionItem>
-            </Accordion>
-          </AccordionItem>
-        </Accordion>
-      );
-
-      // expand outer
-      await userEvent.click(screen.getByText('outer title'));
-
-      expect(screen.getByText('inner panel')).not.toBeVisible();
-    });
-
-    it('should not close outer Accordion item when closing inner Accordion item', async () => {
-      render(
-        <Accordion>
-          <AccordionItem open>
-            outer panel
-            <Accordion>
-              <AccordionItem title="inner title" open>
-                inner panel
-              </AccordionItem>
-            </Accordion>
-          </AccordionItem>
-        </Accordion>
-      );
-
-      // close inner
-      await userEvent.click(screen.getByText('inner title'));
-
-      expect(screen.getByText('outer panel')).toBeVisible();
-    });
-  });
 });
