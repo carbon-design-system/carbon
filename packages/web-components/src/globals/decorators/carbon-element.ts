@@ -14,7 +14,7 @@
  * not an arrow function.
  */
 
-import type { Constructor } from '../../../../../node_modules/@lit/reactive-element/decorators/base.js';
+import type { Constructor } from '@lit/reactive-element/decorators/base.js';
 
 /**
  * Allow for custom element classes with private constructors

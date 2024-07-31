@@ -5,77 +5,77 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-"use strict";
+'use strict';
 
-import path from "path";
-import autoprefixer from "autoprefixer";
-import cssnano from "cssnano";
-import { fileURLToPath } from "url";
-import postcss from "postcss";
-import alias from "@rollup/plugin-alias";
-import { rollup } from "rollup";
-import nodeResolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import typescript from "@rollup/plugin-typescript";
-import litSCSS from "../tools/rollup-plugin-lit-scss.js";
-import { globby } from "globby";
-import carbonIcons from "../tools/rollup-plugin-icons.js";
-import carbonIconPaths from "../tools/rollup-plugin-icon-paths.js";
+import path from 'path';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
+import { fileURLToPath } from 'url';
+import postcss from 'postcss';
+import alias from '@rollup/plugin-alias';
+import { rollup } from 'rollup';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import typescript from '@rollup/plugin-typescript';
+import litSCSS from '../tools/rollup-plugin-lit-scss.js';
+import { globby } from 'globby';
+import carbonIcons from '../tools/rollup-plugin-icons.js';
+import carbonIconPaths from '../tools/rollup-plugin-icon-paths.js';
 
-import * as packageJson from "../package.json" assert { type: "json" };
+import * as packageJson from '../package.json' assert { type: 'json' };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function build() {
   const esInputs = await globby([
-    "src/**/*.ts",
-    "!src/**/*.stories.ts",
-    "!src/**/*.d.ts",
-    "!src/globals/internal/storybook-cdn.ts",
-    "!src/polyfills",
+    'src/**/*.ts',
+    '!src/**/*.stories.ts',
+    '!src/**/*.d.ts',
+    '!src/globals/internal/storybook-cdn.ts',
+    '!src/polyfills',
   ]);
 
   const libInputs = await globby([
-    "src/components/**/defs.ts",
-    "src/globals/**/*.ts",
-    "!src/globals/decorators/**/*.ts",
-    "!src/globals/directives/**/*.ts",
-    "!src/globals/internal/**/*.ts",
-    "!src/globals/mixins/**/*.ts",
+    'src/components/**/defs.ts',
+    'src/globals/**/*.ts',
+    '!src/globals/decorators/**/*.ts',
+    '!src/globals/directives/**/*.ts',
+    '!src/globals/internal/**/*.ts',
+    '!src/globals/mixins/**/*.ts',
   ]);
 
   const iconInput = await globby([
-    "node_modules/@carbon/icons/lib/**/*.js",
-    "!**/index.js",
+    'node_modules/@carbon/icons/lib/**/*.js',
+    '!**/index.js',
   ]);
 
   const entryPoint = {
-    rootDir: "src",
-    outputDirectory: path.resolve(__dirname, ".."),
+    rootDir: path.resolve(__dirname, '..', 'src'),
+    outputDirectory: path.resolve(__dirname, '..'),
   };
 
   const formats = [
     {
-      type: "esm",
-      directory: "es",
+      type: 'esm',
+      directory: 'es',
     },
     {
-      type: "commonjs",
-      directory: "lib",
+      type: 'commonjs',
+      directory: 'lib',
     },
   ];
 
   for (const format of formats) {
     const outputDirectory = path.join(
       entryPoint.outputDirectory,
-      format.directory,
+      format.directory
     );
 
     const cwcInputConfig = getRollupConfig(
-      format.type === "esm" ? esInputs : libInputs,
+      format.type === 'esm' ? esInputs : libInputs,
       entryPoint.rootDir,
       outputDirectory,
-      format.type === "esm" ? iconInput : [],
+      format.type === 'esm' ? iconInput : []
     );
 
     const cwcBundle = await rollup(cwcInputConfig);
@@ -84,9 +84,9 @@ async function build() {
       dir: outputDirectory,
       format: format.type,
       preserveModules: true,
-      preserveModulesRoot: "src",
+      preserveModulesRoot: 'src',
       banner,
-      exports: "named",
+      exports: 'named',
       sourcemap: true,
     });
   }
@@ -119,18 +119,20 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
     }),
     plugins: [
       alias({
-        entries: [{ find: /^(.*)\.scss\?lit$/, replacement: "$1.scss" }],
+        entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
       }),
       nodeResolve({
         browser: true,
-        mainFields: ["jsnext", "module", "main"],
-        extensions: [".js", ".ts"],
+        mainFields: ['jsnext', 'module', 'main'],
+        extensions: ['.js', '.ts'],
       }),
       commonjs({
         include: [/node_modules/],
       }),
       litSCSS({
-        includePaths: [path.resolve(__dirname, "../node_modules")],
+        includePaths: [
+          path.resolve(__dirname, '../node_modules', '../../../node_modules'),
+        ],
         async preprocessor(contents, id) {
           return (
             await postcss([autoprefixer(), cssnano()]).process(contents, {
@@ -141,7 +143,7 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
       }),
       carbonIcons(iconInput, banner),
       typescript({
-        noEmitOnError: true,
+        noEmitOnError: false,
         compilerOptions: {
           rootDir,
           outDir,
