@@ -607,9 +607,9 @@ const ComboBox = forwardRef(
           const itemArray = document.querySelectorAll(
             `li.${prefix}--list-box__menu-item[role="option"]`
           );
-          const selectedItem = itemArray[highlightedIndex!];
-          if (selectedItem) {
-            selectedItem.scrollIntoView({
+          const highlightedItem = itemArray[highlightedIndex!];
+          if (highlightedItem) {
+            highlightedItem.scrollIntoView({
               behavior: 'smooth',
               block: 'nearest',
             });
