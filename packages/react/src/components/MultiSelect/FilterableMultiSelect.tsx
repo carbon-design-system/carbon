@@ -16,7 +16,7 @@ import Downshift, {
   UseComboboxStateChangeTypes,
   UseMultipleSelectionInterface,
 } from 'downshift';
-import isEqual from 'lodash.isequal';
+import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   useContext,
@@ -772,6 +772,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         disabled={disabled}
         light={light}
         ref={ref}
+        id={id}
         invalid={invalid}
         invalidText={invalidText}
         warn={warn}

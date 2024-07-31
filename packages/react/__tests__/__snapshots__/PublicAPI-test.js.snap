@@ -3733,6 +3733,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "invalid": Object {
         "type": "bool",
       },
