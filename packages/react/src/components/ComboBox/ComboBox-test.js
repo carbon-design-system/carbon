@@ -29,7 +29,7 @@ const prefix = 'cds';
 
 describe('ComboBox', () => {
   let mockProps;
-
+  window.HTMLElement.prototype.scrollIntoView = function () {};
   beforeEach(() => {
     mockProps = {
       id: 'test-combobox',

@@ -328,7 +328,7 @@ const Dropdown = React.forwardRef(
         return isObject && 'disabled' in item && item.disabled === true;
       },
       onHighlightedIndexChange: ({ highlightedIndex }) => {
-        if (highlightedIndex! > -1) {
+        if (highlightedIndex! > -1 && typeof window !== undefined) {
           const itemArray = document.querySelectorAll(
             `li.${prefix}--list-box__menu-item[role="option"]`
           );
