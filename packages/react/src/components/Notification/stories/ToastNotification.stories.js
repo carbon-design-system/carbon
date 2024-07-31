@@ -35,7 +35,6 @@ export const Default = () => (
     role="status"
     caption="00:00:00 AM"
     timeout={0}
-    kind="warning-alt"
     title="Notification title"
     subtitle="Subtitle text goes here"
   />
@@ -78,6 +77,12 @@ Playground.argTypes = {
   className: {
     table: {
       disable: true,
+    },
+  },
+  kind: {
+    options: ['error', 'success', 'warning', 'info'],
+    control: {
+      type: 'select',
     },
   },
 };

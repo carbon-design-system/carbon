@@ -29,7 +29,6 @@ export default {
 export const Default = () => (
   <StaticNotification
     title="Notification title"
-    kind="warning-alt"
     subtitle="Subtitle text goes here"
   />
 );
@@ -94,6 +93,12 @@ Playground.argTypes = {
   className: {
     table: {
       disable: true,
+    },
+  },
+  kind: {
+    options: ['error', 'success', 'warning', 'info'],
+    control: {
+      type: 'select',
     },
   },
 };

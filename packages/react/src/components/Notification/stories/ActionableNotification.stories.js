@@ -34,7 +34,6 @@ export const Default = () => (
   <ActionableNotification
     title="Notification title"
     subtitle="Subtitle text goes here"
-    kind="warning-alt"
     closeOnEscape
     inline={false}
     actionButtonLabel="Action"
@@ -84,6 +83,12 @@ Playground.argTypes = {
   hasFocus: {
     table: {
       disable: true,
+    },
+  },
+  kind: {
+    options: ['error', 'success', 'warning', 'info'],
+    control: {
+      type: 'select',
     },
   },
 };
