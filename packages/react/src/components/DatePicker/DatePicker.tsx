@@ -444,35 +444,38 @@ const DatePicker = React.forwardRef(function DatePicker(
   const lastStartValue = useRef('');
 
   // fix datepicker deleting the selectedDate when the calendar closes
-  const onCalendarClose = (selectedDates, dateStr, instance, e) => {
-    // Handle the case whewhen it's called from click outside handler
-    if (e && e.type === 'clickOutside') {
-      return;
-    }
+  const onCalendarClose = useCallback(
+    (selectedDates, dateStr, instance, e) => {
+      // Handle the case whewhen it's called from click outside handler
+      if (e && e.type === 'clickOutside') {
+        return;
+      }
 
-    setTimeout(() => {
-      if (
-        lastStartValue.current &&
-        selectedDates[0] &&
-        !startInputField.current.value
-      ) {
-        startInputField.current.value = lastStartValue.current;
-        calendarRef.current.setDate(
-          [startInputField.current.value, endInputField?.current?.value],
-          true,
-          calendarRef.current.config.dateFormat
-        );
-      }
-      // Call the prop's onClose if it exists
-      if (onClose) {
-        onClose(
-          calendarRef.current.selectedDates,
-          dateStr,
-          calendarRef.current
-        );
-      }
-    });
-  };
+      setTimeout(() => {
+        if (
+          lastStartValue.current &&
+          selectedDates[0] &&
+          !startInputField.current.value
+        ) {
+          startInputField.current.value = lastStartValue.current;
+          calendarRef.current.setDate(
+            [startInputField.current.value, endInputField?.current?.value],
+            true,
+            calendarRef.current.config.dateFormat
+          );
+        }
+        // Call the prop's onClose if it exists
+        if (onClose) {
+          onClose(
+            calendarRef.current.selectedDates,
+            dateStr,
+            calendarRef.current
+          );
+        }
+      });
+    },
+    [onClose]
+  );
 
   const endInputField = useRef<HTMLTextAreaElement>(null);
   const calendarRef: any | undefined = useRef(null);

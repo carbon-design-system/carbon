@@ -8,7 +8,6 @@
 import React, { useState, useEffect } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-import Button from '../Button';
 
 import DatePicker from './DatePicker';
 import DatePickerSkeleton from './DatePicker.Skeleton';
