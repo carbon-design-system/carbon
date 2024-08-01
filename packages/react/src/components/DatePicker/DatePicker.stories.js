@@ -36,8 +36,15 @@ export default {
   },
 };
 
-export const Simple = () => (
-  <DatePicker datePickerType="simple">
+export const Simple1 = () => (
+  <DatePicker
+    datePickerType="simple"
+    onChange={(value) => {
+      console.log('check onchange bugs', value);
+    }}
+    onClose={(e) => {
+      console.log(' check onclose', e);
+    }}>
     <DatePickerInput
       placeholder="mm/dd/yyyy"
       labelText="Date Picker label"
@@ -46,8 +53,64 @@ export const Simple = () => (
   </DatePicker>
 );
 
+export const Test33 = () => {
+  const [currentDate, setCurrentDate] = useState(null);
+  const [inputText, setInputText] = useState('');
+  const [currentTypedDate, setCurrentTypedDate] = useState('');
+
+  return (
+    <div>
+      <DatePicker
+        id="testDateField"
+        datePickerType="single"
+        allowInput={true}
+        dateFormat="d/m/Y"
+        locale="en"
+        onChange={(event) => {
+          if (event && Array.isArray(event) && event.length) {
+            setCurrentDate(event[0]);
+          } else {
+            setCurrentDate(null);
+          }
+        }}>
+        <DatePickerInput
+          id="testDateFieldInput"
+          datePickerType="single"
+          placeholder="dd/mm/yyyy"
+          labelText="Date"
+          size="md"
+          onChange={(event) => {
+            setInputText(event?.target?.value);
+          }}
+          onBlur={(event) => {
+            setCurrentTypedDate(inputText);
+          }}
+        />
+      </DatePicker>
+      <br />
+      <p style={{ fontWeight: 600, fontSize: '10pt' }}>Date picker date:</p>
+      <p style={{ fontSize: '11pt' }}>
+        {currentDate && currentDate.toISOString
+          ? currentDate.toDateString()
+          : 'No date'}
+      </p>
+      <br />
+      <p style={{ fontWeight: 600, fontSize: '10pt' }}>Date input date:</p>
+      <p style={{ fontSize: '11pt' }}>
+        {currentTypedDate ? currentTypedDate : 'No date typed'}
+      </p>
+    </div>
+  );
+};
 export const SingleWithCalendar = () => (
-  <DatePicker datePickerType="single">
+  <DatePicker
+    datePickerType="single"
+    onChange={(value) => {
+      console.log('check onchange bugs', value);
+    }}
+    onClose={(e) => {
+      console.log(' check onclose', e);
+    }}>
     <DatePickerInput
       placeholder="mm/dd/yyyy"
       labelText="Date Picker label"

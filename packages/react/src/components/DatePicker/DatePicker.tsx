@@ -839,6 +839,19 @@ const DatePicker = React.forwardRef(function DatePicker(
       calendarRef.current.set('inline', inline);
     }
   }, [inline]);
+  useEffect(() => {
+    //when value prop is set to empty, this clears the faltpicker's calendar instance and text input
+    if (value === '') {
+      calendarRef.current?.clear();
+      if (startInputField.current) {
+        startInputField.current.value = '';
+      }
+
+      if (endInputField.current) {
+        endInputField.current.value = '';
+      }
+    }
+  }, [value]);
 
   useEffect(() => {
     let isMouseDown = false;
@@ -858,7 +871,6 @@ const DatePicker = React.forwardRef(function DatePicker(
     };
 
     const closeCalendar = (event) => {
-      console.log('calendarRef', calendarRef);
       calendarRef.current.close();
       // Remove focus from endDate calendar input
       if (document.activeElement instanceof HTMLElement) {
