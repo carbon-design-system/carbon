@@ -13,7 +13,7 @@ import {
   UseSelectProps,
   UseSelectStateChangeTypes,
 } from 'downshift';
-import isEqual from 'lodash.isequal';
+import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   ForwardedRef,
@@ -43,7 +43,7 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
-import type { InternationalProps } from '../../types/common';
+import type { TranslateWithId } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 import {
   useFloating,
@@ -98,7 +98,7 @@ interface OnChangeData<ItemType> {
 
 export interface MultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
-    InternationalProps<
+    TranslateWithId<
       'close.menu' | 'open.menu' | 'clear.all' | 'clear.selection'
     > {
   /**
@@ -646,7 +646,7 @@ const MultiSelect = React.forwardRef(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });
@@ -835,7 +835,8 @@ MultiSelect.propTypes = {
 
   /**
    * Provide a compare function that is used to determine the ordering of
-   * options. See 'sortItems' for more control.
+   * options. See 'sortItems' for more control. Consider
+   * declaring function with `useCallback` to prevent unnecessary re-renders.
    */
   compareItems: PropTypes.func,
 
@@ -895,7 +896,8 @@ MultiSelect.propTypes = {
   /**
    * Helper function passed to downshift that allows the library to render a
    * given item to a string label. By default, it extracts the `label` field
-   * from a given item to serve as the item label in the list.
+   * from a given item to serve as the item label in the list. Consider
+   * declaring function with `useCallback` to prevent unnecessary re-renders.
    */
   itemToString: PropTypes.func,
 

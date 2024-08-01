@@ -53,7 +53,8 @@ FluidMultiSelect.propTypes = {
 
   /**
    * Provide a compare function that is used to determine the ordering of
-   * options. See 'sortItems' for more control.
+   * options. See 'sortItems' for more control. Consider declaring function
+   * with `useCallback` to prevent unnecessary re-renders.
    */
   compareItems: PropTypes.func,
 
@@ -112,7 +113,8 @@ FluidMultiSelect.propTypes = {
   /**
    * Helper function passed to downshift that allows the library to render a
    * given item to a string label. By default, it extracts the `label` field
-   * from a given item to serve as the item label in the list.
+   * from a given item to serve as the item label in the list. Consider
+   * declaring function with `useCallback` to prevent unnecessary re-renders.
    */
   itemToString: PropTypes.func,
 
