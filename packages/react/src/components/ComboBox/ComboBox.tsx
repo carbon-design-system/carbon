@@ -45,6 +45,7 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useFloating, flip, autoUpdate } from '@floating-ui/react';
+import { TranslateWithId } from '../../types/common';
 
 const {
   InputBlur,
@@ -129,9 +130,23 @@ interface OnChangeData<ItemType> {
   inputValue?: string | null;
 }
 
+/**
+ * Message ids that will be passed to translateWithId().
+ * Combination of message ids from ListBox/next/ListBoxSelection.js and
+ * ListBox/next/ListBoxTrigger.js, but we can't access those values directly
+ * because those components aren't Typescript.  (If you try, TranslationKey
+ * ends up just being defined as "string".)
+ */
+type TranslationKey =
+  | 'close.menu'
+  | 'open.menu'
+  | 'clear.all'
+  | 'clear.selection';
+
 type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
 export interface ComboBoxProps<ItemType>
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
+    TranslateWithId<TranslationKey> {
   /**
    * Specify whether or not the ComboBox should allow a value that is
    * not in the list to be entered in the input
@@ -296,12 +311,6 @@ export interface ComboBoxProps<ItemType>
   titleText?: ReactNode;
 
   /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
-   */
-  translateWithId?: (id: string) => string;
-
-  /**
    * Specify whether the control is currently in warning state
    */
   warn?: boolean;
@@ -452,6 +461,7 @@ const ComboBox = forwardRef(
       (state, actionAndChanges) => {
         const { type, changes } = actionAndChanges;
         const { highlightedIndex } = changes;
+
         switch (type) {
           case InputBlur:
             if (
@@ -598,11 +608,23 @@ const ComboBox = forwardRef(
         setInputValue(inputValue || '');
         setHighlightedIndex(indexToHighlight(inputValue));
       },
-
       onSelectedItemChange({ selectedItem }) {
         onChange({ selectedItem });
       },
-
+      onHighlightedIndexChange: ({ highlightedIndex }) => {
+        if (highlightedIndex! > -1 && typeof window !== undefined) {
+          const itemArray = document.querySelectorAll(
+            `li.${prefix}--list-box__menu-item[role="option"]`
+          );
+          const highlightedItem = itemArray[highlightedIndex!];
+          if (highlightedItem) {
+            highlightedItem.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+            });
+          }
+        }
+      },
       initialSelectedItem: initialSelectedItem,
       inputId: id,
       stateReducer,
@@ -661,7 +683,13 @@ const ComboBox = forwardRef(
           'aria-label': deprecatedAriaLabel || ariaLabel,
           ref: autoAlign ? refs.setFloating : null,
         }),
-      [autoAlign, deprecatedAriaLabel, ariaLabel]
+      [
+        autoAlign,
+        deprecatedAriaLabel,
+        ariaLabel,
+        getMenuProps,
+        refs.setFloating,
+      ]
     );
 
     return (

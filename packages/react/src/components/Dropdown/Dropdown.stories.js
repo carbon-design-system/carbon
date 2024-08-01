@@ -67,6 +67,15 @@ const items = [
   {
     text: 'Option 5',
   },
+  {
+    text: 'Option 6',
+  },
+  {
+    text: 'Option 7',
+  },
+  {
+    text: 'Option 8',
+  },
 ];
 
 export const ExperimentalAutoAlign = () => (
