@@ -91,16 +91,10 @@ export const ExperimentalAutoAlignBoundaryTest = () => {
   return (
     <div
       style={{
-        overflow: 'scroll',
-        width: '800px',
         height: '900px',
-        border: '1px',
-        borderStyle: 'dashed',
-        borderColor: 'black',
         paddingTop: '50px',
-        margin: '290px auto 0',
-      }}
-      ref={setBoundary}>
+        width: 400,
+      }}>
       <Dropdown
         autoAlign={true}
         id="default"
@@ -108,7 +102,6 @@ export const ExperimentalAutoAlignBoundaryTest = () => {
         helperText="This is some helper text"
         initialSelectedItem={items[1]}
         label="Option 1"
-        autoAlignBoundary={boundary}
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         direction="top"
