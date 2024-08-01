@@ -25,17 +25,11 @@ figma.connect(
         Condensed: true,
       }),
       headerRowItems: figma.children(['_Structured list header row item']),
-      headerRow: figma.nestedProps('_Structured list header row item', {
-        isFlush: figma.enum('Alignment', {
-          Flush: true,
-        }),
-      }),
+      isFlush: figma.boolean('Flush'),
       rowItems: figma.children(['_Structured list row item']),
     },
-    example: ({ headerRow, headerRowItem, rowItems, isCondensed }) => (
-      <StructuredListWrapper
-        isFlush={headerRow.isFlush}
-        isCondensed={isCondensed}>
+    example: ({ isFlush, headerRowItem, rowItems, isCondensed }) => (
+      <StructuredListWrapper isFlush={isFlush} isCondensed={isCondensed}>
         <StructuredListHead>{headerRowItems}</StructuredListHead>
         <StructuredListBody>{rowItems}</StructuredListBody>
       </StructuredListWrapper>
@@ -52,19 +46,11 @@ figma.connect(
       isCondensed: figma.enum('Size', {
         Condensed: true,
       }),
-      headerRow: figma.nestedProps('_Structured list header row item', {
-        isFlush: figma.enum('Alignment', {
-          Flush: true,
-        }),
-      }),
       headerRowItems: figma.children(['_Structured list header row item']),
       rowItems: figma.children(['_Structured list row item - Selectable']),
     },
-    example: ({ headerRow, headerRowItem, rowItems, isCondensed }) => (
-      <StructuredListWrapper
-        selection
-        isFlush={headerRow.isFlush}
-        isCondensed={isCondensed}>
+    example: ({ headerRowItem, rowItems, isCondensed }) => (
+      <StructuredListWrapper selection isCondensed={isCondensed}>
         <StructuredListHead>{headerRowItems}</StructuredListHead>
         <StructuredListBody>{rowItems}</StructuredListBody>
       </StructuredListWrapper>
