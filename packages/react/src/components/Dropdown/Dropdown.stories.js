@@ -5,11 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-import { Popover, PopoverContent } from '../Popover';
-import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
 
 import { default as Dropdown, DropdownSkeleton } from './';
 import mdx from './Dropdown.mdx';
@@ -89,19 +87,10 @@ export const ExperimentalAutoAlign = () => (
   </div>
 );
 
-export const ExperimentalAutoAlignBoundary = () => {
-  const [open, setOpen] = useState(true);
-  const ref = useRef();
-  const [boundary, setBoundary] = useState();
-
-  // useEffect(() => {
-  //   ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
-  // });
+export const ExperimentalAutoAlignBoundaryTest = () => {
   return (
     <div
       style={{
-        //  display: 'grid',
-        //  placeItems: 'center',
         overflow: 'scroll',
         width: '800px',
         height: '900px',
@@ -112,15 +101,6 @@ export const ExperimentalAutoAlignBoundary = () => {
         margin: '290px auto 0',
       }}
       ref={setBoundary}>
-      {/* <div
-         style={{
-           width: '2100px',
-           height: '1px',
-           placeItems: 'center',
-         }}
-       /> */}
-
-      {/* <div style={{ placeItems: 'center', height: '32px', width: '32px' }}> */}
       <Dropdown
         autoAlign={true}
         id="default"
@@ -133,36 +113,11 @@ export const ExperimentalAutoAlignBoundary = () => {
         itemToString={(item) => (item ? item.text : '')}
         direction="top"
       />
-      {/* <div
-           style={{
-             height: '1000px',
-             width: '1px',
-             placeItems: 'center',
-           }}
-         /> */}
-      {/* </div> */}
     </div>
-
-    //  </div>
   );
-  // <div style={{ width: 400 }}>
-  //   <div style={{ height: 300 }}></div>
-  //   <Dropdown
-  //     autoAlign={true}
-  //     id="default"
-  //     titleText="Dropdown label"
-  //     helperText="This is some helper text"
-  //     initialSelectedItem={items[1]}
-  //     label="Option 1"
-  //     items={items}
-  //     itemToString={(item) => (item ? item.text : '')}
-  //     direction="top"
-  //   />
-  //   <div style={{ height: 800 }}></div>
-  // </div>
 };
 
-export const Playground = (args) => {
+export const Playground = (args) => (
   <div style={{ width: 400 }}>
     <Dropdown
       id="default"
@@ -174,8 +129,8 @@ export const Playground = (args) => {
       itemToString={(item) => (item ? item.text : '')}
       {...args}
     />
-  </div>;
-};
+  </div>
+);
 
 Playground.args = {
   invalid: false,
