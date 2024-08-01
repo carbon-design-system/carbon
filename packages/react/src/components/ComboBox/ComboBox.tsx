@@ -461,6 +461,7 @@ const ComboBox = forwardRef(
       (state, actionAndChanges) => {
         const { type, changes } = actionAndChanges;
         const { highlightedIndex } = changes;
+
         switch (type) {
           case InputBlur:
             if (
@@ -607,11 +608,23 @@ const ComboBox = forwardRef(
         setInputValue(inputValue || '');
         setHighlightedIndex(indexToHighlight(inputValue));
       },
-
       onSelectedItemChange({ selectedItem }) {
         onChange({ selectedItem });
       },
-
+      onHighlightedIndexChange: ({ highlightedIndex }) => {
+        if (highlightedIndex! > -1 && typeof window !== undefined) {
+          const itemArray = document.querySelectorAll(
+            `li.${prefix}--list-box__menu-item[role="option"]`
+          );
+          const highlightedItem = itemArray[highlightedIndex!];
+          if (highlightedItem) {
+            highlightedItem.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+            });
+          }
+        }
+      },
       initialSelectedItem: initialSelectedItem,
       inputId: id,
       stateReducer,
