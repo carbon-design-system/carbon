@@ -54,6 +54,11 @@ next element.
 Our `Combobox` component utilizes [Downshift](https://www.downshift-js.com/)
 under the hood to help provide complex yet accessible custom dropdown
 components. We provide access to the built in Downshift features with this prop.
+
+Use with caution: anything you define here overrides the components' internal
+handling of that prop. Downshift internals are subject to change, and in some
+cases they can not be shimmed to shield you from potentially breaking changes.
+
 For more information, checkout the Downshift prop
 [documentation](https://www.downshift-js.com/downshift#props-used-in-examples)
 
