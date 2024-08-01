@@ -49,7 +49,7 @@ import {
   size as floatingSize,
   type Boundary,
 } from '@floating-ui/react';
-// import {hide} from '@floating-ui/dom';
+import { computePosition, hide } from '@floating-ui/dom';
 
 const {
   ToggleButtonKeyDownArrowDown,
@@ -104,11 +104,6 @@ export interface DropdownProps<ItemType>
    * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
    */
   autoAlign?: boolean;
-
-  /**
-   * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
-   */
-  autoAlignBoundary?: Boundary;
 
   /**
    * Specify the direction of the dropdown. Can be either top or bottom.
@@ -290,7 +285,7 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
-    const { refs, floatingStyles } = useFloating(
+    const { refs, elements, floatingStyles } = useFloating(
       autoAlign
         ? {
             placement: direction,
@@ -310,14 +305,28 @@ const Dropdown = React.forwardRef(
                   });
                 },
               }),
-              flip({
-                boundary: autoAlignBoundary,
-              }),
+              flip(),
             ],
             whileElementsMounted: autoUpdate,
           }
         : {} // When autoAlign is turned off, floating-ui will not be used
     );
+
+    const { reference, floating } = elements;
+
+    const updatePosition = () => {
+      computePosition(reference, floating, {
+        middleware: [hide({ strategy: 'referenceHidden' })],
+      }).then(({ middlewareData }) => {
+        if (middlewareData.hide) {
+          Object.assign(floating.style, {
+            visibility: middlewareData.hide.referenceHidden
+              ? 'hidden'
+              : 'visible',
+          });
+        }
+      });
+    };
 
     useEffect(() => {
       if (autoAlign) {
@@ -326,6 +335,7 @@ const Dropdown = React.forwardRef(
             refs.floating.current.style[style] = floatingStyles[style];
           }
         });
+        updatePosition();
       }
     }, [floatingStyles, autoAlign, refs.floating]);
 
@@ -663,21 +673,6 @@ Dropdown.propTypes = {
    * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
    */
   autoAlign: PropTypes.bool,
-
-  /**
-   * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
-   */
-  autoAlignBoundary: PropTypes.oneOfType([
-    PropTypes.oneOf(['clippingAncestors']),
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.exact({
-      x: PropTypes.number,
-      y: PropTypes.number,
-      width: PropTypes.number,
-      height: PropTypes.number,
-    }),
-  ]),
 
   /**
    * Provide a custom className to be applied on the cds--dropdown node
