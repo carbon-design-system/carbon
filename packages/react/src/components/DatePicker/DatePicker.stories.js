@@ -161,8 +161,7 @@ export const RangeWithCalendar = () => {
       }}
       onClose={(e) => {
         console.log(' check onclose', e);
-      }}
-      closeOnSelect={false}>
+      }}>
       <DatePickerInput
         id="date-picker-input-id-start"
         placeholder="mm/dd/yyyy"
