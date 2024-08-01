@@ -139,7 +139,10 @@ export interface FilterableMultiSelectProps<ItemType>
   disabled?: boolean;
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift. Use with caution: anything you define
+   * here overrides the components' internal handling of that prop. Downshift
+   * internals are subject to change, and in some cases they can not be shimmed
+   * to shield you from potentially breaking changes.
    */
   downshiftProps?: UseMultipleSelectionProps<ItemType>;
 
@@ -590,7 +593,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   }
 
   const { getDropdownProps } = useMultipleSelection<ItemType>({
-    ...downshiftProps,
     activeIndex: highlightedIndex,
     initialSelectedItems,
     selectedItems: controlledSelectedItems,
@@ -606,6 +608,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         }
       }
     },
+    ...downshiftProps,
   });
 
   useEffect(() => {
@@ -956,7 +959,10 @@ FilterableMultiSelect.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift. Use with caution: anything you define
+   * here overrides the components' internal handling of that prop. Downshift
+   * internals are subject to change, and in some cases they can not be shimmed
+   * to shield you from potentially breaking changes.
    */
   // @ts-ignore
   downshiftProps: PropTypes.shape(Downshift.propTypes),
