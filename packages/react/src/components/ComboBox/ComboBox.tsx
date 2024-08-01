@@ -39,12 +39,13 @@ import ListBox, {
 } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useFloating, flip, autoUpdate } from '@floating-ui/react';
+import { TranslateWithId } from '../../types/common';
 
 const {
   InputBlur,
@@ -122,8 +123,6 @@ const findHighlightedIndex = <ItemType,>(
   return -1;
 };
 
-const getInstanceId = setupGetInstanceId();
-
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type' | 'size';
 
 interface OnChangeData<ItemType> {
@@ -131,9 +130,23 @@ interface OnChangeData<ItemType> {
   inputValue?: string | null;
 }
 
+/**
+ * Message ids that will be passed to translateWithId().
+ * Combination of message ids from ListBox/next/ListBoxSelection.js and
+ * ListBox/next/ListBoxTrigger.js, but we can't access those values directly
+ * because those components aren't Typescript.  (If you try, TranslationKey
+ * ends up just being defined as "string".)
+ */
+type TranslationKey =
+  | 'close.menu'
+  | 'open.menu'
+  | 'clear.all'
+  | 'clear.selection';
+
 type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
 export interface ComboBoxProps<ItemType>
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
+    TranslateWithId<TranslationKey> {
   /**
    * Specify whether or not the ComboBox should allow a value that is
    * not in the list to be entered in the input
@@ -298,12 +311,6 @@ export interface ComboBoxProps<ItemType>
   titleText?: ReactNode;
 
   /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
-   */
-  translateWithId?: (id: string) => string;
-
-  /**
    * Specify whether the control is currently in warning state
    */
   warn?: boolean;
@@ -379,7 +386,7 @@ const ComboBox = forwardRef(
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
-    const comboBoxInstanceId = getInstanceId();
+    const comboBoxInstanceId = useId();
     const [inputValue, setInputValue] = useState(
       getInputValue({
         initialSelectedItem,
@@ -454,6 +461,7 @@ const ComboBox = forwardRef(
       (state, actionAndChanges) => {
         const { type, changes } = actionAndChanges;
         const { highlightedIndex } = changes;
+
         switch (type) {
           case InputBlur:
             if (
@@ -600,11 +608,23 @@ const ComboBox = forwardRef(
         setInputValue(inputValue || '');
         setHighlightedIndex(indexToHighlight(inputValue));
       },
-
       onSelectedItemChange({ selectedItem }) {
         onChange({ selectedItem });
       },
-
+      onHighlightedIndexChange: ({ highlightedIndex }) => {
+        if (highlightedIndex! > -1 && typeof window !== undefined) {
+          const itemArray = document.querySelectorAll(
+            `li.${prefix}--list-box__menu-item[role="option"]`
+          );
+          const highlightedItem = itemArray[highlightedIndex!];
+          if (highlightedItem) {
+            highlightedItem.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+            });
+          }
+        }
+      },
       initialSelectedItem: initialSelectedItem,
       inputId: id,
       stateReducer,
@@ -656,13 +676,20 @@ const ComboBox = forwardRef(
       (helperText && !isFluid && helperTextId) ||
       undefined;
 
+    // Memoize the value of getMenuProps to avoid an infinite loop
     const menuProps = useMemo(
       () =>
         getMenuProps({
           'aria-label': deprecatedAriaLabel || ariaLabel,
           ref: autoAlign ? refs.setFloating : null,
         }),
-      [autoAlign, deprecatedAriaLabel, ariaLabel]
+      [
+        autoAlign,
+        deprecatedAriaLabel,
+        ariaLabel,
+        getMenuProps,
+        refs.setFloating,
+      ]
     );
 
     return (

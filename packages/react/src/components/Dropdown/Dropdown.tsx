@@ -40,8 +40,8 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { ReactAttr } from '../../types/common';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { TranslateWithId, ReactAttr } from '../../types/common';
+import { useId } from '../../internal/useId';
 import {
   useFloating,
   flip,
@@ -49,18 +49,10 @@ import {
   size as floatingSize,
 } from '@floating-ui/react';
 
-const getInstanceId = setupGetInstanceId();
-
-const {
-  ToggleButtonKeyDownArrowDown,
-  ToggleButtonKeyDownArrowUp,
-  ToggleButtonKeyDownHome,
-  ToggleButtonKeyDownEnd,
-  ItemMouseMove,
-  MenuMouseLeave,
-} = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
-  ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
-};
+const { ItemMouseMove, MenuMouseLeave } =
+  useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
+    ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
+  };
 
 const defaultItemToString = <ItemType,>(item?: ItemType | null): string => {
   if (typeof item === 'string') {
@@ -87,7 +79,8 @@ export interface OnChangeData<ItemType> {
 }
 
 export interface DropdownProps<ItemType>
-  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
+  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes>,
+    TranslateWithId<ListBoxMenuIconTranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
@@ -223,14 +216,6 @@ export interface DropdownProps<ItemType>
   titleText?: ReactNode;
 
   /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId?(
-    messageId: ListBoxMenuIconTranslationKey,
-    args?: Record<string, unknown>
-  ): string;
-
-  /**
    * The dropdown type, `default` or `inline`
    */
   type?: ListBoxType;
@@ -335,25 +320,27 @@ const Dropdown = React.forwardRef(
         const isObject = item !== null && typeof item === 'object';
         return isObject && 'disabled' in item && item.disabled === true;
       },
+      onHighlightedIndexChange: ({ highlightedIndex }) => {
+        if (highlightedIndex! > -1 && typeof window !== undefined) {
+          const itemArray = document.querySelectorAll(
+            `li.${prefix}--list-box__menu-item[role="option"]`
+          );
+          const highlightedItem = itemArray[highlightedIndex!];
+          if (highlightedItem) {
+            highlightedItem.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+            });
+          }
+        }
+      },
     };
-    const { current: dropdownInstanceId } = useRef(getInstanceId());
+    const dropdownInstanceId = useId();
 
     function stateReducer(state, actionAndChanges) {
-      const { changes, props, type } = actionAndChanges;
-      const { highlightedIndex } = changes;
+      const { changes, type } = actionAndChanges;
 
       switch (type) {
-        case ToggleButtonKeyDownArrowDown:
-        case ToggleButtonKeyDownArrowUp:
-        case ToggleButtonKeyDownHome:
-        case ToggleButtonKeyDownEnd:
-          if (highlightedIndex > -1) {
-            const itemArray = document.querySelectorAll(
-              `li.${prefix}--list-box__menu-item[role="option"]`
-            );
-            props.scrollIntoView(itemArray[highlightedIndex]);
-          }
-          return changes;
         case ItemMouseMove:
         case MenuMouseLeave:
           return { ...changes, highlightedIndex: state.highlightedIndex };

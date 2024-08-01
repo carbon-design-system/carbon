@@ -22,11 +22,17 @@ import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { Text } from '../Text';
+import { TranslateWithId } from '../../types/common';
 
 export const translationIds = {
   'increment.number': 'increment.number',
   'decrement.number': 'decrement.number',
-};
+} as const;
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = keyof typeof translationIds;
 
 const defaultTranslations = {
   [translationIds['increment.number']]: 'Increment number',
@@ -45,10 +51,8 @@ type ExcludedAttributes =
   | 'value';
 
 export interface NumberInputProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    ExcludedAttributes
-  > {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
+    TranslateWithId<TranslationKey> {
   /**
    * `true` to allow empty string.
    */
@@ -175,11 +179,6 @@ export interface NumberInputProps
    * Specify how much the values should increase/decrease upon clicking on up/down button
    */
   step?: number;
-
-  /**
-   * Provide custom text for the component for each translation id
-   */
-  translateWithId?: (id: string) => string;
 
   /**
    * Specify the value of the input
