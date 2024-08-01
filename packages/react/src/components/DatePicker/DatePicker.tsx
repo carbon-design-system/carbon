@@ -444,36 +444,38 @@ const DatePicker = React.forwardRef(function DatePicker(
   const lastStartValue = useRef('');
 
   // fix datepicker deleting the selectedDate when the calendar closes
-  const onCalendarClose = (selectedDates, dateStr, instance, e) => {
-    setTimeout(() => {
-      if (
-        lastStartValue.current &&
-        selectedDates[0] &&
-        !startInputField.current.value
-      ) {
-        startInputField.current.value = lastStartValue.current;
-        calendarRef.current.setDate(
-          [startInputField.current.value, endInputField?.current?.value],
-          true,
-          calendarRef.current.config.dateFormat
-        );
+  const onCalendarClose = useCallback(
+    (selectedDates, dateStr, instance, e) => {
+      // Handle the case whewhen it's called from click outside handler
+      if (e && e.type === 'clickOutside') {
+        return;
       }
-      if (
-        e &&
-        e.type === 'click' &&
-        !instance.config._input.contains(e.target)
-      ) {
-        calendarRef.current.close();
-      }
-      if (onClose) {
-        onClose(
-          calendarRef.current.selectedDates,
-          dateStr,
-          calendarRef.current
-        );
-      }
-    });
-  };
+
+      setTimeout(() => {
+        if (
+          lastStartValue.current &&
+          selectedDates[0] &&
+          !startInputField.current.value
+        ) {
+          startInputField.current.value = lastStartValue.current;
+          calendarRef.current.setDate(
+            [startInputField.current.value, endInputField?.current?.value],
+            true,
+            calendarRef.current.config.dateFormat
+          );
+        }
+        // Call the prop's onClose if it exists
+        if (onClose) {
+          onClose(
+            calendarRef.current.selectedDates,
+            dateStr,
+            calendarRef.current
+          );
+        }
+      });
+    },
+    [onClose]
+  );
 
   const endInputField = useRef<HTMLTextAreaElement>(null);
   const calendarRef: any | undefined = useRef(null);
@@ -659,7 +661,7 @@ const DatePicker = React.forwardRef(function DatePicker(
           savedOnChange(...args);
         }
       },
-      onClose: savedOnClose,
+
       onReady: onHook,
       onMonthChange: onHook,
       onYearChange: onHook,
@@ -839,23 +841,42 @@ const DatePicker = React.forwardRef(function DatePicker(
   }, [inline]);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    let isMouseDown = false;
+
+    const handleMouseDown = (event) => {
       if (
         calendarRef.current &&
+        calendarRef.current.isOpen &&
         !calendarRef.current.calendarContainer.contains(event.target) &&
         !startInputField.current.contains(event.target) &&
-        (!endInputField.current ||
-          !endInputField.current.contains(event.target))
+        !endInputField.current?.contains(event.target)
       ) {
-        calendarRef.current.close();
+        isMouseDown = true;
+        // Close the calendar immediately on mousedown
+        closeCalendar(event);
       }
     };
-    document.addEventListener('click', handleClickOutside, true);
+
+    const closeCalendar = (event) => {
+      console.log('calendarRef', calendarRef);
+      calendarRef.current.close();
+      // Remove focus from endDate calendar input
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+      onCalendarClose(
+        calendarRef.current.selectedDates,
+        '',
+        calendarRef.current,
+        { type: 'clickOutside' }
+      );
+    };
+    document.addEventListener('mousedown', handleMouseDown, true);
 
     return () => {
-      document.removeEventListener('click', handleClickOutside, true);
+      document.removeEventListener('mousedown', handleMouseDown, true);
     };
-  }, []);
+  }, [calendarRef, startInputField, endInputField, onCalendarClose]);
 
   useEffect(() => {
     if (calendarRef?.current?.set) {

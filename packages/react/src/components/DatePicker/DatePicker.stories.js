@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import Button from '../Button';
 
 import DatePicker from './DatePicker';
 import DatePickerSkeleton from './DatePicker.Skeleton';
@@ -55,10 +56,50 @@ export const SingleWithCalendar = () => (
     />
   </DatePicker>
 );
+export const Test2 = () => {
+  const [date, setDate] = useState();
+  return (
+    <>
+      <DatePicker
+        datePickerType="single"
+        value={date}
+        onChange={(value) => {
+          console.log('check onchange bugs', value);
+          setDate(value);
+        }}
+        onClose={(e) => {
+          console.log(' check onclose', e);
+        }}>
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id="date-picker-simple"
+        />
+      </DatePicker>
+      <button
+        type="button"
+        onClick={() => {
+          console.log('date', date);
+          setDate('');
+        }}>
+        clear
+      </button>
 
+      <span> value is {date?.toLocaleString()}</span>
+    </>
+  );
+};
 export const RangeWithCalendar = () => {
   return (
-    <DatePicker datePickerType="range">
+    <DatePicker
+      datePickerType="range"
+      onChange={(e) => {
+        console.log('check onchange bugs', e);
+      }}
+      onClose={(e) => {
+        console.log(' check onclose', e);
+      }}
+      closeOnSelect={false}>
       <DatePickerInput
         id="date-picker-input-id-start"
         placeholder="mm/dd/yyyy"
@@ -74,7 +115,54 @@ export const RangeWithCalendar = () => {
     </DatePicker>
   );
 };
+export const Test = () => {
+  const [date, setDate] = useState(['', '']);
+  useEffect(() => {
+    console.log('selected date:', date);
+  }, [date]);
 
+  const handleChange = (range) => {
+    const [startDate, endDate] = range ?? ['', ''];
+
+    if (!startDate || !endDate) return;
+
+    setDate([startDate, endDate]);
+  };
+
+  return (
+    <>
+      <div className="buttonsGroup">
+        <div className="button">
+          <Button kind="ghost" onClick={() => setDate(['', ''])}>
+            reset
+          </Button>
+        </div>
+      </div>
+      <DatePicker
+        light
+        datePickerType="range"
+        dateFormat="m/d/Y"
+        value={date}
+        //   onChange={(vals) => handleChange(vals)}
+        onClose={(e) => {
+          console.log('check onclose', e);
+        }}>
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+          size="md"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+          size="md"
+        />
+      </DatePicker>
+    </>
+  );
+};
 export const SimpleWithLayer = () => (
   <WithLayer>
     {(layer) => (
