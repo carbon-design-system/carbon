@@ -49,16 +49,10 @@ import {
   size as floatingSize,
 } from '@floating-ui/react';
 
-const {
-  ToggleButtonKeyDownArrowDown,
-  ToggleButtonKeyDownArrowUp,
-  ToggleButtonKeyDownHome,
-  ToggleButtonKeyDownEnd,
-  ItemMouseMove,
-  MenuMouseLeave,
-} = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
-  ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
-};
+const { ItemMouseMove, MenuMouseLeave } =
+  useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
+    ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
+  };
 
 const defaultItemToString = <ItemType,>(item?: ItemType | null): string => {
   if (typeof item === 'string') {
@@ -326,25 +320,27 @@ const Dropdown = React.forwardRef(
         const isObject = item !== null && typeof item === 'object';
         return isObject && 'disabled' in item && item.disabled === true;
       },
+      onHighlightedIndexChange: ({ highlightedIndex }) => {
+        if (highlightedIndex! > -1 && typeof window !== undefined) {
+          const itemArray = document.querySelectorAll(
+            `li.${prefix}--list-box__menu-item[role="option"]`
+          );
+          const highlightedItem = itemArray[highlightedIndex!];
+          if (highlightedItem) {
+            highlightedItem.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+            });
+          }
+        }
+      },
     };
     const dropdownInstanceId = useId();
 
     function stateReducer(state, actionAndChanges) {
-      const { changes, props, type } = actionAndChanges;
-      const { highlightedIndex } = changes;
+      const { changes, type } = actionAndChanges;
 
       switch (type) {
-        case ToggleButtonKeyDownArrowDown:
-        case ToggleButtonKeyDownArrowUp:
-        case ToggleButtonKeyDownHome:
-        case ToggleButtonKeyDownEnd:
-          if (highlightedIndex > -1) {
-            const itemArray = document.querySelectorAll(
-              `li.${prefix}--list-box__menu-item[role="option"]`
-            );
-            props.scrollIntoView(itemArray[highlightedIndex]);
-          }
-          return changes;
         case ItemMouseMove:
         case MenuMouseLeave:
           return { ...changes, highlightedIndex: state.highlightedIndex };
