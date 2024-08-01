@@ -409,10 +409,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     setPrevOpen(open);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const sortedItems = sortItems!(
-    filterItems(items, { itemToString, inputValue }),
-    {
+  // memoize sorted items to reduce unnecessary expensive sort on rerender
+  const sortedItems = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return sortItems!(filterItems(items, { itemToString, inputValue }), {
       selectedItems: {
         top: controlledSelectedItems,
         fixed: [],
@@ -421,8 +421,17 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       itemToString,
       compareItems,
       locale,
-    }
-  );
+    });
+  }, [
+    items,
+    inputValue,
+    controlledSelectedItems,
+    topItems,
+    selectionFeedback,
+    itemToString,
+    compareItems,
+    locale,
+  ]);
 
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
