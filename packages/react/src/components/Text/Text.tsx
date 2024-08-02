@@ -6,10 +6,11 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode, useContext } from 'react';
+import React, { ReactNode, useContext, useRef } from 'react';
 import { PolymorphicProps } from '../../types/common';
 import { TextDir } from './TextDirection';
 import { TextDirectionContext } from './TextDirectionContext';
+import { useMergeRefs } from '@floating-ui/react';
 
 export interface TextBaseProps {
   dir?: TextDir | undefined;
@@ -19,13 +20,13 @@ export type TextProps<T extends React.ElementType> = PolymorphicProps<
   T,
   TextBaseProps
 >;
-function Text<T extends React.ElementType>({
-  as,
-  children,
-  dir = 'auto',
-  ...rest
-}: TextProps<T>) {
+const Text = React.forwardRef(function Text<T extends React.ElementType>(
+  { as, children, dir = 'auto', ...rest }: TextProps<T>,
+  forwardRef: React.ForwardedRef<HTMLElement | undefined>
+) {
   // TODO: Update with context typing once its been converted to TS
+  const textRef = useRef<HTMLElement>();
+  const ref = useMergeRefs([forwardRef, textRef]);
   const context = useContext<any>(TextDirectionContext);
   const textProps: { dir?: TextDir } = {};
   const BaseComponent = as ?? 'span';
@@ -59,12 +60,12 @@ function Text<T extends React.ElementType>({
 
   return (
     <TextDirectionContext.Provider value={value}>
-      <BaseComponent {...rest} {...textProps}>
+      <BaseComponent ref={ref} {...rest} {...textProps}>
         {children}
       </BaseComponent>
     </TextDirectionContext.Provider>
   );
-}
+});
 
 Text.propTypes = {
   /**
