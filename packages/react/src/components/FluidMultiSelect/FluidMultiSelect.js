@@ -69,7 +69,10 @@ FluidMultiSelect.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift. Use with caution: anything you define
+   * here overrides the components' internal handling of that prop. Downshift
+   * internals are subject to change, and in some cases they can not be shimmed
+   * to shield you from potentially breaking changes.
    */
   downshiftProps: PropTypes.object,
 
