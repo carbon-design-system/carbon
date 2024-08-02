@@ -549,6 +549,7 @@ const ComboBox = forwardRef(
 
     const showWarning = !invalid && warn;
     const className = cx(`${prefix}--combo-box`, {
+      [`${prefix}--combo-box--invalid--focused`]: invalid && isFocused,
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--combo-box--warning`]: showWarning,
       [`${prefix}--combo-box--readonly`]: readOnly,
