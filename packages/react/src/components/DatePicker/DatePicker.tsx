@@ -443,39 +443,48 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   const lastStartValue = useRef('');
 
-  // fix datepicker deleting the selectedDate when the calendar closes
-  const onCalendarClose = useCallback(
-    (selectedDates, dateStr, instance, e) => {
-      // Handle the case whewhen it's called from click outside handler
-      if (e && e.type === 'clickOutside') {
-        return;
-      }
+  interface CalendarCloseEvent {
+    selectedDates: Date[];
+    dateStr: string;
+    instance: object; //This is `Intance` of flatpicker
+  }
+  const [calendarCloseEvent, setCalendarCloseEvent] =
+    useState<CalendarCloseEvent | null>(null);
 
-      setTimeout(() => {
-        if (
-          lastStartValue.current &&
-          selectedDates[0] &&
-          !startInputField.current.value
-        ) {
-          startInputField.current.value = lastStartValue.current;
-          calendarRef.current.setDate(
-            [startInputField.current.value, endInputField?.current?.value],
-            true,
-            calendarRef.current.config.dateFormat
-          );
-        }
-        // Call the prop's onClose if it exists
-        if (onClose) {
-          onClose(
-            calendarRef.current.selectedDates,
-            dateStr,
-            calendarRef.current
-          );
-        }
-      });
+  // fix datepicker deleting the selectedDate when the calendar closes
+  const handleCalendarClose = useCallback(
+    (selectedDates, dateStr, instance) => {
+      if (
+        lastStartValue.current &&
+        selectedDates[0] &&
+        !startInputField.current.value
+      ) {
+        startInputField.current.value = lastStartValue.current;
+        calendarRef.current.setDate(
+          [startInputField.current.value, endInputField?.current?.value],
+          true,
+          calendarRef.current.config.dateFormat
+        );
+      }
+      if (onClose) {
+        onClose(selectedDates, dateStr, instance);
+      }
     },
     [onClose]
   );
+  const onCalendarClose = (selectedDates, dateStr, instance, e) => {
+    if (e && e.type === 'clickOutside') {
+      return;
+    }
+    setCalendarCloseEvent({ selectedDates, dateStr, instance });
+  };
+  useEffect(() => {
+    if (calendarCloseEvent) {
+      const { selectedDates, dateStr, instance } = calendarCloseEvent;
+      handleCalendarClose(selectedDates, dateStr, instance);
+      setCalendarCloseEvent(null);
+    }
+  }, [calendarCloseEvent, handleCalendarClose]);
 
   const endInputField = useRef<HTMLTextAreaElement>(null);
   const calendarRef: any | undefined = useRef(null);
