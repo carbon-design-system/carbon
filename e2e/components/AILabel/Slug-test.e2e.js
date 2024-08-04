@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,53 +11,53 @@ const { test } = require('@playwright/test'); // eslint-disable-line
 const { themes } = require('../../test-utils/env');
 const { snapshotStory } = require('../../test-utils/storybook'); // eslint-disable-line
 
-test.describe('Slug', () => {
+test.describe('AILabel', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
       test('default @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'Slug',
-          id: 'experimental-unstable-slug--default',
+          component: 'AILabel',
+          id: 'components-ailabel--default',
           theme,
         });
       });
 
-      test('slug callout @vrt', async ({ page }) => {
+      test('AILabel callout @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'Slug',
-          id: 'experimental-unstable-slug--callout',
+          component: 'AILabel',
+          id: 'components-ailabel--callout',
           theme,
         });
       });
 
-      test('slug inside form @vrt', async ({ page }) => {
+      test('AILabel inside form @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'Slug',
-          id: 'experimental-unstable-slug-form--form-example',
+          component: 'AILabel',
+          id: 'components-form--with-ai-label',
           theme,
         });
       });
 
-      test('slug inside DataTable column @vrt', async ({ page }) => {
+      test('AILabel inside DataTable column @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'Slug',
-          id: 'experimental-unstable-slug-datatable--column-slug-sort',
+          component: 'AILabel',
+          id: 'components-datatable-withailabel--column-ai-label-sort',
           theme,
         });
       });
 
-      test('slug inside DataTable row @vrt', async ({ page }) => {
+      test('AILabel inside DataTable row @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'Slug',
-          id: 'experimental-unstable-slug-datatable--slug-with-selection-and-expansion',
+          component: 'AILabel',
+          id: 'components-datatable-withailabel--ai-label-with-selection-and-expansion',
           theme,
         });
       });
 
-      test('slug inside Tile @vrt', async ({ page }) => {
+      test('AILabel inside Tile @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'Slug',
-          id: 'experimental-unstable-slug-examples--tile',
+          component: 'AILabel',
+          id: 'components-tile--with-ai-label',
           theme,
         });
       });

@@ -109,7 +109,10 @@ export interface DropdownProps<ItemType>
   disabled?: boolean;
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift. Use with caution: anything you define
+   * here overrides the components' internal handling of that prop. Downshift
+   * internals are subject to change, and in some cases they can not be shimmed
+   * to shield you from potentially breaking changes.
    */
   downshiftProps?: Partial<UseSelectProps<ItemType>>;
 
@@ -310,7 +313,6 @@ const Dropdown = React.forwardRef(
     const { isFluid } = useContext(FormContext);
 
     const selectProps: UseSelectProps<ItemType> = {
-      ...downshiftProps,
       items,
       itemToString,
       initialSelectedItem,
@@ -334,6 +336,7 @@ const Dropdown = React.forwardRef(
           }
         }
       },
+      ...downshiftProps,
     };
     const dropdownInstanceId = useId();
 
@@ -495,7 +498,7 @@ const Dropdown = React.forwardRef(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });
@@ -659,7 +662,10 @@ Dropdown.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift. Use with caution: anything you define
+   * here overrides the components' internal handling of that prop. Downshift
+   * internals are subject to change, and in some cases they can not be shimmed
+   * to shield you from potentially breaking changes.
    */
   downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
 
