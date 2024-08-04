@@ -17,7 +17,7 @@ import {
   generateGenericItem,
   waitForPosition,
 } from '../../ListBox/test-helpers';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
 
@@ -186,7 +186,7 @@ describe('FilterableMultiSelect', () => {
 
   it('should respect slug prop', async () => {
     const { container } = render(
-      <FilterableMultiSelect {...mockProps} slug={<Slug />} />
+      <FilterableMultiSelect {...mockProps} slug={<AILabel />} />
     );
     await waitForPosition();
 

@@ -17,13 +17,19 @@ import {
 } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
+import { TranslateWithId } from '../../types/common';
 
 const defaultTranslations = {
   'carbon.progress-step.complete': 'Complete',
   'carbon.progress-step.incomplete': 'Incomplete',
   'carbon.progress-step.current': 'Current',
   'carbon.progress-step.invalid': 'Invalid',
-};
+} as const;
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = keyof typeof defaultTranslations;
 
 function translateWithId(messageId) {
   return defaultTranslations[messageId];
@@ -156,7 +162,7 @@ ProgressIndicator.propTypes = {
   vertical: PropTypes.bool,
 };
 
-export interface ProgressStepProps {
+export interface ProgressStepProps extends TranslateWithId<TranslationKey> {
   /**
    * Provide an optional className to be applied to the containing `<li>` node
    */
@@ -220,12 +226,6 @@ export interface ProgressStepProps {
    * The ID of the tooltip content.
    */
   tooltipId?: string;
-
-  /**
-   * Optional method that takes in a message id and returns an
-   * internationalized string.
-   */
-  translateWithId?: (id: string) => string;
 }
 
 function ProgressStep({
