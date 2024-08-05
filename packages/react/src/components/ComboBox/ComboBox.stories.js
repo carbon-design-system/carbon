@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
@@ -63,6 +63,92 @@ export default {
       page: mdx,
     },
   },
+};
+
+export const DownshiftPropsTest = () => {
+  const downshiftActions = useRef();
+
+  return (
+    <div style={{ width: 300 }}>
+      <ComboBox
+        onChange={() => {}}
+        id="carbon-combobox"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        titleText="ComboBox title"
+        helperText="Combobox helper text"
+        downshiftActions={downshiftActions}
+        downshiftProps={{
+          //         reset: () => void
+          // openMenu: () => void
+          // closeMenu: () => void
+          // toggleMenu: () => void
+          // selectItem: (item: Item | null) => void
+          // setHighlightedIndex: (index: number) => void
+          // setInputValue: (inputValue: string) => void
+
+          // if (changes.selectedItem === null) {
+          //   component?.setState({
+          //     isOpen: true,
+          //   });
+          //   return;
+          // }
+          // if (changes?.isOpen && component?.inputValue === 'Item 1') {
+          //   component?.setState({
+          //     inputValue: '',
+          //   });
+          //   return;
+          // }
+          // if (changes?.isClosed && component?.inputValue !== 'Item 1') {
+          //   component?.setState({
+          //     inputValue: 'Item 1',
+          //   });
+          //   return;
+          // }
+
+          //   {
+          //     "type": "__input_blur__",
+          //     "highlightedIndex": -1,
+          //     "isOpen": false,
+          //     "selectedItem": null,
+          //     "inputValue": ""
+          // }
+          onSelectedItemChange: (changes) => {
+            // console.log('onSelectedItemChange', changes);
+            // keep the menu open after selection
+            // downshiftActions.current.openMenu();
+          },
+          onIsOpenChange: (changes) => {
+            console.log('onIsOpenChange', changes);
+            console.log('downshiftActions', downshiftActions);
+
+            const { isOpen, selectedItem, inputValue } = changes;
+
+            if (!selectedItem) {
+              downshiftActions.current.openMenu();
+            }
+
+            if (isOpen && inputValue === 'Option 1') {
+              downshiftActions.current.setInputValue('');
+            }
+
+            if (!isOpen && inputValue !== 'Option 1') {
+              downshiftActions.current.setInputValue('Option 1');
+            }
+          },
+          onHighlightedIndexChange: (changes) => {
+            // console.log('onHighlightedIndexChange', changes);
+          },
+          onInputChange: (changes) => {
+            // console.log('onInputChange', changes);
+          },
+          onStateChange: (changes) => {
+            // console.log('onStateChange', changes);
+          },
+        }}
+      />
+    </div>
+  );
 };
 
 export const Default = () => (
