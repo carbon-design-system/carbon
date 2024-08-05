@@ -31,7 +31,7 @@ export function useSelection({
   initialSelectedItems = [],
   selectedItems: controlledItems,
   selectAll = false,
-  itemsWithSelectAll = [],
+  filteredItems = [],
 }) {
   const isMounted = useRef(false);
   const savedOnChange = useRef(onChange);
@@ -45,10 +45,8 @@ export function useSelection({
         return;
       }
 
-      const allSelectableItems = itemsWithSelectAll.filter(
-        (item) => !item.disabled
-      );
-      const disabledItemCount = itemsWithSelectAll.filter(
+      const allSelectableItems = filteredItems.filter((item) => !item.disabled);
+      const disabledItemCount = filteredItems.filter(
         (item) => item.disabled
       ).length;
 
@@ -74,7 +72,7 @@ export function useSelection({
           // checking if all items are selected then We should select mark the 'select All' option as well
           if (
             selectAll &&
-            itemsWithSelectAll.length - 1 ===
+            filteredItems.length - 1 ===
               newSelectedItems.length + disabledItemCount
           ) {
             newSelectedItems = allSelectableItems;
@@ -95,7 +93,7 @@ export function useSelection({
         selectedItems: newSelectedItems,
       });
     },
-    [disabled, selectedItems, itemsWithSelectAll, selectAll, isControlled]
+    [disabled, selectedItems, filteredItems, selectAll, isControlled]
   );
 
   const clearSelection = useCallback(() => {

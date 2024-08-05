@@ -9,18 +9,14 @@ import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 import { act, render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
 import MultiSelect from '../';
-import {
-  generateItems,
-  generateGenericItem,
-  waitForPosition,
-} from '../../ListBox/test-helpers';
+import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
 import userEvent from '@testing-library/user-event';
 import { Slug } from '../../Slug';
 import Button from '../../Button';
 import ButtonSet from '../../ButtonSet';
 
 const prefix = 'cds';
-
+const waitForPosition = () => act(async () => {});
 describe('MultiSelect', () => {
   beforeEach(() => {
     jest.mock('../../../internal/deprecateFieldOnObject');
@@ -573,30 +569,48 @@ describe('MultiSelect', () => {
       );
     });
 
-    it('should select all options when selectAll prop is true', async () => {
-      const items = generateItems(4, generateGenericItem);
+    it('should select all options when isSelectAll property in an item is provided', async () => {
+      const items = [
+        {
+          id: 'select-all',
+          text: 'All roles',
+          isSelectAll: true,
+        },
+        {
+          id: 'downshift-1-item-0',
+          text: 'Editor',
+        },
+        {
+          id: 'downshift-1-item-1',
+          text: 'Owner',
+        },
+        {
+          id: 'downshift-1-item-2',
+          text: 'Uploader',
+        },
+      ];
       render(
         <MultiSelect
           id="test"
           label={'test-label'}
+          titleText="Multiselect title"
+          itemToString={(item) => (item ? item.text : '')}
+          helperText="This is helper text"
           items={items}
-          selectAll={true}
         />
       );
 
       const labelNode = screen.getByRole('combobox');
       await userEvent.click(labelNode);
 
-      //check that the select all option is present
       const options = screen.getAllByRole('option');
-      expect(options.length).toBe(items.length + 1);
-      // Verify all options are selected
-      await userEvent.click(options[0]);
+
+      await userEvent.click(screen.getByText('All roles'));
       options.forEach((option) => {
         expect(option).toHaveAttribute('aria-selected', 'true');
       });
       //verify all options are de-selected
-      await userEvent.click(options[0]);
+      await userEvent.click(screen.getByText('All roles'));
       options.forEach((option) => {
         expect(option).toHaveAttribute('aria-selected', 'false');
       });

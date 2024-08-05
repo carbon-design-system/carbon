@@ -20,7 +20,7 @@ import {
 import { Slug } from '../../Slug';
 
 const prefix = 'cds';
-
+const waitForPosition = () => act(async () => {});
 const openMenu = async () => {
   await userEvent.click(screen.getByRole('combobox'));
 };

@@ -28,10 +28,10 @@ export const defaultSortItems = (
   { selectedItems = [], itemToString, compareItems, locale = 'en' }
 ) => {
   // Extract the "select all" option
-  const selectAllOption = items.find((item) => item.id === 'select-all-option');
+  const selectAllOption = items.find((item) => item.isSelectAll);
 
   // Filter out the "select all" option from the items array
-  const filteredItems = items.filter((item) => item.id !== 'select-all-option');
+  const filteredItems = items.filter((item) => !item.isSelectAll);
 
   // Sort the filtered items
   const sortedItems = filteredItems.sort((itemA, itemB) => {

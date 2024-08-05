@@ -18,7 +18,6 @@ import PropTypes from 'prop-types';
 import React, {
   ForwardedRef,
   useContext,
-  useRef,
   useState,
   useMemo,
   ReactNode,
@@ -235,16 +234,6 @@ export interface MultiSelectProps<ItemType>
   readOnly?: boolean;
 
   /**
-   * **Experimental**: Enable a Select All item in the list
-   */
-  selectAll?: boolean;
-
-  /**
-   * **Experimental**: Provide text for the Select All option in the list. Used when selectAll={true}.
-   */
-  selectAllItemText?: string;
-
-  /**
    * For full control of the selected items
    */
   selectedItems?: ItemType[];
@@ -333,11 +322,22 @@ const MultiSelect = React.forwardRef(
       readOnly,
       locale = 'en',
       slug,
-      selectAll = false,
-      selectAllItemText = 'All',
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const filteredItems = useMemo(() => {
+      return items.filter((item) => {
+        if (typeof item === 'object' && item !== null) {
+          for (const key in item) {
+            if (Object.hasOwn(item, key) && item[key] === undefined) {
+              return false; // Return false if any property has an undefined value
+            }
+          }
+        }
+        return true; // Return true if item is not an object with undefined values
+      });
+    }, [items]);
+    let selectAll = filteredItems.some((item) => (item as any).isSelectAll);
     if ((selected ?? []).length > 0 && selectAll) {
       console.warn(
         'Warning: `selectAll` should not be used when `selectedItems` is provided. Please pass either `selectAll` or `selectedItems`, not both.'
@@ -353,12 +353,6 @@ const MultiSelect = React.forwardRef(
     const [prevOpenProp, setPrevOpenProp] = useState(open);
     const [topItems, setTopItems] = useState([]);
     const [itemsCleared, setItemsCleared] = useState(false);
-
-    const selectAllOption = {
-      id: 'select-all-option',
-      text: selectAllItemText,
-      isSelectAll: true,
-    };
 
     const { refs, floatingStyles, middlewareData } = useFloating(
       autoAlign
@@ -397,24 +391,6 @@ const MultiSelect = React.forwardRef(
       }
     }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
 
-    // Filter out items with an object having undefined values
-    const filteredItems = useMemo(() => {
-      return items.filter((item) => {
-        if (typeof item === 'object' && item !== null) {
-          for (const key in item) {
-            if (Object.hasOwn(item, key) && item[key] === undefined) {
-              return false; // Return false if any property has an undefined value
-            }
-          }
-        }
-        return true; // Return true if item is not an object with undefined values
-      });
-    }, [items]);
-
-    const itemsWithSelectAll = selectAll
-      ? [selectAllOption, ...filteredItems]
-      : filteredItems;
-
     const {
       selectedItems: controlledSelectedItems,
       onItemChange,
@@ -425,7 +401,7 @@ const MultiSelect = React.forwardRef(
       onChange,
       selectedItems: selected,
       selectAll,
-      itemsWithSelectAll,
+      filteredItems,
     });
 
     const selectProps: UseSelectProps<ItemType> = {
@@ -444,7 +420,7 @@ const MultiSelect = React.forwardRef(
         );
       },
       selectedItem: controlledSelectedItems,
-      items: itemsWithSelectAll as ItemType[],
+      items: filteredItems as ItemType[],
       isItemDisabled(item, _index) {
         return (item as any).disabled;
       },
@@ -614,7 +590,7 @@ const MultiSelect = React.forwardRef(
           } else {
             return {
               ...changes,
-              highlightedIndex: itemsWithSelectAll.indexOf(highlightedIndex),
+              highlightedIndex: filteredItems.indexOf(highlightedIndex),
             };
           }
         case ToggleButtonKeyDownArrowDown:
@@ -695,7 +671,7 @@ const MultiSelect = React.forwardRef(
         getMenuProps({
           ref: autoAlign ? refs.setFloating : null,
         }),
-      [autoAlign]
+      [autoAlign, getMenuProps, refs.setFloating]
     );
 
     return (
@@ -773,7 +749,7 @@ const MultiSelect = React.forwardRef(
             {isOpen &&
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               sortItems!(
-                itemsWithSelectAll as readonly ItemType[],
+                filteredItems as readonly ItemType[],
                 sortOptions as SortItemsOptions<ItemType>
               ).map((item, index) => {
                 const isChecked =
@@ -988,16 +964,6 @@ MultiSelect.propTypes = {
    * Whether or not the Dropdown is readonly
    */
   readOnly: PropTypes.bool,
-
-  /**
-   * **Experimental**: Enable a Select All item in the list
-   */
-  selectAll: PropTypes.bool,
-
-  /**
-   * **Experimental**: Provide text for the Select All option in the list. Used when selectAll={true}.
-   */
-  selectAllItemText: PropTypes.string,
 
   /**
    * For full control of the selected items

@@ -420,10 +420,14 @@ export const SelectAll = () => {
             text: 'Reader - a disabled item',
             disabled: true,
           },
+          {
+            id: 'select-all',
+            text: 'All roles',
+            isSelectAll: true,
+          },
         ]}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
-        selectAll={true}
         onChange={onChange}
         selectAllItemText="All roles"
       />
