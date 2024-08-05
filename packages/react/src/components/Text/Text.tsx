@@ -22,11 +22,9 @@ export type TextProps<T extends React.ElementType> = PolymorphicProps<
 >;
 const Text = React.forwardRef(function Text<T extends React.ElementType>(
   { as, children, dir = 'auto', ...rest }: TextProps<T>,
-  forwardRef: React.ForwardedRef<HTMLElement | undefined>
+  ref: React.Ref<HTMLElement>
 ) {
   // TODO: Update with context typing once its been converted to TS
-  const textRef = useRef<HTMLElement>();
-  const ref = useMergeRefs([forwardRef, textRef]);
   const context = useContext<any>(TextDirectionContext);
   const textProps: { dir?: TextDir } = {};
   const BaseComponent = as ?? 'span';
