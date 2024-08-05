@@ -56,7 +56,7 @@ $sizes: (
 
 /// Slug styles
 /// @access public
-/// @group slider
+/// @group AI
 @mixin slug {
   .#{$prefix}--slug {
     display: flex;
@@ -92,16 +92,19 @@ $sizes: (
     }
   }
 
+  // Add 24px click target for mini, 2xs sizes
+  .#{$prefix}--slug__button--mini::after,
+  .#{$prefix}--slug__button--2xs::after {
+    position: absolute;
+    display: block;
+    block-size: 24px;
+    content: '';
+    inline-size: 24px;
+  }
+
   .#{$prefix}--slug .#{$prefix}--slug__button:focus {
     border: 1px solid $focus;
     box-shadow: inset 0 0 0 1px $focus;
-  }
-
-  .#{$prefix}--slug
-    .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus,
-  .#{$prefix}--slug
-    .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus {
-    box-shadow: none;
   }
 
   .#{$prefix}--slug .#{$prefix}--slug__button:hover {

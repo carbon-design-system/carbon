@@ -189,7 +189,8 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
           onMouseDown={handleMousedown}
           ref={floatingRef}
           label={label}
-          align={tooltipAlignment}>
+          align={tooltipAlignment}
+          kind="ghost">
           <IconElement className={`${prefix}--overflow-menu__icon`} />
         </IconButton>
         <Menu

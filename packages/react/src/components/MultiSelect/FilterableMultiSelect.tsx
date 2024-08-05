@@ -16,7 +16,7 @@ import Downshift, {
   UseComboboxStateChangeTypes,
   UseMultipleSelectionInterface,
 } from 'downshift';
-import isEqual from 'lodash.isequal';
+import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   useContext,
@@ -37,7 +37,10 @@ import {
   type MultiSelectSortingProps,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
-import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import ListBox, {
+  ListBoxMenuIconTranslationKey,
+  PropTypes as ListBoxPropTypes,
+} from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { defaultItemToString } from './tools/itemToString';
@@ -54,6 +57,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { TranslateWithId } from '../../types/common';
 
 const {
   InputBlur,
@@ -81,8 +85,22 @@ const {
 } =
   useMultipleSelection.stateChangeTypes as UseMultipleSelectionInterface['stateChangeTypes'];
 
+/**
+ * Message ids that will be passed to translateWithId().
+ * Combination of message ids from ListBox/next/ListBoxSelection.js and
+ * ListBox/next/ListBoxTrigger.js, but we can't access those values directly
+ * because those components aren't Typescript.  (If you try, TranslationKey
+ * ends up just being defined as "string".)
+ */
+type TranslationKey =
+  | 'close.menu'
+  | 'open.menu'
+  | 'clear.all'
+  | 'clear.selection';
+
 export interface FilterableMultiSelectProps<ItemType>
-  extends MultiSelectSortingProps<ItemType> {
+  extends MultiSelectSortingProps<ItemType>,
+    TranslateWithId<TranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
    * @deprecated
@@ -121,7 +139,10 @@ export interface FilterableMultiSelectProps<ItemType>
   disabled?: boolean;
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift. Use with caution: anything you define
+   * here overrides the components' internal handling of that prop. Downshift
+   * internals are subject to change, and in some cases they can not be shimmed
+   * to shield you from potentially breaking changes.
    */
   downshiftProps?: UseMultipleSelectionProps<ItemType>;
 
@@ -262,11 +283,6 @@ export interface FilterableMultiSelectProps<ItemType>
    */
   titleText?: ReactNode;
 
-  /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId?(messageId: string, args?: Record<string, unknown>): string;
-
   type?: 'default' | 'inline';
 
   /**
@@ -396,10 +412,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     setPrevOpen(open);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const sortedItems = sortItems!(
-    filterItems(items, { itemToString, inputValue }),
-    {
+  // memoize sorted items to reduce unnecessary expensive sort on rerender
+  const sortedItems = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return sortItems!(filterItems(items, { itemToString, inputValue }), {
       selectedItems: {
         top: controlledSelectedItems,
         fixed: [],
@@ -408,8 +424,17 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       itemToString,
       compareItems,
       locale,
-    }
-  );
+    });
+  }, [
+    items,
+    inputValue,
+    controlledSelectedItems,
+    topItems,
+    selectionFeedback,
+    itemToString,
+    compareItems,
+    locale,
+  ]);
 
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
@@ -577,7 +602,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   }
 
   const { getDropdownProps } = useMultipleSelection<ItemType>({
-    ...downshiftProps,
     activeIndex: highlightedIndex,
     initialSelectedItems,
     selectedItems: controlledSelectedItems,
@@ -593,6 +617,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         }
       }
     },
+    ...downshiftProps,
   });
 
   useEffect(() => {
@@ -616,7 +641,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
 
   // Slug is always size `mini`
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'mini',
     });
@@ -729,7 +754,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         },
         { suppressRefError: true }
       ),
-    [autoAlign]
+    [autoAlign, getMenuProps, refs.setFloating]
   );
 
   const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {
@@ -943,7 +968,10 @@ FilterableMultiSelect.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift. Use with caution: anything you define
+   * here overrides the components' internal handling of that prop. Downshift
+   * internals are subject to change, and in some cases they can not be shimmed
+   * to shield you from potentially breaking changes.
    */
   // @ts-ignore
   downshiftProps: PropTypes.shape(Downshift.propTypes),
