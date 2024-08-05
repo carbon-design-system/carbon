@@ -28,7 +28,7 @@ export default {
 
 export const Selectable = (args) => {
   return (
-    <>
+    <ul role="listbox">
       <SelectableTag
         renderIcon={Asleep}
         text="Tag content with a long text description"
@@ -41,7 +41,7 @@ export const Selectable = (args) => {
         className="some-class"
         {...args}
       />
-    </>
+    </ul>
   );
 };
 
