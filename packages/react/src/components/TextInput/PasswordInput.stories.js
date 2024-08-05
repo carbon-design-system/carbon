@@ -37,6 +37,8 @@ export const Playground = (args) => (
       labelText="Text input label"
       helperText="Optional help text"
       autoComplete="true"
+      hidePasswordLabel="sssfdfddcff dfdfdf"
+      showPasswordLabel=""
     />
   </div>
 );
