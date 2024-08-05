@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
@@ -40,15 +40,8 @@ export default {
   },
 };
 
-export const Simple1 = () => (
-  <DatePicker
-    datePickerType="simple"
-    onChange={(value) => {
-      console.log('check onchange bugs', value);
-    }}
-    onClose={(e) => {
-      console.log(' check onclose', e);
-    }}>
+export const Simple = () => (
+  <DatePicker datePickerType="simple">
     <DatePickerInput
       placeholder="mm/dd/yyyy"
       labelText="Date Picker label"
@@ -57,64 +50,8 @@ export const Simple1 = () => (
   </DatePicker>
 );
 
-export const Test33 = () => {
-  const [currentDate, setCurrentDate] = useState(null);
-  const [inputText, setInputText] = useState('');
-  const [currentTypedDate, setCurrentTypedDate] = useState('');
-
-  return (
-    <div>
-      <DatePicker
-        id="testDateField"
-        datePickerType="single"
-        allowInput={true}
-        dateFormat="d/m/Y"
-        locale="en"
-        onChange={(event) => {
-          if (event && Array.isArray(event) && event.length) {
-            setCurrentDate(event[0]);
-          } else {
-            setCurrentDate(null);
-          }
-        }}>
-        <DatePickerInput
-          id="testDateFieldInput"
-          datePickerType="single"
-          placeholder="dd/mm/yyyy"
-          labelText="Date"
-          size="md"
-          onChange={(event) => {
-            setInputText(event?.target?.value);
-          }}
-          onBlur={(event) => {
-            setCurrentTypedDate(inputText);
-          }}
-        />
-      </DatePicker>
-      <br />
-      <p style={{ fontWeight: 600, fontSize: '10pt' }}>Date picker date:</p>
-      <p style={{ fontSize: '11pt' }}>
-        {currentDate && currentDate.toISOString
-          ? currentDate.toDateString()
-          : 'No date'}
-      </p>
-      <br />
-      <p style={{ fontWeight: 600, fontSize: '10pt' }}>Date input date:</p>
-      <p style={{ fontSize: '11pt' }}>
-        {currentTypedDate ? currentTypedDate : 'No date typed'}
-      </p>
-    </div>
-  );
-};
 export const SingleWithCalendar = () => (
-  <DatePicker
-    datePickerType="single"
-    onChange={(value) => {
-      console.log('check onchange bugs', value);
-    }}
-    onClose={(e) => {
-      console.log(' check onclose', e);
-    }}>
+  <DatePicker datePickerType="single">
     <DatePickerInput
       placeholder="mm/dd/yyyy"
       labelText="Date Picker label"
@@ -123,49 +60,10 @@ export const SingleWithCalendar = () => (
     />
   </DatePicker>
 );
-export const Test2 = () => {
-  const [date, setDate] = useState();
-  return (
-    <>
-      <DatePicker
-        datePickerType="single"
-        value={date}
-        onChange={(value) => {
-          console.log('check onchange bugs', value);
-          setDate(value);
-        }}
-        onClose={(e) => {
-          console.log(' check onclose', e);
-        }}>
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          id="date-picker-simple"
-        />
-      </DatePicker>
-      <button
-        type="button"
-        onClick={() => {
-          console.log('date', date);
-          setDate('');
-        }}>
-        clear
-      </button>
 
-      <span> value is {date?.toLocaleString()}</span>
-    </>
-  );
-};
 export const RangeWithCalendar = () => {
   return (
-    <DatePicker
-      datePickerType="range"
-      onChange={(e) => {
-        console.log('check onchange bugs', e);
-      }}
-      onClose={(e) => {
-        console.log(' check onclose', e);
-      }}>
+    <DatePicker datePickerType="range">
       <DatePickerInput
         id="date-picker-input-id-start"
         placeholder="mm/dd/yyyy"
@@ -181,54 +79,7 @@ export const RangeWithCalendar = () => {
     </DatePicker>
   );
 };
-export const Test = () => {
-  const [date, setDate] = useState(['', '']);
-  useEffect(() => {
-    console.log('selected date:', date);
-  }, [date]);
 
-  const handleChange = (range) => {
-    const [startDate, endDate] = range ?? ['', ''];
-
-    if (!startDate || !endDate) return;
-
-    setDate([startDate, endDate]);
-  };
-
-  return (
-    <>
-      <div className="buttonsGroup">
-        <div className="button">
-          <Button kind="ghost" onClick={() => setDate(['', ''])}>
-            reset
-          </Button>
-        </div>
-      </div>
-      <DatePicker
-        light
-        datePickerType="range"
-        dateFormat="m/d/Y"
-        value={date}
-        //   onChange={(vals) => handleChange(vals)}
-        onClose={(e) => {
-          console.log('check onclose', e);
-        }}>
-        <DatePickerInput
-          id="date-picker-input-id-start"
-          placeholder="mm/dd/yyyy"
-          labelText="Start date"
-          size="md"
-        />
-        <DatePickerInput
-          id="date-picker-input-id-finish"
-          placeholder="mm/dd/yyyy"
-          labelText="End date"
-          size="md"
-        />
-      </DatePicker>
-    </>
-  );
-};
 export const SimpleWithLayer = () => (
   <WithLayer>
     {(layer) => (
