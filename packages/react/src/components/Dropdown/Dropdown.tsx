@@ -46,7 +46,7 @@ import {
   flip,
   autoUpdate,
   size as floatingSize,
-  type Boundary,
+  type ReferenceElement,
 } from '@floating-ui/react';
 import { computePosition, hide } from '@floating-ui/dom';
 
@@ -241,7 +241,6 @@ const Dropdown = React.forwardRef(
   <ItemType,>(
     {
       autoAlign = false,
-      autoAlignBoundary,
       className: containerClassName,
       disabled = false,
       direction = 'bottom',
@@ -304,15 +303,16 @@ const Dropdown = React.forwardRef(
     const { reference, floating } = elements;
 
     const updatePosition = () => {
-      computePosition(reference, floating, {
+      computePosition(reference as ReferenceElement, floating as HTMLElement, {
         middleware: [hide({ strategy: 'referenceHidden' })],
       }).then(({ middlewareData }) => {
         if (middlewareData.hide) {
-          Object.assign(floating.style, {
-            visibility: middlewareData.hide.referenceHidden
-              ? 'hidden'
-              : 'visible',
-          });
+          floating &&
+            Object.assign(floating.style, {
+              visibility: middlewareData.hide.referenceHidden
+                ? 'hidden'
+                : 'visible',
+            });
         }
       });
     };
