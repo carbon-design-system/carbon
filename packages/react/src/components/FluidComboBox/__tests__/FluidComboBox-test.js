@@ -27,7 +27,7 @@ const openMenu = async () => {
 
 describe('FluidComboBox', () => {
   let mockProps;
-
+  window.HTMLElement.prototype.scrollIntoView = function () {};
   beforeEach(() => {
     mockProps = {
       id: 'test-fluidcombobox',

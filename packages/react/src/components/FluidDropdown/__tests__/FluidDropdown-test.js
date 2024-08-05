@@ -177,6 +177,7 @@ describe('FluidDropdown', () => {
   });
 
   describe('Component API', () => {
+    window.HTMLElement.prototype.scrollIntoView = function () {};
     it('should accept a `ref` for the underlying button element', async () => {
       const ref = React.createRef();
       render(<FluidDropdown {...mockProps} ref={ref} />);

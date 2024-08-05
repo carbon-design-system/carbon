@@ -11,8 +11,9 @@ import PropTypes from 'prop-types';
 import { Close } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { KeyboardEvent, MouseEvent } from 'react';
+import { TranslateWithId } from '../../types/common';
 
-export interface ListBoxSelectionProps {
+export interface ListBoxSelectionProps extends TranslateWithId<TranslationKey> {
   /**
    * Specify a function to be invoked when a user interacts with the clear
    * selection element.
@@ -44,13 +45,6 @@ export interface ListBoxSelectionProps {
    * whether the selection should display a badge or a single clear icon.
    */
   selectionCount?: number;
-
-  /**
-   * i18n hook used to provide the appropriate description for the given menu
-   * icon. This function takes in an id defined in `translationIds` and should
-   * return a string message for that given message id.
-   */
-  translateWithId?(messageId: string, args?: Record<string, unknown>): string;
 }
 
 export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>;
@@ -58,7 +52,12 @@ export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>;
 export const translationIds = {
   'clear.all': 'clear.all',
   'clear.selection': 'clear.selection',
-};
+} as const;
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = keyof typeof translationIds;
 
 const defaultTranslations = {
   [translationIds['clear.all']]: 'Clear all selected items',

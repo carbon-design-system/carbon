@@ -408,11 +408,11 @@ like to see changed.
 
 Component tokens are available for the following components:
 
-| Component    | Import                                                       | File                                                                            |
-| :----------- | :----------------------------------------------------------- | :------------------------------------------------------------------------------ |
-| button       | `@use '@carbon/styles/scss/components/button/tokens';`       | [`scss/components/button/tokens`](../scss/components/button/tokens)             |
-| notification | `@use '@carbon/styles/scss/components/notification/tokens';` | [`scss/components/notification/tokens`](../scss/components/notification/tokens) |
-| tag          | `@use '@carbon/styles/scss/components/tag/tokens';`          | [`scss/components/tag/tokens`](../scss/components/tag/tokens)                   |
+| Component    | Import                                                       | File                                                                                  |
+| :----------- | :----------------------------------------------------------- | :------------------------------------------------------------------------------------ |
+| button       | `@use '@carbon/styles/scss/components/button/tokens';`       | [`scss/components/button/tokens`](../scss/components/button/_tokens.scss)             |
+| notification | `@use '@carbon/styles/scss/components/notification/tokens';` | [`scss/components/notification/tokens`](../scss/components/notification/_tokens.scss) |
+| tag          | `@use '@carbon/styles/scss/components/tag/tokens';`          | [`scss/components/tag/tokens`](../scss/components/tag/_tokens.scss)                   |
 
 For example, if you wanted to change the component token `button-primary` for
 `button` you could do the following:

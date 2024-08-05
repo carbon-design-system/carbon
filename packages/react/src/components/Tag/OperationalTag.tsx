@@ -14,15 +14,13 @@ import React, {
   useRef,
 } from 'react';
 import classNames from 'classnames';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-
-const getInstanceId = setupGetInstanceId();
 
 const TYPES = {
   red: 'Red',
@@ -100,7 +98,7 @@ const OperationalTag = <T extends React.ElementType>({
 }: OperationalTagProps<T>) => {
   const prefix = usePrefix();
   const tagRef = useRef<HTMLElement>();
-  const tagId = id || `tag-${getInstanceId()}`;
+  const tagId = id || `tag-${useId()}`;
   const tagClasses = classNames(`${prefix}--tag--operational`, className);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
@@ -113,7 +111,7 @@ const OperationalTag = <T extends React.ElementType>({
   }, [prefix, tagRef]);
 
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'sm',
       kind: 'inline',

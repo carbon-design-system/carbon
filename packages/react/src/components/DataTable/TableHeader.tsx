@@ -16,7 +16,7 @@ import classNames from 'classnames';
 import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
+import { TranslateWithId, ReactAttr } from '../../types/common';
 import { DataTableSortState } from './state/sortStates';
 
 const defaultScope = 'col';
@@ -64,7 +64,11 @@ const sortDirections: { [key: string]: 'none' | 'ascending' | 'descending' } = {
 };
 
 interface TableHeaderProps
-  extends ReactAttr<HTMLTableCellElement & HTMLButtonElement> {
+  extends ReactAttr<HTMLTableCellElement & HTMLButtonElement>,
+    TranslateWithId<
+      TableHeaderTranslationKey,
+      { header; sortDirection; isSortHeader; sortStates }
+    > {
   /**
    * Pass in children that will be embedded in the table header label
    */
@@ -119,16 +123,6 @@ interface TableHeaderProps
    * NONE, or ASC.
    */
   sortDirection?: string;
-
-  /**
-   * Supply a method to translate internal strings with your i18n tool of
-   * choice. Translation keys are available on the `translationKeys` field for
-   * this component.
-   */
-  translateWithId?: (
-    key: TableHeaderTranslationKey,
-    { header, sortDirection, isSortHeader, sortStates }
-  ) => string;
 }
 
 const TableHeader = React.forwardRef(function TableHeader(

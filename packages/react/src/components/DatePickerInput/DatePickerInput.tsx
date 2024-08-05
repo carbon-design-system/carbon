@@ -11,11 +11,10 @@ import PropTypes, { ReactElementLike, ReactNodeArray } from 'prop-types';
 import React, { ForwardedRef, useContext } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { ReactAttr } from '../../types/common';
 import { Text } from '../Text';
 
-const getInstanceId = setupGetInstanceId();
 type ExcludedAttributes = 'value' | 'onChange' | 'locale' | 'children';
 export type ReactNodeLike =
   | ReactElementLike
@@ -158,7 +157,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
   } = props;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
-  const datePickerInputInstanceId = getInstanceId();
+  const datePickerInputInstanceId = useId();
   const datePickerInputProps = {
     id,
     onChange: (event) => {
@@ -218,7 +217,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
 
   // Slug is always size `mini`
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'mini',
     });

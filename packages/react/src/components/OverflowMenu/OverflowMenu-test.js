@@ -37,6 +37,21 @@ describe('OverflowMenu', () => {
       expect(screen.getByRole('button')).toHaveAttribute('data-testid', 'test');
     });
 
+    it('should always use button kind=ghost', () => {
+      render(
+        <OverflowMenu
+          data-testid="test"
+          aria-label="Overflow menu"
+          className="extra-class">
+          <OverflowMenuItem className="test-child" itemText="one" />
+          <OverflowMenuItem className="test-child" itemText="two" />
+        </OverflowMenu>
+      );
+
+      expect(screen.getByRole('button')).not.toHaveClass('cds--btn--primary');
+      expect(screen.getByRole('button')).toHaveClass('cds--btn--ghost');
+    });
+
     it('should flip menu alignment', async () => {
       render(
         <OverflowMenu

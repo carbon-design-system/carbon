@@ -11,10 +11,8 @@ import classNames from 'classnames';
 import { Text } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
-
-const getInstanceId = setupGetInstanceId();
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type';
 
@@ -127,7 +125,7 @@ const Checkbox = React.forwardRef(
     const showWarning = !readOnly && !invalid && warn;
     const showHelper = !invalid && !warn;
 
-    const checkboxGroupInstanceId = getInstanceId();
+    const checkboxGroupInstanceId = useId();
 
     const helperId = !helperText
       ? undefined

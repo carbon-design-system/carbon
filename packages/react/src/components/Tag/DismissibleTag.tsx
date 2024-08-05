@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
 import classNames from 'classnames';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import Tag, { SIZES, TYPES } from './Tag';
@@ -16,8 +16,6 @@ import { Close } from '@carbon/icons-react';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-
-const getInstanceId = setupGetInstanceId();
 
 export interface DismissibleTagBaseProps {
   /**
@@ -93,7 +91,7 @@ const DismissibleTag = <T extends React.ElementType>({
 }: DismissibleTagProps<T>) => {
   const prefix = usePrefix();
   const tagLabelRef = useRef<HTMLElement>();
-  const tagId = id || `tag-${getInstanceId()}`;
+  const tagId = id || `tag-${useId()}`;
   const tagClasses = classNames(`${prefix}--tag--filter`, className);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
@@ -111,7 +109,7 @@ const DismissibleTag = <T extends React.ElementType>({
   };
 
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'sm',
       kind: 'inline',

@@ -6,11 +6,9 @@ import { textInputProps } from './util';
 import { warning } from '../../internal/warning';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { ReactAttr } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
-
-const getInstanceId = setupGetInstanceId();
 
 let didWarnAboutDeprecation = false;
 
@@ -149,7 +147,7 @@ const ControlledPasswordInput = React.forwardRef(
     ref
   ) {
     const prefix = usePrefix();
-    const { current: controlledPasswordInstanceId } = useRef(getInstanceId());
+    const controlledPasswordInstanceId = useId();
 
     if (__DEV__) {
       warning(

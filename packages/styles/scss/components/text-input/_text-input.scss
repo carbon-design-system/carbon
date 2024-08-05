@@ -398,14 +398,15 @@
     flex-direction: column;
   }
 
-  .#{$prefix}--text-input-wrapper--inline .cds--form-requirement {
+  .#{$prefix}--text-input-wrapper--inline .#{$prefix}--form-requirement {
     display: block;
     overflow: visible;
     font-weight: 400;
     max-block-size: convert.to-rem(200px);
   }
 
-  .#{$prefix}--text-input-wrapper--inline--invalid .cds--form-requirement {
+  .#{$prefix}--text-input-wrapper--inline--invalid
+    .#{$prefix}--form-requirement {
     color: $text-error;
   }
 

@@ -11,7 +11,7 @@
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
 const css = require('css');
-const isEqual = require('lodash.isequal');
+const isEqual = require('react-fast-compare');
 
 const { render } = SassRenderer.create(__dirname);
 

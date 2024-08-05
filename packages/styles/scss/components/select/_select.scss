@@ -311,6 +311,11 @@
     inset-inline-end: calc(-#{$spacing-03} - #{$divider-width});
   }
 
+  .#{$prefix}--select--slug .#{$prefix}--slug--revert::after {
+    inset-block-start: convert.to-rem(8px);
+    inset-inline-end: convert.to-rem(-1px);
+  }
+
   .#{$prefix}--select--slug
     .#{$prefix}--select-input:not(:has(~ .#{$prefix}--slug--revert)) {
     @include ai-gradient;
