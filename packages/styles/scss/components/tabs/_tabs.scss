@@ -601,13 +601,13 @@
 
     .#{$prefix}--tabs__nav-item--disabled {
       background-color: transparent;
-      border-block-end: $tab-underline-disabled;
+      border-block-end: 1px solid $border-subtle;
       color: $tab-text-disabled;
       outline: none;
     }
 
     .#{$prefix}--tabs__nav-item--disabled:hover {
-      border-block-end: $tab-underline-disabled;
+      border-block-end: 1px solid $border-subtle;
       color: $tab-text-disabled;
       cursor: not-allowed;
     }
@@ -629,7 +629,7 @@
 
     .#{$prefix}--tabs__nav-item--disabled:focus,
     .#{$prefix}--tabs__nav-item--disabled:active {
-      border-block-end: $tab-underline-disabled;
+      border-block-end: 1px solid $border-subtle;
       outline: none;
       pointer-events: none;
     }
