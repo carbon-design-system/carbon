@@ -86,6 +86,22 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
     expect(container.firstChild).toHaveAttribute('id', 'custom-id');
   });
 
+  it('should always use button kind=ghost', () => {
+    render(
+      <OverflowMenu>
+        <MenuItem label="item" className="test-child">
+          one
+        </MenuItem>
+        <MenuItem label="item" className="test-child">
+          two
+        </MenuItem>
+      </OverflowMenu>
+    );
+
+    expect(screen.getByRole('button')).not.toHaveClass('cds--btn--primary');
+    expect(screen.getByRole('button')).toHaveClass('cds--btn--ghost');
+  });
+
   it('should close menu on outside click', async () => {
     render(
       <OverflowMenu>
