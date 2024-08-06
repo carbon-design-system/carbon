@@ -552,6 +552,7 @@ const MultiSelect = React.forwardRef(
     function stateReducer(state, actionAndChanges) {
       const { changes, props, type } = actionAndChanges;
       const { highlightedIndex } = changes;
+      console.log('highlightedIndex', highlightedIndex);
 
       if (changes.isOpen && !isOpen) {
         setTopItems(controlledSelectedItems);
@@ -576,6 +577,8 @@ const MultiSelect = React.forwardRef(
           setIsOpenWrapper(changes.isOpen || false);
           return { ...changes, highlightedIndex: 0 };
         case ItemClick:
+          console.log('changes', changes);
+          console.log('state', state);
           setHighlightedIndex(changes.selectedItem);
           onItemChange(changes.selectedItem);
           return { ...changes, highlightedIndex: state.highlightedIndex };
@@ -590,7 +593,7 @@ const MultiSelect = React.forwardRef(
           } else {
             return {
               ...changes,
-              highlightedIndex: filteredItems.indexOf(highlightedIndex),
+              highlightedIndex: filteredItems.indexOf(highlightedIndex) + 1,
             };
           }
         case ToggleButtonKeyDownArrowDown:
