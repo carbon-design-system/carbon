@@ -93,7 +93,7 @@ const SelectableTag = <T extends React.ElementType>({
   }, [prefix, tagRef]);
 
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'sm',
       kind: 'inline',

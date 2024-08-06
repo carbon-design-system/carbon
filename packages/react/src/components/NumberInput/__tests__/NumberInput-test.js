@@ -11,7 +11,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { NumberInput } from '../NumberInput';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 
 function translateWithId(id) {
   if (id === 'increment.number') {
@@ -70,7 +70,7 @@ describe('NumberInput', () => {
   });
 
   it('should respect slug prop', () => {
-    render(<NumberInput label="test-label" id="test" slug={<Slug />} />);
+    render(<NumberInput label="test-label" id="test" slug={<AILabel />} />);
 
     expect(
       screen.getByRole('button', { name: 'AI - Show information' })

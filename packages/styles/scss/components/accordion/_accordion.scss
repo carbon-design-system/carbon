@@ -217,7 +217,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
   .#{$prefix}--accordion__item--active {
     overflow: visible;
 
-    .#{$prefix}--accordion__wrapper {
+    > .#{$prefix}--accordion__wrapper {
       // Properties for when the accordion is open
       overflow: visible;
       max-block-size: fit-content;
@@ -226,9 +226,11 @@ $content-padding: 0 0 0 $spacing-05 !default;
       padding-block-end: $spacing-06;
     }
 
-    .#{$prefix}--accordion__arrow {
-      fill: $icon-primary;
-      transform: rotate(-90deg) #{'/*rtl:ignore*/'};
+    > .#{$prefix}--accordion__heading {
+      > .#{$prefix}--accordion__arrow {
+        fill: $icon-primary;
+        transform: rotate(-90deg) #{'/*rtl:ignore*/'};
+      }
     }
   }
 

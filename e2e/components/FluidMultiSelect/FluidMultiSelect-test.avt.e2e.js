@@ -81,6 +81,7 @@ test.describe('@avt FluidMultiSelect', () => {
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Space');
     await expect(menu).toBeVisible();
+    await page.keyboard.press('ArrowDown');
     // Navigation inside the menu
     // Focus on first element by default
     await expect(
@@ -175,6 +176,7 @@ test.describe('@avt FluidMultiSelect', () => {
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Space');
     await expect(menu).toBeVisible();
+    await page.keyboard.press('ArrowDown');
     // Navigation inside the menu
     // Focus on first element by default
     await expect(

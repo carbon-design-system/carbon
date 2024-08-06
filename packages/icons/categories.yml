@@ -649,6 +649,13 @@ categories:
           - ai-generate
           - ai-launch
           - ai-recommend
+          - ibm-watson--discovery
+          - ibm-watson--orders
+          - ibm-watsonx--assistant
+          - ibm-watsonx--code-assistant
+          - ibm-watsonx--code-assistant-for-z
+          - ibm-watsonx--code-assistant-for-z--refactor
+          - ibm-watsonx--orchestrate
           - machine-learning
           - machine-learning-model
           - model
@@ -800,7 +807,6 @@ categories:
           - ibm-cloud-pak--watson-aiops
           - ibm-security--services
           - ibm-watson--assistant
-          - ibm-watson--discovery
           - ibm-watson--knowledge-catalog
           - ibm-watson--knowledge-studio
           - ibm-watson--language-translator
@@ -808,17 +814,11 @@ categories:
           - ibm-watson--natural-language-classifier
           - ibm-watson--natural-language-understanding
           - ibm-watson--openscale
-          - ibm-watson--orders
           - ibm-watson--query
           - ibm-watson--speech-to-text
           - ibm-watson--studio
           - ibm-watson--text-to-speech
           - ibm-watson--tone-analyzer
-          - ibm-watsonx--assistant
-          - ibm-watsonx--code-assistant
-          - ibm-watsonx--code-assistant-for-z
-          - ibm-watsonx--code-assistant-for-z--refactor
-          - ibm-watsonx--orchestrate
           - ibm-z--cloud-mod-stack
           - ibm-z--environments-dev-sec-ops
           - ibm-z--processor-capacity-reference
@@ -834,9 +834,6 @@ categories:
           - scis--transparent-supply
           - virtual-private-cloud--alt
           - vlan--ibm
-          - watsonx-ai
-          - watsonx-data
-          - watsonx-governance
       - name: Commerce
         members:
           - apple

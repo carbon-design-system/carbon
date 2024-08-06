@@ -9,7 +9,7 @@ import React from 'react';
 import CheckboxGroup from '../CheckboxGroup';
 import Checkbox from '../Checkbox/Checkbox';
 import { render, screen } from '@testing-library/react';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -155,7 +155,7 @@ describe('CheckboxGroup', () => {
       <CheckboxGroup
         className="some-class"
         legendText="Checkbox heading"
-        slug={<Slug />}
+        slug={<AILabel />}
       />
     );
 

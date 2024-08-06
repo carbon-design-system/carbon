@@ -14,6 +14,20 @@ import { match, keys } from '../../../internal/keyboard';
 export default (config) => (fp) => {
   const { inputFrom, inputTo, lastStartValue } = config;
   /**
+   * Handles `click` outside to close calendar
+   */
+  const handleClickOutside = (event) => {
+    if (
+      !fp.isOpen ||
+      fp.calendarContainer.contains(event.target) ||
+      event.target === inputFrom ||
+      event.target === inputTo
+    ) {
+      return;
+    }
+    fp.close();
+  };
+  /**
    * Handles `keydown` event.
    */
   const handleKeydown = (event) => {
@@ -127,6 +141,7 @@ export default (config) => (fp) => {
       inputTo.removeEventListener('blur', handleBlur, true);
     }
     inputFrom.removeEventListener('keydown', handleKeydown, true);
+    document.removeEventListener('click', handleClickOutside, true);
   };
 
   /**
@@ -140,6 +155,7 @@ export default (config) => (fp) => {
       inputTo.addEventListener('keydown', handleKeydown, true);
       inputTo.addEventListener('blur', handleBlur, true);
     }
+    document.addEventListener('click', handleClickOutside, true);
   };
 
   /**

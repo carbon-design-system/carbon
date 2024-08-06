@@ -15,7 +15,7 @@ import {
   waitForPosition,
 } from '../../ListBox/test-helpers';
 import userEvent from '@testing-library/user-event';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 import Button from '../../Button';
 import ButtonSet from '../../ButtonSet';
 
@@ -246,6 +246,8 @@ describe('MultiSelect', () => {
 
     expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
 
+    await userEvent.keyboard('[Enter]');
+    await userEvent.keyboard('[ArrowDown]');
     await userEvent.keyboard('[Enter]');
 
     expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'true');
@@ -587,7 +589,7 @@ describe('MultiSelect', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       const { container } = render(
-        <MultiSelect id="test" label={label} items={items} slug={<Slug />} />
+        <MultiSelect id="test" label={label} items={items} slug={<AILabel />} />
       );
       await waitForPosition();
 

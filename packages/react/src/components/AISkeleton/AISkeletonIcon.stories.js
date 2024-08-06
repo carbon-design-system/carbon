@@ -9,11 +9,11 @@
 
 import React from 'react';
 
-import AiSkeletonIcon from './AiSkeletonIcon';
+import AISkeletonIcon from './AISkeletonIcon';
 
 export default {
-  title: 'Experimental/unstable__AiSkeleton/AiSkeletonIcon',
-  component: AiSkeletonIcon,
+  title: 'Components/Skeleton/AISkeleton',
+  component: AISkeletonIcon,
 };
 
 const propsSkeleton = {
@@ -30,9 +30,9 @@ const propsSkeleton2 = {
   },
 };
 
-export const Default = () => (
+export const _AISkeletonIcon = () => (
   <>
-    <AiSkeletonIcon {...propsSkeleton} />
-    <AiSkeletonIcon {...propsSkeleton2} />
+    <AISkeletonIcon {...propsSkeleton} />
+    <AISkeletonIcon {...propsSkeleton2} />
   </>
 );

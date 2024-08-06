@@ -6,9 +6,14 @@
  */
 
 import React from 'react';
+import '../AILabel/ailabel-story.scss';
 import { default as Checkbox, CheckboxSkeleton } from './';
 import mdx from './Checkbox.mdx';
 import CheckboxGroup from '../CheckboxGroup';
+import Button from '../Button';
+import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
+import { IconButton } from '../IconButton';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 
 const checkboxEvents = {
   className: 'some-class',
@@ -85,6 +90,75 @@ export const Single = () => {
 };
 
 export const Skeleton = () => <CheckboxSkeleton />;
+
+const slugFunc = (kind) => (
+  <AILabel className="slug-container" kind={kind}>
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+export const withAILabel = () => (
+  <div className="slug-check-radio-container">
+    <CheckboxGroup legendText="Group Label" slug={slugFunc()}>
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
+    </CheckboxGroup>
+
+    <CheckboxGroup legendText="Group Label">
+      <Checkbox
+        labelText={`Checkbox label`}
+        id="checkbox-label-4"
+        slug={slugFunc()}
+      />
+      <Checkbox
+        labelText={`Checkbox label`}
+        id="checkbox-label-5"
+        slug={slugFunc()}
+      />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-6" />
+    </CheckboxGroup>
+
+    <CheckboxGroup legendText="Group Label">
+      <Checkbox
+        labelText={`Checkbox label`}
+        id="checkbox-label-7"
+        slug={slugFunc('inline')}
+      />
+      <Checkbox
+        labelText={`Checkbox label`}
+        id="checkbox-label-8"
+        slug={slugFunc('inline')}
+      />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-9" />
+    </CheckboxGroup>
+  </div>
+);
 
 export const Playground = (args) => (
   <CheckboxGroup {...fieldsetCheckboxProps()} {...args}>

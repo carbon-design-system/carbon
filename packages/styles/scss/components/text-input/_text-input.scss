@@ -132,7 +132,11 @@
   }
 
   .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover {
-    inset-inline-start: -(convert.to-rem(40px));
+    inset-inline-start: -($spacing-08);
+  }
+
+  .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover-content {
+    min-inline-size: $spacing-08;
   }
 
   .#{$prefix}--text-input--sm
@@ -398,14 +402,15 @@
     flex-direction: column;
   }
 
-  .#{$prefix}--text-input-wrapper--inline .cds--form-requirement {
+  .#{$prefix}--text-input-wrapper--inline .#{$prefix}--form-requirement {
     display: block;
     overflow: visible;
     font-weight: 400;
     max-block-size: convert.to-rem(200px);
   }
 
-  .#{$prefix}--text-input-wrapper--inline--invalid .cds--form-requirement {
+  .#{$prefix}--text-input-wrapper--inline--invalid
+    .#{$prefix}--form-requirement {
     color: $text-error;
   }
 

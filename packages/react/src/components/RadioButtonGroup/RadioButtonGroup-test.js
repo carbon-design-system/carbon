@@ -10,7 +10,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import RadioButtonGroup from './RadioButtonGroup';
 import RadioButton from '../RadioButton';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -235,7 +235,7 @@ describe('RadioButtonGroup', () => {
 
     it('should respect slug prop', () => {
       const { container } = render(
-        <RadioButtonGroup slug={<Slug />} name="test" legendText="test">
+        <RadioButtonGroup slug={<AILabel />} name="test" legendText="test">
           <RadioButton labelText="test-1" value={1} />
           <RadioButton labelText="test-0" value={0} />
         </RadioButtonGroup>

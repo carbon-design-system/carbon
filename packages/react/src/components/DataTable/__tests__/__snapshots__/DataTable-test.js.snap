@@ -572,7 +572,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-labelledby="tooltip-:r2m:"
-                class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--primary"
+                class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost"
                 title="Settings"
                 type="button"
               >
@@ -1003,7 +1003,7 @@ exports[`DataTable renders as expected - Component API should render and match s
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-labelledby="tooltip-:rk:"
-                class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--primary"
+                class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost"
                 title="Settings"
                 type="button"
               >
