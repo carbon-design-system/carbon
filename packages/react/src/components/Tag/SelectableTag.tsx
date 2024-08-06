@@ -139,8 +139,7 @@ const SelectableTag = <T extends React.ElementType>({
 
   return (
     <Tag
-      role="option"
-      aria-selected={selectedTag}
+      aria-pressed={selectedTag}
       ref={tagRef}
       slug={slug}
       size={size}
