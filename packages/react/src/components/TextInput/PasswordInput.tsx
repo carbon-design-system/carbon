@@ -329,6 +329,11 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   if (tooltipPosition === 'right' || tooltipPosition === 'left') {
     align = tooltipPosition;
   }
+  if (!hidePasswordLabel || hidePasswordLabel.trim() === '') {
+    console.warn('Warning: The "hidePasswordLabel" should not be blank.');
+  } else if (!showPasswordLabel || showPasswordLabel.trim() === '') {
+    console.warn('Warning: The "showPasswordLabel" should not be blank.');
+  }
   const input = (
     <>
       <input
@@ -349,6 +354,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
         data-toggle-password-visibility={inputType === 'password'}
       />
       {isFluid && <hr className={`${prefix}--text-input__divider`} />}
+
       <Tooltip
         align={align}
         className={`${prefix}--toggle-password-tooltip`}

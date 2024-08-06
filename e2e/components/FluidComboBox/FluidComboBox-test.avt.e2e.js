@@ -84,6 +84,7 @@ test.describe('@avt FluidComboBox', () => {
     await expect(combobox).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(menu).toBeVisible();
+    await page.keyboard.press('ArrowDown');
     // Navigation inside the menu
     // move to first option
     await expect(optionOne).toHaveClass(

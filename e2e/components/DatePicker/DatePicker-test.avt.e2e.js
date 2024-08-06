@@ -125,7 +125,7 @@ test.describe('@avt DatePicker', () => {
     await page.keyboard.press('Enter');
     await page.keyboard.press('Enter');
     await expect(
-      page.locator('input#date-picker-input-id-finish')
+      page.locator('input#date-picker-input-id-start')
     ).toBeFocused();
     await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
       /open/

@@ -37,10 +37,13 @@
     white-space: nowrap;
   }
 
-  .#{$prefix}--list-box__wrapper--fluid
-    .#{$prefix}--combo-box
-    .#{$prefix}--text-input:focus {
-    outline: none;
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus
+    .#{$prefix}--combo-box.#{$prefix}--list-box--expanded:has(
+      input[aria-activedescendant]:not([aria-activedescendant=''])
+    )
+    .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
+    outline-offset: convert.to-rem(-1px);
+    outline-width: convert.to-rem(1px);
   }
 
   .#{$prefix}--list-box__wrapper--fluid
