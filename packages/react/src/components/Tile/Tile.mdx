@@ -60,24 +60,35 @@ or if you have multiple feature flags you can enable them this way.
 );
 ```
 
-<div style={{ width: '1018px', maxWidth: '100%' }}>
-  <Story of={TileFeatureFlagStories.Clickable} meta={TileFeatureFlagStories} />
-</div>
-<div style={{ width: '1018px', maxWidth: '100%' }}>
-  <Story of={TileFeatureFlagStories.Expandable} meta={TileFeatureFlagStories} />
-</div>
-<div style={{ width: '1018px', maxWidth: '100%' }}>
-  <Story
-    of={TileFeatureFlagStories.MultiSelect}
-    meta={TileFeatureFlagStories}
-  />
-</div>
-<div style={{ width: '1018px', maxWidth: '100%' }}>
-  <Canvas of={TileFeatureFlagStories.Radio} meta={TileFeatureFlagStories} />
-</div>
-<div style={{ width: '1018px', maxWidth: '100%' }}>
-  <Story of={TileFeatureFlagStories.Selectable} meta={TileFeatureFlagStories} />
-</div>
+<Canvas>
+  <div style={{ width: '1018px', maxWidth: '100%' }}>
+    <Story
+      of={TileFeatureFlagStories.Clickable}
+      meta={TileFeatureFlagStories}
+    />
+  </div>
+  <div style={{ width: '1018px', maxWidth: '100%' }}>
+    <Story
+      of={TileFeatureFlagStories.Expandable}
+      meta={TileFeatureFlagStories}
+    />
+  </div>
+  <div style={{ width: '1018px', maxWidth: '100%' }}>
+    <Story
+      of={TileFeatureFlagStories.MultiSelect}
+      meta={TileFeatureFlagStories}
+    />
+  </div>
+  <div style={{ width: '1018px', maxWidth: '100%' }}>
+    <Story of={TileFeatureFlagStories.Radio} meta={TileFeatureFlagStories} />
+  </div>
+  <div style={{ width: '1018px', maxWidth: '100%' }}>
+    <Story
+      of={TileFeatureFlagStories.Selectable}
+      meta={TileFeatureFlagStories}
+    />
+  </div>
+</Canvas>
 
 ## Component API
 

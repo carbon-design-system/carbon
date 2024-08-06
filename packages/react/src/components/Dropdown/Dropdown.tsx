@@ -40,7 +40,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { ReactAttr } from '../../types/common';
+import { TranslateWithId, ReactAttr } from '../../types/common';
 import { useId } from '../../internal/useId';
 import {
   useFloating,
@@ -49,16 +49,10 @@ import {
   size as floatingSize,
 } from '@floating-ui/react';
 
-const {
-  ToggleButtonKeyDownArrowDown,
-  ToggleButtonKeyDownArrowUp,
-  ToggleButtonKeyDownHome,
-  ToggleButtonKeyDownEnd,
-  ItemMouseMove,
-  MenuMouseLeave,
-} = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
-  ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
-};
+const { ItemMouseMove, MenuMouseLeave } =
+  useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
+    ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
+  };
 
 const defaultItemToString = <ItemType,>(item?: ItemType | null): string => {
   if (typeof item === 'string') {
@@ -85,7 +79,8 @@ export interface OnChangeData<ItemType> {
 }
 
 export interface DropdownProps<ItemType>
-  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
+  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes>,
+    TranslateWithId<ListBoxMenuIconTranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
@@ -114,7 +109,10 @@ export interface DropdownProps<ItemType>
   disabled?: boolean;
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift. Use with caution: anything you define
+   * here overrides the components' internal handling of that prop. Downshift
+   * internals are subject to change, and in some cases they can not be shimmed
+   * to shield you from potentially breaking changes.
    */
   downshiftProps?: Partial<UseSelectProps<ItemType>>;
 
@@ -221,14 +219,6 @@ export interface DropdownProps<ItemType>
   titleText?: ReactNode;
 
   /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId?(
-    messageId: ListBoxMenuIconTranslationKey,
-    args?: Record<string, unknown>
-  ): string;
-
-  /**
    * The dropdown type, `default` or `inline`
    */
   type?: ListBoxType;
@@ -323,7 +313,6 @@ const Dropdown = React.forwardRef(
     const { isFluid } = useContext(FormContext);
 
     const selectProps: UseSelectProps<ItemType> = {
-      ...downshiftProps,
       items,
       itemToString,
       initialSelectedItem,
@@ -333,25 +322,28 @@ const Dropdown = React.forwardRef(
         const isObject = item !== null && typeof item === 'object';
         return isObject && 'disabled' in item && item.disabled === true;
       },
+      onHighlightedIndexChange: ({ highlightedIndex }) => {
+        if (highlightedIndex! > -1 && typeof window !== undefined) {
+          const itemArray = document.querySelectorAll(
+            `li.${prefix}--list-box__menu-item[role="option"]`
+          );
+          const highlightedItem = itemArray[highlightedIndex!];
+          if (highlightedItem) {
+            highlightedItem.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+            });
+          }
+        }
+      },
+      ...downshiftProps,
     };
     const dropdownInstanceId = useId();
 
     function stateReducer(state, actionAndChanges) {
-      const { changes, props, type } = actionAndChanges;
-      const { highlightedIndex } = changes;
+      const { changes, type } = actionAndChanges;
 
       switch (type) {
-        case ToggleButtonKeyDownArrowDown:
-        case ToggleButtonKeyDownArrowUp:
-        case ToggleButtonKeyDownHome:
-        case ToggleButtonKeyDownEnd:
-          if (highlightedIndex > -1) {
-            const itemArray = document.querySelectorAll(
-              `li.${prefix}--list-box__menu-item[role="option"]`
-            );
-            props.scrollIntoView(itemArray[highlightedIndex]);
-          }
-          return changes;
         case ItemMouseMove:
         case MenuMouseLeave:
           return { ...changes, highlightedIndex: state.highlightedIndex };
@@ -506,7 +498,7 @@ const Dropdown = React.forwardRef(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });
@@ -670,7 +662,10 @@ Dropdown.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift. Use with caution: anything you define
+   * here overrides the components' internal handling of that prop. Downshift
+   * internals are subject to change, and in some cases they can not be shimmed
+   * to shield you from potentially breaking changes.
    */
   downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
 

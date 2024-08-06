@@ -76,7 +76,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   let normalizedSlug;
   if (
     React.isValidElement(slug) &&
-    (slug['type'] as any)?.displayName === 'Slug'
+    (slug['type'] as any)?.displayName === 'AILabel'
   ) {
     normalizedSlug = React.cloneElement(slug, {
       size: 'mini',
