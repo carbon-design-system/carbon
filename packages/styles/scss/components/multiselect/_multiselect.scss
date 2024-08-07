@@ -48,7 +48,7 @@
   .#{$prefix}--multi-select.#{$prefix}--multi-select--selectall
     .#{$prefix}--list-box__menu-item:first-child
     .#{$prefix}--list-box__menu-item__option {
-    padding: 0.6875rem 1rem;
+    padding: 0.6875rem $spacing-05;
     margin: 0;
     border-block-end: 1px solid $border-subtle-01;
   }
