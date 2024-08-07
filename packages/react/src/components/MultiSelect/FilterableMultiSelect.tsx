@@ -487,9 +487,16 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   }, [controlledSelectedItems, isOpen, setTopItems]);
 
+  const validateHighlightFocus = () => {
+    if (controlledSelectedItems.length > 0) {
+      setHighlightedIndex(0);
+    }
+  };
+
   function handleMenuChange(forceIsOpen: boolean): void {
     const nextIsOpen = forceIsOpen ?? !isOpen;
     setIsOpen(nextIsOpen);
+    validateHighlightFocus();
     if (onMenuChange) {
       onMenuChange(nextIsOpen);
     }
@@ -508,8 +515,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   } = useCombobox<ItemType>({
     isOpen,
     items: sortedItems,
+    // defaultHighlightedIndex: 0, // after selection, highlight the first item.
     itemToString,
-    defaultHighlightedIndex: 0, // after selection, highlight the first item.
     id,
     labelId,
     menuId,
@@ -520,7 +527,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       return (item as any).disabled;
     },
   });
-
   function stateReducer(state, actionAndChanges) {
     const { type, props, changes } = actionAndChanges;
     const { highlightedIndex } = changes;
@@ -548,20 +554,30 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return changes;
       case FunctionToggleMenu:
       case ToggleButtonClick:
+        validateHighlightFocus();
         if (changes.isOpen && !changes.selectedItem) {
-          return { ...changes, highlightedIndex: 0 };
+          return { ...changes };
         }
-        return changes;
+
+        return { ...changes, highlightedIndex: null };
       case InputChange:
         if (onInputValueChange) {
           onInputValueChange(changes.inputValue);
         }
         setInputValue(changes.inputValue ?? '');
         setIsOpen(true);
-        return changes;
+        return { ...changes, highlightedIndex: 0 };
 
       case InputClick:
-        return { ...changes, isOpen: false };
+        validateHighlightFocus();
+        if (changes.isOpen && !changes.selectedItem) {
+          return { ...changes };
+        }
+        return {
+          ...changes,
+          isOpen: false,
+          highlightedIndex: null,
+        };
       case MenuMouseLeave:
         return { ...changes, highlightedIndex: state.highlightedIndex };
       case InputKeyDownArrowUp:
