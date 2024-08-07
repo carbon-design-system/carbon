@@ -329,18 +329,29 @@ const MultiSelect = React.forwardRef(
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const sortOptions = {
+      selectedItems: selected,
+      itemToString,
+      compareItems,
+      locale,
+    };
+
     const filteredItems = useMemo(() => {
-      return items.filter((item) => {
-        if (typeof item === 'object' && item !== null) {
-          for (const key in item) {
-            if (Object.hasOwn(item, key) && item[key] === undefined) {
-              return false; // Return false if any property has an undefined value
+      return sortItems!(
+        items.filter((item) => {
+          if (typeof item === 'object' && item !== null) {
+            for (const key in item) {
+              if (Object.hasOwn(item, key) && item[key] === undefined) {
+                return false; // Return false if any property has an undefined value
+              }
             }
           }
-        }
-        return true; // Return true if item is not an object with undefined values
-      });
+          return true; // Return true if item is not an object with undefined values
+        }),
+        sortOptions as SortItemsOptions<ItemType>
+      );
     }, [items]);
+
     let selectAll = filteredItems.some((item) => (item as any).isSelectAll);
     if ((selected ?? []).length > 0 && selectAll) {
       console.warn(
@@ -540,13 +551,6 @@ const MultiSelect = React.forwardRef(
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const ItemToElement = itemToElement!;
 
-    const sortOptions = {
-      selectedItems: controlledSelectedItems,
-      itemToString,
-      compareItems,
-      locale,
-    };
-
     if (selectionFeedback === 'fixed') {
       sortOptions.selectedItems = [];
     } else if (selectionFeedback === 'top-after-reopen') {
@@ -598,7 +602,7 @@ const MultiSelect = React.forwardRef(
           } else {
             return {
               ...changes,
-              highlightedIndex: filteredItems.indexOf(highlightedIndex) + 1,
+              highlightedIndex: filteredItems.indexOf(highlightedIndex),
             };
           }
         case ToggleButtonKeyDownArrowDown:
@@ -755,11 +759,7 @@ const MultiSelect = React.forwardRef(
           </div>
           <ListBox.Menu {...menuProps}>
             {isOpen &&
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              sortItems!(
-                filteredItems as readonly ItemType[],
-                sortOptions as SortItemsOptions<ItemType>
-              ).map((item, index) => {
+              filteredItems.map((item, index) => {
                 const isChecked =
                   selectedItems.filter((selected) => isEqual(selected, item))
                     .length > 0;
