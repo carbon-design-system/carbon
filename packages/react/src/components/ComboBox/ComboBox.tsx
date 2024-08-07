@@ -678,7 +678,15 @@ const ComboBox = forwardRef(
           toggleMenu,
         };
       }
-    }, [downshiftActions, setHighlightedIndex, reset]);
+    }, [
+      closeMenu,
+      openMenu,
+      reset,
+      selectItem,
+      setHighlightedIndex,
+      downshiftSetInputValue,
+      toggleMenu,
+    ]);
 
     const buttonProps = getToggleButtonProps({
       disabled: disabled || readOnly,
