@@ -46,9 +46,8 @@ import {
   flip,
   autoUpdate,
   size as floatingSize,
-  type ReferenceElement,
 } from '@floating-ui/react';
-import { computePosition, hide } from '@floating-ui/dom';
+import { hide } from '@floating-ui/dom';
 
 const { ItemMouseMove, MenuMouseLeave } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
