@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import FilterableMultiSelect from '../FilterableMultiSelect';
 import {
@@ -15,7 +15,6 @@ import {
   findMenuIconNode,
   generateItems,
   generateGenericItem,
-  waitForPosition,
 } from '../../ListBox/test-helpers';
 import { AILabel } from '../../AILabel';
 
