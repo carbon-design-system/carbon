@@ -5575,12 +5575,6 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
-      "selectAll": Object {
-        "type": "bool",
-      },
-      "selectAllItemText": Object {
-        "type": "string",
-      },
       "selectedItems": Object {
         "type": "array",
       },
