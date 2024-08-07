@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,22 +10,22 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('@avt Slug', async () => {
+test.describe('@avt AILabel', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'Slug',
-      id: 'experimental-unstable-slug--default',
+      component: 'AILabel',
+      id: 'components-ailabel--default',
       globals: {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('Slug');
+    await expect(page).toHaveNoACViolations('AILabel');
   });
 
   test.slow('@avt-advanced-states open state', async ({ page }) => {
     await visitStory(page, {
-      component: 'Slug',
-      id: 'experimental-unstable-slug--default',
+      component: 'AILabel',
+      id: 'components-ailabel--default',
       globals: {
         theme: 'white',
       },
@@ -34,24 +34,24 @@ test.describe('@avt Slug', async () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Enter');
-    await expect(page).toHaveNoACViolations('Slug-open');
+    await expect(page).toHaveNoACViolations('AILabel-open');
   });
 
   test.slow('@avt-advanced-states ai form', async ({ page }) => {
     await visitStory(page, {
-      component: 'Slug',
-      id: 'experimental-unstable-slug-form--form-example',
+      component: 'AILabel',
+      id: 'components-form--with-ai-label',
       globals: {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('Slug-form');
+    await expect(page).toHaveNoACViolations('AILabel-form');
   });
 
   test('@avt-keyboard-nav - slug', async ({ page }) => {
     await visitStory(page, {
       component: 'Search',
-      id: 'experimental-unstable-slug--callout',
+      id: 'components-ailabel--callout',
       globals: {
         theme: 'white',
       },
@@ -63,7 +63,7 @@ test.describe('@avt Slug', async () => {
     await expect(slug).toBeVisible();
     await expect(callout).toBeVisible();
 
-    // Tab to the Slug
+    // Tab to the AILabel
     await page.keyboard.press('Tab');
     await expect(slug).toBeFocused();
 

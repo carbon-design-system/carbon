@@ -118,10 +118,11 @@ test.describe('@avt MultiSelect', () => {
       page.getByRole('option', {
         name: 'An example option that is really long to show what should be done to handle long text',
       })
-    ).toHaveClass(
+    ).not.toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
     );
     // select first option (should select with enter and space)
+    await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     await expect(
       page.getByRole('option', {

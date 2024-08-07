@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import MultiSelect from '../';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
 import userEvent from '@testing-library/user-event';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 import Button from '../../Button';
 import ButtonSet from '../../ButtonSet';
 
@@ -560,7 +560,7 @@ describe('MultiSelect', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       const { container } = render(
-        <MultiSelect id="test" label={label} items={items} slug={<Slug />} />
+        <MultiSelect id="test" label={label} items={items} slug={<AILabel />} />
       );
       await waitForPosition();
 
