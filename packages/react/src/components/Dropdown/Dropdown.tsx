@@ -273,7 +273,7 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
-    const { refs, elements, floatingStyles } = useFloating(
+    const { refs, floatingStyles, middlewareData } = useFloating(
       autoAlign
         ? {
             placement: direction,
@@ -294,37 +294,26 @@ const Dropdown = React.forwardRef(
                 },
               }),
               flip(),
+              hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
         : {} // When autoAlign is turned off, floating-ui will not be used
     );
 
-    const { reference, floating } = elements;
-
-    const updatePosition = () => {
-      computePosition(reference as ReferenceElement, floating as HTMLElement, {
-        middleware: [hide({ strategy: 'referenceHidden' })],
-      }).then(({ middlewareData }) => {
-        if (middlewareData.hide) {
-          floating &&
-            Object.assign(floating.style, {
-              visibility: middlewareData.hide.referenceHidden
-                ? 'hidden'
-                : 'visible',
-            });
-        }
-      });
-    };
-
     useEffect(() => {
       if (autoAlign) {
-        Object.keys(floatingStyles).forEach((style) => {
+        const updatedFloatingStyles = {
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible',
+        };
+        Object.keys(updatedFloatingStyles).forEach((style) => {
           if (refs.floating.current) {
-            refs.floating.current.style[style] = floatingStyles[style];
+            refs.floating.current.style[style] = updatedFloatingStyles[style];
           }
         });
-        updatePosition();
       }
     }, [floatingStyles, autoAlign, refs.floating]);
 
