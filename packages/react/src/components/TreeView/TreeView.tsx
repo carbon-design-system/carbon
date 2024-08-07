@@ -5,16 +5,68 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
-import uniqueId from '../../tools/uniqueId';
-import { usePrefix } from '../../internal/usePrefix';
 import { useControllableState } from '../../internal/useControllableState';
+import { usePrefix } from '../../internal/usePrefix';
+import uniqueId from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
+import TreeNode, { TreeNodeProps } from './TreeNode';
 
-export default function TreeView({
+export type TreeViewProps = {
+  /**
+   * Mark the active node in the tree, represented by its ID
+   */
+  active?: string | number;
+  /**
+   * Specify the children of the TreeView
+   */
+  children?: React.ReactNode;
+  /**
+   * Specify an optional className to be applied to the TreeView
+   */
+  className?: string;
+  /**
+   * Specify whether or not the label should be hidden
+   */
+  hideLabel?: boolean;
+  /**
+   * Provide the label text that will be read by a screen reader
+   */
+  label: string;
+  /**
+   * **[Experimental]** Specify the selection mode of the tree.
+   * If `multiselect` is `false` then only one node can be selected at a time
+   */
+  multiselect?: boolean;
+  /**
+   * **[Experimental]** Callback function that is called when any node is activated.
+   * *This is only supported with the `enable-treeview-controllable` feature flag!*
+   */
+  onActivate?: (activated?: string | number) => void;
+  /**
+   * Callback function that is called when any node is selected
+   */
+  onSelect?: (selected: Array<string | number>, payload: any) => void;
+  /**
+   * Array representing all selected node IDs in the tree
+   */
+  selected?: Array<string | number>;
+  /**
+   * Specify the size of the tree from a list of available sizes.
+   */
+  size?: 'xs' | 'sm';
+} & React.HTMLAttributes<HTMLUListElement>;
+
+type TreeViewComponent = {
+  (props: TreeViewProps): JSX.Element;
+  propTypes?: any;
+  TreeNode: typeof TreeNode;
+};
+
+const TreeView: TreeViewComponent = ({
   active: prespecifiedActive,
   children,
   className,
@@ -26,7 +78,7 @@ export default function TreeView({
   selected: preselected,
   size = 'sm',
   ...rest
-}) {
+}: TreeViewProps) => {
   const enableTreeviewControllable = useFeatureFlag(
     'enable-treeview-controllable'
   );
@@ -34,10 +86,13 @@ export default function TreeView({
   const { current: treeId } = useRef(rest.id || uniqueId());
   const prefix = usePrefix();
   const treeClasses = classNames(className, `${prefix}--tree`, {
+    // @ts-ignore - will always be false according to prop types
     [`${prefix}--tree--${size}`]: size !== 'default',
   });
-  const treeRootRef = useRef(null);
-  const treeWalker = useRef(treeRootRef?.current);
+  const treeRootRef = useRef<HTMLUListElement>(null);
+  const treeWalker = useRef<TreeWalker>(
+    treeRootRef?.current as unknown as TreeWalker
+  );
 
   const controllableSelectionState = useControllableState({
     value: preselected,
@@ -69,7 +124,7 @@ export default function TreeView({
   }
 
   function handleTreeSelect(event, node = {}) {
-    const { id: nodeId } = node;
+    const nodeId = (node as any).id;
     if (multiselect && (event.metaKey || event.ctrlKey)) {
       if (!selected.includes(nodeId)) {
         setSelected(selected.concat(nodeId));
@@ -94,6 +149,7 @@ export default function TreeView({
     if (event.type === 'blur') {
       const { relatedTarget: currentFocusedNode, target: prevFocusedNode } =
         event;
+
       if (treeRootRef?.current?.contains(currentFocusedNode)) {
         prevFocusedNode.tabIndex = -1;
       }
@@ -102,6 +158,7 @@ export default function TreeView({
       resetNodeTabIndices();
       const { relatedTarget: prevFocusedNode, target: currentFocusedNode } =
         event;
+
       if (treeRootRef?.current?.contains(prevFocusedNode)) {
         prevFocusedNode.tabIndex = -1;
       }
@@ -110,14 +167,15 @@ export default function TreeView({
   }
 
   let focusTarget = false;
-  const nodesWithProps = React.Children.map(children, (node) => {
-    const sharedNodeProps = {
+  const nodesWithProps = React.Children.map(children, (_node) => {
+    const node = _node as React.ReactElement<TreeNodeProps>;
+    const sharedNodeProps: Partial<TreeNodeProps> = {
       active,
       depth: 0,
       onNodeFocusEvent: handleFocusEvent,
       onTreeSelect: handleTreeSelect,
       selected,
-      tabIndex: (!node.props.disabled && -1) || null,
+      tabIndex: (!node.props.disabled && -1) || undefined,
     };
     if (!focusTarget && !node.props.disabled) {
       sharedNodeProps.tabIndex = 0;
@@ -136,14 +194,19 @@ export default function TreeView({
         keys.ArrowDown,
         keys.Home,
         keys.End,
+        // @ts-ignore - `matches` doesn't like the object syntax without missing properties
         { code: 'KeyA' },
       ])
     ) {
       event.preventDefault();
     }
 
+    if (!treeWalker.current) {
+      return;
+    }
+
     treeWalker.current.currentNode = event.target;
-    let nextFocusNode;
+    let nextFocusNode: Node | null = null;
 
     if (match(event, keys.ArrowUp)) {
       nextFocusNode = treeWalker.current.previousNode();
@@ -151,14 +214,16 @@ export default function TreeView({
     if (match(event, keys.ArrowDown)) {
       nextFocusNode = treeWalker.current.nextNode();
     }
+    // @ts-ignore - `matches` doesn't like the object syntax without missing properties
     if (matches(event, [keys.Home, keys.End, { code: 'KeyA' }])) {
-      const nodeIds = [];
+      const nodeIds: string[] = [];
 
       if (matches(event, [keys.Home, keys.End])) {
         if (
           multiselect &&
           event.shiftKey &&
           event.ctrlKey &&
+          treeWalker.current.currentNode instanceof Element &&
           !treeWalker.current.currentNode.getAttribute('aria-disabled')
         ) {
           nodeIds.push(treeWalker.current.currentNode?.id);
@@ -169,22 +234,26 @@ export default function TreeView({
             : treeWalker.current.nextNode()
         ) {
           nextFocusNode = treeWalker.current.currentNode;
-
           if (
             multiselect &&
             event.shiftKey &&
             event.ctrlKey &&
+            nextFocusNode instanceof Element &&
             !nextFocusNode.getAttribute('aria-disabled')
           ) {
             nodeIds.push(nextFocusNode?.id);
           }
         }
       }
+      // @ts-ignore - `matches` doesn't like the object syntax without missing properties
       if (match(event, { code: 'KeyA' }) && event.ctrlKey) {
         treeWalker.current.currentNode = treeWalker.current.root;
 
         while (treeWalker.current.nextNode()) {
-          if (!treeWalker.current.currentNode.getAttribute('aria-disabled')) {
+          if (
+            treeWalker.current.currentNode instanceof Element &&
+            !treeWalker.current.currentNode.getAttribute('aria-disabled')
+          ) {
             nodeIds.push(treeWalker.current.currentNode?.id);
           }
         }
@@ -193,8 +262,10 @@ export default function TreeView({
     }
     if (nextFocusNode && nextFocusNode !== event.target) {
       resetNodeTabIndices();
-      nextFocusNode.tabIndex = 0;
-      nextFocusNode.focus();
+      if (nextFocusNode instanceof HTMLElement) {
+        nextFocusNode.tabIndex = 0;
+        nextFocusNode.focus();
+      }
     }
     rest?.onKeyDown?.(event);
   }
@@ -202,17 +273,24 @@ export default function TreeView({
   useEffect(() => {
     treeWalker.current =
       treeWalker.current ??
-      document.createTreeWalker(treeRootRef?.current, NodeFilter.SHOW_ELEMENT, {
-        acceptNode: function (node) {
-          if (node.classList.contains(`${prefix}--tree-node--disabled`)) {
-            return NodeFilter.FILTER_REJECT;
-          }
-          if (node.matches(`li.${prefix}--tree-node`)) {
-            return NodeFilter.FILTER_ACCEPT;
-          }
-          return NodeFilter.FILTER_SKIP;
-        },
-      });
+      document.createTreeWalker(
+        treeRootRef?.current as unknown as Node,
+        NodeFilter.SHOW_ELEMENT,
+        {
+          acceptNode: function (node) {
+            if (!(node instanceof Element)) {
+              return NodeFilter.FILTER_SKIP;
+            }
+            if (node.classList.contains(`${prefix}--tree-node--disabled`)) {
+              return NodeFilter.FILTER_REJECT;
+            }
+            if (node.matches(`li.${prefix}--tree-node`)) {
+              return NodeFilter.FILTER_ACCEPT;
+            }
+            return NodeFilter.FILTER_SKIP;
+          },
+        }
+      );
   }, [prefix]);
 
   const useActiveAndSelectedOnMount = () =>
@@ -231,29 +309,29 @@ export default function TreeView({
 
   const labelId = `${treeId}__label`;
   const TreeLabel = () =>
-    !hideLabel && (
+    !hideLabel ? (
       <label id={labelId} className={`${prefix}--label`}>
         {label}
       </label>
-    );
+    ) : null;
 
   return (
     <>
       <TreeLabel />
       <ul
         {...rest}
-        aria-label={hideLabel ? label : null}
-        aria-labelledby={!hideLabel ? labelId : null}
-        aria-multiselectable={multiselect || null}
+        aria-label={hideLabel ? label : undefined}
+        aria-labelledby={!hideLabel ? labelId : undefined}
+        aria-multiselectable={multiselect || undefined}
         className={treeClasses}
         onKeyDown={handleKeyDown}
-        ref={treeRootRef}
+        ref={treeRootRef as unknown as React.RefObject<HTMLUListElement>}
         role="tree">
         {nodesWithProps}
       </ul>
     </>
   );
-}
+};
 
 TreeView.propTypes = {
   /**
@@ -310,3 +388,6 @@ TreeView.propTypes = {
    */
   size: PropTypes.oneOf(['xs', 'sm']),
 };
+
+TreeView.TreeNode = TreeNode;
+export default TreeView;
