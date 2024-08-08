@@ -629,7 +629,7 @@
 
     .#{$prefix}--tabs__nav-item--disabled:focus,
     .#{$prefix}--tabs__nav-item--disabled:active {
-      border-block-end: 1px solid $border-subtle;
+      border-block-end: 2px solid $border-subtle;
       outline: none;
       pointer-events: none;
     }
