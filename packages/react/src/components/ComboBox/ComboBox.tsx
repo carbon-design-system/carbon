@@ -209,7 +209,9 @@ export interface ComboBoxProps<ItemType>
    * cases they can not be shimmed by Carbon to shield you from potentially breaking
    * changes.
    */
-  downshiftActions?: React.MutableRefObject<UseComboboxActions<ItemType>>;
+  downshiftActions?: React.MutableRefObject<
+    UseComboboxActions<ItemType> | undefined
+  >;
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -1011,11 +1013,7 @@ ComboBox.propTypes = {
    * cases they can not be shimmed by Carbon to shield you from potentially breaking
    * changes.
    */
-
-  downshiftActions: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.object }),
-  ]),
+  downshiftActions: PropTypes.exact({ current: PropTypes.any }),
 
   /**
    * Provide helper text that is used alongside the control label for
