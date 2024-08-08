@@ -80,6 +80,11 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
    * Specify the tabIndex of the button.
    */
   tabIndex?: number;
+
+  /**
+   * Specify the menuTarget props of the menu.
+   */
+  menuTarget?: Element; // Add this line
 }
 
 const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
@@ -93,6 +98,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       size = 'lg',
       menuAlignment = 'bottom',
       tabIndex = 0,
+      menuTarget,
       ...rest
     },
     forwardRef
@@ -191,7 +197,8 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
           mode="basic"
           size={size}
           open={open}
-          onClose={handleClose}>
+          onClose={handleClose}
+          menuTarget={menuTarget}>
           {children}
         </Menu>
       </div>
@@ -250,6 +257,11 @@ MenuButton.propTypes = {
    */
   // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   tabIndex: PropTypes.number,
+
+  /**
+   * Specify the menuTarget prop of the menu.
+   */
+  menuTarget: PropTypes.instanceOf(Element),
 };
 
 export { MenuButton };

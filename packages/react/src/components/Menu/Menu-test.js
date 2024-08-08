@@ -76,7 +76,7 @@ describe('Menu', () => {
       const el = document.createElement('div');
       document.body.appendChild(el);
       el.classList.add('custom-class');
-      render(<Menu open target={el} />);
+      render(<Menu open menuTarget={el} />);
 
       // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('.custom-class')).toBeInTheDocument();
