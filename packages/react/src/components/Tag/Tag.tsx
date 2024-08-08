@@ -170,7 +170,7 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
 
   // Slug is always size `md` and `inline`
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug' && !isInteractiveTag) {
+  if (slug && slug['type']?.displayName === 'AILabel' && !isInteractiveTag) {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'sm',
       kind: 'inline',
@@ -216,7 +216,6 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
 
   const labelClasses = classNames({
     [`${prefix}--tag__label`]: !isInteractiveTag,
-    [`${prefix}--tag--${type}`]: type && !isInteractiveTag,
   });
 
   return (
