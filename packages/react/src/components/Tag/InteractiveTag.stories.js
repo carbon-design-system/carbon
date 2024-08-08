@@ -15,6 +15,8 @@ import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Popover, PopoverContent } from '../Popover';
 import mdx from './InteractiveTag.mdx';
 import './storyInteractiveTag.scss';
+import { usePrefix } from '../../internal/usePrefix';
+import { Text } from '../Text';
 
 export default {
   title: 'Experimental/unstable__InteractiveTag',
@@ -89,6 +91,7 @@ Selectable.argTypes = {
 
 export const Operational = (args) => {
   const [open, setOpen] = useState(false);
+  const [openHighContrast, setOpenHighContrast] = useState(false);
 
   return (
     <>
@@ -173,31 +176,33 @@ export const Operational = (args) => {
           justifyContent: 'flex-start',
           marginTop: '1rem',
         }}>
-        <Toggletip>
-          <ToggletipButton label="Tag content" tabIndex={-1} as="div">
-            <OperationalTag
-              renderIcon={Asleep}
-              text="Tag content"
-              className="some-class"
-              {...args}
-            />
-          </ToggletipButton>
-          <ToggletipContent>
-            <div style={{ lineHeight: 0 }}>
-              <p>Tag 1 name</p>
-              <p>Tag 2 name</p>
-              <p>Tag 3 name</p>
-              <p>Tag 4 name</p>
-              <p>Tag 5 name</p>
-            </div>
-          </ToggletipContent>
-        </Toggletip>
+        {/* High contrast example */}
+        <Popover open={openHighContrast} highContrast>
+          <OperationalTag
+            onClick={() => {
+              setOpenHighContrast(!openHighContrast);
+            }}
+            aria-expanded={openHighContrast}
+            renderIcon={Asleep}
+            text="Tag content"
+            className="some-class"
+            {...args}
+          />
+          <PopoverContent className="popover-content">
+            <Text as="p">Tag 1 name</Text>
+            <Text as="p">Tag 2 name</Text>
+            <Text as="p">Tag 3 name</Text>
+            <Text as="p">Tag 4 name</Text>
+            <Text as="p">Tag 5 name</Text>
+          </PopoverContent>
+        </Popover>
 
         <Popover open={open}>
           <OperationalTag
             onClick={() => {
               setOpen(!open);
             }}
+            aria-expanded={open}
             renderIcon={Asleep}
             text="Tag content"
             className="some-class"
