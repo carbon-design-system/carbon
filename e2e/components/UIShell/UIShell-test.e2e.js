@@ -14,14 +14,6 @@ const { snapshotStory } = require('../../test-utils/storybook');
 test.describe('UIShell', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
-      // test('header @vrt', async ({ page }) => {
-      //   await snapshotStory(page, {
-      //     component: 'UIShell',
-      //     id: 'components-ui-shell-header--overview',
-      //     theme,
-      //   });
-      // });
-
       test('header w/ actions and right panel @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
