@@ -86,11 +86,11 @@ export const DownshiftActionsTest = () => {
               downshiftActions?.current?.openMenu?.();
               return;
             }
-            if (changes?.isOpen && component?.inputValue === 'Option 1') {
+            if (changes?.isOpen && changes?.inputValue === 'Option 1') {
               downshiftActions?.current?.setInputValue?.('');
               return;
             }
-            if (!changes?.isOpen && component?.inputValue !== 'Option 1') {
+            if (!changes?.isOpen && changes?.inputValue !== 'Option 1') {
               downshiftActions?.current?.setInputValue?.('Option 1');
               return;
             }
