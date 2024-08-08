@@ -61,6 +61,17 @@ export const SingleWithCalendar = () => (
   </DatePicker>
 );
 
+export const CalendarWithInline = () => (
+  <DatePicker datePickerType="single" inline={true}>
+    <DatePickerInput
+      placeholder="mm/dd/yyyy"
+      labelText="Date Picker label"
+      id="date-picker-single"
+      size="md"
+    />
+  </DatePicker>
+);
+
 export const RangeWithCalendar = () => {
   return (
     <DatePicker datePickerType="range">
