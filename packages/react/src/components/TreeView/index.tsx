@@ -5,10 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import TreeView from './TreeView';
-import TreeNode from './TreeNode';
-
-TreeView.TreeNode = TreeNode;
+import TreeNode, { TreeNodeProps } from './TreeNode';
+import TreeView, { TreeViewProps } from './TreeView';
 
 export { TreeNode, TreeView };
+export type { TreeViewProps, TreeNodeProps };
 export default TreeView;
