@@ -9,7 +9,6 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   ChangeEvent,
-  useMemo,
   useRef,
   useState,
   useEffect,
@@ -18,23 +17,24 @@ import React, {
   RefObject,
 } from 'react';
 import Search, { SearchProps } from '../Search';
-import setupGetInstanceId from './tools/instanceId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
-import { InternationalProps } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 
-const getInstanceId = setupGetInstanceId();
-
+/**
+ * Message ids that will be passed to translateWithId().
+ */
 export type TableToolbarTranslationKey =
   | 'carbon.table.toolbar.search.label'
   | 'carbon.table.toolbar.search.placeholder';
 
-const translationKeys = {
+const translationKeys: Record<TableToolbarTranslationKey, string> = {
   'carbon.table.toolbar.search.label': 'Filter table',
   'carbon.table.toolbar.search.placeholder': 'Filter table',
 };
 
-const translateWithId = (id: string): string => {
+const translateWithId = (id: TableToolbarTranslationKey): string => {
   return translationKeys[id];
 };
 
@@ -54,7 +54,7 @@ export type TableToolbarSearchHandleExpand = (
 
 export interface TableToolbarSearchProps
   extends Omit<SearchProps, ExcludedInheritedProps>,
-    InternationalProps<TableToolbarTranslationKey> {
+    TranslateWithId<TableToolbarTranslationKey> {
   /**
    * Specifies if the search should initially render in an expanded state
    */
@@ -150,7 +150,7 @@ const TableToolbarSearch = ({
 
   const expanded = controlled ? expandedProp : expandedState;
   const [value, setValue] = useState(defaultValue || '');
-  const uniqueId = useMemo(getInstanceId, []);
+  const uniqueId = useId('table-toolbar-search');
   const [focusTarget, setFocusTarget] = useState<RefObject<HTMLElement> | null>(
     null
   );
@@ -213,11 +213,7 @@ const TableToolbarSearch = ({
       disabled={disabled}
       className={searchClasses}
       value={value}
-      id={
-        typeof id !== 'undefined'
-          ? id
-          : `table-toolbar-search-${uniqueId.toString()}`
-      }
+      id={typeof id !== 'undefined' ? id : uniqueId}
       labelText={labelText || t('carbon.table.toolbar.search.label')}
       placeholder={placeholder || t('carbon.table.toolbar.search.placeholder')}
       onChange={onChange}

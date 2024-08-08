@@ -7,7 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import isEqual from 'lodash.isequal';
+import isEqual from 'react-fast-compare';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
 import { getNextSortState } from './state/sorting';
 import type { DataTableSortState } from './state/sortStates';
@@ -37,6 +37,7 @@ import TableToolbarAction from './TableToolbarAction';
 import TableToolbarContent from './TableToolbarContent';
 import TableToolbarSearch from './TableToolbarSearch';
 import TableToolbarMenu from './TableToolbarMenu';
+import { TranslateWithId } from '../../types/common';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -49,7 +50,12 @@ const translationKeys = {
   unselectAll: 'carbon.table.all.unselect',
   selectRow: 'carbon.table.row.select',
   unselectRow: 'carbon.table.row.unselect',
-};
+} as const;
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = (typeof translationKeys)[keyof typeof translationKeys];
 
 const defaultTranslations = {
   [translationKeys.expandAll]: 'Expand all rows',
@@ -154,6 +160,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     [key: string]: unknown;
   }) => {
     ariaLabel: string;
+    'aria-label': string;
     checked: boolean | undefined;
     disabled?: boolean | undefined;
     id: string;
@@ -210,7 +217,8 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   radio: boolean | undefined;
 }
 
-export interface DataTableProps<RowType, ColTypes extends any[]> {
+export interface DataTableProps<RowType, ColTypes extends any[]>
+  extends TranslateWithId<TranslationKey> {
   children?: (
     renderProps: DataTableRenderProps<RowType, ColTypes>
   ) => React.ReactElement;
@@ -242,7 +250,6 @@ export interface DataTableProps<RowType, ColTypes extends any[]> {
     }
   ) => number;
   stickyHeader?: boolean;
-  translateWithId?: (id: string) => string;
   useStaticWidth?: boolean;
   useZebraStyles?: boolean;
 }
@@ -630,7 +637,8 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
         ]),
         id: `${this.getTablePrefix()}__select-row-${row.id}`,
         name: `select-row`,
-        ariaLabel: t(translationKey),
+        ariaLabel: t(translationKey), // TODO remove in v12
+        'aria-label': t(translationKey),
         disabled: row.disabled,
         radio: this.props.radio || null,
       };
@@ -650,7 +658,8 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
 
     return {
       ...rest,
-      ariaLabel: t(translationKey),
+      ariaLabel: t(translationKey), // TODO remove in v12
+      'aria-label': t(translationKey),
       checked,
       id: `${this.getTablePrefix()}__select-all`,
       indeterminate,

@@ -9,8 +9,8 @@ import React, {
   ComponentProps,
   forwardRef,
   ReactNode,
+  useLayoutEffect,
   useRef,
-  useState,
 } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -21,13 +21,25 @@ import { Menu } from '../Menu';
 
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
 import { useId } from '../../internal/useId';
-import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
+import {
+  useFloating,
+  flip,
+  size as floatingSize,
+  autoUpdate,
+} from '@floating-ui/react';
+import mergeRefs from '../../tools/mergeRefs';
 
-const spacing = 0; // top and bottom spacing between the button and the menu. in px
 const validButtonKinds = ['primary', 'tertiary', 'ghost'];
 const defaultButtonKind = 'primary';
 
+export type MenuAlignment =
+  | 'top'
+  | 'top-start'
+  | 'top-end'
+  | 'bottom'
+  | 'bottom-start'
+  | 'bottom-end';
 export interface MenuButtonProps extends ComponentProps<'div'> {
   /**
    * A collection of MenuItems to be rendered as actions for this MenuButton.
@@ -57,13 +69,7 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
   /**
    * Experimental property. Specify how the menu should align with the button element
    */
-  menuAlignment:
-    | 'top'
-    | 'top-start'
-    | 'top-end'
-    | 'bottom'
-    | 'bottom-start'
-    | 'bottom-end';
+  menuAlignment: MenuAlignment;
 
   /**
    * Specify the size of the button and menu.
@@ -93,35 +99,52 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
   ) {
     const id = useId('MenuButton');
     const prefix = usePrefix();
-
     const triggerRef = useRef<HTMLDivElement>(null);
-    const menuRef = useRef<HTMLUListElement>(null);
-    const ref = useMergedRefs([forwardRef, triggerRef]);
-    const [width, setWidth] = useState(0);
+    const middlewares = [flip({ crossAxis: false })];
+
+    if (menuAlignment === 'bottom' || menuAlignment === 'top') {
+      middlewares.push(
+        floatingSize({
+          apply({ rects, elements }) {
+            Object.assign(elements.floating.style, {
+              width: `${rects.reference.width}px`,
+            });
+          },
+        })
+      );
+    }
+    const { refs, floatingStyles, placement, middlewareData } = useFloating({
+      placement: menuAlignment,
+
+      // The floating element is positioned relative to its nearest
+      // containing block (usually the viewport). It will in many cases also
+      // “break” the floating element out of a clipping ancestor.
+      // https://floating-ui.com/docs/misc#clipping
+      strategy: 'fixed',
+
+      // Middleware order matters, arrow should be last
+      middleware: middlewares,
+      whileElementsMounted: autoUpdate,
+    });
+    const ref = mergeRefs(forwardRef, triggerRef);
     const {
       open,
-      x,
-      y,
       handleClick: hookOnClick,
       handleMousedown,
       handleClose,
     } = useAttachedMenu(triggerRef);
 
+    useLayoutEffect(() => {
+      Object.keys(floatingStyles).forEach((style) => {
+        if (refs.floating.current) {
+          refs.floating.current.style[style] = floatingStyles[style];
+        }
+      });
+    }, [floatingStyles, refs.floating, middlewareData, placement, open]);
+
     function handleClick() {
       if (triggerRef.current) {
-        const { width: w } = triggerRef.current.getBoundingClientRect();
-        setWidth(w);
         hookOnClick();
-      }
-    }
-
-    function handleOpen() {
-      if (menuRef.current) {
-        menuRef.current.style.inlineSize = `${width}px`;
-        menuRef.current.style.minInlineSize = `${width}px`;
-        if (menuAlignment !== 'bottom' && menuAlignment !== 'top') {
-          menuRef.current.style.inlineSize = `fit-content`;
-        }
       }
     }
 
@@ -143,6 +166,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
         aria-owns={open ? id : undefined}
         className={containerClasses}>
         <Button
+          ref={refs.setReference}
           className={triggerClasses}
           size={size}
           tabIndex={tabIndex}
@@ -160,16 +184,14 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
           containerRef={triggerRef}
           menuAlignment={menuAlignment}
           className={menuClasses}
-          ref={menuRef}
+          ref={refs.setFloating}
           id={id}
+          legacyAutoalign={false}
           label={label}
           mode="basic"
           size={size}
           open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          x={x}
-          y={[y[0] - spacing, y[1] + spacing]}>
+          onClose={handleClose}>
           {children}
         </Menu>
       </div>

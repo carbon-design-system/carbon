@@ -10,6 +10,10 @@ import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import ComboBox from '../ComboBox';
+import Button from '../Button';
+import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
+import { IconButton } from '../IconButton';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './ComboBox.mdx';
 
 const items = [
@@ -74,7 +78,7 @@ export const Default = () => (
   </div>
 );
 
-export const AllowCustomValue = () => {
+export const AllowCustomValue = (args) => {
   const filterItems = (menu) => {
     return menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase());
   };
@@ -83,7 +87,7 @@ export const AllowCustomValue = () => {
       <ComboBox
         allowCustomValue
         shouldFilterItem={filterItems}
-        onChange={() => {}}
+        onChange={args.onChange}
         id="carbon-combobox"
         items={['Apple', 'Orange', 'Banana', 'Pineapple', 'Raspberry', 'Lime']}
         titleText="ComboBox title"
@@ -91,6 +95,25 @@ export const AllowCustomValue = () => {
       />
     </div>
   );
+};
+export const ExperimentalAutoAlign = () => (
+  <div style={{ width: 400 }}>
+    <div style={{ height: 300 }}></div>
+    <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+      autoAlign={true}
+    />
+    <div style={{ height: 800 }}></div>
+  </div>
+);
+
+AllowCustomValue.argTypes = {
+  onChange: { action: 'onChange' },
 };
 
 export const _WithLayer = () => (
@@ -108,6 +131,51 @@ export const _WithLayer = () => (
       </div>
     )}
   </WithLayer>
+);
+
+const aiLabel = (
+  <AILabel className="slug-container">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+export const withAILabel = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+      slug={aiLabel}
+    />
+  </div>
 );
 
 export const Playground = (args) => (

@@ -13,7 +13,7 @@ import {
   UseSelectProps,
   UseSelectStateChangeTypes,
 } from 'downshift';
-import isEqual from 'lodash.isequal';
+import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   ForwardedRef,
@@ -22,26 +22,36 @@ import React, {
   useState,
   useMemo,
   ReactNode,
+  useLayoutEffect,
 } from 'react';
 import ListBox, {
   ListBoxSize,
   ListBoxType,
   PropTypes as ListBoxPropTypes,
 } from '../ListBox';
-import { sortingPropTypes } from './MultiSelectPropTypes';
+import {
+  MultiSelectSortingProps,
+  SortItemsOptions,
+  sortingPropTypes,
+} from './MultiSelectPropTypes';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
-import type { InternationalProps } from '../../types/common';
+import type { TranslateWithId } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
+import {
+  useFloating,
+  flip,
+  size as floatingSize,
+  autoUpdate,
+} from '@floating-ui/react';
 
-const getInstanceId = setupGetInstanceId();
 const {
   ItemClick,
   ToggleButtonBlur,
@@ -78,64 +88,8 @@ const defaultItemToString = <ItemType,>(item?: ItemType): string => {
   return '';
 };
 
-interface SharedOptions {
-  locale: string;
-}
-
-interface DownshiftTypedProps<ItemType> {
-  itemToString?(item: ItemType): string;
-}
-
-interface SortItemsOptions<ItemType>
-  extends SharedOptions,
-    DownshiftTypedProps<ItemType> {
-  compareItems(
-    item1: ItemType,
-    item2: ItemType,
-    options: SharedOptions
-  ): number;
-  selectedItems: ItemType[];
-}
-
 interface selectedItemType {
   text: string;
-}
-
-interface MultiSelectSortingProps<ItemType> {
-  /**
-   * Provide a compare function that is used to determine the ordering of
-   * options. See 'sortItems' for more control.
-   */
-  compareItems?(
-    item1: ItemType,
-    item2: ItemType,
-    options: SharedOptions
-  ): number;
-
-  /**
-   * Provide a method that sorts all options in the control. Overriding this
-   * prop means that you also have to handle the sort logic for selected versus
-   * un-selected items. If you just want to control ordering, consider the
-   * `compareItems` prop instead.
-   *
-   * The return value should be a number whose sign indicates the relative order
-   * of the two elements: negative if a is less than b, positive if a is greater
-   * than b, and zero if they are equal.
-   *
-   * sortItems :
-   *   (items: Array<Item>, {
-   *     selectedItems: Array<Item>,
-   *     itemToString: Item => string,
-   *     compareItems: (itemA: string, itemB: string, {
-   *       locale: string
-   *     }) => number,
-   *     locale: string,
-   *   }) => Array<Item>
-   */
-  sortItems?(
-    items: ReadonlyArray<ItemType>,
-    options: SortItemsOptions<ItemType>
-  ): ItemType[];
 }
 
 interface OnChangeData<ItemType> {
@@ -144,9 +98,16 @@ interface OnChangeData<ItemType> {
 
 export interface MultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
-    InternationalProps<
+    TranslateWithId<
       'close.menu' | 'open.menu' | 'clear.all' | 'clear.selection'
     > {
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign?: boolean;
+
   className?: string;
 
   /**
@@ -175,7 +136,10 @@ export interface MultiSelectProps<ItemType>
   disabled?: ListBoxProps['disabled'];
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift. Use with caution: anything you define
+   * here overrides the components' internal handling of that prop. Downshift
+   * internals are subject to change, and in some cases they can not be shimmed
+   * to shield you from potentially breaking changes.
    */
   downshiftProps?: Partial<UseSelectProps<ItemType>>;
 
@@ -325,6 +289,7 @@ export interface MultiSelectProps<ItemType>
 const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
+      autoAlign = false,
       className: containerClassName,
       id,
       items,
@@ -365,7 +330,7 @@ const MultiSelect = React.forwardRef(
   ) => {
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
-    const { current: multiSelectInstanceId } = useRef(getInstanceId());
+    const multiSelectInstanceId = useId();
     const [isFocused, setIsFocused] = useState(false);
     const [inputFocused, setInputFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(open || false);
@@ -383,6 +348,43 @@ const MultiSelect = React.forwardRef(
       selectedItems: selected,
     });
 
+    const { refs, floatingStyles, middlewareData } = useFloating(
+      autoAlign
+        ? {
+            placement: direction,
+
+            // The floating element is positioned relative to its nearest
+            // containing block (usually the viewport). It will in many cases also
+            // “break” the floating element out of a clipping ancestor.
+            // https://floating-ui.com/docs/misc#clipping
+            strategy: 'fixed',
+
+            // Middleware order matters, arrow should be last
+            middleware: [
+              flip({ crossAxis: false }),
+              floatingSize({
+                apply({ rects, elements }) {
+                  Object.assign(elements.floating.style, {
+                    width: `${rects.reference.width}px`,
+                  });
+                },
+              }),
+            ],
+            whileElementsMounted: autoUpdate,
+          }
+        : {}
+    );
+
+    useLayoutEffect(() => {
+      if (autoAlign) {
+        Object.keys(floatingStyles).forEach((style) => {
+          if (refs.floating.current) {
+            refs.floating.current.style[style] = floatingStyles[style];
+          }
+        });
+      }
+    }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
+
     // Filter out items with an object having undefined values
     const filteredItems = useMemo(() => {
       return items.filter((item) => {
@@ -398,7 +400,6 @@ const MultiSelect = React.forwardRef(
     }, [items]);
 
     const selectProps: UseSelectProps<ItemType> = {
-      ...downshiftProps,
       stateReducer,
       isOpen,
       itemToString: (filteredItems) => {
@@ -417,6 +418,7 @@ const MultiSelect = React.forwardRef(
       isItemDisabled(item, _index) {
         return (item as any).disabled;
       },
+      ...downshiftProps,
     };
 
     const {
@@ -566,7 +568,11 @@ const MultiSelect = React.forwardRef(
           break;
         case ToggleButtonClick:
           setIsOpenWrapper(changes.isOpen || false);
-          return { ...changes, highlightedIndex: 0 };
+          return {
+            ...changes,
+            highlightedIndex:
+              controlledSelectedItems.length > 0 ? 0 : undefined,
+          };
         case ItemClick:
           setHighlightedIndex(changes.selectedItem);
           onItemChange(changes.selectedItem);
@@ -643,7 +649,7 @@ const MultiSelect = React.forwardRef(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });
@@ -652,6 +658,15 @@ const MultiSelect = React.forwardRef(
     const itemsSelectedText =
       selectedItems.length > 0 &&
       selectedItems.map((item) => (item as selectedItemType)?.text);
+
+    // Memoize the value of getMenuProps to avoid an infinite loop
+    const menuProps = useMemo(
+      () =>
+        getMenuProps({
+          ref: autoAlign ? refs.setFloating : null,
+        }),
+      [autoAlign]
+    );
 
     return (
       <div className={wrapperClasses}>
@@ -686,7 +701,9 @@ const MultiSelect = React.forwardRef(
               className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
             />
           )}
-          <div className={multiSelectFieldWrapperClasses}>
+          <div
+            className={multiSelectFieldWrapperClasses}
+            ref={autoAlign ? refs.setReference : null}>
             {selectedItems.length > 0 && (
               <ListBox.Selection
                 readOnly={readOnly}
@@ -722,7 +739,7 @@ const MultiSelect = React.forwardRef(
             </button>
             {normalizedSlug}
           </div>
-          <ListBox.Menu {...getMenuProps()}>
+          <ListBox.Menu {...menuProps}>
             {isOpen &&
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               sortItems!(
@@ -797,6 +814,13 @@ MultiSelect.propTypes = {
   ...sortingPropTypes,
 
   /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign: PropTypes.bool,
+
+  /**
    * Provide a custom class name to be added to the outermost node in the
    * component
    */
@@ -814,7 +838,8 @@ MultiSelect.propTypes = {
 
   /**
    * Provide a compare function that is used to determine the ordering of
-   * options. See 'sortItems' for more control.
+   * options. See 'sortItems' for more control. Consider
+   * declaring function with `useCallback` to prevent unnecessary re-renders.
    */
   compareItems: PropTypes.func,
 
@@ -829,7 +854,10 @@ MultiSelect.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift. Use with caution: anything you define
+   * here overrides the components' internal handling of that prop. Downshift
+   * internals are subject to change, and in some cases they can not be shimmed
+   * to shield you from potentially breaking changes.
    */
   downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
 
@@ -874,7 +902,8 @@ MultiSelect.propTypes = {
   /**
    * Helper function passed to downshift that allows the library to render a
    * given item to a string label. By default, it extracts the `label` field
-   * from a given item to serve as the item label in the list.
+   * from a given item to serve as the item label in the list. Consider
+   * declaring function with `useCallback` to prevent unnecessary re-renders.
    */
   itemToString: PropTypes.func,
 

@@ -7,6 +7,7 @@
 
 const prefix = 'cds';
 import userEvent from '@testing-library/user-event';
+import { act } from 'react';
 
 // Finding nodes in a ListBox
 export const findListBoxNode = () => {
@@ -105,3 +106,52 @@ export const generateItems = (amount, generator) =>
     .map((_, i) => generator(i));
 
 export const customItemToString = ({ field }) => field;
+
+/**
+ * This object contains two sets of three items that share the same root
+ * word in different portions of the string (beginning, middle, end):
+ *
+ *  - 'struct'
+ *  - 'port'
+ *
+ * Separated by a disabled item, these derivative words are helpful when
+ * testing fuzzy search functions and components that do substring filtering.
+ */
+export const cognateItems = [
+  {
+    id: 'structure',
+    text: 'Structure',
+  },
+  {
+    id: 'construct',
+    text: 'Construct',
+  },
+  {
+    id: 'instruction',
+    text: 'Instruction',
+  },
+  {
+    id: 'disabled-item',
+    text: 'A disabled item',
+    disabled: true,
+  },
+  {
+    id: 'transport',
+    text: 'Transport',
+  },
+  {
+    id: 'portable',
+    text: 'Portable',
+  },
+  {
+    id: 'import',
+    text: 'Import',
+  },
+];
+
+/**
+ * Flushes microtasks to ensure element position state is settled
+ * From https://floating-ui.com/docs/react#testing
+ * More context here: https://github.com/floating-ui/react-popper/issues/368#issuecomment-1340413010
+ */
+export const waitForPosition = () => act(async () => {});

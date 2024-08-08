@@ -439,7 +439,6 @@ class OverflowMenu extends React.Component<
   handleClick = (evt) => {
     const { onClick = noopFn } = this.props;
     this.setState({ click: true });
-    evt.stopPropagation();
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
       this.setState({ open: !this.state.open });
       onClick(evt);
@@ -733,7 +732,8 @@ class OverflowMenu extends React.Component<
             id={id}
             ref={mergeRefs(this._triggerRef, ref)}
             size={size}
-            label={iconDescription}>
+            label={iconDescription}
+            kind="ghost">
             <IconElement {...iconProps} />
           </IconButton>
           {open && this.state.hasMountedTrigger && wrappedMenuBody}

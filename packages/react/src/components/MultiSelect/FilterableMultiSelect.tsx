@@ -16,7 +16,7 @@ import Downshift, {
   UseComboboxStateChangeTypes,
   UseMultipleSelectionInterface,
 } from 'downshift';
-import isEqual from 'lodash.isequal';
+import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   useContext,
@@ -29,14 +29,18 @@ import React, {
   type FocusEvent,
   type KeyboardEvent,
   ReactElement,
+  useLayoutEffect,
+  useMemo,
 } from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import {
-  type ItemBase,
-  type SortingPropTypes,
+  type MultiSelectSortingProps,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
-import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import ListBox, {
+  ListBoxMenuIconTranslationKey,
+  PropTypes as ListBoxPropTypes,
+} from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { defaultItemToString } from './tools/itemToString';
@@ -47,6 +51,13 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useSelection } from '../../internal/Selection';
+import {
+  useFloating,
+  flip,
+  size as floatingSize,
+  autoUpdate,
+} from '@floating-ui/react';
+import { TranslateWithId } from '../../types/common';
 
 const {
   InputBlur,
@@ -74,8 +85,22 @@ const {
 } =
   useMultipleSelection.stateChangeTypes as UseMultipleSelectionInterface['stateChangeTypes'];
 
-export interface FilterableMultiSelectProps<Item extends ItemBase>
-  extends SortingPropTypes<Item> {
+/**
+ * Message ids that will be passed to translateWithId().
+ * Combination of message ids from ListBox/next/ListBoxSelection.js and
+ * ListBox/next/ListBoxTrigger.js, but we can't access those values directly
+ * because those components aren't Typescript.  (If you try, TranslationKey
+ * ends up just being defined as "string".)
+ */
+type TranslationKey =
+  | 'close.menu'
+  | 'open.menu'
+  | 'clear.all'
+  | 'clear.selection';
+
+export interface FilterableMultiSelectProps<ItemType>
+  extends MultiSelectSortingProps<ItemType>,
+    TranslateWithId<TranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
    * @deprecated
@@ -83,6 +108,13 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
   'aria-label'?: string;
   /** @deprecated */
   ariaLabel?: string;
+
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign?: boolean;
 
   className?: string;
 
@@ -107,22 +139,25 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
   disabled?: boolean;
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift. Use with caution: anything you define
+   * here overrides the components' internal handling of that prop. Downshift
+   * internals are subject to change, and in some cases they can not be shimmed
+   * to shield you from potentially breaking changes.
    */
-  downshiftProps?: UseMultipleSelectionProps<Item>;
+  downshiftProps?: UseMultipleSelectionProps<ItemType>;
 
   /**
    * Default sorter is assigned if not provided.
    */
   filterItems(
-    items: readonly Item[],
+    items: readonly ItemType[],
     extra: {
       inputValue: string | null;
       itemToString: NonNullable<
-        UseMultipleSelectionProps<Item>['itemToString']
+        UseMultipleSelectionProps<ItemType>['itemToString']
       >;
     }
-  ): Item[];
+  ): ItemType[];
 
   /**
    * Specify whether the title text should be hidden or not
@@ -144,7 +179,7 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
    * Allow users to pass in arbitrary items from their collection that are
    * pre-selected
    */
-  initialSelectedItems?: Item[];
+  initialSelectedItems?: ItemType[];
 
   /**
    * Is the current selection invalid?
@@ -160,7 +195,7 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
    * Function to render items as custom components instead of strings.
    * Defaults to null and is overridden by a getter
    */
-  itemToElement?: FunctionComponent<Item>;
+  itemToElement?: FunctionComponent<ItemType>;
 
   /**
    * Helper function passed to downshift that allows the library to render
@@ -169,13 +204,13 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
    * By default, it extracts the `label` field from a given item
    * to serve as the item label in the list.
    */
-  itemToString?(item: Item | null): string;
+  itemToString?(item: ItemType | null): string;
 
   /**
    * We try to stay as generic as possible here to allow individuals to pass
    * in a collection of whatever kind of data structure they prefer
    */
-  items: Item[];
+  items: ItemType[];
 
   /**
    * @deprecated `true` to use the light version.
@@ -193,13 +228,13 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
    * `onChange` is a utility for this controlled component to communicate to a
    * consuming component what kind of internal state changes are occurring.
    */
-  onChange?(changes: { selectedItems: Item[] }): void;
+  onChange?(changes: { selectedItems: ItemType[] }): void;
 
   /**
    * A utility for this controlled component
    * to communicate to the currently typed input.
    */
-  onInputValueChange?: UseComboboxProps<Item>['onInputValueChange'];
+  onInputValueChange?: UseComboboxProps<ItemType>['onInputValueChange'];
 
   /**
    * `onMenuChange` is a utility for this controlled component to communicate to a
@@ -229,7 +264,7 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
   /**
    * For full control of the selected items
    */
-  selectedItems?: Item[];
+  selectedItems?: ItemType[];
 
   /**
    * Specify the size of the ListBox.
@@ -247,11 +282,6 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
    * combobox via ARIA attributes.
    */
   titleText?: ReactNode;
-
-  /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId?(messageId: string, args?: Record<string, unknown>): string;
 
   type?: 'default' | 'inline';
 
@@ -272,9 +302,10 @@ export interface FilterableMultiSelectProps<Item extends ItemBase>
 }
 
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
-  Item extends ItemBase
+  ItemType
 >(
   {
+    autoAlign = false,
     className: containerClassName,
     clearSelectionDescription = 'Total items selected: ',
     clearSelectionText = 'To clear selection, press Delete or Backspace',
@@ -304,13 +335,13 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     selectionFeedback = 'top-after-reopen',
     selectedItems: selected,
     size,
-    sortItems = defaultSortItems as FilterableMultiSelectProps<Item>['sortItems'],
+    sortItems = defaultSortItems as FilterableMultiSelectProps<ItemType>['sortItems'],
     translateWithId,
     useTitleInItem,
     warn,
     warnText,
     slug,
-  }: FilterableMultiSelectProps<Item>,
+  }: FilterableMultiSelectProps<ItemType>,
   ref: ForwardedRef<HTMLDivElement>
 ) {
   const { isFluid } = useContext(FormContext);
@@ -318,7 +349,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
   const [prevOpen, setPrevOpen] = useState<boolean>(!!open);
   const [inputValue, setInputValue] = useState<string>('');
-  const [topItems, setTopItems] = useState<Item[]>(initialSelectedItems ?? []);
+  const [topItems, setTopItems] = useState<ItemType[]>(
+    initialSelectedItems ?? []
+  );
   const [inputFocused, setInputFocused] = useState<boolean>(false);
 
   const {
@@ -332,6 +365,43 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     selectedItems: selected,
   });
 
+  const { refs, floatingStyles, middlewareData } = useFloating(
+    autoAlign
+      ? {
+          placement: direction,
+
+          // The floating element is positioned relative to its nearest
+          // containing block (usually the viewport). It will in many cases also
+          // “break” the floating element out of a clipping ancestor.
+          // https://floating-ui.com/docs/misc#clipping
+          strategy: 'fixed',
+
+          // Middleware order matters, arrow should be last
+          middleware: [
+            flip({ crossAxis: false }),
+            floatingSize({
+              apply({ rects, elements }) {
+                Object.assign(elements.floating.style, {
+                  width: `${rects.reference.width}px`,
+                });
+              },
+            }),
+          ],
+          whileElementsMounted: autoUpdate,
+        }
+      : {}
+  );
+
+  useLayoutEffect(() => {
+    if (autoAlign) {
+      Object.keys(floatingStyles).forEach((style) => {
+        if (refs.floating.current) {
+          refs.floating.current.style[style] = floatingStyles[style];
+        }
+      });
+    }
+  }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
+
   const textInput = useRef<HTMLInputElement>(null);
   const filterableMultiSelectInstanceId = useId();
 
@@ -342,9 +412,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     setPrevOpen(open);
   }
 
-  const sortedItems = sortItems(
-    filterItems(items, { itemToString, inputValue }),
-    {
+  // memoize sorted items to reduce unnecessary expensive sort on rerender
+  const sortedItems = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return sortItems!(filterItems(items, { itemToString, inputValue }), {
       selectedItems: {
         top: controlledSelectedItems,
         fixed: [],
@@ -353,8 +424,17 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       itemToString,
       compareItems,
       locale,
-    }
-  );
+    });
+  }, [
+    items,
+    inputValue,
+    controlledSelectedItems,
+    topItems,
+    selectionFeedback,
+    itemToString,
+    compareItems,
+    locale,
+  ]);
 
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
@@ -407,9 +487,16 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   }, [controlledSelectedItems, isOpen, setTopItems]);
 
+  const validateHighlightFocus = () => {
+    if (controlledSelectedItems.length > 0) {
+      setHighlightedIndex(0);
+    }
+  };
+
   function handleMenuChange(forceIsOpen: boolean): void {
     const nextIsOpen = forceIsOpen ?? !isOpen;
     setIsOpen(nextIsOpen);
+    validateHighlightFocus();
     if (onMenuChange) {
       onMenuChange(nextIsOpen);
     }
@@ -425,11 +512,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     getItemProps,
     openMenu,
     isOpen: isMenuOpen,
-  } = useCombobox<Item>({
+  } = useCombobox<ItemType>({
     isOpen,
     items: sortedItems,
+    // defaultHighlightedIndex: 0, // after selection, highlight the first item.
     itemToString,
-    defaultHighlightedIndex: 0, // after selection, highlight the first item.
     id,
     labelId,
     menuId,
@@ -440,7 +527,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       return (item as any).disabled;
     },
   });
-
   function stateReducer(state, actionAndChanges) {
     const { type, props, changes } = actionAndChanges;
     const { highlightedIndex } = changes;
@@ -448,7 +534,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     if (changes.isOpen && !isOpen) {
       setTopItems(controlledSelectedItems);
     }
-
     switch (type) {
       case InputKeyDownEnter:
         if (changes.selectedItem && changes.selectedItem.disabled !== true) {
@@ -469,20 +554,30 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return changes;
       case FunctionToggleMenu:
       case ToggleButtonClick:
+        validateHighlightFocus();
         if (changes.isOpen && !changes.selectedItem) {
-          return { ...changes, highlightedIndex: 0 };
+          return { ...changes };
         }
-        return changes;
+
+        return { ...changes, highlightedIndex: null };
       case InputChange:
         if (onInputValueChange) {
           onInputValueChange(changes.inputValue);
         }
         setInputValue(changes.inputValue ?? '');
         setIsOpen(true);
-        return changes;
+        return { ...changes, highlightedIndex: 0 };
 
       case InputClick:
-        return { ...changes, isOpen: false };
+        validateHighlightFocus();
+        if (changes.isOpen && !changes.selectedItem) {
+          return { ...changes };
+        }
+        return {
+          ...changes,
+          isOpen: false,
+          highlightedIndex: null,
+        };
       case MenuMouseLeave:
         return { ...changes, highlightedIndex: state.highlightedIndex };
       case InputKeyDownArrowUp:
@@ -522,8 +617,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   }
 
-  const { getDropdownProps } = useMultipleSelection<Item>({
-    ...downshiftProps,
+  const { getDropdownProps } = useMultipleSelection<ItemType>({
     activeIndex: highlightedIndex,
     initialSelectedItems,
     selectedItems: controlledSelectedItems,
@@ -539,6 +633,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         }
       }
     },
+    ...downshiftProps,
   });
 
   useEffect(() => {
@@ -562,7 +657,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
 
   // Slug is always size `mini`
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'mini',
     });
@@ -659,13 +754,24 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         }
       },
       onFocus: () => setInputFocused(true),
-      onBlur() {
-        setInputFocused(false);
+      onBlur: () => {
+        !isOpen && setInputFocused(false);
         setInputValue('');
       },
     })
   );
-  const menuProps = getMenuProps({}, { suppressRefError: true });
+
+  // Memoize the value of getMenuProps to avoid an infinite loop
+  const menuProps = useMemo(
+    () =>
+      getMenuProps(
+        {
+          ref: autoAlign ? refs.setFloating : null,
+        },
+        { suppressRefError: true }
+      ),
+    [autoAlign, getMenuProps, refs.setFloating]
+  );
 
   const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {
     if (
@@ -707,13 +813,16 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         disabled={disabled}
         light={light}
         ref={ref}
+        id={id}
         invalid={invalid}
         invalidText={invalidText}
         warn={warn}
         warnText={warnText}
         isOpen={isOpen}
         size={size}>
-        <div className={`${prefix}--list-box__field`}>
+        <div
+          className={`${prefix}--list-box__field`}
+          ref={autoAlign ? refs.setReference : null}>
           {controlledSelectedItems.length > 0 && (
             // @ts-expect-error: It is expecting a non-required prop called: "onClearSelection"
             <ListBoxSelection
@@ -821,9 +930,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     </div>
   );
 }) as {
-  <Item extends ItemBase>(
-    props: FilterableMultiSelectProps<Item>
-  ): ReactElement;
+  <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement;
   propTypes?: any;
   contextTypes?: any;
   defaultProps?: any;
@@ -850,6 +957,13 @@ FilterableMultiSelect.propTypes = {
   ),
 
   /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign: PropTypes.bool,
+
+  /**
    * Specify the text that should be read for screen readers that describes total items selected
    */
   clearSelectionDescription: PropTypes.string,
@@ -870,7 +984,10 @@ FilterableMultiSelect.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift. Use with caution: anything you define
+   * here overrides the components' internal handling of that prop. Downshift
+   * internals are subject to change, and in some cases they can not be shimmed
+   * to shield you from potentially breaking changes.
    */
   // @ts-ignore
   downshiftProps: PropTypes.shape(Downshift.propTypes),
