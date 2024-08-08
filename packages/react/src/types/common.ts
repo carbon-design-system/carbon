@@ -19,13 +19,19 @@ export type PolymorphicProps<Element extends React.ElementType, Props> = Props &
     as?: Element;
   };
 
-export interface InternationalProps<
-  MID = string,
-  ARGS = Record<string, unknown>
-> {
+export interface TranslateWithId<MID = string, ARGS = Record<string, unknown>> {
   /**
    * Supply a method to translate internal strings with your i18n tool of
    * choice.
    */
   translateWithId?(messageId: MID, args?: ARGS): string;
 }
+
+/**
+ * Alias of TranslateWithId. Will be removed in v12
+ * @deprecated Use TranslateWithId instead
+ */
+export type InternationalProps<
+  MID = string,
+  ARGS = Record<string, unknown>
+> = TranslateWithId<MID, ARGS>;

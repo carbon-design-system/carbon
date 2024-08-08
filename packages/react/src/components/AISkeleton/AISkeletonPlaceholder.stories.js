@@ -9,11 +9,13 @@
 
 import React from 'react';
 
-import AiSkeletonPlaceholder from './AiSkeletonPlaceholder';
+import AISkeletonPlaceholder from './AISkeletonPlaceholder';
 
 export default {
-  title: 'Experimental/unstable__AiSkeleton/AiSkeletonPlaceholder',
-  component: AiSkeletonPlaceholder,
+  title: 'Components/Skeleton/AISkeleton',
+  component: AISkeletonPlaceholder,
 };
 
-export const Default = () => <AiSkeletonPlaceholder className="test" />;
+export const _AISkeletonPlaceholder = () => (
+  <AISkeletonPlaceholder className="test" />
+);
