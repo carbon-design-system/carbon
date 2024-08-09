@@ -381,6 +381,14 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           Quisque consectetur non risus eu rutrum.{' '}
         </p>
 
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+
         {args.hasScrollingContent && (
           <>
             <p>
