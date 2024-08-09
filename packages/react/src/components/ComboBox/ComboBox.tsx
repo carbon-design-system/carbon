@@ -521,7 +521,7 @@ const ComboBox = forwardRef(
           case FunctionToggleMenu:
           case ToggleButtonClick:
             if (changes.isOpen && !changes.selectedItem) {
-              return { ...changes, highlightedIndex: 0 };
+              return { ...changes };
             }
             return changes;
 
@@ -594,7 +594,7 @@ const ComboBox = forwardRef(
 
     const inputClasses = cx(`${prefix}--text-input`, {
       [`${prefix}--text-input--empty`]: !inputValue,
-      [`${prefix}--combo-box--input--focus`]: isFocused && !isFluid,
+      [`${prefix}--combo-box--input--focus`]: isFocused,
     });
 
     // needs to be Capitalized for react to render it correctly
