@@ -26,12 +26,18 @@ export const defaultCompareItems = (itemA, itemB, { locale }) =>
 export const defaultSortItems = (
   items,
   { selectedItems = [], itemToString, compareItems, locale = 'en' }
-) =>
-  items.sort((itemA, itemB) => {
+) => {
+  // Extract the "select all" option
+  const selectAllOption = items.find((item) => item.isSelectAll);
+
+  // Filter out the "select all" option from the items array
+  const filteredItems = items.filter((item) => !item.isSelectAll);
+
+  // Sort the filtered items
+  const sortedItems = filteredItems.sort((itemA, itemB) => {
     const hasItemA = selectedItems.includes(itemA);
     const hasItemB = selectedItems.includes(itemB);
 
-    // Prefer whichever item is in the `selectedItems` array first
     if (hasItemA && !hasItemB) {
       return -1;
     }
@@ -44,3 +50,7 @@ export const defaultSortItems = (
       locale,
     });
   });
+
+  // Add the "select all" option to the beginning of the sorted array, if it exists
+  return selectAllOption ? [selectAllOption, ...sortedItems] : sortedItems;
+};

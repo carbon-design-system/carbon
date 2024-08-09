@@ -30,6 +30,8 @@ export function useSelection({
   onChange,
   initialSelectedItems = [],
   selectedItems: controlledItems,
+  selectAll = false,
+  filteredItems = [],
 }) {
   const isMounted = useRef(false);
   const savedOnChange = useRef(onChange);
@@ -42,25 +44,47 @@ export function useSelection({
       if (disabled) {
         return;
       }
-      let selectedIndex;
-      selectedItems.forEach((selectedItem, index) => {
-        if (isEqual(selectedItem, item)) {
-          selectedIndex = index;
-        }
-      });
+
+      const allSelectableItems = filteredItems.filter((item) => !item.disabled);
+      const disabledItemCount = filteredItems.filter(
+        (item) => item.disabled
+      ).length;
+
       let newSelectedItems;
-      if (selectedIndex === undefined) {
-        newSelectedItems = selectedItems.concat(item);
-        callOnChangeHandler({
-          isControlled,
-          isMounted: isMounted.current,
-          onChangeHandlerControlled: savedOnChange.current,
-          onChangeHandlerUncontrolled: setUncontrolledItems,
-          selectedItems: newSelectedItems,
-        });
-        return;
+
+      //deselect all on click to All/indeterminate option
+      if (item && item.isSelectAll && selectedItems.length > 0) {
+        newSelectedItems = [];
       }
-      newSelectedItems = removeAtIndex(selectedItems, selectedIndex);
+      //select all option
+      else if (item && item.isSelectAll && selectedItems.length == 0) {
+        newSelectedItems = allSelectableItems;
+      } else {
+        let selectedIndex;
+        selectedItems.forEach((selectedItem, index) => {
+          if (isEqual(selectedItem, item)) {
+            selectedIndex = index;
+          }
+        });
+
+        if (selectedIndex === undefined) {
+          newSelectedItems = selectedItems.concat(item);
+          // checking if all items are selected then We should select mark the 'select All' option as well
+          if (
+            selectAll &&
+            filteredItems.length - 1 ===
+              newSelectedItems.length + disabledItemCount
+          ) {
+            newSelectedItems = allSelectableItems;
+          }
+        } else {
+          newSelectedItems = removeAtIndex(selectedItems, selectedIndex);
+          newSelectedItems = newSelectedItems.filter(
+            (item) => !item.isSelectAll
+          );
+        }
+      }
+
       callOnChangeHandler({
         isControlled,
         isMounted: isMounted.current,
@@ -69,7 +93,7 @@ export function useSelection({
         selectedItems: newSelectedItems,
       });
     },
-    [disabled, isControlled, selectedItems]
+    [disabled, selectedItems, filteredItems, selectAll, isControlled]
   );
 
   const clearSelection = useCallback(() => {
