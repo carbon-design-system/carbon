@@ -123,9 +123,10 @@ export default (config) => (fp) => {
         if (inputTo.value) {
           fp.setDate(
             [inputFrom.value, inputTo.value],
-            true,
+            false,
             fp.config.dateFormat
           );
+          fp.updateValue();
         }
       }
     }
