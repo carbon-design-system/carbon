@@ -118,6 +118,7 @@ const SelectableTag = <T extends React.ElementType>({
         leaveDelayMs={0}
         onMouseEnter={() => false}>
         <Tag
+          aria-pressed={selectedTag}
           ref={tagRef}
           slug={slug}
           size={size}
@@ -138,6 +139,7 @@ const SelectableTag = <T extends React.ElementType>({
 
   return (
     <Tag
+      aria-pressed={selectedTag}
       ref={tagRef}
       slug={slug}
       size={size}
