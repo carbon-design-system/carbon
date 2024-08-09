@@ -34,7 +34,6 @@ test.describe('@avt Modal', () => {
     const button = page.getByRole('button', { name: 'Launch modal' });
 
     // Open the modal via keyboard navigation
-    await page.keyboard.press('Tab');
     await expect(button).toBeFocused();
     button.press('Enter');
 
