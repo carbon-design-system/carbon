@@ -88,7 +88,7 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
-  target?: Element;
+  menuTarget?: Element;
 
   /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
@@ -117,7 +117,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     size = 'sm',
     legacyAutoalign = 'true',
     // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
-    target = canUseDOM && document.body,
+    menuTarget = canUseDOM && document.body,
     x = 0,
     y = 0,
     ...rest
@@ -443,11 +443,13 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     </MenuContext.Provider>
   );
 
-  if (!target) {
+  if (!menuTarget) {
     return rendered;
   }
 
-  return isRoot ? (open && createPortal(rendered, target)) || null : rendered;
+  return isRoot
+    ? (open && createPortal(rendered, menuTarget)) || null
+    : rendered;
 });
 
 Menu.propTypes = {
@@ -505,7 +507,7 @@ Menu.propTypes = {
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
   // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
-  target: PropTypes.object,
+  menuTarget: PropTypes.object,
 
   /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
