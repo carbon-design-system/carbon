@@ -267,19 +267,7 @@ Map {
       "inline": Object {
         "type": "bool",
       },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "error",
-            "info",
-            "info-square",
-            "success",
-            "warning",
-            "warning-alt",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "kind": [Function],
       "lowContrast": Object {
         "type": "bool",
       },
@@ -4450,19 +4438,7 @@ Map {
       "hideCloseButton": Object {
         "type": "bool",
       },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "error",
-            "info",
-            "info-square",
-            "success",
-            "warning",
-            "warning-alt",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "kind": [Function],
       "lowContrast": Object {
         "type": "bool",
       },
@@ -7480,19 +7456,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "error",
-            "info",
-            "info-square",
-            "success",
-            "warning",
-            "warning-alt",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "kind": [Function],
       "lowContrast": Object {
         "type": "bool",
       },
@@ -9267,19 +9231,7 @@ Map {
       "hideCloseButton": Object {
         "type": "bool",
       },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "error",
-            "info",
-            "info-square",
-            "success",
-            "warning",
-            "warning-alt",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "kind": [Function],
       "lowContrast": Object {
         "type": "bool",
       },

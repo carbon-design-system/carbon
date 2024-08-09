@@ -42,6 +42,7 @@ import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
 import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { useFeatureFlag } from '../FeatureFlags';
+import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -536,15 +537,17 @@ ToastNotification.propTypes = {
   /**
    * Specify what state the notification represents
    */
-  kind: PropTypes.oneOf([
-    'error',
-    'info',
-    'info-square',
-    'success',
-    'warning',
-    'warning-alt',
-  ]),
-
+  kind: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'error',
+      'info',
+      'info-square',
+      'success',
+      'warning',
+      'warning-alt',
+    ]),
+    ['error', 'info', 'success', 'warning']
+  ),
   /**
    * Specify whether you are using the low contrast variant of the ToastNotification.
    */
@@ -768,14 +771,17 @@ InlineNotification.propTypes = {
   /**
    * Specify what state the notification represents
    */
-  kind: PropTypes.oneOf([
-    'error',
-    'info',
-    'info-square',
-    'success',
-    'warning',
-    'warning-alt',
-  ]),
+  kind: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'error',
+      'info',
+      'info-square',
+      'success',
+      'warning',
+      'warning-alt',
+    ]),
+    ['error', 'info', 'success', 'warning']
+  ),
 
   /**
    * Specify whether you are using the low contrast variant of the InlineNotification.
@@ -1143,14 +1149,17 @@ ActionableNotification.propTypes = {
   /**
    * Specify what state the notification represents
    */
-  kind: PropTypes.oneOf([
-    'error',
-    'info',
-    'info-square',
-    'success',
-    'warning',
-    'warning-alt',
-  ]),
+  kind: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'error',
+      'info',
+      'info-square',
+      'success',
+      'warning',
+      'warning-alt',
+    ]),
+    ['error', 'info', 'success', 'warning']
+  ),
 
   /**
    * Specify whether you are using the low contrast variant of the ActionableNotification.
@@ -1345,14 +1354,17 @@ StaticNotification.propTypes = {
   /**
    * Specify what state the notification represents
    */
-  kind: PropTypes.oneOf([
-    'error',
-    'info',
-    'info-square',
-    'success',
-    'warning',
-    'warning-alt',
-  ]),
+  kind: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'error',
+      'info',
+      'info-square',
+      'success',
+      'warning',
+      'warning-alt',
+    ]),
+    ['error', 'info', 'success', 'warning']
+  ),
 
   /**
    * Specify whether you are using the low contrast variant of the StaticNotification.

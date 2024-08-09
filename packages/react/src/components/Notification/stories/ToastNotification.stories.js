@@ -79,6 +79,12 @@ Playground.argTypes = {
       disable: true,
     },
   },
+  kind: {
+    options: ['error', 'success', 'warning', 'info'],
+    control: {
+      type: 'select',
+    },
+  },
 };
 Playground.args = {
   role: 'status',
