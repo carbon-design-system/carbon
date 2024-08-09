@@ -45,9 +45,7 @@ export const Playground = (args) => {
   const selectableOnChange = action('onChange (MenuItemSelectable)');
   const radioOnChange = action('onChange (MenuItemRadioGroup)');
 
-  const menuTarget =
-    document.getElementById(args.menuTarget) ||
-    document.getElementById('storybook-root');
+  const menuTarget = document.getElementById('storybook-root');
 
   return (
     <Menu
@@ -96,4 +94,16 @@ export const Playground = (args) => {
 Playground.args = {
   onClose: action('onClose'),
   open: true,
+};
+Playground.argTypes = {
+  menuTarget: {
+    table: {
+      disable: true,
+    },
+  },
+  target: {
+    table: {
+      disable: true,
+    },
+  },
 };

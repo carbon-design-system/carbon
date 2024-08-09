@@ -74,6 +74,11 @@ interface OverflowMenuProps {
     | 'bottom-right'
     | 'left'
     | 'right';
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   */
+  menuTarget?: Element;
 }
 
 const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
@@ -87,6 +92,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       size = defaultSize,
       menuAlignment = 'bottom-start',
       tooltipAlignment,
+      menuTarget,
       ...rest
     },
     forwardRef
@@ -205,7 +211,8 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
           onClose={handleClose}
           x={x}
           y={y}
-          label={label}>
+          label={label}
+          menuTarget={menuTarget}>
           {children}
         </Menu>
       </div>
@@ -266,6 +273,11 @@ OverflowMenu.propTypes = {
     'left',
     'right',
   ]),
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   */
+  menuTarget: PropTypes.instanceOf(Element),
 };
 
 export { OverflowMenu };

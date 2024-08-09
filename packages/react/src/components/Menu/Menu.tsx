@@ -91,6 +91,12 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   menuTarget?: Element;
 
   /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   * (Deprecated prop)
+   */
+  target?: Element;
+
+  /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
    */
   x?: number | [number, number];
@@ -118,6 +124,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     legacyAutoalign = 'true',
     // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
     menuTarget = canUseDOM && document.body,
+    target = canUseDOM && document.body,
     x = 0,
     y = 0,
     ...rest
@@ -131,6 +138,13 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const context = useContext(MenuContext);
 
   const isRoot = context.state.isRoot;
+
+  if (target && target !== document.body) {
+    warning(
+      false,
+      'Warning: The `target` prop is deprecated and will be removed in a future release. Please use `menuTarget` instead.'
+    );
+  }
 
   if (context.state.mode === 'basic' && !isRoot) {
     warning(
@@ -443,12 +457,17 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     </MenuContext.Provider>
   );
 
-  if (!menuTarget) {
+  if (!(menuTarget || target)) {
     return rendered;
   }
 
   return isRoot
-    ? (open && createPortal(rendered, menuTarget)) || null
+    ? (open &&
+        createPortal(
+          rendered,
+          target && target !== document.body ? target : menuTarget
+        )) ||
+        null
     : rendered;
 });
 
@@ -508,6 +527,11 @@ Menu.propTypes = {
    */
   // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   menuTarget: PropTypes.object,
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   */
+  target: PropTypes.instanceOf(Element),
 
   /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])

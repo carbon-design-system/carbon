@@ -82,9 +82,15 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
   tabIndex?: number;
 
   /**
-   * Specify the menuTarget props of the menu.
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
-  menuTarget?: Element; // Add this line
+  menuTarget?: Element;
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   * (Deprecated props)
+   */
+  target?: Element;
 }
 
 const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
@@ -99,6 +105,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       menuAlignment = 'bottom',
       tabIndex = 0,
       menuTarget,
+      target,
       ...rest
     },
     forwardRef
@@ -198,7 +205,8 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
           size={size}
           open={open}
           onClose={handleClose}
-          menuTarget={menuTarget}>
+          menuTarget={menuTarget}
+          target={target}>
           {children}
         </Menu>
       </div>
@@ -259,9 +267,15 @@ MenuButton.propTypes = {
   tabIndex: PropTypes.number,
 
   /**
-   * Specify the menuTarget prop of the menu.
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
   menuTarget: PropTypes.instanceOf(Element),
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   * Deprecated props
+   */
+  target: PropTypes.instanceOf(Element),
 };
 
 export { MenuButton };

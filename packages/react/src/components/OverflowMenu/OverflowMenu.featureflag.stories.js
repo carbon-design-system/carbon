@@ -222,4 +222,14 @@ Playground.argTypes = {
       'Specify how the menu should align with the button element `bottom-start` `bottom-end` `top-start` `top-end`',
     default: 'bottom-start',
   },
+  menuTarget: {
+    table: {
+      disable: true,
+    },
+  },
+  target: {
+    table: {
+      disable: true,
+    },
+  },
 };
