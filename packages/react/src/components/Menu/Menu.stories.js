@@ -57,6 +57,8 @@ export const Playground = (args) => {
           onChange={radioOnChange}
         />
       </MenuItem>
+      <MenuItemDivider />
+      <MenuItem label="Cut" shortcut="⌘X" onClick={itemOnClick} />
       <MenuItem label="Copy" shortcut="⌘C" onClick={itemOnClick} />
       <MenuItem label="Paste" shortcut="⌘V" disabled onClick={itemOnClick} />
       <MenuItemDivider />
