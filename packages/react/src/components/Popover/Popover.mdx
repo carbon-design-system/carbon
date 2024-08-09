@@ -1,4 +1,4 @@
-import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import { ArgTypes, Canvas, Story } from '@storybook/blocks';
 import * as PopoverStories from './Popover.stories';
 
 # Popover
@@ -65,9 +65,7 @@ clicks outside of a popover will close the popover. This is achieved by using
 state in conjunction with the callback prop to set `open` to false when
 `onRequestClose` is called.
 
-<Canvas>
-  <Story of={PopoverStories.TabTip} />
-</Canvas>
+<Canvas of={PopoverStories.TabTip} />
 
 ## Alignment
 
@@ -100,7 +98,7 @@ appearance, including:
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

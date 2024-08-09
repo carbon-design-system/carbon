@@ -1,4 +1,4 @@
-import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import { ArgTypes, Canvas, Story } from '@storybook/blocks';
 import * as FormStories from './Form.stories';
 
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
@@ -31,9 +31,7 @@ The `Form` component is configurable to fit various use cases and layouts. It is
 purposely simple out of the box, and users are responsible for configuring it to
 suit their needs.
 
-<Canvas>
-  <Story of={FormStories.Default} />
-</Canvas>
+<Canvas of={FormStories.Default} />
 
 ## Accessibility Considerations
 
@@ -46,7 +44,7 @@ or `title` attribute. Read more on the accessible naming rule
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

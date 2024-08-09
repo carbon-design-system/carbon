@@ -1,4 +1,4 @@
-import { Story, ArgsTable, Canvas, Meta } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import * as TileStories from './Tile.stories';
 import * as TileFeatureFlagStories from './Tile.featureflag.stories';
 
@@ -16,45 +16,31 @@ import * as TileFeatureFlagStories from './Tile.featureflag.stories';
 
 ## Overview
 
-<Canvas>
-  <Story of={TileStories.Default} />
-</Canvas>
+<Canvas of={TileStories.Default} />
 
 ## Clickable
 
-<Canvas>
-  <Story of={TileStories.Clickable} />
-</Canvas>
+<Canvas of={TileStories.Clickable} />
 
 ## Expandable
 
-<Canvas>
-  <Story of={TileStories.Expandable} />
-</Canvas>
+<Canvas of={TileStories.Expandable} />
 
 ## Expandable with Interactive
 
-<Canvas>
-  <Story of={TileStories.ExpandableWithInteractive} />
-</Canvas>
+<Canvas of={TileStories.ExpandableWithInteractive} />
 
 ## Multi Select
 
-<Canvas>
-  <Story of={TileStories.Selectable} />
-</Canvas>
+<Canvas of={TileStories.Selectable} />
 
 ## Multi Select
 
-<Canvas>
-  <Story of={TileStories.MultiSelect} />
-</Canvas>
+<Canvas of={TileStories.MultiSelect} />
 
 ## Radio
 
-<Canvas>
-  <Story of={TileStories.Radio} />
-</Canvas>
+<Canvas of={TileStories.Radio} />
 
 ## Experimental Improved Contrast
 
@@ -106,7 +92,7 @@ or if you have multiple feature flags you can enable them this way.
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

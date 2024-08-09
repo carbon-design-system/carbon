@@ -1,4 +1,4 @@
-import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import { ArgTypes, Canvas } from '@storybook/blocks';
 import * as ComboBoxStories from './ComboBox.stories.js';
 import ComboBox from '../ComboBox';
 
@@ -29,13 +29,11 @@ import ComboBox from '../ComboBox';
 A combobox allows the user to make a selection from a predefined list of options
 and is typically used when there are a large amount of options to choose from.
 
-<Canvas>
-  <Story of={ComboBoxStories.Default} />
-</Canvas>
+<Canvas of={ComboBoxStories.Default} />
 
 ## Component API
 
-<ArgsTable sort="asc" />
+<ArgTypes />
 
 ## Disabled
 
@@ -213,9 +211,7 @@ callback.
 
 ## With Layer
 
-<Canvas>
-  <Story of={ComboBoxStories._WithLayer} />
-</Canvas>
+<Canvas of={ComboBoxStories._WithLayer} />
 
 ## Feedback
 

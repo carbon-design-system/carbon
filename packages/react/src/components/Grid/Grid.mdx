@@ -1,4 +1,4 @@
-import { Story, Canvas, ArgsTable } from '@storybook/blocks';
+import { Story, Canvas, ArgTypes } from '@storybook/blocks';
 import * as GridStories from './Grid.stories';
 
 # Grid
@@ -7,9 +7,10 @@ import * as GridStories from './Grid.stories';
 &nbsp;|&nbsp;
 [Usage guidelines](https://www.carbondesignsystem.com/guidelines/2x-grid/overview)
 
-{/* <!-- prettier-ignore-start -->
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+{/* prettier-ignore-start */}
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -28,8 +29,9 @@ import * as GridStories from './Grid.stories';
   - [Can I nest grid components?](#can-i-nest-grid-components)
 - [Feedback](#feedback)
 
-{/* <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-<!-- prettier-ignore-end --> */}
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+{/* prettier-ignore-end */}
 
 Carbon's grid components help developers use the
 [2x Grid](https://www.carbondesignsystem.com/guidelines/2x-grid/overview). The
@@ -40,9 +42,7 @@ variety of layouts. You can import these components from `@carbon/react`:
 import { Grid, Column } from '@carbon/react';
 ```
 
-<Canvas>
-  <Story of={GridStories.Default} />
-</Canvas>
+<Canvas of={GridStories.Default} />
 
 ## Overview
 
@@ -85,9 +85,7 @@ You can pair up multiple breakpoint props to specify how many columns the
 we will use the `sm`, `md`, and `lg` prop to specify how many columns the
 `Column` components should span at the small, medium, and large breakpoints.
 
-<Canvas>
-  <Story of={GridStories.Default} />
-</Canvas>
+<Canvas of={GridStories.Default} />
 
 ### Debugging
 
@@ -109,27 +107,21 @@ among others.
 There are several
 [gutter modes](https://www.carbondesignsystem.com/guidelines/2x-grid/implementation/#gutter-modes)
 that you can use depending on the layout effect you're looking to achieve. By
-default, `Grid` uses the wide gutter mode with a 32px gutter. However, you can use
-the `condensed` prop to enable the condensed gutter mode with a 1px gutter or the
-`narrow` prop to enable the narrow grid with a 16px gutter.
+default, `Grid` uses the wide gutter mode with a 32px gutter. However, you can
+use the `condensed` prop to enable the condensed gutter mode with a 1px gutter
+or the `narrow` prop to enable the narrow grid with a 16px gutter.
 
 ### Full width grid
 
-<Canvas>
-  <Story of={GridStories.FullWidth} />
-</Canvas>
+<Canvas of={GridStories.FullWidth} />
 
 ### Condensed grid
 
-<Canvas>
-  <Story of={GridStories.Condensed} />
-</Canvas>
+<Canvas of={GridStories.Condensed} />
 
 ### Narrow grid
 
-<Canvas>
-  <Story of={GridStories.Narrow} />
-</Canvas>
+<Canvas of={GridStories.Narrow} />
 
 ## Subgrid
 
@@ -141,13 +133,11 @@ properly configured for the subgrid to inherit. Additionally, wrapping subgrids
 in a `Column` enables you to define responsive parameters for the column (`sm`,
 `md`, etc) that the subgrid will inherit and be bound to.
 
-<Canvas>
-  <Story of={GridStories.Subgrid} />
-</Canvas>
+<Canvas of={GridStories.Subgrid} />
 
-For more specialized grid implementations you may want to disable the
-automatic subgrid definition. To achieve this you can wrap your nested `Grid` 
-in `GridSettings` and set `subgrid={false}`.
+For more specialized grid implementations you may want to disable the automatic
+subgrid definition. To achieve this you can wrap your nested `Grid` in
+`GridSettings` and set `subgrid={false}`.
 
 ```jsx
 <Grid>
@@ -168,9 +158,7 @@ pass in `condensed` to a nested `Grid` (subgrid) to enable a certain gutter mode
 for only that subgrid. This can be useful when you need to mix-and-match certain
 gutter modes to achieve a particular layout.
 
-<Canvas>
-  <Story of={GridStories.MixedGutterModes} />
-</Canvas>
+<Canvas of={GridStories.MixedGutterModes} />
 
 ## Auto columns
 
@@ -186,9 +174,7 @@ grid's `grid-template-columns` property. This declares that there should be
 The values of these custom properties can be changed to modify the default
 behavior of columns.
 
-<Canvas>
-  <Story of={GridStories.Responsive} />
-</Canvas>
+<Canvas of={GridStories.Responsive} />
 
 ## Offset columns
 
@@ -207,13 +193,11 @@ breakpoint. At the medium breakpoint, it will be offset by two columns.
 <Column sm={2} md={{ span: 4, offset: 2 }} />
 ```
 
-<Canvas>
-  <Story of={GridStories.Offset} />
-</Canvas>
+<Canvas of={GridStories.Offset} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ### Using the `as` prop
 

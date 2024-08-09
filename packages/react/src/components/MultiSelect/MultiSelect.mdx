@@ -1,4 +1,4 @@
-import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import { ArgTypes, Canvas, Story } from '@storybook/blocks';
 
 import * as MultiSelect from './MultiSelect.stories';
 
@@ -27,35 +27,30 @@ import * as MultiSelect from './MultiSelect.stories';
 ## Overview
 
 The `MultiSelect` component is a variant of the `Dropdown` component that allows
-for multiple items to be selected. `MultiSelect` stays open while items are
-being selected.
+for multiple items to be selected. `MultiSelect` stays open while items are The
+`MultiSelect` component is a variant of the `Dropdown` component that allows for
+multiple items to be selected. `MultiSelect` stays open while items are being
+selected.
 
-<Canvas>
-  <Story of={MultiSelect.Default} />
-</Canvas>
+<Canvas of={MultiSelect.Default} />
 
 ### With initial selected items
 
 By passing items into the `initialSelectedItems` prop, they can be pre-selected.
 
-<Canvas>
-  <Story of={MultiSelect.WithInitialSelectedItems} />
-</Canvas>
+<Canvas of={MultiSelect.WithInitialSelectedItems} />
 
 ### Filtering
 
 The `FilterableMultiSelect` component allows for filtering the list of
-selectable items to a subset.
+selectable items to a subset. The `FilterableMultiSelect` component allows for
+filtering the list of selectable items to a subset.
 
-<Canvas>
-  <Story of={MultiSelect.Filterable} />
-</Canvas>
+<Canvas of={MultiSelect.Filterable} />
 
 ### With layer
 
-<Canvas>
-  <Story of={MultiSelect.WithLayerMultiSelect} />
-</Canvas>
+<Canvas of={MultiSelect.WithLayerMultiSelect} />
 
 ## Component API
 
@@ -72,7 +67,7 @@ cases they can not be shimmed to shield you from potentially breaking changes.
 For more information, checkout the Downshift prop
 [documentation](https://www.downshift-js.com/downshift#props-used-in-examples)
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

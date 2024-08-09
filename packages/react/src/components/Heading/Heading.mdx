@@ -1,4 +1,4 @@
-import { Canvas, ArgsTable, Story } from '@storybook/blocks';
+import { Canvas, ArgTypes, Story } from '@storybook/blocks';
 import * as HeadingStories from './Heading.stories';
 
 # Heading
@@ -31,13 +31,11 @@ appropriate heading level without you having to manually specify it. To do this,
 you use the `Section` component for each section of your page. Every `Heading`
 component in that `Section` will use the correct heading level.
 
-<Canvas>
-  <Story of={HeadingStories.Default} />
-</Canvas>
+<Canvas of={HeadingStories.Default} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ### Section as
 

@@ -9,11 +9,7 @@
 
 import React from 'react';
 import './story.scss';
-import {
-  default as Accordion,
-  AccordionItem,
-  AccordionSkeleton,
-} from '../Accordion';
+import { default as Accordion, AccordionItem, AccordionSkeleton } from '.';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import mdx from './Accordion.mdx';

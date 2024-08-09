@@ -24,9 +24,7 @@ When to use:
 - Use DismissibleTag when you want to allow users to easily clear or dismiss
   specific filters applied to items.
 
-<Canvas>
-  <Story of={InteractiveTagStories.Dismissible} />
-</Canvas>
+  <Canvas of={InteractiveTagStories.Dismissible} />
 
 ```jsx
 <DismissibleTag
@@ -51,9 +49,7 @@ When to use:
   need to be a little more specific around filtering for selectable versus
   dismissable tags).
 
-<Canvas>
-  <Story of={InteractiveTagStories.Selectable} />
-</Canvas>
+  <Canvas of={InteractiveTagStories.Selectable} />
 
 ```jsx
 <SelectableTag className="some-class" renderIcon={Asleep}>
@@ -78,9 +74,7 @@ When not to use:
 - Do not use in combination with Dismissable tags. Instead, consider letting the
   user enter an "edit mode" to dismiss tags.
 
-<Canvas>
-  <Story of={InteractiveTagStories.Operational} />
-</Canvas>
+  <Canvas of={InteractiveTagStories.Operational} />
 
 ```jsx
 <OperationalTag type="red" className="some-class" renderIcon={Asleep}>

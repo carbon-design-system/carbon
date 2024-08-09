@@ -12,7 +12,9 @@ import { useCallback, Ref, ForwardedRef } from 'react';
  * refs from both `React.forwardRef` and `useRef` that you would like to add to
  * the same node.
  */
-export const useMergedRefs = <T>(refs: ForwardedRef<T>[]): Ref<T> => {
+export const useMergedRefs = <T extends unknown>(
+  refs: ForwardedRef<T>[]
+): Ref<T> => {
   return useCallback((node) => {
     refs.forEach((ref) => {
       if (typeof ref === 'function') {

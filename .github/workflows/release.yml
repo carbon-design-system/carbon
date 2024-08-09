@@ -38,8 +38,7 @@ jobs:
 
       # Additional steps for generating playwright json report for avt tests
       - name: Build storybook
-        run:
-          STORYBOOK_STORE_7=false yarn workspace @carbon/react storybook:build
+        run: yarn workspace @carbon/react storybook:build
       - name: Run storybook
         id: storybook
         run: |

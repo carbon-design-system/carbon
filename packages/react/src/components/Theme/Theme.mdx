@@ -1,13 +1,14 @@
-import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import { ArgTypes, Story, Canvas } from '@storybook/blocks';
 import * as ThemeStories from './Theme.stories';
 
 # Theme
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Theme)
 
-{/* <!-- prettier-ignore-start -->
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+{/* prettier-ignore-start */}
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -16,8 +17,9 @@ import * as ThemeStories from './Theme.stories';
   - [Theme as](#theme-as)
 - [Feedback](#feedback)
 
-{/* <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-<!-- prettier-ignore-end --> */}
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+{/* prettier-ignore-end */}
 
 ## Overview
 
@@ -36,17 +38,21 @@ files by writing:
 
 You also get this file when you import `@carbon/react` directly in your Sass.
 
-<Canvas>
-  <Story of={ThemeStories.Default} />
-</Canvas>
+<Canvas of={ThemeStories.Default} />
 
 ## Setting the global theme
 
-To the set the theme for your entire project, the `GlobalTheme` component can be used.
+To the set the theme for your entire project, the `GlobalTheme` component can be
+used.
 
-Please note that in contrast to `Theme` this does not apply any styles on its own but rather sets the context's theme according to the value you pass to its `theme` prop.
+Please note that in contrast to `Theme` this does not apply any styles on its
+own but rather sets the context's theme according to the value you pass to its
+`theme` prop.
 
-This is due to the various options of applying global css custom properties which differ from application to application. Depending on your architecture you may want to apply a class to the `<body>` or add a custom data attribute to your `<html>` element:
+This is due to the various options of applying global css custom properties
+which differ from application to application. Depending on your architecture you
+may want to apply a class to the `<body>` or add a custom data attribute to your
+`<html>` element:
 
 ```jsx
 import { useEffect } from 'react';
@@ -71,17 +77,19 @@ function App() {
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/themes';
 
-:root[data-carbon-theme="g10"] {
+:root[data-carbon-theme='g10'] {
   @include theme.theme(themes.$g10);
 }
 
-:root[data-carbon-theme="g100"] {
+:root[data-carbon-theme='g100'] {
   @include theme.theme(themes.$g100);
 }
 ```
 
-This way, the `GlobalTheme` component is used to "synchronize" the state of the application's context and your scss, so that other components and hooks like useTheme can work properly.
-For this reason, the component should be used as a wrapper of the root of your application.
+This way, the `GlobalTheme` component is used to "synchronize" the state of the
+application's context and your scss, so that other components and hooks like
+useTheme can work properly. For this reason, the component should be used as a
+wrapper of the root of your application.
 
 By default, the global theme is set to `white`.
 
@@ -107,9 +115,7 @@ function ExamplePage() {
 }
 ```
 
-<Canvas>
-  <Story of={ThemeStories.Default} />
-</Canvas>
+<Canvas of={ThemeStories.Default} />
 
 ## Getting the current theme in a component
 
@@ -126,13 +132,11 @@ function ExampleComponent() {
 }
 ```
 
-<Canvas>
-  <Story of={ThemeStories.UseTheme} />
-</Canvas>
+<Canvas of={ThemeStories.UseTheme} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ### Theme as
 

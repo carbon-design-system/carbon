@@ -9,8 +9,8 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
   Stories,
+  ArgTypes,
 } from '@storybook/blocks';
 
 import './styles.scss';
@@ -191,7 +191,7 @@ const parameters = {
         <Subtitle />
         <Description />
         <Primary />
-        <ArgsTable />
+        <ArgTypes />
         <Stories includePrimary={false} />
       </>
     ),
@@ -242,12 +242,10 @@ const parameters = {
   },
   options: {
     storySort: (storyA, storyB) => {
-      const isUsingV6Store = process.env.STORYBOOK_STORE_7 === 'false';
-
-      const idA = isUsingV6Store ? storyA[1].id : storyA.id;
-      const idB = isUsingV6Store ? storyB[1].id : storyB.id;
-      const titleA = isUsingV6Store ? storyA[1].title : storyA.title;
-      const titleB = isUsingV6Store ? storyB[1].title : storyB.title;
+      const idA = storyA.id;
+      const idB = storyB.id;
+      const titleA = storyA.title;
+      const titleB = storyB.title;
 
       if (idA.includes('welcome')) {
         return -1;
