@@ -38,6 +38,7 @@ exports[`Accordion should render 1`] = `
       </button>
       <div
         class="cds--accordion__wrapper"
+        hidden=""
       >
         <div
           class="cds--accordion__content"
@@ -80,6 +81,7 @@ exports[`Accordion should render 1`] = `
       </button>
       <div
         class="cds--accordion__wrapper"
+        hidden=""
       >
         <div
           class="cds--accordion__content"
@@ -122,6 +124,7 @@ exports[`Accordion should render 1`] = `
       </button>
       <div
         class="cds--accordion__wrapper"
+        hidden=""
       >
         <div
           class="cds--accordion__content"
