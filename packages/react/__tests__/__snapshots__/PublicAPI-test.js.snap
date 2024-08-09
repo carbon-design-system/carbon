@@ -7727,6 +7727,9 @@ Map {
       "onKeyDown": Object {
         "type": "func",
       },
+      "rel": Object {
+        "type": "string",
+      },
       "tabIndex": Object {
         "type": "number",
       },
