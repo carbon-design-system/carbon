@@ -11,7 +11,13 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import ContentSwitcher from './ContentSwitcher';
 import { Switch, IconSwitch } from '../Switch';
 import mdx from './ContentSwitcher.mdx';
-import { TableOfContents, Workspace, ViewMode_2 } from '@carbon/icons-react';
+import {
+  TableOfContents,
+  Workspace,
+  ViewMode_2,
+  Bee,
+  Add,
+} from '@carbon/icons-react';
 
 export default {
   title: 'Components/ContentSwitcher',
@@ -62,6 +68,40 @@ export const IconOnly = (args) => (
     </IconSwitch>
     <IconSwitch name="three" text="View Mode">
       <ViewMode_2 />
+    </IconSwitch>
+  </ContentSwitcher>
+);
+
+export const IconOnlySlide = (args) => (
+  <ContentSwitcher onChange={() => {}} {...args} iconOnlySlide>
+    <IconSwitch name="one" text="Table of Contents">
+      <TableOfContents />
+    </IconSwitch>
+    <IconSwitch name="two" text="Workspace Test">
+      <Workspace />
+    </IconSwitch>
+    <IconSwitch name="three" text="View Mode">
+      <ViewMode_2 />
+    </IconSwitch>
+  </ContentSwitcher>
+);
+
+export const IconOnlySlide5 = (args) => (
+  <ContentSwitcher onChange={() => {}} {...args} iconOnlySlide>
+    <IconSwitch name="one" text="Table of Contents">
+      <TableOfContents />
+    </IconSwitch>
+    <IconSwitch name="two" text="Workspace Test">
+      <Workspace />
+    </IconSwitch>
+    <IconSwitch name="three" text="View Mode">
+      <ViewMode_2 />
+    </IconSwitch>
+    <IconSwitch name="four" text="View Mode">
+      <Bee />
+    </IconSwitch>
+    <IconSwitch name="five" text="View Mode">
+      <Add />
     </IconSwitch>
   </ContentSwitcher>
 );

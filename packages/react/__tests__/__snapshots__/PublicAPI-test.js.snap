@@ -4327,6 +4327,9 @@ Map {
       "enterDelayMs": Object {
         "type": "number",
       },
+      "iconOnlySlide": Object {
+        "type": "bool",
+      },
       "index": Object {
         "type": "number",
       },
