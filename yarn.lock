@@ -8191,21 +8191,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accessibility-checker@npm:^3.1.48":
-  version: 3.1.48
-  resolution: "accessibility-checker@npm:3.1.48"
+"accessibility-checker@npm:^3.1.74":
+  version: 3.1.74
+  resolution: "accessibility-checker@npm:3.1.74"
   dependencies:
-    axios: "npm:^0.27.2"
+    axios: "npm:^1.4.0"
     chromedriver: "npm:*"
     deep-diff: "npm:^1.0.2"
     exceljs: "npm:^4.3.0"
     js-yaml: "npm:^4.1.0"
     puppeteer: "npm:^13.0.0"
     string-hash: "npm:^1.1.3"
-    uuid: "npm:^8.3.2"
   bin:
     achecker: bin/achecker.js
-  checksum: 10/fe4f23c310d35e28937b1f35029171da6777ce61a5448b9042cae7b9ba76007eb023e83ef133c2b319bd2b4a1eb9da8f8fc91b0c6b01a3ef34f762490e2dd66f
+  checksum: 10/822bac1917640bbe48d1c57101b274375c03d7483b53208b1b0913fd6c759aec660ad19e015e787dc234bf8881fe15fb6e3157287fee97d508f7fbbac2d3a720
   languageName: node
   linkType: hard
 
@@ -9015,24 +9014,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.27.2":
-  version: 0.27.2
-  resolution: "axios@npm:0.27.2"
-  dependencies:
-    follow-redirects: "npm:^1.14.9"
-    form-data: "npm:^4.0.0"
-  checksum: 10/2efaf18dd0805f7bc772882bc86f004abd92d51007b54c5081f74db0d08ce3593e2c010261896d25a14318eeaa2e966fd825e34f810e8a3339dc64b9d177cf70
-  languageName: node
-  linkType: hard
-
-"axios@npm:^1.5.1, axios@npm:^1.6.0":
-  version: 1.7.2
-  resolution: "axios@npm:1.7.2"
+"axios@npm:^1.4.0, axios@npm:^1.5.1, axios@npm:^1.6.0":
+  version: 1.7.3
+  resolution: "axios@npm:1.7.3"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10/6ae80dda9736bb4762ce717f1a26ff997d94672d3a5799ad9941c24d4fb019c1dff45be8272f08d1975d7950bac281f3ba24aff5ecd49ef5a04d872ec428782f
+  checksum: 10/7f92af205705a8fb4a9d35666b663729507657f252a1d39d83582590119941872d49078017cf992e32f47aa3b7317f5439f77be772a173dac2ae0fedd38f43ae
   languageName: node
   linkType: hard
 
@@ -9987,7 +9976,7 @@ __metadata:
     "@testing-library/react": "npm:^16.0.0"
     "@testing-library/user-event": "npm:^14.4.3"
     "@types/react-is": "npm:~18.3.0"
-    accessibility-checker: "npm:^3.1.48"
+    accessibility-checker: "npm:^3.1.74"
     all-contributors-cli: "npm:^6.19.0"
     cross-env: "npm:^7.0.0"
     cross-spawn: "npm:^7.0.0"
@@ -14521,7 +14510,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.10.0, follow-redirects@npm:^1.14.9, follow-redirects@npm:^1.15.6":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.10.0, follow-redirects@npm:^1.15.6":
   version: 1.15.6
   resolution: "follow-redirects@npm:1.15.6"
   peerDependenciesMeta:
@@ -17350,7 +17339,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.24.7"
     "@babel/preset-react": "npm:^7.24.7"
     "@babel/runtime": "npm:^7.24.7"
-    accessibility-checker: "npm:^3.1.48"
+    accessibility-checker: "npm:^3.1.74"
     axe-core: "npm:^4.3.5"
     babel-jest: "npm:^28.1.0"
     chalk: "npm:^4.1.1"
