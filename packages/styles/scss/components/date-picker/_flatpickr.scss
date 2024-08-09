@@ -145,9 +145,9 @@
   }
 
   .flatpickr-calendar.inline {
-    position: relative;
+    position: absolute;
     display: block;
-    inset-block-start: convert.to-rem(2px);
+    inset-block-start: auto;
   }
 
   .flatpickr-calendar.static {
