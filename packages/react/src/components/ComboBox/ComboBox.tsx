@@ -6,7 +6,7 @@
  */
 
 import cx from 'classnames';
-import { useCombobox, UseComboboxProps } from 'downshift';
+import { useCombobox, UseComboboxProps, UseComboboxActions } from 'downshift';
 import PropTypes from 'prop-types';
 import React, {
   useContext,
@@ -188,12 +188,30 @@ export interface ComboBoxProps<ItemType>
   disabled?: boolean;
 
   /**
-   * Additional props passed to Downshift. Use with caution: anything you define
-   * here overrides the components' internal handling of that prop. Downshift
-   * internals are subject to change, and in some cases they can not be shimmed
-   * to shield you from potentially breaking changes.
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
+   *
    */
   downshiftProps?: Partial<UseComboboxProps<ItemType>>;
+
+  /**
+   * Provide a ref that will be mutated to contain an object of downshift
+   * action functions. These can be called to change the internal state of the
+   * downshift useCombobox hook.
+   *
+   * **Use with caution:** calling these actions modifies the internal state of
+   * downshift. It may conflict with or override the state management used within
+   * Combobox. Downshift APIs and internals are subject to change, and in some
+   * cases they can not be shimmed by Carbon to shield you from potentially breaking
+   * changes.
+   */
+  downshiftActions?: React.MutableRefObject<
+    UseComboboxActions<ItemType> | undefined
+  >;
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -336,6 +354,7 @@ const ComboBox = forwardRef(
       className: containerClassName,
       direction = 'bottom',
       disabled = false,
+      downshiftActions,
       downshiftProps,
       helperText,
       id,
@@ -590,17 +609,26 @@ const ComboBox = forwardRef(
     }
 
     const {
+      // Prop getters
       getInputProps,
       getItemProps,
       getLabelProps,
       getMenuProps,
       getToggleButtonProps,
+
+      // State
       isOpen,
       highlightedIndex,
-      selectItem,
       selectedItem,
-      toggleMenu,
+
+      // Actions
+      closeMenu,
+      openMenu,
+      reset,
+      selectItem,
       setHighlightedIndex,
+      setInputValue: downshiftSetInputValue,
+      toggleMenu,
     } = useCombobox({
       items: filterItems(items, itemToString, inputValue),
       inputValue: inputValue,
@@ -636,6 +664,31 @@ const ComboBox = forwardRef(
       },
       ...downshiftProps,
     });
+
+    useEffect(() => {
+      // Used to expose the downshift actions to consumers for use with downshiftProps
+      // An odd pattern, here we mutate the value stored in the ref provided from the consumer.
+      // A riff of https://gist.github.com/gaearon/1a018a023347fe1c2476073330cc5509
+      if (downshiftActions) {
+        downshiftActions.current = {
+          closeMenu,
+          openMenu,
+          reset,
+          selectItem,
+          setHighlightedIndex,
+          setInputValue: downshiftSetInputValue,
+          toggleMenu,
+        };
+      }
+    }, [
+      closeMenu,
+      openMenu,
+      reset,
+      selectItem,
+      setHighlightedIndex,
+      downshiftSetInputValue,
+      toggleMenu,
+    ]);
 
     const buttonProps = getToggleButtonProps({
       disabled: disabled || readOnly,
@@ -729,7 +782,7 @@ const ComboBox = forwardRef(
               {...getInputProps({
                 'aria-controls': isOpen ? undefined : menuProps.id,
                 placeholder,
-                ref: { ...mergeRefs(textInput, ref) },
+                ref: mergeRefs(textInput, ref),
                 onKeyDown: (
                   event: KeyboardEvent<HTMLInputElement> & {
                     preventDownshiftDefault: boolean;
@@ -938,14 +991,30 @@ ComboBox.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift. Use with caution: anything you define
-   * here overrides the components' internal handling of that prop. Downshift
-   * internals are subject to change, and in some cases they can not be shimmed
-   * to shield you from potentially breaking changes.
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
    */
   downshiftProps: PropTypes.object as React.Validator<
     UseComboboxProps<unknown>
   >,
+
+  /**
+   * Provide a ref that will be mutated to contain an object of downshift
+   * action functions. These can be called to change the internal state of the
+   * downshift useCombobox hook.
+   *
+   * **Use with caution:** calling these actions modifies the internal state of
+   * downshift. It may conflict with or override the state management used within
+   * Combobox. Downshift APIs and internals are subject to change, and in some
+   * cases they can not be shimmed by Carbon to shield you from potentially breaking
+   * changes.
+   */
+  downshiftActions: PropTypes.exact({ current: PropTypes.any }),
+
   /**
    * Provide helper text that is used alongside the control label for
    * additional help

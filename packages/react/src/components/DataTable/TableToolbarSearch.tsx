@@ -17,6 +17,7 @@ import React, {
   RefObject,
 } from 'react';
 import Search, { SearchProps } from '../Search';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';

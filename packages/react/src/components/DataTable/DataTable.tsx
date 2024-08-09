@@ -15,7 +15,7 @@ import { getCellId } from './tools/cells';
 import denormalize from './tools/denormalize';
 import { composeEventHandlers } from '../../tools/events';
 import { defaultFilterRows } from './tools/filter';
-import setupGetInstanceId from './tools/instanceId';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import Table from './Table';
 import TableActionList from './TableActionList';
 import TableBatchAction from './TableBatchAction';

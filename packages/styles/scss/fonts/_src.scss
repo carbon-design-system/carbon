@@ -79,7 +79,14 @@ $-akamai-filenames: (
 /// @param {String} $unicode-range
 /// @param {List} $formats
 /// @returns List
-@function -default-resolver($name, $weight, $style, $unicode-range, $formats) {
+@function -default-resolver(
+  $name,
+  $weight,
+  $style,
+  $unicode-range,
+  $formats,
+  $package-name
+) {
   @if (config.$use-akamai-cdn) {
     $name: -get-akamai-filename($-akamai-filenames, $name, 'name');
     $filename: -get-akamai-filename($-akamai-filenames, $name, 'filename');
@@ -142,9 +149,9 @@ $-akamai-filenames: (
     @each $format in $formats {
       $url: $filename;
       @if $unicode-range {
-        $url: '#{config.$font-path}/#{$name}/fonts/split/#{$format}/#{$filename}-#{$unicode-range}';
+        $url: '#{config.$font-path}-#{$package-name}/fonts/split/#{$format}/#{$filename}-#{$unicode-range}';
       } @else {
-        $url: '#{config.$font-path}/#{$name}/fonts/complete/#{$format}/#{$filename}';
+        $url: '#{config.$font-path}-#{$package-name}/fonts/complete/#{$format}/#{$filename}';
       }
 
       // Add extension
@@ -173,13 +180,21 @@ $resolver: meta.get-function('-default-resolver') !default;
 /// @param {String} $unicode-range
 /// @param {List} $formats
 /// @returns List
-@function get($name, $weight, $style, $unicode-range: null, $formats) {
+@function get(
+  $name,
+  $weight,
+  $style,
+  $unicode-range: null,
+  $formats,
+  $package-name
+) {
   @return meta.call(
     $resolver,
     $name: $name,
     $weight: $weight,
     $style: $style,
     $unicode-range: $unicode-range,
-    $formats: $formats
+    $formats: $formats,
+    $package-name: $package-name
   );
 }

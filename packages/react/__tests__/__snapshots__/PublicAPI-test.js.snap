@@ -1278,6 +1278,16 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "downshiftActions": Object {
+        "args": Array [
+          Object {
+            "current": Object {
+              "type": "any",
+            },
+          },
+        ],
+        "type": "exact",
+      },
       "downshiftProps": Object {
         "type": "object",
       },
