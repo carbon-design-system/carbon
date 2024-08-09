@@ -86,6 +86,7 @@ function FileUploaderItem({
   className,
   ...other
 }: FileUploaderItemProps) {
+  const textRef = useRef<HTMLParagraphElement>(null);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
   const prefix = usePrefix();
   const { current: id } = useRef(uuid || uid());
@@ -108,8 +109,7 @@ function FileUploaderItem({
   };
 
   useLayoutEffect(() => {
-    const element = document.querySelector(`[title="${name}"]`);
-    isEllipsisActive(element);
+    isEllipsisActive(textRef.current);
   }, [prefix, name]);
 
   return (
@@ -122,6 +122,7 @@ function FileUploaderItem({
             className={`${prefix}--file-filename-tooltip`}>
             <button className={`${prefix}--file-filename-button`} type="button">
               <Text
+                ref={textRef}
                 as="p"
                 title={name}
                 className={`${prefix}--file-filename-button`}
@@ -133,6 +134,7 @@ function FileUploaderItem({
         </div>
       ) : (
         <Text
+          ref={textRef}
           as="p"
           title={name}
           className={`${prefix}--file-filename`}

@@ -10017,6 +10017,7 @@ Map {
     },
   },
   "unstable_Text" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
         "args": Array [
@@ -10049,6 +10050,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "unstable_TextDirection" => Object {
     "propTypes": Object {
