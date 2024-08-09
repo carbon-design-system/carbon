@@ -100,29 +100,6 @@ export const ExperimentalAutoAlign = () => (
   </div>
 );
 
-export const ExperimentalAutoAlignBoundaryTest = () => {
-  return (
-    <div
-      style={{
-        height: '900px',
-        paddingTop: '50px',
-        width: 400,
-      }}>
-      <Dropdown
-        autoAlign={true}
-        id="default"
-        titleText="Dropdown label"
-        helperText="This is some helper text"
-        initialSelectedItem={items[1]}
-        label="Option 1"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        direction="top"
-      />
-    </div>
-  );
-};
-
 export const Playground = (args) => (
   <div style={{ width: 400 }}>
     <Dropdown
