@@ -11,7 +11,6 @@ import { default as SelectableTag } from './SelectableTag';
 import { default as OperationalTag } from './OperationalTag';
 import { default as DismissibleTag } from './DismissibleTag';
 import { Asleep } from '@carbon/icons-react';
-import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Popover, PopoverContent } from '../Popover';
 import mdx from './InteractiveTag.mdx';
 import './storyInteractiveTag.scss';
