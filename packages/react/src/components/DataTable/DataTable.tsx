@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import type { MouseEvent } from 'react';
 import isEqual from 'react-fast-compare';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
 import { getNextSortState } from './state/sorting';
@@ -154,20 +155,20 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     ['id']: string;
     [key: string]: unknown;
   };
-  getSelectionProps: (getSelectionPropsArgs: {
+  getSelectionProps: (getSelectionPropsArgs?: {
     onClick?: (e: MouseEvent) => void;
     row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
     ariaLabel: string;
     'aria-label': string;
-    checked: boolean | undefined;
+    checked?: boolean | undefined;
     disabled?: boolean | undefined;
     id: string;
     indeterminate?: boolean;
     name: string;
     onSelect: (e: MouseEvent) => void;
-    radio?: boolean | null;
+    radio?: boolean | undefined;
     [key: string]: unknown;
   };
   getToolbarProps: (getToolbarPropsArgs?: { [key: string]: unknown }) => {
@@ -640,7 +641,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
         ariaLabel: t(translationKey), // TODO remove in v12
         'aria-label': t(translationKey),
         disabled: row.disabled,
-        radio: this.props.radio || null,
+        radio: this.props.radio,
       };
     }
 

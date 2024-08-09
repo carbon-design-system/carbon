@@ -46,7 +46,7 @@ interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
    * Specify whether this row is expanded or not. This helps coordinate data
    * attributes so that `TableExpandRow` and `TableExpandedRow` work together
    */
-  isExpanded: boolean;
+  isExpanded?: boolean;
 
   /**
    * Hook for when a listener initiates a request to expand the given row

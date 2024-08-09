@@ -1587,6 +1587,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "nevantan",
+      "name": "Nevan Tan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25013998?v=4",
+      "profile": "https://gitlab.com/nevantan",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

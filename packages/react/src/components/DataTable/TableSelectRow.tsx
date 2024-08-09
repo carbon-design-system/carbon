@@ -31,7 +31,7 @@ export interface TableSelectRowProps {
   /**
    * Specify whether this row is selected, or not
    */
-  checked: boolean;
+  checked?: boolean;
 
   /**
    * The CSS class names of the cell that wraps the underlying input control

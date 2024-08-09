@@ -299,6 +299,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/lluisrojass"><img src="https://avatars.githubusercontent.com/u/15043356?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Luis</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=lluisrojass" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/lharrison13"><img src="https://avatars.githubusercontent.com/u/172074450?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Luke Harrison</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=lharrison13" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/tekno0ryder"><img src="https://avatars.githubusercontent.com/u/8721803?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ahmed Alsinan</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=tekno0ryder" title="Code">💻</a></td>
+    <td align="center"><a href="https://gitlab.com/nevantan"><img src="https://avatars.githubusercontent.com/u/25013998?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nevan Tan</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=nevantan" title="Code">💻</a></td>
   </tr>
 </table>
 
