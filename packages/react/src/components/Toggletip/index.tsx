@@ -110,6 +110,7 @@ export function Toggletip<E extends ElementType = 'span'>({
   const id = useId();
   const className = cx(`${prefix}--toggletip`, customClassName, {
     [`${prefix}--toggletip--open`]: open,
+    [`${prefix}--autoalign`]: autoAlign,
   });
   const actions = {
     toggle: () => {

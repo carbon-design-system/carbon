@@ -424,6 +424,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       [`${prefix}--menu--shown`]:
         (open && !legacyAutoalign) || (position[0] >= 0 && position[1] >= 0),
       [`${prefix}--menu--with-icons`]: childContext.state.hasIcons,
+      [`${prefix}--autoalign`]: !legacyAutoalign,
     }
   );
 
