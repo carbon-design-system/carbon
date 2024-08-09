@@ -58,6 +58,10 @@ interface BaseSwitcherItemProps {
    * Specify where to open the link.
    */
   target?: HTMLAttributeAnchorTarget;
+  /**
+   * The rel property for the link.
+   */
+  rel?: string;
 }
 
 interface SwitcherItemWithAriaLabel extends BaseSwitcherItemProps {
@@ -89,6 +93,7 @@ const SwitcherItem = forwardRef<ElementType, SwitcherItemProps>(
       onKeyDown = () => {},
       href,
       target,
+      rel,
       ...rest
     } = props;
 
@@ -132,6 +137,7 @@ const SwitcherItem = forwardRef<ElementType, SwitcherItemProps>(
           }}
           href={href}
           target={target}
+          rel={rel}
           ref={forwardRef}
           {...rest}
           className={linkClassName}
@@ -183,6 +189,10 @@ SwitcherItem.propTypes = {
    * Specify where to open the link.
    */
   target: PropTypes.string,
+  /**
+   * The rel property for the link.
+   */
+  rel: PropTypes.string,
 };
 
 export default SwitcherItem;
