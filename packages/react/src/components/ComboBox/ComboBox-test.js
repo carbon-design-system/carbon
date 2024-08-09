@@ -18,7 +18,7 @@ import {
   waitForPosition,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
@@ -29,7 +29,7 @@ const prefix = 'cds';
 
 describe('ComboBox', () => {
   let mockProps;
-
+  window.HTMLElement.prototype.scrollIntoView = function () {};
   beforeEach(() => {
     mockProps = {
       id: 'test-combobox',
@@ -224,7 +224,9 @@ describe('ComboBox', () => {
   });
 
   it('should respect slug prop', async () => {
-    const { container } = render(<ComboBox {...mockProps} slug={<Slug />} />);
+    const { container } = render(
+      <ComboBox {...mockProps} slug={<AILabel />} />
+    );
     await waitForPosition();
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--slug`
