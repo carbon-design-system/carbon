@@ -7,17 +7,16 @@
 
 'use strict';
 
-module.exports = {
+export default {
   extends: [
-    require.resolve('stylelint-config-standard'),
-    require.resolve('stylelint-no-unsupported-browser-features'),
-    require.resolve('stylelint-config-idiomatic-order'),
-    require.resolve('stylelint-config-standard-scss'),
-    require.resolve('./rules/possible-errors'),
-    require.resolve('./rules/limit-language-features'),
-    require.resolve('./rules/stylistic-issues'),
-    require.resolve('./plugins/a11y'),
-    require.resolve('./plugins/prettier'),
-    require.resolve('./plugins/scss'),
+    'stylelint-config-standard',
+    'stylelint-no-unsupported-browser-features',
+    'stylelint-config-idiomatic-order',
+    'stylelint-config-standard-scss',
+    './rules/possible-errors',
+    './rules/limit-language-features',
+    './rules/stylistic-issues',
+    './plugins/a11y',
+    './plugins/scss',
   ],
 };
