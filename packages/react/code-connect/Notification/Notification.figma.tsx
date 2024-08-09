@@ -23,8 +23,6 @@ const sharedNotificationProps = {
     Success: 'success',
     Warning: 'warning',
     Error: 'error',
-    // 'Info square': 'info-square', missing from Figma
-    // 'Warning alt': 'warning-alt' missing from Figma
   }),
   hideCloseButton: figma.boolean('Close', {
     true: false,
