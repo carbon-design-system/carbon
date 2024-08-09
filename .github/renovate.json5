@@ -11,10 +11,12 @@
 
     // https://docs.renovatebot.com/presets-npm/#npmunpublishsafe
     'npm:unpublishSafe',
-
-    // https://docs.renovatebot.com/presets-schedule/#scheduledaily
-    'schedule:every weekday',
   ],
+  "schedule": [
+    "after 10pm every weekday",
+    "before 5am every weekday",
+    "every weekend"
+  ]
   vulnerabilityAlerts: {
     enabled: true,
   },
