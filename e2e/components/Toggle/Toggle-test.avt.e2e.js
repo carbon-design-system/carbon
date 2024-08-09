@@ -63,11 +63,11 @@ test.describe('@avt Toggle', () => {
         theme: 'white',
       },
     });
+    const toggleSwitch = page.getByRole('switch');
     await page.keyboard.press('Tab');
-    await expect(page.getByRole('switch')).toBeVisible();
-    await page.keyboard.press('Space');
-    page.getByText('Off');
-    await page.keyboard.press('Space');
-    page.getByText('On');
+    await expect(toggleSwitch).toBeVisible();
+    await expect(toggleSwitch).toHaveAttribute('aria-checked', 'true');
+    await page.keyboard.press('Enter');
+    await expect(toggleSwitch).toHaveAttribute('aria-checked', 'false');
   });
 });
