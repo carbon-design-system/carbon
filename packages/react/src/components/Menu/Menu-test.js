@@ -9,6 +9,7 @@ import React from 'react';
 import { Menu, MenuItem, MenuItemSelectable, MenuItemRadioGroup } from './';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { waitForPosition } from '../ListBox/test-helpers';
 
 describe('Menu', () => {
   describe('renders as expected', () => {
@@ -83,7 +84,7 @@ describe('Menu', () => {
       document.body.removeChild(el);
     });
 
-    it('warns about nested menus in basic mode', () => {
+    it('warns about nested menus in basic mode', async () => {
       const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       render(
@@ -93,14 +94,14 @@ describe('Menu', () => {
           </MenuItem>
         </Menu>
       );
-
+      await waitForPosition();
       expect(spy).toHaveBeenCalled();
       spy.mockRestore();
     });
   });
 
   describe('Submenu behavior', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       jest.useFakeTimers();
       render(
         <Menu open>
@@ -109,6 +110,7 @@ describe('Menu', () => {
           </MenuItem>
         </Menu>
       );
+      await waitForPosition();
     });
     afterEach(() => {
       jest.useRealTimers();
