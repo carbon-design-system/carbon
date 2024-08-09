@@ -15,7 +15,6 @@ import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Popover, PopoverContent } from '../Popover';
 import mdx from './InteractiveTag.mdx';
 import './storyInteractiveTag.scss';
-import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
 
 export default {
