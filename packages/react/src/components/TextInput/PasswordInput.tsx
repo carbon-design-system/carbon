@@ -242,6 +242,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     placeholder,
     type: inputType,
     className: textInputClasses,
+    readOnly,
     ref,
     ...rest,
   };
@@ -250,6 +251,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     `${prefix}--text-input-wrapper`,
     `${prefix}--password-input-wrapper`,
     {
+      [`${prefix}--text-input-wrapper--readonly`]: readOnly,
       [`${prefix}--text-input-wrapper--light`]: light,
       [`${prefix}--text-input-wrapper--inline`]: inline,
       [`${prefix}--text-input--fluid`]: isFluid,
@@ -362,7 +364,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
         <button
           type="button"
           className={passwordVisibilityToggleClasses}
-          disabled={disabled}
+          disabled={disabled || readOnly}
           onClick={handleTogglePasswordVisibility}>
           {passwordVisibilityIcon}
         </button>
@@ -447,6 +449,11 @@ PasswordInput.propTypes = {
    * Specify whether the control is currently invalid
    */
   invalid: PropTypes.bool,
+
+  /**
+   * Whether the PasswordInput should be read-only
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Provide the text that is displayed when the control is in an invalid state
