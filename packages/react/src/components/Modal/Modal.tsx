@@ -215,6 +215,11 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Modal` component
    */
   slug?: ReactNode;
+
+  /**
+   * Specify if the Modal has any nested Modals.
+   */
+  isNested?: boolean;
 }
 
 const Modal = React.forwardRef(function Modal(
@@ -250,6 +255,7 @@ const Modal = React.forwardRef(function Modal(
     loadingIconDescription,
     onLoadingSuccess = noopFn,
     slug,
+    isNested,
     ...rest
   }: ModalProps,
   ref: React.LegacyRef<HTMLDivElement>
@@ -283,7 +289,8 @@ const Modal = React.forwardRef(function Modal(
   }
 
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
-    evt.stopPropagation();
+    isNested && evt.stopPropagation();
+
     if (open) {
       if (match(evt, keys.Escape)) {
         onRequestClose(evt);
@@ -313,7 +320,8 @@ const Modal = React.forwardRef(function Modal(
 
   function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
     const target = evt.target as Node;
-    evt.stopPropagation();
+    isNested && evt.stopPropagation();
+
     if (
       !preventCloseOnClickOutside &&
       !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
@@ -664,6 +672,11 @@ Modal.propTypes = {
    * Specify whether or not the Modal content should have any inner padding.
    */
   isFullWidth: PropTypes.bool,
+
+  /**
+   * Specify if the Modal has any nested Modals.
+   */
+  isNested: PropTypes.bool,
 
   /**
    * Provide a ref to return focus to once the modal is closed.
