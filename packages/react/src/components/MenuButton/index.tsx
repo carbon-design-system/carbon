@@ -80,6 +80,17 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
    * Specify the tabIndex of the button.
    */
   tabIndex?: number;
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   */
+  menuTarget?: Element;
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   * (Deprecated props)
+   */
+  target?: Element;
 }
 
 const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
@@ -93,6 +104,8 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       size = 'lg',
       menuAlignment = 'bottom',
       tabIndex = 0,
+      menuTarget,
+      target,
       ...rest
     },
     forwardRef
@@ -191,7 +204,9 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
           mode="basic"
           size={size}
           open={open}
-          onClose={handleClose}>
+          onClose={handleClose}
+          menuTarget={menuTarget}
+          target={target}>
           {children}
         </Menu>
       </div>
@@ -250,6 +265,17 @@ MenuButton.propTypes = {
    */
   // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   tabIndex: PropTypes.number,
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   */
+  menuTarget: PropTypes.instanceOf(Element),
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   * Deprecated props
+   */
+  target: PropTypes.instanceOf(Element),
 };
 
 export { MenuButton };

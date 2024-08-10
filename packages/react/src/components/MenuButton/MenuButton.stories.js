@@ -161,4 +161,14 @@ Playground.argTypes = {
       disable: true,
     },
   },
+  menuTarget: {
+    table: {
+      disable: true,
+    },
+  },
+  target: {
+    table: {
+      disable: true,
+    },
+  },
 };
