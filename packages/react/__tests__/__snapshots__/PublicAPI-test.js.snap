@@ -1278,6 +1278,16 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "downshiftActions": Object {
+        "args": Array [
+          Object {
+            "current": Object {
+              "type": "any",
+            },
+          },
+        ],
+        "type": "exact",
+      },
       "downshiftProps": Object {
         "type": "object",
       },
@@ -7719,6 +7729,9 @@ Map {
       },
       "onKeyDown": Object {
         "type": "func",
+      },
+      "rel": Object {
+        "type": "string",
       },
       "tabIndex": Object {
         "type": "number",
