@@ -58,7 +58,7 @@ export type TreeViewProps = {
    * Specify the size of the tree from a list of available sizes.
    */
   size?: 'xs' | 'sm';
-} & React.HTMLAttributes<HTMLUListElement>;
+} & Omit<React.HTMLAttributes<HTMLUListElement>, 'onSelect'>;
 
 type TreeViewComponent = {
   (props: TreeViewProps): JSX.Element;
