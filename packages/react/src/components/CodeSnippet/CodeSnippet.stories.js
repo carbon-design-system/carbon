@@ -142,6 +142,14 @@ export const Playground = (args) => (
   </CodeSnippet>
 );
 
+export const ExperimentalAutoAlign = (args) => (
+  <div style={{ height: 1000, width: 3000, marginLeft: 200, marginTop: 100 }}>
+    <CodeSnippet type="single" feedback="Copied to clipboard" autoAlign>
+      {'yarn add @carbon/react'}
+    </CodeSnippet>
+  </div>
+);
+
 Playground.argTypes = {
   ['aria-label']: {
     table: {

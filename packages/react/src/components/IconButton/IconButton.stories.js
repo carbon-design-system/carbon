@@ -44,6 +44,14 @@ export const Default = () => (
   </div>
 );
 
+export const ExperimentalAutoAlign = () => (
+  <div style={{ width: 2000, height: 1500, margin: '3rem' }}>
+    <IconButton label="label" autoAlign>
+      <Edit />
+    </IconButton>
+  </div>
+);
+
 const PlaygroundStory = (props) => {
   const { align, defaultOpen, disabled, kind, label, size } = props;
   return (
