@@ -2033,7 +2033,7 @@ __metadata:
     "@carbon/styles": "npm:^1.62.0"
     "@carbon/test-utils": "npm:^10.30.0"
     "@carbon/themes": "npm:^11.38.0"
-    "@figma/code-connect": "npm:^1.0.3"
+    "@figma/code-connect": "npm:^1.0.4"
     "@floating-ui/react": "npm:^0.26.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@rollup/plugin-babel": "npm:^6.0.0"
@@ -3089,9 +3089,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/code-connect@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "@figma/code-connect@npm:1.0.3"
+"@figma/code-connect@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@figma/code-connect@npm:1.0.4"
   dependencies:
     "@babel/core": "npm:^7.24.7"
     "@babel/generator": "npm:^7.24.7"
@@ -3119,7 +3119,7 @@ __metadata:
     zod-validation-error: "npm:^3.2.0"
   bin:
     figma: bin/figma
-  checksum: 10/2a9bb9b5e8e6db5a935796f3664426b83a8efd01afe783ea5bf75d553a3f487e6ad509163ca7699e218020d136e9c634122b17039ab0dff65b3638de664769a0
+  checksum: 10/a412e637748513ae64888032c62856a34680581ad4bfb03e4b03a37eee41b13b9b3d43df1cb74c2d9ec8dcf0c6ac82b72a22da5655e21f91a832e5b5bef2adcf
   languageName: node
   linkType: hard
 
