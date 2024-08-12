@@ -70,3 +70,18 @@ figma.connect(
     ),
   }
 );
+
+// vertical tabs items
+figma.connect(
+  Tab,
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=75769-1965&t=PaZ3ZnEGQGMgXgBW-4',
+  {
+    props: {
+      label: figma.string('Text'),
+      disabled: figma.enum('State', {
+        Disabled: true,
+      }),
+    },
+    example: ({ label, disabled }) => <Tab disabled={disabled}>{label}</Tab>,
+  }
+);
