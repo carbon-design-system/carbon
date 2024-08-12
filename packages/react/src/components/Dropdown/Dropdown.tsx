@@ -6,7 +6,6 @@
  */
 
 import React, {
-  useRef,
   useContext,
   useState,
   FocusEvent,
@@ -48,6 +47,7 @@ import {
   autoUpdate,
   size as floatingSize,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
 
 const { ItemMouseMove, MenuMouseLeave } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
@@ -274,7 +274,7 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
-    const { refs, floatingStyles } = useFloating(
+    const { refs, floatingStyles, middlewareData } = useFloating(
       autoAlign
         ? {
             placement: direction,
@@ -295,6 +295,7 @@ const Dropdown = React.forwardRef(
                 },
               }),
               flip(),
+              hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
@@ -303,9 +304,15 @@ const Dropdown = React.forwardRef(
 
     useEffect(() => {
       if (autoAlign) {
-        Object.keys(floatingStyles).forEach((style) => {
+        const updatedFloatingStyles = {
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible',
+        };
+        Object.keys(updatedFloatingStyles).forEach((style) => {
           if (refs.floating.current) {
-            refs.floating.current.style[style] = floatingStyles[style];
+            refs.floating.current.style[style] = updatedFloatingStyles[style];
           }
         });
       }
@@ -495,7 +502,7 @@ const Dropdown = React.forwardRef(
         getMenuProps({
           ref: autoAlign ? refs.setFloating : null,
         }),
-      [autoAlign]
+      [autoAlign, getMenuProps, refs.setFloating]
     );
 
     // Slug is always size `mini`
