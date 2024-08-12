@@ -304,6 +304,9 @@ Filterable.argTypes = {
   onChange: {
     action: 'onChange',
   },
+  onMenuChange: {
+    action: 'onMenuChange',
+  },
 };
 
 export const WithLayerMultiSelect = () => (
