@@ -17,6 +17,7 @@ import React, {
   RefObject,
 } from 'react';
 import Search, { SearchProps } from '../Search';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
@@ -150,7 +151,7 @@ const TableToolbarSearch = ({
 
   const expanded = controlled ? expandedProp : expandedState;
   const [value, setValue] = useState(defaultValue || '');
-  const uniqueId = useId();
+  const uniqueId = useId('table-toolbar-search');
   const [focusTarget, setFocusTarget] = useState<RefObject<HTMLElement> | null>(
     null
   );
@@ -213,11 +214,7 @@ const TableToolbarSearch = ({
       disabled={disabled}
       className={searchClasses}
       value={value}
-      id={
-        typeof id !== 'undefined'
-          ? id
-          : `table-toolbar-search-${uniqueId.toString()}`
-      }
+      id={typeof id !== 'undefined' ? id : uniqueId}
       labelText={labelText || t('carbon.table.toolbar.search.label')}
       placeholder={placeholder || t('carbon.table.toolbar.search.placeholder')}
       onChange={onChange}

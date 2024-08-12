@@ -139,7 +139,12 @@ export interface FilterableMultiSelectProps<ItemType>
   disabled?: boolean;
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
    */
   downshiftProps?: UseMultipleSelectionProps<ItemType>;
 
@@ -409,10 +414,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     setPrevOpen(open);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const sortedItems = sortItems!(
-    filterItems(items, { itemToString, inputValue }),
-    {
+  // memoize sorted items to reduce unnecessary expensive sort on rerender
+  const sortedItems = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return sortItems!(filterItems(items, { itemToString, inputValue }), {
       selectedItems: {
         top: controlledSelectedItems,
         fixed: [],
@@ -421,8 +426,17 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       itemToString,
       compareItems,
       locale,
-    }
-  );
+    });
+  }, [
+    items,
+    inputValue,
+    controlledSelectedItems,
+    topItems,
+    selectionFeedback,
+    itemToString,
+    compareItems,
+    locale,
+  ]);
 
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
@@ -475,9 +489,16 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   }, [controlledSelectedItems, isOpen, setTopItems]);
 
+  const validateHighlightFocus = () => {
+    if (controlledSelectedItems.length > 0) {
+      setHighlightedIndex(0);
+    }
+  };
+
   function handleMenuChange(forceIsOpen: boolean): void {
     const nextIsOpen = forceIsOpen ?? !isOpen;
     setIsOpen(nextIsOpen);
+    validateHighlightFocus();
     if (onMenuChange) {
       onMenuChange(nextIsOpen);
     }
@@ -496,8 +517,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   } = useCombobox<ItemType>({
     isOpen,
     items: sortedItems,
+    // defaultHighlightedIndex: 0, // after selection, highlight the first item.
     itemToString,
-    defaultHighlightedIndex: 0, // after selection, highlight the first item.
     id,
     labelId,
     menuId,
@@ -508,7 +529,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       return (item as any).disabled;
     },
   });
-
   function stateReducer(state, actionAndChanges) {
     const { type, props, changes } = actionAndChanges;
     const { highlightedIndex } = changes;
@@ -536,20 +556,30 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return changes;
       case FunctionToggleMenu:
       case ToggleButtonClick:
+        validateHighlightFocus();
         if (changes.isOpen && !changes.selectedItem) {
-          return { ...changes, highlightedIndex: 0 };
+          return { ...changes };
         }
-        return changes;
+
+        return { ...changes, highlightedIndex: null };
       case InputChange:
         if (onInputValueChange) {
           onInputValueChange(changes.inputValue);
         }
         setInputValue(changes.inputValue ?? '');
         setIsOpen(true);
-        return changes;
+        return { ...changes, highlightedIndex: 0 };
 
       case InputClick:
-        return { ...changes, isOpen: false };
+        validateHighlightFocus();
+        if (changes.isOpen && !changes.selectedItem) {
+          return { ...changes };
+        }
+        return {
+          ...changes,
+          isOpen: false,
+          highlightedIndex: null,
+        };
       case MenuMouseLeave:
         return { ...changes, highlightedIndex: state.highlightedIndex };
       case InputKeyDownArrowUp:
@@ -590,7 +620,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   }
 
   const { getDropdownProps } = useMultipleSelection<ItemType>({
-    ...downshiftProps,
     activeIndex: highlightedIndex,
     initialSelectedItems,
     selectedItems: controlledSelectedItems,
@@ -606,6 +635,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         }
       }
     },
+    ...downshiftProps,
   });
 
   useEffect(() => {
@@ -629,7 +659,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
 
   // Slug is always size `mini`
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'mini',
     });
@@ -956,7 +986,12 @@ FilterableMultiSelect.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
    */
   // @ts-ignore
   downshiftProps: PropTypes.shape(Downshift.propTypes),

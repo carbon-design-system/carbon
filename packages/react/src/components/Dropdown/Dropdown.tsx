@@ -6,7 +6,6 @@
  */
 
 import React, {
-  useRef,
   useContext,
   useState,
   FocusEvent,
@@ -48,6 +47,7 @@ import {
   autoUpdate,
   size as floatingSize,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
 
 const { ItemMouseMove, MenuMouseLeave } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
@@ -109,7 +109,12 @@ export interface DropdownProps<ItemType>
   disabled?: boolean;
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
    */
   downshiftProps?: Partial<UseSelectProps<ItemType>>;
 
@@ -269,7 +274,7 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
-    const { refs, floatingStyles } = useFloating(
+    const { refs, floatingStyles, middlewareData } = useFloating(
       autoAlign
         ? {
             placement: direction,
@@ -290,6 +295,7 @@ const Dropdown = React.forwardRef(
                 },
               }),
               flip(),
+              hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
@@ -298,9 +304,15 @@ const Dropdown = React.forwardRef(
 
     useEffect(() => {
       if (autoAlign) {
-        Object.keys(floatingStyles).forEach((style) => {
+        const updatedFloatingStyles = {
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible',
+        };
+        Object.keys(updatedFloatingStyles).forEach((style) => {
           if (refs.floating.current) {
-            refs.floating.current.style[style] = floatingStyles[style];
+            refs.floating.current.style[style] = updatedFloatingStyles[style];
           }
         });
       }
@@ -310,7 +322,6 @@ const Dropdown = React.forwardRef(
     const { isFluid } = useContext(FormContext);
 
     const selectProps: UseSelectProps<ItemType> = {
-      ...downshiftProps,
       items,
       itemToString,
       initialSelectedItem,
@@ -334,6 +345,7 @@ const Dropdown = React.forwardRef(
           }
         }
       },
+      ...downshiftProps,
     };
     const dropdownInstanceId = useId();
 
@@ -490,12 +502,12 @@ const Dropdown = React.forwardRef(
         getMenuProps({
           ref: autoAlign ? refs.setFloating : null,
         }),
-      [autoAlign]
+      [autoAlign, getMenuProps, refs.setFloating]
     );
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });
@@ -659,7 +671,12 @@ Dropdown.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
    */
   downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
 
