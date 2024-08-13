@@ -8,21 +8,22 @@
 // @ts-nocheck
 import React from 'react';
 import {
-  unstable__FluidDropdown as FluidDropdown,
+  unstable__FluidMultiSelect as FluidMultiSelect,
   unstable__FluidDropdownSkeleton as FluidDropdownSkeleton,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(
-  FluidDropdown,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14505-302528&t=4Ath5JqwaYJZxznq-4',
+  FluidMultiSelect,
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14530-300220&t=aG4cJRjteQHcd71k-4',
   {
     props: {
-      titleText: figma.string('Label text'),
-      label: figma.string('Prompt text'),
-      readOnly: figma.enum('State', {
-        'Read-only': true,
+      titleText: figma.boolean('Show Tooltip', {
+        // true: figma.string('Label text') + figma.children('Tooltip'), //https://github.com/figma/code-connect/issues/92
+        true: figma.string('Label text'),
+        false: figma.string('Label text'),
       }),
+      label: figma.string('Prompt text'),
       disabled: figma.enum('State', {
         Disabled: true,
       }),
@@ -34,6 +35,9 @@ figma.connect(
         Warning: true,
       }),
       warnText: figma.string('Warning text'),
+      readOnly: figma.enum('State', {
+        'Read-only': true,
+      }),
     },
     example: ({ ...props }) => {
       const items = [
@@ -48,7 +52,7 @@ figma.connect(
       ];
 
       return (
-        <FluidDropdown
+        <FluidMultiSelect
           {...props}
           id="id"
           initialSelectedItem={items[0]}
@@ -61,7 +65,7 @@ figma.connect(
 
 figma.connect(
   FluidDropdownSkeleton,
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=14032-290635&mode=dev',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14530-300220&t=aG4cJRjteQHcd71k-4',
   {
     variant: { State: 'Skeleton' },
     example: () => {
