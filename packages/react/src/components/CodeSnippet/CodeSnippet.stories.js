@@ -144,7 +144,11 @@ export const Playground = (args) => (
 
 export const ExperimentalAutoAlign = (args) => (
   <div style={{ height: 1000, width: 3000, marginLeft: 200, marginTop: 100 }}>
-    <CodeSnippet type="single" feedback="Copied to clipboard" autoAlign>
+    <CodeSnippet
+      type="single"
+      feedback="Copied to clipboard"
+      align="top"
+      autoAlign>
       {'yarn add @carbon/react'}
     </CodeSnippet>
   </div>
