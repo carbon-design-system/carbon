@@ -227,9 +227,4 @@ Playground.argTypes = {
       disable: true,
     },
   },
-  target: {
-    table: {
-      disable: true,
-    },
-  },
 };

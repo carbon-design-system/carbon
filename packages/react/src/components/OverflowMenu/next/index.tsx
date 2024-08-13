@@ -212,7 +212,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
           x={x}
           y={y}
           label={label}
-          menuTarget={menuTarget}>
+          target={menuTarget}>
           {children}
         </Menu>
       </div>

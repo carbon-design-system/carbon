@@ -312,31 +312,4 @@ export const upgrades = [
       },
     ],
   },
-  {
-    name: 'update-menu-target-prop',
-    description: 'Update Menu`s target prop to menuTarget',
-    migrate: async (options) => {
-      const transform = path.join(TRANSFORM_DIR, 'update-menu-target-prop.js');
-      const paths =
-        Array.isArray(options.paths) && options.paths.length > 0
-          ? options.paths
-          : await glob(['**/*.js', '**/*.jsx'], {
-              cwd: options.workspaceDir,
-              ignore: [
-                '**/es/**',
-                '**/lib/**',
-                '**/umd/**',
-                '**/node_modules/**',
-                '**/storybook-static/**',
-              ],
-            });
-
-      await run({
-        dry: !options.write,
-        transform,
-        paths,
-        verbose: options.verbose,
-      });
-    },
-  },
 ];

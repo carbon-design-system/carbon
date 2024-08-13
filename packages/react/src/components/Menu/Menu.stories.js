@@ -45,13 +45,10 @@ export const Playground = (args) => {
   const selectableOnChange = action('onChange (MenuItemSelectable)');
   const radioOnChange = action('onChange (MenuItemRadioGroup)');
 
-  const menuTarget = document.getElementById('storybook-root');
+  const target = document.getElementById('storybook-root');
 
   return (
-    <Menu
-      {...args}
-      menuTarget={menuTarget}
-      x={document?.dir === 'rtl' ? 250 : 0}>
+    <Menu {...args} target={target} x={document?.dir === 'rtl' ? 250 : 0}>
       <MenuItem label="Share with">
         <MenuItemRadioGroup
           label="Share with"
@@ -97,11 +94,6 @@ Playground.args = {
 };
 
 Playground.argTypes = {
-  menuTarget: {
-    table: {
-      disable: true,
-    },
-  },
   target: {
     table: {
       disable: true,
