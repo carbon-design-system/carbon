@@ -49,13 +49,64 @@ next element.
 <Combobox disabled />
 ```
 
-## Combobox `downshiftProps`
+## Combobox uses Downshift
 
 Our `Combobox` component utilizes [Downshift](https://www.downshift-js.com/)
 under the hood to help provide complex yet accessible custom dropdown
-components. We provide access to the built in Downshift features with this prop.
-For more information, checkout the Downshift prop
-[documentation](https://www.downshift-js.com/downshift#props-used-in-examples)
+components.
+
+### `downshiftProps`
+
+`downshiftProps` is made available as a passthrough to the underlying downshift
+`useCombobox` hook.
+
+**Use with caution:** anything you define here overrides the components'
+internal handling of that prop. Downshift internals are subject to change, and
+in some cases they can not be shimmed to shield you from potentially breaking
+changes.
+
+For more information, checkout the Downshift `useCombobox` props
+[documentation](https://github.com/downshift-js/downshift/tree/v9.0.7/src/hooks/useCombobox#basic-props)
+
+### Combobox `downshiftActions`
+
+The downshift action methods are made available through the `downshiftActions`
+prop. While not recommended, this prop allows you to modify downshift's internal
+state without having to fully control the component.
+
+**Use with caution:** calling these actions modifies the internal state of
+downshift. It may conflict with or override the state management used within
+Combobox. Downshift APIs and internals are subject to change, and in some cases
+they can not be shimmed by Carbon to shield you from potentially breaking
+changes.
+
+#### `downshiftActions` Usage
+
+Provide a ref that will be mutated to contain an object of downshift action
+functions. These can be called to change the internal state of the downshift
+useCombobox hook.
+
+```
+const downshiftActions = useRef();
+
+return (
+  <ComboBox
+    ...
+    downshiftActions={downshiftActions}
+    downshiftProps={{
+      onStateChange: (changes) => {
+        if (changes.selectedItem === null) {
+          downshiftActions?.current?.openMenu?.();
+          return;
+        }
+      },
+    }}
+  />
+);
+```
+
+For more information, checkout the Downshift `useCombobox` action functions
+[documentation](https://github.com/downshift-js/downshift/tree/v9.0.7/src/hooks/useCombobox#actions)
 
 ## Placeholders and Labeling
 
