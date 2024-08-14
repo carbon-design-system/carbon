@@ -902,6 +902,33 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
   }, [value, prefix]); //eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    if (!calendarRef.current || !startInputField.current) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (
+        match(event, keys.Tab) &&
+        !event.shiftKey &&
+        document.activeElement === endInputField.current &&
+        calendarRef.current.isOpen
+      ) {
+        calendarRef.current.close();
+        // Remove focus from endDate calendar input
+        document.activeElement instanceof HTMLElement && // this is to fix the TS warning
+          document?.activeElement?.blur();
+
+        onCalendarClose(
+          calendarRef.current.selectedDates,
+          '',
+          calendarRef.current,
+          event
+        );
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown, true);
+    return () => document.removeEventListener('keydown', handleKeyDown, true);
+  }, [calendarRef, startInputField, endInputField, onCalendarClose]);
+
   let fluidError;
   if (isFluid) {
     if (invalid) {
