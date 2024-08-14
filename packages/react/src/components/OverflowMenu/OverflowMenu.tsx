@@ -732,7 +732,8 @@ class OverflowMenu extends React.Component<
             id={id}
             ref={mergeRefs(this._triggerRef, ref)}
             size={size}
-            label={iconDescription}>
+            label={iconDescription}
+            kind="ghost">
             <IconElement {...iconProps} />
           </IconButton>
           {open && this.state.hasMountedTrigger && wrappedMenuBody}
