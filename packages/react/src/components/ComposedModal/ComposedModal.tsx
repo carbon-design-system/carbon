@@ -410,7 +410,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     // Slug is always size `sm`
     let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'sm',
       });

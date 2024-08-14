@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { act } from 'react';
 import { OverflowMenu } from '.';
 import { MenuItem } from '../../Menu';
 import { render, screen } from '@testing-library/react';
@@ -47,10 +47,8 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
         </MenuItem>
       </OverflowMenu>
     );
-
     await userEvent.type(screen.getByRole('button'), 'enter');
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-
     // eslint-disable-next-line testing-library/no-node-access
     const ul = document.querySelector('ul');
     expect(ul).toBeInTheDocument();
@@ -86,6 +84,22 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
     expect(container.firstChild).toHaveAttribute('id', 'custom-id');
   });
 
+  it('should always use button kind=ghost', () => {
+    render(
+      <OverflowMenu>
+        <MenuItem label="item" className="test-child">
+          one
+        </MenuItem>
+        <MenuItem label="item" className="test-child">
+          two
+        </MenuItem>
+      </OverflowMenu>
+    );
+
+    expect(screen.getByRole('button')).not.toHaveClass('cds--btn--primary');
+    expect(screen.getByRole('button')).toHaveClass('cds--btn--ghost');
+  });
+
   it('should close menu on outside click', async () => {
     render(
       <OverflowMenu>
@@ -99,7 +113,11 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
     );
     await userEvent.type(screen.getByRole('button'), 'enter');
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    await userEvent.click(document.body);
+
+    await act(async () => {
+      await userEvent.click(document.body);
+    });
+
     expect(screen.getByRole('button')).toHaveAttribute(
       'aria-expanded',
       'false'

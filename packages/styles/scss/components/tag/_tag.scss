@@ -267,6 +267,11 @@
     &:hover {
       cursor: not-allowed;
     }
+
+    .#{$prefix}--tag__label {
+      background-color: $layer;
+      color: $text-disabled;
+    }
   }
 
   .#{$prefix}--tag--selectable.#{$prefix}--tag--disabled,
