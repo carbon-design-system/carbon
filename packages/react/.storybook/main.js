@@ -118,6 +118,17 @@ const config = {
     // Merge custom configuration into the default config
     const { mergeConfig } = await import('vite');
 
+    if (configType === 'DEVELOPMENT') {
+      config.define = {
+        __DEV__: 'true',
+      };
+    }
+    if (configType === 'PRODUCTION') {
+      config.define = {
+        __DEV__: 'false',
+      };
+    }
+
     return mergeConfig(config, {
       esbuild: {
         include: /\.[jt]sx?$/,
@@ -131,16 +142,16 @@ const config = {
           },
         },
       },
-      plugins: [
-        react({
-          babel: {
-            // This instructs Vite to use Babel for the necessary transforms,
-            // including converting __DEV__ to true/false in our code.
-            babelrc: true,
-            configFile: true,
-          },
-        }),
-      ],
+      // plugins: [
+      //   react({
+      //     babel: {
+      //       // This instructs Vite to use Babel for the necessary transforms,
+      //       // including converting __DEV__ to true/false in our code.
+      //       babelrc: true,
+      //       configFile: true,
+      //     },
+      //   }),
+      // ],
     });
   },
   docs: {
