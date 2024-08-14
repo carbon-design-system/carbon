@@ -10590,8 +10590,7 @@ __metadata:
   resolution: "codesandbox-styles@workspace:examples/codesandbox-styles"
   dependencies:
     "@carbon/styles": "npm:^1.63.0-rc.0"
-     sass: "npm:^1.77.7"
-
+    sass: "npm:^1.77.7"
     vite: "npm:^4.3.8"
   languageName: unknown
   linkType: soft
