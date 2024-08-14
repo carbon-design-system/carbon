@@ -345,15 +345,23 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     function handleStepperClick(event, direction) {
       if (inputRef.current) {
-        direction === 'up'
-          ? inputRef.current.stepUp()
-          : inputRef.current.stepDown();
-
+        const currentValue = Number(inputRef.current.value);
+        let newValue =
+          direction === 'up' ? currentValue + step : currentValue - step;
+        if (min !== undefined) {
+          newValue = Math.max(newValue, min);
+        }
+        if (max !== undefined) {
+          newValue = Math.min(newValue, max);
+        }
+        const currentInputValue = inputRef.current
+          ? inputRef.current.value
+          : '';
         const state = {
           value:
-            allowEmpty && inputRef.current.value === ''
+            allowEmpty && currentInputValue === '' && step === 0
               ? ''
-              : Number(inputRef.current.value),
+              : newValue,
           direction: direction,
         };
         setValue(state.value);
