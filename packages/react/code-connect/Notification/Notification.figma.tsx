@@ -23,8 +23,6 @@ const sharedNotificationProps = {
     Success: 'success',
     Warning: 'warning',
     Error: 'error',
-    // 'Info square': 'info-square', missing from Figma
-    // 'Warning alt': 'warning-alt' missing from Figma
   }),
   hideCloseButton: figma.boolean('Close', {
     true: false,
@@ -89,12 +87,13 @@ figma.connect(
     variant: { Type: 'Inline short' },
 
     props: sharedNotificationProps,
-    example: ({ title, kind, subtitle, hideCloseButton }) => (
+    example: ({ title, kind, subtitle, hideCloseButton, lowContrast }) => (
       <InlineNotification
         title={title}
         kind={kind}
         subtitle={subtitle}
         hideCloseButton={hideCloseButton}
+        lowContrast={lowContrast}
       />
     ),
   }
