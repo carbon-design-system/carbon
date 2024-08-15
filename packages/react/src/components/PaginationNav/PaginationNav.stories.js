@@ -28,6 +28,7 @@ export const Playground = (args) => (
 );
 
 Playground.args = {
+  size: 'lg',
   loop: false,
   itemsShown: 10,
   page: 0,
@@ -36,6 +37,10 @@ Playground.args = {
 };
 
 Playground.argTypes = {
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
   loop: {
     control: {
       type: 'boolean',
