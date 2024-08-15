@@ -284,7 +284,7 @@ export const ExplainabilityPopover = (args) => {
   );
 };
 
-Callout.argTypes = {
+ExplainabilityPopover.argTypes = {
   showSlugActions: {
     control: {
       type: 'boolean',
