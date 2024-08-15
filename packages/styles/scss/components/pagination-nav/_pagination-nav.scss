@@ -164,7 +164,7 @@
 
   .#{$prefix}--pagination-nav__select-icon {
     position: absolute;
-    inset-block-start: calc(50% - #{$select-icon-top-position * 0.5});
+    inset-block-start: calc(50% - #{$select-icon-top-position * 0.25});
     inset-inline-start: calc(50% - #{$select-icon-top-position * 0.5});
     pointer-events: none;
   }
