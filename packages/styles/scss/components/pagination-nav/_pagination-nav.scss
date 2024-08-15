@@ -27,9 +27,9 @@
 /// @param {Color} $background-color-active [initial]
 /// @param {Number} $font-weight [400]
 /// @param {Number} $item-padding [0]
-/// @param {Number} $button-min-width [$spacing-09]
-/// @param {Value} $button-padding [1.0625rem $spacing-02]
-/// @param {Number} $button-direction-size [$spacing-09]
+/// @param {Number} $button-min-width [$spacing-09] TODO: remove in v12
+/// @param {Value} $button-padding [1.0625rem $spacing-02] TODO: remove in v12
+/// @param {Number} $button-direction-size [$spacing-09] TODO: remove in v12
 /// @param {Number} $select-icon-top-position [$spacing-05]
 /// @param {Number} $select-icon-left-position [$spacing-05]
 @mixin pagination-nav(
@@ -123,6 +123,7 @@
     }
   }
 
+  // TODO: remove in v12
   .#{$prefix}--pagination-nav__page--direction {
     display: flex;
     align-items: center;
