@@ -243,7 +243,7 @@ export const Default = () => (
   </>
 );
 
-export const Callout = (args) => {
+export const ExplainabilityPopover = (args) => {
   const { showSlugActions = true } = args;
 
   return (
