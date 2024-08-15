@@ -134,6 +134,9 @@ const config = {
         include: /\.[jt]sx?$/,
         exclude: [],
         loader: 'tsx',
+        define: {
+          __DEV__: 'false',
+        },
       },
       optimizeDeps: {
         esbuildOptions: {
@@ -142,16 +145,15 @@ const config = {
           },
         },
       },
-      // plugins: [
-      //   react({
-      //     babel: {
-      //       // This instructs Vite to use Babel for the necessary transforms,
-      //       // including converting __DEV__ to true/false in our code.
-      //       babelrc: true,
-      //       configFile: true,
-      //     },
-      //   }),
-      // ],
+      plugins: [
+        react({
+          babel: {
+            // This instructs Vite to use Babel for the necessary transforms,
+            babelrc: true,
+            configFile: true,
+          },
+        }),
+      ],
     });
   },
   docs: {
