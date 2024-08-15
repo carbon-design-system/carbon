@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict'; 
+'use strict';
 
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
