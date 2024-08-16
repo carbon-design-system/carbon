@@ -12,7 +12,6 @@ import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
 import React, {
   useCallback,
-  useLayoutEffect,
   useState,
   useRef,
   useEffect,
@@ -1214,13 +1213,15 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
   useEvent(dismissIconRef, 'mouseover', onDismissIconMouseEnter);
   useEvent(dismissIconRef, 'mouseleave', onDismissIconMouseLeave);
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     function handler() {
-      const elementTabId = document.getElementById(`${id}`);
-      const newElement = elementTabId?.getElementsByClassName(
-        `${prefix}--tabs__nav-item-label`
-      )[0];
-      isEllipsisActive(newElement);
+      const elementTabId = document.getElementById(`${id}`) || tabRef.current;
+      if (elementTabId?.closest(`.${prefix}--tabs--vertical`)) {
+        const newElement = elementTabId?.getElementsByClassName(
+          `${prefix}--tabs__nav-item-label`
+        )[0];
+        isEllipsisActive(newElement);
+      }
     }
     handler();
     window.addEventListener('resize', handler);
@@ -1681,7 +1682,7 @@ function TabPanels({ children }: TabPanelsProps) {
   const refs = useRef<(HTMLDivElement | null)[]>([]);
   const hiddenStates = useRef<boolean[]>([]);
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     const tabContainer = refs.current[0]?.previousElementSibling;
     const isVertical = tabContainer?.classList.contains(
       `${prefix}--tabs--vertical`

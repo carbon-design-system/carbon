@@ -1012,7 +1012,7 @@
     background-attachment: fixed;
   }
 
-  tr.#{$prefix}--parent-row.cds--data-table--selected.#{$prefix}--data-table--slug-row,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
   .#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
   tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row
     + .#{$prefix}--expandable-row {
@@ -1031,7 +1031,7 @@
     border-block-end-color: $border-subtle;
   }
 
-  tr.#{$prefix}--expandable-row.cds--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
+  tr.#{$prefix}--expandable-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
     > td:not(.#{$prefix}--table-expand):not(
       .#{$prefix}--table-column-checkbox
     ):not(.#{$prefix}--table-column-slug) {

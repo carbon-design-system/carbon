@@ -10,7 +10,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import Tag from './';
 import DismissibleTag from './DismissibleTag';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 describe('Tag', () => {
   describe('automated accessibility testing', () => {
@@ -57,7 +57,7 @@ describe('Tag', () => {
   });
 
   it('should respect slug prop', () => {
-    render(<Tag type="red" slug={<Slug />} />);
+    render(<Tag type="red" slug={<AILabel />} />);
 
     expect(
       screen.getByRole('button', { name: 'AI - Show information' })

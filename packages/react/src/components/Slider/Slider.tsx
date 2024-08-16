@@ -29,6 +29,7 @@ import {
   UpperHandle,
   UpperHandleFocus,
 } from './SliderHandles';
+import { TranslateWithId } from '../../types/common';
 
 const ThumbWrapper = ({
   hasTooltip = false,
@@ -78,16 +79,18 @@ ThumbWrapper.propTypes = {
 
 const translationIds = {
   autoCorrectAnnouncement: 'carbon.slider.auto-correct-announcement',
-};
+} as const;
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = (typeof translationIds)[keyof typeof translationIds];
 
 function translateWithId(
-  translationId,
+  translationId: TranslationKey,
   translationState?: { correctedValue?: string }
 ) {
-  if (
-    translationId === translationIds.autoCorrectAnnouncement &&
-    translationState?.correctedValue
-  ) {
+  if (translationState?.correctedValue) {
     const { correctedValue } = translationState;
     return `The inputted value "${correctedValue}" was corrected to the nearest allowed digit.`;
   }
@@ -122,11 +125,10 @@ enum HandlePosition {
 }
 
 type ExcludedAttributes = 'onChange' | 'onBlur';
+
 export interface SliderProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    ExcludedAttributes
-  > {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
+    TranslateWithId<TranslationKey, { correctedValue?: string }> {
   /**
    * The `ariaLabel` for the `<input>`.
    */
@@ -153,7 +155,7 @@ export interface SliderProps
   disabled?: boolean;
 
   /**
-   * The callback to format the label associated with the minimum/maximum value.
+   * The callback to format the label associated with the minimum/maximum value and the value tooltip when hideTextInput is true.
    */
   formatLabel?: (value: number, label: string | undefined) => string;
 
@@ -274,16 +276,6 @@ export interface SliderProps
    * which will be `(max - min) / stepMultiplier`.
    */
   stepMultiplier?: number;
-
-  /**
-   * Supply a method to translate internal strings with your i18n tool of
-   * choice. Translation keys are available on the `translationIds` field for
-   * this component.
-   */
-  translateWithId?: (
-    translationId: string,
-    translationState: { correctedValue?: string }
-  ) => string;
 
   /**
    * The value of the slider. When there are two handles, value is the lower
@@ -1521,7 +1513,7 @@ class Slider extends PureComponent<SliderProps> {
                   <ThumbWrapper
                     hasTooltip={hideTextInput}
                     className={lowerThumbWrapperClasses}
-                    label={`${value}`}
+                    label={`${formatLabel(value, '')}`}
                     align="top"
                     {...lowerThumbWrapperProps}>
                     <div
@@ -1529,6 +1521,7 @@ class Slider extends PureComponent<SliderProps> {
                       role="slider"
                       id={twoHandles ? undefined : id}
                       tabIndex={!readOnly ? 0 : -1}
+                      aria-valuetext={`${formatLabel(value, '')}`}
                       aria-valuemax={twoHandles ? valueUpper : max}
                       aria-valuemin={min}
                       aria-valuenow={value}
@@ -1555,7 +1548,7 @@ class Slider extends PureComponent<SliderProps> {
                     <ThumbWrapper
                       hasTooltip={hideTextInput}
                       className={upperThumbWrapperClasses}
-                      label={`${valueUpper}`}
+                      label={`${formatLabel(valueUpper || 0, '')}`}
                       align="top"
                       {...upperThumbWrapperProps}>
                       <div

@@ -10,9 +10,7 @@ import React, { ReactNode } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
-
-const getInstanceId = setupGetInstanceId();
+import { useId } from '../../internal/useId';
 
 export interface CheckboxGroupProps {
   children?: ReactNode;
@@ -54,7 +52,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   const showWarning = !readOnly && !invalid && warn;
   const showHelper = !invalid && !warn;
 
-  const checkboxGroupInstanceId = getInstanceId();
+  const checkboxGroupInstanceId = useId();
 
   const helperId = !helperText
     ? undefined
@@ -78,7 +76,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   let normalizedSlug;
   if (
     React.isValidElement(slug) &&
-    (slug['type'] as any)?.displayName === 'Slug'
+    (slug['type'] as any)?.displayName === 'AILabel'
   ) {
     normalizedSlug = React.cloneElement(slug, {
       size: 'mini',

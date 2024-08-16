@@ -19,9 +19,7 @@ import { Legend } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import mergeRefs from '../../tools/mergeRefs';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
-
-const getInstanceId = setupGetInstanceId();
+import { useId } from '../../internal/useId';
 
 export const RadioButtonGroupContext = createContext(null);
 
@@ -157,7 +155,7 @@ const RadioButtonGroup = React.forwardRef(
     const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
     const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
 
-    const { current: radioButtonGroupInstanceId } = useRef(getInstanceId());
+    const radioButtonGroupInstanceId = useId();
 
     /**
      * prop + state alignment - getDerivedStateFromProps
@@ -242,7 +240,7 @@ const RadioButtonGroup = React.forwardRef(
 
     // Slug is always size `mini`
     let normalizedSlug: ReactElement | undefined;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
         kind: 'default',

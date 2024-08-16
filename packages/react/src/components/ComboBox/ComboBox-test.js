@@ -18,7 +18,7 @@ import {
   waitForPosition,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
@@ -29,7 +29,7 @@ const prefix = 'cds';
 
 describe('ComboBox', () => {
   let mockProps;
-
+  window.HTMLElement.prototype.scrollIntoView = function () {};
   beforeEach(() => {
     mockProps = {
       id: 'test-combobox',
@@ -209,8 +209,24 @@ describe('ComboBox', () => {
     expect(findInputNode()).toHaveDisplayValue('Apple');
   });
 
+  it('should apply onChange value if custom value is entered and `allowCustomValue` is set', async () => {
+    render(<ComboBox {...mockProps} allowCustomValue />);
+
+    expect(findInputNode()).toHaveDisplayValue('');
+
+    await userEvent.type(findInputNode(), 'Apple');
+    await userEvent.keyboard('[Enter]');
+    assertMenuClosed();
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      inputValue: 'Apple',
+      selectedItem: null,
+    });
+  });
+
   it('should respect slug prop', async () => {
-    const { container } = render(<ComboBox {...mockProps} slug={<Slug />} />);
+    const { container } = render(
+      <ComboBox {...mockProps} slug={<AILabel />} />
+    );
     await waitForPosition();
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--slug`
