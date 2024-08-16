@@ -18,7 +18,8 @@
     "src",
     "umd",
     "index.scss",
-    "telemetry.yml"
+    "telemetry.yml",
+    "custom-properties.scss"
   ],
   "keywords": [
     "eyeglass-module",
