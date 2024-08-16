@@ -11,7 +11,7 @@ import remarkGfm from 'remark-gfm';
 import fs from 'fs';
 import glob from 'fast-glob';
 import path from 'path';
-import react from '@vitejs/plugin-react';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
 // MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
@@ -65,7 +65,6 @@ const stories = glob
     }
     return true;
   });
-
 const config = {
   addons: [
     {
@@ -80,6 +79,7 @@ const config = {
       },
     },
     '@storybook/addon-storysource',
+    '@storybook/addon-webpack5-compiler-babel',
     /**
      * For now, the storybook-addon-accessibility-checker fork replaces the @storybook/addon-a11y.
      * Eventually they plan to attempt to get this back into the root addon with the storybook team.
@@ -103,58 +103,97 @@ const config = {
     buildStoriesJson: true,
   },
   framework: {
-    name: '@storybook/react-vite',
+    name: '@storybook/react-webpack5',
     options: {},
   },
   stories,
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
-  core: {
-    builder: '@storybook/builder-vite', // 👈 The builder enabled here.
-  },
 
-  async viteFinal(config, { configType }) {
-    // Merge custom configuration into the default config
-    const { mergeConfig } = await import('vite');
+  webpack(config) {
+    // const babelLoader = config.module.rules.find((rule) => {
+    //   console.log({ rule });
+    //   return rule.use?.some(({ loader }) => {
+    //     return loader.includes('babel-loader');
+    //   });
+    // });
 
-    if (configType === 'DEVELOPMENT') {
-      config.define = {
-        __DEV__: 'true',
-      };
-    }
-    if (configType === 'PRODUCTION') {
-      config.define = {
-        __DEV__: 'false',
-      };
-    }
-
-    return mergeConfig(config, {
-      esbuild: {
-        include: /\.[jt]sx?$/,
-        exclude: [],
-        loader: 'tsx',
-        define: {
-          __DEV__: 'false',
+    // This is a temporary trick to get `babel-loader` to ignore packages that
+    // are brought in that have an es, lib, or umd directory.
+    //
+    // Typically this is covered by /node_modules/ (which is the default), but
+    // in our case it seems like these dependencies are resolving to where their
+    // symlink points to. In other words, `@carbon/icons-react` becomes
+    // `../icons-react/es/index.js`.
+    //
+    // This results in these files being included in `babel-loader` and causing
+    // the build times to increase dramatically
+    // console.log({ babelLoader });
+    // babelLoader.exclude = [
+    //   /node_modules/,
+    //   /packages\/.*\/(es|lib|umd)/,
+    //   /packages\/icons-react\/next/,
+    // ];
+    config.module.rules.push({
+      test: /\.s?css$/,
+      sideEffects: true,
+      exclude: [
+        /node_modules/,
+        /packages\/.*\/(es|lib|umd)/,
+        /packages\/icons-react\/next/,
+      ],
+      use: [
+        {
+          loader:
+            process.env.NODE_ENV === 'production'
+              ? MiniCssExtractPlugin.loader
+              : 'style-loader',
         },
-      },
-      optimizeDeps: {
-        esbuildOptions: {
-          loader: {
-            '.js': 'jsx',
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 2,
+            sourceMap: true,
           },
         },
-      },
-      plugins: [
-        react({
-          babel: {
-            // This instructs Vite to use Babel for the necessary transforms,
-            babelrc: true,
-            configFile: true,
+        {
+          loader: 'postcss-loader',
+          options: {
+            postcssOptions: {
+              plugins: [
+                require('autoprefixer')({
+                  overrideBrowserslist: ['last 1 version'],
+                }),
+              ],
+            },
+            sourceMap: true,
           },
-        }),
+        },
+        {
+          loader: 'sass-loader',
+          options: {
+            implementation: require('sass'),
+            sassOptions: {
+              includePaths: [
+                path.resolve(__dirname, '..', 'node_modules'),
+                path.resolve(__dirname, '..', '..', '..', 'node_modules'),
+              ],
+            },
+            warnRuleAsWarning: true,
+            sourceMap: true,
+          },
+        },
       ],
     });
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins.push(
+        new MiniCssExtractPlugin({
+          filename: '[name].[contenthash].css',
+        })
+      );
+    }
+    return config;
   },
   docs: {
     autodocs: true,
