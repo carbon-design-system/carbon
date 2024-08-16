@@ -37,5 +37,6 @@
     width: mini-units(32);
     border-right: 1px solid $border-subtle;
     border-left: 1px solid $border-subtle;
+    overflow-y: auto;
   }
 }

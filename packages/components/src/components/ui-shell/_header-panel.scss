@@ -41,6 +41,7 @@
     width: carbon--mini-units(32);
     border-right: 1px solid $shell-panel-border;
     border-left: 1px solid $shell-panel-border;
+    overflow-y: auto;
   }
 }
 
