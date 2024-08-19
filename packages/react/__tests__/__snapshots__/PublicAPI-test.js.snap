@@ -1278,6 +1278,16 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "downshiftActions": Object {
+        "args": Array [
+          Object {
+            "current": Object {
+              "type": "any",
+            },
+          },
+        ],
+        "type": "exact",
+      },
       "downshiftProps": Object {
         "type": "object",
       },
@@ -6180,6 +6190,9 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "showPasswordLabel": Object {
         "type": "string",
       },
@@ -7717,6 +7730,9 @@ Map {
       "onKeyDown": Object {
         "type": "func",
       },
+      "rel": Object {
+        "type": "string",
+      },
       "tabIndex": Object {
         "type": "number",
       },
@@ -8834,6 +8850,9 @@ Map {
         },
         "placeholder": Object {
           "type": "string",
+        },
+        "readOnly": Object {
+          "type": "bool",
         },
         "showPasswordLabel": Object {
           "type": "string",
