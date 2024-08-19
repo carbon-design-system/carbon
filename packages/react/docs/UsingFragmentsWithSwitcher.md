@@ -1,4 +1,4 @@
-- The `Switcher` component is designed to have `SwitcherItem` components as its
+The `Switcher` component is designed to have `SwitcherItem` components as its
   direct children. However, there may be cases where you want to use React
   Fragments or other nested structures within the `Switcher`. To accommodate we
   recommend using the [`react-keyed-flatten-children`]
