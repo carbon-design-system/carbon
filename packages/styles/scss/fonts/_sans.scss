@@ -13,8 +13,7 @@ $font-family: 'IBM Plex Sans';
 $name: 'IBM-Plex-Sans';
 $styles: (normal, italic);
 $unicode-ranges: (Cyrillic, Pi, Latin3, Latin2, Latin1);
-$formats: (woff2);
-$package-name: 'sans';
+$formats: (woff2, woff);
 
 @mixin thin($styles: $styles, $unicode-ranges: $unicode-ranges) {
   @each $style in $styles {
@@ -24,14 +23,7 @@ $package-name: 'sans';
         font-family: $font-family;
         font-style: $style;
         font-weight: 100;
-        src: src.get(
-          $name,
-          Thin,
-          $style,
-          $unicode-range,
-          $formats,
-          $package-name
-        );
+        src: src.get($name, Thin, $style, $unicode-range, $formats);
         unicode-range: unicode.get-range($unicode-range);
       }
     }
@@ -46,14 +38,7 @@ $package-name: 'sans';
         font-family: $font-family;
         font-style: $style;
         font-weight: 200;
-        src: src.get(
-          $name,
-          ExtraLight,
-          $style,
-          $unicode-range,
-          $formats,
-          $package-name
-        );
+        src: src.get($name, ExtraLight, $style, $unicode-range, $formats);
         unicode-range: unicode.get-range($unicode-range);
       }
     }
@@ -68,14 +53,7 @@ $package-name: 'sans';
         font-family: $font-family;
         font-style: $style;
         font-weight: 300;
-        src: src.get(
-          $name,
-          Light,
-          $style,
-          $unicode-range,
-          $formats,
-          $package-name
-        );
+        src: src.get($name, Light, $style, $unicode-range, $formats);
         unicode-range: unicode.get-range($unicode-range);
       }
     }
@@ -90,14 +68,7 @@ $package-name: 'sans';
         font-family: $font-family;
         font-style: $style;
         font-weight: 400;
-        src: src.get(
-          $name,
-          Regular,
-          $style,
-          $unicode-range,
-          $formats,
-          $package-name
-        );
+        src: src.get($name, Regular, $style, $unicode-range, $formats);
         unicode-range: unicode.get-range($unicode-range);
       }
     }
@@ -112,14 +83,7 @@ $package-name: 'sans';
         font-family: $font-family;
         font-style: $style;
         font-weight: 450;
-        src: src.get(
-          $name,
-          Text,
-          $style,
-          $unicode-range,
-          $formats,
-          $package-name
-        );
+        src: src.get($name, Text, $style, $unicode-range, $formats);
         unicode-range: unicode.get-range($unicode-range);
       }
     }
@@ -134,14 +98,7 @@ $package-name: 'sans';
         font-family: $font-family;
         font-style: $style;
         font-weight: 500;
-        src: src.get(
-          $name,
-          Medium,
-          $style,
-          $unicode-range,
-          $formats,
-          $package-name
-        );
+        src: src.get($name, Medium, $style, $unicode-range, $formats);
         unicode-range: unicode.get-range($unicode-range);
       }
     }
@@ -156,14 +113,7 @@ $package-name: 'sans';
         font-family: $font-family;
         font-style: $style;
         font-weight: 600;
-        src: src.get(
-          $name,
-          SemiBold,
-          $style,
-          $unicode-range,
-          $formats,
-          $package-name
-        );
+        src: src.get($name, SemiBold, $style, $unicode-range, $formats);
         unicode-range: unicode.get-range($unicode-range);
       }
     }
@@ -178,14 +128,7 @@ $package-name: 'sans';
         font-family: $font-family;
         font-style: $style;
         font-weight: 700;
-        src: src.get(
-          $name,
-          Bold,
-          $style,
-          $unicode-range,
-          $formats,
-          $package-name
-        );
+        src: src.get($name, Bold, $style, $unicode-range, $formats);
         unicode-range: unicode.get-range($unicode-range);
       }
     }
