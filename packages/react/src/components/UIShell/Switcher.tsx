@@ -78,13 +78,7 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(function Switcher(
     currentIndex: number;
     direction: number;
   }) => {
-    const flattenedChildren = React.Children.toArray(children).flatMap(
-      (child) =>
-        React.isValidElement(child) && child.type === React.Fragment
-          ? React.Children.toArray(child.props.children)
-          : child
-    );
-    const enabledIndices = flattenedChildren.reduce<number[]>(
+    const enabledIndices = React.Children.toArray(children).reduce<number[]>(
       (acc, curr, i) => {
         if (Object.keys((curr as any).props).length !== 0) {
           acc.push(i);
@@ -115,40 +109,30 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(function Switcher(
     }
   };
 
-  const childrenWithProps = React.Children.toArray(children).flatMap(
+  const childrenWithProps = React.Children.toArray(children).map(
     (child, index) => {
-      if (React.isValidElement(child)) {
-        if (child.type === React.Fragment) {
-          // Handle React.Fragment case
-          return React.Children.toArray(child.props.children).map(
-            (fragmentChild, fragmentIndex) =>
-              React.isValidElement(fragmentChild)
-                ? React.cloneElement(fragmentChild as React.ReactElement<any>, {
-                    handleSwitcherItemFocus,
-                    index: `${index}-${fragmentIndex}`,
-                    key: `${index}-${fragmentIndex}`,
-                    expanded,
-                  })
-                : fragmentChild
-          );
-        } else if (getDisplayName(child.type) === 'Switcher') {
-          return React.cloneElement(child as React.ReactElement<any>, {
-            handleSwitcherItemFocus,
-            index,
-            key: index,
-            expanded,
-          });
-        } else {
-          return React.cloneElement(child as React.ReactElement<any>, {
-            index,
-            key: index,
-            expanded,
-          });
-        }
+      // only setup click handlers if onChange event is passed
+      if (
+        React.isValidElement(child) &&
+        child.type &&
+        getDisplayName(child.type) === 'Switcher'
+      ) {
+        return React.cloneElement(child as React.ReactElement<any>, {
+          handleSwitcherItemFocus,
+          index,
+          key: index,
+          expanded,
+        });
       }
-      return child;
+
+      return React.cloneElement(child as React.ReactElement<any>, {
+        index,
+        key: index,
+        expanded,
+      });
     }
   );
+
   return (
     <ul
       ref={ref as React.RefObject<HTMLUListElement>}
