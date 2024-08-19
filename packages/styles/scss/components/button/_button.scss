@@ -162,7 +162,6 @@
     );
 
     > :first-child {
-      margin-block-start: convert.to-rem(1px);
       min-inline-size: convert.to-rem(16px);
     }
 
