@@ -2159,7 +2159,7 @@ __metadata:
     resolve: "npm:^1.12.0"
     sass: "npm:^1.51.0"
   peerDependencies:
-    react-dom: ^16.9.0 || ^17.0.1
+    react-dom: ^18.0.0
   languageName: unknown
   linkType: soft
 
