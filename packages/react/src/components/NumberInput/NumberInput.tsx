@@ -345,15 +345,23 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     function handleStepperClick(event, direction) {
       if (inputRef.current) {
-        direction === 'up'
-          ? inputRef.current.stepUp()
-          : inputRef.current.stepDown();
-
+        const currentValue = Number(inputRef.current.value);
+        let newValue =
+          direction === 'up' ? currentValue + step : currentValue - step;
+        if (min !== undefined) {
+          newValue = Math.max(newValue, min);
+        }
+        if (max !== undefined) {
+          newValue = Math.min(newValue, max);
+        }
+        const currentInputValue = inputRef.current
+          ? inputRef.current.value
+          : '';
         const state = {
           value:
-            allowEmpty && inputRef.current.value === ''
+            allowEmpty && currentInputValue === '' && step === 0
               ? ''
-              : Number(inputRef.current.value),
+              : newValue,
           direction: direction,
         };
         setValue(state.value);
@@ -370,7 +378,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });
@@ -378,7 +386,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     // Need to update the internal value when the revert button is clicked
     let isRevertActive;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       isRevertActive = normalizedSlug.props.revertActive;
     }
 

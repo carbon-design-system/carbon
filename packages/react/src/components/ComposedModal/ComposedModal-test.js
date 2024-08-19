@@ -14,7 +14,7 @@ import ComposedModal, { ModalBody } from './ComposedModal';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
 import { TextInput } from '../../';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -235,7 +235,7 @@ describe('ComposedModal', () => {
 
     it('should respect slug prop', () => {
       const { container } = render(
-        <ComposedModal open slug={<Slug />}>
+        <ComposedModal open slug={<AILabel />}>
           <ModalHeader>Modal header</ModalHeader>
           <ModalBody>This is the modal body content</ModalBody>
           <ModalFooter

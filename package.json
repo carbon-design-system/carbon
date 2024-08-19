@@ -57,7 +57,7 @@
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/react-is": "~18.3.0",
-    "accessibility-checker": "^3.1.48",
+    "accessibility-checker": "^3.1.74",
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^7.0.0",
     "cross-spawn": "^7.0.0",
@@ -65,7 +65,7 @@
     "eslint": "^9.0.0",
     "eslint-plugin-playwright": "^1.0.0",
     "fs-extra": "^11.0.0",
-    "glob": "^10.0.0",
+    "glob": "^11.0.0",
     "husky": "^9.0.0",
     "jest": "^28.1.0",
     "jest-junit": "^16.0.0",
@@ -145,5 +145,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@4.2.2"
+  "packageManager": "yarn@4.4.0"
 }

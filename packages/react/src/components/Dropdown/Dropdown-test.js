@@ -18,7 +18,7 @@ import {
 } from '../ListBox/test-helpers';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from '../Dropdown/Dropdown.Skeleton';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -202,7 +202,9 @@ describe('Dropdown', () => {
     });
 
     it('should respect slug prop', async () => {
-      const { container } = render(<Dropdown {...mockProps} slug={<Slug />} />);
+      const { container } = render(
+        <Dropdown {...mockProps} slug={<AILabel />} />
+      );
       await waitForPosition();
       expect(container.firstChild).toHaveClass(
         `${prefix}--list-box__wrapper--slug`
