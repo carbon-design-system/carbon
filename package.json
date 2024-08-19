@@ -65,7 +65,7 @@
     "eslint": "^9.0.0",
     "eslint-plugin-playwright": "^1.0.0",
     "fs-extra": "^11.0.0",
-    "glob": "^10.0.0",
+    "glob": "^11.0.0",
     "husky": "^9.0.0",
     "jest": "^28.1.0",
     "jest-junit": "^16.0.0",
