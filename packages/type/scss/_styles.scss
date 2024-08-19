@@ -15,6 +15,7 @@
 @use 'prefix' as *;
 @use 'font-family';
 @use 'scale';
+@use '@carbon/feature-flags' as *;
 
 /// @type Map
 /// @access public
@@ -884,6 +885,12 @@ $tokens: (
         }
       }
     }
+  }
+}
+
+@if enabled('enable-type-custom-properties') {
+  :root {
+    @include emit-type-custom-properties();
   }
 }
 

@@ -71,7 +71,7 @@ describe('@carbon/type', () => {
 
   it('should emit the css Custom properties for non-fluid typography', async () => {
     const { result } = await render(`
-        @import '../custom-properties';
+        @import '../index';
       `);
     const { stylesheet } = css.parse(result.css.toString());
     const rules = stylesheet.rules.filter(
