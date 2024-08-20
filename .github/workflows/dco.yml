@@ -16,7 +16,7 @@ jobs:
           (github.event.comment.body == 'recheck' || github.event.comment.body
           == 'I have read the DCO document and I hereby sign the DCO.') ||
           github.event_name == 'pull_request_target'
-        uses: cla-assistant/github-action@288ded2bc5a0f48314232cffa20ff7314a34b8ce # v2.5.0
+        uses: cla-assistant/github-action@f41946747f85d28e9a738f4f38dbcc74b69c7e0e # v2.5.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
