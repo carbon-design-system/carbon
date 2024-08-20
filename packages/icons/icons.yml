@@ -15219,6 +15219,8 @@
     - generative
     - deep learning
     - watsonx
+  sizes:
+    - 32
 - name: mobile
   friendly_name: Mobile
   aliases:
@@ -15409,6 +15411,8 @@
     - generative
     - deep learning
     - watsonx
+  sizes:
+    - 32
 - name: model--reference
   friendly_name: Model reference
   aliases:
