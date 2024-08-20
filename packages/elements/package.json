@@ -51,7 +51,7 @@
     "@carbon/cli": "^11.19.0",
     "fs-extra": "^11.0.0",
     "klaw-sync": "^6.0.0",
-    "replace-in-file": "^7.0.0",
+    "replace-in-file": "^8.0.0",
     "rimraf": "^5.0.0"
   }
 }

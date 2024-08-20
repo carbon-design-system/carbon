@@ -1797,7 +1797,7 @@ __metadata:
     prettier-config-carbon: "npm:^0.11.0"
     progress-estimator: "npm:^0.3.0"
     remark: "npm:^10.0.1"
-    replace-in-file: "npm:^7.0.0"
+    replace-in-file: "npm:^8.0.0"
     rollup: "npm:^2.79.1"
     sass: "npm:^1.51.0"
     sassdoc: "npm:^2.7.3"
@@ -1838,7 +1838,7 @@ __metadata:
     "@ibm/telemetry-js": "npm:^1.5.0"
     fs-extra: "npm:^11.0.0"
     klaw-sync: "npm:^6.0.0"
-    replace-in-file: "npm:^7.0.0"
+    replace-in-file: "npm:^8.0.0"
     rimraf: "npm:^5.0.0"
   languageName: unknown
   linkType: soft
@@ -10020,7 +10020,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:5.3.0, chalk@npm:^5.2.0":
+"chalk@npm:5.3.0, chalk@npm:^5.2.0, chalk@npm:^5.3.0":
   version: 5.3.0
   resolution: "chalk@npm:5.3.0"
   checksum: 10/6373caaab21bd64c405bfc4bd9672b145647fc9482657b5ea1d549b3b2765054e9d3d928870cdf764fb4aad67555f5061538ff247b8310f110c5c888d92397ea
@@ -15137,6 +15137,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"glob@npm:^10.4.2":
+  version: 10.4.5
+  resolution: "glob@npm:10.4.5"
+  dependencies:
+    foreground-child: "npm:^3.1.0"
+    jackspeak: "npm:^3.1.2"
+    minimatch: "npm:^9.0.4"
+    minipass: "npm:^7.1.2"
+    package-json-from-dist: "npm:^1.0.0"
+    path-scurry: "npm:^1.11.1"
+  bin:
+    glob: dist/esm/bin.mjs
+  checksum: 10/698dfe11828b7efd0514cd11e573eaed26b2dff611f0400907281ce3eab0c1e56143ef9b35adc7c77ecc71fba74717b510c7c223d34ca8a98ec81777b293d4ac
+  languageName: node
+  linkType: hard
+
 "glob@npm:^11.0.0":
   version: 11.0.0
   resolution: "glob@npm:11.0.0"
@@ -15167,7 +15183,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^8.0.1, glob@npm:^8.1.0":
+"glob@npm:^8.0.1":
   version: 8.1.0
   resolution: "glob@npm:8.1.0"
   dependencies:
@@ -23968,16 +23984,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"replace-in-file@npm:^7.0.0":
-  version: 7.0.1
-  resolution: "replace-in-file@npm:7.0.1"
+"replace-in-file@npm:^8.0.0":
+  version: 8.1.0
+  resolution: "replace-in-file@npm:8.1.0"
   dependencies:
-    chalk: "npm:^4.1.2"
-    glob: "npm:^8.1.0"
+    chalk: "npm:^5.3.0"
+    glob: "npm:^10.4.2"
     yargs: "npm:^17.7.2"
   bin:
     replace-in-file: bin/cli.js
-  checksum: 10/41c5f5b2ac58cf9cf9f371e038a9b1ece08a734a48cef7225b394ba8c955636c32828f08873246822fa46337b7e30c6cb7f7c1374e88d40f63063d142f918272
+  checksum: 10/5b32dd1fcd97acdafb4ad8e5ebd060ce9b330d7bfa8b069ba46111f6f3b323811cfd4ca0fccc89b05e02319032e03c79799f06e4d679758b0b4a9fd900037cf2
   languageName: node
   linkType: hard
 
