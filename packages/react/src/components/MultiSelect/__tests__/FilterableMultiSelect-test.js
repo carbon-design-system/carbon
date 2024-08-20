@@ -17,7 +17,7 @@ import {
   generateGenericItem,
   waitForPosition,
 } from '../../ListBox/test-helpers';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
 
@@ -186,12 +186,19 @@ describe('FilterableMultiSelect', () => {
 
   it('should respect slug prop', async () => {
     const { container } = render(
-      <FilterableMultiSelect {...mockProps} slug={<Slug />} />
+      <FilterableMultiSelect {...mockProps} slug={<AILabel />} />
     );
     await waitForPosition();
 
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--slug`
     );
+  });
+
+  it('should place the given id on the listbox wrapper', async () => {
+    render(<FilterableMultiSelect {...mockProps} id="custom-id" />);
+    await waitForPosition();
+
+    expect(document.querySelector(`.${prefix}--list-box`).id).toBe('custom-id');
   });
 });

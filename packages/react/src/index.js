@@ -144,7 +144,14 @@ export {
 export Tab from './components/Tab';
 export TabContent from './components/TabContent';
 export Tabs from './components/Tabs';
-export { TabPanel, TabPanels, TabList, IconTab } from './components/Tabs';
+export {
+  TabsVertical,
+  TabPanel,
+  TabPanels,
+  TabList,
+  TabListVertical,
+  IconTab,
+} from './components/Tabs';
 export Tag from './components/Tag';
 export DismissibleTag from './components/Tag/DismissibleTag.tsx';
 export OperationalTag from './components/Tag/OperationalTag.tsx';
@@ -308,17 +315,27 @@ export {
 } from './components/Theme';
 export { usePrefix } from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';
+
+export { AILabel, AILabelContent, AILabelActions } from './components/AILabel';
+// Keep until V12
 export {
-  Slug as unstable__Slug,
-  SlugContent as unstable__SlugContent,
-  SlugActions as unstable__SlugActions,
-} from './components/Slug';
+  AILabel as unstable__Slug,
+  AILabelContent as unstable__SlugContent,
+  AILabelActions as unstable__SlugActions,
+} from './components/AILabel';
 
 export {
-  AiSkeletonText as unstable__AiSkeletonText,
-  AiSkeletonIcon as unstable__AiSkeletonIcon,
-  AiSkeletonPlaceholder as unstable__AiSkeletonPlaceholder,
-} from './components/AiSkeleton';
+  AISkeletonText,
+  AISkeletonIcon,
+  AISkeletonPlaceholder,
+} from './components/AISkeleton';
+// Keep until V12
+export {
+  AISkeletonText as unstable__AiSkeletonText,
+  AISkeletonIcon as unstable__AiSkeletonIcon,
+  AISkeletonPlaceholder as unstable__AiSkeletonPlaceholder,
+} from './components/AISkeleton';
+
 export {
   ChatButton as unstable__ChatButton,
   ChatButtonSkeleton as unstable__ChatButtonSkeleton,

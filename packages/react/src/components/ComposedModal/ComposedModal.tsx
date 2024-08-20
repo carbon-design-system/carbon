@@ -27,6 +27,7 @@ import wrapFocus, {
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
+import { composeEventHandlers } from '../../tools/events';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -288,7 +289,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       onKeyDown?.(event);
     }
 
-    function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
+    function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
       const target = evt.target as Node;
       evt.stopPropagation();
       if (
@@ -409,7 +410,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     // Slug is always size `sm`
     let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'sm',
       });
@@ -423,7 +424,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         ref={ref}
         aria-hidden={!open}
         onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
-        onMouseDown={handleMousedown}
+        onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
         onKeyDown={handleKeyDown}
         className={modalClass}>
         <div

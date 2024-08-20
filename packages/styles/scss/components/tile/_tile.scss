@@ -502,7 +502,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
-    .#{$prefix}--slug:has(> .cds--popover--open) {
+    .#{$prefix}--slug:has(> .#{$prefix}--popover--open) {
     z-index: 2;
   }
 

@@ -1531,7 +1531,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/7907338?v=4",
       "profile": "https://github.com/ychavoya",
       "contributions": [
-        "code"
+        "code",
+        "doc"
       ]
     },
     {
@@ -1565,6 +1566,33 @@
       "name": "Luis",
       "avatar_url": "https://avatars.githubusercontent.com/u/15043356?v=4",
       "profile": "https://github.com/lluisrojass",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "lharrison13",
+      "name": "Luke Harrison",
+      "avatar_url": "https://avatars.githubusercontent.com/u/172074450?v=4",
+      "profile": "https://github.com/lharrison13",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "tekno0ryder",
+      "name": "Ahmed Alsinan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8721803?v=4",
+      "profile": "https://github.com/tekno0ryder",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "NabeelAyubee",
+      "name": "Md Nabeel Ayubee",
+      "avatar_url": "https://avatars.githubusercontent.com/u/64087875?v=4",
+      "profile": "https://github.com/NabeelAyubee",
       "contributions": [
         "code"
       ]

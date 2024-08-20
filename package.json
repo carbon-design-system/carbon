@@ -38,14 +38,14 @@
     "react-is": "~18.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.2",
-    "@babel/plugin-proposal-class-properties": "^7.17.12",
-    "@babel/plugin-proposal-export-default-from": "^7.17.12",
-    "@babel/plugin-proposal-export-namespace-from": "^7.17.12",
-    "@babel/plugin-transform-runtime": "^7.18.2",
-    "@babel/preset-env": "^7.18.2",
-    "@babel/preset-react": "^7.17.12",
-    "@babel/runtime": "^7.18.3",
+    "@babel/core": "^7.24.7",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-export-default-from": "^7.24.7",
+    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
+    "@babel/plugin-transform-runtime": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/runtime": "^7.24.7",
     "@carbon/cli": "workspace:packages/cli",
     "@commitlint/cli": "^18.0.0",
     "@commitlint/config-conventional": "^18.0.0",
@@ -57,7 +57,7 @@
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/react-is": "~18.3.0",
-    "accessibility-checker": "^3.1.48",
+    "accessibility-checker": "^3.1.74",
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^7.0.0",
     "cross-spawn": "^7.0.0",
@@ -65,7 +65,7 @@
     "eslint": "^9.0.0",
     "eslint-plugin-playwright": "^1.0.0",
     "fs-extra": "^11.0.0",
-    "glob": "^10.0.0",
+    "glob": "^11.0.0",
     "husky": "^9.0.0",
     "jest": "^28.1.0",
     "jest-junit": "^16.0.0",
@@ -145,5 +145,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@4.2.2"
+  "packageManager": "yarn@4.4.0"
 }

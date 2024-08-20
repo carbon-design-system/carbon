@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// @ts-nocheck
 import React from 'react';
 import { Toggle, ToggleSkeleton } from '@carbon/react';
 import figma from '@figma/code-connect';
@@ -34,29 +33,7 @@ figma.connect(
       labelA: figma.string('State text'),
       labelB: figma.string('State text'),
     },
-    example: ({
-      disabled,
-      size,
-      readOnly,
-      hideLabel,
-      labelText,
-      defaultToggled,
-      labelA,
-      labelB,
-    }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
-      <Toggle
-        size={size}
-        readOnly={readOnly}
-        disabled={disabled}
-        hideLabel={hideLabel}
-        labelText={labelText}
-        defaultToggled={defaultToggled}
-        labelA={labelA}
-        labelB={labelB}
-      />
-    ),
+    example: ({ ...props }) => <Toggle id="id" {...props} />,
   }
 );
 
@@ -81,9 +58,8 @@ figma.connect(
       defaultToggled: figma.boolean('Toggled'),
     },
     example: ({ disabled, size, readOnly, defaultToggled }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
       <Toggle
+        id="id"
         size={size}
         readOnly={readOnly}
         disabled={disabled}
@@ -129,9 +105,8 @@ figma.connect(
       hideLabel,
       labelText,
     }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
       <Toggle
+        id="id"
         size={size}
         readOnly={readOnly}
         disabled={disabled}
@@ -152,11 +127,7 @@ figma.connect(
     variant: { State: 'Skeleton' },
 
     example: () => {
-      return (
-        // Disclaimer: Code Connect is currently in beta and integration with Carbon
-        // React is in an exploratory phase. Code sample below may be incomplete.
-        <ToggleSkeleton />
-      );
+      return <ToggleSkeleton />;
     },
   }
 );

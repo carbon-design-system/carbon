@@ -6,7 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode, useContext, useState } from 'react';
+import React, {
+  ReactNode,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+} from 'react';
 import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import PasswordInput from './PasswordInput';
@@ -310,12 +316,36 @@ const TextInput = React.forwardRef(function TextInput(
   );
 
   const { isFluid } = useContext(FormContext);
+  const announcerRef = useRef(null);
+  const [prevAnnouncement, setPrevAnnouncement] = useState('');
   const ariaAnnouncement = useAnnouncer(textCount, maxCount);
+  useEffect(() => {
+    if (ariaAnnouncement && ariaAnnouncement !== prevAnnouncement) {
+      const announcer = announcerRef.current as HTMLSpanElement | null;
+      if (announcer) {
+        // Clear the content first
+        announcer.textContent = '';
+        // Set the new content after a small delay
+        const timeoutId = setTimeout(() => {
+          if (announcer) {
+            announcer.textContent = ariaAnnouncement;
+            setPrevAnnouncement(ariaAnnouncement);
+          }
+        }, 1000);
+        // clear the timeout
+        return () => {
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+        };
+      }
+    }
+  }, [ariaAnnouncement, prevAnnouncement]);
   const Icon = normalizedProps.icon as any;
 
   // Slug is always size `mini`
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'mini',
     });
@@ -338,7 +368,12 @@ const TextInput = React.forwardRef(function TextInput(
           {Icon && <Icon className={iconClasses} />}
           {input}
           {normalizedSlug}
-          <span className={`${prefix}--text-input__counter-alert`} role="alert">
+          <span
+            className={`${prefix}--text-input__counter-alert`}
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+            ref={announcerRef}>
             {ariaAnnouncement}
           </span>
           {isFluid && <hr className={`${prefix}--text-input__divider`} />}
