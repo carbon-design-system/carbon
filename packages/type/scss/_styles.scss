@@ -15,7 +15,6 @@
 @use 'prefix' as *;
 @use 'font-family';
 @use 'scale';
-@use '@carbon/feature-flags' as *;
 
 /// @type Map
 /// @access public
@@ -870,27 +869,6 @@ $tokens: (
       --#{$custom-property-prefix}-#{$name}-#{$property},
       #{$value}
     );
-  }
-}
-
-// output type custom properties used by non-fluid type-style below
-/// @access public
-/// @group @carbon/type
-@mixin emit-type-custom-properties() {
-  @each $name, $token in $tokens {
-    @if string.slice($name, 1, 5) != 'fluid' {
-      @each $property, $value in $token {
-        @if $property != 'breakpoints' {
-          --#{$custom-property-prefix}-#{$name}-#{$property}: #{$value};
-        }
-      }
-    }
-  }
-}
-
-@if enabled('enable-type-custom-properties') {
-  :root {
-    @include emit-type-custom-properties();
   }
 }
 

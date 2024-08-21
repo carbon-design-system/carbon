@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../../feature-flags' as *;
 @use '../config';
 
 // prettier-ignore
@@ -90,3 +91,24 @@
     custom-property-prefix: config.$prefix,
   )
 );
+
+// output type custom properties used by non-fluid type-style below
+/// @access public
+/// @group @carbon/type
+@mixin emit-type-custom-properties() {
+  @each $name, $token in type.$tokens {
+    @if string.slice($name, 1, 5) != 'fluid' {
+      @each $property, $value in $token {
+        @if $property != 'breakpoints' {
+          --#{config.$prefix}-#{$name}-#{$property}: #{$value};
+        }
+      }
+    }
+  }
+}
+
+@if enabled('enable-type-custom-properties') {
+  :root {
+    @include emit-type-custom-properties();
+  }
+}
