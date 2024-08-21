@@ -9,8 +9,7 @@ The `Switcher` component is designed to have `SwitcherItem` components as its
 
 The `react-keyed-flatten-children` package allows you to flatten arrays and
 React Fragments into a regular, one-dimensional array while preserving element
-and fragment keys. This is particularly useful when working with components like
-`Switcher` that expect specific direct children.
+and fragment keys. 
 
 1. Install the package:
 
@@ -41,5 +40,4 @@ and fragment keys. This is particularly useful when working with components like
 
 This approach allows you to use Fragments and nested structures with components
 like `<Switcher>` without modifying their source code. It preserves keys and
-props, ensuring stable rendering across updates while keeping the component
-library's dependencies light.
+props, ensuring stable rendering across updates.
