@@ -5,8 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../../feature-flags' as *;
+@use '../feature-flags' as *;
 @use '../config';
+@use 'sass:string';
+@use 'sass:map';
 
 // prettier-ignore
 @forward '@carbon/type' show
@@ -110,5 +112,7 @@
 @if enabled('enable-type-custom-properties') {
   :root {
     @include emit-type-custom-properties();
+
+    content: '';
   }
 }

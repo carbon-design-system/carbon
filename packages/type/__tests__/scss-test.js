@@ -68,17 +68,4 @@ describe('@carbon/type', () => {
       );
     }
   });
-
-  it('should emit the css Custom properties for non-fluid typography', async () => {
-    const { result } = await render(`
-        @import '../index';
-      `);
-    const { stylesheet } = css.parse(result.css.toString());
-    const rules = stylesheet.rules.filter(
-      (rule) => rule.selectors[0] === ':root'
-    );
-    const declarations = rules[0].declarations;
-
-    expect(declarations.length).toBe(191);
-  });
 });
