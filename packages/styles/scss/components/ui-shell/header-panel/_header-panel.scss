@@ -38,5 +38,6 @@
     border-inline-end: 1px solid $border-subtle;
     border-inline-start: 1px solid $border-subtle;
     inline-size: mini-units(32);
+    overflow-y: auto;
   }
 }

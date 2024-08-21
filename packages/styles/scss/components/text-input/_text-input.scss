@@ -206,6 +206,22 @@
     }
   }
 
+  .#{$prefix}--text-input--password__visibility__toggle:disabled.#{$prefix}--tooltip__trigger {
+    svg {
+      fill: $icon-disabled;
+    }
+
+    cursor: default;
+  }
+
+  .#{$prefix}--text-input--password__visibility__toggle:disabled.#{$prefix}--tooltip__trigger:hover {
+    svg {
+      fill: $icon-disabled;
+    }
+
+    cursor: default;
+  }
+
   .#{$prefix}--text-input__counter-alert {
     position: absolute;
     overflow: hidden;
@@ -354,6 +370,7 @@
     > .#{$prefix}--text-input--warning:focus {
     outline: none;
   }
+
   //-----------------------------
   // Inline Text Input
   //-----------------------------
