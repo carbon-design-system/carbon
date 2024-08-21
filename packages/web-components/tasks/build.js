@@ -131,7 +131,8 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
       }),
       litSCSS({
         includePaths: [
-          path.resolve(__dirname, '../node_modules', '../../../node_modules'),
+          path.resolve(__dirname, '../node_modules'),
+          path.resolve(__dirname, '../../../node_modules'),
         ],
         async preprocessor(contents, id) {
           return (
