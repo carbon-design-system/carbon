@@ -125,7 +125,7 @@
     "storybook": "^7.1.0",
     "storybook-addon-accessibility-checker": "^3.1.61-rc.3",
     "stream-browserify": "^3.0.0",
-    "style-loader": "^3.3.1",
+    "style-loader": "^4.0.0",
     "typescript-config-carbon": "^0.2.0",
     "webpack": "^5.65.0",
     "webpack-dev-server": "^4.7.4"
