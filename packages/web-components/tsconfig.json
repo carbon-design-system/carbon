@@ -4,7 +4,12 @@
     "module": "es2015",
     "moduleResolution": "node",
     "lib": ["es2017", "esnext.array", "dom", "dom.iterable"],
-    "typeRoots": ["src/typings", "tests/typings", "node_modules/@types", "../../node_modules/@types"],
+    "typeRoots": [
+      "src/typings",
+      "tests/typings",
+      "node_modules/@types",
+      "../../node_modules/@types"
+    ],
     "declaration": true,
     "rootDir": ".",
     "skipLibCheck": true,
@@ -18,8 +23,14 @@
     "strict": true,
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", ".storybook/**/*.ts", ".storybook/**/*.tsx"],
-  "exclude": ["src/**/*.stories.ts"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "tests/**/*.ts",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx"
+  ],
+  "exclude": ["src/**/*.stories.ts", "src/globals/internal/storybook-cdn.ts"]
 }

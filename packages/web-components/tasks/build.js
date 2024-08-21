@@ -50,7 +50,7 @@ async function build() {
   ]);
 
   const entryPoint = {
-    rootDir: path.resolve(__dirname, '..', 'src'),
+    rootDir: 'src',
     outputDirectory: path.resolve(__dirname, '..'),
   };
 
@@ -143,7 +143,7 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
       }),
       carbonIcons(iconInput, banner),
       typescript({
-        noEmitOnError: false,
+        noEmitOnError: true,
         compilerOptions: {
           rootDir,
           outDir,
