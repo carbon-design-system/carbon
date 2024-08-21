@@ -4,13 +4,16 @@ import path from 'path';
 
 // To run this file, cd to packages/react and run:
 // FIGMA_ACCESS_TOKEN=<your-figma-access-token> npx tsx tasks/build-code-connect-icons.ts
+// Inspect and debug it via:
+// FIGMA_ACCESS_TOKEN=<your-figma-access-token> npx tsx --inspect-brk tasks/build-code-connect-icons.ts
+// and open chrome://inspect to select this file
 
 async function generateIconsWithSizeProp() {
   // fetch components from a figma file. If the `node-id` query parameter is used,
   // only components within those frames will be included. This is useful if your
   // file is very large, as this will speed up the query by a lot
   let components = await client.getComponents(
-    'https://figma.com/file/J5c0d85dSJn9JnBhSYYLmD?node-id=14109-411'
+    'https://figma.com/file/J5c0d85dSJn9JnBhSYYLmD/?node-id=14109-411'
   );
 
   // Map from figma to React component names
