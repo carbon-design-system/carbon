@@ -22,6 +22,14 @@ test.describe('UIShell', () => {
         });
       });
 
+      test('header w/ actions and switcher @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'UIShell',
+          id: 'components-ui-shell-header--header-w-actions-and-switcher',
+          theme,
+        });
+      });
+
       test('header w/ navigation @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',

@@ -276,7 +276,7 @@ test.describe('@avt DataTable', () => {
         'components-datatable-selection--default'
       );
     });
-    test.skip('@avt-advanced-states with-radio-expansion', async ({ page }) => {
+    test('@avt-advanced-states with-radio-expansion', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-dynamic--playground',
