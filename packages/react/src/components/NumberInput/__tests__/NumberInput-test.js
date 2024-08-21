@@ -332,12 +332,44 @@ describe('NumberInput', () => {
           translateWithId={translateWithId}
         />
       );
-
       expect(screen.getByLabelText('test-label')).toHaveValue(5);
-
       await userEvent.click(screen.getByLabelText('decrement'));
       expect(screen.getByLabelText('test-label')).toHaveValue(0);
     });
+  });
+  it('should increase by the value of large step', async () => {
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        min={-9999}
+        value={1000}
+        max={10000}
+        step={1000}
+        translateWithId={translateWithId}
+      />
+    );
+    expect(screen.getByLabelText('test-label')).toHaveValue(1000);
+    await userEvent.click(screen.getByLabelText('increment'));
+    expect(screen.getByLabelText('test-label')).toHaveValue(2000);
+  });
+  it('should decrease by the value of large step', async () => {
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        min={-9999}
+        value={1000}
+        max={10000}
+        step={1000}
+        translateWithId={translateWithId}
+      />
+    );
+
+    expect(screen.getByLabelText('test-label')).toHaveValue(1000);
+
+    await userEvent.click(screen.getByLabelText('decrement'));
+    expect(screen.getByLabelText('test-label')).toHaveValue(0);
   });
 
   it('should respect readOnly prop', async () => {
