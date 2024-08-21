@@ -9,7 +9,6 @@
 
 @use 'sass:map';
 @use 'sass:math';
-@use 'sass:string';
 @use '@carbon/grid/scss/config' as gridconfig;
 @use '@carbon/grid/scss/breakpoint' as grid;
 @use 'prefix' as *;
@@ -869,21 +868,6 @@ $tokens: (
       --#{$custom-property-prefix}-#{$name}-#{$property},
       #{$value}
     );
-  }
-}
-
-// output type custom properties used by non-fluid type-style below
-/// @access public
-/// @group @carbon/type
-@mixin emit-type-custom-properties() {
-  @each $name, $token in $tokens {
-    @if string.slice($name, 1, 5) != 'fluid' {
-      @each $property, $value in $token {
-        @if $property != 'breakpoints' {
-          --#{$custom-property-prefix}-#{$name}-#{$property}: #{$value};
-        }
-      }
-    }
   }
 }
 
