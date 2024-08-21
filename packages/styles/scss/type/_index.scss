@@ -112,7 +112,5 @@
 @if enabled('enable-type-custom-properties') {
   :root {
     @include emit-type-custom-properties();
-
-    content: '';
   }
 }
