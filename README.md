@@ -301,6 +301,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/lharrison13"><img src="https://avatars.githubusercontent.com/u/172074450?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Luke Harrison</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=lharrison13" title="Code">💻</a></td>
 
     <td align="center"><a href="https://github.com/tekno0ryder"><img src="https://avatars.githubusercontent.com/u/8721803?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ahmed Alsinan</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=tekno0ryder" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Adam-Shea"><img src="https://avatars.githubusercontent.com/u/44814104?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Adam Shea</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Adam-Shea" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/NabeelAyubee"><img src="https://avatars.githubusercontent.com/u/64087875?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Md Nabeel Ayubee</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=NabeelAyubee" title="Code">💻</a></td>
   </tr>
 </table>
