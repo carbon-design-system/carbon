@@ -29,17 +29,37 @@ const FeatureFlagContext = createContext(GlobalFeatureFlags);
  * along with the current `FeatureFlagContext` to provide consumers to check if
  * a feature flag is enabled or disabled in a given React tree
  */
-function FeatureFlags({ children, flags = {} }) {
+function FeatureFlags({
+  children,
+  flags = {},
+  enableUseControlledStateWithValue,
+  enableV12TileDefaultIcons,
+  enableV12TileRadioIcons,
+  enableV12Overflowmenu,
+  enableTreeviewControllable,
+  enableExperimentalFocusWrapWithoutSentinels,
+}) {
   const parentScope = useContext(FeatureFlagContext);
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
+
+  const combinedFlags = {
+    'enable-use-controlled-state-with-value': enableUseControlledStateWithValue,
+    'enable-v12-tile-default-icons': enableV12TileDefaultIcons,
+    'enable-v12-tile-radio-icons': enableV12TileRadioIcons,
+    'enable-v12-overflowmenu': enableV12Overflowmenu,
+    'enable-treeview-controllable': enableTreeviewControllable,
+    'enable-experimental-focus-wrap-without-sentinels':
+      enableExperimentalFocusWrapWithoutSentinels,
+    ...flags,
+  };
   const [scope, updateScope] = useState(() => {
-    const scope = createScope(flags);
+    const scope = createScope(combinedFlags);
     scope.mergeWithScope(parentScope);
     return scope;
   });
 
   if (parentScope !== prevParentScope) {
-    const scope = createScope(flags);
+    const scope = createScope(combinedFlags);
     scope.mergeWithScope(parentScope);
     updateScope(scope);
     setPrevParentScope(parentScope);
@@ -48,7 +68,7 @@ function FeatureFlags({ children, flags = {} }) {
   // We use a custom hook to detect if any of the keys or their values change
   // for flags that are passed in. If they have changed, then we re-create the
   // FeatureFlagScope using the new flags
-  useChangedValue(flags, isEqual, (changedFlags) => {
+  useChangedValue(combinedFlags, isEqual, (changedFlags) => {
     const scope = createScope(changedFlags);
     scope.mergeWithScope(parentScope);
     updateScope(scope);
@@ -68,6 +88,12 @@ FeatureFlags.propTypes = {
    * Provide the feature flags to enabled or disabled in the current React tree
    */
   flags: PropTypes.objectOf(PropTypes.bool),
+  enableUseControlledStateWithValue: PropTypes.bool,
+  enableV12TileDefaultIcons: PropTypes.bool,
+  enableV12TileRadioIcons: PropTypes.bool,
+  enableV12Overflowmenu: PropTypes.bool,
+  enableTreeviewControllable: PropTypes.bool,
+  enableExperimentalFocusWrapWithoutSentinels: PropTypes.bool,
 };
 
 /**

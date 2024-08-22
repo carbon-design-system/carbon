@@ -71,6 +71,46 @@ describe('FeatureFlags', () => {
     });
   });
 
+  it('should provide access to the feature flags for a scope', () => {
+    const checkFlags = jest.fn();
+    const checkFlag = jest.fn();
+
+    function TestComponent() {
+      const featureFlags = useFeatureFlags();
+      const flag1 = useFeatureFlag('enable-v12-overflowmenu');
+      const flag2 = useFeatureFlag('enable-treeview-controllable');
+
+      checkFlags({
+        enableV12Overflowmenu: featureFlags.enabled('enable-v12-overflowmenu'),
+        enableTreeviewControllable: featureFlags.enabled(
+          'enable-treeview-controllable'
+        ),
+      });
+
+      checkFlag({
+        enableV12Overflowmenu: flag1,
+        enableTreeviewControllable: flag2,
+      });
+
+      return null;
+    }
+
+    render(
+      <FeatureFlags enableV12Overflowmenu enableTreeviewControllable={false}>
+        <TestComponent />
+      </FeatureFlags>
+    );
+
+    expect(checkFlags).toHaveBeenLastCalledWith({
+      enableV12Overflowmenu: true,
+      enableTreeviewControllable: false,
+    });
+    expect(checkFlag).toHaveBeenLastCalledWith({
+      enableV12Overflowmenu: true,
+      enableTreeviewControllable: false,
+    });
+  });
+
   it('should re-render when flags change', () => {
     const checkFlags = jest.fn();
     const checkFlag = jest.fn();
@@ -121,6 +161,94 @@ describe('FeatureFlags', () => {
     expect(checkFlag).toHaveBeenLastCalledWith({
       a: false,
       b: true,
+    });
+  });
+
+  it('should handle boolean props correctly when no flags object is provided', () => {
+    const checkFlags = jest.fn();
+    const checkFlag = jest.fn();
+
+    function TestComponent() {
+      const featureFlags = useFeatureFlags();
+      const enableV12Overflowmenu = useFeatureFlag('enable-v12-overflowmenu');
+      const enableTreeviewControllable = useFeatureFlag(
+        'enable-treeview-controllable'
+      );
+
+      checkFlags({
+        enableV12Overflowmenu: featureFlags.enabled('enable-v12-overflowmenu'),
+        enableTreeviewControllable: featureFlags.enabled(
+          'enable-treeview-controllable'
+        ),
+      });
+
+      checkFlag({
+        enableV12Overflowmenu,
+        enableTreeviewControllable,
+      });
+
+      return null;
+    }
+
+    render(
+      <FeatureFlags enableV12Overflowmenu enableTreeviewControllable={false}>
+        <TestComponent />
+      </FeatureFlags>
+    );
+
+    expect(checkFlags).toHaveBeenLastCalledWith({
+      enableV12Overflowmenu: true,
+      enableTreeviewControllable: false,
+    });
+    expect(checkFlag).toHaveBeenLastCalledWith({
+      enableV12Overflowmenu: true,
+      enableTreeviewControllable: false,
+    });
+  });
+
+  it('should handle boolean props and flags object with no overlapping keys', () => {
+    const checkFlags = jest.fn();
+    const checkFlag = jest.fn();
+
+    function TestComponent() {
+      const featureFlags = useFeatureFlags();
+      const enableV12Overflowmenu = useFeatureFlag('enable-v12-overflowmenu');
+      const enableExperimentalFocusWrapWithoutSentinels = useFeatureFlag(
+        'enable-experimental-focus-wrap-without-sentinels'
+      );
+
+      checkFlags({
+        enableV12Overflowmenu: featureFlags.enabled('enable-v12-overflowmenu'),
+        enableExperimentalFocusWrapWithoutSentinels: featureFlags.enabled(
+          'enable-experimental-focus-wrap-without-sentinels'
+        ),
+      });
+
+      checkFlag({
+        enableV12Overflowmenu,
+        enableExperimentalFocusWrapWithoutSentinels,
+      });
+
+      return null;
+    }
+
+    render(
+      <FeatureFlags
+        flags={{
+          'enable-v12-overflowmenu': false,
+        }}
+        enableExperimentalFocusWrapWithoutSentinels>
+        <TestComponent />
+      </FeatureFlags>
+    );
+
+    expect(checkFlags).toHaveBeenLastCalledWith({
+      enableV12Overflowmenu: false,
+      enableExperimentalFocusWrapWithoutSentinels: true,
+    });
+    expect(checkFlag).toHaveBeenLastCalledWith({
+      enableV12Overflowmenu: false,
+      enableExperimentalFocusWrapWithoutSentinels: true,
     });
   });
 
