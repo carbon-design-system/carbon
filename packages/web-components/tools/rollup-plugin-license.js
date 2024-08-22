@@ -7,12 +7,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const path = require('path');
-const readPkgUp = require('read-pkg-up');
-const MagicString = require('magic-string');
-const { createFilter } = require('@rollup/pluginutils');
+import path from 'path';
+import { readPackageUp } from 'read-package-up';
+import MagicString from 'magic-string';
+import { createFilter } from '@rollup/pluginutils';
 
-function rollupPluginLicense({
+export default function rollupPluginLicense({
   include,
   exclude,
   whitelist,
@@ -34,7 +34,7 @@ function rollupPluginLicense({
       const isSelf = /\/node_modules\//i.test(id);
       const packageContents = !isSelf
         ? undefined
-        : await readPkgUp({ cwd: path.dirname(id) });
+        : await readPackageUp({ cwd: path.dirname(id) });
       const { name } = (packageContents && packageContents.packageJson) || {};
 
       if (!name || licensesForPackages[name]) {
@@ -96,5 +96,3 @@ function rollupPluginLicense({
     },
   };
 }
-
-module.exports = rollupPluginLicense;

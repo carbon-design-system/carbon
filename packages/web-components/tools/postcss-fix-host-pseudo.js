@@ -7,8 +7,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const postcss = require('postcss');
-const parser = require('postcss-selector-parser');
+import postcss from 'postcss';
+import parser from 'postcss-selector-parser';
 
 const pseudoElementNames = [
   'first-line',
@@ -55,7 +55,7 @@ const rePseudoElements = new RegExp(`::?(${pseudoElementNames.join('|')})`);
  * ```
  */
 // eslint-disable-next-line prefer-arrow-callback
-module.exports = postcss.plugin(
+export default postcss.plugin(
   'fix-host-pseudo',
   function postCssPluginFixHostPseudo() {
     return function fixHostPseudo(css) {
