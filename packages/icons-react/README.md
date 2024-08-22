@@ -49,7 +49,7 @@ const { Add } = require('@carbon/icons-react');
 
 _Note: if you would like to find the import path for an icon, you can reference
 our
-[Icon Library](https://www.carbondesignsystem.com/guidelines/iconography/library)_
+[Icon Library](https://carbondesignsystem.com/elements/icons/library)_
 
 ### Icon fill
 
