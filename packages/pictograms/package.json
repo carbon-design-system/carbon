@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@carbon/icon-build-helpers": "^1.28.0",
-    "rimraf": "^5.0.0"
+    "rimraf": "^6.0.0"
   },
   "dependencies": {
     "@ibm/telemetry-js": "^1.5.0"
