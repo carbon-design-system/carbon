@@ -13,7 +13,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { rollup } from 'rollup';
 import autoprefixer from 'autoprefixer';
-import { babel } from '@rollup/plugin-babel';
 import alias from '@rollup/plugin-alias';
 import commonjs from '@rollup/plugin-commonjs';
 import cssnano from 'cssnano';
@@ -115,7 +114,6 @@ function getRollupConfig({ folders = [] } = {}) {
 
   return {
     input: _generateInputs(folders),
-    external: [/@babel\/runtime/],
     plugins: [
       alias({
         entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
@@ -132,46 +130,14 @@ function getRollupConfig({ folders = [] } = {}) {
         sourceMap: true,
       }),
       carbonIcons(),
-      babel({
-        babelHelpers: 'bundled',
-        extensions: ['.ts'],
-        exclude: ['node_modules/**'], // only transpile our source code
-        presets: ['@babel/preset-modules'],
-        plugins: [
-          '@babel/plugin-transform-typescript',
-          '@babel/plugin-transform-class-properties',
-          [
-            '@babel/plugin-proposal-decorators',
-            { decoratorsBeforeExport: true },
-          ],
-          '@babel/plugin-transform-nullish-coalescing-operator',
-          ['@babel/plugin-transform-object-rest-spread', { useBuiltIns: true }],
-          '@babel/plugin-transform-optional-chaining',
-          [
-            'template-html-minifier', // TODO: verify this is actually needed, doesn't seem to be doing anything
-            {
-              modules: {
-                'lit-html': ['html'],
-                'lit-element': ['html'],
-              },
-              htmlMinifier: {
-                collapseWhitespace: true,
-                conservativeCollapse: true,
-                removeComments: true,
-                caseSensitive: true,
-                minifyCSS: true,
-              },
-            },
-          ],
-        ],
+      typescript({
+        noEmitOnError: true,
+        declaration: false,
+        compilerOptions: {
+          rootDir: 'src',
+          outDir: 'dist',
+        },
       }),
-      // typescript({
-      //   noEmitOnError: true,
-      //   compilerOptions: {
-      //     rootDir: 'src',
-      //     outDir: 'dist',
-      //   },
-      // }),
       litSCSS({
         includePaths: [
           path.resolve(__dirname, '../node_modules'),
