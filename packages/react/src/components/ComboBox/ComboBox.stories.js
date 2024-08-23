@@ -132,6 +132,22 @@ export const AllowCustomValue = (args) => {
     </div>
   );
 };
+
+export const AutocompleteWithTypeahead = (args) => {
+  return (
+    <div style={{ width: 300 }}>
+      <ComboBox
+        allowCustomValue
+        autocomplete
+        onChange={args.onChange}
+        id="carbon-combobox"
+        items={['Apple', 'Orange', 'Banana', 'Pineapple', 'Raspberry', 'Lime']}
+        titleText="ComboBox title"
+        helperText="Combobox helper text"
+      />
+    </div>
+  );
+};
 export const ExperimentalAutoAlign = () => (
   <div style={{ width: 400 }}>
     <div style={{ height: 300 }}></div>
@@ -226,6 +242,10 @@ export const Playground = (args) => (
     />
   </div>
 );
+
+AutocompleteWithTypeahead.argTypes = {
+  onChange: { action: 'onChange' },
+};
 
 Playground.argTypes = {
   ['aria-label']: {

@@ -78,6 +78,23 @@ const defaultItemToString = <ItemType,>(item: ItemType | null) => {
 
 const defaultShouldFilterItem = () => true;
 
+const autocompleteCustomFilter = ({
+  item,
+  inputValue,
+}: {
+  item: string;
+  inputValue: string | null;
+}): boolean => {
+  if (inputValue === null || inputValue === '') {
+    return true; // Show all items if there's no input
+  }
+
+  const lowercaseItem = item.toLowerCase();
+  const lowercaseInput = inputValue.toLowerCase();
+
+  return lowercaseItem.startsWith(lowercaseInput);
+};
+
 const getInputValue = <ItemType,>({
   initialSelectedItem,
   inputValue,
@@ -171,6 +188,11 @@ export interface ComboBoxProps<ItemType>
    * ancestor elements.
    */
   autoAlign?: boolean;
+
+  /**
+   * **Experimental**: will enable autcomplete and typeahead for the input field
+   */
+  autocomplete?: boolean;
 
   /**
    * An optional className to add to the container node
@@ -347,10 +369,14 @@ const ComboBox = forwardRef(
     props: ComboBoxProps<ItemType>,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
+    const [cursorPosition, setCursorPosition] = useState(0);
+    const inputRef = useRef<HTMLInputElement>(null);
+
     const {
       ['aria-label']: ariaLabel = 'Choose an item',
       ariaLabel: deprecatedAriaLabel,
       autoAlign = false,
+      autocomplete = false,
       className: containerClassName,
       direction = 'bottom',
       disabled = false,
@@ -405,10 +431,7 @@ const ComboBox = forwardRef(
         }
       }
     }, [autoAlign, floatingStyles, refs.floating, parentWidth]);
-    const prefix = usePrefix();
-    const { isFluid } = useContext(FormContext);
-    const textInput = useRef<HTMLInputElement>(null);
-    const comboBoxInstanceId = useId();
+
     const [inputValue, setInputValue] = useState(
       getInputValue({
         initialSelectedItem,
@@ -417,6 +440,39 @@ const ComboBox = forwardRef(
         selectedItem: selectedItemProp,
       })
     );
+
+    const [typeaheadText, setTypeaheadText] = useState('');
+
+    useEffect(() => {
+      const getTypeaheadSuggestion = (input: string) => {
+        if (!autocomplete || !input) {
+          return '';
+        }
+
+        const filteredItems = items.filter((item) =>
+          autocompleteCustomFilter({
+            item: itemToString(item),
+            inputValue: input,
+          })
+        );
+
+        if (filteredItems.length > 0) {
+          const suggestion = itemToString(filteredItems[0]);
+          return suggestion.slice(input.length);
+        }
+        return '';
+      };
+
+      if (autocomplete) {
+        const suggestion = getTypeaheadSuggestion(inputValue);
+        setTypeaheadText(suggestion);
+      }
+    }, [inputValue, autocomplete, items, itemToString]);
+
+    const prefix = usePrefix();
+    const { isFluid } = useContext(FormContext);
+    const textInput = useRef<HTMLInputElement>(null);
+    const comboBoxInstanceId = useId();
     const [isFocused, setIsFocused] = useState(false);
     const [prevSelectedItem, setPrevSelectedItem] = useState<ItemType | null>();
     const [doneInitialSelectedItem, setDoneInitialSelectedItem] =
@@ -442,7 +498,9 @@ const ComboBox = forwardRef(
       inputValue: string | null
     ) =>
       items.filter((item) =>
-        shouldFilterItem
+        autocomplete
+          ? autocompleteCustomFilter({ item: itemToString(item), inputValue })
+          : shouldFilterItem
           ? shouldFilterItem({
               item,
               itemToString,
@@ -636,8 +694,19 @@ const ComboBox = forwardRef(
         return itemToString(item);
       },
       onInputValueChange({ inputValue }) {
-        setInputValue(inputValue || '');
-        setHighlightedIndex(indexToHighlight(inputValue));
+        // setInputValue(inputValue || '');
+        // setHighlightedIndex(indexToHighlight(inputValue));
+        if (inputValue === null) {
+          setInputValue('');
+          setCursorPosition(0);
+        } else {
+          const newInputValue = (inputValue ?? '').endsWith(typeaheadText)
+            ? inputValue
+            : inputValue + typeaheadText;
+          console.log(newInputValue);
+          setInputValue(newInputValue as any);
+          setCursorPosition(inputValue?.length ?? 0);
+        }
       },
       onSelectedItemChange({ selectedItem }) {
         onChange({ selectedItem });
@@ -689,6 +758,11 @@ const ComboBox = forwardRef(
       downshiftSetInputValue,
       toggleMenu,
     ]);
+    useEffect(() => {
+      if (inputRef.current) {
+        inputRef.current.setSelectionRange(cursorPosition, cursorPosition);
+      }
+    }, [inputValue, cursorPosition]);
 
     const buttonProps = getToggleButtonProps({
       disabled: disabled || readOnly,
@@ -782,7 +856,14 @@ const ComboBox = forwardRef(
               {...getInputProps({
                 'aria-controls': isOpen ? undefined : menuProps.id,
                 placeholder,
-                ref: mergeRefs(textInput, ref),
+                value: inputValue,
+                onChange: (e) => {
+                  const newValue = e.target.value.endsWith(typeaheadText)
+                    ? e.target.value.slice(0, -typeaheadText.length)
+                    : e.target.value;
+                  downshiftSetInputValue(newValue);
+                },
+                ref: mergeRefs(textInput, ref, inputRef),
                 onKeyDown: (
                   event: KeyboardEvent<HTMLInputElement> & {
                     preventDownshiftDefault: boolean;
@@ -974,6 +1055,11 @@ ComboBox.propTypes = {
    * ancestor elements.
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * **Experimental**: will enable autcomplete and typeahead for the input field
+   */
+  autocomplete: PropTypes.bool,
 
   /**
    * An optional className to add to the container node
