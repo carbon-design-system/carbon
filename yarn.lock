@@ -9440,16 +9440,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"braces@npm:^3.0.2, braces@npm:~3.0.2":
-  version: 3.0.2
-  resolution: "braces@npm:3.0.2"
-  dependencies:
-    fill-range: "npm:^7.0.1"
-  checksum: 10/966b1fb48d193b9d155f810e5efd1790962f2c4e0829f8440b8ad236ba009222c501f70185ef732fef17a4c490bb33a03b90dab0631feafbdf447da91e8165b1
-  languageName: node
-  linkType: hard
-
-"braces@npm:^3.0.3":
+"braces@npm:^3.0.2, braces@npm:^3.0.3, braces@npm:~3.0.2":
   version: 3.0.3
   resolution: "braces@npm:3.0.3"
   dependencies:
@@ -14316,15 +14307,6 @@ __metadata:
     repeat-string: "npm:^1.6.1"
     to-regex-range: "npm:^2.1.0"
   checksum: 10/68be23b3c40d5a3fd2847ce18e3a5eac25d9f4c05627291e048ba1346ed0e429668b58a3429e61c0db9fa5954c4402fe99322a65d8a0eb06ebed8d3a18fbb09a
-  languageName: node
-  linkType: hard
-
-"fill-range@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "fill-range@npm:7.0.1"
-  dependencies:
-    to-regex-range: "npm:^5.0.1"
-  checksum: 10/e260f7592fd196b4421504d3597cc76f4a1ca7a9488260d533b611fc3cefd61e9a9be1417cb82d3b01ad9f9c0ff2dbf258e1026d2445e26b0cf5148ff4250429
   languageName: node
   linkType: hard
 
@@ -20152,7 +20134,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:4.0.5, micromatch@npm:^4.0.2, micromatch@npm:^4.0.4, micromatch@npm:^4.0.5":
+"micromatch@npm:4.0.5":
   version: 4.0.5
   resolution: "micromatch@npm:4.0.5"
   dependencies:
@@ -20183,7 +20165,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:^4.0.6":
+"micromatch@npm:^4.0.2, micromatch@npm:^4.0.4, micromatch@npm:^4.0.5, micromatch@npm:^4.0.6":
   version: 4.0.7
   resolution: "micromatch@npm:4.0.7"
   dependencies:
@@ -28636,7 +28618,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:8.5.0, ws@npm:^8.2.3, ws@npm:^8.4.2":
+"ws@npm:8.5.0":
   version: 8.5.0
   resolution: "ws@npm:8.5.0"
   peerDependencies:
@@ -28660,7 +28642,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.17.1":
+"ws@npm:^8.17.1, ws@npm:^8.2.3, ws@npm:^8.4.2":
   version: 8.18.0
   resolution: "ws@npm:8.18.0"
   peerDependencies:
@@ -28795,7 +28777,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:2.3.4, yaml@npm:^2.0.0":
+"yaml@npm:2.3.4":
   version: 2.3.4
   resolution: "yaml@npm:2.3.4"
   checksum: 10/f8207ce43065a22268a2806ea6a0fa3974c6fde92b4b2fa0082357e487bc333e85dc518910007e7ac001b532c7c84bd3eccb6c7757e94182b564028b0008f44b
@@ -28809,7 +28791,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^2.4.1":
+"yaml@npm:^2.0.0, yaml@npm:^2.4.1":
   version: 2.5.0
   resolution: "yaml@npm:2.5.0"
   bin:
