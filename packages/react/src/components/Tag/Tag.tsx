@@ -224,6 +224,7 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
       disabled={disabled}
       className={tagClasses}
       id={tagId}
+      type={ComponentTag === 'button' ? 'button' : undefined}
       {...other}>
       {CustomIconElement && size !== 'sm' ? (
         <div className={`${prefix}--tag__custom-icon`}>

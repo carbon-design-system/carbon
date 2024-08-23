@@ -28,3 +28,6 @@ deprecated:
   - name: AI
     reason:
       Icon should not be used. Teams should use the Carbon AILabel component.
+  - name: machine-learning
+    reason:
+      Icon should not be used. Teams should use machine-learning-model instead
