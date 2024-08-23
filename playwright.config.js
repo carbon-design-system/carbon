@@ -34,9 +34,6 @@ const config = {
   outputDir: path.join(__dirname, '.playwright', 'results'),
   snapshotDir: path.join(__dirname, '.playwright', 'snapshots'),
 
-  // https://playwright.dev/docs/test-parallel#parallelize-tests-in-a-single-file
-  // fullyParallel: true,
-
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   use: {

@@ -32,7 +32,7 @@ test.describe('@avt CodeSnippet', () => {
     });
 
     await expect(page.getByRole('button')).toBeVisible();
-    page.getByRole('button').hover();
+    await page.getByRole('button').hover();
     await expect(page).toHaveNoACViolations('CodeSnippet inline hover');
   });
 

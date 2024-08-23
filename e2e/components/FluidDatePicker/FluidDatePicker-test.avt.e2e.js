@@ -65,14 +65,20 @@ test.describe('@avt FluidDatePicker', () => {
     });
     // for some reason the firs tab is not working to focus the first tabstop, so focusing manually
     await page.getByRole('textbox', { name: 'Label' }).focus();
-    await expect(page.getByRole('textbox', { name: 'Label' })).toBeFocused();
-    await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
+    const textbox = await page.getByRole('textbox', { name: 'Label' });
+    await expect(textbox).toBeFocused();
+    const calendar = await page.locator('div.flatpickr-calendar');
+    await expect(calendar).toHaveClass(/open/);
+    await expect(calendar).toBeVisible();
+
+    const today = await page.locator('.flatpickr-day.today');
     await page.keyboard.press('ArrowDown');
-    await expect(page.locator('span.today')).toBeFocused();
+    await expect(today).toBeVisible();
+    await expect(today).toBeFocused();
+
     await page.keyboard.press('Escape');
-    await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
-      /open/
-    );
+    await expect(calendar).not.toHaveClass(/open/);
+    await expect(calendar).toBeHidden();
   });
 
   test('@avt-keyboard-nav range', async ({ page }) => {
