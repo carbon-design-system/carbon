@@ -672,9 +672,9 @@ const MultiSelect = React.forwardRef(
       selectedItems.length > 0 &&
       selectedItems.map((item) => (item as selectedItemType)?.text);
 
-    const selectedItemsWithoutSelectAll = selectAll
-      ? selectedItems.filter((item: any) => !item.isSelectAll)
-      : selectedItems;
+    const selectedItemsLength = selectAll
+      ? selectedItems.filter((item: any) => !item.isSelectAll).length
+      : selectedItems.length;
 
     // Memoize the value of getMenuProps to avoid an infinite loop
     const menuProps = useMemo(
@@ -727,7 +727,7 @@ const MultiSelect = React.forwardRef(
                 clearSelection={
                   !disabled && !readOnly ? clearSelection : noopFn
                 }
-                selectionCount={selectedItemsWithoutSelectAll.length}
+                selectionCount={selectedItemsLength}
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 translateWithId={translateWithId!}
                 disabled={disabled}
