@@ -50,7 +50,12 @@ const config = {
     },
   ],
   reporter: [
-    ['line'],
+    // Dot reporter is used in CI because it's very concise - it only produces a
+    // single character per successful test run.
+    [process.env.CI ? 'dot' : 'line'],
+
+    // The remaining reporters should always be used, in both CI and dev.
+    ['blob'],
     [
       'json',
       {

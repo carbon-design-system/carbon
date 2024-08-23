@@ -177,7 +177,7 @@ jobs:
         uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a #4.3.6
         with:
           name: playwright-vrt-blob-report-${{ matrix.shardIndex }}
-          path: playwright-vrt-blob-report
+          path: blob-report
           retention-days: 1
 
   vrt:
@@ -242,7 +242,7 @@ jobs:
         uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a #4.3.6
         with:
           name: playwright-avt-blob-report-${{ matrix.shardIndex }}
-          path: playwright-avt-blob-report
+          path: blob-report
           retention-days: 1
 
   avt:

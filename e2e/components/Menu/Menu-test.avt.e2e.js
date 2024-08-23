@@ -61,14 +61,14 @@ test.describe('@avt Menu', () => {
 
     await expect(nestedMenu).toBeVisible();
     await expect(nestedMenuItem).toBeVisible();
-    await expect(nestedMenuItem).not.toBeChecked();
+    await expect(nestedMenuItem).toHaveAttribute('aria-checked', 'false');
 
     // avoid flaky test failures from the keyboard press happening too quickly
     // this retries the keypress along with the focus assertion until it passes
     await expect(async () => {
       // Should select item with enter key
       await page.keyboard.press('Enter');
-      expect(nestedMenuItem).toBeChecked();
+      await expect(nestedMenuItem).toHaveAttribute('aria-checked', 'true');
     }).toPass();
 
     // avoid flaky test failures from the keyboard press happening too quickly
