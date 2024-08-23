@@ -31,7 +31,7 @@ export interface TableSelectRowProps {
   /**
    * Specify whether this row is selected, or not
    */
-  checked: boolean;
+  checked?: boolean;
 
   /**
    * The CSS class names of the cell that wraps the underlying input control
@@ -129,7 +129,7 @@ TableSelectRow.propTypes = {
   /**
    * Specify whether this row is selected, or not
    */
-  checked: PropTypes.bool.isRequired,
+  checked: PropTypes.bool,
 
   /**
    * The CSS class names of the cell that wraps the underlying input control

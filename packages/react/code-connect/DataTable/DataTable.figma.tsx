@@ -5,101 +5,229 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// React : Figma
-// DataTable > Table : Data table
-// TableSelectRow & TableRow : Data table row
-// TableHead > TableRow : Data table header row item
-// TableBody > TableRow : Data table body row item
-// TableCell : Data table row cell item
-// TableHeader : Data table header cell item
-
+// @ts-nocheck
 import React from 'react';
 import {
+  TableContainer,
   Table,
   TableHead,
   TableRow,
-  TableHeader,
   TableBody,
-  TableCell,
+  TableExpandHeader,
+  TableSelectAll,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
+
+const sharedTableProps = {
+  // skeleton: figma.boolean('Skeleton'),
+  slot: figma.boolean('Slot', {
+    true: figma.instance('Swap slot'),
+  }),
+  toolbar: figma.boolean('Toolbar', {
+    true: figma.children(['Data table toolbar item']),
+  }),
+  pagination: figma.boolean('Pagination', {
+    true: figma.children(['Pagination - Table bar']),
+  }),
+  headerItem: figma.nestedProps('Data table header item', {
+    description: figma.boolean('Description', {
+      true: figma.string('Description text'),
+    }),
+    title: figma.string('Title text'),
+  }),
+  headerRow: figma.nestedProps('Data table header row item', {
+    size: figma.enum('Size', {
+      'Extra large': 'xl',
+      Large: 'lg',
+      Medium: 'md',
+      Small: 'sm',
+      'Extra small': 'xs',
+    }),
+    children: figma.children('Col*'),
+  }),
+  headerRowItems: figma.children(['Data table header row item']),
+  rowItems: figma.boolean('Body', {
+    true: figma.children(['Data table body row item']),
+  }),
+};
 
 figma.connect(
   Table,
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
   {
-    props: {
-      body: figma.boolean('Body'),
-      swapslot: figma.instance('Swap slot'),
-      slot: figma.boolean('Slot'), // shows up below data table
-      toolbar: figma.boolean('Toolbar'),
-      pagination: figma.boolean('Pagination'),
-      type: figma.enum('Type', {
-        Default: 'default',
-        Expandable: 'expandable',
-        'Select checkbox': 'select-checkbox',
-        'Select radio': 'select-radio',
-        'Expandable + Selectable': 'expandable---selectable',
-        'Batch actions': 'batch-actions',
-      }),
-      size: figma.enum('Size', {
-        'XL / LG / MD': 'xl---lg---md',
-        'SM / XS': 'sm---xs',
-      }),
-      skeleton: figma.boolean('Skeleton'),
-    },
-    example: () => {
-      // This is sample code for a basic Table
-      // See storybook for for detailed implementation docs
-      // https://react.carbondesignsystem.com/?path=/docs/components-datatable-basic--overview
-      const rows = [
-        {
-          id: 'load-balancer-1',
-          name: 'Load Balancer 1',
-          rule: 'Round robin',
-          Status: 'Starting',
-          other: 'Test',
-          example: '22',
-        },
-        {
-          id: 'load-balancer-2',
-          name: 'Load Balancer 2',
-          rule: 'DNS delegation',
-          status: 'Active',
-          other: 'Test',
-          example: '22',
-        },
-        {
-          id: 'load-balancer-3',
-          name: 'Load Balancer 3',
-          rule: 'Round robin',
-          status: 'Disabled',
-          other: 'Test',
-          example: '22',
-        },
-      ];
-      const headers = ['Name', 'Rule', 'Status'];
+    props: sharedTableProps,
+    example: ({
+      headerItem,
+      headerRow,
+      headerRowItems,
+      rowItems,
+      pagination,
+      toolbar,
+      slot,
+    }) => {
       return (
-        <Table aria-label="sample table">
-          <TableHead>
-            <TableRow>
-              {headers.map((header) => (
-                <TableHeader key={header}>{header}</TableHeader>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id}>
-                {Object.keys(row)
-                  .filter((key) => key !== 'id')
-                  .map((key) => {
-                    return <TableCell key={key}>{row[key]}</TableCell>;
-                  })}
+        <TableContainer
+          title={headerItem.title}
+          description={headerItem.description}>
+          {toolbar}
+          <Table size={headerRow.size} aria-label="sample table">
+            <TableHead>
+              <TableRow>{headerRow.children}</TableRow>
+            </TableHead>
+            <TableBody>{rowItems}</TableBody>
+          </Table>
+          {pagination}
+          {slot}
+        </TableContainer>
+      );
+    },
+  }
+);
+
+figma.connect(
+  Table,
+  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
+  {
+    variant: { Type: 'Expandable' },
+    props: sharedTableProps,
+    example: ({
+      headerItem,
+      headerRow,
+      headerRowItems,
+      rowItems,
+      pagination,
+      toolbar,
+      slot,
+    }) => {
+      return (
+        <TableContainer
+          title={headerItem.title}
+          description={headerItem.description}>
+          {toolbar}
+          <Table size={headerRow.size} aria-label="sample table">
+            <TableHead>
+              <TableRow>
+                <TableExpandHeader aria-label="expand row" />
+                {headerRow.children}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody>{rowItems}</TableBody>
+          </Table>
+          {pagination}
+          {slot}
+        </TableContainer>
+      );
+    },
+  }
+);
+
+figma.connect(
+  Table,
+  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
+  {
+    variant: { Type: 'Select checkbox' },
+    props: sharedTableProps,
+    example: ({
+      headerItem,
+      headerRow,
+      headerRowItems,
+      rowItems,
+      pagination,
+      toolbar,
+      slot,
+    }) => {
+      return (
+        <TableContainer
+          title={headerItem.title}
+          description={headerItem.description}>
+          {toolbar}
+          <Table size={headerRow.size} aria-label="sample table">
+            <TableHead>
+              <TableRow>
+                <TableSelectAll />
+                {headerRow.children}
+              </TableRow>
+            </TableHead>
+            <TableBody>{rowItems}</TableBody>
+          </Table>
+          {pagination}
+          {slot}
+        </TableContainer>
+      );
+    },
+  }
+);
+
+figma.connect(
+  Table,
+  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
+  {
+    variant: { Type: 'Select radio' },
+    props: sharedTableProps,
+    example: ({
+      headerItem,
+      headerRow,
+      headerRowItems,
+      rowItems,
+      pagination,
+      toolbar,
+      slot,
+    }) => {
+      return (
+        <TableContainer
+          title={headerItem.title}
+          description={headerItem.description}>
+          {toolbar}
+          <Table size={headerRow.size} aria-label="sample table">
+            <TableHead>
+              <TableRow>
+                <th scope="col" />
+                {headerRow.children}
+              </TableRow>
+            </TableHead>
+            <TableBody>{rowItems}</TableBody>
+          </Table>
+          {pagination}
+          {slot}
+        </TableContainer>
+      );
+    },
+  }
+);
+
+figma.connect(
+  Table,
+  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
+  {
+    variant: { Type: 'Expandable + Selectable' },
+    props: sharedTableProps,
+    example: ({
+      headerItem,
+      headerRow,
+      headerRowItems,
+      rowItems,
+      pagination,
+      toolbar,
+      slot,
+    }) => {
+      return (
+        <TableContainer
+          title={headerItem.title}
+          description={headerItem.description}>
+          {toolbar}
+          <Table size={headerRow.size} aria-label="sample table">
+            <TableHead>
+              <TableRow>
+                <TableExpandHeader aria-label="expand row" />
+                <TableSelectAll />
+                {headerRow.children}
+              </TableRow>
+            </TableHead>
+            <TableBody>{rowItems}</TableBody>
+          </Table>
+          {pagination}
+          {slot}
+        </TableContainer>
       );
     },
   }
