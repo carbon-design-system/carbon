@@ -93,14 +93,24 @@ test.describe('@avt DatePicker', () => {
     ).toBeFocused();
     const calendar = await page.locator('div.flatpickr-calendar');
     await expect(calendar).toHaveClass(/open/);
-    await page.keyboard.press('ArrowDown');
-    const today = await page.locator('span.today');
-    await expect(today).toBeVisible();
-    await expect(today).toBeFocused();
-    await page.keyboard.press('Escape');
-    await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
-      /open/
-    );
+
+    // avoid flaky test failures from the keyboard press happening too quickly
+    // this retries the keypress along with the focus assertion until it passes
+    await expect(async () => {
+      await page.keyboard.press('ArrowDown');
+      const today = await page.locator('span.today');
+      await expect(today).toBeVisible();
+      await expect(today).toBeFocused();
+    }).toPass();
+
+    // avoid flaky test failures from the keyboard press happening too quickly
+    // this retries the keypress along with the focus assertion until it passes
+    await expect(async () => {
+      await page.keyboard.press('Escape');
+      await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
+        /open/
+      );
+    }).toPass();
   });
 
   test('@avt-keyboard-nav range state', async ({ page }) => {

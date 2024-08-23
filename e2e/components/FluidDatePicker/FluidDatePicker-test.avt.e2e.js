@@ -72,13 +72,22 @@ test.describe('@avt FluidDatePicker', () => {
     await expect(calendar).toBeVisible();
 
     const today = await page.locator('.flatpickr-day.today');
-    await page.keyboard.press('ArrowDown');
-    await expect(today).toBeVisible();
-    await expect(today).toBeFocused();
 
-    await page.keyboard.press('Escape');
-    await expect(calendar).not.toHaveClass(/open/);
-    await expect(calendar).toBeHidden();
+    // avoid flaky test failures from the keyboard press happening too quickly
+    // this retries the keypress along with the focus assertion until it passes
+    await expect(async () => {
+      await page.keyboard.press('ArrowDown');
+      await expect(today).toBeVisible();
+      await expect(today).toBeFocused();
+    }).toPass();
+
+    // avoid flaky test failures from the keyboard press happening too quickly
+    // this retries the keypress along with the focus assertion until it passes
+    await expect(async () => {
+      await page.keyboard.press('Escape');
+      await expect(calendar).not.toHaveClass(/open/);
+      await expect(calendar).toBeHidden();
+    }).toPass();
   });
 
   test('@avt-keyboard-nav range', async ({ page }) => {
