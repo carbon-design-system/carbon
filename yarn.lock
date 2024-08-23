@@ -2340,10 +2340,6 @@ __metadata:
     "@mdx-js/esbuild": "npm:^3.0.1"
     "@mordech/vite-lit-loader": "npm:^0.31.3"
     "@open-wc/semantic-dom-diff": "npm:~0.18.0"
-    "@percy-io/in-percy": "npm:^0.1.11"
-    "@percy/cli": "npm:^1.27.4"
-    "@percy/cypress": "npm:^3.1.2"
-    "@percy/dom": "npm:^1.27.5"
     "@rollup/plugin-alias": "npm:^5.1.0"
     "@rollup/plugin-commonjs": "npm:^21.0.3"
     "@rollup/plugin-node-resolve": "npm:^8.4.0"
@@ -2404,13 +2400,13 @@ __metadata:
     replace-ext: "npm:^2.0.0"
     resize-observer-polyfill: "npm:^1.5.0"
     rimraf: "npm:^5.0.0"
-    rollup: "npm:^2.55.1"
+    rollup: "npm:^2.79.1"
     rollup-plugin-multi-input: "npm:^1.3.1"
     rollup-plugin-sass: "npm:^1.13.0"
-    sass: "npm:~1.75.0"
-    sass-loader: "npm:^10.0.0"
+    sass: "npm:^1.51.0"
+    sass-loader: "npm:^14.0.0"
     storybook: "npm:^8.0.6"
-    storybook-addon-accessibility-checker: "npm:^3.1.61-rc.2"
+    storybook-addon-accessibility-checker: "npm:^3.1.61-rc.3"
     strip-comments: "npm:^1.0.0"
     temp: "npm:^0.9.0"
     through2: "npm:^3.0.0"
@@ -4837,13 +4833,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@percy-io/in-percy@npm:^0.1.11":
-  version: 0.1.11
-  resolution: "@percy-io/in-percy@npm:0.1.11"
-  checksum: 10/8bdac24f183e09eee49a0ce365e1587abf865e86fc811af5fc6fdbf3057cef673d52875069adefcbbfa561bf544d44bb44834e5f2ec92d5513c5c355bc7408ec
-  languageName: node
-  linkType: hard
-
 "@percy/cli-app@npm:1.29.0":
   version: 1.29.0
   resolution: "@percy/cli-app@npm:1.29.0"
@@ -4918,7 +4907,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@percy/cli@npm:^1.27.0, @percy/cli@npm:^1.27.4":
+"@percy/cli@npm:^1.27.0":
   version: 1.29.0
   resolution: "@percy/cli@npm:1.29.0"
   dependencies:
@@ -4984,18 +4973,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@percy/cypress@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "@percy/cypress@npm:3.1.2"
-  dependencies:
-    "@percy/sdk-utils": "npm:^1.3.1"
-  peerDependencies:
-    cypress: ">=3"
-  checksum: 10/95d70adc4fbd67d8479885816f677b14e48eb102bab969c8d557e16fd7f4d10834ed8ddfac6b0eb7d94896692129e8f7b8c7f8cf35265eee5ddc195de944dfdb
-  languageName: node
-  linkType: hard
-
-"@percy/dom@npm:1.29.0, @percy/dom@npm:^1.27.5":
+"@percy/dom@npm:1.29.0":
   version: 1.29.0
   resolution: "@percy/dom@npm:1.29.0"
   checksum: 10/78ef4c1fa3be404073753100d4ecfa8f83f0db5e395753cf7b8c0cda1eb69afb0b9d8d85fbed22b91a224106e5342668059dd642aad3c4744ce6b1414fa41aa6
@@ -5027,7 +5005,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@percy/sdk-utils@npm:1.29.0, @percy/sdk-utils@npm:^1.3.1":
+"@percy/sdk-utils@npm:1.29.0":
   version: 1.29.0
   resolution: "@percy/sdk-utils@npm:1.29.0"
   checksum: 10/cf36e75e61887f9172bfda7fdf3e191e48bd6c98023769ca75b5c6979290a234409e8738c3fb191e8cef650881e1dd50948f68690f39723ca5aca93519d6504f
@@ -19998,13 +19976,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"klona@npm:^2.0.4":
-  version: 2.0.6
-  resolution: "klona@npm:2.0.6"
-  checksum: 10/ed7e2c9af58cb646e758e60b75dec24bf72466066290f78c515a2bae23a06fa280f11ff3210c43b94a18744954aa5358f9d46583d5e4c36da073ecc3606355c4
-  languageName: node
-  linkType: hard
-
 "known-css-properties@npm:^0.29.0":
   version: 0.29.0
   resolution: "known-css-properties@npm:0.29.0"
@@ -27494,7 +27465,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.55.1, rollup@npm:^2.79.1":
+"rollup@npm:^2.79.1":
   version: 2.79.1
   resolution: "rollup@npm:2.79.1"
   dependencies:
@@ -27718,31 +27689,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^10.0.0":
-  version: 10.5.2
-  resolution: "sass-loader@npm:10.5.2"
-  dependencies:
-    klona: "npm:^2.0.4"
-    loader-utils: "npm:^2.0.0"
-    neo-async: "npm:^2.6.2"
-    schema-utils: "npm:^3.0.0"
-    semver: "npm:^7.3.2"
-  peerDependencies:
-    fibers: ">= 3.1.0"
-    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
-    sass: ^1.3.0
-    webpack: ^4.36.0 || ^5.0.0
-  peerDependenciesMeta:
-    fibers:
-      optional: true
-    node-sass:
-      optional: true
-    sass:
-      optional: true
-  checksum: 10/27b85f852d270a5c84b95f8ba3fbc84e7cbb77a3481f3ff2b74d4ea87f2ad4cefcba70ba41412b80e62ba433c75994d4d12d323d39a24de5087b60b571a1a3c9
-  languageName: node
-  linkType: hard
-
 "sass-loader@npm:^14.0.0":
   version: 14.2.1
   resolution: "sass-loader@npm:14.2.1"
@@ -27779,19 +27725,6 @@ __metadata:
   bin:
     sass: sass.js
   checksum: 10/4bf6e3007fef62dd6dfc657c89c2890872a6b5dc43e2dc4d61bcf9ae1bdc2dd95b59454a3cbd3c8363c98b673b028e1578b26135190d0f2a8a184a38ab41e99b
-  languageName: node
-  linkType: hard
-
-"sass@npm:~1.75.0":
-  version: 1.75.0
-  resolution: "sass@npm:1.75.0"
-  dependencies:
-    chokidar: "npm:>=3.0.0 <4.0.0"
-    immutable: "npm:^4.0.0"
-    source-map-js: "npm:>=0.6.2 <2.0.0"
-  bin:
-    sass: sass.js
-  checksum: 10/9f2d1b5adfe0b008e7062ef2f42fd9b26672e39e36ef3d234166636a4082d1f66c01804070e4e07b50ec872cdd9485ccf10fae8f87b3c00b9de6400c6e73efe8
   languageName: node
   linkType: hard
 
@@ -27985,7 +27918,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8, semver@npm:^7.5.3, semver@npm:^7.5.4, semver@npm:^7.6.3":
+"semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8, semver@npm:^7.5.3, semver@npm:^7.5.4, semver@npm:^7.6.3":
   version: 7.6.3
   resolution: "semver@npm:7.6.3"
   bin:
@@ -28707,7 +28640,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-accessibility-checker@npm:^3.1.61-rc.2, storybook-addon-accessibility-checker@npm:^3.1.61-rc.3":
+"storybook-addon-accessibility-checker@npm:^3.1.61-rc.3":
   version: 3.1.61-rc.3
   resolution: "storybook-addon-accessibility-checker@npm:3.1.61-rc.3"
   dependencies:
