@@ -331,27 +331,17 @@ const MultiSelect = React.forwardRef(
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
-    const sortOptions = {
-      selectedItems: selected,
-      itemToString,
-      compareItems,
-      locale,
-    };
-
     const filteredItems = useMemo(() => {
-      return sortItems!(
-        items.filter((item) => {
-          if (typeof item === 'object' && item !== null) {
-            for (const key in item) {
-              if (Object.hasOwn(item, key) && item[key] === undefined) {
-                return false; // Return false if any property has an undefined value
-              }
+      return items.filter((item) => {
+        if (typeof item === 'object' && item !== null) {
+          for (const key in item) {
+            if (Object.hasOwn(item, key) && item[key] === undefined) {
+              return false; // Return false if any property has an undefined value
             }
           }
-          return true; // Return true if item is not an object with undefined values
-        }),
-        sortOptions as SortItemsOptions<ItemType>
-      );
+        }
+        return true; // Return true if item is not an object with undefined values
+      });
     }, [items]);
 
     let selectAll = filteredItems.some((item) => (item as any).isSelectAll);
@@ -420,6 +410,13 @@ const MultiSelect = React.forwardRef(
       selectAll,
       filteredItems,
     });
+
+    const sortOptions = {
+      selectedItems: controlledSelectedItems,
+      itemToString,
+      compareItems,
+      locale,
+    };
 
     const selectProps: UseSelectProps<ItemType> = {
       stateReducer,
@@ -675,9 +672,9 @@ const MultiSelect = React.forwardRef(
       selectedItems.length > 0 &&
       selectedItems.map((item) => (item as selectedItemType)?.text);
 
-    const selectedItemsWithoutSelectAll = selectedItems.filter(
-      (item: any) => !item.isSelectAll
-    );
+    const selectedItemsWithoutSelectAll = selectAll
+      ? selectedItems.filter((item: any) => !item.isSelectAll)
+      : selectedItems;
 
     // Memoize the value of getMenuProps to avoid an infinite loop
     const menuProps = useMemo(
@@ -761,7 +758,10 @@ const MultiSelect = React.forwardRef(
           </div>
           <ListBox.Menu {...menuProps}>
             {isOpen &&
-              filteredItems.map((item, index) => {
+              sortItems!(
+                filteredItems,
+                sortOptions as SortItemsOptions<ItemType>
+              ).map((item, index) => {
                 const isChecked =
                   selectedItems.filter((selected) => isEqual(selected, item))
                     .length > 0;

@@ -27,30 +27,19 @@ export const defaultSortItems = (
   items,
   { selectedItems = [], itemToString, compareItems, locale = 'en' }
 ) => {
-  // Extract the "select all" option
-  const selectAllOption = items.find((item) => item.isSelectAll);
+  return items.sort((itemA, itemB) => {
+    // Always place "select all" option at the beginning
+    if (itemA.isSelectAll) return -1;
+    if (itemB.isSelectAll) return 1;
 
-  // Filter out the "select all" option from the items array
-  const filteredItems = items.filter((item) => !item.isSelectAll);
-
-  // Sort the filtered items
-  const sortedItems = filteredItems.sort((itemA, itemB) => {
     const hasItemA = selectedItems.includes(itemA);
     const hasItemB = selectedItems.includes(itemB);
 
-    if (hasItemA && !hasItemB) {
-      return -1;
-    }
-
-    if (hasItemB && !hasItemA) {
-      return 1;
-    }
+    if (hasItemA && !hasItemB) return -1;
+    if (hasItemB && !hasItemA) return 1;
 
     return compareItems(itemToString(itemA), itemToString(itemB), {
       locale,
     });
   });
-
-  // Add the "select all" option to the beginning of the sorted array, if it exists
-  return selectAllOption ? [selectAllOption, ...sortedItems] : sortedItems;
 };

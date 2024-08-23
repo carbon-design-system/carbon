@@ -385,6 +385,31 @@ export const _Controlled = () => {
   );
 };
 
+const itemsWithSelectAll = [
+  {
+    id: 'downshift-1-item-0',
+    text: 'Editor',
+  },
+  {
+    id: 'downshift-1-item-1',
+    text: 'Owner',
+  },
+  {
+    id: 'downshift-1-item-2',
+    text: 'Uploader',
+  },
+  {
+    id: 'downshift-1-item-3',
+    text: 'Reader - a disabled item',
+    disabled: true,
+  },
+  {
+    id: 'select-all',
+    text: 'All roles',
+    isSelectAll: true,
+  },
+];
+
 export const SelectAll = () => {
   const [label, setLabel] = useState('Choose options');
 
@@ -405,34 +430,10 @@ export const SelectAll = () => {
         id="carbon-multiselect-example"
         titleText="Multiselect title"
         helperText="This is helper text"
-        items={[
-          {
-            id: 'downshift-1-item-0',
-            text: 'Editor',
-          },
-          {
-            id: 'downshift-1-item-1',
-            text: 'Owner',
-          },
-          {
-            id: 'downshift-1-item-2',
-            text: 'Uploader',
-          },
-          {
-            id: 'downshift-1-item-3',
-            text: 'Reader - a disabled item',
-            disabled: true,
-          },
-          {
-            id: 'select-all',
-            text: 'All roles',
-            isSelectAll: true,
-          },
-        ]}
+        items={itemsWithSelectAll}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
         onChange={onChange}
-        selectAllItemText="All roles"
       />
     </div>
   );
