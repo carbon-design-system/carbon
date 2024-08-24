@@ -57,6 +57,7 @@ package-lock.json
 
 # Playwright
 .playwright
+blob-report
 
 # Local token
 .env
