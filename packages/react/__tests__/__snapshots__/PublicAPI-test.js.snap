@@ -9844,14 +9844,7 @@ Map {
       "enableV12TileRadioIcons": Object {
         "type": "bool",
       },
-      "flags": Object {
-        "args": Array [
-          Object {
-            "type": "bool",
-          },
-        ],
-        "type": "objectOf",
-      },
+      "flags": [Function],
     },
   },
   "unstable_Layout" => Object {

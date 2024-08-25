@@ -17,7 +17,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-
+import deprecate from '../../prop-types/deprecate';
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
  * or disable feature flags in a given React tree
@@ -85,9 +85,13 @@ FeatureFlags.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Provide the feature flags to enabled or disabled in the current React tree
+   * Provide the feature flags to enabled or disabled in the current Rea,ct tree
    */
-  flags: PropTypes.objectOf(PropTypes.bool),
+  flags: deprecate(
+    PropTypes.objectOf(PropTypes.bool),
+    'The `flags` prop for `FeatureFlag` has ' +
+      'been deprecated. Please run the `featureflag-deprecate-flags-prop` codemod to migrate to individual boolean props.'
+  ),
   enableUseControlledStateWithValue: PropTypes.bool,
   enableV12TileDefaultIcons: PropTypes.bool,
   enableV12TileRadioIcons: PropTypes.bool,
