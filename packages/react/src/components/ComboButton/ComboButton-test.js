@@ -134,11 +134,11 @@ describe('ComboButton', () => {
 
           await userEvent.click(screen.getAllByRole('button')[1]);
 
-          waitFor(() =>
+          waitFor(() => {
             expect(screen.getByRole('menu')).toHaveClass(
               `${prefix}--combo-button__${alignment}`
-            )
-          );
+            );
+          });
         });
       });
     });
