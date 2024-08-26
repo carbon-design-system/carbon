@@ -32,25 +32,24 @@ const FeatureFlagContext = createContext(GlobalFeatureFlags);
 function FeatureFlags({
   children,
   flags = {},
-  enableUseControlledStateWithValue,
-  enableV12TileDefaultIcons,
-  enableV12TileRadioIcons,
-  enableV12Overflowmenu,
-  enableTreeviewControllable,
-  enableExperimentalFocusWrapWithoutSentinels,
+  enableUseControlledStateWithValue = false,
+  enableV12TileDefaultIcons = false,
+  enableV12TileRadioIcons = false,
+  enableV12Overflowmenu = false,
+  enableTreeviewControllable = false,
+  enableExperimentalFocusWrapWithoutSentinels = false,
 }) {
   const parentScope = useContext(FeatureFlagContext);
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
 
   const combinedFlags = {
-    'enable-use-controlled-state-with-value':
-      enableUseControlledStateWithValue ?? false,
-    'enable-v12-tile-default-icons': enableV12TileDefaultIcons ?? false,
-    'enable-v12-tile-radio-icons': enableV12TileRadioIcons ?? false,
-    'enable-v12-overflowmenu': enableV12Overflowmenu ?? false,
-    'enable-treeview-controllable': enableTreeviewControllable ?? false,
+    'enable-use-controlled-state-with-value': enableUseControlledStateWithValue,
+    'enable-v12-tile-default-icons': enableV12TileDefaultIcons,
+    'enable-v12-tile-radio-icons': enableV12TileRadioIcons,
+    'enable-v12-overflowmenu': enableV12Overflowmenu,
+    'enable-treeview-controllable': enableTreeviewControllable,
     'enable-experimental-focus-wrap-without-sentinels':
-      enableExperimentalFocusWrapWithoutSentinels ?? false,
+      enableExperimentalFocusWrapWithoutSentinels,
     ...flags,
   };
   const [scope, updateScope] = useState(() => {
