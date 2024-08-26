@@ -25,7 +25,7 @@ test.describe('AILabel', () => {
       test('AILabel callout @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'AILabel',
-          id: 'components-ailabel--callout',
+          id: 'components-ailabel--explainability-popover',
           theme,
         });
       });
