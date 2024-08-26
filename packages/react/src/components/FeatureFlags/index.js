@@ -43,13 +43,14 @@ function FeatureFlags({
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
 
   const combinedFlags = {
-    'enable-use-controlled-state-with-value': enableUseControlledStateWithValue,
-    'enable-v12-tile-default-icons': enableV12TileDefaultIcons,
-    'enable-v12-tile-radio-icons': enableV12TileRadioIcons,
-    'enable-v12-overflowmenu': enableV12Overflowmenu,
-    'enable-treeview-controllable': enableTreeviewControllable,
+    'enable-use-controlled-state-with-value':
+      enableUseControlledStateWithValue ?? false,
+    'enable-v12-tile-default-icons': enableV12TileDefaultIcons ?? false,
+    'enable-v12-tile-radio-icons': enableV12TileRadioIcons ?? false,
+    'enable-v12-overflowmenu': enableV12Overflowmenu ?? false,
+    'enable-treeview-controllable': enableTreeviewControllable ?? false,
     'enable-experimental-focus-wrap-without-sentinels':
-      enableExperimentalFocusWrapWithoutSentinels,
+      enableExperimentalFocusWrapWithoutSentinels ?? false,
     ...flags,
   };
   const [scope, updateScope] = useState(() => {
@@ -143,7 +144,8 @@ function useChangedValue(value, compare, callback) {
  */
 function useFeatureFlag(flag) {
   const scope = useContext(FeatureFlagContext);
-  return scope.enabled(flag);
+  //updated to return false for undefined flags
+  return scope.enabled(flag) ?? false;
 }
 
 /**

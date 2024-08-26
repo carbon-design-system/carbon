@@ -273,3 +273,6 @@ export const EnableV12TileRadioIcons = () => {
     </FeatureFlags>
   );
 };
+export const Test = () => {
+  return <div className={wrapperClasses}></div>;
+};

@@ -36,6 +36,8 @@ function transform(fileInfo, api, options) {
 
       if (
         flagsAttribute &&
+        flagsAttribute.value &&
+        flagsAttribute.value.expression &&
         flagsAttribute.value.expression.type === 'ObjectExpression'
       ) {
         const newAttributes = flagsAttribute.value.expression.properties
@@ -60,3 +62,4 @@ function transform(fileInfo, api, options) {
 }
 
 module.exports = transform;
+module.exports.parser = 'tsx';
