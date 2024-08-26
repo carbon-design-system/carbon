@@ -15,6 +15,7 @@ import React, {
   useState,
   useEffect,
   FC,
+  useCallback,
 } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
@@ -343,38 +344,41 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     const Icon = normalizedProps.icon as any;
 
-    function handleStepperClick(event, direction) {
-      if (inputRef.current) {
-        const currentValue = Number(inputRef.current.value);
-        let newValue =
-          direction === 'up' ? currentValue + step : currentValue - step;
-        if (min !== undefined) {
-          newValue = Math.max(newValue, min);
-        }
-        if (max !== undefined) {
-          newValue = Math.min(newValue, max);
-        }
-        const currentInputValue = inputRef.current
-          ? inputRef.current.value
-          : '';
-        const state = {
-          value:
-            allowEmpty && currentInputValue === '' && step === 0
-              ? ''
-              : newValue,
-          direction: direction,
-        };
-        setValue(state.value);
+    const handleStepperClick = useCallback(
+      (event, direction) => {
+        if (inputRef.current) {
+          const currentValue = Number(inputRef.current.value);
+          let newValue =
+            direction === 'up' ? currentValue + step : currentValue - step;
+          if (min !== undefined) {
+            newValue = Math.max(newValue, min);
+          }
+          if (max !== undefined) {
+            newValue = Math.min(newValue, max);
+          }
+          const currentInputValue = inputRef.current
+            ? inputRef.current.value
+            : '';
+          const state = {
+            value:
+              allowEmpty && currentInputValue === '' && step === 0
+                ? ''
+                : newValue,
+            direction: direction,
+          };
+          setValue(state.value);
 
-        if (onChange) {
-          onChange(event, state);
-        }
+          if (onChange) {
+            onChange(event, state);
+          }
 
-        if (onClick) {
-          onClick(event, state);
+          if (onClick) {
+            onClick(event, state);
+          }
         }
-      }
-    }
+      },
+      [allowEmpty, step, min, max, onChange, onClick]
+    );
 
     // Slug is always size `mini`
     let normalizedSlug;
