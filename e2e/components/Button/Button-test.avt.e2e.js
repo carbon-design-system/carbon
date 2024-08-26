@@ -150,7 +150,7 @@ test.describe('@avt Button', () => {
       },
     });
     await expect(page.getByRole('button')).toBeVisible();
-    page.getByRole('button').hover();
+    await page.getByRole('button').hover();
 
     await expect(page).toHaveNoACViolations('Button-hover');
   });

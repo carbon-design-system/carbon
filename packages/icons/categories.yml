@@ -658,7 +658,9 @@ categories:
           - ibm-watsonx--orchestrate
           - machine-learning
           - machine-learning-model
+          - ml-model--reference
           - model
+          - model--foundation
           - model--reference
           - model--tuned
           - prompt-session
