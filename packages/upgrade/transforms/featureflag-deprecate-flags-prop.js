@@ -26,7 +26,11 @@ function transform(fileInfo, api, options) {
   const { jscodeshift: j } = api;
   const root = j(fileInfo.source);
   const printOptions = options.printOptions || defaultOptions;
-
+  if (
+    !root.find(j.JSXOpeningElement, { name: { name: 'FeatureFlags' } }).size()
+  ) {
+    return null; // if no FeatureFlags found, don't modify & return the file
+  }
   root
     .find(j.JSXOpeningElement, { name: { name: 'FeatureFlags' } })
     .forEach((path) => {
