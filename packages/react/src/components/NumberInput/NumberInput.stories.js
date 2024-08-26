@@ -85,16 +85,27 @@ export const withAILabel = () => (
 export const Playground = (args) => {
   // const { numberInputArrowTranslationIds, ...rest } = props();
   return (
-    <NumberInput
-      id="carbon-number"
-      min={-100}
-      max={100}
-      value={50}
-      label="NumberInput label"
-      helperText="Optional helper text."
-      invalidText="Number is not valid"
-      {...args}
-    />
+    <>
+      <NumberInput
+        id="carbon-number"
+        min={-100}
+        max={100}
+        value={50}
+        label="NumberInput label"
+        helperText="Optional helper text."
+        invalidText="Number is not valid"
+        {...args}
+      />
+      <NumberInput
+        id="carbon-number"
+        min={-100}
+        max={100}
+        value={50}
+        label="NumberInput label"
+        helperText="Optional helper text."
+        invalidText="Number is not valid"
+      />
+    </>
   );
 };
 
@@ -105,12 +116,12 @@ Playground.args = {
 
 Playground.argTypes = {
   className: {
-    table: {
+    control: {
       disable: true,
     },
   },
   defaultValue: {
-    table: {
+    control: {
       disable: true,
     },
   },
@@ -118,7 +129,7 @@ Playground.argTypes = {
     control: { type: 'text' },
   },
   id: {
-    table: {
+    control: {
       disable: true,
     },
   },
@@ -129,7 +140,7 @@ Playground.argTypes = {
     control: { type: 'text' },
   },
   light: {
-    table: {
+    control: {
       disable: true,
     },
   },
