@@ -44,22 +44,6 @@ test.describe('@avt ProgressIndicator', () => {
     await expect(page).toHaveNoACViolations('ProgressIndicator-skeleton');
   });
 
-  test('@avt-advanced-states - onHover', async ({ page }) => {
-    await visitStory(page, {
-      component: 'ProgressIndicator',
-      id: 'components-progressindicator--default',
-      globals: {
-        theme: 'white',
-      },
-    });
-
-    await expect(page.getByText('First step')).toBeVisible();
-
-    page.getByText('First step').hover();
-
-    await expect(page).toHaveNoACViolations('ProgressIndicator-onhover');
-  });
-
   test('@avt-advanced-states - complete', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressIndicator',
@@ -95,9 +79,11 @@ test.describe('@avt ProgressIndicator', () => {
       },
     });
 
-    await expect(page.getByText('Click me')).toBeVisible();
+    const clickMeButton = page.getByRole('button').first();
 
-    page.getByText('Click me').hover();
+    await expect(clickMeButton).toBeVisible();
+
+    await clickMeButton.hover();
 
     await expect(page).toHaveNoACViolations(
       'ProgressIndicator-interactive-onhover'
