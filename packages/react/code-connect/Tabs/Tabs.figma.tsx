@@ -34,8 +34,6 @@ figma.connect(
         size: figma.enum('Size', {
           Large: 'lg',
         }),
-        // dismissable: figma.boolean('Dismissible'),
-        // dismissableWithIcon: figma.boolean('Dismissible + Icon'),
         dismissable: figma.boolean('Dismissible', {
           true: true,
           false: figma.boolean('Dismissible + Icon'),
