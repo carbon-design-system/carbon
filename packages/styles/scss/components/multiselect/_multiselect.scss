@@ -84,6 +84,23 @@
 
   .#{$prefix}--multi-select
     .#{$prefix}--list-box__menu-item__option
+    .#{$prefix}--checkbox-label::before {
+    margin-block: 0;
+  }
+
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item__option
+    .cds--checkbox:indeterminate
+    + .cds--checkbox-label::after {
+    inset-block-start: convert.to-rem(9px);
+  }
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item__option
+    .cds--checkbox-label::after {
+    inset-block-start: convert.to-rem(5px);
+  }
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item__option
     > .#{$prefix}--form-item {
     flex-direction: row;
     margin: 0;
