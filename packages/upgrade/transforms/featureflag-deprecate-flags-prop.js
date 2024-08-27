@@ -38,12 +38,7 @@ function transform(fileInfo, api, options) {
         (attr) => attr.type === 'JSXAttribute' && attr.name.name === 'flags'
       );
 
-      if (
-        flagsAttribute &&
-        flagsAttribute.value &&
-        flagsAttribute.value.expression &&
-        flagsAttribute.value.expression.type === 'ObjectExpression'
-      ) {
+      if (flagsAttribute?.value?.expression?.type === 'ObjectExpression') {
         const newAttributes = flagsAttribute.value.expression.properties
           .filter((flag) => flag.value.value === true)
           .map((flag) => {
