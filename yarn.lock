@@ -2222,6 +2222,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/utilities@workspace:packages/utilities":
+  version: 0.0.0-use.local
+  resolution: "@carbon/utilities@workspace:packages/utilities"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.5.0"
+    esbuild: "npm:^0.23.0"
+    rimraf: "npm:^6.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@colors/colors@npm:1.5.0":
   version: 1.5.0
   resolution: "@colors/colors@npm:1.5.0"
