@@ -26,6 +26,11 @@ export default {
         disable: true,
       },
     },
+    selectionMode: {
+      table: {
+        disable: true,
+      },
+    },
   },
   parameters: {
     docs: {
