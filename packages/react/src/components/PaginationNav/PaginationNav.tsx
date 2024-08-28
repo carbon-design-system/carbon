@@ -312,6 +312,11 @@ interface PaginationNavProps
   page?: number;
 
   /**
+   * Specify the size of the PaginationNav.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
    * The total number of items.
    */
   totalItems?: number;
@@ -327,6 +332,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       itemsShown = 10,
       page = 0,
       loop = false,
+      size = 'lg',
       translateWithId: t = translateWithId,
       ...rest
     },
@@ -428,7 +434,9 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       setIsOverFlowDisabled(disableOverflow);
     }, [disableOverflow]);
 
-    const classNames = classnames(`${prefix}--pagination-nav`, className);
+    const classNames = classnames(`${prefix}--pagination-nav`, className, {
+      [`${prefix}--layout--size-${size}`]: size,
+    });
 
     const backwardButtonDisabled = !loop && currentPage === 0;
     const forwardButtonDisabled = !loop && currentPage === totalItems - 1;
@@ -631,6 +639,11 @@ PaginationNav.propTypes = {
    * The index of current page.
    */
   page: PropTypes.number,
+
+  /**
+   * Specify the size of the PaginationNav.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * The total number of items.

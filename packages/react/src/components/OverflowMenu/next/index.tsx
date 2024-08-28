@@ -94,24 +94,27 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
     const { refs, floatingStyles, placement, middlewareData } = useFloating(
       autoAlign
         ? {
+            // Computing the position starts with initial positioning
+            // via `placement`.
             placement: menuAlignment,
 
             // The floating element is positioned relative to its nearest
-            // containing block (usually the viewport). It will in many cases also
-            // “break” the floating element out of a clipping ancestor.
+            // containing block (usually the viewport). It will in many cases
+            // also “break” the floating element out of a clipping ancestor.
             // https://floating-ui.com/docs/misc#clipping
             strategy: 'fixed',
 
-            // Middleware order matters, arrow should be last
+            // Middleware are executed as an in-between “middle” step of the
+            // initial `placement` computation and eventual return of data for
+            // rendering. Each middleware is executed in order.
             middleware: [
               flip({
-                fallbackAxisSideDirection: 'start',
-                fallbackPlacements: [
-                  'top-start',
-                  'top-end',
-                  'bottom-start',
-                  'bottom-end',
-                ],
+                // An explicit array of placements to try if the initial
+                // `placement` doesn’t fit on the axes in which overflow
+                // is checked.
+                fallbackPlacements: menuAlignment.includes('bottom')
+                  ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+                  : ['top-start', 'top-end', 'bottom-start', 'bottom-end'],
               }),
             ],
             whileElementsMounted: autoUpdate,

@@ -265,7 +265,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
     if (indexToFocus !== currentItem) {
       const nodeToFocus = focusableItems[indexToFocus];
-      nodeToFocus.ref.current.focus();
+      nodeToFocus.ref?.current?.focus();
     }
   }
 
