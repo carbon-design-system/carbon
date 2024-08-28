@@ -22,12 +22,6 @@ export default {
 
 export const Default = () => <CopyButton />;
 
-export const ExperimentalAutoAlign = () => (
-  <div style={{ height: 1000, width: 3000, marginLeft: 500 }}>
-    <CopyButton align="top" autoAlign />
-  </div>
-);
-
 export const Playground = (args) => <CopyButton {...args} />;
 
 Playground.argTypes = {
