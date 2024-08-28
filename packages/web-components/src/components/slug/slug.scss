@@ -235,7 +235,6 @@ $colorMap: (
 }
 
 // override for specific alignments
-/* stylelint-disable-next-line no-duplicate-selectors */
 :host(#{$prefix}-slug[alignment='left-end']),
 :host(#{$prefix}-slug[alignment='left-bottom']),
 :host(#{$prefix}-slug[alignment='right-end']),
@@ -246,7 +245,6 @@ $colorMap: (
 }
 
 // Change caret color / border when it is near the bottom of the callout
-/* stylelint-disable-next-line no-duplicate-selectors */
 :host(#{$prefix}-slug[alignment='left-end']),
 :host(#{$prefix}-slug[alignment='left-bottom']),
 :host(#{$prefix}-slug[alignment='right-end']),
@@ -269,7 +267,6 @@ $colorMap: (
 }
 
 // Change the caret border when it is near the middle of the callout
-/* stylelint-disable-next-line no-duplicate-selectors */
 :host(#{$prefix}-slug[alignment='left']),
 :host(#{$prefix}-slug[alignment='right']) {
   .#{$prefix}--popover-caret::before {

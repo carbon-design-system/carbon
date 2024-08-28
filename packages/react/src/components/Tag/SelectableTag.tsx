@@ -93,7 +93,7 @@ const SelectableTag = <T extends React.ElementType>({
   }, [prefix, tagRef]);
 
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'sm',
       kind: 'inline',
@@ -118,6 +118,7 @@ const SelectableTag = <T extends React.ElementType>({
         leaveDelayMs={0}
         onMouseEnter={() => false}>
         <Tag
+          aria-pressed={selectedTag}
           ref={tagRef}
           slug={slug}
           size={size}
@@ -138,6 +139,7 @@ const SelectableTag = <T extends React.ElementType>({
 
   return (
     <Tag
+      aria-pressed={selectedTag}
       ref={tagRef}
       slug={slug}
       size={size}

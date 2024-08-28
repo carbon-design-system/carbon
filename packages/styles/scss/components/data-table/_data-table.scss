@@ -49,8 +49,7 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-header {
     background-color: $layer;
-    padding-block-end: $spacing-06;
-    padding-block-start: $spacing-05;
+    padding-block: $spacing-05 $spacing-06;
     padding-inline: $spacing-05;
   }
 
@@ -143,8 +142,7 @@
     &.#{$prefix}--data-table--lg
       tr:not([data-child-row])
       td:not(.#{$prefix}--table-expand) {
-      padding-block-end: $spacing-05;
-      padding-block-start: $spacing-05;
+      padding-block: $spacing-05 $spacing-05;
 
       &.#{$prefix}--table-column-menu {
         padding-block-start: $spacing-03;
@@ -163,8 +161,7 @@
   .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header {
     &.#{$prefix}--data-table--lg
       th:not(.#{$prefix}--table-expand):not(.#{$prefix}--table-sort__header) {
-      padding-block-end: $spacing-05;
-      padding-block-start: $spacing-05;
+      padding-block: $spacing-05 $spacing-05;
 
       &.#{$prefix}--table-column-menu {
         padding-block-start: $spacing-03;
@@ -193,8 +190,7 @@
   .#{$prefix}--data-table th {
     background-color: $layer-accent;
     color: $text-primary;
-    padding-inline-end: $spacing-05;
-    padding-inline-start: $spacing-05;
+    padding-inline: $spacing-05 $spacing-05;
   }
 
   .#{$prefix}--data-table th:last-of-type {
@@ -212,8 +208,7 @@
     border-block-end: 1px solid $border-subtle;
     border-block-start: 1px solid $layer;
     color: $text-secondary;
-    padding-inline-end: $spacing-05;
-    padding-inline-start: $spacing-05;
+    padding-inline: $spacing-05 $spacing-05;
 
     + td:first-of-type {
       padding-inline-start: $spacing-04;
@@ -324,8 +319,7 @@
   .#{$prefix}--data-table--xs td.#{$prefix}--table-column-menu,
   .#{$prefix}--data-table--sm td.#{$prefix}--table-column-menu {
     block-size: convert.to-rem(24px);
-    padding-block-end: 0;
-    padding-block-start: 0;
+    padding-block: 0 0;
   }
 
   .#{$prefix}--data-table--sm td.#{$prefix}--table-column-menu {
@@ -418,8 +412,7 @@
   .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox {
     min-inline-size: 2.5rem;
     // spacing between checkbox / chevron and next cell should be 8px / 0.5rem
-    padding-inline-end: convert.to-rem(4px);
-    padding-inline-start: 1rem;
+    padding-inline: 1rem convert.to-rem(4px);
   }
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
@@ -453,8 +446,7 @@
   .#{$prefix}--data-table--xl thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--xl tbody td.#{$prefix}--table-expand {
     block-size: convert.to-rem(64px);
-    padding-block-end: convert.to-rem(22px);
-    padding-block-start: convert.to-rem(10px);
+    padding-block: convert.to-rem(10px) convert.to-rem(22px);
   }
 
   .#{$prefix}--data-table--xl .#{$prefix}--table-column-checkbox {
@@ -570,14 +562,12 @@
   }
 
   .#{$prefix}--data-table--xs .#{$prefix}--table-header-label {
-    padding-block-end: convert.to-rem(2px);
-    padding-block-start: convert.to-rem(2px);
+    padding-block: convert.to-rem(2px) convert.to-rem(2px);
   }
 
   .#{$prefix}--data-table--xs td,
   .#{$prefix}--data-table--xs tbody tr th {
-    padding-block-end: convert.to-rem(2px);
-    padding-block-start: convert.to-rem(2px);
+    padding-block: convert.to-rem(2px) convert.to-rem(2px);
   }
 
   .#{$prefix}--data-table--xs .#{$prefix}--overflow-menu {
@@ -593,8 +583,7 @@
       .#{$prefix}--data-table--top-aligned-header
     )
     th.#{$prefix}--table-column-checkbox {
-    padding-block-end: 0;
-    padding-block-start: 0;
+    padding-block: 0 0;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--xs
@@ -615,16 +604,14 @@
   }
 
   .#{$prefix}--data-table--sm .#{$prefix}--table-header-label {
-    padding-block-end: convert.to-rem(7px);
-    padding-block-start: convert.to-rem(7px);
+    padding-block: convert.to-rem(7px) convert.to-rem(7px);
   }
 
   .#{$prefix}--data-table--sm td,
   .#{$prefix}--data-table--sm tbody tr th,
   .#{$prefix}--data-table--sm.#{$prefix}--data-table--top-aligned-header
     th.#{$prefix}--table-column-checkbox {
-    padding-block-end: convert.to-rem(6px);
-    padding-block-start: convert.to-rem(7px);
+    padding-block: convert.to-rem(7px) convert.to-rem(6px);
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--sm:not(
@@ -635,8 +622,7 @@
       .#{$prefix}--data-table--top-aligned-header
     )
     th.#{$prefix}--table-column-checkbox {
-    padding-block-end: convert.to-rem(3px);
-    padding-block-start: convert.to-rem(3px);
+    padding-block: convert.to-rem(3px) convert.to-rem(3px);
   }
 
   .#{$prefix}--data-table--sm .#{$prefix}--overflow-menu {
@@ -655,14 +641,12 @@
   .#{$prefix}--data-table--md .#{$prefix}--table-header-label,
   .#{$prefix}--data-table--md.#{$prefix}--data-table--top-aligned-header
     th.#{$prefix}--table-column-checkbox {
-    padding-block-end: convert.to-rem(7px);
-    padding-block-start: convert.to-rem(7px);
+    padding-block: convert.to-rem(7px) convert.to-rem(7px);
   }
 
   .#{$prefix}--data-table--md td,
   .#{$prefix}--data-table--md tbody tr th {
-    padding-block-end: convert.to-rem(6px);
-    padding-block-start: convert.to-rem(7px);
+    padding-block: convert.to-rem(7px) convert.to-rem(6px);
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--md:not(
@@ -673,13 +657,11 @@
       .#{$prefix}--data-table--top-aligned-header
     )
     th.#{$prefix}--table-column-checkbox {
-    padding-block-end: convert.to-rem(3px);
-    padding-block-start: convert.to-rem(3px);
+    padding-block: convert.to-rem(3px) convert.to-rem(3px);
   }
 
   .#{$prefix}--data-table--md .#{$prefix}--table-column-menu {
-    padding-block-end: convert.to-rem(3px);
-    padding-block-start: convert.to-rem(3px);
+    padding-block: convert.to-rem(3px) convert.to-rem(3px);
   }
 
   //----------------------------------------------------------------------------
@@ -692,14 +674,12 @@
   }
 
   .#{$prefix}--data-table--xl .#{$prefix}--table-header-label {
-    padding-block-end: $spacing-05;
-    padding-block-start: $spacing-05;
+    padding-block: $spacing-05 $spacing-05;
   }
 
   .#{$prefix}--data-table--xl td,
   .#{$prefix}--data-table--xl tbody tr th {
-    padding-block-end: $spacing-05;
-    padding-block-start: $spacing-05;
+    padding-block: $spacing-05 $spacing-05;
   }
 
   .#{$prefix}--data-table--xl th,
@@ -900,19 +880,16 @@
 
       max-inline-size: calc(100% - 10px);
       overflow-y: hidden;
-      padding-block-end: 1rem;
+      padding-block: convert.to-rem(15px) 1rem;
       // Needed to reduce 1px jump when toggling between variations
-      padding-block-start: convert.to-rem(15px);
     }
 
     &.#{$prefix}--data-table--xs th .#{$prefix}--table-header-label {
-      padding-block-end: 0;
-      padding-block-start: convert.to-rem(3px);
+      padding-block: convert.to-rem(3px) 0;
     }
 
     &.#{$prefix}--data-table--sm th .#{$prefix}--table-header-label {
-      padding-block-end: 0;
-      padding-block-start: convert.to-rem(8px);
+      padding-block: convert.to-rem(8px) 0;
     }
 
     &.#{$prefix}--data-table--xl th .#{$prefix}--table-header-label {
@@ -1012,7 +989,7 @@
     background-attachment: fixed;
   }
 
-  tr.#{$prefix}--parent-row.cds--data-table--selected.#{$prefix}--data-table--slug-row,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
   .#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
   tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row
     + .#{$prefix}--expandable-row {
@@ -1031,7 +1008,7 @@
     border-block-end-color: $border-subtle;
   }
 
-  tr.#{$prefix}--expandable-row.cds--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
+  tr.#{$prefix}--expandable-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
     > td:not(.#{$prefix}--table-expand):not(
       .#{$prefix}--table-column-checkbox
     ):not(.#{$prefix}--table-column-slug) {

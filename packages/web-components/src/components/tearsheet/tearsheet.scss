@@ -115,7 +115,6 @@ $motion-duration: $duration-moderate-02;
   background: initial;
   opacity: 1;
 
-  // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
   transition: visibility 0s linear;
   visibility: inherit;
 

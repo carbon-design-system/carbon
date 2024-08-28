@@ -94,14 +94,12 @@ $css--plex: true !default;
   }
 }
 
-/* stylelint-disable selector-pseudo-class-parentheses-space-inside */
 :host(#{$prefix}-date-picker-input[kind='simple'][short]),
 :host(#{$prefix}-date-picker-input-skeleton[kind='simple'][short]) {
   .#{$prefix}--date-picker__input {
     inline-size: rem(90px);
   }
 }
-/* stylelint-enable selector-pseudo-class-parentheses-space-inside */
 
 :host(#{$prefix}-date-picker-input[kind='single']),
 :host(#{$prefix}-date-picker-input-skeleton[kind='single']) {

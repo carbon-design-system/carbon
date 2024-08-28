@@ -91,7 +91,7 @@ const TileGroup = (props) => {
     const traverseAndModifyChildren = (children) => {
       return React.Children.map(children, (child) => {
         // If RadioTile found, return it with necessary props
-        if (child.type === RadioTile) {
+        if (child?.type === RadioTile) {
           const { value, ...otherProps } = child.props;
           return (
             <RadioTile
@@ -104,7 +104,7 @@ const TileGroup = (props) => {
               checked={value === selected}
             />
           );
-        } else if (child.props && child.props.children) {
+        } else if (child?.props?.children) {
           // If the child is not RadioTile and has children, recheck the children
           return React.cloneElement(child, {
             ...child.props,

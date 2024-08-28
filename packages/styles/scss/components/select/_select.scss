@@ -217,8 +217,7 @@
     border-block-end: none;
     color: $text-primary;
     inline-size: auto;
-    padding-inline-end: $spacing-07;
-    padding-inline-start: $spacing-03;
+    padding-inline: $spacing-03 $spacing-07;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input:focus,
@@ -309,6 +308,11 @@
   .#{$prefix}--select--slug .#{$prefix}--slug::after {
     display: block;
     inset-inline-end: calc(-#{$spacing-03} - #{$divider-width});
+  }
+
+  .#{$prefix}--select--slug .#{$prefix}--slug--revert::after {
+    inset-block-start: convert.to-rem(8px);
+    inset-inline-end: convert.to-rem(-1px);
   }
 
   .#{$prefix}--select--slug

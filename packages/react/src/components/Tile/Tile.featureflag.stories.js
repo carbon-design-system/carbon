@@ -20,6 +20,16 @@ import {
 import TileGroup from '../TileGroup/TileGroup';
 import { Layer } from '../Layer';
 import './tile-story.scss';
+import '../AILabel/ailabel-story.scss';
+import {
+  Launch,
+  ArrowRight,
+  View,
+  FolderOpen,
+  Folders,
+} from '@carbon/icons-react';
+import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
+import { IconButton } from '../IconButton';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
@@ -286,4 +296,83 @@ export const ExpandableWithLayer = () => {
       )}
     </WithLayer>
   );
+};
+
+const aiLabel = (
+  <AILabel className="slug-container">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+export const _WithAILabel = {
+  argTypes: {
+    hasRoundedCorners: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    slug: {
+      description:
+        '**Experimental**: Provide an `AILabel` component to be rendered inside the component',
+    },
+  },
+  render: (args) => (
+    <div className="slug-selectable-tile-container slug-experimental-radio-tile-container">
+      <TileGroup
+        defaultSelected="default-selected"
+        legend="Radio Tile Group - Feature Flags enabled"
+        name="radio tile group two"
+        {...args}>
+        <RadioTile
+          className="slug-radio-tile"
+          id="radio-tile-4"
+          value="standard"
+          slug={aiLabel}
+          {...args}>
+          Option 1
+        </RadioTile>
+        <RadioTile
+          className="slug-radio-tile"
+          id="radio-tile-5"
+          value="default-selected"
+          slug={aiLabel}
+          {...args}>
+          Option 2
+        </RadioTile>
+        <RadioTile
+          className="slug-radio-tile"
+          id="radio-tile-6"
+          value="selected"
+          slug={aiLabel}
+          {...args}>
+          Option 3
+        </RadioTile>
+      </TileGroup>
+    </div>
+  ),
 };

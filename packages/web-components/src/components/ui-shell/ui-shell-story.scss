@@ -10,7 +10,6 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/components/ui-shell/functions';
 
-/* stylelint-disable selector-type-no-unknown */
 #{$prefix}-header ~ #{$prefix}-side-nav {
   block-size: calc(100% - $spacing-09);
   margin-block-start: $spacing-09;
