@@ -7,7 +7,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { delay } from 'bluebird';
 import { render } from 'lit';
 import EventManager from '../utils/event-manager';
 
@@ -295,7 +294,6 @@ describe('cds-multi-select', function () {
       (itemNode as unknown as CDSMultiSelectItem).value = 'value-added';
       elem.appendChild(itemNode);
       (elem as CDSMultiSelect).value = 'value-added';
-      await delay(0); // Workaround for IE MutationObserver scheduling bug for moving elements to slot
       try {
         expect((elem as CDSMultiSelect).value).toBe('value-added');
       } finally {

@@ -5,13 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { addons } from '@storybook/addons';
-import yourTheme from './theme';
-
-addons.setConfig({
-  theme: yourTheme,
-});
-
 /**
  * Conditionally generate CSS to hide a component based on its corresponding
  * feature flag environment variable.

@@ -11,7 +11,6 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
-import { delay } from 'bluebird';
 import { prefix } from '../../globals/settings';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
@@ -95,7 +94,7 @@ export default class CDSCEDemoFileUploader extends LitElement {
     } else {
       // Simulates network request time
       const rand = Math.random() * 1000;
-      await delay(rand);
+      await new Promise((t) => setTimeout(t, rand));
       this._files = this._files.map((item) =>
         id !== item.id
           ? item
@@ -106,7 +105,7 @@ export default class CDSCEDemoFileUploader extends LitElement {
       );
       this.requestUpdate();
       // Shows x icon after 1 second
-      await delay(1000);
+      await new Promise((t) => setTimeout(t, 1000));
       this._files = this._files.map((item) =>
         id !== item.id
           ? item

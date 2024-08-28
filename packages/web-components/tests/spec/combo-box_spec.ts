@@ -7,7 +7,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { delay } from 'bluebird';
 import { render } from 'lit';
 import EventManager from '../utils/event-manager';
 
@@ -252,7 +251,6 @@ describe('cds-combo-box', function () {
       (itemNode as unknown as CDSComboBoxItem).value = 'value-added';
       elem.appendChild(itemNode);
       (elem as CDSComboBox).value = 'value-added';
-      await delay(0); // Workaround for IE MutationObserver scheduling bug for moving elements to slot
       try {
         expect(
           (elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement)
