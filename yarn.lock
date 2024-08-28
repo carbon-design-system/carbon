@@ -2028,18 +2028,18 @@ __metadata:
     "@rollup/plugin-commonjs": "npm:^26.0.0"
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
     "@rollup/plugin-typescript": "npm:^11.0.0"
-    "@storybook/addon-a11y": "npm:^8.2.4"
-    "@storybook/addon-actions": "npm:^8.2.4"
-    "@storybook/addon-docs": "npm:^8.2.4"
-    "@storybook/addon-essentials": "npm:^8.2.4"
+    "@storybook/addon-a11y": "npm:^8.2.8"
+    "@storybook/addon-actions": "npm:^8.2.8"
+    "@storybook/addon-docs": "npm:^8.2.8"
+    "@storybook/addon-essentials": "npm:^8.2.8"
     "@storybook/addon-links": "npm:^8.1.10"
-    "@storybook/addon-storysource": "npm:^8.2.4"
+    "@storybook/addon-storysource": "npm:^8.2.8"
     "@storybook/addon-webpack5-compiler-babel": "npm:^3.0.3"
-    "@storybook/blocks": "npm:^8.2.4"
-    "@storybook/manager-api": "npm:^8.2.4"
-    "@storybook/react": "npm:^8.2.4"
-    "@storybook/react-webpack5": "npm:^8.2.4"
-    "@storybook/theming": "npm:^8.2.4"
+    "@storybook/blocks": "npm:^8.2.8"
+    "@storybook/manager-api": "npm:^8.2.8"
+    "@storybook/react": "npm:^8.2.8"
+    "@storybook/react-webpack5": "npm:^8.2.8"
+    "@storybook/theming": "npm:^8.2.8"
     "@types/react-is": "npm:~18.3.0"
     autoprefixer: "npm:^10.4.0"
     babel-loader: "npm:^9.0.0"
@@ -2078,7 +2078,7 @@ __metadata:
     rollup-plugin-strip-banner: "npm:^3.0.0"
     sass: "npm:^1.51.0"
     sass-loader: "npm:^14.0.0"
-    storybook: "npm:^8.2.4"
+    storybook: "npm:^8.2.8"
     storybook-addon-accessibility-checker: "npm:^3.1.61-rc.3"
     stream-browserify: "npm:^3.0.0"
     style-loader: "npm:^4.0.0"
@@ -5349,7 +5349,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-a11y@npm:^8.2.4":
+"@storybook/addon-a11y@npm:^8.2.8":
   version: 8.2.9
   resolution: "@storybook/addon-a11y@npm:8.2.9"
   dependencies:
@@ -5361,7 +5361,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-actions@npm:8.2.9, @storybook/addon-actions@npm:^8.2.4":
+"@storybook/addon-actions@npm:8.2.9, @storybook/addon-actions@npm:^8.2.8":
   version: 8.2.9
   resolution: "@storybook/addon-actions@npm:8.2.9"
   dependencies:
@@ -5402,7 +5402,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-docs@npm:8.2.9, @storybook/addon-docs@npm:^8.2.4":
+"@storybook/addon-docs@npm:8.2.9, @storybook/addon-docs@npm:^8.2.8":
   version: 8.2.9
   resolution: "@storybook/addon-docs@npm:8.2.9"
   dependencies:
@@ -5425,7 +5425,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-essentials@npm:^8.2.4":
+"@storybook/addon-essentials@npm:^8.2.8":
   version: 8.2.9
   resolution: "@storybook/addon-essentials@npm:8.2.9"
   dependencies:
@@ -5508,7 +5508,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-storysource@npm:^8.2.4":
+"@storybook/addon-storysource@npm:^8.2.8":
   version: 8.2.9
   resolution: "@storybook/addon-storysource@npm:8.2.9"
   dependencies:
@@ -5551,7 +5551,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/blocks@npm:8.2.9, @storybook/blocks@npm:^8.2.4":
+"@storybook/blocks@npm:8.2.9, @storybook/blocks@npm:^8.2.8":
   version: 8.2.9
   resolution: "@storybook/blocks@npm:8.2.9"
   dependencies:
@@ -5857,7 +5857,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/manager-api@npm:^8.2.4, @storybook/manager-api@npm:^8.2.9":
+"@storybook/manager-api@npm:^8.2.8, @storybook/manager-api@npm:^8.2.9":
   version: 8.2.9
   resolution: "@storybook/manager-api@npm:8.2.9"
   peerDependencies:
@@ -5954,7 +5954,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-webpack5@npm:^8.2.4":
+"@storybook/react-webpack5@npm:^8.2.8":
   version: 8.2.9
   resolution: "@storybook/react-webpack5@npm:8.2.9"
   dependencies:
@@ -5974,7 +5974,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react@npm:8.2.9, @storybook/react@npm:^8.2.4":
+"@storybook/react@npm:8.2.9, @storybook/react@npm:^8.2.8":
   version: 8.2.9
   resolution: "@storybook/react@npm:8.2.9"
   dependencies:
@@ -6054,7 +6054,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:^8.2.4, @storybook/theming@npm:^8.2.9":
+"@storybook/theming@npm:^8.2.8, @storybook/theming@npm:^8.2.9":
   version: 8.2.9
   resolution: "@storybook/theming@npm:8.2.9"
   peerDependencies:
@@ -24244,7 +24244,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook@npm:^8.2.4":
+"storybook@npm:^8.2.8":
   version: 8.2.9
   resolution: "storybook@npm:8.2.9"
   dependencies:
