@@ -23,6 +23,7 @@ import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
 import { Stack } from '../Stack';
 import { Grid, Column } from '../Grid';
+import { Layer } from '../Layer';
 import mdx from './Tabs.mdx';
 
 import TabsSkeleton from './Tabs.Skeleton';
@@ -374,20 +375,22 @@ export const Contained = () => (
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
       <TabPanel>
-        <form style={{ margin: '2em' }}>
-          <legend className={`cds--label`}>Validation example</legend>
-          <Checkbox id="cb" labelText="Accept privacy policy" />
-          <Button
-            style={{ marginTop: '1rem', marginBottom: '1rem' }}
-            type="submit">
-            Submit
-          </Button>
-          <TextInput
-            type="text"
-            labelText="Text input label"
-            helperText="Optional help text"
-          />
-        </form>
+        <Layer>
+          <form style={{ margin: '2em' }}>
+            <legend className={`cds--label`}>Validation example</legend>
+            <Checkbox id="cb" labelText="Accept privacy policy" />
+            <Button
+              style={{ marginTop: '1rem', marginBottom: '1rem' }}
+              type="submit">
+              Submit
+            </Button>
+            <TextInput
+              type="text"
+              labelText="Text input label"
+              helperText="Optional help text"
+            />
+          </form>
+        </Layer>
       </TabPanel>
       <TabPanel>Tab Panel 3</TabPanel>
       <TabPanel>Tab Panel 4</TabPanel>
@@ -410,20 +413,22 @@ export const ContainedWithIcons = () => (
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
       <TabPanel>
-        <form style={{ margin: '2em' }}>
-          <legend className={`cds--label`}>Validation example</legend>
-          <Checkbox id="cb" labelText="Accept privacy policy" />
-          <Button
-            style={{ marginTop: '1rem', marginBottom: '1rem' }}
-            type="submit">
-            Submit
-          </Button>
-          <TextInput
-            type="text"
-            labelText="Text input label"
-            helperText="Optional help text"
-          />
-        </form>
+        <Layer>
+          <form style={{ margin: '2em' }}>
+            <legend className={`cds--label`}>Validation example</legend>
+            <Checkbox id="cb" labelText="Accept privacy policy" />
+            <Button
+              style={{ marginTop: '1rem', marginBottom: '1rem' }}
+              type="submit">
+              Submit
+            </Button>
+            <TextInput
+              type="text"
+              labelText="Text input label"
+              helperText="Optional help text"
+            />
+          </form>
+        </Layer>
       </TabPanel>
       <TabPanel>Tab Panel 3</TabPanel>
       <TabPanel>Tab Panel 4</TabPanel>
@@ -446,20 +451,22 @@ export const ContainedWithSecondaryLabels = () => (
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
       <TabPanel>
-        <form style={{ margin: '2em' }}>
-          <legend className={`cds--label`}>Validation example</legend>
-          <Checkbox id="cb" labelText="Accept privacy policy" />
-          <Button
-            style={{ marginTop: '1rem', marginBottom: '1rem' }}
-            type="submit">
-            Submit
-          </Button>
-          <TextInput
-            type="text"
-            labelText="Text input label"
-            helperText="Optional help text"
-          />
-        </form>
+        <Layer>
+          <form style={{ margin: '2em' }}>
+            <legend className={`cds--label`}>Validation example</legend>
+            <Checkbox id="cb" labelText="Accept privacy policy" />
+            <Button
+              style={{ marginTop: '1rem', marginBottom: '1rem' }}
+              type="submit">
+              Submit
+            </Button>
+            <TextInput
+              type="text"
+              labelText="Text input label"
+              helperText="Optional help text"
+            />
+          </form>
+        </Layer>
       </TabPanel>
       <TabPanel>Tab Panel 3</TabPanel>
       <TabPanel>Tab Panel 4</TabPanel>
@@ -490,20 +497,22 @@ export const ContainedWithSecondaryLabelsAndIcons = () => (
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
       <TabPanel>
-        <form style={{ margin: '2em' }}>
-          <legend className={`cds--label`}>Validation example</legend>
-          <Checkbox id="cb" labelText="Accept privacy policy" />
-          <Button
-            style={{ marginTop: '1rem', marginBottom: '1rem' }}
-            type="submit">
-            Submit
-          </Button>
-          <TextInput
-            type="text"
-            labelText="Text input label"
-            helperText="Optional help text"
-          />
-        </form>
+        <Layer>
+          <form style={{ margin: '2em' }}>
+            <legend className={`cds--label`}>Validation example</legend>
+            <Checkbox id="cb" labelText="Accept privacy policy" />
+            <Button
+              style={{ marginTop: '1rem', marginBottom: '1rem' }}
+              type="submit">
+              Submit
+            </Button>
+            <TextInput
+              type="text"
+              labelText="Text input label"
+              helperText="Optional help text"
+            />
+          </form>
+        </Layer>
       </TabPanel>
       <TabPanel>Tab Panel 3</TabPanel>
       <TabPanel>Tab Panel 4</TabPanel>
@@ -529,20 +538,22 @@ export const ContainedFullWidth = () => (
         <TabPanels>
           <TabPanel>Tab Panel 1</TabPanel>
           <TabPanel>
-            <form>
-              <legend className={`cds--label`}>Validation example</legend>
-              <Checkbox id="cb" labelText="Accept privacy policy" />
-              <Button
-                style={{ marginTop: '1rem', marginBottom: '1rem' }}
-                type="submit">
-                Submit
-              </Button>
-              <TextInput
-                type="text"
-                labelText="Text input label"
-                helperText="Optional help text"
-              />
-            </form>
+            <Layer>
+              <form style={{ margin: '2em' }}>
+                <legend className={`cds--label`}>Validation example</legend>
+                <Checkbox id="cb" labelText="Accept privacy policy" />
+                <Button
+                  style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                  type="submit">
+                  Submit
+                </Button>
+                <TextInput
+                  type="text"
+                  labelText="Text input label"
+                  helperText="Optional help text"
+                />
+              </form>
+            </Layer>
           </TabPanel>
           <TabPanel>Tab Panel 3</TabPanel>
           <TabPanel>Tab Panel 4</TabPanel>
@@ -573,24 +584,38 @@ export const Vertical = ({ ...args }) => (
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
       <TabPanel>
-        <form style={{ margin: '2em' }}>
-          <Stack gap={7}>
-            <TextInput id="one" labelText="First Name" />
-            <TextInput id="three" labelText="Middle Initial" />
-            <TextInput id="two" labelText="Last Name" />
-            <RadioButtonGroup
-              legendText="Radio button heading"
-              name="formgroup-default-radio-button-group"
-              defaultSelected="radio-1">
-              <RadioButton labelText="Option 1" value="radio-1" id="radio-1" />
-              <RadioButton labelText="Option 2" value="radio-2" id="radio-2" />
-              <RadioButton labelText="Option 3" value="radio-3" id="radio-3" />
-            </RadioButtonGroup>
-            <Checkbox labelText={`Checkbox one`} id="checkbox-label-1" />
-            <Checkbox labelText={`Checkbox two`} id="checkbox-label-2" />
-            <Button>Submit</Button>
-          </Stack>
-        </form>
+        <Layer>
+          <form style={{ margin: '2em' }}>
+            <Stack gap={7}>
+              <TextInput id="one" labelText="First Name" />
+              <TextInput id="three" labelText="Middle Initial" />
+              <TextInput id="two" labelText="Last Name" />
+              <RadioButtonGroup
+                legendText="Radio button heading"
+                name="formgroup-default-radio-button-group"
+                defaultSelected="radio-1">
+                <RadioButton
+                  labelText="Option 1"
+                  value="radio-1"
+                  id="radio-1"
+                />
+                <RadioButton
+                  labelText="Option 2"
+                  value="radio-2"
+                  id="radio-2"
+                />
+                <RadioButton
+                  labelText="Option 3"
+                  value="radio-3"
+                  id="radio-3"
+                />
+              </RadioButtonGroup>
+              <Checkbox labelText={`Checkbox one`} id="checkbox-label-1" />
+              <Checkbox labelText={`Checkbox two`} id="checkbox-label-2" />
+              <Button>Submit</Button>
+            </Stack>
+          </form>
+        </Layer>
       </TabPanel>
       <TabPanel>Tab Panel 3</TabPanel>
       <TabPanel>Tab Panel 4</TabPanel>
