@@ -22,6 +22,13 @@ const defaultOptions = {
   trailingComma: true,
 };
 
+//This list can be updated as needed, if any flags are made true by default
+const flagsToRemove = [
+  'enable-v11-release',
+  'enable-css-custom-properties',
+  'enable-css-grid',
+];
+
 function transform(fileInfo, api, options) {
   const { jscodeshift: j } = api;
   const root = j(fileInfo.source);
@@ -39,7 +46,17 @@ function transform(fileInfo, api, options) {
       );
 
       if (flagsAttribute?.value?.expression?.type === 'ObjectExpression') {
-        const newAttributes = flagsAttribute.value.expression.properties
+        const properties = flagsAttribute.value.expression.properties;
+
+        // Filter out flags to remove
+        const filteredProperties = properties.filter((prop) => {
+          const keyName =
+            prop.key.type === 'Identifier' ? prop.key.name : prop.key.value;
+          return !flagsToRemove.includes(keyName);
+        });
+
+        // Convert remaining flags to boolean props
+        const newAttributes = filteredProperties
           .filter((flag) => flag.value.value === true)
           .map((flag) => {
             const flagName =

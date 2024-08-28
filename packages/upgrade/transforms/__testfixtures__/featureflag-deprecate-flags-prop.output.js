@@ -108,3 +108,17 @@ export const CombinedFlags = () => {
     </FeatureFlags>
   );
 };
+export const OldFlags = () => {
+  return (
+    <FeatureFlags>
+      <TileGroup legend="TestGroup" name="test">
+        <RadioTile id="test-1" value="test-1">
+          Option 1
+        </RadioTile>
+        <RadioTile id="test-2" value="test-2">
+          Option 2
+        </RadioTile>
+      </TileGroup>
+    </FeatureFlags>
+  );
+};

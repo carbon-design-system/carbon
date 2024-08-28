@@ -98,6 +98,28 @@ export const CombinedFlags = () => {
         'enable-v12-overflowmenu': true,
         'enable-treeview-controllable': true,       
         'enable-experimental-focus-wrap-without-sentinels': true,
+        'enable-v11-release': true,
+        'enable-css-custom-properties': true,
+        'enable-css-grid': true,
+      }}>
+      <TileGroup legend="TestGroup" name="test">
+        <RadioTile id="test-1" value="test-1">
+          Option 1
+        </RadioTile>
+        <RadioTile id="test-2" value="test-2">
+          Option 2
+        </RadioTile>
+      </TileGroup>
+    </FeatureFlags>
+  );
+};
+export const OldFlags = () => {
+  return (
+    <FeatureFlags
+      flags={{
+        'enable-v11-release': true,
+        'enable-css-custom-properties': true,
+        'enable-css-grid': true,
       }}>
       <TileGroup legend="TestGroup" name="test">
         <RadioTile id="test-1" value="test-1">
