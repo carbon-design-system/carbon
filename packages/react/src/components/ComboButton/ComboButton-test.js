@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -133,12 +133,9 @@ describe('ComboButton', () => {
           );
 
           await userEvent.click(screen.getAllByRole('button')[1]);
-
-          waitFor(() => {
-            expect(screen.getByRole('menu')).toHaveClass(
-              `${prefix}--combo-button__${alignment}`
-            );
-          });
+          expect(document.querySelector('ul.cds--menu')).toHaveClass(
+            `${prefix}--combo-button__${alignment}`
+          );
         });
       });
     });
@@ -183,12 +180,10 @@ describe('ComboButton', () => {
 
       await userEvent.click(screen.getAllByRole('button')[1]);
 
-      waitFor(() => {
-        expect(screen.getByRole('menu')).toBeInTheDocument();
-        expect(screen.getByRole('menuitem')).toHaveTextContent(
-          /^Additional action$/
-        );
-      });
+      expect(document.querySelector('ul.cds--menu')).toBeInTheDocument();
+      expect(
+        document.querySelector('.cds--menu-item__label')
+      ).toHaveTextContent(/^Additional action$/);
     });
 
     it('warns when MenuItemSelectable is used in children', async () => {
