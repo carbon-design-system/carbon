@@ -7,6 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import React from 'react';
 
 import { usePrefix } from '../../internal/usePrefix';
@@ -21,15 +22,18 @@ import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
 
+export type AILabelContentProps = React.HTMLAttributes<HTMLSpanElement>;
+
 export const AILabelContent = React.forwardRef(function AILabelContent(
-  { children, className },
+  { className, children, ...rest }: AILabelContentProps,
   ref
 ) {
   const prefix = usePrefix();
 
-  const hasAILabelActions = React.Children.toArray(children).some(
-    (child) => child.type?.displayName === 'AILabelActions'
-  );
+  const hasAILabelActions = React.Children.toArray(children).some((child) => {
+    const item = child as any;
+    item.type?.displayName === 'AILabelActions';
+  });
 
   const aiLabelContentClasses = cx(className, {
     [`${prefix}--slug-content`]: true,
@@ -56,8 +60,10 @@ AILabelContent.propTypes = {
   className: PropTypes.string,
 };
 
+export type AILabelActionsProps = React.HTMLAttributes<HTMLSpanElement>;
+
 export const AILabelActions = React.forwardRef(function AILabelActions(
-  { children, className },
+  { className, children, ...rest }: AILabelActionsProps,
   ref
 ) {
   const prefix = usePrefix();
@@ -67,7 +73,7 @@ export const AILabelActions = React.forwardRef(function AILabelActions(
   });
 
   return (
-    <ToggletipActions className={aiLabelActionsClasses} ref={ref}>
+    <ToggletipActions className={aiLabelActionsClasses}>
       {children}
     </ToggletipActions>
   );
@@ -86,82 +92,146 @@ AILabelActions.propTypes = {
   className: PropTypes.string,
 };
 
-export const AILabel = React.forwardRef(function AILabel(
-  {
-    aiText = 'AI',
-    aiTextLabel,
-    textLabel,
-    align,
-    autoAlign = true,
-    children,
-    className,
-    kind = 'default',
-    onRevertClick,
-    revertActive,
-    revertLabel = 'Revert to AI input',
-    slugLabel = 'Show information',
-    ['aria-label']: ariaLabel = 'Show information',
-    size = 'xs',
-    ...rest
-  },
-  ref
-) {
-  const prefix = usePrefix();
-  const id = useId('AILabel');
+/**
+ * Deprecated popover alignment values.
+ * @deprecated Use NewPopoverAlignment instead.
+ */
+export type DeprecatedAlignment =
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'left-bottom'
+  | 'left-top'
+  | 'right-bottom'
+  | 'right-top';
 
-  const aiLabelClasses = cx(className, {
-    [`${prefix}--slug`]: true,
-    [`${prefix}--slug--revert`]: revertActive,
-  });
+export type NewAlignment =
+  | 'top'
+  | 'bottom'
+  | 'left'
+  | 'right'
+  | 'top-start'
+  | 'top-end'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left-end'
+  | 'left-start'
+  | 'right-end'
+  | 'right-start';
 
-  const aiLabelButtonClasses = cx({
-    [`${prefix}--slug__button`]: true,
-    [`${prefix}--slug__button--${size}`]: size,
-    [`${prefix}--slug__button--${kind}`]: kind,
-    [`${prefix}--slug__button--inline-with-content`]:
-      kind === 'inline' && (aiTextLabel || textLabel),
-  });
+export type Alignment = DeprecatedAlignment | NewAlignment;
 
-  const handleOnRevertClick = (evt) => {
-    if (onRevertClick) {
-      onRevertClick(evt);
-    }
+const propMappingFunction = (deprecatedValue) => {
+  const mapping = {
+    'top-left': 'top-start',
+    'top-right': 'top-end',
+    'bottom-left': 'bottom-start',
+    'bottom-right': 'bottom-end',
+    'left-bottom': 'left-end',
+    'left-top': 'left-start',
+    'right-bottom': 'right-end',
+    'right-top': 'right-start',
   };
+  return mapping[deprecatedValue];
+};
 
-  const ariaLabelText =
-    !aiTextLabel && !textLabel
-      ? `${aiText} - ${slugLabel || ariaLabel}`
-      : `${aiText} - ${aiTextLabel || textLabel}`;
+interface AILabelProps {
+  AILabelContent?: React.ReactNode;
+  aiText?: string;
+  aiTextLabel?: string;
+  textLabel?: string;
+  align?: Alignment;
+  autoAlign?: boolean;
+  children?: React.ReactNode;
+  className?: string;
+  kind?: 'default' | 'inline';
+  onRevertClick?: (evt: React.MouseEvent<HTMLButtonElement>) => void;
+  revertActive?: boolean;
+  revertLabel?: string;
+  size?: 'mini' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  'aria-label'?: string;
+  slugLabel?: string;
+}
 
-  return (
-    <div className={aiLabelClasses} ref={ref} id={id}>
-      {revertActive ? (
-        <IconButton
-          onClick={handleOnRevertClick}
-          kind="ghost"
-          size="sm"
-          label={revertLabel}
-          {...rest}>
-          <Undo />
-        </IconButton>
-      ) : (
-        <Toggletip align={align} autoAlign={autoAlign} {...rest}>
-          <ToggletipButton
-            className={aiLabelButtonClasses}
-            label={ariaLabelText}>
-            <span className={`${prefix}--slug__text`}>{aiText}</span>
-            {kind === 'inline' && (aiTextLabel || textLabel) && (
-              <span className={`${prefix}--slug__additional-text`}>
-                {aiTextLabel || textLabel}
-              </span>
-            )}
-          </ToggletipButton>
-          {children}
-        </Toggletip>
-      )}
-    </div>
-  );
-});
+export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
+  function AILabel(
+    {
+      aiText = 'AI',
+      aiTextLabel,
+      textLabel,
+      align,
+      autoAlign = true,
+      children,
+      className,
+      kind = 'default',
+      onRevertClick,
+      revertActive,
+      revertLabel = 'Revert to AI input',
+      slugLabel = 'Show information',
+      ['aria-label']: ariaLabel = 'Show information',
+      size = 'xs',
+      ...rest
+    },
+    ref
+  ) {
+    const prefix = usePrefix();
+    const id = useId('AILabel');
+
+    const aiLabelClasses = cx(className, {
+      [`${prefix}--slug`]: true,
+      [`${prefix}--slug--revert`]: revertActive,
+    });
+
+    const aiLabelButtonClasses = cx({
+      [`${prefix}--slug__button`]: true,
+      [`${prefix}--slug__button--${size}`]: size,
+      [`${prefix}--slug__button--${kind}`]: kind,
+      [`${prefix}--slug__button--inline-with-content`]:
+        kind === 'inline' && (aiTextLabel || textLabel),
+    });
+
+    const handleOnRevertClick = (evt) => {
+      if (onRevertClick) {
+        onRevertClick(evt);
+      }
+    };
+
+    const ariaLabelText =
+      !aiTextLabel && !textLabel
+        ? `${aiText} - ${slugLabel || ariaLabel}`
+        : `${aiText} - ${aiTextLabel || textLabel}`;
+
+    return (
+      <div className={aiLabelClasses} ref={ref} id={id}>
+        {revertActive ? (
+          <IconButton
+            onClick={handleOnRevertClick}
+            kind="ghost"
+            size="sm"
+            label={revertLabel}
+            {...rest}>
+            <Undo />
+          </IconButton>
+        ) : (
+          <Toggletip align={align} autoAlign={autoAlign} {...rest}>
+            <ToggletipButton
+              className={aiLabelButtonClasses}
+              label={ariaLabelText}>
+              <span className={`${prefix}--slug__text`}>{aiText}</span>
+              {kind === 'inline' && (aiTextLabel || textLabel) && (
+                <span className={`${prefix}--slug__additional-text`}>
+                  {aiTextLabel || textLabel}
+                </span>
+              )}
+            </ToggletipButton>
+            {children}
+          </Toggletip>
+        )}
+      </div>
+    );
+  }
+);
 
 AILabel.displayName = 'AILabel';
 AILabel.propTypes = {
@@ -187,31 +257,52 @@ AILabel.propTypes = {
   /**
    * Specify how the popover should align with the button
    */
-  align: PropTypes.oneOf([
-    'top',
-    'top-left', // deprecated use top-start instead
-    'top-start',
-    'top-right', // deprecated use top-end instead
-    'top-end',
+  align: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'top',
+      'top-left', // deprecated use top-start instead
+      'top-right', // deprecated use top-end instead
 
-    'bottom',
-    'bottom-left', // deprecated use bottom-start instead
-    'bottom-start',
-    'bottom-right', // deprecated use bottom-end instead
-    'bottom-end',
+      'bottom',
+      'bottom-left', // deprecated use bottom-start instead
+      'bottom-right', // deprecated use bottom-end instead
 
-    'left',
-    'left-bottom', // deprecated use left-end instead
-    'left-end',
-    'left-top', // deprecated use left-start instead
-    'left-start',
+      'left',
+      'left-bottom', // deprecated use left-end instead
+      'left-top', // deprecated use left-start instead
 
-    'right',
-    'right-bottom', // deprecated use right-end instead
-    'right-end',
-    'right-top', // deprecated use right-start instead
-    'right-start',
-  ]),
+      'right',
+      'right-bottom', // deprecated use right-end instead
+      'right-top', // deprecated use right-start instead
+
+      // new values to match floating-ui
+      'top-start',
+      'top-end',
+      'bottom-start',
+      'bottom-end',
+      'left-end',
+      'left-start',
+      'right-end',
+      'right-start',
+    ]),
+    //allowed prop values
+    [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+    //optional mapper function
+    propMappingFunction
+  ),
 
   /**
    * Specify the text that will be provided to the aria-label of the `AILabel` button
