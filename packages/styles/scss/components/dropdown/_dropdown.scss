@@ -93,7 +93,7 @@
     border-block-end-color: $border-subtle;
   }
 
-  .#{$prefix}--dropdown--open .cds--list-box__field {
+  .#{$prefix}--dropdown--open .#{$prefix}--list-box__field {
     outline: none;
   }
 
@@ -178,8 +178,7 @@
     // Account for the border in `.cds--dropdown`
     block-size: calc(100% + 1px);
     // 2rem + SVG width
-    padding-inline-end: convert.to-rem(42px);
-    padding-inline-start: $spacing-05;
+    padding-inline: $spacing-05 convert.to-rem(42px);
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -193,14 +192,13 @@
     position: absolute;
     z-index: z('dropdown');
     display: flex;
+    // NOTE: IE, Edge, and Safari do not support two value `overflow` shorthand.
+    overflow: hidden auto;
     flex-direction: column;
     background-color: $layer;
     inline-size: 100%;
     list-style: none;
     max-block-size: 0;
-    // NOTE: IE, Edge, and Safari do not support two value `overflow` shorthand.
-    overflow-x: hidden;
-    overflow-y: auto;
     transition: max-height $duration-fast-02 motion(standard, productive);
   }
 
@@ -273,8 +271,7 @@
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
     block-size: convert.to-rem(32px);
-    padding-block-end: convert.to-rem(7px);
-    padding-block-start: convert.to-rem(7px);
+    padding-block: convert.to-rem(7px) convert.to-rem(7px);
   }
 
   .#{$prefix}--dropdown--focused,

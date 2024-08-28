@@ -37,7 +37,6 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 
   /* Set to zero-specificity so it can be overridden by dynamic stylesheet */
-  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
   :where(.#{$prefix}--tabs-nav-content) {
     position: absolute;
     block-size: 100%;
@@ -148,7 +147,6 @@ $inset-transition: inset 110ms motion(standard, productive);
     padding: $spacing-03 $spacing-05;
     block-size: $spacing-09;
     // height - vertical padding
-    /* stylelint-disable declaration-property-unit-allowed-list */
     line-height: calc(#{$spacing-09} - (#{$spacing-03} * 2));
   }
 }

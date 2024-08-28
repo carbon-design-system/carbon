@@ -92,7 +92,7 @@
     .#{$prefix}--list-box__field--wrapper--input-focused:has(
       button[aria-expanded='false']
     ),
-  .#{$prefix}--multi-select.#{$prefix}--multi-select--selected
+  .#{$prefix}--multi-select
     .#{$prefix}--list-box__field--wrapper--input-focused:has(
       button[aria-expanded='true']
     ) {

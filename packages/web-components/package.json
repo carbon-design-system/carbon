@@ -155,5 +155,20 @@
     "vite": "^5.0.7",
     "web-component-analyzer": "1.2.0-next.0"
   },
-  "typings": "es/index.d.ts"
+  "typings": "es/index.d.ts",
+  "stylelint": {
+    "extends": [
+      "../../config/stylelint-config-carbon"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "src/components/**/*.scss"
+        ],
+        "rules": {
+          "max-nesting-depth": null
+        }
+      }
+    ]
+  }
 }
