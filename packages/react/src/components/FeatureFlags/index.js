@@ -90,7 +90,8 @@ FeatureFlags.propTypes = {
   flags: deprecate(
     PropTypes.objectOf(PropTypes.bool),
     'The `flags` prop for `FeatureFlag` has ' +
-      'been deprecated. Please run the `featureflag-deprecate-flags-prop` codemod to migrate to individual boolean props.'
+      'been deprecated. Please run the `featureflag-deprecate-flags-prop` codemod to migrate to individual boolean props.' +
+      `npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write`
   ),
   enableUseControlledStateWithValue: PropTypes.bool,
   enableV12TileDefaultIcons: PropTypes.bool,
