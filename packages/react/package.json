@@ -121,7 +121,7 @@
     "rollup": "^2.79.1",
     "rollup-plugin-strip-banner": "^3.0.0",
     "sass": "^1.51.0",
-    "sass-loader": "^14.0.0",
+    "sass-loader": "^16.0.0",
     "storybook": "^7.1.0",
     "storybook-addon-accessibility-checker": "^3.1.61-rc.3",
     "stream-browserify": "^3.0.0",

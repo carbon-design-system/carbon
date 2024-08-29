@@ -2074,7 +2074,7 @@ __metadata:
     rollup: "npm:^2.79.1"
     rollup-plugin-strip-banner: "npm:^3.0.0"
     sass: "npm:^1.51.0"
-    sass-loader: "npm:^14.0.0"
+    sass-loader: "npm:^16.0.0"
     storybook: "npm:^7.1.0"
     storybook-addon-accessibility-checker: "npm:^3.1.61-rc.3"
     stream-browserify: "npm:^3.0.0"
@@ -24532,24 +24532,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^14.0.0":
-  version: 14.0.0
-  resolution: "sass-loader@npm:14.0.0"
+"sass-loader@npm:^16.0.0":
+  version: 16.0.1
+  resolution: "sass-loader@npm:16.0.1"
   dependencies:
     neo-async: "npm:^2.6.2"
   peerDependencies:
+    "@rspack/core": 0.x || 1.x
     node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
     sass: ^1.3.0
     sass-embedded: "*"
     webpack: ^5.0.0
   peerDependenciesMeta:
+    "@rspack/core":
+      optional: true
     node-sass:
       optional: true
     sass:
       optional: true
     sass-embedded:
       optional: true
-  checksum: 10/9415bf9003023b85f4bd775d2780fb5259be7ee9c8679f94a9ad3bea7d080dda44ff8a33ac15d3b225fbe8a6ab0762fbc98532278a89973c4de408c3bc4a98af
+    webpack:
+      optional: true
+  checksum: 10/3ba0ecfbfd3c0caa48fe58e9a1f4ccd08e5a95b1233978f985567be04fb153ef6736b95e54cc1a5a6e7a3485c3fa09dc165d028c031ae431f71f64f5ddd93608
   languageName: node
   linkType: hard
 
