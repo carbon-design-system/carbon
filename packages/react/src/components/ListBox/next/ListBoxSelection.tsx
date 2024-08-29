@@ -31,11 +31,7 @@ export interface ListBoxSelectionProps {
    * Specify a function to be invoked when a user interacts with the clear
    * selection element.
    */
-  clearSelection: (
-    event:
-      | React.MouseEvent<HTMLButtonElement>
-      | React.KeyboardEvent<HTMLDivElement>
-  ) => void;
+  clearSelection: (event: React.MouseEvent<HTMLButtonElement>) => void;
   /**
    * Specify an optional `selectionCount` value that will be used to determine
    * whether the selection should display a badge or a single clear icon.
@@ -55,18 +51,13 @@ export interface ListBoxSelectionProps {
    * Specify an optional `onClearSelection` handler that is called when the underlying
    * element is cleared
    */
-  onClearSelection?: (
-    event:
-      | React.MouseEvent<HTMLButtonElement>
-      | React.KeyboardEvent<HTMLDivElement>
-  ) => void;
+  onClearSelection?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   /**
    * Specify an optional `onClick` handler that is called when the underlying
    * clear selection element is clicked
    */
-  onClick?:
-    | React.MouseEventHandler<HTMLButtonElement>
-    | React.KeyboardEvent<HTMLDivElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+
   /**
    * Specify an optional `onKeyDown` handler that is called when the underlying
    * clear selection element fires a keydown event
