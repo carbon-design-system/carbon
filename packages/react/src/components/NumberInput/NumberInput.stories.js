@@ -157,4 +157,10 @@ Playground.argTypes = {
   },
 };
 
-export const Skeleton = () => <NumberInputSkeleton />;
+export const Skeleton = () => (
+  <div>
+    <NumberInputSkeleton size="lg" />
+    <NumberInputSkeleton size="md" />
+    <NumberInputSkeleton size="sm" />
+  </div>
+);
