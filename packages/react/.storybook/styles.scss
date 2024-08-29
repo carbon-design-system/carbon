@@ -6,7 +6,7 @@
 //
 
 @use '../index.scss' as styles with (
-  $font-path: '@ibm/plex'
+  $font-path: '~@ibm/plex'
 );
 @use '../scss/grid/flexbox';
 
