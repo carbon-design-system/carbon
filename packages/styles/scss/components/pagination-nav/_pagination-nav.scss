@@ -15,6 +15,7 @@
 @use '../../utilities/button-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/layout';
 @use '../../utilities/visually-hidden' as *;
 
 /// Pagination nav base styles
@@ -26,9 +27,9 @@
 /// @param {Color} $background-color-active [initial]
 /// @param {Number} $font-weight [400]
 /// @param {Number} $item-padding [0]
-/// @param {Number} $button-min-width [$spacing-09]
-/// @param {Value} $button-padding [1.0625rem $spacing-02]
-/// @param {Number} $button-direction-size [$spacing-09]
+/// @param {Number} $button-min-width [$spacing-09] TODO: remove in v12
+/// @param {Value} $button-padding [1.0625rem $spacing-02] TODO: remove in v12
+/// @param {Number} $button-direction-size [$spacing-09] TODO: remove in v12
 /// @param {Number} $select-icon-top-position [$spacing-05]
 /// @param {Number} $select-icon-left-position [$spacing-05]
 @mixin pagination-nav(
@@ -47,6 +48,8 @@
   .#{$prefix}--pagination-nav {
     @include reset;
     @include type-style('body-compact-01');
+    @include layout.use('size', $default: 'lg', $min: 'sm', $max: 'lg');
+    @include layout.use('density', $default: 'normal');
 
     line-height: 0;
   }
@@ -75,12 +78,13 @@
 
     position: relative;
     display: block;
-    padding: $button-padding;
+    // subtract 0.875rem to account for font-size 14px
+    padding: calc((layout.size('height') - 0.875rem) / 2) $spacing-02;
     border-radius: 0;
     color: $text-primary;
     font-weight: $font-weight;
     line-height: 1;
-    min-inline-size: $button-min-width;
+    min-inline-size: layout.size('height');
     outline: 0;
     text-align: center;
     text-decoration: none;
@@ -119,6 +123,7 @@
     }
   }
 
+  // TODO: remove in v12
   .#{$prefix}--pagination-nav__page--direction {
     display: flex;
     align-items: center;
@@ -134,7 +139,7 @@
 
   .#{$prefix}--pagination-nav__page--select {
     appearance: none;
-    max-block-size: $button-min-width;
+    max-block-size: layout.size('height');
     text-indent: calc(50% - 4.5px);
     // Override some Firefox user-agent styles
     @-moz-document url-prefix() {
@@ -160,7 +165,7 @@
 
   .#{$prefix}--pagination-nav__select-icon {
     position: absolute;
-    inset-block-start: calc(50% - #{$select-icon-top-position * 0.5});
+    inset-block-start: calc(50% - #{$select-icon-top-position * 0.25});
     inset-inline-start: calc(50% - #{$select-icon-top-position * 0.5});
     pointer-events: none;
   }
