@@ -2222,7 +2222,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/utilities@workspace:packages/utilities":
+"@carbon/utilities-react@workspace:packages/utilities-react":
+  version: 0.0.0-use.local
+  resolution: "@carbon/utilities-react@workspace:packages/utilities-react"
+  dependencies:
+    "@carbon/utilities": "npm:^0.0.1"
+    "@ibm/telemetry-js": "npm:^1.5.0"
+    esbuild: "npm:^0.23.0"
+    rimraf: "npm:^6.0.0"
+  peerDependencies:
+    react: ^16.8.6 || ^17.0.1 || ^18.2.0
+  languageName: unknown
+  linkType: soft
+
+"@carbon/utilities@npm:^0.0.1, @carbon/utilities@workspace:packages/utilities":
   version: 0.0.0-use.local
   resolution: "@carbon/utilities@workspace:packages/utilities"
   dependencies:
