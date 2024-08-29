@@ -29,7 +29,6 @@ const config: StorybookConfig = {
   stories: stories,
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-mdx-gfm',
     '@storybook/addon-essentials',
     '@storybook/addon-storysource',
     'storybook-addon-accessibility-checker',
@@ -53,6 +52,7 @@ const config: StorybookConfig = {
       define: {
         'process.env': process.env,
       },
+      sourcemap: true,
     });
   },
   docs: {
