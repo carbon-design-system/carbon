@@ -1,4 +1,4 @@
-# @carbon/upgrade
+# @carbon/utilities
 
 > Utilities and helpers to drive consistency across software products using the
 > Carbon Design System

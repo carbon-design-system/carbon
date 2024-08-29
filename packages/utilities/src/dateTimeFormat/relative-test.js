@@ -1,4 +1,4 @@
-import { relative } from '.';
+import * as relative from './relative';
 
 const locale = 'en-US';
 const styles = ['long', 'short', 'narrow'];

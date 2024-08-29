@@ -1,4 +1,4 @@
-import { absolute } from '.';
+import * as absolute from './absolute';
 
 const locale = 'en-US';
 const styles = ['full', 'long', 'medium', 'short'];

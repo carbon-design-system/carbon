@@ -27,8 +27,8 @@
     "provenance": true
   },
   "scripts": {
-    "build:es": "esbuild ./src/**/*.ts --minify --outdir=es --target=es2020 --format=esm",
-    "build:cjs": "esbuild ./src/**/*.ts --minify --outdir=lib --target=es2020 --format=cjs",
+    "build:es": "esbuild ./src/**/!(*-test).{js,ts} --minify --outdir=es --target=es2020 --format=esm",
+    "build:cjs": "esbuild ./src/**/!(*-test).{js,ts} --minify --outdir=lib --target=es2020 --format=cjs",
     "build": "yarn build:es & yarn build:cjs",
     "watch": "yarn build:es --watch & yarn build:cjs --watch",
     "clean": "rimraf es lib",

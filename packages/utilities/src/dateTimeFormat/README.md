@@ -1,4 +1,4 @@
-# date-time-format
+# dateTimeFormat
 
 A wrapper utility around `Intl.RelativeTimeFormat` and `Intl.DateTimeFormat` for
 easy use according to the
