@@ -1,4 +1,4 @@
-import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import { ArgTypes, Story, Canvas } from '@storybook/blocks';
 import * as SliderStories from './Slider.stories';
 
 # Slider
@@ -21,13 +21,11 @@ import * as SliderStories from './Slider.stories';
 Sliders provide a visual indication of adjustable content, where the user can
 increase or decrease the value by moving the handle along a horizontal track.
 
-<Canvas>
-  <Story of={SliderStories.Playground} />
-</Canvas>
+<Canvas of={SliderStories.Playground} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ### `step` Prop
 
@@ -44,9 +42,7 @@ bound of the range in addition to the `value` prop, which specifies the lower
 bound. When in two handle mode, both `value` and `valueUpper` are provided as
 keys to `onChange` function prop that is passed to the component.
 
-<Canvas>
-  <Story of={SliderStories.Playground} />
-</Canvas>
+<Canvas of={SliderStories.Playground} />
 
 ## Feedback
 
