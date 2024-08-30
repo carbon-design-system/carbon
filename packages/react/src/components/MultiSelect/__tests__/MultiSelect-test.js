@@ -158,10 +158,16 @@ describe('MultiSelect', () => {
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const itemNode = getByText(container, item.label);
 
-    expect(
-      // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-selected="true"][role="option"]')
-    ).toBeNull();
+    const options = screen.getAllByRole('option');
+    for (const option of options) {
+      expect(option).toHaveAttribute('aria-selected', 'false');
+    }
+
+    await userEvent.click(itemNode);
+    expect(options[0]).toHaveAttribute('aria-selected', 'true');
+
+    await userEvent.click(itemNode);
+    expect(options[0]).toHaveAttribute('aria-selected', 'false');
   });
 
   it('should close the menu when the user hits the Escape key', async () => {
@@ -227,6 +233,23 @@ describe('MultiSelect', () => {
 
     await userEvent.tab();
     await userEvent.keyboard('[Space]');
+
+    const [item] = items;
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const itemNode = getByText(container, item.label);
+
+    const options = screen.getAllByRole('option');
+    for (const option of options) {
+      expect(option).toHaveAttribute('aria-selected', 'false');
+    }
+
+    expect(options[0]).toHaveAttribute('aria-selected', 'false');
+
+    await userEvent.keyboard('[Enter]');
+    await userEvent.keyboard('[ArrowDown]');
+    await userEvent.keyboard('[Enter]');
+
+    expect(options[0]).toHaveAttribute('aria-selected', 'true');
   });
 
   it('should clear selected items when the user clicks the clear selection button', async () => {
@@ -321,6 +344,12 @@ describe('MultiSelect', () => {
       const labelNode = getByText(container, label);
 
       await userEvent.click(labelNode);
+
+      const options = screen.getAllByRole('option');
+      expect(options[0]).toHaveAttribute('aria-selected', 'true');
+      expect(options[1]).toHaveAttribute('aria-selected', 'true');
+      expect(options[2]).toHaveAttribute('aria-selected', 'false');
+      expect(options[3]).toHaveAttribute('aria-selected', 'false');
     });
 
     it('should trigger onChange with selected items', async () => {
