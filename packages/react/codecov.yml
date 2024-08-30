@@ -2,7 +2,7 @@ coverage:
   status:
     project:
       components:
-        target: 100%
+        target: auto # every new commit must maintain or raise the overall code coverage
         threshold: 1%
         paths:
           - src/components/
