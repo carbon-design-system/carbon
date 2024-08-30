@@ -64,8 +64,8 @@ test.describe('@avt Toggle', () => {
       },
     });
     const toggleSwitch = page.getByRole('switch');
-    await page.keyboard.press('Tab');
     await expect(toggleSwitch).toBeVisible();
+    await page.keyboard.press('Tab');
     await expect(toggleSwitch).toHaveAttribute('aria-checked', 'true');
     await page.keyboard.press('Enter');
     await expect(toggleSwitch).toHaveAttribute('aria-checked', 'false');

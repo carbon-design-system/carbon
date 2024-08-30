@@ -21,6 +21,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
 import mergeRefs from '../../tools/mergeRefs';
 import { MenuAlignment } from '../MenuButton';
 import { TranslateWithId } from '../../types/common';
@@ -99,7 +100,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     const id = useId('combobutton');
     const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement>(null);
-    const middlewares = [flip({ crossAxis: false })];
+    const middlewares = [flip({ crossAxis: false }), hide()];
 
     if (menuAlignment === 'bottom' || menuAlignment === 'top') {
       middlewares.push(
@@ -134,9 +135,13 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     } = useAttachedMenu(containerRef);
 
     useLayoutEffect(() => {
-      Object.keys(floatingStyles).forEach((style) => {
+      const updatedFloatingStyles = {
+        ...floatingStyles,
+        visibility: middlewareData.hide?.referenceHidden ? 'hidden' : 'visible',
+      };
+      Object.keys(updatedFloatingStyles).forEach((style) => {
         if (refs.floating.current) {
-          refs.floating.current.style[style] = floatingStyles[style];
+          refs.floating.current.style[style] = updatedFloatingStyles[style];
         }
       });
     }, [floatingStyles, refs.floating, middlewareData, placement, open]);

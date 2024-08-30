@@ -81,12 +81,6 @@ module.exports = {
     'declaration-property-unit-allowed-list': {
       '/^animation/': ['ms'],
     },
-    // Specify a blacklist of disallowed property and value pairs within
-    // declarations.
-    'declaration-property-value-disallowed-list': {
-      // Disallow unset as it is unsupported in IE11
-      '/.*/': ['unset'],
-    },
     // Specify a whitelist of allowed property and value pairs within
     // declarations.
     'declaration-property-value-allowed-list': OFF,
