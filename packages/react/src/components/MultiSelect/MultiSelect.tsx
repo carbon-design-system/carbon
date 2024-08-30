@@ -51,6 +51,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
 
 const {
   ItemClick,
@@ -371,6 +372,7 @@ const MultiSelect = React.forwardRef(
                   });
                 },
               }),
+              hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
@@ -379,9 +381,15 @@ const MultiSelect = React.forwardRef(
 
     useLayoutEffect(() => {
       if (autoAlign) {
-        Object.keys(floatingStyles).forEach((style) => {
+        const updatedFloatingStyles = {
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible',
+        };
+        Object.keys(updatedFloatingStyles).forEach((style) => {
           if (refs.floating.current) {
-            refs.floating.current.style[style] = floatingStyles[style];
+            refs.floating.current.style[style] = updatedFloatingStyles[style];
           }
         });
       }

@@ -29,6 +29,7 @@ import {
   arrow,
   offset,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
 
 interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -258,6 +259,7 @@ export const Popover: PopoverComponent = React.forwardRef(
               arrow({
                 element: caretRef,
               }),
+              hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
@@ -286,9 +288,15 @@ export const Popover: PopoverComponent = React.forwardRef(
 
     useEffect(() => {
       if (autoAlign) {
-        Object.keys(floatingStyles).forEach((style) => {
+        const updatedFloatingStyles = {
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible',
+        };
+        Object.keys(updatedFloatingStyles).forEach((style) => {
           if (refs.floating.current) {
-            refs.floating.current.style[style] = floatingStyles[style];
+            refs.floating.current.style[style] = updatedFloatingStyles[style];
           }
         });
 
