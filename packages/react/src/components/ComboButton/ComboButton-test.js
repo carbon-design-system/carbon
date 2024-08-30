@@ -133,8 +133,7 @@ describe('ComboButton', () => {
           );
 
           await userEvent.click(screen.getAllByRole('button')[1]);
-
-          expect(screen.getByRole('menu')).toHaveClass(
+          expect(document.querySelector('ul.cds--menu')).toHaveClass(
             `${prefix}--combo-button__${alignment}`
           );
         });
@@ -181,10 +180,10 @@ describe('ComboButton', () => {
 
       await userEvent.click(screen.getAllByRole('button')[1]);
 
-      expect(screen.getByRole('menu')).toBeInTheDocument();
-      expect(screen.getByRole('menuitem')).toHaveTextContent(
-        /^Additional action$/
-      );
+      expect(document.querySelector('ul.cds--menu')).toBeInTheDocument();
+      expect(
+        document.querySelector('.cds--menu-item__label')
+      ).toHaveTextContent(/^Additional action$/);
     });
 
     it('warns when MenuItemSelectable is used in children', async () => {
