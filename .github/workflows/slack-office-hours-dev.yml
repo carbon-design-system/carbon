@@ -34,7 +34,7 @@ jobs:
                 },
                 {
                   "type": "image",
-                  "image_url": "https://carbondesignsystem.com/static/406b7e7bf6865c094dd9a7a0bcb8bd41/3cbba/light-getting-started-developers.png",
+                  "image_url": "https://github.com/user-attachments/assets/e12fb5b9-9657-4e7b-b1a1-e1149cca8956",
                   "alt_text": "A terminal prompt symbol"
                 },
                 {
@@ -127,7 +127,7 @@ jobs:
                 },
                 {
                   "type": "image",
-                  "image_url": "https://carbondesignsystem.com/static/406b7e7bf6865c094dd9a7a0bcb8bd41/3cbba/light-getting-started-developers.png",
+                  "image_url": "https://github.com/user-attachments/assets/e12fb5b9-9657-4e7b-b1a1-e1149cca8956",
                   "alt_text": "A terminal prompt symbol"
                 },
                 {
@@ -191,4 +191,3 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-        
