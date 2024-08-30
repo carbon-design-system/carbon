@@ -1621,6 +1621,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "pamrulla",
+      "name": "Patan Amrulla Khan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4942741?v=4",
+      "profile": "https://github.com/pamrulla",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"
