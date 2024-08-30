@@ -1,0 +1,8 @@
+coverage:
+  status:
+    project:
+      components:
+        target: 100%
+        threshold: 1%
+        paths:
+          - src/components/
