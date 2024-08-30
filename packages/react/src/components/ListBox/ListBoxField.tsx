@@ -33,6 +33,11 @@ function ListBoxField({
 }: ListBoxFieldProps) {
   const prefix = usePrefix();
 
+  const test = (x, y) => {
+    const result = x + y;
+    return result;
+  };
+
   return (
     <div
       className={`${prefix}--list-box__field`}
