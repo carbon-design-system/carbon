@@ -8,10 +8,11 @@
 import Dropdown, {
   type DropdownTranslationKey,
   type OnChangeData,
+  type DropdownProps,
 } from './Dropdown';
 
 export type { DropdownTranslationKey, OnChangeData };
-export { Dropdown };
+export { Dropdown, type DropdownProps };
 export { default as DropdownSkeleton } from './Dropdown.Skeleton';
 
 export default Dropdown;

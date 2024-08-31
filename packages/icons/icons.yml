@@ -428,6 +428,19 @@
     - money
   sizes:
     - 32
+- name: ai-generate
+  friendly_name: Generate AI
+  aliases:
+    - ai
+    - automation
+    - artificial intelligence
+    - enterprise
+    - explainability
+    - ai interactivity
+    - generate
+    - generative
+  sizes:
+    - 32
 - name: ai-governance--lifecycle
   friendly_name: AI governance lifecycle
   aliases:
@@ -481,6 +494,21 @@
     - ai interactivity
     - generate
     - generative
+  sizes:
+    - 32
+- name: ai-recommend
+  friendly_name: Recommend AI
+  aliases:
+    - ai
+    - automation
+    - artificial intelligence
+    - enterprise
+    - explainability
+    - ai interactivity
+    - generate
+    - generative
+    - recommend
+    - recommendation
   sizes:
     - 32
 - name: ai-results
@@ -9440,6 +9468,33 @@
     - industry
   sizes:
     - 32
+- name: gem
+  friendly_name: Gem
+  aliases:
+    - 3d
+    - prototype
+    - sketch
+    - illustrate
+    - assemble
+    - fabricate
+    - manufacture
+    - construct
+  sizes:
+    - 32
+- name: gem--reference
+  friendly_name: Gem reference
+  aliases:
+    - reference
+    - 3d
+    - prototype
+    - sketch
+    - illustrate
+    - assemble
+    - fabricate
+    - manufacture
+    - construct
+  sizes:
+    - 32
 - name: gender--female
   friendly_name: Gender female
   aliases:
@@ -14660,6 +14715,11 @@
     - machine learning model
     - ML
     - model
+    - AI
+    - foundation model
+    - watsonx
+    - deep learning
+    - brain
   sizes:
     - 32
 - name: magic-wand
@@ -15147,6 +15207,20 @@
     - weather
   sizes:
     - 32
+- name: ml-model--reference
+  friendly_name: Machine learning model reference
+  aliases:
+    - AI
+    - model
+    - foundation model
+    - machine learning
+    - reference
+    - brain
+    - generative
+    - deep learning
+    - watsonx
+  sizes:
+    - 32
 - name: mobile
   friendly_name: Mobile
   aliases:
@@ -15305,15 +15379,10 @@
 - name: model
   friendly_name: Model
   aliases:
-    - reference
-    - 3d
-    - prototype
-    - sketch
-    - illustrate
-    - assemble
-    - fabricate
-    - manufacture
-    - construct
+    - AI
+    - generative
+    - watsonx
+    - deep learning
     - foundation
     - foundation model
   sizes:
@@ -15332,27 +15401,39 @@
     - construct
   sizes:
     - 32
-- name: model--reference
-  friendly_name: Model reference
+- name: model--foundation
+  friendly_name: Foundation model
+  aliases:
+    - AI
+    - model
+    - foundation model
+    - large language model
+    - generative
+    - deep learning
+    - watsonx
   sizes:
     - 32
+- name: model--reference
+  friendly_name: Model reference
   aliases:
-    - reference
-    - 3d
-    - prototype
-    - sketch
-    - illustrate
-    - assemble
-    - fabricate
-    - manufacture
-    - construct
+    - AI
+    - model
+    - foundation model
+    - generative
+    - deep learning
+    - watsonx
+  sizes:
+    - 32
 - name: model--tuned
   friendly_name: Model tuned
   aliases:
     - tuning
     - foundation model
+    - model
     - AI
     - adjust
+    - watsonx
+    - deep learning
   sizes:
     - 32
 - name: model-builder

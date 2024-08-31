@@ -11,12 +11,10 @@ import { default as SelectableTag } from './SelectableTag';
 import { default as OperationalTag } from './OperationalTag';
 import { default as DismissibleTag } from './DismissibleTag';
 import { Asleep } from '@carbon/icons-react';
-import { Tooltip } from '../Tooltip';
-import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Popover, PopoverContent } from '../Popover';
 import mdx from './InteractiveTag.mdx';
-import { usePrefix } from '../../internal/usePrefix';
 import './storyInteractiveTag.scss';
+import { Text } from '../Text';
 
 export default {
   title: 'Experimental/unstable__InteractiveTag',
@@ -30,9 +28,20 @@ export default {
 
 export const Selectable = (args) => {
   return (
-    <SelectableTag renderIcon={Asleep} className="some-class" {...args}>
-      {'Tag content'}
-    </SelectableTag>
+    <>
+      <SelectableTag
+        renderIcon={Asleep}
+        text="Tag content with a long text description"
+        className="some-class"
+        {...args}
+      />
+      <SelectableTag
+        renderIcon={Asleep}
+        text="Tag content"
+        className="some-class"
+        {...args}
+      />
+    </>
   );
 };
 
@@ -79,8 +88,8 @@ Selectable.argTypes = {
 };
 
 export const Operational = (args) => {
-  const prefix = usePrefix();
   const [open, setOpen] = useState(false);
+  const [openHighContrast, setOpenHighContrast] = useState(false);
 
   return (
     <>
@@ -89,72 +98,72 @@ export const Operational = (args) => {
           type="red"
           className="some-class"
           renderIcon={Asleep}
-          {...args}>
-          {'Tag content'}
-        </OperationalTag>
+          text="Tag content with a long text description"
+          {...args}
+        />
         <OperationalTag
           type="magenta"
           className="some-class"
           renderIcon={Asleep}
-          {...args}>
-          {'Tag content'}
-        </OperationalTag>
+          text="Tag content"
+          {...args}
+        />
         <OperationalTag
           type="purple"
           className="some-class"
           renderIcon={Asleep}
-          {...args}>
-          {'Tag content'}
-        </OperationalTag>
+          text="Tag content"
+          {...args}
+        />
         <OperationalTag
           type="blue"
           className="some-class"
           renderIcon={Asleep}
-          {...args}>
-          {'Tag content'}
-        </OperationalTag>
+          text="Tag content"
+          {...args}
+        />
         <OperationalTag
           type="cyan"
           className="some-class"
           renderIcon={Asleep}
-          {...args}>
-          {'Tag content'}
-        </OperationalTag>
+          text="Tag content"
+          {...args}
+        />
         <OperationalTag
           type="teal"
           className="some-class"
           renderIcon={Asleep}
-          {...args}>
-          {'Tag content'}
-        </OperationalTag>
+          text="Tag content"
+          {...args}
+        />
         <OperationalTag
           type="green"
           className="some-class"
           renderIcon={Asleep}
-          {...args}>
-          {'Tag content'}
-        </OperationalTag>
+          text="Tag content"
+          {...args}
+        />
         <OperationalTag
           type="gray"
           className="some-class"
           renderIcon={Asleep}
-          {...args}>
-          {'Tag content'}
-        </OperationalTag>
+          text="Tag content"
+          {...args}
+        />
         <OperationalTag
           type="cool-gray"
           className="some-class"
           renderIcon={Asleep}
-          {...args}>
-          {'Tag content'}
-        </OperationalTag>
+          text="Tag content"
+          {...args}
+        />
         <OperationalTag
           type="warm-gray"
           className="some-class"
           renderIcon={Asleep}
-          {...args}>
-          {'Tag content'}
-        </OperationalTag>
+          text="Tag content"
+          {...args}
+        />
       </div>
 
       <h4>Interactive examples</h4>
@@ -165,45 +174,38 @@ export const Operational = (args) => {
           justifyContent: 'flex-start',
           marginTop: '1rem',
         }}>
-        <Tooltip
-          label="View more"
-          align="bottom"
-          className={`${prefix}--icon-tooltip`}>
-          <OperationalTag className="some-class" renderIcon={Asleep} {...args}>
-            {'Tag content'}
-          </OperationalTag>
-        </Tooltip>
-
-        <Toggletip>
-          <ToggletipButton label="Tag content" tabIndex={-1} as="div">
-            <OperationalTag
-              renderIcon={Asleep}
-              className="some-class"
-              {...args}>
-              {'Tag content'}
-            </OperationalTag>
-          </ToggletipButton>
-          <ToggletipContent>
-            <div style={{ lineHeight: 0 }}>
-              <p>Tag 1 name</p>
-              <p>Tag 2 name</p>
-              <p>Tag 3 name</p>
-              <p>Tag 4 name</p>
-              <p>Tag 5 name</p>
-            </div>
-          </ToggletipContent>
-        </Toggletip>
+        {/* High contrast example */}
+        <Popover open={openHighContrast} highContrast>
+          <OperationalTag
+            onClick={() => {
+              setOpenHighContrast(!openHighContrast);
+            }}
+            aria-expanded={openHighContrast}
+            renderIcon={Asleep}
+            text="Tag content"
+            className="some-class"
+            {...args}
+          />
+          <PopoverContent className="popover-content">
+            <Text as="p">Tag 1 name</Text>
+            <Text as="p">Tag 2 name</Text>
+            <Text as="p">Tag 3 name</Text>
+            <Text as="p">Tag 4 name</Text>
+            <Text as="p">Tag 5 name</Text>
+          </PopoverContent>
+        </Popover>
 
         <Popover open={open}>
           <OperationalTag
             onClick={() => {
               setOpen(!open);
             }}
+            aria-expanded={open}
             renderIcon={Asleep}
+            text="Tag content"
             className="some-class"
-            {...args}>
-            {'Tag content'}
-          </OperationalTag>
+            {...args}
+          />
           <PopoverContent>
             <div
               style={{
@@ -297,99 +299,87 @@ export const Dismissible = (args) => {
       <DismissibleTag
         type="red"
         className="some-class"
-        title="Clear Filter"
         renderIcon={Asleep}
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
+        text="Tag content with a long text description"
+        {...args}
+      />
       <DismissibleTag
         type="magenta"
         className="some-class"
-        title="Clear Filter"
+        text="Tag content"
+        renderIcon={Asleep}
         {...args}
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
+      />
       <DismissibleTag
         type="purple"
         className="some-class"
-        title="Clear Filter"
+        text="Tag content"
+        renderIcon={Asleep}
         {...args}
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
+      />
       <DismissibleTag
         type="blue"
         className="some-class"
-        title="Clear Filter"
+        renderIcon={Asleep}
+        text="Tag content"
         {...args}
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
+      />
       <DismissibleTag
         type="cyan"
         className="some-class"
-        title="Clear Filter"
+        renderIcon={Asleep}
+        text="Tag content"
         {...args}
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
+      />
       <DismissibleTag
         type="teal"
         className="some-class"
-        title="Clear Filter"
+        renderIcon={Asleep}
+        text="Tag content"
         {...args}
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
+      />
       <DismissibleTag
         type="green"
         className="some-class"
-        title="Clear Filter"
+        renderIcon={Asleep}
+        text="Tag content"
         {...args}
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
+      />
       <DismissibleTag
         type="gray"
         className="some-class"
-        title="Clear Filter"
+        renderIcon={Asleep}
+        text="Tag content"
         {...args}
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
+      />
       <DismissibleTag
         type="cool-gray"
         className="some-class"
-        title="Clear Filter"
+        renderIcon={Asleep}
+        text="Tag content"
         {...args}
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
+      />
       <DismissibleTag
         type="warm-gray"
         className="some-class"
-        title="Clear Filter"
+        renderIcon={Asleep}
+        text="Tag content"
         {...args}
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
+      />
       <DismissibleTag
         type="high-contrast"
         className="some-class"
-        title="Clear Filter"
+        renderIcon={Asleep}
+        text="Tag content"
         {...args}
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
+      />
       <DismissibleTag
         type="outline"
         className="some-class"
-        title="Clear Filter"
+        renderIcon={Asleep}
+        text="Tag content"
         {...args}
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
+      />
     </>
   );
 };

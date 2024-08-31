@@ -10,7 +10,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import RadioButtonGroup from './RadioButtonGroup';
 import RadioButton from '../RadioButton';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -51,6 +51,25 @@ describe('RadioButtonGroup', () => {
       <RadioButtonGroup defaultSelected="test-1" name="test" legendText="test">
         <RadioButton labelText="test-1" value="test-1" />
         <RadioButton labelText="test-2" value="test-2" />
+      </RadioButtonGroup>
+    );
+
+    const fieldset = screen
+      .getByText('test', {
+        selector: 'legend',
+      })
+      // eslint-disable-next-line testing-library/no-node-access
+      .closest('fieldset');
+    expect(fieldset).toContainElement(screen.getByLabelText('test-1'));
+    expect(fieldset).toContainElement(screen.getByLabelText('test-2'));
+  });
+
+  it('should ignore null children', () => {
+    render(
+      <RadioButtonGroup defaultSelected="test-1" name="test" legendText="test">
+        <RadioButton labelText="test-1" value="test-1" />
+        <RadioButton labelText="test-2" value="test-2" />
+        {null}
       </RadioButtonGroup>
     );
 
@@ -216,7 +235,7 @@ describe('RadioButtonGroup', () => {
 
     it('should respect slug prop', () => {
       const { container } = render(
-        <RadioButtonGroup slug={<Slug />} name="test" legendText="test">
+        <RadioButtonGroup slug={<AILabel />} name="test" legendText="test">
           <RadioButton labelText="test-1" value={1} />
           <RadioButton labelText="test-0" value={0} />
         </RadioButtonGroup>

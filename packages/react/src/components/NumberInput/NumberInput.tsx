@@ -14,6 +14,7 @@ import React, {
   useRef,
   useState,
   useEffect,
+  FC,
 } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
@@ -21,11 +22,17 @@ import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { Text } from '../Text';
+import { TranslateWithId } from '../../types/common';
 
 export const translationIds = {
   'increment.number': 'increment.number',
   'decrement.number': 'decrement.number',
-};
+} as const;
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = keyof typeof translationIds;
 
 const defaultTranslations = {
   [translationIds['increment.number']]: 'Increment number',
@@ -44,10 +51,8 @@ type ExcludedAttributes =
   | 'value';
 
 export interface NumberInputProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    ExcludedAttributes
-  > {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
+    TranslateWithId<TranslationKey> {
   /**
    * `true` to allow empty string.
    */
@@ -174,11 +179,6 @@ export interface NumberInputProps
    * Specify how much the values should increase/decrease upon clicking on up/down button
    */
   step?: number;
-
-  /**
-   * Provide custom text for the component for each translation id
-   */
-  translateWithId?: (id: string) => string;
 
   /**
    * Specify the value of the input
@@ -345,15 +345,23 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     function handleStepperClick(event, direction) {
       if (inputRef.current) {
-        direction === 'up'
-          ? inputRef.current.stepUp()
-          : inputRef.current.stepDown();
-
+        const currentValue = Number(inputRef.current.value);
+        let newValue =
+          direction === 'up' ? currentValue + step : currentValue - step;
+        if (min !== undefined) {
+          newValue = Math.max(newValue, min);
+        }
+        if (max !== undefined) {
+          newValue = Math.min(newValue, max);
+        }
+        const currentInputValue = inputRef.current
+          ? inputRef.current.value
+          : '';
         const state = {
           value:
-            allowEmpty && inputRef.current.value === ''
+            allowEmpty && currentInputValue === '' && step === 0
               ? ''
-              : Number(inputRef.current.value),
+              : newValue,
           direction: direction,
         };
         setValue(state.value);
@@ -370,7 +378,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });
@@ -378,7 +386,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     // Need to update the internal value when the revert button is clicked
     let isRevertActive;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       isRevertActive = normalizedSlug.props.revertActive;
     }
 
@@ -408,6 +416,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               data-invalid={normalizedProps.invalid ? true : undefined}
               aria-invalid={normalizedProps.invalid}
               aria-describedby={ariaDescribedBy}
+              aria-readonly={readOnly}
               disabled={normalizedProps.disabled}
               ref={ref}
               id={id}
@@ -629,13 +638,13 @@ NumberInput.propTypes = {
   warnText: PropTypes.node,
 };
 
-interface Label {
+export interface Label {
   disabled?: boolean;
   hideLabel?: boolean;
   id?: string;
   label?: ReactNode;
 }
-function Label({ disabled, id, hideLabel, label }: Label) {
+const Label: FC<Label> = ({ disabled, id, hideLabel, label }) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--label`]: true,
@@ -651,7 +660,7 @@ function Label({ disabled, id, hideLabel, label }: Label) {
     );
   }
   return null;
-}
+};
 
 Label.propTypes = {
   disabled: PropTypes.bool,
@@ -660,7 +669,7 @@ Label.propTypes = {
   label: PropTypes.node,
 };
 
-interface HelperTextProps {
+export interface HelperTextProps {
   id?: string;
   description?: ReactNode;
   disabled?: boolean;

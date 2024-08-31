@@ -6,13 +6,14 @@
  */
 
 import cx from 'classnames';
-import { useCombobox, UseComboboxProps } from 'downshift';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import { useCombobox, UseComboboxProps, UseComboboxActions } from 'downshift';
+import PropTypes from 'prop-types';
 import React, {
   useContext,
   useEffect,
   useState,
   useRef,
+  useMemo,
   forwardRef,
   type ReactNode,
   type ComponentType,
@@ -38,11 +39,14 @@ import ListBox, {
 } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
+import { useFloating, flip, autoUpdate } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
+import { TranslateWithId } from '../../types/common';
 
 const {
   InputBlur,
@@ -120,8 +124,6 @@ const findHighlightedIndex = <ItemType,>(
   return -1;
 };
 
-const getInstanceId = setupGetInstanceId();
-
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type' | 'size';
 
 interface OnChangeData<ItemType> {
@@ -129,9 +131,23 @@ interface OnChangeData<ItemType> {
   inputValue?: string | null;
 }
 
+/**
+ * Message ids that will be passed to translateWithId().
+ * Combination of message ids from ListBox/next/ListBoxSelection.js and
+ * ListBox/next/ListBoxTrigger.js, but we can't access those values directly
+ * because those components aren't Typescript.  (If you try, TranslationKey
+ * ends up just being defined as "string".)
+ */
+type TranslationKey =
+  | 'close.menu'
+  | 'open.menu'
+  | 'clear.all'
+  | 'clear.selection';
+
 type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
 export interface ComboBoxProps<ItemType>
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
+    TranslateWithId<TranslationKey> {
   /**
    * Specify whether or not the ComboBox should allow a value that is
    * not in the list to be entered in the input
@@ -151,6 +167,13 @@ export interface ComboBoxProps<ItemType>
   ariaLabel?: string;
 
   /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign?: boolean;
+
+  /**
    * An optional className to add to the container node
    */
   className?: string;
@@ -166,9 +189,30 @@ export interface ComboBoxProps<ItemType>
   disabled?: boolean;
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
+   *
    */
   downshiftProps?: Partial<UseComboboxProps<ItemType>>;
+
+  /**
+   * Provide a ref that will be mutated to contain an object of downshift
+   * action functions. These can be called to change the internal state of the
+   * downshift useCombobox hook.
+   *
+   * **Use with caution:** calling these actions modifies the internal state of
+   * downshift. It may conflict with or override the state management used within
+   * Combobox. Downshift APIs and internals are subject to change, and in some
+   * cases they can not be shimmed by Carbon to shield you from potentially breaking
+   * changes.
+   */
+  downshiftActions?: React.MutableRefObject<
+    UseComboboxActions<ItemType> | undefined
+  >;
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -280,19 +324,13 @@ export interface ComboBoxProps<ItemType>
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `ComboBox` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the
    * combobox via ARIA attributes.
    */
   titleText?: ReactNode;
-
-  /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
-   */
-  translateWithId?: (id: string) => string;
 
   /**
    * Specify whether the control is currently in warning state
@@ -313,9 +351,11 @@ const ComboBox = forwardRef(
     const {
       ['aria-label']: ariaLabel = 'Choose an item',
       ariaLabel: deprecatedAriaLabel,
+      autoAlign = false,
       className: containerClassName,
       direction = 'bottom',
       disabled = false,
+      downshiftActions,
       downshiftProps,
       helperText,
       id,
@@ -342,10 +382,40 @@ const ComboBox = forwardRef(
       slug,
       ...rest
     } = props;
+    const { refs, floatingStyles, middlewareData } = useFloating(
+      autoAlign
+        ? {
+            placement: direction,
+            strategy: 'fixed',
+            middleware: [flip(), hide()],
+            whileElementsMounted: autoUpdate,
+          }
+        : {}
+    );
+    const parentWidth = (refs?.reference?.current as HTMLElement)?.clientWidth;
+
+    useEffect(() => {
+      if (autoAlign) {
+        const updatedFloatingStyles = {
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible',
+        };
+        Object.keys(updatedFloatingStyles).forEach((style) => {
+          if (refs.floating.current) {
+            refs.floating.current.style[style] = updatedFloatingStyles[style];
+          }
+        });
+        if (parentWidth && refs.floating.current) {
+          refs.floating.current.style.width = parentWidth + 'px';
+        }
+      }
+    }, [autoAlign, floatingStyles, refs.floating, parentWidth]);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
-    const comboBoxInstanceId = getInstanceId();
+    const comboBoxInstanceId = useId();
     const [inputValue, setInputValue] = useState(
       getInputValue({
         initialSelectedItem,
@@ -420,22 +490,34 @@ const ComboBox = forwardRef(
       (state, actionAndChanges) => {
         const { type, changes } = actionAndChanges;
         const { highlightedIndex } = changes;
+
         switch (type) {
           case InputBlur:
             if (
               state.inputValue &&
               highlightedIndex == '-1' &&
-              !allowCustomValue
+              changes.selectedItem
+            ) {
+              return {
+                ...changes,
+                inputValue: itemToString(changes.selectedItem),
+              };
+            } else if (
+              state.inputValue &&
+              highlightedIndex == '-1' &&
+              !allowCustomValue &&
+              !changes.selectedItem
             ) {
               return { ...changes, inputValue: '' };
+            } else {
+              return changes;
             }
-            return changes;
           case InputKeyDownEnter:
             if (allowCustomValue) {
               setInputValue(inputValue);
               setHighlightedIndex(changes.selectedItem);
               if (onChange) {
-                onChange({ selectedItem: changes.selectedItem });
+                onChange({ selectedItem: changes.selectedItem, inputValue });
               }
               return changes;
             } else if (changes.selectedItem && !allowCustomValue) {
@@ -446,7 +528,7 @@ const ComboBox = forwardRef(
           case FunctionToggleMenu:
           case ToggleButtonClick:
             if (changes.isOpen && !changes.selectedItem) {
-              return { ...changes, highlightedIndex: 0 };
+              return { ...changes };
             }
             return changes;
 
@@ -493,6 +575,7 @@ const ComboBox = forwardRef(
 
     const showWarning = !invalid && warn;
     const className = cx(`${prefix}--combo-box`, {
+      [`${prefix}--combo-box--invalid--focused`]: invalid && isFocused,
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--combo-box--warning`]: showWarning,
       [`${prefix}--combo-box--readonly`]: readOnly,
@@ -518,7 +601,7 @@ const ComboBox = forwardRef(
 
     const inputClasses = cx(`${prefix}--text-input`, {
       [`${prefix}--text-input--empty`]: !inputValue,
-      [`${prefix}--combo-box--input--focus`]: isFocused && !isFluid,
+      [`${prefix}--combo-box--input--focus`]: isFocused,
     });
 
     // needs to be Capitalized for react to render it correctly
@@ -526,27 +609,35 @@ const ComboBox = forwardRef(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });
     }
 
     const {
+      // Prop getters
       getInputProps,
       getItemProps,
       getLabelProps,
       getMenuProps,
       getToggleButtonProps,
+
+      // State
       isOpen,
       highlightedIndex,
-      selectItem,
       selectedItem,
-      toggleMenu,
+
+      // Actions
+      closeMenu,
+      openMenu,
+      reset,
+      selectItem,
       setHighlightedIndex,
+      setInputValue: downshiftSetInputValue,
+      toggleMenu,
     } = useCombobox({
-      ...downshiftProps,
-      items,
+      items: filterItems(items, itemToString, inputValue),
       inputValue: inputValue,
       itemToString: (item) => {
         return itemToString(item);
@@ -555,18 +646,56 @@ const ComboBox = forwardRef(
         setInputValue(inputValue || '');
         setHighlightedIndex(indexToHighlight(inputValue));
       },
-
       onSelectedItemChange({ selectedItem }) {
         onChange({ selectedItem });
       },
-
+      onHighlightedIndexChange: ({ highlightedIndex }) => {
+        if (highlightedIndex! > -1 && typeof window !== undefined) {
+          const itemArray = document.querySelectorAll(
+            `li.${prefix}--list-box__menu-item[role="option"]`
+          );
+          const highlightedItem = itemArray[highlightedIndex!];
+          if (highlightedItem) {
+            highlightedItem.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+            });
+          }
+        }
+      },
       initialSelectedItem: initialSelectedItem,
       inputId: id,
       stateReducer,
       isItemDisabled(item, _index) {
         return (item as any).disabled;
       },
+      ...downshiftProps,
     });
+
+    useEffect(() => {
+      // Used to expose the downshift actions to consumers for use with downshiftProps
+      // An odd pattern, here we mutate the value stored in the ref provided from the consumer.
+      // A riff of https://gist.github.com/gaearon/1a018a023347fe1c2476073330cc5509
+      if (downshiftActions) {
+        downshiftActions.current = {
+          closeMenu,
+          openMenu,
+          reset,
+          selectItem,
+          setHighlightedIndex,
+          setInputValue: downshiftSetInputValue,
+          toggleMenu,
+        };
+      }
+    }, [
+      closeMenu,
+      openMenu,
+      reset,
+      selectItem,
+      setHighlightedIndex,
+      downshiftSetInputValue,
+      toggleMenu,
+    ]);
 
     const buttonProps = getToggleButtonProps({
       disabled: disabled || readOnly,
@@ -611,6 +740,22 @@ const ComboBox = forwardRef(
       (helperText && !isFluid && helperTextId) ||
       undefined;
 
+    // Memoize the value of getMenuProps to avoid an infinite loop
+    const menuProps = useMemo(
+      () =>
+        getMenuProps({
+          'aria-label': deprecatedAriaLabel || ariaLabel,
+          ref: autoAlign ? refs.setFloating : null,
+        }),
+      [
+        autoAlign,
+        deprecatedAriaLabel,
+        ariaLabel,
+        getMenuProps,
+        refs.setFloating,
+      ]
+    );
+
     return (
       <div className={wrapperClasses}>
         {titleText && (
@@ -630,6 +775,7 @@ const ComboBox = forwardRef(
           light={light}
           size={size}
           warn={warn}
+          ref={autoAlign ? refs.setReference : null}
           warnText={warnText}
           warnTextId={warnTextId}>
           <div className={`${prefix}--list-box__field`}>
@@ -639,11 +785,11 @@ const ComboBox = forwardRef(
               type="text"
               tabIndex={0}
               aria-haspopup="listbox"
-              aria-owns={getMenuProps().id}
               title={textInput?.current?.value}
               {...getInputProps({
+                'aria-controls': isOpen ? undefined : menuProps.id,
                 placeholder,
-                ref: { ...mergeRefs(textInput, ref) },
+                ref: mergeRefs(textInput, ref),
                 onKeyDown: (
                   event: KeyboardEvent<HTMLInputElement> & {
                     preventDownshiftDefault: boolean;
@@ -663,7 +809,18 @@ const ComboBox = forwardRef(
                     toggleMenu();
 
                     if (highlightedIndex !== -1) {
-                      selectItem(items[highlightedIndex]);
+                      selectItem(
+                        filterItems(items, itemToString, inputValue)[
+                          highlightedIndex
+                        ]
+                      );
+                    }
+
+                    // Since `onChange` does not normally fire when the menu is closed, we should
+                    // manually fire it when `allowCustomValue` is provided, the menu is closing,
+                    // and there is a value.
+                    if (allowCustomValue && isOpen && inputValue) {
+                      onChange({ selectedItem, inputValue });
                     }
 
                     event.preventDownshiftDefault = true;
@@ -736,10 +893,7 @@ const ComboBox = forwardRef(
             />
           </div>
           {normalizedSlug}
-          <ListBox.Menu
-            {...getMenuProps({
-              'aria-label': deprecatedAriaLabel || ariaLabel,
-            })}>
+          <ListBox.Menu {...menuProps}>
             {isOpen
               ? filterItems(items, itemToString, inputValue).map(
                   (item, index) => {
@@ -821,6 +975,12 @@ ComboBox.propTypes = {
     PropTypes.string,
     'This prop syntax has been deprecated. Please use the new `aria-label`.'
   ),
+  /**
+   * **Experimental**: Will attempt to automatically align the floating
+   * element to avoid collisions with the viewport and being clipped by
+   * ancestor elements.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * An optional className to add to the container node
@@ -838,11 +998,30 @@ ComboBox.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
    */
   downshiftProps: PropTypes.object as React.Validator<
     UseComboboxProps<unknown>
   >,
+
+  /**
+   * Provide a ref that will be mutated to contain an object of downshift
+   * action functions. These can be called to change the internal state of the
+   * downshift useCombobox hook.
+   *
+   * **Use with caution:** calling these actions modifies the internal state of
+   * downshift. It may conflict with or override the state management used within
+   * Combobox. Downshift APIs and internals are subject to change, and in some
+   * cases they can not be shimmed by Carbon to shield you from potentially breaking
+   * changes.
+   */
+  downshiftActions: PropTypes.exact({ current: PropTypes.any }),
+
   /**
    * Provide helper text that is used alongside the control label for
    * additional help

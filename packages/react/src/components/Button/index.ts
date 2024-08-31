@@ -6,8 +6,8 @@
  */
 
 import Button from './Button';
-
+import { type ButtonProps } from './Button';
 export default Button;
-export { Button };
+export { Button, type ButtonProps };
 export * from './Button';
 export { default as ButtonSkeleton } from './Button.Skeleton';

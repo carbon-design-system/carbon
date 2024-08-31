@@ -8,6 +8,7 @@
 import React from 'react';
 import TileGroup from '../TileGroup';
 import RadioTile from '../../RadioTile/RadioTile';
+import Button from '../../Button';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import { FeatureFlags } from '../../FeatureFlags';
@@ -92,6 +93,39 @@ describe('TileGroup', () => {
 
       expect(screen.getByDisplayValue('test-1')).toBeRequired();
       expect(screen.getByDisplayValue('test-2')).toBeRequired();
+    });
+
+    it('should handle non-RadioTile (null) children', async () => {
+      const ToggleableRadioTiles = () => {
+        const [showSecondTile, setShowSecondTile] = React.useState(true);
+        return (
+          <>
+            <Button onClick={() => setShowSecondTile(!showSecondTile)}>
+              Toggle second tile
+            </Button>
+
+            <TileGroup defaultSelected="test-1" legend="TestGroup" name="test">
+              <RadioTile id="test-1" value="test-1">
+                Option 1
+              </RadioTile>
+              {showSecondTile && (
+                <RadioTile id="test-2" value="test-2">
+                  Option 2
+                </RadioTile>
+              )}
+            </TileGroup>
+          </>
+        );
+      };
+      render(<ToggleableRadioTiles />);
+
+      expect(screen.getByDisplayValue('test-1')).toBeVisible();
+      expect(screen.getByDisplayValue('test-2')).toBeVisible();
+
+      await userEvent.click(screen.getByRole('button'));
+
+      expect(screen.getByDisplayValue('test-1')).toBeVisible();
+      expect(screen.queryByDisplayValue('test-2')).not.toBeInTheDocument();
     });
 
     it('should support a custom `className` on the outermost element', () => {
