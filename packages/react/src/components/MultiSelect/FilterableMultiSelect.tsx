@@ -57,6 +57,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
 import { TranslateWithId } from '../../types/common';
 
 const {
@@ -388,6 +389,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
                 });
               },
             }),
+            hide(),
           ],
           whileElementsMounted: autoUpdate,
         }
@@ -396,9 +398,13 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
 
   useLayoutEffect(() => {
     if (autoAlign) {
-      Object.keys(floatingStyles).forEach((style) => {
+      const updatedFloatingStyles = {
+        ...floatingStyles,
+        visibility: middlewareData.hide?.referenceHidden ? 'hidden' : 'visible',
+      };
+      Object.keys(updatedFloatingStyles).forEach((style) => {
         if (refs.floating.current) {
-          refs.floating.current.style[style] = floatingStyles[style];
+          refs.floating.current.style[style] = updatedFloatingStyles[style];
         }
       });
     }
