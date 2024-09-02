@@ -12,6 +12,8 @@ import Modal from './Modal';
 import Button from '../Button';
 import Select from '../Select';
 import MultiSelect from '../MultiSelect';
+import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
+import { Popover, PopoverContent } from '../Popover';
 import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
@@ -312,6 +314,7 @@ export const WithScrollingContent = () => {
 
 export const Playground = ({ numberOfButtons, ...args }) => {
   const [open, setOpen] = useState(true);
+  const [popoverOpen, setPopoverOpen] = useState(false);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch modal</Button>
@@ -441,6 +444,22 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
           Quisque consectetur non risus eu rutrum.{' '}
         </p>
+
+        <Popover align={'bottom-right'} autoAlign open={popoverOpen}>
+          <div className="playground-trigger">
+            <CheckboxIcon
+              onClick={() => {
+                setPopoverOpen(!popoverOpen);
+              }}
+            />
+          </div>
+          <PopoverContent className="p-3">
+            <h2 className="popover-title">Popover Example</h2>
+            <p className="popover-details">
+              This server has 150 GB of block storage remaining.
+            </p>
+          </PopoverContent>
+        </Popover>
 
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
