@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
 import fs from 'fs-extra';
 import klaw from 'klaw-sync';
 import os from 'os';
