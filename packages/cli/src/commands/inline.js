@@ -7,12 +7,12 @@
 
 'use strict';
 
-const fs = require('fs-extra');
-const klaw = require('klaw-sync');
-const os = require('os');
-const path = require('path');
-const replace = require('replace-in-file');
-const { createLogger } = require('../logger');
+import fs from 'fs-extra';
+import klaw from 'klaw-sync';
+import os from 'os';
+import path from 'path';
+import replace from 'replace-in-file';
+import { createLogger } from '../logger';
 
 const logger = createLogger('inline');
 const isWin = process.platform === 'win32';
