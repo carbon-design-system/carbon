@@ -5,12 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import fs from 'fs-extra';
-import klaw from 'klaw-sync';
-import os from 'os';
-import path from 'path';
+'use strict';
+
+const fs = require('fs-extra');
+const klaw = require('klaw-sync');
+const os = require('os');
+const path = require('path');
 import replace from 'replace-in-file';
-import { createLogger } from '../logger';
+const { createLogger } = require('../logger');
 
 const logger = createLogger('inline');
 const isWin = process.platform === 'win32';
