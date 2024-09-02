@@ -1,5 +1,5 @@
 import Accordion, { AccordionItem, AccordionSkeleton } from '../Accordion';
-import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import { ArgTypes, Canvas } from '@storybook/blocks';
 import * as AccordionStories from './Accordion.stories';
 
 # Accordion
@@ -34,9 +34,7 @@ You can configure the accordion item's heading using the `title` prop.
 Everything you pass in as a child of `AccordionItem` will be rendered in the
 accordion's panel.
 
-<Canvas>
-  <Story of={AccordionStories.Default} />
-</Canvas>
+<Canvas of={AccordionStories.Default} />
 
 ## Skeleton state
 
@@ -44,13 +42,11 @@ You can use the `AccordionSkeleton` component to render a skeleton variant of an
 accordion. This is useful to display while content in your accordion is being
 fetched from an external resource like an API.
 
-<Canvas>
-  <Story of={AccordionStories.Skeleton} />
-</Canvas>
+<Canvas of={AccordionStories.Skeleton} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 Additional props passed into `Accordion` will be forwarded along to the
 underlying accordion container.

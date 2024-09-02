@@ -1,4 +1,4 @@
-import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas } from '@storybook/blocks';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
 import * as ContentSwitcherStories from './ContentSwitcher.stories.js';
@@ -37,13 +37,11 @@ Content switchers allow users to toggle between two or more content sections
 within the same space on screen. Only one content section is shown at a time.
 Create Switch components for each section in the content switcher.
 
-<Canvas>
-  <Story of={ContentSwitcherStories.Playground} />
-</Canvas>
+<Canvas of={ContentSwitcherStories.Playground} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ### ContentSwitcher `className`
 

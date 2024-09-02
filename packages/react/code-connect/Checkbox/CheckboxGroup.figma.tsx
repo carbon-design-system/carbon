@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// @ts-nocheck
 import React from 'react';
 import { CheckboxGroup } from '@carbon/react';
 import figma from '@figma/code-connect';
@@ -16,11 +15,12 @@ figma.connect(
   {
     props: {
       // horizontal: figma.boolean('Horizontal'), // missing in React
-      //helpermessage: figma.boolean('Helper message'), show/hide helper text in figma, in react if message is there it displays
       // warnMessage: figma.boolean('Warning message'), // you can have a component in a warn state while hiding warning message in Figma, not supported in code
       // errorMessage: figma.boolean('Error message'), // you can have a component in a error state while hiding error message in Figma, not supported in code
       children: figma.children(['Checkbox']),
-      helperText: figma.string('Helper text'),
+      helperText: figma.boolean('Helper message', {
+        true: figma.string('Helper text'),
+      }),
       readOnly: figma.enum('State', {
         'Read-only': true,
       }),
@@ -33,25 +33,8 @@ figma.connect(
       }),
       warnText: figma.string('Warning text'),
     },
-    example: ({
-      helperText,
-      readOnly,
-      children,
-      invalid,
-      invalidText,
-      warn,
-      warnText,
-    }) => (
-      // Disclaimer: Code Connect is currently in beta and integration with Carbon
-      // React is in an exploratory phase. Code sample below may be incomplete.
-      <CheckboxGroup
-        legendText="Checkbox group label"
-        helperText={helperText}
-        readOnly={readOnly}
-        warnText={warnText}
-        invalidText={invalidText}
-        invalid={invalid}
-        warn={warn}>
+    example: ({ children, ...props }) => (
+      <CheckboxGroup legendText="Checkbox group label" {...props}>
         {children}
       </CheckboxGroup>
     ),
