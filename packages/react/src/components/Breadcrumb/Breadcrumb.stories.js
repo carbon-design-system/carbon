@@ -35,6 +35,9 @@ export const Default = () => (
     <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 4</BreadcrumbItem>
+    <BreadcrumbItem href="#" isCurrentPage>
+      Breadcrumb 5
+    </BreadcrumbItem>
   </Breadcrumb>
 );
 
@@ -51,7 +54,9 @@ export const BreadcrumbWithOverflowMenu = () => (
       </OverflowMenu>
     </BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
-    <BreadcrumbItem isCurrentPage>Breadcrumb 6</BreadcrumbItem>
+    <BreadcrumbItem href="#" isCurrentPage>
+      Breadcrumb 6
+    </BreadcrumbItem>
   </Breadcrumb>
 );
 
