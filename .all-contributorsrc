@@ -1589,12 +1589,31 @@
       ]
     },
     {
+      "login": "Adam-Shea",
+      "name": "Adam Shea",
+      "avatar_url": "https://avatars.githubusercontent.com/u/44814104?v=4",
+      "profile": "https://github.com/Adam-Shea",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "NabeelAyubee",
       "name": "Md Nabeel Ayubee",
       "avatar_url": "https://avatars.githubusercontent.com/u/64087875?v=4",
       "profile": "https://github.com/NabeelAyubee",
       "contributions": [
         "code"
+      ]
+    },
+    {
+      "login": "pamrulla",
+      "name": "Patan Amrulla Khan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4942741?v=4",
+      "profile": "https://github.com/pamrulla",
+      "contributions": [
+        "code",
+        "doc"
       ]
     }
   ],

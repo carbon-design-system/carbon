@@ -2069,7 +2069,6 @@ Map {
           "type": "string",
         },
         "isExpanded": Object {
-          "isRequired": true,
           "type": "bool",
         },
         "isSelected": Object {
@@ -2167,7 +2166,6 @@ Map {
         },
         "ariaLabel": [Function],
         "checked": Object {
-          "isRequired": true,
           "type": "bool",
         },
         "className": Object {
@@ -2200,7 +2198,6 @@ Map {
         },
         "ariaLabel": [Function],
         "checked": Object {
-          "isRequired": true,
           "type": "bool",
         },
         "className": Object {
@@ -2230,6 +2227,7 @@ Map {
       },
     },
     "TableSlugRow": Object {
+      "displayName": "TableSlugRow",
       "propTypes": Object {
         "className": Object {
           "type": "string",
@@ -6113,6 +6111,16 @@ Map {
       "page": Object {
         "type": "number",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "totalItems": Object {
         "type": "number",
       },
@@ -8115,7 +8123,6 @@ Map {
         "type": "string",
       },
       "isExpanded": Object {
-        "isRequired": true,
         "type": "bool",
       },
       "isSelected": Object {
@@ -8213,7 +8220,6 @@ Map {
       },
       "ariaLabel": [Function],
       "checked": Object {
-        "isRequired": true,
         "type": "bool",
       },
       "className": Object {
@@ -8246,7 +8252,6 @@ Map {
       },
       "ariaLabel": [Function],
       "checked": Object {
-        "isRequired": true,
         "type": "bool",
       },
       "className": Object {
@@ -8276,6 +8281,7 @@ Map {
     },
   },
   "TableSlugRow" => Object {
+    "displayName": "TableSlugRow",
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -10026,6 +10032,7 @@ Map {
     },
   },
   "unstable_Text" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
         "args": Array [
@@ -10058,6 +10065,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "unstable_TextDirection" => Object {
     "propTypes": Object {
