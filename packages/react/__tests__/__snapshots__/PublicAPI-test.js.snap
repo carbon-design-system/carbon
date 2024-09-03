@@ -2227,6 +2227,7 @@ Map {
       },
     },
     "TableSlugRow": Object {
+      "displayName": "TableSlugRow",
       "propTypes": Object {
         "className": Object {
           "type": "string",
@@ -8280,6 +8281,7 @@ Map {
     },
   },
   "TableSlugRow" => Object {
+    "displayName": "TableSlugRow",
     "propTypes": Object {
       "className": Object {
         "type": "string",
