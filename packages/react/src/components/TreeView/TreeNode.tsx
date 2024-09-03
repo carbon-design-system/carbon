@@ -234,12 +234,7 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
       }
       if (children && match(event, keys.ArrowRight)) {
         if (expanded) {
-          const firstChildElement = currentNode.current?.querySelector(
-            '[role="treeitem"]'
-          ) as HTMLElement | null;
-          if (firstChildElement) {
-            firstChildElement.focus();
-          }
+          (currentNode.current?.lastChild?.firstChild as HTMLElement).focus();
         } else {
           if (!enableTreeviewControllable) {
             onToggle?.(event, { id, isExpanded: true, label, value });
