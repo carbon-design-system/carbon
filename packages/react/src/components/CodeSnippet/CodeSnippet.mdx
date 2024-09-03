@@ -1,4 +1,4 @@
-import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas } from '@storybook/blocks';
 import CodeSnippet from '../CodeSnippet';
 import * as CodeSnippetStories from './CodeSnippet.stories';
 
@@ -27,9 +27,7 @@ Code snippets are strings or small blocks of reusable code that are copyable. We
 don't provide the copy functionality and recommend
 [clipboard.js](https://clipboardjs.com/).
 
-<Canvas>
-  <Story of={CodeSnippetStories.Inline} />
-</Canvas>
+<Canvas of={CodeSnippetStories.Inline} />
 
 ## Skeleton state
 
@@ -37,18 +35,14 @@ You can use the `CodeSnippetSkeleton` component to render a skeleton variant of
 an code snippet. This is useful to display while content in your code snippet is
 being fetched from an external resource like an API.
 
-<Canvas>
-  <Story of={CodeSnippetStories.Skeleton} />
-</Canvas>
+<Canvas of={CodeSnippetStories.Skeleton} />
 
 ## Inline
 
 Inline code snippet's are used for distinguishing a symbol, variable, function
 name or similar small piece of code from it's surrounding text.
 
-<Canvas>
-  <Story of={CodeSnippetStories.Inline} />
-</Canvas>
+<Canvas of={CodeSnippetStories.Inline} />
 
 ## Multi-line
 
@@ -57,9 +51,7 @@ line. They're shown in a block and useful for showing classes, functions, blocks
 of styles and the like. There is an option to wrap the lines displayed if the
 lines are longer than the container.
 
-<Canvas>
-  <Story of={CodeSnippetStories.Multiline} />
-</Canvas>
+<Canvas of={CodeSnippetStories.Multiline} />
 
 ## Single-line
 
@@ -67,13 +59,11 @@ Single line code snippets are used when showing code that fits on one line
 without wrapping. Useful for calling out terminal commands, function
 invocations, expressions etc.
 
-<Canvas>
-  <Story of={CodeSnippetStories.Singleline} />
-</Canvas>
+<Canvas of={CodeSnippetStories.Singleline} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Migration notes
 
