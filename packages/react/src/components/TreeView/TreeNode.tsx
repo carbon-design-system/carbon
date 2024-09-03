@@ -224,6 +224,10 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
           }
           setExpanded(false);
         } else {
+          /**
+           * When focus is on a leaf node or a closed parent node, move focus to
+           * its parent node (unless its depth is level 1)
+           */
           const parentNode = findParentTreeNode(
             currentNode.current?.parentElement || null
           );
@@ -234,6 +238,10 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
       }
       if (children && match(event, keys.ArrowRight)) {
         if (expanded) {
+          /**
+           * When focus is on an expanded parent node, move focus to the first
+           * child node
+           */
           (currentNode.current?.lastChild?.firstChild as HTMLElement).focus();
         } else {
           if (!enableTreeviewControllable) {
