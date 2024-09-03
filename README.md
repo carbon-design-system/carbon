@@ -303,6 +303,9 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Adam-Shea"><img src="https://avatars.githubusercontent.com/u/44814104?v=4?s=100" width="100px;" alt="Adam Shea"/><br /><sub><b>Adam Shea</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Adam-Shea" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/NabeelAyubee"><img src="https://avatars.githubusercontent.com/u/64087875?v=4?s=100" width="100px;" alt="Md Nabeel Ayubee"/><br /><sub><b>Md Nabeel Ayubee</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=NabeelAyubee" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/pamrulla"><img src="https://avatars.githubusercontent.com/u/4942741?v=4?s=100" width="100px;" alt="Patan Amrulla Khan"/><br /><sub><b>Patan Amrulla Khan</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=pamrulla" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=pamrulla" title="Documentation">📖</a></td>
+    </tr>
   </tbody>
 </table>
 

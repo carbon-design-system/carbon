@@ -50,9 +50,11 @@ $content-padding: 0 0 0 $spacing-05 !default;
     @include layout.use('density', $default: 'normal');
 
     @include component-reset.reset;
-
-    inline-size: 100%;
-    list-style: none;
+    /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, no-duplicate-selectors */
+    & {
+      inline-size: 100%;
+      list-style: none;
+    }
   }
 
   .#{$prefix}--accordion__item {
@@ -81,20 +83,23 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion__heading {
+    transition: background-color motion(standard, productive) $duration-fast-02;
     @include button-reset.reset;
 
-    position: relative;
-    display: flex;
-    flex-direction: $flex-direction;
-    align-items: center;
-    justify-content: $justify-content;
-    margin: 0;
-    color: $text-primary;
-    cursor: pointer;
-    inline-size: 100%;
-    min-block-size: layout.size('height');
-    padding-inline-end: layout.density('padding-inline');
-    transition: background-color motion(standard, productive) $duration-fast-02;
+    /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, no-duplicate-selectors */
+    & {
+      position: relative;
+      display: flex;
+      flex-direction: $flex-direction;
+      align-items: center;
+      justify-content: $justify-content;
+      margin: 0;
+      color: $text-primary;
+      cursor: pointer;
+      inline-size: 100%;
+      min-block-size: layout.size('height');
+      padding-inline-end: layout.density('padding-inline');
+    }
 
     &:hover {
       background-color: $layer-hover;
@@ -143,23 +148,30 @@ $content-padding: 0 0 0 $spacing-05 !default;
   .#{$prefix}--accordion__arrow {
     @include focus-outline('reset');
 
-    flex: 0 0 1rem;
-    block-size: 1rem;
-    fill: $icon-primary;
-    inline-size: 1rem;
-    // Without flex basis and flex shrink being set here, our icon width can go
-    // <16px and cause the icon to render in the incorrect artboard size
-    transform: rotate(-270deg) #{'/*rtl:ignore*/'};
     transition: all $duration-fast-02 motion(standard, productive);
+
+    /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, no-duplicate-selectors */
+    & {
+      flex: 0 0 1rem;
+      block-size: 1rem;
+      fill: $icon-primary;
+      inline-size: 1rem;
+      // Without flex basis and flex shrink being set here, our icon width can go
+      // <16px and cause the icon to render in the incorrect artboard size
+      transform: rotate(-270deg) #{'/*rtl:ignore*/'};
+    }
   }
 
   .#{$prefix}--accordion__title {
     @include type-style('body-01');
 
-    z-index: 1;
-    inline-size: 100%;
-    padding-inline-start: $spacing-05;
-    text-align: start;
+    /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, no-duplicate-selectors */
+    & {
+      z-index: 1;
+      inline-size: 100%;
+      padding-inline-start: $spacing-05;
+      text-align: start;
+    }
   }
 
   .#{$prefix}--accordion__wrapper {

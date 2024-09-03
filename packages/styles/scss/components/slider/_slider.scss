@@ -224,7 +224,6 @@
   .#{$prefix}--slider__thumb--lower,
   .#{$prefix}--slider__thumb--upper {
     position: absolute;
-    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
     border-radius: unset;
     background-color: transparent;
     box-shadow: none;
