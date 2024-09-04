@@ -700,10 +700,6 @@
 
   .#{$prefix}--tabs--contained ~ .#{$prefix}--tab-content {
     background: $layer;
-
-    > * {
-      @include layer-tokens.emit-layer-tokens(2);
-    }
   }
 
   .#{$prefix}--tabs--vertical ~ .#{$prefix}--tab-content {
