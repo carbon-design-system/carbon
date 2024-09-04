@@ -114,7 +114,7 @@ Playground.argTypes = {
     },
   },
   helperText: {
-    table: { type: 'text' },
+    control: { type: 'text' },
   },
   id: {
     table: {
@@ -122,10 +122,10 @@ Playground.argTypes = {
     },
   },
   invalidText: {
-    table: { type: 'text' },
+    control: { type: 'text' },
   },
   label: {
-    table: { type: 'text' },
+    control: { type: 'text' },
   },
   light: {
     table: {
