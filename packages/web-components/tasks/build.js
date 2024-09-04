@@ -7,20 +7,21 @@
 
 'use strict';
 
-import path from 'path';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
 import { fileURLToPath } from 'url';
-import postcss from 'postcss';
-import alias from '@rollup/plugin-alias';
-import { rollup } from 'rollup';
-import nodeResolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
-import litSCSS from '../tools/rollup-plugin-lit-scss.js';
 import { globby } from 'globby';
+import { rollup } from 'rollup';
+import alias from '@rollup/plugin-alias';
+import autoprefixer from 'autoprefixer';
 import carbonIcons from '../tools/rollup-plugin-icons.js';
 import carbonIconPaths from '../tools/rollup-plugin-icon-paths.js';
+import commonjs from '@rollup/plugin-commonjs';
+import copy from 'rollup-plugin-copy';
+import cssnano from 'cssnano';
+import litSCSS from '../tools/rollup-plugin-lit-scss.js';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import path from 'path';
+import postcss from 'postcss';
+import typescript from '@rollup/plugin-typescript';
 
 import * as packageJson from '../package.json' assert { type: 'json' };
 
@@ -120,6 +121,10 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
     plugins: [
       alias({
         entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
+      }),
+      copy({
+        targets: [{ src: 'src/components/**/*.scss', dest: 'scss' }],
+        flatten: false,
       }),
       nodeResolve({
         browser: true,

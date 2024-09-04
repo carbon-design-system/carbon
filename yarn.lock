@@ -2378,6 +2378,7 @@ __metadata:
     read-package-up: "npm:^11.0.0"
     rimraf: "npm:^6.0.0"
     rollup: "npm:^2.79.1"
+    rollup-plugin-copy: "npm:^3.5.0"
     rollup-plugin-multi-input: "npm:^1.3.1"
     sass: "npm:^1.51.0"
     storybook: "npm:^8.2.8"
@@ -7388,6 +7389,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/fs-extra@npm:^8.0.1":
+  version: 8.1.5
+  resolution: "@types/fs-extra@npm:8.1.5"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10/565d9e55cd05064b3ab272b8748ed512b8fa5cddc23fd32b0d5f147f9ea3a45981577c4478b5060cae7b3d914c508bd2ea97eb84d9c1fa6f967982c892e4ab26
+  languageName: node
+  linkType: hard
+
+"@types/glob@npm:^7.1.1":
+  version: 7.2.0
+  resolution: "@types/glob@npm:7.2.0"
+  dependencies:
+    "@types/minimatch": "npm:*"
+    "@types/node": "npm:*"
+  checksum: 10/6ae717fedfdfdad25f3d5a568323926c64f52ef35897bcac8aca8e19bc50c0bd84630bbd063e5d52078b2137d8e7d3c26eabebd1a2f03ff350fff8a91e79fc19
+  languageName: node
+  linkType: hard
+
 "@types/graceful-fs@npm:^4.1.3":
   version: 4.1.9
   resolution: "@types/graceful-fs@npm:4.1.9"
@@ -7571,6 +7591,13 @@ __metadata:
   version: 1.3.5
   resolution: "@types/mime@npm:1.3.5"
   checksum: 10/e29a5f9c4776f5229d84e525b7cd7dd960b51c30a0fb9a028c0821790b82fca9f672dab56561e2acd9e8eed51d431bde52eafdfef30f643586c4162f1aecfc78
+  languageName: node
+  linkType: hard
+
+"@types/minimatch@npm:*":
+  version: 5.1.2
+  resolution: "@types/minimatch@npm:5.1.2"
+  checksum: 10/94db5060d20df2b80d77b74dd384df3115f01889b5b6c40fa2dfa27cfc03a68fb0ff7c1f2a0366070263eb2e9d6bfd8c87111d4bc3ae93c3f291297c1bf56c85
   languageName: node
   linkType: hard
 
@@ -10848,6 +10875,13 @@ __metadata:
   version: 2.9.3
   resolution: "colord@npm:2.9.3"
   checksum: 10/907a4506d7307e2f580b471b581e992181ed75ab0c6925ece9ca46d88161d2fc50ed15891cd0556d0d9321237ca75afc9d462e4c050b939ef88428517f047f30
+  languageName: node
+  linkType: hard
+
+"colorette@npm:^1.1.0":
+  version: 1.4.0
+  resolution: "colorette@npm:1.4.0"
+  checksum: 10/c8d6c8c3ef5a99acfc3dd9a68f48019f1479ec347551387e4a1762e40f69e98ce19d4dc321ffb4919d1f28a7bdc90c39d4e9a901f4c474fd2124ad93a00c0454
   languageName: node
   linkType: hard
 
@@ -14413,7 +14447,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:3.3.2, fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.2, fast-glob@npm:^3.2.7, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.1, fast-glob@npm:^3.3.2":
+"fast-glob@npm:3.3.2, fast-glob@npm:^3.0.3, fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.2, fast-glob@npm:^3.2.7, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.1, fast-glob@npm:^3.3.2":
   version: 3.3.2
   resolution: "fast-glob@npm:3.3.2"
   dependencies:
@@ -14971,6 +15005,17 @@ __metadata:
     graceful-fs: "npm:^4.1.2"
     jsonfile: "npm:^2.1.0"
   checksum: 10/2cd92acba96fc2a180b7fc9d7966765d3eb4dfe8b52c112da62d421b40d07554e814ead8364f7be002449bfecb2180ec9ee37f85c4eee28e5281c7969c5cd059
+  languageName: node
+  linkType: hard
+
+"fs-extra@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "fs-extra@npm:8.1.0"
+  dependencies:
+    graceful-fs: "npm:^4.2.0"
+    jsonfile: "npm:^4.0.0"
+    universalify: "npm:^0.1.0"
+  checksum: 10/6fb12449f5349be724a138b4a7b45fe6a317d2972054517f5971959c26fbd17c0e145731a11c7324460262baa33e0a799b183ceace98f7a372c95fbb6f20f5de
   languageName: node
   linkType: hard
 
@@ -15614,6 +15659,22 @@ __metadata:
     define-properties: "npm:^1.2.1"
     gopd: "npm:^1.0.1"
   checksum: 10/1f1fd078fb2f7296306ef9dd51019491044ccf17a59ed49d375b576ca108ff37e47f3d29aead7add40763574a992f16a5367dd1e2173b8634ef18556ab719ac4
+  languageName: node
+  linkType: hard
+
+"globby@npm:10.0.1":
+  version: 10.0.1
+  resolution: "globby@npm:10.0.1"
+  dependencies:
+    "@types/glob": "npm:^7.1.1"
+    array-union: "npm:^2.1.0"
+    dir-glob: "npm:^3.0.1"
+    fast-glob: "npm:^3.0.3"
+    glob: "npm:^7.1.3"
+    ignore: "npm:^5.1.1"
+    merge2: "npm:^1.2.3"
+    slash: "npm:^3.0.0"
+  checksum: 10/ea724a820d7d4eafc5aa3882d667a7ef3505b3018652b2658185d58752f122b75d3370086e4d4a7b1bbcdf8c2e700e5709a48db189a930df37005e1b3c86c256
   languageName: node
   linkType: hard
 
@@ -16374,6 +16435,13 @@ __metadata:
   version: 5.3.1
   resolution: "ignore@npm:5.3.1"
   checksum: 10/0a884c2fbc8c316f0b9f92beaf84464253b73230a4d4d286697be45fca081199191ca33e1c2e82d9e5f851f5e9a48a78e25a35c951e7eb41e59f150db3530065
+  languageName: node
+  linkType: hard
+
+"ignore@npm:^5.1.1":
+  version: 5.3.2
+  resolution: "ignore@npm:5.3.2"
+  checksum: 10/cceb6a457000f8f6a50e1196429750d782afce5680dd878aa4221bd79972d68b3a55b4b1458fc682be978f4d3c6a249046aa0880637367216444ab7b014cfc98
   languageName: node
   linkType: hard
 
@@ -17193,6 +17261,13 @@ __metadata:
   dependencies:
     isobject: "npm:^3.0.1"
   checksum: 10/2a401140cfd86cabe25214956ae2cfee6fbd8186809555cd0e84574f88de7b17abacb2e477a6a658fa54c6083ecbda1e6ae404c7720244cd198903848fca70ca
+  languageName: node
+  linkType: hard
+
+"is-plain-object@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "is-plain-object@npm:3.0.1"
+  checksum: 10/d13fe75db350d4ac669595cdfe0242ae87fcecddf2bca858d2dd443a6ed6eb1f69951fac8c2fa85b16106c6b0d7738fea86c2aca2ecee7fd61de15c1574f2cc5
   languageName: node
   linkType: hard
 
@@ -18564,6 +18639,18 @@ __metadata:
     graceful-fs:
       optional: true
   checksum: 10/517656e0a7c4eda5a90341dd0ec9e9b7590d0c77d66d8aad0162615dfc7c5f219c82565b927cc4cc774ca93e484d118a274ef0def74279a3d8afb4ff2f4e4800
+  languageName: node
+  linkType: hard
+
+"jsonfile@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "jsonfile@npm:4.0.0"
+  dependencies:
+    graceful-fs: "npm:^4.1.6"
+  dependenciesMeta:
+    graceful-fs:
+      optional: true
+  checksum: 10/17796f0ab1be8479827d3683433f97ebe0a1c6932c3360fa40348eac36904d69269aab26f8b16da311882d94b42e9208e8b28e490bf926364f3ac9bff134c226
   languageName: node
   linkType: hard
 
@@ -20283,7 +20370,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"merge2@npm:^1.3.0, merge2@npm:^1.4.1":
+"merge2@npm:^1.2.3, merge2@npm:^1.3.0, merge2@npm:^1.4.1":
   version: 1.4.1
   resolution: "merge2@npm:1.4.1"
   checksum: 10/7268db63ed5169466540b6fb947aec313200bcf6d40c5ab722c22e242f651994619bcd85601602972d3c85bd2cc45a358a4c61937e9f11a061919a1da569b0c2
@@ -25128,6 +25215,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rollup-plugin-copy@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "rollup-plugin-copy@npm:3.5.0"
+  dependencies:
+    "@types/fs-extra": "npm:^8.0.1"
+    colorette: "npm:^1.1.0"
+    fs-extra: "npm:^8.1.0"
+    globby: "npm:10.0.1"
+    is-plain-object: "npm:^3.0.0"
+  checksum: 10/706ba6bd2052b95d1037f12963ff4b50749730f18aefad10544f9574aff7c035c88c5dd9ae1f0c0408cf09862e595a0ea4d68e13c2717addaea2bda3ade0d0e0
+  languageName: node
+  linkType: hard
+
 "rollup-plugin-multi-input@npm:^1.3.1":
   version: 1.5.0
   resolution: "rollup-plugin-multi-input@npm:1.5.0"
@@ -28499,6 +28599,13 @@ __metadata:
   version: 6.0.1
   resolution: "universal-user-agent@npm:6.0.1"
   checksum: 10/fdc8e1ae48a05decfc7ded09b62071f571c7fe0bd793d700704c80cea316101d4eac15cc27ed2bb64f4ce166d2684777c3198b9ab16034f547abea0d3aa1c93c
+  languageName: node
+  linkType: hard
+
+"universalify@npm:^0.1.0":
+  version: 0.1.2
+  resolution: "universalify@npm:0.1.2"
+  checksum: 10/40cdc60f6e61070fe658ca36016a8f4ec216b29bf04a55dce14e3710cc84c7448538ef4dad3728d0bfe29975ccd7bfb5f414c45e7b78883567fb31b246f02dff
   languageName: node
   linkType: hard
 
