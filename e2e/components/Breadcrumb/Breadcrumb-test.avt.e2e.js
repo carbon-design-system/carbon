@@ -96,6 +96,6 @@ test.describe('@avt Breadcrumb', () => {
 
     await page.keyboard.press('Tab');
     await expect(page.getByText('Breadcrumb 6')).toBeVisible();
-    await expect(page.getByText('Breadcrumb 6')).not.toBeFocused();
+    await expect(page.getByText('Breadcrumb 6')).toBeFocused();
   });
 });
