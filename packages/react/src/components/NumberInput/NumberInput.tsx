@@ -7,6 +7,7 @@
 
 import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
+import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
 import React, {
   ReactNode,
@@ -14,8 +15,8 @@ import React, {
   useRef,
   useState,
   useEffect,
-  FC,
   useCallback,
+  FC,
 } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
@@ -304,24 +305,27 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       ariaDescribedBy = helperText ? normalizedProps.helperId : undefined;
     }
 
-    function handleOnChange(event) {
-      if (disabled) {
-        return;
-      }
+    const handleOnChange = useCallback(
+      (event) => {
+        if (disabled) {
+          return;
+        }
 
-      const state = {
-        value:
-          allowEmpty && event.target.value === ''
-            ? ''
-            : Number(event.target.value),
-        direction: value < event.target.value ? 'up' : 'down',
-      };
-      setValue(state.value);
+        const state = {
+          value:
+            allowEmpty && event.target.value === ''
+              ? ''
+              : Number(event.target.value),
+          direction: value < event.target.value ? 'up' : 'down',
+        };
+        setValue(state.value);
 
-      if (onChange) {
-        onChange(event, state);
-      }
-    }
+        if (onChange) {
+          onChange(event, state);
+        }
+      },
+      [disabled, allowEmpty, onChange, setValue, value]
+    );
 
     const handleFocus: React.FocusEventHandler<
       HTMLInputElement | HTMLDivElement
@@ -343,42 +347,41 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     });
 
     const Icon = normalizedProps.icon as any;
+    const debouncedHandleStepperClick = useCallback(
+      debounce((event, direction) => {
+        if (!inputRef.current || disabled || readOnly) return;
 
-    const handleStepperClick = useCallback(
-      (event, direction) => {
-        if (inputRef.current) {
-          const currentValue = Number(inputRef.current.value);
-          let newValue =
-            direction === 'up' ? currentValue + step : currentValue - step;
-          if (min !== undefined) {
-            newValue = Math.max(newValue, min);
-          }
-          if (max !== undefined) {
-            newValue = Math.min(newValue, max);
-          }
-          const currentInputValue = inputRef.current
-            ? inputRef.current.value
-            : '';
-          const state = {
-            value:
-              allowEmpty && currentInputValue === '' && step === 0
-                ? ''
-                : newValue,
-            direction: direction,
-          };
-          setValue(state.value);
-
-          if (onChange) {
-            onChange(event, state);
-          }
-
-          if (onClick) {
-            onClick(event, state);
-          }
+        const currentValue = Number(inputRef.current.value);
+        let newValue =
+          direction === 'up' ? currentValue + step : currentValue - step;
+        if (min !== undefined) {
+          newValue = Math.max(newValue, min);
         }
-      },
-      [allowEmpty, step, min, max, onChange, onClick]
+        if (max !== undefined) {
+          newValue = Math.min(newValue, max);
+        }
+        const currentInputValue = inputRef.current
+          ? inputRef.current.value
+          : '';
+        const state = {
+          value:
+            allowEmpty && currentInputValue === '' && step === 0
+              ? ''
+              : newValue,
+          direction: direction,
+        };
+
+        setValue(state.value);
+
+        onChange?.(event, state);
+        onClick?.(event, state);
+      }, 50),
+      [step, min, max, allowEmpty, onChange, onClick]
     );
+
+    function handleStepperClick(event, direction) {
+      debouncedHandleStepperClick(event, direction);
+    }
 
     // Slug is always size `mini`
     let normalizedSlug;
