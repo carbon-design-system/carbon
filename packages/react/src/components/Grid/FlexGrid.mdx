@@ -1,4 +1,4 @@
-import { Story, Canvas, ArgsTable } from '@storybook/blocks';
+import { Story, Canvas, ArgTypes } from '@storybook/blocks';
 import * as FlexGridStories from './FlexGrid.stories';
 
 # Grid
@@ -7,9 +7,10 @@ import * as FlexGridStories from './FlexGrid.stories';
 &nbsp;|&nbsp;
 [Usage guidelines](https://www.carbondesignsystem.com/guidelines/2x-grid/overview)
 
-{/* <!-- prettier-ignore-start -->
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+{/* prettier-ignore-start */}
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -27,8 +28,9 @@ import * as FlexGridStories from './FlexGrid.stories';
   - [Can I nest grid components?](#can-i-nest-grid-components)
 - [Feedback](#feedback)
 
-{/* <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-<!-- prettier-ignore-end --> */}
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+{/* prettier-ignore-end */}
 
 Carbon's grid components help developers use the
 [2x Grid](https://www.carbondesignsystem.com/guidelines/2x-grid/overview). The
@@ -48,9 +50,7 @@ import { FlexGrid, Row, Column } from '@carbon/react';
 );
 ```
 
-<Canvas>
-  <Story of={FlexGridStories.ResponsiveGrid} />
-</Canvas>
+<Canvas of={FlexGridStories.ResponsiveGrid} />
 
 ## Overview
 
@@ -93,47 +93,37 @@ You can pair up multiple breakpoint props to specify how many columns the
 we will use the `sm`, `md`, and `lg` prop to specify how many columns the
 `Column` components should span at the small, medium, and large breakpoints.
 
-<Canvas>
-  <Story of={FlexGridStories.ResponsiveGrid} />
-</Canvas>
+<Canvas of={FlexGridStories.ResponsiveGrid} />
 
 ## Gutter modes
 
 There are several
 [gutter modes](https://www.carbondesignsystem.com/guidelines/2x-grid/implementation/#gutter-modes)
 that you can use depending on the layout effect you're looking to achieve. By
-default, `FlexGrid` uses the wide gutter mode with a 32px gutter. However, you can
-use the `narrow` or `condensed` props to enable the narrow and condensed grid
-modes, respectively.
+default, `FlexGrid` uses the wide gutter mode with a 32px gutter. However, you
+can use the `narrow` or `condensed` props to enable the narrow and condensed
+grid modes, respectively.
 
 The same way that you can pass in `narrow` or `condensed` to the `FlexGrid`
 component, you can also pass in `narrow` or `condensed` to a `Row` component to
-enable a certain gutter mode but only for a row. This can be useful when you need
-to mix-and-match certain gutter modes to achieve a particular layout.
+enable a certain gutter mode but only for a row. This can be useful when you
+need to mix-and-match certain gutter modes to achieve a particular layout.
 
 ### Wide grid
 
-<Canvas>
-  <Story of={FlexGridStories.FullWidth} />
-</Canvas>
+<Canvas of={FlexGridStories.FullWidth} />
 
 ### Narrow grid
 
-<Canvas>
-  <Story of={FlexGridStories.Narrow} />
-</Canvas>
+<Canvas of={FlexGridStories.Narrow} />
 
 ### Condensed grid
 
-<Canvas>
-  <Story of={FlexGridStories.Condensed} />
-</Canvas>
+<Canvas of={FlexGridStories.Condensed} />
 
 ### Mix-and-match
 
-<Canvas>
-  <Story of={FlexGridStories.MixedGutterModes} />
-</Canvas>
+<Canvas of={FlexGridStories.MixedGutterModes} />
 
 ## Auto columns
 
@@ -151,9 +141,7 @@ For example, if you have on `Column` component it would span 100%, two `Column`
 components would span 50% each, four `Column` components would span 25% each,
 and so on.
 
-<Canvas>
-  <Story of={FlexGridStories.AutoColumns} />
-</Canvas>
+<Canvas of={FlexGridStories.AutoColumns} />
 
 ## Offset columns
 
@@ -172,13 +160,11 @@ breakpoint. At the medium breakpoint, it will be offset by two columns.
 <Column sm={2} md={{ span: 4, offset: 2 }} />
 ```
 
-<Canvas>
-  <Story of={FlexGridStories.Offset} />
-</Canvas>
+<Canvas of={FlexGridStories.Offset} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ### Using the `as` prop
 
