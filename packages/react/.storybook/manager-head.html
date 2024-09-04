@@ -74,6 +74,16 @@
   type="text/javascript"
   async="async"></script>
 
+<!-- 
+  Ensure plex is loaded into the manager ui even when plex is not locally 
+  installed on the user's machine. This file uses `local()` within the 
+  @font-face declarations, so if plex is available locally, nothing is loaded 
+  from the CDN. 
+-->
+<link
+  rel="stylesheet"
+  href="https://1.www.s81c.com/common/carbon/plex/sans.css" />
+
 <!-- Style overrides -->
 <style>
   body {
