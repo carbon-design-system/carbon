@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable react/jsx-no-duplicate-props */
 // @ts-nocheck
 import React from 'react';
 import {
