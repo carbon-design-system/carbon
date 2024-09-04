@@ -1,4 +1,4 @@
-import { Story, ArgsTable, Canvas, Unstyled } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas, Unstyled } from '@storybook/blocks';
 import Modal from '../Modal';
 import { InlineNotification } from '../Notification';
 import CodeSnippet from '../CodeSnippet';
@@ -40,13 +40,11 @@ the modal body content. You can also use `modalLabel`, `modalHeading`,
 `secondaryButtonText` and `primaryButtonText` props to change the corresponding
 text.
 
-<Canvas>
-  <Story of={ModalStories.WithStateManager} />
-</Canvas>
+<Canvas of={ModalStories.WithStateManager} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Opening/closing modal
 
