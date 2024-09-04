@@ -1,7 +1,6 @@
-import { ArgsTable, Canvas, Story, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as TextInputStories from './TextInput.stories';
 import * as PasswordInputStories from './PasswordInput.stories';
-
 
 # TextInput
 
@@ -11,9 +10,7 @@ import * as PasswordInputStories from './PasswordInput.stories';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/text-input/accessibility)
 
-<Canvas>
-  <Story of={TextInputStories.Default} />
-</Canvas>
+<Canvas of={TextInputStories.Default} />
 
 ## Overview
 
@@ -23,21 +20,15 @@ default text input is for short, one-line content.
 
 ### Fluid
 
-<Canvas>
-  <Story of={TextInputStories.Fluid} />
-</Canvas>
+<Canvas of={TextInputStories.Fluid} />
 
 ### Read Only
 
-<Canvas>
-  <Story of={TextInputStories.ReadOnly} />
-</Canvas>
+<Canvas of={TextInputStories.ReadOnly} />
 
 ### With Layer
 
-<Canvas>
-  <Story of={TextInputStories._WithLayer} />
-</Canvas>
+<Canvas of={TextInputStories._WithLayer} />
 
 ### Password Input
 
@@ -55,7 +46,7 @@ component instead.
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 
