@@ -300,6 +300,7 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--inline.#{$prefix}--btn {
     block-size: 1.25rem;
     inline-size: initial;
+    max-inline-size: unset;
     min-block-size: 1.25rem;
     padding-inline: 0;
   }
