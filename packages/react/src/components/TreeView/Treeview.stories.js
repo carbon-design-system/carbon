@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Document, Folder } from '@carbon/icons-react';
 import { default as TreeView, TreeNode } from './';
+import mdx from './TreeView.mdx';
 import './story.scss';
 
 const nodes = [
@@ -186,6 +187,11 @@ export default {
   component: TreeView,
   subcomponents: {
     TreeNode,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
   args: {
     onSelect: action('onSelect'),
