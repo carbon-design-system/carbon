@@ -50,7 +50,7 @@
     "prettier": "^2.8.8",
     "prettier-config-carbon": "^0.11.0",
     "progress-estimator": "^0.3.0",
-    "remark": "^10.0.1",
+    "remark": "^15.0.0",
     "replace-in-file": "^7.0.0",
     "rollup": "^2.79.1",
     "sass": "^1.77.7",
