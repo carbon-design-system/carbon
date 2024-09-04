@@ -1,13 +1,13 @@
-import { ArgTypes, Meta, Markdown } from "@storybook/blocks";
-import { cdnJs, cdnCss } from "../../globals/internal/storybook-cdn";
-import * as IconButtonStories from "./icon-button.stories";
+import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as IconButtonStories from './icon-button.stories';
 
 <Meta of={IconButtonStories} />
 
 # Icon Button
 
 > 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/web-components/examples/stackblitz/basic/components/icon-button)
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/icon-button)
 > example implementation.
 
 [![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/stackblitz/basic/components/icon-button)
@@ -24,19 +24,19 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import "@carbon/web-components/es/components/icon-button/index.js";
+import '@carbon/web-components/es/components/icon-button/index.js';
 ```
 
-<Markdown>{`${cdnJs({ components: ["icon-button"] })}`}</Markdown>
+<Markdown>{`${cdnJs({ components: ['icon-button'] })}`}</Markdown>
 <Markdown>{`${cdnCss()}`}</Markdown>
 
 ```javascript
-import "@carbon/web-components/es/components/icon-button/index.js";
-import Edit16 from "@carbon/icons/lib/edit/16";
+import '@carbon/web-components/es/components/icon-button/index.js';
+import Edit16 from '@carbon/icons/lib/edit/16';
 
 function App() {
   return html`<cds-icon-button>
-    ${Edit16({ slot: "icon" })}
+    ${Edit16({ slot: 'icon' })}
     <span slot="tooltip-content"> Tooltip text </span>
   </cds-icon-button>`;
 }
