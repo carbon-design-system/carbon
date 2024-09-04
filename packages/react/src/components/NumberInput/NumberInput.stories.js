@@ -85,7 +85,7 @@ export const withAILabel = () => (
 export const Playground = (args) => {
   return (
     <NumberInput
-      id="carbon-number-play"
+      id="carbon-number"
       min={-100}
       max={100}
       value={50}
@@ -104,31 +104,31 @@ Playground.args = {
 
 Playground.argTypes = {
   className: {
-    control: {
+    table: {
       disable: true,
     },
   },
   defaultValue: {
-    control: {
+    table: {
       disable: true,
     },
   },
   helperText: {
-    control: { type: 'text' },
+    table: { type: 'text' },
   },
   id: {
-    control: {
+    table: {
       disable: true,
     },
   },
   invalidText: {
-    control: { type: 'text' },
+    table: { type: 'text' },
   },
   label: {
-    control: { type: 'text' },
+    table: { type: 'text' },
   },
   light: {
-    control: {
+    table: {
       disable: true,
     },
   },
