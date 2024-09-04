@@ -1,0 +1,75 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    c4d-expressive-modal:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script src="src/index.js"></script>
+</head>
+<body>
+<div class="cds--grid">
+  <div class="cds--row">
+    <div class="cds--col-sm-4 cds--col-lg-12">
+      <cds-button id="open-modal-btn">Open modal
+      </cds-button>
+    </div>
+  </div>
+</div>
+<c4d-expressive-modal id="modal">
+  <c4d-expressive-modal-header>
+    <c4d-expressive-modal-close-button></c4d-expressive-modal-close-button>
+    <c4d-expressive-modal-heading>Modal Title</c4d-expressive-modal-heading>
+  </c4d-expressive-modal-header>
+  <c4d-expressive-modal-body>
+    Quisque felis odio, egestas vel tempus iaculis, interdum vel eros. Phasellus
+    pharetra, purus et pretium posuere, ipsum
+    risus pulvinar leo, non rutrum tortor risus vitae quam. Nulla sed nibh
+    felis. Maecenas nec tincidunt eros. Fusce
+    sollicitudin sit amet quam eu fringilla. Donec tincidunt ut nisi vitae
+    pharetra. Curabitur imperdiet ante sit amet mi
+    laoreet, vitae facilisis ante convallis. Aenean quis dapibus augue. Sed nisl
+    dui, scelerisque et augue eget, pharetra
+    commodo elit. In venenatis sapien eu nisl congue suscipit.
+  </c4d-expressive-modal-body>
+  <c4d-expressive-modal-footer>
+    <c4d-button>
+      Lorem ipsum dolor
+      <svg
+        slot="icon"
+        focusable="false"
+        preserveAspectRatio="xMidYMid meet"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M11.8 2.8L10.8 3.8 16.2 9.3 1 9.3 1 10.7 16.2 10.7 10.8 16.2 11.8 17.2 19 10z"></path>
+      </svg>
+    </cds-button>
+  </c4d-expressive-modal-footer>
+</c4d-expressive-modal>
+</body>
+<script type="text/javascript">
+  document.getElementById('open-modal-btn').addEventListener('click', () => {
+    document.getElementById('modal').open = true;
+  });
+</script>
+</html>

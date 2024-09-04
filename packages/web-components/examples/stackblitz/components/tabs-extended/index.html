@@ -1,0 +1,79 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+
+  <link rel="stylesheet" href="src/styles.scss" />
+  <style type="text/css">
+    /* Suppress custom element until styles are loaded */
+    c4d-tabs-extended:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script src="src/index.js"></script>
+</head>
+<body>
+  <div class="cds--grid">
+    <div class="cds--row">
+      <div class="cds--col-sm-4 cds--col-lg-12">
+        <c4d-tabs-extended value="first">
+          <c4d-tab id="tab-first" target="panel-first" value="first" selected>
+            First tab with long text
+          </c4d-tab>
+          <c4d-tab id="tab-second" target="panel-second" value="second">
+            Second tab
+          </c4d-tab>
+          <c4d-tab id="tab-third" target="panel-third" value="third">
+            Third tab
+          </c4d-tab>
+          <c4d-tab id="tab-fourth" target="panel-fourth" value="fourth">
+            Fourth tab
+          </c4d-tab>
+          <c4d-tab label="Fifth tab" disabled>Fifth tab</c4d-tab>
+        </c4d-tabs-extended>
+        <div>
+          <div id="panel-first" role="tabpanel" aria-labelledby="tab-first">
+            <p>Content for first tab goes here.</p>
+          </div>
+          <div
+            id="panel-second"
+            role="tabpanel"
+            aria-labelledby="tab-second"
+            hidden
+          >
+            <p>Content for second tab goes here.</p>
+          </div>
+          <div
+            id="panel-third"
+            role="tabpanel"
+            aria-labelledby="tab-third"
+            hidden
+          >
+            <p>Content for third tab goes here.</p>
+          </div>
+          <div
+            id="panel-fourth"
+            role="tabpanel"
+            aria-labelledby="tab-fourth"
+            hidden
+          >
+            <p>Content for fourth tab goes here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

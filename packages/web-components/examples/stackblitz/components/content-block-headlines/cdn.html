@@ -1,0 +1,86 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    c4d-content-block-headlines:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v2/latest/content-block-headlines.min.js"></script>
+</head>
+<body>
+<div class="cds--grid">
+  <div class="cds--row">
+    <div class="cds--col-sm-4 cds--col-lg-12 cds--offset-lg-4 cds--no-gutter">
+      <c4d-content-block-headlines>
+        <c4d-content-block-heading>Aliquam condimentum</c4d-content-block-heading>
+        <c4d-content-block-copy
+        >Lorem ipsum *dolor* sit amet, consectetur adipiscing elit. Aenean et ultricies est. Mauris iaculis eget dolor nec
+          hendrerit.</c4d-content-block-copy
+        >
+        <c4d-content-block-headlines-item>
+          <c4d-content-block-headlines-heading>25%</c4d-content-block-headlines-heading>
+          <c4d-content-item-copy slot="copy"
+          >Modernize mission-critical applications and infrastructure in a hybrid multicloud environment up to 25 percent
+            faster.</c4d-content-item-copy
+          >
+          <c4d-link-list slot="footer" type="vertical">
+            <c4d-link-list-item-cta icon-placement="right" href="https://www.ibm.com" cta-type="local">
+              Link text
+            </c4d-link-list-item-cta>
+          </c4d-link-list>
+        </c4d-content-block-headlines-item>
+        <c4d-content-block-headlines-item>
+          <c4d-content-block-headlines-heading>25%</c4d-content-block-headlines-heading>
+          <c4d-content-item-copy slot="copy"
+          >Modernize mission-critical applications and infrastructure in a hybrid multicloud environment up to 25 percent
+            faster.</c4d-content-item-copy
+          >
+          <c4d-link-list slot="footer" type="vertical">
+            <c4d-link-list-item-cta icon-placement="right" href="https://www.ibm.com" cta-type="local">
+              Link text
+            </c4d-link-list-item-cta>
+          </c4d-link-list>
+        </c4d-content-block-headlines-item>
+        <c4d-content-block-headlines-item>
+          <c4d-content-block-headlines-heading>1.34M</c4d-content-block-headlines-heading>
+          <c4d-content-item-copy slot="copy"
+          >Save 1.34M per year by optimizing your time and IT expenses.</c4d-content-item-copy
+          >
+          <c4d-link-list slot="footer" type="vertical">
+            <c4d-link-list-item-cta icon-placement="right" href="https://www.ibm.com" cta-type="local">
+              Link text
+            </c4d-link-list-item-cta>
+          </c4d-link-list>
+        </c4d-content-block-headlines-item>
+        <c4d-content-block-headlines-item>
+          <c4d-content-block-headlines-heading>25%</c4d-content-block-headlines-heading>
+          <c4d-content-item-copy slot="copy"
+          >Modernize mission-critical applications and infrastructure in a hybrid multicloud environment up to 25 percent
+            faster.</c4d-content-item-copy
+          >
+          <c4d-link-list slot="footer" type="vertical">
+            <c4d-link-list-item-cta icon-placement="right" href="https://www.ibm.com" cta-type="local">
+              Link text
+            </c4d-link-list-item-cta>
+          </c4d-link-list>
+        </c4d-content-block-headlines-item>
+      </c4d-content-block-headlines>
+    </div>
+  </div>
+</div>
+</body>
+</html>

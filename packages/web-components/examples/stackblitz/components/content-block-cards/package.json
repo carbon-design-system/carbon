@@ -1,0 +1,23 @@
+{
+  "name": "ibmdotcom-web-components-content-block-cards-example",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample project for getting started with the Web Components from Carbon for IBM.com.",
+  "license": "Apache-2",
+  "scripts": {
+    "clean": "rimraf node_modules dist .cache",
+    "start": "parcel index.html --port=9000 --no-hmr",
+    "build": "parcel build *.html --public-url ./"
+  },
+  "dependencies": {
+    "@carbon/ibmdotcom-web-components": "latest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "carbon-components": "^10.36.0",
+    "parcel": "2.0.0-beta.2",
+    "rimraf": "^3.0.2",
+    "sass": "^1.32.13"
+  }
+}

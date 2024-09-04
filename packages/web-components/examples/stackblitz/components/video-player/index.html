@@ -1,0 +1,32 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>@carbon/ibmdotcom-web-components example</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css" />
+    <style type="text/css">
+      /* Suppress custom element until styles are loaded */
+      cds-video-player-container:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script src="src/index.js"></script>
+  </head>
+  <body>
+    <div class="cds--grid">
+      <div class="cds--row">
+        <div class="cds--col-sm-4 cds--col-lg-8 cds--offset-lg-4">
+          <c4d-video-player-container video-id="1_9h94wo6b"></c4d-video-player-container>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

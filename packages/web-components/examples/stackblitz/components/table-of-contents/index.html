@@ -1,0 +1,352 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <style type="text/css">
+    /* Suppress custom element until styles are loaded */
+    c4d-table-of-contents:not(:defined) {
+      display: none;
+    }
+
+    h3 {
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+    }
+
+    caem-accordion {
+      display: block;
+      padding: 2rem 0;
+    }
+
+    cds-carousel {
+      --cds--carousel--overflow-hint-size: 0;
+      padding: 2rem 0;
+    }
+  </style>
+  <!-- CDN artifact -->
+  <script
+    type="module"
+    src="https://1.www.s81c.com/common/carbon/carbon-for-aem/tag/latest/accordion.min.js"
+  ></script>
+  <script src="src/index.js"></script>
+</head>
+<body>
+<div class="cds--grid">
+  <div class="cds--row">
+    <div class="cds--col-sm-8 cds--col-lg-16">
+      <c4d-table-of-contents>
+        <div class="cds--tableofcontents__contents">
+          <a name="1" data-title="Section - 1"></a>
+          <h3>Section - 1</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Praesent tristique magna sit amet purus gravida quis blandit
+            turpis. Id eu nisl nunc mi ipsum. Purus in massa
+            tempor nec feugiat nisl pretium. Sit amet tellus cras adipiscing
+            enim eu turpis. Urna id volutpat lacus laoreet. Et leo
+            duis ut diam. Lectus magna fringilla urna porttitor rhoncus dolor.
+            Neque egestas congue quisque egestas diam in arcu
+            cursus euismod. Vitae et leo duis ut diam quam nulla porttitor. Id
+            ornare arcu odio ut sem nulla pharetra diam sit.
+            Cursus turpis massa tincidunt dui ut ornare lectus sit amet. Rhoncus
+            aenean vel elit scelerisque mauris pellentesque
+            pulvinar pellentesque habitant. Risus viverra adipiscing at in.
+            Ullamcorper morbi tincidunt ornare massa eget egestas
+            purus viverra. Hendrerit gravida rutrum quisque non tellus orci ac
+            auctor augue.
+          </p>
+
+          <c4d-carousel>
+            <c4d-card href="https://example.com">
+              <c4d-card-heading>Lorem ipsum dolor sit amet</c4d-card-heading>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et
+              ultricies est.
+              <c4d-card-footer>
+                <svg
+                  slot="icon"
+                  focusable="false"
+                  preserveAspectRatio="xMidYMid meet"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M11.8 2.8L10.8 3.8 16.2 9.3 1 9.3 1 10.7 16.2 10.7 10.8 16.2 11.8 17.2 19 10z"></path>
+                </svg>
+              </c4d-card-footer>
+            </c4d-card>
+            <c4d-card href="https://example.com">
+              <c4d-card-heading>Lorem ipsum dolor sit amet</c4d-card-heading>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et
+              ultricies est. Mauris iaculis eget dolor nec hendrerit.
+              Phasellus at elit sollicitudin, sodales nulla quis, consequat libero.
+              <c4d-card-footer>
+                <svg
+                  slot="icon"
+                  focusable="false"
+                  preserveAspectRatio="xMidYMid meet"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M11.8 2.8L10.8 3.8 16.2 9.3 1 9.3 1 10.7 16.2 10.7 10.8 16.2 11.8 17.2 19 10z"></path>
+                </svg>
+              </c4d-card-footer>
+            </c4d-card>
+            <c4d-card href="https://example.com">
+              <c4d-card-heading>Lorem ipsum dolor sit amet</c4d-card-heading>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et
+              ultricies est.
+              <c4d-card-footer>
+                <svg
+                  slot="icon"
+                  focusable="false"
+                  preserveAspectRatio="xMidYMid meet"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M11.8 2.8L10.8 3.8 16.2 9.3 1 9.3 1 10.7 16.2 10.7 10.8 16.2 11.8 17.2 19 10z"></path>
+                </svg>
+              </c4d-card-footer>
+            </c4d-card>
+            <c4d-card href="https://example.com">
+              <c4d-card-heading>Lorem ipsum dolor sit amet</c4d-card-heading>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et
+              ultricies est. Mauris iaculis eget dolor nec hendrerit.
+              Phasellus at elit sollicitudin, sodales nulla quis, consequat libero.
+              <c4d-card-footer>
+                <svg
+                  slot="icon"
+                  focusable="false"
+                  preserveAspectRatio="xMidYMid meet"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M11.8 2.8L10.8 3.8 16.2 9.3 1 9.3 1 10.7 16.2 10.7 10.8 16.2 11.8 17.2 19 10z"></path>
+                </svg>
+              </c4d-card-footer>
+            </c4d-card>
+            <c4d-card href="https://example.com">
+              <c4d-card-heading>Lorem ipsum dolor sit amet</c4d-card-heading>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et
+              ultricies est.
+              <c4d-card-footer>
+                <svg
+                  slot="icon"
+                  focusable="false"
+                  preserveAspectRatio="xMidYMid meet"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M11.8 2.8L10.8 3.8 16.2 9.3 1 9.3 1 10.7 16.2 10.7 10.8 16.2 11.8 17.2 19 10z"></path>
+                </svg>
+              </c4d-card-footer>
+            </c4d-card>
+          </c4d-carousel>
+
+          <a name="2" data-title="Section - 2"></a>
+          <h3>Section - 2</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Praesent tristique magna sit amet purus gravida quis blandit
+            turpis. Id eu nisl nunc mi ipsum. Purus in massa
+            tempor nec feugiat nisl pretium. Sit amet tellus cras adipiscing
+            enim eu turpis. Urna id volutpat lacus laoreet. Et leo
+            duis ut diam. Lectus magna fringilla urna porttitor rhoncus dolor.
+            Neque egestas congue quisque egestas diam in arcu
+            cursus euismod. Vitae et leo duis ut diam quam nulla porttitor. Id
+            ornare arcu odio ut sem nulla pharetra diam sit.
+            Cursus turpis massa tincidunt dui ut ornare lectus sit amet. Rhoncus
+            aenean vel elit scelerisque mauris pellentesque
+            pulvinar pellentesque habitant. Risus viverra adipiscing at in.
+            Ullamcorper morbi tincidunt ornare massa eget egestas
+            purus viverra. Hendrerit gravida rutrum quisque non tellus orci ac
+            auctor augue.
+          </p>
+
+          <c4d-video-cta-container>
+            <c4d-text-cta cta-type="video" href="1_9h94wo6b"></c4d-text-cta>
+          </c4d-video-cta-container>
+
+          <a name="3" data-title="Section - 3"></a>
+          <h3>Section - 3</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Praesent tristique magna sit amet purus gravida quis blandit
+            turpis. Id eu nisl nunc mi ipsum. Purus in massa
+            tempor nec feugiat nisl pretium. Sit amet tellus cras adipiscing
+            enim eu turpis. Urna id volutpat lacus laoreet. Et leo
+            duis ut diam. Lectus magna fringilla urna porttitor rhoncus dolor.
+            Neque egestas congue quisque egestas diam in arcu
+            cursus euismod. Vitae et leo duis ut diam quam nulla porttitor. Id
+            ornare arcu odio ut sem nulla pharetra diam sit.
+            Cursus turpis massa tincidunt dui ut ornare lectus sit amet. Rhoncus
+            aenean vel elit scelerisque mauris pellentesque
+            pulvinar pellentesque habitant. Risus viverra adipiscing at in.
+            Ullamcorper morbi tincidunt ornare massa eget egestas
+            purus viverra. Hendrerit gravida rutrum quisque non tellus orci ac
+            auctor augue.
+          </p>
+
+          <caem-accordion>
+            <caem-accordion-item>
+              <span slot="title">
+                Accordion 1 - <strong>this text is important</strong>
+              </span>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus accumsan ante et faucibus. Aenean nec dui et sem blandit commodo. Quisque at ex eget lorem pellentesque consectetur. Mauris elementum massa placerat tortor placerat, nec aliquet arcu pulvinar. Maecenas in velit ut lectus condimentumsagittis. Donec in convallis metus. Vivamus eu sapien dapibus, hendrerit urna in, fermentum lacus.
+              </p>
+              <p>
+                Example with rich text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus accumsan ante et
+                faucibus. Aenean nec dui et sem blandit commodo. Quisque at ex eget lorem pellentesque consectetur. Mauris elementum
+                massa placerat tortor placerat, nec aliquet arcu pulvinar.
+              </p>
+              <ul>
+                <li>Lorem ipsum dolor sit amet</li>
+                <li>
+                  Vestibulum luctus accumsan
+                  <ul>
+                    <li>Lorem ipsum 2.1</li>
+                    <li>Lorem ipsum 2.2</li>
+                  </ul>
+                </li>
+                <li>Mauris elementum massa</li>
+              </ul>
+              <c4d-text-cta cta-type="local" href="#!" icon-placement="right">
+                Call To Action
+              </c4d-text-cta>
+            </caem-accordion-item>
+            <caem-accordion-item title-text="Accordion 2">
+              <p>
+                Praesent faucibus nulla eu maximus fermentum. Donec arcu lectus, rutrum id urna sed, pharetra accumsan massa. Fusce sit amet nisl volutpat, consectetur ipsum sit amet, posuere nisi. Sed eget aliquam enim, nec tristique neque. Nunc id arcu nibh. Vestibulum enim dui, imperdiet non lectus sit amet, ullamcorper vulputate dolor. Donec dapibus, tortor vel rhoncus faucibus, ipsum libero cursus quam, euismod venenatis quam libero egestas tellus. Nam eget aliquet magna. Quisque a efficitur est. Aenean faucibus enim et fringilla eleifend. Sed semper tristique laoreet.
+              </p>
+            </caem-accordion-item>
+            <caem-accordion-item title-text="Accordion 3">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio rem labore est nemo eius? Beatae eos quisquam ad. Consequatur minus id quasi facilis reiciendis, repellat impedit repellendus atque, veritatis esse suscipit delectus exercitationem libero animi.</p>
+            </caem-accordion-item>
+          </caem-accordion>
+
+          <a name="4" data-title="Section - 4"></a>
+          <h3>Section - 4</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Praesent tristique magna sit amet purus gravida quis blandit
+            turpis. Id eu nisl nunc mi ipsum. Purus in massa
+            tempor nec feugiat nisl pretium. Sit amet tellus cras adipiscing
+            enim eu turpis. Urna id volutpat lacus laoreet. Et leo
+            duis ut diam. Lectus magna fringilla urna porttitor rhoncus dolor.
+            Neque egestas congue quisque egestas diam in arcu
+            cursus euismod. Vitae et leo duis ut diam quam nulla porttitor. Id
+            ornare arcu odio ut sem nulla pharetra diam sit.
+            Cursus turpis massa tincidunt dui ut ornare lectus sit amet. Rhoncus
+            aenean vel elit scelerisque mauris pellentesque
+            pulvinar pellentesque habitant. Risus viverra adipiscing at in.
+            Ullamcorper morbi tincidunt ornare massa eget egestas
+            purus viverra. Hendrerit gravida rutrum quisque non tellus orci ac
+            auctor augue.
+          </p>
+
+          <c4d-video-player-container video-id="1_9h94wo6b"></c4d-video-player-container>
+
+          <a name="5" data-title="Section - 5"></a>
+          <h3>Section - 5</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Praesent tristique magna sit amet purus gravida quis blandit
+            turpis. Id eu nisl nunc mi ipsum. Purus in massa
+            tempor nec feugiat nisl pretium. Sit amet tellus cras adipiscing
+            enim eu turpis. Urna id volutpat lacus laoreet. Et leo
+            duis ut diam. Lectus magna fringilla urna porttitor rhoncus dolor.
+            Neque egestas congue quisque egestas diam in arcu
+            cursus euismod. Vitae et leo duis ut diam quam nulla porttitor. Id
+            ornare arcu odio ut sem nulla pharetra diam sit.
+            Cursus turpis massa tincidunt dui ut ornare lectus sit amet. Rhoncus
+            aenean vel elit scelerisque mauris pellentesque
+            pulvinar pellentesque habitant. Risus viverra adipiscing at in.
+            Ullamcorper morbi tincidunt ornare massa eget egestas
+            purus viverra. Hendrerit gravida rutrum quisque non tellus orci ac
+            auctor augue.
+          </p>
+
+          <a name="6" data-title="Section - 6"></a>
+          <h3>Section - 6</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Praesent tristique magna sit amet purus gravida quis blandit
+            turpis. Id eu nisl nunc mi ipsum. Purus in massa
+            tempor nec feugiat nisl pretium. Sit amet tellus cras adipiscing
+            enim eu turpis. Urna id volutpat lacus laoreet. Et leo
+            duis ut diam. Lectus magna fringilla urna porttitor rhoncus dolor.
+            Neque egestas congue quisque egestas diam in arcu
+            cursus euismod. Vitae et leo duis ut diam quam nulla porttitor. Id
+            ornare arcu odio ut sem nulla pharetra diam sit.
+            Cursus turpis massa tincidunt dui ut ornare lectus sit amet. Rhoncus
+            aenean vel elit scelerisque mauris pellentesque
+            pulvinar pellentesque habitant. Risus viverra adipiscing at in.
+            Ullamcorper morbi tincidunt ornare massa eget egestas
+            purus viverra. Hendrerit gravida rutrum quisque non tellus orci ac
+            auctor augue.
+          </p>
+
+          <a name="7" data-title="Section - 7"></a>
+          <h3>Section - 7</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Praesent tristique magna sit amet purus gravida quis blandit
+            turpis. Id eu nisl nunc mi ipsum. Purus in massa
+            tempor nec feugiat nisl pretium. Sit amet tellus cras adipiscing
+            enim eu turpis. Urna id volutpat lacus laoreet. Et leo
+            duis ut diam. Lectus magna fringilla urna porttitor rhoncus dolor.
+            Neque egestas congue quisque egestas diam in arcu
+            cursus euismod. Vitae et leo duis ut diam quam nulla porttitor. Id
+            ornare arcu odio ut sem nulla pharetra diam sit.
+            Cursus turpis massa tincidunt dui ut ornare lectus sit amet. Rhoncus
+            aenean vel elit scelerisque mauris pellentesque
+            pulvinar pellentesque habitant. Risus viverra adipiscing at in.
+            Ullamcorper morbi tincidunt ornare massa eget egestas
+            purus viverra. Hendrerit gravida rutrum quisque non tellus orci ac
+            auctor augue.
+          </p>
+        </div>
+      </c4d-table-of-contents>
+    </div>
+  </div>
+</div>
+</body>
+</html>

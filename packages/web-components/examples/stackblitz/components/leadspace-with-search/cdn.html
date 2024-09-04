@@ -1,0 +1,45 @@
+<!--
+@license
+Copyright IBM Corp. 2020
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <style type="text/css">
+    /* Suppress custom element until styles are loaded */
+    c4d-leadspace-with-search:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module"
+          src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v2/latest/leadspace-with-search.min.js"></script>
+</head>
+<body>
+<div class="cds--grid">
+  <div class="cds--row">
+    <div class="cds--col-sm-4 cds--col-lg-12">
+      <h1>Hello World! 👋</h1>
+
+      <c4d-leadspace-with-search>
+        <c4d-leadspace-heading>Find a product</c4d-leadspace-heading>
+        <c4d-leadspace-with-search-copy
+        >Automate your software release process with continuous
+        delivery (CD)—the most critical part of adopting DevOps.
+        Build, test, and deploy code changes quickly, ensuring
+        software is always ready for deployment.
+      </c4d-leadspace-with-search-copy>
+        <c4d-search-with-typeahead slot='search' leadspace-search><c4d-search-with-typeahead/>
+        <c4d-hr slot='hr'></c4d-hr>
+      </c4d-leadspace-with-search>
+    </div>
+  </div>
+</div>
+</body>
+</html>

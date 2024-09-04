@@ -1,0 +1,83 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    c4d-content-block-media:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v2/latest/content-block-media.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v2/latest/image-with-caption.min.js"></script>
+</head>
+<body>
+<div class="cds--grid">
+  <div class="cds--row">
+    <div class="cds--col-sm-4 cds--col-lg-12 cds--offset-lg-4">
+      <c4d-content-block-media>
+        <c4d-content-block-heading>
+          Curabitur malesuada varius mi eu posuere
+        </c4d-content-block-heading>
+        <c4d-content-block-copy size="lg">
+          Lorem ipsum dolor sit amet, *consectetur* adipiscing elit. Aenean et ultricies est. Mauris iaculis eget dolor nec
+          hendrerit. Phasellus at elit sollicitudin, sodales nulla quis, consequat libero. Phasellus at elit sollicitudin,
+          sodales nulla quis, consequat libero.
+        </c4d-content-block-copy>
+        <c4d-content-block-media-content>
+          <c4d-content-group-heading>
+            Lorem ipsum dolor sit amet
+          </c4d-content-group-heading>
+          <c4d-image
+            slot="media"
+            alt="Image alt text"
+            default-src="https://fpoimg.com/672x378?text=16:9&amp;bg_color=ee5396&amp;text_color=161616"
+            heading="Lorem ipsum"
+          >
+            <c4d-image-item
+              media="(min-width: 672px)"
+              srcset="https://fpoimg.com/672x378?text=16:9&amp;bg_color=ee5396&amp;text_color=161616"
+            >
+            </c4d-image-item>
+            <c4d-image-item
+              media="(min-width: 400px)"
+              srcset="https://fpoimg.com/400x225?text=16:9&amp;bg_color=ee5396&amp;text_color=161616"
+            >
+            </c4d-image-item>
+            <c4d-image-item
+              media="(min-width: 320px)"
+              srcset="https://fpoimg.com/320x180?text=16:9&amp;bg_color=ee5396&amp;text_color=161616"
+            >
+            </c4d-image-item>
+          </c4d-image>
+          <c4d-content-item>
+            <c4d-content-item-heading>Lorem ipsum dolor sit amet.</c4d-content-item-heading>
+            <c4d-content-item-copy>
+              Lorem ipsum dolor sit amet, *consectetur* adipiscing elit. Vivamus sed interdum tortor. Sed id pellentesque
+              diam. In ut quam id mauris finibus efficitur quis ut arcu. Praesent purus turpis, venenatis eget odio et,
+              tincidunt bibendum sem. Curabitur pretium elit non blandit lobortis. Donec quis pretium odio, in dignissim
+              sapien.
+            </c4d-content-item-copy>
+          </c4d-content-item>
+          <c4d-card link cta-type="local" slot="footer" href="https://example.com">
+            <p>Lorem ipsum dolor sit amet</p>
+            <c4d-card-footer></c4d-card-footer>
+          </c4d-card>
+        </c4d-content-block-media-content>
+      </c4d-content-block-media>
+    </div>
+  </div>
+</div>
+</body>
+</html>

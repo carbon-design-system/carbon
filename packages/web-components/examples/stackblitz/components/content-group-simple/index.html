@@ -1,0 +1,80 @@
+<!--
+@license
+Copyright IBM Corp. 2020
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>@carbon/ibmdotcom-web-components example</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css" />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-content-group-simple:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script src="src/index.js"></script>
+  </head>
+  <body>
+    <div class="cds--grid">
+      <div class="cds--row">
+        <div class="cds--col-sm-4 cds--col-lg-12 cds--offset-lg-4">
+          <c4d-content-group-simple>
+            <c4d-content-group-heading>Curabitur malesuada varius mi eu posuere</c4d-content-group-heading>
+            <c4d-content-group-copy>
+              Lorem ipsum *dolor* sit amet, consectetur adipiscing elit. Vestibulum non porttitor libero, in venenatis magna.
+            </c4d-content-group-copy>
+            <c4d-content-item>
+              <c4d-content-item-heading>Lorem ipsum dolor sit amet.</c4d-content-item-heading>
+              <c4d-content-item-copy
+                >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed interdum tortor. Sed id pellentesque diam.
+                In ut quam id mauris finibus efficitur quis ut arcu. Praesent purus turpis, venenatis eget odio et, tincidunt
+                bibendum sem. Curabitur pretium elit non blandit lobortis. Donec quis pretium odio, in dignissim
+                sapien.</c4d-content-item-copy
+              >
+            </c4d-content-item>
+            <c4d-content-item>
+              <c4d-content-item-heading>Lorem ipsum dolor sit amet.</c4d-content-item-heading>
+              <c4d-content-item-copy
+                >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed interdum tortor. Sed id pellentesque diam.
+                In ut quam id mauris finibus efficitur quis ut arcu. Praesent purus turpis, venenatis eget odio et, tincidunt
+                bibendum sem. Curabitur pretium elit non blandit lobortis. Donec quis pretium odio, in dignissim
+                sapien.</c4d-content-item-copy
+              >
+              <c4d-content-item-copy
+                >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed interdum tortor. Sed id pellentesque diam.
+                In ut quam id mauris finibus efficitur quis ut arcu. Praesent purus turpis, venenatis eget odio et, tincidunt
+                bibendum sem. Curabitur pretium elit non blandit lobortis. Donec quis pretium odio, in dignissim
+                sapien.</c4d-content-item-copy
+              >
+              <c4d-content-item-copy>
+                - [list item](https://www.ibm.com) - list item 1a 1. list item 2 1. list item 2a
+              </c4d-content-item-copy>
+            </c4d-content-item>
+            <c4d-card slot="footer" href="https://www.ibm.com/" cta-type="local">
+              Lorem ipsum dolor sit amet
+              <c4d-card-footer>
+                <svg
+                  slot="icon"
+                  focusable="false"
+                  preserveAspectRatio="xMidYMid meet"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  aria-hidden="true"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M11.8 2.8L10.8 3.8 16.2 9.3 1 9.3 1 10.7 16.2 10.7 10.8 16.2 11.8 17.2 19 10z"></path>
+                </svg>
+              </c4d-card-footer>
+            </c4d-card>
+          </c4d-content-group-simple>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

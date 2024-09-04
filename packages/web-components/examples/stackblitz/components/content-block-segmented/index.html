@@ -1,0 +1,86 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>@carbon/ibmdotcom-web-components example</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css" />
+    <style type="text/css">
+      /* Suppress custom element until styles are loaded */
+      cds-content-block-segmented:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script src="src/index.js"></script>
+  </head>
+  <body>
+    <div class="cds--grid">
+      <div class="cds--row">
+        <div class="cds--col-sm-4 cds--col-lg-8 cds--offset-lg-4">
+          <c4d-content-block-segmented>
+            <c4d-content-block-heading>Lorem ipsum dolor sit amet</c4d-content-block-heading>
+            <c4d-content-block-copy>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et ultricies est. Mauris iaculis eget dolor nec
+              hendrerit. Phasellus at elit sollicitudin, sodales nulla quis, consequat libero.
+            </c4d-content-block-copy>
+            <c4d-image
+              slot="media"
+              alt="Image alt text"
+              default-src="https://fpoimg.com/672x378?text=16:9&amp;bg_color=ee5396&amp;text_color=161616"
+              heading="Mauris iaculis eget dolor nec hendrerit."
+            >
+            </c4d-image>
+            <c4d-content-block-segmented-item>
+              <c4d-content-group-heading>Lorem ipsum dolor sit amet.</c4d-content-group-heading>
+              <c4d-content-item-copy
+                >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed interdum tortor. Sed id pellentesque diam.
+                In ut quam id mauris finibus efficitur quis ut arcu. Praesent purus turpis, venenatis eget odio et, tincidunt
+                bibendum sem. Curabitur pretium elit non blandit lobortis. Donec quis pretium odio, in dignissim sapien. Lorem
+                ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed interdum tortor. Sed id pellentesque diam. In ut
+                quam id mauris finibus efficitur quis ut arcu. Praesent purus turpis, venenatis eget odio et, tincidunt bibendum
+                sem. Curabitur pretium elit non blandit lobortis. Donec quis pretium odio, in dignissim
+                sapien.</c4d-content-item-copy
+              >
+              <c4d-text-cta slot="footer" cta-type="local" icon-placement="right" href="https://example.com"
+                >Lorem Ipsum dolor sit</c4d-text-cta
+              >
+            </c4d-content-block-segmented-item>
+            <c4d-content-block-segmented-item>
+              <c4d-content-group-heading>Lorem ipsum dolor sit amet.</c4d-content-group-heading>
+              <c4d-content-item-copy
+                >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed interdum tortor. Sed id pellentesque diam.
+                In ut quam id mauris finibus efficitur quis ut arcu. Praesent purus turpis, venenatis eget odio et, tincidunt
+                bibendum sem. Curabitur pretium elit non blandit lobortis. Donec quis pretium odio, in dignissim sapien. Lorem
+                ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed interdum tortor. Sed id pellentesque diam. In ut
+                quam id mauris finibus efficitur quis ut arcu. Praesent purus turpis, venenatis eget odio et, tincidunt bibendum
+                sem. Curabitur pretium elit non blandit lobortis. Donec quis pretium odio, in dignissim
+                sapien.</c4d-content-item-copy
+              >
+              <c4d-image
+                slot="media"
+                alt="Image alt text"
+                default-src="https://fpoimg.com/672x378?text=16:9&amp;bg_color=ee5396&amp;text_color=161616"
+                heading="Mauris iaculis eget dolor nec hendrerit."
+              >
+              </c4d-image>
+              <c4d-text-cta slot="footer" cta-type="local" icon-placement="right" href="https://example.com"
+                >Lorem Ipsum dolor sit</c4d-text-cta
+              >
+            </c4d-content-block-segmented-item>
+            <c4d-card slot="footer" cta-type="local" href="https://example.com">
+              Lorem ipsum dolor
+              <c4d-card-footer></c4d-card-footer>
+            </c4d-card>
+          </c4d-content-block-segmented>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

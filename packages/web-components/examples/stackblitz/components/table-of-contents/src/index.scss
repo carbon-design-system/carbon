@@ -1,0 +1,26 @@
+//
+// @license
+//
+// Copyright IBM Corp. 2020, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// `enable-css-custom-properties` and `grid-columns-16` feature flags are requirements for Carbon for IBM.com styles
+$feature-flags: (
+  enable-css-custom-properties: true,
+  grid-columns-16: true,
+);
+
+@import '@carbon/ibmdotcom-styles/scss/globals/vars';
+@import '@carbon/ibmdotcom-styles/scss/components/tableofcontents';
+
+body {
+  padding: $spacing-09;
+}
+
+h3 {
+  padding-top: $spacing-05;
+  padding-bottom: $spacing-07;
+}

@@ -1,0 +1,34 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css" />
+  <script src="src/index.js"></script>
+</head>
+<body>
+<div style="padding-top: 200px;"></div>
+<c4d-footer-container
+  size="regular"
+  language-selector-label="Choose a language"
+  clear-selection-label="Clear language selection"
+  selected-language="English"
+></c4d-footer-container>
+</body>
+<script>
+  const languageList = [
+    { id: 'da', text: 'Danish / Dansk' },
+    { id: 'nl', text: 'Dutch / Nederlands' },
+    { id: 'en', text: 'English' },
+  ];
+  document.querySelector("cds-footer-container").langList = languageList;
+</script>
+</html>

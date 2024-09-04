@@ -1,0 +1,77 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    c4d-cta-block:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v2/latest/cta-block.min.js"></script>
+</head>
+
+<body>
+<div class="cds--grid">
+  <div class="cds--row">
+    <div class="cds--col-lg-8 cds--col-sm-4 cds--offset-lg-4">
+      <c4d-cta-block no-border>
+        <c4d-content-block-heading>Take the next step</c4d-content-block-heading>
+        <c4d-content-block-copy
+        >Want to discuss your options with a DevOps expert? Contact our sales team to evaluate your
+          needs.</c4d-content-block-copy
+        >
+
+        <c4d-button-group slot="action" style="--cds-button-group--item-count:2">
+          <c4d-button-group-item kind="tertiary" href="https://example.com">
+            Secondary Button
+          </c4d-button-group-item>
+          <c4d-button-group-item kind="primary" ref="https://example.com">
+            Primary button
+          </c4d-button-group-item>
+        </c4d-button-group>
+
+        <c4d-cta-block-item-row>
+          <c4d-cta-block-item>
+            <c4d-content-item-heading>Get connected</c4d-content-item-heading>
+            <c4d-content-item-copy
+            >IBM DevOps partners have a wide range of expertise. Find one to build that right solution for you.
+            </c4d-content-item-copy>
+            <c4d-text-cta slot="footer" cta-type="local" icon-placement="right" href="example.com"
+            >Find a partner
+            </c4d-text-cta>
+          </c4d-cta-block-item>
+
+          <c4d-cta-block-item>
+            <c4d-content-item-heading>Learn how</c4d-content-item-heading>
+            <c4d-content-item-copy>Dig into more self-directed larning about DevOps methodologies.</c4d-content-item-copy>
+            <c4d-text-cta slot="footer" cta-type="local" icon-placement="right" href="example.com"
+            >Browse tutorials
+            </c4d-text-cta>
+          </c4d-cta-block-item>
+
+          <c4d-cta-block-item>
+            <c4d-content-item-heading>Learn how</c4d-content-item-heading>
+            <c4d-content-item-copy>Dig into more self-directed larning about DevOps methodologies.</c4d-content-item-copy>
+            <c4d-text-cta slot="footer" cta-type="local" icon-placement="right" href="example.com"
+            >Browse tutorials
+            </c4d-text-cta>
+          </c4d-cta-block-item>
+        </c4d-cta-block-item-row>
+      </c4d-cta-block>
+    </div>
+  </div>
+</div>
+</body>
+</html>

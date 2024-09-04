@@ -1,0 +1,75 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>@carbon/ibmdotcom-web-components example</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css" />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-filter-panel:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script src="src/index.js"></script>
+  </head>
+
+  <body>
+    <div class="cds--grid">
+      <div class="cds--row">
+        <div class="cds--col-lg-4">
+          <c4d-filter-panel-composite>
+        <c4d-filter-panel-heading slot="heading">Filter</c4d-filter-panel-heading>
+        <c4d-filter-group>
+          <c4d-filter-group-item title="Product types">
+            <c4d-filter-panel-checkbox value="API">API</c4d-filter-panel-checkbox>
+            <c4d-filter-panel-checkbox value="Application">Application</c4d-filter-panel-checkbox>
+            <c4d-filter-panel-checkbox value="Data Set">Data Set</c4d-filter-panel-checkbox>
+            <c4d-filter-panel-checkbox value="Free Trial">Free Trial</c4d-filter-panel-checkbox>
+            <c4d-filter-panel-checkbox value="Hardware">Hardware</c4d-filter-panel-checkbox>
+            <c4d-filter-panel-checkbox value="Service">Service</c4d-filter-panel-checkbox>
+            <c4d-filter-panel-checkbox value="Service Assets">Service Assets</c4d-filter-panel-checkbox>
+            <c4d-filter-panel-checkbox value="Software">Software</c4d-filter-panel-checkbox>
+          </c4d-filter-group-item>
+          <c4d-filter-group-item title="Technologies">
+            <c4d-filter-panel-input-select header-value="Analytics" title="Analytics"></c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="Artificial intelligence" title="Artificial intelligence">
+              <c4d-filter-panel-input-select-item value="Machine Learning">Machine Learning</c4d-filter-panel-input-select-item>
+              <c4d-filter-panel-input-select-item value="Natural language processing">Natural language processing</c4d-filter-panel-input-select-item>
+              <c4d-filter-panel-input-select-item value="Speech recognition">Speech recognition</c4d-filter-panel-input-select-item>
+            </c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="Automation" title="Automation"></c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="Blockchain" title="Blockchain"></c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="Cloud computing" title="Cloud computing"></c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="IT infrastructure" title="IT infrastructure"></c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="IT management" title="IT management"></c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="Mobile technologys" title="Mobile technology"></c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="Security" title="Security"></c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="Software development" title="Software development"></c4d-filter-panel-input-select>
+          </c4d-filter-group-item>
+          <c4d-filter-group-item title="Business needs">
+            <c4d-filter-panel-input-select header-value="Business operations" title="Business operations"></c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="Content Management" title="Content Management"></c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="Customer service" title="Customer service"></c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="Finance" title="Finance"></c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="Marketing and sales" title="Marketing and sales"></c4d-filter-panel-input-select>
+            <c4d-filter-panel-input-select header-value="Supply chain management" title="Supply chain management"></c4d-filter-panel-input-select>
+          </c4d-filter-group-item>
+          <c4d-filter-group-item title="Deployment types">
+            <c4d-filter-panel-checkbox value="On-premisis">On-premisis</c4d-filter-panel-checkbox>
+            <c4d-filter-panel-checkbox value="SaaS">SaaS</c4d-filter-panel-checkbox>
+          </c4d-filter-group-item>
+        </c4d-filter-group>
+      </c4d-filter-panel-composite>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

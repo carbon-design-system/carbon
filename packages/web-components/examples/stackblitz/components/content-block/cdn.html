@@ -1,0 +1,41 @@
+<!--
+@license
+Copyright IBM Corp. 2020
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    c4d-content-block:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v2/latest/content-block.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v2/latest/card-link-cta.min.js"></script>
+</head>
+<body>
+<div class="cds--grid">
+  <div class="cds--row">
+    <div class="cds--col-sm-4 cds--col-lg-12 cds--offset-lg-4">
+      <c4d-content-block>
+        <c4d-content-block-heading>Curabitur malesuada varius mi eu posuere</c4d-content-block-heading>
+        <c4d-content-block-copy>
+          Lorem ipsum *dolor* sit amet, consectetur adipiscing elit. Vestibulum non porttitor libero, in venenatis magna.
+        </c4d-content-block-copy>
+        <c4d-card link slot="footer" cta-type="local" href="https://www.example.com">
+          <c4d-card link-heading>cta copy</c4d-card-heading>
+          <c4d-card-footer cta-type="local"></c4d-card-footer>
+        </c4d-card>
+      </c4d-content-block>
+    </div>
+  </div>
+</div>
+</body>
+</html>

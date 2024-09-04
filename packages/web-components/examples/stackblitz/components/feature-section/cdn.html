@@ -1,0 +1,73 @@
+<!--
+@license
+Copyright IBM Corp. 2020
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <style type="text/css">
+    /* Suppress custom element until styles are loaded */
+    c4d-feature-section:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module"
+          src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v2/latest/feature-section.min.js"></script>
+</head>
+<body>
+  <c4d-feature-section media-alignment="right">
+    <c4d-image
+      slot="image"
+      default-src="https://fpoimg.com/1584x1584?text=1:1&bg_color=ee5396&text_color=161616">
+      <c4d-image-item
+        media="(min-width: 1584px)"
+        srcset="https://fpoimg.com/1584x1584?text=1:1&bg_color=ee5396&text_color=161616">
+      </c4d-image-item>
+      <c4d-image-item
+        media="(min-width: 1056px)"
+        srcset="https://fpoimg.com/1584x1584?text=1:1&bg_color=ee5396&text_color=161616">
+      </c4d-image-item>
+      <c4d-image-item
+        media="(min-width: 672px)"
+        srcset="https://fpoimg.com/960x720?text=4:3&bg_color=ee5396&text_color=161616">
+      </c4d-image-item>
+      <c4d-image-item
+        media="(min-width: 320px)"
+        srcset="https://fpoimg.com/720x720?text=1:1&bg_color=ee5396&text_color=161616">
+      </c4d-image-item>
+      <c4d-image-item
+        media="(min-width: 0px)"
+        srcset="https://fpoimg.com/320x320?text=1:1&bg_color=ee5396&text_color=161616">
+      </c4d-image-item>
+    </c4d-image>
+    <c4d-card-eyebrow>5 min activity</c4d-card-eyebrow>
+    <c4d-content-block-heading>Ready when you are</c4d-content-block-heading>
+    <c4d-content-item-paragraph slot="copy"
+      >We're flexible. We can work with you on a wide variety of engagements on a
+      project or consulting basis. And we're technology agnostic. Our experts work
+      with any vendor's technology, not just IBM's. You decide how you want to
+      work and where to focus our expertise.</c4d-content-item-paragraph
+    >
+  
+    <c4d-card
+      link
+      slot="footer"
+      href="https://example.com"
+      cta-type="local"
+      color-scheme="inverse">
+      <c4d-card-heading
+        >Try a free virtual business framing session with IBM
+        Garage</c4d-card-heading
+      >
+      <c4d-card-footer> </c4d-card-footer>
+    </c4d-card>
+  </c4d-feature-section>
+</body>
+</html>
