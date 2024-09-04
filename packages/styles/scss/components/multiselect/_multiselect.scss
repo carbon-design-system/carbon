@@ -42,6 +42,26 @@
     min-inline-size: auto;
   }
 
+  // When select all is turned on, the first item in the listbox
+  // is always the "Select all" option and gets special border
+  // treatment
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--selectall
+    .#{$prefix}--list-box__menu-item:first-child
+    .#{$prefix}--list-box__menu-item__option {
+    padding: 0.6875rem $spacing-05;
+    margin: 0;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  // When select all is turned on, the second item in the list
+  // has special treatment to look correct against the "Select all"
+  // border treatment
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--selectall
+    .#{$prefix}--list-box__menu-item:nth-child(2)
+    .#{$prefix}--list-box__menu-item__option {
+    border-block-start: none;
+  }
+
   .#{$prefix}--multi-select
     .#{$prefix}--list-box__menu-item__option
     .#{$prefix}--checkbox-wrapper {
@@ -62,6 +82,23 @@
     white-space: nowrap;
   }
 
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item__option
+    .#{$prefix}--checkbox-label::before {
+    margin-block: 0;
+  }
+
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item__option
+    .cds--checkbox:indeterminate
+    + .cds--checkbox-label::after {
+    inset-block-start: convert.to-rem(9px);
+  }
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__menu-item__option
+    .cds--checkbox-label::after {
+    inset-block-start: convert.to-rem(5px);
+  }
   .#{$prefix}--multi-select
     .#{$prefix}--list-box__menu-item__option
     > .#{$prefix}--form-item {
@@ -92,7 +129,7 @@
     .#{$prefix}--list-box__field--wrapper--input-focused:has(
       button[aria-expanded='false']
     ),
-  .#{$prefix}--multi-select.#{$prefix}--multi-select--selected
+  .#{$prefix}--multi-select
     .#{$prefix}--list-box__field--wrapper--input-focused:has(
       button[aria-expanded='true']
     ) {

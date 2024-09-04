@@ -18,7 +18,6 @@ import PropTypes from 'prop-types';
 import React, {
   ForwardedRef,
   useContext,
-  useRef,
   useState,
   useMemo,
   ReactNode,
@@ -43,7 +42,9 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
+import Checkbox from '../Checkbox';
 import type { InternationalProps } from '../../types/common';
+import type { TranslateWithId } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 import {
   useFloating,
@@ -51,6 +52,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
 
 const {
   ItemClick,
@@ -98,7 +100,7 @@ interface OnChangeData<ItemType> {
 
 export interface MultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
-    InternationalProps<
+    TranslateWithId<
       'close.menu' | 'open.menu' | 'clear.all' | 'clear.selection'
     > {
   /**
@@ -136,7 +138,12 @@ export interface MultiSelectProps<ItemType>
   disabled?: ListBoxProps['disabled'];
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
    */
   downshiftProps?: Partial<UseSelectProps<ItemType>>;
 
@@ -325,6 +332,26 @@ const MultiSelect = React.forwardRef(
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const filteredItems = useMemo(() => {
+      return items.filter((item) => {
+        if (typeof item === 'object' && item !== null) {
+          for (const key in item) {
+            if (Object.hasOwn(item, key) && item[key] === undefined) {
+              return false; // Return false if any property has an undefined value
+            }
+          }
+        }
+        return true; // Return true if item is not an object with undefined values
+      });
+    }, [items]);
+
+    let selectAll = filteredItems.some((item) => (item as any).isSelectAll);
+    if ((selected ?? []).length > 0 && selectAll) {
+      console.warn(
+        'Warning: `selectAll` should not be used when `selectedItems` is provided. Please pass either `selectAll` or `selectedItems`, not both.'
+      );
+      selectAll = false;
+    }
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const multiSelectInstanceId = useId();
@@ -334,16 +361,6 @@ const MultiSelect = React.forwardRef(
     const [prevOpenProp, setPrevOpenProp] = useState(open);
     const [topItems, setTopItems] = useState([]);
     const [itemsCleared, setItemsCleared] = useState(false);
-    const {
-      selectedItems: controlledSelectedItems,
-      onItemChange,
-      clearSelection,
-    } = useSelection({
-      disabled,
-      initialSelectedItems,
-      onChange,
-      selectedItems: selected,
-    });
 
     const { refs, floatingStyles, middlewareData } = useFloating(
       autoAlign
@@ -366,6 +383,7 @@ const MultiSelect = React.forwardRef(
                   });
                 },
               }),
+              hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
@@ -374,30 +392,41 @@ const MultiSelect = React.forwardRef(
 
     useLayoutEffect(() => {
       if (autoAlign) {
-        Object.keys(floatingStyles).forEach((style) => {
+        const updatedFloatingStyles = {
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible',
+        };
+        Object.keys(updatedFloatingStyles).forEach((style) => {
           if (refs.floating.current) {
-            refs.floating.current.style[style] = floatingStyles[style];
+            refs.floating.current.style[style] = updatedFloatingStyles[style];
           }
         });
       }
     }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
 
-    // Filter out items with an object having undefined values
-    const filteredItems = useMemo(() => {
-      return items.filter((item) => {
-        if (typeof item === 'object' && item !== null) {
-          for (const key in item) {
-            if (Object.hasOwn(item, key) && item[key] === undefined) {
-              return false; // Return false if any property has an undefined value
-            }
-          }
-        }
-        return true; // Return true if item is not an object with undefined values
-      });
-    }, [items]);
+    const {
+      selectedItems: controlledSelectedItems,
+      onItemChange,
+      clearSelection,
+    } = useSelection({
+      disabled,
+      initialSelectedItems,
+      onChange,
+      selectedItems: selected,
+      selectAll,
+      filteredItems,
+    });
+
+    const sortOptions = {
+      selectedItems: controlledSelectedItems,
+      itemToString,
+      compareItems,
+      locale,
+    };
 
     const selectProps: UseSelectProps<ItemType> = {
-      ...downshiftProps,
       stateReducer,
       isOpen,
       itemToString: (filteredItems) => {
@@ -412,10 +441,11 @@ const MultiSelect = React.forwardRef(
         );
       },
       selectedItem: controlledSelectedItems,
-      items: filteredItems,
+      items: filteredItems as ItemType[],
       isItemDisabled(item, _index) {
         return (item as any).disabled;
       },
+      ...downshiftProps,
     };
 
     const {
@@ -521,18 +551,12 @@ const MultiSelect = React.forwardRef(
         selectedItems && selectedItems.length > 0,
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--multi-select--readonly`]: readOnly,
+      [`${prefix}--multi-select--selectall`]: selectAll,
     });
 
     // needs to be capitalized for react to render it correctly
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const ItemToElement = itemToElement!;
-
-    const sortOptions = {
-      selectedItems: controlledSelectedItems,
-      itemToString,
-      compareItems,
-      locale,
-    };
 
     if (selectionFeedback === 'fixed') {
       sortOptions.selectedItems = [];
@@ -565,7 +589,11 @@ const MultiSelect = React.forwardRef(
           break;
         case ToggleButtonClick:
           setIsOpenWrapper(changes.isOpen || false);
-          return { ...changes, highlightedIndex: 0 };
+          return {
+            ...changes,
+            highlightedIndex:
+              controlledSelectedItems.length > 0 ? 0 : undefined,
+          };
         case ItemClick:
           setHighlightedIndex(changes.selectedItem);
           onItemChange(changes.selectedItem);
@@ -581,7 +609,7 @@ const MultiSelect = React.forwardRef(
           } else {
             return {
               ...changes,
-              highlightedIndex: props.items.indexOf(highlightedIndex),
+              highlightedIndex: filteredItems.indexOf(highlightedIndex),
             };
           }
         case ToggleButtonKeyDownArrowDown:
@@ -642,7 +670,7 @@ const MultiSelect = React.forwardRef(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    if (slug && slug['type']?.displayName === 'AILabel') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });
@@ -652,13 +680,17 @@ const MultiSelect = React.forwardRef(
       selectedItems.length > 0 &&
       selectedItems.map((item) => (item as selectedItemType)?.text);
 
+    const selectedItemsLength = selectAll
+      ? selectedItems.filter((item: any) => !item.isSelectAll).length
+      : selectedItems.length;
+
     // Memoize the value of getMenuProps to avoid an infinite loop
     const menuProps = useMemo(
       () =>
         getMenuProps({
           ref: autoAlign ? refs.setFloating : null,
         }),
-      [autoAlign]
+      [autoAlign, getMenuProps, refs.setFloating]
     );
 
     return (
@@ -703,7 +735,7 @@ const MultiSelect = React.forwardRef(
                 clearSelection={
                   !disabled && !readOnly ? clearSelection : noopFn
                 }
-                selectionCount={selectedItems.length}
+                selectionCount={selectedItemsLength}
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 translateWithId={translateWithId!}
                 disabled={disabled}
@@ -734,7 +766,6 @@ const MultiSelect = React.forwardRef(
           </div>
           <ListBox.Menu {...menuProps}>
             {isOpen &&
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               sortItems!(
                 filteredItems,
                 sortOptions as SortItemsOptions<ItemType>
@@ -742,6 +773,11 @@ const MultiSelect = React.forwardRef(
                 const isChecked =
                   selectedItems.filter((selected) => isEqual(selected, item))
                     .length > 0;
+
+                const isIndeterminate =
+                  selectedItems.length !== 0 &&
+                  item['isSelectAll'] &&
+                  !isChecked;
 
                 const itemProps = getItemProps({
                   item,
@@ -754,24 +790,27 @@ const MultiSelect = React.forwardRef(
                 return (
                   <ListBox.MenuItem
                     key={itemProps.id}
-                    isActive={isChecked}
+                    isActive={isChecked && !item['isSelectAll']}
                     aria-label={itemText}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
                     disabled={itemProps['aria-disabled']}
                     {...itemProps}>
                     <div className={`${prefix}--checkbox-wrapper`}>
-                      <span
+                      <Checkbox
+                        id={`${itemProps.id}__checkbox`}
+                        labelText={
+                          itemToElement ? (
+                            <ItemToElement key={itemProps.id} {...item} />
+                          ) : (
+                            itemText
+                          )
+                        }
+                        checked={isChecked}
                         title={useTitleInItem ? itemText : undefined}
-                        className={`${prefix}--checkbox-label`}
-                        data-contained-checkbox-state={isChecked}
-                        id={`${itemProps.id}__checkbox`}>
-                        {itemToElement ? (
-                          <ItemToElement key={itemProps.id} {...item} />
-                        ) : (
-                          itemText
-                        )}
-                      </span>
+                        indeterminate={isIndeterminate}
+                        disabled={disabled}
+                      />
                     </div>
                   </ListBox.MenuItem>
                 );
@@ -831,7 +870,8 @@ MultiSelect.propTypes = {
 
   /**
    * Provide a compare function that is used to determine the ordering of
-   * options. See 'sortItems' for more control.
+   * options. See 'sortItems' for more control. Consider
+   * declaring function with `useCallback` to prevent unnecessary re-renders.
    */
   compareItems: PropTypes.func,
 
@@ -846,7 +886,12 @@ MultiSelect.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
    */
   downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
 
@@ -891,7 +936,8 @@ MultiSelect.propTypes = {
   /**
    * Helper function passed to downshift that allows the library to render a
    * given item to a string label. By default, it extracts the `label` field
-   * from a given item to serve as the item label in the list.
+   * from a given item to serve as the item label in the list. Consider
+   * declaring function with `useCallback` to prevent unnecessary re-renders.
    */
   itemToString: PropTypes.func,
 

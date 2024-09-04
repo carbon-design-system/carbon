@@ -21,18 +21,25 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
 import mergeRefs from '../../tools/mergeRefs';
 import { MenuAlignment } from '../MenuButton';
+import { TranslateWithId } from '../../types/common';
 
 const defaultTranslations = {
   'carbon.combo-button.additional-actions': 'Additional actions',
 };
 
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = keyof typeof defaultTranslations;
+
 function defaultTranslateWithId(messageId: string) {
   return defaultTranslations[messageId];
 }
 
-interface ComboButtonProps {
+interface ComboButtonProps extends TranslateWithId<TranslationKey> {
   /**
    * A collection of `MenuItems` to be rendered as additional actions for this `ComboButton`.
    */
@@ -72,12 +79,6 @@ interface ComboButtonProps {
    * Specify how the trigger tooltip should be aligned.
    */
   tooltipAlignment?: React.ComponentProps<typeof IconButton>['align'];
-
-  /**
-   * Optional method that takes in a message `id` and returns an
-   * internationalized string.
-   */
-  translateWithId?: (id: string) => string;
 }
 
 const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
@@ -99,7 +100,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     const id = useId('combobutton');
     const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement>(null);
-    const middlewares = [flip({ crossAxis: false })];
+    const middlewares = [flip({ crossAxis: false }), hide()];
 
     if (menuAlignment === 'bottom' || menuAlignment === 'top') {
       middlewares.push(
@@ -134,9 +135,13 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     } = useAttachedMenu(containerRef);
 
     useLayoutEffect(() => {
-      Object.keys(floatingStyles).forEach((style) => {
+      const updatedFloatingStyles = {
+        ...floatingStyles,
+        visibility: middlewareData.hide?.referenceHidden ? 'hidden' : 'visible',
+      };
+      Object.keys(updatedFloatingStyles).forEach((style) => {
         if (refs.floating.current) {
-          refs.floating.current.style[style] = floatingStyles[style];
+          refs.floating.current.style[style] = updatedFloatingStyles[style];
         }
       });
     }, [floatingStyles, refs.floating, middlewareData, placement, open]);

@@ -2,6 +2,154 @@
 
 exports[`Public API should only change with a semver change 1`] = `
 Map {
+  "AILabel" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "AILabelContent": Object {
+        "type": "node",
+      },
+      "aiText": Object {
+        "type": "string",
+      },
+      "aiTextLabel": [Function],
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-start",
+            "top-right",
+            "top-end",
+            "bottom",
+            "bottom-left",
+            "bottom-start",
+            "bottom-right",
+            "bottom-end",
+            "left",
+            "left-bottom",
+            "left-end",
+            "left-top",
+            "left-start",
+            "right",
+            "right-bottom",
+            "right-end",
+            "right-top",
+            "right-start",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "aria-label": Object {
+        "type": "string",
+      },
+      "autoAlign": Object {
+        "type": "bool",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "default",
+            "inline",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "onRevertClick": Object {
+        "type": "func",
+      },
+      "revertActive": Object {
+        "type": "bool",
+      },
+      "revertLabel": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "mini",
+            "2xs",
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "slugLabel": [Function],
+      "textLabel": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "AILabelActions" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "AILabelContent" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "AISkeletonIcon" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
+  },
+  "AISkeletonPlaceholder" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "AISkeletonText" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "heading": Object {
+        "type": "bool",
+      },
+      "lineCount": Object {
+        "type": "number",
+      },
+      "paragraph": Object {
+        "type": "bool",
+      },
+      "width": Object {
+        "type": "string",
+      },
+    },
+  },
   "Accordion" => Object {
     "propTypes": Object {
       "align": Object {
@@ -1133,6 +1281,16 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "downshiftActions": Object {
+        "args": Array [
+          Object {
+            "current": Object {
+              "type": "any",
+            },
+          },
+        ],
+        "type": "exact",
+      },
       "downshiftProps": Object {
         "type": "object",
       },
@@ -1914,7 +2072,6 @@ Map {
           "type": "string",
         },
         "isExpanded": Object {
-          "isRequired": true,
           "type": "bool",
         },
         "isSelected": Object {
@@ -2012,7 +2169,6 @@ Map {
         },
         "ariaLabel": [Function],
         "checked": Object {
-          "isRequired": true,
           "type": "bool",
         },
         "className": Object {
@@ -2045,7 +2201,6 @@ Map {
         },
         "ariaLabel": [Function],
         "checked": Object {
-          "isRequired": true,
           "type": "bool",
         },
         "className": Object {
@@ -2075,6 +2230,7 @@ Map {
       },
     },
     "TableSlugRow": Object {
+      "displayName": "TableSlugRow",
       "propTypes": Object {
         "className": Object {
           "type": "string",
@@ -5958,6 +6114,16 @@ Map {
       "page": Object {
         "type": "number",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "totalItems": Object {
         "type": "number",
       },
@@ -6034,6 +6200,9 @@ Map {
       },
       "placeholder": Object {
         "type": "string",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "showPasswordLabel": Object {
         "type": "string",
@@ -7572,6 +7741,9 @@ Map {
       "onKeyDown": Object {
         "type": "func",
       },
+      "rel": Object {
+        "type": "string",
+      },
       "tabIndex": Object {
         "type": "number",
       },
@@ -7954,7 +8126,6 @@ Map {
         "type": "string",
       },
       "isExpanded": Object {
-        "isRequired": true,
         "type": "bool",
       },
       "isSelected": Object {
@@ -8052,7 +8223,6 @@ Map {
       },
       "ariaLabel": [Function],
       "checked": Object {
-        "isRequired": true,
         "type": "bool",
       },
       "className": Object {
@@ -8085,7 +8255,6 @@ Map {
       },
       "ariaLabel": [Function],
       "checked": Object {
-        "isRequired": true,
         "type": "bool",
       },
       "className": Object {
@@ -8115,6 +8284,7 @@ Map {
     },
   },
   "TableSlugRow" => Object {
+    "displayName": "TableSlugRow",
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -8689,6 +8859,9 @@ Map {
         },
         "placeholder": Object {
           "type": "string",
+        },
+        "readOnly": Object {
+          "type": "bool",
         },
         "showPasswordLabel": Object {
           "type": "string",
@@ -9862,6 +10035,7 @@ Map {
     },
   },
   "unstable_Text" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
         "args": Array [
@@ -9894,6 +10068,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "unstable_TextDirection" => Object {
     "propTypes": Object {
@@ -10761,12 +10936,13 @@ Map {
   "unstable__Slug" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "AILabelContent": Object {
+        "type": "node",
+      },
       "aiText": Object {
         "type": "string",
       },
-      "aiTextLabel": Object {
-        "type": "string",
-      },
+      "aiTextLabel": [Function],
       "align": Object {
         "args": Array [
           Array [
@@ -10793,6 +10969,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "aria-label": Object {
+        "type": "string",
       },
       "autoAlign": Object {
         "type": "bool",
@@ -10835,10 +11014,8 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slugContent": Object {
-        "type": "node",
-      },
-      "slugLabel": Object {
+      "slugLabel": [Function],
+      "textLabel": Object {
         "type": "string",
       },
     },

@@ -8,22 +8,29 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 // @ts-nocheck
 import React from 'react';
-import { Tabs, TabList, TabPanels, TabPanel } from '@carbon/react';
+import {
+  Tabs,
+  TabsVertical,
+  TabListVertical,
+  TabList,
+  TabPanels,
+  TabPanel,
+} from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(
   Tabs,
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=3890-50605&mode=design&t=ERtuwFdbSumlRYtB-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3890-50605&t=PaZ3ZnEGQGMgXgBW-4',
   {
     props: {
-      children: figma.children(['_Tabs items']),
       contained: figma.enum('Style', {
         Contained: true,
       }),
       fullWidth: figma.enum('Alignment', {
         'Grid aware': true,
       }),
-      tab: figma.nestedProps('_Tabs items', {
+      children: figma.children(['_Horizontal tabs items']),
+      tab: figma.nestedProps('_Horizontal tabs items', {
         size: figma.enum('Size', {
           Large: 'lg',
         }),
@@ -49,6 +56,30 @@ figma.connect(
           <TabPanel>Tab Panel 4</TabPanel>
         </TabPanels>
       </Tabs>
+    ),
+  }
+);
+
+// vertical
+figma.connect(
+  TabsVertical,
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=75823-2818&t=PaZ3ZnEGQGMgXgBW-4',
+  {
+    props: {
+      children: figma.children(['_Vertical tabs items']),
+    },
+    example: ({ children }) => (
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs">{children}</TabListVertical>
+        {/* Example code below, not mapped in Figma.
+        There needs to be one TabPanel per Tab */}
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+        </TabPanels>
+      </TabsVertical>
     ),
   }
 );

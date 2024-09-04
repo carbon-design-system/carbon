@@ -37,6 +37,8 @@ const files = [
   'scss/components/_index.scss',
   'scss/components/accordion/_accordion.scss',
   'scss/components/accordion/_index.scss',
+  'scss/components/ai-label/_ai-label.scss',
+  'scss/components/ai-label/_index.scss',
   'scss/components/aspect-ratio/_aspect-ratio.scss',
   'scss/components/aspect-ratio/_index.scss',
   'scss/components/breadcrumb/_breadcrumb.scss',
