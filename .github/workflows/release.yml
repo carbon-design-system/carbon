@@ -38,8 +38,7 @@ jobs:
 
       # Additional steps for generating playwright json report for avt tests
       - name: Build storybook
-        run:
-          STORYBOOK_STORE_7=false yarn workspace @carbon/react storybook:build
+        run: yarn workspace @carbon/react storybook:build
       - name: Run storybook
         id: storybook
         run: |
@@ -58,7 +57,7 @@ jobs:
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a #4.3.6
         with:
           name: playwright-avt-report
           path: .playwright

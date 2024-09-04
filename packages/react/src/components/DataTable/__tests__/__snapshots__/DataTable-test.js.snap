@@ -62,7 +62,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 <input
                   class="cds--radio-button"
                   id="data-table-17__select-row-b"
-                  name="select-row"
+                  name="select-row-17"
                   type="radio"
                   value=""
                 />
@@ -100,7 +100,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 <input
                   class="cds--radio-button"
                   id="data-table-17__select-row-a"
-                  name="select-row"
+                  name="select-row-17"
                   type="radio"
                   value=""
                 />
@@ -138,7 +138,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 <input
                   class="cds--radio-button"
                   id="data-table-17__select-row-c"
-                  name="select-row"
+                  name="select-row-17"
                   type="radio"
                   value=""
                 />
@@ -234,7 +234,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 <input
                   class="cds--radio-button"
                   id="data-table-16__select-row-b"
-                  name="select-row"
+                  name="select-row-16"
                   type="radio"
                   value=""
                 />
@@ -272,7 +272,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 <input
                   class="cds--radio-button"
                   id="data-table-16__select-row-a"
-                  name="select-row"
+                  name="select-row-16"
                   type="radio"
                   value=""
                 />
@@ -310,7 +310,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 <input
                   class="cds--radio-button"
                   id="data-table-16__select-row-c"
-                  name="select-row"
+                  name="select-row-16"
                   type="radio"
                   value=""
                 />
@@ -691,7 +691,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 <input
                   class="cds--checkbox"
                   id="data-table-7__select-row-b"
-                  name="select-row"
+                  name="select-row-7"
                   type="checkbox"
                 />
                 <label
@@ -724,7 +724,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 <input
                   class="cds--checkbox"
                   id="data-table-7__select-row-a"
-                  name="select-row"
+                  name="select-row-7"
                   type="checkbox"
                 />
                 <label
@@ -757,7 +757,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 <input
                   class="cds--checkbox"
                   id="data-table-7__select-row-c"
-                  name="select-row"
+                  name="select-row-7"
                   type="checkbox"
                 />
                 <label
