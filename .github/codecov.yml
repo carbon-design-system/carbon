@@ -16,34 +16,18 @@ component_management:
         branches:
           - '!main'
   individual_components:
-    - component_id: react # this is an identifier that should not be changed
-      name: react # this is a display name, and can be changed freely
-      paths:
-        - ../packages/react/**
-    - component_id: core-components # this is an identifier that should not be changed
-      name: core-components # this is a display name, and can be changed freely
-      paths:
-        - ../packages/react/src/components/**
     - component_id: colors
       name: colors
       paths:
         - ../packages/colors/**
-    - component_id: elements
-      name: elements
-      paths:
-        - ../packages/elements/**
     - component_id: feature-flags
       name: feature-flags
       paths:
         - ../packages/feature-flags/**
-    - component_id: grid
-      name: grid
+    - component_id: icon-build-helpers
+      name: icon-build-helpers
       paths:
-        - ../packages/grid/**
-    - component_id: icon-helpers
-      name: icon-helpers
-      paths:
-        - ../packages/icon-helpers/**
+        - ../packages/icon-build-helpers/**
     - component_id: layout
       name: layout
       paths:
@@ -52,14 +36,14 @@ component_management:
       name: motion
       paths:
         - ../packages/motion/**
+    - component_id: react # this is an identifier that should not be changed
+      name: react # this is a display name, and can be changed freely
+      paths:
+        - ../packages/react/**
     - component_id: scss-generator
       name: scss-generator
       paths:
         - ../packages/scss-generator/**
-    - component_id: styles
-      name: styles
-      paths:
-        - ../packages/styles/**
     - component_id: test-utils
       name: test-utils
       paths:
