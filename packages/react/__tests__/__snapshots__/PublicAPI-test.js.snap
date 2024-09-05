@@ -9832,9 +9832,6 @@ Map {
       "enableTreeviewControllable": Object {
         "type": "bool",
       },
-      "enableUseControlledStateWithValue": Object {
-        "type": "bool",
-      },
       "enableV12Overflowmenu": Object {
         "type": "bool",
       },
