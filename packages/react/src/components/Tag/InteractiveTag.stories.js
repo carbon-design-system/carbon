@@ -366,7 +366,7 @@ export const Dismissible = (args) => {
           type={tag.type}
           className="some-class"
           renderIcon={Asleep}
-          title={`Dismiss ${tag.text}`}
+          // title={`Dismiss ${tag.text}`}
           text={tag.text}
           onClose={(e) => {
             e.preventDefault();

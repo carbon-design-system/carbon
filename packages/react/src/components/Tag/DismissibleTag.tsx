@@ -152,8 +152,7 @@ const DismissibleTag = <T extends React.ElementType>({
             className={`${prefix}--tag__close-icon`}
             onClick={handleClose}
             disabled={disabled}
-            aria-label={title}
-            title={title}>
+            aria-label={title}>
             <Close />
           </button>
         </Tooltip>
