@@ -312,7 +312,7 @@ export const upgrades = [
           const paths =
             Array.isArray(options.paths) && options.paths.length > 0
               ? options.paths
-              : await glob(['**/*.js', '**/*.jsx'], {
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
                   cwd: options.workspaceDir,
                   ignore: [
                     '**/es/**',
