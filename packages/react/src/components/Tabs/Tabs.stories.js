@@ -680,7 +680,7 @@ Playground.args = {
 };
 
 Playground.argTypes = {
-  automatic: {
+  activation: {
     control: { type: 'select' },
     options: ['automatic', 'manual'],
   },
