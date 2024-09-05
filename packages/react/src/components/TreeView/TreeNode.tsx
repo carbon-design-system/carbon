@@ -14,6 +14,7 @@ import React, {
   useEffect,
   useRef,
   useState,
+  MutableRefObject,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
@@ -114,7 +115,7 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
       value,
       ...rest
     },
-    ref
+    forwardedRef
   ) => {
     // These are provided by the parent TreeView component
     const depth = propDepth as number;
@@ -136,9 +137,20 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
       ? controllableExpandedState
       : uncontrollableExpandedState;
 
-    const currentNode = useRef<HTMLLIElement>(null);
+    const currentNode = useRef<HTMLLIElement | null>(null);
     const currentNodeLabel = useRef<HTMLDivElement>(null);
     const prefix = usePrefix();
+
+    const setRefs = (element: HTMLLIElement | null) => {
+      currentNode.current = element;
+      if (typeof forwardedRef === 'function') {
+        forwardedRef(element);
+      } else if (forwardedRef) {
+        (forwardedRef as MutableRefObject<HTMLLIElement | null>).current =
+          element;
+      }
+    };
+
     const nodesWithProps = React.Children.map(children, (node) => {
       if (React.isValidElement(node)) {
         return React.cloneElement(node, {
@@ -196,14 +208,15 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
         event.stopPropagation();
       }
       if (match(event, keys.ArrowLeft)) {
-        const findParentTreeNode = (node) => {
+        const findParentTreeNode = (node: Element | null): Element | null => {
+          if (!node) return null;
           if (node.classList.contains(`${prefix}--tree-parent-node`)) {
             return node;
           }
           if (node.classList.contains(`${prefix}--tree`)) {
             return null;
           }
-          return findParentTreeNode(node.parentNode);
+          return findParentTreeNode(node.parentElement);
         };
         if (children && expanded) {
           if (!enableTreeviewControllable) {
@@ -215,7 +228,12 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
            * When focus is on a leaf node or a closed parent node, move focus to
            * its parent node (unless its depth is level 1)
            */
-          findParentTreeNode(currentNode.current?.parentNode)?.focus();
+          const parentNode = findParentTreeNode(
+            currentNode.current?.parentElement || null
+          );
+          if (parentNode instanceof HTMLElement) {
+            parentNode.focus();
+          }
         }
       }
       if (children && match(event, keys.ArrowRight)) {
@@ -307,13 +325,11 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
       onFocus: handleFocusEvent,
       onKeyDown: handleKeyDown,
       role: 'treeitem',
-      // @ts-ignore
-      ref: currentNode,
     };
 
     if (!children) {
       return (
-        <li {...treeNodeProps}>
+        <li {...treeNodeProps} ref={setRefs}>
           <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
             {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
             {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
@@ -323,8 +339,7 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
       );
     }
     return (
-      // eslint-disable-next-line jsx-a11y/role-supports-aria-props
-      <li {...treeNodeProps} aria-expanded={!!expanded} ref={ref}>
+      <li {...treeNodeProps} aria-expanded={!!expanded} ref={setRefs}>
         <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
           {/* https://github.com/carbon-design-system/carbon/pull/6008#issuecomment-675738670 */}
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
