@@ -2946,6 +2946,9 @@ Map {
       "slug": Object {
         "type": "node",
       },
+      "tagTitle": Object {
+        "type": "string",
+      },
       "text": Object {
         "type": "string",
       },

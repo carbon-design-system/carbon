@@ -355,7 +355,7 @@ export const Dismissible = (args) => {
   return (
     <>
       <Button
-        aria-label="Re-render all tags in the screen"
+        // aria-label="Re-render all tags in the screen"
         style={{ marginBottom: '3rem' }}
         onClick={resetTabs}>
         Reset
