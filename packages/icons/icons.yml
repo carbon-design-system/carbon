@@ -14715,6 +14715,11 @@
     - machine learning model
     - ML
     - model
+    - AI
+    - foundation model
+    - watsonx
+    - deep learning
+    - brain
   sizes:
     - 32
 - name: magic-wand
@@ -15202,6 +15207,20 @@
     - weather
   sizes:
     - 32
+- name: ml-model--reference
+  friendly_name: Machine learning model reference
+  aliases:
+    - AI
+    - model
+    - foundation model
+    - machine learning
+    - reference
+    - brain
+    - generative
+    - deep learning
+    - watsonx
+  sizes:
+    - 32
 - name: mobile
   friendly_name: Mobile
   aliases:
@@ -15380,6 +15399,18 @@
     - fabricate
     - manufacture
     - construct
+  sizes:
+    - 32
+- name: model--foundation
+  friendly_name: Foundation model
+  aliases:
+    - AI
+    - model
+    - foundation model
+    - large language model
+    - generative
+    - deep learning
+    - watsonx
   sizes:
     - 32
 - name: model--reference

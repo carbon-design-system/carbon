@@ -112,9 +112,9 @@ const babelConfig = {
   ],
   plugins: [
     'dev-expression',
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-proposal-export-namespace-from',
     '@babel/plugin-proposal-export-default-from',
+    '@babel/plugin-transform-class-properties',
+    '@babel/plugin-transform-export-namespace-from',
     '@babel/plugin-transform-react-constant-elements',
   ],
   babelHelpers: 'bundled',
