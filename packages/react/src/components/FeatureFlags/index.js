@@ -32,7 +32,6 @@ const FeatureFlagContext = createContext(GlobalFeatureFlags);
 function FeatureFlags({
   children,
   flags = {},
-  enableUseControlledStateWithValue = false,
   enableV12TileDefaultIcons = false,
   enableV12TileRadioIcons = false,
   enableV12Overflowmenu = false,
@@ -92,7 +91,6 @@ FeatureFlags.propTypes = {
       'been deprecated. Please run the `featureflag-deprecate-flags-prop` codemod to migrate to individual boolean props.' +
       `npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write`
   ),
-  enableUseControlledStateWithValue: PropTypes.bool,
   enableV12TileDefaultIcons: PropTypes.bool,
   enableV12TileRadioIcons: PropTypes.bool,
   enableV12Overflowmenu: PropTypes.bool,
