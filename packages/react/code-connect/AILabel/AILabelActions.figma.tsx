@@ -15,10 +15,6 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=57561-3559&t=SB9qULZbn3FRopvU-4',
   {
     props: {
-      detailsbutton59717: figma.boolean('Details button'),
-      action359716: figma.boolean('Action 3'),
-      action259715: figma.boolean('Action 2'),
-      action159714: figma.boolean('Action 1'),
       children: figma.children('*'),
     },
     example: ({ children }) => <AILabelActions>{children}</AILabelActions>,
