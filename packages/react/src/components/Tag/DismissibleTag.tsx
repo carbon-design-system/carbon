@@ -16,7 +16,6 @@ import { Close } from '@carbon/icons-react';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-import { keys, match } from '../../internal/keyboard';
 
 export interface DismissibleTagBaseProps {
   /**
@@ -153,6 +152,7 @@ const DismissibleTag = <T extends React.ElementType>({
             className={`${prefix}--tag__close-icon`}
             onClick={handleClose}
             disabled={disabled}
+            aria-label={title}
             title={title}>
             <Close />
           </button>
