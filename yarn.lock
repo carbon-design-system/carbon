@@ -14199,7 +14199,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^10.2.2, glob@npm:^10.3.10, glob@npm:^10.3.7, glob@npm:^10.4.1":
+"glob@npm:^10.2.2, glob@npm:^10.3.10, glob@npm:^10.4.1":
+  version: 10.4.1
+  resolution: "glob@npm:10.4.1"
+  dependencies:
+    foreground-child: "npm:^3.1.0"
+    jackspeak: "npm:^3.1.2"
+    minimatch: "npm:^9.0.4"
+    minipass: "npm:^7.1.2"
+    path-scurry: "npm:^1.11.1"
+  bin:
+    glob: dist/esm/bin.mjs
+  checksum: 10/d7bb49d2b413f77bdd59fea4ca86dcc12450deee221af0ca93e09534b81b9ef68fe341345751d8ff0c5b54bad422307e0e44266ff8ad7fbbd0c200e8ec258b16
+  languageName: node
+  linkType: hard
+
+"glob@npm:^10.3.7":
   version: 10.4.5
   resolution: "glob@npm:10.4.5"
   dependencies:
