@@ -43,7 +43,6 @@ function FeatureFlags({
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
 
   const combinedFlags = {
-    'enable-use-controlled-state-with-value': enableUseControlledStateWithValue,
     'enable-v12-tile-default-icons': enableV12TileDefaultIcons,
     'enable-v12-tile-radio-icons': enableV12TileRadioIcons,
     'enable-v12-overflowmenu': enableV12Overflowmenu,

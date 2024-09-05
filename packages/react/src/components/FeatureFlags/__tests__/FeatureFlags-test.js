@@ -32,6 +32,45 @@ describe('FeatureFlags', () => {
     expect(checkFlags).toHaveBeenLastCalledWith(true);
     expect(checkFlag).toHaveBeenLastCalledWith(true);
   });
+  it('should provide access to the feature flags for a scope through deprecated flags prop', () => {
+    consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const checkFlags = jest.fn();
+    const checkFlag = jest.fn();
+
+    function TestComponent() {
+      const featureFlags = useFeatureFlags();
+      const a = useFeatureFlag('a');
+      const b = useFeatureFlag('b');
+
+      checkFlags({
+        a: featureFlags.enabled('a'),
+        b: featureFlags.enabled('b'),
+      });
+
+      checkFlag({
+        a,
+        b,
+      });
+
+      return null;
+    }
+
+    render(
+      <FeatureFlags flags={{ a: true, b: false }}>
+        <TestComponent />
+      </FeatureFlags>
+    );
+
+    expect(checkFlags).toHaveBeenLastCalledWith({
+      a: true,
+      b: false,
+    });
+    expect(checkFlag).toHaveBeenLastCalledWith({
+      a: true,
+      b: false,
+    });
+    consoleSpy.mockRestore();
+  });
 
   it('should provide access to the feature flags for a scope', () => {
     const checkFlags = jest.fn();
