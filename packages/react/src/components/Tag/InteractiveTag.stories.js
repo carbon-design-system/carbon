@@ -293,6 +293,7 @@ export const Dismissible = (args) => {
     {
       type: 'red',
       text: 'Tag content with a long text description',
+      textTitle: 'Provide a custom title to the tag',
     },
     {
       type: 'magenta',
@@ -366,8 +367,9 @@ export const Dismissible = (args) => {
           type={tag.type}
           className="some-class"
           renderIcon={Asleep}
-          // title={`Dismiss ${tag.text}`}
           text={tag.text}
+          textTitle={tag.textTitle}
+          title={`Dismiss ${tag.text}`}
           onClose={(e) => {
             e.preventDefault();
             handleClose(tag);

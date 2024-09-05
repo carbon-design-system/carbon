@@ -61,6 +61,11 @@ export interface DismissibleTagBaseProps {
   text?: string;
 
   /**
+   * Provide a custom `title` to be inserted in the tag.
+   */
+  textTitle?: string;
+
+  /**
    * Text to show on clear filters
    */
   title?: string;
@@ -86,6 +91,7 @@ const DismissibleTag = <T extends React.ElementType>({
   slug,
   size,
   text,
+  textTitle,
   type,
   ...other
 }: DismissibleTagProps<T>) => {
@@ -138,7 +144,9 @@ const DismissibleTag = <T extends React.ElementType>({
       id={tagId}
       {...otherProps}>
       <div className={`${prefix}--interactive--tag-children`}>
-        <Text title={text} className={`${prefix}--tag__label`}>
+        <Text
+          title={textTitle ? textTitle : text}
+          className={`${prefix}--tag__label`}>
           {text}
         </Text>
         <Tooltip
@@ -203,6 +211,11 @@ DismissibleTag.propTypes = {
    * Provide text to be rendered inside of a the tag.
    */
   text: PropTypes.string,
+
+  /**
+   * Provide a custom `title` to be inserted in the tag.
+   */
+  textTitle: PropTypes.string,
 
   /**
    * Text to show on clear filters
