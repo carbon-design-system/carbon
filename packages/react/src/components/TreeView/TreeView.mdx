@@ -1,4 +1,4 @@
-import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import { ArgTypes, Canvas } from '@storybook/blocks';
 import * as TreeViewStories from './Treeview.stories';
 
 # TreeView
@@ -13,31 +13,30 @@ import * as TreeViewStories from './Treeview.stories';
 
 ## Overview
 
-TreeView is a component that allows users to navigate through a hierarchy of items. It is used to display nested lists of items that can be expanded or collapsed to show and hide additional items.
+TreeView is a component that allows users to navigate through a hierarchy of
+items. It is used to display nested lists of items that can be expanded or
+collapsed to show and hide additional items.
 
-<Canvas>
-  <Story of={TreeViewStories.Default} />
-</Canvas>
+<Canvas of={TreeViewStories.Default} />
 
 ## With Controlled Expansion
 
-The `expanded` prop can be used to control the expansion state of the TreeView. The `isExpanded` prop can be used to determine if an individual tree node is expanded or collapsed.
+The `expanded` prop can be used to control the expansion state of the TreeView.
+The `isExpanded` prop can be used to determine if an individual tree node is
+expanded or collapsed.
 
-<Canvas>
-  <Story of={TreeViewStories.WithControlledExpansion} />
-</Canvas>
+<Canvas of={TreeViewStories.WithControlledExpansion} />
 
 ## With Custom Icons
 
-The `renderIcon` prop can be used to customize the icons of each node in the TreeView.
+The `renderIcon` prop can be used to customize the icons of each node in the
+TreeView.
 
-<Canvas>
-  <Story of={TreeViewStories.WithCustomIcons} />
-</Canvas>
+<Canvas of={TreeViewStories.WithIcons} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 
