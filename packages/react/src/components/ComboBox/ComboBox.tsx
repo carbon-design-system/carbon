@@ -45,6 +45,7 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useFloating, flip, autoUpdate } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
 import { TranslateWithId } from '../../types/common';
 
 const {
@@ -381,12 +382,12 @@ const ComboBox = forwardRef(
       slug,
       ...rest
     } = props;
-    const { refs, floatingStyles } = useFloating(
+    const { refs, floatingStyles, middlewareData } = useFloating(
       autoAlign
         ? {
             placement: direction,
             strategy: 'fixed',
-            middleware: [flip()],
+            middleware: [flip(), hide()],
             whileElementsMounted: autoUpdate,
           }
         : {}
@@ -395,9 +396,15 @@ const ComboBox = forwardRef(
 
     useEffect(() => {
       if (autoAlign) {
-        Object.keys(floatingStyles).forEach((style) => {
+        const updatedFloatingStyles = {
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible',
+        };
+        Object.keys(updatedFloatingStyles).forEach((style) => {
           if (refs.floating.current) {
-            refs.floating.current.style[style] = floatingStyles[style];
+            refs.floating.current.style[style] = updatedFloatingStyles[style];
           }
         });
         if (parentWidth && refs.floating.current) {
