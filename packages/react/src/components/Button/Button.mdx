@@ -1,4 +1,4 @@
-import { Story, ArgsTable, Canvas, Unstyled } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas, Unstyled } from '@storybook/blocks';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { Add, TrashCan } from '@carbon/icons-react';
@@ -46,12 +46,10 @@ communicate calls to action to the user and allow users to interact with pages
 in a variety of ways. `Button` labels express what action will occur when the
 user interacts with it.
 
-<Canvas>
-  <Story of={ButtonStories.Default} />
-  <Story of={ButtonStories.Secondary} />
-  <Story of={ButtonStories.Tertiary} />
-  <Story of={ButtonStories.Ghost} />
-</Canvas>
+<Canvas of={ButtonStories.Default} />
+<Canvas of={ButtonStories.Secondary} />
+<Canvas of={ButtonStories.Tertiary} />
+<Canvas of={ButtonStories.Ghost} />
 
 ## Danger Buttons
 
@@ -63,9 +61,7 @@ danger button style. However, if a destructive action is just one of several
 actions a user could choose from, then a lower emphasis style like the tertiary
 danger button or the ghost danger button may be more appropriate.
 
-<Canvas>
-  <Story of={ButtonStories.Danger} />
-</Canvas>
+<Canvas of={ButtonStories.Danger} />
 
 ## Icon-only Buttons
 
@@ -74,9 +70,7 @@ Icon buttons can take the form of Primary, Secondary, Tertiary, and Ghost but
 most commonly will be styled as primary or ghost buttons. Icon only buttons do
 not support Danger, Danger tertiary, or Danger ghost.
 
-<Canvas>
-  <Story of={ButtonStories.IconButton} />
-</Canvas>
+<Canvas of={ButtonStories.IconButton} />
 
 ## Set of Buttons
 
@@ -87,9 +81,7 @@ Negative action buttons will be on the left. Positive action buttons should be
 on the right. When these two types buttons are paired in the correct order, they
 will automatically space themselves apart.
 
-<Canvas>
-  <Story of={ButtonStories.SetOfButtons} />
-</Canvas>
+<Canvas of={ButtonStories.SetOfButtons} />
 
 ## Skeleton state
 
@@ -97,13 +89,11 @@ You can use the `ButtonSkeleton` component to render a skeleton variant of a
 button. This is useful to display on initial page load to indicate to users that
 content is being loaded.
 
-<Canvas>
-  <Story of={ButtonStories.Skeleton} />
-</Canvas>
+<Canvas of={ButtonStories.Skeleton} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 Additional props passed into `Button` will be forwarded along to the underlying
 button element.

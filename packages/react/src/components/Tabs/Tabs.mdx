@@ -1,5 +1,5 @@
-import { ArgsTable, Canvas, Story } from '@storybook/blocks';
-import { Tabs, TabList, TabListVertical, Tab, TabPanels, TabPanel } from './Tabs';
+import { ArgTypes, Canvas, Story } from '@storybook/blocks';
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
 import * as TabsStories from './Tabs.stories';
 import { Grid, Column } from '../Grid';
 
@@ -22,7 +22,7 @@ import { Grid, Column } from '../Grid';
   - [Dismissable Tabs](#dismissable-tabs)
   - [Vertical Tabs](#vertical-tabs)
 - [Component API](#component-api)
-  - [Tab - render content on click](#tab---render-content-on-click)
+  - [Tab - tab activation modes](#tab---tab-activation-modes)
   - [Tabs and the Grid - fullWidth prop](#tabs-and-the-grid---fullwidth-prop)
 - [V11](#v11)
   - [Tabs composition](#tabs-composition)
@@ -40,25 +40,17 @@ what is in rendered inside of `Tab` and `TabPanel`.
 
 ### Line Tabs
 
-<Canvas>
-  <Story of={TabsStories.Default} />
-</Canvas>
+<Canvas of={TabsStories.Default} />
 
 ### Contained Tabs
 
-<Canvas>
-  <Story of={TabsStories.Contained} />
-</Canvas>
+<Canvas of={TabsStories.Contained} />
 
 ### Icon Tabs
 
-<Canvas>
-  <Story of={TabsStories.IconOnly} />
-</Canvas>
+<Canvas of={TabsStories.IconOnly} />
 
-<Canvas>
-  <Story of={TabsStories.Icon20Only} />
-</Canvas>
+<Canvas of={TabsStories.Icon20Only} />
 
 ### Dismissable Tabs
 
@@ -180,25 +172,23 @@ return (
 
 And there you have it! Working dismissable tabs.
 
-<Canvas>
-  <Story of={TabsStories.Dismissable} />
-</Canvas>
+<Canvas of={TabsStories.Dismissable} />
 
 ### Vertical tabs
 
-<Canvas>
-  <Story of={TabsStories.Vertical} />
-</Canvas>
+<Canvas of={TabsStories.Vertical} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
-### Tab - render content on click
+### Tab - tab activation modes
 
-You will occasionally run into a situation where you only want Tab content to be
-loaded when the Tab is clicked. In v11, to do this, you can this by setting
-`activation` to `manual`:
+**Tabs With Automatic Activation**: A tabs widget where tabs are automatically activated and their panel is displayed when they receive focus.
+
+**Tabs With Manual Activation**: A tabs widget where users activate a tab and display its panel by pressing Space or Enter.
+
+In v11, to do this, you can this by setting `activation` to `manual`:
 
 ```jsx
 <Tabs>
