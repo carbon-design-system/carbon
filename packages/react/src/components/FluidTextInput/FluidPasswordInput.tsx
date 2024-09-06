@@ -12,7 +12,101 @@ import { PasswordInput } from '../PasswordInput';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
-function FluidPasswordInput({ className, ...other }) {
+export interface FluidPasswordInputProps {
+  /**
+   * Specify an optional className to be applied to the outer FluidForm wrapper
+   */
+  className?: string;
+
+  /**
+   * Optionally provide the default value of the `<input>`
+   */
+  defaultValue?: string | number;
+
+  /**
+   * Specify whether the `<input>` should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * "Hide password" tooltip text on password visibility toggle
+   */
+  hidePasswordLabel?: string;
+
+  /**
+   * Specify a custom `id` for the `<input>`
+   */
+  id: string;
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText?: React.ReactNode;
+
+  /**
+   * Specify whether the control is a password input
+   */
+  isPassword?: boolean;
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
+   */
+  labelText: React.ReactNode;
+
+  /**
+   * Optionally provide an `onChange` handler that is called whenever `<input>`
+   * is updated
+   */
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+
+  /**
+   * Optionally provide an `onClick` handler that is called whenever the
+   * `<input>` is clicked
+   */
+  onClick?: React.MouseEventHandler<HTMLInputElement>;
+
+  /**
+   * Callback function that is called whenever the toggle password visibility
+   * button is clicked
+   */
+  onTogglePasswordVisibility?: React.MouseEventHandler<HTMLButtonElement>;
+
+  /**
+   * Specify the placeholder attribute for the `<input>`
+   */
+  placeholder?: string;
+
+  /**
+   * "Show password" tooltip text on password visibility toggle
+   */
+  showPasswordLabel?: string;
+
+  /**
+   * Specify the value of the `<input>`
+   */
+  value?: string | number;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: React.ReactNode;
+}
+
+const FluidPasswordInput: React.FC<FluidPasswordInputProps> = ({
+  className,
+  ...other
+}) => {
   const prefix = usePrefix();
   const classNames = classnames(className, `${prefix}--text-input--fluid`);
 
@@ -21,7 +115,7 @@ function FluidPasswordInput({ className, ...other }) {
       <PasswordInput className={classNames} {...other} />
     </FormContext.Provider>
   );
-}
+};
 
 FluidPasswordInput.propTypes = {
   /**
