@@ -9,7 +9,6 @@ import { StaticNotification as Callout } from '@carbon/react';
 import { StaticNotification as SomeOtherName } from '@carbon/react';
 import { unstable__Callout } from '@carbon/react';
 import { unstable__Callout as SomeOtherOtherName } from '@carbon/react';
-import { unstable__Callout as StaticNotification } from '@carbon/react';
 import { StaticNotificationProps } from '@carbon/react/es/components/Notification';
 import { StaticNotificationProps } from '@carbon/react/lib/components/Notification';
 
