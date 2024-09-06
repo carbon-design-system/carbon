@@ -12,21 +12,79 @@ import Select from '../Select';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
-const FluidSelect = React.forwardRef(function FluidSelect(
-  { className, children, ...other },
-  ref
-) {
-  const prefix = usePrefix();
-  const classNames = classnames(`${prefix}--select--fluid`, className);
+export interface FluidSelectProps {
+  /**
+   * Provide the contents of your Select
+   */
+  children?: React.ReactNode;
 
-  return (
-    <FormContext.Provider value={{ isFluid: true }}>
-      <Select ref={ref} className={classNames} {...other}>
-        {children}
-      </Select>
-    </FormContext.Provider>
-  );
-});
+  /**
+   * Specify an optional className to be applied to the node containing the label and the select box
+   */
+  className?: string;
+
+  /**
+   * Optionally provide the default value of the `<select>`
+   */
+  defaultValue?: any;
+
+  /**
+   * Specify whether the control is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify a custom `id` for the `<select>`
+   */
+  id: string;
+
+  /**
+   * Specify if the currently value is invalid.
+   */
+  invalid?: boolean;
+
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  invalidText?: React.ReactNode;
+
+  /**
+   * Provide label text to be read by screen readers when interacting with the
+   * control
+   */
+  labelText?: React.ReactNode;
+
+  /**
+   * Provide an optional `onChange` hook that is called each time the value of
+   * the underlying `<input>` changes
+   */
+  onChange?: React.ChangeEventHandler<HTMLSelectElement>;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: React.ReactNode;
+}
+
+const FluidSelect = React.forwardRef<HTMLSelectElement, FluidSelectProps>(
+  function FluidSelect({ className, children, ...other }, ref) {
+    const prefix = usePrefix();
+    const classNames = classnames(`${prefix}--select--fluid`, className);
+
+    return (
+      <FormContext.Provider value={{ isFluid: true }}>
+        <Select ref={ref} className={classNames} {...other}>
+          {children}
+        </Select>
+      </FormContext.Provider>
+    );
+  }
+);
 
 FluidSelect.propTypes = {
   /**
