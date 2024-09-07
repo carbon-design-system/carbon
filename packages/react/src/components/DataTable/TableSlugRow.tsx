@@ -41,6 +41,7 @@ const TableSlugRow = ({ className, slug }: TableSlugRowProps) => {
   return <td className={TableSlugRowClasses}>{normalizedSlug}</td>;
 };
 
+TableSlugRow.displayName = 'TableSlugRow';
 TableSlugRow.propTypes = {
   /**
    * The CSS class names of the cell that wraps the underlying input control
