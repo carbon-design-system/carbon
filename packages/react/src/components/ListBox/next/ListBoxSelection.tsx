@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,14 +20,66 @@ import { usePrefix } from '../../../internal/usePrefix';
 export const translationIds = {
   'clear.all': 'clear.all',
   'clear.selection': 'clear.selection',
+} as const;
+
+export type TranslationKey = keyof typeof translationIds;
+
+const defaultTranslations: Record<TranslationKey, string> = {
+  'clear.all': 'Clear all selected items',
+  'clear.selection': 'Clear selected item',
 };
 
-const defaultTranslations = {
-  [translationIds['clear.all']]: 'Clear all selected items',
-  [translationIds['clear.selection']]: 'Clear selected item',
-};
+function defaultTranslateWithId(id: TranslationKey): string {
+  return defaultTranslations[id];
+}
+export interface ListBoxSelectionProps {
+  /**
+   * Specify a function to be invoked when a user interacts with the clear
+   * selection element.
+   */
+  clearSelection: (
+    event:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.KeyboardEvent<HTMLButtonElement>
+  ) => void;
+  /**
+   * Specify an optional `selectionCount` value that will be used to determine
+   * whether the selection should display a badge or a single clear icon.
+   */
+  selectionCount?: number;
+  /**
+   * i18n hook used to provide the appropriate description for the given menu
+   * icon. This function takes in an id defined in `translationIds` and should
+   * return a string message for that given message id.
+   */
+  translateWithId?: (id: TranslationKey) => string;
+  /**
+   * Specify whether or not the clear selection element should be disabled
+   */
+  disabled?: boolean;
+  /**
+   * Specify an optional `onClearSelection` handler that is called when the underlying
+   * element is cleared
+   */
+  onClearSelection?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  /**
+   * Specify an optional `onClick` handler that is called when the underlying
+   * clear selection element is clicked
+   */
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 
-const defaultTranslateWithId = (id) => defaultTranslations[id];
+  /**
+   * Specify an optional `onKeyDown` handler that is called when the underlying
+   * clear selection element fires a keydown event
+   */
+  onKeyDown?: React.KeyboardEventHandler<HTMLButtonElement>;
+
+  /**
+   * Specify an optional `onMouseUp` handler that is called when the underlying
+   * clear selection element fires a mouseup event
+   */
+  onMouseUp?: React.MouseEventHandler<HTMLButtonElement>;
+}
 
 function ListBoxSelection({
   clearSelection,
@@ -36,7 +88,7 @@ function ListBoxSelection({
   disabled,
   onClearSelection,
   ...rest
-}) {
+}: ListBoxSelectionProps) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: selectionCount,
@@ -52,7 +104,7 @@ function ListBoxSelection({
     }
   );
 
-  function onClick(event) {
+  function onClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     event.stopPropagation();
     if (disabled) {
       return;
@@ -66,7 +118,9 @@ function ListBoxSelection({
   if (selectionCount) {
     return (
       <div className={tagClasses}>
-        <span className={`${prefix}--tag__label`} title={selectionCount}>
+        <span
+          className={`${prefix}--tag__label`}
+          title={selectionCount?.toString()}>
           {selectionCount}
         </span>
         <button
@@ -121,6 +175,12 @@ ListBoxSelection.propTypes = {
    * clear selection element is clicked
    */
   onClick: PropTypes.func,
+
+  /**
+   * Specify an optional `onClick` handler that is called when the underlying
+   * clear selection element is clicked
+   */
+  onMouseUp: PropTypes.func,
 
   /**
    * Specify an optional `onKeyDown` handler that is called when the underlying
