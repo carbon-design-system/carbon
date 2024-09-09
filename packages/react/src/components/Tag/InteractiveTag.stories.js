@@ -369,7 +369,7 @@ export const Dismissible = (args) => {
           renderIcon={Asleep}
           text={tag.text}
           tagTitle={tag.tagTitle}
-          title={`Dismiss ${tag.text}`}
+          title="Dismiss"
           onClose={(e) => {
             e.preventDefault();
             handleClose(tag);
