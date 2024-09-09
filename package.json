@@ -57,7 +57,7 @@
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/react-is": "~18.3.0",
-    "accessibility-checker": "^3.1.74",
+    "accessibility-checker": "^3.1.75",
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^7.0.0",
     "cross-spawn": "^7.0.0",
