@@ -85,23 +85,18 @@ export const withAILabel = () => (
 
 export const Playground = (args) => {
   // const { numberInputArrowTranslationIds, ...rest } = props();
-  return (
-    <NumberInput
-      id="carbon-number"
-      min={-100}
-      max={100}
-      value={50}
-      label="NumberInput label"
-      helperText="Optional helper text."
-      invalidText="Number is not valid"
-      {...args}
-    />
-  );
+  return <NumberInput id="carbon-number" {...args} />;
 };
 
 Playground.args = {
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  value: 50,
+  min: -100,
+  max: 100,
+  label: 'NumberInput label',
+  helperText: 'Optional helper text.',
+  invalidText: 'Number is not valid',
 };
 
 Playground.argTypes = {
@@ -150,6 +145,12 @@ Playground.argTypes = {
   },
   value: {
     control: { type: `number` },
+  },
+  min: {
+    control: { type: 'number' },
+  },
+  max: {
+    control: { type: 'number' },
   },
   warnText: {
     control: {
