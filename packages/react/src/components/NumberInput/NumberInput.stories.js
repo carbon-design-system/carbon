@@ -12,6 +12,7 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { number } from 'prop-types';
 
 export default {
   title: 'Components/NumberInput',
@@ -148,7 +149,7 @@ Playground.argTypes = {
     },
   },
   value: {
-    control: { type: 'text' },
+    control: { type: `number` },
   },
   warnText: {
     control: {
