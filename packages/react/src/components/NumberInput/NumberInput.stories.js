@@ -83,35 +83,50 @@ export const withAILabel = () => (
   </div>
 );
 
-export const Playground = (args) => {
-  // const { numberInputArrowTranslationIds, ...rest } = props();
-  return <NumberInput id="carbon-number" {...args} />;
-};
+export const Playground = (args) => (
+  <div>
+    <NumberInput {...args} id="number-input" />
+  </div>
+);
 
 Playground.args = {
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  value: 50,
   min: -100,
   max: 100,
+  value: 50,
+  step: 1,
+  invalid: false,
+  invalidText: 'Error message goes here',
+  disabled: false,
   label: 'NumberInput label',
   helperText: 'Optional helper text.',
-  invalidText: 'Number is not valid',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  size: 'md',
 };
-
 Playground.argTypes = {
   className: {
-    table: {
-      disable: true,
-    },
+    control: { type: 'text' },
   },
   defaultValue: {
     table: {
       disable: true,
     },
   },
-  helperText: {
-    control: { type: 'text' },
+  min: {
+    control: { type: 'number' },
+  },
+  max: {
+    control: { type: 'number' },
+  },
+  value: {
+    control: { type: 'number' },
+  },
+  step: {
+    control: { type: 'number' },
+  },
+  invalid: {
+    control: { type: 'boolean' },
   },
   id: {
     table: {
@@ -121,6 +136,9 @@ Playground.argTypes = {
   invalidText: {
     control: { type: 'text' },
   },
+  disabled: {
+    control: { type: 'boolean' },
+  },
   label: {
     control: { type: 'text' },
   },
@@ -129,34 +147,31 @@ Playground.argTypes = {
       disable: true,
     },
   },
+  helperText: {
+    control: { type: 'text' },
+  },
+  warn: {
+    control: { type: 'boolean' },
+  },
+  warnText: {
+    control: { type: 'text' },
+  },
+  size: {
+    options: ['sm', 'md', 'lg', 'xl'],
+    control: { type: 'select' },
+  },
   onChange: {
     action: 'onChange',
   },
   onClick: {
     action: 'onClick',
   },
-  onKeyUp: {
-    action: 'onKeyUp',
-  },
   translateWithId: {
     table: {
       disable: true,
     },
   },
-  value: {
-    control: { type: `number` },
-  },
-  min: {
-    control: { type: 'number' },
-  },
-  max: {
-    control: { type: 'number' },
-  },
-  warnText: {
-    control: {
-      type: 'text',
-    },
+  onKeyUp: {
+    action: 'onKeyUp',
   },
 };
-
-export const Skeleton = () => <NumberInputSkeleton />;
