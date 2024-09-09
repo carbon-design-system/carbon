@@ -92,7 +92,7 @@ export const Playground = (args) => {
       label="NumberInput label"
       helperText="Optional helper text."
       invalidText="Number is not valid"
-      {...args}
+      // {...args}
     />
   );
 };
