@@ -492,7 +492,15 @@ const ComboBox = forwardRef(
         const { highlightedIndex } = changes;
 
         switch (type) {
-          case InputBlur:
+          case InputBlur: {
+            if (allowCustomValue && highlightedIndex == '-1') {
+              const customValue = inputValue as ItemType;
+              changes.selectedItem = customValue;
+              if (onChange) {
+                onChange({ selectedItem: inputValue as ItemType, inputValue });
+              }
+              return changes;
+            }
             if (
               state.inputValue &&
               highlightedIndex == '-1' &&
