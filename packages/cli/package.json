@@ -3,6 +3,7 @@
   "description": "Task automation for working with the Carbon Design System",
   "version": "11.20.0",
   "license": "Apache-2.0",
+  "type": "module",
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
   },
