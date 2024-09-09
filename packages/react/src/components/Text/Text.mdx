@@ -1,4 +1,4 @@
-import { Canvas, ArgsTable, Story } from '@storybook/blocks';
+import { Canvas, ArgTypes, Story } from '@storybook/blocks';
 import * as TextStories from './Text-story';
 
 # Text
@@ -30,18 +30,14 @@ direction independently of text direction.
 `Text` can be used for applying the correct `dir` attribute on a particular text
 node based on the `TextDirection`, defaulting to `auto`.
 
-<Canvas>
-  <Story of={TextStories.Default} />
-</Canvas>
+<Canvas of={TextStories.Default} />
 
 ## Layout Direction
 
 `LayoutDirection` can be used for setting the layout direction in a part of an
 application.
 
-<Canvas>
-  <Story of={TextStories.LayoutAndText} />
-</Canvas>
+<Canvas of={TextStories.LayoutAndText} />
 
 ## Text Direction
 
@@ -49,9 +45,7 @@ application.
 application. It allows you to force the text direction of any particular text in
 the sub-tree.
 
-<Canvas>
-  <Story of={TextStories.SetTextDirection} />
-</Canvas>
+<Canvas of={TextStories.SetTextDirection} />
 
 ## Usage Examples
 
@@ -66,13 +60,11 @@ transformation functions that return nodes, like `itemToElement` on `Dropdown`.
 The Usage Examples story below provides some examples of how to do this with
 various components.
 
-<Canvas>
-  <Story of={TextStories.UsageExamples} />
-</Canvas>
+<Canvas of={TextStories.UsageExamples} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

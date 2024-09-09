@@ -17,7 +17,7 @@
     "vue": "^2.5.17",
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.5.17",
-    "webpack": "^4.25.1"
+    "webpack": "^5.94.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^4.0.9",

@@ -9,18 +9,14 @@ import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 import { act, render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
 import MultiSelect from '../';
-import {
-  generateItems,
-  generateGenericItem,
-  waitForPosition,
-} from '../../ListBox/test-helpers';
+import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
 import userEvent from '@testing-library/user-event';
 import { AILabel } from '../../AILabel';
 import Button from '../../Button';
 import ButtonSet from '../../ButtonSet';
 
 const prefix = 'cds';
-
+const waitForPosition = () => act(async () => {});
 describe('MultiSelect', () => {
   beforeEach(() => {
     jest.mock('../../../internal/deprecateFieldOnObject');
@@ -162,18 +158,16 @@ describe('MultiSelect', () => {
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const itemNode = getByText(container, item.label);
 
-    expect(
-      // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-selected="true"][role="option"]')
-    ).toBeNull();
+    const options = screen.getAllByRole('option');
+    for (const option of options) {
+      expect(option).toHaveAttribute('aria-selected', 'false');
+    }
 
     await userEvent.click(itemNode);
-
-    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'true');
+    expect(options[0]).toHaveAttribute('aria-selected', 'true');
 
     await userEvent.click(itemNode);
-
-    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
+    expect(options[0]).toHaveAttribute('aria-selected', 'false');
   });
 
   it('should close the menu when the user hits the Escape key', async () => {
@@ -244,13 +238,18 @@ describe('MultiSelect', () => {
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const itemNode = getByText(container, item.label);
 
-    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
+    const options = screen.getAllByRole('option');
+    for (const option of options) {
+      expect(option).toHaveAttribute('aria-selected', 'false');
+    }
+
+    expect(options[0]).toHaveAttribute('aria-selected', 'false');
 
     await userEvent.keyboard('[Enter]');
     await userEvent.keyboard('[ArrowDown]');
     await userEvent.keyboard('[Enter]');
 
-    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'true');
+    expect(options[0]).toHaveAttribute('aria-selected', 'true');
   });
 
   it('should clear selected items when the user clicks the clear selection button', async () => {
@@ -346,10 +345,11 @@ describe('MultiSelect', () => {
 
       await userEvent.click(labelNode);
 
-      expect(
-        // eslint-disable-next-line testing-library/no-node-access
-        document.querySelector('[data-contained-checkbox-state="true"]')
-      ).toBeInstanceOf(HTMLElement);
+      const options = screen.getAllByRole('option');
+      expect(options[0]).toHaveAttribute('aria-selected', 'true');
+      expect(options[1]).toHaveAttribute('aria-selected', 'true');
+      expect(options[2]).toHaveAttribute('aria-selected', 'false');
+      expect(options[3]).toHaveAttribute('aria-selected', 'false');
     });
 
     it('should trigger onChange with selected items', async () => {
@@ -596,6 +596,53 @@ describe('MultiSelect', () => {
       expect(container.firstChild).toHaveClass(
         `${prefix}--list-box__wrapper--slug`
       );
+    });
+
+    it('should select all options when isSelectAll property in an item is provided', async () => {
+      const items = [
+        {
+          id: 'select-all',
+          text: 'All roles',
+          isSelectAll: true,
+        },
+        {
+          id: 'downshift-1-item-0',
+          text: 'Editor',
+        },
+        {
+          id: 'downshift-1-item-1',
+          text: 'Owner',
+        },
+        {
+          id: 'downshift-1-item-2',
+          text: 'Uploader',
+        },
+      ];
+      render(
+        <MultiSelect
+          id="test"
+          label={'test-label'}
+          titleText="Multiselect title"
+          itemToString={(item) => (item ? item.text : '')}
+          helperText="This is helper text"
+          items={items}
+        />
+      );
+
+      const labelNode = screen.getByRole('combobox');
+      await userEvent.click(labelNode);
+
+      const options = screen.getAllByRole('option');
+
+      await userEvent.click(screen.getByText('All roles'));
+      options.forEach((option) => {
+        expect(option).toHaveAttribute('aria-selected', 'true');
+      });
+      //verify all options are de-selected
+      await userEvent.click(screen.getByText('All roles'));
+      options.forEach((option) => {
+        expect(option).toHaveAttribute('aria-selected', 'false');
+      });
     });
   });
 

@@ -51,7 +51,7 @@ test.describe('@avt AILabel', () => {
   test('@avt-keyboard-nav - slug', async ({ page }) => {
     await visitStory(page, {
       component: 'Search',
-      id: 'components-ailabel--callout',
+      id: 'components-ailabel--explainability-popover',
       globals: {
         theme: 'white',
       },
