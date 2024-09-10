@@ -81,7 +81,7 @@ export const withAILabel = () => (
     />
   </div>
 );
-
+export const Skeleton = () => <NumberInputSkeleton />;
 export const Playground = ({ ...args }) => {
   const [value, setValue] = React.useState(50);
 
