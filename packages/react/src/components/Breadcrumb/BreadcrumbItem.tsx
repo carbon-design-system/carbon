@@ -80,7 +80,7 @@ const BreadcrumbItem: ForwardRefReturn<HTMLLIElement, BreadcrumbItemProps> =
       return (
         <li className={className} ref={ref} {...rest}>
           {href ? (
-            <Link href={href} aria-current={ariaCurrent}>
+            <Link href={href} aria-current={ariaCurrent || isCurrentPage}>
               {children}
             </Link>
           ) : (
