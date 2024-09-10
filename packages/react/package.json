@@ -131,7 +131,7 @@
     "style-loader": "^4.0.0",
     "typescript-config-carbon": "^0.3.0",
     "webpack": "^5.65.0",
-    "webpack-dev-server": "^4.7.4"
+    "webpack-dev-server": "^5.0.0"
   },
   "sideEffects": [
     "es/index.js",
