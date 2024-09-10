@@ -35,6 +35,11 @@ jobs:
       - name: Check release type
         if: contains(github.ref_name, '-rc.')
         run: echo "PRE_RELEASE=true" >> $GITHUB_ENV
+      - name: Get version of web components from package.json
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+        with:
+          path: packages/web-components
 
       # If tag is a release candidate, upload the CDN artifacts to the `next` tag folder
       # ie. https://1.www.s81c.com/common/carbon/web-components/tag/next/breadcrumb.min.js
@@ -81,5 +86,4 @@ jobs:
           AWS_REGION: ${{ secrets.COMMON_COS_REGION }}
           AWS_S3_ENDPOINT: https://${{ secrets.COMMON_COS_ENDPOINT }}
           SOURCE_DIR: 'packages/web-components/dist'
-          DEST_DIR:
-            'common/carbon/web-components/version/${{ github.ref_name }}'
+          DEST_DIR: 'common/carbon/web-components/version/v${{steps.package-version.outputs.current-version}}'
