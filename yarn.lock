@@ -2021,7 +2021,7 @@ __metadata:
     "@carbon/styles": "npm:^1.65.0-rc.0"
     "@carbon/test-utils": "npm:^10.32.0-rc.0"
     "@carbon/themes": "npm:^11.40.0-rc.0"
-    "@figma/code-connect": "npm:^1.0.4"
+    "@figma/code-connect": "npm:^1.0.6"
     "@floating-ui/react": "npm:^0.26.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@rollup/plugin-babel": "npm:^6.0.0"
@@ -3066,16 +3066,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/code-connect@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "@figma/code-connect@npm:1.0.4"
+"@figma/code-connect@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@figma/code-connect@npm:1.0.6"
   dependencies:
     "@babel/core": "npm:^7.24.7"
     "@babel/generator": "npm:^7.24.7"
     "@babel/parser": "npm:^7.24.7"
     "@babel/types": "npm:^7.24.7"
     "@storybook/csf-tools": "npm:^7.6.7"
-    axios: "npm:^1.6.0"
+    axios: "npm:^1.7.4"
     boxen: "npm:5.1.1"
     chalk: "npm:^4.1.2"
     commander: "npm:^11.1.0"
@@ -3096,7 +3096,7 @@ __metadata:
     zod-validation-error: "npm:^3.2.0"
   bin:
     figma: bin/figma
-  checksum: 10/a412e637748513ae64888032c62856a34680581ad4bfb03e4b03a37eee41b13b9b3d43df1cb74c2d9ec8dcf0c6ac82b72a22da5655e21f91a832e5b5bef2adcf
+  checksum: 10/952cf06f6a7e792cc41ca3e208ceb4d926823039882d208c074312bad817be0c4fbdd0dfbd38ac71f34e82eb3a0f6254678bf73bd5a2644823f13e2e37c31948
   languageName: node
   linkType: hard
 
@@ -8227,14 +8227,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.4.0, axios@npm:^1.5.1, axios@npm:^1.6.0":
-  version: 1.7.3
-  resolution: "axios@npm:1.7.3"
+"axios@npm:^1.4.0, axios@npm:^1.5.1, axios@npm:^1.7.4":
+  version: 1.7.5
+  resolution: "axios@npm:1.7.5"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10/7f92af205705a8fb4a9d35666b663729507657f252a1d39d83582590119941872d49078017cf992e32f47aa3b7317f5439f77be772a173dac2ae0fedd38f43ae
+  checksum: 10/6cbcfe943a84089f420a900a3a3aeb54ee94dcc9c2b81b150434896357be5d1079eff0b1bbb628597371e79f896b1bc5776df04184756ba99656ff31df9a75bf
   languageName: node
   linkType: hard
 
