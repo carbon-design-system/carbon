@@ -42,6 +42,11 @@ interface IconButtonProps
     | 'right';
 
   /**
+   * **Experimental**: Will attempt to automatically align the tooltip
+   */
+  autoAlign?: boolean;
+
+  /**
    * Provide an icon or asset to be rendered inside of the IconButton
    */
   children?: ReactNode;
@@ -109,6 +114,7 @@ interface IconButtonProps
 const IconButton = React.forwardRef(function IconButton(
   {
     align,
+    autoAlign = false,
     children,
     className,
     closeOnActivation = true,
@@ -134,6 +140,7 @@ const IconButton = React.forwardRef(function IconButton(
   return (
     <Tooltip
       align={align}
+      autoAlign={autoAlign}
       closeOnActivation={closeOnActivation}
       className={tooltipClasses}
       defaultOpen={defaultOpen}
@@ -177,6 +184,11 @@ IconButton.propTypes = {
     'left',
     'right',
   ]),
+
+  /**
+   * **Experimental**: Will attempt to automatically align the tooltip
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Provide an icon or asset to be rendered inside of the IconButton
