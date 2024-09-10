@@ -83,100 +83,7 @@ export const withAILabel = () => (
   </div>
 );
 
-export const Playground = (args) => (
-  <div>
-    <NumberInput {...args} id="number-input" />
-  </div>
-);
-
-Playground.args = {
-  min: -100,
-  max: 100,
-  value: 50,
-  step: 1,
-  invalid: false,
-  invalidText: 'Error message goes here',
-  disabled: false,
-  label: 'NumberInput label',
-  helperText: 'Optional helper text.',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  size: 'md',
-};
-Playground.argTypes = {
-  className: {
-    control: { type: 'text' },
-  },
-  defaultValue: {
-    table: {
-      disable: true,
-    },
-  },
-  min: {
-    control: { type: 'number' },
-  },
-  max: {
-    control: { type: 'number' },
-  },
-  value: {
-    control: { type: 'number' },
-  },
-  step: {
-    control: { type: 'number' },
-  },
-  invalid: {
-    control: { type: 'boolean' },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  invalidText: {
-    control: { type: 'text' },
-  },
-  disabled: {
-    control: { type: 'boolean' },
-  },
-  label: {
-    control: { type: 'text' },
-  },
-  light: {
-    table: {
-      disable: true,
-    },
-  },
-  helperText: {
-    control: { type: 'text' },
-  },
-  warn: {
-    control: { type: 'boolean' },
-  },
-  warnText: {
-    control: { type: 'text' },
-  },
-  size: {
-    options: ['sm', 'md', 'lg', 'xl'],
-    control: { type: 'select' },
-  },
-  onChange: {
-    action: 'onChange',
-  },
-  onClick: {
-    action: 'onClick',
-  },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
-  },
-  onKeyUp: {
-    action: 'onKeyUp',
-  },
-};
-
-export const Playground2 = ({ ...args }) => {
+export const Playground = ({ ...args }) => {
   const [value, setValue] = React.useState(50);
 
   const handleChange = (event, { value }) => {
@@ -197,7 +104,7 @@ export const Playground2 = ({ ...args }) => {
   );
 };
 
-Playground2.args = {
+Playground.args = {
   step: 1,
   disabled: false,
   invalid: false,
@@ -207,7 +114,7 @@ Playground2.args = {
   size: 'md',
 };
 
-Playground2.argTypes = {
+Playground.argTypes = {
   min: { control: { type: 'number' } },
   max: { control: { type: 'number' } },
   step: { control: { type: 'number' } },
@@ -222,4 +129,89 @@ Playground2.argTypes = {
   },
   label: { control: { type: 'text' } },
   helperText: { control: { type: 'text' } },
+  id: {
+    table: {
+      disable: true,
+    },
+  },
+  light: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const Playground2 = ({ ...args }) => {
+  // const { numberInputArrowTranslationIds, ...rest } = props();
+  return (
+    <NumberInput
+      id="carbon-number"
+      min={-100}
+      max={100}
+      value={50}
+      label="NumberInput label"
+      helperText="Optional helper text."
+      invalidText="Number is not valid"
+      {...args}
+    />
+  );
+};
+
+Playground2.args = {
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+};
+
+Playground2.argTypes = {
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  defaultValue: {
+    table: {
+      disable: true,
+    },
+  },
+  helperText: {
+    control: { type: 'text' },
+  },
+  id: {
+    table: {
+      disable: true,
+    },
+  },
+  invalidText: {
+    control: { type: 'text' },
+  },
+  label: {
+    control: { type: 'text' },
+  },
+  light: {
+    table: {
+      disable: true,
+    },
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  onClick: {
+    action: 'onClick',
+  },
+  onKeyUp: {
+    action: 'onKeyUp',
+  },
+  translateWithId: {
+    table: {
+      disable: true,
+    },
+  },
+  value: {
+    control: { type: 'text' },
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+  },
 };
