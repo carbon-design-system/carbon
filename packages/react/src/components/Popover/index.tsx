@@ -78,17 +78,7 @@ export type NewPopoverAlignment =
 export type PopoverAlignment = DeprecatedPopoverAlignment | NewPopoverAlignment;
 
 const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    'top-left': 'top-start',
-    'top-right': 'top-end',
-    'bottom-left': 'bottom-start',
-    'bottom-right': 'bottom-end',
-    'left-bottom': 'left-end',
-    'left-top': 'left-start',
-    'right-bottom': 'right-end',
-    'right-top': 'right-start',
-  };
-  return mapping[deprecatedValue];
+  return mapPopoverAlignProp(deprecatedValue);
 };
 interface PopoverBaseProps {
   /**

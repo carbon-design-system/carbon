@@ -18,6 +18,7 @@ import {
   ToggletipActions,
 } from '../Toggletip';
 import { IconButton } from '../IconButton';
+import { mapPopoverAlignProp } from '../../tools/createPropAdapter';
 import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
@@ -123,17 +124,7 @@ export type NewAlignment =
 export type Alignment = DeprecatedAlignment | NewAlignment;
 
 const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    'top-left': 'top-start',
-    'top-right': 'top-end',
-    'bottom-left': 'bottom-start',
-    'bottom-right': 'bottom-end',
-    'left-bottom': 'left-end',
-    'left-top': 'left-start',
-    'right-bottom': 'right-end',
-    'right-top': 'right-start',
-  };
-  return mapping[deprecatedValue];
+  return mapPopoverAlignProp(deprecatedValue);
 };
 
 interface AILabelProps {
