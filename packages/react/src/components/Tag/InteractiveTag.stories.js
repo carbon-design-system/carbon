@@ -28,7 +28,7 @@ export default {
 
 export const Selectable = (args) => {
   return (
-    <div aria-label="Selectable tags">
+    <div aria-label="Selectable tags" role="group">
       <SelectableTag
         renderIcon={Asleep}
         text="Tag content with a long text description"
@@ -93,7 +93,10 @@ export const Operational = (args) => {
 
   return (
     <>
-      <div aria-label="Operational tags" style={{ marginBottom: '1rem' }}>
+      <div
+        aria-label="Operational tags"
+        role="group"
+        style={{ marginBottom: '1rem' }}>
         <OperationalTag
           type="red"
           className="some-class"
@@ -296,7 +299,7 @@ Operational.argTypes = {
 
 export const Dismissible = (args) => {
   return (
-    <div aria-label="Dismissible tags">
+    <div aria-label="Dismissible tags" role="group">
       <DismissibleTag
         type="red"
         className="some-class"
