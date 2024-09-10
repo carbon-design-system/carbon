@@ -233,3 +233,57 @@ Playground2.argTypes = {
     },
   },
 };
+
+export const Playground3 = ({ ...args }) => {
+  return (
+    <NumberInput
+      id="playground-number-input"
+      min={-100}
+      max={100}
+      label="NumberInput label"
+      helperText="Optional helper text."
+      {...args}
+    />
+  );
+};
+
+Playground3.args = {
+  step: 1,
+  disabled: false,
+  invalid: false,
+  invalidText: 'Error message goes here',
+  warn: false,
+  warnText: 'Warning message goes here',
+  size: 'md',
+  value: 50,
+};
+
+Playground3.argTypes = {
+  min: { control: { type: 'number' } },
+  max: { control: { type: 'number' } },
+  step: { control: { type: 'number' } },
+  disabled: { control: { type: 'boolean' } },
+  invalid: { control: { type: 'boolean' } },
+  invalidText: { control: { type: 'text' } },
+  warn: { control: { type: 'boolean' } },
+  warnText: { control: { type: 'text' } },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
+  label: { control: { type: 'text' } },
+  helperText: { control: { type: 'text' } },
+  id: {
+    table: {
+      disable: true,
+    },
+  },
+  light: {
+    table: {
+      disable: true,
+    },
+  },
+  onChange: {
+    action: 'onChange',
+  },
+};
