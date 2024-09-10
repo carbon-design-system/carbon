@@ -36,6 +36,11 @@ interface CopyProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     | 'right';
 
   /**
+   * **Experimental**: Will attempt to automatically align the tooltip
+   */
+  autoAlign?: boolean;
+
+  /**
    * Specify an optional className to be applied to the underlying `<button>`
    */
   className?: string;
@@ -66,6 +71,7 @@ interface CopyProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export default function Copy({
   align = 'bottom',
+  autoAlign = false,
   children,
   className,
   feedback = 'Copied!',
@@ -112,6 +118,7 @@ export default function Copy({
     <IconButton
       closeOnActivation={false}
       align={align}
+      autoAlign={autoAlign}
       className={classNames}
       label={animation ? feedback : initialLabel}
       onClick={composeEventHandlers([onClick, handleClick])}
@@ -142,6 +149,11 @@ Copy.propTypes = {
     'left',
     'right',
   ]),
+
+  /**
+   * **Experimental**: Will attempt to automatically align the tooltip
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Pass in content to be rendered in the underlying `<button>`
