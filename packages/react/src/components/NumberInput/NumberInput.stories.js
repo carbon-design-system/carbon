@@ -107,13 +107,20 @@ Playground.args = {
   step: 1,
   disabled: false,
   invalid: false,
-  invalidText: 'Error message goes here',
+  invalidText: 'Number is not valid',
+  helperText: 'Optional helper text.',
   warn: false,
-  warnText: 'Warning message goes here',
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
   size: 'md',
 };
 
 Playground.argTypes = {
+  className: {
+    table: {
+      disable: true,
+    },
+  },
   min: { control: { type: 'number' } },
   max: { control: { type: 'number' } },
   step: { control: { type: 'number' } },
@@ -133,7 +140,17 @@ Playground.argTypes = {
       disable: true,
     },
   },
+  defaultValue: {
+    table: {
+      disable: true,
+    },
+  },
   light: {
+    table: {
+      disable: true,
+    },
+  },
+  translateWithId: {
     table: {
       disable: true,
     },
