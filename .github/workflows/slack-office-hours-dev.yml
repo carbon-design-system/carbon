@@ -193,7 +193,7 @@ jobs:
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
   post-reminder-to-carbon-ibmproducts-pal-dev:
-    name: Post dev reminder to carbon-web-components
+    name: Post dev reminder to ibmproducts-pal-dev
     runs-on: ubuntu-latest
     steps:
       - name: Send custom JSON data to Slack workflow
