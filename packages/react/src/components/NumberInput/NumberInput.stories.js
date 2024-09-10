@@ -175,3 +175,51 @@ Playground.argTypes = {
     action: 'onKeyUp',
   },
 };
+
+export const Playground2 = ({ ...args }) => {
+  const [value, setValue] = React.useState(50);
+
+  const handleChange = (event, { value }) => {
+    setValue(value);
+  };
+
+  return (
+    <NumberInput
+      id="playground-number-input"
+      min={-100}
+      max={100}
+      value={value}
+      label="NumberInput label"
+      helperText="Optional helper text."
+      onChange={handleChange}
+      {...args}
+    />
+  );
+};
+
+Playground2.args = {
+  step: 1,
+  disabled: false,
+  invalid: false,
+  invalidText: 'Error message goes here',
+  warn: false,
+  warnText: 'Warning message goes here',
+  size: 'md',
+};
+
+Playground2.argTypes = {
+  min: { control: { type: 'number' } },
+  max: { control: { type: 'number' } },
+  step: { control: { type: 'number' } },
+  disabled: { control: { type: 'boolean' } },
+  invalid: { control: { type: 'boolean' } },
+  invalidText: { control: { type: 'text' } },
+  warn: { control: { type: 'boolean' } },
+  warnText: { control: { type: 'text' } },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
+  label: { control: { type: 'text' } },
+  helperText: { control: { type: 'text' } },
+};
