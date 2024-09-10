@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable react/jsx-no-duplicate-props */
 // @ts-nocheck
 import React from 'react';
 import {
@@ -34,12 +33,14 @@ figma.connect(
         size: figma.enum('Size', {
           Large: 'lg',
         }),
-        dismissable: figma.boolean('Dismissible'),
-        dismissablePlusIcon: figma.boolean('Dismissible + Icon'),
+        dismissable: figma.boolean('Dismissible', {
+          true: true,
+          false: figma.boolean('Dismissible + Icon'),
+        }),
       }),
     },
     example: ({ children, contained, fullWidth, tab }) => (
-      <Tabs dismissable={tab.dismissable} dismissable={tab.dismissablePlusIcon}>
+      <Tabs dismissable={tab.dismissable}>
         <TabList
           aria-label="List of tabs"
           contained={contained}
