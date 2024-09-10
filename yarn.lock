@@ -11178,7 +11178,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"doiuse@npm:^6.0.1":
+"doiuse@npm:^6.0.2":
   version: 6.0.2
   resolution: "doiuse@npm:6.0.2"
   dependencies:
@@ -21255,7 +21255,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.14, postcss@npm:^8.4.16, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.24, postcss@npm:^8.4.32, postcss@npm:^8.4.33, postcss@npm:^8.4.5":
+"postcss@npm:^8.4.14, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.24, postcss@npm:^8.4.32, postcss@npm:^8.4.33, postcss@npm:^8.4.5":
   version: 8.4.38
   resolution: "postcss@npm:8.4.38"
   dependencies:
@@ -24239,7 +24239,7 @@ __metadata:
     stylelint-config-prettier: "npm:^9.0.3"
     stylelint-config-standard: "npm:^34.0.0"
     stylelint-config-standard-scss: "npm:^11.0.0"
-    stylelint-no-unsupported-browser-features: "npm:^7.0.0"
+    stylelint-no-unsupported-browser-features: "npm:^8.0.0"
     stylelint-order: "npm:^6.0.0"
     stylelint-prettier: "npm:^2.0.0"
     stylelint-scss: "npm:^4.1.0"
@@ -24325,16 +24325,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-no-unsupported-browser-features@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "stylelint-no-unsupported-browser-features@npm:7.0.0"
+"stylelint-no-unsupported-browser-features@npm:^8.0.0":
+  version: 8.0.1
+  resolution: "stylelint-no-unsupported-browser-features@npm:8.0.1"
   dependencies:
-    doiuse: "npm:^6.0.1"
-    lodash: "npm:^4.17.15"
-    postcss: "npm:^8.4.16"
+    doiuse: "npm:^6.0.2"
+    postcss: "npm:^8.4.32"
   peerDependencies:
-    stylelint: ^14.0.0||^15.0.0
-  checksum: 10/cb6ba284988a0c5fcc49b8ed66f164a95ef34e3ddc6302baf4b6bd37ea8b3421ce781fe13455beb31f2a12279c0f0c62a5c3ec2c6324c53a2a1ee643962e6976
+    stylelint: ^16.0.2
+  checksum: 10/cd6ed977b182ae55e32ca585388f4db4f68c6bf1df10436cdb6348ebf354e16c17e3101471f492e545fd8876a581c6d48f4e16f04ce171851ffe5bd9b4cb5428
   languageName: node
   linkType: hard
 
