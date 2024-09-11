@@ -36,11 +36,13 @@ export const Default = () => (
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
       </p>
     </AccordionItem>
-    <AccordionItem title="Section 2 title">
+    <AccordionItem title="Testing - remove changes before merge">
       <p>
+        <button>test</button>
+        <button>test</button>
+        <button>test</button>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
