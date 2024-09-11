@@ -78,7 +78,17 @@ export type NewPopoverAlignment =
 export type PopoverAlignment = DeprecatedPopoverAlignment | NewPopoverAlignment;
 
 const propMappingFunction = (deprecatedValue) => {
-  return mapPopoverAlignProp(deprecatedValue);
+  const mapping = {
+    'top-left': 'top-start',
+    'top-right': 'top-end',
+    'bottom-left': 'bottom-start',
+    'bottom-right': 'bottom-end',
+    'left-bottom': 'left-end',
+    'left-top': 'left-start',
+    'right-bottom': 'right-end',
+    'right-top': 'right-start',
+  };
+  return mapping[deprecatedValue];
 };
 interface PopoverBaseProps {
   /**
@@ -151,7 +161,7 @@ export const Popover: PopoverComponent = React.forwardRef(
   function PopoverRenderFunction<E extends ElementType = 'span'>(
     {
       isTabTip,
-      align = isTabTip ? 'bottom-start' : 'bottom',
+      align: initialAlign = isTabTip ? 'bottom-start' : 'bottom',
       as: BaseComponent = 'span' as E,
       autoAlign = false,
       caret = isTabTip ? false : true,
@@ -169,6 +179,8 @@ export const Popover: PopoverComponent = React.forwardRef(
     const floating = useRef<HTMLSpanElement>(null);
     const caretRef = useRef<HTMLSpanElement>(null);
     const popover = useRef<Element>(null);
+
+    let align = mapPopoverAlignProp(initialAlign);
 
     // If the `Popover` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
     useWindowEvent('blur', () => {
