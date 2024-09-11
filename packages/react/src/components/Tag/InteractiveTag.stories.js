@@ -366,24 +366,24 @@ export const Dismissible = (args) => {
         Reset
       </Button>
       <br />
-     <div aria-label="Dismissible tags" role="group">
-      {renderedTags.map((tag, index) => (
-        <DismissibleTag
-          key={index}
-          type={tag.type}
-          className="some-class"
-          renderIcon={Asleep}
-          text={tag.text}
-          tagTitle={tag.tagTitle}
-          title="Dismiss"
-          onClose={(e) => {
-            e.preventDefault();
-            handleClose(tag);
-          }}
-          {...args}
-        />
-      ))}
-     </div>
+      <div aria-label="Dismissible tags" role="group">
+        {renderedTags.map((tag, index) => (
+          <DismissibleTag
+            key={index}
+            type={tag.type}
+            className="some-class"
+            renderIcon={Asleep}
+            text={tag.text}
+            tagTitle={tag.tagTitle}
+            title="Dismiss"
+            onClose={(e) => {
+              e.preventDefault();
+              handleClose(tag);
+            }}
+            {...args}
+          />
+        ))}
+      </div>
     </>
   );
 };
