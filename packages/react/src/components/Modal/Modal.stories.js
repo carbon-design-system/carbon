@@ -94,22 +94,6 @@ export const Default = () => {
           ]}
           itemToString={(item) => (item ? item.text : '')}
         />
-
-        <TextInput
-          data-modal-primary-focus
-          id="text-input-1"
-          labelText="Domain name"
-          placeholder="e.g. github.com"
-          style={{ marginBottom: '1rem' }}
-        />
-
-        <TextInput
-          data-modal-primary-focus
-          id="text-input-1"
-          labelText="Domain name"
-          placeholder="e.g. github.com"
-          style={{ marginBottom: '1rem' }}
-        />
       </Modal>
     </>
   );
