@@ -30,6 +30,7 @@ import {
   offset,
 } from '@floating-ui/react';
 import { hide } from '@floating-ui/dom';
+import { useFeatureFlag } from '../FeatureFlags';
 
 interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -179,6 +180,9 @@ export const Popover: PopoverComponent = React.forwardRef(
     const floating = useRef<HTMLSpanElement>(null);
     const caretRef = useRef<HTMLSpanElement>(null);
     const popover = useRef<Element>(null);
+    const enableFloatingStyles = useFeatureFlag(
+      'enable-v12-dynamically-set-floating-styles'
+    );
 
     let align = mapPopoverAlignProp(initialAlign);
 
@@ -242,7 +246,7 @@ export const Popover: PopoverComponent = React.forwardRef(
     });
 
     const { refs, floatingStyles, placement, middlewareData } = useFloating(
-      autoAlign
+      enableFloatingStyles || autoAlign
         ? {
             placement: align,
 
@@ -255,15 +259,17 @@ export const Popover: PopoverComponent = React.forwardRef(
             // Middleware order matters, arrow should be last
             middleware: [
               offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
-              flip({ fallbackAxisSideDirection: 'start' }),
+              autoAlign && flip({ fallbackAxisSideDirection: 'start' }),
               arrow({
                 element: caretRef,
               }),
-              hide(),
+              autoAlign && hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
-        : {} // When autoAlign is turned off, floating-ui will not be used
+        : {}
+      // When autoAlign is turned off & the `enable-v12-dynamically-set-floating-styles` feature flag is not
+      // enabled, floating-ui will not be used
     );
 
     const value = useMemo(() => {
@@ -287,7 +293,7 @@ export const Popover: PopoverComponent = React.forwardRef(
     }
 
     useEffect(() => {
-      if (autoAlign) {
+      if (enableFloatingStyles || autoAlign) {
         const updatedFloatingStyles = {
           ...floatingStyles,
           visibility: middlewareData.hide?.referenceHidden
@@ -446,7 +452,6 @@ if (__DEV__) {
 Popover.propTypes = {
   /**
    * Specify how the popover should align with the trigger element
-   
    */
   align: deprecateValuesWithin(
     PropTypes.oneOf([
