@@ -521,6 +521,7 @@ const ComboBox = forwardRef(
               return { ...changes, inputValue: '' };
             }
             return changes;
+          }
 
           case FunctionSelectItem:
             if (onChange) {
@@ -530,7 +531,6 @@ const ComboBox = forwardRef(
               });
             }
             return changes;
-          }
 
           case InputKeyDownEnter:
             if (allowCustomValue) {
