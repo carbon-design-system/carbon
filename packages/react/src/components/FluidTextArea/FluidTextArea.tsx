@@ -13,7 +13,117 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
-function FluidTextArea({ className, ...other }) {
+export interface FluidTextAreaProps {
+  /**
+   * Provide a custom className that is applied directly to the underlying
+   * `<textarea>` node
+   */
+  className?: string;
+
+  /**
+   * Specify the `cols` attribute for the underlying `<textarea>` node
+   */
+  cols?: number;
+
+  /**
+   * Optionally provide the default value of the `<textarea>`
+   */
+  defaultValue?: string | number;
+
+  /**
+   * Specify whether the control is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify whether to display the character counter
+   */
+  enableCounter?: boolean;
+
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText?: React.ReactNode;
+
+  /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
+  hideLabel?: boolean;
+
+  /**
+   * Provide a unique identifier for the control
+   */
+  id?: string;
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText?: React.ReactNode;
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
+   */
+  labelText: React.ReactNode;
+
+  /**
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
+   */
+  light?: boolean;
+
+  /**
+   * Max character count allowed for the textarea. This is needed in order for enableCounter to display
+   */
+  maxCount?: number;
+
+  /**
+   * Optionally provide an `onChange` handler that is called whenever `<textarea>`
+   * is updated
+   */
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
+
+  /**
+   * Optionally provide an `onClick` handler that is called whenever the
+   * `<textarea>` is clicked
+   */
+  onClick?: React.MouseEventHandler<HTMLTextAreaElement>;
+
+  /**
+   * Specify the placeholder attribute for the `<textarea>`
+   */
+  placeholder?: string;
+
+  /**
+   * Specify the rows attribute for the `<textarea>`
+   */
+  rows?: number;
+
+  /**
+   * Provide the current value of the `<textarea>`
+   */
+  value?: string | number;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   *  Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: React.ReactNode;
+}
+
+const FluidTextArea: React.FC<FluidTextAreaProps> = ({
+  className,
+  ...other
+}) => {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--text-area--fluid`, className);
 
@@ -22,7 +132,7 @@ function FluidTextArea({ className, ...other }) {
       <TextArea className={classNames} {...other} />
     </FormContext.Provider>
   );
-}
+};
 
 FluidTextArea.propTypes = {
   /**
