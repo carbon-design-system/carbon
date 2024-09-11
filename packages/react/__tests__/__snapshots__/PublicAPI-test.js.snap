@@ -801,6 +801,9 @@ Map {
         "type": "string",
       },
       "ariaLabel": [Function],
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -1799,6 +1802,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -1835,6 +1841,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "autoAlign": Object {
+        "type": "bool",
       },
       "className": Object {
         "type": "string",
@@ -4226,6 +4235,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "autoAlign": Object {
+        "type": "bool",
       },
       "children": Object {
         "type": "node",
