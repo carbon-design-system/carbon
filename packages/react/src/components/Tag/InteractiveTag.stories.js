@@ -177,7 +177,8 @@ export const Operational = (args) => {
           justifyContent: 'flex-start',
           marginTop: '1rem',
         }}
-        aria-label="Operational tags with Popover">
+        aria-label="Operational tags with Popover"
+        role="group">
         {/* High contrast example */}
         <Popover open={openHighContrast} highContrast>
           <OperationalTag
