@@ -18,7 +18,6 @@ import {
   waitForPosition,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
-import { ComboBoxOld } from '../ComboBox';
 import { AILabel } from '../AILabel';
 
 const findInputNode = () => screen.getByRole('combobox');
@@ -35,7 +34,7 @@ describe('ComboBox', () => {
     mockProps = {
       id: 'test-combobox',
       items: generateItems(5, generateGenericItem),
-      onChange: jest.fn(console.log('on chnage going')),
+      onChange: jest.fn(),
       placeholder: 'Filter...',
       type: 'default',
     };
@@ -294,7 +293,6 @@ describe('ComboBox', () => {
       await userEvent.click(
         screen.getByRole('button', { name: 'Clear selected item' })
       );
-      screen.debug();
       expect(mockProps.onChange).toHaveBeenCalled();
     });
     it('should clear selected item when `selectedItem` is updated to `null`', async () => {
