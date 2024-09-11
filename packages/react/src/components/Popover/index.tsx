@@ -347,7 +347,7 @@ export const Popover: PopoverComponent = React.forwardRef(
         [`${prefix}--popover--drop-shadow`]: dropShadow,
         [`${prefix}--popover--high-contrast`]: highContrast,
         [`${prefix}--popover--open`]: open,
-        [`${prefix}--popover--auto-align`]: autoAlign,
+        [`${prefix}--popover--auto-align ${prefix}--autoalign`]: autoAlign,
         [`${prefix}--popover--${currentAlignment}`]: true,
         [`${prefix}--popover--tab-tip`]: isTabTip,
       },
