@@ -83,11 +83,13 @@ const getInputValue = <ItemType,>({
   inputValue,
   itemToString,
   selectedItem,
+  prevSelectedItem,
 }: {
   initialSelectedItem?: ItemType | null;
   inputValue: string;
   itemToString: ItemToStringHandler<ItemType>;
   selectedItem?: ItemType | null;
+  prevSelectedItem?: ItemType | null;
 }) => {
   if (selectedItem) {
     return itemToString(selectedItem);
@@ -95,6 +97,10 @@ const getInputValue = <ItemType,>({
 
   if (initialSelectedItem) {
     return itemToString(initialSelectedItem);
+  }
+
+  if (!selectedItem && prevSelectedItem) {
+    return '';
   }
 
   return inputValue || '';
@@ -432,6 +438,7 @@ const ComboBox = forwardRef(
           inputValue,
           itemToString,
           selectedItem: selectedItemProp,
+          prevSelectedItem,
         })
       );
     }
@@ -636,7 +643,11 @@ const ComboBox = forwardRef(
         return itemToString(item);
       },
       onInputValueChange({ inputValue }) {
-        setInputValue(inputValue || '');
+        const newInputValue = inputValue || '';
+        setInputValue(newInputValue);
+        if (selectedItemProp) {
+          onChange({ selectedItem, inputValue: newInputValue });
+        }
         setHighlightedIndex(indexToHighlight(inputValue));
       },
       onSelectedItemChange({ selectedItem }) {

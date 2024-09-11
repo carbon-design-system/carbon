@@ -1605,6 +1605,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Neues",
+      "name": "neues",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9409245?v=4",
+      "profile": "https://github.com/Neues",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

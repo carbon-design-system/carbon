@@ -18,6 +18,7 @@ import {
   waitForPosition,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
+import { ComboBoxOld } from '../ComboBox';
 import { AILabel } from '../AILabel';
 
 const findInputNode = () => screen.getByRole('combobox');
@@ -34,7 +35,7 @@ describe('ComboBox', () => {
     mockProps = {
       id: 'test-combobox',
       items: generateItems(5, generateGenericItem),
-      onChange: jest.fn(),
+      onChange: jest.fn(console.log('on chnage going')),
       placeholder: 'Filter...',
       type: 'default',
     };
@@ -62,6 +63,18 @@ describe('ComboBox', () => {
         selectedItem: mockProps.items[i],
       });
     }
+  });
+
+  it('should call `onChange` when selection is cleared', async () => {
+    render(<ComboBox {...mockProps} />);
+    expect(mockProps.onChange).not.toHaveBeenCalled();
+    await openMenu();
+    await userEvent.click(screen.getAllByRole('option')[0]);
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Clear selected item' })
+    );
+    expect(mockProps.onChange).toHaveBeenCalledTimes(2);
   });
 
   it('should call `onChange` with the proper item when `shouldFilterItem` is provided', async () => {
@@ -257,14 +270,14 @@ describe('ComboBox', () => {
     });
   });
 
-  describe('should display selected item found in `selectedItem`', () => {
-    it('using an object type for the `selectedItem` prop', async () => {
+  describe('provided `selectedItem`', () => {
+    it('should display selected item using an object type for the `selectedItem` prop', async () => {
       render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
 
-    it('using a string type for the `selectedItem` prop', async () => {
+    it('should display selected item using a string type for the `selectedItem` prop', async () => {
       // Replace the 'items' property in mockProps with a list of strings
       mockProps = {
         ...mockProps,
@@ -274,6 +287,25 @@ describe('ComboBox', () => {
       render(<ComboBox {...mockProps} selectedItem={mockProps.items[1]} />);
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
+    });
+    it('should call `onChange` when selection is cleared and `selectedItem` is provided', async () => {
+      render(<ComboBox {...mockProps} selectedItem={mockProps.items[1]} />);
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Clear selected item' })
+      );
+      screen.debug();
+      expect(mockProps.onChange).toHaveBeenCalled();
+    });
+    it('should clear selected item when `selectedItem` is updated to `null`', async () => {
+      const { rerender } = render(
+        <ComboBox {...mockProps} selectedItem={mockProps.items[1]} />
+      );
+      await waitForPosition();
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[1].label);
+      rerender(<ComboBox {...mockProps} selectedItem={null} />);
+      await waitForPosition();
+      expect(findInputNode()).toHaveDisplayValue('');
     });
   });
 
