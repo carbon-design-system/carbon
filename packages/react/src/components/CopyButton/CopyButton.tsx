@@ -30,6 +30,11 @@ export interface CopyButtonProps extends ButtonProps<'button'> {
     | 'right';
 
   /**
+   * **Experimental**: Will attempt to automatically align the tooltip
+   */
+  autoAlign?: boolean;
+
+  /**
    * Specify an optional className to be applied to the underlying `<button>`
    */
   className?: string;
@@ -59,6 +64,7 @@ export interface CopyButtonProps extends ButtonProps<'button'> {
 }
 export default function CopyButton({
   align = 'bottom',
+  autoAlign = false,
   feedback = 'Copied!',
   feedbackTimeout = 2000,
   iconDescription = 'Copy to clipboard',
@@ -74,6 +80,7 @@ export default function CopyButton({
         feedbackTimeout={feedbackTimeout}
         onClick={onClick}
         align={align}
+        autoAlign={autoAlign}
         className={classnames(className, `${prefix}--copy-btn`)}
         aria-label={iconDescription}
         {...other}>
@@ -97,6 +104,11 @@ CopyButton.propTypes = {
     'left',
     'right',
   ]),
+
+  /**
+   * **Experimental**: Will attempt to automatically align the tooltip
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Specify an optional className to be applied to the underlying `<button>`

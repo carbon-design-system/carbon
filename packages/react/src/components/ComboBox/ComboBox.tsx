@@ -493,7 +493,15 @@ const ComboBox = forwardRef(
         const { highlightedIndex } = changes;
 
         switch (type) {
-          case InputBlur:
+          case InputBlur: {
+            if (allowCustomValue && highlightedIndex == '-1') {
+              const customValue = inputValue as ItemType;
+              changes.selectedItem = customValue;
+              if (onChange) {
+                onChange({ selectedItem: inputValue as ItemType, inputValue });
+              }
+              return changes;
+            }
             if (
               state.inputValue &&
               highlightedIndex == '-1' &&
@@ -503,16 +511,17 @@ const ComboBox = forwardRef(
                 ...changes,
                 inputValue: itemToString(changes.selectedItem),
               };
-            } else if (
+            }
+            if (
               state.inputValue &&
               highlightedIndex == '-1' &&
               !allowCustomValue &&
               !changes.selectedItem
             ) {
               return { ...changes, inputValue: '' };
-            } else {
-              return changes;
             }
+            return changes;
+
           case FunctionSelectItem:
             if (onChange) {
               onChange({
@@ -521,6 +530,8 @@ const ComboBox = forwardRef(
               });
             }
             return changes;
+          }
+
           case InputKeyDownEnter:
             if (allowCustomValue) {
               setInputValue(inputValue);
