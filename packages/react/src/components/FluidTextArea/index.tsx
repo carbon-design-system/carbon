@@ -6,7 +6,12 @@
  */
 
 import FluidTextArea from './FluidTextArea';
-
+import { type FluidTextAreaProps } from './FluidTextArea';
+import { type FluidTextAreaSkeletonProps } from './FluidTextArea.Skeleton';
 export default FluidTextArea;
-export { FluidTextArea };
+export {
+  FluidTextArea,
+  type FluidTextAreaProps,
+  type FluidTextAreaSkeletonProps,
+};
 export { default as FluidTextAreaSkeleton } from './FluidTextArea.Skeleton';
