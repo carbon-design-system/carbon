@@ -11,7 +11,7 @@ import {
 import { Document, Folder } from '@carbon/icons-react';
 export const EnableV12TileDefaultIconsFlag = () => {
   return (
-    <FeatureFlags enableV12TileDefaultIcons>
+    (<FeatureFlags enableV12TileDefaultIcons>
       <TileGroup legend="TestGroup" name="test">
         <RadioTile id="test-1" value="test-1">
           Option 1
@@ -20,13 +20,13 @@ export const EnableV12TileDefaultIconsFlag = () => {
           Option 2
         </RadioTile>
       </TileGroup>
-    </FeatureFlags>
+    </FeatureFlags>)
   );
 };
 export const EnableExperimentalFocusWrapWithoutSentinels = () => {
   return (
     // prettier-ignore
-    <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+    (<FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
       <ActionableNotification
         title="Notification title"
         subtitle="Subtitle text goes here"
@@ -34,12 +34,12 @@ export const EnableExperimentalFocusWrapWithoutSentinels = () => {
         inline={false}
         actionButtonLabel="Action"
       />
-    </FeatureFlags>
+    </FeatureFlags>)
   );
 };
 export const EnableTreeviewControllable = (args) => {
   return (
-    <div>
+    (<div>
       <FeatureFlags enableTreeviewControllable>
         <TreeView
           label="Tree View"
@@ -54,12 +54,12 @@ export const EnableTreeviewControllable = (args) => {
           {renderTree(nodes)}
         </TreeView>
       </FeatureFlags>
-    </div>
+    </div>)
   );
 };
 export const EnableV12Overflowmenu = () => {
   return (
-    <FeatureFlags enableV12Overflowmenu>
+    (<FeatureFlags enableV12Overflowmenu>
       <OverflowMenu autoAlign={true}>
         <MenuItem label="Stop app" />
         <MenuItem label="Restart app" />
@@ -68,12 +68,12 @@ export const EnableV12Overflowmenu = () => {
 
         <MenuItem label="Delete app" kind="danger" />
       </OverflowMenu>
-    </FeatureFlags>
+    </FeatureFlags>)
   );
 };
 export const EnableV12TileRadioIcons = () => {
   return (
-    <FeatureFlags enableV12TileRadioIcons>
+    (<FeatureFlags enableV12TileRadioIcons>
       <TileGroup legend="TestGroup" name="test">
         <RadioTile id="test-1" value="test-1">
           Option 1
@@ -82,7 +82,7 @@ export const EnableV12TileRadioIcons = () => {
           Option 2
         </RadioTile>
       </TileGroup>
-    </FeatureFlags>
+    </FeatureFlags>)
   );
 };
 export const TestRegularJsx = () => {
@@ -91,7 +91,7 @@ export const TestRegularJsx = () => {
 export const CombinedFlags = () => {
   return (
     // prettier-ignore
-    <FeatureFlags
+    (<FeatureFlags
       enableV12TileDefaultIcons
       enableV12TileRadioIcons
       enableV12Overflowmenu
@@ -105,12 +105,12 @@ export const CombinedFlags = () => {
           Option 2
         </RadioTile>
       </TileGroup>
-    </FeatureFlags>
+    </FeatureFlags>)
   );
 };
 export const OldFlags = () => {
   return (
-    <FeatureFlags>
+    (<FeatureFlags>
       <TileGroup legend="TestGroup" name="test">
         <RadioTile id="test-1" value="test-1">
           Option 1
@@ -119,6 +119,6 @@ export const OldFlags = () => {
           Option 2
         </RadioTile>
       </TileGroup>
-    </FeatureFlags>
+    </FeatureFlags>)
   );
 };

@@ -9,4 +9,4 @@
 
 const { defineTest } = require('jscodeshift/dist/testUtils');
 
-defineTest(__dirname, 'featureflag-deprecate-flags-prop', { parser: 'tsx' });
+defineTest(__dirname, 'featureflag-deprecate-flags-prop');
