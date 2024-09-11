@@ -148,7 +148,6 @@ const ControlledPasswordInput = React.forwardRef(
   ) {
     const prefix = usePrefix();
     const controlledPasswordInstanceId = useId();
-
     if (__DEV__) {
       warning(
         didWarnAboutDeprecation,

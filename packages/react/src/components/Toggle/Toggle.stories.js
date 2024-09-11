@@ -17,7 +17,7 @@ export default {
 
 export const Default = () => (
   <Toggle
-    labelText="Toggle element label"
+    labelText="Label"
     labelA="Off"
     labelB="On"
     defaultToggled
@@ -28,7 +28,7 @@ export const Default = () => (
 export const SmallToggle = () => (
   <Toggle
     size="sm"
-    labelText="Toggle element label"
+    labelText="Label"
     labelA="Off"
     labelB="On"
     defaultToggled
@@ -37,7 +37,14 @@ export const SmallToggle = () => (
 );
 
 export const Playground = (args) => (
-  <Toggle labelA="Off" labelB="On" defaultToggled id="toggle-3" {...args} />
+  <Toggle
+    labelText="Label"
+    labelA="Off"
+    labelB="On"
+    defaultToggled
+    id="toggle-3"
+    {...args}
+  />
 );
 
 Playground.argTypes = {
@@ -85,9 +92,9 @@ Playground.argTypes = {
 
 export const WithAccessibleLabels = () => (
   <VStack gap={7}>
-    <Toggle id="toggle-4" labelText="Toggle label" />
+    <Toggle id="toggle-4" labelText="Label" />
 
-    <Toggle id="toggle-5" labelText="Toggle label" hideLabel />
+    <Toggle id="toggle-5" labelText="Label" hideLabel />
 
     <div>
       <div id="toggle-6-label" style={{ marginBlockEnd: '0.5rem' }}>

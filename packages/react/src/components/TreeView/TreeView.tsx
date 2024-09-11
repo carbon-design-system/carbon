@@ -49,7 +49,12 @@ export type TreeViewProps = {
   /**
    * Callback function that is called when any node is selected
    */
-  onSelect?: (selected: Array<string | number>, payload: any) => void;
+  onSelect?: (
+    event: React.SyntheticEvent<HTMLUListElement>,
+    payload?: Partial<TreeNodeProps> & {
+      activeNodeId?: string | number;
+    }
+  ) => void;
   /**
    * Array representing all selected node IDs in the tree
    */
@@ -58,7 +63,7 @@ export type TreeViewProps = {
    * Specify the size of the tree from a list of available sizes.
    */
   size?: 'xs' | 'sm';
-} & React.HTMLAttributes<HTMLUListElement>;
+} & Omit<React.HTMLAttributes<HTMLUListElement>, 'onSelect'>;
 
 type TreeViewComponent = {
   (props: TreeViewProps): JSX.Element;
