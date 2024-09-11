@@ -15,6 +15,7 @@ import React, {
   useRef,
   useMemo,
   forwardRef,
+  useCallback,
   type ReactNode,
   type ComponentType,
   type ForwardedRef,
@@ -371,6 +372,7 @@ const ComboBox = forwardRef(
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     const [cursorPosition, setCursorPosition] = useState(0);
+    const prevInputLengthRef = useRef(0);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const {
@@ -471,8 +473,13 @@ const ComboBox = forwardRef(
       };
 
       if (autocomplete) {
-        const suggestion = getTypeaheadSuggestion(inputValue);
-        setTypeaheadText(suggestion);
+        if (autocomplete && inputValue.length >= prevInputLengthRef.current) {
+          const suggestion = getTypeaheadSuggestion(inputValue);
+          setTypeaheadText(suggestion);
+        } else {
+          setTypeaheadText('');
+        }
+        prevInputLengthRef.current = inputValue.length;
       }
     }, [inputValue, autocomplete, items, itemToString]);
 
@@ -544,7 +551,7 @@ const ComboBox = forwardRef(
         inputValue
       );
 
-    const stateReducer = React.useCallback(
+    const stateReducer = useCallback(
       (state, actionAndChanges) => {
         const { type, changes } = actionAndChanges;
         const { highlightedIndex } = changes;
@@ -701,18 +708,12 @@ const ComboBox = forwardRef(
         return itemToString(item);
       },
       onInputValueChange({ inputValue }) {
-        // setInputValue(inputValue || '');
-        // setHighlightedIndex(indexToHighlight(inputValue));
         if (inputValue === null) {
           setInputValue('');
           setCursorPosition(0);
         } else {
-          const newInputValue = (inputValue ?? '').endsWith(typeaheadText)
-            ? inputValue
-            : inputValue + typeaheadText;
-          console.log(newInputValue);
-          setInputValue(newInputValue as any);
-          setCursorPosition(inputValue?.length ?? 0);
+          setInputValue(inputValue as any);
+          setCursorPosition(inputValue?.length as any);
         }
       },
       onSelectedItemChange({ selectedItem }) {
@@ -830,6 +831,17 @@ const ComboBox = forwardRef(
       ]
     );
 
+    useEffect(() => {
+      if (textInput.current) {
+        if (inputRef.current && typeaheadText) {
+          const selectionStart = inputValue.length;
+          const selectionEnd = selectionStart + typeaheadText.length;
+
+          inputRef.current.value = inputValue + typeaheadText;
+          inputRef.current.setSelectionRange(selectionStart, selectionEnd);
+        }
+      }
+    }, [inputValue, typeaheadText]);
     return (
       <div className={wrapperClasses}>
         {titleText && (
@@ -865,9 +877,7 @@ const ComboBox = forwardRef(
                 placeholder,
                 value: inputValue,
                 onChange: (e) => {
-                  const newValue = e.target.value.endsWith(typeaheadText)
-                    ? e.target.value.slice(0, -typeaheadText.length)
-                    : e.target.value;
+                  const newValue = e.target.value;
                   downshiftSetInputValue(newValue);
                 },
                 ref: mergeRefs(textInput, ref, inputRef),
@@ -938,6 +948,12 @@ const ComboBox = forwardRef(
                     if (isOpen) {
                       toggleMenu();
                     }
+                  }
+                  if (autocomplete && typeaheadText && event.key === 'Tab') {
+                    event.preventDefault();
+                    const newValue = inputValue + typeaheadText;
+                    downshiftSetInputValue(newValue);
+                    setCursorPosition(newValue.length);
                   }
                 },
               })}
