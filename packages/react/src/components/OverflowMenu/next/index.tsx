@@ -166,7 +166,8 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
 
     const containerClasses = classNames(
       className,
-      `${prefix}--overflow-menu__container`
+      `${prefix}--overflow-menu__container`,
+      { [`${prefix}--autoalign`]: autoAlign }
     );
 
     const menuClasses = classNames(

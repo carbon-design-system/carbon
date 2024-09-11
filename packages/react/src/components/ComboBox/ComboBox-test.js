@@ -209,6 +209,13 @@ describe('ComboBox', () => {
     expect(findInputNode()).toHaveDisplayValue('Apple');
   });
 
+  it('should handle InputBlur with allowCustomValue', async () => {
+    render(<ComboBox {...mockProps} allowCustomValue />);
+    await userEvent.type(findInputNode(), 'Apple');
+    fireEvent.blur(findInputNode());
+    expect(findInputNode()).toHaveDisplayValue('Apple');
+  });
+
   it('should apply onChange value if custom value is entered and `allowCustomValue` is set', async () => {
     render(<ComboBox {...mockProps} allowCustomValue />);
 
