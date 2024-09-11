@@ -1,15 +1,15 @@
 The `Switcher` component is designed to have `SwitcherItem` components as its
-  direct children. However, there may be cases where you want to use React
-  Fragments or other nested structures within the `Switcher`. To accommodate we
-  recommend using the [`react-keyed-flatten-children`]
-  (https://www.npmjs.com/package/react-keyed-flatten-children#react-keyed-flatten-children)
-  package.
+direct children. However, there may be cases where you want to use React
+Fragments or other nested structures within the `Switcher`. To accommodate we
+recommend using the [`react-keyed-flatten-children`]
+(https://www.npmjs.com/package/react-keyed-flatten-children#react-keyed-flatten-children)
+package.
 
 ### Using react-keyed-flatten-children
 
 The `react-keyed-flatten-children` package allows you to flatten arrays and
 React Fragments into a regular, one-dimensional array while preserving element
-and fragment keys. 
+and fragment keys.
 
 1. Install the package:
 
