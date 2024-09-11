@@ -28,7 +28,7 @@ export default {
 
 export const Selectable = (args) => {
   return (
-    <>
+    <div aria-label="Selectable tags" role="group">
       <SelectableTag
         renderIcon={Asleep}
         text="Tag content with a long text description"
@@ -41,7 +41,7 @@ export const Selectable = (args) => {
         className="some-class"
         {...args}
       />
-    </>
+    </div>
   );
 };
 
@@ -93,7 +93,10 @@ export const Operational = (args) => {
 
   return (
     <>
-      <div style={{ marginBottom: '1rem' }}>
+      <div
+        aria-label="Operational tags"
+        role="group"
+        style={{ marginBottom: '1rem' }}>
         <OperationalTag
           type="red"
           className="some-class"
@@ -173,7 +176,9 @@ export const Operational = (args) => {
           display: 'flex',
           justifyContent: 'flex-start',
           marginTop: '1rem',
-        }}>
+        }}
+        aria-label="Operational tags with Popover"
+        role="group">
         {/* High contrast example */}
         <Popover open={openHighContrast} highContrast>
           <OperationalTag
@@ -295,7 +300,7 @@ Operational.argTypes = {
 
 export const Dismissible = (args) => {
   return (
-    <>
+    <div aria-label="Dismissible tags" role="group">
       <DismissibleTag
         type="red"
         className="some-class"
@@ -380,7 +385,7 @@ export const Dismissible = (args) => {
         text="Tag content"
         {...args}
       />
-    </>
+    </div>
   );
 };
 
