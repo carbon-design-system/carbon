@@ -11,9 +11,18 @@ import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
-function FluidNumberInputSkeleton({ className, ...other }) {
-  const prefix = usePrefix();
+export interface FluidNumberInputSkeletonProps {
+  /**
+   * Specify an optional className to be applied to the outer FluidForm wrapper
+   */
+  className?: string;
+}
 
+const FluidNumberInputSkeleton: React.FC<FluidNumberInputSkeletonProps> = ({
+  className,
+  ...other
+}) => {
+  const prefix = usePrefix();
   return (
     <FormContext.Provider value={{ isFluid: true }}>
       <div
@@ -27,7 +36,7 @@ function FluidNumberInputSkeleton({ className, ...other }) {
       </div>
     </FormContext.Provider>
   );
-}
+};
 
 FluidNumberInputSkeleton.propTypes = {
   /**
