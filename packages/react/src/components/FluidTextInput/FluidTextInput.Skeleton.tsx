@@ -11,7 +11,17 @@ import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
-function FluidSearchSkeleton({ className, ...other }) {
+export interface FluidTextInputSkeletonProps {
+  /**
+   * Specify an optional className to be applied to the outer FluidForm wrapper
+   */
+  className?: string;
+}
+
+const FluidTextInputSkeleton: React.FC<FluidTextInputSkeletonProps> = ({
+  className,
+  ...other
+}) => {
   const prefix = usePrefix();
 
   return (
@@ -27,13 +37,13 @@ function FluidSearchSkeleton({ className, ...other }) {
       </div>
     </FormContext.Provider>
   );
-}
+};
 
-FluidSearchSkeleton.propTypes = {
+FluidTextInputSkeleton.propTypes = {
   /**
    * Specify an optional className to be applied to the outer FluidForm wrapper
    */
   className: PropTypes.string,
 };
 
-export default FluidSearchSkeleton;
+export default FluidTextInputSkeleton;
