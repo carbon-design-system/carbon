@@ -242,7 +242,11 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
           className={`${prefix}--definition--tooltip--tag`}>
           <Text
             title={
-              children !== null && children !== undefined ? children : typeText
+              children !== null &&
+              children !== undefined &&
+              typeof children === 'string'
+                ? children
+                : typeText
             }
             className={labelClasses}>
             {children !== null && children !== undefined ? children : typeText}
@@ -251,7 +255,11 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
       ) : (
         <Text
           title={
-            children !== null && children !== undefined ? children : typeText
+            children !== null &&
+            children !== undefined &&
+            typeof children === 'string'
+              ? children
+              : typeText
           }
           className={labelClasses}>
           {children !== null && children !== undefined ? children : typeText}
