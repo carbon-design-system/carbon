@@ -12,33 +12,7 @@ Map {
         "type": "string",
       },
       "aiTextLabel": [Function],
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-start",
-            "top-right",
-            "top-end",
-            "bottom",
-            "bottom-left",
-            "bottom-start",
-            "bottom-right",
-            "bottom-end",
-            "left",
-            "left-bottom",
-            "left-end",
-            "left-top",
-            "left-start",
-            "right",
-            "right-bottom",
-            "right-end",
-            "right-top",
-            "right-start",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "aria-label": Object {
         "type": "string",
       },
@@ -801,6 +775,9 @@ Map {
         "type": "string",
       },
       "ariaLabel": [Function],
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -1799,6 +1776,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -1835,6 +1815,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "autoAlign": Object {
+        "type": "bool",
       },
       "className": Object {
         "type": "string",
@@ -2945,6 +2928,9 @@ Map {
       },
       "slug": Object {
         "type": "node",
+      },
+      "tagTitle": Object {
+        "type": "string",
       },
       "text": Object {
         "type": "string",
@@ -4226,6 +4212,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "autoAlign": Object {
+        "type": "bool",
       },
       "children": Object {
         "type": "node",
@@ -10940,33 +10929,7 @@ Map {
         "type": "string",
       },
       "aiTextLabel": [Function],
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-start",
-            "top-right",
-            "top-end",
-            "bottom",
-            "bottom-left",
-            "bottom-start",
-            "bottom-right",
-            "bottom-end",
-            "left",
-            "left-bottom",
-            "left-end",
-            "left-top",
-            "left-start",
-            "right",
-            "right-bottom",
-            "right-end",
-            "right-top",
-            "right-start",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "aria-label": Object {
         "type": "string",
       },
