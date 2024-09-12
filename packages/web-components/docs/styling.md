@@ -1,6 +1,8 @@
 # Using custom styles in components
 
-As Shadow DOM (one of the Web Components specs that `@carbon/web-components` uses) promises, styles that `@carbon/web-components` defines does not affect styles in your application, or vice versa.
+As Shadow DOM (one of the Web Components specs that `@carbon/web-components`
+uses) promises, styles that `@carbon/web-components` defines does not affect
+styles in your application, or vice versa.
 
 However, in cases where your application or a Carbon-derived style guide wants
 to change the styles of our components, there are a few options.
@@ -46,23 +48,23 @@ With CSS Custom Properties approach, you can switch the entire theme under the
 specific element by:
 
 ```css
-@use "@carbon/styles/scss/reset";
-@use "@carbon/styles/scss/theme";
-@use "@carbon/styles/scss/themes";
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
 
 footer {
-   @include theme.theme(themes.$g100);
- } // Emits all theme tokens in CSS Custom Properties
+  @include theme.theme(themes.$g100);
+} // Emits all theme tokens in CSS Custom Properties
 ```
 
-Some components such as `Button`, `Notification`, & `Tag` have specific tokens per theme
-that need to emitted in the styles. You can do this for example by adding the
-following:
+Some components such as `Button`, `Notification`, & `Tag` have specific tokens
+per theme that need to emitted in the styles. You can do this for example by
+adding the following:
 
 ```css
-@use "@carbon/styles/scss/reset";
-@use "@carbon/styles/scss/theme";
-@use "@carbon/styles/scss/themes";
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
 @use '@carbon/styles/scss/components/notification/tokens' as notification-tokens;
 @use '@carbon/styles/scss/components/tag/tokens' as tag-tokens;

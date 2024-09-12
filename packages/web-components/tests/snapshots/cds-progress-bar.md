@@ -2,7 +2,7 @@
 
 ## `Rendering`
 
-####   `Should render with minimum attributes`
+#### `Should render with minimum attributes`
 
 ```
 <div class="cds--progress-bar cds--progress-bar--big cds--progress-bar--default">
@@ -29,7 +29,7 @@
 
 ```
 
-####   `Should render with various attributes`
+#### `Should render with various attributes`
 
 ```
 <div class="cds--progress-bar cds--progress-bar--big cds--progress-bar--default">
@@ -65,4 +65,3 @@
 </div>
 
 ```
-

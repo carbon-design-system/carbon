@@ -31,13 +31,22 @@ export default function rollupPluginIcons(inputs, banner) {
         const svg = await import(iconPath);
 
         const iconsDir = path.dirname(require.resolve('@carbon/icons/lib'));
-        const iconsESPath = path.resolve('es', 'icons', path.relative(iconsDir, iconPath));
-        const spreadModulePath = path.resolve(__dirname, '../es/globals/directives/spread');
+        const iconsESPath = path.resolve(
+          'es',
+          'icons',
+          path.relative(iconsDir, iconPath)
+        );
+        const spreadModulePath = path.resolve(
+          __dirname,
+          '../es/globals/directives/spread'
+        );
 
-        const code =
-          `${banner}
+        const code = `${banner}
 import { svg } from 'lit';
-import spread from '${path.relative(path.dirname(iconsESPath), spreadModulePath)}';
+import spread from '${path.relative(
+          path.dirname(iconsESPath),
+          spreadModulePath
+        )}';
 
 const svgResultCarbonIcon = ${icon(svg.default)};
 export default svgResultCarbonIcon;`;
@@ -45,25 +54,27 @@ export default svgResultCarbonIcon;`;
         this.emitFile({
           type: 'asset',
           fileName: `icons/${path.relative(iconsDir, iconPath)}`,
-          source: code
+          source: code,
         });
 
         // emit icon type file
-        const typeCode =
-        `${banner}
+        const typeCode = `${banner}
 import { SVGTemplateResult } from 'lit-html';
 declare const svgResultCarbonIcon: ({ children, ...attrs }?: { children?: SVGTemplateResult; [attr: string]: any }) => SVGTemplateResult;
 export default svgResultCarbonIcon;`;
 
-      const typePath = path.format({ ...path.parse(iconPath), base: '', ext: '.d.ts' })
+        const typePath = path.format({
+          ...path.parse(iconPath),
+          base: '',
+          ext: '.d.ts',
+        });
 
-      this.emitFile({
-        type: 'asset',
-        fileName: `icons/${path.relative(iconsDir, typePath)}`,
-        source: typeCode
-      });
+        this.emitFile({
+          type: 'asset',
+          fileName: `icons/${path.relative(iconsDir, typePath)}`,
+          source: typeCode,
+        });
       }
-    }
+    },
   };
 }
-

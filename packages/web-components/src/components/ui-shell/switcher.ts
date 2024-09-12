@@ -7,11 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html } from "lit";
-import { property } from "lit/decorators.js";
-import { carbonElement as customElement } from "../../globals/decorators/carbon-element";
-import styles from "./header.scss?lit";
-import { prefix } from "../../globals/settings";
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import styles from './header.scss?lit';
+import { prefix } from '../../globals/settings';
 
 /**
  * Switcher
@@ -23,18 +23,18 @@ class CDSSwitcher extends LitElement {
   /**
    * Required props for accessibility label on the underlying menu
    */
-  @property({ type: String, attribute: "aria-label" })
+  @property({ type: String, attribute: 'aria-label' })
   ariaLabel;
 
   /**
    * Prop for accessibility labelled by on the underlying menu
    */
-  @property({ type: String, attribute: "aria-labelledby" })
+  @property({ type: String, attribute: 'aria-labelledby' })
   ariaLabelledBy;
 
   connectedCallback() {
-    if (!this.hasAttribute("role")) {
-      this.setAttribute("role", "list");
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'list');
     }
     super.connectedCallback();
   }

@@ -2,9 +2,9 @@
 
 ## `cds-file-uploader`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <p class="cds--file--label">
@@ -26,9 +26,9 @@
 
 ## `cds-file-uploader-item`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <p class="cds--file-filename">
@@ -57,7 +57,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <p class="cds--file-filename">
@@ -83,7 +83,7 @@
 
 ```
 
-####     `should render uploaded state`
+#### `should render uploaded state`
 
 ```
 <p class="cds--file-filename">
@@ -107,7 +107,7 @@
 
 ```
 
-####     `should render editing state`
+#### `should render editing state`
 
 ```
 <p class="cds--file-filename">
@@ -137,7 +137,7 @@
 
 ```
 
-####     `should render editing state with various attributes`
+#### `should render editing state with various attributes`
 
 ```
 <p class="cds--file-filename">
@@ -163,4 +163,3 @@
 </div>
 
 ```
-

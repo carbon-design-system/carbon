@@ -1,12 +1,18 @@
 # Having components participate in form
 
-Though form elements in `@carbon/web-components` (e.g. `<cds-text-input>`) are not native form elements like `<input>`, they have some extra APIs that align well with web/framework standards.
+Though form elements in `@carbon/web-components` (e.g. `<cds-text-input>`) are
+not native form elements like `<input>`, they have some extra APIs that align
+well with web/framework standards.
 
 ## `formdata` event
 
-Browsers supporting [`formdata` event](https://www.chromestatus.com/feature/5662230242656256) fire that event when the user clicks on `<button type="submit">` in `<form>`. Our form components listen to that event to add their values to the `<form>`.
+Browsers supporting
+[`formdata` event](https://www.chromestatus.com/feature/5662230242656256) fire
+that event when the user clicks on `<button type="submit">` in `<form>`. Our
+form components listen to that event to add their values to the `<form>`.
 
-To support other browsers, you can use a regular `<button>` and manually fire a custom event with the same name (`formdata`), like below:
+To support other browsers, you can use a regular `<button>` and manually fire a
+custom event with the same name (`formdata`), like below:
 
 ```javascript
 const form = document.querySelector('form');

@@ -45,4 +45,4 @@ export function resourceJSPaths(babel) {
       },
     },
   };
-};
+}

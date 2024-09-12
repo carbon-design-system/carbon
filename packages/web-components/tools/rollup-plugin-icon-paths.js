@@ -22,8 +22,11 @@ export default function rollupPluginIconPaths() {
         const __dirname = path.dirname(fileURLToPath(import.meta.url));
         const iconPathRegex = /@carbon\/icons\/lib/g;
         const filenameES = filePath.replace(/[/\\]src[/\\]/, '/es/');
-        const iconsDir = path.relative(path.dirname(filenameES), path.resolve(__dirname, '../icons'));
-        return content.replace(iconPathRegex,iconsDir);
+        const iconsDir = path.relative(
+          path.dirname(filenameES),
+          path.resolve(__dirname, '../icons')
+        );
+        return content.replace(iconPathRegex, iconsDir);
       }
 
       for (const [fileName, fileData] of Object.entries(bundle)) {
@@ -34,4 +37,3 @@ export default function rollupPluginIconPaths() {
     },
   };
 }
-

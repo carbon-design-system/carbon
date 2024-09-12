@@ -7,13 +7,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from "lit";
-import { prefix } from "../../../globals/settings";
-import { TABLE_SIZE } from "../table";
+import { html } from 'lit';
+import { prefix } from '../../../globals/settings';
+import { TABLE_SIZE } from '../table';
 // @ts-ignore
-import Settings16 from "@carbon/icons/lib/settings/16";
-import "../index";
-import storyDocs from "./data-table.mdx";
+import Settings16 from '@carbon/icons/lib/settings/16';
+import '../index';
+import storyDocs from './data-table.mdx';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -25,7 +25,7 @@ const sizes = {
 
 const defaultArgs = {
   isSortable: false,
-  locale: "en",
+  locale: 'en',
   size: TABLE_SIZE.LG,
   useStaticWidth: false,
   useZebraStyles: false,
@@ -33,25 +33,25 @@ const defaultArgs = {
 
 const controls = {
   isSortable: {
-    control: "boolean",
-    description: "Is sortable",
+    control: 'boolean',
+    description: 'Is sortable',
   },
   locale: {
-    control: "text",
-    description: "Locale",
+    control: 'text',
+    description: 'Locale',
   },
   size: {
-    control: "radio",
-    description: "Size",
+    control: 'radio',
+    description: 'Size',
     options: sizes,
   },
   useStaticWidth: {
-    control: "boolean",
-    description: "Use static width",
+    control: 'boolean',
+    description: 'Use static width',
   },
   useZebraStyles: {
-    control: "boolean",
-    description: "Use zebra styles",
+    control: 'boolean',
+    description: 'Use zebra styles',
   },
 };
 
@@ -66,11 +66,10 @@ export const Default = {
       <cds-table-toolbar slot="toolbar">
         <cds-table-toolbar-content ?has-batch-actions="true">
           <cds-table-toolbar-search
-            placeholder="Filter table"
-          ></cds-table-toolbar-search>
+            placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
             ${Settings16({
-              slot: "icon",
+              slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
             <cds-overflow-menu-body>
@@ -168,8 +167,7 @@ export const Playground = {
       ?radio=${radio}
       size="${size}"
       ?use-static-width="${useStaticWidth}"
-      ?use-zebra-styles="${useZebraStyles}"
-    >
+      ?use-zebra-styles="${useZebraStyles}">
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
         >With filtering</cds-table-header-description
@@ -178,11 +176,10 @@ export const Playground = {
       <cds-table-toolbar slot="toolbar">
         <cds-table-toolbar-content ?has-batch-actions="true">
           <cds-table-toolbar-search
-            placeholder="Filter table"
-          ></cds-table-toolbar-search>
+            placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
             ${Settings16({
-              slot: "icon",
+              slot: 'icon',
               class: `${prefix}--overflow-menu__icon`,
             })}
             <cds-overflow-menu-body>
@@ -264,7 +261,7 @@ export const Playground = {
 };
 
 const meta = {
-  title: "Components/DataTable/Filtering",
+  title: 'Components/DataTable/Filtering',
   parameters: {
     docs: {
       page: storyDocs,
