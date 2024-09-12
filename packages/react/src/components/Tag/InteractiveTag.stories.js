@@ -15,6 +15,7 @@ import { Popover, PopoverContent } from '../Popover';
 import mdx from './InteractiveTag.mdx';
 import './storyInteractiveTag.scss';
 import { Text } from '../Text';
+import Button from '../Button';
 
 export default {
   title: 'Experimental/unstable__InteractiveTag',
@@ -28,7 +29,7 @@ export default {
 
 export const Selectable = (args) => {
   return (
-    <>
+    <div aria-label="Selectable tags" role="group">
       <SelectableTag
         renderIcon={Asleep}
         text="Tag content with a long text description"
@@ -41,7 +42,7 @@ export const Selectable = (args) => {
         className="some-class"
         {...args}
       />
-    </>
+    </div>
   );
 };
 
@@ -93,7 +94,10 @@ export const Operational = (args) => {
 
   return (
     <>
-      <div style={{ marginBottom: '1rem' }}>
+      <div
+        aria-label="Operational tags"
+        role="group"
+        style={{ marginBottom: '1rem' }}>
         <OperationalTag
           type="red"
           className="some-class"
@@ -173,7 +177,9 @@ export const Operational = (args) => {
           display: 'flex',
           justifyContent: 'flex-start',
           marginTop: '1rem',
-        }}>
+        }}
+        aria-label="Operational tags with Popover"
+        role="group">
         {/* High contrast example */}
         <Popover open={openHighContrast} highContrast>
           <OperationalTag
@@ -285,101 +291,99 @@ Operational.argTypes = {
       type: 'select',
     },
   },
-  // type: {
-  //   options: ['red', 'magenta', 'blue'],
-  //   control: {
-  //     type: 'select',
-  //   },
-  // },
 };
 
 export const Dismissible = (args) => {
+  const tags = [
+    {
+      type: 'red',
+      text: 'Tag content with a long text description',
+      tagTitle: 'Provide a custom title to the tag',
+    },
+    {
+      type: 'magenta',
+      text: 'Tag content 1',
+    },
+    {
+      type: 'purple',
+      text: 'Tag content 2',
+    },
+    {
+      type: 'blue',
+      text: 'Tag content 3',
+    },
+    {
+      type: 'cyan',
+      text: 'Tag content 4',
+    },
+    {
+      type: 'teal',
+      text: 'Tag content 5',
+    },
+    {
+      type: 'green',
+      text: 'Tag content 6',
+    },
+    {
+      type: 'gray',
+      text: 'Tag content 7',
+    },
+    {
+      type: 'cool-gray',
+      text: 'Tag content 8',
+    },
+    {
+      type: 'warm-gray',
+      text: 'Tag content 9',
+    },
+    {
+      type: 'high-contrast',
+      text: 'Tag content 10',
+    },
+    {
+      type: 'outline',
+      text: 'Tag content 11',
+    },
+  ];
+
+  const [renderedTags, setRenderedTags] = useState(tags);
+
+  const handleClose = (removedTag) => {
+    const newTags = renderedTags.filter((tag) => tag !== removedTag);
+    setRenderedTags(newTags);
+  };
+
+  const resetTabs = () => {
+    setRenderedTags(tags);
+  };
+
   return (
     <>
-      <DismissibleTag
-        type="red"
-        className="some-class"
-        renderIcon={Asleep}
-        text="Tag content with a long text description"
-        {...args}
-      />
-      <DismissibleTag
-        type="magenta"
-        className="some-class"
-        text="Tag content"
-        renderIcon={Asleep}
-        {...args}
-      />
-      <DismissibleTag
-        type="purple"
-        className="some-class"
-        text="Tag content"
-        renderIcon={Asleep}
-        {...args}
-      />
-      <DismissibleTag
-        type="blue"
-        className="some-class"
-        renderIcon={Asleep}
-        text="Tag content"
-        {...args}
-      />
-      <DismissibleTag
-        type="cyan"
-        className="some-class"
-        renderIcon={Asleep}
-        text="Tag content"
-        {...args}
-      />
-      <DismissibleTag
-        type="teal"
-        className="some-class"
-        renderIcon={Asleep}
-        text="Tag content"
-        {...args}
-      />
-      <DismissibleTag
-        type="green"
-        className="some-class"
-        renderIcon={Asleep}
-        text="Tag content"
-        {...args}
-      />
-      <DismissibleTag
-        type="gray"
-        className="some-class"
-        renderIcon={Asleep}
-        text="Tag content"
-        {...args}
-      />
-      <DismissibleTag
-        type="cool-gray"
-        className="some-class"
-        renderIcon={Asleep}
-        text="Tag content"
-        {...args}
-      />
-      <DismissibleTag
-        type="warm-gray"
-        className="some-class"
-        renderIcon={Asleep}
-        text="Tag content"
-        {...args}
-      />
-      <DismissibleTag
-        type="high-contrast"
-        className="some-class"
-        renderIcon={Asleep}
-        text="Tag content"
-        {...args}
-      />
-      <DismissibleTag
-        type="outline"
-        className="some-class"
-        renderIcon={Asleep}
-        text="Tag content"
-        {...args}
-      />
+      <Button
+        // aria-label="Re-render all tags in the screen"
+        style={{ marginBottom: '3rem' }}
+        onClick={resetTabs}>
+        Reset
+      </Button>
+      <br />
+      <div aria-label="Dismissible tags" role="group">
+        {renderedTags.map((tag, index) => (
+          <DismissibleTag
+            key={index}
+            type={tag.type}
+            className="some-class"
+            renderIcon={Asleep}
+            text={tag.text}
+            tagTitle={tag.tagTitle}
+            title="Dismiss"
+            onClose={(e) => {
+              e.preventDefault();
+              handleClose(tag);
+            }}
+            {...args}
+          />
+        ))}
+      </div>
     </>
   );
 };
