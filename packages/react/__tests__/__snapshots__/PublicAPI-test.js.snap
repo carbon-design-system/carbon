@@ -420,21 +420,7 @@ Map {
       "isSelected": Object {
         "type": "bool",
       },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "primary",
-            "secondary",
-            "danger",
-            "ghost",
-            "danger--primary",
-            "danger--ghost",
-            "danger--tertiary",
-            "tertiary",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "kind": [Function],
       "onBlur": Object {
         "type": "func",
       },
