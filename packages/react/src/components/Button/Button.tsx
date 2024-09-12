@@ -7,7 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
-import { IconButton, IconButtonKind } from '../IconButton';
+import { IconButton, IconButtonKind, IconButtonKinds } from '../IconButton';
 import { composeEventHandlers } from '../../tools/events';
 import { PolymorphicProps } from '../../types/common';
 import { PopoverAlignment } from '../Popover';
@@ -74,7 +74,9 @@ export interface ButtonBaseProps
   /**
    * Specify the kind of Button you want to create
    */
-  kind?: ButtonKind;
+  kind?: ButtonBaseProps['hasIconOnly'] extends true
+    ? IconButtonKind
+    : ButtonKind;
 
   /**
    * Optional prop to allow overriding the icon rendering.
@@ -266,8 +268,24 @@ Button.propTypes = {
   /**
    * Specify the kind of Button you want to create
    */
-  // TODO: this should be either ButtonKinds or IconButtonKinds based on the value of "hasIconOnly"
-  kind: PropTypes.oneOf(ButtonKinds),
+  kind: (props, propName, componentName) => {
+    const { hasIconOnly } = props;
+    const validKinds = hasIconOnly ? IconButtonKinds : ButtonKinds;
+
+    if (props[propName] === undefined) {
+      return null;
+    }
+
+    if (!validKinds.includes(props[propName])) {
+      return new Error(
+        `Invalid prop \`${propName}\` supplied to \`${componentName}\`. Expected one of ${validKinds.join(
+          ', '
+        )}.`
+      );
+    }
+
+    return null;
+  },
 
   /**
    * Provide an optional function to be called when the button element
