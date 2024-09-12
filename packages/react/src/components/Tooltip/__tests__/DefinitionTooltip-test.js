@@ -10,7 +10,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { DefinitionTooltip } from '../DefinitionTooltip';
 
-describe('DefintiionTooltip', () => {
+describe('DefinitionTooltip', () => {
   it('should display onClick a defintion provided via prop', async () => {
     const definition = 'Uniform Resource Locator';
     render(<DefinitionTooltip definition={definition}>URL</DefinitionTooltip>);
