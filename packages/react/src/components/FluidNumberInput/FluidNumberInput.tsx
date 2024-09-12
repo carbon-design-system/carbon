@@ -12,10 +12,115 @@ import { NumberInput } from '../NumberInput';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
-const FluidNumberInput = React.forwardRef(function FluidNumberInput(
-  { className, ...other },
-  ref
-) {
+export interface FluidNumberInputProps {
+  /**
+   * `true` to allow empty string.
+   */
+  allowEmpty?: boolean;
+
+  /**
+   * Specify an optional className to be applied to the wrapper node
+   */
+  className?: string;
+
+  /**
+   * Optional starting value for uncontrolled state
+   */
+  defaultValue?: number | string;
+
+  /**
+   * Specify if the wheel functionality for the input should be disabled, or not
+   */
+  disableWheel?: boolean;
+
+  /**
+   * Specify if the control should be disabled, or not
+   */
+  disabled?: boolean;
+
+  /**
+   * Provide a description for up/down icons that can be read by screen readers
+   */
+  iconDescription?: string;
+
+  /**
+   * Specify a custom `id` for the input
+   */
+  id: string;
+
+  /**
+   * Specify if the currently value is invalid.
+   */
+  invalid?: boolean;
+
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  invalidText?: React.ReactNode;
+
+  /**
+   * Generic `label` that will be used as the textual representation of what
+   * this field is for
+   */
+  label?: React.ReactNode;
+
+  /**
+   * The maximum value.
+   */
+  max?: number;
+
+  /**
+   * The minimum value.
+   */
+  min?: number;
+
+  onChange?: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    state: { value: number | string; direction: string }
+  ) => void;
+
+  /**
+   * Provide an optional function to be called when the up/down button is clicked
+   */
+  onClick?: (
+    event: React.MouseEvent<HTMLElement>,
+    state?: { value: number | string; direction: string }
+  ) => void;
+  /**
+   * Provide an optional function to be called when a key is pressed in the number input
+   */
+  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
+
+  /**
+   * Specify how much the values should increase/decrease upon clicking on up/down button
+   */
+  step?: number;
+
+  /**
+   * Provide custom text for the component for each translation id
+   */
+  translateWithId?: (id: string) => string;
+
+  /**
+   * Specify the value of the input
+   */
+  value?: number | string;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: React.ReactNode;
+}
+
+const FluidNumberInput: React.FC<FluidNumberInputProps> = React.forwardRef<
+  HTMLInputElement,
+  FluidNumberInputProps
+>(function FluidNumberInput({ className, ...other }, ref) {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--number-input--fluid`, className);
 
