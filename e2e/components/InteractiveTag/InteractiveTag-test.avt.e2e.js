@@ -53,12 +53,30 @@ test.describe('@avt InteractiveTag', () => {
         theme: 'white',
       },
     });
+    await expect(
+      page.getByText('Tag content with a long text description').first()
+    ).toBeVisible();
+
     const tooltip = page.getByRole('tooltip');
-    const button = page.getByRole('button').first();
+    const button = page.getByRole('button').nth(1);
     await expect(button).toBeVisible();
+    await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await expect(button).toBeFocused();
     await expect(tooltip).toHaveAttribute('aria-hidden', 'false');
+
+    // Test dismissible functionality
+    await page.keyboard.press('Enter');
+    await expect(
+      page.getByText('Tag content with a long text description')
+    ).not.toBeVisible();
+
+    // Reset button click
+    await page.keyboard.press('Shift+Tab');
+    await page.keyboard.press('Enter');
+    await expect(
+      page.getByText('Tag content with a long text description').first()
+    ).toBeVisible();
   });
 
   test('@avt-keyboard-nav OperationalTag', async ({ page }) => {
