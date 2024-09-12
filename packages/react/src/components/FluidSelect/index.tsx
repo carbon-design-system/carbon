@@ -6,7 +6,9 @@
  */
 
 import FluidSelect from './FluidSelect';
-
+import FluidSelectSkeletonProps from './FluidSelect.Skeleton';
+import FluidSelectProps from './FluidSelect.Skeleton';
+export type { FluidSelectSkeletonProps, FluidSelectProps };
 export default FluidSelect;
 export { FluidSelect };
 export { default as FluidSelectSkeleton } from './FluidSelect.Skeleton';
