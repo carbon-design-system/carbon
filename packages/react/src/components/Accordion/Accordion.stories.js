@@ -38,7 +38,7 @@ export const Default = () => (
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
       </p>
     </AccordionItem>
-    <AccordionItem title="Testing - remove changes before merge">
+    <AccordionItem title="Section 2 title">
       <p>
         <button>test</button>
         <button>test</button>
