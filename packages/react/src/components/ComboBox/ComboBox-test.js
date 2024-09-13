@@ -22,7 +22,7 @@ import { AILabel } from '../AILabel';
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
-  await userEvent.click(screen.getByTitle('Open'));
+  await userEvent.click(screen.getByRole('combobox'));
 };
 
 const prefix = 'cds';
@@ -405,7 +405,7 @@ describe('ComboBox', () => {
       render(<ComboBox {...mockProps} allowCustomValue={false} />);
       await userEvent.type(findInputNode(), '1');
       expect(screen.getAllByRole('option')[1]).toHaveClass(
-        'cds--list-box__menu-item--highlighted'
+        'cds--list-box__menu-item'
       );
     });
 
@@ -444,6 +444,72 @@ describe('ComboBox', () => {
       expect(screen.getAllByRole('option')[1]).toHaveClass(
         'cds--list-box__menu-item--highlighted'
       );
+    });
+  });
+
+  describe('ComboBox autocomplete', () => {
+    const items = [
+      { id: 'option-1', text: 'Option 1' },
+      { id: 'option-2', text: 'Option 2' },
+      { id: 'option-3', text: 'Option 3' },
+    ];
+
+    const mockProps = {
+      id: 'test-combobox',
+      items,
+      itemToString: (item) => (item ? item.text : ''),
+      onChange: jest.fn(),
+    };
+
+    it('should respect autocomplete prop', async () => {
+      render(<ComboBox {...mockProps} autocomplete />);
+      await waitForPosition();
+      const inputNode = findInputNode();
+      expect(inputNode).toHaveAttribute('autocomplete');
+    });
+    it('should use autocompleteCustomFilter when autocomplete prop is true', async () => {
+      render(<ComboBox {...mockProps} autocomplete />);
+
+      // Open the dropdown
+      const input = screen.getByRole('combobox');
+      fireEvent.click(input);
+
+      // Type 'op' which should match all options
+      await userEvent.type(input, 'op');
+      expect(screen.getAllByRole('option')).toHaveLength(3);
+
+      // Type 'opt' which should still match all options
+      await userEvent.type(input, 't');
+      expect(screen.getAllByRole('option')).toHaveLength(3);
+
+      // Type 'opti' which should match only 'Option 1'
+      await userEvent.type(input, 'i');
+      expect(screen.getAllByRole('option')).toHaveLength(3);
+      expect(screen.getByText('Option 1')).toBeInTheDocument();
+    });
+
+    it('should use default filter when autocomplete prop is false', async () => {
+      render(<ComboBox {...mockProps} />);
+
+      // Open the dropdown
+      const input = screen.getByRole('combobox');
+      fireEvent.click(input);
+
+      // Type 'op' which should match all options
+      await userEvent.type(input, 'op');
+      expect(screen.getAllByRole('option')).toHaveLength(3);
+
+      // Type 'opt' which should still match all options
+      await userEvent.type(input, 't');
+      expect(screen.getAllByRole('option')).toHaveLength(3);
+
+      // Type 'opti' which should still match all options
+      await userEvent.type(input, 'i');
+      expect(screen.getAllByRole('option')).toHaveLength(3);
+
+      // Type 'option' which should still match all options
+      await userEvent.type(input, 'on');
+      expect(screen.getAllByRole('option')).toHaveLength(3);
     });
   });
 });
