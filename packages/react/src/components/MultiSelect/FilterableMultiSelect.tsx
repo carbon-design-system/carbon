@@ -462,6 +462,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
       [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
       [`${prefix}--list-box__wrapper--slug`]: slug,
+      [`${prefix}--autoalign`]: autoAlign,
     }
   );
   const helperId = !helperText
@@ -506,10 +507,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     const nextIsOpen = forceIsOpen ?? !isOpen;
     setIsOpen(nextIsOpen);
     validateHighlightFocus();
-    if (onMenuChange) {
-      onMenuChange(nextIsOpen);
-    }
   }
+
+  useEffect(() => {
+    onMenuChange?.(isOpen);
+  }, [isOpen, onMenuChange]);
 
   const {
     getToggleButtonProps,
