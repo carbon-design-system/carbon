@@ -14,13 +14,6 @@ import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
-function handleClose(event, onClose) {
-  if (onClose) {
-    event.stopPropagation();
-    onClose(event);
-  }
-}
-
 describe('Tag', () => {
   describe('automated accessibility testing', () => {
     it('should have no Axe violations', async () => {
