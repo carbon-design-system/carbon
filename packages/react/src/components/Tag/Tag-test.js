@@ -8,9 +8,18 @@
 import { Add } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import Tag from './';
+import Tag, { TagSkeleton } from './';
 import DismissibleTag from './DismissibleTag';
 import { AILabel } from '../AILabel';
+
+const prefix = 'cds';
+
+function handleClose(event, onClose) {
+  if (onClose) {
+    event.stopPropagation();
+    onClose(event);
+  }
+}
 
 describe('Tag', () => {
   describe('automated accessibility testing', () => {
@@ -62,5 +71,33 @@ describe('Tag', () => {
     expect(
       screen.getByRole('button', { name: 'AI - Show information' })
     ).toBeInTheDocument();
+  });
+
+  it('should render a skeleton state', () => {
+    const { container } = render(<TagSkeleton />);
+
+    const selectWrapper = container.querySelector(`.${prefix}--tag`);
+
+    expect(selectWrapper).toHaveClass(`${prefix}--skeleton`);
+  });
+
+  it('should call onClose with the event', () => {
+    const onClose = jest.fn();
+    const event = { stopPropagation: jest.fn() };
+    handleClose(event, onClose);
+    expect(onClose).toHaveBeenCalledWith(event);
+  });
+
+  it('should stop propagation if onClose is defined', () => {
+    const onClose = jest.fn();
+    const event = { stopPropagation: jest.fn() };
+    handleClose(event, onClose);
+    expect(event.stopPropagation).toHaveBeenCalled();
+  });
+
+  it('should not stop propagation if onClose is undefined', () => {
+    const event = { stopPropagation: jest.fn() };
+    handleClose(event);
+    expect(event.stopPropagation).not.toHaveBeenCalled();
   });
 });
