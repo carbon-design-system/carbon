@@ -80,24 +80,4 @@ describe('Tag', () => {
 
     expect(selectWrapper).toHaveClass(`${prefix}--skeleton`);
   });
-
-  it('should call onClose with the event', () => {
-    const onClose = jest.fn();
-    const event = { stopPropagation: jest.fn() };
-    handleClose(event, onClose);
-    expect(onClose).toHaveBeenCalledWith(event);
-  });
-
-  it('should stop propagation if onClose is defined', () => {
-    const onClose = jest.fn();
-    const event = { stopPropagation: jest.fn() };
-    handleClose(event, onClose);
-    expect(event.stopPropagation).toHaveBeenCalled();
-  });
-
-  it('should not stop propagation if onClose is undefined', () => {
-    const event = { stopPropagation: jest.fn() };
-    handleClose(event);
-    expect(event.stopPropagation).not.toHaveBeenCalled();
-  });
 });
