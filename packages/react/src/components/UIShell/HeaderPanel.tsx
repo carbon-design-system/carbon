@@ -90,7 +90,9 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
       eventHandlers.onBlur = (event) => {
         if (
           !event.currentTarget.contains(event.relatedTarget) &&
-          !lastClickedElement?.classList?.contains('cds--switcher__item-link')
+          !lastClickedElement?.classList?.contains(
+            `${prefix}--switcher__item-link`
+          )
         ) {
           setExpandedState(false);
           setLastClickedElement(null);
