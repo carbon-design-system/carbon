@@ -507,10 +507,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     const nextIsOpen = forceIsOpen ?? !isOpen;
     setIsOpen(nextIsOpen);
     validateHighlightFocus();
-    if (onMenuChange) {
-      onMenuChange(nextIsOpen);
-    }
   }
+
+  useEffect(() => {
+    onMenuChange?.(isOpen);
+  }, [isOpen, onMenuChange]);
 
   const {
     getToggleButtonProps,
