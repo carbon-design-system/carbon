@@ -61,6 +61,7 @@ figma.connect(
         true: figma.instance('Swap icon'),
       }),
       text: figma.string('Tag text'),
+      tagTitle: figma.string('Tag title'),
       size: figma.enum('Size', {
         Large: 'lg',
         Small: 'sm',
