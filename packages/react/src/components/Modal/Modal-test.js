@@ -380,6 +380,31 @@ describe('Modal', () => {
 
     expect(container.firstChild).toHaveClass(`${prefix}--modal--slug`);
   });
+
+  it('should not render a close button when closeButtonDisabled is true', () => {
+    render(
+      <Modal
+        data-testid="modal-1"
+        closeButtonDisabled
+        primaryButtonText="Save"
+        secondaryButtonText="Cancel">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByTestId('modal-1')).not.toHaveClass(
+      `${prefix}--modal-close-button`
+    );
+  });
 });
 
 describe('events', () => {

@@ -1615,6 +1615,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "CaiqueSobral",
+      "name": "Caique Sobral",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51248056?v=4",
+      "profile": "https://github.com/CaiqueSobral",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

@@ -65,6 +65,11 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   className?: string;
 
   /**
+   * Specify if the close button should not be displayed
+   */
+  closeButtonDisabled?: boolean;
+
+  /**
    * Specify an label for the close button of the modal; defaults to close
    */
   closeButtonLabel?: string;
@@ -233,6 +238,7 @@ const Modal = React.forwardRef(function Modal(
     onRequestSubmit = noopFn,
     onSecondarySubmit,
     primaryButtonDisabled = false,
+    closeButtonDisabled,
     danger,
     alert,
     secondaryButtons,
@@ -510,7 +516,7 @@ const Modal = React.forwardRef(function Modal(
       aria-modal="true"
       tabIndex={-1}>
       <div className={`${prefix}--modal-header`}>
-        {passiveModal && modalButton}
+        {passiveModal && !closeButtonDisabled && modalButton}
         {modalLabel && (
           <Text
             as="h2"
@@ -526,7 +532,7 @@ const Modal = React.forwardRef(function Modal(
           {modalHeading}
         </Text>
         {normalizedSlug}
-        {!passiveModal && modalButton}
+        {!passiveModal && !closeButtonDisabled && modalButton}
       </div>
       <Layer
         ref={contentRef}
@@ -639,6 +645,11 @@ Modal.propTypes = {
    * Specify an optional className to be applied to the modal root node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify if the close button should not be displayed
+   */
+  closeButtonDisabled: PropTypes.bool,
 
   /**
    * Specify an label for the close button of the modal; defaults to close
