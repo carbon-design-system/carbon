@@ -272,7 +272,7 @@
   }
 
   //removing mask image in case we have dropdown in modal
-  .#{$prefix}--modal-scroll-content:has(.#{$prefix}--dropdown--autoalign) {
+  .#{$prefix}--modal-scroll-content:has(.#{$prefix}--autoalign) {
     mask-image: none;
   }
 
