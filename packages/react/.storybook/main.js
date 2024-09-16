@@ -19,12 +19,10 @@ const storyGlobs = [
   './Welcome/Welcome.mdx',
   '../src/**/*.stories.js',
   '../src/**/*.mdx',
-  '../src/**/*.stories.mdx',
   '../src/components/Tile/Tile.mdx',
   '../src/**/next/*.stories.js',
   '../src/**/next/**/*.stories.js',
   '../src/**/next/*.mdx',
-  '../src/**/next/*.stories.mdx',
   '../src/**/*-story.js',
 ];
 
