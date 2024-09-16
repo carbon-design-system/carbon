@@ -4,9 +4,8 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+import React from 'react';
 import PropTypes from 'prop-types';
-import { ReactNode, Children, forwardRef, cloneElement } from 'react';
 import classnames from 'classnames';
 import FluidTextInput from '../FluidTextInput';
 import { usePrefix } from '../../internal/usePrefix';
@@ -16,7 +15,7 @@ export interface FluidTimePickerProps {
   /**
    * The child node(s)
    */
-  children?: ReactNode;
+  children?: React.ReactNode;
 
   /**
    * Specify an optional className to be applied to the outer FluidTimePicker wrapper
@@ -36,13 +35,13 @@ export interface FluidTimePickerProps {
   /**
    * Provide the text that is displayed when the control is in error state
    */
-  invalidText?: ReactNode;
+  invalidText?: React.ReactNode;
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
    * control
    */
-  labelText: ReactNode;
+  labelText: React.ReactNode;
 
   /**
    * Specify whether the control is currently in warning state
@@ -52,74 +51,77 @@ export interface FluidTimePickerProps {
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: ReactNode;
+  warnText?: React.ReactNode;
 }
 
-const FluidTimePicker = forwardRef<HTMLInputElement, FluidTimePickerProps>(
-  function FluidTimePicker(
-    {
-      className,
-      children,
-      disabled,
-      invalid,
-      invalidText,
-      warn,
-      warnText,
-      ...other
-    },
-    ref
-  ) {
-    const prefix = usePrefix();
+const FluidTimePicker = React.forwardRef<
+  HTMLInputElement,
+  FluidTimePickerProps
+>(function FluidTimePicker(
+  {
+    className,
+    children,
+    disabled,
+    invalid,
+    invalidText,
+    warn,
+    warnText,
+    ...other
+  },
+  ref
+) {
+  const prefix = usePrefix();
 
-    const classNames = classnames(className, {
-      [`${prefix}--time-picker--fluid`]: true,
-      [`${prefix}--time-picker--equal-width`]:
-        Children.toArray(children).length !== 2,
-      [`${prefix}--time-picker--fluid--disabled`]: disabled,
-      [`${prefix}--time-picker--fluid--invalid`]: invalid,
-      [`${prefix}--time-picker--fluid--warning`]: warn,
-    });
+  const classNames = classnames(className, {
+    [`${prefix}--time-picker--fluid`]: true,
+    [`${prefix}--time-picker--equal-width`]:
+      React.Children.toArray(children).length !== 2,
+    [`${prefix}--time-picker--fluid--disabled`]: disabled,
+    [`${prefix}--time-picker--fluid--invalid`]: invalid,
+    [`${prefix}--time-picker--fluid--warning`]: warn,
+  });
 
-    const errorText = () => {
-      if (invalid) {
-        return invalidText;
-      }
-      if (warn) {
-        return warnText;
-      }
-    };
+  const errorText = () => {
+    if (invalid) {
+      return invalidText;
+    }
+    if (warn) {
+      return warnText;
+    }
+  };
 
-    const error = invalid || warn;
+  const error = invalid || warn;
 
-    return (
-      <div className={classNames}>
-        <div className={`${prefix}--time-picker--fluid__wrapper`}>
-          <div className={`${prefix}--time-picker__input`}>
-            <FluidTextInput id="" disabled={disabled} ref={ref} {...other} />
-          </div>
-          {disabled
-            ? Children.toArray(children).map((child) => {
-                return cloneElement(child as React.ReactElement, { disabled });
-              })
-            : children}
+  return (
+    <div className={classNames}>
+      <div className={`${prefix}--time-picker--fluid__wrapper`}>
+        <div className={`${prefix}--time-picker__input`}>
+          <FluidTextInput id="" disabled={disabled} ref={ref} {...other} />
         </div>
-        {error && <hr className={`${prefix}--time-picker__divider`} />}
-        {error && (
-          <div className={`${prefix}--form-requirement`}>{errorText()}</div>
-        )}
-        {error && invalid ? (
-          <WarningFilled
-            className={`${prefix}--time-picker__icon ${prefix}--time-picker__icon--invalid`}
-          />
-        ) : (
-          <WarningAltFilled
-            className={`${prefix}--time-picker__icon ${prefix}--time-picker__icon--warn`}
-          />
-        )}
+        {disabled
+          ? React.Children.toArray(children).map((child) => {
+              return React.cloneElement(child as React.ReactElement, {
+                disabled,
+              });
+            })
+          : children}
       </div>
-    );
-  }
-);
+      {error && <hr className={`${prefix}--time-picker__divider`} />}
+      {error && (
+        <div className={`${prefix}--form-requirement`}>{errorText()}</div>
+      )}
+      {error && invalid ? (
+        <WarningFilled
+          className={`${prefix}--time-picker__icon ${prefix}--time-picker__icon--invalid`}
+        />
+      ) : (
+        <WarningAltFilled
+          className={`${prefix}--time-picker__icon ${prefix}--time-picker__icon--warn`}
+        />
+      )}
+    </div>
+  );
+});
 
 FluidTimePicker.propTypes = {
   /**
