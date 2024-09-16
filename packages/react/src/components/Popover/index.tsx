@@ -180,9 +180,8 @@ export const Popover: PopoverComponent = React.forwardRef(
     const floating = useRef<HTMLSpanElement>(null);
     const caretRef = useRef<HTMLSpanElement>(null);
     const popover = useRef<Element>(null);
-    const enableFloatingStyles = useFeatureFlag(
-      'enable-v12-dynamically-set-floating-styles'
-    );
+    const enableFloatingStyles =
+      useFeatureFlag('enable-v12-dynamically-set-floating-styles') || autoAlign;
 
     let align = mapPopoverAlignProp(initialAlign);
 
@@ -293,7 +292,7 @@ export const Popover: PopoverComponent = React.forwardRef(
     }
 
     useEffect(() => {
-      if (enableFloatingStyles || autoAlign) {
+      if (enableFloatingStyles) {
         const updatedFloatingStyles = {
           ...floatingStyles,
           visibility: middlewareData.hide?.referenceHidden
@@ -353,7 +352,8 @@ export const Popover: PopoverComponent = React.forwardRef(
         [`${prefix}--popover--drop-shadow`]: dropShadow,
         [`${prefix}--popover--high-contrast`]: highContrast,
         [`${prefix}--popover--open`]: open,
-        [`${prefix}--popover--auto-align ${prefix}--autoalign`]: autoAlign,
+        [`${prefix}--popover--auto-align ${prefix}--autoalign`]:
+          enableFloatingStyles,
         [`${prefix}--popover--${currentAlignment}`]: true,
         [`${prefix}--popover--tab-tip`]: isTabTip,
       },
@@ -373,9 +373,11 @@ export const Popover: PopoverComponent = React.forwardRef(
        */
       const isTriggerElement = item?.type === 'button';
       const isTriggerComponent =
-        autoAlign && displayName && ['ToggletipButton'].includes(displayName);
+        enableFloatingStyles &&
+        displayName &&
+        ['ToggletipButton'].includes(displayName);
       const isAllowedTriggerComponent =
-        autoAlign &&
+        enableFloatingStyles &&
         displayName &&
         !['ToggletipContent', 'PopoverContent'].includes(displayName);
 
@@ -409,9 +411,9 @@ export const Popover: PopoverComponent = React.forwardRef(
             // In either of these caes we want to set this as the reference node for floating-ui autoAlign
             // positioning.
             if (
-              (autoAlign &&
+              (enableFloatingStyles &&
                 (item?.type as any)?.displayName !== 'PopoverContent') ||
-              (autoAlign &&
+              (enableFloatingStyles &&
                 (item?.type as any)?.displayName === 'ToggletipButton')
             ) {
               // Set the reference element for floating-ui
@@ -436,7 +438,7 @@ export const Popover: PopoverComponent = React.forwardRef(
     return (
       <PopoverContext.Provider value={value}>
         <BaseComponentAsAny {...rest} className={className} ref={ref}>
-          {autoAlign || isTabTip ? mappedChildren : children}
+          {enableFloatingStyles || isTabTip ? mappedChildren : children}
         </BaseComponentAsAny>
       </PopoverContext.Provider>
     );
@@ -564,12 +566,14 @@ function PopoverContentRenderFunction(
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
   const ref = useMergedRefs([setFloating, forwardRef]);
+  const enableFloatingStyles =
+    useFeatureFlag('enable-v12-dynamically-set-floating-styles') || autoAlign;
 
   return (
     <span {...rest} className={`${prefix}--popover`}>
       <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
-        {autoAlign && (
+        {enableFloatingStyles && (
           <span
             className={cx({
               [`${prefix}--popover-caret`]: true,
@@ -579,7 +583,7 @@ function PopoverContentRenderFunction(
           />
         )}
       </span>
-      {!autoAlign && (
+      {!enableFloatingStyles && (
         <span
           className={cx({
             [`${prefix}--popover-caret`]: true,

@@ -6,14 +6,14 @@
  */
 
 import React from 'react';
-import { default as Dropdown } from '../Dropdown';
+import { default as Dropdown } from '.';
 import { action } from '@storybook/addon-actions';
-import mdx from './Popover.featureflag.mdx';
+import mdx from '../Popover/Popover.featureflag.mdx';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
 // eslint-disable-next-line storybook/csf-component
 export default {
-  title: 'Experimental/Feature Flags/Dynamic floating styles',
+  title: 'Experimental/Feature Flags/Dynamic floating styles/Dropdown',
   component: Dropdown,
   parameters: {
     docs: {
