@@ -718,13 +718,11 @@ const ComboBox = forwardRef(
         return itemToString(item);
       },
       onInputValueChange({ inputValue }) {
-        if (inputValue === null) {
-          setInputValue('');
-          setCursorPosition(0);
-        } else {
-          setInputValue(inputValue as any);
-          setCursorPosition(inputValue?.length as any);
-        }
+        const normalizedInput = inputValue || '';
+
+        setInputValue(normalizedInput);
+        setHighlightedIndex(indexToHighlight(normalizedInput));
+        setCursorPosition(inputValue === null ? 0 : normalizedInput.length);
       },
       onSelectedItemChange({ selectedItem }) {
         onChange({ selectedItem });
@@ -960,6 +958,7 @@ const ComboBox = forwardRef(
                     }
                   }
                   if (autocomplete && event.key === 'Tab') {
+                    //  event.preventDefault();
                     const matchingItem = items.find((item) =>
                       itemToString(item)
                         .toLowerCase()

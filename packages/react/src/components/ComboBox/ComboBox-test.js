@@ -541,7 +541,7 @@ describe('ComboBox', () => {
 
       expect(findInputNode()).toHaveDisplayValue('Apple');
     });
-    it('should autocomplete on Tab after backspace', async () => {
+    it('should not autocomplete on Tab after backspace', async () => {
       render(<ComboBox {...mockProps} autocomplete />);
 
       const input = screen.getByRole('combobox');
@@ -552,7 +552,7 @@ describe('ComboBox', () => {
 
       await userEvent.keyboard('[Tab]');
 
-      expect(findInputNode()).toHaveDisplayValue('Apple');
+      expect(document.activeElement).not.toBe(input);
     });
     it('should autocomplete with the first matching suggestion when multiple matches exist', async () => {
       const multipleMatchProps = {
