@@ -90,6 +90,12 @@ describe('ComboBox', () => {
     });
   });
 
+  it('should call `onChange` on a fully controlled component', async () => {
+    render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
+    await userEvent.click(screen.getAllByRole('button')[0]);
+    expect(mockProps.onChange).toHaveBeenCalled();
+  });
+
   it('should select the correct item from the filtered list after text input on click', async () => {
     const user = userEvent.setup();
 
@@ -206,6 +212,13 @@ describe('ComboBox', () => {
     expect(findInputNode()).toHaveDisplayValue('Apple');
     // Should retain value on blur
     await userEvent.keyboard('[Tab]');
+    expect(findInputNode()).toHaveDisplayValue('Apple');
+  });
+
+  it('should handle InputBlur with allowCustomValue', async () => {
+    render(<ComboBox {...mockProps} allowCustomValue />);
+    await userEvent.type(findInputNode(), 'Apple');
+    fireEvent.blur(findInputNode());
     expect(findInputNode()).toHaveDisplayValue('Apple');
   });
 
