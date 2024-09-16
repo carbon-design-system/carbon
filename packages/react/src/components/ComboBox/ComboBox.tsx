@@ -959,11 +959,18 @@ const ComboBox = forwardRef(
                       toggleMenu();
                     }
                   }
-                  if (autocomplete && typeaheadText && event.key === 'Tab') {
-                    event.preventDefault();
-                    const newValue = inputValue + typeaheadText;
-                    downshiftSetInputValue(newValue);
-                    setCursorPosition(newValue.length);
+                  if (autocomplete && event.key === 'Tab') {
+                    const matchingItem = items.find((item) =>
+                      itemToString(item)
+                        .toLowerCase()
+                        .startsWith(inputValue.toLowerCase())
+                    );
+                    if (matchingItem) {
+                      const newValue = itemToString(matchingItem);
+                      downshiftSetInputValue(newValue);
+                      setCursorPosition(newValue.length);
+                      selectItem(matchingItem);
+                    }
                   }
                 },
               })}
