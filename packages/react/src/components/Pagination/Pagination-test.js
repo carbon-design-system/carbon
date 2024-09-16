@@ -222,6 +222,11 @@ describe('Pagination', () => {
       ).not.toBeInTheDocument();
     });
 
+    it('Next button should be enabled if totalItems undefined and pagesUnknown is true', () => {
+      render(<Pagination pagesUnknown={true} pageSizes={[10]} />);
+      expect(screen.getByLabelText('Next page')).not.toBeDisabled();
+    });
+
     it('should handle zero total items', () => {
       render(
         <Pagination
@@ -231,7 +236,7 @@ describe('Pagination', () => {
           page={1}
         />
       );
-
+      expect(screen.getByLabelText('Next page')).toBeDisabled();
       expect(screen.getByText('0–0 of 0 items')).toBeInTheDocument();
     });
   });

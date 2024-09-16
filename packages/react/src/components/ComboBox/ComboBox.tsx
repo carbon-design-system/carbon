@@ -57,6 +57,7 @@ const {
   InputKeyDownArrowUp,
   InputKeyDownArrowDown,
   MenuMouseLeave,
+  FunctionSelectItem,
 } = useCombobox.stateChangeTypes;
 
 const defaultItemToString = <ItemType,>(item: ItemType | null) => {
@@ -528,6 +529,16 @@ const ComboBox = forwardRef(
             }
             return changes;
           }
+
+          case FunctionSelectItem:
+            if (onChange) {
+              onChange({
+                selectedItem: changes.selectedItem,
+                inputValue: changes.inputValue,
+              });
+            }
+            return changes;
+
           case InputKeyDownEnter:
             if (allowCustomValue) {
               setInputValue(inputValue);
@@ -595,6 +606,7 @@ const ComboBox = forwardRef(
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--combo-box--warning`]: showWarning,
       [`${prefix}--combo-box--readonly`]: readOnly,
+      [`${prefix}--autoalign`]: autoAlign,
     });
 
     const titleClasses = cx(`${prefix}--label`, {
