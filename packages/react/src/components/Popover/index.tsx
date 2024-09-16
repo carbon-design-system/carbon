@@ -245,7 +245,7 @@ export const Popover: PopoverComponent = React.forwardRef(
     });
 
     const { refs, floatingStyles, placement, middlewareData } = useFloating(
-      enableFloatingStyles || autoAlign
+      enableFloatingStyles
         ? {
             placement: align,
 
@@ -336,7 +336,7 @@ export const Popover: PopoverComponent = React.forwardRef(
     }, [
       floatingStyles,
       refs.floating,
-      autoAlign,
+      enableFloatingStyles,
       middlewareData,
       placement,
       caret,
