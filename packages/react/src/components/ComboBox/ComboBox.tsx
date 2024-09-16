@@ -586,6 +586,12 @@ const ComboBox = forwardRef(
         if (onToggleClick) {
           onToggleClick(event);
         }
+        if (readOnly) {
+          // Prevent the list from opening if readOnly is true
+          event.preventDownshiftDefault = true;
+          event?.persist?.();
+          return;
+        }
 
         if (event.target === textInput.current && isOpen) {
           event.preventDownshiftDefault = true;
@@ -749,6 +755,15 @@ const ComboBox = forwardRef(
               evt.preventDefault();
             }
           },
+          onClick: (evt: MouseEvent<HTMLInputElement>) => {
+            // Prevent the default behavior which would open the list
+            evt.preventDefault();
+            // Focus on the element as per readonly input behavior
+            evt.currentTarget.focus();
+          },
+          onFocus: (evt: FocusEvent<HTMLInputElement>) => {
+            evt.target.blur(); // Immediately remove focus when received
+          },
         }
       : {};
 
@@ -878,6 +893,13 @@ const ComboBox = forwardRef(
                     if (isOpen) {
                       toggleMenu();
                     }
+                  }
+                  if (readOnly) {
+                    // Prevent default behavior for all keys except Tab when readOnly
+                    if (event.key !== 'Tab') {
+                      event.preventDefault();
+                    }
+                    return;
                   }
                 },
               })}
