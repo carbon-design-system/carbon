@@ -10,13 +10,13 @@ import classnames from 'classnames';
 import DatePicker from '../DatePicker';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
-import { ReactNode } from 'react';
+import React from 'react';
 
 export interface FluidDatePickerProps {
   /**
    * The child node(s)
    */
-  children?: ReactNode;
+  children?: React.ReactNode;
   /**
    * Specify an optional className to be applied to the outer FluidForm wrapper
    */
