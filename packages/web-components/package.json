@@ -79,6 +79,8 @@
   "devDependencies": {
     "@carbon/icon-helpers": "10.47.0",
     "@carbon/icons": "^11.31.0",
+    "@carbon/layout": "^11.26.0",
+    "@carbon/motion": "^11.22.0",
     "@juggle/resize-observer": "^3.4.0",
     "@mordech/vite-lit-loader": "^0.31.3",
     "@rollup/plugin-alias": "^5.1.0",

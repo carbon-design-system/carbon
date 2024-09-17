@@ -6,9 +6,8 @@
   "license": "Apache-2",
   "main": "index.html",
   "scripts": {
-    "build": "parcel build *.html --no-minify --public-url ./",
     "clean": "rimraf node_modules dist .cache",
-    "start": "parcel index.html --port=9000 --no-hmr"
+    "dev": "vite"
   },
   "dependencies": {
     "@carbon/styles": "^1.51.0",
@@ -16,10 +15,7 @@
     "sass": "^1.64.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-0",
-    "@babel/plugin-transform-runtime": "^7.23.9",
-    "@babel/preset-env": "^7.23.9",
-    "parcel-bundler": "1.12.3",
+    "vite": "5.2.13",
     "rimraf": "^3.0.2"
   }
 }
