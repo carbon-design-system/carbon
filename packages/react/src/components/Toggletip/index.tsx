@@ -331,10 +331,10 @@ interface ToggletipContentProps {
  * `children` passed in as a prop inside of `PopoverContent` so that they will
  * be rendered inside of the popover for this component.
  */
-export function ToggletipContent({
-  children,
-  className: customClassName,
-}: ToggletipContentProps) {
+export const ToggletipContent = React.forwardRef<
+  HTMLDivElement,
+  ToggletipContentProps
+>(function ToggletipContent({ children, className: customClassName }, ref) {
   const toggletip = useToggletip();
   const prefix = usePrefix();
   return (
@@ -342,8 +342,7 @@ export function ToggletipContent({
       <div className={`${prefix}--toggletip-content`}>{children}</div>
     </PopoverContent>
   );
-}
-
+});
 ToggletipContent.propTypes = {
   /**
    * Custom children to be rendered as the content of the label
@@ -387,3 +386,5 @@ ToggletipActions.propTypes = {
    */
   className: PropTypes.string,
 };
+
+// export default ToggletipContent;
