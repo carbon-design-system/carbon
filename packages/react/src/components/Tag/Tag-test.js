@@ -66,11 +66,21 @@ describe('Tag', () => {
     ).toBeInTheDocument();
   });
 
-  it('should render a skeleton state', () => {
-    const { container } = render(<TagSkeleton />);
+  describe('Skeleton Tag', () => {
+    it('should render a skeleton state', () => {
+      const { container } = render(<TagSkeleton />);
 
-    const selectWrapper = container.querySelector(`.${prefix}--tag`);
+      const selectWrapper = container.querySelector(`.${prefix}--tag`);
 
-    expect(selectWrapper).toHaveClass(`${prefix}--skeleton`);
+      expect(selectWrapper).toHaveClass(`${prefix}--skeleton`);
+    });
+
+    it('should render a skeleton state with a small size', () => {
+      const { container } = render(<TagSkeleton size="sm" />);
+
+      const selectWrapper = container.querySelector(`.${prefix}--tag`);
+
+      expect(selectWrapper).toHaveClass(`${prefix}--layout--size-sm`);
+    });
   });
 });
