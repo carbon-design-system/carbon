@@ -7,11 +7,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import FluidTextInput from '../FluidTextInput';
+import FluidTextInput, { FluidTextInputProps } from '../FluidTextInput';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
-export interface FluidTimePickerProps {
+export interface FluidTimePickerProps extends FluidTextInputProps {
   /**
    * The child node(s)
    */
@@ -96,7 +96,7 @@ const FluidTimePicker = React.forwardRef<
     <div className={classNames}>
       <div className={`${prefix}--time-picker--fluid__wrapper`}>
         <div className={`${prefix}--time-picker__input`}>
-          <FluidTextInput id="" disabled={disabled} ref={ref} {...other} />
+          <FluidTextInput ref={ref} {...other} />
         </div>
         {disabled
           ? React.Children.toArray(children).map((child) => {
