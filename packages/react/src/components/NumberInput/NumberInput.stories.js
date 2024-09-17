@@ -81,30 +81,61 @@ export const withAILabel = () => (
     />
   </div>
 );
+export const Skeleton = () => <NumberInputSkeleton />;
+export const Playground = ({ ...args }) => {
+  const [value, setValue] = React.useState(50);
 
-export const Playground = (args) => {
-  // const { numberInputArrowTranslationIds, ...rest } = props();
+  const handleChange = (event, { value }) => {
+    setValue(value);
+  };
+
   return (
     <NumberInput
-      id="carbon-number"
+      id="playground-number-input"
       min={-100}
       max={100}
-      value={50}
+      value={value}
       label="NumberInput label"
       helperText="Optional helper text."
-      invalidText="Number is not valid"
+      onChange={handleChange}
       {...args}
     />
   );
 };
 
 Playground.args = {
+  step: 1,
+  disabled: false,
+  invalid: false,
+  invalidText: 'Number is not valid',
+  helperText: 'Optional helper text.',
+  warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  size: 'md',
 };
 
 Playground.argTypes = {
   className: {
+    table: {
+      disable: true,
+    },
+  },
+  min: { control: { type: 'number' } },
+  max: { control: { type: 'number' } },
+  step: { control: { type: 'number' } },
+  disabled: { control: { type: 'boolean' } },
+  invalid: { control: { type: 'boolean' } },
+  invalidText: { control: { type: 'text' } },
+  warn: { control: { type: 'boolean' } },
+  warnText: { control: { type: 'text' } },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
+  label: { control: { type: 'text' } },
+  helperText: { control: { type: 'text' } },
+  id: {
     table: {
       disable: true,
     },
@@ -114,47 +145,14 @@ Playground.argTypes = {
       disable: true,
     },
   },
-  helperText: {
-    control: { type: 'text' },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  invalidText: {
-    control: { type: 'text' },
-  },
-  label: {
-    control: { type: 'text' },
-  },
   light: {
     table: {
       disable: true,
     },
-  },
-  onChange: {
-    action: 'onChange',
-  },
-  onClick: {
-    action: 'onClick',
-  },
-  onKeyUp: {
-    action: 'onKeyUp',
   },
   translateWithId: {
     table: {
       disable: true,
     },
   },
-  value: {
-    control: { type: 'text' },
-  },
-  warnText: {
-    control: {
-      type: 'text',
-    },
-  },
 };
-
-export const Skeleton = () => <NumberInputSkeleton />;
