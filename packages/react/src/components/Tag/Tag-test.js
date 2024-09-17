@@ -6,11 +6,13 @@
  */
 
 import { Add } from '@carbon/icons-react';
-import { render, screen } from '@testing-library/react';
+import { getByRole, render, screen } from '@testing-library/react';
 import React from 'react';
-import Tag, { TagSkeleton } from './';
+import Tag, { SelectableTag, TagSkeleton } from './';
 import DismissibleTag from './DismissibleTag';
 import { AILabel } from '../AILabel';
+import { waitForPosition } from '../ListBox/test-helpers';
+import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
 
@@ -64,6 +66,37 @@ describe('Tag', () => {
     expect(
       screen.getByRole('button', { name: 'AI - Show information' })
     ).toBeInTheDocument();
+  });
+
+  describe('Selectable Tag', () => {
+    it('should render a selectable tag', () => {
+      const { container } = render(<SelectableTag text="Tag content" />);
+
+      const selectableTag = container.querySelector(
+        `.${prefix}--tag--selectable`
+      );
+
+      expect(selectableTag).toHaveClass(`${prefix}--tag--selectable`);
+    });
+
+    it('should render a selectable tag', async () => {
+      const { container } = render(<SelectableTag text="Tag content" />);
+
+      const selectableTag = container.querySelector(
+        `.${prefix}--tag--selectable`
+      );
+
+      await userEvent.click(selectableTag);
+      expect(selectableTag).toHaveAttribute('aria-pressed', 'true');
+      expect(selectableTag).toHaveClass(`${prefix}--tag--selectable-selected`);
+    });
+
+    it('should respect slug prop', () => {
+      render(<SelectableTag as="div" text="Tag content" slug={<AILabel />} />);
+      expect(
+        screen.getByRole('button', { name: 'AI - Show information' })
+      ).toBeInTheDocument();
+    });
   });
 
   describe('Skeleton Tag', () => {

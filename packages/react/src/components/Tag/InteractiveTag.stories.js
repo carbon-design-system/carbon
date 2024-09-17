@@ -16,6 +16,7 @@ import mdx from './InteractiveTag.mdx';
 import './storyInteractiveTag.scss';
 import { Text } from '../Text';
 import Button from '../Button';
+import { AILabel } from '../AILabel';
 
 export default {
   title: 'Experimental/unstable__InteractiveTag',
