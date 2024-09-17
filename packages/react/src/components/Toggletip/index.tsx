@@ -386,5 +386,3 @@ ToggletipActions.propTypes = {
    */
   className: PropTypes.string,
 };
-
-// export default ToggletipContent;
