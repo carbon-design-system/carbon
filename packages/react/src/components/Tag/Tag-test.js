@@ -70,17 +70,17 @@ describe('Tag', () => {
     it('should render a skeleton state', () => {
       const { container } = render(<TagSkeleton />);
 
-      const selectWrapper = container.querySelector(`.${prefix}--tag`);
+      const skeletonTag = container.querySelector(`.${prefix}--tag`);
 
-      expect(selectWrapper).toHaveClass(`${prefix}--skeleton`);
+      expect(skeletonTag).toHaveClass(`${prefix}--skeleton`);
     });
 
     it('should render a skeleton state with a small size', () => {
       const { container } = render(<TagSkeleton size="sm" />);
 
-      const selectWrapper = container.querySelector(`.${prefix}--tag`);
+      const skeletonTag = container.querySelector(`.${prefix}--tag`);
 
-      expect(selectWrapper).toHaveClass(`${prefix}--layout--size-sm`);
+      expect(skeletonTag).toHaveClass(`${prefix}--layout--size-sm`);
     });
   });
 });
