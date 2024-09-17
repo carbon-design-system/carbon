@@ -6,7 +6,7 @@
  */
 
 import FluidDatePicker from './FluidDatePicker';
-import { FluidDatePickerProps } from './FluidDatePicker';
+import type { FluidDatePickerProps } from './FluidDatePicker';
 import { FluidDatePickerSkeletonProps } from './FluidDatePicker.Skeleton';
 export type { FluidDatePickerProps, FluidDatePickerSkeletonProps };
 export { default as FluidDatePickerSkeleton } from './FluidDatePicker.Skeleton';
