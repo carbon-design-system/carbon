@@ -102,12 +102,6 @@ describe('ComboBox', () => {
     });
   });
 
-  it('should call `onChange` on a fully controlled component', async () => {
-    render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
-    await userEvent.click(screen.getAllByRole('button')[0]);
-    expect(mockProps.onChange).toHaveBeenCalled();
-  });
-
   it('should select the correct item from the filtered list after text input on click', async () => {
     const user = userEvent.setup();
 
@@ -300,7 +294,17 @@ describe('ComboBox', () => {
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
     });
-    it('should call `onChange` when selection is cleared and `selectedItem` is provided', async () => {
+    it('should call `onChange` when selection is updated', async () => {
+      render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+      await openMenu();
+      await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
+      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+      expect(
+        screen.getByRole('combobox', { value: 'Item 2' })
+      ).toBeInTheDocument();
+    });
+    it('should call `onChange` when selection is cleared', async () => {
       render(<ComboBox {...mockProps} selectedItem={mockProps.items[1]} />);
       expect(mockProps.onChange).not.toHaveBeenCalled();
       await userEvent.click(

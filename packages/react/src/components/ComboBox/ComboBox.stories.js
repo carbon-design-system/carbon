@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
@@ -213,6 +213,42 @@ export const withAILabel = () => (
     />
   </div>
 );
+
+export const _fullyControlled = () => {
+  const options = [
+    {
+      id: 'option-1',
+      text: 'Option 1',
+    },
+    {
+      id: 'option-2',
+      text: 'Option 2',
+    },
+    {
+      id: 'option-3',
+      text: 'Option 3',
+    },
+  ];
+  const [value, setValue] = useState(options[0]);
+  const onChange = ({ selectedItem }) => {
+    setValue(selectedItem);
+  };
+
+  return (
+    <div style={{ width: 300 }}>
+      <ComboBox
+        onChange={onChange}
+        id="carbon-combobox"
+        items={options}
+        selectedItem={value}
+        itemToString={(item) => (item ? item.text : '')}
+        titleText="Fully Controlled ComboBox title"
+        helperText="Combobox helper text"
+      />
+      <Button onClick={() => setValue(null)}>Reset</Button>
+    </div>
+  );
+};
 
 export const Playground = (args) => (
   <div style={{ width: 300 }}>
