@@ -19,6 +19,17 @@ $css--plex: true !default;
   @extend .#{$prefix}--checkbox-wrapper;
 }
 
+// RTL overrides
+:host(#{$prefix}-checkbox:dir(rtl)) {
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
+    margin-block-start: 0;
+    margin-inline-start: to-rem(-1px);
+    transform: scale(1.2) rotate3d(0.5, 1, 0, 158deg);
+    transform-origin: center;
+  }
+}
+
 :host(#{$prefix}-checkbox[readonly]) {
   @extend .#{$prefix}--checkbox-wrapper--readonly;
 }
