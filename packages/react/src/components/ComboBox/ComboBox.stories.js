@@ -138,12 +138,12 @@ export const AutocompleteWithTypeahead = (args) => {
     <div style={{ width: 300 }}>
       <ComboBox
         allowCustomValue
-        autocomplete
         onChange={args.onChange}
+        helperText="Combobox helper text"
         id="carbon-combobox"
         items={['Apple', 'Orange', 'Banana', 'Pineapple', 'Raspberry', 'Lime']}
         titleText="ComboBox title"
-        helperText="Combobox helper text"
+        typeahead
       />
     </div>
   );

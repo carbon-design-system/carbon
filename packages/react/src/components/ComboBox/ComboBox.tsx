@@ -193,11 +193,6 @@ export interface ComboBoxProps<ItemType>
   autoAlign?: boolean;
 
   /**
-   * **Experimental**: will enable autcomplete and typeahead for the input field
-   */
-  autocomplete?: boolean;
-
-  /**
    * An optional className to add to the container node
    */
   className?: string;
@@ -333,6 +328,7 @@ export interface ComboBoxProps<ItemType>
    * Specify your own filtering logic by passing in a `shouldFilterItem`
    * function that takes in the current input and an item and passes back
    * whether or not the item should be filtered.
+   * this prop will be ignored if `typeahead` prop is enabled
    */
   shouldFilterItem?: (input: {
     item: ItemType;
@@ -355,6 +351,11 @@ export interface ComboBoxProps<ItemType>
    * combobox via ARIA attributes.
    */
   titleText?: ReactNode;
+
+  /**
+   * **Experimental**: will enable autcomplete and typeahead for the input field
+   */
+  typeahead?: boolean;
 
   /**
    * Specify whether the control is currently in warning state
@@ -380,7 +381,6 @@ const ComboBox = forwardRef(
       ['aria-label']: ariaLabel = 'Choose an item',
       ariaLabel: deprecatedAriaLabel,
       autoAlign = false,
-      autocomplete = false,
       className: containerClassName,
       direction = 'bottom',
       disabled = false,
@@ -405,6 +405,7 @@ const ComboBox = forwardRef(
       size,
       titleText,
       translateWithId,
+      typeahead = false,
       warn,
       warnText,
       allowCustomValue = false,
@@ -454,35 +455,30 @@ const ComboBox = forwardRef(
     const [typeaheadText, setTypeaheadText] = useState('');
 
     useEffect(() => {
-      const getTypeaheadSuggestion = (input: string) => {
-        if (!autocomplete || !input) {
-          return '';
-        }
-
-        const filteredItems = items.filter((item) =>
-          autocompleteCustomFilter({
-            item: itemToString(item),
-            inputValue: input,
-          })
-        );
-
-        if (filteredItems.length > 0) {
-          const suggestion = itemToString(filteredItems[0]);
-          return suggestion.slice(input.length);
-        }
-        return '';
-      };
-
-      if (autocomplete) {
-        if (autocomplete && inputValue.length >= prevInputLengthRef.current) {
-          const suggestion = getTypeaheadSuggestion(inputValue);
-          setTypeaheadText(suggestion);
+      if (typeahead) {
+        if (inputValue.length >= prevInputLengthRef.current) {
+          if (inputValue) {
+            const filteredItems = items.filter((item) =>
+              autocompleteCustomFilter({
+                item: itemToString(item),
+                inputValue: inputValue,
+              })
+            );
+            if (filteredItems.length > 0) {
+              const suggestion = itemToString(filteredItems[0]);
+              setTypeaheadText(suggestion.slice(inputValue.length));
+            } else {
+              setTypeaheadText('');
+            }
+          } else {
+            setTypeaheadText('');
+          }
         } else {
           setTypeaheadText('');
         }
         prevInputLengthRef.current = inputValue.length;
       }
-    }, [inputValue, autocomplete, items, itemToString]);
+    }, [typeahead, inputValue, items, itemToString, autocompleteCustomFilter]);
 
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
@@ -513,7 +509,7 @@ const ComboBox = forwardRef(
       inputValue: string | null
     ) =>
       items.filter((item) =>
-        autocomplete
+        typeahead
           ? autocompleteCustomFilter({ item: itemToString(item), inputValue })
           : shouldFilterItem
           ? shouldFilterItem({
@@ -968,7 +964,7 @@ const ComboBox = forwardRef(
                       toggleMenu();
                     }
                   }
-                  if (autocomplete && event.key === 'Tab') {
+                  if (typeahead && event.key === 'Tab') {
                     //  event.preventDefault();
                     const matchingItem = items.find((item) =>
                       itemToString(item)
@@ -1104,11 +1100,6 @@ ComboBox.propTypes = {
    * ancestor elements.
    */
   autoAlign: PropTypes.bool,
-
-  /**
-   * **Experimental**: will enable autcomplete and typeahead for the input field
-   */
-  autocomplete: PropTypes.bool,
 
   /**
    * An optional className to add to the container node
@@ -1256,6 +1247,7 @@ ComboBox.propTypes = {
    * Specify your own filtering logic by passing in a `shouldFilterItem`
    * function that takes in the current input and an item and passes back
    * whether or not the item should be filtered.
+   * this prop will be ignored if `typeahead` prop is enabled
    */
   shouldFilterItem: PropTypes.func,
 
@@ -1280,6 +1272,11 @@ ComboBox.propTypes = {
    * and returns the localized string for the message
    */
   translateWithId: PropTypes.func,
+
+  /**
+   * **Experimental**: will enable autcomplete and typeahead for the input field
+   */
+  typeahead: PropTypes.bool,
 
   /**
    * Specify whether the control is currently in warning state

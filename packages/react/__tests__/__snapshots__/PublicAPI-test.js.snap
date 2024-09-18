@@ -1226,9 +1226,6 @@ Map {
       "autoAlign": Object {
         "type": "bool",
       },
-      "autocomplete": Object {
-        "type": "bool",
-      },
       "className": Object {
         "type": "string",
       },
@@ -1350,6 +1347,9 @@ Map {
       },
       "translateWithId": Object {
         "type": "func",
+      },
+      "typeahead": Object {
+        "type": "bool",
       },
       "warn": Object {
         "type": "bool",
