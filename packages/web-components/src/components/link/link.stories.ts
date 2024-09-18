@@ -7,14 +7,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from "lit";
-import { ifDefined } from "lit/directives/if-defined.js";
-import Download16 from "@carbon/icons/lib/download/16";
-import { LINK_SIZE } from "./link";
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import Download16 from '@carbon/icons/lib/download/16';
+import { LINK_SIZE } from './link';
 
 const defaultArgs = {
   disabled: false,
-  href: "https://example.com",
+  href: 'https://example.com',
   inline: false,
   size: LINK_SIZE.MEDIUM,
   visited: false,
@@ -22,20 +22,20 @@ const defaultArgs = {
 
 const controls = {
   disabled: {
-    control: "boolean",
+    control: 'boolean',
     description: `Specify if the control should be disabled, or not`,
   },
   href: {
-    control: "text",
+    control: 'text',
     description: `Provide the href attribute for the <a> node`,
   },
   size: {
-    control: "radio",
+    control: 'radio',
     options: [LINK_SIZE.SMALL, LINK_SIZE.MEDIUM, LINK_SIZE.LARGE],
     description: `Specify the size of the Link. Currently supports either sm, 'md' (default) or 'lg' as an option.`,
   },
   visited: {
-    control: "boolean",
+    control: 'boolean',
     description: `Specify whether you want the link to receive visited styles after the link has been clicked`,
   },
 };
@@ -76,9 +76,8 @@ export const PairedWithIcon = {
       ?disabled="${disabled}"
       href="${ifDefined(href)}"
       size="${ifDefined(size)}"
-      @click="${onClick}"
-    >
-      Download ${Download16({ slot: "icon" })}
+      @click="${onClick}">
+      Download ${Download16({ slot: 'icon' })}
     </cds-link>
   `,
 };
@@ -93,15 +92,14 @@ export const Playground = {
       size="${ifDefined(size)}"
       ?inline="${inline}"
       ?visited="${visited}"
-      @click="${onClick}"
-    >
+      @click="${onClick}">
       Link
     </cds-link>
   `,
 };
 
 const meta = {
-  title: "Components/Link",
+  title: 'Components/Link',
 };
 
 export default meta;

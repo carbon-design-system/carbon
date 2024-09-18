@@ -2,7 +2,7 @@
 
 ## `Misc attributes`
 
-####   `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <div class="cds--search-magnifier">
@@ -35,7 +35,7 @@
 
 ```
 
-####   `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <div class="cds--search-magnifier">
@@ -71,4 +71,3 @@
 </button>
 
 ```
-

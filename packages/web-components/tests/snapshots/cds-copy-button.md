@@ -2,7 +2,7 @@
 
 ## `Rendering`
 
-####   `Should render with minimum attributes`
+#### `Should render with minimum attributes`
 
 ```
 <cds-copy
@@ -16,7 +16,7 @@
 
 ```
 
-####   `Should render with various attributes`
+#### `Should render with various attributes`
 
 ```
 <cds-copy
@@ -29,4 +29,3 @@
 </cds-copy>
 
 ```
-

@@ -2,7 +2,7 @@
 
 ## `Misc attributes`
 
-####   `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <label
@@ -62,7 +62,7 @@
 
 ```
 
-####   `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <label
@@ -122,4 +122,3 @@
 </div>
 
 ```
-

@@ -2,7 +2,7 @@
 
 ## `Rendering`
 
-####   `Should render with minimum attributes`
+#### `Should render with minimum attributes`
 
 ```
 <div
@@ -27,7 +27,7 @@
 
 ```
 
-####   `Should render with various attributes`
+#### `Should render with various attributes`
 
 ```
 <div
@@ -54,4 +54,3 @@
 </div>
 
 ```
-

@@ -34,6 +34,8 @@ jobs:
         with:
           node-version: '20.x'
       - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable --immutable-cache
       - name: Check formatting of project files
         run: yarn format:diff
@@ -47,6 +49,8 @@ jobs:
         with:
           node-version: '20.x'
       - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable --immutable-cache
       - name: Lint JavaScript files
         run: yarn lint
@@ -72,6 +76,8 @@ jobs:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
       - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable --immutable-cache
       - name: Build project
         run: yarn build
@@ -79,8 +85,11 @@ jobs:
         run: |
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
       - name: Run tests
-        run: yarn test --ci
-
+        run: yarn test --ci --collectCoverage
+      - name: Upload coverage reports to Codecov with GitHub Action
+        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673 # v4.5.0
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   e2e:
     name: 'test:e2e'
     runs-on: ubuntu-latest
@@ -101,6 +110,8 @@ jobs:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
       - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable --immutable-cache
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
         id: filter
@@ -145,6 +156,8 @@ jobs:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
       - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable --immutable-cache
       - name: Install browsers
         run: yarn playwright install --with-deps
@@ -212,6 +225,8 @@ jobs:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
       - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable --immutable-cache
       - name: Install browsers
         run: yarn playwright install --with-deps
@@ -275,6 +290,8 @@ jobs:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
       - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable --immutable-cache
 
       - name: Download vrt blob reports from GitHub Actions Artifacts

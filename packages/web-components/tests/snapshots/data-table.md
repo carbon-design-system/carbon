@@ -2,9 +2,9 @@
 
 ## `cds-table-batch-action`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <div class="cds--batch-summary">
@@ -24,7 +24,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <div class="cds--batch-summary">
@@ -44,7 +44,7 @@
 
 ```
 
-####     `should render non-plural selected rows count`
+#### `should render non-plural selected rows count`
 
 ```
 <div class="cds--batch-summary">
@@ -66,9 +66,9 @@
 
 ## `cds-table-header-cell`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <span
@@ -83,7 +83,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <button
@@ -110,9 +110,9 @@
 
 ## `cds-table-row`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <slot>
@@ -120,7 +120,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <div class="cds--table-column-checkbox">
@@ -146,9 +146,9 @@
 
 ## `cds-table-toolbar-search`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <div
@@ -186,7 +186,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <div
@@ -226,9 +226,9 @@
 
 ## `cds-table-expand-row`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <div class="cds--table-expand">
@@ -239,7 +239,7 @@
 </slot>
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <div class="cds--table-expand">
@@ -271,4 +271,3 @@
 <slot>
 </slot>
 ```
-

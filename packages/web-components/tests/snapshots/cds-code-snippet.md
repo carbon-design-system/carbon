@@ -2,7 +2,7 @@
 
 ## `Rendering`
 
-####   `Should render with minimum attributes for single line mode`
+#### `Should render with minimum attributes for single line mode`
 
 ```
 <div
@@ -33,7 +33,7 @@
 
 ```
 
-####   `Should render with minimum attributes for multi line mode`
+#### `Should render with minimum attributes for multi line mode`
 
 ```
 <div
@@ -62,7 +62,7 @@
 
 ```
 
-####   `Should render with minimum attributes for inline mode`
+#### `Should render with minimum attributes for inline mode`
 
 ```
 <cds-copy button-class-name="cds--snippet cds--snippet--inline">
@@ -77,7 +77,7 @@
 
 ```
 
-####   `Should render with various attributes for single line mode`
+#### `Should render with various attributes for single line mode`
 
 ```
 <div
@@ -108,7 +108,7 @@
 
 ```
 
-####   `Should render with various attributes for multi line mode`
+#### `Should render with various attributes for multi line mode`
 
 ```
 <div
@@ -137,7 +137,7 @@
 
 ```
 
-####   `Should render with various attributes for inline mode`
+#### `Should render with various attributes for inline mode`
 
 ```
 <cds-copy button-class-name="cds--snippet cds--snippet--inline">
@@ -154,7 +154,7 @@
 
 ## `Expand/collapse button in multi line mode`
 
-####   `Should render the expando`
+#### `Should render the expando`
 
 ```
 <button
@@ -171,4 +171,3 @@
   </span>
 </button>
 ```
-

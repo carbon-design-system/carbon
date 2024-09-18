@@ -2,7 +2,7 @@
 
 ## `Misc attributes`
 
-####   `should render with minimum attributes for <button>`
+#### `should render with minimum attributes for <button>`
 
 ```
 <button
@@ -19,7 +19,7 @@
 
 ```
 
-####   `should render with various attributes for <button>`
+#### `should render with various attributes for <button>`
 
 ```
 <button
@@ -37,7 +37,7 @@
 
 ```
 
-####   `should render with minimum attributes for <a>`
+#### `should render with minimum attributes for <a>`
 
 ```
 <a
@@ -56,7 +56,7 @@
 
 ```
 
-####   `should render with various attributes for <a>`
+#### `should render with various attributes for <a>`
 
 ```
 <a
@@ -75,7 +75,7 @@
 
 ```
 
-####   `should render disabled state for <a>`
+#### `should render disabled state for <a>`
 
 ```
 <p
@@ -90,4 +90,3 @@
 </p>
 
 ```
-

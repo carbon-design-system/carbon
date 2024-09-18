@@ -7,25 +7,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from "lit";
+import { html } from 'lit';
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Fade16 from "@carbon/icons/lib/fade/16";
-import Search20 from "@carbon/icons/lib/search/20";
-import Notification20 from "@carbon/icons/lib/notification/20";
-import SwitcherIcon20 from "@carbon/icons/lib/switcher/20";
-import contentStyles from "@carbon/styles/scss/components/ui-shell/content/_content.scss?lit";
-import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from "./side-nav";
-import { classMap } from "lit/directives/class-map.js";
-import "./index";
-import "../skip-to-content";
-import "../modal/modal";
-import "../button/button";
-import styles from "./ui-shell-story.scss?lit";
-import { prefix } from "../../globals/settings";
+import Fade16 from '@carbon/icons/lib/fade/16';
+import Search20 from '@carbon/icons/lib/search/20';
+import Notification20 from '@carbon/icons/lib/notification/20';
+import SwitcherIcon20 from '@carbon/icons/lib/switcher/20';
+import contentStyles from '@carbon/styles/scss/components/ui-shell/content/_content.scss?lit';
+import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from './side-nav';
+import { classMap } from 'lit/directives/class-map.js';
+import './index';
+import '../skip-to-content';
+import '../modal/modal';
+import '../button/button';
+import styles from './ui-shell-story.scss?lit';
+import { prefix } from '../../globals/settings';
 
-const linksHref = "https://www.carbondesignsystem.com/";
+const linksHref = 'https://www.carbondesignsystem.com/';
 
 const StoryContent = ({ useResponsiveOffset = true }) => {
   const firstColumnClasses = classMap({
@@ -33,7 +33,7 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
     [`${prefix}--offset-lg-3`]: useResponsiveOffset,
   });
   const toggleButton = () => {
-    document.querySelector("cds-modal")?.toggleAttribute("open");
+    document.querySelector('cds-modal')?.toggleAttribute('open');
   };
   return html`
     <style type="text/css">
@@ -44,8 +44,7 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
         <div class="${prefix}--row">
           <div
             class="${firstColumnClasses}"
-            style="${!useResponsiveOffset ? `margin-left: 16rem;` : ""}"
-          >
+            style="${!useResponsiveOffset ? `margin-left: 16rem;` : ''}">
             <h2 style="margin: 0 0 30px">Purpose and function</h2>
             <p>
               The shell is perhaps the most crucial piece of any UI built with
@@ -121,7 +120,7 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
 };
 
 export const FixedSideNav = {
-  name: "Fixed SideNav",
+  name: 'Fixed SideNav',
   render: () => {
     const result = html`
       <style>
@@ -132,8 +131,7 @@ export const FixedSideNav = {
         usage-mode="${SIDE_NAV_USAGE_MODE.REGULAR}"
         aria-label="Side navigation"
         collapse-mode="${SIDE_NAV_COLLAPSE_MODE.FIXED}"
-        expanded
-      >
+        expanded>
         <cds-side-nav-items>
           <cds-side-nav-menu title="L0 menu">
             <cds-side-nav-menu-item href="${linksHref}">
@@ -153,8 +151,7 @@ export const FixedSideNav = {
             <cds-side-nav-menu-item
               active
               aria-current="page"
-              href="${linksHref}"
-            >
+              href="${linksHref}">
               L0 menu item
             </cds-side-nav-menu-item>
             <cds-side-nav-menu-item href="${linksHref}">
@@ -188,7 +185,7 @@ export const FixedSideNav = {
 };
 
 export const FixedSideNavDivider = {
-  name: "Fixed SideNav w/Divider",
+  name: 'Fixed SideNav w/Divider',
   render: () => {
     const result = html`
       <style>
@@ -198,8 +195,7 @@ export const FixedSideNavDivider = {
         is-not-child-of-header
         aria-label="Side navigation"
         collapse-mode="${SIDE_NAV_COLLAPSE_MODE.FIXED}"
-        expanded
-      >
+        expanded>
         <cds-side-nav-items>
           <cds-side-nav-menu title="L0 menu">
             <cds-side-nav-menu-item href="${linksHref}">
@@ -219,8 +215,7 @@ export const FixedSideNavDivider = {
             <cds-side-nav-menu-item
               active
               aria-current="page"
-              href="${linksHref}"
-            >
+              href="${linksHref}">
               L0 menu item
             </cds-side-nav-menu-item>
             <cds-side-nav-menu-item href="${linksHref}">
@@ -255,7 +250,7 @@ export const FixedSideNavDivider = {
 };
 
 export const FixedSideNavIcons = {
-  name: "Fixed SideNav w/ Icons",
+  name: 'Fixed SideNav w/ Icons',
   render: () => {
     const result = html`
       <style>
@@ -265,11 +260,10 @@ export const FixedSideNavIcons = {
         is-not-child-of-header
         aria-label="Side navigation"
         collapse-mode="${SIDE_NAV_COLLAPSE_MODE.FIXED}"
-        expanded
-      >
+        expanded>
         <cds-side-nav-items>
           <cds-side-nav-menu title="Category title">
-            ${Fade16({ slot: "title-icon" })}
+            ${Fade16({ slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
@@ -281,15 +275,14 @@ export const FixedSideNavIcons = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-menu title="Category title">
-            ${Fade16({ slot: "title-icon" })}
+            ${Fade16({ slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
             <cds-side-nav-menu-item
               active
               aria-current="page"
-              href="${linksHref}"
-            >
+              href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
             <cds-side-nav-menu-item href="${linksHref}">
@@ -297,7 +290,7 @@ export const FixedSideNavIcons = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-menu title="Category title">
-            ${Fade16({ slot: "title-icon" })}
+            ${Fade16({ slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
@@ -309,10 +302,10 @@ export const FixedSideNavIcons = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-link href="javascript:void(0)"
-            >${Fade16({ slot: "title-icon" })}Link</cds-side-nav-link
+            >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
           >
           <cds-side-nav-link href="javascript:void(0)"
-            >${Fade16({ slot: "title-icon" })}Link</cds-side-nav-link
+            >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
           >
         </cds-side-nav-items>
       </cds-side-nav>
@@ -336,7 +329,7 @@ export const HeaderBase = {
 };
 
 export const HeaderBaseWActions = {
-  name: "Header Base w/ Actions",
+  name: 'Header Base w/ Actions',
   render: () =>
     html` <style>
         ${styles}
@@ -347,27 +340,25 @@ export const HeaderBaseWActions = {
         >
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: "icon" })}
+            ${Search20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="Notification"
-            tooltip-text="Notification"
-          >
-            ${Notification20({ slot: "icon" })}
+            tooltip-text="Notification">
+            ${Notification20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"
-            tooltip-alignment="right"
-          >
-            ${SwitcherIcon20({ slot: "icon" })}
+            tooltip-alignment="right">
+            ${SwitcherIcon20({ slot: 'icon' })}
           </cds-header-global-action>
         </div>
       </cds-header>`,
 };
 
 export const HeaderBaseWActionsRightPanel = {
-  name: "Header Base w/ Actions and Right Panel",
+  name: 'Header Base w/ Actions and Right Panel',
   render: () =>
     html` <style>
         ${styles}
@@ -378,33 +369,30 @@ export const HeaderBaseWActionsRightPanel = {
         >
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: "icon" })}
+            ${Search20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             panel-id="notification-panel"
             aria-label="Notification"
-            tooltip-text="Notification"
-          >
-            ${Notification20({ slot: "icon" })}
+            tooltip-text="Notification">
+            ${Notification20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"
-            tooltip-alignment="right"
-          >
-            ${SwitcherIcon20({ slot: "icon" })}
+            tooltip-alignment="right">
+            ${SwitcherIcon20({ slot: 'icon' })}
           </cds-header-global-action>
         </div>
         <cds-header-panel
           id="notification-panel"
           expanded
-          aria-label="Header Panel"
-        ></cds-header-panel>
+          aria-label="Header Panel"></cds-header-panel>
       </cds-header>`,
 };
 
 export const HeaderBaseWActionsSwitcher = {
-  name: "Header Base w/ Actions and Switcher",
+  name: 'Header Base w/ Actions and Switcher',
   render: () =>
     html` <style>
         ${styles}
@@ -415,22 +403,20 @@ export const HeaderBaseWActionsSwitcher = {
         >
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: "icon" })}
+            ${Search20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="Notification"
-            tooltip-text="Notification"
-          >
-            ${Notification20({ slot: "icon" })}
+            tooltip-text="Notification">
+            ${Notification20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             button-label-active="Close switcher"
             button-label-inactive="Open switcher"
             tooltip-text="Open switcher"
             panel-id="switcher-panel"
-            tooltip-alignment="right"
-          >
-            ${SwitcherIcon20({ slot: "icon" })}
+            tooltip-alignment="right">
+            ${SwitcherIcon20({ slot: 'icon' })}
           </cds-header-global-action>
         </div>
         <cds-header-panel id="switcher-panel" aria-label="Header Panel">
@@ -462,7 +448,7 @@ export const HeaderBaseWActionsSwitcher = {
 };
 
 export const HeaderBaseWNavigationActionsAndSideNav = {
-  name: "Header Base w/ Navigation, Actions and SideNav",
+  name: 'Header Base w/ Navigation, Actions and SideNav',
   render: () =>
     html` <style>
         ${styles}
@@ -470,8 +456,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
       <cds-header aria-label="IBM Platform Name">
         <cds-header-menu-button
           button-label-active="Close menu"
-          button-label-inactive="Open menu"
-        ></cds-header-menu-button>
+          button-label-inactive="Open menu"></cds-header-menu-button>
         <cds-header-name href="javascript:void 0" prefix="IBM"
           >[Platform]</cds-header-name
         >
@@ -499,26 +484,23 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
         </cds-header-nav>
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: "icon" })}
+            ${Search20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="Notification"
-            tooltip-text="Notification"
-          >
-            ${Notification20({ slot: "icon" })}
+            tooltip-text="Notification">
+            ${Notification20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"
-            tooltip-alignment="right"
-          >
-            ${SwitcherIcon20({ slot: "icon" })}
+            tooltip-alignment="right">
+            ${SwitcherIcon20({ slot: 'icon' })}
           </cds-header-global-action>
         </div>
         <cds-side-nav
           aria-label="Side navigation"
-          collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RESPONSIVE}"
-        >
+          collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RESPONSIVE}">
           <cds-side-nav-items>
             <cds-header-side-nav-items has-divider>
               <cds-side-nav-link href="javascript:void(0)">
@@ -543,7 +525,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
               </cds-side-nav-menu>
             </cds-header-side-nav-items>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: "title-icon" })}
+              ${Fade16({ slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -555,7 +537,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: "title-icon" })}
+              ${Fade16({ slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -567,7 +549,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: "title-icon" })}
+              ${Fade16({ slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -579,10 +561,10 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-link href="javascript:void(0)"
-              >${Fade16({ slot: "title-icon" })}Link</cds-side-nav-link
+              >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
             >
             <cds-side-nav-link href="javascript:void(0)"
-              >${Fade16({ slot: "title-icon" })}Link</cds-side-nav-link
+              >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
             >
           </cds-side-nav-items>
         </cds-side-nav>
@@ -591,7 +573,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
 };
 
 export const HeaderBaseWNavigationActions = {
-  name: "Header Base w/ Navigation and Actions",
+  name: 'Header Base w/ Navigation and Actions',
   render: () =>
     html` <style>
         ${styles}
@@ -599,8 +581,7 @@ export const HeaderBaseWNavigationActions = {
       <cds-header aria-label="IBM Platform Name">
         <cds-header-menu-button
           button-label-active="Close menu"
-          button-label-inactive="Open menu"
-        ></cds-header-menu-button>
+          button-label-inactive="Open menu"></cds-header-menu-button>
         <cds-header-name href="javascript:void 0" prefix="IBM"
           >[Platform]</cds-header-name
         >
@@ -617,8 +598,7 @@ export const HeaderBaseWNavigationActions = {
           <cds-header-menu
             is-active
             menu-label="Link 4"
-            trigger-content="Link 4"
-          >
+            trigger-content="Link 4">
             <cds-header-menu-item href="javascript:void 0"
               >Sub-link 1</cds-header-menu-item
             >
@@ -632,27 +612,24 @@ export const HeaderBaseWNavigationActions = {
         </cds-header-nav>
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: "icon" })}
+            ${Search20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="Notification"
-            tooltip-text="Notification"
-          >
-            ${Notification20({ slot: "icon" })}
+            tooltip-text="Notification">
+            ${Notification20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"
-            tooltip-alignment="right"
-          >
-            ${SwitcherIcon20({ slot: "icon" })}
+            tooltip-alignment="right">
+            ${SwitcherIcon20({ slot: 'icon' })}
           </cds-header-global-action>
         </div>
         <cds-side-nav
           is-not-persistent
           aria-label="Side navigation"
-          collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RESPONSIVE}"
-        >
+          collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RESPONSIVE}">
           <cds-side-nav-items>
             <cds-side-nav-link href="javascript:void(0)">
               Link 1
@@ -680,7 +657,7 @@ export const HeaderBaseWNavigationActions = {
 };
 
 export const HeaderBaseWNavigation = {
-  name: "Header Base w/ Navigation",
+  name: 'Header Base w/ Navigation',
   render: () =>
     html` <style>
         ${styles}
@@ -688,8 +665,7 @@ export const HeaderBaseWNavigation = {
       <cds-header aria-label="IBM Platform Name">
         <cds-header-menu-button
           button-label-active="Close menu"
-          button-label-inactive="Open menu"
-        ></cds-header-menu-button>
+          button-label-inactive="Open menu"></cds-header-menu-button>
         <cds-header-name href="javascript:void 0" prefix="IBM"
           >[Platform]</cds-header-name
         >
@@ -718,8 +694,7 @@ export const HeaderBaseWNavigation = {
         <cds-side-nav
           is-not-persistent
           aria-label="Side navigation"
-          collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RESPONSIVE}"
-        >
+          collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RESPONSIVE}">
           <cds-side-nav-items>
             <cds-side-nav-link href="javascript:void(0)">
               Link 1
@@ -747,7 +722,7 @@ export const HeaderBaseWNavigation = {
 };
 
 export const HeaderBaseWSideNav = {
-  name: "Header Base w/ SideNav",
+  name: 'Header Base w/ SideNav',
   render: () => {
     const result = html`
       <style>
@@ -756,18 +731,16 @@ export const HeaderBaseWSideNav = {
       <cds-header aria-label="IBM Platform Name">
         <cds-header-menu-button
           button-label-active="Close menu"
-          button-label-inactive="Open menu"
-        ></cds-header-menu-button>
+          button-label-inactive="Open menu"></cds-header-menu-button>
         <cds-header-name href="javascript:void 0" prefix="IBM"
           >[Platform]</cds-header-name
         >
         <cds-side-nav
           aria-label="Side navigation"
-          collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RESPONSIVE}"
-        >
+          collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RESPONSIVE}">
           <cds-side-nav-items>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: "title-icon" })}
+              ${Fade16({ slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -779,15 +752,14 @@ export const HeaderBaseWSideNav = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: "title-icon" })}
+              ${Fade16({ slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
               <cds-side-nav-menu-item
                 active
                 aria-current="page"
-                href="${linksHref}"
-              >
+                href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
               <cds-side-nav-menu-item href="${linksHref}">
@@ -795,7 +767,7 @@ export const HeaderBaseWSideNav = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: "title-icon" })}
+              ${Fade16({ slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -807,10 +779,10 @@ export const HeaderBaseWSideNav = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-link href="javascript:void(0)"
-              >${Fade16({ slot: "title-icon" })}Link</cds-side-nav-link
+              >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
             >
             <cds-side-nav-link href="javascript:void(0)"
-              >${Fade16({ slot: "title-icon" })}Link</cds-side-nav-link
+              >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
             >
           </cds-side-nav-items>
         </cds-side-nav>
@@ -823,7 +795,7 @@ export const HeaderBaseWSideNav = {
 };
 
 export const HeaderBaseWSkipToContent = {
-  name: "Header Base w/ SkipToContent",
+  name: 'Header Base w/ SkipToContent',
   render: () =>
     html` <style>
         ${styles}
@@ -835,20 +807,18 @@ export const HeaderBaseWSkipToContent = {
         >
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: "icon" })}
+            ${Search20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="Notification"
-            tooltip-text="Notification"
-          >
-            ${Notification20({ slot: "icon" })}
+            tooltip-text="Notification">
+            ${Notification20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"
-            tooltip-alignment="right"
-          >
-            ${SwitcherIcon20({ slot: "icon" })}
+            tooltip-alignment="right">
+            ${SwitcherIcon20({ slot: 'icon' })}
           </cds-header-global-action>
         </div>
       </cds-header>
@@ -856,26 +826,24 @@ export const HeaderBaseWSkipToContent = {
 };
 
 export const SideNavRail = {
-  name: "SideNav Rail",
+  name: 'SideNav Rail',
   render: () =>
     html` <style>
         ${styles}
       </style>
       <cds-side-nav
         aria-label="Side navigation"
-        collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RAIL}"
-      >
+        collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RAIL}">
         <cds-side-nav-items>
           <cds-side-nav-menu title="Category title">
-            ${Fade16({ slot: "title-icon" })}
+            ${Fade16({ slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
             <cds-side-nav-menu-item
               active
               aria-current="page"
-              href="${linksHref}"
-            >
+              href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
             <cds-side-nav-menu-item href="${linksHref}">
@@ -883,7 +851,7 @@ export const SideNavRail = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-menu title="Category title">
-            ${Fade16({ slot: "title-icon" })}
+            ${Fade16({ slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
@@ -895,7 +863,7 @@ export const SideNavRail = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-menu title="Category title">
-            ${Fade16({ slot: "title-icon" })}
+            ${Fade16({ slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Link
             </cds-side-nav-menu-item>
@@ -907,10 +875,10 @@ export const SideNavRail = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-link href="javascript:void(0)"
-            >${Fade16({ slot: "title-icon" })}Link</cds-side-nav-link
+            >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
           >
           <cds-side-nav-link href="javascript:void(0)"
-            >${Fade16({ slot: "title-icon" })}Link</cds-side-nav-link
+            >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
           >
         </cds-side-nav-items>
       </cds-side-nav>
@@ -918,7 +886,7 @@ export const SideNavRail = {
 };
 
 export const SideNavRailWHeader = {
-  name: "SideNav Rail w/ Header",
+  name: 'SideNav Rail w/ Header',
   render: () =>
     html` <style>
         ${styles}
@@ -926,8 +894,7 @@ export const SideNavRailWHeader = {
       <cds-header aria-label="IBM Platform Name">
         <cds-header-menu-button
           button-label-active="Close menu"
-          button-label-inactive="Open menu"
-        ></cds-header-menu-button>
+          button-label-inactive="Open menu"></cds-header-menu-button>
         <cds-header-name href="javascript:void 0" prefix="IBM"
           >[Platform]</cds-header-name
         >
@@ -955,37 +922,33 @@ export const SideNavRailWHeader = {
         </cds-header-nav>
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${Search20({ slot: "icon" })}
+            ${Search20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="Notification"
-            tooltip-text="Notification"
-          >
-            ${Notification20({ slot: "icon" })}
+            tooltip-text="Notification">
+            ${Notification20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"
-            tooltip-alignment="right"
-          >
-            ${SwitcherIcon20({ slot: "icon" })}
+            tooltip-alignment="right">
+            ${SwitcherIcon20({ slot: 'icon' })}
           </cds-header-global-action>
         </div>
         <cds-side-nav
           aria-label="Side navigation"
-          collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RAIL}"
-        >
+          collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RAIL}">
           <cds-side-nav-items>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: "title-icon" })}
+              ${Fade16({ slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
               <cds-side-nav-menu-item
                 active
                 aria-current="page"
-                href="${linksHref}"
-              >
+                href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
               <cds-side-nav-menu-item href="${linksHref}">
@@ -993,7 +956,7 @@ export const SideNavRailWHeader = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: "title-icon" })}
+              ${Fade16({ slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -1005,7 +968,7 @@ export const SideNavRailWHeader = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-menu title="Category title">
-              ${Fade16({ slot: "title-icon" })}
+              ${Fade16({ slot: 'title-icon' })}
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
@@ -1017,10 +980,10 @@ export const SideNavRailWHeader = {
               </cds-side-nav-menu-item>
             </cds-side-nav-menu>
             <cds-side-nav-link href="javascript:void(0)"
-              >${Fade16({ slot: "title-icon" })}Link</cds-side-nav-link
+              >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
             >
             <cds-side-nav-link href="javascript:void(0)"
-              >${Fade16({ slot: "title-icon" })}Link</cds-side-nav-link
+              >${Fade16({ slot: 'title-icon' })}Link</cds-side-nav-link
             >
           </cds-side-nav-items>
         </cds-side-nav>
@@ -1029,7 +992,7 @@ export const SideNavRailWHeader = {
 };
 
 export const SideNavWLargeSideNavItems = {
-  name: "SideNav w/ large side nav items",
+  name: 'SideNav w/ large side nav items',
   render: () => {
     const result = html`
       <style>
@@ -1039,8 +1002,7 @@ export const SideNavWLargeSideNavItems = {
         is-not-child-of-header
         aria-label="Side navigation"
         collapse-mode="${SIDE_NAV_COLLAPSE_MODE.FIXED}"
-        expanded
-      >
+        expanded>
         <cds-side-nav-items>
           <cds-side-nav-menu large title="Large menu">
             <cds-side-nav-menu-item href="${linksHref}">
@@ -1057,7 +1019,7 @@ export const SideNavWLargeSideNavItems = {
             >Large link</cds-side-nav-link
           >
           <cds-side-nav-menu large title="Large menu w/icon"
-            >${Fade16({ slot: "title-icon" })}
+            >${Fade16({ slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Menu 1
             </cds-side-nav-menu-item>
@@ -1069,7 +1031,7 @@ export const SideNavWLargeSideNavItems = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-link large href="javascript:void(0)">
-            ${Fade16({ slot: "title-icon" })} Large link
+            ${Fade16({ slot: 'title-icon' })} Large link
             w/icon</cds-side-nav-link
           >
         </cds-side-nav-items>
@@ -1082,5 +1044,5 @@ export const SideNavWLargeSideNavItems = {
 };
 
 export default {
-  title: "Components/UI Shell",
+  title: 'Components/UI Shell',
 };

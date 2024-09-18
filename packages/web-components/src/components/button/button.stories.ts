@@ -7,19 +7,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from "lit";
+import { html } from 'lit';
 // Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Add16 from "@carbon/icons/lib/add/16";
+import Add16 from '@carbon/icons/lib/add/16';
 import {
   BUTTON_KIND,
   BUTTON_TYPE,
   BUTTON_SIZE,
   BUTTON_TOOLTIP_ALIGNMENT,
   BUTTON_TOOLTIP_POSITION,
-} from "./button";
-import "./index";
+} from './button';
+import './index';
 
 const kind = {
   [`Primary button (${BUTTON_KIND.PRIMARY})`]: BUTTON_KIND.PRIMARY,
@@ -40,16 +40,16 @@ const types = {
 };
 
 const alignmentOptions = {
-  ["Start"]: BUTTON_TOOLTIP_ALIGNMENT.START,
-  ["Center"]: BUTTON_TOOLTIP_ALIGNMENT.CENTER,
-  ["End"]: BUTTON_TOOLTIP_ALIGNMENT.END,
+  ['Start']: BUTTON_TOOLTIP_ALIGNMENT.START,
+  ['Center']: BUTTON_TOOLTIP_ALIGNMENT.CENTER,
+  ['End']: BUTTON_TOOLTIP_ALIGNMENT.END,
 };
 
 const positionOptions = {
-  ["Top"]: BUTTON_TOOLTIP_POSITION.TOP,
-  ["Right"]: BUTTON_TOOLTIP_POSITION.RIGHT,
-  ["Bottom"]: BUTTON_TOOLTIP_POSITION.BOTTOM,
-  ["Left"]: BUTTON_TOOLTIP_POSITION.LEFT,
+  ['Top']: BUTTON_TOOLTIP_POSITION.TOP,
+  ['Right']: BUTTON_TOOLTIP_POSITION.RIGHT,
+  ['Bottom']: BUTTON_TOOLTIP_POSITION.BOTTOM,
+  ['Left']: BUTTON_TOOLTIP_POSITION.LEFT,
 };
 
 const sizes = {
@@ -69,62 +69,62 @@ const defaultArgs = {
 
 const controls = {
   buttonClassName: {
-    control: "text",
-    description: "Specify an optional className to be added to your Button",
+    control: 'text',
+    description: 'Specify an optional className to be added to your Button',
   },
   dangerDescription: {
-    control: "text",
+    control: 'text',
     description:
-      "Specify the message read by screen readers for the danger button variant",
+      'Specify the message read by screen readers for the danger button variant',
   },
   disabled: {
-    control: "boolean",
-    description: "Specify whether the Button should be disabled, or not",
+    control: 'boolean',
+    description: 'Specify whether the Button should be disabled, or not',
   },
   href: {
-    control: "string",
+    control: 'string',
     description:
-      "Optionally specify an href for your Button to become an <code><a></code> element",
+      'Optionally specify an href for your Button to become an <code><a></code> element',
   },
   isExpressive: {
-    control: "boolean",
-    description: "Specify whether the Button is expressive, or not",
+    control: 'boolean',
+    description: 'Specify whether the Button is expressive, or not',
   },
   isSelected: {
-    control: "boolean",
+    control: 'boolean',
     description:
-      "Specify whether the Button is currently selected. Only applies to the Ghost variant.",
+      'Specify whether the Button is currently selected. Only applies to the Ghost variant.',
   },
   kind: {
-    control: "select",
-    description: "Specifiy the kind of Button you want to create",
+    control: 'select',
+    description: 'Specifiy the kind of Button you want to create',
     options: kind,
   },
   linkRole: {
-    control: "text",
-    description: "Optional prop to specify the role of the Button",
+    control: 'text',
+    description: 'Optional prop to specify the role of the Button',
   },
   size: {
-    control: "select",
+    control: 'select',
     description:
-      "Specify the size of the button, from the following list of sizes:",
+      'Specify the size of the button, from the following list of sizes:',
     options: sizes,
   },
   tooltipAlignment: {
-    control: "radio",
+    control: 'radio',
     description:
-      "Specify the alignment of the tooltip to the icon-only button. Can be one of: start, center, or end.",
+      'Specify the alignment of the tooltip to the icon-only button. Can be one of: start, center, or end.',
     options: alignmentOptions,
   },
   tooltipPosition: {
-    control: "radio",
+    control: 'radio',
     description:
-      "Specify the direction of the tooltip for icon-only buttons. Can be either top, right, bottom, or left.",
+      'Specify the direction of the tooltip for icon-only buttons. Can be either top, right, bottom, or left.',
     options: positionOptions,
   },
   type: {
-    control: "radio",
-    description: "Optional prop to specify the type of the Button",
+    control: 'radio',
+    description: 'Optional prop to specify the type of the Button',
     options: types,
   },
   onClick: {
@@ -163,8 +163,7 @@ export const Default = {
       size="${size}"
       tooltip-alignment="${tooltipAlignment}"
       tooltip-position="${tooltipPosition}"
-      type="${type}"
-    >
+      type="${type}">
       Button
     </cds-button>`,
 };
@@ -197,8 +196,7 @@ export const Danger = {
         size="${size}"
         tooltip-alignment="${tooltipAlignment}"
         tooltip-position="${tooltipPosition}"
-        type="${type}"
-      >
+        type="${type}">
         Button
       </cds-button>
       <cds-button
@@ -213,8 +211,7 @@ export const Danger = {
         size="${size}"
         tooltip-alignment="${tooltipAlignment}"
         tooltip-position="${tooltipPosition}"
-        type="${type}"
-      >
+        type="${type}">
         Tertiary Danger Button
       </cds-button>
       <cds-button
@@ -229,8 +226,7 @@ export const Danger = {
         size="${size}"
         tooltip-alignment="${tooltipAlignment}"
         tooltip-position="${tooltipPosition}"
-        type="${type}"
-      >
+        type="${type}">
         Ghost Danger Button
       </cds-button>`,
 };
@@ -263,8 +259,7 @@ export const Ghost = {
       size="${size}"
       tooltip-alignment="${tooltipAlignment}"
       tooltip-position="${tooltipPosition}"
-      type="${type}"
-    >
+      type="${type}">
       Button
     </cds-button>`,
 };
@@ -301,9 +296,8 @@ export const IconButton = {
       tooltip-position="${tooltipPosition}"
       tooltip-text="Icon Description"
       type="${type}"
-      @click="${onClick}"
-    >
-      ${Add16({ slot: "icon" })}
+      @click="${onClick}">
+      ${Add16({ slot: 'icon' })}
     </cds-button>`,
 };
 
@@ -335,8 +329,7 @@ export const Secondary = {
       size="${size}"
       tooltip-alignment="${tooltipAlignment}"
       tooltip-position="${tooltipPosition}"
-      type="${type}"
-    >
+      type="${type}">
       Button
     </cds-button>`,
 };
@@ -370,8 +363,7 @@ export const SetOfButtons = {
         size="${size}"
         tooltip-alignment="${tooltipAlignment}"
         tooltip-position="${tooltipPosition}"
-        type="${type}"
-      >
+        type="${type}">
         Secondary button
       </cds-button>
       <cds-button
@@ -386,8 +378,7 @@ export const SetOfButtons = {
         size="${size}"
         tooltip-alignment="${tooltipAlignment}"
         tooltip-position="${tooltipPosition}"
-        type="${type}"
-      >
+        type="${type}">
         Primary button </cds-button
       ><cds-button-set></cds-button-set
     ></cds-button-set>`,
@@ -427,16 +418,15 @@ export const Tertiary = {
       size="${size}"
       tooltip-alignment="${tooltipAlignment}"
       tooltip-position="${tooltipPosition}"
-      type="${type}"
-    >
+      type="${type}">
       Button
     </cds-button>`,
 };
 
 const meta = {
-  title: "Components/Button",
+  title: 'Components/Button',
   parameters: {
-    actions: { argTypesRegex: "^on.*" },
+    actions: { argTypesRegex: '^on.*' },
   },
 };
 

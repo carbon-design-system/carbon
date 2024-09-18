@@ -2,9 +2,9 @@
 
 ## `cds-clickable-tile`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <a
@@ -27,7 +27,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <a
@@ -57,7 +57,7 @@
 
 ```
 
-####     `should render disabled state`
+#### `should render disabled state`
 
 ```
 <a
@@ -89,9 +89,9 @@
 
 ## `cds-expandable-tile`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <button
@@ -118,7 +118,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <button
@@ -150,9 +150,9 @@
 
 ## `cds-selectable-tile`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <input
@@ -176,7 +176,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <input
@@ -204,9 +204,9 @@
 
 ## `cds-radio-tile`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <input
@@ -229,7 +229,7 @@
 </label>
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <input
@@ -256,7 +256,7 @@
 
 ## `Misc attributes`
 
-####   `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <input
@@ -279,7 +279,7 @@
 </label>
 ```
 
-####   `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <input
@@ -303,4 +303,3 @@
   </div>
 </label>
 ```
-

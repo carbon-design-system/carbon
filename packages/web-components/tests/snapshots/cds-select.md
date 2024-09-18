@@ -2,7 +2,7 @@
 
 ## `Misc attributes`
 
-####   `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <div class="cds--select">
@@ -71,7 +71,7 @@
 
 ```
 
-####   `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <div class="cds--select cds--select--disabled">
@@ -147,7 +147,7 @@
 
 ```
 
-####   `should render invalid state`
+#### `should render invalid state`
 
 ```
 <div class="cds--select cds--select--invalid">
@@ -222,4 +222,3 @@
 </div>
 
 ```
-

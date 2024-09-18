@@ -2,7 +2,7 @@
 
 ## `Rendering`
 
-####   `Should render with minimum attributes`
+#### `Should render with minimum attributes`
 
 ```
 <label class="cds--label">
@@ -55,7 +55,7 @@
 
 ```
 
-####   `Should render with various attributes`
+#### `Should render with various attributes`
 
 ```
 <label class="cds--label cds--label--disabled">
@@ -108,4 +108,3 @@
 </div>
 
 ```
-

@@ -2,7 +2,7 @@
 
 ## `Rendering`
 
-####   `Should render with various attributes`
+#### `Should render with various attributes`
 
 ```
 <div class="cds--text-area__label-wrapper">
@@ -39,4 +39,3 @@
 </div>
 
 ```
-
