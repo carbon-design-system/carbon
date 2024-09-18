@@ -43,36 +43,6 @@ export const Selectable = (args) => {
         className="some-class"
         {...args}
       />
-      <br />
-      <br />
-      <SelectableTag
-        slug={<AILabel />}
-        renderIcon={Asleep}
-        text="Tag content with a long text description"
-        className="some-class"
-        {...args}
-      />
-      <SelectableTag
-        slug={<AILabel />}
-        text="Tag content with a long text description"
-        className="some-class"
-        {...args}
-      />
-      <SelectableTag
-        as="div"
-        slug={<AILabel />}
-        text="Tag content"
-        className="some-class"
-        {...args}
-      />
-      <SelectableTag
-        as="div"
-        slug={<AILabel />}
-        renderIcon={Asleep}
-        text="Tag content"
-        className="some-class"
-        {...args}
-      />
     </div>
   );
 };
@@ -200,39 +170,6 @@ export const Operational = (args) => {
           {...args}
         />
       </div>
-
-      <br />
-      <br />
-      <OperationalTag
-        slug={<AILabel />}
-        type="red"
-        className="some-class"
-        renderIcon={Asleep}
-        text="Tag content with a long text description"
-        {...args}
-      />
-      <OperationalTag
-        slug={<AILabel />}
-        type="red"
-        className="some-class"
-        text="Tag content with a long text description"
-        {...args}
-      />
-      <OperationalTag
-        slug={<AILabel />}
-        type="magenta"
-        className="some-class"
-        renderIcon={Asleep}
-        text="Tag content"
-        {...args}
-      />
-      <OperationalTag
-        slug={<AILabel />}
-        type="magenta"
-        className="some-class"
-        text="Tag content"
-        {...args}
-      />
 
       <h4>Interactive examples</h4>
       <div
@@ -448,38 +385,104 @@ export const Dismissible = (args) => {
           />
         ))}
       </div>
+    </>
+  );
+};
+
+export const WithAILabel = () => {
+  return (
+    <>
+      <h4>Dismissible Tag</h4>
+      <br />
+      <DismissibleTag
+        slug={<AILabel />}
+        type="red"
+        className="some-class"
+        renderIcon={Asleep}
+        text="Text Content with a long description"
+        title="Dismiss"
+      />
+      <DismissibleTag
+        slug={<AILabel />}
+        type="red"
+        className="some-class"
+        text="Text Content with a long description"
+        title="Dismiss"
+      />
+      <DismissibleTag
+        slug={<AILabel />}
+        type="red"
+        renderIcon={Asleep}
+        className="some-class"
+        text="Text Content"
+        title="Dismiss"
+      />
+      <DismissibleTag
+        slug={<AILabel />}
+        type="red"
+        className="some-class"
+        text="Text Content"
+        title="Dismiss"
+      />
 
       <br />
       <br />
-      <DismissibleTag
+      <h4>Operational Tag</h4>
+      <br />
+
+      <OperationalTag
         slug={<AILabel />}
         type="red"
         className="some-class"
         renderIcon={Asleep}
-        text="Text Content with a long description"
-        title="Dismiss"
+        text="Tag content with a long text description"
       />
-      <DismissibleTag
+      <OperationalTag
         slug={<AILabel />}
         type="red"
         className="some-class"
-        text="Text Content with a long description"
-        title="Dismiss"
+        text="Tag content with a long text description"
       />
-      <DismissibleTag
+      <OperationalTag
         slug={<AILabel />}
         type="red"
+        className="some-class"
         renderIcon={Asleep}
-        className="some-class"
-        text="Text Content"
-        title="Dismiss"
+        text="Tag content"
       />
-      <DismissibleTag
+      <OperationalTag
         slug={<AILabel />}
         type="red"
         className="some-class"
-        text="Text Content"
-        title="Dismiss"
+        text="Tag content"
+      />
+
+      <br />
+      <br />
+      <h4>Selectable Tag</h4>
+      <br />
+
+      <SelectableTag
+        slug={<AILabel />}
+        renderIcon={Asleep}
+        text="Tag content with a long text description"
+        className="some-class"
+      />
+      <SelectableTag
+        slug={<AILabel />}
+        text="Tag content with a long text description"
+        className="some-class"
+      />
+      <SelectableTag
+        slug={<AILabel />}
+        text="Tag content"
+        className="some-class"
+      />
+      <SelectableTag
+        slug={<AILabel />}
+        renderIcon={Asleep}
+        text="Tag content"
+        className="some-class"
       />
     </>
   );
