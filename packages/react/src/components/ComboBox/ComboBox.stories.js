@@ -235,7 +235,7 @@ export const _fullyControlled = () => {
   };
 
   return (
-    <div style={{ width: 300 }}>
+    <div>
       <ComboBox
         onChange={onChange}
         id="carbon-combobox"
@@ -245,7 +245,17 @@ export const _fullyControlled = () => {
         titleText="Fully Controlled ComboBox title"
         helperText="Combobox helper text"
       />
-      <Button onClick={() => setValue(null)}>Reset</Button>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
+        <Button onClick={() => setValue(null)}>Reset</Button>
+        <Button onClick={() => setValue(options[0])}>Option 1</Button>
+        <Button onClick={() => setValue(options[1])}>Option 2</Button>
+        <Button onClick={() => setValue(options[2])}>Option 3</Button>
+      </div>
     </div>
   );
 };

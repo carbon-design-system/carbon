@@ -431,24 +431,29 @@ const ComboBox = forwardRef(
       })
     );
     const [isFocused, setIsFocused] = useState(false);
-    const [prevSelectedItem, setPrevSelectedItem] = useState<ItemType | null>();
-    const [doneInitialSelectedItem, setDoneInitialSelectedItem] =
-      useState(false);
     const savedOnInputChange = useRef(onInputChange);
+    const prevSelectedItemProp = useRef<ItemType | null | undefined>(
+      selectedItemProp
+    );
 
-    if (!doneInitialSelectedItem || prevSelectedItem !== selectedItemProp) {
-      setDoneInitialSelectedItem(true);
-      setPrevSelectedItem(selectedItemProp);
-      setInputValue(
-        getInputValue({
+    // fully controlled combobox: handle changes to selectedItemProp
+    useEffect(() => {
+      if (prevSelectedItemProp.current !== selectedItemProp) {
+        const currentInputValue = getInputValue({
           initialSelectedItem,
           inputValue,
           itemToString,
           selectedItem: selectedItemProp,
-          prevSelectedItem,
-        })
-      );
-    }
+          prevSelectedItem: prevSelectedItemProp.current,
+        });
+        setInputValue(currentInputValue);
+        onChange({
+          selectedItem: selectedItemProp,
+          inputValue: currentInputValue,
+        });
+        prevSelectedItemProp.current = selectedItemProp;
+      }
+    }, [selectedItemProp]);
 
     const filterItems = (
       items: ItemType[],
