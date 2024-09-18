@@ -45,6 +45,7 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useFloating, flip, autoUpdate } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
 import { TranslateWithId } from '../../types/common';
 
 const {
@@ -83,11 +84,13 @@ const getInputValue = <ItemType,>({
   inputValue,
   itemToString,
   selectedItem,
+  prevSelectedItem,
 }: {
   initialSelectedItem?: ItemType | null;
   inputValue: string;
   itemToString: ItemToStringHandler<ItemType>;
   selectedItem?: ItemType | null;
+  prevSelectedItem?: ItemType | null;
 }) => {
   if (selectedItem) {
     return itemToString(selectedItem);
@@ -95,6 +98,10 @@ const getInputValue = <ItemType,>({
 
   if (initialSelectedItem) {
     return itemToString(initialSelectedItem);
+  }
+
+  if (!selectedItem && prevSelectedItem) {
+    return '';
   }
 
   return inputValue || '';
@@ -381,12 +388,12 @@ const ComboBox = forwardRef(
       slug,
       ...rest
     } = props;
-    const { refs, floatingStyles } = useFloating(
+    const { refs, floatingStyles, middlewareData } = useFloating(
       autoAlign
         ? {
             placement: direction,
             strategy: 'fixed',
-            middleware: [flip()],
+            middleware: [flip(), hide()],
             whileElementsMounted: autoUpdate,
           }
         : {}
@@ -395,9 +402,15 @@ const ComboBox = forwardRef(
 
     useEffect(() => {
       if (autoAlign) {
-        Object.keys(floatingStyles).forEach((style) => {
+        const updatedFloatingStyles = {
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible',
+        };
+        Object.keys(updatedFloatingStyles).forEach((style) => {
           if (refs.floating.current) {
-            refs.floating.current.style[style] = floatingStyles[style];
+            refs.floating.current.style[style] = updatedFloatingStyles[style];
           }
         });
         if (parentWidth && refs.floating.current) {
@@ -418,23 +431,29 @@ const ComboBox = forwardRef(
       })
     );
     const [isFocused, setIsFocused] = useState(false);
-    const [prevSelectedItem, setPrevSelectedItem] = useState<ItemType | null>();
-    const [doneInitialSelectedItem, setDoneInitialSelectedItem] =
-      useState(false);
     const savedOnInputChange = useRef(onInputChange);
+    const prevSelectedItemProp = useRef<ItemType | null | undefined>(
+      selectedItemProp
+    );
 
-    if (!doneInitialSelectedItem || prevSelectedItem !== selectedItemProp) {
-      setDoneInitialSelectedItem(true);
-      setPrevSelectedItem(selectedItemProp);
-      setInputValue(
-        getInputValue({
+    // fully controlled combobox: handle changes to selectedItemProp
+    useEffect(() => {
+      if (prevSelectedItemProp.current !== selectedItemProp) {
+        const currentInputValue = getInputValue({
           initialSelectedItem,
           inputValue,
           itemToString,
           selectedItem: selectedItemProp,
-        })
-      );
-    }
+          prevSelectedItem: prevSelectedItemProp.current,
+        });
+        setInputValue(currentInputValue);
+        onChange({
+          selectedItem: selectedItemProp,
+          inputValue: currentInputValue,
+        });
+        prevSelectedItemProp.current = selectedItemProp;
+      }
+    }, [selectedItemProp]);
 
     const filterItems = (
       items: ItemType[],
@@ -485,7 +504,15 @@ const ComboBox = forwardRef(
         const { highlightedIndex } = changes;
 
         switch (type) {
-          case InputBlur:
+          case InputBlur: {
+            if (allowCustomValue && highlightedIndex == '-1') {
+              const customValue = inputValue as ItemType;
+              changes.selectedItem = customValue;
+              if (onChange) {
+                onChange({ selectedItem: inputValue as ItemType, inputValue });
+              }
+              return changes;
+            }
             if (
               state.inputValue &&
               highlightedIndex == '-1' &&
@@ -495,16 +522,18 @@ const ComboBox = forwardRef(
                 ...changes,
                 inputValue: itemToString(changes.selectedItem),
               };
-            } else if (
+            }
+            if (
               state.inputValue &&
               highlightedIndex == '-1' &&
               !allowCustomValue &&
               !changes.selectedItem
             ) {
               return { ...changes, inputValue: '' };
-            } else {
-              return changes;
             }
+            return changes;
+          }
+
           case InputKeyDownEnter:
             if (allowCustomValue) {
               setInputValue(inputValue);
@@ -572,6 +601,7 @@ const ComboBox = forwardRef(
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--combo-box--warning`]: showWarning,
       [`${prefix}--combo-box--readonly`]: readOnly,
+      [`${prefix}--autoalign`]: autoAlign,
     });
 
     const titleClasses = cx(`${prefix}--label`, {
@@ -636,7 +666,12 @@ const ComboBox = forwardRef(
         return itemToString(item);
       },
       onInputValueChange({ inputValue }) {
-        setInputValue(inputValue || '');
+        const newInputValue = inputValue || '';
+        setInputValue(newInputValue);
+        if (selectedItemProp && !inputValue) {
+          // ensure onChange is called when selectedItem is cleared
+          onChange({ selectedItem, inputValue: newInputValue });
+        }
         setHighlightedIndex(indexToHighlight(inputValue));
       },
       onSelectedItemChange({ selectedItem }) {
@@ -880,7 +915,6 @@ const ComboBox = forwardRef(
             )}
             <ListBoxTrigger
               {...buttonProps}
-              // @ts-expect-error
               isOpen={isOpen}
               translateWithId={translateWithId}
             />

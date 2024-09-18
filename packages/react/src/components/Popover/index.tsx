@@ -29,6 +29,7 @@ import {
   arrow,
   offset,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
 
 interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -258,6 +259,7 @@ export const Popover: PopoverComponent = React.forwardRef(
               arrow({
                 element: caretRef,
               }),
+              hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
@@ -286,9 +288,15 @@ export const Popover: PopoverComponent = React.forwardRef(
 
     useEffect(() => {
       if (autoAlign) {
-        Object.keys(floatingStyles).forEach((style) => {
+        const updatedFloatingStyles = {
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible',
+        };
+        Object.keys(updatedFloatingStyles).forEach((style) => {
           if (refs.floating.current) {
-            refs.floating.current.style[style] = floatingStyles[style];
+            refs.floating.current.style[style] = updatedFloatingStyles[style];
           }
         });
 
@@ -339,7 +347,7 @@ export const Popover: PopoverComponent = React.forwardRef(
         [`${prefix}--popover--drop-shadow`]: dropShadow,
         [`${prefix}--popover--high-contrast`]: highContrast,
         [`${prefix}--popover--open`]: open,
-        [`${prefix}--popover--auto-align`]: autoAlign,
+        [`${prefix}--popover--auto-align ${prefix}--autoalign`]: autoAlign,
         [`${prefix}--popover--${currentAlignment}`]: true,
         [`${prefix}--popover--tab-tip`]: isTabTip,
       },
@@ -348,12 +356,26 @@ export const Popover: PopoverComponent = React.forwardRef(
 
     const mappedChildren = React.Children.map(children, (child) => {
       const item = child as any;
+      const displayName = item?.type?.displayName;
+
+      /**
+       * Only trigger elements (button) or trigger components (ToggletipButton) should be
+       * cloned because these will be decorated with a trigger-specific className and ref.
+       *
+       * There are also some specific components that should not be cloned when autoAlign
+       * is on, even if they are a trigger element.
+       */
+      const isTriggerElement = item?.type === 'button';
+      const isTriggerComponent =
+        autoAlign && displayName && ['ToggletipButton'].includes(displayName);
+      const isAllowedTriggerComponent =
+        autoAlign &&
+        displayName &&
+        !['ToggletipContent', 'PopoverContent'].includes(displayName);
 
       if (
-        (item?.type === 'button' ||
-          (autoAlign && item?.type?.displayName !== 'PopoverContent') ||
-          (autoAlign && item?.type?.displayName === 'ToggletipButton')) &&
-        React.isValidElement(item)
+        React.isValidElement(item) &&
+        (isTriggerElement || isTriggerComponent || isAllowedTriggerComponent)
       ) {
         const className = (item?.props as any)?.className;
         const ref = (item?.props as any).ref;

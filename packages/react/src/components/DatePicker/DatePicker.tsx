@@ -911,6 +911,7 @@ const DatePicker = React.forwardRef(function DatePicker(
         document.activeElement === endInputField.current &&
         calendarRef.current.isOpen
       ) {
+        event.preventDefault();
         calendarRef.current.close();
         // Remove focus from endDate calendar input
         document.activeElement instanceof HTMLElement && // this is to fix the TS warning
