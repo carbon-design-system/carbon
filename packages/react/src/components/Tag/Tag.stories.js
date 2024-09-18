@@ -58,29 +58,6 @@ export const ReadOnly = () => {
       <Tag className="some-class" type="outline">
         {'Tag content'}
       </Tag>
-
-      <br />
-      <br />
-      <Tag className="some-class" type="red" slug={<AILabel />}>
-        {'Tag content with a long text description'}
-      </Tag>
-      <Tag
-        renderIcon={Asleep}
-        className="some-class"
-        type="red"
-        slug={<AILabel />}>
-        {'Tag content with a long text description'}
-      </Tag>
-      <Tag
-        renderIcon={Asleep}
-        className="some-class"
-        type="magenta"
-        slug={<AILabel />}>
-        {'Tag content'}
-      </Tag>
-      <Tag className="some-class" type="magenta" slug={<AILabel />}>
-        {'Tag content'}
-      </Tag>
     </>
   );
 };

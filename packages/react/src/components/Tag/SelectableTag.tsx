@@ -92,14 +92,6 @@ const SelectableTag = <T extends React.ElementType>({
     setIsEllipsisApplied(isEllipsisActive(newElement));
   }, [prefix, tagRef]);
 
-  // let normalizedSlug;
-  // if (slug && slug['type']?.displayName === 'AILabel') {
-  //   normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-  //     size: 'sm',
-  //     kind: 'inline',
-  //   });
-  // }
-
   const tooltipClasses = classNames(
     `${prefix}--icon-tooltip`,
     `${prefix}--tag-label-tooltip`
