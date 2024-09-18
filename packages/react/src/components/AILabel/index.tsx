@@ -193,6 +193,11 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
         ? `${aiText} - ${slugLabel || ariaLabel}`
         : `${aiText} - ${aiTextLabel || textLabel}`;
 
+    const triggerProps = {
+      onFocus: (event: FocusEvent) => event.stopPropagation(),
+      onClick: (event: Event) => event.stopPropagation(),
+    };
+
     return (
       <div className={aiLabelClasses} ref={ref} id={id}>
         {revertActive ? (
@@ -207,6 +212,7 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
         ) : (
           <Toggletip align={align} autoAlign={autoAlign} {...rest}>
             <ToggletipButton
+              {...triggerProps}
               className={aiLabelButtonClasses}
               label={ariaLabelText}>
               <span className={`${prefix}--slug__text`}>{aiText}</span>

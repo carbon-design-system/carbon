@@ -92,13 +92,13 @@ const SelectableTag = <T extends React.ElementType>({
     setIsEllipsisApplied(isEllipsisActive(newElement));
   }, [prefix, tagRef]);
 
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'sm',
-      kind: 'inline',
-    });
-  }
+  // let normalizedSlug;
+  // if (slug && slug['type']?.displayName === 'AILabel') {
+  //   normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+  //     size: 'sm',
+  //     kind: 'inline',
+  //   });
+  // }
 
   const tooltipClasses = classNames(
     `${prefix}--icon-tooltip`,
@@ -131,7 +131,6 @@ const SelectableTag = <T extends React.ElementType>({
           <Text title={text} className={`${prefix}--tag__label`}>
             {text}
           </Text>
-          {normalizedSlug}
         </Tag>
       </Tooltip>
     );
@@ -149,10 +148,11 @@ const SelectableTag = <T extends React.ElementType>({
       id={tagId}
       onClick={() => setSelectedTag(!selectedTag)}
       {...otherProps}>
-      {normalizedSlug}
-      <Text title={text} className={`${prefix}--tag__label`}>
-        {text}
-      </Text>
+      <div className={`${prefix}--interactive--tag-children`}>
+        <Text title={text} className={`${prefix}--tag__label`}>
+          {text}
+        </Text>
+      </div>
     </Tag>
   );
 };

@@ -397,6 +397,10 @@
     border-color: currentColor;
   }
 
+  .#{$prefix}--tag--wrapper--slug {
+    min-inline-size: 32.14px;
+  }
+
   // Windows HCM fix
   /* stylelint-disable */
   .#{$prefix}--tag {
@@ -462,5 +466,18 @@
       .#{$prefix}--tag--operational.#{$prefix}--tag--disabled
     ) {
     pointer-events: none;
+  }
+
+  .#{$prefix}--popover-container.#{$prefix}--definition--tooltip--tag:has(
+      + .#{$prefix}--tag--wrapper--slug
+    ) {
+    max-inline-size: 160px;
+  }
+
+  .#{$prefix}--tag__custom-icon
+    + .#{$prefix}--popover-container.#{$prefix}--definition--tooltip--tag:has(
+      + .#{$prefix}--tag--wrapper--slug
+    ) {
+    max-inline-size: 144px;
   }
 }

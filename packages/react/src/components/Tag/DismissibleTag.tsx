@@ -149,6 +149,11 @@ const DismissibleTag = <T extends React.ElementType>({
           className={`${prefix}--tag__label`}>
           {text}
         </Text>
+        {slug && (
+          <div className={`${prefix}--tag--wrapper--slug`}>
+            {normalizedSlug}
+          </div>
+        )}
         <Tooltip
           label={isEllipsisApplied ? dismissLabel : title}
           align="bottom"
@@ -164,7 +169,6 @@ const DismissibleTag = <T extends React.ElementType>({
             <Close />
           </button>
         </Tooltip>
-        {normalizedSlug}
       </div>
     </Tag>
   );
