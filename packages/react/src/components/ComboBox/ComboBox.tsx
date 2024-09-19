@@ -57,7 +57,6 @@ const {
   InputKeyDownArrowUp,
   InputKeyDownArrowDown,
   MenuMouseLeave,
-  FunctionSelectItem,
 } = useCombobox.stateChangeTypes;
 
 const defaultItemToString = <ItemType,>(item: ItemType | null) => {
@@ -85,11 +84,13 @@ const getInputValue = <ItemType,>({
   inputValue,
   itemToString,
   selectedItem,
+  prevSelectedItem,
 }: {
   initialSelectedItem?: ItemType | null;
   inputValue: string;
   itemToString: ItemToStringHandler<ItemType>;
   selectedItem?: ItemType | null;
+  prevSelectedItem?: ItemType | null;
 }) => {
   if (selectedItem) {
     return itemToString(selectedItem);
@@ -97,6 +98,10 @@ const getInputValue = <ItemType,>({
 
   if (initialSelectedItem) {
     return itemToString(initialSelectedItem);
+  }
+
+  if (!selectedItem && prevSelectedItem) {
+    return '';
   }
 
   return inputValue || '';
@@ -426,23 +431,29 @@ const ComboBox = forwardRef(
       })
     );
     const [isFocused, setIsFocused] = useState(false);
-    const [prevSelectedItem, setPrevSelectedItem] = useState<ItemType | null>();
-    const [doneInitialSelectedItem, setDoneInitialSelectedItem] =
-      useState(false);
     const savedOnInputChange = useRef(onInputChange);
+    const prevSelectedItemProp = useRef<ItemType | null | undefined>(
+      selectedItemProp
+    );
 
-    if (!doneInitialSelectedItem || prevSelectedItem !== selectedItemProp) {
-      setDoneInitialSelectedItem(true);
-      setPrevSelectedItem(selectedItemProp);
-      setInputValue(
-        getInputValue({
+    // fully controlled combobox: handle changes to selectedItemProp
+    useEffect(() => {
+      if (prevSelectedItemProp.current !== selectedItemProp) {
+        const currentInputValue = getInputValue({
           initialSelectedItem,
           inputValue,
           itemToString,
           selectedItem: selectedItemProp,
-        })
-      );
-    }
+          prevSelectedItem: prevSelectedItemProp.current,
+        });
+        setInputValue(currentInputValue);
+        onChange({
+          selectedItem: selectedItemProp,
+          inputValue: currentInputValue,
+        });
+        prevSelectedItemProp.current = selectedItemProp;
+      }
+    }, [selectedItemProp]);
 
     const filterItems = (
       items: ItemType[],
@@ -522,15 +533,6 @@ const ComboBox = forwardRef(
             }
             return changes;
           }
-
-          case FunctionSelectItem:
-            if (onChange) {
-              onChange({
-                selectedItem: changes.selectedItem,
-                inputValue: changes.inputValue,
-              });
-            }
-            return changes;
 
           case InputKeyDownEnter:
             if (allowCustomValue) {
@@ -664,7 +666,12 @@ const ComboBox = forwardRef(
         return itemToString(item);
       },
       onInputValueChange({ inputValue }) {
-        setInputValue(inputValue || '');
+        const newInputValue = inputValue || '';
+        setInputValue(newInputValue);
+        if (selectedItemProp && !inputValue) {
+          // ensure onChange is called when selectedItem is cleared
+          onChange({ selectedItem, inputValue: newInputValue });
+        }
         setHighlightedIndex(indexToHighlight(inputValue));
       },
       onSelectedItemChange({ selectedItem }) {

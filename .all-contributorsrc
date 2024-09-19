@@ -1615,6 +1615,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "Neues",
+      "name": "Noah Sgorbati",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9409245?v=4",
+      "profile": "https://github.com/Neues",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"
