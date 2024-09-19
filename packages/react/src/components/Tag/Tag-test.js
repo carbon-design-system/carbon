@@ -8,9 +8,11 @@
 import { Add } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import Tag from './';
+import Tag, { TagSkeleton } from './';
 import DismissibleTag from './DismissibleTag';
 import { AILabel } from '../AILabel';
+
+const prefix = 'cds';
 
 describe('Tag', () => {
   describe('automated accessibility testing', () => {
@@ -62,5 +64,23 @@ describe('Tag', () => {
     expect(
       screen.getByRole('button', { name: 'AI - Show information' })
     ).toBeInTheDocument();
+  });
+
+  describe('Skeleton Tag', () => {
+    it('should render a skeleton state', () => {
+      const { container } = render(<TagSkeleton />);
+
+      const skeletonTag = container.querySelector(`.${prefix}--tag`);
+
+      expect(skeletonTag).toHaveClass(`${prefix}--skeleton`);
+    });
+
+    it('should render a skeleton state with a small size', () => {
+      const { container } = render(<TagSkeleton size="sm" />);
+
+      const skeletonTag = container.querySelector(`.${prefix}--tag`);
+
+      expect(skeletonTag).toHaveClass(`${prefix}--layout--size-sm`);
+    });
   });
 });
