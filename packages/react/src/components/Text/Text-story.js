@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { LayoutDirection } from '../LayoutDirection';
-import { TextDirection, Text } from '../Text';
+import { TextDirection, Text } from '.';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
 import Button from '../Button';
