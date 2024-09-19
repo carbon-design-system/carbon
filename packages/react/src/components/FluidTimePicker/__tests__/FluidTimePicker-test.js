@@ -15,28 +15,28 @@ const prefix = 'cds';
 
 describe('FluidTimePicker', () => {
   describe('renders as expected - Component API', () => {
-    // it('should add extra classes that are passed via className', () => {
-    //   const { container } = render(
-    //     <FluidTimePicker
-    //       className="custom-class"
-    //       id="time=picker-1"
-    //       data-testid="timePicker-1"
-    //       labelText="Time">
-    //       <FluidTimePickerSelect id="select-1" labelText="Clock">
-    //         <SelectItem value="am" text="AM" />
-    //         <SelectItem value="pm" text="PM" />
-    //       </FluidTimePickerSelect>
-    //       <FluidTimePickerSelect id="select-2" labelText="Timezone">
-    //         <SelectItem value="et" text="Eastern Time (ET)" />
-    //         <SelectItem value="ct" text="Central Time (CT)" />
-    //         <SelectItem value="mt" text="Mountain Time (MT)" />
-    //         <SelectItem value="pt" text="Pacific Time (PT)" />
-    //       </FluidTimePickerSelect>
-    //     </FluidTimePicker>
-    //   );
+    it('should add extra classes that are passed via className', () => {
+      const { container } = render(
+        <FluidTimePicker
+          className="custom-class"
+          id="time=picker-1"
+          data-testid="timePicker-1"
+          labelText="Time">
+          <FluidTimePickerSelect id="select-1" labelText="Clock">
+            <SelectItem value="am" text="AM" />
+            <SelectItem value="pm" text="PM" />
+          </FluidTimePickerSelect>
+          <FluidTimePickerSelect id="select-2" labelText="Timezone">
+            <SelectItem value="et" text="Eastern Time (ET)" />
+            <SelectItem value="ct" text="Central Time (CT)" />
+            <SelectItem value="mt" text="Mountain Time (MT)" />
+            <SelectItem value="pt" text="Pacific Time (PT)" />
+          </FluidTimePickerSelect>
+        </FluidTimePicker>
+      );
 
-    //   expect(container.firstChild).toHaveClass('custom-class');
-    // });
+      expect(container.firstChild).toHaveClass('custom-class');
+    });
 
     it('should add fluid classes by default', () => {
       const { container } = render(
