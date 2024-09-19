@@ -5,11 +5,15 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
-- [Overview](#overview)
-- [Global flags](#global-flags)
-- [Feature flags](#feature-flags)
-- [Optimizing your Sass builds](#optimizing-your-sass-builds)
-- [FAQ](#faq)
+- [Sass](#sass)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Global flags](#global-flags)
+  - [Feature flags](#feature-flags)
+  - [Optimizing your Sass builds](#optimizing-your-sass-builds)
+  - [Prefixes](#prefixes)
+    - [Overriding `$prefix`](#overriding-prefix)
+  - [FAQ](#faq)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
@@ -67,13 +71,14 @@ $css--reset: false;
 
 For a full reference of flags, see the table below.
 
-| Global flag       | Description                                                          | Default value |
-| ----------------- | -------------------------------------------------------------------- | ------------- |
-| `$css--font-face` | Includes the font-face mixins for the current font family (IBM Plex) | `true`        |
-| `$css--helpers`   | Includes classes and utilities that are commonly used by components  | `true`        |
-| `$css--body`      | Sets a top-level reset, type style, and color for the `<body>` tag   | `true`        |
-| `$css--use-layer` | Enables use of box-shadow in `layer()` helpers                       | `true`        |
-| `$css--reset`     | Includes a top-level CSS Reset                                       | `true`        |
+| Global flag                    | Description                                                          | Default value |
+| ------------------------------ | -------------------------------------------------------------------- | ------------- |
+| `$css--font-face`              | Includes the font-face mixins for the current font family (IBM Plex) | `true`        |
+| `$css--helpers`                | Includes classes and utilities that are commonly used by components  | `true`        |
+| `$css--body`                   | Sets a top-level reset, type style, and color for the `<body>` tag   | `true`        |
+| `$css--use-layer`              | Enables use of box-shadow in `layer()` helpers                       | `true`        |
+| `$css--reset`                  | Includes a top-level CSS Reset                                       | `true`        |
+| `$css--emit-type-custom-props` | Emit custom CSS properties for typography                            | `true`        |
 
 ## Feature flags
 

@@ -18,6 +18,12 @@ $css--body: true !default;
 /// @group config
 $css--font-face: true !default;
 
+/// If true, emit the custom type properties in in :root
+/// @access public
+/// @type Bool
+/// @group config
+$css--emit-type-custom-props: true !default;
+
 /// If true, include reset CSS
 /// @access public
 /// @type Bool

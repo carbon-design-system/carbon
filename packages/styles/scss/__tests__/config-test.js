@@ -33,12 +33,14 @@ describe('@carbon/styles/scss/config', () => {
         $css--font-face: false,
         $css--reset: false,
         $css--default-type: false,
+        $css--emit-type-custom-props: false
       );
 
       $_: get('config', (
         css--default-type: config.$css--default-type,
         css--font-face: config.$css--font-face,
         css--reset: config.$css--reset,
+        css--emit-type-custom-props,
         prefix: config.$prefix,
       ));
     `);
@@ -47,6 +49,7 @@ describe('@carbon/styles/scss/config', () => {
       'css--default-type': false,
       'css--font-face': false,
       'css--reset': false,
+      'css--emit-type-custom-props': false,
       prefix: 'test',
     });
   });

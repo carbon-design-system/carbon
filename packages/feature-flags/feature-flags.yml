@@ -50,7 +50,3 @@ feature-flags:
     description: >
       Enable the new focus wrap behavior that doesn't use sentinel nodes
     enabled: false
-  - name: enable-type-custom-properties
-    description: >
-      Enable the output of type custom properties
-    enabled: false

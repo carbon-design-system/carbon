@@ -109,7 +109,7 @@
   }
 }
 
-@if enabled('enable-type-custom-properties') {
+@if config.$css--emit-type-custom-props == true {
   :root {
     @include emit-type-custom-properties();
   }
