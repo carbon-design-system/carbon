@@ -2308,7 +2308,6 @@ __metadata:
     autoprefixer: "npm:^10.4.0"
     babel-loader: "npm:^8.0.4"
     cssnano: "npm:^7.0.0"
-    eslint-plugin-storybook: "npm:^0.6.15"
     flatpickr: "npm:4.6.13"
     globby: "npm:^14.0.2"
     is-port-reachable: "npm:^3.1.0"
@@ -7917,7 +7916,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:5.62.0, @typescript-eslint/utils@npm:^5.45.0, @typescript-eslint/utils@npm:^5.58.0, @typescript-eslint/utils@npm:^5.62.0":
+"@typescript-eslint/utils@npm:5.62.0, @typescript-eslint/utils@npm:^5.58.0, @typescript-eslint/utils@npm:^5.62.0":
   version: 5.62.0
   resolution: "@typescript-eslint/utils@npm:5.62.0"
   dependencies:
@@ -13518,20 +13517,6 @@ __metadata:
   peerDependencies:
     eslint: ">=0.8.0"
   checksum: 10/d93b87fa3e4a816931374edb69da030a54a9673f2ed3bd33110ed0c51b689ffc9d817964dc1b86467b4bbd8ff0bf15d13b43e57d71878d7b818b52eb14074aaf
-  languageName: node
-  linkType: hard
-
-"eslint-plugin-storybook@npm:^0.6.15":
-  version: 0.6.15
-  resolution: "eslint-plugin-storybook@npm:0.6.15"
-  dependencies:
-    "@storybook/csf": "npm:^0.0.1"
-    "@typescript-eslint/utils": "npm:^5.45.0"
-    requireindex: "npm:^1.1.0"
-    ts-dedent: "npm:^2.2.0"
-  peerDependencies:
-    eslint: ">=6"
-  checksum: 10/0c278594c8474ce2f176ffc6610240ae9d6c8f9dafbff02be61e6ae05f15081ce858c5b16e64d8995a3a3777c9d1725953fcde4312efab9118aa544a75b27c46
   languageName: node
   linkType: hard
 
@@ -24388,7 +24373,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"requireindex@npm:^1.1.0, requireindex@npm:^1.2.0":
+"requireindex@npm:^1.2.0":
   version: 1.2.0
   resolution: "requireindex@npm:1.2.0"
   checksum: 10/266d1cb31f6cbc4b6cf2e898f5bbc45581f7919bcf61bba5c45d0adb69b722b9ff5a13727be3350cde4520d7cd37f39df45d58a29854baaa4552cd6b05ae4a1a
