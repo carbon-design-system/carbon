@@ -202,12 +202,14 @@
 
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after,
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
-    inset-inline: auto 0;
+    inset-inline-end: 0;
+    inset-inline-start: auto;
   }
 
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after,
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
-    inset-block: auto 0;
+    inset-block-end: 0;
+    inset-block-start: auto;
   }
 
   .#{$prefix}--overflow-menu-options--open {

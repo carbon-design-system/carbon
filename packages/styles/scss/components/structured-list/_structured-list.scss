@@ -68,7 +68,8 @@
     &.#{$prefix}--structured-list--flush
       .#{$prefix}--structured-list-row
       .#{$prefix}--structured-list-th:first-of-type {
-      padding-inline: 0 1rem;
+      padding-inline-end: 1rem;
+      padding-inline-start: 0;
     }
   }
 

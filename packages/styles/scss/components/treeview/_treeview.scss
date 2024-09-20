@@ -100,8 +100,9 @@
 
   .#{$prefix}--tree-node:not(.#{$prefix}--tree-parent-node)
     .#{$prefix}--tree-node__label {
-    padding-block: convert.to-rem(7px) convert.to-rem(7px);
+    padding-block-end: convert.to-rem(7px);
     // (min-height 32px - single line text height 18px) / 2 = 7px
+    padding-block-start: convert.to-rem(7px);
   }
 
   .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__label__details {
@@ -145,7 +146,8 @@
     block-size: convert.to-rem(24px);
     inline-size: convert.to-rem(24px);
     margin-block-start: $spacing-02;
-    margin-inline: -$spacing-02 $spacing-02;
+    margin-inline-end: $spacing-02;
+    margin-inline-start: -$spacing-02;
     padding-inline-start: $spacing-02;
 
     &:hover {
@@ -171,7 +173,8 @@
     align-self: flex-start;
     fill: $icon-secondary;
     margin-block-start: convert.to-rem(1px);
-    margin-inline: $spacing-03 $spacing-03;
+    margin-inline-end: $spacing-03;
+    margin-inline-start: $spacing-03;
     min-block-size: 1rem;
     min-inline-size: 1rem;
   }

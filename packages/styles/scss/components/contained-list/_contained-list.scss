@@ -198,13 +198,14 @@
     block-size: 1px;
     content: '';
     inset-block-end: 0;
-    inset-inline: 0 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
   }
 
   .#{$prefix}--contained-list--inset-rulers
     .#{$prefix}--contained-list-item:not(:last-of-type)::before {
-    inset-inline: layout.density('padding-inline')
-      layout.density('padding-inline');
+    inset-inline-end: layout.density('padding-inline');
+    inset-inline-start: layout.density('padding-inline');
   }
 
   .#{$prefix}--contained-list-item--clickable
@@ -248,7 +249,8 @@
     display: flex;
     justify-content: flex-end;
     inset-block-start: 0;
-    inset-inline: 0 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     pointer-events: none;
   }
 
