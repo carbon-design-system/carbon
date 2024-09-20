@@ -55,7 +55,7 @@ jobs:
           AWS_REGION: ${{ secrets.COMMON_COS_REGION }}
           AWS_S3_ENDPOINT: https://${{ secrets.COMMON_COS_ENDPOINT }}
           SOURCE_DIR: 'packages/web-components/dist'
-          DEST_DIR: 'common/carbon/web-components/tag/next'
+          DEST_DIR: 'common/carbon/web-components/tag/v2/next'
 
       # If tag is a full release, upload the CDN artifacts to the `latest` tag folder
       # ie. https://1.www.s81c.com/common/carbon/web-components/tag/latest/breadcrumb.min.js
@@ -71,7 +71,7 @@ jobs:
           AWS_REGION: ${{ secrets.COMMON_COS_REGION }}
           AWS_S3_ENDPOINT: https://${{ secrets.COMMON_COS_ENDPOINT }}
           SOURCE_DIR: 'packages/web-components/dist'
-          DEST_DIR: 'common/carbon/web-components/tag/latest'
+          DEST_DIR: 'common/carbon/web-components/tag/v2/latest'
 
       # Upload the CDN artifacts to versioned folder
       # ie. https://1.www.s81c.com/common/carbon/web-components/version/v2.12.0/breadcrumb.min.js
