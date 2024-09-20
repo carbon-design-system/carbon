@@ -97,7 +97,8 @@
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    padding-block: 0;
+    padding-block-end: 0;
+    padding-block-start: 0;
     padding-inline-end: 0;
 
     &:hover {

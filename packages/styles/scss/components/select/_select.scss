@@ -217,7 +217,8 @@
     border-block-end: none;
     color: $text-primary;
     inline-size: auto;
-    padding-inline: $spacing-03 $spacing-07;
+    padding-inline-end: $spacing-07;
+    padding-inline-start: $spacing-03;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input:focus,

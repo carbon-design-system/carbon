@@ -684,7 +684,8 @@ $sizes: (
 
   .#{$prefix}--slug .#{$prefix}--toggletip-content {
     // This sets the max size to the size of the action bar with 3 buttons
-    padding-block: convert.to-rem(24px) convert.to-rem(80px);
+    padding-block-end: convert.to-rem(80px);
+    padding-block-start: convert.to-rem(24px);
     padding-inline: convert.to-rem(24px);
   }
 

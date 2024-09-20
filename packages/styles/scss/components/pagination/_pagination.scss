@@ -164,12 +164,14 @@
   }
 
   .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
-    margin-inline: convert.to-rem(1px) 1rem;
+    margin-inline-end: 1rem;
+    margin-inline-start: convert.to-rem(1px);
   }
 
   .#{$prefix}--pagination__right
     .#{$prefix}--pagination__text.#{$prefix}--pagination__page-text {
-    margin-inline: 1rem convert.to-rem(1px);
+    margin-inline-end: convert.to-rem(1px);
+    margin-inline-start: 1rem;
   }
 
   .#{$prefix}--pagination__right

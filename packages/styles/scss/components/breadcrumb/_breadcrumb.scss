@@ -163,6 +163,7 @@
   .#{$prefix}--breadcrumb
     .#{$prefix}--overflow-menu.#{$prefix}--btn--icon-only {
     min-block-size: 1.125rem;
-    padding-inline: 0 0;
+    padding-inline-end: 0;
+    padding-inline-start: 0;
   }
 }

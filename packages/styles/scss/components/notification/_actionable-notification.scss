@@ -336,7 +336,8 @@
     margin-inline-start: calc(
       #{$spacing-07} + #{convert.to-rem(20px)} - #{convert.to-rem(2px)}
     );
-    padding-inline: $spacing-05;
+    padding-inline-end: $spacing-05;
+    padding-inline-start: $spacing-05;
   }
 
   // Tertiary button styles by default use mostly "inverse" tokens. Since the non-low-contrast notification

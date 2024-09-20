@@ -375,7 +375,8 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
   // RTL overrides
   [dir='rtl'] .#{$prefix}--accordion--start .#{$prefix}--accordion__heading {
-    padding-inline: layout.density('padding-inline') 0;
+    padding-inline-end: 0;
+    padding-inline-start: layout.density('padding-inline');
   }
 
   [dir='rtl'] .#{$prefix}--accordion--start .#{$prefix}--accordion__title {

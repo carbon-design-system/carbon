@@ -36,7 +36,8 @@
     background-color: $background;
     color: $text-secondary;
     inline-size: mini-units(6);
-    inset-block: 0 0;
+    inset-block-end: 0;
+    inset-block-start: 0;
     inset-inline-start: 0;
     max-inline-size: mini-units(32);
     // TODO: sync with motion work
@@ -270,7 +271,8 @@
       background-color: $border-interactive;
       content: '';
       inline-size: 3px;
-      inset-block: 0 0;
+      inset-block-end: 0;
+      inset-block-start: 0;
       inset-inline-start: 0;
     }
   }
@@ -381,7 +383,8 @@
     background-color: $border-interactive;
     content: '';
     inline-size: 3px;
-    inset-block: 0 0;
+    inset-block-end: 0;
+    inset-block-start: 0;
     inset-inline-start: 0;
   }
 
