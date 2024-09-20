@@ -10,6 +10,7 @@
 import type { StorybookConfig } from '@storybook/web-components-vite';
 import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
+import remarkGfm from 'remark-gfm';
 import viteSVGResultCarbonIconLoader from '../tools/vite-svg-result-carbon-icon-loader';
 const glob = require('fast-glob');
 
@@ -28,6 +29,16 @@ const stories = glob.sync(
 const config: StorybookConfig = {
   stories: stories,
   addons: [
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-storysource',

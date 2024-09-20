@@ -2316,6 +2316,7 @@ __metadata:
     null-loader: "npm:^4.0.0"
     prop-types: "npm:^15.7.2"
     read-package-up: "npm:^11.0.0"
+    remark-gfm: "npm:^4.0.0"
     rimraf: "npm:^6.0.0"
     rollup: "npm:^2.79.1"
     rollup-plugin-copy: "npm:^3.5.0"
