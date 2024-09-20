@@ -280,7 +280,8 @@
     transform: none;
 
     &::before {
-      inset-inline: 0 auto;
+      inset-inline-end: auto;
+      inset-inline-start: 0;
     }
 
     &:hover,

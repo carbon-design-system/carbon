@@ -416,7 +416,8 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
     // (The height of button) + (The height of the tooltip's triangle) + 4px
     inset-block-start: convert.to-rem(50.8px);
-    inset-inline: 50% auto;
+    inset-inline-end: auto;
+    inset-inline-start: 50%;
 
     &::before {
       inset-block-start: 0;
@@ -438,7 +439,8 @@ $copy-btn-feedback: $background-inverse !default;
     // TODO: use updated global tooltip mixins under the hood
     // since all of the positioning values for the copy button tooltip are arbitrary hard coded rem values, we need this arbitrary 4px offset to keep the proper tooltip spacing according to the spec
     inset-block-start: calc(100% - #{convert.to-rem(4px)});
-    inset-inline: 50% auto;
+    inset-inline-end: auto;
+    inset-inline-start: 50%;
   }
 
   // Overflow Indicator

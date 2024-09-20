@@ -27,7 +27,8 @@
     background-color: $layer;
     color: $text-secondary;
     inline-size: 0;
-    inset-block: mini-units(6) 0;
+    inset-block-end: 0;
+    inset-block-start: mini-units(6);
     inset-inline-end: 0;
     transition: width $duration-fast-02 motion(exit, productive);
     will-change: width;
