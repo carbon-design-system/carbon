@@ -358,7 +358,10 @@ export const HeaderWNavigationActionsAndSideNav = () => (
                   <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
                 </HeaderMenu>
               </HeaderSideNavItems>
-              <SideNavMenu renderIcon={Fade} title="Category title">
+              <SideNavMenu
+                renderIcon={Fade}
+                title="Category title"
+                tabIndex={0}>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link 5
                 </SideNavMenuItem>
@@ -369,7 +372,10 @@ export const HeaderWNavigationActionsAndSideNav = () => (
                   Link 7
                 </SideNavMenuItem>
               </SideNavMenu>
-              <SideNavMenu renderIcon={Fade} title="Category title">
+              <SideNavMenu
+                renderIcon={Fade}
+                title="Category title"
+                tabIndex={0}>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link 8
                 </SideNavMenuItem>
@@ -383,7 +389,8 @@ export const HeaderWNavigationActionsAndSideNav = () => (
               <SideNavMenu
                 renderIcon={Fade}
                 title="Category title"
-                isActive={true}>
+                isActive={true}
+                tabIndex={0}>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link 11
                 </SideNavMenuItem>

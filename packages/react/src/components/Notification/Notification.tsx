@@ -62,7 +62,10 @@ function useEscapeToClose(ref, callback, override = true) {
   };
 
   useIsomorphicEffect(() => {
-    document.addEventListener('keydown', handleKeyDown, false);
+    if (ref.current !== null) {
+      document.addEventListener('keydown', handleKeyDown, false);
+    }
+
     return () => document.removeEventListener('keydown', handleKeyDown, false);
   });
 }

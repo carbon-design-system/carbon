@@ -18,11 +18,11 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 const storyGlobs = [
   './Welcome/Welcome.mdx',
   '../src/**/*.stories.js',
-  '../src/**/*.stories.mdx',
+  '../src/**/*.mdx',
   '../src/components/Tile/Tile.mdx',
   '../src/**/next/*.stories.js',
   '../src/**/next/**/*.stories.js',
-  '../src/**/next/*.stories.mdx',
+  '../src/**/next/*.mdx',
   '../src/**/*-story.js',
 ];
 
