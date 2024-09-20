@@ -91,10 +91,9 @@
       }
 
       .#{$prefix}--tab--list {
+        overflow: visible auto;
         flex-direction: column;
         inline-size: 100%;
-        overflow-x: visible;
-        overflow-y: auto;
       }
 
       .#{$prefix}--tab--list-gradient_bottom {
@@ -157,8 +156,7 @@
 
     .#{$prefix}--tab--overflow-nav-button--next {
       position: absolute;
-      inset-block-end: 0;
-      inset-block-start: 0;
+      inset-block: 0 0;
       inset-inline-end: 0;
     }
 
@@ -187,8 +185,7 @@
 
     .#{$prefix}--tab--overflow-nav-button--previous {
       position: absolute;
-      inset-block-end: 0;
-      inset-block-start: 0;
+      inset-block: 0 0;
       inset-inline-start: 0;
     }
 

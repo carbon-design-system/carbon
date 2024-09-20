@@ -1,0 +1,197 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/layer' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/components/modal' as *;
+@use '@carbon/styles/scss/components/button' as *;
+
+:host(#{$prefix}-modal[open]) {
+  @extend .#{$prefix}--modal;
+
+  opacity: 1;
+  transition: opacity $duration-moderate-02 motion(entrance, expressive),
+    visibility 0ms linear;
+  visibility: inherit;
+
+  .#{$prefix}--modal-container {
+    transform: translate3d(0, 0, 0);
+    transition: transform $duration-moderate-02 motion(entrance, expressive);
+  }
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+:host(#{$prefix}-modal) {
+  @extend .#{$prefix}--modal;
+}
+
+:host(#{$prefix}-modal[full-width]) {
+  ::slotted(#{$prefix}-modal-body) {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+:host(#{$prefix}-modal[has-scrolling-content])
+  ::slotted(#{$prefix}-modal-body) {
+  @extend .#{$prefix}--modal-scroll-content;
+}
+
+:host(#{$prefix}-modal-header) {
+  @extend .#{$prefix}--modal-header;
+}
+
+:host(#{$prefix}-modal-close-button) {
+  @extend .#{$prefix}--modal-close-button;
+
+  outline: none;
+}
+
+:host(#{$prefix}-modal-heading),
+:host(#{$prefix}-modal-label) {
+  display: block;
+}
+
+:host(#{$prefix}-modal-heading) {
+  @extend .#{$prefix}--modal-header__heading;
+}
+
+:host(#{$prefix}-modal-label) {
+  @extend .#{$prefix}--modal-header__label;
+}
+
+:host(#{$prefix}-modal-body) {
+  @extend .#{$prefix}--modal-content;
+  @extend .#{$prefix}--layer-two;
+
+  ::slotted(#{$prefix}-form-item) {
+    margin-block-end: $spacing-05;
+  }
+
+  ::slotted(#{$prefix}-select:last-of-type) {
+    padding-block-end: 0;
+  }
+
+  ::slotted(*:last-child) {
+    padding-block-end: $spacing-07;
+  }
+}
+
+:host(#{$prefix}-modal-body-content) {
+  @include type-style('body-01');
+
+  display: block;
+  padding-inline-end: calc(20% - #{$spacing-07});
+}
+
+:host(#{$prefix}-modal-body-content[description]) {
+  margin-block-end: $spacing-05;
+}
+
+:host(#{$prefix}-modal-footer) {
+  @extend .#{$prefix}--modal-footer;
+}
+
+:host(#{$prefix}-modal-footer[has-three-buttons]) {
+  @extend .#{$prefix}--modal-footer--three-button;
+
+  ::slotted(#{$prefix}-modal-footer-button) {
+    flex: 0 1 25%;
+  }
+}
+
+:host(#{$prefix}-modal-footer-button:first-of-type) .#{$prefix}--btn {
+  box-shadow: inherit;
+}
+
+:host(#{$prefix}-modal-footer-button) {
+  .#{$prefix}--btn {
+    block-size: 100%;
+    box-shadow: rem(-1px) 0 0 0 $button-separator;
+    inline-size: 100%;
+    max-inline-size: none;
+
+    padding-block: $spacing-05 $spacing-07;
+
+    &:focus {
+      box-shadow: inset 0 0 0 $button-outline-width $focus,
+        inset 0 0 0 $button-border-width $background;
+    }
+  }
+}
+
+:host(#{$prefix}-modal-footer) ::slotted(#{$prefix}-button),
+:host(#{$prefix}-modal-footer-button) {
+  flex: 0 1 50%;
+  margin: 0;
+  block-size: $spacing-10;
+  inline-size: 50%;
+  max-inline-size: none;
+}
+
+// Slug
+
+:host(#{$prefix}-modal[slug]) {
+  background-color: $ai-overlay;
+}
+
+:host(#{$prefix}-modal[slug]) .#{$prefix}--modal-container {
+  @include ai-popover-gradient('default', 0, 'layer');
+
+  border: 1px solid transparent;
+  background-color: $layer;
+  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+    0 24px 40px -24px $ai-drop-shadow;
+}
+
+:host(#{$prefix}-modal[slug][has-footer]) .#{$prefix}--modal-container {
+  @include ai-popover-gradient('default', 64px, 'layer');
+
+  box-shadow: inset 0 -80px 0 -16px $layer,
+    inset 0 -160px 70px -65px $ai-inner-shadow,
+    0 24px 40px -24px $ai-drop-shadow;
+}
+
+:host(#{$prefix}-modal[slug][has-scrolling-content]) {
+  ::slotted(#{$prefix}-modal-body) {
+    mask-image: linear-gradient(
+        to bottom,
+        $layer calc(100% - 80px),
+        transparent calc(100% - 48px),
+        transparent 100%
+      ),
+      linear-gradient(to left, $layer 0, 16px, transparent 16px),
+      linear-gradient(to right, $layer 0, 2px, transparent 2px),
+      linear-gradient(to top, $layer 0, 2px, transparent 2px);
+  }
+}
+
+:host(#{$prefix}-modal[slug])
+  .#{$prefix}--modal-content--overflow-indicator::before,
+:host(#{$prefix}-modal[slug]) .#{$prefix}--modal-content--overflow-indicator {
+  display: none;
+}
+
+:host(#{$prefix}-modal-header) ::slotted(#{$prefix}-slug) {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+:host(#{$prefix}-modal-header[close-button]) ::slotted(#{$prefix}-slug) {
+  inset-inline-end: $spacing-09;
+}
