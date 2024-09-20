@@ -61,13 +61,11 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
     calc((layout.size('height') - var(--temp-1lh)) / 2 - convert.to-rem(1px)),
     var(--temp-padding-block-max)
   );
-  padding-inline-end: calc(
-    layout.density('padding-inline') * 3 + convert.to-rem(16px) -
-      convert.to-rem(1px)
-  );
-  padding-inline-start: calc(
-    layout.density('padding-inline') - convert.to-rem(1px)
-  );
+  padding-inline: calc(layout.density('padding-inline') - convert.to-rem(1px))
+    calc(
+      layout.density('padding-inline') * 3 + convert.to-rem(16px) -
+        convert.to-rem(1px)
+    );
   text-align: start;
   text-decoration: none;
   transition: background $duration-fast-01 motion(entrance, productive),
@@ -146,6 +144,5 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
 @mixin button-padding-large {
   align-items: baseline;
   padding-block-start: $spacing-05;
-  padding-inline-end: $spacing-10;
-  padding-inline-start: $spacing-05;
+  padding-inline: $spacing-05 $spacing-10;
 }
