@@ -348,7 +348,8 @@
 
   .#{$prefix}--date-picker--fluid__skeleton--container
     .#{$prefix}--date-picker__icon {
-    inset-block: auto $spacing-03;
+    inset-block-end: $spacing-03;
+    inset-block-start: auto;
   }
 
   // Range skeleton

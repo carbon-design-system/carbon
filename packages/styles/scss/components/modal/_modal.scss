@@ -113,10 +113,12 @@
     grid-column: 1/-1;
     grid-row: 2/-2;
     overflow-y: auto;
-    padding-block: $spacing-03 $spacing-09;
+    padding-block-end: $spacing-09;
     // Required to accommodate focus outline's negative offset:
+    padding-block-start: $spacing-03;
     // anything besides text/p spans full width, with just 16px padding
-    padding-inline: $spacing-05 $spacing-05;
+    padding-inline-end: $spacing-05;
+    padding-inline-start: $spacing-05;
 
     &:focus {
       @include focus-outline('outline');
@@ -125,7 +127,8 @@
 
   // fluid form in modal
   .#{$prefix}--modal-content .#{$prefix}--form--fluid {
-    margin-inline: -$spacing-05 -$spacing-05;
+    margin-inline-end: -$spacing-05;
+    margin-inline-start: -$spacing-05;
   }
 
   //TO-DO: remove .#{$prefix}--modal-content__regular-content in v11 since hasForm has been deprecated
@@ -151,7 +154,8 @@
     grid-row: 1/1;
     margin-block-end: $spacing-03;
     padding-block-start: $spacing-05;
-    padding-inline: $spacing-05 $spacing-09;
+    padding-inline-end: $spacing-09;
+    padding-inline-start: $spacing-05;
   }
 
   .#{$prefix}--modal-header__label {
@@ -295,7 +299,8 @@
     margin: 0;
     block-size: convert.to-rem(64px);
     max-inline-size: none;
-    padding-block: calc($spacing-05 - convert.to-rem(2px)) $spacing-07;
+    padding-block-end: $spacing-07;
+    padding-block-start: calc($spacing-05 - convert.to-rem(2px));
   }
 
   .#{$prefix}--modal-footer--three-button .#{$prefix}--btn {

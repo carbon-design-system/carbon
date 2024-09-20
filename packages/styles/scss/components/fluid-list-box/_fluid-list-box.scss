@@ -61,7 +61,8 @@
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__field {
-    padding-block: convert.to-rem(33px) convert.to-rem(13px);
+    padding-block-end: convert.to-rem(13px);
+    padding-block-start: convert.to-rem(33px);
     padding-inline-start: $spacing-05;
   }
 

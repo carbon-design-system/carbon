@@ -265,7 +265,8 @@
   }
 
   .flatpickr-current-month .cur-month {
-    margin-inline: $spacing-02 $spacing-02;
+    margin-inline-end: $spacing-02;
+    margin-inline-start: $spacing-02;
 
     &:hover {
       background-color: $layer-hover;
