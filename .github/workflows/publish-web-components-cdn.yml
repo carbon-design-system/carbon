@@ -42,7 +42,7 @@ jobs:
           path: packages/web-components
 
       # If tag is a release candidate, upload the CDN artifacts to the `next` tag folder
-      # ie. https://1.www.s81c.com/common/carbon/web-components/tag/next/breadcrumb.min.js
+      # ie. https://1.www.s81c.com/common/carbon/web-components/tag/v2/next/breadcrumb.min.js
       - name: Upload to COS under the `next` folder
         if: ${{ env.PRE_RELEASE }}
         uses: jakejarvis/s3-sync-action@master
@@ -58,7 +58,7 @@ jobs:
           DEST_DIR: 'common/carbon/web-components/tag/v2/next'
 
       # If tag is a full release, upload the CDN artifacts to the `latest` tag folder
-      # ie. https://1.www.s81c.com/common/carbon/web-components/tag/latest/breadcrumb.min.js
+      # ie. https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/breadcrumb.min.js
       - name: Upload to COS under the `latest` folder
         if: ${{ !env.PRE_RELEASE }}
         uses: jakejarvis/s3-sync-action@master
