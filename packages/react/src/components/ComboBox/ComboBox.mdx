@@ -1,6 +1,8 @@
-import { ArgTypes, Canvas } from '@storybook/blocks';
+import { ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import * as ComboBoxStories from './ComboBox.stories.js';
 import ComboBox from '../ComboBox';
+
+<Meta isTemplate />
 
 # ComboBox
 
@@ -121,7 +123,7 @@ want to fully control the component, you can use `initialSelectedItem`
 ```jsx
 const items = ['Option 1', 'Option 2', 'Option 3']
 
-<Combobox initialSelectedItem={items[2]} />;
+<Combobox initialSelectedItem={items[2]} />
 ```
 
 ## `itemToElement`
