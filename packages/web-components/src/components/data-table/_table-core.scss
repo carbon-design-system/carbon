@@ -454,16 +454,16 @@
   .#{$prefix}--table-expand__button {
     margin-inline-start: $spacing-06;
   }
+}
 
-  &[slug] {
-    #{$prefix}-checkbox,
-    #{$prefix}-radio-button {
-      padding-inline-start: $spacing-05;
-    }
+:host(#{$prefix}-table-row[rows-with-slug][slug]) {
+  #{$prefix}-checkbox,
+  #{$prefix}-radio-button {
+    padding-inline-start: $spacing-05;
+  }
 
-    .#{$prefix}--table-expand__button {
-      margin-inline-start: $spacing-03;
-    }
+  .#{$prefix}--table-expand__button {
+    margin-inline-start: $spacing-03;
   }
 }
 

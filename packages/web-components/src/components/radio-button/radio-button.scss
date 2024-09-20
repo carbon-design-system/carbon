@@ -59,6 +59,10 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-radio-button:not(:last-of-type)) {
+  margin-inline-end: $spacing-05;
+}
+
 :host(#{$prefix}-radio-button[orientation='vertical']) {
   margin-block-end: to-rem(6px);
   margin-inline-end: 0;

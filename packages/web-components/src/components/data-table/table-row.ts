@@ -14,6 +14,8 @@ import ChevronRight16 from '@carbon/icons/lib/chevron--right/16';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './data-table.scss?lit';
+import '../checkbox';
+import '../radio-button';
 
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';

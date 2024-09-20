@@ -128,8 +128,8 @@
   @extend .#{$prefix}--batch-actions;
 
   box-sizing: border-box;
+}
 
-  &[active] {
-    @extend .#{$prefix}--batch-actions--active;
-  }
+:host(#{$prefix}-table-batch-actions[active]) {
+  @extend .#{$prefix}--batch-actions--active;
 }
