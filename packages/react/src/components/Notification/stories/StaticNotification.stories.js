@@ -30,7 +30,7 @@ export const Default = () => (
         project:
       </p>
       <CodeSnippet type="single" feedback="Copied to clipboard">
-        npx @carbon/upgrade migrate rename-staticnotification-to-callout --write
+        npx @carbon/upgrade migrate refactor-to-callout --write
       </CodeSnippet>
     </div>
   </>

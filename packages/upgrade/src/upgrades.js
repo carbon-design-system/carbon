@@ -292,14 +292,11 @@ export const upgrades = [
         },
       },
       {
-        name: 'rename-staticnotification-to-callout',
+        name: 'refactor-to-callout',
         description:
           'Rewrites imports and usages of StaticNotification to Callout',
         migrate: async (options) => {
-          const transform = path.join(
-            TRANSFORM_DIR,
-            'rename-staticnotification-to-callout.js'
-          );
+          const transform = path.join(TRANSFORM_DIR, 'refactor-to-callout.js');
           const paths =
             Array.isArray(options.paths) && options.paths.length > 0
               ? options.paths

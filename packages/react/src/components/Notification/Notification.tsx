@@ -1408,7 +1408,7 @@ export const StaticNotification: React.FC<StaticNotificationProps> = (
       didWarnAboutDeprecation,
       '`StaticNotification` has been renamed to `Callout`.' +
         'Run the following codemod to automatically update usages in your' +
-        'project: `npx @carbon/upgrade migrate rename-staticnotification-to-callout --write`'
+        'project: `npx @carbon/upgrade migrate refactor-to-callout --write`'
     );
     didWarnAboutDeprecation = true;
   }
