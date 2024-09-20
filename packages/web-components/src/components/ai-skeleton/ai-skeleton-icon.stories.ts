@@ -20,7 +20,7 @@ export const Default = {
     },
   },
   render: () => {
-    html`<cds-ai-skeleton-icon
+    return html`<cds-ai-skeleton-icon
         custom-styles="margin: 50px"></cds-ai-skeleton-icon>
       <cds-ai-skeleton-icon
         custom-styles="margin: 50px; width: 24px; height: 24px"></cds-ai-skeleton-icon>`;

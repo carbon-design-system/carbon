@@ -20,7 +20,7 @@ export const Default = {
     },
   },
   render: () => {
-    html`<cds-ai-skeleton-placeholder
+    return html`<cds-ai-skeleton-placeholder
       class="test"></cds-ai-skeleton-placeholder>`;
   },
 };

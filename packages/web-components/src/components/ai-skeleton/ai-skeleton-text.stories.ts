@@ -46,7 +46,7 @@ export const Default = {
     },
   },
   render: () => {
-    html`<cds-ai-skeleton-text></cds-ai-skeleton-text>`;
+    return html`<cds-ai-skeleton-text></cds-ai-skeleton-text>`;
   },
 };
 
