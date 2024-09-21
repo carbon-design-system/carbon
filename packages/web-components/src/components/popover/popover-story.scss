@@ -1,0 +1,124 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2019, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
+
+/// Utilities
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.justify-items-end {
+  justify-items: end;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mb-3 {
+  margin-block-end: $spacing-05;
+}
+
+.mt-9 {
+  padding-block-start: $spacing-09;
+}
+
+.mt-10 {
+  padding-block-start: $spacing-10;
+}
+
+.p-3 {
+  padding: $spacing-05;
+}
+
+#{$prefix}-popover .playground-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid theme.$border-subtle;
+  block-size: $spacing-07;
+  inline-size: $spacing-07;
+}
+
+#{$prefix}-popover .playground-trigger svg {
+  fill: theme.$background-inverse;
+}
+
+#{$prefix}-popover .popover-title {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-01;
+}
+
+#{$prefix}-popover .popover-details {
+  @include type.type-style('body-compact-01');
+}
+
+#{$prefix}-popover .popover-story {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+.popover-tabtip-story .p-3 {
+  inline-size: 16rem;
+}
+
+.popover-tabtip-story #{$prefix}-popover .#{$prefix}--radio-button-wrapper {
+  margin-block-end: $spacing-03;
+}
+
+.popover-tabtip-story hr {
+  border: none;
+  margin: $spacing-03 0 $spacing-05;
+  background: theme.$border-subtle;
+  block-size: 1px;
+}
+
+.popover-tabtip-story #{$prefix}-popover:last-of-type {
+  margin-inline-start: 15rem;
+}

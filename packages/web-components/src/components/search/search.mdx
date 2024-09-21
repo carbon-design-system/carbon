@@ -1,0 +1,53 @@
+import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SearchStories from './search.stories';
+
+<Meta of={SearchStories} />
+
+# Search
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/search)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/search)
+
+Search enables users to specify a word or a phrase to find particular relevant
+pieces of content without the use of navigation. Search can be used as the
+primary means of discovering content, or as a filter to aid the user in finding
+content.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/search/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['search'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-search label-text="Search"></cds-search>
+```
+
+## Skeleton
+
+For the skeleton variation, utilize `<cds-search-skeleton>`.
+
+```html
+<cds-search-skeleton></cds-search-skeleton>
+```
+
+## `<cds-search>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-search light>`) and `false` means not setting the attribute (e.g.
+`<cds-search>` without `light` attribute).
+
+<ArgTypes of="cds-search" />

@@ -1,0 +1,58 @@
+import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as PaginationStories from './pagination.stories';
+
+<Meta of={PaginationStories} />
+
+# Pagination
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/pagination)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/pagination)
+
+The pagination component is used to switch through multiple pages of items, when
+only a maximum number of items can be displayed per page. Can be used in
+combination with other components like data table.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/pagination/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['pagination'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-pagination page-size="10" total-items="100">
+  <cds-select-item value="10">10</cds-select-item>
+  <cds-select-item value="20">20</cds-select-item>
+  <cds-select-item value="30">30</cds-select-item>
+  <cds-select-item value="40">40</cds-select-item>
+  <cds-select-item value="50">50</cds-select-item>
+</cds-pagination>
+```
+
+## `<cds-pagination>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-pagination at-last-page>`) and `false` means not setting the attribute
+(e.g. `<cds-pagination>` without `at-last-page` attribute).
+
+<ArgTypes of="cds-pagination" />
+
+## `<cds-pages-select>` attributes, properties and events
+
+<ArgTypes of="cds-pages-select" />
+
+## `<cds-page-sizes-select>` attributes, properties and events
+
+<ArgTypes of="cds-page-sizes-select" />
