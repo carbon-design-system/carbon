@@ -205,7 +205,7 @@
 
   .#{$prefix}--data-table td,
   .#{$prefix}--data-table tbody th {
-    border-block-end: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle-01;
     border-block-start: 1px solid $layer;
     color: $text-secondary;
     padding-inline: $spacing-05 $spacing-05;
