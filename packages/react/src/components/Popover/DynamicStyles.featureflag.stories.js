@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { Information } from '@carbon/icons-react';
+import React, { useState } from 'react';
+import { Information, Checkbox as CheckboxIcon } from '@carbon/icons-react';
 import { ComboBox } from '../ComboBox';
 import { ComboButton } from '../ComboButton';
 import { Dropdown } from '../Dropdown';
@@ -19,12 +19,18 @@ import {
   ToggletipContent,
   ToggletipActions,
 } from '../Toggletip';
-import { MenuItem } from '../Menu';
+import { Tooltip } from '../Tooltip';
+import { MenuItem, MenuItemDivider } from '../Menu';
 import { MenuButton } from '../MenuButton';
 import { MultiSelect } from '../MultiSelect';
+import { Popover, PopoverContent } from '../Popover';
+import { OverflowMenu } from '../OverflowMenu';
 import { action } from '@storybook/addon-actions';
 import mdx from './DynamicStyles.featureflag.mdx';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
+
+import './story.scss';
+import '../Tooltip/story.scss';
 
 // eslint-disable-next-line storybook/csf-component
 export default {
@@ -159,6 +165,41 @@ _Dropdown.argTypes = {
   },
 };
 
+export const _Popover = () => {
+  const [open, setOpen] = useState(true);
+
+  return (
+    <Popover open={open} align="top">
+      <div className="playground-trigger">
+        <CheckboxIcon
+          onClick={() => {
+            setOpen(!open);
+          }}
+        />
+      </div>
+      <PopoverContent className="p-3">
+        <div>
+          <p className="popover-title">This popover uses autoAlign</p>
+          <p className="popover-details">
+            Scroll the container up, down, left or right to observe how the
+            popover will automatically change its position in attempt to stay
+            within the viewport. This works on initial render in addition to on
+            scroll.
+          </p>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+};
+
+_Popover.argTypes = {
+  hasFocus: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
 export const _MenuButton = () => (
   <MenuButton label="Actions">
     <MenuItem label="First action" />
@@ -223,6 +264,51 @@ export const _Toggletip = () => {
 };
 
 _Toggletip.argTypes = {
+  hasFocus: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const _Tooltip = () => {
+  const tooltipLabel =
+    'Scroll the container up, down, left or right to observe how the tooltip will automatically change its position in attempt to stay within the viewport. This works on initial render in addition to on scroll.';
+  return (
+    <div>
+      <Tooltip label={tooltipLabel} align="top">
+        <button className="sb-tooltip-trigger" type="button">
+          <Information />
+        </button>
+      </Tooltip>
+    </div>
+  );
+};
+
+_Tooltip.argTypes = {
+  hasFocus: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const _OverflowMenu = () => {
+  return (
+    <div>
+      <OverflowMenu>
+        <MenuItem label="Stop app" />
+        <MenuItem label="Restart app" />
+        <MenuItem label="Rename app" />
+        <MenuItem label="Edit routes and access" />
+        <MenuItemDivider />
+        <MenuItem label="Delete app" kind="danger" />
+      </OverflowMenu>
+    </div>
+  );
+};
+
+_OverflowMenu.argTypes = {
   hasFocus: {
     table: {
       disable: true,
