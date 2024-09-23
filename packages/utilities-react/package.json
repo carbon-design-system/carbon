@@ -1,7 +1,7 @@
 {
   "name": "@carbon/utilities-react",
   "description": "Utilities and helpers to drive consistency across software products using the Carbon Design System with React",
-  "version": "0.0.1",
+  "version": "0.1.0-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -44,7 +44,7 @@
     "rimraf": "^6.0.0"
   },
   "dependencies": {
-    "@carbon/utilities": "^0.0.1",
+    "@carbon/utilities": "^0.1.0-rc.0",
     "@ibm/telemetry-js": "^1.6.1"
   }
 }
