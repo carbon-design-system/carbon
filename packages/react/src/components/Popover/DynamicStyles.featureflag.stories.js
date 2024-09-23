@@ -78,7 +78,7 @@ const comboBoxItems = [
   },
 ];
 
-export const _ComboBox = () => (
+export const _ComboBox = (args) => (
   <ComboBox
     onChange={() => {}}
     id="carbon-combobox"
@@ -86,13 +86,19 @@ export const _ComboBox = () => (
     itemToString={(item) => (item ? item.text : '')}
     titleText="ComboBox title"
     helperText="Combobox helper text"
+    {...args}
   />
 );
 
+_ComboBox.args = {
+  direction: 'bottom',
+};
+
 _ComboBox.argTypes = {
-  hasFocus: {
-    table: {
-      disable: true,
+  direction: {
+    options: ['top', 'bottom'],
+    control: {
+      type: 'radio',
     },
   },
 };
@@ -104,14 +110,6 @@ export const _ComboButton = () => (
     <MenuItem label="Fourth action" disabled />
   </ComboButton>
 );
-
-_ComboButton.argTypes = {
-  hasFocus: {
-    table: {
-      disable: true,
-    },
-  },
-};
 
 const items = [
   {
@@ -144,7 +142,7 @@ const items = [
   },
 ];
 
-export const _Dropdown = () => (
+export const _Dropdown = (args) => (
   <Dropdown
     id="default"
     titleText="Dropdown label"
@@ -153,14 +151,19 @@ export const _Dropdown = () => (
     label="Option 1"
     items={items}
     itemToString={(item) => (item ? item.text : '')}
-    direction="bottom"
+    {...args}
   />
 );
 
+_Dropdown.args = {
+  direction: 'bottom',
+};
+
 _Dropdown.argTypes = {
-  hasFocus: {
-    table: {
-      disable: true,
+  direction: {
+    options: ['top', 'bottom'],
+    control: {
+      type: 'radio',
     },
   },
 };
@@ -192,10 +195,31 @@ export const _Popover = () => {
   );
 };
 
+_Popover.args = {
+  align: 'bottom',
+};
+
 _Popover.argTypes = {
-  hasFocus: {
-    table: {
-      disable: true,
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: {
+      type: 'select',
     },
   },
 };
@@ -207,14 +231,6 @@ export const _MenuButton = () => (
     <MenuItem label="Third action" disabled />
   </MenuButton>
 );
-
-_MenuButton.argTypes = {
-  hasFocus: {
-    table: {
-      disable: true,
-    },
-  },
-};
 
 export const _MultiSelect = () => (
   <MultiSelect
@@ -228,45 +244,56 @@ export const _MultiSelect = () => (
   />
 );
 
-_MultiSelect.argTypes = {
-  hasFocus: {
-    table: {
-      disable: true,
-    },
-  },
-};
-
-export const _Toggletip = () => {
+export const _Toggletip = (args) => {
   return (
     <div>
-      <div>
-        <ToggletipLabel>Toggletip label</ToggletipLabel>
-        <Toggletip align="bottom" defaultOpen>
-          <ToggletipButton label="Show information">
-            <Information />
-          </ToggletipButton>
-          <ToggletipContent>
-            <p>
-              Scroll the container up, down, left or right to observe how the
-              Toggletip will automatically change its position in attempt to
-              stay within the viewport. This works on initial render in addition
-              to on scroll.
-            </p>
-            <ToggletipActions>
-              <Link href="#">Link action</Link>
-              <Button size="sm">Button</Button>
-            </ToggletipActions>
-          </ToggletipContent>
-        </Toggletip>
-      </div>
+      <ToggletipLabel>Toggletip label</ToggletipLabel>
+      <Toggletip align={args.align} defaultOpen>
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>
+            Scroll the container up, down, left or right to observe how the
+            Toggletip will automatically change its position in attempt to stay
+            within the viewport. This works on initial render in addition to on
+            scroll.
+          </p>
+          <ToggletipActions>
+            <Link href="#">Link action</Link>
+            <Button size="sm">Button</Button>
+          </ToggletipActions>
+        </ToggletipContent>
+      </Toggletip>
     </div>
   );
 };
 
+_Toggletip.args = {
+  align: 'bottom',
+};
+
 _Toggletip.argTypes = {
-  hasFocus: {
-    table: {
-      disable: true,
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: {
+      type: 'select',
     },
   },
 };
@@ -285,14 +312,6 @@ export const _Tooltip = () => {
   );
 };
 
-_Tooltip.argTypes = {
-  hasFocus: {
-    table: {
-      disable: true,
-    },
-  },
-};
-
 export const _OverflowMenu = () => {
   return (
     <div>
@@ -306,12 +325,4 @@ export const _OverflowMenu = () => {
       </OverflowMenu>
     </div>
   );
-};
-
-_OverflowMenu.argTypes = {
-  hasFocus: {
-    table: {
-      disable: true,
-    },
-  },
 };
