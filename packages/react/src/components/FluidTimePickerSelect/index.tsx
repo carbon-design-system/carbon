@@ -6,6 +6,7 @@
  */
 
 import FluidTimePickerSelect from './FluidTimePickerSelect';
-
+import { type FluidTimePickerSelectProps } from './FluidTimePickerSelect';
+export { type FluidTimePickerSelectProps };
 export default FluidTimePickerSelect;
 export { FluidTimePickerSelect };

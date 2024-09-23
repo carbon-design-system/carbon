@@ -12,6 +12,17 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FluidTextInputSkeleton } from '../FluidTextInput';
 import { FluidSelectSkeleton } from '../FluidSelect';
 
+export interface FluidTimePickerSkeletonProps {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+  /**
+   * Specify if there are only two TimePicker elements
+   */
+  isOnlyTwo?: boolean;
+}
+
 const FluidTimePickerSkeleton = ({ className, isOnlyTwo, ...rest }) => {
   const prefix = usePrefix();
   const wrapperClasses = cx(
