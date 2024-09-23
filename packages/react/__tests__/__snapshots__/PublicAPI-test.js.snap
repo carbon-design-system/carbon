@@ -9801,14 +9801,22 @@ Map {
       "children": Object {
         "type": "node",
       },
-      "flags": Object {
-        "args": Array [
-          Object {
-            "type": "bool",
-          },
-        ],
-        "type": "objectOf",
+      "enableExperimentalFocusWrapWithoutSentinels": Object {
+        "type": "bool",
       },
+      "enableTreeviewControllable": Object {
+        "type": "bool",
+      },
+      "enableV12Overflowmenu": Object {
+        "type": "bool",
+      },
+      "enableV12TileDefaultIcons": Object {
+        "type": "bool",
+      },
+      "enableV12TileRadioIcons": Object {
+        "type": "bool",
+      },
+      "flags": [Function],
     },
   },
   "unstable_Layout" => Object {

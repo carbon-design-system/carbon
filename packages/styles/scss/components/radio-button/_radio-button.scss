@@ -285,8 +285,7 @@ $radio-border-width: 1px !default;
     .#{$prefix}--radio-button__appearance,
   .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left
     .#{$prefix}--radio-button__appearance {
-    margin-inline-end: 0;
-    margin-inline-start: $spacing-03;
+    margin-inline: $spacing-03 0;
   }
 
   // Slug styles

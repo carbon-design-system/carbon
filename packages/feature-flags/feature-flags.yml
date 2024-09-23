@@ -9,11 +9,6 @@ feature-flags:
   - name: enable-css-custom-properties
     description: Describe what the flag does
     enabled: false
-  - name: enable-use-controlled-state-with-value
-    description: >
-      Enable components to be created in either a controlled or uncontrolled
-      mode
-    enabled: false
   - name: enable-css-grid
     description: >
       Enable CSS Grid Layout in the Grid and Column React components
