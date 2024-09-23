@@ -276,7 +276,7 @@ const Dropdown = React.forwardRef(
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
     const enableFloatingStyles = useFeatureFlag(
-      'enable-v12-dynamically-set-floating-styles'
+      'enable-v12-dynamic-floating-styles'
     );
 
     const { refs, floatingStyles, middlewareData } = useFloating(
@@ -305,7 +305,7 @@ const Dropdown = React.forwardRef(
             whileElementsMounted: autoUpdate,
           }
         : {}
-      // When autoAlign is turned off & the `enable-v12-dynamically-set-floating-styles` feature flag is not
+      // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
       // enabled, floating-ui will not be used
     );
 

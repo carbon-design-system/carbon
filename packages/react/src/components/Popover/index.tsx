@@ -181,7 +181,7 @@ export const Popover: PopoverComponent = React.forwardRef(
     const caretRef = useRef<HTMLSpanElement>(null);
     const popover = useRef<Element>(null);
     const enableFloatingStyles =
-      useFeatureFlag('enable-v12-dynamically-set-floating-styles') || autoAlign;
+      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
     let align = mapPopoverAlignProp(initialAlign);
 
@@ -267,7 +267,7 @@ export const Popover: PopoverComponent = React.forwardRef(
             whileElementsMounted: autoUpdate,
           }
         : {}
-      // When autoAlign is turned off & the `enable-v12-dynamically-set-floating-styles` feature flag is not
+      // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
       // enabled, floating-ui will not be used
     );
 
@@ -567,7 +567,7 @@ function PopoverContentRenderFunction(
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
   const ref = useMergedRefs([setFloating, forwardRef]);
   const enableFloatingStyles =
-    useFeatureFlag('enable-v12-dynamically-set-floating-styles') || autoAlign;
+    useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
   return (
     <span {...rest} className={`${prefix}--popover`}>

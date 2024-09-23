@@ -5,8 +5,8 @@ dynamic positioning of floating elements to their trigger / anchor element and
 collision detection. In the majority of cases, the dynamic positioning of
 elements with the `@floating-ui` 'fixed' strategy will prevent clipping.
 
-The 'enable-v12-dynamically-set-floating-styles' flag can be used if the dynamic
-styles is needed but the collision detection is not desired.
+The 'enable-v12-dynamic-floating-styles' flag can be used if the dynamic styles
+is needed but the collision detection is not desired.
 
 **Note**: If the `autoAlign` prop is used, the feature flag won't be necessary
 as the collision detection includes the dynamic styles logic.
@@ -16,7 +16,7 @@ as the collision detection includes the dynamic styles logic.
 ```js
 <FeatureFlags
   flags={{
-    'enable-v12-dynamically-set-floating-styles': true,
+    'enable-v12-dynamic-floating-styles': true,
   }}>
   <Popover open={open}>
     <button

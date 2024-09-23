@@ -53,7 +53,7 @@ in the Carbon monorepo.
 | `enable-v12-overflowmenu`                          | Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents             | `false` | ✅              |           |
 | `enable-v12-tile-radio-icons`                      | Enable rendering of default icons in the tile components                             | `false` | ✅              | ✅        |
 | `enable-v12-structured-list-visible-icons`         | Enable icon components within StructuredList to always be visible                    | `false` |                 | ✅        |
-| `enable-v12-dynamically-set-floating-styles`       | Enable dynamic setting of floating styles for components like Popover, Tooltip, etc. | `false` | ✅              | ✅        |
+| `enable-v12-dynamic-floating-styles`               | Enable dynamic setting of floating styles for components like Popover, Tooltip, etc. | `false` | ✅              | ✅        |
 
 ## Turning on feature flags in Javascript/react
 
@@ -118,11 +118,14 @@ Feature flags can also be enabled via the provided `enable()` mixin
 
 ## FeatureFlags Prop Update
 
-The `FeatureFlags` component has been updated to improve compatibility. The `flags` object prop is now deprecated and is replaced with individual boolean props for each feature flag.
+The `FeatureFlags` component has been updated to improve compatibility. The
+`flags` object prop is now deprecated and is replaced with individual boolean
+props for each feature flag.
 
-The `flags` prop will be removed in a future release. Instead, use individual boolean props for each feature flag. 
-A `featureflag-deprecate-flags-prop` codemod has been provided to help deprecate the `flags` object prop and switch to individual boolean props.
-
+The `flags` prop will be removed in a future release. Instead, use individual
+boolean props for each feature flag. A `featureflag-deprecate-flags-prop`
+codemod has been provided to help deprecate the `flags` object prop and switch
+to individual boolean props.
 
 ```bash
 npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write
@@ -131,9 +134,9 @@ npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write
 ```jsx
 //Before migration
 
- <FeatureFlags   
+ <FeatureFlags
   flags={{
-    'enable-v12-tile-default-icons': true, 
+    'enable-v12-tile-default-icons': true,
   }}>
     <App />
   </FeatureFlags>

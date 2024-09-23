@@ -101,7 +101,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
     // feature flag utilized to separate out only the dynamic styles from @floating-ui
     // flag is turned on when collision detection (ie. flip, hide) logic is not desired
     const enableOnlyFloatingStyles = useFeatureFlag(
-      'enable-v12-dynamically-set-floating-styles'
+      'enable-v12-dynamic-floating-styles'
     );
 
     const id = useId('MenuButton');

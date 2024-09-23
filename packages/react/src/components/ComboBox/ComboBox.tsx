@@ -386,7 +386,7 @@ const ComboBox = forwardRef(
     } = props;
 
     const enableFloatingStyles =
-      useFeatureFlag('enable-v12-dynamically-set-floating-styles') || autoAlign;
+      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
     const { refs, floatingStyles, middlewareData } = useFloating(
       enableFloatingStyles
