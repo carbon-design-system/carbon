@@ -9,10 +9,49 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FluidSelect from '../FluidSelect';
 
-const FluidTimePickerSelect = React.forwardRef(function FluidTimePickerSelect(
-  { children, className, ...other },
-  ref
-) {
+export interface FluidTimePickerSelectProps {
+  /**
+   * Provide the contents of your Select
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the node containing the label and the select box
+   */
+  className?: string;
+
+  /**
+   * Optionally provide the default value of the `<select>`
+   */
+  defaultValue?: any;
+
+  /**
+   * Specify whether the control is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify a custom `id` for the `<select>`
+   */
+  id: string;
+
+  /**
+   * Provide label text to be read by screen readers when interacting with the
+   * control
+   */
+  labelText?: React.ReactNode;
+
+  /**
+   * Provide an optional `onChange` hook that is called each time the value of
+   * the underlying `<input>` changes
+   */
+  onChange?: React.ChangeEventHandler<HTMLSelectElement>;
+}
+
+const FluidTimePickerSelect = React.forwardRef<
+  HTMLSelectElement,
+  FluidTimePickerSelectProps
+>(function FluidTimePickerSelect({ children, className, ...other }, ref) {
   return (
     <FluidSelect className={className} ref={ref} {...other}>
       {children}

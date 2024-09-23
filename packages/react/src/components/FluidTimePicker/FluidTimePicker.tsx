@@ -4,15 +4,60 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import FluidTextInput from '../FluidTextInput';
+import FluidTextInput, { FluidTextInputProps } from '../FluidTextInput';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
-const FluidTimePicker = React.forwardRef(function FluidTimePicker(
+export interface FluidTimePickerProps extends FluidTextInputProps {
+  /**
+   * The child node(s)
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the outer FluidTimePicker wrapper
+   */
+  className?: string;
+
+  /**
+   * Specify whether the `<input>` should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify whether or not the control is invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in error state
+   */
+  invalidText?: React.ReactNode;
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
+   */
+  labelText: React.ReactNode;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: React.ReactNode;
+}
+
+const FluidTimePicker = React.forwardRef<
+  HTMLInputElement,
+  FluidTimePickerProps
+>(function FluidTimePicker(
   {
     className,
     children,
@@ -29,7 +74,8 @@ const FluidTimePicker = React.forwardRef(function FluidTimePicker(
 
   const classNames = classnames(className, {
     [`${prefix}--time-picker--fluid`]: true,
-    [`${prefix}--time-picker--equal-width`]: children?.length !== 2,
+    [`${prefix}--time-picker--equal-width`]:
+      React.Children.toArray(children).length !== 2,
     [`${prefix}--time-picker--fluid--disabled`]: disabled,
     [`${prefix}--time-picker--fluid--invalid`]: invalid,
     [`${prefix}--time-picker--fluid--warning`]: warn,
@@ -50,11 +96,13 @@ const FluidTimePicker = React.forwardRef(function FluidTimePicker(
     <div className={classNames}>
       <div className={`${prefix}--time-picker--fluid__wrapper`}>
         <div className={`${prefix}--time-picker__input`}>
-          <FluidTextInput disabled={disabled} ref={ref} {...other} />
+          <FluidTextInput ref={ref} {...other} />
         </div>
         {disabled
           ? React.Children.toArray(children).map((child) => {
-              return React.cloneElement(child, { disabled });
+              return React.cloneElement(child as React.ReactElement, {
+                disabled,
+              });
             })
           : children}
       </div>
