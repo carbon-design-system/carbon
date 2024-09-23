@@ -1,0 +1,45 @@
+{
+  "name": "@carbon/utilities",
+  "description": "Utilities and helpers to drive consistency across software products using the Carbon Design System",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/utilities"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "es",
+    "lib",
+    "telemetry.yml"
+  ],
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "carbon-utilities"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build:es": "esbuild ./src/**/!(*-test).{js,ts} --minify --outdir=es --target=es2020 --format=esm",
+    "build:cjs": "esbuild ./src/**/!(*-test).{js,ts} --minify --outdir=lib --target=es2020 --format=cjs",
+    "build": "yarn build:es & yarn build:cjs",
+    "watch": "yarn build:es --watch & yarn build:cjs --watch",
+    "clean": "rimraf es lib",
+    "test": "echo yay && exit 0",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
+  },
+  "devDependencies": {
+    "esbuild": "^0.23.0",
+    "rimraf": "^6.0.0"
+  },
+  "dependencies": {
+    "@ibm/telemetry-js": "^1.6.1"
+  }
+}

@@ -1,0 +1,55 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as CheckboxStories from './checkbox.stories';
+
+<Meta of={CheckboxStories} />
+
+# Check box
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/checkbox)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/checkbox)
+
+Check box in `carbon-web-components` represents a combination of a check box and
+its label.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/checkbox/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['checkbox'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-checkbox>Lorem Ipsum</cds-checkbox>
+```
+
+Use `cds-checkbox-group` when handling multiple checkboxes
+
+```html
+<cds-checkbox-group legend-text="Group label">
+  <cds-checkbox>Lorem Ipsum 0</cds-checkbox>
+  <cds-checkbox>Lorem Ipsum 1</cds-checkbox>
+</cds-checkbox-group>
+```
+
+## `<cds-checkbox>` attributes, properties and events
+
+Unlike regular checkbox, `<cds-checkbox>` does _not_ fire `change` event. Please
+use `cds-checkbox-changed` event instead.
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-checkbox checked>`) and `false` means not setting the attribute (e.g.
+`<cds-checkbox>` without `checked` attribute).
+
+<ArgTypes of="cds-checkbox" />
