@@ -371,9 +371,11 @@ export const Popover: PopoverComponent = React.forwardRef(
       const isAllowedTriggerComponent =
         autoAlign &&
         !['ToggletipContent', 'PopoverContent'].includes(displayName);
+      const renderComponentName = item?.type?.render?.name;
 
       if (
         React.isValidElement(item) &&
+        renderComponentName !== 'ToggletipContent' &&
         (isTriggerElement || isTriggerComponent || isAllowedTriggerComponent)
       ) {
         const className = (item?.props as any)?.className;

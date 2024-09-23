@@ -338,7 +338,10 @@ export const ToggletipContent = React.forwardRef<
   const toggletip = useToggletip();
   const prefix = usePrefix();
   return (
-    <PopoverContent className={customClassName} {...toggletip?.contentProps}>
+    <PopoverContent
+      className={customClassName}
+      {...toggletip?.contentProps}
+      ref={ref}>
       <div className={`${prefix}--toggletip-content`}>{children}</div>
     </PopoverContent>
   );
