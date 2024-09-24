@@ -1,0 +1,165 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/components/popover/index';
+@use '@carbon/styles/scss/components/tooltip';
+@use '@carbon/styles/scss/components/ui-shell/header';
+@use '@carbon/styles/scss/components/ui-shell/header-panel';
+@use '@carbon/styles/scss/components/ui-shell/switcher';
+
+:host(#{$prefix}-header) {
+  @extend .#{$prefix}--header;
+
+  ::slotted(.#{$prefix}--header__global) {
+    @extend .#{$prefix}--header__global;
+  }
+}
+
+:host(#{$prefix}-header-nav) {
+  @extend .#{$prefix}--header__nav;
+
+  .#{$prefix}-ce--header__divider {
+    position: absolute;
+    background-color: $border-subtle;
+    block-size: $spacing-06;
+    inline-size: rem(1px);
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    transform: translateY(-50%);
+  }
+}
+
+:host(#{$prefix}-header-nav-item) {
+  outline: none;
+}
+
+:host(#{$prefix}-header-menu) {
+  @extend .#{$prefix}--header__submenu;
+
+  outline: none;
+}
+
+:host(#{$prefix}-header-menu-item) {
+  outline: none;
+
+  a.#{$prefix}--header__menu-item {
+    background-color: $layer;
+    block-size: $spacing-09;
+
+    &:hover {
+      background-color: $background-hover;
+      color: $text-primary;
+    }
+
+    &:active {
+      background-color: $background-active;
+    }
+  }
+
+  a.#{$prefix}--header__menu-item--current {
+    background-color: $layer-selected;
+
+    &:hover {
+      background-color: $layer-selected-hover;
+    }
+
+    &::after {
+      position: absolute;
+      background-color: $border-interactive;
+      block-size: 100%;
+      content: '';
+      inline-size: 3px;
+      inset-block: -#{$spacing-01};
+      inset-inline-start: -#{$spacing-01};
+    }
+  }
+}
+
+:host(#{$prefix}-header-global-action) {
+  ::slotted(svg) {
+    fill: $icon-secondary;
+  }
+
+  &:hover ::slotted(svg) {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--popover {
+    z-index: 8001;
+  }
+}
+
+:host(#{$prefix}-header-nav-item),
+:host(#{$prefix}-header-menu) {
+  a.#{$prefix}--header__menu-item {
+    box-sizing: border-box;
+  }
+}
+
+:host(#{$prefix}-header-menu-button) {
+  display: content;
+  outline: none;
+
+  @include breakpoint('lg') {
+    display: none;
+  }
+}
+
+:host(#{$prefix}-header-menu-button[collapse-mode='fixed']) {
+  display: none;
+}
+
+:host(#{$prefix}-header-menu-button[collapse-mode='rail']) {
+  @include breakpoint('lg') {
+    display: block;
+  }
+}
+
+:host(#{$prefix}-header-name) {
+  display: content;
+  block-size: 100%;
+
+  a {
+    box-sizing: border-box;
+  }
+}
+
+:host(#{$prefix}-header-panel) {
+  @extend .#{$prefix}--header-panel;
+}
+
+:host(#{$prefix}-header-panel[expanded]) {
+  @extend .#{$prefix}--header-panel--expanded;
+}
+
+:host(#{$prefix}-switcher) {
+  @extend .#{$prefix}--switcher;
+}
+
+:host(#{$prefix}-switcher-item) {
+  @extend .#{$prefix}--switcher__item;
+
+  a {
+    box-sizing: border-box;
+  }
+}
+
+:host(#{$prefix}-switcher-item:nth-child(1)) {
+  margin-block-start: $spacing-05;
+}
+
+:host(#{$prefix}-switcher-divider) {
+  @extend .#{$prefix}--switcher__item--divider;
+}

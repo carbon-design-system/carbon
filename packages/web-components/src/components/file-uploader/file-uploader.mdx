@@ -1,0 +1,62 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as FileUploaderStories from './file-uploader.stories';
+
+<Meta of={FileUploaderStories} />
+
+# File uploader
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/file-uploader)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/file-uploader)
+
+File uploaders allow users to select one or more files to upload to a specific
+location.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/file-uploader/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['file-uploader'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-file-uploader
+  label-description="Only .jpg and .png files. 500kb max file size"
+  label-title="Account photo"
+>
+  <cds-file-uploader-button accept="image/jpeg image/png" multiple>
+    Drag and drop files here or click to upload
+  </cds-file-drop-container>
+</cds-file-uploader>
+```
+
+## `<cds-file-uploader>` attributes, properties and events
+
+<ArgTypes of="cds-file-uploader" />
+
+## `<cds-file-uploader-drop-container>` attributes, properties and events
+
+<ArgTypes of="cds-file-uploader-drop-container" />
+
+## `<cds-file-uploader-button>` attributes, properties and events
+
+<ArgTypes of="cds-file-uploader-button" />
+
+## `<cds-file-uploader-item>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-file-uploader-item invalid>`) and `false` means not setting the attribute
+(e.g. `<cds-file-uploader-item>` without `invalid` attribute).
+
+<ArgTypes of="cds-file-uploader-item" />
