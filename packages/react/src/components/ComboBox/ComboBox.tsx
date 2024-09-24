@@ -761,9 +761,6 @@ const ComboBox = forwardRef(
             // Focus on the element as per readonly input behavior
             evt.currentTarget.focus();
           },
-          // onFocus: (evt: FocusEvent<HTMLInputElement>) => {
-          //   evt.target.blur(); // Immediately remove focus when received
-          // },
         }
       : {};
 
