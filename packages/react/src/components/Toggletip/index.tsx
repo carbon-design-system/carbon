@@ -331,7 +331,7 @@ interface ToggletipContentProps {
  * `children` passed in as a prop inside of `PopoverContent` so that they will
  * be rendered inside of the popover for this component.
  */
-export const ToggletipContent = React.forwardRef<
+const ToggletipContent = React.forwardRef<
   HTMLDivElement,
   ToggletipContentProps
 >(function ToggletipContent({ children, className: customClassName }, ref) {
@@ -358,6 +358,10 @@ ToggletipContent.propTypes = {
    */
   className: PropTypes.string,
 };
+
+ToggletipContent.displayName = 'ToggletipContent';
+
+export { ToggletipContent };
 
 interface ToggleTipActionsProps {
   children?: ReactNode;
@@ -389,3 +393,5 @@ ToggletipActions.propTypes = {
    */
   className: PropTypes.string,
 };
+
+// export { ToggletipContent }
