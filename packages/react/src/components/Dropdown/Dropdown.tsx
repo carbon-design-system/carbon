@@ -80,7 +80,8 @@ export interface OnChangeData<ItemType> {
 
 export interface DropdownProps<ItemType>
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes>,
-    TranslateWithId<ListBoxMenuIconTranslationKey> {
+    TranslateWithId<ListBoxMenuIconTranslationKey>,
+    React.RefAttributes<HTMLDivElement> {
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
