@@ -1,0 +1,89 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as DropdownStories from './dropdown.stories';
+
+<Meta of={DropdownStories} />
+
+# Dropdown
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/dropdown)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/dropdown)
+
+Dropdown presents a list of options that can be used to filter or sort existing
+content.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/dropdown/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['dropdown'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-dropdown value="bar">
+  <cds-dropdown-item value="foo">Foo</cds-dropdown-item>
+  <cds-dropdown-item value="bar">Bar</cds-dropdown-item>
+  <cds-dropdown-item value="baz">Baz</cds-dropdown-item>
+</cds-dropdown>
+```
+
+## Selection
+
+When user attempts to select a dropdown item, `cds-dropdown-beingselected` event
+fires on `<cds-dropdown>`, which has the following properties in the event
+details:
+
+| Property | Description                               |
+| -------- | ----------------------------------------- |
+| `item`   | The `<cds-dropdown-item>` being selected. |
+
+`cds-dropdown-beingselected` bubbles and is cancelable. Canceling this event
+means canceling change in selection.
+
+## Inline dropdown
+
+You can place a `cds-dropdown` inline with other content by using the inline
+variant
+
+```html
+<cds-dropdown type="inline">
+  <cds-dropdown-item value="foo">Foo</cds-dropdown-item>
+  <cds-dropdown-item value="bar">Bar</cds-dropdown-item>
+  <cds-dropdown-item value="baz">Baz</cds-dropdown-item>
+</cds-dropdown>
+```
+
+## Skeleton
+
+For the skeleton variation, utilize `<cds-dropdown-skeleton>`.
+
+```html
+<cds-dropdown-skeleton></cds-dropdown-skeleton>
+```
+
+## `<cds-dropdown>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-dropdown open>`) and `false` means not setting the attribute (e.g.
+`<cds-dropdown>` without `open` attribute).
+
+<ArgTypes of="cds-dropdown" />
+
+## `<cds-dropdown-item>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-dropdown-item disabled>`) and `false` means not setting the attribute
+(e.g. `<cds-dropdown-item>` without `disabled` attribute).
+
+<ArgTypes of="cds-dropdown-item" />

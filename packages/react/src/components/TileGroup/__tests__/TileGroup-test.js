@@ -198,10 +198,7 @@ describe('TileGroup', () => {
     //Feature flag : enable-v12-tile-radio-icons
     it('should keep radio unselected if no `defaultSelected` is provided', () => {
       render(
-        <FeatureFlags
-          flags={{
-            'enable-v12-tile-radio-icons': true,
-          }}>
+        <FeatureFlags enableV12TileRadioIcons>
           <TileGroup legend="TestGroup" name="test">
             <RadioTile id="test-1" value="test-1">
               Option 1

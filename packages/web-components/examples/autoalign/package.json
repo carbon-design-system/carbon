@@ -1,0 +1,21 @@
+{
+  "name": "carbon-web-components-autoalign-example",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample project for getting started with the Web Components from Carbon.",
+  "license": "Apache-2",
+  "main": "index.html",
+  "scripts": {
+    "clean": "rimraf node_modules dist .cache",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@carbon/styles": "^1.51.0",
+    "@carbon/web-components": "latest",
+    "sass": "^1.64.1"
+  },
+  "devDependencies": {
+    "vite": "5.2.13",
+    "rimraf": "^3.0.2"
+  }
+}
