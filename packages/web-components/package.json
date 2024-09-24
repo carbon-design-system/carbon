@@ -1,7 +1,7 @@
 {
   "name": "@carbon/web-components",
   "description": "Web components for the Carbon Design System",
-  "version": "2.13.1",
+  "version": "2.14.0-rc.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -78,9 +78,9 @@
   },
   "devDependencies": {
     "@carbon/icon-helpers": "10.47.0",
-    "@carbon/icons": "^11.31.0",
-    "@carbon/layout": "^11.26.0",
-    "@carbon/motion": "^11.22.0",
+    "@carbon/icons": "^11.50.0-rc.0",
+    "@carbon/layout": "^11.27.0-rc.0",
+    "@carbon/motion": "^11.23.0-rc.0",
     "@juggle/resize-observer": "^3.4.0",
     "@mordech/vite-lit-loader": "^0.31.3",
     "@rollup/plugin-alias": "^5.1.0",
