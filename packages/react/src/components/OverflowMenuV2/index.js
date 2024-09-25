@@ -25,10 +25,7 @@ function OverflowMenuV2(props) {
   }
 
   return (
-    <FeatureFlags
-      flags={{
-        'enable-v12-overflowmenu': true,
-      }}>
+    <FeatureFlags enableV12Overflowmenu>
       <OverflowMenu {...props} />
     </FeatureFlags>
   );

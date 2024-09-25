@@ -54,7 +54,7 @@ function useEscapeToClose(ref, callback, override = true) {
     // The callback should only be called when focus is on or within the container
     const elementContainsFocus =
       (ref.current && document.activeElement === ref.current) ||
-      ref.current.contains(document.activeElement);
+      ref.current?.contains(document.activeElement);
 
     if (matches(event, [keys.Escape]) && override && elementContainsFocus) {
       callback(event);
@@ -62,7 +62,10 @@ function useEscapeToClose(ref, callback, override = true) {
   };
 
   useIsomorphicEffect(() => {
-    document.addEventListener('keydown', handleKeyDown, false);
+    if (ref.current !== null) {
+      document.addEventListener('keydown', handleKeyDown, false);
+    }
+
     return () => document.removeEventListener('keydown', handleKeyDown, false);
   });
 }

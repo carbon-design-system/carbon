@@ -1,0 +1,74 @@
+import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SliderStories from './slider.stories';
+
+<Meta of={SliderStories} />
+
+# Slider
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/slider)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/slider)
+
+Sliders provide a visual indication of adjustable content, where the user can
+move the handle along a horizontal track to increase or decrease the value.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/slider/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['slider'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-slider
+  label-text="Slider"
+  max="100"
+  min="0"
+  step="1"
+  value="50"></cds-slider>
+```
+
+## With input box
+
+To include an input box, place `<cds-slider-input>` within `<cds-slider>`.
+
+```html
+<cds-slider label-text="Slider" max="100" min="0" step="1" value="50">
+  <cds-slider-input aria-label="Slider value" type="number"></cds-slider-input>
+</cds-slider>
+```
+
+## Skeleton
+
+For the skeleton variation, utilize `<cds-slider-skeleton>`.
+
+```html
+<cds-slider-skeleton></cds-slider-skeleton>
+```
+
+## `<cds-slider>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-slider disabled>`) and `false` means not setting the attribute (e.g.
+`<cds-slider>` without `disabled` attribute).
+
+<ArgTypes of="cds-slider" />
+
+## `<cds-slider-input>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-slider-input invalid>`) and `false` means not setting the attribute (e.g.
+`<cds-slider-input>` without `invalid` attribute).
+
+<ArgTypes of="cds-slider-input" />
