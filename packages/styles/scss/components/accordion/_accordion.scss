@@ -248,7 +248,12 @@ $content-padding: 0 0 0 $spacing-05 !default;
       }
     }
   }
-  /* stylelint-disable */
+  /** starting style also not supported widely
+    * https://caniuse.com/mdn-css_at-rules_starting-style
+    */
+  /* Needs to be after the previous accordion__item--active rule
+     to take effect, as the specificity is the same */
+  /* stylelint-disable-next-line scss/at-rule-no-unknown */
   @starting-style {
     .#{$prefix}--accordion__item--active {
       > .#{$prefix}--accordion__wrapper {
@@ -258,7 +263,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
       }
     }
   }
-  /* stylelint-enable */
 
   // flush
   .#{$prefix}--accordion--flush .#{$prefix}--accordion__item {
