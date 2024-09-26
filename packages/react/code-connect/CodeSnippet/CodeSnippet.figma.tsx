@@ -45,7 +45,7 @@ figma.connect(
     },
     example: ({ codeSnippet }) => {
       return (
-        <CodeSnippet type="inline" feedback="Tooltip text">
+        <CodeSnippet type="inline" feedback="Copied to clipboard">
           {codeSnippet.text}
         </CodeSnippet>
       );
