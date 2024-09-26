@@ -6,7 +6,9 @@
  */
 
 import FluidMultiSelect from './FluidMultiSelect';
-
+import type { FluidMultiSelectProps } from './FluidMultiSelect';
+import type { FluidMultiSelectSkeletonProps } from './FluidMultiSelect.Skeleton';
+export type { FluidMultiSelectProps, FluidMultiSelectSkeletonProps };
 export default FluidMultiSelect;
 export { FluidMultiSelect };
 export { default as FluidMultiSelectSkeleton } from './FluidMultiSelect.Skeleton';
