@@ -891,13 +891,6 @@ const ComboBox = forwardRef(
                       toggleMenu();
                     }
                   }
-                  if (readOnly) {
-                    // Prevent default behavior for all keys except Tab when readOnly
-                    if (event.key !== 'Tab') {
-                      event.preventDefault();
-                    }
-                    return;
-                  }
                 },
               })}
               {...rest}
