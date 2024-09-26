@@ -19,12 +19,12 @@ import icon from './svg-result-carbon-icon.js';
  * @returns {object} The rollup plugin to transform an `.svg` file to a `lit-html` template.
  */
 export default function rollupPluginDistIcons({
-  include = /@carbon[\\/]icons[\\/]/i,
+  include = /packages[\\/]icons[\\/]lib[\\/]/i,
   exclude,
 } = {}) {
   const filter = createFilter(include, exclude);
   return {
-    name: 'lit-scss',
+    name: 'carbon-dist-icons',
 
     /**
      * Enqueues the module contents for loading.

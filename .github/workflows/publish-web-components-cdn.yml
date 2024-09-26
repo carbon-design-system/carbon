@@ -27,10 +27,8 @@ jobs:
           node-version: '18.x'
           cache: 'yarn'
       - name: Install dependencies
-        run: yarn install
-      - name: Build Web Components package
         run: |
-          cd packages/web-components
+          yarn install
           yarn build
       - name: Check release type
         if: contains(github.ref_name, '-rc.')
