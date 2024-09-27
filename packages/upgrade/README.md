@@ -67,6 +67,12 @@ the
 Each is tested against a series of test fixtures to ensure transforms are
 predictable and consistently provide the intended output.
 
+#### Output formatting
+
+The output of a codemod may not match your codebase's formatting style. It is
+recommended to always run the result of a codemod through an autoformatter like
+[Prettier](https://prettier.io/).
+
 ## 🙌 Contributing
 
 If you have ideas on how we could make your migration experience easier, please

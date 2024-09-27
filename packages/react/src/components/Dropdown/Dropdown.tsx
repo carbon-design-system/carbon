@@ -390,7 +390,7 @@ const Dropdown = React.forwardRef(
       [`${prefix}--dropdown--readonly`]: readOnly,
       [`${prefix}--dropdown--${size}`]: size,
       [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--dropdown--autoalign`]: autoAlign,
+      [`${prefix}--autoalign`]: autoAlign,
     });
 
     const titleClasses = cx(`${prefix}--label`, {

@@ -13,4 +13,3 @@ defineTest(__dirname, 'refactor-to-callout');
 defineTest(__dirname, 'refactor-to-callout', null, 'refactor-to-callout2');
 defineTest(__dirname, 'refactor-to-callout', null, 'refactor-to-callout3');
 defineTest(__dirname, 'refactor-to-callout', null, 'refactor-to-callout4');
-defineTest(__dirname, 'refactor-to-callout', null, 'refactor-to-callout5');

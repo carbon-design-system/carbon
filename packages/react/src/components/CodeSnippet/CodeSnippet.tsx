@@ -45,6 +45,11 @@ export interface CodeSnippetProps {
     | 'right';
 
   /**
+   * **Experimental**: Will attempt to automatically align the tooltip
+   */
+  autoAlign?: boolean;
+
+  /**
    * Specify a label to be read by screen readers on the containing textbox
    * node
    */
@@ -150,6 +155,7 @@ export interface CodeSnippetProps {
 
 function CodeSnippet({
   align = 'bottom',
+  autoAlign = false,
   className,
   type = 'single',
   children,
@@ -304,6 +310,7 @@ function CodeSnippet({
       <Copy
         {...rest}
         align={align}
+        autoAlign={autoAlign}
         onClick={handleCopyClick}
         aria-label={deprecatedAriaLabel || ariaLabel}
         aria-describedby={uid}
@@ -377,6 +384,7 @@ function CodeSnippet({
       {!hideCopyButton && (
         <CopyButton
           align={align}
+          autoAlign={autoAlign}
           size={type === 'multi' ? 'sm' : 'md'}
           disabled={disabled}
           onClick={handleCopyClick}
@@ -436,6 +444,11 @@ CodeSnippet.propTypes = {
     PropTypes.string,
     'This prop syntax has been deprecated. Please use the new `aria-label`.'
   ),
+
+  /**
+   * **Experimental**: Will attempt to automatically align the tooltip
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Provide the content of your CodeSnippet as a node or string

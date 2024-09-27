@@ -58,6 +58,7 @@ packages/**/examples/**
 
 # Upgrade
 packages/upgrade/cli.js
+packages/upgrade/**/*.output.js
 
 # Accessibility Verification Testing
 **/.avt/**
