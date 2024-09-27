@@ -9478,7 +9478,7 @@
   sizes:
     - 32
 - name: gateway--api
-  friendly_name: Gateway api
+  friendly_name: Gateway API
   aliases:
     - gateway
     - systems
