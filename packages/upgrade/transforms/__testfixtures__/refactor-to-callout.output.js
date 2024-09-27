@@ -15,9 +15,9 @@ const LocallyRenamedStaticNotification = unstable__Callout;
 // prettier-ignore
 const App = () => {
   return (<>
-        <Callout title="Test" />
-        <SomeOtherName title="Test" />
-        <Callout title="Test" />
-        <LocallyRenamedStaticNotification title="Test" />
-    </>);
+    <Callout title="Test" />
+    <SomeOtherName title="Test" />
+    <Callout title="Test" />
+    <LocallyRenamedStaticNotification title="Test" />
+  </>);
 };
