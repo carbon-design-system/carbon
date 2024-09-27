@@ -17,87 +17,138 @@ function transform(fileInfo, api, options) {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
 
-  // Mapping function for typical imports
-  function updateImportSpecifier(specifier, sourceValue) {
-    // If the import is from '@carbon/react'
-    if (typeof sourceValue === 'string' && sourceValue === '@carbon/react') {
-      if (
-        specifier.type === 'ImportSpecifier' &&
-        specifier.imported.name === 'unstable__StaticNotification'
-      ) {
-        // Change unstable__StaticNotification to unstable__Callout
-        specifier.imported.name = 'unstable__Callout';
-        // If the local alias is StaticNotification, change it to Callout
-        if (specifier.local.name === 'StaticNotification') {
-          specifier.local.name = 'Callout';
-        }
-      } else if (
-        specifier.type === 'ImportSpecifier' &&
-        specifier.imported.name === 'StaticNotification'
-      ) {
-        // Change StaticNotification to Callout
-        specifier.imported.name = 'Callout';
-        if (specifier.local.name === 'StaticNotification') {
-          specifier.local.name = 'Callout';
-        }
-      } else if (
-        specifier.type === 'ImportSpecifier' &&
-        specifier.imported.name === 'StaticNotificationProps'
-      ) {
-        // Change StaticNotificationProps to CalloutProps
-        specifier.imported.name = 'CalloutProps';
-        if (specifier.local.name === 'StaticNotificationProps') {
-          specifier.local.name = 'CalloutProps';
-        }
-      }
-    } else if (
-      typeof sourceValue === 'string' &&
-      (sourceValue.startsWith('@carbon/react/es/components/Notification') ||
-        sourceValue.startsWith('@carbon/react/lib/components/Notification'))
-    ) {
-      // For fully qualified paths, change StaticNotification to Callout and StaticNotificationProps to CalloutProps
-      if (specifier.imported.name === 'StaticNotification') {
-        specifier.imported.name = 'Callout';
-        if (specifier.local.name === 'StaticNotification') {
-          specifier.local.name = 'Callout';
-        }
-      } else if (specifier.imported.name === 'StaticNotificationProps') {
-        specifier.imported.name = 'CalloutProps';
-        if (specifier.local.name === 'StaticNotificationProps') {
-          specifier.local.name = 'CalloutProps';
-        }
-      }
-    }
+  // Helper function to check if the import source is from '@carbon/react' or its subpaths
+  function isCarbonReactImport(sourceValue) {
+    return (
+      sourceValue === '@carbon/react' ||
+      sourceValue.startsWith('@carbon/react/es') ||
+      sourceValue.startsWith('@carbon/react/lib')
+    );
   }
 
-  // Handle the transformation of imports
+  // Collect names of identifiers imported from '@carbon/react' or its subpaths
+  const importedIdentifiers = new Map(); // Map of local name to transformed name
+
+  // Transform import declarations
   root.find(j.ImportDeclaration).forEach((path) => {
     const sourceValue = path.node.source.value;
 
-    // Ensure sourceValue is a string
+    // Only transform imports from '@carbon/react' and its subpaths
+    if (!isCarbonReactImport(sourceValue)) {
+      return;
+    }
+
+    path.node.specifiers.forEach((specifier) => {
+      if (specifier.type === 'ImportSpecifier') {
+        let importedName = specifier.imported.name;
+        let localName = specifier.local ? specifier.local.name : importedName;
+        let transformedImportedName = importedName;
+        let transformedLocalName = localName;
+
+        // Transform imported names and local names as necessary
+        if (importedName === 'unstable__StaticNotification') {
+          transformedImportedName = 'unstable__Callout';
+          specifier.imported.name = transformedImportedName;
+
+          if (localName === 'StaticNotification') {
+            transformedLocalName = 'Callout';
+            specifier.local.name = transformedLocalName;
+          } else if (localName === 'unstable__StaticNotification') {
+            transformedLocalName = 'unstable__Callout';
+            specifier.local.name = transformedLocalName;
+          }
+          // If local name is something else (e.g., SomeOtherName), leave it unchanged
+        } else if (importedName === 'StaticNotification') {
+          transformedImportedName = 'Callout';
+          specifier.imported.name = transformedImportedName;
+
+          if (localName === 'StaticNotification') {
+            transformedLocalName = 'Callout';
+            specifier.local.name = transformedLocalName;
+          }
+          // If local name is different, leave it unchanged
+        } else if (importedName === 'StaticNotificationProps') {
+          transformedImportedName = 'CalloutProps';
+          specifier.imported.name = transformedImportedName;
+
+          if (localName === 'StaticNotificationProps') {
+            transformedLocalName = 'CalloutProps';
+            specifier.local.name = transformedLocalName;
+          }
+          // If local name is different, leave it unchanged
+        }
+
+        // If imported name and local name are the same after transformation, remove the alias
+        if (
+          specifier.local &&
+          specifier.local.name === specifier.imported.name
+        ) {
+          delete specifier.local;
+        }
+
+        // Update the mapping of imported identifiers
+        // Only add to the map if the local name or the transformed name is different
+        if (localName !== transformedLocalName) {
+          importedIdentifiers.set(localName, transformedLocalName);
+        }
+      }
+    });
+  });
+
+  // Deduplicate imports
+  const importDeclarations = root.find(j.ImportDeclaration);
+
+  importDeclarations.forEach((path) => {
+    const sourceValue = path.node.source.value;
+
+    // Only deduplicate imports from '@carbon/react' and its subpaths
+    if (!isCarbonReactImport(sourceValue)) {
+      return;
+    }
+
+    const specifiers = path.node.specifiers;
+    const uniqueSpecifiers = [];
+    const seen = new Set();
+
+    specifiers.forEach((specifier) => {
+      const importedName = specifier.imported.name;
+      const localName = specifier.local ? specifier.local.name : importedName;
+      const key = `${importedName}:${localName}`;
+
+      if (!seen.has(key)) {
+        seen.add(key);
+        uniqueSpecifiers.push(specifier);
+      }
+    });
+
+    path.node.specifiers = uniqueSpecifiers;
+  });
+
+  // Remove empty import declarations
+  importDeclarations.forEach((path) => {
+    if (path.node.specifiers.length === 0) {
+      j(path).remove();
+    }
+  });
+
+  // Update usages in the code
+  root.find(j.Identifier).forEach((path) => {
+    const name = path.node.name;
+
+    // Skip if the identifier is part of an import specifier
     if (
-      typeof sourceValue !== 'string' ||
-      !sourceValue.startsWith('@carbon/react')
+      path.parent.node.type === 'ImportSpecifier' ||
+      path.parent.node.type === 'ImportDefaultSpecifier' ||
+      path.parent.node.type === 'ImportNamespaceSpecifier'
     ) {
       return;
     }
 
-    // Transform the specifiers
-    path.node.specifiers.forEach((specifier) => {
-      // Handle only ImportSpecifier types
-      if (specifier.type === 'ImportSpecifier') {
-        // Avoid transforming `unstable__Callout` if already correct
-        if (
-          specifier.imported.name === 'unstable__Callout' &&
-          (specifier.local.name === 'Callout' ||
-            specifier.local.name !== 'StaticNotification')
-        ) {
-          return; // Skip this, it's already correct
-        }
-
-        updateImportSpecifier(specifier, sourceValue);
-      }
-    });
+    // Only transform identifiers that match the imported identifiers
+    if (importedIdentifiers.has(name)) {
+      const transformedName = importedIdentifiers.get(name);
+      path.node.name = transformedName;
+    }
   });
 
   return root.toSource(printOptions);

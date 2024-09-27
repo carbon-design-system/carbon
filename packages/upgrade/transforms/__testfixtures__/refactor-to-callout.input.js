@@ -12,6 +12,7 @@ import { unstable__StaticNotification as Callout } from '@carbon/react';
 const LocallyRenamedStaticNotification = unstable__StaticNotification;
 
 // Component usages
+// prettier-ignore
 const App = () => {
   return (
     <>
