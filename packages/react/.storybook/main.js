@@ -98,74 +98,44 @@ const config = {
       },
     },
   ],
+  core: {
+    builder: '@storybook/builder-vite',
+  },
   features: {
     previewCsfV3: true,
     buildStoriesJson: true,
   },
   framework: {
-    name: '@storybook/react-webpack5',
+    name: '@storybook/react-vite',
     options: {},
   },
   stories,
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
+  async viteFinal(config) {
+    // Merge custom configuration into the default config
+    const { mergeConfig } = await import('vite');
 
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.s?css$/,
-      sideEffects: true,
-      use: [
-        {
-          loader:
-            process.env.NODE_ENV === 'production'
-              ? MiniCssExtractPlugin.loader
-              : 'style-loader',
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 2,
-            sourceMap: true,
+    return mergeConfig(config, {
+      // Add dependencies to pre-optimization
+      define: {
+        __DEV__: JSON.stringify(process.env.NODE_ENV === 'development'),
+      },
+
+      esbuild: {
+        include: /\.[jt]sx?$/,
+        exclude: [],
+        loader: 'tsx',
+      },
+      optimizeDeps: {
+        esbuildOptions: {
+          loader: {
+            '.js': 'jsx',
           },
         },
-        {
-          loader: 'postcss-loader',
-          options: {
-            postcssOptions: {
-              plugins: [
-                require('autoprefixer')({
-                  overrideBrowserslist: ['last 1 version'],
-                }),
-              ],
-            },
-            sourceMap: true,
-          },
-        },
-        {
-          loader: 'sass-loader',
-          options: {
-            implementation: require('sass'),
-            sassOptions: {
-              includePaths: [
-                path.resolve(__dirname, '..', 'node_modules'),
-                path.resolve(__dirname, '..', '..', '..', 'node_modules'),
-              ],
-            },
-            warnRuleAsWarning: true,
-            sourceMap: true,
-          },
-        },
-      ],
+      },
     });
-    if (process.env.NODE_ENV === 'production') {
-      config.plugins.push(
-        new MiniCssExtractPlugin({
-          filename: '[name].[contenthash].css',
-        })
-      );
-    }
-    return config;
   },
   docs: {
     autodocs: true,
