@@ -1,0 +1,70 @@
+import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as RadioButtonStories from './radio-button.stories';
+
+<Meta of={RadioButtonStories} />
+
+# Radio button
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/radio-button)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/radio-button)
+
+Radio buttons are used when a list of two or more options are mutually
+exclusive, meaning the user must select only one option.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/radio-button/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['radio-button'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-radio-button-group
+  label-position="right"
+  orientation="horizontal"
+  name="radio-group">
+  <cds-radio-button label-text="Radio button" value="all"></cds-radio-button>
+  <cds-radio-button
+    label-text="Radio button"
+    value="cloudFoundry"></cds-radio-button>
+  <cds-radio-button
+    label-text="Radio button"
+    value="staging"></cds-radio-button>
+</cds-radio-button-group>
+```
+
+## Skeleton
+
+For the skeleton variation, utilize `<cds-radio-button-skeleton>`.
+
+```html
+<cds-radio-button-skeleton></cds-radio-button-skeleton>
+```
+
+## `<cds-radio-button-group>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-radio-button-group disabled>`) and `false` means not setting the attribute
+(e.g. `<cds-radio-button-group>` without `disabled` attribute).
+
+<ArgTypes of="cds-radio-button-group" />
+
+## `<cds-radio-button-group>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-radio-button-group disabled>`) and `false` means not setting the attribute
+(e.g. `<cds-radio-button-group>` without `disabled` attribute).
+
+<ArgTypes of="cds-radio-button-group" />

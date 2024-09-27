@@ -1,7 +1,9 @@
-import { Story, ArgTypes, Canvas } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
 import * as DropdownStories from './Dropdown.stories';
+
+<Meta isTemplate />
 
 # Dropdown
 
@@ -108,7 +110,7 @@ want to fully control the component, you can use `initialSelectedItem`.
 ```jsx
 const items = ['Option 1', 'Option 2', 'Option 3']
 
-<Dropdown initialSelectedItem={items[2]} />;
+<Dropdown initialSelectedItem={items[2]} />
 ```
 
 ### Dropdown `itemToElement`

@@ -1,0 +1,99 @@
+import { Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SlugDataTableStories from './slug-data-table.stories';
+
+<Meta of={SlugDataTableStories} />
+
+# Slug in DataTable
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/slug)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/slug)
+
+The DataTable supports placing a slug in both the column header and row.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+The `Slug` itself is a button that acts as a `Toggletip` trigger. To construct
+the contents of the `Slug` callout, you can place the desired elements as a
+child of `Slug` in a div with slot `body-text`, like so:
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/slug/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['slug'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-slug size="mini" alignment="bottom-left">
+  <div slot="body-text">{Content Here}</div>
+</cds-slug>
+```
+
+### HTML (with actions)
+
+The `Slug` also supports the rendering of an action bar at the bottom of the
+callout. To achieve this, you can add elements with `slot="actions"` inside the
+`slot="body-text"` element
+
+```html
+<cds-slug size="mini" alignment="bottom-left">
+  <div slot="body-text">
+    {Content Here} {Optional Slug action bar}
+    <cds-icon-button kind="ghost" slot="actions" size="lg">
+      ${View16({ slot: 'icon' })}
+      <span slot="tooltip-content"> View </span>
+    </cds-icon-button>
+    <cds-icon-button kind="ghost" slot="actions" size="lg">
+      ${FolderOpen16({ slot: 'icon' })}
+      <span slot="tooltip-content"> Open folder</span>
+    </cds-icon-button>
+    <cds-icon-button kind="ghost" slot="actions" size="lg">
+      ${Folders16({ slot: 'icon' })}
+      <span slot="tooltip-content"> Folders </span>
+    </cds-icon-button>
+    <cds-slug-action-button>View details</cds-slug-action-button>
+  </div>
+</cds-slug>
+```
+
+## Using `slug` in `DataTable`
+
+### Using as a column header
+
+To use a `Slug` inside a column header, you'll need to add a `slug` to the
+appropriate `cds-table-header-cell`.
+
+```html
+<cds-table-header-cell>
+  Attached groups
+  <cds-slug alignment="bottom-left">
+    <div slot="body-text">{Content Here}</div>
+  </cds-slug>
+</cds-table-header-cell>
+```
+
+### Using in a row
+
+To use a `Slug` inside a `DataTable` row, you'll need to pass in your `Slug`
+component to `cds-table-row`:
+
+```html
+<cds-table-row>
+  <cds-slug alignment="bottom-left">
+    <div slot="body-text">{Content Here}</div>
+  </cds-slug>
+  <cds-table-cell>Load Balancer 1</cds-table-cell>
+  <cds-table-cell>HTTP</cds-table-cell>
+  ...
+</cds-table-row>
+```
