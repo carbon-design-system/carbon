@@ -12,7 +12,7 @@ import {
   ToastNotification,
   InlineNotification,
   ActionableNotification,
-} from './Notification';
+} from '../Notification';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -55,6 +55,14 @@ describe('NotificationButton', () => {
 });
 
 describe('ToastNotification', () => {
+  it('should render', () => {
+    const { asFragment } = render(
+      <ToastNotification title="Notification title" />
+    );
+
+    expect(asFragment()).toMatchSnapshot();
+  });
+
   it('should have role=status by default', () => {
     const { container } = render(
       <ToastNotification title="Notification title" />
@@ -178,6 +186,14 @@ describe('ToastNotification', () => {
 });
 
 describe('InlineNotification', () => {
+  it('should render', () => {
+    const { asFragment } = render(
+      <InlineNotification title="Notification title" />
+    );
+
+    expect(asFragment()).toMatchSnapshot();
+  });
+
   it('should have role=status by default', () => {
     const { container } = render(
       <InlineNotification title="Notification title" />
@@ -300,6 +316,14 @@ describe('InlineNotification', () => {
 });
 
 describe('ActionableNotification', () => {
+  it('should render', () => {
+    const { asFragment } = render(
+      <ActionableNotification actionButtonLabel="My custom action" />
+    );
+
+    expect(asFragment()).toMatchSnapshot();
+  });
+
   it('uses role=alertdialog', () => {
     const { container } = render(
       <ActionableNotification actionButtonLabel="My custom action" />
