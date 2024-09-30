@@ -37,6 +37,7 @@ jobs:
           yarn storybook:build
       - name: Create CNAME
         run: |
+          touch packages/web-components/storybook-static/.nojekyll
           touch packages/web-components/storybook-static/CNAME
           echo "web-components.carbondesignsystem.com" > packages/web-components/storybook-static/CNAME
       - name: Push to Web Components repo
