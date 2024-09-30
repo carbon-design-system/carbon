@@ -1,0 +1,18 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/components/skeleton-styles';
+
+:host(#{$prefix}-skeleton-text) {
+  display: block;
+  inline-size: 100%;
+
+  .#{$prefix}--skeleton__text {
+    margin-block-start: 0;
+  }
+}

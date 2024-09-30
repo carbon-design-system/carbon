@@ -66,8 +66,7 @@
 
   .#{$prefix}--unstable-pagination__right
     .#{$prefix}--unstable-pagination__text {
-    margin-inline-end: $spacing-05;
-    margin-inline-start: convert.to-rem(1px);
+    margin-inline: convert.to-rem(1px) $spacing-05;
   }
 
   .#{$prefix}--unstable-pagination__button {
