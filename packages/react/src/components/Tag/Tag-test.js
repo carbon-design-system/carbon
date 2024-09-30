@@ -6,11 +6,12 @@
  */
 
 import { Add } from '@carbon/icons-react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import Tag, { TagSkeleton } from './';
 import DismissibleTag from './DismissibleTag';
 import { AILabel } from '../AILabel';
+import { Asleep } from '@carbon/icons-react';
 
 const prefix = 'cds';
 
@@ -82,5 +83,75 @@ describe('Tag', () => {
 
       expect(skeletonTag).toHaveClass(`${prefix}--layout--size-sm`);
     });
+  });
+
+  it('should render with different types', () => {
+    const types = [
+      'red',
+      'magenta',
+      'purple',
+      'blue',
+      'cyan',
+      'teal',
+      'green',
+      'gray',
+      'cool-gray',
+      'warm-gray',
+      'high-contrast',
+      'outline',
+    ];
+
+    types.forEach((type) => {
+      const { container } = render(<Tag type={type}>Tag content</Tag>);
+      expect(container.firstChild).toHaveClass(`${prefix}--tag--${type}`);
+    });
+  });
+
+  it('should render with custom className', () => {
+    const { container } = render(<Tag className="some-class">Tag content</Tag>);
+    expect(container.firstChild).toHaveClass('some-class');
+  });
+
+  it('should render with icon', () => {
+    render(<Tag renderIcon={Asleep}>Tag content</Tag>);
+    expect(screen.getByText('Tag content')).toBeInTheDocument();
+    expect(document.querySelector('svg')).toBeInTheDocument();
+  });
+
+  it('should render as a filter tag', () => {
+    consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const { container } = render(<Tag filter>Tag content</Tag>);
+    expect(container.firstChild).toHaveClass(`${prefix}--tag--filter`);
+    consoleSpy.mockRestore();
+  });
+
+  it('should render with different sizes', () => {
+    const sizes = ['sm', 'md', 'lg'];
+
+    sizes.forEach((size) => {
+      const { container } = render(<Tag size={size}>Tag content</Tag>);
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--tag ${prefix}--tag--${size} ${prefix}--layout--size-${size}`
+      );
+    });
+  });
+
+  it('should render as disabled', () => {
+    const { container } = render(<Tag disabled>Disabled Tag</Tag>);
+    expect(container.firstChild).toHaveClass(`${prefix}--tag--disabled`);
+  });
+
+  it('should handle close button click', () => {
+    consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const mockOnClose = jest.fn();
+    render(
+      <Tag type="red" filter onClose={mockOnClose} title="Close tag">
+        onClose
+      </Tag>
+    );
+    const closeButton = screen.getByTitle('Close tag');
+    closeButton.click();
+    expect(mockOnClose).toHaveBeenCalledTimes(1);
+    consoleSpy.mockRestore();
   });
 });
