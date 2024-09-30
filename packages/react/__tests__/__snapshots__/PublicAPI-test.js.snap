@@ -9455,6 +9455,7 @@ Map {
     "render": [Function],
   },
   "ToggletipContent" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -9463,6 +9464,7 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "ToggletipLabel" => Object {
     "propTypes": Object {
