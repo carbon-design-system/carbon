@@ -1271,27 +1271,27 @@
     - action
   sizes:
     - 32
-- name: array-booleans
+- name: array--booleans
   friendly name: Array of booleans
   aliases:
     - true false
     - booleans
   sizes:
     - 32
-- name: array-dates
+- name: array--dates
   friendly name: Array of dates
   aliases:
     - dates
     - calendars
   sizes:
     - 32
-- name: array-numbers
+- name: array--numbers
   friendly name: Array of numbers
   aliases:
     - numbers
   sizes:
     - 32
-- name: array-objects
+- name: array--objects
   friendly name: Array of objects
   aliases:
     - curly brackets
@@ -1299,7 +1299,7 @@
     - object array
   sizes:
     - 32
-- name: array-strings
+- name: array--strings
   friendly name: Array of strings
   aliases:
     - strings
