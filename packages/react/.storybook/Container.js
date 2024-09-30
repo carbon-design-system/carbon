@@ -44,15 +44,14 @@ function Container({ story, id }) {
           }}>
           <p
             style={{ color: 'white', fontWeight: 'bold', fontSize: '.875rem' }}>
-            carbon-components-react@7.x is in maintenance mode, support is
-            scheduled to end on September 30, 2024.
-            <span style={{ fontWeight: '400' }}> Start using v11 now!</span>
+            carbon-components-react@7.x reached end of support on September 30,
+            2024 and will not receive any more updates.
           </p>
           <a
             style={{ textDecoration: 'none', color: 'white' }}
-            href="https://github.com/carbon-design-system/carbon/blob/main/docs/release-schedule.md"
+            href="https://carbondesignsystem.com/migrating/guide/develop/"
             target="_blank">
-            Release schedule
+            Migrate to v11 →
           </a>
         </div>
       )}
