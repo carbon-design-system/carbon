@@ -2307,11 +2307,11 @@ categories:
           - airplay
           - airplay--filled
           - aperture
-          - array-booleans
-          - array-dates
-          - array-numbers
-          - array-objects
-          - array-strings
+          - array--booleans
+          - array--dates
+          - array--numbers
+          - array--objects
+          - array--strings
           - asset
           - asset--confirm
           - asset--digital-twin
