@@ -12555,8 +12555,8 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z-validation-assistant
-- friendly_name: IBM watsonx™ Code Assistant for Z Validation Assistant
-- aliases:
+  friendly_name: IBM watsonx™ Code Assistant for Z Validation Assistant
+  aliases:
     - ibm watsonx code assistant for Z Validation Assistant
     - AI assistant
     - code
