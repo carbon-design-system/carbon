@@ -2,6 +2,12 @@
 
 > Styles for the Carbon Design System
 
+> [!CAUTION]  
+> `carbon-components` is deprecated and will not receive any more updates.
+>
+> More information is available on our
+> [website](https://www.carbondesignsystem.com/deprecations)
+
 ## Getting started
 
 To install `carbon-components` in your project, you will need to run the
