@@ -7,7 +7,7 @@
 
 // @ts-nocheck
 import React from 'react';
-import { Form } from './FormOnPage';
+import { Form } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(
