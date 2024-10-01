@@ -119,10 +119,11 @@ describe('Tag', () => {
   });
 
   it('should render as a filter tag', () => {
-    consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(<Tag filter>Tag content</Tag>);
     expect(container.firstChild).toHaveClass(`${prefix}--tag--filter`);
-    consoleSpy.mockRestore();
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
   });
 
   it('should render with different sizes', () => {
@@ -142,7 +143,7 @@ describe('Tag', () => {
   });
 
   it('should handle close button click', () => {
-    consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const mockOnClose = jest.fn();
     render(
       <Tag type="red" filter onClose={mockOnClose} title="Close tag">
@@ -152,6 +153,7 @@ describe('Tag', () => {
     const closeButton = screen.getByTitle('Close tag');
     closeButton.click();
     expect(mockOnClose).toHaveBeenCalledTimes(1);
-    consoleSpy.mockRestore();
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
   });
 });
