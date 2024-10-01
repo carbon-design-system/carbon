@@ -38,20 +38,20 @@ const unstable_meta = {
 
 // An unstable component will retain its name, specifically for things like
 // the rules of hooks plugin which depend on the correct casing of the name
-function StaticNotification(props) {
+function ComponentName(props) {
   // ...
 }
 
 // However, when we export the component we will export it with the `unstable_`
 // prefix. (Similar to React.unstable_Suspense, React.unstable_Profiler)
-export { default as unstable_StaticNotification } from './components/StaticNotification';
+export { default as unstable_ComponentName } from './components/ComponentName';
 ```
 
 For teams using these features, they will need to import the functionality by
 using the `unstable_` prefix. For example:
 
 ```jsx
-import { unstable_StaticNotification as StaticNotification } from '@carbon/react';
+import { unstable_ComponentName as ComponentName } from '@carbon/react';
 ```
 
 ### Documenting components and exports prefixed with `unstable_`

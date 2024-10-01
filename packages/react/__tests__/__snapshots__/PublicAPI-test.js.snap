@@ -569,6 +569,50 @@ Map {
     "2": "bottom",
     "3": "left",
   },
+  "Callout" => Object {
+    "propTypes": Object {
+      "actionButtonLabel": Object {
+        "type": "string",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "error",
+            "info",
+            "info-square",
+            "success",
+            "warning",
+            "warning-alt",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "lowContrast": Object {
+        "type": "bool",
+      },
+      "onActionButtonClick": Object {
+        "type": "func",
+      },
+      "statusIconDescription": Object {
+        "type": "string",
+      },
+      "subtitle": Object {
+        "type": "node",
+      },
+      "title": Object {
+        "type": "string",
+      },
+      "titleId": Object {
+        "type": "string",
+      },
+    },
+  },
   "Checkbox" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -7455,50 +7499,7 @@ Map {
     },
     "render": [Function],
   },
-  "StaticNotification" => Object {
-    "propTypes": Object {
-      "actionButtonLabel": Object {
-        "type": "string",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "error",
-            "info",
-            "info-square",
-            "success",
-            "warning",
-            "warning-alt",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "lowContrast": Object {
-        "type": "bool",
-      },
-      "onActionButtonClick": Object {
-        "type": "func",
-      },
-      "statusIconDescription": Object {
-        "type": "string",
-      },
-      "subtitle": Object {
-        "type": "node",
-      },
-      "title": Object {
-        "type": "string",
-      },
-      "titleId": Object {
-        "type": "string",
-      },
-    },
-  },
+  "StaticNotification" => Object {},
   "StructuredListBody" => Object {
     "propTypes": Object {
       "children": Object {
