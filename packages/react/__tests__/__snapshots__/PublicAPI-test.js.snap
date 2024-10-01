@@ -9458,6 +9458,7 @@ Map {
     "render": [Function],
   },
   "ToggletipContent" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -9466,6 +9467,7 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "ToggletipLabel" => Object {
     "propTypes": Object {
@@ -9804,14 +9806,22 @@ Map {
       "children": Object {
         "type": "node",
       },
-      "flags": Object {
-        "args": Array [
-          Object {
-            "type": "bool",
-          },
-        ],
-        "type": "objectOf",
+      "enableExperimentalFocusWrapWithoutSentinels": Object {
+        "type": "bool",
       },
+      "enableTreeviewControllable": Object {
+        "type": "bool",
+      },
+      "enableV12Overflowmenu": Object {
+        "type": "bool",
+      },
+      "enableV12TileDefaultIcons": Object {
+        "type": "bool",
+      },
+      "enableV12TileRadioIcons": Object {
+        "type": "bool",
+      },
+      "flags": [Function],
     },
   },
   "unstable_Layout" => Object {
@@ -10765,6 +10775,7 @@ Map {
     },
   },
   "unstable__FluidTextInput" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -10831,6 +10842,7 @@ Map {
         "type": "node",
       },
     },
+    "render": [Function],
   },
   "unstable__FluidTextInputSkeleton" => Object {
     "propTypes": Object {

@@ -1,0 +1,251 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/focus-outline' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/components/tile/index' as *;
+@use '@carbon/styles/scss/components/link/index' as *;
+@use '@carbon/styles/scss/components/form/index' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/layout' as *;
+
+:host(#{$prefix}-tile) {
+  @extend .#{$prefix}--tile;
+  @include emit-layout-tokens();
+
+  ::slotted(.#{$prefix}--link) {
+    @extend .#{$prefix}--link;
+  }
+}
+
+:host(#{$prefix}-tile-group) {
+  @extend .#{$prefix}--tile-group;
+
+  background: transparent;
+
+  fieldset {
+    border: none;
+  }
+}
+
+:host(#{$prefix}-clickable-tile) {
+  @include emit-layout-tokens();
+
+  display: grid;
+  outline: none;
+
+  .#{$prefix}--link--disabled {
+    display: block;
+  }
+
+  .#{$prefix}--tile {
+    // Overrides what `.#{$prefix}--link` defines
+    padding: $spacing-05;
+    outline: $spacing-01 solid transparent;
+  }
+
+  .#{$prefix}--tile--clickable {
+    @extend .#{$prefix}--tile--clickable;
+    // Overrides what `.#{$prefix}--link` defines
+    display: block;
+    transition: $duration-moderate-01 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  &:hover {
+    .#{$prefix}--tile--clickable {
+      color: inherit;
+    }
+  }
+
+  ::slotted(#{$prefix}-slug) {
+    pointer-events: none;
+  }
+}
+
+:host(#{$prefix}-radio-tile) {
+  @include emit-layout-tokens();
+
+  display: block;
+
+  margin-block-end: $spacing-03;
+  outline: none;
+}
+
+:host(#{$prefix}-selectable-tile) {
+  @include emit-layout-tokens();
+
+  position: relative;
+
+  display: content;
+  outline: none;
+
+  .#{$prefix}--tile__chevron {
+    @extend .#{$prefix}--tile__chevron;
+  }
+}
+
+:host(#{$prefix}-radio-tile),
+:host(#{$prefix}-selectable-tile) {
+  .#{$prefix}--tile-input:checked
+    ~ .#{$prefix}--tile--selectable
+    .#{$prefix}--tile__checkmark {
+    opacity: 1;
+  }
+}
+
+:host(#{$prefix}-clickable-tile) ::slotted(*),
+:host(#{$prefix}-selectable-tile) ::slotted(*) {
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+
+:host(#{$prefix}-expandable-tile) {
+  @extend .#{$prefix}--tile;
+  @extend .#{$prefix}--tile--expandable;
+  @include emit-layout-tokens();
+
+  ::slotted(#{$prefix}-tile-below-the-fold-content) {
+    @extend .#{$prefix}--tile-content__below-the-fold;
+  }
+
+  .#{$prefix}-ce--expandable-tile--below-the-fold-content {
+    max-block-size: 0;
+    transition: max-height $duration-fast-02 motion(standard, productive);
+  }
+}
+
+:host(#{$prefix}-expandable-tile[expanded]) {
+  @extend .#{$prefix}--tile--is-expanded;
+
+  ::slotted(#{$prefix}-tile-below-the-fold-content) {
+    opacity: 1;
+    transition: $duration-fast-02 motion(standard, productive);
+    visibility: visible;
+  }
+}
+
+:host(#{$prefix}-expandable-tile[with-interactive]) {
+  cursor: default;
+  transition: max-height $duration-moderate-01 motion(standard, productive);
+
+  &:hover {
+    background-color: $layer;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+:host(#{$prefix}-expandable-tile:not([with-interactive])) {
+  .#{$prefix}--tile__chevron {
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+  }
+}
+
+:host(#{$prefix}-tile[color-scheme='light']),
+:host(#{$prefix}-expandable-tile[color-scheme='light']) {
+  @extend .#{$prefix}--tile--light;
+}
+
+// Slug styles
+:host(#{$prefix}-tile[slug]),
+:host(#{$prefix}-expandable-tile[slug]),
+:host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile,
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile {
+  @include ai-popover-gradient('default', 0, 'layer');
+
+  border: 1px solid transparent;
+  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+    0 24px 40px -24px $ai-drop-shadow;
+}
+
+:host(#{$prefix}-tile),
+:host(#{$prefix}-expandable-tile),
+:host(#{$prefix}-clickable-tile),
+:host(#{$prefix}-selectable-tile) {
+  ::slotted(#{$prefix}-slug) {
+    position: absolute;
+    inset-block-start: $spacing-05;
+    inset-inline-end: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-selectable-tile) ::slotted(#{$prefix}-slug) {
+  inset-inline-end: $spacing-08;
+}
+
+:host(#{$prefix}-expandable-tile[slug]):hover {
+  @include ai-popover-gradient('default', 0, 'layer');
+}
+
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile::before,
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile::after,
+:host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile::before {
+  position: absolute;
+  display: block;
+  block-size: 100%;
+  content: '';
+  inline-size: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  opacity: 0;
+  transition: opacity $duration-fast-02 motion(standard, productive);
+}
+
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile::before,
+:host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile::before {
+  @include ai-popover-gradient('hover', 0, 'layer');
+
+  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
+}
+
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile:hover::before,
+:host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile:hover::before {
+  opacity: 1;
+}
+
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected {
+  border: 1px solid $layer-selected-inverse;
+  .#{$prefix}--tile__checkmark {
+    z-index: 1;
+  }
+}
+
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected::after {
+  @include ai-popover-gradient('selected', 0, 'layer');
+
+  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
+}
+
+:host(#{$prefix}-expandable-tile[slug]) {
+  overflow: visible;
+}
+
+:host(#{$prefix}-tile[slug][has-rounded-corners]),
+:host(#{$prefix}-expandable-tile[slug][has-rounded-corners]),
+:host(#{$prefix}-clickable-tile[slug][has-rounded-corners]),
+:host(#{$prefix}-selectable-tile[slug][has-rounded-corners]) {
+  @extend .#{$prefix}--tile--slug-rounded;
+
+  .#{$prefix}--tile__chevron {
+    border-end-end-radius: $spacing-03;
+  }
+}

@@ -74,8 +74,7 @@
     th
     > .#{$prefix}--table-header-label {
     line-height: 1;
-    padding-inline-end: $spacing-05;
-    padding-inline-start: $spacing-05;
+    padding-inline: $spacing-05 $spacing-05;
   }
 
   // -------------------------------------
@@ -107,20 +106,17 @@
     th.#{$prefix}--table-sort__header
     .#{$prefix}--table-sort__flex
     .#{$prefix}--table-header-label {
-    padding-block-end: 0;
-    padding-block-start: 0;
+    padding-block: 0 0;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--sm
     th.#{$prefix}--table-sort__header {
-    padding-block-end: convert.to-rem(7px);
-    padding-block-start: convert.to-rem(7px);
+    padding-block: convert.to-rem(7px) convert.to-rem(7px);
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--xs
     th.#{$prefix}--table-sort__header {
-    padding-block-end: convert.to-rem(2px);
-    padding-block-start: convert.to-rem(2px);
+    padding-block: convert.to-rem(2px) convert.to-rem(2px);
   }
 
   .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--xs):not(
@@ -176,8 +172,7 @@
   .#{$prefix}--table-sort__icon-unsorted {
     fill: $icon-primary;
     inline-size: convert.to-rem(20px);
-    margin-inline-end: $spacing-03;
-    margin-inline-start: $spacing-03;
+    margin-inline: $spacing-03 $spacing-03;
     min-inline-size: $spacing-05;
     opacity: 0;
   }
@@ -205,8 +200,7 @@
   .#{$prefix}--table-sort__icon {
     fill: $icon-primary;
     inline-size: convert.to-rem(20px);
-    margin-inline-end: $spacing-03;
-    margin-inline-start: $spacing-03;
+    margin-inline: $spacing-03 $spacing-03;
     min-inline-size: $spacing-05;
     opacity: 1;
     transform: rotate(0);
@@ -251,8 +245,7 @@
   // Slug styles
   .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon,
   .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon-unsorted {
-    margin-inline-end: convert.to-rem(8px);
-    margin-inline-start: auto;
+    margin-inline: auto convert.to-rem(8px);
   }
 
   .#{$prefix}--table-sort__header--slug .#{$prefix}--slug {
