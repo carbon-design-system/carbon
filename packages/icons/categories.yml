@@ -838,6 +838,7 @@ categories:
           - ibm-cloud-pak--security
           - ibm-cloud-pak--system
           - ibm-cloud-pak--watson-aiops
+          - ibm-devops--control
           - ibm-quantum--safe-advisor
           - ibm-quantum--safe-explorer
           - ibm-quantum--safe-remediator
