@@ -1,0 +1,73 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/themes.css" /> 
+  <style>
+    /* Suppress custom element until styles are loaded */
+    cds-ordered-list:not(:defined) {
+      display: none;
+    }
+
+    cds-unordered-list:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/list.min.js"></script>
+</head>
+<body class="cds-theme-zone-white">
+  <h3>cds-ordered-list</h3>
+
+  <cds-ordered-list>
+    <cds-list-item>
+      Ordered List level 1
+      <cds-ordered-list>
+        <cds-list-item>Ordered List level 2</cds-list-item>
+        <cds-list-item>
+          Ordered List level 2
+          <cds-ordered-list>
+            <cds-list-item>Ordered List level 2</cds-list-item>
+            <cds-list-item>Ordered List level 2</cds-list-item>
+          </cds-ordered-list>
+        </cds-list-item>
+      </cds-ordered-list>
+    </cds-list-item>
+    <cds-list-item>Ordered List level 1</cds-list-item>
+    <cds-list-item>Ordered List level 1</cds-list-item>
+  </cds-ordered-list>
+
+  <hr style="margin: 3rem 0" />
+
+  <h3>cds-unordered-list</h3>
+
+  <cds-unordered-list>
+    <cds-list-item>
+      Unordered List level 1
+      <cds-unordered-list>
+        <cds-list-item>Unordered List level 2</cds-list-item>
+        <cds-list-item>
+          Unordered List level 2
+          <cds-unordered-list>
+            <cds-list-item>Unordered List level 2</cds-list-item>
+            <cds-list-item>Unordered List level 2</cds-list-item>
+          </cds-unordered-list>
+        </cds-list-item>
+      </cds-unordered-list>
+    </cds-list-item>
+    <cds-list-item>Unordered List level 1</cds-list-item>
+    <cds-list-item>Unordered List level 1</cds-list-item>
+  </cds-unordered-list>
+</body>
+</html>

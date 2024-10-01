@@ -1,0 +1,113 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/breadcrumb';
+@import '../overflow-menu/overflow-menu';
+
+:host(#{$prefix}-breadcrumb),
+:host(#{$prefix}-breadcrumb-skeleton) {
+  @extend .#{$prefix}--breadcrumb;
+
+  .#{$prefix}--breadcrumb {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+:host(#{$prefix}-breadcrumb-item),
+:host(#{$prefix}-breadcrumb-item-skeleton) {
+  @extend .#{$prefix}--breadcrumb-item;
+
+  &::after {
+    color: $text-primary;
+    content: '/';
+    margin-inline-start: $spacing-03;
+  }
+}
+
+:host(#{$prefix}-breadcrumb-overflow-menu) {
+  position: relative;
+  block-size: rem(18px);
+  inline-size: rem(20px);
+
+  &:focus {
+    outline: 1px solid $focus;
+  }
+
+  &:hover {
+    background: transparent;
+
+    ::after {
+      opacity: 1;
+    }
+  }
+
+  // Used to mimic link underline
+  ::after {
+    position: absolute;
+    background: $link-primary-hover;
+    block-size: 1px;
+    content: '';
+    inline-size: $spacing-04;
+    inset-block-end: $spacing-01;
+    opacity: 0;
+    transition: opacity $duration-fast-01 motion(standard, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+}
+
+:host(#{$prefix}-breadcrumb-overflow-menu[open]) {
+  background: transparent;
+  box-shadow: none;
+}
+
+:host(#{$prefix}-breadcrumb-overflow-menu) svg {
+  position: relative;
+  fill: $link-primary;
+  transform: translateY(4px);
+}
+
+:host(#{$prefix}-breadcrumb-overflow-menu):hover svg {
+  fill: $link-primary-hover;
+}
+
+:host(#{$prefix}-breadcrumb[no-trailing-slash])
+  ::slotted(#{$prefix}-breadcrumb-item:last-of-type)::after {
+  content: '';
+}
+
+:host(#{$prefix}-breadcrumb-link) {
+  outline: none;
+
+  // Re-define the ruleset so this wins over `.#{$prefix}--link:visited`, etc.
+  .#{$prefix}--link--disabled {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--link__icon[hidden] {
+    display: none;
+  }
+}
+
+:host(#{$prefix}-breadcrumb-link[aria-current='page']) .#{$prefix}--link {
+  color: $text-primary;
+  cursor: auto;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

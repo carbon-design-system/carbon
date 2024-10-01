@@ -341,10 +341,13 @@ cases, follow these steps below to ensure a proper patch release:
 
 ## Previous releases (v10)
 
-We currently support the current and previous major version of the Design
-System. While the current major version will receive features and bug fixes, the
-previous major version will only receive bug fixes along with any critical
-security updates.
+From the initial v11 release in March 2022 until September 30, 2024 we supported
+the previous major version of the Design System (v10). During this time v10 only
+received bug fixes when requested, and critical security updates. All v10 code
+and assets reached end of support on September 30, 2024.
+
+The content below relating to the v10 release process is only kept here for
+posterity and should be removed from this document in the next major release.
 
 ### How to determine if the previous major version needs to be released
 
