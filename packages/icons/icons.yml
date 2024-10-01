@@ -12062,6 +12062,15 @@
     - app
   sizes:
     - 32
+- name: ibm-devops--control
+  friendly_name: IBM DevOps Control
+  aliases:
+    - collaboration
+    - control
+    - integration
+    - quality assurance
+  sizes:
+    - 32
 - name: ibm-quantum--safe-advisor
   friendly_name: IBM Quantum Safe™ Advisor
   aliases:
