@@ -1272,27 +1272,27 @@
   sizes:
     - 32
 - name: array--booleans
-  friendly name: Array of booleans
+  friendly_name: Array of booleans
   aliases:
     - true false
     - booleans
   sizes:
     - 32
 - name: array--dates
-  friendly name: Array of dates
+  friendly_name: Array of dates
   aliases:
     - dates
     - calendars
   sizes:
     - 32
 - name: array--numbers
-  friendly name: Array of numbers
+  friendly_name: Array of numbers
   aliases:
     - numbers
   sizes:
     - 32
 - name: array--objects
-  friendly name: Array of objects
+  friendly_name: Array of objects
   aliases:
     - curly brackets
     - objects array
@@ -1300,7 +1300,7 @@
   sizes:
     - 32
 - name: array--strings
-  friendly name: Array of strings
+  friendly_name: Array of strings
   aliases:
     - strings
     - letters
@@ -1954,7 +1954,7 @@
   sizes:
     - 32
 - name: bland-altman-plot
-  friendly name: Bland-Altman plot
+  friendly_name: Bland-Altman plot
   aliases:
     - SPSS
     - statistics
@@ -2401,7 +2401,7 @@
   sizes:
     - 32
 - name: build--image
-  friendly name: Image build
+  friendly_name: Image build
   aliases:
     - build
     - image build,
@@ -2413,7 +2413,7 @@
   sizes:
     - 32
 - name: build--run
-  friendly name: Build run
+  friendly_name: Build run
   aliases:
     - occurrence of a build
     - build
@@ -9390,7 +9390,7 @@
   sizes:
     - 32
 - name: function--2
-  friendly name: Function 2
+  friendly_name: Function 2
   aliases:
     - stateless code snippet
     - http request
@@ -10307,7 +10307,7 @@
   sizes:
     - 32
 - name: ibm--api-connect
-  friendly name: IBM API Connect®
+  friendly_name: IBM API Connect®
   aliases:
     - IBM API Connect
     - Hybrid Cloud
@@ -10322,7 +10322,7 @@
   sizes:
     - 32
 - name: ibm--app-connect-enterprise
-  friendly name: IBM App Connect Enterprise
+  friendly_name: IBM App Connect Enterprise
   aliases:
     - Cloud
     - Cognitive
@@ -10342,7 +10342,7 @@
   sizes:
     - 32
 - name: ibm--aspera
-  friendly name: IBM Aspera®
+  friendly_name: IBM Aspera®
   aliases:
     - Hybrid Cloud
     - Line
@@ -10383,7 +10383,7 @@
   sizes:
     - 32
 - name: ibm--data-power
-  friendly name: IBM DataPower®
+  friendly_name: IBM DataPower®
   aliases:
     - IBM Data Power
     - Hybrid Cloud
@@ -10456,7 +10456,7 @@
   sizes:
     - 32
 - name: ibm--deployable-architecture
-  friendly name: Deployable Architecture
+  friendly_name: Deployable Architecture
   aliases:
     - Deployable Architecture
     - IBM Cloud Catalog
@@ -10759,7 +10759,7 @@
   sizes:
     - 32
 - name: ibm--global-storage-architecture
-  friendly name: Global Storage Architecture
+  friendly_name: Global Storage Architecture
   aliases:
     - cloud
     - file system
@@ -10767,7 +10767,7 @@
   sizes:
     - 32
 - name: ibm--granite
-  friendly name: IBM® Granite™
+  friendly_name: IBM® Granite™
   aliases:
     - IBM Granite
     - AI
@@ -10812,7 +10812,7 @@
   sizes:
     - 32
 - name: ibm--knowledge-catalog
-  friendly name: IBM® Knowledge Catalog
+  friendly_name: IBM® Knowledge Catalog
   aliases:
     - ibm knowledge catalog
     - Notebook
@@ -10829,7 +10829,7 @@
   sizes:
     - 32
 - name: ibm--knowledge-catalog-premium
-  friendly name: IBM® Knowledge Catalog Premium
+  friendly_name: IBM® Knowledge Catalog Premium
   aliases:
     - ibm knowledge catalog premium
     - catalog
@@ -10846,7 +10846,7 @@
   sizes:
     - 32
 - name: ibm--knowledge-catalog-standard
-  friendly name: IBM® Knowledge Catalog Standard
+  friendly_name: IBM® Knowledge Catalog Standard
   aliases:
     - ibm knowledge catalog standard
     - information
@@ -10930,7 +10930,7 @@
   sizes:
     - 32
 - name: ibm--machine-learning-for-zos
-  friendly name: IBM® Machine Learning for z/OS®
+  friendly_name: IBM® Machine Learning for z/OS®
   aliases:
     - IBM Machine Learning for z/OS
     - IBM Machine Learning for zOS
@@ -10993,7 +10993,7 @@
   sizes:
     - 32
 - name: ibm--planning-analytics
-  friendly name: IBM Planning Analytics
+  friendly_name: IBM Planning Analytics
   aliases:
     - Hybrid Cloud
     - Data
@@ -11107,7 +11107,7 @@
   sizes:
     - 32
 - name: ibm--streamsets
-  friendly name: IBM StreamSets
+  friendly_name: IBM StreamSets
   aliases:
     - ibm streamsets
     - ibm stream sets
@@ -11215,7 +11215,7 @@
   sizes:
     - 32
 - name: ibm-cloud--backup-and-recovery
-  friendly name: IBM Cloud® Backup and Recovery
+  friendly_name: IBM Cloud® Backup and Recovery
   aliases:
     - IBM Cloud Backup and Recovery
     - arrow
@@ -11231,7 +11231,7 @@
   sizes:
     - 32
 - name: ibm-cloud--backup-service-vpc
-  friendly name: IBM Cloud® Backup Service for VPC
+  friendly_name: IBM Cloud® Backup Service for VPC
   aliases:
     - IBM Cloud Backup Service for VPC
     - managed services
@@ -11281,7 +11281,7 @@
   sizes:
     - 32
 - name: ibm-cloud--code-engine
-  friendly name: IBM Cloud® Code Engine
+  friendly_name: IBM Cloud® Code Engine
   aliases:
     - Hybrid cloud
     - IBM Cloud Code Engine
@@ -11304,7 +11304,7 @@
   sizes:
     - 32
 - name: ibm-cloud--databases
-  friendly name: IBM Cloud® Databases
+  friendly_name: IBM Cloud® Databases
   aliases:
     - infrastructure
     - servers
@@ -11499,7 +11499,7 @@
   sizes:
     - 32
 - name: ibm-cloud--gate-keeper
-  friendly name: IBM Cloud® Gate Keeper
+  friendly_name: IBM Cloud® Gate Keeper
   aliases:
     - IBM Cloud Gate Keeper
     - fraud analysis
@@ -11681,7 +11681,7 @@
   sizes:
     - 32
 - name: ibm-cloud--observability
-  friendly name: IBM Cloud® Observability
+  friendly_name: IBM Cloud® Observability
   aliases:
     - cloud
     - list
@@ -11760,7 +11760,7 @@
   sizes:
     - 32
 - name: ibm-cloud--security
-  friendly name: IBM Cloud® Security
+  friendly_name: IBM Cloud® Security
   aliases:
     - security
     - configuration
@@ -11803,7 +11803,7 @@
   sizes:
     - 32
 - name: ibm-cloud--security-groups
-  friendly name: IBM Cloud® Security Groups
+  friendly_name: IBM Cloud® Security Groups
   aliases:
     - IBM Cloud Security Groups
     - IP filter
@@ -11894,7 +11894,7 @@
   sizes:
     - 32
 - name: ibm-cloud--vpc-block-storage-snapshots
-  friendly name: IBM Cloud® Block Storage Snapshots for VPC
+  friendly_name: IBM Cloud® Block Storage Snapshots for VPC
   aliases:
     - IBM Cloud Block Storage Snapshots for VPC
     - cube
@@ -11903,7 +11903,7 @@
   sizes:
     - 32
 - name: ibm-cloud--vpc-client-vpn
-  friendly name: IBM Cloud® Client VPN for VPC
+  friendly_name: IBM Cloud® Client VPN for VPC
   aliases:
     - ibm cloud client vpn for vpc
     - networking
@@ -11935,7 +11935,7 @@
   sizes:
     - 32
 - name: ibm-cloud--vpc-file-storage
-  friendly name: IBM Cloud® File Storage for VPC
+  friendly_name: IBM Cloud® File Storage for VPC
   aliases:
     - IBM Cloud Block Storage for VPC
     - file
@@ -11945,7 +11945,7 @@
   sizes:
     - 32
 - name: ibm-cloud--vpc-images
-  friendly name: Images for VPC
+  friendly_name: Images for VPC
   aliases:
     - virtual servers
     - settings
@@ -12063,7 +12063,7 @@
   sizes:
     - 32
 - name: ibm-quantum--safe-advisor
-  friendly name: IBM Quantum Safe™ Advisor
+  friendly_name: IBM Quantum Safe™ Advisor
   aliases:
     - research
     - scan
@@ -12095,7 +12095,7 @@
   sizes:
     - 32
 - name: ibm-quantum--safe-explorer
-  friendly name: IBM Quantum Safe™ Explorer
+  friendly_name: IBM Quantum Safe™ Explorer
   aliases:
     - research
     - scan
@@ -12120,7 +12120,7 @@
   sizes:
     - 32
 - name: ibm-quantum--safe-remediator
-  friendly name: IBM Quantum Safe™ Remediator
+  friendly_name: IBM Quantum Safe™ Remediator
   aliases:
     - research
     - scan
@@ -12546,7 +12546,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z-validation-assistant
-- friendly name: IBM watsonx™ Code Assistant for Z Validation Assistant
+- friendly_name: IBM watsonx™ Code Assistant for Z Validation Assistant
 - aliases:
     - ibm watsonx code assistant for Z Validation Assistant
     - AI assistant
@@ -12625,7 +12625,7 @@
   sizes:
     - 32
 - name: ibm-z--open-editor
-  friendly name: IBM Z® Open Editor
+  friendly_name: IBM Z® Open Editor
   aliases:
     - Systems
     - IT
@@ -13420,7 +13420,7 @@
     - ISO
     - outline
 - name: job--daemon
-  friendly name: Daemon job
+  friendly_name: Daemon job
   aliases:
     - job run
     - retry
@@ -13429,7 +13429,7 @@
   sizes:
     - 32
 - name: job--run
-  friendly name: Job run
+  friendly_name: Job run
   aliases:
     - job
     - instance
@@ -16456,7 +16456,7 @@
     - 16
     - 32
 - name: network-time-protocol
-  friendly name: Network time protocol
+  friendly_name: Network time protocol
   aliases:
     - NTP
     - flow
@@ -16890,7 +16890,7 @@
     - figure
     - alphanumeric
 - name: object
-  friendly name: Object
+  friendly_name: Object
   aliases:
     - data object
     - curly brackets
@@ -18514,7 +18514,7 @@
   sizes:
     - 32
 - name: punctuation-check
-  friendly name: Punctuation check
+  friendly_name: Punctuation check
   aliases:
     - Punctuation check
     - Spell check
@@ -22859,7 +22859,7 @@
   sizes:
     - 32
 - name: thumbs-up-double
-  friendly name: Double thumbs up
+  friendly_name: Double thumbs up
   aliases:
     - like
     - love
@@ -22867,7 +22867,7 @@
   sizes:
     - 32
 - name: thumbs-up-double--filled
-  friendly name: Double thumbs up filled
+  friendly_name: Double thumbs up filled
   aliases:
     - like
     - love
