@@ -1,6 +1,6 @@
 {
   "name": "carbon-components-react",
-  "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
+  "description": "The Carbon Design System is IBM’s open-source design system for products and experiences. This package reached end of support on September 30, 2024 and will not receive any more updates.",
   "version": "8.67.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
