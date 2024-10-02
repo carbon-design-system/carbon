@@ -586,6 +586,12 @@ const ComboBox = forwardRef(
         if (onToggleClick) {
           onToggleClick(event);
         }
+        if (readOnly) {
+          // Prevent the list from opening if readOnly is true
+          event.preventDownshiftDefault = true;
+          event?.persist?.();
+          return;
+        }
 
         if (event.target === textInput.current && isOpen) {
           event.preventDownshiftDefault = true;
@@ -748,6 +754,12 @@ const ComboBox = forwardRef(
             if (evt.key !== 'Tab') {
               evt.preventDefault();
             }
+          },
+          onClick: (evt: MouseEvent<HTMLInputElement>) => {
+            // Prevent the default behavior which would open the list
+            evt.preventDefault();
+            // Focus on the element as per readonly input behavior
+            evt.currentTarget.focus();
           },
         }
       : {};
