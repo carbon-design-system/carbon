@@ -2404,8 +2404,8 @@
   friendly_name: Image build
   aliases:
     - build
-    - image build,
-    - container image 
+    - 'image build,'
+    - container image
     - source code
     - cube
     - settings
@@ -2417,8 +2417,8 @@
   aliases:
     - occurrence of a build
     - build
-    - image build,
-    - container image 
+    - 'image build,'
+    - container image
     - source code
     - cube
     - arrow
@@ -12608,6 +12608,20 @@
     - security
   sizes:
     - 32
+- name: ibm-z--open-editor
+  friendly_name: IBM Z® Open Editor
+  aliases:
+    - Systems
+    - IT
+    - IBM Z Open Editor
+    - Infrastructure
+    - Hexagon
+    - DevOps
+    - Developer
+    - Build
+    - Code
+  sizes:
+    - 32
 - name: ibm-z--processor-capacity-reference
   friendly_name: IBM Z® Processor Capacity Reference
   aliases:
@@ -12631,20 +12645,6 @@
     - provisioning
     - mainframe
     - app
-  sizes:
-    - 32
-- name: ibm-z--open-editor
-  friendly_name: IBM Z® Open Editor
-  aliases:
-    - Systems
-    - IT
-    - IBM Z Open Editor
-    - Infrastructure
-    - Hexagon
-    - DevOps
-    - Developer
-    - Build
-    - Code
   sizes:
     - 32
 - name: ibm-z-os
@@ -16452,6 +16452,17 @@
     - interface
   sizes:
     - 32
+- name: network-time-protocol
+  friendly_name: Network time protocol
+  aliases:
+    - NTP
+    - flow
+    - watch
+    - time
+    - clock
+    - network time protocol
+  sizes:
+    - 32
 - name: new-tab
   friendly_name: New tab
   aliases:
@@ -16463,17 +16474,6 @@
     - operations
   sizes:
     - 16
-    - 32
-- name: network-time-protocol
-  friendly_name: Network time protocol
-  aliases:
-    - NTP
-    - flow
-    - watch
-    - time
-    - clock
-    - network time protocol
-  sizes:
     - 32
 - name: next--filled
   friendly_name: Next filled
