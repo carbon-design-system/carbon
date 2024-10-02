@@ -12,6 +12,8 @@ import {
   ToastNotification,
   InlineNotification,
   ActionableNotification,
+  StaticNotification,
+  Callout,
 } from '../Notification';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -359,5 +361,43 @@ describe('ActionableNotification', () => {
     await waitFor(() => {
       expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument();
     });
+  });
+});
+
+// TODO: Remove StaticNotification tests when Callout moves to stable OR in
+// v12, whichever is first. Ensure test parity on Callout.
+describe('StaticNotification', () => {
+  it('logs a deprecation notice when used', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    expect(() => {
+      render(<StaticNotification title="Notification title" />);
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      'Warning: `StaticNotification` has been renamed to `Callout`.' +
+        'Run the following codemod to automatically update usages in your' +
+        'project: `npx @carbon/upgrade migrate refactor-to-callout --write`'
+    );
+    spy.mockRestore();
+  });
+});
+
+describe('Callout', () => {
+  it('enforces aria-describedby on interactive children elements', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <Callout title="Notification title" titleId="titleId">
+          <button type="button" aria-describedby="titleId">
+            Sample button text
+          </button>
+        </Callout>
+      );
+    }).not.toThrow();
+
+    expect(spy).not.toHaveBeenCalled();
+    spy.mockRestore();
   });
 });

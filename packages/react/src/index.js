@@ -106,7 +106,8 @@ export {
   InlineNotification,
   NotificationActionButton,
   NotificationButton,
-  StaticNotification as unstable__StaticNotification,
+  Callout as unstable__Callout,
+  Callout as unstable__StaticNotification,
 } from './components/Notification';
 export { NumberInput, NumberInputSkeleton } from './components/NumberInput';
 export { OrderedList } from './components/OrderedList';
