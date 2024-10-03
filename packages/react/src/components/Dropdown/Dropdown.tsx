@@ -525,101 +525,101 @@ const Dropdown = React.forwardRef(
           </label>
         )}
         <Layer>
-        <ListBox
-          onFocus={handleFocus}
-          onBlur={handleFocus}
-          size={size}
-          className={className}
-          invalid={invalid}
-          invalidText={invalidText}
-          warn={warn}
-          warnText={warnText}
-          isOpen={isOpen}
-          ref={autoAlign ? refs.setReference : null}
-          id={id}>
-          {invalid && (
-            <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
-          )}
-          {showWarning && (
-            <WarningAltFilled
-              className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
-            />
-          )}
-          <button
-            type="button"
-            // aria-expanded is already being passed through {...toggleButtonProps}
-            className={`${prefix}--list-box__field`}
-            disabled={disabled}
-            aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
-            aria-describedby={
-              !inline && !invalid && !warn && helper ? helperId : undefined
-            }
-            title={
-              selectedItem && itemToString !== undefined
-                ? itemToString(selectedItem)
-                : defaultItemToString(label)
-            }
-            {...toggleButtonProps}
-            {...readOnlyEventHandlers}
-            ref={mergedRef}>
-            <span className={`${prefix}--list-box__label`}>
-              {selectedItem
-                ? renderSelectedItem
-                  ? renderSelectedItem(selectedItem)
-                  : itemToString(selectedItem)
-                : (label as any)}
-            </span>
-            <ListBox.MenuIcon
-              isOpen={isOpen}
-              translateWithId={translateWithId}
-            />
-          </button>
-          {normalizedSlug}
-          <ListBox.Menu {...menuProps}>
-            {isOpen &&
-              items.map((item, index) => {
-                const isObject = item !== null && typeof item === 'object';
-                const itemProps = getItemProps({
-                  item,
-                  index,
-                });
-                if (
-                  item !== null &&
-                  typeof item === 'object' &&
-                  Object.prototype.hasOwnProperty.call(item, 'id')
-                ) {
-                  itemProps.id = item['id'];
-                }
-                const title =
-                  isObject && 'text' in item && itemToElement
-                    ? item.text
-                    : itemToString(item);
-                return (
-                  <ListBox.MenuItem
-                    key={itemProps.id}
-                    isActive={selectedItem === item}
-                    isHighlighted={highlightedIndex === index}
-                    title={title as string}
-                    disabled={itemProps['aria-disabled']}
-                    {...itemProps}>
-                    {typeof item === 'object' &&
-                    ItemToElement !== undefined &&
-                    ItemToElement !== null ? (
-                      <ItemToElement key={itemProps.id} {...item} />
-                    ) : (
-                      itemToString(item)
-                    )}
-                    {selectedItem === item && (
-                      <Checkmark
-                        className={`${prefix}--list-box__menu-item__selected-icon`}
-                      />
-                    )}
-                  </ListBox.MenuItem>
-                );
-              })}
-          </ListBox.Menu>
-        </ListBox>
-          <Layer>
+          <ListBox
+            onFocus={handleFocus}
+            onBlur={handleFocus}
+            size={size}
+            className={className}
+            invalid={invalid}
+            invalidText={invalidText}
+            warn={warn}
+            warnText={warnText}
+            isOpen={isOpen}
+            ref={autoAlign ? refs.setReference : null}
+            id={id}>
+            {invalid && (
+              <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
+            )}
+            {showWarning && (
+              <WarningAltFilled
+                className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
+              />
+            )}
+            <button
+              type="button"
+              // aria-expanded is already being passed through {...toggleButtonProps}
+              className={`${prefix}--list-box__field`}
+              disabled={disabled}
+              aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
+              aria-describedby={
+                !inline && !invalid && !warn && helper ? helperId : undefined
+              }
+              title={
+                selectedItem && itemToString !== undefined
+                  ? itemToString(selectedItem)
+                  : defaultItemToString(label)
+              }
+              {...toggleButtonProps}
+              {...readOnlyEventHandlers}
+              ref={mergedRef}>
+              <span className={`${prefix}--list-box__label`}>
+                {selectedItem
+                  ? renderSelectedItem
+                    ? renderSelectedItem(selectedItem)
+                    : itemToString(selectedItem)
+                  : (label as any)}
+              </span>
+              <ListBox.MenuIcon
+                isOpen={isOpen}
+                translateWithId={translateWithId}
+              />
+            </button>
+            {normalizedSlug}
+            <ListBox.Menu {...menuProps}>
+              {isOpen &&
+                items.map((item, index) => {
+                  const isObject = item !== null && typeof item === 'object';
+                  const itemProps = getItemProps({
+                    item,
+                    index,
+                  });
+                  if (
+                    item !== null &&
+                    typeof item === 'object' &&
+                    Object.prototype.hasOwnProperty.call(item, 'id')
+                  ) {
+                    itemProps.id = item['id'];
+                  }
+                  const title =
+                    isObject && 'text' in item && itemToElement
+                      ? item.text
+                      : itemToString(item);
+                  return (
+                    <ListBox.MenuItem
+                      key={itemProps.id}
+                      isActive={selectedItem === item}
+                      isHighlighted={highlightedIndex === index}
+                      title={title as string}
+                      disabled={itemProps['aria-disabled']}
+                      {...itemProps}>
+                      {typeof item === 'object' &&
+                      ItemToElement !== undefined &&
+                      ItemToElement !== null ? (
+                        <ItemToElement key={itemProps.id} {...item} />
+                      ) : (
+                        itemToString(item)
+                      )}
+                      {selectedItem === item && (
+                        <Checkmark
+                          className={`${prefix}--list-box__menu-item__selected-icon`}
+                        />
+                      )}
+                    </ListBox.MenuItem>
+                  );
+                })}
+            </ListBox.Menu>
+          </ListBox>
+        </Layer>
         {!inline && !invalid && !warn && helper}
       </div>
     );
