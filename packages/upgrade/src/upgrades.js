@@ -347,15 +347,15 @@ export const upgrades = [
             Array.isArray(options.paths) && options.paths.length > 0
               ? options.paths
               : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
-                cwd: options.workspaceDir,
-                ignore: [
-                  '**/es/**',
-                  '**/lib/**',
-                  '**/umd/**',
-                  '**/node_modules/**',
-                  '**/storybook-static/**',
-                ],
-              });
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
 
           await run({
             dry: !options.write,
