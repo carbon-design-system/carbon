@@ -8,95 +8,30 @@
 import React from 'react';
 import { StaticNotification } from '../../Notification';
 import { Link } from '../../Link';
-import mdx from '../Notification.mdx';
+import { CodeSnippet } from '../../CodeSnippet';
+import mdx from './StaticNotification.mdx';
 
-// eslint-disable-next-line storybook/csf-component
 export default {
   title: 'Experimental/unstable__StaticNotification',
-  component: StaticNotification,
   parameters: {
     docs: {
       page: mdx,
     },
   },
-  args: {
-    kind: 'error',
-    lowContrast: false,
-    statusIconDescription: 'notification',
-  },
 };
 
 export const Default = () => (
-  <StaticNotification
-    title="Notification title"
-    subtitle="Subtitle text goes here"
-  />
-);
+  <>
+    <StaticNotification title="StaticNotification has been renamed to Callout" />
 
-export const WithInteractiveElements = () => (
-  <StaticNotification
-    title="Notification title"
-    titleId="my fancy id 123"
-    kind="info"
-    lowContrast>
-    <div className="cds--inline-notification__subtitle">
-      Additional text can describe the notification, or a link to{' '}
-      <Link inline href="#" aria-describedby="my fancy id 123">
-        learn more
-      </Link>
+    <div style={{ marginLeft: '.5rem', marginTop: '2rem' }}>
+      <p style={{ marginBottom: '1rem' }}>
+        Run the following codemod to automatically update usages in your
+        project:
+      </p>
+      <CodeSnippet type="single" feedback="Copied to clipboard">
+        npx @carbon/upgrade migrate refactor-to-callout --write
+      </CodeSnippet>
     </div>
-  </StaticNotification>
+  </>
 );
-
-export const WithActionButtonOnly = () => (
-  <StaticNotification
-    title="Notification title"
-    titleId="notif-1"
-    kind="info"
-    lowContrast
-    actionButtonLabel="Learn More">
-    <div className="cds--inline-notification__subtitle">
-      Here is some important info you might want to know.{' '}
-    </div>
-  </StaticNotification>
-);
-
-export const WithActionButtonAndLinks = () => (
-  <StaticNotification
-    title="Notification title"
-    titleId="notif-1"
-    kind="info"
-    lowContrast
-    actionButtonLabel="Learn More">
-    <div className="cds--inline-notification__subtitle">
-      <Link inline href="#" aria-describedby="notif-1">
-        Create
-      </Link>{' '}
-      or{' '}
-      <Link inline href="#" aria-describedby="notif-1">
-        register
-      </Link>{' '}
-      a cluster before creating a Configuration. Some additional info could go
-      here to show that this notification subtitle goes below the title.
-    </div>
-  </StaticNotification>
-);
-
-export const Playground = (args) => <StaticNotification {...args} />;
-
-Playground.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-};
-Playground.args = {
-  title: 'Notification title',
-  subtitle: 'Subtitle text goes here',
-};
