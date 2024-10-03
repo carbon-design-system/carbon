@@ -36,6 +36,7 @@ describe('Carbon Components React', () => {
         "ButtonSkeleton",
         "ButtonTooltipAlignments",
         "ButtonTooltipPositions",
+        "Callout",
         "Checkbox",
         "CheckboxGroup",
         "CheckboxSkeleton",

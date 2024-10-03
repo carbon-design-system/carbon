@@ -16,8 +16,19 @@ import React, {
   useEffect,
   useRef,
   useState,
+  ReactNode,
 } from 'react';
 import deprecate from '../../prop-types/deprecate';
+
+interface FeatureFlagsProps {
+  children?: ReactNode;
+  flags?: Record<string, boolean>;
+  enableV12TileDefaultIcons?: boolean;
+  enableV12TileRadioIcons?: boolean;
+  enableV12Overflowmenu?: boolean;
+  enableTreeviewControllable?: boolean;
+  enableExperimentalFocusWrapWithoutSentinels?: boolean;
+}
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
  * or disable feature flags in a given React tree
@@ -37,7 +48,7 @@ function FeatureFlags({
   enableV12Overflowmenu = false,
   enableTreeviewControllable = false,
   enableExperimentalFocusWrapWithoutSentinels = false,
-}) {
+}: FeatureFlagsProps): JSX.Element {
   const parentScope = useContext(FeatureFlagContext);
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
 
@@ -108,7 +119,11 @@ FeatureFlags.propTypes = {
  * @param {Function} compare
  * @param {Function} callback
  */
-function useChangedValue(value, compare, callback) {
+function useChangedValue<T>(
+  value: T,
+  compare: (a: T, b: T) => boolean,
+  callback: (value: T) => void
+) {
   const initialRender = useRef(false);
   const savedCallback = useRef(callback);
   const [prevValue, setPrevValue] = useState(value);
@@ -163,7 +178,10 @@ function useFeatureFlags() {
  * @param {object} b
  * @returns {boolean}
  */
-function isEqual(a, b) {
+function isEqual(
+  a: Record<string, boolean>,
+  b: Record<string, boolean>
+): boolean {
   if (a === b) {
     return true;
   }
