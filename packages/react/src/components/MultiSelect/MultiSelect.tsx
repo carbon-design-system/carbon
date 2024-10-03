@@ -6,6 +6,7 @@
  */
 
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { Layer } from '@carbon/react';
 import cx from 'classnames';
 import {
   useSelect,
@@ -705,122 +706,125 @@ const MultiSelect = React.forwardRef(
             </span>
           )}
         </label>
-        <ListBox
-          onFocus={isFluid ? handleFocus : undefined}
-          onBlur={isFluid ? handleFocus : undefined}
-          type={type}
-          size={size}
-          className={className}
-          disabled={disabled}
-          light={light}
-          invalid={invalid}
-          invalidText={invalidText}
-          warn={warn}
-          warnText={warnText}
-          isOpen={isOpen}
-          id={id}>
-          {invalid && (
-            <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
-          )}
-          {showWarning && (
-            <WarningAltFilled
-              className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
-            />
-          )}
-          <div
-            className={multiSelectFieldWrapperClasses}
-            ref={autoAlign ? refs.setReference : null}>
-            {selectedItems.length > 0 && (
-              <ListBox.Selection
-                readOnly={readOnly}
-                clearSelection={
-                  !disabled && !readOnly ? clearSelection : noopFn
-                }
-                selectionCount={selectedItemsLength}
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                translateWithId={translateWithId!}
-                disabled={disabled}
+        <Layer>
+          <ListBox
+            onFocus={isFluid ? handleFocus : undefined}
+            onBlur={isFluid ? handleFocus : undefined}
+            type={type}
+            size={size}
+            className={className}
+            disabled={disabled}
+            invalid={invalid}
+            invalidText={invalidText}
+            warn={warn}
+            warnText={warnText}
+            isOpen={isOpen}
+            id={id}>
+            {invalid && (
+              <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
+            )}
+            {showWarning && (
+              <WarningAltFilled
+                className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
               />
             )}
-            <button
-              type="button"
-              className={`${prefix}--list-box__field`}
-              disabled={disabled}
-              aria-disabled={disabled || readOnly}
-              aria-describedby={
-                !inline && !invalid && !warn && helperText
-                  ? helperId
-                  : undefined
-              }
-              {...toggleButtonProps}
-              ref={mergedRef}
-              {...readOnlyEventHandlers}>
-              <span id={fieldLabelId} className={`${prefix}--list-box__label`}>
-                {label}
-              </span>
-              <ListBox.MenuIcon
-                isOpen={isOpen}
-                translateWithId={translateWithId}
-              />
-            </button>
-            {normalizedSlug}
-          </div>
-          <ListBox.Menu {...menuProps}>
-            {isOpen &&
-              sortItems!(
-                filteredItems,
-                sortOptions as SortItemsOptions<ItemType>
-              ).map((item, index) => {
-                const isChecked =
-                  selectedItems.filter((selected) => isEqual(selected, item))
-                    .length > 0;
+            <div
+              className={multiSelectFieldWrapperClasses}
+              ref={autoAlign ? refs.setReference : null}>
+              {selectedItems.length > 0 && (
+                <ListBox.Selection
+                  readOnly={readOnly}
+                  clearSelection={
+                    !disabled && !readOnly ? clearSelection : noopFn
+                  }
+                  selectionCount={selectedItemsLength}
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  translateWithId={translateWithId!}
+                  disabled={disabled}
+                />
+              )}
+              <button
+                type="button"
+                className={`${prefix}--list-box__field`}
+                disabled={disabled}
+                aria-disabled={disabled || readOnly}
+                aria-describedby={
+                  !inline && !invalid && !warn && helperText
+                    ? helperId
+                    : undefined
+                }
+                {...toggleButtonProps}
+                ref={mergedRef}
+                {...readOnlyEventHandlers}>
+                <span
+                  id={fieldLabelId}
+                  className={`${prefix}--list-box__label`}>
+                  {label}
+                </span>
+                <ListBox.MenuIcon
+                  isOpen={isOpen}
+                  translateWithId={translateWithId}
+                />
+              </button>
+              {normalizedSlug}
+            </div>
+            <ListBox.Menu {...menuProps}>
+              {isOpen &&
+                sortItems!(
+                  filteredItems,
+                  sortOptions as SortItemsOptions<ItemType>
+                ).map((item, index) => {
+                  const isChecked =
+                    selectedItems.filter((selected) => isEqual(selected, item))
+                      .length > 0;
 
-                const isIndeterminate =
-                  selectedItems.length !== 0 &&
-                  item['isSelectAll'] &&
-                  !isChecked;
+                  const isIndeterminate =
+                    selectedItems.length !== 0 &&
+                    item['isSelectAll'] &&
+                    !isChecked;
 
-                const itemProps = getItemProps({
-                  item,
-                  // we don't want Downshift to set aria-selected for us
-                  // we also don't want to set 'false' for reader verbosity's sake
-                  ['aria-selected']: isChecked,
-                });
-                const itemText = itemToString(item);
+                  const itemProps = getItemProps({
+                    item,
+                    // we don't want Downshift to set aria-selected for us
+                    // we also don't want to set 'false' for reader verbosity's sake
+                    ['aria-selected']: isChecked,
+                  });
+                  const itemText = itemToString(item);
 
-                return (
-                  <ListBox.MenuItem
-                    key={itemProps.id}
-                    isActive={isChecked && !item['isSelectAll']}
-                    aria-label={itemText}
-                    isHighlighted={highlightedIndex === index}
-                    title={itemText}
-                    disabled={itemProps['aria-disabled']}
-                    {...itemProps}>
-                    <div className={`${prefix}--checkbox-wrapper`}>
-                      <Checkbox
-                        id={`${itemProps.id}__checkbox`}
-                        labelText={
-                          itemToElement ? (
-                            <ItemToElement key={itemProps.id} {...item} />
-                          ) : (
-                            itemText
-                          )
-                        }
-                        checked={isChecked}
-                        title={useTitleInItem ? itemText : undefined}
-                        indeterminate={isIndeterminate}
-                        disabled={disabled}
-                      />
-                    </div>
-                  </ListBox.MenuItem>
-                );
-              })}
-          </ListBox.Menu>
-          {itemsCleared && (
-            <span aria-live="assertive" aria-label={clearAnnouncement} />
-          )}
-        </ListBox>
+                  return (
+                    <ListBox.MenuItem
+                      key={itemProps.id}
+                      isActive={isChecked && !item['isSelectAll']}
+                      aria-label={itemText}
+                      isHighlighted={highlightedIndex === index}
+                      title={itemText}
+                      disabled={itemProps['aria-disabled']}
+                      {...itemProps}>
+                      <div className={`${prefix}--checkbox-wrapper`}>
+                        <Checkbox
+                          id={`${itemProps.id}__checkbox`}
+                          labelText={
+                            itemToElement ? (
+                              <ItemToElement key={itemProps.id} {...item} />
+                            ) : (
+                              itemText
+                            )
+                          }
+                          checked={isChecked}
+                          title={useTitleInItem ? itemText : undefined}
+                          indeterminate={isIndeterminate}
+                          disabled={disabled}
+                        />
+                      </div>
+                    </ListBox.MenuItem>
+                  );
+                })}
+            </ListBox.Menu>
+            {itemsCleared && (
+              <span aria-live="assertive" aria-label={clearAnnouncement} />
+            )}
+          </ListBox>
+        </Layer>
         {!inline && !invalid && !warn && helperText && (
           <div id={helperId} className={helperClasses}>
             {helperText}

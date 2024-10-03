@@ -6,6 +6,7 @@
  */
 
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { Layer } from '@carbon/react';
 import cx from 'classnames';
 import Downshift, {
   useCombobox,
@@ -819,123 +820,124 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           </span>
         </label>
       ) : null}
-      <ListBox
-        onFocus={isFluid ? handleFocus : undefined}
-        onBlur={isFluid ? handleFocus : undefined}
-        className={className}
-        disabled={disabled}
-        light={light}
-        ref={ref}
-        id={id}
-        invalid={invalid}
-        invalidText={invalidText}
-        warn={warn}
-        warnText={warnText}
-        isOpen={isOpen}
-        size={size}>
-        <div
-          className={`${prefix}--list-box__field`}
-          ref={autoAlign ? refs.setReference : null}>
-          {controlledSelectedItems.length > 0 && (
-            <ListBoxSelection
-              clearSelection={() => {
-                clearSelection();
-                if (textInput.current) {
-                  textInput.current.focus();
-                }
-              }}
-              selectionCount={controlledSelectedItems.length}
+      <Layer>
+        <ListBox
+          onFocus={isFluid ? handleFocus : undefined}
+          onBlur={isFluid ? handleFocus : undefined}
+          className={className}
+          disabled={disabled}
+          ref={ref}
+          id={id}
+          invalid={invalid}
+          invalidText={invalidText}
+          warn={warn}
+          warnText={warnText}
+          isOpen={isOpen}
+          size={size}>
+          <div
+            className={`${prefix}--list-box__field`}
+            ref={autoAlign ? refs.setReference : null}>
+            {controlledSelectedItems.length > 0 && (
+              <ListBoxSelection
+                clearSelection={() => {
+                  clearSelection();
+                  if (textInput.current) {
+                    textInput.current.focus();
+                  }
+                }}
+                selectionCount={controlledSelectedItems.length}
+                translateWithId={translateWithId}
+                disabled={disabled}
+              />
+            )}
+            <input
+              className={inputClasses}
+              {...inputProps}
+              ref={mergeRefs(textInput, inputProps.ref)}
+            />
+            {invalid && (
+              <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
+            )}
+            {showWarning && (
+              <WarningAltFilled
+                className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
+              />
+            )}
+            {inputValue && (
+              <ListBoxSelection
+                clearSelection={clearInputValue}
+                disabled={disabled}
+                translateWithId={translateWithId}
+                onMouseUp={(event: MouseEvent) => {
+                  // If we do not stop this event from propagating,
+                  // it seems like Downshift takes our event and
+                  // prevents us from getting `onClick` /
+                  // `clearSelection` from the underlying <button> in
+                  // ListBoxSelection
+                  event.stopPropagation();
+                }}
+              />
+            )}
+            <ListBoxTrigger
+              {...buttonProps}
+              isOpen={isOpen}
               translateWithId={translateWithId}
-              disabled={disabled}
             />
-          )}
-          <input
-            className={inputClasses}
-            {...inputProps}
-            ref={mergeRefs(textInput, inputProps.ref)}
-          />
-          {invalid && (
-            <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
-          )}
-          {showWarning && (
-            <WarningAltFilled
-              className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
-            />
-          )}
-          {inputValue && (
-            <ListBoxSelection
-              clearSelection={clearInputValue}
-              disabled={disabled}
-              translateWithId={translateWithId}
-              onMouseUp={(event: MouseEvent) => {
-                // If we do not stop this event from propagating,
-                // it seems like Downshift takes our event and
-                // prevents us from getting `onClick` /
-                // `clearSelection` from the underlying <button> in
-                // ListBoxSelection
-                event.stopPropagation();
-              }}
-            />
-          )}
-          <ListBoxTrigger
-            {...buttonProps}
-            isOpen={isOpen}
-            translateWithId={translateWithId}
-          />
-        </div>
-        {normalizedSlug}
+          </div>
+          {normalizedSlug}
 
-        <ListBox.Menu {...menuProps}>
-          {isOpen
-            ? sortedItems.map((item, index) => {
-                const isChecked =
-                  controlledSelectedItems.filter((selected) =>
-                    isEqual(selected, item)
-                  ).length > 0;
-                const itemProps = getItemProps({
-                  item,
-                  ['aria-selected']: isChecked,
-                });
-                const itemText = itemToString(item);
+          <ListBox.Menu {...menuProps}>
+            {isOpen
+              ? sortedItems.map((item, index) => {
+                  const isChecked =
+                    controlledSelectedItems.filter((selected) =>
+                      isEqual(selected, item)
+                    ).length > 0;
+                  const itemProps = getItemProps({
+                    item,
+                    ['aria-selected']: isChecked,
+                  });
+                  const itemText = itemToString(item);
 
-                // The initial implementation using <Downshift> would place the disabled attribute
-                // on disabled menu items. Conversely, useCombobox places aria-disabled instead.
-                // To avoid any potential breaking changes, we avoid placing aria-disabled and
-                // instead match the old behavior of placing the disabled attribute.
-                const disabled = itemProps['aria-disabled'];
-                const {
-                  'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
-                  ...modifiedItemProps
-                } = itemProps;
+                  // The initial implementation using <Downshift> would place the disabled attribute
+                  // on disabled menu items. Conversely, useCombobox places aria-disabled instead.
+                  // To avoid any potential breaking changes, we avoid placing aria-disabled and
+                  // instead match the old behavior of placing the disabled attribute.
+                  const disabled = itemProps['aria-disabled'];
+                  const {
+                    'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
+                    ...modifiedItemProps
+                  } = itemProps;
 
-                return (
-                  <ListBox.MenuItem
-                    key={itemProps.id}
-                    aria-label={itemText}
-                    isActive={isChecked}
-                    isHighlighted={highlightedIndex === index}
-                    title={itemText}
-                    disabled={disabled}
-                    {...modifiedItemProps}>
-                    <div className={`${prefix}--checkbox-wrapper`}>
-                      <span
-                        title={useTitleInItem ? itemText : undefined}
-                        className={`${prefix}--checkbox-label`}
-                        data-contained-checkbox-state={isChecked}
-                        id={`${itemProps.id}-item`}>
-                        {ItemToElement ? (
-                          <ItemToElement key={itemProps.id} {...item} />
-                        ) : (
-                          itemText
-                        )}
-                      </span>
-                    </div>
-                  </ListBox.MenuItem>
-                );
-              })
-            : null}
-        </ListBox.Menu>
-      </ListBox>
+                  return (
+                    <ListBox.MenuItem
+                      key={itemProps.id}
+                      aria-label={itemText}
+                      isActive={isChecked}
+                      isHighlighted={highlightedIndex === index}
+                      title={itemText}
+                      disabled={disabled}
+                      {...modifiedItemProps}>
+                      <div className={`${prefix}--checkbox-wrapper`}>
+                        <span
+                          title={useTitleInItem ? itemText : undefined}
+                          className={`${prefix}--checkbox-label`}
+                          data-contained-checkbox-state={isChecked}
+                          id={`${itemProps.id}-item`}>
+                          {ItemToElement ? (
+                            <ItemToElement key={itemProps.id} {...item} />
+                          ) : (
+                            itemText
+                          )}
+                        </span>
+                      </div>
+                    </ListBox.MenuItem>
+                  );
+                })
+              : null}
+          </ListBox.Menu>
+        </ListBox>
+      </Layer>
       {!inline && !invalid && !warn ? helper : null}
     </div>
   );

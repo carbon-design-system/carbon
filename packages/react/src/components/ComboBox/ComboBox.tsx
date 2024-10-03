@@ -6,6 +6,7 @@
  */
 
 import cx from 'classnames';
+import { Layer } from '@carbon/react';
 import { useCombobox, UseComboboxProps, UseComboboxActions } from 'downshift';
 import PropTypes from 'prop-types';
 import React, {
@@ -784,184 +785,188 @@ const ComboBox = forwardRef(
             {titleText}
           </Text>
         )}
-        <ListBox
-          onFocus={handleFocus}
-          onBlur={handleFocus}
-          className={className}
-          disabled={disabled}
-          invalid={invalid}
-          invalidText={invalidText}
-          invalidTextId={invalidTextId}
-          isOpen={isOpen}
-          light={light}
-          size={size}
-          warn={warn}
-          ref={autoAlign ? refs.setReference : null}
-          warnText={warnText}
-          warnTextId={warnTextId}>
-          <div className={`${prefix}--list-box__field`}>
-            <input
-              disabled={disabled}
-              className={inputClasses}
-              type="text"
-              tabIndex={0}
-              aria-haspopup="listbox"
-              title={textInput?.current?.value}
-              {...getInputProps({
-                'aria-controls': isOpen ? undefined : menuProps.id,
-                placeholder,
-                ref: mergeRefs(textInput, ref),
-                onKeyDown: (
-                  event: KeyboardEvent<HTMLInputElement> & {
-                    preventDownshiftDefault: boolean;
-                    target: {
-                      value: string;
-                      setSelectionRange: (start: number, end: number) => void;
-                    };
-                  }
-                ): void => {
-                  if (match(event, keys.Space)) {
-                    event.stopPropagation();
-                  }
-                  if (
-                    match(event, keys.Enter) &&
-                    (!inputValue || allowCustomValue)
-                  ) {
-                    toggleMenu();
-
-                    if (highlightedIndex !== -1) {
-                      selectItem(
-                        filterItems(items, itemToString, inputValue)[
-                          highlightedIndex
-                        ]
-                      );
+        <Layer>
+          <ListBox
+            onFocus={handleFocus}
+            onBlur={handleFocus}
+            className={className}
+            disabled={disabled}
+            invalid={invalid}
+            invalidText={invalidText}
+            invalidTextId={invalidTextId}
+            isOpen={isOpen}
+            size={size}
+            warn={warn}
+            ref={autoAlign ? refs.setReference : null}
+            warnText={warnText}
+            warnTextId={warnTextId}>
+            <div className={`${prefix}--list-box__field`}>
+              <input
+                disabled={disabled}
+                className={inputClasses}
+                type="text"
+                tabIndex={0}
+                aria-haspopup="listbox"
+                title={textInput?.current?.value}
+                {...getInputProps({
+                  'aria-controls': isOpen ? undefined : menuProps.id,
+                  placeholder,
+                  ref: mergeRefs(textInput, ref),
+                  onKeyDown: (
+                    event: KeyboardEvent<HTMLInputElement> & {
+                      preventDownshiftDefault: boolean;
+                      target: {
+                        value: string;
+                        setSelectionRange: (start: number, end: number) => void;
+                      };
                     }
-
-                    // Since `onChange` does not normally fire when the menu is closed, we should
-                    // manually fire it when `allowCustomValue` is provided, the menu is closing,
-                    // and there is a value.
-                    if (allowCustomValue && isOpen && inputValue) {
-                      onChange({ selectedItem, inputValue });
+                  ): void => {
+                    if (match(event, keys.Space)) {
+                      event.stopPropagation();
                     }
-
-                    event.preventDownshiftDefault = true;
-                    event?.persist?.();
-                  }
-
-                  if (match(event, keys.Escape) && inputValue) {
-                    if (event.target === textInput.current && isOpen) {
+                    if (
+                      match(event, keys.Enter) &&
+                      (!inputValue || allowCustomValue)
+                    ) {
                       toggleMenu();
+
+                      if (highlightedIndex !== -1) {
+                        selectItem(
+                          filterItems(items, itemToString, inputValue)[
+                            highlightedIndex
+                          ]
+                        );
+                      }
+
+                      // Since `onChange` does not normally fire when the menu is closed, we should
+                      // manually fire it when `allowCustomValue` is provided, the menu is closing,
+                      // and there is a value.
+                      if (allowCustomValue && isOpen && inputValue) {
+                        onChange({ selectedItem, inputValue });
+                      }
+
                       event.preventDownshiftDefault = true;
                       event?.persist?.();
                     }
-                  }
 
-                  if (match(event, keys.Home) && event.code !== 'Numpad7') {
-                    event.target.setSelectionRange(0, 0);
-                  }
-
-                  if (match(event, keys.End) && event.code !== 'Numpad1') {
-                    event.target.setSelectionRange(
-                      event.target.value.length,
-                      event.target.value.length
-                    );
-                  }
-
-                  if (event.altKey && event.key == 'ArrowDown') {
-                    event.preventDownshiftDefault = true;
-                    if (!isOpen) {
-                      toggleMenu();
+                    if (match(event, keys.Escape) && inputValue) {
+                      if (event.target === textInput.current && isOpen) {
+                        toggleMenu();
+                        event.preventDownshiftDefault = true;
+                        event?.persist?.();
+                      }
                     }
-                  }
-                  if (event.altKey && event.key == 'ArrowUp') {
-                    event.preventDownshiftDefault = true;
-                    if (isOpen) {
-                      toggleMenu();
-                    }
-                  }
-                },
-              })}
-              {...rest}
-              {...readOnlyEventHandlers}
-              readOnly={readOnly}
-              aria-describedby={ariaDescribedBy}
-            />
 
-            {invalid && (
-              <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
-            )}
-            {showWarning && (
-              <WarningAltFilled
-                className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
+                    if (match(event, keys.Home) && event.code !== 'Numpad7') {
+                      event.target.setSelectionRange(0, 0);
+                    }
+
+                    if (match(event, keys.End) && event.code !== 'Numpad1') {
+                      event.target.setSelectionRange(
+                        event.target.value.length,
+                        event.target.value.length
+                      );
+                    }
+
+                    if (event.altKey && event.key == 'ArrowDown') {
+                      event.preventDownshiftDefault = true;
+                      if (!isOpen) {
+                        toggleMenu();
+                      }
+                    }
+                    if (event.altKey && event.key == 'ArrowUp') {
+                      event.preventDownshiftDefault = true;
+                      if (isOpen) {
+                        toggleMenu();
+                      }
+                    }
+                  },
+                })}
+                {...rest}
+                {...readOnlyEventHandlers}
+                readOnly={readOnly}
+                aria-describedby={ariaDescribedBy}
               />
-            )}
-            {inputValue && (
-              <ListBoxSelection
-                clearSelection={() => {
-                  selectItem(null);
-                }}
+
+              {invalid && (
+                <WarningFilled
+                  className={`${prefix}--list-box__invalid-icon`}
+                />
+              )}
+              {showWarning && (
+                <WarningAltFilled
+                  className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
+                />
+              )}
+              {inputValue && (
+                <ListBoxSelection
+                  clearSelection={() => {
+                    selectItem(null);
+                  }}
+                  translateWithId={translateWithId}
+                  disabled={disabled || readOnly}
+                  onClearSelection={handleSelectionClear}
+                  selectionCount={0}
+                />
+              )}
+              <ListBoxTrigger
+                {...buttonProps}
+                isOpen={isOpen}
                 translateWithId={translateWithId}
-                disabled={disabled || readOnly}
-                onClearSelection={handleSelectionClear}
-                selectionCount={0}
               />
-            )}
-            <ListBoxTrigger
-              {...buttonProps}
-              isOpen={isOpen}
-              translateWithId={translateWithId}
-            />
-          </div>
-          {normalizedSlug}
-          <ListBox.Menu {...menuProps}>
-            {isOpen
-              ? filterItems(items, itemToString, inputValue).map(
-                  (item, index) => {
-                    const isObject = item !== null && typeof item === 'object';
-                    const title =
-                      isObject && 'text' in item && itemToElement
-                        ? item.text?.toString()
-                        : itemToString(item);
-                    const itemProps = getItemProps({
-                      item,
-                      index,
-                    });
+            </div>
+            {normalizedSlug}
+            <ListBox.Menu {...menuProps}>
+              {isOpen
+                ? filterItems(items, itemToString, inputValue).map(
+                    (item, index) => {
+                      const isObject =
+                        item !== null && typeof item === 'object';
+                      const title =
+                        isObject && 'text' in item && itemToElement
+                          ? item.text?.toString()
+                          : itemToString(item);
+                      const itemProps = getItemProps({
+                        item,
+                        index,
+                      });
 
-                    // The initial implementation using <Downshift> would place the disabled attribute
-                    // on disabled menu items. Conversely, useCombobox places aria-disabled instead.
-                    // To avoid any potential breaking changes, we avoid placing aria-disabled and
-                    // instead match the old behavior of placing the disabled attribute.
-                    const disabled = itemProps['aria-disabled'];
-                    const {
-                      'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
-                      ...modifiedItemProps
-                    } = itemProps;
+                      // The initial implementation using <Downshift> would place the disabled attribute
+                      // on disabled menu items. Conversely, useCombobox places aria-disabled instead.
+                      // To avoid any potential breaking changes, we avoid placing aria-disabled and
+                      // instead match the old behavior of placing the disabled attribute.
+                      const disabled = itemProps['aria-disabled'];
+                      const {
+                        'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
+                        ...modifiedItemProps
+                      } = itemProps;
 
-                    return (
-                      <ListBox.MenuItem
-                        key={itemProps.id}
-                        isActive={selectedItem === item}
-                        isHighlighted={highlightedIndex === index}
-                        title={title}
-                        disabled={disabled}
-                        {...modifiedItemProps}>
-                        {ItemToElement ? (
-                          <ItemToElement key={itemProps.id} {...item} />
-                        ) : (
-                          itemToString(item)
-                        )}
-                        {selectedItem === item && (
-                          <Checkmark
-                            className={`${prefix}--list-box__menu-item__selected-icon`}
-                          />
-                        )}
-                      </ListBox.MenuItem>
-                    );
-                  }
-                )
-              : null}
-          </ListBox.Menu>
-        </ListBox>
+                      return (
+                        <ListBox.MenuItem
+                          key={itemProps.id}
+                          isActive={selectedItem === item}
+                          isHighlighted={highlightedIndex === index}
+                          title={title}
+                          disabled={disabled}
+                          {...modifiedItemProps}>
+                          {ItemToElement ? (
+                            <ItemToElement key={itemProps.id} {...item} />
+                          ) : (
+                            itemToString(item)
+                          )}
+                          {selectedItem === item && (
+                            <Checkmark
+                              className={`${prefix}--list-box__menu-item__selected-icon`}
+                            />
+                          )}
+                        </ListBox.MenuItem>
+                      );
+                    }
+                  )
+                : null}
+            </ListBox.Menu>
+          </ListBox>
+        </Layer>
         {helperText && !invalid && !warn && !isFluid && (
           <Text as="div" id={helperTextId} className={helperClasses}>
             {helperText}
