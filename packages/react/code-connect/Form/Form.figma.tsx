@@ -7,7 +7,7 @@
 
 // @ts-nocheck
 import React from 'react';
-import { Form } from './FormOnPage';
+import { Form } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(
@@ -15,8 +15,8 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3897-51336&t=SbIuH3RAJeFPjXmN-4',
   {
     props: {
-      chidlren: figma.children('*'),
+      children: figma.children('*'),
     },
-    example: ({ chidlren }) => <Form aria-label="sample form">{chidlren}</Form>,
+    example: ({ children }) => <Form aria-label="sample form">{children}</Form>,
   }
 );
