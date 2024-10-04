@@ -22,7 +22,7 @@ import { Canvas, ArgTypes, Meta } from '@storybook/blocks';
 
 There are 4 different types of notification components:
 `ActionableNotification`, `InlineNotification`, `ToastNotification`, and
-`unstable__StaticNotification`.
+`unstable__Callout`.
 
 ### ActionableNotification
 
@@ -39,19 +39,18 @@ focus until the action is acted upon or the notification is dismissed.
 elements or rich text. These are announced by screenreaders when rendered. They
 don't grab focus. Use them to provide the user with an alert, status, or log.
 
-### unstable\_\_StaticNotification
+### unstable\_\_Callout (previously StaticNotification)
 
-`unstable__StaticNotification` is non-modal and should only be used inline with
-content on the initial render of the page or modal because it will not be
-announced to screenreader users like the other notification components.
+`unstable__Callout` is non-modal and should only be used inline with content on
+the initial render of the page or modal because it will not be announced to
+screenreader users like the other notification components.
 
 As such, this should not be used for real-time notifications or notifications
 responding to user input (unless the page is completely refreshing and bumping
-the users focus back to the first element in the dom/tab order). If a
-StaticNotification is rendered after the initial render, screenreader users'
-focus may have already passed this portion of the DOM and they will not know
-that the notification has been rendered until they circle back to the beginning
-of the page.
+the users focus back to the first element in the dom/tab order). If a Callout is
+rendered after the initial render, screenreader users' focus may have already
+passed this portion of the DOM and they will not know that the notification has
+been rendered until they circle back to the beginning of the page.
 
 This is the most passive notification component and is essentially just a styled
 div. If you place actions or interactive elements within this component, place

@@ -1,6 +1,7 @@
 name: Design defect 🎨
 description: Report a visual design issue
 title: '[Bug]: '
+type: 'bug'
 labels: 'type: bug 🐛'
 body:
   - type: markdown
