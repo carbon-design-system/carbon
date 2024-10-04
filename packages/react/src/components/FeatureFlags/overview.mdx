@@ -114,3 +114,33 @@ Feature flags can also be enabled via the provided `enable()` mixin
 
 @include feature-flags.enable('enable-experimental-tile-contrast');
 ```
+
+## FeatureFlags Prop Update
+
+The `FeatureFlags` component has been updated to improve compatibility. The `flags` object prop is now deprecated and is replaced with individual boolean props for each feature flag.
+
+The `flags` prop will be removed in a future release. Instead, use individual boolean props for each feature flag. 
+A `featureflag-deprecate-flags-prop` codemod has been provided to help deprecate the `flags` object prop and switch to individual boolean props.
+
+
+```bash
+npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write
+```
+
+```jsx
+//Before migration
+
+ <FeatureFlags   
+  flags={{
+    'enable-v12-tile-default-icons': true, 
+  }}>
+    <App />
+  </FeatureFlags>
+
+
+//After migration
+
+  <FeatureFlags enableV12TileDefaultIcons>
+    <App />
+  </FeatureFlags>
+```

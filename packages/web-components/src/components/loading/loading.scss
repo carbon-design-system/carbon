@@ -1,0 +1,39 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/components/loading';
+
+:host(#{$prefix}-loading) {
+  @extend .#{$prefix}--loading;
+
+  display: block;
+}
+
+:host(#{$prefix}-loading[overlay]) {
+  @extend .#{$prefix}--loading-overlay;
+
+  // Avoids duplicate animation of the host and the `.#{$prefix}--loading` in the shadow DOM
+  animation: none;
+}
+
+:host(#{$prefix}-loading[type='small']) {
+  @extend .#{$prefix}--loading--small;
+}
+
+:host(#{$prefix}-loading[inactive]) {
+  @extend .#{$prefix}--loading--stop;
+}
+
+.#{$prefix}--loading__background[hidden] {
+  // Conditional rendering of `circle.#{$prefix}--loading__background` does not seem to render the `<circle>` well
+  // even though the DOM seems right
+  display: none;
+}
