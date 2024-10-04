@@ -223,15 +223,6 @@
       inset-inline-end: -$spacing-03;
     }
 
-    &.#{$prefix}--tabs--contained
-      .#{$prefix}--tab--overflow-nav-button--previous::before {
-      background: linear-gradient(
-        to left,
-        rgba(255, 255, 255, 0),
-        $layer-accent
-      );
-    }
-
     .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
       background-image: linear-gradient(
         to left,
