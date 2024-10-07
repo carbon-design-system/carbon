@@ -10889,6 +10889,18 @@
     - dashboard
   sizes:
     - 32
+- name: ibm--unstructured-data-processor
+  friendly_name: IBM® Unstructured Data Processor
+  aliases:
+    - filter
+    - data
+    - unstructured
+    - data processing
+    - processing
+    - shapes
+    - platform
+  sizes:
+    - 32   
 - name: ibm--vpn-for-vpc
   friendly_name: IBM® VPN for VPC
   aliases:

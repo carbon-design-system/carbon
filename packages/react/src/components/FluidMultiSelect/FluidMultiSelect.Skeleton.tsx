@@ -10,7 +10,17 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const FluidMultiSelectSkeleton = ({ className, ...rest }) => {
+export interface FluidMultiSelectSkeletonProps {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+}
+
+const FluidMultiSelectSkeleton: React.FC<FluidMultiSelectSkeletonProps> = ({
+  className,
+  ...rest
+}) => {
   const prefix = usePrefix();
   const wrapperClasses = cx(
     className,
