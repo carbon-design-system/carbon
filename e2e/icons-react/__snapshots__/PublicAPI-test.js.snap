@@ -1007,6 +1007,7 @@ Array [
   "IbmTenet",
   "IbmToolchain",
   "IbmTurbonomic",
+  "IbmUnstructuredDataProcessor",
   "IbmVpnForVpc",
   "IbmVsiOnVpcForRegulatedIndustries",
   "IbmWatsonAssistant",

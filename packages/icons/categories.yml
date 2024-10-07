@@ -752,6 +752,7 @@ categories:
           - ibm--tenet
           - ibm--toolchain
           - ibm--turbonomic
+          - ibm--unstructured-data-processor
           - ibm--vpn-for-vpc
           - ibm--vsi-on-vpc-for-regulated-industries
           - ibm--wazi-deploy
