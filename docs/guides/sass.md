@@ -16,112 +16,134 @@
 
 ## Overview
 
-The `carbon-components` package ships all of the styles for the Carbon Design
-System as Sass files in the `scss` folder. You can import this file directly
-through either of the following paths:
+The `@carbon/styles` package ships all of the styles for the Carbon Design
+System.
+
+> [!IMPORTANT]  
+> You probably don't need to install this package. Framework variant packages
+> such as `@carbon/react` re-export all of `@carbon/styles`. For the examples
+> below `@carbon/styles` paths can be switched out for `@carbon/react` without
+> issue.
+
+`@carbon/styles` uses the sass module system. We recommend taking a look through
+the [announcement](https://sass-lang.com/blog/the-module-system-is-launched/)
+and [documentation](https://sass-lang.com/documentation/at-rules/use/) to
+familiarize yourself with this. `@use` is quite
+[different than `@import`](https://sass-lang.com/documentation/at-rules/use/#differences-from-import),
+particularly as it relates to the previous concept of `globals` in the v10.x
+styles.
+
+To get started, just `@use` the package.
 
 ```scss
-# Specifying node_modules directly
-@import 'node_modules/carbon-components/scss/<path-to-file>';
-
-# With webpack
-@import '~carbon-components/scss/<path-to-file>';
-
-# With sass config setup to include `node_modules` in paths
-@import 'carbon-components/scss/<path-to-file>';
+@use '@carbon/styles';
 ```
 
-There are two folders in this `scss` folder:
-
-- `components`: which contain component-specific styles and mixins
-- `globals`: which contain files that effect global settings like color, type,
-  grid, and more
-
-To quickly get started, you can import `styles.scss` which contains all of the
-styles for the Carbon Design System. You can import this using the following
-path:
-
-```scss
-@import 'carbon-components/scss/globals/scss/styles.scss';
-```
-
-_Note: the `styles.scss` will include all styles for the Carbon Design System,
-even if you are not using all of its components, to learn how to optimize this
-import check out [Optimizing your Sass builds](#optimizing-your-sass-builds)._
+This will include all the styles for the Carbon Design System, even if you're
+not using all of it's components. If desired, you can
+[optimize your Sass builds](#optimizing-your-sass-builds) to include only the
+relevant modules you need.
 
 If you would like to a see a full overview of the functionality we ship in Sass,
 in particular our public API, you should checkout our published
-[SassDoc](../../packages/components/docs/sass.md).
+[SassDoc](../../packages/styles/docs/sass.md).
 
-## Global flags
+## Config variables
 
-The Carbon Design System sass setup specifies a number of global flags that you
-can configure before importing Carbon's sass files to enable or disable
-different behaviors. To enable these flags, you will need to set them before
-importing any styles from Carbon. For example:
+The Carbon Design System sass setup specifies a number of config variables
+(previously called "global flags") that you can configure via the `with` syntax.
+For example:
 
 ```scss
-$css--reset: false;
-@import 'carbon-components/scss/globals/scss/styles.scss';
+@use '@carbon/styles' with (
+  $font-path: '@ibm/plex'
+);
 ```
 
-For a full reference of flags, see the table below.
+For a full reference of config variables, see the table below.
 
-| Global flag       | Description                                                          | Default value |
-| ----------------- | -------------------------------------------------------------------- | ------------- |
-| `$css--font-face` | Includes the font-face mixins for the current font family (IBM Plex) | `true`        |
-| `$css--helpers`   | Includes classes and utilities that are commonly used by components  | `true`        |
-| `$css--body`      | Sets a top-level reset, type style, and color for the `<body>` tag   | `true`        |
-| `$css--use-layer` | Enables use of box-shadow in `layer()` helpers                       | `true`        |
-| `$css--reset`     | Includes a top-level CSS Reset                                       | `true`        |
+| Global flag          | Description                                                                          | Default value |
+| -------------------- | ------------------------------------------------------------------------------------ | ------------- |
+| `$css--body`         | Sets a top-level reset, type style, and color for the `<body>` tag                   | `true`        |
+| `$css--font-face`    | Includes the font-face mixins for IBM Plex                                           | `true`        |
+| `$css--reset`        | Includes a top-level CSS Reset                                                       | `true`        |
+| `$css--default-type` | Includes default type styles for a handful of elements (`h1`, etc)                   | `true`        |
+| `$font-display`      | Specify the default value for the `font-display` property used for fonts             | `swap`        |
+| `$font-path`         | Specify the base path for loading IBM Plex. When using Vite, set this to `@ibm/plex` | `~@ibm/plex`  |
+| `$use-akamai-cdn`    | Specify if IBM Plex should be provided by the IBM Akamai CDN                         | `false`       |
+| `$prefix`            | Specify the value used to prefix all selectors and CSS Custom Properties             | `cds`         |
+| `$use-flexbox-grid`  | Specify if the flexbox grid styles should be emitted                                 | `false`       |
+| `$flex-grid-columns` | Specify the total columns to be used in the flex grid                                | `16`          |
 
 ## Feature flags
 
 The Carbon Design System takes advantage of feature flags to conditionally
-enable or disable new features that are being introduced to the system. To
-configure feature flags, you will need to update the `$feature-flags` map before
-importing any sass files from Carbon. For example:
+enable or disable new features that are being introduced to the system. You can
+enable feature flags in any of your stylesheets. Most often this is done at the
+root/entrypoint stylesheet.
 
 ```scss
-$feature-flags: (
-  grid-columns-16: true,
+@use '@carbon/styles/scss/feature-flags' with (
+  $feature-flags: (
+    'enable-experimental-tile-contrast': true,
+  )
 );
-@import 'carbon-components/scss/globals/scss/styles.scss';
+@use '@carbon/styles';
+```
+
+Feature flags can also be enabled via the provided `enable()` mixin
+
+```scss
+@use '@carbon/styles/scss/feature-flags';
+@use '@carbon/styles';
+
+@include feature-flags.enable('enable-experimental-tile-contrast');
 ```
 
 ## Optimizing your Sass builds
 
 If you are looking to optimize the CSS that is output by including the Carbon
-Design System, you can take advantage of the fact that every partial in Carbon's
-package can be compiled independently. Using this feature, you can mirror the
-structure of the default `styles.scss` file to include only the component styles
-that you need.
+Design System, you can take advantage of the fact that every module in
+`@carbon/styles` package can be compiled independently. Using the sass module
+system, when `@use`ing a single file, all required dependent modules will be
+included as well.
 
-At a high-level, this would look like:
+To use only a specific module, include the full path.
 
 ```scss
-// Your entrypoint for including sass files from Carbon
-$css--font-face: true;
-$css--helpers: true;
-$css--body: true;
-$css--use-layer: true;
-$css--reset: true;
-$css--default-type: true;
-$css--plex: true;
+@use '@carbon/styles/scss/<path-to-file>';
+```
 
-// Include defaults typically provided through the `styles.scss` entrypoint
-@import 'carbon-components/scss/globals/scss/_css--reset.scss';
-@import 'carbon-components/scss/globals/scss/_css--font-face.scss';
-@import 'carbon-components/scss/globals/scss/_css--helpers.scss';
-@import 'carbon-components/scss/globals/scss/_css--body.scss';
+> [!NOTE]  
+> Sass modules can only ever be configured once. Bringing in this module and
+> configuring it should be one of the first things you do in your project.
+>
+> As such, when configuring or using multiple modules, `@use '@carbon/styles';`
+> should always come last in the `@use` order.
 
-// Optionally include the grid
-@import 'carbon-components/scss/globals/grid/_grid.scss';
+More broadly, you can mirror the default entrypoint configuration to include
+only the component styles that you need. At a high-level, this would look like:
+
+```scss
+// Use the config module to set config variables
+@use '@carbon/styles/scss/config' with (
+  $prefix: 'cds'
+);
+
+// Include prerequisite modules typically provided through the main entrypoint
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/grid';
+@use '@carbon/styles/scss/layer';
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/theme';
 
 // Optionally include components that you need
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/file-uploader/file-uploader';
+@use '@carbon/styles/scss/components/button';
 ```
+
+In this example, because `button` relies on
+[a number of additional modules](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/button/_button.scss#L8-L22),
+all of these will be included in the final compiled output.
 
 ## Prefixes
 
@@ -150,44 +172,18 @@ the future if this value changes or if the prefix is overridden.
 ### Overriding `$prefix`
 
 In order to override `$prefix` to your own custom prefix, you will need to set
-`$prefix` before importing any styles from Carbon. For example:
+`$prefix`. For example:
 
 ```scss
-// Custom prefix
-$prefix: 'ibm';
-
-// Import Carbon
-@import 'path-to-carbon';
+@use '@carbon/styles' with (
+  $prefix: 'my-prefix'
+);
 ```
 
 In addition, if you're using any of the JavaScript packages that Carbon ships,
-you'll want to update the `prefix` setting available in `carbon-components`.
-This setting is used in JavaScript files to make sure that components use the
-correct prefix for class names. For example:
-
-```jsx
-import { settings } from 'carbon-components';
-import React from 'react';
-
-const { prefix } = settings;
-
-function Accordion(props) {
-  return <ul className={`${prefix}--accordion`}>{props.children}</ul>;
-}
-```
-
-Settings from Carbon are available from the `settings` named export. You can
-mutate this value before including any references to other packages (like
-`carbon-components-react`) in order to change `prefix` across
-
-```js
-import { settings } from 'carbon-components';
-// Set custom prefix, should match what is set in Sass
-settings.prefix = 'cds';
-```
-
-**Note:** it's important that this is included as one of the first modules
-initialized in your project. We recommend having this be one of the first
-imports in your entrypoint as a result.
+you'll want to update the `prefix` there as well. For instance, in
+`@carbon/react` the
+[ClassPrefix](https://react.carbondesignsystem.com/?path=/docs/components-classprefix--overview)
+component is available for this use.
 
 ## FAQ

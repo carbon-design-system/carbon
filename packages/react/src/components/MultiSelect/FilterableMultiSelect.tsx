@@ -102,6 +102,7 @@ type TranslationKey =
 
 export interface FilterableMultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
+    React.RefAttributes<HTMLDivElement>,
     TranslateWithId<TranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
@@ -507,10 +508,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     const nextIsOpen = forceIsOpen ?? !isOpen;
     setIsOpen(nextIsOpen);
     validateHighlightFocus();
-    if (onMenuChange) {
-      onMenuChange(nextIsOpen);
-    }
   }
+
+  useEffect(() => {
+    onMenuChange?.(isOpen);
+  }, [isOpen, onMenuChange]);
 
   const {
     getToggleButtonProps,

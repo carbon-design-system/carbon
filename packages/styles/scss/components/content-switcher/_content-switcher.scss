@@ -277,8 +277,7 @@
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn {
     // accounts for the larger icon sizes to keep the switcher at 48px
-    padding-inline-end: convert.to-rem(14px);
-    padding-inline-start: convert.to-rem(14px);
+    padding-inline: convert.to-rem(14px) convert.to-rem(14px);
   }
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn svg {
