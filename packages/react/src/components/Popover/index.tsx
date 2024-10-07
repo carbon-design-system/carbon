@@ -370,7 +370,6 @@ export const Popover: PopoverComponent = React.forwardRef(
         autoAlign && displayName && ['ToggletipButton'].includes(displayName);
       const isAllowedTriggerComponent =
         autoAlign &&
-        displayName &&
         !['ToggletipContent', 'PopoverContent'].includes(displayName);
 
       if (

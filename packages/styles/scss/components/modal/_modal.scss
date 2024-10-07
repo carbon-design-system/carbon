@@ -125,7 +125,7 @@
 
   // fluid form in modal
   .#{$prefix}--modal-content .#{$prefix}--form--fluid {
-    margin-inline: -$spacing-05 -$spacing-05;
+    margin-inline: -$spacing-05 - $spacing-05;
   }
 
   //TO-DO: remove .#{$prefix}--modal-content__regular-content in v11 since hasForm has been deprecated
