@@ -6,7 +6,7 @@
  */
 
 import cx from 'classnames';
-import { Layer } from '@carbon/react';
+import { Layer } from '../Layer';
 import { useCombobox, UseComboboxProps, UseComboboxActions } from 'downshift';
 import PropTypes from 'prop-types';
 import React, {

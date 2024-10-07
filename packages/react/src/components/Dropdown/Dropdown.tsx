@@ -15,7 +15,7 @@ import React, {
   useEffect,
   useMemo,
 } from 'react';
-import { Layer } from '@carbon/react';
+import { Layer } from '../Layer';
 import {
   useSelect,
   UseSelectInterface,

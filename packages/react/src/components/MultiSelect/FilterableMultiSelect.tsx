@@ -6,7 +6,7 @@
  */
 
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
-import { Layer } from '@carbon/react';
+import { Layer } from '../Layer';
 import cx from 'classnames';
 import Downshift, {
   useCombobox,
