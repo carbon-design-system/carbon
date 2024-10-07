@@ -314,28 +314,96 @@ export const Manual = () => (
 );
 
 export const Icon20Only = () => (
-  <Tabs>
-    <TabList iconSize="lg" aria-label="List of tabs">
-      <IconTab label="Analyze" disabled>
-        <Search size={20} aria-label="Analyze" />
-      </IconTab>
-      <IconTab label="Activity">
-        <Activity size={20} aria-label="Activity" />
-      </IconTab>
-      <IconTab label="Notification">
-        <Notification size={20} aria-label="Notification" />
-      </IconTab>
-      <IconTab label="Chat">
-        <Chat size={20} aria-label="Chat" />
-      </IconTab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-    </TabPanels>
-  </Tabs>
+  <>
+    <Tabs>
+      <TabList iconSize="lg" aria-label="List of tabs">
+        <IconTab label="Analyze" disabled>
+          <Search size={20} aria-label="Analyze" />
+        </IconTab>
+        <IconTab label="Activity">
+          <Activity size={20} aria-label="Activity" />
+        </IconTab>
+        <IconTab label="Notification">
+          <Notification size={20} aria-label="Notification" />
+        </IconTab>
+        <IconTab label="Chat">
+          <Chat size={20} aria-label="Chat" />
+        </IconTab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+      </TabPanels>
+    </Tabs>
+    <Tabs>
+      <TabList contained iconSize="lg" aria-label="List of tabs">
+        <IconTab label="Analyze" disabled>
+          <Search size={20} aria-label="Analyze" />
+        </IconTab>
+        <IconTab label="Activity">
+          <Activity size={20} aria-label="Activity" />
+        </IconTab>
+        <IconTab label="Notification">
+          <Notification size={20} aria-label="Notification" />
+        </IconTab>
+        <IconTab label="Chat">
+          <Chat size={20} aria-label="Chat" />
+        </IconTab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+      </TabPanels>
+    </Tabs>
+    <Tabs>
+      <TabList aria-label="List of tabs">
+        <IconTab label="Analyze" disabled>
+          <Search aria-label="Analyze" />
+        </IconTab>
+        <IconTab label="Activity">
+          <Activity aria-label="Activity" />
+        </IconTab>
+        <IconTab label="Notification">
+          <Notification aria-label="Notification" />
+        </IconTab>
+        <IconTab label="Chat">
+          <Chat aria-label="Chat" />
+        </IconTab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+      </TabPanels>
+    </Tabs>
+    <Tabs>
+      <TabList contained aria-label="List of tabs">
+        <IconTab label="Analyze" disabled>
+          <Search aria-label="Analyze" />
+        </IconTab>
+        <IconTab label="Activity">
+          <Activity aria-label="Activity" />
+        </IconTab>
+        <IconTab label="Notification">
+          <Notification aria-label="Notification" />
+        </IconTab>
+        <IconTab label="Chat">
+          <Chat aria-label="Chat" />
+        </IconTab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+      </TabPanels>
+    </Tabs>
+  </>
 );
 
 export const IconOnly = () => (
