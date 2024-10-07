@@ -163,28 +163,32 @@
     .#{$prefix}--tab--overflow-nav-button--next::before {
       position: absolute;
       z-index: 1;
-      background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0),
-        $background
-      );
       block-size: 100%;
       content: '';
       inline-size: $spacing-03;
       inset-inline-start: -$spacing-03;
     }
 
-    &.#{$prefix}--tabs--contained
+    &:not(.#{$prefix}--tabs--contained) {
       .#{$prefix}--tab--overflow-nav-button--next::before {
-      background-image: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0),
-        $layer-accent
-      );
+        background: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0),
+          $background
+        );
+      }
+      .#{$prefix}--tab--overflow-nav-button--previous::before {
+        background: linear-gradient(
+          to left,
+          rgba(255, 255, 255, 0),
+          $background
+        );
+      }
     }
 
     .#{$prefix}--tab--overflow-nav-button--previous {
       position: absolute;
+      z-index: 1;
       inset-block: 0 0;
       inset-inline-start: 0;
     }
@@ -192,20 +196,10 @@
     .#{$prefix}--tab--overflow-nav-button--previous::before {
       position: absolute;
       z-index: 1;
-      background: $background;
       block-size: 100%;
       content: '';
-      inline-size: $spacing-08;
-      inset-inline-end: 0;
-    }
-
-    &.#{$prefix}--tabs--contained
-      .#{$prefix}--tab--overflow-nav-button--previous::before {
-      background: linear-gradient(
-        to left,
-        rgba(255, 255, 255, 0),
-        $layer-accent
-      );
+      inline-size: $spacing-03;
+      inset-inline-end: -$spacing-03;
     }
 
     .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
@@ -624,13 +618,13 @@
 
     .#{$prefix}--tabs__nav-item--disabled {
       background-color: transparent;
-      border-block-end: $tab-underline-disabled;
+      border-block-end: 2px solid $border-subtle;
       color: $tab-text-disabled;
       outline: none;
     }
 
     .#{$prefix}--tabs__nav-item--disabled:hover {
-      border-block-end: $tab-underline-disabled;
+      border-block-end: 2px solid $border-subtle;
       color: $tab-text-disabled;
       cursor: not-allowed;
     }
@@ -652,7 +646,7 @@
 
     .#{$prefix}--tabs__nav-item--disabled:focus,
     .#{$prefix}--tabs__nav-item--disabled:active {
-      border-block-end: $tab-underline-disabled;
+      border-block-end: 2px solid $border-subtle;
       outline: none;
       pointer-events: none;
     }
