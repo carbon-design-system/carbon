@@ -19,6 +19,7 @@ import ComboBox from '../ComboBox';
 - [downshiftProps](#combobox-downshiftprops)
 - [Placeholder and labeling](#placeholders-and-labeling)
 - [initialSelectedItem](#initialselecteditem)
+- [selectedItem](#selecteditem)
 - [itemToElement](#itemtoelement)
 - [itemToString](#itemtostring)
 - [shouldFilterItem](#shouldfilteritem)
@@ -124,6 +125,60 @@ want to fully control the component, you can use `initialSelectedItem`
 const items = ['Option 1', 'Option 2', 'Option 3']
 
 <Combobox initialSelectedItem={items[2]} />
+```
+
+## `selectedItem`
+
+You can use `selectedItem` for a fully controlled component.
+
+<Canvas of={ComboBoxStories._fullyControlled} />
+
+```jsx
+
+const options = [
+  {
+    id: 'option-1',
+    text: 'Option 1',
+  },
+  {
+    id: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    id: 'option-3',
+    text: 'Option 3',
+  },
+];
+const [value, setValue] = useState(options[0]);
+
+const onChange = ({ selectedItem }) => {
+  setValue(selectedItem);
+};
+
+return (
+  <div>
+    <ComboBox
+      onChange={onChange}
+      id="carbon-combobox"
+      items={options}
+      selectedItem={value}
+      itemToString={(item) => (item ? item.text : '')}
+      titleText="Fully Controlled ComboBox title"
+      helperText="Combobox helper text"
+    />
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    }}>
+      <Button onClick={() => setValue(null)}>Reset</Button>
+      <Button onClick={() => setValue(options[0])}>Option 1</Button>
+      <Button onClick={() => setValue(options[1])}>Option 2</Button>
+      <Button onClick={() => setValue(options[2])}>Option 3</Button>
+    </div>
+  </div>
+);
+
 ```
 
 ## `itemToElement`
