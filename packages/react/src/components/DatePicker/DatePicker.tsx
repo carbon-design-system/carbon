@@ -729,7 +729,11 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
 
     function handleKeyPress(event) {
-      if (match(event, keys.Enter) && closeOnSelect) {
+      if (
+        match(event, keys.Enter) &&
+        closeOnSelect &&
+        datePickerType == 'single'
+      ) {
         calendar.calendarContainer.classList.remove('open');
       }
     }
