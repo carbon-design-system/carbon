@@ -124,7 +124,7 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
       <div className={headerClass} {...rest} ref={ref}>
         {label && <h2 className={labelClass}>{label}</h2>}
 
-        {title && <h3 className={titleClass}>{title}</h3>}
+        {title && <h2 className={titleClass}>{title}</h2>}
 
         {children}
 
