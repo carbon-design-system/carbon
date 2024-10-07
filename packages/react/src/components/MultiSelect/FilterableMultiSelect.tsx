@@ -709,14 +709,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       handleMenuChange(!isOpen);
       textInput.current?.focus();
     },
-    // onClick: (event) => {
-    //   if (!readOnly) {
-    //     handleMenuChange(!isOpen);
-    //     textInput.current?.focus();
-    //   } else {
-    //     event.preventDefault();
-    //   }
-    // },
     // When we moved the "root node" of Downshift to the <input> for
     // ARIA 1.2 compliance, we unfortunately hit this branch for the
     // "mouseup" event that downshift listens to:
@@ -752,11 +744,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
 
         if (match(event, keys.Space)) {
           event.stopPropagation();
-        }
-
-        if (readOnly) {
-          event.preventDefault();
-          return;
         }
 
         if (match(event, keys.Enter)) {
@@ -897,7 +884,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           <input
             className={inputClasses}
             {...inputProps}
-            ref={mergeRefs(textInput, inputProps.ref)}
+            ref={mergedRef}
             {...readOnlyEventHandlers}
             readOnly={readOnly}
           />
