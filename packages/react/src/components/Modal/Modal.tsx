@@ -520,7 +520,7 @@ const Modal = React.forwardRef(function Modal(
           </Text>
         )}
         <Text
-          as="h3"
+          as="h2"
           id={modalHeadingId}
           className={`${prefix}--modal-header__heading`}>
           {modalHeading}
