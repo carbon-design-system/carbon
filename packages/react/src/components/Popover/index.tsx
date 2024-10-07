@@ -27,6 +27,7 @@ import {
   flip,
   autoUpdate,
   arrow,
+  shift,
   offset,
 } from '@floating-ui/react';
 import { hide } from '@floating-ui/dom';
@@ -256,6 +257,7 @@ export const Popover: PopoverComponent = React.forwardRef(
             middleware: [
               offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
               flip({ fallbackAxisSideDirection: 'start' }),
+              shift(),
               arrow({
                 element: caretRef,
               }),
@@ -558,7 +560,7 @@ function PopoverContentRenderFunction(
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
   const ref = useMergedRefs([setFloating, forwardRef]);
-
+  // console.log(refs)
   return (
     <span {...rest} className={`${prefix}--popover`}>
       <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
