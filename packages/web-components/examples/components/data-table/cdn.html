@@ -1,0 +1,79 @@
+<!--
+@license
+
+Copyright IBM Corp. 2022
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>@carbon/ibmdotcom-web-components example</title>
+    <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/themes.css" /> 
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-data-table:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/data-table.min.js"></script>
+  </head>
+  <body class="cds-theme-zone-white">
+    <cds-table>
+      <cds-table-head>
+        <cds-table-header-row>
+          <cds-table-header-cell>Name</cds-table-header-cell>
+          <cds-table-header-cell>Status</cds-table-header-cell>
+        </cds-table-header-row>
+      </cds-table-head>
+      <cds-table-body>
+        <cds-table-row>
+          <cds-table-cell>Load Balancer 1</cds-table-cell>
+          <cds-table-cell>Disabled</cds-table-cell>
+        </cds-table-row>
+        <cds-table-row>
+          <cds-table-cell>Load Balancer 2</cds-table-cell>
+          <cds-table-cell>Starting</cds-table-cell>
+        </cds-table-row>
+        <cds-table-row>
+          <cds-table-cell>Load Balancer 3</cds-table-cell>
+          <cds-table-cell>Active</cds-table-cell>
+        </cds-table-row>
+      </cds-table-body>
+    </cds-table>
+
+    <br />
+    <br />
+    <br />
+
+    <h1>Sortable table</h1>
+    <div id="sortable-table"></div>
+    <cds-table is-sortable>
+      <cds-table-head>
+        <cds-table-header-row>
+          <cds-table-header-cell>Name</cds-table-header-cell>
+          <cds-table-header-cell>Status</cds-table-header-cell>
+        </cds-table-header-row>
+      </cds-table-head>
+      <cds-table-body>
+        <cds-table-row>
+          <cds-table-cell>Load Balancer 1</cds-table-cell>
+          <cds-table-cell>Disabled</cds-table-cell>
+        </cds-table-row>
+        <cds-table-row>
+          <cds-table-cell>Load Balancer 2</cds-table-cell>
+          <cds-table-cell>Starting</cds-table-cell>
+        </cds-table-row>
+        <cds-table-row>
+          <cds-table-cell>Load Balancer 3</cds-table-cell>
+          <cds-table-cell>Active</cds-table-cell>
+        </cds-table-row>
+      </cds-table-body>
+    </cds-table>
+  </body>
+</html>
