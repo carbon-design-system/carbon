@@ -107,7 +107,7 @@ export interface FluidComboBoxProps<ItemType> extends ComboBoxProps<ItemType> {
    * Provide the title text that will be read by a screen reader when
    * visiting this control
    */
-  titleText: React.ReactNode;
+  titleText?: React.ReactNode;
 
   /**
    * Callback function for translating ListBoxMenuIcon SVG title
