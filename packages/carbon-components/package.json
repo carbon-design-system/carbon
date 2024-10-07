@@ -1,6 +1,6 @@
 {
   "name": "carbon-components",
-  "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
+  "description": "The Carbon Design System is IBM’s open-source design system for products and experiences. This package reached end of support on September 30, 2024 and will not receive any more updates.",
   "version": "11.66.0",
   "license": "Apache-2.0",
   "repository": {
@@ -8,8 +8,8 @@
     "url": "https://github.com/carbon-design-system/carbon.git",
     "directory": "packages/components"
   },
-  "bugs": "https://github.com/carbon-design-system/carbon/issues",
-  "homepage": "https://www.carbondesignsystem.com/",
+  "bugs": "https://www.carbondesignsystem.com/deprecated",
+  "homepage": "https://www.carbondesignsystem.com/deprecated",
   "files": [
     "scss/**/*",
     "index.scss",
