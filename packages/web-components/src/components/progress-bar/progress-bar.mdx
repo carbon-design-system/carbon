@@ -1,0 +1,64 @@
+import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as ProgressBarStories from './progress-bar.stories';
+
+<Meta of={ProgressBarStories} />
+
+# Progress bar
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/progress-bar)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/progress-bar)
+
+A progress bar indicates that the user’s request has been received and the
+application is making progress toward completing the requested action. Progress
+bars inform users about the status of ongoing processes, the estimated time of
+how long a process will take, or if a request is being executed.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/progress-bar/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['progress-bar'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-progress-bar
+  label="Progress bar label"
+  helper-text="Optional helper text"
+  value="75">
+</cds-progress-bar>
+```
+
+## Indeterminate
+
+Indeterminate progress bars are used when the loading progress is unknown or the
+amount of wait time can’t be calculated. To use the indeterminate variation,
+make sure the `status` property is set to `active` and there is no `value`
+attribute passed in.
+
+```html
+<cds-progress-bar
+  label="Progress bar label"
+  helper-text="Optional helper text"
+  status="active">
+</cds-progress-bar>
+```
+
+## `<cds-progress-bar>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-progress-bar hide-label>`) and `false` means not setting the attribute
+(e.g. `<cds-progress-bar>` without `hide-label` attribute).
+
+<ArgTypes of="cds-progress-bar" />

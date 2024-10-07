@@ -49,8 +49,7 @@
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--combo-box
     .#{$prefix}--list-box__selection {
-    inset-block-end: convert.to-rem(10px);
-    inset-block-start: auto;
+    inset-block: auto convert.to-rem(10px);
     transform: none;
   }
 

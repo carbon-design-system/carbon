@@ -32,8 +32,8 @@ describe('FeatureFlags', () => {
     expect(checkFlags).toHaveBeenLastCalledWith(true);
     expect(checkFlag).toHaveBeenLastCalledWith(true);
   });
-
-  it('should provide access to the feature flags for a scope', () => {
+  it('should provide access to the feature flags for a scope through deprecated flags prop', () => {
+    consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const checkFlags = jest.fn();
     const checkFlag = jest.fn();
 
@@ -68,6 +68,49 @@ describe('FeatureFlags', () => {
     expect(checkFlag).toHaveBeenLastCalledWith({
       a: true,
       b: false,
+    });
+    consoleSpy.mockRestore();
+  });
+
+  it('should provide access to the feature flags for a scope', () => {
+    const checkFlags = jest.fn();
+    const checkFlag = jest.fn();
+
+    function TestComponent() {
+      const featureFlags = useFeatureFlags();
+      const enableV12Overflowmenu = useFeatureFlag('enable-v12-overflowmenu');
+      const enableTreeviewControllable = useFeatureFlag(
+        'enable-treeview-controllable'
+      );
+
+      checkFlags({
+        enableV12Overflowmenu: featureFlags.enabled('enable-v12-overflowmenu'),
+        enableTreeviewControllable: featureFlags.enabled(
+          'enable-treeview-controllable'
+        ),
+      });
+
+      checkFlag({
+        enableV12Overflowmenu,
+        enableTreeviewControllable,
+      });
+
+      return null;
+    }
+
+    render(
+      <FeatureFlags enableV12Overflowmenu>
+        <TestComponent />
+      </FeatureFlags>
+    );
+
+    expect(checkFlags).toHaveBeenLastCalledWith({
+      enableV12Overflowmenu: true,
+      enableTreeviewControllable: false,
+    });
+    expect(checkFlag).toHaveBeenLastCalledWith({
+      enableV12Overflowmenu: true,
+      enableTreeviewControllable: false,
     });
   });
 
@@ -77,95 +120,101 @@ describe('FeatureFlags', () => {
 
     function TestComponent() {
       const featureFlags = useFeatureFlags();
-      const a = useFeatureFlag('a');
-      const b = useFeatureFlag('b');
+      const enableV12Overflowmenu = useFeatureFlag('enable-v12-overflowmenu');
+      const enableTreeviewControllable = useFeatureFlag(
+        'enable-treeview-controllable'
+      );
 
       checkFlags({
-        a: featureFlags.enabled('a'),
-        b: featureFlags.enabled('b'),
+        enableV12Overflowmenu: featureFlags.enabled('enable-v12-overflowmenu'),
+        enableTreeviewControllable: featureFlags.enabled(
+          'enable-treeview-controllable'
+        ),
       });
 
       checkFlag({
-        a,
-        b,
+        enableV12Overflowmenu,
+        enableTreeviewControllable,
       });
 
       return null;
     }
 
     const { rerender } = render(
-      <FeatureFlags flags={{ a: true, b: false }}>
+      <FeatureFlags enableV12Overflowmenu>
         <TestComponent />
       </FeatureFlags>
     );
 
     expect(checkFlags).toHaveBeenLastCalledWith({
-      a: true,
-      b: false,
+      enableV12Overflowmenu: true,
+      enableTreeviewControllable: false,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
-      a: true,
-      b: false,
+      enableV12Overflowmenu: true,
+      enableTreeviewControllable: false,
     });
 
     rerender(
-      <FeatureFlags flags={{ a: false, b: true }}>
+      <FeatureFlags enableTreeviewControllable>
         <TestComponent />
       </FeatureFlags>
     );
 
     expect(checkFlags).toHaveBeenLastCalledWith({
-      a: false,
-      b: true,
+      enableV12Overflowmenu: false,
+      enableTreeviewControllable: true,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
-      a: false,
-      b: true,
+      enableV12Overflowmenu: false,
+      enableTreeviewControllable: true,
     });
   });
 
   it('should merge scopes and overwrite duplicate keys', () => {
-    GlobalFeatureFlags.add('global', true);
-
     const checkFlag = jest.fn();
 
     function TestComponent() {
-      const global = useFeatureFlag('global');
-      const local = useFeatureFlag('local');
+      const enableV12Overflowmenu = useFeatureFlag('enable-v12-overflowmenu');
+      const enableTreeviewControllable = useFeatureFlag(
+        'enable-treeview-controllable'
+      );
 
-      checkFlag({ global, local });
+      checkFlag({ enableV12Overflowmenu, enableTreeviewControllable });
 
       return null;
     }
 
     render(
-      <FeatureFlags flags={{ local: true }}>
+      <FeatureFlags enableTreeviewControllable>
         <TestComponent />
       </FeatureFlags>
     );
 
     expect(checkFlag).toHaveBeenLastCalledWith({
-      global: true,
-      local: true,
+      enableV12Overflowmenu: false,
+      enableTreeviewControllable: true,
     });
 
     render(
-      <FeatureFlags flags={{ local: true }}>
-        <FeatureFlags flags={{ global: false }}>
+      <FeatureFlags enableTreeviewControllable>
+        <FeatureFlags enableV12Overflowmenu>
           <TestComponent />
         </FeatureFlags>
       </FeatureFlags>
     );
 
     expect(checkFlag).toHaveBeenLastCalledWith({
-      global: false,
-      local: true,
+      enableV12Overflowmenu: true,
+      enableTreeviewControllable: false,
     });
 
     render(
-      <FeatureFlags flags={{ local: true }}>
-        <FeatureFlags flags={{ global: false }}>
-          <FeatureFlags flags={{ local: false }}>
+      <FeatureFlags enableTreeviewControllable>
+        <FeatureFlags enableV12Overflowmenu>
+          <FeatureFlags
+            enableTreeviewControllable={false}
+            enableV12Overflowmenu={false}>
             <TestComponent />
           </FeatureFlags>
         </FeatureFlags>
@@ -173,8 +222,90 @@ describe('FeatureFlags', () => {
     );
 
     expect(checkFlag).toHaveBeenLastCalledWith({
-      global: false,
-      local: false,
+      enableV12Overflowmenu: false,
+      enableTreeviewControllable: false,
+    });
+  });
+  it('should handle boolean props and flags object with no overlapping keys', () => {
+    const checkFlags = jest.fn();
+    const checkFlag = jest.fn();
+
+    function TestComponent() {
+      const featureFlags = useFeatureFlags();
+      const enableV12Overflowmenu = useFeatureFlag('enable-v12-overflowmenu');
+      const enableExperimentalFocusWrapWithoutSentinels = useFeatureFlag(
+        'enable-experimental-focus-wrap-without-sentinels'
+      );
+
+      checkFlags({
+        enableV12Overflowmenu: featureFlags.enabled('enable-v12-overflowmenu'),
+        enableExperimentalFocusWrapWithoutSentinels: featureFlags.enabled(
+          'enable-experimental-focus-wrap-without-sentinels'
+        ),
+      });
+
+      checkFlag({
+        enableV12Overflowmenu,
+        enableExperimentalFocusWrapWithoutSentinels,
+      });
+
+      return null;
+    }
+
+    render(
+      <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+        <TestComponent />
+      </FeatureFlags>
+    );
+
+    expect(checkFlags).toHaveBeenLastCalledWith({
+      enableV12Overflowmenu: false,
+      enableExperimentalFocusWrapWithoutSentinels: true,
+    });
+    expect(checkFlag).toHaveBeenLastCalledWith({
+      enableV12Overflowmenu: false,
+      enableExperimentalFocusWrapWithoutSentinels: true,
+    });
+  });
+  it('should handle boolean props correctly when no flags object is provided', () => {
+    const checkFlags = jest.fn();
+    const checkFlag = jest.fn();
+
+    function TestComponent() {
+      const featureFlags = useFeatureFlags();
+      const enableV12Overflowmenu = useFeatureFlag('enable-v12-overflowmenu');
+      const enableTreeviewControllable = useFeatureFlag(
+        'enable-treeview-controllable'
+      );
+
+      checkFlags({
+        enableV12Overflowmenu: featureFlags.enabled('enable-v12-overflowmenu'),
+        enableTreeviewControllable: featureFlags.enabled(
+          'enable-treeview-controllable'
+        ),
+      });
+
+      checkFlag({
+        enableV12Overflowmenu,
+        enableTreeviewControllable,
+      });
+
+      return null;
+    }
+
+    render(
+      <FeatureFlags enableV12Overflowmenu enableTreeviewControllable={false}>
+        <TestComponent />
+      </FeatureFlags>
+    );
+
+    expect(checkFlags).toHaveBeenLastCalledWith({
+      enableV12Overflowmenu: true,
+      enableTreeviewControllable: false,
+    });
+    expect(checkFlag).toHaveBeenLastCalledWith({
+      enableV12Overflowmenu: true,
+      enableTreeviewControllable: false,
     });
   });
 });

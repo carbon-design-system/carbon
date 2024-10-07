@@ -1,0 +1,93 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as AccordionStories from './accordion.stories';
+
+<Meta of={AccordionStories} />
+
+# Accordion
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/accordion)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/accordion)
+
+The accordion component delivers large amounts of content in a small space
+through progressive disclosure. That is, the user gets key details about the
+underlying content and can choose to expand that content within the constraints
+of the accordion. Accordions work especially well on mobile interfaces or
+whenever vertical space is at a premium.
+
+Avoid “nested” accordions—that is, collapsible content within collapsible
+content. This type of pattern goes against UX best practices.
+
+The Carbon accordion allows for multiple sections to be expanded simultaneously.
+
+A chevron is used to indicate the “expand/collapse” action, though the entire
+header area is clickable for the same action.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/accordion/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['accordion'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-accordion>
+  <cds-accordion-item title="Section 1 title">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </p>
+  </cds-accordion-item>
+  <cds-accordion-item title="Section 2 title">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </p>
+  </cds-accordion-item>
+  <cds-accordion-item title="Section 3 title">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </p>
+  </cds-accordion-item>
+  <cds-accordion-item title="Section 4 title">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </p>
+  </cds-accordion-item>
+</cds-accordion>
+```
+
+### HTML (skeleton)
+
+```html
+<cds-accordion-skeleton></cds-accordion-skeleton>
+```
+
+## `<cds-accordion-item>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-accordion-item open>`) and `false` means not setting the attribute (e.g.
+`<cds-accordion-item>` without `open` attribute).
+
+<ArgTypes of="cds-accordion-item" />

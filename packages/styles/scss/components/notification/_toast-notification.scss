@@ -145,6 +145,7 @@
   }
 
   .#{$prefix}--toast-notification__details {
+    margin-block-end: $spacing-05;
     margin-inline-end: $spacing-05;
   }
 
@@ -212,7 +213,6 @@
     @include type-style('body-compact-01');
 
     color: $text-inverse;
-    margin-block-end: $spacing-05;
     padding-block-start: $spacing-03;
   }
 

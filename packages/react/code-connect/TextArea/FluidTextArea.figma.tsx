@@ -7,7 +7,7 @@
 
 // @ts-nocheck
 import React from 'react';
-import { unstable__FluidTextArea as FluidTextArea } from './TextAreaFluid';
+import { unstable__FluidTextArea as FluidTextArea } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(
