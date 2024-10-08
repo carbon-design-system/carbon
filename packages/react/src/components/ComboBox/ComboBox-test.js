@@ -64,6 +64,18 @@ describe('ComboBox', () => {
     }
   });
 
+  it('should call `onChange` when selection is cleared', async () => {
+    render(<ComboBox {...mockProps} />);
+    expect(mockProps.onChange).not.toHaveBeenCalled();
+    await openMenu();
+    await userEvent.click(screen.getAllByRole('option')[0]);
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Clear selected item' })
+    );
+    expect(mockProps.onChange).toHaveBeenCalledTimes(2);
+  });
+
   it('should call `onChange` with the proper item when `shouldFilterItem` is provided', async () => {
     const filterItems = (menu) => {
       return menu?.item?.label
@@ -88,12 +100,6 @@ describe('ComboBox', () => {
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[2],
     });
-  });
-
-  it('should call `onChange` on a fully controlled component', async () => {
-    render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
-    await userEvent.click(screen.getAllByRole('button')[0]);
-    expect(mockProps.onChange).toHaveBeenCalled();
   });
 
   it('should select the correct item from the filtered list after text input on click', async () => {
@@ -270,14 +276,14 @@ describe('ComboBox', () => {
     });
   });
 
-  describe('should display selected item found in `selectedItem`', () => {
-    it('using an object type for the `selectedItem` prop', async () => {
+  describe('provided `selectedItem`', () => {
+    it('should display selected item using an object type for the `selectedItem` prop', async () => {
       render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
 
-    it('using a string type for the `selectedItem` prop', async () => {
+    it('should display selected item using a string type for the `selectedItem` prop', async () => {
       // Replace the 'items' property in mockProps with a list of strings
       mockProps = {
         ...mockProps,
@@ -287,6 +293,45 @@ describe('ComboBox', () => {
       render(<ComboBox {...mockProps} selectedItem={mockProps.items[1]} />);
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
+    });
+    it('should update and call `onChange` when selection is updated from the combobox', async () => {
+      render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+      await openMenu();
+      await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
+      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+      expect(
+        screen.getByRole('combobox', { value: 'Item 2' })
+      ).toBeInTheDocument();
+    });
+    it('should update and call `onChange` when selection is updated externally', async () => {
+      const { rerender } = render(
+        <ComboBox {...mockProps} selectedItem={mockProps.items[0]} />
+      );
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
+      rerender(<ComboBox {...mockProps} selectedItem={mockProps.items[1]} />);
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[1].label);
+      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    });
+    it('should clear selected item and call `onChange` when selection is cleared from the combobox', async () => {
+      render(<ComboBox {...mockProps} selectedItem={mockProps.items[1]} />);
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Clear selected item' })
+      );
+      expect(mockProps.onChange).toHaveBeenCalled();
+      expect(findInputNode()).toHaveDisplayValue('');
+    });
+    it('should clear selected item when `selectedItem` is updated to `null` externally', async () => {
+      const { rerender } = render(
+        <ComboBox {...mockProps} selectedItem={mockProps.items[1]} />
+      );
+      await waitForPosition();
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[1].label);
+      rerender(<ComboBox {...mockProps} selectedItem={null} />);
+      await waitForPosition();
+      expect(findInputNode()).toHaveDisplayValue('');
+      expect(mockProps.onChange).toHaveBeenCalled();
     });
   });
 

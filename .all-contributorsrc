@@ -1624,6 +1624,25 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "Neues",
+      "name": "Noah Sgorbati",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9409245?v=4",
+      "profile": "https://github.com/Neues",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "divya-281",
+      "name": "Divya G",
+      "avatar_url": "https://avatars.githubusercontent.com/u/72991264?v=4",
+      "profile": "https://github.com/divya-281",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
