@@ -43,8 +43,7 @@ $font-display: 'swap' !default;
 /// @group config
 $font-path: '~@ibm/plex' !default;
 
-/// The value used to prefix selectors and CSS Custom Properties across the
-/// codebase
+/// Specify if the new per-family plex packages (e.g. @ibm/plex-sans) should be used
 /// @access public
 /// @type Boolean
 /// @group config
