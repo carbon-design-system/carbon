@@ -317,20 +317,21 @@ Here are some contribution quick tips:
 
 ### What projects can I contribute to?
 
-- [`carbon-components`](https://github.com/carbon-design-system/carbon/tree/main/packages/components)
-- [`carbon-components-react`](https://github.com/carbon-design-system/carbon/tree/main/packages/react)
+- [`@carbon/styles`](https://github.com/carbon-design-system/carbon/tree/main/packages/styles)
+- [`@carbon/react`](https://github.com/carbon-design-system/carbon/tree/main/packages/react)
+- [`@carbon/web-components`](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components)
 - [`carbon-website`](https://github.com/carbon-design-system/carbon-website)
 - [`gatsby-theme-carbon`](https://github.com/carbon-design-system/gatsby-theme-carbon)
 - [`carbon-design-kit`](https://github.com/carbon-design-system/carbon-design-kit)
 - [`@carbon/elements`](https://github.com/carbon-design-system/carbon/tree/main/packages/elements)
-- [`@carbon/type`](https://github.com/carbon-design-system/carbon/tree/main/packages/type)
 - [`@carbon/colors`](https://github.com/carbon-design-system/carbon/tree/main/packages/colors)
 - [`@carbon/grid`](https://github.com/carbon-design-system/carbon/tree/main/packages/grid)
 - [`@carbon/icons`](https://github.com/carbon-design-system/carbon/tree/main/packages/icons)
+- [`@carbon/icons-react`](https://github.com/carbon-design-system/carbon/tree/main/packages/icons-react)
 - [`@carbon/layout`](https://github.com/carbon-design-system/carbon/tree/main/packages/layout)
 - [`@carbon/motion`](https://github.com/carbon-design-system/carbon/tree/main/packages/motion)
 - [`@carbon/themes`](https://github.com/carbon-design-system/carbon/tree/main/packages/themes)
-- [`@carbon/icons-react`](https://github.com/carbon-design-system/carbon/tree/main/packages/icons-react)
+- [`@carbon/type`](https://github.com/carbon-design-system/carbon/tree/main/packages/type)
 
 And more! You can view a complete list of our packages
 [here](https://github.com/carbon-design-system/carbon/tree/main/packages).
@@ -346,9 +347,8 @@ work:
   best to answer questions on slack, it's not always possible to answer
   everything. One of the easiest ways to help us it to jump in on slack
   conversations if there's something you know the answer to! Some of our most
-  popular slack channels include `#carbon-components`, `#carbon-react`,
-  `#carbon-design-system`, `#carbon-ng`, `#carbon-vue`, `#carbon-announcements`,
-  `#carbon-community-components`.
+  popular slack channels include `#carbon-react`, `#carbon-web-components`,
+  `#carbon-design-system`, `#carbon-ng`, `#carbon-vue`, `#carbon-announcements`.
 - **Report bugs.** Even if you don't have the time to contribute a bug fix,
   opening an issue alone makes a big difference! Be sure to completely fill out
   the issue template to best help us understand what is going wrong.
@@ -356,12 +356,12 @@ work:
 ### If I'm contributing code, am I required to contribute it for all frameworks?
 
 If you've been working with Carbon for a while, you know that we have code
-assets in multiple frameworks. While the core team only maintains the React
-components, we work closely with the other framework teams to maintain parity.
-If you're contributing a bug fix in a framework other than React for a component
-which also exists in the React version, you can either contribute a fix for the
-React version as well or open an issue so that we can update the React component
-accordingly.
+assets in multiple frameworks. While the core team only maintains the React and
+Web Component implementations, we work closely with the other framework teams to
+maintain parity. If you're contributing a bug fix in a framework other than
+React for a component which also exists in the React and Web Components version,
+you can either contribute a fix for the that version as well or open an issue so
+that we can update the component accordingly.
 
 ### How can I test-drive components or provide a bug reproduction?
 
@@ -382,5 +382,3 @@ services:
 
 - [`@carbon/react` template](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v11.2.0/examples/codesandbox)
 - [`@carbon/styles` template](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v11.2.0/examples/codesandbox-styles)
-- [`carbon-components-react` template](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v10/packages/react/examples/codesandbox),
-  configured to use v10.x assets
