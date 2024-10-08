@@ -43,6 +43,13 @@ $font-display: 'swap' !default;
 /// @group config
 $font-path: '~@ibm/plex' !default;
 
+/// The value used to prefix selectors and CSS Custom Properties across the
+/// codebase
+/// @access public
+/// @type Boolean
+/// @group config
+$use-per-family-plex: false !default;
+
 /// Specify if IBM Plex should be provided by the IBM Akamai CDN
 /// @access public
 /// @type String
