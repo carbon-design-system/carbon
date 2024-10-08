@@ -65,7 +65,7 @@ jobs:
         uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.4
         with:
           node-version: '20.x'
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 #v4.0.2
+      - uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 #v4.1.0
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -87,7 +87,7 @@ jobs:
       - name: Run tests
         run: yarn test --ci --collectCoverage
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673 # v4.5.0
+        uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4.6.0
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   e2e:
@@ -99,7 +99,7 @@ jobs:
         uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.4
         with:
           node-version: '20.x'
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 #v4.0.2
+      - uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 #v4.1.0
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -145,7 +145,7 @@ jobs:
         uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.4
         with:
           node-version: '20.x'
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 #v4.0.2
+      - uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 #v4.1.0
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -214,7 +214,7 @@ jobs:
         uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.4
         with:
           node-version: '20.x'
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 #v4.0.2
+      - uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 #v4.1.0
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -279,7 +279,7 @@ jobs:
         uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.4
         with:
           node-version: '20.x'
-      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 #v4.0.2
+      - uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 #v4.1.0
         if: github.event_name != 'merge_group'
         id: cache
         with:
