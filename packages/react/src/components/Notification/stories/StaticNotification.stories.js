@@ -13,6 +13,7 @@ import mdx from './StaticNotification.mdx';
 
 export default {
   title: 'Experimental/unstable__StaticNotification',
+  component: StaticNotification,
   parameters: {
     docs: {
       page: mdx,
