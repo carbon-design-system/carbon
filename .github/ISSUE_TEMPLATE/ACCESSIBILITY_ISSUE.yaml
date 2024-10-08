@@ -38,6 +38,7 @@ body:
         - '@carbon/themes'
         - '@carbon/type'
         - '@carbon/upgrade'
+        - '@carbon/web-components'
     validations:
       required: true
   - type: dropdown
