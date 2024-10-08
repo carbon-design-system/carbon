@@ -10,12 +10,32 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { DefinitionTooltip } from '../DefinitionTooltip';
 
-describe('DefintiionTooltip', () => {
-  it('should display onClick a defintion provided via prop', async () => {
+describe('DefinitionTooltip', () => {
+  it('should display on click a definition provided via prop', async () => {
     const definition = 'Uniform Resource Locator';
     render(<DefinitionTooltip definition={definition}>URL</DefinitionTooltip>);
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
     await userEvent.click(screen.getByText('URL'));
-    expect(screen.getByText(definition)).toBeVisible();
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  it('should control tooltip display when using keyboard event', async () => {
+    const definition = 'Uniform Resource Locator';
+    render(<DefinitionTooltip definition={definition}>URL</DefinitionTooltip>);
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+    await userEvent.tab();
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+    await userEvent.tab();
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
   });
 
   it('should have a visible tooltip if `defaultOpen` is set to true', () => {
@@ -26,6 +46,7 @@ describe('DefintiionTooltip', () => {
       </DefinitionTooltip>
     );
     expect(screen.getByText(definition)).toBeVisible();
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
   });
 
   describe('Component API', () => {
