@@ -733,17 +733,14 @@ const ComboBox = forwardRef(
         return itemToString(item);
       },
       onInputValueChange({ inputValue }) {
-
         const normalizedInput = inputValue || '';
-
         setInputValue(normalizedInput);
         if (selectedItemProp && !inputValue) {
           // ensure onChange is called when selectedItem is cleared
-          onChange({ selectedItem, inputValue: newInputValue });
+          onChange({ selectedItem, inputValue: normalizedInput });
         }
         setHighlightedIndex(indexToHighlight(normalizedInput));
         setCursorPosition(inputValue === null ? 0 : normalizedInput.length);
-
       },
       onSelectedItemChange({ selectedItem }) {
         onChange({ selectedItem });
