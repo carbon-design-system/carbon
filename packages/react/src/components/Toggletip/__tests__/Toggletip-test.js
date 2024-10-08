@@ -219,7 +219,8 @@ describe('Toggletip', () => {
         <div data-testid="custom-button" ref={ref} {...props} />
       ));
 
-      it('should render custom component with onClick handler', () => {
+      it('should render custom component with onClick handler', async () => {
+        const user = userEvent.setup();
         render(
           <Toggletip>
             <ToggletipButton as={CustomButton}>Click me</ToggletipButton>
@@ -228,7 +229,7 @@ describe('Toggletip', () => {
 
         const button = screen.getByTestId('custom-button');
         expect(button).toBeInTheDocument();
-        fireEvent.click(button);
+        await user.click(button);
       });
 
       it('should use default label when not provided', () => {
@@ -392,7 +393,8 @@ describe('Toggletip', () => {
         );
       });
 
-      it('should close when focus moves outside the toggletip', () => {
+      it('should close when focus moves outside the toggletip', async () => {
+        const user = userEvent.setup();
         const { container } = render(
           <>
             <button data-testid="external-button">External</button>
@@ -406,9 +408,8 @@ describe('Toggletip', () => {
         const toggleButton = screen.getByText('Toggle');
         const externalButton = screen.getByTestId('external-button');
 
-        fireEvent.blur(toggleButton, {
-          relatedTarget: externalButton,
-        });
+        await user.click(toggleButton);
+        await user.tab();
 
         expect(container.lastChild).not.toHaveClass(
           `${prefix}--toggletip--open`
