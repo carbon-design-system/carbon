@@ -598,7 +598,7 @@ describe('ComboBox', () => {
     });
     it('should not autocomplete on Tab after backspace', async () => {
       const user = userEvent.setup();
-      render(<ComboBox {...mockProps} typeahead />);
+      render(<ComboBox {...mockProps} allowCustomValue typeahead />);
 
       const input = screen.getByRole('combobox');
       user.click(input);
@@ -616,7 +616,7 @@ describe('ComboBox', () => {
         options: ['Apple', 'Application', 'Apricot'],
       };
       const user = userEvent.setup();
-      render(<ComboBox {...multipleMatchProps} typeahead />);
+      render(<ComboBox {...multipleMatchProps} allowCustomValue typeahead />);
 
       const input = screen.getByRole('combobox');
       user.click(input);
@@ -629,7 +629,7 @@ describe('ComboBox', () => {
 
     it('should match case exactly with option list when Tab is pressed', async () => {
       const user = userEvent.setup();
-      render(<ComboBox {...mockProps} typeahead />);
+      render(<ComboBox {...mockProps} allowCustomValue typeahead />);
 
       const input = screen.getByRole('combobox');
       user.click(input);
