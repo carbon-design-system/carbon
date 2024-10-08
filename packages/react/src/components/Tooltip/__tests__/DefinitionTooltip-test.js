@@ -11,7 +11,7 @@ import React from 'react';
 import { DefinitionTooltip } from '../DefinitionTooltip';
 
 describe('DefinitionTooltip', () => {
-  it('should display onClick a defintion provided via prop', async () => {
+  it('should display onClick a definition provided via prop', async () => {
     const definition = 'Uniform Resource Locator';
     render(<DefinitionTooltip definition={definition}>URL</DefinitionTooltip>);
     await userEvent.click(screen.getByText('URL'));
@@ -103,7 +103,6 @@ describe('DefinitionTooltip', () => {
         </DefinitionTooltip>
       );
 
-      const content = screen.getByText(definition);
       const trigger = screen.getByRole('button');
 
       expect(screen.getByRole('button')).toHaveAttribute(
@@ -133,7 +132,6 @@ describe('DefinitionTooltip', () => {
         </DefinitionTooltip>
       );
 
-      const content = screen.getByText(definition);
       const trigger = screen.getByRole('button');
 
       expect(screen.getByRole('button')).toHaveAttribute(
