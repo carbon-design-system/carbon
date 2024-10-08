@@ -118,14 +118,12 @@ Feature flags can also be enabled via the provided `enable()` mixin
 
 ## FeatureFlags Prop Update
 
-The `FeatureFlags` component has been updated to improve compatibility. The
-`flags` object prop is now deprecated and is replaced with individual boolean
-props for each feature flag.
+The `FeatureFlags` component has been updated to improve compatibility. The 
+`flags` object prop is now deprecated and will be removed in a future release.
 
-The `flags` prop will be removed in a future release. Instead, use individual
-boolean props for each feature flag. A `featureflag-deprecate-flags-prop`
-codemod has been provided to help deprecate the `flags` object prop and switch
-to individual boolean props.
+Use individual boolean props for each feature flag instead. A 
+`featureflag-deprecate-flags-prop` codemod has been provided to help 
+deprecate the `flags` object prop and switch to individual boolean props.
 
 ```bash
 npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write
