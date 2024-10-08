@@ -9,7 +9,8 @@ import React from 'react';
 import FluidTimePicker from '../FluidTimePicker';
 import FluidTimePickerSelect from '../../FluidTimePickerSelect';
 import SelectItem from '../../SelectItem';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
 
@@ -133,7 +134,7 @@ describe('FluidTimePicker', () => {
         </FluidTimePicker>
       );
 
-      fireEvent.click(screen.getByRole('textbox'));
+      userEvent.click(screen.getByRole('textbox'));
       expect(onClick).not.toHaveBeenCalled();
     });
   });
