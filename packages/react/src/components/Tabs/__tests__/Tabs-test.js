@@ -7,12 +7,12 @@ import {
   TabPanels,
   TabList,
   TabListVertical,
-} from './Tabs';
+} from '../Tabs';
 import { act } from 'react';
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import * as hooks from '../../internal/useMatchMedia';
+import * as hooks from '../../../internal/useMatchMedia';
 
 const prefix = 'cds';
 
@@ -255,6 +255,78 @@ describe('Tab', () => {
     expect(onKeyDown).toHaveBeenCalled();
   });
 
+  it('should go to the next tab using arrow keys', async () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <Tab data-testid="tab-testid-1">Tab Label 1</Tab>
+          <Tab data-testid="tab-testid-2">Tab Label 2</Tab>
+          <Tab data-testid="tab-testid-3">Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    await userEvent.tab();
+    await userEvent.keyboard('[ArrowRight]');
+
+    expect(screen.getByTestId('tab-testid-2')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+
+    await userEvent.keyboard('[ArrowLeft]');
+
+    expect(screen.getByTestId('tab-testid-1')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+
+    await userEvent.keyboard('[End]');
+
+    expect(screen.getByTestId('tab-testid-3')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+
+    await userEvent.keyboard('[Home]');
+
+    expect(screen.getByTestId('tab-testid-1')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+  });
+
+  it('should go to the next tab with manual activation', async () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs" activation="manual">
+          <Tab data-testid="tab-testid-1">Tab Label 1</Tab>
+          <Tab data-testid="tab-testid-2">Tab Label 2</Tab>
+          <Tab data-testid="tab-testid-3">Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    await userEvent.tab();
+    await userEvent.keyboard('[ArrowRight]');
+    await userEvent.keyboard('[Space]');
+
+    expect(screen.getByTestId('tab-testid-2')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+  });
+
   it('should render close icon if dismissable', () => {
     render(
       <Tabs dismissable onTabCloseRequest={() => {}}>
@@ -276,6 +348,36 @@ describe('Tab', () => {
       screen.getAllByLabelText('Press delete to remove Tab Label 1 tab')[0]
         .parentElement
     ).not.toHaveClass(`${prefix}--visually-hidden`);
+  });
+
+  it('should ignore hover on dismissable icon if it is a contained tab', async () => {
+    render(
+      <Tabs dismissable onTabCloseRequest={() => {}}>
+        <TabList contained aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab disabled data-testid="tab-testid">
+            Tab Label 2
+          </Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    const tab = screen.getByTestId('tab-testid');
+    const tabIcon = screen.getAllByLabelText(
+      'Press delete to remove Tab Label 2 tab'
+    )[0].parentElement;
+
+    await userEvent.hover(tabIcon);
+    expect(tab).toHaveClass('cds--tabs__nav-item--hover-off');
+
+    await userEvent.unhover(tabIcon);
+    expect(tab).not.toHaveClass('cds--tabs__nav-item--hover-off');
   });
 
   it('should not render close icon if not dismissable', () => {
@@ -459,6 +561,136 @@ describe('Tab', () => {
     // eslint-disable-next-line testing-library/no-node-access
     expect(screen.getByTestId('svg').parentElement).toHaveClass(
       `${prefix}--tabs__nav-item--icon-left`
+    );
+  });
+});
+
+describe('TabsVertical', () => {
+  beforeEach(() => {
+    jest.resetModules();
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => false);
+  });
+
+  it('should render as horizontal tab in sm breakpoint', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+
+    const { container } = render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.firstChild).not.toHaveClass(`${prefix}--tabs--vertical`);
+  });
+
+  it('should go to the next tab using arrow keys', async () => {
+    render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs">
+          <Tab data-testid="tab-testid-1">Tab Label 1</Tab>
+          <Tab data-testid="tab-testid-2">Tab Label 2</Tab>
+          <Tab data-testid="tab-testid-3">Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    await userEvent.tab();
+    await userEvent.keyboard('[ArrowDown]');
+
+    expect(screen.getByTestId('tab-testid-2')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+
+    await userEvent.keyboard('[ArrowUp]');
+
+    expect(screen.getByTestId('tab-testid-1')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+
+    await userEvent.keyboard('[End]');
+
+    expect(screen.getByTestId('tab-testid-3')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+
+    await userEvent.keyboard('[Home]');
+
+    expect(screen.getByTestId('tab-testid-1')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+  });
+
+  it('should go to the next tab with manual activation', async () => {
+    render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs" activation="manual">
+          <Tab data-testid="tab-testid-1">Tab Label 1</Tab>
+          <Tab data-testid="tab-testid-2">Tab Label 2</Tab>
+          <Tab data-testid="tab-testid-3">Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    await userEvent.tab();
+    await userEvent.keyboard('[ArrowDown]');
+    await userEvent.keyboard('[Space]');
+
+    expect(screen.getByTestId('tab-testid-2')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+  });
+
+  it('should not select a disabled tab and select next tab', () => {
+    render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs">
+          <Tab data-testid="tab-testid-1" disabled>
+            Tab Label 1
+          </Tab>
+          <Tab data-testid="tab-testid-2">Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(screen.getByTestId('tab-testid-1')).toHaveAttribute(
+      'aria-selected',
+      'false'
+    );
+
+    // By default, if a Tab is disabled, the next Tab should be selected
+    expect(screen.getByTestId('tab-testid-2')).toHaveAttribute(
+      'aria-selected',
+      'true'
     );
   });
 });

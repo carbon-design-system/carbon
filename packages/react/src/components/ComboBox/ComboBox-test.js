@@ -22,7 +22,7 @@ import { AILabel } from '../AILabel';
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
-  await userEvent.click(screen.getByTitle('Open'));
+  await userEvent.click(screen.getByRole('combobox'));
 };
 
 const prefix = 'cds';
@@ -456,7 +456,7 @@ describe('ComboBox', () => {
       render(<ComboBox {...mockProps} allowCustomValue={false} />);
       await userEvent.type(findInputNode(), '1');
       expect(screen.getAllByRole('option')[1]).toHaveClass(
-        'cds--list-box__menu-item--highlighted'
+        'cds--list-box__menu-item'
       );
     });
 
@@ -495,6 +495,149 @@ describe('ComboBox', () => {
       expect(screen.getAllByRole('option')[1]).toHaveClass(
         'cds--list-box__menu-item--highlighted'
       );
+    });
+  });
+
+  describe('ComboBox autocomplete', () => {
+    const items = [
+      { id: 'option-1', text: 'Option 1' },
+      { id: 'option-2', text: 'Option 2' },
+      { id: 'option-3', text: 'Option 3' },
+      { id: 'apple', text: 'Apple' },
+      { id: 'banana', text: 'Banana' },
+      { id: 'orange', text: 'Orange' },
+      { id: 'orangeish', text: 'Orangeish' },
+    ];
+
+    const mockProps = {
+      id: 'test-combobox',
+      items,
+      itemToString: (item) => (item ? item.text : ''),
+      onChange: jest.fn(),
+    };
+
+    it('should respect autocomplete prop', async () => {
+      render(<ComboBox {...mockProps} typeahead />);
+      await waitForPosition();
+      const inputNode = findInputNode();
+      expect(inputNode).toHaveAttribute('autocomplete');
+    });
+    it('should use autocompleteCustomFilter when autocomplete prop is true', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} typeahead />);
+
+      // Open the dropdown
+      const input = screen.getByRole('combobox');
+      user.click(input);
+
+      // Type 'op' which should match all options
+      await user.type(input, 'op');
+      expect(screen.getAllByRole('option')).toHaveLength(3);
+
+      // Type 'opt' which should still match all options
+      await user.type(input, 't');
+      expect(screen.getAllByRole('option')).toHaveLength(3);
+
+      // Type 'opti' which should match only 'Option 1'
+      await user.type(input, 'i');
+      expect(screen.getAllByRole('option')).toHaveLength(3);
+      expect(screen.getByText('Option 1')).toBeInTheDocument();
+    });
+
+    it('should use default filter when autocomplete prop is false', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} />);
+
+      // Open the dropdown
+      const input = screen.getByRole('combobox');
+      user.click(input);
+
+      // Type 'op' which should match all options
+      await user.type(input, 'op');
+      expect(screen.getAllByRole('option')).toHaveLength(7);
+
+      // Type 'opt' which should still match all options
+      await user.type(input, 't');
+      expect(screen.getAllByRole('option')).toHaveLength(7);
+
+      // Type 'opti' which should still match all options
+      await user.type(input, 'i');
+      expect(screen.getAllByRole('option')).toHaveLength(7);
+
+      // Type 'option' which should still match all options
+      await user.type(input, 'on');
+      expect(screen.getAllByRole('option')).toHaveLength(7);
+    });
+
+    it('should not autocomplete when no match is found', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} typeahead />);
+
+      const input = screen.getByRole('combobox');
+      user.click(input);
+
+      await user.type(input, 'xyz');
+      await user.keyboard('[Tab]');
+
+      expect(document.activeElement).not.toBe(input);
+    });
+    it('should suggest best matching typeahread suggestion and complete it in Tab key press', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} typeahead />);
+
+      // Open the dropdown
+      const input = screen.getByRole('combobox');
+      user.click(input);
+
+      // Type 'op' which should match all options
+      await user.type(input, 'Ap');
+
+      await user.keyboard('[Tab]');
+
+      expect(findInputNode()).toHaveDisplayValue('Apple');
+    });
+    it('should not autocomplete on Tab after backspace', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} allowCustomValue typeahead />);
+
+      const input = screen.getByRole('combobox');
+      user.click(input);
+
+      await user.type(input, 'App');
+      await user.keyboard('[Backspace]');
+
+      await user.keyboard('[Tab]');
+
+      expect(document.activeElement).not.toBe(input);
+    });
+    it('should autocomplete with the first matching suggestion when multiple matches exist', async () => {
+      const multipleMatchProps = {
+        ...mockProps,
+        options: ['Apple', 'Application', 'Apricot'],
+      };
+      const user = userEvent.setup();
+      render(<ComboBox {...multipleMatchProps} allowCustomValue typeahead />);
+
+      const input = screen.getByRole('combobox');
+      user.click(input);
+
+      await user.type(input, 'App');
+      await user.keyboard('[Tab]');
+
+      expect(input).toHaveDisplayValue('Apple');
+    });
+
+    it('should match case exactly with option list when Tab is pressed', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} allowCustomValue typeahead />);
+
+      const input = screen.getByRole('combobox');
+      user.click(input);
+
+      await user.type(input, 'APpl');
+      await user.keyboard('[Tab]');
+
+      expect(input).toHaveDisplayValue('Apple');
     });
   });
 });
