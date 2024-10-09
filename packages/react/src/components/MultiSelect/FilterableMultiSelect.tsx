@@ -12,6 +12,7 @@ import Downshift, {
   useMultipleSelection,
   type UseComboboxProps,
   type UseMultipleSelectionProps,
+  type A11yRemovalMessage,
   UseComboboxInterface,
   UseComboboxStateChangeTypes,
   UseMultipleSelectionInterface,
@@ -158,9 +159,7 @@ export interface FilterableMultiSelectProps<ItemType>
     items: readonly ItemType[],
     extra: {
       inputValue: string | null;
-      itemToString: NonNullable<
-        UseMultipleSelectionProps<ItemType>['itemToString']
-      >;
+      itemToString: NonNullable<UseComboboxProps<ItemType>['itemToString']>;
     }
   ): ItemType[];
 
@@ -633,7 +632,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     activeIndex: highlightedIndex,
     initialSelectedItems,
     selectedItems: controlledSelectedItems,
-    itemToString,
     onStateChange(changes) {
       switch (changes.type) {
         case SelectedItemKeyDownBackspace:
