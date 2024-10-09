@@ -51,11 +51,6 @@ export interface DismissibleTagBaseProps {
   size?: keyof typeof SIZES;
 
   /**
-   * **Experimental:** Provide a `Slug` component to be rendered inside the `DismissibleTag` component
-   */
-  slug?: ReactNode;
-
-  /**
    * Provide text to be rendered inside of a the tag.
    */
   text?: string;
@@ -88,7 +83,6 @@ const DismissibleTag = <T extends React.ElementType>({
   renderIcon,
   title = 'Dismiss',
   onClose,
-  slug,
   size,
   text,
   tagTitle,
@@ -113,14 +107,6 @@ const DismissibleTag = <T extends React.ElementType>({
       onClose(event);
     }
   };
-
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'sm',
-      kind: 'inline',
-    });
-  }
 
   const tooltipClasses = classNames(
     `${prefix}--icon-tooltip`,
@@ -164,7 +150,6 @@ const DismissibleTag = <T extends React.ElementType>({
             <Close />
           </button>
         </Tooltip>
-        {normalizedSlug}
       </div>
     </Tag>
   );
@@ -201,11 +186,6 @@ DismissibleTag.propTypes = {
    * `md` (default) or `lg` sizes.
    */
   size: PropTypes.oneOf(Object.keys(SIZES)),
-
-  /**
-   * **Experimental:** Provide a `Slug` component to be rendered inside the `DismissibleTag` component
-   */
-  slug: PropTypes.node,
 
   /**
    * Provide text to be rendered inside of a the tag.
