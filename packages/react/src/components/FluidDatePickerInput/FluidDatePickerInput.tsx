@@ -6,12 +6,12 @@
  */
 
 import React from 'react';
-import DatePickerInput from '../DatePickerInput';
+import DatePickerInput, { DatePickerInputProps } from '../DatePickerInput';
 import { FormContext } from '../FluidForm/FormContext';
 
 const FluidDatePickerInput = React.forwardRef(function FluidDatePickerInput(
-  { ...other },
-  ref
+  { ...other }: DatePickerInputProps,
+  ref: React.Ref<HTMLDivElement>
 ) {
   return (
     <FormContext.Provider value={{ isFluid: true }}>
