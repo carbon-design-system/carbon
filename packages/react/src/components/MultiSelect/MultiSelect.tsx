@@ -53,6 +53,7 @@ import {
   autoUpdate,
 } from '@floating-ui/react';
 import { hide } from '@floating-ui/dom';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const {
   ItemClick,
@@ -362,8 +363,11 @@ const MultiSelect = React.forwardRef(
     const [topItems, setTopItems] = useState([]);
     const [itemsCleared, setItemsCleared] = useState(false);
 
+    const enableFloatingStyles =
+      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+
     const { refs, floatingStyles, middlewareData } = useFloating(
-      autoAlign
+      enableFloatingStyles
         ? {
             placement: direction,
 
@@ -375,7 +379,7 @@ const MultiSelect = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
-              flip({ crossAxis: false }),
+              autoAlign && flip({ crossAxis: false }),
               floatingSize({
                 apply({ rects, elements }) {
                   Object.assign(elements.floating.style, {
@@ -383,7 +387,7 @@ const MultiSelect = React.forwardRef(
                   });
                 },
               }),
-              hide(),
+              autoAlign && hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
@@ -391,7 +395,7 @@ const MultiSelect = React.forwardRef(
     );
 
     useLayoutEffect(() => {
-      if (autoAlign) {
+      if (enableFloatingStyles) {
         const updatedFloatingStyles = {
           ...floatingStyles,
           visibility: middlewareData.hide?.referenceHidden
@@ -404,7 +408,13 @@ const MultiSelect = React.forwardRef(
           }
         });
       }
-    }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
+    }, [
+      enableFloatingStyles,
+      floatingStyles,
+      refs.floating,
+      middlewareData,
+      open,
+    ]);
 
     const {
       selectedItems: controlledSelectedItems,
@@ -551,7 +561,7 @@ const MultiSelect = React.forwardRef(
         selectedItems && selectedItems.length > 0,
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--multi-select--readonly`]: readOnly,
-      [`${prefix}--autoalign`]: autoAlign,
+      [`${prefix}--autoalign`]: enableFloatingStyles,
       [`${prefix}--multi-select--selectall`]: selectAll,
     });
 
@@ -689,9 +699,9 @@ const MultiSelect = React.forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: autoAlign ? refs.setFloating : null,
+          ref: enableFloatingStyles ? refs.setFloating : null,
         }),
-      [autoAlign, getMenuProps, refs.setFloating]
+      [enableFloatingStyles, getMenuProps, refs.setFloating]
     );
 
     return (
@@ -729,7 +739,7 @@ const MultiSelect = React.forwardRef(
           )}
           <div
             className={multiSelectFieldWrapperClasses}
-            ref={autoAlign ? refs.setReference : null}>
+            ref={enableFloatingStyles ? refs.setReference : null}>
             {selectedItems.length > 0 && (
               <ListBox.Selection
                 readOnly={readOnly}

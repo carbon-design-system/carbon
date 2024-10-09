@@ -47,6 +47,7 @@ import { FormContext } from '../FluidForm';
 import { useFloating, flip, autoUpdate } from '@floating-ui/react';
 import { hide } from '@floating-ui/dom';
 import { TranslateWithId } from '../../types/common';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const {
   InputBlur,
@@ -388,12 +389,16 @@ const ComboBox = forwardRef(
       slug,
       ...rest
     } = props;
+
+    const enableFloatingStyles =
+      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+
     const { refs, floatingStyles, middlewareData } = useFloating(
-      autoAlign
+      enableFloatingStyles
         ? {
             placement: direction,
             strategy: 'fixed',
-            middleware: [flip(), hide()],
+            middleware: autoAlign ? [flip(), hide()] : undefined,
             whileElementsMounted: autoUpdate,
           }
         : {}
@@ -401,7 +406,7 @@ const ComboBox = forwardRef(
     const parentWidth = (refs?.reference?.current as HTMLElement)?.clientWidth;
 
     useEffect(() => {
-      if (autoAlign) {
+      if (enableFloatingStyles) {
         const updatedFloatingStyles = {
           ...floatingStyles,
           visibility: middlewareData.hide?.referenceHidden
@@ -417,7 +422,7 @@ const ComboBox = forwardRef(
           refs.floating.current.style.width = parentWidth + 'px';
         }
       }
-    }, [autoAlign, floatingStyles, refs.floating, parentWidth]);
+    }, [enableFloatingStyles, floatingStyles, refs.floating, parentWidth]);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
@@ -607,7 +612,7 @@ const ComboBox = forwardRef(
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--combo-box--warning`]: showWarning,
       [`${prefix}--combo-box--readonly`]: readOnly,
-      [`${prefix}--autoalign`]: autoAlign,
+      [`${prefix}--autoalign`]: enableFloatingStyles,
     });
 
     const titleClasses = cx(`${prefix}--label`, {
@@ -785,10 +790,10 @@ const ComboBox = forwardRef(
       () =>
         getMenuProps({
           'aria-label': deprecatedAriaLabel || ariaLabel,
-          ref: autoAlign ? refs.setFloating : null,
+          ref: enableFloatingStyles ? refs.setFloating : null,
         }),
       [
-        autoAlign,
+        enableFloatingStyles,
         deprecatedAriaLabel,
         ariaLabel,
         getMenuProps,
@@ -815,7 +820,7 @@ const ComboBox = forwardRef(
           light={light}
           size={size}
           warn={warn}
-          ref={autoAlign ? refs.setReference : null}
+          ref={enableFloatingStyles ? refs.setReference : null}
           warnText={warnText}
           warnTextId={warnTextId}>
           <div className={`${prefix}--list-box__field`}>

@@ -45,3 +45,8 @@ feature-flags:
     description: >
       Enable the new focus wrap behavior that doesn't use sentinel nodes
     enabled: false
+  - name: enable-v12-dynamic-floating-styles
+    description: >
+      Enable dynamic setting of floating styles for components like Popover,
+      Tooltip, etc.
+    enabled: false
