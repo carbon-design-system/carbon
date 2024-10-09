@@ -10244,6 +10244,7 @@ Map {
         "type": "node",
       },
       "onChange": Object {
+        "isRequired": true,
         "type": "func",
       },
       "renderSelectedItem": Object {
