@@ -12,7 +12,6 @@ import Downshift, {
   useMultipleSelection,
   type UseComboboxProps,
   type UseMultipleSelectionProps,
-  type A11yRemovalMessage,
   UseComboboxInterface,
   UseComboboxStateChangeTypes,
   UseMultipleSelectionInterface,
