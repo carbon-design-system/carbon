@@ -392,8 +392,10 @@
   .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb--upper {
     background-color: transparent;
 
+    &:active,
     &:hover,
     &:focus {
+      background-color: transparent;
       transform: none;
     }
 
