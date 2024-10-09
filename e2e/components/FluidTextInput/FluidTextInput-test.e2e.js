@@ -22,8 +22,8 @@ test.describe('FluidTextInput', () => {
         });
 
         await snapshotStory(page, {
-          component: 'FluidTextInput',
-          id: 'experimental-fluid-components-unstable-fluidtextinput--password-input',
+          component: 'FluidPasswordInput',
+          id: 'experimental-fluid-components-unstable-fluidpasswordinput--default',
           theme,
         });
       });

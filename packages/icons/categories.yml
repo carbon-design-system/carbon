@@ -658,7 +658,9 @@ categories:
           - ibm-watsonx--orchestrate
           - machine-learning
           - machine-learning-model
+          - ml-model--reference
           - model
+          - model--foundation
           - model--reference
           - model--tuned
           - prompt-session
@@ -750,6 +752,7 @@ categories:
           - ibm--tenet
           - ibm--toolchain
           - ibm--turbonomic
+          - ibm--unstructured-data-processor
           - ibm--vpn-for-vpc
           - ibm--vsi-on-vpc-for-regulated-industries
           - ibm--wazi-deploy

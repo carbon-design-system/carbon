@@ -49,8 +49,7 @@
     td {
     border: 0;
     background-color: $layer-hover;
-    padding-block-end: 0;
-    padding-block-start: 0;
+    padding-block: 0 0;
     transition: padding $duration-moderate-01 motion(standard, productive),
       background-color $duration-fast-01 motion(standard, productive);
   }
@@ -199,8 +198,7 @@
   .#{$prefix}--data-table
     td.#{$prefix}--table-expand
     + .#{$prefix}--table-column-checkbox {
-    padding-inline-end: convert.to-rem(6px);
-    padding-inline-start: convert.to-rem(6px);
+    padding-inline: convert.to-rem(6px) convert.to-rem(6px);
   }
 
   // Hide bottom border of checkbox column when expanded

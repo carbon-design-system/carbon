@@ -4,7 +4,7 @@ import {
   gray90,
   green10,
   blue10,
-  yellow30,
+  yellow10,
   white0,
 } from '@carbon/colors';
 import {
@@ -50,14 +50,9 @@ export const notificationBackgroundInfo = {
   g100: gray90,
 };
 
-export const colorMap = {
-  yellow30,
-  white0,
-};
-
 export const notificationBackgroundWarning = {
-  whiteTheme: colorMap,
-  g10: colorMap,
+  whiteTheme: yellow10,
+  g10: yellow10,
   g90: gray80,
   g100: gray90,
 };

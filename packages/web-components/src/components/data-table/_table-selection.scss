@@ -1,0 +1,102 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//
+// Selection check box
+//
+:host(#{$prefix}-table-header-row) {
+  .#{$prefix}--table-column-checkbox {
+    border-block-end: none;
+    border-block-start: none;
+    padding-inline: $spacing-05 $spacing-02;
+    transition: background-color $duration-fast-01 motion(entrance, productive);
+
+    .#{$prefix}--checkbox-label {
+      inline-size: 20px;
+    }
+  }
+}
+
+:host(#{$prefix}-table-row) {
+  .#{$prefix}--table-column-checkbox {
+    border-block-end: 1px solid $border-subtle;
+    padding-inline: $spacing-05 $spacing-02;
+
+    .#{$prefix}--checkbox-label {
+      padding-inline-start: $spacing-05;
+    }
+  }
+}
+
+:host(#{$prefix}-table-row:hover) {
+  .#{$prefix}--table-column-checkbox {
+    background-color: $background-hover;
+    border-block-end-color: $layer-hover-01;
+    border-block-start-color: $layer-hover-01;
+  }
+}
+
+:host(#{$prefix}-table-row[selected]) {
+  /* stylelint-disable-next-line no-duplicate-selectors */
+  .#{$prefix}--table-column-checkbox,
+  ::slotted(#{$prefix}-table-cell),
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    background-color: $layer-accent-01;
+    // bottom border acts as separator from other rows
+    border-block-end: 1px solid $layer-active;
+    color: $text-primary;
+  }
+
+  &:hover {
+    /* stylelint-disable-next-line no-duplicate-selectors */
+    .#{$prefix}--table-column-checkbox,
+    ::slotted(#{$prefix}-table-cell),
+    .#{$prefix}--table-expand,
+    .#{$prefix}--table-column-checkbox {
+      background-color: $data-table-column-hover;
+      border-block-end-color: $data-table-column-hover;
+    }
+  }
+}
+
+:host(#{$prefix}-table-expanded-row[filtered]),
+:host(#{$prefix}-table-row[filtered]) {
+  /* stylelint-disable-next-line declaration-no-important */
+  display: none !important;
+}
+
+:host(#{$prefix}-table-expanded-row[selected][slug]:not([highlighted])),
+:host(#{$prefix}-table-row[selected][slug]),
+:host(#{$prefix}-table-row[expandable][selected][slug]) {
+  @include ai-table-gradient('selected');
+
+  background-attachment: fixed;
+
+  &[highlighted],
+  &:hover {
+    @include ai-table-gradient('hover');
+
+    background-attachment: fixed;
+
+    /* stylelint-disable-next-line no-duplicate-selectors */
+    .#{$prefix}--table-column-checkbox,
+    ::slotted(#{$prefix}-table-cell),
+    .#{$prefix}--table-expand,
+    .#{$prefix}--table-column-checkbox {
+      background: none;
+    }
+  }
+
+  /* stylelint-disable-next-line no-duplicate-selectors */
+  .#{$prefix}--table-column-checkbox,
+  ::slotted(#{$prefix}-table-cell),
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    background: none;
+  }
+}
