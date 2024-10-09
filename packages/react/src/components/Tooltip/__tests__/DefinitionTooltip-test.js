@@ -45,11 +45,125 @@ describe('DefinitionTooltip', () => {
         term
       </DefinitionTooltip>
     );
-    expect(screen.getByText(definition)).toBeVisible();
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
   });
 
   describe('Component API', () => {
+    it('should open onKeyDown', async () => {
+      const user = userEvent.setup();
+      const definition = 'Uniform Resource Locator';
+      render(
+        <DefinitionTooltip
+          data-testid="test"
+          definition={definition}
+          className="tooltip-class">
+          URL
+        </DefinitionTooltip>
+      );
+
+      const button = screen.getByRole('button');
+
+      await user.tab();
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+
+      await user.keyboard('[Escape]');
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+    });
+    it('should close when trigger is blurred', async () => {
+      const user = userEvent.setup();
+      const definition = 'Uniform Resource Locator';
+      render(
+        <DefinitionTooltip
+          data-testid="test"
+          definition={definition}
+          className="tooltip-class">
+          URL
+        </DefinitionTooltip>
+      );
+
+      const button = screen.getByRole('button');
+
+      await user.tab();
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+      await user.tab();
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+    });
+    it('should close on unhover/mouseout when openOnHover is false', async () => {
+      const user = userEvent.setup();
+      const definition = 'Uniform Resource Locator';
+      render(
+        <DefinitionTooltip
+          data-testid="test"
+          definition={definition}
+          className="tooltip-class"
+          defaultOpen>
+          URL
+        </DefinitionTooltip>
+      );
+
+      const content = screen.getByText(definition);
+
+      expect(content).toBeVisible();
+      await userEvent.unhover(content);
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-expanded',
+        'false'
+      );
+    });
+    it('should open on hover when openOnHover', async () => {
+      const user = userEvent.setup();
+      const definition = 'Uniform Resource Locator';
+      render(
+        <DefinitionTooltip
+          data-testid="test"
+          definition={definition}
+          className="tooltip-class"
+          openOnHover>
+          URL
+        </DefinitionTooltip>
+      );
+
+      const trigger = screen.getByRole('button');
+
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-expanded',
+        'false'
+      );
+      await user.hover(trigger);
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-expanded',
+        'true'
+      );
+      await user.unhover(trigger);
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-expanded',
+        'false'
+      );
+    });
+    it('should not open on hover by default', async () => {
+      const user = userEvent.setup();
+      const definition = 'Uniform Resource Locator';
+      render(
+        <DefinitionTooltip
+          data-testid="test"
+          definition={definition}
+          className="tooltip-class">
+          URL
+        </DefinitionTooltip>
+      );
+
+      const trigger = screen.getByRole('button');
+
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-expanded',
+        'false'
+      );
+      await user.hover(trigger);
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-expanded',
+        'false'
+      );
+    });
     it('should apply additional props to the underlying button element', () => {
       const definition = 'Uniform Resource Locator';
       render(
