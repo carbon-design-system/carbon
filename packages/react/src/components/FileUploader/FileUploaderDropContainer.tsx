@@ -226,7 +226,7 @@ function FileUploaderDropContainer({
         multiple={multiple}
         onChange={handleChange}
         onClick={(evt) => {
-          (evt.target as HTMLInputElement).value = null as unknown as string;
+          (evt.target as HTMLInputElement).value = '';
         }}
       />
     </div>
