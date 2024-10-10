@@ -90,6 +90,39 @@ describe('TimePicker', () => {
       render(<TimePicker id="time-picker" placeholder="🧸" />);
       expect(screen.getByPlaceholderText('🧸')).toBeInTheDocument();
     });
+
+    it('should call onBlur when not disabled or readOnly', () => {
+      const onBlur = jest.fn();
+      render(<TimePicker id="time-picker" onBlur={onBlur} />);
+      const input = screen.getByRole('textbox');
+
+      fireEvent.blur(input);
+      expect(onBlur).toHaveBeenCalled();
+    });
+
+    it('should not call onBlur when disabled', () => {
+      const onBlur = jest.fn();
+      render(<TimePicker id="time-picker" onBlur={onBlur} disabled />);
+      const input = screen.getByRole('textbox');
+
+      fireEvent.blur(input);
+      expect(onBlur).not.toHaveBeenCalled();
+    });
+
+    it('should update value and prevValue when value changes', () => {
+      const { rerender } = render(
+        <TimePicker id="time-picker" value="10:00" />
+      );
+
+      // Initial render
+      expect(screen.getByRole('textbox')).toHaveValue('10:00');
+
+      // Rerender with a new value
+      rerender(<TimePicker id="time-picker" value="11:00" />);
+
+      // Check if the value is updated
+      expect(screen.getByRole('textbox')).toHaveValue('11:00');
+    });
   });
 
   describe('label', () => {
