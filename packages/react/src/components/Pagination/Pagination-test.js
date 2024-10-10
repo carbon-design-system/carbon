@@ -1,7 +1,7 @@
 import React from 'react';
 import Pagination from './Pagination';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { getAllByRole, render, screen } from '@testing-library/react';
 
 describe('Pagination', () => {
   describe('renders as expected - Component API', () => {
@@ -83,7 +83,7 @@ describe('Pagination', () => {
       expect(screen.getByText('éléments par page')).toBeInTheDocument();
     });
 
-    it('should call onChange when approrpiate', async () => {
+    it('should call onChange when switching pages using the buttons', async () => {
       const onChange = jest.fn();
       render(
         <Pagination
@@ -97,6 +97,114 @@ describe('Pagination', () => {
       await userEvent.click(screen.getByLabelText('Previous page'));
       await userEvent.click(screen.getByLabelText('Next page'));
       expect(onChange).toHaveBeenCalledTimes(2);
+      expect(onChange).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({ page: 2 })
+      );
+      expect(onChange).toHaveBeenNthCalledWith(
+        2,
+        expect.objectContaining({ page: 3 })
+      );
+    });
+
+    it('should call onChange when switching pages using the dropdown', async () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          totalItems={2}
+          pageSizes={[1]}
+          pageSize={1}
+          page={1}
+          onChange={onChange}
+        />
+      );
+      await userEvent.selectOptions(screen.getByLabelText(/Page number/), '2');
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({ page: 2 })
+      );
+    });
+
+    it('should call onChange when changing page size using the dropdown', async () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          totalItems={2}
+          pageSizes={[1, 2]}
+          pageSize={1}
+          page={1}
+          onChange={onChange}
+        />
+      );
+      await userEvent.selectOptions(
+        screen.getByLabelText('Items per page:'),
+        '2'
+      );
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({ pageSize: 2 })
+      );
+    });
+
+    it('should keep focus on the previous button if there is a previous page after it is clicked', async () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          pageSizes={[10, 20]}
+          pageSize={10}
+          page={3}
+          onChange={onChange}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('Previous page'));
+      expect(screen.getByLabelText('Previous page')).toHaveFocus();
+    });
+
+    it('should change focus off the previous button and to the next button if there is no previous page after it is clicked', async () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          pageSizes={[10, 20]}
+          pageSize={10}
+          page={2}
+          onChange={onChange}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('Previous page'));
+      expect(screen.getByLabelText('Next page')).toHaveFocus();
+    });
+
+    it('should keep focus on the next button if there is a next page after it is clicked', async () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          pageSizes={[10, 20]}
+          pageSize={10}
+          page={2}
+          onChange={onChange}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('Next page'));
+      expect(screen.getByLabelText('Next page')).toHaveFocus();
+    });
+
+    it('should change focus off the next button and to the previous button if there is no next page after it is clicked', async () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          pageSizes={[10, 20]}
+          pageSize={10}
+          totalItems={31}
+          page={3}
+          onChange={onChange}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('Next page'));
+      expect(screen.getByLabelText('Previous page')).toHaveFocus();
     });
 
     it('should change page based on page', () => {
@@ -110,6 +218,40 @@ describe('Pagination', () => {
       );
 
       expect(screen.getByText('11–20 of 40 items')).toBeInTheDocument();
+    });
+
+    it('should update the text when switching pages using the buttons', async () => {
+      render(<Pagination pageSizes={[10, 20]} pageSize={10} page={3} />);
+      expect(screen.getByText('21–30 items')).toBeInTheDocument();
+
+      await userEvent.click(screen.getByLabelText('Previous page'));
+      expect(screen.getByText('11–20 items')).toBeInTheDocument();
+
+      await userEvent.click(screen.getByLabelText('Next page'));
+      expect(screen.getByText('21–30 items')).toBeInTheDocument();
+    });
+
+    it('should update the text when switching pages using the dropdown', async () => {
+      render(
+        <Pagination totalItems={2} pageSizes={[1]} pageSize={1} page={1} />
+      );
+      expect(screen.getByText('1–1 of 2 items')).toBeInTheDocument();
+
+      await userEvent.selectOptions(screen.getByLabelText(/Page number/), '2');
+      expect(screen.getByText('2–2 of 2 items')).toBeInTheDocument();
+    });
+
+    it('should update the text when switching page size using the dropdown', async () => {
+      render(
+        <Pagination totalItems={2} pageSizes={[1, 2]} pageSize={1} page={1} />
+      );
+      expect(screen.getByText('1–1 of 2 items')).toBeInTheDocument();
+
+      await userEvent.selectOptions(
+        screen.getByLabelText('Items per page:'),
+        '2'
+      );
+      expect(screen.getByText('1–2 of 2 items')).toBeInTheDocument();
     });
 
     it('should respect pageInputDisabled prop', () => {
@@ -149,6 +291,23 @@ describe('Pagination', () => {
       );
 
       expect(screen.getByText('21–40 of 40 items')).toBeInTheDocument();
+    });
+
+    it('should respect pageSize prop with a custom label', () => {
+      render(
+        <Pagination
+          totalItems={40}
+          pageSizes={[
+            { text: 'Five', value: 5 },
+            { text: 'Ten', value: 10 },
+          ]}
+          pageSize={10}
+          page={1}
+        />
+      );
+
+      expect(screen.getByText('1–10 of 40 items')).toBeInTheDocument();
+      expect(screen.getByText('Ten')).toBeInTheDocument();
     });
 
     it('should respect pageSizeInputDisabled prop', () => {
@@ -238,6 +397,68 @@ describe('Pagination', () => {
       );
       expect(screen.getByLabelText('Next page')).toBeDisabled();
       expect(screen.getByText('0–0 of 0 items')).toBeInTheDocument();
+    });
+
+    it('should update the page when updated externally', () => {
+      const commonProps = {
+        totalItems: 4,
+        pageSizes: [2],
+        pageSize: 2,
+      };
+      const { rerender } = render(<Pagination {...commonProps} page={1} />);
+      expect(screen.getByText('1–2 of 4 items')).toBeInTheDocument();
+      rerender(<Pagination {...commonProps} page={2} />);
+      expect(screen.getByText('3–4 of 4 items')).toBeInTheDocument();
+    });
+
+    it('should update the page size when updated externally', () => {
+      const commonProps = {
+        page: 1,
+        totalItems: 4,
+        pageSizes: [2, 4],
+      };
+      const { rerender } = render(<Pagination {...commonProps} pageSize={2} />);
+      expect(screen.getByText('1–2 of 4 items')).toBeInTheDocument();
+      rerender(<Pagination {...commonProps} pageSize={4} />);
+      expect(screen.getByText('1–4 of 4 items')).toBeInTheDocument();
+    });
+
+    it('should update the page sizes when updated externally', () => {
+      const commonProps = {
+        page: 1,
+        totalItems: 4,
+        pageSize: 2,
+      };
+      const { rerender } = render(
+        <Pagination {...commonProps} pageSizes={[2, 4]} />
+      );
+      const select = screen.getByLabelText('Items per page:');
+
+      expect(getAllByRole(select, 'option')).toHaveLength(2);
+      expect(getAllByRole(select, 'option')[0]).toHaveValue('2');
+      expect(getAllByRole(select, 'option')[1]).toHaveValue('4');
+
+      rerender(<Pagination {...commonProps} pageSizes={[1, 2, 3]} />);
+
+      expect(getAllByRole(select, 'option')).toHaveLength(3);
+      expect(getAllByRole(select, 'option')[0]).toHaveValue('1');
+      expect(getAllByRole(select, 'option')[1]).toHaveValue('2');
+      expect(getAllByRole(select, 'option')[2]).toHaveValue('3');
+    });
+
+    it('should update the page to 1 when the updated page sizes do not include the new size', () => {
+      const commonProps = {
+        page: 2,
+        totalItems: 4,
+        pageSize: 2,
+      };
+      const { rerender } = render(
+        <Pagination {...commonProps} pageSizes={[2, 4]} />
+      );
+      expect(screen.getByText('3–4 of 4 items')).toBeInTheDocument();
+
+      rerender(<Pagination {...commonProps} pageSizes={[1]} />);
+      expect(screen.getByText('1–2 of 4 items')).toBeInTheDocument();
     });
   });
 });
