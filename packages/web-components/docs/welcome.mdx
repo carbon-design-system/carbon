@@ -1,0 +1,115 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction/Welcome" />
+
+A Carbon Design System variant that's as easy to use as native HTML elements, with no framework tax, no framework silo.
+
+<p align="center">
+  <a href="https://www.carbondesignsystem.com">
+    <img alt="Carbon Design System" src="https://user-images.githubusercontent.com/3901764/57545698-ce5f2380-7320-11e9-8682-903df232d7b0.png" width="100%" />
+  </a>
+</p>
+
+> Carbon is an open-source design system built by IBM. With the IBM Design
+> Language as its foundation, the system consists of working code, design tools
+> and resources, human interface guidelines, and a vibrant community of
+> contributors.
+
+<p align="center">
+  <a href="https://github.com/carbon-design-system/carbon-for-ibm-dotcom/blob/main/packages/carbon-web-components/LICENSE">
+    <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Carbon is released under the Apache-2.0 license" />
+  </a>
+</p>
+
+# `@carbon/web-components`
+
+`@carbon/web-components` is a variant of Carbon Design System with Custom Elements v1 and Shadow DOM v1 specs.
+
+The effort stems from https://github.com/carbon-design-system/issue-tracking/issues/121.
+
+## Getting started
+
+To install `@carbon/web-components` in your project, you will need to run the
+following command using [npm](https://www.npmjs.com/):
+
+```bash
+npm install --save @carbon/web-components
+```
+
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
+instead:
+
+```bash
+yarn add @carbon/web-components
+```
+
+### Basic usage
+
+Our example at [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic) shows the most basic usage:
+
+The first thing you need is **setting up a module bundler** to resolve ECMAScript `import`s. The above example uses [Webpack](https://webpack.js.org), but you can use other bundlers like [Rollup](https://rollupjs.org/) too.
+
+Once you set up a module bundler, you can start importing our component modules, for example:
+
+```javascript
+import '@carbon/web-components/es/components/dropdown/dropdown.js';
+import '@carbon/web-components/es/components/dropdown/dropdown-item.js';
+```
+
+Once you've imported the component modules, you can use our components in the same manner as native HTML tags, for example:
+
+```html
+<cds-dropdown trigger-content="Select an item">
+  <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
+  <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
+  <cds-dropdown-item value="dea">Option 4</cds-dropdown-item>
+  <cds-dropdown-item value="router">Option 5</cds-dropdown-item>
+</cds-dropdown>
+```
+
+An alternative to using a bundler are CDN artifacts which can be added client side in your html files. With CDNs, you can import the components in `<script type="module">`:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/dropdown.min.js"></script>
+    <style type="text/css">
+      #app {
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+        width: 300px;
+        margin: 2rem;
+      }
+
+      cds-dropdown:not(:defined),
+      cds-dropdown-item:not(:defined) {
+        visibility: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <cds-dropdown trigger-content="Select an item">
+        <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
+        <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
+        <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
+        <cds-dropdown-item value="dea">Option 4</cds-dropdown-item>
+        <cds-dropdown-item value="router">Option 5</cds-dropdown-item>
+      </cds-dropdown>
+    </div>
+  </body>
+</html>
+```
+
+### JavaScript framework integration
+
+This package can also be used within other JavaScript frameworks such as Angular and
+Vue. This is achievable since web components are the modern browser standard, and
+work well with other front-end frameworks that exist in the application. In
+turn, this also comes with the benefits of encapsulation within the Shadow DOM:
+
+### Other usage guides
+
+- [Having components participate in form](/?path=/story/introduction-form-paticipation--page)
+- [Using custom styles in components](/?path=/docs/introduction-custom-styles--page)

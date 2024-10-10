@@ -31,7 +31,7 @@ describe('TableExpandHeader', () => {
           <TableHead>
             <TableRow>
               <TableExpandHeader
-                ariaLabel="test-label"
+                aria-label="test-label"
                 isExpanded={false}
                 onExpand={jest.fn()}
                 className="custom-class"
@@ -43,12 +43,12 @@ describe('TableExpandHeader', () => {
       expect(container).toMatchSnapshot();
     });
 
-    it('should respect ariaLabel prop', () => {
+    it('should respect aria-label prop', () => {
       render(
         <Table>
           <TableHead>
             <TableRow>
-              <TableExpandHeader isExpanded enableToggle ariaLabel="Expand" />
+              <TableExpandHeader isExpanded aria-label="Expand" enableToggle />
             </TableRow>
           </TableHead>
         </Table>

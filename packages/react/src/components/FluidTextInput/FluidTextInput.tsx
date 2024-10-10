@@ -87,26 +87,24 @@ export interface FluidTextInputProps {
   warnText?: React.ReactNode;
 }
 
-const FluidTextInput: React.FC<FluidTextInputProps> = ({
-  className,
-  isPassword,
-  ...other
-}) => {
-  const prefix = usePrefix();
-  const classNames = classnames(className, {
-    [`${prefix}--text-input--fluid`]: !isPassword,
-  });
+const FluidTextInput = React.forwardRef<HTMLInputElement, FluidTextInputProps>(
+  function FluidTextInput({ className, isPassword, ...other }, ref) {
+    const prefix = usePrefix();
+    const classNames = classnames(className, {
+      [`${prefix}--text-input--fluid`]: !isPassword,
+    });
 
-  return (
-    <FormContext.Provider value={{ isFluid: true }}>
-      {isPassword ? (
-        <PasswordInput className={classNames} {...other} />
-      ) : (
-        <TextInput className={classNames} {...other} />
-      )}
-    </FormContext.Provider>
-  );
-};
+    return (
+      <FormContext.Provider value={{ isFluid: true }}>
+        {isPassword ? (
+          <PasswordInput className={classNames} ref={ref} {...other} />
+        ) : (
+          <TextInput className={classNames} ref={ref} {...other} />
+        )}
+      </FormContext.Provider>
+    );
+  }
+);
 
 FluidTextInput.propTypes = {
   /**

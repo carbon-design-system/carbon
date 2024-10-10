@@ -22,7 +22,7 @@ test.describe('@avt AILabel', () => {
     await expect(page).toHaveNoACViolations('AILabel');
   });
 
-  test.slow('@avt-advanced-states open state', async ({ page }) => {
+  test('@avt-advanced-states open state', async ({ page }) => {
     await visitStory(page, {
       component: 'AILabel',
       id: 'components-ailabel--default',
@@ -37,7 +37,7 @@ test.describe('@avt AILabel', () => {
     await expect(page).toHaveNoACViolations('AILabel-open');
   });
 
-  test.slow('@avt-advanced-states ai form', async ({ page }) => {
+  test('@avt-advanced-states ai form', async ({ page }) => {
     await visitStory(page, {
       component: 'AILabel',
       id: 'components-form--with-ai-label',
