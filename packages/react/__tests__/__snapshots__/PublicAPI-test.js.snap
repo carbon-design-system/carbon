@@ -520,6 +520,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "fluid": Object {
+        "type": "bool",
+      },
       "stacked": Object {
         "type": "bool",
       },
