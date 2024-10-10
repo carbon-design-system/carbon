@@ -9,7 +9,7 @@
 
 const OFF = null;
 
-module.exports = {
+export default {
   rules: {
     // Color
     // Require (where possible) or disallow named colors.
@@ -110,8 +110,6 @@ module.exports = {
     'selector-max-combinators': OFF,
     // Limit the number of compound selectors in a selector.
     'selector-max-compound-selectors': OFF,
-    // Limit the number of adjacent empty lines within selectors.
-    'selector-max-empty-lines': OFF,
     // Limit the number of id selectors in a selector.
     'selector-max-id': OFF,
     // Limit the specificity of selectors.

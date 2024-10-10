@@ -22,6 +22,6 @@
     "provenance": true
   },
   "peerDependencies": {
-    "prettier": "2.x"
+    "prettier": "3.2.5"
   }
 }

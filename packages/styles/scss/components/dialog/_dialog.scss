@@ -83,7 +83,6 @@
     /*   Before-open state  */
     /* Needs to be after the previous dialog[open] rule to take effect,
     as the specificity is the same */
-    /* stylelint-disable-next-line scss/at-rule-no-unknown */
     @starting-style {
       &[open] {
         opacity: 0;
@@ -140,7 +139,6 @@
   */
   /* This starting-style rule cannot be nested inside the above selector
 because the nesting selector cannot represent pseudo-elements. */
-  /* stylelint-disable-next-line scss/at-rule-no-unknown */
   @starting-style {
     .#{$prefix}--dialog[open]::backdrop {
       opacity: 0;
