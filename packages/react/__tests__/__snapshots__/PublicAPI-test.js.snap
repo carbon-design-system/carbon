@@ -569,6 +569,50 @@ Map {
     "2": "bottom",
     "3": "left",
   },
+  "Callout" => Object {
+    "propTypes": Object {
+      "actionButtonLabel": Object {
+        "type": "string",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "error",
+            "info",
+            "info-square",
+            "success",
+            "warning",
+            "warning-alt",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "lowContrast": Object {
+        "type": "bool",
+      },
+      "onActionButtonClick": Object {
+        "type": "func",
+      },
+      "statusIconDescription": Object {
+        "type": "string",
+      },
+      "subtitle": Object {
+        "type": "node",
+      },
+      "title": Object {
+        "type": "string",
+      },
+      "titleId": Object {
+        "type": "string",
+      },
+    },
+  },
   "Checkbox" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -1347,6 +1391,9 @@ Map {
       },
       "translateWithId": Object {
         "type": "func",
+      },
+      "typeahead": Object {
+        "type": "bool",
       },
       "warn": Object {
         "type": "bool",
@@ -7458,50 +7505,7 @@ Map {
     },
     "render": [Function],
   },
-  "StaticNotification" => Object {
-    "propTypes": Object {
-      "actionButtonLabel": Object {
-        "type": "string",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "error",
-            "info",
-            "info-square",
-            "success",
-            "warning",
-            "warning-alt",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "lowContrast": Object {
-        "type": "bool",
-      },
-      "onActionButtonClick": Object {
-        "type": "func",
-      },
-      "statusIconDescription": Object {
-        "type": "string",
-      },
-      "subtitle": Object {
-        "type": "node",
-      },
-      "title": Object {
-        "type": "string",
-      },
-      "titleId": Object {
-        "type": "string",
-      },
-    },
-  },
+  "StaticNotification" => Object {},
   "StructuredListBody" => Object {
     "propTypes": Object {
       "children": Object {
@@ -9458,6 +9462,7 @@ Map {
     "render": [Function],
   },
   "ToggletipContent" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -9466,6 +9471,7 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "ToggletipLabel" => Object {
     "propTypes": Object {
@@ -9804,14 +9810,22 @@ Map {
       "children": Object {
         "type": "node",
       },
-      "flags": Object {
-        "args": Array [
-          Object {
-            "type": "bool",
-          },
-        ],
-        "type": "objectOf",
+      "enableExperimentalFocusWrapWithoutSentinels": Object {
+        "type": "bool",
       },
+      "enableTreeviewControllable": Object {
+        "type": "bool",
+      },
+      "enableV12Overflowmenu": Object {
+        "type": "bool",
+      },
+      "enableV12TileDefaultIcons": Object {
+        "type": "bool",
+      },
+      "enableV12TileRadioIcons": Object {
+        "type": "bool",
+      },
+      "flags": [Function],
     },
   },
   "unstable_Layout" => Object {
@@ -10236,6 +10250,7 @@ Map {
         "type": "node",
       },
       "onChange": Object {
+        "isRequired": true,
         "type": "func",
       },
       "renderSelectedItem": Object {
@@ -10765,6 +10780,7 @@ Map {
     },
   },
   "unstable__FluidTextInput" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -10831,6 +10847,7 @@ Map {
         "type": "node",
       },
     },
+    "render": [Function],
   },
   "unstable__FluidTextInputSkeleton" => Object {
     "propTypes": Object {
