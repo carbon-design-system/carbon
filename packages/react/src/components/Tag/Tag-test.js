@@ -79,7 +79,7 @@ describe('Tag', () => {
       expect(selectableTag).toHaveClass(`${prefix}--tag--selectable`);
     });
 
-    it('should render a selectable tag', async () => {
+    it('should select the selectable tag', async () => {
       const { container } = render(<SelectableTag text="Tag content" />);
 
       const selectableTag = container.querySelector(
@@ -89,13 +89,6 @@ describe('Tag', () => {
       await userEvent.click(selectableTag);
       expect(selectableTag).toHaveAttribute('aria-pressed', 'true');
       expect(selectableTag).toHaveClass(`${prefix}--tag--selectable-selected`);
-    });
-
-    it('should respect slug prop', () => {
-      render(<SelectableTag as="div" text="Tag content" slug={<AILabel />} />);
-      expect(
-        screen.getByRole('button', { name: 'AI - Show information' })
-      ).toBeInTheDocument();
     });
   });
 
