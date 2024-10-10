@@ -19,6 +19,8 @@ import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import ComboBox from '../ComboBox';
 import mdx from './Modal.mdx';
+import { MenuButton } from '../MenuButton';
+import { MenuItem } from '../Menu';
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -43,6 +45,7 @@ export default {
 
 export const Default = () => {
   const [open, setOpen] = useState(true);
+  const menuTargetref = useRef(null);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch modal</Button>
@@ -58,6 +61,7 @@ export const Default = () => {
           organization to a URL that you own. A custom domain can be a shared
           domain, a shared subdomain, or a shared domain and host.
         </p>
+
         <TextInput
           data-modal-primary-focus
           id="text-input-1"
@@ -78,6 +82,16 @@ export const Default = () => {
             { id: 'two', label: 'two', name: 'two' },
           ]}
         />
+        <br />
+        <div ref={menuTargetref}>
+          <MenuButton label="Actions" menuTarget={menuTargetref.current}>
+            <MenuItem label="First action" />
+            <MenuItem label="Second action" />
+            <MenuItem label="Third action" />
+            <MenuItem label="Danger action" kind="danger" />
+          </MenuButton>
+        </div>
+        <br />
         <MultiSelect
           id="test"
           label="Multiselect"
