@@ -259,6 +259,11 @@ export interface FilterableMultiSelectProps<ItemType>
   placeholder?: string;
 
   /**
+   * Whether or not the filterable multiselect is readonly
+   */
+  readOnly?: boolean;
+
+  /**
    * Specify feedback (mode) of the selection.
    * `top`: selected item jumps to top
    * `fixed`: selected item stays at its position
@@ -335,6 +340,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     onChange,
     onMenuChange,
     placeholder,
+    readOnly,
     titleText,
     type,
     selectionFeedback = 'top-after-reopen',
@@ -505,9 +511,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   };
 
   function handleMenuChange(forceIsOpen: boolean): void {
-    const nextIsOpen = forceIsOpen ?? !isOpen;
-    setIsOpen(nextIsOpen);
-    validateHighlightFocus();
+    if (!readOnly) {
+      const nextIsOpen = forceIsOpen ?? !isOpen;
+      setIsOpen(nextIsOpen);
+      validateHighlightFocus();
+    }
   }
 
   useEffect(() => {
@@ -689,6 +697,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       [`${prefix}--multi-select--selected`]:
         controlledSelectedItems?.length > 0,
       [`${prefix}--multi-select--filterable--input-focused`]: inputFocused,
+      [`${prefix}--multi-select--readonly`]: readOnly,
     }
   );
 
@@ -728,7 +737,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       placeholder,
       preventKeyAction: isOpen,
 
-      onClick: () => handleMenuChange(true),
+      onClick: () => !readOnly && handleMenuChange(true),
       onKeyDown(event: KeyboardEvent<HTMLElement>) {
         const $input = event.target as HTMLInputElement;
         const $value = $input.value;
@@ -798,6 +807,28 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   };
 
+  const mergedRef = mergeRefs(textInput, inputProps.ref);
+
+  const readOnlyEventHandlers = readOnly
+    ? {
+        onClick: (evt: React.MouseEvent<HTMLInputElement>) => {
+          // NOTE: does not prevent click
+          evt.preventDefault();
+          // focus on the element as per readonly input behavior
+          if (mergedRef.current !== undefined) {
+            mergedRef.current.focus();
+          }
+        },
+        onKeyDown: (evt: React.KeyboardEvent<HTMLInputElement>) => {
+          const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
+          // This prevents the select from opening for the above keys
+          if (selectAccessKeys.includes(evt.key)) {
+            evt.preventDefault();
+          }
+        },
+      }
+    : {};
+
   const clearSelectionContent =
     controlledSelectedItems.length > 0 ? (
       <span className={`${prefix}--visually-hidden`}>
@@ -832,7 +863,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         invalidText={invalidText}
         warn={warn}
         warnText={warnText}
-        isOpen={isOpen}
+        isOpen={!readOnly && isOpen}
         size={size}>
         <div
           className={`${prefix}--list-box__field`}
@@ -853,7 +884,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           <input
             className={inputClasses}
             {...inputProps}
-            ref={mergeRefs(textInput, inputProps.ref)}
+            ref={mergedRef}
+            {...readOnlyEventHandlers}
+            readOnly={readOnly}
           />
           {invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />

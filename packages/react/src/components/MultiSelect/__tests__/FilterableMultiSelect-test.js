@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { act, render, screen } from '@testing-library/react';
+import { getByText } from '@carbon/test-utils/dom';
 import userEvent from '@testing-library/user-event';
 import FilterableMultiSelect from '../FilterableMultiSelect';
 import {
@@ -63,6 +64,28 @@ describe('FilterableMultiSelect', () => {
     expect(mockProps.onMenuChange).toHaveBeenCalledWith(false);
   });
 
+  it('should not be interactive if readonly', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const { container } = render(
+      <FilterableMultiSelect
+        id="test"
+        readOnly={true}
+        label={label}
+        items={items}
+      />
+    );
+    await waitForPosition();
+
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const labelNode = getByText(container, label);
+    await userEvent.click(labelNode);
+
+    expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
+    ).toBeFalsy();
+  });
   it('should initially have the menu open when open prop is provided', async () => {
     render(<FilterableMultiSelect {...mockProps} open />);
     await waitForPosition();
