@@ -504,6 +504,10 @@
       overflow-x: visible;
     }
 
+    .#{$prefix}--tabs__nav-item--icon-only {
+      margin-inline-end: convert.to-rem(1px);
+    }
+
     .#{$prefix}--tabs__nav-item--icon-only,
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon-only {
       display: flex;
