@@ -14,7 +14,7 @@ test.describe('@avt InteractiveTag', () => {
   test('@avt-advanced-states DismissibleTag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'experimental-unstable-interactivetag--dismissible',
+      id: 'components-tag--dismissible',
       globals: {
         theme: 'white',
       },
@@ -26,7 +26,7 @@ test.describe('@avt InteractiveTag', () => {
   test('@avt-advanced-states OperationalTag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'experimental-unstable-interactivetag--operational',
+      id: 'components-tag--operational',
       globals: {
         theme: 'white',
       },
@@ -37,7 +37,7 @@ test.describe('@avt InteractiveTag', () => {
   test('@avt-advanced-states SelectableTag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'experimental-unstable-interactivetag--selectable',
+      id: 'components-tag--selectable',
       globals: {
         theme: 'white',
       },
@@ -48,7 +48,7 @@ test.describe('@avt InteractiveTag', () => {
   test('@avt-keyboard-nav DismissibleTag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'experimental-unstable-interactivetag--dismissible',
+      id: 'components-tag--dismissible',
       globals: {
         theme: 'white',
       },
@@ -82,7 +82,7 @@ test.describe('@avt InteractiveTag', () => {
   test('@avt-keyboard-nav OperationalTag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'experimental-unstable-interactivetag--operational',
+      id: 'components-tag--operational',
       globals: {
         theme: 'white',
       },
@@ -117,7 +117,7 @@ test.describe('@avt InteractiveTag', () => {
   test('@avt-keyboard-nav SelectableTag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'experimental-unstable-interactivetag--selectable',
+      id: 'components-tag--selectable',
       globals: {
         theme: 'white',
       },

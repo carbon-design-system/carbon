@@ -2959,9 +2959,6 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
       "tagTitle": Object {
         "type": "string",
       },
@@ -5874,9 +5871,6 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
       "text": Object {
         "type": "string",
       },
@@ -7011,9 +7005,6 @@ Map {
           ],
         ],
         "type": "oneOf",
-      },
-      "slug": Object {
-        "type": "node",
       },
       "text": Object {
         "type": "string",

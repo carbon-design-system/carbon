@@ -12,13 +12,13 @@ import { default as OperationalTag } from './OperationalTag';
 import { default as DismissibleTag } from './DismissibleTag';
 import { Asleep } from '@carbon/icons-react';
 import { Popover, PopoverContent } from '../Popover';
-import mdx from './InteractiveTag.mdx';
+import mdx from './Tag.mdx';
 import './storyInteractiveTag.scss';
 import { Text } from '../Text';
 import Button from '../Button';
 
 export default {
-  title: 'Experimental/unstable__InteractiveTag',
+  title: 'Components/Tag',
   component: SelectableTag,
   parameters: {
     docs: {
