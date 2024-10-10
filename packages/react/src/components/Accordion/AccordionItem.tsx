@@ -196,7 +196,6 @@ function AccordionItem({
       </Toggle>
       <div
         ref={content}
-        hidden={!isOpen}
         className={`${prefix}--accordion__wrapper`}
         onTransitionEnd={onAnimationEnd}>
         <div id={id} className={`${prefix}--accordion__content`}>

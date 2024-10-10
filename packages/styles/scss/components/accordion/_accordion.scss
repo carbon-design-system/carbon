@@ -176,11 +176,13 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
   .#{$prefix}--accordion__wrapper {
     // Properties for when the accordion is closed
+    display: none;
     overflow: hidden;
     padding: 0;
     max-block-size: 0;
     opacity: 0;
-    transition: all $duration-fast-02 motion(entrance, productive);
+    transition: all $duration-fast-02 motion(entrance, productive)
+      allow-discrete;
     writing-mode: horizontal-tb;
   }
 
@@ -231,6 +233,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     > .#{$prefix}--accordion__wrapper {
       // Properties for when the accordion is open
+      display: block;
       overflow: visible;
       max-block-size: fit-content;
       opacity: 1;
@@ -242,6 +245,21 @@ $content-padding: 0 0 0 $spacing-05 !default;
       > .#{$prefix}--accordion__arrow {
         fill: $icon-primary;
         transform: rotate(-90deg) #{'/*rtl:ignore*/'};
+      }
+    }
+  }
+  /** starting style also not supported widely
+    * https://caniuse.com/mdn-css_at-rules_starting-style
+    */
+  /* Needs to be after the previous accordion__item--active rule
+     to take effect, as the specificity is the same */
+  /* stylelint-disable-next-line scss/at-rule-no-unknown */
+  @starting-style {
+    .#{$prefix}--accordion__item--active {
+      > .#{$prefix}--accordion__wrapper {
+        padding: 0;
+        max-block-size: 0;
+        opacity: 0;
       }
     }
   }
@@ -382,16 +400,4 @@ $content-padding: 0 0 0 $spacing-05 !default;
     margin-inline-end: 0;
     padding-inline-start: 0;
   }
-}
-
-@mixin -content-visible {
-  block-size: 100%;
-  opacity: 1;
-  visibility: inherit;
-}
-
-@mixin -content-hidden {
-  block-size: 0;
-  opacity: 0;
-  visibility: hidden;
 }
