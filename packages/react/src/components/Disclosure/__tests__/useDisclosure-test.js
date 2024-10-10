@@ -8,7 +8,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { useDisclosure } from '../index.js';
+import { useDisclosure } from '../index';
 import '@testing-library/jest-dom';
 
 describe('useDisclosure', () => {
