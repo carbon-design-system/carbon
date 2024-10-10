@@ -21,10 +21,16 @@ export interface NumberInputSkeletonProps
    * Specify whether the label should be hidden, or not
    */
   hideLabel?: boolean;
+
+  /**
+   * Specify the size of the Number Input.
+   */
+  size?: 'sm' | 'md' | 'lg';
 }
 function NumberInputSkeleton({
   hideLabel,
   className,
+  size = 'md',
   ...rest
 }: NumberInputSkeletonProps) {
   const prefix = usePrefix();
@@ -33,7 +39,9 @@ function NumberInputSkeleton({
       {!hideLabel && (
         <span className={`${prefix}--label ${prefix}--skeleton`} />
       )}
-      <div className={`${prefix}--number ${prefix}--skeleton`} />
+      <div
+        className={`${prefix}--number ${prefix}--skeleton  ${prefix}--number--${size}`}
+      />
     </div>
   );
 }
@@ -48,6 +56,10 @@ NumberInputSkeleton.propTypes = {
    * Specify whether the label should be hidden, or not
    */
   hideLabel: PropTypes.bool,
+  /**
+   * Specify the size of the Number Input.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
 export default NumberInputSkeleton;
