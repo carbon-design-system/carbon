@@ -4908,6 +4908,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "closeButtonDisabled": Object {
+        "type": "bool",
+      },
       "closeButtonLabel": Object {
         "type": "string",
       },
