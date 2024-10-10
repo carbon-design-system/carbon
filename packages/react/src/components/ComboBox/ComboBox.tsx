@@ -851,7 +851,6 @@ const ComboBox = forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          'aria-label': deprecatedAriaLabel || ariaLabel,
           ref: autoAlign ? refs.setFloating : null,
         }),
       [
@@ -905,6 +904,9 @@ const ComboBox = forwardRef(
               aria-haspopup="listbox"
               title={textInput?.current?.value}
               {...getInputProps({
+                'aria-label': titleText
+                  ? undefined
+                  : deprecatedAriaLabel || ariaLabel,
                 'aria-controls': isOpen ? undefined : menuProps.id,
                 placeholder,
                 value: inputValue,
