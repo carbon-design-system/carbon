@@ -1,7 +1,7 @@
 name: Question ❓
 description: Usage question or discussion about Carbon components.
 title: '[Question]: '
-labels: 'type: question ❓'
+labels: ['type: question ❓', 'status: needs triage 🕵️‍♀️']
 body:
   - type: markdown
     attributes:
@@ -23,10 +23,12 @@ body:
       value: '- `#carbon-design-system` for questions about the Design System.'
   - type: markdown
     attributes:
-      value: '- `#carbon-components` for questions about component styles.'
+      value: '- `#carbon-react` for questions about `@carbon/react`.'
   - type: markdown
     attributes:
-      value: '- `#carbon-react` for questions about our React components'
+      value:
+        '- `#carbon-web-components` for questions about
+        `@carbon/web-components`.'
   - type: markdown
     attributes:
       value:

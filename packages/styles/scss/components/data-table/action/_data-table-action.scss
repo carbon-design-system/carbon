@@ -396,8 +396,7 @@
     background-color: $background-brand;
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     inset-block-end: 0;
-    inset-inline-end: 0;
-    inset-inline-start: 0;
+    inset-inline: 0 0;
     opacity: 0;
     pointer-events: none;
     transform: translate3d(0, 48px, 0);
@@ -428,8 +427,7 @@
   .#{$prefix}--action-list .#{$prefix}--btn,
   .#{$prefix}--batch-summary .#{$prefix}--btn {
     color: $text-on-color;
-    padding-inline-end: $spacing-05;
-    padding-inline-start: $spacing-05;
+    padding-inline: $spacing-05 $spacing-05;
     white-space: nowrap;
   }
 
@@ -648,8 +646,7 @@
   .#{$prefix}--table-toolbar--sm .#{$prefix}--btn--primary {
     block-size: convert.to-rem(32px);
     min-block-size: auto;
-    padding-block-end: 0.375rem;
-    padding-block-start: 0.375rem;
+    padding-block: 0.375rem 0.375rem;
   }
 
   .#{$prefix}--table-toolbar--sm

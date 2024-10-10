@@ -390,7 +390,7 @@ const Dropdown = React.forwardRef(
       [`${prefix}--dropdown--readonly`]: readOnly,
       [`${prefix}--dropdown--${size}`]: size,
       [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--dropdown--autoalign`]: autoAlign,
+      [`${prefix}--autoalign`]: autoAlign,
     });
 
     const titleClasses = cx(`${prefix}--label`, {
@@ -424,7 +424,10 @@ const Dropdown = React.forwardRef(
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
-    const toggleButtonProps = getToggleButtonProps();
+    const toggleButtonProps = getToggleButtonProps({
+      'aria-label': ariaLabel || deprecatedAriaLabel,
+    });
+
     const helper =
       helperText && !isFluid ? (
         <div id={helperId} className={helperClasses}>
@@ -523,7 +526,6 @@ const Dropdown = React.forwardRef(
         <ListBox
           onFocus={handleFocus}
           onBlur={handleFocus}
-          aria-label={deprecatedAriaLabel || ariaLabel}
           size={size}
           className={className}
           invalid={invalid}

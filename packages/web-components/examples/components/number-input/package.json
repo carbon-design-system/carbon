@@ -1,0 +1,22 @@
+{
+  "name": "carbon-web-components-number-input-example",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample project for getting started with the Web Components from Carbon.",
+  "license": "Apache-2",
+  "main": "index.html",
+  "scripts": {
+    "build": "vite build",
+    "clean": "rimraf node_modules dist .cache",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@carbon/styles": "^1.34.0",
+    "@carbon/web-components": "latest",
+    "sass": "^1.64.1"
+  },
+  "devDependencies": {
+    "vite": "5.2.14",
+    "rimraf": "^3.0.2"
+  }
+}
