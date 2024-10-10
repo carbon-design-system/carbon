@@ -2,7 +2,7 @@ name: Design defect 🎨
 description: Report a visual design issue
 title: '[Bug]: '
 type: 'bug'
-labels: 'type: bug 🐛'
+labels: ['type: bug 🐛', 'status: needs triage 🕵️‍♀️']
 body:
   - type: markdown
     attributes:
@@ -36,6 +36,7 @@ body:
         - '@carbon/themes'
         - '@carbon/type'
         - '@carbon/upgrade'
+        - '@carbon/web-components'
     validations:
       required: true
   - type: dropdown
