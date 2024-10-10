@@ -12,6 +12,7 @@ import Tag, { SelectableTag, TagSkeleton } from './';
 import DismissibleTag from './DismissibleTag';
 import { AILabel } from '../AILabel';
 import userEvent from '@testing-library/user-event';
+import { Asleep } from '@carbon/icons-react';
 
 const prefix = 'cds';
 
@@ -66,7 +67,6 @@ describe('Tag', () => {
       screen.getByRole('button', { name: 'AI - Show information' })
     ).toBeInTheDocument();
   });
-
 
   describe('Selectable Tag', () => {
     it('should render a selectable tag', () => {
