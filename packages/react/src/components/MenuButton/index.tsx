@@ -261,7 +261,10 @@ MenuButton.propTypes = {
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
-  menuTarget: PropTypes.instanceOf(Element),
+
+  menuTarget: PropTypes.instanceOf(
+    typeof Element !== 'undefined' ? Element : Object
+  ) as React.Validator<Element | null | undefined>,
 };
 
 export { MenuButton };

@@ -4757,6 +4757,12 @@ Map {
         ],
         "type": "oneOf",
       },
+      "menuTarget": Object {
+        "args": Array [
+          [Function],
+        ],
+        "type": "instanceOf",
+      },
       "size": Object {
         "args": Array [
           Array [
