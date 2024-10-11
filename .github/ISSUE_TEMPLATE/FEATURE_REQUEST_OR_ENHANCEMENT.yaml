@@ -1,7 +1,8 @@
 name: Feature request or enhancement 💡
 description: Suggest an idea for this project.
 title: '[Feature Request]: '
-labels: 'type: enhancement 💡'
+type: 'enhancement'
+labels: ['type: enhancement 💡', 'status: needs triage 🕵️‍♀️']
 body:
   - type: markdown
     attributes:
@@ -17,26 +18,34 @@ body:
     attributes:
       label: The problem
       description:
-        'Provide a clear and concise description of what the problem this new feature is trying to solve. (For example, I find it frustrating when...). Be sure to attach screenshots or videos to illustrate the problem.'
+        'Provide a clear and concise description of what the problem this new
+        feature is trying to solve. (For example, I find it frustrating
+        when...). Be sure to attach screenshots or videos to illustrate the
+        problem.'
     validations:
       required: true
   - type: textarea
     id: solution
     attributes:
       label: The solution
-      description: 'Provide a clear and concise description of what you would like to happen instead. Be sure to attach screenshots or videos to illustrate the solution if possible. Design specs are highly encouraged.'
+      description:
+        'Provide a clear and concise description of what you would like to
+        happen instead. Be sure to attach screenshots or videos to illustrate
+        the solution if possible. Design specs are highly encouraged.'
     validations:
       required: true
   - type: textarea
     id: user-research
     attributes:
       label: Examples
-      description: Provide sample content, references, or audits of solutions solving the same problem in other applications/websites.
+      description:
+        Provide sample content, references, or audits of solutions solving the
+        same problem in other applications/websites.
   - type: input
     id: application
     attributes:
       label: Application/PAL
-      description: "What application and/or PAL do you work on?"
+      description: 'What application and/or PAL do you work on?'
   - type: dropdown
     id: priority
     attributes:
@@ -55,7 +64,10 @@ body:
       value:
         '_Carbon is a collaborative system. We encourage teams to build
         components and submit them for integration as either add-ons or core
-        components. To better understand our feature request process and what happends after you submit this issue, [check out the docs](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#type-enhancement-) on Github._'
+        components. To better understand our feature request process and what
+        happends after you submit this issue, [check out the
+        docs](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#type-enhancement-)
+        on Github._'
   - type: checkboxes
     id: terms
     attributes:

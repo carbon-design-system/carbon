@@ -42,6 +42,7 @@ import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
 import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { useFeatureFlag } from '../FeatureFlags';
+import { warning } from '../../internal/warning';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -851,7 +852,7 @@ export interface ActionableNotificationProps
 
   /**
    * @deprecated This prop will be removed in the next major version, v12.
-   * Specify if focus should be moved to the component on render. To meet the spec for alertdialog, this must always be true. If you're setting this to false, explore using StaticNotification instead. https://github.com/carbon-design-system/carbon/pull/15532
+   * Specify if focus should be moved to the component on render. To meet the spec for alertdialog, this must always be true. If you're setting this to false, explore using Callout instead. https://github.com/carbon-design-system/carbon/pull/15532
    */
   hasFocus?: boolean;
 
@@ -1128,10 +1129,14 @@ ActionableNotification.propTypes = {
   closeOnEscape: PropTypes.bool,
 
   /**
-   * Deprecated, please use StaticNotification once it's available. Issue #15532
    * Specify if focus should be moved to the component when the notification contains actions
    */
-  hasFocus: deprecate(PropTypes.bool),
+  hasFocus: deprecate(
+    PropTypes.bool,
+    'hasFocus is deprecated. To conform to accessibility requirements hasFocus ' +
+      'should always be `true` for ActionableNotification. If you were ' +
+      'setting this prop to `false`, consider using the Callout component instead.'
+  ),
 
   /**
    * Specify the close button should be disabled, or not
@@ -1198,12 +1203,11 @@ ActionableNotification.propTypes = {
 };
 
 /**
- * StaticNotification
+ * Callout
  * ==================
  */
 
-export interface StaticNotificationProps
-  extends HTMLAttributes<HTMLDivElement> {
+export interface CalloutProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Pass in the action button label that will be rendered within the ActionableNotification.
    */
@@ -1231,7 +1235,7 @@ export interface StaticNotificationProps
     | 'warning-alt';
 
   /**
-   * Specify whether you are using the low contrast variant of the StaticNotification.
+   * Specify whether you are using the low contrast variant of the Callout.
    */
   lowContrast?: boolean;
 
@@ -1261,7 +1265,7 @@ export interface StaticNotificationProps
   titleId?: string;
 }
 
-export function StaticNotification({
+export function Callout({
   actionButtonLabel,
   children,
   onActionButtonClick,
@@ -1273,7 +1277,7 @@ export function StaticNotification({
   kind = 'error',
   lowContrast,
   ...rest
-}: StaticNotificationProps) {
+}: CalloutProps) {
   const prefix = usePrefix();
   const containerClassName = cx(className, {
     [`${prefix}--actionable-notification`]: true,
@@ -1329,7 +1333,7 @@ export function StaticNotification({
   );
 }
 
-StaticNotification.propTypes = {
+Callout.propTypes = {
   /**
    * Pass in the action button label that will be rendered within the ActionableNotification.
    */
@@ -1358,7 +1362,7 @@ StaticNotification.propTypes = {
   ]),
 
   /**
-   * Specify whether you are using the low contrast variant of the StaticNotification.
+   * Specify whether you are using the low contrast variant of the Callout.
    */
   lowContrast: PropTypes.bool,
 
@@ -1386,4 +1390,31 @@ StaticNotification.propTypes = {
    * Specify the id for the element containing the title
    */
   titleId: PropTypes.string,
+};
+
+// In renaming StaticNotification to Callout, the legacy StaticNotification
+// export and it's types should remain usable until Callout is moved to stable.
+// The StaticNotification component below forwards props to Callout and inherits
+// CalloutProps to ensure consumer usage is not impacted, while providing them
+// a deprecation warning.
+// TODO: remove this when Callout moves to stable OR in v12, whichever is first
+/**
+ * @deprecated Use `CalloutProps` instead.
+ */
+export interface StaticNotificationProps extends CalloutProps {}
+let didWarnAboutDeprecation = false;
+export const StaticNotification: React.FC<StaticNotificationProps> = (
+  props
+) => {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      '`StaticNotification` has been renamed to `Callout`.' +
+        'Run the following codemod to automatically update usages in your' +
+        'project: `npx @carbon/upgrade migrate refactor-to-callout --write`'
+    );
+    didWarnAboutDeprecation = true;
+  }
+
+  return <Callout {...props} />;
 };
