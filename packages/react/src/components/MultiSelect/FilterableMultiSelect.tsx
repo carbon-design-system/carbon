@@ -737,7 +737,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       placeholder,
       preventKeyAction: isOpen,
 
-      onClick: () => !readOnly && handleMenuChange(true),
+      onClick: () => handleMenuChange(true),
       onKeyDown(event: KeyboardEvent<HTMLElement>) {
         const $input = event.target as HTMLInputElement;
         const $value = $input.value;
