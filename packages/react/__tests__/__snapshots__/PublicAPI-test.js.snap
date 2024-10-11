@@ -1392,6 +1392,9 @@ Map {
       "translateWithId": Object {
         "type": "func",
       },
+      "typeahead": Object {
+        "type": "bool",
+      },
       "warn": Object {
         "type": "bool",
       },
@@ -3311,9 +3314,7 @@ Map {
     "render": [Function],
   },
   "FileUploader" => Object {
-    "contextType": Object {
-      "$$typeof": Symbol(react.context),
-    },
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "accept": Object {
         "args": Array [
@@ -3393,6 +3394,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "FileUploaderButton" => Object {
     "propTypes": Object {
@@ -10244,6 +10246,7 @@ Map {
         "type": "node",
       },
       "onChange": Object {
+        "isRequired": true,
         "type": "func",
       },
       "renderSelectedItem": Object {
