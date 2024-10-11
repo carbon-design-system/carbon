@@ -10,7 +10,7 @@ import React, { PropsWithChildren, ReactNode } from 'react';
 import { IdPrefixContext } from '../../internal/useIdPrefix';
 
 type IdPrefixProps = {
-  children: ReactNode;
+  children?: ReactNode;
 
   /**
    * The value used to prefix the auto-generated id placed on some DOM elements
