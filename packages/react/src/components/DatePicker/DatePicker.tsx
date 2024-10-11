@@ -710,10 +710,6 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
 
     function handleOnChange(event) {
-      if (datePickerType == 'single' && closeOnSelect) {
-        calendar.calendarContainer.classList.remove('open');
-      }
-
       const { target } = event;
       if (target === start) {
         lastStartValue.current = start.value;
@@ -730,14 +726,22 @@ const DatePicker = React.forwardRef(function DatePicker(
       if (calendar.selectedDates.length === 0) {
         return;
       }
+    }
 
-      calendar.clear();
-      calendar.input.focus();
+    function handleKeyPress(event) {
+      if (
+        match(event, keys.Enter) &&
+        closeOnSelect &&
+        datePickerType == 'single'
+      ) {
+        calendar.calendarContainer.classList.remove('open');
+      }
     }
 
     if (start) {
       start.addEventListener('keydown', handleArrowDown);
       start.addEventListener('change', handleOnChange);
+      start.addEventListener('keypress', handleKeyPress);
 
       if (calendar && calendar.calendarContainer) {
         // Flatpickr's calendar dialog is not rendered in a landmark causing an
@@ -755,6 +759,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     if (end) {
       end.addEventListener('keydown', handleArrowDown);
       end.addEventListener('change', handleOnChange);
+      end.addEventListener('keypress', handleKeyPress);
     }
 
     //component did unmount equivalent
@@ -779,11 +784,13 @@ const DatePicker = React.forwardRef(function DatePicker(
       if (start) {
         start.removeEventListener('keydown', handleArrowDown);
         start.removeEventListener('change', handleOnChange);
+        start.removeEventListener('keypress', handleKeyPress);
       }
 
       if (end) {
         end.removeEventListener('keydown', handleArrowDown);
         end.removeEventListener('change', handleOnChange);
+        end.removeEventListener('change', handleKeyPress);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

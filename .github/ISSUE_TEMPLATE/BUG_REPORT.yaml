@@ -3,7 +3,7 @@ description:
   Something not working as expected? This is the place to report your issue.
 title: '[Bug]: '
 type: 'bug'
-labels: 'type: bug 🐛'
+labels: ['type: bug 🐛', 'status: needs triage 🕵️‍♀️']
 body:
   - type: markdown
     attributes:
