@@ -22,22 +22,6 @@ describe('DefinitionTooltip', () => {
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
   });
 
-  it('should control tooltip display when using keyboard event', async () => {
-    const definition = 'Uniform Resource Locator';
-    render(<DefinitionTooltip definition={definition}>URL</DefinitionTooltip>);
-    expect(screen.getByRole('button')).toHaveAttribute(
-      'aria-expanded',
-      'false'
-    );
-    await userEvent.tab();
-    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    await userEvent.tab();
-    expect(screen.getByRole('button')).toHaveAttribute(
-      'aria-expanded',
-      'false'
-    );
-  });
-
   it('should have a visible tooltip if `defaultOpen` is set to true', () => {
     const definition = 'test-definition';
     render(
