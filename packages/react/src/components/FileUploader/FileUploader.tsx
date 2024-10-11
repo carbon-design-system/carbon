@@ -156,7 +156,7 @@ const FileUploader = React.forwardRef(
       if (filenameStatus === 'edit') {
         evt.stopPropagation();
         const filteredArray = state.fileNames.filter(
-          (filename) => filename !== nodes[index].innerText.trim()
+          (filename) => filename !== nodes[index]?.innerText?.trim()
         );
 
         updateState({ fileNames: filteredArray });
