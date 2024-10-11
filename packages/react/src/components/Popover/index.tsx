@@ -378,7 +378,6 @@ export const Popover: PopoverComponent = React.forwardRef(
         ['ToggletipButton'].includes(displayName);
       const isAllowedTriggerComponent =
         enableFloatingStyles &&
-        displayName &&
         !['ToggletipContent', 'PopoverContent'].includes(displayName);
 
       if (

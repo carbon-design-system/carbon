@@ -103,13 +103,26 @@ _ComboBox.argTypes = {
   },
 };
 
-export const _ComboButton = () => (
-  <ComboButton label="Primary action">
+export const _ComboButton = (args) => (
+  <ComboButton menuAlignment={args.menuAlignment} label="Primary action">
     <MenuItem label="Second action with a long label description" />
     <MenuItem label="Third action" />
     <MenuItem label="Fourth action" disabled />
   </ComboButton>
 );
+
+_ComboButton.args = {
+  menuAlignment: 'bottom',
+};
+
+_ComboButton.argTypes = {
+  menuAlignment: {
+    options: ['top', 'bottom'],
+    control: {
+      type: 'radio',
+    },
+  },
+};
 
 const items = [
   {
@@ -168,30 +181,37 @@ _Dropdown.argTypes = {
   },
 };
 
-export const _Popover = () => {
+export const _Popover = (args) => {
   const [open, setOpen] = useState(true);
 
   return (
-    <Popover open={open} align="top">
-      <div className="playground-trigger">
-        <CheckboxIcon
-          onClick={() => {
-            setOpen(!open);
-          }}
-        />
-      </div>
-      <PopoverContent className="p-3">
-        <div>
-          <p className="popover-title">This popover uses autoAlign</p>
-          <p className="popover-details">
-            Scroll the container up, down, left or right to observe how the
-            popover will automatically change its position in attempt to stay
-            within the viewport. This works on initial render in addition to on
-            scroll.
-          </p>
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+      }}>
+      <Popover open={open} align={args.align}>
+        <div className="playground-trigger">
+          <CheckboxIcon
+            onClick={() => {
+              setOpen(!open);
+            }}
+          />
         </div>
-      </PopoverContent>
-    </Popover>
+        <PopoverContent className="p-3">
+          <div>
+            <p className="popover-title">This popover uses autoAlign</p>
+            <p className="popover-details">
+              Scroll the container up, down, left or right to observe how the
+              popover will automatically change its position in attempt to stay
+              within the viewport. This works on initial render in addition to
+              on scroll.
+            </p>
+          </div>
+        </PopoverContent>
+      </Popover>
+    </div>
   );
 };
 
@@ -224,25 +244,52 @@ _Popover.argTypes = {
   },
 };
 
-export const _MenuButton = () => (
-  <MenuButton label="Actions">
+export const _MenuButton = (args) => (
+  <MenuButton menuAlignment={args.menuAlignment} label="Actions">
     <MenuItem label="First action" />
     <MenuItem label="Second action that is a longer item to test overflow and title." />
     <MenuItem label="Third action" disabled />
   </MenuButton>
 );
 
-export const _MultiSelect = () => (
+_MenuButton.args = {
+  menuAlignment: 'bottom',
+};
+
+_MenuButton.argTypes = {
+  menuAlignment: {
+    options: ['top', 'bottom'],
+    control: {
+      type: 'radio',
+    },
+  },
+};
+
+export const _MultiSelect = (args) => (
   <MultiSelect
     label="Multiselect Label"
     id="carbon-multiselect-example"
     titleText="Multiselect title"
     helperText="This is helper text"
     items={comboBoxItems}
+    direction={args.direction}
     itemToString={(item) => (item ? item.text : '')}
     selectionFeedback="top-after-reopen"
   />
 );
+
+_MultiSelect.args = {
+  direction: 'bottom',
+};
+
+_MultiSelect.argTypes = {
+  direction: {
+    options: ['top', 'bottom'],
+    control: {
+      type: 'radio',
+    },
+  },
+};
 
 export const _Toggletip = (args) => {
   return (
@@ -298,18 +345,52 @@ _Toggletip.argTypes = {
   },
 };
 
-export const _Tooltip = () => {
+export const _Tooltip = (args) => {
   const tooltipLabel =
     'Scroll the container up, down, left or right to observe how the tooltip will automatically change its position in attempt to stay within the viewport. This works on initial render in addition to on scroll.';
   return (
-    <div>
-      <Tooltip label={tooltipLabel} align="top">
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+      }}>
+      <Tooltip label={tooltipLabel} align={args.align}>
         <button className="sb-tooltip-trigger" type="button">
           <Information />
         </button>
       </Tooltip>
     </div>
   );
+};
+
+_Tooltip.args = {
+  align: 'bottom',
+};
+
+_Tooltip.argTypes = {
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
 };
 
 export const _OverflowMenu = () => {
