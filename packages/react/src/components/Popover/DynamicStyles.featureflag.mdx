@@ -4,16 +4,20 @@ import { Meta } from '@storybook/blocks';
 
 # Dynamically set floating styles
 
-Carbon library currently utilitizes the `@floating-ui` library to handle the
-dynamic positioning of floating elements to their trigger / anchor element and
-collision detection. In the majority of cases, the dynamic positioning of
-elements with the `@floating-ui` 'fixed' strategy will prevent clipping.
+Components with `autoAlign` use the
+[`floating-ui`](https://github.com/floating-ui/floating-ui) library to handle
+the dynamic positioning of floating elements relative to their trigger / anchor
+element. This also includes collision detection that repositions the floating
+element as necessary to keep it visible within the viewport. In the majority of
+cases, the styling from the `floating-ui` 'fixed' positioning strategy prevents
+the floating element from being
+[clipped](https://floating-ui.com/docs/misc#clipping) by an ancestor element.
 
-The 'enable-v12-dynamic-floating-styles' flag can be used if the dynamic styles
-is needed but the collision detection is not desired.
+The `enable-v12-dynamic-floating-styles` flag enables this dynamic styling
+without the collision detection.
 
-**Note**: If the `autoAlign` prop is used, the feature flag won't be necessary
-as the collision detection includes the dynamic styles logic.
+**Note**: The flag has no effect when used with `autoAlign` because `autoAlign`
+includes both the dynamic positioning styles and collision detection.
 
 ## Enable dynamic setting of floating styles
 
