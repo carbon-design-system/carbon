@@ -39,9 +39,7 @@ describe('Tag', () => {
         <DismissibleTag type="red" title="Close tag" text="Tag content" />
       );
 
-      const dismissibleTag = container.querySelector(`.${prefix}--tag--filter`);
-
-      expect(dismissibleTag).toHaveClass(`${prefix}--tag--filter`);
+      expect(container.firstChild).toHaveClass(`${prefix}--tag--filter`);
     });
 
     it('should support onClose event', async () => {
