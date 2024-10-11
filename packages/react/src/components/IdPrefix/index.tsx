@@ -15,7 +15,7 @@ type IdPrefixProps = {
   /**
    * The value used to prefix the auto-generated id placed on some DOM elements
    */
-  prefix: string;
+  prefix?: string;
 };
 
 function IdPrefix({ children, prefix }: PropsWithChildren<IdPrefixProps>) {
