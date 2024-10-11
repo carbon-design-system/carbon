@@ -395,6 +395,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
