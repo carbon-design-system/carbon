@@ -72,11 +72,7 @@ describe('Tag', () => {
     it('should render a selectable tag', () => {
       const { container } = render(<SelectableTag text="Tag content" />);
 
-      const selectableTag = container.querySelector(
-        `.${prefix}--tag--selectable`
-      );
-
-      expect(selectableTag).toHaveClass(`${prefix}--tag--selectable`);
+      expect(container.firstChild).toHaveClass(`${prefix}--tag--selectable`);
     });
 
     it('should select the selectable tag', async () => {
