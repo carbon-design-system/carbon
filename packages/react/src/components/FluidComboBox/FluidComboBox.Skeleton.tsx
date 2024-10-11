@@ -10,7 +10,17 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const FluidComboBoxSkeleton = ({ className, ...rest }) => {
+export interface FluidComboBoxSkeletonProps {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+}
+
+const FluidComboBoxSkeleton: React.FC<FluidComboBoxSkeletonProps> = ({
+  className,
+  ...rest
+}) => {
   const prefix = usePrefix();
   const wrapperClasses = cx(
     className,

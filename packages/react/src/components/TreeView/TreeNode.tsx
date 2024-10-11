@@ -356,11 +356,13 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
             {label}
           </span>
         </div>
-        {expanded && (
-          <ul role="group" className={`${prefix}--tree-node__children`}>
-            {nodesWithProps}
-          </ul>
-        )}
+        <ul
+          role="group"
+          className={classNames(`${prefix}--tree-node__children`, {
+            [`${prefix}--tree-node--hidden`]: !expanded,
+          })}>
+          {nodesWithProps}
+        </ul>
       </li>
     );
   }
