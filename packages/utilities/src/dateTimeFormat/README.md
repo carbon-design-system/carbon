@@ -1,8 +1,9 @@
 # dateTimeFormat
 
-A wrapper utility around `Intl.RelativeTimeFormat` and `Intl.DateTimeFormat` for
-easy use according to the
-[IBM Software Design guidance](https://pages.github.ibm.com/cdai-design/pal/content/date-and-time).
+A wrapper utility around `Intl.RelativeTimeFormat` and `Intl.DateTimeFormat`.
+See the
+[Date and time guidance](https://pages.github.ibm.com/carbon/ibm-products/guidelines/content/date-and-time/)
+provided on the Carbon for IBM Products site.
 
 ## Relative
 

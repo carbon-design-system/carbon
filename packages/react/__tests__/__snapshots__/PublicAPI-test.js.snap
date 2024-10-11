@@ -1395,6 +1395,9 @@ Map {
       "translateWithId": Object {
         "type": "func",
       },
+      "typeahead": Object {
+        "type": "bool",
+      },
       "warn": Object {
         "type": "bool",
       },
