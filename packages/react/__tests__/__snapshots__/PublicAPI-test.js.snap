@@ -1392,6 +1392,9 @@ Map {
       "translateWithId": Object {
         "type": "func",
       },
+      "typeahead": Object {
+        "type": "bool",
+      },
       "warn": Object {
         "type": "bool",
       },
@@ -10244,6 +10247,7 @@ Map {
         "type": "node",
       },
       "onChange": Object {
+        "isRequired": true,
         "type": "func",
       },
       "renderSelectedItem": Object {
