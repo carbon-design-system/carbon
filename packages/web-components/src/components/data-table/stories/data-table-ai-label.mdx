@@ -1,16 +1,16 @@
 import { Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import * as SlugDataTableStories from './ai-label-data-table.stories';
+import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
+import * as AILabelDataTableStories from './data-table-ai-label.stories';
 
-<Meta of={SlugDataTableStories} />
+<Meta of={AILabelDataTableStories} />
 
-# Slug in DataTable
+# AI Label in DataTable
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/slug)
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/ai-label)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/slug)
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/ai-label)
 
 The DataTable supports placing a slug in both the column header and row.
 
@@ -25,10 +25,10 @@ child of `Slug` in a div with slot `body-text`, like so:
 ### JS (via import)
 
 ```javascript
-import '@carbon/web-components/es/components/slug/index.js';
+import '@carbon/web-components/es/components/ai-label/index.js';
 ```
 
-<Markdown>{`${cdnJs({ components: ['slug'] })}`}</Markdown>
+<Markdown>{`${cdnJs({ components: ['ai-label'] })}`}</Markdown>
 <Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
@@ -66,12 +66,12 @@ callout. To achieve this, you can add elements with `slot="actions"` inside the
 </cds-ai-label>
 ```
 
-## Using `slug` in `DataTable`
+## Using `AILabel` in `DataTable`
 
 ### Using as a column header
 
-To use a `Slug` inside a column header, you'll need to add a `slug` to the
-appropriate `cds-table-header-cell`.
+To use a `AILabel` inside a column header, you'll need to add a `ai-label`
+component to the appropriate `cds-table-header-cell`.
 
 ```html
 <cds-table-header-cell>
@@ -84,8 +84,8 @@ appropriate `cds-table-header-cell`.
 
 ### Using in a row
 
-To use a `Slug` inside a `DataTable` row, you'll need to pass in your `Slug`
-component to `cds-table-row`:
+To use a `AILabel` inside a `DataTable` row, you'll need to pass in your
+`ai-label` component to `cds-table-row`:
 
 ```html
 <cds-table-row>

@@ -243,7 +243,7 @@ export const Playground = {
       </style>
       <div class="ai-label-container">
         <cds-ai-label
-          ?autoalign="${autoalign}"
+          ?autoalign=${autoalign}
           alignment="${ifDefined(alignment)}"
           size="${size}"
           kind="${kind}"
