@@ -102,6 +102,21 @@ describe('ComboBox', () => {
     });
   });
 
+  it('should display titleText', () => {
+    render(<ComboBox {...mockProps} titleText="Combobox title" />);
+
+    expect(screen.getByText('Combobox title')).toBeInTheDocument();
+  });
+
+  it('should confirm custom aria-label is on the input', () => {
+    render(<ComboBox {...mockProps} aria-label="custom aria-label" />);
+
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-label',
+      'custom aria-label'
+    );
+  });
+
   it('should select the correct item from the filtered list after text input on click', async () => {
     const user = userEvent.setup();
 

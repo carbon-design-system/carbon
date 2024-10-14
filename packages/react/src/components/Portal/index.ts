@@ -5,9 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
+
+interface PortalProps {
+  /**
+   * Specify the children elements to be rendered inside of the <Portal>
+   */
+  children: ReactNode;
+  /**
+   * Provide a ref for a container node to render the portal
+   */
+  container?: React.RefObject<HTMLElement>;
+}
 
 /**
  * Helper component for rendering content within a portal. By default, the
@@ -15,8 +25,11 @@ import ReactDOM from 'react-dom';
  * the `container` prop. Any `children` provided to this component will be
  * rendered inside of the container.
  */
-function Portal({ container, children }) {
-  const [mountNode, setMountNode] = useState(null);
+function Portal({
+  container,
+  children,
+}: PortalProps): React.ReactPortal | null {
+  const [mountNode, setMountNode] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     setMountNode(container ? container.current : document.body);
@@ -28,21 +41,5 @@ function Portal({ container, children }) {
 
   return null;
 }
-
-Portal.propTypes = {
-  /**
-   * Specify the children elements to be rendered inside of the <Portal>
-   */
-  children: PropTypes.node,
-
-  /**
-   * Provide a ref for a container node to render the portal
-   */
-  container: PropTypes.oneOfType([
-    PropTypes.shape({
-      current: PropTypes.any,
-    }),
-  ]),
-};
 
 export { Portal };

@@ -15,7 +15,7 @@ import {
   StructuredListRow,
   StructuredListInput,
   StructuredListCell,
-} from '@carbon/react';
+} from '../StructuredList';
 import { CheckmarkFilled } from '@carbon/react/icons';
 
 const prefix = 'cds';
@@ -71,9 +71,12 @@ const renderComponent = ({ ...rest } = {}) => {
   );
 };
 
-const structuredListBodyRowGenerator = (numRows, rest) => {
+const structuredListBodyRowGenerator = (numRows, rest, selection) => {
   return Array.apply(null, Array(numRows)).map((n, i) => (
-    <StructuredListRow key={`row-${i}`} onKeyDown={onKeyDownHandlerFn}>
+    <StructuredListRow
+      key={`row-${i}`}
+      onKeyDown={onKeyDownHandlerFn}
+      selection={selection}>
       <StructuredListCell>Row {i}</StructuredListCell>
       <StructuredListCell>Row {i}, Col 2</StructuredListCell>
       <StructuredListCell>
@@ -102,7 +105,7 @@ const structuredListBodyRowGenerator = (numRows, rest) => {
 };
 
 const renderSelectionVariant = ({ ...rest } = {}) => {
-  const { inputProps, wrapperProps } = rest;
+  const { inputProps, wrapperProps, rowSelection } = rest;
   return render(
     <StructuredListWrapper selection {...wrapperProps}>
       <StructuredListHead>
@@ -114,7 +117,7 @@ const renderSelectionVariant = ({ ...rest } = {}) => {
         </StructuredListRow>
       </StructuredListHead>
       <StructuredListBody onKeyDown={onKeyDownBodyHandlerFn}>
-        {structuredListBodyRowGenerator(4, inputProps)}
+        {structuredListBodyRowGenerator(4, inputProps, rowSelection)}
       </StructuredListBody>
     </StructuredListWrapper>
   );
@@ -237,6 +240,12 @@ describe('StructuredList', () => {
       expect(onKeyDownHandlerFn).toHaveBeenCalledTimes(2);
       await user.keyboard('[ArrowDown]');
       expect(onKeyDownHandlerFn).toHaveBeenCalledTimes(3);
+    });
+
+    it('should be able to click on a selected row', async () => {
+      renderSelectionVariant({ rowSelection: true });
+
+      await userEvent.click(screen.getByText('Row 1'));
     });
   });
 

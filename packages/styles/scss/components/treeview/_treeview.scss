@@ -40,6 +40,10 @@
     }
   }
 
+  .#{$prefix}--tree-node--hidden {
+    display: none;
+  }
+
   .#{$prefix}--tree-node__children {
     @include component-reset.reset;
 
