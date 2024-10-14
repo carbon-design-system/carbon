@@ -11,7 +11,8 @@ import remarkGfm from 'remark-gfm';
 import fs from 'fs';
 import glob from 'fast-glob';
 import path from 'path';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import react from '@vitejs/plugin-react';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
 // MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
@@ -65,6 +66,9 @@ const stories = glob
     }
     return true;
   });
+console.log('aaah ', __dirname);
+console.log(path.resolve(__dirname, 'src'));
+console.log(path.resolve(__dirname, '..', '..', '..', 'node_modules'));
 const config = {
   addons: [
     {
@@ -79,14 +83,13 @@ const config = {
       },
     },
     '@storybook/addon-storysource',
-    '@storybook/addon-webpack5-compiler-babel',
     /**
      * For now, the storybook-addon-accessibility-checker fork replaces the @storybook/addon-a11y.
      * Eventually they plan to attempt to get this back into the root addon with the storybook team.
      * See more: https://ibm-studios.slack.com/archives/G01GCBCGTPV/p1697230798817659
      */
-    // '@storybook/addon-a11y',
-    'storybook-addon-accessibility-checker',
+    '@storybook/addon-a11y',
+    // 'storybook-addon-accessibility-checker',
     {
       name: '@storybook/addon-docs',
       options: {
@@ -100,6 +103,9 @@ const config = {
   ],
   core: {
     builder: '@storybook/builder-vite',
+    // options: {
+    //   viteConfigPath: '../../../vite.config.js',
+    // }
   },
   features: {
     previewCsfV3: true,
@@ -122,7 +128,23 @@ const config = {
       define: {
         __DEV__: JSON.stringify(process.env.NODE_ENV === 'development'),
       },
-
+      css: {
+        // postcss: {
+        //   plugins: [
+        //     autoprefixer({
+        //       overrideBrowserslist: ['last 1 version'],
+        //     }),
+        //   ],
+        // },
+        // preprocessorOptions: {
+        // scss: {
+        // api: 'modern',
+        // silenceDeprecations: ['legacy-js-api'],
+        // quietDeps: true,
+        // additionalData: `@use './styles.scss' as *;`
+        // },
+        // },
+      },
       esbuild: {
         include: /\.[jt]sx?$/,
         exclude: [],
@@ -135,8 +157,28 @@ const config = {
           },
         },
       },
+      plugins: [
+        react({
+          // babel: {
+          // presets: ['babel-preset-carbon'],
+          // This instructs Vite to use Babel for the necessary transforms,
+          // babelrc: true,
+          // configFile: true,
+          // },
+        }),
+        tsconfigPaths(),
+      ],
+      // this is not working
+      resolve: {
+        //   alias: {
+        //     '@carbon/react/icons': path.resolve('..', '..', '..', 'node_modules/@carbon/react/icons/src'),
+        //     '@': path.join(__dirname, '../../../node_modules')
+        //   },
+        preserveSymlinks: true,
+      },
     });
   },
+
   docs: {
     autodocs: true,
     defaultName: 'Overview',

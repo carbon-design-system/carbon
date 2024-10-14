@@ -2,7 +2,10 @@
   "extends": "typescript-config-carbon/tsconfig.base.json",
   "compilerOptions": {
     // TODO: Turn back on once stricter typings for internal utitlies are complete
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    // "paths": {
+    //   "@/*": ["../../node_modules/*"], // not working
+    // }
   },
   "include": ["src/**/*", "icons/src/index.ts"],
   "exclude": ["**/*.figma.tsx"]
