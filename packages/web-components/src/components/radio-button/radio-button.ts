@@ -372,7 +372,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         <span class="${prefix}--radio-button__appearance"></span>
         <span class="${innerLabelClasses}"
           ><slot>${labelText}</slot>
-          <slot name="slug" @slotchange="${this._handleSlotChange}"></slot
+          <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot
         ></span>
       </label>
     `;
@@ -382,7 +382,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   /**

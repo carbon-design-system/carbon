@@ -484,7 +484,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
               .value="${this._value}"
               maxlength="${ifNonEmpty(maxCount)}"
               @input="${handleInput}" />
-            <slot name="slug" @slotchange="${handleSlotChange}"></slot>
+            <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>
             ${this.showPasswordVisibilityToggle &&
             (type === INPUT_TYPE.PASSWORD || type === INPUT_TYPE.TEXT)
               ? passwordVisibilityButton()
@@ -505,10 +505,10 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
 
   updated() {
     this.shadowRoot
-      ?.querySelector("slot[name='slug']")
+      ?.querySelector("slot[name='ai-label']")
       ?.classList.toggle(
         `${prefix}--slug--revert`,
-        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
   }
 
@@ -516,7 +516,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   static shadowRootOptions = {

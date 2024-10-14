@@ -158,7 +158,7 @@ class CDSTextarea extends CDSTextInput {
           .value="${this.value}"
           maxlength="${ifNonEmpty(this.maxCount)}"
           @input="${this._handleInput}"></textarea>
-        <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
+        <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
       </div>
       <div class="${helperTextClasses}" ?hidden="${this.invalid || this.warn}">
         <slot name="helper-text"> ${this.helperText} </slot>

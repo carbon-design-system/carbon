@@ -346,10 +346,10 @@ class CDSSelect extends FormMixin(LitElement) {
     }
 
     this.shadowRoot
-      ?.querySelector("slot[name='slug']")
+      ?.querySelector("slot[name='ai-label']")
       ?.classList.toggle(
         `${prefix}--slug--revert`,
-        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
   }
 
@@ -438,7 +438,7 @@ class CDSSelect extends FormMixin(LitElement) {
         ${this._renderItems(this)}
       </select>
       ${ChevronDown16({ class: `${prefix}--select__arrow` })}
-      <slot name="slug" @slotchange=${handleSlugSlotChange}></slot>
+      <slot name="ai-label" @slotchange=${handleSlugSlotChange}></slot>
       ${!invalid
         ? undefined
         : WarningFilled16({ class: `${prefix}--select__invalid-icon` })}
@@ -493,7 +493,7 @@ class CDSSelect extends FormMixin(LitElement) {
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   /**

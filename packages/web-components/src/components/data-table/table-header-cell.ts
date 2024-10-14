@@ -231,14 +231,14 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
     }
     return html`<span part="label-text" class="${labelClasses}">
       <slot></slot
-      ><slot name="slug" @slotchange="${this._handleSlugSlotChange}"></slot
+      ><slot name="ai-label" @slotchange="${this._handleSlugSlotChange}"></slot
     ></span> `;
   }
   /**
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   /**

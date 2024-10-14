@@ -786,7 +786,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
     Array.prototype.slice
       .call(this._tableHeaderRow.children)
       .forEach((headerCell, index) => {
-        if (headerCell.querySelector(`${prefix}-slug`)) {
+        if (headerCell.querySelector(`${prefix}-ai-label`)) {
           headerCell.setAttribute('slug', '');
           headersWithSlug.push(index);
         } else {

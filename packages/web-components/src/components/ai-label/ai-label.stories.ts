@@ -14,6 +14,7 @@ import Folders16 from '@carbon/icons/lib/folders/16';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
 import '../icon-button/index';
+import '../button/index';
 import styles from './ai-label-story.scss?lit';
 
 import { POPOVER_ALIGNMENT } from '../popover/defs';
@@ -79,8 +80,10 @@ const actions = html`
 const args = {
   aiTextLabel: '',
   alignment: POPOVER_ALIGNMENT.BOTTOM,
-  kind: 'inline',
+  autoalign: true,
+  kind: 'default',
   revertActive: false,
+  showActions: true,
   size: AI_LABEL_SIZE.EXTRA_SMALL,
 };
 
@@ -95,11 +98,21 @@ const argTypes = {
     description: 'Specify how the popover should align with the button.',
     options: tooltipAlignments,
   },
+  autoalign: {
+    control: 'boolean',
+    description:
+      'Will auto-align the popover. This prop is currently experimental and is subject to future changes.',
+  },
   kind: {
     control: 'radio',
     description:
       'Specify the type of AI Label, from the following list of types: <code>default</code>, <code>hollow</code>, or <code>inline</code>.',
     options: ['default', 'inline'],
+  },
+  showActions: {
+    control: 'boolean',
+    description:
+      'Storybook only - Specify whether to show action items in AI Label callout',
   },
   size: {
     control: 'select',
@@ -120,41 +133,42 @@ export const Default = {
         ${styles}
       </style>
       <div class="ai-label-container">
-        <cds-ai-label size="mini" alignment="bottom-left">
+        <cds-ai-label autoalign size="mini" alignment="bottom-left">
           ${content}${actions}
         </cds-ai-label>
-        <cds-ai-label size="2xs" alignment="bottom-left">
+        <cds-ai-label autoalign size="2xs" alignment="bottom-left">
           ${content}${actions}
         </cds-ai-label>
-        <cds-ai-label size="xs" alignment="bottom-left">
+        <cds-ai-label autoalign size="xs" alignment="bottom-left">
           ${content}${actions}
         </cds-ai-label>
-        <cds-ai-label size="sm" alignment="bottom-left">
+        <cds-ai-label autoalign size="sm" alignment="bottom-left">
           ${content}${actions}
         </cds-ai-label>
-        <cds-ai-label size="md" alignment="bottom-left" open>
+        <cds-ai-label autoalign size="md" alignment="bottom-left">
           ${content} ${actions}</cds-ai-label
         >
-        <cds-ai-label size="lg" alignment="bottom-left">
+        <cds-ai-label autoalign size="lg" alignment="bottom-left">
           ${content} ${actions}</cds-ai-label
         >
-        <cds-ai-label size="xl" alignment="bottom-left">
+        <cds-ai-label autoalign size="xl" alignment="bottom-left">
           ${content} ${actions}</cds-ai-label
         >
       </div>
       <div class="ai-label-container">
-        <cds-ai-label size="sm" kind="inline" alignment="bottom-left">
+        <cds-ai-label autoalign size="sm" kind="inline" alignment="bottom-left">
           ${content}${actions}
         </cds-ai-label>
-        <cds-ai-label size="md" kind="inline" alignment="bottom-left">
+        <cds-ai-label autoalign size="md" kind="inline" alignment="bottom-left">
           ${content}${actions}
         </cds-ai-label>
-        <cds-ai-label size="lg" kind="inline" alignment="bottom-left">
+        <cds-ai-label autoalign size="lg" kind="inline" alignment="bottom-left">
           ${content}${actions}
         </cds-ai-label>
       </div>
       <div class="ai-label-container">
         <cds-ai-label
+          autoalign
           size="sm"
           kind="inline"
           ai-text-label="Text goes here"
@@ -162,6 +176,7 @@ export const Default = {
           ${content}${actions}
         </cds-ai-label>
         <cds-ai-label
+          autoalign
           size="md"
           kind="inline"
           ai-text-label="Text goes here"
@@ -169,6 +184,7 @@ export const Default = {
           ${content}${actions}
         </cds-ai-label>
         <cds-ai-label
+          autoalign
           size="lg"
           kind="inline"
           ai-text-label="Text goes here"
@@ -180,33 +196,10 @@ export const Default = {
   },
 };
 
-export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const { alignment, aiTextLabel, kind, revertActive, size } = args ?? {};
-    return html`
-      <style>
-        ${styles}
-      </style>
-      <div class="ai-label-container">
-        <cds-ai-label
-          alignment="${ifDefined(alignment)}"
-          size="${size}"
-          kind="${kind}"
-          ai-text-label="${aiTextLabel}"
-          ?revert-active="${revertActive}">
-          ${content} ${actions}
-        </cds-ai-label>
-      </div>
-    `;
-  },
-};
-
-export const Callout = {
+export const ExplainabilityPopover = {
   args: {
     alignment: tooltipAlignments.bottom,
-    showActions: false,
+    showActions: true,
   },
   argTypes: {
     alignment: {
@@ -216,7 +209,8 @@ export const Callout = {
     },
     showActions: {
       control: 'boolean',
-      description: 'Specify whether to show action items in AI Label callout',
+      description:
+        'Storybook only - Specify whether to show action items in AI Label callout',
     },
   },
   render: (args) => {
@@ -232,6 +226,36 @@ export const Callout = {
           size="${AI_LABEL_SIZE.EXTRA_SMALL}">
           ${content} ${showActions ? actions : ''}
         </cds-ai-label>
+      </div>
+    `;
+  },
+};
+
+export const Playground = {
+  args,
+  argTypes,
+  render: (args) => {
+    const { alignment, aiTextLabel, autoalign, kind, revertActive, size } =
+      args ?? {};
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div class="ai-label-container">
+        <cds-ai-label
+          ?autoalign="${autoalign}"
+          alignment="${ifDefined(alignment)}"
+          size="${size}"
+          kind="${kind}"
+          ai-text-label="${aiTextLabel}"
+          ?revert-active="${revertActive}">
+          ${content} ${actions}
+        </cds-ai-label>
+      </div>
+      <div style="display: inline-flex">
+        <cds-button>Test</cds-button>
+        <cds-button kind="danger">Test</cds-button>
+        <div></div>
       </div>
     `;
   },

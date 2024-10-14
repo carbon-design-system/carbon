@@ -79,14 +79,14 @@ class CDSTile extends LitElement {
 
   render() {
     return html` <slot></slot
-      ><slot name="slug" @slotchange="${this._handleSlotChange}"></slot>`;
+      ><slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>`;
   }
 
   /**
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   static styles = styles;

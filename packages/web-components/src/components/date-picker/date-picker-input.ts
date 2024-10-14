@@ -316,7 +316,9 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
             @input="${handleInput}"
             ?readonly="${readonly}" />
           ${normalizedProps.icon || this._renderIcon()}
-          <slot name="slug" @slotchange="${this._handleSlugSlotChange}"></slot>
+          <slot
+            name="ai-label"
+            @slotchange="${this._handleSlugSlotChange}"></slot>
         </span>
       </div>
       <div
@@ -334,10 +336,10 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
 
   updated() {
     this.shadowRoot
-      ?.querySelector("slot[name='slug']")
+      ?.querySelector("slot[name='ai-label']")
       ?.classList.toggle(
         `${prefix}--slug--revert`,
-        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
   }
 
@@ -362,7 +364,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   static shadowRootOptions = {

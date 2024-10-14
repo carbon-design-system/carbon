@@ -650,10 +650,10 @@ class CDSDropdown extends ValidityMixin(
       : this.removeAttribute('slug');
 
     this.shadowRoot
-      ?.querySelector("slot[name='slug']")
+      ?.querySelector("slot[name='ai-label']")
       ?.classList.toggle(
         `${prefix}--slug--revert`,
-        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
   }
 
@@ -798,7 +798,7 @@ class CDSDropdown extends ValidityMixin(
             ${ChevronDown16({ 'aria-label': toggleLabel })}
           </div>
         </div>
-        <slot name="slug" @slotchange=${handleSlugSlotChange}></slot>
+        <slot name="ai-label" @slotchange=${handleSlugSlotChange}></slot>
         ${menuBody}
       </div>
       <div
@@ -872,7 +872,7 @@ class CDSDropdown extends ValidityMixin(
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   static shadowRootOptions = {

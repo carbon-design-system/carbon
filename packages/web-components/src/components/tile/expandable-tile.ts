@@ -171,7 +171,7 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
           id: 'icon',
         })}
       </button>
-      <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
+      <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
       <div id="content" class="${prefix}--tile-content">
         <div><slot name="above-the-fold-content"></slot></div>
         <div
@@ -189,7 +189,7 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   /**

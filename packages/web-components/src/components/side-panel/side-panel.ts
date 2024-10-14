@@ -370,7 +370,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   };
 
   private _checkUpdateIconButtonSizes = () => {
-    const slug = this.querySelector(`${prefix}-slug`);
+    const slug = this.querySelector(`${prefix}-ai-label`);
     const otherButtons = this?.shadowRoot?.querySelectorAll(
       '#nav-back-button, #close-button'
     );
@@ -740,7 +740,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
 
         <!-- render slug and close button area -->
         <div class=${`${blockClass}__slug-and-close`}>
-          <slot name="slug" @slotchange=${this._handleSlugChange}></slot>
+          <slot name="ai-label" @slotchange=${this._handleSlugChange}></slot>
           <!-- {normalizedSlug} -->
           <cds-icon-button
             align="bottom-right"

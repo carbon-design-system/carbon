@@ -553,7 +553,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
           name="header-navigation"
           @slotchange=${this._checkSetHasSlot}></slot>
       </div>
-      <slot name="slug" @slotchange=${this._handleSlugChange}></slot>
+      <slot name="ai-label" @slotchange=${this._handleSlugChange}></slot>
       ${this.hasCloseIcon || this?._actionsCount === 0
         ? html`<cds-modal-close-button
             close-button-label=${closeIconDescription}

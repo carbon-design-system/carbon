@@ -201,7 +201,7 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         </div>
         <div class="${prefix}--tile-content"><slot></slot></div>
       </label>
-      <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
+      <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
     `;
   }
 
@@ -209,7 +209,7 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   /**

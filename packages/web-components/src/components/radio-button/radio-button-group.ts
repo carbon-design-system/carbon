@@ -249,7 +249,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
         ${legendText
           ? html` <legend class="${prefix}--label">
               ${legendText}
-              <slot name="slug" @slotchange="${handleSlotChange}"></slot>
+              <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>
             </legend>`
           : ``}
         <slot></slot>
@@ -280,7 +280,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   /**

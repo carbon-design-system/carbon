@@ -321,7 +321,7 @@ class CDSNumberInput extends CDSTextInput {
         </label>
         <div class="${inputWrapperClasses}">
           ${normalizedProps.icon} ${input}
-          <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
+          <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
           <div class="${prefix}--number__controls">
             ${!this.hideSteppers
               ? html`${decrementButton} ${incrementButton}`

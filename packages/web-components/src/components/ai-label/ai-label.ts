@@ -25,7 +25,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-ai-label`)
 export default class CDSAILabel extends CDSToggleTip {
   @property({ reflect: true })
-  slot = 'slug';
+  slot = 'ai-label';
   /**
    * Specify the correct translation of the AI text
    */
@@ -57,7 +57,7 @@ export default class CDSAILabel extends CDSToggleTip {
   revertLabel = 'Revert to AI input';
 
   /**
-   * Slug size should be mini, 2xs, xs, sm, md, lg, xl.
+   * AI Label size should be mini, 2xs, xs, sm, md, lg, xl.
    */
   @property({ reflect: true })
   size = AI_LABEL_SIZE.EXTRA_SMALL;

@@ -185,7 +185,7 @@ class CDSCheckboxGroup extends LitElement {
         ?aria-describedby=${!invalid && !warn && helper ? helperId : undefined}>
         <legend class="${prefix}--label" id=${legendId || ariaLabelledBy}>
           ${legendText}
-          <slot name="slug" @slotchange="${handleSlotChange}"></slot>
+          <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>
         </legend>
         <slot></slot>
         <div class="${prefix}--checkbox-group__validation-msg">
@@ -222,7 +222,7 @@ class CDSCheckboxGroup extends LitElement {
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   static shadowRootOptions = {

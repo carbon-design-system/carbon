@@ -258,7 +258,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
           >${labelText ? labelText : html`<slot></slot>`}</span
         >
       </label>
-      <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
+      <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
       <div class="${prefix}--checkbox__validation-msg">
         ${!readonly && invalid
           ? html`
@@ -292,7 +292,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   static shadowRootOptions = {

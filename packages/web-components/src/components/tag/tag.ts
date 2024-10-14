@@ -141,7 +141,7 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
     return html`
       <slot name="icon"></slot>
       <slot></slot>
-      <slot name="slug" @slotchange="${handleSlugSlotChange}"></slot>
+      <slot name="ai-label" @slotchange="${handleSlugSlotChange}"></slot>
       ${filter
         ? html`
             <button class="${prefix}--tag__close-icon" ?disabled=${disabled}>
@@ -156,7 +156,7 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   /**

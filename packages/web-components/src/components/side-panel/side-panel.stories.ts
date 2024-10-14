@@ -271,7 +271,7 @@ const slugs = {
 const getSlug = (index) => {
   switch (index) {
     case 1:
-      return html`<cds-slug size="xs" alignment="bottom-right">
+      return html`<cds-ai-label size="xs" alignment="bottom-right">
         <div slot="body-text">
           <p class="secondary">AI Explained</p>
           <h1>84%</h1>
@@ -284,7 +284,7 @@ const getSlug = (index) => {
           <p class="secondary">Model type</p>
           <p class="bold">Foundation model</p>
         </div>
-      </cds-slug>`;
+      </cds-ai-label>`;
     default:
       return null;
   }

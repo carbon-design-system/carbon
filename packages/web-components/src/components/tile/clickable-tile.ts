@@ -82,7 +82,7 @@ class CDSClickableTile extends CDSLink {
    * A selector that will return the slug item.
    */
   static get slugItem() {
-    return `${prefix}-slug`;
+    return `${prefix}-ai-label`;
   }
 
   static styles = styles;
