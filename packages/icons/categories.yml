@@ -560,7 +560,6 @@ categories:
           - thumbs-down
           - thumbs-down--filled
           - thumbs-up
-          - thumbs-up-double
           - thumbs-up--filled
           - thumbs-up-double
           - thumbs-up-double--filled
@@ -1100,7 +1099,7 @@ categories:
           - U2
           - U3
           - X
-          - Y 
+          - Y
           - Z
   - name: Organization
     subcategories:
