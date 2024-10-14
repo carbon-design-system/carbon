@@ -2959,6 +2959,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "tagTitle": Object {
         "type": "string",
       },
