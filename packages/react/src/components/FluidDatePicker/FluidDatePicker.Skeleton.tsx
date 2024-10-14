@@ -12,11 +12,22 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 import { Calendar } from '@carbon/icons-react';
 
-function FluidDatePickerSkeleton({
+export interface FluidDatePickerSkeletonProps {
+  /**
+   * Specify an optional className to be applied to the outer FluidForm wrapper
+   */
+  className?: string;
+  /**
+   * Specify which variant of the DatePicker the skeleton should mimic
+   */
+  datePickerType?: 'simple' | 'single' | 'range';
+}
+
+const FluidDatePickerSkeleton: React.FC<FluidDatePickerSkeletonProps> = ({
   className,
   datePickerType = 'single',
   ...other
-}) {
+}) => {
   const prefix = usePrefix();
 
   const classNames = classnames(
@@ -54,7 +65,7 @@ function FluidDatePickerSkeleton({
       </div>
     </FormContext.Provider>
   );
-}
+};
 
 FluidDatePickerSkeleton.propTypes = {
   /**

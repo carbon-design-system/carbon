@@ -6,7 +6,9 @@
  */
 
 import FluidComboBox from './FluidComboBox';
-
+import type { FluidComboBoxProps } from './FluidComboBox';
+import type { FluidComboBoxSkeletonProps } from './FluidComboBox.Skeleton';
+export type { FluidComboBoxProps, FluidComboBoxSkeletonProps };
 export default FluidComboBox;
 export { FluidComboBox };
 export { default as FluidComboBoxSkeleton } from './FluidComboBox.Skeleton';
