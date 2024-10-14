@@ -8,11 +8,12 @@
 import { Add } from '@carbon/icons-react';
 import { getByRole, render, screen } from '@testing-library/react';
 import React from 'react';
-import Tag, { SelectableTag, TagSkeleton } from './';
+import Tag, { OperationalTag, SelectableTag, TagSkeleton } from './';
 import DismissibleTag from './DismissibleTag';
 import { AILabel } from '../AILabel';
 import userEvent from '@testing-library/user-event';
 import { Asleep } from '@carbon/icons-react';
+import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
 
@@ -103,6 +104,37 @@ describe('Tag', () => {
       const skeletonTag = container.querySelector(`.${prefix}--tag`);
 
       expect(skeletonTag).toHaveClass(`${prefix}--layout--size-sm`);
+    });
+  });
+
+  describe('Operational Tag', () => {
+    it('should render a operational state', () => {
+      const { container } = render(
+        <OperationalTag type="red" className="some-class" text="Tag content" />
+      );
+
+      const operationalTag = container.querySelector(
+        `.${prefix}--tag--operational `
+      );
+
+      expect(operationalTag).toHaveClass(`${prefix}--tag--operational `);
+    });
+
+    it('should accept other props such as onClick', async () => {
+      const onClick = jest.fn();
+
+      const { container } = render(
+        <OperationalTag
+          type="red"
+          className="some-class"
+          text="Tag content"
+          onClick={onClick}
+        />
+      );
+
+      await userEvent.click(screen.getByRole('button'));
+
+      expect(onClick).toHaveBeenCalled();
     });
   });
 
