@@ -18,4 +18,6 @@ export {
   type ActionableNotificationProps,
   StaticNotification,
   type StaticNotificationProps,
+  Callout,
+  type CalloutProps,
 } from './Notification';

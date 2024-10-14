@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { FluidSearchProps } from './FluidSearch';
-import { FluidSearchSkeletonProps } from './FluidSearch.Skeleton';
+import type { FluidSearchProps } from './FluidSearch';
+import type { FluidSearchSkeletonProps } from './FluidSearch.Skeleton';
 export { default, default as FluidSearch } from './FluidSearch';
 export { type FluidSearchProps, type FluidSearchSkeletonProps };
 export { default as FluidSearchSkeleton } from './FluidSearch.Skeleton';
