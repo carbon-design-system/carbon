@@ -10915,7 +10915,7 @@
     - shapes
     - platform
   sizes:
-    - 32   
+    - 32
 - name: ibm--vpn-for-vpc
   friendly_name: IBM® VPN for VPC
   aliases:
