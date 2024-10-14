@@ -38,12 +38,27 @@ export default {
 
 export const Default = () => {
   return (
-    <Grid>
-      <Column sm={4} />
-      <Column sm={4} />
-      <Column sm={4} />
-      <Column sm={4} />
-    </Grid>
+    <>
+      REVERT CHANGES BEFORE MERGE
+      <Grid>
+        <Column sm={4} />
+        <Column sm={4} />
+        <Column sm={4} />
+        <Column sm={4} />
+      </Grid>
+      <Grid align="start">
+        <Column sm={4} />
+        <Column sm={4} />
+        <Column sm={4} />
+        <Column sm={4} />
+      </Grid>
+      <Grid align="end">
+        <Column sm={4} />
+        <Column sm={4} />
+        <Column sm={4} />
+        <Column sm={4} />
+      </Grid>
+    </>
   );
 };
 
