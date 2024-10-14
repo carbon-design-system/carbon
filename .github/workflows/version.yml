@@ -28,7 +28,7 @@ jobs:
     if: github.repository == 'carbon-design-system/carbon'
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
+      - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4.2.1
         with:
           fetch-depth: '0'
       - name: Use Node.js 20.x
