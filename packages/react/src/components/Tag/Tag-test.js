@@ -5,15 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Add } from '@carbon/icons-react';
-import { getByRole, render, screen } from '@testing-library/react';
 import React from 'react';
-import Tag, { OperationalTag, SelectableTag, TagSkeleton } from './';
-import DismissibleTag from './DismissibleTag';
+import { render, screen } from '@testing-library/react';
+import Tag, {
+  OperationalTag,
+  SelectableTag,
+  DismissibleTag,
+  TagSkeleton,
+} from './';
 import { AILabel } from '../AILabel';
 import userEvent from '@testing-library/user-event';
-import { Asleep } from '@carbon/icons-react';
-import userEvent from '@testing-library/user-event';
+import { Asleep, Add } from '@carbon/icons-react';
 
 const prefix = 'cds';
 
