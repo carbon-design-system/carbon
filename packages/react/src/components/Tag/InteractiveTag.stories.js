@@ -10,14 +10,12 @@ import { default as Tag } from '.';
 import { default as SelectableTag } from './SelectableTag';
 import { default as OperationalTag } from './OperationalTag';
 import { default as DismissibleTag } from './DismissibleTag';
-import { Asleep, FolderOpen, Folders, View } from '@carbon/icons-react';
+import { Asleep } from '@carbon/icons-react';
 import { Popover, PopoverContent } from '../Popover';
 import mdx from './Tag.mdx';
 import './storyInteractiveTag.scss';
 import { Text } from '../Text';
 import Button from '../Button';
-import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
-import { IconButton } from '../IconButton';
 
 export default {
   title: 'Components/Tag',
@@ -359,37 +357,6 @@ export const Dismissible = (args) => {
     setRenderedTags(tags);
   };
 
-  const aiLabel = (
-    <AILabel className="slug-container">
-      <AILabelContent>
-        <div>
-          <p className="secondary">AI Explained</p>
-          <h1>84%</h1>
-          <p className="secondary bold">Confidence score</p>
-          <p className="secondary">
-            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-          </p>
-          <hr />
-          <p className="secondary">Model type</p>
-          <p className="bold">Foundation model</p>
-        </div>
-        <AILabelActions>
-          <IconButton kind="ghost" label="View">
-            <View />
-          </IconButton>
-          <IconButton kind="ghost" label="Open Folder">
-            <FolderOpen />
-          </IconButton>
-          <IconButton kind="ghost" label="Folders">
-            <Folders />
-          </IconButton>
-          <Button>View details</Button>
-        </AILabelActions>
-      </AILabelContent>
-    </AILabel>
-  );
-
   return (
     <>
       <Button
@@ -402,7 +369,6 @@ export const Dismissible = (args) => {
       <div aria-label="Dismissible tags" role="group">
         {renderedTags.map((tag, index) => (
           <DismissibleTag
-            slug={aiLabel}
             key={index}
             type={tag.type}
             className="some-class"
