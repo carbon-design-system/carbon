@@ -64,7 +64,7 @@ jobs:
         uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.4
         with:
           node-version: '20.x'
-      - uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 #v4.1.0
+      - uses: actions/cache@3624ceb22c1c5a301c8db4169662070a689d9ea8 #v4.1.1
         id: cache
         with:
           path: |
@@ -92,7 +92,7 @@ jobs:
         uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.4
         with:
           node-version: '20.x'
-      - uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2 #v4.1.0
+      - uses: actions/cache@3624ceb22c1c5a301c8db4169662070a689d9ea8 #v4.1.1
         id: cache
         with:
           path: |
