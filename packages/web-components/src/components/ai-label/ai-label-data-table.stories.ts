@@ -43,7 +43,7 @@ const actions = html`
     ${Folders16({ slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
-  <cds-slug-action-button>View Literature</cds-slug-action-button>
+  <cds-ai-label-action-button>View Literature</cds-ai-label-action-button>
 `;
 
 export const _ColumnSlugSort = {
@@ -63,8 +63,8 @@ export const _ColumnSlugSort = {
             <cds-table-header-cell>Rule</cds-table-header-cell>
             <cds-table-header-cell
               >Attached groups
-              <cds-slug alignment="bottom-left"
-                >${content}${actions}</cds-slug
+              <cds-ai-label alignment="bottom-left"
+                >${content}${actions}</cds-ai-label
               ></cds-table-header-cell
             >
             <cds-table-header-cell>Status</cds-table-header-cell>
@@ -143,7 +143,9 @@ export const _ColumnSlugWithSelectionAndExpansion = {
             <cds-table-header-cell>Name</cds-table-header-cell>
             <cds-table-header-cell
               >Protocol
-              <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+              <cds-ai-label alignment="bottom-left"
+                >${content}${actions}</cds-ai-label
+              >
             </cds-table-header-cell>
             <cds-table-header-cell>Port</cds-table-header-cell>
             <cds-table-header-cell>Rule</cds-table-header-cell>
@@ -269,7 +271,9 @@ export const _SlugWithExpansion = {
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row>
-            <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left"
+              >${content}${actions}</cds-ai-label
+            >
             <cds-table-cell>Load Balancer 1</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
             <cds-table-cell>443</cds-table-cell>
@@ -294,7 +298,9 @@ export const _SlugWithExpansion = {
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row>
-            <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left"
+              >${content}${actions}</cds-ai-label
+            >
             <cds-table-cell>Load Balancer 6</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
             <cds-table-cell>3000</cds-table-cell>
@@ -309,7 +315,9 @@ export const _SlugWithExpansion = {
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row>
-            <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left"
+              >${content}${actions}</cds-ai-label
+            >
             <cds-table-cell>Load Balancer 4</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
             <cds-table-cell>443</cds-table-cell>
@@ -370,7 +378,9 @@ export const _SlugWithRadioSelection = {
             >
           </cds-table-row>
           <cds-table-row selection-name="1">
-            <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left"
+              >${content}${actions}</cds-ai-label
+            >
 
             <cds-table-cell>Load Balancer 1</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
@@ -388,7 +398,9 @@ export const _SlugWithRadioSelection = {
             <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-row selection-name="3">
-            <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left"
+              >${content}${actions}</cds-ai-label
+            >
 
             <cds-table-cell>Load Balancer 6</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
@@ -400,7 +412,9 @@ export const _SlugWithRadioSelection = {
             >
           </cds-table-row>
           <cds-table-row selection-name="4">
-            <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left"
+              >${content}${actions}</cds-ai-label
+            >
 
             <cds-table-cell>Load Balancer 4</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
@@ -454,7 +468,9 @@ export const SlugWithSelection = {
             >
           </cds-table-row>
           <cds-table-row selection-name="1">
-            <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left"
+              >${content}${actions}</cds-ai-label
+            >
             <cds-table-cell>Load Balancer 1</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
             <cds-table-cell>443</cds-table-cell>
@@ -471,7 +487,9 @@ export const SlugWithSelection = {
             <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-row selection-name="3">
-            <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left"
+              >${content}${actions}</cds-ai-label
+            >
             <cds-table-cell>Load Balancer 6</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
             <cds-table-cell>3000</cds-table-cell>
@@ -482,7 +500,9 @@ export const SlugWithSelection = {
             >
           </cds-table-row>
           <cds-table-row selection-name="4">
-            <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left"
+              >${content}${actions}</cds-ai-label
+            >
             <cds-table-cell>Load Balancer 4</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
             <cds-table-cell>443</cds-table-cell>
@@ -539,7 +559,9 @@ export const SlugWithSelectionAndExpansion = {
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row selection-name="1">
-            <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left"
+              >${content}${actions}</cds-ai-label
+            >
             <cds-table-cell>Load Balancer 1</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
             <cds-table-cell>443</cds-table-cell>
@@ -564,7 +586,9 @@ export const SlugWithSelectionAndExpansion = {
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row selection-name="3">
-            <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left"
+              >${content}${actions}</cds-ai-label
+            >
             <cds-table-cell>Load Balancer 6</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
             <cds-table-cell>3000</cds-table-cell>
@@ -579,7 +603,9 @@ export const SlugWithSelectionAndExpansion = {
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row selection-name="4">
-            <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left"
+              >${content}${actions}</cds-ai-label
+            >
             <cds-table-cell>Load Balancer 4</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
             <cds-table-cell>443</cds-table-cell>

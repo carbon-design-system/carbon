@@ -15,13 +15,13 @@ $css--plex: true !default;
   @include emit-layout-tokens();
 
   outline: none;
-  ::slotted(#{$prefix}-slug) {
+  ::slotted(#{$prefix}-ai-label) {
     position: absolute;
     inset-block-start: $spacing-04;
     inset-inline-end: $spacing-05;
   }
 
-  ::slotted(#{$prefix}-slug[revert-active]) {
+  ::slotted(#{$prefix}-ai-label[revert-active]) {
     inset-block-start: $spacing-02;
     inset-inline-end: $spacing-03;
     transform: translate(0);
@@ -43,11 +43,11 @@ $css--plex: true !default;
     }
   }
 
-  ::slotted(#{$prefix}-slug) {
+  ::slotted(#{$prefix}-ai-label) {
     inset-inline-end: $spacing-08;
   }
 
-  ::slotted(#{$prefix}-slug[revert-active]) {
+  ::slotted(#{$prefix}-ai-label[revert-active]) {
     inset-inline-end: $spacing-07;
   }
 }

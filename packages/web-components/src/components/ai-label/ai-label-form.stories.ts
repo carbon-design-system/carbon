@@ -82,7 +82,7 @@ const actions = html`
     ${Folders16({ slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
-  <cds-slug-action-button>View details</cds-slug-action-button>
+  <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
 export const _AIForm = {
@@ -135,9 +135,11 @@ export const _AIForm = {
                 invalid-text="${invalidText}"
                 ?warn="${warn}"
                 warn-text="${warnText}">
-                <cds-slug alignment="bottom-left" ?revert-active="${revert}">
+                <cds-ai-label
+                  alignment="bottom-left"
+                  ?revert-active="${revert}">
                   ${content}${actions}
-                </cds-slug>
+                </cds-ai-label>
               </cds-number-input>
             </cds-form-item>
 
@@ -152,8 +154,10 @@ export const _AIForm = {
                   invalid-text="${invalidText}"
                   ?warn="${warn}"
                   warn-text="${warnText}">
-                  <cds-slug alignment="bottom-left" ?revert-active="${revert}">
-                    ${content}${actions}</cds-slug
+                  <cds-ai-label
+                    alignment="bottom-left"
+                    ?revert-active="${revert}">
+                    ${content}${actions}</cds-ai-label
                   >
                 </cds-date-picker-input>
               </cds-date-picker>
@@ -168,8 +172,10 @@ export const _AIForm = {
                 invalid-text="${invalidText}"
                 ?warn="${warn}"
                 warn-text="${warnText}">
-                <cds-slug alignment="bottom-left" ?revert-active="${revert}">
-                  ${content}${actions}</cds-slug
+                <cds-ai-label
+                  alignment="bottom-left"
+                  ?revert-active="${revert}">
+                  ${content}${actions}</cds-ai-label
                 >
               </cds-text-input>
             </cds-form-item>
@@ -183,8 +189,10 @@ export const _AIForm = {
                 invalid-text="${invalidText}"
                 ?warn="${warn}"
                 warn-text="${warnText}">
-                <cds-slug alignment="bottom-left" ?revert-active="${revert}">
-                  ${content}${actions}</cds-slug
+                <cds-ai-label
+                  alignment="bottom-left"
+                  ?revert-active="${revert}">
+                  ${content}${actions}</cds-ai-label
                 >
               </cds-textarea>
             </cds-form-item>
@@ -199,8 +207,10 @@ export const _AIForm = {
                 invalid-text="${invalidText}"
                 ?warn="${warn}"
                 warn-text="${warnText}">
-                <cds-slug alignment="bottom-left" ?revert-active="${revert}">
-                  ${content}${actions}</cds-slug
+                <cds-ai-label
+                  alignment="bottom-left"
+                  ?revert-active="${revert}">
+                  ${content}${actions}</cds-ai-label
                 >
                 ${items.map(
                   (elem) => html`
@@ -223,8 +233,8 @@ export const _AIForm = {
               invalid-text="${invalidText}"
               ?warn="${warn}"
               warn-text="${warnText}">
-              <cds-slug alignment="bottom-left" ?revert-active="${revert}">
-                ${content}${actions}</cds-slug
+              <cds-ai-label alignment="bottom-left" ?revert-active="${revert}">
+                ${content}${actions}</cds-ai-label
               >
               <cds-multi-select-item value="example">
                 An example option that is really long to show what should be
@@ -256,8 +266,8 @@ export const _AIForm = {
               invalid-text="${invalidText}"
               ?warn="${warn}"
               warn-text="${warnText}">
-              <cds-slug alignment="bottom-left" ?revert-active="${revert}">
-                ${content}${actions}</cds-slug
+              <cds-ai-label alignment="bottom-left" ?revert-active="${revert}">
+                ${content}${actions}</cds-ai-label
               >
               <cds-multi-select-item value="example"
                 >An example option that is really long to show what should be
@@ -289,8 +299,8 @@ export const _AIForm = {
               invalid-text="${invalidText}"
               ?warn="${warn}"
               warn-text="${warnText}">
-              <cds-slug alignment="bottom-left" ?revert-active="${revert}">
-                ${content}${actions}</cds-slug
+              <cds-ai-label alignment="bottom-left" ?revert-active="${revert}">
+                ${content}${actions}</cds-ai-label
               >
 
               <cds-combo-box-item value="all">Option 1</cds-combo-box-item>
@@ -314,8 +324,8 @@ export const _AIForm = {
               invalid-text="${invalidText}"
               ?warn="${warn}"
               warn-text="${warnText}">
-              <cds-slug alignment="bottom-left" ?revert-active="${revert}">
-                ${content}${actions}</cds-slug
+              <cds-ai-label alignment="bottom-left" ?revert-active="${revert}">
+                ${content}${actions}</cds-ai-label
               >
               <cds-select-item-group label="Category 1">
                 <cds-select-item value="all">Option 1</cds-select-item>
@@ -340,13 +350,15 @@ export const _RevertTest = {
   render: () => {
     const handleInput = (event) => {
       event.target
-        ?.querySelector('cds-slug')
+        ?.querySelector('cds-ai-label')
         ?.setAttribute('revert-active', '');
     };
 
     const handleRevert = (value) => {
       return (event) => {
-        (event.target as HTMLElement).parentElement?.querySelector('cds-slug')
+        (event.target as HTMLElement).parentElement?.querySelector(
+          'cds-ai-label'
+        )
           ? (event.target as HTMLElement).parentElement?.setAttribute(
               'value',
               value
@@ -364,10 +376,10 @@ export const _RevertTest = {
                 label="Sample AI Input"
                 value="Generated AI content"
                 @input="${handleInput}">
-                <cds-slug
+                <cds-ai-label
                   alignment="bottom-left"
                   @click="${handleRevert('Generated AI content')}"
-                  >${content}</cds-slug
+                  >${content}</cds-ai-label
                 >
               </cds-text-input>
             </cds-form-item>
@@ -380,8 +392,10 @@ export const _RevertTest = {
                 step="1"
                 label="Sample AI Input"
                 @cds-number-input="${handleInput}">
-                <cds-slug alignment="bottom-left" @click="${handleRevert('11')}"
-                  >${content}</cds-slug
+                <cds-ai-label
+                  alignment="bottom-left"
+                  @click="${handleRevert('11')}"
+                  >${content}</cds-ai-label
                 >
               </cds-number-input>
             </cds-form-item>

@@ -20,7 +20,7 @@
 @use '../popover/popover.scss' as *;
 
 :host(#{$prefix}-toggletip),
-:host(#{$prefix}-slug) {
+:host(#{$prefix}-ai-label) {
   // TODO: audit
   @extend .#{$prefix}--toggletip;
 
@@ -35,7 +35,7 @@
   }
 }
 
-:host(#{$prefix}-slug[open][autoalign]),
+:host(#{$prefix}-ai-label[open][autoalign]),
 :host(#{$prefix}-toggletip[open][autoalign]) {
   .#{$prefix}--popover-content {
     display: block;

@@ -70,7 +70,7 @@ $css--plex: true !default;
     }
   }
 
-  ::slotted(#{$prefix}-slug) {
+  ::slotted(#{$prefix}-ai-label) {
     pointer-events: none;
   }
 }
@@ -181,14 +181,14 @@ $css--plex: true !default;
 :host(#{$prefix}-expandable-tile),
 :host(#{$prefix}-clickable-tile),
 :host(#{$prefix}-selectable-tile) {
-  ::slotted(#{$prefix}-slug) {
+  ::slotted(#{$prefix}-ai-label) {
     position: absolute;
     inset-block-start: $spacing-05;
     inset-inline-end: $spacing-05;
   }
 }
 
-:host(#{$prefix}-selectable-tile) ::slotted(#{$prefix}-slug) {
+:host(#{$prefix}-selectable-tile) ::slotted(#{$prefix}-ai-label) {
   inset-inline-end: $spacing-08;
 }
 

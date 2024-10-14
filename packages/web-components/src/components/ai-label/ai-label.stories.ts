@@ -14,10 +14,10 @@ import Folders16 from '@carbon/icons/lib/folders/16';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
 import '../icon-button/index';
-import styles from './slug-story.scss?lit';
+import styles from './ai-label-story.scss?lit';
 
 import { POPOVER_ALIGNMENT } from '../popover/defs';
-import { SLUG_SIZE } from './defs';
+import { AI_LABEL_SIZE } from './defs';
 
 const tooltipAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,
@@ -35,13 +35,14 @@ const tooltipAlignments = {
 };
 
 const sizes = {
-  [`Mini size (${SLUG_SIZE.MINI})`]: SLUG_SIZE.MINI,
-  [`2XS size (${SLUG_SIZE.EXTRA_EXTRA_SMALL})`]: SLUG_SIZE.EXTRA_EXTRA_SMALL,
-  [`XS size (${SLUG_SIZE.EXTRA_SMALL})`]: SLUG_SIZE.EXTRA_SMALL,
-  [`Small size (${SLUG_SIZE.SMALL})`]: SLUG_SIZE.SMALL,
-  [`Medium size (${SLUG_SIZE.MEDIUM})`]: SLUG_SIZE.MEDIUM,
-  [`Large size (${SLUG_SIZE.LARGE})`]: SLUG_SIZE.LARGE,
-  [`XL size (${SLUG_SIZE.EXTRA_LARGE})`]: SLUG_SIZE.EXTRA_LARGE,
+  [`Mini size (${AI_LABEL_SIZE.MINI})`]: AI_LABEL_SIZE.MINI,
+  [`2XS size (${AI_LABEL_SIZE.EXTRA_EXTRA_SMALL})`]:
+    AI_LABEL_SIZE.EXTRA_EXTRA_SMALL,
+  [`XS size (${AI_LABEL_SIZE.EXTRA_SMALL})`]: AI_LABEL_SIZE.EXTRA_SMALL,
+  [`Small size (${AI_LABEL_SIZE.SMALL})`]: AI_LABEL_SIZE.SMALL,
+  [`Medium size (${AI_LABEL_SIZE.MEDIUM})`]: AI_LABEL_SIZE.MEDIUM,
+  [`Large size (${AI_LABEL_SIZE.LARGE})`]: AI_LABEL_SIZE.LARGE,
+  [`XL size (${AI_LABEL_SIZE.EXTRA_LARGE})`]: AI_LABEL_SIZE.EXTRA_LARGE,
 };
 
 const content = html`
@@ -72,7 +73,7 @@ const actions = html`
     ${Folders16({ slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
-  <cds-slug-action-button>View details</cds-slug-action-button>
+  <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
 const args = {
@@ -80,7 +81,7 @@ const args = {
   alignment: POPOVER_ALIGNMENT.BOTTOM,
   kind: 'inline',
   revertActive: false,
-  size: SLUG_SIZE.EXTRA_SMALL,
+  size: AI_LABEL_SIZE.EXTRA_SMALL,
 };
 
 const argTypes = {
@@ -97,7 +98,7 @@ const argTypes = {
   kind: {
     control: 'radio',
     description:
-      'Specify the type of Slug, from the following list of types: <code>default</code>, <code>hollow</code>, or <code>inline</code>.',
+      'Specify the type of AI Label, from the following list of types: <code>default</code>, <code>hollow</code>, or <code>inline</code>.',
     options: ['default', 'inline'],
   },
   size: {
@@ -118,62 +119,62 @@ export const Default = {
       <style>
         ${styles}
       </style>
-      <div class="slug-container">
-        <cds-slug size="mini" alignment="bottom-left">
+      <div class="ai-label-container">
+        <cds-ai-label size="mini" alignment="bottom-left">
           ${content}${actions}
-        </cds-slug>
-        <cds-slug size="2xs" alignment="bottom-left">
+        </cds-ai-label>
+        <cds-ai-label size="2xs" alignment="bottom-left">
           ${content}${actions}
-        </cds-slug>
-        <cds-slug size="xs" alignment="bottom-left">
+        </cds-ai-label>
+        <cds-ai-label size="xs" alignment="bottom-left">
           ${content}${actions}
-        </cds-slug>
-        <cds-slug size="sm" alignment="bottom-left">
+        </cds-ai-label>
+        <cds-ai-label size="sm" alignment="bottom-left">
           ${content}${actions}
-        </cds-slug>
-        <cds-slug size="md" alignment="bottom-left" open>
-          ${content} ${actions}</cds-slug
+        </cds-ai-label>
+        <cds-ai-label size="md" alignment="bottom-left" open>
+          ${content} ${actions}</cds-ai-label
         >
-        <cds-slug size="lg" alignment="bottom-left">
-          ${content} ${actions}</cds-slug
+        <cds-ai-label size="lg" alignment="bottom-left">
+          ${content} ${actions}</cds-ai-label
         >
-        <cds-slug size="xl" alignment="bottom-left">
-          ${content} ${actions}</cds-slug
+        <cds-ai-label size="xl" alignment="bottom-left">
+          ${content} ${actions}</cds-ai-label
         >
       </div>
-      <div class="slug-container">
-        <cds-slug size="sm" kind="inline" alignment="bottom-left">
+      <div class="ai-label-container">
+        <cds-ai-label size="sm" kind="inline" alignment="bottom-left">
           ${content}${actions}
-        </cds-slug>
-        <cds-slug size="md" kind="inline" alignment="bottom-left">
+        </cds-ai-label>
+        <cds-ai-label size="md" kind="inline" alignment="bottom-left">
           ${content}${actions}
-        </cds-slug>
-        <cds-slug size="lg" kind="inline" alignment="bottom-left">
+        </cds-ai-label>
+        <cds-ai-label size="lg" kind="inline" alignment="bottom-left">
           ${content}${actions}
-        </cds-slug>
+        </cds-ai-label>
       </div>
-      <div class="slug-container">
-        <cds-slug
+      <div class="ai-label-container">
+        <cds-ai-label
           size="sm"
           kind="inline"
           ai-text-label="Text goes here"
           alignment="bottom-left">
           ${content}${actions}
-        </cds-slug>
-        <cds-slug
+        </cds-ai-label>
+        <cds-ai-label
           size="md"
           kind="inline"
           ai-text-label="Text goes here"
           alignment="bottom-left">
           ${content}${actions}
-        </cds-slug>
-        <cds-slug
+        </cds-ai-label>
+        <cds-ai-label
           size="lg"
           kind="inline"
           ai-text-label="Text goes here"
           alignment="bottom-left">
           ${content}${actions}
-        </cds-slug>
+        </cds-ai-label>
       </div>
     `;
   },
@@ -188,15 +189,15 @@ export const Playground = {
       <style>
         ${styles}
       </style>
-      <div class="slug-container">
-        <cds-slug
+      <div class="ai-label-container">
+        <cds-ai-label
           alignment="${ifDefined(alignment)}"
           size="${size}"
           kind="${kind}"
           ai-text-label="${aiTextLabel}"
           ?revert-active="${revertActive}">
           ${content} ${actions}
-        </cds-slug>
+        </cds-ai-label>
       </div>
     `;
   },
@@ -215,7 +216,7 @@ export const Callout = {
     },
     showActions: {
       control: 'boolean',
-      description: 'Specify whether to show action items in slug callout',
+      description: 'Specify whether to show action items in AI Label callout',
     },
   },
   render: (args) => {
@@ -224,17 +225,20 @@ export const Callout = {
       <style>
         ${styles}
       </style>
-      <div class="slug-container-example slug-container centered">
-        <cds-slug open alignment="${alignment}" size="${SLUG_SIZE.EXTRA_SMALL}">
+      <div class="ai-label-container-example ai-label-container centered">
+        <cds-ai-label
+          open
+          alignment="${alignment}"
+          size="${AI_LABEL_SIZE.EXTRA_SMALL}">
           ${content} ${showActions ? actions : ''}
-        </cds-slug>
+        </cds-ai-label>
       </div>
     `;
   },
 };
 
 const meta = {
-  title: 'Experimental/Slug',
+  title: 'Components/AI Label',
 };
 
 export default meta;

@@ -36,7 +36,7 @@ $colorMap: (
   'high-contrast': $text-inverse,
 );
 
-:host(#{$prefix}-slug) {
+:host(#{$prefix}-ai-label) {
   @extend .#{$prefix}--slug;
 
   .#{$prefix}--slug__text {
@@ -109,21 +109,21 @@ $colorMap: (
   }
 }
 
-:host(#{$prefix}-slug:not([with-actions])) {
+:host(#{$prefix}-ai-label:not([with-actions])) {
   .#{$prefix}--toggletip-content {
     max-inline-size: to-rem(320px);
   }
 }
 
-:host(#{$prefix}-slug[revert-active]) {
+:host(#{$prefix}-ai-label[revert-active]) {
   transform: translate($spacing-03, -50%);
 }
 
-:host(#{$prefix}-slug[open]) {
+:host(#{$prefix}-ai-label[open]) {
   z-index: 2;
 }
 
-:host(#{$prefix}-slug-action-button) {
+:host(#{$prefix}-ai-label-action-button) {
   @include emit-layout-tokens();
   .#{$prefix}--btn--primary {
     order: 1;
@@ -132,7 +132,7 @@ $colorMap: (
 }
 
 :host(
-    #{$prefix}-slug[kind='inline']:not([size='md']):not([size='lg']):not(
+    #{$prefix}-ai-label[kind='inline']:not([size='md']):not([size='lg']):not(
         [size='xl']
       )
   ) {
@@ -141,21 +141,21 @@ $colorMap: (
   }
 }
 
-:host(#{$prefix}-slug[kind='inline'][size='lg']),
-:host(#{$prefix}-slug[kind='inline'][size='xl']) {
+:host(#{$prefix}-ai-label[kind='inline'][size='lg']),
+:host(#{$prefix}-ai-label[kind='inline'][size='xl']) {
   .#{$prefix}--slug__button {
     font-size: $spacing-05;
   }
 }
 
-:host(#{$prefix}-slug:not([kind='inline'])) {
+:host(#{$prefix}-ai-label:not([kind='inline'])) {
   .#{$prefix}--slug__button:focus {
     border: 1px solid $focus;
   }
 }
 
 // top
-:host(#{$prefix}-slug[alignment^='top']) {
+:host(#{$prefix}-ai-label[alignment^='top']) {
   .#{$prefix}--popover-caret {
     &::before {
       inset-block-end: to-rem(1px);
@@ -181,7 +181,7 @@ $colorMap: (
 }
 
 // right
-:host(#{$prefix}-slug[alignment^='right']) {
+:host(#{$prefix}-ai-label[alignment^='right']) {
   .#{$prefix}--popover-caret {
     &::before {
       content: '';
@@ -199,7 +199,7 @@ $colorMap: (
 }
 
 // bottom
-:host(#{$prefix}-slug[alignment^='bottom']) {
+:host(#{$prefix}-ai-label[alignment^='bottom']) {
   .#{$prefix}--popover-caret {
     &::before {
       inset-block-start: to-rem(1px);
@@ -218,7 +218,7 @@ $colorMap: (
 }
 
 //left
-:host(#{$prefix}-slug[alignment^='left']) {
+:host(#{$prefix}-ai-label[alignment^='left']) {
   .#{$prefix}--popover-caret {
     &::before {
       inset-inline-end: to-rem(1px);
@@ -235,53 +235,53 @@ $colorMap: (
 }
 
 // override for specific alignments
-:host(#{$prefix}-slug[alignment='left-end']),
-:host(#{$prefix}-slug[alignment='left-bottom']),
-:host(#{$prefix}-slug[alignment='right-end']),
-:host(#{$prefix}-slug[alignment='right-bottom']) {
+:host(#{$prefix}-ai-label[alignment='left-end']),
+:host(#{$prefix}-ai-label[alignment='left-bottom']),
+:host(#{$prefix}-ai-label[alignment='right-end']),
+:host(#{$prefix}-ai-label[alignment='right-bottom']) {
   .#{$prefix}--popover-caret::after {
     background: transparent;
   }
 }
 
 // Change caret color / border when it is near the bottom of the callout
-:host(#{$prefix}-slug[alignment='left-end']),
-:host(#{$prefix}-slug[alignment='left-bottom']),
-:host(#{$prefix}-slug[alignment='right-end']),
-:host(#{$prefix}-slug[alignment='right-bottom']),
-:host(#{$prefix}-slug[alignment^='top']) {
+:host(#{$prefix}-ai-label[alignment='left-end']),
+:host(#{$prefix}-ai-label[alignment='left-bottom']),
+:host(#{$prefix}-ai-label[alignment='right-end']),
+:host(#{$prefix}-ai-label[alignment='right-bottom']),
+:host(#{$prefix}-ai-label[alignment^='top']) {
   .#{$prefix}--popover-caret::before {
     border-color: $ai-popover-caret-bottom;
     background: $ai-popover-caret-bottom-background;
   }
 }
 
-:host(#{$prefix}-slug[autoalign][alignment='left-end'][has-actions]),
-:host(#{$prefix}-slug[autoalign][alignment='left-bottom'][has-actions]),
-:host(#{$prefix}-slug[autoalign][alignment='right-end'][has-actions]),
-:host(#{$prefix}-slug[autoalign][alignment='right-bottom'][has-actions]),
-:host(#{$prefix}-slug[autoalign][alignment^='top'][has-actions]) {
+:host(#{$prefix}-ai-label[autoalign][alignment='left-end'][has-actions]),
+:host(#{$prefix}-ai-label[autoalign][alignment='left-bottom'][has-actions]),
+:host(#{$prefix}-ai-label[autoalign][alignment='right-end'][has-actions]),
+:host(#{$prefix}-ai-label[autoalign][alignment='right-bottom'][has-actions]),
+:host(#{$prefix}-ai-label[autoalign][alignment^='top'][has-actions]) {
   .#{$prefix}--popover-caret::before {
     background: $ai-popover-caret-bottom-background-actions;
   }
 }
 
 // Change the caret border when it is near the middle of the callout
-:host(#{$prefix}-slug[alignment='left']),
-:host(#{$prefix}-slug[alignment='right']) {
+:host(#{$prefix}-ai-label[alignment='left']),
+:host(#{$prefix}-ai-label[alignment='right']) {
   .#{$prefix}--popover-caret::before {
     border-color: $ai-popover-caret-center;
   }
 }
 
 // caret styles for auto align
-:host(#{$prefix}-slug[autoalign]) .#{$prefix}--popover-caret {
+:host(#{$prefix}-ai-label[autoalign]) .#{$prefix}--popover-caret {
   block-size: $spacing-04;
   inline-size: $spacing-04;
   transform: none;
 }
 
-:host(#{$prefix}-slug[autoalign]) {
+:host(#{$prefix}-ai-label[autoalign]) {
   .#{$prefix}--popover-caret::before {
     inset-block-start: 0;
   }
@@ -293,8 +293,8 @@ $colorMap: (
   }
 }
 
-:host(#{$prefix}-slug[autoalign][alignment^='left']),
-:host(#{$prefix}-slug[autoalign][alignment^='right']) {
+:host(#{$prefix}-ai-label[autoalign][alignment^='left']),
+:host(#{$prefix}-ai-label[autoalign][alignment^='right']) {
   .#{$prefix}--popover-caret::before {
     inset-inline-start: 0;
   }
@@ -306,17 +306,17 @@ $colorMap: (
   }
 }
 
-:host(#{$prefix}-slug[autoalign][alignment='left-end']),
-:host(#{$prefix}-slug[autoalign][alignment='left-bottom']),
-:host(#{$prefix}-slug[autoalign][alignment='right-end']),
-:host(#{$prefix}-slug[autoalign][alignment='right-bottom']) {
+:host(#{$prefix}-ai-label[autoalign][alignment='left-end']),
+:host(#{$prefix}-ai-label[autoalign][alignment='left-bottom']),
+:host(#{$prefix}-ai-label[autoalign][alignment='right-end']),
+:host(#{$prefix}-ai-label[autoalign][alignment='right-bottom']) {
   .#{$prefix}--popover-caret::after {
     background: transparent;
   }
 }
 
 @each $color, $token in $colorMap {
-  :host(#{$prefix}-slug[tag='#{$color}']) {
+  :host(#{$prefix}-ai-label[tag='#{$color}']) {
     .#{$prefix}--slug__text {
       color: $token;
     }

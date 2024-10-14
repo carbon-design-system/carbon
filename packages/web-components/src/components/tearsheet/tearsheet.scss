@@ -194,7 +194,7 @@ $motion-duration: $duration-moderate-02;
 
 :host(#{$prefix}-tearsheet[slug])
   .#{$prefix}--tearsheet__header[has-actions]
-  ::slotted(#{$prefix}-slug) {
+  ::slotted(#{$prefix}-ai-label) {
   inset-inline-end: 0;
 }
 

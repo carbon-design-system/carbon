@@ -26,7 +26,7 @@ import '../tag/index';
 import '../text-input/index';
 import '../textarea/index';
 import '../tile/index';
-import styles from './slug-story.scss?lit';
+import styles from './ai-label-story.scss?lit';
 
 const items = [
   {
@@ -84,7 +84,7 @@ const actions = html`
     ${Folders16({ slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
-  <cds-slug-action-button>View details</cds-slug-action-button>
+  <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
 export const _Checkbox = {
@@ -128,7 +128,9 @@ export const _Checkbox = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
           <cds-checkbox>Checkbox label</cds-checkbox>
           <cds-checkbox>Checkbox label</cds-checkbox>
           <cds-checkbox>Checkbox label</cds-checkbox>
@@ -143,11 +145,15 @@ export const _Checkbox = {
           warn-text="${warnText}">
           <cds-checkbox>
             Checkbox label
-            <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left">
+              ${content}${actions}</cds-ai-label
+            >
           </cds-checkbox>
           <cds-checkbox>
             Checkbox label
-            <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left">
+              ${content}${actions}</cds-ai-label
+            >
           </cds-checkbox>
           <cds-checkbox>Checkbox label</cds-checkbox>
         </cds-checkbox-group>
@@ -161,15 +167,15 @@ export const _Checkbox = {
           warn-text="${warnText}">
           <cds-checkbox>
             Checkbox label
-            <cds-slug alignment="bottom-left" kind="inline">
+            <cds-ai-label alignment="bottom-left" kind="inline">
               ${content}${actions}
-            </cds-slug>
+            </cds-ai-label>
           </cds-checkbox>
           <cds-checkbox>
             Checkbox label
-            <cds-slug alignment="bottom-left" kind="inline">
+            <cds-ai-label alignment="bottom-left" kind="inline">
               ${content}${actions}
-            </cds-slug>
+            </cds-ai-label>
           </cds-checkbox>
           <cds-checkbox>Checkbox label</cds-checkbox>
         </cds-checkbox-group>
@@ -188,7 +194,9 @@ export const _Combobox = {
           helper-text="This is some helper text"
           title-text="Combo box title"
           label="Filter...">
-          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
 
           <cds-combo-box-item value="all">Option 1</cds-combo-box-item>
           <cds-combo-box-item value="cloudFoundry">Option 2</cds-combo-box-item>
@@ -214,7 +222,9 @@ export const _DatePicker = {
             kind="single"
             label-text="Date Picker label"
             placeholder="mm/dd/yyyy">
-            <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+            <cds-ai-label alignment="bottom-left">
+              ${content}${actions}</cds-ai-label
+            >
           </cds-date-picker-input>
         </cds-date-picker>
       </div>`;
@@ -231,7 +241,9 @@ export const _Dropdown = {
           helper-text="This is some helper text"
           title-text="Dropdown label"
           label="Dropdown menu options">
-          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
           ${items.map(
             (elem) => html`
               <cds-dropdown-item
@@ -270,7 +282,7 @@ export const _Modal = {
     </style>
     <cds-modal open prevent-close ?has-scrolling-content="${hasScrollingContent}">
       <cds-modal-header>
-        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
         <cds-modal-close-button></cds-modal-close-button>
         <cds-modal-label>Account resources</cds-modal-label>
         <cds-modal-heading>Add a custom domain</cds-modal-heading>
@@ -341,7 +353,9 @@ export const _Multiselect = {
           title-text="Multiselect title"
           label="Multiselect label"
           helper-text="This is helper text">
-          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
           <cds-multi-select-item value="example">
             An example option that is really long to show what should be done to
             handle long text</cds-multi-select-item
@@ -370,7 +384,9 @@ export const _FilterableMultiselect = {
           filterable="true"
           title-text="FilterableMultiselect title"
           helper-text="This is helper text">
-          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
           <cds-multi-select-item value="example"
             >An example option that is really long to show what should be done
             to handle long text</cds-multi-select-item
@@ -401,7 +417,9 @@ export const _NumberItem = {
           max="100"
           step="1"
           label="Number input">
-          <cds-slug alignment="bottom-left"> ${content}${actions} </cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}
+          </cds-ai-label>
         </cds-number-input>
       </div> `;
   },
@@ -450,7 +468,9 @@ export const _RadioButton = {
         invalid-text="${invalidText}"
         ?warn="${warn}"
         warn-text="${warnText}">
-        <cds-slug alignment="bottom-left"> ${content}${actions} </cds-slug>
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}
+        </cds-ai-label>
         <cds-radio-button
           label-text="Radio button label"
           value="radio-1"></cds-radio-button>
@@ -473,10 +493,14 @@ export const _RadioButton = {
         ?warn="${warn}"
         warn-text="${warnText}">
         <cds-radio-button label-text="Radio button label" value="radio-4">
-          <cds-slug alignment="bottom-left"> ${content}${actions} </cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}
+          </cds-ai-label>
         </cds-radio-button>
         <cds-radio-button label-text="Radio button label" value="radio-5">
-          <cds-slug alignment="bottom-left"> ${content}${actions} </cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}
+          </cds-ai-label>
         </cds-radio-button>
         <cds-radio-button
           label-text="Radio button label"
@@ -494,14 +518,14 @@ export const _RadioButton = {
         ?warn="${warn}"
         warn-text="${warnText}">
         <cds-radio-button label-text="Radio button label" value="radio-7">
-          <cds-slug alignment="bottom-left" kind="inline">
+          <cds-ai-label alignment="bottom-left" kind="inline">
             ${content}${actions}
-          </cds-slug>
+          </cds-ai-label>
         </cds-radio-button>
         <cds-radio-button label-text="Radio button label" value="radio-8">
-          <cds-slug alignment="bottom-left" kind="inline">
+          <cds-ai-label alignment="bottom-left" kind="inline">
             ${content}${actions}
-          </cds-slug>
+          </cds-ai-label>
         </cds-radio-button>
         <cds-radio-button
           label-text="Radio button label"
@@ -521,7 +545,9 @@ export const _Select = {
           helper-text="Optional helper text"
           label-text="Select"
           placeholder="Optional placeholder text">
-          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
           <cds-select-item-group label="Category 1">
             <cds-select-item value="all">Option 1</cds-select-item>
             <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
@@ -543,21 +569,29 @@ export const _Tag = {
       </style>
       <cds-tag type="red"
         >Tag
-        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}</cds-ai-label
+        >
       </cds-tag>
 
       <cds-tag filter type="purple">
         Tag
-        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}</cds-ai-label
+        >
       </cds-tag>
 
       <cds-tag type="blue">
         ${Asleep16({ slot: 'icon' })} Tag
-        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}</cds-ai-label
+        >
       </cds-tag>
       <cds-tag filter type="green">
         ${Asleep16({ slot: 'icon' })} Tag
-        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}</cds-ai-label
+        >
       </cds-tag>`;
   },
 };
@@ -569,7 +603,9 @@ export const _TextInput = {
       </style>
       <div style="width: 400px">
         <cds-text-input label="Text input label" placeholder="Placeholder text">
-          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
         </cds-text-input>
       </div> `;
   },
@@ -582,7 +618,9 @@ export const _TextArea = {
       </style>
       <div style="width: 400px">
         <cds-textarea label="Text input label" placeholder="Placeholder text">
-          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
         </cds-textarea>
       </div> `;
   },
@@ -621,7 +659,9 @@ export const _Tile = {
               </div>
             </div>
           </div>
-          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
         </cds-tile>
 
         <cds-clickable-tile
@@ -665,7 +705,9 @@ export const _Tile = {
               </div>
             </div>
           </div>
-          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
         </cds-selectable-tile>
 
         <cds-expandable-tile
@@ -697,7 +739,9 @@ export const _Tile = {
               at consectetur turpis mauris.
             </p>
           </cds-tile-below-the-fold-content>
-          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
         </cds-expandable-tile>
       </div> `;
   },

@@ -8,9 +8,9 @@
  */
 
 /**
- * Slug size.
+ * AI Label size.
  */
-export enum SLUG_SIZE {
+export enum AI_LABEL_SIZE {
   /**
    * Mini size.
    */
@@ -48,9 +48,9 @@ export enum SLUG_SIZE {
 }
 
 /**
- * Slug kind.
+ * AI Label kind.
  */
-export enum SLUG_KIND {
+export enum AI_LABEL_KIND {
   /**
    * Default kind.
    */

@@ -186,12 +186,12 @@
   display: none;
 }
 
-:host(#{$prefix}-modal-header) ::slotted(#{$prefix}-slug) {
+:host(#{$prefix}-modal-header) ::slotted(#{$prefix}-ai-label) {
   position: absolute;
   inset-block-start: 0;
   inset-inline-end: 0;
 }
 
-:host(#{$prefix}-modal-header[close-button]) ::slotted(#{$prefix}-slug) {
+:host(#{$prefix}-modal-header[close-button]) ::slotted(#{$prefix}-ai-label) {
   inset-inline-end: $spacing-09;
 }

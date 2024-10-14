@@ -1,6 +1,6 @@
 import { Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import * as SlugDataTableStories from './slug-data-table.stories';
+import * as SlugDataTableStories from './ai-label-data-table.stories';
 
 <Meta of={SlugDataTableStories} />
 
@@ -34,9 +34,9 @@ import '@carbon/web-components/es/components/slug/index.js';
 ### HTML
 
 ```html
-<cds-slug size="mini" alignment="bottom-left">
+<cds-ai-label size="mini" alignment="bottom-left">
   <div slot="body-text">{Content Here}</div>
-</cds-slug>
+</cds-ai-label>
 ```
 
 ### HTML (with actions)
@@ -46,7 +46,7 @@ callout. To achieve this, you can add elements with `slot="actions"` inside the
 `slot="body-text"` element
 
 ```html
-<cds-slug size="mini" alignment="bottom-left">
+<cds-ai-label size="mini" alignment="bottom-left">
   <div slot="body-text">
     {Content Here} {Optional Slug action bar}
     <cds-icon-button kind="ghost" slot="actions" size="lg">
@@ -61,9 +61,9 @@ callout. To achieve this, you can add elements with `slot="actions"` inside the
       ${Folders16({ slot: 'icon' })}
       <span slot="tooltip-content"> Folders </span>
     </cds-icon-button>
-    <cds-slug-action-button>View details</cds-slug-action-button>
+    <cds-ai-label-action-button>View details</cds-ai-label-action-button>
   </div>
-</cds-slug>
+</cds-ai-label>
 ```
 
 ## Using `slug` in `DataTable`
@@ -76,9 +76,9 @@ appropriate `cds-table-header-cell`.
 ```html
 <cds-table-header-cell>
   Attached groups
-  <cds-slug alignment="bottom-left">
+  <cds-ai-label alignment="bottom-left">
     <div slot="body-text">{Content Here}</div>
-  </cds-slug>
+  </cds-ai-label>
 </cds-table-header-cell>
 ```
 
@@ -89,9 +89,9 @@ component to `cds-table-row`:
 
 ```html
 <cds-table-row>
-  <cds-slug alignment="bottom-left">
+  <cds-ai-label alignment="bottom-left">
     <div slot="body-text">{Content Here}</div>
-  </cds-slug>
+  </cds-ai-label>
   <cds-table-cell>Load Balancer 1</cds-table-cell>
   <cds-table-cell>HTTP</cds-table-cell>
   ...
