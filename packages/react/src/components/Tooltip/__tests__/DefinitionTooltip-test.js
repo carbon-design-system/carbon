@@ -11,11 +11,15 @@ import React from 'react';
 import { DefinitionTooltip } from '../DefinitionTooltip';
 
 describe('DefinitionTooltip', () => {
-  it('should display onClick a definition provided via prop', async () => {
+  it('should display on click a definition provided via prop', async () => {
     const definition = 'Uniform Resource Locator';
     render(<DefinitionTooltip definition={definition}>URL</DefinitionTooltip>);
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
     await userEvent.click(screen.getByText('URL'));
-    expect(screen.getByText(definition)).toBeVisible();
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
   });
 
   it('should have a visible tooltip if `defaultOpen` is set to true', () => {
@@ -25,7 +29,7 @@ describe('DefinitionTooltip', () => {
         term
       </DefinitionTooltip>
     );
-    expect(screen.getByText(definition)).toBeVisible();
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
   });
 
   describe('Component API', () => {
