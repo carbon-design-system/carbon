@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import {
@@ -38,6 +38,29 @@ export default {
       control: false,
     },
   },
+};
+
+export const Test = () => {
+  const [element, setElement] = useState();
+
+  return (
+    <Menu open target={element} label="Menu">
+      <MenuItem label="Menu">
+        <MenuItemRadioGroup
+          label="MenuItemRadioGroup"
+          items={[
+            { label: 'Item 1', value: '1' },
+            { label: 'Item 2', value: '2' },
+          ]}
+          onChange={(data) => {
+            console.log({ data });
+            alert('test', data);
+          }}
+          itemToString={(item) => item.label}
+        />
+      </MenuItem>
+    </Menu>
+  );
 };
 
 export const Playground = (args) => {
