@@ -45,6 +45,14 @@ to display the Menu in case the provided `menuAlignment` obscures it.
 We encourage you to play around in the Storybook playground to better understand
 the `menuAlignment` prop.
 
+## menuTarget Prop
+
+The `menuTarget` prop specifies where the `OverflowMenu` should render, which is particularly useful when using `OverflowMenu` inside a modal. By default, the menu renders in `document.body`, but this can disrupt focus order in modals or other components with focus management.
+
+Pass the `menuTarget` prop to render the `OverflowMenu` inside the modal or any specific element where you want it to render:
+
+
+
 ## Component API
 
 <ArgTypes />
