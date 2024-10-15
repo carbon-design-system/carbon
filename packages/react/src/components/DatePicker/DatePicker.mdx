@@ -1,7 +1,9 @@
-import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import * as DatePickerStories from './DatePicker.stories';
+
+<Meta isTemplate />
 
 # Date Picker
 
@@ -44,9 +46,7 @@ picker is best to use. Each picker’s format can be customized depending on
 location or need. The `DatePicker` component expects a `DatePickerInput` as a
 child.
 
-<Canvas>
-  <Story of={DatePickerStories.Playground} />
-</Canvas>
+<Canvas of={DatePickerStories.Playground} />
 
 ### Simple DatePicker
 
@@ -54,9 +54,7 @@ The simple date input provides the user with only a text field in which they can
 manually input a date. It allows dates to be entered without adding unnecessary
 interactions that come with the calendar menu or a dropdown.
 
-<Canvas>
-  <Story of={DatePickerStories.Simple} />
-</Canvas>
+<Canvas of={DatePickerStories.Simple} />
 
 ### Range Datepicker
 
@@ -64,10 +62,8 @@ Calendar pickers default to showing today’s date when opened and only one mont
 is shown at a time. Calendar pickers allow users to navigate through months and
 years, however they work best when used for recent or near future dates.
 
-<Canvas>
-  <Story of={DatePickerStories.SingleWithCalendar} />
-  <Story of={DatePickerStories.RangeWithCalendar} />
-</Canvas>
+<Canvas of={DatePickerStories.SingleWithCalendar} />
+<Canvas of={DatePickerStories.RangeWithCalendar} />
 
 ### Skeleton state
 
@@ -75,13 +71,11 @@ You can use the `DatePickerSkeleton` component to render a skeleton variant of a
 `DatePicker`. This is useful to display while an initial date range in your
 `DatePicker` is being fetched from an external resource like an API.
 
-<Canvas>
-  <Story of={DatePickerStories.Skeleton} />
-</Canvas>
+<Canvas of={DatePickerStories.Skeleton} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ### DatePicker `appendTo`
 

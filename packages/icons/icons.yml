@@ -483,6 +483,21 @@
     - uncontrolled
   sizes:
     - 32
+- name: ai-label
+  friendly_name: AI Label
+  aliases:
+    - ai
+    - automation
+    - artificial intelligence
+    - enterprise
+    - explainability
+    - ai interactivity
+    - generate
+    - generative
+    - label
+    - slug
+  sizes:
+    - 32
 - name: ai-launch
   friendly_name: Launch AI
   aliases:
@@ -10889,6 +10904,18 @@
     - dashboard
   sizes:
     - 32
+- name: ibm--unstructured-data-processor
+  friendly_name: IBM® Unstructured Data Processor
+  aliases:
+    - filter
+    - data
+    - unstructured
+    - data processing
+    - processing
+    - shapes
+    - platform
+  sizes:
+    - 32
 - name: ibm--vpn-for-vpc
   friendly_name: IBM® VPN for VPC
   aliases:
@@ -14715,6 +14742,11 @@
     - machine learning model
     - ML
     - model
+    - AI
+    - foundation model
+    - watsonx
+    - deep learning
+    - brain
   sizes:
     - 32
 - name: magic-wand
@@ -15202,6 +15234,20 @@
     - weather
   sizes:
     - 32
+- name: ml-model--reference
+  friendly_name: Machine learning model reference
+  aliases:
+    - AI
+    - model
+    - foundation model
+    - machine learning
+    - reference
+    - brain
+    - generative
+    - deep learning
+    - watsonx
+  sizes:
+    - 32
 - name: mobile
   friendly_name: Mobile
   aliases:
@@ -15380,6 +15426,18 @@
     - fabricate
     - manufacture
     - construct
+  sizes:
+    - 32
+- name: model--foundation
+  friendly_name: Foundation model
+  aliases:
+    - AI
+    - model
+    - foundation model
+    - large language model
+    - generative
+    - deep learning
+    - watsonx
   sizes:
     - 32
 - name: model--reference

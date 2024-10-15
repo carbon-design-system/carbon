@@ -14,7 +14,7 @@ test.describe('@avt InteractiveTag', () => {
   test('@avt-advanced-states DismissibleTag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'experimental-unstable-interactivetag--dismissible',
+      id: 'components-tag--dismissible',
       globals: {
         theme: 'white',
       },
@@ -26,7 +26,7 @@ test.describe('@avt InteractiveTag', () => {
   test('@avt-advanced-states OperationalTag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'experimental-unstable-interactivetag--operational',
+      id: 'components-tag--operational',
       globals: {
         theme: 'white',
       },
@@ -37,7 +37,7 @@ test.describe('@avt InteractiveTag', () => {
   test('@avt-advanced-states SelectableTag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'experimental-unstable-interactivetag--selectable',
+      id: 'components-tag--selectable',
       globals: {
         theme: 'white',
       },
@@ -48,23 +48,41 @@ test.describe('@avt InteractiveTag', () => {
   test('@avt-keyboard-nav DismissibleTag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'experimental-unstable-interactivetag--dismissible',
+      id: 'components-tag--dismissible',
       globals: {
         theme: 'white',
       },
     });
+    await expect(
+      page.getByText('Tag content with a long text description').first()
+    ).toBeVisible();
+
     const tooltip = page.getByRole('tooltip');
-    const button = page.getByRole('button').first();
+    const button = page.getByRole('button').nth(1);
     await expect(button).toBeVisible();
+    await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await expect(button).toBeFocused();
     await expect(tooltip).toHaveAttribute('aria-hidden', 'false');
+
+    // Test dismissible functionality
+    await page.keyboard.press('Enter');
+    await expect(
+      page.getByText('Tag content with a long text description')
+    ).not.toBeVisible();
+
+    // Reset button click
+    await page.keyboard.press('Shift+Tab');
+    await page.keyboard.press('Enter');
+    await expect(
+      page.getByText('Tag content with a long text description').first()
+    ).toBeVisible();
   });
 
   test('@avt-keyboard-nav OperationalTag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'experimental-unstable-interactivetag--operational',
+      id: 'components-tag--operational',
       globals: {
         theme: 'white',
       },
@@ -99,7 +117,7 @@ test.describe('@avt InteractiveTag', () => {
   test('@avt-keyboard-nav SelectableTag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'experimental-unstable-interactivetag--selectable',
+      id: 'components-tag--selectable',
       globals: {
         theme: 'white',
       },

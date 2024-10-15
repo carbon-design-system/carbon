@@ -12,7 +12,6 @@ $font-family: 'IBM Plex Sans Thai Looped';
 $name: 'IBM-Plex-Sans-Thai-Looped';
 $styles: (normal);
 $formats: (woff2, woff);
-$package-name: 'sans-thai-looped';
 
 @mixin thin() {
   @font-face {
@@ -24,8 +23,7 @@ $package-name: 'sans-thai-looped';
       $name: $name,
       $weight: Thin,
       $style: $styles,
-      $formats: $formats,
-      $package-name: $package-name
+      $formats: $formats
     );
   }
 }
@@ -40,8 +38,7 @@ $package-name: 'sans-thai-looped';
       $name: $name,
       $weight: ExtraLight,
       $style: $styles,
-      $formats: $formats,
-      $package-name: $package-name
+      $formats: $formats
     );
   }
 }
@@ -56,8 +53,7 @@ $package-name: 'sans-thai-looped';
       $name: $name,
       $weight: Light,
       $style: $styles,
-      $formats: $formats,
-      $package-name: $package-name
+      $formats: $formats
     );
   }
 }
@@ -72,8 +68,7 @@ $package-name: 'sans-thai-looped';
       $name: $name,
       $weight: Regular,
       $style: $styles,
-      $formats: $formats,
-      $package-name: $package-name
+      $formats: $formats
     );
   }
 }
@@ -88,8 +83,7 @@ $package-name: 'sans-thai-looped';
       $name: $name,
       $weight: Text,
       $style: $styles,
-      $formats: $formats,
-      $package-name: $package-name
+      $formats: $formats
     );
   }
 }
@@ -104,8 +98,7 @@ $package-name: 'sans-thai-looped';
       $name: $name,
       $weight: Medium,
       $style: $styles,
-      $formats: $formats,
-      $package-name: $package-name
+      $formats: $formats
     );
   }
 }
@@ -120,8 +113,7 @@ $package-name: 'sans-thai-looped';
       $name: $name,
       $weight: SemiBold,
       $style: $styles,
-      $formats: $formats,
-      $package-name: $package-name
+      $formats: $formats
     );
   }
 }
@@ -136,8 +128,7 @@ $package-name: 'sans-thai-looped';
       $name: $name,
       $weight: Bold,
       $style: $styles,
-      $formats: $formats,
-      $package-name: $package-name
+      $formats: $formats
     );
   }
 }

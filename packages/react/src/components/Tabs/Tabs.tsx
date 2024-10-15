@@ -1242,8 +1242,8 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
       ).filter((node) => {
         const element = node as HTMLElement;
         return (
-          element.classList.contains('cds--tabs__nav-link') &&
-          !element.classList.contains('cds--tabs__nav-item--disabled')
+          element.classList.contains(`${prefix}--tabs__nav-link`) &&
+          !element.classList.contains(`${prefix}--tabs__nav-item--disabled`)
         );
       }).length;
 

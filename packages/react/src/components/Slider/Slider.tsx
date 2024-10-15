@@ -1520,7 +1520,7 @@ class Slider extends PureComponent<SliderProps> {
                       className={lowerThumbClasses}
                       role="slider"
                       id={twoHandles ? undefined : id}
-                      tabIndex={!readOnly ? 0 : -1}
+                      tabIndex={readOnly || disabled ? undefined : 0}
                       aria-valuetext={`${formatLabel(value, '')}`}
                       aria-valuemax={twoHandles ? valueUpper : max}
                       aria-valuemin={min}
@@ -1554,7 +1554,7 @@ class Slider extends PureComponent<SliderProps> {
                       <div
                         className={upperThumbClasses}
                         role="slider"
-                        tabIndex={!readOnly ? 0 : -1}
+                        tabIndex={readOnly || disabled ? undefined : 0}
                         aria-valuemax={max}
                         aria-valuemin={value}
                         aria-valuenow={valueUpper}

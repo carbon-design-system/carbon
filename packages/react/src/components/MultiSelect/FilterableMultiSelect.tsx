@@ -28,6 +28,7 @@ import React, {
   ForwardedRef,
   type FocusEvent,
   type KeyboardEvent,
+  type MouseEvent,
   ReactElement,
   useLayoutEffect,
   useMemo,
@@ -57,6 +58,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
 import { TranslateWithId } from '../../types/common';
 
 const {
@@ -100,6 +102,7 @@ type TranslationKey =
 
 export interface FilterableMultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
+    React.RefAttributes<HTMLDivElement>,
     TranslateWithId<TranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
@@ -388,6 +391,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
                 });
               },
             }),
+            hide(),
           ],
           whileElementsMounted: autoUpdate,
         }
@@ -396,9 +400,13 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
 
   useLayoutEffect(() => {
     if (autoAlign) {
-      Object.keys(floatingStyles).forEach((style) => {
+      const updatedFloatingStyles = {
+        ...floatingStyles,
+        visibility: middlewareData.hide?.referenceHidden ? 'hidden' : 'visible',
+      };
+      Object.keys(updatedFloatingStyles).forEach((style) => {
         if (refs.floating.current) {
-          refs.floating.current.style[style] = floatingStyles[style];
+          refs.floating.current.style[style] = updatedFloatingStyles[style];
         }
       });
     }
@@ -455,6 +463,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
       [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
       [`${prefix}--list-box__wrapper--slug`]: slug,
+      [`${prefix}--autoalign`]: autoAlign,
     }
   );
   const helperId = !helperText
@@ -499,10 +508,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     const nextIsOpen = forceIsOpen ?? !isOpen;
     setIsOpen(nextIsOpen);
     validateHighlightFocus();
-    if (onMenuChange) {
-      onMenuChange(nextIsOpen);
-    }
   }
+
+  useEffect(() => {
+    onMenuChange?.(isOpen);
+  }, [isOpen, onMenuChange]);
 
   const {
     getToggleButtonProps,
@@ -644,7 +654,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   });
 
-  function clearInputValue(event?: KeyboardEvent | undefined) {
+  function clearInputValue(
+    event?: KeyboardEvent<Element> | MouseEvent<HTMLButtonElement>
+  ) {
     const value = textInput.current?.value;
     if (value?.length === 1 || (event && match(event, keys.Escape))) {
       setInputValue('');
@@ -826,7 +838,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           className={`${prefix}--list-box__field`}
           ref={autoAlign ? refs.setReference : null}>
           {controlledSelectedItems.length > 0 && (
-            // @ts-expect-error: It is expecting a non-required prop called: "onClearSelection"
             <ListBoxSelection
               clearSelection={() => {
                 clearSelection();
@@ -853,7 +864,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
             />
           )}
           {inputValue && (
-            // @ts-expect-error: It is expecting two non-required prop called: "onClearSelection" & "selectionCount"
             <ListBoxSelection
               clearSelection={clearInputValue}
               disabled={disabled}
@@ -870,7 +880,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           )}
           <ListBoxTrigger
             {...buttonProps}
-            // @ts-expect-error
             isOpen={isOpen}
             translateWithId={translateWithId}
           />
