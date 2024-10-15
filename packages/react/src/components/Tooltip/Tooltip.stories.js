@@ -56,7 +56,7 @@ export const Default = () => {
     'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
     <Tooltip align="bottom" label={label}>
-      <Button className="sb-tooltip-trigger">This button has a tooltip</Button>
+      <Button>This button has a tooltip</Button>
     </Tooltip>
   );
 };
@@ -64,7 +64,7 @@ export const Default = () => {
 export const Alignment = () => {
   return (
     <Tooltip label="Tooltip alignment" align="bottom-left">
-      <Button className="sb-tooltip-trigger">This button has a tooltip</Button>
+      <Button>This button has a tooltip</Button>
     </Tooltip>
   );
 };
@@ -86,9 +86,7 @@ export const ExperimentalAutoAlign = () => {
           left: '2500px',
         }}>
         <Tooltip label={tooltipLabel} align="top" autoAlign>
-          <Button className="sb-tooltip-trigger" ref={ref}>
-            This button has a tooltip
-          </Button>
+          <Button ref={ref}>This button has a tooltip</Button>
         </Tooltip>
       </div>
     </div>
@@ -98,7 +96,7 @@ export const ExperimentalAutoAlign = () => {
 export const Duration = () => {
   return (
     <Tooltip label="Label one" enterDelayMs={0} leaveDelayMs={300}>
-      <Button className="sb-tooltip-trigger">This button has a tooltip</Button>
+      <Button>This button has a tooltip</Button>
     </Tooltip>
   );
 };
@@ -122,7 +120,7 @@ const PlaygroundStory = (props) => {
       label={label}
       leaveDelayMs={leaveDelayMs}
       closeOnActivation={closeOnActivation}>
-      <button className="sb-tooltip-trigger" type="button">
+      <button type="button">
         <SquareOutline />
       </button>
     </Tooltip>
