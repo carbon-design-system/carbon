@@ -255,7 +255,7 @@ describe('MenuItem', () => {
     });
   });
 
-  it('Should called onChange once', async () => {
+  it('should call onChange once', async () => {
     const onChange = jest.fn();
 
     render(
