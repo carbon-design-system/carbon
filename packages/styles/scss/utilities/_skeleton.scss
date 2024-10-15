@@ -36,6 +36,7 @@
     block-size: 100%;
     content: '';
     inline-size: 100%;
+    inset-inline-start: 0;
     will-change: transform-origin, transform, opacity;
 
     @media (prefers-reduced-motion: reduce) {

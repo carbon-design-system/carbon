@@ -483,6 +483,21 @@
     - uncontrolled
   sizes:
     - 32
+- name: ai-label
+  friendly_name: AI Label
+  aliases:
+    - ai
+    - automation
+    - artificial intelligence
+    - enterprise
+    - explainability
+    - ai interactivity
+    - generate
+    - generative
+    - label
+    - slug
+  sizes:
+    - 32
 - name: ai-launch
   friendly_name: Launch AI
   aliases:
@@ -10900,7 +10915,7 @@
     - shapes
     - platform
   sizes:
-    - 32   
+    - 32
 - name: ibm--vpn-for-vpc
   friendly_name: IBM® VPN for VPC
   aliases:

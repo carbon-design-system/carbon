@@ -396,6 +396,10 @@
     border-color: currentColor;
   }
 
+  .#{$prefix}--tag--filter .#{$prefix}--slug {
+    min-inline-size: convert.to-rem(32.14px);
+  }
+
   // Windows HCM fix
   /* stylelint-disable */
   .#{$prefix}--tag {
