@@ -6,10 +6,19 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import { IdPrefixContext } from '../../internal/useIdPrefix';
 
-function IdPrefix({ children, prefix }) {
+type IdPrefixProps = {
+  children?: ReactNode;
+
+  /**
+   * The value used to prefix the auto-generated id placed on some DOM elements
+   */
+  prefix?: string;
+};
+
+function IdPrefix({ children, prefix }: PropsWithChildren<IdPrefixProps>) {
   return (
     <IdPrefixContext.Provider value={prefix}>
       {children}
