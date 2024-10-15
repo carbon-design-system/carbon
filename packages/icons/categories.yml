@@ -647,6 +647,7 @@ categories:
           - ai-governance--tracked
           - ai-governance--untracked
           - ai-generate
+          - ai-label
           - ai-launch
           - ai-recommend
           - ibm-watson--discovery

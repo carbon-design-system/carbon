@@ -27,6 +27,7 @@ Array [
   "AiGovernanceLifecycle",
   "AiGovernanceTracked",
   "AiGovernanceUntracked",
+  "AiLabel",
   "AiLaunch",
   "AiRecommend",
   "AirlineDigitalGate",
