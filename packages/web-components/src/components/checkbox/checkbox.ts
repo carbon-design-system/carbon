@@ -176,12 +176,12 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSCheckbox).slugItem
+              (this.constructor as typeof CDSCheckbox).aiLabelItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     const type = (hasContent[0] as HTMLElement).getAttribute('kind');
     (hasContent[0] as HTMLElement).setAttribute(
       'size',
@@ -191,13 +191,15 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   }
 
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   updated() {
-    const { _hasSlug: hasSlug } = this;
-    hasSlug ? this.setAttribute('slug', '') : this.removeAttribute('slug');
+    const { _hasAILabel: hasAILabel } = this;
+    hasAILabel
+      ? this.setAttribute('ai-label', '')
+      : this.removeAttribute('ai-label');
   }
 
   render() {
@@ -289,9 +291,9 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   }
 
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the ai-label item.
    */
-  static get slugItem() {
+  static get aiLabelItem() {
     return `${prefix}-ai-label`;
   }
 

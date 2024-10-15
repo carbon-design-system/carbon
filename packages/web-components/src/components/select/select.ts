@@ -145,7 +145,7 @@ class CDSSelect extends FormMixin(LitElement) {
   /**
    * Handles `slotchange` event.
    */
-  protected _handleSlugSlotChange({ target }: Event) {
+  protected _handleAILabelSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
@@ -370,7 +370,7 @@ class CDSSelect extends FormMixin(LitElement) {
       value,
       _placeholderItemValue: placeholderItemValue,
       _handleInput: handleInput,
-      _handleSlugSlotChange: handleSlugSlotChange,
+      _handleAILabelSlotChange: handleAILabelSlotChange,
       _hasSlug: hasSlug,
     } = this;
 
@@ -438,7 +438,7 @@ class CDSSelect extends FormMixin(LitElement) {
         ${this._renderItems(this)}
       </select>
       ${ChevronDown16({ class: `${prefix}--select__arrow` })}
-      <slot name="ai-label" @slotchange=${handleSlugSlotChange}></slot>
+      <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>
       ${!invalid
         ? undefined
         : WarningFilled16({ class: `${prefix}--select__invalid-icon` })}

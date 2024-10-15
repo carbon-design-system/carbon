@@ -71,13 +71,13 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-checkbox-group) .#{$prefix}--checkbox-group--slug,
-:host(#{$prefix}-checkbox[slug]) {
+:host(#{$prefix}-checkbox[ai-label]) {
   ::slotted(#{$prefix}-ai-label) {
     margin-inline-start: $spacing-03;
   }
 }
 
-:host(#{$prefix}-checkbox[slug]) {
+:host(#{$prefix}-checkbox[ai-label]) {
   flex-direction: row;
 
   .#{$prefix}--checkbox-label-text {
@@ -85,6 +85,6 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-checkbox[slug]) ::slotted(#{$prefix}-ai-label) {
+:host(#{$prefix}-checkbox[ai-label]) ::slotted(#{$prefix}-ai-label) {
   align-self: center;
 }

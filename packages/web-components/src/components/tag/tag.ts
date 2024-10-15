@@ -34,7 +34,7 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * Handles `slotchange` event.
    */
-  protected _handleSlugSlotChange({ target }: Event) {
+  protected _handleAILabelSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
@@ -135,13 +135,13 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
     const {
       disabled,
       filter,
-      _handleSlugSlotChange: handleSlugSlotChange,
+      _handleAILabelSlotChange: handleAILabelSlotChange,
       title,
     } = this;
     return html`
       <slot name="icon"></slot>
       <slot></slot>
-      <slot name="ai-label" @slotchange="${handleSlugSlotChange}"></slot>
+      <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>
       ${filter
         ? html`
             <button class="${prefix}--tag__close-icon" ?disabled=${disabled}>

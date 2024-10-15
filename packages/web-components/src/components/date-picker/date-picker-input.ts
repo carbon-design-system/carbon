@@ -31,25 +31,25 @@ export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND };
 @customElement(`${prefix}-date-picker-input`)
 class CDSDatePickerInput extends FocusMixin(LitElement) {
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  private _hasSlug = false;
+  private _hasAILabel = false;
 
   /**
    * Handles `slotchange` event.
    */
-  protected _handleSlugSlotChange({ target }: Event) {
+  protected _handleAILabelSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSDatePickerInput).slugItem
+              (this.constructor as typeof CDSDatePickerInput).aiLabelItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     this.requestUpdate();
   }
@@ -243,7 +243,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       warnText,
       _handleClickWrapper: handleClickWrapper,
       _handleInput: handleInput,
-      _hasSlug: hasSlug,
+      _hasAILabel: hasAILabel,
     } = this;
 
     const invalidIcon = WarningFilled16({
@@ -290,7 +290,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       [`${prefix}--date-picker-input__wrapper--invalid`]:
         normalizedProps.invalid,
       [`${prefix}--date-picker-input__wrapper--warn`]: normalizedProps.warn,
-      [`${prefix}--date-picker-input__wrapper--slug`]: hasSlug,
+      [`${prefix}--date-picker-input__wrapper--slug`]: hasAILabel,
     });
 
     const helperTextClasses = classMap({
@@ -318,7 +318,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
           ${normalizedProps.icon || this._renderIcon()}
           <slot
             name="ai-label"
-            @slotchange="${this._handleSlugSlotChange}"></slot>
+            @slotchange="${this._handleAILabelSlotChange}"></slot>
         </span>
       </div>
       <div
@@ -361,9 +361,9 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   }
 
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the AI Label item.
    */
-  static get slugItem() {
+  static get aiLabelItem() {
     return `${prefix}-ai-label`;
   }
 

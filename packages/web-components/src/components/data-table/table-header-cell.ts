@@ -75,7 +75,7 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
   /**
    * Handles `slotchange` event.
    */
-  protected _handleSlugSlotChange({ target }: Event) {
+  protected _handleAILabelSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
@@ -224,14 +224,16 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
             ${sortIcon}
             <slot
               name="slug"
-              @slotchange="${this._handleSlugSlotChange}"></slot>
+              @slotchange="${this._handleAILabelSlotChange}"></slot>
           </span>
         </button>
       `;
     }
     return html`<span part="label-text" class="${labelClasses}">
       <slot></slot
-      ><slot name="ai-label" @slotchange="${this._handleSlugSlotChange}"></slot
+      ><slot
+        name="ai-label"
+        @slotchange="${this._handleAILabelSlotChange}"></slot
     ></span> `;
   }
   /**

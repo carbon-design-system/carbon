@@ -254,7 +254,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * Handles `slotchange` event.
    */
-  protected _handleSlugSlotChange({ target }: Event) {
+  protected _handleAILabelSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
@@ -702,7 +702,7 @@ class CDSDropdown extends ValidityMixin(
       _handleKeydownInner: handleKeydownInner,
       _handleKeypressInner: handleKeypressInner,
       _handleSlotchangeHelperText: handleSlotchangeHelperText,
-      _handleSlugSlotChange: handleSlugSlotChange,
+      _handleAILabelSlotChange: handleAILabelSlotChange,
       _slotHelperTextNode: slotHelperTextNode,
     } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
@@ -798,7 +798,7 @@ class CDSDropdown extends ValidityMixin(
             ${ChevronDown16({ 'aria-label': toggleLabel })}
           </div>
         </div>
-        <slot name="ai-label" @slotchange=${handleSlugSlotChange}></slot>
+        <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>
         ${menuBody}
       </div>
       <div
