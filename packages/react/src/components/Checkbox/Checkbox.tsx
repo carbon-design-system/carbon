@@ -200,8 +200,7 @@ const Checkbox = React.forwardRef(
         <label
           htmlFor={id}
           className={`${prefix}--checkbox-label`}
-          title={title}
-        >
+          title={title}>
           <Text className={innerLabelClasses}>
             {labelText}
             {normalizedSlug}
