@@ -2,7 +2,8 @@ name: Bug report 🐛
 description:
   Something not working as expected? This is the place to report your issue.
 title: '[Bug]: '
-labels: 'type: bug 🐛'
+type: 'bug'
+labels: ['type: bug 🐛', 'status: needs triage 🕵️‍♀️']
 body:
   - type: markdown
     attributes:
@@ -34,6 +35,7 @@ body:
         - '@carbon/themes'
         - '@carbon/type'
         - '@carbon/upgrade'
+        - '@carbon/web-components'
         - 'carbon-components-svelte'
     validations:
       required: true

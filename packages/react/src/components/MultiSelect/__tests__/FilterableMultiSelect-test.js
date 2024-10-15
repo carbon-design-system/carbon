@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import FilterableMultiSelect from '../FilterableMultiSelect';
 import {
@@ -15,12 +15,11 @@ import {
   findMenuIconNode,
   generateItems,
   generateGenericItem,
-  waitForPosition,
 } from '../../ListBox/test-helpers';
 import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
-
+const waitForPosition = () => act(async () => {});
 const openMenu = async () => {
   await userEvent.click(screen.getByRole('combobox'));
 };
@@ -48,11 +47,34 @@ describe('FilterableMultiSelect', () => {
     expect(screen.getAllByRole('option').length).toBe(mockProps.items.length);
   });
 
+  it('should call `onMenuChange` when the user clicks on the combobox', async () => {
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    await userEvent.click(screen.getByRole('combobox'));
+    expect(mockProps.onMenuChange).toHaveBeenCalledWith(true);
+  });
+
+  it('should call `onMenuChange` when the user clicks on the screen', async () => {
+    render(<FilterableMultiSelect {...mockProps} open />);
+    await waitForPosition();
+
+    await userEvent.click(document.body);
+    expect(mockProps.onMenuChange).toHaveBeenCalledWith(false);
+  });
+
   it('should initially have the menu open when open prop is provided', async () => {
     render(<FilterableMultiSelect {...mockProps} open />);
     await waitForPosition();
 
     assertMenuOpen(mockProps);
+  });
+
+  it('should call `onMenuChange` when open prop is provided', async () => {
+    render(<FilterableMultiSelect {...mockProps} open />);
+    await waitForPosition();
+
+    expect(mockProps.onMenuChange).toHaveBeenCalledWith(true);
   });
 
   it('should open the menu with a down arrow', async () => {
@@ -65,6 +87,15 @@ describe('FilterableMultiSelect', () => {
     expect(screen.getAllByRole('option').length).toBe(mockProps.items.length);
   });
 
+  it('should call `onMenuChange` when the user types a down arrow', async () => {
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    const menuIconNode = findMenuIconNode();
+    await userEvent.type(menuIconNode, '{arrowdown}');
+    expect(mockProps.onMenuChange).toHaveBeenCalledWith(true);
+  });
+
   it('should let the user toggle the menu by the menu icon', async () => {
     render(<FilterableMultiSelect {...mockProps} />);
     await waitForPosition();
@@ -75,6 +106,17 @@ describe('FilterableMultiSelect', () => {
     await userEvent.click(findMenuIconNode());
 
     assertMenuClosed();
+  });
+
+  it('should call `onMenuChange` when the user toggles the menu by the menu icon', async () => {
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    await userEvent.click(findMenuIconNode());
+    expect(mockProps.onMenuChange).toHaveBeenCalledWith(true);
+
+    await userEvent.click(findMenuIconNode());
+    expect(mockProps.onMenuChange).toHaveBeenCalledWith(false);
   });
 
   it('should not close the menu after a user makes a selection', async () => {

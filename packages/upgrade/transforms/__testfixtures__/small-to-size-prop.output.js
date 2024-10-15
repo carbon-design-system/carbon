@@ -4,8 +4,7 @@ function Test1() {
 
 function Test2() {
   return (
-    <Button className="test" size="sm">
-      Test
-    </Button>
+    (<Button className="test" size="sm">Test
+          </Button>)
   );
 }

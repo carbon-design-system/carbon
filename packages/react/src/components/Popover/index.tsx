@@ -29,6 +29,8 @@ import {
   arrow,
   offset,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
+import { useFeatureFlag } from '../FeatureFlags';
 
 interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -178,6 +180,8 @@ export const Popover: PopoverComponent = React.forwardRef(
     const floating = useRef<HTMLSpanElement>(null);
     const caretRef = useRef<HTMLSpanElement>(null);
     const popover = useRef<Element>(null);
+    const enableFloatingStyles =
+      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
     let align = mapPopoverAlignProp(initialAlign);
 
@@ -241,7 +245,7 @@ export const Popover: PopoverComponent = React.forwardRef(
     });
 
     const { refs, floatingStyles, placement, middlewareData } = useFloating(
-      autoAlign
+      enableFloatingStyles
         ? {
             placement: align,
 
@@ -254,14 +258,17 @@ export const Popover: PopoverComponent = React.forwardRef(
             // Middleware order matters, arrow should be last
             middleware: [
               offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
-              flip({ fallbackAxisSideDirection: 'start' }),
+              autoAlign && flip({ fallbackAxisSideDirection: 'start' }),
               arrow({
                 element: caretRef,
               }),
+              autoAlign && hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
-        : {} // When autoAlign is turned off, floating-ui will not be used
+        : {}
+      // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
+      // enabled, floating-ui will not be used
     );
 
     const value = useMemo(() => {
@@ -285,10 +292,16 @@ export const Popover: PopoverComponent = React.forwardRef(
     }
 
     useEffect(() => {
-      if (autoAlign) {
-        Object.keys(floatingStyles).forEach((style) => {
+      if (enableFloatingStyles) {
+        const updatedFloatingStyles = {
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible',
+        };
+        Object.keys(updatedFloatingStyles).forEach((style) => {
           if (refs.floating.current) {
-            refs.floating.current.style[style] = floatingStyles[style];
+            refs.floating.current.style[style] = updatedFloatingStyles[style];
           }
         });
 
@@ -323,7 +336,7 @@ export const Popover: PopoverComponent = React.forwardRef(
     }, [
       floatingStyles,
       refs.floating,
-      autoAlign,
+      enableFloatingStyles,
       middlewareData,
       placement,
       caret,
@@ -339,7 +352,8 @@ export const Popover: PopoverComponent = React.forwardRef(
         [`${prefix}--popover--drop-shadow`]: dropShadow,
         [`${prefix}--popover--high-contrast`]: highContrast,
         [`${prefix}--popover--open`]: open,
-        [`${prefix}--popover--auto-align`]: autoAlign,
+        [`${prefix}--popover--auto-align ${prefix}--autoalign`]:
+          enableFloatingStyles,
         [`${prefix}--popover--${currentAlignment}`]: true,
         [`${prefix}--popover--tab-tip`]: isTabTip,
       },
@@ -348,12 +362,27 @@ export const Popover: PopoverComponent = React.forwardRef(
 
     const mappedChildren = React.Children.map(children, (child) => {
       const item = child as any;
+      const displayName = item?.type?.displayName;
+
+      /**
+       * Only trigger elements (button) or trigger components (ToggletipButton) should be
+       * cloned because these will be decorated with a trigger-specific className and ref.
+       *
+       * There are also some specific components that should not be cloned when autoAlign
+       * is on, even if they are a trigger element.
+       */
+      const isTriggerElement = item?.type === 'button';
+      const isTriggerComponent =
+        enableFloatingStyles &&
+        displayName &&
+        ['ToggletipButton'].includes(displayName);
+      const isAllowedTriggerComponent =
+        enableFloatingStyles &&
+        !['ToggletipContent', 'PopoverContent'].includes(displayName);
 
       if (
-        (item?.type === 'button' ||
-          (autoAlign && item?.type?.displayName !== 'PopoverContent') ||
-          (autoAlign && item?.type?.displayName === 'ToggletipButton')) &&
-        React.isValidElement(item)
+        React.isValidElement(item) &&
+        (isTriggerElement || isTriggerComponent || isAllowedTriggerComponent)
       ) {
         const className = (item?.props as any)?.className;
         const ref = (item?.props as any).ref;
@@ -381,9 +410,9 @@ export const Popover: PopoverComponent = React.forwardRef(
             // In either of these caes we want to set this as the reference node for floating-ui autoAlign
             // positioning.
             if (
-              (autoAlign &&
+              (enableFloatingStyles &&
                 (item?.type as any)?.displayName !== 'PopoverContent') ||
-              (autoAlign &&
+              (enableFloatingStyles &&
                 (item?.type as any)?.displayName === 'ToggletipButton')
             ) {
               // Set the reference element for floating-ui
@@ -408,7 +437,7 @@ export const Popover: PopoverComponent = React.forwardRef(
     return (
       <PopoverContext.Provider value={value}>
         <BaseComponentAsAny {...rest} className={className} ref={ref}>
-          {autoAlign || isTabTip ? mappedChildren : children}
+          {enableFloatingStyles || isTabTip ? mappedChildren : children}
         </BaseComponentAsAny>
       </PopoverContext.Provider>
     );
@@ -424,7 +453,6 @@ if (__DEV__) {
 Popover.propTypes = {
   /**
    * Specify how the popover should align with the trigger element
-   
    */
   align: deprecateValuesWithin(
     PropTypes.oneOf([
@@ -537,12 +565,14 @@ function PopoverContentRenderFunction(
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
   const ref = useMergedRefs([setFloating, forwardRef]);
+  const enableFloatingStyles =
+    useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
   return (
     <span {...rest} className={`${prefix}--popover`}>
       <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
-        {autoAlign && (
+        {enableFloatingStyles && (
           <span
             className={cx({
               [`${prefix}--popover-caret`]: true,
@@ -552,7 +582,7 @@ function PopoverContentRenderFunction(
           />
         )}
       </span>
-      {!autoAlign && (
+      {!enableFloatingStyles && (
         <span
           className={cx({
             [`${prefix}--popover-caret`]: true,

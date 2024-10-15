@@ -97,8 +97,7 @@
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    padding-block-end: 0;
-    padding-block-start: 0;
+    padding-block: 0;
     padding-inline-end: 0;
 
     &:hover {
@@ -395,6 +394,10 @@
 
   .#{$prefix}--tag .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover {
     border-color: currentColor;
+  }
+
+  .#{$prefix}--tag--filter .#{$prefix}--slug {
+    min-inline-size: convert.to-rem(32.14px);
   }
 
   // Windows HCM fix

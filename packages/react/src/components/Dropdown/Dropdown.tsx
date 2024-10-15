@@ -6,7 +6,6 @@
  */
 
 import React, {
-  useRef,
   useContext,
   useState,
   FocusEvent,
@@ -48,6 +47,8 @@ import {
   autoUpdate,
   size as floatingSize,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { ItemMouseMove, MenuMouseLeave } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
@@ -109,10 +110,12 @@ export interface DropdownProps<ItemType>
   disabled?: boolean;
 
   /**
-   * Additional props passed to Downshift. Use with caution: anything you define
-   * here overrides the components' internal handling of that prop. Downshift
-   * internals are subject to change, and in some cases they can not be shimmed
-   * to shield you from potentially breaking changes.
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
    */
   downshiftProps?: Partial<UseSelectProps<ItemType>>;
 
@@ -272,8 +275,12 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
-    const { refs, floatingStyles } = useFloating(
-      autoAlign
+    const enableFloatingStyles = useFeatureFlag(
+      'enable-v12-dynamic-floating-styles'
+    );
+
+    const { refs, floatingStyles, middlewareData } = useFloating(
+      enableFloatingStyles || autoAlign
         ? {
             placement: direction,
 
@@ -292,18 +299,27 @@ const Dropdown = React.forwardRef(
                   });
                 },
               }),
-              flip(),
+              autoAlign && flip(),
+              autoAlign && hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
-        : {} // When autoAlign is turned off, floating-ui will not be used
+        : {}
+      // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
+      // enabled, floating-ui will not be used
     );
 
     useEffect(() => {
-      if (autoAlign) {
-        Object.keys(floatingStyles).forEach((style) => {
+      if (enableFloatingStyles || autoAlign) {
+        const updatedFloatingStyles = {
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible',
+        };
+        Object.keys(updatedFloatingStyles).forEach((style) => {
           if (refs.floating.current) {
-            refs.floating.current.style[style] = floatingStyles[style];
+            refs.floating.current.style[style] = updatedFloatingStyles[style];
           }
         });
       }
@@ -381,7 +397,7 @@ const Dropdown = React.forwardRef(
       [`${prefix}--dropdown--readonly`]: readOnly,
       [`${prefix}--dropdown--${size}`]: size,
       [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--dropdown--autoalign`]: autoAlign,
+      [`${prefix}--autoalign`]: autoAlign,
     });
 
     const titleClasses = cx(`${prefix}--label`, {
@@ -415,7 +431,10 @@ const Dropdown = React.forwardRef(
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
-    const toggleButtonProps = getToggleButtonProps();
+    const toggleButtonProps = getToggleButtonProps({
+      'aria-label': ariaLabel || deprecatedAriaLabel,
+    });
+
     const helper =
       helperText && !isFluid ? (
         <div id={helperId} className={helperClasses}>
@@ -491,9 +510,9 @@ const Dropdown = React.forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: autoAlign ? refs.setFloating : null,
+          ref: enableFloatingStyles || autoAlign ? refs.setFloating : null,
         }),
-      [autoAlign]
+      [autoAlign, getMenuProps, refs.setFloating]
     );
 
     // Slug is always size `mini`
@@ -514,7 +533,6 @@ const Dropdown = React.forwardRef(
         <ListBox
           onFocus={handleFocus}
           onBlur={handleFocus}
-          aria-label={deprecatedAriaLabel || ariaLabel}
           size={size}
           className={className}
           invalid={invalid}
@@ -523,7 +541,7 @@ const Dropdown = React.forwardRef(
           warnText={warnText}
           light={light}
           isOpen={isOpen}
-          ref={autoAlign ? refs.setReference : null}
+          ref={enableFloatingStyles || autoAlign ? refs.setReference : null}
           id={id}>
           {invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
@@ -662,10 +680,12 @@ Dropdown.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift. Use with caution: anything you define
-   * here overrides the components' internal handling of that prop. Downshift
-   * internals are subject to change, and in some cases they can not be shimmed
-   * to shield you from potentially breaking changes.
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
    */
   downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
 

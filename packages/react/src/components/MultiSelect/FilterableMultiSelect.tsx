@@ -28,6 +28,7 @@ import React, {
   ForwardedRef,
   type FocusEvent,
   type KeyboardEvent,
+  type MouseEvent,
   ReactElement,
   useLayoutEffect,
   useMemo,
@@ -57,6 +58,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
 import { TranslateWithId } from '../../types/common';
 
 const {
@@ -100,6 +102,7 @@ type TranslationKey =
 
 export interface FilterableMultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
+    React.RefAttributes<HTMLDivElement>,
     TranslateWithId<TranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
@@ -139,10 +142,12 @@ export interface FilterableMultiSelectProps<ItemType>
   disabled?: boolean;
 
   /**
-   * Additional props passed to Downshift. Use with caution: anything you define
-   * here overrides the components' internal handling of that prop. Downshift
-   * internals are subject to change, and in some cases they can not be shimmed
-   * to shield you from potentially breaking changes.
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
    */
   downshiftProps?: UseMultipleSelectionProps<ItemType>;
 
@@ -386,6 +391,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
                 });
               },
             }),
+            hide(),
           ],
           whileElementsMounted: autoUpdate,
         }
@@ -394,9 +400,13 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
 
   useLayoutEffect(() => {
     if (autoAlign) {
-      Object.keys(floatingStyles).forEach((style) => {
+      const updatedFloatingStyles = {
+        ...floatingStyles,
+        visibility: middlewareData.hide?.referenceHidden ? 'hidden' : 'visible',
+      };
+      Object.keys(updatedFloatingStyles).forEach((style) => {
         if (refs.floating.current) {
-          refs.floating.current.style[style] = floatingStyles[style];
+          refs.floating.current.style[style] = updatedFloatingStyles[style];
         }
       });
     }
@@ -453,6 +463,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
       [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
       [`${prefix}--list-box__wrapper--slug`]: slug,
+      [`${prefix}--autoalign`]: autoAlign,
     }
   );
   const helperId = !helperText
@@ -487,13 +498,21 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   }, [controlledSelectedItems, isOpen, setTopItems]);
 
+  const validateHighlightFocus = () => {
+    if (controlledSelectedItems.length > 0) {
+      setHighlightedIndex(0);
+    }
+  };
+
   function handleMenuChange(forceIsOpen: boolean): void {
     const nextIsOpen = forceIsOpen ?? !isOpen;
     setIsOpen(nextIsOpen);
-    if (onMenuChange) {
-      onMenuChange(nextIsOpen);
-    }
+    validateHighlightFocus();
   }
+
+  useEffect(() => {
+    onMenuChange?.(isOpen);
+  }, [isOpen, onMenuChange]);
 
   const {
     getToggleButtonProps,
@@ -508,8 +527,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   } = useCombobox<ItemType>({
     isOpen,
     items: sortedItems,
+    // defaultHighlightedIndex: 0, // after selection, highlight the first item.
     itemToString,
-    defaultHighlightedIndex: 0, // after selection, highlight the first item.
     id,
     labelId,
     menuId,
@@ -520,7 +539,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       return (item as any).disabled;
     },
   });
-
   function stateReducer(state, actionAndChanges) {
     const { type, props, changes } = actionAndChanges;
     const { highlightedIndex } = changes;
@@ -548,20 +566,30 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         return changes;
       case FunctionToggleMenu:
       case ToggleButtonClick:
+        validateHighlightFocus();
         if (changes.isOpen && !changes.selectedItem) {
-          return { ...changes, highlightedIndex: 0 };
+          return { ...changes };
         }
-        return changes;
+
+        return { ...changes, highlightedIndex: null };
       case InputChange:
         if (onInputValueChange) {
           onInputValueChange(changes.inputValue);
         }
         setInputValue(changes.inputValue ?? '');
         setIsOpen(true);
-        return changes;
+        return { ...changes, highlightedIndex: 0 };
 
       case InputClick:
-        return { ...changes, isOpen: false };
+        validateHighlightFocus();
+        if (changes.isOpen && !changes.selectedItem) {
+          return { ...changes };
+        }
+        return {
+          ...changes,
+          isOpen: false,
+          highlightedIndex: null,
+        };
       case MenuMouseLeave:
         return { ...changes, highlightedIndex: state.highlightedIndex };
       case InputKeyDownArrowUp:
@@ -626,7 +654,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   });
 
-  function clearInputValue(event?: KeyboardEvent | undefined) {
+  function clearInputValue(
+    event?: KeyboardEvent<Element> | MouseEvent<HTMLButtonElement>
+  ) {
     const value = textInput.current?.value;
     if (value?.length === 1 || (event && match(event, keys.Escape))) {
       setInputValue('');
@@ -808,7 +838,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           className={`${prefix}--list-box__field`}
           ref={autoAlign ? refs.setReference : null}>
           {controlledSelectedItems.length > 0 && (
-            // @ts-expect-error: It is expecting a non-required prop called: "onClearSelection"
             <ListBoxSelection
               clearSelection={() => {
                 clearSelection();
@@ -835,7 +864,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
             />
           )}
           {inputValue && (
-            // @ts-expect-error: It is expecting two non-required prop called: "onClearSelection" & "selectionCount"
             <ListBoxSelection
               clearSelection={clearInputValue}
               disabled={disabled}
@@ -852,7 +880,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           )}
           <ListBoxTrigger
             {...buttonProps}
-            // @ts-expect-error
             isOpen={isOpen}
             translateWithId={translateWithId}
           />
@@ -968,10 +995,12 @@ FilterableMultiSelect.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Additional props passed to Downshift. Use with caution: anything you define
-   * here overrides the components' internal handling of that prop. Downshift
-   * internals are subject to change, and in some cases they can not be shimmed
-   * to shield you from potentially breaking changes.
+   * Additional props passed to Downshift.
+   *
+   * **Use with caution:** anything you define here overrides the components'
+   * internal handling of that prop. Downshift APIs and internals are subject to
+   * change, and in some cases they can not be shimmed by Carbon to shield you
+   * from potentially breaking changes.
    */
   // @ts-ignore
   downshiftProps: PropTypes.shape(Downshift.propTypes),

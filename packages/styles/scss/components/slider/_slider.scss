@@ -224,7 +224,6 @@
   .#{$prefix}--slider__thumb--lower,
   .#{$prefix}--slider__thumb--upper {
     position: absolute;
-    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
     border-radius: unset;
     background-color: transparent;
     box-shadow: none;
@@ -281,8 +280,7 @@
     transform: none;
 
     &::before {
-      inset-inline-end: auto;
-      inset-inline-start: 0;
+      inset-inline: 0 auto;
     }
 
     &:hover,
@@ -387,6 +385,22 @@
     &:active {
       background: $border-disabled;
       transform: translate(-50%, -50%);
+    }
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb--lower,
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb--upper {
+    background-color: transparent;
+
+    &:active,
+    &:hover,
+    &:focus {
+      background-color: transparent;
+      transform: none;
+    }
+
+    .#{$prefix}--slider__thumb-icon {
+      fill: $border-disabled;
     }
   }
 
