@@ -650,6 +650,7 @@ categories:
           - ai-governance--tracked
           - ai-governance--untracked
           - ai-generate
+          - ai-label
           - ai-launch
           - ai-recommend
           - ibm--granite
@@ -770,6 +771,7 @@ categories:
           - ibm--tenet
           - ibm--toolchain
           - ibm--turbonomic
+          - ibm--unstructured-data-processor
           - ibm--vpn-for-vpc
           - ibm--vsi-on-vpc-for-regulated-industries
           - ibm--wazi-deploy
