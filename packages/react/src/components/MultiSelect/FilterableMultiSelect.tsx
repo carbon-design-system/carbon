@@ -870,6 +870,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           ref={autoAlign ? refs.setReference : null}>
           {controlledSelectedItems.length > 0 && (
             <ListBoxSelection
+              readOnly={readOnly}
               clearSelection={() => {
                 clearSelection();
                 if (textInput.current) {
@@ -901,6 +902,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
               clearSelection={clearInputValue}
               disabled={disabled}
               translateWithId={translateWithId}
+              readOnly={readOnly}
               onMouseUp={(event: MouseEvent) => {
                 // If we do not stop this event from propagating,
                 // it seems like Downshift takes our event and
