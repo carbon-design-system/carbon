@@ -39,7 +39,7 @@ class CDSModalHeader extends LitElement {
       );
     if (hasContent.length > 0) {
       this._hasAILabel = Boolean(hasContent);
-      (hasContent[0] as HTMLElement).setAttribute('size', 'lg');
+      (hasContent[0] as HTMLElement).setAttribute('size', 'sm');
     }
     this.requestUpdate();
   }

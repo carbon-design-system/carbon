@@ -194,5 +194,7 @@
 }
 
 :host(#{$prefix}-modal-header[close-button]) ::slotted(#{$prefix}-ai-label) {
-  inset-inline-end: $spacing-09;
+  position: absolute;
+  inset-block-start: to-rem(10px);
+  inset-inline-end: to-rem(48px);
 }
