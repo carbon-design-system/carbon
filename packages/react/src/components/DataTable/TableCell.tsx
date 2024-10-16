@@ -47,6 +47,7 @@ const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
     return (
       <td
         className={tableCellClassNames ? tableCellClassNames : undefined}
+        ref={ref}
         colSpan={colSpan}
         {...rest}>
         {children}
