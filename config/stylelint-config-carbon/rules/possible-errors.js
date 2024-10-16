@@ -9,7 +9,7 @@
 
 const OFF = null;
 
-module.exports = {
+export default {
   rules: {
     // Color
     'color-no-invalid-hex': true,
@@ -58,7 +58,7 @@ module.exports = {
     'at-rule-no-unknown': OFF,
 
     // Comment
-    'comment-no-empty': true,
+    'comment-no-empty': OFF,
 
     // General / Sheet
     'no-descending-specificity': true,

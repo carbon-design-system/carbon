@@ -3,6 +3,7 @@
   "description": "Stylelint configuration for Carbon",
   "version": "1.19.0",
   "license": "Apache-2.0",
+  "type": "module",
   "main": "index.js",
   "repository": {
     "type": "git",

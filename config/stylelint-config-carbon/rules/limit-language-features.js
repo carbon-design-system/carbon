@@ -9,7 +9,7 @@
 
 const OFF = null;
 
-module.exports = {
+export default {
   rules: {
     // Color
     // Require (where possible) or disallow named colors.

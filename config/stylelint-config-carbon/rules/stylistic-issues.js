@@ -9,7 +9,7 @@
 
 const OFF = null;
 
-module.exports = {
+export default {
   rules: {
     // Color
     // Specify lowercase or uppercase for hex colors (Autofixable).
@@ -23,8 +23,7 @@ module.exports = {
     'font-family-name-quotes': 'always-where-recommended',
 
     // Font weight
-    // Require numeric or named (where possible) font-weight values.
-    'font-weight-notation': OFF,
+    // Removed deprecated 'font-weight-notation' rule
 
     // Function
     // Require a newline or disallow whitespace after the commas of functions.
@@ -47,9 +46,7 @@ module.exports = {
     // Require a single space or disallow whitespace on the inside of the
     // parentheses of functions.
     'function-parentheses-space-inside': 'never-single-line',
-    // Require or disallow quotes for urls.
-    'function-url-quotes': OFF,
-    // Require or disallow whitespace after functions.
+    // Removed deprecated 'function-url-quotes' rule
     'function-whitespace-after': 'always',
 
     // Number
@@ -72,8 +69,7 @@ module.exports = {
     'unit-case': 'lower',
 
     // Value
-    // Specify lowercase or uppercase for keywords values.
-    'value-keyword-case': OFF,
+    // Removed deprecated 'value-keyword-case' rule
 
     // Value list
     // Require a newline or disallow whitespace after the commas of value lists.
@@ -102,9 +98,7 @@ module.exports = {
     // Require a single space or disallow whitespace after the bang of
     // declarations.
     'declaration-bang-space-after': 'never',
-    // Require a single space or disallow whitespace before the bang of
-    // declarations.
-    'declaration-bang-space-before': OFF,
+    // Removed deprecated 'declaration-bang-space-before' rule
     // Require a newline or disallow whitespace after the colon of declarations.
     'declaration-colon-newline-after': OFF,
     // Require a single space or disallow whitespace after the colon of
