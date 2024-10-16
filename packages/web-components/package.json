@@ -82,7 +82,7 @@
     "@carbon/layout": "^11.27.0",
     "@carbon/motion": "^11.23.0",
     "@juggle/resize-observer": "^3.4.0",
-    "@mordech/vite-lit-loader": "^0.31.3",
+    "@mordech/vite-lit-loader": "^0.36.0",
     "@rollup/plugin-alias": "^5.1.0",
     "@rollup/plugin-commonjs": "^26.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",

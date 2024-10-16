@@ -2328,7 +2328,7 @@ __metadata:
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@juggle/resize-observer": "npm:^3.4.0"
-    "@mordech/vite-lit-loader": "npm:^0.31.3"
+    "@mordech/vite-lit-loader": "npm:^0.36.0"
     "@rollup/plugin-alias": "npm:^5.1.0"
     "@rollup/plugin-commonjs": "npm:^26.0.0"
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
@@ -3949,13 +3949,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mordech/vite-lit-loader@npm:^0.31.3":
-  version: 0.31.3
-  resolution: "@mordech/vite-lit-loader@npm:0.31.3"
+"@mordech/vite-lit-loader@npm:^0.36.0":
+  version: 0.36.0
+  resolution: "@mordech/vite-lit-loader@npm:0.36.0"
   dependencies:
     cheerio: "npm:1.0.0-rc.12"
-    tslib: "npm:^2.3.0"
-  checksum: 10/a83c0b5e2252af9e179a5765fb553d9ea372634df17cc3c1668fa57c10933a8413f8c53d47830d7b6ab7fc17ebc403043c2c6db96994d395d7e767732f90ac9f
+    tslib: "npm:^2.6.2"
+  checksum: 10/79edf8ff9fb73aaee10a529849ba83981a34a30062d88bc5c14e4d844db776d9b055dec92c83d2074ab791c906df370b48be0807841c3eaf6501d47084979ada
   languageName: node
   linkType: hard
 
