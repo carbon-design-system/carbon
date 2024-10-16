@@ -23,7 +23,8 @@ export default {
     'font-family-name-quotes': 'always-where-recommended',
 
     // Font weight
-    // Removed deprecated 'font-weight-notation' rule
+    // Require numeric or named (where possible) font-weight values.
+    'font-weight-notation': OFF,
 
     // Function
     // Require a newline or disallow whitespace after the commas of functions.
@@ -46,9 +47,11 @@ export default {
     // Require a single space or disallow whitespace on the inside of the
     // parentheses of functions.
     'function-parentheses-space-inside': 'never-single-line',
-    // Removed deprecated 'function-url-quotes' rule
-    'function-whitespace-after': 'always',
 
+    // Require or disallow quotes for urls.
+    'function-url-quotes': OFF,
+    // Require or disallow whitespace after functions.
+    'function-whitespace-after': 'always',
     // Number
     // Require or disallow a leading zero for fractional numbers less than 1
     // (Autofixable).
@@ -69,8 +72,8 @@ export default {
     'unit-case': 'lower',
 
     // Value
-    // Removed deprecated 'value-keyword-case' rule
-
+    // Specify lowercase or uppercase for keywords values.
+    'value-keyword-case': OFF,
     // Value list
     // Require a newline or disallow whitespace after the commas of value lists.
     'value-list-comma-newline-after': 'always-multi-line',
@@ -98,6 +101,9 @@ export default {
     // Require a single space or disallow whitespace after the bang of
     // declarations.
     'declaration-bang-space-after': 'never',
+    // Require a single space or disallow whitespace before the bang of
+    // declarations.
+    'declaration-bang-space-before': OFF,
     // Removed deprecated 'declaration-bang-space-before' rule
     // Require a newline or disallow whitespace after the colon of declarations.
     'declaration-colon-newline-after': OFF,
