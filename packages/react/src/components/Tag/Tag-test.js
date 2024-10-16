@@ -33,16 +33,43 @@ describe('Tag', () => {
     });
   });
 
-  it('should have an appropriate aria-label when (filterable)', () => {
-    const { container } = render(
-      <DismissibleTag type="red" title="Close tag" text="Tag content" />
-    );
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const button = container.querySelector('[aria-label]');
-    const accessibilityLabel = button.getAttribute('aria-label');
-    // This check would mirror our "Accessibility label must contain at least all of visible label"
-    // requirement
-    expect(accessibilityLabel).toEqual(expect.stringContaining('Close tag'));
+  describe('Dismissible Tag', () => {
+    it('should render a Dismissible Tag state', () => {
+      const { container } = render(
+        <DismissibleTag type="red" title="Close tag" text="Tag content" />
+      );
+
+      expect(container.firstChild).toHaveClass(`${prefix}--tag--filter`);
+    });
+
+    it('should support onClose event', async () => {
+      const onClick = jest.fn();
+
+      const { container } = render(
+        <DismissibleTag
+          type="red"
+          title="Close tag"
+          text="Tag content"
+          onClose={onClick}
+        />
+      );
+
+      await userEvent.click(screen.getByRole('button'));
+
+      expect(onClick).toHaveBeenCalled();
+    });
+
+    it('should have an appropriate aria-label when (filterable)', () => {
+      const { container } = render(
+        <DismissibleTag type="red" title="Close tag" text="Tag content" />
+      );
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const button = container.querySelector('[aria-label]');
+      const accessibilityLabel = button.getAttribute('aria-label');
+      // This check would mirror our "Accessibility label must contain at least all of visible label"
+      // requirement
+      expect(accessibilityLabel).toEqual(expect.stringContaining('Close tag'));
+    });
   });
 
   it('should allow for a custom label', () => {

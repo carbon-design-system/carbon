@@ -50,11 +50,6 @@ export interface SelectableTagBaseProps {
   size?: keyof typeof SIZES;
 
   /**
-   * **Experimental:** Provide a `Slug` component to be rendered inside the `SelectableTag` component
-   */
-  slug?: ReactNode;
-
-  /**
    * Provide text to be rendered inside of a the tag.
    */
   text?: string;
@@ -71,7 +66,6 @@ const SelectableTag = <T extends React.ElementType>({
   id,
   renderIcon,
   selected = false,
-  slug,
   size,
   text,
   ...other
@@ -91,14 +85,6 @@ const SelectableTag = <T extends React.ElementType>({
     )[0];
     setIsEllipsisApplied(isEllipsisActive(newElement));
   }, [prefix, tagRef]);
-
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'sm',
-      kind: 'inline',
-    });
-  }
 
   const tooltipClasses = classNames(
     `${prefix}--icon-tooltip`,
@@ -120,7 +106,6 @@ const SelectableTag = <T extends React.ElementType>({
         <Tag
           aria-pressed={selectedTag}
           ref={tagRef}
-          slug={slug}
           size={size}
           renderIcon={renderIcon}
           disabled={disabled}
@@ -131,7 +116,6 @@ const SelectableTag = <T extends React.ElementType>({
           <Text title={text} className={`${prefix}--tag__label`}>
             {text}
           </Text>
-          {normalizedSlug}
         </Tag>
       </Tooltip>
     );
@@ -141,7 +125,6 @@ const SelectableTag = <T extends React.ElementType>({
     <Tag
       aria-pressed={selectedTag}
       ref={tagRef}
-      slug={slug}
       size={size}
       renderIcon={renderIcon}
       disabled={disabled}
@@ -149,7 +132,6 @@ const SelectableTag = <T extends React.ElementType>({
       id={tagId}
       onClick={() => setSelectedTag(!selectedTag)}
       {...otherProps}>
-      {normalizedSlug}
       <Text title={text} className={`${prefix}--tag__label`}>
         {text}
       </Text>
@@ -189,11 +171,6 @@ SelectableTag.propTypes = {
    * `md` (default) or `lg` sizes.
    */
   size: PropTypes.oneOf(Object.keys(SIZES)),
-
-  /**
-   * **Experimental:** Provide a `Slug` component to be rendered inside the `SelectableTag` component
-   */
-  slug: PropTypes.node,
 
   /**
    * Provide text to be rendered inside of a the tag.
