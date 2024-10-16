@@ -66,9 +66,7 @@ const stories = glob
     }
     return true;
   });
-console.log('aaah ', __dirname);
-console.log(path.resolve(__dirname, 'src'));
-console.log(path.resolve(__dirname, '..', '..', '..', 'node_modules'));
+
 const config = {
   addons: [
     {
@@ -83,13 +81,7 @@ const config = {
       },
     },
     '@storybook/addon-storysource',
-    /**
-     * For now, the storybook-addon-accessibility-checker fork replaces the @storybook/addon-a11y.
-     * Eventually they plan to attempt to get this back into the root addon with the storybook team.
-     * See more: https://ibm-studios.slack.com/archives/G01GCBCGTPV/p1697230798817659
-     */
     '@storybook/addon-a11y',
-    // 'storybook-addon-accessibility-checker',
     {
       name: '@storybook/addon-docs',
       options: {
@@ -103,9 +95,6 @@ const config = {
   ],
   core: {
     builder: '@storybook/builder-vite',
-    // options: {
-    //   viteConfigPath: '../../../vite.config.js',
-    // }
   },
   features: {
     previewCsfV3: true,
@@ -170,10 +159,6 @@ const config = {
       ],
       // this is not working
       resolve: {
-        //   alias: {
-        //     '@carbon/react/icons': path.resolve('..', '..', '..', 'node_modules/@carbon/react/icons/src'),
-        //     '@': path.join(__dirname, '../../../node_modules')
-        //   },
         preserveSymlinks: true,
       },
     });

@@ -40,9 +40,9 @@
 /// @param {Any} $fallback
 /// @returns var()
 @function get-var($name, $fallback: false) {
-  @if $fallback {
-    @return var(--#{config.$prefix}-#{$name}, #{$fallback});
-  }
+  // @if $fallback {
+  //   @return var(--#{config.$prefix}-#{$name}, #{$fallback});
+  // }
   @return var(--#{config.$prefix}-#{$name});
 }
 
