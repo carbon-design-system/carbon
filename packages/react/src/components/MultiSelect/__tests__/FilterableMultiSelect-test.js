@@ -244,3 +244,4 @@ describe('FilterableMultiSelect', () => {
     expect(document.querySelector(`.${prefix}--list-box`).id).toBe('custom-id');
   });
 });
+// checking code coverage using codecov
