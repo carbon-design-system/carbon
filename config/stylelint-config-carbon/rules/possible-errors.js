@@ -58,7 +58,7 @@ export default {
     'at-rule-no-unknown': OFF,
 
     // Comment
-    'comment-no-empty': OFF,
+    'comment-no-empty': true,
 
     // General / Sheet
     'no-descending-specificity': true,
