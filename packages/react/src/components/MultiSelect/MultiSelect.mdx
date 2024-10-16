@@ -76,13 +76,12 @@ For more information, checkout the Downshift prop
 The MultiSelect component now includes a "Select All" feature, allowing users to
 easily select or deselect all options with a single action.
 
-To implement the "Select All" feature in your MultiSelect component:
+To implement the "Select All" feature in your MultiSelect component,
+add a new option to your options array with these properties:
 
-Add a new option to your options array with these properties:
-
-- id: A unique identifier (e.g., 'select-all')
-- text: The label for the "Select All" option
-- isSelectAll: Set to true
+- `id`: A unique identifier (e.g., 'select-all')
+- `text`: The label for the option
+- `isSelectAll`: Set to `true`
 
 ```
 const options = [
