@@ -112,7 +112,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-radio-button[slug]) {
+:host(#{$prefix}-radio-button[ai-label]) {
   .#{$prefix}--radio-button__label-text {
     display: flex;
   }
@@ -124,7 +124,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-radio-button-group) .#{$prefix}--radio-button-group--slug,
-:host(#{$prefix}-radio-button[slug]) {
+:host(#{$prefix}-radio-button[ai-label]) {
   ::slotted(#{$prefix}-ai-label) {
     margin-inline-start: $spacing-03;
   }

@@ -240,10 +240,10 @@ class CDSTable extends HostListenerMixin(LitElement) {
   withHeader;
 
   /**
-   *  true if slugs are added in the rows
+   *  true if AI Labels are added in the rows
    */
-  @property({ type: Boolean, attribute: 'with-row-slugs' })
-  withRowSlugs = false;
+  @property({ type: Boolean, attribute: 'with-row-ai-labels' })
+  withRowAILabels = false;
 
   private _handleSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
@@ -768,15 +768,15 @@ class CDSTable extends HostListenerMixin(LitElement) {
       (tableBody as any).useZebraStyles = this.useZebraStyles;
     }
 
-    if (this.withRowSlugs) {
-      this._tableHeaderRow.setAttribute('rows-with-slug', '');
+    if (this.withRowAILabels) {
+      this._tableHeaderRow.setAttribute('rows-with-ai-label', '');
       this._tableRows.forEach((row) => {
-        row.setAttribute('rows-with-slug', '');
+        row.setAttribute('rows-with-ai-label', '');
       });
     } else {
-      this._tableHeaderRow.removeAttribute('rows-with-slug');
+      this._tableHeaderRow.removeAttribute('rows-with-ai-label');
       this._tableRows.forEach((row) => {
-        row.removeAttribute('rows-with-slug');
+        row.removeAttribute('rows-with-ai-label');
       });
     }
 

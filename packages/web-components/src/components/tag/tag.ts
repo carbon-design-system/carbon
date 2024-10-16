@@ -40,7 +40,7 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSTag).slugItem
+              (this.constructor as typeof CDSTag).aiLabelItem
             )
           : false
       );
@@ -153,9 +153,9 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the AI Label item.
    */
-  static get slugItem() {
+  static get aiLabelItem() {
     return `${prefix}-ai-label`;
   }
 

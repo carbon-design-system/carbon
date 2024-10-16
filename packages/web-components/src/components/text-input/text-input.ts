@@ -47,9 +47,9 @@ export {
 @customElement(`${prefix}-text-input`)
 class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   /**
    * Handles `slotchange` event.
@@ -60,12 +60,12 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSTextInput).slugItem
+              (this.constructor as typeof CDSTextInput).aiLabelItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     this.requestUpdate();
   }
@@ -319,7 +319,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       warnText,
       value,
       _handleInput: handleInput,
-      _hasSlug: hasSlug,
+      _hasAILabel: hasAILabel,
       _handleSlotChange: handleSlotChange,
     } = this;
 
@@ -382,7 +382,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     const fieldWrapperClasses = classMap({
       [`${prefix}--text-input__field-wrapper`]: true,
       [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
-      [`${prefix}--text-input__field-wrapper--slug`]: hasSlug,
+      [`${prefix}--text-input__field-wrapper--slug`]: hasAILabel,
     });
 
     const labelClasses = classMap({
@@ -513,9 +513,9 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   }
 
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the AI Label item.
    */
-  static get slugItem() {
+  static get aiLabelItem() {
     return `${prefix}-ai-label`;
   }
 

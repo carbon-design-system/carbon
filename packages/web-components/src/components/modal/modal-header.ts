@@ -20,9 +20,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-modal-header`)
 class CDSModalHeader extends LitElement {
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   /**
    * Handles `slotchange` event.
@@ -33,19 +33,19 @@ class CDSModalHeader extends LitElement {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSModalHeader).slugItem
+              (this.constructor as typeof CDSModalHeader).aiLabelItem
             )
           : false
       );
     if (hasContent.length > 0) {
-      this._hasSlug = Boolean(hasContent);
+      this._hasAILabel = Boolean(hasContent);
       (hasContent[0] as HTMLElement).setAttribute('size', 'lg');
     }
     this.requestUpdate();
   }
 
   updated() {
-    if (this._hasSlug) {
+    if (this._hasAILabel) {
       this.parentElement?.setAttribute('slug', '');
     } else {
       this.parentElement?.removeAttribute('slug');
@@ -58,9 +58,9 @@ class CDSModalHeader extends LitElement {
   }
 
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the AI Label item.
    */
-  static get slugItem() {
+  static get aiLabelItem() {
     return `${prefix}-ai-label`;
   }
 

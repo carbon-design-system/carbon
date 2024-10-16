@@ -97,20 +97,20 @@ class CDSCheckboxGroup extends LitElement {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSCheckboxGroup).slugItem
+              (this.constructor as typeof CDSCheckboxGroup).aiLabelItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     this.requestUpdate();
   }
 
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   updated(changedProperties) {
     const { selectorCheckbox } = this.constructor as typeof CDSCheckboxGroup;
@@ -148,7 +148,7 @@ class CDSCheckboxGroup extends LitElement {
       readonly,
       warn,
       warnText,
-      _hasSlug: hasSlug,
+      _hasAILabel: hasAILabel,
       _handleSlotChange: handleSlotChange,
     } = this;
 
@@ -172,7 +172,7 @@ class CDSCheckboxGroup extends LitElement {
       [`${prefix}--checkbox-group--readonly`]: readonly,
       [`${prefix}--checkbox-group--invalid`]: !readonly && invalid,
       [`${prefix}--checkbox-group--warning`]: showWarning,
-      [`${prefix}--checkbox-group--slug`]: hasSlug,
+      [`${prefix}--checkbox-group--slug`]: hasAILabel,
     });
 
     return html`
@@ -219,9 +219,9 @@ class CDSCheckboxGroup extends LitElement {
   }
 
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the AI Label item.
    */
-  static get slugItem() {
+  static get aiLabelItem() {
     return `${prefix}-ai-label`;
   }
 

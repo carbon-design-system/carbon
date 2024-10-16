@@ -161,7 +161,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   _hasSubtitle = false;
 
   @state()
-  _hasSlug = false;
+  _hasAILabel = false;
 
   @state()
   _hasActionToolbar = false;
@@ -402,7 +402,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._checkUpdateIconButtonSizes();
     const childItems = (e.target as HTMLSlotElement).assignedElements();
 
-    this._hasSlug = childItems.length > 0;
+    this._hasAILabel = childItems.length > 0;
   }
 
   private _handleSubtitleChange(e: Event) {
@@ -795,7 +795,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         part="dialog"
         role="complementary"
         placement="${placement}"
-        ?has-slug=${this._hasSlug}
+        ?has-slug=${this._hasAILabel}
         ?open=${this._isOpen}
         ?opening=${open && !this._isOpen}
         ?closing=${!open && this._isOpen}

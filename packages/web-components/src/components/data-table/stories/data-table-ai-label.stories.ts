@@ -51,7 +51,7 @@ const actions = html`
 export const _AILabelWithExpansion = {
   render: () => {
     return html`
-      <cds-table with-row-slugs expandable batch-expansion>
+      <cds-table with-row-ai-labels expandable batch-expansion>
         <cds-table-header-title slot="title">DataTable</cds-table-header-title>
         <cds-table-header-description slot="description"
           >With sorting</cds-table-header-description
@@ -162,7 +162,7 @@ export const _AILabelWithExpansion = {
 export const _AILabelWithRadioSelection = {
   render: () => {
     return html`
-      <cds-table radio with-row-slugs>
+      <cds-table radio with-row-ai-labels>
         <cds-table-header-title slot="title">DataTable</cds-table-header-title>
         <cds-table-header-description slot="description"
           >With selection</cds-table-header-description
@@ -252,7 +252,7 @@ export const _AILabelWithRadioSelection = {
 export const _AILabelWithSelection = {
   render: () => {
     return html`
-      <cds-table with-row-slugs>
+      <cds-table with-row-ai-labels>
         <cds-table-header-title slot="title">DataTable</cds-table-header-title>
         <cds-table-header-description slot="description"
           >With selection</cds-table-header-description
@@ -339,7 +339,7 @@ export const _AILabelWithSelection = {
 export const AILabelWithSelectionAndExpansion = {
   render: () => {
     return html`
-      <cds-table expandable batch-expansion with-row-slugs>
+      <cds-table expandable batch-expansion with-row-ai-labels>
         <cds-table-header-title slot="title">DataTable</cds-table-header-title>
         <cds-table-header-description slot="description"
           >With selection</cds-table-header-description

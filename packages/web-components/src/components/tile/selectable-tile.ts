@@ -38,9 +38,9 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   protected _inputType = 'checkbox';
 
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   /**
    * Handles `slotchange` event.
@@ -51,12 +51,12 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSSelectableTile)?.slugItem
+              (this.constructor as typeof CDSSelectableTile)?.aiLabelItem
             )
           : false
       );
     if (hasContent.length > 0) {
-      this._hasSlug = Boolean(hasContent);
+      this._hasAILabel = Boolean(hasContent);
       (hasContent[0] as HTMLElement).setAttribute('size', 'xs');
     }
     this.requestUpdate();
@@ -114,7 +114,7 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
       key === ' ' ||
       (key === 'Enter' &&
         !(event.target as HTMLElement)?.matches(
-          (this.constructor as typeof CDSSelectableTile).slugItem
+          (this.constructor as typeof CDSSelectableTile).aiLabelItem
         ))
     ) {
       this.selected = !this.selected;
@@ -135,7 +135,7 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
 
   /**
    * Specify if the `SeletableTile` component should be rendered with rounded corners.
-   * Only valid when `slug` prop is present
+   * Only valid when `ai-label` prop is present
    */
   @property({ type: Boolean, attribute: 'has-rounded-corners' })
   hasRoundedCorners = false;
@@ -159,10 +159,10 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   value!: string;
 
   updated() {
-    if (this._hasSlug) {
-      this.setAttribute('slug', '');
+    if (this._hasAILabel) {
+      this.setAttribute('ai-label', '');
     } else {
-      this.removeAttribute('slug');
+      this.removeAttribute('ai-label');
     }
   }
 
@@ -175,14 +175,14 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
       value,
       _inputType: inputType,
       _handleChange: handleChange,
-      _hasSlug: hasSlug,
+      _hasAILabel: hasAILabel,
     } = this;
     const classes = classMap({
       [`${prefix}--tile`]: true,
       [`${prefix}--tile--selectable`]: true,
       [`${prefix}--tile--is-selected`]: selected,
       [`${prefix}--tile--${colorScheme}`]: colorScheme,
-      [`${prefix}--tile--slug-rounded`]: hasSlug && hasRoundedCorners,
+      [`${prefix}--tile--slug-rounded`]: hasAILabel && hasRoundedCorners,
     });
     return html`
       <input
@@ -206,9 +206,9 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the AI Label item.
    */
-  static get slugItem() {
+  static get aiLabelItem() {
     return `${prefix}-ai-label`;
   }
 

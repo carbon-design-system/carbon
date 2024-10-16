@@ -122,7 +122,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-combo-box[slug]) {
+:host(#{$prefix}-combo-box[ai-label]) {
   @extend .#{$prefix}--list-box__wrapper--slug;
 
   .#{$prefix}--list-box__field {
@@ -140,7 +140,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-combo-box[slug][isclosable]) {
+:host(#{$prefix}-combo-box[ai-label][isclosable]) {
   ::slotted(#{$prefix}-ai-label) {
     inset-inline-end: $spacing-10;
   }

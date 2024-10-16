@@ -156,7 +156,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-dropdown[slug]) {
+:host(#{$prefix}-dropdown[ai-label]) {
   @extend .#{$prefix}--list-box__wrapper--slug;
 
   ::slotted(#{$prefix}-ai-label) {
@@ -170,8 +170,8 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-dropdown[slug][warn]),
-:host(#{$prefix}-dropdown[slug][invalid]) {
+:host(#{$prefix}-dropdown[ai-label][warn]),
+:host(#{$prefix}-dropdown[ai-label][invalid]) {
   .#{$prefix}--list-box {
     .#{$prefix}--list-box__field {
       padding-inline-end: $spacing-12;

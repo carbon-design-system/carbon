@@ -24,9 +24,9 @@ export { TILE_COLOR_SCHEME };
 @customElement(`${prefix}-tile`)
 class CDSTile extends LitElement {
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   /**
    * Handles `slotchange` event.
@@ -37,12 +37,12 @@ class CDSTile extends LitElement {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSTile).slugItem
+              (this.constructor as typeof CDSTile).aiLabelItem
             )
           : false
       );
     if (hasContent.length > 0) {
-      this._hasSlug = Boolean(hasContent);
+      this._hasAILabel = Boolean(hasContent);
       (hasContent[0] as HTMLElement).setAttribute('size', 'xs');
     }
     this.requestUpdate();
@@ -56,7 +56,7 @@ class CDSTile extends LitElement {
 
   /**
    * Specify if the `Tile` component should be rendered with rounded corners.
-   * Only valid when `slug` prop is present
+   * Only valid when `ai-label` prop is present
    */
   @property({ type: Boolean, attribute: 'has-rounded-corners' })
   hasRoundedCorners = false;
@@ -70,10 +70,10 @@ class CDSTile extends LitElement {
       anchorTag.before(document.createElement('br'));
     }
 
-    if (this._hasSlug) {
-      this.setAttribute('slug', '');
+    if (this._hasAILabel) {
+      this.setAttribute('ai-label', '');
     } else {
-      this.removeAttribute('slug');
+      this.removeAttribute('ai-label');
     }
   }
 
@@ -83,9 +83,9 @@ class CDSTile extends LitElement {
   }
 
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the AI Label item.
    */
-  static get slugItem() {
+  static get aiLabelItem() {
     return `${prefix}-ai-label`;
   }
 

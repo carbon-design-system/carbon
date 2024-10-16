@@ -130,7 +130,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
   _hasLabel = false;
 
   @state()
-  _hasSlug = false;
+  _hasAILabel = false;
 
   @state()
   _hasTitle = false;
@@ -309,12 +309,12 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
   private _handleSlugChange(e: Event) {
     const childItems = (e.target as HTMLSlotElement).assignedElements();
 
-    this._hasSlug = childItems.length > 0;
-    if (this._hasSlug) {
+    this._hasAILabel = childItems.length > 0;
+    if (this._hasAILabel) {
       childItems[0].setAttribute('size', 'lg');
-      this.setAttribute('slug', '');
+      this.setAttribute('ai-label', '');
     } else {
-      this.removeAttribute('slug');
+      this.removeAttribute('ai-label');
     }
   }
 
@@ -538,7 +538,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
       ?has-navigation=${this._hasHeaderNavigation && this.width === 'wide'}
       ?has-header-actions=${this._hasHeaderActions && this.width === 'wide'}
       ?has-actions=${this?._actionsCount > 0}
-      ?has-slug=${this?._hasSlug}
+      ?has-slug=${this?._hasAILabel}
       width=${width}>
       ${this.width === TEARSHEET_WIDTH.WIDE
         ? html`<cds-layer level="1" class=${`${blockClass}__header-content`}

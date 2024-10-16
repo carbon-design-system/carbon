@@ -84,7 +84,7 @@ class CDSTableExpandedRow extends HostListenerMixin(LitElement) {
   updated() {
     this.previousElementSibling?.hasAttribute('slug')
       ? this.setAttribute('slug', '')
-      : this.removeAttribute('slug');
+      : this.removeAttribute('ai-label');
   }
 
   /**

@@ -67,9 +67,9 @@ class CDSDropdown extends ValidityMixin(
   HostListenerMixin(FormMixin(FocusMixin(LitElement)))
 ) {
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   @state()
   protected _activeDescendant?: string;
@@ -260,12 +260,12 @@ class CDSDropdown extends ValidityMixin(
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSDropdown).slugItem
+              (this.constructor as typeof CDSDropdown).aiLabelItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     this.requestUpdate();
   }
@@ -645,9 +645,9 @@ class CDSDropdown extends ValidityMixin(
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updated(_changedProperties) {
-    this._hasSlug
+    this._hasAILabel
       ? this.setAttribute('slug', '')
-      : this.removeAttribute('slug');
+      : this.removeAttribute('ai-label');
 
     this.shadowRoot
       ?.querySelector("slot[name='ai-label']")
@@ -869,9 +869,9 @@ class CDSDropdown extends ValidityMixin(
   }
 
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the AI Label item.
    */
-  static get slugItem() {
+  static get aiLabelItem() {
     return `${prefix}-ai-label`;
   }
 

@@ -165,7 +165,7 @@ $motion-duration: $duration-moderate-02;
   @extend .#{$prefix}--visually-hidden;
 }
 
-:host(#{$prefix}-tearsheet[slug]) {
+:host(#{$prefix}-tearsheet[ai-label]) {
   --overlay-color: #{$ai-overlay};
 
   .#{$block-class}__container {
@@ -192,7 +192,7 @@ $motion-duration: $duration-moderate-02;
   }
 }
 
-:host(#{$prefix}-tearsheet[slug])
+:host(#{$prefix}-tearsheet[ai-label])
   .#{$prefix}--tearsheet__header[has-actions]
   ::slotted(#{$prefix}-ai-label) {
   inset-inline-end: 0;

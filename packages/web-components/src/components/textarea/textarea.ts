@@ -99,7 +99,7 @@ class CDSTextarea extends CDSTextInput {
       [`${prefix}--text-area__wrapper`]: true,
       [`${prefix}--text-area__wrapper--warn`]: this.warn,
       [`${prefix}--text-area__wrapper--readonly`]: this.readonly,
-      [`${prefix}--text-area__wrapper--slug`]: this._hasSlug,
+      [`${prefix}--text-area__wrapper--slug`]: this._hasAILabel,
     });
 
     const labelClasses = classMap({

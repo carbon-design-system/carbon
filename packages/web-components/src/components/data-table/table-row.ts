@@ -44,9 +44,9 @@ import CDSTableCell from './table-cell';
 @customElement(`${prefix}-table-row`)
 class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   /**
    * Handles `click` event on the radio button.
@@ -206,12 +206,12 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSTableRow).slugItem
+              (this.constructor as typeof CDSTableRow).aiLabelItem
             )
           : false
       );
     if (hasContent.length > 0) {
-      this._hasSlug = Boolean(hasContent);
+      this._hasAILabel = Boolean(hasContent);
       (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     }
     this.requestUpdate();
@@ -394,10 +394,10 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
       }
     }
 
-    if (this._hasSlug) {
-      this.setAttribute('slug', '');
+    if (this._hasAILabel) {
+      this.setAttribute('ai-label', '');
     } else {
-      this.removeAttribute('slug');
+      this.removeAttribute('ai-label');
     }
   }
 
@@ -458,9 +458,9 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the AI Label item.
    */
-  static get slugItem() {
+  static get aiLabelItem() {
     return `${prefix}-ai-label`;
   }
 

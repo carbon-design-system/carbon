@@ -162,7 +162,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-multi-select[slug]) {
+:host(#{$prefix}-multi-select[ai-label]) {
   @extend .#{$prefix}--list-box__wrapper--slug;
 
   ::slotted(#{$prefix}-ai-label) {
@@ -176,8 +176,8 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-multi-select[slug][warn]),
-:host(#{$prefix}-multi-select[slug][invalid]) {
+:host(#{$prefix}-multi-select[ai-label][warn]),
+:host(#{$prefix}-multi-select[ai-label][invalid]) {
   .#{$prefix}--list-box {
     .#{$prefix}--list-box__field {
       padding-inline-end: $spacing-12;
