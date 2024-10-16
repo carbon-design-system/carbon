@@ -12,15 +12,15 @@ import * as AILabelDataTableStories from './data-table-ai-label.stories';
 
 [![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/ai-label)
 
-The DataTable supports placing a slug in both the column header and row.
+The DataTable supports placing an AI Label in both the column header and row.
 
 ## Getting started
 
 Here's a quick example to get you started.
 
-The `Slug` itself is a button that acts as a `Toggletip` trigger. To construct
-the contents of the `Slug` callout, you can place the desired elements as a
-child of `Slug` in a div with slot `body-text`, like so:
+The `AI Label` itself is a button that acts as a `Toggletip` trigger. To
+construct the contents of the `AI Label` callout, you can place the desired
+elements as a child of `AI Label` in a div with slot `body-text`, like so:
 
 ### JS (via import)
 
@@ -41,14 +41,14 @@ import '@carbon/web-components/es/components/ai-label/index.js';
 
 ### HTML (with actions)
 
-The `Slug` also supports the rendering of an action bar at the bottom of the
+The `AI Label` also supports the rendering of an action bar at the bottom of the
 callout. To achieve this, you can add elements with `slot="actions"` inside the
 `slot="body-text"` element
 
 ```html
 <cds-ai-label size="mini" alignment="bottom-left">
   <div slot="body-text">
-    {Content Here} {Optional Slug action bar}
+    {Content Here} {Optional AI Label action bar}
     <cds-icon-button kind="ghost" slot="actions" size="lg">
       ${View16({ slot: 'icon' })}
       <span slot="tooltip-content"> View </span>

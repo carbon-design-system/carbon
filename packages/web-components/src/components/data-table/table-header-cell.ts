@@ -223,7 +223,7 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
             ></span>
             ${sortIcon}
             <slot
-              name="slug"
+              name="ai-label"
               @slotchange="${this._handleAILabelSlotChange}"></slot>
           </span>
         </button>

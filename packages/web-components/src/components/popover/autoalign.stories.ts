@@ -263,12 +263,12 @@ export const AILabel = {
   argTypes: {
     alignment: {
       control: 'select',
-      description: 'Slug alignment to trigger button (alignment)',
+      description: 'AI Label alignment to trigger button (alignment)',
       options: popoverAlignments,
     },
     size: {
       control: 'select',
-      description: 'Slug size (size)',
+      description: 'AI Label size (size)',
       options: sizes,
     },
     kind: {

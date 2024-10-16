@@ -46,9 +46,9 @@ class CDSModalHeader extends LitElement {
 
   updated() {
     if (this._hasAILabel) {
-      this.parentElement?.setAttribute('slug', '');
+      this.parentElement?.setAttribute('ai-label', '');
     } else {
-      this.parentElement?.removeAttribute('slug');
+      this.parentElement?.removeAttribute('ai-label');
     }
   }
 

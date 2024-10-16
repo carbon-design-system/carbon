@@ -646,7 +646,7 @@ class CDSDropdown extends ValidityMixin(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updated(_changedProperties) {
     this._hasAILabel
-      ? this.setAttribute('slug', '')
+      ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');
 
     this.shadowRoot

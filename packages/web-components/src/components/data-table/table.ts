@@ -781,16 +781,16 @@ class CDSTable extends HostListenerMixin(LitElement) {
     }
 
     // Gets table header info to add to the column cells for styles
-    const headersWithSlug: number[] = [];
+    const headersWithAILabel: number[] = [];
 
     Array.prototype.slice
       .call(this._tableHeaderRow.children)
       .forEach((headerCell, index) => {
         if (headerCell.querySelector(`${prefix}-ai-label`)) {
-          headerCell.setAttribute('slug', '');
-          headersWithSlug.push(index);
+          headerCell.setAttribute('ai-label', '');
+          headersWithAILabel.push(index);
         } else {
-          headerCell.removeAttribute('slug');
+          headerCell.removeAttribute('ai-label');
         }
       });
 
@@ -798,9 +798,9 @@ class CDSTable extends HostListenerMixin(LitElement) {
       Array.prototype.slice
         .call((row as HTMLElement).children)
         .forEach((cell, index) => {
-          headersWithSlug.includes(index)
-            ? cell.setAttribute('slug-in-header', '')
-            : cell.removeAttribute('slug-in-header');
+          headersWithAILabel.includes(index)
+            ? cell.setAttribute('ai-label-in-header', '')
+            : cell.removeAttribute('ai-label-in-header');
         });
     });
   }

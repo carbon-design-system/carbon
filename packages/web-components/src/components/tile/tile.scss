@@ -165,7 +165,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--tile--light;
 }
 
-// Slug styles
+// AI Label styles
 :host(#{$prefix}-tile[ai-label]),
 :host(#{$prefix}-expandable-tile[ai-label]),
 :host(#{$prefix}-clickable-tile[ai-label]) .#{$prefix}--tile,

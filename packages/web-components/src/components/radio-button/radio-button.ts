@@ -343,7 +343,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       );
     }
     hasAILabel
-      ? this.setAttribute('slug', '')
+      ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');
   }
 
@@ -372,8 +372,8 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         value=${ifDefined(value)} />
       <label for="input" class="${prefix}--radio-button__label">
         <span class="${prefix}--radio-button__appearance"></span>
-        <span class="${innerLabelClasses}"
-          ><slot>${labelText}</slot>
+        <span class="${innerLabelClasses}">
+          ${labelText}
           <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot
         ></span>
       </label>

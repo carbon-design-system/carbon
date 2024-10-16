@@ -17,8 +17,8 @@ import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 // To Do: Replace with an an icon from `@carbon/icons`
-// since the hollow slug in `ClickableTile` is not interactive
-const slugIcon = html` <svg
+// since the hollow AI Label in `ClickableTile` is not interactive
+const aiLabelIcon = html` <svg
   class="${prefix}--tile--slug-icon"
   width="24"
   height="24"
@@ -38,14 +38,14 @@ const slugIcon = html` <svg
 @customElement(`${prefix}-clickable-tile`)
 class CDSClickableTile extends CDSLink {
   protected get _classes() {
-    const { colorScheme, disabled, hasRoundedCorners, slug } = this;
+    const { colorScheme, disabled, hasRoundedCorners, aiLabel } = this;
     return classMap({
       [`${prefix}--link`]: true,
       [`${prefix}--link--disabled`]: disabled,
       [`${prefix}--tile`]: true,
       [`${prefix}--tile--clickable`]: true,
       [`${prefix}--tile--${colorScheme}`]: colorScheme,
-      [`${prefix}--tile--slug-rounded`]: slug && hasRoundedCorners,
+      [`${prefix}--tile--slug-rounded`]: aiLabel && hasRoundedCorners,
     });
   }
 
@@ -63,19 +63,19 @@ class CDSClickableTile extends CDSLink {
 
   /**
    * Specify if the `ClickableTile` component should be rendered with rounded corners.
-   * Only valid when `slug` prop is present
+   * Only valid when `ai-label` prop is present
    */
   @property({ type: Boolean, attribute: 'has-rounded-corners' })
   hasRoundedCorners = false;
 
   @property({ type: Boolean })
-  slug = false;
+  aiLabel = false;
 
   /**
    * @returns The inner content.
    */
   protected _renderInner() {
-    return html` ${super._renderInner()} ${this.slug ? slugIcon : ''} `;
+    return html` ${super._renderInner()} ${this.aiLabel ? aiLabelIcon : ''} `;
   }
 
   /**
