@@ -130,6 +130,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
   const tooltipRef = useRef(null);
   const {
     as,
+    autoAlign = false,
     children,
     hasIconOnly = false,
     iconDescription,
@@ -191,6 +192,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
         onMouseLeave={onMouseLeave}
         onFocus={onFocus}
         onBlur={onBlur}
+        autoAlign={autoAlign}
         onClick={composeEventHandlers([onClick, handleClick])}
         renderIcon={iconOnlyImage ? null : ButtonImageElement} // avoid doubling the icon.
       >
@@ -211,6 +213,11 @@ Button.propTypes = {
     PropTypes.string,
     PropTypes.elementType,
   ]),
+
+  /**
+   * **Experimental**: Will attempt to automatically align the tooltip
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Specify the content of your Button

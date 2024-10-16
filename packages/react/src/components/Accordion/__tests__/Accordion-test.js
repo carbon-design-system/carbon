@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '../../../../scss/components/accordion/_index.scss';
 import Button from '../../Button';
 import React from 'react';
 import { default as Accordion, AccordionItem } from '../';
@@ -233,25 +232,27 @@ describe('Accordion', () => {
     it('should expand All on click to button', async () => {
       render(<ControlledAccordion />);
 
-      // click to open
       await userEvent.click(screen.getByText('Click to expand all'));
 
-      // test when open
-      expect(screen.getByText('Panel A')).toBeVisible();
-      expect(screen.getByText('Panel B')).toBeVisible();
-      expect(screen.getByText('Panel C')).toBeVisible();
+      // Check if the class `cds--accordion__item--active` is added to all items
+      const items = screen.getAllByRole('listitem');
+      items.forEach((item) => {
+        expect(item).toHaveClass('cds--accordion__item--active');
+      });
     });
 
     it('should Collapse All on click to button', async () => {
       render(<ControlledAccordion />);
 
-      // click to close
+      await userEvent.click(screen.getByText('Click to expand all'));
+
       await userEvent.click(screen.getByText('Click to collapse all'));
 
-      // test when close
-      expect(screen.getByText('Panel A')).not.toBeVisible();
-      expect(screen.getByText('Panel B')).not.toBeVisible();
-      expect(screen.getByText('Panel C')).not.toBeVisible();
+      // Check if the class `cds--accordion__item--active` is removed from all items
+      const items = screen.getAllByRole('listitem');
+      items.forEach((item) => {
+        expect(item).not.toHaveClass('cds--accordion__item--active');
+      });
     });
   });
   describe('Ordered List', () => {

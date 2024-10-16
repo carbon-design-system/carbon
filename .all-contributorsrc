@@ -1589,7 +1589,7 @@
       ]
     },
     {
-     "login": "AliAldobyan",
+      "login": "AliAldobyan",
       "name": "Ali Al Dobyan",
       "avatar_url": "https://avatars.githubusercontent.com/u/17975825?v=4",
       "profile": "https://github.com/AliAldobyan",
@@ -1640,6 +1640,15 @@
       "name": "Divya G",
       "avatar_url": "https://avatars.githubusercontent.com/u/72991264?v=4",
       "profile": "https://github.com/divya-281",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "soumyaraju",
+      "name": "Soumya Raju",
+      "avatar_url": "https://avatars.githubusercontent.com/u/41182657?v=4",
+      "profile": "https://github.com/soumyaraju",
       "contributions": [
         "code"
       ]
