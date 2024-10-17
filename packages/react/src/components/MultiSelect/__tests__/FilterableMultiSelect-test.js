@@ -243,5 +243,160 @@ describe('FilterableMultiSelect', () => {
 
     expect(document.querySelector(`.${prefix}--list-box`).id).toBe('custom-id');
   });
+
+  it('should render with initial selected items', async () => {
+    const initialSelectedItems = [mockProps.items[0], mockProps.items[1]];
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        initialSelectedItems={initialSelectedItems}
+      />
+    );
+    await waitForPosition();
+
+    expect(
+      screen.getAllByRole('button', { name: 'Clear all selected items' })
+    ).toHaveLength(1);
+    expect(screen.getByText('2')).toBeInTheDocument();
+  });
+
+  it('should handle disabled state', async () => {
+    render(<FilterableMultiSelect {...mockProps} disabled={true} />);
+    await waitForPosition();
+
+    expect(screen.getByRole('combobox')).toBeDisabled();
+    await userEvent.click(screen.getByRole('combobox'));
+    assertMenuClosed();
+  });
+
+  it('should handle invalid state', async () => {
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        invalid={true}
+        invalidText="Invalid selection"
+      />
+    );
+    await waitForPosition();
+
+    expect(screen.getByText('Invalid selection')).toBeInTheDocument();
+    expect(
+      screen.getByRole('combobox').closest(`.${prefix}--multi-select`)
+    ).toHaveClass(`${prefix}--multi-select--invalid`);
+  });
+
+  it('should handle warning state', async () => {
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        warn={true}
+        warnText="Warning message"
+      />
+    );
+    await waitForPosition();
+
+    expect(screen.getByText('Warning message')).toBeInTheDocument();
+    expect(
+      screen.getByRole('combobox').closest(`.${prefix}--multi-select`)
+    ).not.toHaveClass(`${prefix}--multi-select--invalid`);
+  });
+
+  it('should call onInputValueChange when typing', async () => {
+    const onInputValueChange = jest.fn();
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        onInputValueChange={onInputValueChange}
+      />
+    );
+    await waitForPosition();
+
+    await openMenu();
+    await userEvent.type(screen.getByRole('combobox'), 'test');
+
+    expect(onInputValueChange).toHaveBeenCalledWith('test');
+  });
+
+  it('should clear all selections when clicking clear all button', async () => {
+    const initialSelectedItems = [mockProps.items[0], mockProps.items[1]];
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        initialSelectedItems={initialSelectedItems}
+      />
+    );
+    await waitForPosition();
+
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Clear all selected items' })
+    );
+
+    expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });
+  });
+
+  it('should handle different sizes', async () => {
+    const { rerender } = render(
+      <FilterableMultiSelect {...mockProps} size="sm" />
+    );
+    await waitForPosition();
+
+    expect(
+      screen.getByRole('combobox').closest(`.${prefix}--multi-select`)
+    ).toHaveClass(`${prefix}--list-box--sm`);
+
+    rerender(<FilterableMultiSelect {...mockProps} size="lg" />);
+    await waitForPosition();
+
+    expect(
+      screen.getByRole('combobox').closest(`.${prefix}--multi-select`)
+    ).toHaveClass(`${prefix}--list-box--lg`);
+  });
+
+  it('should handle selectionFeedback prop', async () => {
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        selectionFeedback="top-after-reopen"
+      />
+    );
+    await waitForPosition();
+
+    await openMenu();
+    await userEvent.click(screen.getAllByRole('option')[2]);
+    await userEvent.click(findMenuIconNode());
+    await openMenu();
+
+    expect(screen.getAllByRole('option')[0]).toHaveTextContent('Item 2');
+  });
+
+  it('should handle custom itemToString prop', async () => {
+    const customItemToString = (item) => `Custom ${item.label}`;
+    render(
+      <FilterableMultiSelect {...mockProps} itemToString={customItemToString} />
+    );
+    await waitForPosition();
+
+    await openMenu();
+
+    expect(screen.getByText('Custom Item 0')).toBeInTheDocument();
+  });
+
+  it('should handle custom compareItems prop', async () => {
+    const customCompareItems = (a, b) => {
+      if (a.text && b.text) {
+        return b.text.localeCompare(a.text);
+      }
+      return 0;
+    };
+    render(
+      <FilterableMultiSelect {...mockProps} compareItems={customCompareItems} />
+    );
+    await waitForPosition();
+
+    await openMenu();
+
+    const options = screen.getAllByRole('option');
+    expect(options[0]).toHaveTextContent('Item 0');
+    expect(options[4]).toHaveTextContent('Item 4');
+  });
 });
-// checking code coverage using codecov
