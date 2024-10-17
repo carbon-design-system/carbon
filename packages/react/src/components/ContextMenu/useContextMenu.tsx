@@ -7,18 +7,28 @@
 
 import { useEffect, useState } from 'react';
 
-/**
- * @param {Element|Document|Window|object} [trigger=document] The element or ref which should trigger the Menu on right-click
- * @returns {object} Props object to pass onto Menu component
- */
-function useContextMenu(trigger = document) {
-  const [open, setOpen] = useState(false);
-  const [position, setPosition] = useState([0, 0]);
+type TriggerType = Element | Document | Window | React.RefObject<Element>;
 
-  function openContextMenu(e) {
+interface ContextMenuProps {
+  open: boolean;
+  x: number;
+  y: number;
+  onClose: () => void;
+  mode: string;
+}
+
+/**
+ * @param {TriggerType} [trigger=document] The element or ref which should trigger the Menu on right-click
+ * @returns {ContextMenuProps} Props object to pass onto Menu component
+ */
+function useContextMenu(trigger: TriggerType = document): ContextMenuProps {
+  const [open, setOpen] = useState<boolean>(false);
+  const [position, setPosition] = useState<[number, number]>([0, 0]);
+
+  function openContextMenu(e: MouseEvent): void {
     e.preventDefault();
 
-    const { x, y } = e;
+    const { clientX: x, clientY: y } = e;
 
     setPosition([x, y]);
     setOpen(true);
@@ -29,17 +39,20 @@ function useContextMenu(trigger = document) {
   }
 
   useEffect(() => {
-    const el = trigger?.current ?? trigger;
+    const el =
+      trigger instanceof Element ||
+      trigger instanceof Document ||
+      trigger instanceof Window
+        ? trigger
+        : trigger.current;
 
-    if (
-      (el && el instanceof Element) ||
-      el instanceof Document ||
-      el instanceof Window
-    ) {
-      el.addEventListener('contextmenu', openContextMenu);
+    if (el) {
+      const eventListener = (e: Event) => openContextMenu(e as MouseEvent);
+
+      el.addEventListener('contextmenu', eventListener);
 
       return () => {
-        el.removeEventListener('contextmenu', openContextMenu);
+        el.removeEventListener('contextmenu', eventListener);
       };
     }
   }, [trigger]);
