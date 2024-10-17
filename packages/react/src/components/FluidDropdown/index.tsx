@@ -6,7 +6,9 @@
  */
 
 import FluidDropdown from './FluidDropdown';
-
+import { type FluidDropdownProps } from './FluidDropdown';
+import { type FluidDropdownSkeletonProps } from './FluidDropdown.Skeleton';
+export type { FluidDropdownProps, FluidDropdownSkeletonProps };
 export default FluidDropdown;
 export { FluidDropdown };
 export { default as FluidDropdownSkeleton } from './FluidDropdown.Skeleton';
