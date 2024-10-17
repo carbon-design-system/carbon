@@ -12,6 +12,7 @@ $font-family: 'IBM Plex Sans Arabic';
 $name: 'IBM-Plex-Sans-Arabic';
 $styles: (normal);
 $formats: (woff2, woff);
+$package-name: 'sans-arabic';
 
 @mixin thin() {
   @font-face {
@@ -23,7 +24,8 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: Thin,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
@@ -38,7 +40,8 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: ExtraLight,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
@@ -53,7 +56,8 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: Light,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
@@ -68,7 +72,8 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: Regular,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
@@ -83,7 +88,8 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: Text,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
@@ -98,7 +104,8 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: Medium,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
@@ -113,7 +120,8 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: SemiBold,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
@@ -128,7 +136,8 @@ $formats: (woff2, woff);
       $name: $name,
       $weight: Bold,
       $style: $styles,
-      $formats: $formats
+      $formats: $formats,
+      $package-name: $package-name
     );
   }
 }
