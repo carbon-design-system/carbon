@@ -2000,7 +2000,8 @@ Map {
       },
     },
     "TableCell": Object {
-      "displayName": "TableCell",
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
     },
     "TableContainer": Object {
       "propTypes": Object {
@@ -4759,6 +4760,12 @@ Map {
         ],
         "type": "oneOf",
       },
+      "menuTarget": Object {
+        "args": Array [
+          [Function],
+        ],
+        "type": "instanceOf",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -5875,9 +5882,6 @@ Map {
           ],
         ],
         "type": "oneOf",
-      },
-      "slug": Object {
-        "type": "node",
       },
       "text": Object {
         "type": "string",
@@ -7014,9 +7018,6 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
       "text": Object {
         "type": "string",
       },
@@ -8016,7 +8017,8 @@ Map {
     },
   },
   "TableCell" => Object {
-    "displayName": "TableCell",
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "TableContainer" => Object {
     "propTypes": Object {
