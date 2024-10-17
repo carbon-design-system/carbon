@@ -164,7 +164,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   _hasSubtitle = false;
 
   @state()
-  _hasAILabel = false;
+  _hasSlug = false;
 
   @state()
   _hasActionToolbar = false;
@@ -373,7 +373,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   };
 
   private _checkUpdateIconButtonSizes = () => {
-    const slug = this.querySelector(`${prefix}-ai-label`);
+    const slug = this.querySelector(`${prefix}-slug`);
     const otherButtons = this?.shadowRoot?.querySelectorAll(
       '#nav-back-button, #close-button'
     );
@@ -405,7 +405,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._checkUpdateIconButtonSizes();
     const childItems = (e.target as HTMLSlotElement).assignedElements();
 
-    this._hasAILabel = childItems.length > 0;
+    this._hasSlug = childItems.length > 0;
   }
 
   private _handleSubtitleChange(e: Event) {
@@ -743,7 +743,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
 
         <!-- render slug and close button area -->
         <div class=${`${blockClass}__slug-and-close`}>
-          <slot name="ai-label" @slotchange=${this._handleSlugChange}></slot>
+          <slot name="slug" @slotchange=${this._handleSlugChange}></slot>
           <!-- {normalizedSlug} -->
           <cds-icon-button
             align="bottom-right"
@@ -798,7 +798,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         part="dialog"
         role="complementary"
         placement="${placement}"
-        ?has-slug=${this._hasAILabel}
+        ?has-slug=${this._hasSlug}
         ?open=${this._isOpen}
         ?opening=${open && !this._isOpen}
         ?closing=${!open && this._isOpen}

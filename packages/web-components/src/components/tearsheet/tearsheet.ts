@@ -133,7 +133,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
   _hasLabel = false;
 
   @state()
-  _hasAILabel = false;
+  _hasSlug = false;
 
   @state()
   _hasTitle = false;
@@ -312,12 +312,12 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
   private _handleSlugChange(e: Event) {
     const childItems = (e.target as HTMLSlotElement).assignedElements();
 
-    this._hasAILabel = childItems.length > 0;
-    if (this._hasAILabel) {
+    this._hasSlug = childItems.length > 0;
+    if (this._hasSlug) {
       childItems[0].setAttribute('size', 'lg');
-      this.setAttribute('ai-label', '');
+      this.setAttribute('slug', '');
     } else {
-      this.removeAttribute('ai-label');
+      this.removeAttribute('slug');
     }
   }
 
@@ -541,7 +541,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
       ?has-navigation=${this._hasHeaderNavigation && this.width === 'wide'}
       ?has-header-actions=${this._hasHeaderActions && this.width === 'wide'}
       ?has-actions=${this?._actionsCount > 0}
-      ?has-slug=${this?._hasAILabel}
+      ?has-slug=${this?._hasSlug}
       width=${width}>
       ${this.width === TEARSHEET_WIDTH.WIDE
         ? html`<cds-layer level="1" class=${`${blockClass}__header-content`}
@@ -556,7 +556,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
           name="header-navigation"
           @slotchange=${this._checkSetHasSlot}></slot>
       </div>
-      <slot name="ai-label" @slotchange=${this._handleSlugChange}></slot>
+      <slot name="slug" @slotchange=${this._handleSlugChange}></slot>
       ${this.hasCloseIcon || this?._actionsCount === 0
         ? html`<cds-modal-close-button
             close-button-label=${closeIconDescription}
