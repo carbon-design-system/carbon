@@ -486,55 +486,6 @@ describe('FilterableMultiSelect', () => {
     );
   });
 
-  // it('should handle locale prop', async () => {
-  //   const customCompareItems = jest.fn((a, b, options = {}) => {
-  //     // Use the 'label' property for comparison
-  //     return a.label.localeCompare(b.label, options.locale);
-  //   });
-
-  //   render(
-  //     <FilterableMultiSelect
-  //       {...mockProps}
-  //       locale="fr"
-  //       compareItems={customCompareItems}
-  //     />
-  //   );
-
-  //   await waitForPosition();
-  //   await openMenu();
-
-  //   // Verify that customCompareItems was called
-  //   expect(customCompareItems).toHaveBeenCalled();
-
-  //   // Check that it was called with the correct locale
-  //   const calls = customCompareItems.mock.calls;
-  //   expect(calls.some((call) => call[2] && call[2].locale === 'fr')).toBe(true);
-
-  //   // Verify the structure of the items being compared
-  //   const firstCall = customCompareItems.mock.calls[0];
-  //   expect(firstCall[0]).toMatchObject({
-  //     id: expect.stringContaining('id-'),
-  //     label: expect.stringContaining('Item '),
-  //     value: expect.any(Number),
-  //   });
-  //   expect(firstCall[1]).toMatchObject({
-  //     id: expect.stringContaining('id-'),
-  //     label: expect.stringContaining('Item '),
-  //     value: expect.any(Number),
-  //   });
-  // });
-
-  // it('should handle direction prop', async () => {
-  //   const { container } = render(
-  //     <FilterableMultiSelect {...mockProps} direction="top" />
-  //   );
-  //   await waitForPosition();
-
-  //   expect(container.querySelector(`.${prefix}--list-box`)).toHaveClass(
-  //     `${prefix}--list-box--up`
-  //   );
-  // });
-
   it('should handle itemToElement prop', async () => {
     const items = [{ text: 'test-item' }];
     const label = 'test-label';
@@ -579,33 +530,6 @@ describe('FilterableMultiSelect', () => {
     expect(translateWithId).toHaveBeenCalled();
     expect(screen.getByTitle('Custom close.menu')).toBeInTheDocument();
   });
-
-  // it('should handle fluid form context', async () => {
-  //   const user = userEvent.setup();
-  //   const FormContext = React.createContext({ isFluid: true });
-
-  //   render(
-  //     <FormContext.Provider value={{ isFluid: true }}>
-  //       <FilterableMultiSelect {...mockProps} />
-  //     </FormContext.Provider>
-  //   );
-
-  //   await waitForPosition();
-
-  //   // Find the input element (combobox) within the FilterableMultiSelect
-  //   const combobox = screen.getByRole('combobox');
-
-  //   // Click on the combobox
-  //   await user.click(combobox);
-
-  //   // Find the list box wrapper
-  //   const listBoxWrapper = combobox.closest(`.${prefix}--list-box__wrapper`);
-
-  //   // Check if the wrapper has the fluid focus class
-  //   expect(listBoxWrapper).toHaveClass(
-  //     `${prefix}--list-box__wrapper--fluid--focus`
-  //   );
-  // });
 
   it('should handle keyboard navigation', async () => {
     render(<FilterableMultiSelect {...mockProps} />);
