@@ -128,9 +128,8 @@
       "../../config/stylelint-config-carbon"
     ],
     "rules": {
-      "max-nesting-depth": 3  
+      "max-nesting-depth": 3
     },
-
     "overrides": [
       {
         "files": [
