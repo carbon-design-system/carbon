@@ -13,13 +13,9 @@ import { WithFeatureFlags } from '../../../../.storybook/templates/WithFeatureFl
 
 // eslint-disable-next-line storybook/csf-component
 export default {
-  title: 'Experimental/Feature Flags/Notifications/Actionable',
+  title: 'Components/Notifications/Actionable/Feature Flag',
   component: ActionableNotification,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
+  tags: ['!autodocs'],
   decorators: [
     (Story) => (
       <WithFeatureFlags>
@@ -35,24 +31,6 @@ export default {
     statusIconDescription: 'notification',
     onClose: action('onClose'),
     onCloseButtonClick: action('onCloseButtonClick'),
-  },
-};
-
-export const Default = () => (
-  <ActionableNotification
-    title="Notification title"
-    subtitle="Subtitle text goes here"
-    closeOnEscape
-    inline={false}
-    actionButtonLabel="Action"
-  />
-);
-
-Default.argTypes = {
-  hasFocus: {
-    table: {
-      disable: true,
-    },
   },
 };
 

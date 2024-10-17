@@ -184,16 +184,12 @@ function renderTree(nodes) {
 }
 
 export default {
-  title: 'Experimental/Feature Flags/TreeView',
+  title: 'components/TreeView/Feature Flag',
   component: TreeView,
   subcomponents: {
     TreeNode,
   },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
+  tags: ['!autodocs'],
   args: {
     onSelect: action('onSelect'),
   },
