@@ -127,13 +127,12 @@
     "extends": [
       "../../config/stylelint-config-carbon"
     ],
-    "rules": {
-      "max-nesting-depth": 3
-    },
+    
     "overrides": [
       {
         "files": [
           "src/components/**/*.scss"
+         
         ],
         "rules": {
           "max-nesting-depth": null

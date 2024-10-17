@@ -76,7 +76,6 @@
         }
 
         @include breakpoint($key) {
-          /* stylelint-disable-next-line max-nesting-depth */
           @each $name, $value in $changes {
             --cds-#{$name}: #{$value};
           }

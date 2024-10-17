@@ -144,10 +144,7 @@
   "stylelint": {
     "extends": [
       "./config/stylelint-config-carbon"
-    ],
-    "rules": {
-      "max-nesting-depth": 3
-    }
-  },
+    ]
+    },
   "packageManager": "yarn@4.4.1"
 }
