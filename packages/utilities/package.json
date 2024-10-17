@@ -36,7 +36,7 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
-    "esbuild": "^0.23.0",
+    "esbuild": "^0.24.0",
     "rimraf": "^6.0.0"
   },
   "dependencies": {
