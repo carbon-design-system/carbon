@@ -119,7 +119,7 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
       const childJsxElement = children as JSX.Element;
 
       if (
-        childJsxElement.type?.displayName === 'Switcher' &&
+        childJsxElement?.type?.displayName === 'Switcher' &&
         !focusedElement?.closest(`.${prefix}--header-panel--expanded`) &&
         !focusedElement?.closest(`.${prefix}--header__action`) &&
         !headerPanelReference?.current?.classList.contains(
