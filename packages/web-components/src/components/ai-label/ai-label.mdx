@@ -21,9 +21,9 @@ AI instances in a way that is identifiable across any IBM product.
 
 Here's a quick example to get you started.
 
-The `AILabel` itself is a button that acts as a `Toggletip` trigger. To
-construct the contents of the `AILabel` callout, you can place the desired
-elements as a child of `AILabel` in a div with slot `body-text`, like so:
+The `AI Label` itself is a button that acts as a `Toggletip` trigger. To
+construct the contents of the `AI Label` callout, you can place the desired
+elements as a child of `AI Label` in a div with slot `body-text`, like so:
 
 ### JS (via import)
 
@@ -44,7 +44,7 @@ import '@carbon/web-components/es/components/ai-label/index.js';
 
 ### HTML (with actions)
 
-The `AILabel` also supports the rendering of an action bar at the bottom of the
+The `AI Label` also supports the rendering of an action bar at the bottom of the
 callout. To achieve this, you can add elements with `slot="actions"` inside the
 `slot="body-text"` element
 
@@ -71,7 +71,7 @@ callout. To achieve this, you can add elements with `slot="actions"` inside the
 
 ### AI Label `aiText`
 
-If needed, you can change the text inside the `AILabel` when translating to
+If needed, you can change the text inside the `AI Label` when translating to
 different languages.
 
 ```html
@@ -93,7 +93,7 @@ the `ai-text-label` prop.
 
 ### AI Label `kind`
 
-The `AILabel` component has two variants, `default` and `inline`.
+The `AI Label` component has two variants, `default` and `inline`.
 
 ```html
 <cds-ai-label size="xs">
@@ -101,7 +101,7 @@ The `AILabel` component has two variants, `default` and `inline`.
 </cds-ai-label>
 ```
 
-The `inline` `AILabel` with the standard icon can also trigger the AI
+The `inline` `AI Label` with the standard icon can also trigger the AI
 explainability callout.
 
 ```html
@@ -112,8 +112,8 @@ explainability callout.
 
 ### AI Label `revertActive`
 
-`revert-active` is a boolean prop that can be set on `AILabel` that transforms
-the `AILabel` into a revert action button. This is useful if a user edits an
+`revert-active` is a boolean prop that can be set on `AI Label` that transforms
+the `AI Label` into a revert action button. This is useful if a user edits an
 AI-generated input to show that the element has been modified. This can be used
 in conjunction with the `@click` event listener to handle restoring the element
 to the AI-generated state. For an example, please take a look at the
