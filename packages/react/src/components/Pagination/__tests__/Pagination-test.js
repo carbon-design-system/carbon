@@ -1,5 +1,5 @@
 import React from 'react';
-import Pagination from './Pagination';
+import Pagination from '../Pagination';
 import userEvent from '@testing-library/user-event';
 import { getAllByRole, render, screen } from '@testing-library/react';
 
