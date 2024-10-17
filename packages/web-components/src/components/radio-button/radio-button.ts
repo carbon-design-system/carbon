@@ -131,7 +131,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   private _handleClick = (event) => {
     if (
       !(event.target as HTMLElement).matches(
-        (this.constructor as typeof CDSRadioButton)?.slugItem
+        (this.constructor as typeof CDSRadioButton)?.aiLabelItem
       )
     ) {
       const { disabled, _radioButtonDelegate: radioButtonDelegate } = this;
@@ -176,7 +176,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   private _handleKeydown = (event: KeyboardEvent) => {
     if (
       !(event.target as HTMLElement).matches(
-        (this.constructor as typeof CDSRadioButton)?.slugItem
+        (this.constructor as typeof CDSRadioButton)?.aiLabelItem
       )
     ) {
       const { orientation, _radioButtonDelegate: radioButtonDelegate } = this;
@@ -209,12 +209,12 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSRadioButton).slugItem
+              (this.constructor as typeof CDSRadioButton).aiLabelItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     const type = (hasContent[0] as HTMLElement).getAttribute('kind');
     (hasContent[0] as HTMLElement).setAttribute(
       'size',
@@ -224,9 +224,9 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   /**
    * `true` if this radio button should be checked.
@@ -313,7 +313,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
 
   updated(changedProperties) {
     const {
-      _hasSlug: hasSlug,
+      _hasAILabel: hasAILabel,
       _inputNode: inputNode,
       _radioButtonDelegate: radioButtonDelegate,
       name,
@@ -342,7 +342,9 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
           : '0'
       );
     }
-    hasSlug ? this.setAttribute('slug', '') : this.removeAttribute('slug');
+    hasAILabel
+      ? this.setAttribute('ai-label', '')
+      : this.removeAttribute('ai-label');
   }
 
   render() {
@@ -370,19 +372,19 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         value=${ifDefined(value)} />
       <label for="input" class="${prefix}--radio-button__label">
         <span class="${prefix}--radio-button__appearance"></span>
-        <span class="${innerLabelClasses}"
-          ><slot>${labelText}</slot>
-          <slot name="slug" @slotchange="${this._handleSlotChange}"></slot
+        <span class="${innerLabelClasses}">
+          ${labelText}
+          <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot
         ></span>
       </label>
     `;
   }
 
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the AI Label item.
    */
-  static get slugItem() {
-    return `${prefix}-slug`;
+  static get aiLabelItem() {
+    return `${prefix}-ai-label`;
   }
 
   /**

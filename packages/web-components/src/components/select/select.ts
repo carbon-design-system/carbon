@@ -35,9 +35,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-select`)
 class CDSSelect extends FormMixin(LitElement) {
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   /**
    * The mutation observer DOM mutation.
@@ -145,18 +145,18 @@ class CDSSelect extends FormMixin(LitElement) {
   /**
    * Handles `slotchange` event.
    */
-  protected _handleSlugSlotChange({ target }: Event) {
+  protected _handleAILabelSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSSelect).slugItem
+              (this.constructor as typeof CDSSelect).aiLabelItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     this.requestUpdate();
   }
@@ -346,10 +346,10 @@ class CDSSelect extends FormMixin(LitElement) {
     }
 
     this.shadowRoot
-      ?.querySelector("slot[name='slug']")
+      ?.querySelector("slot[name='ai-label']")
       ?.classList.toggle(
         `${prefix}--slug--revert`,
-        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
   }
 
@@ -370,8 +370,8 @@ class CDSSelect extends FormMixin(LitElement) {
       value,
       _placeholderItemValue: placeholderItemValue,
       _handleInput: handleInput,
-      _handleSlugSlotChange: handleSlugSlotChange,
-      _hasSlug: hasSlug,
+      _handleAILabelSlotChange: handleAILabelSlotChange,
+      _hasAILabel: hasAILabel,
     } = this;
 
     const selectClasses = classMap({
@@ -381,7 +381,7 @@ class CDSSelect extends FormMixin(LitElement) {
       [`${prefix}--select--warning`]: warn,
       [`${prefix}--select--disabled`]: disabled,
       [`${prefix}--select--readonly`]: readonly,
-      [`${prefix}--select--slug`]: hasSlug,
+      [`${prefix}--select--slug`]: hasAILabel,
     });
 
     const inputClasses = classMap({
@@ -438,7 +438,7 @@ class CDSSelect extends FormMixin(LitElement) {
         ${this._renderItems(this)}
       </select>
       ${ChevronDown16({ class: `${prefix}--select__arrow` })}
-      <slot name="slug" @slotchange=${handleSlugSlotChange}></slot>
+      <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>
       ${!invalid
         ? undefined
         : WarningFilled16({ class: `${prefix}--select__invalid-icon` })}
@@ -490,10 +490,10 @@ class CDSSelect extends FormMixin(LitElement) {
   }
 
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the AI Label item.
    */
-  static get slugItem() {
-    return `${prefix}-slug`;
+  static get aiLabelItem() {
+    return `${prefix}-ai-label`;
   }
 
   /**

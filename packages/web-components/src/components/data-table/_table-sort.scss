@@ -58,13 +58,13 @@
 }
 
 // places slug near sorting icon in header
-:host(#{$prefix}-table-header-cell[sort-direction][slug]) {
+:host(#{$prefix}-table-header-cell[sort-direction][ai-label]) {
   .#{$prefix}--table-sort__icon-unsorted,
   .#{$prefix}--table-sort__icon {
     margin-inline: auto $spacing-03;
   }
 
-  ::slotted(#{$prefix}-slug) {
+  ::slotted(#{$prefix}-ai-label) {
     margin-inline-end: $spacing-03;
   }
 }

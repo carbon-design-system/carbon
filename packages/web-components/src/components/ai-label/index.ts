@@ -7,5 +7,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './slug';
-import './slug-action-button';
+import './ai-label';
+import './ai-label-action-button';

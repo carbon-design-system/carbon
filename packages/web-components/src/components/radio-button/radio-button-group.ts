@@ -83,20 +83,20 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSRadioButtonGroup).slugItem
+              (this.constructor as typeof CDSRadioButtonGroup).aiLabelItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     this.requestUpdate();
   }
 
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   /**
    * The `value` attribute for the `<input>` for selection.
@@ -215,7 +215,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
       orientation,
       legendText,
       helperText,
-      _hasSlug: hasSlug,
+      _hasAILabel: hasAILabel,
       _handleSlotChange: handleSlotChange,
     } = this;
 
@@ -239,7 +239,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
       [`${prefix}--radio-button-group--readonly`]: readOnly,
       [`${prefix}--radio-button-group--${orientation}`]:
         orientation === 'vertical',
-      [`${prefix}--radio-button-group--slug`]: hasSlug,
+      [`${prefix}--radio-button-group--slug`]: hasAILabel,
     });
 
     return html` <fieldset
@@ -249,7 +249,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
         ${legendText
           ? html` <legend class="${prefix}--label">
               ${legendText}
-              <slot name="slug" @slotchange="${handleSlotChange}"></slot>
+              <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>
             </legend>`
           : ``}
         <slot></slot>
@@ -277,10 +277,10 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   }
 
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the AI Label item.
    */
-  static get slugItem() {
-    return `${prefix}-slug`;
+  static get aiLabelItem() {
+    return `${prefix}-ai-label`;
   }
 
   /**
