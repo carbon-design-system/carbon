@@ -69,6 +69,11 @@ export interface FluidSelectProps {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: React.ReactNode;
+
+  /**
+   * Whether or not the component is readonly
+   */
+  readOnly?: boolean;
 }
 
 const FluidSelect = React.forwardRef<HTMLSelectElement, FluidSelectProps>(
@@ -143,6 +148,11 @@ FluidSelect.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Whether or not the component is readonly
+   */
+  readOnly: PropTypes.bool,
 };
 
 export default FluidSelect;
