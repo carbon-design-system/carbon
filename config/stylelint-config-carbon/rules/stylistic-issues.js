@@ -77,11 +77,5 @@ export default {
 
     // Shorthands
     'declaration-block-no-redundant-longhand-properties': OFF,
-    'max-nesting-depth': [
-      0,
-      {
-        ignoreAtRules: ['if', 'else', 'each', 'include', 'mixin'],
-      },
-    ],
   },
 };
