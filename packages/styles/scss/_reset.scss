@@ -150,8 +150,6 @@
   blockquote::after,
   q::before,
   q::after {
-    content: '';
-    // stylelint-disable-next-line declaration-block-no-duplicate-properties
     content: none;
   }
 

@@ -63,7 +63,7 @@ describe('zone', () => {
         ([token, value]) => {
           return rule.declarations.find((declaration) => {
             return (
-              declaration.property.includes(token) &&
+              declaration?.property?.includes(token) &&
               declaration.value === value
             );
           });

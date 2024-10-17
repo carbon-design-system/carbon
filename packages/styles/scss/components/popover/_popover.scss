@@ -62,7 +62,6 @@ $popover-text-color: custom-property.get-var(
 // The distance between the popover container and the triggering element
 // Specify the distance between the popover and the trigger. This value must
 // have a unit otherwise the `calc()` expression will not work
-// stylelint-disable-next-line length-zero-no-unit
 $popover-offset: custom-property.get-var('popover-offset', 0rem);
 
 // Customize the dimensions of the caret by specifying its width or height.
@@ -297,7 +296,7 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover-content::before {
     block-size: $popover-offset;
     inset-block-start: 0;
-    inset-inline: 0 0;
+    inset-inline: 0;
     transform: translateY(-100%);
   }
 
@@ -460,7 +459,7 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover-content::before {
     block-size: $popover-offset;
     inset-block-end: 0;
-    inset-inline: 0 0;
+    inset-inline: 0;
     transform: translateY(100%);
   }
 
@@ -616,7 +615,7 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content::before {
     inline-size: $popover-offset;
-    inset-block: 0 0;
+    inset-block: 0;
     inset-inline-start: 0;
     transform: translateX(-100%);
   }
@@ -783,7 +782,7 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content::before {
     inline-size: $popover-offset;
-    inset-block: 0 0;
+    inset-block: 0;
     inset-inline-end: 0;
     transform: translateX(100%);
   }

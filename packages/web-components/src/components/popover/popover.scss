@@ -20,7 +20,7 @@ $css--plex: true !default;
 // The distance between the popover container and the triggering element
 // Specify the distance between the popover and the trigger. This value must
 // have a unit otherwise the `calc()` expression will not work
-// stylelint-disable-next-line length-zero-no-unit
+
 $popover-offset: custom-property.get-var('popover-offset', 0rem);
 
 // Customize the dimensions of the caret by specifying its width or height.

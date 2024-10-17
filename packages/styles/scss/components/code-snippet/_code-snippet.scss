@@ -555,7 +555,7 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   // Windows HCM fix
-  /* stylelint-disable */
+
   .#{$prefix}--snippet__icon {
     @include high-contrast-mode('icon-fill');
   }
@@ -568,5 +568,4 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--multi {
     @include high-contrast-mode('outline');
   }
-  /* stylelint-enable */
 }

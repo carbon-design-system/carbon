@@ -16,7 +16,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/combo-box' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/text-input/text-input';
-@use '../dropdown/dropdown.scss';
+@use '../dropdown/dropdown';
 
 :host(#{$prefix}-combo-box) {
   @extend :host(#{$prefix}-dropdown);

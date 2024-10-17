@@ -306,7 +306,7 @@
   }
 
   // Windows HCM fix
-  /* stylelint-disable */
+
   .#{$prefix}--inline-notification {
     @include high-contrast-mode('outline');
   }
@@ -323,5 +323,4 @@
     .#{$prefix}--inline-notification__close-icon {
     @include high-contrast-mode('icon-fill');
   }
-  /* stylelint-enable */
 }

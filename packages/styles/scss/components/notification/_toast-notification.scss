@@ -222,7 +222,7 @@
   }
 
   // Windows HCM fix
-  /* stylelint-disable */
+
   .#{$prefix}--toast-notification {
     @include high-contrast-mode('outline');
   }
@@ -235,5 +235,4 @@
   .#{$prefix}--toast-notification .#{$prefix}--toast-notification__icon {
     @include high-contrast-mode('icon-fill');
   }
-  /* stylelint-enable */
 }

@@ -7,7 +7,7 @@
 
 'use strict';
 
-module.exports = {
+export default {
   extends: ['stylelint-config-prettier'],
   plugins: ['stylelint-prettier'],
   rules: {

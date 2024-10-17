@@ -236,7 +236,7 @@
   }
 
   // Windows HCM fix
-  // stylelint-disable-next-line no-duplicate-selectors
+
   .#{$prefix}--date-picker__icon {
     @include high-contrast-mode('icon-fill');
   }

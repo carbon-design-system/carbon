@@ -475,7 +475,7 @@
   }
 
   // Windows HCM fix
-  /* stylelint-disable */
+
   .#{$prefix}--actionable-notification {
     @include high-contrast-mode('outline');
   }
@@ -491,5 +491,4 @@
     .#{$prefix}--actionable-notification__close-icon {
     @include high-contrast-mode('icon-fill');
   }
-  /* stylelint-enable */
 }

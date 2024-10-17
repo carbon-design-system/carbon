@@ -198,7 +198,7 @@
     block-size: 1px;
     content: '';
     inset-block-end: 0;
-    inset-inline: 0 0;
+    inset-inline: 0;
   }
 
   .#{$prefix}--contained-list--inset-rulers
@@ -248,7 +248,7 @@
     display: flex;
     justify-content: flex-end;
     inset-block-start: 0;
-    inset-inline: 0 0;
+    inset-inline: 0;
     pointer-events: none;
   }
 

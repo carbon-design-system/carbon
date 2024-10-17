@@ -461,7 +461,7 @@
   }
 
   // Windows HCM fix
-  // stylelint-disable-next-line no-duplicate-selectors
+
   .#{$prefix}--dropdown .#{$prefix}--list-box__field {
     @include high-contrast-mode('outline');
   }
