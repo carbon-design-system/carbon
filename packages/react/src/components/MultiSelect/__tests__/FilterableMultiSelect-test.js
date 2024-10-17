@@ -399,4 +399,258 @@ describe('FilterableMultiSelect', () => {
     expect(options[0]).toHaveTextContent('Item 0');
     expect(options[4]).toHaveTextContent('Item 4');
   });
+
+  it('should handle autoAlign prop', async () => {
+    const { container } = render(
+      <FilterableMultiSelect {...mockProps} autoAlign />
+    );
+    await waitForPosition();
+
+    expect(container.firstChild).toHaveClass(`${prefix}--autoalign`);
+  });
+
+  it('should handle inline type', async () => {
+    const { container } = render(
+      <FilterableMultiSelect {...mockProps} type="inline" />
+    );
+    await waitForPosition();
+
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--multi-select__wrapper--inline`
+    );
+  });
+
+  it('should handle hideLabel prop', async () => {
+    render(
+      <FilterableMultiSelect {...mockProps} titleText="Test Title" hideLabel />
+    );
+    await waitForPosition();
+
+    expect(screen.getByText('Test Title')).toHaveClass(
+      `${prefix}--visually-hidden`
+    );
+  });
+
+  it('should handle custom filterItems function', async () => {
+    const customFilterItems = jest.fn((items) =>
+      items.filter((item) => item.label.includes('2'))
+    );
+    render(
+      <FilterableMultiSelect {...mockProps} filterItems={customFilterItems} />
+    );
+    await waitForPosition();
+
+    await openMenu();
+    await userEvent.type(screen.getByRole('combobox'), '2');
+
+    expect(customFilterItems).toHaveBeenCalled();
+    expect(screen.getAllByRole('option')).toHaveLength(1);
+    expect(screen.getByText('Item 2')).toBeInTheDocument();
+  });
+
+  it('should handle custom sortItems function', async () => {
+    const customSortItems = jest.fn((items) =>
+      [...items].sort((a, b) => b.label.localeCompare(a.label))
+    );
+    render(
+      <FilterableMultiSelect {...mockProps} sortItems={customSortItems} />
+    );
+    await waitForPosition();
+
+    await openMenu();
+
+    expect(customSortItems).toHaveBeenCalled();
+    const options = screen.getAllByRole('option');
+    expect(options[0]).toHaveTextContent('Item 4');
+    expect(options[4]).toHaveTextContent('Item 0');
+  });
+
+  it('should handle useTitleInItem prop', async () => {
+    render(<FilterableMultiSelect {...mockProps} useTitleInItem />);
+    await waitForPosition();
+
+    await openMenu();
+
+    const option = screen.getAllByRole('option')[0];
+    expect(option.querySelector('span')).toHaveAttribute('title', 'Item 0');
+  });
+
+  it('should handle helperText prop', async () => {
+    render(
+      <FilterableMultiSelect {...mockProps} helperText="This is helper text" />
+    );
+    await waitForPosition();
+
+    expect(screen.getByText('This is helper text')).toHaveClass(
+      `${prefix}--form__helper-text`
+    );
+  });
+
+  // it('should handle locale prop', async () => {
+  //   const customCompareItems = jest.fn((a, b, options = {}) => {
+  //     // Use the 'label' property for comparison
+  //     return a.label.localeCompare(b.label, options.locale);
+  //   });
+
+  //   render(
+  //     <FilterableMultiSelect
+  //       {...mockProps}
+  //       locale="fr"
+  //       compareItems={customCompareItems}
+  //     />
+  //   );
+
+  //   await waitForPosition();
+  //   await openMenu();
+
+  //   // Verify that customCompareItems was called
+  //   expect(customCompareItems).toHaveBeenCalled();
+
+  //   // Check that it was called with the correct locale
+  //   const calls = customCompareItems.mock.calls;
+  //   expect(calls.some((call) => call[2] && call[2].locale === 'fr')).toBe(true);
+
+  //   // Verify the structure of the items being compared
+  //   const firstCall = customCompareItems.mock.calls[0];
+  //   expect(firstCall[0]).toMatchObject({
+  //     id: expect.stringContaining('id-'),
+  //     label: expect.stringContaining('Item '),
+  //     value: expect.any(Number),
+  //   });
+  //   expect(firstCall[1]).toMatchObject({
+  //     id: expect.stringContaining('id-'),
+  //     label: expect.stringContaining('Item '),
+  //     value: expect.any(Number),
+  //   });
+  // });
+
+  // it('should handle direction prop', async () => {
+  //   const { container } = render(
+  //     <FilterableMultiSelect {...mockProps} direction="top" />
+  //   );
+  //   await waitForPosition();
+
+  //   expect(container.querySelector(`.${prefix}--list-box`)).toHaveClass(
+  //     `${prefix}--list-box--up`
+  //   );
+  // });
+
+  it('should handle itemToElement prop', async () => {
+    const items = [{ text: 'test-item' }];
+    const label = 'test-label';
+
+    render(
+      <FilterableMultiSelect
+        id="custom-id"
+        label={label}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        itemToElement={(item) =>
+          item ? (
+            <span className="test-element" data-testid="custom-id-item">
+              {item.text}{' '}
+              <span role="img" alt="fire">
+                {' '}
+                🔥
+              </span>
+            </span>
+          ) : (
+            <span></span>
+          )
+        }
+      />
+    );
+    await waitForPosition();
+
+    await openMenu();
+
+    expect(screen.getAllByTestId('custom-id-item')).toHaveLength(1);
+    expect(screen.getByText('test-item')).toBeInTheDocument();
+  });
+
+  it('should handle custom translateWithId', async () => {
+    const translateWithId = jest.fn((id) => `Custom ${id}`);
+    render(
+      <FilterableMultiSelect {...mockProps} translateWithId={translateWithId} />
+    );
+    await waitForPosition();
+
+    await openMenu();
+    expect(translateWithId).toHaveBeenCalled();
+    expect(screen.getByTitle('Custom close.menu')).toBeInTheDocument();
+  });
+
+  // it('should handle fluid form context', async () => {
+  //   const user = userEvent.setup();
+  //   const FormContext = React.createContext({ isFluid: true });
+
+  //   render(
+  //     <FormContext.Provider value={{ isFluid: true }}>
+  //       <FilterableMultiSelect {...mockProps} />
+  //     </FormContext.Provider>
+  //   );
+
+  //   await waitForPosition();
+
+  //   // Find the input element (combobox) within the FilterableMultiSelect
+  //   const combobox = screen.getByRole('combobox');
+
+  //   // Click on the combobox
+  //   await user.click(combobox);
+
+  //   // Find the list box wrapper
+  //   const listBoxWrapper = combobox.closest(`.${prefix}--list-box__wrapper`);
+
+  //   // Check if the wrapper has the fluid focus class
+  //   expect(listBoxWrapper).toHaveClass(
+  //     `${prefix}--list-box__wrapper--fluid--focus`
+  //   );
+  // });
+
+  it('should handle keyboard navigation', async () => {
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    const input = screen.getByRole('combobox');
+    await userEvent.type(input, '{arrowdown}');
+    expect(mockProps.onMenuChange).toHaveBeenCalledWith(true);
+
+    await userEvent.keyboard('[Enter]');
+    expect(screen.getAllByRole('option')[0]).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+
+    await userEvent.type(input, '{escape}');
+    assertMenuClosed();
+  });
+
+  it('should handle clearInputValue function', async () => {
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    await openMenu();
+    await userEvent.type(screen.getByRole('combobox'), 'test');
+    expect(screen.getByRole('combobox')).toHaveValue('test');
+
+    const clearButton = screen.getByRole('button', {
+      name: 'Clear selected item',
+    });
+    await userEvent.click(clearButton);
+    expect(screen.getByRole('combobox')).toHaveValue('');
+  });
+
+  it('should handle selectionFeedback prop with "fixed" value', async () => {
+    render(<FilterableMultiSelect {...mockProps} selectionFeedback="fixed" />);
+    await waitForPosition();
+
+    await openMenu();
+    await userEvent.click(screen.getAllByRole('option')[2]);
+    await userEvent.click(findMenuIconNode());
+    await openMenu();
+
+    const options = screen.getAllByRole('option');
+    expect(options[2]).toHaveTextContent('Item 2');
+    expect(options[2]).toHaveAttribute('aria-selected', 'true');
+  });
 });
