@@ -254,4 +254,28 @@ describe('MenuItem', () => {
       spy.mockRestore();
     });
   });
+
+  it('should call onChange once', async () => {
+    const onChange = jest.fn();
+
+    render(
+      <Menu open label="Menu">
+        <MenuItem label="Menu">
+          <MenuItemRadioGroup
+            label="MenuItemRadioGroup"
+            items={[
+              { label: 'Item 1', value: '1' },
+              { label: 'Item 2', value: '2' },
+            ]}
+            onChange={onChange}
+            itemToString={(item) => item.label}
+          />
+        </MenuItem>
+      </Menu>
+    );
+
+    await userEvent.click(screen.getByTitle('Menu'));
+    await userEvent.click(screen.getByTitle('Item 1'));
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
 });
