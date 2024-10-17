@@ -372,19 +372,36 @@
 
     &:hover {
       cursor: not-allowed;
-      transform: translate(-50%, -50%);
+      transform: none;
     }
 
     &:focus {
       background-color: $border-disabled;
       box-shadow: none;
       outline: none;
-      transform: translate(-50%, -50%);
+      transform: none;
     }
 
     &:active {
       background: $border-disabled;
-      transform: translate(-50%, -50%);
+      box-shadow: none;
+      transform: none;
+    }
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb--lower,
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb--upper {
+    background-color: transparent;
+
+    &:active,
+    &:hover,
+    &:focus {
+      background-color: transparent;
+      transform: none;
+    }
+
+    .#{$prefix}--slider__thumb-icon {
+      fill: $border-disabled;
     }
   }
 
