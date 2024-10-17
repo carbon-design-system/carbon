@@ -1,9 +1,10 @@
-import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs';
+import { Meta } from '@storybook/blocks';
 
 <Meta
   title="Components/OverflowMenu/Feature Flag/Flag details"
   name="Flag details"
 />
+
 # OverflowMenu
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/OverflowMenu/next)
@@ -57,9 +58,40 @@ other components with focus management.
 Pass the `menuTarget` prop to render the `OverflowMenu` inside the modal or any
 specific element where you want it to render:
 
-## Component API
+## Dynamically set floating styles
 
-<ArgTypes />
+Components with `autoAlign` use the
+[`floating-ui`](https://github.com/floating-ui/floating-ui) library to handle
+the dynamic positioning of floating elements relative to their trigger / anchor
+element. This also includes collision detection that repositions the floating
+element as necessary to keep it visible within the viewport. In the majority of
+cases, the styling from the `floating-ui` 'fixed' positioning strategy prevents
+the floating element from being
+[clipped](https://floating-ui.com/docs/misc#clipping) by an ancestor element.
+
+The `enable-v12-dynamic-floating-styles` flag enables this dynamic styling
+without the collision detection.
+
+**Note**: The flag has no effect when used with `autoAlign` because `autoAlign`
+includes both the dynamic positioning styles and collision detection.
+
+## Enable dynamic setting of floating styles
+
+```js
+<FeatureFlags
+  flags={{
+    'enable-v12-dynamic-floating-styles': true,
+  }}>
+  <OverflowMenu>
+    <MenuItem label="Stop app" />
+    <MenuItem label="Restart app" />
+    <MenuItem label="Rename app" />
+    <MenuItem label="Edit routes and access" />
+    <MenuItemDivider />
+    <MenuItem label="Delete app" kind="danger" />
+  </OverflowMenu>
+</FeatureFlags>
+```
 
 ## Feedback
 

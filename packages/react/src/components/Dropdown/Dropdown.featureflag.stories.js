@@ -6,61 +6,64 @@
  */
 
 import React from 'react';
-import { ComboBox } from '../ComboBox';
+
+import { Dropdown } from '../Dropdown';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
+// eslint-disable-next-line storybook/csf-component
 export default {
-  title: 'Components/ComboBox/Feature Flag',
-  component: ComboBox,
+  title: 'Components/Dropdown/Feature Flag',
+  component: Dropdown,
   tags: ['!autodocs'],
   decorators: [
     (Story) => (
-      <WithFeatureFlags
-        flags={{
-          'enable-v12-dynamic-floating-styles': true,
-        }}>
+      <WithFeatureFlags>
         <Story />
       </WithFeatureFlags>
     ),
   ],
 };
 
-const comboBoxItems = [
+const items = [
   {
-    id: 'option-0',
-    text: 'An example option that is really long to show what should be done to handle long text',
+    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
   },
   {
-    id: 'option-1',
     text: 'Option 1',
   },
   {
-    id: 'option-2',
     text: 'Option 2',
   },
   {
-    id: 'option-3',
     text: 'Option 3 - a disabled item',
     disabled: true,
   },
   {
-    id: 'option-4',
     text: 'Option 4',
   },
   {
-    id: 'option-5',
     text: 'Option 5',
+  },
+  {
+    text: 'Option 6',
+  },
+  {
+    text: 'Option 7',
+  },
+  {
+    text: 'Option 8',
   },
 ];
 
 export const FloatingStyles = (args) => (
-  <ComboBox
-    onChange={() => {}}
-    id="carbon-combobox"
-    items={comboBoxItems}
+  <Dropdown
+    id="default"
+    titleText="Dropdown label"
+    helperText="This is some helper text"
+    initialSelectedItem={items[1]}
+    label="Option 1"
+    items={items}
     itemToString={(item) => (item ? item.text : '')}
-    titleText="ComboBox title"
-    helperText="Combobox helper text"
     {...args}
   />
 );

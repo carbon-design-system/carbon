@@ -6,19 +6,17 @@
  */
 
 import React from 'react';
-import { ComboBox } from '../ComboBox';
+import { MultiSelect } from '../MultiSelect';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
+// eslint-disable-next-line storybook/csf-component
 export default {
-  title: 'Components/ComboBox/Feature Flag',
-  component: ComboBox,
+  title: 'Components/MultiSelect/Feature Flag',
+  component: MultiSelect,
   tags: ['!autodocs'],
   decorators: [
     (Story) => (
-      <WithFeatureFlags
-        flags={{
-          'enable-v12-dynamic-floating-styles': true,
-        }}>
+      <WithFeatureFlags>
         <Story />
       </WithFeatureFlags>
     ),
@@ -54,14 +52,15 @@ const comboBoxItems = [
 ];
 
 export const FloatingStyles = (args) => (
-  <ComboBox
-    onChange={() => {}}
-    id="carbon-combobox"
+  <MultiSelect
+    label="Multiselect Label"
+    id="carbon-multiselect-example"
+    titleText="Multiselect title"
+    helperText="This is helper text"
     items={comboBoxItems}
+    direction={args.direction}
     itemToString={(item) => (item ? item.text : '')}
-    titleText="ComboBox title"
-    helperText="Combobox helper text"
-    {...args}
+    selectionFeedback="top-after-reopen"
   />
 );
 

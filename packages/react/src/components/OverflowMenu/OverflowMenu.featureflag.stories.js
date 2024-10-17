@@ -6,10 +6,6 @@
  */
 
 import React, { useRef, useEffect } from 'react';
-import { action } from '@storybook/addon-actions';
-
-import { ArrowsVertical } from '@carbon/icons-react';
-
 import {
   MenuItem,
   MenuItemDivider,
@@ -17,10 +13,7 @@ import {
   MenuItemRadioGroup,
   MenuItemSelectable,
 } from '../Menu';
-
 import { OverflowMenu } from './';
-import mdx from './next/OverflowMenu.mdx';
-
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
 export default {
@@ -142,6 +135,21 @@ export const WithMenuAlignment = (args) => {
         </OverflowMenu>
       </div>
     </>
+  );
+};
+
+export const FloatingStyles = () => {
+  return (
+    <div>
+      <OverflowMenu>
+        <MenuItem label="Stop app" />
+        <MenuItem label="Restart app" />
+        <MenuItem label="Rename app" />
+        <MenuItem label="Edit routes and access" />
+        <MenuItemDivider />
+        <MenuItem label="Delete app" kind="danger" />
+      </OverflowMenu>
+    </div>
   );
 };
 
