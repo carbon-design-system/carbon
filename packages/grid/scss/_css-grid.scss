@@ -46,7 +46,6 @@
     // grid-margin CSS Custom Properties if they've changed from the previous
     // breakpoint. By default, we emit the smallest breakpoint values on the
     // :root selector
-
     @each $key, $value in $breakpoints {
       @if is-smallest-breakpoint($key, $breakpoints) {
         --cds-grid-columns: #{get-column-count($breakpoints, $key)};
