@@ -84,7 +84,6 @@ $block-class-action-set: #{$pkg-prefix}--action-set;
       inset-inline-end: 0;
     }
 
-    /* stylelint-disable-next-line no-duplicate-selectors -- disabled to keep close to 'right' setting */
     &[placement='left'] {
       @extend .#{$block-class}--left-placement;
 

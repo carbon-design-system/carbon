@@ -283,16 +283,15 @@ $motion-duration: $duration-moderate-02;
     }
 
     // and restore the 'light' prop in case light fields are wanted
+
     .#{$prefix}--text-input--light,
-  .#{$prefix}--text-area--light,
-  .#{$prefix}--search--light .#{$prefix}--search-input,
-  .#{$prefix}--select--light .#{$prefix}--select-input,
-  .#{$prefix}--dropdown--light,
-  .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list,
-  /* stylelint-disable-next-line prettier/prettier */
-  .#{$prefix}--number--light input[type='number'],
-  .#{$prefix}--date-picker--light
-    .#{$prefix}--date-picker__input {
+    .#{$prefix}--text-area--light,
+    .#{$prefix}--search--light .#{$prefix}--search-input,
+    .#{$prefix}--select--light .#{$prefix}--select-input,
+    .#{$prefix}--dropdown--light,
+    .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list,
+    .#{$prefix}--number--light input[type='number'],
+    .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
       background-color: $field-02;
     }
   }

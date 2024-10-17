@@ -495,7 +495,7 @@
   }
 
   // Windows HCM fix
-  /* stylelint-disable */
+
   .#{$prefix}--slider__thumb {
     @include high-contrast-mode('outline');
   }
@@ -505,5 +505,4 @@
   .#{$prefix}--slider__track {
     @include high-contrast-mode('outline');
   }
-  /* stylelint-enable */
 }

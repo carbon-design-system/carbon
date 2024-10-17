@@ -40,7 +40,7 @@ $-components: (
     color: custom-property.get-var('text-primary');
 
     @each $key, $value in $theme {
-      @if type-of($value) == color {
+      @if meta.type-of($value) == color {
         @include custom-property.declaration($key, $value);
       }
     }
@@ -80,9 +80,11 @@ $-components: (
           $fallback: map.get($value, fallback);
           $theme-values: map.get($value, values);
 
+          /* stylelint-disable-next-line max-nesting-depth */
           @each $theme-value in $theme-values {
             $value: map.get($theme-value, value);
 
+            /* stylelint-disable-next-line max-nesting-depth */
             @if theme.matches(map.get($theme-value, theme), $theme) and
               meta.type-of($value) ==
               color
