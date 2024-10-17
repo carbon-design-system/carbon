@@ -5,14 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Add } from '@carbon/icons-react';
-import { render, screen } from '@testing-library/react';
 import React from 'react';
-import Tag, { OperationalTag, TagSkeleton } from './';
-import DismissibleTag from './DismissibleTag';
+import { render, screen } from '@testing-library/react';
+import Tag, {
+  OperationalTag,
+  SelectableTag,
+  DismissibleTag,
+  TagSkeleton,
+} from './';
 import { AILabel } from '../AILabel';
-import { Asleep } from '@carbon/icons-react';
 import userEvent from '@testing-library/user-event';
+import { Asleep, Add } from '@carbon/icons-react';
 
 const prefix = 'cds';
 
@@ -93,6 +96,26 @@ describe('Tag', () => {
     expect(
       screen.getByRole('button', { name: 'AI - Show information' })
     ).toBeInTheDocument();
+  });
+
+  describe('Selectable Tag', () => {
+    it('should render a selectable tag', () => {
+      const { container } = render(<SelectableTag text="Tag content" />);
+
+      expect(container.firstChild).toHaveClass(`${prefix}--tag--selectable`);
+    });
+
+    it('should select the selectable tag', async () => {
+      const { container } = render(<SelectableTag text="Tag content" />);
+
+      const selectableTag = container.querySelector(
+        `.${prefix}--tag--selectable`
+      );
+
+      await userEvent.click(selectableTag);
+      expect(selectableTag).toHaveAttribute('aria-pressed', 'true');
+      expect(selectableTag).toHaveClass(`${prefix}--tag--selectable-selected`);
+    });
   });
 
   describe('Skeleton Tag', () => {

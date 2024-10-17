@@ -6,8 +6,10 @@
  */
 
 import React from 'react';
-import { AILabel } from '../';
+import { AILabel, AILabelContent, AILabelActions } from '../';
+import { Button } from '../../Button';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
 
@@ -113,5 +115,46 @@ describe('AILabel', () => {
         `${prefix}--slug__button--xl`
       );
     });
+  });
+
+  it('should handle revert click', async () => {
+    render(
+      <AILabel
+        revertActive
+        revertLabel="Test revert label"
+        onRevertClick={() => {}}
+      />
+    );
+
+    await userEvent.click(screen.getByRole('button'));
+  });
+});
+
+describe('AILabelContent', () => {
+  it('should render with content', () => {
+    render(
+      <AILabel>
+        <AILabelContent>Children test</AILabelContent>
+      </AILabel>
+    );
+
+    expect(screen.getByText('Children test')).toBeInTheDocument();
+  });
+});
+
+describe('AILabelActions', () => {
+  it('should render with actions', () => {
+    render(
+      <AILabel>
+        <AILabelContent>
+          Children test
+          <AILabelActions>
+            <Button>View details</Button>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
+    );
+
+    expect(screen.getByText('View details')).toBeInTheDocument();
   });
 });

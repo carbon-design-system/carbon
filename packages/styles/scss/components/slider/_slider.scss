@@ -372,19 +372,20 @@
 
     &:hover {
       cursor: not-allowed;
-      transform: translate(-50%, -50%);
+      transform: none;
     }
 
     &:focus {
       background-color: $border-disabled;
       box-shadow: none;
       outline: none;
-      transform: translate(-50%, -50%);
+      transform: none;
     }
 
     &:active {
       background: $border-disabled;
-      transform: translate(-50%, -50%);
+      box-shadow: none;
+      transform: none;
     }
   }
 
