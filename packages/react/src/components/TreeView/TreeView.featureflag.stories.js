@@ -10,8 +10,6 @@ import { action } from '@storybook/addon-actions';
 import { Document, Folder } from '@carbon/icons-react';
 import { Button, VStack } from '../../';
 
-import mdx from './TreeView.featureflag.mdx';
-
 import { TreeView, TreeNode } from './';
 
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
