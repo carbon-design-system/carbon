@@ -345,4 +345,60 @@ describe('FileUploaderDropContainer', () => {
     const input = container.querySelector('input');
     expect(label).toHaveAttribute('for', input.id);
   });
+  it('should not set active state on drag over when disabled', () => {
+    const { container } = render(
+      <FileUploaderDropContainer disabled {...requiredProps} />
+    );
+
+    const dropArea = container.firstChild;
+
+    const dragOverEvent = {
+      preventDefault: jest.fn(),
+      stopPropagation: jest.fn(),
+    };
+
+    Simulate.dragOver(dropArea, dragOverEvent);
+    expect(dropArea).not.toHaveClass('test');
+  });
+  it('should not call onAddFiles when disabled', () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer
+        onAddFiles={onAddFiles}
+        disabled
+        labelText="Add file"
+      />
+    );
+
+    const dropArea = container.querySelector('button');
+    Simulate.click(dropArea);
+
+    expect(onAddFiles).not.toHaveBeenCalled();
+  });
+  it('should initialize with default props', () => {
+    const { container } = render(
+      <FileUploaderDropContainer labelText="Upload" />
+    );
+    const input = container.querySelector('input');
+    expect(input).not.toBeNull();
+    expect(input.multiple).toBe(false);
+  });
+
+  it('should reset input value after files are selected and clicked again', () => {
+    const { container } = render(
+      <FileUploaderDropContainer labelText="Upload" />
+    );
+    const input = container.querySelector('input');
+
+    uploadFiles(input, [
+      new File(['content'], 'test.txt', { type: 'text/plain' }),
+    ]);
+
+    expect(input.files.length).toBe(1);
+
+    const dropArea = container.querySelector('button');
+    Simulate.click(dropArea);
+
+    expect(input.files.length).toBe(0);
+  });
 });
