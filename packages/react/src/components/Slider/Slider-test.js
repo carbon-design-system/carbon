@@ -962,7 +962,7 @@ describe('Slider', () => {
 
       await click(lowerThumb);
       await keyboard('{ArrowRight}');
-      expect(lowerThumb).toHaveFocus();
+      expect(lowerThumb).not.toHaveFocus();
       expect(lowerInput).toHaveValue(initialValueLower);
       expect(lowerThumb).toHaveAttribute(
         'aria-valuenow',

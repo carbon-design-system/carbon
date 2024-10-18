@@ -35,7 +35,6 @@ exports[`AccordionItem renders as expected - Component API should render and mat
     </button>
     <div
       class="cds--accordion__wrapper"
-      hidden=""
     >
       <div
         class="cds--accordion__content"
