@@ -15,7 +15,6 @@ import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-import { composeEventHandlers } from '../../tools/events';
 
 export interface SelectableTagBaseProps {
   /**
@@ -119,7 +118,7 @@ const SelectableTag = <T extends React.ElementType>({
         leaveDelayMs={0}
         onMouseEnter={() => false}>
         <Tag
-          aria-pressed={selectedTag}
+          aria-pressed={selectedTag !== false}
           ref={tagRef}
           size={size}
           renderIcon={renderIcon}
@@ -138,7 +137,7 @@ const SelectableTag = <T extends React.ElementType>({
 
   return (
     <Tag
-      aria-pressed={selectedTag}
+      aria-pressed={selectedTag !== false}
       ref={tagRef}
       size={size}
       renderIcon={renderIcon}
