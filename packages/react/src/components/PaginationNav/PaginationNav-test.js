@@ -111,5 +111,11 @@ describe('PaginationNav', () => {
 
       expect(screen.getByText('4')).toHaveAttribute('aria-current', 'page');
     });
+
+    it('should not hide page 1 when active page is 0', () => {
+      render(<PaginationNav totalItems={4} page={0} />);
+
+      expect(screen.getByText('1')).toBeInTheDocument();
+    });
   });
 });
