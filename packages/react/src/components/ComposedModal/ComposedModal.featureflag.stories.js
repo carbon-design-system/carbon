@@ -45,7 +45,7 @@ export default {
   ],
 };
 
-export const Playground = (args) => {
+export const FocusWrapWithoutSentinels = (args) => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -84,7 +84,7 @@ export const Playground = (args) => {
   );
 };
 
-Playground.argTypes = {
+FocusWrapWithoutSentinels.argTypes = {
   children: {
     table: {
       disable: true,

@@ -8,7 +8,6 @@
 import React from 'react';
 import { ActionableNotification } from '../../Notification';
 import { action } from '@storybook/addon-actions';
-import mdx from '../Notification.featureflag.mdx';
 import { WithFeatureFlags } from '../../../../.storybook/templates/WithFeatureFlags';
 
 // eslint-disable-next-line storybook/csf-component
@@ -34,9 +33,11 @@ export default {
   },
 };
 
-export const Playground = (args) => <ActionableNotification {...args} />;
+export const FocusWrapWithoutSentinels = (args) => (
+  <ActionableNotification {...args} />
+);
 
-Playground.argTypes = {
+FocusWrapWithoutSentinels.argTypes = {
   ['aria-label']: {
     table: {
       disable: true,
@@ -72,7 +73,7 @@ Playground.argTypes = {
     },
   },
 };
-Playground.args = {
+FocusWrapWithoutSentinels.args = {
   actionButtonLabel: 'Action',
   inline: false,
   title: 'Notification title',
