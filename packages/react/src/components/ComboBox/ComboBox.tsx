@@ -527,12 +527,12 @@ const ComboBox = forwardRef(
         typeahead
           ? autocompleteCustomFilter({ item: itemToString(item), inputValue })
           : shouldFilterItem
-          ? shouldFilterItem({
-              item,
-              itemToString,
-              inputValue,
-            })
-          : defaultShouldFilterItem()
+            ? shouldFilterItem({
+                item,
+                itemToString,
+                inputValue,
+              })
+            : defaultShouldFilterItem()
       );
 
     useEffect(() => {

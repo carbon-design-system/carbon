@@ -127,18 +127,23 @@ export const Selection = {
         </cds-structured-list-head>
         <cds-structured-list-body>
           ${selectionValues.map(
-            (selectionValue, index) => html` <cds-structured-list-row
-              selection-value=${ifDefined(selectionValue)}>
-              <cds-structured-list-cell>Row ${index}</cds-structured-list-cell>
-              <cds-structured-list-cell>Row ${index}</cds-structured-list-cell>
-              <cds-structured-list-cell>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
-                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
-                Pellentesque vulputate nisl a porttitor
-                interdum.</cds-structured-list-cell
-              >
-            </cds-structured-list-row>`
+            (selectionValue, index) =>
+              html` <cds-structured-list-row
+                selection-value=${ifDefined(selectionValue)}>
+                <cds-structured-list-cell
+                  >Row ${index}</cds-structured-list-cell
+                >
+                <cds-structured-list-cell
+                  >Row ${index}</cds-structured-list-cell
+                >
+                <cds-structured-list-cell>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                  dui magna, finibus id tortor sed, aliquet bibendum augue.
+                  Aenean posuere sem vel euismod dignissim. Nulla ut cursus
+                  dolor. Pellentesque vulputate nisl a porttitor
+                  interdum.</cds-structured-list-cell
+                >
+              </cds-structured-list-row>`
           )}
         </cds-structured-list-body>
       </cds-structured-list>
@@ -227,11 +232,12 @@ export const skeleton = {
             </cds-structured-list-head>
             <cds-structured-list-body>
               ${Array.apply(null, Array(5)).map(
-                () => html`<cds-structured-list-row>
-                  <cds-structured-list-cell></cds-structured-list-cell>
-                  <cds-structured-list-cell></cds-structured-list-cell>
-                  <cds-structured-list-cell></cds-structured-list-cell>
-                </cds-structured-list-row>`
+                () =>
+                  html`<cds-structured-list-row>
+                    <cds-structured-list-cell></cds-structured-list-cell>
+                    <cds-structured-list-cell></cds-structured-list-cell>
+                    <cds-structured-list-cell></cds-structured-list-cell>
+                  </cds-structured-list-row>`
               )}
             </cds-structured-list-body>
           </cds-structured-list>

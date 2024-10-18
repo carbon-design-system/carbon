@@ -94,7 +94,7 @@ class CDSFileUploaderButton extends HostListenerMixin(LitElement) {
         const hasFileExtension = fileExtensionRegExp.test(name);
         const [fileExtension] = !hasFileExtension
           ? [undefined]
-          : fileExtensionRegExp.exec(name) ?? [];
+          : (fileExtensionRegExp.exec(name) ?? []);
 
         return (
           acceptedTypes.has(mimeType) ||

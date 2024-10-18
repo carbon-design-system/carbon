@@ -240,8 +240,8 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
           onExpand && isExpanded
             ? true
             : onExpand && !isExpanded
-            ? false
-            : undefined
+              ? false
+              : undefined
         }
         aria-controls={onExpand ? uniqueId : undefined}>
         <CustomSearchIcon icon={renderIcon} />

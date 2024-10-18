@@ -131,7 +131,7 @@ The CDN artifacts define the custom elements for the browser, so they can be
 directly used once the script tag has been added to the page. For example:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <script

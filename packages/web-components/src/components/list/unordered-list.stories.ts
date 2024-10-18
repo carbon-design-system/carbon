@@ -23,31 +23,33 @@ const controls = {
 };
 
 export const Default = {
-  render: () => html`<cds-unordered-list>
-    <cds-list-item>Unordered List level 1</cds-list-item>
-    <cds-list-item>Unordered List level 1</cds-list-item>
-    <cds-list-item>Unordered List level 1</cds-list-item>
-  </cds-unordered-list>`,
+  render: () =>
+    html`<cds-unordered-list>
+      <cds-list-item>Unordered List level 1</cds-list-item>
+      <cds-list-item>Unordered List level 1</cds-list-item>
+      <cds-list-item>Unordered List level 1</cds-list-item>
+    </cds-unordered-list>`,
 };
 
 export const Nested = {
-  render: () => html`<cds-unordered-list>
-    <cds-list-item>
-      Unordered List level 1
-      <cds-unordered-list>
-        <cds-list-item>Unordered List level 2</cds-list-item>
-        <cds-list-item>
-          Unordered List level 2
-          <cds-unordered-list>
-            <cds-list-item>Unordered List level 3</cds-list-item>
-            <cds-list-item>Unordered List level 3</cds-list-item>
-          </cds-unordered-list>
-        </cds-list-item>
-      </cds-unordered-list>
-    </cds-list-item>
-    <cds-list-item>Unordered List level 1</cds-list-item>
-    <cds-list-item>Unordered List level 1</cds-list-item>
-  </cds-unordered-list>`,
+  render: () =>
+    html`<cds-unordered-list>
+      <cds-list-item>
+        Unordered List level 1
+        <cds-unordered-list>
+          <cds-list-item>Unordered List level 2</cds-list-item>
+          <cds-list-item>
+            Unordered List level 2
+            <cds-unordered-list>
+              <cds-list-item>Unordered List level 3</cds-list-item>
+              <cds-list-item>Unordered List level 3</cds-list-item>
+            </cds-unordered-list>
+          </cds-list-item>
+        </cds-unordered-list>
+      </cds-list-item>
+      <cds-list-item>Unordered List level 1</cds-list-item>
+      <cds-list-item>Unordered List level 1</cds-list-item>
+    </cds-unordered-list>`,
 };
 
 export const Playground = {

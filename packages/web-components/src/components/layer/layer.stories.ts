@@ -64,9 +64,8 @@ export const UseLayer = {
   render: () => {
     document.addEventListener(`${prefix}-use-layer`, (e) => {
       const { layer, level } = (e as any).detail;
-      layer.querySelector(
-        '.example-layer-test-component.use-layer'
-      ).innerText = `The current layer level is: ${level + 1}`;
+      layer.querySelector('.example-layer-test-component.use-layer').innerText =
+        `The current layer level is: ${level + 1}`;
     });
 
     return html`

@@ -29,66 +29,69 @@ const controls = {
 };
 
 export const Default = {
-  render: () => html`<cds-ordered-list native>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-  </cds-ordered-list>`,
+  render: () =>
+    html`<cds-ordered-list native>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+    </cds-ordered-list>`,
 };
 
 export const NativeListStyles = {
-  render: () => html`<cds-ordered-list native>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>
-      Ordered List level 1
-      <cds-ordered-list native>
-        <cds-list-item>Ordered List level 2</cds-list-item>
-        <cds-list-item>Ordered List level 2</cds-list-item>
-        <cds-list-item>Ordered List level 2</cds-list-item>
-        <cds-list-item>Ordered List level 2</cds-list-item>
-      </cds-ordered-list>
-    </cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-  </cds-ordered-list>`,
+  render: () =>
+    html`<cds-ordered-list native>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>
+        Ordered List level 1
+        <cds-ordered-list native>
+          <cds-list-item>Ordered List level 2</cds-list-item>
+          <cds-list-item>Ordered List level 2</cds-list-item>
+          <cds-list-item>Ordered List level 2</cds-list-item>
+          <cds-list-item>Ordered List level 2</cds-list-item>
+        </cds-ordered-list>
+      </cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+    </cds-ordered-list>`,
 };
 
 export const Nested = {
-  render: () => html`<cds-ordered-list>
-    <cds-list-item>
-      Ordered List level 1
-      <cds-ordered-list native>
-        <cds-list-item>Ordered List level 2</cds-list-item>
-        <cds-list-item>
-          Ordered List level 2
-          <cds-ordered-list native>
-            <cds-list-item>Ordered List level 3</cds-list-item>
-            <cds-list-item>Ordered List level 3</cds-list-item>
-          </cds-ordered-list>
-        </cds-list-item>
-      </cds-ordered-list>
-    </cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-    <cds-list-item>Ordered List level 1</cds-list-item>
-  </cds-ordered-list>`,
+  render: () =>
+    html`<cds-ordered-list>
+      <cds-list-item>
+        Ordered List level 1
+        <cds-ordered-list native>
+          <cds-list-item>Ordered List level 2</cds-list-item>
+          <cds-list-item>
+            Ordered List level 2
+            <cds-ordered-list native>
+              <cds-list-item>Ordered List level 3</cds-list-item>
+              <cds-list-item>Ordered List level 3</cds-list-item>
+            </cds-ordered-list>
+          </cds-list-item>
+        </cds-ordered-list>
+      </cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+      <cds-list-item>Ordered List level 1</cds-list-item>
+    </cds-ordered-list>`,
 };
 
 export const Playground = {

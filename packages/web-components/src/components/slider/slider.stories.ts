@@ -233,10 +233,9 @@ export const Skeleton = {
       skip: true,
     },
   },
-  render: () =>
-    html`
-      <cds-form-item><cds-slider-skeleton></cds-slider-skeleton></cds-form-item>
-    `,
+  render: () => html`
+    <cds-form-item><cds-slider-skeleton></cds-slider-skeleton></cds-form-item>
+  `,
 };
 
 export const Playground = {

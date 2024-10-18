@@ -150,11 +150,12 @@ export const Playground = {
 const meta = {
   title: 'Components/Tooltip',
   decorators: [
-    (story) => html`<div class="sb-tooltip-story">
-      <style>
-        ${styles}</style
-      >${story()}
-    </div>`,
+    (story) =>
+      html`<div class="sb-tooltip-story">
+        <style>
+          ${styles}</style
+        >${story()}
+      </div>`,
   ],
 };
 

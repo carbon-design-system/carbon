@@ -12,7 +12,7 @@ import { useId } from '../../internal/useId';
 import { ButtonBaseProps, ButtonProps } from './Button';
 
 const ButtonBase = React.forwardRef(function ButtonBase<
-  T extends React.ElementType
+  T extends React.ElementType,
 >(
   {
     as,

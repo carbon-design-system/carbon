@@ -56,7 +56,7 @@ export interface LayerComponent {
 }
 
 const LayerRenderFunction = React.forwardRef(function Layer<
-  T extends React.ElementType
+  T extends React.ElementType,
 >(
   {
     as = 'div' as T,

@@ -54,7 +54,8 @@
 
     inline-size: 100%;
     text-overflow: ellipsis;
-    transition: background-color $duration-fast-02 motion(standard, productive),
+    transition:
+      background-color $duration-fast-02 motion(standard, productive),
       outline $duration-fast-02 motion(standard, productive);
 
     &:focus {
@@ -199,7 +200,8 @@
     fill: $icon-primary;
     inline-size: convert.to-rem(40px);
     opacity: 1;
-    transition: opacity $duration-fast-02 motion(standard, productive),
+    transition:
+      opacity $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive),
       outline $duration-fast-02 motion(standard, productive),
       border $duration-fast-02 motion(standard, productive);
@@ -324,7 +326,8 @@
   .#{$prefix}--search--expandable .#{$prefix}--search-input {
     padding: 0;
     inline-size: 0;
-    transition: padding $duration-fast-01 motion(standard, productive),
+    transition:
+      padding $duration-fast-01 motion(standard, productive),
       width 0s linear $duration-fast-01;
 
     &::placeholder {
