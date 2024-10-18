@@ -15,6 +15,7 @@ import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
+import { composeEventHandlers } from '../../tools/events';
 
 export interface SelectableTagBaseProps {
   /**
@@ -37,6 +38,16 @@ export interface SelectableTagBaseProps {
    * Can be a React component class
    */
   renderIcon?: React.ElementType;
+
+  /**
+   * Provide an optional hook that is called when selected is changed
+   */
+  onChange?: (checked: boolean) => void;
+
+  /**
+   * Provide an optional function to be called when the tag is clicked.
+   */
+  onClick?: (e: Event) => void;
 
   /**
    * Specify the state of the selectable tag.
@@ -65,6 +76,8 @@ const SelectableTag = <T extends React.ElementType>({
   disabled,
   id,
   renderIcon,
+  onChange,
+  onClick,
   selected = false,
   size,
   text,
@@ -91,9 +104,11 @@ const SelectableTag = <T extends React.ElementType>({
     `${prefix}--tag-label-tooltip`
   );
 
-  // Removing onClick from the spread operator
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { onClick, ...otherProps } = other;
+  const handleClick = (e: Event) => {
+    setSelectedTag(!selectedTag);
+    onChange?.(!selectedTag);
+    onClick?.(e);
+  };
 
   if (isEllipsisApplied) {
     return (
@@ -111,8 +126,8 @@ const SelectableTag = <T extends React.ElementType>({
           disabled={disabled}
           className={tagClasses}
           id={tagId}
-          onClick={() => setSelectedTag(!selectedTag)}
-          {...otherProps}>
+          onClick={handleClick}
+          {...other}>
           <Text title={text} className={`${prefix}--tag__label`}>
             {text}
           </Text>
@@ -130,8 +145,8 @@ const SelectableTag = <T extends React.ElementType>({
       disabled={disabled}
       className={tagClasses}
       id={tagId}
-      onClick={() => setSelectedTag(!selectedTag)}
-      {...otherProps}>
+      onClick={handleClick}
+      {...other}>
       <Text title={text} className={`${prefix}--tag__label`}>
         {text}
       </Text>
@@ -160,6 +175,16 @@ SelectableTag.propTypes = {
    * Can be a React component class
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Provide an optional hook that is called when selected is changed
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Provide an optional function to be called when the tag is clicked.
+   */
+  onClick: PropTypes.func,
 
   /**
    * Specify the state of the selectable tag.
