@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getByText } from '@carbon/test-utils/dom';
-import { render } from '@testing-library/react';
+import { FileUploaderDropContainer } from '../';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
-import { FileUploaderDropContainer } from '../';
+import { getByText } from '@carbon/test-utils/dom';
+import { render } from '@testing-library/react';
 import { uploadFiles } from '../test-helpers';
 
 const requiredProps = { labelText: 'Add file' };
@@ -236,5 +236,113 @@ describe('FileUploaderDropContainer', () => {
         ]),
       }
     );
+  });
+  it('should not allow file selection when disabled', () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer
+        onAddFiles={onAddFiles}
+        disabled
+        {...requiredProps}
+      />
+    );
+
+    const dropArea = container.querySelector('button');
+    Simulate.click(dropArea);
+
+    expect(onAddFiles).not.toHaveBeenCalled();
+  });
+
+  it('should filter files based on the accept prop', () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer
+        accept={['.png']}
+        onAddFiles={onAddFiles}
+        {...requiredProps}
+      />
+    );
+    const input = container.querySelector('input');
+
+    const files = [
+      new File(['foo'], 'foo.txt', { type: 'text/plain' }),
+      new File(['bar'], 'bar.png', { type: 'image/png' }),
+    ];
+
+    uploadFiles(input, files);
+
+    expect(onAddFiles).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: {
+          files,
+        },
+      }),
+      {
+        addedFiles: expect.arrayContaining([
+          expect.objectContaining({ invalidFileType: true }), // foo.txt
+          expect.not.objectContaining({ invalidFileType: true }), // bar.png
+        ]),
+      }
+    );
+  });
+
+  it('should call onClick when drop area is clicked', () => {
+    const onClick = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer onClick={onClick} {...requiredProps} />
+    );
+
+    const dropArea = container.querySelector('button');
+    Simulate.click(dropArea);
+
+    expect(onClick).toHaveBeenCalled();
+  });
+
+  it('should reset input value when clicked after selecting files', () => {
+    const { container } = render(
+      <FileUploaderDropContainer labelText="test" />
+    );
+    const input = container.querySelector('input');
+
+    uploadFiles(input, [
+      new File(['content'], 'test.png', { type: 'image/png' }),
+    ]);
+
+    expect(input.files.length).toBe(1);
+
+    Simulate.click(container.querySelector('button'));
+    expect(input.files.length).toBe(0);
+  });
+
+  it('should call the onClick handler when the drop area is clicked', () => {
+    const onClick = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer onClick={onClick} {...requiredProps} />
+    );
+    const dropArea = container.querySelector('button');
+    Simulate.click(dropArea);
+    expect(onClick).toHaveBeenCalled();
+  });
+
+  it('should handle the case when no files are added', () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer onAddFiles={onAddFiles} {...requiredProps} />
+    );
+    const input = container.querySelector('input');
+
+    expect(onAddFiles).not.toHaveBeenCalled();
+  });
+
+  it('should have a properly associated label for accessibility', () => {
+    const { container } = render(
+      <FileUploaderDropContainer
+        labelText="Upload your files"
+        {...requiredProps}
+      />
+    );
+    const label = container.querySelector('label');
+    const input = container.querySelector('input');
+    expect(label).toHaveAttribute('for', input.id);
   });
 });
