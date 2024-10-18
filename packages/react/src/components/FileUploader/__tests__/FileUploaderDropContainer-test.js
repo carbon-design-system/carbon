@@ -401,4 +401,21 @@ describe('FileUploaderDropContainer', () => {
 
     expect(input.files.length).toBe(0);
   });
+
+  it('should not set active state when disabled on drag over', () => {
+    const { container } = render(
+      <FileUploaderDropContainer disabled {...requiredProps} />
+    );
+    const dropArea = container.firstChild;
+
+    const dragOverEvent = {
+      preventDefault: jest.fn(),
+      stopPropagation: jest.fn(),
+    };
+
+    Simulate.dragOver(dropArea, dragOverEvent);
+    expect(dragOverEvent.preventDefault).toHaveBeenCalled();
+    expect(dragOverEvent.stopPropagation).toHaveBeenCalled();
+    expect(dropArea).not.toHaveClass('some-active-class');
+  });
 });
