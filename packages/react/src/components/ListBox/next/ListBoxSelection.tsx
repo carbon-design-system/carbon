@@ -107,7 +107,7 @@ function ListBoxSelection({
     `${prefix}--tag--filter`,
     `${prefix}--tag--high-contrast`,
     {
-      [`${prefix}--tag--disabled`]: disabled || readOnly,
+      [`${prefix}--tag--disabled`]: disabled,
     }
   );
 
