@@ -319,7 +319,7 @@
   .#{$prefix}--data-table--xs td.#{$prefix}--table-column-menu,
   .#{$prefix}--data-table--sm td.#{$prefix}--table-column-menu {
     block-size: convert.to-rem(24px);
-    padding-block: 0 0;
+    padding-block: 0;
   }
 
   .#{$prefix}--data-table--sm td.#{$prefix}--table-column-menu {
@@ -583,7 +583,7 @@
       .#{$prefix}--data-table--top-aligned-header
     )
     th.#{$prefix}--table-column-checkbox {
-    padding-block: 0 0;
+    padding-block: 0;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--xs
@@ -827,7 +827,7 @@
     }
 
     //hides ff scrollbar
-    @-moz-document url-prefix() {
+    @document url-prefix() {
       thead,
       tbody {
         scrollbar-width: none;
@@ -1076,7 +1076,7 @@
     td.#{$prefix}--table-cell--column-slug,
 
   // Windows HCM fix
-  // stylelint-disable-next-line no-duplicate-selectors
+  
   .#{$prefix}--data-table-content {
     @include high-contrast-mode('outline');
   }

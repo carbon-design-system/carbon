@@ -416,7 +416,7 @@
   }
 
   // Windows HCM fix
-  /* stylelint-disable no-duplicate-selectors */
+
   .#{$prefix}--modal-close__icon {
     @include high-contrast-mode('icon-fill');
   }
@@ -424,5 +424,4 @@
   .#{$prefix}--modal-close:focus {
     @include high-contrast-mode('focus');
   }
-  /* stylelint-enable no-duplicate-selectors */
 }
