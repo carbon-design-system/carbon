@@ -32,6 +32,7 @@ const defaultTranslations: Record<TranslationKey, string> = {
 function defaultTranslateWithId(id: TranslationKey): string {
   return defaultTranslations[id];
 }
+
 export interface ListBoxSelectionProps {
   /**
    * Specify a function to be invoked when a user interacts with the clear
@@ -57,6 +58,11 @@ export interface ListBoxSelectionProps {
    * Specify whether or not the clear selection element should be disabled
    */
   disabled?: boolean;
+  /**
+   * Whether or not the listbox is readonly
+   */
+  readOnly?: boolean;
+
   /**
    * Specify an optional `onClearSelection` handler that is called when the underlying
    * element is cleared
@@ -86,6 +92,7 @@ function ListBoxSelection({
   selectionCount,
   translateWithId: t = defaultTranslateWithId,
   disabled,
+  readOnly,
   onClearSelection,
   ...rest
 }: ListBoxSelectionProps) {
@@ -106,7 +113,7 @@ function ListBoxSelection({
 
   function onClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     event.stopPropagation();
-    if (disabled) {
+    if (disabled || readOnly) {
       return;
     }
     clearSelection(event);
@@ -126,11 +133,12 @@ function ListBoxSelection({
         <button
           aria-label={description}
           className={`${prefix}--tag__close-icon`}
-          disabled={disabled}
+          disabled={disabled || readOnly}
           onClick={onClick}
           tabIndex={-1}
           title={description}
-          type="button">
+          type="button"
+          aria-disabled={readOnly ? true : undefined}>
           <Close />
         </button>
       </div>
@@ -142,11 +150,12 @@ function ListBoxSelection({
       {...rest}
       aria-label={description}
       className={className}
-      disabled={disabled}
+      disabled={disabled || readOnly}
       onClick={onClick}
       tabIndex={-1}
       title={description}
-      type="button">
+      type="button"
+      aria-disabled={readOnly ? true : undefined}>
       <Close />
     </button>
   );
@@ -163,6 +172,11 @@ ListBoxSelection.propTypes = {
    * Specify whether or not the clear selection element should be disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Whether or not the listbox is readonly
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify an optional `onClearSelection` handler that is called when the underlying
