@@ -50,7 +50,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
     @include layout.use('density', $default: 'normal');
 
     @include component-reset.reset;
-    /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, no-duplicate-selectors */
+
     & {
       inline-size: 100%;
       list-style: none;
@@ -86,7 +86,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
     transition: background-color motion(standard, productive) $duration-fast-02;
     @include button-reset.reset;
 
-    /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, no-duplicate-selectors */
     & {
       position: relative;
       display: flex;
@@ -150,7 +149,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     transition: all $duration-fast-02 motion(standard, productive);
 
-    /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, no-duplicate-selectors */
     & {
       flex: 0 0 1rem;
       block-size: 1rem;
@@ -165,7 +163,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
   .#{$prefix}--accordion__title {
     @include type-style('body-01');
 
-    /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, no-duplicate-selectors */
     & {
       z-index: 1;
       inline-size: 100%;
@@ -253,7 +250,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
     */
   /* Needs to be after the previous accordion__item--active rule
      to take effect, as the specificity is the same */
-  /* stylelint-disable-next-line scss/at-rule-no-unknown */
+
   @starting-style {
     .#{$prefix}--accordion__item--active {
       > .#{$prefix}--accordion__wrapper {
