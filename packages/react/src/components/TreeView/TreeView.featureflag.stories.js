@@ -10,8 +10,6 @@ import { action } from '@storybook/addon-actions';
 import { Document, Folder } from '@carbon/icons-react';
 import { Button, VStack } from '../../';
 
-import mdx from './TreeView.featureflag.mdx';
-
 import { TreeView, TreeNode } from './';
 
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
@@ -184,16 +182,12 @@ function renderTree(nodes) {
 }
 
 export default {
-  title: 'Experimental/Feature Flags/TreeView',
+  title: 'components/TreeView/Feature Flag',
   component: TreeView,
   subcomponents: {
     TreeNode,
   },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
+  tags: ['!autodocs'],
   args: {
     onSelect: action('onSelect'),
   },

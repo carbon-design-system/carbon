@@ -33,7 +33,7 @@ test.describe('OverflowMenu', () => {
       test('feature flags default @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'OverflowMenu',
-          id: 'experimental-feature-flags-overflowmenu--overflow-menu',
+          id: 'components-overflowmenu-feature-flags-overflowmenu--overflow-menu',
           theme,
         });
       });
@@ -41,7 +41,7 @@ test.describe('OverflowMenu', () => {
       test('feature flags render custom icon @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'OverflowMenu',
-          id: 'experimental-feature-flags-overflowmenu--custom-icon',
+          id: 'components-overflowmenu-feature-flags-overflowmenu--custom-icon',
           theme,
         });
       });

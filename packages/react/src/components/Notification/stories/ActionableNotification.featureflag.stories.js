@@ -8,18 +8,13 @@
 import React from 'react';
 import { ActionableNotification } from '../../Notification';
 import { action } from '@storybook/addon-actions';
-import mdx from '../Notification.featureflag.mdx';
 import { WithFeatureFlags } from '../../../../.storybook/templates/WithFeatureFlags';
 
 // eslint-disable-next-line storybook/csf-component
 export default {
-  title: 'Experimental/Feature Flags/Notifications/Actionable',
+  title: 'Components/Notifications/Actionable/Feature Flag',
   component: ActionableNotification,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
+  tags: ['!autodocs'],
   decorators: [
     (Story) => (
       <WithFeatureFlags>
@@ -38,27 +33,11 @@ export default {
   },
 };
 
-export const Default = () => (
-  <ActionableNotification
-    title="Notification title"
-    subtitle="Subtitle text goes here"
-    closeOnEscape
-    inline={false}
-    actionButtonLabel="Action"
-  />
+export const FocusWrapWithoutSentinels = (args) => (
+  <ActionableNotification {...args} />
 );
 
-Default.argTypes = {
-  hasFocus: {
-    table: {
-      disable: true,
-    },
-  },
-};
-
-export const Playground = (args) => <ActionableNotification {...args} />;
-
-Playground.argTypes = {
+FocusWrapWithoutSentinels.argTypes = {
   ['aria-label']: {
     table: {
       disable: true,
@@ -94,7 +73,7 @@ Playground.argTypes = {
     },
   },
 };
-Playground.args = {
+FocusWrapWithoutSentinels.args = {
   actionButtonLabel: 'Action',
   inline: false,
   title: 'Notification title',
