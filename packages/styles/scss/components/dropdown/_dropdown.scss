@@ -24,23 +24,17 @@
 /// @group dropdown
 @mixin dropdown {
   .#{$prefix}--dropdown__wrapper--inline {
-    display: inline-grid;
+    display: inline-flex;
     align-items: center;
-    grid-gap: 0 convert.to-rem(24px);
-    grid-template: auto auto / auto min-content;
+    gap: convert.to-rem(24px);
 
     .#{$prefix}--label {
       @include type-style('body-compact-01');
     }
 
     .#{$prefix}--label,
-    .#{$prefix}--form__helper-text,
-    .#{$prefix}--form-requirement {
+    .#{$prefix}--form__helper-text {
       margin: 0;
-    }
-
-    .#{$prefix}--form-requirement {
-      grid-column: 2;
     }
   }
 
