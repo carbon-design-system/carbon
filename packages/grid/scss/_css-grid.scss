@@ -144,8 +144,10 @@
   // Condensed
   .#{$prefix}--css-grid--condensed {
     --cds-grid-gutter: #{$grid-gutter-condensed};
-    --cds-grid-column-hang: #{math.div($grid-gutter, 2) -
-      math.div($grid-gutter-condensed, 2)};
+    --cds-grid-column-hang: #{math.div($grid-gutter, 2) - math.div(
+        $grid-gutter-condensed,
+        2
+      )};
   }
 
   // -----------------------------------------------------------------------------
@@ -179,8 +181,10 @@
   .#{$prefix}--subgrid--condensed {
     --cds-grid-gutter-start: #{math.div($grid-gutter-condensed, 2)};
     --cds-grid-gutter-end: #{math.div($grid-gutter-condensed, 2)};
-    --cds-grid-column-hang: #{math.div($grid-gutter, 2) -
-      math.div($grid-gutter-condensed, 2)};
+    --cds-grid-column-hang: #{math.div($grid-gutter, 2) - math.div(
+        $grid-gutter-condensed,
+        2
+      )};
   }
 
   // -----------------------------------------------------------------------------
