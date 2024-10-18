@@ -467,9 +467,7 @@ const Dropdown = React.forwardRef(
             // NOTE: does not prevent click
             evt.preventDefault();
             // focus on the element as per readonly input behavior
-            if (mergedRef.current !== undefined) {
-              mergedRef.current.focus();
-            }
+            mergedRef?.current?.focus();
           },
           onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
             const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
@@ -487,7 +485,6 @@ const Dropdown = React.forwardRef(
             ) {
               setIsTyping(true);
             }
-
             if (
               (isTyping && evt.code === 'Space') ||
               !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
