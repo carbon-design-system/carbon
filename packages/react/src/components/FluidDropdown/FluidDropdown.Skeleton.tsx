@@ -10,7 +10,17 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const FluidDropdownSkeleton = ({ className, ...rest }) => {
+export interface FluidDropdownSkeletonProps {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+}
+
+const FluidDropdownSkeleton: React.FC<FluidDropdownSkeletonProps> = ({
+  className,
+  ...rest
+}) => {
   const prefix = usePrefix();
   const wrapperContainerClasses = cx(
     className,
