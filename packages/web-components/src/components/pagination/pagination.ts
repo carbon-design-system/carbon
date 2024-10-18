@@ -383,12 +383,11 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 inline
                 value="${page}">
                 ${Array.from(new Array(totalPages)).map(
-                  (_item, index) =>
-                    html`
-                      <cds-select-item value="${index + 1}">
-                        ${index + 1}
-                      </cds-select-item>
-                    `
+                  (_item, index) => html`
+                    <cds-select-item value="${index + 1}">
+                      ${index + 1}
+                    </cds-select-item>
+                  `
                 )}
               </cds-select>
             `
@@ -401,12 +400,11 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 inline
                 value="${page}">
                 ${Array.from(new Array(totalPages)).map(
-                  (_item, index) =>
-                    html`
-                      <cds-select-item value="${index + 1}">
-                        ${index + 1}
-                      </cds-select-item>
-                    `
+                  (_item, index) => html`
+                    <cds-select-item value="${index + 1}">
+                      ${index + 1}
+                    </cds-select-item>
+                  `
                 )}
               </cds-select>
               <span class="${prefix}--pagination__text"
