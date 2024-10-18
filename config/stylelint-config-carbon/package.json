@@ -39,7 +39,7 @@
     "stylelint-use-logical": "^2.1.0"
   },
   "devDependencies": {
-    "prettier": "^2.8.8",
+    "prettier": "^3.2.5",
     "stylelint": "^16.0.0"
   }
 }
