@@ -2045,7 +2045,7 @@ __metadata:
     "@rollup/plugin-babel": "npm:^6.0.0"
     "@rollup/plugin-commonjs": "npm:^26.0.0"
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
-    "@rollup/plugin-typescript": "npm:^11.0.0"
+    "@rollup/plugin-typescript": "npm:^12.0.0"
     "@storybook/addon-a11y": "npm:^8.2.8"
     "@storybook/addon-actions": "npm:^8.2.8"
     "@storybook/addon-docs": "npm:^8.2.8"
@@ -2318,7 +2318,7 @@ __metadata:
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
     "@rollup/plugin-replace": "npm:^5.0.0"
     "@rollup/plugin-terser": "npm:^0.4.4"
-    "@rollup/plugin-typescript": "npm:^11.0.0"
+    "@rollup/plugin-typescript": "npm:^12.0.0"
     "@rollup/pluginutils": "npm:^4.2.0"
     "@storybook/addon-essentials": "npm:^8.2.8"
     "@storybook/addon-links": "npm:^8.2.8"
@@ -5581,14 +5581,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-typescript@npm:^11.0.0":
-  version: 11.0.0
-  resolution: "@rollup/plugin-typescript@npm:11.0.0"
+"@rollup/plugin-typescript@npm:^12.0.0":
+  version: 12.1.1
+  resolution: "@rollup/plugin-typescript@npm:12.1.1"
   dependencies:
-    "@rollup/pluginutils": "npm:^5.0.1"
+    "@rollup/pluginutils": "npm:^5.1.0"
     resolve: "npm:^1.22.1"
   peerDependencies:
-    rollup: ^2.14.0||^3.0.0
+    rollup: ^2.14.0||^3.0.0||^4.0.0
     tslib: "*"
     typescript: ">=3.7.0"
   peerDependenciesMeta:
@@ -5596,7 +5596,7 @@ __metadata:
       optional: true
     tslib:
       optional: true
-  checksum: 10/ea240f1fd656329a088fa54eb3f0e3a8b9d9f47cc1c99fcdbf6bccb531763d8c767c7b43c666295d3ae30112576dc464a1f30d0257a5d740863c3ddee11f8070
+  checksum: 10/838d5e67d1b383154fab7ae1b0c58e91844c70380210b12c1d5f2ed5d2264d4fbd21ff991a13a4a72078dce897b5c482c70554a21671269219aa9d2525f14dcd
   languageName: node
   linkType: hard
 
@@ -5623,6 +5623,22 @@ __metadata:
     rollup:
       optional: true
   checksum: 10/7aebf04d5d25d7d2e9514cc8f81a49b11f093b29eae2862da29022532b66e3de4681f537cc785fdcf438bcdefa3af4453470e7951ca91d6ebea2f41d6aea42d3
+  languageName: node
+  linkType: hard
+
+"@rollup/pluginutils@npm:^5.1.0":
+  version: 5.1.2
+  resolution: "@rollup/pluginutils@npm:5.1.2"
+  dependencies:
+    "@types/estree": "npm:^1.0.0"
+    estree-walker: "npm:^2.0.2"
+    picomatch: "npm:^2.3.1"
+  peerDependencies:
+    rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+  peerDependenciesMeta:
+    rollup:
+      optional: true
+  checksum: 10/cc1fe3285ab48915a6535ab2f0c90dc511bd3e63143f8e9994bb036c6c5071fd14d641cff6c89a7fde6a4faa85227d4e2cf46ee36b7d962099e0b9e4c9b8a4b0
   languageName: node
   linkType: hard
 
