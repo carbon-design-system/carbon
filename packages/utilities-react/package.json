@@ -40,7 +40,7 @@
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0"
   },
   "devDependencies": {
-    "esbuild": "^0.23.0",
+    "esbuild": "^0.24.0",
     "rimraf": "^6.0.0"
   },
   "dependencies": {
