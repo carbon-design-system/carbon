@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 const path = require('path');
 
-test.describe('FileUploader @avt', () => {
+test.describe('@avt FileUploader', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
@@ -120,7 +120,7 @@ test.describe('FileUploader @avt', () => {
     // Delete the file
     await page.keyboard.press('Tab');
     await page.keyboard.press('Enter');
-    await expect(page.getByText('test-file-for-uploading')).not.toBeVisible();
+    await expect(page.getByText('test-file-for-uploading')).toBeHidden();
   });
 
   test.slow(
@@ -164,7 +164,7 @@ test.describe('FileUploader @avt', () => {
       await page.keyboard.press('Enter');
       await expect(
         page.locator('#test-upload-file-long-text-for-tooltip-to-show-up.jpg')
-      ).not.toBeVisible();
+      ).toBeHidden();
     }
   );
 
@@ -207,6 +207,6 @@ test.describe('FileUploader @avt', () => {
     await page.keyboard.press('Enter');
     await expect(
       page.locator('#test-upload-file-long-text-for-tooltip-to-show-up.jpg')
-    ).not.toBeVisible();
+    ).toBeHidden();
   });
 });

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
-import { Pagination as CarbonPagination } from 'carbon-components-react';
+import { Pagination as CarbonPagination } from '@carbon/react';
 
 /**
  * Wrapped version of Carbon `<Pagination>`, that uses zero-based starting row

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+  <rect width="24" height="24" x="4" y="4" rx="2" ry="2"/>
+  <path fill="none" d="M0 32V0h32v32z" data-name="&amp;lt;Square Solid&amp;gt;"/>
+</svg>

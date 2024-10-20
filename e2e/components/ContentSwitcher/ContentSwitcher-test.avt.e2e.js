@@ -10,7 +10,7 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('ContentSwitcher @avt', () => {
+test.describe('@avt ContentSwitcher', () => {
   test('@avt-default-state ContentSwitcher', async ({ page }) => {
     await visitStory(page, {
       component: 'ContentSwitcher',

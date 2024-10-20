@@ -1,0 +1,20 @@
+// Style to match design spec
+
+#operational-tag > .cds--popover--caret {
+  --cds-popover-offset: 5px;
+}
+
+#operational-tag > .cds--popover-caret,
+.cds--popover {
+  --cds-popover-offset: 5px;
+  --cds-popover-caret-height: 5px;
+}
+
+.popover-content {
+  line-height: 0;
+  padding: 1rem;
+
+  p {
+    font-size: 14px;
+  }
+}

@@ -10,7 +10,7 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('CopyButton @avt', () => {
+test.describe('@avt CopyButton', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'CopyButton',

@@ -47,7 +47,7 @@ export const Default = () => (
       <TextInput id="two" labelText="Last Name" />
       <RadioButtonGroup
         legendText="Radio button heading"
-        name="radio-button-group"
+        name="formgroup-default-radio-button-group"
         defaultSelected="radio-1">
         <RadioButton labelText="Option 1" value="radio-1" id="radio-1" />
         <RadioButton labelText="Option 2" value="radio-2" id="radio-2" />
@@ -65,7 +65,7 @@ export const Playground = (args) => (
       <TextInput id="two" labelText="Last Name" />
       <RadioButtonGroup
         legendText="Radio button heading"
-        name="radio-button-group"
+        name="formgroup-playground-radio-button-group"
         defaultSelected="radio-1">
         <RadioButton labelText="Option 1" value="radio-1" id="radio-1" />
         <RadioButton labelText="Option 2" value="radio-2" id="radio-2" />

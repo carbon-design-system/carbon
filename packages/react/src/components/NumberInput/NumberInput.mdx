@@ -1,5 +1,7 @@
-import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as NumberInputStories from './NumberInput.stories';
+
+<Meta isTemplate />
 
 # NumberInput
 
@@ -18,19 +20,15 @@ import * as NumberInputStories from './NumberInput.stories';
 
 ## Overview
 
-<Canvas>
-  <Story of={NumberInputStories.Playground} />
-</Canvas>
+<Canvas of={NumberInputStories.Playground} />
 
 ## Skeleton State
 
-<Canvas>
-  <Story of={NumberInputStories.Skeleton} />
-</Canvas>
+<Canvas of={NumberInputStories.Skeleton} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

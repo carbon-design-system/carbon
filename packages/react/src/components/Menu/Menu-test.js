@@ -7,8 +7,9 @@
 
 import React from 'react';
 import { Menu, MenuItem, MenuItemSelectable, MenuItemRadioGroup } from './';
-import { render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { waitForPosition } from '../ListBox/test-helpers';
 
 describe('Menu', () => {
   describe('renders as expected', () => {
@@ -83,7 +84,7 @@ describe('Menu', () => {
       document.body.removeChild(el);
     });
 
-    it('warns about nested menus in basic mode', () => {
+    it('warns about nested menus in basic mode', async () => {
       const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       render(
@@ -93,9 +94,92 @@ describe('Menu', () => {
           </MenuItem>
         </Menu>
       );
-
+      await waitForPosition();
       expect(spy).toHaveBeenCalled();
       spy.mockRestore();
+    });
+  });
+
+  describe('Submenu behavior', () => {
+    beforeEach(async () => {
+      jest.useFakeTimers();
+      render(
+        <Menu open>
+          <MenuItem label="Submenu">
+            <MenuItem label="Item" />
+          </MenuItem>
+        </Menu>
+      );
+      await waitForPosition();
+    });
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+    it('should only show parent and not then submenu when not hovered', () => {
+      const menus = screen.getAllByRole('menu');
+      expect(menus.length).toBe(2);
+      expect(menus[0]).toHaveClass('cds--menu--open');
+      expect(menus[1]).not.toHaveClass('cds--menu--open');
+    });
+
+    it('should show sub menu when hovered for hoverIntentDelay', async () => {
+      const menus = screen.getAllByRole('menu');
+      await act(() =>
+        fireEvent.mouseEnter(
+          screen.getByRole('menuitem', { name: 'Submenu Submenu' })
+        )
+      );
+      expect(menus[0]).toHaveClass('cds--menu--open');
+      expect(menus[1]).not.toHaveClass('cds--menu--open');
+
+      await act(() => jest.runOnlyPendingTimers());
+      expect(menus[0]).toHaveClass('cds--menu--open');
+      expect(menus[1]).toHaveClass('cds--menu--open');
+    });
+
+    it('should close sub menu on leave after leaveIntentDelay', async () => {
+      const menus = screen.getAllByRole('menu');
+      await act(() => {
+        fireEvent.mouseEnter(
+          screen.getByRole('menuitem', { name: 'Submenu Submenu' })
+        );
+        jest.runOnlyPendingTimers();
+      });
+      expect(menus[0]).toHaveClass('cds--menu--open');
+      expect(menus[1]).toHaveClass('cds--menu--open');
+
+      await act(() => {
+        fireEvent.mouseLeave(
+          screen.getByRole('menuitem', { name: 'Submenu Submenu' })
+        );
+        jest.runOnlyPendingTimers();
+      });
+      expect(menus[0]).toHaveClass('cds--menu--open');
+      expect(menus[1]).not.toHaveClass('cds--menu--open');
+    });
+
+    it('should cancel close sub menu on leave and reenter before leaveIntentDelay', async () => {
+      const menus = screen.getAllByRole('menu');
+      await act(() => {
+        fireEvent.mouseEnter(
+          screen.getByRole('menuitem', { name: 'Submenu Submenu' })
+        );
+        jest.runOnlyPendingTimers();
+      });
+      expect(menus[0]).toHaveClass('cds--menu--open');
+      expect(menus[1]).toHaveClass('cds--menu--open');
+
+      await act(() => {
+        fireEvent.mouseLeave(
+          screen.getByRole('menuitem', { name: 'Submenu Submenu' })
+        );
+        fireEvent.mouseEnter(
+          screen.getByRole('menuitem', { name: 'Submenu Submenu' })
+        );
+        jest.runOnlyPendingTimers();
+      });
+      expect(menus[0]).toHaveClass('cds--menu--open');
+      expect(menus[1]).toHaveClass('cds--menu--open');
     });
   });
 });
@@ -169,5 +253,29 @@ describe('MenuItem', () => {
       expect(spy).toHaveBeenCalled();
       spy.mockRestore();
     });
+  });
+
+  it('should call onChange once', async () => {
+    const onChange = jest.fn();
+
+    render(
+      <Menu open label="Menu">
+        <MenuItem label="Menu">
+          <MenuItemRadioGroup
+            label="MenuItemRadioGroup"
+            items={[
+              { label: 'Item 1', value: '1' },
+              { label: 'Item 2', value: '2' },
+            ]}
+            onChange={onChange}
+            itemToString={(item) => item.label}
+          />
+        </MenuItem>
+      </Menu>
+    );
+
+    await userEvent.click(screen.getByTitle('Menu'));
+    await userEvent.click(screen.getByTitle('Item 1'));
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 });

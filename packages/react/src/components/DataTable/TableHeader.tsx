@@ -6,8 +6,8 @@
  */
 
 import cx from 'classnames';
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { type MouseEventHandler, useRef } from 'react';
+import PropTypes from 'prop-types';
+import React, { type MouseEventHandler, useRef, ReactNode } from 'react';
 import {
   ArrowUp as Arrow,
   ArrowsVertical as Arrows,
@@ -16,7 +16,7 @@ import classNames from 'classnames';
 import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
+import { TranslateWithId, ReactAttr } from '../../types/common';
 import { DataTableSortState } from './state/sortStates';
 
 const defaultScope = 'col';
@@ -24,7 +24,7 @@ const defaultScope = 'col';
 export type TableHeaderTranslationKey = 'carbon.table.header.icon.description';
 
 export interface TableHeaderTranslationArgs {
-  header: React.ReactNode;
+  header: ReactNode;
   isSortHeader?: boolean;
   sortDirection?: DataTableSortState;
   sortStates: typeof sortStates;
@@ -64,11 +64,15 @@ const sortDirections: { [key: string]: 'none' | 'ascending' | 'descending' } = {
 };
 
 interface TableHeaderProps
-  extends ReactAttr<HTMLTableCellElement & HTMLButtonElement> {
+  extends ReactAttr<HTMLTableCellElement & HTMLButtonElement>,
+    TranslateWithId<
+      TableHeaderTranslationKey,
+      { header; sortDirection; isSortHeader; sortStates }
+    > {
   /**
    * Pass in children that will be embedded in the table header label
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * Specify an optional className to be applied to the container node
@@ -112,23 +116,13 @@ interface TableHeaderProps
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TableSlugRow` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Specify which direction we are currently sorting by, should be one of DESC,
    * NONE, or ASC.
    */
   sortDirection?: string;
-
-  /**
-   * Supply a method to translate internal strings with your i18n tool of
-   * choice. Translation keys are available on the `translationKeys` field for
-   * this component.
-   */
-  translateWithId?: (
-    key: TableHeaderTranslationKey,
-    { header, sortDirection, isSortHeader, sortStates }
-  ) => string;
 }
 
 const TableHeader = React.forwardRef(function TableHeader(

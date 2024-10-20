@@ -1,7 +1,9 @@
-import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import LinkTo from '@storybook/addon-links/react';
 import { ClassPrefix } from '../ClassPrefix';
 import * as ClassPrefixStories from './ClassPrefix.stories';
+
+<Meta isTemplate />
 
 # ClassPrefix
 
@@ -22,9 +24,7 @@ import * as ClassPrefixStories from './ClassPrefix.stories';
 The `ClassPrefix` component is used to change the prefix in the classes used by
 components in Carbon.
 
-<Canvas>
-  <Story of={ClassPrefixStories.Default} />
-</Canvas>
+<Canvas of={ClassPrefixStories.Default} />
 
 By default, the prefix used by components is `cds`. However, you can change this
 prefix in Sass and coordinate that change to React using the `ClassPrefix`
@@ -61,11 +61,15 @@ export default function MyApp() {
 }
 ```
 
-To _get_ the prefix, use <LinkTo title="Hooks/usePrefix" name="Overview">usePrefix</LinkTo>
+To _get_ the prefix, use
+
+<LinkTo title="Hooks/usePrefix" name="Overview">
+  usePrefix
+</LinkTo>
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

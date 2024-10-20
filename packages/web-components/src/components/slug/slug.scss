@@ -1,0 +1,336 @@
+/**
+* @license
+*
+* Copyright IBM Corp. 2019, 2024
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+@use 'sass:map';
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/components/slug/index' as *;
+@use '../toggle-tip/toggletip';
+
+// importing tag color tokens for the styling slug in tag component
+@use '@carbon/styles/scss/components/tag/index' as *;
+
+$colorMap: (
+  'red': $tag-color-red,
+  'magenta': $tag-color-magenta,
+  'purple': $tag-color-purple,
+  'blue': $tag-color-blue,
+  'cyan': $tag-color-cyan,
+  'teal': $tag-color-teal,
+  'green': $tag-color-green,
+  'gray': $tag-color-gray,
+  'cool-gray': $tag-color-cool-gray,
+  'warm-gray': $tag-color-warm-gray,
+  'high-contrast': $text-inverse,
+);
+
+:host(#{$prefix}-slug) {
+  @extend .#{$prefix}--slug;
+
+  .#{$prefix}--slug__text {
+    @include font-family('sans');
+  }
+
+  .#{$prefix}--popover-content {
+    @include ai-popover-gradient();
+
+    border: 1px solid transparent;
+    border-radius: $spacing-03;
+    // Need to make tokens
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+      -40px 44px 60px -24px $ai-popover-shadow-outer-01,
+      -56px 64px 64px -24px $ai-popover-shadow-outer-02;
+    color: $text-primary;
+    min-inline-size: to-rem(280px);
+  }
+
+  .#{$prefix}--toggletip-actions {
+    position: absolute;
+    justify-content: flex-end;
+    backdrop-filter: blur(85px);
+    background: rgba(0, 0, 0, 0.01);
+    border-end-end-radius: $spacing-03;
+    border-end-start-radius: $spacing-03;
+    column-gap: 0;
+    inline-size: 100%;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+  }
+
+  .#{$prefix}--toggletip-content {
+    // This sets the max size to the size of the action bar with 3 buttons
+    padding-block: $spacing-06 $spacing-11;
+    padding-inline: $spacing-06;
+    --cds-button-focus-color: var(--cds-focus);
+  }
+
+  .#{$prefix}--popover-caret {
+    background: transparent;
+    clip-path: none;
+
+    &::before {
+      position: absolute;
+      display: block;
+      box-sizing: border-box;
+      border: 1px solid $ai-border-start;
+      background: $background;
+      block-size: $spacing-04;
+      clip-path: polygon(98% 0, 0 0, -52% 150%) border-box;
+      content: '';
+      inline-size: $spacing-04;
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      position: absolute;
+      display: block;
+      background: $background;
+      block-size: to-rem(14px);
+      content: '';
+      inline-size: $spacing-01;
+    }
+  }
+
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus,
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus {
+    box-shadow: none;
+  }
+}
+
+:host(#{$prefix}-slug:not([with-actions])) {
+  .#{$prefix}--toggletip-content {
+    max-inline-size: to-rem(320px);
+  }
+}
+
+:host(#{$prefix}-slug[revert-active]) {
+  transform: translate($spacing-03, -50%);
+}
+
+:host(#{$prefix}-slug[open]) {
+  z-index: 2;
+}
+
+:host(#{$prefix}-slug-action-button) {
+  @include emit-layout-tokens();
+  .#{$prefix}--btn--primary {
+    order: 1;
+    border-end-end-radius: to-rem(7px);
+  }
+}
+
+:host(
+    #{$prefix}-slug[kind='inline']:not([size='md']):not([size='lg']):not(
+        [size='xl']
+      )
+  ) {
+  .#{$prefix}--slug__button {
+    font-size: $spacing-04;
+  }
+}
+
+:host(#{$prefix}-slug[kind='inline'][size='lg']),
+:host(#{$prefix}-slug[kind='inline'][size='xl']) {
+  .#{$prefix}--slug__button {
+    font-size: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-slug:not([kind='inline'])) {
+  .#{$prefix}--slug__button:focus {
+    border: 1px solid $focus;
+  }
+}
+
+// top
+:host(#{$prefix}-slug[alignment^='top']) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      inset-block-end: to-rem(1px);
+      transform: rotate(-135deg);
+    }
+
+    &::after {
+      background: $ai-popover-caret-bottom-background;
+      block-size: $spacing-01;
+      border-end-end-radius: 50%;
+      border-end-start-radius: 50%;
+      inline-size: to-rem(14px);
+      inset-block-start: -$spacing-01;
+      inset-inline-start: to-rem(-1px);
+    }
+  }
+
+  &[has-actions] {
+    .#{$prefix}--popover-caret::after {
+      display: none;
+    }
+  }
+}
+
+// right
+:host(#{$prefix}-slug[alignment^='right']) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      content: '';
+      inset-inline-start: to-rem(1px);
+      transform: rotate(-45deg);
+    }
+
+    &::after {
+      border-end-start-radius: 50%;
+      border-start-start-radius: 50%;
+      inset-block-start: to-rem(-1px);
+      inset-inline-start: to-rem(6px);
+    }
+  }
+}
+
+// bottom
+:host(#{$prefix}-slug[alignment^='bottom']) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      inset-block-start: to-rem(1px);
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      block-size: $spacing-01;
+      border-start-end-radius: 50%;
+      border-start-start-radius: 50%;
+      inline-size: to-rem(14px);
+      inset-block-end: to-rem(-2.5px);
+      inset-inline-start: to-rem(-1px);
+    }
+  }
+}
+
+//left
+:host(#{$prefix}-slug[alignment^='left']) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      inset-inline-end: to-rem(1px);
+      transform: rotate(135deg);
+    }
+
+    &::after {
+      border-end-end-radius: 50%;
+      border-start-end-radius: 50%;
+      inset-block-start: to-rem(-1px);
+      inset-inline-start: -$spacing-01;
+    }
+  }
+}
+
+// override for specific alignments
+:host(#{$prefix}-slug[alignment='left-end']),
+:host(#{$prefix}-slug[alignment='left-bottom']),
+:host(#{$prefix}-slug[alignment='right-end']),
+:host(#{$prefix}-slug[alignment='right-bottom']) {
+  .#{$prefix}--popover-caret::after {
+    background: transparent;
+  }
+}
+
+// Change caret color / border when it is near the bottom of the callout
+:host(#{$prefix}-slug[alignment='left-end']),
+:host(#{$prefix}-slug[alignment='left-bottom']),
+:host(#{$prefix}-slug[alignment='right-end']),
+:host(#{$prefix}-slug[alignment='right-bottom']),
+:host(#{$prefix}-slug[alignment^='top']) {
+  .#{$prefix}--popover-caret::before {
+    border-color: $ai-popover-caret-bottom;
+    background: $ai-popover-caret-bottom-background;
+  }
+}
+
+:host(#{$prefix}-slug[autoalign][alignment='left-end'][has-actions]),
+:host(#{$prefix}-slug[autoalign][alignment='left-bottom'][has-actions]),
+:host(#{$prefix}-slug[autoalign][alignment='right-end'][has-actions]),
+:host(#{$prefix}-slug[autoalign][alignment='right-bottom'][has-actions]),
+:host(#{$prefix}-slug[autoalign][alignment^='top'][has-actions]) {
+  .#{$prefix}--popover-caret::before {
+    background: $ai-popover-caret-bottom-background-actions;
+  }
+}
+
+// Change the caret border when it is near the middle of the callout
+:host(#{$prefix}-slug[alignment='left']),
+:host(#{$prefix}-slug[alignment='right']) {
+  .#{$prefix}--popover-caret::before {
+    border-color: $ai-popover-caret-center;
+  }
+}
+
+// caret styles for auto align
+:host(#{$prefix}-slug[autoalign]) .#{$prefix}--popover-caret {
+  block-size: $spacing-04;
+  inline-size: $spacing-04;
+  transform: none;
+}
+
+:host(#{$prefix}-slug[autoalign]) {
+  .#{$prefix}--popover-caret::before {
+    inset-block-start: 0;
+  }
+
+  .#{$prefix}--popover-caret::after {
+    inline-size: to-rem(14px);
+    inset-block-end: to-rem(5px);
+    inset-inline-start: to-rem(-1px);
+  }
+}
+
+:host(#{$prefix}-slug[autoalign][alignment^='left']),
+:host(#{$prefix}-slug[autoalign][alignment^='right']) {
+  .#{$prefix}--popover-caret::before {
+    inset-inline-start: 0;
+  }
+  .#{$prefix}--popover-caret::after {
+    block-size: to-rem(14px);
+    inline-size: to-rem(2px);
+    inset-block-start: to-rem(-1px);
+    inset-inline-start: to-rem(5px);
+  }
+}
+
+:host(#{$prefix}-slug[autoalign][alignment='left-end']),
+:host(#{$prefix}-slug[autoalign][alignment='left-bottom']),
+:host(#{$prefix}-slug[autoalign][alignment='right-end']),
+:host(#{$prefix}-slug[autoalign][alignment='right-bottom']) {
+  .#{$prefix}--popover-caret::after {
+    background: transparent;
+  }
+}
+
+@each $color, $token in $colorMap {
+  :host(#{$prefix}-slug[tag='#{$color}']) {
+    .#{$prefix}--slug__text {
+      color: $token;
+    }
+
+    .#{$prefix}--slug__text::before {
+      background: $token;
+    }
+
+    button:hover {
+      border-color: $token;
+
+      .#{$prefix}--slug__text::before {
+        background-color: $token;
+      }
+    }
+  }
+}

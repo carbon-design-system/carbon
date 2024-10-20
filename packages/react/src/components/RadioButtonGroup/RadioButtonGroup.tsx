@@ -5,16 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactElementLike, ReactNodeLike } from 'prop-types';
-import React, { createContext, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import React, {
+  createContext,
+  ReactElement,
+  ReactNode,
+  useRef,
+  useState,
+} from 'react';
 import classNames from 'classnames';
+import type { RadioButtonProps } from '../RadioButton';
 import { Legend } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import mergeRefs from '../../tools/mergeRefs';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
-
-const getInstanceId = setupGetInstanceId();
+import { useId } from '../../internal/useId';
 
 export const RadioButtonGroupContext = createContext(null);
 
@@ -28,7 +33,7 @@ export interface RadioButtonGroupProps
   /**
    * Provide a collection of `<RadioButton>` components to render in the group
    */
-  children?: ReactNodeLike;
+  children?: ReactNode;
 
   /**
    * Provide an optional className to be applied to the container node
@@ -38,7 +43,7 @@ export interface RadioButtonGroupProps
   /**
    * Specify the `<RadioButton>` to be selected by default
    */
-  defaultSelected?: string | number;
+  defaultSelected?: RadioButtonProps['value'];
 
   /**
    * Specify whether the group is disabled
@@ -48,7 +53,7 @@ export interface RadioButtonGroupProps
   /**
    * Provide text that is used alongside the control label for additional help
    */
-  helperText?: ReactNodeLike;
+  helperText?: ReactNode;
 
   /**
    * Specify whether the control is currently invalid
@@ -58,7 +63,7 @@ export interface RadioButtonGroupProps
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * Provide where label text should be placed
@@ -69,7 +74,7 @@ export interface RadioButtonGroupProps
    * Provide a legend to the RadioButtonGroup input that you are
    * exposing to the user
    */
-  legendText?: ReactNodeLike;
+  legendText?: ReactNode;
 
   /**
    * Specify the name of the underlying `<input>` nodes
@@ -80,7 +85,11 @@ export interface RadioButtonGroupProps
    * Provide an optional `onChange` hook that is called whenever the value of
    * the group changes
    */
-  onChange?: (selection: unknown, name: string, evt: unknown) => void;
+  onChange?: (
+    selection: RadioButtonProps['value'],
+    name: RadioButtonGroupProps['name'],
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
 
   /**
    * Provide where radio buttons should be placed
@@ -95,7 +104,7 @@ export interface RadioButtonGroupProps
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Specify whether the control is currently in warning state
@@ -105,12 +114,17 @@ export interface RadioButtonGroupProps
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 
   /**
    * Specify the value that is currently selected in the group
    */
-  valueSelected?: string | number;
+  valueSelected?: RadioButtonProps['value'];
+
+  /**
+   * `true` to specify if input selection in group is required.
+   */
+  required?: boolean;
 }
 
 const RadioButtonGroup = React.forwardRef(
@@ -133,6 +147,7 @@ const RadioButtonGroup = React.forwardRef(
       warn = false,
       warnText,
       slug,
+      required,
       ...rest
     } = props;
     const prefix = usePrefix();
@@ -140,7 +155,7 @@ const RadioButtonGroup = React.forwardRef(
     const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
     const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
 
-    const { current: radioButtonGroupInstanceId } = useRef(getInstanceId());
+    const radioButtonGroupInstanceId = useId();
 
     /**
      * prop + state alignment - getDerivedStateFromProps
@@ -152,29 +167,38 @@ const RadioButtonGroup = React.forwardRef(
     }
 
     function getRadioButtons() {
-      const mappedChildren = React.Children.map(children, (radioButton) => {
-        const { value } = (radioButton as ReactElementLike)?.props ?? undefined;
+      const mappedChildren = React.Children.map(
+        children as ReactElement<RadioButtonProps>,
+        (radioButton) => {
+          if (!radioButton) {
+            return;
+          }
 
-        const newProps = {
-          name: name,
-          key: value,
-          value: value,
-          onChange: handleOnChange,
-          checked: value === selected,
-        };
+          const newProps = {
+            name: name,
+            key: radioButton.props.value,
+            value: radioButton.props.value,
+            onChange: handleOnChange,
+            checked: radioButton.props.value === selected,
+            required: required,
+          };
 
-        if (!selected && (radioButton as ReactElementLike)?.props.checked) {
-          newProps.checked = true;
+          if (!selected && radioButton.props.checked) {
+            newProps.checked = true;
+          }
+
+          return React.cloneElement(radioButton, newProps);
         }
-        if (radioButton) {
-          return React.cloneElement(radioButton as ReactElementLike, newProps);
-        }
-      });
+      );
 
       return mappedChildren;
     }
 
-    function handleOnChange(newSelection, value, evt) {
+    function handleOnChange(
+      newSelection: RadioButtonProps['value'],
+      value: RadioButtonProps['name'],
+      evt: React.ChangeEvent<HTMLInputElement>
+    ) {
       if (!readOnly) {
         if (newSelection !== selected) {
           setSelected(newSelection);
@@ -215,8 +239,8 @@ const RadioButtonGroup = React.forwardRef(
     const divRef = useRef<HTMLDivElement>(null);
 
     // Slug is always size `mini`
-    let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'Slug') {
+    let normalizedSlug: ReactElement | undefined;
+    if (slug && slug['type']?.displayName === 'AILabel') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
         kind: 'default',
@@ -330,6 +354,11 @@ RadioButtonGroup.propTypes = {
    * Whether the RadioButtonGroup should be read-only
    */
   readOnly: PropTypes.bool,
+
+  /**
+   * `true` to specify if radio selection in group is required.
+   */
+  required: PropTypes.bool,
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component

@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('FluidSearch @avt', () => {
+test.describe('@avt FluidSearch', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidSearch',
@@ -46,7 +46,7 @@ test.describe('FluidSearch @avt', () => {
       name: 'Clear search input',
     });
     await expect(search).toBeVisible();
-    await expect(clearButton).not.toBeVisible();
+    await expect(clearButton).toBeHidden();
 
     // Tab to the Search
     await page.keyboard.press('Tab');

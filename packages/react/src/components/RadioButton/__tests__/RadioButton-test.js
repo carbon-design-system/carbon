@@ -9,7 +9,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import RadioButton from '../RadioButton';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
 
@@ -142,12 +142,24 @@ describe('RadioButton', () => {
         name="test-name"
         value="test-value"
         labelText="test-label"
-        slug={<Slug />}
+        slug={<AILabel />}
       />
     );
 
     expect(container.firstChild).toHaveClass(
       `${prefix}--radio-button-wrapper--slug`
     );
+  });
+
+  it('should set the "required" attribute on the <input> by default', () => {
+    render(
+      <RadioButton
+        name="test-name"
+        value="test-value"
+        labelText="test-label"
+        required
+      />
+    );
+    expect(screen.getByRole('radio')).toHaveAttribute('required');
   });
 });

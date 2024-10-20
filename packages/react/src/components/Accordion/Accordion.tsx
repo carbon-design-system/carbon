@@ -8,10 +8,10 @@
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import { AccordionProvider } from './AccordionProvider';
 
-interface AccordionProps {
+export interface AccordionProps {
   /**
    * Specify the alignment of the accordion heading
    * title and chevron. Defaults to `end`.
@@ -23,6 +23,11 @@ interface AccordionProps {
    * the container node.
    */
   className?: string;
+
+  /**
+   * Pass in the children that will be rendered within the Accordion
+   */
+  children?: ReactNode;
 
   /**
    * Specify whether an individual AccordionItem
@@ -37,6 +42,12 @@ interface AccordionProps {
   isFlush?: boolean;
 
   /**
+   * Specify if the Accordion should be an ordered list,
+   * default is `false`
+   */
+  ordered?: boolean;
+
+  /**
    * Specify the size of the Accordion. Currently
    * supports the following: `sm`, `md`, `lg`
    */
@@ -49,6 +60,7 @@ function Accordion({
   className: customClassName,
   disabled = false,
   isFlush = false,
+  ordered = false,
   size,
   ...rest
 }: PropsWithChildren<AccordionProps>) {
@@ -60,12 +72,13 @@ function Accordion({
     [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--accordion--flush`]: isFlush && align !== 'start',
   });
+  const ListTag = ordered ? 'ol' : 'ul';
 
   return (
     <AccordionProvider disabled={disabled}>
-      <ul className={className} {...rest}>
+      <ListTag className={className} {...rest}>
         {children}
-      </ul>
+      </ListTag>
     </AccordionProvider>
   );
 }
@@ -95,6 +108,12 @@ Accordion.propTypes = {
    * Specify whether Accordion text should be flush, default is false, does not work with align="start"
    */
   isFlush: PropTypes.bool,
+
+  /**
+   * Specify if the Accordion should be an ordered list,
+   * default is `false`
+   */
+  ordered: PropTypes.bool,
 
   /**
    * Specify the size of the Accordion. Currently supports the following:

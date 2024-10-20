@@ -93,6 +93,16 @@ Array [
     "relativePath": "scss/components/accordion",
   },
   Object {
+    "filepath": "scss/components/ai-label/_ai-label.scss",
+    "importPath": "@carbon/styles/scss/components/ai-label/ai-label",
+    "relativePath": "scss/components/ai-label/ai-label",
+  },
+  Object {
+    "filepath": "scss/components/ai-label/_index.scss",
+    "importPath": "@carbon/styles/scss/components/ai-label",
+    "relativePath": "scss/components/ai-label",
+  },
+  Object {
     "filepath": "scss/components/aspect-ratio/_aspect-ratio.scss",
     "importPath": "@carbon/styles/scss/components/aspect-ratio/aspect-ratio",
     "relativePath": "scss/components/aspect-ratio/aspect-ratio",

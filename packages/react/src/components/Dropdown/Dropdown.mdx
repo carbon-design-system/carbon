@@ -1,7 +1,9 @@
-import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
 import * as DropdownStories from './Dropdown.stories';
+
+<Meta isTemplate />
 
 # Dropdown
 
@@ -41,18 +43,14 @@ Dropdowns present a list of options from which a user can select one option, or
 several. A selected option can represent a value in a form, or can be used as an
 action to filter or sort existing content.
 
-<Canvas>
-  <Story of={DropdownStories.Default} />
-</Canvas>
+<Canvas of={DropdownStories.Default} />
 
 ### Inline dropdown
 
 You can place a `Dropdown` inline with other content by using the `inline`
 variant
 
-<Canvas>
-  <Story of={DropdownStories.Inline} />
-</Canvas>
+<Canvas of={DropdownStories.Inline} />
 
 ### Skeleton state
 
@@ -60,13 +58,11 @@ You can use the `DropdownSkeleton` component to render a skeleton variant of a
 `Dropdown`. This is useful to display on initial page load or when data needs to
 be fetched from an external API.
 
-<Canvas>
-  <Story of={DropdownStories.Skeleton} />
-</Canvas>
+<Canvas of={DropdownStories.Skeleton} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ### Dropdown `direction`
 
@@ -98,6 +94,11 @@ to the top of the screen. To do this, specify `direction="top"`
 Our `Dropdown` component utilizes [Downshift](https://www.downshift-js.com/)
 under the hood to help provide complex yet accessible custom dropdown
 components. We provide access to the built in Downshift features with this prop.
+
+Use with caution: anything you define here overrides the components' internal
+handling of that prop. Downshift internals are subject to change, and in some
+cases they can not be shimmed to shield you from potentially breaking changes.
+
 For more information, checkout the Downshift prop
 [documentation](https://www.downshift-js.com/downshift#props-used-in-examples)
 
@@ -109,7 +110,7 @@ want to fully control the component, you can use `initialSelectedItem`.
 ```jsx
 const items = ['Option 1', 'Option 2', 'Option 3']
 
-<Dropdown initialSelectedItem={items[2]} />;
+<Dropdown initialSelectedItem={items[2]} />
 ```
 
 ### Dropdown `itemToElement`

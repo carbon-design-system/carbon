@@ -1,5 +1,7 @@
-import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as LinkStories from './Link.stories';
+
+<Meta isTemplate />
 
 # Link
 
@@ -23,9 +25,7 @@ interactive elements, too many links will clutter a page and make it difficult
 for users to identify their next steps. This is especially true for inline
 links, which should be used sparingly.
 
-<Canvas>
-  <Story of={LinkStories.Default} />
-</Canvas>
+<Canvas of={LinkStories.Default} />
 
 ## Accessible Link with Icon
 
@@ -33,13 +33,11 @@ If the text of your link doesn't correspond to the action represented by the
 icon, consider incorporating an `aria-label` for the icon. This will ensure that
 visually impaired users can comprehend the outcome of clicking the link.
 
-<Canvas>
-  <Story of={LinkStories.PairedWithIcon} />
-</Canvas>
+<Canvas of={LinkStories.PairedWithIcon} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

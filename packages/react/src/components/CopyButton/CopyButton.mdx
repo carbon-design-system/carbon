@@ -1,5 +1,7 @@
-import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import { ArgTypes, Story, Canvas, Meta } from '@storybook/blocks';
 import * as CopyButtonStories from './CopyButton.stories.js';
+
+<Meta isTemplate />
 
 # CopyButton
 
@@ -23,13 +25,11 @@ The copy button should be accompanied by a tooltip. Tooltip feedback text should
 be concise and describe the action taken when the user clicks the copy button.
 By default we display the text “Copied!”.
 
-<Canvas>
-  <Story of={CopyButtonStories.Playground} />
-</Canvas>
+<Canvas of={CopyButtonStories.Playground} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

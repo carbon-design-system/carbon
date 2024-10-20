@@ -10,7 +10,7 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('Checkbox @avt', () => {
+test.describe('@avt Checkbox', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Checkbox',

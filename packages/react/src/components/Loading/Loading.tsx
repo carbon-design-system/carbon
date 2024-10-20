@@ -41,7 +41,7 @@ export interface LoadingProps extends ReactAttr<HTMLDivElement> {
   /**
    * Specify whether you want the loader to be applied with an overlay
    */
-  withOverlay: boolean;
+  withOverlay?: boolean;
 }
 
 function Loading({

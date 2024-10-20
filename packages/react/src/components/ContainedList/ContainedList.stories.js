@@ -116,6 +116,7 @@ export const WithActions = () => {
       iconDescription="Dismiss"
       hasIconOnly
       renderIcon={Close}
+      aria-label="Dismiss"
     />
   );
 
@@ -159,6 +160,7 @@ export const WithExpandableSearch = () => {
       action={
         <ExpandableSearch
           placeholder="Filter"
+          labelText="Search"
           value={searchTerm}
           onChange={handleChange}
           closeButtonLabelText="Clear search input"
@@ -218,6 +220,7 @@ export const WithInteractiveItemsAndActions = () => {
       iconDescription="Dismiss"
       hasIconOnly
       renderIcon={Close}
+      aria-label="Dismiss"
     />
   );
 

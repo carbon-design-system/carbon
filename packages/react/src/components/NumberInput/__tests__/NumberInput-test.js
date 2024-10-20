@@ -11,7 +11,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { NumberInput } from '../NumberInput';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 
 function translateWithId(id) {
   if (id === 'increment.number') {
@@ -70,7 +70,7 @@ describe('NumberInput', () => {
   });
 
   it('should respect slug prop', () => {
-    render(<NumberInput label="test-label" id="test" slug={<Slug />} />);
+    render(<NumberInput label="test-label" id="test" slug={<AILabel />} />);
 
     expect(
       screen.getByRole('button', { name: 'AI - Show information' })
@@ -332,12 +332,44 @@ describe('NumberInput', () => {
           translateWithId={translateWithId}
         />
       );
-
       expect(screen.getByLabelText('test-label')).toHaveValue(5);
-
       await userEvent.click(screen.getByLabelText('decrement'));
       expect(screen.getByLabelText('test-label')).toHaveValue(0);
     });
+  });
+  it('should increase by the value of large step', async () => {
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        min={-9999}
+        value={1000}
+        max={10000}
+        step={1000}
+        translateWithId={translateWithId}
+      />
+    );
+    expect(screen.getByLabelText('test-label')).toHaveValue(1000);
+    await userEvent.click(screen.getByLabelText('increment'));
+    expect(screen.getByLabelText('test-label')).toHaveValue(2000);
+  });
+  it('should decrease by the value of large step', async () => {
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        min={-9999}
+        value={1000}
+        max={10000}
+        step={1000}
+        translateWithId={translateWithId}
+      />
+    );
+
+    expect(screen.getByLabelText('test-label')).toHaveValue(1000);
+
+    await userEvent.click(screen.getByLabelText('decrement'));
+    expect(screen.getByLabelText('test-label')).toHaveValue(0);
   });
 
   it('should respect readOnly prop', async () => {
@@ -372,5 +404,37 @@ describe('NumberInput', () => {
     await userEvent.click(screen.getByLabelText('decrement'));
 
     expect(onChange).toHaveBeenCalledTimes(0);
+  });
+
+  it('should update value to empty when allowEmpty is true & input value becomes empty', async () => {
+    const onChange = jest.fn();
+    render(
+      <NumberInput
+        id="carbon-number"
+        min={-100}
+        max={100}
+        value={50}
+        label="NumberInput label"
+        helperText="Optional helper text."
+        invalidText="Number is not valid"
+        allowEmpty={true}
+        onChange={onChange}
+      />
+    );
+
+    const input = screen.getByLabelText('NumberInput label');
+
+    await userEvent.clear(input);
+
+    userEvent.type(input, '{backspace}');
+    expect(input.value).toBe('');
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.any(Object),
+      }),
+      expect.objectContaining({
+        value: '',
+      })
+    );
   });
 });

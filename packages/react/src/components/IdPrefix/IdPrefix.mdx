@@ -1,6 +1,8 @@
-import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import { IdPrefix } from '../IdPrefix';
 import * as IdPrefixStories from './IdPrefix.stories';
+
+<Meta isTemplate />
 
 # Prefix
 
@@ -21,9 +23,7 @@ import * as IdPrefixStories from './IdPrefix.stories';
 The `IdPrefix` component is used to change the prefix applied to the
 automatically generated `id` attributes placed on certain DOM elements.
 
-<Canvas>
-  <Story of={IdPrefixStories.Default} />
-</Canvas>
+<Canvas of={IdPrefixStories.Default} />
 
 This component is intended to be used in limited cases, primarily only if you
 have id conflicts when using v10 and v11 packages at the same time during
@@ -47,7 +47,7 @@ export default function MyApp() {
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

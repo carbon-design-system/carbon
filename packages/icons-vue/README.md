@@ -45,7 +45,7 @@ new Vue({
 ```
 
 _Note: if you would like to find the import path for an icon, you can reference
-our [icon preview](https://carbon-elements.netlify.com/icons/examples/preview/)_
+our [icon preview](https://carbon-elements.netlify.app/icons/examples/preview/)_
 
 Using `CarbonIconsVue` we can pass in any of the icon components that we'd like
 to use. In our application, we can then use them by doing:
@@ -95,3 +95,12 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 ## 📝 License
 
 Licensed under the [Apache 2.0 License](/LICENSE).
+
+## <picture><source height="20" width="20" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-dark.svg"><source height="20" width="20" media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-light.svg"><img height="20" width="20" alt="IBM Telemetry" src="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-light.svg"></picture> IBM Telemetry
+
+This package uses IBM Telemetry to collect de-identified and anonymized metrics
+data. By installing this package as a dependency you are agreeing to telemetry
+collection. To opt out, see
+[Opting out of IBM Telemetry data collection](https://github.com/ibm-telemetry/telemetry-js/tree/main#opting-out-of-ibm-telemetry-data-collection).
+For more information on the data being collected, please see the
+[IBM Telemetry documentation](https://github.com/ibm-telemetry/telemetry-js/tree/main#ibm-telemetry-collection-basics).

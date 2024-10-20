@@ -1,6 +1,8 @@
-import { Story, Canvas, ArgsTable } from '@storybook/blocks';
+import { Story, Canvas, ArgTypes, Meta } from '@storybook/blocks';
 import Checkbox, { CheckboxSkeleton } from '../Checkbox';
 import * as CheckboxStories from './Checkbox.stories';
+
+<Meta isTemplate />
 
 # Checkbox
 
@@ -22,9 +24,7 @@ import * as CheckboxStories from './Checkbox.stories';
 You can build a checkbox using the `Checkbox` in combination with a `<fieldset>`
 element to group controls and `<legend>` element for the label.
 
-<Canvas>
-  <Story of={CheckboxStories.Default} />
-</Canvas>
+<Canvas of={CheckboxStories.Default} />
 
 ### Controlled example
 
@@ -33,7 +33,14 @@ You can also use a controlled checkbox component driven by state:
 ```jsx
 function ExampleComponent() {
   const [isChecked, setIsChecked] = useState(false);
-  return <Checkbox id="checkbox" labelText="checkbox" checked={isChecked} onChange={(_, { checked }) => setIsChecked(checked)} />;
+  return (
+    <Checkbox
+      id="checkbox"
+      labelText="checkbox"
+      checked={isChecked}
+      onChange={(_, { checked }) => setIsChecked(checked)}
+    />
+  );
 }
 ```
 
@@ -43,13 +50,11 @@ You can use the `CheckboxSkeleton` component to render a skeleton variant of a
 checkbox. This is useful to display while content in your checkbox is being
 fetched from an external resource like an API.
 
-<Canvas>
-  <Story of={CheckboxStories.Skeleton} />
-</Canvas>
+<Canvas of={CheckboxStories.Skeleton} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ### Checkbox defaultChecked
 

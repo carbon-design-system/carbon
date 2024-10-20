@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import React, { ReactNode, useContext, useRef } from 'react';
 import { PolymorphicProps } from '../../types/common';
 import { TextDir } from './TextDirection';
 import { TextDirectionContext } from './TextDirectionContext';
+import { useMergeRefs } from '@floating-ui/react';
 
 export interface TextBaseProps {
   dir?: TextDir | undefined;
@@ -19,12 +20,10 @@ export type TextProps<T extends React.ElementType> = PolymorphicProps<
   T,
   TextBaseProps
 >;
-function Text<T extends React.ElementType>({
-  as,
-  children,
-  dir = 'auto',
-  ...rest
-}: TextProps<T>) {
+const Text = React.forwardRef(function Text<T extends React.ElementType>(
+  { as, children, dir = 'auto', ...rest }: TextProps<T>,
+  ref: React.Ref<HTMLElement>
+) {
   // TODO: Update with context typing once its been converted to TS
   const context = useContext<any>(TextDirectionContext);
   const textProps: { dir?: TextDir } = {};
@@ -59,12 +58,12 @@ function Text<T extends React.ElementType>({
 
   return (
     <TextDirectionContext.Provider value={value}>
-      <BaseComponent {...rest} {...textProps}>
+      <BaseComponent ref={ref} {...rest} {...textProps}>
         {children}
       </BaseComponent>
     </TextDirectionContext.Provider>
   );
-}
+});
 
 Text.propTypes = {
   /**
@@ -88,7 +87,7 @@ Text.propTypes = {
   dir: PropTypes.oneOf(['ltr', 'rtl', 'auto']),
 };
 
-function getTextFromChildren(children: ReactNodeLike) {
+function getTextFromChildren(children: ReactNode) {
   if (typeof children === 'string') {
     return children;
   }

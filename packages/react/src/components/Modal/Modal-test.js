@@ -11,7 +11,7 @@ import userEvent from '@testing-library/user-event';
 
 import Modal from './Modal';
 import TextInput from '../TextInput';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -374,7 +374,7 @@ describe('Modal', () => {
         danger
         primaryButtonText="Danger button text"
         data-testid="modal-5"
-        slug={<Slug />}
+        slug={<AILabel />}
       />
     );
 
@@ -510,6 +510,22 @@ describe('events', () => {
 
     await userEvent.keyboard('{Escape}');
     expect(onRequestClose).toHaveBeenCalled();
+  });
+
+  it('should handle onClick events', async () => {
+    const onClick = jest.fn();
+    render(
+      <Modal open onClick={onClick}>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+      </Modal>
+    );
+    const modal = screen.getByRole('dialog');
+    await userEvent.click(modal);
+    expect(onClick).toHaveBeenCalled();
   });
 
   it('should handle submit keyDown events with shouldSubmitOnEnter enabled', async () => {

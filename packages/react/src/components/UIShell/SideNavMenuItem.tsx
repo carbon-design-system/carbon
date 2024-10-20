@@ -7,12 +7,12 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { ElementType, ForwardedRef, HTMLAttributes, Ref } from 'react';
+import React, { ElementType, ForwardedRef, Ref, ComponentProps } from 'react';
 import SideNavLinkText from './SideNavLinkText';
 import Link from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface SideNavMenuItemProps extends HTMLAttributes<HTMLElement> {
+interface SideNavMenuItemProps extends ComponentProps<typeof Link> {
   /**
    * Specify the children to be rendered inside of the `SideNavMenuItem`
    */
@@ -29,6 +29,11 @@ interface SideNavMenuItemProps extends HTMLAttributes<HTMLElement> {
    * `aria-current="page"`, as well.
    */
   isActive?: boolean;
+
+  /**
+   * Optionally provide an href for the underlying li`
+   */
+  href?: string;
 }
 
 const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
@@ -62,6 +67,11 @@ SideNavMenuItem.propTypes = {
    * Provide an optional class to be applied to the containing node
    */
   className: PropTypes.string,
+
+  /**
+   * Optionally provide an href for the underlying li`
+   */
+  href: PropTypes.string,
 
   /**
    * Optionally specify whether the link is "active". An active link is one that

@@ -3,17 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "carbon-components": "latest",
-    "carbon-components-react": "latest",
-    "carbon-icons": "latest",
-    "history": "^5.0.0",
-    "node-sass": "^4.11.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router": "^6.0.0-beta.0",
-    "react-router-dom": "^6.0.0-beta.0",
-    "react-scripts": "^4.0.3",
-    "yarn": "^1.22.13"
+    "@carbon/react": "latest",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router": "^6.23.0",
+    "react-router-dom": "^6.23.0",
+    "react-scripts": "^5.0.1",
+    "sass": "^1.77.6"
   },
   "scripts": {
     "start": "react-scripts start",

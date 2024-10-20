@@ -19,7 +19,8 @@
     will-change: margin-left;
   }
 
-  .#{$prefix}--header ~ .#{$prefix}--content {
+  .#{$prefix}--header ~ .#{$prefix}--content,
+  div:has(.#{$prefix}--header) ~ .#{$prefix}--content {
     margin-block-start: mini-units(6);
   }
 
