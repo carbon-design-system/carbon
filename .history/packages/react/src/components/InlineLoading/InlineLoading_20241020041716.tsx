@@ -108,14 +108,12 @@ const InlineLoading = ({
       );
     }
     if (status === 'inactive') {
+      console.log('icon', iconDescription);
+
       if (!iconDescription) {
         iconLabel = 'not loading';
       }
-      return (
-        <title className={`${prefix}--inline-loading__inactive-status`}>
-          {iconLabel}
-        </title>
-      );
+      return <title>{iconLabel}</title>;
     }
     return undefined;
   };
