@@ -28,20 +28,54 @@ export default {
 };
 
 export const Selectable = (args) => {
+  const tags = [
+    {
+      id: 1,
+      text: 'Tag content with a long text description',
+    },
+    {
+      id: 2,
+      text: 'Tag content 1',
+    },
+    {
+      id: 3,
+      text: 'Tag content 2',
+    },
+    {
+      id: 4,
+      text: 'Tag content 3',
+    },
+  ];
+
+  const [selectedTags, setSelectedTags] = useState([
+    {
+      id: 2,
+      text: 'Tag content 1',
+    },
+  ]);
+
+  const handleChange = (tag, selected) => {
+    const nextSelectedTags = selected
+      ? [...selectedTags, tag]
+      : selectedTags.filter((t) => t.id !== tag.id);
+
+    console.log('Selected tags array: ', nextSelectedTags);
+    setSelectedTags(nextSelectedTags);
+  };
+
   return (
     <div aria-label="Selectable tags" role="group">
-      <SelectableTag
-        renderIcon={Asleep}
-        text="Tag content with a long text description"
-        className="some-class"
-        {...args}
-      />
-      <SelectableTag
-        renderIcon={Asleep}
-        text="Tag content"
-        className="some-class"
-        {...args}
-      />
+      {tags.map((tag, index) => (
+        <SelectableTag
+          key={index}
+          renderIcon={Asleep}
+          text={tag.text}
+          className="some-class"
+          selected={selectedTags.find((t) => t.id === tag.id)}
+          onChange={(selected) => handleChange(tag, selected)}
+          {...args}
+        />
+      ))}
     </div>
   );
 };
