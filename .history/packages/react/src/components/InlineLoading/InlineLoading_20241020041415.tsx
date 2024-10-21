@@ -112,9 +112,12 @@ const InlineLoading = ({
         iconLabel = 'not loading';
       }
       return (
-        <title className={`${prefix}--inline-loading__inactive-status`}>
-          {iconLabel}
-        </title>
+        <Loading
+          small
+          description={iconLabel}
+          withOverlay={false}
+          active={false}
+        />
       );
     }
     return undefined;
