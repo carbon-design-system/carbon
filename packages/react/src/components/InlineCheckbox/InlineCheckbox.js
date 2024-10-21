@@ -12,79 +12,78 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
 /** @type any */
-const InlineCheckbox = React.forwardRef(function InlineCheckbox(
-  props,
-  forwardRef
-) {
-  const {
-    ['aria-label']: ariaLabel,
-    ariaLabel: deprecatedAriaLabel,
-    checked = false,
-    disabled,
-    id,
-    indeterminate,
-    name,
-    onChange = () => {},
-    onClick,
-    onKeyDown,
-    title,
-  } = props;
-  const prefix = usePrefix();
-  const inputRef = useRef(null);
-  const ref = useMergedRefs([inputRef, forwardRef]);
-  const inputProps = {
-    checked,
-    className: `${prefix}--checkbox`,
-    disabled,
-    id,
-    name,
-    onClick: onClick ? onClickCheckBoxInput : onClick,
-    onChange: (evt) => {
-      onChange(evt.target.checked, id, evt);
-    },
-    onKeyDown,
-    ref,
-    type: 'checkbox',
-  };
+const InlineCheckbox = React.forwardRef(
+  function InlineCheckbox(props, forwardRef) {
+    const {
+      ['aria-label']: ariaLabel,
+      ariaLabel: deprecatedAriaLabel,
+      checked = false,
+      disabled,
+      id,
+      indeterminate,
+      name,
+      onChange = () => {},
+      onClick,
+      onKeyDown,
+      title,
+    } = props;
+    const prefix = usePrefix();
+    const inputRef = useRef(null);
+    const ref = useMergedRefs([inputRef, forwardRef]);
+    const inputProps = {
+      checked,
+      className: `${prefix}--checkbox`,
+      disabled,
+      id,
+      name,
+      onClick: onClick ? onClickCheckBoxInput : onClick,
+      onChange: (evt) => {
+        onChange(evt.target.checked, id, evt);
+      },
+      onKeyDown,
+      ref,
+      type: 'checkbox',
+    };
 
-  if (indeterminate) {
-    inputProps.checked = false;
-  }
-
-  useEffect(() => {
-    if (inputRef?.current) {
-      inputRef.current.indeterminate = indeterminate;
-    }
-  }, [indeterminate]);
-
-  function onClickCheckBoxInput(evt) {
-    // If the previous "indeterminate" is true, change "checked" to false. If it is not undefined, we're working on `TableSelectAll`
     if (indeterminate) {
-      evt.target.checked = false;
+      inputProps.checked = false;
     }
-    onClick(evt);
-  }
 
-  return (
-    <div className={`${prefix}--checkbox--inline`}>
-      <input {...inputProps} />
-      {
-        /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */
-        <label
-          htmlFor={id}
-          className={`${prefix}--checkbox-label`}
-          title={title}
-          onClick={(evt) => {
-            evt.stopPropagation();
-          }}>
-          <span className={`${prefix}--visually-hidden`}>
-            {deprecatedAriaLabel || ariaLabel}
-          </span>
-        </label>
+    useEffect(() => {
+      if (inputRef?.current) {
+        inputRef.current.indeterminate = indeterminate;
       }
-    </div>
-  );
-});
+    }, [indeterminate]);
+
+    function onClickCheckBoxInput(evt) {
+      // If the previous "indeterminate" is true, change "checked" to false. If it is not undefined, we're working on `TableSelectAll`
+      if (indeterminate) {
+        evt.target.checked = false;
+      }
+      onClick(evt);
+    }
+
+    return (
+      <div className={`${prefix}--checkbox--inline`}>
+        <input {...inputProps} />
+        {
+          /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */
+          <label
+            htmlFor={id}
+            className={`${prefix}--checkbox-label`}
+            title={title}
+            onClick={(evt) => {
+              evt.stopPropagation();
+            }}>
+            <span className={`${prefix}--visually-hidden`}>
+              {deprecatedAriaLabel || ariaLabel}
+            </span>
+          </label>
+        }
+      </div>
+    );
+  }
+);
 
 InlineCheckbox.propTypes = {
   /**

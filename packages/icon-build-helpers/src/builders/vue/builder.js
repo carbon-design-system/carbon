@@ -73,9 +73,8 @@ async function builder(metadata, { output }) {
   for (const m of modules) {
     files[m.filepath] = m.source;
     input[m.filepath] = m.filepath;
-    files[
-      'index.js'
-    ] += `\nexport { default as ${m.moduleName} } from '${m.filepath}';`;
+    files['index.js'] +=
+      `\nexport { default as ${m.moduleName} } from '${m.filepath}';`;
   }
 
   const bundle = await rollup({

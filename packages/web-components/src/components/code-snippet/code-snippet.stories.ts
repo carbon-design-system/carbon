@@ -228,13 +228,12 @@ export const Skeleton = {
       skip: true,
     },
   },
-  render: () =>
-    html`
-      <cds-code-snippet-skeleton
-        type="single"
-        style="margin-bottom: 8px"></cds-code-snippet-skeleton>
-      <cds-code-snippet-skeleton type="multi"></cds-code-snippet-skeleton>
-    `,
+  render: () => html`
+    <cds-code-snippet-skeleton
+      type="single"
+      style="margin-bottom: 8px"></cds-code-snippet-skeleton>
+    <cds-code-snippet-skeleton type="multi"></cds-code-snippet-skeleton>
+  `,
 };
 
 export const Playground = {

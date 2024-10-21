@@ -52,12 +52,11 @@ export const Playground = {
   parameters: {
     percy: { skip: true },
   },
-  render: ({ assistiveText, description, status }) =>
-    html`
-      <cds-inline-loading status="${status}" assistive-text=${assistiveText}>
-        ${description}
-      </cds-inline-loading>
-    `,
+  render: ({ assistiveText, description, status }) => html`
+    <cds-inline-loading status="${status}" assistive-text=${assistiveText}>
+      ${description}
+    </cds-inline-loading>
+  `,
 };
 
 const meta = {

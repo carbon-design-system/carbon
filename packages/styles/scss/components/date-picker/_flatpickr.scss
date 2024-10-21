@@ -406,7 +406,8 @@
   }
 
   .flatpickr-calendar.animate .dayContainer.slideLeft {
-    animation: fp-fade-out 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    animation:
+      fp-fade-out 400ms cubic-bezier(0.23, 1, 0.32, 1),
       fp-slide-left 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
@@ -416,18 +417,21 @@
   }
 
   .flatpickr-calendar.animate .dayContainer.slideLeftNew {
-    animation: fp-fade-in 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    animation:
+      fp-fade-in 400ms cubic-bezier(0.23, 1, 0.32, 1),
       fp-slide-left 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .flatpickr-calendar.animate .dayContainer.slideRight {
-    animation: fp-fade-out 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    animation:
+      fp-fade-out 400ms cubic-bezier(0.23, 1, 0.32, 1),
       fp-slide-right 400ms cubic-bezier(0.23, 1, 0.32, 1);
     transform: translate3d(100%, 0, 0);
   }
 
   .flatpickr-calendar.animate .dayContainer.slideRightNew {
-    animation: fp-fade-in 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    animation:
+      fp-fade-in 400ms cubic-bezier(0.23, 1, 0.32, 1),
       fp-slide-right-new 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 

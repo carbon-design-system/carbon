@@ -50,14 +50,13 @@ export const Default = {
 export const Playground = {
   args: defaultArgs,
   argTypes: controls,
-  render: ({ inactive, assistiveText, type, withOverlay }) =>
-    html`
-      <cds-loading
-        ?inactive=${inactive}
-        assistive-text=${assistiveText}
-        type=${ifDefined(type)}
-        ?overlay=${withOverlay}></cds-loading>
-    `,
+  render: ({ inactive, assistiveText, type, withOverlay }) => html`
+    <cds-loading
+      ?inactive=${inactive}
+      assistive-text=${assistiveText}
+      type=${ifDefined(type)}
+      ?overlay=${withOverlay}></cds-loading>
+  `,
 };
 
 const meta = {

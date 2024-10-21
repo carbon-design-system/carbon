@@ -322,8 +322,9 @@
 
     padding-block: min(
       calc(
-        (layout.size('height') - var(--temp-expressive-1lh)) / 2 -
-          convert.to-rem(1px)
+        (layout.size('height') - var(--temp-expressive-1lh)) / 2 - convert.to-rem(
+            1px
+          )
       ),
       var(--temp-padding-block-max)
     );

@@ -354,8 +354,9 @@ export const RadioWithLayer = {
 };
 
 export const Selectable = {
-  render: () =>
-    html` <cds-selectable-tile> Default tile </cds-selectable-tile> `,
+  render: () => html`
+    <cds-selectable-tile> Default tile </cds-selectable-tile>
+  `,
 };
 
 const meta = {

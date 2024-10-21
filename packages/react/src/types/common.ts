@@ -33,5 +33,5 @@ export interface TranslateWithId<MID = string, ARGS = Record<string, unknown>> {
  */
 export type InternationalProps<
   MID = string,
-  ARGS = Record<string, unknown>
+  ARGS = Record<string, unknown>,
 > = TranslateWithId<MID, ARGS>;

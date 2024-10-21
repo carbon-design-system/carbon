@@ -89,7 +89,8 @@
   );
 
   @if $type == 'hover' {
-    background: linear-gradient(
+    background:
+      linear-gradient(
           to top,
           theme.$ai-aura-hover-start $start,
           15%,
@@ -112,7 +113,8 @@
         )
         border-box;
   } @else if $type == 'selected' {
-    background: linear-gradient(
+    background:
+      linear-gradient(
           to top,
           theme.$ai-aura-start $start,
           15%,
@@ -126,7 +128,8 @@
       linear-gradient(to top, theme.$layer, theme.$layer)
         border-box;
   } @else {
-    background: linear-gradient(
+    background:
+      linear-gradient(
           to top,
           $background $start,
           theme.$ai-aura-start $start,

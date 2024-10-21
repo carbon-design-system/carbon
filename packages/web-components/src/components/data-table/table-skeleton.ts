@@ -127,32 +127,29 @@ class CDSTableSkeleton extends LitElement {
         <thead>
           <tr>
             ${Array.from(new Array(columnCount)).map(
-              (_, index) =>
-                html`
-                  <th>
-                    <div class="${prefix}--table-header-label">
-                      ${headers[index]}
-                    </div>
-                  </th>
-                `
+              (_, index) => html`
+                <th>
+                  <div class="${prefix}--table-header-label">
+                    ${headers[index]}
+                  </div>
+                </th>
+              `
             )}
           </tr>
         </thead>
         <tbody>
           ${Array.from(new Array(rowCount)).map(
-            () =>
-              html`
-                <tr>
-                  ${Array.from(new Array(columnCount)).map(
-                    () =>
-                      html`
-                        <td>
-                          <span></span>
-                        </td>
-                      `
-                  )}
-                </tr>
-              `
+            () => html`
+              <tr>
+                ${Array.from(new Array(columnCount)).map(
+                  () => html`
+                    <td>
+                      <span></span>
+                    </td>
+                  `
+                )}
+              </tr>
+            `
           )}
         </tbody>
       </table>

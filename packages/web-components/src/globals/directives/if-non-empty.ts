@@ -15,4 +15,4 @@ import { ifDefined } from 'lit/directives/if-defined.js';
  * @param value The value.
  */
 export default (value) =>
-  ifDefined(value === '' ? undefined : value ?? undefined);
+  ifDefined(value === '' ? undefined : (value ?? undefined));

@@ -111,11 +111,10 @@ class CDSAccordionSkeleton extends LitElement {
           `
         : ``}
       ${Array.from(new Array(numSkeletonItems)).map(
-        (_, index) =>
-          html`
-            <cds-accordion-item-skeleton
-              key=${index}></cds-accordion-item-skeleton>
-          `
+        (_, index) => html`
+          <cds-accordion-item-skeleton
+            key=${index}></cds-accordion-item-skeleton>
+        `
       )}
     `;
   }

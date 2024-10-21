@@ -91,7 +91,8 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     line-height: 1.45;
     max-inline-size: convert.to-rem(88px);
     text-overflow: ellipsis;
-    transition: box-shadow $duration-fast-02 motion(standard, productive),
+    transition:
+      box-shadow $duration-fast-02 motion(standard, productive),
       color $duration-fast-02 motion(standard, productive);
     white-space: nowrap;
 
