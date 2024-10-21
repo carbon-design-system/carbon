@@ -171,13 +171,6 @@ const config = {
     autodocs: true,
     defaultName: 'Overview',
   },
-  parameters: {
-    options: {
-      storySort: {
-        order: ['Flag details', '*'],
-      },
-    },
-  },
 };
 
 export default config;
