@@ -42,6 +42,9 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
     if (
       !(event.target as HTMLElement).matches(
         (this.constructor as typeof CDSTableHeaderCell).aiLabelItem
+      ) ||
+      !(event.target as HTMLElement).matches(
+        (this.constructor as typeof CDSTableHeaderCell).slugItem
       )
     ) {
       const nextSortDirection = this._getNextSort();
@@ -82,6 +85,9 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
               (this.constructor as typeof CDSTableHeaderCell).aiLabelItem
+            ) ||
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSTableHeaderCell).slugItem
             )
           : false
       );
@@ -225,6 +231,9 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
             <slot
               name="ai-label"
               @slotchange="${this._handleAILabelSlotChange}"></slot>
+            <slot
+              name="slug"
+              @slotchange="${this._handleAILabelSlotChange}"></slot>
           </span>
         </button>
       `;
@@ -233,8 +242,18 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
       <slot></slot
       ><slot
         name="ai-label"
-        @slotchange="${this._handleAILabelSlotChange}"></slot
+        @slotchange="${this._handleAILabelSlotChange}"></slot>
+      <slot name="slug" @slotchange="${this._handleAILabelSlotChange}"></slot
     ></span> `;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
   /**
    * A selector that will return the AI Label item.

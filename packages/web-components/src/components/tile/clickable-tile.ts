@@ -38,14 +38,14 @@ const aiLabelIcon = html` <svg
 @customElement(`${prefix}-clickable-tile`)
 class CDSClickableTile extends CDSLink {
   protected get _classes() {
-    const { colorScheme, disabled, hasRoundedCorners, aiLabel } = this;
+    const { colorScheme, disabled, hasRoundedCorners, aiLabel, slug } = this;
     return classMap({
       [`${prefix}--link`]: true,
       [`${prefix}--link--disabled`]: disabled,
       [`${prefix}--tile`]: true,
       [`${prefix}--tile--clickable`]: true,
       [`${prefix}--tile--${colorScheme}`]: colorScheme,
-      [`${prefix}--tile--slug-rounded`]: aiLabel && hasRoundedCorners,
+      [`${prefix}--tile--slug-rounded`]: (aiLabel || slug) && hasRoundedCorners,
     });
   }
 
@@ -72,10 +72,41 @@ class CDSClickableTile extends CDSLink {
   aiLabel = false;
 
   /**
+   * deprecated - remove in v12
+   */
+  @property({ type: Boolean })
+  slug = false;
+
+  /**
+   * If using `slug`, set `ai-label` attribute to true so
+   * the styles are applied for slug as well
+   *
+   * remove in v12
+   */
+  connectedCallback() {
+    if (this.slug) {
+      this.setAttribute('ai-Label', '');
+      this.aiLabel = true;
+    }
+    super.connectedCallback();
+  }
+
+  /**
    * @returns The inner content.
    */
   protected _renderInner() {
-    return html` ${super._renderInner()} ${this.aiLabel ? aiLabelIcon : ''} `;
+    return html`
+      ${super._renderInner()} ${this.aiLabel || this.slug ? aiLabelIcon : ''}
+    `;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

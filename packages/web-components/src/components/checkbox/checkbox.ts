@@ -177,6 +177,10 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
               (this.constructor as typeof CDSCheckbox).aiLabelItem
+            ) ||
+            // remove slug reference in v12
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSCheckbox).slugItem
             )
           : false
       );
@@ -261,6 +265,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         >
       </label>
       <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
+      <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
       <div class="${prefix}--checkbox__validation-msg">
         ${!readonly && invalid
           ? html`
@@ -288,6 +293,15 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
    */
   static get eventChange() {
     return `${prefix}-checkbox-changed`;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * Remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

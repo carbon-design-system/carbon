@@ -117,7 +117,8 @@ $css--plex: true !default;
     display: flex;
   }
 
-  ::slotted(#{$prefix}-ai-label[inline]) {
+  ::slotted(#{$prefix}-ai-label[inline]),
+  ::slotted(#{$prefix}-slug[inline]) {
     line-height: inherit;
     margin-block-start: to-rem(-1px);
   }
@@ -125,7 +126,8 @@ $css--plex: true !default;
 
 :host(#{$prefix}-radio-button-group) .#{$prefix}--radio-button-group--slug,
 :host(#{$prefix}-radio-button[ai-label]) {
-  ::slotted(#{$prefix}-ai-label) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
     margin-inline-start: $spacing-03;
   }
 }

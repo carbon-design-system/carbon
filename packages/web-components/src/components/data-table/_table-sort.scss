@@ -64,7 +64,8 @@
     margin-inline: auto $spacing-03;
   }
 
-  ::slotted(#{$prefix}-ai-label) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
     margin-inline-end: $spacing-03;
   }
 }

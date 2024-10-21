@@ -61,6 +61,10 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
               (this.constructor as typeof CDSTextInput).aiLabelItem
+            ) ||
+            // remove reference to slug in v12
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSTextInput).slugItem
             )
           : false
       );
@@ -485,6 +489,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
               maxlength="${ifNonEmpty(maxCount)}"
               @input="${handleInput}" />
             <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>
+            <slot name="slug" @slotchange="${handleSlotChange}"></slot>
             ${this.showPasswordVisibilityToggle &&
             (type === INPUT_TYPE.PASSWORD || type === INPUT_TYPE.TEXT)
               ? passwordVisibilityButton()
@@ -504,12 +509,30 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   }
 
   updated() {
-    this.shadowRoot
-      ?.querySelector("slot[name='ai-label']")
-      ?.classList.toggle(
+    const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
+
+    if (label) {
+      label?.classList.toggle(
         `${prefix}--slug--revert`,
         this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
+    } else {
+      this.shadowRoot
+        ?.querySelector("slot[name='slug']")
+        ?.classList.toggle(
+          `${prefix}--slug--revert`,
+          this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        );
+    }
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

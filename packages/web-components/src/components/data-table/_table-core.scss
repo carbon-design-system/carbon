@@ -114,7 +114,8 @@
     align-items: center;
   }
 
-  ::slotted(#{$prefix}-ai-label) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
     margin-inline-start: auto;
   }
 }

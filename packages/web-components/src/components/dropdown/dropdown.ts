@@ -261,6 +261,10 @@ class CDSDropdown extends ValidityMixin(
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
               (this.constructor as typeof CDSDropdown).aiLabelItem
+            ) ||
+            // remove reference to slug in v12
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSDropdown).slugItem
             )
           : false
       );
@@ -649,12 +653,21 @@ class CDSDropdown extends ValidityMixin(
       ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');
 
-    this.shadowRoot
-      ?.querySelector("slot[name='ai-label']")
-      ?.classList.toggle(
+    const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
+
+    if (label) {
+      label?.classList.toggle(
         `${prefix}--slug--revert`,
         this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
+    } else {
+      this.shadowRoot
+        ?.querySelector("slot[name='slug']")
+        ?.classList.toggle(
+          `${prefix}--slug--revert`,
+          this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        );
+    }
   }
 
   /**
@@ -799,6 +812,7 @@ class CDSDropdown extends ValidityMixin(
           </div>
         </div>
         <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>
+        <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
         ${menuBody}
       </div>
       <div
@@ -866,6 +880,15 @@ class CDSDropdown extends ValidityMixin(
    */
   static get eventToggle() {
     return `${prefix}-dropdown-toggled`;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

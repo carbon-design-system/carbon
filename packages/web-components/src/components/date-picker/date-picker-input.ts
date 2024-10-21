@@ -45,6 +45,10 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
               (this.constructor as typeof CDSDatePickerInput).aiLabelItem
+            ) ||
+            // remove reference to slug in v12
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSDatePickerInput).slugItem
             )
           : false
       );
@@ -319,6 +323,9 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
           <slot
             name="ai-label"
             @slotchange="${this._handleAILabelSlotChange}"></slot>
+          <slot
+            name="slug"
+            @slotchange="${this._handleAILabelSlotChange}"></slot>
         </span>
       </div>
       <div
@@ -335,12 +342,21 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   }
 
   updated() {
-    this.shadowRoot
-      ?.querySelector("slot[name='ai-label']")
-      ?.classList.toggle(
+    const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
+
+    if (label) {
+      label?.classList.toggle(
         `${prefix}--slug--revert`,
         this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
+    } else {
+      this.shadowRoot
+        ?.querySelector("slot[name='slug']")
+        ?.classList.toggle(
+          `${prefix}--slug--revert`,
+          this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        );
+    }
   }
 
   /**
@@ -358,6 +374,15 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    */
   static get selectorParent() {
     return `${prefix}-date-picker`;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

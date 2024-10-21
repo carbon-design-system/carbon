@@ -51,6 +51,10 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
               (this.constructor as typeof CDSExpandableTile)?.aiLabelItem
+            ) ||
+            // remove reference of slug in v12
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSExpandableTile)?.slugItem
             )
           : false
       );
@@ -172,6 +176,7 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         })}
       </button>
       <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
+      <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
       <div id="content" class="${prefix}--tile-content">
         <div><slot name="above-the-fold-content"></slot></div>
         <div
@@ -183,6 +188,15 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         </div>
       </div>
     `;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

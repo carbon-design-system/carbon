@@ -139,13 +139,15 @@ $css--plex: true !default;
     @extend .#{$prefix}--date-picker__icon--invalid;
   }
 
-  ::slotted(#{$prefix}-ai-label) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
     inset-inline-end: $spacing-08;
   }
 
-  ::slotted(#{$prefix}-ai-label:not([revert-active])) {
+  ::slotted(#{$prefix}-ai-label:not([revert-active])),
+  ::slotted(#{$prefix}-slug:not([revert-active])) {
     transform: translateY(-50%);
   }
 }

@@ -139,7 +139,11 @@ export default class PopoverController implements ReactiveController {
 
       // adding specific case here where the style of the caret/arrow
       // is dependent on the placement
-      if (this.host.tagName === 'CDS-AI-LABEL') {
+      // TODO: remove reference to slug in v12
+      if (
+        this.host.tagName === 'CDS-AI-LABEL' ||
+        this.host.tagName === 'CDS-SLUG'
+      ) {
         this.host?.setAttribute('alignment', placement);
       }
     }

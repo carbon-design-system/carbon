@@ -245,6 +245,14 @@ class CDSTable extends HostListenerMixin(LitElement) {
   @property({ type: Boolean, attribute: 'with-row-ai-labels' })
   withRowAILabels = false;
 
+  /**
+   *  true if slugs are added in the rows
+   *
+   * @deprecated remove in v12, use `with-row-ai-labels` instead
+   */
+  @property({ type: Boolean, attribute: 'with-row-slugs' })
+  withRowSlugs = false;
+
   private _handleSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
@@ -614,6 +622,17 @@ class CDSTable extends HostListenerMixin(LitElement) {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'table');
     }
+
+    /**
+     * If using `with-row-slugs`, set `with-row-ai-labels` attribute to true so
+     * the styles are applied for slug as well
+     *
+     * remove in v12
+     */
+    if (this.withRowSlugs) {
+      this.setAttribute('with-rows-ai-labels', '');
+      this.withRowAILabels = true;
+    }
     super.connectedCallback();
   }
 
@@ -786,7 +805,10 @@ class CDSTable extends HostListenerMixin(LitElement) {
     Array.prototype.slice
       .call(this._tableHeaderRow.children)
       .forEach((headerCell, index) => {
-        if (headerCell.querySelector(`${prefix}-ai-label`)) {
+        if (
+          headerCell.querySelector(`${prefix}-ai-label`) ||
+          headerCell.querySelector(`${prefix}-slug`)
+        ) {
           headerCell.setAttribute('ai-label', '');
           headersWithAILabel.push(index);
         } else {

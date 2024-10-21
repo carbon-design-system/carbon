@@ -62,7 +62,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[open]),
 :host(#{$prefix}-popover-content[open]),
 :host(#{$prefix}-toggletip[open]),
-:host(#{$prefix}-ai-label[open]) {
+:host(#{$prefix}-ai-label[open]),
+:host(#{$prefix}-slug[open]) {
   .#{$prefix}--popover-content {
     display: block;
   }
@@ -79,7 +80,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[open][caret]),
 :host(#{$prefix}-popover-content[open][caret]),
 :host(#{$prefix}-toggletip[open]),
-:host(#{$prefix}-ai-label[open]) {
+:host(#{$prefix}-ai-label[open]),
+:host(#{$prefix}-slug[open]) {
   .#{$prefix}--popover-caret {
     display: block;
   }
@@ -95,7 +97,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align^='bottom']:not([autoalign])),
 :host(#{$prefix}-popover-content[align^='bottom']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment^='bottom']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment^='bottom']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment^='bottom']:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='bottom']:not([autoalign])) {
   .#{$prefix}--popover-caret {
     block-size: $popover-caret-height;
     clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
@@ -107,6 +110,8 @@ $popover-caret-height: custom-property.get-var(
 }
 
 :host(#{$prefix}-ai-label[alignment^='bottom']:not([autoalign]))
+  .#{$prefix}--popover-caret,
+:host(#{$prefix}-slug[alignment^='bottom']:not([autoalign]))
   .#{$prefix}--popover-caret {
   clip-path: none;
 }
@@ -114,7 +119,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align='bottom']:not([autoalign])),
 :host(#{$prefix}-popover-content[align='bottom']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='bottom']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment='bottom']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment='bottom']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='bottom']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-end: 0;
     inset-inline-start: 50%;
@@ -125,7 +131,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align='bottom-left']:not([autoalign])),
 :host(#{$prefix}-popover-content[align='bottom-left']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='bottom-left']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment='bottom-left']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment='bottom-left']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='bottom-left']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-end: 0;
     inset-inline-start: 0;
@@ -139,7 +146,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align='bottom-right']:not([autoalign])),
 :host(#{$prefix}-popover-content[align='bottom-right']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='bottom-right']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment='bottom-right']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment='bottom-right']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='bottom-right']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-end: 0;
     inset-inline-end: 0;
@@ -150,7 +158,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align^='left']:not([autoalign])),
 :host(#{$prefix}-popover-content[align^='left']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment^='left']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment^='left']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment^='left']:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='left']:not([autoalign])) {
   .#{$prefix}--popover-caret {
     block-size: $popover-caret-width;
     clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
@@ -164,7 +173,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align='left']:not([autoalign])),
 :host(#{$prefix}-popover-content[align='left']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='left']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment='left']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment='left']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='left']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-start: 50%;
     inset-inline-end: 100%;
@@ -177,7 +187,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align='left-bottom']:not([autoalign])),
 :host(#{$prefix}-popover-content[align='left-bottom']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='left-bottom']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment='left-bottom']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment='left-bottom']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='left-bottom']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-end: 50%;
     inset-inline-end: 100%;
@@ -193,7 +204,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align='left-top']:not([autoalign])),
 :host(#{$prefix}-popover-content[align='left-top']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='left-top']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment='left-top']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment='left-top']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='left-top']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-start: 50%;
     inset-inline-end: 100%;
@@ -209,7 +221,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align^='right']:not([autoalign])),
 :host(#{$prefix}-popover-content[align^='right']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment^='right']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment^='right']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment^='right']:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='right']:not([autoalign])) {
   .#{$prefix}--popover-caret {
     block-size: $popover-caret-width;
     clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
@@ -223,7 +236,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align='right']:not([autoalign])),
 :host(#{$prefix}-popover-content[align='right']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='right']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment='right']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment='right']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='right']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-start: 50%;
     inset-inline-start: 100%;
@@ -236,7 +250,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align='right-bottom']:not([autoalign])),
 :host(#{$prefix}-popover-content[align='right-bottom']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='right-bottom']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment='right-bottom']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment='right-bottom']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='right-bottom']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-end: 50%;
     inset-inline-start: 100%;
@@ -247,7 +262,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align='right-top']:not([autoalign])),
 :host(#{$prefix}-popover-content[align='right-top']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='right-top']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment='right-top']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment='right-top']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='right-top']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-start: 50%;
     inset-inline-start: 100%;
@@ -261,7 +277,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align^='top']:not([autoalign])),
 :host(#{$prefix}-popover-content[align^='top']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment^='top']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment^='top']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment^='top']:not([autoalign])),
+:host(#{$prefix}-slug[alignment^='top']:not([autoalign])) {
   .#{$prefix}--popover-caret {
     block-size: $popover-caret-height;
     clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
@@ -275,7 +292,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align='top']:not([autoalign])),
 :host(#{$prefix}-popover-content[align='top']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='top']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment='top']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment='top']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='top']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-start: 0;
     inset-inline-start: 50%;
@@ -286,7 +304,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align='top-left']:not([autoalign])),
 :host(#{$prefix}-popover-content[align='top-left']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='top-left']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment='top-left']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment='top-left']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='top-left']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-start: 0;
     inset-inline-start: 0;
@@ -300,7 +319,8 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-tooltip-content[align='top-right']:not([autoalign])),
 :host(#{$prefix}-popover-content[align='top-right']:not([autoalign])),
 :host(#{$prefix}-toggletip[alignment='top-right']:not([autoalign])),
-:host(#{$prefix}-ai-label[alignment='top-right']:not([autoalign])) {
+:host(#{$prefix}-ai-label[alignment='top-right']:not([autoalign])),
+:host(#{$prefix}-slug[alignment='top-right']:not([autoalign])) {
   .#{$prefix}--popover-content {
     inset-block-start: 0;
     inset-inline-end: 0;
@@ -319,6 +339,7 @@ $popover-caret-height: custom-property.get-var(
 }
 
 :host(#{$prefix}-ai-label[autoalign]),
+:host(#{$prefix}-slug[autoalign]),
 :host(#{$prefix}-tooltip[autoalign]),
 :host(#{$prefix}-toggletip[autoalign]),
 :host(#{$prefix}-popover[autoalign]) {

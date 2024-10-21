@@ -52,6 +52,10 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
               (this.constructor as typeof CDSSelectableTile)?.aiLabelItem
+            ) ||
+            // remove reference of slug in v12
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSSelectableTile)?.slugItem
             )
           : false
       );
@@ -115,7 +119,10 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
       (key === 'Enter' &&
         !(event.target as HTMLElement)?.matches(
           (this.constructor as typeof CDSSelectableTile).aiLabelItem
-        ))
+        )) ||
+      !(event.target as HTMLElement)?.matches(
+        (this.constructor as typeof CDSSelectableTile).slugItem
+      )
     ) {
       this.selected = !this.selected;
     }
@@ -202,7 +209,17 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         <div class="${prefix}--tile-content"><slot></slot></div>
       </label>
       <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
+      <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
     `;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

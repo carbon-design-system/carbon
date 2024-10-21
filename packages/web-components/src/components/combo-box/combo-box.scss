@@ -129,33 +129,38 @@ $css--plex: true !default;
     padding: 0;
   }
 
-  ::slotted(#{$prefix}-ai-label) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
     inset-inline-end: $spacing-08;
   }
 
-  ::slotted(#{$prefix}-ai-label:not([revert-active])) {
+  ::slotted(#{$prefix}-ai-label:not([revert-active])),
+  ::slotted(#{$prefix}-slug:not([revert-active])) {
     transform: translateY(-50%);
   }
 }
 
 :host(#{$prefix}-combo-box[ai-label][isclosable]) {
-  ::slotted(#{$prefix}-ai-label) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
     inset-inline-end: $spacing-10;
   }
 }
 
 :host(#{$prefix}-combo-box[warn]),
 :host(#{$prefix}-combo-box[invalid]) {
-  ::slotted(#{$prefix}-ai-label) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
     inset-inline-end: $spacing-10;
   }
 }
 
 :host(#{$prefix}-combo-box[warn][isclosable]),
 :host(#{$prefix}-combo-box[invalid][isclosable]) {
-  ::slotted(#{$prefix}-ai-label) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
     inset-inline-end: to-rem(88px);
   }
 }

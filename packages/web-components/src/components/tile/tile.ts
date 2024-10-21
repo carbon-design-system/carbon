@@ -38,6 +38,10 @@ class CDSTile extends LitElement {
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
               (this.constructor as typeof CDSTile).aiLabelItem
+            ) ||
+            // remove reference of slug in v12
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSTile).slugItem
             )
           : false
       );
@@ -79,7 +83,17 @@ class CDSTile extends LitElement {
 
   render() {
     return html` <slot></slot
-      ><slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>`;
+      ><slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot
+      ><slot name="slug" @slotchange="${this._handleSlotChange}"></slot>`;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

@@ -45,19 +45,22 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-number-input) {
-  ::slotted(#{$prefix}-ai-label) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
     inset-inline-end: 5.5rem;
   }
-  ::slotted(#{$prefix}-ai-label:not([revert-active])) {
+  ::slotted(#{$prefix}-ai-label:not([revert-active])),
+  ::slotted(#{$prefix}-slug:not([revert-active])) {
     transform: translateY(-50%);
   }
 }
 :host(#{$prefix}-number-input) .#{$prefix}--number[data-invalid],
 :host(#{$prefix}-number-input[warn]),
 :host(#{$prefix}-number-input[invalid]) {
-  ::slotted(#{$prefix}-ai-label) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
     inset-inline-end: to-rem(120px);
   }
 }

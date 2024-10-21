@@ -84,6 +84,10 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
               (this.constructor as typeof CDSRadioButtonGroup).aiLabelItem
+            ) ||
+            // remove reference to slug in v12
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSRadioButtonGroup).slugItem
             )
           : false
       );
@@ -250,6 +254,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
           ? html` <legend class="${prefix}--label">
               ${legendText}
               <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>
+              <slot name="slug" @slotchange="${handleSlotChange}"></slot>
             </legend>`
           : ``}
         <slot></slot>
@@ -274,6 +279,15 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
    */
   static get selectorRadioButton() {
     return `${prefix}-radio-button`;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

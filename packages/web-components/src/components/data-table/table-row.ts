@@ -187,6 +187,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
       <div class="${prefix}--table-expand">
         <div>
           <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
+          <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
           <button
             class="${prefix}--table-expand__button"
             @click="${handleClickExpando}">
@@ -207,6 +208,9 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
               (this.constructor as typeof CDSTableRow).aiLabelItem
+            ) ||
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSTableRow).slugItem
             )
           : false
       );
@@ -238,6 +242,7 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
               <slot
                 name="ai-label"
                 @slotchange="${this._handleSlotChange}"></slot>
+              <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
               ${radio
                 ? html`<cds-radio-button data-table></cds-radio-button>`
                 : html`<cds-checkbox
@@ -455,6 +460,15 @@ class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   static get selectorExpandedRow() {
     return `${prefix}-table-expanded-row`;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

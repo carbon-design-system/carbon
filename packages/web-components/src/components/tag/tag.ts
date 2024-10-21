@@ -41,6 +41,10 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
               (this.constructor as typeof CDSTag).aiLabelItem
+            ) ||
+            // remove reference of slug in v12
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSTag).slugItem
             )
           : false
       );
@@ -142,6 +146,7 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
       <slot name="icon"></slot>
       <slot></slot>
       <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>
+      <slot name="slug" @slotchange="${handleAILabelSlotChange}"></slot>
       ${filter
         ? html`
             <button class="${prefix}--tag__close-icon" ?disabled=${disabled}>
@@ -150,6 +155,15 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
           `
         : ``}
     `;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

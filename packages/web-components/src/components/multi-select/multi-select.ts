@@ -134,6 +134,10 @@ class CDSMultiSelect extends CDSDropdown {
     } else if (
       !(event.target as HTMLElement)?.matches(
         (this.constructor as typeof CDSMultiSelect).aiLabelItem
+      ) ||
+      // remove reference to slug in v12
+      !(event.target as HTMLElement)?.matches(
+        (this.constructor as typeof CDSMultiSelect).slugItem
       )
     ) {
       super._handleClickInner(event);
@@ -504,9 +508,10 @@ class CDSMultiSelect extends CDSDropdown {
   };
 
   shouldUpdate(changedProperties) {
-    const { selectorItem, aiLabelItem } = this
+    const { selectorItem, aiLabelItem, slugItem } = this
       .constructor as typeof CDSMultiSelect;
-    const aiLabel = this.querySelector(aiLabelItem);
+    const aiLabel =
+      this.querySelector(aiLabelItem) || this.querySelector(slugItem);
     const items = this.querySelectorAll(selectorItem);
 
     const { value, locale } = this;

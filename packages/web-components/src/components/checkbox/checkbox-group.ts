@@ -98,6 +98,10 @@ class CDSCheckboxGroup extends LitElement {
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
               (this.constructor as typeof CDSCheckboxGroup).aiLabelItem
+            ) ||
+            // remove slug reference in v12
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSCheckboxGroup).slugItem
             )
           : false
       );
@@ -186,6 +190,7 @@ class CDSCheckboxGroup extends LitElement {
         <legend class="${prefix}--label" id=${legendId || ariaLabelledBy}>
           ${legendText}
           <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>
+          <slot name="slug" @slotchange="${handleSlotChange}"></slot>
         </legend>
         <slot></slot>
         <div class="${prefix}--checkbox-group__validation-msg">
@@ -216,6 +221,15 @@ class CDSCheckboxGroup extends LitElement {
    */
   static get selectorCheckbox() {
     return `${prefix}-checkbox`;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

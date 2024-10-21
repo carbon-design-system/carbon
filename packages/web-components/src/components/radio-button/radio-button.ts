@@ -132,6 +132,9 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
     if (
       !(event.target as HTMLElement).matches(
         (this.constructor as typeof CDSRadioButton)?.aiLabelItem
+      ) ||
+      !(event.target as HTMLElement).matches(
+        (this.constructor as typeof CDSRadioButton)?.slugItem
       )
     ) {
       const { disabled, _radioButtonDelegate: radioButtonDelegate } = this;
@@ -177,6 +180,9 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
     if (
       !(event.target as HTMLElement).matches(
         (this.constructor as typeof CDSRadioButton)?.aiLabelItem
+      ) ||
+      !(event.target as HTMLElement).matches(
+        (this.constructor as typeof CDSRadioButton)?.slugItem
       )
     ) {
       const { orientation, _radioButtonDelegate: radioButtonDelegate } = this;
@@ -210,6 +216,10 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
               (this.constructor as typeof CDSRadioButton).aiLabelItem
+            ) ||
+            // remove reference to slug in v12
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSRadioButton).slugItem
             )
           : false
       );
@@ -374,10 +384,20 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         <span class="${prefix}--radio-button__appearance"></span>
         <span class="${innerLabelClasses}">
           ${labelText}
-          <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot
+          <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
+          <slot name="slug" @slotchange="${this._handleSlotChange}"></slot
         ></span>
       </label>
     `;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**
