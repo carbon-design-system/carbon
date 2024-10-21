@@ -1,0 +1,33 @@
+{
+    "results": [],
+    "numExecuted": 5,
+    "ruleTime": 46,
+    "nls": {},
+    "summary": {
+        "counts": {
+            "violation": 0,
+            "potentialviolation": 0,
+            "recommendation": 0,
+            "potentialrecommendation": 0,
+            "manual": 0,
+            "pass": 5,
+            "ignored": 0,
+            "elements": 1,
+            "elementsViolation": 0,
+            "elementsViolationReview": 0
+        },
+        "scanTime": 200,
+        "ruleArchive": "Latest Deployment (latest)",
+        "policies": [
+            "IBM_Accessibility"
+        ],
+        "reportLevels": [
+            "violation",
+            "potentialviolation"
+        ],
+        "startScan": 1729541302731
+    },
+    "scanID": "2b0f2f49-db28-47c0-9645-350851cd7470",
+    "toolID": "accessibility-checker-v3.1.74",
+    "label": "Opened Accordion"
+}

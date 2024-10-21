@@ -280,8 +280,7 @@
     transform: none;
 
     &::before {
-      inset-inline-end: auto;
-      inset-inline-start: 0;
+      inset-inline: 0 auto;
     }
 
     &:hover,
@@ -373,19 +372,36 @@
 
     &:hover {
       cursor: not-allowed;
-      transform: translate(-50%, -50%);
+      transform: none;
     }
 
     &:focus {
       background-color: $border-disabled;
       box-shadow: none;
       outline: none;
-      transform: translate(-50%, -50%);
+      transform: none;
     }
 
     &:active {
       background: $border-disabled;
-      transform: translate(-50%, -50%);
+      box-shadow: none;
+      transform: none;
+    }
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb--lower,
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb--upper {
+    background-color: transparent;
+
+    &:active,
+    &:hover,
+    &:focus {
+      background-color: transparent;
+      transform: none;
+    }
+
+    .#{$prefix}--slider__thumb-icon {
+      fill: $border-disabled;
     }
   }
 
@@ -480,7 +496,7 @@
   }
 
   // Windows HCM fix
-  /* stylelint-disable */
+
   .#{$prefix}--slider__thumb {
     @include high-contrast-mode('outline');
   }
@@ -490,5 +506,4 @@
   .#{$prefix}--slider__track {
     @include high-contrast-mode('outline');
   }
-  /* stylelint-enable */
 }

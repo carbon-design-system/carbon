@@ -10,23 +10,23 @@ import { Search } from 'test';
 
 function RendersIconDirectly() {
   return (
-    <div>
+    (<div>
       <Add size={32} />
       <Bee size={24} />
       <Caret size={20} />
       <DownArrow />
-    </div>
+    </div>)
   );
 }
 
 function RendersIconWithProps(props) {
   return (
-    <div>
+    (<div>
       <Add size={32} aria-label="test" {...props} />
       <Bee size={24} aria-label="test" {...props} />
       <Caret size={20} aria-label="test" {...props} />
       <DownArrow aria-label="test" {...props} />
-    </div>
+    </div>)
   );
 }
 
@@ -36,9 +36,9 @@ function AliasedIcon() {
 
 function ExistingScope() {
   return (
-    <div>
+    (<div>
       <Search />
       <SearchIcon size={24} />
-    </div>
+    </div>)
   );
 }

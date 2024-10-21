@@ -7,7 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
-import { IconButton, IconButtonKind } from '../IconButton';
+import { IconButton, IconButtonKind, IconButtonKinds } from '../IconButton';
 import { composeEventHandlers } from '../../tools/events';
 import { PolymorphicProps } from '../../types/common';
 import { PopoverAlignment } from '../Popover';
@@ -74,7 +74,9 @@ export interface ButtonBaseProps
   /**
    * Specify the kind of Button you want to create
    */
-  kind?: ButtonKind;
+  kind?: ButtonBaseProps['hasIconOnly'] extends true
+    ? IconButtonKind
+    : ButtonKind;
 
   /**
    * Optional prop to allow overriding the icon rendering.
@@ -128,6 +130,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
   const tooltipRef = useRef(null);
   const {
     as,
+    autoAlign = false,
     children,
     hasIconOnly = false,
     iconDescription,
@@ -189,6 +192,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
         onMouseLeave={onMouseLeave}
         onFocus={onFocus}
         onBlur={onBlur}
+        autoAlign={autoAlign}
         onClick={composeEventHandlers([onClick, handleClick])}
         renderIcon={iconOnlyImage ? null : ButtonImageElement} // avoid doubling the icon.
       >
@@ -209,6 +213,11 @@ Button.propTypes = {
     PropTypes.string,
     PropTypes.elementType,
   ]),
+
+  /**
+   * **Experimental**: Will attempt to automatically align the tooltip
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Specify the content of your Button
@@ -266,8 +275,24 @@ Button.propTypes = {
   /**
    * Specify the kind of Button you want to create
    */
-  // TODO: this should be either ButtonKinds or IconButtonKinds based on the value of "hasIconOnly"
-  kind: PropTypes.oneOf(ButtonKinds),
+  kind: (props, propName, componentName) => {
+    const { hasIconOnly } = props;
+    const validKinds = hasIconOnly ? IconButtonKinds : ButtonKinds;
+
+    if (props[propName] === undefined) {
+      return null;
+    }
+
+    if (!validKinds.includes(props[propName])) {
+      return new Error(
+        `Invalid prop \`${propName}\` supplied to \`${componentName}\`. Expected one of ${validKinds.join(
+          ', '
+        )}.`
+      );
+    }
+
+    return null;
+  },
 
   /**
    * Provide an optional function to be called when the button element

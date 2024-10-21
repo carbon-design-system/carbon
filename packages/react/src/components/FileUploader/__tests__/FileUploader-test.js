@@ -10,6 +10,7 @@ import { act, render } from '@testing-library/react';
 import React from 'react';
 import FileUploader from '../';
 import { uploadFiles } from '../test-helpers';
+import { Simulate } from 'react-dom/test-utils';
 
 const iconDescription = 'test description';
 const requiredProps = {
@@ -48,22 +49,38 @@ describe('FileUploader', () => {
 
   it('should clear all uploaded files when `clearFiles` is called on a ref', () => {
     const ref = React.createRef();
-    const { container } = render(<FileUploader {...requiredProps} ref={ref} />);
+    const onClick = jest.fn();
+    let requiredProps1 = {
+      ...requiredProps,
+      filenameStatus: 'edit',
+    };
+    const fileUpload = render(
+      <FileUploader {...requiredProps1} ref={ref} onClick={onClick} />
+    );
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const input = container.querySelector('input');
+    const input = fileUpload.container.querySelector('input');
 
     const filename = 'test.png';
     act(() => {
       uploadFiles(input, [new File(['test'], filename, { type: 'image/png' })]);
     });
+    expect(getByText(fileUpload.container, filename)).toBeInstanceOf(
+      HTMLElement
+    );
 
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    expect(getByText(container, filename)).toBeInstanceOf(HTMLElement);
+    const onDelete = jest.fn();
+    const description = 'test-description';
+    // eslint-disable-next-line testing-library/render-result-naming-convention
+
+    let removeFile = getByLabel(
+      fileUpload.container,
+      'test description - test.png'
+    );
     act(() => {
-      ref.current.clearFiles();
+      Simulate.click(removeFile);
     });
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    expect(getByText(container, filename)).not.toBeInstanceOf(HTMLElement);
+
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 
   it('should synchronize the filename status state when its prop changes', () => {
