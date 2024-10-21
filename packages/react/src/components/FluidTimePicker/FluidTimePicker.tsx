@@ -52,6 +52,11 @@ export interface FluidTimePickerProps extends FluidTextInputProps {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: React.ReactNode;
+
+  /**
+   * Whether or not the component is readonly
+   */
+  readOnly?: boolean;
 }
 
 const FluidTimePicker = React.forwardRef<
@@ -66,12 +71,12 @@ const FluidTimePicker = React.forwardRef<
     invalidText,
     warn,
     warnText,
+    readOnly,
     ...other
   },
   ref
 ) {
   const prefix = usePrefix();
-
   const classNames = classnames(className, {
     [`${prefix}--time-picker--fluid`]: true,
     [`${prefix}--time-picker--equal-width`]:
@@ -96,12 +101,23 @@ const FluidTimePicker = React.forwardRef<
     <div className={classNames}>
       <div className={`${prefix}--time-picker--fluid__wrapper`}>
         <div className={`${prefix}--time-picker__input`}>
-          <FluidTextInput ref={ref} {...other} />
+          <FluidTextInput
+            ref={ref}
+            readOnly={readOnly}
+            disabled={disabled}
+            {...other}
+          />
         </div>
         {disabled
           ? React.Children.toArray(children).map((child) => {
               return React.cloneElement(child as React.ReactElement, {
-                disabled,
+                disabled: true,
+              });
+            })
+          : readOnly
+          ? React.Children.toArray(children).map((child) => {
+              return React.cloneElement(child as React.ReactElement, {
+                readOnly: true,
               });
             })
           : children}
@@ -164,6 +180,11 @@ FluidTimePicker.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Whether or not the component is readonly
+   */
+  readOnly: PropTypes.bool,
 };
 
 export default FluidTimePicker;
