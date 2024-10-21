@@ -379,7 +379,6 @@ const ComboBox = forwardRef(
     props: ComboBoxProps<ItemType>,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
-    const [cursorPosition, setCursorPosition] = useState(0);
     const prevInputLengthRef = useRef(0);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -745,7 +744,6 @@ const ComboBox = forwardRef(
           onChange({ selectedItem, inputValue: normalizedInput });
         }
         setHighlightedIndex(indexToHighlight(normalizedInput));
-        setCursorPosition(inputValue === null ? 0 : normalizedInput.length);
       },
       onSelectedItemChange({ selectedItem }) {
         onChange({ selectedItem });
@@ -797,12 +795,6 @@ const ComboBox = forwardRef(
       downshiftSetInputValue,
       toggleMenu,
     ]);
-    useEffect(() => {
-      if (inputRef.current) {
-        inputRef.current.setSelectionRange(cursorPosition, cursorPosition);
-      }
-    }, [inputValue, cursorPosition]);
-
     const buttonProps = getToggleButtonProps({
       disabled: disabled || readOnly,
       onClick: handleToggleClick(isOpen),
@@ -917,6 +909,7 @@ const ComboBox = forwardRef(
                 value: inputValue,
                 onChange: (e) => {
                   const newValue = e.target.value;
+                  setInputValue(newValue);
                   downshiftSetInputValue(newValue);
                 },
                 ref: mergeRefs(textInput, ref, inputRef),
@@ -998,7 +991,6 @@ const ComboBox = forwardRef(
                     if (matchingItem) {
                       const newValue = itemToString(matchingItem);
                       downshiftSetInputValue(newValue);
-                      setCursorPosition(newValue.length);
                       selectItem(matchingItem);
                     }
                   }
