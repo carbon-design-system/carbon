@@ -35,7 +35,7 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
 export default {
-  title: 'Experimental/Feature Flags/Tile',
+  title: 'Components/Tile/Feature Flag',
   component: Tile,
   subcomponents: {
     ClickableTile,
@@ -60,6 +60,7 @@ export default {
       </WithFeatureFlags>
     ),
   ],
+  tags: ['!autodocs'],
 };
 
 const experimentalClassname = 'experimental-tile';

@@ -105,7 +105,7 @@ test.describe('Tile', () => {
       test('feature flags clickable @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'experimental-feature-flags-tile--clickable',
+          id: 'components-tile-feature-flag--clickable',
           theme,
         });
       });
@@ -113,7 +113,7 @@ test.describe('Tile', () => {
       test('feature flags clickable with layer @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'experimental-feature-flags-tile--clickable-with-layer',
+          id: 'components-tile-feature-flag--clickable-with-layer',
           theme,
         });
       });
@@ -121,7 +121,7 @@ test.describe('Tile', () => {
       test('feature flags selectable @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'experimental-feature-flags-tile--selectable',
+          id: 'components-tile-feature-flag--selectable',
           theme,
         });
       });
@@ -129,7 +129,7 @@ test.describe('Tile', () => {
       test('feature flags multi select @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'experimental-feature-flags-tile--multi-select',
+          id: 'components-tile-feature-flag--multi-select',
           theme,
         });
       });
@@ -137,7 +137,7 @@ test.describe('Tile', () => {
       test('feature flags radio @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'experimental-feature-flags-tile--radio',
+          id: 'components-tile-feature-flag--radio',
           theme,
         });
       });
@@ -145,7 +145,7 @@ test.describe('Tile', () => {
       test('feature flags radio with layer @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'experimental-feature-flags-tile--radio-with-layer',
+          id: 'components-tile-feature-flag--radio-with-layer',
           theme,
         });
       });
@@ -153,7 +153,7 @@ test.describe('Tile', () => {
       test('feature flags expandable @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'experimental-feature-flags-tile--expandable',
+          id: 'components-tile-feature-flag--expandable',
           theme,
         });
       });
@@ -163,7 +163,7 @@ test.describe('Tile', () => {
       }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'experimental-feature-flags-tile--expandable-with-interactive',
+          id: 'components-tile-feature-flag--expandable-with-interactive',
           theme,
         });
       });
@@ -171,7 +171,7 @@ test.describe('Tile', () => {
       test('feature flags expandable with layer @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'experimental-feature-flags-tile--expandable-with-layer',
+          id: 'components-tile-feature-flag--expandable-with-layer',
           theme,
         });
       });

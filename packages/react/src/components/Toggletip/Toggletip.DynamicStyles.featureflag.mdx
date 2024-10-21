@@ -1,6 +1,9 @@
 import { Meta } from '@storybook/blocks';
 
-<Meta isTemplate />
+<Meta
+  title="Components/Toggletip/Feature Flag/Flag details"
+  name="Flag details"
+/>
 
 # Dynamically set floating styles
 
@@ -26,17 +29,23 @@ includes both the dynamic positioning styles and collision detection.
   flags={{
     'enable-v12-dynamic-floating-styles': true,
   }}>
-  <Popover open={open}>
-    <button
-      type="button"
-      onClick={() => {
-        setOpen(!open);
-      }}>
-      Toggle
-    </button>
-    <PopoverContent>
-      The content that is revealed by interacting with the Toggle button
-    </PopoverContent>
-  </Popover>
+  <ToggletipLabel>Toggletip label</ToggletipLabel>
+  <Toggletip align={args.align} defaultOpen>
+    <ToggletipButton label="Show information">
+      <Information />
+    </ToggletipButton>
+    <ToggletipContent>
+      <p>
+        Scroll the container up, down, left or right to observe how the
+        Toggletip will automatically change its position in attempt to stay
+        within the viewport. This works on initial render in addition to on
+        scroll.
+      </p>
+      <ToggletipActions>
+        <Link href="#">Link action</Link>
+        <Button size="sm">Button</Button>
+      </ToggletipActions>
+    </ToggletipContent>
+  </Toggletip>
 </FeatureFlags>
 ```
