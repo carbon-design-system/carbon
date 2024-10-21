@@ -1652,7 +1652,16 @@
       "contributions": [
         "code"
       ]
-    }
+    },
+    {
+      "login": "ziyadzulfikar",
+      "name": "ziyadzulfikar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56788667?v=4",
+      "profile": "https://github.com/ziyadzulfikar",
+      "contributions": [
+        "code"
+      ]
+    },
   ],
   "commitConvention": "none"
 }
