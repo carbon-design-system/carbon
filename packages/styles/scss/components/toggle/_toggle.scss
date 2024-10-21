@@ -186,7 +186,6 @@
     @include high-contrast-mode('outline');
   }
 
-  // stylelint-disable-next-line no-duplicate-selectors
   .#{$prefix}--toggle__button:focus
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__switch,
