@@ -10,8 +10,8 @@
 import { render } from 'lit';
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import { Plugin } from 'flatpickr/dist/types/options';
-import ChevronLeft16 from '@carbon/icons/lib/chevron--left/16';
-import ChevronRight16 from '@carbon/icons/lib/chevron--right/16';
+import ChevronLeft16 from '@carbon/icons/lib/chevron--left/16.js';
+import ChevronRight16 from '@carbon/icons/lib/chevron--right/16.js';
 
 /**
  * @returns A Flatpickr plugin to set the right icons in the design system.

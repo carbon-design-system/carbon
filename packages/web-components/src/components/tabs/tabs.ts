@@ -14,8 +14,8 @@ import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { forEach } from '../../globals/internal/collection-helpers';
-import ChevronRight16 from '@carbon/icons/lib/chevron--right/16';
-import ChevronLeft16 from '@carbon/icons/lib/chevron--left/16';
+import ChevronRight16 from '@carbon/icons/lib/chevron--right/16.js';
+import ChevronLeft16 from '@carbon/icons/lib/chevron--left/16.js';
 import CDSContentSwitcher, {
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';

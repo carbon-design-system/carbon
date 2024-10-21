@@ -10,13 +10,13 @@
 import { html } from 'lit';
 import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
-import Add from '@carbon/icons/lib/add/16';
-import Save from '@carbon/icons/lib/save/16';
-import TrashCan from '@carbon/icons/lib/trash-can/16';
+import Add from '@carbon/icons/lib/add/16.js';
+import Save from '@carbon/icons/lib/save/16.js';
+import TrashCan from '@carbon/icons/lib/trash-can/16.js';
 // @ts-ignore
-import Download16 from '@carbon/icons/lib/download/16';
+import Download16 from '@carbon/icons/lib/download/16.js';
 // @ts-ignore
-import Settings16 from '@carbon/icons/lib/settings/16';
+import Settings16 from '@carbon/icons/lib/settings/16.js';
 import '../index';
 import storyDocs from './data-table.mdx';
 

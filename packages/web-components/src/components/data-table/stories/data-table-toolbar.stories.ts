@@ -10,8 +10,8 @@
 import { html } from 'lit';
 import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
-import Settings16 from '@carbon/icons/lib/settings/16';
-import OverflowMenuVertical16 from '@carbon/icons/lib/overflow-menu--vertical/16';
+import Settings16 from '@carbon/icons/lib/settings/16.js';
+import OverflowMenuVertical16 from '@carbon/icons/lib/overflow-menu--vertical/16.js';
 import storyDocs from './data-table.mdx';
 import '../index';
 

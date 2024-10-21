@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import ChevronRight16 from '@carbon/icons/lib/chevron--right/16';
+import ChevronRight16 from '@carbon/icons/lib/chevron--right/16.js';
 import { prefix } from '../../globals/settings';
 import '../skeleton-text/index';
 import styles from './accordion.scss?lit';

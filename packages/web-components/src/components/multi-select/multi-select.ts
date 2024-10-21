@@ -10,7 +10,7 @@
 import { html, TemplateResult } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import Close16 from '@carbon/icons/lib/close/16';
+import Close16 from '@carbon/icons/lib/close/16.js';
 import { prefix } from '../../globals/settings';
 import {
   filter,

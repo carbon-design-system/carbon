@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
+import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';

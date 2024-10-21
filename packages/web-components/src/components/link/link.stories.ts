@@ -9,7 +9,7 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import Download16 from '@carbon/icons/lib/download/16';
+import Download16 from '@carbon/icons/lib/download/16.js';
 import { LINK_SIZE } from './link';
 
 const defaultArgs = {

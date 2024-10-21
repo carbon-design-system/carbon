@@ -12,9 +12,9 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { CONTENT_SWITCHER_SIZE } from './content-switcher';
 import './index';
 import { prefix } from '../../globals/settings';
-import TableOfContents16 from '@carbon/icons/lib/table-of-contents/16';
-import Workspace16 from '@carbon/icons/lib/workspace/16';
-import ViewMode2_16 from '@carbon/icons/lib/view--mode-2/16';
+import TableOfContents16 from '@carbon/icons/lib/table-of-contents/16.js';
+import Workspace16 from '@carbon/icons/lib/workspace/16.js';
+import ViewMode2_16 from '@carbon/icons/lib/view--mode-2/16.js';
 import '../layer/index';
 import '../../../.storybook/templates/with-layer';
 

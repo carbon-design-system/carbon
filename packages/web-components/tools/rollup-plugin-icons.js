@@ -38,7 +38,7 @@ export default function rollupPluginIcons(inputs, banner) {
         );
         const spreadModulePath = path.resolve(
           __dirname,
-          '../es/globals/directives/spread'
+          '../es/globals/directives/spread.js'
         );
 
         const code = `${banner}

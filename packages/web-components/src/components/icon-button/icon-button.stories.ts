@@ -11,7 +11,7 @@ import { html } from 'lit';
 import './index';
 import '../button/index';
 import { ICON_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
-import Edit16 from '@carbon/icons/lib/edit/16';
+import Edit16 from '@carbon/icons/lib/edit/16.js';
 import { ICON_BUTTON_SIZE } from './defs';
 import { BUTTON_KIND } from '../button/defs';
 

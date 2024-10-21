@@ -10,8 +10,8 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import Close20 from '@carbon/icons/lib/close/20';
-import Menu20 from '@carbon/icons/lib/menu/20';
+import Close20 from '@carbon/icons/lib/close/20.js';
+import Menu20 from '@carbon/icons/lib/menu/20.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';

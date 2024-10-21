@@ -11,7 +11,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import ChevronDownGlyph from '@carbon/icons/lib/chevron--down/16';
+import ChevronDownGlyph from '@carbon/icons/lib/chevron--down/16.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';

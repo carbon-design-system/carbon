@@ -10,9 +10,9 @@
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
+import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import { prefix } from '../../globals/settings';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import FormMixin from '../../globals/mixins/form';

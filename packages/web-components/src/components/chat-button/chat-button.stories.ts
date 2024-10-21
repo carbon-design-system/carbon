@@ -9,7 +9,7 @@
 
 import { html } from 'lit';
 import './index';
-import Add16 from '@carbon/icons/lib/add/16';
+import Add16 from '@carbon/icons/lib/add/16.js';
 import styles from './chat-button-story.scss?lit';
 
 export const Default = () => {

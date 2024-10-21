@@ -10,7 +10,7 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { TemplateResult, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import Close16 from '@carbon/icons/lib/close/16';
+import Close16 from '@carbon/icons/lib/close/16.js';
 import { prefix } from '../../globals/settings';
 import { findIndex, forEach } from '../../globals/internal/collection-helpers';
 import CDSDropdown, { DROPDOWN_KEYBOARD_ACTION } from '../dropdown/dropdown';

@@ -10,8 +10,8 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
-import ErrorFilled16 from '@carbon/icons/lib/error--filled/16';
+import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16.js';
+import ErrorFilled16 from '@carbon/icons/lib/error--filled/16.js';
 import { prefix } from '../../globals/settings';
 import LOADING_TYPE from '../loading/types';
 import getLoadingIcon from '../loading/loading-icon';

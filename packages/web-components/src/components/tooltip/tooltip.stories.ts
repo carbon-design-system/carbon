@@ -14,7 +14,7 @@ import { html } from 'lit';
 import './index';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import styles from './tooltip-story.scss?lit';
-import Information16 from '@carbon/icons/lib/information/16';
+import Information16 from '@carbon/icons/lib/information/16.js';
 
 const tooltipAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,

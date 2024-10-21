@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import Close16 from '@carbon/icons/lib/close/16';
+import Close16 from '@carbon/icons/lib/close/16.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListener from '../../globals/decorators/host-listener';

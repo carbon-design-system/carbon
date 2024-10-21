@@ -6,12 +6,12 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import CheckmarkFilled20 from '@carbon/icons/lib/checkmark--filled/20';
-import ErrorFilled20 from '@carbon/icons/lib/error--filled/20';
-import InformationFilled20 from '@carbon/icons/lib/information--filled/20';
-import InformationSquareFilled20 from '@carbon/icons/lib/information--square--filled/20';
-import WarningFilled20 from '@carbon/icons/lib/warning--filled/20';
-import WarningAltFilled20 from '@carbon/icons/lib/warning--alt--filled/20';
+import CheckmarkFilled20 from '@carbon/icons/lib/checkmark--filled/20.js';
+import ErrorFilled20 from '@carbon/icons/lib/error--filled/20.js';
+import InformationFilled20 from '@carbon/icons/lib/information--filled/20.js';
+import InformationSquareFilled20 from '@carbon/icons/lib/information--square--filled/20.js';
+import WarningFilled20 from '@carbon/icons/lib/warning--filled/20.js';
+import WarningAltFilled20 from '@carbon/icons/lib/warning--alt--filled/20.js';
 import { html, svg } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
