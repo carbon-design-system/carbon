@@ -710,7 +710,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     },
   });
 
-  const inputProps = getInputProps(
+  const { autoComplete, ...inputProps } = getInputProps(
     getDropdownProps({
       'aria-controls': isOpen ? menuId : undefined,
       'aria-describedby': helperText ? helperId : undefined,

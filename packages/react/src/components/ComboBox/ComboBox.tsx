@@ -756,6 +756,76 @@ const ComboBox = forwardRef(
       ]
     );
 
+    const { autoComplete, ...inputProps } = getInputProps({
+      'aria-controls': isOpen ? undefined : menuProps.id,
+      placeholder,
+      ref: mergeRefs(textInput, ref),
+      onKeyDown: (
+        event: KeyboardEvent<HTMLInputElement> & {
+          preventDownshiftDefault: boolean;
+          target: {
+            value: string;
+            setSelectionRange: (start: number, end: number) => void;
+          };
+        }
+      ): void => {
+        if (match(event, keys.Space)) {
+          event.stopPropagation();
+        }
+        if (match(event, keys.Enter) && (!inputValue || allowCustomValue)) {
+          toggleMenu();
+
+          if (highlightedIndex !== -1) {
+            selectItem(
+              filterItems(items, itemToString, inputValue)[highlightedIndex]
+            );
+          }
+
+          // Since `onChange` does not normally fire when the menu is closed, we should
+          // manually fire it when `allowCustomValue` is provided, the menu is closing,
+          // and there is a value.
+          if (allowCustomValue && isOpen && inputValue) {
+            onChange({ selectedItem, inputValue });
+          }
+
+          event.preventDownshiftDefault = true;
+          event?.persist?.();
+        }
+
+        if (match(event, keys.Escape) && inputValue) {
+          if (event.target === textInput.current && isOpen) {
+            toggleMenu();
+            event.preventDownshiftDefault = true;
+            event?.persist?.();
+          }
+        }
+
+        if (match(event, keys.Home) && event.code !== 'Numpad7') {
+          event.target.setSelectionRange(0, 0);
+        }
+
+        if (match(event, keys.End) && event.code !== 'Numpad1') {
+          event.target.setSelectionRange(
+            event.target.value.length,
+            event.target.value.length
+          );
+        }
+
+        if (event.altKey && event.key == 'ArrowDown') {
+          event.preventDownshiftDefault = true;
+          if (!isOpen) {
+            toggleMenu();
+          }
+        }
+        if (event.altKey && event.key == 'ArrowUp') {
+          event.preventDownshiftDefault = true;
+          if (isOpen) {
+            toggleMenu();
+          }
+        }
+      },
+    });
+
     return (
       <div className={wrapperClasses}>
         {titleText && (
@@ -786,80 +856,7 @@ const ComboBox = forwardRef(
               tabIndex={0}
               aria-haspopup="listbox"
               title={textInput?.current?.value}
-              {...getInputProps({
-                'aria-controls': isOpen ? undefined : menuProps.id,
-                placeholder,
-                ref: mergeRefs(textInput, ref),
-                onKeyDown: (
-                  event: KeyboardEvent<HTMLInputElement> & {
-                    preventDownshiftDefault: boolean;
-                    target: {
-                      value: string;
-                      setSelectionRange: (start: number, end: number) => void;
-                    };
-                  }
-                ): void => {
-                  if (match(event, keys.Space)) {
-                    event.stopPropagation();
-                  }
-                  if (
-                    match(event, keys.Enter) &&
-                    (!inputValue || allowCustomValue)
-                  ) {
-                    toggleMenu();
-
-                    if (highlightedIndex !== -1) {
-                      selectItem(
-                        filterItems(items, itemToString, inputValue)[
-                          highlightedIndex
-                        ]
-                      );
-                    }
-
-                    // Since `onChange` does not normally fire when the menu is closed, we should
-                    // manually fire it when `allowCustomValue` is provided, the menu is closing,
-                    // and there is a value.
-                    if (allowCustomValue && isOpen && inputValue) {
-                      onChange({ selectedItem, inputValue });
-                    }
-
-                    event.preventDownshiftDefault = true;
-                    event?.persist?.();
-                  }
-
-                  if (match(event, keys.Escape) && inputValue) {
-                    if (event.target === textInput.current && isOpen) {
-                      toggleMenu();
-                      event.preventDownshiftDefault = true;
-                      event?.persist?.();
-                    }
-                  }
-
-                  if (match(event, keys.Home) && event.code !== 'Numpad7') {
-                    event.target.setSelectionRange(0, 0);
-                  }
-
-                  if (match(event, keys.End) && event.code !== 'Numpad1') {
-                    event.target.setSelectionRange(
-                      event.target.value.length,
-                      event.target.value.length
-                    );
-                  }
-
-                  if (event.altKey && event.key == 'ArrowDown') {
-                    event.preventDownshiftDefault = true;
-                    if (!isOpen) {
-                      toggleMenu();
-                    }
-                  }
-                  if (event.altKey && event.key == 'ArrowUp') {
-                    event.preventDownshiftDefault = true;
-                    if (isOpen) {
-                      toggleMenu();
-                    }
-                  }
-                },
-              })}
+              {...inputProps}
               {...rest}
               {...readOnlyEventHandlers}
               readOnly={readOnly}
