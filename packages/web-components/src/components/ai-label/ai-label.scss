@@ -17,7 +17,7 @@
 @use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/components/slug/index' as *;
-@use '../toggle-tip/toggletip.scss';
+@use '../toggle-tip/toggletip';
 
 // importing tag color tokens for the styling slug in tag component
 @use '@carbon/styles/scss/components/tag/index' as *;

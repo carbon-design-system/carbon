@@ -515,7 +515,7 @@ $list-box-menu-width: convert.to-rem(300px);
     display: none;
     background-color: $layer;
     inline-size: $list-box-width;
-    inset-inline: 0 0;
+    inset-inline: 0;
     overflow-y: auto;
     transition: max-height $duration-fast-02 motion(standard, productive);
 
