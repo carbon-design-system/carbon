@@ -1,23 +1,23 @@
 function Accordion() {
   return (
-    <div>
+    (<div>
       <Accordion className="test" size="lg" />
       <Accordion className="test" size="lg">
         <AccordionItem>Test</AccordionItem>
       </Accordion>
-    </div>
+    </div>)
   );
 }
 
 function Button() {
   return (
-    <div>
+    (<div>
       <Button className="test" size="sm" />
       <Button className="test" size="md"></Button>
       <Button className="test" size="lg"></Button>
       <Button className="test" size="xl"></Button>
       <Button className="test" size="2xl"></Button>
-    </div>
+    </div>)
   );
 }
 
@@ -27,11 +27,11 @@ function ComboBox() {
 
 function ContentSwitcher() {
   return (
-    <ContentSwitcher className="test" size="lg">
+    (<ContentSwitcher className="test" size="lg">
       <Switch name="one" text="First section" />
       <Switch name="two" text="Second section" />
       <Switch name="three" text="Third section" />
-    </ContentSwitcher>
+    </ContentSwitcher>)
   );
 }
 
@@ -41,31 +41,31 @@ function Dropdown() {
 
 function DataTable() {
   return (
-    <div>
+    (<div>
       <Table className="test" size="xs"></Table>
       <Table className="test" size="sm"></Table>
       <Table className="test" size="xl"></Table>
       <DataTable className="test" size="xs"></DataTable>
       <DataTable className="test" size="sm"></DataTable>
       <DataTable className="test" size="xl"></DataTable>
-    </div>
+    </div>)
   );
 }
 
 function DatePicker() {
   return (
-    <DatePicker datePickerType="single">
+    (<DatePicker datePickerType="single">
       <DatePickerInput
         size="lg"
         id="datepicker"
         labelText="Datepicker Test"></DatePickerInput>
-    </DatePicker>
+    </DatePicker>)
   );
 }
 
 function FileUploader() {
   return (
-    <div>
+    (<div>
       <FileUploader size="sm"></FileUploader>
       <FileUploader size="md"></FileUploader>
       <FileUploader size="lg"></FileUploader>
@@ -78,7 +78,7 @@ function FileUploader() {
       <FileUploaderDropContainer size="sm"></FileUploaderDropContainer>
       <FileUploaderDropContainer size="md"></FileUploaderDropContainer>
       <FileUploaderDropContainer size="lg"></FileUploaderDropContainer>
-    </div>
+    </div>)
   );
 }
 
@@ -88,7 +88,7 @@ function Link() {
 
 function MultiSelect() {
   return (
-    <div>
+    (<div>
       <MultiSelect
         size="lg"
         items={items}
@@ -99,7 +99,7 @@ function MultiSelect() {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
       />
-    </div>
+    </div>)
   );
 }
 
@@ -113,28 +113,28 @@ function OverflowMenu() {
 
 function Search() {
   return (
-    <div>
+    (<div>
       <Search className="test" size="md" />
       <Search className="test" size="lg" />
-    </div>
+    </div>)
   );
 }
 
 function Select() {
   return (
-    <div>
+    (<div>
       <Select className="test" size="md" />
       <Select className="test" size="lg" />
-    </div>
+    </div>)
   );
 }
 
 function TextInput() {
   return (
-    <div>
+    (<div>
       <TextInput size="md" id="textinput1" labelText="lg -> md"></TextInput>
       <TextInput size="lg" id="textinput1" labelText="xl -> lg"></TextInput>
-    </div>
+    </div>)
   );
 }
 

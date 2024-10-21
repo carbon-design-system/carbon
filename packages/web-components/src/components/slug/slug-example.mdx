@@ -1,0 +1,46 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SlugExampleStories from './slug-example.stories';
+
+<Meta of={SlugExampleStories} />
+
+# Slug
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/slug)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/slug)
+
+## Getting started
+
+Here's a quick example to get you started.
+
+To render the `Slug` inside a component, simply add the `Slug` inside the
+desired component available.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/slug/index.js';
+import '@carbon/web-components/es/components/text-input/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['slug'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-text-input label="Text input label" placeholder="Placeholder text">
+  <div slot="body-text">{Content Here}</div>
+</cds-text-input>
+```
+
+## `<cds-slug>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-slug revert-active>`) and `false` means not setting the attribute (e.g.
+`<cds-slug>` without `revertActive` attribute).
+
+<ArgTypes of="cds-slug" />

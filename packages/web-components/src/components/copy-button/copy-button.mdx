@@ -1,0 +1,42 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as CopyButtonStories from './copy-button.stories';
+
+<Meta of={CopyButtonStories} />
+
+# Copy button
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/copy-button)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/copy-button)
+
+Copy button provides the interface of copy button and its feedback tooltip. No
+actual copy is performed, but application can listen to `click` event of
+`<cds-copy-button>` and interact with the clipboard.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/copy-button/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['copy-button'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-copy-button feedback="Copied!" feedback-timeout="2000">
+  Copy to Clipboard
+</cds-copy-button>
+```
+
+## `<cds-copy-button>` attributes and properties
+
+<ArgTypes of="cds-copy-button" />

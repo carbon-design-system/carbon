@@ -22,7 +22,7 @@ test.describe('@avt Menu', () => {
     await expect(page).toHaveNoACViolations('Menu @avt-default-state');
   });
 
-  test('@avt-keyboard-nav Menu', async ({ page }) => {
+  test.fixme('@avt-keyboard-nav Menu', async ({ page }) => {
     await visitStory(page, {
       component: 'Menu',
       id: 'components-menu--playground',

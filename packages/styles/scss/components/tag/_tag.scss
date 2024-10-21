@@ -97,8 +97,7 @@
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    padding-block-end: 0;
-    padding-block-start: 0;
+    padding-block: 0;
     padding-inline-end: 0;
 
     &:hover {
@@ -397,8 +396,12 @@
     border-color: currentColor;
   }
 
+  .#{$prefix}--tag--filter .#{$prefix}--slug {
+    min-inline-size: convert.to-rem(32.14px);
+  }
+
   // Windows HCM fix
-  /* stylelint-disable */
+
   .#{$prefix}--tag {
     @include high-contrast-mode('outline');
   }
@@ -425,7 +428,6 @@
     + .#{$prefix}--tag-label-tooltip {
     max-inline-size: convert.to-rem(158px);
   }
-  /* stylelint-enable */
 
   .#{$prefix}--interactive--tag-children {
     display: inline-flex;

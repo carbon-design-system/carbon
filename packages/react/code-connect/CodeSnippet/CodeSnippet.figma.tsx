@@ -11,26 +11,42 @@ import figma from '@figma/code-connect';
 
 // Inline
 figma.connect(
+  CodeSnippet,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4266-104904&t=cMvnFTYLPEhzhIpj-4',
   {
-    example: () => {
-      return <div>{/* To view CodeSnippet code, view inner component */}</div>;
+    variant: { Tooltip: 'True' },
+    props: {
+      codeSnippet: figma.nestedProps('Code snippet', {
+        text: figma.textContent('node -v'),
+      }),
+      tooltip: figma.nestedProps('Tooltip content', {
+        text: figma.textContent('Tooltip text'),
+      }),
+    },
+    example: ({ codeSnippet, tooltip }) => {
+      return (
+        <CodeSnippet type="inline" feedback={tooltip.text}>
+          {codeSnippet.text}
+        </CodeSnippet>
+      );
     },
   }
 );
 
-//Inline item
 figma.connect(
   CodeSnippet,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4266-104960&t=cMvnFTYLPEhzhIpj-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4266-104904&t=cMvnFTYLPEhzhIpj-4',
   {
+    variant: { Tooltip: 'False' },
     props: {
-      children: figma.textContent('node -v'),
+      codeSnippet: figma.nestedProps('Code snippet', {
+        text: figma.textContent('node -v'),
+      }),
     },
-    example: ({ children }) => {
+    example: ({ codeSnippet }) => {
       return (
         <CodeSnippet type="inline" feedback="Copied to clipboard">
-          {children}
+          {codeSnippet.text}
         </CodeSnippet>
       );
     },
