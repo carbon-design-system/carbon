@@ -557,10 +557,6 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
 
   function handleClick(item, e) {
     setSelection(item);
-
-    if (onChange) {
-      onChange(e);
-    }
   }
 
   useEffect(() => {

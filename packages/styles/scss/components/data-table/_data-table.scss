@@ -205,7 +205,7 @@
 
   .#{$prefix}--data-table td,
   .#{$prefix}--data-table tbody th {
-    border-block-end: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle-01;
     border-block-start: 1px solid $layer;
     color: $text-secondary;
     padding-inline: $spacing-05 $spacing-05;
@@ -213,6 +213,16 @@
     + td:first-of-type {
       padding-inline-start: $spacing-04;
     }
+  }
+
+  .#{$prefix}--layer-two .#{$prefix}--data-table td,
+  .#{$prefix}--layer-two .#{$prefix}--data-table tbody th {
+    border-block-end: 1px solid $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three .#{$prefix}--data-table td,
+  .#{$prefix}--layer-three .#{$prefix}--data-table tbody th {
+    border-block-end: 1px solid $border-subtle-03;
   }
 
   @supports (-moz-appearance: none) {
@@ -319,7 +329,7 @@
   .#{$prefix}--data-table--xs td.#{$prefix}--table-column-menu,
   .#{$prefix}--data-table--sm td.#{$prefix}--table-column-menu {
     block-size: convert.to-rem(24px);
-    padding-block: 0 0;
+    padding-block: 0;
   }
 
   .#{$prefix}--data-table--sm td.#{$prefix}--table-column-menu {
@@ -583,7 +593,7 @@
       .#{$prefix}--data-table--top-aligned-header
     )
     th.#{$prefix}--table-column-checkbox {
-    padding-block: 0 0;
+    padding-block: 0;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--xs
@@ -827,7 +837,7 @@
     }
 
     //hides ff scrollbar
-    @-moz-document url-prefix() {
+    @document url-prefix() {
       thead,
       tbody {
         scrollbar-width: none;
@@ -1076,7 +1086,7 @@
     td.#{$prefix}--table-cell--column-slug,
 
   // Windows HCM fix
-  // stylelint-disable-next-line no-duplicate-selectors
+  
   .#{$prefix}--data-table-content {
     @include high-contrast-mode('outline');
   }
