@@ -383,7 +383,8 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
     function pageWouldBeHidden(page: number) {
       const startOffset = itemsDisplayedOnPage <= 4 && page > 1 ? 0 : 1;
 
-      const wouldBeHiddenInFront = page >= startOffset && page <= cuts.front;
+      const wouldBeHiddenInFront =
+        (page >= startOffset && page <= cuts.front) || page === 0;
       const wouldBeHiddenInBack =
         page >= totalItems - cuts.back - 1 && page <= totalItems - 2;
 

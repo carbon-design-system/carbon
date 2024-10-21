@@ -189,7 +189,7 @@
       .#{$prefix}--file-filename-tooltip {
         inline-size: -webkit-fill-available;
         padding-inline-start: $spacing-05;
-        @-moz-document url-prefix() {
+        @document url-prefix() {
           inline-size: -moz-available;
         }
       }
@@ -197,7 +197,7 @@
 
     .#{$prefix}--file-filename-tooltip {
       inline-size: -webkit-fill-available;
-      @-moz-document url-prefix() {
+      @document url-prefix() {
         inline-size: -moz-available;
       }
     }
@@ -217,7 +217,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
 
-      @-moz-document url-prefix() {
+      @document url-prefix() {
         inline-size: -moz-available;
       }
     }
@@ -401,7 +401,7 @@
   }
 
   // Windows HCM fix
-  /* stylelint-disable */
+
   .#{$prefix}--file__selected-file {
     @include high-contrast-mode('outline');
   }
@@ -409,5 +409,4 @@
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
     @include high-contrast-mode('icon-fill');
   }
-  /* stylelint-enable */
 }
