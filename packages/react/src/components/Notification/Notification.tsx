@@ -1279,6 +1279,19 @@ export function Callout({
   ...rest
 }: CalloutProps) {
   const prefix = usePrefix();
+
+  let redirectedKind = kind;
+  if (kind === 'success') {
+    console.warn(
+      'Callout: The "success" kind is deprecated. Please use "info" instead.'
+    );
+    redirectedKind = 'info';
+  } else if (kind === 'warning') {
+    console.warn(
+      'Callout: The "warning" kind is deprecated. Please use "error" instead.'
+    );
+    redirectedKind = 'error';
+  }
   const containerClassName = cx(className, {
     [`${prefix}--actionable-notification`]: true,
     [`${prefix}--actionable-notification--low-contrast`]: lowContrast,
@@ -1297,7 +1310,7 @@ export function Callout({
       <div className={`${prefix}--actionable-notification__details`}>
         <NotificationIcon
           notificationType="inline"
-          kind={kind}
+          kind={redirectedKind}
           iconDescription={statusIconDescription || `${kind} icon`}
         />
         <div className={`${prefix}--actionable-notification__text-wrapper`}>
