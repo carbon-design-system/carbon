@@ -49,7 +49,7 @@
     td {
     border: 0;
     background-color: $layer-hover;
-    padding-block: 0 0;
+    padding-block: 0;
     transition: padding $duration-moderate-01 motion(standard, productive),
       background-color $duration-fast-01 motion(standard, productive);
   }
@@ -484,7 +484,6 @@
     @include high-contrast-mode('focus');
   }
 
-  // stylelint-disable-next-line no-duplicate-selectors
   .#{$prefix}--table-expand__svg {
     @include high-contrast-mode('icon-fill');
   }

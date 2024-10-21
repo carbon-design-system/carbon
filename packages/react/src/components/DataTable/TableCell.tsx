@@ -37,27 +37,24 @@ interface TableCellProps extends ReactAttr<HTMLTableCellElement> {
   headers?: string;
 }
 
-const TableCell = ({
-  children,
-  className,
-  hasSlugHeader,
-  colSpan,
-  ...rest
-}: TableCellProps) => {
-  const prefix = usePrefix();
+const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
+  ({ children, className, hasSlugHeader, colSpan, ...rest }, ref) => {
+    const prefix = usePrefix();
 
-  const tableCellClassNames = classNames(className, {
-    [`${prefix}--table-cell--column-slug`]: hasSlugHeader,
-  });
-  return (
-    <td
-      className={tableCellClassNames ? tableCellClassNames : undefined}
-      colSpan={colSpan}
-      {...rest}>
-      {children}
-    </td>
-  );
-};
+    const tableCellClassNames = classNames(className, {
+      [`${prefix}--table-cell--column-slug`]: hasSlugHeader,
+    });
+    return (
+      <td
+        className={tableCellClassNames ? tableCellClassNames : undefined}
+        ref={ref}
+        colSpan={colSpan}
+        {...rest}>
+        {children}
+      </td>
+    );
+  }
+);
 
 TableCell.displayName = 'TableCell';
 export default TableCell;

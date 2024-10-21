@@ -1460,6 +1460,7 @@ categories:
           - document--multiple-02
           - document--pdf
           - document--preliminary
+          - document--processor
           - document--protected
           - document--requirements
           - document--security
