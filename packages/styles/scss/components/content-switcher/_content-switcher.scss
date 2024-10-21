@@ -231,7 +231,7 @@
   }
 
   // Windows HCM fix
-  // stylelint-disable-next-line no-duplicate-selectors
+
   .#{$prefix}--content-switcher-btn:focus {
     @include high-contrast-mode('focus');
   }
