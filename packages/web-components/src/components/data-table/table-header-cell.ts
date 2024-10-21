@@ -41,7 +41,7 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
   private _handleClickSortButton(event) {
     if (
       !(event.target as HTMLElement).matches(
-        (this.constructor as typeof CDSTableHeaderCell).slugItem
+        (this.constructor as typeof CDSTableHeaderCell).aiLabelItem
       )
     ) {
       const nextSortDirection = this._getNextSort();
@@ -75,18 +75,18 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
   /**
    * Handles `slotchange` event.
    */
-  protected _handleSlugSlotChange({ target }: Event) {
+  protected _handleAILabelSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSTableHeaderCell).slugItem
+              (this.constructor as typeof CDSTableHeaderCell).aiLabelItem
             )
           : false
       );
     if (hasContent.length > 0) {
-      this._hasSlug = Boolean(hasContent);
+      this._hasAILabel = Boolean(hasContent);
       (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     }
 
@@ -123,9 +123,9 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
   }
 
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   /**
    * `true` if the table has expandable rows
@@ -187,10 +187,10 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
     ) {
       this.sortDirection = TABLE_SORT_DIRECTION.NONE;
     }
-    if (this._hasSlug) {
-      this.setAttribute('slug', '');
+    if (this._hasAILabel) {
+      this.setAttribute('ai-label', '');
     } else {
-      this.removeAttribute('slug');
+      this.removeAttribute('ai-label');
     }
   }
 
@@ -198,7 +198,7 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
     const { sortDirection } = this;
     const labelClasses = classMap({
       [`${prefix}--table-header-label`]: true,
-      [`${prefix}--table-header-label--slug`]: this._hasSlug,
+      [`${prefix}--table-header-label--slug`]: this._hasAILabel,
     });
     if (sortDirection) {
       const sortIcon =
@@ -223,22 +223,24 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
             ></span>
             ${sortIcon}
             <slot
-              name="slug"
-              @slotchange="${this._handleSlugSlotChange}"></slot>
+              name="ai-label"
+              @slotchange="${this._handleAILabelSlotChange}"></slot>
           </span>
         </button>
       `;
     }
     return html`<span part="label-text" class="${labelClasses}">
       <slot></slot
-      ><slot name="slug" @slotchange="${this._handleSlugSlotChange}"></slot
+      ><slot
+        name="ai-label"
+        @slotchange="${this._handleAILabelSlotChange}"></slot
     ></span> `;
   }
   /**
-   * A selector that will return the slug item.
+   * A selector that will return the AI Label item.
    */
-  static get slugItem() {
-    return `${prefix}-slug`;
+  static get aiLabelItem() {
+    return `${prefix}-ai-label`;
   }
 
   /**
