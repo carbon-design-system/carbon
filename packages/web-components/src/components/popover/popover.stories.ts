@@ -13,7 +13,7 @@ import './popover-content';
 import '../radio-button/index';
 import { POPOVER_ALIGNMENT } from './defs';
 import { prefix } from '../../globals/settings';
-import Checkbox16 from '@carbon/icons/lib/checkbox/16';
+import Checkbox16 from '@carbon/icons/lib/checkbox/16.js';
 import Settings16 from '@carbon/icons/lib/settings/16';
 import '../checkbox/checkbox';
 
