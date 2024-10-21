@@ -1,10 +1,11 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:math';
 @use 'tokens' as *;
 @use 'vars' as *;
 @use 'mixins' as *;
@@ -20,6 +21,98 @@
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/layout';
+
+@mixin button-set-fluid-column() {
+  --flex-direction: column;
+
+  .#{$prefix}--btn {
+    flex: initial;
+    inline-size: 100%;
+    max-inline-size: none;
+  }
+
+  .#{$prefix}--btn--ghost {
+    padding-inline-start: $spacing-05;
+  }
+}
+
+@mixin button-set-fluid-layout() {
+  container-name: button-set;
+  container-type: inline-size;
+
+  .#{$prefix}--btn-set__fluid-inner {
+    --flex-direction: row;
+
+    display: flex;
+    flex-direction: var(--flex-direction);
+    align-items: stretch;
+    justify-content: flex-end;
+    inline-size: 100%;
+  }
+
+  /* NOTE: Container queries are based on this value */
+  $min-inline-button-size: convert.to-rem(176px);
+
+  .#{$prefix}--btn-set__fluid-inner .#{$prefix}--btn {
+    flex: 0 1 25%;
+    max-inline-size: convert.to-rem(232px);
+  }
+
+  .#{$prefix}--btn-set__fluid-inner--auto-stack .#{$prefix}--btn {
+    min-inline-size: $min-inline-button-size;
+  }
+
+  .#{$prefix}--btn-set__fluid-inner .#{$prefix}--btn--ghost,
+  .#{$prefix}--btn-set__fluid-inner .#{$prefix}--btn--danger--ghost {
+    flex: 1 1 25%;
+    max-inline-size: none;
+    padding-inline-start: $spacing-07; /* increased padding when inline */
+  }
+
+  @container (width <= #{4 * $min-inline-button-size}) {
+    .#{$prefix}--btn-set__fluid-inner--quadruple .#{$prefix}--btn {
+      flex: 1 1 25%;
+    }
+
+    .#{$prefix}--btn-set__fluid-inner--auto-stack.#{$prefix}--btn-set__fluid-inner--quadruple {
+      @include button-set-fluid-column();
+    }
+
+    .#{$prefix}--btn-set__fluid-inner.#{$prefix}--btn-set__fluid-inner--double {
+      .#{$prefix}--btn {
+        flex-basis: 50%;
+        max-inline-size: none;
+      }
+    }
+  }
+
+  @container (width <= #{3 * $min-inline-button-size}) {
+    .#{$prefix}--btn-set__fluid-inner--triple .#{$prefix}--btn {
+      flex: 1 1 math.div(100%, 3);
+    }
+
+    // Note that by 640px(40rem) sidepanel expects 1 row
+    .#{$prefix}--btn-set__fluid-inner--auto-stack.#{$prefix}--btn-set__fluid-inner--triple {
+      @include button-set-fluid-column();
+    }
+
+    .#{$prefix}--btn-set__fluid-inner--single .#{$prefix}--btn {
+      flex: 1 1 100%;
+      max-inline-size: none;
+    }
+  }
+
+  @container (width <= #{2 * $min-inline-button-size}) {
+    .#{$prefix}--btn-set__fluid-inner--double .#{$prefix}--btn {
+      flex: 1 1 50%;
+    }
+
+    // Note that by 480px(30rem) side panel expects 1 row
+    .#{$prefix}--btn-set__fluid-inner--auto-stack.#{$prefix}--btn-set__fluid-inner--double {
+      @include button-set-fluid-column();
+    }
+  }
+}
 
 @mixin button {
   .#{$prefix}--btn {
@@ -424,5 +517,9 @@
   // RTL overrides
   [dir='rtl'] .#{$prefix}--btn-set .#{$prefix}--btn:not(:focus) {
     box-shadow: convert.to-rem(1px) 0 0 0 $button-separator;
+  }
+
+  .#{$prefix}--btn-set--fluid {
+    @include button-set-fluid-layout();
   }
 }
