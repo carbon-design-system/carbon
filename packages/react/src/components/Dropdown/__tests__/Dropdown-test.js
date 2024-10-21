@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import React, { useRef } from 'react';
+import { render, screen, act, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   assertMenuOpen,
@@ -15,10 +15,11 @@ import {
   generateItems,
   generateGenericItem,
   waitForPosition,
-} from '../ListBox/test-helpers';
-import Dropdown from '../Dropdown';
-import DropdownSkeleton from '../Dropdown/Dropdown.Skeleton';
-import { AILabel } from '../AILabel';
+} from '../../ListBox/test-helpers';
+import Dropdown from '..';
+import DropdownSkeleton from '../Dropdown.Skeleton';
+import { AILabel } from '../../AILabel';
+import { Simulate } from 'react-dom/test-utils';
 
 const prefix = 'cds';
 
@@ -34,6 +35,9 @@ describe('Dropdown', () => {
       type: 'default',
       titleText: 'Dropdown label',
     };
+  });
+  afterEach(() => {
+    jest.useRealTimers(); // Restore real timers after each test
   });
 
   it('should initially render with the menu not open', async () => {
@@ -92,6 +96,29 @@ describe('Dropdown', () => {
     // the title should use the normal itemToString method
 
     expect(screen.getByText('Item 1')).toBeInTheDocument();
+  });
+
+  it('should render selectedItem as an element of type number', async () => {
+    const itemToElement = jest.fn((item) => {
+      return <div className="mock-item">{item.label}</div>;
+    });
+    let mockProps1 = { ...mockProps, label: 1 };
+    render(<Dropdown itemToElement={itemToElement} {...mockProps1} />);
+    await openMenu();
+    expect(itemToElement).toHaveBeenCalled();
+    await waitForPosition();
+    expect(screen.getByText(1)).toBeInTheDocument();
+  });
+
+  it('should render when defaulItemtoString passed with null value', async () => {
+    let mockProps2 = { ...mockProps, label: [] };
+    const { container } = render(<Dropdown {...mockProps2} />);
+    const labelElement = screen.queryByText('shankar');
+    expect(labelElement).not.toBeInTheDocument();
+    const emptySpanTargeting = container.querySelector(
+      '.cds--list-box__label:not(:empty)'
+    );
+    expect(emptySpanTargeting).toBeNull();
   });
 
   describe('title', () => {
@@ -154,16 +181,131 @@ describe('Dropdown', () => {
   });
 
   it('should respect readOnly prop', async () => {
-    render(<Dropdown {...mockProps} readOnly={true} />);
+    let onChange = jest.fn();
+    let onKeyDown = jest.fn();
+    let mockProps1 = { ...mockProps };
+    const ref = React.createRef();
+    let dropDownItem = render(
+      <Dropdown
+        {...mockProps1}
+        readOnly={true}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        ref={ref}
+      />
+    );
     await openMenu(); // menu should not open
     assertMenuClosed();
 
+    await waitForPosition();
+
+    const button = screen.getByRole('combobox');
+
+    if (button) {
+      fireEvent.click(button);
+      fireEvent.keyDown(screen.getByRole('combobox'), { key: 'ArrowDown' });
+      fireEvent.keyDown(screen.getByRole('combobox'), { code: 'ArrowDown' });
+    }
+
+    expect(onChange).toHaveBeenCalledTimes(0);
+    expect(onKeyDown).toHaveBeenCalledTimes(2);
+    expect(onKeyDown).toHaveBeenCalledWith(
+      expect.objectContaining({ key: 'ArrowDown' })
+    );
     await openMenu(); // menu should not open
     expect(screen.queryByText('Item 0')).not.toBeInTheDocument();
     expect(mockProps.onChange).toHaveBeenCalledTimes(0);
     assertMenuClosed();
 
     mockProps.onChange.mockClear();
+  });
+
+  it('should respect readOnly prop with false and respect call setTimeout function', async () => {
+    let onChange = jest.fn();
+    let onKeyDown = jest.fn();
+    let mockProps2 = { ...mockProps };
+    const ref = React.createRef();
+
+    render(
+      <Dropdown
+        {...mockProps2}
+        readOnly={false}
+        onKeyDown={onKeyDown}
+        onChange={onChange}
+        ref={ref}
+      />
+    );
+
+    //const button = dropDownItem.container.querySelector('#downshift-\\:r19\\:-toggle-button');
+    const button = screen.getByRole('combobox');
+    await waitForPosition();
+    if (button) {
+      act(() => {
+        jest.useFakeTimers();
+        fireEvent.keyDown(screen.getByRole('combobox'), {
+          key: 'Space',
+          code: 'Space',
+        });
+        fireEvent.keyDown(screen.getByRole('combobox'), {
+          key: 'ArrowLeft',
+          code: 'ArrowLeft',
+        });
+        jest.advanceTimersByTime(3000);
+      });
+    }
+    if (button) {
+      act(() => {
+        fireEvent.keyDown(screen.getByRole('combobox'), {
+          key: 'Space',
+          code: 'Space',
+        });
+        fireEvent.keyDown(screen.getByRole('combobox'), {
+          key: 'ArrowLeft',
+          code: 'ArrowLeft',
+        });
+      });
+    }
+    //await openMenu();
+
+    expect(onKeyDown).toHaveBeenCalledWith(
+      expect.objectContaining({ code: 'Space' })
+    );
+    expect(onKeyDown).toHaveBeenCalledWith(
+      expect.objectContaining({ code: 'ArrowLeft' })
+    );
+    expect(onChange).toHaveBeenCalledTimes(0);
+    assertMenuClosed();
+    jest.useRealTimers(); // Restore the original timer behavior
+  });
+
+  it('should respect readOnly prop with false argument and respect clear activated Timeout', async () => {
+    let onChange = jest.fn();
+    let onKeyDown = jest.fn();
+    render(<Dropdown {...mockProps} readOnly={false} onKeyDown={onKeyDown} />);
+
+    await waitForPosition();
+    const button = screen.getByRole('combobox');
+    if (button) {
+      act(() => {
+        fireEvent.keyDown(screen.getByRole('combobox'), {
+          key: 'Space',
+          code: 'Space',
+        });
+        fireEvent.keyDown(screen.getByRole('combobox'), {
+          key: 'ArrowLeft',
+          code: 'ArrowLeft',
+        });
+      });
+    }
+    expect(onKeyDown).toHaveBeenCalledWith(
+      expect.objectContaining({ code: 'Space' })
+    );
+    expect(onKeyDown).toHaveBeenCalledWith(
+      expect.objectContaining({ code: 'ArrowLeft' })
+    );
+    //expect(screen.queryByText('Item 0')).not.toBeInTheDocument();
+    expect(onChange).toHaveBeenCalledTimes(0);
+    assertMenuClosed();
   });
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {
@@ -213,6 +355,27 @@ describe('Dropdown', () => {
   });
 });
 
+describe('Dropdown', () => {
+  let mockProps;
+  beforeEach(() => {
+    mockProps = {
+      id: 'test-dropdown',
+      items: generateItems(5, generateGenericItem),
+      onChange: jest.fn(),
+      label: 'input',
+      placeholder: 'Filter...',
+      type: 'default',
+      titleText: 'Dropdown label',
+    };
+  });
+
+  it('should initially render with the menu not open ', async () => {
+    render(<Dropdown {...mockProps} readOnly={true} />);
+    await waitForPosition();
+    assertMenuClosed();
+  });
+});
+
 describe('DropdownSkeleton', () => {
   describe('Renders as expected', () => {
     it('Has the expected classes', () => {
@@ -221,5 +384,43 @@ describe('DropdownSkeleton', () => {
       // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector(`${prefix}--skeleton`)).toBeDefined();
     });
+  });
+});
+
+describe('Test useEffect ', () => {
+  let mockProps;
+  beforeEach(() => {
+    mockProps = {
+      id: 'test-dropdown',
+      items: generateItems(5, generateGenericItem),
+      onChange: jest.fn(),
+      label: 'input',
+      placeholder: 'Filter...',
+      type: 'default',
+      titleText: 'Dropdown label',
+    };
+  });
+
+  it('for auto-align features', async () => {
+    const initialStyles = { top: '10px', left: '20px' };
+    const updatedStyles = { top: '30px', left: '40px' };
+    const { getByTestId, rerender } = render(
+      <Dropdown
+        {...mockProps}
+        autoAlign={false}
+        floatingstyles={initialStyles}
+      />
+    );
+    //Initially, styles should not be set because autoAlign is false
+    //const floatingElement = getByTestId('test-dropdown');
+    rerender(
+      <Dropdown
+        {...mockProps}
+        autoAlign={true}
+        floatingstyles={updatedStyles}
+      />
+    );
+    await waitForPosition();
+    assertMenuClosed();
   });
 });
