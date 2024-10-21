@@ -177,7 +177,7 @@
 
     .#{$prefix}--tab--overflow-nav-button--next {
       position: relative;
-      inset-block: 0 0;
+      inset-block: 0;
       inset-inline-end: 0;
     }
 
@@ -210,7 +210,7 @@
     .#{$prefix}--tab--overflow-nav-button--previous {
       position: relative;
       z-index: 1;
-      inset-block: 0 0;
+      inset-block: 0;
       inset-inline-start: 0;
     }
 
