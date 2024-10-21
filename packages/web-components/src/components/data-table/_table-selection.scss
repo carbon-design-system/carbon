@@ -41,7 +41,6 @@
 }
 
 :host(#{$prefix}-table-row[selected]) {
-  /* stylelint-disable-next-line no-duplicate-selectors */
   .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
   .#{$prefix}--table-expand,
@@ -53,7 +52,6 @@
   }
 
   &:hover {
-    /* stylelint-disable-next-line no-duplicate-selectors */
     .#{$prefix}--table-column-checkbox,
     ::slotted(#{$prefix}-table-cell),
     .#{$prefix}--table-expand,
@@ -83,7 +81,6 @@
 
     background-attachment: fixed;
 
-    /* stylelint-disable-next-line no-duplicate-selectors */
     .#{$prefix}--table-column-checkbox,
     ::slotted(#{$prefix}-table-cell),
     .#{$prefix}--table-expand,
@@ -92,7 +89,6 @@
     }
   }
 
-  /* stylelint-disable-next-line no-duplicate-selectors */
   .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
   .#{$prefix}--table-expand,
