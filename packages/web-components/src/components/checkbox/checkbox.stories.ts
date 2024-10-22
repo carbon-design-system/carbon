@@ -9,9 +9,9 @@
 
 import { html } from 'lit';
 import { prefix } from '../../globals/settings';
-import View16 from '@carbon/icons/lib/view/16';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16';
-import Folders16 from '@carbon/icons/lib/folders/16';
+import View16 from '@carbon/icons/lib/view/16.js';
+import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
+import Folders16 from '@carbon/icons/lib/folders/16.js';
 import '../ai-label/index';
 import './index';
 

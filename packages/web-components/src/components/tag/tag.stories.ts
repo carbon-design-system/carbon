@@ -9,10 +9,10 @@
 
 import { html } from 'lit';
 import { TAG_SIZE } from './tag';
-import View16 from '@carbon/icons/lib/view/16';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16';
-import Folders16 from '@carbon/icons/lib/folders/16';
-import Asleep16 from '@carbon/icons/lib/asleep/16';
+import View16 from '@carbon/icons/lib/view/16.js';
+import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
+import Folders16 from '@carbon/icons/lib/folders/16.js';
+import Asleep16 from '@carbon/icons/lib/asleep/16.js';
 import './index';
 import '../ai-label';
 import '../icon-button';

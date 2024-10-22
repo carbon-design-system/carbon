@@ -9,9 +9,9 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import View16 from '@carbon/icons/lib/view/16';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16';
-import Folders16 from '@carbon/icons/lib/folders/16';
+import View16 from '@carbon/icons/lib/view/16.js';
+import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
+import Folders16 from '@carbon/icons/lib/folders/16.js';
 import { INPUT_SIZE } from '../text-input/text-input';
 import './number-input';
 import './number-input-skeleton';

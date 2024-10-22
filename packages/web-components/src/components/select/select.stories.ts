@@ -14,9 +14,9 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 // @ts-ignore
 import { prefix } from '../../globals/settings';
 import { INPUT_SIZE } from '../text-input/text-input';
-import View16 from '@carbon/icons/lib/view/16';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16';
-import Folders16 from '@carbon/icons/lib/folders/16';
+import View16 from '@carbon/icons/lib/view/16.js';
+import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
+import Folders16 from '@carbon/icons/lib/folders/16.js';
 import './index';
 import '../form/form-item';
 import '../layer';
