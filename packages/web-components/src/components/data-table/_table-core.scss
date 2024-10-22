@@ -84,14 +84,14 @@
   }
 }
 
-:host(#{$prefix}-table-header-cell[slug]),
-:host(#{$prefix}-table-header-cell[slug]) .#{$prefix}--table-sort {
+:host(#{$prefix}-table-header-cell[ai-label]),
+:host(#{$prefix}-table-header-cell[ai-label]) .#{$prefix}--table-sort {
   @include ai-table-gradient();
 
   box-shadow: inset 0 1px $ai-border-strong;
 }
 
-:host(#{$prefix}-table-header-cell[slug]) .#{$prefix}--table-sort {
+:host(#{$prefix}-table-header-cell[ai-label]) .#{$prefix}--table-sort {
   background: none;
 }
 
@@ -108,12 +108,13 @@
   padding-block-start: rem(14px);
 }
 
-:host(#{$prefix}-table-header-cell[slug]:not([is-sortable])) {
+:host(#{$prefix}-table-header-cell[ai-label]:not([is-sortable])) {
   .#{$prefix}--table-header-label--slug {
     display: flex;
     align-items: center;
   }
 
+  ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     margin-inline-start: auto;
   }
@@ -386,7 +387,7 @@
 :host(#{$prefix}-table-row[selection-name][expandable][highlighted]),
 :host(#{$prefix}-table-row[expandable]:hover),
 :host(#{$prefix}-table-row[selection-name][expandable]:hover) {
-  &:not([slug]) {
+  &:not([ai-label]) {
     ::slotted(#{$prefix}-table-cell),
     .#{$prefix}--table-expand,
     .#{$prefix}--table-column-checkbox {
@@ -441,7 +442,7 @@
 }
 
 //aligns selection and expansion with slug
-:host(#{$prefix}-table-row[rows-with-slug]) {
+:host(#{$prefix}-table-row[rows-with-ai-label]) {
   #{$prefix}-checkbox,
   #{$prefix}-radio-button {
     padding-inline-start: 2rem;
@@ -456,7 +457,7 @@
   }
 }
 
-:host(#{$prefix}-table-row[rows-with-slug][slug]) {
+:host(#{$prefix}-table-row[rows-with-ai-label][ai-label]) {
   #{$prefix}-checkbox,
   #{$prefix}-radio-button {
     padding-inline-start: $spacing-05;
@@ -468,7 +469,7 @@
 }
 
 // alighs header with selection and expansion items
-:host(#{$prefix}-table-header-row[rows-with-slug]) {
+:host(#{$prefix}-table-header-row[rows-with-ai-label]) {
   .#{$prefix}--table-expand {
     padding-inline-start: $spacing-08;
   }
@@ -477,8 +478,10 @@
   }
 }
 
-:host(#{$prefix}-table-header-row[rows-with-slug][selection-name][expandable]),
-:host(#{$prefix}-table-row[rows-with-slug][selection-name][expandable]) {
+:host(
+    #{$prefix}-table-header-row[rows-with-ai-label][selection-name][expandable]
+  ),
+:host(#{$prefix}-table-row[rows-with-ai-label][selection-name][expandable]) {
   .#{$prefix}--table-column-checkbox {
     padding-inline-start: 0;
   }
@@ -487,7 +490,7 @@
   }
 }
 
-:host(#{$prefix}-table-row[slug]) {
+:host(#{$prefix}-table-row[ai-label]) {
   @include ai-table-gradient();
 
   background-attachment: fixed;
