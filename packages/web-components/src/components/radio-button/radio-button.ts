@@ -132,7 +132,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
     if (
       !(event.target as HTMLElement).matches(
         (this.constructor as typeof CDSRadioButton)?.aiLabelItem
-      ) ||
+      ) &&
       !(event.target as HTMLElement).matches(
         (this.constructor as typeof CDSRadioButton)?.slugItem
       )
@@ -180,7 +180,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
     if (
       !(event.target as HTMLElement).matches(
         (this.constructor as typeof CDSRadioButton)?.aiLabelItem
-      ) ||
+      ) &&
       !(event.target as HTMLElement).matches(
         (this.constructor as typeof CDSRadioButton)?.slugItem
       )

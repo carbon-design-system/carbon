@@ -134,7 +134,7 @@ class CDSMultiSelect extends CDSDropdown {
     } else if (
       !(event.target as HTMLElement)?.matches(
         (this.constructor as typeof CDSMultiSelect).aiLabelItem
-      ) ||
+      ) &&
       // remove reference to slug in v12
       !(event.target as HTMLElement)?.matches(
         (this.constructor as typeof CDSMultiSelect).slugItem

@@ -119,10 +119,10 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
       (key === 'Enter' &&
         !(event.target as HTMLElement)?.matches(
           (this.constructor as typeof CDSSelectableTile).aiLabelItem
-        )) ||
-      !(event.target as HTMLElement)?.matches(
-        (this.constructor as typeof CDSSelectableTile).slugItem
-      )
+        ) &&
+        !(event.target as HTMLElement)?.matches(
+          (this.constructor as typeof CDSSelectableTile).slugItem
+        ))
     ) {
       this.selected = !this.selected;
     }
