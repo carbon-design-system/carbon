@@ -41,7 +41,7 @@ export interface SelectableTagBaseProps {
   /**
    * Provide an optional hook that is called when selected is changed
    */
-  onChange?: (checked: boolean) => void;
+  onChange?: (selected: boolean) => void;
 
   /**
    * Provide an optional function to be called when the tag is clicked.
