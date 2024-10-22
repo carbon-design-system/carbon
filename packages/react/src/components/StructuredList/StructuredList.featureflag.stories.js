@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import mdx from './StructuredList.mdx';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { useFeatureFlag } from '../FeatureFlags';
 
@@ -18,9 +17,8 @@ import {
   StructuredListInput,
   StructuredListCell,
 } from './';
-import StructuredListSkeleton from './StructuredList.Skeleton';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
-const experimentalClassname = 'experimental-tile';
+
 export default {
   title: 'Components/StructuredList/Feature Flag',
   component: StructuredListWrapper,
