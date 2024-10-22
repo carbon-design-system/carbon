@@ -215,6 +215,8 @@ export const ExplainabilityPopover = {
   },
   render: (args) => {
     const { alignment, showActions } = args ?? {};
+
+    console.log('showActions', showActions);
     return html`
       <style>
         ${styles}
@@ -235,8 +237,15 @@ export const Playground = {
   args,
   argTypes,
   render: (args) => {
-    const { alignment, aiTextLabel, autoalign, kind, revertActive, size } =
-      args ?? {};
+    const {
+      alignment,
+      aiTextLabel,
+      autoalign,
+      kind,
+      revertActive,
+      showActions,
+      size,
+    } = args ?? {};
     return html`
       <style>
         ${styles}
@@ -249,7 +258,7 @@ export const Playground = {
           kind="${kind}"
           ai-text-label="${aiTextLabel}"
           ?revert-active="${revertActive}">
-          ${content} ${actions}
+          ${content} ${showActions ? actions : ''}
         </cds-ai-label>
       </div>
       <div style="display: inline-flex">

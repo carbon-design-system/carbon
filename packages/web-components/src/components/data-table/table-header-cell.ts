@@ -42,7 +42,7 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
     if (
       !(event.target as HTMLElement).matches(
         (this.constructor as typeof CDSTableHeaderCell).aiLabelItem
-      ) ||
+      ) &&
       !(event.target as HTMLElement).matches(
         (this.constructor as typeof CDSTableHeaderCell).slugItem
       )
