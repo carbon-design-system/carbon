@@ -531,9 +531,9 @@ function TabList({
     ) {
       event.preventDefault();
 
-      const filtredTabs = tabs.current.filter((tab) => tab !== null);
+      const filteredTabs = tabs.current.filter((tab) => tab !== null);
 
-      const activeTabs: TabElement[] = filtredTabs.filter(
+      const activeTabs: TabElement[] = filteredTabs.filter(
         (tab) => !tab.disabled
       );
 
@@ -876,9 +876,9 @@ function TabListVertical({
     if (matches(event, [keys.ArrowDown, keys.ArrowUp, keys.Home, keys.End])) {
       event.preventDefault();
 
-      const filtredTabs = tabs.current.filter((tab) => tab !== null);
+      const filteredTabs = tabs.current.filter((tab) => tab !== null);
 
-      const activeTabs: TabElement[] = filtredTabs.filter(
+      const activeTabs: TabElement[] = filteredTabs.filter(
         (tab) => !tab.disabled
       );
 
