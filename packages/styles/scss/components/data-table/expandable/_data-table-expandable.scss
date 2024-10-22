@@ -49,7 +49,7 @@
     td {
     border: 0;
     background-color: $layer-hover;
-    padding-block: 0 0;
+    padding-block: 0;
     transition: padding $duration-moderate-01 motion(standard, productive),
       background-color $duration-fast-01 motion(standard, productive);
   }
@@ -189,7 +189,15 @@
   // Expand icon column
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table td.#{$prefix}--table-expand {
-    border-block-end: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two .#{$prefix}--data-table td.#{$prefix}--table-expand {
+    border-block-end: 1px solid $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three .#{$prefix}--data-table td.#{$prefix}--table-expand {
+    border-block-end: 1px solid $border-subtle-03;
   }
 
   .#{$prefix}--data-table
@@ -484,7 +492,6 @@
     @include high-contrast-mode('focus');
   }
 
-  // stylelint-disable-next-line no-duplicate-selectors
   .#{$prefix}--table-expand__svg {
     @include high-contrast-mode('icon-fill');
   }
