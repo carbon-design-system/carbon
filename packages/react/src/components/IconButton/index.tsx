@@ -29,17 +29,17 @@ interface IconButtonProps
    */
   align?:
     | 'top'
-    | 'top-left'
-    | 'top-start'
-    | 'top-right'
-    | 'top-end'
     | 'bottom'
-    | 'bottom-left'
     | 'bottom-start'
-    | 'bottom-right'
     | 'bottom-end'
     | 'left'
-    | 'right';
+    | 'right'
+    | 'top-start'
+    | 'top-end'
+    | 'left-end'
+    | 'left-start'
+    | 'right-end'
+    | 'right-start';
 
   /**
    * **Experimental**: Will attempt to automatically align the tooltip
@@ -172,17 +172,18 @@ IconButton.propTypes = {
    */
   align: PropTypes.oneOf([
     'top',
-    'top-left',
-    'top-start',
-    'top-right',
-    'top-end',
     'bottom',
-    'bottom-left',
-    'bottom-start',
-    'bottom-right',
-    'bottom-end',
     'left',
     'right',
+    // new values to match floating-ui
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
+    'left-end',
+    'left-start',
+    'right-end',
+    'right-start',
   ]),
 
   /**

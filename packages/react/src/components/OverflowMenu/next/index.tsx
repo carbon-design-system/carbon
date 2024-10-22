@@ -68,11 +68,11 @@ interface OverflowMenuProps {
    */
   tooltipAlignment?:
     | 'top'
-    | 'top-left'
-    | 'top-right'
+    | 'top-start'
+    | 'top-end'
     | 'bottom'
-    | 'bottom-left'
-    | 'bottom-right'
+    | 'bottom-start'
+    | 'bottom-end'
     | 'left'
     | 'right';
 
@@ -276,11 +276,11 @@ OverflowMenu.propTypes = {
    */
   tooltipAlignment: PropTypes.oneOf([
     'top',
-    'top-left',
-    'top-right',
+    'top-start',
+    'top-end',
     'bottom',
-    'bottom-left',
-    'bottom-right',
+    'bottom-start',
+    'bottom-end',
     'left',
     'right',
   ]),
