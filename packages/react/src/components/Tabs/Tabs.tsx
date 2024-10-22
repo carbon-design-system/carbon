@@ -553,6 +553,18 @@ function TabList({
     }
   }
 
+  function handleBlur({
+    relatedTarget: currentActiveNode,
+  }: React.FocusEvent<HTMLDivElement>) {
+    if (ref.current?.contains(currentActiveNode)) {
+      return;
+    }
+    // reset active index to selected tab index for manual activation
+    if (activation === 'manual') {
+      setActiveIndex(selectedIndex);
+    }
+  }
+
   useEffectOnce(() => {
     const tab = tabs.current[selectedIndex];
     if (scrollIntoView && tab) {
@@ -706,7 +718,8 @@ function TabList({
         role="tablist"
         className={`${prefix}--tab--list`}
         onScroll={debouncedOnScroll}
-        onKeyDown={onKeyDown}>
+        onKeyDown={onKeyDown}
+        onBlur={handleBlur}>
         {React.Children.map(children, (child, index) => {
           return !isElement(child) ? null : (
             <TabContext.Provider
@@ -898,6 +911,18 @@ function TabListVertical({
     }
   }
 
+  function handleBlur({
+    relatedTarget: currentActiveNode,
+  }: React.FocusEvent<HTMLDivElement>) {
+    if (ref.current?.contains(currentActiveNode)) {
+      return;
+    }
+    // reset active index to selected tab index for manual activation
+    if (activation === 'manual') {
+      setActiveIndex(selectedIndex);
+    }
+  }
+
   useEffectOnce(() => {
     if (tabs.current[selectedIndex]?.disabled) {
       const activeTabs = tabs.current.filter((tab) => {
@@ -991,7 +1016,8 @@ function TabListVertical({
         ref={ref}
         role="tablist"
         className={`${prefix}--tab--list`}
-        onKeyDown={onKeyDown}>
+        onKeyDown={onKeyDown}
+        onBlur={handleBlur}>
         {React.Children.map(children, (child, index) => {
           return !isElement(child) ? null : (
             <TabContext.Provider
