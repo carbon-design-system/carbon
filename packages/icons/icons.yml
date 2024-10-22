@@ -7510,6 +7510,18 @@
     - draft
   sizes:
     - 32
+- name: document--processor
+  friendly_name: Document processor
+  aliases:
+    - document
+    - processing
+    - extraction
+    - classification
+    - data
+    - AI
+    - digital labor
+  sizes:
+    - 32
 - name: document--protected
   friendly_name: Document protected
   aliases:

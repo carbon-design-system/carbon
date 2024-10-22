@@ -111,5 +111,39 @@ describe('PaginationNav', () => {
 
       expect(screen.getByText('4')).toHaveAttribute('aria-current', 'page');
     });
+
+    it('should render PaginationNav correctly and navigate through different page ranges using select elements', async () => {
+      render(<PaginationNav totalItems={10} itemsShown={4} />);
+
+      // Initial state: < 1 2 ... 10 >
+      expect(screen.getByText('1')).toHaveAttribute('aria-current', 'page');
+      expect(screen.getByText('2')).toBeInTheDocument();
+      expect(screen.getByText('10')).toBeInTheDocument();
+
+      let selectElements = screen.getAllByLabelText('Select Page number');
+      expect(selectElements).toHaveLength(1);
+
+      // Select page 6 from the dropdown
+      await userEvent.selectOptions(selectElements[0], '6');
+
+      // New state: < ... 6 ... 10 >
+      expect(screen.getByText('6')).toHaveAttribute('aria-current', 'page');
+
+      // Check for two select elements in this state
+      selectElements = screen.getAllByLabelText('Select Page number');
+      expect(selectElements).toHaveLength(2);
+
+      // Select page 1 from the first dropdown
+      await userEvent.selectOptions(selectElements[0], '1');
+
+      // Final state: < 1 2 ... 10 >
+      expect(screen.getByText('1')).toHaveAttribute('aria-current', 'page');
+      expect(screen.getByText('2')).toBeInTheDocument();
+      expect(screen.getByText('10')).toBeInTheDocument();
+
+      // Check that we're back to one select element
+      selectElements = screen.getAllByLabelText('Select Page number');
+      expect(selectElements).toHaveLength(1);
+    });
   });
 });

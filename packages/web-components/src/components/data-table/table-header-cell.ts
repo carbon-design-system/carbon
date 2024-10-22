@@ -10,8 +10,8 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import ArrowsVertical32 from '@carbon/icons/lib/arrows--vertical/32';
-import ArrowDown32 from '@carbon/icons/lib/arrow--down/32';
+import ArrowsVertical32 from '@carbon/icons/lib/arrows--vertical/32.js';
+import ArrowDown32 from '@carbon/icons/lib/arrow--down/32.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import {

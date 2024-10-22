@@ -75,7 +75,7 @@
     }
 
     // Select text renders a little high on Firefox
-    @-moz-document url-prefix() {
+    @document url-prefix() {
       // Removes dotted inner focus
       &:-moz-focusring,
       &::-moz-focus-inner {
@@ -344,7 +344,7 @@
   }
 
   // Windows HCM fix
-  // stylelint-disable-next-line no-duplicate-selectors
+
   .#{$prefix}--select__arrow {
     @include high-contrast-mode('icon-fill');
   }

@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import Copy16 from '@carbon/icons/lib/copy/16';
+import Copy16 from '@carbon/icons/lib/copy/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';

@@ -320,11 +320,8 @@
       transform: translate(100%, -50%);
     }
     @if ($position == 'bottom') {
-      border-width: 0
-        convert.to-rem(4px)
-        convert.to-rem(5px)
-        convert.to-rem(4px);
-      border-color: transparent transparent $background-inverse transparent;
+      border-width: 0 convert.to-rem(4px) convert.to-rem(5px);
+      border-color: transparent transparent $background-inverse;
       inset-block-end: -$caret-spacing;
       transform: translate(-50%, 100%);
     }

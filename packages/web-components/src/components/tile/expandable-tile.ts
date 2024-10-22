@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
+import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
