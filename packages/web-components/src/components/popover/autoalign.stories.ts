@@ -15,11 +15,11 @@ import '../icon-button/index';
 import '../data-table/index';
 import { POPOVER_ALIGNMENT } from './defs';
 import { AI_LABEL_SIZE } from '../ai-label/defs';
-import Checkbox16 from '@carbon/icons/lib/checkbox/16';
-import Information16 from '@carbon/icons/lib/information/16';
-import View16 from '@carbon/icons/lib/view/16';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16';
-import Folders16 from '@carbon/icons/lib/folders/16';
+import Checkbox16 from '@carbon/icons/lib/checkbox/16.js';
+import Information16 from '@carbon/icons/lib/information/16.js';
+import View16 from '@carbon/icons/lib/view/16.js';
+import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
+import Folders16 from '@carbon/icons/lib/folders/16.js';
 
 import styles from './popover-story.scss?lit';
 import aiLabelStyles from '../ai-label/ai-label-story.scss?lit';

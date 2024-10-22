@@ -141,7 +141,15 @@ export const AutocompleteWithTypeahead = (args) => {
         onChange={args.onChange}
         helperText="Combobox helper text"
         id="carbon-combobox"
-        items={['Apple', 'Orange', 'Banana', 'Pineapple', 'Raspberry', 'Lime']}
+        items={[
+          'Apple',
+          'Apricot',
+          'Avocado',
+          'Banana',
+          'Blackberry',
+          'Blueberry',
+          'Cantaloupe',
+        ]}
         titleText="ComboBox title"
         typeahead
       />
