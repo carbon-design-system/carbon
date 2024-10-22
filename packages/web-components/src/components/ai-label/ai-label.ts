@@ -12,21 +12,20 @@ import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSToggleTip from '../toggle-tip/toggletip';
-import styles from './slug.scss?lit';
-import Undo16 from '@carbon/icons/lib/undo/16.js';
-import { SLUG_SIZE, SLUG_KIND } from './defs';
+import styles from './ai-label.scss?lit';
+import Undo16 from '@carbon/icons/lib/undo/16';
+import { AI_LABEL_SIZE, AI_LABEL_KIND } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
- * Basic slug.
+ * Basic AI Label.
  *
- * @deprecated This component has been deprecated, please use the <cds-ai-label> component instead.
- * @element cds-slug
+ * @element cds-ai-label
  */
-@customElement(`${prefix}-slug`)
-export default class CDSSlug extends CDSToggleTip {
+@customElement(`${prefix}-ai-label`)
+export default class CDSAILabel extends CDSToggleTip {
   @property({ reflect: true })
-  slot = 'slug';
+  slot = 'ai-label';
   /**
    * Specify the correct translation of the AI text
    */
@@ -40,10 +39,10 @@ export default class CDSSlug extends CDSToggleTip {
   aiTextLabel = '';
 
   /**
-   * Specify the type of Slug, from the following list of types: (default, inline)
+   * Specify the type of AI Label, from the following list of types: (default, inline)
    */
   @property({ reflect: true })
-  kind = SLUG_KIND.DEFAULT;
+  kind = AI_LABEL_KIND.DEFAULT;
 
   /**
    * Specify whether the revert button should be visible
@@ -58,16 +57,16 @@ export default class CDSSlug extends CDSToggleTip {
   revertLabel = 'Revert to AI input';
 
   /**
-   * Slug size should be mini, 2xs, xs, sm, md, lg, xl.
+   * AI Label size should be mini, 2xs, xs, sm, md, lg, xl.
    */
   @property({ reflect: true })
-  size = SLUG_SIZE.EXTRA_SMALL;
+  size = AI_LABEL_SIZE.EXTRA_SMALL;
 
   /**
-   * Specify the text that will be provided to the aria-label of the `Slug` button
+   * Specify the text that will be provided to the aria-label of the `AI Label` button
    */
-  @property({ attribute: 'slug-label' })
-  slugLabel = 'Show information';
+  @property({ attribute: 'button-label' })
+  buttonLabel = 'Show information';
 
   @property()
   previousValue;
@@ -86,15 +85,15 @@ export default class CDSSlug extends CDSToggleTip {
   };
 
   protected _renderTooltipButton = () => {
-    const { size, kind, aiText, aiTextLabel, slugLabel } = this;
-    const ariaLabel = `${aiText} - ${slugLabel}`;
+    const { size, kind, aiText, aiTextLabel, buttonLabel } = this;
+    const ariaLabel = `${aiText} - ${buttonLabel}`;
     const classes = classMap({
       [`${prefix}--toggletip-button`]: true,
       [`${prefix}--slug__button`]: true,
       [`${prefix}--slug__button--${size}`]: size,
       [`${prefix}--slug__button--${kind}`]: kind,
       [`${prefix}--slug__button--inline-with-content`]:
-        kind === SLUG_KIND.INLINE && aiTextLabel,
+        kind === AI_LABEL_KIND.INLINE && aiTextLabel,
     });
     return html`
       <button
@@ -103,7 +102,7 @@ export default class CDSSlug extends CDSToggleTip {
         class=${classes}
         aria-label="${ariaLabel}">
         <span class="${prefix}--slug__text">${aiText}</span>
-        ${aiTextLabel && kind === SLUG_KIND.INLINE
+        ${aiTextLabel && kind === AI_LABEL_KIND.INLINE
           ? html`
               <span class="${prefix}--slug__additional-text">
                 ${aiTextLabel}
