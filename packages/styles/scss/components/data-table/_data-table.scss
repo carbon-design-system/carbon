@@ -205,7 +205,7 @@
 
   .#{$prefix}--data-table td,
   .#{$prefix}--data-table tbody th {
-    border-block-end: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle-01;
     border-block-start: 1px solid $layer;
     color: $text-secondary;
     padding-inline: $spacing-05 $spacing-05;
@@ -213,6 +213,16 @@
     + td:first-of-type {
       padding-inline-start: $spacing-04;
     }
+  }
+
+  .#{$prefix}--layer-two .#{$prefix}--data-table td,
+  .#{$prefix}--layer-two .#{$prefix}--data-table tbody th {
+    border-block-end: 1px solid $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three .#{$prefix}--data-table td,
+  .#{$prefix}--layer-three .#{$prefix}--data-table tbody th {
+    border-block-end: 1px solid $border-subtle-03;
   }
 
   @supports (-moz-appearance: none) {
