@@ -8,9 +8,13 @@
 import { html } from 'lit';
 import { prefix } from '../../globals/settings';
 import { INPUT_SIZE } from '../text-input/text-input';
+import View16 from '@carbon/icons/lib/view/16.js';
+import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
+import Folders16 from '@carbon/icons/lib/folders/16.js';
 import './date-picker';
 import './date-picker-input-skeleton';
 import '../layer/index';
+import '../ai-label';
 import '../../../.storybook/templates/with-layer';
 
 const sizes = {
@@ -255,6 +259,54 @@ export const Skeleton = {
     percy: {
       skip: true,
     },
+  },
+};
+
+const content = html`
+  <div slot="body-text">
+    <p class="secondary">AI Explained</p>
+    <h1>84%</h1>
+    <p class="secondary bold">Confidence score</p>
+    <p class="secondary">
+      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+    </p>
+    <hr />
+    <p class="secondary">Model type</p>
+    <p class="bold">Foundation model</p>
+  </div>
+`;
+
+const actions = html`
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${View16({ slot: 'icon' })}
+    <span slot="tooltip-content"> View </span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${FolderOpen16({ slot: 'icon' })}
+    <span slot="tooltip-content"> Open folder</span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${Folders16({ slot: 'icon' })}
+    <span slot="tooltip-content"> Folders </span>
+  </cds-icon-button>
+  <cds-ai-label-action-button>View details</cds-ai-label-action-button>
+`;
+
+export const WithAILabel = {
+  render: () => {
+    return html`
+      <cds-date-picker>
+        <cds-date-picker-input
+          kind="single"
+          label-text="Date Picker label"
+          placeholder="mm/dd/yyyy">
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
+        </cds-date-picker-input>
+      </cds-date-picker>
+    `;
   },
 };
 
