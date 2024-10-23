@@ -61,8 +61,8 @@ export function format(
 }
 
 export function formatRange(
-  startDate: Date | Number,
-  endDate: Date | Number,
+  startDate: Date | number,
+  endDate: Date | number,
   options?: Partial<{
     locale: string;
     style: Intl.DateTimeFormatOptions['timeStyle'];

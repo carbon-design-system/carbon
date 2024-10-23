@@ -11,5 +11,5 @@ import '@carbon/web-components/es/components/tearsheet/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/textarea/index.js';
-import '@carbon/web-components/es/components/slug/index.js';
+import '@carbon/web-components/es/components/ai-label/index.js';
 import '@carbon/web-components/es/components/tabs/index.js';
