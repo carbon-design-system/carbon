@@ -1869,7 +1869,7 @@ __metadata:
     "@carbon/icon-helpers": "npm:^10.54.0"
     "@hapi/joi": "npm:^17.1.1"
     "@rollup/plugin-babel": "npm:^6.0.0"
-    "@rollup/plugin-replace": "npm:^5.0.0"
+    "@rollup/plugin-replace": "npm:^6.0.0"
     browserslist-config-carbon: "npm:^11.2.0"
     change-case: "npm:^4.1.1"
     core-js: "npm:^3.16.0"
@@ -2320,7 +2320,7 @@ __metadata:
     "@rollup/plugin-alias": "npm:^5.1.0"
     "@rollup/plugin-commonjs": "npm:^26.0.0"
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
-    "@rollup/plugin-replace": "npm:^5.0.0"
+    "@rollup/plugin-replace": "npm:^6.0.0"
     "@rollup/plugin-terser": "npm:^0.4.4"
     "@rollup/plugin-typescript": "npm:^11.0.0"
     "@rollup/pluginutils": "npm:^4.2.0"
@@ -5554,18 +5554,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-replace@npm:^5.0.0":
-  version: 5.0.1
-  resolution: "@rollup/plugin-replace@npm:5.0.1"
+"@rollup/plugin-replace@npm:^6.0.0":
+  version: 6.0.1
+  resolution: "@rollup/plugin-replace@npm:6.0.1"
   dependencies:
     "@rollup/pluginutils": "npm:^5.0.1"
-    magic-string: "npm:^0.26.4"
+    magic-string: "npm:^0.30.3"
   peerDependencies:
-    rollup: ^1.20.0||^2.0.0||^3.0.0
+    rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
   peerDependenciesMeta:
     rollup:
       optional: true
-  checksum: 10/97d308ab6c98cb3164936432b10c804547f66821e8a798b77de9c1ec005e5fa95b2cef561c84b27460567708a1a453e5d6c3c74586a7446c845c9e515eb84611
+  checksum: 10/130bfbaac8fe4330b7a98ec3b21a1b4b5b3e239fbc5ba95f582f2c81501125693f3ce9252bdf21e2501d761052a3822d12a476fa45067f60ba5f0abd304eb160
   languageName: node
   linkType: hard
 
@@ -19017,7 +19017,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:0.26.7, magic-string@npm:^0.26.4":
+"magic-string@npm:0.26.7":
   version: 0.26.7
   resolution: "magic-string@npm:0.26.7"
   dependencies:
