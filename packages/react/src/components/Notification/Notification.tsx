@@ -495,7 +495,6 @@ export function ToastNotification({
           onClick={handleCloseButtonClick}
           aria-hidden="true"
           aria-label={deprecatedAriaLabel || ariaLabel}
-          tabIndex={-1}
         />
       )}
     </div>
@@ -741,7 +740,6 @@ export function InlineNotification({
           onClick={handleCloseButtonClick}
           aria-hidden="true"
           aria-label={ariaLabel}
-          tabIndex={-1}
         />
       )}
     </div>
