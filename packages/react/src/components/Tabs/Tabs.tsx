@@ -1717,7 +1717,7 @@ function TabPanels({ children }: TabPanelsProps) {
   return (
     <>
       {React.Children.map(children, (child, index) => {
-        return (
+        return !isElement(child) ? null : (
           <TabPanelContext.Provider value={index}>
             {React.cloneElement(child as React.ReactElement<any>, {
               ref: (element: HTMLDivElement) => {
