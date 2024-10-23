@@ -1,0 +1,54 @@
+{
+  "name": "@carbon/utilities-react",
+  "description": "Utilities and helpers to drive consistency across software products using the Carbon Design System with React",
+  "version": "0.2.0-rc.0",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/utilities-react"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "es",
+    "lib",
+    "telemetry.yml"
+  ],
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "carbon-utilities",
+    "carbon-react"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build:es": "esbuild ./src/**/!(*-test).{js,ts,jsx,tsx} --minify --outdir=es --target=es2020 --format=esm",
+    "build:cjs": "esbuild ./src/**/!(*-test).{js,ts,jsx,tsx} --minify --outdir=lib --target=es2020 --format=cjs",
+    "build:types": "tsc",
+    "build": "yarn build:es & yarn build:cjs & yarn build:types",
+    "watch": "yarn build:es --watch & yarn build:cjs --watch",
+    "clean": "rimraf es lib",
+    "test": "echo yay && exit 0",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6 || ^17.0.1 || ^18.2.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "rimraf": "^6.0.0",
+    "typescript": "^4.8.4",
+    "typescript-config-carbon": "^0.3.0"
+  },
+  "dependencies": {
+    "@carbon/utilities": "^0.2.0-rc.0",
+    "@ibm/telemetry-js": "^1.6.1"
+  }
+}

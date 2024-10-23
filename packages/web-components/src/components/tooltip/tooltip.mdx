@@ -1,0 +1,66 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as Tooltip from './tooltip.stories';
+
+<Meta of={Tooltip} />
+
+# Tooltip
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/tooltip)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/tooltip)
+
+You can use the Tooltip component as a wrapper to display a popup for an
+interactive element that you provide. If you are trying to place interactive
+content inside of the Tooltip itself, consider using Toggletip instead. You can
+provide the interactive element as a child to Tooltip. Tooltips provide
+additional information upon hover or focus. The information should be
+contextual, useful, and nonessential information. Keep tooltips short.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/tooltip/index.js';
+import Information16 from '@carbon/icons/lib/information/16.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['tooltip'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-tooltip align="bottom">
+  <div class="sb-tooltip-trigger" aria-labelledby="content">
+    ${Information16()}
+  </div>
+  <cds-tooltip-content id="content">
+    Occassionally, services are updated in a specified time window to ensure no
+    down time for customers.
+  </cds-tooltip-content>
+</cds-tooltip>
+```
+
+## Toggletips vs Tooltips
+
+Toggletips and tooltips are similar visually and both contain a popover and
+interactive trigger element. The two components differ in the way they are
+invoked and dismissed and if the user must interact with the contents. A tooltip
+is exposed on hover or focus when you need to expose brief, supplemental
+information that is not interactive. A toggletip is used on click or enter when
+you need to expose interactive elements, such as button, that a user needs to
+interact with.
+
+### `<cds-tooltip>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-tooltip open>`) and `false` means not setting the attribute (e.g.
+`<cds-tooltip>` without `open` attribute).
+
+<ArgTypes of="cds-tooltip" />

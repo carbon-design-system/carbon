@@ -1589,6 +1589,15 @@
       ]
     },
     {
+      "login": "AliAldobyan",
+      "name": "Ali Al Dobyan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17975825?v=4",
+      "profile": "https://github.com/AliAldobyan",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "Adam-Shea",
       "name": "Adam Shea",
       "avatar_url": "https://avatars.githubusercontent.com/u/44814104?v=4",
@@ -1614,6 +1623,52 @@
       "contributions": [
         "code",
         "doc"
+      ]
+    },
+    {
+      "login": "Neues",
+      "name": "Noah Sgorbati",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9409245?v=4",
+      "profile": "https://github.com/Neues",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "divya-281",
+      "name": "Divya G",
+      "avatar_url": "https://avatars.githubusercontent.com/u/72991264?v=4",
+      "profile": "https://github.com/divya-281",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "soumyaraju",
+      "name": "Soumya Raju",
+      "avatar_url": "https://avatars.githubusercontent.com/u/41182657?v=4",
+      "profile": "https://github.com/soumyaraju",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ziyadzulfikar",
+      "name": "ziyadzulfikar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56788667?v=4",
+      "profile": "https://github.com/ziyadzulfikar",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mariat189",
+      "name": "Mariat",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74430463?v=4",
+      "profile": "https://github.com/mariat189",
+      "contributions": [
+        "code"
       ]
     }
   ],

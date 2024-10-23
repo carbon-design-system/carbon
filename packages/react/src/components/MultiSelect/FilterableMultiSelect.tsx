@@ -28,6 +28,7 @@ import React, {
   ForwardedRef,
   type FocusEvent,
   type KeyboardEvent,
+  type MouseEvent,
   ReactElement,
   useLayoutEffect,
   useMemo,
@@ -101,6 +102,7 @@ type TranslationKey =
 
 export interface FilterableMultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
+    React.RefAttributes<HTMLDivElement>,
     TranslateWithId<TranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
@@ -257,6 +259,11 @@ export interface FilterableMultiSelectProps<ItemType>
   placeholder?: string;
 
   /**
+   * Whether or not the filterable multiselect is readonly
+   */
+  readOnly?: boolean;
+
+  /**
    * Specify feedback (mode) of the selection.
    * `top`: selected item jumps to top
    * `fixed`: selected item stays at its position
@@ -333,6 +340,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     onChange,
     onMenuChange,
     placeholder,
+    readOnly,
     titleText,
     type,
     selectionFeedback = 'top-after-reopen',
@@ -461,6 +469,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
       [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
       [`${prefix}--list-box__wrapper--slug`]: slug,
+      [`${prefix}--autoalign`]: autoAlign,
     }
   );
   const helperId = !helperText
@@ -502,13 +511,16 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   };
 
   function handleMenuChange(forceIsOpen: boolean): void {
-    const nextIsOpen = forceIsOpen ?? !isOpen;
-    setIsOpen(nextIsOpen);
-    validateHighlightFocus();
-    if (onMenuChange) {
-      onMenuChange(nextIsOpen);
+    if (!readOnly) {
+      const nextIsOpen = forceIsOpen ?? !isOpen;
+      setIsOpen(nextIsOpen);
+      validateHighlightFocus();
     }
   }
+
+  useEffect(() => {
+    onMenuChange?.(isOpen);
+  }, [isOpen, onMenuChange]);
 
   const {
     getToggleButtonProps,
@@ -650,7 +662,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   });
 
-  function clearInputValue(event?: KeyboardEvent | undefined) {
+  function clearInputValue(
+    event?: KeyboardEvent<Element> | MouseEvent<HTMLButtonElement>
+  ) {
     const value = textInput.current?.value;
     if (value?.length === 1 || (event && match(event, keys.Escape))) {
       setInputValue('');
@@ -683,6 +697,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       [`${prefix}--multi-select--selected`]:
         controlledSelectedItems?.length > 0,
       [`${prefix}--multi-select--filterable--input-focused`]: inputFocused,
+      [`${prefix}--multi-select--readonly`]: readOnly,
     }
   );
 
@@ -792,6 +807,28 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   };
 
+  const mergedRef = mergeRefs(textInput, inputProps.ref);
+
+  const readOnlyEventHandlers = readOnly
+    ? {
+        onClick: (evt: React.MouseEvent<HTMLInputElement>) => {
+          // NOTE: does not prevent click
+          evt.preventDefault();
+          // focus on the element as per readonly input behavior
+          if (mergedRef.current !== undefined) {
+            mergedRef.current.focus();
+          }
+        },
+        onKeyDown: (evt: React.KeyboardEvent<HTMLInputElement>) => {
+          const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
+          // This prevents the select from opening for the above keys
+          if (selectAccessKeys.includes(evt.key)) {
+            evt.preventDefault();
+          }
+        },
+      }
+    : {};
+
   const clearSelectionContent =
     controlledSelectedItems.length > 0 ? (
       <span className={`${prefix}--visually-hidden`}>
@@ -826,14 +863,14 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
         invalidText={invalidText}
         warn={warn}
         warnText={warnText}
-        isOpen={isOpen}
+        isOpen={!readOnly && isOpen}
         size={size}>
         <div
           className={`${prefix}--list-box__field`}
           ref={autoAlign ? refs.setReference : null}>
           {controlledSelectedItems.length > 0 && (
-            // @ts-expect-error: It is expecting a non-required prop called: "onClearSelection"
             <ListBoxSelection
+              readOnly={readOnly}
               clearSelection={() => {
                 clearSelection();
                 if (textInput.current) {
@@ -848,7 +885,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           <input
             className={inputClasses}
             {...inputProps}
-            ref={mergeRefs(textInput, inputProps.ref)}
+            ref={mergedRef}
+            {...readOnlyEventHandlers}
+            readOnly={readOnly}
           />
           {invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
@@ -859,11 +898,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
             />
           )}
           {inputValue && (
-            // @ts-expect-error: It is expecting two non-required prop called: "onClearSelection" & "selectionCount"
             <ListBoxSelection
               clearSelection={clearInputValue}
               disabled={disabled}
               translateWithId={translateWithId}
+              readOnly={readOnly}
               onMouseUp={(event: MouseEvent) => {
                 // If we do not stop this event from propagating,
                 // it seems like Downshift takes our event and
@@ -876,7 +915,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
           )}
           <ListBoxTrigger
             {...buttonProps}
-            // @ts-expect-error
             isOpen={isOpen}
             translateWithId={translateWithId}
           />

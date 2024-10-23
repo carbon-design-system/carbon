@@ -142,7 +142,7 @@
     max-block-size: layout.size('height');
     text-indent: calc(50% - 4.5px);
     // Override some Firefox user-agent styles
-    @-moz-document url-prefix() {
+    @document url-prefix() {
       text-indent: 0;
     }
   }
