@@ -71,36 +71,35 @@ export interface StackProps extends React.HTMLAttributes<HTMLElement> {
  * - https://paste.twilio.design/layout/stack/
  * - https://github.com/Workday/canvas-kit/blob/f2f599654876700f483a1d8c5de82a41315c76f1/modules/labs-react/layout/lib/Stack.tsx
  */
-const Stack = React.forwardRef<React.ReactNode, StackProps>(function Stack(
-  props,
-  ref
-) {
-  const {
-    as: BaseComponent = 'div',
-    children,
-    className: customClassName,
-    gap,
-    orientation = 'vertical',
-    ...rest
-  } = props;
-  const prefix = usePrefix();
-  const className = cx(customClassName, {
-    [`${prefix}--stack-${orientation}`]: true,
-    [`${prefix}--stack-scale-${gap}`]: typeof gap === 'number',
-  });
-  const style = {};
+const Stack = React.forwardRef<React.ReactNode, StackProps>(
+  function Stack(props, ref) {
+    const {
+      as: BaseComponent = 'div',
+      children,
+      className: customClassName,
+      gap,
+      orientation = 'vertical',
+      ...rest
+    } = props;
+    const prefix = usePrefix();
+    const className = cx(customClassName, {
+      [`${prefix}--stack-${orientation}`]: true,
+      [`${prefix}--stack-scale-${gap}`]: typeof gap === 'number',
+    });
+    const style = {};
 
-  if (typeof gap === 'string') {
-    style[`--${prefix}-stack-gap`] = gap;
+    if (typeof gap === 'string') {
+      style[`--${prefix}-stack-gap`] = gap;
+    }
+
+    return (
+      // eslint-disable-next-line react/forbid-component-props
+      <BaseComponent {...rest} ref={ref} className={className} style={style}>
+        {children}
+      </BaseComponent>
+    );
   }
-
-  return (
-    // eslint-disable-next-line react/forbid-component-props
-    <BaseComponent {...rest} ref={ref} className={className} style={style}>
-      {children}
-    </BaseComponent>
-  );
-});
+);
 
 Stack.propTypes = {
   /**
