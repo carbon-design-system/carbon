@@ -74,7 +74,7 @@ const config = {
         actions: true,
         backgrounds: false,
         controls: true,
-        docs: true,
+        docs: false,
         toolbars: true,
         viewport: true,
       },
