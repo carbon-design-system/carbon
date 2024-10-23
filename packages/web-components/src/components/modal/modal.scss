@@ -143,13 +143,13 @@
   max-inline-size: none;
 }
 
-// Slug
+// AI Label
 
-:host(#{$prefix}-modal[slug]) {
+:host(#{$prefix}-modal[ai-label]) {
   background-color: $ai-overlay;
 }
 
-:host(#{$prefix}-modal[slug]) .#{$prefix}--modal-container {
+:host(#{$prefix}-modal[ai-label]) .#{$prefix}--modal-container {
   @include ai-popover-gradient('default', 0, 'layer');
 
   border: 1px solid transparent;
@@ -158,7 +158,7 @@
     0 24px 40px -24px $ai-drop-shadow;
 }
 
-:host(#{$prefix}-modal[slug][has-footer]) .#{$prefix}--modal-container {
+:host(#{$prefix}-modal[ai-label][has-footer]) .#{$prefix}--modal-container {
   @include ai-popover-gradient('default', 64px, 'layer');
 
   box-shadow: inset 0 -80px 0 -16px $layer,
@@ -166,7 +166,7 @@
     0 24px 40px -24px $ai-drop-shadow;
 }
 
-:host(#{$prefix}-modal[slug][has-scrolling-content]) {
+:host(#{$prefix}-modal[ai-label][has-scrolling-content]) {
   ::slotted(#{$prefix}-modal-body) {
     mask-image: linear-gradient(
         to bottom,
@@ -180,18 +180,23 @@
   }
 }
 
-:host(#{$prefix}-modal[slug])
+:host(#{$prefix}-modal[ai-label])
   .#{$prefix}--modal-content--overflow-indicator::before,
-:host(#{$prefix}-modal[slug]) .#{$prefix}--modal-content--overflow-indicator {
+:host(#{$prefix}-modal[ai-label])
+  .#{$prefix}--modal-content--overflow-indicator {
   display: none;
 }
 
+:host(#{$prefix}-modal-header) ::slotted(#{$prefix}-ai-label),
 :host(#{$prefix}-modal-header) ::slotted(#{$prefix}-slug) {
   position: absolute;
   inset-block-start: 0;
   inset-inline-end: 0;
 }
 
+:host(#{$prefix}-modal-header[close-button]) ::slotted(#{$prefix}-ai-label),
 :host(#{$prefix}-modal-header[close-button]) ::slotted(#{$prefix}-slug) {
-  inset-inline-end: $spacing-09;
+  position: absolute;
+  inset-block-start: to-rem(10px);
+  inset-inline-end: to-rem(48px);
 }

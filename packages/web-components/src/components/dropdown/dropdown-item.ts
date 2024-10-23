@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import Checkmark16 from '@carbon/icons/lib/checkmark/16';
+import Checkmark16 from '@carbon/icons/lib/checkmark/16.js';
 import { prefix } from '../../globals/settings';
 import { DROPDOWN_SIZE } from './dropdown';
 import styles from './dropdown.scss?lit';

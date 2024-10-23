@@ -10,8 +10,8 @@
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import { prefix } from '../../globals/settings';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -99,7 +99,7 @@ class CDSTextarea extends CDSTextInput {
       [`${prefix}--text-area__wrapper`]: true,
       [`${prefix}--text-area__wrapper--warn`]: this.warn,
       [`${prefix}--text-area__wrapper--readonly`]: this.readonly,
-      [`${prefix}--text-area__wrapper--slug`]: this._hasSlug,
+      [`${prefix}--text-area__wrapper--slug`]: this._hasAILabel,
     });
 
     const labelClasses = classMap({
@@ -158,6 +158,7 @@ class CDSTextarea extends CDSTextInput {
           .value="${this.value}"
           maxlength="${ifNonEmpty(this.maxCount)}"
           @input="${this._handleInput}"></textarea>
+        <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
         <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
       </div>
       <div class="${helperTextClasses}" ?hidden="${this.invalid || this.warn}">

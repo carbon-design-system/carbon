@@ -10,7 +10,7 @@
 import { styleMap } from 'lit/directives/style-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
+import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import { CODE_SNIPPET_COLOR_SCHEME, CODE_SNIPPET_TYPE } from './defs';
