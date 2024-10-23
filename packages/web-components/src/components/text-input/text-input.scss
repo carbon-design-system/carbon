@@ -21,12 +21,14 @@ $css--plex: true !default;
   inline-size: 100%;
   outline: none;
 
+  ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
     inset-inline-end: $spacing-05;
   }
 
+  ::slotted(#{$prefix}-ai-label:not([revert-active])),
   ::slotted(#{$prefix}-slug:not([revert-active])) {
     transform: translateY(-50%);
   }
@@ -64,6 +66,7 @@ $css--plex: true !default;
     }
   }
 
+  ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     inset-inline-end: $spacing-08;
   }
