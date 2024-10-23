@@ -138,7 +138,6 @@ exports[`InlineNotification should render 1`] = `
       aria-hidden="true"
       aria-label="close notification"
       class="cds--inline-notification__close-button"
-      tabindex="-1"
       title="close notification"
       type="button"
     >
@@ -205,7 +204,6 @@ exports[`ToastNotification should render 1`] = `
       aria-hidden="true"
       aria-label="close notification"
       class="cds--toast-notification__close-button"
-      tabindex="-1"
       title="close notification"
       type="button"
     >
