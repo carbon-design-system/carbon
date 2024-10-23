@@ -200,7 +200,9 @@ SideNavMenu.propTypes = {
 Defining the children parameter with the type ReactNode | ReactNode[]. This allows for various possibilities:
 a single element, an array of elements, or null or undefined.
 **/
-function hasActiveDescendant(children: ReactNode | ReactNode[]): boolean {
+export function hasActiveDescendant(
+  children: ReactNode | ReactNode[]
+): boolean {
   if (Array.isArray(children)) {
     return children.some((child) => {
       if (!React.isValidElement(child)) {
