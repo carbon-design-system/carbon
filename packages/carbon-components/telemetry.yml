@@ -2,10 +2,10 @@
 
 version: 1
 projectId: fbc5603c-90ba-4d2f-b054-55108c9e06c0
-endpoint: https://collector-prod.1am6wm210aow.us-south.codeengine.appdomain.cloud/v1/metrics
+endpoint: https://www-api.ibm.com/ibm-telemetry/v1/metrics
 collect:
   npm:
     dependencies: null
   js:
-    tokens: 
+    tokens:
     functions: {}

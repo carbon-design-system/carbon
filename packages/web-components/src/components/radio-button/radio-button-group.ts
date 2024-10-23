@@ -16,8 +16,8 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { find, forEach } from '../../globals/internal/collection-helpers';
 import { RADIO_BUTTON_LABEL_POSITION, RADIO_BUTTON_ORIENTATION } from './defs';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import CDSRadioButton from './radio-button';
 import styles from './radio-button.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -83,20 +83,24 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSRadioButtonGroup).aiLabelItem
+            ) ||
+            // remove reference to slug in v12
+            (elem as HTMLElement).matches(
               (this.constructor as typeof CDSRadioButtonGroup).slugItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     this.requestUpdate();
   }
 
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   /**
    * The `value` attribute for the `<input>` for selection.
@@ -215,7 +219,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
       orientation,
       legendText,
       helperText,
-      _hasSlug: hasSlug,
+      _hasAILabel: hasAILabel,
       _handleSlotChange: handleSlotChange,
     } = this;
 
@@ -239,7 +243,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
       [`${prefix}--radio-button-group--readonly`]: readOnly,
       [`${prefix}--radio-button-group--${orientation}`]:
         orientation === 'vertical',
-      [`${prefix}--radio-button-group--slug`]: hasSlug,
+      [`${prefix}--radio-button-group--slug`]: hasAILabel,
     });
 
     return html` <fieldset
@@ -249,6 +253,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
         ${legendText
           ? html` <legend class="${prefix}--label">
               ${legendText}
+              <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>
               <slot name="slug" @slotchange="${handleSlotChange}"></slot>
             </legend>`
           : ``}
@@ -278,9 +283,18 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
 
   /**
    * A selector that will return the slug item.
+   *
+   * remove in v12
    */
   static get slugItem() {
     return `${prefix}-slug`;
+  }
+
+  /**
+   * A selector that will return the AI Label item.
+   */
+  static get aiLabelItem() {
+    return `${prefix}-ai-label`;
   }
 
   /**

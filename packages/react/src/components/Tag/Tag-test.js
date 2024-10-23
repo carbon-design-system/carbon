@@ -5,14 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Add } from '@carbon/icons-react';
-import { render, screen } from '@testing-library/react';
 import React from 'react';
-import Tag, { OperationalTag, TagSkeleton } from './';
-import DismissibleTag from './DismissibleTag';
+import { render, screen } from '@testing-library/react';
+import Tag, {
+  OperationalTag,
+  SelectableTag,
+  DismissibleTag,
+  TagSkeleton,
+} from './';
 import { AILabel } from '../AILabel';
-import { Asleep } from '@carbon/icons-react';
 import userEvent from '@testing-library/user-event';
+import { Asleep, Add } from '@carbon/icons-react';
 
 const prefix = 'cds';
 
@@ -33,16 +36,43 @@ describe('Tag', () => {
     });
   });
 
-  it('should have an appropriate aria-label when (filterable)', () => {
-    const { container } = render(
-      <DismissibleTag type="red" title="Close tag" text="Tag content" />
-    );
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const button = container.querySelector('[aria-label]');
-    const accessibilityLabel = button.getAttribute('aria-label');
-    // This check would mirror our "Accessibility label must contain at least all of visible label"
-    // requirement
-    expect(accessibilityLabel).toEqual(expect.stringContaining('Close tag'));
+  describe('Dismissible Tag', () => {
+    it('should render a Dismissible Tag state', () => {
+      const { container } = render(
+        <DismissibleTag type="red" title="Close tag" text="Tag content" />
+      );
+
+      expect(container.firstChild).toHaveClass(`${prefix}--tag--filter`);
+    });
+
+    it('should support onClose event', async () => {
+      const onClick = jest.fn();
+
+      const { container } = render(
+        <DismissibleTag
+          type="red"
+          title="Close tag"
+          text="Tag content"
+          onClose={onClick}
+        />
+      );
+
+      await userEvent.click(screen.getByRole('button'));
+
+      expect(onClick).toHaveBeenCalled();
+    });
+
+    it('should have an appropriate aria-label when (filterable)', () => {
+      const { container } = render(
+        <DismissibleTag type="red" title="Close tag" text="Tag content" />
+      );
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const button = container.querySelector('[aria-label]');
+      const accessibilityLabel = button.getAttribute('aria-label');
+      // This check would mirror our "Accessibility label must contain at least all of visible label"
+      // requirement
+      expect(accessibilityLabel).toEqual(expect.stringContaining('Close tag'));
+    });
   });
 
   it('should allow for a custom label', () => {
@@ -66,6 +96,50 @@ describe('Tag', () => {
     expect(
       screen.getByRole('button', { name: 'AI - Show information' })
     ).toBeInTheDocument();
+  });
+
+  describe('Selectable Tag', () => {
+    it('should render a selectable tag', () => {
+      const { container } = render(<SelectableTag text="Tag content" />);
+
+      expect(container.firstChild).toHaveClass(`${prefix}--tag--selectable`);
+    });
+
+    it('should select the selectable tag', async () => {
+      const { container } = render(<SelectableTag text="Tag content" />);
+
+      const selectableTag = container.firstChild;
+
+      await userEvent.click(selectableTag);
+      expect(selectableTag).toHaveAttribute('aria-pressed', 'true');
+      expect(selectableTag).toHaveClass(`${prefix}--tag--selectable-selected`);
+    });
+
+    it('should call onChange', async () => {
+      const onChange = jest.fn();
+
+      const { container } = render(
+        <SelectableTag text="Tag content" onChange={onChange} />
+      );
+
+      const selectableTag = container.firstChild;
+
+      await userEvent.click(selectableTag);
+      expect(onChange).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call onClick', async () => {
+      const onClick = jest.fn();
+
+      const { container } = render(
+        <SelectableTag text="Tag content" onClick={onClick} />
+      );
+
+      const selectableTag = container.firstChild;
+
+      await userEvent.click(selectableTag);
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe('Skeleton Tag', () => {
