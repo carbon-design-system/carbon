@@ -509,11 +509,15 @@ const ComboBox = forwardRef(
           selectedItem: selectedItemProp,
           prevSelectedItem: prevSelectedItemProp.current,
         });
-        setInputValue(currentInputValue);
-        onChange({
-          selectedItem: selectedItemProp,
-          inputValue: currentInputValue,
-        });
+
+        // selectedItem has been updated externally, need to update state and call onChange
+        if (inputValue !== currentInputValue) {
+          setInputValue(currentInputValue);
+          onChange({
+            selectedItem: selectedItemProp,
+            inputValue: currentInputValue,
+          });
+        }
         prevSelectedItemProp.current = selectedItemProp;
       }
     }, [selectedItemProp]);
@@ -746,7 +750,10 @@ const ComboBox = forwardRef(
         setHighlightedIndex(indexToHighlight(normalizedInput));
       },
       onSelectedItemChange({ selectedItem }) {
-        onChange({ selectedItem });
+        // only call onChange if new selection is updated from previous
+        if (JSON.stringify(selectedItem) !== JSON.stringify(selectedItemProp)) {
+          onChange({ selectedItem });
+        }
       },
       onHighlightedIndexChange: ({ highlightedIndex }) => {
         if (highlightedIndex! > -1 && typeof window !== undefined) {
