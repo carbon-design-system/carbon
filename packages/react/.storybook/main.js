@@ -12,7 +12,6 @@ import fs from 'fs';
 import glob from 'fast-glob';
 import path from 'path';
 import react from '@vitejs/plugin-react';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
 // MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
@@ -155,9 +154,7 @@ const config = {
           // configFile: true,
           // },
         }),
-        tsconfigPaths(),
       ],
-      // this is not working
       resolve: {
         preserveSymlinks: true,
       },

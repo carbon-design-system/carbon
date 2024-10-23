@@ -157,11 +157,7 @@ function useChangedValue<T>(
 function useFeatureFlag(flag) {
   const scope = useContext(FeatureFlagContext);
   //updated to return false for undefined flags
-  const f = scope.enabled(flag);
-  if (f === true || f === false) {
-    return f;
-  }
-  return false;
+  return scope.enabled(flag) ?? false;
 }
 
 /**
