@@ -57,6 +57,3 @@ package-lock.json
 
 # Playwright
 .playwright
-
-# Vs code history
-.history/*
