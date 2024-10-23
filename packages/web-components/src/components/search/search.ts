@@ -10,8 +10,8 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import Close16 from '@carbon/icons/lib/close/16';
-import Search16 from '@carbon/icons/lib/search/16';
+import Close16 from '@carbon/icons/lib/close/16.js';
+import Search16 from '@carbon/icons/lib/search/16.js';
 import { prefix } from '../../globals/settings';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import FocusMixin from '../../globals/mixins/focus';

@@ -11,8 +11,8 @@ import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import CDSCheckbox from './checkbox';
 import styles from './checkbox.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -97,20 +97,24 @@ class CDSCheckboxGroup extends LitElement {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSCheckboxGroup).aiLabelItem
+            ) ||
+            // remove slug reference in v12
+            (elem as HTMLElement).matches(
               (this.constructor as typeof CDSCheckboxGroup).slugItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     this.requestUpdate();
   }
 
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   updated(changedProperties) {
     const { selectorCheckbox } = this.constructor as typeof CDSCheckboxGroup;
@@ -148,7 +152,7 @@ class CDSCheckboxGroup extends LitElement {
       readonly,
       warn,
       warnText,
-      _hasSlug: hasSlug,
+      _hasAILabel: hasAILabel,
       _handleSlotChange: handleSlotChange,
     } = this;
 
@@ -172,7 +176,7 @@ class CDSCheckboxGroup extends LitElement {
       [`${prefix}--checkbox-group--readonly`]: readonly,
       [`${prefix}--checkbox-group--invalid`]: !readonly && invalid,
       [`${prefix}--checkbox-group--warning`]: showWarning,
-      [`${prefix}--checkbox-group--slug`]: hasSlug,
+      [`${prefix}--checkbox-group--slug`]: hasAILabel,
     });
 
     return html`
@@ -185,6 +189,7 @@ class CDSCheckboxGroup extends LitElement {
         ?aria-describedby=${!invalid && !warn && helper ? helperId : undefined}>
         <legend class="${prefix}--label" id=${legendId || ariaLabelledBy}>
           ${legendText}
+          <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>
           <slot name="slug" @slotchange="${handleSlotChange}"></slot>
         </legend>
         <slot></slot>
@@ -220,9 +225,18 @@ class CDSCheckboxGroup extends LitElement {
 
   /**
    * A selector that will return the slug item.
+   *
+   * remove in v12
    */
   static get slugItem() {
     return `${prefix}-slug`;
+  }
+
+  /**
+   * A selector that will return the AI Label item.
+   */
+  static get aiLabelItem() {
+    return `${prefix}-ai-label`;
   }
 
   static shadowRootOptions = {

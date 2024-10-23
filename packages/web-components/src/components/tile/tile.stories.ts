@@ -10,9 +10,46 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { TILE_COLOR_SCHEME } from './tile';
+import View16 from '@carbon/icons/lib/view/16.js';
+import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
+import Folders16 from '@carbon/icons/lib/folders/16.js';
 import './index';
+import '../ai-label';
+import '../icon-button';
 import storyDocs from './tile.mdx';
+import styles from './tile-story.scss?lit';
 import '../../../.storybook/templates/with-layer';
+
+const content = html`
+  <div slot="body-text">
+    <p class="secondary">AI Explained</p>
+    <h1>84%</h1>
+    <p class="secondary bold">Confidence score</p>
+    <p class="secondary">
+      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+    </p>
+    <hr />
+    <p class="secondary">Model type</p>
+    <p class="bold">Foundation model</p>
+  </div>
+`;
+
+const actions = html`
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${View16({ slot: 'icon' })}
+    <span slot="tooltip-content"> View </span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${FolderOpen16({ slot: 'icon' })}
+    <span slot="tooltip-content"> Open folder</span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${Folders16({ slot: 'icon' })}
+    <span slot="tooltip-content"> Folders </span>
+  </cds-icon-button>
+  <cds-ai-label-action-button>View details</cds-ai-label-action-button>
+`;
 
 const colorSchemes = {
   [`Regular`]: null,
@@ -356,6 +393,127 @@ export const RadioWithLayer = {
 export const Selectable = {
   render: () =>
     html` <cds-selectable-tile> Default tile </cds-selectable-tile> `,
+};
+
+export const WithAILabel = {
+  args: {
+    hasRoundedCorners: false,
+  },
+  argTypes: {
+    hasRoundedCorners: {
+      control: 'boolean',
+    },
+  },
+  render: (args) => {
+    const { hasRoundedCorners } = args ?? {};
+    return html`<style>
+        ${styles}
+      </style>
+      <div class="ai-label-tile-container">
+        <cds-tile ?has-rounded-corners="${hasRoundedCorners}">
+          <div class="tile-container">
+            <h4>Title</h4>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+              at consectetur turpis mauris gravida penatibus.
+            </p>
+            <div class="ai-data">
+              <div class="data-container">
+                <p>Data Quality</p>
+                <h3>85%</h3>
+              </div>
+              <div class="data-container">
+                <p>Label text</p>
+                <h3>16%</h3>
+              </div>
+            </div>
+          </div>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
+        </cds-tile>
+
+        <cds-clickable-tile
+          href="https://example.com"
+          ai-label
+          ?has-rounded-corners="${hasRoundedCorners}">
+          <div class="tile-container">
+            <h4>Title</h4>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+              at consectetur turpis mauris gravida penatibus.
+            </p>
+            <div class="ai-data">
+              <div class="data-container">
+                <p>Data Quality</p>
+                <h3>85%</h3>
+              </div>
+              <div class="data-container">
+                <p>Label text</p>
+                <h3>16%</h3>
+              </div>
+            </div>
+          </div>
+        </cds-clickable-tile>
+
+        <cds-selectable-tile ?has-rounded-corners="${hasRoundedCorners}">
+          <div class="tile-container">
+            <h4>Title</h4>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+              at consectetur turpis mauris gravida penatibus.
+            </p>
+            <div class="ai-data">
+              <div class="data-container">
+                <p>Data Quality</p>
+                <h3>85%</h3>
+              </div>
+              <div class="data-container">
+                <p>Label text</p>
+                <h3>16%</h3>
+              </div>
+            </div>
+          </div>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
+        </cds-selectable-tile>
+
+        <cds-expandable-tile
+          with-interactive
+          ?has-rounded-corners="${hasRoundedCorners}">
+          <cds-tile-above-the-fold-content slot="above-the-fold-content">
+            <div class="tile-container">
+              <h4>Title</h4>
+              <p>
+                Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum
+                sit at consectetur turpis mauris gravida penatibus.
+              </p>
+              <div class="ai-data">
+                <div class="data-container">
+                  <p>Data Quality</p>
+                  <h3>85%</h3>
+                </div>
+                <div class="data-container">
+                  <p>Label text</p>
+                  <h3>16%</h3>
+                </div>
+              </div>
+            </div>
+          </cds-tile-above-the-fold-content>
+          <cds-tile-below-the-fold-content>
+            <h6>Expanded Section</h6>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+              at consectetur turpis mauris.
+            </p>
+          </cds-tile-below-the-fold-content>
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
+        </cds-expandable-tile>
+      </div>`;
+  },
 };
 
 const meta = {
