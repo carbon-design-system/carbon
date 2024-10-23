@@ -34,6 +34,7 @@ import {
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/icons-react';
+import isEqual from 'react-fast-compare';
 import ListBox, {
   PropTypes as ListBoxPropTypes,
   ListBoxSize,
@@ -751,7 +752,7 @@ const ComboBox = forwardRef(
       },
       onSelectedItemChange({ selectedItem }) {
         // only call onChange if new selection is updated from previous
-        if (JSON.stringify(selectedItem) !== JSON.stringify(selectedItemProp)) {
+        if (!isEqual(selectedItem, selectedItemProp)) {
           onChange({ selectedItem });
         }
       },
