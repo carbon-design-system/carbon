@@ -12,7 +12,7 @@
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/config' as *;
 
-.slug-container {
+.ai-label-container {
   display: flex;
   align-items: flex-start;
   margin-block-end: $spacing-12;
@@ -22,7 +22,7 @@
   }
 }
 
-.slug-container-example.centered {
+.ai-label-container-example.centered {
   align-items: center;
   justify-content: center;
   margin: 0;
@@ -56,7 +56,7 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
   margin-block-end: $spacing-05;
 }
 
-.slug-tile-container {
+.ai-label-tile-container {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -78,37 +78,37 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
   }
 }
 
-.slug-tile-container h4 {
+.ai-label-tile-container h4 {
   margin-block-end: $spacing-05;
 }
 
-.slug-tile-container .ai-data {
+.ai-label-tile-container .ai-data {
   display: flex;
   padding: $spacing-05 0;
   margin-block-start: $spacing-05;
 }
 
-.slug-tile-container .data-container {
+.ai-label-tile-container .data-container {
   inline-size: 126px;
 }
 
-.slug-tile-container .data-container:first-of-type {
+.ai-label-tile-container .data-container:first-of-type {
   margin-inline-end: $spacing-05;
 }
 
-.slug-tile-container p {
+.ai-label-tile-container p {
   @include type-style('body-01');
 }
 
-.slug-tile-container .data-container p {
+.ai-label-tile-container .data-container p {
   @include type-style('label-02');
 }
 
-.slug-tile-container #{$prefix}-tile-below-the-fold-content {
+.ai-label-tile-container #{$prefix}-tile-below-the-fold-content {
   padding-block-start: $spacing-05;
 }
 
-.slug-tile-container #{$prefix}-tile-below-the-fold-content p {
+.ai-label-tile-container #{$prefix}-tile-below-the-fold-content p {
   @include type-style('label-01');
 
   margin: $spacing-03 0 50px;
