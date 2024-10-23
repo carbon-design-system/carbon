@@ -1,0 +1,10 @@
+{
+  "codeConnect": {
+    "parser": "react",
+    "importPaths": {
+      "packages/react/src/*": "@carbon/react"
+    },
+    "paths": {},
+    "include": ["packages/react/code-connect/**"]
+  }
+}

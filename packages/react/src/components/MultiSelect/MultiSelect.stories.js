@@ -5,13 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { action } from '@storybook/addon-actions';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import mdx from './MultiSelect.mdx';
 
 import MultiSelect from '.';
 import FilterableMultiSelect from './FilterableMultiSelect';
+import Button from '../Button';
+import ButtonSet from '../ButtonSet';
+import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
+import { IconButton } from '../IconButton';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
 
 export default {
   title: 'Components/MultiSelect',
@@ -68,9 +75,6 @@ export default {
     open: {
       table: { disable: true },
     },
-    readOnly: {
-      control: { type: 'boolean' },
-    },
     titleText: {
       table: { disable: true },
     },
@@ -114,24 +118,38 @@ const items = [
 ];
 
 export const Playground = (args) => {
+  const ref = useRef();
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
   return (
-    <div style={{ width: 300 }}>
-      <MultiSelect
-        label="Multiselect Label"
-        id="carbon-multiselect-example"
-        titleText="Multiselect title"
-        helperText="This is helper text"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        selectionFeedback="top-after-reopen"
-        {...args}
-      />
+    <div style={{ width: '5000px', height: '5000px' }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: '2500px',
+          left: '2500px',
+          width: 300,
+        }}>
+        <MultiSelect
+          label="Multiselect Label"
+          id="carbon-multiselect-example"
+          titleText="Multiselect title"
+          helperText="This is helper text"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          selectionFeedback="top-after-reopen"
+          ref={ref}
+          {...args}
+        />
+      </div>
     </div>
   );
 };
 
 Playground.args = {
   size: 'md',
+  autoAlign: false,
   type: 'default',
   titleText: 'This is a MultiSelect Title',
   disabled: false,
@@ -145,6 +163,8 @@ Playground.args = {
   clearSelectionDescription: 'Total items selected: ',
   useTitleInItem: false,
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
+  selectAll: false,
+  selectAllItemText: 'All options',
 };
 
 Playground.argTypes = {
@@ -226,7 +246,10 @@ Playground.argTypes = {
 
 export const Default = () => {
   return (
-    <div style={{ width: 300 }}>
+    <div
+      style={{
+        width: 300,
+      }}>
       <MultiSelect
         label="Multiselect Label"
         id="carbon-multiselect-example"
@@ -242,7 +265,10 @@ export const Default = () => {
 
 export const WithInitialSelectedItems = () => {
   return (
-    <div style={{ width: 300 }}>
+    <div
+      style={{
+        width: 300,
+      }}>
       <MultiSelect
         label="Multiselect Label"
         id="carbon-multiselect-example-2"
@@ -257,9 +283,12 @@ export const WithInitialSelectedItems = () => {
   );
 };
 
-export const Filterable = () => {
+export const Filterable = (args) => {
   return (
-    <div style={{ width: 300 }}>
+    <div
+      style={{
+        width: 300,
+      }}>
       <FilterableMultiSelect
         id="carbon-multiselect-example-3"
         titleText="Multiselect title"
@@ -267,9 +296,19 @@ export const Filterable = () => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
     </div>
   );
+};
+
+Filterable.argTypes = {
+  onChange: {
+    action: 'onChange',
+  },
+  onMenuChange: {
+    action: 'onMenuChange',
+  },
 };
 
 export const WithLayerMultiSelect = () => (
@@ -306,3 +345,190 @@ export const _FilterableWithLayer = () => (
     )}
   </WithLayer>
 );
+
+export const _Controlled = () => {
+  const [selectedItems, setSelectedItems] = useState(
+    items.filter((item) => item.id === 'downshift-1-item-0')
+  );
+
+  const onSelectionChanged = (value) => {
+    action('changed items')(value);
+    setSelectedItems(value);
+  };
+
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        id="carbon-multiselect-example-controlled"
+        titleText="Multiselect title"
+        label="Multiselect label"
+        items={items}
+        selectedItems={selectedItems}
+        onChange={(data) => onSelectionChanged(data.selectedItems)}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+      />
+      <br />
+      <ButtonSet>
+        <Button
+          id="all"
+          onClick={() =>
+            setSelectedItems(items.filter((item) => !item.disabled))
+          }>
+          Select all
+        </Button>
+        <Button
+          id="clear"
+          kind="secondary"
+          onClick={() => setSelectedItems([])}>
+          Clear
+        </Button>
+      </ButtonSet>
+    </div>
+  );
+};
+
+const itemsWithSelectAll = [
+  {
+    id: 'downshift-1-item-0',
+    text: 'Editor',
+  },
+  {
+    id: 'downshift-1-item-1',
+    text: 'Owner',
+  },
+  {
+    id: 'downshift-1-item-2',
+    text: 'Uploader',
+  },
+  {
+    id: 'downshift-1-item-3',
+    text: 'Reader - a disabled item',
+    disabled: true,
+  },
+  {
+    id: 'select-all',
+    text: 'All roles',
+    isSelectAll: true,
+  },
+];
+
+export const SelectAll = () => {
+  const [label, setLabel] = useState('Choose options');
+
+  const onChange = (value) => {
+    if (value.selectedItems.length == 1) {
+      setLabel('Option selected');
+    } else if (value.selectedItems.length > 1) {
+      setLabel('Options selected');
+    } else {
+      setLabel('Choose options');
+    }
+  };
+
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        label={label}
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={itemsWithSelectAll}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        onChange={onChange}
+      />
+    </div>
+  );
+};
+
+const aiLabel = (
+  <AILabel className="slug-container">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+export const withAILabel = () => (
+  <div style={{ width: 400 }}>
+    <MultiSelect
+      label="Multiselect Label"
+      id="carbon-multiselect-example"
+      titleText="Multiselect title"
+      helperText="This is helper text"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      selectionFeedback="top-after-reopen"
+      slug={aiLabel}
+    />
+  </div>
+);
+
+export const FilterableWithAILabel = () => (
+  <div style={{ width: 400 }}>
+    <FilterableMultiSelect
+      label="Multiselect Label"
+      id="carbon-multiselect-example"
+      titleText="Multiselect title"
+      helperText="This is helper text"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      selectionFeedback="top-after-reopen"
+      slug={aiLabel}
+    />
+  </div>
+);
+
+export const ExperimentalAutoAlign = () => {
+  const ref = useRef();
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
+  return (
+    <div style={{ width: '5000px', height: '5000px' }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: '2500px',
+          left: '2500px',
+          width: 300,
+        }}>
+        <MultiSelect
+          label="Multiselect Label"
+          id="carbon-multiselect-example"
+          titleText="Multiselect title"
+          helperText="This is helper text"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          selectionFeedback="top-after-reopen"
+          ref={ref}
+          autoAlign
+        />
+      </div>
+    </div>
+  );
+};

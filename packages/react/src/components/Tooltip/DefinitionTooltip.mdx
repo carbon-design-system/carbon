@@ -1,9 +1,11 @@
-import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import * as DefinitionTooltipStories from './DefinitionTooltip.stories';
+
+<Meta isTemplate />
 
 # DefinitionTooltip
 
-[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Tooltip/DefinitionTooltip.js)
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Tooltip/DefinitionTooltip.tsx)
 &nbsp;|&nbsp;
 [Usage guidelines](https://www.carbondesignsystem.com/components/tooltip/usage)
 &nbsp;|&nbsp;
@@ -32,9 +34,7 @@ The `DefinitionTooltip` is made up of two parts: a term and the tooltip itself.
 You can customize the contents of the tooltip through the `definition` prop. You
 can customize the term by providing your own `children` to this component.
 
-<Canvas>
-  <Story of={DefinitionTooltipStories.Default} />
-</Canvas>
+<Canvas of={DefinitionTooltipStories.Default} />
 
 ### Customizing the content of a definition tooltip
 
@@ -56,7 +56,7 @@ your component.
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

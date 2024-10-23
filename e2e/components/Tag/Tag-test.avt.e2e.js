@@ -10,11 +10,11 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('Tag @avt', () => {
+test.describe('@avt Tag', () => {
   test('@avt-default-state Tag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'components-tag--default',
+      id: 'components-tag--read-only',
       globals: {
         theme: 'white',
       },
@@ -36,19 +36,19 @@ test.describe('Tag @avt', () => {
   test('@avt-keyboard-nav Tag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'components-tag--playground',
+      id: 'components-tag--read-only',
       globals: {
         theme: 'white',
       },
-      args: {
-        filter: true,
-      },
     });
-
-    await expect(page.getByText('Tag content')).toBeVisible();
+    const button = page.getByRole('button').first();
+    await expect(button).toBeVisible();
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('button', { name: 'Clear filter' })
-    ).toBeFocused();
+    await expect(button).toBeFocused();
+    // Expect DefinitionTooltip to be visible
+    await expect(page.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
   });
 });

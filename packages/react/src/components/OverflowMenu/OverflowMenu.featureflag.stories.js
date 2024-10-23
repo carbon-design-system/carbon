@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { ArrowsVertical } from '@carbon/icons-react';
@@ -59,6 +59,36 @@ export const _OverflowMenu = () => {
       <MenuItemDivider />
       <MenuItem label="Delete app" kind="danger" onClick={onClick} />
     </OverflowMenu>
+  );
+};
+
+export const AutoAlign = () => {
+  const ref = useRef();
+
+  useEffect(() => {
+    console.log(ref);
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
+
+  return (
+    <div style={{ width: '5000px', height: '5000px' }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: '2500px',
+          left: '2500px',
+        }}
+        ref={ref}>
+        <OverflowMenu autoAlign={true}>
+          <MenuItem label="Stop app" />
+          <MenuItem label="Restart app" />
+          <MenuItem label="Rename app" />
+          <MenuItem label="Edit routes and access" />
+          <MenuItemDivider />
+          <MenuItem label="Delete app" kind="danger" />
+        </OverflowMenu>
+      </div>
+    </div>
   );
 };
 
@@ -191,5 +221,10 @@ Playground.argTypes = {
     description:
       'Specify how the menu should align with the button element `bottom-start` `bottom-end` `top-start` `top-end`',
     default: 'bottom-start',
+  },
+  menuTarget: {
+    table: {
+      disable: true,
+    },
   },
 };

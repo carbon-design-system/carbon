@@ -17,7 +17,7 @@ type ColumnSpanPercent = '25%' | '50%' | '75%' | '100%';
 
 type ColumnSpanSimple = boolean | number | ColumnSpanPercent;
 
-interface ColumnSpanObject {
+export interface ColumnSpanObject {
   span?: ColumnSpanSimple;
 
   offset?: number;
@@ -29,7 +29,7 @@ interface ColumnSpanObject {
 
 export type ColumnSpan = ColumnSpanSimple | ColumnSpanObject;
 
-interface ColumnBaseProps {
+export interface ColumnBaseProps {
   /**
    * Pass in content that will be rendered within the `Column`
    */
@@ -385,12 +385,16 @@ function getClassNameForBreakpoints(
     if (typeof breakpoint === 'object') {
       const { span, offset, start, end } = breakpoint;
 
-      if (typeof offset === 'number' && offset > 0) {
-        classNames.push(`${prefix}--${name}:col-start-${offset + 1}`);
+      if (typeof offset === 'number') {
+        classNames.push(
+          `${prefix}--${name}:col-start-${offset > 0 ? offset + 1 : 'auto'}`
+        );
       }
 
       if (typeof start === 'number') {
-        classNames.push(`${prefix}--${name}:col-start-${start}`);
+        classNames.push(
+          `${prefix}--${name}:col-start-${start ? start : 'auto'}`
+        );
       }
 
       if (typeof end === 'number') {

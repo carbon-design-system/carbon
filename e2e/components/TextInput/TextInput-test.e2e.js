@@ -33,7 +33,7 @@ test.describe('TextInput', () => {
       test('toggle password visibility @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'TextInput',
-          id: 'components-textinput--toggle-password-visibility',
+          id: 'components-passwordinput--default',
           theme,
         });
       });

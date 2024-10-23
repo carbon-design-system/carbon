@@ -1,5 +1,7 @@
-import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import { ArgTypes, Story, Canvas, Meta } from '@storybook/blocks';
 import * as ContainedListStories from './ContainedList.stories.js';
+
+<Meta isTemplate />
 
 # ContainedList
 
@@ -24,9 +26,7 @@ import * as ContainedListStories from './ContainedList.stories.js';
 
 ## Overview
 
-<Canvas>
-  <Story of={ContainedListStories.Default} />
-</Canvas>
+<Canvas of={ContainedListStories.Default} />
 
 ### Search
 
@@ -85,9 +85,7 @@ export const WithExpandableSearch = () => {
 };
 ```
 
-<Canvas>
-  <Story of={ContainedListStories.WithExpandableSearch} />
-</Canvas>
+<Canvas of={ContainedListStories.WithExpandableSearch} />
 
 #### Persistent Search:
 
@@ -139,13 +137,14 @@ export const WithPersistentSearch = () => {
 };
 ```
 
-<Canvas>
-  <Story of={ContainedListStories.WithPersistentSearch} />
-</Canvas>
+`ContainedList.ContainedListItem` is deprecated, use
+`import { ContainedListItem } from '@carbon/react` import instead.
+
+<Canvas of={ContainedListStories.WithPersistentSearch} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

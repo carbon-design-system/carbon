@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, {
   ChangeEventHandler,
   ComponentPropsWithRef,
@@ -24,11 +24,9 @@ import {
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { composeEventHandlers } from '../../tools/events';
 import { Text } from '../Text';
-
-const getInstanceId = setupGetInstanceId();
 
 type ExcludedAttributes = 'size';
 
@@ -122,7 +120,7 @@ interface SelectProps
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Specify whether the control is currently in warning state
@@ -165,7 +163,7 @@ const Select = React.forwardRef(function Select(
   const { isFluid } = useContext(FormContext);
   const [isFocused, setIsFocused] = useState(false);
   const [title, setTitle] = useState('');
-  const { current: selectInstanceId } = useRef(getInstanceId());
+  const selectInstanceId = useId();
 
   const selectClasses = classNames({
     [`${prefix}--select`]: true,
@@ -250,7 +248,7 @@ const Select = React.forwardRef(function Select(
 
   // Slug is always size `mini`
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'mini',
     });

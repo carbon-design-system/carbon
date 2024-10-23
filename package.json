@@ -29,40 +29,41 @@
     "postinstall": "husky"
   },
   "resolutions": {
-    "@types/react": "~18.2.33",
-    "@types/prop-types": "15.7.11",
+    "@types/react": "~18.3.0",
+    "@types/prop-types": "15.7.13",
     "ast-types": "^0.14.0",
     "node-sass": "^9.0.0",
-    "react": "~18.2.0",
-    "react-dom": "~18.2.0",
-    "react-is": "~18.2.0"
+    "react": "~18.3.0",
+    "react-dom": "~18.3.0",
+    "react-is": "~18.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.2",
-    "@babel/plugin-proposal-class-properties": "^7.17.12",
-    "@babel/plugin-proposal-export-default-from": "^7.17.12",
-    "@babel/plugin-proposal-export-namespace-from": "^7.17.12",
-    "@babel/plugin-transform-runtime": "^7.18.2",
-    "@babel/preset-env": "^7.18.2",
-    "@babel/preset-react": "^7.17.12",
-    "@babel/runtime": "^7.18.3",
+    "@babel/core": "^7.24.7",
+    "@babel/plugin-proposal-export-default-from": "^7.24.7",
+    "@babel/plugin-transform-class-properties": "^7.24.7",
+    "@babel/plugin-transform-export-namespace-from": "^7.24.7",
+    "@babel/plugin-transform-runtime": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/runtime": "^7.24.7",
     "@carbon/cli": "workspace:packages/cli",
     "@commitlint/cli": "^18.0.0",
     "@commitlint/config-conventional": "^18.0.0",
     "@percy/cli": "^1.27.0",
     "@percy/playwright": "^1.0.4",
     "@playwright/test": "^1.36.2",
+    "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^6.0.0",
-    "@testing-library/react": "^14.0.0",
+    "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/react-is": "~18.2.0",
+    "@types/react-is": "~18.3.0",
     "accessibility-checker": "^3.1.48",
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^7.0.0",
     "cross-spawn": "^7.0.0",
     "doctoc": "^2.0.0",
-    "eslint": "^8.40.0",
-    "eslint-plugin-playwright": "^0.22.1",
+    "eslint": "^9.0.0",
+    "eslint-plugin-playwright": "^1.0.0",
     "fs-extra": "^11.0.0",
     "glob": "^10.0.0",
     "husky": "^9.0.0",
@@ -74,7 +75,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.0",
-    "stylelint": "^15.0.0"
+    "stylelint": "^16.0.0"
   },
   "commitlint": {
     "extends": [
@@ -144,5 +145,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.4.1"
 }

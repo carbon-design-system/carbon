@@ -236,4 +236,11 @@
     ~ .#{$prefix}--slug {
     inset-inline-end: $spacing-05;
   }
+
+  // Remove ai border when invalid
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area--invalid {
+    border-block-end-color: transparent;
+  }
 }

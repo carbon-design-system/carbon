@@ -11,6 +11,7 @@ import React, { ElementType, useMemo, type PropsWithChildren } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import { LayerContext } from '../Layer/LayerContext';
+import { useMatchMedia } from '../../internal/useMatchMedia';
 
 interface GlobalThemeProps {
   theme?: 'white' | 'g10' | 'g90' | 'g100';
@@ -80,8 +81,11 @@ export function Theme<E extends ElementType = 'div'>({
     [`${prefix}--layer-one`]: true,
   });
   const value = React.useMemo(() => {
+    const isDark = theme && ['g90', 'g100'].includes(theme);
+
     return {
       theme,
+      isDark,
     };
   }, [theme]);
   const BaseComponentAsAny = BaseComponent as any;
@@ -128,4 +132,8 @@ Theme.propTypes = {
  */
 export function useTheme() {
   return React.useContext(ThemeContext);
+}
+
+export function usePrefersDarkScheme() {
+  return useMatchMedia('(prefers-color-scheme: dark)');
 }

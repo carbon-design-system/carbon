@@ -5,8 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useState, useContext, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import React, {
+  ReactNode,
+  useState,
+  useContext,
+  useRef,
+  useEffect,
+} from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
@@ -15,11 +21,9 @@ import { FormContext } from '../FluidForm';
 import { useAnnouncer } from '../../internal/useAnnouncer';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
-
-const getInstanceId = setupGetInstanceId();
 
 export interface TextAreaProps
   extends React.InputHTMLAttributes<HTMLTextAreaElement> {
@@ -52,7 +56,7 @@ export interface TextAreaProps
   /**
    * Provide text that is used alongside the control label for additional help
    */
-  helperText?: ReactNodeLike;
+  helperText?: ReactNode;
 
   /**
    * Specify whether you want the underlying label to be visually hidden
@@ -72,13 +76,13 @@ export interface TextAreaProps
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
    * control
    */
-  labelText: ReactNodeLike;
+  labelText: ReactNode;
 
   /**
    * @deprecated
@@ -128,7 +132,7 @@ export interface TextAreaProps
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextArea` component
    */
-  slug?: ReactNodeLike;
+  slug?: ReactNode;
 
   /**
    * Provide the current value of the `<textarea>`
@@ -143,7 +147,7 @@ export interface TextAreaProps
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 
   /**
    * Specify the method used for calculating the counter number
@@ -179,7 +183,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const { isFluid } = useContext(FormContext);
   const { defaultValue, value } = other;
 
-  const { current: textAreaInstanceId } = useRef(getInstanceId());
+  const textAreaInstanceId = useId();
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const ref = useMergedRefs([forwardRef, textareaRef]) as
@@ -227,7 +231,10 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       if (!disabled && enableCounter && counterMode === 'word') {
         const key = evt.which;
 
-        if (maxCount && textCount >= maxCount && key === 32) {
+        if (
+          (maxCount && textCount >= maxCount && key === 32) ||
+          (maxCount && textCount >= maxCount && key === 13)
+        ) {
           evt.preventDefault();
         }
       }
@@ -318,6 +325,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const formItemClasses = classNames(`${prefix}--form-item`, className);
 
   const textAreaWrapperClasses = classNames(`${prefix}--text-area__wrapper`, {
+    [`${prefix}--text-area__wrapper--cols`]: other.cols,
     [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
     [`${prefix}--text-area__wrapper--warn`]: warn,
     [`${prefix}--text-area__wrapper--slug`]: slug,
@@ -406,17 +414,48 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       textareaProps.maxLength = maxCount;
     }
   }
+
+  const announcerRef = useRef(null);
+  const [prevAnnouncement, setPrevAnnouncement] = useState('');
   const ariaAnnouncement = useAnnouncer(
     textCount,
     maxCount,
     counterMode === 'word' ? 'words' : undefined
   );
+  useEffect(() => {
+    if (ariaAnnouncement && ariaAnnouncement !== prevAnnouncement) {
+      const announcer = announcerRef.current as HTMLSpanElement | null;
+      if (announcer) {
+        // Clear the content first
+        announcer.textContent = '';
+
+        // Set the new content after a small delay
+        const timeoutId = setTimeout(
+          () => {
+            if (announcer) {
+              announcer.textContent = ariaAnnouncement;
+              setPrevAnnouncement(ariaAnnouncement);
+            }
+          },
+          counterMode === 'word' ? 2000 : 1000
+        );
+
+        //clear the timeout
+        return () => {
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+        };
+      }
+    }
+  }, [ariaAnnouncement, prevAnnouncement, counterMode]);
 
   const input = (
     <textarea
       {...other}
       {...textareaProps}
       placeholder={placeholder}
+      aria-readonly={other.readOnly ? true : false}
       className={textareaClasses}
       aria-invalid={invalid}
       aria-describedby={ariaDescribedBy}
@@ -429,7 +468,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
 
   // Slug is always size `mini`
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'mini',
     });
@@ -452,7 +491,12 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
         )}
         {input}
         {normalizedSlug}
-        <span className={`${prefix}--text-area__counter-alert`} role="alert">
+        <span
+          className={`${prefix}--text-area__counter-alert`}
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          ref={announcerRef}>
           {ariaAnnouncement}
         </span>
         {isFluid && <hr className={`${prefix}--text-area__divider`} />}

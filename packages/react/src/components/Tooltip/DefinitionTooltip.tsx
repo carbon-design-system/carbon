@@ -70,7 +70,7 @@ export interface DefinitionTooltipProps
 }
 
 const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
-  align = 'bottom-left',
+  align = 'bottom-start',
   className,
   children,
   definition,
@@ -104,6 +104,9 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
       onMouseEnter={() => {
         openOnHover ? setOpen(true) : null;
       }}
+      onFocus={() => {
+        setOpen(true);
+      }}
       open={isOpen}>
       <button
         {...rest}
@@ -113,8 +116,10 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
         onBlur={() => {
           setOpen(false);
         }}
-        onClick={() => {
-          setOpen(!isOpen);
+        onMouseDown={(event) => {
+          // We use onMouseDown rather than onClick to make sure this triggers
+          // before onFocus.
+          if (event.button === 0) setOpen(!isOpen);
         }}
         onKeyDown={onKeyDown}
         type="button">
@@ -135,20 +140,30 @@ DefinitionTooltip.propTypes = {
    */
   align: PropTypes.oneOf([
     'top',
-    'top-left',
-    'top-right',
+    'top-left', // deprecated use top-start instead
+    'top-right', // deprecated use top-end instead
 
     'bottom',
-    'bottom-left',
-    'bottom-right',
+    'bottom-left', // deprecated use bottom-start instead
+    'bottom-right', // deprecated use bottom-end instead
 
     'left',
-    'left-bottom',
-    'left-top',
+    'left-bottom', // deprecated use left-end instead
+    'left-top', // deprecated use left-start instead
 
     'right',
-    'right-bottom',
-    'right-top',
+    'right-bottom', // deprecated use right-end instead
+    'right-top', // deprecated use right-start instead
+
+    // new values to match floating-ui
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
+    'left-end',
+    'left-start',
+    'right-end',
+    'right-start',
   ]),
 
   /**

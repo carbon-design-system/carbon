@@ -1,15 +1,18 @@
 import React, {
   InputHTMLAttributes,
+  ReactNode,
   useContext,
   useEffect,
   useState,
 } from 'react';
 import classNames from 'classnames';
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import { View, ViewOff } from '@carbon/icons-react';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
+import { Tooltip } from '../Tooltip';
+import { PopoverAlignment } from '../Popover';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -40,7 +43,7 @@ export interface PasswordInputProps
   /**
    * Provide text that is used alongside the control label for additional help
    */
-  helperText?: ReactNodeLike;
+  helperText?: ReactNode;
 
   /**
    * Specify whether or not the underlying label is visually hidden
@@ -70,12 +73,12 @@ export interface PasswordInputProps
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * Provide the text that will be read by a screen reader when visiting this control
    */
-  labelText: ReactNodeLike;
+  labelText: ReactNode;
 
   /**
    * @deprecated The `light` prop for `PasswordInput` has been deprecated in favor of the new `Layer` component. It will be removed in the next major release.
@@ -162,7 +165,7 @@ export interface PasswordInputProps
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 }
 
 const PasswordInput = React.forwardRef(function PasswordInput(
@@ -186,7 +189,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     size = 'md',
     showPasswordLabel = 'Show password',
     tooltipPosition = 'bottom',
-    tooltipAlignment = 'center',
+    tooltipAlignment = 'end',
     type = 'password',
     warn = false,
     warnText,
@@ -239,6 +242,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     placeholder,
     type: inputType,
     className: textInputClasses,
+    readOnly,
     ref,
     ...rest,
   };
@@ -247,6 +251,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     `${prefix}--text-input-wrapper`,
     `${prefix}--password-input-wrapper`,
     {
+      [`${prefix}--text-input-wrapper--readonly`]: readOnly,
       [`${prefix}--text-input-wrapper--light`]: light,
       [`${prefix}--text-input-wrapper--inline`]: inline,
       [`${prefix}--text-input--fluid`]: isFluid,
@@ -297,18 +302,40 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   ) : (
     <View className={`${prefix}--icon-visibility-on`} />
   );
+
   const passwordVisibilityToggleClasses = classNames(
     `${prefix}--text-input--password__visibility__toggle`,
     `${prefix}--btn`,
-    `${prefix}--btn--icon-only`,
     `${prefix}--tooltip__trigger`,
     `${prefix}--tooltip--a11y`,
     {
-      [`${prefix}--btn--disabled`]: disabled,
       [`${prefix}--tooltip--${tooltipPosition}`]: tooltipPosition,
       [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
     }
   );
+
+  let align: PopoverAlignment | undefined = undefined;
+
+  if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
+    if (tooltipAlignment === 'center') {
+      align = tooltipPosition;
+    }
+    if (tooltipAlignment === 'end') {
+      align = `${tooltipPosition}-end`;
+    }
+    if (tooltipAlignment === 'start') {
+      align = `${tooltipPosition}-start`;
+    }
+  }
+
+  if (tooltipPosition === 'right' || tooltipPosition === 'left') {
+    align = tooltipPosition;
+  }
+  if (!hidePasswordLabel || hidePasswordLabel.trim() === '') {
+    console.warn('Warning: The "hidePasswordLabel" should not be blank.');
+  } else if (!showPasswordLabel || showPasswordLabel.trim() === '') {
+    console.warn('Warning: The "showPasswordLabel" should not be blank.');
+  }
   const input = (
     <>
       <input
@@ -329,18 +356,19 @@ const PasswordInput = React.forwardRef(function PasswordInput(
         data-toggle-password-visibility={inputType === 'password'}
       />
       {isFluid && <hr className={`${prefix}--text-input__divider`} />}
-      <button
-        type="button"
-        className={passwordVisibilityToggleClasses}
-        disabled={disabled}
-        onClick={handleTogglePasswordVisibility}>
-        {!disabled && (
-          <span className={`${prefix}--assistive-text`}>
-            {passwordIsVisible ? hidePasswordLabel : showPasswordLabel}
-          </span>
-        )}
-        {passwordVisibilityIcon}
-      </button>
+
+      <Tooltip
+        align={align}
+        className={`${prefix}--toggle-password-tooltip`}
+        label={passwordIsVisible ? hidePasswordLabel : showPasswordLabel}>
+        <button
+          type="button"
+          className={passwordVisibilityToggleClasses}
+          disabled={disabled || readOnly}
+          onClick={handleTogglePasswordVisibility}>
+          {passwordVisibilityIcon}
+        </button>
+      </Tooltip>
     </>
   );
 
@@ -421,6 +449,11 @@ PasswordInput.propTypes = {
    * Specify whether the control is currently invalid
    */
   invalid: PropTypes.bool,
+
+  /**
+   * Whether the PasswordInput should be read-only
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Provide the text that is displayed when the control is in an invalid state

@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import RadioButton from './RadioButton';
+import RadioButton, { RadioButtonProps } from './RadioButton';
 
 export default RadioButton;
 export { RadioButton };
+
+export type { RadioButtonProps };

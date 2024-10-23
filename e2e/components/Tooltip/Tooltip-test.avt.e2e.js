@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Tooltip @avt', () => {
+test.describe('@avt Tooltip', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Tooltip',
@@ -44,8 +44,7 @@ test.describe('Tooltip @avt', () => {
     await expect(page).toHaveNoACViolations('Tooltip - duration');
   });
 
-  // Prevent timeout
-  test.slow('tooltip default - @avt-keyboard-nav', async ({ page }) => {
+  test('@avt-keyboard-nav - tooltip default', async ({ page }) => {
     await visitStory(page, {
       component: 'Tooltip',
       id: 'components-tooltip--default',
@@ -54,12 +53,36 @@ test.describe('Tooltip @avt', () => {
       },
     });
 
-    await page.keyboard.press('Tab');
     await expect(page.getByRole('button')).toBeVisible();
     // Expect tooltip to be focused
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button')).toBeFocused();
     // Expect tooltip content to be visible
     await expect(page.locator('.cds--popover-container')).toBeVisible();
+  });
+
+  test('@avt-keyboard-nav - tooltip default Escape key on hover', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'Tooltip',
+      id: 'components-tooltip--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    const tooltipTrigger = page.getByRole('button');
+    await expect(tooltipTrigger).toBeVisible();
+
+    await tooltipTrigger.hover();
+
+    const tooltipContent = page.getByText(
+      'Occasionally, services are updated in a specified time window to ensure no down time for customers.'
+    );
+    await expect(tooltipContent).toBeVisible();
+    // Press ESCAPE key while hover is active
+    await page.keyboard.press('Escape');
+    await expect(tooltipContent).toBeHidden();
   });
 });

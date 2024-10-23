@@ -1,5 +1,7 @@
-import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import * as TooltipStories from './Tooltip.stories';
+
+<Meta isTemplate />
 
 # Tooltip
 
@@ -40,9 +42,7 @@ can provide the interactive element as a child to `Tooltip`, for example:
 the component you provide renders an interactive element. In addition, you can
 specify the contents of the popup through the `label` or `description` prop.
 
-<Canvas>
-  <Story of={TooltipStories.Default} />
-</Canvas>
+<Canvas of={TooltipStories.Default} />
 
 ### Toggletips vs Tooltips
 
@@ -79,9 +79,7 @@ relative to the tooltip. For example, if you provide `align="top"` to the
 Similarly, if you provide `align="bottom"` then the tooltip will render below
 your component.
 
-<Canvas>
-  <Story of={TooltipStories.Alignment} />
-</Canvas>
+<Canvas of={TooltipStories.Alignment} />
 
 You can also configure the placement of the caret, if it is enabled, by choosing
 between `left` and `right` or `bottom` and `top`, depending on where your
@@ -100,9 +98,7 @@ You can customize the delay between when a tooltip is invoked and its contents
 are shown. You can also customize the delay between when a tooltip is dismissed
 and its contents are hidden.
 
-<Canvas>
-  <Story of={TooltipStories.Duration} />
-</Canvas>
+<Canvas of={TooltipStories.Duration} />
 
 The `enterDelayMs` prop allows you to provide a time, in milliseconds, that the
 component will wait before showing the tooltip. The `exitDelayMs` prop allows
@@ -114,7 +110,7 @@ By default, these values are set to 100ms for `enterDelayms` and 300ms for
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

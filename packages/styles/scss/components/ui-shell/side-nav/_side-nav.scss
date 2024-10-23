@@ -36,13 +36,13 @@
     background-color: $background;
     color: $text-secondary;
     inline-size: mini-units(6);
-    inset-block-end: 0;
-    inset-block-start: 0;
+    inset-block: 0;
     inset-inline-start: 0;
     max-inline-size: mini-units(32);
     // TODO: sync with motion work
-    transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
-    will-change: width;
+    transition: inline-size 0.11s cubic-bezier(0.2, 0, 1, 0.9),
+      transform 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+    will-change: inline-size;
   }
 
   .#{$prefix}--side-nav--ux {
@@ -270,8 +270,7 @@
       background-color: $border-interactive;
       content: '';
       inline-size: 3px;
-      inset-block-end: 0;
-      inset-block-start: 0;
+      inset-block: 0;
       inset-inline-start: 0;
     }
   }
@@ -382,8 +381,7 @@
     background-color: $border-interactive;
     content: '';
     inline-size: 3px;
-    inset-block-end: 0;
-    inset-block-start: 0;
+    inset-block: 0;
     inset-inline-start: 0;
   }
 

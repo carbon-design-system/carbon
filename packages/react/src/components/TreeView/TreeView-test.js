@@ -56,6 +56,28 @@ describe('TreeView', () => {
       expect(within(nodeChild).getByText('Node 2')).toBeInTheDocument();
     });
 
+    it('should render children as expected when using dot syntax', () => {
+      render(
+        <TreeView label="Tree View">
+          <TreeView.TreeNode
+            isExpanded={true}
+            data-testid="Node 1"
+            label="Node 1">
+            <TreeView.TreeNode data-testid="Node 2" label="Node 2" />
+          </TreeView.TreeNode>
+        </TreeView>
+      );
+
+      const nodeParent = screen.getByTestId('Node 1');
+      const nodeChild = screen.getByTestId('Node 2');
+
+      expect(nodeParent).toHaveClass(`${prefix}--tree-parent-node`);
+      expect(nodeChild).toHaveClass(`${prefix}--tree-leaf-node`);
+
+      expect(within(nodeParent).getByText('Node 1')).toBeInTheDocument();
+      expect(within(nodeChild).getByText('Node 2')).toBeInTheDocument();
+    });
+
     it('should support a custom `className` prop on the outermost element', () => {
       const { container } = render(
         <TreeView className="custom-class" label="Tree" />
@@ -204,6 +226,74 @@ describe('TreeView', () => {
       expect(screen.getByTestId('Node 1')).toHaveClass(
         `${prefix}--tree-node--with-icon`
       );
+    });
+  });
+
+  describe('keyboard navigation', () => {
+    it('should focus on the first child node when right arrow is pressed on an expanded parent node', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <TreeView label="Tree View">
+          <TreeNode
+            data-testid="parent-node"
+            label="Parent Node"
+            isExpanded={true}>
+            <TreeNode data-testid="child-node-1" label="Child Node 1" />
+            <TreeNode data-testid="child-node-2" label="Child Node 2" />
+          </TreeNode>
+        </TreeView>
+      );
+
+      const parentNode = screen.getByTestId('parent-node');
+      const childNode1 = screen.getByTestId('child-node-1');
+
+      // Focus on the parent node
+      parentNode.focus();
+      expect(parentNode).toHaveFocus();
+
+      // Press the right arrow key
+      await user.keyboard('[ArrowRight]');
+
+      // Check if the first child node is now focused
+      expect(childNode1).toHaveFocus();
+    });
+
+    it('should expand a collapsed parent node when right arrow is pressed', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <TreeView label="Tree View">
+          <TreeNode
+            data-testid="parent-node"
+            label="Parent Node"
+            isExpanded={false}>
+            <TreeNode data-testid="child-node" label="Child Node" />
+          </TreeNode>
+        </TreeView>
+      );
+
+      const parentNode = screen.getByTestId('parent-node');
+
+      // Initially, the parent node should not be expanded
+      expect(parentNode).not.toHaveAttribute('aria-expanded', 'true');
+
+      // Focus on the parent node
+      parentNode.focus();
+      expect(parentNode).toHaveFocus();
+
+      // Press the right arrow key
+      await user.keyboard('[ArrowRight]');
+
+      // The parent node should now be expanded
+      expect(parentNode).toHaveAttribute('aria-expanded', 'true');
+
+      // Now that the parent is expanded, we can check for the child node
+      const childNode = screen.getByTestId('child-node');
+      expect(childNode).toBeInTheDocument();
+
+      // The parent node should still have focus
+      expect(parentNode).toHaveFocus();
     });
   });
 });

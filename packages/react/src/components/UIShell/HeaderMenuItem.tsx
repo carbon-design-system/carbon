@@ -75,7 +75,7 @@ const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
       </li>
     );
   }
-);
+) as HeaderMenuItemComponent;
 
 HeaderMenuItem.displayName = 'HeaderMenuItem';
 HeaderMenuItem.propTypes = {

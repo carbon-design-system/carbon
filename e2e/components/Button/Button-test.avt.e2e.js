@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Button @avt', () => {
+test.describe('@avt Button', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
@@ -150,7 +150,7 @@ test.describe('Button @avt', () => {
       },
     });
     await expect(page.getByRole('button')).toBeVisible();
-    page.getByRole('button').hover();
+    await page.getByRole('button').hover();
 
     await expect(page).toHaveNoACViolations('Button-hover');
   });
