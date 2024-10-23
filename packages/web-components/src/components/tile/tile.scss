@@ -70,6 +70,7 @@ $css--plex: true !default;
     }
   }
 
+  ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     pointer-events: none;
   }
@@ -165,11 +166,11 @@ $css--plex: true !default;
   @extend .#{$prefix}--tile--light;
 }
 
-// Slug styles
-:host(#{$prefix}-tile[slug]),
-:host(#{$prefix}-expandable-tile[slug]),
-:host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile,
-:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile {
+// AI Label styles
+:host(#{$prefix}-tile[ai-label]),
+:host(#{$prefix}-expandable-tile[ai-label]),
+:host(#{$prefix}-clickable-tile[ai-label]) .#{$prefix}--tile,
+:host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile {
   @include ai-popover-gradient('default', 0, 'layer');
 
   border: 1px solid transparent;
@@ -181,6 +182,7 @@ $css--plex: true !default;
 :host(#{$prefix}-expandable-tile),
 :host(#{$prefix}-clickable-tile),
 :host(#{$prefix}-selectable-tile) {
+  ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: $spacing-05;
@@ -188,17 +190,18 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-selectable-tile) ::slotted(#{$prefix}-ai-label),
 :host(#{$prefix}-selectable-tile) ::slotted(#{$prefix}-slug) {
   inset-inline-end: $spacing-08;
 }
 
-:host(#{$prefix}-expandable-tile[slug]):hover {
+:host(#{$prefix}-expandable-tile[ai-label]):hover {
   @include ai-popover-gradient('default', 0, 'layer');
 }
 
-:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile::before,
-:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile::after,
-:host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile::before {
+:host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile::before,
+:host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile::after,
+:host(#{$prefix}-clickable-tile[ai-label]) .#{$prefix}--tile::before {
   position: absolute;
   display: block;
   block-size: 100%;
@@ -210,39 +213,40 @@ $css--plex: true !default;
   transition: opacity $duration-fast-02 motion(standard, productive);
 }
 
-:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile::before,
-:host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile::before {
+:host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile::before,
+:host(#{$prefix}-clickable-tile[ai-label]) .#{$prefix}--tile::before {
   @include ai-popover-gradient('hover', 0, 'layer');
 
   box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
 }
 
-:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile:hover::before,
-:host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile:hover::before {
+:host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile:hover::before,
+:host(#{$prefix}-clickable-tile[ai-label]) .#{$prefix}--tile:hover::before {
   opacity: 1;
 }
 
-:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected {
+:host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile--is-selected {
   border: 1px solid $layer-selected-inverse;
   .#{$prefix}--tile__checkmark {
     z-index: 1;
   }
 }
 
-:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected::after {
+:host(#{$prefix}-selectable-tile[ai-label])
+  .#{$prefix}--tile--is-selected::after {
   @include ai-popover-gradient('selected', 0, 'layer');
 
   box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
 }
 
-:host(#{$prefix}-expandable-tile[slug]) {
+:host(#{$prefix}-expandable-tile[ai-label]) {
   overflow: visible;
 }
 
-:host(#{$prefix}-tile[slug][has-rounded-corners]),
-:host(#{$prefix}-expandable-tile[slug][has-rounded-corners]),
-:host(#{$prefix}-clickable-tile[slug][has-rounded-corners]),
-:host(#{$prefix}-selectable-tile[slug][has-rounded-corners]) {
+:host(#{$prefix}-tile[ai-label][has-rounded-corners]),
+:host(#{$prefix}-expandable-tile[ai-label][has-rounded-corners]),
+:host(#{$prefix}-clickable-tile[ai-label][has-rounded-corners]),
+:host(#{$prefix}-selectable-tile[ai-label][has-rounded-corners]) {
   @extend .#{$prefix}--tile--slug-rounded;
 
   .#{$prefix}--tile__chevron {

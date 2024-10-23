@@ -133,6 +133,10 @@ class CDSMultiSelect extends CDSDropdown {
       this._handleUserInitiatedClearInput();
     } else if (
       !(event.target as HTMLElement)?.matches(
+        (this.constructor as typeof CDSMultiSelect).aiLabelItem
+      ) &&
+      // remove reference to slug in v12
+      !(event.target as HTMLElement)?.matches(
         (this.constructor as typeof CDSMultiSelect).slugItem
       )
     ) {
@@ -504,9 +508,10 @@ class CDSMultiSelect extends CDSDropdown {
   };
 
   shouldUpdate(changedProperties) {
-    const { selectorItem, slugItem } = this
+    const { selectorItem, aiLabelItem, slugItem } = this
       .constructor as typeof CDSMultiSelect;
-    const slug = this.querySelector(slugItem);
+    const aiLabel =
+      this.querySelector(aiLabelItem) || this.querySelector(slugItem);
     const items = this.querySelectorAll(selectorItem);
 
     const { value, locale } = this;
@@ -535,7 +540,7 @@ class CDSMultiSelect extends CDSDropdown {
           locale,
         });
 
-        slug ? sortedMenuItems.unshift(slug as Node) : '';
+        aiLabel ? sortedMenuItems.unshift(aiLabel as Node) : '';
         // @todo remove typecast once we've updated to Typescript.
         (this as any).replaceChildren(...sortedMenuItems);
       }
@@ -550,7 +555,7 @@ class CDSMultiSelect extends CDSDropdown {
           locale,
         });
 
-        slug ? sortedMenuItems.unshift(slug as Node) : '';
+        aiLabel ? sortedMenuItems.unshift(aiLabel as Node) : '';
         // @todo remove typecast once we've updated to Typescript.
         (this as any).replaceChildren(...sortedMenuItems);
       }
