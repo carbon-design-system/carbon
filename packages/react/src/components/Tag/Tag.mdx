@@ -37,6 +37,64 @@ When to use:
 
 <Canvas of={InteractiveTagStories.Dismissible} />
 
+Here it is a sample code to help you get started.
+
+```js
+const tags = [
+  {
+    type: 'red',
+    text: 'Tag content with a long text description',
+    tagTitle: 'Provide a custom title to the tag',
+  },
+  {
+    type: 'magenta',
+    text: 'Tag content 1',
+  },
+  {
+    type: 'purple',
+    text: 'Tag content 2',
+  },
+];
+
+const [renderedTags, setRenderedTags] = useState(tags);
+
+const handleClose = (removedTag) => {
+  const newTags = renderedTags.filter((tag) => tag !== removedTag);
+  setRenderedTags(newTags);
+};
+
+const resetTabs = () => {
+  setRenderedTags(tags);
+};
+
+return (
+  <>
+    <Button style={{ marginBottom: '3rem' }} onClick={resetTabs}>
+      Reset
+    </Button>
+    <br />
+    <div aria-label="Dismissible tags" role="group">
+      {renderedTags.map((tag, index) => (
+        <DismissibleTag
+          key={index}
+          type={tag.type}
+          className="some-class"
+          renderIcon={Asleep}
+          text={tag.text}
+          tagTitle={tag.tagTitle}
+          title="Dismiss"
+          onClose={(e) => {
+            e.preventDefault();
+            handleClose(tag);
+          }}
+          {...args}
+        />
+      ))}
+    </div>
+  </>
+);
+```
+
 ## Selectable
 
 Selectable tags are used to select or unselect single or multiple items.
@@ -51,6 +109,61 @@ When to use:
   dismissable tags).
 
 <Canvas of={InteractiveTagStories.Selectable} />
+
+Here it is a sample code to help you get started.
+
+```js
+const tags = [
+  {
+    id: 1,
+    text: 'Tag content with a long text description',
+  },
+  {
+    id: 2,
+    text: 'Tag content 1',
+  },
+  {
+    id: 3,
+    text: 'Tag content 2',
+  },
+  {
+    id: 4,
+    text: 'Tag content 3',
+  },
+];
+
+const [selectedTags, setSelectedTags] = useState([
+  {
+    id: 2,
+    text: 'Tag content 1',
+  },
+]);
+
+const handleChange = (tag, selected) => {
+  const nextSelectedTags = selected
+    ? [...selectedTags, tag]
+    : selectedTags.filter((t) => t.id !== tag.id);
+
+  console.log('Selected tags array: ', nextSelectedTags);
+  setSelectedTags(nextSelectedTags);
+};
+
+return (
+  <div aria-label="Selectable tags" role="group">
+    {tags.map((tag, index) => (
+      <SelectableTag
+        key={index}
+        renderIcon={Asleep}
+        text={tag.text}
+        className="some-class"
+        selected={selectedTags.find((t) => t.id === tag.id)}
+        onChange={(selected) => handleChange(tag, selected)}
+        {...args}
+      />
+    ))}
+  </div>
+);
+```
 
 ## Operational
 

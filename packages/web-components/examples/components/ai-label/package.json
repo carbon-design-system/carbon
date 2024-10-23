@@ -1,5 +1,5 @@
 {
-  "name": "carbon-web-components-slug-example",
+  "name": "carbon-web-components-ai-label-example",
   "version": "0.1.0",
   "private": true,
   "description": "Sample project for getting started with the Web Components from Carbon.",
@@ -16,7 +16,7 @@
     "sass": "^1.64.1"
   },
   "devDependencies": {
-    "vite": "5.2.13",
+    "vite": "5.2.14",
     "rimraf": "^3.0.2"
   }
 }
