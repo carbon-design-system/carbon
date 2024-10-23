@@ -1280,17 +1280,30 @@ export function Callout({
 }: CalloutProps) {
   const prefix = usePrefix();
 
+  let didWarnAboutSuccessKind = false;
+  let didWarnAboutWarningKind = false;
+
   let redirectedKind = kind;
-  if (kind === 'success') {
-    console.warn(
-      'Callout: The "success" kind is deprecated. Please use "info" instead.'
-    );
-    redirectedKind = 'info';
-  } else if (kind === 'warning') {
-    console.warn(
-      'Callout: The "warning" kind is deprecated. Please use "error" instead.'
-    );
-    redirectedKind = 'error';
+  if (__DEV__) {
+    if (kind === 'success') {
+      if (!didWarnAboutSuccessKind) {
+        warning(
+          didWarnAboutSuccessKind,
+          'Callout: The "success" kind is deprecated. Please use "info" instead.'
+        );
+        didWarnAboutSuccessKind = true;
+      }
+      redirectedKind = 'info';
+    } else if (kind === 'warning') {
+      if (!didWarnAboutWarningKind) {
+        warning(
+          didWarnAboutWarningKind,
+          'Callout: The "warning" kind is deprecated. Please use "error" instead.'
+        );
+        didWarnAboutWarningKind = true;
+      }
+      redirectedKind = 'error';
+    }
   }
   const containerClassName = cx(className, {
     [`${prefix}--actionable-notification`]: true,
