@@ -155,14 +155,12 @@ function useChangedValue<T>(
  * @returns {boolean}
  */
 function useFeatureFlag(flag) {
-  console.log('usefeatureflag');
   const scope = useContext(FeatureFlagContext);
   //updated to return false for undefined flags
   const f = scope.enabled(flag);
   if (f === true || f === false) {
     return f;
   }
-  console.log('secret third thing: ', f);
   return false;
 }
 
