@@ -12,9 +12,9 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html, TemplateResult } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
+import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -67,9 +67,9 @@ class CDSDropdown extends ValidityMixin(
   HostListenerMixin(FormMixin(FocusMixin(LitElement)))
 ) {
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   @state()
   protected _activeDescendant?: string;
@@ -254,18 +254,22 @@ class CDSDropdown extends ValidityMixin(
   /**
    * Handles `slotchange` event.
    */
-  protected _handleSlugSlotChange({ target }: Event) {
+  protected _handleAILabelSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSDropdown).aiLabelItem
+            ) ||
+            // remove reference to slug in v12
+            (elem as HTMLElement).matches(
               (this.constructor as typeof CDSDropdown).slugItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     this.requestUpdate();
   }
@@ -645,16 +649,25 @@ class CDSDropdown extends ValidityMixin(
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updated(_changedProperties) {
-    this._hasSlug
-      ? this.setAttribute('slug', '')
-      : this.removeAttribute('slug');
+    this._hasAILabel
+      ? this.setAttribute('ai-label', '')
+      : this.removeAttribute('ai-label');
 
-    this.shadowRoot
-      ?.querySelector("slot[name='slug']")
-      ?.classList.toggle(
+    const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
+
+    if (label) {
+      label?.classList.toggle(
         `${prefix}--slug--revert`,
-        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
+    } else {
+      this.shadowRoot
+        ?.querySelector("slot[name='slug']")
+        ?.classList.toggle(
+          `${prefix}--slug--revert`,
+          this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        );
+    }
   }
 
   /**
@@ -702,7 +715,7 @@ class CDSDropdown extends ValidityMixin(
       _handleKeydownInner: handleKeydownInner,
       _handleKeypressInner: handleKeypressInner,
       _handleSlotchangeHelperText: handleSlotchangeHelperText,
-      _handleSlugSlotChange: handleSlugSlotChange,
+      _handleAILabelSlotChange: handleAILabelSlotChange,
       _slotHelperTextNode: slotHelperTextNode,
     } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
@@ -798,7 +811,8 @@ class CDSDropdown extends ValidityMixin(
             ${ChevronDown16({ 'aria-label': toggleLabel })}
           </div>
         </div>
-        <slot name="slug" @slotchange=${handleSlugSlotChange}></slot>
+        <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>
+        <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
         ${menuBody}
       </div>
       <div
@@ -870,9 +884,18 @@ class CDSDropdown extends ValidityMixin(
 
   /**
    * A selector that will return the slug item.
+   *
+   * remove in v12
    */
   static get slugItem() {
     return `${prefix}-slug`;
+  }
+
+  /**
+   * A selector that will return the AI Label item.
+   */
+  static get aiLabelItem() {
+    return `${prefix}-ai-label`;
   }
 
   static shadowRootOptions = {
