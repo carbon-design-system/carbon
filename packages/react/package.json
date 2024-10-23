@@ -83,7 +83,7 @@
     "@carbon/themes": "^11.43.0-rc.0",
     "@figma/code-connect": "^1.1.4",
     "@rollup/plugin-babel": "^6.0.0",
-    "@rollup/plugin-commonjs": "^26.0.0",
+    "@rollup/plugin-commonjs": "^28.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "@rollup/plugin-typescript": "^11.0.0",
     "@storybook/addon-a11y": "^8.2.8",
