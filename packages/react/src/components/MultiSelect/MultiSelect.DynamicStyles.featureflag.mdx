@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Components/MultiSelect/Feature Flag" name="Flag details" />
+
+# Dynamically set floating styles
+
+Components with `autoAlign` use the
+[`floating-ui`](https://github.com/floating-ui/floating-ui) library to handle
+the dynamic positioning of floating elements relative to their trigger / anchor
+element. This also includes collision detection that repositions the floating
+element as necessary to keep it visible within the viewport. In the majority of
+cases, the styling from the `floating-ui` 'fixed' positioning strategy prevents
+the floating element from being
+[clipped](https://floating-ui.com/docs/misc#clipping) by an ancestor element.
+
+The `enable-v12-dynamic-floating-styles` flag enables this dynamic styling
+without the collision detection.
+
+**Note**: The flag has no effect when used with `autoAlign` because `autoAlign`
+includes both the dynamic positioning styles and collision detection.
+
+## Enable dynamic setting of floating styles
+
+```js
+<FeatureFlags
+  flags={{
+    'enable-v12-dynamic-floating-styles': true,
+  }}>
+  <MultiSelect
+    label="Multiselect Label"
+    id="carbon-multiselect-example"
+    titleText="Multiselect title"
+    helperText="This is helper text"
+    items={comboBoxItems}
+    direction={args.direction}
+    itemToString={(item) => (item ? item.text : '')}
+    selectionFeedback="top-after-reopen"
+  />
+</FeatureFlags>
+```
