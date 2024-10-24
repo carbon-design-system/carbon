@@ -10,8 +10,12 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { DROPDOWN_DIRECTION, DROPDOWN_SIZE, DROPDOWN_TYPE } from './dropdown';
+import View16 from '@carbon/icons/lib/view/16.js';
+import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
+import Folders16 from '@carbon/icons/lib/folders/16.js';
 import './dropdown-item';
 import './dropdown-skeleton';
+import '../ai-label';
 
 const directionOptions = {
   [`Top`]: DROPDOWN_DIRECTION.TOP,
@@ -225,6 +229,64 @@ export const WithLayer = {
   `,
 };
 
+export const Skeleton = {
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: () => html` <cds-dropdown-skeleton></cds-dropdown-skeleton> `,
+};
+
+const content = html`
+  <div slot="body-text">
+    <p class="secondary">AI Explained</p>
+    <h1>84%</h1>
+    <p class="secondary bold">Confidence score</p>
+    <p class="secondary">
+      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+    </p>
+    <hr />
+    <p class="secondary">Model type</p>
+    <p class="bold">Foundation model</p>
+  </div>
+`;
+
+const actions = html`
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${View16({ slot: 'icon' })}
+    <span slot="tooltip-content"> View </span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${FolderOpen16({ slot: 'icon' })}
+    <span slot="tooltip-content"> Open folder</span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${Folders16({ slot: 'icon' })}
+    <span slot="tooltip-content"> Folders </span>
+  </cds-icon-button>
+  <cds-ai-label-action-button>View details</cds-ai-label-action-button>
+`;
+
+export const WithAILabel = {
+  render: () => html`
+    <cds-dropdown
+      helper-text="This is some helper text"
+      title-text="Dropdown title"
+      label="Dropdown menu options">
+      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
+    </cds-dropdown>
+  `,
+};
+
 export const Playground = {
   argTypes: controls,
   args: defaultArgs,
@@ -245,43 +307,33 @@ export const Playground = {
     label,
     warn,
     warnText,
-  }) =>
-    html`
-      <cds-dropdown
-        aria-label=${ifDefined(ariaLabel)}
-        ?open=${open}
-        ?disabled="${disabled}"
-        ?hide-label=${hideLabel}
-        helper-text=${ifDefined(helperText)}
-        ?invalid=${invalid}
-        ?read-only=${readOnly}
-        invalid-text=${invalidText}
-        direction="${direction}"
-        title-text=${ifDefined(titleText)}
-        size="${ifDefined(size)}"
-        type="${ifDefined(type)}"
-        value=${ifDefined(value)}
-        label=${ifDefined(label)}
-        ?warn=${warn}
-        warn-text=${warnText}>
-        ${items.map(
-          (elem) => html`
-            <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
-              >${elem.text}</cds-dropdown-item
-            >
-          `
-        )}
-      </cds-dropdown>
-    `,
-};
-
-export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
-  render: () => html` <cds-dropdown-skeleton></cds-dropdown-skeleton> `,
+  }) => html`
+    <cds-dropdown
+      aria-label=${ifDefined(ariaLabel)}
+      ?open=${open}
+      ?disabled="${disabled}"
+      ?hide-label=${hideLabel}
+      helper-text=${ifDefined(helperText)}
+      ?invalid=${invalid}
+      ?read-only=${readOnly}
+      invalid-text=${invalidText}
+      direction="${direction}"
+      title-text=${ifDefined(titleText)}
+      size="${ifDefined(size)}"
+      type="${ifDefined(type)}"
+      value=${ifDefined(value)}
+      label=${ifDefined(label)}
+      ?warn=${warn}
+      warn-text=${warnText}>
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
+    </cds-dropdown>
+  `,
 };
 
 const meta = {
