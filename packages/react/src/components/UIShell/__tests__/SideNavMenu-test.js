@@ -12,8 +12,6 @@ import { SideNavMenu, SideNavMenuItem } from '../';
 import { SideNavContext } from '../SideNav';
 
 describe('SideNavMenu', () => {
-  let mockRef;
-
   it('should be expanded by default if `defaultExpanded` is true', () => {
     render(
       <SideNavMenu defaultExpanded title="test-title">
@@ -152,13 +150,13 @@ describe('SideNavMenu', () => {
   });
 
   it('sets isExpanded and prevExpanded when sideNav is not expanded and isRail is true', () => {
-    mockRef = { current: null };
+    const ref = jest.fn();
     render(
       <SideNavContext.Provider value={{ isRail: true }}>
         <SideNavMenu
           isSideNavExpanded={false}
           defaultExpanded={true}
-          ref={mockRef}
+          ref={ref}
           title="test-title">
           <SideNavMenuItem>a</SideNavMenuItem>
           <SideNavMenuItem>b</SideNavMenuItem>
@@ -173,12 +171,13 @@ describe('SideNavMenu', () => {
   });
 
   it('sets isExpanded and prevExpanded when sideNav is expanded, prevExpanded is true and isRail is true', () => {
+    const ref = jest.fn();
     render(
       <SideNavContext.Provider value={{ isRail: true }}>
         <SideNavMenu
           isSideNavExpanded={true}
           defaultExpanded={true}
-          ref={mockRef} //uses the value of mockRef from previous test
+          ref={ref}
           title="test-title">
           <SideNavMenuItem>a</SideNavMenuItem>
           <SideNavMenuItem>b</SideNavMenuItem>
@@ -190,13 +189,13 @@ describe('SideNavMenu', () => {
   });
 
   it('closes sideNav on escape key press', async () => {
-    mockRef = { current: null };
+    const ref = jest.fn();
     render(
       <SideNavContext.Provider value={{ isRail: true }}>
         <SideNavMenu
           isSideNavExpanded={true}
           defaultExpanded={true}
-          ref={mockRef}
+          ref={ref}
           title="test-title">
           <SideNavMenuItem>a</SideNavMenuItem>
           <SideNavMenuItem>b</SideNavMenuItem>
