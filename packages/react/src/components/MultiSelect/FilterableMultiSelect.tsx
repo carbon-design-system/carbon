@@ -312,7 +312,7 @@ export interface FilterableMultiSelectProps<ItemType>
 }
 
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
-  ItemType
+  ItemType,
 >(
   {
     autoAlign = false,
@@ -725,7 +725,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     },
   });
 
-  const { autoComplete, ...inputProps } = getInputProps(
+  const inputProps = getInputProps(
     getDropdownProps({
       'aria-controls': isOpen ? menuId : undefined,
       'aria-describedby': helperText ? helperId : undefined,
