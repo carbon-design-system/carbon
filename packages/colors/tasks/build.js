@@ -136,7 +136,7 @@ async function build() {
   const MODULES_ENTRYPOINT = path.resolve(__dirname, '..', 'index.scss');
 
   await Promise.all([
-    fs.writeFile(MODULES_ENTRYPOINT, generate(sassModule).code),
+    fs.writeFile(MODULES_ENTRYPOINT, await generate(sassModule).code),
   ]);
 }
 

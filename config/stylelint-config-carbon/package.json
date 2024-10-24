@@ -35,11 +35,12 @@
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-no-unsupported-browser-features": "^8.0.1",
     "stylelint-order": "^6.0.0",
+    "stylelint-prettier": "^5.0.0",
     "stylelint-scss": "^6.2.1",
     "stylelint-use-logical": "^2.1.0"
   },
   "devDependencies": {
-    "prettier": "^2.8.8",
+    "prettier": "^3.3.3",
     "stylelint": "^16.0.0"
   }
 }
