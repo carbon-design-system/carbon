@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { fireEvent, render } from '@testing-library/react';
+
 import { FileUploaderDropContainer } from '../';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import { getByText } from '@carbon/test-utils/dom';
-import { render } from '@testing-library/react';
 import { uploadFiles } from '../test-helpers';
 
 const requiredProps = { labelText: 'Add file' };
@@ -417,5 +418,68 @@ describe('FileUploaderDropContainer', () => {
     expect(dragOverEvent.preventDefault).toHaveBeenCalled();
     expect(dragOverEvent.stopPropagation).toHaveBeenCalled();
     expect(dropArea).not.toHaveClass('some-active-class');
+  });
+  it('should return array of files marked as invalid if they dont match accepted types', () => {
+    const onAddFilesMock = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer
+        accept={['image/png']}
+        onAddFiles={onAddFilesMock}
+        {...requiredProps}
+      />
+    );
+    const event = {
+      dataTransfer: {
+        files: [
+          new File(['sample text'], 'example.txt', { type: 'text/plain' }),
+        ],
+      },
+      preventDefault: jest.fn(),
+      stopPropagation: jest.fn(),
+    };
+    fireEvent.drop(container.firstChild, event);
+    expect(onAddFilesMock).toHaveBeenCalledWith(expect.anything(), {
+      addedFiles: [
+        expect.objectContaining({
+          invalidFileType: true,
+        }),
+      ],
+    });
+  });
+
+  it('should render a label with custom labelText for screen readers', () => {
+    const { getByLabelText } = render(
+      <FileUploaderDropContainer labelText="Upload your file" />
+    );
+    const hiddenLabel = getByLabelText('Upload your file');
+    expect(hiddenLabel).toBeInTheDocument();
+  });
+  it('should prevent default action on Space key press', () => {
+    const { container } = render(
+      <FileUploaderDropContainer {...requiredProps} />
+    );
+    const dropArea = container.querySelector('button');
+    const preventDefault = jest.fn();
+    const event = new KeyboardEvent('keydown', {
+      key: ' ',
+      code: 'Space',
+      bubbles: true,
+    });
+    Object.defineProperty(event, 'preventDefault', { value: preventDefault });
+    dropArea.dispatchEvent(event);
+    expect(preventDefault).toHaveBeenCalled();
+  });
+
+  it('should trigger input click on Enter key press', () => {
+    const { container } = render(
+      <FileUploaderDropContainer {...requiredProps} />
+    );
+    const dropArea = container.querySelector('button');
+    const input = container.querySelector('input');
+    const clickMock = jest.spyOn(input, 'click').mockImplementation(() => {});
+    dropArea.focus();
+    fireEvent.keyDown(dropArea, { key: 'Enter', code: 'Enter', charCode: 13 });
+    expect(clickMock).toHaveBeenCalled();
+    clickMock.mockRestore();
   });
 });
