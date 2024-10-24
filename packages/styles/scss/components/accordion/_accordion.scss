@@ -109,9 +109,12 @@ $content-padding: 0 0 0 $spacing-05 !default;
       position: relative;
       z-index: 2;
       box-shadow:
-        /* Border top */ 0 -1px 0 0 $focus,
-        inset 0 1px 0 0 $focus, /* Border right */ inset 2px 0 0 0 $focus,
-        /* Border bottom */ 0 1px 0 0 $focus, inset 0 -1px 0 0 $focus,
+        /* Border top */
+        0 -1px 0 0 $focus,
+        inset 0 1px 0 0 $focus,
+        /* Border right */ inset 2px 0 0 0 $focus,
+        /* Border bottom */ 0 1px 0 0 $focus,
+        inset 0 -1px 0 0 $focus,
         /* Border left */ inset -2px 0 0 0 $focus;
       outline: none;
     }
