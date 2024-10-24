@@ -2264,7 +2264,6 @@ __metadata:
     "@rollup/plugin-commonjs": "npm:^26.0.0"
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
     "@rollup/plugin-typescript": "npm:^11.0.0"
-    "@storybook/addon-a11y": "npm:^8.3.5"
     "@storybook/addon-actions": "npm:^8.3.5"
     "@storybook/addon-docs": "npm:^8.3.5"
     "@storybook/addon-essentials": "npm:^8.3.5"
@@ -2308,6 +2307,7 @@ __metadata:
     rollup-plugin-strip-banner: "npm:^3.0.0"
     sass: "npm:^1.77.7"
     storybook: "npm:^8.3.5"
+    storybook-addon-accessibility-checker: "npm:^3.1.61-rc.3"
     stream-browserify: "npm:^3.0.0"
     tabbable: "npm:^6.2.0"
     typescript-config-carbon: "npm:^0.3.0"
@@ -6332,18 +6332,6 @@ __metadata:
   dependencies:
     "@sinonjs/commons": "npm:^1.7.0"
   checksum: 10/033c74ad389b0655b6af2fa1af31dddf45878e65879f06c5d1940e0ceb053a234f2f46c728dcd97df8ee9312431e45dd7aedaee3a69d47f73a2001a7547fc3d6
-  languageName: node
-  linkType: hard
-
-"@storybook/addon-a11y@npm:^8.3.5":
-  version: 8.3.6
-  resolution: "@storybook/addon-a11y@npm:8.3.6"
-  dependencies:
-    "@storybook/addon-highlight": "npm:8.3.6"
-    axe-core: "npm:^4.2.0"
-  peerDependencies:
-    storybook: ^8.3.6
-  checksum: 10/ea7dfc57319e69824297291f87b32f1389c27554b69016178a9224db9cb0e055b0873d5a21ca4b944e947309575ad891cc3044e93d91633ce472ccb16678b48e
   languageName: node
   linkType: hard
 

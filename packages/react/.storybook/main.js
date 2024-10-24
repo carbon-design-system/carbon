@@ -80,7 +80,13 @@ const config = {
       },
     },
     '@storybook/addon-storysource',
-    '@storybook/addon-a11y',
+    /**
+     * For now, the storybook-addon-accessibility-checker fork replaces the @storybook/addon-a11y.
+     * Eventually they plan to attempt to get this back into the root addon with the storybook team.
+     * See more: https://ibm-studios.slack.com/archives/G01GCBCGTPV/p1697230798817659
+     */
+    // '@storybook/addon-a11y',
+    'storybook-addon-accessibility-checker',
     {
       name: '@storybook/addon-docs',
       options: {
@@ -116,23 +122,6 @@ const config = {
       define: {
         __DEV__: JSON.stringify(process.env.NODE_ENV === 'development'),
       },
-      css: {
-        // postcss: {
-        //   plugins: [
-        //     autoprefixer({
-        //       overrideBrowserslist: ['last 1 version'],
-        //     }),
-        //   ],
-        // },
-        // preprocessorOptions: {
-        // scss: {
-        // api: 'modern',
-        // silenceDeprecations: ['legacy-js-api'],
-        // quietDeps: true,
-        // additionalData: `@use './styles.scss' as *;`
-        // },
-        // },
-      },
       esbuild: {
         include: /\.[jt]sx?$/,
         exclude: [],
@@ -165,6 +154,7 @@ const config = {
     autodocs: true,
     defaultName: 'Overview',
   },
+  logLevel: 'debug',
 };
 
 export default config;
