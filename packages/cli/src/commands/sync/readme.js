@@ -9,7 +9,7 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const prettier = require('prettier');
+const prettier = require('prettier2');
 const prettierConfig = require('prettier-config-carbon');
 const createRemark = require('remark');
 const monorepo = require('./remark/remark-monorepo');
