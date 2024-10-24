@@ -71,7 +71,7 @@ const TableToolbarFilter = ({
 
   const toolbarActionClasses = cx(
     className,
-    `${prefix}--toolbar-action ${prefix}--overflow-menu ${prefix}--toolbar-filter`
+    `${prefix}--toolbar-action ${prefix}--overflow-menu`
   );
 
   const handleApplyFilter = () => {
