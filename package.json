@@ -24,6 +24,7 @@
     "lint": "eslint actions config packages www",
     "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
+    "telemetry:config": "lerna run telemetry:config",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
     "postinstall": "husky"
