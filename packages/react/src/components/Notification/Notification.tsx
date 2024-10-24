@@ -493,7 +493,6 @@ export function ToastNotification({
         <NotificationButton
           notificationType="toast"
           onClick={handleCloseButtonClick}
-          aria-hidden="true"
           aria-label={deprecatedAriaLabel || ariaLabel}
         />
       )}
@@ -738,7 +737,6 @@ export function InlineNotification({
         <NotificationButton
           notificationType="inline"
           onClick={handleCloseButtonClick}
-          aria-hidden="true"
           aria-label={ariaLabel}
         />
       )}
