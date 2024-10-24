@@ -34,19 +34,30 @@ export interface TableToolbarProps
    * `lg` Change the row height of table
    */
   size?: 'sm' | 'lg';
+  /**
+   *  Display batch actions bar bellow the datagrid toolbar.
+   */
+  useDoubleToolbar?: boolean | undefined;
 }
 
 const TableToolbar: React.FC<TableToolbarProps> = ({
   ['aria-label']: ariaLabel = 'data table toolbar',
   ariaLabel: deprecatedAriaLabel,
   children,
+  useDoubleToolbar,
   size,
   ...rest
 }) => {
   const prefix = usePrefix();
+  const shouldShowBatchActions =
+    children && children[0]?.props.shouldShowBatchActions;
   const className = cx({
     [`${prefix}--table-toolbar`]: true,
     [`${prefix}--table-toolbar--${size}`]: size,
+    [`${prefix}--table-toolbar--${size}--double-menu`]:
+      size && shouldShowBatchActions && useDoubleToolbar,
+    [`${prefix}--table-toolbar--double-menu`]:
+      shouldShowBatchActions && useDoubleToolbar,
   });
   return (
     <section
@@ -84,6 +95,11 @@ TableToolbar.propTypes = {
    * `lg` Change the row height of table
    */
   size: PropTypes.oneOf(['sm', 'lg']),
+
+  /**
+   *  Display batch actions bar bellow the datagrid toolbar.
+   */
+  useDoubleToolbar: PropTypes.bool,
 };
 
 export default TableToolbar;

@@ -1906,6 +1906,9 @@ Map {
         "stickyHeader": Object {
           "type": "bool",
         },
+        "useDoubleToolbar": Object {
+          "type": "bool",
+        },
         "useStaticWidth": Object {
           "type": "bool",
         },
@@ -2275,6 +2278,9 @@ Map {
           ],
           "type": "oneOf",
         },
+        "useDoubleToolbar": Object {
+          "type": "bool",
+        },
       },
     },
     "TableToolbarAction": Object {
@@ -2495,6 +2501,9 @@ Map {
       },
       "translateWithId": Object {
         "type": "func",
+      },
+      "useDoubleToolbar": Object {
+        "type": "bool",
       },
       "useStaticWidth": Object {
         "type": "bool",
@@ -7939,6 +7948,9 @@ Map {
       "stickyHeader": Object {
         "type": "bool",
       },
+      "useDoubleToolbar": Object {
+        "type": "bool",
+      },
       "useStaticWidth": Object {
         "type": "bool",
       },
@@ -8307,6 +8319,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "useDoubleToolbar": Object {
+        "type": "bool",
       },
     },
   },

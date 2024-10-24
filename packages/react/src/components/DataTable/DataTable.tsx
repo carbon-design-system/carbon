@@ -175,6 +175,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   };
   getToolbarProps: (getToolbarPropsArgs?: { [key: string]: unknown }) => {
     size: 'sm' | undefined;
+    useDoubleToolbar: boolean | undefined;
     [key: string]: unknown;
   };
   getBatchActionProps: (getBatchActionPropsArgs?: {
@@ -195,6 +196,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     stickyHeader?: boolean;
     useStaticWidth?: boolean;
     useZebraStyles?: boolean;
+    useDoubleToolbar?: boolean;
   };
   getTableContainerProps: () => {
     stickyHeader?: boolean;
@@ -255,6 +257,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   stickyHeader?: boolean;
   useStaticWidth?: boolean;
   useZebraStyles?: boolean;
+  useDoubleToolbar?: boolean;
 }
 
 interface DataTableState<ColTypes extends any[]> {
@@ -377,6 +380,11 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
      * `true` to add useZebraStyles striping.
      */
     useZebraStyles: PropTypes.bool,
+
+    /**
+     * `true` to display batch actions bar bellow the datagrid toolbar.
+     */
+    useDoubleToolbar: PropTypes.bool,
   };
 
   static translationKeys = Object.values(translationKeys);
@@ -678,13 +686,15 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
     props = {}
   ): {
     size: 'sm' | undefined;
+    useDoubleToolbar: boolean | undefined;
     [key: string]: unknown;
   } => {
-    const { size } = this.props;
+    const { size, useDoubleToolbar } = this.props;
     const isSmall = size === 'xs' || size === 'sm';
     return {
       ...props,
       size: isSmall ? 'sm' : undefined,
+      useDoubleToolbar,
     };
   };
 
@@ -706,6 +716,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
   getTableProps = () => {
     const {
       useZebraStyles,
+      useDoubleToolbar,
       size = 'lg',
       isSortable,
       useStaticWidth,
@@ -715,6 +726,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
     } = this.props;
     return {
       useZebraStyles,
+      useDoubleToolbar,
       size,
       isSortable,
       useStaticWidth,

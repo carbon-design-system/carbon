@@ -33,6 +33,9 @@
     inline-size: 100%;
     min-block-size: $spacing-09;
   }
+  .#{$prefix}--table-toolbar--double-menu {
+    block-size: calc(6rem + 1px);
+  }
 
   .#{$prefix}--toolbar-content {
     display: flex;
@@ -40,8 +43,7 @@
     block-size: $spacing-09;
     inline-size: 100%;
     transform: translate3d(0, 0, 0);
-    transition:
-      transform $duration-fast-02 motion(standard, productive),
+    transition: transform $duration-fast-02 motion(standard, productive),
       clip-path $duration-fast-02 motion(standard, productive);
   }
 
@@ -80,8 +82,7 @@
     box-shadow: none;
     cursor: pointer;
     inline-size: $spacing-09;
-    transition:
-      width $transition-expansion $standard-easing,
+    transition: width $transition-expansion $standard-easing,
       background-color $duration-fast-02 motion(entrance, productive);
 
     &:hover {
@@ -379,12 +380,15 @@
     inline-size: $spacing-09;
   }
 
-  .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
-  .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
+  :not(.#{$prefix}--table-toolbar--double-menu)
+    ~ .#{$prefix}--batch-actions--active
+    ~ .#{$prefix}--toolbar-search-container,
+  :not(.#{$prefix}--table-toolbar--double-menu)
+    ~ .#{$prefix}--batch-actions--active
+    ~ .#{$prefix}--toolbar-content {
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     transform: translate3d(0, 48px, 0);
-    transition:
-      transform $duration-fast-02 motion(standard, productive),
+    transition: transform $duration-fast-02 motion(standard, productive),
       clip-path $duration-fast-02 motion(standard, productive);
   }
 
@@ -403,8 +407,7 @@
     opacity: 0;
     pointer-events: none;
     transform: translate3d(0, 48px, 0);
-    transition:
-      transform $duration-fast-02 motion(standard, productive),
+    transition: transform $duration-fast-02 motion(standard, productive),
       clip-path $duration-fast-02 motion(standard, productive),
       opacity $duration-fast-02 motion(standard, productive);
     will-change: transform;
@@ -625,6 +628,11 @@
       block-size: 2rem;
       inline-size: 2rem;
     }
+  }
+
+  .#{$prefix}--table-toolbar--sm--double-menu {
+    block-size: convert.to-rem(65px);
+    min-block-size: convert.to-rem(65px);
   }
 
   .#{$prefix}--search--disabled .#{$prefix}--search-magnifier-icon:hover {
