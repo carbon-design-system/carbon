@@ -11,30 +11,26 @@ export interface FluidTextAreaSkeletonProps {
   className?: string;
 }
 
-function FluidTextAreaSkeleton({ className, ...other }) {
+const FluidTextAreaSkeleton: React.FC<FluidTextAreaSkeletonProps> = ({
+  className,
+  ...other
+}) => {
   const prefix = usePrefix();
 
-  const FluidTextAreaSkeleton: React.FC<FluidTextAreaSkeletonProps> = ({
-    className,
-    ...other
-  }) => {
-    const prefix = usePrefix();
-
-    return (
-      <FormContext.Provider value={{ isFluid: true }}>
-        <div
-          className={classnames(
-            `${prefix}--form-item ${prefix}--text-area--fluid__skeleton`,
-            className
-          )}
-          {...other}>
-          <span className={`${prefix}--label ${prefix}--skeleton`} />
-          <div className={`${prefix}--skeleton ${prefix}--text-area`} />
-        </div>
-      </FormContext.Provider>
-    );
-  };
-}
+  return (
+    <FormContext.Provider value={{ isFluid: true }}>
+      <div
+        className={classnames(
+          `${prefix}--form-item ${prefix}--text-area--fluid__skeleton`,
+          className
+        )}
+        {...other}>
+        <span className={`${prefix}--label ${prefix}--skeleton`} />
+        <div className={`${prefix}--skeleton ${prefix}--text-area`} />
+      </div>
+    </FormContext.Provider>
+  );
+};
 
 FluidTextAreaSkeleton.propTypes = {
   /**
