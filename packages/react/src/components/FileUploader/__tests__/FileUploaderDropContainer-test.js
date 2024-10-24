@@ -482,4 +482,23 @@ describe('FileUploaderDropContainer', () => {
     expect(clickMock).toHaveBeenCalled();
     clickMock.mockRestore();
   });
+
+  it('should return early when disabled', () => {
+    const handleDrop = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer
+        onDrop={handleDrop}
+        disabled
+        {...requiredProps}
+      />
+    );
+    const dropArea = container.firstChild;
+    const dropEvent = new Event('drop', {
+      bubbles: true,
+      cancelable: true,
+    });
+
+    dropArea.dispatchEvent(dropEvent);
+    expect(handleDrop).not.toHaveBeenCalled();
+  });
 });
