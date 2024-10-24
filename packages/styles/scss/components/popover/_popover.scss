@@ -104,11 +104,10 @@ $popover-caret-height: custom-property.get-var(
   }
 
   // Drop shadow modifier
-  .#{$prefix}--popover--drop-shadow .#{$prefix}--popover {
-    @include custom-property.declaration(
-      'popover-drop-shadow',
-      drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2))
-    );
+  .#{$prefix}--popover--drop-shadow
+    .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
   }
 
   // Caret tip modifier

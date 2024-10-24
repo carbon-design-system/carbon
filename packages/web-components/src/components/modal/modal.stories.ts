@@ -10,7 +10,15 @@
 import { html } from 'lit';
 import '../structured-list';
 import { MODAL_SIZE } from './modal';
+import View16 from '@carbon/icons/lib/view/16.js';
+import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
+import Folders16 from '@carbon/icons/lib/folders/16.js';
 import './index';
+import '../ai-label';
+import '../icon-button';
+import '../form';
+import '../select';
+import '../textarea';
 
 const toggleButton = () => {
   document.querySelector('cds-modal')?.toggleAttribute('open');
@@ -295,6 +303,95 @@ export const WithStateManager = {
   `,
 };
 
+const content = html`
+  <div slot="body-text">
+    <p class="secondary">AI Explained</p>
+    <h1>84%</h1>
+    <p class="secondary bold">Confidence score</p>
+    <p class="secondary">
+      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+    </p>
+    <hr />
+    <p class="secondary">Model type</p>
+    <p class="bold">Foundation model</p>
+  </div>
+`;
+
+const actions = html`
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${View16({ slot: 'icon' })}
+    <span slot="tooltip-content"> View </span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${FolderOpen16({ slot: 'icon' })}
+    <span slot="tooltip-content"> Open folder</span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${Folders16({ slot: 'icon' })}
+    <span slot="tooltip-content"> Folders </span>
+  </cds-icon-button>
+  <cds-ai-label-action-button>View details</cds-ai-label-action-button>
+`;
+
+export const WithAILabel = {
+  render: () => html`
+<cds-modal open has-scrolling-content>
+      <cds-modal-header>
+        <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
+        <cds-modal-close-button></cds-modal-close-button>
+        <cds-modal-label>Account resources</cds-modal-label>
+        <cds-modal-heading>Add a custom domain</cds-modal-heading>
+      </cds-modal-header>
+      <cds-modal-body>
+        <cds-modal-body-content description>
+        <p style="margin-bottom: 1rem">
+        Custom domains direct requests for your apps in this Cloud Foundry
+        organization to a URL that you own. A custom domain can be a shared
+        domain, a shared subdomain, or a shared domain and host.
+      </p>
+      <p style="margin-bottom: 1rem">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+        eu nibh odio. Nunc a consequat est, id porttitor sapien. Proin vitae
+        leo vitae orci tincidunt auctor eget eget libero. Ut tincidunt
+        ultricies fringilla. Aliquam erat volutpat. Aenean arcu odio,
+        elementum vel vehicula vitae, porttitor ac lorem. Sed viverra elit
+        ac risus tincidunt fermentum. Ut sollicitudin nibh id risus ornare
+        ornare. Etiam gravida orci ut lectus dictum, quis ultricies felis
+        mollis. Mauris nec commodo est, nec faucibus nibh. Nunc commodo ante
+        quis pretium consectetur. Ut ac nisl vitae mi mattis vulputate a at
+        elit. Nullam porttitor ex eget mi feugiat mattis. Nunc non sodales
+        magna. Proin ornare tellus quis hendrerit egestas. Donec pharetra
+        leo nec molestie sollicitudin.
+      </p>
+        </cds-modal-body-content>
+        <cds-form-item>
+          <cds-text-input placeholder="e.g. github.com" label="Domain name">
+          </cds-text-input>
+        </cds-form-item>
+
+        <cds-form-item>
+          <cds-select placeholder="US South" label-text="Region">
+            <cds-select-item value="us-south">US South</cds-select-item>
+            <cds-select-item value="us-east">US East</cds-select-item>
+          </cds-select>
+        </cds-form-item>
+        <cds-form-item>
+        <cds-textarea label="Comments" >
+        </cds-form-item>
+      </cds-textarea>
+      </cds-modal-body>
+      <cds-modal-footer>
+        <cds-modal-footer-button kind="secondary"
+          >Cancel</cds-modal-footer-button
+        >
+        <cds-modal-footer-button>Add</cds-modal-footer-button>
+      </cds-modal-footer>
+    </cds-modal>
+    <cds-button @click="${toggleButton}">Launch modal</cds-button>
+  `,
+};
+
 export const Playground = {
   args: defaultArgs,
   argTypes: controls,
@@ -313,123 +410,122 @@ export const Playground = {
     preventCloseOnClickOutside,
     primaryButtonDisabled,
     size,
-  }) =>
-    html`
-      <cds-modal
-        aria-label=${ariaLabel}
-        ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
-        ?alert=${alert}
-        size="${size}"
-        ?open=${open}
-        ?full-width=${fullWidth}
-        prevent-close
-        ?has-scrolling-content="${hasScrollingContent}">
-        <cds-modal-header>
-          <cds-modal-close-button
-            close-button-label=${closeButtonLabel}></cds-modal-close-button>
-          <cds-modal-label>${modalLabel}</cds-modal-label>
-          <cds-modal-heading>${modalHeading}</cds-modal-heading>
-        </cds-modal-header>
-        <cds-modal-body>
-          <cds-modal-body-content description>
-            Custom domains direct requests for your apps in this Cloud Foundry
-            organization to a URL that you own. A custom domain can be a shared
-            domain, a shared subdomain, or a shared domain and host.
-          </cds-modal-body-content>
-          <cds-form-item>
-            <cds-text-input placeholder="e.g. github.com" label="Domain name">
-            </cds-text-input>
-          </cds-form-item>
-          <cds-select label-text="Region" placeholder="US South">
-            <cds-select-item value="us-south">Option 1</cds-select-item>
-            <cds-select-item value="us-east">Option 2</cds-select-item>
-          </cds-select>
+  }) => html`
+    <cds-modal
+      aria-label=${ariaLabel}
+      ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
+      ?alert=${alert}
+      size="${size}"
+      ?open=${open}
+      ?full-width=${fullWidth}
+      prevent-close
+      ?has-scrolling-content="${hasScrollingContent}">
+      <cds-modal-header>
+        <cds-modal-close-button
+          close-button-label=${closeButtonLabel}></cds-modal-close-button>
+        <cds-modal-label>${modalLabel}</cds-modal-label>
+        <cds-modal-heading>${modalHeading}</cds-modal-heading>
+      </cds-modal-header>
+      <cds-modal-body>
+        <cds-modal-body-content description>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </cds-modal-body-content>
+        <cds-form-item>
+          <cds-text-input placeholder="e.g. github.com" label="Domain name">
+          </cds-text-input>
+        </cds-form-item>
+        <cds-select label-text="Region" placeholder="US South">
+          <cds-select-item value="us-south">Option 1</cds-select-item>
+          <cds-select-item value="us-east">Option 2</cds-select-item>
+        </cds-select>
 
-          ${hasScrollingContent
-            ? html` <cds-modal-body-content>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean id accumsan augue. Phasellus consequat augue vitae
-                  tellus tincidunt posuere. Curabitur justo urna, consectetur
-                  vel elit iaculis, ultrices condimentum risus. Nulla facilisi.
-                  Etiam venenatis molestie tellus. Quisque consectetur non risus
-                  eu rutrum.
-                </cds-modal-body-content>
-                <cds-modal-body-content>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean id accumsan augue. Phasellus consequat augue vitae
-                  tellus tincidunt posuere. Curabitur justo urna, consectetur
-                  vel elit iaculis, ultrices condimentum risus. Nulla facilisi.
-                  Etiam venenatis molestie tellus. Quisque consectetur non risus
-                  eu rutrum.
-                </cds-modal-body-content>
-                <cds-modal-body-content>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean id accumsan augue. Phasellus consequat augue vitae
-                  tellus tincidunt posuere. Curabitur justo urna, consectetur
-                  vel elit iaculis, ultrices condimentum risus. Nulla facilisi.
-                  Etiam venenatis molestie tellus. Quisque consectetur non risus
-                  eu rutrum.
-                </cds-modal-body-content>
-                <h3>Lorem ipsum</h3>
-                <cds-modal-body-content>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean id accumsan augue. Phasellus consequat augue vitae
-                  tellus tincidunt posuere. Curabitur justo urna, consectetur
-                  vel elit iaculis, ultrices condimentum risus. Nulla facilisi.
-                  Etiam venenatis molestie tellus. Quisque consectetur non risus
-                  eu rutrum.
-                </cds-modal-body-content>
-                <cds-modal-body-content>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean id accumsan augue. Phasellus consequat augue vitae
-                  tellus tincidunt posuere. Curabitur justo urna, consectetur
-                  vel elit iaculis, ultrices condimentum risus. Nulla facilisi.
-                  Etiam venenatis molestie tellus. Quisque consectetur non risus
-                  eu rutrum.
-                </cds-modal-body-content>
-                <cds-modal-body-content>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean id accumsan augue. Phasellus consequat augue vitae
-                  tellus tincidunt posuere. Curabitur justo urna, consectetur
-                  vel elit iaculis, ultrices condimentum risus. Nulla facilisi.
-                  Etiam venenatis molestie tellus. Quisque consectetur non risus
-                  eu rutrum.
-                </cds-modal-body-content>
-                <cds-modal-body-content>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean id accumsan augue. Phasellus consequat augue vitae
-                  tellus tincidunt posuere. Curabitur justo urna, consectetur
-                  vel elit iaculis, ultrices condimentum risus. Nulla facilisi.
-                  Etiam venenatis molestie tellus. Quisque consectetur non risus
-                  eu rutrum.
-                </cds-modal-body-content>`
-            : ``}
-        </cds-modal-body>
+        ${hasScrollingContent
+          ? html` <cds-modal-body-content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.
+              </cds-modal-body-content>
+              <cds-modal-body-content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.
+              </cds-modal-body-content>
+              <cds-modal-body-content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.
+              </cds-modal-body-content>
+              <h3>Lorem ipsum</h3>
+              <cds-modal-body-content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.
+              </cds-modal-body-content>
+              <cds-modal-body-content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.
+              </cds-modal-body-content>
+              <cds-modal-body-content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.
+              </cds-modal-body-content>
+              <cds-modal-body-content>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.
+              </cds-modal-body-content>`
+          : ``}
+      </cds-modal-body>
 
-        ${passiveModal
-          ? ``
-          : html` <cds-modal-footer>
-              ${numberOfButtons > 2
-                ? html` <cds-modal-footer-button kind="secondary"
-                    >Keep both</cds-modal-footer-button
-                  >`
-                : ``}
-              ${numberOfButtons >= 2
-                ? html` <cds-modal-footer-button kind="secondary"
-                    >${numberOfButtons === 2
-                      ? html`Cancel`
-                      : 'Rename'}</cds-modal-footer-button
-                  >`
-                : ``}
+      ${passiveModal
+        ? ``
+        : html` <cds-modal-footer>
+            ${numberOfButtons > 2
+              ? html` <cds-modal-footer-button kind="secondary"
+                  >Keep both</cds-modal-footer-button
+                >`
+              : ``}
+            ${numberOfButtons >= 2
+              ? html` <cds-modal-footer-button kind="secondary"
+                  >${numberOfButtons === 2
+                    ? html`Cancel`
+                    : 'Rename'}</cds-modal-footer-button
+                >`
+              : ``}
 
-              <cds-modal-footer-button
-                ?disabled=${primaryButtonDisabled}
-                kind="${danger ? 'danger' : 'primary'}"
-                >Add</cds-modal-footer-button
-              >
-            </cds-modal-footer>`}
-      </cds-modal>
-    `,
+            <cds-modal-footer-button
+              ?disabled=${primaryButtonDisabled}
+              kind="${danger ? 'danger' : 'primary'}"
+              >Add</cds-modal-footer-button
+            >
+          </cds-modal-footer>`}
+    </cds-modal>
+  `,
 };
 
 const meta = {
