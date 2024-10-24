@@ -1,7 +1,8 @@
 name: Accessibility Issue ♿
 description: Report an accessibility or usability issue.
 title: '[a11y]: '
-labels: 'type: a11y ♿'
+type: 'bug'
+labels: ['type: a11y ♿', 'type: bug 🐛', 'status: needs triage 🕵️‍♀️']
 body:
   - type: markdown
     attributes:
@@ -37,6 +38,7 @@ body:
         - '@carbon/themes'
         - '@carbon/type'
         - '@carbon/upgrade'
+        - '@carbon/web-components'
     validations:
       required: true
   - type: dropdown
