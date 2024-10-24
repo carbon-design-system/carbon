@@ -107,24 +107,33 @@ export const Default = {
 };
 
 export const WithAILabel = {
-  render: () => html`<cds-tag type="red"
-      >Tag
-      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-    </cds-tag>
+  render: () =>
+    html`<cds-tag type="red"
+        >Tag
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}</cds-ai-label
+        >
+      </cds-tag>
 
-    <cds-tag filter type="purple">
-      Tag
-      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-    </cds-tag>
+      <cds-tag filter type="purple">
+        Tag
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}</cds-ai-label
+        >
+      </cds-tag>
 
-    <cds-tag type="blue">
-      ${Asleep16({ slot: 'icon' })} Tag
-      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-    </cds-tag>
-    <cds-tag filter type="green">
-      ${Asleep16({ slot: 'icon' })} Tag
-      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-    </cds-tag>`,
+      <cds-tag type="blue">
+        ${Asleep16({ slot: 'icon' })} Tag
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}</cds-ai-label
+        >
+      </cds-tag>
+      <cds-tag filter type="green">
+        ${Asleep16({ slot: 'icon' })} Tag
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}</cds-ai-label
+        >
+      </cds-tag>`,
 };
 
 export const Playground = {
