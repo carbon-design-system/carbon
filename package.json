@@ -71,7 +71,7 @@
     "jest-junit": "^16.0.0",
     "lerna": "^8.0.0",
     "lint-staged": "^15.0.0",
-    "prettier": "^2.8.8",
+    "prettier": "^3.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.0",
