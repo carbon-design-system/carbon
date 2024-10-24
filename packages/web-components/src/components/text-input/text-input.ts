@@ -12,10 +12,10 @@ import { property, query } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
-import View16 from '@carbon/icons/lib/view/16';
-import ViewOff16 from '@carbon/icons/lib/view--off/16';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
+import View16 from '@carbon/icons/lib/view/16.js';
+import ViewOff16 from '@carbon/icons/lib/view--off/16.js';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import FormMixin from '../../globals/mixins/form';
 import ValidityMixin from '../../globals/mixins/validity';
@@ -47,9 +47,9 @@ export {
 @customElement(`${prefix}-text-input`)
 class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   /**
    * Handles `slotchange` event.
@@ -60,12 +60,16 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSTextInput).aiLabelItem
+            ) ||
+            // remove reference to slug in v12
+            (elem as HTMLElement).matches(
               (this.constructor as typeof CDSTextInput).slugItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     this.requestUpdate();
   }
@@ -319,7 +323,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       warnText,
       value,
       _handleInput: handleInput,
-      _hasSlug: hasSlug,
+      _hasAILabel: hasAILabel,
       _handleSlotChange: handleSlotChange,
     } = this;
 
@@ -382,7 +386,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     const fieldWrapperClasses = classMap({
       [`${prefix}--text-input__field-wrapper`]: true,
       [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
-      [`${prefix}--text-input__field-wrapper--slug`]: hasSlug,
+      [`${prefix}--text-input__field-wrapper--slug`]: hasAILabel,
     });
 
     const labelClasses = classMap({
@@ -484,6 +488,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
               .value="${this._value}"
               maxlength="${ifNonEmpty(maxCount)}"
               @input="${handleInput}" />
+            <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>
             <slot name="slug" @slotchange="${handleSlotChange}"></slot>
             ${this.showPasswordVisibilityToggle &&
             (type === INPUT_TYPE.PASSWORD || type === INPUT_TYPE.TEXT)
@@ -504,19 +509,37 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   }
 
   updated() {
-    this.shadowRoot
-      ?.querySelector("slot[name='slug']")
-      ?.classList.toggle(
+    const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
+
+    if (label) {
+      label?.classList.toggle(
         `${prefix}--slug--revert`,
-        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
+    } else {
+      this.shadowRoot
+        ?.querySelector("slot[name='slug']")
+        ?.classList.toggle(
+          `${prefix}--slug--revert`,
+          this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        );
+    }
   }
 
   /**
    * A selector that will return the slug item.
+   *
+   * remove in v12
    */
   static get slugItem() {
     return `${prefix}-slug`;
+  }
+
+  /**
+   * A selector that will return the AI Label item.
+   */
+  static get aiLabelItem() {
+    return `${prefix}-ai-label`;
   }
 
   static shadowRootOptions = {

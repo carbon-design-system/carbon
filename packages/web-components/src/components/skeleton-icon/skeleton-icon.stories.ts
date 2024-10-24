@@ -16,9 +16,10 @@ export const Default = {
       skip: true,
     },
   },
-  render: () => html`<cds-skeleton-icon style="margin: 50px"></cds-skeleton-icon
-    ><cds-skeleton-icon
-      style="margin: 50px; width: 24px; height: 24px;"></cds-skeleton-icon>`,
+  render: () =>
+    html`<cds-skeleton-icon style="margin: 50px"></cds-skeleton-icon
+      ><cds-skeleton-icon
+        style="margin: 50px; width: 24px; height: 24px;"></cds-skeleton-icon>`,
 };
 
 const meta = {

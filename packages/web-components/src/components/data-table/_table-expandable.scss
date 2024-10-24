@@ -69,8 +69,8 @@
   background-color: $layer-selected;
 }
 
-:host(#{$prefix}-table-row[slug][expandable][selection-name][selected]),
-:host(#{$prefix}-table-row[slug][expandable]) {
+:host(#{$prefix}-table-row[ai-label][expandable][selection-name][selected]),
+:host(#{$prefix}-table-row[ai-label][expandable]) {
   &:hover,
   &[highlighted] {
     @include ai-table-gradient('hover');
@@ -101,7 +101,7 @@
   }
 }
 
-:host(#{$prefix}-table-expanded-row[slug]) {
+:host(#{$prefix}-table-expanded-row[ai-label]) {
   @include ai-table-gradient();
 
   &[highlighted] {
@@ -109,7 +109,7 @@
   }
 }
 
-:host(#{$prefix}-table-expanded-row[rows-with-slug]) {
+:host(#{$prefix}-table-expanded-row[rows-with-ai-label]) {
   td {
     padding-inline-start: to-rem(88px);
   }

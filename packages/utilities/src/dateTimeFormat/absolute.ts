@@ -61,8 +61,8 @@ export function format(
 }
 
 export function formatRange(
-  startDate: Date | Number,
-  endDate: Date | Number,
+  startDate: Date | number,
+  endDate: Date | number,
   options?: Partial<{
     locale: string;
     style: Intl.DateTimeFormatOptions['timeStyle'];
@@ -73,12 +73,12 @@ export function formatRange(
   const timeStyle =
     options?.timeStyle === null
       ? undefined
-      : options?.timeStyle ?? options?.style ?? 'short';
+      : (options?.timeStyle ?? options?.style ?? 'short');
 
   const dateStyle =
     options?.dateStyle === null
       ? undefined
-      : options?.dateStyle ?? options?.style ?? 'medium';
+      : (options?.dateStyle ?? options?.style ?? 'medium');
 
   const dtf = new Intl.DateTimeFormat(options?.locale, {
     timeStyle,
