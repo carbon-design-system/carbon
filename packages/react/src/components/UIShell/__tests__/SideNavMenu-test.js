@@ -150,13 +150,11 @@ describe('SideNavMenu', () => {
   });
 
   it('sets isExpanded and prevExpanded when sideNav is not expanded and isRail is true', () => {
-    const ref = jest.fn();
     render(
       <SideNavContext.Provider value={{ isRail: true }}>
         <SideNavMenu
           isSideNavExpanded={false}
           defaultExpanded={true}
-          ref={ref}
           title="test-title">
           <SideNavMenuItem>a</SideNavMenuItem>
           <SideNavMenuItem>b</SideNavMenuItem>
@@ -171,13 +169,11 @@ describe('SideNavMenu', () => {
   });
 
   it('sets isExpanded and prevExpanded when sideNav is expanded, prevExpanded is true and isRail is true', () => {
-    const ref = jest.fn();
     render(
       <SideNavContext.Provider value={{ isRail: true }}>
         <SideNavMenu
           isSideNavExpanded={true}
           defaultExpanded={true}
-          ref={ref}
           title="test-title">
           <SideNavMenuItem>a</SideNavMenuItem>
           <SideNavMenuItem>b</SideNavMenuItem>
@@ -189,13 +185,11 @@ describe('SideNavMenu', () => {
   });
 
   it('closes sideNav on escape key press', async () => {
-    const ref = jest.fn();
     render(
       <SideNavContext.Provider value={{ isRail: true }}>
         <SideNavMenu
           isSideNavExpanded={true}
           defaultExpanded={true}
-          ref={ref}
           title="test-title">
           <SideNavMenuItem>a</SideNavMenuItem>
           <SideNavMenuItem>b</SideNavMenuItem>
