@@ -5,12 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+
+import { Filter } from '@carbon/icons-react';
 import OverflowMenu from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
-import { Filter } from '@carbon/icons-react';
+import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { render, screen, fireEvent } from '@testing-library/react';
 
 describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
@@ -210,5 +211,80 @@ describe('OverflowMenu', () => {
       // Check that the click handler was called only once
       expect(handleClick).toHaveBeenCalledTimes(1);
     });
+  });
+  it('should not open menu when disabled', async () => {
+    render(
+      <OverflowMenu aria-label="Overflow menu" className="extra-class" disabled>
+        <OverflowMenuItem className="test-child" itemText="one" />
+        <OverflowMenuItem className="test-child" itemText="two" />
+      </OverflowMenu>
+    );
+
+    const button = screen.getByRole('button');
+    await userEvent.click(button);
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+  });
+  it('should close the menu when clicking outside', async () => {
+    render(
+      <div>
+        <OverflowMenu aria-label="Overflow menu" className="extra-class">
+          <OverflowMenuItem className="test-child" itemText="one" />
+          <OverflowMenuItem className="test-child" itemText="two" />
+        </OverflowMenu>
+        <div data-testid="outside-element">Outside Element</div>
+      </div>
+    );
+
+    const button = screen.getByRole('button');
+    await userEvent.click(button);
+    expect(button).toHaveAttribute('aria-expanded', 'true');
+    await userEvent.click(screen.getByTestId('outside-element'));
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+  });
+  it('should set aria-label for the icon using iconDescription prop', () => {
+    const iconDescription = 'custom icon description';
+    render(
+      <OverflowMenu
+        aria-label="Overflow menu"
+        className="extra-class"
+        iconDescription={iconDescription}>
+        <OverflowMenuItem className="test-child" itemText="one" />
+        <OverflowMenuItem className="test-child" itemText="two" />
+      </OverflowMenu>
+    );
+    const button = screen.getByRole('button', { name: iconDescription });
+    const svgIcon = button.querySelector('.cds--overflow-menu__icon');
+    expect(svgIcon).toHaveAttribute('aria-label', iconDescription);
+  });
+  it('should align menu based on direction prop', async () => {
+    const { rerender } = render(
+      <OverflowMenu
+        direction="top"
+        iconDescription="custom-icon"
+        className="extra-class">
+        <OverflowMenuItem className="test-child" itemText="one" />
+        <OverflowMenuItem className="test-child" itemText="two" />
+      </OverflowMenu>
+    );
+    const button = screen.getByRole('button', { name: 'custom-icon' });
+    fireEvent.click(button);
+    const menu = await waitFor(() =>
+      screen.getByRole('menu', { hidden: true })
+    );
+    expect(menu).toHaveAttribute('data-floating-menu-direction', 'top');
+
+    rerender(
+      <OverflowMenu
+        direction="bottom"
+        iconDescription="custom-icon"
+        className="extra-class">
+        <OverflowMenuItem className="test-child" itemText="one" />
+        <OverflowMenuItem className="test-child" itemText="two" />
+      </OverflowMenu>
+    );
+    const newMenu = await waitFor(() =>
+      screen.getByRole('menu', { hidden: true })
+    );
+    expect(newMenu).toHaveAttribute('data-floating-menu-direction', 'bottom');
   });
 });
