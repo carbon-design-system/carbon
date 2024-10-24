@@ -3977,6 +3977,16 @@ Map {
   },
   "Grid" => Object {
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "as": Object {
         "args": Array [
           Array [
@@ -6991,6 +7001,12 @@ Map {
       },
       "id": Object {
         "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
       },
       "renderIcon": Object {
         "args": Array [

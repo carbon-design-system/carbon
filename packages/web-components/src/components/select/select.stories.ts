@@ -197,22 +197,25 @@ export const Skeleton = {
 };
 
 export const WithAILabel = {
-  render: () => html` <div style="width: 400px">
-    <cds-select
-      helper-text="Optional helper text"
-      label-text="Select an option">
-      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-      <cds-select-item-group label="Category 1">
-        <cds-select-item value="all">Option 1</cds-select-item>
-        <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
-      </cds-select-item-group>
-      <cds-select-item-group label="Category 2">
-        <cds-select-item value="staging">Option 3</cds-select-item>
-        <cds-select-item value="dea">Option 4</cds-select-item>
-        <cds-select-item value="router">Option 5</cds-select-item>
-      </cds-select-item-group>
-    </cds-select>
-  </div>`,
+  render: () =>
+    html` <div style="width: 400px">
+      <cds-select
+        helper-text="Optional helper text"
+        label-text="Select an option">
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}</cds-ai-label
+        >
+        <cds-select-item-group label="Category 1">
+          <cds-select-item value="all">Option 1</cds-select-item>
+          <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+        </cds-select-item-group>
+        <cds-select-item-group label="Category 2">
+          <cds-select-item value="staging">Option 3</cds-select-item>
+          <cds-select-item value="dea">Option 4</cds-select-item>
+          <cds-select-item value="router">Option 5</cds-select-item>
+        </cds-select-item-group>
+      </cds-select>
+    </div>`,
 };
 
 export const WithLayer = {

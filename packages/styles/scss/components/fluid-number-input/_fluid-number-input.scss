@@ -84,7 +84,9 @@
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type {
-    box-shadow: inset 0 -1px $focus, inset -2px 0 $focus;
+    box-shadow:
+      inset 0 -1px $focus,
+      inset -2px 0 $focus;
   }
 
   .#{$prefix}--number-input--fluid
