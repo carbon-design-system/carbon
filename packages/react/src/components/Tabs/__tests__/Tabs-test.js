@@ -327,6 +327,30 @@ describe('Tab', () => {
     );
   });
 
+  it('should reset focus to the active tab on blur in manual activation', async () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs" activation="manual">
+          <Tab data-testid="tab-testid-1">Tab Label 1</Tab>
+          <Tab data-testid="tab-testid-2">Tab Label 2</Tab>
+          <Tab data-testid="tab-testid-3">Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    await userEvent.tab();
+    await userEvent.keyboard('[ArrowRight]');
+    expect(screen.getByTestId('tab-testid-2')).toHaveFocus();
+    await userEvent.keyboard('[Tab]');
+    await userEvent.keyboard('[Shift][Tab]');
+    expect(screen.getByTestId('tab-testid-1')).toHaveFocus();
+  });
+
   it('should render close icon if dismissable', () => {
     render(
       <Tabs dismissable onTabCloseRequest={() => {}}>

@@ -307,34 +307,33 @@ export const Playground = {
     label,
     warn,
     warnText,
-  }) =>
-    html`
-      <cds-dropdown
-        aria-label=${ifDefined(ariaLabel)}
-        ?open=${open}
-        ?disabled="${disabled}"
-        ?hide-label=${hideLabel}
-        helper-text=${ifDefined(helperText)}
-        ?invalid=${invalid}
-        ?read-only=${readOnly}
-        invalid-text=${invalidText}
-        direction="${direction}"
-        title-text=${ifDefined(titleText)}
-        size="${ifDefined(size)}"
-        type="${ifDefined(type)}"
-        value=${ifDefined(value)}
-        label=${ifDefined(label)}
-        ?warn=${warn}
-        warn-text=${warnText}>
-        ${items.map(
-          (elem) => html`
-            <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
-              >${elem.text}</cds-dropdown-item
-            >
-          `
-        )}
-      </cds-dropdown>
-    `,
+  }) => html`
+    <cds-dropdown
+      aria-label=${ifDefined(ariaLabel)}
+      ?open=${open}
+      ?disabled="${disabled}"
+      ?hide-label=${hideLabel}
+      helper-text=${ifDefined(helperText)}
+      ?invalid=${invalid}
+      ?read-only=${readOnly}
+      invalid-text=${invalidText}
+      direction="${direction}"
+      title-text=${ifDefined(titleText)}
+      size="${ifDefined(size)}"
+      type="${ifDefined(type)}"
+      value=${ifDefined(value)}
+      label=${ifDefined(label)}
+      ?warn=${warn}
+      warn-text=${warnText}>
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
+    </cds-dropdown>
+  `,
 };
 
 const meta = {
