@@ -45,6 +45,7 @@ export default {
 
 export const Default = () => {
   const [open, setOpen] = useState(true);
+  const [openPopover, setOpenPopover] = useState(false);
   const menuTargetref = useRef(null);
   return (
     <>
@@ -61,7 +62,26 @@ export const Default = () => {
           organization to a URL that you own. A custom domain can be a shared
           domain, a shared subdomain, or a shared domain and host.
         </p>
-
+        <Popover open={openPopover} autoAlign>
+          <div className="playground-trigger">
+            <CheckboxIcon
+              onClick={() => {
+                setOpenPopover(!openPopover);
+              }}
+            />
+          </div>
+          <PopoverContent className="p-3">
+            <div>
+              <p className="popover-title">This popover uses autoAlign</p>
+              <p className="popover-details">
+                Scroll the container up, down, left or right to observe how the
+                popover will automatically change its position in attempt to
+                stay within the viewport. This works on initial render in
+                addition to on scroll.
+              </p>
+            </div>
+          </PopoverContent>
+        </Popover>
         <TextInput
           data-modal-primary-focus
           id="text-input-1"

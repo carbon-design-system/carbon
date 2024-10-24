@@ -192,28 +192,27 @@ export const Playground = {
     legendText,
     warn,
     warnText,
-  }) =>
-    html`
-      <cds-checkbox-group
-        helper-text="${helperText}"
-        ?disabled="${disabled}"
-        ?invalid="${invalid}"
-        invalid-text="${invalidText}"
-        legend-text="${legendText}"
-        ?readonly="${readonly}"
-        ?warn="${warn}"
-        warn-text="${warnText}">
-        <cds-checkbox checked @cds-checkbox-changed="${onChange}"
-          >Checkbox label</cds-checkbox
-        >
-        <cds-checkbox @cds-checkbox-changed="${onChange}"
-          >Checkbox label</cds-checkbox
-        >
-        <cds-checkbox disabled @cds-checkbox-changed="${onChange}"
-          >Checkbox label</cds-checkbox
-        >
-      </cds-checkbox-group>
-    `,
+  }) => html`
+    <cds-checkbox-group
+      helper-text="${helperText}"
+      ?disabled="${disabled}"
+      ?invalid="${invalid}"
+      invalid-text="${invalidText}"
+      legend-text="${legendText}"
+      ?readonly="${readonly}"
+      ?warn="${warn}"
+      warn-text="${warnText}">
+      <cds-checkbox checked @cds-checkbox-changed="${onChange}"
+        >Checkbox label</cds-checkbox
+      >
+      <cds-checkbox @cds-checkbox-changed="${onChange}"
+        >Checkbox label</cds-checkbox
+      >
+      <cds-checkbox disabled @cds-checkbox-changed="${onChange}"
+        >Checkbox label</cds-checkbox
+      >
+    </cds-checkbox-group>
+  `,
 };
 
 const meta = {

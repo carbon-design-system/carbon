@@ -14,6 +14,7 @@ import { GridSettings, useGridSettings } from './GridContext';
 import { GridComponent, GridProps } from './GridTypes';
 
 function CSSGrid<T extends React.ElementType>({
+  align,
   as: BaseComponent = 'div' as T,
   children,
   className: customClassName,
@@ -50,6 +51,8 @@ function CSSGrid<T extends React.ElementType>({
     [`${prefix}--css-grid--condensed`]: mode === 'condensed',
     [`${prefix}--css-grid--narrow`]: mode === 'narrow',
     [`${prefix}--css-grid--full-width`]: fullWidth,
+    [`${prefix}--css-grid--start`]: align === 'start',
+    [`${prefix}--css-grid--end`]: align === 'end',
   });
 
   // cast as any to let TypeScript allow passing in attributes to base component
@@ -64,6 +67,11 @@ function CSSGrid<T extends React.ElementType>({
 }
 
 CSSGrid.propTypes = {
+  /**
+   * Specify grid aligment. Default is center
+   */
+  align: PropTypes.oneOf(['start', 'center', 'end']),
+
   /**
    * Provide a custom element to render instead of the default <div>
    */

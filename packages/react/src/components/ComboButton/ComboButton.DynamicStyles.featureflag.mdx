@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/blocks';
 
-<Meta isTemplate />
+<Meta title="Components/ComboButton/Feature Flag" name="Flag details" />
 
 # Dynamically set floating styles
 
@@ -26,17 +26,10 @@ includes both the dynamic positioning styles and collision detection.
   flags={{
     'enable-v12-dynamic-floating-styles': true,
   }}>
-  <Popover open={open}>
-    <button
-      type="button"
-      onClick={() => {
-        setOpen(!open);
-      }}>
-      Toggle
-    </button>
-    <PopoverContent>
-      The content that is revealed by interacting with the Toggle button
-    </PopoverContent>
-  </Popover>
+  <ComboButton menuAlignment={args.menuAlignment} label="Primary action">
+    <MenuItem label="Second action with a long label description" />
+    <MenuItem label="Third action" />
+    <MenuItem label="Fourth action" disabled />
+  </ComboButton>
 </FeatureFlags>
 ```
