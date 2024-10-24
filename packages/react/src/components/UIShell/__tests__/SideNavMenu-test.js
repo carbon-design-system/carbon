@@ -9,7 +9,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { SideNavMenu, SideNavMenuItem } from '../';
-import { hasActiveDescendant } from '../SideNavMenu';
 import { SideNavContext } from '../SideNav';
 
 describe('SideNavMenu', () => {
@@ -65,7 +64,7 @@ describe('SideNavMenu', () => {
 
   it('should toggle the menu on click', async () => {
     render(
-      <SideNavMenu title="test-title">
+      <SideNavMenu title="test-title" tabIndex={1}>
         <SideNavMenuItem>a</SideNavMenuItem>
         <SideNavMenuItem>b</SideNavMenuItem>
         <SideNavMenuItem>c</SideNavMenuItem>
@@ -103,52 +102,53 @@ describe('SideNavMenu', () => {
     expect(ref).toHaveBeenCalledWith(screen.getByRole('button'));
   });
 
-  it('should return true if the child is a valid React element, and instance of Array and has isActive and aria-current props', () => {
-    const child = [
-      <SideNavMenuItem isActive={true} aria-current="page">
-        <SideNavMenuItem isActive={false} aria-current="page">
+  it('should check whether the SideNavMenu has a valid react child with isActive and aria-current attributes', () => {
+    const { container } = render(
+      <SideNavMenu title="test-title">
+        <SideNavMenuItem isActive={true} aria-current="true" key={'child1'}>
+          {[<div key={'subChild1'}>a</div>]}
+        </SideNavMenuItem>
+        <SideNavMenuItem key={'child2'}>b</SideNavMenuItem>
+        <SideNavMenuItem key={'child3'}>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).toHaveClass(`cds--side-nav__item--active`);
+  });
+
+  it('should check whether the SideNavMenu has an invalid child but is an instance of array', () => {
+    const { container } = render(
+      <SideNavMenu title="test-title">{[null]}</SideNavMenu>
+    );
+    expect(container.firstChild).not.toHaveClass(`cds--side-nav__item--active`);
+  });
+
+  it('should check whether sideNavMenu has a valid react child and isActive attribute set to true', () => {
+    const { container } = render(
+      <SideNavMenu title="test-title">
+        <SideNavMenuItem isActive={true} key={'child1'}>
           a
         </SideNavMenuItem>
-      </SideNavMenuItem>,
-      <SideNavMenuItem isActive={true} aria-current="page">
-        b
-      </SideNavMenuItem>,
-    ];
-    expect(hasActiveDescendant(child)).toBe(true);
-  });
-
-  it('should return true if the child is a invalid React element and has isActive props set to true', () => {
-    const child = <div isActive={true} />;
-    expect(hasActiveDescendant(child)).toBe(true);
-  });
-
-  it('should return true if the child is a invalid React element and has aria-current props', () => {
-    const child = <div aria-current="page"></div>;
-    expect(hasActiveDescendant(child)).toBe(true);
-  });
-
-  it('should return false if the child is a valid react element but does not have isActive and aria-current props', () => {
-    const child = <div />;
-    render(
-      <SideNavMenu title="test-title">
-        <SideNavMenuItem>a</SideNavMenuItem>
-        <SideNavMenuItem>b</SideNavMenuItem>
-        <SideNavMenuItem>c</SideNavMenuItem>
       </SideNavMenu>
     );
-    expect(hasActiveDescendant(child)).toBe(false);
+    expect(container.firstChild).toHaveClass(`cds--side-nav__item--active`);
   });
 
-  it('should return false if child is an invalid React element', () => {
-    const child = ['abc', 'xyz'];
-    render(
+  it('should check whether sideNavMenu has a valid react child and aria-current attribute', () => {
+    const { container } = render(
       <SideNavMenu title="test-title">
-        <SideNavMenuItem>a</SideNavMenuItem>
-        <SideNavMenuItem>b</SideNavMenuItem>
-        <SideNavMenuItem>c</SideNavMenuItem>
+        <SideNavMenuItem aria-current="true" key={'child1'}>
+          a
+        </SideNavMenuItem>
       </SideNavMenu>
     );
-    expect(hasActiveDescendant(child)).toBe(false);
+    expect(container.firstChild).toHaveClass(`cds--side-nav__item--active`);
+  });
+
+  it('should check whether the SideNavMenu has invalid react element as child', () => {
+    const { container } = render(
+      <SideNavMenu title="test-title">{null}</SideNavMenu>
+    );
+    expect(container.firstChild).not.toHaveClass(`cds--side-nav__item--active`);
   });
 
   it('sets isExpanded and prevExpanded when sideNav is not expanded and isRail is true', () => {
@@ -189,12 +189,12 @@ describe('SideNavMenu', () => {
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
   });
 
-  it('closes sideNav on escape key press', () => {
+  it('closes sideNav on escape key press', async () => {
     mockRef = { current: null };
     render(
       <SideNavContext.Provider value={{ isRail: true }}>
         <SideNavMenu
-          sSideNavExpanded={true}
+          isSideNavExpanded={true}
           defaultExpanded={true}
           ref={mockRef}
           title="test-title">
@@ -205,12 +205,9 @@ describe('SideNavMenu', () => {
       </SideNavContext.Provider>
     );
 
-    fireEvent.keyDown(screen.getByText(/a/i), {
-      key: 'Escape',
-      code: 'Escape',
-      keyCode: 27,
-      charCode: 27,
-    });
+    await userEvent.click(screen.getByRole('button'));
+    await userEvent.keyboard('{Escape}');
+
     expect(screen.getByRole('button')).toHaveAttribute(
       'aria-expanded',
       'false'
