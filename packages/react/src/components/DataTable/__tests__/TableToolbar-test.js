@@ -7,6 +7,8 @@
 
 import React from 'react';
 import TableToolbar from '../TableToolbar';
+import TableBatchActions from '../TableBatchActions';
+import TableToolbarContent from '../TableToolbarContent';
 import { render, screen } from '@testing-library/react';
 
 describe('TableToolbar', () => {
@@ -43,6 +45,37 @@ describe('TableToolbar', () => {
       const { container } = render(<TableToolbar size="sm" />);
 
       expect(container.firstChild).toHaveClass('cds--table-toolbar--sm');
+    });
+  });
+
+  describe('with double toolbar', () => {
+    it('should set the doubleToolbar class with `useDoubleToolbar`', () => {
+      const { rerender } = render(
+        <TableToolbar>
+          <TableBatchActions
+            shouldShowBatchActions={true}
+            totalSelected={0}
+            onCancel={() => {}}></TableBatchActions>
+          <TableToolbarContent />
+        </TableToolbar>
+      );
+
+      expect(screen.getByRole('region')).not.toHaveClass(
+        'cds--table-toolbar--double-menu'
+      );
+
+      rerender(
+        <TableToolbar useDoubleToolbar={true}>
+          <TableBatchActions
+            shouldShowBatchActions={true}
+            totalSelected={0}
+            onCancel={() => {}}></TableBatchActions>
+          <TableToolbarContent />
+        </TableToolbar>
+      );
+      expect(screen.getByRole('region')).toHaveClass(
+        'cds--table-toolbar--double-menu'
+      );
     });
   });
 });
