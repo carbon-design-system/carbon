@@ -64,7 +64,7 @@ as `disabled`. If it triggers a destructive action, you can pass it
 `kind="danger"` to highlight it specially on hover and focus.
 
 ```jsx
-<Menu>
+<Menu open>
   <MenuItem label="Copy" shortcut="⌘C" />
   <MenuItem label="Paste" shortcut="⌘V" disabled />
   <MenuItem label="Delete" kind="danger" />
@@ -75,13 +75,13 @@ In order to render a submenu, you can pass any of the above mentioned
 subcomponents as `children` of a `MenuItem`.
 
 ```jsx
-<Menu>
+<Menu open>
   <MenuItem label="Open" />
   <MenuItem label="Save" />
   <MenuItem label="Import">
-    <MenuItem label="Image">
-    <MenuItem label="Movie">
-    <MenuItem label="Text">
+    <MenuItem label="Image" />
+    <MenuItem label="Movie" />
+    <MenuItem label="Text" />
   </MenuItem>
 </Menu>
 ```
@@ -92,7 +92,7 @@ The `MenuItemDivider` renders a thin dividing line, visually separating menu
 items. Use this to enhance grouping of related items.
 
 ```jsx
-<Menu>
+<Menu open>
   <MenuItem label="Cut" />
   <MenuItem label="Copy" />
   <MenuItem label="Paste" />
@@ -117,7 +117,7 @@ related to each other, you'll want to wrap them in a `MenuItemGroup` for
 improved accessibility.
 
 ```jsx
-<Menu>
+<Menu open>
   <MenuItemGroup label="Font style">
     <MenuItemSelectable label="Bold" selected />
     <MenuItemSelectable label="Italic" />
@@ -132,7 +132,7 @@ can be selected at a time. The component automatically wraps itself in a
 `MenuItemGroup`, so you won't have to nest it manually.
 
 ```jsx
-<Menu>
+<Menu open>
   <MenuItemRadioGroup
     label="Font family"
     items={['Sans', 'Serif', 'Mono']}
