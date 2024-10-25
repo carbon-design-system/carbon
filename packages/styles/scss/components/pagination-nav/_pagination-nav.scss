@@ -88,7 +88,8 @@
     outline: 0;
     text-align: center;
     text-decoration: none;
-    transition: background-color $duration-fast-02 motion(standard, productive),
+    transition:
+      background-color $duration-fast-02 motion(standard, productive),
       color $duration-fast-02 motion(standard, productive);
     user-select: none;
 
@@ -142,7 +143,7 @@
     max-block-size: layout.size('height');
     text-indent: calc(50% - 4.5px);
     // Override some Firefox user-agent styles
-    @-moz-document url-prefix() {
+    @document url-prefix() {
       text-indent: 0;
     }
   }

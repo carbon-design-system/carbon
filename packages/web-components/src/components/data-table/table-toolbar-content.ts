@@ -43,8 +43,8 @@ class CDSTableToolbarContent extends LitElement {
           this.size === 'xs'
             ? 'sm'
             : this.size === 'md' || this.size === 'xl'
-            ? 'lg'
-            : this.size;
+              ? 'lg'
+              : this.size;
         e.setAttribute('size', size);
       });
     }

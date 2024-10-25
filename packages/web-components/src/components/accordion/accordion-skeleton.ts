@@ -13,7 +13,7 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { ACCORDION_ALIGNMENT } from './accordion';
 import { forEach } from '../../globals/internal/collection-helpers';
-import ChevronRight16 from '@carbon/icons/lib/chevron--right/16';
+import ChevronRight16 from '@carbon/icons/lib/chevron--right/16.js';
 import './accordion-item-skeleton';
 import '../skeleton-text/index';
 import styles from './accordion.scss?lit';
@@ -111,11 +111,10 @@ class CDSAccordionSkeleton extends LitElement {
           `
         : ``}
       ${Array.from(new Array(numSkeletonItems)).map(
-        (_, index) =>
-          html`
-            <cds-accordion-item-skeleton
-              key=${index}></cds-accordion-item-skeleton>
-          `
+        (_, index) => html`
+          <cds-accordion-item-skeleton
+            key=${index}></cds-accordion-item-skeleton>
+        `
       )}
     `;
   }

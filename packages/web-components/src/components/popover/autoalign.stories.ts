@@ -10,19 +10,19 @@
 import { html } from 'lit';
 import './index';
 import '../toggle-tip/index';
-import '../slug/index';
+import '../ai-label/index';
 import '../icon-button/index';
 import '../data-table/index';
 import { POPOVER_ALIGNMENT } from './defs';
-import { SLUG_SIZE } from '../slug/defs';
-import Checkbox16 from '@carbon/icons/lib/checkbox/16';
-import Information16 from '@carbon/icons/lib/information/16';
-import View16 from '@carbon/icons/lib/view/16';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16';
-import Folders16 from '@carbon/icons/lib/folders/16';
+import { AI_LABEL_SIZE } from '../ai-label/defs';
+import Checkbox16 from '@carbon/icons/lib/checkbox/16.js';
+import Information16 from '@carbon/icons/lib/information/16.js';
+import View16 from '@carbon/icons/lib/view/16.js';
+import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
+import Folders16 from '@carbon/icons/lib/folders/16.js';
 
 import styles from './popover-story.scss?lit';
-import slugStyles from '../slug/slug-story.scss?lit';
+import aiLabelStyles from '../ai-label/ai-label-story.scss?lit';
 import tooltipStyles from '../tooltip/tooltip-story.scss?lit';
 
 const popoverAlignments = {
@@ -41,13 +41,14 @@ const popoverAlignments = {
 };
 
 const sizes = {
-  [`Mini size (${SLUG_SIZE.MINI})`]: SLUG_SIZE.MINI,
-  [`2XS size (${SLUG_SIZE.EXTRA_EXTRA_SMALL})`]: SLUG_SIZE.EXTRA_EXTRA_SMALL,
-  [`XS size (${SLUG_SIZE.EXTRA_SMALL})`]: SLUG_SIZE.EXTRA_SMALL,
-  [`Small size (${SLUG_SIZE.SMALL})`]: SLUG_SIZE.SMALL,
-  [`Medium size (${SLUG_SIZE.MEDIUM})`]: SLUG_SIZE.MEDIUM,
-  [`Large size (${SLUG_SIZE.LARGE})`]: SLUG_SIZE.LARGE,
-  [`XL size (${SLUG_SIZE.EXTRA_LARGE})`]: SLUG_SIZE.EXTRA_LARGE,
+  [`Mini size (${AI_LABEL_SIZE.MINI})`]: AI_LABEL_SIZE.MINI,
+  [`2XS size (${AI_LABEL_SIZE.EXTRA_EXTRA_SMALL})`]:
+    AI_LABEL_SIZE.EXTRA_EXTRA_SMALL,
+  [`XS size (${AI_LABEL_SIZE.EXTRA_SMALL})`]: AI_LABEL_SIZE.EXTRA_SMALL,
+  [`Small size (${AI_LABEL_SIZE.SMALL})`]: AI_LABEL_SIZE.SMALL,
+  [`Medium size (${AI_LABEL_SIZE.MEDIUM})`]: AI_LABEL_SIZE.MEDIUM,
+  [`Large size (${AI_LABEL_SIZE.LARGE})`]: AI_LABEL_SIZE.LARGE,
+  [`XL size (${AI_LABEL_SIZE.EXTRA_LARGE})`]: AI_LABEL_SIZE.EXTRA_LARGE,
 };
 
 const content = html`
@@ -78,7 +79,7 @@ const actions = html`
     ${Folders16({ slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
-  <cds-slug-action-button>View details</cds-slug-action-button>
+  <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
 export const Popover = {
@@ -150,7 +151,7 @@ export const Popover = {
   },
 };
 
-export const Toogletip = {
+export const Toggletip = {
   args: {
     alignment: POPOVER_ALIGNMENT.BOTTOM,
     bodyText: `Lorem ipsum dolor sit amet, di os consectetur adipiscing elit,
@@ -251,10 +252,10 @@ export const Tooltip = {
   },
 };
 
-export const Slug = {
+export const AILabel = {
   args: {
     alignment: POPOVER_ALIGNMENT.BOTTOM,
-    size: SLUG_SIZE.EXTRA_SMALL,
+    size: AI_LABEL_SIZE.EXTRA_SMALL,
     kind: 'default',
     aiTextLabel: '',
     revertActive: false,
@@ -262,12 +263,12 @@ export const Slug = {
   argTypes: {
     alignment: {
       control: 'select',
-      description: 'Slug alignment to trigger button (alignment)',
+      description: 'AI Label alignment to trigger button (alignment)',
       options: popoverAlignments,
     },
     size: {
       control: 'select',
-      description: 'Slug size (size)',
+      description: 'AI Label size (size)',
       options: sizes,
     },
     kind: {
@@ -288,10 +289,10 @@ export const Slug = {
     const { alignment, aiTextLabel, size, kind, revertActive } = args ?? {};
     return html`
       <style>
-        ${slugStyles}
+        ${aiLabelStyles}
       </style>
-      <div class="slug-container">
-        <cds-slug
+      <div class="ai-label-container">
+        <cds-ai-label
           autoalign
           alignment="${alignment}"
           size="${size}"
@@ -299,7 +300,7 @@ export const Slug = {
           ai-text-label="${aiTextLabel}"
           ?revert-active="${revertActive}">
           ${content} ${actions}
-        </cds-slug>
+        </cds-ai-label>
       </div>
     `;
   },
