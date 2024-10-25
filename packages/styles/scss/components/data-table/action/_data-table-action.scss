@@ -45,10 +45,6 @@
       clip-path $duration-fast-02 motion(standard, productive);
   }
 
-  .#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-content {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-
   .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-input {
     padding: 0 3rem;
     // For toolbar animation with (esp.) persistent search box
