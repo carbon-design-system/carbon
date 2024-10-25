@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { render, screen, within, fireEvent, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
@@ -26,6 +26,32 @@ const openMenu = async () => {
 };
 
 const prefix = 'cds';
+
+const ControlledComboBox = ({ controlledItem }) => {
+  const items = generateItems(5, generateGenericItem);
+  const [value, setValue] = useState(controlledItem || items[0]);
+  const [onChangeCallCount, setOnChangeCallCount] = useState(0);
+  const controlledOnChange = ({ selectedItem }) => {
+    setValue(selectedItem);
+    setOnChangeCallCount(onChangeCallCount + 1);
+  };
+
+  return (
+    <div>
+      <ComboBox
+        id="test-combobox"
+        items={items}
+        selectedItem={value}
+        onChange={controlledOnChange}
+        placeholder="Filter..."
+        type="default"
+      />
+      <div>value: {value.label}</div>
+      <div>onChangeCallCount: {onChangeCallCount}</div>
+      <button onClick={() => setValue(items[2])}>Choose item 3</button>
+    </div>
+  );
+};
 
 describe('ComboBox', () => {
   let mockProps;
@@ -309,7 +335,7 @@ describe('ComboBox', () => {
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
     });
-    it('should update and call `onChange` when selection is updated from the combobox', async () => {
+    it('should update and call `onChange` once when selection is updated from the combobox', async () => {
       render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
       expect(mockProps.onChange).not.toHaveBeenCalled();
       await openMenu();
@@ -319,7 +345,28 @@ describe('ComboBox', () => {
         screen.getByRole('combobox', { value: 'Item 2' })
       ).toBeInTheDocument();
     });
-    it('should update and call `onChange` when selection is updated externally', async () => {
+    it('should not call `onChange` when current selection is selected again', async () => {
+      render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+      await openMenu();
+      await userEvent.click(screen.getByRole('option', { name: 'Item 0' }));
+      expect(mockProps.onChange).toHaveBeenCalledTimes(0);
+      expect(
+        screen.getByRole('combobox', { value: 'Item 0' })
+      ).toBeInTheDocument();
+    });
+    it('should update and call `onChange` once when selection is updated from the combobox and the external state managing selectedItem is updated', async () => {
+      render(<ControlledComboBox />);
+      expect(screen.getByText('onChangeCallCount: 0')).toBeInTheDocument();
+      await openMenu();
+      await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
+      expect(screen.getByText('onChangeCallCount: 1')).toBeInTheDocument();
+      expect(screen.getByText('value: Item 2')).toBeInTheDocument();
+      expect(
+        screen.getByRole('combobox', { value: 'Item 2' })
+      ).toBeInTheDocument();
+    });
+    it('should update and call `onChange` once when selection is updated externally', async () => {
       const { rerender } = render(
         <ComboBox {...mockProps} selectedItem={mockProps.items[0]} />
       );
@@ -334,7 +381,7 @@ describe('ComboBox', () => {
       await userEvent.click(
         screen.getByRole('button', { name: 'Clear selected item' })
       );
-      expect(mockProps.onChange).toHaveBeenCalled();
+      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
       expect(findInputNode()).toHaveDisplayValue('');
     });
     it('should clear selected item when `selectedItem` is updated to `null` externally', async () => {
