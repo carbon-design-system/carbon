@@ -64,6 +64,30 @@ describe('Tabs', () => {
     );
 
     expect(container.firstChild).toHaveClass('custom-class');
+    expect(container);
+  });
+
+  it('should not render conditionally excluded tabs and panels', () => {
+    const condition = false;
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs" data-test-id="test-id">
+          <Tab>Tab Label 1</Tab>
+          {condition ? (
+            <Tab data-test-id="excluded-tab">Tab Label 2</Tab>
+          ) : null}
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          {condition ? (
+            <TabPanel data-test-id="excluded-panel">Tab Panel 2</TabPanel>
+          ) : null}
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(screen.queryByTestId('excluded-tab')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('excluded-panel')).not.toBeInTheDocument();
   });
 });
 
