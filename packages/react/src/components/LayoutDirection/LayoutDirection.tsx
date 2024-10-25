@@ -6,15 +6,37 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ElementType, ReactNode } from 'react';
 import { LayoutDirectionContext } from './LayoutDirectionContext';
+
+type Direction = 'ltr' | 'rtl';
+
+interface LayoutDirectionContextValue {
+  direction: Direction;
+}
+
+interface LayoutDirectionProps {
+  /**
+   * Customize the element type used to render the outermost node
+   */
+  as?: ElementType;
+  /**
+   * Provide child elements or components to be rendered inside of this
+   * component
+   */
+  children?: ReactNode;
+  /**
+   * Specify the layout direction of this part of the page
+   */
+  dir: Direction;
+}
 
 function LayoutDirection({
   as: BaseComponent = 'div',
   children,
   dir,
   ...rest
-}) {
+}: LayoutDirectionProps) {
   const value = React.useMemo(() => {
     return {
       direction: dir,
