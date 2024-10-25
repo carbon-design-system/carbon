@@ -14,7 +14,7 @@ describe('FluidDatePickerSkeleton', () => {
     render(<FluidDatePickerSkeleton />);
     const skeletonIcon = screen.getByRole('img', { hidden: true });
     expect(skeletonIcon).toBeInTheDocument();
-    expect(skeletonIcon).toHaveClass('cds--date-picker__icon'); 
+    expect(skeletonIcon).toHaveClass('cds--date-picker__icon');
   });
 
   it('renders the range variant when specified', () => {
