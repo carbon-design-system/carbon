@@ -39,7 +39,8 @@
     "clean": "rimraf es lib icons/index.js icons/index.d.ts icons/index.esm.js storybook-static",
     "postinstall": "ibmtelemetry --config=telemetry.yml",
     "storybook": "storybook dev -p 3000",
-    "storybook:build": "storybook build"
+    "storybook:build": "storybook build",
+    "telemetry:config": "npx -y @ibm/telemetry-js-config-generator generate --id fd89d12b-6a39-48b4-adf4-30c94dc0dddd --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components/**/*.(tsx|js|jsx)"
   },
   "peerDependencies": {
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0",
