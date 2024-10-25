@@ -56,6 +56,11 @@ export interface RadioButtonGroupProps
   helperText?: ReactNode;
 
   /**
+   * Specify whether the `legendText` should be hidden, or not. Provide a `legendText` to meet accessibility standards if `hideLegendText` is true
+   */
+  hideLegendText?: boolean;
+
+  /**
    * Specify whether the control is currently invalid
    */
   invalid?: boolean;
@@ -135,6 +140,7 @@ const RadioButtonGroup = React.forwardRef(
       defaultSelected,
       disabled,
       helperText,
+      hideLegendText = false,
       invalid = false,
       invalidText,
       labelPosition = 'right',
@@ -250,12 +256,13 @@ const RadioButtonGroup = React.forwardRef(
     return (
       <div className={wrapperClasses} ref={mergeRefs(divRef, ref)}>
         <fieldset
+          aria-label={legendText?.toString()}
           className={fieldsetClasses}
           disabled={disabled}
           data-invalid={invalid ? true : undefined}
           aria-describedby={showHelper && helperText ? helperId : undefined}
           {...rest}>
-          {legendText && (
+          {legendText && !hideLegendText && (
             <Legend className={`${prefix}--label`}>
               {legendText}
               {normalizedSlug}
@@ -312,6 +319,11 @@ RadioButtonGroup.propTypes = {
    * Provide text that is used alongside the control label for additional help
    */
   helperText: PropTypes.node,
+
+  /**
+   * Specify whether the `legendText` should be hidden, or not. Provide a `legendText` to meet accessibility standards if `hideLegendText` is true
+   */
+  hideLegendText: PropTypes.bool,
 
   /**
    * Specify whether the control is currently invalid

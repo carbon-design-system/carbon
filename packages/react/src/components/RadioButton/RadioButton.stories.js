@@ -236,6 +236,7 @@ Playground.args = {
   invalidText: 'Invalid selection',
   warn: false,
   warnText: 'Please notice the warning',
+  hideLegendText: false,
 };
 
 Playground.argTypes = {
@@ -270,6 +271,13 @@ Playground.argTypes = {
       'Provide the text that is displayed when the control is in an invalid state',
     control: {
       type: 'text',
+    },
+  },
+  hideLegendText: {
+    description:
+      'Specify whether the `legendText` should be hidden, or not. Provide a `legendText` to meet accessibility standards if `hideLegendText` is true',
+    control: {
+      type: 'boolean',
     },
   },
   orientation: {
