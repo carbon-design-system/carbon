@@ -20,6 +20,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 /**
  * Basic slug.
  *
+ * @deprecated This component has been deprecated, please use the <cds-ai-label> component instead.
  * @element cds-slug
  */
 @customElement(`${prefix}-slug`)
