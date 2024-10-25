@@ -220,7 +220,7 @@ export interface DropdownProps<ItemType>
    * Provide the title text that will be read by a screen reader when
    * visiting this control
    */
-  titleText?: ReactNode;
+  titleText: ReactNode;
 
   /**
    * The dropdown type, `default` or `inline`
