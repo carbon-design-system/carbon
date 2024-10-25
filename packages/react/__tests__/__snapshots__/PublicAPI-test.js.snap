@@ -9833,6 +9833,9 @@ Map {
       "enableTreeviewControllable": Object {
         "type": "bool",
       },
+      "enableV12DynamicFloatingStyles": Object {
+        "type": "bool",
+      },
       "enableV12Overflowmenu": Object {
         "type": "bool",
       },
