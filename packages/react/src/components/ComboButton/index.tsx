@@ -279,17 +279,18 @@ ComboButton.propTypes = {
    */
   tooltipAlignment: PropTypes.oneOf([
     'top',
-    'top-left',
-    'top-start',
-    'top-right',
-    'top-end',
     'bottom',
-    'bottom-left',
-    'bottom-start',
-    'bottom-right',
-    'bottom-end',
     'left',
     'right',
+    // new values to match floating-ui
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
+    'left-end',
+    'left-start',
+    'right-end',
+    'right-start',
   ]),
 
   /**

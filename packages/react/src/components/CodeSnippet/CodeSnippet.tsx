@@ -36,13 +36,17 @@ export interface CodeSnippetProps {
    */
   align?:
     | 'top'
-    | 'top-left'
-    | 'top-right'
     | 'bottom'
-    | 'bottom-left'
-    | 'bottom-right'
     | 'left'
-    | 'right';
+    | 'right'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left-end'
+    | 'left-start'
+    | 'right-end'
+    | 'right-start';
 
   /**
    * **Experimental**: Will attempt to automatically align the tooltip
@@ -420,13 +424,18 @@ CodeSnippet.propTypes = {
    */
   align: PropTypes.oneOf([
     'top',
-    'top-left',
-    'top-right',
     'bottom',
-    'bottom-left',
-    'bottom-right',
     'left',
     'right',
+    // new values to match floating-ui
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
+    'left-end',
+    'left-start',
+    'right-end',
+    'right-start',
   ]),
 
   /**
