@@ -54,6 +54,11 @@ interface TableProps {
    * `true` to add useZebraStyles striping.
    */
   useZebraStyles?: boolean;
+
+  /**
+   * `true` to display batch actions bar bellow the datagrid toolbar.
+   */
+  useDoubleToolbar?: boolean;
 }
 
 const isElementWrappingContent = (
@@ -102,6 +107,7 @@ export const Table = ({
   className,
   children,
   useZebraStyles,
+  useDoubleToolbar,
   size = 'lg',
   isSortable = false,
   useStaticWidth,
@@ -287,6 +293,11 @@ Table.propTypes = {
    * `true` to add useZebraStyles striping.
    */
   useZebraStyles: PropTypes.bool,
+
+  /**
+   * `true` to display batch actions bar bellow the datagrid toolbar.
+   */
+  useDoubleToolbar: PropTypes.bool,
 };
 
 export default Table;
