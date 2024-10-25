@@ -34,7 +34,6 @@
     "build": "yarn build:es & yarn build:cjs & yarn build:types",
     "watch": "yarn build:es --watch & yarn build:cjs --watch",
     "clean": "rimraf es lib",
-    "test": "echo yay && exit 0",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
