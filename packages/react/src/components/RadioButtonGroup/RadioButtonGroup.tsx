@@ -253,17 +253,20 @@ const RadioButtonGroup = React.forwardRef(
       });
     }
 
+    const legendTextClasses = classNames(`${prefix}--label`, {
+      [`${prefix}--visually-hidden`]: hideLegendText,
+    });
+
     return (
       <div className={wrapperClasses} ref={mergeRefs(divRef, ref)}>
         <fieldset
-          aria-label={legendText?.toString()}
           className={fieldsetClasses}
           disabled={disabled}
           data-invalid={invalid ? true : undefined}
           aria-describedby={showHelper && helperText ? helperId : undefined}
           {...rest}>
-          {legendText && !hideLegendText && (
-            <Legend className={`${prefix}--label`}>
+          {legendText && (
+            <Legend className={legendTextClasses}>
               {legendText}
               {normalizedSlug}
             </Legend>
