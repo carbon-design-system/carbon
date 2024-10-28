@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import Close16 from '@carbon/icons/lib/close/16';
+import Close16 from '@carbon/icons/lib/close/16.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListener from '../../globals/decorators/host-listener';
@@ -34,12 +34,16 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * Handles `slotchange` event.
    */
-  protected _handleSlugSlotChange({ target }: Event) {
+  protected _handleAILabelSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSTag).aiLabelItem
+            ) ||
+            // remove reference of slug in v12
+            (elem as HTMLElement).matches(
               (this.constructor as typeof CDSTag).slugItem
             )
           : false
@@ -135,13 +139,14 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
     const {
       disabled,
       filter,
-      _handleSlugSlotChange: handleSlugSlotChange,
+      _handleAILabelSlotChange: handleAILabelSlotChange,
       title,
     } = this;
     return html`
       <slot name="icon"></slot>
       <slot></slot>
-      <slot name="slug" @slotchange="${handleSlugSlotChange}"></slot>
+      <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>
+      <slot name="slug" @slotchange="${handleAILabelSlotChange}"></slot>
       ${filter
         ? html`
             <button class="${prefix}--tag__close-icon" ?disabled=${disabled}>
@@ -154,9 +159,18 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
 
   /**
    * A selector that will return the slug item.
+   *
+   * remove in v12
    */
   static get slugItem() {
     return `${prefix}-slug`;
+  }
+
+  /**
+   * A selector that will return the AI Label item.
+   */
+  static get aiLabelItem() {
+    return `${prefix}-ai-label`;
   }
 
   /**

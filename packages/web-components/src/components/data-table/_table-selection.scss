@@ -41,7 +41,6 @@
 }
 
 :host(#{$prefix}-table-row[selected]) {
-  /* stylelint-disable-next-line no-duplicate-selectors */
   .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
   .#{$prefix}--table-expand,
@@ -53,7 +52,6 @@
   }
 
   &:hover {
-    /* stylelint-disable-next-line no-duplicate-selectors */
     .#{$prefix}--table-column-checkbox,
     ::slotted(#{$prefix}-table-cell),
     .#{$prefix}--table-expand,
@@ -70,9 +68,9 @@
   display: none !important;
 }
 
-:host(#{$prefix}-table-expanded-row[selected][slug]:not([highlighted])),
-:host(#{$prefix}-table-row[selected][slug]),
-:host(#{$prefix}-table-row[expandable][selected][slug]) {
+:host(#{$prefix}-table-expanded-row[selected][ai-label]:not([highlighted])),
+:host(#{$prefix}-table-row[selected][ai-label]),
+:host(#{$prefix}-table-row[expandable][selected][ai-label]) {
   @include ai-table-gradient('selected');
 
   background-attachment: fixed;
@@ -83,7 +81,6 @@
 
     background-attachment: fixed;
 
-    /* stylelint-disable-next-line no-duplicate-selectors */
     .#{$prefix}--table-column-checkbox,
     ::slotted(#{$prefix}-table-cell),
     .#{$prefix}--table-expand,
@@ -92,7 +89,6 @@
     }
   }
 
-  /* stylelint-disable-next-line no-duplicate-selectors */
   .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
   .#{$prefix}--table-expand,

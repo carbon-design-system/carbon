@@ -17,7 +17,7 @@
 @use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/components/slug/index' as *;
-@use '../toggle-tip/toggletip.scss';
+@use '../toggle-tip/toggletip';
 
 // importing tag color tokens for the styling slug in tag component
 @use '@carbon/styles/scss/components/tag/index' as *;
@@ -49,7 +49,8 @@ $colorMap: (
     border: 1px solid transparent;
     border-radius: $spacing-03;
     // Need to make tokens
-    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+    box-shadow:
+      inset 0 -80px 70px -65px $ai-inner-shadow,
       -40px 44px 60px -24px $ai-popover-shadow-outer-01,
       -56px 64px 64px -24px $ai-popover-shadow-outer-02;
     color: $text-primary;

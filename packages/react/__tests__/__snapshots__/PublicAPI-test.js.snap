@@ -2000,7 +2000,8 @@ Map {
       },
     },
     "TableCell": Object {
-      "displayName": "TableCell",
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
     },
     "TableContainer": Object {
       "propTypes": Object {
@@ -3976,6 +3977,16 @@ Map {
   },
   "Grid" => Object {
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "as": Object {
         "args": Array [
           Array [
@@ -6991,6 +7002,12 @@ Map {
       "id": Object {
         "type": "string",
       },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -8016,7 +8033,8 @@ Map {
     },
   },
   "TableCell" => Object {
-    "displayName": "TableCell",
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "TableContainer" => Object {
     "propTypes": Object {
