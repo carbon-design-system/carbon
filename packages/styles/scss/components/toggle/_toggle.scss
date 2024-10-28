@@ -79,7 +79,9 @@
     .#{$prefix}--toggle__switch,
   .#{$prefix}--toggle:not(.#{$prefix}--toggle--disabled):active
     .#{$prefix}--toggle__switch {
-    box-shadow: 0 0 0 1px $focus-inset, 0 0 0 3px $focus;
+    box-shadow:
+      0 0 0 1px $focus-inset,
+      0 0 0 3px $focus;
   }
 
   .#{$prefix}--toggle__switch--checked {

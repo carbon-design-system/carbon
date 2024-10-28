@@ -247,13 +247,11 @@ export const RangeWithCalendarWithLayer = {
 };
 
 export const Skeleton = {
-  render: () =>
-    html`
-      <cds-date-picker-input-skeleton
-        kind="from"></cds-date-picker-input-skeleton>
-      <cds-date-picker-input-skeleton
-        kind="to"></cds-date-picker-input-skeleton>
-    `,
+  render: () => html`
+    <cds-date-picker-input-skeleton
+      kind="from"></cds-date-picker-input-skeleton>
+    <cds-date-picker-input-skeleton kind="to"></cds-date-picker-input-skeleton>
+  `,
   decorators: [(story) => html` <div>${story()}</div> `],
   parameters: {
     percy: {
