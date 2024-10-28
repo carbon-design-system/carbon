@@ -18,7 +18,7 @@ const requiredProps = {
   iconDescription,
   filenameStatus: 'uploading',
   labelTitle: 'Upload files',
-  labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',
+  labelDescription: 'Max file size is 500 MB. Only .jpg files are supported.',
 };
 
 describe('FileUploader', () => {
