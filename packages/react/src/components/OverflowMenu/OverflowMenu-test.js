@@ -287,4 +287,26 @@ describe('OverflowMenu', () => {
     );
     expect(newMenu).toHaveAttribute('data-floating-menu-direction', 'bottom');
   });
+  it('focuses the next enabled menu item when pressing ArrowDown', async () => {
+    render(
+      <OverflowMenu iconDescription="custom-icon" className="extra-class">
+        <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
+        <OverflowMenuItem
+          itemText="Item 2"
+          disabled
+          data-testid="menu-item-2"
+        />
+        <OverflowMenuItem itemText="Item 3" data-testid="menu-item-3" />
+      </OverflowMenu>
+    );
+    const button = screen.getByRole('button', { name: 'custom-icon' });
+    fireEvent.click(button);
+
+    const menuItem1 = screen.getByText('Item 1').closest('button');
+    const menuItem3 = screen.getByText('Item 3').closest('button');
+
+    menuItem1.focus();
+    fireEvent.keyDown(menuItem1, { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(menuItem3).toHaveFocus();
+  });
 });
