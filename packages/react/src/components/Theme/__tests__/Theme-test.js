@@ -115,8 +115,8 @@ describe('usePrefersDarkScheme', () => {
 });
 
 describe('GlobalTheme', () => {
-  jest.resetModules();
   it('should set the theme globally', () => {
+    jest.resetModules();
     function TestComponent({ id }) {
       const { theme } = useTheme();
       return (
