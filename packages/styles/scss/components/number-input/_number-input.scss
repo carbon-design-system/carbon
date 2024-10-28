@@ -521,15 +521,15 @@
   }
 
   .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--sm {
-    block-size: convert.to-rem(32px);
+    block-size: $spacing-07;
   }
 
   .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--md {
-    block-size: convert.to-rem(40px);
+    block-size: $spacing-08;
   }
 
   .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--lg {
-    block-size: convert.to-rem(48px);
+    block-size: $spacing-09;
   }
 
   // Windows HCM fix
