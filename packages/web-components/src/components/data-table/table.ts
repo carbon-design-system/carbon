@@ -262,6 +262,22 @@ class CDSTable extends HostListenerMixin(LitElement) {
     this.withHeader = hasContent;
   }
 
+  private _handleTableBodyChange() {
+    // cds-table-head or cds-table-body may have changed
+    this._tableBody = this.querySelector(
+      (this.constructor as typeof CDSTable).selectorTableBody
+    );
+    this._tableExpandedRows = this.querySelectorAll(
+      (this.constructor as typeof CDSTable).selectorTableExpandedRows
+    );
+    this._tableRows = this.querySelectorAll(
+      (this.constructor as typeof CDSTable).selectorTableRow
+    );
+
+    // update any row dependant features
+    this.updateExpandable();
+  }
+
   private _handleSortAction(columnIndex, sortDirection) {
     const rows = [...this._tableRows];
 
@@ -669,15 +685,19 @@ class CDSTable extends HostListenerMixin(LitElement) {
     this.headerCount = this._tableHeaderRow.children.length;
   }
 
+  updateExpandable() {
+    this._tableRows.forEach((e, index) => {
+      e.expandable = this.expandable;
+      e.setAttribute('sort-id', index);
+    });
+    this._tableHeaderRow.expandable = this.expandable;
+    this._tableHeaderRow.batchExpansion = this.batchExpansion;
+    this.headerCount += this.expandable ? 1 : -1;
+  }
+
   updated(changedProperties) {
     if (changedProperties.has('expandable')) {
-      this._tableRows.forEach((e, index) => {
-        e.expandable = this.expandable;
-        e.setAttribute('sort-id', index);
-      });
-      this._tableHeaderRow.expandable = this.expandable;
-      this._tableHeaderRow.batchExpansion = this.batchExpansion;
-      this.headerCount += this.expandable ? 1 : -1;
+      this.updateExpandable();
     }
 
     if (changedProperties.has('headerCount')) {
@@ -843,10 +863,14 @@ class CDSTable extends HostListenerMixin(LitElement) {
       ${false // TODO: replace with this.stickyHeader when feature is fully implemented
         ? html` <div class="${prefix}--data-table_inner-container">
             <div class="${prefix}--data-table-content">
-              <slot></slot>
+              <slot
+                @cds-table-body-content-change="${this
+                  ._handleTableBodyChange}"></slot>
             </div>
           </div>`
-        : html`<slot></slot>`}
+        : html`<slot
+            @cds-table-body-content-change="${this
+              ._handleTableBodyChange}"></slot>`}
     `;
   }
 
