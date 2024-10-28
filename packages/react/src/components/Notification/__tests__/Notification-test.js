@@ -400,4 +400,52 @@ describe('Callout', () => {
     expect(spy).not.toHaveBeenCalled();
     spy.mockRestore();
   });
+
+  it('should redirect deprecated kinds in development', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const { container: successContainer } = render(
+      <Callout kind="success" title="Test">
+        Content
+      </Callout>
+    );
+    expect(successContainer.firstChild).toHaveClass(
+      `${prefix}--actionable-notification--info`
+    );
+    expect(successContainer.firstChild).not.toHaveClass(
+      `${prefix}--actionable-notification--success`
+    );
+
+    const { container: warningContainer } = render(
+      <Callout kind="warning" title="Test">
+        Content
+      </Callout>
+    );
+    expect(warningContainer.firstChild).toHaveClass(
+      `${prefix}--actionable-notification--error`
+    );
+    expect(warningContainer.firstChild).not.toHaveClass(
+      `${prefix}--actionable-notification--warning`
+    );
+
+    try {
+      expect(spy).toHaveBeenCalled();
+    } finally {
+      spy.mockRestore();
+    }
+  });
+
+  it('enforces aria-describedby on interactive children elements', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    expect(() => {
+      render(
+        <Callout title="Notification title" titleId="titleId">
+          <button type="button" aria-describedby="titleId">
+            Sample button text
+          </button>
+        </Callout>
+      );
+    }).not.toThrow();
+    expect(spy).not.toHaveBeenCalled();
+    spy.mockRestore();
+  });
 });

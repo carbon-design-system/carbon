@@ -1308,7 +1308,7 @@ export function Callout({
   const containerClassName = cx(className, {
     [`${prefix}--actionable-notification`]: true,
     [`${prefix}--actionable-notification--low-contrast`]: lowContrast,
-    [`${prefix}--actionable-notification--${kind}`]: kind,
+    [`${prefix}--actionable-notification--${redirectedKind}`]: redirectedKind,
     [`${prefix}--actionable-notification--hide-close-button`]: true,
   });
 
@@ -1324,7 +1324,7 @@ export function Callout({
         <NotificationIcon
           notificationType="inline"
           kind={redirectedKind}
-          iconDescription={statusIconDescription || `${kind} icon`}
+          iconDescription={statusIconDescription || `${redirectedKind} icon`}
         />
         <div className={`${prefix}--actionable-notification__text-wrapper`}>
           {title && (
