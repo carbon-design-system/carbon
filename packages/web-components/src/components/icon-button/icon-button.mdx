@@ -1,0 +1,47 @@
+import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as IconButtonStories from './icon-button.stories';
+
+<Meta of={IconButtonStories} />
+
+# Icon Button
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/icon-button)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/icon-button)
+
+The `icon-button` component is useful when you have a button where the content
+is an icon. In this situation, it's important that the button itself is labeled
+in a way that can be understandable by mouse, keyboard, and screen readers. As a
+result, this component makes it easy to create accessible icon buttons
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/icon-button/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['icon-button'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+```javascript
+import '@carbon/web-components/es/components/icon-button/index.js';
+import Edit16 from '@carbon/icons/lib/edit/16.js';
+
+function App() {
+  return html`<cds-icon-button>
+    ${Edit16({ slot: 'icon' })}
+    <span slot="tooltip-content"> Tooltip text </span>
+  </cds-icon-button>`;
+}
+```
+
+## `<cds-icon-button>` attributes and properties
+
+<ArgTypes of="cds-icon-button" />

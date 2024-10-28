@@ -312,6 +312,11 @@ interface PaginationNavProps
   page?: number;
 
   /**
+   * Specify the size of the PaginationNav.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
    * The total number of items.
    */
   totalItems?: number;
@@ -327,6 +332,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       itemsShown = 10,
       page = 0,
       loop = false,
+      size = 'lg',
       translateWithId: t = translateWithId,
       ...rest
     },
@@ -377,7 +383,8 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
     function pageWouldBeHidden(page: number) {
       const startOffset = itemsDisplayedOnPage <= 4 && page > 1 ? 0 : 1;
 
-      const wouldBeHiddenInFront = page >= startOffset && page <= cuts.front;
+      const wouldBeHiddenInFront =
+        (page >= startOffset && page <= cuts.front) || page === 0;
       const wouldBeHiddenInBack =
         page >= totalItems - cuts.back - 1 && page <= totalItems - 2;
 
@@ -428,7 +435,9 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       setIsOverFlowDisabled(disableOverflow);
     }, [disableOverflow]);
 
-    const classNames = classnames(`${prefix}--pagination-nav`, className);
+    const classNames = classnames(`${prefix}--pagination-nav`, className, {
+      [`${prefix}--layout--size-${size}`]: size,
+    });
 
     const backwardButtonDisabled = !loop && currentPage === 0;
     const forwardButtonDisabled = !loop && currentPage === totalItems - 1;
@@ -631,6 +640,11 @@ PaginationNav.propTypes = {
    * The index of current page.
    */
   page: PropTypes.number,
+
+  /**
+   * Specify the size of the PaginationNav.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * The total number of items.

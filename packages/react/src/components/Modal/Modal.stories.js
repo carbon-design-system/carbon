@@ -12,10 +12,15 @@ import Modal from './Modal';
 import Button from '../Button';
 import Select from '../Select';
 import MultiSelect from '../MultiSelect';
+import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
+import { Popover, PopoverContent } from '../Popover';
 import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
+import ComboBox from '../ComboBox';
 import mdx from './Modal.mdx';
+import { MenuButton } from '../MenuButton';
+import { MenuItem } from '../Menu';
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -40,6 +45,8 @@ export default {
 
 export const Default = () => {
   const [open, setOpen] = useState(true);
+  const [openPopover, setOpenPopover] = useState(false);
+  const menuTargetref = useRef(null);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch modal</Button>
@@ -55,6 +62,26 @@ export const Default = () => {
           organization to a URL that you own. A custom domain can be a shared
           domain, a shared subdomain, or a shared domain and host.
         </p>
+        <Popover open={openPopover} autoAlign>
+          <div className="playground-trigger">
+            <CheckboxIcon
+              onClick={() => {
+                setOpenPopover(!openPopover);
+              }}
+            />
+          </div>
+          <PopoverContent className="p-3">
+            <div>
+              <p className="popover-title">This popover uses autoAlign</p>
+              <p className="popover-details">
+                Scroll the container up, down, left or right to observe how the
+                popover will automatically change its position in attempt to
+                stay within the viewport. This works on initial render in
+                addition to on scroll.
+              </p>
+            </div>
+          </PopoverContent>
+        </Popover>
         <TextInput
           data-modal-primary-focus
           id="text-input-1"
@@ -75,6 +102,16 @@ export const Default = () => {
             { id: 'two', label: 'two', name: 'two' },
           ]}
         />
+        <br />
+        <div ref={menuTargetref}>
+          <MenuButton label="Actions" menuTarget={menuTargetref.current}>
+            <MenuItem label="First action" />
+            <MenuItem label="Second action" />
+            <MenuItem label="Third action" />
+            <MenuItem label="Danger action" kind="danger" />
+          </MenuButton>
+        </div>
+        <br />
         <MultiSelect
           id="test"
           label="Multiselect"
@@ -295,6 +332,7 @@ export const WithScrollingContent = () => {
 
 export const Playground = ({ numberOfButtons, ...args }) => {
   const [open, setOpen] = useState(true);
+  const [popoverOpen, setPopoverOpen] = useState(false);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch modal</Button>
@@ -315,6 +353,21 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           organization to a URL that you own. A custom domain can be a shared
           domain, a shared subdomain, or a shared domain and host.
         </p>
+        <p style={{ marginBottom: '1rem' }}>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <p style={{ marginBottom: '1rem' }}>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <p style={{ marginBottom: '1rem' }}>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
         <TextInput
           data-modal-primary-focus
           id="text-input-1"
@@ -322,10 +375,29 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           placeholder="e.g. github.com"
           style={{ marginBottom: '1rem' }}
         />
-        <Select id="select-1" defaultValue="us-south" labelText="Region">
+        <Select
+          id="select-1"
+          defaultValue="us-south"
+          labelText="Region"
+          style={{ marginBottom: '1rem' }}>
           <SelectItem value="us-south" text="US South" />
           <SelectItem value="us-east" text="US East" />
         </Select>
+
+        <ComboBox
+          allowCustomValue
+          autoAlign={true}
+          id="carbon-combobox"
+          items={[
+            'Apple',
+            'Orange',
+            'Banana',
+            'Pineapple',
+            'Raspberry',
+            'Lime',
+          ]}
+          titleText="ComboBox Example of Floating ui"
+        />
 
         <Dropdown
           autoAlign={true}
@@ -333,7 +405,6 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           style={{ margin: '1rem 0' }}
           titleText="Dropdown Example of Floating ui"
           helperText="This is some helper text"
-          // initialSelectedItem={items[1]}
           label="Option 1"
           items={[
             {
@@ -365,6 +436,24 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           itemToString={(item) => (item ? item.text : '')}
           direction="top"
         />
+        <MultiSelect
+          id="test"
+          label="Multiselect"
+          titleText="Multiselect"
+          helperText="This is some helper text"
+          autoAlign
+          items={[
+            {
+              id: 'downshift-1-item-0',
+              text: 'Option 1',
+            },
+            {
+              id: 'downshift-1-item-1',
+              text: 'Option 2',
+            },
+          ]}
+          itemToString={(item) => (item ? item.text : '')}
+        />
 
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
@@ -373,6 +462,31 @@ export const Playground = ({ numberOfButtons, ...args }) => {
           condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
           Quisque consectetur non risus eu rutrum.{' '}
         </p>
+
+        <Popover align={'bottom-right'} autoAlign open={popoverOpen}>
+          <div className="playground-trigger">
+            <CheckboxIcon
+              onClick={() => {
+                setPopoverOpen(!popoverOpen);
+              }}
+            />
+          </div>
+          <PopoverContent className="p-3">
+            <h2 className="popover-title">Popover Example</h2>
+            <p className="popover-details">
+              This server has 150 GB of block storage remaining.
+            </p>
+          </PopoverContent>
+        </Popover>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
+          accumsan augue. Phasellus consequat augue vitae tellus tincidunt
+          posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices
+          condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus.
+          Quisque consectetur non risus eu rutrum.{' '}
+        </p>
+
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
           accumsan augue. Phasellus consequat augue vitae tellus tincidunt

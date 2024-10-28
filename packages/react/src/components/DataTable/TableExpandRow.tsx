@@ -168,7 +168,7 @@ TableExpandRow.propTypes = {
    * Specify whether this row is expanded or not. This helps coordinate data
    * attributes so that `TableExpandRow` and `TableExpandedRow` work together
    */
-  isExpanded: PropTypes.bool.isRequired,
+  isExpanded: PropTypes.bool,
 
   /**
    * Specify if the row is selected

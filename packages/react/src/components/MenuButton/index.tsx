@@ -28,6 +28,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { useFeatureFlag } from '../FeatureFlags';
 import mergeRefs from '../../tools/mergeRefs';
 
 const validButtonKinds = ['primary', 'tertiary', 'ghost'];
@@ -80,6 +81,11 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
    * Specify the tabIndex of the button.
    */
   tabIndex?: number;
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   */
+  menuTarget?: Element;
 }
 
 const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
@@ -93,14 +99,25 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       size = 'lg',
       menuAlignment = 'bottom',
       tabIndex = 0,
+      menuTarget,
       ...rest
     },
     forwardRef
   ) {
+    // feature flag utilized to separate out only the dynamic styles from @floating-ui
+    // flag is turned on when collision detection (ie. flip, hide) logic is not desired
+    const enableOnlyFloatingStyles = useFeatureFlag(
+      'enable-v12-dynamic-floating-styles'
+    );
+
     const id = useId('MenuButton');
     const prefix = usePrefix();
     const triggerRef = useRef<HTMLDivElement>(null);
-    const middlewares = [flip({ crossAxis: false })];
+    let middlewares: any[] = [];
+
+    if (!enableOnlyFloatingStyles) {
+      middlewares = [flip({ crossAxis: false })];
+    }
 
     if (menuAlignment === 'bottom' || menuAlignment === 'top') {
       middlewares.push(
@@ -113,6 +130,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
         })
       );
     }
+
     const { refs, floatingStyles, placement, middlewareData } = useFloating({
       placement: menuAlignment,
 
@@ -191,7 +209,8 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
           mode="basic"
           size={size}
           open={open}
-          onClose={handleClose}>
+          onClose={handleClose}
+          target={menuTarget}>
           {children}
         </Menu>
       </div>
@@ -250,6 +269,14 @@ MenuButton.propTypes = {
    */
   // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   tabIndex: PropTypes.number,
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   */
+
+  menuTarget: PropTypes.instanceOf(
+    typeof Element !== 'undefined' ? Element : Object
+  ) as React.Validator<Element | null | undefined>,
 };
 
 export { MenuButton };

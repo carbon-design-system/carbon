@@ -99,7 +99,6 @@
     border: 0;
     margin: 0;
     font: inherit;
-    font-feature-settings: 'liga' 1;
     font-size: 100%;
     vertical-align: baseline;
   }
@@ -151,8 +150,6 @@
   blockquote::after,
   q::before,
   q::after {
-    content: '';
-    // stylelint-disable-next-line declaration-block-no-duplicate-properties
     content: none;
   }
 

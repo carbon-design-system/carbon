@@ -1,6 +1,8 @@
-import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import { ArgTypes, Story, Canvas, Meta } from '@storybook/blocks';
 import Tooltip from '../Tooltip';
 import * as FormLabelStories from './FormLabel.stories';
+
+<Meta isTemplate />
 
 # FormLabel
 
@@ -21,13 +23,11 @@ import * as FormLabelStories from './FormLabel.stories';
 
 ## Overview
 
-<Canvas>
-  <Story of={FormLabelStories.Default} />
-</Canvas>
+<Canvas of={FormLabelStories.Default} />
 
 ## Component API
 
-<Props />
+<ArgTypes />
 
 ## Feedback
 

@@ -8,31 +8,23 @@
 'use strict';
 
 import remarkGfm from 'remark-gfm';
-const fs = require('fs');
-const glob = require('fast-glob');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const path = require('path');
+import fs from 'fs';
+import glob from 'fast-glob';
+import path from 'path';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
 // MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
-const storyGlobs =
-  process.env.STORYBOOK_STORE_7 === 'false'
-    ? [
-        '../src/**/*.stories.js',
-        '../src/**/next/*.stories.js',
-        '../src/**/next/**/*.stories.js',
-        '../src/**/*-story.js',
-      ]
-    : [
-        './Welcome/Welcome.mdx',
-        '../src/**/*.stories.js',
-        '../src/**/*.stories.mdx',
-        '../src/components/Tile/Tile.mdx',
-        '../src/**/next/*.stories.js',
-        '../src/**/next/**/*.stories.js',
-        '../src/**/next/*.stories.mdx',
-        '../src/**/*-story.js',
-      ];
+const storyGlobs = [
+  './Welcome/Welcome.mdx',
+  '../src/**/*.stories.js',
+  '../src/**/*.mdx',
+  '../src/components/Tile/Tile.mdx',
+  '../src/**/next/*.stories.js',
+  '../src/**/next/**/*.stories.js',
+  '../src/**/next/*.mdx',
+  '../src/**/*-story.js',
+];
 
 const stories = glob
   .sync(storyGlobs, {
@@ -87,6 +79,7 @@ const config = {
       },
     },
     '@storybook/addon-storysource',
+    '@storybook/addon-webpack5-compiler-babel',
     /**
      * For now, the storybook-addon-accessibility-checker fork replaces the @storybook/addon-a11y.
      * Eventually they plan to attempt to get this back into the root addon with the storybook team.
@@ -108,7 +101,6 @@ const config = {
   features: {
     previewCsfV3: true,
     buildStoriesJson: true,
-    storyStoreV7: process.env.STORYBOOK_STORE_7 !== 'false',
   },
   framework: {
     name: '@storybook/react-webpack5',
@@ -120,27 +112,6 @@ const config = {
   },
 
   webpack(config) {
-    const babelLoader = config.module.rules.find((rule) => {
-      return rule.use?.some(({ loader }) => {
-        return loader.includes('babel-loader');
-      });
-    });
-
-    // This is a temporary trick to get `babel-loader` to ignore packages that
-    // are brought in that have an es, lib, or umd directory.
-    //
-    // Typically this is covered by /node_modules/ (which is the default), but
-    // in our case it seems like these dependencies are resolving to where their
-    // symlink points to. In other words, `@carbon/icons-react` becomes
-    // `../icons-react/es/index.js`.
-    //
-    // This results in these files being included in `babel-loader` and causing
-    // the build times to increase dramatically
-    babelLoader.exclude = [
-      /node_modules/,
-      /packages\/.*\/(es|lib|umd)/,
-      /packages\/icons-react\/next/,
-    ];
     config.module.rules.push({
       test: /\.s?css$/,
       sideEffects: true,

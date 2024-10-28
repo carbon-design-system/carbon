@@ -1,0 +1,36 @@
+import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SkeletonPlaceholderStories from './skeleton-placeholder.stories';
+
+<Meta of={SkeletonPlaceholderStories} />
+
+# Skeleton placeholder
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/skeleton-placeholder)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/skeleton-placeholder)
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/skeleton-placeholder/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['skeleton-placeholder'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-skeleton-placeholder></cds-skeleton-placeholder>
+```
+
+## `<cds-skeleton-placeholder>` attributes, properties and events
+
+<ArgTypes of="cds-skeleton-placeholder" />

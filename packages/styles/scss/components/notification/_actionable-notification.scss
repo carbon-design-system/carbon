@@ -336,8 +336,7 @@
     margin-inline-start: calc(
       #{$spacing-07} + #{convert.to-rem(20px)} - #{convert.to-rem(2px)}
     );
-    padding-inline-end: $spacing-05;
-    padding-inline-start: $spacing-05;
+    padding-inline: $spacing-05;
   }
 
   // Tertiary button styles by default use mostly "inverse" tokens. Since the non-low-contrast notification
@@ -476,7 +475,7 @@
   }
 
   // Windows HCM fix
-  /* stylelint-disable */
+
   .#{$prefix}--actionable-notification {
     @include high-contrast-mode('outline');
   }
@@ -492,5 +491,4 @@
     .#{$prefix}--actionable-notification__close-icon {
     @include high-contrast-mode('icon-fill');
   }
-  /* stylelint-enable */
 }

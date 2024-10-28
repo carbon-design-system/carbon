@@ -1,0 +1,68 @@
+import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as OverflowMenuStories from './overflow-menu.stories';
+
+<Meta of={OverflowMenuStories} />
+
+# Overflow menu
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/overflow-menu)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/overflow-menu)
+
+Overflow menu is used when additional options are available to the user and
+there is a space constraint. Create overflow menu item components for each
+option on the menu.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/overflow-menu/index.js';
+import OverflowMenuVertical16 from '@carbon/icons/lib/overflow-menu--vertical/16.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['overflow-menu'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-overflow-menu>
+  ${OverflowMenuVertical16({ class: `${prefix}--overflow-menu__icon`, slot:
+  'icon', })}
+  <span slot="tooltip-content"> Options </span>
+  <cds-overflow-menu-body>
+    <cds-overflow-menu-item>Option 1</cds-overflow-menu-item>
+    <cds-overflow-menu-item>Option 2</cds-overflow-menu-item>
+    <cds-overflow-menu-item>Option 3</cds-overflow-menu-item>
+    <cds-overflow-menu-item>Option 4</cds-overflow-menu-item>
+    <cds-overflow-menu-item>Option 5</cds-overflow-menu-item>
+  </cds-overflow-menu-body>
+</cds-overflow-menu>
+```
+
+## `<cds-overflow-menu>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-overflow-menu open>`) and `false` means not setting the attribute (e.g.
+`<cds-overflow-menu>` without `open` attribute).
+
+<ArgTypes of="cds-overflow-menu" />
+
+## `<cds-overflow-menu-body>` attributes and properties
+
+<ArgTypes of="cds-overflow-menu-body" />
+
+## `<cds-overflow-menu-item>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-overflow-menu-item disabled>`) and `false` means not setting the attribute
+(e.g. `<cds-overflow-menu-item>` without `disabled` attribute).
+
+<ArgTypes of="cds-overflow-menu-item" />

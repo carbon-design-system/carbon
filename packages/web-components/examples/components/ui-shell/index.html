@@ -1,0 +1,45 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>carbon-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+ 
+  <link rel="stylesheet" href="src/styles.scss" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    cds-header:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="src/index.js"></script>
+</head>
+<body>
+  <cds-header aria-label="IBM Platform Name">
+    <cds-header-menu-button
+      button-label-active="Close menu"
+      button-label-inactive="Open menu"
+    ></cds-header-menu-button>
+    <cds-header-name href="javascript:void 0" prefix="IBM">[Platform]</cds-header-name>
+    <cds-header-nav menu-bar-label="IBM [Platform]">
+      <cds-header-nav-item href="javascript:void 0">Link 1</cds-header-nav-item>
+      <cds-header-nav-item href="javascript:void 0">Link 2</cds-header-nav-item>
+      <cds-header-nav-item href="javascript:void 0">Link 3</cds-header-nav-item>
+      <cds-header-menu menu-label="Link 4" trigger-content="Link 4">
+        <cds-header-menu-item href="javascript:void 0">Sub-link 1</cds-header-menu-item>
+        <cds-header-menu-item href="javascript:void 0">Sub-link 2</cds-header-menu-item>
+        <cds-header-menu-item href="javascript:void 0">Sub-link 3</cds-header-menu-item>
+      </cds-header-menu>
+    </cds-header-nav>
+  </cds-header>
+</body>
+</html>

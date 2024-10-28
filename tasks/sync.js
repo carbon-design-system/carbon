@@ -9,7 +9,7 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const prettier = require('prettier'); //eslint-disable-line no-unused-vars
+const prettier = require('prettier2'); //eslint-disable-line no-unused-vars
 const lerna = require('../lerna.json'); //eslint-disable-line no-unused-vars
 const packageJson = require('../package.json');
 

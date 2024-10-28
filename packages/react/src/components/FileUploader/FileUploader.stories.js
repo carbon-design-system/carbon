@@ -8,6 +8,8 @@
 /* eslint-disable no-console */
 
 import React from 'react';
+import ExampleDropContainerApp from './stories/drop-container';
+import ExampleDropContainerAppSingle from './stories/drag-and-drop-single';
 
 import {
   default as FileUploader,
@@ -35,7 +37,7 @@ export const Default = () => {
     <div className="cds--file__container">
       <FileUploader
         labelTitle="Upload files"
-        labelDescription="Max file size is 500mb. Only .jpg files are supported."
+        labelDescription="Max file size is 500 MB. Only .jpg files are supported."
         buttonLabel="Add file"
         buttonKind="primary"
         size="md"
@@ -53,7 +55,7 @@ export const Default = () => {
 export const _FileUploaderItem = (args) => {
   return (
     <FileUploaderItem
-      errorBody="500kb max file size. Select a new file and try again."
+      errorBody="500 KB max file size. Select a new file and try again."
       errorSubject="File size exceeds limit"
       iconDescription="Delete file"
       invalid={false}
@@ -140,7 +142,7 @@ export const _FileUploaderDropContainer = () => (
 );
 
 export const DragAndDropUploadContainerExampleApplication = (args) =>
-  require('./stories/drop-container').default(args);
+  ExampleDropContainerApp(args);
 
 DragAndDropUploadContainerExampleApplication.args = {
   labelText: 'Drag and drop files here or click to upload',
@@ -155,7 +157,7 @@ DragAndDropUploadContainerExampleApplication.argTypes = {
 };
 
 export const DragAndDropUploadSingleContainerExampleApplication = (args) =>
-  require('./stories/drag-and-drop-single').default(args);
+  ExampleDropContainerAppSingle(args);
 
 DragAndDropUploadSingleContainerExampleApplication.args = {
   labelText: 'Drag and drop a file here or click to upload',
@@ -184,7 +186,7 @@ export const Playground = (args) => {
 };
 Playground.args = {
   labelTitle: 'Upload files',
-  labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',
+  labelDescription: 'Max file size is 500 MB. Only .jpg files are supported.',
   buttonLabel: 'Add file',
   buttonKind: 'primary',
   size: 'md',

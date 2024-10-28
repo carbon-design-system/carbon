@@ -22,7 +22,15 @@ import React, {
   useRef,
   useState,
 } from 'react';
-
+import {
+  useHover,
+  useFloating,
+  useInteractions,
+  safePolygon,
+  autoUpdate,
+  offset,
+  FloatingFocusManager,
+} from '@floating-ui/react';
 import { CaretRight, CaretLeft, Checkmark } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
@@ -79,9 +87,6 @@ export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
   shortcut?: string;
 }
 
-const hoverIntentDelay = 150; // in ms
-const leaveIntentDelay = 300; // in ms
-
 export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
   function MenuItem(
     {
@@ -97,26 +102,41 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     },
     forwardRef
   ) {
+    const [submenuOpen, setSubmenuOpen] = useState(false);
+    const [rtl, setRtl] = useState(false);
+
+    const {
+      refs,
+      floatingStyles,
+      context: floatingContext,
+    } = useFloating({
+      open: submenuOpen,
+      onOpenChange: setSubmenuOpen,
+      placement: rtl ? 'left-start' : 'right-start',
+      whileElementsMounted: autoUpdate,
+      middleware: [offset({ mainAxis: -6, crossAxis: -6 })],
+    });
+    const { getReferenceProps, getFloatingProps } = useInteractions([
+      useHover(floatingContext, {
+        delay: 100,
+        enabled: true,
+        handleClose: safePolygon({
+          requireIntent: false,
+        }),
+      }),
+    ]);
+
     const prefix = usePrefix();
     const context = useContext(MenuContext);
 
     const menuItem = useRef<HTMLLIElement>(null);
-    const ref = useMergedRefs<HTMLLIElement>([forwardRef, menuItem]);
-    const [boundaries, setBoundaries] = useState<{
-      x: number | [number, number];
-      y: number | [number, number];
-    }>({ x: -1, y: -1 });
-    const [rtl, setRtl] = useState(false);
+    const ref = useMergedRefs<HTMLLIElement>([
+      forwardRef,
+      menuItem,
+      refs.setReference,
+    ]);
 
     const hasChildren = Boolean(children);
-    const [submenuOpen, setSubmenuOpen] = useState(false);
-    const hoverIntentTimeout = useRef<ReturnType<typeof setTimeout> | null>(
-      null
-    );
-
-    const leaveIntentTimeout = useRef<ReturnType<typeof setTimeout> | null>(
-      null
-    );
 
     const isDisabled = disabled && !hasChildren;
     const isDanger = kind === 'danger' && !hasChildren;
@@ -136,25 +156,11 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
         return;
       }
 
-      const { x, y, width, height } = menuItem.current.getBoundingClientRect();
-      if (rtl) {
-        setBoundaries({
-          x: [-x, x - width],
-          y: [y, y + height],
-        });
-      } else {
-        setBoundaries({
-          x: [x, x + width],
-          y: [y, y + height],
-        });
-      }
-
       setSubmenuOpen(true);
     }
 
     function closeSubmenu() {
       setSubmenuOpen(false);
-      setBoundaries({ x: -1, y: -1 });
     }
 
     function handleClick(
@@ -170,29 +176,6 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
             onClick(e);
           }
         }
-      }
-    }
-
-    function handleMouseEnter() {
-      if (leaveIntentTimeout.current) {
-        // When mouse reenters before closing keep sub menu open
-        clearTimeout(leaveIntentTimeout.current);
-        leaveIntentTimeout.current = null;
-      }
-      hoverIntentTimeout.current = setTimeout(() => {
-        openSubmenu();
-      }, hoverIntentDelay);
-    }
-
-    function handleMouseLeave() {
-      if (hoverIntentTimeout.current) {
-        clearTimeout(hoverIntentTimeout.current);
-        // Avoid closing the sub menu as soon as mouse leaves
-        // prevents accidental closure due to scroll bar
-        leaveIntentTimeout.current = setTimeout(() => {
-          closeSubmenu();
-          menuItem.current?.focus();
-        }, leaveIntentDelay);
       }
     }
 
@@ -245,48 +228,63 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       }
     }, [iconsAllowed, IconElement, context.state.hasIcons, context]);
 
+    useEffect(() => {
+      Object.keys(floatingStyles).forEach((style) => {
+        if (refs.floating.current && style !== 'position') {
+          refs.floating.current.style[style] = floatingStyles[style];
+        }
+      });
+    }, [floatingStyles, refs.floating]);
+
     return (
-      <li
-        role="menuitem"
-        {...rest}
-        ref={ref}
-        className={classNames}
-        tabIndex={-1}
-        aria-disabled={isDisabled ?? undefined}
-        aria-haspopup={hasChildren ?? undefined}
-        aria-expanded={hasChildren ? submenuOpen : undefined}
-        onClick={handleClick}
-        onMouseEnter={hasChildren ? handleMouseEnter : undefined}
-        onMouseLeave={hasChildren ? handleMouseLeave : undefined}
-        onKeyDown={handleKeyDown}>
-        <div className={`${prefix}--menu-item__icon`}>
-          {iconsAllowed && IconElement && <IconElement />}
-        </div>
-        <Text as="div" className={`${prefix}--menu-item__label`} title={label}>
-          {label}
-        </Text>
-        {shortcut && !hasChildren && (
-          <div className={`${prefix}--menu-item__shortcut`}>{shortcut}</div>
-        )}
-        {hasChildren && (
-          <>
-            <div className={`${prefix}--menu-item__shortcut`}>
-              {rtl ? <CaretLeft /> : <CaretRight />}
-            </div>
-            <Menu
-              label={label}
-              open={submenuOpen}
-              onClose={() => {
-                closeSubmenu();
-                menuItem.current?.focus();
-              }}
-              x={boundaries.x}
-              y={boundaries.y}>
-              {children}
-            </Menu>
-          </>
-        )}
-      </li>
+      <FloatingFocusManager
+        context={floatingContext}
+        order={['reference', 'floating']}
+        modal={false}>
+        <li
+          role="menuitem"
+          {...rest}
+          ref={ref}
+          className={classNames}
+          tabIndex={-1}
+          aria-disabled={isDisabled ?? undefined}
+          aria-haspopup={hasChildren ?? undefined}
+          aria-expanded={hasChildren ? submenuOpen : undefined}
+          onClick={handleClick}
+          onKeyDown={handleKeyDown}
+          {...getReferenceProps()}>
+          <div className={`${prefix}--menu-item__icon`}>
+            {iconsAllowed && IconElement && <IconElement />}
+          </div>
+          <Text
+            as="div"
+            className={`${prefix}--menu-item__label`}
+            title={label}>
+            {label}
+          </Text>
+          {shortcut && !hasChildren && (
+            <div className={`${prefix}--menu-item__shortcut`}>{shortcut}</div>
+          )}
+          {hasChildren && (
+            <>
+              <div className={`${prefix}--menu-item__shortcut`}>
+                {rtl ? <CaretLeft /> : <CaretRight />}
+              </div>
+              <Menu
+                label={label}
+                open={submenuOpen}
+                onClose={() => {
+                  closeSubmenu();
+                  menuItem.current?.focus();
+                }}
+                ref={refs.setFloating}
+                {...getFloatingProps()}>
+                {children}
+              </Menu>
+            </>
+          )}
+        </li>
+      </FloatingFocusManager>
     );
   }
 );
@@ -559,10 +557,6 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
 
   function handleClick(item, e) {
     setSelection(item);
-
-    if (onChange) {
-      onChange(e);
-    }
   }
 
   useEffect(() => {

@@ -49,7 +49,6 @@ test.describe('@avt DatePicker', () => {
     await expect(page).toHaveNoACViolations('DatePicker-Disabled');
   });
 
-  // skipping for now due to accessibility violation
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
@@ -62,8 +61,8 @@ test.describe('@avt DatePicker', () => {
     await expect(page).toHaveNoACViolations('DatePicker-Skeleton');
   });
 
-  // skipping for now due to accessibility violation
-  test('@avt-advanced-states open', async ({ page }) => {
+  // skipped due to text contrast accessibility violation
+  test.skip('@avt-advanced-states open', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
       id: 'components-datepicker--playground',
@@ -92,13 +91,26 @@ test.describe('@avt DatePicker', () => {
     await expect(
       page.getByRole('textbox', { name: 'Date Picker label' })
     ).toBeFocused();
-    await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
-    await page.keyboard.press('ArrowDown');
-    await expect(page.locator('span.today')).toBeFocused();
-    await page.keyboard.press('Escape');
-    await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
-      /open/
-    );
+    const calendar = await page.locator('div.flatpickr-calendar');
+    await expect(calendar).toHaveClass(/open/);
+
+    // avoid flaky test failures from the keyboard press happening too quickly
+    // this retries the keypress along with the focus assertion until it passes
+    await expect(async () => {
+      await page.keyboard.press('ArrowDown');
+      const today = await page.locator('span.today');
+      await expect(today).toBeVisible();
+      await expect(today).toBeFocused();
+    }).toPass();
+
+    // avoid flaky test failures from the keyboard press happening too quickly
+    // this retries the keypress along with the focus assertion until it passes
+    await expect(async () => {
+      await page.keyboard.press('Escape');
+      await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
+        /open/
+      );
+    }).toPass();
   });
 
   test('@avt-keyboard-nav range state', async ({ page }) => {

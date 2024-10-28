@@ -111,7 +111,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     header: DataTableHeader;
     isSortable?: boolean;
     onClick?: (
-      e: React.MouseEvent,
+      e: React.MouseEvent<HTMLButtonElement>,
       sortState: { sortHeaderKey: string; sortDirection: DataTableSortState }
     ) => void;
     [key: string]: unknown;
@@ -119,23 +119,26 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     isSortable: boolean | undefined;
     isSortHeader: boolean;
     key: string;
-    onClick: (e: MouseEvent) => void;
+    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
     sortDirection: DataTableSortState;
     [key: string]: unknown;
   };
   getExpandHeaderProps: (getExpandHeaderPropsArgs?: {
-    onClick?: (e: MouseEvent, expandState: { isExpanded?: boolean }) => void;
-    onExpand?: (e: MouseEvent) => void;
+    onClick?: (
+      e: React.MouseEvent<HTMLButtonElement>,
+      expandState: { isExpanded?: boolean }
+    ) => void;
+    onExpand?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     [key: string]: unknown;
   }) => {
     ariaLabel: string; // TODO Remove in v12
     ['aria-label']: string;
     isExpanded: boolean;
-    onExpand: (e: MouseEvent) => void;
+    onExpand: (e: React.MouseEvent<HTMLButtonElement>) => void;
     [key: string]: unknown;
   };
   getRowProps: (getRowPropsArgs: {
-    onClick?: (e: MouseEvent) => void;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
@@ -145,7 +148,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     isExpanded?: boolean;
     isSelected?: boolean;
     key: string;
-    onExpand: (e: MouseEvent) => void;
+    onExpand: (e: React.MouseEvent<HTMLButtonElement>) => void;
     [key: string]: unknown;
   };
   getExpandedRowProps: (getExpandedRowPropsArgs: {
@@ -156,7 +159,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     [key: string]: unknown;
   };
   getSelectionProps: (getSelectionPropsArgs?: {
-    onClick?: (e: MouseEvent) => void;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
@@ -167,7 +170,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     id: string;
     indeterminate?: boolean;
     name: string;
-    onSelect: (e: MouseEvent) => void;
+    onSelect: (e: React.MouseEvent<HTMLInputElement>) => void;
     radio?: boolean | undefined;
     [key: string]: unknown;
   };
@@ -456,7 +459,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
   }: {
     header: DataTableHeader;
     onClick?: (
-      e: React.MouseEvent,
+      e: React.MouseEvent<HTMLButtonElement>,
       sortState: { sortHeaderKey: string; sortDirection: DataTableSortState }
     ) => void;
     isSortable?: boolean;
@@ -495,8 +498,11 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
    */
   getExpandHeaderProps = (
     { onClick, onExpand, ...rest } = {} as {
-      onClick?: (e: MouseEvent, expandState: { isExpanded: boolean }) => void;
-      onExpand?: (e: MouseEvent) => void;
+      onClick?: (
+        e: React.MouseEvent<HTMLButtonElement>,
+        expandState: { isExpanded: boolean }
+      ) => void;
+      onExpand?: (e: React.MouseEvent<HTMLButtonElement>) => void;
       [key: string]: unknown;
     }
   ) => {
@@ -562,7 +568,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
     onClick,
     ...rest
   }: {
-    onClick?: (e: MouseEvent) => void;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
@@ -617,7 +623,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
    */
   getSelectionProps = (
     { onClick, row, ...rest } = {} as {
-      onClick?: (e: MouseEvent) => void;
+      onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
       row: DataTableRow<ColTypes>;
       [key: string]: unknown;
     }
@@ -637,7 +643,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
           onClick,
         ]),
         id: `${this.getTablePrefix()}__select-row-${row.id}`,
-        name: `select-row`,
+        name: `select-row-${this.instanceId}`,
         ariaLabel: t(translationKey), // TODO remove in v12
         'aria-label': t(translationKey),
         disabled: row.disabled,
