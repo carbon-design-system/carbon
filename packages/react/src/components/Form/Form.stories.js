@@ -151,7 +151,7 @@ export const Default = () => (
           {...fileUploaderEvents}
           id="file-1"
           role="button"
-          labelDescription="Max file size is 500mb. Only .jpg files are supported."
+          labelDescription="Max file size is 500 MB. Only .jpg files are supported."
           buttonLabel="Add file"
           buttonKind="primary"
           size="md"
