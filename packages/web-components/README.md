@@ -55,7 +55,7 @@ The CDN artifacts define the custom elements for the browser, so they can be
 directly used once the script tag has been added to the page. For example:
 
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <script
@@ -83,19 +83,14 @@ directly used once the script tag has been added to the page. For example:
 </html>
 ```
 
-Each component is available by the `latest` tag, or referencing a specific
-version (starting at version `v1.16.0`):
-
-```html
-<!-- By `latest` tag -->
-<script
-  type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/accordion.min.js"></script>
+Each component is available by referencing a specific version (starting at
+version `v1.16.0`):
 
 <!-- By specific version -->
 <script
   type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/version/v2.0.0/accordion.min.js"></script>
+  src="https://1.www.s81c.com/common/carbon/web-components/version/v2.16.0/accordion.min.js"></script>
+
 ```
 
 See a working example
@@ -119,8 +114,9 @@ For a full list of components available, check out our
 ## Creating build
 
 ```
-> yarn install
-> yarn build
+
+> yarn install yarn build
+
 ```
 
 You'll see the build artifacts in `/path/to/carbon-web-components/es` directory.
@@ -149,3 +145,4 @@ collection. To opt out, see
 [Opting out of IBM Telemetry data collection](https://github.com/ibm-telemetry/telemetry-js/tree/main#opting-out-of-ibm-telemetry-data-collection).
 For more information on the data being collected, please see the
 [IBM Telemetry documentation](https://github.com/ibm-telemetry/telemetry-js/tree/main#ibm-telemetry-collection-basics).
+```
