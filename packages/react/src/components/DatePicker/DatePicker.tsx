@@ -782,7 +782,15 @@ const DatePicker = React.forwardRef(function DatePicker(
   useEffect(() => {
     if (calendarRef?.current?.set) {
       if (value !== undefined) {
-        calendarRef.current.setDate(value);
+        // To make up for calendarRef.current.setDate not making provision for an empty string or array
+        if (
+          value === '' ||
+          (Array.isArray(value) && value.every((element) => element === ''))
+        ) {
+          calendarRef.current.clear();
+        } else {
+          calendarRef.current.setDate(value);
+        }
       }
       updateClassNames(calendarRef.current, prefix);
       //for simple date picker w/o calendar; initial mount may not have value
