@@ -72,7 +72,9 @@
     &:focus {
       z-index: 3;
       border-color: $focus;
-      box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $focus-inset;
+      box-shadow:
+        inset 0 0 0 2px $focus,
+        inset 0 0 0 3px $focus-inset;
     }
 
     &:focus::after {
@@ -231,7 +233,7 @@
   }
 
   // Windows HCM fix
-  // stylelint-disable-next-line no-duplicate-selectors
+
   .#{$prefix}--content-switcher-btn:focus {
     @include high-contrast-mode('focus');
   }

@@ -39,7 +39,8 @@
     /** opening and closing is used in as allow-discrete is not currently supported wide enough
      * https://caniuse.com/mdn-css_properties_display_is_transitionable
      */
-    transition: opacity $duration-moderate-02 motion(exit, expressive),
+    transition:
+      opacity $duration-moderate-02 motion(exit, expressive),
       transform $duration-moderate-02 motion(exit, expressive),
       overlay $duration-moderate-02 motion(exit, expressive) allow-discrete,
       display $duration-moderate-02 motion(exit, expressive) allow-discrete;
@@ -65,7 +66,8 @@
       opacity: 1;
       transform: translateY(0);
 
-      transition: opacity $duration-moderate-02 motion(entrance, expressive),
+      transition:
+        opacity $duration-moderate-02 motion(entrance, expressive),
         transform $duration-moderate-02 motion(entrance, expressive),
         overlay $duration-moderate-02 motion(entrance, expressive)
           allow-discrete,
@@ -83,7 +85,7 @@
     /*   Before-open state  */
     /* Needs to be after the previous dialog[open] rule to take effect,
     as the specificity is the same */
-    /* stylelint-disable-next-line scss/at-rule-no-unknown */
+
     @starting-style {
       &[open] {
         opacity: 0;
@@ -115,8 +117,8 @@
     /* opening and closing is used in as allow-discrete is not currently supported wide enough
      * https://caniuse.com/mdn-css_properties_display_is_transitionable
      */
-    transition: background-color $duration-moderate-02
-        motion(entrance, expressive),
+    transition:
+      background-color $duration-moderate-02 motion(entrance, expressive),
       opacity $duration-moderate-02 motion(entrance, expressive);
 
     @media (prefers-reduced-motion) {
@@ -127,7 +129,8 @@
   .#{$prefix}--dialog[open]::backdrop {
     opacity: 1;
 
-    transition: background-color $duration-moderate-02 motion(exit, expressive),
+    transition:
+      background-color $duration-moderate-02 motion(exit, expressive),
       opacity $duration-moderate-02 motion(exit, expressive);
 
     @media (prefers-reduced-motion) {
@@ -140,7 +143,7 @@
   */
   /* This starting-style rule cannot be nested inside the above selector
 because the nesting selector cannot represent pseudo-elements. */
-  /* stylelint-disable-next-line scss/at-rule-no-unknown */
+
   @starting-style {
     .#{$prefix}--dialog[open]::backdrop {
       opacity: 0;

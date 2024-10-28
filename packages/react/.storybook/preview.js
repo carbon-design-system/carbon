@@ -265,19 +265,30 @@ const parameters = {
         return titleA.localeCompare(titleB);
       }
 
+      if (titleA !== titleB) {
+        if (idA.includes('flag-details') && !idB.includes('flag-details')) {
+          return -1;
+        }
+        if (idB.includes('flag-details') && !idA.includes('flag-details')) {
+          return 1;
+        }
+        return titleA.localeCompare(titleB);
+      }
+
       // To sort the stories, we first build up a list of matches based on
       // keywords. Each keyword has a specific weight that will be used to
       // determine order later on.
-      const UNKNOWN_KEYWORD = 4;
+      const UNKNOWN_KEYWORD = 5;
       const keywords = new Map([
         ['welcome', 0],
         ['overview', 1],
         ['default', 2],
         ['usage', 3],
-        ['playground', 5],
-        ['development', 6],
-        ['deprecated', 7],
-        ['unstable', 8],
+        ['flag-details', 4],
+        ['playground', 6],
+        ['development', 7],
+        ['deprecated', 8],
+        ['unstable', 9],
       ]);
       const matches = new Map();
 

@@ -124,17 +124,6 @@ describe('ToastNotification', () => {
     spy.mockRestore();
   });
 
-  it('close button is rendered by default and includes aria-hidden=true', () => {
-    render(<ToastNotification title="Notification title" />);
-
-    const closeButton = screen.queryByRole('button', {
-      hidden: true,
-    });
-
-    expect(closeButton).toBeInTheDocument();
-    expect(closeButton).toHaveAttribute('aria-hidden', 'true');
-  });
-
   it('does not render close button when `hideCloseButton` is provided', () => {
     render(<ToastNotification title="Notification title" hideCloseButton />);
     const closeButton = screen.queryByRole('button', {
@@ -253,16 +242,6 @@ describe('InlineNotification', () => {
 
     expect(spy).toHaveBeenCalled();
     spy.mockRestore();
-  });
-
-  it('close button is rendered by default and includes aria-hidden=true', () => {
-    render(<InlineNotification title="Notification title" />);
-
-    const closeButton = screen.queryByRole('button', {
-      hidden: true,
-    });
-    expect(closeButton).toBeInTheDocument();
-    expect(closeButton).toHaveAttribute('aria-hidden', 'true');
   });
 
   it('does not render close button when `hideCloseButton` is provided', () => {

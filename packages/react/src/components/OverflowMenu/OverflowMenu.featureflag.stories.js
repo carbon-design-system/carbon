@@ -6,10 +6,6 @@
  */
 
 import React, { useRef, useEffect } from 'react';
-import { action } from '@storybook/addon-actions';
-
-import { ArrowsVertical } from '@carbon/icons-react';
-
 import {
   MenuItem,
   MenuItemDivider,
@@ -17,14 +13,12 @@ import {
   MenuItemRadioGroup,
   MenuItemSelectable,
 } from '../Menu';
-
 import { OverflowMenu } from './';
-import mdx from './next/OverflowMenu.mdx';
-
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
+import { FeatureFlags } from '../FeatureFlags';
 
 export default {
-  title: 'Experimental/Feature Flags/OverflowMenu',
+  title: 'Components/OverflowMenu/Feature Flag',
   component: OverflowMenu,
   subcomponents: {
     MenuItem,
@@ -33,11 +27,7 @@ export default {
     MenuItemRadioGroup,
     MenuItemDivider,
   },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
+  tags: ['!autodocs'],
   decorators: [
     (Story) => (
       <WithFeatureFlags>
@@ -45,21 +35,6 @@ export default {
       </WithFeatureFlags>
     ),
   ],
-};
-
-export const _OverflowMenu = () => {
-  const onClick = action('onClick (MenuItem)');
-
-  return (
-    <OverflowMenu>
-      <MenuItem label="Stop app" onClick={onClick} />
-      <MenuItem label="Restart app" onClick={onClick} />
-      <MenuItem label="Rename app" onClick={onClick} />
-      <MenuItem label="Edit routes and access" onClick={onClick} />
-      <MenuItemDivider />
-      <MenuItem label="Delete app" kind="danger" onClick={onClick} />
-    </OverflowMenu>
-  );
 };
 
 export const AutoAlign = () => {
@@ -94,34 +69,22 @@ export const AutoAlign = () => {
 
 export const Nested = () => {
   return (
-    <OverflowMenu>
-      <MenuItem label="Level 1" />
-      <MenuItem label="Level 1" />
-      <MenuItem label="Level 1">
-        <MenuItem label="Level 2" />
-        <MenuItem label="Level 2" />
-        <MenuItem label="Level 2" />
-      </MenuItem>
-      <MenuItem label="Level 1" />
-    </OverflowMenu>
-  );
-};
-
-export const CustomIcon = () => {
-  return (
-    <OverflowMenu renderIcon={ArrowsVertical}>
-      <MenuItemRadioGroup
-        label="Sort by"
-        items={['Name', 'Date created', 'Date last modified', 'Size']}
-        defaultSelectedItem="Date created"
-      />
-      <MenuItemDivider />
-      <MenuItemRadioGroup
-        label="Sorting direction"
-        items={['Ascending', 'Descending']}
-        defaultSelectedItem="Descending"
-      />
-    </OverflowMenu>
+    <FeatureFlags
+      flags={{
+        'enable-v12-overflowmenu': true,
+        'enable-v12-dynamic-floating-styles': false,
+      }}>
+      <OverflowMenu>
+        <MenuItem label="Level 1" />
+        <MenuItem label="Level 1" />
+        <MenuItem label="Level 1">
+          <MenuItem label="Level 2" />
+          <MenuItem label="Level 2" />
+          <MenuItem label="Level 2" />
+        </MenuItem>
+        <MenuItem label="Level 1" />
+      </OverflowMenu>
+    </FeatureFlags>
   );
 };
 
@@ -179,6 +142,21 @@ export const WithMenuAlignment = (args) => {
         </OverflowMenu>
       </div>
     </>
+  );
+};
+
+export const FloatingStyles = () => {
+  return (
+    <div>
+      <OverflowMenu>
+        <MenuItem label="Stop app" />
+        <MenuItem label="Restart app" />
+        <MenuItem label="Rename app" />
+        <MenuItem label="Edit routes and access" />
+        <MenuItemDivider />
+        <MenuItem label="Delete app" kind="danger" />
+      </OverflowMenu>
+    </div>
   );
 };
 

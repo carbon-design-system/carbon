@@ -9,8 +9,8 @@
 
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import CaretLeft16 from '@carbon/icons/lib/caret--left/16';
-import CaretRight16 from '@carbon/icons/lib/caret--right/16';
+import CaretLeft16 from '@carbon/icons/lib/caret--left/16.js';
+import CaretRight16 from '@carbon/icons/lib/caret--right/16.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -383,12 +383,11 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 inline
                 value="${page}">
                 ${Array.from(new Array(totalPages)).map(
-                  (_item, index) =>
-                    html`
-                      <cds-select-item value="${index + 1}">
-                        ${index + 1}
-                      </cds-select-item>
-                    `
+                  (_item, index) => html`
+                    <cds-select-item value="${index + 1}">
+                      ${index + 1}
+                    </cds-select-item>
+                  `
                 )}
               </cds-select>
             `
@@ -401,12 +400,11 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 inline
                 value="${page}">
                 ${Array.from(new Array(totalPages)).map(
-                  (_item, index) =>
-                    html`
-                      <cds-select-item value="${index + 1}">
-                        ${index + 1}
-                      </cds-select-item>
-                    `
+                  (_item, index) => html`
+                    <cds-select-item value="${index + 1}">
+                      ${index + 1}
+                    </cds-select-item>
+                  `
                 )}
               </cds-select>
               <span class="${prefix}--pagination__text"

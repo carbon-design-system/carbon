@@ -1,0 +1,99 @@
+import { Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
+import * as AILabelDataTableStories from './data-table-ai-label.stories';
+
+<Meta of={AILabelDataTableStories} />
+
+# AI Label in DataTable
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/ai-label)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/ai-label)
+
+The DataTable supports placing an AI Label in both the column header and row.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+The `AI Label` itself is a button that acts as a `Toggletip` trigger. To
+construct the contents of the `AI Label` callout, you can place the desired
+elements as a child of `AI Label` in a div with slot `body-text`, like so:
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/ai-label/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['ai-label'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-ai-label size="mini" alignment="bottom-left">
+  <div slot="body-text">{Content Here}</div>
+</cds-ai-label>
+```
+
+### HTML (with actions)
+
+The `AI Label` also supports the rendering of an action bar at the bottom of the
+callout. To achieve this, you can add elements with `slot="actions"` inside the
+`slot="body-text"` element
+
+```html
+<cds-ai-label size="mini" alignment="bottom-left">
+  <div slot="body-text">
+    {Content Here} {Optional AI Label action bar}
+    <cds-icon-button kind="ghost" slot="actions" size="lg">
+      ${View16({ slot: 'icon' })}
+      <span slot="tooltip-content"> View </span>
+    </cds-icon-button>
+    <cds-icon-button kind="ghost" slot="actions" size="lg">
+      ${FolderOpen16({ slot: 'icon' })}
+      <span slot="tooltip-content"> Open folder</span>
+    </cds-icon-button>
+    <cds-icon-button kind="ghost" slot="actions" size="lg">
+      ${Folders16({ slot: 'icon' })}
+      <span slot="tooltip-content"> Folders </span>
+    </cds-icon-button>
+    <cds-ai-label-action-button>View details</cds-ai-label-action-button>
+  </div>
+</cds-ai-label>
+```
+
+## Using `AI Label` in `DataTable`
+
+### Using as a column header
+
+To use a `AI Label` inside a column header, you'll need to add a `ai-label`
+component to the appropriate `cds-table-header-cell`.
+
+```html
+<cds-table-header-cell>
+  Attached groups
+  <cds-ai-label alignment="bottom-left">
+    <div slot="body-text">{Content Here}</div>
+  </cds-ai-label>
+</cds-table-header-cell>
+```
+
+### Using in a row
+
+To use a `AI Label` inside a `DataTable` row, you'll need to pass in your
+`ai-label` component to `cds-table-row`:
+
+```html
+<cds-table-row>
+  <cds-ai-label alignment="bottom-left">
+    <div slot="body-text">{Content Here}</div>
+  </cds-ai-label>
+  <cds-table-cell>Load Balancer 1</cds-table-cell>
+  <cds-table-cell>HTTP</cds-table-cell>
+  ...
+</cds-table-row>
+```
