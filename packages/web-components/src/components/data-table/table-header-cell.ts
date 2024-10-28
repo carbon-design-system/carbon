@@ -10,8 +10,8 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import ArrowsVertical32 from '@carbon/icons/lib/arrows--vertical/32';
-import ArrowDown32 from '@carbon/icons/lib/arrow--down/32';
+import ArrowsVertical32 from '@carbon/icons/lib/arrows--vertical/32.js';
+import ArrowDown32 from '@carbon/icons/lib/arrow--down/32.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import {
@@ -40,6 +40,9 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
    */
   private _handleClickSortButton(event) {
     if (
+      !(event.target as HTMLElement).matches(
+        (this.constructor as typeof CDSTableHeaderCell).aiLabelItem
+      ) &&
       !(event.target as HTMLElement).matches(
         (this.constructor as typeof CDSTableHeaderCell).slugItem
       )
@@ -75,18 +78,21 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
   /**
    * Handles `slotchange` event.
    */
-  protected _handleSlugSlotChange({ target }: Event) {
+  protected _handleAILabelSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSTableHeaderCell).aiLabelItem
+            ) ||
+            (elem as HTMLElement).matches(
               (this.constructor as typeof CDSTableHeaderCell).slugItem
             )
           : false
       );
     if (hasContent.length > 0) {
-      this._hasSlug = Boolean(hasContent);
+      this._hasAILabel = Boolean(hasContent);
       (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     }
 
@@ -123,9 +129,9 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
   }
 
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   /**
    * `true` if the table has expandable rows
@@ -187,10 +193,10 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
     ) {
       this.sortDirection = TABLE_SORT_DIRECTION.NONE;
     }
-    if (this._hasSlug) {
-      this.setAttribute('slug', '');
+    if (this._hasAILabel) {
+      this.setAttribute('ai-label', '');
     } else {
-      this.removeAttribute('slug');
+      this.removeAttribute('ai-label');
     }
   }
 
@@ -198,7 +204,7 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
     const { sortDirection } = this;
     const labelClasses = classMap({
       [`${prefix}--table-header-label`]: true,
-      [`${prefix}--table-header-label--slug`]: this._hasSlug,
+      [`${prefix}--table-header-label--slug`]: this._hasAILabel,
     });
     if (sortDirection) {
       const sortIcon =
@@ -223,22 +229,37 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
             ></span>
             ${sortIcon}
             <slot
+              name="ai-label"
+              @slotchange="${this._handleAILabelSlotChange}"></slot>
+            <slot
               name="slug"
-              @slotchange="${this._handleSlugSlotChange}"></slot>
+              @slotchange="${this._handleAILabelSlotChange}"></slot>
           </span>
         </button>
       `;
     }
     return html`<span part="label-text" class="${labelClasses}">
       <slot></slot
-      ><slot name="slug" @slotchange="${this._handleSlugSlotChange}"></slot
+      ><slot
+        name="ai-label"
+        @slotchange="${this._handleAILabelSlotChange}"></slot>
+      <slot name="slug" @slotchange="${this._handleAILabelSlotChange}"></slot
     ></span> `;
   }
+
   /**
    * A selector that will return the slug item.
+   *
+   * remove in v12
    */
   static get slugItem() {
     return `${prefix}-slug`;
+  }
+  /**
+   * A selector that will return the AI Label item.
+   */
+  static get aiLabelItem() {
+    return `${prefix}-ai-label`;
   }
 
   /**
