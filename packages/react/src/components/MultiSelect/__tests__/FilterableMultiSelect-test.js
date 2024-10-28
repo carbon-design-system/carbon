@@ -854,4 +854,36 @@ describe('FilterableMultiSelect', () => {
       selectedItems: [],
     });
   });
+
+  it('should handle focus on regular elements', async () => {
+    const user = userEvent.setup();
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    await user.click(combobox);
+
+    // Regular focus should show focus state
+    expect(combobox.closest(`.${prefix}--list-box`)).toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+  });
+
+  it('should maintain focus state appropriately when selecting items', async () => {
+    const user = userEvent.setup();
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    await user.click(combobox);
+
+    // Select an item
+    const options = screen.getAllByRole('option');
+    await user.click(options[0]);
+
+    // Verify focus state is maintained after selection
+    expect(combobox.closest(`.${prefix}--list-box`)).toHaveClass(
+      `${prefix}--multi-select--filterable--input-focused`
+    );
+  });
 });
