@@ -668,61 +668,6 @@ describe('FilterableMultiSelect', () => {
     expect(mockProps.onChange).not.toHaveBeenCalled(); // Selection should remain unchanged
   });
 
-  // it('should clear selection when Backspace is pressed on a selected item', async () => {
-  //   const user = userEvent.setup();
-  //   const initialSelectedItems = [mockProps.items[0]];
-  //   render(
-  //     <FilterableMultiSelect
-  //       {...mockProps}
-  //       initialSelectedItems={initialSelectedItems}
-  //     />
-  //   );
-  //   await waitForPosition();
-
-  //   const selectedItem = screen.getByText('Item 0');
-  //   await user.click(selectedItem);
-  //   await user.keyboard('{Backspace}');
-
-  //   expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });
-  // });
-
-  // it('should clear selection when Delete is pressed on a selected item', async () => {
-  //   const user = userEvent.setup();
-  //   const initialSelectedItems = [mockProps.items[0]];
-  //   render(
-  //     <FilterableMultiSelect
-  //       {...mockProps}
-  //       initialSelectedItems={initialSelectedItems}
-  //     />
-  //   );
-  //   await waitForPosition();
-
-  //   const selectedItem = screen.getByText('Item 0');
-  //   await user.click(selectedItem);
-  //   await user.keyboard('{Delete}');
-
-  //   expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });
-  // });
-
-  // it('should clear selection when Backspace is pressed in the dropdown', async () => {
-  //   const user = userEvent.setup();
-  //   const initialSelectedItems = [mockProps.items[0]];
-  //   render(
-  //     <FilterableMultiSelect
-  //       {...mockProps}
-  //       initialSelectedItems={initialSelectedItems}
-  //       onChange={mockProps.onChange} // Add this line to ensure onChange is passed to the component
-  //     />
-  //   );
-  //   await waitForPosition();
-
-  //   const input = screen.getByRole('combobox');
-  //   await user.click(input);
-  //   await user.keyboard('{Backspace}');
-
-  //   expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });
-  // });
-
   it('should clear selection when the clear selection button is clicked', async () => {
     const user = userEvent.setup();
     const initialSelectedItems = [mockProps.items[0]];
@@ -763,5 +708,150 @@ describe('FilterableMultiSelect', () => {
     await user.click(clearButton);
 
     expect(mockProps.onChange).toHaveBeenLastCalledWith({ selectedItems: [] });
+  });
+
+  it('should clear selection when Backspace is pressed on selected item (SelectedItemKeyDownBackspace)', async () => {
+    const initialSelectedItems = [mockProps.items[0]];
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        initialSelectedItems={initialSelectedItems}
+      />
+    );
+    await waitForPosition();
+
+    // Get the selected item element (the tag/chip showing the selection)
+    const selectionElement = screen.getByLabelText('Clear all selected items');
+    await userEvent.type(selectionElement, '{Backspace}');
+
+    expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });
+  });
+
+  it('should clear selection when Delete is pressed on selected item (SelectedItemKeyDownDelete)', async () => {
+    const initialSelectedItems = [mockProps.items[0]];
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        initialSelectedItems={initialSelectedItems}
+      />
+    );
+    await waitForPosition();
+
+    const selectionElement = screen.getByLabelText('Clear all selected items');
+    await userEvent.type(selectionElement, '{Delete}');
+
+    expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });
+  });
+
+  it('should clear selection when Backspace is pressed in dropdown (DropdownKeyDownBackspace)', async () => {
+    const initialSelectedItems = [mockProps.items[0]];
+    const user = userEvent.setup();
+
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        initialSelectedItems={initialSelectedItems}
+      />
+    );
+    await waitForPosition();
+
+    // First click to open dropdown
+    const combobox = screen.getByRole('combobox');
+    await user.click(combobox);
+
+    // Select the item to ensure it's in focus
+    await user.click(screen.getByText('Item 0'));
+
+    // Press backspace in the input
+    await user.type(combobox, '{Backspace}', { skipClick: true });
+
+    // Verify that onChange was called with empty selection
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItems: [],
+    });
+  });
+
+  it('should clear selection when removal function is triggered (FunctionRemoveSelectedItem)', async () => {
+    const initialSelectedItems = [mockProps.items[0]];
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        initialSelectedItems={initialSelectedItems}
+      />
+    );
+    await waitForPosition();
+
+    const clearButton = screen.getByLabelText('Clear all selected items');
+    await userEvent.click(clearButton);
+
+    expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });
+  });
+
+  it('should clear selection when Backspace is pressed in dropdown with multiple selections', async () => {
+    const initialSelectedItems = [mockProps.items[0], mockProps.items[1]];
+    const user = userEvent.setup();
+
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        initialSelectedItems={initialSelectedItems}
+        selectedItems={initialSelectedItems} // Add this to ensure controlled behavior
+      />
+    );
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+
+    // First focus the input
+    await user.tab(); // Focus into the component
+
+    // Ensure we have the initial selections
+    expect(screen.getByText('2')).toBeInTheDocument();
+    expect(combobox).toHaveValue('');
+
+    // Now trigger the backspace
+    await user.keyboard('{Backspace}');
+
+    // Check that the onChange was called with empty selection
+    expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });
+  });
+
+  it('should clear selection using keyboard navigation and Delete key', async () => {
+    const initialSelectedItems = [mockProps.items[0]];
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        initialSelectedItems={initialSelectedItems}
+      />
+    );
+    await waitForPosition();
+
+    // Navigate to the selected item using Tab
+    await userEvent.tab();
+    await userEvent.keyboard('{Delete}');
+
+    expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });
+  });
+
+  it('should clear selection when Delete is pressed in dropdown', async () => {
+    const initialSelectedItems = [mockProps.items[0]];
+    const user = userEvent.setup();
+
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        initialSelectedItems={initialSelectedItems}
+      />
+    );
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    await user.tab();
+
+    await user.keyboard('{Delete}');
+
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItems: [],
+    });
   });
 });
