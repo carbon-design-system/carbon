@@ -1688,6 +1688,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Thamjith",
+      "name": "Thamjith Thaha",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24909620?v=4",
+      "profile": "https://github.com/Thamjith",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Zoe-Gathercole",
+      "name": "Zoë Gathercole",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56911544?v=4",
+      "profile": "https://github.com/Zoe-Gathercole",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
