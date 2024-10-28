@@ -1697,6 +1697,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Zoe-Gathercole",
+      "name": "Zoë Gathercole",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56911544?v=4",
+      "profile": "https://github.com/Zoe-Gathercole",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
