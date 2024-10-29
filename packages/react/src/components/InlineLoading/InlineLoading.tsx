@@ -71,7 +71,9 @@ const InlineLoading = ({
   ...rest
 }: InlineLoadingProps) => {
   const prefix = usePrefix();
-  const loadingClasses = classNames(`${prefix}--inline-loading`, className);
+  const loadingClasses = classNames(`${prefix}--inline-loading`, className, {
+    [`${prefix}--inline-loading__inactive`]: status === 'inactive',
+  });
   const getLoading = () => {
     let iconLabel = iconDescription ? iconDescription : status;
     if (status === 'error') {
@@ -94,17 +96,12 @@ const InlineLoading = ({
         </CheckmarkFilled>
       );
     }
-    if (status === 'inactive' || status === 'active') {
+    if (status === 'active') {
       if (!iconDescription) {
-        iconLabel = status === 'active' ? 'loading' : 'not loading';
+        iconLabel = 'loading';
       }
       return (
-        <Loading
-          small
-          description={iconLabel}
-          withOverlay={false}
-          active={status === 'active'}
-        />
+        <Loading small description={iconLabel} withOverlay={false} active />
       );
     }
     return undefined;

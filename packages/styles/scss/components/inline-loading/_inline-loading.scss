@@ -80,6 +80,10 @@ $-loading-gap-small: 110;
     }
   }
 
+  .#{$prefix}--inline-loading__inactive {
+    padding-inline-start: $spacing-06;
+  }
+
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
     stroke: $interactive;
   }
