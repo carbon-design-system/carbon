@@ -17,5 +17,5 @@ export default create({
     "'IBM Plex Mono', Menlo, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace",
   brandTitle: `@carbon/web-components ${version}`,
   brandUrl:
-    'https://github.com/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components',
+    'https://github.com/carbon-design-system/carbon/tree/main/packages/web-components',
 });

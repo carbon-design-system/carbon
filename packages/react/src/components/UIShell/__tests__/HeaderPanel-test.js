@@ -7,7 +7,9 @@
 
 import React from 'react';
 import HeaderPanel from '../HeaderPanel';
-import { render, screen } from '@testing-library/react';
+import Switcher from '../Switcher';
+import SwitcherItem from '../SwitcherItem';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 describe('HeaderPanel', () => {
@@ -68,7 +70,7 @@ describe('HeaderPanel', () => {
     it('should call `onHeaderPanelFocus` callback, when defined', async () => {
       const onHeaderPanelFocus = jest.fn();
       render(
-        <HeaderPanel onHeaderPanelFocus={onHeaderPanelFocus}>
+        <HeaderPanel onHeaderPanelFocus={onHeaderPanelFocus} expanded>
           <button type="button">Test</button>
         </HeaderPanel>
       );
@@ -90,6 +92,64 @@ describe('HeaderPanel', () => {
         screen.getByRole('button', { name: 'Test' }).focus();
         await userEvent.keyboard('{Escape}');
       }).not.toThrow();
+    });
+
+    it('should handle click', async () => {
+      const onClick = jest.fn();
+
+      render(
+        <HeaderPanel
+          aria-label="test-aria"
+          expanded
+          href="#"
+          onHeaderPanelFocus={onClick}>
+          <Switcher aria-label="Switcher Container">
+            <SwitcherItem aria-label="Link 1" href="#">
+              Link 1
+            </SwitcherItem>
+          </Switcher>
+        </HeaderPanel>
+      );
+
+      await userEvent.click(document.body);
+
+      expect(onClick).toHaveBeenCalled();
+    });
+
+    it('should handle onKeyDown', async () => {
+      const onKeyDown = jest.fn();
+
+      render(
+        <HeaderPanel
+          expanded
+          href="#"
+          onHeaderPanelFocus={onKeyDown}
+          data-testid="header-panel">
+          <button type="button">Test</button>
+        </HeaderPanel>
+      );
+
+      screen.getByRole('button', { name: 'Test' }).focus();
+
+      await userEvent.keyboard('{Escape}');
+      expect(onKeyDown).toHaveBeenCalled();
+    });
+
+    it('should handle onBlur', async () => {
+      const onBlur = jest.fn();
+
+      render(
+        <HeaderPanel href="#" expanded onHeaderPanelFocus={onBlur}>
+          <div>Panel Content</div>
+        </HeaderPanel>
+      );
+
+      const panel = screen.getByText('Panel Content').parentElement;
+      fireEvent.blur(panel, {
+        relatedTarget: null,
+      });
+
+      expect(onBlur).toHaveBeenCalled();
     });
   });
 });
