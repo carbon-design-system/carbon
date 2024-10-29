@@ -21,7 +21,8 @@
   @extend .#{$prefix}--modal;
 
   opacity: 1;
-  transition: opacity $duration-moderate-02 motion(entrance, expressive),
+  transition:
+    opacity $duration-moderate-02 motion(entrance, expressive),
     visibility 0ms linear;
   visibility: inherit;
 
@@ -128,7 +129,8 @@
     padding-block: $spacing-05 $spacing-07;
 
     &:focus {
-      box-shadow: inset 0 0 0 $button-outline-width $focus,
+      box-shadow:
+        inset 0 0 0 $button-outline-width $focus,
         inset 0 0 0 $button-border-width $background;
     }
   }
@@ -154,14 +156,16 @@
 
   border: 1px solid transparent;
   background-color: $layer;
-  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+  box-shadow:
+    inset 0 -80px 70px -65px $ai-inner-shadow,
     0 24px 40px -24px $ai-drop-shadow;
 }
 
 :host(#{$prefix}-modal[ai-label][has-footer]) .#{$prefix}--modal-container {
   @include ai-popover-gradient('default', 64px, 'layer');
 
-  box-shadow: inset 0 -80px 0 -16px $layer,
+  box-shadow:
+    inset 0 -80px 0 -16px $layer,
     inset 0 -160px 70px -65px $ai-inner-shadow,
     0 24px 40px -24px $ai-drop-shadow;
 }
