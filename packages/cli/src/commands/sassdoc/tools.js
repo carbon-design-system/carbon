@@ -7,7 +7,7 @@
 
 'use strict';
 
-const prettier = require('prettier');
+const prettier = require('prettier2');
 const sassdoc = require('sassdoc');
 const toc = require('markdown-toc');
 

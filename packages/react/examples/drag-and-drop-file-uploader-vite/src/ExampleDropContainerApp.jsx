@@ -19,7 +19,7 @@ function uid(prefix = 'id') {
   lastId++;
   return `${prefix}${lastId}`;
 }
-const  prefix  = 'cds';
+const prefix = 'cds';
 
 export const ExampleDropContainerApp = (props) => {
   const [files, setFiles] = useState([]);
@@ -50,7 +50,7 @@ export const ExampleDropContainerApp = (props) => {
         iconDescription: 'Delete file',
         invalid: true,
         errorSubject: 'File size exceeds limit',
-        errorBody: '500kb max file size. Select a new file and try again.',
+        errorBody: '500 KB max file size. Select a new file and try again.',
       };
       setFiles((files) =>
         files.map((file) =>
@@ -154,7 +154,7 @@ export const ExampleDropContainerApp = (props) => {
     <FormItem>
       <p className={labelClasses}>Upload files</p>
       <p className={helperTextClasses}>
-        Max file size is 500kb. Supported file types are .jpg and .png.
+        Max file size is 500 KB. Supported file types are .jpg and .png.
       </p>
       <FileUploaderDropContainer
         {...props}
