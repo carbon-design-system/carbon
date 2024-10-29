@@ -13,44 +13,30 @@ import { Description, Meta } from '@storybook/blocks';
   - [Available classes](#available-classes)
   - [Example usage](#example-usage)
 
-
 ## Overview
 
-In order to minimize the necessity of using front-end bundlers with the Carbon Web Components CDN artifacts, page level styles artifacts are also
-available to use.
+In order to minimize the necessity of using front-end bundlers with the Carbon
+Web Components CDN artifacts, page level styles artifacts are also available to
+use.
 
 If your application is not already compiling its own version of the below
 artifacts, these can be included as part of your project.
 
-> NOTE: The latest/next tags are moving versions. While beneficial to
-> always stay on the most recent version, it is recommended to choose a specific
+> NOTE: The latest/next tags are moving versions. While beneficial to always
+> stay on the most recent version, it is recommended to choose a specific
 > version and properly test your application when upgrading to a newer version.
-> Check for latest version number on [npm](https://www.npmjs.com/package/@carbon/ibmdotcom-web-components).
+> Check for latest version number on
+> [npm](https://www.npmjs.com/package/@carbon/web-components).
 
 ## Plex fonts and Carbon reset
 
-The following includes Carbon reset, as well as imports Plex fonts necessary for
-the page. Note, this will import `IBM Plex Sans`, `IBM Plex Serif`, and `IBM Plex Mono`.
-
-```html
-// SPECIFIC VERSION
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/version/[v2.x.y]/plex.css" />
-
-// LATEST tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/latest/plex.css" />
-
-// NEXT tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/next/plex.css" />
-```
-
-### Alternative: individual Plex family loading
-
-Plex fonts are also available as CSS artifacts, where the Plex font families can be loaded in individually.
+Plex fonts are also available as CSS artifacts, where the Plex font families can
+be loaded in individually.
 
 Available CSS files:
 
 | IBM Plex Mono (all)             | https://1.www.s81c.com/common/carbon/plex/mono.css                   |
-|---------------------------------|----------------------------------------------------------------------|
+| ------------------------------- | -------------------------------------------------------------------- |
 | IBM Plex Mono Bold              | https://1.www.s81c.com/common/carbon/plex/mono-bold.css              |
 | IBM Plex Mono Bold Italic       | https://1.www.s81c.com/common/carbon/plex/mono-bold-italic.css       |
 | IBM Plex Mono ExtraLight        | https://1.www.s81c.com/common/carbon/plex/mono-extralight.css        |
@@ -69,7 +55,7 @@ Available CSS files:
 | IBM Plex Mono Thin Italic       | https://1.www.s81c.com/common/carbon/plex/mono-thin-italic.css       |
 
 | IBM Plex Sans (all)             | https://1.www.s81c.com/common/carbon/plex/sans.css                   |
-|---------------------------------|----------------------------------------------------------------------|
+| ------------------------------- | -------------------------------------------------------------------- |
 | IBM Plex Sans Bold              | https://1.www.s81c.com/common/carbon/plex/sans-bold.css              |
 | IBM Plex Sans Bold Italic       | https://1.www.s81c.com/common/carbon/plex/sans-bold-italic.css       |
 | IBM Plex Sans ExtraLight        | https://1.www.s81c.com/common/carbon/plex/sans-extralight.css        |
@@ -88,7 +74,7 @@ Available CSS files:
 | IBM Plex Sans Thin Italic       | https://1.www.s81c.com/common/carbon/plex/sans-thin-italic.css       |
 
 | IBM Plex Sans Arabic (all)      | https://1.www.s81c.com/common/carbon/plex/sans-arabic.css            |
-|---------------------------------|----------------------------------------------------------------------|
+| ------------------------------- | -------------------------------------------------------------------- |
 | IBM Plex Sans Arabic Bold       | https://1.www.s81c.com/common/carbon/plex/sans-arabic-bold.css       |
 | IBM Plex Sans Arabic ExtraLight | https://1.www.s81c.com/common/carbon/plex/sans-arabic-extralight.css |
 | IBM Plex Sans Arabic Light      | https://1.www.s81c.com/common/carbon/plex/sans-arabic-light.css      |
@@ -99,7 +85,7 @@ Available CSS files:
 | IBM Plex Sans Arabic Thin       | https://1.www.s81c.com/common/carbon/plex/sans-arabic-thin.css       |
 
 | IBM Plex Sans Cond (all)        | https://1.www.s81c.com/common/carbon/plex/sans-condensed.css                   |
-|---------------------------------|--------------------------------------------------------------------------------|
+| ------------------------------- | ------------------------------------------------------------------------------ |
 | IBM Plex Sans Cond Bold         | https://1.www.s81c.com/common/carbon/plex/sans-condensed-bold.css              |
 | IBM Plex Sans Cond Bold Italic  | https://1.www.s81c.com/common/carbon/plex/sans-condensed-bold-italic.css       |
 | IBM Plex Sans Cond ExtLt        | https://1.www.s81c.com/common/carbon/plex/sans-condensed-extralight.css        |
@@ -118,7 +104,7 @@ Available CSS files:
 | IBM Plex Sans Cond Thin Italic  | https://1.www.s81c.com/common/carbon/plex/sans-condensed-thin-italic.css       |
 
 | IBM Plex Sans Devanagari (all)      | https://1.www.s81c.com/common/carbon/plex/sans-devanagari.css            |
-|-------------------------------------|--------------------------------------------------------------------------|
+| ----------------------------------- | ------------------------------------------------------------------------ |
 | IBM Plex Sans Devanagari Bold       | https://1.www.s81c.com/common/carbon/plex/sans-devanagari-bold.css       |
 | IBM Plex Sans Devanagari ExtraLight | https://1.www.s81c.com/common/carbon/plex/sans-devanagari-extralight.css |
 | IBM Plex Sans Devanagari Light      | https://1.www.s81c.com/common/carbon/plex/sans-devanagari-light.css      |
@@ -129,7 +115,7 @@ Available CSS files:
 | IBM Plex Sans Devanagari Thin       | https://1.www.s81c.com/common/carbon/plex/sans-devanagari-thin.css       |
 
 | IBM Plex Sans Hebrew (all)      | https://1.www.s81c.com/common/carbon/plex/sans-hebrew.css            |
-|---------------------------------|----------------------------------------------------------------------|
+| ------------------------------- | -------------------------------------------------------------------- |
 | IBM Plex Sans Hebrew Bold       | https://1.www.s81c.com/common/carbon/plex/sans-hebrew-bold.css       |
 | IBM Plex Sans Hebrew ExtraLight | https://1.www.s81c.com/common/carbon/plex/sans-hebrew-extralight.css |
 | IBM Plex Sans Hebrew Light      | https://1.www.s81c.com/common/carbon/plex/sans-hebrew-light.css      |
@@ -140,7 +126,7 @@ Available CSS files:
 | IBM Plex Sans Hebrew Thin       | https://1.www.s81c.com/common/carbon/plex/sans-hebrew-thin.css       |
 
 | IBM Plex Sans JP (all)      | https://1.www.s81c.com/common/carbon/plex/sans-jp.css            |
-|-----------------------------|------------------------------------------------------------------|
+| --------------------------- | ---------------------------------------------------------------- |
 | IBM Plex Sans JP Bold       | https://1.www.s81c.com/common/carbon/plex/sans-jp-bold.css       |
 | IBM Plex Sans JP ExtraLight | https://1.www.s81c.com/common/carbon/plex/sans-jp-extralight.css |
 | IBM Plex Sans JP Light      | https://1.www.s81c.com/common/carbon/plex/sans-jp-light.css      |
@@ -151,7 +137,7 @@ Available CSS files:
 | IBM Plex Sans JP Thin       | https://1.www.s81c.com/common/carbon/plex/sans-jp-thin.css       |
 
 | IBM Plex Sans KR (all)      | https://1.www.s81c.com/common/carbon/plex/sans-kr.css            |
-|-----------------------------|------------------------------------------------------------------|
+| --------------------------- | ---------------------------------------------------------------- |
 | IBM Plex Sans KR Bold       | https://1.www.s81c.com/common/carbon/plex/sans-kr-bold.css       |
 | IBM Plex Sans KR ExtraLight | https://1.www.s81c.com/common/carbon/plex/sans-kr-extralight.css |
 | IBM Plex Sans KR Light      | https://1.www.s81c.com/common/carbon/plex/sans-kr-light.css      |
@@ -162,7 +148,7 @@ Available CSS files:
 | IBM Plex Sans KR Thin       | https://1.www.s81c.com/common/carbon/plex/sans-kr-thin.css       |
 
 | IBM Plex Sans Thai (all)      | https://1.www.s81c.com/common/carbon/plex/sans-thai.css            |
-|-------------------------------|--------------------------------------------------------------------|
+| ----------------------------- | ------------------------------------------------------------------ |
 | IBM Plex Sans Thai Bold       | https://1.www.s81c.com/common/carbon/plex/sans-thai-bold.css       |
 | IBM Plex Sans Thai ExtraLight | https://1.www.s81c.com/common/carbon/plex/sans-thai-extralight.css |
 | IBM Plex Sans Thai Light      | https://1.www.s81c.com/common/carbon/plex/sans-thai-light.css      |
@@ -173,7 +159,7 @@ Available CSS files:
 | IBM Plex Sans Thai Thin       | https://1.www.s81c.com/common/carbon/plex/sans-thai-thin.css       |
 
 | IBM Plex Sans Thai Looped (all)      | https://1.www.s81c.com/common/carbon/plex/sans-thai-looped.css            |
-|--------------------------------------|---------------------------------------------------------------------------|
+| ------------------------------------ | ------------------------------------------------------------------------- |
 | IBM Plex Sans Thai Looped Bold       | https://1.www.s81c.com/common/carbon/plex/sans-thai-looped-bold.css       |
 | IBM Plex Sans Thai Looped ExtraLight | https://1.www.s81c.com/common/carbon/plex/sans-thai-looped-extralight.css |
 | IBM Plex Sans Thai Looped Light      | https://1.www.s81c.com/common/carbon/plex/sans-thai-looped-light.css      |
@@ -184,7 +170,7 @@ Available CSS files:
 | IBM Plex Sans Thai Looped Thin       | https://1.www.s81c.com/common/carbon/plex/sans-thai-looped-thin.css       |
 
 | IBM Plex Serif (all)        | https://1.www.s81c.com/common/carbon/plex/serif.css                   |
-|-----------------------------|-----------------------------------------------------------------------|
+| --------------------------- | --------------------------------------------------------------------- |
 | IBM Plex Serif Bold         | https://1.www.s81c.com/common/carbon/plex/serif-bold.css              |
 | IBM Plex Serif Bold Italic  | https://1.www.s81c.com/common/carbon/plex/serif-bold-italic.css       |
 | IBM Plex Serif ExtLt        | https://1.www.s81c.com/common/carbon/plex/serif-extralight.css        |
@@ -210,25 +196,31 @@ Example usage:
 
 ```html
 <html>
-<head>
-  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans.css" />
-  <style>
-    body {
-      font-family: IBM Plex Sans,Helvetica Neue,Arial,sans-serif;
-    }
-  </style>
-  ...
-</head>
-<body>
-...
-</body>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://1.www.s81c.com/common/carbon/plex/sans.css" />
+    <style>
+      body {
+        font-family:
+          IBM Plex Sans,
+          Helvetica Neue,
+          Arial,
+          sans-serif;
+      }
+    </style>
+    ...
+  </head>
+  <body>
+    ...
+  </body>
 </html>
 ```
 
 ### Non-latin dynamic font loader
 
-A dynamic font loader for non-Latin fonts is available, called `load-non-latin-plex`. This utility is
-available at the following CDN url:
+A dynamic font loader for non-Latin fonts is available, called
+`load-non-latin-plex`. This utility is available at the following CDN url:
 
 - https://1.www.s81c.com/common/carbon/plex/load-non-latin-plex.js
 
@@ -238,73 +230,88 @@ Usage:
 <script src="https://1.www.s81c.com/common/carbon/plex/load-non-latin-plex.js"></script>
 ```
 
-Note, this script loads in the font based on the detected 2-character language code in the `window.digitalData` object.
-
-For more details, visit: https://www.ibm.com/standards/carbon/developing/building-for-ibm-dotcom/#page-language
-
-
 ## Carbon grid
 
-The following includes Carbon grid (using flex grid) and all corresponding grid classes.
+The following includes Carbon grid (using flex grid) and all corresponding grid
+classes.
 
 ```html
 // SPECIFIC VERSION
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/version/[v2.x.y]/grid.css" />
+<link
+  rel="stylesheet"
+  href="https://1.www.s81c.com/common/carbon/web-components/version/[v2.x.y]/grid.css" />
 
 // LATEST tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/grid.css" />
+<link
+  rel="stylesheet"
+  href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/grid.css" />
 
 // NEXT tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/next/grid.css" />
+<link
+  rel="stylesheet"
+  href="https://1.www.s81c.com/common/carbon/web-components/tag/next/grid.css" />
 ```
 
-The following includes Carbon grid (using CSS grid) and all corresponding grid classes.
+The following includes Carbon grid (using CSS grid) and all corresponding grid
+classes.
 
 ```html
 // SPECIFIC VERSION
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/version/[v2.x.y]/cssgrid.css" />
+<link
+  rel="stylesheet"
+  href="https://1.www.s81c.com/common/carbon/web-components/version/[v2.x.y]/cssgrid.css" />
 
 // LATEST tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/cssgrid.css" />
+<link
+  rel="stylesheet"
+  href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/cssgrid.css" />
 
 // NEXT tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/next/cssgrid.css" />
+<link
+  rel="stylesheet"
+  href="https://1.www.s81c.com/common/carbon/web-components/tag/next/cssgrid.css" />
 ```
 
 [Learn more about the Carbon 2x Grid](https://carbondesignsystem.com/guidelines/2x-grid/overview)
 
 ## Carbon theme zoning classes
 
-The following includes classes for creating Carbon theme zones (white, g10, g90,
-g100). Note that these classes take advantage of using CSS Custom Properties enabled
-in Carbon.
+The following includes classes for creating Carbon theme zones (`white`, `g10`,
+`g90`, `g100`). Note that these classes take advantage of using CSS Custom
+Properties enabled in Carbon.
 
 ```html
 // SPECIFIC VERSION
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/version/[v2.x.y]/themes.css" />
+<link
+  rel="stylesheet"
+  href="https://1.www.s81c.com/common/carbon/web-components/version/[v2.x.y]/themes.css" />
 
 // LATEST tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css" />
+<link
+  rel="stylesheet"
+  href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css" />
 
 // NEXT tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/next/themes.css" />
+<link
+  rel="stylesheet"
+  href="https://1.www.s81c.com/common/carbon/web-components/tag/next/themes.css" />
 ```
 
 ### Available classes
 
-| Theme  | Class name              |
-| ------ | ----------------------- |
-| white  | `.cds-theme-zone-white` |
-| g10    | `.cds-theme-zone-g10`   |
-| g90    | `.cds-theme-zone-g90`   |
-| g100   | `.cds-theme-zone-g100`  |
+| Theme | Class name              |
+| ----- | ----------------------- |
+| white | `.cds-theme-zone-white` |
+| g10   | `.cds-theme-zone-g10`   |
+| g90   | `.cds-theme-zone-g90`   |
+| g100  | `.cds-theme-zone-g100`  |
 
 ### Example usage
 
 ```html
 <html>
 <head>
-  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/version/[v2.x.y]/themes.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css" />
   <script
       type="module"
       src="https://1.www.s81c.com/common/carbon/web-components/version/[v2.x.y]/dropdown.min.js"
@@ -339,4 +346,3 @@ in Carbon.
 </body>
 </html>
 ```
-
