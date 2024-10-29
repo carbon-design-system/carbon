@@ -1280,35 +1280,10 @@ export function Callout({
 }: CalloutProps) {
   const prefix = usePrefix();
 
-  let didWarnAboutSuccessKind = false;
-  let didWarnAboutWarningKind = false;
-
-  let redirectedKind = kind;
-  if (__DEV__) {
-    if (kind === 'success') {
-      if (!didWarnAboutSuccessKind) {
-        warning(
-          didWarnAboutSuccessKind,
-          'Callout: The "success" kind is deprecated. Please use "info" instead.'
-        );
-        didWarnAboutSuccessKind = true;
-      }
-      redirectedKind = 'info';
-    } else if (kind === 'warning') {
-      if (!didWarnAboutWarningKind) {
-        warning(
-          didWarnAboutWarningKind,
-          'Callout: The "warning" kind is deprecated. Please use "error" instead.'
-        );
-        didWarnAboutWarningKind = true;
-      }
-      redirectedKind = 'error';
-    }
-  }
   const containerClassName = cx(className, {
     [`${prefix}--actionable-notification`]: true,
     [`${prefix}--actionable-notification--low-contrast`]: lowContrast,
-    [`${prefix}--actionable-notification--${redirectedKind}`]: redirectedKind,
+    [`${prefix}--actionable-notification--${kind}`]: kind,
     [`${prefix}--actionable-notification--hide-close-button`]: true,
   });
 
@@ -1323,8 +1298,8 @@ export function Callout({
       <div className={`${prefix}--actionable-notification__details`}>
         <NotificationIcon
           notificationType="inline"
-          kind={redirectedKind}
-          iconDescription={statusIconDescription || `${redirectedKind} icon`}
+          kind={kind}
+          iconDescription={statusIconDescription || `${kind} icon`}
         />
         <div className={`${prefix}--actionable-notification__text-wrapper`}>
           {title && (
