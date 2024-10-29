@@ -31,3 +31,6 @@ deprecated:
   - name: machine-learning
     reason:
       Icon should not be used. Teams should use machine-learning-model instead
+  - name: ibm-watson--knowledge-catalog
+    reason:
+      Icon renamed, slightly redesigned and replaced by ibm--knowledge-catalog

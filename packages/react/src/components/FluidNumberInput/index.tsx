@@ -4,8 +4,8 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { FluidNumberInputProps } from './FluidNumberInput';
-import { FluidNumberInputSkeletonProps } from './FluidNumberInput.Skeleton';
+import type { FluidNumberInputProps } from './FluidNumberInput';
+import type { FluidNumberInputSkeletonProps } from './FluidNumberInput.Skeleton';
 export { type FluidNumberInputProps, type FluidNumberInputSkeletonProps };
 export { default, default as FluidNumberInput } from './FluidNumberInput';
 

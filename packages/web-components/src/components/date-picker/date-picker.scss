@@ -1,0 +1,165 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/date-picker/date-picker' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include date-picker;
+
+:host(#{$prefix}-date-picker) {
+  @extend .#{$prefix}--date-picker;
+
+  #floating-menu-container {
+    position: absolute;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--date-picker__calendar.open {
+    margin-block-start: 0;
+  }
+
+  .flatpickr-next-month,
+  .flatpickr-prev-month {
+    svg {
+      transform: rotate(0) #{'/*rtl:rotate(180deg)*/'};
+    }
+  }
+
+  // _date-picker.scss#L351-L360 in `v10.6.0` tree, coping with the CSS class that latest Flatpickr has
+  .#{$prefix}--date-picker__day.flatpickr-disabled,
+  .flatpickr-day.flatpickr-disabled {
+    color: $layer-selected-inverse;
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  // _date-picker.scss#L455-L468 in `v10.6.0` tree, coping with the CSS class that latest Flatpickr has
+  .flatpickr-next-month.flatpickr-disabled,
+  .flatpickr-prev-month.flatpickr-disabled {
+    svg {
+      cursor: not-allowed;
+      fill: $layer-selected-inverse;
+      opacity: 0.5;
+    }
+
+    &:hover {
+      svg {
+        fill: $layer-selected-inverse;
+      }
+    }
+  }
+}
+
+:host(#{$prefix}-date-picker-input),
+:host(#{$prefix}-date-picker-input-skeleton) {
+  @extend .#{$prefix}--date-picker-container;
+
+  outline: none;
+
+  .#{$prefix}--form-requirement[hidden] {
+    display: none;
+  }
+}
+:host(#{$prefix}-date-picker-input[warn]) {
+  .#{$prefix}--form-requirement {
+    color: $text-primary;
+  }
+}
+
+:host(#{$prefix}-date-picker-input[kind='simple']),
+:host(#{$prefix}-date-picker-input-skeleton[kind='simple']) {
+  .#{$prefix}--date-picker__input {
+    inline-size: rem(120px);
+  }
+
+  .#{$prefix}--date-picker__input--invalid,
+  .#{$prefix}--date-picker__input--warn {
+    inline-size: rem(152px);
+  }
+}
+
+:host(#{$prefix}-date-picker-input[kind='simple'][short]),
+:host(#{$prefix}-date-picker-input-skeleton[kind='simple'][short]) {
+  .#{$prefix}--date-picker__input {
+    inline-size: rem(90px);
+  }
+}
+
+:host(#{$prefix}-date-picker-input[kind='single']),
+:host(#{$prefix}-date-picker-input-skeleton[kind='single']) {
+  max-inline-size: rem(288px);
+
+  .#{$prefix}--date-picker__input {
+    inline-size: rem(288px);
+  }
+}
+
+:host(#{$prefix}-date-picker-input[kind='from']),
+:host(#{$prefix}-date-picker-input-skeleton[kind='from']) {
+  margin-inline-end: rem(1px);
+}
+
+:host(#{$prefix}-date-picker-input[kind='from']),
+:host(#{$prefix}-date-picker-input[kind='to']),
+:host(#{$prefix}-date-picker-input-skeleton[kind='from']),
+:host(#{$prefix}-date-picker-input-skeleton[kind='to']) {
+  inline-size: rem(143.5px);
+
+  .#{$prefix}--date-picker__input {
+    inline-size: rem(143.5px);
+  }
+}
+
+:host(#{$prefix}-date-picker-input) {
+  .#{$prefix}--date-picker__icon {
+    @extend .#{$prefix}--date-picker__icon;
+  }
+
+  .#{$prefix}--date-picker__icon--warn {
+    @extend .#{$prefix}--date-picker__icon--warn;
+  }
+
+  .#{$prefix}--date-picker__icon--invalid {
+    @extend .#{$prefix}--date-picker__icon--invalid;
+  }
+
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-08;
+  }
+
+  ::slotted(#{$prefix}-ai-label:not([revert-active])),
+  ::slotted(#{$prefix}-slug:not([revert-active])) {
+    transform: translateY(-50%);
+  }
+}
+
+:host(#{$prefix}-date-picker-input-skeleton) {
+  display: inline-block;
+
+  .#{$prefix}--label {
+    @include skeleton;
+
+    block-size: rem(14px);
+
+    inline-size: rem(75px);
+  }
+}

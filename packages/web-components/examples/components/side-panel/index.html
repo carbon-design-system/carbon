@@ -1,0 +1,122 @@
+<!--
+@license
+
+Copyright IBM Corp. 2024
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>carbon-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+
+  <link rel="stylesheet" href="src/styles.scss" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    cds-button:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="src/index.js"></script>
+</head>
+<body>
+  <div class="container-header"></div>
+  <cds-button id="toggle-side-panel">Toggle side panel</cds-button>
+
+  <cds-side-panel current-step="0" animate-title include-overlay label-text="A longer label that might go on for a little bit" size="md" title="This title is testing a very long title to see how this behaves with a longer title. It needs to be long enough to trigger overflow when collapsed.">
+  <!-- default slotted content -->
+  <h5>Section</h5>
+  <div class="text-inputs">
+    <cds-text-input
+      label="Input A"
+      id="side-panel-story-text-input-a"></cds-text-input>
+    <cds-text-input
+      label="Input B"
+      id="side-panel-story-text-input-b"></cds-text-input>
+  </div>
+  <div class="text-inputs">
+    <cds-text-input
+      label="Input C"
+      id="side-panel-story-text-input-c"></cds-text-input>
+    <cds-text-input
+      label="Input D"
+      id="side-panel-story-text-input-d"></cds-text-input>
+  </div>
+  <div>
+    <cds-textarea
+      label="Notes"
+      value="This is a text area"></cds-textarea>
+    <cds-textarea
+      label="Notes"
+      value="This is a text area"></cds-textarea>
+    <cds-textarea
+      label="Notes"
+      value="This is a text area"></cds-textarea>
+  </div>
+
+  <!-- slotted subtitle slotted content -->
+  <div slot="subtitle">This is your subtitle slot.</div>
+
+  <!-- slotted action toolbar cds-buttons -->
+  <cds-button slot="action-toolbar">Copy</cds-button>
+  <cds-button
+    slot="action-toolbar"
+    aria-label="Settings"
+    has-icon-only="true"
+    kind="ghost"
+    size="sm"
+    tooltip-text="Settings">
+    <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" slot="icon"><path d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3	c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1	C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4	c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4	c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4	c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8	L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6	C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"></path><path d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"></path></svg>
+  </cds-button>
+  <cds-button
+    slot="action-toolbar"
+    aria-label="Delete"
+    has-icon-only="true"
+    kind="ghost"
+    size="sm"
+    tooltip-text="Delete">
+    <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 32 32" slot="icon"><path d="M12 12H14V24H12zM18 12H20V24H18z"></path><path d="M4 6V8H6V28a2 2 0 002 2H24a2 2 0 002-2V8h2V6zM8 28V8H24V28zM12 2H20V4H12z"></path></svg>
+  </cds-button>
+
+  <!-- slotted action items cds-buttons -->
+  <cds-button key="ghost" slot="actions" kind="ghost">
+    Ghost
+  </cds-button>
+  <cds-button key="secondary" slot="actions" kind="secondary">
+    Secondary
+  </cds-button>
+  <cds-button key="primary" slot="actions" kind="primary">
+    Primary
+  </cds-button>
+
+  <!-- slotted ai-label -->
+  <cds-ai-label size="xs" alignment="bottom-right">
+    <div slot="body-text">
+      <p class="secondary">AI Explained</p>
+      <h1>84%</h1>
+      <p class="secondary bold">Confidence score</p>
+      <p class="secondary">
+        Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+        do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+      </p>
+      <hr />
+      <p class="secondary">Model type</p>
+      <p class="bold">Foundation model</p>
+    </div>
+  </cds-ai-label>
+</cds-side-panel>
+</body>
+
+<script>
+    const toggleButton = () => {
+    const tearsheet = document.querySelector(`cds-side-panel`);
+    tearsheet?.toggleAttribute('open');
+  };
+
+  document.getElementById("toggle-side-panel").addEventListener("click", toggleButton);
+</script>
+</html>
