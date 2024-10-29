@@ -88,7 +88,7 @@
     "@rollup/plugin-replace": "^6.0.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.0.0",
-    "@rollup/pluginutils": "^4.2.0",
+    "@rollup/pluginutils": "^5.0.0",
     "@storybook/addon-essentials": "^8.2.8",
     "@storybook/addon-links": "^8.2.8",
     "@storybook/addon-storysource": "^8.2.8",
