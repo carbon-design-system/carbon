@@ -1759,7 +1759,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/colors@npm:^11.24.0, @carbon/colors@npm:^11.28.0, @carbon/colors@workspace:packages/colors":
+"@carbon/colors@npm:^11.28.0, @carbon/colors@workspace:packages/colors":
   version: 0.0.0-use.local
   resolution: "@carbon/colors@workspace:packages/colors"
   dependencies:
@@ -1794,15 +1794,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/feature-flags@npm:^0.21.0":
-  version: 0.21.0
-  resolution: "@carbon/feature-flags@npm:0.21.0"
-  dependencies:
-    "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 10/c8d9377cfd428ecc819ce28b2030aa9da33ffebc2d8c915e5ae589be8b9ccf582b9dccdcc731f62eea0b5643ef52c39d2471bfe202713572501997d3dffa1aa7
-  languageName: node
-  linkType: hard
-
 "@carbon/feature-flags@npm:^0.24.0, @carbon/feature-flags@workspace:packages/feature-flags":
   version: 0.0.0-use.local
   resolution: "@carbon/feature-flags@workspace:packages/feature-flags"
@@ -1825,7 +1816,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/grid@npm:^11.25.0, @carbon/grid@npm:^11.29.0, @carbon/grid@workspace:packages/grid":
+"@carbon/grid@npm:^11.29.0, @carbon/grid@workspace:packages/grid":
   version: 0.0.0-use.local
   resolution: "@carbon/grid@workspace:packages/grid"
   dependencies:
@@ -1934,7 +1925,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/layout@npm:^11.24.0, @carbon/layout@npm:^11.28.0, @carbon/layout@workspace:packages/layout":
+"@carbon/layout@npm:^11.28.0, @carbon/layout@workspace:packages/layout":
   version: 0.0.0-use.local
   resolution: "@carbon/layout@workspace:packages/layout"
   dependencies:
@@ -1948,7 +1939,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/motion@npm:^11.20.0, @carbon/motion@npm:^11.24.0, @carbon/motion@workspace:packages/motion":
+"@carbon/motion@npm:^11.24.0, @carbon/motion@workspace:packages/motion":
   version: 0.0.0-use.local
   resolution: "@carbon/motion@workspace:packages/motion"
   dependencies:
@@ -2085,28 +2076,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:1.63.1":
-  version: 1.63.1
-  resolution: "@carbon/styles@npm:1.63.1"
-  dependencies:
-    "@carbon/colors": "npm:^11.24.0"
-    "@carbon/feature-flags": "npm:^0.21.0"
-    "@carbon/grid": "npm:^11.25.0"
-    "@carbon/layout": "npm:^11.24.0"
-    "@carbon/motion": "npm:^11.20.0"
-    "@carbon/themes": "npm:^11.38.0"
-    "@carbon/type": "npm:^11.29.0"
-    "@ibm/plex": "npm:6.0.0-next.6"
-    "@ibm/telemetry-js": "npm:^1.5.0"
-  peerDependencies:
-    sass: ^1.33.0
-  peerDependenciesMeta:
-    sass:
-      optional: true
-  checksum: 10/fe83a42fc0bdbb5e0285cc7bab78dadb898b17db85a2aafaf6e8027e137e2efd09b439c9e7569af37ff00ea821b3918de116909848ab0965d2e642870054a6d5
-  languageName: node
-  linkType: hard
-
 "@carbon/styles@npm:^1.68.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
@@ -2151,7 +2120,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@npm:^11.38.0, @carbon/themes@npm:^11.43.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@npm:^11.43.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
@@ -2174,7 +2143,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/type@npm:^11.29.0, @carbon/type@npm:^11.33.0, @carbon/type@workspace:packages/type":
+"@carbon/type@npm:^11.33.0, @carbon/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
@@ -2252,7 +2221,7 @@ __metadata:
     "@carbon/icons": "npm:^11.52.0"
     "@carbon/layout": "npm:^11.28.0"
     "@carbon/motion": "npm:^11.24.0"
-    "@carbon/styles": "npm:1.63.1"
+    "@carbon/styles": "npm:^1.68.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@juggle/resize-observer": "npm:^3.4.0"
