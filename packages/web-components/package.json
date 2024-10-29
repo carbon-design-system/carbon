@@ -96,7 +96,7 @@
     "@storybook/web-components": "^8.2.8",
     "@storybook/web-components-vite": "^8.2.8",
     "@types/bluebird": "^3.5.36",
-    "@types/jasmine": "^3.10.2",
+    "@types/jasmine": "^5.0.0",
     "@types/jest": "^29.2.3",
     "@types/lodash-es": "^4.17.5",
     "@types/node": "^18.11.9",

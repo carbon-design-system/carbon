@@ -2332,7 +2332,7 @@ __metadata:
     "@storybook/web-components": "npm:^8.2.8"
     "@storybook/web-components-vite": "npm:^8.2.8"
     "@types/bluebird": "npm:^3.5.36"
-    "@types/jasmine": "npm:^3.10.2"
+    "@types/jasmine": "npm:^5.0.0"
     "@types/jest": "npm:^29.2.3"
     "@types/lodash-es": "npm:^4.17.5"
     "@types/node": "npm:^18.11.9"
@@ -7069,10 +7069,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jasmine@npm:^3.10.2":
-  version: 3.10.18
-  resolution: "@types/jasmine@npm:3.10.18"
-  checksum: 10/25ae5b329ccf9e99af24164bdbfb461989047a3ab74dbb25ba5f2c27e1985e59106c6a58da18494dd34357bed37a11093b4b83baca3bf46c81fb15a2af55a6f5
+"@types/jasmine@npm:^5.0.0":
+  version: 5.1.4
+  resolution: "@types/jasmine@npm:5.1.4"
+  checksum: 10/6b21eb0fc75e38783b7ee3f162ac47fd32ceaca3fb9eca0f4ed0730e56269bd61728e38ebe7c0d40b2d09382cc245deeabc556b2e46670eefee27f8d84c3f84c
   languageName: node
   linkType: hard
 
