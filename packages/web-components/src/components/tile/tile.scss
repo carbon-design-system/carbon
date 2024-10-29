@@ -174,7 +174,8 @@ $css--plex: true !default;
   @include ai-popover-gradient('default', 0, 'layer');
 
   border: 1px solid transparent;
-  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+  box-shadow:
+    inset 0 -80px 70px -65px $ai-inner-shadow,
     0 24px 40px -24px $ai-drop-shadow;
 }
 
