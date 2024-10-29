@@ -18,7 +18,7 @@ import * as AutoAlignStories from './autoalign.stories';
 - [Popover](#popover)
 - [Toggletip](#toggletip)
 - [Tooltip](#tooltip)
-- [Slug](#slug)
+- [AI Label](#ai-label)
 
 ## Overview
 
@@ -93,7 +93,7 @@ import '@carbon/web-components/es/components/toggle-tip/index.js';
 
 ```javascript
 import '@carbon/web-components/es/components/tooltip/index.js';
-import Information16 from '@carbon/icons/lib/information/16';
+import Information16 from '@carbon/icons/lib/information/16.js';
 ```
 
 <Markdown>{`${cdnJs({ components: ['tooltip'] })}`}</Markdown>
@@ -111,21 +111,21 @@ import Information16 from '@carbon/icons/lib/information/16';
 </cds-tooltip>
 ```
 
-## Slug
+## AI Label
 
 ### JS (via import)
 
 ```javascript
-import '@carbon/web-components/es/components/slug/index.js';
+import '@carbon/web-components/es/components/ai-label/index.js';
 ```
 
-<Markdown>{`${cdnJs({ components: ['slug'] })}`}</Markdown>
+<Markdown>{`${cdnJs({ components: ['ai-label'] })}`}</Markdown>
 <Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
 ```html
-<cds-slug autoalign>
+<cds-ai-label autoalign>
   <div slot="body-text">
     <p class="secondary">AI Explained</p>
     <h1>84%</h1>
@@ -138,5 +138,5 @@ import '@carbon/web-components/es/components/slug/index.js';
     <p class="secondary">Model type</p>
     <p class="bold">Foundation model</p>
   </div>
-</cds-slug>
+</cds-ai-label>
 ```

@@ -179,7 +179,7 @@ const Checkbox = React.forwardRef(
             }
             if (typeof ref === 'function') {
               ref(el);
-            } else if (ref && Object(ref) === ref) {
+            } else if (ref && 'current' in ref) {
               ref.current = el;
             }
           }}

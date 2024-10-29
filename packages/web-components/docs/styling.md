@@ -1,11 +1,12 @@
 # Using custom styles in components
 
-As Shadow DOM (one of the Web Components specs that `@carbon/web-components`
-uses) promises, styles that `@carbon/web-components` defines does not affect
-styles in your application, or vice versa.
+Since the
+[Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM)
+provides encapsulation, web component styles do not affect styles in your
+application, or vice versa.
 
-However, in cases where your application or a Carbon-derived style guide wants
-to change the styles of our components, there are a few options.
+However, in cases where your application or a Carbon-derived style guide needs
+to change the styles of components, there are a few options.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -19,11 +20,7 @@ to change the styles of our components, there are a few options.
 ## Using CSS Custom Properties
 
 Changes to CSS Custom Properties of the Carbon theme are reflected in the color
-scheme of `@carbon/web-components` components:
-
-[![Edit carbon-web-components with custom style](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/styling/theme-zoning)
-
-For example, if you add CSS like below:
+scheme of web components:
 
 ```css
 footer {
@@ -31,8 +28,7 @@ footer {
 }
 ```
 
-The color of the button in the code below changes to the one in the `g100`
-theme:
+The color of the button in the code below changes to the `g100` theme:
 
 ```html
 <footer>
@@ -40,9 +36,9 @@ theme:
 </footer>
 ```
 
-The names of CSS Custom Properties you can use are the Carbon theme tokens
-prefixed with `--cds-`. The list of Carbon theme tokens can be found at
-[here](https://github.com/carbon-design-system/carbon/blob/v11.34.1/packages/themes/src/index.js).
+The names of CSS Custom Properties you can use are the Carbon theme
+[tokens](https://carbondesignsystem.com/elements/themes/overview/#default-theme),
+prefixed with `--cds-`.
 
 With CSS Custom Properties approach, you can switch the entire theme under the
 specific element by:
@@ -57,7 +53,7 @@ footer {
 } // Emits all theme tokens in CSS Custom Properties
 ```
 
-Some components such as `Button`, `Notification`, & `Tag` have specific tokens
+Some components such as `button`, `notification`, and `tag` have specific tokens
 per theme that need to emitted in the styles. You can do this for example by
 adding the following:
 
@@ -76,10 +72,7 @@ adding the following:
 ## Creating derived components with different style
 
 You can create a derived class of our component and override
-[static `styles` property](https://lit-element.polymer-project.org/guide/styles#static-styles),
-like:
-
-[![Edit @carbon/web-components with custom style](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/styling/custom-style)
+[static `styles` property](https://lit.dev/docs/components/styles/):
 
 ```javascript
 import { css, customElement } from 'lit';

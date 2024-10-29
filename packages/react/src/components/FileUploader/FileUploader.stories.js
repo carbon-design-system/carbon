@@ -37,7 +37,7 @@ export const Default = () => {
     <div className="cds--file__container">
       <FileUploader
         labelTitle="Upload files"
-        labelDescription="Max file size is 500mb. Only .jpg files are supported."
+        labelDescription="Max file size is 500 MB. Only .jpg files are supported."
         buttonLabel="Add file"
         buttonKind="primary"
         size="md"
@@ -55,7 +55,7 @@ export const Default = () => {
 export const _FileUploaderItem = (args) => {
   return (
     <FileUploaderItem
-      errorBody="500kb max file size. Select a new file and try again."
+      errorBody="500 KB max file size. Select a new file and try again."
       errorSubject="File size exceeds limit"
       iconDescription="Delete file"
       invalid={false}
@@ -186,7 +186,7 @@ export const Playground = (args) => {
 };
 Playground.args = {
   labelTitle: 'Upload files',
-  labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',
+  labelDescription: 'Max file size is 500 MB. Only .jpg files are supported.',
   buttonLabel: 'Add file',
   buttonKind: 'primary',
   size: 'md',

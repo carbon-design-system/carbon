@@ -64,6 +64,30 @@ describe('Tabs', () => {
     );
 
     expect(container.firstChild).toHaveClass('custom-class');
+    expect(container);
+  });
+
+  it('should not render conditionally excluded tabs and panels', () => {
+    const condition = false;
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs" data-test-id="test-id">
+          <Tab>Tab Label 1</Tab>
+          {condition ? (
+            <Tab data-test-id="excluded-tab">Tab Label 2</Tab>
+          ) : null}
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          {condition ? (
+            <TabPanel data-test-id="excluded-panel">Tab Panel 2</TabPanel>
+          ) : null}
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(screen.queryByTestId('excluded-tab')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('excluded-panel')).not.toBeInTheDocument();
   });
 });
 
@@ -325,6 +349,30 @@ describe('Tab', () => {
       'aria-selected',
       'true'
     );
+  });
+
+  it('should reset focus to the active tab on blur in manual activation', async () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs" activation="manual">
+          <Tab data-testid="tab-testid-1">Tab Label 1</Tab>
+          <Tab data-testid="tab-testid-2">Tab Label 2</Tab>
+          <Tab data-testid="tab-testid-3">Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    await userEvent.tab();
+    await userEvent.keyboard('[ArrowRight]');
+    expect(screen.getByTestId('tab-testid-2')).toHaveFocus();
+    await userEvent.keyboard('[Tab]');
+    await userEvent.keyboard('[Shift][Tab]');
+    expect(screen.getByTestId('tab-testid-1')).toHaveFocus();
   });
 
   it('should render close icon if dismissable', () => {
