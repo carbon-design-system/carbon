@@ -1906,6 +1906,9 @@ Map {
         "stickyHeader": Object {
           "type": "bool",
         },
+        "tabIndex": Object {
+          "type": "number",
+        },
         "useStaticWidth": Object {
           "type": "bool",
         },
@@ -7948,6 +7951,9 @@ Map {
       },
       "stickyHeader": Object {
         "type": "bool",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
       "useStaticWidth": Object {
         "type": "bool",
