@@ -7,8 +7,10 @@
 
 import React from 'react';
 import RadioTile from './RadioTile';
+import { AILabel } from '../AILabel';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
+import { FeatureFlags } from '../FeatureFlags';
 
 describe('RadioTile', () => {
   describe('renders as expected - Component API', () => {
@@ -92,8 +94,9 @@ describe('RadioTile', () => {
       );
 
       await userEvent.click(screen.getByRole('radio'));
+      await userEvent.keyboard('{Enter}');
 
-      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledTimes(2);
     });
 
     it('should respect tabIndex prop', () => {
@@ -131,5 +134,33 @@ describe('RadioTile', () => {
       );
       expect(screen.getByRole('radio')).toHaveAttribute('required');
     });
+  });
+
+  it('should check AILabel exists on radio tile and is xs', async () => {
+    render(
+      <RadioTile value="standard" slug={<AILabel />}>
+        {' '}
+        Option 1{' '}
+      </RadioTile>
+    );
+    expect(screen.getByRole('button')).toHaveClass(`cds--slug__button--xs`);
+  });
+
+  //Feature flag : enable-v12-tile-radio-icons
+  it('should have a checked attribute if the prop checked is provided', () => {
+    render(
+      <FeatureFlags enableV12TileRadioIcons>
+        <RadioTile id="test-1" value="test-1" checked>
+          Option 1
+        </RadioTile>
+      </FeatureFlags>
+    );
+
+    expect(screen.getByDisplayValue('test-1')).toEqual(
+      screen.getByRole('radio', {
+        checked: true,
+        name: 'Option 1',
+      })
+    );
   });
 });

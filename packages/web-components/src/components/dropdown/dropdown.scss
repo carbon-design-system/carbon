@@ -156,28 +156,31 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-dropdown[slug]) {
+:host(#{$prefix}-dropdown[ai-label]) {
   @extend .#{$prefix}--list-box__wrapper--slug;
 
+  ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
     inset-inline-end: $spacing-08;
   }
 
+  ::slotted(#{$prefix}-ai-label:not([revert-active])),
   ::slotted(#{$prefix}-slug:not([revert-active])) {
     transform: translateY(-50%);
   }
 }
 
-:host(#{$prefix}-dropdown[slug][warn]),
-:host(#{$prefix}-dropdown[slug][invalid]) {
+:host(#{$prefix}-dropdown[ai-label][warn]),
+:host(#{$prefix}-dropdown[ai-label][invalid]) {
   .#{$prefix}--list-box {
     .#{$prefix}--list-box__field {
       padding-inline-end: $spacing-12;
     }
   }
 
+  ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     inset-inline-end: $spacing-10;
   }

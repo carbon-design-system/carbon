@@ -303,7 +303,8 @@
     color: currentColor;
     cursor: pointer;
     inline-size: layout.size('height');
-    transition: background-color $duration-fast-01 motion(standard, productive),
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
       box-shadow $duration-fast-01 motion(standard, productive);
 
     svg {
@@ -401,7 +402,7 @@
   }
 
   // Windows HCM fix
-  /* stylelint-disable */
+
   .#{$prefix}--tag {
     @include high-contrast-mode('outline');
   }
@@ -428,7 +429,6 @@
     + .#{$prefix}--tag-label-tooltip {
     max-inline-size: convert.to-rem(158px);
   }
-  /* stylelint-enable */
 
   .#{$prefix}--interactive--tag-children {
     display: inline-flex;

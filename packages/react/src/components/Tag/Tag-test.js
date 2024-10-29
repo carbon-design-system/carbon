@@ -108,13 +108,37 @@ describe('Tag', () => {
     it('should select the selectable tag', async () => {
       const { container } = render(<SelectableTag text="Tag content" />);
 
-      const selectableTag = container.querySelector(
-        `.${prefix}--tag--selectable`
-      );
+      const selectableTag = container.firstChild;
 
       await userEvent.click(selectableTag);
       expect(selectableTag).toHaveAttribute('aria-pressed', 'true');
       expect(selectableTag).toHaveClass(`${prefix}--tag--selectable-selected`);
+    });
+
+    it('should call onChange', async () => {
+      const onChange = jest.fn();
+
+      const { container } = render(
+        <SelectableTag text="Tag content" onChange={onChange} />
+      );
+
+      const selectableTag = container.firstChild;
+
+      await userEvent.click(selectableTag);
+      expect(onChange).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call onClick', async () => {
+      const onClick = jest.fn();
+
+      const { container } = render(
+        <SelectableTag text="Tag content" onClick={onClick} />
+      );
+
+      const selectableTag = container.firstChild;
+
+      await userEvent.click(selectableTag);
+      expect(onClick).toHaveBeenCalledTimes(1);
     });
   });
 

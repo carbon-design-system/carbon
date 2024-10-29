@@ -16,6 +16,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 /**
  * Slug action button.
  *
+ * @deprecated This component has been deprecated, please use the <cds-ai-label-action-button> component instead.
  * @element cds-slug-action-button
  */
 @customElement(`${prefix}-slug-action-button`)

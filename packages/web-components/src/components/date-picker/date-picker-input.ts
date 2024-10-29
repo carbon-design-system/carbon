@@ -10,14 +10,14 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
-import Calendar16 from '@carbon/icons/lib/calendar/16';
+import Calendar16 from '@carbon/icons/lib/calendar/16.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import { INPUT_SIZE } from '../text-input/text-input';
 import { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND } from './defs';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import styles from './date-picker.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -31,25 +31,29 @@ export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND };
 @customElement(`${prefix}-date-picker-input`)
 class CDSDatePickerInput extends FocusMixin(LitElement) {
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  private _hasSlug = false;
+  private _hasAILabel = false;
 
   /**
    * Handles `slotchange` event.
    */
-  protected _handleSlugSlotChange({ target }: Event) {
+  protected _handleAILabelSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSDatePickerInput).aiLabelItem
+            ) ||
+            // remove reference to slug in v12
+            (elem as HTMLElement).matches(
               (this.constructor as typeof CDSDatePickerInput).slugItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     this.requestUpdate();
   }
@@ -243,7 +247,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       warnText,
       _handleClickWrapper: handleClickWrapper,
       _handleInput: handleInput,
-      _hasSlug: hasSlug,
+      _hasAILabel: hasAILabel,
     } = this;
 
     const invalidIcon = WarningFilled16({
@@ -290,7 +294,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       [`${prefix}--date-picker-input__wrapper--invalid`]:
         normalizedProps.invalid,
       [`${prefix}--date-picker-input__wrapper--warn`]: normalizedProps.warn,
-      [`${prefix}--date-picker-input__wrapper--slug`]: hasSlug,
+      [`${prefix}--date-picker-input__wrapper--slug`]: hasAILabel,
     });
 
     const helperTextClasses = classMap({
@@ -316,7 +320,12 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
             @input="${handleInput}"
             ?readonly="${readonly}" />
           ${normalizedProps.icon || this._renderIcon()}
-          <slot name="slug" @slotchange="${this._handleSlugSlotChange}"></slot>
+          <slot
+            name="ai-label"
+            @slotchange="${this._handleAILabelSlotChange}"></slot>
+          <slot
+            name="slug"
+            @slotchange="${this._handleAILabelSlotChange}"></slot>
         </span>
       </div>
       <div
@@ -333,12 +342,21 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   }
 
   updated() {
-    this.shadowRoot
-      ?.querySelector("slot[name='slug']")
-      ?.classList.toggle(
+    const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
+
+    if (label) {
+      label?.classList.toggle(
         `${prefix}--slug--revert`,
-        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
+    } else {
+      this.shadowRoot
+        ?.querySelector("slot[name='slug']")
+        ?.classList.toggle(
+          `${prefix}--slug--revert`,
+          this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+        );
+    }
   }
 
   /**
@@ -360,9 +378,18 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
 
   /**
    * A selector that will return the slug item.
+   *
+   * remove in v12
    */
   static get slugItem() {
     return `${prefix}-slug`;
+  }
+
+  /**
+   * A selector that will return the AI Label item.
+   */
+  static get aiLabelItem() {
+    return `${prefix}-ai-label`;
   }
 
   static shadowRootOptions = {
