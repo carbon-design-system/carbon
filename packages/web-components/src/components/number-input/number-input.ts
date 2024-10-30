@@ -11,10 +11,10 @@ import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
-import Add16 from '@carbon/icons/lib/add/16';
-import Subtract16 from '@carbon/icons/lib/subtract/16';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
+import Add16 from '@carbon/icons/lib/add/16.js';
+import Subtract16 from '@carbon/icons/lib/subtract/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { NUMBER_INPUT_VALIDATION_STATUS } from './defs';
 import styles from './number-input.scss?lit';
@@ -242,7 +242,7 @@ class CDSNumberInput extends CDSTextInput {
     const inputWrapperClasses = classMap({
       [`${prefix}--number__input-wrapper`]: true,
       [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
-      [`${prefix}--number__input-wrapper--slug`]: this._hasSlug,
+      [`${prefix}--number__input-wrapper--slug`]: this._hasAILabel,
     });
 
     const labelClasses = classMap({
@@ -321,6 +321,7 @@ class CDSNumberInput extends CDSTextInput {
         </label>
         <div class="${inputWrapperClasses}">
           ${normalizedProps.icon} ${input}
+          <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
           <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
           <div class="${prefix}--number__controls">
             ${!this.hideSteppers

@@ -240,7 +240,15 @@ class CDSTable extends HostListenerMixin(LitElement) {
   withHeader;
 
   /**
+   *  true if AI Labels are added in the rows
+   */
+  @property({ type: Boolean, attribute: 'with-row-ai-labels' })
+  withRowAILabels = false;
+
+  /**
    *  true if slugs are added in the rows
+   *
+   * @deprecated remove in v12, use `with-row-ai-labels` instead
    */
   @property({ type: Boolean, attribute: 'with-row-slugs' })
   withRowSlugs = false;
@@ -252,6 +260,22 @@ class CDSTable extends HostListenerMixin(LitElement) {
         (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
       );
     this.withHeader = hasContent;
+  }
+
+  private _handleTableBodyChange() {
+    // cds-table-head or cds-table-body may have changed
+    this._tableBody = this.querySelector(
+      (this.constructor as typeof CDSTable).selectorTableBody
+    );
+    this._tableExpandedRows = this.querySelectorAll(
+      (this.constructor as typeof CDSTable).selectorTableExpandedRows
+    );
+    this._tableRows = this.querySelectorAll(
+      (this.constructor as typeof CDSTable).selectorTableRow
+    );
+
+    // update any row dependant features
+    this.updateExpandable();
   }
 
   private _handleSortAction(columnIndex, sortDirection) {
@@ -614,6 +638,17 @@ class CDSTable extends HostListenerMixin(LitElement) {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'table');
     }
+
+    /**
+     * If using `with-row-slugs`, set `with-row-ai-labels` attribute to true so
+     * the styles are applied for slug as well
+     *
+     * remove in v12
+     */
+    if (this.withRowSlugs) {
+      this.setAttribute('with-rows-ai-labels', '');
+      this.withRowAILabels = true;
+    }
     super.connectedCallback();
   }
 
@@ -650,15 +685,19 @@ class CDSTable extends HostListenerMixin(LitElement) {
     this.headerCount = this._tableHeaderRow.children.length;
   }
 
+  updateExpandable() {
+    this._tableRows.forEach((e, index) => {
+      e.expandable = this.expandable;
+      e.setAttribute('sort-id', index);
+    });
+    this._tableHeaderRow.expandable = this.expandable;
+    this._tableHeaderRow.batchExpansion = this.batchExpansion;
+    this.headerCount += this.expandable ? 1 : -1;
+  }
+
   updated(changedProperties) {
     if (changedProperties.has('expandable')) {
-      this._tableRows.forEach((e, index) => {
-        e.expandable = this.expandable;
-        e.setAttribute('sort-id', index);
-      });
-      this._tableHeaderRow.expandable = this.expandable;
-      this._tableHeaderRow.batchExpansion = this.batchExpansion;
-      this.headerCount += this.expandable ? 1 : -1;
+      this.updateExpandable();
     }
 
     if (changedProperties.has('headerCount')) {
@@ -768,29 +807,32 @@ class CDSTable extends HostListenerMixin(LitElement) {
       (tableBody as any).useZebraStyles = this.useZebraStyles;
     }
 
-    if (this.withRowSlugs) {
-      this._tableHeaderRow.setAttribute('rows-with-slug', '');
+    if (this.withRowAILabels) {
+      this._tableHeaderRow.setAttribute('rows-with-ai-label', '');
       this._tableRows.forEach((row) => {
-        row.setAttribute('rows-with-slug', '');
+        row.setAttribute('rows-with-ai-label', '');
       });
     } else {
-      this._tableHeaderRow.removeAttribute('rows-with-slug');
+      this._tableHeaderRow.removeAttribute('rows-with-ai-label');
       this._tableRows.forEach((row) => {
-        row.removeAttribute('rows-with-slug');
+        row.removeAttribute('rows-with-ai-label');
       });
     }
 
     // Gets table header info to add to the column cells for styles
-    const headersWithSlug: number[] = [];
+    const headersWithAILabel: number[] = [];
 
     Array.prototype.slice
       .call(this._tableHeaderRow.children)
       .forEach((headerCell, index) => {
-        if (headerCell.querySelector(`${prefix}-slug`)) {
-          headerCell.setAttribute('slug', '');
-          headersWithSlug.push(index);
+        if (
+          headerCell.querySelector(`${prefix}-ai-label`) ||
+          headerCell.querySelector(`${prefix}-slug`)
+        ) {
+          headerCell.setAttribute('ai-label', '');
+          headersWithAILabel.push(index);
         } else {
-          headerCell.removeAttribute('slug');
+          headerCell.removeAttribute('ai-label');
         }
       });
 
@@ -798,9 +840,9 @@ class CDSTable extends HostListenerMixin(LitElement) {
       Array.prototype.slice
         .call((row as HTMLElement).children)
         .forEach((cell, index) => {
-          headersWithSlug.includes(index)
-            ? cell.setAttribute('slug-in-header', '')
-            : cell.removeAttribute('slug-in-header');
+          headersWithAILabel.includes(index)
+            ? cell.setAttribute('ai-label-in-header', '')
+            : cell.removeAttribute('ai-label-in-header');
         });
     });
   }
@@ -821,10 +863,14 @@ class CDSTable extends HostListenerMixin(LitElement) {
       ${false // TODO: replace with this.stickyHeader when feature is fully implemented
         ? html` <div class="${prefix}--data-table_inner-container">
             <div class="${prefix}--data-table-content">
-              <slot></slot>
+              <slot
+                @cds-table-body-content-change="${this
+                  ._handleTableBodyChange}"></slot>
             </div>
           </div>`
-        : html`<slot></slot>`}
+        : html`<slot
+            @cds-table-body-content-change="${this
+              ._handleTableBodyChange}"></slot>`}
     `;
   }
 

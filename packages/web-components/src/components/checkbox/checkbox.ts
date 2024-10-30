@@ -14,8 +14,8 @@ import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import styles from './checkbox.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -176,12 +176,16 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
           ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSCheckbox).aiLabelItem
+            ) ||
+            // remove slug reference in v12
+            (elem as HTMLElement).matches(
               (this.constructor as typeof CDSCheckbox).slugItem
             )
           : false
       );
 
-    this._hasSlug = Boolean(hasContent);
+    this._hasAILabel = Boolean(hasContent);
     const type = (hasContent[0] as HTMLElement).getAttribute('kind');
     (hasContent[0] as HTMLElement).setAttribute(
       'size',
@@ -191,13 +195,15 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   }
 
   /**
-   * `true` if there is a slug.
+   * `true` if there is an AI Label.
    */
-  protected _hasSlug = false;
+  protected _hasAILabel = false;
 
   updated() {
-    const { _hasSlug: hasSlug } = this;
-    hasSlug ? this.setAttribute('slug', '') : this.removeAttribute('slug');
+    const { _hasAILabel: hasAILabel } = this;
+    hasAILabel
+      ? this.setAttribute('ai-label', '')
+      : this.removeAttribute('ai-label');
   }
 
   render() {
@@ -258,6 +264,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
           >${labelText ? labelText : html`<slot></slot>`}</span
         >
       </label>
+      <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
       <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
       <div class="${prefix}--checkbox__validation-msg">
         ${!readonly && invalid
@@ -290,9 +297,18 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
 
   /**
    * A selector that will return the slug item.
+   *
+   * Remove in v12
    */
   static get slugItem() {
     return `${prefix}-slug`;
+  }
+
+  /**
+   * A selector that will return the ai-label item.
+   */
+  static get aiLabelItem() {
+    return `${prefix}-ai-label`;
   }
 
   static shadowRootOptions = {
