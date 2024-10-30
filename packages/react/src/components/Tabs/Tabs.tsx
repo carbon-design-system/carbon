@@ -606,13 +606,13 @@ function TabList({
 
   useIsomorphicEffect(() => {
     if (ref.current) {
-      //adding 1 in calculation for firefox support
+      // adding 1 in calculation for firefox support
       setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
     }
 
     function handler() {
       if (ref.current) {
-        //adding 1 in calculation for firefox support
+        // adding 1 in calculation for firefox support
         setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
       }
     }
