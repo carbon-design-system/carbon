@@ -565,6 +565,40 @@ function TabList({
     }
   }
 
+  /**
+   * Scroll the tab into view if it is not already visible
+   * @param tab - The tab to scroll into view
+   * @returns {void}
+   */
+  function scrollTabIntoView(tab) {
+    if (!isScrollable || !ref.current) {
+      return;
+    }
+    if (tab) {
+      // The width of the "scroll buttons"
+      const { width: tabWidth } = tab.getBoundingClientRect();
+
+      // The start and end position of the selected tab
+      const start = tab.offsetLeft;
+      const end = tab.offsetLeft + tabWidth;
+
+      // The start and end of the visible area for the tabs
+      const visibleStart = ref.current.scrollLeft + buttonWidth;
+      const visibleEnd =
+        ref.current.scrollLeft + ref.current.clientWidth - buttonWidth;
+
+      // The beginning of the tab is clipped and not visible
+      if (start < visibleStart) {
+        setScrollLeft(start - buttonWidth);
+      }
+
+      // The end of the tab is clipped and not visible
+      if (end > visibleEnd) {
+        setScrollLeft(end + buttonWidth - ref.current.clientWidth);
+      }
+    }
+  }
+
   useEffectOnce(() => {
     const tab = tabs.current[selectedIndex];
     if (scrollIntoView && tab) {
