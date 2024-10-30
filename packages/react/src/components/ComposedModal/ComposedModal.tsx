@@ -393,7 +393,9 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           return primaryFocusElement;
         }
 
-        return button && button.current;
+        return containerElement
+          ? containerElement.querySelector(`.${prefix}--modal-close`)
+          : null;
       };
 
       const focusButton = (focusContainerElement) => {
