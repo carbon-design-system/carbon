@@ -1268,6 +1268,15 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/56911544?v=4",
       "profile": "https://github.com/Zoe-Gathercole",
       "contributions": ["code"]
+    },
+    {
+      "login": "ashna000",
+      "name": "Ashna Thomas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12691034?s=96&v=4",
+      "profile": "https://github.com/ashna000",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
