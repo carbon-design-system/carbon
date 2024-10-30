@@ -666,39 +666,21 @@ function TabList({
     }
   }, [scrollLeft]);
 
+  // scroll manual tabs when active index changes (focus outline movement)
   useIsomorphicEffect(() => {
-    if (!isScrollable || !ref.current) {
-      return;
-    }
-
     const tab =
       activation === 'manual'
         ? tabs.current[activeIndex]
         : tabs.current[selectedIndex];
-    if (tab) {
-      // The width of the "scroll buttons"
 
-      // The start and end position of the selected tab
-      const { width: tabWidth } = tab.getBoundingClientRect();
-      const start = tab.offsetLeft;
-      const end = tab.offsetLeft + tabWidth;
+    scrollTabIntoView(tab);
+  }, [activation, activeIndex]);
 
-      // The start and end of the visible area for the tabs
-      const visibleStart = ref.current.scrollLeft + buttonWidth;
-      const visibleEnd =
-        ref.current.scrollLeft + ref.current.clientWidth - buttonWidth;
-
-      // The beginning of the tab is clipped and not visible
-      if (start < visibleStart) {
-        setScrollLeft(start - buttonWidth);
-      }
-
-      // The end of the tab is clipped and not visible
-      if (end > visibleEnd) {
-        setScrollLeft(end + buttonWidth - ref.current.clientWidth);
-      }
-    }
-  }, [activation, activeIndex, selectedIndex, isScrollable, children]);
+  // scroll tabs when selected index changes
+  useIsomorphicEffect(() => {
+    const tab = tabs.current[selectedIndex];
+    scrollTabIntoView(tab);
+  }, [selectedIndex, isScrollable, children]);
 
   usePressable(previousButton, {
     onPress({ longPress }) {
