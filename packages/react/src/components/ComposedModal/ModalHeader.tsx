@@ -9,6 +9,9 @@ import React, {
   type ReactNode,
   type MouseEvent,
   type HTMLAttributes,
+  useRef,
+  Ref,
+  useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -23,6 +26,11 @@ export interface ModalHeaderProps extends DivProps {
    * clicked
    */
   buttonOnClick?(event: MouseEvent): void;
+
+  /**
+   * The `ref` callback for the close button.
+   */
+  buttonref?: Ref<HTMLButtonElement>;
 
   /**
    * Specify the content to be placed in the ModalHeader
@@ -74,6 +82,11 @@ export interface ModalHeaderProps extends DivProps {
    * Specify an optional className to be applied to the modal heading
    */
   titleClassName?: string;
+
+  /**
+   * Specify whether the Modal is currently open
+   */
+  open?: boolean;
 }
 
 export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
@@ -90,11 +103,21 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
       labelClassName,
       title,
       titleClassName,
+      open,
       ...rest
     },
     ref
   ) {
     const prefix = usePrefix();
+    const buttonref = useRef<HTMLButtonElement>(null);
+
+    useEffect(() => {
+      if (buttonref && open) {
+        setTimeout(() => {
+          buttonref?.current?.focus();
+        });
+      }
+    }, [buttonref, open]);
 
     function handleCloseButtonClick(evt: MouseEvent) {
       closeModal?.(evt);
@@ -134,7 +157,8 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
             label={iconDescription}
             onClick={handleCloseButtonClick}
             aria-label={iconDescription}
-            align="left">
+            align="left"
+            ref={buttonref}>
             <Close
               size={20}
               aria-hidden="true"
@@ -154,6 +178,17 @@ ModalHeader.propTypes = {
    * clicked
    */
   buttonOnClick: PropTypes.func,
+
+  /**
+   * The `ref` callback for the close button.
+   */
+  // @ts-expect-error: Invalid derived type
+  buttonref: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({
+      current: PropTypes.any,
+    }),
+  ]),
 
   /**
    * Specify the content to be placed in the ModalHeader
@@ -205,4 +240,9 @@ ModalHeader.propTypes = {
    * Specify an optional className to be applied to the modal heading
    */
   titleClassName: PropTypes.string,
+
+  /**
+   * Specify whether the Modal is currently open
+   */
+  open: PropTypes.bool,
 };

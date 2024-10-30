@@ -5159,6 +5159,26 @@ Map {
       "buttonOnClick": Object {
         "type": "func",
       },
+      "buttonref": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "current": Object {
+                    "type": "any",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "children": Object {
         "type": "node",
       },
