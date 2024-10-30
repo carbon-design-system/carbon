@@ -62,5 +62,5 @@ blob-report
 # Local token
 .env
 
-#Virtual Studio Code
+#VS Code
 .history/*
