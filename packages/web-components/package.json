@@ -102,7 +102,7 @@
     "@types/node": "^18.11.9",
     "@webcomponents/webcomponentsjs": "^2.8.0",
     "autoprefixer": "^10.4.0",
-    "babel-loader": "^8.0.4",
+    "babel-loader": "^9.0.0",
     "cssnano": "^7.0.0",
     "globby": "^14.0.2",
     "is-port-reachable": "^3.1.0",

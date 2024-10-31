@@ -2338,7 +2338,7 @@ __metadata:
     "@types/node": "npm:^18.11.9"
     "@webcomponents/webcomponentsjs": "npm:^2.8.0"
     autoprefixer: "npm:^10.4.0"
-    babel-loader: "npm:^8.0.4"
+    babel-loader: "npm:^9.0.0"
     cssnano: "npm:^7.0.0"
     flatpickr: "npm:4.6.13"
     globby: "npm:^14.0.2"
@@ -7097,7 +7097,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/json-schema@npm:^7.0.5, @types/json-schema@npm:^7.0.8, @types/json-schema@npm:^7.0.9":
+"@types/json-schema@npm:^7.0.8, @types/json-schema@npm:^7.0.9":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
   checksum: 10/1a3c3e06236e4c4aab89499c428d585527ce50c24fe8259e8b3926d3df4cfbbbcf306cfc73ddfb66cbafc973116efd15967020b0f738f63e09e64c7d260519e7
@@ -8845,21 +8845,6 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.8.0
   checksum: 10/1d6993345337261ca4e02bb09739971ba668868f6186509defd5a46430fb265f06ca3d0efb113bea1a71c7c8efb1a8578d3e240980f325ec1837a8a77fd54bd6
-  languageName: node
-  linkType: hard
-
-"babel-loader@npm:^8.0.4":
-  version: 8.3.0
-  resolution: "babel-loader@npm:8.3.0"
-  dependencies:
-    find-cache-dir: "npm:^3.3.1"
-    loader-utils: "npm:^2.0.0"
-    make-dir: "npm:^3.1.0"
-    schema-utils: "npm:^2.6.5"
-  peerDependencies:
-    "@babel/core": ^7.0.0
-    webpack: ">=2"
-  checksum: 10/e775e96f605f10d68adc693403ccda2470e856cc52e6017f3621c17dade003d0fc53facfce7b4ada02273a1c0a6a48167f798cc81b73110585d74bf890b39bd5
   languageName: node
   linkType: hard
 
@@ -19068,7 +19053,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"make-dir@npm:^3.0.0, make-dir@npm:^3.0.2, make-dir@npm:^3.1.0":
+"make-dir@npm:^3.0.0, make-dir@npm:^3.0.2":
   version: 3.1.0
   resolution: "make-dir@npm:3.1.0"
   dependencies:
@@ -24407,17 +24392,6 @@ __metadata:
   dependencies:
     loose-envify: "npm:^1.1.0"
   checksum: 10/e8d68b89d18d5b028223edf090092846868a765a591944760942b77ea1f69b17235f7e956696efbb62c8130ab90af7e0949bfb8eba7896335507317236966bc9
-  languageName: node
-  linkType: hard
-
-"schema-utils@npm:^2.6.5":
-  version: 2.7.1
-  resolution: "schema-utils@npm:2.7.1"
-  dependencies:
-    "@types/json-schema": "npm:^7.0.5"
-    ajv: "npm:^6.12.4"
-    ajv-keywords: "npm:^3.5.2"
-  checksum: 10/86c3038798981dbc702d5f6a86d4e4a308a2ec6e8eb1bf7d1a3ea95cb3f1972491833b76ce1c86a068652417019126d5b68219c33a9ad069358dd10429d4096d
   languageName: node
   linkType: hard
 
