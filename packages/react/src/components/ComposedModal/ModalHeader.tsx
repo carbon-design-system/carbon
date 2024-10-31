@@ -9,9 +9,6 @@ import React, {
   type ReactNode,
   type MouseEvent,
   type HTMLAttributes,
-  useRef,
-  Ref,
-  useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -77,11 +74,6 @@ export interface ModalHeaderProps extends DivProps {
    * Specify an optional className to be applied to the modal heading
    */
   titleClassName?: string;
-
-  /**
-   * Specify whether the Modal is currently open
-   */
-  open?: boolean;
 }
 
 export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
@@ -98,7 +90,6 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
       labelClassName,
       title,
       titleClassName,
-      open,
       ...rest
     },
     ref
@@ -214,9 +205,4 @@ ModalHeader.propTypes = {
    * Specify an optional className to be applied to the modal heading
    */
   titleClassName: PropTypes.string,
-
-  /**
-   * Specify whether the Modal is currently open
-   */
-  open: PropTypes.bool,
 };
