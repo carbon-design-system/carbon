@@ -28,11 +28,6 @@ export interface ModalHeaderProps extends DivProps {
   buttonOnClick?(event: MouseEvent): void;
 
   /**
-   * The `ref` callback for the close button.
-   */
-  buttonref?: Ref<HTMLButtonElement>;
-
-  /**
    * Specify the content to be placed in the ModalHeader
    */
   children?: ReactNode;
@@ -109,15 +104,6 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
     ref
   ) {
     const prefix = usePrefix();
-    const buttonref = useRef<HTMLButtonElement>(null);
-
-    useEffect(() => {
-      if (buttonref && open) {
-        setTimeout(() => {
-          buttonref?.current?.focus();
-        });
-      }
-    }, [buttonref, open]);
 
     function handleCloseButtonClick(evt: MouseEvent) {
       closeModal?.(evt);
@@ -157,8 +143,7 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
             label={iconDescription}
             onClick={handleCloseButtonClick}
             aria-label={iconDescription}
-            align="left"
-            ref={buttonref}>
+            align="left">
             <Close
               size={20}
               aria-hidden="true"
@@ -178,17 +163,6 @@ ModalHeader.propTypes = {
    * clicked
    */
   buttonOnClick: PropTypes.func,
-
-  /**
-   * The `ref` callback for the close button.
-   */
-  // @ts-expect-error: Invalid derived type
-  buttonref: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({
-      current: PropTypes.any,
-    }),
-  ]),
 
   /**
    * Specify the content to be placed in the ModalHeader

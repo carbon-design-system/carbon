@@ -357,11 +357,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
             typeof ModalHeader
           >;
           generatedAriaLabel = el.props.label;
-          return React.cloneElement(el, {
-            closeModal,
-            buttonref: button,
-            open,
-          });
+          return React.cloneElement(el, { closeModal });
         }
 
         case isElement(child) &&
@@ -408,8 +404,15 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
       const focusButton = (focusContainerElement) => {
         const target = initialFocus(focusContainerElement);
+
+        const closeButton = focusContainerElement.querySelector(
+          `.${prefix}--modal-close`
+        );
+
         if (target) {
           target.focus();
+        } else if (!target && closeButton) {
+          closeButton?.focus();
         }
       };
 

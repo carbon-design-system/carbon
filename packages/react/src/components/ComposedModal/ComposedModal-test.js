@@ -245,7 +245,11 @@ describe('ComposedModal', () => {
             <button type="button" onClick={() => setIsOpen(!isOpen)}>
               Click me
             </button>
-            <ComposedModal danger open={isOpen} preventCloseOnClickOutside>
+            <ComposedModal
+              danger
+              selectorPrimaryFocus="#text-input-1"
+              open={isOpen}
+              preventCloseOnClickOutside>
               <ModalHeader>Modal header</ModalHeader>
               <ModalBody>
                 This is the modal body content
