@@ -5183,9 +5183,6 @@ Map {
       "labelClassName": Object {
         "type": "string",
       },
-      "open": Object {
-        "type": "bool",
-      },
       "title": Object {
         "type": "node",
       },
