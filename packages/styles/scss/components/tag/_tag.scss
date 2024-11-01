@@ -246,6 +246,14 @@
     );
   }
 
+  .#{$prefix}--multi-select--readonly
+    .#{$prefix}--tag--high-contrast:not(.#{$prefix}--tag--operational)
+    .#{$prefix}--tag__close-icon {
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
   .#{$prefix}--tag--outline:not(.#{$prefix}--tag--operational):not(span):not(
       [disabled]
     ) {
@@ -303,8 +311,7 @@
     color: currentColor;
     cursor: pointer;
     inline-size: layout.size('height');
-    transition:
-      background-color $duration-fast-01 motion(standard, productive),
+    transition: background-color $duration-fast-01 motion(standard, productive),
       box-shadow $duration-fast-01 motion(standard, productive);
 
     svg {
