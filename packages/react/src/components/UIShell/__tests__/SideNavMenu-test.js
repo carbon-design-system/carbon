@@ -100,55 +100,6 @@ describe('SideNavMenu', () => {
     expect(ref).toHaveBeenCalledWith(screen.getByRole('button'));
   });
 
-  it('should check whether the SideNavMenu has a valid react child with isActive and aria-current attributes', () => {
-    const { container } = render(
-      <SideNavMenu title="test-title">
-        <SideNavMenuItem isActive={true} aria-current="true" key={'child1'}>
-          {[<div key={'subChild1'}>a</div>]}
-        </SideNavMenuItem>
-        <SideNavMenuItem key={'child2'}>b</SideNavMenuItem>
-        <SideNavMenuItem key={'child3'}>c</SideNavMenuItem>
-      </SideNavMenu>
-    );
-    expect(container.firstChild).toHaveClass(`cds--side-nav__item--active`);
-  });
-
-  it('should check whether the SideNavMenu has an invalid child but is an instance of array', () => {
-    const { container } = render(
-      <SideNavMenu title="test-title">{[null]}</SideNavMenu>
-    );
-    expect(container.firstChild).not.toHaveClass(`cds--side-nav__item--active`);
-  });
-
-  it('should check whether sideNavMenu has a valid react child and isActive attribute set to true', () => {
-    const { container } = render(
-      <SideNavMenu title="test-title">
-        <SideNavMenuItem isActive={true} key={'child1'}>
-          a
-        </SideNavMenuItem>
-      </SideNavMenu>
-    );
-    expect(container.firstChild).toHaveClass(`cds--side-nav__item--active`);
-  });
-
-  it('should check whether sideNavMenu has a valid react child and aria-current attribute', () => {
-    const { container } = render(
-      <SideNavMenu title="test-title">
-        <SideNavMenuItem aria-current="true" key={'child1'}>
-          a
-        </SideNavMenuItem>
-      </SideNavMenu>
-    );
-    expect(container.firstChild).toHaveClass(`cds--side-nav__item--active`);
-  });
-
-  it('should check whether the SideNavMenu has invalid react element as child', () => {
-    const { container } = render(
-      <SideNavMenu title="test-title">{null}</SideNavMenu>
-    );
-    expect(container.firstChild).not.toHaveClass(`cds--side-nav__item--active`);
-  });
-
   it('sets isExpanded and prevExpanded when sideNav is not expanded and isRail is true', () => {
     render(
       <SideNavContext.Provider value={{ isRail: true }}>
@@ -205,5 +156,111 @@ describe('SideNavMenu', () => {
       'aria-expanded',
       'false'
     );
+  });
+});
+
+describe('properly detects active descendants and applies active styling', () => {
+  it('when a child in children array has isActive', () => {
+    const { container } = render(
+      <SideNavMenu title="test-title">
+        <SideNavMenuItem isActive={true} key={'child1'}>
+          a
+        </SideNavMenuItem>
+        <SideNavMenuItem key={'child2'}>b</SideNavMenuItem>
+        <SideNavMenuItem key={'child3'}>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).toHaveClass(`cds--side-nav__item--active`);
+  });
+
+  it('when a child in children array has aria-current', () => {
+    const { container } = render(
+      <SideNavMenu title="test-title">
+        <SideNavMenuItem aria-current="true" key={'child1'}>
+          a
+        </SideNavMenuItem>
+        <SideNavMenuItem key={'child2'}>b</SideNavMenuItem>
+        <SideNavMenuItem key={'child3'}>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).toHaveClass(`cds--side-nav__item--active`);
+  });
+
+  it('when a child in nested children array has isActive', () => {
+    const { container } = render(
+      <SideNavMenu title="test-title">
+        <SideNavMenuItem isActive={true} key={'child1'}>
+          {[<div key={'subChild1'}>a1</div>, <div key={'subChild2'}>a2</div>]}
+        </SideNavMenuItem>
+        <SideNavMenuItem key={'child2'}>b</SideNavMenuItem>
+        <SideNavMenuItem key={'child3'}>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).toHaveClass(`cds--side-nav__item--active`);
+  });
+
+  it('when a child in nested children array has aria-current', () => {
+    const { container } = render(
+      <SideNavMenu title="test-title">
+        <SideNavMenuItem aria-current="true" key={'child1'}>
+          {[<div key={'subChild1'}>a1</div>, <div key={'subChild2'}>a2</div>]}
+        </SideNavMenuItem>
+        <SideNavMenuItem key={'child2'}>b</SideNavMenuItem>
+        <SideNavMenuItem key={'child3'}>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).toHaveClass(`cds--side-nav__item--active`);
+  });
+
+  it('when a single child has isActive', () => {
+    const { container } = render(
+      <SideNavMenu title="test-title">
+        <SideNavMenuItem isActive={true} key={'child1'}>
+          a
+        </SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).toHaveClass(`cds--side-nav__item--active`);
+  });
+
+  it('when a single child has aria-current', () => {
+    const { container } = render(
+      <SideNavMenu title="test-title">
+        <SideNavMenuItem aria-current="true" key={'child1'}>
+          a
+        </SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).toHaveClass(`cds--side-nav__item--active`);
+  });
+});
+
+describe('properly detects non-active descendants and does not apply active styling', () => {
+  it('when a child in children array is not a valid element', () => {
+    const { container } = render(
+      <SideNavMenu title="test-title">
+        {[null, <SideNavMenuItem key={'validChild'}>a</SideNavMenuItem>]}
+      </SideNavMenu>
+    );
+    expect(container.firstChild).not.toHaveClass(`cds--side-nav__item--active`);
+  });
+
+  it('when all children have no props given', () => {
+    const { container } = render(
+      <SideNavMenu title="test-title">
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).not.toHaveClass(`cds--side-nav__item--active`);
+  });
+
+  it('when a single child has no props', () => {
+    const { container } = render(
+      <SideNavMenu title="test-title">
+        <SideNavMenuItem>a</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).not.toHaveClass(`cds--side-nav__item--active`);
   });
 });
