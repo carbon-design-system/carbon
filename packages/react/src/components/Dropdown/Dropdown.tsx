@@ -21,6 +21,7 @@ import {
   UseSelectInterface,
   UseSelectProps,
   UseSelectState,
+  UseSelectStateChange,
   UseSelectStateChangeTypes,
 } from 'downshift';
 import cx from 'classnames';
@@ -266,9 +267,14 @@ function stateReducer(state, actionAndChanges) {
   switch (type) {
     case ItemMouseMove:
     case MenuMouseLeave:
-      return { ...changes, highlightedIndex: state.highlightedIndex };
+      if (changes.highlightedIndex === state.highlightedIndex) {
+        // Prevent state update if highlightedIndex hasn't changed
+        return state;
+      }
+      return changes;
+    default:
+      return changes;
   }
-  return changes;
 }
 
 const Dropdown = React.forwardRef(
@@ -278,7 +284,7 @@ const Dropdown = React.forwardRef(
       className: containerClassName,
       disabled = false,
       direction = 'bottom',
-      items,
+      items: itemsProp,
       label,
       ['aria-label']: ariaLabel,
       ariaLabel: deprecatedAriaLabel,
@@ -369,22 +375,24 @@ const Dropdown = React.forwardRef(
       [onChange]
     );
 
-    const selectProps: UseSelectProps<ItemType> = {
-      items,
-      itemToString,
-      initialSelectedItem,
-      onSelectedItemChange,
-      stateReducer,
-      isItemDisabled(item, _index) {
-        const isObject = item !== null && typeof item === 'object';
-        return isObject && 'disabled' in item && item.disabled === true;
-      },
-      onHighlightedIndexChange: ({ highlightedIndex }) => {
-        if (highlightedIndex! > -1 && typeof window !== undefined) {
+    const isItemDisabled = useCallback((item, _index) => {
+      const isObject = item !== null && typeof item === 'object';
+      return isObject && 'disabled' in item && item.disabled === true;
+    }, []);
+
+    const onHighlightedIndexChange = useCallback(
+      (changes: UseSelectStateChange<ItemType>) => {
+        const { highlightedIndex } = changes;
+
+        if (
+          highlightedIndex !== undefined &&
+          highlightedIndex > -1 &&
+          typeof window !== undefined
+        ) {
           const itemArray = document.querySelectorAll(
             `li.${prefix}--list-box__menu-item[role="option"]`
           );
-          const highlightedItem = itemArray[highlightedIndex!];
+          const highlightedItem = itemArray[highlightedIndex];
           if (highlightedItem) {
             highlightedItem.scrollIntoView({
               behavior: 'smooth',
@@ -393,8 +401,32 @@ const Dropdown = React.forwardRef(
           }
         }
       },
-      ...downshiftProps,
-    };
+      [prefix]
+    );
+
+    const items = useMemo(() => itemsProp, [itemsProp]);
+    const selectProps = useMemo(
+      () => ({
+        items,
+        itemToString,
+        initialSelectedItem,
+        onSelectedItemChange,
+        stateReducer,
+        isItemDisabled,
+        onHighlightedIndexChange,
+        ...downshiftProps,
+      }),
+      [
+        items,
+        itemToString,
+        initialSelectedItem,
+        onSelectedItemChange,
+        stateReducer,
+        isItemDisabled,
+        onHighlightedIndexChange,
+        downshiftProps,
+      ]
+    );
     const dropdownInstanceId = useId();
 
     // only set selectedItem if the prop is defined. Setting if it is undefined
@@ -461,9 +493,13 @@ const Dropdown = React.forwardRef(
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
-    const toggleButtonProps = getToggleButtonProps({
-      'aria-label': ariaLabel || deprecatedAriaLabel,
-    });
+    const toggleButtonProps = useMemo(
+      () =>
+        getToggleButtonProps({
+          'aria-label': ariaLabel || deprecatedAriaLabel,
+        }),
+      [getToggleButtonProps, ariaLabel, deprecatedAriaLabel]
+    );
 
     const helper =
       helperText && !isFluid ? (
@@ -539,7 +575,7 @@ const Dropdown = React.forwardRef(
         getMenuProps({
           ref: enableFloatingStyles || autoAlign ? refs.setFloating : null,
         }),
-      [autoAlign, getMenuProps, refs.setFloating]
+      [autoAlign, getMenuProps, refs.setFloating, enableFloatingStyles]
     );
 
     // Slug is always size `mini`
