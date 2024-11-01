@@ -311,7 +311,7 @@
     color: currentColor;
     cursor: pointer;
     inline-size: layout.size('height');
-    transition: 
+    transition:
       background-color $duration-fast-01 motion(standard, productive),
       box-shadow $duration-fast-01 motion(standard, productive);
 
