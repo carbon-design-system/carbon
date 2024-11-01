@@ -498,7 +498,7 @@ const Dropdown = React.forwardRef(
         getToggleButtonProps({
           'aria-label': ariaLabel || deprecatedAriaLabel,
         }),
-      [getToggleButtonProps, ariaLabel, deprecatedAriaLabel]
+      [getToggleButtonProps, ariaLabel, deprecatedAriaLabel, isOpen]
     );
 
     const helper =
