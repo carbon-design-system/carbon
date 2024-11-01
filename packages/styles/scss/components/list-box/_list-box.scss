@@ -49,6 +49,10 @@ $list-box-menu-width: convert.to-rem(300px);
 /// @access public
 /// @group list-box
 @mixin list-box {
+  .#{$prefix}--list-box__wrapper {
+    display: block;
+  }
+
   // The overall container element for a `list-box`. Has two variants,
   // `disabled` and `inline`.
   .#{$prefix}--list-box__wrapper--inline {
@@ -669,8 +673,7 @@ $list-box-menu-width: convert.to-rem(300px);
     padding-inline-end: $spacing-06;
     text-decoration: none;
     text-overflow: ellipsis;
-    transition:
-      border-color $duration-fast-01 motion(standard, productive),
+    transition: border-color $duration-fast-01 motion(standard, productive),
       color $duration-fast-01 motion(standard, productive);
     white-space: nowrap;
 
