@@ -40,7 +40,7 @@ describe('@carbon/styles/scss/config', () => {
         css--default-type: config.$css--default-type,
         css--font-face: config.$css--font-face,
         css--reset: config.$css--reset,
-        css--emit-type-custom-props,
+        css--emit-type-custom-props: config.$css--emit-type-custom-props,
         prefix: config.$prefix,
       ));
     `);
