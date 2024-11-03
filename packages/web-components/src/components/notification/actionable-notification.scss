@@ -46,7 +46,8 @@ $css--plex: true !default;
   &:focus {
     border-color: $focus-inverse;
     background-color: $notification-action-tertiary-inverse;
-    box-shadow: inset 0 0 0 button-vars.$button-outline-width $focus-inverse,
+    box-shadow:
+      inset 0 0 0 button-vars.$button-outline-width $focus-inverse,
       inset 0 0 0 button-vars.$button-border-width $background-inverse;
     color: $notification-action-tertiary-inverse-text;
   }

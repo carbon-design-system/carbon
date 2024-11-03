@@ -11,10 +11,6 @@ LICENSE file in the root directory of this source tree.
   <head>
     <title>@carbon/web-components autoalign example</title>
     <meta charset="UTF-8" />
-    <link
-      rel="stylesheet"
-      href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"
-    />
 
     <link rel="stylesheet" href="src/styles.scss" />
     <style>
@@ -28,7 +24,7 @@ LICENSE file in the root directory of this source tree.
       cds-tooltip:not(:defined) {
         display: none;
       }
-      cds-slug:not(:defined) {
+      cds-ai-label:not(:defined) {
         display: none;
       }
     </style>
@@ -111,7 +107,7 @@ LICENSE file in the root directory of this source tree.
     </div>
 
     <div class="section">
-      <cds-slug autoalign>
+      <cds-ai-label autoalign>
         <div slot="body-text">
           <p class="secondary">AI Explained</p>
           <h1>84%</h1>
@@ -124,7 +120,7 @@ LICENSE file in the root directory of this source tree.
           <p class="secondary">Model type</p>
           <p class="bold">Foundation model</p>
         </div>
-      </cds-slug>
+      </cds-ai-label>
     </div>
 
     <script>

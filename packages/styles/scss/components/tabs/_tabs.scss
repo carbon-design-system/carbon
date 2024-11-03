@@ -137,6 +137,14 @@
       &:focus {
         @include focus-outline('outline');
       }
+
+      &:hover {
+        background-color: $background-hover;
+      }
+
+      &:active {
+        background-color: $background-active;
+      }
     }
 
     .#{$prefix}--tab--overflow-nav-button--hidden {
@@ -147,16 +155,29 @@
       margin: 0;
       background-color: $layer-accent;
       inline-size: $spacing-09;
+
+      &:hover {
+        background-color: $layer-accent-hover;
+      }
+
+      &:active {
+        background-color: $layer-accent-active;
+      }
     }
 
     .#{$prefix}--tab--overflow-nav-button svg {
       z-index: 2;
       fill: $icon-primary;
+
+      &:active,
+      &:hover {
+        fill: $icon-primary;
+      }
     }
 
     .#{$prefix}--tab--overflow-nav-button--next {
-      position: absolute;
-      inset-block: 0 0;
+      position: relative;
+      inset-block: 0;
       inset-inline-end: 0;
     }
 
@@ -187,9 +208,9 @@
     }
 
     .#{$prefix}--tab--overflow-nav-button--previous {
-      position: absolute;
+      position: relative;
       z-index: 1;
-      inset-block: 0 0;
+      inset-block: 0;
       inset-inline-start: 0;
     }
 
@@ -332,7 +353,8 @@
     }
 
     .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
-      transition: color $duration-fast-01 motion(standard, productive),
+      transition:
+        color $duration-fast-01 motion(standard, productive),
         border-bottom-color $duration-fast-01 motion(standard, productive),
         outline $duration-fast-01 motion(standard, productive);
     }
@@ -463,7 +485,8 @@
       text-align: start;
       text-decoration: none;
       text-overflow: ellipsis;
-      transition: border $duration-fast-01 motion(standard, productive),
+      transition:
+        border $duration-fast-01 motion(standard, productive),
         outline $duration-fast-01 motion(standard, productive);
       white-space: nowrap;
 
@@ -502,6 +525,10 @@
     &.#{$prefix}--tabs__icon--default .#{$prefix}--tab--list,
     &.#{$prefix}--tabs__icon--lg .#{$prefix}--tab--list {
       overflow-x: visible;
+    }
+
+    .#{$prefix}--tabs__nav-item--icon-only {
+      margin-inline-end: convert.to-rem(1px);
     }
 
     .#{$prefix}--tabs__nav-item--icon-only,

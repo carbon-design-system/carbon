@@ -395,6 +395,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -1392,6 +1395,9 @@ Map {
       "translateWithId": Object {
         "type": "func",
       },
+      "typeahead": Object {
+        "type": "bool",
+      },
       "warn": Object {
         "type": "bool",
       },
@@ -1994,7 +2000,8 @@ Map {
       },
     },
     "TableCell": Object {
-      "displayName": "TableCell",
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
     },
     "TableContainer": Object {
       "propTypes": Object {
@@ -3311,9 +3318,7 @@ Map {
     "render": [Function],
   },
   "FileUploader" => Object {
-    "contextType": Object {
-      "$$typeof": Symbol(react.context),
-    },
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "accept": Object {
         "args": Array [
@@ -3393,6 +3398,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "FileUploaderButton" => Object {
     "propTypes": Object {
@@ -3971,6 +3977,16 @@ Map {
   },
   "Grid" => Object {
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "as": Object {
         "args": Array [
           Array [
@@ -4753,6 +4769,12 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "menuTarget": Object {
+        "args": Array [
+          [Function],
+        ],
+        "type": "instanceOf",
       },
       "size": Object {
         "args": Array [
@@ -5835,6 +5857,16 @@ Map {
       "hideLabel": Object {
         "type": "bool",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "OperationalTag" => Object {
@@ -5870,9 +5902,6 @@ Map {
           ],
         ],
         "type": "oneOf",
-      },
-      "slug": Object {
-        "type": "node",
       },
       "text": Object {
         "type": "string",
@@ -6983,6 +7012,12 @@ Map {
       "id": Object {
         "type": "string",
       },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -7008,9 +7043,6 @@ Map {
           ],
         ],
         "type": "oneOf",
-      },
-      "slug": Object {
-        "type": "node",
       },
       "text": Object {
         "type": "string",
@@ -8011,7 +8043,8 @@ Map {
     },
   },
   "TableCell" => Object {
-    "displayName": "TableCell",
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "TableContainer" => Object {
     "propTypes": Object {
@@ -9810,6 +9843,9 @@ Map {
       "enableTreeviewControllable": Object {
         "type": "bool",
       },
+      "enableV12DynamicFloatingStyles": Object {
+        "type": "bool",
+      },
       "enableV12Overflowmenu": Object {
         "type": "bool",
       },
@@ -10244,6 +10280,7 @@ Map {
         "type": "node",
       },
       "onChange": Object {
+        "isRequired": true,
         "type": "func",
       },
       "renderSelectedItem": Object {

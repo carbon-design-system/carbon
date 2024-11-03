@@ -48,6 +48,7 @@ import {
   size as floatingSize,
 } from '@floating-ui/react';
 import { hide } from '@floating-ui/dom';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { ItemMouseMove, MenuMouseLeave } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
@@ -80,7 +81,8 @@ export interface OnChangeData<ItemType> {
 
 export interface DropdownProps<ItemType>
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes>,
-    TranslateWithId<ListBoxMenuIconTranslationKey> {
+    TranslateWithId<ListBoxMenuIconTranslationKey>,
+    React.RefAttributes<HTMLDivElement> {
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
@@ -218,7 +220,7 @@ export interface DropdownProps<ItemType>
    * Provide the title text that will be read by a screen reader when
    * visiting this control
    */
-  titleText?: ReactNode;
+  titleText: ReactNode;
 
   /**
    * The dropdown type, `default` or `inline`
@@ -274,8 +276,12 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const enableFloatingStyles = useFeatureFlag(
+      'enable-v12-dynamic-floating-styles'
+    );
+
     const { refs, floatingStyles, middlewareData } = useFloating(
-      autoAlign
+      enableFloatingStyles || autoAlign
         ? {
             placement: direction,
 
@@ -294,16 +300,18 @@ const Dropdown = React.forwardRef(
                   });
                 },
               }),
-              flip(),
-              hide(),
+              autoAlign && flip(),
+              autoAlign && hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
-        : {} // When autoAlign is turned off, floating-ui will not be used
+        : {}
+      // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
+      // enabled, floating-ui will not be used
     );
 
     useEffect(() => {
-      if (autoAlign) {
+      if (enableFloatingStyles || autoAlign) {
         const updatedFloatingStyles = {
           ...floatingStyles,
           visibility: middlewareData.hide?.referenceHidden
@@ -460,9 +468,7 @@ const Dropdown = React.forwardRef(
             // NOTE: does not prevent click
             evt.preventDefault();
             // focus on the element as per readonly input behavior
-            if (mergedRef.current !== undefined) {
-              mergedRef.current.focus();
-            }
+            mergedRef?.current?.focus();
           },
           onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
             const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
@@ -480,7 +486,6 @@ const Dropdown = React.forwardRef(
             ) {
               setIsTyping(true);
             }
-
             if (
               (isTyping && evt.code === 'Space') ||
               !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
@@ -503,7 +508,7 @@ const Dropdown = React.forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: autoAlign ? refs.setFloating : null,
+          ref: enableFloatingStyles || autoAlign ? refs.setFloating : null,
         }),
       [autoAlign, getMenuProps, refs.setFloating]
     );
@@ -534,7 +539,7 @@ const Dropdown = React.forwardRef(
           warnText={warnText}
           light={light}
           isOpen={isOpen}
-          ref={autoAlign ? refs.setReference : null}
+          ref={enableFloatingStyles || autoAlign ? refs.setReference : null}
           id={id}>
           {invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
