@@ -14,4 +14,5 @@ FeatureFlags.merge({
   'enable-experimental-tile-contrast': false,
   'enable-v12-tile-radio-icons': false,
   'enable-v12-structured-list-visible-icons': false,
+  'enable-v12-dynamic-floating-styles': false,
 });
