@@ -1606,8 +1606,8 @@ class Slider extends PureComponent<SliderProps> {
                       twoHandles
                         ? ariaLabelInputUpper
                         : ariaLabelInput
-                        ? ariaLabelInput
-                        : undefined
+                          ? ariaLabelInput
+                          : undefined
                     }
                     disabled={disabled}
                     required={required}
