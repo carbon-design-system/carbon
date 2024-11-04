@@ -14,7 +14,7 @@ interface InlineCheckboxProps {
   /*
    * Specify the label for the control
    */
-  'aria-label': string;
+  'aria-label'?: string;
 
   /**
    * Deprecated, please use `aria-label` instead.
@@ -154,7 +154,7 @@ InlineCheckbox.propTypes = {
   /**
    * Specify the label for the control
    */
-  ['aria-label']: PropTypes.string.isRequired,
+  ['aria-label']: PropTypes.string,
 
   /**
    * Deprecated, please use `aria-label` instead.
