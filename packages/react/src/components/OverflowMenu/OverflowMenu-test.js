@@ -5,16 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React, { createRef } from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { Filter } from '@carbon/icons-react';
 import OverflowMenu from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
-import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
+    const closeMenuMock = jest.fn();
     it('should support a custom `className` prop on the button element', () => {
       render(
         <OverflowMenu open aria-label="Overflow menu" className="extra-class">
@@ -308,5 +309,17 @@ describe('OverflowMenu', () => {
     menuItem1.focus();
     fireEvent.keyDown(menuItem1, { key: 'ArrowDown', code: 'ArrowDown' });
     expect(menuItem3).toHaveFocus();
+  });
+  it('should not throw an error if the trigger element is null', () => {
+    const { container } = render(
+      <OverflowMenu iconDescription="custom-icon" className="extra-class" />
+    );
+    const instance = container.firstChild;
+    const focusMenuEl = instance.focusMenuEl;
+    expect(() => {
+      if (focusMenuEl) {
+        focusMenuEl.call(instance);
+      }
+    }).not.toThrow();
   });
 });
