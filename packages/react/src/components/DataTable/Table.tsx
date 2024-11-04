@@ -232,8 +232,7 @@ export const Table = ({
     <div
       className={`${prefix}--data-table-content`}
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-      tabIndex={tabIndex ?? (isScrollable ? 0 : undefined)}
-      }>
+      tabIndex={tabIndex ?? (isScrollable ? 0 : undefined)}>
       <table
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
