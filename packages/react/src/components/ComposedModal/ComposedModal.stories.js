@@ -16,7 +16,6 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import Button from '../Button';
-import ButtonSkeleton from '../Button/Button.Skeleton';
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -42,30 +41,6 @@ export default {
       page: mdx,
     },
   },
-};
-
-export const Test = () => {
-  const [open, setOpen] = useState(true);
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-
-      <ComposedModal
-        open={open}
-        onClose={() => setOpen(false)}
-        modalHeading="Testing Modal"
-        modalLabel="Test">
-        <ModalHeader>This modal is loading</ModalHeader>
-        <ModalBody>
-          <p>Loading...</p>
-        </ModalBody>
-        <ModalFooter>
-          <Button kind="secondary">Cancel</Button>
-          <ButtonSkeleton />
-        </ModalFooter>
-      </ComposedModal>
-    </>
-  );
 };
 
 export const Default = () => {
