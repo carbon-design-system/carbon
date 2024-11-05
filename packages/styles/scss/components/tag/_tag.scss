@@ -303,8 +303,7 @@
     color: currentColor;
     cursor: pointer;
     inline-size: layout.size('height');
-    transition:
-      background-color $duration-fast-01 motion(standard, productive),
+    transition: background-color $duration-fast-01 motion(standard, productive),
       box-shadow $duration-fast-01 motion(standard, productive);
 
     svg {
@@ -405,10 +404,8 @@
     border-color: currentColor;
   }
 
-  .#{$prefix}--tag--filter
-    .#{$prefix}--ai-label
-    .#{$prefix}--tag--filter
-    .#{$prefix}--slug {
+  .#{$prefix}--tag--filter .#{$prefix}--ai-label,
+  .#{$prefix}--tag--filter .#{$prefix}--slug {
     min-inline-size: convert.to-rem(32.14px);
   }
 
