@@ -10,11 +10,11 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
-interface InlineCheckboxProps {
+export interface InlineCheckboxProps {
   /*
    * Specify the label for the control
    */
-  'aria-label'?: string;
+  'aria-label': string;
 
   /**
    * Deprecated, please use `aria-label` instead.
@@ -154,7 +154,7 @@ InlineCheckbox.propTypes = {
   /**
    * Specify the label for the control
    */
-  ['aria-label']: PropTypes.string,
+  ['aria-label']: PropTypes.string.isRequired,
 
   /**
    * Deprecated, please use `aria-label` instead.
