@@ -50,7 +50,7 @@ export const Default = () => {
     <p>
       Custom domains direct requests for your apps in this Cloud Foundry
       organization to a{' '}
-      <DefinitionTooltip openOnHover align definition={definition}>
+      <DefinitionTooltip openOnHover definition={definition}>
         URL that you own. A custom domain can be a shared domain,
       </DefinitionTooltip>{' '}
       a shared subdomain, or a shared domain and host.
