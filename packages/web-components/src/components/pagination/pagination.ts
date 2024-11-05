@@ -26,9 +26,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  *
  * @element cds-pagination
  * @slot page-sizes-select - Where to put in the `<page-sizes-select>`.
- * @fires cds-pages-select-changed - The custom event fired after the current page is changed from `<cds-pages-select>`.
- * @fires cds-page-sizes-select-changed
- *   The custom event fired after the number of rows per page is changed from `<cds-page-sizes-select>`.
+ * @fires cds-pagination-changed-current - The custom event fired after the current page is changed from `<cds-pages-select>`.
+ * @fires cds-page-sizes-select-changed - The custom event fired after the number of rows per page is changed from `<cds-page-sizes-select>`.
  */
 @customElement(`${prefix}-pagination`)
 class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
@@ -97,6 +96,25 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
   }
 
   /**
+   * Handles user-initiated change in the size of the page.
+   */
+  private _handleUserInitiatedPageSizeChange() {
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSPagination).eventPageSizeChanged,
+        {
+          bubbles: true,
+          composed: true,
+          detail: {
+            page: this.page,
+            pageSize: this.pageSize,
+          },
+        }
+      )
+    );
+  }
+
+  /**
    * Handles `click` event on the previous button.
    */
   private _handleClickPrevButton() {
@@ -125,7 +143,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    *
    * @param event The event.
    */
-  @HostListener('eventChangeSelect')
+  @HostListener(`${prefix}-select-selected`)
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleChangeSelector(event) {
     const { value } = event.detail;
@@ -139,6 +157,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
         pageSize > 0 ? Math.ceil(totalItems / pageSize) : totalItems;
       this.page = 1;
       this.start = 0;
+      this._handleUserInitiatedPageSizeChange();
     } else {
       this.page = value;
       this._handleUserInitiatedChangeStart((value - 1) * pageSize);
@@ -461,8 +480,8 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
   /**
    * The name of the custom event fired after the number of rows per page is changed from `<cds-page-sizes-select>`.
    */
-  static get eventChangeSelect() {
-    return `${prefix}-select-selected`;
+  static get eventPageSizeChanged() {
+    return `${prefix}-page-sizes-select-changed`;
   }
 
   static shadowRootOptions = {

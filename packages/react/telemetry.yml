@@ -328,6 +328,7 @@ collect:
         # FeatureFlags
         - enableExperimentalFocusWrapWithoutSentinels
         - enableTreeviewControllable
+        - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
         - enableV12TileDefaultIcons
         - enableV12TileRadioIcons
@@ -612,12 +613,12 @@ collect:
         - top-start
         # General - aria-current
         - date
-        - "false"
+        - 'false'
         - location
         - page
         - step
         - time
-        - "true"
+        - 'true'
         # General - buttonKind
         - danger
         - danger--ghost
@@ -661,9 +662,9 @@ collect:
         - left
         - right
         # General - level
-        - "0"
-        - "1"
-        - "2"
+        - '0'
+        - '1'
+        - '2'
         # General - loadingStatus
         - active
         - error
