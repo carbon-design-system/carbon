@@ -313,7 +313,6 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/mikdhadc"><img src="https://avatars.githubusercontent.com/u/54241506?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mohammed Mikdhad C</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=mikdhadc" title="Code">💻</a></td>
     <td align="center"><a href="https://irfadkp.github.io/"><img src="https://avatars.githubusercontent.com/u/54243898?v=4?s=100" width="100px;" alt=""/><br /><sub><b>IRFAD KP</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=irfadkp" title="Code">💻</a></td>
   </tr>
-  </tr>
   <tr>
     <td align="center"><a href="https://github.com/ziyadzulfikar"><img src="https://avatars.githubusercontent.com/u/56788667?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ziyadzulfikar</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=ziyadzulfikar" title="Code">💻</a></td>
     <td align="center"><a href="https://irfadkp.github.io/"><img src="https://avatars.githubusercontent.com/u/54243898?v=4?s=100" width="100px;" alt=""/><br /><sub><b>IRFAD KP</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=irfadkp" title="Code">💻</a></td>
