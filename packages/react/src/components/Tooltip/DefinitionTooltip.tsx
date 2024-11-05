@@ -25,6 +25,11 @@ export interface DefinitionTooltipProps
   align?: PopoverAlignment;
 
   /**
+   * Will auto-align Definition Tooltip. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlign?: boolean;
+
+  /**
    * The `children` prop will be used as the value that is being defined
    */
   children?: React.ReactNode;
@@ -70,7 +75,8 @@ export interface DefinitionTooltipProps
 }
 
 const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
-  align = 'bottom-start',
+  align = 'bottom',
+  autoAlign,
   className,
   children,
   definition,
@@ -96,6 +102,7 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
     <Popover
       align={align}
       className={className}
+      autoAlign={autoAlign}
       dropShadow={false}
       highContrast
       onMouseLeave={() => {
@@ -165,6 +172,11 @@ DefinitionTooltip.propTypes = {
     'right-end',
     'right-start',
   ]),
+
+  /**
+   * Will auto-align the popover. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * The `children` prop will be used as the value that is being defined
