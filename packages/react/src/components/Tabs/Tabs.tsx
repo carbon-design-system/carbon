@@ -531,9 +531,9 @@ function TabList({
     ) {
       event.preventDefault();
 
-      const filtredTabs = tabs.current.filter((tab) => tab !== null);
+      const filteredTabs = tabs.current.filter((tab) => tab !== null);
 
-      const activeTabs: TabElement[] = filtredTabs.filter(
+      const activeTabs: TabElement[] = filteredTabs.filter(
         (tab) => !tab.disabled
       );
 
@@ -550,6 +550,18 @@ function TabList({
         setActiveIndex(nextIndex);
       }
       tabs.current[nextIndex]?.focus();
+    }
+  }
+
+  function handleBlur({
+    relatedTarget: currentActiveNode,
+  }: React.FocusEvent<HTMLDivElement>) {
+    if (ref.current?.contains(currentActiveNode)) {
+      return;
+    }
+    // reset active index to selected tab index for manual activation
+    if (activation === 'manual') {
+      setActiveIndex(selectedIndex);
     }
   }
 
@@ -706,7 +718,8 @@ function TabList({
         role="tablist"
         className={`${prefix}--tab--list`}
         onScroll={debouncedOnScroll}
-        onKeyDown={onKeyDown}>
+        onKeyDown={onKeyDown}
+        onBlur={handleBlur}>
         {React.Children.map(children, (child, index) => {
           return !isElement(child) ? null : (
             <TabContext.Provider
@@ -876,9 +889,9 @@ function TabListVertical({
     if (matches(event, [keys.ArrowDown, keys.ArrowUp, keys.Home, keys.End])) {
       event.preventDefault();
 
-      const filtredTabs = tabs.current.filter((tab) => tab !== null);
+      const filteredTabs = tabs.current.filter((tab) => tab !== null);
 
-      const activeTabs: TabElement[] = filtredTabs.filter(
+      const activeTabs: TabElement[] = filteredTabs.filter(
         (tab) => !tab.disabled
       );
 
@@ -895,6 +908,18 @@ function TabListVertical({
         setActiveIndex(nextIndex);
       }
       tabs.current[nextIndex]?.focus();
+    }
+  }
+
+  function handleBlur({
+    relatedTarget: currentActiveNode,
+  }: React.FocusEvent<HTMLDivElement>) {
+    if (ref.current?.contains(currentActiveNode)) {
+      return;
+    }
+    // reset active index to selected tab index for manual activation
+    if (activation === 'manual') {
+      setActiveIndex(selectedIndex);
     }
   }
 
@@ -991,7 +1016,8 @@ function TabListVertical({
         ref={ref}
         role="tablist"
         className={`${prefix}--tab--list`}
-        onKeyDown={onKeyDown}>
+        onKeyDown={onKeyDown}
+        onBlur={handleBlur}>
         {React.Children.map(children, (child, index) => {
           return !isElement(child) ? null : (
             <TabContext.Provider
@@ -1717,7 +1743,7 @@ function TabPanels({ children }: TabPanelsProps) {
   return (
     <>
       {React.Children.map(children, (child, index) => {
-        return (
+        return !isElement(child) ? null : (
           <TabPanelContext.Provider value={index}>
             {React.cloneElement(child as React.ReactElement<any>, {
               ref: (element: HTMLDivElement) => {

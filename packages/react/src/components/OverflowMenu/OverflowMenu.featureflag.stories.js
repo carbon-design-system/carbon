@@ -15,6 +15,7 @@ import {
 } from '../Menu';
 import { OverflowMenu } from './';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
+import { FeatureFlags } from '../FeatureFlags';
 
 export default {
   title: 'Components/OverflowMenu/Feature Flag',
@@ -68,16 +69,22 @@ export const AutoAlign = () => {
 
 export const Nested = () => {
   return (
-    <OverflowMenu>
-      <MenuItem label="Level 1" />
-      <MenuItem label="Level 1" />
-      <MenuItem label="Level 1">
-        <MenuItem label="Level 2" />
-        <MenuItem label="Level 2" />
-        <MenuItem label="Level 2" />
-      </MenuItem>
-      <MenuItem label="Level 1" />
-    </OverflowMenu>
+    <FeatureFlags
+      flags={{
+        'enable-v12-overflowmenu': true,
+        'enable-v12-dynamic-floating-styles': false,
+      }}>
+      <OverflowMenu>
+        <MenuItem label="Level 1" />
+        <MenuItem label="Level 1" />
+        <MenuItem label="Level 1">
+          <MenuItem label="Level 2" />
+          <MenuItem label="Level 2" />
+          <MenuItem label="Level 2" />
+        </MenuItem>
+        <MenuItem label="Level 1" />
+      </OverflowMenu>
+    </FeatureFlags>
   );
 };
 
