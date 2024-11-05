@@ -27,8 +27,7 @@
     position: relative;
     block-size: 100%;
     inline-size: 100%;
-    transition:
-      background-color $duration-fast-01 motion(standard, productive),
+    transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
 
@@ -407,17 +406,6 @@
     .#{$prefix}--date-picker-input__wrapper--slug
     .#{$prefix}--slug {
     inset-block-start: convert.to-rem(43px);
-  }
-
-  .#{$prefix}--date-picker--fluid
-    .#{$prefix}--date-picker-input__wrapper--slug:has(
-      .#{$prefix}--ai-label
-    ):not(:has(.#{$prefix}--ai-label--revert)),
-  .#{$prefix}--date-picker--fluid
-    .#{$prefix}--date-picker-input__wrapper--slug:has(.#{$prefix}--slug):not(
-      :has(.#{$prefix}--slug--revert)
-    ) {
-    @include ai-gradient;
   }
 
   .#{$prefix}--date-picker--fluid
