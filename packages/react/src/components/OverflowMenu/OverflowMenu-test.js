@@ -310,6 +310,29 @@ describe('OverflowMenu', () => {
     fireEvent.keyDown(menuItem1, { key: 'ArrowDown', code: 'ArrowDown' });
     expect(menuItem3).toHaveFocus();
   });
+  it('focuses the previous enabled menu item when pressing ArrowUp', async () => {
+    render(
+      <OverflowMenu iconDescription="custom-icon" className="extra-class">
+        <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
+        <OverflowMenuItem
+          itemText="Item 2"
+          disabled
+          data-testid="menu-item-2"
+        />
+        <OverflowMenuItem itemText="Item 3" data-testid="menu-item-3" />
+      </OverflowMenu>
+    );
+    const button = screen.getByRole('button', { name: 'custom-icon' });
+    fireEvent.click(button);
+
+    const menuItem1 = screen.getByText('Item 1').closest('button');
+    const menuItem3 = screen.getByText('Item 3').closest('button');
+
+    menuItem3.focus();
+    expect(menuItem3).toHaveFocus();
+    fireEvent.keyDown(menuItem3, { key: 'ArrowUp', code: 'ArrowUp' });
+    expect(menuItem1).toHaveFocus();
+  });
   it('should not throw an error if the trigger element is null', () => {
     const { container } = render(
       <OverflowMenu iconDescription="custom-icon" className="extra-class" />
