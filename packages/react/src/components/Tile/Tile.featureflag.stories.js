@@ -299,7 +299,7 @@ export const ExpandableWithLayer = () => {
 };
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -342,14 +342,14 @@ export const _WithAILabel = {
     },
   },
   render: (args) => (
-    <div className="slug-selectable-tile-container slug-experimental-radio-tile-container">
+    <div className="ai-label-selectable-tile-container ai-label-experimental-radio-tile-container">
       <TileGroup
         defaultSelected="default-selected"
         legend="Radio Tile Group - Feature Flags enabled"
         name="radio tile group two"
         {...args}>
         <RadioTile
-          className="slug-radio-tile"
+          className="ai-label-radio-tile"
           id="radio-tile-4"
           value="standard"
           slug={aiLabel}
@@ -357,7 +357,7 @@ export const _WithAILabel = {
           Option 1
         </RadioTile>
         <RadioTile
-          className="slug-radio-tile"
+          className="ai-label-radio-tile"
           id="radio-tile-5"
           value="default-selected"
           slug={aiLabel}
@@ -365,7 +365,7 @@ export const _WithAILabel = {
           Option 2
         </RadioTile>
         <RadioTile
-          className="slug-radio-tile"
+          className="ai-label-radio-tile"
           id="radio-tile-6"
           value="selected"
           slug={aiLabel}

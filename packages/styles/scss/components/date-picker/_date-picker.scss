@@ -190,7 +190,8 @@
     inline-size: convert.to-rem(143.5px);
   }
 
-  // Styles for `Slug` rendered inside `DatePickerInput`
+  // Styles for `AILabel` rendered inside `DatePickerInput`
+  .#{$prefix}--date-picker-input__wrapper--slug .#{$prefix}--ai-label,
   .#{$prefix}--date-picker-input__wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
@@ -198,7 +199,9 @@
     transform: translateY(-50%);
   }
 
-  .#{$prefix}--date-picker-input__wrapper--slug
+  .#{$prefix}--date-picker-input__wrapper--slug:has(.#{$prefix}--ai-label)
+    .#{$prefix}--date-picker__input:not(:has(~ .#{$prefix}--ai-label--revert)),
+  .#{$prefix}--date-picker-input__wrapper--slug:has(.#{$prefix}--slug)
     .#{$prefix}--date-picker__input:not(:has(~ .#{$prefix}--slug--revert)) {
     @include ai-gradient;
 
