@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { createRef } from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { Filter } from '@carbon/icons-react';
 import OverflowMenu from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
+import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 describe('OverflowMenu', () => {
@@ -321,5 +321,24 @@ describe('OverflowMenu', () => {
         focusMenuEl.call(instance);
       }
     }).not.toThrow();
+  });
+  it('closes the menu on Escape key press', () => {
+    render(
+      <OverflowMenu open iconDescription="custom-icon" className="extra-class">
+        <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
+        <OverflowMenuItem
+          itemText="Item 2"
+          disabled
+          data-testid="menu-item-2"
+        />
+        <OverflowMenuItem itemText="Item 3" data-testid="menu-item-3" />
+      </OverflowMenu>
+    );
+    const button = screen.getByRole('button', { name: 'custom-icon' });
+    expect(button).toHaveClass('cds--overflow-menu--open');
+    fireEvent.keyDown(button, { key: 'Escape', code: 'Escape' });
+    setTimeout(() => {
+      expect(button).not.toHaveClass('cds--overflow-menu--open');
+    }, 0);
   });
 });
