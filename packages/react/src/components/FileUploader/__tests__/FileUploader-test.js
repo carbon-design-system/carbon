@@ -5,19 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getByLabel, getByText } from '@carbon/test-utils/dom';
 import { act, render } from '@testing-library/react';
-import React from 'react';
+import { getByLabel, getByText } from '@carbon/test-utils/dom';
+
 import FileUploader from '../';
-import { uploadFiles } from '../test-helpers';
+import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
+import { uploadFiles } from '../test-helpers';
 
 const iconDescription = 'test description';
 const requiredProps = {
   iconDescription,
   filenameStatus: 'uploading',
   labelTitle: 'Upload files',
-  labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',
+  labelDescription: 'Max file size is 500 MB. Only .jpg files are supported.',
 };
 
 describe('FileUploader', () => {
@@ -105,5 +106,65 @@ describe('FileUploader', () => {
 
     const complete = getByLabel(container, iconDescription);
     expect(edit).not.toEqual(complete);
+  });
+  it('should disable file input when `disabled` prop is true', () => {
+    const { container } = render(
+      <FileUploader {...requiredProps} disabled buttonLabel="disabled upload" />
+    );
+    const input = container.querySelector('input');
+    expect(input).toBeDisabled();
+  });
+  it('should render with different button kinds', () => {
+    const buttonKinds = ['primary', 'secondary', 'danger', 'ghost'];
+    buttonKinds.forEach((kind) => {
+      const { container } = render(
+        <FileUploader {...requiredProps} buttonKind={kind} />
+      );
+      const button = container.querySelector('button');
+      expect(button).toHaveClass(`cds--btn--${kind}`);
+    });
+  });
+  it('should trigger `onDelete` when a file is removed', () => {
+    const onDelete = jest.fn();
+    const { container } = render(
+      <FileUploader
+        {...requiredProps}
+        filenameStatus="edit"
+        onDelete={onDelete}
+      />
+    );
+    const input = container.querySelector('input');
+
+    act(() => {
+      uploadFiles(input, [
+        new File(['test'], 'test.png', { type: 'image/png' }),
+      ]);
+    });
+
+    const removeFileButton = getByLabel(
+      container,
+      'test description - test.png'
+    );
+
+    act(() => {
+      Simulate.click(removeFileButton);
+    });
+
+    expect(onDelete).toHaveBeenCalledTimes(1);
+  });
+  it('should trigger `onChange` when files are selected', () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      <FileUploader {...requiredProps} onChange={onChange} />
+    );
+    const input = container.querySelector('input');
+
+    act(() => {
+      uploadFiles(input, [
+        new File(['test'], 'test.png', { type: 'image/png' }),
+      ]);
+    });
+
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 });

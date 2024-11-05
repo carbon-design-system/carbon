@@ -1906,6 +1906,9 @@ Map {
         "stickyHeader": Object {
           "type": "bool",
         },
+        "tabIndex": Object {
+          "type": "number",
+        },
         "useStaticWidth": Object {
           "type": "bool",
         },
@@ -3977,6 +3980,16 @@ Map {
   },
   "Grid" => Object {
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "as": Object {
         "args": Array [
           Array [
@@ -5847,6 +5860,16 @@ Map {
       "hideLabel": Object {
         "type": "bool",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "OperationalTag" => Object {
@@ -6992,6 +7015,12 @@ Map {
       "id": Object {
         "type": "string",
       },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -7922,6 +7951,9 @@ Map {
       },
       "stickyHeader": Object {
         "type": "bool",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
       "useStaticWidth": Object {
         "type": "bool",
@@ -9815,6 +9847,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": Object {
+        "type": "bool",
+      },
+      "enableV12DynamicFloatingStyles": Object {
         "type": "bool",
       },
       "enableV12Overflowmenu": Object {

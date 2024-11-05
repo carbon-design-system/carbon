@@ -258,7 +258,41 @@ export const Popover: PopoverComponent = React.forwardRef(
             // Middleware order matters, arrow should be last
             middleware: [
               offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
-              autoAlign && flip({ fallbackAxisSideDirection: 'start' }),
+              autoAlign &&
+                flip({
+                  fallbackPlacements: align.includes('bottom')
+                    ? [
+                        'bottom',
+                        'bottom-start',
+                        'bottom-end',
+                        'right',
+                        'right-start',
+                        'right-end',
+                        'left',
+                        'left-start',
+                        'left-end',
+                        'top',
+                        'top-start',
+                        'top-end',
+                      ]
+                    : [
+                        'top',
+                        'top-start',
+                        'top-end',
+                        'left',
+                        'left-start',
+                        'left-end',
+                        'right',
+                        'right-start',
+                        'right-end',
+                        'bottom',
+                        'bottom-start',
+                        'bottom-end',
+                      ],
+
+                  fallbackStrategy: 'initialPlacement',
+                  fallbackAxisSideDirection: 'start',
+                }),
               arrow({
                 element: caretRef,
               }),
@@ -567,7 +601,6 @@ function PopoverContentRenderFunction(
   const ref = useMergedRefs([setFloating, forwardRef]);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
-
   return (
     <span {...rest} className={`${prefix}--popover`}>
       <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>

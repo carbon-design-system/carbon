@@ -27,7 +27,7 @@
     display: inline-grid;
     align-items: center;
     grid-gap: 0 convert.to-rem(24px);
-    grid-template: auto auto / auto min-content;
+    grid-template: auto / auto min-content;
 
     .#{$prefix}--label {
       @include type-style('body-compact-01');
@@ -215,7 +215,8 @@
   .#{$prefix}--dropdown-item {
     position: relative;
     opacity: 0;
-    transition: visibility $duration-fast-01 motion(standard, productive),
+    transition:
+      visibility $duration-fast-01 motion(standard, productive),
       opacity $duration-fast-01 motion(standard, productive),
       background-color $duration-fast-01 motion(standard, productive);
     visibility: inherit;

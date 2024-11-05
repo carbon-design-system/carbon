@@ -46,6 +46,12 @@ class CDSTableBody extends LitElement {
    */
   private _handleSlotChange = () => {
     this._updateZebra();
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSTableBody).eventTableBodyContentChange,
+        { bubbles: true, cancelable: false }
+      )
+    );
   };
 
   /**
@@ -78,6 +84,13 @@ class CDSTableBody extends LitElement {
   render() {
     const { _handleSlotChange: handleSlotChange } = this;
     return html` <slot @slotchange="${handleSlotChange}"></slot> `;
+  }
+
+  /**
+   * The name of the custom event fired after the body slot content changes
+   */
+  static get eventTableBodyContentChange() {
+    return `${prefix}-table-body-content-change`;
   }
 
   static styles = styles;

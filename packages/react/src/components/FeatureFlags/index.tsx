@@ -28,6 +28,7 @@ interface FeatureFlagsProps {
   enableV12Overflowmenu?: boolean;
   enableTreeviewControllable?: boolean;
   enableExperimentalFocusWrapWithoutSentinels?: boolean;
+  enableV12DynamicFloatingStyles?: boolean;
 }
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
@@ -48,6 +49,7 @@ function FeatureFlags({
   enableV12Overflowmenu = false,
   enableTreeviewControllable = false,
   enableExperimentalFocusWrapWithoutSentinels = false,
+  enableV12DynamicFloatingStyles = false,
 }: FeatureFlagsProps): JSX.Element {
   const parentScope = useContext(FeatureFlagContext);
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
@@ -59,6 +61,7 @@ function FeatureFlags({
     'enable-treeview-controllable': enableTreeviewControllable,
     'enable-experimental-focus-wrap-without-sentinels':
       enableExperimentalFocusWrapWithoutSentinels,
+    'enable-v12-dynamic-floating-styles': enableV12DynamicFloatingStyles,
     ...flags,
   };
   const [scope, updateScope] = useState(() => {
@@ -107,6 +110,7 @@ FeatureFlags.propTypes = {
   enableV12Overflowmenu: PropTypes.bool,
   enableTreeviewControllable: PropTypes.bool,
   enableExperimentalFocusWrapWithoutSentinels: PropTypes.bool,
+  enableV12DynamicFloatingStyles: PropTypes.bool,
 };
 
 /**
