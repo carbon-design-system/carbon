@@ -286,7 +286,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
     // which means Flatpickr will never be instantiated in "simple" mode.
     if (dateInteractNode && dateInteractNode.input) {
       this.calendar = flatpickr(
-        dateInteractNode as any,
+        dateInteractNode.input as any,
         this._datePickerOptions
       );
     }
