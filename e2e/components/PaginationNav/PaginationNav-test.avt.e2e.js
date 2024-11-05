@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('PaginationNav @avt', () => {
+test.describe('@avt PaginationNav', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'PaginationNav',

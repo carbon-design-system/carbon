@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { spacing } from '@carbon/layout';
+import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import { spacing } from '@carbon/layout';
+
 import { usePrefix } from '../../internal/usePrefix';
 
 /**
@@ -21,7 +22,7 @@ const SPACING_STEPS = Array.from({ length: spacing.length - 1 }).map(
   }
 );
 
-interface StackProps extends React.HTMLAttributes<HTMLElement> {
+export interface StackProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Provide a custom element type to render as the outermost element in
    * the Stack component. By default, this component will render a `div`.
@@ -70,36 +71,35 @@ interface StackProps extends React.HTMLAttributes<HTMLElement> {
  * - https://paste.twilio.design/layout/stack/
  * - https://github.com/Workday/canvas-kit/blob/f2f599654876700f483a1d8c5de82a41315c76f1/modules/labs-react/layout/lib/Stack.tsx
  */
-const Stack = React.forwardRef<React.ReactNode, StackProps>(function Stack(
-  props,
-  ref
-) {
-  const {
-    as: BaseComponent = 'div',
-    children,
-    className: customClassName,
-    gap,
-    orientation = 'vertical',
-    ...rest
-  } = props;
-  const prefix = usePrefix();
-  const className = cx(customClassName, {
-    [`${prefix}--stack-${orientation}`]: true,
-    [`${prefix}--stack-scale-${gap}`]: typeof gap === 'number',
-  });
-  const style = {};
+const Stack = React.forwardRef<React.ReactNode, StackProps>(
+  function Stack(props, ref) {
+    const {
+      as: BaseComponent = 'div',
+      children,
+      className: customClassName,
+      gap,
+      orientation = 'vertical',
+      ...rest
+    } = props;
+    const prefix = usePrefix();
+    const className = cx(customClassName, {
+      [`${prefix}--stack-${orientation}`]: true,
+      [`${prefix}--stack-scale-${gap}`]: typeof gap === 'number',
+    });
+    const style = {};
 
-  if (typeof gap === 'string') {
-    style[`--${prefix}-stack-gap`] = gap;
+    if (typeof gap === 'string') {
+      style[`--${prefix}-stack-gap`] = gap;
+    }
+
+    return (
+      // eslint-disable-next-line react/forbid-component-props
+      <BaseComponent {...rest} ref={ref} className={className} style={style}>
+        {children}
+      </BaseComponent>
+    );
   }
-
-  return (
-    // eslint-disable-next-line react/forbid-component-props
-    <BaseComponent {...rest} ref={ref} className={className} style={style}>
-      {children}
-    </BaseComponent>
-  );
-});
+);
 
 Stack.propTypes = {
   /**

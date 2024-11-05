@@ -1,0 +1,54 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as ContentSwitcherStories from './content-switcher.stories';
+
+<Meta of={ContentSwitcherStories} />
+
+# Content switcher
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/content-switcher)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/content-switcher)
+
+Content switcher manipulates the content shown following an exclusive or
+“either/or” pattern. It is used to toggle between two or more content sections
+within the same space on screen. Only one section can be shown at a time.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/content-switcher/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['content-switcher'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-content-switcher>
+  <cds-content-switcher-item value="all">Option 1</cds-content-switcher-item>
+  <cds-content-switcher-item value="cloudFoundry" disabled
+    >Option 2</cds-content-switcher-item
+  >
+  <cds-content-switcher-item value="staging"
+    >Option 3</cds-content-switcher-item
+  >
+  <cds-content-switcher-item value="dea">Option 4</cds-content-switcher-item>
+  <cds-content-switcher-item value="router">Option 5</cds-content-switcher-item>
+</cds-content-switcher>
+```
+
+## `<cds-content-switcher>` attributes, properties and events
+
+<ArgTypes of="cds-content-switcher" />
+
+## `<cds-content-switcher-item>` attributes and properties
+
+<ArgTypes of="cds-content-switcher-item" />

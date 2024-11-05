@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Tile @avt', () => {
+test.describe('@avt Tile', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Tile',
@@ -22,7 +22,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('Tile');
   });
 
-  test('ClickableTile @avt-default-state', async ({ page }) => {
+  test('@avt-default-state ClickableTile', async ({ page }) => {
     await visitStory(page, {
       component: 'ClickableTile',
       id: 'components-tile--clickable',
@@ -33,7 +33,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('ClickableTile');
   });
 
-  test('ExpandableTile @avt-default-state', async ({ page }) => {
+  test('@avt-default-state ExpandableTile', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpandableTile',
       id: 'components-tile--expandable',
@@ -44,7 +44,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('ExpandableTile');
   });
 
-  test('SelectableTile @avt-default-state', async ({ page }) => {
+  test('@avt-default-state SelectableTile', async ({ page }) => {
     await visitStory(page, {
       component: 'SelectableTile',
       id: 'components-tile--selectable',
@@ -55,7 +55,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('SelectableTile');
   });
 
-  test('SelectableTile multi-select @avt-default-state', async ({ page }) => {
+  test('@avt-default-state SelectableTile multi-select', async ({ page }) => {
     await visitStory(page, {
       component: 'SelectableTile',
       id: 'components-tile--multi-select',
@@ -66,7 +66,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('SelectableTile multi-select');
   });
 
-  test('RadioTile @avt-default-state', async ({ page }) => {
+  test('@avt-default-state RadioTile', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioTile',
       id: 'components-tile--radio',
@@ -77,7 +77,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('RadioTile');
   });
 
-  test('ClickableTile - @avt-advanced-states', async ({ page }) => {
+  test('@avt-advanced-states ClickableTile', async ({ page }) => {
     await visitStory(page, {
       component: 'Tile',
       id: 'components-tile--clickable',
@@ -92,7 +92,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('ClickableTile-Disabled');
   });
 
-  test('ExpandableTile - @avt-advanced-states', async ({ page }) => {
+  test('@avt-advanced-states ExpandableTile', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpandableTile',
       id: 'components-tile--expandable',
@@ -101,6 +101,12 @@ test.describe('Tile @avt', () => {
       },
     });
     await expect(page.locator('body')).toBeFocused();
+
+    // Pause to ensure the initial animation finishes before we interact
+    await expect(
+      page.getByRole('button', { name: 'Above the fold content here' })
+    ).toBeVisible();
+
     await page.keyboard.press('Tab');
     await expect(page.locator('#expandable-tile-1')).toBeFocused();
     await page.keyboard.press('Enter');
@@ -109,7 +115,32 @@ test.describe('Tile @avt', () => {
     );
   });
 
-  test('SelectableTile @avt-keyboard-nav', async ({ page }) => {
+  test('@avt-advanced-states ExpandableTile with interactive spacebar', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'ExpandableTile',
+      id: 'components-tile--expandable-with-interactive',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page.locator('body')).toBeFocused();
+
+    // Pause to ensure the initial animation finishes before we interact
+    await expect(page.getByLabel('Interact to Expand tile')).toBeVisible();
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+
+    await expect(page.getByLabel('Interact to Expand tile')).toBeFocused();
+    await page.keyboard.press('Space');
+    await expect(page.locator('#expandable-tile-1')).toHaveClass(
+      'cds--tile cds--tile--expandable cds--tile--expandable--interactive cds--tile--is-expanded'
+    );
+  });
+
+  test('@avt-keyboard-nav SelectableTile', async ({ page }) => {
     await visitStory(page, {
       component: 'SelectableTile',
       id: 'components-tile--selectable',
@@ -118,15 +149,19 @@ test.describe('Tile @avt', () => {
       },
     });
     await expect(page.locator('body')).toBeFocused();
+
+    // Pause to ensure the initial animation finishes before we interact
+    await expect(page.getByRole('checkbox')).toBeVisible();
+
     await page.keyboard.press('Tab');
-    await expect(page.locator('#selectable-tile-1')).toBeFocused();
+    await expect(page.getByRole('checkbox')).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(page.locator('#selectable-tile-1')).toHaveClass(
+    await expect(page.getByRole('checkbox')).toHaveClass(
       'cds--tile cds--tile--selectable cds--tile--is-selected'
     );
   });
 
-  test('RadioTile @avt-keyboard-nav', async ({ page }) => {
+  test('@avt-keyboard-nav RadioTile', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioTile',
       id: 'components-tile--radio',
@@ -135,9 +170,13 @@ test.describe('Tile @avt', () => {
       },
     });
     await expect(page.locator('body')).toBeFocused();
+
+    // Pause to ensure the initial animation finishes before we interact
+    await expect(page.getByRole('radio').nth(0)).toBeVisible();
+
     await page.keyboard.press('Tab');
-    await expect(page.locator('#radio-tile-2')).toBeFocused();
+    await expect(page.getByRole('radio').nth(1)).toBeFocused();
     await page.keyboard.press('ArrowUp');
-    await expect(page.locator('#radio-tile-1')).toBeChecked();
+    await expect(page.getByRole('radio').nth(0)).toBeChecked();
   });
 });

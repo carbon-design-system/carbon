@@ -82,9 +82,10 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
     },
     ref: ForwardedRef<HTMLElement>
   ) {
-    const isRail = useContext(SideNavContext);
+    const { isRail } = useContext(SideNavContext);
     const prefix = usePrefix();
     const [isExpanded, setIsExpanded] = useState<boolean>(defaultExpanded);
+    const [prevExpanded, setPrevExpanded] = useState<boolean>(defaultExpanded);
     const className = cx({
       [`${prefix}--side-nav__item`]: true,
       [`${prefix}--side-nav__item--active`]:
@@ -93,6 +94,14 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
       [`${prefix}--side-nav__item--large`]: large,
       [customClassName as string]: !!customClassName,
     });
+
+    if (!isSideNavExpanded && isExpanded && isRail) {
+      setIsExpanded(false);
+      setPrevExpanded(true);
+    } else if (isSideNavExpanded && prevExpanded && isRail) {
+      setIsExpanded(true);
+      setPrevExpanded(false);
+    }
 
     return (
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions

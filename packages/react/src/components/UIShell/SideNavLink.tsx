@@ -78,7 +78,7 @@ export interface SideNavLinkComponent {
 }
 
 const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
-  E extends ElementType = 'a'
+  E extends ElementType = 'a',
 >(
   {
     children,
@@ -123,7 +123,7 @@ const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
       </Link>
     </SideNavItem>
   );
-});
+}) as SideNavLinkComponent;
 
 SideNavLink.displayName = 'SideNavLink';
 SideNavLink.propTypes = {

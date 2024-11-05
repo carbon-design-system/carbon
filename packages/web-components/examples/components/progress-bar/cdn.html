@@ -1,0 +1,33 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/web-components example</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/themes.css" /> 
+  <style>
+    /* Suppress custom element until styles are loaded */
+    cds-progress-bar:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/progress-bar.min.js"></script>
+</head>
+<body class="cds-theme-zone-white">
+  <cds-progress-bar
+    label="Progress bar label"
+    helper-text="Optional helper text"
+    value="75">
+  </cds-progress-bar>
+</body>
+</html>

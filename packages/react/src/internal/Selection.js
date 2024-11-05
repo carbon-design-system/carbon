@@ -7,7 +7,7 @@
 
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash.isequal';
+import isEqual from 'react-fast-compare';
 
 function callOnChangeHandler({
   isControlled,
@@ -30,6 +30,8 @@ export function useSelection({
   onChange,
   initialSelectedItems = [],
   selectedItems: controlledItems,
+  selectAll = false,
+  filteredItems = [],
 }) {
   const isMounted = useRef(false);
   const savedOnChange = useRef(onChange);
@@ -43,26 +45,46 @@ export function useSelection({
         return;
       }
 
-      let selectedIndex;
-      selectedItems.forEach((selectedItem, index) => {
-        if (isEqual(selectedItem, item)) {
-          selectedIndex = index;
-        }
-      });
+      const allSelectableItems = filteredItems.filter((item) => !item.disabled);
+      const disabledItemCount = filteredItems.filter(
+        (item) => item.disabled
+      ).length;
+
       let newSelectedItems;
-      if (selectedIndex === undefined) {
-        newSelectedItems = selectedItems.concat(item);
-        callOnChangeHandler({
-          isControlled,
-          isMounted: isMounted.current,
-          onChangeHandlerControlled: savedOnChange.current,
-          onChangeHandlerUncontrolled: setUncontrolledItems,
-          selectedItems: newSelectedItems,
+
+      //deselect all on click to All/indeterminate option
+      if (item && item.isSelectAll && selectedItems.length > 0) {
+        newSelectedItems = [];
+      }
+      //select all option
+      else if (item && item.isSelectAll && selectedItems.length == 0) {
+        newSelectedItems = allSelectableItems;
+      } else {
+        let selectedIndex;
+        selectedItems.forEach((selectedItem, index) => {
+          if (isEqual(selectedItem, item)) {
+            selectedIndex = index;
+          }
         });
-        return;
+
+        if (selectedIndex === undefined) {
+          newSelectedItems = selectedItems.concat(item);
+          // checking if all items are selected then We should select mark the 'select All' option as well
+          if (
+            selectAll &&
+            filteredItems.length - 1 ===
+              newSelectedItems.length + disabledItemCount
+          ) {
+            newSelectedItems = allSelectableItems;
+          }
+        } else {
+          newSelectedItems = removeAtIndex(selectedItems, selectedIndex);
+          newSelectedItems = newSelectedItems.filter(
+            (item) => !item.isSelectAll
+          );
+        }
       }
 
-      newSelectedItems = removeAtIndex(selectedItems, selectedIndex);
       callOnChangeHandler({
         isControlled,
         isMounted: isMounted.current,
@@ -71,7 +93,7 @@ export function useSelection({
         selectedItems: newSelectedItems,
       });
     },
-    [disabled, isControlled, selectedItems]
+    [disabled, selectedItems, filteredItems, selectAll, isControlled]
   );
 
   const clearSelection = useCallback(() => {
@@ -186,7 +208,6 @@ export default class Selection extends React.Component {
       onItemChange: this.handleOnItemChange,
       clearSelection: this.handleClearSelection,
     };
-
     if (render !== undefined) {
       return render(renderProps);
     }

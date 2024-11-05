@@ -1,0 +1,46 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as AISkeletonStories from './ai-skeleton-placeholder.stories';
+
+<Meta of={AISkeletonStories} />
+
+# AI Skeleton placeholder
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/ai-skeleton)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/ai-skeleton)
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/ai-skeleton/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['ai-skeleton'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-ai-skeleton-placeholder></cds-ai-skeleton-placeholder>
+<cds-ai-skeleton-icon></cds-ai-skeleton-icon>
+<cds-ai-skeleton-text></cds-ai-skeleton-text>
+```
+
+## `<cds-skeleton-placeholder>` attributes, properties and events
+
+<ArgTypes of="cds-skeleton-placeholder" />
+
+## `<cds-skeleton-icon>` attributes, properties and events
+
+<ArgTypes of="cds-skeleton-icon" />
+
+## `<cds-skeleton-text>` attributes, properties and events
+
+<ArgTypes of="cds-skeleton-text" />

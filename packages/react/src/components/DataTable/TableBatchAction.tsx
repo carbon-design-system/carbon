@@ -33,7 +33,7 @@ const TableBatchAction = ({
   renderIcon = iconAddSolid,
   iconDescription = 'Add',
   ...props
-}) => (
+}: TableBatchActionProps) => (
   <Button
     renderIcon={renderIcon}
     iconDescription={iconDescription}

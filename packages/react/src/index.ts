@@ -76,6 +76,7 @@ export * from './components/SkeletonIcon';
 export * from './components/SkeletonPlaceholder';
 export * from './components/SkeletonText';
 export * from './components/Slider';
+export * from './components/Stack';
 export * from './components/StructuredList';
 export * from './components/Switch';
 export * from './components/Tab';
@@ -125,6 +126,10 @@ export {
   FluidSelectSkeleton as unstable__FluidSelectSkeleton,
 } from './components/FluidSelect';
 export {
+  FluidSearch as unstable__FluidSearch,
+  FluidSearchSkeleton as unstable__FluidSearchSkeleton,
+} from './components/FluidSearch';
+export {
   FluidTextArea as unstable__FluidTextArea,
   FluidTextAreaSkeleton as unstable__FluidTextAreaSkeleton,
 } from './components/FluidTextArea';
@@ -152,15 +157,28 @@ export {
 } from './components/Pagination/experimental';
 export * from './components/Popover';
 export * from './components/ProgressBar';
+export { AILabel, AILabelContent, AILabelActions } from './components/AILabel';
+// Keep until V12
 export {
-  Slug as unstable__Slug,
-  SlugContent as unstable__SlugContent,
-  SlugActions as unstable__SlugActions,
-} from './components/Slug';
+  AILabel as unstable__Slug,
+  AILabelContent as unstable__SlugContent,
+  AILabelActions as unstable__SlugActions,
+} from './components/AILabel';
 export {
   ChatButton as unstable__ChatButton,
   ChatButtonSkeleton as unstable__ChatButtonSkeleton,
 } from './components/ChatButton';
+export {
+  AISkeletonText,
+  AISkeletonIcon,
+  AISkeletonPlaceholder,
+} from './components/AISkeleton';
+// Keep until V12
+export {
+  AISkeletonText as unstable__AiSkeletonText,
+  AISkeletonIcon as unstable__AiSkeletonIcon,
+  AISkeletonPlaceholder as unstable__AiSkeletonPlaceholder,
+} from './components/AISkeleton';
 export * from './components/Stack';
 export * from './components/Tooltip';
 export {

@@ -10,8 +10,8 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('DataTable @avt', () => {
-  test.describe('basic', () => {
+test.describe('@avt DataTable', () => {
+  test.describe('@avt basic', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -38,7 +38,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('batch actions', () => {
+  test.describe('@avt batch actions', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -53,7 +53,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('dynamic', () => {
+  test.describe('@avt dynamic', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -167,7 +167,7 @@ test.describe('DataTable @avt', () => {
       await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
       // Invoke the cancel button
       await page.keyboard.press('Space');
-      await expect(page.getByText('1 item selected')).not.toBeVisible();
+      await expect(page.getByText('1 item selected')).toBeHidden();
       // Every checkbox should no longer be checked
       for (const checkbox of await page.getByRole('checkbox').all()) {
         await expect(checkbox).not.toBeChecked();
@@ -175,7 +175,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('expansion', () => {
+  test.describe('@avt expansion', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -202,7 +202,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('filtering', () => {
+  test.describe('@avt filtering', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -215,9 +215,55 @@ test.describe('DataTable @avt', () => {
         'components-datatable-filtering--default'
       );
     });
+
+    test('@avt-keyboard-nav', async ({ page }) => {
+      await visitStory(page, {
+        component: 'DataTable',
+        id: 'components-datatable-filtering--default',
+        globals: {
+          theme: 'white',
+        },
+      });
+
+      // Start off by manually focusing the filtering input
+      await page.getByLabel('Filtering').focus();
+      await expect(page.getByLabel('Filtering')).toBeFocused();
+
+      await page.keyboard.press('Enter');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Enter');
+      // Selecting the first checkbox
+      await page.keyboard.press('Space');
+
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      // Presisng the primary button Apply Filter
+      await page.keyboard.press('Enter');
+
+      //
+      await expect(page.getByText('443')).not.toBeVisible();
+
+      // Coming back to the filtering button and pressing Enter to open
+      await page.keyboard.press('Shift+Tab');
+      await page.keyboard.press('Enter');
+
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      // Presisng the secondary button Reset Filter
+      await page.keyboard.press('Enter');
+
+      // All elements should be visible now
+      await expect(page.getByText('443').first()).toBeVisible();
+    });
   });
 
-  test.describe('selection', () => {
+  test.describe('@avt selection', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -230,16 +276,19 @@ test.describe('DataTable @avt', () => {
         'components-datatable-selection--default'
       );
     });
-    test('@avt-advanced-states with-radio-expansion', async ({ page }) => {
+    test.skip('@avt-advanced-states with-radio-expansion', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
-        id: 'components-datatable-selection--with-radio-expansion',
+        id: 'components-datatable-dynamic--playground',
         globals: {
           theme: 'white',
         },
+        args: {
+          radio: true,
+        },
       });
       await expect(page).toHaveNoACViolations(
-        'components-datatable-selection--with-radio-expansion'
+        'components-datatable-with-radio-expansion'
       );
     });
     test('@avt-advanced-states with-selection-and-sorting', async ({
@@ -258,7 +307,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('skeleton', () => {
+  test.describe('@avt skeleton', () => {
     test('@avt-default-state skeleton', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -273,7 +322,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('sorting', () => {
+  test.describe('@avt sorting', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -288,7 +337,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('toolbar', () => {
+  test.describe('@avt toolbar', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',

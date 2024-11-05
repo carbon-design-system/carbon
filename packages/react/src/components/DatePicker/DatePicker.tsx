@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, { ReactNodeLike } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, {
   useContext,
   useEffect,
@@ -14,6 +14,7 @@ import React, {
   useCallback,
   useState,
   ForwardedRef,
+  ReactNode,
 } from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
@@ -28,6 +29,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
 import { FormContext } from '../FluidForm';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { DateLimit, DateOption } from 'flatpickr/dist/types/options';
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((_day, index) => {
@@ -199,7 +201,7 @@ export type CalRef = {
   plugins: [];
   clickOpens: any;
 };
-interface DatePickerProps {
+export interface DatePickerProps {
   /**
    * Flatpickr prop passthrough enables direct date input, and when set to false,
    * we must clear dates manually by resetting the value prop to empty string making it a controlled input.
@@ -214,7 +216,7 @@ interface DatePickerProps {
   /**
    * The child nodes.
    */
-  children: React.ReactNode | object;
+  children: ReactNode | object;
 
   /**
    * The CSS class names.
@@ -243,12 +245,12 @@ interface DatePickerProps {
   /**
    * The flatpickr `disable` option that allows a user to disable certain dates.
    */
-  disable?: string[];
+  disable?: DateLimit<DateOption>[];
 
   /**
    * The flatpickr `enable` option that allows a user to enable certain dates.
    */
-  enable?: string[];
+  enable?: DateLimit<DateOption>[];
 
   /**
    * The flatpickr `inline` option.
@@ -263,7 +265,7 @@ interface DatePickerProps {
   /**
    * Provide the text that is displayed when the control is in error state (Fluid Only)
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * `true` to use the light version.
@@ -342,12 +344,12 @@ interface DatePickerProps {
   /**
    * The maximum date that a user can pick to.
    */
-  maxDate?: string | number;
+  maxDate?: DateOption;
 
   /**
    * The minimum date that a user can start picking from.
    */
-  minDate?: string | number;
+  minDate?: DateOption;
 
   /**
    * The `change` event handler.
@@ -363,6 +365,11 @@ interface DatePickerProps {
    * The `open` event handler.
    */
   onOpen?: flatpickr.Options.Hook;
+
+  /**
+   * flatpickr prop passthrough. Controls how dates are parsed.
+   */
+  parseDate?: (date: string) => Date | false;
 
   /**
    * whether the DatePicker is to be readOnly
@@ -390,7 +397,7 @@ interface DatePickerProps {
   /**
    * Provide the text that is displayed when the control is in warning state (Fluid only)
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 }
 
 const DatePicker = React.forwardRef(function DatePicker(
@@ -419,6 +426,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     readOnly = false,
     short = false,
     value,
+    parseDate: parseDateProp,
     ...rest
   }: DatePickerProps,
   ref: ForwardedRef<HTMLDivElement>
@@ -435,9 +443,17 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   const lastStartValue = useRef('');
 
+  interface CalendarCloseEvent {
+    selectedDates: Date[];
+    dateStr: string;
+    instance: object; //This is `Intance` of flatpicker
+  }
+  const [calendarCloseEvent, setCalendarCloseEvent] =
+    useState<CalendarCloseEvent | null>(null);
+
   // fix datepicker deleting the selectedDate when the calendar closes
-  const onCalendarClose = (selectedDates, dateStr) => {
-    setTimeout(() => {
+  const handleCalendarClose = useCallback(
+    (selectedDates, dateStr, instance) => {
       if (
         lastStartValue.current &&
         selectedDates[0] &&
@@ -451,21 +467,29 @@ const DatePicker = React.forwardRef(function DatePicker(
         );
       }
       if (onClose) {
-        onClose(
-          calendarRef.current.selectedDates,
-          dateStr,
-          calendarRef.current
-        );
+        onClose(selectedDates, dateStr, instance);
       }
-    });
+    },
+    [onClose]
+  );
+  const onCalendarClose = (selectedDates, dateStr, instance, e) => {
+    if (e && e.type === 'clickOutside') {
+      return;
+    }
+    setCalendarCloseEvent({ selectedDates, dateStr, instance });
   };
+  useEffect(() => {
+    if (calendarCloseEvent) {
+      const { selectedDates, dateStr, instance } = calendarCloseEvent;
+      handleCalendarClose(selectedDates, dateStr, instance);
+      setCalendarCloseEvent(null);
+    }
+  }, [calendarCloseEvent, handleCalendarClose]);
 
   const endInputField = useRef<HTMLTextAreaElement>(null);
   const calendarRef: any | undefined = useRef(null);
   const savedOnChange = useSavedCallback(onChange);
-  const savedOnClose = useSavedCallback(
-    datePickerType === 'range' ? onCalendarClose : onClose
-  );
+
   const savedOnOpen = useSavedCallback(onOpen);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
@@ -557,10 +581,50 @@ const DatePicker = React.forwardRef(function DatePicker(
       localeData = l10n[locale];
     }
 
+    /**
+     * parseDate is called before the date is actually set.
+     * It attempts to parse the input value and return a valid date string.
+     * Flatpickr's default parser results in odd dates when given invalid
+     * values, so instead here we normalize the month/day to `1` if given
+     * a value outside the acceptable range.
+     */
+    let parseDate;
+    if (!parseDateProp && dateFormat === 'm/d/Y') {
+      // This function only supports the default dateFormat.
+      parseDate = (date) => {
+        // Month must be 1-12. If outside these bounds, `1` should be used.
+        const month =
+          date.split('/')[0] <= 12 && date.split('/')[0] > 0
+            ? parseInt(date.split('/')[0])
+            : 1;
+        const year = parseInt(date.split('/')[2]);
+
+        if (month && year) {
+          // The month and year must be provided to be able to determine
+          // the number of days in the month.
+          const daysInMonth = new Date(year, month, 0).getDate();
+          // If the day does not fall within the days in the month, `1` should be used.
+          const day =
+            date.split('/')[1] <= daysInMonth && date.split('/')[1] > 0
+              ? parseInt(date.split('/')[1])
+              : 1;
+
+          return new Date(`${year}/${month}/${day}`);
+        } else {
+          // With no month and year, we cannot calculate anything.
+          // Returning false gives flatpickr an invalid date, which will clear the input
+          return false;
+        }
+      };
+    } else if (parseDateProp) {
+      parseDate = parseDateProp;
+    }
+
     const { current: start } = startInputField;
     const { current: end } = endInputField;
     const flatpickerconfig: any = {
       inline: inline ?? false,
+      onClose: onCalendarClose,
       disableMobile: true,
       defaultDate: value,
       closeOnSelect: closeOnSelect,
@@ -571,6 +635,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       [enableOrDisable]: enableOrDisableArr,
       minDate: minDate,
       maxDate: maxDate,
+      parseDate: parseDate,
       plugins: [
         datePickerType === 'range'
           ? carbonFlatpickrRangePlugin({
@@ -603,7 +668,7 @@ const DatePicker = React.forwardRef(function DatePicker(
           savedOnChange(...args);
         }
       },
-      onClose: savedOnClose,
+
       onReady: onHook,
       onMonthChange: onHook,
       onYearChange: onHook,
@@ -619,10 +684,13 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     function handleArrowDown(event) {
       if (match(event, keys.Escape)) {
-        calendar.calendarContainer.classList.remove('open');
+        calendar?.calendarContainer?.classList.remove('open');
       }
 
       if (match(event, keys.ArrowDown)) {
+        if (event.target == endInputField.current) {
+          calendar?.calendarContainer?.classList.add('open');
+        }
         const {
           calendarContainer,
           selectedDateElem: fpSelectedDateElem,
@@ -642,10 +710,6 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
 
     function handleOnChange(event) {
-      if (datePickerType == 'single' && closeOnSelect) {
-        calendar.calendarContainer.classList.remove('open');
-      }
-
       const { target } = event;
       if (target === start) {
         lastStartValue.current = start.value;
@@ -662,14 +726,22 @@ const DatePicker = React.forwardRef(function DatePicker(
       if (calendar.selectedDates.length === 0) {
         return;
       }
+    }
 
-      calendar.clear();
-      calendar.input.focus();
+    function handleKeyPress(event) {
+      if (
+        match(event, keys.Enter) &&
+        closeOnSelect &&
+        datePickerType == 'single'
+      ) {
+        calendar.calendarContainer.classList.remove('open');
+      }
     }
 
     if (start) {
       start.addEventListener('keydown', handleArrowDown);
       start.addEventListener('change', handleOnChange);
+      start.addEventListener('keypress', handleKeyPress);
 
       if (calendar && calendar.calendarContainer) {
         // Flatpickr's calendar dialog is not rendered in a landmark causing an
@@ -687,6 +759,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     if (end) {
       end.addEventListener('keydown', handleArrowDown);
       end.addEventListener('change', handleOnChange);
+      end.addEventListener('keypress', handleKeyPress);
     }
 
     //component did unmount equivalent
@@ -711,22 +784,17 @@ const DatePicker = React.forwardRef(function DatePicker(
       if (start) {
         start.removeEventListener('keydown', handleArrowDown);
         start.removeEventListener('change', handleOnChange);
+        start.removeEventListener('keypress', handleKeyPress);
       }
 
       if (end) {
         end.removeEventListener('keydown', handleArrowDown);
         end.removeEventListener('change', handleOnChange);
+        end.removeEventListener('change', handleKeyPress);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    savedOnChange,
-    savedOnClose,
-    savedOnOpen,
-    readOnly,
-    closeOnSelect,
-    hasInput,
-  ]);
+  }, [savedOnChange, savedOnOpen, readOnly, closeOnSelect, hasInput]);
 
   // this hook allows consumers to access the flatpickr calendar
   // instance for cases where functions like open() or close()
@@ -778,6 +846,56 @@ const DatePicker = React.forwardRef(function DatePicker(
       calendarRef.current.set('inline', inline);
     }
   }, [inline]);
+  useEffect(() => {
+    //when value prop is set to empty, this clears the faltpicker's calendar instance and text input
+    if (value === '') {
+      calendarRef.current?.clear();
+      if (startInputField.current) {
+        startInputField.current.value = '';
+      }
+
+      if (endInputField.current) {
+        endInputField.current.value = '';
+      }
+    }
+  }, [value]);
+
+  useEffect(() => {
+    let isMouseDown = false;
+
+    const handleMouseDown = (event) => {
+      if (
+        calendarRef.current &&
+        calendarRef.current.isOpen &&
+        !calendarRef.current.calendarContainer.contains(event.target) &&
+        !startInputField.current.contains(event.target) &&
+        !endInputField.current?.contains(event.target)
+      ) {
+        isMouseDown = true;
+        // Close the calendar immediately on mousedown
+        closeCalendar(event);
+      }
+    };
+
+    const closeCalendar = (event) => {
+      calendarRef.current.close();
+      // Remove focus from endDate calendar input
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+      onCalendarClose(
+        calendarRef.current.selectedDates,
+        '',
+        calendarRef.current,
+        { type: 'clickOutside' }
+      );
+    };
+    document.addEventListener('mousedown', handleMouseDown, true);
+
+    return () => {
+      document.removeEventListener('mousedown', handleMouseDown, true);
+    };
+  }, [calendarRef, startInputField, endInputField, onCalendarClose]);
 
   useEffect(() => {
     if (calendarRef?.current?.set) {
@@ -798,6 +916,34 @@ const DatePicker = React.forwardRef(function DatePicker(
       startInputField.current.value = value;
     }
   }, [value, prefix]); //eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!calendarRef.current || !startInputField.current) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (
+        match(event, keys.Tab) &&
+        !event.shiftKey &&
+        document.activeElement === endInputField.current &&
+        calendarRef.current.isOpen
+      ) {
+        event.preventDefault();
+        calendarRef.current.close();
+        // Remove focus from endDate calendar input
+        document.activeElement instanceof HTMLElement && // this is to fix the TS warning
+          document?.activeElement?.blur();
+
+        onCalendarClose(
+          calendarRef.current.selectedDates,
+          '',
+          calendarRef.current,
+          event
+        );
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown, true);
+    return () => document.removeEventListener('keydown', handleKeyDown, true);
+  }, [calendarRef, startInputField, endInputField, onCalendarClose]);
 
   let fluidError;
   if (isFluid) {
@@ -1005,6 +1151,11 @@ DatePicker.propTypes = {
    * `(dates: Date[], dStr: string, fp: Instance, data?: any):void;`
    */
   onOpen: PropTypes.func,
+
+  /**
+   * flatpickr prop passthrough. Controls how dates are parsed.
+   */
+  parseDate: PropTypes.func,
 
   /**
    * whether the DatePicker is to be readOnly

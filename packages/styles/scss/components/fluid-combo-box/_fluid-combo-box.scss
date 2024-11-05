@@ -37,17 +37,19 @@
     white-space: nowrap;
   }
 
-  .#{$prefix}--list-box__wrapper--fluid
-    .#{$prefix}--combo-box
-    .#{$prefix}--text-input:focus {
-    outline: none;
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus
+    .#{$prefix}--combo-box.#{$prefix}--list-box--expanded:has(
+      input[aria-activedescendant]:not([aria-activedescendant=''])
+    )
+    .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
+    outline-offset: convert.to-rem(-1px);
+    outline-width: convert.to-rem(1px);
   }
 
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--combo-box
     .#{$prefix}--list-box__selection {
-    inset-block-end: convert.to-rem(10px);
-    inset-block-start: auto;
+    inset-block: auto convert.to-rem(10px);
     transform: none;
   }
 
@@ -68,5 +70,12 @@
     .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
     inset-inline-end: 1rem;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    :not(.#{$prefix}--list-box--up)
+    .#{$prefix}--combo-box
+    .#{$prefix}--list-box__menu {
+    inset-block-start: calc(100% + convert.to-rem(1px));
   }
 }

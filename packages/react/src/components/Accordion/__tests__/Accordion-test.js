@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '../../../../scss/components/accordion/_index.scss';
-
+import Button from '../../Button';
 import React from 'react';
 import { default as Accordion, AccordionItem } from '../';
 import { render, screen } from '@testing-library/react';
@@ -195,6 +194,106 @@ describe('Accordion', () => {
       expect(screen.getByTestId('accordion-2')).not.toHaveClass(
         'cds--accordion--flush'
       );
+    });
+  });
+
+  describe('Expand/Collapse All', () => {
+    const ControlledAccordion = () => {
+      const [expandAll, setExpandAll] = React.useState(false);
+      return (
+        <>
+          <Button onClick={() => setExpandAll(true)}>
+            Click to expand all
+          </Button>
+          <Button
+            onClick={() => {
+              expandAll || expandAll === null
+                ? setExpandAll(false)
+                : setExpandAll(null);
+            }}>
+            Click to collapse all
+          </Button>
+
+          <Accordion className="extra-class">
+            <AccordionItem className="child" title="Heading A" open={expandAll}>
+              Panel A
+            </AccordionItem>
+            <AccordionItem className="child" title="Heading B" open={expandAll}>
+              Panel B
+            </AccordionItem>
+            <AccordionItem className="child" title="Heading C" open={expandAll}>
+              Panel C
+            </AccordionItem>
+          </Accordion>
+        </>
+      );
+    };
+
+    it('should expand All on click to button', async () => {
+      render(<ControlledAccordion />);
+
+      await userEvent.click(screen.getByText('Click to expand all'));
+
+      // Check if the class `cds--accordion__item--active` is added to all items
+      const items = screen.getAllByRole('listitem');
+      items.forEach((item) => {
+        expect(item).toHaveClass('cds--accordion__item--active');
+      });
+    });
+
+    it('should Collapse All on click to button', async () => {
+      render(<ControlledAccordion />);
+
+      await userEvent.click(screen.getByText('Click to expand all'));
+
+      await userEvent.click(screen.getByText('Click to collapse all'));
+
+      // Check if the class `cds--accordion__item--active` is removed from all items
+      const items = screen.getAllByRole('listitem');
+      items.forEach((item) => {
+        expect(item).not.toHaveClass('cds--accordion__item--active');
+      });
+    });
+  });
+  describe('Ordered List', () => {
+    it('should be an ol if prop ordered is passed as true', () => {
+      const { container } = render(
+        <Accordion data-testid="accordion" ordered={true}>
+          <AccordionItem className="child" title="Heading A">
+            Panel A
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading B">
+            Panel B
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading C">
+            Panel C
+          </AccordionItem>
+        </Accordion>
+      );
+      const ol = container.querySelector('ol');
+      expect(ol).toBeInTheDocument();
+      const ul = container.querySelector('ul');
+      expect(ul).not.toBeInTheDocument();
+    });
+
+    it('should be a ul if prop ordered is passed as false', () => {
+      const { container } = render(
+        <Accordion data-testid="accordion" ordered={false}>
+          <AccordionItem className="child" title="Heading A">
+            Panel A
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading B">
+            Panel B
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading C">
+            Panel C
+          </AccordionItem>
+        </Accordion>
+      );
+      const ol = container.querySelector('ol');
+      expect(ol).not.toBeInTheDocument();
+      const ul = container.querySelector('ul');
+      expect(ul).toBeInTheDocument();
     });
   });
 });

@@ -1,0 +1,83 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as TagStories from './tag.stories';
+
+<Meta of={TagStories} />
+
+# Tag
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/tag)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/tag)
+
+Tags are used for items that need to be labeled, categorized, or organized using
+keywords that describe them.
+
+Multiple or single tags can be used to categorize items.
+
+Use tags when content is mapped to multiple categories, and the user needs a way
+to differentiate between them.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/tag/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['tag'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-tag type="gray" title="tag-example"> This is a tag </cds-tag>
+```
+
+## Filter tag
+
+Use the `filter` attribute to turn the tag into a filterable element.
+
+```html
+<cds-tag filter type="gray" title="Clear selection"> This is a tag </cds-tag>
+```
+
+You can use the events to catch the closing of the tag.
+
+```js
+document.addEventListener('cds-tag-closed', (event) => {
+  // use values here
+});
+```
+
+## Custom icon
+
+If you'd like to use a custom icon other than the `Close` button, import another
+icon and insert it within the tag element as such:
+
+```html
+<cds-tag filter type="gray" title="Clear selection"> This is a tag </cds-tag>
+```
+
+```javascript
+import Download16 from '@carbon/icons/lib/download/16.js';
+
+function App() {
+  return html` <cds-tag filter type="gray" title="Clear selection"
+    >This is a tag ${Download16({ slot: 'icon' })}</cds-tag
+  >`;
+}
+```
+
+## `<cds-tag>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-tag disabled>`) and `false` means not setting the attribute (e.g.
+`<cds-tag>` without `disabled` attribute).
+
+<ArgTypes of="cds-tag" />

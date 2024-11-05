@@ -7,8 +7,10 @@
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
+
 import { HeaderContainer } from '../';
+import userEvent from '@testing-library/user-event';
 
 describe('HeaderContainer', () => {
   it('should support rendering through a render prop', () => {
@@ -44,6 +46,40 @@ describe('HeaderContainer', () => {
       _onClickSideNavExpand();
     });
 
+    expect(renderProp).toHaveBeenCalledWith(
+      {
+        isSideNavExpanded: false,
+        onClickSideNavExpand: expect.any(Function),
+      },
+      {}
+    );
+  });
+
+  it('should pass through rest props', () => {
+    const rest = {
+      foo: 'foo',
+      bar: /bar/,
+    };
+    const Test = jest.fn(() => <div />);
+
+    render(<HeaderContainer render={Test} {...rest} />);
+
+    expect(Test).toHaveBeenCalledWith(
+      {
+        isSideNavExpanded: false,
+        onClickSideNavExpand: expect.any(Function),
+        ...rest,
+      },
+      {}
+    );
+  });
+
+  it('should close the side nav on Escape', async () => {
+    const renderProp = jest.fn(() => null);
+
+    render(<HeaderContainer render={renderProp} isSideNavExpanded />);
+
+    await userEvent.keyboard('[Escape]');
     expect(renderProp).toHaveBeenCalledWith(
       {
         isSideNavExpanded: false,

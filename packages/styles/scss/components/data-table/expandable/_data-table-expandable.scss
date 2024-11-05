@@ -49,9 +49,9 @@
     td {
     border: 0;
     background-color: $layer-hover;
-    padding-block-end: 0;
-    padding-block-start: 0;
-    transition: padding $duration-moderate-01 motion(standard, productive),
+    padding-block: 0;
+    transition:
+      padding $duration-moderate-01 motion(standard, productive),
       background-color $duration-fast-01 motion(standard, productive);
   }
 
@@ -65,15 +65,16 @@
 
   //child row visible
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] {
-    transition: height $duration-moderate-01 motion(standard, productive),
+    transition:
+      height $duration-moderate-01 motion(standard, productive),
       background-color $duration-fast-01 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
     border-block-end: 1px solid $border-subtle;
     padding-inline-start: 3.5rem;
-    transition: padding-bottom $duration-moderate-01
-        motion(standard, productive),
+    transition:
+      padding-bottom $duration-moderate-01 motion(standard, productive),
       transform $duration-moderate-01 motion(standard, productive);
   }
 
@@ -129,7 +130,8 @@
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row) td,
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row td,
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
-    transition: height $duration-moderate-01 motion(standard, productive),
+    transition:
+      height $duration-moderate-01 motion(standard, productive),
       background-color $duration-fast-01 motion(standard, productive),
       border-color $duration-fast-01 motion(standard, productive);
   }
@@ -190,7 +192,15 @@
   // Expand icon column
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table td.#{$prefix}--table-expand {
-    border-block-end: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two .#{$prefix}--data-table td.#{$prefix}--table-expand {
+    border-block-end: 1px solid $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three .#{$prefix}--data-table td.#{$prefix}--table-expand {
+    border-block-end: 1px solid $border-subtle-03;
   }
 
   .#{$prefix}--data-table
@@ -199,8 +209,7 @@
   .#{$prefix}--data-table
     td.#{$prefix}--table-expand
     + .#{$prefix}--table-column-checkbox {
-    padding-inline-end: convert.to-rem(6px);
-    padding-inline-start: convert.to-rem(6px);
+    padding-inline: convert.to-rem(6px) convert.to-rem(6px);
   }
 
   // Hide bottom border of checkbox column when expanded
@@ -346,7 +355,8 @@
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
     + tr[data-child-row]
     td {
-    transition: transform $duration-moderate-01 motion(standard, productive),
+    transition:
+      transform $duration-moderate-01 motion(standard, productive),
       border-bottom $duration-fast-01 motion(standard, productive),
       border-top $duration-fast-01 motion(standard, productive);
   }
@@ -464,7 +474,7 @@
   .#{$prefix}--parent-row .#{$prefix}--table-column-slug,
   .#{$prefix}--parent-row
     .#{$prefix}--table-column-slug
-    + td.cds--table-expand[data-previous-value='collapsed'] {
+    + td.#{$prefix}--table-expand[data-previous-value='collapsed'] {
     box-shadow: none;
   }
 
@@ -472,7 +482,7 @@
     .#{$prefix}--table-column-slug,
   .#{$prefix}--parent-row.#{$prefix}--expandable-row
     .#{$prefix}--table-column-slug
-    + td.cds--table-expand[data-previous-value='collapsed'] {
+    + td.#{$prefix}--table-expand[data-previous-value='collapsed'] {
     border-block-end: 1px solid transparent;
   }
 
@@ -486,7 +496,6 @@
     @include high-contrast-mode('focus');
   }
 
-  // stylelint-disable-next-line no-duplicate-selectors
   .#{$prefix}--table-expand__svg {
     @include high-contrast-mode('icon-fill');
   }

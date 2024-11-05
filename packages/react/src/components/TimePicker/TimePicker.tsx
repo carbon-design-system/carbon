@@ -255,7 +255,7 @@ const TimePicker: TimePickerComponent = React.forwardRef<
       if (item) {
         return React.cloneElement(item, {
           ...item.props,
-          disabled: disabled,
+          disabled: item.props.disabled ?? disabled,
           readOnly: readOnly,
           ...readOnlyEventHandlers,
         });

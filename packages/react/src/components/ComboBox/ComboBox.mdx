@@ -1,6 +1,8 @@
-import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import { ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import * as ComboBoxStories from './ComboBox.stories.js';
 import ComboBox from '../ComboBox';
+
+<Meta isTemplate />
 
 # ComboBox
 
@@ -17,6 +19,7 @@ import ComboBox from '../ComboBox';
 - [downshiftProps](#combobox-downshiftprops)
 - [Placeholder and labeling](#placeholders-and-labeling)
 - [initialSelectedItem](#initialselecteditem)
+- [selectedItem](#selecteditem)
 - [itemToElement](#itemtoelement)
 - [itemToString](#itemtostring)
 - [shouldFilterItem](#shouldfilteritem)
@@ -29,13 +32,11 @@ import ComboBox from '../ComboBox';
 A combobox allows the user to make a selection from a predefined list of options
 and is typically used when there are a large amount of options to choose from.
 
-<Canvas>
-  <Story of={ComboBoxStories.Default} />
-</Canvas>
+<Canvas of={ComboBoxStories.Default} />
 
 ## Component API
 
-<ArgsTable sort="asc" />
+<ArgTypes />
 
 ## Disabled
 
@@ -49,13 +50,70 @@ next element.
 <Combobox disabled />
 ```
 
-## Combobox `downshiftProps`
+## Combobox uses Downshift
 
 Our `Combobox` component utilizes [Downshift](https://www.downshift-js.com/)
 under the hood to help provide complex yet accessible custom dropdown
-components. We provide access to the built in Downshift features with this prop.
-For more information, checkout the Downshift prop
-[documentation](https://www.downshift-js.com/downshift#props-used-in-examples)
+components.
+
+### `downshiftProps`
+
+`downshiftProps` is made available as a passthrough to the underlying downshift
+`useCombobox` hook.
+
+**Use with caution:** anything you define here overrides the components'
+internal handling of that prop. Downshift internals are subject to change, and
+in some cases they can not be shimmed to shield you from potentially breaking
+changes.
+
+For more information, checkout the Downshift `useCombobox` props
+[documentation](https://github.com/downshift-js/downshift/tree/v9.0.7/src/hooks/useCombobox#basic-props)
+
+## typeahead Prop
+
+The `typeahead` prop enables predictive text and autocomplete functionality in the ComboBox. When enabled, it displays inline suggestions as you type, using a built-in prefix-matching filter that ignores the `shouldFilterItem` prop. Pressing `Tab` will complete the input with the first matching suggestion, while arrow keys can still be used to navigate through filtered options.
+
+When combined with the `allowCustomValue` prop, the ComboBox supports both custom values and typeahead suggestions.
+
+### Combobox `downshiftActions`
+
+The downshift action methods are made available through the `downshiftActions`
+prop. While not recommended, this prop allows you to modify downshift's internal
+state without having to fully control the component.
+
+**Use with caution:** calling these actions modifies the internal state of
+downshift. It may conflict with or override the state management used within
+Combobox. Downshift APIs and internals are subject to change, and in some cases
+they can not be shimmed by Carbon to shield you from potentially breaking
+changes.
+
+#### `downshiftActions` Usage
+
+Provide a ref that will be mutated to contain an object of downshift action
+functions. These can be called to change the internal state of the downshift
+useCombobox hook.
+
+```
+const downshiftActions = useRef();
+
+return (
+  <ComboBox
+    ...
+    downshiftActions={downshiftActions}
+    downshiftProps={{
+      onStateChange: (changes) => {
+        if (changes.selectedItem === null) {
+          downshiftActions?.current?.openMenu?.();
+          return;
+        }
+      },
+    }}
+  />
+);
+```
+
+For more information, checkout the Downshift `useCombobox` action functions
+[documentation](https://github.com/downshift-js/downshift/tree/v9.0.7/src/hooks/useCombobox#actions)
 
 ## Placeholders and Labeling
 
@@ -72,7 +130,61 @@ want to fully control the component, you can use `initialSelectedItem`
 ```jsx
 const items = ['Option 1', 'Option 2', 'Option 3']
 
-<Combobox initialSelectedItem={items[2]} />;
+<Combobox initialSelectedItem={items[2]} />
+```
+
+## `selectedItem`
+
+You can use `selectedItem` for a fully controlled component.
+
+<Canvas of={ComboBoxStories._fullyControlled} />
+
+```jsx
+
+const options = [
+  {
+    id: 'option-1',
+    text: 'Option 1',
+  },
+  {
+    id: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    id: 'option-3',
+    text: 'Option 3',
+  },
+];
+const [value, setValue] = useState(options[0]);
+
+const onChange = ({ selectedItem }) => {
+  setValue(selectedItem);
+};
+
+return (
+  <div>
+    <ComboBox
+      onChange={onChange}
+      id="carbon-combobox"
+      items={options}
+      selectedItem={value}
+      itemToString={(item) => (item ? item.text : '')}
+      titleText="Fully Controlled ComboBox title"
+      helperText="Combobox helper text"
+    />
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    }}>
+      <Button onClick={() => setValue(null)}>Reset</Button>
+      <Button onClick={() => setValue(options[0])}>Option 1</Button>
+      <Button onClick={() => setValue(options[1])}>Option 2</Button>
+      <Button onClick={() => setValue(options[2])}>Option 3</Button>
+    </div>
+  </div>
+);
+
 ```
 
 ## `itemToElement`
@@ -162,9 +274,7 @@ callback.
 
 ## With Layer
 
-<Canvas>
-  <Story of={ComboBoxStories._WithLayer} />
-</Canvas>
+<Canvas of={ComboBoxStories._WithLayer} />
 
 ## Feedback
 

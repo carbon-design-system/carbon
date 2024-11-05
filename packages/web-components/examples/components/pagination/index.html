@@ -1,0 +1,32 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>carbon-web-components example</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/styles.scss" />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-pagination:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script type="module" src="src/index.js"></script>
+  </head>
+  <body>
+    <cds-pagination start="0" total-items="103">
+      <cds-select-item value="10">10</cds-select-item>
+      <cds-select-item value="20">20</cds-select-item>
+      <cds-select-item value="30">30</cds-select-item>
+      <cds-select-item value="40">40</cds-select-item>
+      <cds-select-item value="50">50</cds-select-item>
+    </cds-pagination>
+  </body>
+</html>

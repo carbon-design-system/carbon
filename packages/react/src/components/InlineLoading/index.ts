@@ -5,6 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import InlineLoading from './InlineLoading';
+import InlineLoading, { type InlineLoadingProps } from './InlineLoading';
 export default InlineLoading;
-export { InlineLoading };
+export { InlineLoading, type InlineLoadingProps };

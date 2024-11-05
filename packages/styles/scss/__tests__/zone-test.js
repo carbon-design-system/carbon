@@ -11,7 +11,7 @@
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
 const css = require('css');
-const isEqual = require('lodash.isequal');
+const isEqual = require('react-fast-compare');
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -63,7 +63,7 @@ describe('zone', () => {
         ([token, value]) => {
           return rule.declarations.find((declaration) => {
             return (
-              declaration.property.includes(token) &&
+              declaration?.property?.includes(token) &&
               declaration.value === value
             );
           });

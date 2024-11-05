@@ -21,7 +21,8 @@
     position: relative;
     background: $field;
     block-size: 100%;
-    transition: background-color $duration-fast-01 motion(standard, productive),
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
 
@@ -151,6 +152,24 @@
   .#{$prefix}--text-input--fluid.#{$prefix}--password-input-wrapper
     .#{$prefix}--text-input__invalid-icon {
     inset-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--toggle-password-tooltip {
+    @include focus-outline('reset');
+
+    position: absolute;
+    block-size: convert.to-rem(64px);
+    cursor: pointer;
+    inline-size: convert.to-rem(48px);
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    transition: outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--toggle-password-tooltip
+    .#{$prefix}--popover {
+    inset-inline-start: 0;
   }
 
   .#{$prefix}--text-input--fluid

@@ -1,0 +1,72 @@
+import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SelectStories from './select.stories';
+
+<Meta of={SelectStories} />
+
+# Select
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/select)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/select)
+
+The select component allows users to choose one option from a list. It is used
+in forms for users to submit data.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/select/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['select'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-select
+  helper-text="Optional helper text"
+  label-text="Select"
+  placeholder="Optional placeholder text">
+  <cds-select-item-group label="Category 1">
+    <cds-select-item value="all">Option 1</cds-select-item>
+    <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+  </cds-select-item-group>
+  <cds-select-item-group label="Category 2">
+    <cds-select-item value="staging">Option 3</cds-select-item>
+    <cds-select-item value="dea">Option 4</cds-select-item>
+    <cds-select-item value="router">Option 5</cds-select-item>
+  </cds-select-item-group>
+</cds-select>
+```
+
+## `<cds-select>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-select autofocus>`) and `false` means not setting the attribute (e.g.
+`<cds-select>` without `autofocus` attribute).
+
+<ArgTypes of="cds-select" />
+
+## `<cds-select-item-group>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-select-item-group disabled>`) and `false` means not setting the attribute
+(e.g. `<cds-select-item-group>` without `disabled` attribute).
+
+<ArgTypes of="cds-select-item-group" />
+
+## `<cds-select-item>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-select-item disabled>`) and `false` means not setting the attribute (e.g.
+`<cds-select-item>` without `disabled` attribute).
+
+<ArgTypes of="cds-select-item" />

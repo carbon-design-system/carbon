@@ -12,6 +12,8 @@
  */
 export const canUseDOM = !!(
   typeof window !== 'undefined' &&
+  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
   window.document &&
+  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
   window.document.createElement
 );

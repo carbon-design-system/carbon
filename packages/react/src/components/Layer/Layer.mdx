@@ -1,13 +1,14 @@
-import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as LayerStories from './Layer.stories';
+
+<Meta isTemplate />
 
 # Layer
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Layer)
 
-{/* <!-- prettier-ignore-start -->
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -17,8 +18,7 @@ import * as LayerStories from './Layer.stories';
   - [Layer as](#layer-as)
 - [Feedback](#feedback)
 
-{/* <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-<!-- prettier-ignore-end --> */}
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
@@ -27,10 +27,7 @@ layer has a specific set of token values associated with it. You can use these
 tokens directly, or use contextual tokens from our styles package like `$layer`
 or `$field`.
 
-<Canvas>
-  <Story of={LayerStories.Default} />
-</Canvas>
-
+<Canvas of={LayerStories.Default} />
 
 The `Layer` component accepts `children` as a prop. Each child of a `Layer`
 component is rendered using the layer tokens at that layer. `Layer` components
@@ -50,7 +47,10 @@ can be nested indefinitely, but the token sets typically end after 3 layers.
 
 ## Setting a custom level
 
-You can override the `level` of a `Layer` if you would like to change the presentation of a layer in your application. This is particularly helpful if you would like to reset the `Layer` level back to `0` or if you want to make sure a part of a page always renders in a certain level.
+You can override the `level` of a `Layer` if you would like to change the
+presentation of a layer in your application. This is particularly helpful if you
+would like to reset the `Layer` level back to `0` or if you want to make sure a
+part of a page always renders in a certain level.
 
 To do this, you can use the `level` prop:
 
@@ -78,14 +78,16 @@ function ExampleComponent() {
 }
 ```
 
-If the structure of `Layer` components in your app change, the hook will automatically update with the new `level`.
+If the structure of `Layer` components in your app change, the hook will
+automatically update with the new `level`.
 
-The `level` value can be one of: `0`, `1`, or `2` and will correspond to the level of
-the current layer. This value mirrors the `level` prop on the `Layer` component.
+The `level` value can be one of: `0`, `1`, or `2` and will correspond to the
+level of the current layer. This value mirrors the `level` prop on the `Layer`
+component.
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ### Layer as
 

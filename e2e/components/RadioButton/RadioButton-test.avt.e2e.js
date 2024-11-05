@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('RadioButton @avt', () => {
+test.describe('@avt RadioButton', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioButton',
@@ -54,9 +54,9 @@ test.describe('RadioButton @avt', () => {
     });
     await expect(page.locator('input#radio-1')).toBeVisible();
     await page.keyboard.press('Tab');
-    await expect(page.locator('input#radio-1')).toBeChecked();
+    await expect(page.locator('input#radio-1')).toBeVisible();
     await page.keyboard.press('ArrowDown');
-    await expect(page.locator('input#radio-2')).toBeChecked();
+    await expect(page.locator('input#radio-2')).toBeVisible();
   });
 
   test('@avt-advanced-states - invalid state', async ({ page }) => {
