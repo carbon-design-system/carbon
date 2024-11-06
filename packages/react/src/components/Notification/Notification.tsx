@@ -1377,7 +1377,7 @@ Callout.propTypes = {
       'warning',
       'warning-alt',
     ]),
-    ['success', 'info', 'warning', 'error'],
+    ['error', 'info', 'info-square', 'warning-alt'],
     propMappingFunction
   ),
 
