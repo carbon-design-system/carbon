@@ -1,0 +1,66 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>@carbon/ibmdotcom-web-components example</title>
+    <meta charset="UTF-8" />
+
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-overflow-menu:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/overflow-menu.min.js"
+    ></script>
+  </head>
+  <body class="cds-theme-zone-white">
+    <div
+      data-floating-menu-container
+      style="
+        position: relative;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      "
+    >
+      <cds-overflow-menu>
+        <svg
+          focusable="false"
+          preserveAspectRatio="xMidYMid meet"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          aria-hidden="true"
+          width="16"
+          height="16"
+          viewBox="0 0 32 32"
+          class="cds--overflow-menu__icon"
+          slot="icon"
+        >
+          <!--?lit$666059372$-->
+          <circle cx="16" cy="8" r="2"></circle>
+          <circle cx="16" cy="16" r="2"></circle>
+          <circle cx="16" cy="24" r="2"></circle>
+        </svg>
+        <span slot="tooltip-content"> Options </span>
+        <cds-overflow-menu-body>
+          <cds-overflow-menu-item>Option 1</cds-overflow-menu-item>
+          <cds-overflow-menu-item>Option 2</cds-overflow-menu-item>
+          <cds-overflow-menu-item>Option 3</cds-overflow-menu-item>
+          <cds-overflow-menu-item>Option 4</cds-overflow-menu-item>
+          <cds-overflow-menu-item>Option 5</cds-overflow-menu-item>
+        </cds-overflow-menu-body>
+      </cds-overflow-menu>
+    </div>
+  </body>
+</html>

@@ -30,7 +30,7 @@ $-loading-gap-small: 110;
   }
 
   .#{$prefix}--inline-loading__text {
-    @include type-style('label-01');
+    @include type-style('label-02');
 
     color: $text-secondary;
   }

@@ -162,7 +162,6 @@
     );
 
     > :first-child {
-      margin-block-start: convert.to-rem(1px);
       min-inline-size: convert.to-rem(16px);
     }
 
@@ -173,6 +172,12 @@
     &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon,
     &.#{$prefix}--btn--danger--ghost .#{$prefix}--btn__icon {
       margin: 0;
+    }
+
+    &.#{$prefix}--btn--danger--ghost {
+      padding-inline-end: calc(
+        layout.density('padding-inline') - convert.to-rem(16px)
+      );
     }
   }
 
@@ -317,8 +322,9 @@
 
     padding-block: min(
       calc(
-        (layout.size('height') - var(--temp-expressive-1lh)) / 2 -
-          convert.to-rem(1px)
+        (layout.size('height') - var(--temp-expressive-1lh)) / 2 - convert.to-rem(
+            1px
+          )
       ),
       var(--temp-padding-block-max)
     );
@@ -408,7 +414,7 @@
   }
 
   // Windows HCM fix
-  // stylelint-disable-next-line no-duplicate-selectors
+
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
     .#{$prefix}--btn__icon
     path:not([data-icon-path]):not([fill='none']),

@@ -164,14 +164,12 @@
   }
 
   .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
-    margin-inline-end: 1rem;
-    margin-inline-start: convert.to-rem(1px);
+    margin-inline: convert.to-rem(1px) 1rem;
   }
 
   .#{$prefix}--pagination__right
     .#{$prefix}--pagination__text.#{$prefix}--pagination__page-text {
-    margin-inline-end: convert.to-rem(1px);
-    margin-inline-start: 1rem;
+    margin-inline: 1rem convert.to-rem(1px);
   }
 
   .#{$prefix}--pagination__right
@@ -222,7 +220,8 @@
     fill: $icon-primary;
     inline-size: convert.to-rem(40px);
     min-block-size: convert.to-rem(32px);
-    transition: outline $duration-fast-02 motion(standard, productive),
+    transition:
+      outline $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);
   }
 
@@ -285,7 +284,7 @@
   }
 
   // Windows HCM fix
-  // stylelint-disable-next-line no-duplicate-selectors
+
   .#{$prefix}--pagination__button,
   .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
     @include high-contrast-mode('outline');

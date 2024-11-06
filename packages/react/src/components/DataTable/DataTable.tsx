@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import type { MouseEvent } from 'react';
 import isEqual from 'react-fast-compare';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
 import { getNextSortState } from './state/sorting';
@@ -164,13 +165,13 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   }) => {
     ariaLabel: string;
     'aria-label': string;
-    checked?: boolean;
+    checked?: boolean | undefined;
     disabled?: boolean | undefined;
     id: string;
     indeterminate?: boolean;
     name: string;
     onSelect: (e: React.MouseEvent<HTMLInputElement>) => void;
-    radio?: boolean;
+    radio?: boolean | undefined;
     [key: string]: unknown;
   };
   getToolbarProps: (getToolbarPropsArgs?: { [key: string]: unknown }) => {

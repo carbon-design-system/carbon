@@ -1,6 +1,8 @@
-import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import InlineLoading from '../InlineLoading';
 import * as InlineLoadingStories from './InlineLoading.stories';
+
+<Meta isTemplate />
 
 # InlineLoading
 
@@ -14,13 +16,11 @@ import * as InlineLoadingStories from './InlineLoading.stories';
 
 ## Overview
 
-<Canvas>
-  <Story of={InlineLoadingStories.Default} />
-</Canvas>
+<Canvas of={InlineLoadingStories.Default} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

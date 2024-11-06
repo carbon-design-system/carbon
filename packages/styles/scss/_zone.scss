@@ -40,7 +40,7 @@ $-components: (
     color: custom-property.get-var('text-primary');
 
     @each $key, $value in $theme {
-      @if type-of($value) == color {
+      @if meta.type-of($value) == color {
         @include custom-property.declaration($key, $value);
       }
     }

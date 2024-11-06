@@ -21,7 +21,8 @@
     position: relative;
     background: $field;
     block-size: 100%;
-    transition: background-color $duration-fast-01 motion(standard, productive),
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
 
@@ -61,8 +62,7 @@
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__field {
-    padding-block-end: convert.to-rem(13px);
-    padding-block-start: convert.to-rem(33px);
+    padding-block: convert.to-rem(33px) convert.to-rem(13px);
     padding-inline-start: $spacing-05;
   }
 
@@ -261,6 +261,8 @@
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--skeleton
     .#{$prefix}--list-box__field {
+    @include skeleton;
+
     position: absolute;
     padding: 0;
     block-size: convert.to-rem(8px);
@@ -272,21 +274,13 @@
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--skeleton
     .#{$prefix}--list-box__label {
+    @include skeleton;
+
     position: absolute;
     block-size: convert.to-rem(8px);
     inline-size: 25%;
     inset-block-start: $spacing-05;
     inset-inline-start: $spacing-05;
-  }
-
-  .#{$prefix}--list-box__wrapper--fluid
-    .#{$prefix}--skeleton
-    .#{$prefix}--list-box__field,
-  .#{$prefix}--list-box__wrapper--fluid
-    .#{$prefix}--skeleton
-    .#{$prefix}--list-box__label {
-    animation: 3000ms ease-in-out skeleton infinite;
-    background: $skeleton-element;
   }
 
   // Slug styles

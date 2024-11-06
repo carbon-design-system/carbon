@@ -110,6 +110,7 @@ export function Toggletip<E extends ElementType = 'span'>({
   const id = useId();
   const className = cx(`${prefix}--toggletip`, customClassName, {
     [`${prefix}--toggletip--open`]: open,
+    [`${prefix}--autoalign`]: autoAlign,
   });
   const actions = {
     toggle: () => {
@@ -264,7 +265,7 @@ export type ToggleTipButtonProps<T extends React.ElementType> =
  * clicks and keyboard interactions.
  */
 export const ToggletipButton = React.forwardRef(function ToggletipButton<
-  T extends React.ElementType
+  T extends React.ElementType,
 >(
   {
     children,
@@ -330,19 +331,21 @@ interface ToggletipContentProps {
  * `children` passed in as a prop inside of `PopoverContent` so that they will
  * be rendered inside of the popover for this component.
  */
-export function ToggletipContent({
-  children,
-  className: customClassName,
-}: ToggletipContentProps) {
+const ToggletipContent = React.forwardRef<
+  HTMLDivElement,
+  ToggletipContentProps
+>(function ToggletipContent({ children, className: customClassName }, ref) {
   const toggletip = useToggletip();
   const prefix = usePrefix();
   return (
-    <PopoverContent className={customClassName} {...toggletip?.contentProps}>
+    <PopoverContent
+      className={customClassName}
+      {...toggletip?.contentProps}
+      ref={ref}>
       <div className={`${prefix}--toggletip-content`}>{children}</div>
     </PopoverContent>
   );
-}
-
+});
 ToggletipContent.propTypes = {
   /**
    * Custom children to be rendered as the content of the label
@@ -355,6 +358,10 @@ ToggletipContent.propTypes = {
    */
   className: PropTypes.string,
 };
+
+ToggletipContent.displayName = 'ToggletipContent';
+
+export { ToggletipContent };
 
 interface ToggleTipActionsProps {
   children?: ReactNode;

@@ -1,0 +1,120 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button' as *;
+@use '@carbon/styles/scss/components/popover/index';
+@use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
+@use '@carbon/styles/scss/components/tooltip';
+@use '@carbon/styles/scss/components/chat-button' as *;
+@use '@carbon/styles/scss/layout' as *;
+
+@include code-snippet;
+
+:host(#{$prefix}-button),
+:host(#{$prefix}-modal-footer-button) {
+  @include emit-layout-tokens();
+
+  display: inline-flex;
+
+  ::slotted([slot='icon']) {
+    @extend .#{$prefix}--btn__icon;
+  }
+
+  .#{$prefix}--btn {
+    flex-grow: 1;
+    max-inline-size: 100%;
+  }
+}
+
+:host(#{$prefix}-button-skeleton) {
+  @include emit-layout-tokens();
+}
+
+:host(#{$prefix}-button[isExpressive]) ::slotted([slot='icon']),
+:host(#{$prefix}-modal-footer-button[isExpressive]) ::slotted([slot='icon']) {
+  block-size: rem(20px);
+  inline-size: rem(20px);
+}
+
+:host(#{$prefix}-button[pagination]),
+:host(#{$prefix}-modal-footer-button[pagination]) {
+  .#{$prefix}--btn {
+    border: none;
+    border-inline-start: 1px solid $border-subtle;
+    transition: none;
+
+    &:focus {
+      border-inline-start: 1px solid transparent;
+      box-shadow: none;
+      outline: $spacing-01 solid $focus;
+      outline-offset: -#{$spacing-01};
+    }
+  }
+}
+
+:host(#{$prefix}-button[pagination]:not([disabled])),
+:host(#{$prefix}-modal-footer-button[pagination]:not([disabled])) {
+  .#{$prefix}--btn {
+    color: $icon-primary;
+
+    &:active {
+      background-color: $layer-hover;
+    }
+  }
+}
+
+:host(#{$prefix}-button[pagination][batch-action]:not([disabled])),
+:host(
+    #{$prefix}-modal-footer-button[pagination][batch-action]:not([disabled])
+  ) {
+  .#{$prefix}--btn {
+    padding: $button-padding-ghost;
+
+    &:focus {
+      outline: $spacing-01 solid $layer;
+      outline-offset: -#{$spacing-01};
+    }
+  }
+
+  :host(#{$prefix}-button[pagination][has-main-content]:not([disabled])),
+  :host(
+      #{$prefix}-modal-footer-button[pagination][has-main-content]:not(
+          [disabled]
+        )
+    ) {
+    ::slotted([slot='icon']) {
+      position: static;
+      margin-inline-start: $spacing-02;
+    }
+  }
+}
+
+:host(#{$prefix}-button[kind='ghost']:hover) .#{$prefix}--btn--ghost,
+:host(#{$prefix}-button[kind='ghost']) .#{$prefix}--btn--ghost:active {
+  outline: none;
+}
+
+:host(#{$prefix}-button-set),
+:host(#{$prefix}-side-panel-button-set) {
+  @extend .#{$prefix}--btn-set;
+
+  ::slotted(#{$prefix}-button) {
+    inline-size: 100%;
+    // 196px from design kit
+    max-inline-size: rem(196px);
+  }
+}
+
+:host(#{$prefix}-button-set[stacked]) {
+  @extend .#{$prefix}--btn-set--stacked;
+}

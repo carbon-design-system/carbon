@@ -12,33 +12,7 @@ Map {
         "type": "string",
       },
       "aiTextLabel": [Function],
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-start",
-            "top-right",
-            "top-end",
-            "bottom",
-            "bottom-left",
-            "bottom-start",
-            "bottom-right",
-            "bottom-end",
-            "left",
-            "left-bottom",
-            "left-end",
-            "left-top",
-            "left-start",
-            "right",
-            "right-bottom",
-            "right-end",
-            "right-top",
-            "right-start",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "aria-label": Object {
         "type": "string",
       },
@@ -421,6 +395,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -446,21 +423,7 @@ Map {
       "isSelected": Object {
         "type": "bool",
       },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "primary",
-            "secondary",
-            "danger",
-            "ghost",
-            "danger--primary",
-            "danger--ghost",
-            "danger--tertiary",
-            "tertiary",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "kind": [Function],
       "onBlur": Object {
         "type": "func",
       },
@@ -608,6 +571,50 @@ Map {
     "1": "right",
     "2": "bottom",
     "3": "left",
+  },
+  "Callout" => Object {
+    "propTypes": Object {
+      "actionButtonLabel": Object {
+        "type": "string",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "error",
+            "info",
+            "info-square",
+            "success",
+            "warning",
+            "warning-alt",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "lowContrast": Object {
+        "type": "bool",
+      },
+      "onActionButtonClick": Object {
+        "type": "func",
+      },
+      "statusIconDescription": Object {
+        "type": "string",
+      },
+      "subtitle": Object {
+        "type": "node",
+      },
+      "title": Object {
+        "type": "string",
+      },
+      "titleId": Object {
+        "type": "string",
+      },
+    },
   },
   "Checkbox" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -801,6 +808,9 @@ Map {
         "type": "string",
       },
       "ariaLabel": [Function],
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -1385,6 +1395,9 @@ Map {
       "translateWithId": Object {
         "type": "func",
       },
+      "typeahead": Object {
+        "type": "bool",
+      },
       "warn": Object {
         "type": "bool",
       },
@@ -1799,6 +1812,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -1835,6 +1851,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "autoAlign": Object {
+        "type": "bool",
       },
       "className": Object {
         "type": "string",
@@ -1886,6 +1905,9 @@ Map {
         },
         "stickyHeader": Object {
           "type": "bool",
+        },
+        "tabIndex": Object {
+          "type": "number",
         },
         "useStaticWidth": Object {
           "type": "bool",
@@ -1981,7 +2003,8 @@ Map {
       },
     },
     "TableCell": Object {
-      "displayName": "TableCell",
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
     },
     "TableContainer": Object {
       "propTypes": Object {
@@ -2227,6 +2250,7 @@ Map {
       },
     },
     "TableSlugRow": Object {
+      "displayName": "TableSlugRow",
       "propTypes": Object {
         "className": Object {
           "type": "string",
@@ -2945,6 +2969,9 @@ Map {
       "slug": Object {
         "type": "node",
       },
+      "tagTitle": Object {
+        "type": "string",
+      },
       "text": Object {
         "type": "string",
       },
@@ -3294,9 +3321,7 @@ Map {
     "render": [Function],
   },
   "FileUploader" => Object {
-    "contextType": Object {
-      "$$typeof": Symbol(react.context),
-    },
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "accept": Object {
         "args": Array [
@@ -3376,6 +3401,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "FileUploaderButton" => Object {
     "propTypes": Object {
@@ -3954,6 +3980,16 @@ Map {
   },
   "Grid" => Object {
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "as": Object {
         "args": Array [
           Array [
@@ -4225,6 +4261,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "autoAlign": Object {
+        "type": "bool",
       },
       "children": Object {
         "type": "node",
@@ -4733,6 +4772,12 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "menuTarget": Object {
+        "args": Array [
+          [Function],
+        ],
+        "type": "instanceOf",
       },
       "size": Object {
         "args": Array [
@@ -5815,6 +5860,16 @@ Map {
       "hideLabel": Object {
         "type": "bool",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "OperationalTag" => Object {
@@ -5850,9 +5905,6 @@ Map {
           ],
         ],
         "type": "oneOf",
-      },
-      "slug": Object {
-        "type": "node",
       },
       "text": Object {
         "type": "string",
@@ -6963,6 +7015,12 @@ Map {
       "id": Object {
         "type": "string",
       },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -6988,9 +7046,6 @@ Map {
           ],
         ],
         "type": "oneOf",
-      },
-      "slug": Object {
-        "type": "node",
       },
       "text": Object {
         "type": "string",
@@ -7479,50 +7534,7 @@ Map {
     },
     "render": [Function],
   },
-  "StaticNotification" => Object {
-    "propTypes": Object {
-      "actionButtonLabel": Object {
-        "type": "string",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "error",
-            "info",
-            "info-square",
-            "success",
-            "warning",
-            "warning-alt",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "lowContrast": Object {
-        "type": "bool",
-      },
-      "onActionButtonClick": Object {
-        "type": "func",
-      },
-      "statusIconDescription": Object {
-        "type": "string",
-      },
-      "subtitle": Object {
-        "type": "node",
-      },
-      "title": Object {
-        "type": "string",
-      },
-      "titleId": Object {
-        "type": "string",
-      },
-    },
-  },
+  "StaticNotification" => Object {},
   "StructuredListBody" => Object {
     "propTypes": Object {
       "children": Object {
@@ -7940,6 +7952,9 @@ Map {
       "stickyHeader": Object {
         "type": "bool",
       },
+      "tabIndex": Object {
+        "type": "number",
+      },
       "useStaticWidth": Object {
         "type": "bool",
       },
@@ -8034,7 +8049,8 @@ Map {
     },
   },
   "TableCell" => Object {
-    "displayName": "TableCell",
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "TableContainer" => Object {
     "propTypes": Object {
@@ -8280,6 +8296,7 @@ Map {
     },
   },
   "TableSlugRow" => Object {
+    "displayName": "TableSlugRow",
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -9478,6 +9495,7 @@ Map {
     "render": [Function],
   },
   "ToggletipContent" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -9486,6 +9504,7 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "ToggletipLabel" => Object {
     "propTypes": Object {
@@ -9824,14 +9843,25 @@ Map {
       "children": Object {
         "type": "node",
       },
-      "flags": Object {
-        "args": Array [
-          Object {
-            "type": "bool",
-          },
-        ],
-        "type": "objectOf",
+      "enableExperimentalFocusWrapWithoutSentinels": Object {
+        "type": "bool",
       },
+      "enableTreeviewControllable": Object {
+        "type": "bool",
+      },
+      "enableV12DynamicFloatingStyles": Object {
+        "type": "bool",
+      },
+      "enableV12Overflowmenu": Object {
+        "type": "bool",
+      },
+      "enableV12TileDefaultIcons": Object {
+        "type": "bool",
+      },
+      "enableV12TileRadioIcons": Object {
+        "type": "bool",
+      },
+      "flags": [Function],
     },
   },
   "unstable_Layout" => Object {
@@ -10256,6 +10286,7 @@ Map {
         "type": "node",
       },
       "onChange": Object {
+        "isRequired": true,
         "type": "func",
       },
       "renderSelectedItem": Object {
@@ -10785,6 +10816,7 @@ Map {
     },
   },
   "unstable__FluidTextInput" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -10851,6 +10883,7 @@ Map {
         "type": "node",
       },
     },
+    "render": [Function],
   },
   "unstable__FluidTextInputSkeleton" => Object {
     "propTypes": Object {
@@ -10938,33 +10971,7 @@ Map {
         "type": "string",
       },
       "aiTextLabel": [Function],
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-start",
-            "top-right",
-            "top-end",
-            "bottom",
-            "bottom-left",
-            "bottom-start",
-            "bottom-right",
-            "bottom-end",
-            "left",
-            "left-bottom",
-            "left-end",
-            "left-top",
-            "left-start",
-            "right",
-            "right-bottom",
-            "right-end",
-            "right-top",
-            "right-start",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "aria-label": Object {
         "type": "string",
       },

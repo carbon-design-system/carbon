@@ -1,5 +1,7 @@
-import { Story, Canvas, ArgsTable } from '@storybook/blocks';
+import { Story, Canvas, ArgTypes, Meta } from '@storybook/blocks';
 import * as ProgressIndicatorStories from './ProgressIndicator.stories';
+
+<Meta isTemplate />
 
 # ProgressIndicator
 
@@ -25,9 +27,7 @@ import * as ProgressIndicatorStories from './ProgressIndicator.stories';
 
 ## Overview
 
-<Canvas>
-  <Story of={ProgressIndicatorStories.Default} />
-</Canvas>
+<Canvas of={ProgressIndicatorStories.Default} />
 
 For React usage, `ProgressIndicator` holds the `currentIndex` state to indicate
 which `ProgressStep` is the current step. The `ProgressIndicator` component
@@ -44,7 +44,7 @@ the `onChange` handler.
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

@@ -51,8 +51,10 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     @include component-reset.reset;
 
-    inline-size: 100%;
-    list-style: none;
+    & {
+      inline-size: 100%;
+      list-style: none;
+    }
   }
 
   .#{$prefix}--accordion__item {
@@ -81,20 +83,22 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion__heading {
+    transition: background-color motion(standard, productive) $duration-fast-02;
     @include button-reset.reset;
 
-    position: relative;
-    display: flex;
-    flex-direction: $flex-direction;
-    align-items: center;
-    justify-content: $justify-content;
-    margin: 0;
-    color: $text-primary;
-    cursor: pointer;
-    inline-size: 100%;
-    min-block-size: layout.size('height');
-    padding-inline-end: layout.density('padding-inline');
-    transition: background-color motion(standard, productive) $duration-fast-02;
+    & {
+      position: relative;
+      display: flex;
+      flex-direction: $flex-direction;
+      align-items: center;
+      justify-content: $justify-content;
+      margin: 0;
+      color: $text-primary;
+      cursor: pointer;
+      inline-size: 100%;
+      min-block-size: layout.size('height');
+      padding-inline-end: layout.density('padding-inline');
+    }
 
     &:hover {
       background-color: $layer-hover;
@@ -105,9 +109,12 @@ $content-padding: 0 0 0 $spacing-05 !default;
       position: relative;
       z-index: 2;
       box-shadow:
-        /* Border top */ 0 -1px 0 0 $focus,
-        inset 0 1px 0 0 $focus, /* Border right */ inset 2px 0 0 0 $focus,
-        /* Border bottom */ 0 1px 0 0 $focus, inset 0 -1px 0 0 $focus,
+        /* Border top */
+        0 -1px 0 0 $focus,
+        inset 0 1px 0 0 $focus,
+        /* Border right */ inset 2px 0 0 0 $focus,
+        /* Border bottom */ 0 1px 0 0 $focus,
+        inset 0 -1px 0 0 $focus,
         /* Border left */ inset -2px 0 0 0 $focus;
       outline: none;
     }
@@ -143,32 +150,39 @@ $content-padding: 0 0 0 $spacing-05 !default;
   .#{$prefix}--accordion__arrow {
     @include focus-outline('reset');
 
-    flex: 0 0 1rem;
-    block-size: 1rem;
-    fill: $icon-primary;
-    inline-size: 1rem;
-    // Without flex basis and flex shrink being set here, our icon width can go
-    // <16px and cause the icon to render in the incorrect artboard size
-    transform: rotate(-270deg) #{'/*rtl:ignore*/'};
     transition: all $duration-fast-02 motion(standard, productive);
+
+    & {
+      flex: 0 0 1rem;
+      block-size: 1rem;
+      fill: $icon-primary;
+      inline-size: 1rem;
+      // Without flex basis and flex shrink being set here, our icon width can go
+      // <16px and cause the icon to render in the incorrect artboard size
+      transform: rotate(-270deg) #{'/*rtl:ignore*/'};
+    }
   }
 
   .#{$prefix}--accordion__title {
     @include type-style('body-01');
 
-    z-index: 1;
-    inline-size: 100%;
-    padding-inline-start: $spacing-05;
-    text-align: start;
+    & {
+      z-index: 1;
+      inline-size: 100%;
+      padding-inline-start: $spacing-05;
+      text-align: start;
+    }
   }
 
   .#{$prefix}--accordion__wrapper {
     // Properties for when the accordion is closed
+    display: none;
     overflow: hidden;
     padding: 0;
     max-block-size: 0;
     opacity: 0;
-    transition: all $duration-fast-02 motion(entrance, productive);
+    transition: all $duration-fast-02 motion(entrance, productive)
+      allow-discrete;
     writing-mode: horizontal-tb;
   }
 
@@ -219,6 +233,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     > .#{$prefix}--accordion__wrapper {
       // Properties for when the accordion is open
+      display: block;
       overflow: visible;
       max-block-size: fit-content;
       opacity: 1;
@@ -230,6 +245,21 @@ $content-padding: 0 0 0 $spacing-05 !default;
       > .#{$prefix}--accordion__arrow {
         fill: $icon-primary;
         transform: rotate(-90deg) #{'/*rtl:ignore*/'};
+      }
+    }
+  }
+  /** starting style also not supported widely
+    * https://caniuse.com/mdn-css_at-rules_starting-style
+    */
+  /* Needs to be after the previous accordion__item--active rule
+     to take effect, as the specificity is the same */
+
+  @starting-style {
+    .#{$prefix}--accordion__item--active {
+      > .#{$prefix}--accordion__wrapper {
+        padding: 0;
+        max-block-size: 0;
+        opacity: 0;
       }
     }
   }
@@ -363,24 +393,11 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
   // RTL overrides
   [dir='rtl'] .#{$prefix}--accordion--start .#{$prefix}--accordion__heading {
-    padding-inline-end: 0;
-    padding-inline-start: layout.density('padding-inline');
+    padding-inline: layout.density('padding-inline') 0;
   }
 
   [dir='rtl'] .#{$prefix}--accordion--start .#{$prefix}--accordion__title {
     margin-inline-end: 0;
     padding-inline-start: 0;
   }
-}
-
-@mixin -content-visible {
-  block-size: 100%;
-  opacity: 1;
-  visibility: inherit;
-}
-
-@mixin -content-hidden {
-  block-size: 0;
-  opacity: 0;
-  visibility: hidden;
 }

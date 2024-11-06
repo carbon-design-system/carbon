@@ -1,5 +1,7 @@
-import { ArgsTable, Canvas, Story} from '@storybook/blocks'
+import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as SkeletonTextStories from './SkeletonText.stories';
+
+<Meta isTemplate />
 
 # SkeletonText
 
@@ -11,13 +13,11 @@ import * as SkeletonTextStories from './SkeletonText.stories';
 
 ## Overview
 
-<Canvas>
-  <Story of={SkeletonTextStories.Default} />
-</Canvas>
+<Canvas of={SkeletonTextStories.Default} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 

@@ -1,0 +1,92 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/checkbox';
+
+:host(#{$prefix}-checkbox) {
+  @extend .#{$prefix}--form-item;
+  @extend .#{$prefix}--checkbox-wrapper;
+}
+
+// RTL overrides
+:host(#{$prefix}-checkbox:dir(rtl)) {
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
+    margin-block-start: 0;
+    margin-inline-start: to-rem(-1px);
+    transform: scale(1.2) rotate3d(0.5, 1, 0, 158deg);
+    transform-origin: center;
+  }
+}
+
+:host(#{$prefix}-checkbox[readonly]) {
+  @extend .#{$prefix}--checkbox-wrapper--readonly;
+}
+
+:host(#{$prefix}-checkbox:not([readonly])[invalid]) {
+  @extend .#{$prefix}--checkbox-wrapper--invalid;
+}
+
+:host(#{$prefix}-checkbox[invalid-group]) .#{$prefix}--checkbox-label::before {
+  border-color: $support-error;
+}
+
+:host(#{$prefix}-checkbox:not([readonly]):not([invalid])[warn]) {
+  @extend .#{$prefix}--checkbox-wrapper--warning;
+}
+
+:host(#{$prefix}-checkbox[data-table]) {
+  margin: 0;
+}
+
+:host(#{$prefix}-checkbox[data-table][hide-checkbox]) {
+  pointer-events: none;
+
+  .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label::after {
+    border-color: transparent;
+    background-color: transparent;
+  }
+}
+
+:host(#{$prefix}-checkbox-skeleton) {
+  .#{$prefix}--checkbox-label {
+    cursor: default;
+  }
+}
+
+:host(#{$prefix}-checkbox-group) {
+  display: flex;
+}
+
+:host(#{$prefix}-checkbox-group) .#{$prefix}--checkbox-group--slug,
+:host(#{$prefix}-checkbox[ai-label]) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
+    margin-inline-start: $spacing-03;
+  }
+}
+
+:host(#{$prefix}-checkbox[ai-label]) {
+  flex-direction: row;
+
+  .#{$prefix}--checkbox-label-text {
+    display: flex;
+  }
+}
+
+:host(#{$prefix}-checkbox[ai-label]) ::slotted(#{$prefix}-ai-label),
+:host(#{$prefix}-checkbox[ai-label]) ::slotted(#{$prefix}-slug) {
+  align-self: center;
+}

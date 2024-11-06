@@ -1,0 +1,53 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>@carbon/ibmdotcom-web-components example</title>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/themes.css"
+    />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-slider:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/slider.min.js"
+    ></script>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/form.min.js"
+    ></script>
+  </head>
+  <body class="cds-theme-zone-white">
+    <cds-form-item>
+      <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="50"
+      >
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"
+        ></cds-slider-input>
+      </cds-slider>
+    </cds-form-item>
+  </body>
+</html>

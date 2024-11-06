@@ -49,7 +49,12 @@ export type TreeViewProps = {
   /**
    * Callback function that is called when any node is selected
    */
-  onSelect?: (selected: Array<string | number>, payload: any) => void;
+  onSelect?: (
+    event: React.SyntheticEvent<HTMLUListElement>,
+    payload?: Partial<TreeNodeProps> & {
+      activeNodeId?: string | number;
+    }
+  ) => void;
   /**
    * Array representing all selected node IDs in the tree
    */
@@ -58,7 +63,7 @@ export type TreeViewProps = {
    * Specify the size of the tree from a list of available sizes.
    */
   size?: 'xs' | 'sm';
-} & React.HTMLAttributes<HTMLUListElement>;
+} & Omit<React.HTMLAttributes<HTMLUListElement>, 'onSelect'>;
 
 type TreeViewComponent = {
   (props: TreeViewProps): JSX.Element;
@@ -224,7 +229,10 @@ const TreeView: TreeViewComponent = ({
           event.shiftKey &&
           event.ctrlKey &&
           treeWalker.current.currentNode instanceof Element &&
-          !treeWalker.current.currentNode.getAttribute('aria-disabled')
+          !treeWalker.current.currentNode.getAttribute('aria-disabled') &&
+          !treeWalker.current.currentNode.classList.contains(
+            `${prefix}--tree-node--hidden`
+          )
         ) {
           nodeIds.push(treeWalker.current.currentNode?.id);
         }
@@ -239,7 +247,8 @@ const TreeView: TreeViewComponent = ({
             event.shiftKey &&
             event.ctrlKey &&
             nextFocusNode instanceof Element &&
-            !nextFocusNode.getAttribute('aria-disabled')
+            !nextFocusNode.getAttribute('aria-disabled') &&
+            !nextFocusNode.classList.contains(`${prefix}--tree-node--hidden`)
           ) {
             nodeIds.push(nextFocusNode?.id);
           }
@@ -252,7 +261,10 @@ const TreeView: TreeViewComponent = ({
         while (treeWalker.current.nextNode()) {
           if (
             treeWalker.current.currentNode instanceof Element &&
-            !treeWalker.current.currentNode.getAttribute('aria-disabled')
+            !treeWalker.current.currentNode.getAttribute('aria-disabled') &&
+            !treeWalker.current.currentNode.classList.contains(
+              `${prefix}--tree-node--hidden`
+            )
           ) {
             nodeIds.push(treeWalker.current.currentNode?.id);
           }
@@ -281,7 +293,10 @@ const TreeView: TreeViewComponent = ({
             if (!(node instanceof Element)) {
               return NodeFilter.FILTER_SKIP;
             }
-            if (node.classList.contains(`${prefix}--tree-node--disabled`)) {
+            if (
+              node.classList.contains(`${prefix}--tree-node--disabled`) ||
+              node.classList.contains(`${prefix}--tree-node--hidden`)
+            ) {
               return NodeFilter.FILTER_REJECT;
             }
             if (node.matches(`li.${prefix}--tree-node`)) {

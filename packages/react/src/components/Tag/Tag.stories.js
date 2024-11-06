@@ -13,71 +13,69 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import '../AILabel/ailabel-story.scss';
+import mdx from './Tag.mdx';
 
 export default {
   title: 'Components/Tag',
   component: Tag,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const ReadOnly = () => {
+export const ReadOnly = (args) => {
   return (
     <>
-      <Tag className="some-class" type="red">
+      <Tag className="some-class" type="red" {...args}>
         {'Tag content with a long text description'}
       </Tag>
-      <Tag className="some-class" type="magenta">
+      <Tag className="some-class" type="magenta" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="purple">
+      <Tag className="some-class" type="purple" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="blue">
+      <Tag className="some-class" type="blue" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="cyan">
+      <Tag className="some-class" type="cyan" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="teal">
+      <Tag className="some-class" type="teal" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="green">
+      <Tag className="some-class" type="green" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="gray">
+      <Tag className="some-class" type="gray" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="cool-gray">
+      <Tag className="some-class" type="cool-gray" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="warm-gray">
+      <Tag className="some-class" type="warm-gray" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="high-contrast">
+      <Tag className="some-class" type="high-contrast" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="outline">
+      <Tag className="some-class" type="outline" {...args}>
         {'Tag content'}
       </Tag>
     </>
   );
 };
 
-export const Playground = (args) => {
-  return (
-    <Tag renderIcon={Asleep} {...args}>
-      {'Tag content'}
-    </Tag>
-  );
-};
-
-Playground.args = {
+ReadOnly.args = {
   disabled: false,
   filter: false,
   size: 'md',
   title: 'Clear filter',
 };
 
-Playground.argTypes = {
+ReadOnly.argTypes = {
   children: {
     control: false,
   },
@@ -112,23 +110,7 @@ Playground.argTypes = {
     },
   },
   type: {
-    options: [
-      'red',
-      'magenta',
-      'purple',
-      'blue',
-      'cyan',
-      'teal',
-      'green',
-      'gray',
-      'cool-gray',
-      'warm-gray',
-      'high-contrast',
-      'outline',
-    ],
-    control: {
-      type: 'select',
-    },
+    control: false,
   },
 };
 
