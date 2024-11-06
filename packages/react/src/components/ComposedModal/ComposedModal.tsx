@@ -366,7 +366,11 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
             ModalFooterProps,
             typeof ModalFooter
           >;
-          return React.cloneElement(el, { closeModal, inputref: button });
+          return React.cloneElement(el, {
+            closeModal,
+            inputref: button,
+            danger,
+          });
         }
 
         default:
@@ -386,7 +390,9 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       const initialFocus = (focusContainerElement) => {
         const containerElement = focusContainerElement || innerModal.current;
         const primaryFocusElement = containerElement
-          ? containerElement.querySelector(selectorPrimaryFocus)
+          ? containerElement.querySelector(
+              danger ? `.${prefix}--btn--secondary` : selectorPrimaryFocus
+            )
           : null;
 
         if (primaryFocusElement) {
@@ -398,8 +404,15 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
       const focusButton = (focusContainerElement) => {
         const target = initialFocus(focusContainerElement);
+
+        const closeButton = focusContainerElement.querySelector(
+          `.${prefix}--modal-close`
+        );
+
         if (target) {
           target.focus();
+        } else if (!target && closeButton) {
+          closeButton?.focus();
         }
       };
 
