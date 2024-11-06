@@ -54,15 +54,9 @@ export interface ContentSwitcherProps
   selectedIndex: number;
 
   /**
-   * Choose whether to switch content using keyboard focus. Default: `automatic`
-   * @deprecated `selectionMode` has changed to `shouldSwitchOnKeyboardFocus`
+   * Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to 'automatic'
    */
   selectionMode?: 'automatic' | 'manual';
-
-  /**
-   * Choose whether to switch content using keyboard focus. Default: `true`
-   */
-  shouldSwitchOnKeyboardFocus?: boolean;
 
   /**
    * Specify the size of the Content Switcher. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
@@ -121,17 +115,9 @@ export default class ContentSwitcher extends React.Component<
     selectedIndex: PropTypes.number,
 
     /**
-     * Choose whether to switch content using keyboard focus. Default: `automatic`
+     * Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to 'automatic'
      */
-    selectionMode: deprecate(
-      PropTypes.oneOf(['automatic', 'manual']),
-      'The prop `selectionMode` has been deprecated. Please use the new prop `shouldSwitchOnKeyboardFocus.'
-    ),
-
-    /**
-     * Choose whether to switch content using keyboard focus. Default: `true`
-     */
-    shouldSwitchOnKeyboardFocus: PropTypes.bool,
+    selectionMode: PropTypes.oneOf(['automatic', 'manual']),
 
     /**
      * Specify the size of the Content Switcher. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
@@ -156,7 +142,7 @@ export default class ContentSwitcher extends React.Component<
   };
 
   handleChildChange = (data) => {
-    const { selectionMode, shouldSwitchOnKeyboardFocus = true } = this.props;
+    const { selectionMode = 'automatic' } = this.props;
     // the currently selected child index
     const { selectedIndex } = this.state;
     // the newly selected child index
@@ -169,9 +155,8 @@ export default class ContentSwitcher extends React.Component<
         index,
         this.props.children?.length as number
       );
-
       const children = React.Children.toArray(this.props.children);
-      if (selectionMode === 'manual' || !shouldSwitchOnKeyboardFocus) {
+      if (selectionMode === 'manual') {
         const switchRef = this._switchRefs[nextIndex as number];
         switchRef && switchRef.focus();
       } else {
@@ -214,6 +199,7 @@ export default class ContentSwitcher extends React.Component<
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       selectedIndex = 0,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      selectionMode = 'automatic',
       size,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onChange = noopFn,
