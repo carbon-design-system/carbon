@@ -297,6 +297,9 @@
     margin: 0;
     block-size: convert.to-rem(64px);
     max-inline-size: none;
+  }
+
+  .#{$prefix}--modal-footer .#{$prefix}--btn:not(.#{$prefix}--skeleton) {
     padding-block: calc($spacing-05 - convert.to-rem(2px)) $spacing-07;
   }
 
