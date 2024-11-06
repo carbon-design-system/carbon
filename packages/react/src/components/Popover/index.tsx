@@ -244,7 +244,6 @@ export const Popover: PopoverComponent = React.forwardRef(
         }
       }
     });
-    console.log(alignmentAxisOffset);
     const { refs, floatingStyles, placement, middlewareData } = useFloating(
       enableFloatingStyles
         ? {
