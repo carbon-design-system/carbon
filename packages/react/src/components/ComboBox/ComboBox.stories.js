@@ -65,42 +65,6 @@ export default {
   },
 };
 
-export const DownshiftActionsTest = () => {
-  const downshiftActions = useRef();
-
-  return (
-    <div style={{ width: 300 }}>
-      <ComboBox
-        onChange={() => {}}
-        id="carbon-combobox"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        titleText="ComboBox title"
-        helperText="Combobox helper text"
-        downshiftActions={downshiftActions}
-        downshiftProps={{
-          onStateChange: (changes) => {
-            console.log('onStateChange changes', changes);
-
-            if (changes.selectedItem === null) {
-              downshiftActions?.current?.openMenu?.();
-              return;
-            }
-            if (changes?.isOpen && changes?.inputValue === 'Option 1') {
-              downshiftActions?.current?.setInputValue?.('');
-              return;
-            }
-            if (!changes?.isOpen && changes?.inputValue !== 'Option 1') {
-              downshiftActions?.current?.setInputValue?.('Option 1');
-              return;
-            }
-          },
-        }}
-      />
-    </div>
-  );
-};
-
 export const Default = () => (
   <div style={{ width: 300 }}>
     <ComboBox
