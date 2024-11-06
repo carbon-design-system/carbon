@@ -83,12 +83,12 @@ function useToggletip() {
 
 interface ToggletipProps<E extends ElementType> {
   align?: PopoverAlignment | undefined;
+  alignmentAxisOffset?: Number;
   as?: E | undefined;
   autoAlign?: boolean | undefined;
   className?: string | undefined;
   children?: ReactNode;
   defaultOpen?: boolean | undefined;
-  alignmentAxisOffset?: Number;
 }
 
 /**
