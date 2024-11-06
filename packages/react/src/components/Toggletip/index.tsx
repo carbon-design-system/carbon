@@ -88,6 +88,7 @@ interface ToggletipProps<E extends ElementType> {
   className?: string | undefined;
   children?: ReactNode;
   defaultOpen?: boolean | undefined;
+  alignmentAxisOffset?: Number;
 }
 
 /**
@@ -265,7 +266,7 @@ export type ToggleTipButtonProps<T extends React.ElementType> =
  * clicks and keyboard interactions.
  */
 export const ToggletipButton = React.forwardRef(function ToggletipButton<
-  T extends React.ElementType,
+  T extends React.ElementType
 >(
   {
     children,

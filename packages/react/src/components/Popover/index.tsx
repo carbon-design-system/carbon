@@ -172,6 +172,7 @@ export const Popover: PopoverComponent = React.forwardRef(
       highContrast = false,
       onRequestClose,
       open,
+      alignmentAxisOffset,
       ...rest
     }: PopoverProps<E>,
     forwardRef: ForwardedRef<Element>
@@ -243,7 +244,7 @@ export const Popover: PopoverComponent = React.forwardRef(
         }
       }
     });
-
+    console.log(alignmentAxisOffset);
     const { refs, floatingStyles, placement, middlewareData } = useFloating(
       enableFloatingStyles
         ? {
@@ -257,7 +258,14 @@ export const Popover: PopoverComponent = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
-              offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
+              offset(
+                !isTabTip
+                  ? {
+                      alignmentAxis: alignmentAxisOffset,
+                      mainAxis: popoverDimensions?.current?.offset,
+                    }
+                  : 0
+              ),
               autoAlign &&
                 flip({
                   fallbackPlacements: align.includes('bottom')
