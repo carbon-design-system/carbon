@@ -657,7 +657,7 @@ const Dropdown = React.forwardRef(
           {slug ? (
             normalizedDecorator
           ) : decorator ? (
-            <div className={`${prefix}--list-box__wrapper-inner--decorator`}>
+            <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
               {normalizedDecorator}
             </div>
           ) : (
