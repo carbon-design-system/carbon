@@ -1216,14 +1216,14 @@ export type DeprecatedKindProps =
   | 'warning'
   | 'warning-alt';
 
-export type NewKindProps = 'error' | 'info' | 'info-square' | 'warning-alt';
+export type NewKindProps = 'warning' | 'info';
 
 export type KindProps = DeprecatedKindProps | NewKindProps;
 
 const propMappingFunction = (deprecatedValue) => {
   const mapping = {
-    success: 'info',
-    warning: 'error',
+    error: 'warning', // only redirect error -> warning
+    success: 'info', // only redirect success -> info
   };
   return mapping[deprecatedValue];
 };
@@ -1377,7 +1377,7 @@ Callout.propTypes = {
       'warning',
       'warning-alt',
     ]),
-    ['error', 'info', 'info-square', 'warning-alt'],
+    ['warning', 'info'],
     propMappingFunction
   ),
 
