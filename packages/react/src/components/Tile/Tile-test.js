@@ -51,7 +51,7 @@ describe('Tile', () => {
     it('should respect slug prop', () => {
       render(<Tile slug={<AILabel />}>Default tile</Tile>);
       expect(
-        screen.getByRole('button', { name: 'AI - Show information' })
+        screen.getByRole('button', { name: 'AI Show information' })
       ).toBeInTheDocument();
     });
   });
@@ -183,7 +183,7 @@ describe('Tile', () => {
         </SelectableTile>
       );
       expect(
-        screen.getByRole('button', { name: 'AI - Show information' })
+        screen.getByRole('button', { name: 'AI Show information' })
       ).toBeInTheDocument();
     });
   });
@@ -325,7 +325,7 @@ describe('Tile', () => {
         </ExpandableTile>
       );
       expect(
-        screen.getByRole('button', { name: 'AI - Show information' })
+        screen.getByRole('button', { name: 'AI Show information' })
       ).toBeInTheDocument();
     });
   });
