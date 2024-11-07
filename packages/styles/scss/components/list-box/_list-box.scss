@@ -1064,6 +1064,12 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--ai-label::before,
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
     .#{$prefix}--slug::before,
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
@@ -1075,6 +1081,13 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
     ~ .#{$prefix}--ai-label,
   .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
     ~ .#{$prefix}--ai-label,

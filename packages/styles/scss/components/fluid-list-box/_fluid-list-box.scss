@@ -309,6 +309,12 @@
     .#{$prefix}--ai-label,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
+    .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
     .#{$prefix}--slug,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--invalid
@@ -360,6 +366,18 @@
     )
     ~ .#{$prefix}--list-box__wrapper--decorator-inner
     > *,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--ai-label,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field:has(
