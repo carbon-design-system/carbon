@@ -1040,22 +1040,29 @@
     @include ai-table-gradient();
   }
 
+  .#{$prefix}--table-column-slug .#{$prefix}--ai-label,
   .#{$prefix}--table-column-slug .#{$prefix}--slug {
     position: absolute;
     z-index: 2;
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--data-table--xl
+    .#{$prefix}--table-column-slug
+    .#{$prefix}--ai-label,
   .#{$prefix}--data-table--xl .#{$prefix}--table-column-slug .#{$prefix}--slug {
     transform: translateY(1px);
   }
 
-  // Slug inside header styles
+  // AILabel inside header styles
   th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug {
     display: flex;
     align-items: center;
   }
 
+  th
+    .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug
+    .#{$prefix}--ai-label,
   th
     .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug
     .#{$prefix}--slug {
