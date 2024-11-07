@@ -26,7 +26,11 @@ export default {
 };
 
 export const Default = () => (
-  <Callout title="Notification title" subtitle="Subtitle text goes here" />
+  <Callout
+    title="Notification title"
+    kind="info"
+    subtitle="Subtitle text goes here"
+  />
 );
 
 export const WithInteractiveElements = () => (
