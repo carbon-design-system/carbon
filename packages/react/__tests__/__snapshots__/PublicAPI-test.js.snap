@@ -789,21 +789,7 @@ Map {
   },
   "CodeSnippet" => Object {
     "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-right",
-            "bottom",
-            "bottom-left",
-            "bottom-right",
-            "left",
-            "right",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "aria-label": Object {
         "type": "string",
       },
@@ -1450,25 +1436,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "tooltipAlignment": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-start",
-            "top-right",
-            "top-end",
-            "bottom",
-            "bottom-left",
-            "bottom-start",
-            "bottom-right",
-            "bottom-end",
-            "left",
-            "right",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "tooltipAlignment": [Function],
       "translateWithId": Object {
         "type": "func",
       },
@@ -1797,21 +1765,7 @@ Map {
   },
   "Copy" => Object {
     "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-right",
-            "bottom",
-            "bottom-left",
-            "bottom-right",
-            "left",
-            "right",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "autoAlign": Object {
         "type": "bool",
       },
@@ -1837,21 +1791,7 @@ Map {
   },
   "CopyButton" => Object {
     "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-right",
-            "bottom",
-            "bottom-left",
-            "bottom-right",
-            "left",
-            "right",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "autoAlign": Object {
         "type": "bool",
       },
@@ -4243,25 +4183,7 @@ Map {
   "IconButton" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-start",
-            "top-right",
-            "top-end",
-            "bottom",
-            "bottom-left",
-            "bottom-start",
-            "bottom-right",
-            "bottom-end",
-            "left",
-            "right",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "autoAlign": Object {
         "type": "bool",
       },
