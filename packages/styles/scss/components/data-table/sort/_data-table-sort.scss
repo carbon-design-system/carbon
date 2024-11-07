@@ -243,12 +243,12 @@
     margin-block-start: convert.to-rem(13px);
   }
 
-  // Slug styles
+  // AILabel styles
   .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon,
   .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon-unsorted {
     margin-inline: auto convert.to-rem(8px);
   }
-
+  .#{$prefix}--table-sort__header--slug .#{$prefix}--ai-label,
   .#{$prefix}--table-sort__header--slug .#{$prefix}--slug {
     margin-inline-end: convert.to-rem(8px);
   }

@@ -205,13 +205,22 @@
     inset-inline-start: $spacing-05;
   }
 
-  // Slug styles
+  // AILabel styles
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--ai-label,
   .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper--slug
     .#{$prefix}--slug {
     inset-block-start: convert.to-rem(42px);
   }
 
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--invalid
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--warning
+    ~ .#{$prefix}--ai-label,
   .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input--invalid
     ~ .#{$prefix}--slug,
