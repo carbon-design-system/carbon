@@ -225,6 +225,11 @@ Toggletip.propTypes = {
   ]),
 
   /**
+   * Provide an offset value for alignment axis.
+   */
+  alignmentAxisOffset: PropTypes.number,
+
+  /**
    * Provide a custom element or component to render the top-level node for the
    * component.
    */
