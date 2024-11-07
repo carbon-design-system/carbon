@@ -313,7 +313,7 @@ export const ExpandableWithLayer = () => (
 );
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -357,7 +357,7 @@ export const withAILabel = {
   },
   render: (args) => (
     <>
-      <div className="slug-tile-container">
+      <div className="ai-label-tile-container">
         <Tile slug={aiLabel} id="tile-1" {...args}>
           <h4>Title</h4>
           <p>
@@ -431,7 +431,7 @@ export const withAILabel = {
         </ExpandableTile>
       </div>
 
-      <div className="slug-selectable-tile-container">
+      <div className="ai-label-selectable-tile-container">
         <TileGroup
           defaultSelected="default-selected"
           legend="Selectable Tile Group"
@@ -439,7 +439,7 @@ export const withAILabel = {
           {...args}>
           <div>
             <SelectableTile
-              className="slug-selectable-tile"
+              className="ai-label-selectable-tile"
               id="selectable-tile-1"
               slug={aiLabel}
               {...args}>
@@ -448,7 +448,7 @@ export const withAILabel = {
           </div>
           <div>
             <SelectableTile
-              className="slug-selectable-tile"
+              className="ai-label-selectable-tile"
               slug={aiLabel}
               id="selectable-tile-2"
               {...args}>
@@ -457,7 +457,7 @@ export const withAILabel = {
           </div>
           <div>
             <SelectableTile
-              className="slug-selectable-tile"
+              className="ai-label-selectable-tile"
               slug={aiLabel}
               id="selectable-tile-3"
               {...args}>
@@ -468,14 +468,14 @@ export const withAILabel = {
       </div>
       <br />
       <br />
-      <div className="slug-selectable-tile-container">
+      <div className="ai-label-selectable-tile-container">
         <TileGroup
           defaultSelected="default-selected"
           legend="Radio Tile Group"
           name="radio tile group"
           {...args}>
           <RadioTile
-            className="slug-radio-tile"
+            className="ai-label-radio-tile"
             id="radio-tile-1"
             value="standard"
             slug={aiLabel}
@@ -483,7 +483,7 @@ export const withAILabel = {
             Option 1
           </RadioTile>
           <RadioTile
-            className="slug-radio-tile"
+            className="ai-label-radio-tile"
             id="radio-tile-2"
             value="default-selected"
             slug={aiLabel}
@@ -491,7 +491,7 @@ export const withAILabel = {
             Option 2
           </RadioTile>
           <RadioTile
-            className="slug-radio-tile"
+            className="ai-label-radio-tile"
             id="radio-tile-3"
             value="selected"
             slug={aiLabel}
