@@ -352,6 +352,18 @@ describe('Dropdown', () => {
         `${prefix}--list-box__wrapper--decorator`
       );
     });
+
+    it('should respect deprecated slug prop', async () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      const { container } = render(
+        <Dropdown {...mockProps} slug={<AILabel />} />
+      );
+      await waitForPosition();
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--list-box__wrapper--slug`
+      );
+      spy.mockRestore();
+    });
   });
 });
 
