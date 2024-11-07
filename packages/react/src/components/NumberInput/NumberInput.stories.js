@@ -11,7 +11,8 @@ import NumberInputSkeleton from './NumberInput.Skeleton';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
-import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/NumberInput',
@@ -77,7 +78,22 @@ export const withAILabel = () => (
       label="NumberInput label"
       helperText="Optional helper text."
       invalidText="Number is not valid"
-      slug={aiLabel}
+      decorator={aiLabel}
+    />
+
+    <br />
+    <NumberInput
+      min={-100}
+      max={100}
+      value={50}
+      label="NumberInput label"
+      helperText="Optional helper text."
+      invalidText="Number is not valid"
+      decorator={
+        <Tooltip label={'hello'}>
+          <Information />
+        </Tooltip>
+      }
     />
   </div>
 );
