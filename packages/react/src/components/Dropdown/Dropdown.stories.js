@@ -13,8 +13,9 @@ import { default as Dropdown, DropdownSkeleton } from './';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
-import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import mdx from './Dropdown.mdx';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/Dropdown',
@@ -294,7 +295,24 @@ export const withAILabel = () => (
       label="Option 1"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      slug={aiLabel}
+      decorator={aiLabel}
+    />
+
+    <br />
+
+    <Dropdown
+      id="default"
+      titleText="Dropdown title"
+      helperText="This is some helper text"
+      initialSelectedItem={items[1]}
+      label="Option 1"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      decorator={
+        <Tooltip>
+          <Information></Information>
+        </Tooltip>
+      }
     />
   </div>
 );

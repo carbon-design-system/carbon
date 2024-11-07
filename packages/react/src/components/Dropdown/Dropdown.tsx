@@ -101,6 +101,11 @@ export interface DropdownProps<ItemType>
   autoAlign?: boolean;
 
   /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `Dropdown` component
+   */
+  decorator?: ReactNode;
+
+  /**
    * Specify the direction of the dropdown. Can be either top or bottom.
    */
   direction?: 'top' | 'bottom';
@@ -212,6 +217,7 @@ export interface DropdownProps<ItemType>
   size?: ListBoxSize;
 
   /**
+   * @deprecated please use `decorator` instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
   slug?: ReactNode;
@@ -245,6 +251,7 @@ const Dropdown = React.forwardRef(
     {
       autoAlign = false,
       className: containerClassName,
+      decorator,
       disabled = false,
       direction = 'bottom',
       items,
@@ -423,6 +430,7 @@ const Dropdown = React.forwardRef(
         [`${prefix}--list-box__wrapper--fluid--focus`]:
           isFluid && isFocused && !isOpen,
         [`${prefix}--list-box__wrapper--slug`]: slug,
+        [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
     );
 
@@ -513,12 +521,18 @@ const Dropdown = React.forwardRef(
       [autoAlign, getMenuProps, refs.setFloating]
     );
 
-    // Slug is always size `mini`
-    let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'AILabel') {
-      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size: 'mini',
-      });
+    // AILabel is always size `mini`
+    let normalizedDecorator = slug ?? decorator;
+    if (
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel'
+    ) {
+      normalizedDecorator = React.cloneElement(
+        normalizedDecorator as React.ReactElement<any>,
+        {
+          size: 'mini',
+        }
+      );
     }
 
     return (
@@ -578,7 +592,15 @@ const Dropdown = React.forwardRef(
               translateWithId={translateWithId}
             />
           </button>
-          {normalizedSlug}
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div className={`${prefix}--list-box__wrapper-inner--decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
           <ListBox.Menu {...menuProps}>
             {isOpen &&
               items.map((item, index) => {
@@ -666,6 +688,11 @@ Dropdown.propTypes = {
    * Provide a custom className to be applied on the cds--dropdown node
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `Dropdown` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify the direction of the dropdown. Can be either top or bottom.
@@ -791,7 +818,11 @@ Dropdown.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop for `Dropdown` has ' +
+      'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
+  ),
 
   /**
    * Provide the title text that will be read by a screen reader when

@@ -343,13 +343,13 @@ describe('Dropdown', () => {
       expect(ref.current).toHaveAttribute('aria-haspopup', 'listbox');
     });
 
-    it('should respect slug prop', async () => {
+    it('should respect decorator prop', async () => {
       const { container } = render(
-        <Dropdown {...mockProps} slug={<AILabel />} />
+        <Dropdown {...mockProps} decorator={<AILabel />} />
       );
       await waitForPosition();
       expect(container.firstChild).toHaveClass(
-        `${prefix}--list-box__wrapper--slug`
+        `${prefix}--list-box__wrapper--decorator`
       );
     });
   });
