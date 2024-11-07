@@ -27,7 +27,7 @@
     display: inline-grid;
     align-items: center;
     grid-gap: 0 convert.to-rem(24px);
-    grid-template: auto auto / auto min-content;
+    grid-template: auto / auto min-content;
 
     .#{$prefix}--label {
       @include type-style('body-compact-01');

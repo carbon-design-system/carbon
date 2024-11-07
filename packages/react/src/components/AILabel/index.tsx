@@ -37,8 +37,8 @@ export const AILabelContent = React.forwardRef(function AILabelContent(
   });
 
   const aiLabelContentClasses = cx(className, {
-    [`${prefix}--slug-content`]: true,
-    [`${prefix}--slug-content--with-actions`]: hasAILabelActions,
+    [`${prefix}--ai-label-content`]: true,
+    [`${prefix}--ai-label-content--with-actions`]: hasAILabelActions,
   });
 
   return (
@@ -51,12 +51,12 @@ export const AILabelContent = React.forwardRef(function AILabelContent(
 AILabelContent.displayName = 'AILabelContent';
 AILabelContent.propTypes = {
   /**
-   * Specify the content you want rendered inside the slug ToggleTip
+   * Specify the content you want rendered inside the AILabel ToggleTip
    */
   children: PropTypes.node,
 
   /**
-   * Specify an optional className to be added to the AI slug callout
+   * Specify an optional className to be added to the AILabel callout
    */
   className: PropTypes.string,
 };
@@ -70,7 +70,7 @@ export const AILabelActions = React.forwardRef(function AILabelActions(
   const prefix = usePrefix();
 
   const aiLabelActionsClasses = cx(className, {
-    [`${prefix}--slug-actions`]: true,
+    [`${prefix}--ai-label-actions`]: true,
   });
 
   return (
@@ -83,12 +83,12 @@ export const AILabelActions = React.forwardRef(function AILabelActions(
 AILabelActions.displayName = 'AILabelActions';
 AILabelActions.propTypes = {
   /**
-   * Specify the content you want rendered inside the slug callout toolbar
+   * Specify the content you want rendered inside the AILabel callout toolbar
    */
   children: PropTypes.node,
 
   /**
-   * Specify an optional className to be added to the AI slug toolbar
+   * Specify an optional className to be added to the AILabel toolbar
    */
   className: PropTypes.string,
 };
@@ -170,15 +170,15 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
     const id = useId('AILabel');
 
     const aiLabelClasses = cx(className, {
-      [`${prefix}--slug`]: true,
-      [`${prefix}--slug--revert`]: revertActive,
+      [`${prefix}--ai-label`]: true,
+      [`${prefix}--ai-label--revert`]: revertActive,
     });
 
     const aiLabelButtonClasses = cx({
-      [`${prefix}--slug__button`]: true,
-      [`${prefix}--slug__button--${size}`]: size,
-      [`${prefix}--slug__button--${kind}`]: kind,
-      [`${prefix}--slug__button--inline-with-content`]:
+      [`${prefix}--ai-label__button`]: true,
+      [`${prefix}--ai-label__button--${size}`]: size,
+      [`${prefix}--ai-label__button--${kind}`]: kind,
+      [`${prefix}--ai-label__button--inline-with-content`]:
         kind === 'inline' && (aiTextLabel || textLabel),
     });
 
@@ -209,9 +209,9 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
             <ToggletipButton
               className={aiLabelButtonClasses}
               label={ariaLabelText}>
-              <span className={`${prefix}--slug__text`}>{aiText}</span>
+              <span className={`${prefix}--ai-label__text`}>{aiText}</span>
               {kind === 'inline' && (aiTextLabel || textLabel) && (
-                <span className={`${prefix}--slug__additional-text`}>
+                <span className={`${prefix}--ai-label__additional-text`}>
                   {aiTextLabel || textLabel}
                 </span>
               )}

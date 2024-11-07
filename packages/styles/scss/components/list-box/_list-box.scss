@@ -885,7 +885,8 @@ $list-box-menu-width: convert.to-rem(300px);
     text-overflow: ellipsis;
   }
 
-  // Slug styles
+  // AILabel styles
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
@@ -894,6 +895,8 @@ $list-box-menu-width: convert.to-rem(300px);
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::after,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::before {
     position: absolute;
@@ -903,23 +906,32 @@ $list-box-menu-width: convert.to-rem(300px);
     inline-size: convert.to-rem(1px);
   }
 
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::before {
     display: none;
     inset-inline-start: convert.to-rem(-9px);
   }
 
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::after,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after {
     display: block;
     inset-inline-end: convert.to-rem(-9px);
   }
 
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label--revert::after,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug--revert::after {
     inset-block-start: convert.to-rem(8px);
     inset-inline-end: convert.to-rem(-1px);
   }
 
   .#{$prefix}--list-box__wrapper--slug
-    .#{$prefix}--list-box:not(:has(.#{$prefix}--slug--revert)) {
+    .#{$prefix}--list-box:has(.#{$prefix}--ai-label):not(
+      :has(.#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box:has(.#{$prefix}--slug):not(
+      :has(.#{$prefix}--slug--revert)
+    ) {
     @include ai-gradient;
   }
 
@@ -978,6 +990,12 @@ $list-box-menu-width: convert.to-rem(300px);
 
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
     .#{$prefix}--slug::before,
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
@@ -985,6 +1003,13 @@ $list-box-menu-width: convert.to-rem(300px);
     display: block;
   }
 
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--ai-label,
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
     ~ .#{$prefix}--slug,

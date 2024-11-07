@@ -207,7 +207,9 @@ describe('DatePicker', () => {
       />
     );
 
-    expect(screen.getByRole('button')).toHaveClass(`${prefix}--slug__button`);
+    expect(screen.getByRole('button')).toHaveClass(
+      `${prefix}--ai-label__button`
+    );
   });
 
   it('should respect parseDate prop', async () => {

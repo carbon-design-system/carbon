@@ -2,14 +2,15 @@
 library:
   id: carbon-web-components
   name: Carbon Web Components
-  description: Build user interfaces with web components based on Carbon's React library.
-  externalDocsUrl: https://www.ibm.com/standards/web/carbon-for-ibm-dotcom
+  description:
+    Build user interfaces with web components based on Carbon's React library.
+  externalDocsUrl: https://web-components.carbondesignsystem.com
   inherits: carbon-styles
   demoLinks:
     - type: storybook
       name: Storybook
       action: link
-      url: https://www.ibm.com/standards/carbon/carbon-web-components
+      url: https://web-components.carbondesignsystem.com
   navData:
     - title: Get started
       path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/frameworks/web-components.mdx'
@@ -22,7 +23,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-accordion
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-accordion
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/accordion/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/accordion/style.mdx
@@ -36,7 +37,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-breadcrumb
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-breadcrumb
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/breadcrumb/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/breadcrumb/style.mdx
@@ -50,7 +51,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-button
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-button
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/button/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/button/style.mdx
@@ -64,7 +65,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-checkbox
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-checkbox
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/checkbox/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/checkbox/style.mdx
@@ -78,7 +79,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-code-snippet
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-code-snippet
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/code-snippet/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/code-snippet/style.mdx
@@ -91,7 +92,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-combo-box
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-combo-box
     docs:
       overviewPath: ./src/components/combo-box/docs/overview.mdx
   content-switcher:
@@ -102,7 +103,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-content-switcher
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-content-switcher
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/content-switcher/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/content-switcher/style.mdx
@@ -115,7 +116,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-copy-button
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-copy-button
     docs:
       overviewPath: ./src/components/copy-button/docs/overview.mdx
   data-table:
@@ -126,7 +127,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-data-table
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-data-table
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/data-table/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/data-table/style.mdx
@@ -140,7 +141,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-date-picker
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-date-picker
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/date-picker/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/date-picker/style.mdx
@@ -154,7 +155,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-dropdown
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-dropdown
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/dropdown/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/dropdown/style.mdx
@@ -168,7 +169,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-file-uploader
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-file-uploader
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/file-uploader/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/file-uploader/style.mdx
@@ -184,8 +185,8 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-icon
-    thumbnailPath: "./thumbnails/icon.svg"
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-icon
+    thumbnailPath: './thumbnails/icon.svg'
     tags:
       - media
       - content-element
@@ -199,7 +200,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-inline-loading
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-inline-loading
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/inline-loading/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/inline-loading/style.mdx
@@ -211,12 +212,12 @@ assets:
     type: component
     framework: web-component
     platform: web
-    thumbnailPath: "./thumbnails/input.svg"
+    thumbnailPath: './thumbnails/input.svg'
     demoLinks:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-input
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-input
     tags:
       - input-control
     docs:
@@ -229,7 +230,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-link
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-link
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/link/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/link/style.mdx
@@ -243,7 +244,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-list
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-list
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/list/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/list/style.mdx
@@ -257,7 +258,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-loading
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-loading
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/loading/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/loading/style.mdx
@@ -271,7 +272,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-modal
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-modal
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/modal/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/modal/style.mdx
@@ -285,7 +286,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-multi-select
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-multi-select
     docs:
       overviewPath: ./src/components/multi-select/docs/overview.mdx
   notification:
@@ -296,7 +297,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-notifications
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-notifications
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/notification/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/notification/style.mdx
@@ -310,7 +311,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-number-input
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-number-input
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/number-input/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/number-input/style.mdx
@@ -324,7 +325,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-overflow-menu
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-overflow-menu
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/style.mdx
@@ -338,7 +339,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-pagination
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-pagination
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/pagination/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/pagination/style.mdx
@@ -352,7 +353,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-progress-indicator
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-progress-indicator
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/progress-indicator/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/progress-indicator/style.mdx
@@ -366,7 +367,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-radio-button
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-radio-button
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/radio-button/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/radio-button/style.mdx
@@ -380,7 +381,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-search
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-search
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/search/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/search/style.mdx
@@ -394,7 +395,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-select
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-select
     tags:
       - shell
     docs:
@@ -413,7 +414,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-skeleton-placeholder
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-skeleton-placeholder
     tags:
       - system-feedback
     docs:
@@ -429,7 +430,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-skeleton-text
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-skeleton-text
     tags:
       - shell
     docs:
@@ -445,7 +446,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-skip-to-content
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-skip-to-content
     tags:
       - contextual-navigation
     docs:
@@ -458,7 +459,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-slider
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-slider
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/slider/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/slider/style.mdx
@@ -472,7 +473,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-structured-list
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-structured-list
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/structured-list/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/structured-list/style.mdx
@@ -486,7 +487,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-tabs
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-tabs
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tabs/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tabs/style.mdx
@@ -500,7 +501,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-tag
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-tag
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tag/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tag/style.mdx
@@ -513,7 +514,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-textarea
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-textarea
     docs:
       overviewPath: ./src/components/textarea/docs/overview.mdx
   tile:
@@ -524,7 +525,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-tile
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-tile
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tile/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tile/style.mdx
@@ -538,7 +539,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-toggle
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-toggle
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggle/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggle/style.mdx
@@ -552,7 +553,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-tooltip
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-tooltip
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tooltip/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tooltip/style.mdx
@@ -570,7 +571,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://www.ibm.com/standards/carbon/carbon-web-components/?path=/docs/components-ui-shell
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-ui-shell
     tags:
       - contextual-navigation
     docs:

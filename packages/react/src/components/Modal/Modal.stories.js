@@ -752,7 +752,7 @@ export const WithInlineLoading = () => {
 };
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -786,7 +786,7 @@ export const withAILabel = {
   render: () => {
     const [open, setOpen] = useState(true); // eslint-disable-line
     return (
-      <div className="slug-modal">
+      <div className="ai-label-modal">
         <Button onClick={() => setOpen(true)}>Launch modal</Button>
         <Modal
           open={open}
