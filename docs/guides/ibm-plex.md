@@ -269,12 +269,6 @@ When multiple configurations are present:
 
 #### Migrating from Akamai CDN
 
-1. Install the required Plex family packages:
-
-```bash
-# Install only the font families you need
-npm install @ibm/plex-sans @ibm/plex-mono # Add other families as needed
-```
 
 2. Update your Sass configuration:
 
