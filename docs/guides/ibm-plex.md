@@ -331,7 +331,6 @@ In the next major version:
 - Backward compatibility will be maintained:
   - Akamai CDN option (`$use-akamai-cdn`) will continue to work
   - Custom font path (`$font-path`) will remain supported
-  - Migration will not be required but recommended
 
 ### Self-hosted, CDN
 
