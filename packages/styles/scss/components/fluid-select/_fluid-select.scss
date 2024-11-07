@@ -200,7 +200,8 @@
     fill: $icon-disabled;
   }
 
-  // Slug styles
+  // AILabel styles
+  .#{$prefix}--select--fluid .#{$prefix}--select--slug .#{$prefix}--ai-label,
   .#{$prefix}--select--fluid .#{$prefix}--select--slug .#{$prefix}--slug {
     inset-block-start: convert.to-rem(42px);
     inset-inline-end: $spacing-08;
@@ -212,7 +213,10 @@
     padding-inline-end: $spacing-10;
   }
 
-  // remove slug divider when element is invalid and fluid
+  // remove ai-label divider when element is invalid and fluid
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--ai-label::before,
   .#{$prefix}--select--fluid
     .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
     .#{$prefix}--slug::before {

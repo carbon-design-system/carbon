@@ -297,6 +297,9 @@
     margin: 0;
     block-size: convert.to-rem(64px);
     max-inline-size: none;
+  }
+
+  .#{$prefix}--modal-footer .#{$prefix}--btn:not(.#{$prefix}--skeleton) {
     padding-block: calc($spacing-05 - convert.to-rem(2px)) $spacing-07;
   }
 
@@ -400,6 +403,14 @@
       linear-gradient(to top, $layer 0, 2px, transparent 2px);
   }
 
+  .#{$prefix}--modal-header
+    > .#{$prefix}--ai-label:has(+ .#{$prefix}--modal-close-button),
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal-close-button
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container-body
+    > .#{$prefix}--ai-label,
   .#{$prefix}--modal-header
     > .#{$prefix}--slug:has(+ .#{$prefix}--modal-close-button),
   .#{$prefix}--modal-header

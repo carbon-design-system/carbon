@@ -283,12 +283,20 @@
     inset-inline-start: $spacing-05;
   }
 
-  // Slug styles
+  // AILabel styles
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--ai-label,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--slug {
     inset-block-start: convert.to-rem(42px);
   }
 
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--ai-label,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--slug,
@@ -316,6 +324,18 @@
     padding-inline-end: convert.to-rem(88px);
   }
 
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--ai-label,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field:has(
@@ -364,7 +384,13 @@
     inset-inline-end: $spacing-04;
   }
 
-  // remove slug divider when element is invalid and fluid
+  // remove ai-label divider when element is invalid and fluid
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--ai-label::before,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--invalid[data-invalid]
     .#{$prefix}--slug::before,
