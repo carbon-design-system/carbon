@@ -1289,7 +1289,7 @@ export function Callout({
   subtitle,
   statusIconDescription,
   className,
-  kind = 'error',
+  kind = 'info',
   lowContrast,
   ...rest
 }: CalloutProps) {
