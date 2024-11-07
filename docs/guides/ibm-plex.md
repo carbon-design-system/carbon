@@ -46,8 +46,8 @@ document.
 
 IBM Plex is distributed through a package on NPM:
 
-- [`@ibm/plex`](https://www.npmjs.com/package/@ibm/plex): The complete package
-  containing all fonts
+- [`@ibm/plex`](https://www.npmjs.com/package/@ibm/plex): The legacy package
+  containing all fonts. This package is no longer updated and uses an outdated version of plex.
 - Individual per-family packages (e.g., `@ibm/plex-sans`, `@ibm/plex-mono`) The
   source for this package is available on
   [GitHub](https://github.com/ibm/plex#readme).
