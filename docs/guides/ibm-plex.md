@@ -47,7 +47,8 @@ document.
 IBM Plex is distributed through a package on NPM:
 
 - [`@ibm/plex`](https://www.npmjs.com/package/@ibm/plex): The legacy package
-  containing all fonts. This package is no longer updated and uses an outdated version of plex.
+  containing all fonts. This package is no longer updated and uses an outdated
+  version of plex.
 - Individual per-family packages (e.g., `@ibm/plex-sans`, `@ibm/plex-mono`) The
   source for this package is available on
   [GitHub](https://github.com/ibm/plex#readme).
@@ -269,8 +270,7 @@ When multiple configurations are present:
 
 #### Migrating from Akamai CDN
 
-
-2. Update your Sass configuration:
+Update your Sass configuration:
 
 ```scss
 // Remove or set Akamai CDN to false
@@ -278,18 +278,6 @@ When multiple configurations are present:
 
 // Enable per-family loading
 $use-per-family-plex: true;
-```
-
-3. Update your imports:
-
-```scss
-// Before (if you had specific imports)
-@import '@carbon/type/scss/font-face/mono';
-@import '@carbon/type/scss/font-face/sans';
-
-// After (using per-family packages)
-@import '@ibm/plex-mono/scss/index';
-@import '@ibm/plex-sans/scss/index';
 ```
 
 #### Migrating from Basic Font Path
