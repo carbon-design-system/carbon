@@ -292,7 +292,7 @@ interface PaginationNavProps
   disableOverflow?: boolean;
 
   /**
-   * The number of items to be shown (minimum of 4).
+   * The number of items to be shown (minimum of 4 unless props.items < 4).
    */
   itemsShown?: number;
 
@@ -622,7 +622,7 @@ PaginationNav.propTypes = {
   disableOverflow: PropTypes.bool, // eslint-disable-line react/prop-types
 
   /**
-   * The number of items to be shown (minimum of 4).
+   * The number of items to be shown (minimum of 4 unless props.items < 4).
    */
   itemsShown: PropTypes.number,
 
