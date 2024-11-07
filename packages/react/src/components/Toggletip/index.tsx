@@ -25,9 +25,9 @@ import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 
 type ToggletipLabelProps<E extends ElementType> = {
-  as?: E | undefined;
+  as?: E;
   children?: ReactNode;
-  className?: string | undefined;
+  className?: string;
 };
 
 /**
@@ -84,7 +84,7 @@ function useToggletip() {
 interface ToggletipProps<E extends ElementType> {
   align?: PopoverAlignment;
   alignmentAxisOffset?: number;
-  as?: E | undefined;
+  as?: E;
   autoAlign?: boolean;
   className?: string;
   children?: ReactNode;
@@ -259,8 +259,8 @@ Toggletip.propTypes = {
 
 interface ToggletipButtonBaseProps {
   children?: ReactNode;
-  className?: string | undefined;
-  label?: string | undefined;
+  className?: string;
+  label?: string;
 }
 
 export type ToggleTipButtonProps<T extends React.ElementType> =
@@ -329,7 +329,7 @@ ToggletipButton.displayName = 'ToggletipButton';
 
 interface ToggletipContentProps {
   children?: ReactNode;
-  className?: string | undefined;
+  className?: string;
 }
 
 /**
@@ -371,7 +371,7 @@ export { ToggletipContent };
 
 interface ToggleTipActionsProps {
   children?: ReactNode;
-  className?: string | undefined;
+  className?: string;
 }
 
 /**
