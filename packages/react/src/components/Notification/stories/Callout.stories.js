@@ -19,7 +19,7 @@ export default {
     },
   },
   args: {
-    kind: 'error',
+    kind: 'info',
     lowContrast: false,
     statusIconDescription: 'notification',
   },
@@ -56,6 +56,10 @@ Playground.argTypes = {
     table: {
       disable: true,
     },
+  },
+  kind: {
+    options: ['info', 'warning'],
+    control: { type: 'select' },
   },
 };
 Playground.args = {
