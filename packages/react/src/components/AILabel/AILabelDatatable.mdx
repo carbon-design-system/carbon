@@ -5,7 +5,7 @@ import { AILabel, AILabelContent, AILabelActions } from '.';
 
 # AILabel
 
-[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Slug)
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/AILabel)
 |
 [AILabel release status](https://airtable.com/appCAqlGVN8tRUbAp/shr71ZyLlIGORz3Vh/tblHqPusgkK8hIeHo)
 |
@@ -22,7 +22,7 @@ import { AILabel, AILabelContent, AILabelActions } from '.';
 
 ## Overview
 
-The `DataTable` supports placing a `slug` in both the column header and row.
+The `DataTable` supports placing a `AI label` in both the column header and row.
 
 <Canvas id="components-datatable-withailabel--column-ai-label-with-selection-and-expansion" />
 
@@ -50,7 +50,7 @@ callout. To achieve this, you can pass in `AILabelActions` as a child of
 <AILabel>
   <AILabelContent>
     {Content Here}
-    {Optional Slug action bar}
+    {Optional AI label action bar}
     <AILabelActions>
       <IconButton kind="ghost" label="View">
         <View />
@@ -71,7 +71,7 @@ callout. To achieve this, you can pass in `AILabelActions` as a child of
 
 ### Using as a column header
 
-To use an `AILabel` inside a column header, you'll need to add a `slug` to the
+To use an `AILabel` inside a column header, you'll need to add a `AILabel` to the
 appropriate column data.
 
 ```jsx
@@ -83,9 +83,9 @@ const columnAILabelHeaders = [
   {
     key: 'attached_groups',
     header: 'Attached groups',
-    slug: (
+    AILabel: (
       <AILabel
-        className="slug-container"
+        className="ai-label-container"
         autoAlign={false}
         align="bottom-right">
         <AILabelContent>
@@ -139,7 +139,7 @@ To use an `AILabel` inside a `DataTable` row, you'll need to pass in your
 <TableBody>
   {rows.map((row, i) => (
     <TableRow key={i} {...getRowProps({ row })}>
-      <TableSlugRow slug={slug} />
+      <TableSlugRow slug={AILabel} />
       <TableSelectRow {...getSelectionProps({ row })} />
       {row.cells.map((cell) => (
         <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -153,4 +153,4 @@ To use an `AILabel` inside a `DataTable` row, you'll need to pass in your
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Slug/SlugDatatable.mdx).
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/AILabel/AILabelDatatable.mdx).
