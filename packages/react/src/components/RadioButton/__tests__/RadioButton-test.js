@@ -151,6 +151,21 @@ describe('RadioButton', () => {
     );
   });
 
+  it('should update AILabel size', () => {
+    const { container } = render(
+      <RadioButton
+        name="test-name"
+        value="test-value"
+        labelText="test-label"
+        decorator={<AILabel kind="inline" />}
+      />
+    );
+
+    expect(container.querySelector(`.${prefix}--ai-label__button`)).toHaveClass(
+      `${prefix}--ai-label__button--md`
+    );
+  });
+
   it('should respect the deprecated slug prop', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(
