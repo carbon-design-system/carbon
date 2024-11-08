@@ -443,7 +443,7 @@ export const SelectAll = () => {
 };
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>

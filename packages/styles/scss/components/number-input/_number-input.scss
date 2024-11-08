@@ -425,7 +425,8 @@
     background-color: $border-subtle;
   }
 
-  // Styles for `Slug` rendered inside `NumberInput`
+  // Styles for `AILabel` rendered inside `NumberInput`
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
@@ -433,6 +434,7 @@
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before,
   .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--number__control-btn::before,
@@ -444,7 +446,7 @@
     content: '';
     inline-size: convert.to-rem(1px);
   }
-
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
     display: none;
     inset-inline-start: convert.to-rem(-16px);
@@ -487,6 +489,8 @@
   }
 
   .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--number__invalid)
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--number__invalid)
     .#{$prefix}--slug::before {
     display: block;
   }
@@ -501,7 +505,13 @@
   }
 
   .#{$prefix}--number__input-wrapper--slug
-    input[type='number']:not(:has(~ .#{$prefix}--slug--revert)),
+    input[type='number']:has(~ .#{$prefix}--ai-label):not(
+      :has(~ .#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--number__input-wrapper--slug
+    input[type='number']:has(~ .#{$prefix}--slug):not(
+      :has(~ .#{$prefix}--slug--revert)
+    ),
   .#{$prefix}--number__input-wrapper--slug input[type='number']:disabled {
     @include ai-gradient;
 
