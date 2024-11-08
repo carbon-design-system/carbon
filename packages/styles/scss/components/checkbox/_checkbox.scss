@@ -372,6 +372,12 @@
     display: flex;
   }
 
+  .#{$prefix}--checkbox-group--slug
+    legend.#{$prefix}--label
+    .#{$prefix}--ai-label,
+  .#{$prefix}--checkbox-wrapper--slug
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label,
   .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label .#{$prefix}--slug,
   .#{$prefix}--checkbox-wrapper--slug
     .#{$prefix}--checkbox-label-text
@@ -379,6 +385,9 @@
     margin-inline-start: $spacing-03;
   }
 
+  .#{$prefix}--checkbox-wrapper--slug
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label__button--inline,
   .#{$prefix}--checkbox-wrapper--slug
     .#{$prefix}--checkbox-label-text
     .#{$prefix}--slug__button--inline {
