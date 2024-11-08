@@ -43,6 +43,11 @@ export default {
         disable: true,
       },
     },
+    slug: {
+      table: {
+        disable: true,
+      },
+    },
   },
   parameters: {
     docs: {
@@ -254,7 +259,7 @@ export const Skeleton = () => (
 );
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -294,7 +299,7 @@ export const withAILabel = () => (
       label="Option 1"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      slug={aiLabel}
+      decorator={aiLabel}
     />
   </div>
 );
