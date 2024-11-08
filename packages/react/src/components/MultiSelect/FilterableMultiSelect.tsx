@@ -310,7 +310,7 @@ export interface FilterableMultiSelectProps<ItemType>
 }
 
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
-  ItemType,
+  ItemType
 >(
   {
     autoAlign = false,
@@ -542,7 +542,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     inputValue,
     stateReducer,
     isItemDisabled(item, _index) {
-      return (item as any).disabled;
+      return (item as any)?.disabled;
     },
   });
   function stateReducer(state, actionAndChanges) {

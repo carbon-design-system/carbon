@@ -774,7 +774,7 @@ const ComboBox = forwardRef(
       inputId: id,
       stateReducer,
       isItemDisabled(item, _index) {
-        return (item as any).disabled;
+        return (item as any)?.disabled;
       },
       ...downshiftProps,
     });
