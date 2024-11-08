@@ -200,6 +200,117 @@ describe('ComposedModal', () => {
       expect(elementInput).toHaveFocus();
     });
 
+    it('should focus on the primary button', async () => {
+      function ComposedModalExample() {
+        const [isOpen, setIsOpen] = React.useState(false);
+        return (
+          <>
+            <button type="button" onClick={() => setIsOpen(!isOpen)}>
+              Click me
+            </button>
+            <ComposedModal open={isOpen} preventCloseOnClickOutside>
+              <ModalHeader>Modal header</ModalHeader>
+              <ModalBody>
+                This is the modal body content
+                <TextInput
+                  id="text-input-1"
+                  data-testid="test-id-1"
+                  labelText="text input"
+                />
+              </ModalBody>
+              <ModalFooter
+                primaryButtonText="Add"
+                secondaryButtonText="Cancel"
+              />
+            </ComposedModal>
+          </>
+        );
+      }
+      render(<ComposedModalExample />);
+
+      await userEvent.click(screen.getByText('Click me'));
+
+      const elementModal = screen.getByRole('presentation', { hidden: true });
+      expect(elementModal).toHaveClass('is-visible');
+
+      const elementInput = screen.getByRole('button', { name: 'Add' });
+      expect(elementInput).toHaveFocus();
+    });
+
+    it('should focus on the secondary button if danger is true', async () => {
+      function ComposedModalExample() {
+        const [isOpen, setIsOpen] = React.useState(false);
+        return (
+          <>
+            <button type="button" onClick={() => setIsOpen(!isOpen)}>
+              Click me
+            </button>
+            <ComposedModal
+              danger
+              selectorPrimaryFocus="#text-input-1"
+              open={isOpen}
+              preventCloseOnClickOutside>
+              <ModalHeader>Modal header</ModalHeader>
+              <ModalBody>
+                This is the modal body content
+                <TextInput
+                  id="text-input-1"
+                  data-testid="test-id-1"
+                  labelText="text input"
+                />
+              </ModalBody>
+              <ModalFooter
+                primaryButtonText="Add"
+                secondaryButtonText="Cancel"
+              />
+            </ComposedModal>
+          </>
+        );
+      }
+      render(<ComposedModalExample />);
+
+      await userEvent.click(screen.getByText('Click me'));
+
+      const elementModal = screen.getByRole('presentation', { hidden: true });
+      expect(elementModal).toHaveClass('is-visible');
+
+      const elementInput = screen.getByRole('button', { name: 'Cancel' });
+      expect(elementInput).toHaveFocus();
+    });
+
+    it('should focus on the close button if there is no focusable element', async () => {
+      function ComposedModalExample() {
+        const [isOpen, setIsOpen] = React.useState(false);
+        return (
+          <>
+            <button type="button" onClick={() => setIsOpen(!isOpen)}>
+              Click me
+            </button>
+            <ComposedModal open={isOpen} preventCloseOnClickOutside>
+              <ModalHeader>Modal header</ModalHeader>
+              <ModalBody>
+                This is the modal body content
+                <TextInput
+                  id="text-input-1"
+                  data-testid="test-id-1"
+                  labelText="text input"
+                />
+              </ModalBody>
+            </ComposedModal>
+          </>
+        );
+      }
+      render(<ComposedModalExample />);
+
+      await userEvent.click(screen.getByText('Click me'));
+
+      const elementModal = screen.getByRole('presentation', { hidden: true });
+      expect(elementModal).toHaveClass('is-visible');
+
+      const elementInput = screen.getByRole('button', { name: 'Close' });
+      expect(elementInput).toHaveFocus();
+    });
+
     it('should change size based on size prop', () => {
       render(
         <ComposedModal open size="lg">

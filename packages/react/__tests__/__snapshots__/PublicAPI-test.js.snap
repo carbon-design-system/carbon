@@ -583,19 +583,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "error",
-            "info",
-            "info-square",
-            "success",
-            "warning",
-            "warning-alt",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "kind": [Function],
       "lowContrast": Object {
         "type": "bool",
       },
@@ -789,21 +777,7 @@ Map {
   },
   "CodeSnippet" => Object {
     "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-right",
-            "bottom",
-            "bottom-left",
-            "bottom-right",
-            "left",
-            "right",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "aria-label": Object {
         "type": "string",
       },
@@ -1450,25 +1424,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "tooltipAlignment": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-start",
-            "top-right",
-            "top-end",
-            "bottom",
-            "bottom-left",
-            "bottom-start",
-            "bottom-right",
-            "bottom-end",
-            "left",
-            "right",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "tooltipAlignment": [Function],
       "translateWithId": Object {
         "type": "func",
       },
@@ -1797,21 +1753,7 @@ Map {
   },
   "Copy" => Object {
     "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-right",
-            "bottom",
-            "bottom-left",
-            "bottom-right",
-            "left",
-            "right",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "autoAlign": Object {
         "type": "bool",
       },
@@ -1837,21 +1779,7 @@ Map {
   },
   "CopyButton" => Object {
     "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-right",
-            "bottom",
-            "bottom-left",
-            "bottom-right",
-            "left",
-            "right",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "autoAlign": Object {
         "type": "bool",
       },
@@ -1905,6 +1833,9 @@ Map {
         },
         "stickyHeader": Object {
           "type": "bool",
+        },
+        "tabIndex": Object {
+          "type": "number",
         },
         "useStaticWidth": Object {
           "type": "bool",
@@ -4240,25 +4171,7 @@ Map {
   "IconButton" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-start",
-            "top-right",
-            "top-end",
-            "bottom",
-            "bottom-left",
-            "bottom-start",
-            "bottom-right",
-            "bottom-end",
-            "left",
-            "right",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "align": [Function],
       "autoAlign": Object {
         "type": "bool",
       },
@@ -7948,6 +7861,9 @@ Map {
       },
       "stickyHeader": Object {
         "type": "bool",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
       "useStaticWidth": Object {
         "type": "bool",
