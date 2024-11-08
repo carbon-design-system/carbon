@@ -166,6 +166,11 @@ Playground.argTypes = {
       disable: true,
     },
   },
+  slug: {
+    table: {
+      disable: true,
+    },
+  },
   translateWithId: {
     table: {
       disable: true,
