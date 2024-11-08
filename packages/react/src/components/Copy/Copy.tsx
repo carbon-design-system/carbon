@@ -20,20 +20,53 @@ import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
+import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+
+export type DeprecatedCopyAlignment =
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'left-bottom'
+  | 'left-top'
+  | 'right-bottom'
+  | 'right-top';
+
+export type NewCopyAlignment =
+  | 'top'
+  | 'bottom'
+  | 'left'
+  | 'right'
+  | 'top-start'
+  | 'top-end'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left-end'
+  | 'left-start'
+  | 'right-end'
+  | 'right-start';
+
+export type CopyAlignment = DeprecatedCopyAlignment | NewCopyAlignment;
+
+const propMappingFunction = (deprecatedValue) => {
+  const mapping = {
+    'top-left': 'top-start',
+    'top-right': 'top-end',
+    'bottom-left': 'bottom-start',
+    'bottom-right': 'bottom-end',
+    'left-bottom': 'left-end',
+    'left-top': 'left-start',
+    'right-bottom': 'right-end',
+    'right-top': 'right-start',
+  };
+  return mapping[deprecatedValue];
+};
 
 interface CopyProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Specify how the trigger should align with the tooltip
    */
-  align?:
-    | 'top'
-    | 'top-left'
-    | 'top-right'
-    | 'bottom'
-    | 'bottom-left'
-    | 'bottom-right'
-    | 'left'
-    | 'right';
+  align?: CopyAlignment;
 
   /**
    * **Experimental**: Will attempt to automatically align the tooltip
@@ -139,16 +172,52 @@ Copy.propTypes = {
   /**
    * Specify how the trigger should align with the tooltip
    */
-  align: PropTypes.oneOf([
-    'top',
-    'top-left',
-    'top-right',
-    'bottom',
-    'bottom-left',
-    'bottom-right',
-    'left',
-    'right',
-  ]),
+  align: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'top',
+      'top-left', // deprecated use top-start instead
+      'top-right', // deprecated use top-end instead
+
+      'bottom',
+      'bottom-left', // deprecated use bottom-start instead
+      'bottom-right', // deprecated use bottom-end instead
+
+      'left',
+      'left-bottom', // deprecated use left-end instead
+      'left-top', // deprecated use left-start instead
+
+      'right',
+      'right-bottom', // deprecated use right-end instead
+      'right-top', // deprecated use right-start instead
+
+      // new values to match floating-ui
+      'top-start',
+      'top-end',
+      'bottom-start',
+      'bottom-end',
+      'left-end',
+      'left-start',
+      'right-end',
+      'right-start',
+    ]),
+    //allowed prop values
+    [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+    //optional mapper function
+    propMappingFunction
+  ),
 
   /**
    * **Experimental**: Will attempt to automatically align the tooltip

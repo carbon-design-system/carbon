@@ -586,7 +586,7 @@ const Dropdown = React.forwardRef(
       [autoAlign, getMenuProps, refs.setFloating, enableFloatingStyles]
     );
 
-    // Slug is always size `mini`
+    // AILabel is always size `mini`
     const normalizedDecorator = useMemo(() => {
       const element = slug ?? decorator;
       if (element && element['type']?.displayName === 'AILabel') {
