@@ -453,7 +453,7 @@ const MultiSelect = React.forwardRef(
       selectedItem: controlledSelectedItems,
       items: filteredItems as ItemType[],
       isItemDisabled(item, _index) {
-        return (item as any).disabled;
+        return (item as any)?.disabled;
       },
       ...downshiftProps,
     };
