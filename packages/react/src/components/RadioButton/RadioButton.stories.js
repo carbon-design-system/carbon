@@ -12,8 +12,9 @@ import React from 'react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
-import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import mdx from './RadioButton.mdx';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/RadioButton',
@@ -132,7 +133,7 @@ export const withAILabel = {
   render: () => (
     <div className="ai-label-check-radio-container">
       <RadioButtonGroup
-        slug={AILabelFunc('default')}
+        decorator={AILabelFunc('default')}
         orientation="vertical"
         legendText="Group label"
         name="radio-button-group"
@@ -163,7 +164,7 @@ export const withAILabel = {
           labelText="Radio button label"
           value="radio-4"
           id="radio-4"
-          slug={AILabelFunc()}
+          decorator={AILabelFunc()}
         />
         <RadioButton
           labelText="Radio button label"
@@ -187,13 +188,104 @@ export const withAILabel = {
           labelText="Radio button label"
           value="radio-7"
           id="radio-7"
-          slug={AILabelFunc('inline')}
+          decorator={AILabelFunc('inline')}
         />
         <RadioButton
           labelText="Radio button label"
           value="radio-8"
           id="radio-8"
-          slug={AILabelFunc('inline')}
+          decorator={AILabelFunc('inline')}
+        />
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-9"
+          id="radio-9"
+        />
+      </RadioButtonGroup>
+
+      <RadioButtonGroup
+        decorator={
+          <Tooltip>
+            <Information></Information>
+          </Tooltip>
+        }
+        orientation="vertical"
+        legendText="Group label"
+        name="radio-button-group"
+        defaultSelected="radio-1">
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-1"
+          id="radio-1"
+        />
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-2"
+          id="radio-2"
+        />
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-3"
+          id="radio-3"
+        />
+      </RadioButtonGroup>
+
+      <RadioButtonGroup
+        orientation="vertical"
+        legendText="Group label"
+        name="radio-button-group-2"
+        defaultSelected="radio-4">
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-4"
+          id="radio-4"
+          decorator={
+            <Tooltip>
+              <Information></Information>
+            </Tooltip>
+          }
+        />
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-5"
+          id="radio-5"
+          decorator={
+            <Tooltip>
+              <Information></Information>
+            </Tooltip>
+          }
+        />
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-6"
+          id="radio-6"
+        />
+      </RadioButtonGroup>
+
+      <RadioButtonGroup
+        orientation="vertical"
+        legendText="Group label"
+        name="radio-button-group-3"
+        defaultSelected="radio-7">
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-7"
+          id="radio-7"
+          decorator={
+            <Tooltip>
+              <Information></Information>
+            </Tooltip>
+          }
+        />
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-8"
+          id="radio-8"
+          decorator={
+            <Tooltip>
+              <Information></Information>
+            </Tooltip>
+          }
         />
         <RadioButton
           labelText="Radio button label"
