@@ -886,6 +886,9 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   // AILabel styles
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug {
     position: absolute;
@@ -895,6 +898,12 @@ $list-box-menu-width: convert.to-rem(300px);
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *::after,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *::before,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::after,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after,
@@ -906,24 +915,43 @@ $list-box-menu-width: convert.to-rem(300px);
     inline-size: convert.to-rem(1px);
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *::before,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::before {
     display: none;
     inset-inline-start: convert.to-rem(-9px);
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *::after,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::after,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after {
     display: block;
+    inset-block-start: 0;
     inset-inline-end: convert.to-rem(-9px);
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    .#{$prefix}--ai-label--revert::after,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label--revert::after,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug--revert::after {
     inset-block-start: convert.to-rem(8px);
     inset-inline-end: convert.to-rem(-1px);
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box:has(
+      .#{$prefix}--list-box__inner-wrapper--decorator .#{$prefix}--ai-label
+    ):not(
+      :has(
+          .#{$prefix}--list-box__inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box:has(.#{$prefix}--ai-label):not(
       :has(.#{$prefix}--ai-label--revert)
@@ -935,22 +963,41 @@ $list-box-menu-width: convert.to-rem(300px);
     @include ai-gradient;
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box
+    input[role='combobox'],
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box
     input[role='combobox'] {
     border-block-end-color: transparent;
   }
 
+  .#{$prefix}--list-box__wrapper--decorator .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--decorator .#{$prefix}--text-input--empty,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--list-box__field,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--text-input--empty {
     padding-inline-end: $spacing-10;
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
     padding-inline-end: $spacing-12;
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--text-input--empty,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--text-input--empty,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field,
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--invalid[data-invalid]
     .#{$prefix}--text-input--empty,
@@ -966,6 +1013,12 @@ $list-box-menu-width: convert.to-rem(300px);
     padding-inline-end: $spacing-12;
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--invalid[data-invalid]
     .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
@@ -975,6 +1028,16 @@ $list-box-menu-width: convert.to-rem(300px);
     padding-inline-end: convert.to-rem(141px);
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--text-input--empty
+    + .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__invalid-icon.#{$prefix}--list-box__invalid-icon--warning,
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--invalid[data-invalid]
     .#{$prefix}--text-input--empty
@@ -988,6 +1051,18 @@ $list-box-menu-width: convert.to-rem(300px);
     inset-inline-end: convert.to-rem(83px);
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    > *::before,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    > *::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--ai-label::before,
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--invalid[data-invalid]
     .#{$prefix}--ai-label::before,
@@ -1003,6 +1078,20 @@ $list-box-menu-width: convert.to-rem(300px);
     display: block;
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--ai-label,
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
     ~ .#{$prefix}--ai-label,
@@ -1020,6 +1109,14 @@ $list-box-menu-width: convert.to-rem(300px);
     inset-inline-end: calc($spacing-10 + 18px);
   }
 
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    .#{$prefix}--list-box__invalid-icon,
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--invalid
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
@@ -1074,11 +1171,15 @@ $list-box-menu-width: convert.to-rem(300px);
     }
   }
 
+  .#{$prefix}--list-box__wrapper--decorator:has(.#{$prefix}--multi-select)
+    .#{$prefix}--list-box__menu-icon,
   .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--multi-select)
     .#{$prefix}--list-box__menu-icon {
     inset-inline-end: $spacing-04;
   }
 
+  .#{$prefix}--list-box__wrapper--decorator:has(.#{$prefix}--dropdown)
+    .#{$prefix}--list-box__menu-icon,
   .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--dropdown)
     .#{$prefix}--list-box__menu-icon {
     inset-inline-end: $spacing-04;
