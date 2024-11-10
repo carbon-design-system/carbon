@@ -17,3 +17,23 @@ export enum GRID_ALIGNMENT {
    */
   END = 'end',
 }
+
+/**
+ * Button type.
+ */
+export enum SUB_GRID_MODE {
+  /**
+   * Default sug-grid mode.
+   */
+  WIDE = 'wide',
+
+  /**
+   * Condensed sub-grid (should match hosting grid).
+   */
+  CONDENSED = 'condensed',
+
+  /**
+   * Narrow sub-grid (should match hosting grid).
+   */
+  NARROW = 'narrow',
+}

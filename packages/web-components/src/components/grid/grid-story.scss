@@ -1,0 +1,108 @@
+@use '@carbon/styles/scss/grid';
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+:root {
+  @include grid.css-grid();
+}
+
+.sb-css-grid-container {
+  // Gutter modes
+  cds-grid::part(grid) {
+    background-color: $blue-20;
+    outline: 1px dashed $blue-40;
+    // row-gap: $spacing-05;
+  }
+
+  // .cds--css-grid p {
+  //   @include type-style('code-02');
+  // }
+
+  // .cds--css-grid p:first-of-type {
+  //   margin-block-start: 0;
+  // }
+
+  // Narrow
+  cds-grid[narrow]::part(grid) {
+    background-color: #d6f9f9;
+    outline: 1px dashed $green-40;
+  }
+
+  // Condensed
+  cds-grid[condensed]::part(grid) {
+    background-color: $purple-10;
+    outline: 1px dashed $purple-40;
+  }
+
+  cds-sub-grid::part(grid) {
+    position: relative;
+    background: #eef4ff;
+    outline: 1px solid black;
+    padding-block: 2rem;
+  }
+
+  cds-sub-grid::part(grid),
+  cds-sub-grid[mode='wide']::part(grid) {
+    --grid-mode-color: #97c1ff;
+  }
+
+  cds-rid[narrow]::part(grid),
+  cds-sub-grid[mode='narrow']::part(grid) {
+    --grid-mode-color: #20d5d2;
+
+    background: $green-10;
+  }
+
+  cds-grid[condensed]::part(grid),
+  cds-sub-grid[mode='condensed']::part(grid) {
+    --grid-mode-color: #bb8eff;
+
+    background: $purple-10;
+  }
+
+  cds-sub-grid[mode='narrow']::part(grid) {
+    background: #d6f9f9;
+  }
+
+  cds-sub-grid[mode='condensed']::part(grid) {
+    background: #f7f2ff;
+  }
+
+  cds-sub-grid::part(grid)::before {
+    @include type-style('code-01');
+
+    position: absolute;
+    display: block;
+    padding: 0.125rem 0.25rem;
+    background: var(--grid-mode-color, #97c1ff);
+    color: $black;
+    content: 'subgrid';
+    inset-block-start: 0;
+    inset-inline-start: 0;
+  }
+
+  // // Column
+  cds-column {
+    --border-color: #97c1ff;
+
+    background: $white;
+    box-shadow: 0 0 0 1px var(--border-color);
+
+    min-block-size: 80px;
+  }
+
+  cds-sub-grid[mode='narrow']::part(grid) cds-column,
+  cds-grid[narrow]::part(grid) cds-column {
+    --border-color: #20d5d2;
+  }
+
+  cds-sub-grid[mode='condensed']::part(grid) cds-column,
+  cds-grid[condensed]::part(grid) cds-column {
+    --border-color: #bb8eff;
+  }
+}
+
+.cds--grid-part cds-column cds-grid::part(grid) {
+  box-shadow: 0 0 5px black;
+}

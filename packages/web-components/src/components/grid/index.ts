@@ -8,4 +8,5 @@
  */
 
 import './grid';
-import './col';
+import './column';
+import './sub-grid';

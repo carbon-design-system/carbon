@@ -13,7 +13,6 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import { prefix } from '../../globals/settings';
 import styles from './grid.scss?lit';
 import { GRID_ALIGNMENT } from './defs';
-
 export { GRID_ALIGNMENT } from './defs';
 
 @customElement(`${prefix}-grid`)
@@ -28,34 +27,32 @@ class CDSGrid extends LitElement {
    * Collapse the gutter to 1px. Useful for fluid layouts.
    * Rows have 1px of margin between them to match gutter.
    */
-  @property({ attribute: 'condensed' })
+  @property({ reflect: true, attribute: 'condensed', type: Boolean })
   condensed = false;
 
   /**
    * Container hangs 16px into the gutter. Useful for
    * typographic alignment with and without containers.
    */
-  @property({ attribute: 'narrow' })
+  @property({ reflect: true, attribute: 'narrow', type: Boolean })
   narrow = false;
 
   /**
    * Grid is nested within another grid
    */
-  @property({ attribute: 'sub-grid' })
+  @property({ reflect: true, attribute: 'sub-grid', type: Boolean })
   subGrid = false;
 
   /**
    * Remove the default max width that the grid has set
    */
-  @property({ reflect: true, attribute: 'wide' })
-  wide = false;
+  @property({ reflect: true, attribute: 'full-width', type: Boolean })
+  fullWidth = false;
 
   render() {
-    const classes = 'cds--css-grid';
-
     // Grid styling added to contained components, allowing CSS Grid
     // to affect the it's own slot content.
-    return html`<div class="${classes}" part="grid">
+    return html`<div class="${prefix}--grid-part" part="grid">
       <slot></slot>
     </div> `;
   }

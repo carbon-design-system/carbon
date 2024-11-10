@@ -22,10 +22,15 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/grid/index.js';
 ```
 
+<Markdown>{`${cdnJs({ components: ['grid'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
 ### HTML
 
 ```html
-<div>Bye then</div>
+<cds-grid
+  ><cds-col>1</cds-col><cds-col>1</cds-col><cds-col>1</cds-col>
+</cds-grid>
 ```
 
 ## `<grid>` attributes, properties and events

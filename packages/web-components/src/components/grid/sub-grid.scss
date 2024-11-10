@@ -1,0 +1,31 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/grid';
+@use './mixin' as *;
+
+$sub-grid: #{$prefix}--subgrid;
+
+:host(#{$prefix}-sub-grid) .#{$prefix}--grid-part {
+  @extend .#{$sub-grid};
+
+  box-sizing: border-box; /* prevent padding leaking out */
+}
+
+:host(#{$prefix}-sub-grid[mode='wide']) .#{$prefix}--grid-part {
+  @extend .#{$sub-grid}--wide;
+}
+
+:host(#{$prefix}-sub-grid[mode='condensed']) .#{$prefix}--grid-part {
+  @extend .#{$sub-grid}--condensed;
+}
+
+:host(#{$prefix}-sub-grid[mode='narrow']) .#{$prefix}--grid-part {
+  @extend .#{$sub-grid}--narrow;
+}
+
+@include grid-columns(#{$prefix}-sub-grid);

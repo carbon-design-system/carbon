@@ -5,12 +5,36 @@
 // LICENSE file in the root directory of this source tree.
 //
 @use '@carbon/styles/scss/config' as *;
-@use '@carbon/grid/scss/css-grid.scss' as *;
+// @use '@carbon/styles/scss/grid/css-grid' as *;
+@use '@carbon/styles/scss/grid';
+@use './mixin' as *;
 
-:host(#{$prefix}-grid) {
-  @extend .#{$prefix}--css-grid;
+$css-grid: #{$prefix}--css-grid;
+:host(#{$prefix}-grid) .#{$prefix}--grid-part {
+  @extend .#{$css-grid};
 
-  ::slotted(#{$prefix}-col) {
-    @extend .#{$prefix}--css-grid-column;
-  }
+  box-sizing: border-box; /* prevent padding leaking out */
 }
+
+// :host(#{$prefix}-grid[align='start']) .#{$prefix}--grid-part {
+//   @extend .#{$css-grid}--start;
+// }
+
+// :host(#{$prefix}-grid[align='end']) .#{$prefix}--grid-part {
+//   @extend .#{$css-grid}--end;
+// }
+
+:host(#{$prefix}-grid[condensed]) .#{$prefix}--grid-part {
+  @extend .#{$css-grid}--condensed;
+}
+
+:host(#{$prefix}-grid[narrow]) .#{$prefix}--grid-part {
+  @extend .#{$css-grid}--narrow;
+}
+
+:host(#{$prefix}-grid[full-width]) .#{$prefix}--grid-part {
+  @extend .#{$css-grid}--full-width;
+}
+
+// Column styles
+@include grid-columns(#{$prefix}-grid);
