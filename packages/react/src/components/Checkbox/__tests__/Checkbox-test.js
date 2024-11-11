@@ -199,7 +199,8 @@ describe('Checkbox', () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it('should respect slug prop', () => {
+  it('should respect deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(
       <Checkbox
         defaultChecked
@@ -211,6 +212,22 @@ describe('Checkbox', () => {
 
     expect(container.firstChild).toHaveClass(
       `${prefix}--checkbox-wrapper--slug`
+    );
+    spy.mockRestore();
+  });
+
+  it('should respect decorator prop', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        decorator={<AILabel />}
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--checkbox-wrapper--decorator`
     );
   });
 });
