@@ -58,14 +58,17 @@ $sizes: (
 /// @access public
 /// @group AI
 @mixin slug {
+  .#{$prefix}--ai-label,
   .#{$prefix}--slug {
     display: flex;
   }
 
+  .#{$prefix}--ai-label:has(> .#{$prefix}--popover--open),
   .#{$prefix}--slug:has(> .#{$prefix}--popover--open) {
     z-index: 2;
   }
 
+  .#{$prefix}--ai-label .#{$prefix}--ai-label__button,
   .#{$prefix}--slug .#{$prefix}--slug__button {
     position: relative;
     display: flex;
@@ -83,7 +86,7 @@ $sizes: (
       background $duration-fast-01 motion(entrance, productive);
 
     @each $group, $size in $sizes {
-      // Create a class for each size slug
+      // Create a class for each size ai label
       &--#{$group} {
         @each $property, $value in $size {
           // Set correct properties for each size
@@ -94,6 +97,8 @@ $sizes: (
   }
 
   // Add 24px click target for mini, 2xs sizes
+  .#{$prefix}--ai-label__button--mini::after,
+  .#{$prefix}--ai-label__button--2xs::after,
   .#{$prefix}--slug__button--mini::after,
   .#{$prefix}--slug__button--2xs::after {
     position: absolute;
@@ -103,16 +108,19 @@ $sizes: (
     inline-size: 24px;
   }
 
+  .#{$prefix}--ai-label .#{$prefix}--ai-label__button:focus,
   .#{$prefix}--slug .#{$prefix}--slug__button:focus {
     border: 1px solid $focus;
     box-shadow: inset 0 0 0 1px $focus;
   }
 
+  .#{$prefix}--ai-label .#{$prefix}--ai-label__button:hover,
   .#{$prefix}--slug .#{$prefix}--slug__button:hover {
     background: $border-inverse;
     color: $text-inverse;
   }
 
+  .#{$prefix}--ai-label .#{$prefix}--ai-label__button:hover:active,
   .#{$prefix}--slug .#{$prefix}--slug__button:hover:active {
     background: $border-inverse;
     box-shadow:
@@ -121,6 +129,10 @@ $sizes: (
     color: $text-inverse;
   }
 
+  .#{$prefix}--ai-label
+    .#{$prefix}--ai-label__button.#{$prefix}--ai-label__button--mini:hover:active,
+  .#{$prefix}--ai-label
+    .#{$prefix}--ai-label__button.#{$prefix}--ai-label__button--2xs:hover:active,
   .#{$prefix}--slug
     .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:hover:active,
   .#{$prefix}--slug
@@ -128,12 +140,14 @@ $sizes: (
     box-shadow: inset 0 0 0 1px $focus-inset;
   }
 
+  .#{$prefix}--ai-label__text,
   .#{$prefix}--slug__text {
     position: relative;
     z-index: 1;
   }
 
   // Inline slug
+  .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline,
   .#{$prefix}--slug .#{$prefix}--slug__button--inline {
     border: 1px solid transparent;
     border-radius: convert.to-rem(1px);
@@ -146,15 +160,19 @@ $sizes: (
     padding-inline: convert.to-rem(4px);
   }
 
+  .#{$prefix}--ai-label__button--inline::before,
   .#{$prefix}--slug__button--inline::before {
     display: none;
   }
 
+  .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline:focus,
   .#{$prefix}--slug .#{$prefix}--slug__button--inline:focus {
     border-color: $focus;
     box-shadow: none;
   }
 
+  .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline:hover,
+  .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline:hover:active,
   .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover,
   .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover:active {
     border-color: $icon-secondary;
@@ -163,20 +181,29 @@ $sizes: (
     color: $text-secondary;
   }
 
+  .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline:focus:hover,
   .#{$prefix}--slug .#{$prefix}--slug__button--inline:focus:hover {
     border-color: $focus;
   }
 
+  .#{$prefix}--ai-label
+    .#{$prefix}--ai-label__button--inline:hover
+    .#{$prefix}--ai-label__text::before,
   .#{$prefix}--slug
     .#{$prefix}--slug__button--inline:hover
     .#{$prefix}--slug__text::before {
     background: $icon-secondary;
   }
 
+  .#{$prefix}--ai-label__button--inline .#{$prefix}--ai-label__text,
   .#{$prefix}--slug__button--inline .#{$prefix}--slug__text {
     padding-inline-start: convert.to-rem(8px);
   }
 
+  .#{$prefix}--ai-label__button--inline.#{$prefix}--ai-label__button--lg
+    .#{$prefix}--ai-label__text,
+  .#{$prefix}--ai-label__button--inline.#{$prefix}--ai-label__button--xl
+    .#{$prefix}--ai-label__text,
   .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--lg
     .#{$prefix}--slug__text,
   .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--xl
@@ -184,6 +211,7 @@ $sizes: (
     padding-inline-start: convert.to-rem(12px);
   }
 
+  .#{$prefix}--ai-label__button--inline .#{$prefix}--ai-label__text::before,
   .#{$prefix}--slug__button--inline .#{$prefix}--slug__text::before {
     position: absolute;
     display: inline-block;
@@ -200,6 +228,8 @@ $sizes: (
       box-shadow $duration-fast-01 motion(entrance, productive);
   }
 
+  .#{$prefix}--ai-label__button--lg .#{$prefix}--ai-label__text::before,
+  .#{$prefix}--ai-label__button--xl .#{$prefix}--ai-label__text::before,
   .#{$prefix}--slug__button--lg .#{$prefix}--slug__text::before,
   .#{$prefix}--slug__button--xl .#{$prefix}--slug__text::before {
     block-size: convert.to-rem(8px);
@@ -207,6 +237,18 @@ $sizes: (
   }
 
   // Only allow sm, md, and lg sizes
+  .#{$prefix}--ai-label__button--inline.#{$prefix}--ai-label__button--mini,
+  .#{$prefix}--ai-label__button--inline.#{$prefix}--ai-label__button--mini
+    .#{$prefix}--ai-label__additional-text,
+  .#{$prefix}--ai-label__button--inline.#{$prefix}--ai-label__button--2xs,
+  .#{$prefix}--ai-label__button--inline.#{$prefix}--ai-label__button--2xs
+    .#{$prefix}--ai-label__additional-text,
+  .#{$prefix}--ai-label__button--inline.#{$prefix}--ai-label__button--xs,
+  .#{$prefix}--ai-label__button--inline.#{$prefix}--ai-label__button--xs
+    .#{$prefix}--ai-label__additional-text,
+  .#{$prefix}--ai-label__button--inline.#{$prefix}--ai-label__button--sm,
+  .#{$prefix}--ai-label__button--inline.#{$prefix}--ai-label__button--sm
+    .#{$prefix}--ai-label__additional-text,
   .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--mini,
   .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--mini
     .#{$prefix}--slug__additional-text,
@@ -222,18 +264,23 @@ $sizes: (
     font-size: convert.to-rem(12px);
   }
 
+  .#{$prefix}--ai-label__button--inline.#{$prefix}--ai-label__button--lg,
+  .#{$prefix}--ai-label__button--inline.#{$prefix}--ai-label__button--xl,
   .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--lg,
   .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--xl {
     font-size: convert.to-rem(16px);
   }
 
   // Inline slug with text
+  .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline-with-content,
   .#{$prefix}--slug .#{$prefix}--slug__button--inline-with-content {
     border: 1px solid $border-inverse;
     padding-block: convert.to-rem(2px);
     padding-inline: convert.to-rem(8px);
   }
 
+  .#{$prefix}--ai-label__button--inline-with-content
+    .#{$prefix}--ai-label__additional-text,
   .#{$prefix}--slug__button--inline-with-content
     .#{$prefix}--slug__additional-text {
     @include type-style('body-compact-02');
@@ -241,17 +288,24 @@ $sizes: (
     padding-inline-start: convert.to-rem(4px);
   }
 
+  .#{$prefix}--ai-label__button--inline.#{$prefix}--ai-label__button--md
+    .#{$prefix}--ai-label__additional-text,
   .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--md
     .#{$prefix}--slug__additional-text {
     font-size: convert.to-rem(14px);
   }
 
+  .#{$prefix}--ai-label
+    .#{$prefix}--ai-label__button--inline-with-content:focus,
+  .#{$prefix}--ai-label
+    .#{$prefix}--ai-label__button--inline-with-content:hover:focus,
   .#{$prefix}--slug .#{$prefix}--slug__button--inline-with-content:focus,
   .#{$prefix}--slug .#{$prefix}--slug__button--inline-with-content:hover:focus {
     box-shadow: inset 0 0 0 1px $focus;
   }
 
   // Slug callout styles
+  .#{$prefix}--ai-label .#{$prefix}--ai-label-content,
   .#{$prefix}--slug .#{$prefix}--slug-content {
     @include ai-popover-gradient();
 
@@ -267,6 +321,16 @@ $sizes: (
   }
 
   // Slug callout caret styles
+  .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--slug
     > .#{$prefix}--toggletip
     > .#{$prefix}--popover
@@ -282,6 +346,58 @@ $sizes: (
   }
 
   // Caret pseudo element base styles
+  .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--top-end,
+      .#{$prefix}--popover--top-start,
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-right,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--bottom-start,
+      .#{$prefix}--popover--bottom-end,
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-top,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--left-start,
+      .#{$prefix}--popover--left-end,
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-top,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--right-start,
+      .#{$prefix}--popover--right-end
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::before,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--top-end,
+      .#{$prefix}--popover--top-start,
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-right,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--bottom-start,
+      .#{$prefix}--popover--bottom-end,
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-top,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--left-start,
+      .#{$prefix}--popover--left-end,
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-top,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--right-start,
+      .#{$prefix}--popover--right-end
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret::before,
   .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--top,
@@ -345,6 +461,58 @@ $sizes: (
     transform: rotate(45deg);
   }
 
+  .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--top-end,
+      .#{$prefix}--popover--top-start,
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-right,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--bottom-start,
+      .#{$prefix}--popover--bottom-end,
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-top,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--left-start,
+      .#{$prefix}--popover--left-end,
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-top,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--right-start,
+      .#{$prefix}--popover--right-end
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::after,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--top-end,
+      .#{$prefix}--popover--top-start,
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-right,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--bottom-start,
+      .#{$prefix}--popover--bottom-end,
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-top,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--left-start,
+      .#{$prefix}--popover--left-end,
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-top,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--right-start,
+      .#{$prefix}--popover--right-end
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret::after,
   .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--top,
@@ -406,6 +574,28 @@ $sizes: (
   }
 
   // Top
+  .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--top-end,
+      .#{$prefix}--popover--top-start
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--top-end,
+      .#{$prefix}--popover--top-start
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--top,
@@ -444,6 +634,17 @@ $sizes: (
     }
   }
 
+  .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--top-end,
+      .#{$prefix}--popover--top-start
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--ai-label-content--with-actions
+    + .#{$prefix}--popover-caret::after,
   .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--top,
@@ -459,6 +660,28 @@ $sizes: (
   }
 
   // Right
+  .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--right-top,
+      .#{$prefix}--popover--right-start,
+      .#{$prefix}--popover--right-end
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--right-top,
+      .#{$prefix}--popover--right-start,
+      .#{$prefix}--popover--right-end
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--right,
@@ -495,6 +718,28 @@ $sizes: (
   }
 
   // Bottom
+  .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--bottom-right,
+      .#{$prefix}--popover--bottom-start,
+      .#{$prefix}--popover--bottom-end
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--bottom-right,
+      .#{$prefix}--popover--bottom-start,
+      .#{$prefix}--popover--bottom-end
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--bottom,
@@ -533,6 +778,28 @@ $sizes: (
   }
 
   // Left
+  .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--left-top,
+      .#{$prefix}--popover--left-start,
+      .#{$prefix}--popover--left-end
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--left-top,
+      .#{$prefix}--popover--left-start,
+      .#{$prefix}--popover--left-end
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--left,
@@ -569,6 +836,26 @@ $sizes: (
   }
 
   // Override for specific alignments
+  .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--left-end,
+      .#{$prefix}--popover--right-end
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::after,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--left-end,
+      .#{$prefix}--popover--right-end
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret::after,
   .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--left-bottom,
@@ -593,6 +880,36 @@ $sizes: (
   }
 
   // Change caret color / border when it is near the bottom of the callout
+  .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--left-end,
+      .#{$prefix}--popover--right-end,
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--top-end,
+      .#{$prefix}--popover--top-start
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--left-end,
+      .#{$prefix}--popover--right-end,
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--top-end,
+      .#{$prefix}--popover--top-start
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--left-bottom,
@@ -630,6 +947,36 @@ $sizes: (
   }
 
   // Adjust background if actions are present
+  .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--left-end,
+      .#{$prefix}--popover--right-end,
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--top-end,
+      .#{$prefix}--popover--top-start
+    )
+    > .#{$prefix}--popover:has(.#{$prefix}--ai-label-content--with-actions)
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--left-end,
+      .#{$prefix}--popover--right-end,
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--top-start,
+      .#{$prefix}--popover--top-end
+    )
+    > .#{$prefix}--popover:has(.#{$prefix}--ai-label-content--with-actions)
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--left-bottom,
@@ -666,6 +1013,22 @@ $sizes: (
   }
 
   // Change the caret border when it is near the middle of the callout
+  .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--right
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--ai-label
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--right
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--left,
@@ -687,16 +1050,21 @@ $sizes: (
     }
   }
 
+  .#{$prefix}--ai-label .#{$prefix}--toggletip-content,
   .#{$prefix}--slug .#{$prefix}--toggletip-content {
     // This sets the max size to the size of the action bar with 3 buttons
     padding-block: convert.to-rem(24px) convert.to-rem(80px);
     padding-inline: convert.to-rem(24px);
   }
 
+  .#{$prefix}--ai-label
+    .#{$prefix}--ai-label-content
+    .#{$prefix}--toggletip-content,
   .#{$prefix}--slug .#{$prefix}--slug-content .#{$prefix}--toggletip-content {
     max-inline-size: convert.to-rem(320px);
   }
 
+  .#{$prefix}--ai-label .#{$prefix}--ai-label-actions,
   .#{$prefix}--slug .#{$prefix}--slug-actions {
     position: absolute;
     justify-content: flex-end;
@@ -710,6 +1078,7 @@ $sizes: (
     inset-inline-end: 0;
   }
 
+  .#{$prefix}--ai-label .#{$prefix}--ai-label-actions .#{$prefix}--btn:focus,
   .#{$prefix}--slug .#{$prefix}--slug-actions .#{$prefix}--btn:focus {
     border-color: $focus;
     box-shadow:
@@ -717,21 +1086,25 @@ $sizes: (
       inset 0 0 0 2px $background;
   }
 
+  .#{$prefix}--ai-label .#{$prefix}--ai-label-actions .#{$prefix}--btn--primary,
   .#{$prefix}--slug .#{$prefix}--slug-actions .#{$prefix}--btn--primary {
     order: 1;
     border-end-end-radius: convert.to-rem(7px);
   }
 
   // Revert styles
+  .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
   .#{$prefix}--slug.#{$prefix}--slug--revert {
     transform: translate($spacing-03, -50%);
   }
 
+  .#{$prefix}--ai-label--revert .#{$prefix}--btn--icon-only,
   .#{$prefix}--slug--revert .#{$prefix}--btn--icon-only {
     align-items: center;
     padding-block-start: 0;
   }
 
+  .#{$prefix}--ai-label--revert .#{$prefix}--btn--icon-only svg,
   .#{$prefix}--slug--revert .#{$prefix}--btn--icon-only svg {
     margin: 0;
   }

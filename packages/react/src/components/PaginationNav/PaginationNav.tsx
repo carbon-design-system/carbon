@@ -292,7 +292,7 @@ interface PaginationNavProps
   disableOverflow?: boolean;
 
   /**
-   * The number of items to be shown.
+   * The number of items to be shown (minimum of 4 unless props.items < 4).
    */
   itemsShown?: number;
 
@@ -398,8 +398,8 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
 
     // re-calculate cuts if props.totalItems or props.itemsShown change
     useEffect(() => {
-      setItemsDisplayedOnPage(itemsShown >= 4 ? itemsShown : 4);
-      setCuts(calculateCuts(currentPage, totalItems, itemsShown));
+      setItemsDisplayedOnPage(Math.max(itemsShown, 4));
+      setCuts(calculateCuts(currentPage, totalItems, Math.max(itemsShown, 4)));
     }, [totalItems, itemsShown]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // update cuts if necessary whenever currentPage changes
@@ -622,7 +622,7 @@ PaginationNav.propTypes = {
   disableOverflow: PropTypes.bool, // eslint-disable-line react/prop-types
 
   /**
-   * The number of items to be shown.
+   * The number of items to be shown (minimum of 4 unless props.items < 4).
    */
   itemsShown: PropTypes.number,
 
