@@ -116,7 +116,6 @@ const TableSelectRow = ({
     checked,
     disabled,
   };
-  // const InlineInputComponent = radio ? RadioButton : InlineCheckbox;
 
   const labelValue = ariaLabel || deprecatedAriaLabel || '';
   const tableSelectRowClasses = classNames(`${prefix}--table-column-checkbox`, {
