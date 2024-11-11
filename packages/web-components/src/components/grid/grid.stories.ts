@@ -42,13 +42,14 @@ export const Default = {
   },
   render: ({ condensed, narrow, fullWidth }) =>
     html`<cds-grid
+        class="sb-grid"
         ?condensed=${condensed}
         ?narrow=${narrow}
         ?full-width=${fullWidth}>
-        <cds-column sm="4"></cds-column>
-        <cds-column sm="4"></cds-column>
-        <cds-column sm="4"></cds-column>
-        <cds-column sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
       </cds-grid>
       <style>
         ${styles}
@@ -62,33 +63,33 @@ export const MixedGutterModes = {
     },
   },
   render: () =>
-    html`<cds-grid>
-        <cds-column sm="4" md="8">
-          <cds-sub-grid>
-            <cds-column sm="" ="4" md="8">
-              <cds-sub-grid narrow>
-                <cds-column>
+    html`<cds-grid class="sb-grid">
+        <cds-column class="sb-column" sm="4" md="8">
+          <cds-sub-grid class="sb-sub-grid">
+            <cds-column class="sb-column" sm="" ="4" md="8">
+              <cds-sub-grid class="sb-sub-grid" narrow>
+                <cds-column class="sb-column">
                   <div>Text</div>
                 </cds-column>
-                <cds-column>
+                <cds-column class="sb-column">
                   <div>Text</div>
                 </cds-column>
-                <cds-column>
+                <cds-column class="sb-column">
                   <div>Text</div>
                 </cds-column>
-                <cds-column>
+                <cds-column class="sb-column">
                   <div>Text</div>
                 </cds-column>
-                <cds-column sm="4">
-                  <cds-sub-grid>
-                    <cds-column>Text</cds-column>
-                    <cds-column>Text</cds-column>
-                    <cds-column sm="2">
-                      <cds-sub-grid condensed>
-                        <cds-column>
+                <cds-column class="sb-column" sm="4">
+                  <cds-sub-grid class="sb-sub-grid">
+                    <cds-column class="sb-column">Text</cds-column>
+                    <cds-column class="sb-column">Text</cds-column>
+                    <cds-column class="sb-column" sm="2">
+                      <cds-sub-grid class="sb-sub-grid" condensed>
+                        <cds-column class="sb-column">
                           <div>Text</div>
                         </cds-column>
-                        <cds-column>
+                        <cds-column class="sb-column">
                           <div>Text</div>
                         </cds-column>
                       </cds-sub-grid>
@@ -100,22 +101,22 @@ export const MixedGutterModes = {
           </cds-sub-grid>
         </cds-column>
       </cds-grid>
-      <cds-grid narrow>
-        <cds-column sm="4" md="8">
-          <cds-sub-grid wide>
-            <cds-column sm="4"></cds-column>
-            <cds-column sm="4">
-              <cds-sub-grid narrow>
-                <cds-column>
+      <cds-grid class="sb-grid" narrow>
+        <cds-column class="sb-column" sm="4" md="8">
+          <cds-sub-grid class="sb-sub-grid" wide>
+            <cds-column class="sb-column" sm="4"></cds-column>
+            <cds-column class="sb-column" sm="4">
+              <cds-sub-grid class="sb-sub-grid" narrow>
+                <cds-column class="sb-column">
                   <div>Text</div>
                 </cds-column>
-                <cds-column>
+                <cds-column class="sb-column">
                   <div>Text</div>
                 </cds-column>
-                <cds-column>
+                <cds-column class="sb-column">
                   <div>Text</div>
                 </cds-column>
-                <cds-column>
+                <cds-column class="sb-column">
                   <div>Text</div>
                 </cds-column>
               </cds-sub-grid>
@@ -138,23 +139,32 @@ export const Offset = {
   },
   render: ({ condensed, narrow, fullWidth }) =>
     html`<cds-grid
+        class="sb-grid"
         ?condensed=${condensed}
         ?narrow=${narrow}
         ?full-width=${fullWidth}>
         <cds-column
+          class="sb-column"
           sm="span:1 start:4"
           md="span:2 start:7"
           lg="span:4 start:13"></cds-column>
         <cds-column
+          class="sb-column"
           sm="span:2 start:3"
           md="span:4 start:5"
           lg="span:8 start:9"></cds-column>
         <cds-column
+          class="sb-column"
           sm="span:3 start:2"
           md="span:6 start:3"
           lg="span:12 start:5"></cds-column>
-        <cds-column sm="span:4" md="span:8" lg="span:16"></cds-column>
         <cds-column
+          class="sb-column"
+          sm="span:4"
+          md="span:8"
+          lg="span:16"></cds-column>
+        <cds-column
+          class="sb-column"
           sm="span:25% start:2"
           md="span:50% start:3"
           lg="span:75% start:5"></cds-column>
@@ -173,28 +183,28 @@ export const Responsive = {
     },
   },
   render: ({ condensed, narrow, fullWidth }) =>
-    html`<cds-grid>
-        <cds-column sm="2" md="4" lg="6">
+    html`<cds-grid class="sb-grid">
+        <cds-column class="sb-column" sm="2" md="4" lg="6">
           <p>Small: Span 2 of 4</p>
           <p>Medium: Span 4 of 8</p>
           <p>Large: Span 6 of 16</p>
         </cds-column>
-        <cds-column sm="2" md="2" lg="3">
+        <cds-column class="sb-column" sm="2" md="2" lg="3">
           <p>Small: Span 2 of 4</p>
           <p>Medium: Span 2 of 8</p>
           <p>Large: Span 3 of 16</p>
         </cds-column>
-        <cds-column sm="0" md="2" lg="3">
+        <cds-column class="sb-column" sm="0" md="2" lg="3">
           <p>Small: Span 0 of 4</p>
           <p>Medium: Span 2 of 8</p>
           <p>Large: Span 3 of 16</p>
         </cds-column>
-        <cds-column sm="0" md="0" lg="4">
+        <cds-column class="sb-column" sm="0" md="0" lg="4">
           <p>Small: Span 0 of 4</p>
           <p>Medium: Span 0 of 8</p>
           <p>Large: Span 4 of 16</p>
         </cds-column>
-        <cds-column sm="25%" md="50%" lg="75%">
+        <cds-column class="sb-column" sm="25%" md="50%" lg="75%">
           <p>Small: Span 25%</p>
           <p>Medium: Span 50%</p>
           <p>Large: Span 75%</p>
@@ -215,62 +225,63 @@ export const SubGrid = {
   },
   render: ({ condensed, narrow, fullWidth }) =>
     html`<cds-grid
+        class="sb-grid"
         ?condensed=${condensed}
         ?narrow=${narrow}
         ?full-width=${fullWidth}>
-        <cds-column sm="2" md="4" lg="3">
+        <cds-column class="sb-column" sm="2" md="4" lg="3">
           <p>Small: Span 2 of 4</p>
           <p>Medium: Span 4 of 8</p>
           <p>Large: Span 3 of 16</p>
         </cds-column>
-        <cds-column sm="2" md="4" lg="10">
+        <cds-column class="sb-column" sm="2" md="4" lg="10">
           <p>Small: Span 2 of 4</p>
           <p>Medium: Span 4 of 8</p>
           <p>Large: Span 10 of 16</p>
-          <cds-sub-grid>
-            <cds-column sm="1" md="1" lg="2">
+          <cds-sub-grid class="sb-sub-grid">
+            <cds-column class="sb-column" sm="1" md="1" lg="2">
               <p>sm=1</p>
               <p>md=1</p>
               <p>lg=2</p>
             </cds-column>
-            <cds-column sm="1" md="1" lg="2">
+            <cds-column class="sb-column" sm="1" md="1" lg="2">
               <p>sm=1</p>
               <p>md=1</p>
               <p>lg=2</p>
             </cds-column>
-            <cds-column sm="0" md="1" lg="1">
+            <cds-column class="sb-column" sm="0" md="1" lg="1">
               <p>sm=0</p>
               <p>md=1</p>
               <p>lg=1</p>
             </cds-column>
-            <cds-column sm="0" md="1" lg="1">
+            <cds-column class="sb-column" sm="0" md="1" lg="1">
               <p>sm=0</p>
               <p>md=1</p>
               <p>lg=1</p>
             </cds-column>
-            <cds-column sm="0" md="0" lg="1">
+            <cds-column class="sb-column" sm="0" md="0" lg="1">
               <p>sm=0</p>
               <p>md=0</p>
               <p>lg=1</p>
             </cds-column>
-            <cds-column sm="0" md="0" lg="1">
+            <cds-column class="sb-column" sm="0" md="0" lg="1">
               <p>sm=0</p>
               <p>md=0</p>
               <p>lg=1</p>
             </cds-column>
-            <cds-column sm="0" md="0" lg="1">
+            <cds-column class="sb-column" sm="0" md="0" lg="1">
               <p>sm=0</p>
               <p>md=0</p>
               <p>lg=1</p>
             </cds-column>
-            <cds-column sm="0" md="0" lg="1">
+            <cds-column class="sb-column" sm="0" md="0" lg="1">
               <p>sm=0</p>
               <p>md=0</p>
               <p>lg=1</p>
             </cds-column>
           </cds-sub-grid>
         </cds-column>
-        <cds-column sm="0" md="0" lg="3">
+        <cds-column class="sb-column" sm="0" md="0" lg="3">
           <p>Small: Span 0 of 4</p>
           <p>Medium: Span 0 of 8</p>
           <p>Large: Span 3 of 16</p>
