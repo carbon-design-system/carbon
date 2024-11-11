@@ -386,13 +386,15 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     }
 
     // AILabel always size `mini`
-    let normalizedDecorator;
+    let normalizedDecorator = React.isValidElement(slug ?? decorator)
+      ? slug ?? decorator
+      : null;
     if (
-      (slug && slug['type']?.displayName === 'AILabel') ||
-      (decorator && decorator['type']?.displayName === 'AILabel')
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel'
     ) {
       normalizedDecorator = React.cloneElement(
-        (slug ?? decorator) as React.ReactElement<any>,
+        normalizedDecorator as React.ReactElement<any>,
         {
           size: 'mini',
         }
@@ -402,10 +404,10 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     // Need to update the internal value when the revert button is clicked
     let isRevertActive;
     if (
-      (slug && slug['type']?.displayName === 'AILabel') ||
-      (decorator && decorator['type']?.displayName === 'AILabel')
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel'
     ) {
-      isRevertActive = normalizedDecorator.props.revertActive;
+      isRevertActive = (normalizedDecorator as ReactElement).props.revertActive;
     }
 
     useEffect(() => {

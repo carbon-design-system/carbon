@@ -15,6 +15,7 @@ import React, {
   ReactNode,
   useEffect,
   useMemo,
+  ReactElement,
 } from 'react';
 import {
   useSelect,
@@ -588,18 +589,13 @@ const Dropdown = React.forwardRef(
 
     // AILabel is always size `mini`
     const normalizedDecorator = useMemo(() => {
-      if (
-        (slug && slug['type']?.displayName === 'AILabel') ||
-        (decorator && decorator['type']?.displayName === 'AILabel')
-      ) {
-        return React.cloneElement(
-          (slug ?? decorator) as React.ReactElement<any>,
-          {
-            size: 'mini',
-          }
-        );
+      let element = slug ?? decorator;
+      if (element && element['type']?.displayName === 'AILabel') {
+        return React.cloneElement(element as React.ReactElement<any>, {
+          size: 'mini',
+        });
       }
-      return;
+      return React.isValidElement(element) ? element : null;
     }, [slug, decorator]);
 
     return (
