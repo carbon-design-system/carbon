@@ -45,10 +45,83 @@ export const Default = {
         ?condensed=${condensed}
         ?narrow=${narrow}
         ?full-width=${fullWidth}>
-        <cds-column sm="4" lg="10"></cds-column>
-        <cds-column sm="1"></cds-column>
-        <cds-column sm="1"></cds-column>
-        <cds-column sm="1" md="2" lg="4"></cds-column>
+        <cds-column sm="4"></cds-column>
+        <cds-column sm="4"></cds-column>
+        <cds-column sm="4"></cds-column>
+        <cds-column sm="4"></cds-column>
+      </cds-grid>
+      <style>
+        ${styles}
+      </style>`,
+};
+
+export const MixedGutterModes = {
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: () =>
+    html`<cds-grid>
+        <cds-column sm="4" md="8">
+          <cds-sub-grid>
+            <cds-column sm="" ="4" md="8">
+              <cds-sub-grid narrow>
+                <cds-column>
+                  <div>Text</div>
+                </cds-column>
+                <cds-column>
+                  <div>Text</div>
+                </cds-column>
+                <cds-column>
+                  <div>Text</div>
+                </cds-column>
+                <cds-column>
+                  <div>Text</div>
+                </cds-column>
+                <cds-column sm="4">
+                  <cds-sub-grid>
+                    <cds-column>Text</cds-column>
+                    <cds-column>Text</cds-column>
+                    <cds-column sm="2">
+                      <cds-sub-grid condensed>
+                        <cds-column>
+                          <div>Text</div>
+                        </cds-column>
+                        <cds-column>
+                          <div>Text</div>
+                        </cds-column>
+                      </cds-sub-grid>
+                    </cds-column>
+                  </cds-sub-grid>
+                </cds-column>
+              </cds-sub-grid>
+            </cds-column>
+          </cds-sub-grid>
+        </cds-column>
+      </cds-grid>
+      <cds-grid narrow>
+        <cds-column sm="4" md="8">
+          <cds-sub-grid wide>
+            <cds-column sm="4"></cds-column>
+            <cds-column sm="4">
+              <cds-sub-grid narrow>
+                <cds-column>
+                  <div>Text</div>
+                </cds-column>
+                <cds-column>
+                  <div>Text</div>
+                </cds-column>
+                <cds-column>
+                  <div>Text</div>
+                </cds-column>
+                <cds-column>
+                  <div>Text</div>
+                </cds-column>
+              </cds-sub-grid>
+            </cds-column>
+          </cds-sub-grid>
+        </cds-column>
       </cds-grid>
       <style>
         ${styles}
@@ -91,6 +164,47 @@ export const Offset = {
       </style>`,
 };
 
+export const Responsive = {
+  args: defaultArgs,
+  argTypes: controls,
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: ({ condensed, narrow, fullWidth }) =>
+    html`<cds-grid>
+        <cds-column sm="2" md="4" lg="6">
+          <p>Small: Span 2 of 4</p>
+          <p>Medium: Span 4 of 8</p>
+          <p>Large: Span 6 of 16</p>
+        </cds-column>
+        <cds-column sm="2" md="2" lg="3">
+          <p>Small: Span 2 of 4</p>
+          <p>Medium: Span 2 of 8</p>
+          <p>Large: Span 3 of 16</p>
+        </cds-column>
+        <cds-column sm="0" md="2" lg="3">
+          <p>Small: Span 0 of 4</p>
+          <p>Medium: Span 2 of 8</p>
+          <p>Large: Span 3 of 16</p>
+        </cds-column>
+        <cds-column sm="0" md="0" lg="4">
+          <p>Small: Span 0 of 4</p>
+          <p>Medium: Span 0 of 8</p>
+          <p>Large: Span 4 of 16</p>
+        </cds-column>
+        <cds-column sm="25%" md="50%" lg="75%">
+          <p>Small: Span 25%</p>
+          <p>Medium: Span 50%</p>
+          <p>Large: Span 75%</p>
+        </cds-column>
+      </cds-grid>
+      <style>
+        ${styles}
+      </style>`,
+};
+
 export const SubGrid = {
   args: defaultArgs,
   argTypes: controls,
@@ -115,44 +229,44 @@ export const SubGrid = {
           <p>Large: Span 10 of 16</p>
           <cds-sub-grid>
             <cds-column sm="1" md="1" lg="2">
-              <p>sm="1"</p>
-              <p>md="1"</p>
-              <p>lg="2"</p>
+              <p>sm=1</p>
+              <p>md=1</p>
+              <p>lg=2</p>
             </cds-column>
             <cds-column sm="1" md="1" lg="2">
-              <p>sm="1"</p>
-              <p>md="1"</p>
-              <p>lg="2"</p>
+              <p>sm=1</p>
+              <p>md=1</p>
+              <p>lg=2</p>
             </cds-column>
             <cds-column sm="0" md="1" lg="1">
-              <p>sm="0"</p>
-              <p>md="1"</p>
-              <p>lg="1"</p>
+              <p>sm=0</p>
+              <p>md=1</p>
+              <p>lg=1</p>
             </cds-column>
             <cds-column sm="0" md="1" lg="1">
-              <p>sm="0"</p>
-              <p>md="1"</p>
-              <p>lg="1"</p>
+              <p>sm=0</p>
+              <p>md=1</p>
+              <p>lg=1</p>
             </cds-column>
             <cds-column sm="0" md="0" lg="1">
-              <p>sm="0"</p>
-              <p>md="0"</p>
-              <p>lg="1"</p>
+              <p>sm=0</p>
+              <p>md=0</p>
+              <p>lg=1</p>
             </cds-column>
             <cds-column sm="0" md="0" lg="1">
-              <p>sm="0"</p>
-              <p>md="0"</p>
-              <p>lg="1"</p>
+              <p>sm=0</p>
+              <p>md=0</p>
+              <p>lg=1</p>
             </cds-column>
             <cds-column sm="0" md="0" lg="1">
-              <p>sm="0"</p>
-              <p>md="0"</p>
-              <p>lg="1"</p>
+              <p>sm=0</p>
+              <p>md=0</p>
+              <p>lg=1</p>
             </cds-column>
             <cds-column sm="0" md="0" lg="1">
-              <p>sm="0"</p>
-              <p>md="0"</p>
-              <p>lg="1"</p>
+              <p>sm=0</p>
+              <p>md=0</p>
+              <p>lg=1</p>
             </cds-column>
           </cds-sub-grid>
         </cds-column>
@@ -178,9 +292,3 @@ const meta = {
 };
 
 export default meta;
-
-// <cds-column sm={{ span: 1, offset: 3 }} md={{ span: 2, offset: 6 }} lg={{ span: 4, offset: 12 }} />
-// <cds-column sm={{ span: 2, offset: 2}} md={{ span: 4, offset: 4 }} lg={{ span: 8, offset: 8 }} />
-// <cds-column sm={{ span: 3, offset: 1 }} md={{ span: 6, offset: 2 }} lg={{ span: 12, offset: 4 }} />
-// <cds-column sm={{ span: 4 }} md={{ span: 8 }} lg={{ span: 16 }} />
-// <cds-column sm={{ span: '25%', offset: 1 }} md={{ span: '50%', offset: 2 }} lg={{ span: '75%', offset: 4}} />

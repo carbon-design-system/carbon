@@ -8,6 +8,8 @@
  */
 
 import { LitElement, html } from 'lit';
+import { provide } from '@lit/context';
+import { GridContext, gridContext } from './grid-context';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
@@ -38,18 +40,21 @@ class CDSGrid extends LitElement {
   narrow = false;
 
   /**
-   * Grid is nested within another grid
-   */
-  @property({ reflect: true, attribute: 'sub-grid', type: Boolean })
-  subGrid = false;
-
-  /**
    * Remove the default max width that the grid has set
    */
   @property({ reflect: true, attribute: 'full-width', type: Boolean })
   fullWidth = false;
 
+  @provide({ context: gridContext })
+  @property({ attribute: false })
+  public gridContext: GridContext = {
+    condensed: false,
+    narrow: false,
+  };
+
   render() {
+    this.gridContext = { condensed: this.condensed, narrow: this.narrow };
+
     // Grid styling added to contained components, allowing CSS Grid
     // to affect the it's own slot content.
     return html`<div class="${prefix}--grid-part" part="grid">
