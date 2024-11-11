@@ -151,7 +151,9 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
 
     const inputRef = useRef<HTMLInputElement>(null);
 
-    let normalizedDecorator = slug ?? decorator;
+    let normalizedDecorator = React.isValidElement(slug ?? decorator)
+      ? slug ?? decorator
+      : null;
     if (
       normalizedDecorator &&
       normalizedDecorator['type']?.displayName === 'AILabel'

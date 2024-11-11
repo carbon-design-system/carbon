@@ -211,66 +211,34 @@ export const withAILabel = {
         }
         orientation="vertical"
         legendText="Group label"
-        name="radio-button-group"
-        defaultSelected="radio-1">
+        name="radio-button-group-4"
+        defaultSelected="radio-10">
         <RadioButton
           labelText="Radio button label"
-          value="radio-1"
-          id="radio-1"
+          value="radio-10"
+          id="radio-10"
         />
         <RadioButton
           labelText="Radio button label"
-          value="radio-2"
-          id="radio-2"
+          value="radio-11"
+          id="radio-11"
         />
         <RadioButton
           labelText="Radio button label"
-          value="radio-3"
-          id="radio-3"
-        />
-      </RadioButtonGroup>
-
-      <RadioButtonGroup
-        orientation="vertical"
-        legendText="Group label"
-        name="radio-button-group-2"
-        defaultSelected="radio-4">
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-4"
-          id="radio-4"
-          decorator={
-            <Tooltip>
-              <Information></Information>
-            </Tooltip>
-          }
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-5"
-          id="radio-5"
-          decorator={
-            <Tooltip>
-              <Information></Information>
-            </Tooltip>
-          }
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-6"
-          id="radio-6"
+          value="radio-12"
+          id="radio-12"
         />
       </RadioButtonGroup>
 
       <RadioButtonGroup
         orientation="vertical"
         legendText="Group label"
-        name="radio-button-group-3"
-        defaultSelected="radio-7">
+        name="radio-button-group-5"
+        defaultSelected="radio-13">
         <RadioButton
           labelText="Radio button label"
-          value="radio-7"
-          id="radio-7"
+          value="radio-13"
+          id="radio-13"
           decorator={
             <Tooltip>
               <Information></Information>
@@ -279,8 +247,8 @@ export const withAILabel = {
         />
         <RadioButton
           labelText="Radio button label"
-          value="radio-8"
-          id="radio-8"
+          value="radio-14"
+          id="radio-14"
           decorator={
             <Tooltip>
               <Information></Information>
@@ -289,8 +257,40 @@ export const withAILabel = {
         />
         <RadioButton
           labelText="Radio button label"
-          value="radio-9"
-          id="radio-9"
+          value="radio-15"
+          id="radio-15"
+        />
+      </RadioButtonGroup>
+
+      <RadioButtonGroup
+        orientation="vertical"
+        legendText="Group label"
+        name="radio-button-group-6"
+        defaultSelected="radio-16">
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-16"
+          id="radio-16"
+          decorator={
+            <Tooltip>
+              <Information></Information>
+            </Tooltip>
+          }
+        />
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-17"
+          id="radio-17"
+          decorator={
+            <Tooltip>
+              <Information></Information>
+            </Tooltip>
+          }
+        />
+        <RadioButton
+          labelText="Radio button label"
+          value="radio-18"
+          id="radio-18"
         />
       </RadioButtonGroup>
     </div>
