@@ -232,7 +232,7 @@ describe('Checkbox', () => {
   });
 
   it('should set size to "md" when decorator kind is "inline"', () => {
-    const { getByText } = render(
+    const { container } = render(
       <Checkbox
         defaultChecked
         labelText="Checkbox label"
