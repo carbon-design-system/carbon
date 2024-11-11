@@ -404,6 +404,14 @@
   }
 
   .#{$prefix}--modal-header
+    > .#{$prefix}--ai-label:has(+ .#{$prefix}--modal-close-button),
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal-close-button
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container-body
+    > .#{$prefix}--ai-label,
+  .#{$prefix}--modal-header
     > .#{$prefix}--slug:has(+ .#{$prefix}--modal-close-button),
   .#{$prefix}--modal-header
     > .#{$prefix}--modal-close-button

@@ -277,13 +277,22 @@
     background-color: transparent;
   }
 
-  // Slug styles
+  // AILabel styles
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--slug
+    .#{$prefix}--ai-label,
   .#{$prefix}--number-input--fluid
     .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--slug {
     inset-block-start: convert.to-rem(43px);
   }
 
+  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number__input-wrapper--slug
+    .#{$prefix}--ai-label,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
+    .#{$prefix}--ai-label,
   .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
     .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--slug,
@@ -306,7 +315,11 @@
   }
 
   .#{$prefix}--number-input--fluid
-    .#{$prefix}--number__input-wrapper--slug:not(
+    .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--ai-label):not(
+      :has(.#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--slug):not(
       :has(.#{$prefix}--slug--revert)
     ) {
     @include ai-gradient;

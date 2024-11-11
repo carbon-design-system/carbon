@@ -387,7 +387,9 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     fill: $icon-disabled;
   }
 
-  // Slug styles
+  // AILabel styles
+  .#{$prefix}--tile > .#{$prefix}--ai-label,
+  .#{$prefix}--tile--expandable > div > .#{$prefix}--ai-label,
   .#{$prefix}--tile > .#{$prefix}--slug,
   .#{$prefix}--tile--expandable > div > .#{$prefix}--slug,
   .#{$prefix}--tile--clickable .#{$prefix}--tile--slug-icon {
@@ -396,10 +398,13 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     inset-inline-end: $spacing-05;
   }
 
+  .#{$prefix}--tile.#{$prefix}--tile--selectable > .#{$prefix}--ai-label,
   .#{$prefix}--tile.#{$prefix}--tile--selectable > .#{$prefix}--slug {
     inset-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
+    > .#{$prefix}--ai-label,
   .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
     > .#{$prefix}--slug {
     inset-inline-end: $spacing-05;
@@ -414,10 +419,13 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
+    > .#{$prefix}--ai-label,
+  .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
     > .#{$prefix}--slug {
     inset-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--tile.#{$prefix}--tile--clickable > .#{$prefix}--ai-label,
   .#{$prefix}--tile.#{$prefix}--tile--clickable > .#{$prefix}--slug {
     pointer-events: none;
   }
@@ -502,21 +510,28 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--slug.#{$prefix}--tile--clickable .#{$prefix}--tile-content,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
     > .#{$prefix}--tile__checkmark,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--is-selected .#{$prefix}--ai-label,
   .#{$prefix}--tile--slug.#{$prefix}--tile--is-selected .#{$prefix}--slug {
     z-index: 1;
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
+    .#{$prefix}--ai-label:has(> .#{$prefix}--popover--open),
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
     .#{$prefix}--slug:has(> .#{$prefix}--popover--open) {
     z-index: 2;
   }
 
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable > .#{$prefix}--ai-label,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable > .#{$prefix}--slug,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
     > .#{$prefix}--tile__checkmark {
     z-index: 1;
   }
 
+  .#{$prefix}--tile--expandable:has(
+      .#{$prefix}--ai-label > .#{$prefix}--popover--open
+    ),
   .#{$prefix}--tile--expandable:has(
       .#{$prefix}--slug > .#{$prefix}--popover--open
     ) {
