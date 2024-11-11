@@ -13,7 +13,9 @@ import CheckboxGroup from '../CheckboxGroup';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
-import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+
+import { Tooltip } from '../Tooltip';
 
 const checkboxEvents = {
   className: 'some-class',
@@ -122,7 +124,7 @@ const AILabelFunc = (kind) => (
   </AILabel>
 );
 
-export const withAILabel = () => (
+export const withAILabelSlugDeleteThis = () => (
   <div className="ai-label-check-radio-container">
     <CheckboxGroup legendText="Group Label" slug={AILabelFunc()}>
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
@@ -156,6 +158,58 @@ export const withAILabel = () => (
         slug={AILabelFunc('inline')}
       />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-9" />
+    </CheckboxGroup>
+  </div>
+);
+
+export const withAILabel = () => (
+  <div className="ai-label-check-radio-container">
+    <CheckboxGroup legendText="Group Label" decorator={AILabelFunc()}>
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
+    </CheckboxGroup>
+
+    <CheckboxGroup legendText="Group Label">
+      <Checkbox
+        labelText={`Checkbox label`}
+        id="checkbox-label-4"
+        decorator={AILabelFunc()}
+      />
+      <Checkbox
+        labelText={`Checkbox label`}
+        id="checkbox-label-5"
+        decorator={AILabelFunc()}
+      />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-6" />
+    </CheckboxGroup>
+
+    <CheckboxGroup
+      legendText="Group Label"
+      decorator={
+        <Tooltip>
+          <Information></Information>
+        </Tooltip>
+      }>
+      <Checkbox
+        labelText={`Checkbox label`}
+        id="checkbox-label-7"
+        decorator={AILabelFunc('inline')}
+      />
+      <Checkbox
+        labelText={`Checkbox label`}
+        id="checkbox-label-8"
+        decorator={AILabelFunc('inline')}
+      />
+      <Checkbox
+        labelText={`Checkbox label`}
+        id="checkbox-label-9"
+        decorator={
+          <Tooltip>
+            <Information></Information>
+          </Tooltip>
+        }
+      />
     </CheckboxGroup>
   </div>
 );

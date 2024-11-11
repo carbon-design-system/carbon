@@ -366,7 +366,9 @@
     transform: scale(1.2) rotate3d(0.5, 1, 0, 158deg);
   }
 
-  // Slug styles
+  // Decorator styles
+  .#{$prefix}--checkbox-group--decorator legend.#{$prefix}--label,
+  .#{$prefix}--checkbox-wrapper--decorator .#{$prefix}--checkbox-label-text,
   .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label,
   .#{$prefix}--checkbox-wrapper--slug .#{$prefix}--checkbox-label-text {
     display: flex;
@@ -381,7 +383,27 @@
   .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label .#{$prefix}--slug,
   .#{$prefix}--checkbox-wrapper--slug
     .#{$prefix}--checkbox-label-text
-    .#{$prefix}--slug {
+    .#{$prefix}--slug,
+  .#{$prefix}--checkbox-group--decorator
+    legend.#{$prefix}--label
+    .#{$prefix}--ai-label,
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label,
+  .#{$prefix}--checkbox-group--decorator
+    legend.#{$prefix}--label
+    .#{$prefix}--decorator,
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--decorator,
+  .#{$prefix}--checkbox-group--decorator
+    legend.#{$prefix}--label
+    .#{$prefix}--checkbox-group-inner--decorator
+    > *,
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--checkbox-wrapper-inner--decorator
+    > * {
     margin-inline-start: $spacing-03;
   }
 
@@ -390,7 +412,25 @@
     .#{$prefix}--ai-label__button--inline,
   .#{$prefix}--checkbox-wrapper--slug
     .#{$prefix}--checkbox-label-text
-    .#{$prefix}--slug__button--inline {
+    .#{$prefix}--slug__button--inline,
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label__button--inline,
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--slug__button--inline,
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label__button--inline,
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label--inline,
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label__button--inline,
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label__button--inline {
     line-height: inherit;
     margin-block-start: convert.to-rem(-1px);
   }
