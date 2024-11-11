@@ -284,6 +284,9 @@
   }
 
   // AILabel styles
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--ai-label,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
@@ -291,6 +294,20 @@
     inset-block-start: convert.to-rem(42px);
   }
 
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__wrapper--decorator-inner
+    > *,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__wrapper--decorator-inner
+    > *,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--ai-label,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--ai-label,
@@ -306,6 +323,12 @@
     inset-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    button.#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    button.#{$prefix}--list-box__field,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     button.#{$prefix}--list-box__field,
@@ -315,6 +338,12 @@
     padding-inline-end: $spacing-10;
   }
 
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
@@ -324,6 +353,32 @@
     padding-inline-end: convert.to-rem(88px);
   }
 
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--list-box__wrapper--decorator-inner
+    > *,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--list-box__wrapper--decorator-inner
+    > *,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--ai-label,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field:has(
@@ -351,6 +406,8 @@
     inset-inline-end: $spacing-10;
   }
 
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
     padding-inline-end: $spacing-12;
@@ -385,6 +442,14 @@
   }
 
   // remove ai-label divider when element is invalid and fluid
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--list-box__wrapper--decorator-inner
+    > *::before,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__wrapper--decorator-inner
+    > *::before,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--invalid[data-invalid]
     .#{$prefix}--ai-label::before,

@@ -327,7 +327,7 @@ export const withAILabel = (args) => {
             label="Option 1"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
           <MultiSelect
@@ -429,7 +429,7 @@ export const withAILabel = (args) => {
             label="Choose an option"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
