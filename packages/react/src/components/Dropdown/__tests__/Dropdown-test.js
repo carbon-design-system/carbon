@@ -343,7 +343,18 @@ describe('Dropdown', () => {
       expect(ref.current).toHaveAttribute('aria-haspopup', 'listbox');
     });
 
-    it('should respect slug prop', async () => {
+    it('should respect decorator prop', async () => {
+      const { container } = render(
+        <Dropdown {...mockProps} decorator={<AILabel />} />
+      );
+      await waitForPosition();
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--list-box__wrapper--decorator`
+      );
+    });
+
+    it('should respect deprecated slug prop', async () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       const { container } = render(
         <Dropdown {...mockProps} slug={<AILabel />} />
       );
@@ -351,6 +362,7 @@ describe('Dropdown', () => {
       expect(container.firstChild).toHaveClass(
         `${prefix}--list-box__wrapper--slug`
       );
+      spy.mockRestore();
     });
   });
 });

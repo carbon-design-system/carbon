@@ -414,7 +414,7 @@ const Pagination = React.forwardRef(function Pagination(
             <CaretLeft />
           </IconButton>
           <IconButton
-            align="top-right"
+            align="top-end"
             disabled={forwardButtonDisabled || isLastPage}
             kind="ghost"
             className={forwardButtonClasses}

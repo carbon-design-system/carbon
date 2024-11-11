@@ -41,7 +41,7 @@ const aiContent = (
 
 export const Default = () => (
   <>
-    <div className="slug-container slug-container-example">
+    <div className="ai-label-container ai-label-container-example">
       <AILabel autoAlign size="mini">
         <AILabelContent>{aiContent}</AILabelContent>
       </AILabel>
@@ -134,7 +134,7 @@ export const Default = () => (
         </AILabelContent>
       </AILabel>
     </div>
-    <div className="slug-container-example slug-container">
+    <div className="ai-label-container ai-label-container-example">
       <AILabel autoAlign kind="inline" size="sm">
         <AILabelContent>
           {aiContent}
@@ -187,7 +187,7 @@ export const Default = () => (
         </AILabelContent>
       </AILabel>
     </div>
-    <div className="slug-container-example slug-container">
+    <div className="ai-label-container ai-label-container-example">
       <AILabel autoAlign kind="inline" size="sm" textLabel="Text goes here">
         <AILabelContent>
           {aiContent}
@@ -244,10 +244,10 @@ export const Default = () => (
 );
 
 export const ExplainabilityPopover = (args) => {
-  const { showSlugActions = true } = args;
+  const { showAILabelActions = true } = args;
 
   return (
-    <div className="slug-container-example slug-container centered">
+    <div className="ai-label-container-example ai-label-container centered">
       <AILabel autoAlign={false} defaultOpen {...args}>
         <AILabelContent>
           {' '}
@@ -264,7 +264,7 @@ export const ExplainabilityPopover = (args) => {
             <p className="secondary">Model type</p>
             <p className="bold">Foundation model</p>
           </div>
-          {showSlugActions && (
+          {showAILabelActions && (
             <AILabelActions>
               <IconButton kind="ghost" label="View">
                 <View />
@@ -285,7 +285,7 @@ export const ExplainabilityPopover = (args) => {
 };
 
 ExplainabilityPopover.argTypes = {
-  showSlugActions: {
+  showAILabelActions: {
     control: {
       type: 'boolean',
     },
@@ -384,7 +384,7 @@ ExplainabilityPopover.argTypes = {
 };
 
 export const Playground = (args) => {
-  const { showSlugActions = true } = args;
+  const { showAILabelActions = true } = args;
 
   const renderedContent = (
     <>
@@ -400,7 +400,7 @@ export const Playground = (args) => {
         <p className="secondary">Model type</p>
         <p className="bold">Foundation model</p>
       </div>
-      {showSlugActions && (
+      {showAILabelActions && (
         <AILabelActions>
           <IconButton kind="ghost" label="View">
             <View />
@@ -419,7 +419,7 @@ export const Playground = (args) => {
 
   return (
     <>
-      <div className="slug-container slug-container-example">
+      <div className="ai-label-container ai-label-container-example">
         <AILabel aria-label="Test" {...args}>
           <AILabelContent>{renderedContent}</AILabelContent>
         </AILabel>
@@ -431,7 +431,7 @@ export const Playground = (args) => {
 };
 
 Playground.argTypes = {
-  showSlugActions: {
+  showAILabelActions: {
     control: {
       type: 'boolean',
     },

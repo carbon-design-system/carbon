@@ -160,8 +160,7 @@ function useChangedValue<T>(
  */
 function useFeatureFlag(flag) {
   const scope = useContext(FeatureFlagContext);
-  //updated to return false for undefined flags
-  return scope.enabled(flag) ?? false;
+  return scope.enabled(flag);
 }
 
 /**
