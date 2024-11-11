@@ -230,4 +230,19 @@ describe('Checkbox', () => {
       `${prefix}--checkbox-wrapper--decorator`
     );
   });
+
+  it('should set size to "md" when decorator kind is "inline"', () => {
+    const { getByText } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-2"
+        decorator={<AILabel kind="inline" />}
+      />
+    );
+
+    expect(
+      container.querySelector('.cds--ai-label__button--md')
+    ).toBeInTheDocument();
+  });
 });
