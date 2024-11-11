@@ -380,22 +380,12 @@
   .#{$prefix}--checkbox-wrapper--slug
     .#{$prefix}--checkbox-label-text
     .#{$prefix}--ai-label,
-  .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label .#{$prefix}--slug,
-  .#{$prefix}--checkbox-wrapper--slug
-    .#{$prefix}--checkbox-label-text
-    .#{$prefix}--slug,
   .#{$prefix}--checkbox-group--decorator
     legend.#{$prefix}--label
     .#{$prefix}--ai-label,
   .#{$prefix}--checkbox-wrapper--decorator
     .#{$prefix}--checkbox-label-text
     .#{$prefix}--ai-label,
-  .#{$prefix}--checkbox-group--decorator
-    legend.#{$prefix}--label
-    .#{$prefix}--decorator,
-  .#{$prefix}--checkbox-wrapper--decorator
-    .#{$prefix}--checkbox-label-text
-    .#{$prefix}--decorator,
   .#{$prefix}--checkbox-group--decorator
     legend.#{$prefix}--label
     .#{$prefix}--checkbox-group-inner--decorator
@@ -408,24 +398,6 @@
   }
 
   .#{$prefix}--checkbox-wrapper--slug
-    .#{$prefix}--checkbox-label-text
-    .#{$prefix}--ai-label__button--inline,
-  .#{$prefix}--checkbox-wrapper--slug
-    .#{$prefix}--checkbox-label-text
-    .#{$prefix}--slug__button--inline,
-  .#{$prefix}--checkbox-wrapper--decorator
-    .#{$prefix}--checkbox-label-text
-    .#{$prefix}--ai-label__button--inline,
-  .#{$prefix}--checkbox-wrapper--decorator
-    .#{$prefix}--checkbox-label-text
-    .#{$prefix}--slug__button--inline,
-  .#{$prefix}--checkbox-wrapper--decorator
-    .#{$prefix}--checkbox-label-text
-    .#{$prefix}--ai-label__button--inline,
-  .#{$prefix}--checkbox-wrapper--decorator
-    .#{$prefix}--checkbox-label-text
-    .#{$prefix}--ai-label--inline,
-  .#{$prefix}--checkbox-wrapper--decorator
     .#{$prefix}--checkbox-label-text
     .#{$prefix}--ai-label__button--inline,
   .#{$prefix}--checkbox-wrapper--decorator
