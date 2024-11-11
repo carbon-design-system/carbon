@@ -333,19 +333,7 @@ describe('OverflowMenu', () => {
     fireEvent.keyDown(menuItem3, { key: 'ArrowUp', code: 'ArrowUp' });
     expect(menuItem1).toHaveFocus();
   });
-  it('should not throw an error if the trigger element is null', () => {
-    const { container } = render(
-      <OverflowMenu iconDescription="custom-icon" className="extra-class" />
-    );
-    const instance = container.firstChild;
-    const focusMenuEl = instance.focusMenuEl;
-    expect(() => {
-      if (focusMenuEl) {
-        focusMenuEl.call(instance);
-      }
-    }).not.toThrow();
-  });
-  it('closes the menu on Escape key press', () => {
+  it('closes the menu on Escape key press', async () => {
     render(
       <OverflowMenu open iconDescription="custom-icon" className="extra-class">
         <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
@@ -359,9 +347,12 @@ describe('OverflowMenu', () => {
     );
     const button = screen.getByRole('button', { name: 'custom-icon' });
     expect(button).toHaveClass('cds--overflow-menu--open');
-    fireEvent.keyDown(button, { key: 'Escape', code: 'Escape' });
-    setTimeout(() => {
-      expect(button).not.toHaveClass('cds--overflow-menu--open');
-    }, 0);
+
+    const menu = await waitFor(() =>
+      screen.getByRole('menu', { hidden: true })
+    );
+    fireEvent.keyDown(menu, { key: 'Escape', code: 'Escape' });
+    expect(button).not.toHaveClass('cds--overflow-menu--open');
+    expect(button).toHaveFocus();
   });
 });
