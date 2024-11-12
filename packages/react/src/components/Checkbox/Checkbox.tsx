@@ -162,7 +162,7 @@ const Checkbox = React.forwardRef(
     });
 
     let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? slug ?? decorator
+      ? (slug ?? decorator)
       : null;
     if (
       normalizedDecorator &&
