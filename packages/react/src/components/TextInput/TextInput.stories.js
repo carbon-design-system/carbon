@@ -8,13 +8,14 @@
 import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import FluidForm from '../FluidForm';
-import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import mdx from './TextInput.mdx';
 
 import { default as TextInput, TextInputSkeleton } from '../TextInput';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/TextInput',
@@ -29,6 +30,11 @@ export default {
   },
   argTypes: {
     light: {
+      table: {
+        disable: true,
+      },
+    },
+    slug: {
       table: {
         disable: true,
       },
@@ -108,13 +114,27 @@ const aiLabel = (
 );
 
 export const withAILabel = () => (
-  <TextInput
-    type="text"
-    labelText="Text input label"
-    helperText="Optional help text"
-    id="text-input-ai-label"
-    slug={aiLabel}
-  />
+  <>
+    <TextInput
+      type="text"
+      labelText="Text input label"
+      helperText="Optional help text"
+      id="text-input-ai-label"
+      decorator={aiLabel}
+    />
+    <br />
+    <TextInput
+      type="text"
+      labelText="Text input label"
+      helperText="Optional help text"
+      id="text-input-ai-label"
+      decorator={
+        <Tooltip>
+          <Information></Information>
+        </Tooltip>
+      }
+    />
+  </>
 );
 
 export const Skeleton = () => <TextInputSkeleton />;
