@@ -2940,6 +2940,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "direction": Object {
         "args": Array [
           Array [
@@ -3037,9 +3040,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "titleText": Object {
         "isRequired": true,
         "type": "node",
