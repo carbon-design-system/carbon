@@ -219,6 +219,7 @@ export const _fullyControlled = () => {
   ];
   const [value, setValue] = useState(options[0]);
   const onChange = ({ selectedItem }) => {
+    console.log('onChange', selectedItem);
     setValue(selectedItem);
   };
 

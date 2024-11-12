@@ -532,12 +532,12 @@ const ComboBox = forwardRef(
         typeahead
           ? autocompleteCustomFilter({ item: itemToString(item), inputValue })
           : shouldFilterItem
-            ? shouldFilterItem({
-                item,
-                itemToString,
-                inputValue,
-              })
-            : defaultShouldFilterItem()
+          ? shouldFilterItem({
+              item,
+              itemToString,
+              inputValue,
+            })
+          : defaultShouldFilterItem()
       );
 
     useEffect(() => {
@@ -744,7 +744,11 @@ const ComboBox = forwardRef(
       onInputValueChange({ inputValue }) {
         const normalizedInput = inputValue || '';
         setInputValue(normalizedInput);
-        if (selectedItemProp && !inputValue) {
+        if (
+          selectedItemProp &&
+          !inputValue &&
+          !isEqual(selectedItem, selectedItemProp)
+        ) {
           // ensure onChange is called when selectedItem is cleared
           onChange({ selectedItem, inputValue: normalizedInput });
         }
