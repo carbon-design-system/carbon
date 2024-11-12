@@ -347,12 +347,11 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
 
     switch (size) {
       case 'md':
-        numberOfPages = 5;
+        numberOfPages = Math.max(itemsShown, 5);
         break;
       case 'sm':
-        numberOfPages = 7;
+        numberOfPages = Math.max(4, Math.min(itemsShown, 7));
         break;
-
       default:
         numberOfPages = 4;
         break;
