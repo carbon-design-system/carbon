@@ -476,7 +476,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
 
   // AILabel is always size `mini`
   let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? slug ?? decorator
+    ? (slug ?? decorator)
     : null;
   if (
     normalizedDecorator &&

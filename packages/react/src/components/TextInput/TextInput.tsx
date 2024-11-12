@@ -353,7 +353,7 @@ const TextInput = React.forwardRef(function TextInput(
 
   // AILabel is always size `mini`
   let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? slug ?? decorator
+    ? (slug ?? decorator)
     : null;
   if (
     normalizedDecorator &&
