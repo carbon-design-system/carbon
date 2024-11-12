@@ -387,7 +387,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     // AILabel always size `mini`
     let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? slug ?? decorator
+      ? (slug ?? decorator)
       : null;
     if (
       normalizedDecorator &&
