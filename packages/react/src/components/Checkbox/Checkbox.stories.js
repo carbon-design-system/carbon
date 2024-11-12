@@ -124,44 +124,6 @@ const AILabelFunc = (kind) => (
   </AILabel>
 );
 
-export const withAILabelSlugDeleteThis = () => (
-  <div className="ai-label-check-radio-container">
-    <CheckboxGroup legendText="Group Label" slug={AILabelFunc()}>
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
-    </CheckboxGroup>
-
-    <CheckboxGroup legendText="Group Label">
-      <Checkbox
-        labelText={`Checkbox label`}
-        id="checkbox-label-4"
-        slug={AILabelFunc()}
-      />
-      <Checkbox
-        labelText={`Checkbox label`}
-        id="checkbox-label-5"
-        slug={AILabelFunc()}
-      />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-6" />
-    </CheckboxGroup>
-
-    <CheckboxGroup legendText="Group Label">
-      <Checkbox
-        labelText={`Checkbox label`}
-        id="checkbox-label-7"
-        slug={AILabelFunc('inline')}
-      />
-      <Checkbox
-        labelText={`Checkbox label`}
-        id="checkbox-label-8"
-        slug={AILabelFunc('inline')}
-      />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-9" />
-    </CheckboxGroup>
-  </div>
-);
-
 export const withAILabel = () => (
   <div className="ai-label-check-radio-container">
     <CheckboxGroup legendText="Group Label" decorator={AILabelFunc()}>
