@@ -82,8 +82,8 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
 
   // AILabel always size `mini`
   let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? slug ?? decorator
-      : null;
+    ? slug ?? decorator
+    : null;
   if (
     normalizedDecorator &&
     normalizedDecorator['type']?.displayName === 'AILabel'
