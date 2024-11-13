@@ -51,6 +51,10 @@ $list-box-menu-width: convert.to-rem(300px);
 @mixin list-box {
   // The overall container element for a `list-box`. Has two variants,
   // `disabled` and `inline`.
+  .#{$prefix}--list-box__wrapper {
+    display: block;
+  }
+
   .#{$prefix}--list-box__wrapper--inline {
     display: inline-grid;
     align-items: center;
