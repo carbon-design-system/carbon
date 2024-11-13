@@ -86,7 +86,7 @@ const transform = (fileInfo, api) => {
         if (attr.name.name === 'kind' || attr.name.name === 'icon') {
           const originalName = attr.name.name;
           attr.name.name = 'renderIcon';
-          if (originalName === 'kind' && attr.value.type === 'StringLiteral') {
+          if (originalName === 'kind') {
             if (attr.value.value === 'user') {
               attr.value = j.jsxExpressionContainer(j.identifier('User'));
               shouldImportUser = true;
