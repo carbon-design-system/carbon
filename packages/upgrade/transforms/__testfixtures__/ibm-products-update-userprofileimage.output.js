@@ -7,38 +7,38 @@ const ImageUrl ='https://img.freepik.com/free-photo/portrait-man-cartoon-style_2
     
 export const Example = () => (
     <>
-        <UserAvatar
-            size="md"
-            tooltipAlignment="bottom"
-            backgroundColor="order-5-purple"
-            tooltipText="Thomas Watson"
-            className="myClass"
-            name="thomas j. watson"
-        />
-        <UserAvatar
-            size="md"
-            tooltipAlignment="bottom"
-            backgroundColor="order-5-purple"
-            tooltipText="Thomas Watson"
-            className="myClass"
-            renderIcon={User}
-        />
-        <UserAvatar
-            size="md"
-            tooltipAlignment="bottom"
-            backgroundColor="order-5-purple"
-            tooltipText="Thomas Watson"
-            className="myClass"
-            renderIcon={() => <Add size={20} />}
-        />
-        <UserAvatar
-            size="md"
-            tooltipAlignment="bottom"
-            backgroundColor="order-5-purple"
-            tooltipText="Thomas Watson"
-            className="myClass"
-            image={ImageUrl}
-            imageDescription="Avatar of Thomas Watson"
-        />
+    <UserAvatar
+        size="md"
+        tooltipAlignment="bottom"
+        backgroundColor="order-5-purple"
+        tooltipText="Thomas Watson"
+        className="myClass"
+        name="thomas j. watson"
+    />
+    <UserAvatar
+        size="md"
+        tooltipAlignment="bottom"
+        backgroundColor="order-5-purple"
+        tooltipText="Thomas Watson"
+        className="myClass"
+        renderIcon={User}
+    />
+    <UserAvatar
+        size="md"
+        tooltipAlignment="bottom"
+        backgroundColor="order-5-purple"
+        tooltipText="Thomas Watson"
+        className="myClass"
+        renderIcon={() => <Add size={20} />}
+    />
+    <UserAvatar
+        size="md"
+        tooltipAlignment="bottom"
+        backgroundColor="order-5-purple"
+        tooltipText="Thomas Watson"
+        className="myClass"
+        image={ImageUrl}
+        imageDescription="Avatar of Thomas Watson"
+    />
     </>
 );
