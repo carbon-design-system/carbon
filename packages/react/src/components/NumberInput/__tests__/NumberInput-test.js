@@ -69,12 +69,24 @@ describe('NumberInput', () => {
     expect(screen.getByLabelText('test-label')).toHaveValue(5);
   });
 
-  it('should respect slug prop', () => {
+  it('should respect decorator prop', () => {
+    render(
+      <NumberInput label="test-label" id="test" decorator={<AILabel />} />
+    );
+
+    expect(
+      screen.getByRole('button', { name: 'AI - Show information' })
+    ).toBeInTheDocument();
+  });
+
+  it('should respect the deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     render(<NumberInput label="test-label" id="test" slug={<AILabel />} />);
 
     expect(
       screen.getByRole('button', { name: 'AI - Show information' })
     ).toBeInTheDocument();
+    spy.mockRestore();
   });
 
   it('should allow an empty string as input to the underlying <input>', () => {

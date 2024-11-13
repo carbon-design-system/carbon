@@ -36,7 +36,8 @@
     "node-sass": "^9.0.0",
     "react": "~18.3.0",
     "react-dom": "~18.3.0",
-    "react-is": "~18.3.0"
+    "react-is": "~18.3.0",
+    "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",
@@ -64,9 +65,9 @@
     "cross-spawn": "^7.0.0",
     "doctoc": "^2.0.0",
     "eslint": "^9.0.0",
-    "eslint-plugin-playwright": "^1.0.0",
+    "eslint-plugin-playwright": "^2.0.0",
     "fs-extra": "^11.0.0",
-    "glob": "^10.0.0",
+    "glob": "^11.0.0",
     "husky": "^9.0.0",
     "jest": "^28.1.0",
     "jest-junit": "^16.0.0",
