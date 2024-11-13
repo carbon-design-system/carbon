@@ -270,7 +270,7 @@ export type ToggleTipButtonProps<T extends React.ElementType> =
  * `ToggletipButton` controls the visibility of the Toggletip through mouse
  * clicks and keyboard interactions.
  */
-// adding a comment to push
+
 export const ToggletipButton = React.forwardRef(function ToggletipButton<
   T extends React.ElementType
 >(
