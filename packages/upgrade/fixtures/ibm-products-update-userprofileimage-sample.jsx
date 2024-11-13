@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { UserProfileImage } from '@carbon/ibm-products';
 import { Add } from '@carbon/react/icons';
