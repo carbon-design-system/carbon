@@ -212,6 +212,24 @@ describe('DatePicker', () => {
     );
   });
 
+  it('should respect deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(
+      <DatePickerInput
+        id="date-picker-input-id-start"
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        data-testid="input-value"
+        slug={<AILabel />}
+      />
+    );
+
+    expect(screen.getByRole('button')).toHaveClass(
+      `${prefix}--ai-label__button`
+    );
+    spy.mockRestore();
+  });
+
   it('should respect parseDate prop', async () => {
     const parseDate = jest.fn();
     parseDate.mockReturnValueOnce(new Date('1989/01/20'));
