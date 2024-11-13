@@ -13,9 +13,7 @@ import CheckboxGroup from '../CheckboxGroup';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
-import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
-
-import { Tooltip } from '../Tooltip';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 
 const checkboxEvents = {
   className: 'some-class',
@@ -146,13 +144,7 @@ export const withAILabel = () => (
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-6" />
     </CheckboxGroup>
 
-    <CheckboxGroup
-      legendText="Group Label"
-      decorator={
-        <Tooltip>
-          <Information></Information>
-        </Tooltip>
-      }>
+    <CheckboxGroup legendText="Group Label">
       <Checkbox
         labelText={`Checkbox label`}
         id="checkbox-label-7"
@@ -163,15 +155,7 @@ export const withAILabel = () => (
         id="checkbox-label-8"
         decorator={AILabelFunc('inline')}
       />
-      <Checkbox
-        labelText={`Checkbox label`}
-        id="checkbox-label-9"
-        decorator={
-          <Tooltip>
-            <Information></Information>
-          </Tooltip>
-        }
-      />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-9" />
     </CheckboxGroup>
   </div>
 );
