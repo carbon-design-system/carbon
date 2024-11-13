@@ -18,7 +18,7 @@ import ButtonSet from '../ButtonSet';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/MultiSelect',
@@ -483,7 +483,21 @@ export const withAILabel = () => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       selectionFeedback="top-after-reopen"
-      slug={aiLabel}
+      decorator={aiLabel}
+    />
+    <MultiSelect
+      label="Multiselect Label"
+      id="carbon-multiselect-example"
+      titleText="Multiselect title"
+      helperText="This is helper text"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      selectionFeedback="top-after-reopen"
+      decorator={
+        <Tooltip>
+          <View />
+        </Tooltip>
+      }
     />
   </div>
 );
