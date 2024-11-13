@@ -91,8 +91,8 @@ export const Single = () => {
 
 export const Skeleton = () => <CheckboxSkeleton />;
 
-const slugFunc = (kind) => (
-  <AILabel className="slug-container" kind={kind}>
+const AILabelFunc = (kind) => (
+  <AILabel className="ai-label-container" kind={kind}>
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -123,8 +123,8 @@ const slugFunc = (kind) => (
 );
 
 export const withAILabel = () => (
-  <div className="slug-check-radio-container">
-    <CheckboxGroup legendText="Group Label" slug={slugFunc()}>
+  <div className="ai-label-check-radio-container">
+    <CheckboxGroup legendText="Group Label" slug={AILabelFunc()}>
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
@@ -134,12 +134,12 @@ export const withAILabel = () => (
       <Checkbox
         labelText={`Checkbox label`}
         id="checkbox-label-4"
-        slug={slugFunc()}
+        slug={AILabelFunc()}
       />
       <Checkbox
         labelText={`Checkbox label`}
         id="checkbox-label-5"
-        slug={slugFunc()}
+        slug={AILabelFunc()}
       />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-6" />
     </CheckboxGroup>
@@ -148,12 +148,12 @@ export const withAILabel = () => (
       <Checkbox
         labelText={`Checkbox label`}
         id="checkbox-label-7"
-        slug={slugFunc('inline')}
+        slug={AILabelFunc('inline')}
       />
       <Checkbox
         labelText={`Checkbox label`}
         id="checkbox-label-8"
-        slug={slugFunc('inline')}
+        slug={AILabelFunc('inline')}
       />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-9" />
     </CheckboxGroup>

@@ -19,7 +19,7 @@ export default {
     },
   },
   args: {
-    kind: 'error',
+    kind: 'info',
     lowContrast: false,
     statusIconDescription: 'notification',
   },
@@ -44,40 +44,6 @@ export const WithInteractiveElements = () => (
   </Callout>
 );
 
-export const WithActionButtonOnly = () => (
-  <Callout
-    title="Notification title"
-    titleId="notif-1"
-    kind="info"
-    lowContrast
-    actionButtonLabel="Learn More">
-    <div className="cds--inline-notification__subtitle">
-      Here is some important info you might want to know.{' '}
-    </div>
-  </Callout>
-);
-
-export const WithActionButtonAndLinks = () => (
-  <Callout
-    title="Notification title"
-    titleId="notif-1"
-    kind="info"
-    lowContrast
-    actionButtonLabel="Learn More">
-    <div className="cds--inline-notification__subtitle">
-      <Link inline href="#" aria-describedby="notif-1">
-        Create
-      </Link>{' '}
-      or{' '}
-      <Link inline href="#" aria-describedby="notif-1">
-        register
-      </Link>{' '}
-      a cluster before creating a Configuration. Some additional info could go
-      here to show that this notification subtitle goes below the title.
-    </div>
-  </Callout>
-);
-
 export const Playground = (args) => <Callout {...args} />;
 
 Playground.argTypes = {
@@ -90,6 +56,10 @@ Playground.argTypes = {
     table: {
       disable: true,
     },
+  },
+  kind: {
+    options: ['info', 'warning'],
+    control: { type: 'select' },
   },
 };
 Playground.args = {

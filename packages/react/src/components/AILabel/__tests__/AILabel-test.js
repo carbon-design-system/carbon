@@ -46,7 +46,7 @@ describe('AILabel', () => {
       const wrapper = render(<AILabel kind="inline" textLabel="Test text" />);
 
       const additionalTextSpan = wrapper.container.querySelector(
-        `.${prefix}--slug__additional-text`
+        `.${prefix}--ai-label__additional-text`
       );
       expect(additionalTextSpan).toBeInTheDocument();
       expect(additionalTextSpan).toHaveTextContent('Test text');
@@ -56,7 +56,7 @@ describe('AILabel', () => {
       const wrapper = render(<AILabel textLabel="Test text" />);
 
       const additionalTextSpan = wrapper.container.querySelector(
-        `.${prefix}--slug__additional-text`
+        `.${prefix}--ai-label__additional-text`
       );
       expect(additionalTextSpan).not.toBeInTheDocument();
     });
@@ -89,14 +89,14 @@ describe('AILabel', () => {
       render(<AILabel kind="inline" />);
 
       expect(screen.getByRole('button')).toHaveClass(
-        `${prefix}--slug__button--inline`
+        `${prefix}--ai-label__button--inline`
       );
     });
 
     it('should respect revertActive prop', () => {
       const { container } = render(<AILabel revertActive />);
 
-      expect(container.firstChild).toHaveClass(`${prefix}--slug--revert`);
+      expect(container.firstChild).toHaveClass(`${prefix}--ai-label--revert`);
       expect(container.firstChild.firstChild).toHaveClass(
         `${prefix}--icon-tooltip`
       );
@@ -112,7 +112,7 @@ describe('AILabel', () => {
       render(<AILabel size="xl" />);
 
       expect(screen.getByRole('button')).toHaveClass(
-        `${prefix}--slug__button--xl`
+        `${prefix}--ai-label__button--xl`
       );
     });
   });
