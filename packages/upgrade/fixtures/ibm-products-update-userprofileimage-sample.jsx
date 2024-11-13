@@ -1,10 +1,9 @@
-/* eslint-disable no-console */
 import React from 'react';
 import { UserProfileImage } from '@carbon/ibm-products';
 import { Add } from '@carbon/react/icons';
 
 const ImageUrl =
-  'https://img.freepik.com/free-photo/portrait-man-cartoon-style_23-2151133939.jpg?semt=ais_hybrid';
+  'https://assets.ibm.com/is/image/ibm/oday?wid1278&hei=718&fit=constrain,0&qlt=85,0';
 
 export const Example = () => (
   <>
