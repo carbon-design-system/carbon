@@ -306,7 +306,7 @@ export const withAILabel = (args) => {
     <Stack gap={7} className="form-example">
       <Form aria-label="sample form" className="ai-label-form">
         <Stack gap={7}>
-          <NumberInput {...numberInputProps} slug={aiLabel} {...rest} />
+          <NumberInput {...numberInputProps} decorator={aiLabel} {...rest} />
           <DatePicker datePickerType="single">
             <DatePickerInput
               placeholder="mm/dd/yyyy"
@@ -327,7 +327,7 @@ export const withAILabel = (args) => {
             label="Option 1"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
           <MultiSelect
@@ -400,7 +400,7 @@ export const withAILabel = (args) => {
           <FluidNumberInput
             {...numberInputProps}
             id="fluid-number-input"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
@@ -429,7 +429,7 @@ export const withAILabel = (args) => {
             label="Choose an option"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
