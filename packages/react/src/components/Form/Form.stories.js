@@ -272,7 +272,7 @@ const items = [
 export const withAILabel = (args) => {
   const { revertActive, ...rest } = args;
   const aiLabel = (
-    <AILabel className="slug-container" revertActive={revertActive}>
+    <AILabel className="ai-label-container" revertActive={revertActive}>
       <AILabelContent>
         <div>
           <p className="secondary">AI Explained</p>
@@ -304,9 +304,9 @@ export const withAILabel = (args) => {
 
   return (
     <Stack gap={7} className="form-example">
-      <Form aria-label="sample form" className="slug-form">
+      <Form aria-label="sample form" className="ai-label-form">
         <Stack gap={7}>
-          <NumberInput {...numberInputProps} slug={aiLabel} {...rest} />
+          <NumberInput {...numberInputProps} decorator={aiLabel} {...rest} />
           <DatePicker datePickerType="single">
             <DatePickerInput
               placeholder="mm/dd/yyyy"
@@ -327,7 +327,7 @@ export const withAILabel = (args) => {
             label="Option 1"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
           <MultiSelect
@@ -382,7 +382,7 @@ export const withAILabel = (args) => {
         </Stack>
       </Form>
 
-      <FluidForm aria-label="sample ai form" className="fluid-slug-form">
+      <FluidForm aria-label="sample ai form" className="fluid-ai-label-form">
         <div style={{ display: 'flex' }}>
           <FluidDatePicker datePickerType="single" style={{ width: '100%' }}>
             <FluidDatePickerInput
@@ -400,7 +400,7 @@ export const withAILabel = (args) => {
           <FluidNumberInput
             {...numberInputProps}
             id="fluid-number-input"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
@@ -429,7 +429,7 @@ export const withAILabel = (args) => {
             label="Choose an option"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
