@@ -3541,6 +3541,9 @@ Map {
       "compareItems": Object {
         "type": "func",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "direction": Object {
         "args": Array [
           Array [
@@ -3755,9 +3758,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "sortItems": Object {
         "type": "func",
       },
@@ -5221,6 +5222,9 @@ Map {
         "compareItems": Object {
           "type": "func",
         },
+        "decorator": Object {
+          "type": "node",
+        },
         "direction": Object {
           "args": Array [
             Array [
@@ -5435,9 +5439,7 @@ Map {
           ],
           "type": "oneOf",
         },
-        "slug": Object {
-          "type": "node",
-        },
+        "slug": [Function],
         "sortItems": Object {
           "type": "func",
         },
@@ -5474,6 +5476,9 @@ Map {
       },
       "compareItems": Object {
         "type": "func",
+      },
+      "decorator": Object {
+        "type": "node",
       },
       "direction": Object {
         "args": Array [
@@ -5562,9 +5567,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "sortItems": Object {
         "type": "func",
       },
@@ -6808,6 +6811,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "defaultValue": Object {
         "type": "any",
       },
@@ -6856,9 +6862,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "warn": Object {
         "type": "bool",
       },

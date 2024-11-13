@@ -512,7 +512,21 @@ export const FilterableWithAILabel = () => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       selectionFeedback="top-after-reopen"
-      slug={aiLabel}
+      decorator={aiLabel}
+    />
+    <FilterableMultiSelect
+      label="Multiselect Label"
+      id="carbon-multiselect-example"
+      titleText="Multiselect title"
+      helperText="This is helper text"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      selectionFeedback="top-after-reopen"
+      decorator={
+        <Tooltip>
+          <View />
+        </Tooltip>
+      }
     />
   </div>
 );
