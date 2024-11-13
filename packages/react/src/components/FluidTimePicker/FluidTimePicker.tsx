@@ -54,7 +54,7 @@ export interface FluidTimePickerProps extends FluidTextInputProps {
   warnText?: React.ReactNode;
 
   /**
-   * Whether or not the component is readonly
+   * Specify if the component is readonly
    */
   readOnly?: boolean;
 }
