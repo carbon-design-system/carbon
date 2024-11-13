@@ -84,20 +84,23 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
     } as CustomType);
   }
   return (
-    <fieldset
-      className={fieldsetClasses}
-      data-invalid={invalid ? true : undefined}
-      aria-labelledby={rest['aria-labelledby'] || legendId}
-      aria-readonly={readOnly}
-      aria-describedby={!invalid && !warn && helper ? helperId : undefined}
-      {...rest}>
-      <legend
-        className={`${prefix}--label`}
-        id={legendId || rest['aria-labelledby']}>
-        {legendText}
-        {normalizedSlug}
-      </legend>
-      {children}
+    <>
+      <fieldset
+        className={fieldsetClasses}
+        data-invalid={invalid ? true : undefined}
+        aria-labelledby={rest['aria-labelledby'] || legendId}
+        aria-readonly={readOnly}
+        aria-describedby={!invalid && !warn && helper ? helperId : undefined}
+        {...rest}>
+        <legend
+          className={`${prefix}--label`}
+          id={legendId || rest['aria-labelledby']}>
+          {legendText}
+          {normalizedSlug}
+        </legend>
+        {children}
+        {showHelper && helper}
+      </fieldset>
       <div className={`${prefix}--checkbox-group__validation-msg`}>
         {!readOnly && invalid && (
           <>
@@ -114,8 +117,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
           </>
         )}
       </div>
-      {showHelper && helper}
-    </fieldset>
+    </>
   );
 };
 
