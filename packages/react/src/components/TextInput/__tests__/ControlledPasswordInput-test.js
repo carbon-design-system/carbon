@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import ControlledPasswordInput from './ControlledPasswordInput';
+import ControlledPasswordInput from '../ControlledPasswordInput';
 import React from 'react';
 
 describe('ControlledPasswordInput Component', () => {
