@@ -432,10 +432,17 @@
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
     position: absolute;
-    block-size: 1rem;
     inset-block-start: 50%;
     inset-inline-end: $spacing-12;
     transform: translateY(-50%);
+  }
+
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator:not(
+      :has(.#{$prefix}--ai-label)
+    )
+    > * {
+    block-size: 1rem;
   }
 
   .#{$prefix}--number__input-wrapper--decorator
