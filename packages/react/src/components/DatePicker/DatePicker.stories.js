@@ -166,7 +166,7 @@ const aiLabel = (
 );
 
 export const withAILabel = () => (
-  <div style={{ width: 400 }}>
+  <div style={{ width: 400, display: 'flex', gap: '1rem' }}>
     <DatePicker datePickerType="single">
       <DatePickerInput
         placeholder="mm/dd/yyyy"
@@ -186,7 +186,7 @@ export const withAILabel = () => (
         id="date-picker"
         decorator={
           <Tooltip>
-            <Information></Information>
+            <Information />
           </Tooltip>
         }
       />
