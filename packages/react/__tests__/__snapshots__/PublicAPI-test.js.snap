@@ -6811,9 +6811,6 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "decorator": Object {
-        "type": "node",
-      },
       "defaultValue": Object {
         "type": "any",
       },
@@ -6862,7 +6859,9 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": [Function],
+      "slug": Object {
+        "type": "node",
+      },
       "warn": Object {
         "type": "bool",
       },
