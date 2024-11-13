@@ -203,7 +203,10 @@ export const Popover: PopoverComponent = React.forwardRef(
     // needs to be placed 1px further outside the popover content. To do so,
     // we look to see if any of the children has a className containing "slug"
     const initialCaretHeight = React.Children.toArray(children).some((x) => {
-      return (x as any)?.props?.className?.includes('slug');
+      return (
+        (x as any)?.props?.className?.includes('slug') ||
+        (x as any)?.props?.className?.includes('ai-label')
+      );
     })
       ? 7
       : 6;
