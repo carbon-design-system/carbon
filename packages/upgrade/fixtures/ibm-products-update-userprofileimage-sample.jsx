@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react';
-import { UserProfileImage } from '@carbon/ibm-products';
+import { UserAvatar } from '@carbon/ibm-products';
 import { Add } from '@carbon/react/icons';
 
 const ImageUrl =
@@ -8,38 +8,34 @@ const ImageUrl =
 
 export const Example = () => (
   <>
-    <UserProfileImage
+    <UserAvatar
       size="md"
       tooltipAlignment="bottom"
-      backgroundColor="light-purple"
-      theme="light"
+      backgroundColor="order-5-purple"
       tooltipText="Thomas Watson"
       className="myClass"
-      initials="thomas j. watson"
+      name="thomas j. watson"
     />
-    <UserProfileImage
+    <UserAvatar
       size="md"
       tooltipAlignment="bottom"
-      backgroundColor="light-purple"
-      theme="light"
+      backgroundColor="order-5-purple"
       tooltipText="Thomas Watson"
       className="myClass"
-      kind="user"
+      renderIcon="user"
     />
-    <UserProfileImage
+    <UserAvatar
       size="md"
       tooltipAlignment="bottom"
-      backgroundColor="light-purple"
-      theme="light"
+      backgroundColor="order-5-purple"
       tooltipText="Thomas Watson"
       className="myClass"
-      icon={() => <Add size={20} />}
+      renderIcon={() => <Add size={20} />}
     />
-    <UserProfileImage
+    <UserAvatar
       size="md"
       tooltipAlignment="bottom"
-      backgroundColor="light-purple"
-      theme="light"
+      backgroundColor="order-5-purple"
       tooltipText="Thomas Watson"
       className="myClass"
       image={ImageUrl}
