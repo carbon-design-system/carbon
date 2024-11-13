@@ -279,6 +279,10 @@
 
   // AILabel styles
   .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *,
+  .#{$prefix}--number-input--fluid
     .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--ai-label,
   .#{$prefix}--number-input--fluid
@@ -287,6 +291,14 @@
     inset-block-start: convert.to-rem(43px);
   }
 
+  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--decorator.#{$prefix}--number__input-wrapper--warning
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *,
   .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
     .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--ai-label,
@@ -303,6 +315,15 @@
   }
 
   .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--decorator
+    input,
+  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number__input-wrapper--decorator
+    input[data-invalid],
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--decorator.#{$prefix}--number__input-wrapper--warning
+    input,
+  .#{$prefix}--number-input--fluid
     .#{$prefix}--number__input-wrapper--slug
     input,
   .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
@@ -314,6 +335,10 @@
     padding-inline-end: convert.to-rem(120px);
   }
 
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--decorator:has(
+      .#{$prefix}--ai-label
+    ):not(:has(.#{$prefix}--ai-label--revert)),
   .#{$prefix}--number-input--fluid
     .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--ai-label):not(
       :has(.#{$prefix}--ai-label--revert)
