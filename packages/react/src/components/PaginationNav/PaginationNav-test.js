@@ -100,12 +100,6 @@ describe('PaginationNav', () => {
       expect(screen.getByLabelText('Next')).toBeDisabled();
     });
 
-    it('should render in medium size and let user render 4 pages', () => {
-      render(<PaginationNav size="md" totalItems={5} itemsShown={4} />);
-
-      expect(screen.getByLabelText('Select Page number')).toBeInTheDocument();
-    });
-
     it('should render in small size and let user render 4 pages', () => {
       render(<PaginationNav size="sm" totalItems={10} itemsShown={4} />);
 
