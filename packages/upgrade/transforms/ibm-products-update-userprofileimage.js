@@ -76,11 +76,14 @@ const transform = (fileInfo, api) => {
           if (colorMapping[attr.value.value]) {
             attr.value.value = colorMapping[attr.value.value];
           }
-        } else if (attr.name.name === 'theme') {
+        }
+        if (attr.name.name === 'theme') {
           return;
-        } else if (attr.name.name === 'initials') {
+        }
+        if (attr.name.name === 'initials') {
           attr.name.name = 'name';
-        } else if (attr.name.name === 'kind' || attr.name.name === 'icon') {
+        }
+        if (attr.name.name === 'kind' || attr.name.name === 'icon') {
           const originalName = attr.name.name;
           attr.name.name = 'renderIcon';
           if (originalName === 'kind' && attr.value.type === 'StringLiteral') {
@@ -92,14 +95,11 @@ const transform = (fileInfo, api) => {
               shouldImportGroup = true;
             }
           }
-          updatedAttributes.push(attr);
-        } else {
-          updatedAttributes.push(attr);
         }
+        updatedAttributes.push(attr);
       });
       path.node.openingElement.attributes = updatedAttributes;
     });
-
   // Update import statement
   root
     .find(j.ImportDeclaration)
