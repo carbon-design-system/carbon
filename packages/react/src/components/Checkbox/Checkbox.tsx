@@ -74,7 +74,7 @@ export interface CheckboxProps
   invalidText?: ReactNode;
 
   /**
-   * * @deprecated please use decorator instead.
+   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
    */
   slug?: ReactNode;
