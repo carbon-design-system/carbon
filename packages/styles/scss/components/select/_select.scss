@@ -279,10 +279,11 @@
     display: none;
   }
 
-  // Slug styles
+  // AILabel styles
 
   $divider-width: 1px;
 
+  .#{$prefix}--select--slug .#{$prefix}--ai-label,
   .#{$prefix}--select--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
@@ -291,6 +292,8 @@
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--select--slug .#{$prefix}--ai-label::after,
+  .#{$prefix}--select--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--select--slug .#{$prefix}--slug::after,
   .#{$prefix}--select--slug .#{$prefix}--slug::before {
     position: absolute;
@@ -300,33 +303,50 @@
     inline-size: convert.to-rem(1px);
   }
 
+  .#{$prefix}--select--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--select--slug .#{$prefix}--slug::before {
     display: none;
     inset-inline-start: calc(-#{$spacing-03} - #{$divider-width});
   }
 
+  .#{$prefix}--select--slug .#{$prefix}--ai-label::after,
   .#{$prefix}--select--slug .#{$prefix}--slug::after {
     display: block;
     inset-inline-end: calc(-#{$spacing-03} - #{$divider-width});
   }
 
+  .#{$prefix}--select--slug .#{$prefix}--ai-label--revert::after,
   .#{$prefix}--select--slug .#{$prefix}--slug--revert::after {
     inset-block-start: convert.to-rem(8px);
     inset-inline-end: convert.to-rem(-1px);
   }
 
   .#{$prefix}--select--slug
-    .#{$prefix}--select-input:not(:has(~ .#{$prefix}--slug--revert)) {
+    .#{$prefix}--select-input:has(~ .#{$prefix}--ai-label):not(
+      :has(~ .#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--select--slug
+    .#{$prefix}--select-input:has(~ .#{$prefix}--slug):not(
+      :has(~ .#{$prefix}--slug--revert)
+    ) {
     @include ai-gradient;
 
     padding-inline-end: $spacing-10;
   }
 
   .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
-    .#{$prefix}--select-input:not(:has(~ .#{$prefix}--slug--revert)) {
+    .#{$prefix}--select-input:has(~ .#{$prefix}--ai-label):not(
+      :has(~ .#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--select-input:has(~ .#{$prefix}--slug):not(
+      :has(~ .#{$prefix}--slug--revert)
+    ) {
     padding-inline-end: $spacing-12;
   }
 
+  .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--ai-label::before,
   .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
     .#{$prefix}--slug::before {
     display: block;

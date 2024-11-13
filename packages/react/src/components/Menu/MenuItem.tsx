@@ -377,10 +377,6 @@ export const MenuItemSelectable = forwardRef<
 
   function handleClick(e) {
     setChecked(!checked);
-
-    if (onChange) {
-      onChange(e);
-    }
   }
 
   useEffect(() => {

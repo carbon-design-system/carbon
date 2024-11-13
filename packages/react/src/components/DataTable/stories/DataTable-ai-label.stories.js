@@ -73,7 +73,7 @@ const columnAILabelHeaders = [
     header: 'Attached groups',
     slug: (
       <AILabel
-        className="slug-container"
+        className="ai-label-container"
         autoAlign={false}
         align="bottom-right">
         <AILabelContent>
@@ -113,7 +113,7 @@ const columnAILabelHeaders = [
 ];
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -371,7 +371,7 @@ export const ColumnAILabelWithSelectionAndExpansion = () => (
       <TableContainer
         title="DataTable"
         description="With expansion"
-        className="slug-column-table"
+        className="ai-label-column-table"
         {...getTableContainerProps()}>
         <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
@@ -436,7 +436,7 @@ export const ColumnAILabelSort = () => (
       <TableContainer
         title="DataTable"
         description="With sorting"
-        className="slug-column-table">
+        className="ai-label-column-table">
         <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
