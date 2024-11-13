@@ -272,7 +272,7 @@ export type ToggleTipButtonProps<T extends React.ElementType> =
  */
 
 export const ToggletipButton = React.forwardRef(function ToggletipButton<
-  T extends React.ElementType
+  T extends React.ElementType,
 >(
   {
     children,
