@@ -24,7 +24,7 @@ export const Example = () => (
       theme="light"
       tooltipText="Thomas Watson"
       className="myClass"
-      kind="user"
+      kind="group"
     />
     <UserProfileImage
       size="md"
