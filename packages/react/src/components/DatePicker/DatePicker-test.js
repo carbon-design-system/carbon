@@ -196,14 +196,14 @@ describe('DatePicker', () => {
     expect(ref).toHaveBeenCalledWith(container.firstChild);
   });
 
-  it('should respect slug prop', () => {
+  it('should respect decorator prop', () => {
     render(
       <DatePickerInput
         id="date-picker-input-id-start"
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"
         data-testid="input-value"
-        slug={<AILabel />}
+        decorator={<AILabel />}
       />
     );
 
