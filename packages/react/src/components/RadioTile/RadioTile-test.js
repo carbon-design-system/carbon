@@ -143,7 +143,7 @@ describe('RadioTile', () => {
         Option 1{' '}
       </RadioTile>
     );
-    expect(screen.getByRole('button')).toHaveClass(`cds--slug__button--xs`);
+    expect(screen.getByRole('button')).toHaveClass(`cds--ai-label__button--xs`);
   });
 
   //Feature flag : enable-v12-tile-radio-icons

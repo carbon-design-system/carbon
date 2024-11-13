@@ -6,7 +6,7 @@ import * as AILabelStories from './AILabel.stories';
 
 # AILabel
 
-[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Slug)
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/AILabel)
 |
 [AILabel release status](https://airtable.com/appCAqlGVN8tRUbAp/shr71ZyLlIGORz3Vh/tblHqPusgkK8hIeHo)
 |
@@ -80,7 +80,7 @@ callout. To achieve this, you can pass in `AILabelActions` as a child of
 If needed, you can change the text inside the `AILabel` when translating to
 different languages.
 
-<AILabel aiText="IA" className="sbdocs-slug">
+<AILabel aiText="IA" className="sbdocs-ai-label">
   <AILabelContent>Explanation of AI generated content</AILabelContent>
 </AILabel>
 
@@ -95,11 +95,11 @@ different languages.
 When using the `inline` variant, you can add text adjacent to the AI label with
 the `aiTextLabel` prop.
 
-<AILabel kind="inline" textLabel="Text goes here" className="sbdocs-slug">
+<AILabel kind="inline" textLabel="Text goes here" className="sbdocs-ai-label">
   <AILabelContent>Explanation of AI generated content</AILabelContent>
 </AILabel>
 <br />
-<AILabel kind="inline" className="sbdocs-slug">
+<AILabel kind="inline" className="sbdocs-ai-label">
   <AILabelContent>Explanation of AI generated content</AILabelContent>
 </AILabel>
 
@@ -117,7 +117,7 @@ the `aiTextLabel` prop.
 
 The `AILabel` component has two variants, `default` and `inline`.
 
-<AILabel size="xs" className="sbdocs-slug">
+<AILabel size="xs" className="sbdocs-ai-label">
   <AILabelContent>AI was used to generate this content</AILabelContent>
 </AILabel>
 
@@ -130,7 +130,7 @@ The `AILabel` component has two variants, `default` and `inline`.
 The `inline` `AILabel` with the standard icon can also trigger the AI
 explainability callout.
 
-<AILabel kind="inline" textLabel="Text goes here" className="sbdocs-slug">
+<AILabel kind="inline" textLabel="Text goes here" className="sbdocs-ai-label">
   <AILabelContent>Explanation of AI generated content</AILabelContent>
 </AILabel>
 
@@ -147,12 +147,12 @@ the `AILabel` into a revert action button. This is useful if a user edits an
 AI-generated input to show that the element has been modified. This can be used
 in conjunction with the `onRevertClick` callback to handle restoring the element
 to the AI-generated state. For an example, please take a look at the
-[Revert Test story](https://react.carbondesignsystem.com/?path=/story/experimental-unstable-slug-form--revert-test)
+[Revert Test story](https://react.carbondesignsystem.com/?path=/story/components-form--with-ai-label&args=revertActive:!true)
 or take a look at the example story
-[source code](https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Slug/Slug-form.stories.js#L96).
+[source code](https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Form/Form.stories.js#L272).
 
 ## Feedback
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Slug/Slug.mdx).
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/AILabel/AILabel.mdx).
