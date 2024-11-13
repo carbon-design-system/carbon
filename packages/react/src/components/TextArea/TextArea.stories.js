@@ -89,26 +89,13 @@ const aiLabel = (
 );
 
 export const withAILabel = () => (
-  <>
-    <TextArea
-      labelText="Text Area label"
-      helperText="Optional helper text"
-      rows={4}
-      id="text-area-5"
-      decorator={aiLabel}
-    />
-    <TextArea
-      labelText="Text Area label"
-      helperText="Optional helper text"
-      rows={4}
-      id="text-area-5"
-      decorator={
-        <Tooltip>
-          <Information></Information>
-        </Tooltip>
-      }
-    />
-  </>
+  <TextArea
+    labelText="Text Area label"
+    helperText="Optional helper text"
+    rows={4}
+    id="text-area-5"
+    decorator={aiLabel}
+  />
 );
 
 export const Skeleton = () => <TextAreaSkeleton />;

@@ -114,27 +114,13 @@ const aiLabel = (
 );
 
 export const withAILabel = () => (
-  <>
-    <TextInput
-      type="text"
-      labelText="Text input label"
-      helperText="Optional help text"
-      id="text-input-ai-label"
-      decorator={aiLabel}
-    />
-    <br />
-    <TextInput
-      type="text"
-      labelText="Text input label"
-      helperText="Optional help text"
-      id="text-input-ai-label"
-      decorator={
-        <Tooltip>
-          <Information></Information>
-        </Tooltip>
-      }
-    />
-  </>
+  <TextInput
+    type="text"
+    labelText="Text input label"
+    helperText="Optional help text"
+    id="text-input-ai-label"
+    decorator={aiLabel}
+  />
 );
 
 export const Skeleton = () => <TextInputSkeleton />;

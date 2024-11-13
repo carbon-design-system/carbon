@@ -46,8 +46,7 @@
     font-family: inherit;
 
     inline-size: 100%;
-    transition:
-      background-color $duration-fast-01 motion(standard, productive),
+    transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
 
     &:focus,
@@ -287,8 +286,7 @@
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
     position: relative;
     background: $field;
-    transition:
-      background-color $duration-fast-01 motion(standard, productive),
+    transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
 
@@ -511,6 +509,15 @@
   .#{$prefix}--text-input--invalid ~ .#{$prefix}--slug,
   .#{$prefix}--text-input--warning ~ .#{$prefix}--slug {
     inset-inline-end: $spacing-08;
+  }
+
+  // Decorator
+  .#{$prefix}--text-input__field-wrapper--decorator
+    .#{$prefix}--text-input__field-inner-wrapper--decorator:not(
+      :has(.#{$prefix}--ai-label)
+    )
+    > * {
+    block-size: 1rem;
   }
 
   // Windows HCM fix
