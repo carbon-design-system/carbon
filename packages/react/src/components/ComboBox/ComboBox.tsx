@@ -205,6 +205,11 @@ export interface ComboBoxProps<ItemType>
   className?: string;
 
   /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `ComboBox` component
+   */
+  decorator?: ReactNode;
+
+  /**
    * Specify the direction of the combobox dropdown. Can be either top or bottom.
    */
   direction?: 'top' | 'bottom';
@@ -349,6 +354,7 @@ export interface ComboBoxProps<ItemType>
   size?: ListBoxSize;
 
   /**
+   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `ComboBox` component
    */
   slug?: ReactNode;
@@ -388,6 +394,7 @@ const ComboBox = forwardRef(
       ariaLabel: deprecatedAriaLabel,
       autoAlign = false,
       className: containerClassName,
+      decorator,
       direction = 'bottom',
       disabled = false,
       downshiftActions,
@@ -532,12 +539,12 @@ const ComboBox = forwardRef(
         typeahead
           ? autocompleteCustomFilter({ item: itemToString(item), inputValue })
           : shouldFilterItem
-            ? shouldFilterItem({
-                item,
-                itemToString,
-                inputValue,
-              })
-            : defaultShouldFilterItem()
+          ? shouldFilterItem({
+              item,
+              itemToString,
+              inputValue,
+            })
+          : defaultShouldFilterItem()
       );
 
     useEffect(() => {
@@ -695,6 +702,7 @@ const ComboBox = forwardRef(
         [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
         [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
         [`${prefix}--list-box__wrapper--slug`]: slug,
+        [`${prefix}--list-box__wrapper--decorator`]: decorator,
       },
     ]);
 
@@ -706,12 +714,20 @@ const ComboBox = forwardRef(
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
 
-    // Slug is always size `mini`
-    let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'AILabel') {
-      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size: 'mini',
-      });
+    // AILabel always size `mini`
+    let normalizedDecorator = React.isValidElement(slug ?? decorator)
+      ? slug ?? decorator
+      : null;
+    if (
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel'
+    ) {
+      normalizedDecorator = React.cloneElement(
+        normalizedDecorator as React.ReactElement<any>,
+        {
+          size: 'mini',
+        }
+      );
     }
 
     const {
@@ -1035,7 +1051,15 @@ const ComboBox = forwardRef(
               translateWithId={translateWithId}
             />
           </div>
-          {normalizedSlug}
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
           <ListBox.Menu {...menuProps}>
             {isOpen
               ? filterItems(items, itemToString, inputValue).map(
@@ -1129,6 +1153,11 @@ ComboBox.propTypes = {
    * An optional className to add to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `ComboBox` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify the direction of the combobox dropdown. Can be either top or bottom.
@@ -1280,10 +1309,10 @@ ComboBox.propTypes = {
    */
   size: ListBoxPropTypes.ListBoxSize,
 
-  /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComboBox` component
-   */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the
