@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import InlineCheckbox from './InlineCheckbox';
-
+import InlineCheckbox, { type InlineCheckboxProps } from './InlineCheckbox';
 export default InlineCheckbox;
-export { InlineCheckbox };
+export { InlineCheckbox, type InlineCheckboxProps };
