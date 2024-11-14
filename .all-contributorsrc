@@ -1277,6 +1277,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/56911544?v=4",
       "profile": "https://github.com/Zoe-Gathercole",
       "contributions": ["code"]
+    },
+    {
+      "login": "gdelory",
+      "name": "Guillaume Delory",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9974707?v=4",
+      "profile": "https://github.com/gdelory",
+      "contributions": ["code"]
     }
   ],
   "commitConvention": "none"
