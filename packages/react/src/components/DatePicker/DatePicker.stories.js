@@ -15,9 +15,10 @@ import DatePickerInput from '../DatePickerInput';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
-import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 
 import mdx from './DatePicker.mdx';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/DatePicker',
@@ -165,14 +166,29 @@ const aiLabel = (
 );
 
 export const withAILabel = () => (
-  <div style={{ width: 400 }}>
+  <div style={{ width: 400, display: 'flex', gap: '1rem' }}>
     <DatePicker datePickerType="single">
       <DatePickerInput
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"
         size="md"
         id="date-picker"
-        slug={aiLabel}
+        decorator={aiLabel}
+      />
+    </DatePicker>
+
+    {/* Test decorator with Tooltip TO BE REMOVED!! */}
+    <DatePicker datePickerType="single">
+      <DatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        size="md"
+        id="date-picker"
+        decorator={
+          <Tooltip>
+            <Information />
+          </Tooltip>
+        }
       />
     </DatePicker>
   </div>
