@@ -40,7 +40,7 @@ export interface DatePickerInputProps
   datePickerType?: 'simple' | 'single' | 'range';
 
   /**
-   * **Experimental**: Provide a `decorator` component to be rendered inside the `RadioButton` component
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `DatePickerInput` component
    */
   decorator?: ReactNode;
 
