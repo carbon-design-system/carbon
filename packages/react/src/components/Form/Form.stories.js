@@ -317,8 +317,8 @@ export const withAILabel = (args) => {
               {...rest}
             />
           </DatePicker>
-          <TextInput {...TextInputProps} slug={aiLabel} {...rest} />
-          <TextArea {...textareaProps} slug={aiLabel} {...rest} />
+          <TextInput {...TextInputProps} decorator={aiLabel} {...rest} />
+          <TextArea {...textareaProps} decorator={aiLabel} {...rest} />
           <Dropdown
             id="default"
             titleText="Dropdown title"
@@ -408,7 +408,7 @@ export const withAILabel = (args) => {
           <FluidTextInput
             {...TextInputProps}
             id="fluid-text-input"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
@@ -416,7 +416,7 @@ export const withAILabel = (args) => {
           <FluidTextArea
             {...textareaProps}
             id="fluid-text-area"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
