@@ -249,9 +249,14 @@ describe('TreeView', () => {
       const parentNode = screen.getByTestId('parent-node');
       const childNode1 = screen.getByTestId('child-node-1');
 
+      // Focus on the parent node
       parentNode.focus();
       expect(parentNode).toHaveFocus();
+
+      // Press the right arrow key
       await user.keyboard('[ArrowRight]');
+
+      // Check if the first child node is now focused
       expect(childNode1).toHaveFocus();
     });
 
