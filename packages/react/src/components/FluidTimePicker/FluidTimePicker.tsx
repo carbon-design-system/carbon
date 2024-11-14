@@ -115,12 +115,12 @@ const FluidTimePicker = React.forwardRef<
               });
             })
           : readOnly
-          ? React.Children.toArray(children).map((child) => {
-              return React.cloneElement(child as React.ReactElement, {
-                readOnly: true,
-              });
-            })
-          : children}
+            ? React.Children.toArray(children).map((child) => {
+                return React.cloneElement(child as React.ReactElement, {
+                  readOnly: true,
+                });
+              })
+            : children}
       </div>
       {error && <hr className={`${prefix}--time-picker__divider`} />}
       {error && (
