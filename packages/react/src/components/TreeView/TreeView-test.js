@@ -270,13 +270,25 @@ describe('TreeView', () => {
       );
 
       const parentNode = screen.getByTestId('parent-node');
+
+      // Initially, the parent node should not be expanded
       expect(parentNode).not.toHaveAttribute('aria-expanded', 'true');
+
+      // Focus on the parent node
       parentNode.focus();
       expect(parentNode).toHaveFocus();
+
+      // Press the right arrow key
       await user.keyboard('[ArrowRight]');
+
+      // The parent node should now be expanded
       expect(parentNode).toHaveAttribute('aria-expanded', 'true');
+
+      // Now that the parent is expanded, we can check for the child node
       const childNode = screen.getByTestId('child-node');
       expect(childNode).toBeInTheDocument();
+
+      // The parent node should still have focus
       expect(parentNode).toHaveFocus();
     });
   });
