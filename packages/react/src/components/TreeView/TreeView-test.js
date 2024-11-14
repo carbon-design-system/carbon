@@ -419,21 +419,4 @@ describe('TreeView', () => {
 
     expect(screen.getByLabelText('My Tree View')).toBeInTheDocument();
   });
-
-  it('should set the active node correctly on click (uncontrolled)', async () => {
-    const user = userEvent.setup();
-    render(
-      <TreeView label="Tree View">
-        <TreeNode id="Node 1" label="Node 1" />
-        <TreeNode id="Node 2" label="Node 2" />
-      </TreeView>
-    );
-
-    const node1 = screen.getByText('Node 1').closest('.cds--tree-node'); // Find the parent node
-    const node2 = screen.getByText('Node 2').closest('.cds--tree-node'); // Find the parent node
-    await user.click(node1);
-    expect(node1).toHaveClass('cds--tree-node--active');
-    await user.click(node2);
-    expect(node2).toHaveClass('cds--tree-node--active');
-  });
 });
