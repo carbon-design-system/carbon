@@ -3,12 +3,10 @@ import { Button, Layer } from '@carbon/react';
 
 function TestComponent() {
   <div>
-    <Layer>
-      <Button>Click me</Button>
-    </Layer>
+    <Button light>Click me</Button>
     <Button>Another button</Button>
     <Layer>
-      <Button>Nested light button</Button>
+      <Button light>Nested light button</Button>
     </Layer>
   </div>;
 }
