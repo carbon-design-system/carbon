@@ -375,4 +375,21 @@ describe('TreeView', () => {
     );
     expect(screen.queryByText('Tree View')).not.toBeInTheDocument();
   });
+
+  it('should render custom icons in TreeNode', () => {
+    const CustomIcon = () => <svg data-testid="custom-icon" />;
+
+    render(
+      <TreeView label="Tree View">
+        <TreeNode id="Node 1" label="Node 1" renderIcon={CustomIcon} />
+        <TreeNode id="Node 2" label="Node 2" />
+      </TreeView>
+    );
+
+    const node1Icon = screen.getByTestId('custom-icon');
+    const node2 = screen.getByText('Node 2');
+
+    expect(node1Icon).toBeInTheDocument();
+    expect(node2.querySelector('svg')).toBeNull();
+  });
 });
