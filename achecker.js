@@ -13,7 +13,15 @@ module.exports = {
   ruleArchive: 'versioned',
   policies: ['Custom_Ruleset'],
   failLevels: ['violation'],
-  reportLevels: ['violation'],
+  reportLevels: !process.env.CI
+    ? ['violation']
+    : [
+        'violation',
+        'potentialviolation',
+        'recommendation',
+        'potentialrecommendation',
+        'manual',
+      ],
   outputFormat: ['json'],
   outputFolder: path.join('.avt', 'reports'),
   baselineFolder: path.join('.avt', 'baseline'),
