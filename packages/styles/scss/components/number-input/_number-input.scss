@@ -427,6 +427,9 @@
   }
 
   // Styles for `AILabel` rendered inside `NumberInput`
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
     position: absolute;
@@ -435,6 +438,13 @@
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__control-btn::after,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before,
   .#{$prefix}--number__input-wrapper--slug
@@ -447,6 +457,9 @@
     content: '';
     inline-size: convert.to-rem(1px);
   }
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *::before,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
     display: none;
@@ -458,12 +471,16 @@
     inset-inline-end: 0;
   }
 
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__control-btn::before,
   .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--number__control-btn::before {
     display: block;
     inset-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__control-btn:focus::before,
   .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--number__control-btn:focus::before {
     display: none;
@@ -476,6 +493,8 @@
   }
 
   .#{$prefix}--number__input-wrapper:has(.#{$prefix}--number__control-btn:hover)
+    ~ .#{$prefix}--number__input-wrapper--decorator::after,
+  .#{$prefix}--number__input-wrapper:has(.#{$prefix}--number__control-btn:hover)
     ~ .#{$prefix}--number__input-wrapper--slug::after {
     display: none;
   }
@@ -485,10 +504,18 @@
     display: none;
   }
 
+  .#{$prefix}--number__input-wrapper--decorator .#{$prefix}--number__invalid,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
     inset-inline-end: $spacing-13 - $spacing-05;
   }
 
+  .#{$prefix}--number__input-wrapper--decorator:has(
+      .#{$prefix}--number__invalid
+    )
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--number__invalid)
+    .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--number__invalid)
     .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--number__invalid)
@@ -496,6 +523,12 @@
     display: block;
   }
 
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--decorator
+    input[data-invalid],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--decorator.#{$prefix}--number__input-wrapper--warning
+    input,
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--slug
     input[data-invalid],
@@ -505,6 +538,16 @@
     padding-inline-end: convert.to-rem(144px);
   }
 
+  .#{$prefix}--number__input-wrapper--decorator
+    input[type='number']:has(
+      ~ .#{$prefix}--number__input-inner-wrapper--decorator
+        .#{$prefix}--ai-label
+    ):not(
+      :has(
+          ~ .#{$prefix}--number__input-inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
   .#{$prefix}--number__input-wrapper--slug
     input[type='number']:has(~ .#{$prefix}--ai-label):not(
       :has(~ .#{$prefix}--ai-label--revert)
@@ -563,10 +606,13 @@
   display: none;
 }
 
+.#{$prefix}--number__input-wrapper--decorator .#{$prefix}--number__rule-divider,
 .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__rule-divider {
   display: none;
 }
 
+.#{$prefix}--number__input-wrapper--decorator
+  .#{$prefix}--number__control-btn:hover,
 .#{$prefix}--number__input-wrapper--slug
   .#{$prefix}--number__control-btn:hover {
   box-shadow: 0 -1px 0 $ai-border-strong inset;
