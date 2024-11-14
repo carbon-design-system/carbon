@@ -5,3 +5,6 @@ snapshot:
     - 360
     - 1366
   minHeight: 1024
+discovery:
+  allowed-hostnames:
+    - 1.www.s81c.com

@@ -43,6 +43,7 @@ import { noopFn } from '../../internal/noopFn';
 import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { useFeatureFlag } from '../FeatureFlags';
 import { warning } from '../../internal/warning';
+import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -493,9 +494,7 @@ export function ToastNotification({
         <NotificationButton
           notificationType="toast"
           onClick={handleCloseButtonClick}
-          aria-hidden="true"
           aria-label={deprecatedAriaLabel || ariaLabel}
-          tabIndex={-1}
         />
       )}
     </div>
@@ -739,9 +738,7 @@ export function InlineNotification({
         <NotificationButton
           notificationType="inline"
           onClick={handleCloseButtonClick}
-          aria-hidden="true"
           aria-label={ariaLabel}
-          tabIndex={-1}
         />
       )}
     </div>
@@ -1207,6 +1204,30 @@ ActionableNotification.propTypes = {
  * ==================
  */
 
+/**
+ * Deprecated callout kind values.
+ * @deprecated Use NewKindProps instead.
+ */
+export type DeprecatedKindProps =
+  | 'error'
+  | 'info'
+  | 'info-square'
+  | 'success'
+  | 'warning'
+  | 'warning-alt';
+
+export type NewKindProps = 'warning' | 'info';
+
+export type KindProps = DeprecatedKindProps | NewKindProps;
+
+const propMappingFunction = (deprecatedValue) => {
+  const mapping = {
+    error: 'warning', // only redirect error -> warning
+    success: 'info', // only redirect success -> info
+  };
+  return mapping[deprecatedValue];
+};
+
 export interface CalloutProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Pass in the action button label that will be rendered within the ActionableNotification.
@@ -1226,13 +1247,7 @@ export interface CalloutProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify what state the notification represents
    */
-  kind?:
-    | 'error'
-    | 'info'
-    | 'info-square'
-    | 'success'
-    | 'warning'
-    | 'warning-alt';
+  kind?: KindProps;
 
   /**
    * Specify whether you are using the low contrast variant of the Callout.
@@ -1274,11 +1289,12 @@ export function Callout({
   subtitle,
   statusIconDescription,
   className,
-  kind = 'error',
+  kind = 'info',
   lowContrast,
   ...rest
 }: CalloutProps) {
   const prefix = usePrefix();
+
   const containerClassName = cx(className, {
     [`${prefix}--actionable-notification`]: true,
     [`${prefix}--actionable-notification--low-contrast`]: lowContrast,
@@ -1352,14 +1368,18 @@ Callout.propTypes = {
   /**
    * Specify what state the notification represents
    */
-  kind: PropTypes.oneOf([
-    'error',
-    'info',
-    'info-square',
-    'success',
-    'warning',
-    'warning-alt',
-  ]),
+  kind: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'error',
+      'info',
+      'info-square',
+      'success',
+      'warning',
+      'warning-alt',
+    ]),
+    ['warning', 'info'],
+    propMappingFunction
+  ),
 
   /**
    * Specify whether you are using the low contrast variant of the Callout.

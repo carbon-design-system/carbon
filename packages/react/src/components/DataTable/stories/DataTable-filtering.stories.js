@@ -21,13 +21,16 @@ import DataTable, {
   TableToolbarSearch,
   TableToolbarMenu,
   TableToolbarAction,
+  TableBatchActions,
+  TableBatchAction,
+  TableSelectAll,
+  TableSelectRow,
 } from '..';
 import { rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
 import TableToolbarFilter from './examples/TableToolbarFilter';
-import Checkbox from '../../Checkbox';
-import { usePrefix } from '../../../internal/usePrefix';
 import './datatable-story.scss';
+import { Add, Download, Save, TrashCan } from '@carbon/icons-react';
 
 export default {
   title: 'Components/DataTable/Filtering',
@@ -208,8 +211,8 @@ export const Playground = (args) => {
             <TableToolbarContent>
               {/* pass in `onInputChange` change here to make filtering work */}
               <TableToolbarSearch
-                onChange={(evt) => {
-                  action('TableToolbarSearch - onChange')(evt);
+                onChange={(evt, value) => {
+                  action(`TableToolbarSearch - onChange ${value}`)(evt);
                   onInputChange(evt);
                 }}
               />

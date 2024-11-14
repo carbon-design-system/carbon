@@ -84,7 +84,9 @@
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type {
-    box-shadow: inset 0 -1px $focus, inset -2px 0 $focus;
+    box-shadow:
+      inset 0 -1px $focus,
+      inset -2px 0 $focus;
   }
 
   .#{$prefix}--number-input--fluid
@@ -275,13 +277,34 @@
     background-color: transparent;
   }
 
-  // Slug styles
+  // AILabel styles
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--slug
+    .#{$prefix}--ai-label,
   .#{$prefix}--number-input--fluid
     .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--slug {
     inset-block-start: convert.to-rem(43px);
   }
 
+  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--decorator.#{$prefix}--number__input-wrapper--warning
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *,
+  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number__input-wrapper--slug
+    .#{$prefix}--ai-label,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
+    .#{$prefix}--ai-label,
   .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
     .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--slug,
@@ -291,6 +314,15 @@
     inset-inline-end: convert.to-rem(88px);
   }
 
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--decorator
+    input,
+  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number__input-wrapper--decorator
+    input[data-invalid],
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--decorator.#{$prefix}--number__input-wrapper--warning
+    input,
   .#{$prefix}--number-input--fluid
     .#{$prefix}--number__input-wrapper--slug
     input,
@@ -304,7 +336,15 @@
   }
 
   .#{$prefix}--number-input--fluid
-    .#{$prefix}--number__input-wrapper--slug:not(
+    .#{$prefix}--number__input-wrapper--decorator:has(
+      .#{$prefix}--ai-label
+    ):not(:has(.#{$prefix}--ai-label--revert)),
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--ai-label):not(
+      :has(.#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--slug):not(
       :has(.#{$prefix}--slug--revert)
     ) {
     @include ai-gradient;

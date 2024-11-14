@@ -21,15 +21,11 @@ const FluidSelectSkeleton: React.FC<FluidSelectSkeletonProps> = ({
   ...rest
 }) => {
   const prefix = usePrefix();
-  const wrapperClasses = cx(
-    className,
-    `${prefix}--skeleton`,
-    `${prefix}--list-box`
-  );
+  const wrapperClasses = cx(className, `${prefix}--list-box__wrapper--fluid`);
 
   return (
-    <div className={`${prefix}--list-box__wrapper--fluid`}>
-      <div className={wrapperClasses} {...rest}>
+    <div className={wrapperClasses} {...rest}>
+      <div className={`${prefix}--skeleton ${prefix}--list-box`}>
         <span className={`${prefix}--list-box__label`} />
         <div className={`${prefix}--list-box__field`} />
       </div>

@@ -275,6 +275,93 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   };
 
   /**
+   * Sets calendar options
+   * @param property property to set
+   * @param calendar calendar object
+   */
+  private _setCalendar(property, calendar) {
+    const { disabled, dateFormat, open, readonly, minDate, maxDate, value } =
+      this;
+
+    const { selectorInputFrom, selectorInputTo } = this
+      .constructor as typeof CDSDatePicker;
+    const inputFrom = this.querySelector(
+      selectorInputFrom
+    ) as CDSDatePickerInput;
+    const inputTo = this.querySelector(selectorInputTo) as CDSDatePickerInput;
+
+    if (property === 'dateFormat') {
+      calendar.set({ dateFormat });
+    }
+    if (property === 'date') {
+      if (!parseISODateString(minDate)) {
+        // Allows empty start/end
+        throw new Error(
+          `Wrong date format found in \`minDate\` property: ${minDate}`
+        );
+      }
+      if (!parseISODateString(maxDate)) {
+        // Allows empty start/end
+        throw new Error(
+          `Wrong date format found in \`maxDate\` property: ${maxDate}`
+        );
+      }
+      if (minDate && maxDate && minDate > maxDate) {
+        throw new Error(
+          `\`maxDate\` property, shouldn't be smaller than the \`minDate\` property. You have: minDate: ${minDate}, maxDate: ${maxDate}`
+        );
+      }
+      calendar.set({ minDate, maxDate });
+    }
+    if (property === 'open') {
+      if (open && !readonly) {
+        calendar.open();
+      } else {
+        calendar.close();
+      }
+    }
+    if (property === 'disabled') {
+      [inputFrom, inputTo].forEach((input) => {
+        if (input) {
+          input.disabled = disabled;
+          input.readonly = readonly;
+        }
+      });
+    }
+    if (property === 'value') {
+      const dates = value
+        .split('/')
+        .filter(Boolean)
+        .map((item) => parseISODateString(item));
+      if (dates.some((item) => isNaN(Number(item)))) {
+        throw new Error(
+          `Wrong date format found in \`value\` property: ${value}`
+        );
+      }
+      const [startDate, endDate] = dates;
+      if (startDate && endDate && startDate > endDate) {
+        throw new Error(
+          `In \`value\` property, the end date shouldn't be smaller than the start date. You have: ${value}`
+        );
+      }
+      if (calendar) {
+        calendar.setDate(dates);
+        [inputFrom, inputTo].forEach((input, i) => {
+          if (input) {
+            input.value = !dates[i]
+              ? ''
+              : calendar.formatDate(
+                  new Date(dates[i]),
+                  calendar.config.dateFormat
+                );
+          }
+        });
+      }
+    }
+    return calendar;
+  }
+
+  /**
    * Instantiates Flatpickr.
    *
    * @returns The Flatpickr instance.
@@ -286,10 +373,41 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
     // which means Flatpickr will never be instantiated in "simple" mode.
     if (dateInteractNode && dateInteractNode.input) {
       this.calendar = flatpickr(
-        dateInteractNode as any,
+        dateInteractNode.input as any,
         this._datePickerOptions
       );
     }
+
+    const {
+      calendar,
+      disabled,
+      dateFormat,
+      open,
+      readonly,
+      minDate,
+      maxDate,
+      value,
+    } = this;
+
+    if (dateFormat) {
+      this._setCalendar('dateFormat', calendar);
+    }
+
+    if (minDate || maxDate) {
+      this._setCalendar('date', calendar);
+    }
+
+    if (open) {
+      this._setCalendar('open', calendar);
+    }
+
+    if (disabled || readonly) {
+      this._setCalendar('disabled', calendar);
+    }
+    if (value) {
+      this._setCalendar('value', calendar);
+    }
+
     return this.calendar;
   }
 
@@ -400,89 +518,25 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   }
 
   updated(changedProperties) {
-    const { calendar, disabled, open, readonly } = this;
-    const { selectorInputFrom, selectorInputTo } = this
-      .constructor as typeof CDSDatePicker;
-    const inputFrom = this.querySelector(
-      selectorInputFrom
-    ) as CDSDatePickerInput;
-    const inputTo = this.querySelector(selectorInputTo) as CDSDatePickerInput;
+    const { calendar } = this;
     if (calendar && changedProperties.has('dateFormat')) {
-      const { dateFormat } = this;
-      calendar.set({ dateFormat });
+      this._setCalendar('dateFormat', calendar);
     }
     if (changedProperties.has('minDate') || changedProperties.has('maxDate')) {
-      const { minDate, maxDate } = this;
-      if (!parseISODateString(minDate)) {
-        // Allows empty start/end
-        throw new Error(
-          `Wrong date format found in \`minDate\` property: ${minDate}`
-        );
-      }
-      if (!parseISODateString(maxDate)) {
-        // Allows empty start/end
-        throw new Error(
-          `Wrong date format found in \`maxDate\` property: ${maxDate}`
-        );
-      }
-      if (minDate && maxDate && minDate > maxDate) {
-        throw new Error(
-          `\`maxDate\` property, shouldn't be smaller than the \`minDate\` property. You have: minDate: ${minDate}, maxDate: ${maxDate}`
-        );
-      }
-      if (calendar) {
-        calendar.set({ minDate, maxDate });
-      }
+      this._setCalendar('date', calendar);
     }
 
     if (changedProperties.has('open') && calendar) {
-      if (open && !readonly) {
-        calendar.open();
-      } else {
-        calendar.close();
-      }
+      this._setCalendar('open', calendar);
     }
     if (
       changedProperties.has('disabled') ||
       changedProperties.has('readonly')
     ) {
-      [inputFrom, inputTo].forEach((input) => {
-        if (input) {
-          input.disabled = disabled;
-          input.readonly = readonly;
-        }
-      });
+      this._setCalendar('disabled', calendar);
     }
     if (changedProperties.has('value')) {
-      const { value } = this;
-      const dates = value
-        .split('/')
-        .filter(Boolean)
-        .map((item) => parseISODateString(item));
-      if (dates.some((item) => isNaN(Number(item)))) {
-        throw new Error(
-          `Wrong date format found in \`value\` property: ${value}`
-        );
-      }
-      const [startDate, endDate] = dates;
-      if (startDate && endDate && startDate > endDate) {
-        throw new Error(
-          `In \`value\` property, the end date shouldn't be smaller than the start date. You have: ${value}`
-        );
-      }
-      if (calendar) {
-        calendar.setDate(dates);
-        [inputFrom, inputTo].forEach((input, i) => {
-          if (input) {
-            input.value = !dates[i]
-              ? ''
-              : calendar.formatDate(
-                  new Date(dates[i]),
-                  calendar.config.dateFormat
-                );
-          }
-        });
-      }
+      this._setCalendar('value', calendar);
     }
   }
 
