@@ -9,10 +9,11 @@ import React from 'react';
 
 import { Stack, StackProps } from './Stack';
 
-const VStack = React.forwardRef<React.ReactNode, StackProps>(
-  function VStack(props, ref) {
-    return <Stack {...props} ref={ref} orientation="vertical" />;
-  }
-);
+const VStack = React.forwardRef<React.ReactNode, StackProps>(function VStack(
+  props,
+  ref
+) {
+  return <Stack {...props} ref={ref} orientation="vertical" />;
+});
 
 export { VStack };
