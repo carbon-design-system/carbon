@@ -13,6 +13,8 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import '../AILabel/ailabel-story.scss';
+import { Tooltip } from '../Tooltip';
+import { Information } from '@carbon/icons-react';
 import mdx from './Tag.mdx';
 
 export default {
@@ -217,13 +219,17 @@ const aiLabel = (
 
 export const withAILabel = () => (
   <div style={{ marginBottom: '4rem' }}>
-    <Tag slug={aiLabel} className="some-class" type="red" title="Clear Filter">
+    <Tag
+      decorator={aiLabel}
+      className="some-class"
+      type="red"
+      title="Clear Filter">
       {'Tag'}
     </Tag>
 
     <Tag
       filter
-      slug={aiLabel}
+      decorator={aiLabel}
       className="some-class"
       type="purple"
       title="Clear Filter">
@@ -232,7 +238,7 @@ export const withAILabel = () => (
 
     <Tag
       renderIcon={Asleep}
-      slug={aiLabel}
+      decorator={aiLabel}
       className="some-class"
       type="blue"
       title="Clear Filter">
@@ -242,7 +248,58 @@ export const withAILabel = () => (
     <Tag
       filter
       renderIcon={Asleep}
-      slug={aiLabel}
+      decorator={aiLabel}
+      className="some-class"
+      type="green"
+      title="Clear Filter">
+      {'Tag'}
+    </Tag>
+    <Tag
+      decorator={
+        <Tooltip label={'hello'}>
+          <Information />
+        </Tooltip>
+      }
+      className="some-class"
+      type="red"
+      title="Clear Filter">
+      {'Tag'}
+    </Tag>
+
+    <Tag
+      filter
+      decorator={
+        <Tooltip label={'hello'}>
+          <Information />
+        </Tooltip>
+      }
+      className="some-class"
+      type="purple"
+      title="Clear Filter">
+      {'Tag'}
+    </Tag>
+
+    <Tag
+      renderIcon={Asleep}
+      decorator={
+        <Tooltip label={'hello'}>
+          <Information />
+        </Tooltip>
+      }
+      className="some-class"
+      type="blue"
+      title="Clear Filter">
+      {'Tag'}
+    </Tag>
+
+    <Tag
+      filter
+      renderIcon={Asleep}
+      decorator={
+        <Tooltip label={'hello'}>
+          <Information />
+        </Tooltip>
+      }
       className="some-class"
       type="green"
       title="Clear Filter">

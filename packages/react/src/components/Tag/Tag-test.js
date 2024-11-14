@@ -90,12 +90,22 @@ describe('Tag', () => {
     expect(screen.getByTestId('test')).toBeInTheDocument();
   });
 
-  it('should respect slug prop', () => {
+  it('should respect decorator prop', () => {
+    render(<Tag type="red" decorator={<AILabel />} />);
+
+    expect(
+      screen.getByRole('button', { name: 'AI - Show information' })
+    ).toBeInTheDocument();
+  });
+
+  it('should respect deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     render(<Tag type="red" slug={<AILabel />} />);
 
     expect(
       screen.getByRole('button', { name: 'AI - Show information' })
     ).toBeInTheDocument();
+    spy.mockRestore();
   });
 
   describe('Selectable Tag', () => {
