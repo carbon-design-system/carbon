@@ -392,4 +392,14 @@ describe('TreeView', () => {
     expect(node1Icon).toBeInTheDocument();
     expect(node2.querySelector('svg')).toBeNull();
   });
+  it('should render the label correctly', () => {
+    render(
+      <TreeView label="My Tree View">
+        <TreeNode id="Node 1" label="Node 1" />
+        <TreeNode id="Node 2" label="Node 2" />
+      </TreeView>
+    );
+
+    expect(screen.getByLabelText('My Tree View')).toBeInTheDocument();
+  });
 });
