@@ -249,14 +249,9 @@ describe('TreeView', () => {
       const parentNode = screen.getByTestId('parent-node');
       const childNode1 = screen.getByTestId('child-node-1');
 
-      // Focus on the parent node
       parentNode.focus();
       expect(parentNode).toHaveFocus();
-
-      // Press the right arrow key
       await user.keyboard('[ArrowRight]');
-
-      // Check if the first child node is now focused
       expect(childNode1).toHaveFocus();
     });
 
@@ -275,25 +270,13 @@ describe('TreeView', () => {
       );
 
       const parentNode = screen.getByTestId('parent-node');
-
-      // Initially, the parent node should not be expanded
       expect(parentNode).not.toHaveAttribute('aria-expanded', 'true');
-
-      // Focus on the parent node
       parentNode.focus();
       expect(parentNode).toHaveFocus();
-
-      // Press the right arrow key
       await user.keyboard('[ArrowRight]');
-
-      // The parent node should now be expanded
       expect(parentNode).toHaveAttribute('aria-expanded', 'true');
-
-      // Now that the parent is expanded, we can check for the child node
       const childNode = screen.getByTestId('child-node');
       expect(childNode).toBeInTheDocument();
-
-      // The parent node should still have focus
       expect(parentNode).toHaveFocus();
     });
   });
@@ -309,10 +292,8 @@ describe('TreeView', () => {
     await user.keyboard('[ControlLeft>]');
     await user.click(lists[0]);
     await user.click(lists[1]);
-    // Ensure both nodes are selected
     expect(lists[0]).toHaveAttribute('aria-selected', 'true');
     expect(lists[1]).toHaveAttribute('aria-selected', 'true');
-    // Deselect the first node by clicking it again with Ctrl
     await user.keyboard('[ControlLeft>]');
     await user.click(lists[0]);
     expect(lists[0]).toHaveAttribute('aria-selected', 'false');
@@ -342,12 +323,9 @@ describe('TreeView', () => {
     );
     const parentNode = screen.getByTestId('parent-node');
     const childNode1 = screen.getByTestId('child-node-1');
-    // Focus on the parent node
     parentNode.focus();
     expect(parentNode).toHaveFocus();
-    // Press the right arrow key
     await user.keyboard('[ArrowRight]');
-    // Check if the first child node is now focused
     expect(childNode1).toHaveFocus();
   });
   it('should expand a collapsed parent node when right arrow is pressed', async () => {
@@ -363,16 +341,11 @@ describe('TreeView', () => {
       </TreeView>
     );
     const parentNode = screen.getByTestId('parent-node');
-    // Initially, the parent node should not be expanded
     expect(parentNode).not.toHaveAttribute('aria-expanded', 'true');
-    // Focus on the parent node
     parentNode.focus();
     expect(parentNode).toHaveFocus();
-    // Press the right arrow key
     await user.keyboard('[ArrowRight]');
-    // The parent node should now be expanded
     expect(parentNode).toHaveAttribute('aria-expanded', 'true');
-    // Now that the parent is expanded, we can check for the child node
     const childNode = screen.getByTestId('child-node');
     expect(childNode).toBeInTheDocument();
   });
@@ -386,14 +359,20 @@ describe('TreeView', () => {
     );
     const node1 = screen.getByTestId('Node 1');
     const node2 = screen.getByTestId('Node 2');
-    // Focus on the first node
     node1.focus();
     expect(node1).toHaveFocus();
-    // Navigate to the next node
     await user.keyboard('[ArrowDown]');
     expect(node2).toHaveFocus();
-    // Navigate back to the previous node
     await user.keyboard('[ArrowUp]');
     expect(node1).toHaveFocus();
+  });
+
+  it('should not render label when hideLabel is true', () => {
+    render(
+      <TreeView label="Tree View" hideLabel>
+        <TreeNode id="Node 1" label="Node 1" />
+      </TreeView>
+    );
+    expect(screen.queryByText('Tree View')).not.toBeInTheDocument();
   });
 });
