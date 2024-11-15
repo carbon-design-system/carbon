@@ -303,7 +303,8 @@
     color: currentColor;
     cursor: pointer;
     inline-size: layout.size('height');
-    transition: background-color $duration-fast-01 motion(standard, productive),
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
       box-shadow $duration-fast-01 motion(standard, productive);
 
     svg {
