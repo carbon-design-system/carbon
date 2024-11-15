@@ -288,13 +288,19 @@ $radio-border-width: 1px !default;
     margin-inline: $spacing-03 0;
   }
 
-  // Slug styles
+  // AILabel styles
   .#{$prefix}--radio-button-group--slug legend.#{$prefix}--label,
   .#{$prefix}--radio-button-wrapper--slug
     .#{$prefix}--radio-button__label-text {
     display: flex;
   }
 
+  .#{$prefix}--radio-button-group--slug
+    legend.#{$prefix}--label
+    .#{$prefix}--ai-label,
+  .#{$prefix}--radio-button-wrapper--slug
+    .#{$prefix}--radio-button__label-text
+    .#{$prefix}--ai-label,
   .#{$prefix}--radio-button-group--slug
     legend.#{$prefix}--label
     .#{$prefix}--slug,
@@ -304,6 +310,9 @@ $radio-border-width: 1px !default;
     margin-inline-start: $spacing-03;
   }
 
+  .#{$prefix}--radio-button-wrapper--slug
+    .#{$prefix}--radio-button__label-text
+    .#{$prefix}--ai-label__button--inline,
   .#{$prefix}--radio-button-wrapper--slug
     .#{$prefix}--radio-button__label-text
     .#{$prefix}--slug__button--inline {

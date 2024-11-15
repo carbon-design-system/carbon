@@ -380,12 +380,17 @@
     }
   }
 
-  // Slug styles
+  // AILabel styles
+  .#{$prefix}--tag .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline,
   .#{$prefix}--tag .#{$prefix}--slug .#{$prefix}--slug__button--inline {
     color: currentColor;
     margin-inline-start: convert.to-rem(1px);
   }
 
+  .#{$prefix}--tag
+    .#{$prefix}--ai-label
+    .#{$prefix}--ai-label__button--inline
+    .#{$prefix}--ai-label__text::before,
   .#{$prefix}--tag
     .#{$prefix}--slug
     .#{$prefix}--slug__button--inline
@@ -393,10 +398,14 @@
     background-color: currentColor;
   }
 
+  .#{$prefix}--tag
+    .#{$prefix}--ai-label
+    .#{$prefix}--ai-label__button--inline:hover,
   .#{$prefix}--tag .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover {
     border-color: currentColor;
   }
 
+  .#{$prefix}--tag--filter .#{$prefix}--ai-label,
   .#{$prefix}--tag--filter .#{$prefix}--slug {
     min-inline-size: convert.to-rem(32.14px);
   }
