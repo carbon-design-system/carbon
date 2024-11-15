@@ -444,6 +444,9 @@
   }
 
   // Styles for AILabel rendered inside TextInput
+  .#{$prefix}--text-input__field-wrapper--decorator
+    .#{$prefix}--text-input__field-inner-wrapper--decorator
+    > *,
   .#{$prefix}--text-input__field-wrapper .#{$prefix}--ai-label,
   .#{$prefix}--text-input__field-wrapper .#{$prefix}--slug {
     position: absolute;
@@ -452,6 +455,16 @@
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--text-input__field-wrapper--decorator
+    .#{$prefix}--text-input:has(
+      ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
+        .#{$prefix}--ai-label
+    ):not(
+      :has(
+          ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
   .#{$prefix}--text-input__field-wrapper--slug
     .#{$prefix}--text-input:has(~ .#{$prefix}--ai-label):not(
       :has(~ .#{$prefix}--ai-label--revert)
@@ -461,10 +474,25 @@
       :has(~ .#{$prefix}--slug--revert)
     ) {
     @include ai-gradient;
+  }
 
+  .#{$prefix}--text-input__field-wrapper--decorator
+    .#{$prefix}--text-input:has(
+      ~ .#{$prefix}--text-input__field-inner-wrapper--decorator > *
+    ),
+  .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--text-input:has(~ .#{$prefix}--ai-label),
+  .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--text-input:has(~ .#{$prefix}--slug) {
     padding-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--text-input--invalid:has(
+      ~ .#{$prefix}--text-input__field-inner-wrapper--decorator > *
+    ),
+  .#{$prefix}--text-input--warning:has(
+      ~ .#{$prefix}--text-input__field-inner-wrapper--decorator > *
+    ),
   .#{$prefix}--text-input--invalid:has(~ .#{$prefix}--ai-label),
   .#{$prefix}--text-input--warning:has(~ .#{$prefix}--ai-label),
   .#{$prefix}--text-input--invalid:has(~ .#{$prefix}--slug),
@@ -472,11 +500,26 @@
     padding-inline-end: $spacing-10;
   }
 
+  .#{$prefix}--text-input--invalid
+    ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-input--warning
+    ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
+    > *,
   .#{$prefix}--text-input--invalid ~ .#{$prefix}--ai-label,
   .#{$prefix}--text-input--warning ~ .#{$prefix}--ai-label,
   .#{$prefix}--text-input--invalid ~ .#{$prefix}--slug,
   .#{$prefix}--text-input--warning ~ .#{$prefix}--slug {
     inset-inline-end: $spacing-08;
+  }
+
+  // Decorator
+  .#{$prefix}--text-input__field-wrapper--decorator
+    .#{$prefix}--text-input__field-inner-wrapper--decorator:not(
+      :has(.#{$prefix}--ai-label)
+    )
+    > * {
+    block-size: 1rem;
   }
 
   // Windows HCM fix
