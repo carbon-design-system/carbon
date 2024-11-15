@@ -8,6 +8,7 @@
 import React from 'react';
 import { default as Tag } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
+import DismissibleTag from '../Tag/DismissibleTag';
 import { Asleep, View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -227,14 +228,12 @@ export const withAILabel = () => (
       {'Tag'}
     </Tag>
 
-    <Tag
-      filter
+    <DismissibleTag
       decorator={aiLabel}
       className="some-class"
       type="purple"
-      title="Clear Filter">
-      {'Tag'}
-    </Tag>
+      title="Clear Filter"
+      text="Tag"></DismissibleTag>
 
     <Tag
       renderIcon={Asleep}
@@ -245,15 +244,13 @@ export const withAILabel = () => (
       {'Tag'}
     </Tag>
 
-    <Tag
-      filter
+    <DismissibleTag
       renderIcon={Asleep}
       decorator={aiLabel}
       className="some-class"
       type="green"
-      title="Clear Filter">
-      {'Tag'}
-    </Tag>
+      title="Clear Filter"
+      text="Tag"></DismissibleTag>
     <Tag
       decorator={
         <Tooltip label={'hello'}>
@@ -266,8 +263,7 @@ export const withAILabel = () => (
       {'Tag'}
     </Tag>
 
-    <Tag
-      filter
+    <DismissibleTag
       decorator={
         <Tooltip label={'hello'}>
           <Information />
@@ -275,9 +271,8 @@ export const withAILabel = () => (
       }
       className="some-class"
       type="purple"
-      title="Clear Filter">
-      {'Tag'}
-    </Tag>
+      title="Clear Filter"
+      text="Tag"></DismissibleTag>
 
     <Tag
       renderIcon={Asleep}
@@ -292,8 +287,7 @@ export const withAILabel = () => (
       {'Tag'}
     </Tag>
 
-    <Tag
-      filter
+    <DismissibleTag
       renderIcon={Asleep}
       decorator={
         <Tooltip label={'hello'}>
@@ -302,8 +296,7 @@ export const withAILabel = () => (
       }
       className="some-class"
       type="green"
-      title="Clear Filter">
-      {'Tag'}
-    </Tag>
+      title="Clear Filter"
+      text="Tag"></DismissibleTag>
   </div>
 );
