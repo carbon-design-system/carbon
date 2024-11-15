@@ -5,23 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import invariant from 'invariant';
-import PropTypes from 'prop-types';
-import React, { ComponentType } from 'react';
-import classNames from 'classnames';
-import ClickListener from '../../internal/ClickListener';
 import FloatingMenu, {
-  DIRECTION_TOP,
   DIRECTION_BOTTOM,
+  DIRECTION_TOP,
 } from '../../internal/FloatingMenu';
-import { OverflowMenuVertical } from '@carbon/icons-react';
-import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
-import mergeRefs from '../../tools/mergeRefs';
-import { PrefixContext } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import React, { ComponentType } from 'react';
+import { matches as keyCodeMatches, keys } from '../../internal/keyboard';
+
+import ClickListener from '../../internal/ClickListener';
 import { IconButton } from '../IconButton';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { OverflowMenuVertical } from '@carbon/icons-react';
+import { PrefixContext } from '../../internal/usePrefix';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import deprecate from '../../prop-types/deprecate';
+import invariant from 'invariant';
+import mergeRefs from '../../tools/mergeRefs';
 import { noopFn } from '../../internal/noopFn';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -81,15 +82,16 @@ export const getMenuOffset = (menuBody, direction, trigger, flip) => {
         top: 0,
       };
     }
-    case 'left':
-    case 'right': {
-      // TODO: Ensure `trigger` is there for `<OverflowMenu open>`
-      const triggerHeight = !trigger ? 0 : trigger.offsetHeight;
-      return {
-        left: 0,
-        top: (!flip ? 1 : -1) * (menuHeight / 2 - triggerHeight / 2),
-      };
-    }
+    // case left and right is not called
+    // case 'left':
+    // case 'right': {
+    //   // TODO: Ensure `trigger` is there for `<OverflowMenu open>`
+    //   const triggerHeight = !trigger ? 0 : trigger.offsetHeight;
+    //   return {
+    //     left: 0,
+    //     top: (!flip ? 1 : -1) * (menuHeight / 2 - triggerHeight / 2),
+    //   };
+    // }
 
     default:
       break;
