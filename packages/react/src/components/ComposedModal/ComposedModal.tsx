@@ -432,7 +432,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       }
     }, [open, selectorPrimaryFocus, isOpen]);
 
-    // Slug is always size `sm`
+    // AILabel is always size `sm`
     let normalizedDecorator = useMemo(() => {
       const element = slug ?? decorator;
       if (element && element['type']?.displayName === 'AILabel') {
