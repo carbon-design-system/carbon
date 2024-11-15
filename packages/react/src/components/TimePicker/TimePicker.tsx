@@ -225,7 +225,7 @@ const TimePicker: TimePickerComponent = React.forwardRef<
   });
 
   const label = labelText ? (
-    <label htmlFor={id} className={labelClasses}>
+    <label htmlFor={id} className={labelClasses} aria-hidden={hideLabel}>
       {labelText}
     </label>
   ) : null;
