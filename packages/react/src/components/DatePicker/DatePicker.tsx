@@ -880,9 +880,6 @@ const DatePicker = React.forwardRef(function DatePicker(
     const closeCalendar = (event) => {
       calendarRef.current.close();
       // Remove focus from endDate calendar input
-      if (document.activeElement instanceof HTMLElement) {
-        document.activeElement.blur();
-      }
       onCalendarClose(
         calendarRef.current.selectedDates,
         '',
@@ -918,12 +915,7 @@ const DatePicker = React.forwardRef(function DatePicker(
         document.activeElement === endInputField.current &&
         calendarRef.current.isOpen
       ) {
-        event.preventDefault();
         calendarRef.current.close();
-        // Remove focus from endDate calendar input
-        document.activeElement instanceof HTMLElement && // this is to fix the TS warning
-          document?.activeElement?.blur();
-
         onCalendarClose(
           calendarRef.current.selectedDates,
           '',
