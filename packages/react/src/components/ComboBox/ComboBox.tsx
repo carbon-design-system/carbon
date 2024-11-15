@@ -34,6 +34,7 @@ import {
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/icons-react';
+import isEqual from 'react-fast-compare';
 import ListBox, {
   PropTypes as ListBoxPropTypes,
   ListBoxSize,
@@ -509,11 +510,14 @@ const ComboBox = forwardRef(
           selectedItem: selectedItemProp,
           prevSelectedItem: prevSelectedItemProp.current,
         });
-        setInputValue(currentInputValue);
-        onChange({
-          selectedItem: selectedItemProp,
-          inputValue: currentInputValue,
-        });
+        // selectedItem has been updated externally, need to update state and call onChange
+        if (inputValue !== currentInputValue) {
+          setInputValue(currentInputValue);
+          onChange({
+            selectedItem: selectedItemProp,
+            inputValue: currentInputValue,
+          });
+        }
         prevSelectedItemProp.current = selectedItemProp;
       }
     }, [selectedItemProp]);
@@ -527,12 +531,12 @@ const ComboBox = forwardRef(
         typeahead
           ? autocompleteCustomFilter({ item: itemToString(item), inputValue })
           : shouldFilterItem
-            ? shouldFilterItem({
-                item,
-                itemToString,
-                inputValue,
-              })
-            : defaultShouldFilterItem()
+          ? shouldFilterItem({
+              item,
+              itemToString,
+              inputValue,
+            })
+          : defaultShouldFilterItem()
       );
 
     useEffect(() => {
@@ -739,14 +743,7 @@ const ComboBox = forwardRef(
       onInputValueChange({ inputValue }) {
         const normalizedInput = inputValue || '';
         setInputValue(normalizedInput);
-        if (selectedItemProp && !inputValue) {
-          // ensure onChange is called when selectedItem is cleared
-          onChange({ selectedItem, inputValue: normalizedInput });
-        }
         setHighlightedIndex(indexToHighlight(normalizedInput));
-      },
-      onSelectedItemChange({ selectedItem }) {
-        onChange({ selectedItem });
       },
       onHighlightedIndexChange: ({ highlightedIndex }) => {
         if (highlightedIndex! > -1 && typeof window !== undefined) {
@@ -762,11 +759,25 @@ const ComboBox = forwardRef(
           }
         }
       },
+      onStateChange: ({ type, selectedItem: newSelectedItem }) => {
+        if (
+          type === '__item_click__' &&
+          !isEqual(selectedItemProp, newSelectedItem)
+        ) {
+          onChange({ selectedItem: newSelectedItem });
+        }
+        if (
+          type === '__function_select_item__' ||
+          type === '__input_keydown_enter__'
+        ) {
+          onChange({ selectedItem: newSelectedItem });
+        }
+      },
       initialSelectedItem: initialSelectedItem,
       inputId: id,
       stateReducer,
       isItemDisabled(item, _index) {
-        return (item as any).disabled;
+        return (item as any)?.disabled;
       },
       ...downshiftProps,
     });
