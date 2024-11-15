@@ -38,7 +38,7 @@ export const Default = () => {
 };
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -77,7 +77,7 @@ export const withAILabel = () => (
       label="NumberInput label"
       helperText="Optional helper text."
       invalidText="Number is not valid"
-      slug={aiLabel}
+      decorator={aiLabel}
     />
   </div>
 );
@@ -146,6 +146,11 @@ Playground.argTypes = {
     },
   },
   light: {
+    table: {
+      disable: true,
+    },
+  },
+  slug: {
     table: {
       disable: true,
     },
