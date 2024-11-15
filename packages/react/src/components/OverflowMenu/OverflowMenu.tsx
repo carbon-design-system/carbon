@@ -82,16 +82,6 @@ export const getMenuOffset = (menuBody, direction, trigger, flip) => {
         top: 0,
       };
     }
-    // case left and right is not called
-    // case 'left':
-    // case 'right': {
-    //   // TODO: Ensure `trigger` is there for `<OverflowMenu open>`
-    //   const triggerHeight = !trigger ? 0 : trigger.offsetHeight;
-    //   return {
-    //     left: 0,
-    //     top: (!flip ? 1 : -1) * (menuHeight / 2 - triggerHeight / 2),
-    //   };
-    // }
 
     default:
       break;
