@@ -293,7 +293,11 @@ const TextInput = React.forwardRef(function TextInput(
     ) : null;
 
   const label = labelText ? (
-    <Text as="label" htmlFor={id} className={labelClasses}>
+    <Text
+      as="label"
+      htmlFor={id}
+      className={labelClasses}
+      aria-hidden={hideLabel}>
       {labelText}
     </Text>
   ) : null;
@@ -353,7 +357,7 @@ const TextInput = React.forwardRef(function TextInput(
 
   // AILabel is always size `mini`
   let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+    ? slug ?? decorator
     : null;
   if (
     normalizedDecorator &&
