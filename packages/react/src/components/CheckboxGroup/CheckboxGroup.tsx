@@ -65,13 +65,16 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   ) : null;
 
   const fieldsetClasses = cx(`${prefix}--checkbox-group`, className, {
-    [`${prefix}--checkbox-group--${orientation}`]: orientation === 'horizontal',
     [`${prefix}--checkbox-group--readonly`]: readOnly,
     [`${prefix}--checkbox-group--invalid`]: !readOnly && invalid,
     [`${prefix}--checkbox-group--warning`]: showWarning,
     [`${prefix}--checkbox-group--slug`]: slug,
   });
 
+  const orientationClass =
+    orientation === 'horizontal'
+      ? `${prefix}--checkbox-group--${orientation}`
+      : '';
   // Slug is always size `mini`
   let normalizedSlug;
   if (
@@ -98,25 +101,25 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
           {legendText}
           {normalizedSlug}
         </legend>
-        {children}
+        <div className={orientationClass}>{children}</div>
+        <div className={`${prefix}--checkbox-group__validation-msg`}>
+          {!readOnly && invalid && (
+            <>
+              <WarningFilled className={`${prefix}--checkbox__invalid-icon`} />
+              <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+            </>
+          )}
+          {showWarning && (
+            <>
+              <WarningAltFilled
+                className={`${prefix}--checkbox__invalid-icon ${prefix}--checkbox__invalid-icon--warning`}
+              />
+              <div className={`${prefix}--form-requirement`}>{warnText}</div>
+            </>
+          )}
+        </div>
         {showHelper && helper}
       </fieldset>
-      <div className={`${prefix}--checkbox-group__validation-msg`}>
-        {!readOnly && invalid && (
-          <>
-            <WarningFilled className={`${prefix}--checkbox__invalid-icon`} />
-            <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-          </>
-        )}
-        {showWarning && (
-          <>
-            <WarningAltFilled
-              className={`${prefix}--checkbox__invalid-icon ${prefix}--checkbox__invalid-icon--warning`}
-            />
-            <div className={`${prefix}--form-requirement`}>{warnText}</div>
-          </>
-        )}
-      </div>
     </>
   );
 };

@@ -227,7 +227,7 @@
 
   .#{$prefix}--checkbox-group__validation-msg,
   .#{$prefix}--checkbox__validation-msg {
-    // display: none;
+    display: none;
     align-items: flex-start;
     margin-block-start: $spacing-02;
   }
@@ -247,9 +247,9 @@
   }
 
   .#{$prefix}--checkbox-group--invalid
-    + .#{$prefix}--checkbox-group__validation-msg,
+    .#{$prefix}--checkbox-group__validation-msg,
   .#{$prefix}--checkbox-group--warning
-    + .#{$prefix}--checkbox-group__validation-msg,
+    .#{$prefix}--checkbox-group__validation-msg,
   .#{$prefix}--checkbox-wrapper--invalid
     > .#{$prefix}--checkbox__validation-msg,
   .#{$prefix}--checkbox-wrapper--warning
@@ -258,10 +258,10 @@
   }
 
   .#{$prefix}--checkbox-group--invalid
-    + .#{$prefix}--checkbox-group__validation-msg
+    .#{$prefix}--checkbox-group__validation-msg
     .#{$prefix}--form-requirement,
   .#{$prefix}--checkbox-group--warning
-    + .#{$prefix}--checkbox-group__validation-msg
+    .#{$prefix}--checkbox-group__validation-msg
     .#{$prefix}--form-requirement,
   .#{$prefix}--checkbox-wrapper--invalid
     .#{$prefix}--checkbox__validation-msg
@@ -277,7 +277,7 @@
   }
 
   .#{$prefix}--checkbox-group--invalid
-    + .#{$prefix}--checkbox-group__validation-msg
+    .#{$prefix}--checkbox-group__validation-msg
     .#{$prefix}--form-requirement,
   .#{$prefix}--checkbox-wrapper--invalid
     .#{$prefix}--checkbox__validation-msg
