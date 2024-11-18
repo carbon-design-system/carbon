@@ -283,6 +283,7 @@
 
   $divider-width: 1px;
 
+  .#{$prefix}--select--decorator .#{$prefix}--select__inner-wrapper--decorator,
   .#{$prefix}--select--slug .#{$prefix}--ai-label,
   .#{$prefix}--select--slug .#{$prefix}--slug {
     position: absolute;
@@ -292,6 +293,10 @@
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator::after,
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator::before,
   .#{$prefix}--select--slug .#{$prefix}--ai-label::after,
   .#{$prefix}--select--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--select--slug .#{$prefix}--slug::after,
@@ -303,18 +308,30 @@
     inline-size: convert.to-rem(1px);
   }
 
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator::before,
   .#{$prefix}--select--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--select--slug .#{$prefix}--slug::before {
     display: none;
     inset-inline-start: calc(-#{$spacing-03} - #{$divider-width});
   }
 
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator::after,
   .#{$prefix}--select--slug .#{$prefix}--ai-label::after,
   .#{$prefix}--select--slug .#{$prefix}--slug::after {
     display: block;
+    inset-block-start: 0;
     inset-inline-end: calc(-#{$spacing-03} - #{$divider-width});
   }
 
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator
+    .#{$prefix}--ai-label--revert {
+    transform: translate(0, 0);
+  }
+
+  .#{$prefix}--select--decorator .#{$prefix}--ai-label--revert::after,
   .#{$prefix}--select--slug .#{$prefix}--ai-label--revert::after,
   .#{$prefix}--select--slug .#{$prefix}--slug--revert::after {
     inset-block-start: convert.to-rem(8px);
@@ -345,6 +362,8 @@
     padding-inline-end: $spacing-12;
   }
 
+  .#{$prefix}--select--decorator:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--select__inner-wrapper--decorator::before,
   .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
     .#{$prefix}--ai-label::before,
   .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
@@ -352,6 +371,10 @@
     display: block;
   }
 
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select-input__wrapper
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon,
   .#{$prefix}--select--slug
     .#{$prefix}--select-input__wrapper[data-invalid]
     .#{$prefix}--select-input

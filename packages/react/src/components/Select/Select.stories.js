@@ -136,7 +136,7 @@ export const _WithLayer = () => (
 );
 
 const aiLabel = (
-  <AILabel className="ai-label-container" revertActive={true}>
+  <AILabel className="ai-label-container" revertActive={false}>
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -167,70 +167,174 @@ const aiLabel = (
 );
 
 export const withAILabel = () => (
-  <div style={{ width: 400 }}>
-    <Select
-      id="select-1"
-      labelText="Select an option"
-      helperText="Optional helper text"
-      decorator={aiLabel}>
-      <SelectItem value="" text="" />
-      <SelectItem
-        value="An example option that is really long to show what should be done to handle long text"
-        text="An example option that is really long to show what should be done to handle long text"
-      />
-      <SelectItem value="Option 2" text="Option 2" />
-      <SelectItem value="Option 3" text="Option 3" />
-      <SelectItem value="Option 4" text="Option 4" />
-    </Select>
-    <Select
-      id="select-1"
-      labelText="REMOVE BEFORE MERGE"
-      decorator={
-        <Tooltip>
-          <View />
-        </Tooltip>
-      }>
-      <SelectItem value="" text="" />
-      <SelectItem
-        value="An example option that is really long to show what should be done to handle long text"
-        text="An example option that is really long to show what should be done to handle long text"
-      />
-      <SelectItem value="Option 2" text="Option 2" />
-      <SelectItem value="Option 3" text="Option 3" />
-      <SelectItem value="Option 4" text="Option 4" />
-    </Select>
-    <Select
-      id="select-1"
-      labelText="REMOVE BEFORE MERGE"
-      decorator={aiLabel}
-      warn>
-      <SelectItem value="" text="" />
-      <SelectItem
-        value="An example option that is really long to show what should be done to handle long text"
-        text="An example option that is really long to show what should be done to handle long text"
-      />
-      <SelectItem value="Option 2" text="Option 2" />
-      <SelectItem value="Option 3" text="Option 3" />
-      <SelectItem value="Option 4" text="Option 4" />
-    </Select>
-    <Select
-      id="select-1"
-      labelText="REMOVE BEFORE MERGE"
-      warn
-      decorator={
-        <Tooltip>
-          <View />
-        </Tooltip>
-      }>
-      <SelectItem value="" text="" />
-      <SelectItem
-        value="An example option that is really long to show what should be done to handle long text"
-        text="An example option that is really long to show what should be done to handle long text"
-      />
-      <SelectItem value="Option 2" text="Option 2" />
-      <SelectItem value="Option 3" text="Option 3" />
-      <SelectItem value="Option 4" text="Option 4" />
-    </Select>
+  <div style={{ display: 'flex', width: '1200px', 'flex-wrap': 'wrap' }}>
+    <div style={{ width: '100%', padding: '10px' }}>Original slug prop</div>
+    <div style={{ width: '33%', padding: '10px' }}>
+      <Select
+        id="select-0"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        slug={aiLabel}>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '33%', padding: '10px' }}>
+      <Select
+        id="select-0"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        slug={aiLabel}
+        invalid>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '33%', padding: '10px' }}>
+      <Select
+        id="select-0"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        slug={aiLabel}
+        warn>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '100%', padding: '10px' }}>New decorator prop</div>
+    <div style={{ width: '33%', padding: '10px' }}>
+      <Select
+        id="select-1"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        decorator={aiLabel}>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '33%', padding: '10px' }}>
+      <Select
+        id="select-1"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        invalid
+        decorator={aiLabel}>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '33%', padding: '10px' }}>
+      <Select
+        id="select-1"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        decorator={aiLabel}
+        warn>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '100%', padding: '10px' }}>
+      New decorator prop with tooltip
+    </div>
+    <div style={{ width: '33%', padding: '10px' }}>
+      <Select
+        id="select-3"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        decorator={
+          <Tooltip>
+            <View />
+          </Tooltip>
+        }>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '33%', padding: '10px' }}>
+      <Select
+        id="select-3"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        invalid
+        decorator={
+          <Tooltip>
+            <View />
+          </Tooltip>
+        }>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '33%', padding: '10px' }}>
+      <Select
+        id="select-3"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        warn
+        decorator={
+          <Tooltip>
+            <View />
+          </Tooltip>
+        }>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
   </div>
 );
 
