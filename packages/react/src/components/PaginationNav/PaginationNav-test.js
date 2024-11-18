@@ -10,6 +10,18 @@ import PaginationNav from './PaginationNav';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
+
 describe('PaginationNav', () => {
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto outermost element', () => {
