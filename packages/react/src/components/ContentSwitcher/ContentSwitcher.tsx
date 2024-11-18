@@ -54,7 +54,7 @@ export interface ContentSwitcherProps
   selectedIndex: number;
 
   /**
-   * Choose whether or not to automatically change selection on focus
+   * Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to 'automatic'
    */
   selectionMode?: 'automatic' | 'manual';
 
@@ -115,7 +115,7 @@ export default class ContentSwitcher extends React.Component<
     selectedIndex: PropTypes.number,
 
     /**
-     * Choose whether or not to automatically change selection on focus
+     * Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to 'automatic'
      */
     selectionMode: PropTypes.oneOf(['automatic', 'manual']),
 

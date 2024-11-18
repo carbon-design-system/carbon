@@ -46,9 +46,10 @@ const ControlledComboBox = ({ controlledItem }) => {
         placeholder="Filter..."
         type="default"
       />
-      <div>value: {value.label}</div>
+      <div>value: {value?.label || 'none'}</div>
       <div>onChangeCallCount: {onChangeCallCount}</div>
-      <button onClick={() => setValue(items[2])}>Choose item 3</button>
+      <button onClick={() => setValue(items[3])}>Choose item 3</button>
+      <button onClick={() => setValue(null)}>reset</button>
     </div>
   );
 };
@@ -366,6 +367,55 @@ describe('ComboBox', () => {
         screen.getByRole('combobox', { value: 'Item 2' })
       ).toBeInTheDocument();
     });
+    it('should update and call `onChange` once when selection is cleared from the combobox and the external state managing selectedItem is updated', async () => {
+      render(<ControlledComboBox />);
+      expect(screen.getByText('onChangeCallCount: 0')).toBeInTheDocument();
+      await openMenu();
+      await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
+      expect(screen.getByText('onChangeCallCount: 1')).toBeInTheDocument();
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Clear selected item' })
+      );
+      expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
+      expect(screen.getByText('value: none')).toBeInTheDocument();
+      expect(findInputNode()).toHaveDisplayValue('');
+    });
+    it('should update and call `onChange` once when selection is cleared from the combobox after an external update is made, and the external state managing selectedItem is updated', async () => {
+      render(<ControlledComboBox />);
+      expect(screen.getByText('onChangeCallCount: 0')).toBeInTheDocument();
+      await openMenu();
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Choose item 3' })
+      );
+      expect(screen.getByText('onChangeCallCount: 1')).toBeInTheDocument();
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Clear selected item' })
+      );
+      expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
+      expect(screen.getByText('value: none')).toBeInTheDocument();
+      expect(findInputNode()).toHaveDisplayValue('');
+    });
+    it('should update and call `onChange` when a combination of external and combobox selections are made', async () => {
+      render(<ControlledComboBox />);
+      expect(screen.getByText('onChangeCallCount: 0')).toBeInTheDocument();
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Choose item 3' })
+      );
+      expect(screen.getByText('onChangeCallCount: 1')).toBeInTheDocument();
+      expect(findInputNode()).toHaveDisplayValue('Item 3');
+      expect(screen.getByText('value: Item 3')).toBeInTheDocument();
+      await openMenu();
+      await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
+      expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
+      expect(findInputNode()).toHaveDisplayValue('Item 2');
+      expect(screen.getByText('value: Item 2')).toBeInTheDocument();
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Clear selected item' })
+      );
+      expect(screen.getByText('onChangeCallCount: 3')).toBeInTheDocument();
+      expect(screen.getByText('value: none')).toBeInTheDocument();
+      expect(findInputNode()).toHaveDisplayValue('');
+    });
     it('should update and call `onChange` once when selection is updated externally', async () => {
       const { rerender } = render(
         <ComboBox {...mockProps} selectedItem={mockProps.items[0]} />
@@ -375,13 +425,14 @@ describe('ComboBox', () => {
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1].label);
       expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     });
-    it('should clear selected item and call `onChange` when selection is cleared from the combobox', async () => {
-      render(<ComboBox {...mockProps} selectedItem={mockProps.items[1]} />);
-      expect(mockProps.onChange).not.toHaveBeenCalled();
-      await userEvent.click(
-        screen.getByRole('button', { name: 'Clear selected item' })
-      );
-      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    it('should clear selected item and call `onChange` when selection is cleared externally', async () => {
+      render(<ControlledComboBox />);
+      expect(screen.getByText('onChangeCallCount: 0')).toBeInTheDocument();
+      await openMenu();
+      await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
+      await userEvent.click(screen.getByRole('button', { name: 'reset' }));
+      expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
+      expect(screen.getByText('value: none')).toBeInTheDocument();
       expect(findInputNode()).toHaveDisplayValue('');
     });
     it('should clear selected item when `selectedItem` is updated to `null` externally', async () => {

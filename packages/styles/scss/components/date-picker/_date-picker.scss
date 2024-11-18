@@ -191,6 +191,9 @@
   }
 
   // Styles for `AILabel` rendered inside `DatePickerInput`
+  .#{$prefix}--date-picker-input__wrapper--decorator
+    .#{$prefix}--date-picker-input-inner-wrapper--decorator
+    > *,
   .#{$prefix}--date-picker-input__wrapper--slug .#{$prefix}--ai-label,
   .#{$prefix}--date-picker-input__wrapper--slug .#{$prefix}--slug {
     position: absolute;
@@ -199,6 +202,24 @@
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--date-picker-input__wrapper--decorator
+    .#{$prefix}--date-picker-input-inner-wrapper--decorator:not(
+      :has(.#{$prefix}--ai-label)
+    )
+    > * {
+    block-size: 1rem;
+  }
+
+  .#{$prefix}--date-picker-input__wrapper--decorator
+    .#{$prefix}--date-picker__input:has(
+      ~ .#{$prefix}--date-picker-input-inner-wrapper--decorator
+        .#{$prefix}--ai-label
+    ):not(
+      :has(
+          ~ .#{$prefix}--date-picker-input-inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
   .#{$prefix}--date-picker-input__wrapper--slug
     .#{$prefix}--date-picker__input:has(~ .#{$prefix}--ai-label):not(
       :has(~ .#{$prefix}--ai-label--revert)
