@@ -434,19 +434,19 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     // AILabel is always size `sm`
     let normalizedDecorator = React.isValidElement(slug ?? decorator)
-        ? (slug ?? decorator)
-        : null;
+      ? slug ?? decorator
+      : null;
     if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel'
     ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'sm',
-      }
-    );
-  }
+      normalizedDecorator = React.cloneElement(
+        normalizedDecorator as React.ReactElement<any>,
+        {
+          size: 'sm',
+        }
+      );
+    }
 
     return (
       <Layer
