@@ -369,8 +369,9 @@
     background-color: $ai-overlay;
   }
 
-  .#{$prefix}--modal--slug,
-  .#{$prefix}--modal--decorator .#{$prefix}--modal-container {
+  .#{$prefix}--modal--slug .#{$prefix}--modal-container,
+  .#{$prefix}--modal--decorator:has(.#{$prefix}--ai-label)
+    .#{$prefix}--modal-container {
     @include ai-popover-gradient('default', 0, 'layer');
 
     border: 1px solid transparent;
@@ -379,8 +380,9 @@
       0 24px 40px -24px $ai-drop-shadow;
   }
 
-  .#{$prefix}--modal--slug,
-  .#{$prefix}--modal--decorator
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container:has(.#{$prefix}--modal-footer),
+  .#{$prefix}--modal--decorator:has(.#{$prefix}--ai-label)
     .#{$prefix}--modal-container:has(.#{$prefix}--modal-footer) {
     @include ai-popover-gradient('default', 64px, 'layer');
 
@@ -389,7 +391,8 @@
       0 24px 40px -24px $ai-drop-shadow;
   }
 
-  .#{$prefix}--modal--slug,
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content,
   .#{$prefix}--modal--decorator
     .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content {
     mask-image: linear-gradient(
@@ -433,9 +436,9 @@
     inset-block-start: 1rem;
   }
 
-  .#{$prefix}--modal--slug
+  .#{$prefix}--modal--decorator
     .#{$prefix}--modal-content--overflow-indicator::before,
-  .#{$prefix}--modal--slug .#{$prefix}--modal-content--overflow-indicator {
+  .#{$prefix}--modal--decorator .#{$prefix}--modal-content--overflow-indicator {
     display: none;
   }
 
