@@ -136,7 +136,38 @@ export const _WithLayer = () => (
 );
 
 const aiLabel = (
-  <AILabel className="ai-label-container" revertActive={false}>
+  <AILabel className="ai-label-container">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+const aiLabelrevert = (
+  <AILabel className="ai-label-container" revertActive={true}>
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -168,8 +199,10 @@ const aiLabel = (
 
 export const withAILabel = () => (
   <div style={{ display: 'flex', width: '1200px', 'flex-wrap': 'wrap' }}>
-    <div style={{ width: '100%', padding: '10px' }}>Original slug prop</div>
-    <div style={{ width: '33%', padding: '10px' }}>
+    <div style={{ width: '100%', padding: '5px', borderTop: '1px solid' }}>
+      Original slug prop
+    </div>
+    <div style={{ width: '33%', padding: '5px' }}>
       <Select
         id="select-0"
         labelText="Select an option"
@@ -185,7 +218,7 @@ export const withAILabel = () => (
         <SelectItem value="Option 4" text="Option 4" />
       </Select>
     </div>
-    <div style={{ width: '33%', padding: '10px' }}>
+    <div style={{ width: '33%', padding: '5px' }}>
       <Select
         id="select-0"
         labelText="Select an option"
@@ -202,7 +235,7 @@ export const withAILabel = () => (
         <SelectItem value="Option 4" text="Option 4" />
       </Select>
     </div>
-    <div style={{ width: '33%', padding: '10px' }}>
+    <div style={{ width: '33%', padding: '5px' }}>
       <Select
         id="select-0"
         labelText="Select an option"
@@ -219,8 +252,10 @@ export const withAILabel = () => (
         <SelectItem value="Option 4" text="Option 4" />
       </Select>
     </div>
-    <div style={{ width: '100%', padding: '10px' }}>New decorator prop</div>
-    <div style={{ width: '33%', padding: '10px' }}>
+    <div style={{ width: '100%', padding: '5px', borderTop: '1px solid' }}>
+      New decorator prop
+    </div>
+    <div style={{ width: '33%', padding: '5px' }}>
       <Select
         id="select-1"
         labelText="Select an option"
@@ -236,7 +271,7 @@ export const withAILabel = () => (
         <SelectItem value="Option 4" text="Option 4" />
       </Select>
     </div>
-    <div style={{ width: '33%', padding: '10px' }}>
+    <div style={{ width: '33%', padding: '5px' }}>
       <Select
         id="select-1"
         labelText="Select an option"
@@ -253,7 +288,7 @@ export const withAILabel = () => (
         <SelectItem value="Option 4" text="Option 4" />
       </Select>
     </div>
-    <div style={{ width: '33%', padding: '10px' }}>
+    <div style={{ width: '33%', padding: '5px' }}>
       <Select
         id="select-1"
         labelText="Select an option"
@@ -270,10 +305,10 @@ export const withAILabel = () => (
         <SelectItem value="Option 4" text="Option 4" />
       </Select>
     </div>
-    <div style={{ width: '100%', padding: '10px' }}>
+    <div style={{ width: '100%', padding: '5px', borderTop: '1px solid' }}>
       New decorator prop with tooltip
     </div>
-    <div style={{ width: '33%', padding: '10px' }}>
+    <div style={{ width: '33%', padding: '5px' }}>
       <Select
         id="select-3"
         labelText="Select an option"
@@ -293,7 +328,7 @@ export const withAILabel = () => (
         <SelectItem value="Option 4" text="Option 4" />
       </Select>
     </div>
-    <div style={{ width: '33%', padding: '10px' }}>
+    <div style={{ width: '33%', padding: '5px' }}>
       <Select
         id="select-3"
         labelText="Select an option"
@@ -314,7 +349,7 @@ export const withAILabel = () => (
         <SelectItem value="Option 4" text="Option 4" />
       </Select>
     </div>
-    <div style={{ width: '33%', padding: '10px' }}>
+    <div style={{ width: '33%', padding: '5px' }}>
       <Select
         id="select-3"
         labelText="Select an option"
@@ -325,6 +360,112 @@ export const withAILabel = () => (
             <View />
           </Tooltip>
         }>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '100%', padding: '5px', borderTop: '1px solid' }}>
+      Original slug prop with revert
+    </div>
+    <div style={{ width: '33%', padding: '5px' }}>
+      <Select
+        id="select-0"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        slug={aiLabelrevert}>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '33%', padding: '5px' }}>
+      <Select
+        id="select-0"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        slug={aiLabelrevert}
+        invalid>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '33%', padding: '5px' }}>
+      <Select
+        id="select-0"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        slug={aiLabelrevert}
+        warn>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '100%', padding: '5px', borderTop: '1px solid' }}>
+      New decorator prop with revert
+    </div>
+    <div style={{ width: '33%', padding: '5px' }}>
+      <Select
+        id="select-1"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        decorator={aiLabelrevert}>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '33%', padding: '5px' }}>
+      <Select
+        id="select-1"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        invalid
+        decorator={aiLabelrevert}>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+    <div style={{ width: '33%', padding: '5px' }}>
+      <Select
+        id="select-1"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        decorator={aiLabelrevert}
+        warn>
         <SelectItem value="" text="" />
         <SelectItem
           value="An example option that is really long to show what should be done to handle long text"
