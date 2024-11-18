@@ -14,6 +14,20 @@ import { match, keys } from '../../../internal/keyboard';
 export default (config) => (fp) => {
   const { inputFrom, inputTo, lastStartValue } = config;
   /**
+   * Handles `click` outside to close calendar
+   */
+  const handleClickOutside = (event) => {
+    if (
+      !fp.isOpen ||
+      fp.calendarContainer.contains(event.target) ||
+      event.target === inputFrom ||
+      event.target === inputTo
+    ) {
+      return;
+    }
+    fp.close();
+  };
+  /**
    * Handles `keydown` event.
    */
   const handleKeydown = (event) => {
@@ -67,7 +81,7 @@ export default (config) => (fp) => {
     if (inputTo === target && fp.selectedDates[1]) {
       // Using getTime() enables the ability to more readily compare the date currently
       // selected in the calendar and the date currently in the value of the input
-      const withoutTime = (date) => date.setHours(0, 0, 0, 0);
+      const withoutTime = (date) => date?.setHours(0, 0, 0, 0);
       const selectedToDate = withoutTime(new Date(fp.selectedDates[1]));
       const currentValueToDate = withoutTime(
         parseDateWithFormat(inputTo.value)
@@ -90,7 +104,7 @@ export default (config) => (fp) => {
       }
     }
 
-    const isValidDate = (date) => date.toString() !== 'Invalid Date';
+    const isValidDate = (date) => date?.toString() !== 'Invalid Date';
     // save end date in calendar inmediately after it's been written down
     if (inputTo === target && fp.selectedDates.length === 1 && inputTo.value) {
       if (isValidDate(parseDateWithFormat(inputTo.value))) {
@@ -127,6 +141,7 @@ export default (config) => (fp) => {
       inputTo.removeEventListener('blur', handleBlur, true);
     }
     inputFrom.removeEventListener('keydown', handleKeydown, true);
+    document.removeEventListener('click', handleClickOutside, true);
   };
 
   /**
@@ -140,6 +155,7 @@ export default (config) => (fp) => {
       inputTo.addEventListener('keydown', handleKeydown, true);
       inputTo.addEventListener('blur', handleBlur, true);
     }
+    document.addEventListener('click', handleClickOutside, true);
   };
 
   /**

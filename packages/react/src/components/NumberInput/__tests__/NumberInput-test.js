@@ -11,7 +11,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { NumberInput } from '../NumberInput';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 
 function translateWithId(id) {
   if (id === 'increment.number') {
@@ -69,12 +69,24 @@ describe('NumberInput', () => {
     expect(screen.getByLabelText('test-label')).toHaveValue(5);
   });
 
-  it('should respect slug prop', () => {
-    render(<NumberInput label="test-label" id="test" slug={<Slug />} />);
+  it('should respect decorator prop', () => {
+    render(
+      <NumberInput label="test-label" id="test" decorator={<AILabel />} />
+    );
 
     expect(
       screen.getByRole('button', { name: 'AI - Show information' })
     ).toBeInTheDocument();
+  });
+
+  it('should respect the deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(<NumberInput label="test-label" id="test" slug={<AILabel />} />);
+
+    expect(
+      screen.getByRole('button', { name: 'AI - Show information' })
+    ).toBeInTheDocument();
+    spy.mockRestore();
   });
 
   it('should allow an empty string as input to the underlying <input>', () => {
@@ -332,12 +344,44 @@ describe('NumberInput', () => {
           translateWithId={translateWithId}
         />
       );
-
       expect(screen.getByLabelText('test-label')).toHaveValue(5);
-
       await userEvent.click(screen.getByLabelText('decrement'));
       expect(screen.getByLabelText('test-label')).toHaveValue(0);
     });
+  });
+  it('should increase by the value of large step', async () => {
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        min={-9999}
+        value={1000}
+        max={10000}
+        step={1000}
+        translateWithId={translateWithId}
+      />
+    );
+    expect(screen.getByLabelText('test-label')).toHaveValue(1000);
+    await userEvent.click(screen.getByLabelText('increment'));
+    expect(screen.getByLabelText('test-label')).toHaveValue(2000);
+  });
+  it('should decrease by the value of large step', async () => {
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        min={-9999}
+        value={1000}
+        max={10000}
+        step={1000}
+        translateWithId={translateWithId}
+      />
+    );
+
+    expect(screen.getByLabelText('test-label')).toHaveValue(1000);
+
+    await userEvent.click(screen.getByLabelText('decrement'));
+    expect(screen.getByLabelText('test-label')).toHaveValue(0);
   });
 
   it('should respect readOnly prop', async () => {

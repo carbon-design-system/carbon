@@ -483,6 +483,21 @@
     - uncontrolled
   sizes:
     - 32
+- name: ai-label
+  friendly_name: AI Label
+  aliases:
+    - ai
+    - automation
+    - artificial intelligence
+    - enterprise
+    - explainability
+    - ai interactivity
+    - generate
+    - generative
+    - label
+    - slug
+  sizes:
+    - 32
 - name: ai-launch
   friendly_name: Launch AI
   aliases:
@@ -1271,6 +1286,43 @@
     - action
   sizes:
     - 32
+- name: array--booleans
+  friendly_name: Array of booleans
+  aliases:
+    - true false
+    - booleans
+  sizes:
+    - 32
+- name: array--dates
+  friendly_name: Array of dates
+  aliases:
+    - dates
+    - calendars
+  sizes:
+    - 32
+- name: array--numbers
+  friendly_name: Array of numbers
+  aliases:
+    - numbers
+  sizes:
+    - 32
+- name: array--objects
+  friendly_name: Array of objects
+  aliases:
+    - curly brackets
+    - objects array
+    - object array
+  sizes:
+    - 32
+- name: array--strings
+  friendly_name: Array of strings
+  aliases:
+    - strings
+    - letters
+    - characters
+    - strings array
+  sizes:
+    - 32
 - name: arrival
   friendly_name: Arrival
   aliases:
@@ -1916,6 +1968,18 @@
     - instruments
   sizes:
     - 32
+- name: bland-altman-plot
+  friendly_name: Bland-Altman plot
+  aliases:
+    - SPSS
+    - statistics
+    - bland altman plot
+    - Difference
+    - Scatter plot
+    - Data chart
+    - averages
+  sizes:
+    - 32
 - name: bloch-sphere
   friendly_name: Bloch sphere
   aliases:
@@ -2349,6 +2413,30 @@
     - health
     - brush
     - polygon
+  sizes:
+    - 32
+- name: build--image
+  friendly_name: Image build
+  aliases:
+    - build
+    - 'image build,'
+    - container image
+    - source code
+    - cube
+    - settings
+    - cogwheel
+  sizes:
+    - 32
+- name: build--run
+  friendly_name: Build run
+  aliases:
+    - occurrence of a build
+    - build
+    - 'image build,'
+    - container image
+    - source code
+    - cube
+    - arrow
   sizes:
     - 32
 - name: build-tool
@@ -7422,6 +7510,18 @@
     - draft
   sizes:
     - 32
+- name: document--processor
+  friendly_name: Document processor
+  aliases:
+    - document
+    - processing
+    - extraction
+    - classification
+    - data
+    - AI
+    - digital labor
+  sizes:
+    - 32
 - name: document--protected
   friendly_name: Document protected
   aliases:
@@ -9316,6 +9416,15 @@
     - function
   sizes:
     - 32
+- name: function--2
+  friendly_name: Function 2
+  aliases:
+    - stateless code snippet
+    - http request
+    - runtime environment
+    - brackets
+  sizes:
+    - 32
 - name: function-math
   friendly_name: Function math
   aliases:
@@ -9396,7 +9505,7 @@
   sizes:
     - 32
 - name: gateway--api
-  friendly_name: Gateway api
+  friendly_name: Gateway API
   aliases:
     - gateway
     - systems
@@ -10224,6 +10333,58 @@
     - event management
   sizes:
     - 32
+- name: ibm--api-connect
+  friendly_name: IBM API Connect®
+  aliases:
+    - IBM API Connect
+    - Hybrid Cloud
+    - Circle
+    - System
+    - Network
+    - connections
+    - API platform
+    - API management
+    - API monetization
+    - API creation
+  sizes:
+    - 32
+- name: ibm--app-connect-enterprise
+  friendly_name: IBM App Connect Enterprise
+  aliases:
+    - Cloud
+    - Cognitive
+    - Software
+    - Line
+    - Circle
+    - Connect
+    - Share
+    - App Connect
+    - Application connection
+    - Data integration tool
+    - Data management
+    - App integration
+    - Workflows
+    - Integration workflows
+    - Integration tool
+  sizes:
+    - 32
+- name: ibm--aspera
+  friendly_name: IBM Aspera®
+  aliases:
+    - Hybrid Cloud
+    - Line
+    - Circle
+    - Connection
+    - Network
+    - IBM Aspera
+    - File transfer
+    - Data transfer
+    - Data streaming
+    - Data movement
+    - File sharing
+    - Data migration
+  sizes:
+    - 32
 - name: ibm--bluepay
   friendly_name: Unassigned
   aliases:
@@ -10246,6 +10407,15 @@
   aliases:
     - content management
     - SaaS
+  sizes:
+    - 32
+- name: ibm--data-power
+  friendly_name: IBM DataPower®
+  aliases:
+    - IBM Data Power
+    - Hybrid Cloud
+    - Circle
+    - IBM DataPower
   sizes:
     - 32
 - name: ibm--data-product-exchange
@@ -10310,6 +10480,17 @@
     - open
     - data
     - ai
+  sizes:
+    - 32
+- name: ibm--deployable-architecture
+  friendly_name: Deployable Architecture
+  aliases:
+    - Deployable Architecture
+    - IBM Cloud Catalog
+    - Catalogue
+    - hexagon
+    - launch
+    - speed
   sizes:
     - 32
 - name: ibm--dynamic-route-server
@@ -10604,6 +10785,24 @@
     - arrow
   sizes:
     - 32
+- name: ibm--global-storage-architecture
+  friendly_name: Global Storage Architecture
+  aliases:
+    - cloud
+    - file system
+    - network storage
+  sizes:
+    - 32
+- name: ibm--granite
+  friendly_name: IBM® Granite™
+  aliases:
+    - IBM Granite
+    - AI
+    - foundation models
+    - open-source
+    - cube
+  sizes:
+    - 32
 - name: ibm--ibv
   friendly_name: IBM® Institute for Business Value
   aliases:
@@ -10637,6 +10836,58 @@
     - product
     - components
     - service
+  sizes:
+    - 32
+- name: ibm--knowledge-catalog
+  friendly_name: IBM® Knowledge Catalog
+  aliases:
+    - ibm knowledge catalog
+    - Notebook
+    - File
+    - Inventory
+    - Catalog
+    - list
+    - information
+    - repository
+    - book
+    - binder
+    - document
+    - four squares
+  sizes:
+    - 32
+- name: ibm--knowledge-catalog-premium
+  friendly_name: IBM® Knowledge Catalog Premium
+  aliases:
+    - ibm knowledge catalog premium
+    - catalog
+    - information
+    - repository
+    - book
+    - binder
+    - premium
+    - document
+    - star
+    - file
+    - document
+    - list
+  sizes:
+    - 32
+- name: ibm--knowledge-catalog-standard
+  friendly_name: IBM® Knowledge Catalog Standard
+  aliases:
+    - ibm knowledge catalog standard
+    - information
+    - repository
+    - book
+    - binder
+    - standard
+    - document
+    - checkmark
+    - ok
+    - list
+    - notebook
+    - file
+    - inventory
   sizes:
     - 32
 - name: ibm--launchpad-s4
@@ -10705,6 +10956,28 @@
     - server
   sizes:
     - 32
+- name: ibm--machine-learning-for-zos
+  friendly_name: IBM® Machine Learning for z/OS®
+  aliases:
+    - IBM Machine Learning for z/OS
+    - IBM Machine Learning for zOS
+    - server
+    - IBM Z
+    - transactional AI
+    - model development
+    - model deployment
+    - user management
+    - system administration
+    - dashboard
+    - IBM MLZ
+    - IBM z16
+    - Telum
+    - colocation
+    - inferencing
+    - server
+    - AI
+  sizes:
+    - 32
 - name: ibm--match-360
   friendly_name: IBM® Match 360
   aliases:
@@ -10744,6 +11017,18 @@
     - cloud
     - financial services
     - secure
+  sizes:
+    - 32
+- name: ibm--planning-analytics
+  friendly_name: IBM Planning Analytics
+  aliases:
+    - Hybrid Cloud
+    - Data
+    - Speed
+    - Hexagon
+    - lines
+    - dots
+    - Build
   sizes:
     - 32
 - name: ibm--power-vs
@@ -10848,6 +11133,15 @@
     - secure
   sizes:
     - 32
+- name: ibm--streamsets
+  friendly_name: IBM StreamSets
+  aliases:
+    - ibm streamsets
+    - ibm stream sets
+    - hybrid cloud
+    - data fabric
+  sizes:
+    - 32
 - name: ibm--telehealth
   friendly_name: IBM® Telehealth
   aliases:
@@ -10887,6 +11181,18 @@
     - insights
     - visualization
     - dashboard
+  sizes:
+    - 32
+- name: ibm--unstructured-data-processor
+  friendly_name: IBM® Unstructured Data Processor
+  aliases:
+    - filter
+    - data
+    - unstructured
+    - data processing
+    - processing
+    - shapes
+    - platform
   sizes:
     - 32
 - name: ibm--vpn-for-vpc
@@ -10947,6 +11253,39 @@
     - service
   sizes:
     - 32
+- name: ibm-cloud--backup-and-recovery
+  friendly_name: IBM Cloud® Backup and Recovery
+  aliases:
+    - IBM Cloud Backup and Recovery
+    - arrow
+    - refresh
+    - storage
+    - infrastructure
+    - application
+    - protection
+    - workload
+    - encryption
+    - policy
+    - automation
+  sizes:
+    - 32
+- name: ibm-cloud--backup-service-vpc
+  friendly_name: IBM Cloud® Backup Service for VPC
+  aliases:
+    - IBM Cloud Backup Service for VPC
+    - managed services
+    - backup
+    - virtual private cloud
+    - block storage
+    - cloud
+    - volumes
+    - refresh
+    - arrow
+    - reset
+    - server
+    - infrastructure
+  sizes:
+    - 32
 - name: ibm-cloud--bare-metal-server
   friendly_name: IBM Cloud® Bare Metal Server
   aliases:
@@ -10980,6 +11319,18 @@
     - squares
   sizes:
     - 32
+- name: ibm-cloud--code-engine
+  friendly_name: IBM Cloud® Code Engine
+  aliases:
+    - Hybrid cloud
+    - IBM Cloud Code Engine
+    - Data
+    - AI
+    - Squares
+    - Speed
+    - App creation
+  sizes:
+    - 32
 - name: ibm-cloud--continuous-delivery
   friendly_name: IBM Cloud® Continuous Delivery
   aliases:
@@ -10989,6 +11340,14 @@
     - automate tests
     - quality control
     - analytics
+  sizes:
+    - 32
+- name: ibm-cloud--databases
+  friendly_name: IBM Cloud® Databases
+  aliases:
+    - infrastructure
+    - servers
+    - data center
   sizes:
     - 32
 - name: ibm-cloud--dedicated-host
@@ -11178,6 +11537,20 @@
     - infrastructure
   sizes:
     - 32
+- name: ibm-cloud--gate-keeper
+  friendly_name: IBM Cloud® Gate Keeper
+  aliases:
+    - IBM Cloud Gate Keeper
+    - fraud analysis
+    - fraud detection
+    - fraud investigation
+    - security
+    - shield
+    - check
+    - checkmark
+    - ok
+  sizes:
+    - 32
 - name: ibm-cloud--hpc
   friendly_name: IBM Cloud® HPC
   aliases:
@@ -11346,6 +11719,15 @@
     - up arrow
   sizes:
     - 32
+- name: ibm-cloud--observability
+  friendly_name: IBM Cloud® Observability
+  aliases:
+    - cloud
+    - list
+    - checkmarks
+    - ok
+  sizes:
+    - 32
 - name: ibm-cloud--pal
   friendly_name: Carbon for Cloud
   aliases:
@@ -11416,6 +11798,23 @@
     - circle
   sizes:
     - 32
+- name: ibm-cloud--security
+  friendly_name: IBM Cloud® Security
+  aliases:
+    - security
+    - configuration
+    - automation
+    - cloud
+    - compliance
+    - secrets
+    - keys
+    - encryption
+    - secure
+    - workloads
+    - management
+    - shield cloud
+  sizes:
+    - 32
 - name: ibm-cloud--security-compliance-center
   friendly_name: IBM Cloud® Security and Compliance Center
   aliases:
@@ -11440,6 +11839,23 @@
     - infrastructure
     - alert
     - insights
+  sizes:
+    - 32
+- name: ibm-cloud--security-groups
+  friendly_name: IBM Cloud® Security Groups
+  aliases:
+    - IBM Cloud Security Groups
+    - IP filter
+    - incoming
+    - outgoing
+    - traffic
+    - virtual server
+    - rules
+    - shield
+    - security
+    - list
+    - text
+    - policy
   sizes:
     - 32
 - name: ibm-cloud--subnets
@@ -11516,6 +11932,34 @@
     - virtual private cloud
   sizes:
     - 32
+- name: ibm-cloud--vpc-block-storage-snapshots
+  friendly_name: IBM Cloud® Block Storage Snapshots for VPC
+  aliases:
+    - IBM Cloud Block Storage Snapshots for VPC
+    - cube
+    - rays
+    - 3d
+  sizes:
+    - 32
+- name: ibm-cloud--vpc-client-vpn
+  friendly_name: IBM Cloud® Client VPN for VPC
+  aliases:
+    - ibm cloud client vpn for vpc
+    - networking
+    - globe
+    - lock
+    - secure
+    - security
+    - network
+    - connect
+    - infrastructure
+    - web
+    - remote
+    - client to site
+    - access
+    - manage
+  sizes:
+    - 32
 - name: ibm-cloud--vpc-endpoints
   friendly_name: IBM Cloud® VPC endpoints
   aliases:
@@ -11527,6 +11971,26 @@
     - cloud
     - internet
     - cloud
+  sizes:
+    - 32
+- name: ibm-cloud--vpc-file-storage
+  friendly_name: IBM Cloud® File Storage for VPC
+  aliases:
+    - IBM Cloud Block Storage for VPC
+    - file
+    - folder
+    - list
+    - archive
+  sizes:
+    - 32
+- name: ibm-cloud--vpc-images
+  friendly_name: Images for VPC
+  aliases:
+    - virtual servers
+    - settings
+    - configuration
+    - images
+    - camera
   sizes:
     - 32
 - name: ibm-cloud-pak--applications
@@ -11635,6 +12099,100 @@
     - AI
     - AIOps
     - app
+  sizes:
+    - 32
+- name: ibm-devops--control
+  friendly_name: IBM DevOps Control
+  aliases:
+    - collaboration
+    - control
+    - integration
+    - quality assurance
+  sizes:
+    - 32
+- name: ibm-quantum--safe-advisor
+  friendly_name: IBM Quantum Safe™ Advisor
+  aliases:
+    - research
+    - scan
+    - source
+    - generate
+    - code
+    - network
+    - cryptography
+    - inventory
+    - security
+    - post-quantum
+    - quantum-safe
+    - artifact
+    - library
+    - function
+    - protocol
+    - algorithm
+    - encryption
+    - CBOM
+    - automation
+    - scalable
+    - compliance
+    - remediation
+    - analysis
+    - risk
+    - prioritization
+    - posture
+    - shield
+  sizes:
+    - 32
+- name: ibm-quantum--safe-explorer
+  friendly_name: IBM Quantum Safe™ Explorer
+  aliases:
+    - research
+    - scan
+    - source
+    - generate
+    - code
+    - network
+    - cryptography
+    - inventory
+    - security
+    - post-quantum
+    - quantum-safe
+    - artifact
+    - library
+    - function
+    - protocol
+    - algorithm
+    - encryption
+    - CBOM
+    - shield
+    - security
+  sizes:
+    - 32
+- name: ibm-quantum--safe-remediator
+  friendly_name: IBM Quantum Safe™ Remediator
+  aliases:
+    - research
+    - scan
+    - source
+    - generate
+    - code
+    - network
+    - cryptography
+    - inventory
+    - security
+    - post-quantum
+    - quantum-safe
+    - artifact
+    - library
+    - function
+    - protocol
+    - algorithm
+    - encryption
+    - CBOM
+    - automation
+    - scalable
+    - compliance
+    - remediation
+    - shield
   sizes:
     - 32
 - name: ibm-security
@@ -12035,6 +12593,19 @@
     - application
   sizes:
     - 32
+- name: ibm-watsonx--code-assistant-for-z-validation-assistant
+  friendly_name: IBM watsonx™ Code Assistant for Z Validation Assistant
+  aliases:
+    - ibm watsonx code assistant for Z Validation Assistant
+    - AI assistant
+    - code
+    - COBOL
+    - Java
+    - checkmark
+    - ok
+    - circle
+  sizes:
+    - 32
 - name: ibm-watsonx--orchestrate
   friendly_name: IBM® watsonx™ Orchestrate
   aliases:
@@ -12074,6 +12645,20 @@
     - integration
     - deployment
     - security
+  sizes:
+    - 32
+- name: ibm-z--open-editor
+  friendly_name: IBM Z® Open Editor
+  aliases:
+    - Systems
+    - IT
+    - IBM Z Open Editor
+    - Infrastructure
+    - Hexagon
+    - DevOps
+    - Developer
+    - Build
+    - Code
   sizes:
     - 32
 - name: ibm-z--processor-capacity-reference
@@ -12882,6 +13467,24 @@
     - file set
     - ISO
     - outline
+- name: job--daemon
+  friendly_name: Daemon job
+  aliases:
+    - job run
+    - retry
+    - infinite loop
+    - infinite execution
+  sizes:
+    - 32
+- name: job--run
+  friendly_name: Job run
+  aliases:
+    - job
+    - instance
+    - execution
+    - arrow
+  sizes:
+    - 32
 - name: join--full
   friendly_name: Join full
   aliases:
@@ -14715,6 +15318,11 @@
     - machine learning model
     - ML
     - model
+    - AI
+    - foundation model
+    - watsonx
+    - deep learning
+    - brain
   sizes:
     - 32
 - name: magic-wand
@@ -15202,6 +15810,20 @@
     - weather
   sizes:
     - 32
+- name: ml-model--reference
+  friendly_name: Machine learning model reference
+  aliases:
+    - AI
+    - model
+    - foundation model
+    - machine learning
+    - reference
+    - brain
+    - generative
+    - deep learning
+    - watsonx
+  sizes:
+    - 32
 - name: mobile
   friendly_name: Mobile
   aliases:
@@ -15380,6 +16002,18 @@
     - fabricate
     - manufacture
     - construct
+  sizes:
+    - 32
+- name: model--foundation
+  friendly_name: Foundation model
+  aliases:
+    - AI
+    - model
+    - foundation model
+    - large language model
+    - generative
+    - deep learning
+    - watsonx
   sizes:
     - 32
 - name: model--reference
@@ -15857,6 +16491,17 @@
     - interface
   sizes:
     - 32
+- name: network-time-protocol
+  friendly_name: Network time protocol
+  aliases:
+    - NTP
+    - flow
+    - watch
+    - time
+    - clock
+    - network time protocol
+  sizes:
+    - 32
 - name: new-tab
   friendly_name: New tab
   aliases:
@@ -16292,6 +16937,13 @@
     - statistic
     - figure
     - alphanumeric
+- name: object
+  friendly_name: Object
+  aliases:
+    - data object
+    - curly brackets
+  sizes:
+    - 32
 - name: object-storage
   friendly_name: Object storage
   aliases:
@@ -17907,6 +18559,19 @@
     - review
     - main
     - branch
+  sizes:
+    - 32
+- name: punctuation-check
+  friendly_name: Punctuation check
+  aliases:
+    - Punctuation check
+    - Spell check
+    - Grammar check
+    - Formatting
+    - quotes
+    - quote marks
+    - quotation marks
+    - curly quotes
   sizes:
     - 32
 - name: purchase
@@ -22239,6 +22904,22 @@
     - 'yes'
     - agree
     - filled
+  sizes:
+    - 32
+- name: thumbs-up-double
+  friendly_name: Double thumbs up
+  aliases:
+    - like
+    - love
+    - thumbs up
+  sizes:
+    - 32
+- name: thumbs-up-double--filled
+  friendly_name: Double thumbs up filled
+  aliases:
+    - like
+    - love
+    - thumbs up
   sizes:
     - 32
 - name: thunderstorm

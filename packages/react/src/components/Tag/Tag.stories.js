@@ -8,72 +8,74 @@
 import React from 'react';
 import { default as Tag } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
-import { Asleep } from '@carbon/icons-react';
+import { Asleep, View, FolderOpen, Folders } from '@carbon/icons-react';
+import Button from '../Button';
+import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
+import { IconButton } from '../IconButton';
+import '../AILabel/ailabel-story.scss';
+import mdx from './Tag.mdx';
 
 export default {
   title: 'Components/Tag',
   component: Tag,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const ReadOnly = () => {
+export const ReadOnly = (args) => {
   return (
     <>
-      <Tag className="some-class" type="red">
+      <Tag className="some-class" type="red" {...args}>
         {'Tag content with a long text description'}
       </Tag>
-      <Tag className="some-class" type="magenta">
+      <Tag className="some-class" type="magenta" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="purple">
+      <Tag className="some-class" type="purple" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="blue">
+      <Tag className="some-class" type="blue" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="cyan">
+      <Tag className="some-class" type="cyan" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="teal">
+      <Tag className="some-class" type="teal" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="green">
+      <Tag className="some-class" type="green" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="gray">
+      <Tag className="some-class" type="gray" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="cool-gray">
+      <Tag className="some-class" type="cool-gray" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="warm-gray">
+      <Tag className="some-class" type="warm-gray" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="high-contrast">
+      <Tag className="some-class" type="high-contrast" {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="outline">
+      <Tag className="some-class" type="outline" {...args}>
         {'Tag content'}
       </Tag>
     </>
   );
 };
 
-export const Playground = (args) => {
-  return (
-    <Tag renderIcon={Asleep} {...args}>
-      {'Tag content'}
-    </Tag>
-  );
-};
-
-Playground.args = {
+ReadOnly.args = {
   disabled: false,
   filter: false,
   size: 'md',
   title: 'Clear filter',
 };
 
-Playground.argTypes = {
+ReadOnly.argTypes = {
   children: {
     control: false,
   },
@@ -108,23 +110,7 @@ Playground.argTypes = {
     },
   },
   type: {
-    options: [
-      'red',
-      'magenta',
-      'purple',
-      'blue',
-      'cyan',
-      'teal',
-      'green',
-      'gray',
-      'cool-gray',
-      'warm-gray',
-      'high-contrast',
-      'outline',
-    ],
-    control: {
-      type: 'select',
-    },
+    control: false,
   },
 };
 
@@ -197,3 +183,70 @@ Skeleton.argTypes = {
     },
   },
 };
+
+const aiLabel = (
+  <AILabel className="ai-label-container">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+export const withAILabel = () => (
+  <div style={{ marginBottom: '4rem' }}>
+    <Tag slug={aiLabel} className="some-class" type="red" title="Clear Filter">
+      {'Tag'}
+    </Tag>
+
+    <Tag
+      filter
+      slug={aiLabel}
+      className="some-class"
+      type="purple"
+      title="Clear Filter">
+      {'Tag'}
+    </Tag>
+
+    <Tag
+      renderIcon={Asleep}
+      slug={aiLabel}
+      className="some-class"
+      type="blue"
+      title="Clear Filter">
+      {'Tag'}
+    </Tag>
+
+    <Tag
+      filter
+      renderIcon={Asleep}
+      slug={aiLabel}
+      className="some-class"
+      type="green"
+      title="Clear Filter">
+      {'Tag'}
+    </Tag>
+  </div>
+);

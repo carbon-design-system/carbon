@@ -24,28 +24,30 @@
     "lint": "eslint actions config packages www",
     "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
+    "telemetry:config": "lerna run telemetry:config",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
     "postinstall": "husky"
   },
   "resolutions": {
     "@types/react": "~18.3.0",
-    "@types/prop-types": "15.7.12",
+    "@types/prop-types": "15.7.13",
     "ast-types": "^0.14.0",
     "node-sass": "^9.0.0",
     "react": "~18.3.0",
     "react-dom": "~18.3.0",
-    "react-is": "~18.3.0"
+    "react-is": "~18.3.0",
+    "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.2",
-    "@babel/plugin-proposal-class-properties": "^7.17.12",
-    "@babel/plugin-proposal-export-default-from": "^7.17.12",
-    "@babel/plugin-proposal-export-namespace-from": "^7.17.12",
-    "@babel/plugin-transform-runtime": "^7.18.2",
-    "@babel/preset-env": "^7.18.2",
-    "@babel/preset-react": "^7.17.12",
-    "@babel/runtime": "^7.18.3",
+    "@babel/core": "^7.24.7",
+    "@babel/plugin-proposal-export-default-from": "^7.24.7",
+    "@babel/plugin-transform-class-properties": "^7.24.7",
+    "@babel/plugin-transform-export-namespace-from": "^7.24.7",
+    "@babel/plugin-transform-runtime": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/runtime": "^7.24.7",
     "@carbon/cli": "workspace:packages/cli",
     "@commitlint/cli": "^18.0.0",
     "@commitlint/config-conventional": "^18.0.0",
@@ -63,19 +65,19 @@
     "cross-spawn": "^7.0.0",
     "doctoc": "^2.0.0",
     "eslint": "^9.0.0",
-    "eslint-plugin-playwright": "^1.0.0",
+    "eslint-plugin-playwright": "^2.0.0",
     "fs-extra": "^11.0.0",
-    "glob": "^10.0.0",
+    "glob": "^11.0.0",
     "husky": "^9.0.0",
     "jest": "^28.1.0",
     "jest-junit": "^16.0.0",
     "lerna": "^8.0.0",
     "lint-staged": "^15.0.0",
-    "prettier": "^2.8.8",
+    "prettier": "^3.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.0",
-    "stylelint": "^15.0.0"
+    "stylelint": "^16.0.0"
   },
   "commitlint": {
     "extends": [
@@ -145,5 +147,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@4.2.2"
+  "packageManager": "yarn@4.5.1"
 }

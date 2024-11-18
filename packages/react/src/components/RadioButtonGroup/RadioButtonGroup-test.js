@@ -10,7 +10,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import RadioButtonGroup from './RadioButtonGroup';
 import RadioButton from '../RadioButton';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -233,9 +233,23 @@ describe('RadioButtonGroup', () => {
       );
     });
 
-    it('should respect slug prop', () => {
+    it('should respect decorator prop', () => {
       const { container } = render(
-        <RadioButtonGroup slug={<Slug />} name="test" legendText="test">
+        <RadioButtonGroup decorator={<AILabel />} name="test" legendText="test">
+          <RadioButton labelText="test-1" value={1} />
+          <RadioButton labelText="test-0" value={0} />
+        </RadioButtonGroup>
+      );
+
+      expect(container.firstChild.firstChild).toHaveClass(
+        `${prefix}--radio-button-group--decorator`
+      );
+    });
+
+    it('should respect deprecated slug prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      const { container } = render(
+        <RadioButtonGroup slug={<AILabel />} name="test" legendText="test">
           <RadioButton labelText="test-1" value={1} />
           <RadioButton labelText="test-0" value={0} />
         </RadioButtonGroup>
@@ -244,6 +258,7 @@ describe('RadioButtonGroup', () => {
       expect(container.firstChild.firstChild).toHaveClass(
         `${prefix}--radio-button-group--slug`
       );
+      spy.mockRestore();
     });
 
     it('should call `onChange` when the value of the group changes', async () => {

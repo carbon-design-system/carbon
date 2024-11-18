@@ -21,18 +21,41 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { hide } from '@floating-ui/dom';
+import { useFeatureFlag } from '../FeatureFlags';
 import mergeRefs from '../../tools/mergeRefs';
 import { MenuAlignment } from '../MenuButton';
+import { TranslateWithId } from '../../types/common';
+import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 
 const defaultTranslations = {
   'carbon.combo-button.additional-actions': 'Additional actions',
+};
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = keyof typeof defaultTranslations;
+
+const propMappingFunction = (deprecatedValue) => {
+  const mapping = {
+    'top-left': 'top-start',
+    'top-right': 'top-end',
+    'bottom-left': 'bottom-start',
+    'bottom-right': 'bottom-end',
+    'left-bottom': 'left-end',
+    'left-top': 'left-start',
+    'right-bottom': 'right-end',
+    'right-top': 'right-start',
+  };
+  return mapping[deprecatedValue];
 };
 
 function defaultTranslateWithId(messageId: string) {
   return defaultTranslations[messageId];
 }
 
-interface ComboButtonProps {
+interface ComboButtonProps extends TranslateWithId<TranslationKey> {
   /**
    * A collection of `MenuItems` to be rendered as additional actions for this `ComboButton`.
    */
@@ -72,12 +95,6 @@ interface ComboButtonProps {
    * Specify how the trigger tooltip should be aligned.
    */
   tooltipAlignment?: React.ComponentProps<typeof IconButton>['align'];
-
-  /**
-   * Optional method that takes in a message `id` and returns an
-   * internationalized string.
-   */
-  translateWithId?: (id: string) => string;
 }
 
 const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
@@ -96,10 +113,20 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     },
     forwardRef
   ) {
+    // feature flag utilized to separate out only the dynamic styles from @floating-ui
+    // flag is turned on when collision detection (ie. flip, hide) logic is not desired
+    const enableOnlyFloatingStyles = useFeatureFlag(
+      'enable-v12-dynamic-floating-styles'
+    );
+
     const id = useId('combobutton');
     const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement>(null);
-    const middlewares = [flip({ crossAxis: false })];
+    let middlewares: any[] = [];
+
+    if (!enableOnlyFloatingStyles) {
+      middlewares = [flip({ crossAxis: false }), hide()];
+    }
 
     if (menuAlignment === 'bottom' || menuAlignment === 'top') {
       middlewares.push(
@@ -134,9 +161,13 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     } = useAttachedMenu(containerRef);
 
     useLayoutEffect(() => {
-      Object.keys(floatingStyles).forEach((style) => {
+      const updatedFloatingStyles = {
+        ...floatingStyles,
+        visibility: middlewareData.hide?.referenceHidden ? 'hidden' : 'visible',
+      };
+      Object.keys(updatedFloatingStyles).forEach((style) => {
         if (refs.floating.current) {
-          refs.floating.current.style[style] = floatingStyles[style];
+          refs.floating.current.style[style] = updatedFloatingStyles[style];
         }
       });
     }, [floatingStyles, refs.floating, middlewareData, placement, open]);
@@ -261,20 +292,52 @@ ComboButton.propTypes = {
   /**
    * Specify how the trigger tooltip should be aligned.
    */
-  tooltipAlignment: PropTypes.oneOf([
-    'top',
-    'top-left',
-    'top-start',
-    'top-right',
-    'top-end',
-    'bottom',
-    'bottom-left',
-    'bottom-start',
-    'bottom-right',
-    'bottom-end',
-    'left',
-    'right',
-  ]),
+  tooltipAlignment: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'top',
+      'top-left', // deprecated use top-start instead
+      'top-right', // deprecated use top-end instead
+
+      'bottom',
+      'bottom-left', // deprecated use bottom-start instead
+      'bottom-right', // deprecated use bottom-end instead
+
+      'left',
+      'left-bottom', // deprecated use left-end instead
+      'left-top', // deprecated use left-start instead
+
+      'right',
+      'right-bottom', // deprecated use right-end instead
+      'right-top', // deprecated use right-start instead
+
+      // new values to match floating-ui
+      'top-start',
+      'top-end',
+      'bottom-start',
+      'bottom-end',
+      'left-end',
+      'left-start',
+      'right-end',
+      'right-start',
+    ]),
+    //allowed prop values
+    [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+    //optional mapper function
+    propMappingFunction
+  ),
 
   /**
    * Optional method that takes in a message id and returns an

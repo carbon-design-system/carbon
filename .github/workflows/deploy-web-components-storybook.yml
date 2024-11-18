@@ -1,0 +1,54 @@
+name: Deploy Web Components storybook to GH pages
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      # Matches tags that have the shape `vX.Y.Z`. Reference:
+      # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requesttagsbranches
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+      # Ignore tags that use a preid after `vX.Y.Z`, for example: vX.Y.Z-alpha.0
+      # https://help.github.com/en/articles/workflow-syntax-for-github-actions#example-using-positive-and-negative-patterns
+      - '!v[0-9]+.[0-9]+.[0-9]+-*'
+      - '!v10*'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20.x'
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache
+      - name: Build project
+        run: yarn build
+      - name: Build static Web Components storybook
+        run: |
+          cd packages/web-components
+          yarn storybook:build
+      - name: Create CNAME
+        run: |
+          touch packages/web-components/storybook-static/.nojekyll
+          touch packages/web-components/storybook-static/CNAME
+          echo "web-components.carbondesignsystem.com" > packages/web-components/storybook-static/CNAME
+      - name: Push to Web Components repo
+        uses: cpina/github-action-push-to-another-repository@07c4d7b3def0a8ebe788a8f2c843a4e1de4f6900 #v1.7.2
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        with:
+          source-directory: 'packages/web-components/storybook-static'
+          destination-github-username: 'carbon-design-system'
+          destination-repository-name: 'carbon-web-components-storybook-v2'
+          user-name: carbon-bot
+          user-email: carbon@us.ibm.com
+          target-branch: main
+          commit-message: 'chore(website): update to latest'

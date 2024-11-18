@@ -15,6 +15,9 @@ import {
 } from '@carbon/icons-react';
 import { IconButton } from '../IconButton';
 import { usePrefix } from '../../internal/usePrefix';
+import { TranslateWithId } from '../../types/common';
+import { breakpoints } from '@carbon/layout';
+import { useMatchMedia } from '../../internal/useMatchMedia';
 
 const translationIds = {
   'carbon.pagination-nav.next': 'Next',
@@ -22,7 +25,12 @@ const translationIds = {
   'carbon.pagination-nav.item': 'Page',
   'carbon.pagination-nav.active': 'Active',
   'carbon.pagination-nav.of': 'of',
-};
+} as const;
+
+/**
+ * Message ids that will be passed to translateWithId().
+ */
+type TranslationKey = keyof typeof translationIds;
 
 function translateWithId(messageId: string): string {
   return translationIds[messageId];
@@ -117,7 +125,10 @@ function DirectionButton({
   );
 }
 
-interface PaginationItemProps {
+interface PaginationItemProps
+  extends TranslateWithId<
+    'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
+  > {
   /**
    * Whether or not this is the currently active page.
    */
@@ -132,12 +143,6 @@ interface PaginationItemProps {
    * The page number this item represents.
    */
   page?: number;
-
-  /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
-   */
-  translateWithId?: (id: string) => string;
 }
 
 function PaginationItem({
@@ -170,7 +175,10 @@ function PaginationItem({
   );
 }
 
-interface PaginationOverflowProps {
+interface PaginationOverflowProps
+  extends TranslateWithId<
+    'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
+  > {
   /**
    * How many items to display in this overflow.
    */
@@ -191,12 +199,6 @@ interface PaginationOverflowProps {
    * Set this to true if you are having performance problems with large data sets.
    */
   disableOverflow?: boolean;
-
-  /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
-   */
-  translateWithId?: (id: string) => string;
 }
 
 function PaginationOverflow({
@@ -278,7 +280,8 @@ function PaginationOverflow({
 }
 
 interface PaginationNavProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, 'onChange'> {
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'onChange'>,
+    TranslateWithId<TranslationKey> {
   /**
    * Additional CSS class names.
    */
@@ -291,7 +294,7 @@ interface PaginationNavProps
   disableOverflow?: boolean;
 
   /**
-   * The number of items to be shown.
+   * The number of items to be shown (minimum of 4 unless props.items < 4).
    */
   itemsShown?: number;
 
@@ -311,15 +314,14 @@ interface PaginationNavProps
   page?: number;
 
   /**
+   * Specify the size of the PaginationNav.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
    * The total number of items.
    */
   totalItems?: number;
-
-  /**
-   * Specify a custom translation function that takes in a message identifier
-   * and returns the localized string for the message
-   */
-  translateWithId?: (id: string) => string;
 }
 
 const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
@@ -332,15 +334,20 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       itemsShown = 10,
       page = 0,
       loop = false,
+      size = 'lg',
       translateWithId: t = translateWithId,
       ...rest
     },
     ref
   ) {
+    const smMediaQuery = `(max-width: ${breakpoints.sm.width})`;
+    const isSm = useMatchMedia(smMediaQuery);
+
     const [currentPage, setCurrentPage] = useState(page);
     const [itemsDisplayedOnPage, setItemsDisplayedOnPage] = useState(
-      itemsShown >= 4 ? itemsShown : 4
+      itemsShown >= 4 && !isSm ? itemsShown : 4
     );
+
     const [cuts, setCuts] = useState(
       calculateCuts(currentPage, totalItems, itemsDisplayedOnPage)
     );
@@ -382,7 +389,8 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
     function pageWouldBeHidden(page: number) {
       const startOffset = itemsDisplayedOnPage <= 4 && page > 1 ? 0 : 1;
 
-      const wouldBeHiddenInFront = page >= startOffset && page <= cuts.front;
+      const wouldBeHiddenInFront =
+        (page >= startOffset && page <= cuts.front) || page === 0;
       const wouldBeHiddenInBack =
         page >= totalItems - cuts.back - 1 && page <= totalItems - 2;
 
@@ -396,9 +404,12 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
 
     // re-calculate cuts if props.totalItems or props.itemsShown change
     useEffect(() => {
-      setItemsDisplayedOnPage(itemsShown >= 4 ? itemsShown : 4);
-      setCuts(calculateCuts(currentPage, totalItems, itemsShown));
-    }, [totalItems, itemsShown]); // eslint-disable-line react-hooks/exhaustive-deps
+      const itemsToBeShown = itemsShown >= 4 && !isSm ? itemsShown : 4;
+      setItemsDisplayedOnPage(Math.max(itemsToBeShown, 4));
+      setCuts(
+        calculateCuts(currentPage, totalItems, Math.max(itemsToBeShown, 4))
+      );
+    }, [totalItems, itemsShown, isSm]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // update cuts if necessary whenever currentPage changes
     useEffect(() => {
@@ -433,7 +444,9 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       setIsOverFlowDisabled(disableOverflow);
     }, [disableOverflow]);
 
-    const classNames = classnames(`${prefix}--pagination-nav`, className);
+    const classNames = classnames(`${prefix}--pagination-nav`, className, {
+      [`${prefix}--layout--size-${size}`]: size,
+    });
 
     const backwardButtonDisabled = !loop && currentPage === 0;
     const forwardButtonDisabled = !loop && currentPage === totalItems - 1;
@@ -618,7 +631,7 @@ PaginationNav.propTypes = {
   disableOverflow: PropTypes.bool, // eslint-disable-line react/prop-types
 
   /**
-   * The number of items to be shown.
+   * The number of items to be shown (minimum of 4 unless props.items < 4).
    */
   itemsShown: PropTypes.number,
 
@@ -636,6 +649,11 @@ PaginationNav.propTypes = {
    * The index of current page.
    */
   page: PropTypes.number,
+
+  /**
+   * Specify the size of the PaginationNav.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * The total number of items.

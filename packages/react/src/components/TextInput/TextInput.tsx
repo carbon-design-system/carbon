@@ -6,7 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode, useContext, useState } from 'react';
+import React, {
+  ReactNode,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+} from 'react';
 import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import PasswordInput from './PasswordInput';
@@ -29,6 +35,11 @@ export interface TextInputProps
    * Specify an optional className to be applied to the `<input>` node
    */
   className?: string;
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TextInput` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Optionally provide the default value of the `<input>`
@@ -122,6 +133,7 @@ export interface TextInputProps
   size?: 'sm' | 'md' | 'lg' | 'xl';
 
   /**
+   * @deprecated please use `decorator` instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component
    */
   slug?: ReactNode;
@@ -150,6 +162,7 @@ export interface TextInputProps
 const TextInput = React.forwardRef(function TextInput(
   {
     className,
+    decorator,
     disabled = false,
     helperText,
     hideLabel,
@@ -258,6 +271,7 @@ const TextInput = React.forwardRef(function TextInput(
     {
       [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
       [`${prefix}--text-input__field-wrapper--slug`]: slug,
+      [`${prefix}--text-input__field-wrapper--decorator`]: decorator,
     }
   );
   const iconClasses = classNames({
@@ -310,15 +324,47 @@ const TextInput = React.forwardRef(function TextInput(
   );
 
   const { isFluid } = useContext(FormContext);
+  const announcerRef = useRef(null);
+  const [prevAnnouncement, setPrevAnnouncement] = useState('');
   const ariaAnnouncement = useAnnouncer(textCount, maxCount);
+  useEffect(() => {
+    if (ariaAnnouncement && ariaAnnouncement !== prevAnnouncement) {
+      const announcer = announcerRef.current as HTMLSpanElement | null;
+      if (announcer) {
+        // Clear the content first
+        announcer.textContent = '';
+        // Set the new content after a small delay
+        const timeoutId = setTimeout(() => {
+          if (announcer) {
+            announcer.textContent = ariaAnnouncement;
+            setPrevAnnouncement(ariaAnnouncement);
+          }
+        }, 1000);
+        // clear the timeout
+        return () => {
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+        };
+      }
+    }
+  }, [ariaAnnouncement, prevAnnouncement]);
   const Icon = normalizedProps.icon as any;
 
-  // Slug is always size `mini`
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'mini',
-    });
+  // AILabel is always size `mini`
+  let normalizedDecorator = React.isValidElement(slug ?? decorator)
+    ? slug ?? decorator
+    : null;
+  if (
+    normalizedDecorator &&
+    normalizedDecorator['type']?.displayName === 'AILabel'
+  ) {
+    normalizedDecorator = React.cloneElement(
+      normalizedDecorator as React.ReactElement<any>,
+      {
+        size: 'mini',
+      }
+    );
   }
 
   return (
@@ -337,8 +383,22 @@ const TextInput = React.forwardRef(function TextInput(
           data-invalid={normalizedProps.invalid || null}>
           {Icon && <Icon className={iconClasses} />}
           {input}
-          {normalizedSlug}
-          <span className={`${prefix}--text-input__counter-alert`} role="alert">
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div
+              className={`${prefix}--text-input__field-inner-wrapper--decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
+          <span
+            className={`${prefix}--text-input__counter-alert`}
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+            ref={announcerRef}>
             {ariaAnnouncement}
           </span>
           {isFluid && <hr className={`${prefix}--text-input__divider`} />}
@@ -358,6 +418,11 @@ TextInput.propTypes = {
    * Specify an optional className to be applied to the `<input>` node
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TextInput` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Optionally provide the default value of the `<input>`
@@ -455,7 +520,11 @@ TextInput.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop for `TextInput` has ' +
+      'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the type of the `<input>`

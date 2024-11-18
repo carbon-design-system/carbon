@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack workflow
         id: slack
-        uses: slackapi/slack-github-action@70cd7be8e40a46e8b0eced40b0de447bdb42f68e #v1.26.0
+        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
         with:
           payload: |
             {
@@ -34,7 +34,7 @@ jobs:
                 },
                 {
                   "type": "image",
-                  "image_url": "https://carbondesignsystem.com/static/406b7e7bf6865c094dd9a7a0bcb8bd41/3cbba/light-getting-started-developers.png",
+                  "image_url": "https://github.com/user-attachments/assets/e12fb5b9-9657-4e7b-b1a1-e1149cca8956",
                   "alt_text": "A terminal prompt symbol"
                 },
                 {
@@ -105,7 +105,7 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack workflow
         id: slack
-        uses: slackapi/slack-github-action@70cd7be8e40a46e8b0eced40b0de447bdb42f68e #v1.26.0
+        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
         with:
           payload: |
             {
@@ -127,7 +127,7 @@ jobs:
                 },
                 {
                   "type": "image",
-                  "image_url": "https://carbondesignsystem.com/static/406b7e7bf6865c094dd9a7a0bcb8bd41/3cbba/light-getting-started-developers.png",
+                  "image_url": "https://github.com/user-attachments/assets/e12fb5b9-9657-4e7b-b1a1-e1149cca8956",
                   "alt_text": "A terminal prompt symbol"
                 },
                 {
@@ -161,7 +161,7 @@ jobs:
                       "emoji": true
                     },
                     "value": "click_me_123",
-                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10322733",
+                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10408799",
                     "action_id": "button-action"
                   }
                 },
@@ -191,4 +191,96 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-        
+
+  post-reminder-to-carbon-ibmproducts-pal-dev:
+    name: Post dev reminder to ibmproducts-pal-dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send custom JSON data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
+        with:
+          payload: |
+            {
+              "username": "Carbon Design System",
+              "icon_url": "https://user-images.githubusercontent.com/3360588/192045905-5d9705af-92e2-4432-805e-15db98571e8b.png",
+              "channel": "#ibmproducts-pal-dev",
+              "text": "Join us for Carbon Developer Office Hours!",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Join us for Carbon Developer Office Hours!",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "image",
+                  "image_url": "https://github.com/user-attachments/assets/e12fb5b9-9657-4e7b-b1a1-e1149cca8956",
+                  "alt_text": "A terminal prompt symbol"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":thinking_face:   _Are you running into a weird bug you can’t resolve?_  \n\n_:question:  Do you have questions about using Carbon?_  \n\n :rocket:  _Would you like to discuss migrating from v10 to v11?_"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Carbon developer office hours* are a bi-weekly opportunity to discuss topics like these and get help from the team. Developers from the Carbon team will be available to help and answer questions. While it's very informal, please be prepared to screen share and show your issue!"
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":yourlearning:  *Subscribe and add to your calendar*     :ibm-arrow-right::ibm-arrow-right::ibm-arrow-right:"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Subscribe",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10408799",
+                    "action_id": "button-action"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":memo:  *Sign up to get help in a future session*     :ibm-arrow-right::ibm-arrow-right::ibm-arrow-right:"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "View the agenda",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "https://ibm.biz/carbon-dev-office-hours",
+                    "action_id": "button-action"
+                  }
+                },
+                {
+                  "type": "divider"
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

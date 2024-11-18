@@ -8,15 +8,13 @@
 import PropTypes from 'prop-types';
 import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
 import classNames from 'classnames';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-
-const getInstanceId = setupGetInstanceId();
 
 export interface SelectableTagBaseProps {
   /**
@@ -41,6 +39,16 @@ export interface SelectableTagBaseProps {
   renderIcon?: React.ElementType;
 
   /**
+   * Provide an optional hook that is called when selected is changed
+   */
+  onChange?: (selected: boolean) => void;
+
+  /**
+   * Provide an optional function to be called when the tag is clicked.
+   */
+  onClick?: (e: Event) => void;
+
+  /**
    * Specify the state of the selectable tag.
    */
   selected?: boolean;
@@ -50,11 +58,6 @@ export interface SelectableTagBaseProps {
    * `md` (default) or `lg` sizes.
    */
   size?: keyof typeof SIZES;
-
-  /**
-   * **Experimental:** Provide a `Slug` component to be rendered inside the `SelectableTag` component
-   */
-  slug?: ReactNode;
 
   /**
    * Provide text to be rendered inside of a the tag.
@@ -72,15 +75,16 @@ const SelectableTag = <T extends React.ElementType>({
   disabled,
   id,
   renderIcon,
+  onChange,
+  onClick,
   selected = false,
-  slug,
   size,
   text,
   ...other
 }: SelectableTagProps<T>) => {
   const prefix = usePrefix();
   const tagRef = useRef<HTMLElement>();
-  const tagId = id || `tag-${getInstanceId()}`;
+  const tagId = id || `tag-${useId()}`;
   const [selectedTag, setSelectedTag] = useState(selected);
   const tagClasses = classNames(`${prefix}--tag--selectable`, className, {
     [`${prefix}--tag--selectable-selected`]: selectedTag,
@@ -94,22 +98,16 @@ const SelectableTag = <T extends React.ElementType>({
     setIsEllipsisApplied(isEllipsisActive(newElement));
   }, [prefix, tagRef]);
 
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'sm',
-      kind: 'inline',
-    });
-  }
-
   const tooltipClasses = classNames(
     `${prefix}--icon-tooltip`,
     `${prefix}--tag-label-tooltip`
   );
 
-  // Removing onClick from the spread operator
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { onClick, ...otherProps } = other;
+  const handleClick = (e: Event) => {
+    setSelectedTag(!selectedTag);
+    onChange?.(!selectedTag);
+    onClick?.(e);
+  };
 
   if (isEllipsisApplied) {
     return (
@@ -120,19 +118,18 @@ const SelectableTag = <T extends React.ElementType>({
         leaveDelayMs={0}
         onMouseEnter={() => false}>
         <Tag
+          aria-pressed={selectedTag !== false}
           ref={tagRef}
-          slug={slug}
           size={size}
           renderIcon={renderIcon}
           disabled={disabled}
           className={tagClasses}
           id={tagId}
-          onClick={() => setSelectedTag(!selectedTag)}
-          {...otherProps}>
+          onClick={handleClick}
+          {...other}>
           <Text title={text} className={`${prefix}--tag__label`}>
             {text}
           </Text>
-          {normalizedSlug}
         </Tag>
       </Tooltip>
     );
@@ -140,16 +137,15 @@ const SelectableTag = <T extends React.ElementType>({
 
   return (
     <Tag
+      aria-pressed={selectedTag !== false}
       ref={tagRef}
-      slug={slug}
       size={size}
       renderIcon={renderIcon}
       disabled={disabled}
       className={tagClasses}
       id={tagId}
-      onClick={() => setSelectedTag(!selectedTag)}
-      {...otherProps}>
-      {normalizedSlug}
+      onClick={handleClick}
+      {...other}>
       <Text title={text} className={`${prefix}--tag__label`}>
         {text}
       </Text>
@@ -180,6 +176,16 @@ SelectableTag.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
+   * Provide an optional hook that is called when selected is changed
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Provide an optional function to be called when the tag is clicked.
+   */
+  onClick: PropTypes.func,
+
+  /**
    * Specify the state of the selectable tag.
    */
   selected: PropTypes.bool,
@@ -189,11 +195,6 @@ SelectableTag.propTypes = {
    * `md` (default) or `lg` sizes.
    */
   size: PropTypes.oneOf(Object.keys(SIZES)),
-
-  /**
-   * **Experimental:** Provide a `Slug` component to be rendered inside the `SelectableTag` component
-   */
-  slug: PropTypes.node,
 
   /**
    * Provide text to be rendered inside of a the tag.

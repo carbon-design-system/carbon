@@ -1,5 +1,7 @@
-import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import { ArgTypes, Story, Canvas, Meta } from '@storybook/blocks';
 import * as FormGroupStories from './FormGroup.stories';
+
+<Meta isTemplate />
 
 # FormGroup
 
@@ -20,13 +22,11 @@ import * as FormGroupStories from './FormGroup.stories';
 
 ## Overview
 
-<Canvas>
-  <Story of={FormGroupStories.Default} />
-</Canvas>
+<Canvas of={FormGroupStories.Default} />
 
 ## Component API
 
-<Props />
+<ArgTypes />
 
 ## Feedback
 

@@ -9,7 +9,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import RadioButton from '../RadioButton';
-import { Slug } from '../../Slug';
+import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
 
@@ -136,19 +136,51 @@ describe('RadioButton', () => {
     expect(ref).toHaveBeenCalledWith(screen.getByRole('radio'));
   });
 
-  it('should respect slug prop', () => {
+  it('should respect decorator prop', () => {
     const { container } = render(
       <RadioButton
         name="test-name"
         value="test-value"
         labelText="test-label"
-        slug={<Slug />}
+        decorator={<AILabel />}
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--radio-button-wrapper--decorator`
+    );
+  });
+
+  it('should update AILabel size', () => {
+    const { container } = render(
+      <RadioButton
+        name="test-name"
+        value="test-value"
+        labelText="test-label"
+        decorator={<AILabel kind="inline" />}
+      />
+    );
+
+    expect(container.querySelector(`.${prefix}--ai-label__button`)).toHaveClass(
+      `${prefix}--ai-label__button--md`
+    );
+  });
+
+  it('should respect the deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const { container } = render(
+      <RadioButton
+        name="test-name"
+        value="test-value"
+        labelText="test-label"
+        slug={<AILabel />}
       />
     );
 
     expect(container.firstChild).toHaveClass(
       `${prefix}--radio-button-wrapper--slug`
     );
+    spy.mockRestore();
   });
 
   it('should set the "required" attribute on the <input> by default', () => {

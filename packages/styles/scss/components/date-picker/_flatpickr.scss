@@ -145,9 +145,9 @@
   }
 
   .flatpickr-calendar.inline {
-    position: relative;
+    position: absolute;
     display: block;
-    inset-block-start: convert.to-rem(2px);
+    inset-block-start: auto;
   }
 
   .flatpickr-calendar.static {
@@ -265,8 +265,7 @@
   }
 
   .flatpickr-current-month .cur-month {
-    margin-inline-end: $spacing-02;
-    margin-inline-start: $spacing-02;
+    margin-inline: $spacing-02 $spacing-02;
 
     &:hover {
       background-color: $layer-hover;

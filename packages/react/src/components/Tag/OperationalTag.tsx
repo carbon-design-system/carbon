@@ -14,15 +14,13 @@ import React, {
   useRef,
 } from 'react';
 import classNames from 'classnames';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-
-const getInstanceId = setupGetInstanceId();
 
 const TYPES = {
   red: 'Red',
@@ -67,11 +65,6 @@ export interface OperationalTagBaseProps {
   size?: keyof typeof SIZES;
 
   /**
-   * **Experimental:** Provide a `Slug` component to be rendered inside the `OperationalTag` component
-   */
-  slug?: ReactNode;
-
-  /**
    * Provide text to be rendered inside of a the tag.
    */
   text?: string;
@@ -92,7 +85,6 @@ const OperationalTag = <T extends React.ElementType>({
   disabled,
   id,
   renderIcon,
-  slug,
   size,
   text,
   type = 'gray',
@@ -100,7 +92,7 @@ const OperationalTag = <T extends React.ElementType>({
 }: OperationalTagProps<T>) => {
   const prefix = usePrefix();
   const tagRef = useRef<HTMLElement>();
-  const tagId = id || `tag-${getInstanceId()}`;
+  const tagId = id || `tag-${useId()}`;
   const tagClasses = classNames(`${prefix}--tag--operational`, className);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
@@ -111,14 +103,6 @@ const OperationalTag = <T extends React.ElementType>({
 
     setIsEllipsisApplied(isEllipsisActive(newElement));
   }, [prefix, tagRef]);
-
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'sm',
-      kind: 'inline',
-    });
-  }
 
   const tooltipClasses = classNames(
     `${prefix}--icon-tooltip`,
@@ -146,7 +130,6 @@ const OperationalTag = <T extends React.ElementType>({
           <Text title={text} className={`${prefix}--tag__label`}>
             {text}
           </Text>
-          {normalizedSlug}
         </Tag>
       </Tooltip>
     );
@@ -162,7 +145,6 @@ const OperationalTag = <T extends React.ElementType>({
       className={tagClasses}
       id={tagId}
       {...other}>
-      {normalizedSlug}
       <Text title={text} className={`${prefix}--tag__label`}>
         {text}
       </Text>
@@ -197,11 +179,6 @@ OperationalTag.propTypes = {
    * `md` (default) or `lg` sizes.
    */
   size: PropTypes.oneOf(Object.keys(SIZES)),
-
-  /**
-   * **Experimental:** Provide a `Slug` component to be rendered inside the `OperationalTag` component
-   */
-  slug: PropTypes.node,
 
   /**
    * Provide text to be rendered inside of a the tag.

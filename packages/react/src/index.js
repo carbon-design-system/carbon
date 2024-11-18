@@ -7,17 +7,17 @@
 
 import './feature-flags';
 
-export Accordion from './components/Accordion';
-export AccordionItem from './components/AccordionItem';
+export { Accordion } from './components/Accordion';
+export { AccordionItem } from './components/AccordionItem';
 export { AspectRatio } from './components/AspectRatio';
 export { Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
-export Button from './components/Button';
-export ButtonSet from './components/ButtonSet';
-export Checkbox from './components/Checkbox';
-export CheckboxGroup from './components/CheckboxGroup';
+export { Button } from './components/Button';
+export { ButtonSet } from './components/ButtonSet';
+export { Checkbox } from './components/Checkbox';
+export { CheckboxGroup } from './components/CheckboxGroup';
 export { ClassPrefix } from './components/ClassPrefix';
-export CodeSnippet from './components/CodeSnippet';
-export ComboBox from './components/ComboBox';
+export { CodeSnippet } from './components/CodeSnippet';
+export { ComboBox } from './components/ComboBox';
 export { ComboButton } from './components/ComboButton';
 export {
   ComposedModal,
@@ -25,12 +25,12 @@ export {
   ModalBody,
   ModalFooter,
 } from './components/ComposedModal';
-export ContainedList, { ContainedListItem } from './components/ContainedList';
-export ContentSwitcher from './components/ContentSwitcher';
+export { ContainedList, ContainedListItem } from './components/ContainedList';
+export { ContentSwitcher } from './components/ContentSwitcher';
 export { useContextMenu } from './components/ContextMenu';
-export Copy from './components/Copy';
-export CopyButton from './components/CopyButton';
-export DangerButton from './components/DangerButton';
+export { Copy } from './components/Copy';
+export { CopyButton } from './components/CopyButton';
+export { DangerButton } from './components/DangerButton';
 export {
   default as DataTable,
   Table,
@@ -55,25 +55,26 @@ export {
   TableToolbarSearch,
   TableToolbarMenu,
 } from './components/DataTable';
-export DatePicker from './components/DatePicker';
-export DatePickerInput from './components/DatePickerInput';
-export Dropdown from './components/Dropdown';
+export { DatePicker } from './components/DatePicker';
+export { DatePickerInput } from './components/DatePickerInput';
+export { Dropdown } from './components/Dropdown';
 export {
   ErrorBoundary,
   ErrorBoundaryContext,
 } from './components/ErrorBoundary';
-export FileUploader, {
+export {
+  FileUploader,
   Filename,
   FileUploaderButton,
   FileUploaderDropContainer,
   FileUploaderItem,
 } from './components/FileUploader';
 export { FilterableMultiSelect } from './components/FilterableMultiSelect';
-export Form from './components/Form';
-export FluidForm from './components/FluidForm';
-export FormGroup from './components/FormGroup';
-export FormItem from './components/FormItem';
-export FormLabel from './components/FormLabel';
+export { Form } from './components/Form';
+export { FluidForm } from './components/FluidForm';
+export { FormGroup } from './components/FormGroup';
+export { FormItem } from './components/FormItem';
+export { FormLabel } from './components/FormLabel';
 export {
   Grid,
   Row,
@@ -83,10 +84,10 @@ export {
   GridSettings,
 } from './components/Grid';
 export { IdPrefix } from './components/IdPrefix';
-export InlineLoading from './components/InlineLoading';
-export Link from './components/Link';
-export ListItem from './components/ListItem';
-export Loading from './components/Loading';
+export { InlineLoading } from './components/InlineLoading';
+export { Link } from './components/Link';
+export { ListItem } from './components/ListItem';
+export { Loading } from './components/Loading';
 export {
   Menu,
   MenuItem,
@@ -96,42 +97,43 @@ export {
   MenuItemSelectable,
 } from './components/Menu';
 export { MenuButton } from './components/MenuButton';
-export Modal from './components/Modal';
-export ModalWrapper from './components/ModalWrapper';
-export MultiSelect from './components/MultiSelect';
+export { Modal } from './components/Modal';
+export { ModalWrapper } from './components/ModalWrapper';
+export { MultiSelect } from './components/MultiSelect';
 export {
   ActionableNotification,
   ToastNotification,
   InlineNotification,
   NotificationActionButton,
   NotificationButton,
-  StaticNotification as unstable__StaticNotification,
+  Callout as unstable__Callout,
+  Callout as unstable__StaticNotification,
 } from './components/Notification';
 export { NumberInput, NumberInputSkeleton } from './components/NumberInput';
-export OrderedList from './components/OrderedList';
-export OverflowMenu from './components/OverflowMenu';
-export OverflowMenuItem from './components/OverflowMenuItem';
-export Pagination from './components/Pagination';
-export PaginationNav from './components/PaginationNav';
+export { OrderedList } from './components/OrderedList';
+export { OverflowMenu } from './components/OverflowMenu';
+export { OverflowMenuItem } from './components/OverflowMenuItem';
+export { Pagination } from './components/Pagination';
+export { PaginationNav } from './components/PaginationNav';
 export {
   ControlledPasswordInput,
   PasswordInput,
 } from './components/PasswordInput';
-export PrimaryButton from './components/PrimaryButton';
+export { PrimaryButton } from './components/PrimaryButton';
 export {
   ProgressIndicator,
   ProgressStep,
 } from './components/ProgressIndicator';
-export RadioButton from './components/RadioButton';
-export RadioButtonGroup from './components/RadioButtonGroup';
-export Search from './components/Search';
-export ExpandableSearch from './components/ExpandableSearch';
-export SecondaryButton from './components/SecondaryButton';
-export Select from './components/Select';
-export SelectItem from './components/SelectItem';
-export SelectItemGroup from './components/SelectItemGroup';
+export { RadioButton } from './components/RadioButton';
+export { RadioButtonGroup } from './components/RadioButtonGroup';
+export { Search } from './components/Search';
+export { ExpandableSearch } from './components/ExpandableSearch';
+export { SecondaryButton } from './components/SecondaryButton';
+export { Select } from './components/Select';
+export { SelectItem } from './components/SelectItem';
+export { SelectItemGroup } from './components/SelectItemGroup';
 export { Switch, IconSwitch } from './components/Switch';
-export Slider from './components/Slider';
+export { Slider } from './components/Slider';
 export {
   StructuredListWrapper,
   StructuredListHead,
@@ -141,23 +143,16 @@ export {
   StructuredListCell,
   StructuredListSkeleton,
 } from './components/StructuredList';
-export Tab from './components/Tab';
-export TabContent from './components/TabContent';
-export Tabs from './components/Tabs';
-export {
-  TabsVertical,
-  TabPanel,
-  TabPanels,
-  TabList,
-  TabListVertical,
-  IconTab,
-} from './components/Tabs';
-export Tag from './components/Tag';
-export DismissibleTag from './components/Tag/DismissibleTag.tsx';
-export OperationalTag from './components/Tag/OperationalTag.tsx';
-export SelectableTag from './components/Tag/SelectableTag.tsx';
-export TextArea from './components/TextArea';
-export TextInput from './components/TextInput';
+export { Tab } from './components/Tab';
+export { TabContent } from './components/TabContent';
+export { Tabs } from './components/Tabs';
+export { TabPanel, TabPanels, TabList, IconTab } from './components/Tabs';
+export { Tag } from './components/Tag';
+export { DismissibleTag } from './components/Tag';
+export { OperationalTag } from './components/Tag';
+export { SelectableTag } from './components/Tag';
+export { TextArea } from './components/TextArea';
+export { TextInput } from './components/TextInput';
 export {
   Tile,
   ClickableTile,
@@ -166,11 +161,11 @@ export {
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from './components/Tile';
-export RadioTile from './components/RadioTile';
-export TileGroup from './components/TileGroup';
-export TimePicker from './components/TimePicker';
-export TimePickerSelect from './components/TimePickerSelect';
-export Toggle from './components/Toggle';
+export { RadioTile } from './components/RadioTile';
+export { TileGroup } from './components/TileGroup';
+export { TimePicker } from './components/TimePicker';
+export { TimePickerSelect } from './components/TimePickerSelect';
+export { Toggle } from './components/Toggle';
 export {
   ToggletipLabel,
   Toggletip,
@@ -178,33 +173,33 @@ export {
   ToggletipContent,
   ToggletipActions,
 } from './components/Toggletip';
-export TreeView, { TreeNode } from './components/TreeView';
-export UnorderedList from './components/UnorderedList';
-export SkeletonText from './components/SkeletonText';
-export SkeletonPlaceholder from './components/SkeletonPlaceholder';
-export SkeletonIcon from './components/SkeletonIcon';
-export DataTableSkeleton from './components/DataTableSkeleton';
-export AccordionSkeleton from './components/Accordion/Accordion.Skeleton';
-export BreadcrumbSkeleton from './components/Breadcrumb/Breadcrumb.Skeleton';
-export ButtonSkeleton from './components/Button/Button.Skeleton';
-export CheckboxSkeleton from './components/Checkbox/Checkbox.Skeleton';
-export CodeSnippetSkeleton from './components/CodeSnippet/CodeSnippet.Skeleton';
-export DropdownSkeleton from './components/Dropdown/Dropdown.Skeleton';
-export FileUploaderSkeleton from './components/FileUploader/FileUploader.Skeleton';
-export PaginationSkeleton from './components/Pagination/Pagination.Skeleton';
-export ProgressIndicatorSkeleton from './components/ProgressIndicator/ProgressIndicator.Skeleton';
-export RadioButtonSkeleton from './components/RadioButton/RadioButton.Skeleton';
-export SearchSkeleton from './components/Search/Search.Skeleton';
-export SelectSkeleton from './components/Select/Select.Skeleton';
-export SliderSkeleton from './components/Slider/Slider.Skeleton';
-export TabsSkeleton from './components/Tabs/Tabs.Skeleton';
-export TagSkeleton from './components/Tag/Tag.Skeleton';
-export TextAreaSkeleton from './components/TextArea/TextArea.Skeleton';
-export TextInputSkeleton from './components/TextInput/TextInput.Skeleton';
-export ToggleSkeleton from './components/Toggle/Toggle.Skeleton';
-export ToggleSmallSkeleton from './components/ToggleSmall/ToggleSmall.Skeleton';
-export IconSkeleton from './components/Icon/Icon.Skeleton';
-export DatePickerSkeleton from './components/DatePicker/DatePicker.Skeleton';
+export { TreeView, TreeNode } from './components/TreeView';
+export { UnorderedList } from './components/UnorderedList';
+export { SkeletonText } from './components/SkeletonText';
+export { SkeletonPlaceholder } from './components/SkeletonPlaceholder';
+export { SkeletonIcon } from './components/SkeletonIcon';
+export { DataTableSkeleton } from './components/DataTableSkeleton';
+export { AccordionSkeleton } from './components/Accordion/Accordion.Skeleton';
+export { BreadcrumbSkeleton } from './components/Breadcrumb/Breadcrumb.Skeleton';
+export { ButtonSkeleton } from './components/Button/Button.Skeleton';
+export { CheckboxSkeleton } from './components/Checkbox/Checkbox.Skeleton';
+export { CodeSnippetSkeleton } from './components/CodeSnippet/CodeSnippet.Skeleton';
+export { DropdownSkeleton } from './components/Dropdown/Dropdown.Skeleton';
+export { FileUploaderSkeleton } from './components/FileUploader/FileUploader.Skeleton';
+export { PaginationSkeleton } from './components/Pagination/Pagination.Skeleton';
+export { ProgressIndicatorSkeleton } from './components/ProgressIndicator/ProgressIndicator.Skeleton';
+export { RadioButtonSkeleton } from './components/RadioButton/RadioButton.Skeleton';
+export { SearchSkeleton } from './components/Search/Search.Skeleton';
+export { SelectSkeleton } from './components/Select/Select.Skeleton';
+export { SliderSkeleton } from './components/Slider/Slider.Skeleton';
+export { TabsSkeleton } from './components/Tabs/Tabs.Skeleton';
+export { TagSkeleton } from './components/Tag/Tag.Skeleton';
+export { TextAreaSkeleton } from './components/TextArea/TextArea.Skeleton';
+export { TextInputSkeleton } from './components/TextInput/TextInput.Skeleton';
+export { ToggleSkeleton } from './components/Toggle/Toggle.Skeleton';
+export { ToggleSmallSkeleton } from './components/ToggleSmall/ToggleSmall.Skeleton';
+export { IconSkeleton } from './components/Icon/Icon.Skeleton';
+export { DatePickerSkeleton } from './components/DatePicker/DatePicker.Skeleton';
 export {
   Content,
   Header,
@@ -315,17 +310,27 @@ export {
 } from './components/Theme';
 export { usePrefix } from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';
+
+export { AILabel, AILabelContent, AILabelActions } from './components/AILabel';
+// Keep until V12
 export {
-  Slug as unstable__Slug,
-  SlugContent as unstable__SlugContent,
-  SlugActions as unstable__SlugActions,
-} from './components/Slug';
+  AILabel as unstable__Slug,
+  AILabelContent as unstable__SlugContent,
+  AILabelActions as unstable__SlugActions,
+} from './components/AILabel';
 
 export {
-  AiSkeletonText as unstable__AiSkeletonText,
-  AiSkeletonIcon as unstable__AiSkeletonIcon,
-  AiSkeletonPlaceholder as unstable__AiSkeletonPlaceholder,
-} from './components/AiSkeleton';
+  AISkeletonText,
+  AISkeletonIcon,
+  AISkeletonPlaceholder,
+} from './components/AISkeleton';
+// Keep until V12
+export {
+  AISkeletonText as unstable__AiSkeletonText,
+  AISkeletonIcon as unstable__AiSkeletonIcon,
+  AISkeletonPlaceholder as unstable__AiSkeletonPlaceholder,
+} from './components/AISkeleton';
+
 export {
   ChatButton as unstable__ChatButton,
   ChatButtonSkeleton as unstable__ChatButtonSkeleton,

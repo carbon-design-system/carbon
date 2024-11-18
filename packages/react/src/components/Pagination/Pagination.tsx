@@ -225,7 +225,8 @@ const Pagination = React.forwardRef(function Pagination(
     [`${prefix}--pagination__button--backward`]: true,
     [`${prefix}--pagination__button--no-index`]: backButtonDisabled,
   });
-  const forwardButtonDisabled = disabled || page === totalPages;
+  const forwardButtonDisabled =
+    disabled || (page === totalPages && !pagesUnknown);
   const forwardButtonClasses = cx({
     [`${prefix}--pagination__button`]: true,
     [`${prefix}--pagination__button--forward`]: true,
@@ -413,7 +414,7 @@ const Pagination = React.forwardRef(function Pagination(
             <CaretLeft />
           </IconButton>
           <IconButton
-            align="top-right"
+            align="top-end"
             disabled={forwardButtonDisabled || isLastPage}
             kind="ghost"
             className={forwardButtonClasses}

@@ -18,7 +18,7 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import Link from '../Link';
 import { Add } from '@carbon/icons-react';
-import { Slug } from '../Slug';
+import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -49,7 +49,7 @@ describe('Tile', () => {
     });
 
     it('should respect slug prop', () => {
-      render(<Tile slug={<Slug />}>Default tile</Tile>);
+      render(<Tile slug={<AILabel />}>Default tile</Tile>);
       expect(
         screen.getByRole('button', { name: 'AI - Show information' })
       ).toBeInTheDocument();
@@ -91,12 +91,18 @@ describe('Tile', () => {
     });
 
     it('should respect slug prop', () => {
-      render(<ClickableTile slug={<Slug />}>Default tile</ClickableTile>);
+      render(<ClickableTile slug={<AILabel />}>Default tile</ClickableTile>);
 
       // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('svg')).toHaveClass(
         `${prefix}--tile--slug-icon`
       );
+    });
+    it('should call onKeyDown', async () => {
+      const onKeyDown = jest.fn();
+      render(<ClickableTile onKeyDown={onKeyDown}>keytest</ClickableTile>);
+      await userEvent.type(screen.getByText('keytest'), 'one');
+      expect(onKeyDown).toHaveBeenCalledTimes(3);
     });
   });
 
@@ -174,7 +180,11 @@ describe('Tile', () => {
 
     it('should respect slug prop', () => {
       render(
-        <SelectableTile slug={<Slug />} id="tile-1" name="tiles" value="value">
+        <SelectableTile
+          slug={<AILabel />}
+          id="tile-1"
+          name="tiles"
+          value="value">
           Default tile
         </SelectableTile>
       );
@@ -278,7 +288,7 @@ describe('Tile', () => {
 
     it('supports setting expanded prop to true', () => {
       render(
-        <ExpandableTile expanded>
+        <ExpandableTile expanded tileExpandedLabel="expanded-test">
           <TileAboveTheFoldContent>
             <div>TestAbove</div>
           </TileAboveTheFoldContent>
@@ -288,9 +298,16 @@ describe('Tile', () => {
         </ExpandableTile>
       );
 
-      expect(screen.getByRole('button')).toHaveClass(
-        `${prefix}--tile--is-expanded`
-      );
+      const button = screen.getByRole('button');
+      expect(button).toHaveClass(`${prefix}--tile--is-expanded`);
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+      const chevron = screen
+        .getByRole('button')
+        .querySelector('.cds--tile__chevron');
+      expect(chevron).toBeInTheDocument();
+
+      const span = chevron.querySelector('span');
+      expect(span).toHaveTextContent('expanded-test');
     });
 
     it('supports setting expanded prop to false', () => {
@@ -311,7 +328,7 @@ describe('Tile', () => {
 
     it('should respect slug prop', () => {
       render(
-        <ExpandableTile slug={<Slug />}>
+        <ExpandableTile slug={<AILabel />}>
           <TileAboveTheFoldContent>
             <div>TestAbove</div>
           </TileAboveTheFoldContent>
@@ -398,5 +415,95 @@ describe('Tile', () => {
       expect(onClick).toHaveBeenCalled();
       expect(expandButton).toHaveAttribute('aria-expanded', 'true');
     });
+    it('supports interactive elements in expanded state', async () => {
+      const onButtonClick = jest.fn();
+      render(
+        <ExpandableTile tileMaxHeight={100} tilePadding={0} expanded>
+          <TileAboveTheFoldContent>
+            <div>TestAbove</div>
+          </TileAboveTheFoldContent>
+          <TileBelowTheFoldContent>
+            <button onClick={onButtonClick}>Test Button</button>
+          </TileBelowTheFoldContent>
+        </ExpandableTile>
+      );
+      const expandButton = screen.getByRole('button', {
+        name: 'Interact to collapse Tile',
+      });
+      const testButton = screen.getByRole('button', { name: 'Test Button' });
+      await userEvent.click(testButton);
+
+      expect(onButtonClick).toHaveBeenCalled();
+      expect(expandButton).toHaveAttribute('aria-expanded', 'true');
+    });
+  });
+
+  it('respect selected prop', async () => {
+    const { container } = render(
+      <SelectableTile id="selectable-tile-1" selected value={'test'}>
+        Option 1
+      </SelectableTile>
+    );
+    const tile = container.firstChild;
+    expect(tile).toHaveClass(`${prefix}--tile--is-selected`);
+    await userEvent.click(tile);
+    expect(tile).not.toHaveClass(`${prefix}--tile--is-selected`);
+  });
+
+  it('should call onKeyDown', async () => {
+    const onKeyUp = jest.fn();
+    render(<ExpandableTile onKeyUp={onKeyUp}>Test Content</ExpandableTile>);
+    await userEvent.type(screen.getByText('Test Content'), '{enter}');
+    expect(onKeyUp).toHaveBeenCalledTimes(1);
+  });
+
+  it('should toggle the expanded state when the expanded prop changes dynamically', async () => {
+    const { rerender } = render(
+      <ExpandableTile expanded={false}>
+        <TileAboveTheFoldContent>
+          <div>TestAbove</div>
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent>
+          <div>TestBelow</div>
+        </TileBelowTheFoldContent>
+      </ExpandableTile>
+    );
+    const button = screen.getByRole('button');
+    // Helper function to check the button's expanded state
+    const checkExpandedState = (isExpanded) => {
+      const className = `${prefix}--tile--is-expanded`;
+      expect(button).toHaveAttribute(
+        'aria-expanded',
+        isExpanded ? 'true' : 'false'
+      );
+      if (isExpanded) {
+        expect(button).toHaveClass(className);
+      } else {
+        expect(button).not.toHaveClass(className);
+      }
+    };
+    // Initial state: expanded = false
+    checkExpandedState(false);
+    // Update to expanded = true
+    rerender(
+      <ExpandableTile expanded={true}>
+        <TileAboveTheFoldContent>
+          <div>TestAbove</div>
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent>
+          <div>TestBelow</div>
+        </TileBelowTheFoldContent>
+      </ExpandableTile>
+    );
+    checkExpandedState(true);
+    // Update back to expanded = false
+    rerender(
+      <ExpandableTile expanded={false}>
+        <TileAboveTheFoldContent>
+          <div>TestAbove</div>
+        </TileAboveTheFoldContent>
+      </ExpandableTile>
+    );
+    checkExpandedState(false);
   });
 });

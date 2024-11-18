@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
 import classNames from 'classnames';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import Tag, { SIZES, TYPES } from './Tag';
@@ -16,8 +16,6 @@ import { Close } from '@carbon/icons-react';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-
-const getInstanceId = setupGetInstanceId();
 
 export interface DismissibleTagBaseProps {
   /**
@@ -63,6 +61,11 @@ export interface DismissibleTagBaseProps {
   text?: string;
 
   /**
+   * Provide a custom `title` to be inserted in the tag.
+   */
+  tagTitle?: string;
+
+  /**
    * Text to show on clear filters
    */
   title?: string;
@@ -88,12 +91,13 @@ const DismissibleTag = <T extends React.ElementType>({
   slug,
   size,
   text,
+  tagTitle,
   type,
   ...other
 }: DismissibleTagProps<T>) => {
   const prefix = usePrefix();
   const tagLabelRef = useRef<HTMLElement>();
-  const tagId = id || `tag-${getInstanceId()}`;
+  const tagId = id || `tag-${useId()}`;
   const tagClasses = classNames(`${prefix}--tag--filter`, className);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
@@ -111,7 +115,7 @@ const DismissibleTag = <T extends React.ElementType>({
   };
 
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'AILabel') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'sm',
       kind: 'inline',
@@ -140,9 +144,12 @@ const DismissibleTag = <T extends React.ElementType>({
       id={tagId}
       {...otherProps}>
       <div className={`${prefix}--interactive--tag-children`}>
-        <Text title={text} className={`${prefix}--tag__label`}>
+        <Text
+          title={tagTitle ? tagTitle : text}
+          className={`${prefix}--tag__label`}>
           {text}
         </Text>
+        {normalizedSlug}
         <Tooltip
           label={isEllipsisApplied ? dismissLabel : title}
           align="bottom"
@@ -154,12 +161,10 @@ const DismissibleTag = <T extends React.ElementType>({
             className={`${prefix}--tag__close-icon`}
             onClick={handleClose}
             disabled={disabled}
-            aria-label={title}
-            title={title}>
+            aria-label={title}>
             <Close />
           </button>
         </Tooltip>
-        {normalizedSlug}
       </div>
     </Tag>
   );
@@ -206,6 +211,11 @@ DismissibleTag.propTypes = {
    * Provide text to be rendered inside of a the tag.
    */
   text: PropTypes.string,
+
+  /**
+   * Provide a custom `title` to be inserted in the tag.
+   */
+  tagTitle: PropTypes.string,
 
   /**
    * Text to show on clear filters

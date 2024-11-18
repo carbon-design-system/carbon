@@ -21,11 +21,9 @@ import { FormContext } from '../FluidForm';
 import { useAnnouncer } from '../../internal/useAnnouncer';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
-
-const getInstanceId = setupGetInstanceId();
 
 export interface TextAreaProps
   extends React.InputHTMLAttributes<HTMLTextAreaElement> {
@@ -39,6 +37,11 @@ export interface TextAreaProps
    * Specify the `cols` attribute for the underlying `<textarea>` node
    */
   cols?: number;
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TextArea` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Optionally provide the default value of the `<textarea>`
@@ -132,6 +135,7 @@ export interface TextAreaProps
   rows?: number;
 
   /**
+   * @deprecated please use `decorator` instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextArea` component
    */
   slug?: ReactNode;
@@ -160,6 +164,7 @@ export interface TextAreaProps
 const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const {
     className,
+    decorator,
     disabled = false,
     id,
     labelText,
@@ -185,7 +190,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const { isFluid } = useContext(FormContext);
   const { defaultValue, value } = other;
 
-  const { current: textAreaInstanceId } = useRef(getInstanceId());
+  const textAreaInstanceId = useId();
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const ref = useMergedRefs([forwardRef, textareaRef]) as
@@ -331,6 +336,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
     [`${prefix}--text-area__wrapper--warn`]: warn,
     [`${prefix}--text-area__wrapper--slug`]: slug,
+    [`${prefix}--text-area__wrapper--decorator`]: decorator,
   });
 
   const labelClasses = classNames(`${prefix}--label`, {
@@ -416,11 +422,41 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       textareaProps.maxLength = maxCount;
     }
   }
+
+  const announcerRef = useRef(null);
+  const [prevAnnouncement, setPrevAnnouncement] = useState('');
   const ariaAnnouncement = useAnnouncer(
     textCount,
     maxCount,
     counterMode === 'word' ? 'words' : undefined
   );
+  useEffect(() => {
+    if (ariaAnnouncement && ariaAnnouncement !== prevAnnouncement) {
+      const announcer = announcerRef.current as HTMLSpanElement | null;
+      if (announcer) {
+        // Clear the content first
+        announcer.textContent = '';
+
+        // Set the new content after a small delay
+        const timeoutId = setTimeout(
+          () => {
+            if (announcer) {
+              announcer.textContent = ariaAnnouncement;
+              setPrevAnnouncement(ariaAnnouncement);
+            }
+          },
+          counterMode === 'word' ? 2000 : 1000
+        );
+
+        //clear the timeout
+        return () => {
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+        };
+      }
+    }
+  }, [ariaAnnouncement, prevAnnouncement, counterMode]);
 
   const input = (
     <textarea
@@ -438,12 +474,20 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     />
   );
 
-  // Slug is always size `mini`
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'mini',
-    });
+  // AILabel is always size `mini`
+  let normalizedDecorator = React.isValidElement(slug ?? decorator)
+    ? slug ?? decorator
+    : null;
+  if (
+    normalizedDecorator &&
+    normalizedDecorator['type']?.displayName === 'AILabel'
+  ) {
+    normalizedDecorator = React.cloneElement(
+      normalizedDecorator as React.ReactElement<any>,
+      {
+        size: 'mini',
+      }
+    );
   }
 
   return (
@@ -462,8 +506,21 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
           />
         )}
         {input}
-        {normalizedSlug}
-        <span className={`${prefix}--text-area__counter-alert`} role="alert">
+        {slug ? (
+          normalizedDecorator
+        ) : decorator ? (
+          <div className={`${prefix}--text-area__inner-wrapper--decorator`}>
+            {normalizedDecorator}
+          </div>
+        ) : (
+          ''
+        )}
+        <span
+          className={`${prefix}--text-area__counter-alert`}
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          ref={announcerRef}>
           {ariaAnnouncement}
         </span>
         {isFluid && <hr className={`${prefix}--text-area__divider`} />}
@@ -494,6 +551,11 @@ TextArea.propTypes = {
    * Specify the method used for calculating the counter number
    */
   counterMode: PropTypes.oneOf(['character', 'word']),
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TextArea` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Optionally provide the default value of the `<textarea>`
@@ -592,7 +654,11 @@ TextArea.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextArea` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop for `TextArea` has ' +
+      'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
+  ),
 
   /**
    * Provide the current value of the `<textarea>`

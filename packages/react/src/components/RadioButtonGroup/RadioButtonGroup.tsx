@@ -18,10 +18,9 @@ import type { RadioButtonProps } from '../RadioButton';
 import { Legend } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import deprecate from '../../prop-types/deprecate';
 import mergeRefs from '../../tools/mergeRefs';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
-
-const getInstanceId = setupGetInstanceId();
+import { useId } from '../../internal/useId';
 
 export const RadioButtonGroupContext = createContext(null);
 
@@ -41,6 +40,11 @@ export interface RadioButtonGroupProps
    * Provide an optional className to be applied to the container node
    */
   className?: string;
+
+  /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `RadioButtonGroup` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Specify the `<RadioButton>` to be selected by default
@@ -104,6 +108,7 @@ export interface RadioButtonGroupProps
   readOnly?: boolean;
 
   /**
+   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
    */
   slug?: ReactNode;
@@ -134,6 +139,7 @@ const RadioButtonGroup = React.forwardRef(
     const {
       children,
       className,
+      decorator,
       defaultSelected,
       disabled,
       helperText,
@@ -157,7 +163,7 @@ const RadioButtonGroup = React.forwardRef(
     const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
     const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
 
-    const { current: radioButtonGroupInstanceId } = useRef(getInstanceId());
+    const radioButtonGroupInstanceId = useId();
 
     /**
      * prop + state alignment - getDerivedStateFromProps
@@ -222,6 +228,7 @@ const RadioButtonGroup = React.forwardRef(
       [`${prefix}--radio-button-group--invalid`]: !readOnly && invalid,
       [`${prefix}--radio-button-group--warning`]: showWarning,
       [`${prefix}--radio-button-group--slug`]: slug,
+      [`${prefix}--radio-button-group--decorator`]: decorator,
     });
 
     const helperClasses = classNames(`${prefix}--form__helper-text`, {
@@ -240,13 +247,21 @@ const RadioButtonGroup = React.forwardRef(
 
     const divRef = useRef<HTMLDivElement>(null);
 
-    // Slug is always size `mini`
-    let normalizedSlug: ReactElement | undefined;
-    if (slug && slug['type']?.displayName === 'Slug') {
-      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size: 'mini',
-        kind: 'default',
-      });
+    // AILabel is always size `mini`
+    let normalizedDecorator = React.isValidElement(slug ?? decorator)
+      ? slug ?? decorator
+      : null;
+    if (
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel'
+    ) {
+      normalizedDecorator = React.cloneElement(
+        normalizedDecorator as React.ReactElement<any>,
+        {
+          size: 'mini',
+          kind: 'default',
+        }
+      );
     }
 
     return (
@@ -260,7 +275,16 @@ const RadioButtonGroup = React.forwardRef(
           {legendText && (
             <Legend className={`${prefix}--label`}>
               {legendText}
-              {normalizedSlug}
+              {slug ? (
+                normalizedDecorator
+              ) : decorator ? (
+                <div
+                  className={`${prefix}--radio-button-group-inner--decorator`}>
+                  {normalizedDecorator}
+                </div>
+              ) : (
+                ''
+              )}
             </Legend>
           )}
           {getRadioButtons()}
@@ -299,6 +323,11 @@ RadioButtonGroup.propTypes = {
    * Provide an optional className to be applied to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `RadioButtonGroup` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify the `<RadioButton>` to be selected by default
@@ -365,7 +394,10 @@ RadioButtonGroup.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
 
   /**
    * Specify the value that is currently selected in the group

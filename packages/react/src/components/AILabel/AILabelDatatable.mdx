@@ -1,0 +1,156 @@
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
+import { AILabel, AILabelContent, AILabelActions } from '.';
+
+<Meta isTemplate />
+
+# AILabel
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/AILabel)
+|
+[AILabel release status](https://airtable.com/appCAqlGVN8tRUbAp/shr71ZyLlIGORz3Vh/tblHqPusgkK8hIeHo)
+|
+[Using AI-enhanced components in V10](https://github.com/carbon-design-system/carbon-for-ai/blob/main/docs/support-for-carbon-v10.md)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [AILabel anatomy](#ailabel-anatomy)
+- [Using AILabel in DataTable](#using-ailabel-in-datatable)
+  - [Using as a column header](#using-as-a-column-header)
+  - [Using in a row](#using-in-a-row)
+- [Feedback](#feedback)
+
+## Overview
+
+The `DataTable` supports placing a `AI label` in both the column header and row.
+
+<Canvas id="components-datatable-withailabel--column-ai-label-with-selection-and-expansion" />
+
+<Canvas id="components-datatable-withailabel--ai-label-with-selection" />
+
+## AILabel anatomy
+
+The `AILabel` itself is a button that acts as a `Toggletip` trigger. To
+construct the contents of the `AILabel` callout, you can place the desired
+elements as a child of `AILabel` in `AILabelContent`, like so:
+
+```jsx
+<AILabel>
+  <AILabelContent>
+    {Content Here}
+  </AILabelContent>
+</AILabel>
+```
+
+The `AILabel` also supports the rendering of an action bar at the bottom of the
+callout. To achieve this, you can pass in `AILabelActions` as a child of
+`AILabel`, placed inside the `AILabelContent`
+
+```jsx
+<AILabel>
+  <AILabelContent>
+    {Content Here}
+    {Optional AI label action bar}
+    <AILabelActions>
+      <IconButton kind="ghost" label="View">
+        <View />
+      </IconButton>
+      <IconButton kind="ghost" label="Open Folder">
+        <FolderOpen />
+      </IconButton>
+      <IconButton kind="ghost" label="Folders">
+        <Folders />
+      </IconButton>
+      <Button>View details</Button>
+    </AILabelActions>
+  </AILabelContent>
+</AILabel>
+```
+
+## Using `AILabel` in `DataTable`
+
+### Using as a column header
+
+To use an `AILabel` inside a column header, you'll need to add a `AILabel` to the
+appropriate column data.
+
+```jsx
+const columnAILabelHeaders = [
+  {
+    key: 'name',
+    header: 'Name',
+  },
+  {
+    key: 'attached_groups',
+    header: 'Attached groups',
+    AILabel: (
+      <AILabel
+        className="ai-label-container"
+        autoAlign={false}
+        align="bottom-right">
+        <AILabelContent>
+          <div>
+            <p className="secondary">AI Explained</p>
+            <h1>84%</h1>
+            <p className="secondary bold">Confidence score</p>
+            <p className="secondary">
+              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+              do eiusmod tempor incididunt ut fsil labore et dolore magna
+              aliqua.
+            </p>
+            <hr />
+            <p className="secondary">Model type</p>
+            <p className="bold">Foundation model</p>
+          </div>
+          <AILabelActions>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View details</Button>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
+    ),
+  },
+];
+```
+
+To ensure the table cells are styled appropriately, you'll need to use the new
+`getCellProps` prop getter, like so:
+
+```jsx
+<TableCell {...getCellProps({ cell })} key={cell.id}>
+  {cell.value}
+</TableCell>
+```
+
+### Using in a row
+
+To use an `AILabel` inside a `DataTable` row, you'll need to pass in your
+`AILabel` component to `TableSlugRow`:
+
+```jsx
+<TableBody>
+  {rows.map((row, i) => (
+    <TableRow key={i} {...getRowProps({ row })}>
+      <TableSlugRow slug={AILabel} />
+      <TableSelectRow {...getSelectionProps({ row })} />
+      {row.cells.map((cell) => (
+        <TableCell key={cell.id}>{cell.value}</TableCell>
+      ))}
+    </TableRow>
+  ))}
+</TableBody>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/AILabel/AILabelDatatable.mdx).

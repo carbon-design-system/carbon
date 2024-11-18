@@ -12,7 +12,13 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import DatePicker from './DatePicker';
 import DatePickerSkeleton from './DatePicker.Skeleton';
 import DatePickerInput from '../DatePickerInput';
+import Button from '../Button';
+import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
+import { IconButton } from '../IconButton';
+import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+
 import mdx from './DatePicker.mdx';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/DatePicker',
@@ -44,37 +50,6 @@ export const Simple = () => (
     />
   </DatePicker>
 );
-
-export const Test = () => {
-  const [start, setStart] = useState();
-  const [end, setEnd] = useState();
-
-  const onPeriodChanged = (range) => {
-    setStart(range[0]);
-    setEnd(range[1]);
-    console.log({ range });
-  };
-
-  return (
-    <DatePicker
-      datePickerType="range"
-      value={[start, end]}
-      onChange={onPeriodChanged}>
-      <DatePickerInput
-        id="date-picker-input-id-start"
-        placeholder="mm/dd/yyyy"
-        labelText="Start date"
-        size="md"
-      />
-      <DatePickerInput
-        id="date-picker-input-id-finish"
-        placeholder="mm/dd/yyyy"
-        labelText="End date"
-        size="md"
-      />
-    </DatePicker>
-  );
-};
 
 export const SingleWithCalendar = () => (
   <DatePicker datePickerType="single">
@@ -158,6 +133,66 @@ export const RangeWithCalendarWithLayer = () => (
 );
 
 export const Skeleton = () => <DatePickerSkeleton range />;
+
+const aiLabel = (
+  <AILabel className="ai-label-container">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+export const withAILabel = () => (
+  <div style={{ width: 400, display: 'flex', gap: '1rem' }}>
+    <DatePicker datePickerType="single">
+      <DatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        size="md"
+        id="date-picker"
+        decorator={aiLabel}
+      />
+    </DatePicker>
+
+    {/* Test decorator with Tooltip TO BE REMOVED!! */}
+    <DatePicker datePickerType="single">
+      <DatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        size="md"
+        id="date-picker"
+        decorator={
+          <Tooltip>
+            <Information />
+          </Tooltip>
+        }
+      />
+    </DatePicker>
+  </div>
+);
 
 export const Playground = ({ readOnly, ...args }) => {
   return (

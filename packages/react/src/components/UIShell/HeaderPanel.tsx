@@ -90,7 +90,9 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
       eventHandlers.onBlur = (event) => {
         if (
           !event.currentTarget.contains(event.relatedTarget) &&
-          !lastClickedElement?.classList?.contains('cds--switcher__item-link')
+          !lastClickedElement?.classList?.contains(
+            `${prefix}--switcher__item-link`
+          )
         ) {
           setExpandedState(false);
           setLastClickedElement(null);
@@ -117,7 +119,7 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
       const childJsxElement = children as JSX.Element;
 
       if (
-        childJsxElement.type?.displayName === 'Switcher' &&
+        childJsxElement?.type?.displayName === 'Switcher' &&
         !focusedElement?.closest(`.${prefix}--header-panel--expanded`) &&
         !focusedElement?.closest(`.${prefix}--header__action`) &&
         !headerPanelReference?.current?.classList.contains(

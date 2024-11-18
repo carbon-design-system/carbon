@@ -196,6 +196,7 @@ categories:
           - pentagon--solid
           - percentage
           - percentage--filled
+          - punctuation-check
           - quotes
           - reflect--horizontal
           - reflect--vertical
@@ -560,6 +561,8 @@ categories:
           - thumbs-down--filled
           - thumbs-up
           - thumbs-up--filled
+          - thumbs-up-double
+          - thumbs-up-double--filled
           - trophy
           - trophy--filled
           - unlocked
@@ -647,11 +650,22 @@ categories:
           - ai-governance--tracked
           - ai-governance--untracked
           - ai-generate
+          - ai-label
           - ai-launch
           - ai-recommend
+          - ibm--granite
+          - ibm-watson--discovery
+          - ibm-watson--orders
+          - ibm-watsonx--assistant
+          - ibm-watsonx--code-assistant
+          - ibm-watsonx--code-assistant-for-z
+          - ibm-watsonx--code-assistant-for-z--refactor
+          - ibm-watsonx--orchestrate
           - machine-learning
           - machine-learning-model
+          - ml-model--reference
           - model
+          - model--foundation
           - model--reference
           - model--tuned
           - prompt-session
@@ -669,11 +683,13 @@ categories:
           - autoscaling
           - block-storage
           - object-storage
+          - cics--explorer
           - cics--transaction-server-zos
           - cloud--auditing
           - cloud--logging
           - cloud--monitoring
           - cloud-foundry--1
+          - cloud-foundry--2
           - cloud-registry
           - cloud-satellite
           - cloud-satellite--config
@@ -694,15 +710,20 @@ categories:
           - flow-logs-vpc
           - ibm--ai-on-z
           - ibm--aiops-insights
+          - ibm--api-connect
+          - ibm--app-connect-enterprise
+          - ibm--aspera
           - ibm--bluepay
           - ibm--cloudant
           - ibm--content-services
+          - ibm--data-power
           - ibm--data-product-exchange
           - ibm--data-replication
           - ibm--datastage
           - ibm--db2
           - ibm--db2-warehouse
           - ibm--db2--alt
+          - ibm--deployable-architecture
           - ibm--dynamic-route-server
           - ibm--elo--automotive-compliance
           - ibm--elo--engineering-insights
@@ -721,16 +742,22 @@ categories:
           - ibm--event-processing
           - ibm--event-streams
           - ibm--gcm
+          - ibm--global-storage-architecture
           - ibm--ibv
           - ibm--instana
           - ibm--jrs
+          - ibm--knowledge-catalog
+          - ibm--knowledge-catalog-premium
+          - ibm--knowledge-catalog-standard
           - ibm--launchpad-s4
           - ibm--lpa
           - ibm--lqe
+          - ibm--machine-learning-for-zos
           - ibm--match-360
           - ibm--mq
           - ibm--open-enterprise-languages
           - ibm--openshift-container-platform-on-vpc-for-regulated-industries
+          - ibm--planning-analytics
           - ibm--power-vs
           - ibm--power-vs-private-cloud
           - ibm--power-with-vpc
@@ -739,18 +766,24 @@ categories:
           - ibm--saas-console
           - ibm--sap-on-power
           - ibm--secure-infrastructure-on-vpc-for-regulated-industries
+          - ibm--streamsets
           - ibm--telehealth
           - ibm--tenet
           - ibm--toolchain
           - ibm--turbonomic
+          - ibm--unstructured-data-processor
           - ibm--vpn-for-vpc
           - ibm--vsi-on-vpc-for-regulated-industries
           - ibm--wazi-deploy
           - ibm-cloud--app-id
+          - ibm-cloud--backup-and-recovery
+          - ibm-cloud--backup-service-vpc
           - ibm-cloud--bare-metal-server
           - ibm-cloud--bare-metal-servers-vpc
           - ibm-cloud--citrix-daas
+          - ibm-cloud--code-engine
           - ibm-cloud--continuous-delivery
+          - ibm-cloud--databases
           - ibm-cloud--dedicated-host
           - ibm-cloud--direct-link-1--connect
           - ibm-cloud--direct-link-1--dedicated
@@ -762,6 +795,7 @@ categories:
           - ibm-cloud--event-notification
           - ibm-cloud--event-streams
           - ibm-cloud--for-education
+          - ibm-cloud--gate-keeper
           - ibm-cloud--hpc
           - ibm-cloud--HSM
           - ibm-cloud--hyper-protect-crypto-services
@@ -773,20 +807,27 @@ categories:
           - ibm-cloud--kubernetes-service
           - ibm-cloud--logging
           - ibm-cloud--mass-data-migration
+          - ibm-cloud--observability
           - ibm-cloud--pal
           - ibm-cloud--privileged-access-gateway
           - ibm-cloud--projects
           - ibm-cloud--resiliency
           - ibm-cloud--secrets-manager
+          - ibm-cloud--security
           - ibm-cloud--security-compliance-center
           - ibm-cloud--security-compliance-center-workload-protection
+          - ibm-cloud--security-groups
           - ibm-cloud--subnets
           - ibm-cloud--sysdig-secure
           - ibm-cloud--transit-gateway
           - ibm-cloud--virtual-server-classic
           - ibm-cloud--virtual-server-vpc
           - ibm-cloud--vpc
+          - ibm-cloud--vpc-block-storage-snapshots
+          - ibm-cloud--vpc-client-vpn
           - ibm-cloud--vpc-endpoints
+          - ibm-cloud--vpc-file-storage
+          - ibm-cloud--vpc-images
           - ibm-cloud-pak--applications
           - ibm-cloud-pak--business-automation
           - ibm-cloud-pak--data
@@ -798,9 +839,12 @@ categories:
           - ibm-cloud-pak--security
           - ibm-cloud-pak--system
           - ibm-cloud-pak--watson-aiops
+          - ibm-devops--control
+          - ibm-quantum--safe-advisor
+          - ibm-quantum--safe-explorer
+          - ibm-quantum--safe-remediator
           - ibm-security--services
           - ibm-watson--assistant
-          - ibm-watson--discovery
           - ibm-watson--knowledge-catalog
           - ibm-watson--knowledge-studio
           - ibm-watson--language-translator
@@ -808,19 +852,15 @@ categories:
           - ibm-watson--natural-language-classifier
           - ibm-watson--natural-language-understanding
           - ibm-watson--openscale
-          - ibm-watson--orders
           - ibm-watson--query
           - ibm-watson--speech-to-text
           - ibm-watson--studio
           - ibm-watson--text-to-speech
           - ibm-watson--tone-analyzer
-          - ibm-watsonx--assistant
-          - ibm-watsonx--code-assistant
-          - ibm-watsonx--code-assistant-for-z
-          - ibm-watsonx--code-assistant-for-z--refactor
-          - ibm-watsonx--orchestrate
+          - ibm-watsonx--code-assistant-for-z-validation-assistant
           - ibm-z--cloud-mod-stack
           - ibm-z--environments-dev-sec-ops
+          - ibm-z--open-editor
           - ibm-z--processor-capacity-reference
           - ibm-z-cloud--provisioning
           - ibm-z-os
@@ -834,9 +874,6 @@ categories:
           - scis--transparent-supply
           - virtual-private-cloud--alt
           - vlan--ibm
-          - watsonx-ai
-          - watsonx-data
-          - watsonx-governance
       - name: Commerce
         members:
           - apple
@@ -1064,7 +1101,7 @@ categories:
           - U2
           - U3
           - X
-          - Y 
+          - Y
           - Z
   - name: Organization
     subcategories:
@@ -1135,6 +1172,7 @@ categories:
           - analytics--reference
           - app-connectivity
           - archive
+          - bland-altman-plot
           - blockchain
           - boolean
           - boot-volume
@@ -1398,7 +1436,6 @@ categories:
           - closed-caption
           - closed-caption--alt
           - closed-caption--filled
-          - cloud-foundry--2
           - content-view
           - copy
           - copy--file
@@ -1423,6 +1460,7 @@ categories:
           - document--multiple-02
           - document--pdf
           - document--preliminary
+          - document--processor
           - document--protected
           - document--requirements
           - document--security
@@ -1659,7 +1697,6 @@ categories:
           - box--small
           - cics--cmas
           - cics--db2-connection
-          - cics--explorer
           - cics--program
           - cics--sit
           - cics--sit-overrides
@@ -1753,6 +1790,8 @@ categories:
           - intent-request--upgrade
           - interface--usage
           - intrusion-prevention
+          - job--daemon
+          - job--run
           - join-node
           - kubelet
           - kubernetes
@@ -1774,6 +1813,7 @@ categories:
           - microservices--2
           - mobility--services
           - network-interface
+          - network-time-protocol
           - network--admin-control
           - network--enterprise
           - network--overlay
@@ -2270,6 +2310,11 @@ categories:
           - airplay
           - airplay--filled
           - aperture
+          - array--booleans
+          - array--dates
+          - array--numbers
+          - array--objects
+          - array--strings
           - asset
           - asset--confirm
           - asset--digital-twin
@@ -2289,6 +2334,8 @@ categories:
           - bluetooth--off
           - bot
           - breaking-change
+          - build--image
+          - build--run
           - building--insights-1
           - building--insights-2
           - building--insights-3
@@ -2335,6 +2382,7 @@ categories:
           - fingerprint-recognition
           - forum
           - function
+          - function--2
           - game--console
           - game--wireless
           - headphones
@@ -2361,6 +2409,7 @@ categories:
           - mobile--session
           - mobile--view
           - mobile--view-orientation
+          - object
           - outage
           - password
           - phone--ip

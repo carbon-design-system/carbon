@@ -1,0 +1,69 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as TextInput from './text-input.stories';
+
+<Meta of={TextInput} />
+
+# Text Input
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/input)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/input)
+
+Text fields enable the user to interact with and input data. A single line field
+is used when the input anticipated by the user is a single line of text as
+opposed to a paragraph.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/text-input/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['text-input'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-text-input
+  label="Text input label"
+  helper-text="Optional help text"
+  invalid-text="Error message">
+</cds-text-input>
+```
+
+## Form item
+
+If the input is part of a form, make sure to import and wrap the input with
+`<cds-form-item>`
+
+```javascript
+import '@carbon/web-components/es/components/form/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['form'] })}`}</Markdown>
+
+```html
+<cds-form-item>
+  <cds-text-input
+    label="Text input label"
+    helper-text="Optional help text"
+    invalid-text="Error message">
+  </cds-text-input>
+</cds-form-item>
+```
+
+## `<cds-text-input>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-text-input required>`) and `false` means not setting the attribute (e.g.
+`<cds-text-input>` without `required` attribute).
+
+<ArgTypes of="cds-text-input" />

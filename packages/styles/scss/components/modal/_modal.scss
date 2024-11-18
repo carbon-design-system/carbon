@@ -113,12 +113,10 @@
     grid-column: 1/-1;
     grid-row: 2/-2;
     overflow-y: auto;
-    padding-block-end: $spacing-09;
+    padding-block: $spacing-03 $spacing-09;
     // Required to accommodate focus outline's negative offset:
-    padding-block-start: $spacing-03;
     // anything besides text/p spans full width, with just 16px padding
-    padding-inline-end: $spacing-05;
-    padding-inline-start: $spacing-05;
+    padding-inline: $spacing-05 $spacing-05;
 
     &:focus {
       @include focus-outline('outline');
@@ -127,8 +125,7 @@
 
   // fluid form in modal
   .#{$prefix}--modal-content .#{$prefix}--form--fluid {
-    margin-inline-end: -$spacing-05;
-    margin-inline-start: -$spacing-05;
+    margin-inline: -$spacing-05 - $spacing-05;
   }
 
   //TO-DO: remove .#{$prefix}--modal-content__regular-content in v11 since hasForm has been deprecated
@@ -154,8 +151,7 @@
     grid-row: 1/1;
     margin-block-end: $spacing-03;
     padding-block-start: $spacing-05;
-    padding-inline-end: $spacing-09;
-    padding-inline-start: $spacing-05;
+    padding-inline: $spacing-05 $spacing-09;
   }
 
   .#{$prefix}--modal-header__label {
@@ -272,7 +268,7 @@
   }
 
   //removing mask image in case we have dropdown in modal
-  .#{$prefix}--modal-scroll-content:has(.#{$prefix}--dropdown--autoalign) {
+  .#{$prefix}--modal-scroll-content:has(.#{$prefix}--autoalign) {
     mask-image: none;
   }
 
@@ -299,8 +295,10 @@
     margin: 0;
     block-size: convert.to-rem(64px);
     max-inline-size: none;
-    padding-block-end: $spacing-07;
-    padding-block-start: calc($spacing-05 - convert.to-rem(2px));
+  }
+
+  .#{$prefix}--modal-footer .#{$prefix}--btn:not(.#{$prefix}--skeleton) {
+    padding-block: calc($spacing-05 - convert.to-rem(2px)) $spacing-07;
   }
 
   .#{$prefix}--modal-footer--three-button .#{$prefix}--btn {
@@ -365,12 +363,19 @@
     margin: 0;
   }
 
-  // Slug styles
-  .#{$prefix}--modal--slug.#{$prefix}--modal {
+  // AIlabel styles
+  .#{$prefix}--modal--slug.#{$prefix}--modal,
+  .#{$prefix}--modal--decorator.#{$prefix}--modal:has(
+      .#{$prefix}--modal--inner__decorator .#{$prefix}--ai-label
+    ) {
     background-color: $ai-overlay;
   }
 
-  .#{$prefix}--modal--slug .#{$prefix}--modal-container {
+  .#{$prefix}--modal--slug .#{$prefix}--modal-container,
+  .#{$prefix}--modal--decorator:has(
+      .#{$prefix}--modal--inner__decorator .#{$prefix}--ai-label
+    )
+    .#{$prefix}--modal-container {
     @include ai-popover-gradient('default', 0, 'layer');
 
     border: 1px solid transparent;
@@ -380,6 +385,10 @@
   }
 
   .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container:has(.#{$prefix}--modal-footer),
+  .#{$prefix}--modal--decorator:has(
+      .#{$prefix}--modal--inner__decorator .#{$prefix}--ai-label
+    )
     .#{$prefix}--modal-container:has(.#{$prefix}--modal-footer) {
     @include ai-popover-gradient('default', 64px, 'layer');
 
@@ -389,6 +398,8 @@
   }
 
   .#{$prefix}--modal--slug
+    .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content,
+  .#{$prefix}--modal--decorator
     .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content {
     mask-image: linear-gradient(
         to bottom,
@@ -401,6 +412,27 @@
       linear-gradient(to top, $layer 0, 2px, transparent 2px);
   }
 
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal--inner__decorator:has(
+      + .#{$prefix}--modal-close-button
+    )
+    > *,
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal-close-button
+    ~ .#{$prefix}--modal--inner__decorator
+    > *,
+  .#{$prefix}--modal--decorator
+    .#{$prefix}--modal-container-body
+    > .#{$prefix}--modal--inner__decorator
+    > *,
+  .#{$prefix}--modal-header
+    > .#{$prefix}--ai-label:has(+ .#{$prefix}--modal-close-button),
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal-close-button
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container-body
+    > .#{$prefix}--ai-label,
   .#{$prefix}--modal-header
     > .#{$prefix}--slug:has(+ .#{$prefix}--modal-close-button),
   .#{$prefix}--modal-header
@@ -416,12 +448,15 @@
 
   .#{$prefix}--modal--slug
     .#{$prefix}--modal-content--overflow-indicator::before,
-  .#{$prefix}--modal--slug .#{$prefix}--modal-content--overflow-indicator {
+  .#{$prefix}--modal--slug .#{$prefix}--modal-content--overflow-indicator,
+  .#{$prefix}--modal--decorator
+    .#{$prefix}--modal-content--overflow-indicator::before,
+  .#{$prefix}--modal--decorator .#{$prefix}--modal-content--overflow-indicator {
     display: none;
   }
 
   // Windows HCM fix
-  /* stylelint-disable no-duplicate-selectors */
+
   .#{$prefix}--modal-close__icon {
     @include high-contrast-mode('icon-fill');
   }
@@ -429,5 +464,4 @@
   .#{$prefix}--modal-close:focus {
     @include high-contrast-mode('focus');
   }
-  /* stylelint-enable no-duplicate-selectors */
 }

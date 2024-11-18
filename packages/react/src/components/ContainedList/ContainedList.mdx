@@ -1,5 +1,7 @@
-import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import { ArgTypes, Story, Canvas, Meta } from '@storybook/blocks';
 import * as ContainedListStories from './ContainedList.stories.js';
+
+<Meta isTemplate />
 
 # ContainedList
 
@@ -24,9 +26,7 @@ import * as ContainedListStories from './ContainedList.stories.js';
 
 ## Overview
 
-<Canvas>
-  <Story of={ContainedListStories.Default} />
-</Canvas>
+<Canvas of={ContainedListStories.Default} />
 
 ### Search
 
@@ -85,9 +85,7 @@ export const WithExpandableSearch = () => {
 };
 ```
 
-<Canvas>
-  <Story of={ContainedListStories.WithExpandableSearch} />
-</Canvas>
+<Canvas of={ContainedListStories.WithExpandableSearch} />
 
 #### Persistent Search:
 
@@ -99,7 +97,6 @@ render inline to the Contained List title, please see the
 [Expandable Search](#expandable-search) docs above The `Search` component will
 also remain persistent under the title, so that it remains visible on scroll,
 when there are many list items passed in.
-
 
 ```js
 export const WithPersistentSearch = () => {
@@ -141,16 +138,13 @@ export const WithPersistentSearch = () => {
 ```
 
 `ContainedList.ContainedListItem` is deprecated, use
-`import { ContainedListItem } from '@carbon/react`
-import instead.
+`import { ContainedListItem } from '@carbon/react` import instead.
 
-<Canvas>
-  <Story of={ContainedListStories.WithPersistentSearch} />
-</Canvas>
+<Canvas of={ContainedListStories.WithPersistentSearch} />
 
 ## Component API
 
-<ArgsTable />
+<ArgTypes />
 
 ## Feedback
 
