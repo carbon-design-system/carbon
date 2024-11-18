@@ -510,7 +510,6 @@ const ComboBox = forwardRef(
           selectedItem: selectedItemProp,
           prevSelectedItem: prevSelectedItemProp.current,
         });
-
         // selectedItem has been updated externally, need to update state and call onChange
         if (inputValue !== currentInputValue) {
           setInputValue(currentInputValue);
@@ -744,17 +743,7 @@ const ComboBox = forwardRef(
       onInputValueChange({ inputValue }) {
         const normalizedInput = inputValue || '';
         setInputValue(normalizedInput);
-        if (selectedItemProp && !inputValue) {
-          // ensure onChange is called when selectedItem is cleared
-          onChange({ selectedItem, inputValue: normalizedInput });
-        }
         setHighlightedIndex(indexToHighlight(normalizedInput));
-      },
-      onSelectedItemChange({ selectedItem }) {
-        // only call onChange if new selection is updated from previous
-        if (!isEqual(selectedItem, selectedItemProp)) {
-          onChange({ selectedItem });
-        }
       },
       onHighlightedIndexChange: ({ highlightedIndex }) => {
         if (highlightedIndex! > -1 && typeof window !== undefined) {
@@ -768,6 +757,20 @@ const ComboBox = forwardRef(
               block: 'nearest',
             });
           }
+        }
+      },
+      onStateChange: ({ type, selectedItem: newSelectedItem }) => {
+        if (
+          type === '__item_click__' &&
+          !isEqual(selectedItemProp, newSelectedItem)
+        ) {
+          onChange({ selectedItem: newSelectedItem });
+        }
+        if (
+          type === '__function_select_item__' ||
+          type === '__input_keydown_enter__'
+        ) {
+          onChange({ selectedItem: newSelectedItem });
         }
       },
       initialSelectedItem: initialSelectedItem,

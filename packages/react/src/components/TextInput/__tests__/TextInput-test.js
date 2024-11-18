@@ -226,7 +226,21 @@ describe('TextInput', () => {
       );
     });
 
-    it('should respect slug prop', () => {
+    it('should respect decorator prop', () => {
+      render(
+        <TextInput
+          id="textarea-1"
+          labelText="TextArea label"
+          decorator={<AILabel />}
+        />
+      );
+      expect(
+        screen.getByRole('button', { name: 'AI - Show information' })
+      ).toBeInTheDocument();
+    });
+
+    it('should respect deprecated slug prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       render(
         <TextInput
           id="textarea-1"
@@ -237,6 +251,7 @@ describe('TextInput', () => {
       expect(
         screen.getByRole('button', { name: 'AI - Show information' })
       ).toBeInTheDocument();
+      spy.mockRestore();
     });
   });
 

@@ -196,7 +196,24 @@ describe('DatePicker', () => {
     expect(ref).toHaveBeenCalledWith(container.firstChild);
   });
 
-  it('should respect slug prop', () => {
+  it('should respect decorator prop', () => {
+    render(
+      <DatePickerInput
+        id="date-picker-input-id-start"
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        data-testid="input-value"
+        decorator={<AILabel />}
+      />
+    );
+
+    expect(screen.getByRole('button')).toHaveClass(
+      `${prefix}--ai-label__button`
+    );
+  });
+
+  it('should respect deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     render(
       <DatePickerInput
         id="date-picker-input-id-start"
@@ -210,6 +227,7 @@ describe('DatePicker', () => {
     expect(screen.getByRole('button')).toHaveClass(
       `${prefix}--ai-label__button`
     );
+    spy.mockRestore();
   });
 
   it('should respect parseDate prop', async () => {
@@ -711,5 +729,46 @@ describe('Date picker with minDate and maxDate', () => {
     expect(screen.getByRole('application')).toHaveClass('open');
     await userEvent.keyboard('{escape}');
     expect(screen.getByRole('application')).not.toHaveClass('open');
+  });
+  it('clearing end date should not cause console warnings', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    render(
+      <DatePicker onChange={() => {}} datePickerType="range" dateFormat="m/d/Y">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start Date"
+          data-testid="input-value-start"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-end"
+          placeholder="mm/dd/yyyy"
+          labelText="End Date"
+          data-testid="input-value-end"
+        />
+      </DatePicker>
+    );
+    await userEvent.type(
+      screen.getByLabelText('Start Date'),
+      '01/01/2024{enter}'
+    );
+    await userEvent.type(
+      screen.getByLabelText('End Date'),
+      '01/15/2024{enter}'
+    );
+
+    // Ensure the dates are correctly populated
+    expect(screen.getByLabelText('Start Date')).toHaveValue('01/01/2024');
+    expect(screen.getByLabelText('End Date')).toHaveValue('01/15/2024');
+
+    // Clear the end date
+    await userEvent.clear(screen.getByLabelText('End Date'));
+    expect(screen.getByLabelText('End Date')).toHaveValue('');
+
+    // Click on the start date input after clearing the end date
+    await userEvent.click(screen.getByLabelText('Start Date'));
+    expect(warn).not.toHaveBeenCalled();
+    warn.mockRestore();
   });
 });
