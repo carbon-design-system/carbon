@@ -439,6 +439,14 @@
   }
 
   .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator:not(
+      :has(.#{$prefix}--ai-label)
+    )
+    > * {
+    block-size: 1rem;
+  }
+
+  .#{$prefix}--number__input-wrapper--decorator
     .#{$prefix}--number__input-inner-wrapper--decorator
     > *::before,
   .#{$prefix}--number__input-wrapper--decorator
