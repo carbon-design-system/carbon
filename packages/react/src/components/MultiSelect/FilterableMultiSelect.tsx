@@ -316,7 +316,7 @@ export interface FilterableMultiSelectProps<ItemType>
 }
 
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
-  ItemType
+  ItemType,
 >(
   {
     autoAlign = false,
@@ -684,7 +684,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
 
   // AILabel always size `mini`
   let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? slug ?? decorator
+    ? (slug ?? decorator)
     : null;
   if (
     normalizedDecorator &&

@@ -538,12 +538,12 @@ const ComboBox = forwardRef(
         typeahead
           ? autocompleteCustomFilter({ item: itemToString(item), inputValue })
           : shouldFilterItem
-          ? shouldFilterItem({
-              item,
-              itemToString,
-              inputValue,
-            })
-          : defaultShouldFilterItem()
+            ? shouldFilterItem({
+                item,
+                itemToString,
+                inputValue,
+              })
+            : defaultShouldFilterItem()
       );
 
     useEffect(() => {
@@ -715,7 +715,7 @@ const ComboBox = forwardRef(
 
     // AILabel always size `mini`
     let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? slug ?? decorator
+      ? (slug ?? decorator)
       : null;
     if (
       normalizedDecorator &&

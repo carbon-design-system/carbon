@@ -689,7 +689,7 @@ const MultiSelect = React.forwardRef(
 
     // AILabel always size `mini`
     let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? slug ?? decorator
+      ? (slug ?? decorator)
       : null;
     if (
       normalizedDecorator &&
