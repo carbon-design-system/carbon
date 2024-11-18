@@ -17,6 +17,7 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './Select.mdx';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/Select',
@@ -135,7 +136,7 @@ export const _WithLayer = () => (
 );
 
 const aiLabel = (
-  <AILabel className="ai-label-container">
+  <AILabel className="ai-label-container" revertActive={true}>
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -171,7 +172,56 @@ export const withAILabel = () => (
       id="select-1"
       labelText="Select an option"
       helperText="Optional helper text"
-      slug={aiLabel}>
+      decorator={aiLabel}>
+      <SelectItem value="" text="" />
+      <SelectItem
+        value="An example option that is really long to show what should be done to handle long text"
+        text="An example option that is really long to show what should be done to handle long text"
+      />
+      <SelectItem value="Option 2" text="Option 2" />
+      <SelectItem value="Option 3" text="Option 3" />
+      <SelectItem value="Option 4" text="Option 4" />
+    </Select>
+    <Select
+      id="select-1"
+      labelText="REMOVE BEFORE MERGE"
+      decorator={
+        <Tooltip>
+          <View />
+        </Tooltip>
+      }>
+      <SelectItem value="" text="" />
+      <SelectItem
+        value="An example option that is really long to show what should be done to handle long text"
+        text="An example option that is really long to show what should be done to handle long text"
+      />
+      <SelectItem value="Option 2" text="Option 2" />
+      <SelectItem value="Option 3" text="Option 3" />
+      <SelectItem value="Option 4" text="Option 4" />
+    </Select>
+    <Select
+      id="select-1"
+      labelText="REMOVE BEFORE MERGE"
+      decorator={aiLabel}
+      warn>
+      <SelectItem value="" text="" />
+      <SelectItem
+        value="An example option that is really long to show what should be done to handle long text"
+        text="An example option that is really long to show what should be done to handle long text"
+      />
+      <SelectItem value="Option 2" text="Option 2" />
+      <SelectItem value="Option 3" text="Option 3" />
+      <SelectItem value="Option 4" text="Option 4" />
+    </Select>
+    <Select
+      id="select-1"
+      labelText="REMOVE BEFORE MERGE"
+      warn
+      decorator={
+        <Tooltip>
+          <View />
+        </Tooltip>
+      }>
       <SelectItem value="" text="" />
       <SelectItem
         value="An example option that is really long to show what should be done to handle long text"
