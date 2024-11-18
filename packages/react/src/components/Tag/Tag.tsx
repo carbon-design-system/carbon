@@ -177,7 +177,7 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
 
   // AILabel is always size `sm` and `inline`
   let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? slug ?? decorator
+    ? (slug ?? decorator)
     : null;
   if (
     normalizedDecorator &&

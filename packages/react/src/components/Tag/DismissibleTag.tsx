@@ -123,7 +123,7 @@ const DismissibleTag = <T extends React.ElementType>({
   };
 
   let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? slug ?? decorator
+    ? (slug ?? decorator)
     : null;
   if (
     normalizedDecorator &&
