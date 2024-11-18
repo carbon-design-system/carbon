@@ -12,7 +12,7 @@ import Modal from './Modal';
 import Button from '../Button';
 import Select from '../Select';
 import MultiSelect from '../MultiSelect';
-import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
+import { Checkbox as CheckboxIcon, Information } from '@carbon/icons-react';
 import { Popover, PopoverContent } from '../Popover';
 import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
@@ -32,6 +32,7 @@ import TextArea from '../TextArea';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/Modal',
@@ -785,9 +786,13 @@ const aiLabel = (
 export const withAILabel = {
   render: () => {
     const [open, setOpen] = useState(true); // eslint-disable-line
+    const [open2, setOpen2] = useState(false); // eslint-disable-line
     return (
       <div className="ai-label-modal">
         <Button onClick={() => setOpen(true)}>Launch modal</Button>
+        <Button onClick={() => setOpen2(true)}>
+          Launch modal decorator tooltip
+        </Button>
         <Modal
           open={open}
           onRequestClose={() => setOpen(false)}
@@ -795,7 +800,52 @@ export const withAILabel = {
           modalLabel="Account resources"
           primaryButtonText="Add"
           secondaryButtonText="Cancel"
-          slug={aiLabel}>
+          decorator={aiLabel}>
+          <p style={{ marginBottom: '1rem' }}>
+            Custom domains direct requests for your apps in this Cloud Foundry
+            organization to a URL that you own. A custom domain can be a shared
+            domain, a shared subdomain, or a shared domain and host.
+          </p>
+          <p style={{ marginBottom: '1rem' }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+            eu nibh odio. Nunc a consequat est, id porttitor sapien. Proin vitae
+            leo vitae orci tincidunt auctor eget eget libero. Ut tincidunt
+            ultricies fringilla. Aliquam erat volutpat. Aenean arcu odio,
+            elementum vel vehicula vitae, porttitor ac lorem. Sed viverra elit
+            ac risus tincidunt fermentum. Ut sollicitudin nibh id risus ornare
+            ornare. Etiam gravida orci ut lectus dictum, quis ultricies felis
+            mollis. Mauris nec commodo est, nec faucibus nibh. Nunc commodo ante
+            quis pretium consectetur. Ut ac nisl vitae mi mattis vulputate a at
+            elit. Nullam porttitor ex eget mi feugiat mattis. Nunc non sodales
+            magna. Proin ornare tellus quis hendrerit egestas. Donec pharetra
+            leo nec molestie sollicitudin.
+          </p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+            placeholder="e.g. github.com"
+          />
+          <Select id="select-1" defaultValue="us-south" labelText="Region">
+            <SelectItem value="us-south" text="US South" />
+            <SelectItem value="us-east" text="US East" />
+          </Select>
+          <TextArea labelText="Comments" />
+        </Modal>
+
+        {/* MODAL TO BE REMOVED */}
+        <Modal
+          open={open2}
+          onRequestClose={() => setOpen2(false)}
+          modalHeading="Add a custom domain"
+          modalLabel="Account resources"
+          primaryButtonText="Add"
+          secondaryButtonText="Cancel"
+          decorator={
+            <Tooltip>
+              <Information></Information>
+            </Tooltip>
+          }>
           <p style={{ marginBottom: '1rem' }}>
             Custom domains direct requests for your apps in this Cloud Foundry
             organization to a URL that you own. A custom domain can be a shared
