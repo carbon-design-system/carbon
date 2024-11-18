@@ -210,15 +210,7 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
           className={`${prefix}--tag__label`}>
           {children !== null && children !== undefined ? children : typeText}
         </Text>
-        {slug ? (
-          normalizedDecorator
-        ) : decorator ? (
-          <div className={`${prefix}--tag__decorator`}>
-            {normalizedDecorator}
-          </div>
-        ) : (
-          ''
-        )}
+        {normalizedDecorator}
         <button
           type="button"
           className={`${prefix}--tag__close-icon`}
