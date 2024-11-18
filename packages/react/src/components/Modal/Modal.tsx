@@ -484,7 +484,7 @@ const Modal = React.forwardRef(function Modal(
 
   // AILabel always size `sm`
   let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? slug ?? decorator
+    ? (slug ?? decorator)
     : null;
   if (
     normalizedDecorator &&
