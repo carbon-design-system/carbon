@@ -7286,6 +7286,9 @@ Map {
   "SideNavMenuItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
       "children": Object {
         "type": "node",
       },
