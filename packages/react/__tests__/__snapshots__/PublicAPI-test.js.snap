@@ -6433,6 +6433,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "defaultChecked": Object {
         "type": "bool",
       },
@@ -6470,9 +6473,7 @@ Map {
       "required": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "value": Object {
         "args": Array [
           Array [
@@ -6497,6 +6498,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "decorator": Object {
+        "type": "node",
       },
       "defaultSelected": Object {
         "args": Array [
@@ -6557,9 +6561,7 @@ Map {
       "required": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "valueSelected": Object {
         "args": Array [
           Array [
