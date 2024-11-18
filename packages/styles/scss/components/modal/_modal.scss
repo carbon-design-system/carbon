@@ -366,7 +366,7 @@
   }
 
   // Slug styles
-  .#{$prefix}--modal--slug,
+  .#{$prefix}--modal--slug.#{$prefix}--modal,
   .#{$prefix}--modal--decorator:has(.#{$prefix}--ai-label).#{$prefix}--modal {
     background-color: $ai-overlay;
   }
