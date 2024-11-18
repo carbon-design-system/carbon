@@ -97,6 +97,24 @@ const FluidTimePicker = React.forwardRef<
 
   const error = invalid || warn;
 
+  const childrenWithProps = () => {
+    if (disabled) {
+      return React.Children.toArray(children).map((child) =>
+        React.cloneElement(child as React.ReactElement, {
+          disabled: true,
+        })
+      );
+    }
+    if (readOnly) {
+      return React.Children.toArray(children).map((child) =>
+        React.cloneElement(child as React.ReactElement, {
+          readOnly: true,
+        })
+      );
+    }
+    return children;
+  };
+
   return (
     <div className={classNames}>
       <div className={`${prefix}--time-picker--fluid__wrapper`}>
@@ -108,19 +126,7 @@ const FluidTimePicker = React.forwardRef<
             {...other}
           />
         </div>
-        {disabled
-          ? React.Children.toArray(children).map((child) => {
-              return React.cloneElement(child as React.ReactElement, {
-                disabled: true,
-              });
-            })
-          : readOnly
-            ? React.Children.toArray(children).map((child) => {
-                return React.cloneElement(child as React.ReactElement, {
-                  readOnly: true,
-                });
-              })
-            : children}
+        {childrenWithProps()}
       </div>
       {error && <hr className={`${prefix}--time-picker__divider`} />}
       {error && (

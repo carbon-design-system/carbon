@@ -322,7 +322,7 @@ export interface ComboBoxProps<ItemType>
   placeholder?: string;
 
   /**
-   * Is the ComboBox readonly?
+   * Whether or not the component is read-only
    */
   readOnly?: boolean;
 
@@ -532,12 +532,12 @@ const ComboBox = forwardRef(
         typeahead
           ? autocompleteCustomFilter({ item: itemToString(item), inputValue })
           : shouldFilterItem
-            ? shouldFilterItem({
-                item,
-                itemToString,
-                inputValue,
-              })
-            : defaultShouldFilterItem()
+          ? shouldFilterItem({
+              item,
+              itemToString,
+              inputValue,
+            })
+          : defaultShouldFilterItem()
       );
 
     useEffect(() => {
