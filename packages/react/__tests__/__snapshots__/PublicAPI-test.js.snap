@@ -6984,9 +6984,7 @@ Map {
         "type": "string",
       },
       "light": [Function],
-      "name": Object {
-        "type": "string",
-      },
+      "name": [Function],
       "onChange": Object {
         "type": "func",
       },
@@ -7008,20 +7006,7 @@ Map {
       "title": Object {
         "type": "string",
       },
-      "value": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "isRequired": true,
-        "type": "oneOfType",
-      },
+      "value": [Function],
     },
     "render": [Function],
   },
