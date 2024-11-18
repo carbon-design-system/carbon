@@ -43,6 +43,12 @@ $font-display: 'swap' !default;
 /// @group config
 $font-path: '~@ibm/plex' !default;
 
+/// Specify if the new per-family plex packages (e.g. @ibm/plex-sans) should be used
+/// @access public
+/// @type Boolean
+/// @group config
+$use-per-family-plex: false !default;
+
 /// Specify if IBM Plex should be provided by the IBM Akamai CDN
 /// @access public
 /// @type String
