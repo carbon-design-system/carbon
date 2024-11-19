@@ -384,7 +384,7 @@ export const withAILabel = {
         </Tile>
         <ClickableTile
           href="https://www.carbondesignsystem.com/"
-          decorator
+          decorator={aiLabel}
           id="tile-click"
           renderIcon={ArrowRight}
           {...args}>

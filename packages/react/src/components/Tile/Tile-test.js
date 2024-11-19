@@ -99,12 +99,10 @@ describe('Tile', () => {
     });
 
     it('should respect decorator prop', () => {
-      render(<ClickableTile decorator>Default tile</ClickableTile>);
-
-      // eslint-disable-next-line testing-library/no-node-access
-      expect(document.querySelector('svg')).toHaveClass(
-        `${prefix}--tile--ai-label-icon`
+      render(
+        <ClickableTile decorator={<AILabel />}>Default tile</ClickableTile>
       );
+      expect(document.querySelector(`.${prefix}--cds--ai-label`));
     });
 
     it('should respect deprecated slug prop', () => {
