@@ -29,8 +29,14 @@ const TableRow = (props: TableRowProps) => {
   let rowHasSlug;
   if (props?.children) {
     React.Children.toArray(props.children).map((child: any) => {
-      if (child.type?.displayName === 'TableSlugRow') {
-        if (child.props.slug) {
+      if (
+        child.type?.displayName === 'TableSlugRow' ||
+        child.type?.displayName === 'TableDecoratorRow'
+      ) {
+        if (
+          child.props.slug ||
+          child.props.decorator?.type.displayName === 'AILabel'
+        ) {
           rowHasSlug = true;
         }
       }

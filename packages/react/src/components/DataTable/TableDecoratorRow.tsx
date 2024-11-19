@@ -1,0 +1,80 @@
+/**
+ * Copyright IBM Corp. 2016, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
+import classNames from 'classnames';
+import { usePrefix } from '../../internal/usePrefix';
+import deprecate from '../../prop-types/deprecate';
+
+export interface TableDecoratorRowProps {
+  /**
+   * The CSS class names of the cell that wraps the underlying input control
+   */
+  className?: string;
+
+  /**
+   * @deprecated please use decorator instead.
+   * Provide a `Slug` component to be rendered inside the `TableSlugRow` component
+   */
+  slug?: ReactNode;
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TableDecoratorRow` component
+   */
+  decorator?: ReactNode;
+}
+
+const TableDecoratorRow = ({
+  className,
+  decorator,
+  slug,
+}: TableDecoratorRowProps) => {
+  const prefix = usePrefix();
+  const TableDecoratorRowClasses = classNames({
+    ...(className && { [className]: true }),
+    [`${prefix}--table-column-decorator`]: true,
+    [`${prefix}--table-column-decorator--active`]: decorator,
+  });
+
+  let normalizedDecorator = React.isValidElement(slug ?? decorator)
+    ? slug ?? decorator
+    : null;
+  if (
+    normalizedDecorator &&
+    normalizedDecorator['type']?.displayName === 'AILabel'
+  ) {
+    normalizedDecorator = React.cloneElement(
+      normalizedDecorator as React.ReactElement<any>,
+      {
+        size: 'mini',
+      }
+    );
+  }
+
+  return <td className={TableDecoratorRowClasses}>{normalizedDecorator}</td>;
+};
+
+TableDecoratorRow.displayName = 'TableDecoratorRow';
+TableDecoratorRow.propTypes = {
+  /**
+   * The CSS class names of the cell that wraps the underlying input control
+   */
+  className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TableDecoratorRow` component
+   */
+  decorator: PropTypes.node,
+
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
+};
+
+export default TableDecoratorRow;

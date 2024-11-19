@@ -941,19 +941,23 @@
   // -------------------
   // Slug styles
   // -------------------
-  .#{$prefix}--data-table .#{$prefix}--table-column-slug {
+  .#{$prefix}--data-table .#{$prefix}--table-column-slug,
+  .#{$prefix}--data-table .#{$prefix}--table-column-decorator {
     inline-size: $spacing-05;
     padding-inline-end: 0;
   }
 
   tr.#{$prefix}--data-table--slug-row,
-  tr.#{$prefix}--data-table--slug-row + .#{$prefix}--expandable-row {
+  tr.#{$prefix}--data-table--slug-row + .#{$prefix}--expandable-row,
+  tr.#{$prefix}--data-table--decorator-row,
+  tr.#{$prefix}--data-table--decorator-row + .#{$prefix}--expandable-row {
     @include ai-table-gradient();
 
     background-attachment: fixed;
   }
 
-  .#{$prefix}--data-table--slug-row {
+  .#{$prefix}--data-table--slug-row,
+  .#{$prefix}--data-table--decorator-row {
     box-shadow: inset 1px 0 $ai-border-strong;
   }
 
@@ -983,6 +987,36 @@
   tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     > td,
   tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    > td:first-of-type,
+  .#{$prefix}--data-table
+    tbody
+    tr.#{$prefix}--data-table--decorator-row:hover
+    td,
+  tr.#{$prefix}--data-table--decorator-row.#{$prefix}--expandable-row:hover
+    + .#{$prefix}--expandable-row[data-child-row]
+    td,
+  tr.#{$prefix}--data-table--decorator-row.#{$prefix}--expandable-row--hover
+    + .#{$prefix}--expandable-row[data-child-row]:hover
+    > td,
+  tr.#{$prefix}--data-table--decorator-row.#{$prefix}--expandable-row--hover
+    > td,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--decorator-row.#{$prefix}--expandable-row
+    + tr.#{$prefix}--expandable-row[data-child-row]
+    > td,
+  tr.#{$prefix}--data-table--decorator-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    td,
+  tr.#{$prefix}--data-table--decorator-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    td:first-of-type,
+  tr.#{$prefix}--data-table--decorator-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(
+      .#{$prefix}--expandable-row
+    ):hover
+    > td,
+  tr.#{$prefix}--data-table--decorator-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    + tr[data-child-row]
+    > td,
+  tr.#{$prefix}--data-table--decorator-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    > td,
+  tr.#{$prefix}--data-table--decorator-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     > td:first-of-type {
     background-color: transparent;
   }
@@ -993,7 +1027,14 @@
   tr.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row--hover
     + .#{$prefix}--expandable-row[data-child-row]:hover,
   tr.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--slug-row,
-  tr.#{$prefix}--data-table--selected.#{$prefix}--parent-row.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--slug-row {
+  tr.#{$prefix}--data-table--selected.#{$prefix}--parent-row.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--slug-row,
+  .#{$prefix}--data-table tbody tr.#{$prefix}--data-table--decorator-row:hover,
+  tr.#{$prefix}--data-table--decorator-row:hover
+    + .#{$prefix}--expandable-row[data-child-row],
+  tr.#{$prefix}--data-table--decorator-row.#{$prefix}--expandable-row--hover
+    + .#{$prefix}--expandable-row[data-child-row]:hover,
+  tr.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--decorator-row,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--parent-row.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--decorator-row {
     @include ai-table-gradient('hover');
 
     background-attachment: fixed;
@@ -1002,6 +1043,10 @@
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
   .#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
   tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row
+    + .#{$prefix}--expandable-row,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--decorator-row,
+  .#{$prefix}--data-table--selected.#{$prefix}--data-table--decorator-row,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--decorator-row
     + .#{$prefix}--expandable-row {
     @include ai-table-gradient('selected');
 
@@ -1014,18 +1059,32 @@
   tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
     td:not(.#{$prefix}--table-expand):not(
       .#{$prefix}--table-column-checkbox
-    ):not(.#{$prefix}--table-column-slug) {
+    ):not(.#{$prefix}--table-column-slug),
+  tr.#{$prefix}--data-table--decorator-row.#{$prefix}--data-table--selected td,
+  tr.#{$prefix}--data-table--decorator-row.#{$prefix}--data-table--selected:hover
+    td,
+  tbody tr.#{$prefix}--data-table--decorator-row:hover td,
+  tr.#{$prefix}--data-table--decorator-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    td:not(.#{$prefix}--table-expand):not(
+      .#{$prefix}--table-column-checkbox
+    ):not(.#{$prefix}--table-column-decorator) {
     border-block-end-color: $border-subtle;
   }
 
   tr.#{$prefix}--expandable-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
     > td:not(.#{$prefix}--table-expand):not(
       .#{$prefix}--table-column-checkbox
-    ):not(.#{$prefix}--table-column-slug) {
+    ):not(.#{$prefix}--table-column-slug),
+  tr.#{$prefix}--expandable-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--decorator-row[data-parent-row]
+    > td:not(.#{$prefix}--table-expand):not(
+      .#{$prefix}--table-column-checkbox
+    ):not(.#{$prefix}--table-column-decorator) {
     border-block-end: 1px solid $layer-selected;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row:hover
+    td:first-of-type,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--decoratorß-row.#{$prefix}--expandable-row:hover
     td:first-of-type {
     border-block-end: 1px solid transparent;
   }
@@ -1036,12 +1095,21 @@
     .#{$prefix}--table-sort,
   .#{$prefix}--data-table
     thead
-    th:has(> .#{$prefix}--table-header-label--slug) {
+    th:has(> .#{$prefix}--table-header-label--slug)
+  //    .#{$prefix}--data-table
+  //   thead
+  //   th.#{$prefix}--table-sort__header--decorator
+  //   .#{$prefix}--table-sort,
+  // .#{$prefix}--data-table
+  //   thead
+  //   th:has(> .#{$prefix}--table-header-label--decorator)
+  {
     @include ai-table-gradient();
   }
 
   .#{$prefix}--table-column-slug .#{$prefix}--ai-label,
-  .#{$prefix}--table-column-slug .#{$prefix}--slug {
+  .#{$prefix}--table-column-slug .#{$prefix}--slug,
+  .#{$prefix}--table-column-decorator .#{$prefix}--decorator {
     position: absolute;
     z-index: 2;
     transform: translateY(-50%);
@@ -1050,12 +1118,16 @@
   .#{$prefix}--data-table--xl
     .#{$prefix}--table-column-slug
     .#{$prefix}--ai-label,
-  .#{$prefix}--data-table--xl .#{$prefix}--table-column-slug .#{$prefix}--slug {
+  .#{$prefix}--data-table--xl .#{$prefix}--table-column-slug .#{$prefix}--slug,
+  .#{$prefix}--data-table--xl
+    .#{$prefix}--table-column-decorator
+    .#{$prefix}--decorator {
     transform: translateY(1px);
   }
 
   // AILabel inside header styles
-  th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug {
+  th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug,
+  th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--decorator {
     display: flex;
     align-items: center;
   }
@@ -1065,7 +1137,10 @@
     .#{$prefix}--ai-label,
   th
     .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug
-    .#{$prefix}--slug {
+    .#{$prefix}--slug,
+  th
+    .#{$prefix}--table-header-label.#{$prefix}--table-header-label--decorator
+    .#{$prefix}--tooltip {
     margin-inline-start: auto;
   }
 
