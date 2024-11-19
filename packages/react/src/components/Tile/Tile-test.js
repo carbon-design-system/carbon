@@ -197,19 +197,25 @@ describe('Tile', () => {
       expect(id1).toHaveFocus();
     });
 
-    it('should respect decorator prop', () => {
-      render(
+    it('should respect decorator prop', async () => {
+      const onClick = jest.fn();
+      const { container } = render(
         <SelectableTile
           decorator={<AILabel />}
           id="tile-1"
           name="tiles"
-          value="value">
+          value="value"
+          onClick={onClick}>
           Default tile
         </SelectableTile>
       );
-      expect(
-        screen.getByRole('button', { name: 'AI - Show information' })
-      ).toBeInTheDocument();
+      const aiLabel = screen.getByRole('button', {
+        name: 'AI - Show information',
+      });
+      expect(aiLabel).toBeInTheDocument();
+      const tile = container.firstChild;
+      await userEvent.click(aiLabel);
+      expect(tile).not.toHaveClass(`${prefix}--tile--is-selected`);
     });
 
     it('should respect deprecated slug prop', () => {
