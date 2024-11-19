@@ -1454,6 +1454,9 @@ Map {
       "danger": Object {
         "type": "bool",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "isFullWidth": Object {
         "type": "bool",
       },
@@ -1512,9 +1515,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
     },
     "render": [Function],
   },
@@ -2727,6 +2728,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -2773,9 +2777,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "type": Object {
         "type": "string",
       },
@@ -6434,6 +6436,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "defaultChecked": Object {
         "type": "bool",
       },
@@ -6471,9 +6476,7 @@ Map {
       "required": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "value": Object {
         "args": Array [
           Array [
@@ -6498,6 +6501,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "decorator": Object {
+        "type": "node",
       },
       "defaultSelected": Object {
         "args": Array [
@@ -6558,9 +6564,7 @@ Map {
       "required": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "valueSelected": Object {
         "args": Array [
           Array [
@@ -7287,6 +7291,9 @@ Map {
   "SideNavMenuItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
       "children": Object {
         "type": "node",
       },
@@ -8523,6 +8530,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "defaultValue": Object {
         "args": Array [
           Array [
@@ -8583,9 +8593,7 @@ Map {
       "rows": Object {
         "type": "number",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "value": Object {
         "args": Array [
           Array [
@@ -8858,6 +8866,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "defaultValue": Object {
         "args": Array [
           Array [
@@ -8926,9 +8937,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "type": Object {
         "type": "string",
       },

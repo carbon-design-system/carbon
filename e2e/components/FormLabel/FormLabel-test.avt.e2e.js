@@ -22,35 +22,27 @@ test.describe('@avt FormLabel', () => {
     await expect(page).toHaveNoACViolations('FormLabel');
   });
 
-  test('@avt-advanced-states FormLabel with tooltip', async ({ page }) => {
+  test('@avt-advanced-states FormLabel with toggletip', async ({ page }) => {
     await visitStory(page, {
       component: 'FormLabel',
-      id: 'components-formlabel--with-tooltip',
+      id: 'components-formlabel--with-toggletip',
       globals: {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('FormLabel-with-tooltip');
+    await expect(page).toHaveNoACViolations('FormLabel-with-toggletip');
   });
 
-  test('@avt-keyboard-nav FormLabel with tooltip', async ({ page }) => {
+  test('@avt-keyboard-nav FormLabel with toggletip', async ({ page }) => {
     await visitStory(page, {
       component: 'FormLabel',
-      id: 'components-formlabel--with-tooltip',
+      id: 'components-formlabel--with-toggletip',
       globals: {
         theme: 'white',
       },
     });
 
-    await expect(page.getByText('Form label with Tooltip')).toBeVisible();
-    await page.keyboard.press('Tab');
-    await expect(
-      page
-        .getByText(
-          'This can be used to provide more information about a field.'
-        )
-        .first()
-    ).toBeVisible();
+    await expect(page.getByText('Form label with toggletip')).toBeVisible();
     await page.keyboard.press('Tab');
     await page.keyboard.press('Enter');
     await expect(
