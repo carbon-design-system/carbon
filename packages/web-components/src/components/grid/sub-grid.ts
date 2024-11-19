@@ -43,25 +43,12 @@ class CDSSubGrid extends LitElement {
   @property({ reflect: true, attribute: 'narrow', type: Boolean })
   narrow = false;
 
-  /**
-   * Wide reset to default grid styling.
-   */
-  @property({ reflect: true, attribute: 'wide', type: Boolean })
-  wide = false;
-
   render() {
+    this.mode = SUB_GRID_MODE.WIDE;
     if (this.narrow) {
       this.mode = SUB_GRID_MODE.NARROW;
     } else if (this.condensed) {
       this.mode = SUB_GRID_MODE.CONDENSED;
-    } else if (this.wide) {
-      this.mode = SUB_GRID_MODE.WIDE;
-    } else if (this.gridContext?.narrow) {
-      this.mode = SUB_GRID_MODE.NARROW;
-    } else if (this.gridContext?.condensed) {
-      this.mode = SUB_GRID_MODE.CONDENSED;
-    } else {
-      this.mode = SUB_GRID_MODE.WIDE;
     }
 
     // Grid styling added to contained components, allowing CSS Grid

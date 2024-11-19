@@ -48,12 +48,11 @@ class CDSGrid extends LitElement {
   @provide({ context: gridContext })
   @property({ attribute: false })
   public gridContext: GridContext = {
-    condensed: false,
-    narrow: false,
+    subgrid: false,
   };
 
   render() {
-    this.gridContext = { condensed: this.condensed, narrow: this.narrow };
+    this.gridContext = { subgrid: true };
 
     // Grid styling added to contained components, allowing CSS Grid
     // to affect the it's own slot content.
