@@ -586,7 +586,6 @@ describe('MultiSelect', () => {
     });
 
     it('should respect slug prop', async () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       const { container } = render(
@@ -596,25 +595,6 @@ describe('MultiSelect', () => {
 
       expect(container.firstChild).toHaveClass(
         `${prefix}--list-box__wrapper--slug`
-      );
-      spy.mockRestore();
-    });
-
-    it('should respect decorator prop', async () => {
-      const items = generateItems(4, generateGenericItem);
-      const label = 'test-label';
-      const { container } = render(
-        <MultiSelect
-          id="test"
-          label={label}
-          items={items}
-          decorator={<AILabel />}
-        />
-      );
-      await waitForPosition();
-
-      expect(container.firstChild).toHaveClass(
-        `${prefix}--list-box__wrapper--decorator`
       );
     });
 

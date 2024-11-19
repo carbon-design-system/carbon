@@ -132,11 +132,6 @@ export interface FilterableMultiSelectProps<ItemType>
   clearSelectionText?: string;
 
   /**
-   * **Experimental**: Provide a `decorator` component to be rendered inside the `FilterableMultiSelect` component
-   */
-  decorator?: ReactNode;
-
-  /**
    * Specify the direction of the multiselect dropdown.
    */
   direction?: 'top' | 'bottom';
@@ -163,9 +158,7 @@ export interface FilterableMultiSelectProps<ItemType>
     items: readonly ItemType[],
     extra: {
       inputValue: string | null;
-      itemToString: NonNullable<
-        UseMultipleSelectionProps<ItemType>['itemToString']
-      >;
+      itemToString: NonNullable<UseComboboxProps<ItemType>['itemToString']>;
     }
   ): ItemType[];
 
@@ -288,7 +281,6 @@ export interface FilterableMultiSelectProps<ItemType>
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
    */
   slug?: ReactNode;
@@ -326,7 +318,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     clearSelectionDescription = 'Total items selected: ',
     clearSelectionText = 'To clear selection, press Delete or Backspace',
     compareItems = defaultCompareItems,
-    decorator,
     direction = 'bottom',
     disabled = false,
     downshiftProps,
@@ -476,7 +467,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
       [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
       [`${prefix}--list-box__wrapper--slug`]: slug,
-      [`${prefix}--list-box__wrapper--decorator`]: decorator,
       [`${prefix}--autoalign`]: autoAlign,
     }
   );
@@ -552,7 +542,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     inputValue,
     stateReducer,
     isItemDisabled(item, _index) {
-      return (item as any).disabled;
+      return (item as any)?.disabled;
     },
   });
   function stateReducer(state, actionAndChanges) {
@@ -649,7 +639,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     activeIndex: highlightedIndex,
     initialSelectedItems,
     selectedItems: controlledSelectedItems,
-    itemToString,
     onStateChange(changes) {
       switch (changes.type) {
         case SelectedItemKeyDownBackspace:
@@ -685,20 +674,12 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     }
   }
 
-  // AILabel always size `mini`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? slug ?? decorator
-    : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-      }
-    );
+  // Slug is always size `mini`
+  let normalizedSlug;
+  if (slug && slug['type']?.displayName === 'AILabel') {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'mini',
+    });
   }
 
   const className = cx(
@@ -935,15 +916,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
             translateWithId={translateWithId}
           />
         </div>
-        {slug ? (
-          normalizedDecorator
-        ) : decorator ? (
-          <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
-            {normalizedDecorator}
-          </div>
-        ) : (
-          ''
-        )}
+        {normalizedSlug}
 
         <ListBox.Menu {...menuProps}>
           {isOpen
@@ -1042,11 +1015,6 @@ FilterableMultiSelect.propTypes = {
    * Specify the text that should be read for screen readers to clear selection.
    */
   clearSelectionText: PropTypes.string,
-
-  /**
-   * **Experimental**: Provide a decorator component to be rendered inside the `FilterableMultiSelect` component
-   */
-  decorator: PropTypes.node,
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -1171,10 +1139,10 @@ FilterableMultiSelect.propTypes = {
    */
   size: ListBoxPropTypes.ListBoxSize,
 
-  slug: deprecate(
-    PropTypes.node,
-    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
-  ),
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `FilterableMultiSelect` component
+   */
+  slug: PropTypes.node,
 
   ...sortingPropTypes,
 

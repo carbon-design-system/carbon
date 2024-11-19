@@ -129,11 +129,6 @@ export interface MultiSelectProps<ItemType>
   clearSelectionText?: string;
 
   /**
-   * **Experimental**: Provide a `decorator` component to be rendered inside the `MultiSelect` component
-   */
-  decorator?: ReactNode;
-
-  /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
    */
   direction?: 'bottom' | 'top';
@@ -265,7 +260,6 @@ export interface MultiSelectProps<ItemType>
   size?: ListBoxSize;
 
   /**
-   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
    */
   slug?: ReactNode;
@@ -302,7 +296,6 @@ const MultiSelect = React.forwardRef(
     {
       autoAlign = false,
       className: containerClassName,
-      decorator,
       id,
       items,
       itemToElement,
@@ -460,7 +453,7 @@ const MultiSelect = React.forwardRef(
       selectedItem: controlledSelectedItems,
       items: filteredItems as ItemType[],
       isItemDisabled(item, _index) {
-        return (item as any).disabled;
+        return (item as any)?.disabled;
       },
       ...downshiftProps,
     };
@@ -545,7 +538,6 @@ const MultiSelect = React.forwardRef(
         [`${prefix}--list-box__wrapper--fluid--focus`]:
           !isOpen && isFluid && isFocused,
         [`${prefix}--list-box__wrapper--slug`]: slug,
-        [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
     );
     const titleClasses = cx(`${prefix}--label`, {
@@ -687,20 +679,12 @@ const MultiSelect = React.forwardRef(
         }
       : {};
 
-    // AILabel always size `mini`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? slug ?? decorator
-      : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'mini',
-        }
-      );
+    // Slug is always size `mini`
+    let normalizedSlug;
+    if (slug && slug['type']?.displayName === 'AILabel') {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size: 'mini',
+      });
     }
 
     const itemsSelectedText =
@@ -789,15 +773,7 @@ const MultiSelect = React.forwardRef(
                 translateWithId={translateWithId}
               />
             </button>
-            {slug ? (
-              normalizedDecorator
-            ) : decorator ? (
-              <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
-                {normalizedDecorator}
-              </div>
-            ) : (
-              ''
-            )}
+            {normalizedSlug}
           </div>
           <ListBox.Menu {...menuProps}>
             {isOpen &&
@@ -909,11 +885,6 @@ MultiSelect.propTypes = {
    * declaring function with `useCallback` to prevent unnecessary re-renders.
    */
   compareItems: PropTypes.func,
-
-  /**
-   * **Experimental**: Provide a decorator component to be rendered inside the `MultiSelect` component
-   */
-  decorator: PropTypes.node,
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -1048,10 +1019,10 @@ MultiSelect.propTypes = {
    */
   size: ListBoxPropTypes.ListBoxSize,
 
-  slug: deprecate(
-    PropTypes.node,
-    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
-  ),
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Provide a method that sorts all options in the control. Overriding this
