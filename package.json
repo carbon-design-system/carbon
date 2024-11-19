@@ -120,18 +120,15 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "prettier -v",
-      "prettier --cache --write",
+      "yarn prettier --cache --write",
       "eslint"
     ],
     "**/*.scss": [
-      "prettier -v",
-      "prettier --cache --write",
+      "yarn prettier --cache --write",
       "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
     ],
     "!(*sass).md": [
-      "prettier -v",
-      "prettier --cache --write"
+      "yarn prettier --cache --write"
     ],
     "README.md": [
       "all-contributors generate"
