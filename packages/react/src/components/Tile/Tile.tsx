@@ -561,7 +561,10 @@ SelectableTile.propTypes = {
    * The `name` of the `<input>`.
    * @deprecated
    */
-  name: PropTypes.string,
+  name: deprecate(
+    PropTypes.string,
+    'The `name` property is no longer used.  It will be removed in the next major release.'
+  ),
 
   /**
    * The empty handler of the `<input>`.
@@ -602,7 +605,10 @@ SelectableTile.propTypes = {
    * The value of the `<input>`.
    * @deprecated
    */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  value: deprecate(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    'The `value` property is no longer used.  It will be removed in the next major release.`'
+  ),
 };
 
 export interface ExpandableTileProps extends HTMLAttributes<HTMLDivElement> {
