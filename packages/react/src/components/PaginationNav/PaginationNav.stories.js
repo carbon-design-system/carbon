@@ -7,6 +7,7 @@
 
 import React from 'react';
 import PaginationNav from '../PaginationNav';
+import './styles.scss';
 
 export default {
   title: 'Components/PaginationNav',
