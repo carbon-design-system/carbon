@@ -559,15 +559,15 @@ Popover.propTypes = {
    */
   autoAlignBoundary: PropTypes.oneOfType([
     PropTypes.oneOf(['clippingAncestors']),
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.instanceOf(Element), // For DOM elements
+    PropTypes.arrayOf(PropTypes.instanceOf(Element)), // Array of DOM elements
     PropTypes.exact({
-      x: PropTypes.number,
-      y: PropTypes.number,
-      width: PropTypes.number,
-      height: PropTypes.number,
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
     }),
-  ]),
+  ]) as PropTypes.Validator<Boundary | null | undefined>,
 
   /**
    * Specify whether a caret should be rendered
