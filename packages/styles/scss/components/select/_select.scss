@@ -335,17 +335,17 @@
   .#{$prefix}--select--decorator
     .#{$prefix}--select__inner-wrapper--decorator
     .#{$prefix}--ai-label--revert {
-    transform: translate(calc(#{$spacing-03} - #{$divider-width}), 0);
+    transform: translate($spacing-03, 0);
   }
 
   .#{$prefix}--select--slug .#{$prefix}--ai-label--revert {
-    inset-inline-end: convert.to-rem(42px);
+    inset-inline-end: convert.to-rem(41px);
   }
 
   .#{$prefix}--select--slug .#{$prefix}--ai-label--revert::after,
   .#{$prefix}--select--slug .#{$prefix}--slug--revert::after {
     inset-block-start: convert.to-rem(8px);
-    inset-inline-end: -($spacing-01);
+    inset-inline-end: -($divider-width);
   }
 
   .#{$prefix}--select--decorator
