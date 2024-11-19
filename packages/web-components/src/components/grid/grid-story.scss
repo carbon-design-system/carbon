@@ -48,11 +48,10 @@
     --grid-mode-color: #97c1ff;
   }
 
-  .sb-grid[narrow]::part(grid),
   .sb-sub-grid[mode='narrow']::part(grid) {
     --grid-mode-color: #20d5d2;
 
-    background: $green-10;
+    background: #d6f9f9;
   }
 
   .sb-grid[condensed]::part(grid),
@@ -60,10 +59,6 @@
     --grid-mode-color: #bb8eff;
 
     background: $purple-10;
-  }
-
-  .sb-sub-grid[mode='narrow']::part(grid) {
-    background: #d6f9f9;
   }
 
   .sb-sub-grid[mode='condensed']::part(grid) {

@@ -69,16 +69,16 @@ export const MixedGutterModes = {
             <cds-column class="sb-column" sm="" ="4" md="8">
               <cds-sub-grid class="sb-sub-grid" narrow>
                 <cds-column class="sb-column">
-                  <div>Text</div>
+                  <cds-column-hang>Text</cds-column-hang>
                 </cds-column>
                 <cds-column class="sb-column">
-                  <div>Text</div>
+                  <cds-column-hang>Text</cds-column-hang>
                 </cds-column>
                 <cds-column class="sb-column">
-                  <div>Text</div>
+                  <cds-column-hang>Text</cds-column-hang>
                 </cds-column>
                 <cds-column class="sb-column">
-                  <div>Text</div>
+                  <cds-column-hang>Text</cds-column-hang>
                 </cds-column>
                 <cds-column class="sb-column" sm="4">
                   <cds-sub-grid class="sb-sub-grid">
@@ -87,10 +87,10 @@ export const MixedGutterModes = {
                     <cds-column class="sb-column" sm="2">
                       <cds-sub-grid class="sb-sub-grid" condensed>
                         <cds-column class="sb-column">
-                          <div>Text</div>
+                          <cds-column-hang>Text</cds-column-hang>
                         </cds-column>
                         <cds-column class="sb-column">
-                          <div>Text</div>
+                          <cds-column-hang>Text</cds-column-hang>
                         </cds-column>
                       </cds-sub-grid>
                     </cds-column>
@@ -103,21 +103,21 @@ export const MixedGutterModes = {
       </cds-grid>
       <cds-grid class="sb-grid" narrow>
         <cds-column class="sb-column" sm="4" md="8">
-          <cds-sub-grid class="sb-sub-grid" wide>
+          <cds-sub-grid class="sb-sub-grid">
             <cds-column class="sb-column" sm="4"></cds-column>
             <cds-column class="sb-column" sm="4">
               <cds-sub-grid class="sb-sub-grid" narrow>
                 <cds-column class="sb-column">
-                  <div>Text</div>
+                  <cds-column-hang>Text</cds-column-hang>
                 </cds-column>
                 <cds-column class="sb-column">
-                  <div>Text</div>
+                  <cds-column-hang>Text</cds-column-hang>
                 </cds-column>
                 <cds-column class="sb-column">
-                  <div>Text</div>
+                  <cds-column-hang>Text</cds-column-hang>
                 </cds-column>
                 <cds-column class="sb-column">
-                  <div>Text</div>
+                  <cds-column-hang>Text</cds-column-hang>
                 </cds-column>
               </cds-sub-grid>
             </cds-column>
