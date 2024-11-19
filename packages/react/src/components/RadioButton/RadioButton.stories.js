@@ -132,7 +132,7 @@ export const withAILabel = {
   render: () => (
     <div className="ai-label-check-radio-container">
       <RadioButtonGroup
-        slug={AILabelFunc('default')}
+        decorator={AILabelFunc('default')}
         orientation="vertical"
         legendText="Group label"
         name="radio-button-group"
@@ -163,13 +163,13 @@ export const withAILabel = {
           labelText="Radio button label"
           value="radio-4"
           id="radio-4"
-          slug={AILabelFunc()}
+          decorator={AILabelFunc()}
         />
         <RadioButton
           labelText="Radio button label"
           value="radio-5"
           id="radio-5"
-          slug={AILabelFunc()}
+          decorator={AILabelFunc()}
         />
         <RadioButton
           labelText="Radio button label"
@@ -187,13 +187,13 @@ export const withAILabel = {
           labelText="Radio button label"
           value="radio-7"
           id="radio-7"
-          slug={AILabelFunc('inline')}
+          decorator={AILabelFunc('inline')}
         />
         <RadioButton
           labelText="Radio button label"
           value="radio-8"
           id="radio-8"
-          slug={AILabelFunc('inline')}
+          decorator={AILabelFunc('inline')}
         />
         <RadioButton
           labelText="Radio button label"
