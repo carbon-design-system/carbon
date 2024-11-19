@@ -172,7 +172,7 @@ const RadioTile = React.forwardRef(function RadioTile(
 
   // AILabel is always size `xs`
   let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? slug ?? decorator
+    ? (slug ?? decorator)
     : null;
   if (
     normalizedDecorator &&
