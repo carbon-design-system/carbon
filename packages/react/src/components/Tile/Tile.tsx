@@ -142,7 +142,7 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
   className?: string;
 
   /**
-   * **Experimental**: Provide a `decorator` component or set the boolean to True for an AILabel icon to be rendered inside the `TextInput` component
+   * **Experimental**: Provide a `decorator` component or set the boolean to True for an AILabel icon to be rendered inside the `ClickableTile` component
    */
   decorator?: boolean | ReactNode;
 
@@ -310,7 +310,7 @@ ClickableTile.propTypes = {
   clicked: PropTypes.bool,
 
   /**
-   * **Experimental**: Provide a `decorator` component or set the boolean to True for an AILabel icon to be rendered inside the `TextInput` component
+   * **Experimental**: Provide a `decorator` component or set the boolean to True for an AILabel icon to be rendered inside the `ClickableTile` component
    */
   decorator: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
 

@@ -605,7 +605,6 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     overflow: visible;
   }
 
-  // To Do: Replace svg overrides with actual AI icon
   .#{$prefix}--tile--clickable .#{$prefix}--tile--ai-label-icon rect {
     stroke: $icon-primary;
   }
