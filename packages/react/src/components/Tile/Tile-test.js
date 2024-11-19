@@ -111,12 +111,7 @@ describe('Tile', () => {
       const onClick = jest.fn();
       render(
         <div role="group" aria-label="selectable tiles">
-          <SelectableTile
-            disabled
-            id="tile-1"
-            name="tiles"
-            onClick={onClick}
-            value="value">
+          <SelectableTile disabled id="tile-1" onClick={onClick}>
             <span role="img" aria-label="vertical traffic light">
               🚦
             </span>
@@ -130,25 +125,13 @@ describe('Tile', () => {
     it('should cycle elements in document tab order', async () => {
       render(
         <div role="group" aria-label="selectable tiles">
-          <SelectableTile
-            data-testid="element"
-            id="tile-1"
-            name="tiles"
-            value="value">
+          <SelectableTile data-testid="element" id="tile-1">
             tile 1
           </SelectableTile>
-          <SelectableTile
-            data-testid="element"
-            id="tile-2"
-            name="tiles"
-            value="value">
+          <SelectableTile data-testid="element" id="tile-2">
             tile 2
           </SelectableTile>
-          <SelectableTile
-            data-testid="element"
-            id="tile-3"
-            name="tiles"
-            value="value">
+          <SelectableTile data-testid="element" id="tile-3">
             tile 3
           </SelectableTile>
         </div>
@@ -180,11 +163,7 @@ describe('Tile', () => {
 
     it('should respect slug prop', () => {
       render(
-        <SelectableTile
-          slug={<AILabel />}
-          id="tile-1"
-          name="tiles"
-          value="value">
+        <SelectableTile slug={<AILabel />} id="tile-1">
           Default tile
         </SelectableTile>
       );
@@ -440,7 +419,7 @@ describe('Tile', () => {
 
   it('respect selected prop', async () => {
     const { container } = render(
-      <SelectableTile id="selectable-tile-1" selected value={'test'}>
+      <SelectableTile id="selectable-tile-1" selected>
         Option 1
       </SelectableTile>
     );
