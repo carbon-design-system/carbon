@@ -21,20 +21,10 @@ export default {
 
 export const Default = () => <FormLabel>Form label</FormLabel>;
 
-export const WithTooltip = (controls) => {
+export const WithToggletip = (controls) => {
   const { align } = controls;
   return (
     <>
-      <div className="form-wrapper">
-        <FormLabel>Form label with Tooltip</FormLabel>
-        <Tooltip
-          align="bottom"
-          label="This can be used to provide more information about a field.">
-          <button className="cds--tooltip__trigger" type="button">
-            <Information />
-          </button>
-        </Tooltip>
-      </div>
       <div className="form-wrapper">
         <FormLabel>Form label with Toggletip</FormLabel>
         <Toggletip align={align}>
