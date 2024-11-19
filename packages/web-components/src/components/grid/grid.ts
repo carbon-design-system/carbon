@@ -8,13 +8,13 @@
  */
 
 import { LitElement, html } from 'lit';
-import { provide } from '@lit/context';
+import { consume, provide } from '@lit/context';
 import { GridContext, gridContext } from './grid-context';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './grid.scss?lit';
-import { GRID_ALIGNMENT } from './defs';
+import { GRID_ALIGNMENT, SUB_GRID_MODE } from './defs';
 export { GRID_ALIGNMENT } from './defs';
 
 @customElement(`${prefix}-grid`)
@@ -45,6 +45,10 @@ class CDSGrid extends LitElement {
   @property({ reflect: true, attribute: 'full-width', type: Boolean })
   fullWidth = false;
 
+  @consume({ context: gridContext, subscribe: true })
+  @property({ attribute: false })
+  public gridContextIn?: GridContext;
+
   @provide({ context: gridContext })
   @property({ attribute: false })
   public gridContext: GridContext = {
@@ -54,11 +58,23 @@ class CDSGrid extends LitElement {
   render() {
     this.gridContext = { subgrid: true };
 
-    // Grid styling added to contained components, allowing CSS Grid
-    // to affect the it's own slot content.
-    return html`<div class="${prefix}--grid-part" part="grid">
-      <slot></slot>
-    </div> `;
+    if (this.gridContextIn?.subgrid) {
+      let subMode = SUB_GRID_MODE.WIDE;
+      if (this.narrow) {
+        subMode = SUB_GRID_MODE.NARROW;
+      } else if (this.condensed) {
+        subMode = SUB_GRID_MODE.CONDENSED;
+      }
+      return html`<div subgrid mode=${subMode} part="grid">
+        <slot></slot>
+      </div> `;
+    } else {
+      // Grid styling added to contained components, allowing CSS Grid
+      // to affect the it's own slot content.
+      return html`<div grid part="grid">
+        <slot></slot>
+      </div> `;
+    }
   }
 
   static styles = styles;

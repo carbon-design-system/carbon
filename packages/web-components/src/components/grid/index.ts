@@ -9,5 +9,4 @@
 
 import './grid';
 import './column';
-import './sub-grid';
 import './column-hang';

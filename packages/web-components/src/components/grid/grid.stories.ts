@@ -65,9 +65,9 @@ export const MixedGutterModes = {
   render: () =>
     html`<cds-grid class="sb-grid">
         <cds-column class="sb-column" sm="4" md="8">
-          <cds-sub-grid class="sb-sub-grid">
-            <cds-column class="sb-column" sm="" ="4" md="8">
-              <cds-sub-grid class="sb-sub-grid" narrow>
+          <cds-grid class="sb-sub-grid">
+            <cds-column class="sb-column" sm="4" md="8">
+              <cds-grid class="sb-sub-grid" narrow>
                 <cds-column class="sb-column">
                   <cds-column-hang>Text</cds-column-hang>
                 </cds-column>
@@ -81,32 +81,32 @@ export const MixedGutterModes = {
                   <cds-column-hang>Text</cds-column-hang>
                 </cds-column>
                 <cds-column class="sb-column" sm="4">
-                  <cds-sub-grid class="sb-sub-grid">
+                  <cds-grid class="sb-sub-grid">
                     <cds-column class="sb-column">Text</cds-column>
                     <cds-column class="sb-column">Text</cds-column>
                     <cds-column class="sb-column" sm="2">
-                      <cds-sub-grid class="sb-sub-grid" condensed>
+                      <cds-grid class="sb-sub-grid" condensed>
                         <cds-column class="sb-column">
                           <cds-column-hang>Text</cds-column-hang>
                         </cds-column>
                         <cds-column class="sb-column">
                           <cds-column-hang>Text</cds-column-hang>
                         </cds-column>
-                      </cds-sub-grid>
+                      </cds-grid>
                     </cds-column>
-                  </cds-sub-grid>
+                  </cds-grid>
                 </cds-column>
-              </cds-sub-grid>
+              </cds-grid>
             </cds-column>
-          </cds-sub-grid>
+          </cds-grid>
         </cds-column>
       </cds-grid>
       <cds-grid class="sb-grid" narrow>
         <cds-column class="sb-column" sm="4" md="8">
-          <cds-sub-grid class="sb-sub-grid">
+          <cds-grid class="sb-sub-grid">
             <cds-column class="sb-column" sm="4"></cds-column>
             <cds-column class="sb-column" sm="4">
-              <cds-sub-grid class="sb-sub-grid" narrow>
+              <cds-grid class="sb-sub-grid" narrow>
                 <cds-column class="sb-column">
                   <cds-column-hang>Text</cds-column-hang>
                 </cds-column>
@@ -119,9 +119,9 @@ export const MixedGutterModes = {
                 <cds-column class="sb-column">
                   <cds-column-hang>Text</cds-column-hang>
                 </cds-column>
-              </cds-sub-grid>
+              </cds-grid>
             </cds-column>
-          </cds-sub-grid>
+          </cds-grid>
         </cds-column>
       </cds-grid>
       <style>
@@ -238,7 +238,7 @@ export const SubGrid = {
           <p>Small: Span 2 of 4</p>
           <p>Medium: Span 4 of 8</p>
           <p>Large: Span 10 of 16</p>
-          <cds-sub-grid class="sb-sub-grid">
+          <cds-grid class="sb-sub-grid">
             <cds-column class="sb-column" sm="1" md="1" lg="2">
               <p>sm=1</p>
               <p>md=1</p>
@@ -279,7 +279,7 @@ export const SubGrid = {
               <p>md=0</p>
               <p>lg=1</p>
             </cds-column>
-          </cds-sub-grid>
+          </cds-grid>
         </cds-column>
         <cds-column class="sb-column" sm="0" md="0" lg="3">
           <p>Small: Span 0 of 4</p>

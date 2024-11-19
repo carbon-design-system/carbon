@@ -15,7 +15,14 @@ import { prefix } from '../../globals/settings';
 @customElement(`${prefix}-column`)
 class CDSColumn extends LitElement {
   /**
-   * Specify grid alignment. Default is center
+   * Specify column size
+   * Keys sm, md or lg
+   *
+   * Values
+   * - N, P, { span:N start:S}
+   * N = number
+   * P = percentage
+   * S = Start column
    */
   @property({ reflect: true, attribute: 'sm' })
   sm = '1';
