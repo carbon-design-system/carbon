@@ -343,9 +343,24 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
     const smMediaQuery = `(max-width: ${breakpoints.sm.width})`;
     const isSm = useMatchMedia(smMediaQuery);
 
+    let numberOfPages: number;
+
+    switch (size) {
+      case 'md':
+        numberOfPages = itemsShown === 4 ? itemsShown : 5;
+        break;
+      case 'sm':
+        numberOfPages = Math.max(4, Math.min(itemsShown, 7));
+        break;
+
+      default:
+        numberOfPages = 4;
+        break;
+    }
+
     const [currentPage, setCurrentPage] = useState(page);
     const [itemsDisplayedOnPage, setItemsDisplayedOnPage] = useState(
-      itemsShown >= 4 && !isSm ? itemsShown : 4
+      itemsShown >= 4 && !isSm ? itemsShown : numberOfPages
     );
 
     const [cuts, setCuts] = useState(
@@ -404,12 +419,13 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
 
     // re-calculate cuts if props.totalItems or props.itemsShown change
     useEffect(() => {
-      const itemsToBeShown = itemsShown >= 4 && !isSm ? itemsShown : 4;
+      const itemsToBeShown =
+        itemsShown >= 4 && !isSm ? itemsShown : numberOfPages;
       setItemsDisplayedOnPage(Math.max(itemsToBeShown, 4));
       setCuts(
         calculateCuts(currentPage, totalItems, Math.max(itemsToBeShown, 4))
       );
-    }, [totalItems, itemsShown, isSm]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [totalItems, itemsShown, isSm, size]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // update cuts if necessary whenever currentPage changes
     useEffect(() => {
