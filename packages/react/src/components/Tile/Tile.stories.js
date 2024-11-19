@@ -30,9 +30,11 @@ import {
   View,
   FolderOpen,
   Folders,
+  Information,
 } from '@carbon/icons-react';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/Tile',
@@ -48,6 +50,11 @@ export default {
   },
   argTypes: {
     light: {
+      table: {
+        disable: true,
+      },
+    },
+    slug: {
       table: {
         disable: true,
       },
@@ -350,15 +357,15 @@ export const withAILabel = {
         type: 'boolean',
       },
     },
-    slug: {
+    decorator: {
       description:
-        '**Experimental**: Provide an `AILabel` component to be rendered inside the component',
+        '**Experimental**: Provide a `decorator` component to be rendered inside the component',
     },
   },
   render: (args) => (
     <>
       <div className="ai-label-tile-container">
-        <Tile slug={aiLabel} id="tile-1" {...args}>
+        <Tile decorator={aiLabel} id="tile-1" {...args}>
           <h4>Title</h4>
           <p>
             Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
@@ -377,7 +384,7 @@ export const withAILabel = {
         </Tile>
         <ClickableTile
           href="https://www.carbondesignsystem.com/"
-          slug
+          decorator
           id="tile-click"
           renderIcon={ArrowRight}
           {...args}>
@@ -402,7 +409,7 @@ export const withAILabel = {
           id="expandable-tile-1"
           tileCollapsedIconText="Interact to Expand tile"
           tileExpandedIconText="Interact to Collapse tile"
-          slug={aiLabel}
+          decorator={aiLabel}
           {...args}>
           <TileAboveTheFoldContent>
             <h4>Title</h4>
@@ -441,7 +448,7 @@ export const withAILabel = {
             <SelectableTile
               className="ai-label-selectable-tile"
               id="selectable-tile-1"
-              slug={aiLabel}
+              decorator={aiLabel}
               {...args}>
               Option 1
             </SelectableTile>
@@ -449,7 +456,7 @@ export const withAILabel = {
           <div>
             <SelectableTile
               className="ai-label-selectable-tile"
-              slug={aiLabel}
+              decorator={aiLabel}
               id="selectable-tile-2"
               {...args}>
               Option 2
@@ -458,7 +465,7 @@ export const withAILabel = {
           <div>
             <SelectableTile
               className="ai-label-selectable-tile"
-              slug={aiLabel}
+              decorator={aiLabel}
               id="selectable-tile-3"
               {...args}>
               Option 3
@@ -478,7 +485,7 @@ export const withAILabel = {
             className="ai-label-radio-tile"
             id="radio-tile-1"
             value="standard"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...args}>
             Option 1
           </RadioTile>
@@ -486,7 +493,7 @@ export const withAILabel = {
             className="ai-label-radio-tile"
             id="radio-tile-2"
             value="default-selected"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...args}>
             Option 2
           </RadioTile>
@@ -494,7 +501,208 @@ export const withAILabel = {
             className="ai-label-radio-tile"
             id="radio-tile-3"
             value="selected"
-            slug={aiLabel}
+            decorator={aiLabel}
+            {...args}>
+            Option 3
+          </RadioTile>
+        </TileGroup>
+        <br />
+      </div>
+    </>
+  ),
+};
+
+export const withTooltip = {
+  argTypes: {
+    hasRoundedCorners: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    decorator: {
+      description:
+        '**Experimental**: Provide a `decorator` component to be rendered inside the component',
+    },
+  },
+  render: (args) => (
+    <>
+      <div className="ai-label-tile-container">
+        <Tile
+          decorator={
+            <Tooltip>
+              <Information></Information>
+            </Tooltip>
+          }
+          id="tile-1"
+          {...args}>
+          <h4>Title</h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+            at consectetur turpis mauris gravida penatibus.
+          </p>
+          <div className="ai-data">
+            <div className="data-container">
+              <p>Data Quality</p>
+              <h3>85%</h3>
+            </div>
+            <div className="data-container">
+              <p>Label text</p>
+              <h3>16%</h3>
+            </div>
+          </div>
+        </Tile>
+        <ClickableTile
+          href="https://www.carbondesignsystem.com/"
+          decorator={
+            <Tooltip>
+              <Information></Information>
+            </Tooltip>
+          }
+          id="tile-click"
+          renderIcon={ArrowRight}
+          {...args}>
+          <h4>Title</h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+            at consectetur turpis mauris gravida penatibus.
+          </p>
+          <div className="ai-data">
+            <div className="data-container">
+              <p>Data Quality</p>
+              <h3>85%</h3>
+            </div>
+            <div className="data-container">
+              <p>Label text</p>
+              <h3>16%</h3>
+            </div>
+          </div>
+        </ClickableTile>
+
+        <ExpandableTile
+          id="expandable-tile-1"
+          tileCollapsedIconText="Interact to Expand tile"
+          tileExpandedIconText="Interact to Collapse tile"
+          decorator={
+            <Tooltip>
+              <Information></Information>
+            </Tooltip>
+          }
+          {...args}>
+          <TileAboveTheFoldContent>
+            <h4>Title</h4>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+              at consectetur turpis mauris gravida penatibus.
+            </p>
+            <div className="ai-data">
+              <div className="data-container">
+                <p>Data Quality</p>
+                <h3>85%</h3>
+              </div>
+              <div className="data-container">
+                <p>Label text</p>
+                <h3>16%</h3>
+              </div>
+            </div>
+          </TileAboveTheFoldContent>
+          <TileBelowTheFoldContent>
+            <h6>Expanded Section</h6>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+              at consectetur turpis mauris.
+            </p>
+          </TileBelowTheFoldContent>
+        </ExpandableTile>
+      </div>
+
+      <div className="ai-label-selectable-tile-container">
+        <TileGroup
+          defaultSelected="default-selected"
+          legend="Selectable Tile Group"
+          name="selectable tile group"
+          {...args}>
+          <div>
+            <SelectableTile
+              className="ai-label-selectable-tile"
+              id="selectable-tile-1"
+              decorator={
+                <Tooltip>
+                  <Information></Information>
+                </Tooltip>
+              }
+              {...args}>
+              Option 1
+            </SelectableTile>
+          </div>
+          <div>
+            <SelectableTile
+              className="ai-label-selectable-tile"
+              decorator={
+                <Tooltip>
+                  <Information></Information>
+                </Tooltip>
+              }
+              id="selectable-tile-2"
+              {...args}>
+              Option 2
+            </SelectableTile>
+          </div>
+          <div>
+            <SelectableTile
+              className="ai-label-selectable-tile"
+              decorator={
+                <Tooltip>
+                  <Information></Information>
+                </Tooltip>
+              }
+              id="selectable-tile-3"
+              {...args}>
+              Option 3
+            </SelectableTile>
+          </div>
+        </TileGroup>
+      </div>
+      <br />
+      <br />
+      <div className="ai-label-selectable-tile-container">
+        <TileGroup
+          defaultSelected="default-selected"
+          legend="Radio Tile Group"
+          name="radio tile group"
+          {...args}>
+          <RadioTile
+            className="ai-label-radio-tile"
+            id="radio-tile-1"
+            value="standard"
+            decorator={
+              <Tooltip>
+                <Information></Information>
+              </Tooltip>
+            }
+            {...args}>
+            Option 1
+          </RadioTile>
+          <RadioTile
+            className="ai-label-radio-tile"
+            id="radio-tile-2"
+            value="default-selected"
+            decorator={
+              <Tooltip>
+                <Information></Information>
+              </Tooltip>
+            }
+            {...args}>
+            Option 2
+          </RadioTile>
+          <RadioTile
+            className="ai-label-radio-tile"
+            id="radio-tile-3"
+            value="selected"
+            decorator={
+              <Tooltip>
+                <Information></Information>
+              </Tooltip>
+            }
             {...args}>
             Option 3
           </RadioTile>

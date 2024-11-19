@@ -48,11 +48,19 @@ describe('Tile', () => {
       expect(screen.getByText('Default tile')).toHaveClass('custom-tile-class');
     });
 
-    it('should respect slug prop', () => {
+    it('should respect decorator prop', () => {
+      render(<Tile decorator={<AILabel />}>Default tile</Tile>);
+      expect(
+        screen.getByRole('button', { name: 'AI - Show information' })
+      ).toBeInTheDocument();
+    });
+    it('should respect deprecated slug prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       render(<Tile slug={<AILabel />}>Default tile</Tile>);
       expect(
         screen.getByRole('button', { name: 'AI - Show information' })
       ).toBeInTheDocument();
+      spy.mockRestore();
     });
   });
 
@@ -90,13 +98,24 @@ describe('Tile', () => {
       expect(screen.getByTestId('test')).toBeInTheDocument();
     });
 
-    it('should respect slug prop', () => {
-      render(<ClickableTile slug={<AILabel />}>Default tile</ClickableTile>);
+    it('should respect decorator prop', () => {
+      render(<ClickableTile decorator>Default tile</ClickableTile>);
 
       // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('svg')).toHaveClass(
-        `${prefix}--tile--slug-icon`
+        `${prefix}--tile--ai-label-icon`
       );
+    });
+
+    it('should respect deprecated slug prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      render(<ClickableTile slug>Default tile</ClickableTile>);
+
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(document.querySelector('svg')).toHaveClass(
+        `${prefix}--tile--ai-label-icon`
+      );
+      spy.mockRestore();
     });
     it('should call onKeyDown', async () => {
       const onKeyDown = jest.fn();
@@ -178,7 +197,23 @@ describe('Tile', () => {
       expect(id1).toHaveFocus();
     });
 
-    it('should respect slug prop', () => {
+    it('should respect decorator prop', () => {
+      render(
+        <SelectableTile
+          decorator={<AILabel />}
+          id="tile-1"
+          name="tiles"
+          value="value">
+          Default tile
+        </SelectableTile>
+      );
+      expect(
+        screen.getByRole('button', { name: 'AI - Show information' })
+      ).toBeInTheDocument();
+    });
+
+    it('should respect deprecated slug prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       render(
         <SelectableTile
           slug={<AILabel />}
@@ -191,6 +226,7 @@ describe('Tile', () => {
       expect(
         screen.getByRole('button', { name: 'AI - Show information' })
       ).toBeInTheDocument();
+      spy.mockRestore();
     });
   });
 
@@ -326,7 +362,24 @@ describe('Tile', () => {
       );
     });
 
-    it('should respect slug prop', () => {
+    it('should respect decorator prop', () => {
+      render(
+        <ExpandableTile decorator={<AILabel />}>
+          <TileAboveTheFoldContent>
+            <div>TestAbove</div>
+          </TileAboveTheFoldContent>
+          <TileBelowTheFoldContent>
+            <div>TestBelow</div>
+          </TileBelowTheFoldContent>
+        </ExpandableTile>
+      );
+      expect(
+        screen.getByRole('button', { name: 'AI - Show information' })
+      ).toBeInTheDocument();
+    });
+
+    it('should respect deprecated slug prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       render(
         <ExpandableTile slug={<AILabel />}>
           <TileAboveTheFoldContent>
@@ -340,6 +393,7 @@ describe('Tile', () => {
       expect(
         screen.getByRole('button', { name: 'AI - Show information' })
       ).toBeInTheDocument();
+      spy.mockRestore();
     });
   });
 

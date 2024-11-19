@@ -3213,6 +3213,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "expanded": Object {
         "type": "bool",
       },
@@ -3229,9 +3232,7 @@ Map {
       "onKeyUp": Object {
         "type": "func",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "tabIndex": Object {
         "type": "number",
       },
@@ -6601,6 +6602,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -6620,9 +6624,7 @@ Map {
       "required": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "tabIndex": Object {
         "type": "number",
       },
@@ -6974,6 +6976,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -6999,9 +7004,7 @@ Map {
       "selected": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "tabIndex": Object {
         "type": "number",
       },
@@ -9019,13 +9022,14 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "hasRoundedCorners": Object {
         "type": "bool",
       },
       "light": [Function],
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
     },
     "render": [Function],
   },
