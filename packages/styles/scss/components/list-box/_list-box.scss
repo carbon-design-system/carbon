@@ -99,6 +99,10 @@ $list-box-menu-width: convert.to-rem(300px);
     }
   }
 
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly.#{$prefix}--list-box {
+    cursor: default;
+  }
+
   .#{$prefix}--list-box--lg {
     block-size: convert.to-rem(48px);
     max-block-size: convert.to-rem(48px);
