@@ -1452,6 +1452,9 @@ Map {
       "danger": Object {
         "type": "bool",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "isFullWidth": Object {
         "type": "bool",
       },
@@ -1510,9 +1513,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
     },
     "render": [Function],
   },
@@ -6434,6 +6435,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "defaultChecked": Object {
         "type": "bool",
       },
@@ -6471,9 +6475,7 @@ Map {
       "required": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "value": Object {
         "args": Array [
           Array [
@@ -6498,6 +6500,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "decorator": Object {
+        "type": "node",
       },
       "defaultSelected": Object {
         "args": Array [
@@ -6558,9 +6563,7 @@ Map {
       "required": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "valueSelected": Object {
         "args": Array [
           Array [
@@ -7287,6 +7290,9 @@ Map {
   "SideNavMenuItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
       "children": Object {
         "type": "node",
       },

@@ -411,6 +411,19 @@
   }
 
   .#{$prefix}--modal-header
+    > .#{$prefix}--modal--inner__decorator:has(
+      + .#{$prefix}--modal-close-button
+    )
+    > *,
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal-close-button
+    ~ .#{$prefix}--modal--inner__decorator
+    > *,
+  .#{$prefix}--modal--decorator
+    .#{$prefix}--modal-container-body
+    > .#{$prefix}--modal--inner__decorator
+    > *,
+  .#{$prefix}--modal-header
     > .#{$prefix}--ai-label:has(+ .#{$prefix}--modal-close-button),
   .#{$prefix}--modal-header
     > .#{$prefix}--modal-inner-wrapper--decorator:has(
