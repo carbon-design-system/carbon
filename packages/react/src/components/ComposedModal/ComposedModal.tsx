@@ -434,7 +434,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     // AILabel is always size `sm`
     let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? slug ?? decorator
+      ? (slug ?? decorator)
       : null;
     if (
       normalizedDecorator &&

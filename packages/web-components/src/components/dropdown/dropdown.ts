@@ -803,8 +803,8 @@ class CDSDropdown extends ValidityMixin(
             !shouldTriggerBeFocusable
               ? undefined
               : open
-              ? activeDescendant ?? activeDescendantFallback
-              : ''
+                ? (activeDescendant ?? activeDescendantFallback)
+                : ''
           )}">
           ${this._renderPrecedingLabel()}${this._renderLabel()}${validityIcon}${warningIcon}${this._renderFollowingLabel()}
           <div id="trigger-caret" class="${iconContainerClasses}">

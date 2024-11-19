@@ -249,7 +249,7 @@ const RadioButtonGroup = React.forwardRef(
 
     // AILabel is always size `mini`
     let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? slug ?? decorator
+      ? (slug ?? decorator)
       : null;
     if (
       normalizedDecorator &&
