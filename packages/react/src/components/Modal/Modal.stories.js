@@ -753,7 +753,7 @@ export const WithInlineLoading = () => {
 };
 
 const aiLabel = (
-  <AILabel className="ai-label-container">
+  <AILabel className="ai-label-container" revertActive>
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>

@@ -450,6 +450,12 @@
     inset-block-start: 1rem;
   }
 
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal--inner__decorator:has(.#{$prefix}--ai-label--revert)
+    > * {
+    inset-block-start: 1.475rem;
+  }
+
   .#{$prefix}--modal--decorator
     .#{$prefix}--modal-content--overflow-indicator::before,
   .#{$prefix}--modal--decorator .#{$prefix}--modal-content--overflow-indicator {
