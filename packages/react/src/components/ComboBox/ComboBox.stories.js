@@ -14,7 +14,6 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import { Tooltip } from '../Tooltip';
 import mdx from './ComboBox.mdx';
 
 const items = [
@@ -198,20 +197,7 @@ export const withAILabel = () => (
       itemToString={(item) => (item ? item.text : '')}
       titleText="ComboBox title"
       helperText="Combobox helper text"
-      decorator={aiLabel}
-    />
-    <ComboBox
-      onChange={() => {}}
-      id="carbon-combobox"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      titleText="ComboBox title"
-      helperText="Combobox helper text"
-      decorator={
-        <Tooltip>
-          <View />
-        </Tooltip>
-      }
+      slug={aiLabel}
     />
   </div>
 );
