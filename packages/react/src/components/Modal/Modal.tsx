@@ -545,7 +545,7 @@ const Modal = React.forwardRef(function Modal(
         {slug ? (
           normalizedDecorator
         ) : decorator ? (
-          <div className={`${prefix}--modal-inner-wrapper--decorator`}>
+          <div className={`${prefix}--modal--inner__decorator`}>
             {normalizedDecorator}
           </div>
         ) : (

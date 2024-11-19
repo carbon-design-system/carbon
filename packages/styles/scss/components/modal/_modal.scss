@@ -426,24 +426,12 @@
   .#{$prefix}--modal-header
     > .#{$prefix}--ai-label:has(+ .#{$prefix}--modal-close-button),
   .#{$prefix}--modal-header
-    > .#{$prefix}--modal-inner-wrapper--decorator:has(
-      + .#{$prefix}--modal-close-button
-    ),
-  .#{$prefix}--modal-header
     > .#{$prefix}--modal-close-button
     ~ .#{$prefix}--ai-label,
-  .#{$prefix}--modal-header
-    > .#{$prefix}--modal-close-button
-    ~ .#{$prefix}--modal-inner-wrapper--decorator
-    > *,
   .#{$prefix}--modal--slug
     .#{$prefix}--modal-container-body
     > .#{$prefix}--ai-label,
-  .#{$prefix}--modal--decorator
-    .#{$prefix}--modal-container-body
-    > .#{$prefix}--modal-inner-wrapper--decorator
-    > *
-    .#{$prefix}--modal-header
+  .#{$prefix}--modal-header
     > .#{$prefix}--slug:has(+ .#{$prefix}--modal-close-button),
   .#{$prefix}--modal-header
     > .#{$prefix}--modal-close-button
@@ -457,9 +445,8 @@
   }
 
   .#{$prefix}--modal-header
-    > .#{$prefix}--modal-inner-wrapper--decorator:not(
-      :has(.#{$prefix}--ai-label)
-    ) {
+    > .#{$prefix}--modal--inner__decorator:not(:has(.#{$prefix}--ai-label))
+    > * {
     inset-block-start: 1rem;
   }
 
