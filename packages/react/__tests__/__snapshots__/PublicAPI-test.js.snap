@@ -740,6 +740,19 @@ Map {
       "clicked": Object {
         "type": "bool",
       },
+      "decorator": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "bool",
+            },
+            Object {
+              "type": "node",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "disabled": Object {
         "type": "bool",
       },
