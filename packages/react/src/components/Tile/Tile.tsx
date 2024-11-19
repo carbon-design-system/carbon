@@ -528,7 +528,7 @@ export const SelectableTile = React.forwardRef<
   // AILabel is always size `xs`
   const decoratorRef = useRef<HTMLInputElement>(null);
   let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? slug ?? decorator
+    ? (slug ?? decorator)
     : null;
   if (
     normalizedDecorator &&
@@ -922,7 +922,7 @@ export const ExpandableTile = React.forwardRef<
 
   // AILabel is always size `xs`
   let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? slug ?? decorator
+    ? (slug ?? decorator)
     : null;
   if (
     normalizedDecorator &&
