@@ -12,7 +12,7 @@ import Modal from './Modal';
 import Button from '../Button';
 import Select from '../Select';
 import MultiSelect from '../MultiSelect';
-import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
+import { Checkbox as CheckboxIcon, Information } from '@carbon/icons-react';
 import { Popover, PopoverContent } from '../Popover';
 import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
@@ -32,6 +32,7 @@ import TextArea from '../TextArea';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/Modal',
@@ -752,7 +753,7 @@ export const WithInlineLoading = () => {
 };
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -786,8 +787,11 @@ export const withAILabel = {
   render: () => {
     const [open, setOpen] = useState(true); // eslint-disable-line
     return (
-      <div className="slug-modal">
+      <div className="ai-label-modal">
         <Button onClick={() => setOpen(true)}>Launch modal</Button>
+        <Button onClick={() => setOpen2(true)}>
+          Launch modal decorator tooltip
+        </Button>
         <Modal
           open={open}
           onRequestClose={() => setOpen(false)}
@@ -795,7 +799,7 @@ export const withAILabel = {
           modalLabel="Account resources"
           primaryButtonText="Add"
           secondaryButtonText="Cancel"
-          slug={aiLabel}>
+          decorator={aiLabel}>
           <p style={{ marginBottom: '1rem' }}>
             Custom domains direct requests for your apps in this Cloud Foundry
             organization to a URL that you own. A custom domain can be a shared

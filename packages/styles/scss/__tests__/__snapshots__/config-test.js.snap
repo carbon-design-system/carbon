@@ -42,5 +42,6 @@ Object {
   "prefix": "cds",
   "use-akamai-cdn": false,
   "use-flexbox-grid": false,
+  "use-per-family-plex": false,
 }
 `;

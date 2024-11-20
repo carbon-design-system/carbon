@@ -75,10 +75,12 @@ For a full reference of config variables, see the table below.
 | `$font-display`                | Specify the default value for the `font-display` property used for fonts             | `swap`        |
 | `$font-path`                   | Specify the base path for loading IBM Plex. When using Vite, set this to `@ibm/plex` | `~@ibm/plex`  |
 | `$use-akamai-cdn`              | Specify if IBM Plex should be provided by the IBM Akamai CDN                         | `false`       |
+| `$use-per-family-plex`         | Use individual per-family Plex packages (recommended)                                | `false`       |
 | `$prefix`                      | Specify the value used to prefix all selectors and CSS Custom Properties             | `cds`         |
 | `$use-flexbox-grid`            | Specify if the flexbox grid styles should be emitted                                 | `false`       |
 | `$flex-grid-columns`           | Specify the total columns to be used in the flex grid                                | `16`          |
 | `$css--emit-type-custom-props` | Emit custom CSS properties for typography                                            | `true`        |
+
 
 ## Feature flags
 

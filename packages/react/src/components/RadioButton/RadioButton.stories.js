@@ -97,8 +97,8 @@ export const Skeleton = () => {
   return <RadioButtonSkeleton />;
 };
 
-const slugFunc = (kind) => (
-  <AILabel className="slug-container" kind={kind}>
+const AILabelFunc = (kind) => (
+  <AILabel className="ai-label-container" kind={kind}>
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -130,9 +130,9 @@ const slugFunc = (kind) => (
 
 export const withAILabel = {
   render: () => (
-    <div className="slug-check-radio-container">
+    <div className="ai-label-check-radio-container">
       <RadioButtonGroup
-        slug={slugFunc('default')}
+        decorator={AILabelFunc('default')}
         orientation="vertical"
         legendText="Group label"
         name="radio-button-group"
@@ -163,13 +163,13 @@ export const withAILabel = {
           labelText="Radio button label"
           value="radio-4"
           id="radio-4"
-          slug={slugFunc()}
+          decorator={AILabelFunc()}
         />
         <RadioButton
           labelText="Radio button label"
           value="radio-5"
           id="radio-5"
-          slug={slugFunc()}
+          decorator={AILabelFunc()}
         />
         <RadioButton
           labelText="Radio button label"
@@ -187,13 +187,13 @@ export const withAILabel = {
           labelText="Radio button label"
           value="radio-7"
           id="radio-7"
-          slug={slugFunc('inline')}
+          decorator={AILabelFunc('inline')}
         />
         <RadioButton
           labelText="Radio button label"
           value="radio-8"
           id="radio-8"
-          slug={slugFunc('inline')}
+          decorator={AILabelFunc('inline')}
         />
         <RadioButton
           labelText="Radio button label"

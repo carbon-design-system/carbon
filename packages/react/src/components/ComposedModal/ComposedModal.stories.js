@@ -16,6 +16,7 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import Button from '../Button';
+import { Information } from '@carbon/icons-react';
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -352,7 +353,7 @@ export const WithInlineLoading = () => {
 };
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -386,12 +387,12 @@ export const _withAILabel = {
   render: () => {
     const [open, setOpen] = useState(true); // eslint-disable-line
     return (
-      <div className="slug-modal">
+      <div className="ai-label-modal">
         <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
         <ComposedModal
           open={open}
           onClose={() => setOpen(false)}
-          slug={aiLabel}>
+          decorator={aiLabel}>
           <ModalHeader label="Account resources" title="Add a custom domain" />
           <ModalBody>
             <p style={{ marginBottom: '1rem' }}>
