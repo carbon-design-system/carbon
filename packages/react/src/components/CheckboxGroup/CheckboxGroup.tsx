@@ -72,10 +72,6 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
     [`${prefix}--checkbox-group--slug`]: slug,
   });
 
-  // const orientationClass =
-  //   orientation === 'horizontal'
-  //     ? `${prefix}--checkbox-group--${orientation}`
-  //     : undefined;
   // Slug is always size `mini`
   let normalizedSlug;
   if (
