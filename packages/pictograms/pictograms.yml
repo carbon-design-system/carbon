@@ -4239,6 +4239,15 @@
     - application
     - infrastructure app
     - app
+- name: japan--mt-fuji
+  friendly_name: Japan Mt. Fuji
+  aliases:
+    - Tokyo volcano
+    - Tokyo
+    - Japan
+    - Mt. Fuji
+    - city
+    - cities
 - name: java
   friendly_name: Java
   aliases:
@@ -4600,6 +4609,14 @@
     - Madrid
     - city
     - cities
+- name: madrid--statue
+  friendly_name: Madrid statue
+  aliases:
+    - Madrid statue
+    - statue
+    - Madrid
+    - city
+    - cities
 - name: magic-wand
   friendly_name: Magic wand
   aliases:
@@ -4610,14 +4627,6 @@
     - cloud
     - magician
     - selection
-- name: madrid--statue
-  friendly_name: Madrid statue
-  aliases:
-    - Madrid statue
-    - statue
-    - Madrid
-    - city
-    - cities
 - name: magnify
   friendly_name: Magnify
   aliases:
@@ -5334,7 +5343,7 @@
     - bauble
     - holiday
 - name: osaka--tsutenkaku-tower
-  friendly_name: NaOsaka Tsutenkaku Towerme
+  friendly_name: Osaka Tsutenkaku Tower
   aliases:
     - Osaka
     - Japan

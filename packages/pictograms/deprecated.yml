@@ -11,3 +11,5 @@ deprecated:
     reason:
       This pictogram should no longer be used, as it represents the old avatar
       for the Watson brand, which is retired since the watsonx brand launch.
+  - name: tokyo--volcano
+    reason: This icon has been replaced by japan--mt-fuji
