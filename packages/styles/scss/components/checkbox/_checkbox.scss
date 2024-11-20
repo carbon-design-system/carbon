@@ -367,12 +367,30 @@
     transform: scale(1.2) rotate3d(0.5, 1, 0, 158deg);
   }
 
-  // Slug styles
+  //-----------------------------------------------
+  // Decorator
+  //-----------------------------------------------
+  .#{$prefix}--checkbox-group--decorator legend.#{$prefix}--label,
+  .#{$prefix}--checkbox-wrapper--decorator .#{$prefix}--checkbox-label-text {
+    display: flex;
+  }
+  // Remove v12
   .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label,
   .#{$prefix}--checkbox-wrapper--slug .#{$prefix}--checkbox-label-text {
     display: flex;
   }
 
+  .#{$prefix}--checkbox-group--decorator
+    legend.#{$prefix}--label
+    .#{$prefix}--checkbox-group-inner--decorator
+    > *,
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--checkbox-wrapper-inner--decorator
+    > * {
+    margin-inline-start: $spacing-03;
+  }
+  // Remove v12
   .#{$prefix}--checkbox-group--slug
     legend.#{$prefix}--label
     .#{$prefix}--ai-label,
@@ -386,6 +404,13 @@
     margin-inline-start: $spacing-03;
   }
 
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label__button--inline {
+    line-height: inherit;
+    margin-block-start: convert.to-rem(-1px);
+  }
+  // Remove v12
   .#{$prefix}--checkbox-wrapper--slug
     .#{$prefix}--checkbox-label-text
     .#{$prefix}--ai-label__button--inline,
@@ -396,7 +421,9 @@
     margin-block-start: convert.to-rem(-1px);
   }
 
-  // horizontal checkbox group
+  //-----------------------------------------------
+  // Horizontal group
+  //-----------------------------------------------
   .#{$prefix}--checkbox-group--horizontal {
     position: relative;
     display: flex;
