@@ -246,6 +246,14 @@
     );
   }
 
+  .#{$prefix}--multi-select--readonly
+    .#{$prefix}--tag--high-contrast:not(.#{$prefix}--tag--operational)
+    .#{$prefix}--tag__close-icon {
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
   .#{$prefix}--tag--outline:not(.#{$prefix}--tag--operational):not(span):not(
       [disabled]
     ) {
