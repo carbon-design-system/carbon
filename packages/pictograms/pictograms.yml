@@ -4600,6 +4600,16 @@
     - Madrid
     - city
     - cities
+- name: magic-wand
+  friendly_name: Magic wand
+  aliases:
+    - solutions
+    - guides
+    - magic
+    - docs
+    - cloud
+    - magician
+    - selection
 - name: madrid--statue
   friendly_name: Madrid statue
   aliases:
@@ -5961,6 +5971,16 @@
   friendly_name: Reducing cost
   aliases:
     - reducing cost
+- name: reference-architecture
+  friendly_name: Reference architecture
+  aliases:
+    - solutions
+    - diagram
+    - information
+    - application
+    - architecture
+    - template
+    - reference
 - name: refinery
   friendly_name: Refinery
   aliases:
@@ -8145,6 +8165,17 @@
     - referee
     - football
     - official
+- name: white-paper
+  friendly_name: White paper
+  aliases:
+    - solutions
+    - information
+    - document
+    - guideline
+    - knowledge
+    - summary
+    - white
+    - paper
 - name: wifi
   friendly_name: WiFi
   aliases:
