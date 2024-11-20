@@ -344,9 +344,9 @@ describe('ComposedModal', () => {
       expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
     });
 
-    it('should respect slug prop', () => {
+    it('should respect decorator prop', () => {
       const { container } = render(
-        <ComposedModal open slug={<AILabel />}>
+        <ComposedModal open decorator={<AILabel />}>
           <ModalHeader>Modal header</ModalHeader>
           <ModalBody>This is the modal body content</ModalBody>
           <ModalFooter
@@ -357,8 +357,28 @@ describe('ComposedModal', () => {
         </ComposedModal>
       );
 
-      expect(container.firstChild).toHaveClass(`${prefix}--modal--slug`);
+      expect(container.firstChild).toHaveClass(`${prefix}--modal--decorator`);
     });
+  });
+
+  it('should respect the deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(
+      <ComposedModal open slug={<AILabel />}>
+        <ModalHeader>Modal header</ModalHeader>
+        <ModalBody>This is the modal body content</ModalBody>
+        <ModalFooter
+          primaryButtonText="Add"
+          secondaryButtonText="Cancel"
+          loadingStatus="active"
+          loadingDescription="loading..."></ModalFooter>
+      </ComposedModal>
+    );
+
+    expect(
+      screen.getByRole('button', { name: 'AI - Show information' })
+    ).toBeInTheDocument();
+    spy.mockRestore();
   });
 
   it('should handle onClick events', async () => {
