@@ -613,6 +613,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "defaultChecked": Object {
         "type": "bool",
       },
@@ -648,9 +651,7 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "title": Object {
         "type": "string",
       },
@@ -670,6 +671,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "decorator": Object {
+        "type": "node",
       },
       "helperText": Object {
         "type": "node",
@@ -699,9 +703,7 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "warn": Object {
         "type": "bool",
       },
@@ -4849,6 +4851,9 @@ Map {
       "danger": Object {
         "type": "bool",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "hasScrollingContent": Object {
         "type": "bool",
       },
@@ -4964,9 +4969,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
     },
     "render": [Function],
   },
