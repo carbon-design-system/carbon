@@ -14,8 +14,6 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import '../AILabel/ailabel-story.scss';
-import { Tooltip } from '../Tooltip';
-import { Information } from '@carbon/icons-react';
 import mdx from './Tag.mdx';
 
 export default {
@@ -247,53 +245,6 @@ export const withAILabel = () => (
     <DismissibleTag
       renderIcon={Asleep}
       decorator={aiLabel}
-      className="some-class"
-      type="green"
-      title="Clear Filter"
-      text="Tag"></DismissibleTag>
-    <Tag
-      decorator={
-        <Tooltip label={'hello'}>
-          <Information />
-        </Tooltip>
-      }
-      className="some-class"
-      type="red"
-      title="Clear Filter">
-      {'Tag'}
-    </Tag>
-
-    <DismissibleTag
-      decorator={
-        <Tooltip label={'hello'}>
-          <Information />
-        </Tooltip>
-      }
-      className="some-class"
-      type="purple"
-      title="Clear Filter"
-      text="Tag"></DismissibleTag>
-
-    <Tag
-      renderIcon={Asleep}
-      decorator={
-        <Tooltip label={'hello'}>
-          <Information />
-        </Tooltip>
-      }
-      className="some-class"
-      type="blue"
-      title="Clear Filter">
-      {'Tag'}
-    </Tag>
-
-    <DismissibleTag
-      renderIcon={Asleep}
-      decorator={
-        <Tooltip label={'hello'}>
-          <Information />
-        </Tooltip>
-      }
       className="some-class"
       type="green"
       title="Clear Filter"
