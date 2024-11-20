@@ -283,7 +283,9 @@
 
   $divider-width: 1px;
 
-  .#{$prefix}--select--decorator .#{$prefix}--select__inner-wrapper--decorator,
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *,
   .#{$prefix}--select--slug .#{$prefix}--ai-label,
   .#{$prefix}--select--slug .#{$prefix}--slug {
     position: absolute;
@@ -294,9 +296,11 @@
   }
 
   .#{$prefix}--select--decorator
-    .#{$prefix}--select__inner-wrapper--decorator::after,
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *::after,
   .#{$prefix}--select--decorator
-    .#{$prefix}--select__inner-wrapper--decorator::before,
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *::before,
   .#{$prefix}--select--slug .#{$prefix}--ai-label::after,
   .#{$prefix}--select--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--select--slug .#{$prefix}--slug::after,
@@ -309,7 +313,8 @@
   }
 
   .#{$prefix}--select--decorator
-    .#{$prefix}--select__inner-wrapper--decorator::before,
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *::before,
   .#{$prefix}--select--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--select--slug .#{$prefix}--slug::before {
     display: none;
@@ -317,7 +322,8 @@
   }
 
   .#{$prefix}--select--decorator
-    .#{$prefix}--select__inner-wrapper--decorator::after,
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *::after,
   .#{$prefix}--select--slug .#{$prefix}--ai-label::after,
   .#{$prefix}--select--slug .#{$prefix}--slug::after {
     display: block;
@@ -326,22 +332,22 @@
   }
 
   .#{$prefix}--select--decorator
-    .#{$prefix}--select__inner-wrapper--decorator:has(
-      .#{$prefix}--ai-label--revert
-    )::after {
-    inset-block-start: $spacing-03;
+    .#{$prefix}--select__inner-wrapper--decorator
+    > .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--select--slug .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--select--slug .#{$prefix}--slug--revert::before {
+    inset-block-start: 0.5rem;
+    inset-inline-start: 0;
   }
 
   .#{$prefix}--select--decorator
     .#{$prefix}--select__inner-wrapper--decorator
-    .#{$prefix}--ai-label--revert {
-    transform: translate($spacing-03, 0);
-  }
-
+    > .#{$prefix}--ai-label--revert,
   .#{$prefix}--select--slug .#{$prefix}--ai-label--revert {
     inset-inline-end: convert.to-rem(41px);
   }
 
+  .#{$prefix}--select--decorator .#{$prefix}--ai-label--revert::after,
   .#{$prefix}--select--slug .#{$prefix}--ai-label--revert::after,
   .#{$prefix}--select--slug .#{$prefix}--slug--revert::after {
     inset-block-start: convert.to-rem(8px);
@@ -390,33 +396,13 @@
   }
 
   .#{$prefix}--select--decorator:has(.#{$prefix}--select__invalid-icon)
-    .#{$prefix}--select__inner-wrapper--decorator::before,
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *::before,
   .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
     .#{$prefix}--ai-label::before,
   .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
     .#{$prefix}--slug::before {
     display: block;
-  }
-
-  .#{$prefix}--select--decorator:has(.#{$prefix}--select__invalid-icon)
-    .#{$prefix}--select__inner-wrapper--decorator:has(
-      .#{$prefix}--ai-label--revert
-    )::before,
-  .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
-    .#{$prefix}--ai-label--revert::before {
-    inset-block-start: $spacing-03;
-  }
-
-  .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
-    .#{$prefix}--ai-label--revert::before {
-    inset-inline-start: 0;
-  }
-
-  .#{$prefix}--select--decorator:has(.#{$prefix}--select__invalid-icon)
-    .#{$prefix}--select__inner-wrapper--decorator:has(
-      .#{$prefix}--ai-label--revert
-    )::before {
-    inset-inline-start: $spacing-03;
   }
 
   .#{$prefix}--select--decorator
