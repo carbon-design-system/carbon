@@ -2879,6 +2879,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -2911,9 +2914,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "tagTitle": Object {
         "type": "string",
       },
@@ -8442,6 +8443,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -8473,9 +8477,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "title": [Function],
       "type": Object {
         "args": Array [
