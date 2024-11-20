@@ -169,9 +169,8 @@ describe('CheckboxGroup', () => {
         <Checkbox labelText="Checkbox label 3" id="checkbox-label-3" />
       </CheckboxGroup>
     );
-    const checkboxContainer = container.querySelector(
-      `.${prefix}--checkbox-group--horizontal`
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--checkbox-group--horizontal`
     );
-    expect(checkboxContainer).toBeInTheDocument();
   });
 });

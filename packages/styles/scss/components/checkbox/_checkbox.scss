@@ -229,6 +229,7 @@
   .#{$prefix}--checkbox__validation-msg {
     display: none;
     align-items: flex-start;
+    inline-size: 100%;
     margin-block-start: $spacing-02;
   }
 

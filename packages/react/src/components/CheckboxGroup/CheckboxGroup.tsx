@@ -65,16 +65,17 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   ) : null;
 
   const fieldsetClasses = cx(`${prefix}--checkbox-group`, className, {
+    [`${prefix}--checkbox-group--${orientation}`]: orientation === 'horizontal',
     [`${prefix}--checkbox-group--readonly`]: readOnly,
     [`${prefix}--checkbox-group--invalid`]: !readOnly && invalid,
     [`${prefix}--checkbox-group--warning`]: showWarning,
     [`${prefix}--checkbox-group--slug`]: slug,
   });
 
-  const orientationClass =
-    orientation === 'horizontal'
-      ? `${prefix}--checkbox-group--${orientation}`
-      : undefined;
+  // const orientationClass =
+  //   orientation === 'horizontal'
+  //     ? `${prefix}--checkbox-group--${orientation}`
+  //     : undefined;
   // Slug is always size `mini`
   let normalizedSlug;
   if (
@@ -87,40 +88,38 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
     } as CustomType);
   }
   return (
-    <>
-      <fieldset
-        className={fieldsetClasses}
-        data-invalid={invalid ? true : undefined}
-        aria-labelledby={rest['aria-labelledby'] || legendId}
-        aria-readonly={readOnly}
-        aria-describedby={!invalid && !warn && helper ? helperId : undefined}
-        {...rest}>
-        <legend
-          className={`${prefix}--label`}
-          id={legendId || rest['aria-labelledby']}>
-          {legendText}
-          {normalizedSlug}
-        </legend>
-        <div className={orientationClass}>{children}</div>
-        <div className={`${prefix}--checkbox-group__validation-msg`}>
-          {!readOnly && invalid && (
-            <>
-              <WarningFilled className={`${prefix}--checkbox__invalid-icon`} />
-              <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-            </>
-          )}
-          {showWarning && (
-            <>
-              <WarningAltFilled
-                className={`${prefix}--checkbox__invalid-icon ${prefix}--checkbox__invalid-icon--warning`}
-              />
-              <div className={`${prefix}--form-requirement`}>{warnText}</div>
-            </>
-          )}
-        </div>
-        {showHelper && helper}
-      </fieldset>
-    </>
+    <fieldset
+      className={fieldsetClasses}
+      data-invalid={invalid ? true : undefined}
+      aria-labelledby={rest['aria-labelledby'] || legendId}
+      aria-readonly={readOnly}
+      aria-describedby={!invalid && !warn && helper ? helperId : undefined}
+      {...rest}>
+      <legend
+        className={`${prefix}--label`}
+        id={legendId || rest['aria-labelledby']}>
+        {legendText}
+        {normalizedSlug}
+      </legend>
+      {children}
+      <div className={`${prefix}--checkbox-group__validation-msg`}>
+        {!readOnly && invalid && (
+          <>
+            <WarningFilled className={`${prefix}--checkbox__invalid-icon`} />
+            <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+          </>
+        )}
+        {showWarning && (
+          <>
+            <WarningAltFilled
+              className={`${prefix}--checkbox__invalid-icon ${prefix}--checkbox__invalid-icon--warning`}
+            />
+            <div className={`${prefix}--form-requirement`}>{warnText}</div>
+          </>
+        )}
+      </div>
+      {showHelper && helper}
+    </fieldset>
   );
 };
 
