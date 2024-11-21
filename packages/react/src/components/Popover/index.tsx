@@ -484,7 +484,7 @@ export const Popover: PopoverComponent = React.forwardRef(
       </PopoverContext.Provider>
     );
   }
-);
+) as PopoverComponent;
 
 // Note: this displayName is temporarily set so that Storybook ArgTable
 // correctly displays the name of this component
