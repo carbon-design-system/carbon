@@ -559,8 +559,8 @@ Popover.propTypes = {
    */
   autoAlignBoundary: PropTypes.oneOfType([
     PropTypes.oneOf(['clippingAncestors']),
-    PropTypes.instanceOf(Element), // For DOM elements
-    PropTypes.arrayOf(PropTypes.instanceOf(Element)), // Array of DOM elements
+    PropTypes.elementType,
+    PropTypes.arrayOf(PropTypes.elementType),
     PropTypes.exact({
       x: PropTypes.number.isRequired,
       y: PropTypes.number.isRequired,
