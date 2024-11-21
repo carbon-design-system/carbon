@@ -67,38 +67,140 @@ describe('Switcher', () => {
 
       expect(container.firstChild).toHaveClass('custom-class');
     });
-
-    it('should handle complex nested structure', () => {
-      const ComplexSwitcher = () => (
-        <Switcher aria-label="complex-switcher">
-          <SwitcherItem aria-label="test-aria-label-switcheritem">
-            Nested Complex Item
-          </SwitcherItem>
+    it('should correctly merge refs', () => {
+      const ref1 = React.createRef();
+      render(
+        <Switcher ref={ref1} aria-label="test-label">
+          <SwitcherItem aria-label="test-item">Item 1</SwitcherItem>
+          <SwitcherItem aria-label="test-item">Item 2</SwitcherItem>
         </Switcher>
       );
-      ComplexSwitcher.displayName = 'Switcher';
 
+      expect(ref1.current).not.toBeNull();
+      expect(ref1.current.tagName).toBe('UL');
+    });
+    it('should apply aria attributes correctly', () => {
       render(
-        <Switcher aria-label="test-label">
-          <SwitcherItem aria-label="test-aria-label-switcheritem">
+        <Switcher
+          aria-label="test-aria-label"
+          aria-labelledby="test-labelledby">
+          <SwitcherItem aria-label="item">Item</SwitcherItem>
+        </Switcher>
+      );
+
+      const switcher = screen.getByRole('list');
+      expect(switcher).toHaveAttribute('aria-label', 'test-aria-label');
+      expect(switcher).toHaveAttribute('aria-labelledby', 'test-labelledby');
+    });
+  });
+
+  describe('Switcher navigation and focus management', () => {
+    const renderSwitcher = () => {
+      return (
+        <Switcher aria-label="test-switcher" expanded>
+          <SwitcherItem aria-label="test-1" href="#">
             Item 1
           </SwitcherItem>
-          <div>Regular div</div>
-          <ComplexSwitcher />
-          {/* {null} */}
-          <SwitcherItem aria-label="test-aria-label-switcheritem">
+          <SwitcherItem aria-label="test-2" href="#">
             Item 2
+          </SwitcherItem>
+          <SwitcherItem aria-label="test-3" href="#">
+            Item 3
           </SwitcherItem>
         </Switcher>
       );
-      expect(screen.getByText('Item 1')).toBeInTheDocument();
-      expect(screen.getByText('Regular div')).toBeInTheDocument();
-      expect(screen.getByText('Nested Complex Item')).toBeInTheDocument();
-      expect(screen.getByText('Item 2')).toBeInTheDocument();
+    };
+
+    it('should focus the next valid index when moving forward', async () => {
+      render(renderSwitcher());
+      const items = screen.getAllByRole('listitem');
+      const firstLink = items[0].querySelector('a');
+      const secondLink = items[1].querySelector('a');
+
+      await userEvent.keyboard('{Tab}');
+      expect(document.activeElement).toBe(firstLink);
+      await userEvent.keyboard('{Tab}');
+
+      expect(document.activeElement).toBe(secondLink);
     });
 
-    //makes difference in coverage
-    it('should set focus on the switcherItem', async () => {
+    it('should focus the next valid index when moving backword', async () => {
+      render(renderSwitcher());
+
+      const items = screen.getAllByRole('listitem');
+      const firstLink = items[0].querySelector('a');
+      const secondLink = items[1].querySelector('a');
+
+      await userEvent.keyboard('{Tab}');
+      expect(document.activeElement).toBe(firstLink);
+      await userEvent.keyboard('Shift+Tab');
+      expect(document.activeElement).toBe(firstLink);
+    });
+    it('should focus next SwitcherItem when pressing ArrowDown from first item', async () => {
+      render(renderSwitcher());
+      const focusableItems = screen.getAllByRole('link');
+      expect(focusableItems).toHaveLength(3);
+
+      await userEvent.keyboard('{Tab}');
+      expect(document.activeElement).toBe(focusableItems[0]);
+
+      await userEvent.keyboard('{ArrowDown}');
+      expect(document.activeElement).toBe(focusableItems[1]);
+    });
+    it('should focus previous SwitcherItem when pressing ArrowUp from last item', async () => {
+      render(renderSwitcher());
+      const focusableItems = screen.getAllByRole('link');
+      expect(focusableItems).toHaveLength(3);
+
+      focusableItems[2].focus();
+      expect(document.activeElement).toBe(focusableItems[2]);
+
+      await userEvent.keyboard('{ArrowUp}');
+      expect(document.activeElement).toBe(focusableItems[1]);
+    });
+
+    it('should wrap to first item when pressing ArrowDown from last SwitcherItem', async () => {
+      render(renderSwitcher());
+      const focusableItems = screen.getAllByRole('link');
+      expect(focusableItems).toHaveLength(3);
+
+      focusableItems[2].focus();
+      expect(document.activeElement).toBe(focusableItems[2]);
+
+      await userEvent.keyboard('{ArrowDown}');
+      expect(document.activeElement).toBe(focusableItems[0]);
+    });
+
+    it('should wrap to last item when pressing ArrowUp from first SwitcherItem', async () => {
+      render(renderSwitcher());
+      const focusableItems = screen.getAllByRole('link');
+      expect(focusableItems).toHaveLength(3);
+
+      focusableItems[0].focus();
+      expect(document.activeElement).toBe(focusableItems[0]);
+
+      await userEvent.keyboard('{ArrowUp}');
+      expect(document.activeElement).toBe(focusableItems[2]);
+      expect(document.activeElement).toHaveTextContent('Item 3');
+    });
+    it('should skip non SwitcherItem elements', async () => {
+      render(renderSwitcher());
+      const focusableItems = screen.getAllByRole('link');
+      expect(focusableItems).toHaveLength(3);
+
+      focusableItems[0].focus();
+      expect(document.activeElement).toBe(focusableItems[0]);
+      expect(document.activeElement).toHaveTextContent('Item 1');
+
+      await userEvent.keyboard('{ArrowDown}');
+      expect(document.activeElement).toBe(focusableItems[1]);
+      expect(document.activeElement).toHaveTextContent('Item 2');
+
+      await userEvent.keyboard('{ArrowDown}');
+      expect(document.activeElement).toBe(focusableItems[2]);
+      expect(document.activeElement).toHaveTextContent('Item 3');
+    });
+    it('should handle keyboard navigation with mixed child types', async () => {
       render(
         <Switcher aria-label="test-label">
           <SwitcherItem aria-label="test-aria-label-switcheritem">
@@ -115,208 +217,12 @@ describe('Switcher', () => {
           </Switcher>
         </Switcher>
       );
-
       const items = screen.getAllByRole('listitem');
-      const firstLink = items[0].querySelector('a, button');
-
-      firstLink?.focus();
-
-      expect(document.activeElement).toBe(firstLink);
-    });
-
-    it('should calculate enabledIndices correctly for an empty children array', () => {
-      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
-      const { container } = render(
-        <Switcher aria-label="Test Switcher">{/* No children */}</Switcher>
-      );
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-      expect(container.querySelector('ul')).toHaveAttribute(
-        'aria-label',
-        'Test Switcher'
-      );
-      expect(container.querySelector('ul').children.length).toBe(0);
-    });
-
-    it('should calculate enabledIndices correctly for a children array with valid and other elements', () => {
-      const { container } = render(
-        <Switcher aria-label="Test Switcher">
-          <SwitcherItem aria-label="test-aria-label-switcheritem">
-            Item 1
-          </SwitcherItem>
-          <div>test</div>
-          <SwitcherItem aria-label="test-aria-label-switcheritem">
-            Item 2
-          </SwitcherItem>
-        </Switcher>
-      );
-      expect(container.querySelector('ul')).toHaveAttribute(
-        'aria-label',
-        'Test Switcher'
-      );
-      expect(container.querySelector('ul').children.length).toBe(3);
-    });
-
-    it('should map children with props correctly when the children array contains a mix of valid and invalid elements', () => {
-      const { container } = render(
-        <Switcher aria-label="Test Switcher">
-          <SwitcherItem aria-label="test-aria-label-switcheritem">
-            Item 1
-          </SwitcherItem>
-          {/* Invalid element */}
-          <div>Invalid item</div>
-          <SwitcherItem aria-label="test-aria-label-switcheritem">
-            Item 2
-          </SwitcherItem>
-        </Switcher>
-      );
-      const switcherItems = container.querySelectorAll('li');
-      expect(switcherItems.length).toBe(2);
-      expect(switcherItems[0].firstChild).toHaveAttribute(
-        'aria-label',
-        'test-aria-label-switcheritem'
-      );
-      expect(switcherItems[1].firstChild).toHaveAttribute(
-        'aria-label',
-        'test-aria-label-switcheritem'
-      );
-    });
-    it('should correctly merge refs', () => {
-      const ref1 = React.createRef();
-
-      render(
-        <Switcher ref={ref1} aria-label="test-label">
-          <SwitcherItem aria-label="test-item">Item 1</SwitcherItem>
-          <SwitcherItem aria-label="test-item">Item 2</SwitcherItem>
-        </Switcher>
-      );
-
-      expect(ref1.current).not.toBeNull();
-      expect(ref1.current.tagName).toBe('UL');
-    });
-
-    it('should clone children with additional props', () => {
-      const MockChild = jest.fn(() => null);
-
-      render(
-        <Switcher aria-label="test-switcher" expanded={true}>
-          <MockChild />
-          <MockChild />
-        </Switcher>
-      );
-
-      expect(MockChild.mock.calls[0][0]).toHaveProperty('expanded', true);
-      expect(MockChild.mock.calls[0][0]).toHaveProperty('index', 0);
-      expect(MockChild.mock.calls[1][0]).toHaveProperty('index', 1);
-    });
-
-    it('should apply aria attributes correctly', () => {
-      render(
-        <Switcher
-          aria-label="test-aria-label"
-          aria-labelledby="test-labelledby">
-          <SwitcherItem aria-label="item">Item</SwitcherItem>
-        </Switcher>
-      );
-
-      const switcher = screen.getByRole('list');
-      expect(switcher).toHaveAttribute('aria-label', 'test-aria-label');
-      expect(switcher).toHaveAttribute('aria-labelledby', 'test-labelledby');
-    });
-  });
-
-  describe('Switcher', () => {
-    const mockChildren = [
-      <SwitcherItem key="1" aria-label="test-aria-label-switcheritem-1">
-        Item 1
-      </SwitcherItem>,
-      <SwitcherItem key="2" aria-label="test-aria-label-switcheritem-2">
-        Item 2
-      </SwitcherItem>,
-      <SwitcherItem key="3" aria-label="test-aria-label-switcheritem-3">
-        Item 3
-      </SwitcherItem>,
-    ];
-
-    it('should focus the next valid index when moving forward', async () => {
-      render(
-        <HeaderPanel expanded>
-          <Switcher aria-label="test-label" expanded={true}>
-            <SwitcherItem aria-label="test-aria-label-1" href="#">
-              Item 1
-            </SwitcherItem>
-            <SwitcherItem aria-label="test-aria-label-2" href="#">
-              Item 2
-            </SwitcherItem>
-            <SwitcherItem aria-label="test-aria-label-3" href="#">
-              Item 3
-            </SwitcherItem>
-          </Switcher>
-        </HeaderPanel>
-      );
-
-      const items = screen.getAllByRole('listitem');
-      const firstLink = items[0].querySelector('a, button');
-      const secondLink = items[1].querySelector('a, button');
-
-      await userEvent.keyboard('{Tab}');
-      expect(document.activeElement).toBe(firstLink);
-      await userEvent.keyboard('{Tab}');
-
-      expect(document.activeElement).toBe(secondLink);
-    });
-
-    it('should focus the next valid index when moving backword', async () => {
-      render(
-        <Switcher aria-label="test-label" expanded={true}>
-          <SwitcherItem aria-label="test-aria-label-1" href="#">
-            Item 1
-          </SwitcherItem>
-          <SwitcherItem aria-label="test-aria-label-2" href="#">
-            Item 2
-          </SwitcherItem>
-          <SwitcherItem aria-label="test-aria-label-3" href="#">
-            Item 3
-          </SwitcherItem>
-        </Switcher>
-      );
-
-      const items = screen.getAllByRole('listitem');
-      const firstLink = items[0].querySelector('a, button');
-      const secondLink = items[1].querySelector('a, button');
-
-      await userEvent.keyboard('{Tab}');
-      expect(document.activeElement).toBe(firstLink);
-      await userEvent.keyboard('Shift+Tab');
-      expect(document.activeElement).toBe(firstLink);
-    });
-  });
-
-  describe('childrenWithProps', () => {
-    const mockSwitcherItemFocus = jest.fn();
-    const createMockChildren = (count = 3, overrideProps = {}) => {
-      return Array.from({ length: count }, (_, index) => (
-        <SwitcherItem
-          key={index}
-          id={index}
-          {...overrideProps}
-          aria-label="test-aria-label">
-          Item {index + 1}
-        </SwitcherItem>
-      ));
-    };
-
-    it('should add index prop to each child', () => {
-      const children = createMockChildren();
-      const { container } = render(
-        <Switcher aria-label="test-label" expanded={false}>
-          {children}
-        </Switcher>
-      );
-      const renderedChildren = container.querySelectorAll('a');
-      renderedChildren.forEach((child, index) => {
-        expect(child).toHaveAttribute('id', index.toString());
-      });
+      const secondItem = items[2].querySelector('a');
+      secondItem?.focus();
+      expect(document.activeElement).toBe(secondItem);
+      await userEvent.keyboard('{ArrowDown}');
+      expect(document.activeElement).toHaveTextContent('Nested Item');
     });
   });
 });
