@@ -31,6 +31,7 @@ import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
+import deprecate from '../../prop-types/deprecate';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 
@@ -73,6 +74,11 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
    * Specify whether the Modal is for dangerous actions
    */
   danger?: boolean;
+
+  /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `Modal` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Specify whether the modal contains scrolling content
@@ -212,6 +218,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   size?: ModalSize;
 
   /**
+   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Modal` component
    */
   slug?: ReactNode;
@@ -222,6 +229,7 @@ const Modal = React.forwardRef(function Modal(
     'aria-label': ariaLabelProp,
     children,
     className,
+    decorator,
     modalHeading = '',
     modalLabel = '',
     modalAriaLabel,
@@ -354,6 +362,7 @@ const Modal = React.forwardRef(function Modal(
       'is-visible': open,
       [`${prefix}--modal--danger`]: danger,
       [`${prefix}--modal--slug`]: slug,
+      [`${prefix}--modal--decorator`]: decorator,
     },
     className
   );
@@ -473,12 +482,20 @@ const Modal = React.forwardRef(function Modal(
     };
   }, []);
 
-  // Slug is always size `sm`
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'sm',
-    });
+  // AILabel always size `sm`
+  let normalizedDecorator = React.isValidElement(slug ?? decorator)
+    ? (slug ?? decorator)
+    : null;
+  if (
+    normalizedDecorator &&
+    normalizedDecorator['type']?.displayName === 'AILabel'
+  ) {
+    normalizedDecorator = React.cloneElement(
+      normalizedDecorator as React.ReactElement<any>,
+      {
+        size: 'sm',
+      }
+    );
   }
 
   const modalButton = (
@@ -525,7 +542,15 @@ const Modal = React.forwardRef(function Modal(
           className={`${prefix}--modal-header__heading`}>
           {modalHeading}
         </Text>
-        {normalizedSlug}
+        {slug ? (
+          normalizedDecorator
+        ) : decorator ? (
+          <div className={`${prefix}--modal--inner__decorator`}>
+            {normalizedDecorator}
+          </div>
+        ) : (
+          ''
+        )}
         {!passiveModal && modalButton}
       </div>
       <Layer
@@ -649,6 +674,11 @@ Modal.propTypes = {
    * Specify whether the Modal is for dangerous actions
    */
   danger: PropTypes.bool,
+
+  /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `Modal` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify whether the modal contains scrolling content
@@ -822,10 +852,10 @@ Modal.propTypes = {
    */
   size: PropTypes.oneOf(ModalSizes),
 
-  /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `Modal` component
-   */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
 };
 
 export default Modal;
