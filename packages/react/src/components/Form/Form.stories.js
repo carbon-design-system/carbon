@@ -338,7 +338,7 @@ export const withAILabel = (args) => {
             items={items}
             itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
           <FilterableMultiSelect
@@ -348,7 +348,7 @@ export const withAILabel = (args) => {
             items={items}
             itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
           <ComboBox
@@ -358,7 +358,7 @@ export const withAILabel = (args) => {
             itemToString={(item) => (item ? item.text : '')}
             titleText="ComboBox title"
             helperText="Combobox helper text"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
           <Select
@@ -442,7 +442,7 @@ export const withAILabel = (args) => {
             label="Choose an option"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
@@ -456,7 +456,7 @@ export const withAILabel = (args) => {
             label="Choose an option"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
@@ -471,7 +471,7 @@ export const withAILabel = (args) => {
             label="Choose an option"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
