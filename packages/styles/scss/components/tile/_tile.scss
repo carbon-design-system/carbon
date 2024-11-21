@@ -388,21 +388,29 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   // AILabel styles
+  .#{$prefix}--tile > .#{$prefix}--tile--inner-decorator > *,
+  .#{$prefix}--tile--expandable > div > .#{$prefix}--tile--inner-decorator > *,
   .#{$prefix}--tile > .#{$prefix}--ai-label,
   .#{$prefix}--tile--expandable > div > .#{$prefix}--ai-label,
   .#{$prefix}--tile > .#{$prefix}--slug,
   .#{$prefix}--tile--expandable > div > .#{$prefix}--slug,
-  .#{$prefix}--tile--clickable .#{$prefix}--tile--slug-icon {
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--ai-label-icon {
     position: absolute;
     inset-block-start: $spacing-05;
     inset-inline-end: $spacing-05;
   }
 
+  .#{$prefix}--tile.#{$prefix}--tile--selectable
+    > .#{$prefix}--tile--inner-decorator
+    > *,
   .#{$prefix}--tile.#{$prefix}--tile--selectable > .#{$prefix}--ai-label,
   .#{$prefix}--tile.#{$prefix}--tile--selectable > .#{$prefix}--slug {
     inset-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
+    > .#{$prefix}--tile--inner-decorator
+    > *,
   .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
     > .#{$prefix}--ai-label,
   .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
@@ -419,17 +427,27 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
+    > .#{$prefix}--tile--inner-decorator
+    > *,
+  .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
     > .#{$prefix}--ai-label,
   .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
     > .#{$prefix}--slug {
     inset-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--tile.#{$prefix}--tile--clickable
+    > .#{$prefix}--tile--inner-decorator
+    > *,
   .#{$prefix}--tile.#{$prefix}--tile--clickable > .#{$prefix}--ai-label,
   .#{$prefix}--tile.#{$prefix}--tile--clickable > .#{$prefix}--slug {
     pointer-events: none;
   }
 
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--tile--ai-label-icon
+    ).#{$prefix}--tile,
+  .#{$prefix}--tile--decorator:has(.#{$prefix}--ai-label).#{$prefix}--tile,
   .#{$prefix}--tile--slug.#{$prefix}--tile {
     @include ai-popover-gradient('default', 0, 'layer');
 
@@ -439,10 +457,16 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
       0 4px 8px 0 $ai-drop-shadow;
   }
 
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--ai-label
+    ).#{$prefix}--tile--expandable:hover,
   .#{$prefix}--tile--slug.#{$prefix}--tile--expandable:hover {
     @include ai-popover-gradient('default', 0, 'layer');
   }
 
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable::before,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable::after,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable::before,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::before,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::after,
   .#{$prefix}--tile--slug.#{$prefix}--tile--clickable::before {
@@ -457,6 +481,12 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     transition: opacity $duration-fast-02 motion(standard, productive);
   }
 
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--ai-label
+    ).#{$prefix}--tile--selectable::before,
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--ai-label
+    ).#{$prefix}--tile--clickable::before,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::before,
   .#{$prefix}--tile--slug.#{$prefix}--tile--clickable::before {
     @include ai-popover-gradient('hover', 0, 'layer');
@@ -466,17 +496,25 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
       0 4px 10px 2px $ai-drop-shadow;
   }
 
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable:hover::before,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable:hover::before,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:hover::before,
   .#{$prefix}--tile--slug.#{$prefix}--tile--clickable:hover::before {
     opacity: 1;
   }
 
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable:focus,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable:focus,
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile--decorator.#{$prefix}--tile,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:focus,
   .#{$prefix}--tile--slug.#{$prefix}--tile--clickable:focus,
   .#{$prefix}--tile-input:focus + .#{$prefix}--tile--slug.#{$prefix}--tile {
     outline-offset: -1px;
   }
 
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
+    ).#{$prefix}--tile--selectable::after,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::after {
     @include ai-popover-gradient('selected', 0, 'layer');
 
@@ -485,18 +523,27 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
       0 4px 8px 0 $ai-drop-shadow;
   }
 
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable:hover::after,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:hover::after {
     opacity: 0;
   }
 
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--is-selected::after,
   .#{$prefix}--tile--slug.#{$prefix}--tile--is-selected::after {
     opacity: 1;
   }
 
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--tile--inner-decorator
+    ).#{$prefix}--tile--is-selected,
   .#{$prefix}--tile--slug.#{$prefix}--tile--is-selected {
     border-color: $border-inverse;
   }
 
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
+    .#{$prefix}--tile-content,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable
+    .#{$prefix}--tile-content,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
     .#{$prefix}--tile-content,
   .#{$prefix}--tile--slug.#{$prefix}--tile--clickable
@@ -505,6 +552,15 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     cursor: pointer;
   }
 
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
+    .#{$prefix}--tile-content,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable
+    .#{$prefix}--tile-content,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
+    > .#{$prefix}--tile__checkmark,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--is-selected
+    .#{$prefix}--tile--inner-decorator
+    > *,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
     .#{$prefix}--tile-content,
   .#{$prefix}--tile--slug.#{$prefix}--tile--clickable .#{$prefix}--tile-content,
@@ -515,6 +571,9 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     z-index: 1;
   }
 
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
+    .#{$prefix}--tile--inner-decorator
+    > *:has(> .#{$prefix}--popover--open),
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
     .#{$prefix}--ai-label:has(> .#{$prefix}--popover--open),
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
@@ -522,6 +581,11 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     z-index: 2;
   }
 
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
+    > .#{$prefix}--tile--inner-decorator
+    > *,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
+    > .#{$prefix}--tile__checkmark,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable > .#{$prefix}--ai-label,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable > .#{$prefix}--slug,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
@@ -529,6 +593,9 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     z-index: 1;
   }
 
+  .#{$prefix}--tile--expandable:has(
+      .#{$prefix}--tile--inner-decorator > * > .#{$prefix}--popover--open
+    ),
   .#{$prefix}--tile--expandable:has(
       .#{$prefix}--ai-label > .#{$prefix}--popover--open
     ),
@@ -538,16 +605,19 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     overflow: visible;
   }
 
-  // To Do: Replace svg overrides with actual AI icon
-  .#{$prefix}--tile--clickable .#{$prefix}--tile--slug-icon rect {
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--ai-label-icon rect {
     stroke: $icon-primary;
   }
 
-  .#{$prefix}--tile--clickable .#{$prefix}--tile--slug-icon path {
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--ai-label-icon path {
     fill: $icon-primary;
   }
 
   // Tile with slug and rounded corners
+  .#{$prefix}--tile--decorator-rounded,
+  .#{$prefix}--tile--decorator-rounded.#{$prefix}--tile--selectable::before,
+  .#{$prefix}--tile--decorator-rounded.#{$prefix}--tile--selectable::after,
+  .#{$prefix}--tile--decorator-rounded.#{$prefix}--tile--clickable::before,
   .#{$prefix}--tile--slug-rounded,
   .#{$prefix}--tile--slug-rounded.#{$prefix}--tile--selectable::before,
   .#{$prefix}--tile--slug-rounded.#{$prefix}--tile--selectable::after,
@@ -555,6 +625,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     border-radius: $spacing-03;
   }
 
+  .#{$prefix}--tile--decorator-rounded .#{$prefix}--tile__chevron,
   .#{$prefix}--tile--slug-rounded .#{$prefix}--tile__chevron {
     border-end-end-radius: $spacing-03;
   }

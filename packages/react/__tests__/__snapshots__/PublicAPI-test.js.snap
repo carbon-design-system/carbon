@@ -613,6 +613,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "defaultChecked": Object {
         "type": "bool",
       },
@@ -648,9 +651,7 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "title": Object {
         "type": "string",
       },
@@ -670,6 +671,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "decorator": Object {
+        "type": "node",
       },
       "helperText": Object {
         "type": "node",
@@ -699,9 +703,7 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "warn": Object {
         "type": "bool",
       },
@@ -739,6 +741,19 @@ Map {
       },
       "clicked": Object {
         "type": "bool",
+      },
+      "decorator": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "bool",
+            },
+            Object {
+              "type": "node",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "disabled": Object {
         "type": "bool",
@@ -2864,6 +2879,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -2896,9 +2914,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "tagTitle": Object {
         "type": "string",
       },
@@ -3214,6 +3230,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "expanded": Object {
         "type": "bool",
       },
@@ -3230,9 +3249,7 @@ Map {
       "onKeyUp": Object {
         "type": "func",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "tabIndex": Object {
         "type": "number",
       },
@@ -4849,6 +4866,9 @@ Map {
       "danger": Object {
         "type": "bool",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "hasScrollingContent": Object {
         "type": "bool",
       },
@@ -4964,9 +4984,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
     },
     "render": [Function],
   },
@@ -6604,6 +6622,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -6623,9 +6644,7 @@ Map {
       "required": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "tabIndex": Object {
         "type": "number",
       },
@@ -6977,6 +6996,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -7000,9 +7022,7 @@ Map {
       "selected": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "tabIndex": Object {
         "type": "number",
       },
@@ -8423,6 +8443,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -8454,9 +8477,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "title": [Function],
       "type": Object {
         "args": Array [
@@ -9007,13 +9028,14 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "hasRoundedCorners": Object {
         "type": "bool",
       },
       "light": [Function],
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
     },
     "render": [Function],
   },
@@ -10615,6 +10637,9 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "warn": Object {
         "type": "bool",
       },
@@ -10689,6 +10714,9 @@ Map {
       },
       "placeholder": Object {
         "type": "string",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "rows": Object {
         "type": "number",
@@ -10769,6 +10797,9 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "value": Object {
         "args": Array [
           Array [
@@ -10819,6 +10850,9 @@ Map {
       "labelText": Object {
         "isRequired": true,
         "type": "node",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "warn": Object {
         "type": "bool",

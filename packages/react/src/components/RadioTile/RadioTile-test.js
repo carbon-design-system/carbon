@@ -136,7 +136,18 @@ describe('RadioTile', () => {
     });
   });
 
-  it('should check AILabel exists on radio tile and is xs', async () => {
+  it('should check decorator prop and if AILabel exists on radio tile and is xs', async () => {
+    render(
+      <RadioTile value="standard" decorator={<AILabel />}>
+        {' '}
+        Option 1{' '}
+      </RadioTile>
+    );
+    expect(screen.getByRole('button')).toHaveClass(`cds--ai-label__button--xs`);
+  });
+
+  it('should check deprecated slug prop and if AILabel exists on radio tile and is xs', async () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     render(
       <RadioTile value="standard" slug={<AILabel />}>
         {' '}
@@ -144,6 +155,7 @@ describe('RadioTile', () => {
       </RadioTile>
     );
     expect(screen.getByRole('button')).toHaveClass(`cds--ai-label__button--xs`);
+    spy.mockRestore();
   });
 
   //Feature flag : enable-v12-tile-radio-icons

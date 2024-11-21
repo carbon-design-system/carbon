@@ -322,7 +322,7 @@ export interface ComboBoxProps<ItemType>
   placeholder?: string;
 
   /**
-   * Is the ComboBox readonly?
+   * Whether or not the component is read-only
    */
   readOnly?: boolean;
 
