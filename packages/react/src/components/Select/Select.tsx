@@ -30,7 +30,7 @@ import { Text } from '../Text';
 
 type ExcludedAttributes = 'size';
 
-interface SelectProps
+export interface SelectProps
   extends Omit<ComponentPropsWithRef<'select'>, ExcludedAttributes> {
   /**
    * Provide the contents of your Select
