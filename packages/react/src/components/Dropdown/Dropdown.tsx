@@ -6,6 +6,7 @@
  */
 
 import React, {
+  useCallback,
   useContext,
   useState,
   FocusEvent,
@@ -14,12 +15,14 @@ import React, {
   ReactNode,
   useEffect,
   useMemo,
+  ReactElement,
 } from 'react';
 import {
   useSelect,
   UseSelectInterface,
   UseSelectProps,
   UseSelectState,
+  UseSelectStateChange,
   UseSelectStateChangeTypes,
 } from 'downshift';
 import cx from 'classnames';
@@ -48,6 +51,7 @@ import {
   size as floatingSize,
 } from '@floating-ui/react';
 import { hide } from '@floating-ui/dom';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { ItemMouseMove, MenuMouseLeave } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
@@ -80,7 +84,8 @@ export interface OnChangeData<ItemType> {
 
 export interface DropdownProps<ItemType>
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes>,
-    TranslateWithId<ListBoxMenuIconTranslationKey> {
+    TranslateWithId<ListBoxMenuIconTranslationKey>,
+    React.RefAttributes<HTMLDivElement> {
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
@@ -97,6 +102,11 @@ export interface DropdownProps<ItemType>
    * **Experimental**: Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements.
    */
   autoAlign?: boolean;
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `Dropdown` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Specify the direction of the dropdown. Can be either top or bottom.
@@ -210,6 +220,7 @@ export interface DropdownProps<ItemType>
   size?: ListBoxSize;
 
   /**
+   * @deprecated please use `decorator` instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
   slug?: ReactNode;
@@ -218,7 +229,7 @@ export interface DropdownProps<ItemType>
    * Provide the title text that will be read by a screen reader when
    * visiting this control
    */
-  titleText?: ReactNode;
+  titleText: ReactNode;
 
   /**
    * The dropdown type, `default` or `inline`
@@ -238,14 +249,50 @@ export interface DropdownProps<ItemType>
 
 export type DropdownTranslationKey = ListBoxMenuIconTranslationKey;
 
+/**
+ * Custom state reducer for `useSelect` in Downshift, providing control over
+ * state changes.
+ *
+ * This function is called each time `useSelect` updates its internal state or
+ * triggers `onStateChange`. It allows for fine-grained control of state
+ * updates by modifying or overriding the default changes from Downshift's
+ * reducer.
+ * https://github.com/downshift-js/downshift/tree/master/src/hooks/useSelect#statereducer
+ *
+ * @param {Object} state - The current full state of the Downshift component.
+ * @param {Object} actionAndChanges - Contains the action type and proposed
+ * changes from the default Downshift reducer.
+ * @param {Object} actionAndChanges.changes - Suggested state changes.
+ * @param {string} actionAndChanges.type - The action type for the state
+ * change (e.g., item selection).
+ * @returns {Object} - The modified state based on custom logic or default
+ * changes if no custom logic applies.
+ */
+function stateReducer(state, actionAndChanges) {
+  const { changes, type } = actionAndChanges;
+
+  switch (type) {
+    case ItemMouseMove:
+    case MenuMouseLeave:
+      if (changes.highlightedIndex === state.highlightedIndex) {
+        // Prevent state update if highlightedIndex hasn't changed
+        return state;
+      }
+      return changes;
+    default:
+      return changes;
+  }
+}
+
 const Dropdown = React.forwardRef(
   <ItemType,>(
     {
       autoAlign = false,
       className: containerClassName,
+      decorator,
       disabled = false,
       direction = 'bottom',
-      items,
+      items: itemsProp,
       label,
       ['aria-label']: ariaLabel,
       ariaLabel: deprecatedAriaLabel,
@@ -274,8 +321,12 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const enableFloatingStyles = useFeatureFlag(
+      'enable-v12-dynamic-floating-styles'
+    );
+
     const { refs, floatingStyles, middlewareData } = useFloating(
-      autoAlign
+      enableFloatingStyles || autoAlign
         ? {
             placement: direction,
 
@@ -294,16 +345,18 @@ const Dropdown = React.forwardRef(
                   });
                 },
               }),
-              flip(),
-              hide(),
+              autoAlign && flip(),
+              autoAlign && hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
-        : {} // When autoAlign is turned off, floating-ui will not be used
+        : {}
+      // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
+      // enabled, floating-ui will not be used
     );
 
     useEffect(() => {
-      if (autoAlign) {
+      if (enableFloatingStyles || autoAlign) {
         const updatedFloatingStyles = {
           ...floatingStyles,
           visibility: middlewareData.hide?.referenceHidden
@@ -321,22 +374,33 @@ const Dropdown = React.forwardRef(
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
 
-    const selectProps: UseSelectProps<ItemType> = {
-      items,
-      itemToString,
-      initialSelectedItem,
-      onSelectedItemChange,
-      stateReducer,
-      isItemDisabled(item, _index) {
-        const isObject = item !== null && typeof item === 'object';
-        return isObject && 'disabled' in item && item.disabled === true;
+    const onSelectedItemChange = useCallback(
+      ({ selectedItem }: Partial<UseSelectState<ItemType>>) => {
+        if (onChange) {
+          onChange({ selectedItem: selectedItem ?? null });
+        }
       },
-      onHighlightedIndexChange: ({ highlightedIndex }) => {
-        if (highlightedIndex! > -1 && typeof window !== undefined) {
+      [onChange]
+    );
+
+    const isItemDisabled = useCallback((item, _index) => {
+      const isObject = item !== null && typeof item === 'object';
+      return isObject && 'disabled' in item && item.disabled === true;
+    }, []);
+
+    const onHighlightedIndexChange = useCallback(
+      (changes: UseSelectStateChange<ItemType>) => {
+        const { highlightedIndex } = changes;
+
+        if (
+          highlightedIndex !== undefined &&
+          highlightedIndex > -1 &&
+          typeof window !== undefined
+        ) {
           const itemArray = document.querySelectorAll(
             `li.${prefix}--list-box__menu-item[role="option"]`
           );
-          const highlightedItem = itemArray[highlightedIndex!];
+          const highlightedItem = itemArray[highlightedIndex];
           if (highlightedItem) {
             highlightedItem.scrollIntoView({
               behavior: 'smooth',
@@ -345,20 +409,33 @@ const Dropdown = React.forwardRef(
           }
         }
       },
-      ...downshiftProps,
-    };
+      [prefix]
+    );
+
+    const items = useMemo(() => itemsProp, [itemsProp]);
+    const selectProps = useMemo(
+      () => ({
+        items,
+        itemToString,
+        initialSelectedItem,
+        onSelectedItemChange,
+        stateReducer,
+        isItemDisabled,
+        onHighlightedIndexChange,
+        ...downshiftProps,
+      }),
+      [
+        items,
+        itemToString,
+        initialSelectedItem,
+        onSelectedItemChange,
+        stateReducer,
+        isItemDisabled,
+        onHighlightedIndexChange,
+        downshiftProps,
+      ]
+    );
     const dropdownInstanceId = useId();
-
-    function stateReducer(state, actionAndChanges) {
-      const { changes, type } = actionAndChanges;
-
-      switch (type) {
-        case ItemMouseMove:
-        case MenuMouseLeave:
-          return { ...changes, highlightedIndex: state.highlightedIndex };
-      }
-      return changes;
-    }
 
     // only set selectedItem if the prop is defined. Setting if it is undefined
     // will overwrite default selected items from useSelect
@@ -390,7 +467,7 @@ const Dropdown = React.forwardRef(
       [`${prefix}--dropdown--readonly`]: readOnly,
       [`${prefix}--dropdown--${size}`]: size,
       [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--dropdown--autoalign`]: autoAlign,
+      [`${prefix}--autoalign`]: autoAlign,
     });
 
     const titleClasses = cx(`${prefix}--label`, {
@@ -415,6 +492,7 @@ const Dropdown = React.forwardRef(
         [`${prefix}--list-box__wrapper--fluid--focus`]:
           isFluid && isFocused && !isOpen,
         [`${prefix}--list-box__wrapper--slug`]: slug,
+        [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
     );
 
@@ -424,21 +502,20 @@ const Dropdown = React.forwardRef(
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
-    const toggleButtonProps = getToggleButtonProps();
+    const toggleButtonProps = useMemo(
+      () =>
+        getToggleButtonProps({
+          'aria-label': ariaLabel || deprecatedAriaLabel,
+        }),
+      [getToggleButtonProps, ariaLabel, deprecatedAriaLabel, isOpen]
+    );
+
     const helper =
       helperText && !isFluid ? (
         <div id={helperId} className={helperClasses}>
           {helperText}
         </div>
       ) : null;
-
-    function onSelectedItemChange({
-      selectedItem,
-    }: Partial<UseSelectState<ItemType>>) {
-      if (onChange) {
-        onChange({ selectedItem: selectedItem ?? null });
-      }
-    }
 
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
       setIsFocused(evt.type === 'focus' ? true : false);
@@ -448,18 +525,44 @@ const Dropdown = React.forwardRef(
 
     const [currTimer, setCurrTimer] = useState<NodeJS.Timeout>();
 
-    // eslint-disable-next-line prefer-const
-    let [isTyping, setIsTyping] = useState(false);
+    const [isTyping, setIsTyping] = useState(false);
 
-    const readOnlyEventHandlers = readOnly
-      ? {
+    const onKeyDownHandler = useCallback(
+      (evt: React.KeyboardEvent<HTMLButtonElement>) => {
+        if (
+          evt.code !== 'Space' ||
+          !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
+        ) {
+          setIsTyping(true);
+        }
+        if (
+          (isTyping && evt.code === 'Space') ||
+          !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
+        ) {
+          if (currTimer) {
+            clearTimeout(currTimer);
+          }
+          setCurrTimer(
+            setTimeout(() => {
+              setIsTyping(false);
+            }, 3000)
+          );
+        }
+        if (toggleButtonProps.onKeyDown) {
+          toggleButtonProps.onKeyDown(evt);
+        }
+      },
+      [isTyping, currTimer, toggleButtonProps]
+    );
+
+    const readOnlyEventHandlers = useMemo(() => {
+      if (readOnly) {
+        return {
           onClick: (evt: MouseEvent<HTMLButtonElement>) => {
             // NOTE: does not prevent click
             evt.preventDefault();
             // focus on the element as per readonly input behavior
-            if (mergedRef.current !== undefined) {
-              mergedRef.current.focus();
-            }
+            mergedRef?.current?.focus();
           },
           onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
             const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
@@ -468,50 +571,32 @@ const Dropdown = React.forwardRef(
               evt.preventDefault();
             }
           },
-        }
-      : {
-          onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
-            if (
-              evt.code !== 'Space' ||
-              !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
-            ) {
-              setIsTyping(true);
-            }
-
-            if (
-              (isTyping && evt.code === 'Space') ||
-              !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
-            ) {
-              if (currTimer) {
-                clearTimeout(currTimer);
-              }
-              setCurrTimer(
-                setTimeout(() => {
-                  setIsTyping(false);
-                }, 3000)
-              );
-            }
-            if (toggleButtonProps.onKeyDown) {
-              toggleButtonProps.onKeyDown(evt);
-            }
-          },
         };
+      } else {
+        return {
+          onKeyDown: onKeyDownHandler,
+        };
+      }
+    }, [readOnly, onKeyDownHandler]);
 
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: autoAlign ? refs.setFloating : null,
+          ref: enableFloatingStyles || autoAlign ? refs.setFloating : null,
         }),
-      [autoAlign, getMenuProps, refs.setFloating]
+      [autoAlign, getMenuProps, refs.setFloating, enableFloatingStyles]
     );
 
-    // Slug is always size `mini`
-    let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'AILabel') {
-      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size: 'mini',
-      });
-    }
+    // AILabel is always size `mini`
+    const normalizedDecorator = useMemo(() => {
+      let element = slug ?? decorator;
+      if (element && element['type']?.displayName === 'AILabel') {
+        return React.cloneElement(element as React.ReactElement<any>, {
+          size: 'mini',
+        });
+      }
+      return React.isValidElement(element) ? element : null;
+    }, [slug, decorator]);
 
     return (
       <div className={wrapperClasses} {...other}>
@@ -523,7 +608,6 @@ const Dropdown = React.forwardRef(
         <ListBox
           onFocus={handleFocus}
           onBlur={handleFocus}
-          aria-label={deprecatedAriaLabel || ariaLabel}
           size={size}
           className={className}
           invalid={invalid}
@@ -532,7 +616,7 @@ const Dropdown = React.forwardRef(
           warnText={warnText}
           light={light}
           isOpen={isOpen}
-          ref={autoAlign ? refs.setReference : null}
+          ref={enableFloatingStyles || autoAlign ? refs.setReference : null}
           id={id}>
           {invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
@@ -571,7 +655,15 @@ const Dropdown = React.forwardRef(
               translateWithId={translateWithId}
             />
           </button>
-          {normalizedSlug}
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
           <ListBox.Menu {...menuProps}>
             {isOpen &&
               items.map((item, index) => {
@@ -659,6 +751,11 @@ Dropdown.propTypes = {
    * Provide a custom className to be applied on the cds--dropdown node
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `Dropdown` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify the direction of the dropdown. Can be either top or bottom.
@@ -784,7 +881,11 @@ Dropdown.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop for `Dropdown` has ' +
+      'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
+  ),
 
   /**
    * Provide the title text that will be read by a screen reader when

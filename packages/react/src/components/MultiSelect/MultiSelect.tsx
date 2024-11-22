@@ -53,6 +53,7 @@ import {
   autoUpdate,
 } from '@floating-ui/react';
 import { hide } from '@floating-ui/dom';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const {
   ItemClick,
@@ -126,6 +127,11 @@ export interface MultiSelectProps<ItemType>
    * Specify the text that should be read for screen readers to clear selection.
    */
   clearSelectionText?: string;
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `MultiSelect` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -259,6 +265,7 @@ export interface MultiSelectProps<ItemType>
   size?: ListBoxSize;
 
   /**
+   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
    */
   slug?: ReactNode;
@@ -295,6 +302,7 @@ const MultiSelect = React.forwardRef(
     {
       autoAlign = false,
       className: containerClassName,
+      decorator,
       id,
       items,
       itemToElement,
@@ -362,8 +370,11 @@ const MultiSelect = React.forwardRef(
     const [topItems, setTopItems] = useState([]);
     const [itemsCleared, setItemsCleared] = useState(false);
 
+    const enableFloatingStyles =
+      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+
     const { refs, floatingStyles, middlewareData } = useFloating(
-      autoAlign
+      enableFloatingStyles
         ? {
             placement: direction,
 
@@ -375,7 +386,7 @@ const MultiSelect = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
-              flip({ crossAxis: false }),
+              autoAlign && flip({ crossAxis: false }),
               floatingSize({
                 apply({ rects, elements }) {
                   Object.assign(elements.floating.style, {
@@ -383,7 +394,7 @@ const MultiSelect = React.forwardRef(
                   });
                 },
               }),
-              hide(),
+              autoAlign && hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
@@ -391,7 +402,7 @@ const MultiSelect = React.forwardRef(
     );
 
     useLayoutEffect(() => {
-      if (autoAlign) {
+      if (enableFloatingStyles) {
         const updatedFloatingStyles = {
           ...floatingStyles,
           visibility: middlewareData.hide?.referenceHidden
@@ -404,7 +415,13 @@ const MultiSelect = React.forwardRef(
           }
         });
       }
-    }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
+    }, [
+      enableFloatingStyles,
+      floatingStyles,
+      refs.floating,
+      middlewareData,
+      open,
+    ]);
 
     const {
       selectedItems: controlledSelectedItems,
@@ -443,7 +460,7 @@ const MultiSelect = React.forwardRef(
       selectedItem: controlledSelectedItems,
       items: filteredItems as ItemType[],
       isItemDisabled(item, _index) {
-        return (item as any).disabled;
+        return (item as any)?.disabled;
       },
       ...downshiftProps,
     };
@@ -528,6 +545,7 @@ const MultiSelect = React.forwardRef(
         [`${prefix}--list-box__wrapper--fluid--focus`]:
           !isOpen && isFluid && isFocused,
         [`${prefix}--list-box__wrapper--slug`]: slug,
+        [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
     );
     const titleClasses = cx(`${prefix}--label`, {
@@ -551,6 +569,7 @@ const MultiSelect = React.forwardRef(
         selectedItems && selectedItems.length > 0,
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--multi-select--readonly`]: readOnly,
+      [`${prefix}--autoalign`]: enableFloatingStyles,
       [`${prefix}--multi-select--selectall`]: selectAll,
     });
 
@@ -668,12 +687,20 @@ const MultiSelect = React.forwardRef(
         }
       : {};
 
-    // Slug is always size `mini`
-    let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'AILabel') {
-      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size: 'mini',
-      });
+    // AILabel always size `mini`
+    let normalizedDecorator = React.isValidElement(slug ?? decorator)
+      ? (slug ?? decorator)
+      : null;
+    if (
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel'
+    ) {
+      normalizedDecorator = React.cloneElement(
+        normalizedDecorator as React.ReactElement<any>,
+        {
+          size: 'mini',
+        }
+      );
     }
 
     const itemsSelectedText =
@@ -688,9 +715,9 @@ const MultiSelect = React.forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: autoAlign ? refs.setFloating : null,
+          ref: enableFloatingStyles ? refs.setFloating : null,
         }),
-      [autoAlign, getMenuProps, refs.setFloating]
+      [enableFloatingStyles, getMenuProps, refs.setFloating]
     );
 
     return (
@@ -728,7 +755,7 @@ const MultiSelect = React.forwardRef(
           )}
           <div
             className={multiSelectFieldWrapperClasses}
-            ref={autoAlign ? refs.setReference : null}>
+            ref={enableFloatingStyles ? refs.setReference : null}>
             {selectedItems.length > 0 && (
               <ListBox.Selection
                 readOnly={readOnly}
@@ -762,7 +789,15 @@ const MultiSelect = React.forwardRef(
                 translateWithId={translateWithId}
               />
             </button>
-            {normalizedSlug}
+            {slug ? (
+              normalizedDecorator
+            ) : decorator ? (
+              <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
+                {normalizedDecorator}
+              </div>
+            ) : (
+              ''
+            )}
           </div>
           <ListBox.Menu {...menuProps}>
             {isOpen &&
@@ -874,6 +909,11 @@ MultiSelect.propTypes = {
    * declaring function with `useCallback` to prevent unnecessary re-renders.
    */
   compareItems: PropTypes.func,
+
+  /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `MultiSelect` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -1008,10 +1048,10 @@ MultiSelect.propTypes = {
    */
   size: ListBoxPropTypes.ListBoxSize,
 
-  /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
-   */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
 
   /**
    * Provide a method that sorts all options in the control. Overriding this

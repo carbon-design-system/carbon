@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
+import deprecate from '../../prop-types/deprecate';
 import Tag, { SIZES, TYPES } from './Tag';
 import { Close } from '@carbon/icons-react';
 import { Tooltip } from '../Tooltip';
@@ -22,6 +23,11 @@ export interface DismissibleTagBaseProps {
    * Provide a custom className that is applied to the containing <span>
    */
   className?: string;
+
+  /**
+   * **Experimental:** Provide a `decorator` component to be rendered inside the `DismissibleTag` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Specify if the `DismissibleTag` is disabled
@@ -51,6 +57,7 @@ export interface DismissibleTagBaseProps {
   size?: keyof typeof SIZES;
 
   /**
+   * @deprecated please use `decorator` instead.
    * **Experimental:** Provide a `Slug` component to be rendered inside the `DismissibleTag` component
    */
   slug?: ReactNode;
@@ -59,6 +66,11 @@ export interface DismissibleTagBaseProps {
    * Provide text to be rendered inside of a the tag.
    */
   text?: string;
+
+  /**
+   * Provide a custom `title` to be inserted in the tag.
+   */
+  tagTitle?: string;
 
   /**
    * Text to show on clear filters
@@ -78,6 +90,7 @@ export type DismissibleTagProps<T extends React.ElementType> = PolymorphicProps<
 
 const DismissibleTag = <T extends React.ElementType>({
   className,
+  decorator,
   disabled,
   id,
   renderIcon,
@@ -86,6 +99,7 @@ const DismissibleTag = <T extends React.ElementType>({
   slug,
   size,
   text,
+  tagTitle,
   type,
   ...other
 }: DismissibleTagProps<T>) => {
@@ -108,12 +122,20 @@ const DismissibleTag = <T extends React.ElementType>({
     }
   };
 
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'sm',
-      kind: 'inline',
-    });
+  let normalizedDecorator = React.isValidElement(slug ?? decorator)
+    ? (slug ?? decorator)
+    : null;
+  if (
+    normalizedDecorator &&
+    normalizedDecorator['type']?.displayName === 'AILabel'
+  ) {
+    normalizedDecorator = React.cloneElement(
+      normalizedDecorator as React.ReactElement<any>,
+      {
+        size: 'sm',
+        kind: 'inline',
+      }
+    );
   }
 
   const tooltipClasses = classNames(
@@ -138,9 +160,20 @@ const DismissibleTag = <T extends React.ElementType>({
       id={tagId}
       {...otherProps}>
       <div className={`${prefix}--interactive--tag-children`}>
-        <Text title={text} className={`${prefix}--tag__label`}>
+        <Text
+          title={tagTitle ? tagTitle : text}
+          className={`${prefix}--tag__label`}>
           {text}
         </Text>
+        {slug ? (
+          normalizedDecorator
+        ) : decorator ? (
+          <div className={`${prefix}--tag__decorator`}>
+            {normalizedDecorator}
+          </div>
+        ) : (
+          ''
+        )}
         <Tooltip
           label={isEllipsisApplied ? dismissLabel : title}
           align="bottom"
@@ -152,12 +185,10 @@ const DismissibleTag = <T extends React.ElementType>({
             className={`${prefix}--tag__close-icon`}
             onClick={handleClose}
             disabled={disabled}
-            aria-label={title}
-            title={title}>
+            aria-label={title}>
             <Close />
           </button>
         </Tooltip>
-        {normalizedSlug}
       </div>
     </Tag>
   );
@@ -167,6 +198,11 @@ DismissibleTag.propTypes = {
    * Provide a custom className that is applied to the containing <span>
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental:** Provide a `decorator` component to be rendered inside the `DismissibleTag` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify if the `DismissibleTag` is disabled
@@ -198,12 +234,20 @@ DismissibleTag.propTypes = {
   /**
    * **Experimental:** Provide a `Slug` component to be rendered inside the `DismissibleTag` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
 
   /**
    * Provide text to be rendered inside of a the tag.
    */
   text: PropTypes.string,
+
+  /**
+   * Provide a custom `title` to be inserted in the tag.
+   */
+  tagTitle: PropTypes.string,
 
   /**
    * Text to show on clear filters

@@ -1,0 +1,30 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>carbon-web-components example</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/styles.scss" />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-dropdown:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script type="module" src="src/index.js"></script>
+  </head>
+  <body>
+    <cds-dropdown value="bar">
+      <cds-dropdown-item value="foo">Foo</cds-dropdown-item>
+      <cds-dropdown-item value="bar">Bar</cds-dropdown-item>
+      <cds-dropdown-item value="baz">Baz</cds-dropdown-item>
+    </cds-dropdown>
+  </body>
+</html>

@@ -336,8 +336,7 @@
     margin-inline-start: calc(
       #{$spacing-07} + #{convert.to-rem(20px)} - #{convert.to-rem(2px)}
     );
-    padding-inline-end: $spacing-05;
-    padding-inline-start: $spacing-05;
+    padding-inline: $spacing-05;
   }
 
   // Tertiary button styles by default use mostly "inverse" tokens. Since the non-low-contrast notification
@@ -374,7 +373,8 @@
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:focus {
     border-color: $focus-inverse;
     background-color: $notification-action-tertiary-inverse;
-    box-shadow: inset 0 0 0 button-vars.$button-outline-width $focus-inverse,
+    box-shadow:
+      inset 0 0 0 button-vars.$button-outline-width $focus-inverse,
       inset 0 0 0 button-vars.$button-border-width $background-inverse;
     color: $notification-action-tertiary-inverse-text;
   }
@@ -440,7 +440,8 @@
     inset-inline-end: 0;
     max-inline-size: convert.to-rem(48px);
     min-inline-size: convert.to-rem(48px);
-    transition: outline $duration-fast-02 motion(standard, productive),
+    transition:
+      outline $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);
 
     &:focus {
@@ -476,7 +477,7 @@
   }
 
   // Windows HCM fix
-  /* stylelint-disable */
+
   .#{$prefix}--actionable-notification {
     @include high-contrast-mode('outline');
   }
@@ -492,5 +493,4 @@
     .#{$prefix}--actionable-notification__close-icon {
     @include high-contrast-mode('icon-fill');
   }
-  /* stylelint-enable */
 }

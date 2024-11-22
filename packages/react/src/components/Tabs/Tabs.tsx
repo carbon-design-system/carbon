@@ -531,9 +531,9 @@ function TabList({
     ) {
       event.preventDefault();
 
-      const filtredTabs = tabs.current.filter((tab) => tab !== null);
+      const filteredTabs = tabs.current.filter((tab) => tab !== null);
 
-      const activeTabs: TabElement[] = filtredTabs.filter(
+      const activeTabs: TabElement[] = filteredTabs.filter(
         (tab) => !tab.disabled
       );
 
@@ -550,6 +550,52 @@ function TabList({
         setActiveIndex(nextIndex);
       }
       tabs.current[nextIndex]?.focus();
+    }
+  }
+
+  function handleBlur({
+    relatedTarget: currentActiveNode,
+  }: React.FocusEvent<HTMLDivElement>) {
+    if (ref.current?.contains(currentActiveNode)) {
+      return;
+    }
+    // reset active index to selected tab index for manual activation
+    if (activation === 'manual') {
+      setActiveIndex(selectedIndex);
+    }
+  }
+
+  /**
+   * Scroll the tab into view if it is not already visible
+   * @param tab - The tab to scroll into view
+   * @returns {void}
+   */
+  function scrollTabIntoView(tab) {
+    if (!isScrollable || !ref.current) {
+      return;
+    }
+    if (tab) {
+      // The width of the "scroll buttons"
+      const { width: tabWidth } = tab.getBoundingClientRect();
+
+      // The start and end position of the selected tab
+      const start = tab.offsetLeft;
+      const end = tab.offsetLeft + tabWidth;
+
+      // The start and end of the visible area for the tabs
+      const visibleStart = ref.current.scrollLeft + buttonWidth;
+      const visibleEnd =
+        ref.current.scrollLeft + ref.current.clientWidth - buttonWidth;
+
+      // The beginning of the tab is clipped and not visible
+      if (start < visibleStart) {
+        setScrollLeft(start - buttonWidth);
+      }
+
+      // The end of the tab is clipped and not visible
+      if (end > visibleEnd) {
+        setScrollLeft(end + buttonWidth - ref.current.clientWidth);
+      }
     }
   }
 
@@ -594,13 +640,13 @@ function TabList({
 
   useIsomorphicEffect(() => {
     if (ref.current) {
-      //adding 1 in calculation for firefox support
+      // adding 1 in calculation for firefox support
       setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
     }
 
     function handler() {
       if (ref.current) {
-        //adding 1 in calculation for firefox support
+        // adding 1 in calculation for firefox support
         setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
       }
     }
@@ -620,39 +666,21 @@ function TabList({
     }
   }, [scrollLeft]);
 
+  // scroll manual tabs when active index changes (focus outline movement)
   useIsomorphicEffect(() => {
-    if (!isScrollable || !ref.current) {
-      return;
-    }
-
     const tab =
       activation === 'manual'
         ? tabs.current[activeIndex]
         : tabs.current[selectedIndex];
-    if (tab) {
-      // The width of the "scroll buttons"
 
-      // The start and end position of the selected tab
-      const { width: tabWidth } = tab.getBoundingClientRect();
-      const start = tab.offsetLeft;
-      const end = tab.offsetLeft + tabWidth;
+    scrollTabIntoView(tab);
+  }, [activation, activeIndex]);
 
-      // The start and end of the visible area for the tabs
-      const visibleStart = ref.current.scrollLeft + buttonWidth;
-      const visibleEnd =
-        ref.current.scrollLeft + ref.current.clientWidth - buttonWidth;
-
-      // The beginning of the tab is clipped and not visible
-      if (start < visibleStart) {
-        setScrollLeft(start - buttonWidth);
-      }
-
-      // The end of the tab is clipped and not visible
-      if (end > visibleEnd) {
-        setScrollLeft(end + buttonWidth - ref.current.clientWidth);
-      }
-    }
-  }, [activation, activeIndex, selectedIndex, isScrollable, children]);
+  // scroll tabs when selected index changes
+  useIsomorphicEffect(() => {
+    const tab = tabs.current[selectedIndex];
+    scrollTabIntoView(tab);
+  }, [selectedIndex, isScrollable, children]);
 
   usePressable(previousButton, {
     onPress({ longPress }) {
@@ -706,7 +734,8 @@ function TabList({
         role="tablist"
         className={`${prefix}--tab--list`}
         onScroll={debouncedOnScroll}
-        onKeyDown={onKeyDown}>
+        onKeyDown={onKeyDown}
+        onBlur={handleBlur}>
         {React.Children.map(children, (child, index) => {
           return !isElement(child) ? null : (
             <TabContext.Provider
@@ -876,9 +905,9 @@ function TabListVertical({
     if (matches(event, [keys.ArrowDown, keys.ArrowUp, keys.Home, keys.End])) {
       event.preventDefault();
 
-      const filtredTabs = tabs.current.filter((tab) => tab !== null);
+      const filteredTabs = tabs.current.filter((tab) => tab !== null);
 
-      const activeTabs: TabElement[] = filtredTabs.filter(
+      const activeTabs: TabElement[] = filteredTabs.filter(
         (tab) => !tab.disabled
       );
 
@@ -895,6 +924,18 @@ function TabListVertical({
         setActiveIndex(nextIndex);
       }
       tabs.current[nextIndex]?.focus();
+    }
+  }
+
+  function handleBlur({
+    relatedTarget: currentActiveNode,
+  }: React.FocusEvent<HTMLDivElement>) {
+    if (ref.current?.contains(currentActiveNode)) {
+      return;
+    }
+    // reset active index to selected tab index for manual activation
+    if (activation === 'manual') {
+      setActiveIndex(selectedIndex);
     }
   }
 
@@ -991,7 +1032,8 @@ function TabListVertical({
         ref={ref}
         role="tablist"
         className={`${prefix}--tab--list`}
-        onKeyDown={onKeyDown}>
+        onKeyDown={onKeyDown}
+        onBlur={handleBlur}>
         {React.Children.map(children, (child, index) => {
           return !isElement(child) ? null : (
             <TabContext.Provider
@@ -1242,8 +1284,8 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
       ).filter((node) => {
         const element = node as HTMLElement;
         return (
-          element.classList.contains('cds--tabs__nav-link') &&
-          !element.classList.contains('cds--tabs__nav-item--disabled')
+          element.classList.contains(`${prefix}--tabs__nav-link`) &&
+          !element.classList.contains(`${prefix}--tabs__nav-item--disabled`)
         );
       }).length;
 
@@ -1717,7 +1759,7 @@ function TabPanels({ children }: TabPanelsProps) {
   return (
     <>
       {React.Children.map(children, (child, index) => {
-        return (
+        return !isElement(child) ? null : (
           <TabPanelContext.Provider value={index}>
             {React.cloneElement(child as React.ReactElement<any>, {
               ref: (element: HTMLDivElement) => {

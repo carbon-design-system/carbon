@@ -1,7 +1,8 @@
 {
   "name": "carbon-components-react",
-  "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
-  "version": "8.65.0",
+  "private": true,
+  "description": "The Carbon Design System is IBM’s open-source design system for products and experiences. This package reached end of support on September 30, 2024 and will not receive any more updates.",
+  "version": "8.71.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -42,8 +43,8 @@
     "sass": "^1.33.0"
   },
   "dependencies": {
-    "@carbon/react": "^1.65.0",
-    "@carbon/styles": "^1.64.0",
+    "@carbon/react": "^1.71.0",
+    "@carbon/styles": "^1.70.0",
     "@ibm/telemetry-js": "^1.5.0",
     "chalk": "1.1.3"
   },
@@ -55,9 +56,9 @@
     "@babel/plugin-transform-react-constant-elements": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
     "@babel/preset-react": "^7.24.7",
-    "@carbon/test-utils": "^10.31.0",
+    "@carbon/test-utils": "^10.34.0",
     "@rollup/plugin-babel": "^6.0.0",
-    "@rollup/plugin-commonjs": "^26.0.0",
+    "@rollup/plugin-commonjs": "^28.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "babel-plugin-dev-expression": "^0.2.3",
     "babel-preset-carbon": "^0.6.0",

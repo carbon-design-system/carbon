@@ -36,12 +36,12 @@
     background-color: $background;
     color: $text-secondary;
     inline-size: mini-units(6);
-    inset-block-end: 0;
-    inset-block-start: 0;
+    inset-block: 0;
     inset-inline-start: 0;
     max-inline-size: mini-units(32);
     // TODO: sync with motion work
-    transition: inline-size 0.11s cubic-bezier(0.2, 0, 1, 0.9),
+    transition:
+      inline-size 0.11s cubic-bezier(0.2, 0, 1, 0.9),
       transform 0.11s cubic-bezier(0.2, 0, 1, 0.9);
     will-change: inline-size;
   }
@@ -83,7 +83,8 @@
     inset-block-start: convert.to-rem(48px);
     inset-inline-start: 0;
     opacity: 0;
-    transition: opacity $transition-expansion $standard-easing,
+    transition:
+      opacity $transition-expansion $standard-easing,
       background-color $transition-expansion $standard-easing;
   }
 
@@ -94,7 +95,8 @@
       block-size: 100vh;
       inline-size: 100vw;
       opacity: 1;
-      transition: opacity $transition-expansion $standard-easing,
+      transition:
+        opacity $transition-expansion $standard-easing,
         background-color $transition-expansion $standard-easing;
     }
   }
@@ -212,7 +214,9 @@
     padding: 0 mini-units(2);
     block-size: mini-units(4);
     color: $text-secondary;
-    transition: color $duration-fast-02, background-color $duration-fast-02,
+    transition:
+      color $duration-fast-02,
+      background-color $duration-fast-02,
       outline $duration-fast-02;
     user-select: none;
   }
@@ -271,8 +275,7 @@
       background-color: $border-interactive;
       content: '';
       inline-size: 3px;
-      inset-block-end: 0;
-      inset-block-start: 0;
+      inset-block: 0;
       inset-inline-start: 0;
     }
   }
@@ -339,7 +342,9 @@
     padding: 0 mini-units(2);
     min-block-size: mini-units(4);
     text-decoration: none;
-    transition: color $duration-fast-02, background-color $duration-fast-02,
+    transition:
+      color $duration-fast-02,
+      background-color $duration-fast-02,
       outline $duration-fast-02;
   }
 
@@ -383,8 +388,7 @@
     background-color: $border-interactive;
     content: '';
     inline-size: 3px;
-    inset-block-end: 0;
-    inset-block-start: 0;
+    inset-block: 0;
     inset-inline-start: 0;
   }
 

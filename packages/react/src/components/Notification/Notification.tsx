@@ -42,6 +42,8 @@ import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
 import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { useFeatureFlag } from '../FeatureFlags';
+import { warning } from '../../internal/warning';
+import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -54,7 +56,7 @@ function useEscapeToClose(ref, callback, override = true) {
     // The callback should only be called when focus is on or within the container
     const elementContainsFocus =
       (ref.current && document.activeElement === ref.current) ||
-      ref.current.contains(document.activeElement);
+      ref.current?.contains(document.activeElement);
 
     if (matches(event, [keys.Escape]) && override && elementContainsFocus) {
       callback(event);
@@ -62,7 +64,10 @@ function useEscapeToClose(ref, callback, override = true) {
   };
 
   useIsomorphicEffect(() => {
-    document.addEventListener('keydown', handleKeyDown, false);
+    if (ref.current !== null) {
+      document.addEventListener('keydown', handleKeyDown, false);
+    }
+
     return () => document.removeEventListener('keydown', handleKeyDown, false);
   });
 }
@@ -489,9 +494,7 @@ export function ToastNotification({
         <NotificationButton
           notificationType="toast"
           onClick={handleCloseButtonClick}
-          aria-hidden="true"
           aria-label={deprecatedAriaLabel || ariaLabel}
-          tabIndex={-1}
         />
       )}
     </div>
@@ -735,9 +738,7 @@ export function InlineNotification({
         <NotificationButton
           notificationType="inline"
           onClick={handleCloseButtonClick}
-          aria-hidden="true"
           aria-label={ariaLabel}
-          tabIndex={-1}
         />
       )}
     </div>
@@ -848,7 +849,7 @@ export interface ActionableNotificationProps
 
   /**
    * @deprecated This prop will be removed in the next major version, v12.
-   * Specify if focus should be moved to the component on render. To meet the spec for alertdialog, this must always be true. If you're setting this to false, explore using StaticNotification instead. https://github.com/carbon-design-system/carbon/pull/15532
+   * Specify if focus should be moved to the component on render. To meet the spec for alertdialog, this must always be true. If you're setting this to false, explore using Callout instead. https://github.com/carbon-design-system/carbon/pull/15532
    */
   hasFocus?: boolean;
 
@@ -1125,10 +1126,14 @@ ActionableNotification.propTypes = {
   closeOnEscape: PropTypes.bool,
 
   /**
-   * Deprecated, please use StaticNotification once it's available. Issue #15532
    * Specify if focus should be moved to the component when the notification contains actions
    */
-  hasFocus: deprecate(PropTypes.bool),
+  hasFocus: deprecate(
+    PropTypes.bool,
+    'hasFocus is deprecated. To conform to accessibility requirements hasFocus ' +
+      'should always be `true` for ActionableNotification. If you were ' +
+      'setting this prop to `false`, consider using the Callout component instead.'
+  ),
 
   /**
    * Specify the close button should be disabled, or not
@@ -1195,12 +1200,35 @@ ActionableNotification.propTypes = {
 };
 
 /**
- * StaticNotification
+ * Callout
  * ==================
  */
 
-export interface StaticNotificationProps
-  extends HTMLAttributes<HTMLDivElement> {
+/**
+ * Deprecated callout kind values.
+ * @deprecated Use NewKindProps instead.
+ */
+export type DeprecatedKindProps =
+  | 'error'
+  | 'info'
+  | 'info-square'
+  | 'success'
+  | 'warning'
+  | 'warning-alt';
+
+export type NewKindProps = 'warning' | 'info';
+
+export type KindProps = DeprecatedKindProps | NewKindProps;
+
+const propMappingFunction = (deprecatedValue) => {
+  const mapping = {
+    error: 'warning', // only redirect error -> warning
+    success: 'info', // only redirect success -> info
+  };
+  return mapping[deprecatedValue];
+};
+
+export interface CalloutProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Pass in the action button label that will be rendered within the ActionableNotification.
    */
@@ -1219,16 +1247,10 @@ export interface StaticNotificationProps
   /**
    * Specify what state the notification represents
    */
-  kind?:
-    | 'error'
-    | 'info'
-    | 'info-square'
-    | 'success'
-    | 'warning'
-    | 'warning-alt';
+  kind?: KindProps;
 
   /**
-   * Specify whether you are using the low contrast variant of the StaticNotification.
+   * Specify whether you are using the low contrast variant of the Callout.
    */
   lowContrast?: boolean;
 
@@ -1258,7 +1280,7 @@ export interface StaticNotificationProps
   titleId?: string;
 }
 
-export function StaticNotification({
+export function Callout({
   actionButtonLabel,
   children,
   onActionButtonClick,
@@ -1267,11 +1289,12 @@ export function StaticNotification({
   subtitle,
   statusIconDescription,
   className,
-  kind = 'error',
+  kind = 'info',
   lowContrast,
   ...rest
-}: StaticNotificationProps) {
+}: CalloutProps) {
   const prefix = usePrefix();
+
   const containerClassName = cx(className, {
     [`${prefix}--actionable-notification`]: true,
     [`${prefix}--actionable-notification--low-contrast`]: lowContrast,
@@ -1326,7 +1349,7 @@ export function StaticNotification({
   );
 }
 
-StaticNotification.propTypes = {
+Callout.propTypes = {
   /**
    * Pass in the action button label that will be rendered within the ActionableNotification.
    */
@@ -1345,17 +1368,21 @@ StaticNotification.propTypes = {
   /**
    * Specify what state the notification represents
    */
-  kind: PropTypes.oneOf([
-    'error',
-    'info',
-    'info-square',
-    'success',
-    'warning',
-    'warning-alt',
-  ]),
+  kind: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'error',
+      'info',
+      'info-square',
+      'success',
+      'warning',
+      'warning-alt',
+    ]),
+    ['warning', 'info'],
+    propMappingFunction
+  ),
 
   /**
-   * Specify whether you are using the low contrast variant of the StaticNotification.
+   * Specify whether you are using the low contrast variant of the Callout.
    */
   lowContrast: PropTypes.bool,
 
@@ -1383,4 +1410,31 @@ StaticNotification.propTypes = {
    * Specify the id for the element containing the title
    */
   titleId: PropTypes.string,
+};
+
+// In renaming StaticNotification to Callout, the legacy StaticNotification
+// export and it's types should remain usable until Callout is moved to stable.
+// The StaticNotification component below forwards props to Callout and inherits
+// CalloutProps to ensure consumer usage is not impacted, while providing them
+// a deprecation warning.
+// TODO: remove this when Callout moves to stable OR in v12, whichever is first
+/**
+ * @deprecated Use `CalloutProps` instead.
+ */
+export interface StaticNotificationProps extends CalloutProps {}
+let didWarnAboutDeprecation = false;
+export const StaticNotification: React.FC<StaticNotificationProps> = (
+  props
+) => {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      '`StaticNotification` has been renamed to `Callout`.' +
+        'Run the following codemod to automatically update usages in your' +
+        'project: `npx @carbon/upgrade migrate refactor-to-callout --write`'
+    );
+    didWarnAboutDeprecation = true;
+  }
+
+  return <Callout {...props} />;
 };

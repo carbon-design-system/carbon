@@ -18,7 +18,6 @@ import ButtonSet from '../ButtonSet';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
 
 export default {
   title: 'Components/MultiSelect',
@@ -306,6 +305,9 @@ Filterable.argTypes = {
   onChange: {
     action: 'onChange',
   },
+  onMenuChange: {
+    action: 'onMenuChange',
+  },
 };
 
 export const WithLayerMultiSelect = () => (
@@ -440,7 +442,7 @@ export const SelectAll = () => {
 };
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -480,7 +482,7 @@ export const withAILabel = () => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       selectionFeedback="top-after-reopen"
-      slug={aiLabel}
+      decorator={aiLabel}
     />
   </div>
 );
@@ -495,7 +497,7 @@ export const FilterableWithAILabel = () => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       selectionFeedback="top-after-reopen"
-      slug={aiLabel}
+      decorator={aiLabel}
     />
   </div>
 );

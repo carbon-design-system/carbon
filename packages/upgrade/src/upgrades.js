@@ -291,6 +291,141 @@ export const upgrades = [
           });
         },
       },
+      {
+        name: 'featureflag-deprecate-flags-prop',
+        description: `
+        Updates the <FeatureFlags> component usage:
+        1. Deprecates the 'flags' object prop
+        2. Replaces it with individual boolean props for each feature flag
+        3. Removes usage of no longer needed flags (e.g., 'enable-v11-release')
+        
+        Example transformation:
+        Before: <FeatureFlags flags={{ 'flag1': true, 'flag2': false, 'flag3': true }}>
+        After:  <FeatureFlags flag1 flag3>
+      `,
+
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'featureflag-deprecate-flags-prop.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
+        name: 'refactor-light-to-layer',
+        description: `
+          Refactor 'light' prop usage to instead wrap components with Layer
+         Transforms:
+         <Button light>Click me</Button>
+         Into:
+        <Layer><Button>Click me</Button></Layer>
+      `,
+
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'refactor-light-to-layer.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
+        name: 'refactor-to-callout',
+        description:
+          'Rewrites imports and usages of StaticNotification to Callout',
+        migrate: async (options) => {
+          const transform = path.join(TRANSFORM_DIR, 'refactor-to-callout.js');
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
+        name: 'ibm-products-update-userprofileimage',
+        description: 'Rewrites UserProfileImage to UserAvatar',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'ibm-products-update-userprofileimage.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
     ],
   },
   {

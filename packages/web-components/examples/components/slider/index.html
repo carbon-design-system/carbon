@@ -1,0 +1,40 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>carbon-web-components example</title>
+    <meta charset="UTF-8" />
+
+    <link rel="stylesheet" href="src/styles.scss" />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-slider:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script type="module" src="src/index.js"></script>
+  </head>
+  <body>
+    <cds-form-item>
+      <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="50"
+      >
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"
+        ></cds-slider-input>
+      </cds-slider>
+    </cds-form-item>
+  </body>
+</html>

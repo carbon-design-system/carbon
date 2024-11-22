@@ -1,0 +1,45 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>carbon-web-components example</title>
+    <meta charset="UTF-8" />
+
+    <link rel="stylesheet" href="src/styles.scss" />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-multi-select:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script type="module" src="src/index.js"></script>
+  </head>
+  <body>
+    <cds-multi-select
+      title-text="Multiselect title"
+      label="Multiselect label"
+      helper-text="This is helper text"
+    >
+      <cds-multi-select-item value="example"
+        >An example option that is really long to show what should be done to
+        handle long text</cds-multi-select-item
+      >
+      <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
+      <cds-multi-select-item value="cloudFoundry"
+        >Option 2</cds-multi-select-item
+      >
+      <cds-multi-select-item disabled value="staging"
+        >Option 3 - a disabled item</cds-multi-select-item
+      >
+      <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
+      <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
+    </cds-multi-select>
+  </body>
+</html>

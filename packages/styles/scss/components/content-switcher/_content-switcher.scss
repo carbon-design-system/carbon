@@ -72,7 +72,9 @@
     &:focus {
       z-index: 3;
       border-color: $focus;
-      box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $focus-inset;
+      box-shadow:
+        inset 0 0 0 2px $focus,
+        inset 0 0 0 3px $focus-inset;
     }
 
     &:focus::after {
@@ -231,7 +233,7 @@
   }
 
   // Windows HCM fix
-  // stylelint-disable-next-line no-duplicate-selectors
+
   .#{$prefix}--content-switcher-btn:focus {
     @include high-contrast-mode('focus');
   }
@@ -277,8 +279,7 @@
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn {
     // accounts for the larger icon sizes to keep the switcher at 48px
-    padding-inline-end: convert.to-rem(14px);
-    padding-inline-start: convert.to-rem(14px);
+    padding-inline: convert.to-rem(14px) convert.to-rem(14px);
   }
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn svg {
