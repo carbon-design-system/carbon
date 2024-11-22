@@ -512,4 +512,51 @@ describe('TreeView', () => {
     expect(node1).toHaveClass(`${prefix}--tree-node--selected`);
     expect(node2).toHaveClass(`${prefix}--tree-node--selected`);
   });
+  it('should select nodes correctly when Home key is used with multiselect and shiftKey+ctrlKey', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <TreeView multiselect label="Tree View">
+        <TreeNode data-testid="Node 1" label="Node 1" />
+        <TreeNode data-testid="Node 2" label="Node 2" />
+        <TreeNode data-testid="Node 3" label="Node 3" />
+      </TreeView>
+    );
+
+    const node1 = screen.getByTestId('Node 1');
+    const node2 = screen.getByTestId('Node 2');
+    const node3 = screen.getByTestId('Node 3');
+
+    await user.click(node2);
+    expect(node2).toHaveFocus();
+
+    await user.keyboard('[ControlLeft>][ShiftLeft>][Home]');
+
+    expect(node1).toHaveClass(`${prefix}--tree-node--selected`);
+    expect(node2).toHaveClass(`${prefix}--tree-node--selected`);
+    expect(node3).not.toHaveClass(`${prefix}--tree-node--selected`);
+  });
+
+  it('should select multiple nodes when Home key is pressed with Shift and Ctrl keys', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <TreeView multiselect label="Tree View">
+        <TreeNode data-testid="Node 1" label="Node 1" />
+        <TreeNode data-testid="Node 2" label="Node 2" />
+        <TreeNode data-testid="Node 3" label="Node 3" />
+      </TreeView>
+    );
+
+    const node1 = screen.getByTestId('Node 1');
+    const node2 = screen.getByTestId('Node 2');
+    const node3 = screen.getByTestId('Node 3');
+
+    await user.click(node2);
+    expect(node2).toHaveFocus();
+    await user.keyboard('[ControlLeft>][ShiftLeft>][Home]');
+    expect(node1).toHaveClass(`${prefix}--tree-node--selected`);
+    expect(node2).toHaveClass(`${prefix}--tree-node--selected`);
+    expect(node3).not.toHaveClass(`${prefix}--tree-node--selected`);
+  });
 });
