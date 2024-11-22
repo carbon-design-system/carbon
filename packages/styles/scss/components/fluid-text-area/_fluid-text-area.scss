@@ -220,6 +220,15 @@
 
   // AILabel styles
   .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--decorator:has(
+      .#{$prefix}--text-area__inner-wrapper--decorator .#{$prefix}--ai-label
+    ):not(
+      :has(
+          .#{$prefix}--text-area__inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
+  .#{$prefix}--text-area--fluid
     .#{$prefix}--text-area__wrapper--slug:has(.#{$prefix}--ai-label):not(
       :has(.#{$prefix}--ai-label--revert)
     ),
@@ -230,6 +239,16 @@
     @include ai-gradient;
   }
 
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > *,
   .#{$prefix}--text-area--fluid
     .#{$prefix}--text-area__wrapper--slug
     .#{$prefix}--text-area--invalid
@@ -250,6 +269,9 @@
   }
 
   // Remove ai border when invalid
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area--invalid,
   .#{$prefix}--text-area--fluid
     .#{$prefix}--text-area__wrapper--slug
     .#{$prefix}--text-area--invalid {

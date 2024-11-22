@@ -16,6 +16,7 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import Button from '../Button';
+import { Information } from '@carbon/icons-react';
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -391,7 +392,7 @@ export const _withAILabel = {
         <ComposedModal
           open={open}
           onClose={() => setOpen(false)}
-          slug={aiLabel}>
+          decorator={aiLabel}>
           <ModalHeader label="Account resources" title="Add a custom domain" />
           <ModalBody>
             <p style={{ marginBottom: '1rem' }}>
