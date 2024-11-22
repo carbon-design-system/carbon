@@ -285,12 +285,24 @@ describe('ComboBox', () => {
   });
 
   it('should respect slug prop', async () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(
       <ComboBox {...mockProps} slug={<AILabel />} />
     );
     await waitForPosition();
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--slug`
+    );
+    spy.mockRestore();
+  });
+
+  it('should respect decorator prop', async () => {
+    const { container } = render(
+      <ComboBox {...mockProps} decorator={<AILabel />} />
+    );
+    await waitForPosition();
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--list-box__wrapper--decorator`
     );
   });
 
