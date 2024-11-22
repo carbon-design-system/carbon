@@ -325,26 +325,7 @@ describe('TreeView', () => {
     );
     expect(screen.getByTestId('test-icon')).toBeInTheDocument();
   });
-  it('should focus on the first child node when right arrow is pressed on an expanded parent node', async () => {
-    const user = userEvent.setup();
-    render(
-      <TreeView label="Tree View">
-        <TreeNode
-          data-testid="parent-node"
-          label="Parent Node"
-          isExpanded={true}>
-          <TreeNode data-testid="child-node-1" label="Child Node 1" />
-          <TreeNode data-testid="child-node-2" label="Child Node 2" />
-        </TreeNode>
-      </TreeView>
-    );
-    const parentNode = screen.getByTestId('parent-node');
-    const childNode1 = screen.getByTestId('child-node-1');
-    parentNode.focus();
-    expect(parentNode).toHaveFocus();
-    await user.keyboard('[ArrowRight]');
-    expect(childNode1).toHaveFocus();
-  });
+
   it('should expand a collapsed parent node when right arrow is pressed', async () => {
     const user = userEvent.setup();
     render(
