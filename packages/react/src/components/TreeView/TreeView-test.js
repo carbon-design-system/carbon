@@ -419,4 +419,76 @@ describe('TreeView', () => {
 
     expect(screen.getByLabelText('My Tree View')).toBeInTheDocument();
   });
+
+  it('should collapse an expanded parent node when left arrow is pressed', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <TreeView label="Tree View">
+        <TreeNode
+          data-testid="parent-node"
+          label="Parent Node"
+          isExpanded={true}>
+          <TreeNode data-testid="child-node" label="Child Node" />
+        </TreeNode>
+      </TreeView>
+    );
+
+    const parentNode = screen.getByTestId('parent-node');
+
+    // Initially, the parent node should be expanded
+    expect(parentNode).toHaveAttribute('aria-expanded', 'true');
+
+    // Focus on the parent node
+    parentNode.focus();
+    await user.keyboard('[ArrowLeft]');
+
+    // The parent node should now be collapsed
+    expect(parentNode).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('should deselect a node when clicked again in multiselect mode', async () => {
+    const user = userEvent.setup();
+    render(
+      <TreeView multiselect label="Tree">
+        <TreeNode data-testid="Node 1" label="Node 1" />
+        <TreeNode data-testid="Node 2" label="Node 2" />
+      </TreeView>
+    );
+
+    const lists = screen.getAllByRole('treeitem');
+    await user.keyboard('[ControlLeft>]');
+    await user.click(lists[0]);
+    await user.click(lists[1]);
+
+    expect(lists[0]).toHaveAttribute('aria-selected', 'true');
+    expect(lists[1]).toHaveAttribute('aria-selected', 'true');
+
+    // Deselect Node 1
+    await user.keyboard('[ControlLeft>]');
+    await user.click(lists[0]);
+
+    expect(lists[0]).toHaveAttribute('aria-selected', 'false');
+    expect(lists[1]).toHaveAttribute('aria-selected', 'true');
+  });
+  it('should not allow interaction with disabled nodes', async () => {
+    const user = userEvent.setup();
+    render(
+      <TreeView label="Tree View">
+        <TreeNode data-testid="Node 1" label="Node 1" />
+        <TreeNode data-testid="Node 2" label="Node 2" disabled={true} />
+      </TreeView>
+    );
+
+    const node1 = screen.getByTestId('Node 1');
+    const node2 = screen.getByTestId('Node 2');
+
+    // The disabled node should not be focusable
+    await user.tab();
+    expect(node1).toHaveFocus();
+
+    // The disabled node should also not be clickable
+    fireEvent.click(node2);
+    expect(node2).not.toHaveClass(`${prefix}--tree-node--selected`);
+  });
 });
