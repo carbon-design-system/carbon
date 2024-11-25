@@ -11,26 +11,51 @@ import figma from '@figma/code-connect';
 
 // Inline
 figma.connect(
+  CodeSnippet,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4266-104904&t=cMvnFTYLPEhzhIpj-4',
   {
-    example: () => {
-      return <div>{/* To view CodeSnippet code, view inner component */}</div>;
+    variant: { Tooltip: 'True' },
+    props: {
+      codeSnippet: figma.nestedProps('Code snippet', {
+        text: figma.textContent('node -v'),
+      }),
+      tooltip: figma.nestedProps('Tooltip content', {
+        text: figma.textContent('Tooltip text'),
+      }),
+      disabled: figma.enum('State', {
+        Disabled: true,
+      }),
+    },
+    example: ({ codeSnippet, tooltip, disabled }) => {
+      return (
+        <CodeSnippet type="inline" feedback={tooltip.text} disabled={disabled}>
+          {codeSnippet.text}
+        </CodeSnippet>
+      );
     },
   }
 );
 
-//Inline item
 figma.connect(
   CodeSnippet,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4266-104960&t=cMvnFTYLPEhzhIpj-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4266-104904&t=cMvnFTYLPEhzhIpj-4',
   {
+    variant: { Tooltip: 'False' },
     props: {
-      children: figma.textContent('node -v'),
+      codeSnippet: figma.nestedProps('Code snippet', {
+        text: figma.textContent('node -v'),
+      }),
+      disabled: figma.enum('State', {
+        Disabled: true,
+      }),
     },
-    example: ({ children }) => {
+    example: ({ codeSnippet, disabled }) => {
       return (
-        <CodeSnippet type="inline" feedback="Copied to clipboard">
-          {children}
+        <CodeSnippet
+          type="inline"
+          feedback="Copied to clipboard"
+          disabled={disabled}>
+          {codeSnippet.text}
         </CodeSnippet>
       );
     },
@@ -44,10 +69,16 @@ figma.connect(
   {
     props: {
       children: figma.textContent('$ npm install --save carbon-components'),
+      disabled: figma.enum('State', {
+        Disabled: true,
+      }),
     },
-    example: ({ children }) => {
+    example: ({ children, disabled }) => {
       return (
-        <CodeSnippet type="single" feedback="Copied to clipboard">
+        <CodeSnippet
+          type="single"
+          feedback="Copied to clipboard"
+          disabled={disabled}>
           {children}
         </CodeSnippet>
       );
@@ -67,12 +98,16 @@ figma.connect(
         false: true,
       }),
       expanded: figma.boolean('Expanded'),
+      disabled: figma.enum('State', {
+        Disabled: true,
+      }),
     },
-    example: ({ hideCopyButton }) => (
+    example: ({ hideCopyButton, disabled }) => (
       <CodeSnippet
         type="multi"
         feedback="Copied to clipboard"
-        hideCopyButton={hideCopyButton}>
+        hideCopyButton={hideCopyButton}
+        disabled={disabled}>
         Code sample here
       </CodeSnippet>
     ),

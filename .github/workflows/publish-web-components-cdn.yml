@@ -1,0 +1,87 @@
+name: Publish Web Components CDN artifacts to Cloud Object Storage
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      # Matches tags that have the shape `vX.Y.Z` or `vX.Y.Z-rc.X` Reference:
+      # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requesttagsbranches
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'
+      - '!v10*'
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publish-cdn:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: '0'
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'yarn'
+      - name: Install dependencies
+        run: |
+          yarn install
+          yarn build
+      - name: Check release type
+        if: contains(github.ref_name, '-rc.')
+        run: echo "PRE_RELEASE=true" >> $GITHUB_ENV
+      - name: Get version of web components from package.json
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+        with:
+          path: packages/web-components
+
+      # If tag is a release candidate, upload the CDN artifacts to the `next` tag folder
+      # ie. https://1.www.s81c.com/common/carbon/web-components/tag/v2/next/breadcrumb.min.js
+      - name: Upload to COS under the `next` folder
+        if: ${{ env.PRE_RELEASE }}
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks
+        env:
+          AWS_S3_BUCKET: ${{ secrets.COMMON_COS_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.COMMON_COS_REGION }}
+          AWS_S3_ENDPOINT: https://${{ secrets.COMMON_COS_ENDPOINT }}
+          SOURCE_DIR: 'packages/web-components/dist'
+          DEST_DIR: 'common/carbon/web-components/tag/v2/next'
+
+      # If tag is a full release, upload the CDN artifacts to the `latest` tag folder
+      # ie. https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/breadcrumb.min.js
+      - name: Upload to COS under the `latest` folder
+        if: ${{ !env.PRE_RELEASE }}
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks
+        env:
+          AWS_S3_BUCKET: ${{ secrets.COMMON_COS_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.COMMON_COS_REGION }}
+          AWS_S3_ENDPOINT: https://${{ secrets.COMMON_COS_ENDPOINT }}
+          SOURCE_DIR: 'packages/web-components/dist'
+          DEST_DIR: 'common/carbon/web-components/tag/v2/latest'
+
+      # Upload the CDN artifacts to versioned folder
+      # ie. https://1.www.s81c.com/common/carbon/web-components/version/v2.12.0/breadcrumb.min.js
+      - name: Upload to COS under the versioned folder
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks
+        env:
+          AWS_S3_BUCKET: ${{ secrets.COMMON_COS_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.COMMON_COS_REGION }}
+          AWS_S3_ENDPOINT: https://${{ secrets.COMMON_COS_ENDPOINT }}
+          SOURCE_DIR: 'packages/web-components/dist'
+          DEST_DIR: 'common/carbon/web-components/version/v${{steps.package-version.outputs.current-version}}'

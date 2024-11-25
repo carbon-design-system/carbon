@@ -50,7 +50,7 @@ const ExampleDropContainerApp = (props) => {
         iconDescription: 'Delete file',
         invalid: true,
         errorSubject: 'File size exceeds limit',
-        errorBody: '500kb max file size. Select a new file and try again.',
+        errorBody: '500 KB max file size. Select a new file and try again.',
       };
       setFile(updatedFile);
       return;
@@ -150,7 +150,7 @@ const ExampleDropContainerApp = (props) => {
             name={file.name}
             filesize={file.filesize}
             errorSubject="File size exceeds limit"
-            errorBody="500kb max file size. Select a new file and try again."
+            errorBody="500 KB max file size. Select a new file and try again."
             // eslint-disable-next-line react/prop-types
             size={props.size}
             status={file.status}

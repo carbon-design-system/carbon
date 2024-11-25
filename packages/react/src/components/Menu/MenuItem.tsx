@@ -368,10 +368,6 @@ export const MenuItemSelectable = forwardRef<
 
   function handleClick(e) {
     setChecked(!checked);
-
-    if (onChange) {
-      onChange(e);
-    }
   }
 
   useEffect(() => {
@@ -540,10 +536,6 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
 
   function handleClick(item, e) {
     setSelection(item);
-
-    if (onChange) {
-      onChange(e);
-    }
   }
 
   useEffect(() => {

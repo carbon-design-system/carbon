@@ -1,0 +1,43 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>@carbon/ibmdotcom-web-components example</title>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/themes.css"
+    />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-form-item:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/text-input.min.js"
+    ></script>
+  </head>
+  <body class="cds-theme-zone-white">
+    <cds-form-item>
+      <cds-text-input
+        label="Text input label"
+        helper-text="Optional help text"
+        invalid-text="Error message"
+      >
+      </cds-text-input>
+    </cds-form-item>
+  </body>
+</html>

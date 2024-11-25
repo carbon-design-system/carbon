@@ -40,7 +40,8 @@
     cursor: pointer;
     inline-size: convert.to-rem(40px);
     min-block-size: convert.to-rem(40px);
-    transition: outline $duration-fast-02 motion(entrance, productive),
+    transition:
+      outline $duration-fast-02 motion(entrance, productive),
       background-color $duration-fast-02 motion(entrance, productive);
 
     &:focus {
@@ -202,14 +203,12 @@
 
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after,
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
-    inset-inline-end: 0;
-    inset-inline-start: auto;
+    inset-inline: auto 0;
   }
 
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after,
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
-    inset-block-end: 0;
-    inset-block-start: auto;
+    inset-block: auto 0;
   }
 
   .#{$prefix}--overflow-menu-options--open {
@@ -274,7 +273,8 @@
     inline-size: 100%;
     max-inline-size: 11.25rem;
     text-align: start;
-    transition: outline $duration-fast-02 motion(entrance, productive),
+    transition:
+      outline $duration-fast-02 motion(entrance, productive),
       background-color $duration-fast-02 motion(entrance, productive),
       color $duration-fast-02 motion(entrance, productive);
 

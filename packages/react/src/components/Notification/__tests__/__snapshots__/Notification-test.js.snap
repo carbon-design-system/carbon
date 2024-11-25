@@ -1,0 +1,226 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActionableNotification should render 1`] = `
+<DocumentFragment>
+  <div
+    aria-labelledby="actionable-notification-subtitle-:r1:"
+    class="cds--actionable-notification cds--actionable-notification--toast cds--actionable-notification--error"
+    role="alertdialog"
+  >
+    <span
+      class="cds--visually-hidden"
+      role="link"
+      tabindex="0"
+    >
+      Focus sentinel
+    </span>
+    <div
+      class="cds--actionable-notification__details"
+    >
+      <svg
+        aria-hidden="true"
+        class="cds--toast-notification__icon"
+        fill="currentColor"
+        focusable="false"
+        height="20"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 20 20"
+        width="20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10,1c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S15,1,10,1z M13.5,14.5l-8-8l1-1l8,8L13.5,14.5z"
+        />
+        <path
+          d="M13.5,14.5l-8-8l1-1l8,8L13.5,14.5z"
+          data-icon-path="inner-path"
+          opacity="0"
+        />
+        <title>
+          error icon
+        </title>
+      </svg>
+      <div
+        class="cds--actionable-notification__text-wrapper"
+      >
+        <div
+          class="cds--actionable-notification__content"
+        />
+      </div>
+    </div>
+    <div
+      class="cds--actionable-notification__button-wrapper"
+    >
+      <button
+        class="cds--actionable-notification__action-button cds--btn cds--btn--sm cds--layout--size-sm cds--btn--tertiary"
+        type="button"
+      >
+        My custom action
+      </button>
+      <button
+        aria-label="close notification"
+        class="cds--actionable-notification__close-button"
+        title="close notification"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="cds--actionable-notification__close-icon"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 32 32"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+          />
+        </svg>
+      </button>
+    </div>
+    <span
+      class="cds--visually-hidden"
+      role="link"
+      tabindex="0"
+    >
+      Focus sentinel
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`InlineNotification should render 1`] = `
+<DocumentFragment>
+  <div
+    class="cds--inline-notification cds--inline-notification--error"
+    role="status"
+  >
+    <div
+      class="cds--inline-notification__details"
+    >
+      <svg
+        aria-hidden="true"
+        class="cds--inline-notification__icon"
+        fill="currentColor"
+        focusable="false"
+        height="20"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 20 20"
+        width="20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10,1c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S15,1,10,1z M13.5,14.5l-8-8l1-1l8,8L13.5,14.5z"
+        />
+        <path
+          d="M13.5,14.5l-8-8l1-1l8,8L13.5,14.5z"
+          data-icon-path="inner-path"
+          opacity="0"
+        />
+        <title>
+          error icon
+        </title>
+      </svg>
+      <div
+        class="cds--inline-notification__text-wrapper"
+      >
+        <div
+          class="cds--inline-notification__title"
+          dir="auto"
+        >
+          Notification title
+        </div>
+      </div>
+    </div>
+    <button
+      aria-label="close notification"
+      class="cds--inline-notification__close-button"
+      title="close notification"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="cds--inline-notification__close-icon"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 32 32"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+        />
+      </svg>
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ToastNotification should render 1`] = `
+<DocumentFragment>
+  <div
+    class="cds--toast-notification cds--toast-notification--error"
+    role="status"
+  >
+    <svg
+      aria-hidden="true"
+      class="cds--toast-notification__icon"
+      fill="currentColor"
+      focusable="false"
+      height="20"
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 20 20"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10,1c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S15,1,10,1z M13.5,14.5l-8-8l1-1l8,8L13.5,14.5z"
+      />
+      <path
+        d="M13.5,14.5l-8-8l1-1l8,8L13.5,14.5z"
+        data-icon-path="inner-path"
+        opacity="0"
+      />
+      <title>
+        error icon
+      </title>
+    </svg>
+    <div
+      class="cds--toast-notification__details"
+    >
+      <div
+        class="cds--toast-notification__title"
+        dir="auto"
+      >
+        Notification title
+      </div>
+    </div>
+    <button
+      aria-label="close notification"
+      class="cds--toast-notification__close-button"
+      title="close notification"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="cds--toast-notification__close-icon"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 32 32"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+        />
+      </svg>
+    </button>
+  </div>
+</DocumentFragment>
+`;

@@ -145,6 +145,7 @@
   }
 
   .#{$prefix}--toast-notification__details {
+    margin-block-end: $spacing-05;
     margin-inline-end: $spacing-05;
   }
 
@@ -164,7 +165,9 @@
     margin-inline-start: auto;
     min-block-size: convert.to-rem(48px);
     min-inline-size: convert.to-rem(48px);
-    transition: outline $transition-base, background-color $transition-base;
+    transition:
+      outline $transition-base,
+      background-color $transition-base;
 
     &:focus {
       outline: 2px solid $focus-inverse;
@@ -212,7 +215,6 @@
     @include type-style('body-compact-01');
 
     color: $text-inverse;
-    margin-block-end: $spacing-05;
     padding-block-start: $spacing-03;
   }
 
@@ -222,7 +224,7 @@
   }
 
   // Windows HCM fix
-  /* stylelint-disable */
+
   .#{$prefix}--toast-notification {
     @include high-contrast-mode('outline');
   }
@@ -235,5 +237,4 @@
   .#{$prefix}--toast-notification .#{$prefix}--toast-notification__icon {
     @include high-contrast-mode('icon-fill');
   }
-  /* stylelint-enable */
 }

@@ -7,12 +7,12 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { ElementType, ForwardedRef, HTMLAttributes, Ref } from 'react';
+import React, { ElementType, ForwardedRef, Ref, ComponentProps } from 'react';
 import SideNavLinkText from './SideNavLinkText';
 import Link from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface SideNavMenuItemProps extends HTMLAttributes<HTMLElement> {
+interface SideNavMenuItemProps extends ComponentProps<typeof Link> {
   /**
    * Specify the children to be rendered inside of the `SideNavMenuItem`
    */
@@ -34,6 +34,11 @@ interface SideNavMenuItemProps extends HTMLAttributes<HTMLElement> {
    * Optionally provide an href for the underlying li`
    */
   href?: string;
+
+  /**
+   * Optional component to render instead of default Link
+   */
+  as?: ElementType;
 }
 
 const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
@@ -42,8 +47,8 @@ const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
     const {
       children,
       className: customClassName,
+      as: Component = Link,
       isActive,
-      href,
       ...rest
     } = props;
     const className = cx(`${prefix}--side-nav__menu-item`, customClassName);
@@ -54,13 +59,12 @@ const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
 
     return (
       <li className={className}>
-        <Link
-          href={href}
+        <Component
           {...rest}
           className={linkClassName}
           ref={ref as Ref<ElementType>}>
           <SideNavLinkText>{children}</SideNavLinkText>
-        </Link>
+        </Component>
       </li>
     );
   }
@@ -89,6 +93,11 @@ SideNavMenuItem.propTypes = {
    * `aria-current="page"`, as well.
    */
   isActive: PropTypes.bool,
+
+  /**
+   * Optional component to render instead of default Link
+   */
+  as: PropTypes.elementType,
 };
 
 export default SideNavMenuItem;

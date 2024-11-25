@@ -85,28 +85,31 @@ export interface FluidTextInputProps {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: React.ReactNode;
+
+  /**
+   * Whether or not the component is readonly
+   */
+  readOnly?: boolean;
 }
 
-const FluidTextInput: React.FC<FluidTextInputProps> = ({
-  className,
-  isPassword,
-  ...other
-}) => {
-  const prefix = usePrefix();
-  const classNames = classnames(className, {
-    [`${prefix}--text-input--fluid`]: !isPassword,
-  });
+const FluidTextInput = React.forwardRef<HTMLInputElement, FluidTextInputProps>(
+  function FluidTextInput({ className, isPassword, ...other }, ref) {
+    const prefix = usePrefix();
+    const classNames = classnames(className, {
+      [`${prefix}--text-input--fluid`]: !isPassword,
+    });
 
-  return (
-    <FormContext.Provider value={{ isFluid: true }}>
-      {isPassword ? (
-        <PasswordInput className={classNames} {...other} />
-      ) : (
-        <TextInput className={classNames} {...other} />
-      )}
-    </FormContext.Provider>
-  );
-};
+    return (
+      <FormContext.Provider value={{ isFluid: true }}>
+        {isPassword ? (
+          <PasswordInput className={classNames} ref={ref} {...other} />
+        ) : (
+          <TextInput className={classNames} ref={ref} {...other} />
+        )}
+      </FormContext.Provider>
+    );
+  }
+);
 
 FluidTextInput.propTypes = {
   /**
@@ -181,6 +184,11 @@ FluidTextInput.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Whether or not the component is readonly
+   */
+  readOnly: PropTypes.bool,
 };
 
 export default FluidTextInput;

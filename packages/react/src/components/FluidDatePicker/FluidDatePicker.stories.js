@@ -113,7 +113,7 @@ export const Skeleton = () => (
 );
 
 export const Playground = (args) => {
-  const { invalid, invalidText, warn, warnText, disabled } = args;
+  const { invalid, invalidText, warn, warnText, disabled, readOnly } = args;
   return (
     <div style={{ width: '288px' }}>
       <FluidDatePicker
@@ -121,7 +121,8 @@ export const Playground = (args) => {
         invalid={invalid}
         invalidText={invalidText}
         warn={warn}
-        warnText={warnText}>
+        warnText={warnText}
+        readOnly={readOnly}>
         <FluidDatePickerInput
           placeholder="mm/dd/yyyy"
           labelText="Date Picker label"
@@ -137,7 +138,7 @@ export const Playground = (args) => {
       </FluidDatePicker>
       <br />
       <br />
-      <FluidDatePicker datePickerType="single">
+      <FluidDatePicker datePickerType="single" readOnly={readOnly}>
         <FluidDatePickerInput
           placeholder="mm/dd/yyyy"
           labelText="Date Picker label"
@@ -220,6 +221,12 @@ Playground.argTypes = {
     },
   },
   disabled: {
+    control: { type: 'boolean' },
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  readOnly: {
     control: { type: 'boolean' },
     table: {
       category: 'DatePickerInput',

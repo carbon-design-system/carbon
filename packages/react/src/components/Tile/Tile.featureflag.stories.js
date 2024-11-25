@@ -35,7 +35,7 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
 export default {
-  title: 'Experimental/Feature Flags/Tile',
+  title: 'Components/Tile/Feature Flag',
   component: Tile,
   subcomponents: {
     ClickableTile,
@@ -60,6 +60,7 @@ export default {
       </WithFeatureFlags>
     ),
   ],
+  tags: ['!autodocs'],
 };
 
 const experimentalClassname = 'experimental-tile';
@@ -299,7 +300,7 @@ export const ExpandableWithLayer = () => {
 };
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -336,39 +337,39 @@ export const _WithAILabel = {
         type: 'boolean',
       },
     },
-    slug: {
+    decorator: {
       description:
-        '**Experimental**: Provide an `AILabel` component to be rendered inside the component',
+        '**Experimental**: Provide a `decorator` component to be rendered inside the component',
     },
   },
   render: (args) => (
-    <div className="slug-selectable-tile-container slug-experimental-radio-tile-container">
+    <div className="ai-label-selectable-tile-container ai-label-experimental-radio-tile-container">
       <TileGroup
         defaultSelected="default-selected"
         legend="Radio Tile Group - Feature Flags enabled"
         name="radio tile group two"
         {...args}>
         <RadioTile
-          className="slug-radio-tile"
+          className="ai-label-radio-tile"
           id="radio-tile-4"
           value="standard"
-          slug={aiLabel}
+          decorator={aiLabel}
           {...args}>
           Option 1
         </RadioTile>
         <RadioTile
-          className="slug-radio-tile"
+          className="ai-label-radio-tile"
           id="radio-tile-5"
           value="default-selected"
-          slug={aiLabel}
+          decorator={aiLabel}
           {...args}>
           Option 2
         </RadioTile>
         <RadioTile
-          className="slug-radio-tile"
+          className="ai-label-radio-tile"
           id="radio-tile-6"
           value="selected"
-          slug={aiLabel}
+          decorator={aiLabel}
           {...args}>
           Option 3
         </RadioTile>

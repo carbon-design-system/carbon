@@ -1,0 +1,65 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>@carbon/ibmdotcom-web-components example</title>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/themes.css"
+    />
+    <link rel="stylesheet" href="src/styles.scss" />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-popover:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/popover.min.js"
+    ></script>
+  </head>
+  <body class="cds-theme-zone-white">
+    <div class="mt-10 flex justify-center">
+      <cds-popover open>
+        <div class="playground-trigger">
+          <svg
+            focusable="false"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 32 32"
+          >
+            <!--?lit$666059372$-->
+            <path
+              d="M26,4H6A2,2,0,0,0,4,6V26a2,2,0,0,0,2,2H26a2,2,0,0,0,2-2V6A2,2,0,0,0,26,4ZM6,26V6H26V26Z"
+            ></path>
+          </svg>
+        </div>
+        <cds-popover-content>
+          <div class="p-3">
+            <p class="popover-title">Available storage</p>
+            <p class="popover-details">
+              This server has 150 GB of block storage remaining.
+            </p>
+          </div>
+        </cds-popover-content>
+      </cds-popover>
+    </div>
+  </body>
+</html>

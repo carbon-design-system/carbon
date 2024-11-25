@@ -126,3 +126,11 @@ Playground.args = {
   onClose: action('onClose'),
   open: true,
 };
+
+Playground.argTypes = {
+  target: {
+    table: {
+      disable: true,
+    },
+  },
+};

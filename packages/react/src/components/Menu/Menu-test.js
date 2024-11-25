@@ -254,4 +254,57 @@ describe('MenuItem', () => {
       spy.mockRestore();
     });
   });
+
+  it('should call MenuItemRadioGroup onChange once', async () => {
+    const onChange = jest.fn();
+
+    render(
+      <Menu open label="Menu">
+        <MenuItem label="Menu">
+          <MenuItemRadioGroup
+            label="MenuItemRadioGroup"
+            items={[
+              { label: 'Item 1', value: '1' },
+              { label: 'Item 2', value: '2' },
+            ]}
+            onChange={onChange}
+            itemToString={(item) => item.label}
+          />
+        </MenuItem>
+      </Menu>
+    );
+
+    await userEvent.click(screen.getByTitle('Menu'));
+    await userEvent.click(screen.getByTitle('Item 1'));
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call MenuItemSelectable onChange once with correct value', async () => {
+    const onChange = jest.fn();
+
+    const { rerender } = render(
+      <Menu open label="Menu">
+        <MenuItemSelectable
+          label="Item 1"
+          onChange={onChange}
+          selected={false}
+        />
+      </Menu>
+    );
+
+    await userEvent.click(screen.getByTitle('Item 1'));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledWith(true);
+
+    onChange.mockClear();
+    rerender(
+      <Menu open label="Menu">
+        <MenuItemSelectable label="Item 1" onChange={onChange} selected />
+      </Menu>
+    );
+
+    await userEvent.click(screen.getByTitle('Item 1'));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledWith(false);
+  });
 });
