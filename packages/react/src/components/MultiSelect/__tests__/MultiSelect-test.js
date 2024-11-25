@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { generateGenericItem, generateItems } from '../../ListBox/test-helpers';
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 
@@ -814,6 +814,31 @@ describe('MultiSelect', () => {
       });
 
       expect(preventDefaultMock).toHaveBeenCalled();
+    }
+  });
+
+  it('should focus the element if mergedRef.current is defined', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const mergedRef = React.createRef(); // No TypeScript type annotation needed here
+
+    render(
+      <MultiSelect id="test" label={label} items={items} ref={mergedRef} />
+    );
+
+    // Wait for mergedRef to be defined (i.e., after component mounts)
+    await waitFor(() => expect(mergedRef.current).toBeDefined());
+
+    // Wrap the action of focusing inside `act()`
+    await act(async () => {
+      if (mergedRef.current) {
+        mergedRef.current.focus();
+      }
+    });
+
+    // Verify that the element is focused
+    if (mergedRef.current) {
+      expect(mergedRef.current).toHaveFocus();
     }
   });
 });
