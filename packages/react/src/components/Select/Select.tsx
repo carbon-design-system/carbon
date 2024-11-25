@@ -43,6 +43,11 @@ export interface SelectProps
   className?: string;
 
   /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `Select` component
+   */
+  decorator?: ReactNode;
+
+  /**
    * Optionally provide the default value of the `<select>`
    */
   defaultValue?: any;
@@ -118,6 +123,7 @@ export interface SelectProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
+   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
   slug?: ReactNode;
@@ -136,6 +142,7 @@ export interface SelectProps
 const Select = React.forwardRef(function Select(
   {
     className,
+    decorator,
     id,
     inline = false,
     labelText = 'Select',
@@ -176,6 +183,7 @@ const Select = React.forwardRef(function Select(
     [`${prefix}--select--fluid--invalid`]: isFluid && invalid,
     [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
     [`${prefix}--select--slug`]: slug,
+    [`${prefix}--select--decorator`]: decorator,
   });
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
@@ -246,12 +254,20 @@ const Select = React.forwardRef(function Select(
     },
   };
 
-  // Slug is always size `mini`
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'mini',
-    });
+  // AILabel always size `mini`
+  let normalizedDecorator = React.isValidElement(slug ?? decorator)
+    ? (slug ?? decorator)
+    : null;
+  if (
+    normalizedDecorator &&
+    normalizedDecorator['type']?.displayName === 'AILabel'
+  ) {
+    normalizedDecorator = React.cloneElement(
+      normalizedDecorator as React.ReactElement<any>,
+      {
+        size: 'mini',
+      }
+    );
   }
 
   const input = (() => {
@@ -308,7 +324,15 @@ const Select = React.forwardRef(function Select(
             onFocus={handleFocus}
             onBlur={handleFocus}>
             {input}
-            {normalizedSlug}
+            {slug ? (
+              normalizedDecorator
+            ) : decorator ? (
+              <div className={`${prefix}--select__inner-wrapper--decorator`}>
+                {normalizedDecorator}
+              </div>
+            ) : (
+              ''
+            )}
             {isFluid && <hr className={`${prefix}--select__divider`} />}
             {isFluid && error ? error : null}
           </div>
@@ -331,6 +355,11 @@ Select.propTypes = {
    * Specify an optional className to be applied to the node containing the label and the select box
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `Select` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Optionally provide the default value of the `<select>`
@@ -410,11 +439,10 @@ Select.propTypes = {
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
-  /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `Select` component
-   */
-  slug: PropTypes.node,
-
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
   /**
    * Specify whether the control is currently in warning state
    */
