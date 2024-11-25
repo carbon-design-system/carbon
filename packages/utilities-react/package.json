@@ -1,7 +1,7 @@
 {
   "name": "@carbon/utilities-react",
   "description": "Utilities and helpers to drive consistency across software products using the Carbon Design System with React",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -35,7 +35,6 @@
     "build": "yarn build:es & yarn build:cjs & yarn build:types",
     "watch": "yarn build:es --watch & yarn build:cjs --watch",
     "clean": "rimraf es lib",
-    "test": "echo yay && exit 0",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "peerDependencies": {
@@ -48,7 +47,7 @@
     "typescript-config-carbon": "^0.3.0"
   },
   "dependencies": {
-    "@carbon/utilities": "^0.2.0",
+    "@carbon/utilities": "^0.3.0",
     "@ibm/telemetry-js": "^1.6.1"
   }
 }

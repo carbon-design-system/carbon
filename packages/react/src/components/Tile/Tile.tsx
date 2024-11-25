@@ -17,6 +17,7 @@ import {
   ChevronDown,
   Error,
   ArrowRight,
+  AiLabel,
 } from '@carbon/icons-react';
 import Link from '../Link';
 import { keys, matches } from '../../internal/keyboard';
@@ -36,6 +37,10 @@ import { Text } from '../Text';
 export interface TileProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   className?: string;
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `Tile` component
+   */
+  decorator?: ReactNode;
   /** @deprecated */
   light?: boolean;
 
@@ -46,7 +51,8 @@ export interface TileProps extends HTMLAttributes<HTMLDivElement> {
   hasRoundedCorners?: boolean;
 
   /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
+   * @deprecated please use `decorator` instead.
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Tile` component
    */
   slug?: ReactNode;
 }
@@ -55,6 +61,7 @@ export const Tile = React.forwardRef<HTMLDivElement, TileProps>(function Tile(
   {
     children,
     className,
+    decorator,
     light = false,
     slug,
     hasRoundedCorners = false,
@@ -70,6 +77,8 @@ export const Tile = React.forwardRef<HTMLDivElement, TileProps>(function Tile(
       [`${prefix}--tile--light`]: light,
       [`${prefix}--tile--slug`]: slug,
       [`${prefix}--tile--slug-rounded`]: slug && hasRoundedCorners,
+      [`${prefix}--tile--decorator`]: decorator,
+      [`${prefix}--tile--decorator-rounded`]: decorator && hasRoundedCorners,
     },
     className
   );
@@ -77,6 +86,9 @@ export const Tile = React.forwardRef<HTMLDivElement, TileProps>(function Tile(
     <div className={tileClasses} ref={ref} {...rest}>
       {children}
       {slug}
+      {decorator && (
+        <div className={`${prefix}--tile--inner-decorator`}>{decorator}</div>
+      )}
     </div>
   );
 });
@@ -92,6 +104,11 @@ Tile.propTypes = {
    * The CSS class names.
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `Tile` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * **Experimental**: Specify if the `Tile` component should be rendered with rounded corners. Only valid
@@ -113,12 +130,21 @@ Tile.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Tile` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop for `Tile` has ' +
+      'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
+  ),
 };
 
 export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
   children?: ReactNode;
   className?: string;
+
+  /**
+   * **Experimental**: Provide a `decorator` component or set the boolean to True for an AILabel icon to be rendered inside the `ClickableTile` component
+   */
+  decorator?: boolean | ReactNode;
 
   /** @deprecated */
   light?: boolean;
@@ -165,6 +191,7 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
   rel?: string;
 
   /**
+   * @deprecated please use `decorator` instead.
    * **Experimental**: Specify if a `Slug` icon should be rendered inside the `ClickableTile`
    */
   slug?: boolean;
@@ -178,6 +205,7 @@ export const ClickableTile = React.forwardRef<
     children,
     className,
     clicked = false,
+    decorator,
     disabled,
     href,
     light,
@@ -199,6 +227,8 @@ export const ClickableTile = React.forwardRef<
       [`${prefix}--tile--light`]: light,
       [`${prefix}--tile--slug`]: slug,
       [`${prefix}--tile--slug-rounded`]: slug && hasRoundedCorners,
+      [`${prefix}--tile--decorator`]: decorator,
+      [`${prefix}--tile--decorator-rounded`]: decorator && hasRoundedCorners,
     },
     className
   );
@@ -218,24 +248,6 @@ export const ClickableTile = React.forwardRef<
     }
     onKeyDown(evt);
   }
-
-  // To Do: Replace with an an icon from `@carbon/react`
-  // since the hollow slug in `ClickableTile` is not interactive
-  const hollowSlugIcon = (
-    <svg
-      className={`${prefix}--tile--slug-icon`}
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg">
-      <rect x="0.5" y="0.5" width="23" height="23" />
-      <path
-        d="M13.2436 16H11.5996L10.9276 13.864H7.95164L7.29164 16H5.68364L8.49164 7.624H10.4596L13.2436 16ZM10.5436 12.508L9.46364 9.064H9.40364L8.33564 12.508H10.5436ZM17.9341 16H14.1301V14.728H15.2341V8.896H14.1301V7.624H17.9341V8.896H16.8181V14.728H17.9341V16Z"
-        fill="#161616"
-      />
-    </svg>
-  );
 
   const v12DefaultIcons = useFeatureFlag('enable-v12-tile-default-icons');
   if (v12DefaultIcons) {
@@ -264,12 +276,17 @@ export const ClickableTile = React.forwardRef<
       ref={ref}
       disabled={disabled}
       {...rest}>
-      {slug ? (
+      {slug || decorator ? (
         <div className={`${prefix}--tile-content`}>{children}</div>
       ) : (
         children
       )}
-      {slug && hollowSlugIcon}
+      {(slug === true || decorator === true) && (
+        <AiLabel size="24" className={`${prefix}--tile--ai-label-icon`} />
+      )}
+      {React.isValidElement(decorator) && (
+        <div className={`${prefix}--tile--inner-decorator`}>{decorator}</div>
+      )}
       {Icon && <Icon className={iconClasses} aria-hidden="true" />}
     </Link>
   );
@@ -291,6 +308,11 @@ ClickableTile.propTypes = {
    * Boolean for whether a tile has been clicked.
    */
   clicked: PropTypes.bool,
+
+  /**
+   * **Experimental**: Provide a `decorator` component or set the boolean to True for an AILabel icon to be rendered inside the `ClickableTile` component
+   */
+  decorator: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
 
   /**
    * Specify whether the ClickableTile should be disabled
@@ -343,6 +365,10 @@ ClickableTile.propTypes = {
 export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   className?: string;
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `SelectableTile` component
+   */
+  decorator?: ReactNode;
 
   /** @deprecated */
   light?: boolean;
@@ -394,6 +420,7 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
   selected?: boolean;
 
   /**
+   * @deprecated please use `decorator` instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
    */
   slug?: ReactNode;
@@ -422,6 +449,7 @@ export const SelectableTile = React.forwardRef<
   {
     children,
     className,
+    decorator,
     disabled,
     id,
     light,
@@ -454,6 +482,8 @@ export const SelectableTile = React.forwardRef<
       [`${prefix}--tile--disabled`]: disabled,
       [`${prefix}--tile--slug`]: slug,
       [`${prefix}--tile--slug-rounded`]: slug && hasRoundedCorners,
+      [`${prefix}--tile--decorator`]: decorator,
+      [`${prefix}--tile--decorator-rounded`]: decorator && hasRoundedCorners,
     },
     className
   );
@@ -462,7 +492,11 @@ export const SelectableTile = React.forwardRef<
   function handleOnClick(evt) {
     evt.preventDefault();
     evt?.persist?.();
-    if (slug && slugRef.current && slugRef.current.contains(evt.target)) {
+    if (
+      normalizedDecorator &&
+      decoratorRef.current &&
+      decoratorRef.current.contains(evt.target)
+    ) {
       return;
     }
     setIsSelected(!isSelected);
@@ -491,14 +525,22 @@ export const SelectableTile = React.forwardRef<
     setPrevSelected(selected);
   }
 
-  // Slug is always size `xs`
-  const slugRef = useRef<HTMLInputElement>(null);
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'xs',
-      ref: slugRef,
-    });
+  // AILabel is always size `xs`
+  const decoratorRef = useRef<HTMLInputElement>(null);
+  let normalizedDecorator = React.isValidElement(slug ?? decorator)
+    ? (slug ?? decorator)
+    : null;
+  if (
+    normalizedDecorator &&
+    normalizedDecorator['type']?.displayName === 'AILabel'
+  ) {
+    normalizedDecorator = React.cloneElement(
+      normalizedDecorator as React.ReactElement<any>,
+      {
+        size: 'xs',
+        ref: decoratorRef,
+      }
+    );
   }
 
   return (
@@ -523,7 +565,15 @@ export const SelectableTile = React.forwardRef<
       <Text as="label" htmlFor={id} className={`${prefix}--tile-content`}>
         {children}
       </Text>
-      {normalizedSlug}
+      {slug ? (
+        normalizedDecorator
+      ) : decorator ? (
+        <div className={`${prefix}--tile--inner-decorator`}>
+          {normalizedDecorator}
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 });
@@ -531,6 +581,10 @@ export const SelectableTile = React.forwardRef<
 SelectableTile.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `SelectableTile` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify whether the SelectableTile should be disabled
@@ -589,7 +643,11 @@ SelectableTile.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop for `SelectableTile` has ' +
+      'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the tab index of the wrapper element
@@ -614,6 +672,10 @@ SelectableTile.propTypes = {
 export interface ExpandableTileProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   className?: string;
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `ExpandableTile` component
+   */
+  decorator?: ReactNode;
 
   /** @deprecated */
   light?: boolean;
@@ -645,6 +707,7 @@ export interface ExpandableTileProps extends HTMLAttributes<HTMLDivElement> {
   onKeyUp?(event: KeyboardEvent): void;
 
   /**
+   * @deprecated please use `decorator` instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `ExpandableTile` component
    */
   slug?: ReactNode;
@@ -687,6 +750,7 @@ export const ExpandableTile = React.forwardRef<
     tabIndex = 0,
     className,
     children,
+    decorator,
     expanded = false,
     tileMaxHeight = 0, // eslint-disable-line
     tilePadding = 0, // eslint-disable-line
@@ -785,6 +849,8 @@ export const ExpandableTile = React.forwardRef<
       [`${prefix}--tile--light`]: light,
       [`${prefix}--tile--slug`]: slug,
       [`${prefix}--tile--slug-rounded`]: slug && hasRoundedCorners,
+      [`${prefix}--tile--decorator`]: decorator,
+      [`${prefix}--tile--decorator-rounded`]: decorator && hasRoundedCorners,
     },
     className
   );
@@ -826,11 +892,11 @@ export const ExpandableTile = React.forwardRef<
       !getRoleContent(belowTheFold.current) &&
       !getInteractiveContent(aboveTheFold.current) &&
       !getRoleContent(aboveTheFold.current) &&
-      !slug
+      !(slug || decorator)
     ) {
       setInteractive(false);
     }
-  }, [slug]);
+  }, [slug, decorator]);
 
   useIsomorphicEffect(() => {
     if (!tile.current) {
@@ -860,12 +926,20 @@ export const ExpandableTile = React.forwardRef<
 
   const belowTheFoldId = useId('expandable-tile-interactive');
 
-  // Slug is always size `xs`
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel') {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'xs',
-    });
+  // AILabel is always size `xs`
+  let normalizedDecorator = React.isValidElement(slug ?? decorator)
+    ? (slug ?? decorator)
+    : null;
+  if (
+    normalizedDecorator &&
+    normalizedDecorator['type']?.displayName === 'AILabel'
+  ) {
+    normalizedDecorator = React.cloneElement(
+      normalizedDecorator as React.ReactElement<any>,
+      {
+        size: 'xs',
+      }
+    );
   }
 
   return interactive ? (
@@ -875,7 +949,15 @@ export const ExpandableTile = React.forwardRef<
       className={interactiveClassNames}
       {...rest}>
       <div ref={tileContent}>
-        {normalizedSlug}
+        {slug ? (
+          normalizedDecorator
+        ) : decorator ? (
+          <div className={`${prefix}--tile--inner-decorator`}>
+            {normalizedDecorator}
+          </div>
+        ) : (
+          ''
+        )}
         <div ref={aboveTheFold} className={`${prefix}--tile-content`}>
           {childrenAsArray[0]}
         </div>
@@ -929,6 +1011,10 @@ export const ExpandableTile = React.forwardRef<
 ExpandableTile.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `ExpandableTile` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * `true` if the tile is expanded.
@@ -968,7 +1054,11 @@ ExpandableTile.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `ExpandableTile` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop for `ExpandableTile` has ' +
+      'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
+  ),
 
   /**
    * The `tabindex` attribute.
