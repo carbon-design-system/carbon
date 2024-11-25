@@ -1981,7 +1981,6 @@ Map {
         "decorator": Object {
           "type": "node",
         },
-        "slug": [Function],
       },
     },
     "TableExpandHeader": Object {
@@ -8019,7 +8018,6 @@ Map {
       "decorator": Object {
         "type": "node",
       },
-      "slug": [Function],
     },
   },
   "TableExpandHeader" => Object {
