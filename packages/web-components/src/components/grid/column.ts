@@ -12,6 +12,12 @@ import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 
+export type ColumnSpec =
+  | Number
+  | `${number}%`
+  | `span:${number} start:${number}`
+  | `span:${number}% start:${number}`;
+
 @customElement(`${prefix}-column`)
 class CDSColumn extends LitElement {
   /**
@@ -25,7 +31,16 @@ class CDSColumn extends LitElement {
    * S = Start column
    */
   @property({ reflect: true, attribute: 'sm' })
-  sm = '1';
+  sm?: ColumnSpec;
+
+  @property({ reflect: true, attribute: 'md' })
+  md?: ColumnSpec;
+
+  @property({ reflect: true, attribute: 'lg' })
+  lg?: ColumnSpec;
+
+  @property({ reflect: true, attribute: 'span' })
+  span?: ColumnSpec;
 
   createRenderRoot() {
     return this;

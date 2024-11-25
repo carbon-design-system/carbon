@@ -45,4 +45,19 @@
       }
     }
   }
+
+  @for $i from 1 through 16 {
+    :host(#{$grid-component}) ::slotted(#{$prefix}-column[span='#{$i}']) {
+      @extend .cds--col-span-#{$i};
+    }
+  }
+
+  @for $p from 1 through 4 {
+    $percent: $p * 25;
+
+    :host(#{$grid-component})
+      ::slotted(#{$prefix}-column[span='#{$percent}%']) {
+      @extend .cds--col-span-#{$percent};
+    }
+  }
 }
