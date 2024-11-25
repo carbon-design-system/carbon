@@ -947,8 +947,8 @@
     padding-inline-end: 0;
   }
 
-  tr.#{$prefix}--data-table--slug-row,
-  tr.#{$prefix}--data-table--slug-row + .#{$prefix}--expandable-row,
+  tr.#{$prefix}--data-table--ai-label-row,
+  tr.#{$prefix}--data-table--ai-label-row + .#{$prefix}--expandable-row,
   tr.#{$prefix}--data-table--decorator-row,
   tr.#{$prefix}--data-table--decorator-row + .#{$prefix}--expandable-row {
     @include ai-table-gradient();
@@ -956,37 +956,41 @@
     background-attachment: fixed;
   }
 
-  .#{$prefix}--data-table--slug-row,
+  .#{$prefix}--data-table--ai-label-row,
   .#{$prefix}--data-table--decorator-row {
     box-shadow: inset 1px 0 $ai-border-strong;
   }
 
   // Remove table cell backgrounds that are overriding gradient background on row
-  .#{$prefix}--data-table tbody tr.#{$prefix}--data-table--slug-row:hover td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row:hover
+  .#{$prefix}--data-table
+    tbody
+    tr.#{$prefix}--data-table--ai-label-row:hover
+    td,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row:hover
     + .#{$prefix}--expandable-row[data-child-row]
     td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row--hover
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row--hover
     + .#{$prefix}--expandable-row[data-child-row]:hover
     > td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row--hover > td,
-  tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row--hover
+    > td,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row
     + tr.#{$prefix}--expandable-row[data-child-row]
     > td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
     td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
     td:first-of-type,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(
       .#{$prefix}--expandable-row
     ):hover
     > td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
     + tr[data-child-row]
     > td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     > td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     > td:first-of-type,
   .#{$prefix}--data-table
     tbody
@@ -1021,13 +1025,13 @@
     background-color: transparent;
   }
 
-  .#{$prefix}--data-table tbody tr.#{$prefix}--data-table--slug-row:hover,
-  tr.#{$prefix}--data-table--slug-row:hover
+  .#{$prefix}--data-table tbody tr.#{$prefix}--data-table--ai-label-row:hover,
+  tr.#{$prefix}--data-table--ai-label-row:hover
     + .#{$prefix}--expandable-row[data-child-row],
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row--hover
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row--hover
     + .#{$prefix}--expandable-row[data-child-row]:hover,
-  tr.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--slug-row,
-  tr.#{$prefix}--data-table--selected.#{$prefix}--parent-row.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--slug-row,
+  tr.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--ai-label-row,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--parent-row.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--ai-label-row,
   .#{$prefix}--data-table tbody tr.#{$prefix}--data-table--decorator-row:hover,
   tr.#{$prefix}--data-table--decorator-row:hover
     + .#{$prefix}--expandable-row[data-child-row],
@@ -1040,9 +1044,9 @@
     background-attachment: fixed;
   }
 
-  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
-  .#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
-  tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row,
+  .#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row
     + .#{$prefix}--expandable-row,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--decorator-row,
   .#{$prefix}--data-table--selected.#{$prefix}--data-table--decorator-row,
@@ -1053,10 +1057,11 @@
     background-attachment: fixed;
   }
 
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--data-table--selected td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--data-table--selected:hover td,
-  tbody tr.#{$prefix}--data-table--slug-row:hover td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--data-table--selected td,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--data-table--selected:hover
+    td,
+  tbody tr.#{$prefix}--data-table--ai-label-row:hover td,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
     td:not(.#{$prefix}--table-expand):not(
       .#{$prefix}--table-column-checkbox
     ):not(.#{$prefix}--table-column-slug),
@@ -1071,7 +1076,7 @@
     border-block-end-color: $border-subtle;
   }
 
-  tr.#{$prefix}--expandable-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
+  tr.#{$prefix}--expandable-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row[data-parent-row]
     > td:not(.#{$prefix}--table-expand):not(
       .#{$prefix}--table-column-checkbox
     ):not(.#{$prefix}--table-column-slug),
@@ -1082,7 +1087,7 @@
     border-block-end: 1px solid $layer-selected;
   }
 
-  tr.#{$prefix}--parent-row.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row:hover
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row:hover
     td:first-of-type,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--decoratorß-row.#{$prefix}--expandable-row:hover
     td:first-of-type {
@@ -1091,19 +1096,11 @@
 
   .#{$prefix}--data-table
     thead
-    th.#{$prefix}--table-sort__header--slug
+    th.#{$prefix}--table-sort__header--ai-label
     .#{$prefix}--table-sort,
   .#{$prefix}--data-table
     thead
-    th:has(> .#{$prefix}--table-header-label--slug)
-  //    .#{$prefix}--data-table
-  //   thead
-  //   th.#{$prefix}--table-sort__header--decorator
-  //   .#{$prefix}--table-sort,
-  // .#{$prefix}--data-table
-  //   thead
-  //   th:has(> .#{$prefix}--table-header-label--decorator)
-  {
+    th:has(> .#{$prefix}--table-header-label--ai-label) {
     @include ai-table-gradient();
   }
 
@@ -1126,26 +1123,29 @@
   }
 
   // AILabel inside header styles
-  th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug,
+  th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--ai-label,
   th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--decorator {
     display: flex;
     align-items: center;
   }
 
   th
-    .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug
+    .#{$prefix}--table-header-label.#{$prefix}--table-header-label--ai-label
     .#{$prefix}--ai-label,
   th
-    .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug
+    .#{$prefix}--table-header-label.#{$prefix}--table-header-label--ai-label
     .#{$prefix}--slug,
   th
     .#{$prefix}--table-header-label.#{$prefix}--table-header-label--decorator
-    .#{$prefix}--tooltip {
+    .#{$prefix}--table-header-label--decorator-inner,
+  th
+    .#{$prefix}--table-header-label.#{$prefix}--table-header-label--ai-label
+    .#{$prefix}--table-header-label--decorator-inner {
     margin-inline-start: auto;
   }
 
-  th.#{$prefix}--table-sort__header--slug,
-  th:has(.#{$prefix}--table-header-label--slug) {
+  th.#{$prefix}--table-sort__header--ai-label,
+  th:has(.#{$prefix}--table-header-label--ai-label) {
     box-shadow: inset 0 1px $ai-border-strong;
   }
 

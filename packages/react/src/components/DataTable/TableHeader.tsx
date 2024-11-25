@@ -152,30 +152,30 @@ const TableHeader = React.forwardRef(function TableHeader(
   const prefix = usePrefix();
   const uniqueId = useId('table-sort');
 
-  // Slug is always size `mini`
-  const slugRef = useRef<HTMLInputElement>(null);
+  // AILabel is always size `mini`
+  const AILableRef = useRef<HTMLInputElement>(null);
 
-  let colHasSlug;
+  let colHasAILabel;
   let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? slug ?? decorator
+    ? (slug ?? decorator)
     : null;
   if (
     normalizedDecorator &&
     normalizedDecorator['type']?.displayName === 'AILabel'
   ) {
-    colHasSlug = true;
+    colHasAILabel = true;
     normalizedDecorator = React.cloneElement(
       normalizedDecorator as React.ReactElement<any>,
       {
         size: 'mini',
-        ref: slugRef,
+        ref: AILableRef,
       }
     );
   }
 
   const headerLabelClassNames = classNames({
     [`${prefix}--table-header-label`]: true,
-    [`${prefix}--table-header-label--slug`]: colHasSlug,
+    [`${prefix}--table-header-label--ai-label`]: colHasAILabel,
     [`${prefix}--table-header-label--decorator`]: decorator,
   });
 
@@ -191,7 +191,9 @@ const TableHeader = React.forwardRef(function TableHeader(
         {children ? (
           <div className={headerLabelClassNames}>
             {children}
-            {normalizedDecorator}
+            <div className={`${prefix}--table-header-label--decorator-inner`}>
+              {normalizedDecorator}
+            </div>
           </div>
         ) : null}
       </th>
@@ -217,12 +219,16 @@ const TableHeader = React.forwardRef(function TableHeader(
     });
 
   const headerClasses = cx(headerClassName, `${prefix}--table-sort__header`, {
-    [`${prefix}--table-sort__header--slug`]: colHasSlug,
+    [`${prefix}--table-sort__header--ai-label`]: colHasAILabel,
     [`${prefix}--table-sort__header--decorator`]: decorator,
   });
 
   const handleClick = (evt) => {
-    if (colHasSlug && slugRef.current && slugRef.current.contains(evt.target)) {
+    if (
+      colHasAILabel &&
+      AILableRef.current &&
+      AILableRef.current.contains(evt.target)
+    ) {
       return;
     } else if (onClick) {
       return onClick(evt);
@@ -253,7 +259,9 @@ const TableHeader = React.forwardRef(function TableHeader(
             size={20}
             className={`${prefix}--table-sort__icon-unsorted`}
           />
-          {normalizedDecorator}
+          <div className={`${prefix}--table-header-label--decorator-inner`}>
+            {normalizedDecorator}
+          </div>
         </span>
       </button>
     </th>

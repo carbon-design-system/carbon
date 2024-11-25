@@ -79,7 +79,7 @@
   }
 
   // Increase padding inside expandable row when only a slug OR checkbox is present in row
-  tbody:has(> tr.#{$prefix}--data-table--slug-row)
+  tbody:has(> tr.#{$prefix}--data-table--ai-label-row)
     > tr.#{$prefix}--expandable-row[data-child-row]
     td,
   tbody:has(td.#{$prefix}--table-column-checkbox)
@@ -89,7 +89,7 @@
   }
 
   // Increase padding inside expandable row when slug AND checkbox is present in row
-  tbody:has(> tr.#{$prefix}--data-table--slug-row):has(
+  tbody:has(> tr.#{$prefix}--data-table--ai-label-row):has(
       td.#{$prefix}--table-column-checkbox
     )
     > tr.#{$prefix}--expandable-row[data-child-row]
@@ -486,8 +486,8 @@
     border-block-end: 1px solid transparent;
   }
 
-  .#{$prefix}--data-table--slug-row td,
-  .#{$prefix}--data-table tr.#{$prefix}--data-table--slug-row:hover td {
+  .#{$prefix}--data-table--ai-label-row td,
+  .#{$prefix}--data-table tr.#{$prefix}--data-table--ai-label-row:hover td {
     border-block-start: 1px solid transparent;
   }
 

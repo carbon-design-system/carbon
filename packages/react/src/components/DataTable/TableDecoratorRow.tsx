@@ -18,12 +18,6 @@ export interface TableDecoratorRowProps {
   className?: string;
 
   /**
-   * @deprecated please use decorator instead.
-   * Provide a `Slug` component to be rendered inside the `TableSlugRow` component
-   */
-  slug?: ReactNode;
-
-  /**
    * **Experimental**: Provide a `decorator` component to be rendered inside the `TableDecoratorRow` component
    */
   decorator?: ReactNode;
@@ -32,7 +26,6 @@ export interface TableDecoratorRowProps {
 const TableDecoratorRow = ({
   className,
   decorator,
-  slug,
 }: TableDecoratorRowProps) => {
   const prefix = usePrefix();
   const TableDecoratorRowClasses = classNames({
@@ -41,9 +34,7 @@ const TableDecoratorRow = ({
     [`${prefix}--table-column-decorator--active`]: decorator,
   });
 
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? slug ?? decorator
-    : null;
+  let normalizedDecorator = React.isValidElement(decorator) ? decorator : null;
   if (
     normalizedDecorator &&
     normalizedDecorator['type']?.displayName === 'AILabel'
@@ -70,11 +61,6 @@ TableDecoratorRow.propTypes = {
    * **Experimental**: Provide a `decorator` component to be rendered inside the `TableDecoratorRow` component
    */
   decorator: PropTypes.node,
-
-  slug: deprecate(
-    PropTypes.node,
-    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
-  ),
 };
 
 export default TableDecoratorRow;

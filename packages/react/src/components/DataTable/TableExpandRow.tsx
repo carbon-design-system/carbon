@@ -73,8 +73,8 @@ const TableExpandRow = React.forwardRef(
   ) => {
     const prefix = usePrefix();
 
-    // We need to put the slug before the expansion arrow and all other table cells after the arrow.
-    let rowHasSlug;
+    // We need to put the AILabel and Decorator before the expansion arrow and all other table cells after the arrow.
+    let rowHasAILabel;
     const decorator = React.Children.toArray(children).map((child: any) => {
       if (
         child.type?.displayName === 'TableSlugRow' ||
@@ -84,7 +84,7 @@ const TableExpandRow = React.forwardRef(
           child.props.slug ||
           child.props.decorator?.type.displayName === 'AILabel'
         ) {
-          rowHasSlug = true;
+          rowHasAILabel = true;
         }
 
         return child;
@@ -107,7 +107,7 @@ const TableExpandRow = React.forwardRef(
         [`${prefix}--parent-row`]: true,
         [`${prefix}--expandable-row`]: isExpanded,
         [`${prefix}--data-table--selected`]: isSelected,
-        [`${prefix}--data-table--slug-row`]: rowHasSlug,
+        [`${prefix}--data-table--ai-label-row`]: rowHasAILabel,
       },
       rowClassName
     );
