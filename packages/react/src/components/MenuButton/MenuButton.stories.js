@@ -36,6 +36,7 @@ export const Default = () => (
     <MenuItem label="Third action" disabled />
   </MenuButton>
 );
+
 export const ExperimentalAutoAlign = () => (
   <div style={{ width: '5000px', height: '5000px' }}>
     <div
@@ -51,6 +52,7 @@ export const ExperimentalAutoAlign = () => (
     </div>
   </div>
 );
+
 export const WithDanger = () => (
   <MenuButton label="Actions">
     <MenuItem label="First action" />
@@ -79,6 +81,20 @@ export const WithIcons = () => (
     <MenuItem label="Asset" renderIcon={Asset} />
     <MenuItem label="User" renderIcon={User} />
     <MenuItem label="User group" renderIcon={Group} />
+  </MenuButton>
+);
+
+export const WithNestedMenu = () => (
+  <MenuButton label="Actions">
+    <MenuItem label="Save" shortcut="⌘S" />
+    <MenuItem label="Save as" shortcut="⌥⌘S" />
+    <MenuItem label="Export as">
+      <MenuItem label="PDF" />
+      <MenuItem label="JPG" />
+      <MenuItem label="PNG" />
+    </MenuItem>
+    <MenuItemDivider />
+    <MenuItem label="Delete" kind="danger" />
   </MenuButton>
 );
 
