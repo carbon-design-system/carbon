@@ -8,14 +8,14 @@
 import { createContext, KeyboardEvent, RefObject } from 'react';
 
 type ActionType = {
-  type: 'enableIcons' | 'registerItem';
+  type: 'enableIcons' | 'enableSelectableItems' | 'registerItem';
   payload: any;
 };
 
 type StateType = {
   isRoot: boolean;
-  mode: 'full' | 'basic';
   hasIcons: boolean;
+  hasSelectableItems: boolean;
   size: 'xs' | 'sm' | 'md' | 'lg' | null;
   items: any[];
   requestCloseRoot: (e: Pick<KeyboardEvent<HTMLUListElement>, 'type'>) => void;
@@ -23,8 +23,8 @@ type StateType = {
 
 const menuDefaultState: StateType = {
   isRoot: true,
-  mode: 'full',
   hasIcons: false,
+  hasSelectableItems: false,
   size: null,
   items: [],
   requestCloseRoot: () => {},
@@ -37,6 +37,11 @@ function menuReducer(state: StateType, action: ActionType) {
         ...state,
         hasIcons: true,
       };
+    case 'enableSelectableItems':
+      return {
+        ...state,
+        hasSelectableItems: true,
+      };
     case 'registerItem':
       return {
         ...state,
@@ -48,7 +53,7 @@ function menuReducer(state: StateType, action: ActionType) {
 }
 
 type DispatchFuncProps = {
-  type: 'registerItem' | 'enableIcons';
+  type: ActionType['type'];
   payload: {
     ref: RefObject<HTMLLIElement>;
     disabled: boolean;
