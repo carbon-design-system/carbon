@@ -75,8 +75,7 @@ const BreadcrumbItem: ForwardRefReturn<HTMLLIElement, BreadcrumbItemProps> =
         </li>
       );
     }
-    console.log({ ariaCurrent });
-    console.log({ isCurrentPage });
+
     if (typeof children === 'string') {
       return (
         <li className={className} ref={ref} {...rest}>
