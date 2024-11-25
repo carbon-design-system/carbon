@@ -235,7 +235,6 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           ref={refs.setFloating}
           id={id}
           label={t('carbon.combo-button.additional-actions')}
-          mode="basic"
           size={size}
           open={open}
           onClose={handleClose}>

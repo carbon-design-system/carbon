@@ -206,7 +206,6 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
           id={id}
           legacyAutoalign={false}
           label={label}
-          mode="basic"
           size={size}
           open={open}
           onClose={handleClose}
