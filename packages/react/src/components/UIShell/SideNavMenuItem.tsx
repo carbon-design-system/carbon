@@ -34,12 +34,23 @@ interface SideNavMenuItemProps extends ComponentProps<typeof Link> {
    * Optionally provide an href for the underlying li`
    */
   href?: string;
+
+  /**
+   * Optional component to render instead of default Link
+   */
+  as?: ElementType;
 }
 
 const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
   function SideNavMenuItem(props, ref: ForwardedRef<HTMLElement>) {
     const prefix = usePrefix();
-    const { children, className: customClassName, isActive, ...rest } = props;
+    const {
+      children,
+      className: customClassName,
+      as: Component = Link,
+      isActive,
+      ...rest
+    } = props;
     const className = cx(`${prefix}--side-nav__menu-item`, customClassName);
     const linkClassName = cx({
       [`${prefix}--side-nav__link`]: true,
@@ -48,9 +59,12 @@ const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
 
     return (
       <li className={className}>
-        <Link {...rest} className={linkClassName} ref={ref as Ref<ElementType>}>
+        <Component
+          {...rest}
+          className={linkClassName}
+          ref={ref as Ref<ElementType>}>
           <SideNavLinkText>{children}</SideNavLinkText>
-        </Link>
+        </Component>
       </li>
     );
   }
@@ -79,6 +93,11 @@ SideNavMenuItem.propTypes = {
    * `aria-current="page"`, as well.
    */
   isActive: PropTypes.bool,
+
+  /**
+   * Optional component to render instead of default Link
+   */
+  as: PropTypes.elementType,
 };
 
 export default SideNavMenuItem;
