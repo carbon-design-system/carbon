@@ -6,7 +6,7 @@
  */
 
 import cx from 'classnames';
-import { useCombobox, UseComboboxProps, UseComboboxActions, UseComboboxStateChangeTypes } from 'downshift';
+import { useCombobox, UseComboboxProps, UseComboboxActions } from 'downshift';
 import PropTypes from 'prop-types';
 import React, {
   useContext,
@@ -777,14 +777,14 @@ const ComboBox = forwardRef(
       },
       onStateChange: ({ type, selectedItem: newSelectedItem }) => {
         if (
-          type === UseComboboxStateChangeTypes.ItemClick &&
+          type === useCombobox.stateChangeTypes.ItemClick &&
           !isEqual(selectedItemProp, newSelectedItem)
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
         if (
-          type === UseComboboxStateChangeTypes.FunctionSelectItem ||
-          type === UseComboboxStateChangeTypes.InputKeyDownEnter
+          type === useCombobox.stateChangeTypes.FunctionSelectItem ||
+          type === useCombobox.stateChangeTypes.InputKeyDownEnter
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
