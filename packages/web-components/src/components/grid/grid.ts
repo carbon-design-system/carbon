@@ -56,7 +56,6 @@ class CDSGrid extends LitElement {
   };
 
   render() {
-    console.log(this.align);
     this.gridContext = { subgrid: true };
 
     if (this.gridContextIn?.subgrid) {
