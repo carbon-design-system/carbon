@@ -890,4 +890,21 @@ describe('MultiSelect', () => {
     fireEvent.keyDown(combobox, { key: 'Enter' });
     expect(mockPreventDefault).toHaveBeenCalled();
   });
+
+  it('should return a comma-separated string for an array of items', () => {
+    const mockItems = [{ value: 'item1' }, { value: 'item2' }];
+    const mockItemToString = jest.fn((item) => item.value);
+
+    const selectProps = {
+      stateReducer: jest.fn(),
+      isOpen: false,
+      itemToString: (filteredItems) =>
+        Array.isArray(filteredItems)
+          ? filteredItems.map((item) => mockItemToString(item)).join(', ')
+          : '',
+    };
+    const result = selectProps.itemToString(mockItems);
+    expect(result).toBe('item1, item2');
+    expect(mockItemToString).toHaveBeenCalledTimes(2);
+  });
 });
