@@ -861,4 +861,11 @@ describe('MultiSelect', () => {
       expect(mergedRef.current).toHaveFocus();
     }
   });
+
+  it('should not throw an error when slug is not defined', () => {
+    render(<MultiSelect id="test" label="Test Label" items={[]} />);
+
+    const combobox = screen.getByRole('combobox');
+    expect(combobox).toBeInTheDocument();
+  });
 });
