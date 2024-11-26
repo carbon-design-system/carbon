@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import findLast from 'lodash.findlast';
+import findLast from 'lodash-es/findLast';
 import { useEffect } from 'react';
 import {
   DOCUMENT_POSITION_BROAD_PRECEDING,

@@ -19,7 +19,7 @@ import wrapFocus, {
   wrapFocusWithoutSentinels,
   elementOrParentIsFloatingMenu,
 } from '../../internal/wrapFocus';
-import debounce from 'lodash.debounce';
+import debounce from 'lodash-es/debounce';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';

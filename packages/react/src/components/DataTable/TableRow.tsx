@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import omit from 'lodash.omit';
+import omit from 'lodash-es/omit';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
@@ -54,6 +54,10 @@ const TableRow = (props: TableRowProps) => {
     ]),
     className: className || undefined,
   };
+
+  console.log({ cleanProps });
+  console.log({ props });
+
   return <tr {...cleanProps} />;
 };
 
