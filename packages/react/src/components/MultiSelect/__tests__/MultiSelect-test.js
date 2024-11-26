@@ -907,4 +907,22 @@ describe('MultiSelect', () => {
     expect(result).toBe('item1, item2');
     expect(mockItemToString).toHaveBeenCalledTimes(2);
   });
+
+  it('should return an empty string for non-array input', () => {
+    const mockItemToString = jest.fn();
+
+    const selectProps = {
+      stateReducer: jest.fn(),
+      isOpen: false,
+      itemToString: (filteredItems) =>
+        Array.isArray(filteredItems)
+          ? filteredItems.map((item) => mockItemToString(item)).join(', ')
+          : '',
+    };
+
+    const result = selectProps.itemToString(null);
+
+    expect(result).toBe('');
+    expect(mockItemToString).not.toHaveBeenCalled();
+  });
 });
