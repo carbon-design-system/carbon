@@ -55,9 +55,6 @@ const TableRow = (props: TableRowProps) => {
     className: className || undefined,
   };
 
-  console.log({ cleanProps });
-  console.log({ props });
-
   return <tr {...cleanProps} />;
 };
 
