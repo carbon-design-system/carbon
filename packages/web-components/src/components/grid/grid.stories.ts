@@ -11,13 +11,25 @@ import { html } from 'lit';
 import './index';
 import styles from './grid-story.scss?lit';
 
+const alignments = {
+  [`Start`]: 'start',
+  [`Center`]: 'center',
+  [`End`]: 'end',
+};
+
 const defaultArgs = {
+  align: 'center',
   condensed: false,
   narrow: false,
   fullWidth: false,
 };
 
 const controls = {
+  align: {
+    control: 'radio',
+    description: 'Specify grid alignment. Default is center',
+    options: alignments,
+  },
   condensed: {
     control: 'boolean',
     description: `Collapse gutter to 1px.`,
@@ -33,19 +45,49 @@ const controls = {
 };
 
 export const Default = {
-  args: defaultArgs,
-  argTypes: controls,
   parameters: {
     percy: {
       skip: true,
     },
   },
-  render: ({ condensed, narrow, fullWidth }) =>
-    html`<cds-grid
-        class="sb-grid"
-        ?condensed=${condensed}
-        ?narrow=${narrow}
-        ?full-width=${fullWidth}>
+  render: () =>
+    html`<cds-grid class="sb-grid">
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+      </cds-grid>
+      <style>
+        ${styles}
+      </style>`,
+};
+
+export const Condensed = {
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: () =>
+    html`<cds-grid class="sb-grid" condensed>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+      </cds-grid>
+      <style>
+        ${styles}
+      </style>`,
+};
+
+export const FullWidth = {
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: () =>
+    html`<cds-grid class="sb-grid" full-width>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -129,20 +171,67 @@ export const MixedGutterModes = {
       </style>`,
 };
 
+export const Narrow = {
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: () =>
+    html`<cds-grid class="sb-grid" narrow>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+      </cds-grid>
+      <style>
+        ${styles}
+      </style>`,
+};
+
+export const GridStartEnd = {
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: () =>
+    html`<cds-grid class="sb-grid">
+        <cds-column
+          class="sb-column"
+          sm="span:1 start:4"
+          md="span:2 start:7"
+          lg="span:4 start:13"
+          >span, start</cds-column
+        >
+        <cds-column
+          class="sb-column"
+          sm="span:2 end:5"
+          md="span:4 end:9"
+          lg="span:8 end:17"
+          >span, end</cds-column
+        >
+        <cds-column
+          class="sb-column"
+          sm="start:1 end:4"
+          md="start:3 end:9"
+          lg="start:5 end:17"
+          >start, end</cds-column
+        >
+      </cds-grid>
+      <style>
+        ${styles}
+      </style>`,
+};
+
 export const Offset = {
-  args: defaultArgs,
-  argTypes: controls,
   parameters: {
     percy: {
       skip: true,
     },
   },
   render: ({ condensed, narrow, fullWidth }) =>
-    html`<cds-grid
-        class="sb-grid"
-        ?condensed=${condensed}
-        ?narrow=${narrow}
-        ?full-width=${fullWidth}>
+    html`<cds-grid class="sb-grid">
         <cds-column
           class="sb-column"
           sm="span:1 start:4"
@@ -175,14 +264,12 @@ export const Offset = {
 };
 
 export const Responsive = {
-  args: defaultArgs,
-  argTypes: controls,
   parameters: {
     percy: {
       skip: true,
     },
   },
-  render: ({ condensed, narrow, fullWidth }) =>
+  render: () =>
     html`<cds-grid class="sb-grid">
         <cds-column class="sb-column" sm="2" md="4" lg="6">
           <p>Small: Span 2 of 4</p>
@@ -217,12 +304,6 @@ export const Responsive = {
 
 export const SubGrid = {
   args: defaultArgs,
-  argTypes: controls,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: ({ condensed, narrow, fullWidth }) =>
     html`<cds-grid
         class="sb-grid"
@@ -286,6 +367,31 @@ export const SubGrid = {
           <p>Medium: Span 0 of 8</p>
           <p>Large: Span 3 of 16</p>
         </cds-column>
+      </cds-grid>
+      <style>
+        ${styles}
+      </style>`,
+};
+
+export const Playground = {
+  args: defaultArgs,
+  argTypes: controls,
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: ({ align, condensed, narrow, fullWidth }) =>
+    html`<cds-grid
+        align=${align}
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?narrow=${narrow}
+        ?full-width=${fullWidth}>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
       </cds-grid>
       <style>
         ${styles}

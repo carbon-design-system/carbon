@@ -16,13 +16,13 @@ $css-grid: #{$prefix}--css-grid;
   box-sizing: border-box; /* prevent padding leaking out */
 }
 
-// :host(#{$prefix}-grid[align='start']) [grid] {
-//   @extend .#{$css-grid}--start;
-// }
+:host(#{$prefix}-grid[align='start']) [grid] {
+  @extend .#{$css-grid}--start;
+}
 
-// :host(#{$prefix}-grid[align='end']) [grid] {
-//   @extend .#{$css-grid}--end;
-// }
+:host(#{$prefix}-grid[align='end']) [grid] {
+  @extend .#{$css-grid}--end;
+}
 
 :host(#{$prefix}-grid[condensed]) [grid] {
   @extend .#{$css-grid}--condensed;

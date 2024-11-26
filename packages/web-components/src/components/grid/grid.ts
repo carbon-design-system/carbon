@@ -14,7 +14,7 @@ import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './grid.scss?lit';
-import { GRID_ALIGNMENT, SUB_GRID_MODE } from './defs';
+import { GridAlignmentType, SUB_GRID_MODE } from './defs';
 export { GRID_ALIGNMENT } from './defs';
 
 @customElement(`${prefix}-grid`)
@@ -22,8 +22,8 @@ class CDSGrid extends LitElement {
   /**
    * Specify grid alignment. Default is center
    */
-  @property({ attribute: 'align' })
-  align = GRID_ALIGNMENT.CENTER;
+  @property({ reflect: true, attribute: 'align', type: String })
+  align?: GridAlignmentType;
 
   /**
    * Collapse the gutter to 1px. Useful for fluid layouts.
@@ -56,6 +56,7 @@ class CDSGrid extends LitElement {
   };
 
   render() {
+    console.log(this.align);
     this.gridContext = { subgrid: true };
 
     if (this.gridContextIn?.subgrid) {

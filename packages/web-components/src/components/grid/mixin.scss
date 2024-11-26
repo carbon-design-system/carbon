@@ -6,6 +6,8 @@
     sm: 4,
     md: 8,
     lg: 16,
+    xlg: 16,
+    max: 16,
   );
 
   :host(#{$grid-component}) ::slotted(#{$prefix}-column) {
@@ -23,6 +25,11 @@
       :host(#{$grid-component})
         ::slotted(#{$prefix}-column[#{$key}*='start:#{$i}']) {
         @extend .cds--#{$key}\:col-start-#{$i};
+      }
+
+      :host(#{$grid-component})
+        ::slotted(#{$prefix}-column[#{$key}*='end:#{$i + 1}']) {
+        @extend .cds--#{$key}\:col-end-#{$i + 1};
       }
 
       // span 0

@@ -18,6 +18,8 @@ export enum GRID_ALIGNMENT {
   END = 'end',
 }
 
+export type GridAlignmentType = Record<GRID_ALIGNMENT, string>;
+
 /**
  * Button type.
  */
