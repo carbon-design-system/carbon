@@ -2,6 +2,7 @@
   "name": "examples-nextjs",
   "private": true,
   "version": "0.71.0",
+  "type": "module",
   "scripts": {
     "build": "next build",
     "dev": "next dev",

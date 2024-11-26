@@ -21,8 +21,6 @@ module.exports = {
     '/packages/components/',
     '/packages/react/',
   ],
-  transformIgnorePatterns: [
-    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|?!lodash-es)$',
-  ],
+  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
   reporters: ['default', 'jest-junit'],
 };

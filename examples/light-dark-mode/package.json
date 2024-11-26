@@ -2,6 +2,7 @@
   "name": "examples-light-dark",
   "private": true,
   "version": "0.69.0",
+  "type": "module",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
