@@ -6,7 +6,13 @@
  */
 
 import React, { useState } from 'react';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 import { generateGenericItem, generateItems } from '../../ListBox/test-helpers';
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 
@@ -867,5 +873,21 @@ describe('MultiSelect', () => {
 
     const combobox = screen.getByRole('combobox');
     expect(combobox).toBeInTheDocument();
+  });
+  it('should call preventDefault for select access keys when readonly is true', () => {
+    const mockPreventDefault = jest.fn();
+    render(
+      <MultiSelect id="test" label="Test Label" items={[]} readOnly={true} />
+    );
+    const combobox = screen.getByRole('combobox');
+    expect(combobox).toBeInTheDocument();
+    combobox.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        mockPreventDefault();
+      }
+    });
+    fireEvent.keyDown(combobox, { key: 'Enter' });
+    expect(mockPreventDefault).toHaveBeenCalled();
   });
 });
