@@ -81,7 +81,11 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
     }) => {
       const enabledIndices = React.Children.toArray(children).reduce<number[]>(
         (acc, curr, i) => {
-          if (Object.keys((curr as any).props).length !== 0) {
+          if (
+            React.isValidElement(curr) &&
+            Object.keys((curr as any).props).length !== 0 &&
+            getDisplayName(curr.type) === 'SwitcherItem'
+          ) {
             acc.push(i);
           }
           return acc;
@@ -97,7 +101,11 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
             if (direction === -1) {
               return enabledIndices[enabledIndices.length - 1];
             }
-            return 0;
+            return enabledIndices[0];
+          case 0:
+            if (direction === 1) {
+              return enabledIndices[1];
+            }
           default:
             return enabledIndices[nextIndex];
         }
@@ -116,7 +124,7 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
         if (
           React.isValidElement(child) &&
           child.type &&
-          getDisplayName(child.type) === 'Switcher'
+          getDisplayName(child.type) === 'SwitcherItem'
         ) {
           return React.cloneElement(child as React.ReactElement<any>, {
             handleSwitcherItemFocus,
