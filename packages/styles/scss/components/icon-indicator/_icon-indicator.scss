@@ -27,15 +27,15 @@
     margin-inline-end: $spacing-03;
   }
 
-  .#{$prefix}--icon-indicator--md {
+  .#{$prefix}--icon-indicator--20 {
     @include type-style('body-compact-02');
   }
 
-  .#{$prefix}--icon--error {
+  .#{$prefix}--icon-indicator--error {
     fill: $status-red;
   }
 
-  .#{$prefix}--icon--caution-major {
+  .#{$prefix}--icon-indicator--caution-major {
     fill: $status-orange;
 
     path:first-of-type {
@@ -43,7 +43,7 @@
     }
   }
 
-  .#{$prefix}--icon--caution-minor {
+  .#{$prefix}--icon-indicator--caution-minor {
     fill: $status-yellow;
 
     path:first-of-type {
@@ -51,39 +51,39 @@
     }
   }
 
-  .#{$prefix}--icon--undefined {
+  .#{$prefix}--icon-indicator--undefined {
     fill: $status-purple;
   }
 
-  .#{$prefix}--icon--succeeded {
+  .#{$prefix}--icon-indicator--succeeded {
     fill: $status-green;
   }
 
-  .#{$prefix}--icon--normal {
+  .#{$prefix}--icon-indicator--normal {
     fill: $status-blue;
   }
 
-  .#{$prefix}--icon--in-progress {
+  .#{$prefix}--icon-indicator--in-progress {
     fill: $status-blue;
   }
 
-  .#{$prefix}--icon--incomplete {
+  .#{$prefix}--icon-indicator--incomplete {
     fill: $status-blue;
   }
 
-  .#{$prefix}--icon--not-started {
+  .#{$prefix}--icon-indicator--not-started {
     fill: $status-gray;
   }
 
-  .#{$prefix}--icon--pending {
+  .#{$prefix}--icon-indicator--pending {
     fill: $status-gray;
   }
 
-  .#{$prefix}--icon--unknown {
+  .#{$prefix}--icon-indicator--unknown {
     fill: $status-gray;
   }
 
-  .#{$prefix}--icon--information {
+  .#{$prefix}--icon-indicator--information {
     fill: $status-blue;
   }
 }

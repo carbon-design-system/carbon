@@ -14,54 +14,54 @@ $css--plex: true !default;
   @extend .#{$prefix}--icon-indicator;
 }
 
-:host(#{$prefix}-icon-indicator[size='md']) {
-  @extend .#{$prefix}--icon-indicator--md;
+:host(#{$prefix}-icon-indicator[size='20']) {
+  @extend .#{$prefix}--icon-indicator--20;
 }
 
 :host(#{$prefix}-icon-indicator[type='error']) svg {
-  @extend .#{$prefix}--icon--error;
+  @extend .#{$prefix}--icon-indicator--error;
 }
 
 :host(#{$prefix}-icon-indicator[type='caution-major']) svg {
-  @extend .#{$prefix}--icon--caution-major;
+  @extend .#{$prefix}--icon-indicator--caution-major;
 }
 
 :host(#{$prefix}-icon-indicator[type='caution-minor']) svg {
-  @extend .#{$prefix}--icon--caution-minor;
+  @extend .#{$prefix}--icon-indicator--caution-minor;
 }
 
 :host(#{$prefix}-icon-indicator[type='undefined']) svg {
-  @extend .#{$prefix}--icon--undefined;
+  @extend .#{$prefix}--icon-indicator--undefined;
 }
 
 :host(#{$prefix}-icon-indicator[type='succeeded']) svg {
-  @extend .#{$prefix}--icon--succeeded;
+  @extend .#{$prefix}--icon-indicator--succeeded;
 }
 
 :host(#{$prefix}-icon-indicator[type='normal']) svg {
-  @extend .#{$prefix}--icon--normal;
+  @extend .#{$prefix}--icon-indicator--normal;
 }
 
 :host(#{$prefix}-icon-indicator[type='in-progress']) svg {
-  @extend .#{$prefix}--icon--in-progress;
+  @extend .#{$prefix}--icon-indicator--in-progress;
 }
 
 :host(#{$prefix}-icon-indicator[type='incomplete']) svg {
-  @extend .#{$prefix}--icon--incomplete;
+  @extend .#{$prefix}--icon-indicator--incomplete;
 }
 
 :host(#{$prefix}-icon-indicator[type='not-started']) svg {
-  @extend .#{$prefix}--icon--not-started;
+  @extend .#{$prefix}--icon-indicator--not-started;
 }
 
 :host(#{$prefix}-icon-indicator[type='pending']) svg {
-  @extend .#{$prefix}--icon--pending;
+  @extend .#{$prefix}--icon-indicator--pending;
 }
 
 :host(#{$prefix}-icon-indicator[type='unknown']) svg {
-  @extend .#{$prefix}--icon--unknown;
+  @extend .#{$prefix}--icon-indicator--unknown;
 }
 
 :host(#{$prefix}-icon-indicator[type='information']) svg {
-  @extend .#{$prefix}--icon--information;
+  @extend .#{$prefix}--icon-indicator--information;
 }
