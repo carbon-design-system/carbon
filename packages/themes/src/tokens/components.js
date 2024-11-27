@@ -92,3 +92,18 @@ export const tag = TokenGroup.create({
     'tag-hover-warm-gray',
   ],
 });
+
+export const status = TokenGroup.create({
+  name: 'Status',
+  properties: [],
+  tokens: [
+    'status-red',
+    'status-orange',
+    'status-yellow',
+    'status-purple',
+    'status-green',
+    'status-blue',
+    'status-gray',
+    'status-accessibility-background',
+  ],
+});
