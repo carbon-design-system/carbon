@@ -13,7 +13,10 @@ import {
   ToggletipButton,
   ToggletipContent,
 } from '../Toggletip';
-import { Information } from '@carbon/icons-react';
+import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
+import { IconButton } from '../IconButton';
+import { Button } from '../Button';
+import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
 
 export default {
   title: 'Experimental/Fluid Components/unstable__FluidDropdown',
@@ -87,6 +90,51 @@ export const Condensed = () => (
       label="Choose an option"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
+    />
+  </div>
+);
+
+const aiLabel = (
+  <AILabel className="ai-label-container">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+export const withAILabel = () => (
+  <div style={{ width: '400px' }}>
+    <FluidDropdown
+      initialSelectedItem={items[2]}
+      id="default"
+      titleText="Label"
+      label="Choose an option"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      decorator={aiLabel}
     />
   </div>
 );
