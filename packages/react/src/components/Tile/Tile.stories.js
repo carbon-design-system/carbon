@@ -30,9 +30,11 @@ import {
   View,
   FolderOpen,
   Folders,
+  Information,
 } from '@carbon/icons-react';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/Tile',
@@ -48,6 +50,11 @@ export default {
   },
   argTypes: {
     light: {
+      table: {
+        disable: true,
+      },
+    },
+    slug: {
       table: {
         disable: true,
       },
@@ -313,7 +320,7 @@ export const ExpandableWithLayer = () => (
 );
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -350,15 +357,15 @@ export const withAILabel = {
         type: 'boolean',
       },
     },
-    slug: {
+    decorator: {
       description:
-        '**Experimental**: Provide an `AILabel` component to be rendered inside the component',
+        '**Experimental**: Provide a `decorator` component to be rendered inside the component',
     },
   },
   render: (args) => (
     <>
-      <div className="slug-tile-container">
-        <Tile slug={aiLabel} id="tile-1" {...args}>
+      <div className="ai-label-tile-container">
+        <Tile decorator={aiLabel} id="tile-1" {...args}>
           <h4>Title</h4>
           <p>
             Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
@@ -377,7 +384,7 @@ export const withAILabel = {
         </Tile>
         <ClickableTile
           href="https://www.carbondesignsystem.com/"
-          slug
+          decorator
           id="tile-click"
           renderIcon={ArrowRight}
           {...args}>
@@ -402,7 +409,7 @@ export const withAILabel = {
           id="expandable-tile-1"
           tileCollapsedIconText="Interact to Expand tile"
           tileExpandedIconText="Interact to Collapse tile"
-          slug={aiLabel}
+          decorator={aiLabel}
           {...args}>
           <TileAboveTheFoldContent>
             <h4>Title</h4>
@@ -431,7 +438,7 @@ export const withAILabel = {
         </ExpandableTile>
       </div>
 
-      <div className="slug-selectable-tile-container">
+      <div className="ai-label-selectable-tile-container">
         <TileGroup
           defaultSelected="default-selected"
           legend="Selectable Tile Group"
@@ -439,17 +446,17 @@ export const withAILabel = {
           {...args}>
           <div>
             <SelectableTile
-              className="slug-selectable-tile"
+              className="ai-label-selectable-tile"
               id="selectable-tile-1"
-              slug={aiLabel}
+              decorator={aiLabel}
               {...args}>
               Option 1
             </SelectableTile>
           </div>
           <div>
             <SelectableTile
-              className="slug-selectable-tile"
-              slug={aiLabel}
+              className="ai-label-selectable-tile"
+              decorator={aiLabel}
               id="selectable-tile-2"
               {...args}>
               Option 2
@@ -457,8 +464,8 @@ export const withAILabel = {
           </div>
           <div>
             <SelectableTile
-              className="slug-selectable-tile"
-              slug={aiLabel}
+              className="ai-label-selectable-tile"
+              decorator={aiLabel}
               id="selectable-tile-3"
               {...args}>
               Option 3
@@ -468,37 +475,38 @@ export const withAILabel = {
       </div>
       <br />
       <br />
-      <div className="slug-selectable-tile-container">
+      <div className="ai-label-selectable-tile-container">
         <TileGroup
           defaultSelected="default-selected"
           legend="Radio Tile Group"
           name="radio tile group"
           {...args}>
           <RadioTile
-            className="slug-radio-tile"
+            className="ai-label-radio-tile"
             id="radio-tile-1"
             value="standard"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...args}>
             Option 1
           </RadioTile>
           <RadioTile
-            className="slug-radio-tile"
+            className="ai-label-radio-tile"
             id="radio-tile-2"
             value="default-selected"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...args}>
             Option 2
           </RadioTile>
           <RadioTile
-            className="slug-radio-tile"
+            className="ai-label-radio-tile"
             id="radio-tile-3"
             value="selected"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...args}>
             Option 3
           </RadioTile>
         </TileGroup>
+        <br />
       </div>
     </>
   ),

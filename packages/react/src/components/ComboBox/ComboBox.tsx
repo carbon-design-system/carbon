@@ -34,6 +34,7 @@ import {
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/icons-react';
+import isEqual from 'react-fast-compare';
 import ListBox, {
   PropTypes as ListBoxPropTypes,
   ListBoxSize,
@@ -204,6 +205,11 @@ export interface ComboBoxProps<ItemType>
   className?: string;
 
   /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `ComboBox` component
+   */
+  decorator?: ReactNode;
+
+  /**
    * Specify the direction of the combobox dropdown. Can be either top or bottom.
    */
   direction?: 'top' | 'bottom';
@@ -321,7 +327,7 @@ export interface ComboBoxProps<ItemType>
   placeholder?: string;
 
   /**
-   * Is the ComboBox readonly?
+   * Whether or not the component is read-only
    */
   readOnly?: boolean;
 
@@ -348,6 +354,7 @@ export interface ComboBoxProps<ItemType>
   size?: ListBoxSize;
 
   /**
+   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `ComboBox` component
    */
   slug?: ReactNode;
@@ -387,6 +394,7 @@ const ComboBox = forwardRef(
       ariaLabel: deprecatedAriaLabel,
       autoAlign = false,
       className: containerClassName,
+      decorator,
       direction = 'bottom',
       disabled = false,
       downshiftActions,
@@ -509,11 +517,14 @@ const ComboBox = forwardRef(
           selectedItem: selectedItemProp,
           prevSelectedItem: prevSelectedItemProp.current,
         });
-        setInputValue(currentInputValue);
-        onChange({
-          selectedItem: selectedItemProp,
-          inputValue: currentInputValue,
-        });
+        // selectedItem has been updated externally, need to update state and call onChange
+        if (inputValue !== currentInputValue) {
+          setInputValue(currentInputValue);
+          onChange({
+            selectedItem: selectedItemProp,
+            inputValue: currentInputValue,
+          });
+        }
         prevSelectedItemProp.current = selectedItemProp;
       }
     }, [selectedItemProp]);
@@ -690,6 +701,7 @@ const ComboBox = forwardRef(
         [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
         [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
         [`${prefix}--list-box__wrapper--slug`]: slug,
+        [`${prefix}--list-box__wrapper--decorator`]: decorator,
       },
     ]);
 
@@ -701,12 +713,20 @@ const ComboBox = forwardRef(
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
 
-    // Slug is always size `mini`
-    let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'AILabel') {
-      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size: 'mini',
-      });
+    // AILabel always size `mini`
+    let normalizedDecorator = React.isValidElement(slug ?? decorator)
+      ? (slug ?? decorator)
+      : null;
+    if (
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel'
+    ) {
+      normalizedDecorator = React.cloneElement(
+        normalizedDecorator as React.ReactElement<any>,
+        {
+          size: 'mini',
+        }
+      );
     }
 
     const {
@@ -739,14 +759,7 @@ const ComboBox = forwardRef(
       onInputValueChange({ inputValue }) {
         const normalizedInput = inputValue || '';
         setInputValue(normalizedInput);
-        if (selectedItemProp && !inputValue) {
-          // ensure onChange is called when selectedItem is cleared
-          onChange({ selectedItem, inputValue: normalizedInput });
-        }
         setHighlightedIndex(indexToHighlight(normalizedInput));
-      },
-      onSelectedItemChange({ selectedItem }) {
-        onChange({ selectedItem });
       },
       onHighlightedIndexChange: ({ highlightedIndex }) => {
         if (highlightedIndex! > -1 && typeof window !== undefined) {
@@ -762,11 +775,25 @@ const ComboBox = forwardRef(
           }
         }
       },
+      onStateChange: ({ type, selectedItem: newSelectedItem }) => {
+        if (
+          type === '__item_click__' &&
+          !isEqual(selectedItemProp, newSelectedItem)
+        ) {
+          onChange({ selectedItem: newSelectedItem });
+        }
+        if (
+          type === '__function_select_item__' ||
+          type === '__input_keydown_enter__'
+        ) {
+          onChange({ selectedItem: newSelectedItem });
+        }
+      },
       initialSelectedItem: initialSelectedItem,
       inputId: id,
       stateReducer,
       isItemDisabled(item, _index) {
-        return (item as any).disabled;
+        return (item as any)?.disabled;
       },
       ...downshiftProps,
     });
@@ -1027,7 +1054,15 @@ const ComboBox = forwardRef(
               translateWithId={translateWithId}
             />
           </div>
-          {normalizedSlug}
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
           <ListBox.Menu {...menuProps}>
             {isOpen
               ? filterItems(items, itemToString, inputValue).map(
@@ -1121,6 +1156,11 @@ ComboBox.propTypes = {
    * An optional className to add to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `ComboBox` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify the direction of the combobox dropdown. Can be either top or bottom.
@@ -1272,10 +1312,10 @@ ComboBox.propTypes = {
    */
   size: ListBoxPropTypes.ListBoxSize,
 
-  /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComboBox` component
-   */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the

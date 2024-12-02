@@ -272,7 +272,7 @@ const items = [
 export const withAILabel = (args) => {
   const { revertActive, ...rest } = args;
   const aiLabel = (
-    <AILabel className="slug-container" revertActive={revertActive}>
+    <AILabel className="ai-label-container" revertActive={revertActive}>
       <AILabelContent>
         <div>
           <p className="secondary">AI Explained</p>
@@ -304,21 +304,21 @@ export const withAILabel = (args) => {
 
   return (
     <Stack gap={7} className="form-example">
-      <Form aria-label="sample form" className="slug-form">
+      <Form aria-label="sample form" className="ai-label-form">
         <Stack gap={7}>
-          <NumberInput {...numberInputProps} slug={aiLabel} {...rest} />
+          <NumberInput {...numberInputProps} decorator={aiLabel} {...rest} />
           <DatePicker datePickerType="single">
             <DatePickerInput
               placeholder="mm/dd/yyyy"
               labelText="Date Picker label"
               size="md"
               id="date-picker"
-              slug={aiLabel}
+              decorator={aiLabel}
               {...rest}
             />
           </DatePicker>
-          <TextInput {...TextInputProps} slug={aiLabel} {...rest} />
-          <TextArea {...textareaProps} slug={aiLabel} {...rest} />
+          <TextInput {...TextInputProps} decorator={aiLabel} {...rest} />
+          <TextArea {...textareaProps} decorator={aiLabel} {...rest} />
           <Dropdown
             id="default"
             titleText="Dropdown title"
@@ -327,7 +327,7 @@ export const withAILabel = (args) => {
             label="Option 1"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
           <MultiSelect
@@ -338,7 +338,7 @@ export const withAILabel = (args) => {
             items={items}
             itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
           <FilterableMultiSelect
@@ -348,7 +348,7 @@ export const withAILabel = (args) => {
             items={items}
             itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
           <ComboBox
@@ -358,14 +358,14 @@ export const withAILabel = (args) => {
             itemToString={(item) => (item ? item.text : '')}
             titleText="ComboBox title"
             helperText="Combobox helper text"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
           <Select
             id="select-1"
             labelText="Select an option"
             helperText="Optional helper text"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}>
             <SelectItem value="" text="" />
             <SelectItem
@@ -382,7 +382,7 @@ export const withAILabel = (args) => {
         </Stack>
       </Form>
 
-      <FluidForm aria-label="sample ai form" className="fluid-slug-form">
+      <FluidForm aria-label="sample ai form" className="fluid-ai-label-form">
         <div style={{ display: 'flex' }}>
           <FluidDatePicker datePickerType="single" style={{ width: '100%' }}>
             <FluidDatePickerInput
@@ -400,7 +400,7 @@ export const withAILabel = (args) => {
           <FluidNumberInput
             {...numberInputProps}
             id="fluid-number-input"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
@@ -408,7 +408,7 @@ export const withAILabel = (args) => {
           <FluidTextInput
             {...TextInputProps}
             id="fluid-text-input"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
@@ -416,7 +416,7 @@ export const withAILabel = (args) => {
           <FluidTextArea
             {...textareaProps}
             id="fluid-text-area"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
@@ -429,7 +429,7 @@ export const withAILabel = (args) => {
             label="Choose an option"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
@@ -442,7 +442,7 @@ export const withAILabel = (args) => {
             label="Choose an option"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
@@ -456,7 +456,7 @@ export const withAILabel = (args) => {
             label="Choose an option"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
@@ -471,12 +471,12 @@ export const withAILabel = (args) => {
             label="Choose an option"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
         <div style={{ display: 'flex' }}>
-          <FluidSelect slug={aiLabel} {...rest} id="select-2">
+          <FluidSelect decorator={aiLabel} {...rest} id="select-2">
             <SelectItem value="" text="" />
             <SelectItem value="option-1" text="Option 1" />
             <SelectItem value="option-2" text="Option 2" />
