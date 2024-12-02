@@ -34,7 +34,9 @@ const TableDecoratorRow = ({
     [`${prefix}--table-column-decorator--active`]: decorator,
   });
 
-  let normalizedDecorator = React.isValidElement(decorator) ? decorator : null;
+  let normalizedDecorator = React.isValidElement(decorator)
+    ? (decorator as ReactNode)
+    : null;
   if (
     normalizedDecorator &&
     normalizedDecorator['type']?.displayName === 'AILabel'
