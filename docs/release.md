@@ -89,6 +89,9 @@ release team will need to do the following:
 
 ```bash
 git checkout main
+```
+
+```bash
 git pull upstream main
 ```
 
@@ -105,6 +108,9 @@ chore(release): v11.2.0-rc.0
 
 ```bash
 git tag -a v11.2.0-rc.0 -m 'v11.2.0-rc.0'
+```
+
+```bash
 git push upstream v11.2.0-rc.0
 ```
 
@@ -139,6 +145,9 @@ this stage, the release team will do the following:
 
 ```bash
 git checkout main
+```
+
+```bash
 git pull upstream main
 ```
 
@@ -155,6 +164,9 @@ chore(release): v11.10.0
 
 ```bash
 git tag -a v11.2.0 -m 'v11.2.0'
+```
+
+```bash
 git push upstream v11.2.0
 ```
 
@@ -292,7 +304,13 @@ cases, follow these steps below to ensure a proper patch release:
 
   ```bash
   git add -A
+  ```
+
+  ```bash
   git commit -m 'chore(release): vX.Y.Z'
+  ```
+
+  ```bash
   git push --set-upstream origin release/vX.Y.Z
   ```
 
@@ -310,6 +328,9 @@ cases, follow these steps below to ensure a proper patch release:
 
     ```bash
     git tag -a vX.Y.Z -m 'vX.Y.Z'
+    ```
+
+    ```bash
     git push upstream vX.Y.Z
     ```
 
@@ -404,7 +425,13 @@ yarn lerna version patch \
 
 ```bash
 git add -A
+```
+
+```bash
 git commit -m 'chore(release): vX.Y.Z'
+```
+
+```bash
 git push --set-upstream origin release/vX.Y.Z
 ```
 
@@ -417,6 +444,9 @@ git push --set-upstream origin release/vX.Y.Z
 
 ```bash
 git checkout v10
+```
+
+```bash
 git pull upstream v10
 ```
 
@@ -436,6 +466,9 @@ chore(release): v10.59.1
 
 ```bash
 git tag -a vX.Y.Z -m 'vX.Y.Z'
+```
+
+```bash
 git push upstream vX.Y.Z
 ```
 
@@ -500,9 +533,21 @@ environment as long as you have push access to the repo.
 
 ```bash
 git checkout main
+```
+
+```bash
 git pull upstream main
+```
+
+```bash
 git checkout -b `release/vX.Y.Z`
+```
+
+```bash
 yarn install
+```
+
+```bash
 yarn build
 ```
 
@@ -514,7 +559,13 @@ yarn build
 
 ```bash
 git add .
+```
+
+```bash
 git commit -m "chore(release): vX.Y.Z"
+```
+
+```bash
 git push
 ```
 
