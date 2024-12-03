@@ -7392,6 +7392,9 @@ Map {
   },
   "SliderSkeleton" => Object {
     "propTypes": Object {
+      "ariaLabel": Object {
+        "type": "string",
+      },
       "className": Object {
         "type": "string",
       },
@@ -7400,6 +7403,9 @@ Map {
       },
       "twoHandles": Object {
         "type": "bool",
+      },
+      "unstable_ariaLabelHandleUpper": Object {
+        "type": "string",
       },
     },
   },
