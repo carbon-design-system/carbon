@@ -777,14 +777,14 @@ const ComboBox = forwardRef(
       },
       onStateChange: ({ type, selectedItem: newSelectedItem }) => {
         if (
-          type === '__item_click__' &&
+          type === useCombobox.stateChangeTypes.ItemClick &&
           !isEqual(selectedItemProp, newSelectedItem)
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
         if (
-          type === '__function_select_item__' ||
-          type === '__input_keydown_enter__'
+          type === useCombobox.stateChangeTypes.FunctionSelectItem ||
+          type === useCombobox.stateChangeTypes.InputKeyDownEnter
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
