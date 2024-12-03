@@ -5,18 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { OverflowMenu } from '../OverflowMenu';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+
+import { FeatureFlags } from '../FeatureFlags';
+import { MenuItem } from '../Menu';
 import { OverflowMenuV2 } from './';
 import React from 'react';
-import { render } from '@testing-library/react';
+import { action } from '@storybook/addon-actions';
 
-jest.mock('../OverflowMenu', () => ({
-  OverflowMenu: jest.fn(() => <div>Mocked OverflowMenu</div>),
-}));
-
-jest.mock('../FeatureFlags', () => ({
-  FeatureFlags: ({ children }) => <div>{children}</div>,
-}));
+// Mocking console.warn to track deprecation warning
+jest.spyOn(console, 'warn').mockImplementation(() => {});
 
 describe('<OverflowMenuV2 />', () => {
   let consoleWarnSpy;
@@ -30,15 +28,76 @@ describe('<OverflowMenuV2 />', () => {
     consoleWarnSpy.mockRestore();
   });
 
-  it('renders OverflowMenu wrapped in FeatureFlags', () => {
-    const { getByText } = render(<OverflowMenuV2 />);
-    expect(getByText('Mocked OverflowMenu')).toBeInTheDocument();
+  it('logs the deprecation warning when rendering OverflowMenuV2', () => {
+    const onClick = action('onClick (MenuItem)');
+
+    render(
+      <OverflowMenuV2>
+        <MenuItem label="Stop app" onClick={onClick} />
+      </OverflowMenuV2>
+    );
+
+    // Check if the deprecation warning is logged
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        '`<OverflowMenuV2>` is deprecated and will be removed in the next major version.'
+      )
+    );
   });
 
-  it('passes props to OverflowMenu', () => {
-    const props = { item1: 'value1', item2: 'value2' };
-    render(<OverflowMenuV2 {...props} />);
+  it('renders with FeatureFlags and passes the correct flag', async () => {
+    const { getByRole, findByText } = render(
+      <FeatureFlags enableV12Overflowmenu>
+        <OverflowMenuV2>
+          <MenuItem label="Stop app" />
+          <MenuItem label="Delete app" kind="danger" />
+        </OverflowMenuV2>
+      </FeatureFlags>
+    );
 
-    expect(OverflowMenu).toHaveBeenCalledWith(props, expect.anything());
+    await act(async () => {
+      const button = getByRole('button', { name: /options/i });
+      button.click();
+    });
+
+    expect(await findByText('Stop app')).toBeInTheDocument();
+    expect(await findByText('Delete app')).toBeInTheDocument();
+  });
+
+  it('passes new props to OverflowMenu and applies autoAlign', () => {
+    const { container } = render(
+      <OverflowMenuV2 autoAlign>
+        <MenuItem label="Stop app" />
+      </OverflowMenuV2>
+    );
+
+    expect(container.firstChild).toHaveClass('cds--autoalign');
+  });
+
+  it('renders OverflowMenu with MenuItem children', async () => {
+    render(
+      <FeatureFlags enableV12Overflowmenu>
+        <OverflowMenuV2>
+          <MenuItem label="Stop app" />
+          <MenuItem label="Delete app" kind="danger" />
+        </OverflowMenuV2>
+      </FeatureFlags>
+    );
+
+    const button = screen.getByRole('button', { name: /options/i });
+
+    await act(async () => {
+      fireEvent.click(button);
+    });
+
+    const stopAppMenuItem = await screen.findByRole('menuitem', {
+      name: /Stop app/i,
+    });
+    const deleteAppMenuItem = await screen.findByRole('menuitem', {
+      name: /Delete app/i,
+    });
+
+    expect(stopAppMenuItem).toBeInTheDocument();
+    expect(deleteAppMenuItem).toBeInTheDocument();
   });
 });
