@@ -347,6 +347,7 @@ cases, follow these steps below to ensure a proper patch release:
   - Do NOT do this for the <kbd>carbon-components</kbd> package.
   - You need to use the individual generatied version number for the package
     here, not the released github tag version.
+  - Ensure you log into the npm cli as `carbon-bot` to avoid auth issues
 
 - [ ] for each package (replace <kbd>carbon-components-react</kbd> with the
       package name):
@@ -601,6 +602,8 @@ package which does not contain a compiled stylesheet.
 
 To fix, re-apply the `latest` tag to `v10.x` instead of `v11.x`. Any
 non-versioned unpkg links should now resolve to `carbon-components@v10.x` again.
+
+- Ensure you log into the npm cli as `carbon-bot` to avoid auth issues.
 
 ```bash
 npm dist-tag add carbon-components@10.X.Y latest
