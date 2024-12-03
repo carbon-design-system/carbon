@@ -276,7 +276,7 @@ cases, follow these steps below to ensure a proper patch release:
 - [ ] Checkout to the tag of the release you want to publish a patch for (most
       likely the latest release tag, to find the previous release, view the
       [tag list](https://github.com/carbon-design-system/carbon/tags)).
-      `git checkout release/vX.Y.Z`
+      `git checkout vX.Y.Z`
 - [ ] Create a new release branch with the intended version to be released.
       Should be the same release that we previously checked out to incremented
       by +0.0.1 to account for a new patch version.
@@ -331,7 +331,7 @@ cases, follow these steps below to ensure a proper patch release:
     ```
 
     ```bash
-    git push upstream vX.Y.Z
+    git push upstream refs/tags/vX.Y.Z
     ```
 
 - [ ] Verify that your push triggered a release action
