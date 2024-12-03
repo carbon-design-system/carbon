@@ -151,7 +151,10 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=84336-36580&t=nJ89fkK549fgCUuf-4',
   {
     props: {
-      title: figma.string('Title text'),
+      title: figma.boolean('Title', {
+        true: figma.string('Title text'),
+        false: '',
+      }),
       subtitle: figma.string('Message text'),
       kind: figma.enum('Status', {
         Info: 'info',
