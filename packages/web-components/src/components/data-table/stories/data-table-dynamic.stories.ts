@@ -188,7 +188,7 @@ export const Default = {
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Kevin's VM Groups</cds-table-cell>
           <cds-table-cell>
-            <cds-icon-indicator type="error" label="Error"></cds-icon-indicator>
+            <cds-icon-indicator kind="error" label="Error"></cds-icon-indicator>
           </cds-table-cell>
         </cds-table-row>
         <cds-table-row selection-name="1">
@@ -199,7 +199,7 @@ export const Default = {
           <cds-table-cell>Maureen's VM Groups</cds-table-cell>
           <cds-table-cell
             ><cds-icon-indicator
-              type="succeeded"
+              kind="succeeded"
               label="Succeeded"></cds-icon-indicator
           ></cds-table-cell>
         </cds-table-row>
@@ -211,7 +211,7 @@ export const Default = {
           <cds-table-cell>Andrew's VM Groups</cds-table-cell>
           <cds-table-cell
             ><cds-icon-indicator
-              type="in-progress"
+              kind="in-progress"
               label="in-progress"></cds-icon-indicator
           ></cds-table-cell>
         </cds-table-row>
@@ -222,7 +222,7 @@ export const Default = {
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Marc's VM Groups</cds-table-cell>
           <cds-table-cell
-            ><cds-icon-indicator type="error" label="Error"></cds-icon-indicator
+            ><cds-icon-indicator kind="error" label="Error"></cds-icon-indicator
           ></cds-table-cell>
         </cds-table-row>
         <cds-table-row selection-name="4">
@@ -233,7 +233,7 @@ export const Default = {
           <cds-table-cell>Mel's VM Groups</cds-table-cell>
           <cds-table-cell
             ><cds-icon-indicator
-              type="succeeded"
+              kind="succeeded"
               label="Succeeded"></cds-icon-indicator
           ></cds-table-cell>
         </cds-table-row>
@@ -245,7 +245,7 @@ export const Default = {
           <cds-table-cell>Ronja's VM Groups</cds-table-cell>
           <cds-table-cell
             ><cds-icon-indicator
-              type="in-progress"
+              kind="in-progress"
               label="in-progress"></cds-icon-indicator
           ></cds-table-cell>
         </cds-table-row>
@@ -325,7 +325,7 @@ export const Playground = {
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Kevin's VM Groups</cds-table-cell>
           <cds-table-cell
-            ><cds-icon-indicator type="error" label="Error"></cds-icon-indicator
+            ><cds-icon-indicator kind="error" label="Error"></cds-icon-indicator
           ></cds-table-cell>
         </cds-table-row>
         <cds-table-expanded-row>
@@ -340,7 +340,7 @@ export const Playground = {
           <cds-table-cell>Maureen's VM Groups</cds-table-cell>
           <cds-table-cell
             ><cds-icon-indicator
-              type="succeeded"
+              kind="succeeded"
               label="Succeeded"></cds-icon-indicator
           ></cds-table-cell>
         </cds-table-row>
@@ -356,7 +356,7 @@ export const Playground = {
           <cds-table-cell>Andrew's VM Groups</cds-table-cell>
           <cds-table-cell
             ><cds-icon-indicator
-              type="in-progress"
+              kind="in-progress"
               label="in-progress"></cds-icon-indicator
           ></cds-table-cell>
         </cds-table-row>
@@ -371,7 +371,7 @@ export const Playground = {
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Marc's VM Groups</cds-table-cell>
           <cds-table-cell
-            ><cds-icon-indicator type="error" label="Error"></cds-icon-indicator
+            ><cds-icon-indicator kind="error" label="Error"></cds-icon-indicator
           ></cds-table-cell>
         </cds-table-row>
         <cds-table-expanded-row>
@@ -386,7 +386,7 @@ export const Playground = {
           <cds-table-cell>Mel's VM Groups</cds-table-cell>
           <cds-table-cell
             ><cds-icon-indicator
-              type="succeeded"
+              kind="succeeded"
               label="Succeeded"></cds-icon-indicator
           ></cds-table-cell>
         </cds-table-row>
@@ -402,7 +402,7 @@ export const Playground = {
           <cds-table-cell>Ronja's VM Groups</cds-table-cell>
           <cds-table-cell
             ><cds-icon-indicator
-              type="in-progress"
+              kind="in-progress"
               label="in-progress"></cds-icon-indicator
           ></cds-table-cell>
         </cds-table-row>
