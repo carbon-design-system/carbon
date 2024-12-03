@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export enum ICON_INDICATOR_TYPE {
+export enum ICON_INDICATOR_KIND {
   /**
    * Error
    */

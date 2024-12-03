@@ -175,29 +175,6 @@ $status-gray: (
   ),
 ) !default;
 
-// status-accessibility-background
-$status-accessibility-background: (
-  fallback: map.get(status.$status-accessibility-background, white-theme),
-  values: (
-    (
-      theme: themes.$white,
-      value: map.get(status.$status-accessibility-background, white-theme),
-    ),
-    (
-      theme: themes.$g10,
-      value: map.get(status.$status-accessibility-background, g-10),
-    ),
-    (
-      theme: themes.$g90,
-      value: map.get(status.$status-accessibility-background, g-90),
-    ),
-    (
-      theme: themes.$g100,
-      value: map.get(status.$status-accessibility-background, g-100),
-    ),
-  ),
-) !default;
-
 // Add to $status-tokens map
 $status-tokens: (
   status-red: $status-red,
@@ -207,7 +184,6 @@ $status-tokens: (
   status-blue: $status-blue,
   status-purple: $status-purple,
   status-gray: $status-gray,
-  status-accessibility-background: $status-accessibility-background,
 );
 
 // Generate CSS custom properties for each token
@@ -218,7 +194,3 @@ $status-green: component-tokens.get-var($status-green, 'status-green');
 $status-blue: component-tokens.get-var($status-blue, 'status-blue');
 $status-purple: component-tokens.get-var($status-purple, 'status-purple');
 $status-gray: component-tokens.get-var($status-gray, 'status-gray');
-$status-accessibility-background: component-tokens.get-var(
-  $status-accessibility-background,
-  'status-accessibility-background'
-);

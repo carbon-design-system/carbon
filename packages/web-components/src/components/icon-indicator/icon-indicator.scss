@@ -18,50 +18,50 @@ $css--plex: true !default;
   @extend .#{$prefix}--icon-indicator--20;
 }
 
-:host(#{$prefix}-icon-indicator[type='error']) svg {
+:host(#{$prefix}-icon-indicator[kind='error']) svg {
   @extend .#{$prefix}--icon-indicator--error;
 }
 
-:host(#{$prefix}-icon-indicator[type='caution-major']) svg {
+:host(#{$prefix}-icon-indicator[kind='caution-major']) svg {
   @extend .#{$prefix}--icon-indicator--caution-major;
 }
 
-:host(#{$prefix}-icon-indicator[type='caution-minor']) svg {
+:host(#{$prefix}-icon-indicator[kind='caution-minor']) svg {
   @extend .#{$prefix}--icon-indicator--caution-minor;
 }
 
-:host(#{$prefix}-icon-indicator[type='undefined']) svg {
+:host(#{$prefix}-icon-indicator[kind='undefined']) svg {
   @extend .#{$prefix}--icon-indicator--undefined;
 }
 
-:host(#{$prefix}-icon-indicator[type='succeeded']) svg {
+:host(#{$prefix}-icon-indicator[kind='succeeded']) svg {
   @extend .#{$prefix}--icon-indicator--succeeded;
 }
 
-:host(#{$prefix}-icon-indicator[type='normal']) svg {
+:host(#{$prefix}-icon-indicator[kind='normal']) svg {
   @extend .#{$prefix}--icon-indicator--normal;
 }
 
-:host(#{$prefix}-icon-indicator[type='in-progress']) svg {
+:host(#{$prefix}-icon-indicator[kind='in-progress']) svg {
   @extend .#{$prefix}--icon-indicator--in-progress;
 }
 
-:host(#{$prefix}-icon-indicator[type='incomplete']) svg {
+:host(#{$prefix}-icon-indicator[kind='incomplete']) svg {
   @extend .#{$prefix}--icon-indicator--incomplete;
 }
 
-:host(#{$prefix}-icon-indicator[type='not-started']) svg {
+:host(#{$prefix}-icon-indicator[kind='not-started']) svg {
   @extend .#{$prefix}--icon-indicator--not-started;
 }
 
-:host(#{$prefix}-icon-indicator[type='pending']) svg {
+:host(#{$prefix}-icon-indicator[kind='pending']) svg {
   @extend .#{$prefix}--icon-indicator--pending;
 }
 
-:host(#{$prefix}-icon-indicator[type='unknown']) svg {
+:host(#{$prefix}-icon-indicator[kind='unknown']) svg {
   @extend .#{$prefix}--icon-indicator--unknown;
 }
 
-:host(#{$prefix}-icon-indicator[type='information']) svg {
+:host(#{$prefix}-icon-indicator[kind='information']) svg {
   @extend .#{$prefix}--icon-indicator--information;
 }

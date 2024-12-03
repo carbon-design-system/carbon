@@ -9,9 +9,9 @@
 
 import { html } from 'lit';
 import './index';
-import { ICON_INDICATOR_TYPE } from './defs';
+import { ICON_INDICATOR_KIND } from './defs';
 
-const types = [
+const kinds = [
   'error',
   'caution-major',
   'caution-minor',
@@ -28,15 +28,15 @@ const types = [
 
 export const Default = {
   render: () => html`
-    ${types.map(
-      (type) => html`
+    ${kinds.map(
+      (kind) => html`
         <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
           <cds-icon-indicator
-            type="${type}"
-            label="${type}"></cds-icon-indicator>
+            kind="${kind}"
+            label="${kind}"></cds-icon-indicator>
           <cds-icon-indicator
-            type="${type}"
-            label="${type}"
+            kind="${kind}"
+            label="${kind}"
             size=${20}></cds-icon-indicator>
         </div>
       `
@@ -45,8 +45,8 @@ export const Default = {
 };
 
 const defaultArgs = {
-  label: 'Label',
-  type: ICON_INDICATOR_TYPE.ERROR,
+  label: 'Custom label',
+  kind: ICON_INDICATOR_KIND.ERROR,
   size: 16,
 };
 
@@ -61,25 +61,25 @@ const controls = {
     control: 'text',
     description: 'Label next to the icon.',
   },
-  type: {
+  kind: {
     control: 'select',
-    description: 'Specify the type of the Icon Indicator.',
-    options: types,
+    description: 'Specify the kind of the Icon Indicator.',
+    options: kinds,
   },
 };
 
 export const Playground = {
   argTypes: controls,
   args: defaultArgs,
-  render: ({ label, size, type }) =>
+  render: ({ label, size, kind }) =>
     html` <cds-icon-indicator
-      type="${type}"
+      kind="${kind}"
       size="${size}"
       label="${label}"></cds-icon-indicator>`,
 };
 
 const meta = {
-  title: 'Components/Icon Indicator',
+  title: 'Components/Status Indicators/Icon Indicator',
 };
 
 export default meta;

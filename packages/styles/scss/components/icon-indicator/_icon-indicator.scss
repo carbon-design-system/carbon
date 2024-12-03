@@ -9,6 +9,7 @@
 @use '../../type' as *;
 @use '../../config' as *;
 @use '../../spacing' as *;
+@use '../../colors' as *;
 @use './tokens' as *;
 
 /// icon-indicator styles
@@ -39,7 +40,7 @@
     fill: $status-orange;
 
     path:first-of-type {
-      fill: $status-accessibility-background;
+      fill: $black;
     }
   }
 
@@ -47,7 +48,7 @@
     fill: $status-yellow;
 
     path:first-of-type {
-      fill: $status-accessibility-background;
+      fill: $black;
     }
   }
 

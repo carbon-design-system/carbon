@@ -33,7 +33,7 @@ $-components: (
   button.$button-tokens,
   notification.$notification-tokens,
   tag.$tag-tokens,
-  icon-indicator.$icon-indicator-tokens
+  icon-indicator.$status-tokens
 );
 
 @each $name, $theme in $zones {

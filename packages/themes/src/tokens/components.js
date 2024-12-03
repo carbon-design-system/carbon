@@ -104,6 +104,5 @@ export const status = TokenGroup.create({
     'status-green',
     'status-blue',
     'status-gray',
-    'status-accessibility-background',
   ],
 });
