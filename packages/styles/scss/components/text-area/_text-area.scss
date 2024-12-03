@@ -40,7 +40,8 @@
 
     min-inline-size: 10rem;
     resize: vertical;
-    transition: background-color $duration-fast-01 motion(standard, productive),
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
 
