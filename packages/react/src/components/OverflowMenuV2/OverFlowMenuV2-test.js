@@ -13,9 +13,6 @@ import { OverflowMenuV2 } from './';
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// Mocking console.warn to track deprecation warning
-jest.spyOn(console, 'warn').mockImplementation(() => {});
-
 describe('<OverflowMenuV2 />', () => {
   let consoleWarnSpy;
 
@@ -45,7 +42,7 @@ describe('<OverflowMenuV2 />', () => {
     );
   });
 
-  it('renders with FeatureFlags and passes the correct flag', async () => {
+  it('should render correctly with feature flag enabled', async () => {
     const { getByRole, findByText } = render(
       <FeatureFlags enableV12Overflowmenu>
         <OverflowMenuV2>
