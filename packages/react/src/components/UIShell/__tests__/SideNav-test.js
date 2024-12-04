@@ -98,7 +98,14 @@ describe('SideNav', () => {
 
   it('should handle keyboard events like Escape', () => {
     const onToggle = jest.fn();
-    render(<SideNav aria-label="test" expanded onToggle={onToggle} />);
+    render(
+      <SideNav
+        aria-label="test"
+        expanded
+        onToggle={onToggle}
+        href="#main-content"
+      />
+    );
     const sideNav = screen.getByRole('navigation');
     fireEvent.keyDown(sideNav, { key: 'Escape', keyCode: 27 });
     expect(onToggle).toHaveBeenCalledWith(expect.anything(), false);
