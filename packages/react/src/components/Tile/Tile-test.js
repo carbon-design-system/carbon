@@ -51,7 +51,7 @@ describe('Tile', () => {
     it('should respect decorator prop', () => {
       render(<Tile decorator={<AILabel />}>Default tile</Tile>);
       expect(
-        screen.getByRole('button', { name: 'AI - Show information' })
+        screen.getByRole('button', { name: 'AI Show information' })
       ).toBeInTheDocument();
     });
     it('should respect deprecated slug prop', () => {
@@ -186,7 +186,7 @@ describe('Tile', () => {
         </SelectableTile>
       );
       const aiLabel = screen.getByRole('button', {
-        name: 'AI - Show information',
+        name: 'AI Show information',
       });
       expect(aiLabel).toBeInTheDocument();
       const tile = container.firstChild;
@@ -352,7 +352,7 @@ describe('Tile', () => {
         </ExpandableTile>
       );
       expect(
-        screen.getByRole('button', { name: 'AI - Show information' })
+        screen.getByRole('button', { name: 'AI Show information' })
       ).toBeInTheDocument();
     });
 
