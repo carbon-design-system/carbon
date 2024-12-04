@@ -61,7 +61,7 @@ describe('<OverflowMenuV2 />', () => {
     expect(await findByText('Delete app')).toBeInTheDocument();
   });
 
-  it('passes new props to OverflowMenu and applies autoAlign', () => {
+  it('should respect align prop', () => {
     const { container } = render(
       <OverflowMenuV2 autoAlign>
         <MenuItem label="Stop app" />
