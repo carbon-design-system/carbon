@@ -314,4 +314,24 @@ describe('SideNav', () => {
     expect(onToggleMock).toHaveBeenCalledWith(true, true);
     expect(sideNav).toHaveClass('cds--side-nav--expanded');
   });
+  
+  it('should focus SideNav after tabbing from headerMenuButton', () => {
+    render(
+      <>
+        <button className="cds--header__menu-toggle"></button>
+        <SideNav
+          aria-label="test"
+          expanded
+          isFixedNav={false}
+          defaultExpanded
+        />
+      </>
+    );
+    const mockHeaderMenuButton = screen.getByRole('button');
+    const sideNav = screen.getByRole('navigation');
+
+    mockHeaderMenuButton.focus();
+    fireEvent.keyDown(window, { key: 'Tab' });
+    expect(document.activeElement).toBe(sideNav);
+  });
 });
