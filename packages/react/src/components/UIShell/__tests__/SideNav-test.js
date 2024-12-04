@@ -266,6 +266,23 @@ describe('SideNav', () => {
     expect(sideNav).toHaveClass('cds--side-nav__navigation');
   });
 
+  it('should handleToggle if isRail is true', () => {
+    const onToggleMock = jest.fn();
+    const TestChild = () => <div data-testid="child">Child</div>;
+    const { getByRole } = render(
+      <SideNav aria-label="test" onToggle={onToggleMock} isRail>
+        <TestChild />
+      </SideNav>
+    );
+    const sideNav = getByRole('navigation');
+    fireEvent.focus(sideNav);
+    expect(onToggleMock).toHaveBeenCalled();
+    fireEvent.mouseLeave(sideNav);
+    expect(onToggleMock).toHaveBeenCalledWith(false, false);
+    fireEvent.mouseEnter(sideNav);
+    expect(onToggleMock).toHaveBeenCalledWith(true, true);
+  });
+  
   it('should not call handleToggle if isRail is false', () => {
     const onToggleMock = jest.fn();
     const TestChild = () => <div data-testid="child">Child</div>;
