@@ -282,7 +282,7 @@ describe('SideNav', () => {
     fireEvent.mouseEnter(sideNav);
     expect(onToggleMock).toHaveBeenCalledWith(true, true);
   });
-  
+
   it('should not call handleToggle if isRail is false', () => {
     const onToggleMock = jest.fn();
     const TestChild = () => <div data-testid="child">Child</div>;
@@ -314,7 +314,7 @@ describe('SideNav', () => {
     expect(onToggleMock).toHaveBeenCalledWith(true, true);
     expect(sideNav).toHaveClass('cds--side-nav--expanded');
   });
-  
+
   it('should focus SideNav after tabbing from headerMenuButton', () => {
     render(
       <>
