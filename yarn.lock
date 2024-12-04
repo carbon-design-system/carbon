@@ -1986,7 +1986,7 @@ __metadata:
     "@carbon/styles": "npm:^1.71.0-rc.0"
     "@carbon/test-utils": "npm:^10.34.0"
     "@carbon/themes": "npm:^11.43.0"
-    "@figma/code-connect": "npm:^1.2.1"
+    "@figma/code-connect": "npm:^1.2.2"
     "@floating-ui/react": "npm:^0.26.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@rollup/plugin-babel": "npm:^6.0.0"
@@ -3143,9 +3143,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/code-connect@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@figma/code-connect@npm:1.2.1"
+"@figma/code-connect@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "@figma/code-connect@npm:1.2.2"
   dependencies:
     "@babel/core": "npm:7.25.8"
     "@babel/generator": "npm:7.25.7"
@@ -3170,13 +3170,13 @@ __metadata:
     prompts: "npm:^2.4.2"
     strip-ansi: "npm:^6.0.0"
     ts-morph: "npm:^23.0.0"
-    typescript: "npm:5.4.2"
+    typescript: "npm:5.5.4"
     undici: "npm:^5.28.4"
     zod: "npm:^3.23.8"
     zod-validation-error: "npm:^3.2.0"
   bin:
     figma: bin/figma
-  checksum: 10/97de501bc02e24ea5b868ae7ea8129d2fbfa719d17c51d716bfffdbcf92410787559ca7e14ed8a4b8308c6b53c2f24fb8abdfe27abd708da2066825e5c1c3b1a
+  checksum: 10/8e37bc70691f614e1de16ba531e645cbc9cae4d368596a8e3e13af691653ca6c0fdc23ad8b2a0a9006599c23cf8d80b3e29e7ad96a539b2a5e6c08251a4e3157
   languageName: node
   linkType: hard
 
@@ -26422,17 +26422,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"typescript@npm:5.4.2":
-  version: 5.4.2
-  resolution: "typescript@npm:5.4.2"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10/f8cfdc630ab1672f004e9561eb2916935b2d267792d07ce93e97fc601c7a65191af32033d5e9c0169b7dc37da7db9bf320f7432bc84527cb7697effaa4e4559d
-  languageName: node
-  linkType: hard
-
-"typescript@npm:>=3 < 6":
+"typescript@npm:5.5.4, typescript@npm:>=3 < 6":
   version: 5.5.4
   resolution: "typescript@npm:5.5.4"
   bin:
@@ -26462,17 +26452,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A5.4.2#optional!builtin<compat/typescript>":
-  version: 5.4.2
-  resolution: "typescript@patch:typescript@npm%3A5.4.2#optional!builtin<compat/typescript>::version=5.4.2&hash=5adc0c"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10/f5f9a4133c2670761f0166eae5b3bafbc4a3fc24f0f42a93c9c893d9e9d6e66ea066969c5e7483fa66b4ae0e99125592553f3b92fd3599484de8be13b0615176
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@npm%3A>=3 < 6#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A>=3 < 6#optional!builtin<compat/typescript>":
   version: 5.5.4
   resolution: "typescript@patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"
   bin:
