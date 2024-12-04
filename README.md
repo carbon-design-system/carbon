@@ -319,6 +319,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/mariat189"><img src="https://avatars.githubusercontent.com/u/74430463?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mariat</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=mariat189" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Thamjith"><img src="https://avatars.githubusercontent.com/u/24909620?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Thamjith Thaha</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Thamjith" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Zoe-Gathercole"><img src="https://avatars.githubusercontent.com/u/56911544?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Zoë Gathercole</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Zoe-Gathercole" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/a88zach"><img src="https://avatars.githubusercontent.com/u/1724822?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Zach Tindall</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=a88zach" title="Code">💻</a></td>
   </tr>
 </table>
 
