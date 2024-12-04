@@ -49,6 +49,7 @@ $css--plex: true !default;
 :host(#{$prefix}-button[pagination]),
 :host(#{$prefix}-modal-footer-button[pagination]) {
   .#{$prefix}--btn {
+    padding: 0;
     border: none;
     border-inline-start: 1px solid $border-subtle;
     transition: none;
