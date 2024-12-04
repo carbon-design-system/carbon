@@ -28,6 +28,7 @@ import {
   autoUpdate,
   arrow,
   offset,
+  type Boundary,
 } from '@floating-ui/react';
 import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -103,6 +104,11 @@ interface PopoverBaseProps {
   autoAlign?: boolean;
 
   /**
+   * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlignBoundary?: Boundary;
+
+  /**
    * Specify whether a caret should be rendered
    */
   caret?: boolean;
@@ -165,6 +171,7 @@ export const Popover: PopoverComponent = React.forwardRef(
       align: initialAlign = isTabTip ? 'bottom-start' : 'bottom',
       as: BaseComponent = 'span' as E,
       autoAlign = false,
+      autoAlignBoundary,
       caret = isTabTip ? false : true,
       className: customClassName,
       children,
@@ -258,7 +265,42 @@ export const Popover: PopoverComponent = React.forwardRef(
             // Middleware order matters, arrow should be last
             middleware: [
               offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
-              autoAlign && flip({ fallbackAxisSideDirection: 'start' }),
+              autoAlign &&
+                flip({
+                  fallbackPlacements: align.includes('bottom')
+                    ? [
+                        'bottom',
+                        'bottom-start',
+                        'bottom-end',
+                        'right',
+                        'right-start',
+                        'right-end',
+                        'left',
+                        'left-start',
+                        'left-end',
+                        'top',
+                        'top-start',
+                        'top-end',
+                      ]
+                    : [
+                        'top',
+                        'top-start',
+                        'top-end',
+                        'left',
+                        'left-start',
+                        'left-end',
+                        'right',
+                        'right-start',
+                        'right-end',
+                        'bottom',
+                        'bottom-start',
+                        'bottom-end',
+                      ],
+
+                  fallbackStrategy: 'initialPlacement',
+                  fallbackAxisSideDirection: 'start',
+                  boundary: autoAlignBoundary,
+                }),
               arrow({
                 element: caretRef,
               }),
@@ -442,7 +484,7 @@ export const Popover: PopoverComponent = React.forwardRef(
       </PopoverContext.Provider>
     );
   }
-);
+) as PopoverComponent;
 
 // Note: this displayName is temporarily set so that Storybook ArgTable
 // correctly displays the name of this component
@@ -513,6 +555,21 @@ Popover.propTypes = {
   autoAlign: PropTypes.bool,
 
   /**
+   * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlignBoundary: PropTypes.oneOfType([
+    PropTypes.oneOf(['clippingAncestors']),
+    PropTypes.elementType,
+    PropTypes.arrayOf(PropTypes.elementType),
+    PropTypes.exact({
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+    }),
+  ]) as PropTypes.Validator<Boundary | null | undefined>,
+
+  /**
    * Specify whether a caret should be rendered
    */
   caret: PropTypes.bool,
@@ -567,7 +624,6 @@ function PopoverContentRenderFunction(
   const ref = useMergedRefs([setFloating, forwardRef]);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
-
   return (
     <span {...rest} className={`${prefix}--popover`}>
       <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>

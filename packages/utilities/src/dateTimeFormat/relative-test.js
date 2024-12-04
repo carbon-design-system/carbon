@@ -27,6 +27,18 @@ const tests = [
 describe(locale, () => {
   styles.forEach((style) => {
     describe(style, () => {
+      const nowFormatted = new Intl.RelativeTimeFormat(locale, {
+        style,
+        numeric: 'auto',
+      }).format(0, 'seconds');
+      test(`-30 seconds → ${nowFormatted}`, () => {
+        const actualOutput = relative.format(Date.now() - 1000 * 30, {
+          locale,
+        });
+
+        expect(actualOutput).toBe(nowFormatted);
+      });
+
       const rtf = new Intl.RelativeTimeFormat(locale, { style });
 
       tests.forEach(([unit, unitsPassed, secondsInUnit]) => {

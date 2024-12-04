@@ -5,15 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+
+import { Filter } from '@carbon/icons-react';
 import OverflowMenu from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
-import { Filter } from '@carbon/icons-react';
+import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { render, screen, fireEvent } from '@testing-library/react';
 
 describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
+    const closeMenuMock = jest.fn();
     it('should support a custom `className` prop on the button element', () => {
       render(
         <OverflowMenu open aria-label="Overflow menu" className="extra-class">
@@ -210,5 +212,194 @@ describe('OverflowMenu', () => {
       // Check that the click handler was called only once
       expect(handleClick).toHaveBeenCalledTimes(1);
     });
+  });
+  it('should not open menu when disabled', async () => {
+    render(
+      <OverflowMenu aria-label="Overflow menu" className="extra-class" disabled>
+        <OverflowMenuItem className="test-child" itemText="one" />
+        <OverflowMenuItem className="test-child" itemText="two" />
+      </OverflowMenu>
+    );
+
+    const button = screen.getByRole('button');
+    await userEvent.click(button);
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+  });
+  it('should close the menu when clicking outside', async () => {
+    render(
+      <div>
+        <OverflowMenu aria-label="Overflow menu" className="extra-class">
+          <OverflowMenuItem className="test-child" itemText="one" />
+          <OverflowMenuItem className="test-child" itemText="two" />
+        </OverflowMenu>
+        <div data-testid="outside-element">Outside Element</div>
+      </div>
+    );
+
+    const button = screen.getByRole('button');
+    await userEvent.click(button);
+    expect(button).toHaveAttribute('aria-expanded', 'true');
+    await userEvent.click(screen.getByTestId('outside-element'));
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+  });
+  it('should set aria-label for the icon using iconDescription prop', () => {
+    const iconDescription = 'custom icon description';
+    render(
+      <OverflowMenu
+        aria-label="Overflow menu"
+        className="extra-class"
+        iconDescription={iconDescription}>
+        <OverflowMenuItem className="test-child" itemText="one" />
+        <OverflowMenuItem className="test-child" itemText="two" />
+      </OverflowMenu>
+    );
+    const button = screen.getByRole('button', { name: iconDescription });
+    const svgIcon = button.querySelector('.cds--overflow-menu__icon');
+    expect(svgIcon).toHaveAttribute('aria-label', iconDescription);
+  });
+  it('should align menu based on direction prop', async () => {
+    const { rerender } = render(
+      <OverflowMenu
+        direction="top"
+        iconDescription="custom-icon"
+        className="extra-class">
+        <OverflowMenuItem className="test-child" itemText="one" />
+        <OverflowMenuItem className="test-child" itemText="two" />
+      </OverflowMenu>
+    );
+    const button = screen.getByRole('button', { name: 'custom-icon' });
+    fireEvent.click(button);
+    const menu = await waitFor(() =>
+      screen.getByRole('menu', { hidden: true })
+    );
+    expect(menu).toHaveAttribute('data-floating-menu-direction', 'top');
+
+    rerender(
+      <OverflowMenu
+        direction="bottom"
+        iconDescription="custom-icon"
+        className="extra-class">
+        <OverflowMenuItem className="test-child" itemText="one" />
+        <OverflowMenuItem className="test-child" itemText="two" />
+      </OverflowMenu>
+    );
+    const newMenu = await waitFor(() =>
+      screen.getByRole('menu', { hidden: true })
+    );
+    expect(newMenu).toHaveAttribute('data-floating-menu-direction', 'bottom');
+  });
+  it('focuses the next enabled menu item when pressing ArrowDown', async () => {
+    render(
+      <OverflowMenu iconDescription="custom-icon" className="extra-class">
+        <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
+        <OverflowMenuItem
+          itemText="Item 2"
+          disabled
+          data-testid="menu-item-2"
+        />
+        <OverflowMenuItem itemText="Item 3" data-testid="menu-item-3" />
+      </OverflowMenu>
+    );
+    const button = screen.getByRole('button', { name: 'custom-icon' });
+    fireEvent.click(button);
+
+    const menuItem1 = screen.getByText('Item 1').closest('button');
+    const menuItem3 = screen.getByText('Item 3').closest('button');
+
+    menuItem1.focus();
+    fireEvent.keyDown(menuItem1, { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(menuItem3).toHaveFocus();
+  });
+  it('focuses the next enabled menu item when pressing ArrowUp', async () => {
+    render(
+      <OverflowMenu iconDescription="custom-icon" className="extra-class">
+        <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
+        <OverflowMenuItem
+          itemText="Item 2"
+          disabled
+          data-testid="menu-item-2"
+        />
+        <OverflowMenuItem itemText="Item 3" data-testid="menu-item-3" />
+      </OverflowMenu>
+    );
+    const button = screen.getByRole('button', { name: 'custom-icon' });
+    fireEvent.click(button);
+
+    const menuItem1 = screen.getByText('Item 1').closest('button');
+    const menuItem3 = screen.getByText('Item 3').closest('button');
+
+    menuItem3.focus();
+    expect(menuItem3).toHaveFocus();
+    fireEvent.keyDown(menuItem3, { key: 'ArrowUp', code: 'ArrowUp' });
+    expect(menuItem1).toHaveFocus();
+  });
+  it('focuses the last enabled item when moving backwards from the first enabled item (case -1)', () => {
+    render(
+      <OverflowMenu iconDescription="custom-icon" className="extra-class">
+        <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
+        <OverflowMenuItem
+          itemText="Item 2"
+          disabled
+          data-testid="menu-item-2"
+        />
+        <OverflowMenuItem itemText="Item 3" data-testid="menu-item-3" />
+      </OverflowMenu>
+    );
+
+    const button = screen.getByRole('button', { name: 'custom-icon' });
+    fireEvent.click(button);
+
+    const menuItem1 = screen.getByText('Item 1').closest('button');
+    const menuItem3 = screen.getByText('Item 3').closest('button');
+    menuItem1.focus();
+    expect(menuItem1).toHaveFocus();
+    fireEvent.keyDown(menuItem1, { key: 'ArrowUp', code: 'ArrowUp' });
+    expect(menuItem3).toHaveFocus();
+  });
+
+  it('focuses the first enabled item when moving forward from the last enabled item (case enabledIndices.length)', () => {
+    render(
+      <OverflowMenu iconDescription="custom-icon" className="extra-class">
+        <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
+        <OverflowMenuItem
+          itemText="Item 2"
+          disabled
+          data-testid="menu-item-2"
+        />
+        <OverflowMenuItem itemText="Item 3" data-testid="menu-item-3" />
+      </OverflowMenu>
+    );
+
+    const button = screen.getByRole('button', { name: 'custom-icon' });
+    fireEvent.click(button);
+
+    const menuItem1 = screen.getByText('Item 1').closest('button');
+    const menuItem3 = screen.getByText('Item 3').closest('button');
+    menuItem3.focus();
+    expect(menuItem3).toHaveFocus();
+    fireEvent.keyDown(menuItem3, { key: 'ArrowDown', code: 'ArrowDown' });
+    expect(menuItem1).toHaveFocus();
+  });
+  it('closes the menu on Escape key press', async () => {
+    render(
+      <OverflowMenu open iconDescription="custom-icon" className="extra-class">
+        <OverflowMenuItem itemText="Item 1" data-testid="menu-item-1" />
+        <OverflowMenuItem
+          itemText="Item 2"
+          disabled
+          data-testid="menu-item-2"
+        />
+        <OverflowMenuItem itemText="Item 3" data-testid="menu-item-3" />
+      </OverflowMenu>
+    );
+    const button = screen.getByRole('button', { name: 'custom-icon' });
+    expect(button).toHaveClass('cds--overflow-menu--open');
+
+    const menu = await waitFor(() =>
+      screen.getByRole('menu', { hidden: true })
+    );
+    fireEvent.keyDown(menu, { key: 'Escape', code: 'Escape' });
+    expect(button).not.toHaveClass('cds--overflow-menu--open');
+    expect(button).toHaveFocus();
   });
 });

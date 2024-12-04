@@ -1589,6 +1589,15 @@
       ]
     },
     {
+      "login": "nevantan",
+      "name": "Nevan Tan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25013998?v=4",
+      "profile": "https://gitlab.com/nevantan",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "AliAldobyan",
       "name": "Ali Al Dobyan",
       "avatar_url": "https://avatars.githubusercontent.com/u/17975825?v=4",
@@ -1654,6 +1663,24 @@
       ]
     },
     {
+      "login": "mikdhadc",
+      "name": "Mohammed Mikdhad C",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54241506?v=4",
+      "profile": "https://github.com/mikdhadc",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "irfadkp",
+      "name": "IRFAD KP",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54243898?v=4",
+      "profile": "https://irfadkp.github.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "ziyadzulfikar",
       "name": "ziyadzulfikar",
       "avatar_url": "https://avatars.githubusercontent.com/u/56788667?v=4",
@@ -1663,10 +1690,46 @@
       ]
     },
     {
+      "login": "irfadkp",
+      "name": "IRFAD KP",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54243898?v=4",
+      "profile": "https://irfadkp.github.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "mariat189",
       "name": "Mariat",
       "avatar_url": "https://avatars.githubusercontent.com/u/74430463?v=4",
       "profile": "https://github.com/mariat189",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Thamjith",
+      "name": "Thamjith Thaha",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24909620?v=4",
+      "profile": "https://github.com/Thamjith",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Zoe-Gathercole",
+      "name": "Zoë Gathercole",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56911544?v=4",
+      "profile": "https://github.com/Zoe-Gathercole",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "a88zach",
+      "name": "Zach Tindall",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1724822?v=4",
+      "profile": "https://github.com/a88zach",
       "contributions": [
         "code"
       ]

@@ -426,7 +426,11 @@
     background-color: $border-subtle;
   }
 
-  // Styles for `Slug` rendered inside `NumberInput`
+  // Styles for `AILabel` rendered inside `NumberInput`
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *,
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
@@ -434,6 +438,22 @@
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator:not(
+      :has(.#{$prefix}--ai-label)
+    )
+    > * {
+    block-size: 1rem;
+  }
+
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__control-btn::after,
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before,
   .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--number__control-btn::before,
@@ -445,45 +465,78 @@
     content: '';
     inline-size: convert.to-rem(1px);
   }
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
     display: none;
     inset-inline-start: convert.to-rem(-16px);
   }
+
   .#{$prefix}--number__control-btn::after {
     display: block;
     inset-inline-end: 0;
   }
 
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__control-btn::before,
   .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--number__control-btn::before {
     display: block;
     inset-inline-end: $spacing-08;
   }
+
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__control-btn:focus::before,
   .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--number__control-btn:focus::before {
     display: none;
   }
+
   .#{$prefix}--number__control-btn:hover::after,
   .#{$prefix}--number__control-btn:hover::before {
     display: none;
     inset-inline-end: 0;
   }
+
+  .#{$prefix}--number__input-wrapper:has(.#{$prefix}--number__control-btn:hover)
+    ~ .#{$prefix}--number__input-wrapper--decorator::after,
   .#{$prefix}--number__input-wrapper:has(.#{$prefix}--number__control-btn:hover)
     ~ .#{$prefix}--number__input-wrapper--slug::after {
     display: none;
   }
+
   .#{$prefix}--number__control-btn:has(.up-icon)::after,
   .#{$prefix}--number__control-btn:has(.up-icon)::before {
     display: none;
   }
 
+  .#{$prefix}--number__input-wrapper--decorator .#{$prefix}--number__invalid,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
     inset-inline-end: $spacing-13 - $spacing-05;
   }
+
+  .#{$prefix}--number__input-wrapper--decorator:has(
+      .#{$prefix}--number__invalid
+    )
+    .#{$prefix}--number__input-inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--number__invalid)
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--number__invalid)
+    .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--number__invalid)
     .#{$prefix}--slug::before {
     display: block;
   }
+
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--decorator
+    input[data-invalid],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--decorator.#{$prefix}--number__input-wrapper--warning
+    input,
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--slug
     input[data-invalid],
@@ -493,24 +546,54 @@
     padding-inline-end: convert.to-rem(144px);
   }
 
+  .#{$prefix}--number__input-wrapper--decorator
+    input[type='number']:has(
+      ~ .#{$prefix}--number__input-inner-wrapper--decorator
+        .#{$prefix}--ai-label
+    ):not(
+      :has(
+          ~ .#{$prefix}--number__input-inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
   .#{$prefix}--number__input-wrapper--slug
-    input[type='number']:not(:has(~ .#{$prefix}--slug--revert)),
+    input[type='number']:has(~ .#{$prefix}--ai-label):not(
+      :has(~ .#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--number__input-wrapper--slug
+    input[type='number']:has(~ .#{$prefix}--slug):not(
+      :has(~ .#{$prefix}--slug--revert)
+    ),
   .#{$prefix}--number__input-wrapper--slug input[type='number']:disabled {
     @include ai-gradient;
 
     padding-inline-end: convert.to-rem(145px);
   }
+
   // Skeleton State
+
   .#{$prefix}--number.#{$prefix}--skeleton {
     @include skeleton;
 
-    block-size: 2.5rem;
     inline-size: 100%;
 
     input[type='number'] {
       display: none;
     }
   }
+
+  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--sm {
+    block-size: $spacing-07;
+  }
+
+  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--md {
+    block-size: $spacing-08;
+  }
+
+  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--lg {
+    block-size: $spacing-09;
+  }
+
   // Windows HCM fix
 
   .#{$prefix}--number__control-btn:hover,
@@ -526,18 +609,23 @@
     @include high-contrast-mode('icon-fill');
   }
 }
+
 .#{$prefix}--number__controls:hover .#{$prefix}--number__control-btn::after {
   display: none;
 }
 
+.#{$prefix}--number__input-wrapper--decorator .#{$prefix}--number__rule-divider,
 .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__rule-divider {
   display: none;
 }
 
+.#{$prefix}--number__input-wrapper--decorator
+  .#{$prefix}--number__control-btn:hover,
 .#{$prefix}--number__input-wrapper--slug
   .#{$prefix}--number__control-btn:hover {
   box-shadow: 0 -1px 0 $ai-border-strong inset;
 }
+
 //hide dividers on button focus
 .#{$prefix}--number__controls:focus-within
   .#{$prefix}--number__control-btn::after {

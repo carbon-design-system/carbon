@@ -1,4 +1,4 @@
-# Having components participate in form
+# Using components in a form
 
 Though form elements in `@carbon/web-components` (e.g. `<cds-text-input>`) are
 not native form elements like `<input>`, they have some extra APIs that align
@@ -30,5 +30,3 @@ button.addEventListener('click', () => {
   // You can use `formData` with `fetch()`/XHR instead of letting `<form>` submit the data
 });
 ```
-
-[![Edit carbon-web-components with formdata event](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/form/basic)
