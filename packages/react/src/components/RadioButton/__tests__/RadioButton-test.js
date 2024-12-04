@@ -136,7 +136,38 @@ describe('RadioButton', () => {
     expect(ref).toHaveBeenCalledWith(screen.getByRole('radio'));
   });
 
-  it('should respect slug prop', () => {
+  it('should respect decorator prop', () => {
+    const { container } = render(
+      <RadioButton
+        name="test-name"
+        value="test-value"
+        labelText="test-label"
+        decorator={<AILabel />}
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--radio-button-wrapper--decorator`
+    );
+  });
+
+  it('should update AILabel size', () => {
+    const { container } = render(
+      <RadioButton
+        name="test-name"
+        value="test-value"
+        labelText="test-label"
+        decorator={<AILabel kind="inline" />}
+      />
+    );
+
+    expect(container.querySelector(`.${prefix}--ai-label__button`)).toHaveClass(
+      `${prefix}--ai-label__button--md`
+    );
+  });
+
+  it('should respect the deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(
       <RadioButton
         name="test-name"
@@ -149,6 +180,7 @@ describe('RadioButton', () => {
     expect(container.firstChild).toHaveClass(
       `${prefix}--radio-button-wrapper--slug`
     );
+    spy.mockRestore();
   });
 
   it('should set the "required" attribute on the <input> by default', () => {

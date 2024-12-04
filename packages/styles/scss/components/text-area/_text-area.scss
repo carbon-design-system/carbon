@@ -129,6 +129,9 @@
   }
 
   // Styles for `AILabel` rendered inside `TextArea`
+  .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area__inner-wrapper--decorator
+    > *,
   .#{$prefix}--text-area__wrapper--slug .#{$prefix}--ai-label,
   .#{$prefix}--text-area__wrapper--slug .#{$prefix}--slug {
     position: absolute;
@@ -136,6 +139,8 @@
     inset-inline-end: $spacing-05;
   }
 
+  .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
   .#{$prefix}--text-area__wrapper--slug
     .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
   .#{$prefix}--text-area__wrapper--slug
@@ -145,6 +150,15 @@
     transform: translate(0);
   }
 
+  .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area:has(
+      ~ .#{$prefix}--text-area__inner-wrapper--decorator .#{$prefix}--ai-label
+    ):not(
+      :has(
+          ~ .#{$prefix}--text-area__inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
   .#{$prefix}--text-area__wrapper--slug
     .#{$prefix}--text-area:has(~ .#{$prefix}--ai-label):not(
       :has(~ .#{$prefix}--ai-label--revert)
@@ -154,10 +168,25 @@
       :has(~ .#{$prefix}--slug--revert)
     ) {
     @include ai-gradient;
+  }
 
+  .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area:has(
+      ~ .#{$prefix}--text-area__inner-wrapper--decorator > *
+    ),
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area:has(~ .#{$prefix}--ai-label),
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area:has(~ .#{$prefix}--slug) {
     padding-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--text-area--invalid:has(
+      ~ .#{$prefix}--text-area__inner-wrapper--decorator > *
+    ),
+  .#{$prefix}--text-area--warn:has(
+      ~ .#{$prefix}--text-area__inner-wrapper--decorator > *
+    ),
   .#{$prefix}--text-area--invalid:has(~ .#{$prefix}--ai-label),
   .#{$prefix}--text-area--warn:has(~ .#{$prefix}--ai-label),
   .#{$prefix}--text-area--invalid:has(~ .#{$prefix}--slug),
@@ -165,6 +194,12 @@
     padding-inline-end: $spacing-10;
   }
 
+  .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > *,
   .#{$prefix}--text-area--invalid ~ .#{$prefix}--ai-label,
   .#{$prefix}--text-area--warn ~ .#{$prefix}--ai-label,
   .#{$prefix}--text-area--invalid ~ .#{$prefix}--slug,

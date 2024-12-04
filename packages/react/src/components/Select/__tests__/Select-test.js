@@ -242,12 +242,24 @@ describe('Select', () => {
     });
 
     it('should respect slug prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       const { container } = render(
         <Select id="select" labelText="Select" slug={<AILabel />} />
       );
 
       expect(container.firstChild.firstChild).toHaveClass(
         `${prefix}--select--slug`
+      );
+      spy.mockRestore();
+    });
+
+    it('should respect decorator prop', () => {
+      const { container } = render(
+        <Select id="select" labelText="Select" decorator={<AILabel />} />
+      );
+
+      expect(container.firstChild.firstChild).toHaveClass(
+        `${prefix}--select--decorator`
       );
     });
   });

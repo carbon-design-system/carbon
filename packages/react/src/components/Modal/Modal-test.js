@@ -368,7 +368,21 @@ describe('Modal', () => {
     expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
   });
 
+  it('should respect decorator prop', () => {
+    const { container } = render(
+      <Modal
+        danger
+        primaryButtonText="Danger button text"
+        data-testid="modal-5"
+        decorator={<AILabel />}
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(`${prefix}--modal--decorator`);
+  });
+
   it('should respect slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(
       <Modal
         danger
@@ -379,6 +393,7 @@ describe('Modal', () => {
     );
 
     expect(container.firstChild).toHaveClass(`${prefix}--modal--slug`);
+    spy.mockRestore();
   });
 });
 
