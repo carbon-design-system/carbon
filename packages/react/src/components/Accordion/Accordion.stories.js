@@ -29,8 +29,35 @@ export default {
   },
 };
 
-export const Default = () => (
-  <Accordion>
+const sharedArgTypes = {
+  align: {
+    options: ['start', 'end'],
+    control: { type: 'select' },
+  },
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  isFlush: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
+};
+
+export const Default = (args) => (
+  <Accordion {...args}>
     <AccordionItem title="Section 1 title">
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -48,14 +75,14 @@ export const Default = () => (
       </p>
     </AccordionItem>
     <AccordionItem title="Section 3 title">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
+      <Button>This is a button.</Button>
     </AccordionItem>
-    <AccordionItem title="Section 4 title">
+    <AccordionItem
+      title={
+        <span>
+          Section 4 title (<em>the title can be a node</em>)
+        </span>
+      }>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -66,7 +93,14 @@ export const Default = () => (
   </Accordion>
 );
 
-export const Controlled = () => {
+Default.args = {
+  disabled: false,
+  isFlush: false,
+};
+
+Default.argTypes = { ...sharedArgTypes };
+
+export const Controlled = (args) => {
   const [expandAll, setExpandAll] = React.useState(false);
   return (
     <>
@@ -89,7 +123,7 @@ export const Controlled = () => {
         </Button>
       </ButtonSet>
 
-      <Accordion>
+      <Accordion {...args}>
         <AccordionItem title="Section 1 title" open={expandAll}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -127,8 +161,15 @@ export const Controlled = () => {
   );
 };
 
-export const _WithLayer = () => (
-  <WithLayer>
+Controlled.args = {
+  disabled: false,
+  isFlush: false,
+};
+
+Controlled.argTypes = { ...sharedArgTypes };
+
+export const _WithLayer = (args) => (
+  <WithLayer {...args}>
     <Accordion>
       <AccordionItem title="Section 1 title">
         <p>
@@ -166,6 +207,13 @@ export const _WithLayer = () => (
   </WithLayer>
 );
 
+WithLayer.args = {
+  disabled: false,
+  isFlush: false,
+};
+
+WithLayer.argTypes = { ...sharedArgTypes };
+
 export const Skeleton = (args) => (
   <AccordionSkeleton open count={4} {...args} />
 );
@@ -173,75 +221,6 @@ export const Skeleton = (args) => (
 Skeleton.decorators = [
   (story) => <div style={{ width: '500px' }}>{story()}</div>,
 ];
-
-export const Playground = (args) => (
-  <Accordion {...args}>
-    <AccordionItem title="Section 1 title">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-    <AccordionItem title="Section 2 title">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-    <AccordionItem title="Section 3 title">
-      <Button>This is a button.</Button>
-    </AccordionItem>
-    <AccordionItem
-      title={
-        <span>
-          Section 4 title (<em>the title can be a node</em>)
-        </span>
-      }>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-  </Accordion>
-);
-
-Playground.args = {
-  disabled: false,
-  isFlush: false,
-};
-
-Playground.argTypes = {
-  align: {
-    options: ['start', 'end'],
-    control: { type: 'select' },
-  },
-  children: {
-    control: false,
-  },
-  className: {
-    control: false,
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  isFlush: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  size: {
-    options: ['sm', 'md', 'lg'],
-    control: { type: 'select' },
-  },
-};
 
 Skeleton.args = {
   isFlush: false,

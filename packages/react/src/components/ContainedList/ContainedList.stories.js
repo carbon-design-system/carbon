@@ -60,22 +60,25 @@ export default {
   },
 };
 
-export const Default = () => (
+const DefaultStory = (args) => (
   <>
-    <ContainedList label="List title" kind="on-page">
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-    </ContainedList>
-    <ContainedList label="List title" kind="on-page">
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-    </ContainedList>
+    {[...Array(4)].map((_, i) => (
+      <ContainedList key={i} {...args}>
+        {[...Array(8)].map((_, j) => (
+          <ContainedListItem key={`${i}-${j}`}>List item</ContainedListItem>
+        ))}
+      </ContainedList>
+    ))}
   </>
 );
+
+export const Default = DefaultStory.bind({});
+
+Default.args = {
+  label: 'List title',
+  kind: 'on-page',
+  size: 'lg',
+};
 
 export const Disclosed = () => (
   <>
@@ -351,24 +354,4 @@ export const UsageExamples = () => {
       </ContainedList>
     </>
   );
-};
-
-const PlaygroundStory = (args) => (
-  <>
-    {[...Array(4)].map((_, i) => (
-      <ContainedList key={i} {...args}>
-        {[...Array(8)].map((_, j) => (
-          <ContainedListItem key={`${i}-${j}`}>List item</ContainedListItem>
-        ))}
-      </ContainedList>
-    ))}
-  </>
-);
-
-export const Playground = PlaygroundStory.bind({});
-
-Playground.args = {
-  label: 'List title',
-  kind: 'on-page',
-  size: 'lg',
 };

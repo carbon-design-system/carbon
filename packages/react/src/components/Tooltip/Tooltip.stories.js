@@ -51,14 +51,74 @@ export default {
   ],
 };
 
-export const Default = () => {
-  const label =
-    'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
+const DefaultStory = (props) => {
+  const {
+    align,
+    closeOnActivation,
+    defaultOpen,
+    description,
+    enterDelayMs,
+    label,
+    leaveDelayMs,
+  } = props;
   return (
-    <Tooltip align="bottom" label={label}>
-      <Button>This button has a tooltip</Button>
+    <Tooltip
+      align={align}
+      defaultOpen={defaultOpen}
+      description={description}
+      enterDelayMs={enterDelayMs}
+      label={label}
+      leaveDelayMs={leaveDelayMs}
+      closeOnActivation={closeOnActivation}>
+      <button type="button">
+        <SquareOutline />
+      </button>
     </Tooltip>
   );
+};
+
+export const Default = DefaultStory.bind({});
+
+Default.args = {
+  align: 'bottom',
+  closeOnActivation: false,
+  defaultOpen: false,
+  label: 'Custom label',
+};
+
+Default.argTypes = {
+  align: {
+    options: [
+      'top',
+      'top-left',
+      'top-right',
+
+      'bottom',
+      'bottom-left',
+      'bottom-right',
+
+      'left',
+      'left-bottom',
+      'left-top',
+
+      'right',
+      'right-bottom',
+      'right-top',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
+  label: {
+    control: {
+      type: 'text',
+    },
+  },
+  description: {
+    control: {
+      type: 'text',
+    },
+  },
 };
 
 export const Alignment = () => {
@@ -99,74 +159,4 @@ export const Duration = () => {
       <Button>This button has a tooltip</Button>
     </Tooltip>
   );
-};
-
-const PlaygroundStory = (props) => {
-  const {
-    align,
-    closeOnActivation,
-    defaultOpen,
-    description,
-    enterDelayMs,
-    label,
-    leaveDelayMs,
-  } = props;
-  return (
-    <Tooltip
-      align={align}
-      defaultOpen={defaultOpen}
-      description={description}
-      enterDelayMs={enterDelayMs}
-      label={label}
-      leaveDelayMs={leaveDelayMs}
-      closeOnActivation={closeOnActivation}>
-      <button type="button">
-        <SquareOutline />
-      </button>
-    </Tooltip>
-  );
-};
-
-export const Playground = PlaygroundStory.bind({});
-
-Playground.args = {
-  align: 'bottom',
-  closeOnActivation: false,
-  defaultOpen: false,
-  label: 'Custom label',
-};
-
-Playground.argTypes = {
-  align: {
-    options: [
-      'top',
-      'top-left',
-      'top-right',
-
-      'bottom',
-      'bottom-left',
-      'bottom-right',
-
-      'left',
-      'left-bottom',
-      'left-top',
-
-      'right',
-      'right-bottom',
-      'right-top',
-    ],
-    control: {
-      type: 'select',
-    },
-  },
-  label: {
-    control: {
-      type: 'text',
-    },
-  },
-  description: {
-    control: {
-      type: 'text',
-    },
-  },
 };

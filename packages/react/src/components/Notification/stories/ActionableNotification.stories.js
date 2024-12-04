@@ -30,27 +30,9 @@ export default {
   },
 };
 
-export const Default = () => (
-  <ActionableNotification
-    title="Notification title"
-    subtitle="Subtitle text goes here"
-    closeOnEscape
-    inline={false}
-    actionButtonLabel="Action"
-  />
-);
+export const Default = (args) => <ActionableNotification {...args} />;
 
 Default.argTypes = {
-  hasFocus: {
-    table: {
-      disable: true,
-    },
-  },
-};
-
-export const Playground = (args) => <ActionableNotification {...args} />;
-
-Playground.argTypes = {
   ['aria-label']: {
     table: {
       disable: true,
@@ -86,7 +68,7 @@ Playground.argTypes = {
     },
   },
 };
-Playground.args = {
+Default.args = {
   actionButtonLabel: 'Action',
   inline: false,
   title: 'Notification title',
