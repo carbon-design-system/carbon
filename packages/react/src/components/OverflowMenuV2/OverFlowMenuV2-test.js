@@ -26,7 +26,7 @@ describe('<OverflowMenuV2 />', () => {
     consoleWarnSpy.mockRestore();
   });
 
-  it('logs the deprecation warning when rendering OverflowMenuV2', () => {
+  it('should log the deprecation warning when rendering OverflowMenuV2', () => {
     const onClick = action('onClick (MenuItem)');
 
     render(
@@ -72,7 +72,7 @@ describe('<OverflowMenuV2 />', () => {
     expect(container.firstChild).toHaveClass('cds--autoalign');
   });
 
-  it('renders OverflowMenu with MenuItem children', async () => {
+  it('should render OverflowMenu with MenuItem children', async () => {
     render(
       <FeatureFlags enableV12Overflowmenu>
         <OverflowMenuV2>
