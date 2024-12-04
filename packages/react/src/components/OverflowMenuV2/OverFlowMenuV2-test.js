@@ -5,13 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 
 import { FeatureFlags } from '../FeatureFlags';
 import { MenuItem } from '../Menu';
 import { OverflowMenuV2 } from './';
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import userEvent from '@testing-library/user-event';
 
 describe('<OverflowMenuV2 />', () => {
   let consoleWarnSpy;
@@ -84,7 +85,7 @@ describe('<OverflowMenuV2 />', () => {
     const button = screen.getByRole('button', { name: /options/i });
 
     await act(async () => {
-      fireEvent.click(button);
+      await userEvent.click(button);
     });
 
     const stopAppMenuItem = await screen.findByRole('menuitem', {
