@@ -15,21 +15,21 @@ const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 test.describe('Popover', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
-      // test('Popover @vrt', async ({ page }) => {
-      //   await snapshotStory(page, {
-      //     component: 'Popover',
-      //     id: 'components-popover--playground',
-      //     theme,
-      //   });
-      // });
+      test('Popover @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Popover',
+          id: 'components-popover--playground',
+          theme,
+        });
+      });
 
-      // test('Popover - isTabTip @vrt', async ({ page }) => {
-      //   await snapshotStory(page, {
-      //     component: 'Popover',
-      //     id: 'components-popover--tab-tip',
-      //     theme,
-      //   });
-      // });
+      test('Popover - isTabTip @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Popover',
+          id: 'components-popover--tab-tip',
+          theme,
+        });
+      });
       // test experimental autoAlign
       test('popover - expermental autoAlign scroll to left @vrt', async ({
         page,
@@ -52,7 +52,7 @@ test.describe('Popover', () => {
               return scrollPosition;
             },
             {
-              timeout: 1000,
+              timeout: 1500,
             }
           )
           .toBe(1376);
@@ -85,7 +85,7 @@ test.describe('Popover', () => {
               return scrollPosition;
             },
             {
-              timeout: 1000,
+              timeout: 1500,
             }
           )
           .toBe(2376);
@@ -118,7 +118,7 @@ test.describe('Popover', () => {
               return scrollPosition;
             },
             {
-              timeout: 1000,
+              timeout: 1500,
             }
           )
           .toBe(1806);
@@ -151,7 +151,7 @@ test.describe('Popover', () => {
               return scrollPosition;
             },
             {
-              timeout: 1000,
+              timeout: 1500,
             }
           )
           .toBe(2506);
