@@ -43,8 +43,8 @@
     "telemetry:config": "npx -y @ibm/telemetry-js-config-generator generate --id fd89d12b-6a39-48b4-adf4-30c94dc0dddd --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components/**/*.(tsx|js|jsx)"
   },
   "peerDependencies": {
-    "react": "^16.8.6 || ^17.0.1 || ^18.2.0",
-    "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0",
+    "react": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
+    "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
     "sass": "^1.33.0"
   },
   "dependencies": {
