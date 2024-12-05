@@ -40,7 +40,7 @@ test.describe('Popover', () => {
           theme,
         });
         await page.evaluate(() => {
-          window.scrollBy(-500, 0); // Scroll 500px to the left
+          window.scrollTo(-500, 0); // Scroll 500px to the left
         });
         await snapshot(page, {
           component: 'popover',
@@ -58,7 +58,7 @@ test.describe('Popover', () => {
           theme,
         });
         await page.evaluate(() => {
-          window.scrollBy(500, 0); // Scroll 500px to the right
+          window.scrollTo(500, 0); // Scroll 500px to the right
         });
         await snapshot(page, {
           component: 'popover',
@@ -76,7 +76,7 @@ test.describe('Popover', () => {
           theme,
         });
         await page.evaluate(() => {
-          window.scrollBy(0, -350); // Scroll 350px to the top
+          window.scrollTo(0, -350); // Scroll 350px to the top
         });
         await snapshot(page, {
           component: 'popover',
@@ -94,7 +94,7 @@ test.describe('Popover', () => {
           theme,
         });
         await page.evaluate(() => {
-          window.scrollBy(0, 350); // Scroll 350px to the bottom
+          window.scrollTo(0, 350); // Scroll 350px to the bottom
         });
         await snapshot(page, {
           component: 'popover',
