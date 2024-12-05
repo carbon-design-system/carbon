@@ -52,7 +52,7 @@ test.describe('Popover', () => {
               return scrollPosition;
             },
             {
-              timeout: 1500,
+              timeout: 1000,
             }
           )
           .toBe(1376);
@@ -85,7 +85,7 @@ test.describe('Popover', () => {
               return scrollPosition;
             },
             {
-              timeout: 1500,
+              timeout: 1000,
             }
           )
           .toBe(2376);
@@ -118,7 +118,7 @@ test.describe('Popover', () => {
               return scrollPosition;
             },
             {
-              timeout: 1500,
+              timeout: 1000,
             }
           )
           .toBe(1806);
@@ -151,7 +151,7 @@ test.describe('Popover', () => {
               return scrollPosition;
             },
             {
-              timeout: 1500,
+              timeout: 1000,
             }
           )
           .toBe(2506);
