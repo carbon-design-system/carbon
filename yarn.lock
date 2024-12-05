@@ -12385,6 +12385,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"es-toolkit@npm:^1.22.0":
+  version: 1.29.0
+  resolution: "es-toolkit@npm:1.29.0"
+  dependenciesMeta:
+    "@trivago/prettier-plugin-sort-imports@4.3.0":
+      unplugged: true
+    prettier-plugin-sort-re-exports@0.0.1:
+      unplugged: true
+  checksum: 10/3985879b51f9e8bb7233528c8c7dc7988a9b1a6b755ec167531ff4fcaa7da199d147c3efba714b5e43d68936fa1bbca9cdea4f7e7e1506817bf1c7306828bbca
+  languageName: node
+  linkType: hard
+
 "es-toolkit@npm:^1.27.0":
   version: 1.27.0
   resolution: "es-toolkit@npm:1.27.0"
