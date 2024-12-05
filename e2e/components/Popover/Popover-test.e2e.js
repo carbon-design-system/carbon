@@ -42,6 +42,7 @@ test.describe('Popover', () => {
         await page.evaluate(() => {
           window.scrollTo(-500, 0); // Scroll 500px to the left
         });
+        await page.waitForTimeout(100);
         await snapshot(page, {
           component: 'popover',
           story: `experimental-auto-align-left-${theme}`,
@@ -60,6 +61,7 @@ test.describe('Popover', () => {
         await page.evaluate(() => {
           window.scrollTo(500, 0); // Scroll 500px to the right
         });
+        await page.waitForTimeout(100);
         await snapshot(page, {
           component: 'popover',
           story: `experimental-auto-align-right-${theme}`,
@@ -78,6 +80,7 @@ test.describe('Popover', () => {
         await page.evaluate(() => {
           window.scrollTo(0, -350); // Scroll 350px to the top
         });
+        await page.waitForTimeout(100);
         await snapshot(page, {
           component: 'popover',
           story: `experimental-auto-align-top-${theme}`,
@@ -96,6 +99,7 @@ test.describe('Popover', () => {
         await page.evaluate(() => {
           window.scrollTo(0, 350); // Scroll 350px to the bottom
         });
+        await page.waitForTimeout(100);
         await snapshot(page, {
           component: 'popover',
           story: `experimental-auto-align-bottom-${theme}`,
