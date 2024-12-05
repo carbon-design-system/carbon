@@ -57,6 +57,11 @@ export interface TagBaseProps {
   className?: string;
 
   /**
+   * **Experimental:** Provide a `decorator` component to be rendered inside the `Tag` component
+   */
+  decorator?: ReactNode;
+
+  /**
    * Specify if the `Tag` is disabled
    */
   disabled?: boolean;
@@ -89,6 +94,7 @@ export interface TagBaseProps {
   size?: keyof typeof SIZES;
 
   /**
+   * @deprecated please use `decorator` instead.
    * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
    */
   slug?: ReactNode;
@@ -113,6 +119,7 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
   {
     children,
     className,
+    decorator,
     id,
     type,
     filter, // remove filter in next major release - V12
@@ -168,13 +175,22 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
     }
   };
 
-  // Slug is always size `md` and `inline`
-  let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'AILabel' && !isInteractiveTag) {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'sm',
-      kind: 'inline',
-    });
+  // AILabel is always size `sm` and `inline`
+  let normalizedDecorator = React.isValidElement(slug ?? decorator)
+    ? (slug ?? decorator)
+    : null;
+  if (
+    normalizedDecorator &&
+    normalizedDecorator['type']?.displayName === 'AILabel' &&
+    !isInteractiveTag
+  ) {
+    normalizedDecorator = React.cloneElement(
+      normalizedDecorator as React.ReactElement<any>,
+      {
+        size: 'sm',
+        kind: 'inline',
+      }
+    );
   }
 
   if (filter) {
@@ -194,7 +210,7 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
           className={`${prefix}--tag__label`}>
           {children !== null && children !== undefined ? children : typeText}
         </Text>
-        {normalizedSlug}
+        {normalizedDecorator}
         <button
           type="button"
           className={`${prefix}--tag__close-icon`}
@@ -265,8 +281,13 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
           {children !== null && children !== undefined ? children : typeText}
         </Text>
       )}
-
-      {normalizedSlug}
+      {slug ? (
+        normalizedDecorator
+      ) : decorator ? (
+        <div className={`${prefix}--tag__decorator`}>{normalizedDecorator}</div>
+      ) : (
+        ''
+      )}
     </ComponentTag>
   );
 });
@@ -287,6 +308,11 @@ Tag.propTypes = {
    * Provide a custom className that is applied to the containing <span>
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental:** Provide a `decorator` component to be rendered inside the `Tag` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify if the `Tag` is disabled
@@ -329,7 +355,10 @@ Tag.propTypes = {
   /**
    * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
 
   /**
    * Text to show on clear filters

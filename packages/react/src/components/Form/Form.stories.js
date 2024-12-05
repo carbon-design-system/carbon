@@ -338,7 +338,7 @@ export const withAILabel = (args) => {
             items={items}
             itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
           <FilterableMultiSelect
@@ -348,7 +348,7 @@ export const withAILabel = (args) => {
             items={items}
             itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
           <ComboBox
@@ -358,14 +358,14 @@ export const withAILabel = (args) => {
             itemToString={(item) => (item ? item.text : '')}
             titleText="ComboBox title"
             helperText="Combobox helper text"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
           <Select
             id="select-1"
             labelText="Select an option"
             helperText="Optional helper text"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}>
             <SelectItem value="" text="" />
             <SelectItem
@@ -442,7 +442,7 @@ export const withAILabel = (args) => {
             label="Choose an option"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
@@ -456,7 +456,7 @@ export const withAILabel = (args) => {
             label="Choose an option"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
@@ -471,12 +471,12 @@ export const withAILabel = (args) => {
             label="Choose an option"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            slug={aiLabel}
+            decorator={aiLabel}
             {...rest}
           />
         </div>
         <div style={{ display: 'flex' }}>
-          <FluidSelect slug={aiLabel} {...rest} id="select-2">
+          <FluidSelect decorator={aiLabel} {...rest} id="select-2">
             <SelectItem value="" text="" />
             <SelectItem value="option-1" text="Option 1" />
             <SelectItem value="option-2" text="Option 2" />
