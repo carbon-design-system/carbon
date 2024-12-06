@@ -7,7 +7,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import omit from 'lodash.omit';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
@@ -43,17 +42,20 @@ const TableRow = (props: TableRowProps) => {
     [`${prefix}--data-table--slug-row`]: rowHasSlug,
   });
 
-  const cleanProps = {
-    ...omit(props, [
-      'ariaLabel',
-      'aria-label',
-      'aria-controls',
-      'onExpand',
-      'isExpanded',
-      'isSelected',
-    ]),
-    className: className || undefined,
-  };
+  const {
+    ariaLabel,
+    'aria-label': ariaLabelAlt,
+    'aria-controls': ariaControls,
+    onExpand,
+    isExpanded,
+    isSelected,
+    ...cleanProps
+  } = props as any;
+
+  if (className) {
+    cleanProps.className = className;
+  }
+
   return <tr {...cleanProps} />;
 };
 
