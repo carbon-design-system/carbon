@@ -40,7 +40,7 @@ test.describe('Popover', () => {
           theme,
         });
         await page.evaluate(() => {
-          window.scrollBy(-500, 0); // Scroll 500px to the left
+          window.scrollBy(-500, 0); // Scroll 500px to the left side
         });
 
         await expect
