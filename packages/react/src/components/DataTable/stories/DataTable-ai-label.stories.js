@@ -17,6 +17,7 @@ import DataTable, {
   TableSelectAll,
   TableSelectRow,
   TableSlugRow,
+  TableDecoratorRow,
   TableExpandHeader,
   TableExpandRow,
   TableExpandedRow,
@@ -25,8 +26,9 @@ import { rows, headers } from './shared';
 import mdx from '../../AILabel/AILabelDatatable.mdx';
 import Button from '../../Button';
 import { IconButton } from '../../IconButton';
-import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import { AILabel, AILabelContent, AILabelActions } from '../../AILabel';
+import { Tooltip } from '../../Tooltip';
 import './datatable-story.scss';
 
 export default {
@@ -63,10 +65,49 @@ const columnAILabelHeaders = [
   {
     key: 'port',
     header: 'Port',
+    decorator: (
+      <AILabel
+        className="ai-label-container"
+        autoAlign={false}
+        align="bottom-right">
+        <AILabelContent>
+          <div>
+            <p className="secondary">AI Explained</p>
+            <h1>84%</h1>
+            <p className="secondary bold">Confidence score</p>
+            <p className="secondary">
+              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+              do eiusmod tempor incididunt ut fsil labore et dolore magna
+              aliqua.
+            </p>
+            <hr />
+            <p className="secondary">Model type</p>
+            <p className="bold">Foundation model</p>
+          </div>
+          <AILabelActions>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View details</Button>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
+    ),
   },
   {
     key: 'rule',
     header: 'Rule',
+    decorator: (
+      <Tooltip>
+        <Information />
+      </Tooltip>
+    ),
   },
   {
     key: 'attached_groups',
@@ -143,6 +184,12 @@ const aiLabel = (
   </AILabel>
 );
 
+const decorator = (
+  <Tooltip>
+    <Information />
+  </Tooltip>
+);
+
 export const AILabelWithSelection = () => (
   <DataTable rows={rows} headers={headers}>
     {({
@@ -173,9 +220,13 @@ export const AILabelWithSelection = () => (
           <TableBody>
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
-                <TableSlugRow
-                  slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
-                />
+                {i === 3 || i === 4 || i === 1 ? (
+                  <TableSlugRow slug={aiLabel} />
+                ) : i === 2 ? (
+                  <TableDecoratorRow decorator={decorator} />
+                ) : (
+                  <TableCell />
+                )}
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -219,9 +270,13 @@ export const AILabelWithRadioSelection = () => (
           <TableBody>
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
-                <TableSlugRow
-                  slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
-                />
+                {i === 3 || i === 4 || i === 1 ? (
+                  <TableSlugRow slug={aiLabel} />
+                ) : i === 2 ? (
+                  <TableDecoratorRow decorator={decorator} />
+                ) : (
+                  <TableCell />
+                )}
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -272,9 +327,15 @@ export const AILabelWithSelectionAndExpansion = () => (
             {rows.map((row, i) => (
               <React.Fragment key={row.id}>
                 <TableExpandRow {...getRowProps({ row })}>
-                  <TableSlugRow
-                    slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
-                  />
+                  {i === 3 || i === 4 ? (
+                    <TableSlugRow slug={aiLabel} />
+                  ) : i === 2 ? (
+                    <TableDecoratorRow decorator={decorator} />
+                  ) : i === 1 ? (
+                    <TableDecoratorRow decorator={aiLabel} />
+                  ) : (
+                    <TableDecoratorRow decorator={null} />
+                  )}
                   <TableSelectRow {...getSelectionProps({ row })} />
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -331,9 +392,15 @@ export const AILabelWithExpansion = () => (
             {rows.map((row, i) => (
               <React.Fragment key={row.id}>
                 <TableExpandRow {...getRowProps({ row })}>
-                  <TableSlugRow
-                    slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
-                  />
+                  {i === 3 || i === 4 ? (
+                    <TableSlugRow slug={aiLabel} />
+                  ) : i === 2 ? (
+                    <TableDecoratorRow decorator={decorator} />
+                  ) : i === 1 ? (
+                    <TableDecoratorRow decorator={aiLabel} />
+                  ) : (
+                    <TableDecoratorRow decorator={null} />
+                  )}
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
