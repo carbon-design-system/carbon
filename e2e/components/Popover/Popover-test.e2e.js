@@ -59,7 +59,7 @@ test.describe('Popover', () => {
 
         await snapshot(page, {
           component: 'popover',
-          story: `experimental-auto-align-left-${theme}`,
+          story: 'experimental-auto-align-left',
           theme,
         });
       });
@@ -92,7 +92,7 @@ test.describe('Popover', () => {
 
         await snapshot(page, {
           component: 'popover',
-          story: `experimental-auto-align-right-${theme}`,
+          story: 'experimental-auto-align-right',
           theme,
         });
       });
@@ -125,7 +125,7 @@ test.describe('Popover', () => {
 
         await snapshot(page, {
           component: 'popover',
-          story: `experimental-auto-align-top-${theme}`,
+          story: 'experimental-auto-align-top',
           theme,
         });
       });
@@ -158,7 +158,7 @@ test.describe('Popover', () => {
 
         await snapshot(page, {
           component: 'popover',
-          story: `experimental-auto-align-bottom-${theme}`,
+          story: 'experimental-auto-align-bottom',
           theme,
         });
       });
