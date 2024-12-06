@@ -61,3 +61,6 @@ blob-report
 
 # Local token
 .env
+
+#VS Code
+.history/*
