@@ -20,6 +20,7 @@ async function toHaveNoACViolations(node, label) {
       'html_skipnav_exists',
       'aria_content_in_landmark',
       'aria_child_tabbable',
+      'aria_attribute_conflict',
     ]);
     const ruleset = await aChecker.getRuleset('IBM_Accessibility');
     const customRuleset = JSON.parse(JSON.stringify(ruleset));

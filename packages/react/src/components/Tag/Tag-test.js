@@ -85,7 +85,7 @@ describe('Tag', () => {
       );
 
       expect(
-        screen.getByRole('button', { name: 'AI - Show information' })
+        screen.getByRole('button', { name: 'AI Show information' })
       ).toBeInTheDocument();
     });
 
@@ -101,7 +101,7 @@ describe('Tag', () => {
       );
 
       expect(
-        screen.getByRole('button', { name: 'AI - Show information' })
+        screen.getByRole('button', { name: 'AI Show information' })
       ).toBeInTheDocument();
       spy.mockRestore();
     });
@@ -126,7 +126,7 @@ describe('Tag', () => {
     render(<Tag type="red" decorator={<AILabel />} />);
 
     expect(
-      screen.getByRole('button', { name: 'AI - Show information' })
+      screen.getByRole('button', { name: 'AI Show information' })
     ).toBeInTheDocument();
   });
 
@@ -135,7 +135,7 @@ describe('Tag', () => {
     render(<Tag type="red" slug={<AILabel />} />);
 
     expect(
-      screen.getByRole('button', { name: 'AI - Show information' })
+      screen.getByRole('button', { name: 'AI Show information' })
     ).toBeInTheDocument();
     spy.mockRestore();
   });
