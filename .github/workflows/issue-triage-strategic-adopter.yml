@@ -26,7 +26,7 @@ jobs:
             Mesh|Aspera|Blueworks Live|OpenPages|Databand\.ai|Cognos
             Analytics|Sterling B2B Integration SaaS|Sterling Order & Inventory
             Management|Supply Chain Intelligence Suite|TRIRIGA Application
-            Suite|QRadar SOAR|Guardium Insights|Verify on Cloud)\b
+            Suite|QRadar SOAR|Guardium Insights|Verify on Cloud|DataPower)\b
           flags: g
       - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
         if: ${{ steps.regex-match.outputs.match != '' }}
