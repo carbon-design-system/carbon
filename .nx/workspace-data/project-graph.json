@@ -10309,15 +10309,6 @@
       "type": "npm",
       "name": "npm:axios",
       "data": {
-        "version": "1.7.5",
-        "packageName": "axios",
-        "hash": "10/6cbcfe943a84089f420a900a3a3aeb54ee94dcc9c2b81b150434896357be5d1079eff0b1bbb628597371e79f896b1bc5776df04184756ba99656ff31df9a75bf"
-      }
-    },
-    "npm:axios@1.7.9": {
-      "type": "npm",
-      "name": "npm:axios@1.7.9",
-      "data": {
         "version": "1.7.9",
         "packageName": "axios",
         "hash": "10/b7a5f660ea53ba9c2a745bf5ad77ad8bf4f1338e13ccc3f9f09f810267d6c638c03dac88b55dae8dc98b79c57d2d6835be651d58d2af97c174f43d289a9fd007"
@@ -13318,15 +13309,6 @@
         "version": "11.0.7",
         "packageName": "dotenv-expand",
         "hash": "10/1cd981e2b925e746919e9fca16fa5e953955d021b5d5fea0a4ae96dc61fcc76bc95874e7730f8ceca22f5e3df5a47eb1fc626c3f45e98019ceba54fd58521971"
-      }
-    },
-    "npm:dotenv@16.4.5": {
-      "type": "npm",
-      "name": "npm:dotenv@16.4.5",
-      "data": {
-        "version": "16.4.5",
-        "packageName": "dotenv",
-        "hash": "10/55a3134601115194ae0f924e54473459ed0d9fc340ae610b676e248cca45aa7c680d86365318ea964e6da4e2ea80c4514c1adab5adb43d6867fb57ff068f95c8"
       }
     },
     "npm:dotenv": {
@@ -27346,15 +27328,6 @@
       "type": "npm",
       "name": "npm:yaml",
       "data": {
-        "version": "2.5.0",
-        "packageName": "yaml",
-        "hash": "10/72e903fdbe3742058885205db4a6c9ff38e5f497f4e05e631264f7756083c05e7d10dfb5e4ce9d7a95de95338f9b20d19dd0b91c60c65f7d7608b6b3929820ad"
-      }
-    },
-    "npm:yaml@2.6.1": {
-      "type": "npm",
-      "name": "npm:yaml@2.6.1",
-      "data": {
         "version": "2.6.1",
         "packageName": "yaml",
         "hash": "10/cf412f03a33886db0a3aac70bb4165588f4c5b3c6f8fc91520b71491e5537800b6c2c73ed52015617f6e191eb4644c73c92973960a1999779c62a200ee4c231d"
@@ -33015,7 +32988,7 @@
       },
       {
         "source": "npm:@figma/code-connect",
-        "target": "npm:dotenv@16.4.5",
+        "target": "npm:dotenv",
         "type": "static"
       },
       {
@@ -39207,23 +39180,6 @@
       },
       {
         "source": "npm:axios",
-        "target": "npm:proxy-from-env",
-        "type": "static"
-      }
-    ],
-    "npm:axios@1.7.9": [
-      {
-        "source": "npm:axios@1.7.9",
-        "target": "npm:follow-redirects",
-        "type": "static"
-      },
-      {
-        "source": "npm:axios@1.7.9",
-        "target": "npm:form-data",
-        "type": "static"
-      },
-      {
-        "source": "npm:axios@1.7.9",
         "target": "npm:proxy-from-env",
         "type": "static"
       }
@@ -53108,7 +53064,7 @@
       },
       {
         "source": "npm:nx",
-        "target": "npm:axios@1.7.9",
+        "target": "npm:axios",
         "type": "static"
       },
       {
@@ -53238,7 +53194,7 @@
       },
       {
         "source": "npm:nx",
-        "target": "npm:yaml@2.6.1",
+        "target": "npm:yaml",
         "type": "static"
       },
       {
