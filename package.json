@@ -73,6 +73,7 @@
     "jest-junit": "^16.0.0",
     "lerna": "^8.0.0",
     "lint-staged": "^15.0.0",
+    "nx": "^20.2.1",
     "prettier": "^3.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -147,8 +148,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@4.5.1",
-  "dependencies": {
-    "nx": "^20.2.1"
-  }
+  "packageManager": "yarn@4.5.1"
 }
