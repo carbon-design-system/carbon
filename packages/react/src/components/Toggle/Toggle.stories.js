@@ -100,16 +100,17 @@ export const WithAccessibleLabels = () => (
       <div id="toggle-6-label" style={{ marginBlockEnd: '0.5rem' }}>
         Internal aria-label toggle
       </div>
-      <Toggle aria-label="Internal aria-label toggle" id="toggle-6" hideLabel />
+      <Toggle aria-labelledby="toggle-6-label" id="toggle-6" />
     </div>
 
     <div>
       <label
+        id="toggle-7-label"
         htmlFor="toggle-7"
         style={{ display: 'block', marginBlockEnd: '0.5rem' }}>
         External toggle label
       </label>
-      <Toggle id="toggle-7" hideLabel />
+      <Toggle aria-labelledby="toggle-7-label" id="toggle-7" />
     </div>
   </VStack>
 );
