@@ -147,5 +147,8 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@4.5.1"
+  "packageManager": "yarn@4.5.1",
+  "dependencies": {
+    "nx": "^20.2.1"
+  }
 }
