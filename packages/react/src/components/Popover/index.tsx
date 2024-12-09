@@ -179,6 +179,7 @@ export const Popover: PopoverComponent = React.forwardRef(
       highContrast = false,
       onRequestClose,
       open,
+      alignmentAxisOffset,
       ...rest
     }: PopoverProps<E>,
     forwardRef: ForwardedRef<Element>
@@ -209,7 +210,10 @@ export const Popover: PopoverComponent = React.forwardRef(
     // needs to be placed 1px further outside the popover content. To do so,
     // we look to see if any of the children has a className containing "slug"
     const initialCaretHeight = React.Children.toArray(children).some((x) => {
-      return (x as any)?.props?.className?.includes('slug');
+      return (
+        (x as any)?.props?.className?.includes('slug') ||
+        (x as any)?.props?.className?.includes('ai-label')
+      );
     })
       ? 7
       : 6;
@@ -250,7 +254,6 @@ export const Popover: PopoverComponent = React.forwardRef(
         }
       }
     });
-
     const { refs, floatingStyles, placement, middlewareData } = useFloating(
       enableFloatingStyles
         ? {
@@ -264,7 +267,14 @@ export const Popover: PopoverComponent = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
-              offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
+              offset(
+                !isTabTip
+                  ? {
+                      alignmentAxis: alignmentAxisOffset,
+                      mainAxis: popoverDimensions?.current?.offset,
+                    }
+                  : 0
+              ),
               autoAlign &&
                 flip({
                   fallbackPlacements: align.includes('bottom')
