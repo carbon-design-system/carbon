@@ -1,0 +1,8 @@
+[33mbundle ▐[39m [90m┏[39m bundle
+[33mbundle ▐[39m [90m┗[39m [90mDone in [39m[90m[3m0.40s[23m[39m
+[33mcheck ▐[39m [90m┏[39m check
+[33mcheck ▐[39m [90m┣[39m [90mRunning in: /Users/nikhil/Desktop/try3/carbon/carbon/packages/colors[39m
+[33mcheck ▐[39m [90m┣[39m [90mChecking pattern: 'scss/*.scss', ignoring: ''[39m
+[33mcheck ▐[39m [90m┣[39m [90mCompiling 0 files...[39m
+[33mcheck ▐[39m [90m┣[39m [90mSuccessfully compiled 0 files! 🎉[39m
+[33mcheck ▐[39m [90m┗[39m [90mDone in [39m[90m[3m0.01s[23m[39m

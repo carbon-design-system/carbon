@@ -1,0 +1,11 @@
+[33mbundle ▐[39m [90m┏[39m bundle
+"magenta80", "purple80", "cyan80", "teal80" and "green80" are imported from external module "@carbon/colors" but never used in "src/g10.js", "src/g90.js", "src/g100.js", "src/white.js", "src/component-tokens/tag/tokens.js", "src/v10/white.js", "src/v10/g10.js", "src/v10/g90.js", "src/v10/g100.js" and "src/component-tokens/notification/tokens.js".
+[33mbundle ▐[39m [90m┗[39m [90mDone in [39m[90m[3m0.80s[23m[39m
+[44m [30mINFO[39m [49m [90mBuilding scss files for themes...[39m
+[42m [30mSUCCESS[39m [49m Done! 🎉
+[33mcheck ▐[39m [90m┏[39m check
+[33mcheck ▐[39m [90m┣[39m [90mRunning in: /Users/nikhil/Desktop/try3/carbon/carbon/packages/themes[39m
+[33mcheck ▐[39m [90m┣[39m [90mChecking pattern: 'scss/*.scss', ignoring: ''[39m
+[33mcheck ▐[39m [90m┣[39m [90mCompiling 6 files...[39m
+[33mcheck ▐[39m [90m┣[39m [90mSuccessfully compiled 6 files! 🎉[39m
+[33mcheck ▐[39m [90m┗[39m [90mDone in [39m[90m[3m0.19s[23m[39m

@@ -1,0 +1,8 @@
+[33mbundle ▐[39m [90m┏[39m bundle
+[33mbundle ▐[39m [90m┗[39m [90mDone in [39m[90m[3m0.55s[23m[39m
+[33mcheck ▐[39m [90m┏[39m check
+[33mcheck ▐[39m [90m┣[39m [90mRunning in: /Users/nikhil/Desktop/try3/carbon/carbon/packages/type[39m
+[33mcheck ▐[39m [90m┣[39m [90mChecking pattern: 'scss/*.scss', ignoring: ''[39m
+[33mcheck ▐[39m [90m┣[39m [90mCompiling 7 files...[39m
+[33mcheck ▐[39m [90m┣[39m [90mSuccessfully compiled 7 files! 🎉[39m
+[33mcheck ▐[39m [90m┗[39m [90mDone in [39m[90m[3m0.25s[23m[39m

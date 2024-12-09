@@ -1,0 +1,26 @@
+  [1m[38;2;173;127;168m ▲ Next.js 14.1.1[39m[22m
+
+ [37m[1m [22m[39m Linting and checking validity of types ...
+ [31m[1m⨯[22m[39m ESLint: Failed to load config "next/core-web-vitals" to extend from. Referenced from: /Users/nikhil/Desktop/try3/carbon/carbon/examples/light-dark-mode/.eslintrc.json
+ [37m[1m [22m[39m Creating an optimized production build ...
+ [32m[1m✓[22m[39m Compiled successfully
+ [37m[1m [22m[39m Collecting page data ...
+ [37m[1m [22m[39m Generating static pages (0/3) ...
+ [32m[1m✓[22m[39m Generating static pages (3/3) 
+ [37m[1m [22m[39m Finalizing page optimization ...
+ [37m[1m [22m[39m Collecting build traces ...
+
+[4mRoute (pages)[24m                              [4mSize[24m     [4mFirst Load JS[24m
+┌ ○ /                                      5.28 kB         [37m[1m115 kB[22m[39m
+├   └ css/c2014536ba5872d0.css             246 B
+├   /_app                                  0 B             [37m[1m110 kB[22m[39m
+└ ○ /404                                   180 B           [37m[1m110 kB[22m[39m
++ First Load JS shared by all              [37m[1m190 kB[22m[39m
+  ├ chunks/framework-7b14ec8498ffaae9.js   45.2 kB
+  ├ chunks/main-632a3c10dfe69cbd.js        31.8 kB
+  ├ chunks/pages/_app-9eb714bc05a41393.js  32.3 kB
+  ├ css/4fe5ff87d0234312.css               79.8 kB
+  └ other shared chunks (total)            943 B
+
+○  (Static)  prerendered as static content
+

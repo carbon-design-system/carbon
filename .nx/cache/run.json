@@ -1,0 +1,153 @@
+{
+  "run": {
+    "command": "cli run build --stream --prefix",
+    "startTime": "2024-12-09T18:36:46.423Z",
+    "endTime": "2024-12-09T18:47:49.156Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "@carbon/upgrade:build",
+      "target": "build",
+      "projectName": "@carbon/upgrade",
+      "hash": "11634662104950790527",
+      "startTime": "2024-12-09T18:36:46.430Z",
+      "endTime": "2024-12-09T18:36:49.193Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "typescript-config-carbon:build",
+      "target": "build",
+      "projectName": "typescript-config-carbon",
+      "hash": "4051393928815008656",
+      "startTime": "2024-12-09T18:36:46.430Z",
+      "endTime": "2024-12-09T18:36:50.557Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "@carbon/feature-flags:build",
+      "target": "build",
+      "projectName": "@carbon/feature-flags",
+      "hash": "13096667005618323899",
+      "startTime": "2024-12-09T18:36:46.430Z",
+      "endTime": "2024-12-09T18:36:51.767Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "@carbon/utilities:build",
+      "target": "build",
+      "projectName": "@carbon/utilities",
+      "hash": "4853622870614473883",
+      "startTime": "2024-12-09T18:36:50.558Z",
+      "endTime": "2024-12-09T18:36:57.817Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "@carbon/layout:build",
+      "target": "build",
+      "projectName": "@carbon/layout",
+      "hash": "15624201647919218174",
+      "startTime": "2024-12-09T18:36:50.558Z",
+      "endTime": "2024-12-09T18:37:01.020Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "@carbon/motion:build",
+      "target": "build",
+      "projectName": "@carbon/motion",
+      "hash": "5940060571079180889",
+      "startTime": "2024-12-09T18:36:50.558Z",
+      "endTime": "2024-12-09T18:37:04.667Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "@carbon/colors:build",
+      "target": "build",
+      "projectName": "@carbon/colors",
+      "hash": "3700057665612250228",
+      "startTime": "2024-12-09T18:36:50.558Z",
+      "endTime": "2024-12-09T18:37:04.668Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "@carbon/utilities-react:build",
+      "target": "build",
+      "projectName": "@carbon/utilities-react",
+      "hash": "6093139658116038652",
+      "startTime": "2024-12-09T18:36:57.819Z",
+      "endTime": "2024-12-09T18:37:08.582Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "@carbon/icon-helpers:build",
+      "target": "build",
+      "projectName": "@carbon/icon-helpers",
+      "hash": "12812994204165103234",
+      "startTime": "2024-12-09T18:36:50.558Z",
+      "endTime": "2024-12-09T18:37:10.115Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "@carbon/grid:build",
+      "target": "build",
+      "projectName": "@carbon/grid",
+      "hash": "12975513798001343359",
+      "startTime": "2024-12-09T18:37:01.021Z",
+      "endTime": "2024-12-09T18:37:21.847Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "@carbon/icons:build",
+      "target": "build",
+      "projectName": "@carbon/icons",
+      "hash": "4461970785896143195",
+      "startTime": "2024-12-09T18:37:10.119Z",
+      "endTime": "2024-12-09T18:47:48.207Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    },
+    {
+      "taskId": "@carbon/pictograms:build",
+      "target": "build",
+      "projectName": "@carbon/pictograms",
+      "hash": "11096695560153213188",
+      "startTime": "2024-12-09T18:37:10.119Z",
+      "endTime": "2024-12-09T18:47:48.659Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    },
+    {
+      "taskId": "@carbon/type:build",
+      "target": "build",
+      "projectName": "@carbon/type",
+      "hash": "10930637845394035942",
+      "startTime": "2024-12-09T18:37:21.848Z",
+      "endTime": "2024-12-09T18:47:49.155Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    }
+  ]
+}

@@ -1,0 +1,237 @@
+[36mvite v4.3.9 [32mbuilding for production...[36m[39m
+transforming...
+DEPRECATION WARNING: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+   ┌──> ../../packages/styles/scss/utilities/_button-reset.scss
+17 │     display: inline-block;
+   │     ^^^^^^^^^^^^^^^^^^^^^ declaration
+   ╵
+   ┌──> ../../packages/styles/scss/utilities/_component-reset.scss
+20 │ ┌   *,
+21 │ │   *::before,
+22 │ │   *::after {
+23 │ │     box-sizing: inherit;
+24 │ │   }
+   │ └─── nested rule
+   ╵
+    ../../packages/styles/scss/utilities/_button-reset.scss 17:3          reset()
+    ../../packages/styles/scss/components/accordion/_accordion.scss 87:5  accordion()
+    ../../packages/styles/scss/components/accordion/_index.scss 11:1      @use
+    ../../packages/styles/scss/components/_index.scss 8:1                 @use
+    ../../packages/styles/index.scss 22:1                                 @forward
+    ../../packages/react/index.scss 9:1                                   @use
+    src/index.scss 1:1                                                    root stylesheet
+
+DEPRECATION WARNING: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+   ┌──> ../../packages/styles/scss/utilities/_button-reset.scss
+18 │     padding: 0;
+   │     ^^^^^^^^^^ declaration
+   ╵
+   ┌──> ../../packages/styles/scss/utilities/_component-reset.scss
+20 │ ┌   *,
+21 │ │   *::before,
+22 │ │   *::after {
+23 │ │     box-sizing: inherit;
+24 │ │   }
+   │ └─── nested rule
+   ╵
+    ../../packages/styles/scss/utilities/_button-reset.scss 18:3          reset()
+    ../../packages/styles/scss/components/accordion/_accordion.scss 87:5  accordion()
+    ../../packages/styles/scss/components/accordion/_index.scss 11:1      @use
+    ../../packages/styles/scss/components/_index.scss 8:1                 @use
+    ../../packages/styles/index.scss 22:1                                 @forward
+    ../../packages/react/index.scss 9:1                                   @use
+    src/index.scss 1:1                                                    root stylesheet
+
+DEPRECATION WARNING: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+   ┌──> ../../packages/styles/scss/utilities/_button-reset.scss
+19 │     border: 0;
+   │     ^^^^^^^^^ declaration
+   ╵
+   ┌──> ../../packages/styles/scss/utilities/_component-reset.scss
+20 │ ┌   *,
+21 │ │   *::before,
+22 │ │   *::after {
+23 │ │     box-sizing: inherit;
+24 │ │   }
+   │ └─── nested rule
+   ╵
+    ../../packages/styles/scss/utilities/_button-reset.scss 19:3          reset()
+    ../../packages/styles/scss/components/accordion/_accordion.scss 87:5  accordion()
+    ../../packages/styles/scss/components/accordion/_index.scss 11:1      @use
+    ../../packages/styles/scss/components/_index.scss 8:1                 @use
+    ../../packages/styles/index.scss 22:1                                 @forward
+    ../../packages/react/index.scss 9:1                                   @use
+    src/index.scss 1:1                                                    root stylesheet
+
+DEPRECATION WARNING: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+   ┌──> ../../packages/styles/scss/utilities/_button-reset.scss
+20 │     appearance: none;
+   │     ^^^^^^^^^^^^^^^^ declaration
+   ╵
+   ┌──> ../../packages/styles/scss/utilities/_component-reset.scss
+20 │ ┌   *,
+21 │ │   *::before,
+22 │ │   *::after {
+23 │ │     box-sizing: inherit;
+24 │ │   }
+   │ └─── nested rule
+   ╵
+    ../../packages/styles/scss/utilities/_button-reset.scss 20:3          reset()
+    ../../packages/styles/scss/components/accordion/_accordion.scss 87:5  accordion()
+    ../../packages/styles/scss/components/accordion/_index.scss 11:1      @use
+    ../../packages/styles/scss/components/_index.scss 8:1                 @use
+    ../../packages/styles/index.scss 22:1                                 @forward
+    ../../packages/react/index.scss 9:1                                   @use
+    src/index.scss 1:1                                                    root stylesheet
+
+DEPRECATION WARNING: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+   ┌──> ../../packages/styles/scss/utilities/_button-reset.scss
+21 │     background: none;
+   │     ^^^^^^^^^^^^^^^^ declaration
+   ╵
+   ┌──> ../../packages/styles/scss/utilities/_component-reset.scss
+20 │ ┌   *,
+21 │ │   *::before,
+22 │ │   *::after {
+23 │ │     box-sizing: inherit;
+24 │ │   }
+   │ └─── nested rule
+   ╵
+    ../../packages/styles/scss/utilities/_button-reset.scss 21:3          reset()
+    ../../packages/styles/scss/components/accordion/_accordion.scss 87:5  accordion()
+    ../../packages/styles/scss/components/accordion/_index.scss 11:1      @use
+    ../../packages/styles/scss/components/_index.scss 8:1                 @use
+    ../../packages/styles/index.scss 22:1                                 @forward
+    ../../packages/react/index.scss 9:1                                   @use
+    src/index.scss 1:1                                                    root stylesheet
+
+WARNING: 1133 repetitive deprecation warnings omitted.
+
+[32m✓[39m 434 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mdist/[22m[32mindex.html                                                  [39m[1m[2m  0.47 kB[22m[1m[22m[2m │ gzip:  0.31 kB[22m
+[2mdist/[22m[2massets/[22m[32mfavicon-17e50649.svg                                 [39m[1m[2m  1.52 kB[22m[1m[22m[2m │ gzip:  0.80 kB[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Regular-Latin3-83c0cf9b.woff2            [39m[1m[2m  5.50 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Light-Latin3-32f8eb90.woff2              [39m[1m[2m  5.61 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Regular-Latin3-cef1cb29.woff2           [39m[1m[2m  5.72 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Italic-Latin3-b36e89ec.woff2             [39m[1m[2m  5.80 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Light-Latin3-96134fa2.woff2             [39m[1m[2m  5.85 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-LightItalic-Latin3-8f2c5b8e.woff2        [39m[1m[2m  5.94 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-SemiBold-Latin3-42318ef5.woff2          [39m[1m[2m  6.00 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Italic-Latin3-1da57e50.woff2            [39m[1m[2m  6.01 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-LightItalic-Latin3-109a4697.woff2       [39m[1m[2m  6.04 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-SemiBoldItalic-Latin3-598d9394.woff2    [39m[1m[2m  6.21 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-SemiBold-Latin3-fedd9c44.woff2           [39m[1m[2m  6.42 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Regular-Latin3-79f06a9f.woff2            [39m[1m[2m  6.64 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Regular-Pi-7999b7d7.woff2                [39m[1m[2m  6.67 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Light-Pi-e2edfea6.woff2                  [39m[1m[2m  6.69 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-SemiBoldItalic-Latin3-3a97f5c5.woff2     [39m[1m[2m  6.76 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Regular-Pi-c4b52d3c.woff2               [39m[1m[2m  6.76 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Light-Pi-88bb25d3.woff2                 [39m[1m[2m  6.78 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-SemiBold-Pi-fb3c8362.woff2              [39m[1m[2m  6.80 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Light-Latin3-89b3b969.woff2              [39m[1m[2m  6.83 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-SemiBoldItalic-Latin3-694aed34.woff2     [39m[1m[2m  6.94 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-SemiBold-Latin3-96d28d6c.woff2           [39m[1m[2m  7.00 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Regular-Pi-863dc65c.woff2                [39m[1m[2m  7.04 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-LightItalic-Latin3-7689e68d.woff2        [39m[1m[2m  7.08 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-LightItalic-Pi-a0cd1e8e.woff2            [39m[1m[2m  7.08 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Italic-Latin3-e4e13252.woff2             [39m[1m[2m  7.08 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Italic-Pi-ada20225.woff2                [39m[1m[2m  7.11 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-LightItalic-Pi-16089af9.woff2           [39m[1m[2m  7.14 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Italic-Pi-2327f14c.woff2                 [39m[1m[2m  7.16 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Light-Pi-bf6762ab.woff2                  [39m[1m[2m  7.19 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Italic-Pi-a64c51d6.woff2                 [39m[1m[2m  7.21 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-SemiBoldItalic-Pi-ddcb59fb.woff2        [39m[1m[2m  7.23 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-SemiBold-Pi-9bb2c176.woff2               [39m[1m[2m  7.33 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-LightItalic-Pi-ee080ac0.woff2            [39m[1m[2m  7.48 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-SemiBoldItalic-Pi-447f198e.woff2         [39m[1m[2m  7.51 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-SemiBold-Pi-6efab2c1.woff2               [39m[1m[2m  7.56 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-SemiBoldItalic-Pi-2437cc51.woff2         [39m[1m[2m  7.94 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Light-Cyrillic-4114187c.woff2            [39m[1m[2m 11.57 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Regular-Cyrillic-cbec9753.woff2          [39m[1m[2m 11.57 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Regular-Latin2-446183bf.woff2            [39m[1m[2m 12.59 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-SemiBold-Cyrillic-bc9e0fcc.woff2         [39m[1m[2m 12.65 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Light-Latin2-abab41a7.woff2              [39m[1m[2m 12.74 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Italic-Latin2-b2de1b4f.woff2             [39m[1m[2m 13.42 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-LightItalic-Latin2-5051feb7.woff2        [39m[1m[2m 13.51 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-SemiBold-Latin2-ec810505.woff2           [39m[1m[2m 13.53 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Regular-Latin1-c38b62c3.woff2            [39m[1m[2m 13.56 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Light-Latin1-9631c8ec.woff2              [39m[1m[2m 13.74 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Italic-Cyrillic-767231c6.woff2           [39m[1m[2m 13.88 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-LightItalic-Cyrillic-956634fe.woff2      [39m[1m[2m 14.20 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-SemiBoldItalic-Latin2-80489ee0.woff2     [39m[1m[2m 14.31 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-SemiBold-Latin1-89d58ca9.woff2           [39m[1m[2m 14.50 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Regular-Cyrillic-7302f050.woff2          [39m[1m[2m 14.61 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Regular-Latin2-eb3d7713.woff2            [39m[1m[2m 14.70 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Light-Cyrillic-fa438db9.woff2            [39m[1m[2m 14.73 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Light-Latin2-1b9f09e8.woff2             [39m[1m[2m 14.82 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Regular-Latin2-b58965ce.woff2           [39m[1m[2m 14.84 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-LightItalic-Latin1-da889d29.woff2        [39m[1m[2m 14.84 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-SemiBold-Latin2-78049d2a.woff2          [39m[1m[2m 14.94 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-Italic-Latin1-a3f34880.woff2             [39m[1m[2m 15.03 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-SemiBoldItalic-Cyrillic-94dda54f.woff2   [39m[1m[2m 15.06 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Light-Latin2-7533b0c6.woff2              [39m[1m[2m 15.11 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-SemiBold-Latin2-880cb6f5.woff2           [39m[1m[2m 15.15 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-SemiBold-Cyrillic-64856710.woff2         [39m[1m[2m 15.18 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Italic-Latin2-9760c1d9.woff2             [39m[1m[2m 15.32 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-LightItalic-Latin2-8a49fca7.woff2       [39m[1m[2m 15.39 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-SemiBoldItalic-Latin2-04762cfb.woff2     [39m[1m[2m 15.53 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Italic-Latin2-66a85a33.woff2            [39m[1m[2m 15.62 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexMono-SemiBoldItalic-Latin1-0d870c01.woff2     [39m[1m[2m 15.66 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-LightItalic-Latin2-400c3ee6.woff2        [39m[1m[2m 15.80 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-SemiBoldItalic-Latin2-4b1b27e2.woff2    [39m[1m[2m 15.87 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Italic-Cyrillic-232dbae4.woff2           [39m[1m[2m 16.32 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-LightItalic-Cyrillic-11839190.woff2      [39m[1m[2m 16.56 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Regular-Latin1-9085dc40.woff2            [39m[1m[2m 16.75 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-SemiBoldItalic-Cyrillic-a0bdc2c2.woff2   [39m[1m[2m 16.77 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-SemiBold-Cyrillic-2dcdfa19.woff2        [39m[1m[2m 16.85 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Regular-Cyrillic-085f3275.woff2         [39m[1m[2m 16.86 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Light-Cyrillic-190bd464.woff2           [39m[1m[2m 16.89 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Light-Latin1-2d4c30c4.woff2              [39m[1m[2m 17.46 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-SemiBold-Latin1-62a59aaf.woff2           [39m[1m[2m 17.58 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Regular-Latin1-f134d2cd.woff2           [39m[1m[2m 17.67 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Light-Latin1-b061b795.woff2             [39m[1m[2m 18.04 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-SemiBold-Latin1-0cf62b5f.woff2          [39m[1m[2m 18.08 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-Italic-Latin1-f7957626.woff2             [39m[1m[2m 18.30 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-SemiBoldItalic-Latin1-871075f6.woff2     [39m[1m[2m 18.36 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSans-LightItalic-Latin1-1537b858.woff2        [39m[1m[2m 18.70 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Italic-Latin1-edb6732a.woff2            [39m[1m[2m 18.83 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-LightItalic-Latin1-c4b5b490.woff2       [39m[1m[2m 19.10 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-LightItalic-Cyrillic-e575b534.woff2     [39m[1m[2m 19.48 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-Italic-Cyrillic-23a7b0f5.woff2          [39m[1m[2m 19.65 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-SemiBoldItalic-Latin1-f8093798.woff2    [39m[1m[2m 19.74 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[32mIBMPlexSerif-SemiBoldItalic-Cyrillic-13b18104.woff2  [39m[1m[2m 20.05 kB[22m[1m[22m
+[2mdist/[22m[2massets/[22m[35mindex-f6d479d4.css                                   [39m[1m[2m707.05 kB[22m[1m[22m[2m │ gzip: 74.73 kB[22m
+[2mdist/[22m[2massets/[22m[36mindex-5909d718.js                                    [39m[1m[2m190.13 kB[22m[1m[22m[2m │ gzip: 61.78 kB[22m
+[32m✓ built in 6.66s[39m
