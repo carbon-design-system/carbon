@@ -61,3 +61,6 @@ blob-report
 
 # Local token
 .env
+
+# nx local buiild cache
+.nx/cache
