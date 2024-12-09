@@ -3631,153 +3631,153 @@
       "type": "npm",
       "name": "npm:@percy/cli-app",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/cli-app",
-        "hash": "10/701dc58fe07c3527e703ad717bbde3de6e0bdc30be5a5d0bd7a2ca8cdbab2e15cadda5556b3b93cf078f929b83165a60f28269d6d8a4ef11e4e43fd380443df0"
+        "hash": "10/e457ee7acfac2fea032040a550d7de0fd33bf2b502d8359c4885fafa91bc1aa9f4deb5e07c1918972e3d0ff3e13f7ee37b698838bc328af65890433c61d2056e"
       }
     },
     "npm:@percy/cli-build": {
       "type": "npm",
       "name": "npm:@percy/cli-build",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/cli-build",
-        "hash": "10/596618d7d8ec0873e6464961c0a10e350e209ee2b064c2e3e639c3b02b423a4acaa339f9fb062540944fc54bb992ec4f762bb016e31201531a0094804398f01b"
+        "hash": "10/7f31b057b15504feea1f6de4b202c6733b78e34b429183d323f7e376d204b4b3ca72f7be48481fa5353fffcdda6fc5298d7d642986794c95343f5ca5ba595d5e"
       }
     },
     "npm:@percy/cli-command": {
       "type": "npm",
       "name": "npm:@percy/cli-command",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/cli-command",
-        "hash": "10/ff9a5ab09a7e3c96ff468d74b633058db95cbc0752452b26e5271c7b8d8295b5d92c412befa3920eac47f7782dc6c5ca2c9062c0f59836850b15f9c447d27523"
+        "hash": "10/eaadc20323c20b4de98078530b522d1aeb8b9e029ad7a5cb054b68eb9b2f45c703bee26e2aa5afca5347bcfb2441732c8fecf3663ea177d4cf5c35e452ac11a4"
       }
     },
     "npm:@percy/cli-config": {
       "type": "npm",
       "name": "npm:@percy/cli-config",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/cli-config",
-        "hash": "10/9cb7c080142e2f679b28c06faf3978a6e1715ad6ae6cc61f9dd827363f1426620061f754cb78285181369f2f963ac0b5ea426799ee40f6a25c7b9381a4260d6c"
+        "hash": "10/6405b26d896b5666d32c4a44068478ea66765138788d372c9b31350ea4d58a59a00083421929e2bb3eb979f582e8b6549dfe06a59ede99b90f81a1c6a32c4b59"
       }
     },
     "npm:@percy/cli-exec": {
       "type": "npm",
       "name": "npm:@percy/cli-exec",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/cli-exec",
-        "hash": "10/45e4a1828628a3fe69f1fc727ef7fd2a9f0e1af463ac5bb5ea64bbdb943b88b68e50dbe221c41e09be419cd975b2bd40abd130cf22af9316566e24bb540c118f"
+        "hash": "10/d017bd8d3afd81393009ac57032db63e2582d789cf93efa010908c37aac0446409390f983096819e24f15a93165f41bb9709d504ce911d5d9ba6ef72e0fc53c1"
       }
     },
     "npm:@percy/cli-snapshot": {
       "type": "npm",
       "name": "npm:@percy/cli-snapshot",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/cli-snapshot",
-        "hash": "10/20762bfc7c3803cfb5ad7466ac6feb1757977e758f0131f92645f4565f4987601a5049b414cea020d3a5695ec05f65be66f2e3e07700823f707eeb6397358e03"
+        "hash": "10/41247eb946456ab44385156450337e2cb402f46f4e8fa12138f4ea018b0097c728325e17d819c9ab11c2f29bc00b990969c19e0cd2da74f511bd83a2b2f42ad2"
       }
     },
     "npm:@percy/cli-upload": {
       "type": "npm",
       "name": "npm:@percy/cli-upload",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/cli-upload",
-        "hash": "10/e3d4f251b76bc3f9db04fd10388bd994371ace76eb6b6f49f226d37453e7eae6ffa1f4f32b809b23ef6e5fd6298aa80ef8c84bb684a733549812ac3f4141e649"
+        "hash": "10/8ef79a7cb77940018f164fa3696f0a9d5b7816ced57f2e484ea3deaaf2795b7993a13383865315888f750c446ce23f1aeb5c1cd1e684c694c4365df96ee0644e"
       }
     },
     "npm:@percy/cli": {
       "type": "npm",
       "name": "npm:@percy/cli",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/cli",
-        "hash": "10/073d9931824a24b1f4fecc5b494dac025354e1bf5f38e82e88a1271fdebe5498b9477cf5e6ff905fc062210f352c6eef867cdbf0888c7fb0d96918c47b1919e9"
+        "hash": "10/a67bfeadc9deb11827a22d1f339d7597f8f5779bca7a1d69c3ae05abba8507719bdb1f37681b139234066369e598a22b7ec3489e68d385f03763822e00ab76e3"
       }
     },
     "npm:@percy/client": {
       "type": "npm",
       "name": "npm:@percy/client",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/client",
-        "hash": "10/557c9861af79e04aa1b32a913a037e5f1547cff3b23abd9acc687638797c6b337bb509746f40b57e794739ee74c1e22cfab8207fb36c4e9fd96f6b3195636dcb"
+        "hash": "10/601318235da189f1da9518225a7a7c9b70e7a284d5da128deec670441bf4bed2a5b7b96187ae0fc74ba3fd23ae2a90d7a1dedfecf5f2493898aa0d411a084060"
       }
     },
     "npm:@percy/config": {
       "type": "npm",
       "name": "npm:@percy/config",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/config",
-        "hash": "10/2749031619db2df210c3df19c142b6fcb2f6574c450c7ff1a05986aed37e860aa6ecf1cf6f47d64914605a75046f64ef71068409634acab730b2004b5558def2"
+        "hash": "10/836247bfb4fd982bac4c0bd80fe0f4d4098a7036f9780f7c2a7ea30411b4c6bb081826cb9b6b373925329b01bf83ef557e80ff6d388d81709144b982d0bbf10a"
       }
     },
     "npm:@percy/core": {
       "type": "npm",
       "name": "npm:@percy/core",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/core",
-        "hash": "10/84e0ec9e82ce00941140bb5f2537359be407be156dbf3fc68b43c897b56af12305bc8e5205fecbcb49391060ed631a2c8fedfc327af6ba655a0195241d5dee6c"
+        "hash": "10/c44a4ba31039fde7af8e7518cbfab1f4ff598121b936985eda563930dd79266fdd938f08897774f613130a5ef34c8b36e736bac3a82e9bf4cd4ccf30c3a87552"
       }
     },
     "npm:@percy/dom": {
       "type": "npm",
       "name": "npm:@percy/dom",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/dom",
-        "hash": "10/b92a3ff29495b194b4b4c5155ef49595b863e557d14b3f78f88d9c1c02f23e44181397064399f1c3dc5bc6bbf57626d863dec29facfdfcc1f9b2ed5d9adf362e"
+        "hash": "10/1b6967e47faecd18a5147e583bfd8823732122e4748784e0a4061c378ecc72f0d60fcbb1e89529ced100f7924140b4b1e2f7d5769387f596c2dca1f92dda557f"
       }
     },
     "npm:@percy/env": {
       "type": "npm",
       "name": "npm:@percy/env",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/env",
-        "hash": "10/07a6ead152aeb949d1de3918fecbc551a16d5a40db54fad39c6f418d1bb324a0f6eada3c6ac827177352365fac24e445be12e9dba9382666a6d56a7d7bb5d5d4"
+        "hash": "10/1187cd7189a0f0a38e9305cbf8574bb00643607db0aceafeafe760bfa398f32b7c98c915ffc5188981fa72fd6f1a167ddeb3d7df01c16291ae8b63f7c6295df9"
       }
     },
     "npm:@percy/logger": {
       "type": "npm",
       "name": "npm:@percy/logger",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/logger",
-        "hash": "10/f9512936105077b2cf7eac0be13d54d62fbe0facada67dd2cda863dec75c244d98113874a0a34317304e23909a19844d434b97a401ded81185b3c3336e7dbec3"
+        "hash": "10/a33d81f7cf28f14d3d6b1a1a333e0b725abe88fcff3dbbed70a7448e498a947ed4a183b1960de803ea01d83d0b129403d903da5c2d144d15407396bdfb94f4ca"
       }
     },
     "npm:@percy/playwright": {
       "type": "npm",
       "name": "npm:@percy/playwright",
       "data": {
-        "version": "1.0.6",
+        "version": "1.0.7",
         "packageName": "@percy/playwright",
-        "hash": "10/d64564c5fe5f2c4adcfff86f067d0eed77368bd8498284697037d19f7aaf21f78ac49eafc5648fd0b0d74a3fd90dd1461edce920abd75f55f438e32ed9a5e3cd"
+        "hash": "10/a044e68984ff3819b086c7368088535e678026cc37cd811d3567cd3ebd1d69de8733f72eb4712fefd153cdb693013e51884db9a761a7c42d9fbda848c61f0d49"
       }
     },
     "npm:@percy/sdk-utils": {
       "type": "npm",
       "name": "npm:@percy/sdk-utils",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/sdk-utils",
-        "hash": "10/4ff24d2980bb49cc7fa989b2fe022de17699475b247567d47ad0d32cab5249491c04da70e731e25f3236512250b94c1c9ec3519c5bba392cb8632ab52244a329"
+        "hash": "10/451cc9ed3da7f26b366d568c6b34ebbaac9c82ed7075c81725240f0fd1aba1a60ab3b0d4e63b9581f3bada2c3386b31e2d119e0038be86a257f339c2ef99e509"
       }
     },
     "npm:@percy/webdriver-utils": {
       "type": "npm",
       "name": "npm:@percy/webdriver-utils",
       "data": {
-        "version": "1.29.2",
+        "version": "1.30.4",
         "packageName": "@percy/webdriver-utils",
-        "hash": "10/8cc7140363ead5487d8163625fd99bf6dd681530e78ca394ee21d148f43c2eab316a70b2e7c9cc30e22455a0a28af4be2955cda496c5b4135aa6f99bf686fb27"
+        "hash": "10/46ee29e28c7a9aa5df7251f29d004ee07263dfe74006d0cd852489791136a76078f2c5ba6245b4198d3766d9115b252b921e4a8f262a2389b9a3770f930c511a"
       }
     },
     "npm:@pkgjs/parseargs": {
@@ -6925,15 +6925,6 @@
       "type": "npm",
       "name": "npm:axios",
       "data": {
-        "version": "1.7.5",
-        "packageName": "axios",
-        "hash": "10/6cbcfe943a84089f420a900a3a3aeb54ee94dcc9c2b81b150434896357be5d1079eff0b1bbb628597371e79f896b1bc5776df04184756ba99656ff31df9a75bf"
-      }
-    },
-    "npm:axios@1.7.9": {
-      "type": "npm",
-      "name": "npm:axios@1.7.9",
-      "data": {
         "version": "1.7.9",
         "packageName": "axios",
         "hash": "10/b7a5f660ea53ba9c2a745bf5ad77ad8bf4f1338e13ccc3f9f09f810267d6c638c03dac88b55dae8dc98b79c57d2d6835be651d58d2af97c174f43d289a9fd007"
@@ -9934,15 +9925,6 @@
         "version": "11.0.7",
         "packageName": "dotenv-expand",
         "hash": "10/1cd981e2b925e746919e9fca16fa5e953955d021b5d5fea0a4ae96dc61fcc76bc95874e7730f8ceca22f5e3df5a47eb1fc626c3f45e98019ceba54fd58521971"
-      }
-    },
-    "npm:dotenv@16.4.5": {
-      "type": "npm",
-      "name": "npm:dotenv@16.4.5",
-      "data": {
-        "version": "16.4.5",
-        "packageName": "dotenv",
-        "hash": "10/55a3134601115194ae0f924e54473459ed0d9fc340ae610b676e248cca45aa7c680d86365318ea964e6da4e2ea80c4514c1adab5adb43d6867fb57ff068f95c8"
       }
     },
     "npm:dotenv": {
@@ -18166,9 +18148,9 @@
       "type": "npm",
       "name": "npm:path-to-regexp",
       "data": {
-        "version": "6.2.0",
+        "version": "6.3.0",
         "packageName": "path-to-regexp",
-        "hash": "10/330ad50d40a45c6e8e1d99d55162b9d51192b99e8c8b8d01262f440731f6985a8fcfc427c8640fa6c463d9266fccc4190f8c8ef9d98a0196bedab42b9cd91135"
+        "hash": "10/6822f686f01556d99538b350722ef761541ec0ce95ca40ce4c29e20a5b492fe8361961f57993c71b2418de12e604478dcf7c430de34b2c31a688363a7a944d9c"
       }
     },
     "npm:path-type@3.0.0": {
@@ -23962,15 +23944,6 @@
       "type": "npm",
       "name": "npm:yaml",
       "data": {
-        "version": "2.5.0",
-        "packageName": "yaml",
-        "hash": "10/72e903fdbe3742058885205db4a6c9ff38e5f497f4e05e631264f7756083c05e7d10dfb5e4ce9d7a95de95338f9b20d19dd0b91c60c65f7d7608b6b3929820ad"
-      }
-    },
-    "npm:yaml@2.6.1": {
-      "type": "npm",
-      "name": "npm:yaml@2.6.1",
-      "data": {
         "version": "2.6.1",
         "packageName": "yaml",
         "hash": "10/cf412f03a33886db0a3aac70bb4165588f4c5b3c6f8fc91520b71491e5537800b6c2c73ed52015617f6e191eb4644c73c92973960a1999779c62a200ee4c231d"
@@ -28077,7 +28050,7 @@
     },
     {
       "source": "npm:@figma/code-connect",
-      "target": "npm:dotenv@16.4.5",
+      "target": "npm:dotenv",
       "type": "static"
     },
     {
@@ -34986,17 +34959,17 @@
       "type": "static"
     },
     {
-      "source": "npm:axios@1.7.9",
+      "source": "npm:axios",
       "target": "npm:follow-redirects",
       "type": "static"
     },
     {
-      "source": "npm:axios@1.7.9",
+      "source": "npm:axios",
       "target": "npm:form-data",
       "type": "static"
     },
     {
-      "source": "npm:axios@1.7.9",
+      "source": "npm:axios",
       "target": "npm:proxy-from-env",
       "type": "static"
     },
@@ -51011,16 +50984,6 @@
       "type": "static"
     },
     {
-      "source": "npm:micromatch",
-      "target": "npm:braces",
-      "type": "static"
-    },
-    {
-      "source": "npm:micromatch",
-      "target": "npm:picomatch",
-      "type": "static"
-    },
-    {
       "source": "npm:mime-types",
       "target": "npm:mime-db",
       "type": "static"
@@ -52687,7 +52650,7 @@
     },
     {
       "source": "npm:nx",
-      "target": "npm:axios@1.7.9",
+      "target": "npm:axios",
       "type": "static"
     },
     {
@@ -52817,7 +52780,7 @@
     },
     {
       "source": "npm:nx",
-      "target": "npm:yaml@2.6.1",
+      "target": "npm:yaml",
       "type": "static"
     },
     {
