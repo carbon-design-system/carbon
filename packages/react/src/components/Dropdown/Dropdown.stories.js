@@ -111,8 +111,8 @@ export const Playground = (args) => (
       id="default"
       titleText="Dropdown label"
       helperText="This is some helper text"
-      initialSelectedItem={items[1]}
-      label="Option 1"
+      initialSelectedItem={items[2]}
+      label="Option 2"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       {...args}

@@ -126,7 +126,8 @@
     outline-width: convert.to-rem(1px);
   }
 
-  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__field:focus {
+  .#{$prefix}--list-box__wrapper--fluid--focus
+    .#{$prefix}--list-box__field:focus {
     outline: none;
     outline-offset: 0;
   }

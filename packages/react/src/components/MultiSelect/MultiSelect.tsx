@@ -503,9 +503,17 @@ const MultiSelect = React.forwardRef(
             setItemsCleared(false);
             setIsOpenWrapper(true);
           }
+          if (match(e, keys.ArrowDown) && selectedItems.length === 0) {
+            setInputFocused(false);
+            setIsFocused(false);
+          }
+          if (match(e, keys.Enter) && isOpen) {
+            setInputFocused(true);
+          }
         }
       },
     });
+
     const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
 
     const selectedItems = selectedItem as ItemType[];
@@ -542,8 +550,7 @@ const MultiSelect = React.forwardRef(
           inline && invalid,
         [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
         [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
-        [`${prefix}--list-box__wrapper--fluid--focus`]:
-          !isOpen && isFluid && isFocused,
+        [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
         [`${prefix}--list-box__wrapper--slug`]: slug,
         [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
