@@ -64,3 +64,4 @@ blob-report
 
 # nx local buiild cache
 .nx/cache
+.nx/workspace-data
