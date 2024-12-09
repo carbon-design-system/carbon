@@ -57,7 +57,7 @@ test.describe('@avt AILabel', () => {
       },
     });
     const slug = page.getByRole('button', {
-      name: 'AI - Show information',
+      name: 'AI Show information',
     });
     const callout = page.locator('.cds--popover--open');
     await expect(slug).toBeVisible();

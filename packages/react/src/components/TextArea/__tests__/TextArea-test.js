@@ -204,7 +204,7 @@ describe('TextArea', () => {
         />
       );
       expect(
-        screen.getByRole('button', { name: 'AI - Show information' })
+        screen.getByRole('button', { name: 'AI Show information' })
       ).toBeInTheDocument();
     });
 
@@ -218,7 +218,7 @@ describe('TextArea', () => {
         />
       );
       expect(
-        screen.getByRole('button', { name: 'AI - Show information' })
+        screen.getByRole('button', { name: 'AI Show information' })
       ).toBeInTheDocument();
       spy.mockRestore();
     });
