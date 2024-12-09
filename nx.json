@@ -23,5 +23,6 @@
         "{projectRoot}/packages/react/es, packages/react/lib"
       ]
     }
-  }
+  },
+  "nxCloudId": "6757024dd78ff71eb4eebb5f"
 }
