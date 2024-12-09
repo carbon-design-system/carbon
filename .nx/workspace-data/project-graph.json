@@ -4893,16 +4893,16 @@
       "data": {
         "version": "0.24.0",
         "packageName": "@esbuild/aix-ppc64",
-        "hash": "4415316045981511428"
+        "hash": "10/abe90ecf17befdf4269b306c33b68beb3b5803e8b474279028c82a3c7cc4b14fff6fd3133a4b62a011e93a81b8e33af1af4808aa0031c6bb11bf15c00a5854a9"
       }
     },
-    "npm:@esbuild/android-arm64@0.18.20": {
+    "npm:@esbuild/android-arm64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/android-arm64@0.18.20",
+      "name": "npm:@esbuild/android-arm64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/android-arm64",
-        "hash": "17204542626872632899"
+        "hash": "7046267228255417830"
       }
     },
     "npm:@esbuild/android-arm64@0.21.5": {
@@ -4923,13 +4923,13 @@
         "hash": "3771350141881526116"
       }
     },
-    "npm:@esbuild/android-arm@0.18.20": {
+    "npm:@esbuild/android-arm@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/android-arm@0.18.20",
+      "name": "npm:@esbuild/android-arm@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/android-arm",
-        "hash": "17252843040108074680"
+        "hash": "658543289796579879"
       }
     },
     "npm:@esbuild/android-arm@0.21.5": {
@@ -4950,13 +4950,13 @@
         "hash": "14552031837548495469"
       }
     },
-    "npm:@esbuild/android-x64@0.18.20": {
+    "npm:@esbuild/android-x64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/android-x64@0.18.20",
+      "name": "npm:@esbuild/android-x64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/android-x64",
-        "hash": "17305770367332610508"
+        "hash": "1586885519098729852"
       }
     },
     "npm:@esbuild/android-x64@0.21.5": {
@@ -4977,13 +4977,13 @@
         "hash": "7345253525828706378"
       }
     },
-    "npm:@esbuild/darwin-arm64@0.18.20": {
+    "npm:@esbuild/darwin-arm64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/darwin-arm64@0.18.20",
+      "name": "npm:@esbuild/darwin-arm64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/darwin-arm64",
-        "hash": "7433173723049178316"
+        "hash": "9643443937136088781"
       }
     },
     "npm:@esbuild/darwin-arm64@0.21.5": {
@@ -5004,13 +5004,13 @@
         "hash": "12686586457181021158"
       }
     },
-    "npm:@esbuild/darwin-x64@0.18.20": {
+    "npm:@esbuild/darwin-x64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/darwin-x64@0.18.20",
+      "name": "npm:@esbuild/darwin-x64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/darwin-x64",
-        "hash": "5155312458822178637"
+        "hash": "6301507646299812236"
       }
     },
     "npm:@esbuild/darwin-x64@0.21.5": {
@@ -5031,13 +5031,13 @@
         "hash": "11058787377873927445"
       }
     },
-    "npm:@esbuild/freebsd-arm64@0.18.20": {
+    "npm:@esbuild/freebsd-arm64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/freebsd-arm64@0.18.20",
+      "name": "npm:@esbuild/freebsd-arm64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/freebsd-arm64",
-        "hash": "14986126337997165259"
+        "hash": "3666287981913590706"
       }
     },
     "npm:@esbuild/freebsd-arm64@0.21.5": {
@@ -5058,13 +5058,13 @@
         "hash": "6262726900008576919"
       }
     },
-    "npm:@esbuild/freebsd-x64@0.18.20": {
+    "npm:@esbuild/freebsd-x64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/freebsd-x64@0.18.20",
+      "name": "npm:@esbuild/freebsd-x64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/freebsd-x64",
-        "hash": "13074699967760305988"
+        "hash": "7304972278030514523"
       }
     },
     "npm:@esbuild/freebsd-x64@0.21.5": {
@@ -5085,13 +5085,13 @@
         "hash": "17992491878609312389"
       }
     },
-    "npm:@esbuild/linux-arm64@0.18.20": {
+    "npm:@esbuild/linux-arm64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/linux-arm64@0.18.20",
+      "name": "npm:@esbuild/linux-arm64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/linux-arm64",
-        "hash": "10635806711666817648"
+        "hash": "7738568925152137962"
       }
     },
     "npm:@esbuild/linux-arm64@0.21.5": {
@@ -5112,13 +5112,13 @@
         "hash": "12491844633134982479"
       }
     },
-    "npm:@esbuild/linux-arm@0.18.20": {
+    "npm:@esbuild/linux-arm@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/linux-arm@0.18.20",
+      "name": "npm:@esbuild/linux-arm@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/linux-arm",
-        "hash": "1360907379387263095"
+        "hash": "12915261142086985810"
       }
     },
     "npm:@esbuild/linux-arm@0.21.5": {
@@ -5139,13 +5139,13 @@
         "hash": "12552500031689538242"
       }
     },
-    "npm:@esbuild/linux-ia32@0.18.20": {
+    "npm:@esbuild/linux-ia32@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/linux-ia32@0.18.20",
+      "name": "npm:@esbuild/linux-ia32@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/linux-ia32",
-        "hash": "5126016300902429316"
+        "hash": "8454508547056884142"
       }
     },
     "npm:@esbuild/linux-ia32@0.21.5": {
@@ -5166,13 +5166,13 @@
         "hash": "11799651435934528267"
       }
     },
-    "npm:@esbuild/linux-loong64@0.18.20": {
+    "npm:@esbuild/linux-loong64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/linux-loong64@0.18.20",
+      "name": "npm:@esbuild/linux-loong64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/linux-loong64",
-        "hash": "1234701769363658766"
+        "hash": "772924554821701062"
       }
     },
     "npm:@esbuild/linux-loong64@0.21.5": {
@@ -5193,13 +5193,13 @@
         "hash": "1288201198806470450"
       }
     },
-    "npm:@esbuild/linux-mips64el@0.18.20": {
+    "npm:@esbuild/linux-mips64el@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/linux-mips64el@0.18.20",
+      "name": "npm:@esbuild/linux-mips64el@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/linux-mips64el",
-        "hash": "15275887422896313577"
+        "hash": "8000322116214237276"
       }
     },
     "npm:@esbuild/linux-mips64el@0.21.5": {
@@ -5220,13 +5220,13 @@
         "hash": "1927698670943773848"
       }
     },
-    "npm:@esbuild/linux-ppc64@0.18.20": {
+    "npm:@esbuild/linux-ppc64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/linux-ppc64@0.18.20",
+      "name": "npm:@esbuild/linux-ppc64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/linux-ppc64",
-        "hash": "14389432966636535251"
+        "hash": "10521628817810919488"
       }
     },
     "npm:@esbuild/linux-ppc64@0.21.5": {
@@ -5247,13 +5247,13 @@
         "hash": "3796018374198274721"
       }
     },
-    "npm:@esbuild/linux-riscv64@0.18.20": {
+    "npm:@esbuild/linux-riscv64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/linux-riscv64@0.18.20",
+      "name": "npm:@esbuild/linux-riscv64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/linux-riscv64",
-        "hash": "11738913606100788759"
+        "hash": "6585159027107445091"
       }
     },
     "npm:@esbuild/linux-riscv64@0.21.5": {
@@ -5274,13 +5274,13 @@
         "hash": "11712690334613040342"
       }
     },
-    "npm:@esbuild/linux-s390x@0.18.20": {
+    "npm:@esbuild/linux-s390x@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/linux-s390x@0.18.20",
+      "name": "npm:@esbuild/linux-s390x@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/linux-s390x",
-        "hash": "535893463545675097"
+        "hash": "415620035638446588"
       }
     },
     "npm:@esbuild/linux-s390x@0.21.5": {
@@ -5301,13 +5301,13 @@
         "hash": "3161672989083643502"
       }
     },
-    "npm:@esbuild/linux-x64@0.18.20": {
+    "npm:@esbuild/linux-x64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/linux-x64@0.18.20",
+      "name": "npm:@esbuild/linux-x64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/linux-x64",
-        "hash": "870286523525701749"
+        "hash": "6785870356226272825"
       }
     },
     "npm:@esbuild/linux-x64@0.21.5": {
@@ -5328,13 +5328,13 @@
         "hash": "15444441430890263330"
       }
     },
-    "npm:@esbuild/netbsd-x64@0.18.20": {
+    "npm:@esbuild/netbsd-x64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/netbsd-x64@0.18.20",
+      "name": "npm:@esbuild/netbsd-x64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/netbsd-x64",
-        "hash": "17914415865880670830"
+        "hash": "6440210200688222844"
       }
     },
     "npm:@esbuild/netbsd-x64@0.21.5": {
@@ -5361,16 +5361,16 @@
       "data": {
         "version": "0.24.0",
         "packageName": "@esbuild/openbsd-arm64",
-        "hash": "7891559655566039710"
+        "hash": "10/11948aba4603d52ab4fc874d35796c1d6511b0cb1613f9cfab624f2992316df2d3504c7b58c049130befa7f78ce2fe0c21e297b0e5a280c6fd6ce9726e536cb8"
       }
     },
-    "npm:@esbuild/openbsd-x64@0.18.20": {
+    "npm:@esbuild/openbsd-x64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/openbsd-x64@0.18.20",
+      "name": "npm:@esbuild/openbsd-x64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/openbsd-x64",
-        "hash": "15780294176869917829"
+        "hash": "1972723296298571508"
       }
     },
     "npm:@esbuild/openbsd-x64@0.21.5": {
@@ -5391,13 +5391,13 @@
         "hash": "15903566277710191964"
       }
     },
-    "npm:@esbuild/sunos-x64@0.18.20": {
+    "npm:@esbuild/sunos-x64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/sunos-x64@0.18.20",
+      "name": "npm:@esbuild/sunos-x64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/sunos-x64",
-        "hash": "10855327737481508632"
+        "hash": "5036162174354317988"
       }
     },
     "npm:@esbuild/sunos-x64@0.21.5": {
@@ -5418,13 +5418,13 @@
         "hash": "9614230209311153404"
       }
     },
-    "npm:@esbuild/win32-arm64@0.18.20": {
+    "npm:@esbuild/win32-arm64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/win32-arm64@0.18.20",
+      "name": "npm:@esbuild/win32-arm64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/win32-arm64",
-        "hash": "4708244652606932436"
+        "hash": "4514126094557445746"
       }
     },
     "npm:@esbuild/win32-arm64@0.21.5": {
@@ -5445,13 +5445,13 @@
         "hash": "3328403401951588857"
       }
     },
-    "npm:@esbuild/win32-ia32@0.18.20": {
+    "npm:@esbuild/win32-ia32@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/win32-ia32@0.18.20",
+      "name": "npm:@esbuild/win32-ia32@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/win32-ia32",
-        "hash": "5726906100570759986"
+        "hash": "10170161762511154029"
       }
     },
     "npm:@esbuild/win32-ia32@0.21.5": {
@@ -5472,13 +5472,13 @@
         "hash": "18373964039594497797"
       }
     },
-    "npm:@esbuild/win32-x64@0.18.20": {
+    "npm:@esbuild/win32-x64@0.17.19": {
       "type": "npm",
-      "name": "npm:@esbuild/win32-x64@0.18.20",
+      "name": "npm:@esbuild/win32-x64@0.17.19",
       "data": {
-        "version": "0.18.20",
+        "version": "0.17.19",
         "packageName": "@esbuild/win32-x64",
-        "hash": "14251687108244867867"
+        "hash": "5731259122472539213"
       }
     },
     "npm:@esbuild/win32-x64@0.21.5": {
@@ -5953,9 +5953,9 @@
       "type": "npm",
       "name": "npm:@jest/globals",
       "data": {
-        "version": "28.1.3",
+        "version": "28.1.0",
         "packageName": "@jest/globals",
-        "hash": "10/3504bb23de629d466c6f2b6b75d2e1c1b10caccbbcfb7eaa82d22cc37711c8e364c243929581184846605c023b475ea6c42c2e3ea5994429a988d8d527af32cd"
+        "hash": "10/dce822edd1810430ce381235f714be705a9c774c00bf109d9d5df0dc4868371da62520832df99e83635ee1fc1fa4241cf617821b4e3b1a8bcd3fcd91aa8a75a7"
       }
     },
     "npm:@jest/reporters": {
@@ -5989,9 +5989,9 @@
       "type": "npm",
       "name": "npm:@jest/source-map",
       "data": {
-        "version": "28.1.2",
+        "version": "28.0.2",
         "packageName": "@jest/source-map",
-        "hash": "10/b82a5c2e93d35d86779c61a02ccb967d1b5cd2e9dd67d26d8add44958637cbbb99daeeb8129c7653389cb440dc2a2f5ae4d2183dc453c67669ff98938b775a3a"
+        "hash": "10/427195be85c28517e7e6b29fb38448a371750a1e4f4003e4c33ee0b35bbb72229c80482d444a827aa230f688a0b72c0c858ebd11425a686103c13d6cc61c8da1"
       }
     },
     "npm:@jest/test-result": {
@@ -9562,9 +9562,9 @@
       "type": "npm",
       "name": "npm:accessibility-checker",
       "data": {
-        "version": "3.1.74",
+        "version": "3.1.78",
         "packageName": "accessibility-checker",
-        "hash": "10/822bac1917640bbe48d1c57101b274375c03d7483b53208b1b0913fd6c759aec660ad19e015e787dc234bf8881fe15fb6e3157287fee97d508f7fbbac2d3a720"
+        "hash": "10/04453a96b584cd101ba45f141b283b7eddc651a1be81525c5107161f43a98d3efde6dd0c2e1fc70663252ce6ada82eb9565c82a92cb9402c01a51a7683ccb099"
       }
     },
     "npm:acorn-globals": {
@@ -10075,9 +10075,9 @@
       "type": "npm",
       "name": "npm:array-includes",
       "data": {
-        "version": "3.1.8",
+        "version": "3.1.6",
         "packageName": "array-includes",
-        "hash": "10/290b206c9451f181fb2b1f79a3bf1c0b66bb259791290ffbada760c79b284eef6f5ae2aeb4bcff450ebc9690edd25732c4c73a3c2b340fcc0f4563aed83bf488"
+        "hash": "10/a7168bd16821ec76b95a8f50f73076577a7cbd6c762452043d2b978c8a5fa4afe4f98a025d6f1d5c971b8d0b440b4ee73f6a57fc45382c858b8e17c275015428"
       }
     },
     "npm:array-union@1.0.2": {
@@ -10308,15 +10308,6 @@
     "npm:axios": {
       "type": "npm",
       "name": "npm:axios",
-      "data": {
-        "version": "1.7.5",
-        "packageName": "axios",
-        "hash": "10/6cbcfe943a84089f420a900a3a3aeb54ee94dcc9c2b81b150434896357be5d1079eff0b1bbb628597371e79f896b1bc5776df04184756ba99656ff31df9a75bf"
-      }
-    },
-    "npm:axios@1.7.9": {
-      "type": "npm",
-      "name": "npm:axios@1.7.9",
       "data": {
         "version": "1.7.9",
         "packageName": "axios",
@@ -13320,15 +13311,6 @@
         "hash": "10/1cd981e2b925e746919e9fca16fa5e953955d021b5d5fea0a4ae96dc61fcc76bc95874e7730f8ceca22f5e3df5a47eb1fc626c3f45e98019ceba54fd58521971"
       }
     },
-    "npm:dotenv@16.4.5": {
-      "type": "npm",
-      "name": "npm:dotenv@16.4.5",
-      "data": {
-        "version": "16.4.5",
-        "packageName": "dotenv",
-        "hash": "10/55a3134601115194ae0f924e54473459ed0d9fc340ae610b676e248cca45aa7c680d86365318ea964e6da4e2ea80c4514c1adab5adb43d6867fb57ff068f95c8"
-      }
-    },
     "npm:dotenv": {
       "type": "npm",
       "name": "npm:dotenv",
@@ -13761,6 +13743,15 @@
         "hash": "10/4ae1a016e3dad5b53c3d68cf07e31d8c1cec1a0b584038ece726097ac80bd33ab48fb224c766c9b341c04793837e652461eaca9327a116e7564f553b61ccca71"
       }
     },
+    "npm:esbuild@0.17.19": {
+      "type": "npm",
+      "name": "npm:esbuild@0.17.19",
+      "data": {
+        "version": "0.17.19",
+        "packageName": "esbuild",
+        "hash": "10/86ada7cad6d37a3445858fee31ca39fc6c0436c7c00b2e07b9ce308235be67f36aefe0dda25da9ab08653fde496d1e759d6ad891ce9479f9e1fb4964c8f2a0fa"
+      }
+    },
     "npm:esbuild": {
       "type": "npm",
       "name": "npm:esbuild",
@@ -13768,15 +13759,6 @@
         "version": "0.24.0",
         "packageName": "esbuild",
         "hash": "10/500f83a1216d6548053007b85c070d8293395db344605b17418c6cf1217e5e8d338fa77fc8af27c23faa121c5528e5b0004d46d3a0cdeb87d48f1b5fa0164bc5"
-      }
-    },
-    "npm:esbuild@0.18.20": {
-      "type": "npm",
-      "name": "npm:esbuild@0.18.20",
-      "data": {
-        "version": "0.18.20",
-        "packageName": "esbuild",
-        "hash": "10/1f723ec71c3aa196473bf3298316eedc3f62d523924652dfeb60701b609792f918fc60db84b420d1d8ba9bfa7d69de2fc1d3157ba47c028bdae5d507a26a3c64"
       }
     },
     "npm:esbuild@0.21.5": {
@@ -16825,9 +16807,9 @@
       "type": "npm",
       "name": "npm:is-map",
       "data": {
-        "version": "2.0.3",
+        "version": "2.0.2",
         "packageName": "is-map",
-        "hash": "10/8de7b41715b08bcb0e5edb0fb9384b80d2d5bcd10e142188f33247d19ff078abaf8e9b6f858e2302d8d05376a26a55cd23a3c9f8ab93292b02fcd2cc9e4e92bb"
+        "hash": "10/60ba910f835f2eacb1fdf5b5a6c60fe1c702d012a7673e6546992bcc0c873f62ada6e13d327f9e48f1720d49c152d6cdecae1fa47a261ef3d247c3ce6f0e1d39"
       }
     },
     "npm:is-module": {
@@ -17050,9 +17032,9 @@
       "type": "npm",
       "name": "npm:is-set",
       "data": {
-        "version": "2.0.3",
+        "version": "2.0.2",
         "packageName": "is-set",
-        "hash": "10/5685df33f0a4a6098a98c72d94d67cad81b2bc72f1fb2091f3d9283c4a1c582123cd709145b02a9745f0ce6b41e3e43f1c944496d1d74d4ea43358be61308669"
+        "hash": "10/d89e82acdc7760993474f529e043f9c4a1d63ed4774d21cc2e331d0e401e5c91c27743cd7c889137028f6a742234759a4bd602368fbdbf0b0321994aefd5603f"
       }
     },
     "npm:is-shared-array-buffer": {
@@ -17671,9 +17653,9 @@
       "type": "npm",
       "name": "npm:jest-runtime",
       "data": {
-        "version": "28.1.3",
+        "version": "28.1.0",
         "packageName": "jest-runtime",
-        "hash": "10/d3d91b3f1082bbe3f87dc11ad7abce12f323797d98b3fa5ef7fb5efbd6d30e42041e3732cb8be5d41f0c8d8312d14461381d829ed1fe4e3712cfc82ea4a586fc"
+        "hash": "10/d24913fb5ad9710bf9f4df5d80dd0da4bbe274fe5b6932fe7e7c3ef959f7742344daeec558ad38ad3f290193ecedab829d417d9f07794a2a3ad82f12daab0429"
       }
     },
     "npm:jest-snapshot": {
@@ -23436,13 +23418,13 @@
         "hash": "10/df087b701304432f30922bbee5f534ab189aa6938bd383b5686c03147e0d00cd1789ea10a462361326ce6b6ebe448ce272ad3f3cc40b82eeb3157df12f33663c"
       }
     },
-    "npm:rollup@3.29.4": {
+    "npm:rollup@3.22.0": {
       "type": "npm",
-      "name": "npm:rollup@3.29.4",
+      "name": "npm:rollup@3.22.0",
       "data": {
-        "version": "3.29.4",
+        "version": "3.22.0",
         "packageName": "rollup",
-        "hash": "10/9e39d54e23731a4c4067e9c02910cdf7479a0f9a7584796e2dc6efaa34bb1e5e015c062c87d1e64d96038baca76cefd47681ff22604fae5827147f54123dc6d0"
+        "hash": "10/e6b71b9e8b69b0fc4383be9f0347dcc8c647b342cae5679a89c1a26ae0f1308928d427acaf1c8fc76ddb06ee0966b044f728882478ef5964cc5f149f30e0d8d9"
       }
     },
     "npm:rollup@4.19.1": {
@@ -26689,9 +26671,9 @@
       "type": "npm",
       "name": "npm:vite",
       "data": {
-        "version": "4.5.5",
+        "version": "4.3.9",
         "packageName": "vite",
-        "hash": "10/2e8b39e004f2b2e72506b816700b3aafaf3f85bdcb9dd9392075bb234ce7333f859a0d2078a85ce5d0039f0f659ca564a7366af587848e5166f14b136cb0ad37"
+        "hash": "10/c2f0b392a253318a1d3ffc6873885d4a03c6bda6f717682bd0c82b7a431a67fb1ba08de6e1bf7f3f31bde1615015c5ef4be264f20c6e34c590d8a7c9516e94f4"
       }
     },
     "npm:vite@5.3.5": {
@@ -27345,15 +27327,6 @@
     "npm:yaml": {
       "type": "npm",
       "name": "npm:yaml",
-      "data": {
-        "version": "2.5.0",
-        "packageName": "yaml",
-        "hash": "10/72e903fdbe3742058885205db4a6c9ff38e5f497f4e05e631264f7756083c05e7d10dfb5e4ce9d7a95de95338f9b20d19dd0b91c60c65f7d7608b6b3929820ad"
-      }
-    },
-    "npm:yaml@2.6.1": {
-      "type": "npm",
-      "name": "npm:yaml@2.6.1",
       "data": {
         "version": "2.6.1",
         "packageName": "yaml",
@@ -33015,7 +32988,7 @@
       },
       {
         "source": "npm:@figma/code-connect",
-        "target": "npm:dotenv@16.4.5",
+        "target": "npm:dotenv",
         "type": "static"
       },
       {
@@ -38993,11 +38966,6 @@
       },
       {
         "source": "npm:array-includes",
-        "target": "npm:es-object-atoms",
-        "type": "static"
-      },
-      {
-        "source": "npm:array-includes",
         "target": "npm:get-intrinsic",
         "type": "static"
       },
@@ -39207,23 +39175,6 @@
       },
       {
         "source": "npm:axios",
-        "target": "npm:proxy-from-env",
-        "type": "static"
-      }
-    ],
-    "npm:axios@1.7.9": [
-      {
-        "source": "npm:axios@1.7.9",
-        "target": "npm:follow-redirects",
-        "type": "static"
-      },
-      {
-        "source": "npm:axios@1.7.9",
-        "target": "npm:form-data",
-        "type": "static"
-      },
-      {
-        "source": "npm:axios@1.7.9",
         "target": "npm:proxy-from-env",
         "type": "static"
       }
@@ -42839,6 +42790,118 @@
         "type": "static"
       }
     ],
+    "npm:esbuild@0.17.19": [
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/android-arm@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/android-arm64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/android-x64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/darwin-arm64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/darwin-x64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/freebsd-arm64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/freebsd-x64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/linux-arm@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/linux-arm64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/linux-ia32@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/linux-loong64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/linux-mips64el@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/linux-ppc64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/linux-riscv64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/linux-s390x@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/linux-x64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/netbsd-x64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/openbsd-x64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/sunos-x64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/win32-arm64@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/win32-ia32@0.17.19",
+        "type": "static"
+      },
+      {
+        "source": "npm:esbuild@0.17.19",
+        "target": "npm:@esbuild/win32-x64@0.17.19",
+        "type": "static"
+      }
+    ],
     "npm:esbuild": [
       {
         "source": "npm:esbuild",
@@ -42958,118 +43021,6 @@
       {
         "source": "npm:esbuild",
         "target": "npm:@esbuild/win32-x64",
-        "type": "static"
-      }
-    ],
-    "npm:esbuild@0.18.20": [
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/android-arm@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/android-arm64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/android-x64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/darwin-arm64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/darwin-x64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/freebsd-arm64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/freebsd-x64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/linux-arm@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/linux-arm64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/linux-ia32@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/linux-loong64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/linux-mips64el@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/linux-ppc64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/linux-riscv64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/linux-s390x@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/linux-x64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/netbsd-x64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/openbsd-x64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/sunos-x64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/win32-arm64@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/win32-ia32@0.18.20",
-        "type": "static"
-      },
-      {
-        "source": "npm:esbuild@0.18.20",
-        "target": "npm:@esbuild/win32-x64@0.18.20",
         "type": "static"
       }
     ],
@@ -53108,7 +53059,7 @@
       },
       {
         "source": "npm:nx",
-        "target": "npm:axios@1.7.9",
+        "target": "npm:axios",
         "type": "static"
       },
       {
@@ -53238,7 +53189,7 @@
       },
       {
         "source": "npm:nx",
-        "target": "npm:yaml@2.6.1",
+        "target": "npm:yaml",
         "type": "static"
       },
       {
@@ -55979,9 +55930,9 @@
         "type": "static"
       }
     ],
-    "npm:rollup@3.29.4": [
+    "npm:rollup@3.22.0": [
       {
-        "source": "npm:rollup@3.29.4",
+        "source": "npm:rollup@3.22.0",
         "target": "npm:fsevents",
         "type": "static"
       }
@@ -59712,7 +59663,7 @@
     "npm:vite": [
       {
         "source": "npm:vite",
-        "target": "npm:esbuild@0.18.20",
+        "target": "npm:esbuild@0.17.19",
         "type": "static"
       },
       {
@@ -59727,7 +59678,7 @@
       },
       {
         "source": "npm:vite",
-        "target": "npm:rollup@3.29.4",
+        "target": "npm:rollup@3.22.0",
         "type": "static"
       }
     ],
