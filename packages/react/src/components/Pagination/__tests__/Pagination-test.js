@@ -118,7 +118,7 @@ describe('Pagination', () => {
           onChange={onChange}
         />
       );
-      await userEvent.selectOptions(screen.getByLabelText(/Page number/), '2');
+      await userEvent.selectOptions(screen.getByLabelText(/Page/), '2');
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenCalledWith(
         expect.objectContaining({ page: 2 })
@@ -237,7 +237,7 @@ describe('Pagination', () => {
       );
       expect(screen.getByText('1–1 of 2 items')).toBeInTheDocument();
 
-      await userEvent.selectOptions(screen.getByLabelText(/Page number/), '2');
+      await userEvent.selectOptions(screen.getByLabelText(/Page/), '2');
       expect(screen.getByText('2–2 of 2 items')).toBeInTheDocument();
     });
 
