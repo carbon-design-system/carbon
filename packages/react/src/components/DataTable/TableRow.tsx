@@ -46,7 +46,8 @@ const TableRow = (props: TableRowProps) => {
   // only useful in `TableExpandRow`
   const className = cx(props.className, {
     [`${prefix}--data-table--selected`]: props.isSelected,
-    [`${prefix}--data-table--ai-label-row`]: rowHasAILabel,
+    [`${prefix}--data-table--slug-row ${prefix}--data-table--ai-label-row`]:
+      rowHasAILabel,
   });
 
   const cleanProps = {

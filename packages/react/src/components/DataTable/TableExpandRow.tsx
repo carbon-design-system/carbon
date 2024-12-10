@@ -107,7 +107,8 @@ const TableExpandRow = React.forwardRef(
         [`${prefix}--parent-row`]: true,
         [`${prefix}--expandable-row`]: isExpanded,
         [`${prefix}--data-table--selected`]: isSelected,
-        [`${prefix}--data-table--ai-label-row`]: rowHasAILabel,
+        [`${prefix}--data-table--slug-row ${prefix}--data-table--ai-label-row`]:
+          rowHasAILabel,
       },
       rowClassName
     );

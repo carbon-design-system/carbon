@@ -205,7 +205,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   };
   getCellProps: (getCellPropsArgs: { cell: DataTableCell<ColTypes> }) => {
     [key: string]: unknown;
-    hasSlugHeader?: boolean;
+    hasAILabelHeader?: boolean;
     hasDecoratorHeader?: boolean;
   };
 
@@ -752,7 +752,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
   getCellProps = ({ cell, ...rest }) => {
     return {
       ...rest,
-      hasSlugHeader: cell.hasSlugHeader,
+      hasAILabelHeader: cell.hasAILabelHeader,
       hasDecoratorHeader: cell.hasDecoratorHeader,
     };
   };

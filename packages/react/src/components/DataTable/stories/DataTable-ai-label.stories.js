@@ -104,7 +104,7 @@ const columnAILabelHeaders = [
     key: 'rule',
     header: 'Rule',
     decorator: (
-      <Tooltip>
+      <Tooltip label="Info">
         <Information />
       </Tooltip>
     ),
@@ -185,7 +185,7 @@ const aiLabel = (
 );
 
 const decorator = (
-  <Tooltip>
+  <Tooltip label="Info">
     <Information />
   </Tooltip>
 );

@@ -175,7 +175,8 @@ const TableHeader = React.forwardRef(function TableHeader(
 
   const headerLabelClassNames = classNames({
     [`${prefix}--table-header-label`]: true,
-    [`${prefix}--table-header-label--ai-label`]: colHasAILabel,
+    [`${prefix}--table-header-label--slug ${prefix}--table-header-label--ai-label`]:
+      colHasAILabel,
     [`${prefix}--table-header-label--decorator`]: decorator,
   });
 

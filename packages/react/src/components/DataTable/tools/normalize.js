@@ -55,7 +55,9 @@ const normalize = (rows, headers, prevState = {}) => {
         isEditing: false,
         isValid: true,
         errors: null,
-        hasSlugHeader: !!(slug || decorator?.type?.displayName === 'AILabel'),
+        hasAILabelHeader: !!(
+          slug || decorator?.type?.displayName === 'AILabel'
+        ),
         info: {
           header: key,
         },
