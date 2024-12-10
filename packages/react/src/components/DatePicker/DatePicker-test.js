@@ -196,7 +196,24 @@ describe('DatePicker', () => {
     expect(ref).toHaveBeenCalledWith(container.firstChild);
   });
 
-  it('should respect slug prop', () => {
+  it('should respect decorator prop', () => {
+    render(
+      <DatePickerInput
+        id="date-picker-input-id-start"
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        data-testid="input-value"
+        decorator={<AILabel />}
+      />
+    );
+
+    expect(screen.getByRole('button')).toHaveClass(
+      `${prefix}--ai-label__button`
+    );
+  });
+
+  it('should respect deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     render(
       <DatePickerInput
         id="date-picker-input-id-start"
@@ -210,6 +227,7 @@ describe('DatePicker', () => {
     expect(screen.getByRole('button')).toHaveClass(
       `${prefix}--ai-label__button`
     );
+    spy.mockRestore();
   });
 
   it('should respect parseDate prop', async () => {

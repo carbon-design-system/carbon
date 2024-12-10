@@ -7,9 +7,10 @@
 
 import './story.scss';
 
-import { Information } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
+import { SquareOutline } from '@carbon/icons-react';
 import { Tooltip } from './';
+import Button from './../Button';
 import mdx from './Tooltip.mdx';
 
 export default {
@@ -55,9 +56,7 @@ export const Default = () => {
     'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
     <Tooltip align="bottom" label={label}>
-      <button className="sb-tooltip-trigger" type="button">
-        <Information />
-      </button>
+      <Button>This button has a tooltip</Button>
     </Tooltip>
   );
 };
@@ -65,9 +64,7 @@ export const Default = () => {
 export const Alignment = () => {
   return (
     <Tooltip label="Tooltip alignment" align="bottom-left">
-      <button className="sb-tooltip-trigger" type="button">
-        <Information />
-      </button>
+      <Button>This button has a tooltip</Button>
     </Tooltip>
   );
 };
@@ -89,9 +86,7 @@ export const ExperimentalAutoAlign = () => {
           left: '2500px',
         }}>
         <Tooltip label={tooltipLabel} align="top" autoAlign>
-          <button className="sb-tooltip-trigger" type="button" ref={ref}>
-            <Information />
-          </button>
+          <Button ref={ref}>This button has a tooltip</Button>
         </Tooltip>
       </div>
     </div>
@@ -101,9 +96,7 @@ export const ExperimentalAutoAlign = () => {
 export const Duration = () => {
   return (
     <Tooltip label="Label one" enterDelayMs={0} leaveDelayMs={300}>
-      <button className="sb-tooltip-trigger" type="button">
-        <Information />
-      </button>
+      <Button>This button has a tooltip</Button>
     </Tooltip>
   );
 };
@@ -127,8 +120,8 @@ const PlaygroundStory = (props) => {
       label={label}
       leaveDelayMs={leaveDelayMs}
       closeOnActivation={closeOnActivation}>
-      <button className="sb-tooltip-trigger" type="button">
-        <Information />
+      <button type="button">
+        <SquareOutline />
       </button>
     </Tooltip>
   );

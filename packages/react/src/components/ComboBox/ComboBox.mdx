@@ -130,7 +130,7 @@ want to fully control the component, you can use `initialSelectedItem`
 ```jsx
 const items = ['Option 1', 'Option 2', 'Option 3']
 
-<Combobox initialSelectedItem={items[2]} />
+<Combobox initialSelectedItem={items[2]} onChange={() => {}} />
 ```
 
 ## `selectedItem`
@@ -195,6 +195,7 @@ dropdown item in a custom element.
 
 ```jsx
 <Combobox
+  onChange={() => {}}
   items={[
     { id: 'option-0', text: 'Option 0' },
     { id: 'option-1', text: 'Option 1' },
@@ -226,6 +227,7 @@ If the `items` array is not an array of strings, you'll need to use
     { id: 'option-2', text: 'Option 2' },
   ]}
   itemToString={(item) => (item ? item.text : '')}
+  onChange={() => {}}
 />
 ```
 
@@ -244,6 +246,7 @@ prop.
   shouldFilterItem={(menu) =>
     menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase())
   }
+  onChange={() => {}}
 />
 
 ```jsx
@@ -256,6 +259,7 @@ const filterItems = (menu) => {
   helperText="Combobox helper text"
   items={['Apple', 'Orange', 'Banana']}
   shouldFilterItem={filterItems}
+  onChange={() => {}}
 />;
 ```
 

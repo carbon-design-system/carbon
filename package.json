@@ -73,6 +73,7 @@
     "jest-junit": "^16.0.0",
     "lerna": "^8.0.0",
     "lint-staged": "^15.0.0",
+    "nx": "^20.2.1",
     "prettier": "^3.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -120,15 +121,15 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "prettier --cache --write",
+      "yarn prettier --cache --write",
       "eslint"
     ],
     "**/*.scss": [
-      "prettier --cache --write",
+      "yarn prettier --cache --write",
       "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
     ],
     "!(*sass).md": [
-      "prettier --cache --write"
+      "yarn prettier --cache --write"
     ],
     "README.md": [
       "all-contributors generate"

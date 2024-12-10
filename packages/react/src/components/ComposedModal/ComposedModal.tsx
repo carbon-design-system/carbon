@@ -8,6 +8,8 @@ import React, {
   type ReactNode,
   type ReactElement,
   type RefObject,
+  useMemo,
+  isValidElement,
 } from 'react';
 import { isElement } from 'react-is';
 import PropTypes from 'prop-types';
@@ -28,6 +30,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
+import deprecate from '../../prop-types/deprecate';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -173,6 +176,11 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   danger?: boolean;
 
   /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `ComposedModal` component
+   */
+  decorator?: ReactNode;
+
+  /**
    * Specify whether the Modal content should have any inner padding.
    */
   isFullWidth?: boolean;
@@ -212,6 +220,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
+   * @deprecated please use `decorator` instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `ComposedModal` component
    */
   slug?: ReactNode;
@@ -226,6 +235,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       className: customClassName,
       containerClassName,
       danger,
+      decorator,
       isFullWidth,
       onClose,
       onKeyDown,
@@ -335,6 +345,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         'is-visible': isOpen,
         [`${prefix}--modal--danger`]: danger,
         [`${prefix}--modal--slug`]: slug,
+        [`${prefix}--modal--decorator`]: decorator,
       },
       customClassName
     );
@@ -421,12 +432,20 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       }
     }, [open, selectorPrimaryFocus, isOpen]);
 
-    // Slug is always size `sm`
-    let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'AILabel') {
-      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size: 'sm',
-      });
+    // AILabel is always size `sm`
+    let normalizedDecorator = React.isValidElement(slug ?? decorator)
+      ? (slug ?? decorator)
+      : null;
+    if (
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel'
+    ) {
+      normalizedDecorator = React.cloneElement(
+        normalizedDecorator as React.ReactElement<any>,
+        {
+          size: 'sm',
+        }
+      );
     }
 
     return (
@@ -456,7 +475,15 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
             </button>
           )}
           <div ref={innerModal} className={`${prefix}--modal-container-body`}>
-            {normalizedSlug}
+            {slug ? (
+              normalizedDecorator
+            ) : decorator ? (
+              <div className={`${prefix}--modal--inner__decorator`}>
+                {normalizedDecorator}
+              </div>
+            ) : (
+              ''
+            )}
             {childrenWithProps}
           </div>
           {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
@@ -505,6 +532,11 @@ ComposedModal.propTypes = {
    * Note that this prop is not applied if you render primary/danger button by yourself
    */
   danger: PropTypes.bool,
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `ComposedModal` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify whether the Modal content should have any inner padding.
@@ -557,10 +589,11 @@ ComposedModal.propTypes = {
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
-  /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComposedModal` component
-   */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop for `ComposedModal` has ' +
+      'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
+  ),
 };
 
 export default ComposedModal;
