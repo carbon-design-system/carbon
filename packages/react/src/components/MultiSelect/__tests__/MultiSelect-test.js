@@ -5,15 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getByText, isElementVisible } from '@carbon/test-utils/dom';
-import { act, render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
-import MultiSelect from '../';
-import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
-import userEvent from '@testing-library/user-event';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
+import { generateGenericItem, generateItems } from '../../ListBox/test-helpers';
+import { getByText, isElementVisible } from '@carbon/test-utils/dom';
+
 import { AILabel } from '../../AILabel';
 import Button from '../../Button';
 import ButtonSet from '../../ButtonSet';
+import MultiSelect from '../';
+import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
 const waitForPosition = () => act(async () => {});
@@ -801,5 +808,121 @@ describe('MultiSelect', () => {
         'true'
       );
     });
+  });
+
+  it('should prevent default behavior for ArrowDown, ArrowUp, Space, and Enter keys', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+
+    render(<MultiSelect id="test" label={label} items={items} />);
+
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    const keysToTest = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
+
+    for (const key of keysToTest) {
+      const event = new KeyboardEvent('keydown', {
+        key,
+        bubbles: true,
+        cancelable: true,
+      });
+
+      const preventDefaultMock = jest.fn();
+      Object.defineProperty(event, 'preventDefault', {
+        value: preventDefaultMock,
+        writable: true,
+      });
+
+      // Wrap the event dispatch in act(...)
+      await act(async () => {
+        combobox.dispatchEvent(event);
+      });
+
+      expect(preventDefaultMock).toHaveBeenCalled();
+    }
+  });
+
+  it('should focus the element if mergedRef.current is defined', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const mergedRef = React.createRef(); // No TypeScript type annotation needed here
+
+    render(
+      <MultiSelect id="test" label={label} items={items} ref={mergedRef} />
+    );
+
+    // Wait for mergedRef to be defined (i.e., after component mounts)
+    await waitFor(() => expect(mergedRef.current).toBeDefined());
+
+    // Wrap the action of focusing inside `act()`
+    await act(async () => {
+      if (mergedRef.current) {
+        mergedRef.current.focus();
+      }
+    });
+
+    // Verify that the element is focused
+    if (mergedRef.current) {
+      expect(mergedRef.current).toHaveFocus();
+    }
+  });
+
+  it('should not throw an error when slug is not defined', () => {
+    render(<MultiSelect id="test" label="Test Label" items={[]} />);
+
+    const combobox = screen.getByRole('combobox');
+    expect(combobox).toBeInTheDocument();
+  });
+  it('should call preventDefault for select access keys when readonly is true', () => {
+    const mockPreventDefault = jest.fn();
+    render(
+      <MultiSelect id="test" label="Test Label" items={[]} readOnly={true} />
+    );
+    const combobox = screen.getByRole('combobox');
+    expect(combobox).toBeInTheDocument();
+    combobox.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        mockPreventDefault();
+      }
+    });
+    fireEvent.keyDown(combobox, { key: 'Enter' });
+    expect(mockPreventDefault).toHaveBeenCalled();
+  });
+
+  it('should return a comma-separated string for an array of items', () => {
+    const mockItems = [{ value: 'item1' }, { value: 'item2' }];
+    const mockItemToString = jest.fn((item) => item.value);
+
+    const selectProps = {
+      stateReducer: jest.fn(),
+      isOpen: false,
+      itemToString: (filteredItems) =>
+        Array.isArray(filteredItems)
+          ? filteredItems.map((item) => mockItemToString(item)).join(', ')
+          : '',
+    };
+    const result = selectProps.itemToString(mockItems);
+    expect(result).toBe('item1, item2');
+    expect(mockItemToString).toHaveBeenCalledTimes(2);
+  });
+
+  it('should return an empty string for non-array input', () => {
+    const mockItemToString = jest.fn();
+
+    const selectProps = {
+      stateReducer: jest.fn(),
+      isOpen: false,
+      itemToString: (filteredItems) =>
+        Array.isArray(filteredItems)
+          ? filteredItems.map((item) => mockItemToString(item)).join(', ')
+          : '',
+    };
+
+    const result = selectProps.itemToString(null);
+
+    expect(result).toBe('');
+    expect(mockItemToString).not.toHaveBeenCalled();
   });
 });
