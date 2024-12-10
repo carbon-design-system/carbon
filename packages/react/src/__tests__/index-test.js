@@ -205,6 +205,7 @@ describe('Carbon Components React', () => {
         "TableBody",
         "TableCell",
         "TableContainer",
+        "TableDecoratorRow",
         "TableExpandHeader",
         "TableExpandRow",
         "TableExpandedRow",
