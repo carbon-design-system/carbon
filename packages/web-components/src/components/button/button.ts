@@ -270,6 +270,9 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     let defaultClasses = {
       [`${prefix}--btn`]: true,
       [`${prefix}--btn--${kind}`]: kind,
+      [`${prefix}--btn--danger--tertiary`]:
+        kind === BUTTON_KIND.DANGER_TERTIARY,
+      [`${prefix}--btn--danger--ghost`]: kind === BUTTON_KIND.DANGER_GHOST,
       [`${prefix}--btn--disabled`]: disabled,
       [`${prefix}--btn--icon-only`]: hasIcon && !hasMainContent,
       [`${prefix}--btn--${size}`]: size,
