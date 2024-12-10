@@ -372,7 +372,7 @@ export const Dismissible = (args) => {
     },
     {
       type: 'high-contrast',
-      text: 'Tag content 10',
+      text: 'Tag content 10 with a long text description',
     },
     {
       type: 'outline',
