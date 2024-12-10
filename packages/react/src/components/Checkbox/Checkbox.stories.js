@@ -124,7 +124,7 @@ const AILabelFunc = (kind) => (
 
 export const withAILabel = () => (
   <div className="ai-label-check-radio-container">
-    <CheckboxGroup legendText="Group Label" slug={AILabelFunc()}>
+    <CheckboxGroup legendText="Group Label" decorator={AILabelFunc()}>
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
@@ -134,12 +134,12 @@ export const withAILabel = () => (
       <Checkbox
         labelText={`Checkbox label`}
         id="checkbox-label-4"
-        slug={AILabelFunc()}
+        decorator={AILabelFunc()}
       />
       <Checkbox
         labelText={`Checkbox label`}
         id="checkbox-label-5"
-        slug={AILabelFunc()}
+        decorator={AILabelFunc()}
       />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-6" />
     </CheckboxGroup>
@@ -148,12 +148,12 @@ export const withAILabel = () => (
       <Checkbox
         labelText={`Checkbox label`}
         id="checkbox-label-7"
-        slug={AILabelFunc('inline')}
+        decorator={AILabelFunc('inline')}
       />
       <Checkbox
         labelText={`Checkbox label`}
         id="checkbox-label-8"
-        slug={AILabelFunc('inline')}
+        decorator={AILabelFunc('inline')}
       />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-9" />
     </CheckboxGroup>

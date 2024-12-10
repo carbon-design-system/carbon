@@ -106,6 +106,7 @@ categories:
       - hong-kong--cityscape
       - hong-kong
       - ibm--uk-labs-hursley
+      - japan--mt-fuji
       - kochi-houseboat
       - kuala-lumpur
       - london
@@ -406,6 +407,7 @@ categories:
       - real-estate
       - redefining-financial-services
       - reducing-cost
+      - reference-architecture
       - reliability--02
       - reseller-programs
       - resource-health
@@ -462,6 +464,7 @@ categories:
       - visual--data
       - websites
       - websphere
+      - white-paper
       - windows-hosting
       - workflows
   - name: Controls
@@ -1093,6 +1096,7 @@ categories:
   - name: Strategy
     members:
       - innovate
+      - magic-wand
       - presentation
       - presenter
       - puzzle
