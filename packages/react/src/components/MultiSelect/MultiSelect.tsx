@@ -507,6 +507,9 @@ const MultiSelect = React.forwardRef(
             setInputFocused(false);
             setIsFocused(false);
           }
+          if (match(e, keys.Escape) && isOpen) {
+            setInputFocused(true);
+          }
           if (match(e, keys.Enter) && isOpen) {
             setInputFocused(true);
           }
