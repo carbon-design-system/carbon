@@ -1265,6 +1265,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "direction": Object {
         "args": Array [
           Array [
@@ -1375,9 +1378,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "titleText": Object {
         "type": "node",
       },
@@ -2879,6 +2880,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -2911,9 +2915,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "tagTitle": Object {
         "type": "string",
       },
@@ -3558,6 +3560,9 @@ Map {
       "compareItems": Object {
         "type": "func",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "direction": Object {
         "args": Array [
           Array [
@@ -3772,9 +3777,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "sortItems": Object {
         "type": "func",
       },
@@ -5239,6 +5242,9 @@ Map {
         "compareItems": Object {
           "type": "func",
         },
+        "decorator": Object {
+          "type": "node",
+        },
         "direction": Object {
           "args": Array [
             Array [
@@ -5453,9 +5459,7 @@ Map {
           ],
           "type": "oneOf",
         },
-        "slug": Object {
-          "type": "node",
-        },
+        "slug": [Function],
         "sortItems": Object {
           "type": "func",
         },
@@ -5492,6 +5496,9 @@ Map {
       },
       "compareItems": Object {
         "type": "func",
+      },
+      "decorator": Object {
+        "type": "node",
       },
       "direction": Object {
         "args": Array [
@@ -5580,9 +5587,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "sortItems": Object {
         "type": "func",
       },
@@ -6268,6 +6273,55 @@ Map {
       "autoAlign": Object {
         "type": "bool",
       },
+      "autoAlignBoundary": Object {
+        "args": Array [
+          Array [
+            Object {
+              "args": Array [
+                Array [
+                  "clippingAncestors",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            Object {
+              "type": "elementType",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "elementType",
+                },
+              ],
+              "type": "arrayOf",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "height": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "width": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "x": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "y": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "exact",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "caret": Object {
         "type": "bool",
       },
@@ -6830,6 +6884,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "defaultValue": Object {
         "type": "any",
       },
@@ -6878,9 +6935,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "warn": Object {
         "type": "bool",
       },
@@ -8442,6 +8497,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -8473,9 +8531,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "title": [Function],
       "type": Object {
         "args": Array [

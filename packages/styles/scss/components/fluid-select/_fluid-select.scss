@@ -201,10 +201,14 @@
   }
 
   // AILabel styles
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *,
   .#{$prefix}--select--fluid .#{$prefix}--select--slug .#{$prefix}--ai-label,
   .#{$prefix}--select--fluid .#{$prefix}--select--slug .#{$prefix}--slug {
     inset-block-start: convert.to-rem(42px);
-    inset-inline-end: $spacing-08;
+    inset-inline-end: $spacing-09;
   }
 
   .#{$prefix}--select--fluid
