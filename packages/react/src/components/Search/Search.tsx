@@ -229,7 +229,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
       <div
         aria-label={onExpand ? 'button' : undefined}
-        aria-labelledby={onExpand ? uniqueId : undefined}
+        aria-labelledby={onExpand ? searchId : undefined}
         role={onExpand ? 'button' : undefined}
         className={`${prefix}--search-magnifier`}
         onClick={onExpand}
