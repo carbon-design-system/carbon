@@ -15,6 +15,16 @@ import { LowerHandle, UpperHandle } from './SliderHandles';
 
 export interface SliderSkeletonProps extends HTMLAttributes<HTMLDivElement> {
   /**
+   * The `ariaLabel` for the handle icon.
+   */
+  ariaLabel?: string;
+
+  /**
+   * The `ariaLabel` for the upper bound slider handle when there are two handles.
+   */
+  unstable_ariaLabelHandleUpper?: string;
+
+  /**
    * Specify an optional className to add to the form item wrapper.
    */
   className?: string;
@@ -31,6 +41,8 @@ export interface SliderSkeletonProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const SliderSkeleton = ({
+  ariaLabel = 'slider handle',
+  unstable_ariaLabelHandleUpper: ariaLabelHandleUpper = 'upper slider handle',
   hideLabel,
   className,
   twoHandles,
@@ -82,9 +94,9 @@ const SliderSkeleton = ({
           <div className={lowerThumbWrapperClasses}>
             <div className={lowerThumbClasses}>
               {twoHandles && !isRtl ? (
-                <LowerHandle />
+                <LowerHandle aria-label={ariaLabel} />
               ) : twoHandles && isRtl ? (
-                <UpperHandle />
+                <UpperHandle aria-label={ariaLabelHandleUpper} />
               ) : undefined}
             </div>
           </div>
@@ -92,9 +104,9 @@ const SliderSkeleton = ({
             <div className={upperThumbWrapperClasses}>
               <div className={upperThumbClasses}>
                 {twoHandles && !isRtl ? (
-                  <UpperHandle />
+                  <UpperHandle aria-label={ariaLabelHandleUpper} />
                 ) : twoHandles && isRtl ? (
-                  <LowerHandle />
+                  <LowerHandle aria-label={ariaLabel} />
                 ) : undefined}
               </div>
             </div>
@@ -107,6 +119,16 @@ const SliderSkeleton = ({
 };
 
 SliderSkeleton.propTypes = {
+  /**
+   * The `ariaLabel` for the handle icon.
+   */
+  ariaLabel: PropTypes.string,
+
+  /**
+   * The `ariaLabel` for the upper bound slider handle when there are two handles.
+   */
+  unstable_ariaLabelHandleUpper: PropTypes.string,
+
   /**
    * Specify an optional className to add to the form item wrapper.
    */

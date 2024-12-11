@@ -29,7 +29,7 @@
     @include type-style('body-01');
     @include focus-outline('reset');
 
-    padding: convert.to-rem(11px) layout.density('padding-inline');
+    padding: convert.to-rem(12px) layout.density('padding-inline');
     border: none;
     background-color: $field;
     block-size: 100%;

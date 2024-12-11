@@ -109,7 +109,7 @@ export const TabTip = () => {
         <PopoverContent className="p-3">
           <RadioButtonGroup
             style={{ alignItems: 'flex-start', flexDirection: 'column' }}
-            legendText="Row height"
+            legendText="Row height 1"
             name="radio-button-group"
             defaultSelected="small">
             <RadioButton labelText="Small" value="small" id="radio-small" />
@@ -146,7 +146,7 @@ export const TabTip = () => {
         <PopoverContent className="p-3">
           <RadioButtonGroup
             style={{ alignItems: 'flex-start', flexDirection: 'column' }}
-            legendText="Row height"
+            legendText="Row height 2"
             name="radio-button-group-2"
             defaultSelected="small-2">
             <RadioButton labelText="Small" value="small-2" id="radio-small-2" />
