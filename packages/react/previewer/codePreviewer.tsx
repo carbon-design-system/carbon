@@ -1,20 +1,26 @@
+import React from 'react';
 import StackBlitzSDK from '@stackblitz/sdk';
 import sdk, { Project } from '@stackblitz/sdk';
 import { index, main, packageJson, style, viteConfig } from './configFiles';
 import * as carbonComponents from '../src/index';
+import * as carbonIconsReact from '@carbon/icons-react';
 
 export const stackblitzPrefillConfig = (
   code: any,
   // components: Array<string>, // Add all required components to be imported from @carbon/react
-  icons: Array<string> // Add all required icons to be imported from @carbon/icons-react
+  // icons: Array<string> // Add all required icons to be imported from @carbon/icons-react
+  customImport: string
 ) => {
-  const componentCode = code.parameters.docs.source.originalSource;
-  console.log({ componentCode });
-
-  const output = componentCode
+  const storyCode = code.parameters.docs.source.originalSource
     .replace(/^\s*args\s*=>\s*{\s*|}\s*;?\s*$/g, '')
     // Before: args => { <Component> }
     // After: <Component>
+    .replace(/^\s*\(\)\s*=>\s*{/g, '') // We could delete this one if all stories had the return statement
+    // Before: () => { <Component>
+    // After: <Component>
+    .replace(/^\s*args\s*=>/g, 'return')
+    // Before: args => { <Component>
+    // After: return <Component>
     .replace(/^"|"$/g, '')
     // Before: "<Component>"
     // After: <Component>
@@ -25,10 +31,11 @@ export const stackblitzPrefillConfig = (
     .replace(/onClick=\{(args\.onClick|action\('onClick'\))\}\s*/g, '');
   // Remove the onClick/onChange action
 
-  const componentNames = Object.keys(carbonComponents);
-
   // Function to find all matches
-  const findAllImports = (componentNames: Array<string>, storyCode: string) => {
+  const findComponentImports = (
+    componentNames: Array<string>,
+    storyCode: string
+  ) => {
     return componentNames.filter((componentName) => {
       // Grab the component and add the "<" resulting in"`<ComponentName`
       const regex = new RegExp(`<${componentName}\\b`, 'g');
@@ -37,15 +44,36 @@ export const stackblitzPrefillConfig = (
     });
   };
 
-  // Get all matched components
-  const matchedComponents = findAllImports(componentNames, output);
+  // Function to find all matches
+  const findIconImports = (iconNames: Array<string>, storyCode: string) => {
+    return iconNames.filter((iconName) => {
+      // Grab the component to convert in "<Component" and "{Component}"
+      const regexComponent = new RegExp(`<${iconName}\\b`, 'g');
+      const regexCurlBraces = new RegExp(`{${iconName}}\\s\\b`, 'g');
 
+      // Check if the component exists in the `storyCode`
+      if (regexComponent.test(storyCode) || regexCurlBraces.test(storyCode)) {
+        return iconName;
+      }
+    });
+  };
+
+  // Get all matched components
+  const componentNames = Object.keys(carbonComponents);
+  const matchedComponents = findComponentImports(componentNames, storyCode);
+
+  // Get all matched icons
+  const iconsNames = Object.keys(carbonIconsReact);
+  const matchedIcons = findIconImports(iconsNames, storyCode);
+
+  // Generate App.jsx code
   const app = `
   import React from 'react';
+  ${customImport ? customImport : ''}
   import { ${matchedComponents} } from "@carbon/react";
-  ${icons ? `import { ${icons} } from "@carbon/icons-react";` : ''}
+  ${matchedIcons.length > 0 ? `import { ${matchedIcons} } from "@carbon/icons-react";` : ''}
   export default function App() {
-    ${output}
+    ${storyCode}
   }
   `;
 

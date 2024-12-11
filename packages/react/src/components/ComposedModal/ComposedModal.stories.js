@@ -198,7 +198,7 @@ export const PassiveModal = () => {
 };
 
 export const WithStateManager = () => {
-  const button = useRef();
+  const button = React.useRef();
 
   /**
    * Simple state manager for modals.
@@ -207,7 +207,7 @@ export const WithStateManager = () => {
     renderLauncher: LauncherContent,
     children: ModalContent,
   }) => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = React.useState(false);
     return (
       <>
         {!ModalContent || typeof document === 'undefined'

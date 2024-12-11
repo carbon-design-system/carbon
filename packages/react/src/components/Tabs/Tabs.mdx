@@ -2,6 +2,7 @@ import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
 import * as TabsStories from './Tabs.stories';
 import { Grid, Column } from '../Grid';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -50,7 +51,15 @@ what is in rendered inside of `Tab` and `TabPanel`.
 
 ### Icon Tabs
 
-<Canvas of={TabsStories.IconOnly} />
+<Canvas
+  of={TabsStories.IconOnly}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.IconOnly),
+    },
+  ]}
+/>
 
 <Canvas of={TabsStories.Icon20Only} />
 
@@ -174,7 +183,15 @@ return (
 
 And there you have it! Working dismissable tabs.
 
-<Canvas of={TabsStories.Dismissable} />
+<Canvas
+  of={TabsStories.Dismissable}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.Dismissable),
+    },
+  ]}
+/>
 
 ### Vertical tabs
 
