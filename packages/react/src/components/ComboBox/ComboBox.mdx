@@ -1,6 +1,7 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import * as ComboBoxStories from './ComboBox.stories.js';
 import ComboBox from '../ComboBox';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -32,7 +33,15 @@ import ComboBox from '../ComboBox';
 A combobox allows the user to make a selection from a predefined list of options
 and is typically used when there are a large amount of options to choose from.
 
-<Canvas of={ComboBoxStories.Default} />
+<Canvas
+  of={ComboBoxStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboBoxStories.AllowCustomValue),
+    },
+  ]}
+/>
 
 ## Component API
 
@@ -71,9 +80,14 @@ For more information, checkout the Downshift `useCombobox` props
 
 ## typeahead Prop
 
-The `typeahead` prop enables predictive text and autocomplete functionality in the ComboBox. When enabled, it displays inline suggestions as you type, using a built-in prefix-matching filter that ignores the `shouldFilterItem` prop. Pressing `Tab` will complete the input with the first matching suggestion, while arrow keys can still be used to navigate through filtered options.
+The `typeahead` prop enables predictive text and autocomplete functionality in
+the ComboBox. When enabled, it displays inline suggestions as you type, using a
+built-in prefix-matching filter that ignores the `shouldFilterItem` prop.
+Pressing `Tab` will complete the input with the first matching suggestion, while
+arrow keys can still be used to navigate through filtered options.
 
-When combined with the `allowCustomValue` prop, the ComboBox supports both custom values and typeahead suggestions.
+When combined with the `allowCustomValue` prop, the ComboBox supports both
+custom values and typeahead suggestions.
 
 ### Combobox `downshiftActions`
 
@@ -140,7 +154,6 @@ You can use `selectedItem` for a fully controlled component.
 <Canvas of={ComboBoxStories._fullyControlled} />
 
 ```jsx
-
 const options = [
   {
     id: 'option-1',
@@ -172,11 +185,12 @@ return (
       titleText="Fully Controlled ComboBox title"
       helperText="Combobox helper text"
     />
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between'
-    }}>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}>
       <Button onClick={() => setValue(null)}>Reset</Button>
       <Button onClick={() => setValue(options[0])}>Option 1</Button>
       <Button onClick={() => setValue(options[1])}>Option 2</Button>
@@ -184,7 +198,6 @@ return (
     </div>
   </div>
 );
-
 ```
 
 ## `itemToElement`
