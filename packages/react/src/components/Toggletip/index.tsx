@@ -25,9 +25,9 @@ import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 
 type ToggletipLabelProps<E extends ElementType> = {
-  as?: E | undefined;
+  as?: E;
   children?: ReactNode;
-  className?: string | undefined;
+  className?: string;
 };
 
 /**
@@ -82,12 +82,13 @@ function useToggletip() {
 }
 
 interface ToggletipProps<E extends ElementType> {
-  align?: PopoverAlignment | undefined;
-  as?: E | undefined;
-  autoAlign?: boolean | undefined;
-  className?: string | undefined;
+  align?: PopoverAlignment;
+  alignmentAxisOffset?: number;
+  as?: E;
+  autoAlign?: boolean;
+  className?: string;
   children?: ReactNode;
-  defaultOpen?: boolean | undefined;
+  defaultOpen?: boolean;
 }
 
 /**
@@ -224,6 +225,11 @@ Toggletip.propTypes = {
   ]),
 
   /**
+   * Provide an offset value for alignment axis.
+   */
+  alignmentAxisOffset: PropTypes.number,
+
+  /**
    * Provide a custom element or component to render the top-level node for the
    * component.
    */
@@ -253,8 +259,8 @@ Toggletip.propTypes = {
 
 interface ToggletipButtonBaseProps {
   children?: ReactNode;
-  className?: string | undefined;
-  label?: string | undefined;
+  className?: string;
+  label?: string;
 }
 
 export type ToggleTipButtonProps<T extends React.ElementType> =
@@ -264,6 +270,7 @@ export type ToggleTipButtonProps<T extends React.ElementType> =
  * `ToggletipButton` controls the visibility of the Toggletip through mouse
  * clicks and keyboard interactions.
  */
+
 export const ToggletipButton = React.forwardRef(function ToggletipButton<
   T extends React.ElementType,
 >(
@@ -323,7 +330,7 @@ ToggletipButton.displayName = 'ToggletipButton';
 
 interface ToggletipContentProps {
   children?: ReactNode;
-  className?: string | undefined;
+  className?: string;
 }
 
 /**
@@ -365,7 +372,7 @@ export { ToggletipContent };
 
 interface ToggleTipActionsProps {
   children?: ReactNode;
-  className?: string | undefined;
+  className?: string;
 }
 
 /**
