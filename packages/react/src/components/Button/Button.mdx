@@ -3,11 +3,7 @@ import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { Add, TrashCan } from '@carbon/icons-react';
 import * as ButtonStories from './Button.stories';
-import {
-  stackblitzPrefillConfig,
-  stackblitzPrefillConfigDemo,
-} from '../../../previewer/codePreviewer';
-import { ButtonSecondary } from './demo/ButtonSecondary';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -62,15 +58,7 @@ user interacts with it.
     },
   ]}
 />
-<Canvas
-  of={ButtonStories.Secondary}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfigDemo(ButtonSecondary),
-    },
-  ]}
-/>
+<Canvas of={ButtonStories.Secondary} />
 <Canvas of={ButtonStories.Tertiary} />
 <Canvas of={ButtonStories.Ghost} />
 

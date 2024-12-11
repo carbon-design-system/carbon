@@ -2,7 +2,6 @@ import StackBlitzSDK from '@stackblitz/sdk';
 import sdk, { Project } from '@stackblitz/sdk';
 import { index, main, packageJson, style, viteConfig } from './configFiles';
 import * as carbonComponents from '../src/index';
-// import * as carbonIcons from '../../icons-react/next';
 
 export const stackblitzPrefillConfig = (
   code: any,
@@ -11,8 +10,6 @@ export const stackblitzPrefillConfig = (
 ) => {
   const componentCode = code.parameters.docs.source.originalSource;
   console.log({ componentCode });
-
-  // console.log({ carbonIcons });
 
   const output = componentCode
     .replace(/^\s*args\s*=>\s*{\s*|}\s*;?\s*$/g, '')
