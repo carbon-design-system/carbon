@@ -60,7 +60,7 @@ export const ReadOnly = (args) => {
         {'Tag content'}
       </Tag>
       <Tag className="some-class" type="high-contrast" {...args}>
-        {'Tag content with a long text description'}
+        {'Tag content'}
       </Tag>
       <Tag className="some-class" type="outline" {...args}>
         {'Tag content'}
