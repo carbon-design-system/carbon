@@ -114,9 +114,15 @@ interface TableHeaderProps
   scope?: string;
 
   /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `TableSlugRow` component
+   * @deprecated please use decorator instead.
+   * Provide a `Slug` component to be rendered inside the `TableSlugRow` component
    */
   slug?: ReactNode;
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TableDecoratorRow` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Specify which direction we are currently sorting by, should be one of DESC,
@@ -130,6 +136,7 @@ const TableHeader = React.forwardRef(function TableHeader(
     className: headerClassName,
     children,
     colSpan,
+    decorator,
     isSortable = false,
     isSortHeader,
     onClick,
@@ -145,19 +152,32 @@ const TableHeader = React.forwardRef(function TableHeader(
   const prefix = usePrefix();
   const uniqueId = useId('table-sort');
 
-  // Slug is always size `mini`
-  const slugRef = useRef<HTMLInputElement>(null);
-  let normalizedSlug;
-  if (slug) {
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'mini',
-      ref: slugRef,
-    });
+  // AILabel is always size `mini`
+  const AILableRef = useRef<HTMLInputElement>(null);
+
+  let colHasAILabel;
+  let normalizedDecorator = React.isValidElement(slug ?? decorator)
+    ? (slug ?? decorator)
+    : null;
+  if (
+    normalizedDecorator &&
+    normalizedDecorator['type']?.displayName === 'AILabel'
+  ) {
+    colHasAILabel = true;
+    normalizedDecorator = React.cloneElement(
+      normalizedDecorator as React.ReactElement<any>,
+      {
+        size: 'mini',
+        ref: AILableRef,
+      }
+    );
   }
 
   const headerLabelClassNames = classNames({
     [`${prefix}--table-header-label`]: true,
-    [`${prefix}--table-header-label--slug`]: slug,
+    [`${prefix}--table-header-label--slug ${prefix}--table-header-label--ai-label`]:
+      colHasAILabel,
+    [`${prefix}--table-header-label--decorator`]: decorator,
   });
 
   if (!isSortable) {
@@ -172,7 +192,9 @@ const TableHeader = React.forwardRef(function TableHeader(
         {children ? (
           <div className={headerLabelClassNames}>
             {children}
-            {normalizedSlug}
+            <div className={`${prefix}--table-header-label--decorator-inner`}>
+              {normalizedDecorator}
+            </div>
           </div>
         ) : null}
       </th>
@@ -198,11 +220,16 @@ const TableHeader = React.forwardRef(function TableHeader(
     });
 
   const headerClasses = cx(headerClassName, `${prefix}--table-sort__header`, {
-    [`${prefix}--table-sort__header--slug`]: slug,
+    [`${prefix}--table-sort__header--ai-label`]: colHasAILabel,
+    [`${prefix}--table-sort__header--decorator`]: decorator,
   });
 
   const handleClick = (evt) => {
-    if (slug && slugRef.current && slugRef.current.contains(evt.target)) {
+    if (
+      colHasAILabel &&
+      AILableRef.current &&
+      AILableRef.current.contains(evt.target)
+    ) {
       return;
     } else if (onClick) {
       return onClick(evt);
@@ -233,7 +260,9 @@ const TableHeader = React.forwardRef(function TableHeader(
             size={20}
             className={`${prefix}--table-sort__icon-unsorted`}
           />
-          {normalizedSlug}
+          <div className={`${prefix}--table-header-label--decorator-inner`}>
+            {normalizedDecorator}
+          </div>
         </span>
       </button>
     </th>
