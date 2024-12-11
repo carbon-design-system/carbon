@@ -23,7 +23,7 @@ import path from 'path';
 import postcss from 'postcss';
 import typescript from '@rollup/plugin-typescript';
 
-import * as packageJson from '../package.json' assert { type: 'json' };
+import * as packageJson from '../package.json' with { type: 'json' };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
