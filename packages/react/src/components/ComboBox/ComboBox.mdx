@@ -33,15 +33,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 A combobox allows the user to make a selection from a predefined list of options
 and is typically used when there are a large amount of options to choose from.
 
-<Canvas
-  of={ComboBoxStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboBoxStories.AllowCustomValue),
-    },
-  ]}
-/>
+<Canvas of={ComboBoxStories.Default} />
 
 ## Component API
 

@@ -49,15 +49,7 @@ communicate calls to action to the user and allow users to interact with pages
 in a variety of ways. `Button` labels express what action will occur when the
 user interacts with it.
 
-<Canvas
-  of={ButtonStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ButtonStories.Default),
-    },
-  ]}
-/>
+<Canvas of={ButtonStories.Default} />
 <Canvas of={ButtonStories.Secondary} />
 <Canvas of={ButtonStories.Tertiary} />
 <Canvas of={ButtonStories.Ghost} />
@@ -81,15 +73,7 @@ Icon buttons can take the form of Primary, Secondary, Tertiary, and Ghost but
 most commonly will be styled as primary or ghost buttons. Icon only buttons do
 not support Danger, Danger tertiary, or Danger ghost.
 
-<Canvas
-  of={ButtonStories.IconButton}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ButtonStories.IconButton),
-    },
-  ]}
-/>
+<Canvas of={ButtonStories.IconButton} />
 
 ## Set of Buttons
 

@@ -1,4 +1,4 @@
-export const packageJson = `{
+export const packageJson: string = `{
   "name": "vite",
   "private": true,
   "version": "0.70.0",
@@ -20,7 +20,7 @@ export const packageJson = `{
   }
 }`;
 
-export const index = `
+export const index: string = `
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,7 +37,7 @@ export const index = `
 
 `;
 
-export const viteConfig = `
+export const viteConfig: string = `
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -47,7 +47,7 @@ export default defineConfig({
 });
 `;
 
-export const main = `
+export const main: string = `
 import './index.scss';
 
 import React from 'react';
@@ -63,7 +63,7 @@ root.render(
 );
 `;
 
-export const style = `
+export const style: string = `
 @use '@carbon/react' with (
   $font-path: '@ibm/plex'
 );

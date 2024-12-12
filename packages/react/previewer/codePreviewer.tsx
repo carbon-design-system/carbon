@@ -44,6 +44,10 @@ export const stackblitzPrefillConfig = (
     });
   };
 
+  // Get all matched components
+  const componentNames = Object.keys(carbonComponents);
+  const matchedComponents = findComponentImports(componentNames, storyCode);
+
   // Function to find all matches
   const findIconImports = (iconNames: Array<string>, storyCode: string) => {
     return iconNames.filter((iconName) => {
@@ -52,15 +56,14 @@ export const stackblitzPrefillConfig = (
       const regexCurlBraces = new RegExp(`{${iconName}}\\s\\b`, 'g');
 
       // Check if the component exists in the `storyCode`
-      if (regexComponent.test(storyCode) || regexCurlBraces.test(storyCode)) {
+      if (
+        (regexComponent.test(storyCode) || regexCurlBraces.test(storyCode)) &&
+        !componentNames.indexOf(iconName)
+      ) {
         return iconName;
       }
     });
   };
-
-  // Get all matched components
-  const componentNames = Object.keys(carbonComponents);
-  const matchedComponents = findComponentImports(componentNames, storyCode);
 
   // Get all matched icons
   const iconsNames = Object.keys(carbonIconsReact);
