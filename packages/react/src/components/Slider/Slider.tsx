@@ -1533,13 +1533,13 @@ class Slider extends PureComponent<SliderProps> {
                       }>
                       {twoHandles && !isRtl ? (
                         <>
-                          <LowerHandle />
-                          <LowerHandleFocus />
+                          <LowerHandle aria-label={ariaLabelInput} />
+                          <LowerHandleFocus aria-label={ariaLabelInput} />
                         </>
                       ) : twoHandles && isRtl ? (
                         <>
-                          <UpperHandle />
-                          <UpperHandleFocus />
+                          <UpperHandle aria-label={ariaLabelInputUpper} />
+                          <UpperHandleFocus aria-label={ariaLabelInputUpper} />
                         </>
                       ) : undefined}
                     </div>
@@ -1565,13 +1565,15 @@ class Slider extends PureComponent<SliderProps> {
                         }>
                         {twoHandles && !isRtl ? (
                           <>
-                            <UpperHandle />
-                            <UpperHandleFocus />
+                            <UpperHandle aria-label={ariaLabelInputUpper} />
+                            <UpperHandleFocus
+                              aria-label={ariaLabelInputUpper}
+                            />
                           </>
                         ) : twoHandles && isRtl ? (
                           <>
-                            <LowerHandle />
-                            <LowerHandleFocus />
+                            <LowerHandle aria-label={ariaLabelInput} />
+                            <LowerHandleFocus aria-label={ariaLabelInput} />
                           </>
                         ) : undefined}
                       </div>
