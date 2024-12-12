@@ -72,14 +72,12 @@ body:
       placeholder: What did you see? What did you expect to see?
     validations:
       required: true
-    validations:
-      required: true
   - type: input
     id: example-url
     attributes:
       label: Reproduction/example
       description: |
-        Re-create the issue using [CodeSandbox](https://codesandbox.io/) or [Stackblitz](https://stackblitz.com). We have templates for [@carbon/react](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/examples/vite?file=src%2FApp.jsx), [@carbon/styles](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v11.2.0/examples/codesandbox-styles), and [carbon-components-react](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v10/packages/react/examples/codesandbox)
+        Re-create the issue using Stackblitz. We have templates for [`@carbon/react`](https://stackblitz.com/github/carbon-design-system/sandboxes/tree/main/react/latest/react-19-vite/?preset=node=), [`@carbon/react` with TypeScript](https://stackblitz.com/github/carbon-design-system/sandboxes/tree/main/react/latest/react-19-vite-ts/?preset=node=), or [`@carbon/web-components`](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/button?file=src%2Findex.js)
     validations:
       required: true
   - type: textarea
@@ -96,17 +94,23 @@ body:
     attributes:
       label: Suggested Severity
       description:
-        'Read more to understand our [severity levels](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#severity)'
+        'Read more to understand our [severity
+        levels](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#severity)'
       options:
-        - 'Severity 1 = Must be fixed ASAP. The response must be swift. Someone from the team must drop all current work and be immediately reassigned to address the issue.'
-        - 'Severity 2 = User cannot complete task, and/or no workaround within the user experience of a given component.'
-        - 'Severity 3 = User can complete task, and/or has a workaround within the user experience of a given component.'
-        - 'Severity 4 = Unrelated to a user task, has a workaround or does not need a workaround.'
+        - 'Severity 1 = Must be fixed ASAP. The response must be swift. Someone
+          from the team must drop all current work and be immediately reassigned
+          to address the issue.'
+        - 'Severity 2 = User cannot complete task, and/or no workaround within
+          the user experience of a given component.'
+        - 'Severity 3 = User can complete task, and/or has a workaround within
+          the user experience of a given component.'
+        - 'Severity 4 = Unrelated to a user task, has a workaround or does not
+          need a workaround.'
   - type: input
     id: application
     attributes:
       label: Application/PAL
-      description: "What application and/or PAL do you work on?"
+      description: 'What application and/or PAL do you work on?'
   - type: checkboxes
     id: terms
     attributes:
