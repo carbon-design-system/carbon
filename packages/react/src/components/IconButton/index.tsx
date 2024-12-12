@@ -17,8 +17,12 @@ import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 export const IconButtonKinds = [
   'primary',
   'secondary',
+  'tertiary',
   'ghost',
   'tertiary',
+  'danger',
+  'danger--tertiary',
+  'danger--ghost'
 ] as const;
 
 export type IconButtonKind = (typeof IconButtonKinds)[number];
