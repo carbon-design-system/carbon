@@ -7,10 +7,9 @@
 
 import './story.scss';
 
+import { Help } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
-import { SquareOutline } from '@carbon/icons-react';
 import { Tooltip } from './';
-import Button from './../Button';
 import mdx from './Tooltip.mdx';
 
 export default {
@@ -51,7 +50,65 @@ export default {
   ],
 };
 
-const DefaultStory = (props) => {
+export const Default = () => {
+  const label =
+    'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
+  return (
+    <Tooltip align="bottom" label={label}>
+      <button className="sb-tooltip-trigger" type="button">
+        <Help />
+      </button>
+    </Tooltip>
+  );
+};
+
+export const Alignment = () => {
+  return (
+    <Tooltip label="Tooltip alignment" align="bottom-left">
+      <button className="sb-tooltip-trigger" type="button">
+        <Help />
+      </button>
+    </Tooltip>
+  );
+};
+
+export const ExperimentalAutoAlign = () => {
+  const ref = useRef();
+  const tooltipLabel =
+    'Scroll the container up, down, left or right to observe how the tooltip will automatically change its position in attempt to stay within the viewport. This works on initial render in addition to on scroll.';
+
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
+  return (
+    <div style={{ width: '5000px', height: '5000px' }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: '2500px',
+          left: '2500px',
+        }}>
+        <Tooltip label={tooltipLabel} align="top" autoAlign>
+          <button className="sb-tooltip-trigger" type="button" ref={ref}>
+            <Help />
+          </button>
+        </Tooltip>
+      </div>
+    </div>
+  );
+};
+
+export const Duration = () => {
+  return (
+    <Tooltip label="Label one" enterDelayMs={0} leaveDelayMs={300}>
+      <button className="sb-tooltip-trigger" type="button">
+        <Help />
+      </button>
+    </Tooltip>
+  );
+};
+
+const PlaygroundStory = (props) => {
   const {
     align,
     closeOnActivation,
@@ -70,8 +127,8 @@ const DefaultStory = (props) => {
       label={label}
       leaveDelayMs={leaveDelayMs}
       closeOnActivation={closeOnActivation}>
-      <button type="button">
-        <SquareOutline />
+      <button className="sb-tooltip-trigger" type="button">
+        <Help />
       </button>
     </Tooltip>
   );
