@@ -44,6 +44,11 @@ export const Default = (args) => (
 );
 
 Default.args = {
+  max: 100,
+  min: 0,
+  step: 10,
+  id: 'input-default',
+  placeholder: 'Placeholder text',
   defaultWidth: 400,
   defaultValue: 50,
   invalid: false,

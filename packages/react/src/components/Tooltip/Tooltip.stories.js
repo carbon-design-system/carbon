@@ -11,6 +11,7 @@ import { Help } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
 import { Tooltip } from './';
 import mdx from './Tooltip.mdx';
+import Button from '../Button';
 
 export default {
   title: 'Components/Tooltip',
@@ -54,19 +55,12 @@ export const Default = () => {
   const label =
     'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
-    <Tooltip align="bottom" label={label}>
+    <Tooltip align="bottom" label={label} closeOnActivation={false}>
       <button className="sb-tooltip-trigger" type="button">
         <Help />
       </button>
     </Tooltip>
   );
-};
-
-Default.args = {
-  align: 'bottom',
-  closeOnActivation: false,
-  defaultOpen: false,
-  label: 'Custom label',
 };
 
 Default.argTypes = {

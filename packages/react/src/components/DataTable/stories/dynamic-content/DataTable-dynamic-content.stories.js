@@ -113,6 +113,7 @@ export const Default = (args) => {
             getToolbarProps,
             getBatchActionProps,
             getRowProps,
+            getExpandedRowProps,
             onInputChange,
             selectedRows,
             getTableProps,
@@ -154,32 +155,22 @@ export const Default = (args) => {
                       Download
                     </TableBatchAction>
                   </TableBatchActions>
-                  <TableToolbarContent>
+                  <TableToolbarContent
+                    aria-hidden={batchActionProps.shouldShowBatchActions}>
                     <TableToolbarSearch
-                      onChange={(evt) => {
-                        action('TableToolbarSearch - onChange')(evt);
-                        onInputChange(evt);
-                      }}
                       tabIndex={
                         batchActionProps.shouldShowBatchActions ? -1 : 0
                       }
+                      onChange={onInputChange}
                     />
                     <TableToolbarMenu
                       tabIndex={
                         batchActionProps.shouldShowBatchActions ? -1 : 0
                       }>
-                      <TableToolbarAction
-                        onClick={(evt) => {
-                          action('handleOnRowAdd')(evt);
-                          this.handleOnRowAdd();
-                        }}>
+                      <TableToolbarAction onClick={this.handleOnRowAdd}>
                         Add row
                       </TableToolbarAction>
-                      <TableToolbarAction
-                        onClick={(evt) => {
-                          action('handleOnHeaderAdd')(evt);
-                          this.handleOnHeaderAdd();
-                        }}>
+                      <TableToolbarAction onClick={this.handleOnHeaderAdd}>
                         Add header
                       </TableToolbarAction>
                     </TableToolbarMenu>
@@ -188,12 +179,8 @@ export const Default = (args) => {
                 <Table {...getTableProps()} aria-label="sample table">
                   <TableHead>
                     <TableRow>
-                      <TableExpandHeader />
-                      {args.radio ? (
-                        <th scope="col" />
-                      ) : (
-                        <TableSelectAll {...getSelectionProps()} />
-                      )}
+                      <TableExpandHeader aria-label="expand row" />
+                      <TableSelectAll {...getSelectionProps()} />
                       {headers.map((header, i) => (
                         <TableHeader key={i} {...getHeaderProps({ header })}>
                           {header.header}
@@ -204,20 +191,16 @@ export const Default = (args) => {
                   <TableBody>
                     {rows.map((row) => (
                       <React.Fragment key={row.id}>
-                        <TableExpandRow
-                          {...getRowProps({ row })}
-                          onClick={action('onClick')}>
-                          <TableSelectRow
-                            {...getSelectionProps({ row })}
-                            onChange={action('TableSelectRow - onChange')}
-                          />
+                        <TableExpandRow {...getRowProps({ row })}>
+                          <TableSelectRow {...getSelectionProps({ row })} />
                           {row.cells.map((cell) => (
                             <TableCell key={cell.id}>{cell.value}</TableCell>
                           ))}
                         </TableExpandRow>
                         <TableExpandedRow
                           colSpan={headers.length + 3}
-                          className="demo-expanded-td">
+                          className="demo-expanded-td"
+                          {...getExpandedRowProps({ row })}>
                           <h6>Expandable row content</h6>
                           <div>Description here</div>
                         </TableExpandedRow>

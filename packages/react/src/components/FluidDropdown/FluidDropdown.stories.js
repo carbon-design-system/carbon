@@ -105,21 +105,13 @@ const sharedArgTypes = {
 export const Default = (args) => (
   <div style={{ width: args.defaultWidth }}>
     <FluidDropdown
+      initialSelectedItem={items[2]}
       id="default"
       titleText="Label"
       label="Choose an option"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       {...args}
-    />
-    <br />
-    <FluidDropdown
-      {...args}
-      id="default-3"
-      titleText={ToggleTip}
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
     />
   </div>
 );

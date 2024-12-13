@@ -70,16 +70,6 @@ export const Default = (args) => (
       itemToString={(item) => (item ? item.text : '')}
       {...args}
     />
-    <br />
-    <FluidMultiSelect
-      {...args}
-      onChange={() => {}}
-      id="default-3"
-      titleText={ToggleTip}
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
   </div>
 );
 

@@ -23,7 +23,7 @@ export default {
     kind: 'error',
     lowContrast: false,
     hideCloseButton: false,
-    ['aria-label']: 'closes notification',
+    ['aria-label']: 'close notification',
     statusIconDescription: 'notification',
     onClose: action('onClose'),
     onCloseButtonClick: action('onCloseButtonClick'),
@@ -71,6 +71,7 @@ Default.argTypes = {
 Default.args = {
   actionButtonLabel: 'Action',
   inline: false,
+  closeOnEscape: true,
   title: 'Notification title',
   subtitle: 'Subtitle text goes here',
 };

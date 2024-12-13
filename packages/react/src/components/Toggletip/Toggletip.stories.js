@@ -91,10 +91,8 @@ const DefaultStory = (controls) => {
   const { align } = controls;
   return (
     <>
-      <ToggletipLabel>
-        Toggletip label -- using <code>defaultOpen</code> prop
-      </ToggletipLabel>
-      <Toggletip align={align} defaultOpen>
+      <ToggletipLabel>Toggletip label</ToggletipLabel>
+      <Toggletip align={align}>
         <ToggletipButton label="Show information">
           <Information />
         </ToggletipButton>

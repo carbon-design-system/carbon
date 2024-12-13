@@ -43,7 +43,6 @@ const sharedArgs = {
   helperText: 'Helper text goes here',
   invalid: false,
   invalidText: 'Invalid message goes here',
-  readOnly: false,
   warn: false,
   warnText: 'Warning message goes here',
 };
@@ -148,14 +147,8 @@ const sharedArgTypes = {
 
 export const Default = (args) => (
   <CheckboxGroup {...fieldsetCheckboxProps()} {...args}>
-    <Checkbox
-      defaultChecked
-      {...checkboxEvents}
-      id="checkbox-0"
-      helperText="hello"
-    />
-    <Checkbox {...checkboxEvents} id="checkbox-1" />
-    <Checkbox disabled {...checkboxEvents} id="checkbox-2" />
+    <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+    <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
   </CheckboxGroup>
 );
 
