@@ -184,7 +184,7 @@ export const Default = (args) => {
   return (
     <RadioButtonGroup
       legendText="Radio Button group"
-      name="radio-button-playground-group"
+      name="radio-button-default-group"
       {...args}>
       <RadioButton
         labelText="Radio button label"
