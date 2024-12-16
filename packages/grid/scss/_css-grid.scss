@@ -183,11 +183,10 @@
   .#{$prefix}--subgrid--wide {
     --cds-grid-gutter-start: #{math.div($grid-gutter, 2)};
     --cds-grid-gutter-end: #{math.div($grid-gutter, 2)};
-    --cds-grid-column-hang: 0rem; /* stylelint-disable-line length-zero-no-unit */
+    --cds-grid-column-hang: 0;
   }
 
   .#{$prefix}--subgrid--narrow {
-    --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
     --cds-grid-gutter-end: #{math.div($grid-gutter, 2)};
     --cds-grid-column-hang: #{math.div($grid-gutter, 2)};
   }
