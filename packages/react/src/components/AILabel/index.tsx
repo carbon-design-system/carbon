@@ -190,8 +190,8 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
 
     const ariaLabelText =
       !aiTextLabel && !textLabel
-        ? `${aiText} - ${slugLabel || ariaLabel}`
-        : `${aiText} - ${aiTextLabel || textLabel}`;
+        ? `${aiText} ${slugLabel || ariaLabel}`
+        : `${aiText} ${aiTextLabel || textLabel}`;
 
     return (
       <div className={aiLabelClasses} ref={ref} id={id}>
