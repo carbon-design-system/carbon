@@ -991,8 +991,7 @@
   tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     > td,
   tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
-    > td:first-of-type,
-  > td {
+    > td:first-of-type {
     background-color: transparent;
   }
 
