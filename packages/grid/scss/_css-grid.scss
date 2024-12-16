@@ -138,7 +138,7 @@
 
   // Narrow
   .#{$prefix}--css-grid--narrow {
-    --cds-grid-gutter-start: 0;
+    --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
   }
 
   // Condensed
@@ -156,12 +156,12 @@
 
   // Start
   .#{$prefix}--css-grid--start {
-    margin-inline-start: 0;
+    margin-inline-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
   }
 
   // End
   .#{$prefix}--css-grid--end {
-    margin-inline-end: 0;
+    margin-inline-end: 0rem; /* stylelint-disable-line length-zero-no-unit */
   }
 
   // -----------------------------------------------------------------------------
@@ -183,11 +183,11 @@
   .#{$prefix}--subgrid--wide {
     --cds-grid-gutter-start: #{math.div($grid-gutter, 2)};
     --cds-grid-gutter-end: #{math.div($grid-gutter, 2)};
-    --cds-grid-column-hang: 0;
+    --cds-grid-column-hang: 0rem; /* stylelint-disable-line length-zero-no-unit */
   }
 
   .#{$prefix}--subgrid--narrow {
-    --cds-grid-gutter-start: 0;
+    --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
     --cds-grid-gutter-end: #{math.div($grid-gutter, 2)};
     --cds-grid-column-hang: #{math.div($grid-gutter, 2)};
   }

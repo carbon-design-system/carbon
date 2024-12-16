@@ -36,6 +36,58 @@ export default {
   ],
 };
 
+export const ATestSubgrid = () => {
+  return (
+    <>
+      <h5>Wide</h5>
+      <Grid>
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={8} lg={16}>
+          <Grid>
+            <Column sm={4} md={4} lg={4} />
+            <Column sm={4} md={4} lg={4} />
+            <Column sm={4} md={4} lg={4} />
+            <Column sm={4} md={4} lg={4} />
+          </Grid>
+        </Column>
+      </Grid>
+      <h5>Narrow</h5>
+      <Grid narrow>
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={8} lg={16}>
+          <Grid narrow>
+            <Column sm={4} md={4} lg={4} />
+            <Column sm={4} md={4} lg={4} />
+            <Column sm={4} md={4} lg={4} />
+            <Column sm={4} md={4} lg={4} />
+          </Grid>
+        </Column>
+      </Grid>
+      <h5>Condensed</h5>
+      <Grid condensed>
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={8} lg={16}>
+          <Grid condensed>
+            <Column sm={4} md={4} lg={4} />
+            <Column sm={4} md={4} lg={4} />
+            <Column sm={4} md={4} lg={4} />
+            <Column sm={4} md={4} lg={4} />
+          </Grid>
+        </Column>
+      </Grid>
+    </>
+  );
+};
+
 export const Default = () => {
   return (
     <Grid>
