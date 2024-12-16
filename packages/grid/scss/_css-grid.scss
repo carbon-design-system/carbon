@@ -156,12 +156,12 @@
 
   // Start
   .#{$prefix}--css-grid--start {
-    margin-inline-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
+    margin-inline-start: 0;
   }
 
   // End
   .#{$prefix}--css-grid--end {
-    margin-inline-end: 0rem; /* stylelint-disable-line length-zero-no-unit */
+    margin-inline-end: 0;
   }
 
   // -----------------------------------------------------------------------------
