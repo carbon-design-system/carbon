@@ -947,6 +947,8 @@
     padding-inline-end: 0;
   }
 
+  tr.#{$prefix}--data-table--slug-row,
+  tr.#{$prefix}--data-table--slug-row + .#{$prefix}--expandable-row,
   tr.#{$prefix}--data-table--ai-label-row,
   tr.#{$prefix}--data-table--ai-label-row + .#{$prefix}--expandable-row,
   tr.#{$prefix}--data-table--decorator-row,
@@ -956,6 +958,7 @@
     background-attachment: fixed;
   }
 
+  .#{$prefix}--data-table--slug-row,
   .#{$prefix}--data-table--ai-label-row,
   .#{$prefix}--data-table--decorator-row {
     box-shadow: inset 1px 0 $ai-border-strong;
@@ -1044,6 +1047,10 @@
     background-attachment: fixed;
   }
 
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
+  .#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row
+    + .#{$prefix}--expandable-row,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row,
   .#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row,
   tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row
@@ -1076,7 +1083,11 @@
     border-block-end-color: $border-subtle;
   }
 
-  tr.#{$prefix}--expandable-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row[data-parent-row]
+  tr.#{$prefix}--expandable-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
+    > td:not(.#{$prefix}--table-expand):not(
+      .#{$prefix}--table-column-checkbox
+    ):not(.#{$prefix}--table-column-slug),
+  tr.#{$prefix}--expandable-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
     > td:not(.#{$prefix}--table-expand):not(
       .#{$prefix}--table-column-checkbox
     ):not(.#{$prefix}--table-column-slug),
@@ -1087,6 +1098,8 @@
     border-block-end: 1px solid $layer-selected;
   }
 
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row:hover
+    td:first-of-type,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row:hover
     td:first-of-type,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--decoratorß-row.#{$prefix}--expandable-row:hover
@@ -1094,6 +1107,11 @@
     border-block-end: 1px solid transparent;
   }
 
+  .#{$prefix}--data-table
+    thead
+    th.#{$prefix}--table-sort__header--slug
+    .#{$prefix}--table-sort,
+  .#{$prefix}--data-table thead th:has(> .#{$prefix}--table-header-label--slug),
   .#{$prefix}--data-table
     thead
     th.#{$prefix}--table-sort__header--ai-label
@@ -1123,6 +1141,7 @@
   }
 
   // AILabel inside header styles
+  th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug,
   th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--ai-label,
   th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--decorator {
     display: flex;
@@ -1144,6 +1163,8 @@
     margin-inline-start: auto;
   }
 
+  th.#{$prefix}--table-sort__header--slug,
+  th:has(.#{$prefix}--table-header-label--slug),
   th.#{$prefix}--table-sort__header--ai-label,
   th:has(.#{$prefix}--table-header-label--ai-label) {
     box-shadow: inset 0 1px $ai-border-strong;

@@ -244,6 +244,8 @@
   }
 
   // AILabel styles
+  .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon,
+  .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon-unsorted,
   .#{$prefix}--table-sort__header--ai-label .#{$prefix}--table-sort__icon,
   .#{$prefix}--table-sort__header--ai-label
     .#{$prefix}--table-sort__icon-unsorted,
