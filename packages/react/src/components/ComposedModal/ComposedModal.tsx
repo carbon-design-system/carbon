@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import { Layer } from '../Layer';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
-import debounce from 'lodash.debounce';
+import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
