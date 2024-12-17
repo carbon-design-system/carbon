@@ -25,16 +25,6 @@ export default {
   },
 };
 
-export const Default = () => {
-  return (
-    <Stack gap={6}>
-      <div>Item 1</div>
-      <div>Item 2</div>
-      <div>Item 3</div>
-    </Stack>
-  );
-};
-
 export const Horizontal = () => {
   return (
     <Stack gap={6} orientation="horizontal">
@@ -45,7 +35,7 @@ export const Horizontal = () => {
   );
 };
 
-export const Playground = (args) => {
+export const Default = (args) => {
   return (
     <Stack {...args}>
       <div>Item 1</div>
@@ -55,11 +45,11 @@ export const Playground = (args) => {
   );
 };
 
-Playground.args = {
+Default.args = {
   as: 'div',
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   as: {
     control: {
       type: 'text',

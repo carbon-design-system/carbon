@@ -223,9 +223,24 @@ export default {
   },
 };
 
-export const Default = () => (
-  <TreeView label="Tree View">{renderTree({ nodes })}</TreeView>
+export const Default = (args) => (
+  <TreeView label="Tree View" {...args}>
+    {renderTree({ nodes })}
+  </TreeView>
 );
+
+Default.args = {
+  hideLabel: false,
+  multiselect: false,
+};
+
+Default.argTypes = {
+  active: { control: { type: 'text' } },
+  size: {
+    options: ['xs', 'sm'],
+    control: { type: 'select' },
+  },
+};
 
 export const WithIcons = () => (
   <TreeView label="Tree View">
@@ -248,25 +263,6 @@ export const WithControlledExpansion = () => {
       <TreeView label="Tree View">{renderTree({ nodes, expanded })}</TreeView>
     </>
   );
-};
-
-export const Playground = (args) => (
-  <TreeView label="Tree View" {...args}>
-    {renderTree({ nodes })}
-  </TreeView>
-);
-
-Playground.args = {
-  hideLabel: false,
-  multiselect: false,
-};
-
-Playground.argTypes = {
-  active: { control: { type: 'text' } },
-  size: {
-    options: ['xs', 'sm'],
-    control: { type: 'select' },
-  },
 };
 
 export const Temp = () => (

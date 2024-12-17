@@ -36,15 +36,7 @@ export default {
   },
 };
 
-export const Default = () => (
-  <div style={{ margin: '3rem' }}>
-    <IconButton label="label">
-      <Edit />
-    </IconButton>
-  </div>
-);
-
-const PlaygroundStory = (props) => {
+const DefaultStory = (props) => {
   const { align, defaultOpen, disabled, kind, label, size } = props;
   return (
     <div style={{ margin: '3rem' }}>
@@ -61,9 +53,9 @@ const PlaygroundStory = (props) => {
   );
 };
 
-export const Playground = PlaygroundStory.bind({});
+export const Default = DefaultStory.bind({});
 
-Playground.args = {
+Default.args = {
   align: 'bottom',
   defaultOpen: true,
   disabled: false,
@@ -71,7 +63,7 @@ Playground.args = {
   kind: 'primary',
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   align: {
     options: [
       'top',

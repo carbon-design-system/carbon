@@ -28,18 +28,6 @@ export default {
   },
 };
 
-export const Default = () => (
-  <Search
-    size="lg"
-    placeholder="Find your items"
-    labelText="Search"
-    closeButtonLabelText="Clear search input"
-    id="search-1"
-    onChange={() => {}}
-    onKeyDown={() => {}}
-  />
-);
-
 export const Disabled = () => (
   <Search
     disabled
@@ -96,17 +84,15 @@ export const ExpandableWithLayer = () => (
   </WithLayer>
 );
 
-export const Playground = (args) => (
-  <div style={{ width: args.playgroundWidth }}>
-    <Search id="search-playground-1" {...args} />
+export const Default = (args) => (
+  <div style={{ width: args.defaultWidth }}>
+    <Search id="search-default-1" {...args} />
   </div>
 );
 
-Playground.args = {
-  playgroundWidth: 300,
+Default.args = {
   closeButtonLabelText: 'Clear search input',
   disabled: false,
-  defaultValue: 'Default value',
   labelText: 'Label text',
   placeholder: 'Placeholder text',
   role: 'searchbox',
@@ -114,8 +100,8 @@ Playground.args = {
   type: 'text',
 };
 
-Playground.argTypes = {
-  playgroundWidth: {
+Default.argTypes = {
+  defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
   className: {
