@@ -27,10 +27,18 @@ describe('IconIndicator', () => {
     );
   });
 
-  it('should pass in an extra className when one is given', () => {
-    render(
+  it('should support a custom class name on the outermost element', () => {
+    const { container } = render(
       <IconIndicator kind="error" label="label" className="custom-class" />
     );
-    expect(screen.getByText('label')).toHaveClass('custom-class');
+    expect(container.firstChild).toHaveClass('custom-class');
+  });
+
+  it('should support a ref on the outermost element', () => {
+    const ref = jest.fn();
+    const { container } = render(
+      <IconIndicator kind="error" label="label" ref={ref} />
+    );
+    expect(ref).toHaveBeenCalledWith(container.firstChild);
   });
 });

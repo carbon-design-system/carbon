@@ -73,17 +73,21 @@ interface IconIndicatorProps {
   label: string;
 
   /**
-   * Specify the size of the Icon Indicator. Currently supports either 16 (default) or 20 sizes.
+   * Specify the size of the Icon Indicator. Defaults to 16.
    */
-  size?: number;
+  size?: 16 | 20;
 }
 
-const IconIndicator = ({
-  className: customClassName,
-  kind,
-  label,
-  size = 16,
-}: IconIndicatorProps) => {
+export const IconIndicator = React.forwardRef(function IconIndicatorContent(
+  {
+    className: customClassName,
+    kind,
+    label,
+    size = 16,
+    ...rest
+  }: IconIndicatorProps,
+  ref: React.Ref<HTMLDivElement>
+) {
   const prefix = usePrefix();
   const classNames = cx(`${prefix}--icon-indicator`, customClassName, {
     [`${prefix}--icon-indicator--20`]: size == 20,
@@ -94,7 +98,7 @@ const IconIndicator = ({
     return null;
   }
   return (
-    <div className={classNames}>
+    <div className={classNames} ref={ref}>
       <IconForKind
         size={size}
         className={`${prefix}--icon-indicator--${kind}`}
@@ -102,7 +106,7 @@ const IconIndicator = ({
       {label}
     </div>
   );
-};
+});
 
 IconIndicator.propTypes = {
   /**
@@ -121,7 +125,7 @@ IconIndicator.propTypes = {
   label: PropTypes.string.isRequired,
 
   /**
-   * Specify the size of the Icon Indicator. Currently supports either 16 (default) or 20  sizes
+   * Specify the size of the Icon Indicator. Defaults to 16.
    */
   size: PropTypes.oneOf([16, 20]),
 };

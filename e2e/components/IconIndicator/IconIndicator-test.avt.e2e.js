@@ -13,7 +13,7 @@ test.describe('@avt IconIndicator', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'IconIndicator',
-      id: 'components-statusindicators-iconindicator--default',
+      id: 'experimental-statusindicators-unstable-iconindicator--default',
       globals: {
         theme: 'white',
       },

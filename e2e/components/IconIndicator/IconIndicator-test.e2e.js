@@ -16,7 +16,7 @@ test.describe('IconIndicator', () => {
       test('icon indicator @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'IconIndicator',
-          id: 'components-statusindicators-iconindicator--default',
+          id: 'experimental-statusindicators-unstable-iconindicator--default',
           theme,
         });
       });

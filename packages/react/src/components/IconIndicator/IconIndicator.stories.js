@@ -11,7 +11,7 @@ import { IconIndicatorKinds } from './index';
 import mdx from './IconIndicator.mdx';
 
 export default {
-  title: 'Components/StatusIndicators/IconIndicator',
+  title: 'Experimental/StatusIndicators/unstable__IconIndicator',
   component: IconIndicator,
   parameters: {
     docs: {
@@ -21,12 +21,23 @@ export default {
 };
 
 export const Default = () => {
-  return IconIndicatorKinds.map((type) => (
-    <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-      <IconIndicator kind={type} label={type} />
-      <IconIndicator kind={type} label={type} size={20} />
+  return (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'auto auto',
+        columnGap: '1rem',
+        rowGap: '0.5rem',
+        width: 'fit-content',
+      }}>
+      {IconIndicatorKinds.map((type) => (
+        <>
+          <IconIndicator kind={type} label={type} />
+          <IconIndicator kind={type} label={type} size={20} />
+        </>
+      ))}
     </div>
-  ));
+  );
 };
 
 const PlaygroundStory = (props) => {

@@ -28,9 +28,10 @@ const kinds = [
 
 export const Default = {
   render: () => html`
-    ${kinds.map(
-      (kind) => html`
-        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+    <div
+      style="display: grid; grid-template-columns: 'auto auto'; column-gap: 1rem; row-gap: .5rem; width: 'fit-content'">
+      ${kinds.map(
+        (kind) => html`
           <cds-icon-indicator
             kind="${kind}"
             label="${kind}"></cds-icon-indicator>
@@ -38,9 +39,9 @@ export const Default = {
             kind="${kind}"
             label="${kind}"
             size=${20}></cds-icon-indicator>
-        </div>
-      `
-    )}
+        `
+      )}
+    </div>
   `,
 };
 
@@ -79,7 +80,7 @@ export const Playground = {
 };
 
 const meta = {
-  title: 'Components/Status Indicators/Icon Indicator',
+  title: 'Experimental/Status Indicators/Icon Indicator',
 };
 
 export default meta;

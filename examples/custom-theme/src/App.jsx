@@ -1,10 +1,11 @@
-import { Button } from '@carbon/react';
+import { Button, IconIndicator } from '@carbon/react';
 import React from 'react';
 
 export default function App() {
   return (
     <div>
       <Button>Button with custom theme</Button>
+      <IconIndicator kind="error" label="Custom status red"></IconIndicator>
       <div className="background color">$background</div>
       <div className="background-active color">$background-active</div>
       <div className="background-inverse color">$background-inverse</div>
