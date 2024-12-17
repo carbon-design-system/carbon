@@ -13,7 +13,7 @@ import React, {
 import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
-import throttle from 'lodash.throttle';
+import { throttle } from 'es-toolkit/compat';
 
 import * as keys from '../../internal/keyboard/keys';
 import { matches } from '../../internal/keyboard';
