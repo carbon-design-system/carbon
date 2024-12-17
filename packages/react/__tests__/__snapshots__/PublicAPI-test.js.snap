@@ -9440,6 +9440,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "alignmentAxisOffset": Object {
+        "type": "number",
+      },
       "as": Object {
         "type": "elementType",
       },
