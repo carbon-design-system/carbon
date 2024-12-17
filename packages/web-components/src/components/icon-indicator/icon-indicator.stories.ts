@@ -29,7 +29,7 @@ const kinds = [
 export const Default = {
   render: () => html`
     <div
-      style="display: grid; grid-template-columns: 'auto auto'; column-gap: 1rem; row-gap: .5rem; width: 'fit-content'">
+      style="display: grid; grid-template-columns: auto auto; column-gap: 1rem; row-gap: .5rem; width: fit-content">
       ${kinds.map(
         (kind) => html`
           <cds-icon-indicator
