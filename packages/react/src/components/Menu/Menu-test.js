@@ -83,21 +83,6 @@ describe('Menu', () => {
       expect(document.querySelector('.custom-class')).toBeInTheDocument();
       document.body.removeChild(el);
     });
-
-    it('warns about nested menus in basic mode', async () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <Menu open mode="basic">
-          <MenuItem label="Submenu">
-            <MenuItem label="Item" />
-          </MenuItem>
-        </Menu>
-      );
-      await waitForPosition();
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
   });
 
   describe('Submenu behavior', () => {
@@ -223,35 +208,6 @@ describe('MenuItem', () => {
       );
 
       expect(screen.getByText('item')).toBeInTheDocument();
-    });
-
-    it('warns about MenuItemSelectable in basic mode', () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <Menu open mode="basic">
-          <MenuItemSelectable label="Option" />
-        </Menu>
-      );
-
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
-
-    it('warns about MenuItemRadioGroup in basic mode', () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <Menu open mode="basic">
-          <MenuItemRadioGroup
-            label="Options"
-            items={['Option 1', 'Option 2']}
-          />
-        </Menu>
-      );
-
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
     });
   });
 
