@@ -72,7 +72,6 @@ SideNavHeader.propTypes = {
    * Provide an icon to render in the header of the side navigation. Should be
    * a React class.
    */
-  // @ts-expect-error - PropTypes are unable to cover this case.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
     .isRequired,
 };

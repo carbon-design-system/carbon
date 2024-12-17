@@ -12,7 +12,7 @@ import React, {
   forwardRef,
   type ReactNode,
   ElementType,
-  WeakValidationMap,
+  type JSX,
 } from 'react';
 import cx from 'classnames';
 import Link, { LinkProps, LinkPropTypes } from './Link';
@@ -34,7 +34,7 @@ export interface HeaderMenuItemComponent {
     props: HeaderMenuItemProps<E> & { ref?: ForwardedRef<ElementType> }
   ): JSX.Element | null;
   displayName?: string;
-  propTypes?: WeakValidationMap<HeaderMenuItemProps<any>>;
+  propTypes?: PropTypes.WeakValidationMap<HeaderMenuItemProps<any>>;
 }
 
 const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(

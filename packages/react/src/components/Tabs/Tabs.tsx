@@ -23,7 +23,7 @@ import React, {
   type HTMLAttributes,
   type RefObject,
   type ComponentType,
-  type ReactHTML,
+  type HTMLElementType,
   type ElementType,
 } from 'react';
 import { Grid } from '../Grid';
@@ -1091,7 +1091,7 @@ TabListVertical.propTypes = {
  * when the long press is deactivated
  */
 function createLongPressBehavior(
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   direction: 'forward' | 'backward',
   setScrollLeft
 ) {
@@ -1141,7 +1141,7 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
   /**
    * Provide a custom element to render instead of the default button
    */
-  as?: keyof ReactHTML | ComponentType;
+  as?: HTMLElementType | ComponentType;
 
   /**
    * Provide child elements to be rendered inside `Tab`.
@@ -1451,7 +1451,6 @@ Tab.propTypes = {
   /**
    * Provide a custom element to render instead of the default button
    */
-  // @ts-expect-error: Invalid prop type derivation
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
@@ -1490,7 +1489,6 @@ Tab.propTypes = {
    * Optional prop to render an icon next to the label.
    * Can be a React component class
    */
-  // @ts-expect-error: Invalid prop type derivation
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /*

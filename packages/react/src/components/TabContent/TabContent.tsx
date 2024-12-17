@@ -21,7 +21,7 @@ import { usePrefix } from '../../internal/usePrefix';
 /**
  * Determine if the node within the provided ref contains content that is tabbable.
  */
-function useTabbableContent(ref: RefObject<HTMLDivElement>) {
+function useTabbableContent(ref: RefObject<HTMLDivElement | null>) {
   const [hasTabbableContent, setHasTabbableContent] = useState(false);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

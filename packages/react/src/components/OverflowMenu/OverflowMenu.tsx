@@ -23,6 +23,7 @@ import invariant from 'invariant';
 import mergeRefs from '../../tools/mergeRefs';
 import { noopFn } from '../../internal/noopFn';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -518,7 +519,10 @@ class OverflowMenu extends React.Component<
     const enabledIndices: number[] = React.Children.toArray(
       this.props.children
     ).reduce((acc: number[], curr, i) => {
-      if (React.isValidElement(curr) && !curr.props.disabled) {
+      if (
+        React.isValidElement<OverflowMenuItemProps>(curr) &&
+        !curr.props.disabled
+      ) {
         acc.push(i);
       }
       return acc;

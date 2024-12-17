@@ -68,7 +68,7 @@ interface AccordionItemProps {
    */
   renderExpando?: (
     props: PropsWithChildren<AccordionToggleProps>
-  ) => ReactElement;
+  ) => ReactElement<any>;
 
   /**
    * The callback function to render the expand button.
@@ -76,7 +76,7 @@ interface AccordionItemProps {
    */
   renderToggle?: (
     props: PropsWithChildren<AccordionToggleProps>
-  ) => ReactElement;
+  ) => ReactElement<any>;
 
   /**
    * The accordion title.

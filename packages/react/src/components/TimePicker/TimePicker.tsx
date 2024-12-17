@@ -162,7 +162,7 @@ const TimePicker: TimePickerComponent = React.forwardRef<
     value,
     ...rest
   },
-  ref: React.LegacyRef<HTMLInputElement>
+  ref: React.Ref<HTMLInputElement>
 ) {
   const prefix = usePrefix();
 
