@@ -121,7 +121,7 @@
   }
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus:has(
-      .#{$prefix}--list-box--expanded
+      .#{$prefix}--list-box--expanded.#{$prefix}--multi-select--selected
     ) {
     outline-width: convert.to-rem(1px);
   }
@@ -135,6 +135,7 @@
   .#{$prefix}--list-box__wrapper--fluid:not(.#{$prefix}--list-box--up)
     .#{$prefix}--list-box__menu {
     inset-block-start: calc(100%);
+    margin-block-start: convert.to-rem(2px);
   }
 
   // Invalid / Warning styles

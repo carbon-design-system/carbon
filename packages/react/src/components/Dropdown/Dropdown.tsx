@@ -518,11 +518,7 @@ const Dropdown = React.forwardRef(
       ) : null;
 
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
-      if (isFluid) {
-        setIsFocused(evt.type === 'focus' ? true : false);
-      } else {
-        setIsFocused(evt.type === 'focus' && !selectedItem ? true : false);
-      }
+      setIsFocused(evt.type === 'focus' && !selectedItem ? true : false);
     };
 
     const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
