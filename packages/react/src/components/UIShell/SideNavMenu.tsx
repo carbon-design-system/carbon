@@ -182,7 +182,6 @@ SideNavMenu.propTypes = {
   /**
    * Pass in a custom icon to render next to the `SideNavMenu` title
    */
-  // @ts-expect-error - PropTypes are unable to cover this case.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**

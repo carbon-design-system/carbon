@@ -194,7 +194,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const ref = useMergedRefs([forwardRef, textareaRef]) as
-    | React.LegacyRef<HTMLTextAreaElement>
+    | React.Ref<HTMLTextAreaElement>
     | undefined;
 
   function getInitialTextCount(): number {

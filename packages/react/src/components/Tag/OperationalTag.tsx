@@ -91,7 +91,7 @@ const OperationalTag = <T extends React.ElementType>({
   ...other
 }: OperationalTagProps<T>) => {
   const prefix = usePrefix();
-  const tagRef = useRef<HTMLElement>();
+  const tagRef = useRef<HTMLElement>(undefined);
   const tagId = id || `tag-${useId()}`;
   const tagClasses = classNames(`${prefix}--tag--operational`, className);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);

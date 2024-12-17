@@ -152,9 +152,8 @@ const TableToolbarSearch = ({
   const expanded = controlled ? expandedProp : expandedState;
   const [value, setValue] = useState(defaultValue || '');
   const uniqueId = useId('table-toolbar-search');
-  const [focusTarget, setFocusTarget] = useState<RefObject<HTMLElement> | null>(
-    null
-  );
+  const [focusTarget, setFocusTarget] =
+    useState<RefObject<HTMLElement | null> | null>(null);
   const prefix = usePrefix();
 
   useEffect(() => {

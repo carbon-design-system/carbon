@@ -16,7 +16,7 @@ interface PortalProps {
   /**
    * Provide a ref for a container node to render the portal
    */
-  container?: React.RefObject<HTMLElement>;
+  container?: React.RefObject<HTMLElement | null>;
 }
 
 /**

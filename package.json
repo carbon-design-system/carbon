@@ -31,7 +31,7 @@
   },
   "resolutions": {
     "@types/react": "~19.0.0",
-    "@types/prop-types": "15.7.13",
+    "@types/prop-types": "^15.7.14",
     "ast-types": "^0.14.0",
     "node-sass": "^9.0.0",
     "react": "~19.0.0",
@@ -58,6 +58,7 @@
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.4.3",
+    "@types/prop-types": "^15.7.13",
     "@types/react-is": "^19.0.0",
     "accessibility-checker": "^3.1.78",
     "all-contributors-cli": "^6.19.0",

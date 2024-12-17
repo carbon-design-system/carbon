@@ -12,9 +12,9 @@ import React, {
   ElementType,
   ForwardedRef,
   ReactNode,
-  WeakValidationMap,
   forwardRef,
   useContext,
+  type JSX,
 } from 'react';
 import Link, { LinkProps, LinkPropTypes } from './Link';
 import SideNavIcon from './SideNavIcon';
@@ -74,7 +74,7 @@ export interface SideNavLinkComponent {
     props: SideNavLinkProps<E> & { ref?: ForwardedRef<ElementType> }
   ): JSX.Element | null;
   displayName?: string;
-  propTypes?: WeakValidationMap<SideNavLinkProps<any>>;
+  propTypes?: PropTypes.WeakValidationMap<SideNavLinkProps<any>>;
 }
 
 const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<

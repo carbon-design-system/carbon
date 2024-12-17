@@ -132,7 +132,6 @@ ContainedListItem.propTypes = {
   /**
    * Provide an optional icon to render in front of the item's content.
    */
-  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 

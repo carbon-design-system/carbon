@@ -135,7 +135,7 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
   forwardRef: ForwardedRef<HTMLElement | undefined>
 ) {
   const prefix = usePrefix();
-  const tagRef = useRef<HTMLElement>();
+  const tagRef = useRef<HTMLElement>(undefined);
   const ref = useMergeRefs([forwardRef, tagRef]);
   const tagId = id || `tag-${useId()}`;
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);

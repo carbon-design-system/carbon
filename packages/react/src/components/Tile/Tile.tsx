@@ -358,7 +358,6 @@ ClickableTile.propTypes = {
    * Optional prop to allow overriding the icon rendering.
    * Can be a React component class
    */
-  // @ts-expect-error: Invalid derived prop type, seemingly no real solution.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 

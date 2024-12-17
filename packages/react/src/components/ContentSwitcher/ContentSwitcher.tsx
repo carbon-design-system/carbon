@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { HTMLAttributes, ReactElement } from 'react';
+import React, { HTMLAttributes, ReactElement, type JSX } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { LayoutConstraint } from '../Layout';
@@ -27,7 +27,7 @@ export interface ContentSwitcherProps
   /**
    * Pass in Switch components to be rendered in the ContentSwitcher
    */
-  children?: ReactElement[];
+  children?: ReactElement<any>[];
 
   /**
    * Specify an optional className to be added to the container node
@@ -169,7 +169,9 @@ export default class ContentSwitcher extends React.Component<
               return;
             }
 
-            const child = children[this.state.selectedIndex] as ReactElement;
+            const child = children[
+              this.state.selectedIndex
+            ] as ReactElement<any>;
             const switchRef = this._switchRefs[this.state.selectedIndex];
             switchRef && switchRef.focus();
             this.props.onChange({
@@ -226,11 +228,11 @@ export default class ContentSwitcher extends React.Component<
         onChange={undefined}>
         {children &&
           React.Children.toArray(children).map((child, index) =>
-            React.cloneElement(child as ReactElement, {
+            React.cloneElement(child as ReactElement<any>, {
               index,
               onClick: composeEventHandlers([
                 this.handleChildChange,
-                (child as ReactElement).props.onClick,
+                (child as ReactElement<any>).props.onClick,
               ]),
               onKeyDown: this.handleChildChange,
               selected: index === this.state.selectedIndex,

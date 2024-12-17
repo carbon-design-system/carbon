@@ -224,7 +224,9 @@ const FileUploader = React.forwardRef(
                 <span
                   key={index}
                   className={selectedFileClasses}
-                  ref={(node) => (nodes[index] = node as HTMLSpanElement)} // eslint-disable-line
+                  ref={(node) => {
+                    nodes[index] = node as HTMLSpanElement;
+                  }} // eslint-disable-line
                   {...other}>
                   <Text as="p" className={`${prefix}--file-filename`} id={name}>
                     {name}
@@ -256,7 +258,7 @@ const FileUploader = React.forwardRef(
     );
   }
 ) as {
-  <ItemType>(props: FileUploaderProps): ReactElement;
+  <ItemType>(props: FileUploaderProps): ReactElement<any>;
   propTypes?: any;
   contextTypes?: any;
   defaultProps?: any;

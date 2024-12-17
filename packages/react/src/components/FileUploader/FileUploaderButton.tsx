@@ -101,7 +101,7 @@ export interface FileUploaderButtonProps
    */
   tabIndex?: number | string;
 
-  innerRef?: React.RefObject<HTMLLabelElement>;
+  innerRef?: React.RefObject<HTMLLabelElement | null>;
 }
 
 function FileUploaderButton({
