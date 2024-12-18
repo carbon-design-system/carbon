@@ -17,9 +17,6 @@
 @use '@carbon/react/scss/components/button/tokens' as button-tokens with (
   $button-primary: #3f51b5
 );
-@use '@carbon/react/scss/components/icon-indicator/tokens' as status-tokens with (
-  $status-red: #b53f3f
-);
 @use '@carbon/react';
 
 :root {
