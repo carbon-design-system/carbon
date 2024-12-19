@@ -45,7 +45,7 @@ export default class CDSCEDemoFileUploader extends LitElement {
           id: Math.random().toString(36).slice(2),
           file: item,
           state: FILE_UPLOADER_ITEM_STATE.UPLOADING,
-        } as FileData)
+        }) as FileData
     );
     const { multiple, _files: files, _simulateUpload: simulateUpload } = this;
     if (multiple) {
