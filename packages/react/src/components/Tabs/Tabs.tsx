@@ -8,7 +8,7 @@
 import { ChevronLeft, ChevronRight } from '@carbon/icons-react';
 import { breakpoints } from '@carbon/layout';
 import cx from 'classnames';
-import debounce from 'lodash.debounce';
+import { debounce } from 'es-toolkit/compat';
 import PropTypes from 'prop-types';
 import React, {
   useCallback,
