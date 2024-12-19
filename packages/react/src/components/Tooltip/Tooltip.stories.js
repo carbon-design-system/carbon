@@ -7,7 +7,7 @@
 
 import './story.scss';
 
-import { Information } from '@carbon/icons-react';
+import { Help } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
 import { Tooltip } from './';
 import mdx from './Tooltip.mdx';
@@ -56,7 +56,7 @@ export const Default = () => {
   return (
     <Tooltip align="bottom" label={label}>
       <button className="sb-tooltip-trigger" type="button">
-        <Information />
+        <Help />
       </button>
     </Tooltip>
   );
@@ -66,7 +66,7 @@ export const Alignment = () => {
   return (
     <Tooltip label="Tooltip alignment" align="bottom-left">
       <button className="sb-tooltip-trigger" type="button">
-        <Information />
+        <Help />
       </button>
     </Tooltip>
   );
@@ -90,7 +90,7 @@ export const ExperimentalAutoAlign = () => {
         }}>
         <Tooltip label={tooltipLabel} align="top" autoAlign>
           <button className="sb-tooltip-trigger" type="button" ref={ref}>
-            <Information />
+            <Help />
           </button>
         </Tooltip>
       </div>
@@ -102,7 +102,7 @@ export const Duration = () => {
   return (
     <Tooltip label="Label one" enterDelayMs={0} leaveDelayMs={300}>
       <button className="sb-tooltip-trigger" type="button">
-        <Information />
+        <Help />
       </button>
     </Tooltip>
   );
@@ -128,7 +128,7 @@ const PlaygroundStory = (props) => {
       leaveDelayMs={leaveDelayMs}
       closeOnActivation={closeOnActivation}>
       <button className="sb-tooltip-trigger" type="button">
-        <Information />
+        <Help />
       </button>
     </Tooltip>
   );

@@ -29,6 +29,10 @@
     grid-gap: 0 convert.to-rem(24px);
     grid-template: auto / auto min-content;
 
+    &:has(.#{$prefix}--label.#{$prefix}--visually-hidden) {
+      grid-template: auto / auto;
+    }
+
     .#{$prefix}--label {
       @include type-style('body-compact-01');
     }

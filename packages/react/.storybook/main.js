@@ -26,6 +26,9 @@ const storyGlobs = [
   '../src/**/*-story.js',
 ];
 
+const getAbsolutePath = (packageName) =>
+  path.dirname(require.resolve(path.join(packageName, 'package.json')));
+
 const stories = glob
   .sync(storyGlobs, {
     ignore: ['../src/**/docs/*.mdx', '../src/**/next/docs/*.mdx'],
@@ -106,7 +109,7 @@ const config = {
     buildStoriesJson: true,
   },
   framework: {
-    name: '@storybook/react-vite',
+    name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
   stories,

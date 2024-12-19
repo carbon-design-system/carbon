@@ -6,16 +6,23 @@
 ## Table of Contents
 
 - [Overview](#overview)
-  - [`@ibm/plex`](#ibmplex)
+  - [Plex packages](#plex-packages)
+    - [Per-family packages](#per-family-packages)
+    - [`@ibm/plex`](#ibmplex)
   - [`@font-face`](#font-face)
 - [Including in your product](#including-in-your-product)
   - [`@carbon/type`](#carbontype)
   - [unpkg](#unpkg)
+  - [Loading Configuration](#loading-configuration)
+    - [Configuration Priority](#configuration-priority)
+    - [Using `$font-path`](#using-font-path)
+  - [Migration Guide](#migration-guide)
+    - [Migrating from Akamai CDN to per-family packages](#migrating-from-akamai-cdn-to-per-family-packages)
+  - [Future Changes](#future-changes)
   - [Self-hosted, CDN](#self-hosted-cdn)
     - [Self-hosted](#self-hosted)
     - [CDN](#cdn)
 - [FAQ](#faq)
-    - [How do I enable support for IE11?](#how-do-i-enable-support-for-ie11)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
@@ -23,25 +30,70 @@
 ## Overview
 
 The Carbon Design System uses [IBM Plex](https://www.ibm.com/plex) as its
-typeface. For teams using Carbon, this font is loaded by default from the
-`@ibm/plex` package. Alternatively, the font can be loaded from an Akamai CDN if
-you are using any of our projects, or if you are using
-[`@carbon/type`](../packages/type) directly.
+typeface. For teams using Carbon, there are several options to include IBM Plex
+in your project:
 
-Below, we offer several alternative ways to include IBM Plex in your project for
-a variety of situations.
+1. `@ibm/plex` (this is the default)
+2. Per-family packages `@ibm/plex-sans`, `@ibm/plex-mono`, etc. (recommended for
+   new projects)
+3. Akamai CDN
+4. Self-hosted fonts
 
-If you feel like a situation isn't fully covered, or you have an idea for
-another one to add, please
-[make an issue](https://github.com/IBM/carbon-elements/issues/new/choose)! We
-want to make sure everyone feels like their use-case is fully covered by this
-document.
+### Plex packages
 
-### `@ibm/plex`
+IBM Plex is distributed through packages on NPM:
 
-IBM Plex is distributed through a package on NPM called
-[`@ibm/plex`](https://www.npmjs.com/package/@ibm/plex). The source for this
-package is available on [GitHub](https://github.com/ibm/plex#readme).
+- Individual per-family packages (e.g., `@ibm/plex-sans`, `@ibm/plex-mono`) The
+  source for these packages is available on
+  [GitHub](https://github.com/ibm/plex#readme).
+- [`@ibm/plex`](https://www.npmjs.com/package/@ibm/plex): The legacy package
+  containing all fonts. This package is no longer updated and uses an outdated
+  version of plex.
+
+#### Per-family packages
+
+The per-family packages, introduced in 2024, separate IBM Plex assets out into
+individual packages for each family. This provides greater flexibility for
+projects to only include the fonts they need and/or to include more beyond the
+provided defaults. It also avoids issues with package manager configurations
+requiring dependencies to be included in committed files (e.g. yarn's
+[offline mirror](https://yarnpkg.com/features/caching#offline-mirror)).
+
+Per-family packages include:
+
+- @ibm/plex-math
+- @ibm/plex-mono
+- @ibm/plex-sans-arabic
+- @ibm/plex-sans-condensed
+- @ibm/plex-sans-devanagari
+- @ibm/plex-sans-hebrew
+- @ibm/plex-sans-jp
+- @ibm/plex-sans-kr
+- @ibm/plex-sans-tc
+- @ibm/plex-sans-thai-looped
+- @ibm/plex-sans-thai
+- @ibm/plex-sans-variable
+- @ibm/plex-sans
+- @ibm/plex-serif
+
+For backwards-compatibility, the default configuration in Carbon continues to
+use the legacy `@ibm/plex` package. This package is no longer updated and we
+encourage projects to use the per-family packages instead.
+
+To enable per-family loading, set the sass config variable in your Sass
+configuration. For example with `@carbon/react`:
+
+```scss
+@use '@carbon/react' with (
+  $use-per-family-plex: true
+);
+```
+
+The assets follow a similar structure as defined below for `@ibm/plex` with only
+a slight variation to the pathing. They also no longer include legacy filetypes
+that are no longer needed.
+
+#### `@ibm/plex`
 
 This package ships all of the available fonts, and includes files that offer the
 complete typeface in one file. It also ships fonts split up into a variety of
@@ -198,6 +250,19 @@ update to this document with guidance!
 
 ## Including in your product
 
+If you're using `@carbon/styles` or `@carbon/react`, IBM Plex assets and the
+relevant `@font-face` are already included by default. We recommend configuring
+the per-family packages in your sass configuration to ensure you're using the
+latest version of IBM Plex.
+
+For example, with `@carbon/react`:
+
+```scss
+@use '@carbon/react' with (
+  $use-per-family-plex: true
+);
+```
+
 ### `@carbon/type`
 
 ### unpkg
@@ -220,6 +285,119 @@ To quickly load IBM Plex Sans, you could use the following `@font-face` block:
 }
 ```
 
+### Loading Configuration
+
+Carbon provides several ways to configure how IBM Plex is loaded:
+
+```scss
+// Option 1: Use legacy monolithing `@ibm/plex` assets
+// No configuration is needed, this is the default
+
+// Option 2: Use per-family loading (recommended)
+@use '@carbon/react' with (
+  $use-per-family-plex: true
+);
+
+// Option 3: Use Akamai CDN
+@use '@carbon/react' with (
+  $use-akamai-cdn: true
+);
+
+// When using option 1 or 2, optionally provide a custom font path.
+// This can be used with the default `@ibm/plex` configuration, or
+// with $use-per-family-plex.
+@use '@carbon/react' with (
+  $use-per-family-plex: true
+);
+$font-path: 'path/to/fonts';
+```
+
+#### Configuration Priority
+
+The configuration options follow this priority order:
+
+1. Per-family loading (`$use-per-family-plex: true`)
+2. Akamai CDN (`$use-akamai-cdn: true`)
+
+When multiple configurations are present:
+
+- If both `$use-per-family-plex` and `$use-akamai-cdn` are set to `true`:
+  - Per-family loading takes precedence
+  - Akamai CDN configuration is ignored
+  - Fonts will be loaded from individual family packages
+
+#### Using `$font-path`
+
+When using the default configuration or the per-family package configuration, a
+custom font path can be specified. The pathing structure is slightly different
+between the two.
+
+When using the default:
+
+```
+<$font-path>/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-Bold.woff2
+```
+
+When using the per-family configuration:
+
+```
+<$font-path>/fonts/complete/woff2/IBMPlexSans-Bold.woff2
+```
+
+> If you're using Vite, the tilde included in the default
+> $font-path (`~@ibm/plex`) is not needed. Remove it by reconfiguring `$font-path`to just`@ibm/plex`.
+
+### Migration Guide
+
+#### Migrating from Akamai CDN to per-family packages
+
+1. Update your Sass configuration:
+
+```scss
+@use '@carbon/react' with (
+  // Remove or set Akamai CDN to false
+  // $use-akamai-cdn: false,
+  // Enable per-family packages
+  $use-per-family-plex: true
+);
+```
+
+2. Updates $font-path configuration if needed:
+
+```scss
+@use '@carbon/react' with (
+  $use-akamai-cdn: false,
+  $use-per-family-plex: true,
+
+  // Set the custom path to font assets in your app
+  $font-path: 'path/to/fonts'
+);
+```
+
+```scss
+@use '@carbon/react' with (
+  $use-akamai-cdn: false,
+  $use-per-family-plex: true,
+
+  // Or remove the font-path
+  // $font-path: 'path/to/fonts'
+);
+```
+
+4. Update font references:
+   - Remove custom `@font-face` declarations if you had any
+   - Update any direct path references to use the new package structure
+
+### Future Changes
+
+In the next major version:
+
+- `$use-per-family-plex: true` will be the default configuration
+- The monolithic `@ibm/plex` package will be removed in favor of individual
+  family packages
+- No expected changes to the Akamai CDN option (`$use-akamai-cdn`)
+- No expected further changes for custom font paths (`$font-path`)
+
 ### Self-hosted, CDN
 
 If your product uses a CDN, or you want to self-host, you can serve the IBM Plex
@@ -229,6 +407,9 @@ namely:
 - Download directly from GitHub (unpreferred as the asset is unversioned)
 - Include `@ibm/plex` as a dependency in your project and update the assets
   locally or on the CDN when you update the `@ibm/plex` dependency.
+- Include per-family packages `@ibm/plex-sans`, etc. as a dependency in your
+  project and update the assets locally or on the CDN when you update the
+  per-family packages/dependencies.
 
 #### Self-hosted
 
@@ -258,24 +439,3 @@ view how Akamai does this in
 [`@carbon/type`](https://github.com/IBM/carbon-elements/blob/master/packages/type/scss/font-face/_sans.scss).
 
 ## FAQ
-
-#### How do I enable support for IE11?
-
-If your product needs to support IE11, then you can include a `.woff` complete
-file as a fallback. For example:
-
-```css
-@font-face {
-  font-family: 'IBM Plex Sans';
-  font-weight: 400;
-  src: url('//unpkg.com/@ibm/plex/IBM-Plex-Sans/fonts/complete/woff/IBMPlexSans-Regular.woff')
-    format('woff');
-}
-
-@font-face {
-  font-family: 'IBM Plex Sans';
-  font-weight: 400;
-  src: url('//unpkg.com/@ibm/plex/IBM-Plex-Sans/fonts/complete/woff2/IBMPlexSans-Regular.woff2')
-    format('woff2');
-}
-```

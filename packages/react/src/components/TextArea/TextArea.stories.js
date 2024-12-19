@@ -8,11 +8,12 @@
 import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { default as TextArea, TextAreaSkeleton } from './';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/TextArea',
@@ -22,6 +23,11 @@ export default {
   },
   argTypes: {
     light: {
+      table: {
+        disable: true,
+      },
+    },
+    slug: {
       table: {
         disable: true,
       },
@@ -88,7 +94,7 @@ export const withAILabel = () => (
     helperText="Optional helper text"
     rows={4}
     id="text-area-5"
-    slug={aiLabel}
+    decorator={aiLabel}
   />
 );
 

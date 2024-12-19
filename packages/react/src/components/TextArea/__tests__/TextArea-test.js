@@ -195,7 +195,21 @@ describe('TextArea', () => {
       expect(screen.getByText('0/500')).toBeInTheDocument();
     });
 
-    it('should respect slug prop', () => {
+    it('should respect decorator prop', () => {
+      render(
+        <TextArea
+          id="textarea-1"
+          labelText="TextArea label"
+          decorator={<AILabel />}
+        />
+      );
+      expect(
+        screen.getByRole('button', { name: 'AI Show information' })
+      ).toBeInTheDocument();
+    });
+
+    it('should respect deprecated slug prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       render(
         <TextArea
           id="textarea-1"
@@ -204,8 +218,9 @@ describe('TextArea', () => {
         />
       );
       expect(
-        screen.getByRole('button', { name: 'AI - Show information' })
+        screen.getByRole('button', { name: 'AI Show information' })
       ).toBeInTheDocument();
+      spy.mockRestore();
     });
 
     describe('behaves as expected - Component API', () => {

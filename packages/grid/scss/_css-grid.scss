@@ -138,14 +138,16 @@
 
   // Narrow
   .#{$prefix}--css-grid--narrow {
-    --cds-grid-gutter-start: 0;
+    --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
   }
 
   // Condensed
   .#{$prefix}--css-grid--condensed {
     --cds-grid-gutter: #{$grid-gutter-condensed};
-    --cds-grid-column-hang: #{math.div($grid-gutter, 2) -
-      math.div($grid-gutter-condensed, 2)};
+    --cds-grid-column-hang: #{math.div($grid-gutter, 2) - math.div(
+        $grid-gutter-condensed,
+        2
+      )};
   }
 
   // -----------------------------------------------------------------------------
@@ -185,7 +187,7 @@
   }
 
   .#{$prefix}--subgrid--narrow {
-    --cds-grid-gutter-start: 0;
+    --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
     --cds-grid-gutter-end: #{math.div($grid-gutter, 2)};
     --cds-grid-column-hang: #{math.div($grid-gutter, 2)};
   }
@@ -193,8 +195,10 @@
   .#{$prefix}--subgrid--condensed {
     --cds-grid-gutter-start: #{math.div($grid-gutter-condensed, 2)};
     --cds-grid-gutter-end: #{math.div($grid-gutter-condensed, 2)};
-    --cds-grid-column-hang: #{math.div($grid-gutter, 2) -
-      math.div($grid-gutter-condensed, 2)};
+    --cds-grid-column-hang: #{math.div($grid-gutter, 2) - math.div(
+        $grid-gutter-condensed,
+        2
+      )};
   }
 
   // -----------------------------------------------------------------------------
