@@ -155,9 +155,6 @@
       $tag-hover-red,
       $tag-border-red
     );
-    .#{$prefix}--tag__label {
-      color: $tag-color-red;
-    }
   }
 
   .#{$prefix}--tag--magenta {
@@ -167,10 +164,6 @@
       $tag-hover-magenta,
       $tag-border-magenta
     );
-
-    .#{$prefix}--tag__label {
-      color: $tag-color-magenta;
-    }
   }
 
   .#{$prefix}--tag--purple {
@@ -180,9 +173,6 @@
       $tag-hover-purple,
       $tag-border-purple
     );
-    .#{$prefix}--tag__label {
-      color: $tag-color-purple;
-    }
   }
 
   .#{$prefix}--tag--blue {
@@ -192,9 +182,6 @@
       $tag-hover-blue,
       $tag-border-blue
     );
-    .#{$prefix}--tag__label {
-      color: $tag-color-blue;
-    }
   }
 
   .#{$prefix}--tag--cyan {
@@ -204,9 +191,6 @@
       $tag-hover-cyan,
       $tag-border-cyan
     );
-    .#{$prefix}--tag__label {
-      color: $tag-color-cyan;
-    }
   }
 
   .#{$prefix}--tag--teal {
@@ -216,9 +200,6 @@
       $tag-hover-teal,
       $tag-border-teal
     );
-    .#{$prefix}--tag__label {
-      color: $tag-color-teal;
-    }
   }
 
   .#{$prefix}--tag--green {
@@ -228,9 +209,6 @@
       $tag-hover-green,
       $tag-border-green
     );
-    .#{$prefix}--tag__label {
-      color: $tag-color-green;
-    }
   }
 
   .#{$prefix}--tag--gray {
@@ -240,9 +218,6 @@
       $tag-hover-gray,
       $tag-border-gray
     );
-    .#{$prefix}--tag__label {
-      color: $tag-color-gray;
-    }
   }
 
   .#{$prefix}--tag--cool-gray {
@@ -252,9 +227,6 @@
       $tag-hover-cool-gray,
       $tag-border-cool-gray
     );
-    .#{$prefix}--tag__label {
-      color: $tag-color-cool-gray;
-    }
   }
 
   .#{$prefix}--tag--warm-gray {
@@ -264,9 +236,6 @@
       $tag-hover-warm-gray,
       $tag-border-warm-gray
     );
-    .#{$prefix}--tag__label {
-      color: $tag-color-warm-gray;
-    }
   }
 
   .#{$prefix}--tag--high-contrast:not(.#{$prefix}--tag--operational) {
@@ -275,10 +244,6 @@
       $text-inverse,
       $background-inverse-hover
     );
-
-    .#{$prefix}--tag__label {
-      color: $text-inverse;
-    }
   }
 
   .#{$prefix}--multi-select--readonly
@@ -515,10 +480,6 @@
     + span
     > .#{$prefix}--definition-term {
     max-inline-size: convert.to-rem(176px);
-  }
-
-  .#{$prefix}--tag--high-contrast .#{$prefix}--definition-term {
-    color: $text-inverse;
   }
 
   .#{$prefix}--tag > .#{$prefix}--popover-container {
