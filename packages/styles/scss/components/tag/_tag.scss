@@ -272,7 +272,7 @@
   .#{$prefix}--tag--high-contrast:not(.#{$prefix}--tag--operational) {
     @include tag-theme(
       $background-inverse,
-      text-inverse,
+      $text-inverse,
       $background-inverse-hover
     );
 
