@@ -7,10 +7,10 @@
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState, ForwardedRef, ReactElement } from 'react';
+import React, { useState, ForwardedRef, useImperativeHandle } from 'react';
 import Filename from './Filename';
 import FileUploaderButton from './FileUploaderButton';
-import { ButtonKinds } from '../../prop-types/types';
+import { ButtonKinds } from '../Button/Button';
 import { keys, matches } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
@@ -107,8 +107,15 @@ export interface FileUploaderProps extends ReactAttr<HTMLSpanElement> {
   size?: 'sm' | 'small' | 'md' | 'field' | 'lg';
 }
 
+export interface FileUploaderHandle {
+  /**
+   * Clear internal state
+   */
+  clearFiles: () => void;
+}
+
 const FileUploader = React.forwardRef(
-  <ItemType,>(
+  (
     {
       accept,
       buttonKind,
@@ -127,7 +134,7 @@ const FileUploader = React.forwardRef(
       size,
       ...other
     }: FileUploaderProps,
-    ref: ForwardedRef<HTMLButtonElement>
+    ref: ForwardedRef<FileUploaderHandle>
   ) => {
     const fileUploaderInstanceId = useId('file-uploader');
     const [state, updateState] = useState({
@@ -135,7 +142,6 @@ const FileUploader = React.forwardRef(
     });
     const nodes: HTMLElement[] = [];
     const prefix = usePrefix();
-
     const handleChange = (evt) => {
       evt.stopPropagation();
       const filenames = Array.prototype.map.call(
@@ -169,10 +175,11 @@ const FileUploader = React.forwardRef(
       }
     };
 
-    const clearFiles = () => {
-      // A clearFiles function that resets filenames and can be referenced using a ref by the parent.
-      updateState({ fileNames: [] });
-    };
+    useImperativeHandle(ref, () => ({
+      clearFiles() {
+        updateState({ fileNames: [] });
+      },
+    }));
 
     const uploaderButton = React.createRef<HTMLLabelElement>();
     const classes = classNames({
@@ -255,12 +262,7 @@ const FileUploader = React.forwardRef(
       </div>
     );
   }
-) as {
-  <ItemType>(props: FileUploaderProps): ReactElement;
-  propTypes?: any;
-  contextTypes?: any;
-  defaultProps?: any;
-};
+);
 
 FileUploader.propTypes = {
   /**
@@ -342,6 +344,6 @@ FileUploader.propTypes = {
    * sizes.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
-};
+} as PropTypes.ValidationMap<FileUploaderProps>;
 
 export default FileUploader;
