@@ -310,7 +310,6 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
       const target = evt.target as Node;
       const mouseDownTarget = onMouseDownTarget.current as Node;
-      console.log({ target, mouseDownTarget });
       evt.stopPropagation();
       if (
         !preventCloseOnClickOutside &&
