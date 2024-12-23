@@ -71,7 +71,6 @@ const ToggleTip = (
 export const Default = () => (
   <div style={{ width: '400px' }}>
     <FluidDropdown
-      initialSelectedItem={items[2]}
       id="default"
       titleText="Label"
       label="Choose an option"
