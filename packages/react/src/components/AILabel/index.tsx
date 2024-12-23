@@ -193,6 +193,8 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
         ? `${aiText} ${slugLabel || ariaLabel}`
         : `${aiText} ${aiTextLabel || textLabel}`;
 
+    const isSmallIcon = ['xs', '2xs', 'mini'].includes(size);
+
     return (
       <div className={aiLabelClasses} ref={ref} id={id}>
         {revertActive ? (
@@ -205,7 +207,11 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
             <Undo />
           </IconButton>
         ) : (
-          <Toggletip align={align} autoAlign={autoAlign} {...rest}>
+          <Toggletip
+            align={align}
+            autoAlign={autoAlign}
+            alignmentAxisOffset={isSmallIcon ? -24 : 0}
+            {...rest}>
             <ToggletipButton
               className={aiLabelButtonClasses}
               label={ariaLabelText}>
