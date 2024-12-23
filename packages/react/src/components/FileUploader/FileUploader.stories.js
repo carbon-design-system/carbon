@@ -7,7 +7,7 @@
 
 /* eslint-disable no-console */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import ExampleDropContainerApp from './stories/drop-container';
 import ExampleDropContainerAppSingle from './stories/drag-and-drop-single';
 
@@ -30,6 +30,29 @@ export default {
     FileUploaderItem,
     FileUploaderDropContainer,
   },
+};
+
+export const TESTRefFileUploader = () => {
+  const ref = useRef(null);
+  return (
+    <div className="cds--file__container">
+      <button onClick={() => ref.current?.clearFiles()}>remove</button>
+      <FileUploader
+        ref={ref}
+        labelTitle="Upload files"
+        labelDescription="Max file size is 500 MB. Only .jpg files are supported."
+        buttonLabel="Add file"
+        buttonKind="primary"
+        size="md"
+        filenameStatus="edit"
+        accept={['.jpg', '.png']}
+        multiple={true}
+        disabled={false}
+        iconDescription="Delete file"
+        name=""
+      />
+    </div>
+  );
 };
 
 export const Default = () => {
