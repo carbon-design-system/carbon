@@ -7,7 +7,7 @@
 
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
-import React from 'react';
+import React, { type JSX } from 'react';
 import PropTypes from 'prop-types';
 import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
@@ -162,7 +162,7 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
 
   static contextType = PrefixContext;
 
-  _subMenus: React.RefObject<HTMLUListElement> = React.createRef();
+  _subMenus: React.RefObject<HTMLUListElement | null> = React.createRef();
   private items: Array<HTMLElement | null> = [];
   private menuButtonRef: HTMLElement | null = null;
 

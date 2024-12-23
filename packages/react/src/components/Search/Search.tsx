@@ -361,7 +361,6 @@ Search.propTypes = {
    * Rendered icon for the Search.
    * Can be a React component class
    */
-  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
