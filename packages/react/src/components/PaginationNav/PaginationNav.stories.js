@@ -16,19 +16,13 @@ export default {
   parameters: {},
 };
 
-export const Default = () => (
-  <div style={{ width: '800px' }}>
-    <PaginationNav itemsShown={10} totalItems={25} />
-  </div>
-);
-
-export const Playground = (args) => (
+export const Default = (args) => (
   <div style={{ width: '800px' }}>
     <PaginationNav {...args} />
   </div>
 );
 
-Playground.args = {
+Default.args = {
   size: 'lg',
   loop: false,
   itemsShown: 10,
@@ -37,7 +31,7 @@ Playground.args = {
   disableOverflow: false,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   size: {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },

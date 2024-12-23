@@ -20,17 +20,8 @@ export default {
   },
 };
 
-export const Default = () => (
-  <PasswordInput
-    id="text-input-1"
-    labelText="Text input label"
-    helperText="Optional help text"
-    autoComplete="true"
-  />
-);
-
-export const Playground = (args) => (
-  <div style={{ width: args.playgroundWidth }}>
+export const Default = (args) => (
+  <div style={{ width: args.defaultWidth }}>
     <PasswordInput
       {...args}
       id="text-input-1"
@@ -41,8 +32,8 @@ export const Playground = (args) => (
   </div>
 );
 
-Playground.args = {
-  playgroundWidth: 300,
+Default.args = {
+  defaultWidth: 300,
   className: 'input-test-class',
   placeholder: 'Placeholder text',
   invalid: false,
@@ -56,8 +47,8 @@ Playground.args = {
   size: 'md',
 };
 
-Playground.argTypes = {
-  playgroundWidth: {
+Default.argTypes = {
+  defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
   className: {

@@ -61,16 +61,20 @@ export const Default = () => {
   );
 };
 
-export const CustomLevel = () => {
+export const CustomLevel = (args) => {
   function TestComponent() {
     return <div className="example-layer-test-component">Test component</div>;
   }
 
   return (
-    <Layer level={2}>
+    <Layer level={2} {...args}>
       <TestComponent />
     </Layer>
   );
+};
+
+CustomLevel.args = {
+  level: 2,
 };
 
 export const UseLayer = () => {
@@ -96,17 +100,3 @@ export const UseLayer = () => {
 UseLayer.story = {
   name: 'useLayer',
 };
-
-const PlaygroundStory = (args) => {
-  function TestComponent() {
-    return <div className="example-layer-test-component">Test component</div>;
-  }
-
-  return (
-    <Layer {...args}>
-      <TestComponent />
-    </Layer>
-  );
-};
-
-export const Playground = PlaygroundStory.bind({});

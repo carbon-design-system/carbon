@@ -23,34 +23,16 @@ export default {
     kind: 'error',
     lowContrast: false,
     hideCloseButton: false,
-    ['aria-label']: 'closes notification',
+    ['aria-label']: 'close notification',
     statusIconDescription: 'notification',
     onClose: action('onClose'),
     onCloseButtonClick: action('onCloseButtonClick'),
   },
 };
 
-export const Default = () => (
-  <ActionableNotification
-    title="Notification title"
-    subtitle="Subtitle text goes here"
-    closeOnEscape
-    inline={false}
-    actionButtonLabel="Action"
-  />
-);
+export const Default = (args) => <ActionableNotification {...args} />;
 
 Default.argTypes = {
-  hasFocus: {
-    table: {
-      disable: true,
-    },
-  },
-};
-
-export const Playground = (args) => <ActionableNotification {...args} />;
-
-Playground.argTypes = {
   ['aria-label']: {
     table: {
       disable: true,
@@ -86,9 +68,10 @@ Playground.argTypes = {
     },
   },
 };
-Playground.args = {
+Default.args = {
   actionButtonLabel: 'Action',
   inline: false,
+  closeOnEscape: true,
   title: 'Notification title',
   subtitle: 'Subtitle text goes here',
 };

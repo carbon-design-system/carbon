@@ -28,22 +28,56 @@ export default {
   },
 };
 
-export const Default = () => (
-  <ComboButton label="Primary action">
-    <MenuItem label="Second action with a long label description" />
-    <MenuItem label="Third action" />
-    <MenuItem label="Fourth action" disabled />
-  </ComboButton>
-);
+const sharedArgs = {
+  onClick: action('onClick'),
+  label: 'Primary action',
+};
 
-export const ExperimentalAutoAlign = () => (
+const sharedArgTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  translateWithId: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const Default = (args) => {
+  const onClick = action('onClick (MenuItem)');
+
+  return (
+    <ComboButton {...args}>
+      <MenuItem
+        label="Second action with a long label description"
+        onClick={onClick}
+      />
+      <MenuItem label="Third action" onClick={onClick} />
+      <MenuItem label="Fourth action" disabled onClick={onClick} />
+      <MenuItemDivider />
+      <MenuItem label="Danger action" kind="danger" onClick={onClick} />
+    </ComboButton>
+  );
+};
+Default.args = { ...sharedArgs };
+Default.argTypes = { ...sharedArgTypes };
+
+export const ExperimentalAutoAlign = (args) => (
   <div style={{ width: '5000px', height: '5000px' }}>
     <div
       style={{
         position: 'absolute',
         bottom: '20px',
       }}>
-      <ComboButton label="Primary action">
+      <ComboButton label="Primary action" {...args}>
         <MenuItem label="Second action with a long label description" />
         <MenuItem label="Third action" />
         <MenuItem label="Fourth action" disabled />
@@ -52,8 +86,10 @@ export const ExperimentalAutoAlign = () => (
   </div>
 );
 
-export const WithDanger = () => (
-  <ComboButton label="Primary action">
+ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
+
+export const WithDanger = (args) => (
+  <ComboButton label="Primary action" {...args}>
     <MenuItem label="Second action with a long label description" />
     <MenuItem label="Third action" />
     <MenuItem label="Fourth action" />
@@ -62,12 +98,16 @@ export const WithDanger = () => (
   </ComboButton>
 );
 
-export const WithIcons = () => (
-  <ComboButton label="Save record">
+WithDanger.argTypes = { ...sharedArgTypes };
+
+export const WithIcons = (args) => (
+  <ComboButton label="Save record" {...args}>
     <MenuItem label="Save as a copy" renderIcon={Copy} />
     <MenuItem label="Export" renderIcon={Export} />
   </ComboButton>
 );
+
+WithIcons.argTypes = { ...sharedArgTypes };
 
 export const WithMenuAlignment = () => (
   <>
@@ -123,43 +163,3 @@ export const WithMenuAlignment = () => (
     </div>
   </>
 );
-
-export const Playground = (args) => {
-  const onClick = action('onClick (MenuItem)');
-
-  return (
-    <ComboButton {...args}>
-      <MenuItem
-        label="Second action with a long label description"
-        onClick={onClick}
-      />
-      <MenuItem label="Third action" onClick={onClick} />
-      <MenuItem label="Fourth action" disabled onClick={onClick} />
-      <MenuItemDivider />
-      <MenuItem label="Danger action" kind="danger" onClick={onClick} />
-    </ComboButton>
-  );
-};
-
-Playground.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
-  },
-};
-
-Playground.args = {
-  onClick: action('onClick'),
-  label: 'Primary action',
-};

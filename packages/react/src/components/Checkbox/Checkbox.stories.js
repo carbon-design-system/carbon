@@ -39,150 +39,15 @@ export default {
   },
 };
 
-export const Default = () => {
-  return (
-    <CheckboxGroup {...fieldsetCheckboxProps()}>
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
-    </CheckboxGroup>
-  );
-};
-
-export const Horizontal = () => {
-  return (
-    <CheckboxGroup
-      orientation="horizontal"
-      {...fieldsetCheckboxProps()}
-      helperText="Helper text goes here">
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
-    </CheckboxGroup>
-  );
-};
-
-export const Single = () => {
-  return (
-    <>
-      <Checkbox
-        {...checkboxEvents}
-        id="checkbox-3"
-        helperText="Helper text goes here"
-      />
-      <br /> <br />
-      <Checkbox
-        {...checkboxEvents}
-        id="checkbox-4"
-        invalid
-        invalidText="Invalid text goes here"
-      />
-      <br /> <br />
-      <Checkbox
-        {...checkboxEvents}
-        id="checkbox-5"
-        warn
-        warnText="Warning text goes here"
-      />
-      <br /> <br />
-      <Checkbox {...checkboxEvents} id="checkbox-6" readOnly />
-    </>
-  );
-};
-
-export const Skeleton = () => <CheckboxSkeleton />;
-
-const AILabelFunc = (kind) => (
-  <AILabel className="ai-label-container" kind={kind}>
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
-
-export const withAILabel = () => (
-  <div className="ai-label-check-radio-container">
-    <CheckboxGroup legendText="Group Label" decorator={AILabelFunc()}>
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
-    </CheckboxGroup>
-
-    <CheckboxGroup legendText="Group Label">
-      <Checkbox
-        labelText={`Checkbox label`}
-        id="checkbox-label-4"
-        decorator={AILabelFunc()}
-      />
-      <Checkbox
-        labelText={`Checkbox label`}
-        id="checkbox-label-5"
-        decorator={AILabelFunc()}
-      />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-6" />
-    </CheckboxGroup>
-
-    <CheckboxGroup legendText="Group Label">
-      <Checkbox
-        labelText={`Checkbox label`}
-        id="checkbox-label-7"
-        decorator={AILabelFunc('inline')}
-      />
-      <Checkbox
-        labelText={`Checkbox label`}
-        id="checkbox-label-8"
-        decorator={AILabelFunc('inline')}
-      />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-9" />
-    </CheckboxGroup>
-  </div>
-);
-
-export const Playground = (args) => (
-  <CheckboxGroup {...fieldsetCheckboxProps()} {...args}>
-    <Checkbox
-      defaultChecked
-      {...checkboxEvents}
-      id="checkbox-0"
-      helperText="hello"
-    />
-    <Checkbox {...checkboxEvents} id="checkbox-1" />
-    <Checkbox disabled {...checkboxEvents} id="checkbox-2" />
-  </CheckboxGroup>
-);
-
-Playground.args = {
+const sharedArgs = {
   helperText: 'Helper text goes here',
   invalid: false,
   invalidText: 'Invalid message goes here',
-  readOnly: false,
   warn: false,
   warnText: 'Warning message goes here',
 };
 
-Playground.argTypes = {
+const sharedArgTypes = {
   helperText: {
     description: 'Provide text for the form group for additional help',
     control: {
@@ -279,3 +144,143 @@ Playground.argTypes = {
     options: ['horizontal', 'vertical'],
   },
 };
+
+export const Default = (args) => (
+  <CheckboxGroup {...fieldsetCheckboxProps()} {...args}>
+    <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+    <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+  </CheckboxGroup>
+);
+
+Default.args = {
+  ...sharedArgs,
+};
+
+Default.argTypes = { ...sharedArgTypes };
+
+export const Horizontal = (args) => {
+  return (
+    <CheckboxGroup
+      orientation="horizontal"
+      {...fieldsetCheckboxProps()}
+      helperText="Helper text goes here"
+      {...args}>
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
+    </CheckboxGroup>
+  );
+};
+
+Horizontal.args = { ...sharedArgs };
+
+Horizontal.argTypes = { ...sharedArgTypes };
+
+export const Single = () => {
+  return (
+    <>
+      <Checkbox
+        {...checkboxEvents}
+        id="checkbox-3"
+        helperText="Helper text goes here"
+      />
+      <br /> <br />
+      <Checkbox
+        {...checkboxEvents}
+        id="checkbox-4"
+        invalid
+        invalidText="Invalid text goes here"
+      />
+      <br /> <br />
+      <Checkbox
+        {...checkboxEvents}
+        id="checkbox-5"
+        warn
+        warnText="Warning text goes here"
+      />
+      <br /> <br />
+      <Checkbox {...checkboxEvents} id="checkbox-6" readOnly />
+    </>
+  );
+};
+
+export const Skeleton = () => <CheckboxSkeleton />;
+
+const AILabelFunc = (kind) => (
+  <AILabel className="ai-label-container" kind={kind}>
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+export const withAILabel = (args) => (
+  <div className="ai-label-check-radio-container">
+    <CheckboxGroup legendText="Group Label" decorator={AILabelFunc()} {...args}>
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
+    </CheckboxGroup>
+
+    <CheckboxGroup legendText="Group Label" {...args}>
+      <Checkbox
+        labelText={`Checkbox label`}
+        id="checkbox-label-4"
+        decorator={AILabelFunc()}
+      />
+      <Checkbox
+        labelText={`Checkbox label`}
+        id="checkbox-label-5"
+        decorator={AILabelFunc()}
+      />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-6" />
+    </CheckboxGroup>
+
+    <CheckboxGroup legendText="Group Label" {...args}>
+      <Checkbox
+        labelText={`Checkbox label`}
+        id="checkbox-label-7"
+        decorator={AILabelFunc('inline')}
+      />
+      <Checkbox
+        labelText={`Checkbox label`}
+        id="checkbox-label-8"
+        decorator={AILabelFunc('inline')}
+      />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-9" />
+    </CheckboxGroup>
+  </div>
+);
+
+withAILabel.args = {
+  invalid: false,
+  invalidText: 'Invalid message goes here',
+  readOnly: false,
+  warn: false,
+  warnText: 'Warning message goes here',
+};
+
+withAILabel.argTypes = { ...sharedArgTypes };

@@ -62,7 +62,7 @@ test.describe('@avt RadioButton', () => {
   test('@avt-advanced-states - invalid state', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioButton',
-      id: 'components-radiobutton--playground',
+      id: 'components-radiobutton--default',
       globals: {
         theme: 'white',
       },
@@ -79,7 +79,7 @@ test.describe('@avt RadioButton', () => {
   test('@avt-advanced-states - warn state', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioButton',
-      id: 'components-radiobutton--playground',
+      id: 'components-radiobutton--default',
       globals: {
         theme: 'white',
       },
@@ -96,7 +96,7 @@ test.describe('@avt RadioButton', () => {
   test('@avt-advanced-states - disabled state', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioButton',
-      id: 'components-radiobutton--playground',
+      id: 'components-radiobutton--default',
       globals: {
         theme: 'white',
       },
@@ -112,7 +112,7 @@ test.describe('@avt RadioButton', () => {
   test('@avt-advanced-states - read only state', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioButton',
-      id: 'components-radiobutton--playground',
+      id: 'components-radiobutton--default',
       globals: {
         theme: 'white',
       },

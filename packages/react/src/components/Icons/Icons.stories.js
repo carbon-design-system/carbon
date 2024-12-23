@@ -14,36 +14,22 @@ export default {
   title: 'Elements/Icons',
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
-    <>
-      <section className="demo-icon-example">
-        <h2>16 pixel (default)</h2>
-        <Bee />
-      </section>
-
-      <section className="demo-icon-example">
-        <h2>20 pixel</h2>
-        <Bicycle size={20} />
-      </section>
-
-      <section className="demo-icon-example">
-        <h2>32 pixel</h2>
-        <ChevronUp size={32} />
-      </section>
-    </>
+    <section className="demo-icon-example">
+      <h2>
+        {args.size} pixel {args.size === 16 ? '(default)' : ''}
+      </h2>
+      <Bee {...args} />
+    </section>
   );
 };
 
-export const Playground = (args) => {
-  return <Bee {...args} />;
-};
-
-Playground.args = {
+Default.args = {
   size: 16,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   size: {
     options: ['16', '20', '32'],
     control: { type: 'select' },

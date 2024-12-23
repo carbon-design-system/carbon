@@ -22,18 +22,16 @@ export default {
   },
 };
 
-export const Default = () => <SkeletonText />;
+export const Default = (args) => <SkeletonText {...args} />;
 
-export const Playground = (args) => <SkeletonText {...args} />;
-
-Playground.args = {
+Default.args = {
   heading: false,
   paragraph: false,
   width: '100%',
   lineCount: 3,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   className: {
     control: false,
   },

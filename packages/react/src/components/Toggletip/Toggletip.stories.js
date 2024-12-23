@@ -49,59 +49,6 @@ export default {
   },
 };
 
-export const Default = () => {
-  return (
-    <div>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <ToggletipLabel>Toggletip label</ToggletipLabel>
-        <Toggletip>
-          <ToggletipButton label="Show information">
-            <Information />
-          </ToggletipButton>
-          <ToggletipContent>
-            <p>
-              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut fsil labore et dolore magna
-              aliqua.
-            </p>
-            <ToggletipActions>
-              <Link href="#">Link action</Link>
-              <Button size="sm">Button</Button>
-            </ToggletipActions>
-          </ToggletipContent>
-        </Toggletip>
-      </div>
-      <br />
-      <br />
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-        }}>
-        <ToggletipLabel>
-          Toggletip label -- using <code>defaultOpen</code> prop
-        </ToggletipLabel>
-        <Toggletip defaultOpen>
-          <ToggletipButton label="Show information">
-            <Information />
-          </ToggletipButton>
-          <ToggletipContent>
-            <p>
-              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut fsil labore et dolore magna
-              aliqua.
-            </p>
-            <ToggletipActions>
-              <Link href="#">Link action</Link>
-              <Button size="sm">Button</Button>
-            </ToggletipActions>
-          </ToggletipContent>
-        </Toggletip>
-      </div>
-    </div>
-  );
-};
-
 export const ExperimentalAutoAlign = () => {
   const ref = useRef();
   useEffect(() => {
@@ -140,14 +87,12 @@ export const ExperimentalAutoAlign = () => {
   );
 };
 
-const PlaygroundStory = (controls) => {
+const DefaultStory = (controls) => {
   const { align } = controls;
   return (
     <>
-      <ToggletipLabel>
-        Toggletip label -- using <code>defaultOpen</code> prop
-      </ToggletipLabel>
-      <Toggletip align={align} defaultOpen>
+      <ToggletipLabel>Toggletip label</ToggletipLabel>
+      <Toggletip align={align}>
         <ToggletipButton label="Show information">
           <Information />
         </ToggletipButton>
@@ -166,9 +111,9 @@ const PlaygroundStory = (controls) => {
   );
 };
 
-export const Playground = PlaygroundStory.bind({});
+export const Default = DefaultStory.bind({});
 
-Playground.argTypes = {
+Default.argTypes = {
   align: {
     options: [
       'top',
@@ -193,7 +138,7 @@ Playground.argTypes = {
   },
 };
 
-Playground.story = {
+Default.story = {
   decorators: [
     (story) => (
       <div
