@@ -105,7 +105,7 @@
     "babel-loader": "^9.0.0",
     "cssnano": "^7.0.0",
     "globby": "^14.0.2",
-    "is-port-reachable": "^3.1.0",
+    "is-port-reachable": "^4.0.0",
     "null-loader": "^4.0.0",
     "prop-types": "^15.7.2",
     "read-package-up": "^11.0.0",
