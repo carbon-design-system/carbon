@@ -2248,7 +2248,7 @@ __metadata:
     cssnano: "npm:^7.0.0"
     flatpickr: "npm:4.6.13"
     globby: "npm:^14.0.2"
-    is-port-reachable: "npm:^3.1.0"
+    is-port-reachable: "npm:^4.0.0"
     lit: "npm:^3.1.0"
     lodash-es: "npm:^4.17.21"
     null-loader: "npm:^4.0.0"
@@ -16522,10 +16522,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-port-reachable@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "is-port-reachable@npm:3.1.0"
-  checksum: 10/f6e51a1517acc8cc53f7ab08abe4f8f6262c680033a488b73700ab4986589a29b63db63bb1003110f54a7b555768501e32ab2aab138a082062a87694a18ee553
+"is-port-reachable@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "is-port-reachable@npm:4.0.0"
+  checksum: 10/47b7e10db8edcef27fbf9e50f0de85ad368d35688790ca64a13db67260111ac5f4b98989b11af06199fa93f25d810bd09a5b21b2c2646529668638f7c34d3c04
   languageName: node
   linkType: hard
 
