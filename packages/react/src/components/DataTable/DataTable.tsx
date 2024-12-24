@@ -24,6 +24,7 @@ import TableBatchActions from './TableBatchActions';
 import TableBody from './TableBody';
 import TableCell from './TableCell';
 import TableContainer from './TableContainer';
+import TableDecoratorRow from './TableDecoratorRow';
 import TableExpandHeader from './TableExpandHeader';
 import TableExpandRow from './TableExpandRow';
 import TableExpandedRow from './TableExpandedRow';
@@ -99,6 +100,7 @@ export interface DataTableHeader {
   key: string;
   header: React.ReactNode;
   slug?: React.ReactElement;
+  decorator?: React.ReactElement;
 }
 
 export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
@@ -203,7 +205,8 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   };
   getCellProps: (getCellPropsArgs: { cell: DataTableCell<ColTypes> }) => {
     [key: string]: unknown;
-    hasSlugHeader?: boolean;
+    hasAILabelHeader?: boolean;
+    hasDecoratorHeader?: boolean;
   };
 
   // Custom event handlers
@@ -390,6 +393,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
   static TableBody: typeof TableBody;
   static TableCell: typeof TableCell;
   static TableContainer: typeof TableContainer;
+  static TableDecoratorRow: typeof TableDecoratorRow;
   static TableExpandHeader: typeof TableExpandHeader;
   static TableExpandRow: typeof TableExpandRow;
   static TableExpandedRow: typeof TableExpandedRow;
@@ -473,6 +477,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       isSortable,
       isSortHeader: sortHeaderKey === header.key,
       slug: header.slug,
+      decorator: header.decorator,
       onClick: (event) => {
         const nextSortState = getNextSortState(this.props, this.state, {
           key: header.key,
@@ -747,7 +752,8 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
   getCellProps = ({ cell, ...rest }) => {
     return {
       ...rest,
-      hasSlugHeader: cell.hasSlugHeader,
+      hasAILabelHeader: cell.hasAILabelHeader,
+      hasDecoratorHeader: cell.hasDecoratorHeader,
     };
   };
 
@@ -1035,6 +1041,7 @@ DataTable.TableBatchActions = TableBatchActions;
 DataTable.TableBody = TableBody;
 DataTable.TableCell = TableCell;
 DataTable.TableContainer = TableContainer;
+DataTable.TableDecoratorRow = TableDecoratorRow;
 DataTable.TableExpandHeader = TableExpandHeader;
 DataTable.TableExpandRow = TableExpandRow;
 DataTable.TableExpandedRow = TableExpandedRow;

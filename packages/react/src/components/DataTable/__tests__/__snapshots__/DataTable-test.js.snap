@@ -35,6 +35,9 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 class="cds--table-header-label"
               >
                 Field A
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
             <th
@@ -44,6 +47,9 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 class="cds--table-header-label"
               >
                 Field B
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
           </tr>
@@ -207,6 +213,9 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 class="cds--table-header-label"
               >
                 Field A
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
             <th
@@ -216,6 +225,9 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 class="cds--table-header-label"
               >
                 Field B
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
           </tr>
@@ -664,6 +676,9 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 class="cds--table-header-label"
               >
                 Field A
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
             <th
@@ -673,6 +688,9 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 class="cds--table-header-label"
               >
                 Field B
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
           </tr>
@@ -1069,6 +1087,9 @@ exports[`DataTable renders as expected - Component API should render and match s
                 class="cds--table-header-label"
               >
                 Field A
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
             <th
@@ -1078,6 +1099,9 @@ exports[`DataTable renders as expected - Component API should render and match s
                 class="cds--table-header-label"
               >
                 Field B
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
           </tr>

@@ -245,11 +245,21 @@
 
   // AILabel styles
   .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon,
-  .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon-unsorted {
+  .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon-unsorted,
+  .#{$prefix}--table-sort__header--ai-label .#{$prefix}--table-sort__icon,
+  .#{$prefix}--table-sort__header--ai-label
+    .#{$prefix}--table-sort__icon-unsorted,
+  .#{$prefix}--table-sort__header--decorator .#{$prefix}--table-sort__icon,
+  .#{$prefix}--table-sort__header--decorator
+    .#{$prefix}--table-sort__icon-unsorted {
     margin-inline: auto convert.to-rem(8px);
   }
-  .#{$prefix}--table-sort__header--slug .#{$prefix}--ai-label,
-  .#{$prefix}--table-sort__header--slug .#{$prefix}--slug {
+  .#{$prefix}--table-sort__header--ai-label .#{$prefix}--ai-label,
+  .#{$prefix}--table-sort__header--ai-label .#{$prefix}--slug,
+  .#{$prefix}--table-sort__header--decorator
+    .#{$prefix}--table-header-label--decorator-inner,
+  .#{$prefix}--table-sort__header--ai-label
+    .#{$prefix}--table-header-label--decorator-inner {
     margin-inline-end: convert.to-rem(8px);
   }
 
