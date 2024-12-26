@@ -4,8 +4,8 @@ type AsProp<C extends React.ElementType> = {
 
 type PropsToOmit<C extends React.ElementType, P> = keyof (AsProp<C> & P);
 
-// This is the first reusable type utility we built
-type PolymorphicComponentProp<
+// This can be used if there is NO need for "ref"
+export type PolymorphicComponentProp<
   C extends React.ElementType,
   Props = {},
 > = React.PropsWithChildren<Props & AsProp<C>> &
