@@ -30,4 +30,10 @@
       background-color: $filter-hover-color;
     }
   }
+
+  .#{$prefix}--definition-term {
+    .#{$prefix}--tag__label {
+      color: $text-color;
+    }
+  }
 }
