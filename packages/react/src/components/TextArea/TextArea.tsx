@@ -352,6 +352,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
 
   const counterClasses = classNames(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--text-area__label-counter`]: true,
   });
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {

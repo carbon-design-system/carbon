@@ -534,9 +534,5 @@
     display: flex;
     justify-content: space-between;
     inline-size: 100%;
-
-    .#{$prefix}--text-input__label-counter {
-      align-self: end;
-    }
   }
 }
