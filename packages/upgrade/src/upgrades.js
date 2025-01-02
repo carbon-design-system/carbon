@@ -397,6 +397,37 @@ export const upgrades = [
         },
       },
       {
+        name: 'ibm-products-update-http-errors',
+        description:
+          'Rewrites HttpError403, HttpError404, HttpErrorOther to FullPageError',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'ibm-products-update-http-errors.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
         name: 'ibm-products-update-userprofileimage',
         description: 'Rewrites UserProfileImage to UserAvatar',
         migrate: async (options) => {
