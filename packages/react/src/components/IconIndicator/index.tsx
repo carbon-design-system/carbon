@@ -25,7 +25,7 @@ import {
 } from '@carbon/icons-react';
 
 export const IconIndicatorKinds = [
-  'error',
+  'failed',
   'caution-major',
   'caution-minor',
   'undefined',
@@ -36,11 +36,11 @@ export const IconIndicatorKinds = [
   'not-started',
   'pending',
   'unknown',
-  'information',
+  'informative',
 ];
 
 const iconTypes = {
-  error: ErrorFilled,
+  failed: ErrorFilled,
   ['caution-major']: WarningAltInvertedFilled,
   ['caution-minor']: WarningAltFilled,
   undefined: UndefinedFilled,
@@ -51,7 +51,7 @@ const iconTypes = {
   ['not-started']: CircleDash,
   pending: PendingFilled,
   unknown: UnknownFilled,
-  information: WarningSquareFilled,
+  informative: WarningSquareFilled,
 };
 
 export type IconIndicatorKind = (typeof IconIndicatorKinds)[number];

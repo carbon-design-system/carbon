@@ -11,12 +11,12 @@ import IconIndicator from '../index';
 
 describe('IconIndicator', () => {
   it('should use a custom label', () => {
-    render(<IconIndicator kind="error" label="label" />);
+    render(<IconIndicator kind="failed" label="label" />);
     expect(screen.getByText('label')).toBeInTheDocument();
   });
 
   it('should update with size prop', () => {
-    render(<IconIndicator kind="error" label="label" size={20} />);
+    render(<IconIndicator kind="failed" label="label" size={20} />);
     expect(screen.getByText('label')).toHaveClass('cds--icon-indicator--20');
   });
 
@@ -29,7 +29,7 @@ describe('IconIndicator', () => {
 
   it('should support a custom class name on the outermost element', () => {
     const { container } = render(
-      <IconIndicator kind="error" label="label" className="custom-class" />
+      <IconIndicator kind="failed" label="label" className="custom-class" />
     );
     expect(container.firstChild).toHaveClass('custom-class');
   });
@@ -37,7 +37,7 @@ describe('IconIndicator', () => {
   it('should support a ref on the outermost element', () => {
     const ref = jest.fn();
     const { container } = render(
-      <IconIndicator kind="error" label="label" ref={ref} />
+      <IconIndicator kind="failed" label="label" ref={ref} />
     );
     expect(ref).toHaveBeenCalledWith(container.firstChild);
   });

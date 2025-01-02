@@ -41,7 +41,7 @@ import styles from './icon-indicator.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 const iconMap = {
-  [ICON_INDICATOR_KIND.ERROR]: {
+  [ICON_INDICATOR_KIND.FAILED]: {
     16: ErrorFilled16,
     20: ErrorFilled20,
   },
@@ -85,7 +85,7 @@ const iconMap = {
     16: UnknownFilled16,
     20: UnknownFilled20,
   },
-  [ICON_INDICATOR_KIND.INFORMATION]: {
+  [ICON_INDICATOR_KIND.INFORMATIVE]: {
     16: WarningSquareFilled16,
     20: WarningSquareFilled20,
   },

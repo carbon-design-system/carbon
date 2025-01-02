@@ -18,8 +18,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--icon-indicator--20;
 }
 
-:host(#{$prefix}-icon-indicator[kind='error']) svg {
-  @extend .#{$prefix}--icon-indicator--error;
+:host(#{$prefix}-icon-indicator[kind='failed']) svg {
+  @extend .#{$prefix}--icon-indicator--failed;
 }
 
 :host(#{$prefix}-icon-indicator[kind='caution-major']) svg {
@@ -62,6 +62,6 @@ $css--plex: true !default;
   @extend .#{$prefix}--icon-indicator--unknown;
 }
 
-:host(#{$prefix}-icon-indicator[kind='information']) svg {
-  @extend .#{$prefix}--icon-indicator--information;
+:host(#{$prefix}-icon-indicator[kind='informative']) svg {
+  @extend .#{$prefix}--icon-indicator--informative;
 }

@@ -9,9 +9,9 @@
 
 export enum ICON_INDICATOR_KIND {
   /**
-   * Error
+   * Failed
    */
-  ERROR = 'error',
+  FAILED = 'failed',
 
   /**
    * Caution major.
@@ -64,7 +64,7 @@ export enum ICON_INDICATOR_KIND {
   UNKNOWN = 'unknown',
 
   /**
-   * Information.
+   * Informative.
    */
-  INFORMATION = 'information',
+  INFORMATIVE = 'informative',
 }

@@ -12,7 +12,7 @@ import './index';
 import { ICON_INDICATOR_KIND } from './defs';
 
 const kinds = [
-  'error',
+  'failed',
   'caution-major',
   'caution-minor',
   'undefined',
@@ -23,7 +23,7 @@ const kinds = [
   'not-started',
   'pending',
   'unknown',
-  'information',
+  'informative',
 ];
 
 export const Default = {
@@ -47,7 +47,7 @@ export const Default = {
 
 const defaultArgs = {
   label: 'Custom label',
-  kind: ICON_INDICATOR_KIND.ERROR,
+  kind: ICON_INDICATOR_KIND.FAILED,
   size: 16,
 };
 

@@ -48,7 +48,7 @@ export const Playground = PlaygroundStory.bind({});
 
 Playground.args = {
   label: 'Custom label',
-  kind: 'error',
+  kind: 'failed',
   size: 16,
 };
 

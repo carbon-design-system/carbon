@@ -32,7 +32,7 @@
     @include type-style('body-compact-02');
   }
 
-  .#{$prefix}--icon-indicator--error {
+  .#{$prefix}--icon-indicator--failed {
     fill: $status-red;
   }
 
@@ -84,7 +84,7 @@
     fill: $status-gray;
   }
 
-  .#{$prefix}--icon-indicator--information {
+  .#{$prefix}--icon-indicator--informative {
     fill: $status-blue;
   }
 }
