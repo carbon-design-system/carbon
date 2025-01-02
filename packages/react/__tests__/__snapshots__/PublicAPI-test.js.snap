@@ -4605,15 +4605,7 @@ Map {
       "menuAlignment": Object {
         "type": "string",
       },
-      "mode": Object {
-        "args": Array [
-          Array [
-            "full",
-            "basic",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "mode": [Function],
       "onClose": Object {
         "type": "func",
       },
