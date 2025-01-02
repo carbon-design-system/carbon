@@ -17,6 +17,7 @@ import DataTable, {
   TableSelectAll,
   TableSelectRow,
   TableSlugRow,
+  TableDecoratorRow,
   TableExpandHeader,
   TableExpandRow,
   TableExpandedRow,
@@ -71,7 +72,7 @@ const columnAILabelHeaders = [
   {
     key: 'attached_groups',
     header: 'Attached groups',
-    slug: (
+    decorator: (
       <AILabel
         className="ai-label-container"
         autoAlign={false}
@@ -173,9 +174,11 @@ export const AILabelWithSelection = () => (
           <TableBody>
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
-                <TableSlugRow
-                  slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
-                />
+                {i === 3 || i === 4 || i === 1 ? (
+                  <TableDecoratorRow decorator={aiLabel} />
+                ) : (
+                  <TableCell />
+                )}
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -219,9 +222,11 @@ export const AILabelWithRadioSelection = () => (
           <TableBody>
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
-                <TableSlugRow
-                  slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
-                />
+                {i === 3 || i === 4 || i === 1 ? (
+                  <TableDecoratorRow decorator={aiLabel} />
+                ) : (
+                  <TableCell />
+                )}
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -272,9 +277,11 @@ export const AILabelWithSelectionAndExpansion = () => (
             {rows.map((row, i) => (
               <React.Fragment key={row.id}>
                 <TableExpandRow {...getRowProps({ row })}>
-                  <TableSlugRow
-                    slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
-                  />
+                  {i === 3 || i === 4 || i === 1 ? (
+                    <TableDecoratorRow decorator={aiLabel} />
+                  ) : (
+                    <TableDecoratorRow decorator={null} />
+                  )}
                   <TableSelectRow {...getSelectionProps({ row })} />
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -331,9 +338,11 @@ export const AILabelWithExpansion = () => (
             {rows.map((row, i) => (
               <React.Fragment key={row.id}>
                 <TableExpandRow {...getRowProps({ row })}>
-                  <TableSlugRow
-                    slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
-                  />
+                  {i === 3 || i === 4 || i === 1 ? (
+                    <TableDecoratorRow decorator={aiLabel} />
+                  ) : (
+                    <TableDecoratorRow decorator={null} />
+                  )}
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}

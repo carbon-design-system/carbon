@@ -6,9 +6,10 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import deprecateComponent from '../../prop-types/deprecateComponent';
 
 export interface TableSlugRowProps {
   /**
@@ -23,6 +24,13 @@ export interface TableSlugRowProps {
 }
 
 const TableSlugRow = ({ className, slug }: TableSlugRowProps) => {
+  useEffect(() => {
+    deprecateComponent(
+      'TableSlugRow',
+      'The `TableSlugRow` component has been deprecated and will be removed in the next major version. Use the TableDecoratorRow component instead.'
+    );
+  }, []);
+
   const prefix = usePrefix();
   const TableSlugRowClasses = classNames({
     ...(className && { [className]: true }),
