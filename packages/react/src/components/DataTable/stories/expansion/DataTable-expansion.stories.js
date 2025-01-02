@@ -45,8 +45,16 @@ export default {
   },
 };
 
-export const Default = () => (
-  <DataTable rows={rows} headers={headers}>
+const sharedArgTypes = {
+  radio: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const Default = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
@@ -74,7 +82,9 @@ export const Default = () => (
           <TableBody>
             {rows.map((row) => (
               <React.Fragment key={row.id}>
-                <TableExpandRow {...getRowProps({ row })}>
+                <TableExpandRow
+                  {...getRowProps({ row })}
+                  onClick={action('onClick')}>
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
@@ -95,8 +105,13 @@ export const Default = () => (
   </DataTable>
 );
 
-export const BatchExpansion = () => (
+Default.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const BatchExpansion = (args) => (
   <DataTable
+    {...args}
     rows={rows}
     headers={headers}
     render={({
@@ -151,62 +166,6 @@ export const BatchExpansion = () => (
   />
 );
 
-export const Playground = (args) => (
-  <DataTable rows={rows} headers={headers} {...args}>
-    {({
-      rows,
-      headers,
-      getHeaderProps,
-      getRowProps,
-      getExpandedRowProps,
-      getTableProps,
-      getTableContainerProps,
-    }) => (
-      <TableContainer
-        title="DataTable"
-        description="With expansion"
-        {...getTableContainerProps()}>
-        <Table {...getTableProps()} aria-label="sample table">
-          <TableHead>
-            <TableRow>
-              <TableExpandHeader aria-label="expand row" />
-              {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })}>
-                  {header.header}
-                </TableHeader>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <React.Fragment key={row.id}>
-                <TableExpandRow
-                  {...getRowProps({ row })}
-                  onClick={action('onClick')}>
-                  {row.cells.map((cell) => (
-                    <TableCell key={cell.id}>{cell.value}</TableCell>
-                  ))}
-                </TableExpandRow>
-                <TableExpandedRow
-                  colSpan={headers.length + 1}
-                  className="demo-expanded-td"
-                  {...getExpandedRowProps({ row })}>
-                  <h6>Expandable row content</h6>
-                  <div>Description here</div>
-                </TableExpandedRow>
-              </React.Fragment>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    )}
-  </DataTable>
-);
-
-Playground.argTypes = {
-  radio: {
-    table: {
-      disable: true,
-    },
-  },
+BatchExpansion.argTypes = {
+  ...sharedArgTypes,
 };

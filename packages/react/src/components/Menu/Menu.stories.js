@@ -40,7 +40,7 @@ export default {
   },
 };
 
-export const Playground = (args) => {
+export const Default = (args) => {
   const itemOnClick = action('onClick (MenuItem)');
   const selectableOnChange = action('onChange (MenuItemSelectable)');
   const radioOnChange = action('onChange (MenuItemRadioGroup)');
@@ -88,12 +88,12 @@ export const Playground = (args) => {
   );
 };
 
-Playground.args = {
+Default.args = {
   onClose: action('onClose'),
   open: true,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   target: {
     table: {
       disable: true,
