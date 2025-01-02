@@ -2015,6 +2015,7 @@ __metadata:
     "@rollup/plugin-commonjs": "npm:^28.0.0"
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
     "@rollup/plugin-typescript": "npm:^11.0.0"
+    "@stackblitz/sdk": "npm:^1.11.0"
     "@storybook/addon-a11y": "npm:^8.4.5"
     "@storybook/addon-actions": "npm:^8.4.5"
     "@storybook/addon-docs": "npm:^8.4.5"
@@ -5905,6 +5906,13 @@ __metadata:
   dependencies:
     "@sinonjs/commons": "npm:^1.7.0"
   checksum: 10/033c74ad389b0655b6af2fa1af31dddf45878e65879f06c5d1940e0ceb053a234f2f46c728dcd97df8ee9312431e45dd7aedaee3a69d47f73a2001a7547fc3d6
+  languageName: node
+  linkType: hard
+
+"@stackblitz/sdk@npm:^1.11.0":
+  version: 1.11.0
+  resolution: "@stackblitz/sdk@npm:1.11.0"
+  checksum: 10/351647b818f2e40135ff92d3de61f94a925635acb769862014f4a0eb252011f1c42ede2c6952ab4848ed7512777f3f6d3944914f5750499f35069b54231d6cb2
   languageName: node
   linkType: hard
 

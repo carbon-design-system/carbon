@@ -29,26 +29,7 @@ export default {
   },
 };
 
-export const Default = () => {
-  return (
-    <Grid>
-      <Column sm={1} md={2} lg={4}>
-        <AspectRatio ratio="1x1">Content</AspectRatio>
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        <AspectRatio ratio="1x1">Content</AspectRatio>
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        <AspectRatio ratio="1x1">Content</AspectRatio>
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        <AspectRatio ratio="1x1">Content</AspectRatio>
-      </Column>
-    </Grid>
-  );
-};
-
-export const Playground = {
+export const Default = {
   render: ({ ratio, ...args }) => {
     return (
       <Grid {...args}>
@@ -69,21 +50,15 @@ export const Playground = {
   },
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   as: {
-    table: {
-      disable: true,
-    },
+    control: false,
   },
   children: {
-    table: {
-      disable: true,
-    },
+    control: false,
   },
   className: {
-    table: {
-      disable: true,
-    },
+    control: false,
   },
   ratio: {
     control: {

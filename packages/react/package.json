@@ -84,6 +84,7 @@
     "@rollup/plugin-commonjs": "^28.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "@rollup/plugin-typescript": "^11.0.0",
+    "@stackblitz/sdk": "^1.11.0",
     "@storybook/addon-a11y": "^8.4.5",
     "@storybook/addon-actions": "^8.4.5",
     "@storybook/addon-docs": "^8.4.5",
