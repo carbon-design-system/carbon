@@ -25,12 +25,18 @@ export interface TableRowProps extends ReactAttr<HTMLTableRowElement> {
 const TableRow = (props: TableRowProps) => {
   const prefix = usePrefix();
 
-  let rowHasSlug;
+  let rowHasAILabel;
   if (props?.children) {
     React.Children.toArray(props.children).map((child: any) => {
-      if (child.type?.displayName === 'TableSlugRow') {
-        if (child.props.slug) {
-          rowHasSlug = true;
+      if (
+        child.type?.displayName === 'TableSlugRow' ||
+        child.type?.displayName === 'TableDecoratorRow'
+      ) {
+        if (
+          child.props.slug ||
+          child.props.decorator?.type.displayName === 'AILabel'
+        ) {
+          rowHasAILabel = true;
         }
       }
     });
@@ -39,7 +45,8 @@ const TableRow = (props: TableRowProps) => {
   // only useful in `TableExpandRow`
   const className = cx(props.className, {
     [`${prefix}--data-table--selected`]: props.isSelected,
-    [`${prefix}--data-table--slug-row`]: rowHasSlug,
+    [`${prefix}--data-table--slug-row ${prefix}--data-table--ai-label-row`]:
+      rowHasAILabel,
   });
 
   const {
