@@ -6020,24 +6020,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:^8.1.10":
-  version: 8.2.9
-  resolution: "@storybook/addon-links@npm:8.2.9"
-  dependencies:
-    "@storybook/csf": "npm:0.1.11"
-    "@storybook/global": "npm:^5.0.0"
-    ts-dedent: "npm:^2.0.0"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-    storybook: ^8.2.9
-  peerDependenciesMeta:
-    react:
-      optional: true
-  checksum: 10/e6b14e2cb6763f25027965c90404afb2572b27298e3d1fafa136176113ad4296b1ce48eaa8caf4f521fb6d3404921f17eb3cbe62061ebdc5f2324e0c85333742
-  languageName: node
-  linkType: hard
-
-"@storybook/addon-links@npm:^8.4.5":
+"@storybook/addon-links@npm:^8.1.10, @storybook/addon-links@npm:^8.4.5":
   version: 8.4.7
   resolution: "@storybook/addon-links@npm:8.4.7"
   dependencies:
@@ -6371,21 +6354,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/csf@npm:0.1.11, @storybook/csf@npm:^0.1.0, @storybook/csf@npm:^0.1.11, @storybook/csf@npm:^0.1.2":
-  version: 0.1.11
-  resolution: "@storybook/csf@npm:0.1.11"
-  dependencies:
-    type-fest: "npm:^2.19.0"
-  checksum: 10/f6eeefe3b92ab206676587da9e22a775da026c055999681580d2ca23c98185736f965adc79039a0ae97ea625f0fbc7915cd4559e5db24229a4805784d0b78584
-  languageName: node
-  linkType: hard
-
 "@storybook/csf@npm:^0.0.1":
   version: 0.0.1
   resolution: "@storybook/csf@npm:0.0.1"
   dependencies:
     lodash: "npm:^4.17.15"
   checksum: 10/f6bb019bccd8abc14e45a85258158b7bd8cc525887ac8dc9151ed8c4908be3b5f5523da8a7a9b96ff11b13b6c1744e1a0e070560d63d836b950f595f9a5719d4
+  languageName: node
+  linkType: hard
+
+"@storybook/csf@npm:^0.1.0, @storybook/csf@npm:^0.1.11, @storybook/csf@npm:^0.1.2":
+  version: 0.1.11
+  resolution: "@storybook/csf@npm:0.1.11"
+  dependencies:
+    type-fest: "npm:^2.19.0"
+  checksum: 10/f6eeefe3b92ab206676587da9e22a775da026c055999681580d2ca23c98185736f965adc79039a0ae97ea625f0fbc7915cd4559e5db24229a4805784d0b78584
   languageName: node
   linkType: hard
 
@@ -6432,7 +6415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/manager-api@npm:8.4.5, @storybook/manager-api@npm:^8.4.5":
+"@storybook/manager-api@npm:8.4.5":
   version: 8.4.5
   resolution: "@storybook/manager-api@npm:8.4.5"
   peerDependencies:
@@ -6441,7 +6424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/manager-api@npm:8.4.7":
+"@storybook/manager-api@npm:8.4.7, @storybook/manager-api@npm:^8.4.5":
   version: 8.4.7
   resolution: "@storybook/manager-api@npm:8.4.7"
   peerDependencies:
@@ -6634,7 +6617,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:8.4.5, @storybook/theming@npm:^8.4.5":
+"@storybook/theming@npm:8.4.5":
   version: 8.4.5
   resolution: "@storybook/theming@npm:8.4.5"
   peerDependencies:
@@ -6643,7 +6626,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:8.4.7":
+"@storybook/theming@npm:8.4.7, @storybook/theming@npm:^8.4.5":
   version: 8.4.7
   resolution: "@storybook/theming@npm:8.4.7"
   peerDependencies:
