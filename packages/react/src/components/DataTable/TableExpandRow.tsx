@@ -73,12 +73,18 @@ const TableExpandRow = React.forwardRef(
   ) => {
     const prefix = usePrefix();
 
-    // We need to put the slug before the expansion arrow and all other table cells after the arrow.
-    let rowHasSlug;
-    const slug = React.Children.toArray(children).map((child: any) => {
-      if (child.type?.displayName === 'TableSlugRow') {
-        if (child.props.slug) {
-          rowHasSlug = true;
+    // We need to put the AILabel and Decorator before the expansion arrow and all other table cells after the arrow.
+    let rowHasAILabel;
+    const decorator = React.Children.toArray(children).map((child: any) => {
+      if (
+        child.type?.displayName === 'TableSlugRow' ||
+        child.type?.displayName === 'TableDecoratorRow'
+      ) {
+        if (
+          child.props.slug ||
+          child.props.decorator?.type.displayName === 'AILabel'
+        ) {
+          rowHasAILabel = true;
         }
 
         return child;
@@ -87,7 +93,10 @@ const TableExpandRow = React.forwardRef(
 
     const normalizedChildren = React.Children.toArray(children).map(
       (child: any) => {
-        if (child.type?.displayName !== 'TableSlugRow') {
+        if (
+          child.type?.displayName !== 'TableSlugRow' &&
+          child.type?.displayName !== 'TableDecoratorRow'
+        ) {
           return child;
         }
       }
@@ -98,7 +107,8 @@ const TableExpandRow = React.forwardRef(
         [`${prefix}--parent-row`]: true,
         [`${prefix}--expandable-row`]: isExpanded,
         [`${prefix}--data-table--selected`]: isSelected,
-        [`${prefix}--data-table--slug-row`]: rowHasSlug,
+        [`${prefix}--data-table--slug-row ${prefix}--data-table--ai-label-row`]:
+          rowHasAILabel,
       },
       rowClassName
     );
@@ -106,7 +116,7 @@ const TableExpandRow = React.forwardRef(
 
     return (
       <tr {...rest} ref={ref as never} className={className} data-parent-row>
-        {slug}
+        {decorator}
         <TableCell
           className={`${prefix}--table-expand`}
           data-previous-value={previousValue}
