@@ -10973,7 +10973,7 @@ Map {
       "kind": Object {
         "args": Array [
           Array [
-            "error",
+            "failed",
             "caution-major",
             "caution-minor",
             "undefined",
@@ -10984,7 +10984,7 @@ Map {
             "not-started",
             "pending",
             "unknown",
-            "information",
+            "informative",
           ],
         ],
         "isRequired": true,
