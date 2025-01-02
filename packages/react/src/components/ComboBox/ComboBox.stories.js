@@ -197,7 +197,7 @@ export const withAILabel = () => (
       itemToString={(item) => (item ? item.text : '')}
       titleText="ComboBox title"
       helperText="Combobox helper text"
-      slug={aiLabel}
+      decorator={aiLabel}
     />
   </div>
 );

@@ -17,6 +17,7 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './Select.mdx';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/Select',
@@ -166,12 +167,12 @@ const aiLabel = (
 );
 
 export const withAILabel = () => (
-  <div style={{ width: 400 }}>
+  <div>
     <Select
       id="select-1"
       labelText="Select an option"
       helperText="Optional helper text"
-      slug={aiLabel}>
+      decorator={aiLabel}>
       <SelectItem value="" text="" />
       <SelectItem
         value="An example option that is really long to show what should be done to handle long text"

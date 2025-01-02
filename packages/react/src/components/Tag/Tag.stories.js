@@ -8,6 +8,7 @@
 import React from 'react';
 import { default as Tag } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
+import DismissibleTag from '../Tag/DismissibleTag';
 import { Asleep, View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -217,36 +218,36 @@ const aiLabel = (
 
 export const withAILabel = () => (
   <div style={{ marginBottom: '4rem' }}>
-    <Tag slug={aiLabel} className="some-class" type="red" title="Clear Filter">
-      {'Tag'}
-    </Tag>
-
     <Tag
-      filter
-      slug={aiLabel}
+      decorator={aiLabel}
       className="some-class"
-      type="purple"
+      type="red"
       title="Clear Filter">
       {'Tag'}
     </Tag>
 
+    <DismissibleTag
+      decorator={aiLabel}
+      className="some-class"
+      type="purple"
+      title="Clear Filter"
+      text="Tag"></DismissibleTag>
+
     <Tag
       renderIcon={Asleep}
-      slug={aiLabel}
+      decorator={aiLabel}
       className="some-class"
       type="blue"
       title="Clear Filter">
       {'Tag'}
     </Tag>
 
-    <Tag
-      filter
+    <DismissibleTag
       renderIcon={Asleep}
-      slug={aiLabel}
+      decorator={aiLabel}
       className="some-class"
       type="green"
-      title="Clear Filter">
-      {'Tag'}
-    </Tag>
+      title="Clear Filter"
+      text="Tag"></DismissibleTag>
   </div>
 );

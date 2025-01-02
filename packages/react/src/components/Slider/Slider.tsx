@@ -13,7 +13,7 @@ import React, {
 import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
-import throttle from 'lodash.throttle';
+import { throttle } from 'es-toolkit/compat';
 
 import * as keys from '../../internal/keyboard/keys';
 import { matches } from '../../internal/keyboard';
@@ -1533,13 +1533,13 @@ class Slider extends PureComponent<SliderProps> {
                       }>
                       {twoHandles && !isRtl ? (
                         <>
-                          <LowerHandle />
-                          <LowerHandleFocus />
+                          <LowerHandle aria-label={ariaLabelInput} />
+                          <LowerHandleFocus aria-label={ariaLabelInput} />
                         </>
                       ) : twoHandles && isRtl ? (
                         <>
-                          <UpperHandle />
-                          <UpperHandleFocus />
+                          <UpperHandle aria-label={ariaLabelInputUpper} />
+                          <UpperHandleFocus aria-label={ariaLabelInputUpper} />
                         </>
                       ) : undefined}
                     </div>
@@ -1565,13 +1565,15 @@ class Slider extends PureComponent<SliderProps> {
                         }>
                         {twoHandles && !isRtl ? (
                           <>
-                            <UpperHandle />
-                            <UpperHandleFocus />
+                            <UpperHandle aria-label={ariaLabelInputUpper} />
+                            <UpperHandleFocus
+                              aria-label={ariaLabelInputUpper}
+                            />
                           </>
                         ) : twoHandles && isRtl ? (
                           <>
-                            <LowerHandle />
-                            <LowerHandleFocus />
+                            <LowerHandle aria-label={ariaLabelInput} />
+                            <LowerHandleFocus aria-label={ariaLabelInput} />
                           </>
                         ) : undefined}
                       </div>
