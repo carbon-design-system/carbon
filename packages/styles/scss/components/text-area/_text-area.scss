@@ -104,6 +104,12 @@
     inline-size: 1px;
   }
 
+  .#{$prefix}--form-item {
+    &:has(.#{$prefix}--text-area__wrapper--cols) {
+      inline-size: fit-content;
+    }
+  }
+
   //-----------------------------
   // Disabled
   //-----------------------------
@@ -128,13 +134,21 @@
     border-block-end-color: $border-subtle;
   }
 
-  // Styles for `Slug` rendered inside `TextArea`
+  // Styles for `AILabel` rendered inside `TextArea`
+  .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-area__wrapper--slug .#{$prefix}--ai-label,
   .#{$prefix}--text-area__wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: $spacing-04;
     inset-inline-end: $spacing-05;
   }
 
+  .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
   .#{$prefix}--text-area__wrapper--slug
     .#{$prefix}--slug.#{$prefix}--slug--revert {
     inset-block-start: $spacing-02;
@@ -142,23 +156,67 @@
     transform: translate(0);
   }
 
+  .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area:has(
+      ~ .#{$prefix}--text-area__inner-wrapper--decorator .#{$prefix}--ai-label
+    ):not(
+      :has(
+          ~ .#{$prefix}--text-area__inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
   .#{$prefix}--text-area__wrapper--slug
-    .#{$prefix}--text-area:not(:has(~ .#{$prefix}--slug--revert)) {
+    .#{$prefix}--text-area:has(~ .#{$prefix}--ai-label):not(
+      :has(~ .#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area:has(~ .#{$prefix}--slug):not(
+      :has(~ .#{$prefix}--slug--revert)
+    ) {
     @include ai-gradient;
+  }
 
+  .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area:has(
+      ~ .#{$prefix}--text-area__inner-wrapper--decorator > *
+    ),
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area:has(~ .#{$prefix}--ai-label),
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area:has(~ .#{$prefix}--slug) {
     padding-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--text-area--invalid:has(
+      ~ .#{$prefix}--text-area__inner-wrapper--decorator > *
+    ),
+  .#{$prefix}--text-area--warn:has(
+      ~ .#{$prefix}--text-area__inner-wrapper--decorator > *
+    ),
+  .#{$prefix}--text-area--invalid:has(~ .#{$prefix}--ai-label),
+  .#{$prefix}--text-area--warn:has(~ .#{$prefix}--ai-label),
   .#{$prefix}--text-area--invalid:has(~ .#{$prefix}--slug),
   .#{$prefix}--text-area--warn:has(~ .#{$prefix}--slug) {
     padding-inline-end: $spacing-10;
   }
 
+  .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-area--invalid ~ .#{$prefix}--ai-label,
+  .#{$prefix}--text-area--warn ~ .#{$prefix}--ai-label,
   .#{$prefix}--text-area--invalid ~ .#{$prefix}--slug,
   .#{$prefix}--text-area--warn ~ .#{$prefix}--slug {
     inset-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
+  .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
   .#{$prefix}--text-area--invalid ~ .#{$prefix}--slug.#{$prefix}--slug--revert,
   .#{$prefix}--text-area--warn ~ .#{$prefix}--slug.#{$prefix}--slug--revert {
     inset-inline-end: $spacing-07;

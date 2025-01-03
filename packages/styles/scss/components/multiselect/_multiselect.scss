@@ -201,7 +201,7 @@
 
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly
     .#{$prefix}--tag--filter {
-    box-shadow: 0 0 0 1px $background-inverse;
+    box-shadow: 0 0 0 1px $border-subtle;
   }
 
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly

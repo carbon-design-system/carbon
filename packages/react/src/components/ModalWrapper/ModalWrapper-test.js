@@ -102,6 +102,24 @@ describe('ModalWrapper', () => {
     expect(screen.getByTestId('modal-2')).not.toHaveClass('is-visible');
   });
 
+  it('should call onKeyDown with escape', async () => {
+    const onKeyDown = jest.fn();
+    render(
+      <ModalWrapper
+        buttonTriggerText="Launch modal"
+        modalHeading="Modal heading"
+        modalLabel="Label"
+        data-testid="modal-2"
+        onKeyDown={onKeyDown}>
+        <p>Modal content here</p>
+      </ModalWrapper>
+    );
+
+    await userEvent.tab();
+    await userEvent.keyboard('{Escape}');
+    expect(onKeyDown).toHaveBeenCalledTimes(1);
+  });
+
   it('should set open state to false when close button is clicked', async () => {
     render(
       <ModalWrapper
@@ -149,6 +167,7 @@ describe('ModalWrapper', () => {
         modalHeading="Modal heading"
         modalLabel="Label"
         handleSubmit={handleSubmit}
+        shouldCloseAfterSubmit
         open
         data-testid="modal-5">
         <p>Modal content here</p>

@@ -23,11 +23,13 @@ export default {
   component: DataTableSkeleton,
 };
 
-export const Skeleton = () => {
+export const Skeleton = (args) => {
   const { ...rest } = props();
+
   return (
     <div style={{ width: '800px' }}>
       <DataTableSkeleton
+        {...args}
         {...rest}
         headers={headers}
         aria-label="sample table"
@@ -37,20 +39,7 @@ export const Skeleton = () => {
   );
 };
 
-export const Playground = (args) => {
-  return (
-    <div style={{ width: '800px' }}>
-      <DataTableSkeleton
-        {...args}
-        headers={headers}
-        aria-label="sample table"
-      />
-      <br />
-    </div>
-  );
-};
-
-Playground.argTypes = {
+Skeleton.argTypes = {
   headers: {
     table: {
       disable: true,

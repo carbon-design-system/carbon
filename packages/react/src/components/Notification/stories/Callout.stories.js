@@ -19,15 +19,15 @@ export default {
     },
   },
   args: {
-    kind: 'error',
+    kind: 'info',
     lowContrast: false,
     statusIconDescription: 'notification',
   },
 };
 
-export const Default = () => (
-  <Callout title="Notification title" subtitle="Subtitle text goes here" />
-);
+// export const Default = () => (
+//   <Callout title="Notification title" subtitle="Subtitle text goes here" />
+// );
 
 export const WithInteractiveElements = () => (
   <Callout
@@ -44,43 +44,15 @@ export const WithInteractiveElements = () => (
   </Callout>
 );
 
-export const WithActionButtonOnly = () => (
+export const Default = (args) => (
   <Callout
     title="Notification title"
-    titleId="notif-1"
-    kind="info"
-    lowContrast
-    actionButtonLabel="Learn More">
-    <div className="cds--inline-notification__subtitle">
-      Here is some important info you might want to know.{' '}
-    </div>
-  </Callout>
+    subtitle="Subtitle text goes here"
+    {...args}
+  />
 );
 
-export const WithActionButtonAndLinks = () => (
-  <Callout
-    title="Notification title"
-    titleId="notif-1"
-    kind="info"
-    lowContrast
-    actionButtonLabel="Learn More">
-    <div className="cds--inline-notification__subtitle">
-      <Link inline href="#" aria-describedby="notif-1">
-        Create
-      </Link>{' '}
-      or{' '}
-      <Link inline href="#" aria-describedby="notif-1">
-        register
-      </Link>{' '}
-      a cluster before creating a Configuration. Some additional info could go
-      here to show that this notification subtitle goes below the title.
-    </div>
-  </Callout>
-);
-
-export const Playground = (args) => <Callout {...args} />;
-
-Playground.argTypes = {
+Default.argTypes = {
   children: {
     table: {
       disable: true,
@@ -91,8 +63,8 @@ Playground.argTypes = {
       disable: true,
     },
   },
-};
-Playground.args = {
-  title: 'Notification title',
-  subtitle: 'Subtitle text goes here',
+  kind: {
+    options: ['info', 'warning'],
+    control: { type: 'select' },
+  },
 };

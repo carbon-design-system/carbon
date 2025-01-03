@@ -18,7 +18,6 @@ import ButtonSet from '../ButtonSet';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
 
 export default {
   title: 'Components/MultiSelect',
@@ -117,37 +116,7 @@ const items = [
   },
 ];
 
-export const Playground = (args) => {
-  const ref = useRef();
-  useEffect(() => {
-    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
-  });
-  return (
-    <div style={{ width: '5000px', height: '5000px' }}>
-      <div
-        style={{
-          position: 'absolute',
-          top: '2500px',
-          left: '2500px',
-          width: 300,
-        }}>
-        <MultiSelect
-          label="Multiselect Label"
-          id="carbon-multiselect-example"
-          titleText="Multiselect title"
-          helperText="This is helper text"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          selectionFeedback="top-after-reopen"
-          ref={ref}
-          {...args}
-        />
-      </div>
-    </div>
-  );
-};
-
-Playground.args = {
+const sharedArgs = {
   size: 'md',
   autoAlign: false,
   type: 'default',
@@ -167,7 +136,7 @@ Playground.args = {
   selectAllItemText: 'All options',
 };
 
-Playground.argTypes = {
+const sharedArgTypes = {
   selectionFeedback: {
     options: ['top', 'fixed', 'top-after-reopen'],
     control: { type: 'select' },
@@ -244,7 +213,7 @@ Playground.argTypes = {
   },
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <div
       style={{
@@ -258,12 +227,16 @@ export const Default = () => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
     </div>
   );
 };
 
-export const WithInitialSelectedItems = () => {
+Default.args = { ...sharedArgs };
+Default.argTypes = { ...sharedArgTypes };
+
+export const WithInitialSelectedItems = (args) => {
   return (
     <div
       style={{
@@ -278,6 +251,7 @@ export const WithInitialSelectedItems = () => {
         itemToString={(item) => (item ? item.text : '')}
         initialSelectedItems={[items[0], items[1]]}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
     </div>
   );
@@ -311,7 +285,7 @@ Filterable.argTypes = {
   },
 };
 
-export const WithLayerMultiSelect = () => (
+export const WithLayerMultiSelect = (args) => (
   <WithLayer>
     {(layer) => (
       <div style={{ width: 300 }}>
@@ -323,13 +297,14 @@ export const WithLayerMultiSelect = () => (
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           selectionFeedback="top-after-reopen"
+          {...args}
         />
       </div>
     )}
   </WithLayer>
 );
 
-export const _FilterableWithLayer = () => (
+export const _FilterableWithLayer = (args) => (
   <WithLayer>
     {(layer) => (
       <div style={{ width: 300 }}>
@@ -340,13 +315,14 @@ export const _FilterableWithLayer = () => (
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           selectionFeedback="top-after-reopen"
+          {...args}
         />
       </div>
     )}
   </WithLayer>
 );
 
-export const _Controlled = () => {
+export const _Controlled = (args) => {
   const [selectedItems, setSelectedItems] = useState(
     items.filter((item) => item.id === 'downshift-1-item-0')
   );
@@ -367,6 +343,7 @@ export const _Controlled = () => {
         onChange={(data) => onSelectionChanged(data.selectedItems)}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
       <br />
       <ButtonSet>
@@ -413,7 +390,7 @@ const itemsWithSelectAll = [
   },
 ];
 
-export const SelectAll = () => {
+export const SelectAll = (args) => {
   const [label, setLabel] = useState('Choose options');
 
   const onChange = (value) => {
@@ -437,13 +414,14 @@ export const SelectAll = () => {
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
         onChange={onChange}
+        {...args}
       />
     </div>
   );
 };
 
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -483,12 +461,12 @@ export const withAILabel = () => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       selectionFeedback="top-after-reopen"
-      slug={aiLabel}
+      decorator={aiLabel}
     />
   </div>
 );
 
-export const FilterableWithAILabel = () => (
+export const FilterableWithAILabel = (args) => (
   <div style={{ width: 400 }}>
     <FilterableMultiSelect
       label="Multiselect Label"
@@ -498,12 +476,13 @@ export const FilterableWithAILabel = () => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       selectionFeedback="top-after-reopen"
-      slug={aiLabel}
+      decorator={aiLabel}
+      {...args}
     />
   </div>
 );
 
-export const ExperimentalAutoAlign = () => {
+export const ExperimentalAutoAlign = (args) => {
   const ref = useRef();
   useEffect(() => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
@@ -527,8 +506,11 @@ export const ExperimentalAutoAlign = () => {
           selectionFeedback="top-after-reopen"
           ref={ref}
           autoAlign
+          {...args}
         />
       </div>
     </div>
   );
 };
+
+ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };

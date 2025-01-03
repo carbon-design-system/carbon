@@ -15,28 +15,7 @@ export default {
   component: Toggle,
 };
 
-export const Default = () => (
-  <Toggle
-    labelText="Label"
-    labelA="Off"
-    labelB="On"
-    defaultToggled
-    id="toggle-1"
-  />
-);
-
-export const SmallToggle = () => (
-  <Toggle
-    size="sm"
-    labelText="Label"
-    labelA="Off"
-    labelB="On"
-    defaultToggled
-    id="toggle-2"
-  />
-);
-
-export const Playground = (args) => (
+export const Default = (args) => (
   <Toggle
     labelText="Label"
     labelA="Off"
@@ -47,7 +26,7 @@ export const Playground = (args) => (
   />
 );
 
-Playground.argTypes = {
+Default.argTypes = {
   className: {
     control: false,
   },
@@ -90,6 +69,17 @@ Playground.argTypes = {
   },
 };
 
+export const SmallToggle = () => (
+  <Toggle
+    size="sm"
+    labelText="Label"
+    labelA="Off"
+    labelB="On"
+    defaultToggled
+    id="toggle-2"
+  />
+);
+
 export const WithAccessibleLabels = () => (
   <VStack gap={7}>
     <Toggle id="toggle-4" labelText="Label" />
@@ -100,16 +90,17 @@ export const WithAccessibleLabels = () => (
       <div id="toggle-6-label" style={{ marginBlockEnd: '0.5rem' }}>
         Internal aria-label toggle
       </div>
-      <Toggle aria-label="Internal aria-label toggle" id="toggle-6" hideLabel />
+      <Toggle aria-labelledby="toggle-6-label" id="toggle-6" />
     </div>
 
     <div>
       <label
+        id="toggle-7-label"
         htmlFor="toggle-7"
         style={{ display: 'block', marginBlockEnd: '0.5rem' }}>
         External toggle label
       </label>
-      <Toggle id="toggle-7" hideLabel />
+      <Toggle aria-labelledby="toggle-7-label" id="toggle-7" />
     </div>
   </VStack>
 );

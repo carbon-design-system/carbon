@@ -17,6 +17,7 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './Select.mdx';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/Select',
@@ -76,34 +77,15 @@ export default {
   },
 };
 
-export const Default = () => {
-  return (
-    <div>
-      <Select
-        id="select-1"
-        labelText="Select an option"
-        helperText="Optional helper text">
-        <SelectItem value="" text="" />
-        <SelectItem
-          value="An example option that is really long to show what should be done to handle long text"
-          text="An example option that is really long to show what should be done to handle long text"
-        />
-        <SelectItem value="Option 2" text="Option 2" />
-        <SelectItem value="Option 3" text="Option 3" />
-        <SelectItem value="Option 4" text="Option 4" />
-      </Select>
-    </div>
-  );
-};
-
-export const Inline = () => {
+export const Inline = (args) => {
   return (
     <div>
       <Select
         inline
         id="select-1"
         labelText="Select"
-        helperText="Optional helper text">
+        helperText="Optional helper text"
+        {...args}>
         <SelectItem value="" text="" />
         <SelectItem value="Option 1" text="Option 1" />
         <SelectItem value="Option 2" text="Option 2" />
@@ -114,15 +96,20 @@ export const Inline = () => {
   );
 };
 
+Inline.args = {
+  inline: true,
+};
+
 export const Skeleton = () => <SelectSkeleton />;
 
-export const _WithLayer = () => (
+export const _WithLayer = (args) => (
   <WithLayer>
     {(layer) => (
       <Select
         id={`select-${layer}`}
         labelText=""
-        helperText="Optional helper text">
+        helperText="Optional helper text"
+        {...args}>
         <SelectItem value="" text="" />
         <SelectItem
           value="An example option that is really long to show what should be done to handle long text"
@@ -134,8 +121,14 @@ export const _WithLayer = () => (
   </WithLayer>
 );
 
+_WithLayer.argTypes = {
+  inline: {
+    control: false,
+  },
+};
+
 const aiLabel = (
-  <AILabel className="slug-container">
+  <AILabel className="ai-label-container">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -165,13 +158,14 @@ const aiLabel = (
   </AILabel>
 );
 
-export const withAILabel = () => (
-  <div style={{ width: 400 }}>
+export const withAILabel = (args) => (
+  <div>
     <Select
       id="select-1"
       labelText="Select an option"
       helperText="Optional helper text"
-      slug={aiLabel}>
+      decorator={aiLabel}
+      {...args}>
       <SelectItem value="" text="" />
       <SelectItem
         value="An example option that is really long to show what should be done to handle long text"
@@ -184,7 +178,13 @@ export const withAILabel = () => (
   </div>
 );
 
-export const Playground = (args) => {
+withAILabel.argTypes = {
+  inline: {
+    control: false,
+  },
+};
+
+export const Default = (args) => {
   return (
     <div>
       <Select
@@ -205,7 +205,7 @@ export const Playground = (args) => {
   );
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   helperText: {
     control: 'text',
   },
