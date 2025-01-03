@@ -259,7 +259,7 @@ IconButton.propTypes = {
   autoAlign: PropTypes.bool,
 
   /**
-   * Optionally specify an href for your Button to become an `<a>` element
+   * Optionally specify an href for your IconButton to become an `<a>` element
    */
   href: PropTypes.string,
 
