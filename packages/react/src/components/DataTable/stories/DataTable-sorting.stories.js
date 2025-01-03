@@ -37,36 +37,7 @@ export default {
   },
 };
 
-export const Default = () => (
-  <DataTable rows={rows} headers={headers} isSortable>
-    {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
-      <TableContainer title="DataTable" description="With sorting">
-        <Table {...getTableProps()} aria-label="sample table">
-          <TableHead>
-            <TableRow>
-              {headers.map((header) => (
-                <TableHeader key={header.key} {...getHeaderProps({ header })}>
-                  {header.header}
-                </TableHeader>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id} {...getRowProps({ row })}>
-                {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    )}
-  </DataTable>
-);
-
-export const Playground = (args) => (
+export const Default = (args) => (
   <DataTable isSortable rows={rows} headers={headers} {...args}>
     {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
       <TableContainer title="DataTable" description="With sorting">
@@ -95,7 +66,7 @@ export const Playground = (args) => (
   </DataTable>
 );
 
-Playground.argTypes = {
+Default.argTypes = {
   filterRows: {
     table: {
       disable: true,

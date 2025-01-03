@@ -138,7 +138,7 @@
 
   // Narrow
   .#{$prefix}--css-grid--narrow {
-    --cds-grid-gutter-start: 0;
+    --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
   }
 
   // Condensed
@@ -187,7 +187,7 @@
   }
 
   .#{$prefix}--subgrid--narrow {
-    --cds-grid-gutter-start: 0;
+    --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
     --cds-grid-gutter-end: #{math.div($grid-gutter, 2)};
     --cds-grid-column-hang: #{math.div($grid-gutter, 2)};
   }
