@@ -99,6 +99,7 @@ export interface DataTableRow<ColTypes extends any[]> {
 export interface DataTableHeader {
   key: string;
   header: React.ReactNode;
+  isSortable?: boolean;
   slug?: React.ReactElement;
   decorator?: React.ReactElement;
 }
@@ -311,6 +312,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       PropTypes.shape({
         key: PropTypes.string.isRequired,
         header: PropTypes.node.isRequired,
+        isSortable: PropTypes.bool,
       })
     ).isRequired,
 
@@ -474,7 +476,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       ...rest,
       key: header.key,
       sortDirection,
-      isSortable,
+      isSortable: header.isSortable ?? isSortable, // header check first, since every header defaults to the table isSortable prop
       isSortHeader: sortHeaderKey === header.key,
       slug: header.slug,
       decorator: header.decorator,
