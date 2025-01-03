@@ -18,7 +18,7 @@ test.describe('Popover', () => {
       test('Popover @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Popover',
-          id: 'components-popover--playground',
+          id: 'components-popover--default',
           theme,
         });
       });

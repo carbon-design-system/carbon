@@ -482,10 +482,6 @@
     max-inline-size: convert.to-rem(176px);
   }
 
-  .#{$prefix}--tag--high-contrast .#{$prefix}--definition-term {
-    color: $text-inverse;
-  }
-
   .#{$prefix}--tag > .#{$prefix}--popover-container {
     display: flex;
   }

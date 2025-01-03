@@ -1973,6 +1973,17 @@ Map {
         },
       },
     },
+    "TableDecoratorRow": Object {
+      "displayName": "TableDecoratorRow",
+      "propTypes": Object {
+        "className": Object {
+          "type": "string",
+        },
+        "decorator": Object {
+          "type": "node",
+        },
+      },
+    },
     "TableExpandHeader": Object {
       "propTypes": Object {
         "aria-controls": Object {
@@ -8058,6 +8069,17 @@ Map {
       },
     },
   },
+  "TableDecoratorRow" => Object {
+    "displayName": "TableDecoratorRow",
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "decorator": Object {
+        "type": "node",
+      },
+    },
+  },
   "TableExpandHeader" => Object {
     "propTypes": Object {
       "aria-controls": Object {
@@ -9439,6 +9461,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "alignmentAxisOffset": Object {
+        "type": "number",
       },
       "as": Object {
         "type": "elementType",

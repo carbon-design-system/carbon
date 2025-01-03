@@ -36,7 +36,7 @@ test.describe('@avt DatePicker', () => {
   test('@avt-advanced-states disabled', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
-      id: 'components-datepicker--playground',
+      id: 'components-datepicker--default',
       globals: {
         theme: 'white',
       },
@@ -65,7 +65,7 @@ test.describe('@avt DatePicker', () => {
   test.skip('@avt-advanced-states open', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
-      id: 'components-datepicker--playground',
+      id: 'components-datepicker--default',
       globals: {
         theme: 'white',
       },
