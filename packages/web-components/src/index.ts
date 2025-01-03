@@ -67,6 +67,7 @@ export { default as CDSDropdownSkeleton } from './components/dropdown/dropdown-s
 export { default as CDSFormItem } from './components/form/form-item';
 export { default as CDSFormGroup } from './components/form-group/form-group';
 export { default as CDSIconButton } from './components/icon-button/icon-button';
+export { default as CDSIconIndicator } from './components/icon-indicator/icon-indicator';
 export { default as CDSTextInput } from './components/text-input/text-input';
 export { default as CDSTextInputSkeleton } from './components/text-input/text-input-skeleton';
 export { default as CDSInlineLoading } from './components/inline-loading/inline-loading';

@@ -408,6 +408,16 @@ Array [
     "relativePath": "scss/components/fluid-time-picker",
   },
   Object {
+    "filepath": "scss/components/icon-indicator/_icon-indicator.scss",
+    "importPath": "@carbon/styles/scss/components/icon-indicator/icon-indicator",
+    "relativePath": "scss/components/icon-indicator/icon-indicator",
+  },
+  Object {
+    "filepath": "scss/components/icon-indicator/_index.scss",
+    "importPath": "@carbon/styles/scss/components/icon-indicator",
+    "relativePath": "scss/components/icon-indicator",
+  },
+  Object {
     "filepath": "scss/components/inline-loading/_index.scss",
     "importPath": "@carbon/styles/scss/components/inline-loading",
     "relativePath": "scss/components/inline-loading",

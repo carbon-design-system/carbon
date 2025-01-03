@@ -1,0 +1,67 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/components/icon-indicator/index' as *;
+
+:host(#{$prefix}-icon-indicator) {
+  @extend .#{$prefix}--icon-indicator;
+}
+
+:host(#{$prefix}-icon-indicator[size='20']) {
+  @extend .#{$prefix}--icon-indicator--20;
+}
+
+:host(#{$prefix}-icon-indicator[kind='failed']) svg {
+  @extend .#{$prefix}--icon-indicator--failed;
+}
+
+:host(#{$prefix}-icon-indicator[kind='caution-major']) svg {
+  @extend .#{$prefix}--icon-indicator--caution-major;
+}
+
+:host(#{$prefix}-icon-indicator[kind='caution-minor']) svg {
+  @extend .#{$prefix}--icon-indicator--caution-minor;
+}
+
+:host(#{$prefix}-icon-indicator[kind='undefined']) svg {
+  @extend .#{$prefix}--icon-indicator--undefined;
+}
+
+:host(#{$prefix}-icon-indicator[kind='succeeded']) svg {
+  @extend .#{$prefix}--icon-indicator--succeeded;
+}
+
+:host(#{$prefix}-icon-indicator[kind='normal']) svg {
+  @extend .#{$prefix}--icon-indicator--normal;
+}
+
+:host(#{$prefix}-icon-indicator[kind='in-progress']) svg {
+  @extend .#{$prefix}--icon-indicator--in-progress;
+}
+
+:host(#{$prefix}-icon-indicator[kind='incomplete']) svg {
+  @extend .#{$prefix}--icon-indicator--incomplete;
+}
+
+:host(#{$prefix}-icon-indicator[kind='not-started']) svg {
+  @extend .#{$prefix}--icon-indicator--not-started;
+}
+
+:host(#{$prefix}-icon-indicator[kind='pending']) svg {
+  @extend .#{$prefix}--icon-indicator--pending;
+}
+
+:host(#{$prefix}-icon-indicator[kind='unknown']) svg {
+  @extend .#{$prefix}--icon-indicator--unknown;
+}
+
+:host(#{$prefix}-icon-indicator[kind='informative']) svg {
+  @extend .#{$prefix}--icon-indicator--informative;
+}
