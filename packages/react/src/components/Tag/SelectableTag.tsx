@@ -83,7 +83,7 @@ const SelectableTag = <T extends React.ElementType>({
   ...other
 }: SelectableTagProps<T>) => {
   const prefix = usePrefix();
-  const tagRef = useRef<HTMLElement>();
+  const tagRef = useRef<HTMLElement>(undefined);
   const tagId = id || `tag-${useId()}`;
   const [selectedTag, setSelectedTag] = useState(selected);
   const tagClasses = classNames(`${prefix}--tag--selectable`, className, {

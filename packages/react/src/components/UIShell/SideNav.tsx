@@ -13,6 +13,7 @@ import React, {
   type MouseEventHandler,
   isValidElement,
   createContext,
+  type JSX,
 } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';

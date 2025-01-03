@@ -13,6 +13,7 @@ import React, {
   ReactNode,
   type ComponentProps,
   type ForwardedRef,
+  type JSX,
 } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';

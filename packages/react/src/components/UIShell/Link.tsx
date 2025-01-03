@@ -10,8 +10,8 @@ import React, {
   type ElementType,
   type ForwardedRef,
   forwardRef,
-  type WeakValidationMap,
   type Ref,
+  type JSX,
 } from 'react';
 import deprecate from '../../prop-types/deprecate';
 import { type PolymorphicProps } from '../../types/common';
@@ -57,7 +57,7 @@ const Link = forwardRef(LinkRenderFunction) as (<E extends ElementType = 'a'>(
   props: LinkProps<E>
 ) => JSX.Element) & {
   displayName?: string;
-  propTypes?: WeakValidationMap<LinkProps<any>>;
+  propTypes?: PropTypes.WeakValidationMap<LinkProps<any>>;
 };
 
 const LinkPropTypes = {

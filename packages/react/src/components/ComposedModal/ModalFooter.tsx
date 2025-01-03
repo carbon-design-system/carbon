@@ -35,15 +35,19 @@ function SecondaryButtonSet({
   }
 
   if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
-    return secondaryButtons.map(({ buttonText, onClick: onButtonClick }, i) => (
-      <Button
-        key={`${buttonText}-${i}`}
-        className={secondaryClassName}
-        kind="secondary"
-        onClick={onButtonClick || handleRequestClose}>
-        {buttonText}
-      </Button>
-    ));
+    return (
+      <>
+        {secondaryButtons.map(({ buttonText, onClick: onButtonClick }, i) => (
+          <Button
+            key={`${buttonText}-${i}`}
+            className={secondaryClassName}
+            kind="secondary"
+            onClick={onButtonClick || handleRequestClose}>
+            {buttonText}
+          </Button>
+        ))}
+      </>
+    );
   }
   if (secondaryButtonText) {
     return (
@@ -242,7 +246,6 @@ export const ModalFooter = React.forwardRef<HTMLElement, ModalFooterProps>(
         // @ts-expect-error: Invalid derived types, will be fine once explicit types are added
         ref={ref}
         aria-busy={loadingActive}>
-        {/* @ts-expect-error: Invalid derived types, will be fine once explicit types are added */}
         <SecondaryButtonSet {...secondaryButtonProps} />
         {primaryButtonText && (
           <Button
@@ -295,7 +298,6 @@ ModalFooter.propTypes = {
   /**
    * The `ref` callback for the primary button.
    */
-  // @ts-expect-error: Invalid derived type
   inputref: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({
