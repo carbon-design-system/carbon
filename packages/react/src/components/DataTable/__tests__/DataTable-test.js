@@ -42,16 +42,19 @@ const rows = [
     id: 'b',
     fieldA: 'Field 2:A',
     fieldB: 'Field 2:B',
+    fieldC: 'Field 2:C',
   },
   {
     id: 'a',
     fieldA: 'Field 1:A',
     fieldB: 'Field 1:B',
+    fieldC: 'Field 1:C',
   },
   {
     id: 'c',
     fieldA: 'Field 3:A',
     fieldB: 'Field 3:B',
+    fieldC: 'Field 3:C',
   },
 ];
 
@@ -69,6 +72,11 @@ describe('DataTable', () => {
         {
           key: 'fieldB',
           header: 'Field B',
+        },
+        {
+          key: 'fieldC',
+          header: 'Field C',
+          isSortable: false,
         },
       ],
       locale: 'en',
@@ -169,10 +177,13 @@ describe('DataTable', () => {
         expect(cells()).toEqual([
           'Field 2:A',
           'Field 2:B',
+          'Field 2:C',
           'Field 1:A',
           'Field 1:B',
+          'Field 1:C',
           'Field 3:A',
           'Field 3:B',
+          'Field 3:C',
         ]);
 
         // Click to sort rows by Field A in ascending order
@@ -180,10 +191,13 @@ describe('DataTable', () => {
         expect(cells()).toEqual([
           'Field 1:A',
           'Field 1:B',
+          'Field 1:C',
           'Field 2:A',
           'Field 2:B',
+          'Field 2:C',
           'Field 3:A',
           'Field 3:B',
+          'Field 3:C',
         ]);
 
         // Click to sort rows by Field A in descending order
@@ -191,10 +205,13 @@ describe('DataTable', () => {
         expect(cells()).toEqual([
           'Field 3:A',
           'Field 3:B',
+          'Field 3:C',
           'Field 2:A',
           'Field 2:B',
+          'Field 2:C',
           'Field 1:A',
           'Field 1:B',
+          'Field 1:C',
         ]);
 
         // Click to unsort rows by Field A in descending order
@@ -202,10 +219,13 @@ describe('DataTable', () => {
         expect(cells()).toEqual([
           'Field 2:A',
           'Field 2:B',
+          'Field 2:C',
           'Field 1:A',
           'Field 1:B',
+          'Field 1:C',
           'Field 3:A',
           'Field 3:B',
+          'Field 3:C',
         ]);
       });
 
@@ -228,20 +248,26 @@ describe('DataTable', () => {
         expect(cells()).toEqual([
           'Field 1:A',
           'Field 1:B',
+          'Field 1:C',
           'Field 2:A',
           'Field 2:B',
+          'Field 2:C',
           'Field 3:A',
           'Field 3:B',
+          'Field 3:C',
         ]);
 
         rerender(<DataTable isSortable={true} {...mockProps} />);
         expect(cells()).toEqual([
           'Field 1:A',
           'Field 1:B',
+          'Field 1:C',
           'Field 2:A',
           'Field 2:B',
+          'Field 2:C',
           'Field 3:A',
           'Field 3:B',
+          'Field 3:C',
         ]);
       });
 
@@ -267,6 +293,19 @@ describe('DataTable', () => {
         // should now be in a state where clicking _again_ will sort it
         // "descending" via that header:
         expect(secondHeader()).toHaveTextContent('descending');
+      });
+
+      it('should disallow sorting on fieldC', async () => {
+        render(<DataTable isSortable={true} {...mockProps} />);
+
+        const firstHeader = () => screen.getAllByRole('columnheader')[0];
+        const secondHeader = () => screen.getAllByRole('columnheader')[1];
+        const thirdHeader = () => screen.getAllByRole('columnheader')[2];
+
+        expect(firstHeader()).toHaveTextContent('ascending');
+        expect(secondHeader()).toHaveTextContent('ascending');
+        // Field C is not sortable and the context is the label instead of sort direction
+        expect(thirdHeader()).toHaveTextContent('Field C');
       });
     });
 
