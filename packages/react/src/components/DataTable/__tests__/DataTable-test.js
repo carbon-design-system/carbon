@@ -294,6 +294,19 @@ describe('DataTable', () => {
         // "descending" via that header:
         expect(secondHeader()).toHaveTextContent('descending');
       });
+
+      it('should disallow sorting on fieldC', async () => {
+        render(<DataTable isSortable={true} {...mockProps} />);
+
+        const firstHeader = () => screen.getAllByRole('columnheader')[0];
+        const secondHeader = () => screen.getAllByRole('columnheader')[1];
+        const thirdHeader = () => screen.getAllByRole('columnheader')[2];
+
+        expect(firstHeader()).toHaveTextContent('ascending');
+        expect(secondHeader()).toHaveTextContent('ascending');
+        // Field C is not sortable and the context is the label instead of sort direction
+        expect(thirdHeader()).toHaveTextContent('Field C');
+      });
     });
 
     describe('filtering', () => {
