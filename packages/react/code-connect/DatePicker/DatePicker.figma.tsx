@@ -40,10 +40,10 @@ figma.connect(
       readOnly: figma.enum('State', {
         'Read-only': true,
       }),
-      // hideLabel: figma.boolean('Show label ', { // extra space after label in Figma property name causing code connect to break
-      //   true: false,
-      //   false: true,
-      // }),
+      hideLabel: figma.boolean('Show label', {
+        true: false,
+        false: true,
+      }),
     },
     example: ({ ...props }) => (
       <DatePicker type="simple">
