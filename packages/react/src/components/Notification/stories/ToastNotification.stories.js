@@ -30,19 +30,9 @@ export default {
   },
 };
 
-export const Default = () => (
-  <ToastNotification
-    role="status"
-    caption="00:00:00 AM"
-    timeout={0}
-    title="Notification title"
-    subtitle="Subtitle text goes here"
-  />
-);
+export const Default = (args) => <ToastNotification {...args} />;
 
-export const Playground = (args) => <ToastNotification {...args} />;
-
-Playground.argTypes = {
+Default.argTypes = {
   actionButtonLabel: {
     table: {
       disable: true,
@@ -80,7 +70,7 @@ Playground.argTypes = {
     },
   },
 };
-Playground.args = {
+Default.args = {
   role: 'status',
   caption: '00:00:00 AM',
   timeout: 0,

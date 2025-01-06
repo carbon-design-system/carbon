@@ -200,7 +200,7 @@ export default {
   ],
 };
 
-export const Playground = (args) => {
+export const Default = (args) => {
   const [selected, setSelected] = useState([]);
   const [active, setActive] = useState(null);
 
@@ -240,12 +240,12 @@ export const Playground = (args) => {
   );
 };
 
-Playground.args = {
+Default.args = {
   hideLabel: false,
   multiselect: false,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   active: { control: { disable: true } },
   selected: { control: { disable: true } },
   size: {
