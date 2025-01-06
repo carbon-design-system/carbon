@@ -1740,6 +1740,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "vsvsv",
+      "name": "Vsevolod Platunov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9214692?v=4",
+      "profile": "https://github.com/vsvsv",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
