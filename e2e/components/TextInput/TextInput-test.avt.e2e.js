@@ -25,7 +25,7 @@ test.describe('@avt TextInput', () => {
   test('@avt-advanced-states - disabled', async ({ page }) => {
     await visitStory(page, {
       component: 'TextInput',
-      id: 'components-textinput--playground',
+      id: 'components-textinput--default',
       globals: {
         theme: 'white',
       },

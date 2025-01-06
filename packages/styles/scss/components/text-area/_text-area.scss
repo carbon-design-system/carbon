@@ -104,6 +104,12 @@
     inline-size: 1px;
   }
 
+  .#{$prefix}--form-item {
+    &:has(.#{$prefix}--text-area__wrapper--cols) {
+      inline-size: fit-content;
+    }
+  }
+
   //-----------------------------
   // Disabled
   //-----------------------------
