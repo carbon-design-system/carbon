@@ -189,3 +189,28 @@ export * from './components/Tooltip/DefinitionTooltip';
 export * from './components/Theme';
 export * from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';
+
+/* prop's interface exports */
+
+//accordion
+export type { AccordionProps } from './components/Accordion/Accordion';
+export type { AccordionSkeletonProps } from './components/Accordion/Accordion.Skeleton';
+export type { AccordionItemProps } from './components/Accordion/AccordionItem';
+
+// ai label
+export type { AILabelProps } from './components/AILabel/index';
+export type { AISkeletonIconProps } from './components/AISkeleton/AISkeletonIcon';
+export type { AISkeletonPlaceholderProps } from './components/AISkeleton/AISkeletonPlaceholder';
+export type { AISkeletonTextProps } from './components/AISkeleton/AISkeletonText';
+
+// aspect ratio
+export type { AspectRatioProps } from './components/AspectRatio/AspectRatio';
+
+//breadcrumb
+export type { BreadcrumbProps } from './components/Breadcrumb/Breadcrumb';
+export type { BreadcrumbItemProps } from './components/Breadcrumb/BreadcrumbItem';
+export type { BreadcrumbSkeletonProps } from './components/Breadcrumb/Breadcrumb.Skeleton';
+
+//button
+export type { ButtonProps } from './components/Button/Button';
+export type { ButtonSkeletonProps } from './components/Button/Button.Skeleton';
