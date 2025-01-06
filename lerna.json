@@ -1,6 +1,7 @@
 {
   "version": "independent",
   "npmClient": "yarn",
+  "useNx": true,
   "ignoreChanges": [
     "actions/**",
     "**/__fixtures__/**",

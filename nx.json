@@ -3,24 +3,25 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": [
-          "build"
-        ]
+        "cacheableOperations": ["build"]
       }
     }
   },
   "targetDefaults": {
     "clean": {
-      "dependsOn": [
-        "^clean"
-      ]
+      "dependsOn": ["^clean"]
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
+      "cache": true,
+      "inputs": ["default"],
       "outputs": [
-        "{projectRoot}/packages/react/es, packages/react/lib"
+        "{projectRoot}/packages/**/es/**/*",
+        "{projectRoot}/packages/**/lib/**/*",
+        "{projectRoot}/packages/web-components/dist/**/*",
+        "{projectRoot}/packages/react/icons/**/*",
+        "{projectRoot}/packages/react/scss/**/*",
+        "{projectRoot}/packages/react/index.scss"
       ]
     }
   },
