@@ -322,6 +322,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/a88zach"><img src="https://avatars.githubusercontent.com/u/1724822?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Zach Tindall</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=a88zach" title="Code">💻</a></td>
   </tr>
   <tr>
+    <td align="center"><a href="https://github.com/vsvsv"><img src="https://avatars.githubusercontent.com/u/9214692?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vsevolod Platunov</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=vsvsv" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/ashna000"><img src="https://avatars.githubusercontent.com/u/12691034?s=96&v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ashna Thomas</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=ashna000" title="Code">💻</a></td>
   </tr>
 </table>
