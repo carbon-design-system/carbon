@@ -4226,6 +4226,9 @@ Map {
       "enterDelayMs": Object {
         "type": "number",
       },
+      "href": Object {
+        "type": "string",
+      },
       "isSelected": Object {
         "type": "bool",
       },
