@@ -42,7 +42,7 @@ const rows = [
     port: 3000,
     rule: 'Round robin',
     attached_groups: 'Kevin’s VM Groups',
-    status: <IconIndicator kind="error" label="Error" />,
+    status: <IconIndicator kind="failed" label="Failed" />,
   },
   {
     id: 'b',
@@ -69,7 +69,7 @@ const rows = [
     port: 3000,
     rule: 'Round robin',
     attached_groups: 'Marc’s VM Groups',
-    status: <IconIndicator kind="error" label="Error" />,
+    status: <IconIndicator kind="failed" label="Failed" />,
   },
   {
     id: 'e',
