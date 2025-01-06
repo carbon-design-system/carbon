@@ -390,7 +390,7 @@ export const withAILabel = (args) => {
               labelText="Date Picker label"
               size="md"
               id="fluid-date-picker"
-              slug={aiLabel}
+              decorator={aiLabel}
               {...rest}
             />
           </FluidDatePicker>
@@ -544,7 +544,7 @@ withAILabel.argTypes = {
       type: 'boolean',
     },
     table: {
-      category: 'Slug',
+      category: 'AILabel',
     },
   },
 };

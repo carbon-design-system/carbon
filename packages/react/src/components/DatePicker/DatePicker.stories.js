@@ -41,168 +41,13 @@ export default {
   },
 };
 
-export const Simple = () => (
-  <DatePicker datePickerType="simple">
-    <DatePickerInput
-      placeholder="mm/dd/yyyy"
-      labelText="Date Picker label"
-      id="date-picker-simple"
-    />
-  </DatePicker>
-);
-
-export const SingleWithCalendar = () => (
-  <DatePicker datePickerType="single">
-    <DatePickerInput
-      placeholder="mm/dd/yyyy"
-      labelText="Date Picker label"
-      id="date-picker-single"
-      size="md"
-    />
-  </DatePicker>
-);
-
-export const RangeWithCalendar = () => {
-  return (
-    <DatePicker datePickerType="range">
-      <DatePickerInput
-        id="date-picker-input-id-start"
-        placeholder="mm/dd/yyyy"
-        labelText="Start date"
-        size="md"
-      />
-      <DatePickerInput
-        id="date-picker-input-id-finish"
-        placeholder="mm/dd/yyyy"
-        labelText="End date"
-        size="md"
-      />
-    </DatePicker>
-  );
-};
-
-export const SimpleWithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <DatePicker datePickerType="simple">
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          id={`date-picker-simple-${layer}`}
-          size="md"
-        />
-      </DatePicker>
-    )}
-  </WithLayer>
-);
-
-export const SingleWithCalendarWithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <DatePicker datePickerType="single">
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          id={`date-picker-single-${layer}`}
-          size="md"
-        />
-      </DatePicker>
-    )}
-  </WithLayer>
-);
-
-export const RangeWithCalendarWithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <DatePicker datePickerType="range">
-        <DatePickerInput
-          id={`date-picker-input-id-start-${layer}`}
-          placeholder="mm/dd/yyyy"
-          labelText="Start date"
-          size="md"
-        />
-        <DatePickerInput
-          id={`date-picker-input-id-finish-${layer}`}
-          placeholder="mm/dd/yyyy"
-          labelText="End date"
-          size="md"
-        />
-      </DatePicker>
-    )}
-  </WithLayer>
-);
-
-export const Skeleton = () => <DatePickerSkeleton range />;
-
-const aiLabel = (
-  <AILabel className="ai-label-container">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
-
-export const withAILabel = () => (
-  <div style={{ width: 400 }}>
-    <DatePicker datePickerType="single">
-      <DatePickerInput
-        placeholder="mm/dd/yyyy"
-        labelText="Date Picker label"
-        size="md"
-        id="date-picker"
-        decorator={aiLabel}
-      />
-    </DatePicker>
-  </div>
-);
-
-export const Playground = ({ readOnly, ...args }) => {
-  return (
-    <DatePicker datePickerType="single" {...args} readOnly={readOnly}>
-      <DatePickerInput
-        placeholder="mm/dd/yyyy"
-        labelText="Date Picker label"
-        id="date-picker-single"
-        {...args}
-      />
-      {args.datePickerType === 'range' && (
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="End date"
-          size="md"
-          id="date-picker-input-2"
-          {...args}
-        />
-      )}
-    </DatePicker>
-  );
-};
-
-Playground.argTypes = {
+const sharedArgTypes = {
   appendTo: {
+    table: {
+      disable: true,
+    },
+  },
+  datePickerType: {
     table: {
       disable: true,
     },
@@ -306,3 +151,194 @@ Playground.argTypes = {
     },
   },
 };
+
+export const Default = ({ readOnly, ...args }) => {
+  return (
+    <DatePicker datePickerType="single" {...args} readOnly={readOnly}>
+      <DatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        id="date-picker-single"
+        {...args}
+      />
+      {args.datePickerType === 'range' && (
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+          size="md"
+          id="date-picker-input-2"
+          {...args}
+        />
+      )}
+    </DatePicker>
+  );
+};
+
+Default.argTypes = {
+  ...sharedArgTypes,
+  datePickerType: {
+    options: ['sigle', 'simple', 'range'],
+    control: { type: 'select' },
+  },
+};
+
+export const Simple = (args) => (
+  <DatePicker datePickerType="simple" {...args}>
+    <DatePickerInput
+      placeholder="mm/dd/yyyy"
+      labelText="Date Picker label"
+      id="date-picker-simple"
+      {...args}
+    />
+  </DatePicker>
+);
+
+Simple.argTypes = { ...sharedArgTypes };
+
+export const SingleWithCalendar = (args) => (
+  <DatePicker datePickerType="single" {...args}>
+    <DatePickerInput
+      placeholder="mm/dd/yyyy"
+      labelText="Date Picker label"
+      id="date-picker-single"
+      size="md"
+      {...args}
+    />
+  </DatePicker>
+);
+
+SingleWithCalendar.argTypes = { ...sharedArgTypes };
+
+export const RangeWithCalendar = (args) => {
+  return (
+    <DatePicker datePickerType="range" {...args}>
+      <DatePickerInput
+        id="date-picker-input-id-start"
+        placeholder="mm/dd/yyyy"
+        labelText="Start date"
+        size="md"
+        {...args}
+      />
+      <DatePickerInput
+        id="date-picker-input-id-finish"
+        placeholder="mm/dd/yyyy"
+        labelText="End date"
+        size="md"
+        {...args}
+      />
+    </DatePicker>
+  );
+};
+
+RangeWithCalendar.argTypes = { ...sharedArgTypes };
+
+export const SimpleWithLayer = (args) => (
+  <WithLayer>
+    {(layer) => (
+      <DatePicker datePickerType="simple" {...args}>
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id={`date-picker-simple-${layer}`}
+          size="md"
+          {...args}
+        />
+      </DatePicker>
+    )}
+  </WithLayer>
+);
+
+SimpleWithLayer.argTypes = { ...sharedArgTypes };
+
+export const SingleWithCalendarWithLayer = (args) => (
+  <WithLayer>
+    {(layer) => (
+      <DatePicker datePickerType="single" {...args}>
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id={`date-picker-single-${layer}`}
+          size="md"
+          {...args}
+        />
+      </DatePicker>
+    )}
+  </WithLayer>
+);
+
+SingleWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
+
+export const RangeWithCalendarWithLayer = (args) => (
+  <WithLayer>
+    {(layer) => (
+      <DatePicker datePickerType="range" {...args}>
+        <DatePickerInput
+          id={`date-picker-input-id-start-${layer}`}
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+          size="md"
+          {...args}
+        />
+        <DatePickerInput
+          id={`date-picker-input-id-finish-${layer}`}
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+          size="md"
+          {...args}
+        />
+      </DatePicker>
+    )}
+  </WithLayer>
+);
+
+RangeWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
+
+export const Skeleton = () => <DatePickerSkeleton range />;
+
+const aiLabel = (
+  <AILabel className="ai-label-container">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+export const withAILabel = (args) => (
+  <div style={{ width: 400 }}>
+    <DatePicker datePickerType="single" {...args}>
+      <DatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        size="md"
+        id="date-picker"
+        decorator={aiLabel}
+        {...args}
+      />
+    </DatePicker>
+  </div>
+);
+
+withAILabel.argTypes = { ...sharedArgTypes };
