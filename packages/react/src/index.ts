@@ -214,3 +214,7 @@ export type { BreadcrumbSkeletonProps } from './components/Breadcrumb/Breadcrumb
 //button
 export type { ButtonProps } from './components/Button/Button';
 export type { ButtonSkeletonProps } from './components/Button/Button.Skeleton';
+
+// chat button
+export type { ChatButtonProps } from './components/ChatButton/ChatButton';
+export type { ChatButtonSkeletonProps } from './components/ChatButton/ChatButton.Skeleton';
