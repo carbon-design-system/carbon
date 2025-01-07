@@ -2384,6 +2384,9 @@ Map {
                   "isRequired": true,
                   "type": "node",
                 },
+                "isSortable": Object {
+                  "type": "bool",
+                },
                 "key": Object {
                   "isRequired": true,
                   "type": "string",
