@@ -332,6 +332,47 @@ export const upgrades = [
         },
       },
       {
+        name: 'enable-v12-overflowmenu',
+        description: `
+          Updates the OverflowMenu component usage by wrapping it with FeatureFlags:
+          1. Wraps all OverflowMenu components with FeatureFlags
+          2. Adds FeatureFlags import from @carbon/react if not present
+          
+          Example transformation:
+          Before: <OverflowMenu {...props} />
+          After:  <FeatureFlags enableV12Overflowmenu>
+                    <OverflowMenu {...props} />
+                  </FeatureFlags>
+        `,
+
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'enable-v12-overflowmenu.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
         name: 'refactor-light-to-layer',
         description: `
           Refactor 'light' prop usage to instead wrap components with Layer
