@@ -87,40 +87,7 @@ const items = [
   },
 ];
 
-export const ExperimentalAutoAlign = () => (
-  <div style={{ width: 400 }}>
-    <div style={{ height: 300 }}></div>
-    <Dropdown
-      autoAlign={true}
-      id="default"
-      titleText="Dropdown label"
-      helperText="This is some helper text"
-      initialSelectedItem={items[1]}
-      label="Option 1"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      direction="top"
-    />
-    <div style={{ height: 800 }}></div>
-  </div>
-);
-
-export const Playground = (args) => (
-  <div style={{ width: 400 }}>
-    <Dropdown
-      id="default"
-      titleText="Dropdown label"
-      helperText="This is some helper text"
-      initialSelectedItem={items[1]}
-      label="Option 1"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...args}
-    />
-  </div>
-);
-
-Playground.args = {
+const sharedArgs = {
   invalid: false,
   invalidText: 'invalid selection',
   disabled: false,
@@ -132,7 +99,7 @@ Playground.args = {
   type: 'default',
 };
 
-Playground.argTypes = {
+const sharedArgTypes = {
   invalid: {
     control: {
       type: 'boolean',
@@ -188,7 +155,7 @@ Playground.argTypes = {
   },
 };
 
-export const Default = () => (
+export const Default = (args) => (
   <div style={{ width: 400 }}>
     <Dropdown
       id="default"
@@ -197,11 +164,43 @@ export const Default = () => (
       label="Choose an option"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
+      {...args}
     />
   </div>
 );
 
-export const Inline = () => (
+Default.args = {
+  ...sharedArgs,
+};
+
+Default.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const ExperimentalAutoAlign = (args) => (
+  <div style={{ width: 400 }}>
+    <div style={{ height: 300 }}></div>
+    <Dropdown
+      autoAlign={true}
+      id="default"
+      titleText="Dropdown label"
+      helperText="This is some helper text"
+      initialSelectedItem={items[1]}
+      label="Option 1"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      direction="top"
+      {...args}
+    />
+    <div style={{ height: 800 }}></div>
+  </div>
+);
+
+ExperimentalAutoAlign.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const Inline = (args) => (
   <div style={{ width: 600 }}>
     <Dropdown
       id="inline"
@@ -211,11 +210,16 @@ export const Inline = () => (
       type="inline"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
+      {...args}
     />
   </div>
 );
 
-export const _WithLayer = () => (
+Inline.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const _WithLayer = (args) => (
   <WithLayer>
     {(layer) => (
       <div style={{ width: 400 }}>
@@ -227,13 +231,18 @@ export const _WithLayer = () => (
           label="Option 1"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
+          {...args}
         />
       </div>
     )}
   </WithLayer>
 );
 
-export const InlineWithLayer = () => (
+_WithLayer.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const InlineWithLayer = (args) => (
   <WithLayer>
     {(layer) => (
       <div style={{ width: 600 }}>
@@ -245,11 +254,16 @@ export const InlineWithLayer = () => (
           type="inline"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
+          {...args}
         />
       </div>
     )}
   </WithLayer>
 );
+
+InlineWithLayer.argTypes = {
+  ...sharedArgTypes,
+};
 
 export const Skeleton = () => (
   <div style={{ width: 300 }}>
@@ -288,7 +302,7 @@ const aiLabel = (
   </AILabel>
 );
 
-export const withAILabel = () => (
+export const withAILabel = (args) => (
   <div style={{ width: 400 }}>
     <Dropdown
       id="default"
@@ -299,6 +313,11 @@ export const withAILabel = () => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       decorator={aiLabel}
+      {...args}
     />
   </div>
 );
+
+withAILabel.argTypes = {
+  ...sharedArgTypes,
+};

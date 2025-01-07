@@ -160,7 +160,7 @@ export const FloatingStyles = () => {
   );
 };
 
-export const Playground = (args) => {
+export const Default = (args) => {
   return (
     <OverflowMenu {...args}>
       <MenuItem label="Stop app" />
@@ -173,11 +173,11 @@ export const Playground = (args) => {
   );
 };
 
-Playground.args = {
+Default.args = {
   label: 'Options',
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   children: {
     table: {
       disable: true,
