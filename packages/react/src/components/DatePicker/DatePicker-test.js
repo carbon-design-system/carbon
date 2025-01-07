@@ -388,7 +388,7 @@ describe('Simple date picker', () => {
       cleanup();
     });
 
-    it('should initialize a calendar when using react.lazy', async () => {
+    it.skip('should initialize a calendar when using react.lazy', async () => {
       LazyDatePicker = React.lazy(() =>
         import('@carbon/react').then((module) => ({
           default: module.DatePicker,

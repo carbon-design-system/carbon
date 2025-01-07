@@ -26,28 +26,6 @@ export default {
   subcomponents: {
     PopoverContent,
   },
-  argTypes: {
-    as: {
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-    relative: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   parameters: {
     controls: {
       hideNoControlsWarning: true,
@@ -58,7 +36,30 @@ export default {
   },
 };
 
-const PlaygroundStory = (props) => {
+const sharedArgTypes = {
+  as: {
+    table: {
+      disable: true,
+    },
+  },
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  relative: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+const DefaultStory = (props) => {
   const { align, caret, dropShadow, highContrast, open } = props;
   return (
     <Popover
@@ -66,7 +67,8 @@ const PlaygroundStory = (props) => {
       caret={caret}
       dropShadow={dropShadow}
       highContrast={highContrast}
-      open={open}>
+      open={open}
+      {...props}>
       <div className="playground-trigger">
         <CheckboxIcon />
       </div>
@@ -80,7 +82,9 @@ const PlaygroundStory = (props) => {
   );
 };
 
-export const TabTip = () => {
+DefaultStory.argTypes = { ...sharedArgTypes };
+
+export const TabTip = (args) => {
   const [open, setOpen] = useState(true);
   const [openTwo, setOpenTwo] = useState(false);
   const align = document?.dir === 'rtl' ? 'bottom-right' : 'bottom-left';
@@ -96,7 +100,8 @@ export const TabTip = () => {
           }
         }}
         isTabTip
-        onRequestClose={() => setOpen(false)}>
+        onRequestClose={() => setOpen(false)}
+        {...args}>
         <button
           aria-label="Settings"
           type="button"
@@ -109,7 +114,7 @@ export const TabTip = () => {
         <PopoverContent className="p-3">
           <RadioButtonGroup
             style={{ alignItems: 'flex-start', flexDirection: 'column' }}
-            legendText="Row height"
+            legendText="Row height 1"
             name="radio-button-group"
             defaultSelected="small">
             <RadioButton labelText="Small" value="small" id="radio-small" />
@@ -133,7 +138,8 @@ export const TabTip = () => {
         open={openTwo}
         isTabTip
         align={alignTwo}
-        onRequestClose={() => setOpenTwo(false)}>
+        onRequestClose={() => setOpenTwo(false)}
+        {...args}>
         <button
           aria-label="Settings"
           type="button"
@@ -146,7 +152,7 @@ export const TabTip = () => {
         <PopoverContent className="p-3">
           <RadioButtonGroup
             style={{ alignItems: 'flex-start', flexDirection: 'column' }}
-            legendText="Row height"
+            legendText="Row height 2"
             name="radio-button-group-2"
             defaultSelected="small-2">
             <RadioButton labelText="Small" value="small-2" id="radio-small-2" />
@@ -169,16 +175,22 @@ export const TabTip = () => {
   );
 };
 
-export const Playground = PlaygroundStory.bind({});
+TabTip.argTypes = {
+  ...sharedArgTypes,
+  align: { control: false },
+  autoAlign: { control: false },
+};
 
-Playground.args = {
+export const Default = DefaultStory.bind({});
+
+Default.args = {
   caret: true,
   dropShadow: true,
   highContrast: false,
   open: true,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   align: {
     options: [
       'top',
@@ -223,13 +235,13 @@ Playground.argTypes = {
   },
 };
 
-Playground.story = {
+Default.story = {
   decorators: [
     (story) => <div className="mt-10 flex justify-center">{story()}</div>,
   ],
 };
 
-export const ExperimentalAutoAlign = () => {
+export const ExperimentalAutoAlign = (args) => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
 
@@ -245,7 +257,7 @@ export const ExperimentalAutoAlign = () => {
           top: '2500px',
           left: '2500px',
         }}>
-        <Popover open={open} align="top" autoAlign ref={ref}>
+        <Popover open={open} align="top" autoAlign ref={ref} {...args}>
           <div className="playground-trigger">
             <CheckboxIcon
               onClick={() => {

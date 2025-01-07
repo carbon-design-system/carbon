@@ -59,6 +59,96 @@ const items = [
   },
 ];
 
+export const Default = (args) => (
+  <div style={{ width: args.defaultWidth }}>
+    <FluidMultiSelect
+      onChange={() => {}}
+      id="default"
+      titleText="Label"
+      label="Choose an option"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      {...args}
+    />
+  </div>
+);
+
+const sharedArgTypes = {
+  className: {
+    control: {
+      type: 'text',
+    },
+  },
+  isCondensed: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  isFilterable: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalidText: {
+    control: {
+      type: 'text',
+    },
+  },
+  label: {
+    control: {
+      type: 'text',
+    },
+  },
+  titleText: {
+    control: {
+      type: 'text',
+    },
+  },
+  warn: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+  },
+};
+
+Default.args = {
+  defaultWidth: 400,
+  className: 'test-class',
+  isCondensed: false,
+  isFilterable: false,
+  disabled: false,
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  label: 'Choose an option',
+  titleText: 'Label',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+};
+
+Default.argTypes = {
+  ...sharedArgTypes,
+  defaultWidth: {
+    control: { type: 'range', min: 300, max: 800, step: 50 },
+  },
+};
+
 const ToggleTip = (
   <>
     <ToggletipLabel>Label</ToggletipLabel>
@@ -71,20 +161,6 @@ const ToggleTip = (
       </ToggletipContent>
     </Toggletip>
   </>
-);
-
-export const Default = () => (
-  <div style={{ width: '400px' }}>
-    <FluidMultiSelect
-      onChange={() => {}}
-      initialSelectedItem={items[2]}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
-  </div>
 );
 
 export const Filterable = () => (
@@ -164,7 +240,7 @@ const aiLabel = (
   </AILabel>
 );
 
-export const withAILabel = () => (
+export const withAILabel = (args) => (
   <div style={{ width: '400px' }}>
     <FluidMultiSelect
       onChange={() => {}}
@@ -175,108 +251,17 @@ export const withAILabel = () => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       decorator={aiLabel}
+      {...args}
     />
   </div>
 );
 
-export const Playground = (args) => (
-  <div style={{ width: args.playgroundWidth }}>
-    <FluidMultiSelect
-      onChange={() => {}}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...args}
-    />
-    <br />
-    <FluidMultiSelect
-      {...args}
-      onChange={() => {}}
-      id="default-3"
-      titleText={ToggleTip}
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
-  </div>
-);
+withAILabel.argTypes = {
+  ...sharedArgTypes,
+};
 
 export const Skeleton = () => (
   <div style={{ width: 400 }}>
     <FluidMultiSelectSkeleton />
   </div>
 );
-
-Playground.args = {
-  playgroundWidth: 400,
-  className: 'test-class',
-  isCondensed: false,
-  isFilterable: false,
-  disabled: false,
-  invalid: false,
-  invalidText:
-    'Error message that is really long can wrap to more lines but should not be excessively long.',
-  label: 'Choose an option',
-  titleText: 'Label',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-};
-
-Playground.argTypes = {
-  playgroundWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
-  className: {
-    control: {
-      type: 'text',
-    },
-  },
-  isCondensed: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  isFilterable: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  invalid: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  invalidText: {
-    control: {
-      type: 'text',
-    },
-  },
-  label: {
-    control: {
-      type: 'text',
-    },
-  },
-  titleText: {
-    control: {
-      type: 'text',
-    },
-  },
-  warn: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  warnText: {
-    control: {
-      type: 'text',
-    },
-  },
-};

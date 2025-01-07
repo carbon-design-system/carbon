@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
 const { snapshot } = require('../../test-utils/snapshot');
 const { snapshotStory, visitStory } = require('../../test-utils/storybook');
@@ -18,7 +18,7 @@ test.describe('Popover', () => {
       test('Popover @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Popover',
-          id: 'components-popover--playground',
+          id: 'components-popover--default',
           theme,
         });
       });
@@ -42,6 +42,21 @@ test.describe('Popover', () => {
         await page.evaluate(() => {
           window.scrollBy(-500, 0); // Scroll 500px to the left
         });
+
+        await expect
+          .poll(
+            async () => {
+              const scrollPosition = await page.evaluate(() => {
+                return window.scrollX;
+              });
+              return scrollPosition;
+            },
+            {
+              timeout: 2000,
+            }
+          )
+          .toBe(1376);
+
         await snapshot(page, {
           component: 'popover',
           story: 'experimental-auto-align-left',
@@ -60,6 +75,21 @@ test.describe('Popover', () => {
         await page.evaluate(() => {
           window.scrollBy(500, 0); // Scroll 500px to the right
         });
+
+        await expect
+          .poll(
+            async () => {
+              const scrollPosition = await page.evaluate(() => {
+                return window.scrollX;
+              });
+              return scrollPosition;
+            },
+            {
+              timeout: 2000,
+            }
+          )
+          .toBe(2376);
+
         await snapshot(page, {
           component: 'popover',
           story: 'experimental-auto-align-right',
@@ -78,6 +108,21 @@ test.describe('Popover', () => {
         await page.evaluate(() => {
           window.scrollBy(0, -350); // Scroll 350px to the top
         });
+
+        await expect
+          .poll(
+            async () => {
+              const scrollPosition = await page.evaluate(() => {
+                return window.scrollY;
+              });
+              return scrollPosition;
+            },
+            {
+              timeout: 2000,
+            }
+          )
+          .toBe(1806);
+
         await snapshot(page, {
           component: 'popover',
           story: 'experimental-auto-align-top',
@@ -96,6 +141,21 @@ test.describe('Popover', () => {
         await page.evaluate(() => {
           window.scrollBy(0, 350); // Scroll 350px to the bottom
         });
+
+        await expect
+          .poll(
+            async () => {
+              const scrollPosition = await page.evaluate(() => {
+                return window.scrollY;
+              });
+              return scrollPosition;
+            },
+            {
+              timeout: 2000,
+            }
+          )
+          .toBe(2506);
+
         await snapshot(page, {
           component: 'popover',
           story: 'experimental-auto-align-bottom',
