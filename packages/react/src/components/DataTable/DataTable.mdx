@@ -8,9 +8,6 @@ import {
   TableBody,
 } from '../DataTable';
 
-import * as DataTableBasicStories from './stories/DataTable-basic.stories';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
-
 <Meta isTemplate />
 
 # DataTable
@@ -21,15 +18,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/data-table/accessibility)
 
-<Canvas
-  of={DataTableBasicStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(DataTableBasicStories.Default),
-    },
-  ]}
-/>
+<Canvas id="components-datatable-basic--default" />
 
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
