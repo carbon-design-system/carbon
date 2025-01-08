@@ -14,15 +14,7 @@
     "build": {
       "dependsOn": ["^build"],
       "cache": true,
-      "inputs": ["default"],
-      "outputs": [
-        "{projectRoot}/packages/**/es/**/*",
-        "{projectRoot}/packages/**/lib/**/*",
-        "{projectRoot}/packages/web-components/dist/**/*",
-        "{projectRoot}/packages/react/icons/**/*",
-        "{projectRoot}/packages/react/scss/**/*",
-        "{projectRoot}/packages/react/index.scss"
-      ]
+      "inputs": ["default"]
     }
   },
   "nxCloudId": "6757024dd78ff71eb4eebb5f"
