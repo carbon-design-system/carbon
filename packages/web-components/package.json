@@ -32,17 +32,10 @@
   },
   "type": "module",
   "exports": {
-    "./es/components/*": {
-      "default": "./es/components/*"
-    },
-    "./es/globals/": {
-      "default": "./es/globals/"
-    },
-    "./es": "./es/index.js",
-    "./es/": "./es/",
-    "./lib/": "./lib/",
-    "./dist/": "./dist/",
-    "./scss/": "./scss/",
+    "./es/*": "./es/*",
+    "./lib/*": "./lib/*",
+    "./dist/*": "./dist/*",
+    "./scss/*": "./scss/*",
     "./custom-elements.json": "./custom-elements.json",
     "./package.json": "./package.json"
   },
