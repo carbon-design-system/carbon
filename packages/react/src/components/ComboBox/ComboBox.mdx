@@ -33,7 +33,15 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 A combobox allows the user to make a selection from a predefined list of options
 and is typically used when there are a large amount of options to choose from.
 
-<Canvas of={ComboBoxStories.Default} />
+<Canvas
+  of={ComboBoxStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboBoxStories.Default),
+    },
+  ]}
+/>
 
 ## Component API
 
@@ -143,7 +151,15 @@ const items = ['Option 1', 'Option 2', 'Option 3']
 
 You can use `selectedItem` for a fully controlled component.
 
-<Canvas of={ComboBoxStories._fullyControlled} />
+<Canvas
+  of={ComboBoxStories._fullyControlled}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboBoxStories._fullyControlled),
+    },
+  ]}
+/>
 
 ```jsx
 const options = [
