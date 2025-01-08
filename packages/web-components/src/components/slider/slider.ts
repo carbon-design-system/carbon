@@ -179,6 +179,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     const eventContainer = (event.target as HTMLElement).id;
     const { key, shiftKey } = event;
     if (!this.disabled) {
+      console.log(key, 'key');
       if (key in THUMB_DIRECTION) {
         const {
           max: rawMax,

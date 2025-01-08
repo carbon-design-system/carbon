@@ -45,7 +45,15 @@ class CDSSliderInput extends FocusMixin(LitElement) {
    * Handles `change` event to fire a normalized custom event.
    */
   private _handleChange({ target }: Event) {
-    this.value = Number((target as HTMLInputElement).value);
+    const min = Number(this.min);
+    const max = Number(this.max);
+    const newValue = Number((target as HTMLInputElement).value);
+    this.value =
+      newValue >= min && newValue <= max
+        ? newValue
+        : newValue < min
+          ? min
+          : max;
     this.dispatchEvent(
       new CustomEvent((this.constructor as typeof CDSSliderInput).eventChange, {
         bubbles: true,
@@ -62,16 +70,21 @@ class CDSSliderInput extends FocusMixin(LitElement) {
    */
   private _handleInput({ target }: Event) {
     this.value = Number((target as HTMLInputElement).value);
-    this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof CDSSliderInput).eventChange, {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this.value,
-          intermediate: true,
-        },
-      })
-    );
+    if (this.value >= Number(this.min) && this.value <= Number(this.max)) {
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSSliderInput).eventChange,
+          {
+            bubbles: true,
+            composed: true,
+            detail: {
+              value: this.value,
+              intermediate: true,
+            },
+          }
+        )
+      );
+    }
   }
 
   /**
