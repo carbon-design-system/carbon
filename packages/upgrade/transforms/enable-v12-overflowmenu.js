@@ -43,7 +43,7 @@ function transform(fileInfo, api, options) {
     .find(j.ImportDeclaration)
     .some(
       (path) =>
-        path.node.source.value === '@carbon/react' &&
+        path.node.source.value === '@carbon/feature-flags' &&
         path.node.specifiers.some(
           (spec) => spec.imported && spec.imported.name === 'FeatureFlags'
         )
@@ -75,9 +75,9 @@ function transform(fileInfo, api, options) {
 
     // Add FeatureFlags import if it doesn't exist
     if (!hasFeatureFlagsImport) {
-      // Find all imports from '@carbon/react'
+      // Find all imports from '@carbon/feature-flags'
       const carbonImports = root.find(j.ImportDeclaration, {
-        source: { value: '@carbon/react' },
+        source: { value: '@carbon/feature-flags' },
       });
 
       if (carbonImports.length) {
@@ -92,7 +92,7 @@ function transform(fileInfo, api, options) {
         const firstImport = root.find(j.ImportDeclaration).at(0);
         const featureFlagsImport = j.importDeclaration(
           [j.importSpecifier(j.identifier('FeatureFlags'))],
-          j.literal('@carbon/react')
+          j.literal('@carbon/feature-flags')
         );
 
         if (firstImport.length) {

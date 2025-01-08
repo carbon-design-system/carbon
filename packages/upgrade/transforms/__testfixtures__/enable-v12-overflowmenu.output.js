@@ -1,5 +1,6 @@
 import React from 'react';
-import { OverflowMenu, Button, FeatureFlags } from '@carbon/react';
+import { OverflowMenu, Button} from '@carbon/react';
+import { FeatureFlags } from '@carbon/feature-flags';
 
 function TestComponent() {
   return (

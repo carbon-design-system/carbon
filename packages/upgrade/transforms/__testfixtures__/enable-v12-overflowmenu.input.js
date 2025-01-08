@@ -1,6 +1,6 @@
 // Input: enable-v12-overflowmenu.input.js
 import React from 'react';
-import { OverflowMenu, Button, FeatureFlags } from '@carbon/react';
+import { OverflowMenu, Button } from '@carbon/react';
 
 function TestComponent() {
   return (
