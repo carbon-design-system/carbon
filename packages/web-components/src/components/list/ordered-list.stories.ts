@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,6 +25,15 @@ const controls = {
     control: 'boolean',
     description:
       'Specify whether this ordered list should use native list styles instead of custom counter.',
+  },
+  '--cds-ordered-list-counter-reset': {
+    control: 'text',
+    description:
+      'CSS custom property for counter-reset (e.g., "item 1"). Works when native is set to false.',
+    table: {
+      category: 'CSS Variables',
+      defaultValue: { summary: 'item' },
+    },
   },
 };
 
@@ -97,8 +106,12 @@ export const Nested = {
 export const Playground = {
   args: defaultArgs,
   argTypes: controls,
-  render: ({ isExpressive, native }) => html`
-    <cds-ordered-list ?isExpressive="${isExpressive}" ?native="${native}">
+  render: ({
+    isExpressive,
+    native,
+    '--cds-ordered-list-counter-reset': counterReset,
+  }) => html`
+    <cds-ordered-list style="${counterReset ? `--cds-ordered-list-counter-reset: ${counterReset};` : ''}" ?isExpressive="${isExpressive}" ?native="${native}">
       <cds-list-item>
         Ordered List level 1
         <cds-ordered-list ?isExpressive="${isExpressive}" ?native="${native}">

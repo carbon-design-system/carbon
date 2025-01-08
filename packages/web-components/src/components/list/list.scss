@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -34,15 +34,17 @@ $css--plex: true !default;
     counter-reset: item;
   }
 
-  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
+    counter-reset: var(--cds-ordered-list-counter-reset, item);
     ::slotted(#{$prefix}-list-item) {
-    position: relative;
+      position: relative;
 
-    &::before {
-      position: absolute;
-      content: counter(item) '.';
-      counter-increment: item;
-      inset-inline-start: rem(-24px);
+      &::before {
+        position: absolute;
+        content: counter(item) '.';
+        counter-increment: item;
+        inset-inline-start: rem(-24px);
+      }
     }
   }
 }
