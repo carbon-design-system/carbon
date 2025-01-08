@@ -115,12 +115,6 @@
   }
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus:has(
-      .#{$prefix}--combo-box
-    ) {
-    outline: none;
-  }
-
-  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus:has(
       .#{$prefix}--list-box--expanded.#{$prefix}--multi-select--selected
     ) {
     outline-width: convert.to-rem(1px);
