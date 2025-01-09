@@ -196,7 +196,9 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
         onClick={composeEventHandlers([onClick, handleClick])}
         renderIcon={iconOnlyImage ? null : ButtonImageElement} // avoid doubling the icon.
       >
-        {iconOnlyImage ?? children}
+        {/* // TODO: SHOULD THIS BE CHANGED? */}
+        {iconOnlyImage}
+        {children}
       </IconButton>
     );
   }
