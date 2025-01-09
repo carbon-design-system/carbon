@@ -179,7 +179,6 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     const eventContainer = (event.target as HTMLElement).id;
     const { key, shiftKey } = event;
     if (!this.disabled) {
-      console.log(key, 'key');
       if (key in THUMB_DIRECTION) {
         const {
           max: rawMax,
@@ -498,6 +497,13 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   @HostListener('eventChangeInput')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleChangeInput = (event: CustomEvent) => {
+    const input = event.target as HTMLElement;
+    this.isValid =
+      input.tagName === 'CDS-SLIDER-INPUT'
+        ? this._getInputValidity(event.target as HTMLInputElement)
+        : this.isValid;
+    const inputElement = input.shadowRoot?.querySelector('input');
+    this.warn = this._getInputWarnigState(inputElement);
     const eventContainer = (event.target as HTMLElement).id;
     const { detail } = event;
     const { intermediate, value } = detail;
@@ -674,14 +680,27 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     if (this.invalid) {
       return false;
     }
-
+    if (input?.invalid) {
+      return false;
+    }
     if (
       input?.valueAsNumber > Number(this.max) ||
       input?.valueAsNumber < Number(this.min)
     ) {
+      this.warn = true;
       return false;
     }
     return true;
+  }
+
+  _getInputWarnigState(input) {
+    if (
+      input?.valueAsNumber > Number(input.max) ||
+      input?.valueAsNumber < Number(input.min)
+    ) {
+      return true;
+    }
+    return false;
   }
 
   connectedCallback() {
@@ -703,6 +722,8 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   }
 
   shouldUpdate(changedProperties) {
+    console.log(this.isValid, 'this.isValid');
+    console.log(this.invalid, 'this.invalid');
     const inputs = this.querySelectorAll(
       (this.constructor as typeof CDSSlider).selectorInput
     ) as NodeListOf<CDSSliderInput>;
@@ -751,19 +772,23 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           changedProperties.has('readonly')
         ) {
           const innerInput = input?.shadowRoot?.querySelector('input');
-
           this.isValid = this._getInputValidity(innerInput);
-
           if (!this.readonly && !this.isValid) {
             input.invalid = true;
           } else {
             input.invalid = false;
           }
-
           if (!this.readonly && !this.invalid && this.warn && this.isValid) {
             input.warn = true;
           } else {
             input.warn = false;
+          }
+
+          if (!this.isValid) {
+            this.invalidText = 'Invalid';
+          }
+          if (this.warn) {
+            this.warnText = 'Warning you!';
           }
         }
       }
@@ -796,7 +821,6 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       _startDrag: startDrag,
       _endDrag: endDrag,
     } = this;
-
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--label--disabled`]: disabled,

@@ -48,12 +48,17 @@ class CDSSliderInput extends FocusMixin(LitElement) {
     const min = Number(this.min);
     const max = Number(this.max);
     const newValue = Number((target as HTMLInputElement).value);
-    this.value =
-      newValue >= min && newValue <= max
-        ? newValue
-        : newValue < min
-          ? min
-          : max;
+
+    if (newValue >= min && newValue <= max) {
+      this.value = newValue;
+    } else if (!(target as HTMLInputElement).value) {
+      this.invalid = !!(target as HTMLInputElement);
+      this.warn = !(target as HTMLInputElement);
+    } else {
+      this.value = newValue < min ? min : max;
+      this.warn = !!(target as HTMLInputElement);
+      this.invalid = !(target as HTMLInputElement);
+    }
     this.dispatchEvent(
       new CustomEvent((this.constructor as typeof CDSSliderInput).eventChange, {
         bubbles: true,
@@ -69,21 +74,25 @@ class CDSSliderInput extends FocusMixin(LitElement) {
    * Handles `input` event to fire a normalized custom event.
    */
   private _handleInput({ target }: Event) {
-    this.value = Number((target as HTMLInputElement).value);
-    if (this.value >= Number(this.min) && this.value <= Number(this.max)) {
-      this.dispatchEvent(
-        new CustomEvent(
-          (this.constructor as typeof CDSSliderInput).eventChange,
-          {
-            bubbles: true,
-            composed: true,
-            detail: {
-              value: this.value,
-              intermediate: true,
-            },
-          }
-        )
-      );
+    if ((target as HTMLInputElement).value) {
+      this.value = Number((target as HTMLInputElement).value);
+      this.invalid = false;
+      if (this.value >= Number(this.min) && this.value <= Number(this.max)) {
+        this.warn = false;
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSSliderInput).eventChange,
+            {
+              bubbles: true,
+              composed: true,
+              detail: {
+                value: this.value,
+                intermediate: true,
+              },
+            }
+          )
+        );
+      }
     }
   }
 
@@ -164,6 +173,10 @@ class CDSSliderInput extends FocusMixin(LitElement) {
    */
   @property({ type: Boolean, reflect: true })
   readonly = false;
+
+  static properties = {
+    invalidActive: { type: Boolean },
+  };
 
   render() {
     const {
