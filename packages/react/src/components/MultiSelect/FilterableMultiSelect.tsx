@@ -610,6 +610,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       case InputKeyDownArrowDown:
         if (InputKeyDownArrowDown === type && !isOpen) {
           setIsOpen(true);
+          return {
+            ...changes,
+            highlightedIndex: 0,
+          };
         }
         if (highlightedIndex > -1) {
           const itemArray = document.querySelectorAll(
