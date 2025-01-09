@@ -25,7 +25,7 @@ test.describe('@avt TextArea', () => {
   test('@avt-advanced-states invalid', async ({ page }) => {
     await visitStory(page, {
       component: 'TextArea',
-      id: 'components-textarea--playground',
+      id: 'components-textarea--default',
       globals: {
         theme: 'white',
       },
@@ -39,7 +39,7 @@ test.describe('@avt TextArea', () => {
   test('@avt-advanced-states warn', async ({ page }) => {
     await visitStory(page, {
       component: 'TextArea',
-      id: 'components-textarea--playground',
+      id: 'components-textarea--default',
       globals: {
         theme: 'white',
       },
@@ -64,7 +64,7 @@ test.describe('@avt TextArea', () => {
   test('@avt-keyboard-nav TextArea keyboard counter', async ({ page }) => {
     await visitStory(page, {
       component: 'TextArea',
-      id: 'components-textarea--playground',
+      id: 'components-textarea--default',
       globals: {
         theme: 'white',
       },

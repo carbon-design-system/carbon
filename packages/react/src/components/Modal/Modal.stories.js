@@ -44,294 +44,13 @@ export default {
   },
 };
 
-export const Default = () => {
-  const [open, setOpen] = useState(true);
-  const [openPopover, setOpenPopover] = useState(false);
-  const menuTargetref = useRef(null);
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Launch modal</Button>
-      <Modal
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        modalHeading="Add a custom domain"
-        modalLabel="Account resources"
-        primaryButtonText="Add"
-        secondaryButtonText="Cancel">
-        <p style={{ marginBottom: '1rem' }}>
-          Custom domains direct requests for your apps in this Cloud Foundry
-          organization to a URL that you own. A custom domain can be a shared
-          domain, a shared subdomain, or a shared domain and host.
-        </p>
-        <Popover open={openPopover} autoAlign>
-          <div className="playground-trigger">
-            <CheckboxIcon
-              onClick={() => {
-                setOpenPopover(!openPopover);
-              }}
-            />
-          </div>
-          <PopoverContent className="p-3">
-            <div>
-              <p className="popover-title">This popover uses autoAlign</p>
-              <p className="popover-details">
-                Scroll the container up, down, left or right to observe how the
-                popover will automatically change its position in attempt to
-                stay within the viewport. This works on initial render in
-                addition to on scroll.
-              </p>
-            </div>
-          </PopoverContent>
-        </Popover>
-        <TextInput
-          data-modal-primary-focus
-          id="text-input-1"
-          labelText="Domain name"
-          placeholder="e.g. github.com"
-          style={{ marginBottom: '1rem' }}
-        />
-        <Select id="select-1" defaultValue="us-south" labelText="Region">
-          <SelectItem value="us-south" text="US South" />
-          <SelectItem value="us-east" text="US East" />
-        </Select>
-        <Dropdown
-          id="drop"
-          label="Dropdown"
-          titleText="Dropdown"
-          items={[
-            { id: 'one', label: 'one', name: 'one' },
-            { id: 'two', label: 'two', name: 'two' },
-          ]}
-        />
-        <br />
-        <div ref={menuTargetref}>
-          <MenuButton label="Actions" menuTarget={menuTargetref.current}>
-            <MenuItem label="First action" />
-            <MenuItem label="Second action" />
-            <MenuItem label="Third action" />
-            <MenuItem label="Danger action" kind="danger" />
-          </MenuButton>
-        </div>
-        <br />
-        <MultiSelect
-          id="test"
-          label="Multiselect"
-          titleText="Multiselect"
-          items={[
-            {
-              id: 'downshift-1-item-0',
-              text: 'Option 1',
-            },
-            {
-              id: 'downshift-1-item-1',
-              text: 'Option 2',
-            },
-          ]}
-          itemToString={(item) => (item ? item.text : '')}
-        />
-      </Modal>
-    </>
-  );
-};
-
-export const FullWidth = () => {
-  const [open, setOpen] = useState(true);
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Launch modal</Button>
-      <Modal
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        isFullWidth
-        modalHeading="Full Width Modal"
-        modalLabel="An example of a modal with no padding"
-        primaryButtonText="Add"
-        secondaryButtonText="Cancel">
-        <StructuredListWrapper>
-          <StructuredListHead>
-            <StructuredListRow head>
-              <StructuredListCell head noWrap>
-                Column A
-              </StructuredListCell>
-              <StructuredListCell head noWrap>
-                Column B
-              </StructuredListCell>
-              <StructuredListCell head noWrap>
-                Column C
-              </StructuredListCell>
-            </StructuredListRow>
-          </StructuredListHead>
-          <StructuredListBody>
-            <StructuredListRow>
-              <StructuredListCell noWrap>Row 1</StructuredListCell>
-              <StructuredListCell>Row 1</StructuredListCell>
-              <StructuredListCell>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
-                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
-                Pellentesque vulputate nisl a porttitor interdum.
-              </StructuredListCell>
-            </StructuredListRow>
-            <StructuredListRow>
-              <StructuredListCell noWrap>Row 2</StructuredListCell>
-              <StructuredListCell>Row 2</StructuredListCell>
-              <StructuredListCell>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
-                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
-                Pellentesque vulputate nisl a porttitor interdum.
-              </StructuredListCell>
-            </StructuredListRow>
-            <StructuredListRow>
-              <StructuredListCell noWrap>Row 3</StructuredListCell>
-              <StructuredListCell>Row 3</StructuredListCell>
-              <StructuredListCell>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
-                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
-                Pellentesque vulputate nisl a porttitor interdum.
-              </StructuredListCell>
-            </StructuredListRow>
-          </StructuredListBody>
-        </StructuredListWrapper>
-      </Modal>
-    </>
-  );
-};
-
-export const DangerModal = () => {
-  const [open, setOpen] = useState(true);
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Launch modal</Button>
-      <Modal
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        danger
-        modalHeading="Are you sure you want to delete this custom domain?"
-        modalLabel="Account resources"
-        primaryButtonText="Delete"
-        secondaryButtonText="Cancel"
-      />
-    </>
-  );
-};
-
 const buttons = {
   'One (1)': '1',
   'Two (2)': '2',
   'Three (3)': '3',
 };
-const modalFooter = (numberOfButtons) => {
-  const secondaryButtons = () => {
-    switch (numberOfButtons) {
-      case '1':
-        return {
-          secondaryButtons: [],
-        };
-      case '2':
-        return {
-          secondaryButtonText: 'Cancel',
-        };
-      case '3':
-        return {
-          secondaryButtons: [
-            {
-              buttonText: 'Keep both',
-              onClick: action('onClick'),
-            },
-            {
-              buttonText: 'Rename',
-              onClick: action('onClick'),
-            },
-          ],
-        };
-      default:
-        return null;
-    }
-  };
-  return {
-    ...secondaryButtons(),
-  };
-};
 
-export const WithScrollingContent = () => {
-  const [open, setOpen] = useState(true);
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Launch modal</Button>
-      <Modal
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        hasScrollingContent
-        modalHeading="Add a custom domain"
-        modalLabel="Account resources"
-        primaryButtonText="Add"
-        secondaryButtonText="Cancel">
-        <p style={{ marginBottom: '1rem' }}>
-          Custom domains direct requests for your apps in this Cloud Foundry
-          organization to a URL that you own. A custom domain can be a shared
-          domain, a shared subdomain, or a shared domain and host.
-        </p>
-        <p style={{ marginBottom: '1rem' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu
-          nibh odio. Nunc a consequat est, id porttitor sapien. Proin vitae leo
-          vitae orci tincidunt auctor eget eget libero. Ut tincidunt ultricies
-          fringilla. Aliquam erat volutpat. Aenean arcu odio, elementum vel
-          vehicula vitae, porttitor ac lorem. Sed viverra elit ac risus
-          tincidunt fermentum. Ut sollicitudin nibh id risus ornare ornare.
-          Etiam gravida orci ut lectus dictum, quis ultricies felis mollis.
-          Mauris nec commodo est, nec faucibus nibh. Nunc commodo ante quis
-          pretium consectetur. Ut ac nisl vitae mi mattis vulputate a at elit.
-          Nullam porttitor ex eget mi feugiat mattis. Nunc non sodales magna.
-          Proin ornare tellus quis hendrerit egestas. Donec pharetra leo nec
-          molestie sollicitudin.{' '}
-        </p>
-        <TextInput
-          data-modal-primary-focus
-          id="text-input-1"
-          labelText="Domain name"
-          placeholder="e.g. github.com"
-          style={{ marginBottom: '1rem' }}
-        />
-        <div style={{ marginBottom: '1rem' }}>
-          <Select id="select-1" defaultValue="us-south" labelText="Region">
-            <SelectItem value="us-south" text="US South" />
-            <SelectItem value="us-east" text="US East" />
-          </Select>
-        </div>
-        <Dropdown
-          id="drop"
-          label="Dropdown"
-          titleText="Dropdown"
-          items={[
-            { id: 'one', label: 'one', name: 'one' },
-            { id: 'two', label: 'two', name: 'two' },
-          ]}
-          style={{ marginBottom: '1rem' }}
-        />
-        <MultiSelect
-          id="test"
-          label="Multiselect"
-          titleText="Multiselect"
-          items={[
-            {
-              id: 'downshift-1-item-0',
-              text: 'Option 1',
-            },
-            {
-              id: 'downshift-1-item-1',
-              text: 'Option 2',
-            },
-          ]}
-          itemToString={(item) => (item ? item.text : '')}
-        />
-      </Modal>
-    </>
-  );
-};
-
-export const Playground = ({ numberOfButtons, ...args }) => {
+export const Default = ({ numberOfButtons, ...args }) => {
   const [open, setOpen] = useState(true);
   const [popoverOpen, setPopoverOpen] = useState(false);
   return (
@@ -465,7 +184,7 @@ export const Playground = ({ numberOfButtons, ...args }) => {
         </p>
 
         <Popover align={'bottom-right'} autoAlign open={popoverOpen}>
-          <div className="playground-trigger">
+          <div className="default-trigger">
             <CheckboxIcon
               onClick={() => {
                 setPopoverOpen(!popoverOpen);
@@ -555,11 +274,11 @@ export const Playground = ({ numberOfButtons, ...args }) => {
   );
 };
 
-Playground.args = {
+Default.args = {
   numberOfButtons: 'Two (2)',
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   children: {
     table: {
       disable: true,
@@ -626,6 +345,198 @@ Playground.argTypes = {
       disable: true,
     },
   },
+};
+
+export const FullWidth = () => {
+  const [open, setOpen] = useState(true);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
+      <Modal
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        isFullWidth
+        modalHeading="Full Width Modal"
+        modalLabel="An example of a modal with no padding"
+        primaryButtonText="Add"
+        secondaryButtonText="Cancel">
+        <StructuredListWrapper>
+          <StructuredListHead>
+            <StructuredListRow head>
+              <StructuredListCell head noWrap>
+                Column A
+              </StructuredListCell>
+              <StructuredListCell head noWrap>
+                Column B
+              </StructuredListCell>
+              <StructuredListCell head noWrap>
+                Column C
+              </StructuredListCell>
+            </StructuredListRow>
+          </StructuredListHead>
+          <StructuredListBody>
+            <StructuredListRow>
+              <StructuredListCell noWrap>Row 1</StructuredListCell>
+              <StructuredListCell>Row 1</StructuredListCell>
+              <StructuredListCell>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+                Pellentesque vulputate nisl a porttitor interdum.
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell noWrap>Row 2</StructuredListCell>
+              <StructuredListCell>Row 2</StructuredListCell>
+              <StructuredListCell>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+                Pellentesque vulputate nisl a porttitor interdum.
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell noWrap>Row 3</StructuredListCell>
+              <StructuredListCell>Row 3</StructuredListCell>
+              <StructuredListCell>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+                Pellentesque vulputate nisl a porttitor interdum.
+              </StructuredListCell>
+            </StructuredListRow>
+          </StructuredListBody>
+        </StructuredListWrapper>
+      </Modal>
+    </>
+  );
+};
+
+export const DangerModal = () => {
+  const [open, setOpen] = useState(true);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
+      <Modal
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        danger
+        modalHeading="Are you sure you want to delete this custom domain?"
+        modalLabel="Account resources"
+        primaryButtonText="Delete"
+        secondaryButtonText="Cancel"
+      />
+    </>
+  );
+};
+
+const modalFooter = (numberOfButtons) => {
+  const secondaryButtons = () => {
+    switch (numberOfButtons) {
+      case '1':
+        return {
+          secondaryButtons: [],
+        };
+      case '2':
+        return {
+          secondaryButtonText: 'Cancel',
+        };
+      case '3':
+        return {
+          secondaryButtons: [
+            {
+              buttonText: 'Keep both',
+              onClick: action('onClick'),
+            },
+            {
+              buttonText: 'Rename',
+              onClick: action('onClick'),
+            },
+          ],
+        };
+      default:
+        return null;
+    }
+  };
+  return {
+    ...secondaryButtons(),
+  };
+};
+
+export const WithScrollingContent = () => {
+  const [open, setOpen] = useState(true);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
+      <Modal
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        hasScrollingContent
+        modalHeading="Add a custom domain"
+        modalLabel="Account resources"
+        primaryButtonText="Add"
+        secondaryButtonText="Cancel">
+        <p style={{ marginBottom: '1rem' }}>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <p style={{ marginBottom: '1rem' }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu
+          nibh odio. Nunc a consequat est, id porttitor sapien. Proin vitae leo
+          vitae orci tincidunt auctor eget eget libero. Ut tincidunt ultricies
+          fringilla. Aliquam erat volutpat. Aenean arcu odio, elementum vel
+          vehicula vitae, porttitor ac lorem. Sed viverra elit ac risus
+          tincidunt fermentum. Ut sollicitudin nibh id risus ornare ornare.
+          Etiam gravida orci ut lectus dictum, quis ultricies felis mollis.
+          Mauris nec commodo est, nec faucibus nibh. Nunc commodo ante quis
+          pretium consectetur. Ut ac nisl vitae mi mattis vulputate a at elit.
+          Nullam porttitor ex eget mi feugiat mattis. Nunc non sodales magna.
+          Proin ornare tellus quis hendrerit egestas. Donec pharetra leo nec
+          molestie sollicitudin.{' '}
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+          placeholder="e.g. github.com"
+          style={{ marginBottom: '1rem' }}
+        />
+        <div style={{ marginBottom: '1rem' }}>
+          <Select id="select-1" defaultValue="us-south" labelText="Region">
+            <SelectItem value="us-south" text="US South" />
+            <SelectItem value="us-east" text="US East" />
+          </Select>
+        </div>
+        <Dropdown
+          id="drop"
+          label="Dropdown"
+          titleText="Dropdown"
+          items={[
+            { id: 'one', label: 'one', name: 'one' },
+            { id: 'two', label: 'two', name: 'two' },
+          ]}
+          style={{ marginBottom: '1rem' }}
+        />
+        <MultiSelect
+          id="test"
+          label="Multiselect"
+          titleText="Multiselect"
+          items={[
+            {
+              id: 'downshift-1-item-0',
+              text: 'Option 1',
+            },
+            {
+              id: 'downshift-1-item-1',
+              text: 'Option 2',
+            },
+          ]}
+          itemToString={(item) => (item ? item.text : '')}
+        />
+      </Modal>
+    </>
+  );
 };
 
 export const WithStateManager = () => {

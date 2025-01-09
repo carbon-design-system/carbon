@@ -25,9 +25,9 @@ export default {
   },
 };
 
-export const Default = () => (
-  <Callout title="Notification title" subtitle="Subtitle text goes here" />
-);
+// export const Default = () => (
+//   <Callout title="Notification title" subtitle="Subtitle text goes here" />
+// );
 
 export const WithInteractiveElements = () => (
   <Callout
@@ -44,9 +44,15 @@ export const WithInteractiveElements = () => (
   </Callout>
 );
 
-export const Playground = (args) => <Callout {...args} />;
+export const Default = (args) => (
+  <Callout
+    title="Notification title"
+    subtitle="Subtitle text goes here"
+    {...args}
+  />
+);
 
-Playground.argTypes = {
+Default.argTypes = {
   children: {
     table: {
       disable: true,
@@ -61,8 +67,4 @@ Playground.argTypes = {
     options: ['info', 'warning'],
     control: { type: 'select' },
   },
-};
-Playground.args = {
-  title: 'Notification title',
-  subtitle: 'Subtitle text goes here',
 };

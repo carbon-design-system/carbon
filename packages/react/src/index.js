@@ -335,3 +335,5 @@ export {
   ChatButton as unstable__ChatButton,
   ChatButtonSkeleton as unstable__ChatButtonSkeleton,
 } from './components/ChatButton';
+
+export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';

@@ -36,15 +36,49 @@ export default {
   ],
 };
 
-export const Default = () => {
-  return (
-    <Grid>
-      <Column sm={4} />
-      <Column sm={4} />
-      <Column sm={4} />
-      <Column sm={4} />
-    </Grid>
-  );
+export const Default = (args) => (
+  <Grid {...args}>
+    <Column sm={4} />
+    <Column sm={4} />
+    <Column sm={4} />
+    <Column sm={4} />
+  </Grid>
+);
+
+Default.args = {
+  as: 'div',
+  fullWidth: false,
+  narrow: false,
+  condensed: false,
+};
+
+Default.argTypes = {
+  as: {
+    control: {
+      type: 'text',
+    },
+  },
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  fullWidth: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  narrow: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  condensed: {
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 export const Narrow = () => {
@@ -320,48 +354,3 @@ export const Offset = () => (
     />
   </Grid>
 );
-
-export const Playground = (args) => (
-  <Grid {...args}>
-    <Column sm={4} />
-    <Column sm={4} />
-    <Column sm={4} />
-    <Column sm={4} />
-  </Grid>
-);
-
-Playground.args = {
-  as: 'div',
-  fullWidth: false,
-  narrow: false,
-  condensed: false,
-};
-
-Playground.argTypes = {
-  as: {
-    control: {
-      type: 'text',
-    },
-  },
-  children: {
-    control: false,
-  },
-  className: {
-    control: false,
-  },
-  fullWidth: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  narrow: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  condensed: {
-    control: {
-      type: 'boolean',
-    },
-  },
-};
