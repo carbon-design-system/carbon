@@ -218,3 +218,37 @@ export type { ButtonSkeletonProps } from './components/Button/Button.Skeleton';
 // chat button
 export type { ChatButtonProps } from './components/ChatButton/ChatButton';
 export type { ChatButtonSkeletonProps } from './components/ChatButton/ChatButton.Skeleton';
+
+//checkbox
+export type { CheckboxProps } from './components/Checkbox/Checkbox';
+export type { CheckboxGroupProps } from './components/CheckboxGroup/CheckboxGroup';
+
+//class prefix
+export type { ClassPrefixProps } from './components/ClassPrefix/index';
+
+//code snippet
+export type { CodeSnippetProps } from './components/CodeSnippet/CodeSnippet';
+export type { CodeSnippetSkeletonProps } from './components/CodeSnippet/CodeSnippet.Skeleton';
+
+//combobox
+export type { ComboBoxProps } from './components/ComboBox/ComboBox';
+
+//combo button
+export type { ComboButtonProps } from './components/ComboButton/index';
+
+//composed modal
+export type { ComposedModalProps } from './components/ComposedModal/ComposedModal';
+export type { ModalHeaderProps } from './components/ComposedModal/ModalHeader';
+export type { ModalFooterProps } from './components/ComposedModal/ModalFooter';
+
+//contained list
+export type { ContainedListProps } from './components/ContainedList/ContainedList';
+
+//content switcher
+export type { ContentSwitcherProps } from './components/ContentSwitcher/ContentSwitcher';
+
+//context menu
+export type { ContextMenuProps } from './components/ContextMenu/useContextMenu';
+
+//copy
+export type { CopyProps } from './components/Copy/Copy';
