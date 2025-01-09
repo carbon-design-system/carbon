@@ -346,7 +346,21 @@ class CDSSelect extends FormMixin(LitElement) {
       const { value, _placeholderItemValue: placeholderItemValue } = this;
       // Ensures setting the `value` after rendering child `<option>`s/`<optgroup>`s when there is a change in `value`,
       // given reflecting `value` requires child `<option>`s/`<optgroup>`s being there beforehand
-      this._selectNode.value = !value ? placeholderItemValue : value;
+
+      // Select the <option> with 'selector' attribute
+      const selectedOptions = this.shadowRoot?.querySelectorAll(
+        `.${prefix}--select-option[selected]`
+      );
+      const lastOption =
+        selectedOptions?.[selectedOptions?.length - 1]?.['value'];
+
+      if (value) {
+        this._selectNode.value = value;
+      } else if (lastOption) {
+        this._selectNode.value = lastOption;
+      } else {
+        this._selectNode.value = placeholderItemValue;
+      }
     }
 
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
@@ -443,8 +457,7 @@ class CDSSelect extends FormMixin(LitElement) {
                 disabled
                 hidden
                 class="${prefix}--select-option"
-                value="${placeholderItemValue}"
-                selected>
+                value="${placeholderItemValue}">
                 ${placeholder}
               </option>
             `}
