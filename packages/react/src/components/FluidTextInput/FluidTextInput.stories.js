@@ -25,14 +25,6 @@ export default {
   },
 };
 
-export const Default = () => (
-  <FluidTextInput
-    labelText="Label"
-    placeholder="Placeholder text"
-    id="input-1"
-  />
-);
-
 const ToggleTip = (
   <>
     <ToggletipLabel>Label</ToggletipLabel>
@@ -47,28 +39,14 @@ const ToggleTip = (
   </>
 );
 
-export const DefaultWithTooltip = () => (
-  <FluidTextInput labelText={ToggleTip} placeholder="Placeholder text" />
-);
-
-export const Skeleton = () => (
-  <div style={{ width: '300px' }}>
-    <FluidTextInputSkeleton
-      labelText="Label"
-      placeholder="Placeholder text"
-      id="input-1"
-    />
-  </div>
-);
-
-export const Playground = (args) => (
-  <div style={{ width: args.playgroundWidth }}>
+export const Default = (args) => (
+  <div style={{ width: args.defaultWidth }}>
     <FluidTextInput {...args} />
   </div>
 );
 
-Playground.args = {
-  playgroundWidth: 300,
+Default.args = {
+  defaultWidth: 300,
   className: 'test-class',
   placeholder: 'Placeholder text',
   invalid: false,
@@ -81,8 +59,8 @@ Playground.args = {
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
-Playground.argTypes = {
-  playgroundWidth: {
+Default.argTypes = {
+  defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
   className: {
@@ -141,3 +119,17 @@ Playground.argTypes = {
     },
   },
 };
+
+export const DefaultWithTooltip = () => (
+  <FluidTextInput labelText={ToggleTip} placeholder="Placeholder text" />
+);
+
+export const Skeleton = () => (
+  <div style={{ width: '300px' }}>
+    <FluidTextInputSkeleton
+      labelText="Label"
+      placeholder="Placeholder text"
+      id="input-1"
+    />
+  </div>
+);

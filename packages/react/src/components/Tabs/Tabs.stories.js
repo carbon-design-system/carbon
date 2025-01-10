@@ -64,38 +64,69 @@ export default {
   },
 };
 
-export const Default = () => (
-  <Tabs>
-    <TabList aria-label="List of tabs">
+export const Default = ({ dismissable, ...args }) => (
+  <Tabs dismissable={dismissable} onTabCloseRequest={() => {}}>
+    <TabList aria-label="List of tabs" {...args}>
       <Tab>Dashboard</Tab>
       <Tab>Monitoring</Tab>
       <Tab>Activity</Tab>
-      <Tab disabled>Settings</Tab>
+      <Tab>Settings</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>
-        <form style={{ margin: '2em' }}>
-          <legend className={`cds--label`}>Validation example</legend>
-          <Checkbox id="cb" labelText="Accept privacy policy" />
-          <Button
-            style={{ marginTop: '1rem', marginBottom: '1rem' }}
-            type="submit">
-            Submit
-          </Button>
-          <TextInput
-            type="text"
-            labelText="Text input label"
-            helperText="Optional help text"
-            id="text-input-1"
-          />
-        </form>
-      </TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
       <TabPanel>Tab Panel 3</TabPanel>
       <TabPanel>Tab Panel 4</TabPanel>
     </TabPanels>
   </Tabs>
 );
+
+Default.args = {
+  contained: false,
+  dismissable: false,
+  scrollDebounceWait: 200,
+};
+
+Default.argTypes = {
+  activation: {
+    control: { type: 'select' },
+    options: ['automatic', 'manual'],
+  },
+  contained: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  dismissable: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  iconSize: {
+    control: { type: 'select' },
+    options: ['default', 'lg'],
+  },
+  leftOverflowButtonProps: {
+    control: {
+      type: 'object',
+    },
+  },
+  rightOverflowButtonProps: {
+    control: {
+      type: 'object',
+    },
+  },
+  scrollDebounceWait: {
+    control: {
+      type: 'number',
+    },
+  },
+  scrollIntoView: {
+    control: {
+      type: 'boolean',
+    },
+  },
+};
 
 export const Dismissable = () => {
   const tabs = [
@@ -654,68 +685,4 @@ export const Skeleton = () => {
       <TabsSkeleton />
     </div>
   );
-};
-
-export const Playground = ({ dismissable, ...args }) => (
-  <Tabs dismissable={dismissable} onTabCloseRequest={() => {}}>
-    <TabList aria-label="List of tabs" {...args}>
-      <Tab>Dashboard</Tab>
-      <Tab>Monitoring</Tab>
-      <Tab>Activity</Tab>
-      <Tab>Settings</Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-    </TabPanels>
-  </Tabs>
-);
-
-Playground.args = {
-  contained: false,
-  dismissable: false,
-  scrollDebounceWait: 200,
-};
-
-Playground.argTypes = {
-  activation: {
-    control: { type: 'select' },
-    options: ['automatic', 'manual'],
-  },
-  contained: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  dismissable: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  iconSize: {
-    control: { type: 'select' },
-    options: ['default', 'lg'],
-  },
-  leftOverflowButtonProps: {
-    control: {
-      type: 'object',
-    },
-  },
-  rightOverflowButtonProps: {
-    control: {
-      type: 'object',
-    },
-  },
-  scrollDebounceWait: {
-    control: {
-      type: 'number',
-    },
-  },
-  scrollIntoView: {
-    control: {
-      type: 'boolean',
-    },
-  },
 };

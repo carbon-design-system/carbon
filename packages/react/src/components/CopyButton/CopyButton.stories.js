@@ -20,11 +20,9 @@ export default {
   },
 };
 
-export const Default = () => <CopyButton />;
+export const Default = (args) => <CopyButton {...args} />;
 
-export const Playground = (args) => <CopyButton {...args} />;
-
-Playground.argTypes = {
+Default.argTypes = {
   className: {
     table: {
       disable: true,

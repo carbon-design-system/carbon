@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import findLast from 'lodash.findlast';
 import { useEffect } from 'react';
 import {
   DOCUMENT_POSITION_BROAD_PRECEDING,
@@ -62,10 +61,9 @@ function wrapFocus({
       currentActiveNode === startTrapNode ||
       comparisonResult & DOCUMENT_POSITION_BROAD_PRECEDING
     ) {
-      const tabbable = findLast(
-        bodyNode.querySelectorAll(selectorTabbable),
-        (elem) => Boolean(elem.offsetParent)
-      );
+      const tabbable = [...bodyNode.querySelectorAll(selectorTabbable)]
+        .reverse()
+        .find((elem) => Boolean(elem.offsetParent));
       if (tabbable) {
         tabbable.focus();
       } else if (bodyNode !== oldActiveNode) {

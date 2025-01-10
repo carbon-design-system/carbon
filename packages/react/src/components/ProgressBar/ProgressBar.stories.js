@@ -15,16 +15,7 @@ export default {
   title: 'Components/ProgressBar',
   component: ProgressBar,
 };
-
-export const Default = () => (
-  <ProgressBar
-    label="Progress bar label"
-    helperText="Optional helper text"
-    value={75}
-  />
-);
-
-const PlaygroundStory = (args) => (
+const DefaultStory = (args) => (
   <ProgressBar
     label="Progress bar label"
     helperText="Optional helper text"
@@ -32,9 +23,9 @@ const PlaygroundStory = (args) => (
   />
 );
 
-export const Playground = PlaygroundStory.bind({});
+export const Default = DefaultStory.bind({});
 
-Playground.argTypes = {
+Default.argTypes = {
   className: {
     table: {
       disable: true,

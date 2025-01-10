@@ -7,7 +7,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import omit from 'lodash.omit';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
@@ -26,12 +25,18 @@ export interface TableRowProps extends ReactAttr<HTMLTableRowElement> {
 const TableRow = (props: TableRowProps) => {
   const prefix = usePrefix();
 
-  let rowHasSlug;
+  let rowHasAILabel;
   if (props?.children) {
     React.Children.toArray(props.children).map((child: any) => {
-      if (child.type?.displayName === 'TableSlugRow') {
-        if (child.props.slug) {
-          rowHasSlug = true;
+      if (
+        child.type?.displayName === 'TableSlugRow' ||
+        child.type?.displayName === 'TableDecoratorRow'
+      ) {
+        if (
+          child.props.slug ||
+          child.props.decorator?.type.displayName === 'AILabel'
+        ) {
+          rowHasAILabel = true;
         }
       }
     });
@@ -40,20 +45,24 @@ const TableRow = (props: TableRowProps) => {
   // only useful in `TableExpandRow`
   const className = cx(props.className, {
     [`${prefix}--data-table--selected`]: props.isSelected,
-    [`${prefix}--data-table--slug-row`]: rowHasSlug,
+    [`${prefix}--data-table--slug-row ${prefix}--data-table--ai-label-row`]:
+      rowHasAILabel,
   });
 
-  const cleanProps = {
-    ...omit(props, [
-      'ariaLabel',
-      'aria-label',
-      'aria-controls',
-      'onExpand',
-      'isExpanded',
-      'isSelected',
-    ]),
-    className: className || undefined,
-  };
+  const {
+    ariaLabel,
+    'aria-label': ariaLabelAlt,
+    'aria-controls': ariaControls,
+    onExpand,
+    isExpanded,
+    isSelected,
+    ...cleanProps
+  } = props as any;
+
+  if (className) {
+    cleanProps.className = className;
+  }
+
   return <tr {...cleanProps} />;
 };
 
