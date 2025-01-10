@@ -551,6 +551,9 @@ const Dropdown = React.forwardRef(
         if (['ArrowDown'].includes(evt.key)) {
           setIsFocused(false);
         }
+        if (['Enter'].includes(evt.key) && !selectedItem && !isOpen) {
+          setIsFocused(true);
+        }
         if (toggleButtonProps.onKeyDown) {
           toggleButtonProps.onKeyDown(evt);
         }
