@@ -29,22 +29,12 @@
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--combo-box
     .#{$prefix}--text-input {
-    z-index: 9101;
     overflow: hidden;
     padding-block: convert.to-rem(33px) convert.to-rem(13px);
     padding-inline: $spacing-05 $spacing-10;
     text-overflow: ellipsis;
     transition: none;
     white-space: nowrap;
-  }
-
-  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus
-    .#{$prefix}--combo-box.#{$prefix}--list-box--expanded:has(
-      input[aria-activedescendant]:not([aria-activedescendant=''])
-    )
-    .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
-    outline-offset: convert.to-rem(-1px);
-    outline-width: convert.to-rem(1px);
   }
 
   .#{$prefix}--list-box__wrapper--fluid

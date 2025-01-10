@@ -126,12 +126,6 @@
     outline-offset: 0;
   }
 
-  .#{$prefix}--list-box__wrapper--fluid:not(.#{$prefix}--list-box--up)
-    .#{$prefix}--list-box__menu {
-    inset-block-start: calc(100%);
-    margin-block-start: convert.to-rem(2px);
-  }
-
   // Invalid / Warning styles
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid:not(
       .#{$prefix}--list-box__wrapper--fluid--focus

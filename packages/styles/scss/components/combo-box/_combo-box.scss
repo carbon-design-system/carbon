@@ -19,6 +19,13 @@
     background-color: $field;
   }
 
+  .#{$prefix}--combo-box
+    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted {
+    border: 2px solid $focus;
+    border-block-start: 1px solid $focus;
+    outline: 2px solid transparent;
+  }
+
   // V11: Possibly deprecate
   .#{$prefix}--combo-box.#{$prefix}--list-box--light:hover {
     background-color: $field-02;

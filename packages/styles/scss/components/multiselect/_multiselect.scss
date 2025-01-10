@@ -148,6 +148,15 @@
   }
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted,
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted {
+    border: 2px solid $focus;
+    border-block-start: 1px solid $focus;
+    outline: 2px solid transparent;
+  }
+
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--selected
     .#{$prefix}--text-input,
   .#{$prefix}--multi-select.#{$prefix}--multi-select--selected
     .#{$prefix}--list-box__field {

@@ -553,7 +553,6 @@ const MultiSelect = React.forwardRef(
           inline && invalid,
         [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
         [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
-        [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
         [`${prefix}--list-box__wrapper--slug`]: slug,
         [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
