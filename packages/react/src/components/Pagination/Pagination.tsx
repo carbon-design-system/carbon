@@ -388,7 +388,7 @@ const Pagination = React.forwardRef(function Pagination(
             <Select
               id={`${prefix}-pagination-select-${inputId}-right`}
               className={`${prefix}--select__page-number`}
-              labelText={`Page number, of ${totalPages} pages`}
+              labelText={`Page of ${totalPages} pages`}
               inline
               hideLabel
               onChange={handlePageInputChange}

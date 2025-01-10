@@ -439,7 +439,7 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
    * The value of the `<input>`.
    * @deprecated
    */
-  value: string | number;
+  value?: string | number;
 }
 
 export const SelectableTile = React.forwardRef<

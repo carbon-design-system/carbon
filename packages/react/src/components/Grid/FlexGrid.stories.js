@@ -297,7 +297,7 @@ export const MixedGutterModes = () => (
   </FlexGrid>
 );
 
-export const Playground = (args) => (
+export const Default = (args) => (
   <FlexGrid {...args}>
     <Row>
       <Column>
@@ -316,14 +316,14 @@ export const Playground = (args) => (
   </FlexGrid>
 );
 
-Playground.args = {
+Default.args = {
   as: 'div',
   fullWidth: false,
   narrow: false,
   condensed: false,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   as: {
     control: {
       type: 'text',

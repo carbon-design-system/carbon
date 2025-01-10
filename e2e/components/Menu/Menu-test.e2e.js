@@ -17,7 +17,7 @@ test.describe('Menu', () => {
       test('menu @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Menu',
-          id: 'components-menu--playground',
+          id: 'components-menu--default',
           theme,
         });
       });

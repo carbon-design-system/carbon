@@ -7,11 +7,11 @@
 
 import './story.scss';
 
+import { Help } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
-import { SquareOutline } from '@carbon/icons-react';
 import { Tooltip } from './';
-import Button from './../Button';
 import mdx from './Tooltip.mdx';
+import Button from '../Button';
 
 export default {
   title: 'Components/Tooltip',
@@ -55,10 +55,47 @@ export const Default = () => {
   const label =
     'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
-    <Tooltip align="bottom" label={label}>
-      <Button>This button has a tooltip</Button>
+    <Tooltip align="bottom" label={label} closeOnActivation={false}>
+      <button className="sb-tooltip-trigger" type="button">
+        <Help />
+      </button>
     </Tooltip>
   );
+};
+
+Default.argTypes = {
+  align: {
+    options: [
+      'top',
+      'top-left',
+      'top-right',
+
+      'bottom',
+      'bottom-left',
+      'bottom-right',
+
+      'left',
+      'left-bottom',
+      'left-top',
+
+      'right',
+      'right-bottom',
+      'right-top',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
+  label: {
+    control: {
+      type: 'text',
+    },
+  },
+  description: {
+    control: {
+      type: 'text',
+    },
+  },
 };
 
 export const Alignment = () => {
@@ -99,74 +136,4 @@ export const Duration = () => {
       <Button>This button has a tooltip</Button>
     </Tooltip>
   );
-};
-
-const PlaygroundStory = (props) => {
-  const {
-    align,
-    closeOnActivation,
-    defaultOpen,
-    description,
-    enterDelayMs,
-    label,
-    leaveDelayMs,
-  } = props;
-  return (
-    <Tooltip
-      align={align}
-      defaultOpen={defaultOpen}
-      description={description}
-      enterDelayMs={enterDelayMs}
-      label={label}
-      leaveDelayMs={leaveDelayMs}
-      closeOnActivation={closeOnActivation}>
-      <button type="button">
-        <SquareOutline />
-      </button>
-    </Tooltip>
-  );
-};
-
-export const Playground = PlaygroundStory.bind({});
-
-Playground.args = {
-  align: 'bottom',
-  closeOnActivation: false,
-  defaultOpen: false,
-  label: 'Custom label',
-};
-
-Playground.argTypes = {
-  align: {
-    options: [
-      'top',
-      'top-left',
-      'top-right',
-
-      'bottom',
-      'bottom-left',
-      'bottom-right',
-
-      'left',
-      'left-bottom',
-      'left-top',
-
-      'right',
-      'right-bottom',
-      'right-top',
-    ],
-    control: {
-      type: 'select',
-    },
-  },
-  label: {
-    control: {
-      type: 'text',
-    },
-  },
-  description: {
-    control: {
-      type: 'text',
-    },
-  },
 };

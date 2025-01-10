@@ -78,6 +78,11 @@ interface IconButtonProps
   autoAlign?: boolean;
 
   /**
+   * Optionally specify an href for your IconButton to become an `<a>` element
+   */
+  href?: string;
+
+  /**
    * Provide an icon or asset to be rendered inside of the IconButton
    */
   children?: ReactNode;
@@ -252,6 +257,11 @@ IconButton.propTypes = {
    * **Experimental**: Will attempt to automatically align the tooltip
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * Optionally specify an href for your IconButton to become an `<a>` element
+   */
+  href: PropTypes.string,
 
   /**
    * Provide an icon or asset to be rendered inside of the IconButton

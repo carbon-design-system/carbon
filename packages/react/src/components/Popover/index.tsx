@@ -28,6 +28,7 @@ import {
   autoUpdate,
   arrow,
   offset,
+  type Boundary,
 } from '@floating-ui/react';
 import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -103,6 +104,11 @@ interface PopoverBaseProps {
   autoAlign?: boolean;
 
   /**
+   * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlignBoundary?: Boundary;
+
+  /**
    * Specify whether a caret should be rendered
    */
   caret?: boolean;
@@ -165,6 +171,7 @@ export const Popover: PopoverComponent = React.forwardRef(
       align: initialAlign = isTabTip ? 'bottom-start' : 'bottom',
       as: BaseComponent = 'span' as E,
       autoAlign = false,
+      autoAlignBoundary,
       caret = isTabTip ? false : true,
       className: customClassName,
       children,
@@ -172,6 +179,7 @@ export const Popover: PopoverComponent = React.forwardRef(
       highContrast = false,
       onRequestClose,
       open,
+      alignmentAxisOffset,
       ...rest
     }: PopoverProps<E>,
     forwardRef: ForwardedRef<Element>
@@ -202,7 +210,10 @@ export const Popover: PopoverComponent = React.forwardRef(
     // needs to be placed 1px further outside the popover content. To do so,
     // we look to see if any of the children has a className containing "slug"
     const initialCaretHeight = React.Children.toArray(children).some((x) => {
-      return (x as any)?.props?.className?.includes('slug');
+      return (
+        (x as any)?.props?.className?.includes('slug') ||
+        (x as any)?.props?.className?.includes('ai-label')
+      );
     })
       ? 7
       : 6;
@@ -243,7 +254,6 @@ export const Popover: PopoverComponent = React.forwardRef(
         }
       }
     });
-
     const { refs, floatingStyles, placement, middlewareData } = useFloating(
       enableFloatingStyles
         ? {
@@ -257,7 +267,14 @@ export const Popover: PopoverComponent = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
-              offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
+              offset(
+                !isTabTip
+                  ? {
+                      alignmentAxis: alignmentAxisOffset,
+                      mainAxis: popoverDimensions?.current?.offset,
+                    }
+                  : 0
+              ),
               autoAlign &&
                 flip({
                   fallbackPlacements: align.includes('bottom')
@@ -292,6 +309,7 @@ export const Popover: PopoverComponent = React.forwardRef(
 
                   fallbackStrategy: 'initialPlacement',
                   fallbackAxisSideDirection: 'start',
+                  boundary: autoAlignBoundary,
                 }),
               arrow({
                 element: caretRef,
@@ -476,7 +494,7 @@ export const Popover: PopoverComponent = React.forwardRef(
       </PopoverContext.Provider>
     );
   }
-);
+) as PopoverComponent;
 
 // Note: this displayName is temporarily set so that Storybook ArgTable
 // correctly displays the name of this component
@@ -545,6 +563,21 @@ Popover.propTypes = {
    * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * Specify a bounding element to be used for autoAlign calculations. The viewport is used by default. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlignBoundary: PropTypes.oneOfType([
+    PropTypes.oneOf(['clippingAncestors']),
+    PropTypes.elementType,
+    PropTypes.arrayOf(PropTypes.elementType),
+    PropTypes.exact({
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+    }),
+  ]) as PropTypes.Validator<Boundary | null | undefined>,
 
   /**
    * Specify whether a caret should be rendered

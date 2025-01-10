@@ -17,6 +17,7 @@ import DataTable, {
   TableSelectAll,
   TableSelectRow,
   TableSlugRow,
+  TableDecoratorRow,
   TableExpandHeader,
   TableExpandRow,
   TableExpandedRow,
@@ -51,6 +52,49 @@ export default {
   },
 };
 
+const sharedArgTypes = {
+  filterRows: {
+    table: {
+      disable: true,
+    },
+  },
+  headers: {
+    table: {
+      disable: true,
+    },
+  },
+  isSortable: {
+    table: {
+      disable: true,
+    },
+  },
+  overflowMenuOnHover: {
+    table: {
+      disable: true,
+    },
+  },
+  radio: {
+    table: {
+      disable: true,
+    },
+  },
+  rows: {
+    table: {
+      disable: true,
+    },
+  },
+  translateWithId: {
+    table: {
+      disable: true,
+    },
+  },
+  sortRow: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
 const columnAILabelHeaders = [
   {
     key: 'name',
@@ -71,7 +115,7 @@ const columnAILabelHeaders = [
   {
     key: 'attached_groups',
     header: 'Attached groups',
-    slug: (
+    decorator: (
       <AILabel
         className="ai-label-container"
         autoAlign={false}
@@ -143,8 +187,8 @@ const aiLabel = (
   </AILabel>
 );
 
-export const AILabelWithSelection = () => (
-  <DataTable rows={rows} headers={headers}>
+export const AILabelWithSelection = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
@@ -173,9 +217,11 @@ export const AILabelWithSelection = () => (
           <TableBody>
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
-                <TableSlugRow
-                  slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
-                />
+                {i === 3 || i === 4 || i === 1 ? (
+                  <TableDecoratorRow decorator={aiLabel} />
+                ) : (
+                  <TableCell />
+                )}
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -189,8 +235,10 @@ export const AILabelWithSelection = () => (
   </DataTable>
 );
 
-export const AILabelWithRadioSelection = () => (
-  <DataTable rows={rows} headers={headers} radio>
+AILabelWithSelection.argTypes = { ...sharedArgTypes };
+
+export const AILabelWithRadioSelection = (args) => (
+  <DataTable rows={rows} headers={headers} radio {...args}>
     {({
       rows,
       headers,
@@ -219,9 +267,11 @@ export const AILabelWithRadioSelection = () => (
           <TableBody>
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
-                <TableSlugRow
-                  slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
-                />
+                {i === 3 || i === 4 || i === 1 ? (
+                  <TableDecoratorRow decorator={aiLabel} />
+                ) : (
+                  <TableCell />
+                )}
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -235,8 +285,10 @@ export const AILabelWithRadioSelection = () => (
   </DataTable>
 );
 
-export const AILabelWithSelectionAndExpansion = () => (
-  <DataTable rows={rows} headers={headers}>
+AILabelWithRadioSelection.argTypes = { ...sharedArgTypes };
+
+export const AILabelWithSelectionAndExpansion = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
@@ -272,9 +324,11 @@ export const AILabelWithSelectionAndExpansion = () => (
             {rows.map((row, i) => (
               <React.Fragment key={row.id}>
                 <TableExpandRow {...getRowProps({ row })}>
-                  <TableSlugRow
-                    slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
-                  />
+                  {i === 3 || i === 4 || i === 1 ? (
+                    <TableDecoratorRow decorator={aiLabel} />
+                  ) : (
+                    <TableDecoratorRow decorator={null} />
+                  )}
                   <TableSelectRow {...getSelectionProps({ row })} />
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -296,8 +350,10 @@ export const AILabelWithSelectionAndExpansion = () => (
   </DataTable>
 );
 
-export const AILabelWithExpansion = () => (
-  <DataTable rows={rows} headers={headers}>
+AILabelWithSelectionAndExpansion.argTypes = { ...sharedArgTypes };
+
+export const AILabelWithExpansion = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
@@ -331,9 +387,11 @@ export const AILabelWithExpansion = () => (
             {rows.map((row, i) => (
               <React.Fragment key={row.id}>
                 <TableExpandRow {...getRowProps({ row })}>
-                  <TableSlugRow
-                    slug={i === 3 || i === 4 || i === 1 ? aiLabel : null}
-                  />
+                  {i === 3 || i === 4 || i === 1 ? (
+                    <TableDecoratorRow decorator={aiLabel} />
+                  ) : (
+                    <TableDecoratorRow decorator={null} />
+                  )}
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
@@ -354,8 +412,10 @@ export const AILabelWithExpansion = () => (
   </DataTable>
 );
 
-export const ColumnAILabelWithSelectionAndExpansion = () => (
-  <DataTable rows={rows} headers={columnAILabelHeaders}>
+AILabelWithExpansion.argTypes = { ...sharedArgTypes };
+
+export const ColumnAILabelWithSelectionAndExpansion = (args) => (
+  <DataTable rows={rows} headers={columnAILabelHeaders} {...args}>
     {({
       rows,
       headers,
@@ -423,8 +483,10 @@ export const ColumnAILabelWithSelectionAndExpansion = () => (
   </DataTable>
 );
 
-export const ColumnAILabelSort = () => (
-  <DataTable rows={rows} headers={columnAILabelHeaders}>
+ColumnAILabelWithSelectionAndExpansion.argTypes = { ...sharedArgTypes };
+
+export const ColumnAILabelSort = (args) => (
+  <DataTable rows={rows} headers={columnAILabelHeaders} {...args}>
     {({
       rows,
       headers,
@@ -465,3 +527,5 @@ export const ColumnAILabelSort = () => (
     )}
   </DataTable>
 );
+
+ColumnAILabelSort.argTypes = { ...sharedArgTypes };
