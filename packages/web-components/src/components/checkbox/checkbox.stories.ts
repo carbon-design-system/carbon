@@ -14,6 +14,7 @@ import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
 import Folders16 from '@carbon/icons/lib/folders/16.js';
 import '../ai-label/index';
 import './index';
+import { CHECKBOX_ORIENTATION } from './defs';
 
 const checkboxLabel = 'Checkbox label';
 
@@ -26,6 +27,7 @@ const defaultArgs = {
   readonly: false,
   warn: false,
   warnText: 'Warn message goes here',
+  orientation: 'vertical',
 };
 
 const controls = {
@@ -49,6 +51,11 @@ const controls = {
   legendText: {
     control: 'textNullable',
     description: 'Provide the text to be rendered inside of the fieldset.',
+  },
+  orientation: {
+    control: 'select',
+    description: 'Provide how checkbox should be displayed.',
+    options: CHECKBOX_ORIENTATION,
   },
   readonly: {
     control: 'boolean',
@@ -135,7 +142,7 @@ const actions = html`
 export const WithAILabel = {
   render: () => html`
     <div style="width: 400px">
-      <cds-checkbox-group legend-text="Group label">
+      <cds-checkbox-group legend-text="Group label" orientation="vertical">
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
@@ -144,7 +151,7 @@ export const WithAILabel = {
         <cds-checkbox>Checkbox label</cds-checkbox>
       </cds-checkbox-group>
 
-      <cds-checkbox-group legend-text="Group label">
+      <cds-checkbox-group legend-text="Group label" orientation="vertical">
         <cds-checkbox>
           Checkbox label
           <cds-ai-label alignment="bottom-left">
@@ -160,7 +167,7 @@ export const WithAILabel = {
         <cds-checkbox>Checkbox label</cds-checkbox>
       </cds-checkbox-group>
 
-      <cds-checkbox-group legend-text="Group label">
+      <cds-checkbox-group legend-text="Group label" orientation="vertical">
         <cds-checkbox>
           Checkbox label
           <cds-ai-label alignment="bottom-left" kind="inline">
@@ -190,6 +197,7 @@ export const Playground = {
     invalid,
     invalidText,
     legendText,
+    orientation,
     warn,
     warnText,
   }) => html`
@@ -199,6 +207,7 @@ export const Playground = {
       ?invalid="${invalid}"
       invalid-text="${invalidText}"
       legend-text="${legendText}"
+      orientation="${orientation}"
       ?readonly="${readonly}"
       ?warn="${warn}"
       warn-text="${warnText}">
