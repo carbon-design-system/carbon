@@ -548,7 +548,13 @@ const Dropdown = React.forwardRef(
             }, 3000)
           );
         }
-        if (toggleButtonProps.onKeyDown) {
+
+        if (
+          toggleButtonProps.onKeyDown &&
+          (evt.key !== 'ArrowUp' ||
+            items?.[0] !== selectedItem ||
+            (evt.key === 'ArrowUp' && isOpen))
+        ) {
           toggleButtonProps.onKeyDown(evt);
         }
       },
