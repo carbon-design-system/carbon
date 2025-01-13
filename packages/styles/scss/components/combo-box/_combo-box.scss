@@ -20,10 +20,18 @@
   }
 
   .#{$prefix}--combo-box
-    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted {
+    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted::before {
+    position: absolute;
     border: 2px solid $focus;
+    block-size: 100%;
     border-block-start: 1px solid $focus;
-    outline: 2px solid transparent;
+    content: '';
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--combo-box
+    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted {
+    @include focus-outline('reset');
   }
 
   // V11: Possibly deprecate

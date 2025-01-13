@@ -148,12 +148,22 @@
   }
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted::before,
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted::before {
+    position: absolute;
+    border: 2px solid $focus;
+    block-size: 100%;
+    border-block-start: 1px solid $focus;
+    content: '';
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--selected
     .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted,
   .#{$prefix}--multi-select.#{$prefix}--multi-select--selected
     .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted {
-    border: 2px solid $focus;
-    border-block-start: 1px solid $focus;
-    outline: 2px solid transparent;
+    @include focus-outline('reset');
   }
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--selected
