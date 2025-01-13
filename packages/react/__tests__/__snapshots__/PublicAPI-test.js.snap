@@ -1973,6 +1973,17 @@ Map {
         },
       },
     },
+    "TableDecoratorRow": Object {
+      "displayName": "TableDecoratorRow",
+      "propTypes": Object {
+        "className": Object {
+          "type": "string",
+        },
+        "decorator": Object {
+          "type": "node",
+        },
+      },
+    },
     "TableExpandHeader": Object {
       "propTypes": Object {
         "aria-controls": Object {
@@ -4214,6 +4225,9 @@ Map {
       },
       "enterDelayMs": Object {
         "type": "number",
+      },
+      "href": Object {
+        "type": "string",
       },
       "isSelected": Object {
         "type": "bool",
@@ -7440,6 +7454,9 @@ Map {
   },
   "SliderSkeleton" => Object {
     "propTypes": Object {
+      "ariaLabel": Object {
+        "type": "string",
+      },
       "className": Object {
         "type": "string",
       },
@@ -7448,6 +7465,9 @@ Map {
       },
       "twoHandles": Object {
         "type": "bool",
+      },
+      "unstable_ariaLabelHandleUpper": Object {
+        "type": "string",
       },
     },
   },
@@ -8041,6 +8061,17 @@ Map {
       },
       "useStaticWidth": Object {
         "type": "bool",
+      },
+    },
+  },
+  "TableDecoratorRow" => Object {
+    "displayName": "TableDecoratorRow",
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "decorator": Object {
+        "type": "node",
       },
     },
   },
@@ -9425,6 +9456,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "alignmentAxisOffset": Object {
+        "type": "number",
       },
       "as": Object {
         "type": "elementType",
@@ -10946,6 +10980,48 @@ Map {
         "type": "bool",
       },
     },
+  },
+  "unstable__IconIndicator" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "failed",
+            "caution-major",
+            "caution-minor",
+            "undefined",
+            "succeeded",
+            "normal",
+            "in-progress",
+            "incomplete",
+            "not-started",
+            "pending",
+            "unknown",
+            "informative",
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOf",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            16,
+            20,
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
   },
   "unstable__Slug" => Object {
     "$$typeof": Symbol(react.forward_ref),

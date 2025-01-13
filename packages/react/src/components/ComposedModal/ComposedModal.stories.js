@@ -44,13 +44,51 @@ export default {
   },
 };
 
-export const Default = () => {
+const sharedArgTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  containerClassName: {
+    table: {
+      disable: true,
+    },
+  },
+  onClose: {
+    action: 'onClose',
+  },
+  onKeyDown: {
+    action: 'onKeyDown',
+  },
+  selectorPrimaryFocus: {
+    table: {
+      disable: true,
+    },
+  },
+  selectorsFloatingMenus: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const Default = (args) => {
   const [open, setOpen] = useState(true);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal open={open} onClose={() => setOpen(false)}>
-        <ModalHeader label="Account resources" title="Add a custom domain" />
+      <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
+        <ModalHeader
+          label="Account resources"
+          title="Add a custom domain"
+          {...args}
+        />
         <ModalBody>
           <p style={{ marginBottom: '1rem' }}>
             Custom domains direct requests for your apps in this Cloud Foundry
@@ -69,11 +107,17 @@ export const Default = () => {
             <SelectItem value="us-east" text="US East" />
           </Select>
         </ModalBody>
-        <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+        <ModalFooter
+          primaryButtonText="Add"
+          secondaryButtonText="Cancel"
+          {...args}
+        />
       </ComposedModal>
     </>
   );
 };
+
+Default.argTypes = { ...sharedArgTypes };
 
 export const FullWidth = () => {
   const [open, setOpen] = useState(true);
@@ -154,7 +198,7 @@ export const PassiveModal = () => {
 };
 
 export const WithStateManager = () => {
-  const button = useRef();
+  const button = React.useRef();
 
   /**
    * Simple state manager for modals.
@@ -163,7 +207,7 @@ export const WithStateManager = () => {
     renderLauncher: LauncherContent,
     children: ModalContent,
   }) => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = React.useState(false);
     return (
       <>
         {!ModalContent || typeof document === 'undefined'
@@ -447,78 +491,5 @@ export const _withAILabel = {
         </ComposedModal>
       </div>
     );
-  },
-};
-
-export const Playground = (args) => {
-  const [open, setOpen] = useState(true);
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
-        <ModalHeader
-          label="Account resources"
-          title="Add a custom domain"
-          {...args}
-        />
-        <ModalBody>
-          <p style={{ marginBottom: '1rem' }}>
-            Custom domains direct requests for your apps in this Cloud Foundry
-            organization to a URL that you own. A custom domain can be a shared
-            domain, a shared subdomain, or a shared domain and host.
-          </p>
-          <TextInput
-            data-modal-primary-focus
-            id="text-input-1"
-            labelText="Domain name"
-            placeholder="e.g. github.com"
-            style={{ marginBottom: '1rem' }}
-          />
-          <Select id="select-1" defaultValue="us-south" labelText="Region">
-            <SelectItem value="us-south" text="US South" />
-            <SelectItem value="us-east" text="US East" />
-          </Select>
-        </ModalBody>
-        <ModalFooter
-          primaryButtonText="Add"
-          secondaryButtonText="Cancel"
-          {...args}
-        />
-      </ComposedModal>
-    </>
-  );
-};
-
-Playground.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  containerClassName: {
-    table: {
-      disable: true,
-    },
-  },
-  onClose: {
-    action: 'onClose',
-  },
-  onKeyDown: {
-    action: 'onKeyDown',
-  },
-  selectorPrimaryFocus: {
-    table: {
-      disable: true,
-    },
-  },
-  selectorsFloatingMenus: {
-    table: {
-      disable: true,
-    },
   },
 };
