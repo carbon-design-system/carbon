@@ -135,37 +135,3 @@ export const Skeleton = () => (
     <CodeSnippetSkeleton type="multi" />
   </div>
 );
-
-export const Playground = (args) => (
-  <CodeSnippet type="single" feedback="Copied to clipboard" {...args}>
-    {'yarn add @carbon/react'}
-  </CodeSnippet>
-);
-
-Playground.argTypes = {
-  ['aria-label']: {
-    table: {
-      disable: true,
-    },
-  },
-  ariaLabel: {
-    table: {
-      disable: true,
-    },
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  onClick: {
-    table: {
-      disable: true,
-    },
-  },
-  type: {
-    table: {
-      disable: true,
-    },
-  },
-};
