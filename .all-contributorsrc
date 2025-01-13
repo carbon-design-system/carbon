@@ -1151,18 +1151,6 @@
       ]
     },
     {
-      "login": "heloiselui",
-      "name": "Heloise Lui",
-      "avatar_url": "https://avatars.githubusercontent.com/u/71858203?v=4",
-      "profile": "https://github.com/helolui",
-      "contributions": [
-        "code",
-        "doc",
-        "a11y",
-        "review"
-      ]
-    },
-    {
       "login": "kubijo",
       "name": "Josef Kubíček",
       "avatar_url": "https://avatars.githubusercontent.com/u/11244314?v=4",
@@ -1733,7 +1721,9 @@
       "name": "Zoë Gathercole",
       "avatar_url": "https://avatars.githubusercontent.com/u/56911544?v=4",
       "profile": "https://github.com/Zoe-Gathercole",
-      "contributions": ["code"]
+      "contributions": [
+        "code"
+      ]
     },
     {
       "login": "ashna000",
@@ -1760,6 +1750,18 @@
       "profile": "https://github.com/vsvsv",
       "contributions": [
         "code"
+      ]
+    },
+    {
+      "login": "heloiselui",
+      "name": "Heloise Lui",
+      "avatar_url": "https://avatars.githubusercontent.com/u/71858203?v=4",
+      "profile": "https://github.com/heloiselui",
+      "contributions": [
+        "code",
+        "doc",
+        "a11y",
+        "review"
       ]
     }
   ],
