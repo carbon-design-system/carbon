@@ -8,7 +8,7 @@
  */
 
 import { html } from 'lit';
-import storyDocs from './list.mdx';
+import storyDocs from './ordered-list.mdx';
 import './index';
 
 const defaultArgs = {
@@ -26,20 +26,11 @@ const controls = {
     description:
       'Specify whether this ordered list should use native list styles instead of custom counter.',
   },
-  '--cds-ordered-list-counter-reset': {
-    control: 'text',
-    description:
-      'CSS custom property for counter-reset (e.g., "item 1"). Works when native is set to false.',
-    table: {
-      category: 'CSS Variables',
-      defaultValue: { summary: 'item' },
-    },
-  },
 };
 
 export const Default = {
   render: () =>
-    html`<cds-ordered-list native>
+    html`<cds-ordered-list>
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>Ordered List level 1</cds-list-item>
@@ -106,19 +97,15 @@ export const Nested = {
 export const Playground = {
   args: defaultArgs,
   argTypes: controls,
-  render: ({
-    isExpressive,
-    native,
-    '--cds-ordered-list-counter-reset': counterReset,
-  }) => html`
-    <cds-ordered-list style="${counterReset ? `--cds-ordered-list-counter-reset: ${counterReset};` : ''}" ?isExpressive="${isExpressive}" ?native="${native}">
+  render: ({ isExpressive, native }) => html`
+    <cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
       <cds-list-item>
         Ordered List level 1
-        <cds-ordered-list ?isExpressive="${isExpressive}" ?native="${native}">
+        <cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
           <cds-list-item>Ordered List level 2</cds-list-item>
           <cds-list-item>
             Ordered List level 2
-            <cds-ordered-list ?isExpressive="${isExpressive}" ?native="${native}">
+            <cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
               <cds-list-item>Ordered List level 2</cds-list-item>
               <cds-list-item>Ordered List level 2</cds-list-item>
             </cds-ordered-list>

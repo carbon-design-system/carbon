@@ -34,17 +34,15 @@ $css--plex: true !default;
     counter-reset: item;
   }
 
-  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
-    counter-reset: var(--cds-ordered-list-counter-reset, item);
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
     ::slotted(#{$prefix}-list-item) {
-      position: relative;
+    position: relative;
 
-      &::before {
-        position: absolute;
-        content: counter(item) '.';
-        counter-increment: item;
-        inset-inline-start: rem(-24px);
-      }
+    &::before {
+      position: absolute;
+      content: counter(item) '.';
+      counter-increment: item;
+      inset-inline-start: rem(-24px);
     }
   }
 }
