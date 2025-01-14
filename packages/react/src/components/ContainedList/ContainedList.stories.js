@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { action } from '@storybook/addon-actions';
 import {
@@ -136,13 +136,13 @@ export const WithActions = () => {
 };
 
 export const WithExpandableSearch = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [searchResults, setSearchResults] = React.useState([]);
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const listItems = [
       'List item 1',
       'List item 2',
@@ -178,13 +178,13 @@ export const WithExpandableSearch = () => {
 };
 
 export const WithPersistentSearch = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [searchResults, setSearchResults] = React.useState([]);
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const listItems = [
       'List item 1',
       'List item 2',
