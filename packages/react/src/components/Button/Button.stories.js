@@ -15,8 +15,6 @@ import './button-story.scss';
 import { composeStories } from '@storybook/react';
 import * as stories from '../Breadcrumb/Breadcrumb.stories';
 
-import BadgeIndicator from '../BadgeIndicator';
-
 export default {
   title: 'Components/Button',
   component: Button,
@@ -106,42 +104,6 @@ export const Ghost = (args) => {
     <Button kind="ghost" {...args}>
       Button
     </Button>
-  );
-};
-
-export const GhostIconButtonBadgeIndicator = (args) => {
-  return (
-    <>
-      <Button
-        kind="ghost"
-        renderIcon={Add}
-        iconDescription="Icon Description"
-        hasIconOnly
-        onClick={action('onClick')}
-        {...args}>
-        <BadgeIndicator count={1234}></BadgeIndicator>
-      </Button>
-
-      <Button
-        kind="ghost"
-        renderIcon={Add}
-        iconDescription="Icon Description"
-        hasIconOnly
-        onClick={action('onClick')}
-        {...args}>
-        <BadgeIndicator count={9}></BadgeIndicator>
-      </Button>
-
-      <Button
-        kind="ghost"
-        renderIcon={Add}
-        iconDescription="Icon Description"
-        hasIconOnly
-        onClick={action('onClick')}
-        {...args}>
-        <BadgeIndicator></BadgeIndicator>
-      </Button>
-    </>
   );
 };
 

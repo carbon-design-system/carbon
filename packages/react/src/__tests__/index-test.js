@@ -262,6 +262,7 @@ describe('Carbon Components React', () => {
         "unstable__AiSkeletonIcon",
         "unstable__AiSkeletonPlaceholder",
         "unstable__AiSkeletonText",
+        "unstable__BadgeIndicator",
         "unstable__ChatButton",
         "unstable__ChatButtonSkeleton",
         "unstable__FluidComboBox",

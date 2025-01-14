@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Edit, Notification } from '@carbon/icons-react';
+import { Edit } from '@carbon/icons-react';
 import React from 'react';
 import { IconButton } from '../IconButton';
 import mdx from './IconButton.mdx';
-import { BadgeIndicator } from '../BadgeIndicator/index';
+
 export default {
   title: 'Components/IconButton',
   component: IconButton,
@@ -95,25 +95,4 @@ Default.argTypes = {
     },
     options: ['primary', 'secondary', 'ghost', 'tertiary'],
   },
-};
-
-export const GhostIconButtonBadgeIndicator = (args) => {
-  return (
-    <>
-      <IconButton kind="ghost" label="Icon Description">
-        <Notification />
-        <BadgeIndicator count={1234}></BadgeIndicator>
-      </IconButton>
-
-      <IconButton kind="ghost" label="Icon Description">
-        <Notification />
-        <BadgeIndicator count={9}></BadgeIndicator>
-      </IconButton>
-
-      <IconButton kind="ghost" label="Icon Description">
-        <Notification />
-        <BadgeIndicator></BadgeIndicator>
-      </IconButton>
-    </>
-  );
 };

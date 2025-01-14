@@ -41,6 +41,7 @@ const files = [
   'scss/components/ai-label/_index.scss',
   'scss/components/aspect-ratio/_aspect-ratio.scss',
   'scss/components/aspect-ratio/_index.scss',
+  'scss/components/badge-indicator/_badge-indicator.scss',
   'scss/components/breadcrumb/_breadcrumb.scss',
   'scss/components/breadcrumb/_index.scss',
   'scss/components/button/_button.scss',
