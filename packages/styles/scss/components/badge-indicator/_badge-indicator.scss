@@ -25,7 +25,7 @@
 
     position: absolute;
     display: flex;
-    padding: 0 4px 2px;
+    padding: 0 $spacing-02 $spacing-01;
     border-radius: 100px;
     background: $support-error;
     color: $text-on-color;
@@ -33,12 +33,12 @@
     inset-block-start: 0;
     inset-inline-end: 0;
 
-    margin-block-start: 8px;
-    margin-inline-end: 8px;
+    margin-block-start: $spacing-03;
+    margin-inline-end: $spacing-03;
 
-    max-block-size: 16px;
-    min-block-size: 8px;
-    min-inline-size: 8px;
+    max-block-size: $spacing-05;
+    min-block-size: $spacing-03;
+    min-inline-size: $spacing-03;
   }
 
   .#{$prefix}--badge-indicator--count {
