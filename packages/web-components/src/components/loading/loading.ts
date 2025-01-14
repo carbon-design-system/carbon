@@ -25,7 +25,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-loading`)
 class CDSLoading extends LitElement {
   /**
- * @deprecated The 'assistive-text' property will be deprecated in the next major release. Please use `description` instead.
+   * @deprecated The 'assistive-text' property will be deprecated in the next major release. Please use `description` instead.
    */
   @property({ attribute: 'assistive-text' })
   get assistiveText() {
@@ -34,15 +34,15 @@ class CDSLoading extends LitElement {
   set assistiveText(value) {
     this.description = value;
   }
-    /**
+  /**
    * Specify a description that would be used to best describe the loading state
    */
-    @property({ reflect: true })
-    description = 'Loading';
- /**
- *
- * @deprecated The 'type' property will be deprecated in the next major release. Please use `small` instead.
- */
+  @property({ reflect: true })
+  description = 'Loading';
+  /**
+   *
+   * @deprecated The 'type' property will be deprecated in the next major release. Please use `small` instead.
+   */
   @property()
   get type() {
     return this.small ? LOADING_TYPE.SMALL : LOADING_TYPE.REGULAR;
@@ -50,9 +50,9 @@ class CDSLoading extends LitElement {
   set type(value) {
     this.small = value == LOADING_TYPE.SMALL;
   }
-/**
- * Specify whether you would like the small variant of <Loading>
- */
+  /**
+   * Specify whether you would like the small variant of <Loading>
+   */
   @property({ type: Boolean, reflect: true })
   small = false;
 
@@ -66,10 +66,10 @@ class CDSLoading extends LitElement {
    * `true` if spinner should stop.
    */
 
-   /**
- *
- * @deprecated The 'inactive' property will be deprecated in the next major release. Please use `active` instead.
- */
+  /**
+   *
+   * @deprecated The 'inactive' property will be deprecated in the next major release. Please use `active` instead.
+   */
   @property({ type: Boolean, reflect: true })
   get inactive(): Boolean {
     return this.active;
@@ -78,17 +78,15 @@ class CDSLoading extends LitElement {
   set inactive(value: boolean) {
     this.active = value;
   }
- /**
+  /**
    * Specify whether you want the loading indicator to be spinning or not
    */
   @property({ type: Boolean, reflect: true })
   active = false;
 
- 
-
   render() {
     const { active, description, small, overlay } = this;
-    
+
     const innerClasses = classMap({
       [`${prefix}--loading`]: true,
       [`${prefix}--loading--stop`]: !active,
