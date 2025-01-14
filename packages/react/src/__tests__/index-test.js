@@ -285,6 +285,7 @@ describe('Carbon Components React', () => {
         "unstable__FluidTimePicker",
         "unstable__FluidTimePickerSelect",
         "unstable__FluidTimePickerSkeleton",
+        "unstable__IconIndicator",
         "unstable__Slug",
         "unstable__SlugActions",
         "unstable__SlugContent",

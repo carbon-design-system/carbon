@@ -191,3 +191,4 @@ export * from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';
 
 export { BadgeIndicator as unstable__BadgeIndicator } from './components/BadgeIndicator';
+export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';
