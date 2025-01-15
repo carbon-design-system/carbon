@@ -225,9 +225,9 @@ Toggletip.propTypes = {
   ]),
 
   /**
-   * Provide an offset value for alignment axis.
+   * Will add padding value to arrow in case of bottom-left, bottom-right or top-left, top-right
    */
-  alignmentAxisOffset: PropTypes.number,
+  arrowPadding: PropTypes.number,
 
   /**
    * Provide a custom element or component to render the top-level node for the

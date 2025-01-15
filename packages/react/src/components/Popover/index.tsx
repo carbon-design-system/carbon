@@ -99,6 +99,11 @@ interface PopoverBaseProps {
   align?: PopoverAlignment;
 
   /**
+   * Will add padding value to arrow in case of bottom-left, bottom-right or top-left, top-right
+   */
+  arrowPadding?: number;
+
+  /**
    * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
    */
   autoAlign?: boolean;
@@ -179,7 +184,7 @@ export const Popover: PopoverComponent = React.forwardRef(
       highContrast = false,
       onRequestClose,
       open,
-      alignmentAxisOffset,
+      arrowPadding,
       ...rest
     }: PopoverProps<E>,
     forwardRef: ForwardedRef<Element>
@@ -267,14 +272,7 @@ export const Popover: PopoverComponent = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
-              offset(
-                !isTabTip
-                  ? {
-                      alignmentAxis: alignmentAxisOffset,
-                      mainAxis: popoverDimensions?.current?.offset,
-                    }
-                  : 0
-              ),
+              offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
               autoAlign &&
                 flip({
                   fallbackPlacements: align.includes('bottom')
@@ -313,6 +311,7 @@ export const Popover: PopoverComponent = React.forwardRef(
                 }),
               arrow({
                 element: caretRef,
+                padding: arrowPadding,
               }),
               autoAlign && hide(),
             ],
