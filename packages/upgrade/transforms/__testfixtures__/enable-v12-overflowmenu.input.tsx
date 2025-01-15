@@ -5,6 +5,7 @@ import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
 interface MenuItem {
   id: string;
   label: string;
+  action?: () => void;
 }
 
 interface Props {
@@ -14,14 +15,19 @@ interface Props {
 const TestComponent: FC<Props> = ({ items }) => {
   return (
     <div>
-      <OverflowMenu>
+      {/* Old API usage - mapped items */}
+      <OverflowMenu aria-label="mapped-menu">
         {items.map((item) => (
-          <OverflowMenuItem key={item.id}>{item.label}</OverflowMenuItem>
+          <OverflowMenuItem
+            key={item.id}
+            itemText={item.label}
+            onClick={item.action}
+          />
         ))}
       </OverflowMenu>
-
-      <OverflowMenu direction="top" size="lg">
-        <OverflowMenuItem>TypeScript Item</OverflowMenuItem>
+      {/* Old API - explicit props */}
+      <OverflowMenu direction="top" size="lg" flipped={true}>
+        <OverflowMenuItem hasDivider isDelete itemText="TypeScript Item" />
       </OverflowMenu>
     </div>
   );

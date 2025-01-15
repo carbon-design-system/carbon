@@ -4,17 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * Migrate OverflowMenu components by wrapping them with FeatureFlags
- *
- * Transforms:
- *
- * <OverflowMenu {...props} />
- *
- * Into:
- *
- * <FeatureFlags enableV12Overflowmenu>
- *   <OverflowMenu {...props} />
- * </FeatureFlags>
+ * Migrate OverflowMenu components to v12 API and wrap with FeatureFlags
  */
 
 'use strict';
@@ -24,38 +14,27 @@ const defaultOptions = {
   trailingComma: true,
 };
 
+// Props mapping from OverflowMenuItem to MenuItem
+const MENU_ITEM_PROPS_MAP = {
+  itemText: 'label',
+  href: 'href',
+  disabled: 'disabled',
+  className: 'className',
+};
+
+const EVENT_HANDLERS = new Set(['onClick']);
+
 function transform(fileInfo, api, options) {
   const { jscodeshift: j } = api;
   const root = j(fileInfo.source);
   const printOptions = options.printOptions || defaultOptions;
 
-  // Early return if no OverflowMenu components found
-  if (
-    !root.find(j.JSXOpeningElement, { name: { name: 'OverflowMenu' } }).size()
-  ) {
-    return null;
-  }
-
-  let hasModifications = false;
-
-  // Check if FeatureFlags import already exists
-  const hasFeatureFlagsImport = root
-    .find(j.ImportDeclaration)
-    .some(
-      (path) =>
-        path.node.source.value === '@carbon/feature-flags' &&
-        path.node.specifiers.some(
-          (spec) => spec.imported && spec.imported.name === 'FeatureFlags'
-        )
-    );
-
-  // Find all JSX OverflowMenu elements that aren't already wrapped
+  // Find all OverflowMenu components
   const overflowMenuElements = root
     .find(j.JSXElement, {
       openingElement: { name: { name: 'OverflowMenu' } },
     })
     .filter((path) => {
-      // Skip if already wrapped with FeatureFlags
       let parent = path.parent;
       while (parent) {
         if (
@@ -69,57 +48,153 @@ function transform(fileInfo, api, options) {
       return true;
     });
 
-  // If we found any OverflowMenu components to transform
-  if (overflowMenuElements.length > 0) {
-    hasModifications = true;
-
-    // Add FeatureFlags import if it doesn't exist
-    if (!hasFeatureFlagsImport) {
-      // Find all imports from '@carbon/feature-flags'
-      const carbonImports = root.find(j.ImportDeclaration, {
-        source: { value: '@carbon/feature-flags' },
-      });
-
-      if (carbonImports.length) {
-        // Add FeatureFlags to existing Carbon import
-        const existingImport = carbonImports.get(0);
-        const existingSpecifiers = existingImport.node.specifiers;
-        existingSpecifiers.push(
-          j.importSpecifier(j.identifier('FeatureFlags'))
-        );
-      } else {
-        // Create new Carbon import after the first import
-        const firstImport = root.find(j.ImportDeclaration).at(0);
-        const featureFlagsImport = j.importDeclaration(
-          [j.importSpecifier(j.identifier('FeatureFlags'))],
-          j.literal('@carbon/feature-flags')
-        );
-
-        if (firstImport.length) {
-          firstImport.insertAfter(featureFlagsImport);
-        } else {
-          root.get().node.program.body.unshift(featureFlagsImport);
-        }
-      }
-    }
-
-    // Wrap each OverflowMenu with FeatureFlags
-    overflowMenuElements.forEach((path) => {
-      const elementToWrap = path.node;
-      const wrappedElement = j.jsxElement(
-        j.jsxOpeningElement(j.jsxIdentifier('FeatureFlags'), [
-          j.jsxAttribute(j.jsxIdentifier('enableV12Overflowmenu'), null),
-        ]),
-        j.jsxClosingElement(j.jsxIdentifier('FeatureFlags')),
-        [j.jsxText('\n      '), elementToWrap, j.jsxText('\n    ')]
-      );
-
-      j(path).replaceWith(wrappedElement);
-    });
+  if (!overflowMenuElements.length) {
+    return null;
   }
 
-  return hasModifications ? root.toSource(printOptions) : null;
+  // Add imports in order
+  const importsToAdd = ['MenuItem', 'MenuItemDivider'].sort();
+  const carbonImport = root.find(j.ImportDeclaration, {
+    source: { value: '@carbon/react' },
+  });
+
+  if (carbonImport.length) {
+    const importNode = carbonImport.get(0);
+    const existingSpecifiers = new Set(
+      importNode.node.specifiers
+        .filter((spec) => spec.type === 'ImportSpecifier')
+        .map((spec) => spec.imported.name)
+    );
+
+    importsToAdd.forEach((importName) => {
+      if (!existingSpecifiers.has(importName)) {
+        importNode.node.specifiers.push(
+          j.importSpecifier(j.identifier(importName))
+        );
+      }
+    });
+
+    // Sort specifiers alphabetically
+    importNode.node.specifiers.sort((a, b) =>
+      a.imported.name.localeCompare(b.imported.name)
+    );
+  }
+  // Add FeatureFlags import
+  const hasFeatureFlagsImport = root
+    .find(j.ImportDeclaration)
+    .some(
+      (path) =>
+        path.node.source.value === '@carbon/feature-flags' &&
+        path.node.specifiers.some(
+          (spec) => spec.imported && spec.imported.name === 'FeatureFlags'
+        )
+    );
+
+  if (!hasFeatureFlagsImport) {
+    const featureFlagsImport = j.importDeclaration(
+      [j.importSpecifier(j.identifier('FeatureFlags'))],
+      j.literal('@carbon/feature-flags')
+    );
+
+    const firstImport = root.find(j.ImportDeclaration).at(0);
+    if (firstImport.length) {
+      firstImport.insertAfter(featureFlagsImport);
+    } else {
+      root.get().node.program.body.unshift(featureFlagsImport);
+    }
+  }
+
+  // Transform each OverflowMenu
+  overflowMenuElements.forEach((path) => {
+    // Transform OverflowMenuItem to MenuItem
+    path.node.children.forEach((child, index) => {
+      if (
+        child.type === 'JSXElement' &&
+        child.openingElement.name.name === 'OverflowMenuItem'
+      ) {
+        const itemProps = [];
+        let needsDivider = false;
+        let classNames = [];
+
+        child.openingElement.attributes.forEach((attr) => {
+          if (attr.type === 'JSXSpreadAttribute') {
+            itemProps.push(attr);
+            return;
+          }
+
+          const propName = attr.name.name;
+
+          if (MENU_ITEM_PROPS_MAP[propName]) {
+            if (propName === 'className') {
+              classNames.push(attr.value.value);
+            } else {
+              itemProps.push(
+                j.jsxAttribute(
+                  j.jsxIdentifier(MENU_ITEM_PROPS_MAP[propName]),
+                  attr.value
+                )
+              );
+            }
+          } else if (propName === 'wrapperClassName') {
+            classNames.push(attr.value.value);
+          } else if (propName === 'hasDivider') {
+            needsDivider = true;
+          } else if (propName === 'isDelete') {
+            itemProps.push(
+              j.jsxAttribute(j.jsxIdentifier('kind'), j.stringLiteral('danger'))
+            );
+          } else if (EVENT_HANDLERS.has(propName)) {
+            itemProps.push(attr);
+          }
+        });
+
+        if (classNames.length > 0) {
+          itemProps.push(
+            j.jsxAttribute(
+              j.jsxIdentifier('className'),
+              j.stringLiteral(classNames.join(' '))
+            )
+          );
+        }
+
+        if (needsDivider) {
+          path.node.children.splice(
+            index,
+            0,
+            j.jsxElement(
+              j.jsxOpeningElement(j.jsxIdentifier('MenuItemDivider'), [], true),
+              null,
+              [],
+              true
+            )
+          );
+        }
+
+        // Convert to MenuItem
+        child.openingElement.name = j.jsxIdentifier('MenuItem');
+        child.openingElement.attributes = itemProps;
+        if (child.closingElement) {
+          child.closingElement.name = j.jsxIdentifier('MenuItem');
+        }
+      }
+    });
+
+    // Wrap with FeatureFlags
+    const wrappedElement = j.jsxElement(
+      j.jsxOpeningElement(
+        j.jsxIdentifier('FeatureFlags'),
+        [j.jsxAttribute(j.jsxIdentifier('enableV12Overflowmenu'))],
+        false
+      ),
+      j.jsxClosingElement(j.jsxIdentifier('FeatureFlags')),
+      [j.jsxText('\n      '), path.node, j.jsxText('\n    ')]
+    );
+
+    j(path).replaceWith(wrappedElement);
+  });
+
+  return root.toSource(printOptions);
 }
 
 module.exports = transform;
-module.exports.parser = 'tsx'; // Enable TypeScript parsing
+module.exports.parser = 'tsx';

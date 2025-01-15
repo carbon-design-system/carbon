@@ -1,27 +1,42 @@
 // Input: enable-v12-overflowmenu.input.js
 import React from 'react';
-import { OverflowMenu, Button } from '@carbon/react';
+import { OverflowMenu, OverflowMenuItem, Button } from '@carbon/react';
 
-function TestComponent() {
+function TestComponent({ menuProps }) {
   return (
-    // prettier-ignore
     <div>
-      {/* Basic OverflowMenu */}
-        <OverflowMenu>
-          <OverflowMenu.Item>Option 1</OverflowMenu.Item>
-          <OverflowMenu.Item>Option 2</OverflowMenu.Item>
+      {/* Old API usage - with explicit props */}
+      <OverflowMenu
+        aria-label="overflow-menu"
+        flipped={true}
+        light={true}
+        size="xl">
+        <OverflowMenuItem
+          className="test-class"
+          itemText="Stop app"
+          disabled={false}
+          onClick={() => {}}
+        />
+        <OverflowMenuItem itemText="Restart app" />
+        <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+      </OverflowMenu>
+
+      {/* Old API with spread props */}
+      <OverflowMenu {...menuProps}>
+        <OverflowMenuItem itemText="Dynamic item" />
+        <OverflowMenuItem hasDivider isDelete itemText="Remove" />
+      </OverflowMenu>
+
+      {/* Already using new API - should not be transformed */}
+      <FeatureFlags enableV12Overflowmenu>
+        <OverflowMenu label="Already migrated">
+          <MenuItem label="Option 1" />
+          <MenuItemDivider />
+          <MenuItem label="Delete" kind="danger" />
         </OverflowMenu>
-      {/* With spread props */}
-        <OverflowMenu {...menuProps} />
-      {/* With explicit props */}
-        <OverflowMenu direction="top" size="lg">
-          <OverflowMenu.Item>Another option</OverflowMenu.Item>
-        </OverflowMenu>
-      {/* Already wrapped - should not be modified */}
-        <OverflowMenu>
-          <OverflowMenu.Item>Existing wrapped</OverflowMenu.Item>
-        </OverflowMenu>
-      {/* Other components should be unaffected */}
+      </FeatureFlags>
+
+      {/* Other components - should not be transformed */}
       <Button>Normal button</Button>
     </div>
   );

@@ -1,42 +1,54 @@
+// Output: enable-v12-overflowmenu.output.js
 import React from 'react';
-import { OverflowMenu, Button} from '@carbon/react';
+import { OverflowMenu, OverflowMenuItem, MenuItem, MenuItemDivider, Button } from '@carbon/react';
 import { FeatureFlags } from '@carbon/feature-flags';
 
-function TestComponent() {
-  return (
-    <div>
-      {/* Basic OverflowMenu */}
-      <FeatureFlags enableV12Overflowmenu>
-        <OverflowMenu>
-          <OverflowMenu.Item>Option 1</OverflowMenu.Item>
-          <OverflowMenu.Item>Option 2</OverflowMenu.Item>
-        </OverflowMenu>
-      </FeatureFlags>
+function TestComponent({ menuProps }) {
+ return (
+   <div>
+     {/* Old API usage with props - transformed */}
+     <FeatureFlags enableV12Overflowmenu>
+       <OverflowMenu 
+         label="overflow-menu"
+         align="bottom"
+         flipped={true}
+         light={true}
+         size="xl"
+       >
+         <MenuItem 
+           className="test-class" 
+           label="Stop app" 
+           disabled={false}
+           onClick={() => {}}
+         />
+         <MenuItem label="Restart app" />
+         <MenuItemDivider />
+         <MenuItem label="Delete app" kind="danger" />
+       </OverflowMenu>
+     </FeatureFlags>
 
-      {/* With spread props */}
-      <FeatureFlags enableV12Overflowmenu>
-        <OverflowMenu {...menuProps} />
-      </FeatureFlags>
+     {/* Old API with spread props */}
+     <FeatureFlags enableV12Overflowmenu>
+       <OverflowMenu {...menuProps}>
+         <MenuItem label="Dynamic item" />
+         <MenuItemDivider />
+         <MenuItem label="Remove" kind="danger" />
+       </OverflowMenu>
+     </FeatureFlags>
 
-      {/* With explicit props */}
-      <FeatureFlags enableV12Overflowmenu>
-        <OverflowMenu direction="top" size="lg">
-          <OverflowMenu.Item>Another option</OverflowMenu.Item>
-        </OverflowMenu>
-      </FeatureFlags>
+      {/* Already using new API - should not be transformed */}
+     <FeatureFlags enableV12Overflowmenu>
+       <OverflowMenu label="Already migrated">
+         <MenuItem label="Option 1" />
+         <MenuItemDivider />
+         <MenuItem label="Delete" kind="danger" />
+       </OverflowMenu>
+     </FeatureFlags>
 
-      {/* Already wrapped - should not be modified */}
-      <FeatureFlags enableV12Overflowmenu>
-        <OverflowMenu>
-          <OverflowMenu.Item>Existing wrapped</OverflowMenu.Item>
-        </OverflowMenu>
-      </FeatureFlags>
-
-      {/* Other components should be unaffected */}
-      <Button>Normal button</Button>
-
-    </div>
-  );
+     {/* Other components - unchanged */}
+     <Button>Normal button</Button>
+   </div>
+ );
 }
 
 export default TestComponent;
