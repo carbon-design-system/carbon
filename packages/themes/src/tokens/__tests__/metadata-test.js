@@ -1274,6 +1274,34 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "status-red",
+          "type": "color",
+        },
+        Object {
+          "name": "status-orange",
+          "type": "color",
+        },
+        Object {
+          "name": "status-yellow",
+          "type": "color",
+        },
+        Object {
+          "name": "status-purple",
+          "type": "color",
+        },
+        Object {
+          "name": "status-green",
+          "type": "color",
+        },
+        Object {
+          "name": "status-blue",
+          "type": "color",
+        },
+        Object {
+          "name": "status-gray",
+          "type": "color",
+        },
+        Object {
           "name": "tag-background-red",
           "type": "color",
         },
