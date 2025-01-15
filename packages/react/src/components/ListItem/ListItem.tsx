@@ -11,7 +11,7 @@ import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
 
-type ListItemProps = ComponentProps<'li'>;
+export type ListItemProps = ComponentProps<'li'>;
 
 export default function ListItem({
   className,

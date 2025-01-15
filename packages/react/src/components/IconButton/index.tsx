@@ -65,7 +65,7 @@ const propMappingFunction = (deprecatedValue) => {
   return mapping[deprecatedValue];
 };
 
-interface IconButtonProps
+export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Specify how the trigger should align with the tooltip
