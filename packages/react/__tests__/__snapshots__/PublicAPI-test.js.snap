@@ -398,6 +398,9 @@ Map {
       "autoAlign": Object {
         "type": "bool",
       },
+      "badgeCount": Object {
+        "type": "number",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4207,6 +4210,9 @@ Map {
       "align": [Function],
       "autoAlign": Object {
         "type": "bool",
+      },
+      "badgeCount": Object {
+        "type": "number",
       },
       "children": Object {
         "type": "node",
@@ -10166,21 +10172,6 @@ Map {
         "type": "string",
       },
     },
-  },
-  "unstable__BadgeIndicator" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "aria-label": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "count": Object {
-        "type": "number",
-      },
-    },
-    "render": [Function],
   },
   "unstable__ChatButton" => Object {
     "$$typeof": Symbol(react.forward_ref),

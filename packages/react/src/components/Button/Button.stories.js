@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Add } from '@carbon/icons-react';
+import { Add, Notification } from '@carbon/icons-react';
 import { default as Button, ButtonSkeleton } from '../Button';
 import ButtonSet from '../ButtonSet';
 import mdx from './Button.mdx';
@@ -116,6 +116,22 @@ export const IconButton = (args) => (
     {...args}
   />
 );
+
+export const withBadgeIndicator = (args) => (
+  <Button
+    kind="ghost"
+    badgeCount={4}
+    renderIcon={Notification}
+    iconDescription="Icon Description"
+    hasIconOnly
+    onClick={action('onClick')}
+    {...args}
+  />
+);
+
+withBadgeIndicator.args = {
+  badgeCount: 4,
+};
 
 export const SetOfButtons = (args) => {
   return (

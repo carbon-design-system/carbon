@@ -41,6 +41,12 @@ export type ButtonTooltipPosition = (typeof ButtonTooltipPositions)[number];
 export interface ButtonBaseProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
+   * **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0.
+   * Must be used with size="lg" and kind="ghost"
+   */
+  badgeCount?: number;
+
+  /**
    * Specify the message read by screen readers for the danger button variant
    */
   dangerDescription?: string;
@@ -131,6 +137,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
   const {
     as,
     autoAlign = false,
+    badgeCount,
     children,
     hasIconOnly = false,
     iconDescription,
@@ -185,6 +192,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
         ref={ref}
         as={as}
         align={align}
+        badgeCount={badgeCount}
         label={iconDescription}
         kind={kind}
         size={size}
@@ -218,6 +226,12 @@ Button.propTypes = {
    * **Experimental**: Will attempt to automatically align the tooltip
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0.
+   * Must be used with size="lg" and kind="ghost"
+   */
+  badgeCount: PropTypes.number,
 
   /**
    * Specify the content of your Button

@@ -20,18 +20,9 @@ interface BadgeIndicatorProps {
    * Count of badge indicator
    */
   count?: number;
-  /**
-   * Provide the text that will be read by screen readers when not in a button context
-   */
-  'aria-label'?: string;
 }
 export const BadgeIndicator = React.forwardRef(function BadgeIndicatorContent(
-  {
-    className: customClassName,
-    count,
-    'aria-label': ariaLabel,
-    ...rest
-  }: BadgeIndicatorProps,
+  { className: customClassName, count, ...rest }: BadgeIndicatorProps,
   ref: React.Ref<HTMLDivElement>
 ) {
   const prefix = usePrefix();
@@ -39,16 +30,8 @@ export const BadgeIndicator = React.forwardRef(function BadgeIndicatorContent(
     [`${prefix}--badge-indicator--count`]: count,
   });
   const displayCount = count && count > 999 ? '999+' : count;
-  const defaultAriaLabel = count
-    ? `${count} ${count === 1 ? 'notification' : 'notifications'}`
-    : 'New notification';
   return (
-    <div
-      className={classNames}
-      ref={ref}
-      role="status"
-      aria-label={ariaLabel ?? defaultAriaLabel}
-      {...rest}>
+    <div className={classNames} ref={ref} {...rest}>
       {displayCount}
     </div>
   );
@@ -63,9 +46,5 @@ BadgeIndicator.propTypes = {
    * Count of badge indicator
    */
   count: PropTypes.number,
-  /**
-   * Provide the text that will be read by screen readers when not in a button context
-   */
-  'aria-label': PropTypes.string,
 };
 export default BadgeIndicator;
