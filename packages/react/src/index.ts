@@ -503,3 +503,106 @@ export type { StructuredListSkeletonProps } from './components/StructuredList/St
 
 //switch
 export type { SwitchProps } from './components/Switch/Switch';
+
+//tab
+export type { TabContentProps } from './components/TabContent/TabContent';
+export type { TabsProps } from './components/Tabs/Tabs';
+export type { TabsVerticalProps } from './components/Tabs/Tabs';
+export type { TabListProps } from './components/Tabs/Tabs';
+export type { TabListVerticalProps } from './components/Tabs/Tabs';
+export type { TabProps } from './components/Tabs/Tabs';
+export type { IconTabProps } from './components/Tabs/Tabs';
+export type { TabPanelProps } from './components/Tabs/Tabs';
+export type { TabPanelsProps } from './components/Tabs/Tabs';
+
+//tag
+export type { TagProps } from './components/Tag/Tag';
+export type { TagSkeletonProps } from './components/Tag/Tag.Skeleton';
+export type { SelectableTagProps } from './components/Tag/SelectableTag';
+export type { OperationalTagProps } from './components/Tag/OperationalTag';
+export type { DismissibleTagProps } from './components/Tag/DismissibleTag';
+
+//text
+export type { TextProps } from './components/Text/Text';
+export type { TextDirectionProps } from './components/Text/TextDirection';
+
+//text area
+export type { TextAreaProps } from './components/TextArea/TextArea';
+export type { TextAreaSkeletonProps } from './components/TextArea/TextArea.Skeleton';
+
+//text input
+export type { TextInputProps } from './components/TextInput/TextInput';
+export type { TextInputSkeletonProps } from './components/TextInput/TextInput.Skeleton';
+export type { PasswordInputProps } from './components/TextInput/PasswordInput';
+export type { ControlledPasswordInputProps } from './components/TextInput/ControlledPasswordInput';
+
+//theme
+export type { GlobalThemeProps } from './components/Theme/index';
+
+//tile
+export type { TileProps } from './components/Tile/Tile';
+export type { ClickableTileProps } from './components/Tile/Tile';
+export type { ExpandableTileProps } from './components/Tile/Tile';
+export type { SelectableTileProps } from './components/Tile/Tile';
+export type { TileAboveTheFoldContentProps } from './components/Tile/Tile';
+export type { TileBelowTheFoldContentProps } from './components/Tile/Tile';
+
+//tile group
+export type { TileGroupProps } from './components/TileGroup/TileGroup';
+
+//time picker
+export type { TimePickerProps } from './components/TimePicker/TimePicker';
+
+//time picker select
+export type { TimePickerSelectProps } from './components/TimePickerSelect/TimePickerSelect';
+
+//toggle
+export type { ToggleProps } from './components/Toggle/Toggle';
+export type { ToggleSkeletonProps } from './components/Toggle/Toggle.Skeleton';
+export type { ToggleSmallSkeletonProps } from './components/ToggleSmall/ToggleSmall.Skeleton';
+
+//toggletip
+export type { ToggletipProps } from './components/Toggletip/index';
+export type { ToggletipButtonBaseProps } from './components/Toggletip/index';
+export type { ToggletipContentProps } from './components/Toggletip/index';
+export type { ToggleTipActionsProps } from './components/Toggletip/index';
+
+//tooltip
+export type { TooltipProps } from './components/Tooltip/Tooltip';
+export type { DefinitionTooltipProps } from './components/Tooltip/DefinitionTooltip';
+
+//tree view
+export type { TreeViewProps } from './components/TreeView/TreeView';
+export type { TreeNodeProps } from './components/TreeView/TreeNode';
+
+//ui shell
+export type { HeaderProps } from './components/UIShell/Header';
+export type { HeaderContainerProps } from './components/UIShell/HeaderContainer';
+export type { HeaderGlobalActionProps } from './components/UIShell/HeaderGlobalAction';
+export type { HeaderMenuProps } from './components/UIShell/HeaderMenu';
+export type { HeaderMenuButtonProps } from './components/UIShell/HeaderMenuButton';
+export type { HeaderMenuItemProps } from './components/UIShell/HeaderMenuItem';
+export type { HeaderMenuItemComponent } from './components/UIShell/HeaderMenuItem';
+export type { HeaderNameProps } from './components/UIShell/HeaderName';
+export type { HeaderNavigationProps } from './components/UIShell/HeaderNavigation';
+export type { HeaderPanelProps } from './components/UIShell/HeaderPanel';
+export type { HeaderSideNavItemsProps } from './components/UIShell/HeaderSideNavItems';
+export type { SideNavProps } from './components/UIShell/SideNav';
+export type { SideNavDetailsProps } from './components/UIShell/SideNavDetails';
+export type { SideNavFooterProps } from './components/UIShell/SideNavFooter';
+export type { SideNavHeaderProps } from './components/UIShell/SideNavHeader';
+export type { SideNavIconProps } from './components/UIShell/SideNavIcon';
+export type { SideNavItemsProps } from './components/UIShell/SideNavItems';
+export type { SideNavItemProps } from './components/UIShell/SideNavItem';
+export type { SideNavLinkProps } from './components/UIShell/SideNavLink';
+export type { SideNavLinkTextProps } from './components/UIShell/SideNavLinkText';
+export type { SideNavMenuProps } from './components/UIShell/SideNavMenu';
+export type { SideNavMenuItemProps } from './components/UIShell/SideNavMenuItem';
+export type { SideNavSwitcherProps } from './components/UIShell/SideNavSwitcher';
+export type { SkipToContentProps } from './components/UIShell/SkipToContent';
+export type { BaseSwitcherProps } from './components/UIShell/Switcher';
+export type { SwitcherDividerProps } from './components/UIShell/SwitcherDivider';
+export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
+
+//unordered list
+export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';
