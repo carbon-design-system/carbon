@@ -252,3 +252,54 @@ export type { ContextMenuProps } from './components/ContextMenu/useContextMenu';
 
 //copy
 export type { CopyProps } from './components/Copy/Copy';
+
+//copy button
+export type { CopyButtonProps } from './components/CopyButton/CopyButton';
+
+//data table
+export type { DataTableProps } from './components/DataTable/DataTable';
+export type { TableBatchActionProps } from './components/DataTable/TableBatchAction';
+export type { TableBatchActionsProps } from './components/DataTable/TableBatchActions';
+export type { TableBodyProps } from './components/DataTable/TableBody';
+export type { TableCellProps } from './components/DataTable/TableCell';
+export type { TableContainerProps } from './components/DataTable/TableContainer';
+export type { TableDecoratorRowProps } from './components/DataTable/TableDecoratorRow';
+export type { TableExpandedRowProps } from './components/DataTable/TableExpandedRow';
+export type { TableExpandHeaderProps } from './components/DataTable/TableExpandHeader';
+export type { TableExpandRowProps } from './components/DataTable/TableExpandRow';
+export type { TableHeadProps } from './components/DataTable/TableHead';
+export type { TableHeaderProps } from './components/DataTable/TableHeader';
+export type { TableRowProps } from './components/DataTable/TableRow';
+export type { TableSelectAllProps } from './components/DataTable/TableSelectAll';
+export type { TableSelectRowProps } from './components/DataTable/TableSelectRow';
+export type { TableToolbarProps } from './components/DataTable/TableToolbar';
+export type { TableToolbarActionProps } from './components/DataTable/TableToolbarAction';
+export type { TableToolbarMenuProps } from './components/DataTable/TableToolbarMenu';
+export type { TableToolbarSearchProps } from './components/DataTable/TableToolbarSearch';
+export type { DataTableSkeletonProps } from './components/DataTableSkeleton/DataTableSkeleton';
+
+//date picker
+export type { DatePickerProps } from './components/DatePicker/DatePicker';
+
+//date picker input
+export type { DatePickerInputProps } from './components/DatePickerInput/DatePickerInput';
+
+//dialog
+export type { DialogProps } from './components/Dialog/index';
+
+//dropdown
+export type { DropdownProps } from './components/Dropdown/Dropdown';
+
+//error boundary
+export type { ErrorBoundaryProps } from './components/ErrorBoundary/ErrorBoundary';
+
+//feature flags
+export type { FeatureFlagsProps } from './components/FeatureFlags/index';
+
+//file uploader
+export type { FilenameProps } from './components/FileUploader/Filename';
+export type { FileUploaderProps } from './components/FileUploader/FileUploader';
+export type { FileUploaderSkeletonProps } from './components/FileUploader/FileUploader.Skeleton';
+export type { FileUploaderButtonProps } from './components/FileUploader/FileUploaderButton';
+export type { FileUploaderDropContainerProps } from './components/FileUploader/FileUploaderDropContainer';
+export type { FileUploaderItemProps } from './components/FileUploader/FileUploaderItem';
