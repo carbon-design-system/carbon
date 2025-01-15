@@ -9468,7 +9468,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "alignmentAxisOffset": Object {
+      "arrowPadding": Object {
         "type": "number",
       },
       "as": Object {
