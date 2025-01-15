@@ -1,0 +1,90 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../colors' as *;
+@use './tokens' as *;
+
+/// icon-indicator styles
+/// @access public
+/// @group tag
+@mixin icon-indicator {
+  .#{$prefix}--icon-indicator {
+    @include type-style('body-compact-01');
+
+    display: flex;
+    color: $text-secondary;
+  }
+
+  .#{$prefix}--icon-indicator svg {
+    align-self: center;
+    margin-inline-end: $spacing-03;
+  }
+
+  .#{$prefix}--icon-indicator--20 {
+    @include type-style('body-compact-02');
+  }
+
+  .#{$prefix}--icon-indicator--failed {
+    fill: $status-red;
+  }
+
+  .#{$prefix}--icon-indicator--caution-major {
+    fill: $status-orange;
+
+    path:first-of-type {
+      fill: $black;
+    }
+  }
+
+  .#{$prefix}--icon-indicator--caution-minor {
+    fill: $status-yellow;
+
+    path:first-of-type {
+      fill: $black;
+    }
+  }
+
+  .#{$prefix}--icon-indicator--undefined {
+    fill: $status-purple;
+  }
+
+  .#{$prefix}--icon-indicator--succeeded {
+    fill: $status-green;
+  }
+
+  .#{$prefix}--icon-indicator--normal {
+    fill: $status-blue;
+  }
+
+  .#{$prefix}--icon-indicator--in-progress {
+    fill: $status-blue;
+  }
+
+  .#{$prefix}--icon-indicator--incomplete {
+    fill: $status-blue;
+  }
+
+  .#{$prefix}--icon-indicator--not-started {
+    fill: $status-gray;
+  }
+
+  .#{$prefix}--icon-indicator--pending {
+    fill: $status-gray;
+  }
+
+  .#{$prefix}--icon-indicator--unknown {
+    fill: $status-gray;
+  }
+
+  .#{$prefix}--icon-indicator--informative {
+    fill: $status-blue;
+  }
+}

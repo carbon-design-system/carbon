@@ -130,10 +130,12 @@ export const SetOfButtons = (args) => {
   );
 };
 
-export const Skeleton = () => (
-  <div>
-    <ButtonSkeleton />
-    &nbsp;
-    <ButtonSkeleton size="sm" />
-  </div>
-);
+export const Skeleton = () => {
+  return (
+    <div>
+      <ButtonSkeleton />
+      &nbsp;
+      <ButtonSkeleton size="sm" />
+    </div>
+  );
+};
