@@ -35,15 +35,19 @@ function SecondaryButtonSet({
   }
 
   if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
-    return secondaryButtons.map(({ buttonText, onClick: onButtonClick }, i) => (
-      <Button
-        key={`${buttonText}-${i}`}
-        className={secondaryClassName}
-        kind="secondary"
-        onClick={onButtonClick || handleRequestClose}>
-        {buttonText}
-      </Button>
-    ));
+    return (
+      <>
+        {secondaryButtons.map(({ buttonText, onClick: onButtonClick }, i) => (
+          <Button
+            key={`${buttonText}-${i}`}
+            className={secondaryClassName}
+            kind="secondary"
+            onClick={onButtonClick || handleRequestClose}>
+            {buttonText}
+          </Button>
+        ))}
+      </>
+    );
   }
   if (secondaryButtonText) {
     return (
