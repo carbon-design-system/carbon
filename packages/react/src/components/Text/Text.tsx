@@ -6,66 +6,74 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode, useContext, useRef } from 'react';
-import { PolymorphicProps } from '../../types/common';
+import React, { ReactNode, useContext } from 'react';
 import { TextDir } from './TextDirection';
 import { TextDirectionContext } from './TextDirectionContext';
-import { useMergeRefs } from '@floating-ui/react';
+import {
+  PolymorphicComponentPropWithRef,
+  PolymorphicRef,
+} from '../../internal/PolymorphicProps';
 
 export interface TextBaseProps {
   dir?: TextDir | undefined;
+  children?: ReactNode;
 }
 
-export type TextProps<T extends React.ElementType> = PolymorphicProps<
-  T,
-  TextBaseProps
->;
-const Text = React.forwardRef(function Text<T extends React.ElementType>(
-  { as, children, dir = 'auto', ...rest }: TextProps<T>,
-  ref: React.Ref<HTMLElement>
-) {
-  // TODO: Update with context typing once its been converted to TS
-  const context = useContext<any>(TextDirectionContext);
-  const textProps: { dir?: TextDir } = {};
-  const BaseComponent = as ?? 'span';
-  const value = {
-    ...context,
-  };
+export type TextProps<T extends React.ElementType> =
+  PolymorphicComponentPropWithRef<T, TextBaseProps>;
 
-  if (!context) {
-    textProps.dir = dir;
-    value.direction = dir;
-  } else {
-    const { direction: parentDirection, getTextDirection } = context;
+type TextComponent = <T extends React.ElementType = 'span'>(
+  props: TextProps<T>
+) => React.ReactElement | any;
 
-    if (getTextDirection && getTextDirection.current) {
-      const text = getTextFromChildren(children);
-      const override = getTextDirection.current(text);
+const Text: TextComponent = React.forwardRef(
+  <T extends React.ElementType = 'span'>(
+    { as, children, dir = 'auto', ...rest }: TextProps<T>,
+    ref?: PolymorphicRef<T>
+  ) => {
+    // TODO: Update with context typing once its been converted to TS
+    const context = useContext<any>(TextDirectionContext);
+    const textProps: { dir?: TextDir } = {};
+    const BaseComponent = as ?? 'span';
+    const value = {
+      ...context,
+    };
 
-      if (parentDirection !== override) {
-        textProps.dir = override;
-        value.direction = override;
-      } else if (parentDirection === 'auto') {
-        textProps.dir = override;
-      }
-    } else if (parentDirection !== dir) {
+    if (!context) {
       textProps.dir = dir;
       value.direction = dir;
-    } else if (parentDirection === 'auto') {
-      textProps.dir = dir;
+    } else {
+      const { direction: parentDirection, getTextDirection } = context;
+
+      if (getTextDirection && getTextDirection.current) {
+        const text = getTextFromChildren(children);
+        const override = getTextDirection.current(text);
+
+        if (parentDirection !== override) {
+          textProps.dir = override;
+          value.direction = override;
+        } else if (parentDirection === 'auto') {
+          textProps.dir = override;
+        }
+      } else if (parentDirection !== dir) {
+        textProps.dir = dir;
+        value.direction = dir;
+      } else if (parentDirection === 'auto') {
+        textProps.dir = dir;
+      }
     }
+
+    return (
+      <TextDirectionContext.Provider value={value}>
+        <BaseComponent ref={ref} {...rest} {...textProps}>
+          {children}
+        </BaseComponent>
+      </TextDirectionContext.Provider>
+    );
   }
+);
 
-  return (
-    <TextDirectionContext.Provider value={value}>
-      <BaseComponent ref={ref} {...rest} {...textProps}>
-        {children}
-      </BaseComponent>
-    </TextDirectionContext.Provider>
-  );
-});
-
-Text.propTypes = {
+(Text as React.FC).propTypes = {
   /**
    * Provide a custom element type used to render the outermost node
    */
