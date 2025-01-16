@@ -73,7 +73,7 @@ class CDSCheckboxGroup extends LitElement {
   legendText;
 
   /**
-   * Provide the text to be rendered inside of the fieldset <legend>
+   * Provide the orientation for how the checkbox should be displayed
    */
   @property({ type: String, reflect: true, attribute: 'orientation' })
   orientation = CHECKBOX_ORIENTATION.VERTICAL;

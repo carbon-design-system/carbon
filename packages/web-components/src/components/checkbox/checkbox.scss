@@ -96,5 +96,5 @@ $css--plex: true !default;
   .#{$prefix}--checkbox-group--horizontal
   ::slotted(#{$prefix}-checkbox) {
   flex: none;
-  margin-inline-end: 1rem;
+  margin-inline-end: $spacing-05;
 }

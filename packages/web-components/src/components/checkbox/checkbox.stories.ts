@@ -142,7 +142,7 @@ const actions = html`
 export const WithAILabel = {
   render: () => html`
     <div style="width: 400px">
-      <cds-checkbox-group legend-text="Group label" orientation="vertical">
+      <cds-checkbox-group legend-text="Group label">
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
@@ -151,7 +151,7 @@ export const WithAILabel = {
         <cds-checkbox>Checkbox label</cds-checkbox>
       </cds-checkbox-group>
 
-      <cds-checkbox-group legend-text="Group label" orientation="vertical">
+      <cds-checkbox-group legend-text="Group label">
         <cds-checkbox>
           Checkbox label
           <cds-ai-label alignment="bottom-left">
@@ -167,7 +167,7 @@ export const WithAILabel = {
         <cds-checkbox>Checkbox label</cds-checkbox>
       </cds-checkbox-group>
 
-      <cds-checkbox-group legend-text="Group label" orientation="vertical">
+      <cds-checkbox-group legend-text="Group label">
         <cds-checkbox>
           Checkbox label
           <cds-ai-label alignment="bottom-left" kind="inline">
