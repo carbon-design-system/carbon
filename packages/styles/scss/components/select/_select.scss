@@ -391,7 +391,8 @@
   .#{$prefix}--select--slug
     .#{$prefix}--select-input:has(~ .#{$prefix}--slug):not(
       :has(~ .#{$prefix}--slug--revert)
-    ) {
+    ),
+  .#{$prefix}--select-input-has--ai-label {
     @include ai-gradient;
   }
 
