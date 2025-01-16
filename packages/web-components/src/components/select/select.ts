@@ -366,6 +366,11 @@ class CDSSelect extends FormMixin(LitElement) {
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
 
     if (label) {
+      if ((label as HTMLSlotElement).assignedNodes()?.length) {
+        const inputEl = this.shadowRoot?.getElementById('input');
+        inputEl?.classList.add(`${prefix}--select-input-has--ai-label`);
+      }
+
       label?.classList.toggle(
         `${prefix}--slug--revert`,
         this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
