@@ -75,13 +75,14 @@ export async function main({ argv, cwd }) {
       );
     },
     run(async (args) => {
-      const { verbose, migration, write, paths } = args;
+      const { verbose, migration, write, paths, wrap } = args;
       const options = {
         cwd: cwd(),
         verbose,
         write,
         migration,
         paths,
+        wrap,
       };
       await migrate(options, upgrades);
     })

@@ -1,5 +1,5 @@
 import React from 'react';
-import { OverflowMenu, OverflowMenuItem, Button } from '@carbon/react';
+import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 function TestComponent({ menuProps }) {
   return (
@@ -7,6 +7,7 @@ function TestComponent({ menuProps }) {
       {/* Old API usage - with explicit props */}
       <OverflowMenu
         aria-label="overflow-menu"
+        align="bottom"
         flipped={true}
         light={true}
         size="xl">
@@ -27,16 +28,11 @@ function TestComponent({ menuProps }) {
       </OverflowMenu>
 
       {/* Already using new API - should not be transformed */}
-      <FeatureFlags enableV12Overflowmenu>
-        <OverflowMenu label="Already migrated">
-          <MenuItem label="Option 1" />
-          <MenuItemDivider />
-          <MenuItem label="Delete" kind="danger" />
-        </OverflowMenu>
-      </FeatureFlags>
-
-      {/* Other components - should not be transformed */}
-      <Button>Normal button</Button>
+      <OverflowMenu label="Already migrated">
+        <MenuItem label="Option 1" />
+        <MenuItemDivider />
+        <MenuItem label="Delete" kind="danger" />
+      </OverflowMenu>
     </div>
   );
 }

@@ -1,12 +1,18 @@
-/**
- * Copyright IBM Corp. 2016, 2024
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-'use strict';
-
+// __tests__/enable-v12-overflowmenu-test.js
 const { defineTest } = require('jscodeshift/dist/testUtils');
 
-defineTest(__dirname, 'enable-v12-overflowmenu');
+// Test with wrapping (default)
+defineTest(
+  __dirname,
+  'enable-v12-overflowmenu',
+  { wrap: 'true' },
+  'enable-v12-overflowmenu'
+);
+
+// Test without wrapping
+defineTest(
+  __dirname,
+  'enable-v12-overflowmenu',
+  { wrap: 'false' },
+  'enable-v12-overflowmenu-nowrap'
+);

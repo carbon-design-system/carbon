@@ -334,17 +334,17 @@ export const upgrades = [
       {
         name: 'enable-v12-overflowmenu',
         description: `
-          Updates the OverflowMenu component usage by wrapping it with FeatureFlags:
-          1. Wraps all OverflowMenu components with FeatureFlags
-          2. Adds FeatureFlags import from @carbon/react if not present
-          
-          Example transformation:
-          Before: <OverflowMenu {...props} />
-          After:  <FeatureFlags enableV12Overflowmenu>
-                    <OverflowMenu {...props} />
-                  </FeatureFlags>
+          Updates OverflowMenu components to v12 with optional FeatureFlags wrapping:
+          1. Migrates to new API (OverflowMenuItem -> MenuItem)
+          2. Updates props (itemText -> label, etc)
+          3. Optional FeatureFlags wrapping (--wrap=false to disable)
+       
+          Example:
+          Before:  <OverflowMenu aria-label="menu"><OverflowMenuItem itemText="Option" /></OverflowMenu>
+          After:   <FeatureFlags enableV12Overflowmenu>
+                    <OverflowMenu label="menu"><MenuItem label="Option" /></OverflowMenu>
+                   </FeatureFlags>
         `,
-
         migrate: async (options) => {
           const transform = path.join(
             TRANSFORM_DIR,
@@ -353,7 +353,7 @@ export const upgrades = [
           const paths =
             Array.isArray(options.paths) && options.paths.length > 0
               ? options.paths
-              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+              : await glob(['**/*.{js,jsx,ts,tsx}'], {
                   cwd: options.workspaceDir,
                   ignore: [
                     '**/es/**',
@@ -369,7 +369,9 @@ export const upgrades = [
             transform,
             paths,
             verbose: options.verbose,
+            wrap: options.wrap, // Pass wrap in parserConfig
           });
+          console.log('Run options wrap:', options.wrap);
         },
       },
       {
