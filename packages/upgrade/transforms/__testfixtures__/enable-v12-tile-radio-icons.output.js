@@ -5,7 +5,7 @@ import { FeatureFlags } from '@carbon/feature-flags';
 function TestComponent() {
   return (
     // prettier-ignore
-    <div>
+    (<div>
       {/* Case 1: Unwrapped TileGroup */}
       <FeatureFlags enableV12TileRadioIcons><TileGroup legend="TestGroup" name="test">
           <RadioTile id="test-1" value="test-1">
@@ -80,7 +80,7 @@ function TestComponent() {
             </RadioTile>
           </TileGroup></FeatureFlags>
       </div>
-    </div>
+    </div>)
   );
 }
 
