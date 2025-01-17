@@ -347,7 +347,7 @@ export const _fullyControlled = (args) => {
       text: 'Option 3',
     },
   ];
-  const [value, setValue] = useState(options[0]);
+  const [value, setValue] = React.useState(options[0]);
   const onChange = ({ selectedItem }) => {
     setValue(selectedItem);
   };
