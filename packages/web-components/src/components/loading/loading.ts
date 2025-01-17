@@ -71,12 +71,12 @@ class CDSLoading extends LitElement {
    * @deprecated The 'inactive' property will be deprecated in the next major release. Please use `active` instead.
    */
   @property({ type: Boolean, reflect: true })
-  get inactive(): Boolean {
-    return this.active;
+  get inactive(): boolean {
+    return !this.active;
   }
 
   set inactive(value: boolean) {
-    this.active = value;
+    this.active = !value;
   }
   /**
    * Specify whether you want the loading indicator to be spinning or not
