@@ -1,0 +1,120 @@
+{
+    "results": [
+        {
+            "ruleId": "element_tabbable_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[2]/body[1]/div[1]/nav[1]/ol[1]/li[1]/a[1]",
+                "aria": "/document[1]/navigation[1]/list[1]/listitem[1]/link[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "potential_visible",
+            "message": "Confirm the element should be tabbable and if so, it becomes visible when it has keyboard focus",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 0,
+                "top": 0,
+                "height": 0,
+                "width": 0
+            },
+            "snippet": "<a href=\"#a\" class=\"cds--link\">",
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2024.12.12/doc/en-US/element_tabbable_visible.html#%7B%22message%22%3A%22Confirm%20the%20element%20should%20be%20tabbable%20and%20if%20so%2C%20it%20becomes%20visible%20when%20it%20has%20keyboard%20focus%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%23a%5C%22%20class%3D%5C%22cds--link%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_visible%22%2C%22ruleId%22%3A%22element_tabbable_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "element_tabbable_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[2]/body[1]/div[1]/nav[1]/ol[1]/li[2]/a[1]",
+                "aria": "/document[1]/navigation[1]/list[1]/listitem[2]/link[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "potential_visible",
+            "message": "Confirm the element should be tabbable and if so, it becomes visible when it has keyboard focus",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 0,
+                "top": 0,
+                "height": 0,
+                "width": 0
+            },
+            "snippet": "<a href=\"#b\" class=\"cds--link\">",
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2024.12.12/doc/en-US/element_tabbable_visible.html#%7B%22message%22%3A%22Confirm%20the%20element%20should%20be%20tabbable%20and%20if%20so%2C%20it%20becomes%20visible%20when%20it%20has%20keyboard%20focus%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%23b%5C%22%20class%3D%5C%22cds--link%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_visible%22%2C%22ruleId%22%3A%22element_tabbable_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "element_tabbable_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[2]/body[1]/div[1]/nav[1]/ol[1]/li[3]/a[1]",
+                "aria": "/document[1]/navigation[1]/list[1]/listitem[3]/link[1]"
+            },
+            "ruleTime": 1,
+            "reasonId": "potential_visible",
+            "message": "Confirm the element should be tabbable and if so, it becomes visible when it has keyboard focus",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 0,
+                "top": 0,
+                "height": 0,
+                "width": 0
+            },
+            "snippet": "<a href=\"#c\" class=\"cds--link\">",
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2024.12.12/doc/en-US/element_tabbable_visible.html#%7B%22message%22%3A%22Confirm%20the%20element%20should%20be%20tabbable%20and%20if%20so%2C%20it%20becomes%20visible%20when%20it%20has%20keyboard%20focus%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%23c%5C%22%20class%3D%5C%22cds--link%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_visible%22%2C%22ruleId%22%3A%22element_tabbable_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        }
+    ],
+    "numExecuted": 54,
+    "ruleTime": 11,
+    "nls": {
+        "element_tabbable_visible": {
+            "0": "A tabbable element should be visible on the screen when it has keyboard focus",
+            "potential_visible": "Confirm the element should be tabbable and if so, it becomes visible when it has keyboard focus"
+        }
+    },
+    "summary": {
+        "counts": {
+            "ignored": 0,
+            "elements": 3,
+            "elementsViolation": 0,
+            "elementsViolationReview": 3,
+            "violation": 0,
+            "potentialviolation": 3,
+            "recommendation": 0,
+            "potentialrecommendation": 0,
+            "manual": 0,
+            "pass": 51
+        },
+        "scanTime": 74,
+        "ruleArchive": "Latest Deployment (latest)",
+        "policies": [
+            "IBM_Accessibility"
+        ],
+        "reportLevels": [
+            "violation",
+            "potentialviolation"
+        ],
+        "startScan": 1737150273247
+    },
+    "scanID": "64aded2a-213c-4d33-aa21-05de4f8abe35",
+    "toolID": "accessibility-checker-v3.1.78",
+    "label": "Breadcrumb"
+}

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { action } from '@storybook/addon-actions';
 import {
@@ -60,22 +60,25 @@ export default {
   },
 };
 
-export const Default = () => (
+const DefaultStory = (args) => (
   <>
-    <ContainedList label="List title" kind="on-page">
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-    </ContainedList>
-    <ContainedList label="List title" kind="on-page">
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-    </ContainedList>
+    {[...Array(4)].map((_, i) => (
+      <ContainedList key={i} {...args}>
+        {[...Array(8)].map((_, j) => (
+          <ContainedListItem key={`${i}-${j}`}>List item</ContainedListItem>
+        ))}
+      </ContainedList>
+    ))}
   </>
 );
+
+export const Default = DefaultStory.bind({});
+
+Default.args = {
+  label: 'List title',
+  kind: 'on-page',
+  size: 'lg',
+};
 
 export const Disclosed = () => (
   <>
@@ -133,13 +136,13 @@ export const WithActions = () => {
 };
 
 export const WithExpandableSearch = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [searchResults, setSearchResults] = React.useState([]);
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const listItems = [
       'List item 1',
       'List item 2',
@@ -175,13 +178,13 @@ export const WithExpandableSearch = () => {
 };
 
 export const WithPersistentSearch = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [searchResults, setSearchResults] = React.useState([]);
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const listItems = [
       'List item 1',
       'List item 2',
@@ -351,24 +354,4 @@ export const UsageExamples = () => {
       </ContainedList>
     </>
   );
-};
-
-const PlaygroundStory = (args) => (
-  <>
-    {[...Array(4)].map((_, i) => (
-      <ContainedList key={i} {...args}>
-        {[...Array(8)].map((_, j) => (
-          <ContainedListItem key={`${i}-${j}`}>List item</ContainedListItem>
-        ))}
-      </ContainedList>
-    ))}
-  </>
-);
-
-export const Playground = PlaygroundStory.bind({});
-
-Playground.args = {
-  label: 'List title',
-  kind: 'on-page',
-  size: 'lg',
 };

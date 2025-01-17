@@ -1,0 +1,33 @@
+{
+    "results": [],
+    "numExecuted": 14,
+    "ruleTime": 4,
+    "nls": {},
+    "summary": {
+        "counts": {
+            "ignored": 0,
+            "elements": 0,
+            "elementsViolation": 0,
+            "elementsViolationReview": 0,
+            "violation": 0,
+            "potentialviolation": 0,
+            "recommendation": 0,
+            "potentialrecommendation": 0,
+            "manual": 0,
+            "pass": 14
+        },
+        "scanTime": 41,
+        "ruleArchive": "Latest Deployment (latest)",
+        "policies": [
+            "IBM_Accessibility"
+        ],
+        "reportLevels": [
+            "violation",
+            "potentialviolation"
+        ],
+        "startScan": 1737150273971
+    },
+    "scanID": "0ca3b4ab-abe0-4dc7-8138-f4b54ff6ceec",
+    "toolID": "accessibility-checker-v3.1.78",
+    "label": "Tag"
+}

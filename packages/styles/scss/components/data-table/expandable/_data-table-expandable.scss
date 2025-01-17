@@ -82,6 +82,9 @@
   tbody:has(> tr.#{$prefix}--data-table--slug-row)
     > tr.#{$prefix}--expandable-row[data-child-row]
     td,
+  tbody:has(> tr.#{$prefix}--data-table--ai-label-row)
+    > tr.#{$prefix}--expandable-row[data-child-row]
+    td,
   tbody:has(td.#{$prefix}--table-column-checkbox)
     > tr.#{$prefix}--expandable-row[data-child-row]
     td {
@@ -89,7 +92,7 @@
   }
 
   // Increase padding inside expandable row when slug AND checkbox is present in row
-  tbody:has(> tr.#{$prefix}--data-table--slug-row):has(
+  tbody:has(> tr.#{$prefix}--data-table--ai-label-row):has(
       td.#{$prefix}--table-column-checkbox
     )
     > tr.#{$prefix}--expandable-row[data-child-row]
@@ -474,6 +477,10 @@
   .#{$prefix}--parent-row .#{$prefix}--table-column-slug,
   .#{$prefix}--parent-row
     .#{$prefix}--table-column-slug
+    + td.#{$prefix}--table-expand[data-previous-value='collapsed'],
+  .#{$prefix}--parent-row .#{$prefix}--table-column-decorator,
+  .#{$prefix}--parent-row
+    .#{$prefix}--table-column-decorator
     + td.#{$prefix}--table-expand[data-previous-value='collapsed'] {
     box-shadow: none;
   }
@@ -482,12 +489,19 @@
     .#{$prefix}--table-column-slug,
   .#{$prefix}--parent-row.#{$prefix}--expandable-row
     .#{$prefix}--table-column-slug
+    + td.#{$prefix}--table-expand[data-previous-value='collapsed'],
+  .#{$prefix}--parent-row.#{$prefix}--expandable-row
+    .#{$prefix}--table-column-decorator,
+  .#{$prefix}--parent-row.#{$prefix}--expandable-row
+    .#{$prefix}--table-column-decorator
     + td.#{$prefix}--table-expand[data-previous-value='collapsed'] {
     border-block-end: 1px solid transparent;
   }
 
   .#{$prefix}--data-table--slug-row td,
-  .#{$prefix}--data-table tr.#{$prefix}--data-table--slug-row:hover td {
+  .#{$prefix}--data-table tr.#{$prefix}--data-table--slug-row:hover td,
+  .#{$prefix}--data-table--ai-label-row td,
+  .#{$prefix}--data-table tr.#{$prefix}--data-table--ai-label-row:hover td {
     border-block-start: 1px solid transparent;
   }
 

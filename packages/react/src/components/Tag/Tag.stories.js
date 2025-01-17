@@ -185,69 +185,74 @@ Skeleton.argTypes = {
   },
 };
 
-const aiLabel = (
-  <AILabel className="ai-label-container">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
+export const withAILabel = () => {
+  const aiLabel = () => {
+    return (
+      <AILabel className="ai-label-container">
+        <AILabelContent>
+          <div>
+            <p className="secondary">AI Explained</p>
+            <h1>84%</h1>
+            <p className="secondary bold">Confidence score</p>
+            <p className="secondary">
+              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+              do eiusmod tempor incididunt ut fsil labore et dolore magna
+              aliqua.
+            </p>
+            <hr />
+            <p className="secondary">Model type</p>
+            <p className="bold">Foundation model</p>
+          </div>
+          <AILabelActions>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View details</Button>
+          </AILabelActions>
+        </AILabelContent>
+      </AILabel>
+    );
+  };
 
-export const withAILabel = () => (
-  <div style={{ marginBottom: '4rem' }}>
-    <Tag
-      decorator={aiLabel}
-      className="some-class"
-      type="red"
-      title="Clear Filter">
-      {'Tag'}
-    </Tag>
+  return (
+    <div style={{ marginBottom: '4rem' }}>
+      <Tag
+        decorator={aiLabel}
+        className="some-class"
+        type="red"
+        title="Clear Filter">
+        {'Tag'}
+      </Tag>
 
-    <DismissibleTag
-      decorator={aiLabel}
-      className="some-class"
-      type="purple"
-      title="Clear Filter"
-      text="Tag"></DismissibleTag>
+      <DismissibleTag
+        decorator={aiLabel}
+        className="some-class"
+        type="purple"
+        title="Clear Filter"
+        text="Tag"></DismissibleTag>
 
-    <Tag
-      renderIcon={Asleep}
-      decorator={aiLabel}
-      className="some-class"
-      type="blue"
-      title="Clear Filter">
-      {'Tag'}
-    </Tag>
+      <Tag
+        renderIcon={Asleep}
+        decorator={aiLabel}
+        className="some-class"
+        type="blue"
+        title="Clear Filter">
+        {'Tag'}
+      </Tag>
 
-    <DismissibleTag
-      renderIcon={Asleep}
-      decorator={aiLabel}
-      className="some-class"
-      type="green"
-      title="Clear Filter"
-      text="Tag"></DismissibleTag>
-  </div>
-);
+      <DismissibleTag
+        renderIcon={Asleep}
+        decorator={aiLabel}
+        className="some-class"
+        type="green"
+        title="Clear Filter"
+        text="Tag"></DismissibleTag>
+    </div>
+  );
+};

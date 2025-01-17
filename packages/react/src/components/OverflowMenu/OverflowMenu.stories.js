@@ -24,25 +24,16 @@ export default {
   },
 };
 
-export const Default = () => (
-  <OverflowMenu flipped={document?.dir === 'rtl'} aria-label="overflow-menu">
-    <OverflowMenuItem itemText="Stop app" />
-    <OverflowMenuItem itemText="Restart app" />
-    <OverflowMenuItem itemText="Rename app" />
-    <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
-    <OverflowMenuItem itemText="Edit routes and access" requireTitle />
-    <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
-  </OverflowMenu>
-);
+export const RenderCustomIcon = () => {
+  return (
+    <OverflowMenu flipped={document?.dir === 'rtl'} renderIcon={Filter}>
+      <OverflowMenuItem itemText="Filter A" />
+      <OverflowMenuItem itemText="Filter B" />
+    </OverflowMenu>
+  );
+};
 
-export const RenderCustomIcon = () => (
-  <OverflowMenu flipped={document?.dir === 'rtl'} renderIcon={Filter}>
-    <OverflowMenuItem itemText="Filter A" />
-    <OverflowMenuItem itemText="Filter B" />
-  </OverflowMenu>
-);
-
-export const Playground = (args) => (
+export const Default = (args) => (
   <OverflowMenu aria-label="overflow-menu" {...args}>
     <OverflowMenuItem itemText="Stop app" />
     <OverflowMenuItem itemText="Restart app" />
@@ -53,13 +44,13 @@ export const Playground = (args) => (
   </OverflowMenu>
 );
 
-Playground.args = {
+Default.args = {
   flipped: document?.dir === 'rtl',
   focusTrap: false,
   open: false,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   ariaLabel: {
     table: {
       disable: true,

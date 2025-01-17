@@ -27,8 +27,16 @@ export default {
   },
 };
 
-export const Default = () => (
-  <Breadcrumb>
+const sharedArgTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const Default = (args) => (
+  <Breadcrumb {...args}>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
     </BreadcrumbItem>
@@ -38,8 +46,12 @@ export const Default = () => (
   </Breadcrumb>
 );
 
-export const BreadcrumbWithOverflowMenu = () => (
-  <Breadcrumb noTrailingSlash>
+Default.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const BreadcrumbWithOverflowMenu = (args) => (
+  <Breadcrumb noTrailingSlash {...args}>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
     </BreadcrumbItem>
@@ -55,23 +67,10 @@ export const BreadcrumbWithOverflowMenu = () => (
   </Breadcrumb>
 );
 
-export const Skeleton = () => <BreadcrumbSkeleton />;
+BreadcrumbWithOverflowMenu.argTypes = {
+  ...sharedArgTypes,
+};
 
-export const Playground = (args) => (
-  <Breadcrumb {...args}>
-    <BreadcrumbItem>
-      <a href="/#">Breadcrumb 1</a>
-    </BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 4</BreadcrumbItem>
-  </Breadcrumb>
-);
-
-Playground.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
+export const Skeleton = () => {
+  return <BreadcrumbSkeleton />;
 };

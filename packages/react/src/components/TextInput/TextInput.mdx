@@ -1,6 +1,7 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as TextInputStories from './TextInput.stories';
 import * as PasswordInputStories from './PasswordInput.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -22,11 +23,27 @@ default text input is for short, one-line content.
 
 ### Fluid
 
-<Canvas of={TextInputStories.Fluid} />
+<Canvas
+  of={TextInputStories.Fluid}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TextInputStories.Fluid),
+    },
+  ]}
+/>
 
 ### Read Only
 
-<Canvas of={TextInputStories.ReadOnly} />
+<Canvas
+  of={TextInputStories.ReadOnly}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TextInputStories.ReadOnly),
+    },
+  ]}
+/>
 
 ### With Layer
 

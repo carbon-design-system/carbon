@@ -4,6 +4,7 @@ import { InlineNotification } from '../Notification';
 import CodeSnippet from '../CodeSnippet';
 import * as ComposedModalStories from './ComposedModal.stories.js';
 import './ComposedModal.stories.scss';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -41,7 +42,19 @@ import './ComposedModal.stories.scss';
 Modal content can be customized via the `<ModalHeader>`, `<ModalBody>` and
 `<ModalFooter>` components.
 
-<Canvas of={ComposedModalStories.WithStateManager} />
+<Canvas
+  of={ComposedModalStories.WithStateManager}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(
+          ComposedModalStories.WithStateManager,
+          "import ReactDOM from 'react-dom';"
+        ),
+    },
+  ]}
+/>
 
 ## Component API
 
