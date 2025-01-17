@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property, query, queryAll } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
@@ -62,6 +62,12 @@ class CDSSelect extends FormMixin(LitElement) {
    */
   @query('#input')
   private _inputNode!: HTMLInputElement;
+
+  /**
+   * Select all <option> nodes with `selected` attribute
+   */
+  @queryAll(`.${prefix}--select-option[selected]`)
+  private _selectedOptionNodes!: HTMLOptionElement[];
 
   /**
    * Handles `oninput` event on the `<input>`.
@@ -353,12 +359,10 @@ class CDSSelect extends FormMixin(LitElement) {
       // Ensures setting the `value` after rendering child `<option>`s/`<optgroup>`s when there is a change in `value`,
       // given reflecting `value` requires child `<option>`s/`<optgroup>`s being there beforehand
 
-      // Select the <option> with 'selector' attribute
-      const selectedOptions = this.shadowRoot?.querySelectorAll(
-        `.${prefix}--select-option[selected]`
-      );
       const lastOption =
-        selectedOptions?.[selectedOptions?.length - 1]?.['value'];
+        this._selectedOptionNodes?.[this._selectedOptionNodes?.length - 1]?.[
+          'value'
+        ];
 
       if (value) {
         this._selectNode.value = value;
