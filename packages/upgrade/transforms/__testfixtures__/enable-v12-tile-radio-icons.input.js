@@ -15,7 +15,7 @@ function TestComponent() {
           Option 2
         </RadioTile>
       </TileGroup>
-      {/* Case 2: Already wrapped but missing attribute */}
+      {/* Case 2: Already wrapped but missing flag prop */}
       <FeatureFlags>
         <TileGroup legend="Missing Attribute" name="wrapped">
           <RadioTile id="wrapped-1" value="wrapped-1">
