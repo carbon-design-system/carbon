@@ -103,7 +103,7 @@ export const withBadgeIndicator = (props) => {
     <div style={{ margin: '3rem' }}>
       <IconButton
         badgeCount={badgeCount}
-        label={'label'}
+        // badgeCountLabel={(badgeCount)=> `${badgeCount} notificaciones (español)`}
         kind="ghost"
         size="lg">
         <Notification />

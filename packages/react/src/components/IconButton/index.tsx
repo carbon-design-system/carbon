@@ -85,6 +85,12 @@ interface IconButtonProps
   badgeCount?: number;
 
   /**
+   * Function to provide a custom label based on badgeCount.
+   * If this is provided and badgeCount is used, the label prop is ignored.
+   */
+  badgeCountLabel?: (badgeCount: number) => string;
+
+  /**
    * Optionally specify an href for your IconButton to become an `<a>` element
    */
   href?: string;
@@ -159,6 +165,12 @@ const IconButton = React.forwardRef(function IconButton(
     align,
     autoAlign = false,
     badgeCount,
+    badgeCountLabel = (badgeCount) =>
+      `${
+        badgeCount > 0
+          ? `${badgeCount} new notification${badgeCount > 1 ? 's' : ''}`
+          : 'New notification'
+      } `,
     children,
     className,
     closeOnActivation = true,
@@ -195,7 +207,7 @@ const IconButton = React.forwardRef(function IconButton(
       className={tooltipClasses}
       defaultOpen={defaultOpen}
       enterDelayMs={enterDelayMs}
-      label={label}
+      label={badgeCount !== undefined ? badgeCountLabel(badgeCount) : label}
       leaveDelayMs={leaveDelayMs}>
       <ButtonBase
         {...rest}
@@ -283,6 +295,12 @@ IconButton.propTypes = {
   badgeCount: PropTypes.number,
 
   /**
+   * **Experimental**: Function to provide a custom label based on badgeCount.
+   * If this is provided and badgeCount is used, the label prop is ignored.
+   */
+  badgeCountLabel: PropTypes.func,
+
+  /**
    * Optionally specify an href for your IconButton to become an `<a>` element
    */
   href: PropTypes.string,
@@ -332,9 +350,22 @@ IconButton.propTypes = {
    * Provide the label to be rendered inside of the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
    * This means that if you have text in the child node it will not be
-   * announced to the screen reader.
+   * announced to the screen reader. If badgeCount is used, this prop is not required
+   * and will be handled by the prop badgeCountLabel
    */
-  label: PropTypes.node.isRequired,
+  label: (props, propName, componentName) => {
+    if (props.badgeCount !== undefined) {
+      // `badgeCount` is being used, so `label` is not required
+      return null;
+    }
+    if (!props[propName]) {
+      // `label` is missing and not covered by `badgeCount`.
+      return new Error(
+        `The prop \`${propName}\` is marked as required in \`${componentName}\`, but its value is \`undefined\`. Provide either \`${propName}\` or \`badgeCount\`.`
+      );
+    }
+    return null; // No error
+  },
 
   /**
    * Specify the duration in milliseconds to delay before hiding the tooltip

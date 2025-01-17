@@ -117,17 +117,21 @@ export const IconButton = (args) => (
   />
 );
 
-export const withBadgeIndicator = (args) => (
-  <Button
-    kind="ghost"
-    badgeCount={4}
-    renderIcon={Notification}
-    iconDescription="Icon Description"
-    hasIconOnly
-    onClick={action('onClick')}
-    {...args}
-  />
-);
+export const withBadgeIndicator = (args) => {
+  const { badgeCount } = args;
+
+  return (
+    <Button
+      kind="ghost"
+      badgeCount={badgeCount}
+      renderIcon={Notification}
+      // badgeCountLabel={()=> `4 notificaciones (español)`}
+      hasIconOnly
+      onClick={action('onClick')}
+      {...args}
+    />
+  );
+};
 
 withBadgeIndicator.args = {
   badgeCount: 4,
