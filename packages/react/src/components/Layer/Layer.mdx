@@ -1,5 +1,6 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as LayerStories from './Layer.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -27,7 +28,15 @@ layer has a specific set of token values associated with it. You can use these
 tokens directly, or use contextual tokens from our styles package like `$layer`
 or `$field`.
 
-<Canvas of={LayerStories.Default} />
+<Canvas
+  of={LayerStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(LayerStories.Default),
+    },
+  ]}
+/>
 
 The `Layer` component accepts `children` as a prop. Each child of a `Layer`
 component is rendered using the layer tokens at that layer. `Layer` components

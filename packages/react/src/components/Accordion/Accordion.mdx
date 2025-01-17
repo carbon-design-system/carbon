@@ -1,6 +1,7 @@
 import Accordion, { AccordionItem, AccordionSkeleton } from '../Accordion';
 import { ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import * as AccordionStories from './Accordion.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -36,7 +37,15 @@ You can configure the accordion item's heading using the `title` prop.
 Everything you pass in as a child of `AccordionItem` will be rendered in the
 accordion's panel.
 
-<Canvas of={AccordionStories.Default} />
+<Canvas
+  of={AccordionStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(AccordionStories.Default),
+    },
+  ]}
+/>
 
 ## Skeleton state
 
@@ -44,7 +53,15 @@ You can use the `AccordionSkeleton` component to render a skeleton variant of an
 accordion. This is useful to display while content in your accordion is being
 fetched from an external resource like an API.
 
-<Canvas of={AccordionStories.Skeleton} />
+<Canvas
+  of={AccordionStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(AccordionStories.Skeleton),
+    },
+  ]}
+/>
 
 ## Component API
 
