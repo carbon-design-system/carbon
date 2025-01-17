@@ -58,6 +58,12 @@ class CDSSelect extends FormMixin(LitElement) {
   private _selectNode!: HTMLSelectElement;
 
   /**
+   * Input node of `select` element
+   */
+  @query('#input')
+  private _inputNode!: HTMLInputElement;
+
+  /**
    * Handles `oninput` event on the `<input>`.
    *
    * @param event The event.
@@ -367,8 +373,7 @@ class CDSSelect extends FormMixin(LitElement) {
 
     if (label) {
       if ((label as HTMLSlotElement).assignedNodes()?.length) {
-        const inputEl = this.shadowRoot?.getElementById('input');
-        inputEl?.classList.add(`${prefix}--select-input-has--ai-label`);
+        this._inputNode?.classList.add(`${prefix}--select-input-has--ai-label`);
       }
 
       label?.classList.toggle(
