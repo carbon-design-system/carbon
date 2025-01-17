@@ -60,7 +60,7 @@ class CDSInlineLoading extends LitElement {
       });
       return html`
         <div class="${classes}">
-          ${getLoadingIcon({ assistiveText, type: LOADING_TYPE.SMALL })}
+          ${getLoadingIcon({ description: assistiveText, small: true })}
         </div>
       `;
     }
