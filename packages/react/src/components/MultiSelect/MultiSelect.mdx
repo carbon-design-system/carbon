@@ -1,6 +1,7 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 
 import * as MultiSelect from './MultiSelect.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -35,13 +36,30 @@ for multiple items to be selected. `MultiSelect` stays open while items are The
 multiple items to be selected. `MultiSelect` stays open while items are being
 selected.
 
-<Canvas of={MultiSelect.Default} />
+<Canvas
+  of={MultiSelect.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MultiSelect.Default),
+    },
+  ]}
+/>
 
 ### With initial selected items
 
 By passing items into the `initialSelectedItems` prop, they can be pre-selected.
 
-<Canvas of={MultiSelect.WithInitialSelectedItems} />
+<Canvas
+  of={MultiSelect.WithInitialSelectedItems}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(MultiSelect.WithInitialSelectedItems),
+    },
+  ]}
+/>
 
 ### Select all
 
@@ -72,7 +90,15 @@ The `FilterableMultiSelect` component allows for filtering the list of
 selectable items to a subset. The `FilterableMultiSelect` component allows for
 filtering the list of selectable items to a subset.
 
-<Canvas of={MultiSelect.Filterable} />
+<Canvas
+  of={MultiSelect.Filterable}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MultiSelect.Filterable),
+    },
+  ]}
+/>
 
 ### With layer
 
