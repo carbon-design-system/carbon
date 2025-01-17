@@ -214,6 +214,33 @@ const sharedArgTypes = {
 };
 
 export const Default = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
   return (
     <div
       style={{
@@ -237,6 +264,33 @@ Default.args = { ...sharedArgs };
 Default.argTypes = { ...sharedArgTypes };
 
 export const WithInitialSelectedItems = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
   return (
     <div
       style={{
@@ -258,6 +312,33 @@ export const WithInitialSelectedItems = (args) => {
 };
 
 export const Filterable = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
   return (
     <div
       style={{

@@ -1,5 +1,6 @@
 import { ArgTypes, Story, Canvas, Meta } from '@storybook/blocks';
 import * as ContainedListStories from './ContainedList.stories.js';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -26,7 +27,15 @@ import * as ContainedListStories from './ContainedList.stories.js';
 
 ## Overview
 
-<Canvas of={ContainedListStories.Default} />
+<Canvas
+  of={ContainedListStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ContainedListStories.Default),
+    },
+  ]}
+/>
 
 ### Search
 
@@ -85,7 +94,16 @@ export const WithExpandableSearch = () => {
 };
 ```
 
-<Canvas of={ContainedListStories.WithExpandableSearch} />
+<Canvas
+  of={ContainedListStories.WithExpandableSearch}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(ContainedListStories.WithExpandableSearch),
+    },
+  ]}
+/>
 
 #### Persistent Search:
 
@@ -140,7 +158,16 @@ export const WithPersistentSearch = () => {
 `ContainedList.ContainedListItem` is deprecated, use
 `import { ContainedListItem } from '@carbon/react` import instead.
 
-<Canvas of={ContainedListStories.WithPersistentSearch} />
+<Canvas
+  of={ContainedListStories.WithPersistentSearch}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(ContainedListStories.WithPersistentSearch),
+    },
+  ]}
+/>
 
 ## Component API
 
