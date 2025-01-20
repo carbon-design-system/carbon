@@ -128,7 +128,7 @@ function isIconOnlyButton(
 const Button: ButtonComponent = React.forwardRef(
   <T extends React.ElementType = 'button'>(
     props: ButtonProps<T>,
-    ref: PolymorphicRef<T>
+    ref: React.Ref<unknown>
   ) => {
     const tooltipRef = useRef(null);
     const {

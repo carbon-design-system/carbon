@@ -6,10 +6,11 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useRef } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { ForwardRefReturn } from '../../types/common';
+import Link from '../Link';
 
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   /**
