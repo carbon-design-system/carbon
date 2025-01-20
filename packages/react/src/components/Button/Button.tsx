@@ -109,7 +109,7 @@ export interface ButtonBaseProps
 export type ButtonProps<T extends React.ElementType> =
   PolymorphicComponentPropWithRef<T, ButtonBaseProps>;
 
-type ButtonComponent = <T extends React.ElementType = 'button'>(
+export type ButtonComponent = <T extends React.ElementType = 'button'>(
   props: ButtonProps<T>,
   context?: any
 ) => React.ReactElement | any;
