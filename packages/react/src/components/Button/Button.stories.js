@@ -117,37 +117,25 @@ export const IconButton = (args) => (
   />
 );
 
-export const IconButtonWithBadge = () => {
-  return (
-    <IconButton
-      badgeCount={67}
-      renderIcon={Notification}
-      iconDescription="Alert"
-      // badgeCountLabel={(badgeCount)=> `${badgeCount} notificaciones (español)`}
-      kind="ghost"
-      size="lg"></IconButton>
-  );
-};
-
-export const withBadgeIndicator = (args) => {
+export const IconButtonWithBadge = (args) => {
   const { badgeCount } = args;
 
   return (
     <Button
       kind="ghost"
       badgeCount={badgeCount}
+      size="lg"
+      hasIconOnly
       renderIcon={Notification}
       iconDescription="Alert"
-      size="lg"
-      badgeCountLabel={() => `4 unread items`}
-      hasIconOnly
       onClick={action('onClick')}
+      autoAlign
       {...args}
     />
   );
 };
 
-withBadgeIndicator.args = {
+IconButtonWithBadge.args = {
   badgeCount: 4,
 };
 

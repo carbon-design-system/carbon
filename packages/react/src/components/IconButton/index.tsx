@@ -86,7 +86,7 @@ interface IconButtonProps
 
   /**
    * Function to provide a custom label based on badgeCount.
-   * If this is provided and badgeCount is used, the label prop is ignored.
+   * If this is provided and badgeCount is used, it is combined with iconDescription prop.
    */
   badgeCountLabel?: (badgeCount: number) => string;
 
@@ -165,12 +165,13 @@ const IconButton = React.forwardRef(function IconButton(
     align,
     autoAlign = false,
     badgeCount,
-    badgeCountLabel = (badgeCount) =>
-      `${
-        badgeCount > 0
-          ? `${badgeCount} new notification${badgeCount > 1 ? 's' : ''}`
-          : 'New notification'
-      } `,
+    badgeCountLabel = (count) => {
+      if (count > 0) {
+        const formattedCount = count > 999 ? '999 plus' : count;
+        return `${formattedCount} new notification${count !== 1 ? 's' : ''}`;
+      }
+      return 'New notification';
+    },
     children,
     className,
     closeOnActivation = true,
@@ -297,13 +298,13 @@ IconButton.propTypes = {
 
   /**
    * **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0.
-   * Must be used with size="lg" and kind="ghost"
+   * Must be used with size="lg", kind="ghost" and hasIconOnly=true
    */
   badgeCount: PropTypes.number,
 
   /**
    * **Experimental**: Function to provide a custom label based on badgeCount.
-   * If this is provided and badgeCount is used, the label prop is ignored.
+   * If this is provided and badgeCount is used, it is combined with the iconDescription prop.
    */
   badgeCountLabel: PropTypes.func,
 
