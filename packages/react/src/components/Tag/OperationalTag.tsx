@@ -17,7 +17,7 @@ import classNames from 'classnames';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
-import Tag, { SIZES } from './Tag';
+import Tag, { SIZES, TagBaseProps } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
@@ -91,7 +91,7 @@ const OperationalTag = <T extends React.ElementType>({
   ...other
 }: OperationalTagProps<T>) => {
   const prefix = usePrefix();
-  const tagRef = useRef<HTMLElement>();
+  const tagRef = useRef<HTMLButtonElement>(null);
   const tagId = id || `tag-${useId()}`;
   const tagClasses = classNames(`${prefix}--tag--operational`, className);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
@@ -119,6 +119,7 @@ const OperationalTag = <T extends React.ElementType>({
         onMouseEnter={() => false}
         closeOnActivation>
         <Tag
+          as="button"
           ref={tagRef}
           type={type}
           size={size}
@@ -126,7 +127,7 @@ const OperationalTag = <T extends React.ElementType>({
           disabled={disabled}
           className={tagClasses}
           id={tagId}
-          {...other}>
+          {...(other as Omit<OperationalTagBaseProps, keyof TagBaseProps>)}>
           <Text title={text} className={`${prefix}--tag__label`}>
             {text}
           </Text>
@@ -137,6 +138,7 @@ const OperationalTag = <T extends React.ElementType>({
 
   return (
     <Tag
+      as="button"
       ref={tagRef}
       type={type}
       size={size}
@@ -144,7 +146,7 @@ const OperationalTag = <T extends React.ElementType>({
       disabled={disabled}
       className={tagClasses}
       id={tagId}
-      {...other}>
+      {...(other as Omit<OperationalTagBaseProps, keyof TagBaseProps>)}>
       <Text title={text} className={`${prefix}--tag__label`}>
         {text}
       </Text>

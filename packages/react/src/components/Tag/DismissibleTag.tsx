@@ -104,7 +104,7 @@ const DismissibleTag = <T extends React.ElementType>({
   ...other
 }: DismissibleTagProps<T>) => {
   const prefix = usePrefix();
-  const tagLabelRef = useRef<HTMLElement>();
+  const tagLabelRef = useRef<HTMLDivElement>(null);
   const tagId = id || `tag-${useId()}`;
   const tagClasses = classNames(`${prefix}--tag--filter`, className);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
@@ -157,8 +157,7 @@ const DismissibleTag = <T extends React.ElementType>({
       renderIcon={renderIcon}
       disabled={disabled}
       className={tagClasses}
-      id={tagId}
-      {...otherProps}>
+      id={tagId}>
       <div className={`${prefix}--interactive--tag-children`}>
         <Text
           title={tagTitle ? tagTitle : text}

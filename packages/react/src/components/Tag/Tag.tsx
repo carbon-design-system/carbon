@@ -6,18 +6,11 @@
  */
 
 import PropTypes from 'prop-types';
-import React, {
-  useLayoutEffect,
-  useState,
-  ReactNode,
-  useRef,
-  ForwardedRef,
-} from 'react';
+import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { PolymorphicProps } from '../../types/common';
 import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
 import { DefinitionTooltip } from '../Tooltip';
