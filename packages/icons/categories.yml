@@ -599,6 +599,8 @@ categories:
           - logo--vmware
           - logo--vmware--alt
           - logo--vue
+          - logo--git
+          - logo--red-hat-ai-instructlab-on-ibm-cloud
       - name: IBM
         members:
           - bee
@@ -1421,6 +1423,7 @@ categories:
           - API--1
           - app
           - application
+          - avro
           - badge
           - book
           - CAD
@@ -1860,6 +1863,7 @@ categories:
           - switch-layer-2
           - switch-layer-3
           - sysplex--distributor
+          - spyre-accelerator
           - tcp-ip-service
           - terminal--3270
           - tsq
@@ -2317,10 +2321,12 @@ categories:
           - array--numbers
           - array--objects
           - array--strings
+          - array
           - asset
           - asset--confirm
           - asset--digital-twin
           - asset--view
+          - asset-movement
           - at
           - audio-console
           - augmented-reality
@@ -2347,6 +2353,7 @@ categories:
           - camera
           - camera--action
           - cell-tower
+          - channels
           - chat-bot
           - chip
           - cloud--download
@@ -2361,7 +2368,9 @@ categories:
           - connection--send
           - connection--two-way
           - cookie
+          - create-link
           - debug
+          - delivery-settings
           - deployment-pattern
           - deployment-policy
           - desk--adjustable
@@ -2394,6 +2403,7 @@ categories:
           - iot--platform
           - keyboard
           - keyboard--off
+          - kiosk-device
           - laptop
           - location--current
           - mail--all
@@ -2411,6 +2421,7 @@ categories:
           - mobile--session
           - mobile--view
           - mobile--view-orientation
+          - multiuser-device
           - object
           - outage
           - password
@@ -2436,6 +2447,7 @@ categories:
           - tablet--landscape
           - terminal
           - transmission-lte
+          - trigger
           - USB
           - voicemail
           - VPN
