@@ -549,6 +549,7 @@ const Dropdown = React.forwardRef(
           );
         }
 
+        // For Dropdowns the arrow up key is only allowed if the Dropdown is open
         if (
           toggleButtonProps.onKeyDown &&
           (evt.key !== 'ArrowUp' || (isOpen && evt.key === 'ArrowUp'))
