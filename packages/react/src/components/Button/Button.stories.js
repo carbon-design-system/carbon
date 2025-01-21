@@ -124,7 +124,6 @@ export const IconButtonWithBadge = (args) => {
     <Button
       kind="ghost"
       badgeCount={badgeCount}
-      size="lg"
       hasIconOnly
       renderIcon={Notification}
       iconDescription="Alert"

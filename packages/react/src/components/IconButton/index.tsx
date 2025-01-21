@@ -150,7 +150,7 @@ interface IconButtonProps
   leaveDelayMs?: number;
 
   /**
-   * Specify the size of the Button. Defaults to `md`.
+   * Specify the size of the Button. Defaults to `lg`.
    */
   size?: ButtonSize;
 
@@ -168,7 +168,7 @@ const IconButton = React.forwardRef(function IconButton(
     badgeCountLabel = (count) => {
       if (count > 0) {
         const formattedCount = count > 999 ? '999 plus' : count;
-        return `${formattedCount} new notification${count !== 1 ? 's' : ''}`;
+        return `, ${formattedCount} new notification${count !== 1 ? 's' : ''}`;
       }
       return 'New notification';
     },
@@ -182,7 +182,7 @@ const IconButton = React.forwardRef(function IconButton(
     label,
     leaveDelayMs = 100,
     wrapperClasses,
-    size,
+    size = 'lg',
     isSelected,
     ...rest
   }: IconButtonProps,
@@ -202,7 +202,7 @@ const IconButton = React.forwardRef(function IconButton(
   // Combine base label with badge label if both exist
   const getAccessibilityLabel = () => {
     if (badgeCount !== undefined) {
-      return `${label}, ${badgeCountLabel(badgeCount)}`;
+      return `${label}${badgeCountLabel(badgeCount)}`;
     }
     return label;
   };
@@ -369,7 +369,7 @@ IconButton.propTypes = {
   leaveDelayMs: PropTypes.number,
 
   /**
-   * Specify the size of the Button. Defaults to `md`.
+   * Specify the size of the Button. Defaults to `lg`.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
