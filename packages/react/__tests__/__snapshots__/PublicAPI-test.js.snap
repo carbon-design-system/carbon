@@ -398,9 +398,6 @@ Map {
       "autoAlign": Object {
         "type": "bool",
       },
-      "badgeCount": Object {
-        "type": "number",
-      },
       "children": Object {
         "type": "node",
       },
@@ -4213,6 +4210,9 @@ Map {
       },
       "badgeCount": Object {
         "type": "number",
+      },
+      "badgeCountLabel": Object {
+        "type": "func",
       },
       "children": Object {
         "type": "node",

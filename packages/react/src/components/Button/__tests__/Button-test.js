@@ -165,6 +165,7 @@ describe('Button', () => {
           iconDescription="test"
           badgeCount={12}
           kind="ghost"
+          size="lg"
         />
       );
       expect(screen.getByText('12')).toBeInTheDocument();
@@ -178,6 +179,7 @@ describe('Button', () => {
           iconDescription="test"
           badgeCount={1200}
           kind="ghost"
+          size="lg"
         />
       );
       expect(screen.getByText('999+')).toBeInTheDocument();

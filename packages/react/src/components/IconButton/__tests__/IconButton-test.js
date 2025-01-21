@@ -22,7 +22,7 @@ describe('IconButton', () => {
 
   it('should support badge indicator', () => {
     render(
-      <IconButton label="edit" badgeCount={12} kind="ghost">
+      <IconButton label="edit" badgeCount={12} kind="ghost" size="lg">
         <Edit />
       </IconButton>
     );
@@ -31,7 +31,7 @@ describe('IconButton', () => {
 
   it('should support badge indicator and truncate', () => {
     render(
-      <IconButton label="edit" badgeCount={1200} kind="ghost">
+      <IconButton label="edit" badgeCount={1200} kind="ghost" size="lg">
         <Edit />
       </IconButton>
     );

@@ -193,11 +193,18 @@ const IconButton = React.forwardRef(function IconButton(
     [`${prefix}--icon-tooltip--disabled`]: disabled,
   });
 
-  if (badgeCount && kind !== 'ghost' && size !== 'lg') {
+  if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
     console.warn(
-      "The prop BadgeCount must be used with kind='ghost' and size='lg'"
+      "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
     );
   }
+  // Combine base label with badge label if both exist
+  const getAccessibilityLabel = () => {
+    if (badgeCount !== undefined) {
+      return `${label}, ${badgeCountLabel(badgeCount)}`;
+    }
+    return label;
+  };
 
   return (
     <Tooltip
@@ -207,7 +214,7 @@ const IconButton = React.forwardRef(function IconButton(
       className={tooltipClasses}
       defaultOpen={defaultOpen}
       enterDelayMs={enterDelayMs}
-      label={badgeCount !== undefined ? badgeCountLabel(badgeCount) : label}
+      label={getAccessibilityLabel()}
       leaveDelayMs={leaveDelayMs}>
       <ButtonBase
         {...rest}
@@ -353,19 +360,7 @@ IconButton.propTypes = {
    * announced to the screen reader. If badgeCount is used, this prop is not required
    * and will be handled by the prop badgeCountLabel
    */
-  label: (props, propName, componentName) => {
-    if (props.badgeCount !== undefined) {
-      // `badgeCount` is being used, so `label` is not required
-      return null;
-    }
-    if (!props[propName]) {
-      // `label` is missing and not covered by `badgeCount`.
-      return new Error(
-        `The prop \`${propName}\` is marked as required in \`${componentName}\`, but its value is \`undefined\`. Provide either \`${propName}\` or \`badgeCount\`.`
-      );
-    }
-    return null; // No error
-  },
+  label: PropTypes.node.isRequired,
 
   /**
    * Specify the duration in milliseconds to delay before hiding the tooltip

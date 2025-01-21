@@ -41,18 +41,6 @@ export type ButtonTooltipPosition = (typeof ButtonTooltipPositions)[number];
 export interface ButtonBaseProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0.
-   * Must be used with size="lg", kind="ghost", and hasIconOnly
-   */
-  badgeCount?: number;
-
-  /**
-   * Function to provide a custom label based on badgeCount.
-   * If this is provided and badgeCount is used, the iconDescription prop is ignored.
-   */
-  badgeCountLabel?: (badgeCount: number) => string;
-
-  /**
    * Specify the message read by screen readers for the danger button variant
    */
   dangerDescription?: string;
@@ -143,13 +131,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
   const {
     as,
     autoAlign = false,
-    badgeCount,
-    badgeCountLabel = (badgeCount) =>
-      `${
-        badgeCount > 0
-          ? `${badgeCount} new notification${badgeCount > 1 ? 's' : ''}`
-          : 'New notification'
-      } `,
+
     children,
     hasIconOnly = false,
     iconDescription,
@@ -204,8 +186,6 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
         ref={ref}
         as={as}
         align={align}
-        badgeCount={badgeCount}
-        badgeCountLabel={badgeCountLabel}
         label={iconDescription}
         kind={kind}
         size={size}
@@ -239,18 +219,6 @@ Button.propTypes = {
    * **Experimental**: Will attempt to automatically align the tooltip
    */
   autoAlign: PropTypes.bool,
-
-  /**
-   * **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0.
-   * Must be used with size="lg" and kind="ghost"
-   */
-  badgeCount: PropTypes.number,
-
-  /**
-   * **Experimental**: Function to provide a custom label based on badgeCount.
-   * If this is provided and badgeCount is used, the iconDescription prop is ignored.
-   */
-  badgeCountLabel: PropTypes.func,
 
   /**
    * Specify the content of your Button
@@ -287,12 +255,7 @@ Button.propTypes = {
    * be read by screen readers
    */
   iconDescription: (props) => {
-    if (
-      !props.badgeCount &&
-      props.renderIcon &&
-      !props.children &&
-      !props.iconDescription
-    ) {
+    if (props.renderIcon && !props.children && !props.iconDescription) {
       return new Error(
         'renderIcon property specified without also providing an iconDescription property.'
       );
