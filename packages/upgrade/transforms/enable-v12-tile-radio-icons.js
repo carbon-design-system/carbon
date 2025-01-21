@@ -180,3 +180,4 @@ function transform(fileInfo, api, options) {
 }
 
 module.exports = transform;
+module.exports.parser = 'tsx';

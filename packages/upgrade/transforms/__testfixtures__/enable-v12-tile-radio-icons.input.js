@@ -15,7 +15,7 @@ function TestComponent() {
           Option 2
         </RadioTile>
       </TileGroup>
-      {/* Case 2: Already wrapped but missing flag prop */}
+      {/* Wrapped standalone missing flag prop */}
       <FeatureFlags>
         <TileGroup legend="Missing Attribute" name="wrapped">
           <RadioTile id="wrapped-1" value="wrapped-1">
@@ -27,7 +27,7 @@ function TestComponent() {
         </TileGroup>
       </FeatureFlags>
       {/* Case 3: Already wrapped with other attributes */}
-      <FeatureFlags someOtherFlag>
+      <FeatureFlags enable-v12-tile-default-icons>
         <TileGroup legend="Other Attribute" name="other-wrapped">
           <RadioTile id="other-1" value="other-1">
             Other Flag Option 1
@@ -48,14 +48,14 @@ function TestComponent() {
         <RadioTile id="standalone" value="standalone">
           Standalone Tile
         </RadioTile>
-        {/* Wrapped standalone missing attribute */}
+        {/* Wrapped standalone missing flag prop */}
         <FeatureFlags>
           <RadioTile id="wrapped-standalone" value="wrapped-standalone">
             Wrapped Standalone
           </RadioTile>
         </FeatureFlags>
         {/* Wrapped standalone with other flag */}
-        <FeatureFlags otherFlag>
+        <FeatureFlags enable-v12-tile-default-icons>
           <RadioTile id="other-standalone" value="other-standalone">
             Other Flag Standalone
           </RadioTile>

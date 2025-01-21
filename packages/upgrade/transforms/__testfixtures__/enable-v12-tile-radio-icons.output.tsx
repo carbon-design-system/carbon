@@ -2,10 +2,10 @@ import React from 'react';
 import { TileGroup, RadioTile, Stack } from '@carbon/react';
 import { FeatureFlags } from '@carbon/feature-flags';
 
-function TestComponent() {
+const TestComponent: React.FC = () => {
   return (
     // prettier-ignore
-    (<div>
+    <div>
       {/* Case 1: Unwrapped TileGroup */}
       <FeatureFlags enableV12TileRadioIcons><TileGroup legend="TestGroup" name="test">
           <RadioTile id="test-1" value="test-1">
@@ -26,7 +26,7 @@ function TestComponent() {
           </RadioTile>
         </TileGroup>
       </FeatureFlags>
-      {/* Case 3: Already wrapped with other attributes */}
+      {/* Case 3: Already wrapped with other flags */}
       <FeatureFlags enable-v12-tile-default-icons enableV12TileRadioIcons>
         <TileGroup legend="Other Attribute" name="other-wrapped">
           <RadioTile id="other-1" value="other-1">
@@ -34,7 +34,7 @@ function TestComponent() {
           </RadioTile>
         </TileGroup>
       </FeatureFlags>
-      {/* Case 4: Already wrapped with correct attribute */}
+      {/* Case 4: Already wrapped with correct flag */}
       <FeatureFlags enableV12TileRadioIcons>
         <TileGroup legend="Correct Wrapped" name="correct">
           <RadioTile id="correct-1" value="correct-1">
@@ -80,8 +80,8 @@ function TestComponent() {
             </RadioTile>
           </TileGroup></FeatureFlags>
       </div>
-    </div>)
+    </div>
   );
-}
+};
 
 export default TestComponent;
