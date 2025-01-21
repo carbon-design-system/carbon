@@ -379,6 +379,28 @@ export const _fullyControlled = (args) => {
   );
 };
 
+export const Test = () => {
+  const [selectedItem, setSelectedItem] = useState('1');
+  const onChange = ({ selectedItem }) => {
+    console.log('Parent onChange called with:', selectedItem);
+    setSelectedItem(selectedItem);
+  };
+
+  return (
+    <div>
+      <ComboBox
+        id="3"
+        items={['1', '2', '3']}
+        selectedItem={selectedItem}
+        titleText="ComboBox title"
+        helperText="Combobox helper text"
+        onChange={onChange}
+        allowCustomValue
+      />
+    </div>
+  );
+};
+
 _fullyControlled.argTypes = { ...sharedArgTypes };
 
 AutocompleteWithTypeahead.argTypes = {
