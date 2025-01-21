@@ -43,6 +43,8 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-slider-input) {
+  position: relative;
+
   input {
     box-sizing: border-box;
   }

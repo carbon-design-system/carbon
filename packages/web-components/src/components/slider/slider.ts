@@ -51,6 +51,8 @@ const THUMB_DIRECTION = {
  */
 @customElement(`${prefix}-slider`)
 class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
+  private _cachedRateUpper: number = 1;
+  private _cachedRate: number = 0;
   /**
    * The internal value of `max` property.
    */
@@ -100,10 +102,15 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   private get _rate() {
     const { max, min, value } = this;
     // Copes with out-of-range value coming programmatically or from `<cds-slider-input>`
-    return (
-      (Math.min(Number(max), Math.max(Number(min), value)) - Number(min)) /
-      (Number(max) - Number(min))
-    );
+    if (value) {
+      const rate =
+        (Math.min(Number(max), Math.max(Number(min), value)) - Number(min)) /
+        (Number(max) - Number(min));
+      this._cachedRate = rate;
+      return rate;
+    } else {
+      return this._cachedRate;
+    }
   }
 
   private set _rate(rate: number) {
@@ -123,10 +130,16 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   private get _rateUpper() {
     const { max, min, valueUpper } = this;
     // Copes with out-of-range value coming programmatically or from `<cds-slider-input>`
-    return (
-      (Math.min(Number(max), Math.max(Number(min), valueUpper)) - Number(min)) /
-      (Number(max) - Number(min))
-    );
+    if (valueUpper) {
+      const rateUpper =
+        (Math.min(Number(max), Math.max(Number(min), valueUpper)) -
+          Number(min)) /
+        (Number(max) - Number(min));
+      this._cachedRateUpper = rateUpper;
+      return rateUpper;
+    } else {
+      return this._cachedRateUpper;
+    }
   }
 
   private set _rateUpper(rateUpper: number) {
@@ -498,31 +511,37 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleChangeInput = (event: CustomEvent) => {
     const input = event.target as HTMLElement;
+    const inputElement = input.shadowRoot?.querySelector('input');
     this.isValid =
       input.tagName === 'CDS-SLIDER-INPUT'
-        ? this._getInputValidity(event.target as HTMLInputElement)
+        ? this._getInputValidity(input)
         : this.isValid;
-    const inputElement = input.shadowRoot?.querySelector('input');
     this.warn = this._getInputWarnigState(inputElement);
     const eventContainer = (event.target as HTMLElement).id;
     const { detail } = event;
     const { intermediate, value } = detail;
-    if (eventContainer === 'upper') {
-      this.valueUpper = value;
-    } else {
-      this.value = value;
+    this.warnText = intermediate
+      ? `The inputted value ${intermediate} was corrected to the nearest allowed digit`
+      : '';
+    if (intermediate !== value) {
+      if (eventContainer === 'upper') {
+        this.valueUpper = value;
+      } else {
+        this.value = value;
+      }
     }
     const valueMain = eventContainer === 'upper' ? this.valueUpper : this.value;
-    this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: valueMain,
-          intermediate,
-        },
-      })
-    );
+    valueMain !== '' &&
+      this.dispatchEvent(
+        new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
+          bubbles: true,
+          composed: true,
+          detail: {
+            value: valueMain,
+            intermediate,
+          },
+        })
+      );
   };
 
   /**
@@ -675,8 +694,8 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    */
   @property({ type: Boolean })
   isValid;
-
   _getInputValidity(input) {
+    const inputElement = input?.shadowRoot?.querySelector('input');
     if (this.invalid) {
       return false;
     }
@@ -684,10 +703,9 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       return false;
     }
     if (
-      input?.valueAsNumber > Number(this.max) ||
-      input?.valueAsNumber < Number(this.min)
+      inputElement?.valueAsNumber > Number(this.max) ||
+      inputElement?.valueAsNumber < Number(this.min)
     ) {
-      this.warn = true;
       return false;
     }
     return true;
@@ -722,8 +740,6 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   }
 
   shouldUpdate(changedProperties) {
-    console.log(this.isValid, 'this.isValid');
-    console.log(this.invalid, 'this.invalid');
     const inputs = this.querySelectorAll(
       (this.constructor as typeof CDSSlider).selectorInput
     ) as NodeListOf<CDSSliderInput>;
@@ -745,14 +761,14 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
         }
       }
       if (input) {
-        if (this.valueUpper && index > 0) {
+        if ((this.valueUpper || this.valueUpper === '') && index > 0) {
           ['max', 'min', 'step', 'valueUpper'].forEach((name) => {
             if (name === 'valueUpper') {
               input.value = this.valueUpper;
             } else if (name === 'min') {
               input[name] = this.value;
             } else {
-              this[name];
+              input[name] = this[name];
             }
           });
         } else {
@@ -764,31 +780,17 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             }
           });
         }
-
         if (
           changedProperties.has('value') ||
           changedProperties.has('invalid') ||
           changedProperties.has('warn') ||
           changedProperties.has('readonly')
         ) {
-          const innerInput = input?.shadowRoot?.querySelector('input');
-          this.isValid = this._getInputValidity(innerInput);
+          this.isValid = this._getInputValidity(input);
           if (!this.readonly && !this.isValid) {
             input.invalid = true;
           } else {
             input.invalid = false;
-          }
-          if (!this.readonly && !this.invalid && this.warn && this.isValid) {
-            input.warn = true;
-          } else {
-            input.warn = false;
-          }
-
-          if (!this.isValid) {
-            this.invalidText = 'Invalid';
-          }
-          if (this.warn) {
-            this.warnText = 'Warning you!';
           }
         }
       }
@@ -821,6 +823,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       _startDrag: startDrag,
       _endDrag: endDrag,
     } = this;
+
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--label--disabled`]: disabled,
@@ -830,13 +833,14 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       [`${prefix}--slider--disabled`]: disabled,
       [`${prefix}--slider--readonly`]: readonly,
     });
-
     return html`
       <label class="${labelClasses}" @click="${handleClickLabel}">
         <slot name="label-text">${labelText}</slot>
       </label>
       <div class="${prefix}--slider-container">
-        ${valueUpper ? html` <slot name="lower-input"></slot>` : ''}
+        ${valueUpper || valueUpper === ''
+          ? html` <slot name="lower-input"></slot>`
+          : ''}
         <span class="${prefix}--slider__range-label">
           <slot name="min-text">${formatMinText(min, minLabel)}</slot>
         </span>
@@ -850,7 +854,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           role="presentation">
           <div
             id="thumb"
-            class="${valueUpper
+            class="${valueUpper || valueUpper === ''
               ? `${prefix}--icon-tooltip ${prefix}--slider__thumb-wrapper ${prefix}--slider__thumb-wrapper--lower`
               : `${prefix}--slider__thumb`}"
             role="slider"
@@ -860,7 +864,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             aria-valuenow="${value}"
             style="left: ${rate * 100}%"
             @pointerdown="${startDrag}">
-            ${valueUpper
+            ${valueUpper || valueUpper === ''
               ? html`
                   <div class="${prefix}--slider__thumb--lower">
                     <svg
@@ -886,7 +890,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                 `
               : ``}
           </div>
-          ${valueUpper
+          ${valueUpper || valueUpper === ''
             ? html`
                 <div
                   id="thumb-upper"
@@ -923,7 +927,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
               `
             : html``}
           <div id="track" class="${prefix}--slider__track"></div>
-          ${valueUpper
+          ${valueUpper || valueUpper === ''
             ? html`
                 <div
                   class="${prefix}--slider__filled-track"
