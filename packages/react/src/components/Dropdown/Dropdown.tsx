@@ -549,18 +549,9 @@ const Dropdown = React.forwardRef(
           );
         }
 
-        // Allow any key press that is not ArrowUp or ArrowDown
-        const isNotUpOrDown = evt.key !== 'ArrowUp' && evt.key !== 'ArrowDown';
-        // Allow any key press other than ArrowUp if the first item is selected
-        const isNotTopAndUp =
-          evt.key === 'ArrowUp' && items?.[0] !== selectedItem;
-        // Allow any key press other than ArrowDown if the last item is selected
-        const isNotBottomAndDown =
-          evt.key === 'ArrowDown' &&
-          items?.[items?.length - 1] !== selectedItem;
         if (
           toggleButtonProps.onKeyDown &&
-          (isNotUpOrDown || isOpen || isNotTopAndUp || isNotBottomAndDown)
+          (evt.key !== 'ArrowUp' || (isOpen && evt.key === 'ArrowUp'))
         ) {
           toggleButtonProps.onKeyDown(evt);
         }
