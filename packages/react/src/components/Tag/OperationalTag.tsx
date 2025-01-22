@@ -127,7 +127,7 @@ const OperationalTag = <T extends React.ElementType>({
           disabled={disabled}
           className={tagClasses}
           id={tagId}
-          {...(other as Omit<OperationalTagBaseProps, keyof TagBaseProps>)}>
+          {...other}>
           <Text title={text} className={`${prefix}--tag__label`}>
             {text}
           </Text>
@@ -146,7 +146,7 @@ const OperationalTag = <T extends React.ElementType>({
       disabled={disabled}
       className={tagClasses}
       id={tagId}
-      {...(other as Omit<OperationalTagBaseProps, keyof TagBaseProps>)}>
+      {...other}>
       <Text title={text} className={`${prefix}--tag__label`}>
         {text}
       </Text>

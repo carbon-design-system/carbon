@@ -20,6 +20,9 @@ import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
+import { SelectableTagBaseProps, SelectableTagProps } from './SelectableTag';
+import { OperationalTagBaseProps } from './OperationalTag';
+import { DismissibleTagBaseProps } from './DismissibleTag';
 
 export const TYPES = {
   red: 'Red',
@@ -111,7 +114,11 @@ export type TagProps<T extends React.ElementType> =
   PolymorphicComponentPropWithRef<T, TagBaseProps>;
 
 type TagComponent = <T extends React.ElementType = 'div'>(
-  props: TagProps<T>
+  props:
+    | TagProps<T>
+    | OperationalTagBaseProps
+    | SelectableTagBaseProps
+    | DismissibleTagBaseProps
 ) => React.ReactElement | any;
 
 const Tag: TagComponent = React.forwardRef(

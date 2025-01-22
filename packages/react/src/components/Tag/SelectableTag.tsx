@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
-import Tag, { SIZES } from './Tag';
+import Tag, { SIZES, TagBaseProps } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
@@ -109,6 +109,8 @@ const SelectableTag = <T extends React.ElementType>({
     onClick?.(e);
   };
 
+  console.log('other', other);
+
   if (isEllipsisApplied) {
     return (
       <Tooltip
@@ -118,7 +120,6 @@ const SelectableTag = <T extends React.ElementType>({
         leaveDelayMs={0}
         onMouseEnter={() => false}>
         <Tag
-          as="button"
           aria-pressed={selectedTag !== false}
           ref={tagRef}
           size={size}
@@ -138,7 +139,6 @@ const SelectableTag = <T extends React.ElementType>({
 
   return (
     <Tag
-      as="button"
       aria-pressed={selectedTag !== false}
       ref={tagRef}
       size={size}

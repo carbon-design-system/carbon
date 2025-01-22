@@ -157,7 +157,8 @@ const DismissibleTag = <T extends React.ElementType>({
       renderIcon={renderIcon}
       disabled={disabled}
       className={tagClasses}
-      id={tagId}>
+      id={tagId}
+      {...otherProps}>
       <div className={`${prefix}--interactive--tag-children`}>
         <Text
           title={tagTitle ? tagTitle : text}
