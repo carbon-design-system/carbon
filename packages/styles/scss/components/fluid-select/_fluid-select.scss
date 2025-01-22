@@ -219,6 +219,10 @@
 
   // remove ai-label divider when element is invalid and fluid
   .#{$prefix}--select--fluid
+    .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator
+    > .#{$prefix}--ai-label::before,
+  .#{$prefix}--select--fluid
     .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
     .#{$prefix}--ai-label::before,
   .#{$prefix}--select--fluid
