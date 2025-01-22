@@ -127,8 +127,8 @@ documented in the
 
 New experimental functionality can sometimes be added without the need of an
 `unstable_` export or a feature flag. Oftentimes this ends up being a new prop
-on a component. The documentation **associated** with this prop (TypeScript
-types, PropTypes, storybook controls, etc.) will state that it's experimental.
+on a component. The documentation associated with this prop (TypeScript types,
+PropTypes, storybook controls, etc.) will state that it's experimental.
 
 ## Moving to stable
 
