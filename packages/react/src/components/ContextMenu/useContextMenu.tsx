@@ -13,7 +13,7 @@ type TriggerType =
   | Window
   | React.RefObject<Element | null>;
 
-interface ContextMenuProps {
+export interface ContextMenuProps {
   open: boolean;
   x: number;
   y: number;

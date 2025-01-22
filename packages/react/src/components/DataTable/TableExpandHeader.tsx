@@ -14,7 +14,7 @@ import deprecate from '../../prop-types/deprecate';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import { ReactAttr } from '../../types/common';
 
-type TableExpandHeaderPropsBase = {
+export type TableExpandHeaderPropsBase = {
   /**
    * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandHeader
    */
@@ -56,7 +56,7 @@ type TableExpandHeaderPropsBase = {
   onExpand?(event: React.MouseEvent<HTMLButtonElement>): void;
 } & ReactAttr<HTMLTableCellElement>;
 
-type TableExpandHeaderPropsWithToggle = Omit<
+export type TableExpandHeaderPropsWithToggle = Omit<
   TableExpandHeaderPropsBase,
   'ariaLabel' | 'aria-label' | 'enableToggle' | 'onExpand'
 > & {
@@ -66,7 +66,7 @@ type TableExpandHeaderPropsWithToggle = Omit<
   onExpand(event: React.MouseEvent<HTMLButtonElement>): void;
 };
 
-type TableExpandHeaderPropsWithExpando = Omit<
+export type TableExpandHeaderPropsWithExpando = Omit<
   TableExpandHeaderPropsBase,
   'ariaLabel' | 'aria-label' | 'enableExpando' | 'onExpand'
 > & {

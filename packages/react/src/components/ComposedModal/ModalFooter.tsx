@@ -8,7 +8,7 @@ import { noopFn } from '../../internal/noopFn';
 import InlineLoading from '../InlineLoading';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 
-interface SecondaryButtonProps {
+export interface SecondaryButtonProps {
   buttonText: ReactNode;
   onClick(evt: MouseEvent): void;
 }

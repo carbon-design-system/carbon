@@ -646,6 +646,7 @@ categories:
       - name: AI
         members:
           - AI
+          - ai-business-impact-assessment
           - ai-governance--lifecycle
           - ai-governance--tracked
           - ai-governance--untracked
@@ -653,6 +654,7 @@ categories:
           - ai-label
           - ai-launch
           - ai-recommend
+          - business-metrics
           - ibm--granite
           - ibm-watson--discovery
           - ibm-watson--orders

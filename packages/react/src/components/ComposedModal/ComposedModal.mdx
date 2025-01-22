@@ -42,7 +42,19 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 Modal content can be customized via the `<ModalHeader>`, `<ModalBody>` and
 `<ModalFooter>` components.
 
-<Canvas of={ComposedModalStories.WithStateManager} />
+<Canvas
+  of={ComposedModalStories.WithStateManager}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(
+          ComposedModalStories.WithStateManager,
+          "import ReactDOM from 'react-dom';"
+        ),
+    },
+  ]}
+/>
 
 ## Component API
 

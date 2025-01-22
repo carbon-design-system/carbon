@@ -2,6 +2,7 @@ import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import * as DatePickerStories from './DatePicker.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -54,7 +55,15 @@ The simple date input provides the user with only a text field in which they can
 manually input a date. It allows dates to be entered without adding unnecessary
 interactions that come with the calendar menu or a dropdown.
 
-<Canvas of={DatePickerStories.Simple} />
+<Canvas
+  of={DatePickerStories.Simple}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DatePickerStories.Simple),
+    },
+  ]}
+/>
 
 ### Range Datepicker
 
@@ -62,8 +71,26 @@ Calendar pickers default to showing today’s date when opened and only one mont
 is shown at a time. Calendar pickers allow users to navigate through months and
 years, however they work best when used for recent or near future dates.
 
-<Canvas of={DatePickerStories.SingleWithCalendar} />
-<Canvas of={DatePickerStories.RangeWithCalendar} />
+<Canvas
+  of={DatePickerStories.SingleWithCalendar}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(DatePickerStories.SingleWithCalendar),
+    },
+  ]}
+/>
+<Canvas
+  of={DatePickerStories.RangeWithCalendar}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(DatePickerStories.RangeWithCalendar),
+    },
+  ]}
+/>
 
 ### Skeleton state
 
@@ -71,7 +98,15 @@ You can use the `DatePickerSkeleton` component to render a skeleton variant of a
 `DatePicker`. This is useful to display while an initial date range in your
 `DatePicker` is being fetched from an external resource like an API.
 
-<Canvas of={DatePickerStories.Skeleton} />
+<Canvas
+  of={DatePickerStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DatePickerStories.Skeleton),
+    },
+  ]}
+/>
 
 ## Component API
 
