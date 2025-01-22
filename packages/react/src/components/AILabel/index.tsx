@@ -127,7 +127,7 @@ const propMappingFunction = (deprecatedValue) => {
   return mapPopoverAlignProp(deprecatedValue);
 };
 
-interface AILabelProps {
+export interface AILabelProps {
   AILabelContent?: React.ReactNode;
   aiText?: string;
   aiTextLabel?: string;
