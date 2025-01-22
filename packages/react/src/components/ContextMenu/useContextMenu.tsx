@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 
 type TriggerType = Element | Document | Window | React.RefObject<Element>;
 
-interface ContextMenuProps {
+export interface ContextMenuProps {
   open: boolean;
   x: number;
   y: number;
