@@ -140,10 +140,6 @@ const argTypes = {
   },
 };
 
-const defaultArgs = {
-  helperText: 'Optional helper text',
-};
-
 export const Default = {
   args,
   argTypes,
@@ -275,6 +271,7 @@ export const WithAILabel = {
   argTypes: {
     ...argTypes,
     inline: {
+      ...argTypes.inline,
       control: false,
     },
   },
@@ -338,6 +335,7 @@ export const WithLayer = {
   argTypes: {
     ...argTypes,
     inline: {
+      ...argTypes.inline,
       control: false,
     },
   },
