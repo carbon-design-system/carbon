@@ -117,8 +117,14 @@ $css--plex: true !default;
   box-shadow: none;
   inline-size: 1.25rem;
   min-block-size: 1.125rem;
-  outline: none;
-  transform: translateY(4px);
+
+  #{$prefix}-tooltip button {
+    position: relative;
+    block-size: 1.125rem;
+    inline-size: 1.25rem;
+    min-block-size: 1.125rem;
+    padding-inline: 0;
+  }
 
   :hover,
   :active,
@@ -126,5 +132,11 @@ $css--plex: true !default;
     box-sizing: border-box;
     background: none;
     box-shadow: none;
+  }
+}
+
+:host(#{$prefix}-overflow-menu[breadcrumb]) {
+  ::slotted([slot='icon']) {
+    transform: translateY(4px);
   }
 }
