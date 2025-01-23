@@ -67,7 +67,7 @@ export default {
 export const Default = (args) => {
   return (
     <Tabs onTabCloseRequest={() => {}}>
-      <TabList aria-label="List of tabs" {...args}>
+      <TabList {...args}>
         <Tab>Dashboard</Tab>
         <Tab>Monitoring</Tab>
         <Tab>Activity</Tab>
@@ -186,7 +186,7 @@ export const Dismissable = () => {
         onChange={handleTabChange}
         dismissable
         onTabCloseRequest={handleCloseTabRequest}>
-        <TabList aria-label="List of tabs">
+        <TabList>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled}>
               {tab.label}
@@ -259,7 +259,7 @@ export const DismissableWithIcons = ({ contained }) => {
         onChange={handleTabChange}
         dismissable
         onTabCloseRequest={handleCloseTabRequest}>
-        <TabList aria-label="List of tabs" contained={contained}>
+        <TabList contained={contained}>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled} renderIcon={icons[index]}>
               {tab.label}
@@ -275,7 +275,7 @@ export const DismissableWithIcons = ({ contained }) => {
 export const WithIcons = () => {
   return (
     <Tabs>
-      <TabList activation="manual" aria-label="List of tabs">
+      <TabList activation="manual">
         <Tab renderIcon={Dashboard}>Dashboard</Tab>
         <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
         <Tab renderIcon={Activity}>Activity</Tab>
@@ -314,7 +314,7 @@ export const WithIcons = () => {
 export const Manual = () => {
   return (
     <Tabs>
-      <TabList activation="manual" aria-label="List of tabs">
+      <TabList activation="manual">
         <Tab>Dashboard</Tab>
         <Tab>Monitoring</Tab>
         <Tab title="Tab label 4">Activity</Tab>
@@ -351,7 +351,7 @@ export const Manual = () => {
 export const Icon20Only = () => {
   return (
     <Tabs>
-      <TabList iconSize="lg" aria-label="List of tabs">
+      <TabList iconSize="lg">
         <IconTab label="Analyze" disabled>
           <IbmWatsonDiscovery size={20} aria-label="Analyze" />
         </IconTab>
@@ -378,7 +378,7 @@ export const Icon20Only = () => {
 export const IconOnly = () => {
   return (
     <Tabs>
-      <TabList aria-label="List of tabs">
+      <TabList>
         <IconTab label="Analyze" disabled>
           <IbmWatsonDiscovery aria-label="Analyze" />
         </IconTab>
@@ -405,7 +405,7 @@ export const IconOnly = () => {
 export const Contained = () => {
   return (
     <Tabs>
-      <TabList aria-label="List of tabs" contained>
+      <TabList contained>
         <Tab>Dashboard</Tab>
         <Tab>Monitoring</Tab>
         <Tab>Activity</Tab>
@@ -443,7 +443,7 @@ export const Contained = () => {
 export const ContainedWithIcons = () => {
   return (
     <Tabs>
-      <TabList aria-label="List of tabs" contained>
+      <TabList contained>
         <Tab renderIcon={Dashboard}>Dashboard</Tab>
         <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
         <Tab renderIcon={Activity}>Activity</Tab>
@@ -483,7 +483,7 @@ export const ContainedWithIcons = () => {
 export const ContainedWithSecondaryLabels = () => {
   return (
     <Tabs>
-      <TabList aria-label="List of tabs" contained>
+      <TabList contained>
         <Tab secondaryLabel="(21/25)">Engage</Tab>
         <Tab secondaryLabel="(12/16)">Analyze</Tab>
         <Tab secondaryLabel="(0/7)">Remediate</Tab>
@@ -523,7 +523,7 @@ export const ContainedWithSecondaryLabels = () => {
 export const ContainedWithSecondaryLabelsAndIcons = () => {
   return (
     <Tabs>
-      <TabList aria-label="List of tabs" contained>
+      <TabList contained>
         <Tab renderIcon={Task} secondaryLabel="(21/25">
           Engage
         </Tab>
@@ -573,7 +573,7 @@ export const ContainedFullWidth = () => {
     <Grid condensed>
       <Column lg={16} md={8} sm={4}>
         <Tabs>
-          <TabList aria-label="List of tabs" contained fullWidth>
+          <TabList contained fullWidth>
             <Tab>TLS</Tab>
             <Tab>Origin</Tab>
             <Tab disabled>Rate limiting</Tab>
@@ -619,7 +619,7 @@ export const ContainedFullWidth = () => {
 export const Vertical = (args) => {
   return (
     <TabsVertical {...args}>
-      <TabListVertical aria-label="List of tabs">
+      <TabListVertical>
         <Tab>Dashboard</Tab>
         <Tab>
           Extra long label that will go two lines then truncate when it goes
