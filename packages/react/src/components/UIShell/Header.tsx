@@ -11,7 +11,7 @@ import React, { ReactNode } from 'react';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface HeaderProps {
+export interface HeaderProps {
   children?: ReactNode;
   /**
    * Required props for the accessibility label of the header

@@ -22,4 +22,6 @@ export default {
   },
 };
 
-export const Default = () => <SkeletonPlaceholder />;
+export const Default = () => {
+  return <SkeletonPlaceholder />;
+};

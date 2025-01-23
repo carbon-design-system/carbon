@@ -152,7 +152,7 @@ const findHighlightedIndex = <ItemType,>(
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type' | 'size';
 
-interface OnChangeData<ItemType> {
+export interface OnChangeData<ItemType> {
   selectedItem: ItemType | null | undefined;
   inputValue?: string | null;
 }
@@ -164,13 +164,14 @@ interface OnChangeData<ItemType> {
  * because those components aren't Typescript.  (If you try, TranslationKey
  * ends up just being defined as "string".)
  */
-type TranslationKey =
+export type TranslationKey =
   | 'close.menu'
   | 'open.menu'
   | 'clear.all'
   | 'clear.selection';
 
-type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
+export type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
+
 export interface ComboBoxProps<ItemType>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
     TranslateWithId<TranslationKey> {
@@ -1349,7 +1350,7 @@ type ComboboxComponentProps<ItemType> = PropsWithRef<
   PropsWithChildren<ComboBoxProps<ItemType>> & RefAttributes<HTMLInputElement>
 >;
 
-interface ComboBoxComponent {
+export interface ComboBoxComponent {
   <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement | null;
 }
 
