@@ -42,6 +42,14 @@ const nodes = [
         value: 'Business process mapping',
         label: 'Business process mapping',
         renderIcon: Document,
+        children: [
+          {
+            id: '3-21',
+            value: 'Business process mapping2',
+            label: 'Business process mapping2',
+            renderIcon: Document,
+          },
+        ],
       },
     ],
   },
@@ -55,6 +63,7 @@ const nodes = [
     id: '5',
     value: 'Cloud computing',
     label: 'Cloud computing',
+    href: 'https://carbondesignsystem.com/',
     isExpanded: true,
     renderIcon: Folder,
     children: [
@@ -68,12 +77,14 @@ const nodes = [
         id: '5-2',
         value: 'Databases',
         label: 'Databases',
+        href: 'https://carbondesignsystem.com/',
         renderIcon: Document,
       },
       {
         id: '5-3',
         value: 'DevOps',
         label: 'DevOps',
+        href: 'https://carbondesignsystem.com/',
         isExpanded: true,
         renderIcon: Folder,
         children: [
@@ -81,12 +92,14 @@ const nodes = [
             id: '5-4',
             value: 'Solutions',
             label: 'Solutions',
+            href: 'https://carbondesignsystem.com/',
             renderIcon: Document,
           },
           {
             id: '5-5',
             value: 'Case studies',
             label: 'Case studies',
+            href: 'https://carbondesignsystem.com/',
             isExpanded: true,
             renderIcon: Folder,
             children: [
@@ -94,6 +107,7 @@ const nodes = [
                 id: '5-6',
                 value: 'Resources',
                 label: 'Resources',
+                href: '?path=/story/components-treeview--with-links',
                 renderIcon: Document,
               },
             ],
@@ -167,19 +181,22 @@ const nodes = [
   },
 ];
 
-function renderTree({ nodes, expanded, withIcons = false }) {
+function renderTree({ nodes, expanded, withIcons = false, withLinks = false }) {
   if (!nodes) {
     return;
   }
-  return nodes.map(({ children, renderIcon, isExpanded, ...nodeProps }) => (
-    <TreeNode
-      key={nodeProps.id}
-      renderIcon={withIcons ? renderIcon : null}
-      isExpanded={expanded ?? isExpanded}
-      {...nodeProps}>
-      {renderTree({ nodes: children, expanded, withIcons })}
-    </TreeNode>
-  ));
+  return nodes.map(
+    ({ children, renderIcon, href, isExpanded, ...nodeProps }) => (
+      <TreeNode
+        key={nodeProps.id}
+        renderIcon={withIcons ? renderIcon : null}
+        href={withLinks ? href : null}
+        isExpanded={expanded ?? isExpanded}
+        {...nodeProps}>
+        {renderTree({ nodes: children, expanded, withIcons, withLinks })}
+      </TreeNode>
+    )
+  );
 }
 
 export default {
@@ -245,6 +262,12 @@ Default.argTypes = {
 export const WithIcons = () => (
   <TreeView label="Tree View">
     {renderTree({ nodes, withIcons: true })}
+  </TreeView>
+);
+
+export const WithLinks = () => (
+  <TreeView label="Tree View">
+    {renderTree({ nodes, withLinks: true })}
   </TreeView>
 );
 
