@@ -20,6 +20,7 @@
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/layout';
+@use '../../breakpoint' as *;
 
 @mixin button {
   .#{$prefix}--btn {
@@ -44,6 +45,16 @@
       currentColor,
       $button-primary-active
     );
+    @include breakpoint-down('sm') {
+      @include button-theme(
+        red,
+        transparent,
+        $text-on-color,
+        $button-primary-hover,
+        currentColor,
+        $button-primary-active
+      );
+    }
 
     &:hover {
       color: $text-on-color;
