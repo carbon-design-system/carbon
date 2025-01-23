@@ -39,6 +39,11 @@ const THUMB_DIRECTION = {
 };
 
 /**
+ * Minimum time between processed "drag" events.
+ */
+const EVENT_THROTTLE = 16; // ms
+
+/**
  * Slider.
  *
  * @element cds-slider
@@ -53,6 +58,8 @@ const THUMB_DIRECTION = {
 class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   private _cachedRateUpper: number = 1;
   private _cachedRate: number = 0;
+  private dragCooldownTimeout: number | null = null;
+  private dragCoolDown: boolean = false;
   /**
    * The internal value of `max` property.
    */
@@ -265,6 +272,15 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   }
 
   /**
+   * Throttles calls to `this._onDrag` by limiting events to being processed at
+   * most once every `EVENT_THROTTLE` milliseconds.
+   */
+  onDrag = throttle(this._startDrag, EVENT_THROTTLE, {
+    leading: true,
+    trailing: false,
+  });
+
+  /**
    * Handles `pointerdown` event on the thumb to start dragging.
    */
   private _startDrag(event: PointerEvent) {
@@ -345,45 +361,47 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             )
           );
         } else {
-          const position =
-            ((isRtl
-              ? trackLeft + trackWidth - thumbPosition
-              : thumbPosition - trackLeft) /
-              trackWidth) *
-            100;
-          const differenceValue =
-            position > this.value
-              ? position - this.value
-              : this.value - position;
-          const differenceValueUpper =
-            position > this.valueUpper
-              ? position - this.valueUpper
-              : this.valueUpper - position;
-          if (differenceValue > differenceValueUpper) {
-            this._rateUpper = position / 100;
-          } else if (differenceValue < differenceValueUpper) {
-            this._rate = position / 100;
-          } else if (
-            !this._dragging &&
-            !this._draggingUpper &&
-            differenceValue === differenceValueUpper
-          ) {
-            Math.round(position) > this.valueUpper
-              ? (this._rateUpper = position / 100)
-              : (this._rate = position / 100);
+          if (!this.dragCoolDown) {
+            const position =
+              ((isRtl
+                ? trackLeft + trackWidth - thumbPosition
+                : thumbPosition - trackLeft) /
+                trackWidth) *
+              100;
+            const differenceValue =
+              position > this.value
+                ? position - this.value
+                : this.value - position;
+            const differenceValueUpper =
+              position > this.valueUpper
+                ? position - this.valueUpper
+                : this.valueUpper - position;
+            if (differenceValue > differenceValueUpper) {
+              this._rateUpper = position / 100;
+            } else if (differenceValue < differenceValueUpper) {
+              this._rate = position / 100;
+            } else if (
+              !this._dragging &&
+              !this._draggingUpper &&
+              differenceValue === differenceValueUpper
+            ) {
+              Math.round(position) > this.valueUpper
+                ? (this._rateUpper = position / 100)
+                : (this._rate = position / 100);
+            }
+            this.dispatchEvent(
+              new CustomEvent(
+                (this.constructor as typeof CDSSlider).eventChange,
+                {
+                  bubbles: true,
+                  composed: true,
+                  detail: {
+                    value: this.value,
+                  },
+                }
+              )
+            );
           }
-          this.dispatchEvent(
-            new CustomEvent(
-              (this.constructor as typeof CDSSlider).eventChange,
-              {
-                bubbles: true,
-                composed: true,
-                detail: {
-                  value: this.value,
-                },
-              }
-            )
-          );
         }
       }
     }
@@ -477,6 +495,11 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    * Handles `pointerup` and `pointerleave` event to finishing dragging.
    */
   private _endDrag = () => {
+    if (this._dragging || this._draggingUpper) {
+      this.dragCoolDown = true;
+    } else {
+      this.dragCoolDown = false;
+    }
     if (this._dragging) {
       this.dispatchEvent(
         new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
@@ -501,6 +524,11 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       );
       this._draggingUpper = false;
       this._thumbNodeUpper.style.touchAction = '';
+    }
+    if (this._dragging || this._draggingUpper) {
+      this.dragCooldownTimeout = window.setTimeout(() => {
+        this.dragCoolDown = false;
+      }, 100);
     }
   };
 
@@ -736,6 +764,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       this._throttledHandlePointermoveImpl.cancel();
       this._throttledHandlePointermoveImpl = null;
     }
+    clearTimeout(this.dragCooldownTimeout as number);
     super.disconnectedCallback();
   }
 
@@ -820,7 +849,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       _handleClickLabel: handleClickLabel,
       _handleKeydown: handleKeydown,
       _handleClick: handleClick,
-      _startDrag: startDrag,
+      onDrag,
       _endDrag: endDrag,
     } = this;
 
@@ -863,7 +892,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             aria-valuemin="${min}"
             aria-valuenow="${value}"
             style="left: ${rate * 100}%"
-            @pointerdown="${startDrag}">
+            @pointerdown="${onDrag}">
             ${valueUpper || valueUpper === ''
               ? html`
                   <div class="${prefix}--slider__thumb--lower">
@@ -901,7 +930,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                   aria-valuemin="${min}"
                   aria-valuenow="${valueUpper}"
                   style="left: ${rateUpper * 100}%"
-                  @pointerdown="${startDrag}">
+                  @pointerdown="${onDrag}">
                   <div class="${prefix}--slider__thumb--upper">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
