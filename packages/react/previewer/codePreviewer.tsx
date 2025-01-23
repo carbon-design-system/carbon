@@ -53,12 +53,12 @@ export const stackblitzPrefillConfig = (
     return iconNames.filter((iconName) => {
       // Grab the component to convert in "<Component" and "{Component}"
       const regexComponent = new RegExp(`<${iconName}\\b`, 'g');
-      const regexCurlBraces = new RegExp(`{${iconName}}\\s\\b`, 'g');
+      const regexCurlBraces = new RegExp(`{\\s*${iconName}\\s*}`, 'g');
 
       // Check if the component exists in the `storyCode`
       if (
         (regexComponent.test(storyCode) || regexCurlBraces.test(storyCode)) &&
-        !componentNames.indexOf(iconName)
+        !componentNames.includes(iconName)
       ) {
         return iconName;
       }

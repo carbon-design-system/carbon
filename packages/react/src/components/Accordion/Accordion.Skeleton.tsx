@@ -12,7 +12,7 @@ import { ChevronRight } from '@carbon/icons-react';
 import SkeletonText from '../SkeletonText';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface AccordionSkeletonProps {
+export interface AccordionSkeletonProps {
   /**
    * Specify the alignment of the accordion heading
    * title and chevron.

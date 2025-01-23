@@ -10,7 +10,7 @@ import React, { type ComponentProps } from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface OrderedListProps extends ComponentProps<'ol'> {
+export interface OrderedListProps extends ComponentProps<'ol'> {
   nested?: boolean | undefined;
   native?: boolean | undefined;
   isExpressive?: boolean | undefined;

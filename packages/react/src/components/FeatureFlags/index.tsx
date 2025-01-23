@@ -20,7 +20,7 @@ import React, {
 } from 'react';
 import deprecate from '../../prop-types/deprecate';
 
-interface FeatureFlagsProps {
+export interface FeatureFlagsProps {
   children?: ReactNode;
   flags?: Record<string, boolean>;
   enableV12TileDefaultIcons?: boolean;
