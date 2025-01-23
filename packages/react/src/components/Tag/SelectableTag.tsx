@@ -109,8 +109,6 @@ const SelectableTag = <T extends React.ElementType>({
     onClick?.(e);
   };
 
-  console.log('other', other);
-
   if (isEllipsisApplied) {
     return (
       <Tooltip
