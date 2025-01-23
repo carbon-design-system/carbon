@@ -13,7 +13,12 @@ import './breadcrumb-item';
 import './breadcrumb-link';
 import './breadcrumb-overflow-menu';
 import '../overflow-menu/overflow-menu-body';
+import '../overflow-menu/overflow-menu-item';
 import './breadcrumb-skeleton';
+
+import { prefix } from '../../globals/settings';
+
+import OverflowMenuHorizontal16 from '@carbon/icons/lib/overflow-menu--horizontal/16.js';
 
 const args = {
   ariaLabel: '',
@@ -62,7 +67,7 @@ export const Default = {
 
 export const BreadcrumbWithOverflowMenu = {
   render: () => html`
-    <cds-breadcrumb>
+    <cds-breadcrumb no-trailing-slash>
       <cds-breadcrumb-item>
         <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
       </cds-breadcrumb-item>
@@ -70,18 +75,23 @@ export const BreadcrumbWithOverflowMenu = {
         <cds-breadcrumb-link href="/#">Breadcrumb 2</cds-breadcrumb-link>
       </cds-breadcrumb-item>
       <cds-breadcrumb-item>
-        <cds-breadcrumb-overflow-menu>
+        <cds-overflow-menu breadcrumb>
+          ${OverflowMenuHorizontal16({
+            class: `${prefix}--overflow-menu__icon`,
+            slot: 'icon',
+          })}
+          <span slot="tooltip-content"> Options </span>
           <cds-overflow-menu-body>
             <cds-overflow-menu-item>Breadcrumb 3</cds-overflow-menu-item>
             <cds-overflow-menu-item>Breadcrumb 4</cds-overflow-menu-item>
           </cds-overflow-menu-body>
-        </cds-breadcrumb-overflow-menu>
+        </cds-overflow-menu>
       </cds-breadcrumb-item>
       <cds-breadcrumb-item>
         <cds-breadcrumb-link href="/#">Breadcrumb 5</cds-breadcrumb-link>
       </cds-breadcrumb-item>
       <cds-breadcrumb-item>
-        <cds-breadcrumb-link>Breadcrumb 6</cds-breadcrumb-link>
+        <cds-breadcrumb-link is-currentpage>Breadcrumb 6</cds-breadcrumb-link>
       </cds-breadcrumb-item>
     </cds-breadcrumb>
   `,

@@ -110,3 +110,21 @@ $css--plex: true !default;
 :host(#{$prefix}-overflow-menu-item[divider]) {
   @extend .#{$prefix}--overflow-menu--divider;
 }
+
+:host(#{$prefix}-overflow-menu[breadcrumb]) {
+  background: none;
+  block-size: 1.125rem;
+  box-shadow: none;
+  inline-size: 1.25rem;
+  min-block-size: 1.125rem;
+  outline: none;
+  transform: translateY(4px);
+
+  :hover,
+  :active,
+  :focus {
+    box-sizing: border-box;
+    background: none;
+    box-shadow: none;
+  }
+}

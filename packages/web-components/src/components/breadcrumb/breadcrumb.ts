@@ -13,7 +13,6 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './breadcrumb.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
 /**
  * Breadcrumb.
  *
@@ -35,9 +34,10 @@ class CDSBreadcrumb extends LitElement {
   }
 
   render() {
+    const { noTrailingSlash } = this;
     const classes = classMap({
       [`${prefix}--breadcrumb`]: true,
-      [`${prefix}--breadcrumb--no-trailing-slash`]: this.noTrailingSlash,
+      [`${prefix}--breadcrumb--no-trailing-slash`]: noTrailingSlash,
     });
     return html`
       <ol class="${classes}">

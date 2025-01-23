@@ -111,3 +111,12 @@ $css--plex: true !default;
     text-decoration: none;
   }
 }
+
+:host(#{$prefix}-breadcrumb-link) .cds--breadcrumb-item--current {
+  color: $text-primary;
+  cursor: auto;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
