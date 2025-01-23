@@ -61,10 +61,6 @@ const controls = {
 };
 
 export const Default = {
-  render: () => html` <cds-loading></cds-loading> `,
-};
-
-export const Playground = {
   args: defaultArgs,
   argTypes: controls,
   render: ({
