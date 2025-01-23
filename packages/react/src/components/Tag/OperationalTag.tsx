@@ -17,7 +17,7 @@ import classNames from 'classnames';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
-import Tag, { SIZES, TagBaseProps } from './Tag';
+import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
@@ -119,7 +119,6 @@ const OperationalTag = <T extends React.ElementType>({
         onMouseEnter={() => false}
         closeOnActivation>
         <Tag
-          as="button"
           ref={tagRef}
           type={type}
           size={size}
@@ -138,7 +137,6 @@ const OperationalTag = <T extends React.ElementType>({
 
   return (
     <Tag
-      as="button"
       ref={tagRef}
       type={type}
       size={size}
