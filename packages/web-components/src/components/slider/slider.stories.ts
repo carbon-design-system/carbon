@@ -227,65 +227,28 @@ export const WithLayer = {
   },
 };
 
-export const TwoHandleSlider = {
-  args,
-  argTypes,
-  render: (args) => {
-    const {
-      ariaLabelInput,
-      disabled,
-      hideTextInput,
-      invalid,
-      invalidText,
-      inputType,
-      labelText,
-      max,
-      min,
-      maxLabel,
-      minLabel,
-      name,
-      readOnly,
-      required,
-      step,
-      stepMultiplier,
-      warn,
-      warnText,
-      value,
-      onChange,
-    } = args || {};
-    return html`
-      <cds-form-item>
-        <cds-slider
-          ?disabled="${disabled}"
-          ?hide-text-input="${hideTextInput}"
-          ?invalid="${invalid}"
-          invalid-text="${ifDefined(invalidText)}"
-          label-text="${labelText}"
-          max="${ifDefined(max)}"
-          min="${ifDefined(min)}"
-          max-label="${ifDefined(maxLabel)}"
-          min-label="${ifDefined(minLabel)}"
-          ?readonly="${ifDefined(readOnly)}"
-          step="${ifDefined(step)}"
-          step-multiplier="${ifDefined(stepMultiplier)}"
-          ?warn="${warn}"
-          warn-text="${warnText}"
-          value="${ifDefined(value)}"
-          value-upper="90"
-          @cds-slider-changed="${onChange}">
-          <cds-slider-input
-            aria-label="Lower bound"
-            type="number"
-            id="lower"
-            slot="lower-input"></cds-slider-input>
-          <cds-slider-input
-            aria-label="Upper bound"
-            type="number"
-            id="upper"></cds-slider-input>
-        </cds-slider>
-      </cds-form-item>
-    `;
-  },
+export const TwoHandleSlider = () => {
+  return html`
+    <cds-form-item>
+      <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="10"
+        value-upper="90">
+        <cds-slider-input
+          aria-label="Lower bound"
+          type="number"
+          id="lower"
+          slot="lower-input"></cds-slider-input>
+        <cds-slider-input
+          aria-label="Upper bound"
+          type="number"
+          id="upper"></cds-slider-input>
+      </cds-slider>
+    </cds-form-item>
+  `;
 };
 
 export const Skeleton = {
