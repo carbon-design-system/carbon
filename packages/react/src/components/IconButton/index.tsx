@@ -145,7 +145,7 @@ export interface IconButtonProps
   leaveDelayMs?: number;
 
   /**
-   * Specify the size of the Button. Defaults to `lg`.
+   * Specify the size of the Button. Defaults to `md`.
    */
   size?: ButtonSize;
 
@@ -170,7 +170,7 @@ const IconButton = React.forwardRef(function IconButton(
     label,
     leaveDelayMs = 100,
     wrapperClasses,
-    size = 'lg',
+    size,
     isSelected,
     ...rest
   }: IconButtonProps,
@@ -346,7 +346,7 @@ IconButton.propTypes = {
   leaveDelayMs: PropTypes.number,
 
   /**
-   * Specify the size of the Button. Defaults to `lg`.
+   * Specify the size of the Button. Defaults to `md`.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 

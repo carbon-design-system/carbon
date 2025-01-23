@@ -131,7 +131,6 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
   const {
     as,
     autoAlign = false,
-
     children,
     hasIconOnly = false,
     iconDescription,

@@ -105,6 +105,7 @@ export const withBadgeIndicator = (props) => {
         badgeCount={badgeCount}
         label="Notification"
         kind="ghost"
+        size="lg"
         autoAlign>
         <Notification />
       </IconButton>

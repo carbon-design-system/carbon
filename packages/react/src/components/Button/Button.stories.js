@@ -123,6 +123,7 @@ export const IconButtonWithBadge = (args) => {
   return (
     <Button
       kind="ghost"
+      size="lg"
       badgeCount={badgeCount}
       hasIconOnly
       renderIcon={Notification}

@@ -29,6 +29,17 @@ describe('IconButton', () => {
     expect(screen.getByText('12')).toBeInTheDocument();
   });
 
+  it('should throw warning if using badge indicator improperly', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(
+      <IconButton label="edit" badgeCount={12}>
+        <Edit />
+      </IconButton>
+    );
+    expect(screen.getByText('12')).toBeInTheDocument();
+    spy.mockRestore();
+  });
+
   it('should support badge indicator and truncate', () => {
     render(
       <IconButton label="edit" badgeCount={1200} kind="ghost" size="lg">
