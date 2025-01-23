@@ -36,6 +36,8 @@ $css--plex: true !default;
   }
 }
 
+// TODO: remove cds-breadcrumb-overflow-menu styles once it has been
+// removed from monorepo in v12
 :host(#{$prefix}-breadcrumb-overflow-menu) {
   position: relative;
   block-size: rem(18px);

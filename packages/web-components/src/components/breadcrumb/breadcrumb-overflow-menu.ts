@@ -17,6 +17,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 /**
  * Overflow menu in breadcrumb.
  *
+ * @deprecated use `cds-overflow-menu` instead with the `breadcrumb` property
+ *
  * @element cds-breadcrumb-overflow-menu
  */
 @customElement(`${prefix}-breadcrumb-overflow-menu`)
