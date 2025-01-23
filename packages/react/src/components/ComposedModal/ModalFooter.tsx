@@ -8,7 +8,7 @@ import { noopFn } from '../../internal/noopFn';
 import InlineLoading from '../InlineLoading';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 
-interface SecondaryButtonProps {
+export interface SecondaryButtonProps {
   buttonText: ReactNode;
   onClick(evt: MouseEvent): void;
 }
@@ -35,15 +35,19 @@ function SecondaryButtonSet({
   }
 
   if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
-    return secondaryButtons.map(({ buttonText, onClick: onButtonClick }, i) => (
-      <Button
-        key={`${buttonText}-${i}`}
-        className={secondaryClassName}
-        kind="secondary"
-        onClick={onButtonClick || handleRequestClose}>
-        {buttonText}
-      </Button>
-    ));
+    return (
+      <>
+        {secondaryButtons.map(({ buttonText, onClick: onButtonClick }, i) => (
+          <Button
+            key={`${buttonText}-${i}`}
+            className={secondaryClassName}
+            kind="secondary"
+            onClick={onButtonClick || handleRequestClose}>
+            {buttonText}
+          </Button>
+        ))}
+      </>
+    );
   }
   if (secondaryButtonText) {
     return (
@@ -242,7 +246,6 @@ export const ModalFooter = React.forwardRef<HTMLElement, ModalFooterProps>(
         // @ts-expect-error: Invalid derived types, will be fine once explicit types are added
         ref={ref}
         aria-busy={loadingActive}>
-        {/* @ts-expect-error: Invalid derived types, will be fine once explicit types are added */}
         <SecondaryButtonSet {...secondaryButtonProps} />
         {primaryButtonText && (
           <Button
