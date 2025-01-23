@@ -33,7 +33,7 @@ import {
 import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
 
-interface PopoverContext {
+export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
   caretRef: React.Ref<HTMLSpanElement>;
   autoAlign: boolean | null;
@@ -92,7 +92,7 @@ const propMappingFunction = (deprecatedValue) => {
   };
   return mapping[deprecatedValue];
 };
-interface PopoverBaseProps {
+export interface PopoverBaseProps {
   /**
    * Specify how the popover should align with the trigger element.
    */
