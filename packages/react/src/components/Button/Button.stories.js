@@ -126,7 +126,7 @@ export const IconButtonWithBadge = (args) => {
       badgeCount={badgeCount}
       hasIconOnly
       renderIcon={Notification}
-      iconDescription="Alert"
+      iconDescription="Notification"
       onClick={action('onClick')}
       autoAlign
       {...args}

@@ -10,6 +10,7 @@ import React, { ForwardedRef, ReactNode } from 'react';
 import { ButtonSize } from '../Button';
 import classNames from 'classnames';
 import { Tooltip } from '../Tooltip';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import ButtonBase from '../Button/ButtonBase';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
@@ -83,12 +84,6 @@ interface IconButtonProps
    * Must be used with size="lg" and kind="ghost"
    */
   badgeCount?: number;
-
-  /**
-   * Function to provide a custom label based on badgeCount.
-   * If this is provided and badgeCount is used, it is combined with iconDescription prop.
-   */
-  badgeCountLabel?: (badgeCount: number) => string;
 
   /**
    * Optionally specify an href for your IconButton to become an `<a>` element
@@ -165,13 +160,6 @@ const IconButton = React.forwardRef(function IconButton(
     align,
     autoAlign = false,
     badgeCount,
-    badgeCountLabel = (count) => {
-      if (count > 0) {
-        const formattedCount = count > 999 ? '999 plus' : count;
-        return `, ${formattedCount} new notification${count !== 1 ? 's' : ''}`;
-      }
-      return 'New notification';
-    },
     children,
     className,
     closeOnActivation = true,
@@ -199,13 +187,7 @@ const IconButton = React.forwardRef(function IconButton(
       "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
     );
   }
-  // Combine base label with badge label if both exist
-  const getAccessibilityLabel = () => {
-    if (badgeCount !== undefined) {
-      return `${label}${badgeCountLabel(badgeCount)}`;
-    }
-    return label;
-  };
+  const id = badgeCount ? useId('badge-indicator') : undefined;
 
   return (
     <Tooltip
@@ -215,7 +197,7 @@ const IconButton = React.forwardRef(function IconButton(
       className={tooltipClasses}
       defaultOpen={defaultOpen}
       enterDelayMs={enterDelayMs}
-      label={getAccessibilityLabel()}
+      label={label}
       leaveDelayMs={leaveDelayMs}>
       <ButtonBase
         {...rest}
@@ -229,10 +211,12 @@ const IconButton = React.forwardRef(function IconButton(
             [`${prefix}--btn--selected`]: isSelected,
           },
           className
-        )}>
+        )}
+        aria-describedby={id}>
         {children}
         {badgeCount !== undefined && (
           <BadgeIndicator
+            id={id}
             count={badgeCount > 0 ? badgeCount : undefined}></BadgeIndicator>
         )}
       </ButtonBase>
@@ -303,12 +287,6 @@ IconButton.propTypes = {
   badgeCount: PropTypes.number,
 
   /**
-   * **Experimental**: Function to provide a custom label based on badgeCount.
-   * If this is provided and badgeCount is used, it is combined with the iconDescription prop.
-   */
-  badgeCountLabel: PropTypes.func,
-
-  /**
    * Optionally specify an href for your IconButton to become an `<a>` element
    */
   href: PropTypes.string,
@@ -358,8 +336,7 @@ IconButton.propTypes = {
    * Provide the label to be rendered inside of the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
    * This means that if you have text in the child node it will not be
-   * announced to the screen reader. If badgeCount is used, this prop is not required
-   * and will be handled by the prop badgeCountLabel
+   * announced to the screen reader.
    */
   label: PropTypes.node.isRequired,
 

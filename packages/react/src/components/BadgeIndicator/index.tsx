@@ -20,6 +20,11 @@ interface BadgeIndicatorProps {
    * Count of badge indicator
    */
   count?: number;
+
+  /**
+   * Provide an `id` to uniquely identify the BadgeIndidcator
+   */
+  id?: string;
 }
 export const BadgeIndicator = React.forwardRef(function BadgeIndicatorContent(
   { className: customClassName, count, ...rest }: BadgeIndicatorProps,
@@ -46,5 +51,10 @@ BadgeIndicator.propTypes = {
    * Count of badge indicator
    */
   count: PropTypes.number,
+
+  /**
+   * Provide an `id` to uniquely identify the BadgeIndidcator
+   */
+  id: PropTypes.string,
 };
 export default BadgeIndicator;
