@@ -476,7 +476,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       ...rest,
       key: header.key,
       sortDirection,
-      isSortable: header.isSortable ?? isSortable, // header check first, since every header defaults to the table isSortable prop
+      isSortable: header.isSortable || isSortable, // header check first, since every header defaults to the table isSortable prop
       isSortHeader: sortHeaderKey === header.key,
       slug: header.slug,
       decorator: header.decorator,
