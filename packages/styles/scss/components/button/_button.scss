@@ -45,7 +45,7 @@
       currentColor,
       $button-primary-active
     );
-    @include breakpoint-down('sm') {
+    @media (width <= 360px) {
       @include button-theme(
         red,
         transparent,
