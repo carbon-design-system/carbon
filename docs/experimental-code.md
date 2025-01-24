@@ -205,6 +205,7 @@ movement, it can be moved from "experimental" status to be "stable".
       - [ ] Ensure important discrete states (open, selected, etc.) are covered
             by arranging/interacting with component before calling
             `.toBeAccessible()`
+- [ ] Component is connected with Figma Code Connect and has a `<ComponentName>.figma.tsx` file in the code-connect folder.
 
 ---
 
