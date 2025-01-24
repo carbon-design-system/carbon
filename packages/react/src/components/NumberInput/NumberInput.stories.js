@@ -12,6 +12,7 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import mdx from './NumberInput.mdx';
 
 export default {
   title: 'Components/NumberInput',
@@ -19,6 +20,9 @@ export default {
   parameters: {
     subcomponents: {
       NumberInputSkeleton,
+    },
+    docs: {
+      page: mdx,
     },
   },
 };
@@ -70,7 +74,7 @@ const sharedArgTypes = {
   },
 };
 
-export const Default = ({ ...args }) => {
+export const Default = (args) => {
   const [value, setValue] = React.useState(50);
 
   const handleChange = (event, { value }) => {
@@ -153,4 +157,6 @@ export const withAILabel = (args) => (
 
 withAILabel.argTypes = { ...sharedArgTypes };
 
-export const Skeleton = () => <NumberInputSkeleton />;
+export const Skeleton = () => {
+  return <NumberInputSkeleton />;
+};
