@@ -38,6 +38,39 @@ states.
   ]}
 />
 
+#### Vertical: 
+<Canvas
+  of={RadioButtonStories.Vertical}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(RadioButtonStories.Vertical),
+    },
+  ]}
+/>
+
+#### Skeleton:
+<Canvas
+  of={RadioButtonStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(RadioButtonStories.Skeleton),
+    },
+  ]}
+/>
+
+#### AI Label:
+<Canvas
+  of={RadioButtonStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(RadioButtonStories.withAILabel),
+    },
+  ]}
+/>
+
 ## Component API
 
 <ArgTypes />

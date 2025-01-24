@@ -31,7 +31,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   ]}
 />
 
-## Skeleton State
+## Skeleton state
 
 <Canvas
   of={NumberInputStories.Skeleton}
@@ -39,6 +39,18 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(NumberInputStories.Skeleton),
+    },
+  ]}
+/>
+
+## AI Label
+
+<Canvas
+  of={NumberInputStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(NumberInputStories.withAILabel),
     },
   ]}
 />

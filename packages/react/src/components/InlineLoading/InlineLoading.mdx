@@ -27,6 +27,16 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   ]}
 />
 
+<Canvas
+  of={InlineLoadingStories.UxExample}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(InlineLoadingStories.UxExample),
+    },
+  ]}
+/>
+
 ## Component API
 
 <ArgTypes />

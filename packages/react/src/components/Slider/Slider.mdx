@@ -1,5 +1,6 @@
 import { ArgTypes, Story, Canvas, Meta } from '@storybook/blocks';
 import * as SliderStories from './Slider.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -23,7 +24,64 @@ import * as SliderStories from './Slider.stories';
 Sliders provide a visual indication of adjustable content, where the user can
 increase or decrease the value by moving the handle along a horizontal track.
 
-<Canvas of={SliderStories.Default} />
+<Canvas
+  of={SliderStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.Default),
+    },
+  ]}
+/>
+
+#### Controlled Slider:
+
+<Canvas
+  of={SliderStories.ControlledSlider}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.ControlledSlider),
+    },
+  ]}
+/>
+
+#### Controlled Slider with Layer:
+
+<Canvas
+  of={SliderStories.ControlledSliderWithLayer}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.ControlledSliderWithLayer),
+    },
+  ]}
+/>
+
+#### Skeleton:
+
+<Canvas
+  of={SliderStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.Skeleton),
+    },
+  ]}
+/>
+
+#### Slider With Customer Layer :
+
+<Canvas
+  of={SliderStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.Skeleton),
+    },
+  ]}
+/>
+
 
 ## Component API
 
@@ -44,7 +102,15 @@ bound of the range in addition to the `value` prop, which specifies the lower
 bound. When in two handle mode, both `value` and `valueUpper` are provided as
 keys to `onChange` function prop that is passed to the component.
 
-<Canvas of={SliderStories.Default} />
+<Canvas
+  of={SliderStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.Default),
+    },
+  ]}
+/>
 
 ## Feedback
 

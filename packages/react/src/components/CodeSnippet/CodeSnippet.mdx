@@ -16,11 +16,10 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [Overview](#overview)
-- [Skeleton state](#skeleton-state)
 - [Inline](#inline)
 - [Multi-line](#multi-line)
 - [Single-line](#single-line)
-- [Light variant](#light-variant)
+- [Skeleton state](#skeleton-state)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -36,22 +35,6 @@ don't provide the copy functionality and recommend
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(CodeSnippetStories.Inline),
-    },
-  ]}
-/>
-
-## Skeleton state
-
-You can use the `CodeSnippetSkeleton` component to render a skeleton variant of
-an code snippet. This is useful to display while content in your code snippet is
-being fetched from an external resource like an API.
-
-<Canvas
-  of={CodeSnippetStories.Skeleton}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(CodeSnippetStories.Skeleton),
     },
   ]}
 />
@@ -103,6 +86,23 @@ invocations, expressions etc.
     },
   ]}
 />
+
+## Skeleton state
+
+You can use the `CodeSnippetSkeleton` component to render a skeleton variant of
+an code snippet. This is useful to display while content in your code snippet is
+being fetched from an external resource like an API.
+
+<Canvas
+  of={CodeSnippetStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CodeSnippetStories.Skeleton),
+    },
+  ]}
+/>
+
 
 ## Component API
 

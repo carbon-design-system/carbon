@@ -1,4 +1,6 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import * as MenuButtonStories from "./MenuButton.stories.js"
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -27,6 +29,51 @@ passed as `props.label`.
   <MenuItem label="Third action" />
 </MenuButton>
 ```
+<Canvas
+  of={MenuButtonStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.Default),
+    },
+  ]}
+/>
+
+#### With Danger
+
+<Canvas
+  of={MenuButtonStories.WithDanger}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.WithDanger),
+    },
+  ]}
+/>
+
+#### With Dividers
+
+<Canvas
+  of={MenuButtonStories.WithDividers}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.WithDividers),
+    },
+  ]}
+/>
+
+#### With Icons
+
+<Canvas
+  of={MenuButtonStories.WithIcons}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.WithIcons),
+    },
+  ]}
+/>
 
 ## Menu Alignment
 
@@ -40,6 +87,16 @@ to display the Menu in case the provided `menuAlignment` obscures it.
 
 We encourage you to play around in the Storybook Default stories to better
 understand the `menuAlignment` prop.
+
+<Canvas
+  of={MenuButtonStories.WithMenuAlignment}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.WithMenuAlignment),
+    },
+  ]}
+/>
 
 ## menuTarget Prop
 

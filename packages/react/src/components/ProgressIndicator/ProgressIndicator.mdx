@@ -19,7 +19,6 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [ProgressIndicator](#progressindicator)
-  - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Component API](#component-api)
   - [Feedback](#feedback)
@@ -37,6 +36,29 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     },
   ]}
 />
+
+#### Interactive:
+<Canvas
+  of={ProgressIndicatorStories.Interactive}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ProgressIndicatorStories.Interactive),
+    },
+  ]}
+/>
+
+#### Skeleton:
+<Canvas
+  of={ProgressIndicatorStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ProgressIndicatorStories.Skeleton),
+    },
+  ]}
+/>
+
 
 For React usage, `ProgressIndicator` holds the `currentIndex` state to indicate
 which `ProgressStep` is the current step. The `ProgressIndicator` component

@@ -2,6 +2,7 @@ import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import LinkTo from '@storybook/addon-links/react';
 import { ClassPrefix } from '../ClassPrefix';
 import * as ClassPrefixStories from './ClassPrefix.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -24,7 +25,15 @@ import * as ClassPrefixStories from './ClassPrefix.stories';
 The `ClassPrefix` component is used to change the prefix in the classes used by
 components in Carbon.
 
-<Canvas of={ClassPrefixStories.Default} />
+<Canvas
+  of={ClassPrefixStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ClassPrefixStories.Default),
+    },
+  ]}
+/>
 
 By default, the prefix used by components is `cds`. However, you can change this
 prefix in Sass and coordinate that change to React using the `ClassPrefix`

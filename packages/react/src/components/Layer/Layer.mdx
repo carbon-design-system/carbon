@@ -72,6 +72,16 @@ To do this, you can use the `level` prop:
 </Layer>
 ```
 
+<Canvas
+  of={LayerStories.CustomLevel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(LayerStories.CustomLevel),
+    },
+  ]}
+/>
+
 ## Get the current layer
 
 If you are building a component and would like to know what layer the component
@@ -86,6 +96,16 @@ function ExampleComponent() {
   // ...
 }
 ```
+
+<Canvas
+  of={LayerStories.UseLayer}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(LayerStories.UseLayer),
+    },
+  ]}
+/>
 
 If the structure of `Layer` components in your app change, the hook will
 automatically update with the new `level`.

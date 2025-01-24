@@ -19,6 +19,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [Overview](#overview)
+- [Controlled](#controlled)
 - [Skeleton state](#skeleton-state)
 - [Component API](#component-api)
 - [References](#references)
@@ -43,6 +44,18 @@ accordion's panel.
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(AccordionStories.Default),
+    },
+  ]}
+/>
+
+## Controlled
+
+<Canvas
+  of={AccordionStories.Controlled}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(AccordionStories.Controlled),
     },
   ]}
 />

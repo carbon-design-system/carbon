@@ -33,7 +33,15 @@ appropriate heading level without you having to manually specify it. To do this,
 you use the `Section` component for each section of your page. Every `Heading`
 component in that `Section` will use the correct heading level.
 
-<Canvas of={HeadingStories.Default} />
+<Canvas
+  of={HeadingStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(HeadingStories.Default),
+    },
+  ]}
+/>
 
 ## Component API
 
@@ -65,6 +73,16 @@ You can use the `level` prop to override the level of a section:
   </Section>
 </Section>
 ```
+
+<Canvas
+  of={HeadingStories.CustomLevel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(HeadingStories.CustomLevel),
+    },
+  ]}
+/>
 
 ## Feedback
 

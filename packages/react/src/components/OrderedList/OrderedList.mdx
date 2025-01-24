@@ -28,6 +28,35 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   />
 </div>
 
+#### Native List Styles:
+
+<div style={{ paddingLeft: '15px' }}>
+  <Canvas
+    of={OrderedListStories.NativeListStyles}
+    additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(OrderedListStories.NativeListStyles),
+      },
+    ]}
+  />
+</div>
+
+#### Nested:
+
+<div style={{ paddingLeft: '15px' }}>
+  <Canvas
+    of={OrderedListStories.Nested}
+    additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(OrderedListStories.Nested),
+      },
+    ]}
+  />
+</div>
+
+
 ## Component API
 
 <ArgTypes />

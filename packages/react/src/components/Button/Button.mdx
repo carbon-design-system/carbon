@@ -20,9 +20,12 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 - [Overview](#overview)
-- [Danger Buttons](#danger-buttons)
-- [Icon-only Buttons](#icon-only-buttons)
-- [Set of Buttons](#set-of-buttons)
+- [Secondary Button](#secondary)
+- [Tertiary Button](#tertiary)
+- [Ghost Button](#Ghost)
+- [Danger Button](#danger-buttons)
+- [Icon-only Button](#icon-only-buttons)
+- [Set of Button](#set-of-buttons)
 - [Skeleton state](#skeleton-state)
 - [Component API](#component-api)
   - [Button `as`](#button-as)
@@ -58,6 +61,8 @@ user interacts with it.
     },
   ]}
 />
+
+## Secondary
 <Canvas
   of={ButtonStories.Secondary}
   additionalActions={[
@@ -67,6 +72,8 @@ user interacts with it.
     },
   ]}
 />
+
+## Tertiary
 <Canvas
   of={ButtonStories.Tertiary}
   additionalActions={[
@@ -76,6 +83,8 @@ user interacts with it.
     },
   ]}
 />
+
+## Ghost
 <Canvas
   of={ButtonStories.Ghost}
   additionalActions={[
@@ -86,7 +95,7 @@ user interacts with it.
   ]}
 />
 
-## Danger Buttons
+## Danger Button
 
 The danger button has three different styles: primary, tertiary, and ghost.
 Determining which danger button style to use will depend on the level of
@@ -106,7 +115,7 @@ danger button or the ghost danger button may be more appropriate.
   ]}
 />
 
-## Icon-only Buttons
+## Icon-only Button
 
 Icon buttons allow users to take actions, and make choices, with a single tap.
 Icon buttons can take the form of Primary, Secondary, Tertiary, and Ghost but
@@ -123,7 +132,7 @@ not support Danger, Danger tertiary, or Danger ghost.
   ]}
 />
 
-## Set of Buttons
+## Set of Button
 
 You can wrap two `Button` elements in a `ButtonSet` when an action required by
 the user has more than one option. Always use a negative action button
