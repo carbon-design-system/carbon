@@ -553,7 +553,12 @@ const Dropdown = React.forwardRef(
         if (['Enter'].includes(evt.key) && !selectedItem && !isOpen) {
           setIsFocused(true);
         }
-        if (toggleButtonProps.onKeyDown) {
+
+        // For Dropdowns the arrow up key is only allowed if the Dropdown is open
+        if (
+          toggleButtonProps.onKeyDown &&
+          (evt.key !== 'ArrowUp' || (isOpen && evt.key === 'ArrowUp'))
+        ) {
           toggleButtonProps.onKeyDown(evt);
         }
       },
