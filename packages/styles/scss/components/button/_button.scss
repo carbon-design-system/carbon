@@ -20,7 +20,6 @@
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/layout';
-@use '../../breakpoint' as *;
 
 @mixin button {
   .#{$prefix}--btn {
@@ -45,16 +44,6 @@
       currentColor,
       $button-primary-active
     );
-    @media (width <= 360px) {
-      @include button-theme(
-        red,
-        transparent,
-        $text-on-color,
-        $button-primary-hover,
-        currentColor,
-        $button-primary-active
-      );
-    }
 
     &:hover {
       color: $text-on-color;
