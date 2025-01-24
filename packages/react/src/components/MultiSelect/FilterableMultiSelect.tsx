@@ -1000,7 +1000,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     </div>
   );
 }) as {
-  <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement;
+  <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement<any>;
   propTypes?: any;
   contextTypes?: any;
   defaultProps?: any;

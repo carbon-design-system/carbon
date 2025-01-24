@@ -185,11 +185,11 @@ TableExpandHeader.propTypes = {
     requiredIfGivenPropIsTruthy(
       'enableExpando',
       PropTypes.func
-    ) as Validator<any>,
+    ) as PropTypes.Validator<any>,
     requiredIfGivenPropIsTruthy(
       'enableToggle',
       PropTypes.func
-    ) as Validator<any>,
+    ) as PropTypes.Validator<any>,
   ]),
 };
 

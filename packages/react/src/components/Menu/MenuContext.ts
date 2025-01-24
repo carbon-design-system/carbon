@@ -50,7 +50,7 @@ function menuReducer(state: StateType, action: ActionType) {
 type DispatchFuncProps = {
   type: 'registerItem' | 'enableIcons';
   payload: {
-    ref: RefObject<HTMLLIElement>;
+    ref: RefObject<HTMLLIElement | null>;
     disabled: boolean;
   };
 };

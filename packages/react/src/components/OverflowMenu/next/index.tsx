@@ -278,7 +278,6 @@ OverflowMenu.propTypes = {
   /**
    * Optionally provide a custom icon to be rendered on the trigger button.
    */
-  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
@@ -341,7 +340,7 @@ OverflowMenu.propTypes = {
    */
   menuTarget: PropTypes.instanceOf(
     typeof Element !== 'undefined' ? Element : Object
-  ) as React.Validator<Element | null | undefined>,
+  ) as PropTypes.Validator<Element | null | undefined>,
 };
 
 export { OverflowMenu };

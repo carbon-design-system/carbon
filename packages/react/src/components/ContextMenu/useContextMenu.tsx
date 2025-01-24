@@ -7,7 +7,11 @@
 
 import { useEffect, useState } from 'react';
 
-type TriggerType = Element | Document | Window | React.RefObject<Element>;
+type TriggerType =
+  | Element
+  | Document
+  | Window
+  | React.RefObject<Element | null>;
 
 export interface ContextMenuProps {
   open: boolean;

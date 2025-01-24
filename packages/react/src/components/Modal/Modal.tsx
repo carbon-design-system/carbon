@@ -260,11 +260,11 @@ const Modal = React.forwardRef(function Modal(
     slug,
     ...rest
   }: ModalProps,
-  ref: React.LegacyRef<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>
 ) {
   const prefix = usePrefix();
   const button = useRef<HTMLButtonElement>(null);
-  const secondaryButton = useRef();
+  const secondaryButton = useRef(undefined);
   const contentRef = useRef<HTMLDivElement>(null);
   const innerModal = useRef<HTMLDivElement>(null);
   const startTrap = useRef<HTMLSpanElement>(null);

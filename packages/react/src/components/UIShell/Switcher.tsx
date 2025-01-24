@@ -144,7 +144,7 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
 
     return (
       <ul
-        ref={ref as React.RefObject<HTMLUListElement>}
+        ref={ref as React.RefObject<HTMLUListElement | null>}
         className={className}
         {...accessibilityLabel}>
         {childrenWithProps}

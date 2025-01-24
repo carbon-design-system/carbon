@@ -182,7 +182,7 @@ const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
       {isFilterable ? (
         // @ts-ignore
         <FilterableMultiSelect
-          ref={ref as RefObject<HTMLDivElement>}
+          ref={ref as RefObject<HTMLDivElement | null>}
           className={classNames}
           {...other}
         />

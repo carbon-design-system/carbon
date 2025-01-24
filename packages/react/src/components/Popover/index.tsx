@@ -13,8 +13,8 @@ import React, {
   useMemo,
   useEffect,
   type ForwardedRef,
-  type WeakValidationMap,
   type ElementType,
+  type JSX,
 } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
@@ -161,7 +161,7 @@ export interface PopoverComponent {
     props: PopoverProps<E> & { forwardRef?: ForwardedRef<ElementType> }
   ): JSX.Element | null;
   displayName?: string;
-  propTypes?: WeakValidationMap<PopoverProps<any>>;
+  propTypes?: PropTypes.WeakValidationMap<PopoverProps<any>>;
 }
 
 export const Popover: PopoverComponent = React.forwardRef(

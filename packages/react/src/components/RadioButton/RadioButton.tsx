@@ -159,7 +159,7 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
       normalizedDecorator['type']?.displayName === 'AILabel'
     ) {
       const size =
-        (normalizedDecorator as ReactElement).props?.['kind'] === 'inline'
+        (normalizedDecorator as ReactElement<any>).props?.['kind'] === 'inline'
           ? 'md'
           : 'mini';
       normalizedDecorator = React.cloneElement(
