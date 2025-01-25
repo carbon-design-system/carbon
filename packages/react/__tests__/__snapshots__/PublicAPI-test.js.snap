@@ -4229,6 +4229,9 @@ Map {
       "enterDelayMs": Object {
         "type": "number",
       },
+      "href": Object {
+        "type": "string",
+      },
       "isSelected": Object {
         "type": "bool",
       },
@@ -7837,7 +7840,6 @@ Map {
         "type": "oneOf",
       },
       "aria-label": Object {
-        "isRequired": true,
         "type": "string",
       },
       "children": Object {
