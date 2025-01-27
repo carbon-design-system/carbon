@@ -378,7 +378,7 @@ export const Icon20Only = () => {
 export const IconOnly = () => {
   return (
     <Tabs>
-      <TabList>
+      <TabList iconSize="default">
         <IconTab label="Analyze" disabled>
           <IbmWatsonDiscovery aria-label="Analyze" />
         </IconTab>
