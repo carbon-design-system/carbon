@@ -1883,6 +1883,19 @@
     - empty battery
     - battery indicator
     - technology
+- name: battery--error
+  friendly_name: Battery error
+  sizes:
+    - 32
+  aliases:
+    - charging
+    - power
+    - battery error
+    - error
+    - fail
+    - technology
+    - battery indicator
+    - battery
 - name: battery--full
   friendly_name: Battery full
   sizes:
@@ -1930,6 +1943,18 @@
     - power
     - battery quarter
     - quartery battery
+    - technology
+    - battery indicator
+    - battery
+- name: battery--warning
+  friendly_name: Battery warning
+  sizes:
+    - 32
+  aliases:
+    - charging
+    - power
+    - battery warning
+    - warn
     - technology
     - battery indicator
     - battery
@@ -10497,11 +10522,55 @@
     - storage
   sizes:
     - 32
+- name: ibm-consulting-advantage--agent
+  friendly_name: IBM Consulting Advantage Agent
+  aliases:
+    - prompt based agent
+    - AI agent
+    - chat agent
+    - prompt
+    - AI
+    - consulting
+    - agent
+  sizes:
+    - 32
+- name: ibm-consulting-advantage--application
+  friendly_name: IBM Consulting Advantage Application
+  aliases:
+    - software applications
+    - assets
+    - packages
+    - software
+    - application
+    - consulting
+  sizes:
+    - 32
+- name: ibm-consulting-advantage--assistant
+  friendly_name: IBM Consulting Advantage Assistant
+  aliases:
+    - chat assistant, AI assistant, prompt based assistant
+    - AI assistant
+    - prompt based assistant
+    - assistant
+    - chat
+    - consulting
+  sizes:
+    - 32
 - name: ibm--content-services
   friendly_name: IBM® Content Services
   aliases:
     - content management
     - SaaS
+  sizes:
+    - 32
+- name: ibm--databand
+  friendly_name: IBM Databand®
+  aliases:
+    - databand
+    - observability
+    - software
+    - data
+    - IBM Databand
   sizes:
     - 32
 - name: ibm--data-power
