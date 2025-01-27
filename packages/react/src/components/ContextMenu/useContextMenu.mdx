@@ -1,5 +1,6 @@
-import { Meta } from '@storybook/blocks';
+import { Meta, Canvas } from '@storybook/blocks';
 import * as useContextMenu from './useContextMenu.stories.js';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -44,6 +45,17 @@ function SomeComponent() {
 }
 ```
 
+<Canvas
+  of={useContextMenu.SpecificElement}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(useContextMenu.SpecificElement),
+    },
+  ]}
+/>
+
 Be aware that the following props are not set by `useContextMenu` and can
 therefore be configured by the user:
 
@@ -51,6 +63,17 @@ therefore be configured by the user:
 - label
 - size
 - target
+
+<Canvas
+  of={useContextMenu._useContextMenu}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(useContextMenu._useContextMenu),
+    },
+  ]}
+/>
 
 ## Component API
 

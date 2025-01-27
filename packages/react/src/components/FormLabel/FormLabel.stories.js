@@ -14,12 +14,21 @@ import { ActionableNotification } from '../Notification';
 import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import './form-label-stories.scss';
 
+import mdx from './FormLabel.mdx';
+
 export default {
   title: 'Components/FormLabel',
   component: FormLabel,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = () => <FormLabel>Form label</FormLabel>;
+export const Default = () => {
+  return <FormLabel>Form label</FormLabel>;
+};
 
 export const WithToggletip = (controls) => {
   const { align } = controls;

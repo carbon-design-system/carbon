@@ -164,6 +164,7 @@ export const Default = (args) => {
     </div>
   );
 };
+
 Default.args = {
   labelTitle: 'Upload files',
   labelDescription: 'Max file size is 500 MB. Only .jpg files are supported.',

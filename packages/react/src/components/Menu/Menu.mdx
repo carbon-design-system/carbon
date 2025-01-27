@@ -1,4 +1,7 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import Menu from '../Menu';
+import * as MenuStories from './Menu.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -37,6 +40,16 @@ subcomponents:
 - [MenuItemGroup](#menuitemgroup)
 - [MenuItemSelectable](#menuitemselectable)
 - [MenuItemRadioGroup](#menuitemradiogroup)
+
+<Canvas
+  of={MenuStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuStories.Default),
+    },
+  ]}
+/>
 
 ## Positioning
 

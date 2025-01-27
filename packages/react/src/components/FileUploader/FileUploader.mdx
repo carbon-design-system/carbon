@@ -1,4 +1,6 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import * as FileUploaderStories from './FileUploader.stories.js';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -12,7 +14,83 @@ import { ArgTypes, Meta } from '@storybook/blocks';
 
 ## Table of Contents
 
+- [Overview](#overview)
+  - 
+  - [Range Datepicker](#range-datepicker)
+  - [Skeleton state](#skeleton-state)
+  - [AI label](#ai-label)
+
+
 ## Overview
+
+<Canvas
+  of={FileUploaderStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FileUploaderStories.Default),
+    },
+  ]}
+/>
+
+#### Drag And Drop Upload Container Example Application
+
+<Canvas
+  of={FileUploaderStories.DragAndDropUploadContainerExampleApplication}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FileUploaderStories.DragAndDropUploadContainerExampleApplication),
+    },
+  ]}
+/>
+
+#### Drag And Drop Upload Single Container Example Application
+<Canvas
+  of={FileUploaderStories.DragAndDropUploadSingleContainerExampleApplication}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FileUploaderStories.DragAndDropUploadSingleContainerExampleApplication),
+    },
+  ]}
+/>
+
+#### File Uploader Drop Container
+
+<Canvas
+  of={FileUploaderStories._FileUploaderDropContainer}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FileUploaderStories._FileUploaderDropContainer),
+    },
+  ]}
+/>
+
+#### File Uploader Item
+
+<Canvas
+  of={FileUploaderStories._FileUploaderItem}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FileUploaderStories._FileUploaderItem),
+    },
+  ]}
+/>
+
+#### Skeleton
+<Canvas
+  of={FileUploaderStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FileUploaderStories.Skeleton),
+    },
+  ]}
+/>
+
 
 ## Component API
 
