@@ -348,7 +348,9 @@ const ToggletipContent = React.forwardRef<
     <PopoverContent
       className={customClassName}
       {...toggletip?.contentProps}
-      ref={ref}>
+      ref={ref}
+      role="region"
+      aria-live="polite">
       <div className={`${prefix}--toggletip-content`}>{children}</div>
     </PopoverContent>
   );
