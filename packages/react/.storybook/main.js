@@ -11,7 +11,12 @@ import remarkGfm from 'remark-gfm';
 import fs from 'fs';
 import glob from 'fast-glob';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+// Convert __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
 // MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
@@ -111,7 +116,7 @@ const config = {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
 
-  webpack(config) {
+  async webpack(config) {
     config.module.rules.push({
       test: /\.s?css$/,
       sideEffects: true,
@@ -134,9 +139,12 @@ const config = {
           options: {
             postcssOptions: {
               plugins: [
-                require('autoprefixer')({
-                  overrideBrowserslist: ['last 1 version'],
-                }),
+                [
+                  'autoprefixer',
+                  {
+                    overrideBrowserslist: ['last 1 version'],
+                  },
+                ],
               ],
             },
             sourceMap: true,
@@ -145,7 +153,7 @@ const config = {
         {
           loader: 'sass-loader',
           options: {
-            implementation: require('sass'),
+            implementation: (await import('sass')).default,
             sassOptions: {
               includePaths: [
                 path.resolve(__dirname, '..', 'node_modules'),

@@ -8,7 +8,7 @@
 import React, { useState, useRef } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-
+import { generateItems, generateGenericItem } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -375,6 +375,34 @@ export const _fullyControlled = (args) => {
         <Button onClick={() => setValue(options[1])}>Option 2</Button>
         <Button onClick={() => setValue(options[2])}>Option 3</Button>
       </div>
+    </div>
+  );
+};
+
+export const Test = ({ controlledItem }) => {
+  const items = generateItems(5, generateGenericItem);
+  const [value, setValue] = useState(controlledItem || items[0]);
+  const [onChangeCallCount, setOnChangeCallCount] = useState(0);
+  const controlledOnChange = ({ selectedItem, inputValue }) => {
+    console.log('selected item: ', selectedItem);
+    console.log(inputValue);
+    setValue(selectedItem);
+    setOnChangeCallCount((prevCount) => prevCount + 1);
+  };
+
+  return (
+    <div>
+      <ComboBox
+        id="test-combobox"
+        items={items}
+        selectedItem={value}
+        allowCustomValue
+        onChange={controlledOnChange}
+        placeholder="Filter..."
+        type="default"
+      />
+      <div>value: {value?.label || 'none'}</div>
+      <div>onChangeCallCount: {onChangeCallCount}</div>
     </div>
   );
 };
