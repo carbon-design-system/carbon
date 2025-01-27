@@ -389,26 +389,27 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       value,
     } = this;
 
-    if (dateFormat) {
-      this._setCalendar('dateFormat', calendar);
-    }
+    if (calendar) {
+      if (dateFormat) {
+        this._setCalendar('dateFormat', calendar);
+      }
 
-    if (minDate || maxDate) {
-      this._setCalendar('date', calendar);
-    }
+      if (minDate || maxDate) {
+        this._setCalendar('date', calendar);
+      }
 
-    if (open) {
-      this._setCalendar('open', calendar);
-    }
+      if (open) {
+        this._setCalendar('open', calendar);
+      }
 
-    if (disabled || readonly) {
-      this._setCalendar('disabled', calendar);
+      if (disabled || readonly) {
+        this._setCalendar('disabled', calendar);
+      }
+      if (value) {
+        this._setCalendar('value', calendar);
+      }
     }
-    if (value) {
-      this._setCalendar('value', calendar);
-    }
-
-    return this.calendar;
+    return calendar;
   }
 
   /**
