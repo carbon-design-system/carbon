@@ -457,7 +457,8 @@ function TabList({
   let hasSecondaryLabelTabs = false;
   if (contained) {
     hasSecondaryLabelTabs = React.Children.toArray(children).some((child) => {
-      return isElement(child) && !!child.props.secondaryLabel;
+      const _child = child as React.ReactElement<any>;
+      return React.isValidElement(child) && !!_child.props.secondaryLabel;
     });
   }
 
@@ -744,11 +745,14 @@ function TabList({
                 hasSecondaryLabel: hasSecondaryLabelTabs,
                 contained,
               }}>
-              {React.cloneElement(child, {
-                ref: (node) => {
-                  tabs.current[index] = node;
-                },
-              })}
+              {React.cloneElement(
+                child as React.ReactElement<{ ref?: React.Ref<any> }>,
+                {
+                  ref: (node) => {
+                    tabs.current[index] = node;
+                  },
+                }
+              )}
             </TabContext.Provider>
           );
         })}
@@ -970,10 +974,11 @@ function TabListVertical({
             halfTabHeight >
             containerHeight
         ) {
-          ref.current.scrollTo({
-            top: (selectedIndex - 1) * verticalTabHeight,
-            behavior: 'smooth',
-          });
+          ref.current &&
+            ref.current.scrollTo({
+              top: (selectedIndex - 1) * verticalTabHeight,
+              behavior: 'smooth',
+            });
         }
       }
     }
@@ -1041,11 +1046,14 @@ function TabListVertical({
                 index,
                 hasSecondaryLabel: false,
               }}>
-              {React.cloneElement(child, {
-                ref: (node) => {
-                  tabs.current[index] = node;
-                },
-              })}
+              {React.cloneElement(
+                child as React.ReactElement<{ ref?: React.Ref<any> }>,
+                {
+                  ref: (node) => {
+                    tabs.current[index] = node;
+                  },
+                }
+              )}
             </TabContext.Provider>
           );
         })}

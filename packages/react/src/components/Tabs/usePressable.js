@@ -10,7 +10,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * @param {React.RefObject<HTMLElement>} ref
+ * @param {React.RefObject<HTMLElement | null>} ref
  *
  * @param {{
  *   onPress?(state: { longPress: boolean }): void,
