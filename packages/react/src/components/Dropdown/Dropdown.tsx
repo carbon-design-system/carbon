@@ -461,6 +461,7 @@ const Dropdown = React.forwardRef(
       [`${prefix}--dropdown--invalid`]: invalid,
       [`${prefix}--dropdown--warning`]: showWarning,
       [`${prefix}--dropdown--open`]: isOpen,
+      [`${prefix}--dropdown--focus`]: isFocused,
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--disabled`]: disabled,
       [`${prefix}--dropdown--light`]: light,
@@ -489,8 +490,6 @@ const Dropdown = React.forwardRef(
         [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
         [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
         [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
-        [`${prefix}--list-box__wrapper--fluid--focus`]:
-          isFluid && isFocused && !isOpen,
         [`${prefix}--list-box__wrapper--slug`]: slug,
         [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
@@ -518,7 +517,7 @@ const Dropdown = React.forwardRef(
       ) : null;
 
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
-      setIsFocused(evt.type === 'focus' ? true : false);
+      setIsFocused(evt.type === 'focus' && !selectedItem ? true : false);
     };
 
     const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
@@ -548,7 +547,18 @@ const Dropdown = React.forwardRef(
             }, 3000)
           );
         }
-        if (toggleButtonProps.onKeyDown) {
+        if (['ArrowDown'].includes(evt.key)) {
+          setIsFocused(false);
+        }
+        if (['Enter'].includes(evt.key) && !selectedItem && !isOpen) {
+          setIsFocused(true);
+        }
+
+        // For Dropdowns the arrow up key is only allowed if the Dropdown is open
+        if (
+          toggleButtonProps.onKeyDown &&
+          (evt.key !== 'ArrowUp' || (isOpen && evt.key === 'ArrowUp'))
+        ) {
           toggleButtonProps.onKeyDown(evt);
         }
       },
