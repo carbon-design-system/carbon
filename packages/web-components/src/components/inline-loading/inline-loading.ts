@@ -13,7 +13,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16.js';
 import ErrorFilled16 from '@carbon/icons/lib/error--filled/16.js';
 import { prefix } from '../../globals/settings';
-import LOADING_TYPE from '../loading/types';
 import getLoadingIcon from '../loading/loading-icon';
 import { INLINE_LOADING_STATE } from './defs';
 import styles from './inline-loading.scss?lit';
@@ -58,7 +57,7 @@ class CDSInlineLoading extends LitElement {
     if (status === INLINE_LOADING_STATE.ERROR) {
       return ErrorFilled16({
         class: `${prefix}--inline-loading--error`,
-        children: html`<title>${this.iconDescription}</title>`,
+        children: html`<title>${iconDescription}</title>`,
       });
     }
     const init = {
@@ -88,7 +87,7 @@ class CDSInlineLoading extends LitElement {
 
       return CheckmarkFilled16({
         class: `${prefix}--inline-loading__checkmark-container`,
-        children: html`<title>${this.iconDescription}</title>`,
+        children: html`<title>${iconDescription}</title>`,
       });
     }
     if (
