@@ -416,6 +416,20 @@
     - Plex
   sizes:
     - 32
+- name: ai-business-impact-assessment
+  friendly_name: AI business impact assessment 
+  aliases:
+    - automation
+    - artificial intelligence
+    - business
+    - impact
+    - metrics
+    - performance
+    - assistant
+    - enterprise
+    - watsonx
+  sizes:
+    - 32
 - name: ai-financial-sustainability-check
   friendly_name: AI Financial Sustainability Check
   aliases:
@@ -2527,6 +2541,21 @@
     - travel
     - public
     - bus
+  sizes:
+    - 32
+- name: business-metrics
+  friendly_name: Business metrics 
+  aliases:
+    - automation
+    - artificial intelligence
+    - business
+    - impact
+    - metrics
+    - meter
+    - performance
+    - assistant
+    - enterprise
+    - watsonx
   sizes:
     - 32
 - name: business-processes

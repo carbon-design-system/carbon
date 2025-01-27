@@ -101,6 +101,10 @@
     outline: none;
   }
 
+  .#{$prefix}--dropdown--focus .#{$prefix}--list-box__field {
+    @include focus-outline('outline');
+  }
+
   .#{$prefix}--dropdown--invalid {
     @include focus-outline('invalid');
 
