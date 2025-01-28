@@ -970,12 +970,7 @@ const ComboBox = forwardRef(
                     // Since `onChange` does not normally fire when the menu is closed, we should
                     // manually fire it when `allowCustomValue` is provided, the menu is closing,
                     // and there is a value.
-                    if (
-                      allowCustomValue &&
-                      isOpen &&
-                      inputValue &&
-                      highlightedIndex === -1
-                    ) {
+                    if (allowCustomValue && isOpen && inputValue) {
                       onChange({ selectedItem, inputValue });
                     }
 
