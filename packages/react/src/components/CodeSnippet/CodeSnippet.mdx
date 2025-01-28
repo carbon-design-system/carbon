@@ -1,6 +1,7 @@
 import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import CodeSnippet from '../CodeSnippet';
 import * as CodeSnippetStories from './CodeSnippet.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -29,7 +30,15 @@ Code snippets are strings or small blocks of reusable code that are copyable. We
 don't provide the copy functionality and recommend
 [clipboard.js](https://clipboardjs.com/).
 
-<Canvas of={CodeSnippetStories.Inline} />
+<Canvas
+  of={CodeSnippetStories.Inline}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CodeSnippetStories.Inline),
+    },
+  ]}
+/>
 
 ## Skeleton state
 
@@ -37,14 +46,30 @@ You can use the `CodeSnippetSkeleton` component to render a skeleton variant of
 an code snippet. This is useful to display while content in your code snippet is
 being fetched from an external resource like an API.
 
-<Canvas of={CodeSnippetStories.Skeleton} />
+<Canvas
+  of={CodeSnippetStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CodeSnippetStories.Skeleton),
+    },
+  ]}
+/>
 
 ## Inline
 
 Inline code snippet's are used for distinguishing a symbol, variable, function
 name or similar small piece of code from it's surrounding text.
 
-<Canvas of={CodeSnippetStories.Inline} />
+<Canvas
+  of={CodeSnippetStories.Inline}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CodeSnippetStories.Inline),
+    },
+  ]}
+/>
 
 ## Multi-line
 
@@ -53,7 +78,15 @@ line. They're shown in a block and useful for showing classes, functions, blocks
 of styles and the like. There is an option to wrap the lines displayed if the
 lines are longer than the container.
 
-<Canvas of={CodeSnippetStories.Multiline} />
+<Canvas
+  of={CodeSnippetStories.Multiline}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CodeSnippetStories.Multiline),
+    },
+  ]}
+/>
 
 ## Single-line
 
@@ -61,7 +94,15 @@ Single line code snippets are used when showing code that fits on one line
 without wrapping. Useful for calling out terminal commands, function
 invocations, expressions etc.
 
-<Canvas of={CodeSnippetStories.Singleline} />
+<Canvas
+  of={CodeSnippetStories.Singleline}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CodeSnippetStories.Singleline),
+    },
+  ]}
+/>
 
 ## Component API
 

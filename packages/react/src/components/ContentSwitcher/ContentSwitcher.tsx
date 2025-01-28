@@ -15,7 +15,7 @@ import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 
-interface SwitchEventHandlersParams {
+export interface SwitchEventHandlersParams {
   index?: number;
   name?: string | number;
   text?: string;
@@ -64,7 +64,7 @@ export interface ContentSwitcherProps
   size: 'sm' | 'md' | 'lg';
 }
 
-interface ContentSwitcherState {
+export interface ContentSwitcherState {
   selectedIndex?: number;
 }
 
