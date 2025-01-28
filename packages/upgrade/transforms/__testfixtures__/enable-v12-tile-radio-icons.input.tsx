@@ -4,6 +4,7 @@ import { FeatureFlags } from '@carbon/feature-flags';
 
 const TestComponent: React.FC = () => {
   return (
+    //prettier-ignore
     <div>
       {/* Case 1: Unwrapped TileGroup */}
       <TileGroup legend="TestGroup" name="test">

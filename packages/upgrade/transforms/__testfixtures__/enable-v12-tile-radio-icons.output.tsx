@@ -4,18 +4,17 @@ import { FeatureFlags } from '@carbon/feature-flags';
 
 const TestComponent: React.FC = () => {
   return (
-    <div>
+    //prettier-ignore
+    (<div>
       {/* Case 1: Unwrapped TileGroup */}
-      <FeatureFlags enableV12TileRadioIcons>
-        <TileGroup legend="TestGroup" name="test">
+      <FeatureFlags enableV12TileRadioIcons><TileGroup legend="TestGroup" name="test">
           <RadioTile id="test-1" value="test-1">
             Option 1
           </RadioTile>
           <RadioTile id="test-2" value="test-2">
             Option 2
           </RadioTile>
-        </TileGroup>
-      </FeatureFlags>
+        </TileGroup></FeatureFlags>
       {/* Wrapped standalone missing flag prop */}
       <FeatureFlags enableV12TileRadioIcons>
         <TileGroup legend="Missing Attribute" name="wrapped">
@@ -46,11 +45,9 @@ const TestComponent: React.FC = () => {
       {/* Case 5: Standalone RadioTiles with different scenarios */}
       <Stack>
         {/* Unwrapped standalone */}
-        <FeatureFlags enableV12TileRadioIcons>
-          <RadioTile id="standalone" value="standalone">
+        <FeatureFlags enableV12TileRadioIcons><RadioTile id="standalone" value="standalone">
             Standalone Tile
-          </RadioTile>
-        </FeatureFlags>
+          </RadioTile></FeatureFlags>
         {/* Wrapped standalone missing flag prop */}
         <FeatureFlags enableV12TileRadioIcons>
           <RadioTile id="wrapped-standalone" value="wrapped-standalone">
@@ -72,8 +69,7 @@ const TestComponent: React.FC = () => {
       </Stack>
       {/* Case 6: Nested structures */}
       <div className="nested">
-        <FeatureFlags enableV12TileRadioIcons>
-          <TileGroup legend="Nested Group" name="nested">
+        <FeatureFlags enableV12TileRadioIcons><TileGroup legend="Nested Group" name="nested">
             <div className="wrapper">
               <RadioTile id="nested-1" value="nested-1">
                 Nested Option 1
@@ -82,10 +78,9 @@ const TestComponent: React.FC = () => {
             <RadioTile id="nested-2" value="nested-2">
               Nested Option 2
             </RadioTile>
-          </TileGroup>
-        </FeatureFlags>
+          </TileGroup></FeatureFlags>
       </div>
-    </div>
+    </div>)
   );
 };
 
