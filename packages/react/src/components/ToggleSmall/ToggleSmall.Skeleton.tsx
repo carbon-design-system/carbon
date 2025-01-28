@@ -9,7 +9,7 @@ import React from 'react';
 import cx from 'classnames';
 import { PrefixContext } from '../../internal/usePrefix';
 
-interface ToggleSmallSkeletonProps {
+export interface ToggleSmallSkeletonProps {
   ['aria-label']: string;
   /**
    * Specify an optional className to add to the form item wrapper.

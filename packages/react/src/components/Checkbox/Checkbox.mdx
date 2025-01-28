@@ -1,6 +1,7 @@
 import { Story, Canvas, ArgTypes, Meta } from '@storybook/blocks';
 import Checkbox, { CheckboxSkeleton } from '../Checkbox';
 import * as CheckboxStories from './Checkbox.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -24,7 +25,15 @@ import * as CheckboxStories from './Checkbox.stories';
 You can build a checkbox using the `Checkbox` in combination with a `<fieldset>`
 element to group controls and `<legend>` element for the label.
 
-<Canvas of={CheckboxStories.Default} />
+<Canvas
+  of={CheckboxStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.Default),
+    },
+  ]}
+/>
 
 ### Controlled example
 
@@ -50,7 +59,15 @@ You can use the `CheckboxSkeleton` component to render a skeleton variant of a
 checkbox. This is useful to display while content in your checkbox is being
 fetched from an external resource like an API.
 
-<Canvas of={CheckboxStories.Skeleton} />
+<Canvas
+  of={CheckboxStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.Skeleton),
+    },
+  ]}
+/>
 
 ## Component API
 

@@ -72,7 +72,7 @@ export const withTitle = {
 };
 
 const meta = {
-  title: 'Components/Icon',
+  title: 'Elements/Icons',
 };
 
 export default meta;

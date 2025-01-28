@@ -1,5 +1,6 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as NumberInputStories from './NumberInput.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -20,11 +21,27 @@ import * as NumberInputStories from './NumberInput.stories';
 
 ## Overview
 
-<Canvas of={NumberInputStories.Default} />
+<Canvas
+  of={NumberInputStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(NumberInputStories.Default),
+    },
+  ]}
+/>
 
 ## Skeleton State
 
-<Canvas of={NumberInputStories.Skeleton} />
+<Canvas
+  of={NumberInputStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(NumberInputStories.Skeleton),
+    },
+  ]}
+/>
 
 ## Component API
 
