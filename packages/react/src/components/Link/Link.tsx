@@ -16,6 +16,10 @@ import React, {
 } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
+import {
+  PolymorphicComponentPropWithRef,
+  PolymorphicRef,
+} from '../../internal/PolymorphicProps';
 
 export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
@@ -68,67 +72,70 @@ export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   visited?: boolean;
 }
 
-export type LinkProps<E extends ElementType> = PolymorphicProps<
-  E,
-  LinkBaseProps
->;
+export type LinkProps<T extends React.ElementType> =
+  PolymorphicComponentPropWithRef<T, LinkBaseProps>;
 
-const Link = React.forwardRef(function Link<E extends React.ElementType>(
-  {
-    as: BaseComponent,
-    children,
-    className: customClassName,
-    href,
-    disabled = false,
-    inline = false,
-    visited = false,
-    renderIcon: Icon,
-    size,
-    target,
-    ...rest
-  }: LinkProps<E>,
-  ref
-) {
-  const prefix = usePrefix();
-  const className = cx(`${prefix}--link`, customClassName, {
-    [`${prefix}--link--disabled`]: disabled,
-    [`${prefix}--link--inline`]: inline,
-    [`${prefix}--link--visited`]: visited,
-    [`${prefix}--link--${size}`]: size,
-  });
-  const rel = target === '_blank' ? 'noopener' : undefined;
-  const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
-    className: BaseComponent ? undefined : className,
-    rel,
-    target,
-  };
+type LinkComponent = <T extends React.ElementType = 'a'>(
+  props: LinkProps<T>
+) => React.ReactElement | any;
 
-  // Reference for disabled links:
-  // https://www.scottohara.me/blog/2021/05/28/disabled-links.html
-  if (!disabled) {
-    linkProps.href = href;
-  } else {
-    linkProps.role = 'link';
-    linkProps['aria-disabled'] = true;
+const Link: LinkComponent = React.forwardRef(
+  <T extends React.ElementType = 'a'>(
+    {
+      as: BaseComponent,
+      children,
+      className: customClassName,
+      href,
+      disabled = false,
+      inline = false,
+      visited = false,
+      renderIcon: Icon,
+      size,
+      target,
+      ...rest
+    }: LinkProps<T>,
+    ref: PolymorphicRef<T>
+  ) => {
+    const prefix = usePrefix();
+    const className = cx(`${prefix}--link`, customClassName, {
+      [`${prefix}--link--disabled`]: disabled,
+      [`${prefix}--link--inline`]: inline,
+      [`${prefix}--link--visited`]: visited,
+      [`${prefix}--link--${size}`]: size,
+    });
+    const rel = target === '_blank' ? 'noopener' : undefined;
+    const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
+      className: BaseComponent ? undefined : className,
+      rel,
+      target,
+    };
+
+    // Reference for disabled links:
+    // https://www.scottohara.me/blog/2021/05/28/disabled-links.html
+    if (!disabled) {
+      linkProps.href = href;
+    } else {
+      linkProps.role = 'link';
+      linkProps['aria-disabled'] = true;
+    }
+
+    const BaseComponentAsAny = (BaseComponent ?? 'a') as any;
+
+    return (
+      <BaseComponentAsAny ref={ref} {...linkProps} {...rest}>
+        {children}
+        {!inline && Icon && (
+          <div className={`${prefix}--link__icon`}>
+            <Icon />
+          </div>
+        )}
+      </BaseComponentAsAny>
+    );
   }
+);
 
-  const BaseComponentAsAny = (BaseComponent ?? 'a') as any;
-
-  return (
-    <BaseComponentAsAny ref={ref} {...linkProps} {...rest}>
-      {children}
-      {!inline && Icon && (
-        <div className={`${prefix}--link__icon`}>
-          <Icon />
-        </div>
-      )}
-    </BaseComponentAsAny>
-  );
-});
-
-Link.displayName = 'Link';
-
-Link.propTypes = {
+(Link as React.FC).displayName = 'Link';
+(Link as React.FC).propTypes = {
   /**
    * Provide a custom element or component to render the top-level node for the
    * component.
