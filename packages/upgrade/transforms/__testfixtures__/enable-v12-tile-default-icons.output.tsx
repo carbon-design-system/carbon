@@ -4,7 +4,7 @@ import { FeatureFlags } from '@carbon/feature-flags';
 
 const TestComponent: React.FC = () => {
   return (
-    <div>
+    (<div>
       {/* Case 1: Unwrapped TileGroup */}
       <FeatureFlags enableV12TileDefaultIcons>
         <TileGroup legend="TestGroup" name="test">
@@ -64,7 +64,7 @@ const TestComponent: React.FC = () => {
           </TileGroup>
         </FeatureFlags>
       </div>
-    </div>
+    </div>)
   );
 };
 
