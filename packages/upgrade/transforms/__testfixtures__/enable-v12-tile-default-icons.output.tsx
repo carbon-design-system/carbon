@@ -4,14 +4,13 @@ import { FeatureFlags } from '@carbon/feature-flags';
 
 const TestComponent: React.FC = () => {
   return (
+    //prettier-ignore
     <div>
       {/* Case 1: Unwrapped TileGroup */}
-      <FeatureFlags enableV12TileDefaultIcons>
-        <TileGroup legend="TestGroup" name="test">
+      <FeatureFlags enableV12TileDefaultIcons><TileGroup legend="TestGroup" name="test">
           <Tile id="test-1">Option 1</Tile>
           <Tile id="test-2">Option 2</Tile>
-        </TileGroup>
-      </FeatureFlags>
+        </TileGroup></FeatureFlags>
       {/* Wrapped standalone missing flag prop */}
       <FeatureFlags enableV12TileDefaultIcons>
         <TileGroup legend="Missing Attribute" name="wrapped">
@@ -35,9 +34,7 @@ const TestComponent: React.FC = () => {
       {/* Case 5: Standalone Tiles with different scenarios */}
       <Stack>
         {/* Unwrapped standalone */}
-        <FeatureFlags enableV12TileDefaultIcons>
-          <Tile id="standalone">Standalone Tile</Tile>
-        </FeatureFlags>
+        <FeatureFlags enableV12TileDefaultIcons><Tile id="standalone">Standalone Tile</Tile></FeatureFlags>
 
         {/* Wrapped standalone missing flag prop */}
         <FeatureFlags enableV12TileDefaultIcons>
@@ -56,14 +53,12 @@ const TestComponent: React.FC = () => {
       </Stack>
       {/* Case 6: Nested structures */}
       <div className="nested">
-        <FeatureFlags enableV12TileDefaultIcons>
-          <TileGroup legend="Nested Group" name="nested">
+        <FeatureFlags enableV12TileDefaultIcons><TileGroup legend="Nested Group" name="nested">
             <div className="wrapper">
               <Tile id="nested-1">Nested Option 1</Tile>
             </div>
             <Tile id="nested-2">Nested Option 2</Tile>
-          </TileGroup>
-        </FeatureFlags>
+          </TileGroup></FeatureFlags>
       </div>
     </div>
   );
