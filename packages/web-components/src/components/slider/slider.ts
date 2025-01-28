@@ -97,10 +97,10 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   private _draggingUpper = false;
 
   /**
-   * The Upper value.
+   * The upper bound when there are two handles..
    */
   @property({ type: Number, attribute: 'value-upper' })
-  valueUpper;
+  unstable_valueUpper;
 
   /**
    * The rate of the thumb position in the track.
@@ -135,11 +135,11 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    * When we try to set a new value for upper input, we adjust the value considering `step` property.
    */
   private get _rateUpper() {
-    const { max, min, valueUpper } = this;
+    const { max, min, unstable_valueUpper } = this;
     // Copes with out-of-range value coming programmatically or from `<cds-slider-input>`
-    if (valueUpper) {
+    if (unstable_valueUpper) {
       const rateUpper =
-        (Math.min(Number(max), Math.max(Number(min), valueUpper)) -
+        (Math.min(Number(max), Math.max(Number(min), unstable_valueUpper)) -
           Number(min)) /
         (Number(max) - Number(min));
       this._cachedRateUpper = rateUpper;
@@ -151,7 +151,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
 
   private set _rateUpper(rateUpper: number) {
     const { max, min, step } = this;
-    this.valueUpper =
+    this.unstable_valueUpper =
       Number(min) +
       Math.round(
         ((Number(max) - Number(min)) * Math.min(1, Math.max(0, rateUpper))) /
@@ -206,7 +206,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           step: rawStep,
           stepMultiplier: rawstepMultiplier,
           value,
-          valueUpper,
+          unstable_valueUpper,
         } = this;
         const max = Number(rawMax);
         const min = Number(rawMin);
@@ -217,7 +217,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           THUMB_DIRECTION[key];
         // Snaps to next
         if (eventContainer == 'thumb-upper') {
-          const stepCount = (valueUpper + diff) / step;
+          const stepCount = (unstable_valueUpper + diff) / step;
           const position = Math.min(
             max,
             Math.max(
@@ -226,7 +226,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             )
           );
           if (position >= this.value) {
-            this.valueUpper = position;
+            this.unstable_valueUpper = position;
           }
           this.dispatchEvent(
             new CustomEvent(
@@ -235,7 +235,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                 bubbles: true,
                 composed: true,
                 detail: {
-                  value: this.valueUpper,
+                  value: this.unstable_valueUpper,
                   intermediate: false,
                 },
               }
@@ -250,7 +250,10 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
               (diff >= 0 ? Math.floor(stepCount) : Math.ceil(stepCount)) * step
             )
           );
-          if (!this.valueUpper || position <= this.valueUpper) {
+          if (
+            !this.unstable_valueUpper ||
+            position <= this.unstable_valueUpper
+          ) {
             this.value = position;
           }
           this.dispatchEvent(
@@ -338,12 +341,12 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             bubbles: true,
             composed: true,
             detail: {
-              value: this.valueUpper,
+              value: this.unstable_valueUpper,
             },
           })
         );
       } else {
-        if (!this.valueUpper) {
+        if (!this.unstable_valueUpper) {
           this._rate =
             (isRtl
               ? trackLeft + trackWidth - thumbPosition
@@ -373,9 +376,9 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                 ? position - this.value
                 : this.value - position;
             const differenceValueUpper =
-              position > this.valueUpper
-                ? position - this.valueUpper
-                : this.valueUpper - position;
+              position > this.unstable_valueUpper
+                ? position - this.unstable_valueUpper
+                : this.unstable_valueUpper - position;
             if (differenceValue > differenceValueUpper) {
               this._rateUpper = position / 100;
             } else if (differenceValue < differenceValueUpper) {
@@ -385,7 +388,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
               !this._draggingUpper &&
               differenceValue === differenceValueUpper
             ) {
-              Math.round(position) > this.valueUpper
+              Math.round(position) > this.unstable_valueUpper
                 ? (this._rateUpper = position / 100)
                 : (this._rate = position / 100);
             }
@@ -450,7 +453,10 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           (isRtl
             ? trackLeft + trackWidth - thumbPosition
             : thumbPosition - trackLeft) / trackWidth;
-        if (!this.valueUpper || position * 100 <= this.valueUpper) {
+        if (
+          !this.unstable_valueUpper ||
+          position * 100 <= this.unstable_valueUpper
+        ) {
           this._rate = position;
           this.dispatchEvent(
             new CustomEvent(
@@ -480,7 +486,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                 bubbles: true,
                 composed: true,
                 detail: {
-                  value: this.valueUpper,
+                  value: this.unstable_valueUpper,
                   intermediate: true,
                 },
               }
@@ -518,7 +524,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           bubbles: true,
           composed: true,
           detail: {
-            value: this.valueUpper,
+            value: this.unstable_valueUpper,
           },
         })
       );
@@ -553,12 +559,13 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       : '';
     if (intermediate !== value) {
       if (eventContainer === 'upper') {
-        this.valueUpper = value;
+        this.unstable_valueUpper = value;
       } else {
         this.value = value;
       }
     }
-    const valueMain = eventContainer === 'upper' ? this.valueUpper : this.value;
+    const valueMain =
+      eventContainer === 'upper' ? this.unstable_valueUpper : this.value;
     valueMain !== '' &&
       this.dispatchEvent(
         new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
@@ -790,10 +797,13 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
         }
       }
       if (input) {
-        if ((this.valueUpper || this.valueUpper === '') && index > 0) {
-          ['max', 'min', 'step', 'valueUpper'].forEach((name) => {
-            if (name === 'valueUpper') {
-              input.value = this.valueUpper;
+        if (
+          (this.unstable_valueUpper || this.unstable_valueUpper === '') &&
+          index > 0
+        ) {
+          ['max', 'min', 'step', 'unstable_valueUpper'].forEach((name) => {
+            if (name === 'unstable_valueUpper') {
+              input.value = this.unstable_valueUpper;
             } else if (name === 'min') {
               input[name] = this.value;
             } else {
@@ -802,8 +812,8 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           });
         } else {
           ['max', 'min', 'step', 'value'].forEach((name) => {
-            if (this.valueUpper && name === 'max') {
-              input[name] = this.valueUpper;
+            if (this.unstable_valueUpper && name === 'max') {
+              input[name] = this.unstable_valueUpper;
             } else {
               input[name] = this[name];
             }
@@ -843,7 +853,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       warn,
       warnText,
       value,
-      valueUpper,
+      unstable_valueUpper,
       _rate: rate,
       _rateUpper: rateUpper,
       _handleClickLabel: handleClickLabel,
@@ -867,7 +877,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
         <slot name="label-text">${labelText}</slot>
       </label>
       <div class="${prefix}--slider-container">
-        ${valueUpper || valueUpper === ''
+        ${unstable_valueUpper || unstable_valueUpper === ''
           ? html` <slot name="lower-input"></slot>`
           : ''}
         <span class="${prefix}--slider__range-label">
@@ -883,7 +893,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           role="presentation">
           <div
             id="thumb"
-            class="${valueUpper || valueUpper === ''
+            class="${unstable_valueUpper || unstable_valueUpper === ''
               ? `${prefix}--icon-tooltip ${prefix}--slider__thumb-wrapper ${prefix}--slider__thumb-wrapper--lower`
               : `${prefix}--slider__thumb`}"
             role="slider"
@@ -893,7 +903,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             aria-valuenow="${value}"
             style="left: ${rate * 100}%"
             @pointerdown="${onDrag}">
-            ${valueUpper || valueUpper === ''
+            ${unstable_valueUpper || unstable_valueUpper === ''
               ? html`
                   <div class="${prefix}--slider__thumb--lower">
                     <svg
@@ -919,7 +929,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                 `
               : ``}
           </div>
-          ${valueUpper || valueUpper === ''
+          ${unstable_valueUpper || unstable_valueUpper === ''
             ? html`
                 <div
                   id="thumb-upper"
@@ -928,7 +938,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                   tabindex="${!readonly ? 0 : -1}"
                   aria-valuemax="${max}"
                   aria-valuemin="${min}"
-                  aria-valuenow="${valueUpper}"
+                  aria-valuenow="${unstable_valueUpper}"
                   style="left: ${rateUpper * 100}%"
                   @pointerdown="${onDrag}">
                   <div class="${prefix}--slider__thumb--upper">
@@ -956,11 +966,11 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
               `
             : html``}
           <div id="track" class="${prefix}--slider__track"></div>
-          ${valueUpper || valueUpper === ''
+          ${unstable_valueUpper || unstable_valueUpper === ''
             ? html`
                 <div
                   class="${prefix}--slider__filled-track"
-                  style="transform: ${valueUpper
+                  style="transform: ${unstable_valueUpper
                     ? `translate(${rate * 100}%, -50%) scaleX(${
                         rateUpper - rate
                       })`
@@ -969,7 +979,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             : html` <div class="${prefix}-ce--slider__filled-track-container">
                 <div
                   class="${prefix}--slider__filled-track"
-                  style="transform: ${valueUpper
+                  style="transform: ${unstable_valueUpper
                     ? `translate(${rate * 100}%, -50%) scaleX(${
                         rateUpper - rate
                       })`
