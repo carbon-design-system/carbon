@@ -8,7 +8,7 @@
 import React, { useEffect, useState, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 
-interface PortalProps {
+export interface PortalProps {
   /**
    * Specify the children elements to be rendered inside of the <Portal>
    */

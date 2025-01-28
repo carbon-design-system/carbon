@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface SideNavItemProps {
+export interface SideNavItemProps {
   /**
    * Provide a single icon as the child to `SideNavItem` to render in the
    * container
