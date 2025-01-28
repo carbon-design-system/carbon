@@ -4,7 +4,6 @@ import { FeatureFlags } from '@carbon/feature-flags';
 
 function TestComponent() {
   return (
-    // prettier-ignore
     <div>
       {/* Case 1: Unwrapped TileGroup */}
       <TileGroup legend="TestGroup" name="test">
