@@ -42,7 +42,7 @@ const buttonOrder = (kind) =>
     tertiary: 3,
     danger: 5,
     primary: 6,
-  }[kind] ?? 4);
+  })[kind] ?? 4;
 
 const ButtonSet: ForwardRefReturn<HTMLDivElement, ButtonSetProps> =
   React.forwardRef(function ButtonSet(
