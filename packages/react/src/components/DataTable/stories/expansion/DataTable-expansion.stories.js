@@ -83,6 +83,7 @@ export const Default = (args) => (
             {rows.map((row) => (
               <React.Fragment key={row.id}>
                 <TableExpandRow
+                  aria-expanded={row.isExpanded}
                   {...getRowProps({ row })}
                   onClick={action('onClick')}>
                   {row.cells.map((cell) => (
@@ -90,6 +91,7 @@ export const Default = (args) => (
                   ))}
                 </TableExpandRow>
                 <TableExpandedRow
+                  aria-hidden={!row.isExpanded}
                   colSpan={headers.length + 1}
                   className="demo-expanded-td"
                   {...getExpandedRowProps({ row })}>

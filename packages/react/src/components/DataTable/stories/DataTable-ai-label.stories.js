@@ -386,7 +386,9 @@ export const AILabelWithExpansion = (args) => (
           <TableBody>
             {rows.map((row, i) => (
               <React.Fragment key={row.id}>
-                <TableExpandRow {...getRowProps({ row })}>
+                <TableExpandRow
+                  {...getRowProps({ row })}
+                  aria-expanded={row.isExpanded}>
                   {i === 3 || i === 4 || i === 1 ? (
                     <TableDecoratorRow decorator={aiLabel} />
                   ) : (
@@ -397,6 +399,7 @@ export const AILabelWithExpansion = (args) => (
                   ))}
                 </TableExpandRow>
                 <TableExpandedRow
+                  aria-hidden={!row.isExpanded}
                   colSpan={headers.length + 2}
                   className="demo-expanded-td"
                   {...getExpandedRowProps({ row })}>
@@ -456,7 +459,9 @@ export const ColumnAILabelWithSelectionAndExpansion = (args) => (
             {rows.map((row) => {
               return (
                 <React.Fragment key={row.id}>
-                  <TableExpandRow {...getRowProps({ row })}>
+                  <TableExpandRow
+                    {...getRowProps({ row })}
+                    aria-expanded={row.isExpanded}>
                     <TableSelectRow {...getSelectionProps({ row })} />
                     {row.cells.map((cell) => {
                       return (
@@ -467,6 +472,7 @@ export const ColumnAILabelWithSelectionAndExpansion = (args) => (
                     })}
                   </TableExpandRow>
                   <TableExpandedRow
+                    aria-hidden={!row.isExpanded}
                     colSpan={headers.length + 2}
                     className="demo-expanded-td"
                     {...getExpandedRowProps({ row })}>

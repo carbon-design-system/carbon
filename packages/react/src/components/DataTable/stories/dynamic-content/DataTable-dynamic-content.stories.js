@@ -249,13 +249,16 @@ export const Default = (args) => {
                   <TableBody>
                     {rows.map((row) => (
                       <React.Fragment key={row.id}>
-                        <TableExpandRow {...getRowProps({ row })}>
+                        <TableExpandRow
+                          {...getRowProps({ row })}
+                          aria-expanded={row.isExpanded}>
                           <TableSelectRow {...getSelectionProps({ row })} />
                           {row.cells.map((cell) => (
                             <TableCell key={cell.id}>{cell.value}</TableCell>
                           ))}
                         </TableExpandRow>
                         <TableExpandedRow
+                          aria-hidden={!row.isExpanded}
                           colSpan={headers.length + 3}
                           className="demo-expanded-td"
                           {...getExpandedRowProps({ row })}>
