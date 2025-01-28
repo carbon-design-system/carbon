@@ -12,8 +12,6 @@
 const defaultOptions = {
   quote: 'single',
   trailingComma: true,
-  arrowParensAlways: true,
-  parser: 'tsx',
 };
 
 function transform(fileInfo, api, options) {
