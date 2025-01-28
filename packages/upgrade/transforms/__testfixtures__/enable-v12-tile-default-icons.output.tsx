@@ -4,7 +4,7 @@ import { FeatureFlags } from '@carbon/feature-flags';
 
 const TestComponent: React.FC = () => {
   return (
-    (<div>
+    <div>
       {/* Case 1: Unwrapped TileGroup */}
       <FeatureFlags enableV12TileDefaultIcons>
         <TileGroup legend="TestGroup" name="test">
@@ -17,6 +17,7 @@ const TestComponent: React.FC = () => {
         <TileGroup legend="Missing Attribute" name="wrapped">
           <Tile id="wrapped-1">Already Wrapped Option 1</Tile>
           <Tile id="wrapped-2">Already Wrapped Option 2</Tile>
+          <Tile id="wrapped-3">Already Wrapped Option 3</Tile>
         </TileGroup>
       </FeatureFlags>
       {/* Case 3: Already wrapped with other flags */}
@@ -64,7 +65,7 @@ const TestComponent: React.FC = () => {
           </TileGroup>
         </FeatureFlags>
       </div>
-    </div>)
+    </div>
   );
 };
 

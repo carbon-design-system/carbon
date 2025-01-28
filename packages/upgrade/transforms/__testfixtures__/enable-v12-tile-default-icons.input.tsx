@@ -16,6 +16,7 @@ const TestComponent: React.FC = () => {
         <TileGroup legend="Missing Attribute" name="wrapped">
           <Tile id="wrapped-1">Already Wrapped Option 1</Tile>
           <Tile id="wrapped-2">Already Wrapped Option 2</Tile>
+          <Tile id="wrapped-3">Already Wrapped Option 3</Tile>
         </TileGroup>
       </FeatureFlags>
 
