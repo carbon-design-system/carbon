@@ -66,7 +66,7 @@ const HeaderGlobalAction: React.FC<HeaderGlobalActionProps> = React.forwardRef(
       tooltipAlignment,
       ...rest
     },
-    ref
+    ref: React.Ref<HTMLButtonElement>
   ) {
     const prefix = usePrefix();
     const className = cx({

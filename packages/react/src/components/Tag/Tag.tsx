@@ -6,23 +6,23 @@
  */
 
 import PropTypes from 'prop-types';
-import React, {
-  useLayoutEffect,
-  useState,
-  ReactNode,
-  useRef,
-  ForwardedRef,
-} from 'react';
+import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { PolymorphicProps } from '../../types/common';
 import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
 import { DefinitionTooltip } from '../Tooltip';
 import { isEllipsisActive } from './isEllipsisActive';
 import { useMergeRefs } from '@floating-ui/react';
+import {
+  PolymorphicComponentPropWithRef,
+  PolymorphicRef,
+} from '../../internal/PolymorphicProps';
+import { SelectableTagBaseProps, SelectableTagProps } from './SelectableTag';
+import { OperationalTagBaseProps } from './OperationalTag';
+import { DismissibleTagBaseProps } from './DismissibleTag';
 
 export const TYPES = {
   red: 'Red',
@@ -110,93 +110,145 @@ export interface TagBaseProps {
   type?: keyof typeof TYPES;
 }
 
-export type TagProps<T extends React.ElementType> = PolymorphicProps<
-  T,
-  TagBaseProps
->;
+export type TagProps<T extends React.ElementType> =
+  PolymorphicComponentPropWithRef<T, TagBaseProps>;
 
-const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
-  {
-    children,
-    className,
-    decorator,
-    id,
-    type,
-    filter, // remove filter in next major release - V12
-    renderIcon: CustomIconElement,
-    title = 'Clear filter', // remove title in next major release - V12
-    disabled,
-    onClose, // remove onClose in next major release - V12
-    size,
-    as: BaseComponent,
-    slug,
-    ...other
-  }: TagProps<T>,
-  forwardRef: ForwardedRef<HTMLElement | undefined>
-) {
-  const prefix = usePrefix();
-  const tagRef = useRef<HTMLElement>();
-  const ref = useMergeRefs([forwardRef, tagRef]);
-  const tagId = id || `tag-${useId()}`;
-  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+type TagComponent = <T extends React.ElementType = 'div'>(
+  props:
+    | TagProps<T>
+    | OperationalTagBaseProps
+    | SelectableTagBaseProps
+    | DismissibleTagBaseProps
+) => React.ReactElement | any;
 
-  useLayoutEffect(() => {
-    const newElement = tagRef.current?.getElementsByClassName(
-      `${prefix}--tag__label`
-    )[0];
-    setIsEllipsisApplied(isEllipsisActive(newElement));
-  }, [prefix, tagRef]);
+const Tag: TagComponent = React.forwardRef(
+  <T extends React.ElementType = 'div'>(
+    {
+      children,
+      className,
+      decorator,
+      id,
+      type,
+      filter, // remove filter in next major release - V12
+      renderIcon: CustomIconElement,
+      title = 'Clear filter', // remove title in next major release - V12
+      disabled,
+      onClose, // remove onClose in next major release - V12
+      size,
+      as: BaseComponent,
+      slug,
+      ...other
+    }: TagProps<T>,
+    forwardRef: PolymorphicRef<T>
+  ) => {
+    const prefix = usePrefix();
+    const tagRef = useRef<HTMLElement>();
+    const ref = useMergeRefs([forwardRef, tagRef]);
+    const tagId = id || `tag-${useId()}`;
+    const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-  const conditions = [
-    `${prefix}--tag--selectable`,
-    `${prefix}--tag--filter`,
-    `${prefix}--tag--operational`,
-  ];
+    useLayoutEffect(() => {
+      const newElement = tagRef.current?.getElementsByClassName(
+        `${prefix}--tag__label`
+      )[0];
+      setIsEllipsisApplied(isEllipsisActive(newElement));
+    }, [prefix, tagRef]);
 
-  const isInteractiveTag = conditions.some((el) => className?.includes(el));
+    const conditions = [
+      `${prefix}--tag--selectable`,
+      `${prefix}--tag--filter`,
+      `${prefix}--tag--operational`,
+    ];
 
-  const tagClasses = classNames(`${prefix}--tag`, className, {
-    [`${prefix}--tag--disabled`]: disabled,
-    [`${prefix}--tag--filter`]: filter,
-    [`${prefix}--tag--${size}`]: size, // TODO: V12 - Remove this class
-    [`${prefix}--layout--size-${size}`]: size,
-    [`${prefix}--tag--${type}`]: type,
-    [`${prefix}--tag--interactive`]:
-      other.onClick && !isInteractiveTag && isEllipsisApplied,
-  });
+    const isInteractiveTag = conditions.some((el) => className?.includes(el));
 
-  const typeText =
-    type !== undefined && type in Object.keys(TYPES) ? TYPES[type] : '';
+    const tagClasses = classNames(`${prefix}--tag`, className, {
+      [`${prefix}--tag--disabled`]: disabled,
+      [`${prefix}--tag--filter`]: filter,
+      [`${prefix}--tag--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
+      [`${prefix}--tag--${type}`]: type,
+      [`${prefix}--tag--interactive`]:
+        other.onClick && !isInteractiveTag && isEllipsisApplied,
+    });
 
-  const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (onClose) {
-      event.stopPropagation();
-      onClose(event);
-    }
-  };
+    const typeText =
+      type !== undefined && type in Object.keys(TYPES) ? TYPES[type] : '';
 
-  // AILabel is always size `sm` and `inline`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
-    : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel' &&
-    !isInteractiveTag
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'sm',
-        kind: 'inline',
+    const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (onClose) {
+        event.stopPropagation();
+        onClose(event);
       }
-    );
-  }
+    };
 
-  if (filter) {
-    const ComponentTag = (BaseComponent as React.ElementType) ?? 'div';
+    // AILabel is always size `sm` and `inline`
+    let normalizedDecorator = React.isValidElement(slug ?? decorator)
+      ? (slug ?? decorator)
+      : null;
+    if (
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel' &&
+      !isInteractiveTag
+    ) {
+      normalizedDecorator = React.cloneElement(
+        normalizedDecorator as React.ReactElement<any>,
+        {
+          size: 'sm',
+          kind: 'inline',
+        }
+      );
+    }
+
+    if (filter) {
+      const ComponentTag = (BaseComponent as React.ElementType) ?? 'div';
+      return (
+        <ComponentTag className={tagClasses} id={tagId} {...other}>
+          {CustomIconElement && size !== 'sm' ? (
+            <div className={`${prefix}--tag__custom-icon`}>
+              <CustomIconElement />
+            </div>
+          ) : (
+            ''
+          )}
+
+          <Text
+            title={typeof children === 'string' ? children : undefined}
+            className={`${prefix}--tag__label`}>
+            {children !== null && children !== undefined ? children : typeText}
+          </Text>
+          {normalizedDecorator}
+          <button
+            type="button"
+            className={`${prefix}--tag__close-icon`}
+            onClick={handleClose}
+            disabled={disabled}
+            aria-label={title}
+            title={title}>
+            <Close />
+          </button>
+        </ComponentTag>
+      );
+    }
+
+    const ComponentTag =
+      BaseComponent ??
+      (other.onClick || className?.includes(`${prefix}--tag--operational`)
+        ? 'button'
+        : 'div');
+
+    const labelClasses = classNames({
+      [`${prefix}--tag__label`]: !isInteractiveTag,
+    });
+
     return (
-      <ComponentTag className={tagClasses} id={tagId} {...other}>
+      <ComponentTag
+        ref={ref}
+        disabled={disabled}
+        className={tagClasses}
+        id={tagId}
+        type={ComponentTag === 'button' ? 'button' : undefined}
+        {...other}>
         {CustomIconElement && size !== 'sm' ? (
           <div className={`${prefix}--tag__custom-icon`}>
             <CustomIconElement />
@@ -204,58 +256,28 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
         ) : (
           ''
         )}
-
-        <Text
-          title={typeof children === 'string' ? children : undefined}
-          className={`${prefix}--tag__label`}>
-          {children !== null && children !== undefined ? children : typeText}
-        </Text>
-        {normalizedDecorator}
-        <button
-          type="button"
-          className={`${prefix}--tag__close-icon`}
-          onClick={handleClose}
-          disabled={disabled}
-          aria-label={title}
-          title={title}>
-          <Close />
-        </button>
-      </ComponentTag>
-    );
-  }
-
-  const ComponentTag =
-    BaseComponent ??
-    (other.onClick || className?.includes(`${prefix}--tag--operational`)
-      ? 'button'
-      : 'div');
-
-  const labelClasses = classNames({
-    [`${prefix}--tag__label`]: !isInteractiveTag,
-  });
-
-  return (
-    <ComponentTag
-      ref={ref}
-      disabled={disabled}
-      className={tagClasses}
-      id={tagId}
-      type={ComponentTag === 'button' ? 'button' : undefined}
-      {...other}>
-      {CustomIconElement && size !== 'sm' ? (
-        <div className={`${prefix}--tag__custom-icon`}>
-          <CustomIconElement />
-        </div>
-      ) : (
-        ''
-      )}
-      {isEllipsisApplied && !isInteractiveTag ? (
-        <DefinitionTooltip
-          openOnHover={false}
-          definition={
-            children !== null && children !== undefined ? children : typeText
-          }
-          className={`${prefix}--definition--tooltip--tag`}>
+        {isEllipsisApplied && !isInteractiveTag ? (
+          <DefinitionTooltip
+            openOnHover={false}
+            definition={
+              children !== null && children !== undefined ? children : typeText
+            }
+            className={`${prefix}--definition--tooltip--tag`}>
+            <Text
+              title={
+                children !== null &&
+                children !== undefined &&
+                typeof children === 'string'
+                  ? children
+                  : typeText
+              }
+              className={labelClasses}>
+              {children !== null && children !== undefined
+                ? children
+                : typeText}
+            </Text>
+          </DefinitionTooltip>
+        ) : (
           <Text
             title={
               children !== null &&
@@ -267,32 +289,22 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
             className={labelClasses}>
             {children !== null && children !== undefined ? children : typeText}
           </Text>
-        </DefinitionTooltip>
-      ) : (
-        <Text
-          title={
-            children !== null &&
-            children !== undefined &&
-            typeof children === 'string'
-              ? children
-              : typeText
-          }
-          className={labelClasses}>
-          {children !== null && children !== undefined ? children : typeText}
-        </Text>
-      )}
-      {slug ? (
-        normalizedDecorator
-      ) : decorator ? (
-        <div className={`${prefix}--tag__decorator`}>{normalizedDecorator}</div>
-      ) : (
-        ''
-      )}
-    </ComponentTag>
-  );
-});
+        )}
+        {slug ? (
+          normalizedDecorator
+        ) : decorator ? (
+          <div className={`${prefix}--tag__decorator`}>
+            {normalizedDecorator}
+          </div>
+        ) : (
+          ''
+        )}
+      </ComponentTag>
+    );
+  }
+);
 
-Tag.propTypes = {
+(Tag as React.FC).propTypes = {
   /**
    * Provide an alternative tag or component to use instead of the default
    * wrapping element

@@ -12,6 +12,10 @@ import { composeEventHandlers } from '../../tools/events';
 import { PolymorphicProps } from '../../types/common';
 import { PopoverAlignment } from '../Popover';
 import ButtonBase from './ButtonBase';
+import {
+  PolymorphicComponentPropWithRef,
+  PolymorphicRef,
+} from '../../internal/PolymorphicProps';
 
 export const ButtonKinds = [
   'primary',
@@ -102,15 +106,13 @@ export interface ButtonBaseProps
   tooltipPosition?: ButtonTooltipPosition;
 }
 
-export type ButtonProps<T extends React.ElementType> = PolymorphicProps<
-  T,
-  ButtonBaseProps
->;
+export type ButtonProps<T extends React.ElementType> =
+  PolymorphicComponentPropWithRef<T, ButtonBaseProps>;
 
-export type ButtonComponent = <T extends React.ElementType>(
+export type ButtonComponent = <T extends React.ElementType = 'button'>(
   props: ButtonProps<T>,
   context?: any
-) => React.ReactElement<any, any> | null;
+) => React.ReactElement | any;
 
 function isIconOnlyButton(
   hasIconOnly: ButtonBaseProps['hasIconOnly'],
@@ -123,87 +125,89 @@ function isIconOnlyButton(
   return false;
 }
 
-const Button = React.forwardRef(function Button<T extends React.ElementType>(
-  props: ButtonProps<T>,
-  ref: React.Ref<unknown>
-) {
-  const tooltipRef = useRef(null);
-  const {
-    as,
-    autoAlign = false,
-    children,
-    hasIconOnly = false,
-    iconDescription,
-    kind = 'primary',
-    onBlur,
-    onClick,
-    onFocus,
-    onMouseEnter,
-    onMouseLeave,
-    renderIcon: ButtonImageElement,
-    size,
-    tooltipAlignment = 'center',
-    tooltipPosition = 'top',
-    ...rest
-  } = props;
+const Button: ButtonComponent = React.forwardRef(
+  <T extends React.ElementType = 'button'>(
+    props: ButtonProps<T>,
+    ref: React.Ref<unknown>
+  ) => {
+    const tooltipRef = useRef(null);
+    const {
+      as,
+      autoAlign = false,
+      children,
+      hasIconOnly = false,
+      iconDescription,
+      kind = 'primary',
+      onBlur,
+      onClick,
+      onFocus,
+      onMouseEnter,
+      onMouseLeave,
+      renderIcon: ButtonImageElement,
+      size,
+      tooltipAlignment = 'center',
+      tooltipPosition = 'top',
+      ...rest
+    } = props;
 
-  const handleClick = (evt: React.MouseEvent) => {
-    // Prevent clicks on the tooltip from triggering the button click event
-    if (evt.target === tooltipRef.current) {
-      evt.preventDefault();
-    }
-  };
+    const handleClick = (evt: React.MouseEvent) => {
+      // Prevent clicks on the tooltip from triggering the button click event
+      if (evt.target === tooltipRef.current) {
+        evt.preventDefault();
+      }
+    };
 
-  const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
+    const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
 
-  if (!isIconOnlyButton(hasIconOnly, kind)) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { tooltipAlignment, ...propsWithoutTooltipAlignment } = props;
-    return <ButtonBase ref={ref} {...propsWithoutTooltipAlignment} />;
-  } else {
-    let align: PopoverAlignment | undefined = undefined;
+    if (!isIconOnlyButton(hasIconOnly, kind)) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { tooltipAlignment, ...propsWithoutTooltipAlignment } = props;
+      return <ButtonBase ref={ref} {...propsWithoutTooltipAlignment} />;
+    } else {
+      let align: PopoverAlignment | undefined = undefined;
 
-    if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
-      if (tooltipAlignment === 'center') {
+      if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
+        if (tooltipAlignment === 'center') {
+          align = tooltipPosition;
+        }
+        if (tooltipAlignment === 'end') {
+          align = `${tooltipPosition}-end`;
+        }
+        if (tooltipAlignment === 'start') {
+          align = `${tooltipPosition}-start`;
+        }
+      }
+
+      if (tooltipPosition === 'right' || tooltipPosition === 'left') {
         align = tooltipPosition;
       }
-      if (tooltipAlignment === 'end') {
-        align = `${tooltipPosition}-end`;
-      }
-      if (tooltipAlignment === 'start') {
-        align = `${tooltipPosition}-start`;
-      }
-    }
 
-    if (tooltipPosition === 'right' || tooltipPosition === 'left') {
-      align = tooltipPosition;
+      return (
+        <IconButton
+          {...rest}
+          ref={ref}
+          as={as}
+          align={align}
+          label={iconDescription}
+          kind={kind}
+          size={size}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          autoAlign={autoAlign}
+          onClick={composeEventHandlers([onClick, handleClick])}
+          renderIcon={iconOnlyImage ? null : ButtonImageElement} // avoid doubling the icon.
+        >
+          {iconOnlyImage ?? children}
+        </IconButton>
+      );
     }
-
-    return (
-      <IconButton
-        {...rest}
-        ref={ref}
-        as={as}
-        align={align}
-        label={iconDescription}
-        kind={kind}
-        size={size}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        autoAlign={autoAlign}
-        onClick={composeEventHandlers([onClick, handleClick])}
-        renderIcon={iconOnlyImage ? null : ButtonImageElement} // avoid doubling the icon.
-      >
-        {iconOnlyImage ?? children}
-      </IconButton>
-    );
   }
-});
+);
 
-Button.displayName = 'Button';
-Button.propTypes = {
+(Button as React.FC).displayName = 'Button';
+(Button as React.FC).propTypes = {
   /**
    * Specify how the button itself should be rendered.
    * Make sure to apply all props to the root node and render children appropriately
