@@ -81,7 +81,6 @@ For a full reference of config variables, see the table below.
 | `$flex-grid-columns`           | Specify the total columns to be used in the flex grid                                | `16`          |
 | `$css--emit-type-custom-props` | Emit custom CSS properties for typography                                            | `true`        |
 
-
 ## Feature flags
 
 The Carbon Design System takes advantage of feature flags to conditionally
