@@ -62,7 +62,8 @@ const propMappingFunction = (deprecatedValue) => {
   return mapping[deprecatedValue];
 };
 
-interface CopyProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface CopyProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Specify how the trigger should align with the tooltip
    */

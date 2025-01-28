@@ -33,12 +33,6 @@
 
   // Filterable
   .#{$prefix}--list-box__wrapper--fluid
-    .#{$prefix}--multi-select--filterable--input-focused {
-    outline: none;
-    outline-offset: 0;
-  }
-
-  .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--multi-select--filterable
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input {
