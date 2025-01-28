@@ -5,7 +5,7 @@ import { FeatureFlags } from '@carbon/feature-flags';
 const TestComponent: React.FC = () => {
   return (
     // prettier-ignore
-    <div>
+    (<div>
       {/* Case 1: Unwrapped TileGroup */}
       <FeatureFlags enableV12TileDefaultIcons><TileGroup legend="TestGroup" name="test">
           <Tile id="test-1">
@@ -83,7 +83,7 @@ const TestComponent: React.FC = () => {
             </Tile>
           </TileGroup></FeatureFlags>
       </div>
-    </div>
+    </div>)
   );
 };
 
