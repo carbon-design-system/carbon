@@ -520,24 +520,29 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
 
   updated(changedProperties) {
     const { calendar } = this;
-    if (calendar && changedProperties.has('dateFormat')) {
-      this._setCalendar('dateFormat', calendar);
-    }
-    if (changedProperties.has('minDate') || changedProperties.has('maxDate')) {
-      this._setCalendar('date', calendar);
-    }
+    if (calendar) {
+      if (changedProperties.has('dateFormat')) {
+        this._setCalendar('dateFormat', calendar);
+      }
+      if (
+        changedProperties.has('minDate') ||
+        changedProperties.has('maxDate')
+      ) {
+        this._setCalendar('date', calendar);
+      }
 
-    if (changedProperties.has('open') && calendar) {
-      this._setCalendar('open', calendar);
-    }
-    if (
-      changedProperties.has('disabled') ||
-      changedProperties.has('readonly')
-    ) {
-      this._setCalendar('disabled', calendar);
-    }
-    if (changedProperties.has('value')) {
-      this._setCalendar('value', calendar);
+      if (changedProperties.has('open')) {
+        this._setCalendar('open', calendar);
+      }
+      if (
+        changedProperties.has('disabled') ||
+        changedProperties.has('readonly')
+      ) {
+        this._setCalendar('disabled', calendar);
+      }
+      if (changedProperties.has('value')) {
+        this._setCalendar('value', calendar);
+      }
     }
   }
 
