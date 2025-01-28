@@ -61,6 +61,15 @@ test.describe('@avt FluidDropdown', () => {
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('ArrowDown');
     await expect(menu).toBeVisible();
+    // Expect focus to be on 1st item in menu after Arrow Down
+    // when there is no initial selected item
+    await expect(
+      page.getByRole('option', {
+        name: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+      })
+    ).toHaveClass(
+      'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
+    );
     // Close with Escape, retain focus, and open with Space
     await page.keyboard.press('Escape');
     await page.keyboard.press('Space');
@@ -70,7 +79,27 @@ test.describe('@avt FluidDropdown', () => {
     await expect(menu).toBeHidden();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
+    // Expect focus to be retained when no initial selected item after Enter
+    await expect(toggleButton).toBeFocused();
+    await expect(menu).toBeVisible();
+    // Select item from menu
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
+    // Open with Enter after item has been selected
+    await page.keyboard.press('Enter');
     // Should focus on selected item by default
+    await expect(
+      page.getByRole('option', {
+        name: 'Option 2',
+      })
+    ).toHaveClass(
+      'cds--list-box__menu-item cds--list-box__menu-item--active cds--list-box__menu-item--highlighted'
+    );
+    // Should focus on selected item by default on Arrow Down as well
+    await page.keyboard.press('Escape');
+    await page.keyboard.press('ArrowDown');
     await expect(
       page.getByRole('option', {
         name: 'Option 2',
