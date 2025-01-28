@@ -216,7 +216,6 @@ export const ExplainabilityPopover = {
   render: (args) => {
     const { alignment, showActions } = args ?? {};
 
-    console.log('showActions', showActions);
     return html`
       <style>
         ${styles}

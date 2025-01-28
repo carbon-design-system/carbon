@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useState, ReactNode, useRef } from 'react';
+import React, { useLayoutEffect, useState, useRef, MouseEvent } from 'react';
 import classNames from 'classnames';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -46,7 +46,7 @@ export interface SelectableTagBaseProps {
   /**
    * Provide an optional function to be called when the tag is clicked.
    */
-  onClick?: (e: Event) => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 
   /**
    * Specify the state of the selectable tag.
@@ -83,7 +83,7 @@ const SelectableTag = <T extends React.ElementType>({
   ...other
 }: SelectableTagProps<T>) => {
   const prefix = usePrefix();
-  const tagRef = useRef<HTMLElement>();
+  const tagRef = useRef<HTMLButtonElement>(null);
   const tagId = id || `tag-${useId()}`;
   const [selectedTag, setSelectedTag] = useState(selected);
   const tagClasses = classNames(`${prefix}--tag--selectable`, className, {
@@ -103,7 +103,7 @@ const SelectableTag = <T extends React.ElementType>({
     `${prefix}--tag-label-tooltip`
   );
 
-  const handleClick = (e: Event) => {
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     setSelectedTag(!selectedTag);
     onChange?.(!selectedTag);
     onClick?.(e);
