@@ -783,8 +783,9 @@ const ComboBox = forwardRef(
           onChange({ selectedItem: newSelectedItem });
         }
         if (
-          type === useCombobox.stateChangeTypes.FunctionSelectItem ||
-          type === useCombobox.stateChangeTypes.InputKeyDownEnter
+          (type === useCombobox.stateChangeTypes.FunctionSelectItem ||
+            type === useCombobox.stateChangeTypes.InputKeyDownEnter) &&
+          !isEqual(selectedItemProp, newSelectedItem) // Only fire if there's an actual change
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
@@ -969,7 +970,12 @@ const ComboBox = forwardRef(
                     // Since `onChange` does not normally fire when the menu is closed, we should
                     // manually fire it when `allowCustomValue` is provided, the menu is closing,
                     // and there is a value.
-                    if (allowCustomValue && isOpen && inputValue) {
+                    if (
+                      allowCustomValue &&
+                      isOpen &&
+                      inputValue &&
+                      highlightedIndex === -1
+                    ) {
                       onChange({ selectedItem, inputValue });
                     }
 

@@ -190,8 +190,12 @@ export const Default = (args) => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         titleText="ComboBox title"
+        allowCustomValue
+        onChange={({ selectedItem }) => {
+          console.log(selectedItem);
+        }}
         helperText="Combobox helper text"
-        {...args}
+        // {...args}
       />
     </div>
   );
