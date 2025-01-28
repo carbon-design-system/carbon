@@ -57,7 +57,7 @@ const TestComponent: React.FC = () => {
         {/* Wrapped standalone with other flag */}
         <FeatureFlags enable-v12-tile-default-icons>
           <RadioTile id="other-standalone" value="other-standalone">
-            Other Flag Standalone
+            Other Flag Standalone radio
           </RadioTile>
         </FeatureFlags>
         {/* Correctly wrapped standalone */}
