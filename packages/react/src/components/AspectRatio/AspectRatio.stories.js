@@ -29,25 +29,23 @@ export default {
   },
 };
 
-export const Default = {
-  render: ({ ratio, ...args }) => {
-    return (
-      <Grid {...args}>
-        <Column sm={1} md={2} lg={4}>
-          <AspectRatio ratio={ratio}>Content</AspectRatio>
-        </Column>
-        <Column sm={1} md={2} lg={4}>
-          <AspectRatio ratio={ratio}>Content</AspectRatio>
-        </Column>
-        <Column sm={1} md={2} lg={4}>
-          <AspectRatio ratio={ratio}>Content</AspectRatio>
-        </Column>
-        <Column sm={1} md={2} lg={4}>
-          <AspectRatio ratio={ratio}>Content</AspectRatio>
-        </Column>
-      </Grid>
-    );
-  },
+export const Default = (args) => {
+  return (
+    <Grid {...args}>
+      <Column sm={1} md={2} lg={4}>
+        <AspectRatio {...args}>Content</AspectRatio>
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        <AspectRatio {...args}>Content</AspectRatio>
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        <AspectRatio {...args}>Content</AspectRatio>
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        <AspectRatio {...args}>Content</AspectRatio>
+      </Column>
+    </Grid>
+  );
 };
 
 Default.argTypes = {
@@ -65,5 +63,8 @@ Default.argTypes = {
       type: 'select',
     },
     options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
+    table: {
+      category: 'AspectRatio',
+    },
   },
 };
