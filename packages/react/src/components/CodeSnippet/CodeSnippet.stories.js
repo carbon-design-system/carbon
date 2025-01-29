@@ -29,15 +29,18 @@ export default {
   },
 };
 
-export const Inline = () => (
-  <CodeSnippet type="inline" feedback="Copied to clipboard">
-    {'node -v'}
-  </CodeSnippet>
-);
+export const Inline = () => {
+  return (
+    <CodeSnippet type="inline" feedback="Copied to clipboard">
+      {'node -v'}
+    </CodeSnippet>
+  );
+};
 
-export const Multiline = () => (
-  <CodeSnippet type="multi" feedback="Copied to clipboard">
-    {`  "scripts": {
+export const Multiline = () => {
+  return (
+    <CodeSnippet type="multi" feedback="Copied to clipboard">
+      {`  "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
@@ -66,28 +69,34 @@ export const Multiline = () => (
     "@babel/preset-react": "^7.10.0",
     "@babel/runtime": "^7.10.0",
     "@commitlint/cli": "^8.3.5",`}
-  </CodeSnippet>
-);
-
-export const Singleline = () => (
-  <CodeSnippet type="single" feedback="Copied to clipboard">
-    yarn add carbon-components@latest carbon-components-react@latest
-    @carbon/icons-react@latest carbon-icons@latest
-  </CodeSnippet>
-);
-
-export const InlineWithLayer = () => (
-  <WithLayer>
-    <CodeSnippet type="inline" feedback="Copied to clipboard">
-      {'node -v'}
     </CodeSnippet>
-  </WithLayer>
-);
+  );
+};
 
-export const MultilineWithLayer = () => (
-  <WithLayer>
-    <CodeSnippet type="multi" feedback="Copied to clipboard">
-      {`  "scripts": {
+export const Singleline = () => {
+  return (
+    <CodeSnippet type="single" feedback="Copied to clipboard">
+      yarn add carbon-components@latest carbon-components-react@latest
+      @carbon/icons-react@latest carbon-icons@latest
+    </CodeSnippet>
+  );
+};
+
+export const InlineWithLayer = () => {
+  return (
+    <WithLayer>
+      <CodeSnippet type="inline" feedback="Copied to clipboard">
+        {'node -v'}
+      </CodeSnippet>
+    </WithLayer>
+  );
+};
+
+export const MultilineWithLayer = () => {
+  return (
+    <WithLayer>
+      <CodeSnippet type="multi" feedback="Copied to clipboard">
+        {`  "scripts": {
       "build": "lerna run build --stream --prefix --npm-client yarn",
       "ci-check": "carbon-cli ci-check",
       "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
@@ -116,22 +125,27 @@ export const MultilineWithLayer = () => (
         "@babel/preset-react": "^7.10.0",
         "@babel/runtime": "^7.10.0",
         "@commitlint/cli": "^8.3.5",`}
-    </CodeSnippet>
-  </WithLayer>
-);
+      </CodeSnippet>
+    </WithLayer>
+  );
+};
 
-export const SinglelineWithLayer = () => (
-  <WithLayer>
-    <CodeSnippet type="single" feedback="Copied to clipboard">
-      yarn add carbon-components@latest carbon-components-react@latest
-      @carbon/icons-react@latest carbon-icons@latest
-    </CodeSnippet>
-  </WithLayer>
-);
+export const SinglelineWithLayer = () => {
+  return (
+    <WithLayer>
+      <CodeSnippet type="single" feedback="Copied to clipboard">
+        yarn add carbon-components@latest carbon-components-react@latest
+        @carbon/icons-react@latest carbon-icons@latest
+      </CodeSnippet>
+    </WithLayer>
+  );
+};
 
-export const Skeleton = () => (
-  <div>
-    <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
-    <CodeSnippetSkeleton type="multi" />
-  </div>
-);
+export const Skeleton = () => {
+  return (
+    <div>
+      <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
+      <CodeSnippetSkeleton type="multi" />
+    </div>
+  );
+};
