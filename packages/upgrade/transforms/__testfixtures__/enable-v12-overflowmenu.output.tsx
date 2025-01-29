@@ -1,12 +1,8 @@
+//prettier-ignore
 import React from 'react';
 import { FeatureFlags } from '@carbon/feature-flags';
 import type { FC } from 'react';
-import {
-  MenuItem,
-  MenuItemDivider,
-  OverflowMenu,
-  OverflowMenuItem,
-} from '@carbon/react';
+import { MenuItem, MenuItemDivider, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 interface MenuItem {
   id: string;
@@ -20,7 +16,7 @@ interface Props {
 
 const TestComponent: FC<Props> = ({ items }) => {
   return (
-    <div>
+    (<div>
       {/* Old API usage - mapped items */}
       <FeatureFlags enableV12Overflowmenu>
         <OverflowMenu aria-label="mapped-menu">
@@ -36,11 +32,10 @@ const TestComponent: FC<Props> = ({ items }) => {
       {/* Old API - explicit props */}
       <FeatureFlags enableV12Overflowmenu>
         <OverflowMenu direction="top" size="lg" flipped={true}>
-          <MenuItemDivider />
-          <MenuItem kind="danger" label="TypeScript Item" />
+          <MenuItemDivider /><MenuItem kind='danger' label="TypeScript Item" />
         </OverflowMenu>
       </FeatureFlags>
-    </div>
+    </div>)
   );
 };
 

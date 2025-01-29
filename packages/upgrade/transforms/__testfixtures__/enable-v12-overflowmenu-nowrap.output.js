@@ -1,4 +1,4 @@
-// Output: enable-v12-overflowmenu.output.js
+//prettier-ignore
 import React from 'react';
 import { OverflowMenu, OverflowMenuItem, MenuItem, MenuItemDivider, Button } from '@carbon/react';
 import { FeatureFlags } from '@carbon/feature-flags';
@@ -33,11 +33,13 @@ function TestComponent({ menuProps }) {
        </OverflowMenu>
 
       {/* Already using new API - should not be transformed */}
+     <FeatureFlags enableV12Overflowmenu>
        <OverflowMenu label="Already migrated">
          <MenuItem label="Option 1" />
          <MenuItemDivider />
          <MenuItem label="Delete" kind="danger" />
        </OverflowMenu>
+     </FeatureFlags>
 
      {/* Other components - unchanged */}
      <Button>Normal button</Button>

@@ -1,3 +1,4 @@
+//prettier-ignore
 import React from 'react';
 import type { FC } from 'react';
 import { OverflowMenu, OverflowMenuItem } from '@carbon/react';

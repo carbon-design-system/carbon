@@ -1,11 +1,11 @@
-// Output: enable-v12-overflowmenu.output.js
+//prettier-ignore
 import React from 'react';
 import { OverflowMenu, OverflowMenuItem, MenuItem, MenuItemDivider, Button } from '@carbon/react';
 import { FeatureFlags } from '@carbon/feature-flags';
 
 function TestComponent({ menuProps }) {
- return (
-   <div>
+ return (  
+   (<div>
      {/* Old API usage with props - transformed */}
      <FeatureFlags enableV12Overflowmenu>
        <OverflowMenu 
@@ -47,7 +47,7 @@ function TestComponent({ menuProps }) {
 
      {/* Other components - unchanged */}
      <Button>Normal button</Button>
-   </div>
+   </div>)
  );
 }
 

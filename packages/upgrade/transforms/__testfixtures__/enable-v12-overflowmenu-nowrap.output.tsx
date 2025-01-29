@@ -1,12 +1,8 @@
+//prettier-ignore
 import React from 'react';
 import { FeatureFlags } from '@carbon/feature-flags';
 import type { FC } from 'react';
-import {
-  MenuItem,
-  MenuItemDivider,
-  OverflowMenu,
-  OverflowMenuItem,
-} from '@carbon/react';
+import { MenuItem, MenuItemDivider, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 interface MenuItem {
   id: string;
@@ -20,23 +16,26 @@ interface Props {
 
 const TestComponent: FC<Props> = ({ items }) => {
   return (
-    <div>
+    (<div>
       {/* Old API usage - mapped items */}
-      <OverflowMenu aria-label="mapped-menu">
-        {items.map((item) => (
-          <OverflowMenuItem
-            key={item.id}
-            itemText={item.label}
-            onClick={item.action}
-          />
-        ))}
-      </OverflowMenu>
+      <FeatureFlags enableV12Overflowmenu>
+        <OverflowMenu aria-label="mapped-menu">
+          {items.map((item) => (
+            <OverflowMenuItem
+              key={item.id}
+              itemText={item.label}
+              onClick={item.action}
+            />
+          ))}
+        </OverflowMenu>
+      </FeatureFlags>
       {/* Old API - explicit props */}
-      <OverflowMenu direction="top" size="lg" flipped={true}>
-        <MenuItemDivider />
-        <MenuItem kind="danger" label="TypeScript Item" />
-      </OverflowMenu>
-    </div>
+      <FeatureFlags enableV12Overflowmenu>
+        <OverflowMenu direction="top" size="lg" flipped={true}>
+          <MenuItemDivider /><MenuItem kind='danger' label="TypeScript Item" />
+        </OverflowMenu>
+      </FeatureFlags>
+    </div>)
   );
 };
 
