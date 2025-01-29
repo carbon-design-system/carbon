@@ -1,6 +1,7 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import * as TagStories from './Tag.stories';
 import * as InteractiveTagStories from './InteractiveTag.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -24,7 +25,15 @@ Read-only tags are used to categorize, are used for labeling, and do not have
 interactive functionality. Read-only tags come in several color choices and can
 use optional decorative icons to delineate between multiple categories.
 
-<Canvas of={TagStories.ReadOnly} />
+<Canvas
+  of={TagStories.ReadOnly}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TagStories.ReadOnly),
+    },
+  ]}
+/>
 
 ## Dismissible
 
@@ -35,7 +44,15 @@ When to use:
 - Use DismissibleTag when you want to allow users to easily clear or dismiss
   specific filters applied to items.
 
-<Canvas of={InteractiveTagStories.Dismissible} />
+<Canvas
+  of={InteractiveTagStories.Dismissible}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TagStories.ReadOnly),
+    },
+  ]}
+/>
 
 Here it is a sample code to help you get started.
 
@@ -108,7 +125,15 @@ When to use:
   need to be a little more specific around filtering for selectable versus
   dismissable tags).
 
-<Canvas of={InteractiveTagStories.Selectable} />
+<Canvas
+  of={InteractiveTagStories.Selectable}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(InteractiveTagStories.Selectable),
+    },
+  ]}
+/>
 
 Here it is a sample code to help you get started.
 
@@ -182,7 +207,15 @@ When not to use:
 - Do not use in combination with Dismissable tags. Instead, consider letting the
   user enter an "edit mode" to dismiss tags.
 
-<Canvas of={InteractiveTagStories.Operational} />
+<Canvas
+  of={InteractiveTagStories.Operational}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(InteractiveTagStories.Operational),
+    },
+  ]}
+/>
 
 ## With AI Label
 
@@ -190,8 +223,24 @@ Tag with AI label is now stable for Read Only tags. This addition changes the
 visual appearance of the component and introduces an AI explainability feature
 when AI is present in the component.
 
-<Canvas of={TagStories.withAILabel} />
+<Canvas
+  of={TagStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TagStories.withAILabel),
+    },
+  ]}
+/>
 
 ## Skeleton
 
-<Canvas of={TagStories.Skeleton} />
+<Canvas
+  of={TagStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TagStories.Skeleton),
+    },
+  ]}
+/>

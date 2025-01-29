@@ -36,6 +36,8 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { Tooltip } from '../Tooltip';
 
+import mdx from './Tile.mdx';
+
 export default {
   title: 'Components/Tile',
   component: Tile,
@@ -58,6 +60,11 @@ export default {
       table: {
         disable: true,
       },
+    },
+  },
+  parameters: {
+    docs: {
+      page: mdx,
     },
   },
 };
@@ -258,66 +265,72 @@ export const RadioWithLayer = () => (
   </WithLayer>
 );
 
-export const Expandable = () => (
-  <div style={{ width: '400px' }}>
-    <ExpandableTile
-      id="expandable-tile-1"
-      tileCollapsedIconText="Interact to Expand tile"
-      tileExpandedIconText="Interact to Collapse tile">
-      <TileAboveTheFoldContent>
-        <div style={{ height: '200px' }}>Above the fold content here</div>
-      </TileAboveTheFoldContent>
-      <TileBelowTheFoldContent>
-        <div style={{ height: '400px' }}>Below the fold content here</div>
-      </TileBelowTheFoldContent>
-    </ExpandableTile>
-  </div>
-);
+export const Expandable = () => {
+  return (
+    <div style={{ width: '400px' }}>
+      <ExpandableTile
+        id="expandable-tile-1"
+        tileCollapsedIconText="Interact to Expand tile"
+        tileExpandedIconText="Interact to Collapse tile">
+        <TileAboveTheFoldContent>
+          <div style={{ height: '200px' }}>Above the fold content here</div>
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent>
+          <div style={{ height: '400px' }}>Below the fold content here</div>
+        </TileBelowTheFoldContent>
+      </ExpandableTile>
+    </div>
+  );
+};
 
-export const ExpandableWithInteractive = () => (
-  <div style={{ width: '400px' }}>
-    <ExpandableTile
-      onClick={() => console.log('click')}
-      id="expandable-tile-1"
-      tileCollapsedIconText="Interact to Expand tile"
-      tileExpandedIconText="Interact to Collapse tile">
-      <TileAboveTheFoldContent>
-        <div style={{ height: '200px', width: '200px' }}>
-          Above the fold content here
-          <div style={{ paddingTop: '1rem' }}>
-            <Button>Example</Button>
+export const ExpandableWithInteractive = () => {
+  return (
+    <div style={{ width: '400px' }}>
+      <ExpandableTile
+        onClick={() => console.log('click')}
+        id="expandable-tile-1"
+        tileCollapsedIconText="Interact to Expand tile"
+        tileExpandedIconText="Interact to Collapse tile">
+        <TileAboveTheFoldContent>
+          <div style={{ height: '200px', width: '200px' }}>
+            Above the fold content here
+            <div style={{ paddingTop: '1rem' }}>
+              <Button>Example</Button>
+            </div>
           </div>
-        </div>
-      </TileAboveTheFoldContent>
-      <TileBelowTheFoldContent>
-        <div style={{ height: '200px', width: '200px' }}>
-          Below the fold content here
-          <TextInput id="test2" invalidText="A valid value is required" />
-        </div>
-      </TileBelowTheFoldContent>
-    </ExpandableTile>
-  </div>
-);
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent>
+          <div style={{ height: '200px', width: '200px' }}>
+            Below the fold content here
+            <TextInput id="test2" invalidText="A valid value is required" />
+          </div>
+        </TileBelowTheFoldContent>
+      </ExpandableTile>
+    </div>
+  );
+};
 
-export const ExpandableWithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: '400px' }}>
-        <ExpandableTile
-          id={`expandable-tile-${layer}`}
-          tileCollapsedIconText="Interact to Expand tile"
-          tileExpandedIconText="Interact to Collapse tile">
-          <TileAboveTheFoldContent>
-            <div style={{ height: '100px' }}>Above the fold content here</div>
-          </TileAboveTheFoldContent>
-          <TileBelowTheFoldContent>
-            <div style={{ height: '200px' }}>Below the fold content here</div>
-          </TileBelowTheFoldContent>
-        </ExpandableTile>
-      </div>
-    )}
-  </WithLayer>
-);
+export const ExpandableWithLayer = () => {
+  return (
+    <WithLayer>
+      {(layer) => (
+        <div style={{ width: '400px' }}>
+          <ExpandableTile
+            id={`expandable-tile-${layer}`}
+            tileCollapsedIconText="Interact to Expand tile"
+            tileExpandedIconText="Interact to Collapse tile">
+            <TileAboveTheFoldContent>
+              <div style={{ height: '100px' }}>Above the fold content here</div>
+            </TileAboveTheFoldContent>
+            <TileBelowTheFoldContent>
+              <div style={{ height: '200px' }}>Below the fold content here</div>
+            </TileBelowTheFoldContent>
+          </ExpandableTile>
+        </div>
+      )}
+    </WithLayer>
+  );
+};
 
 const aiLabel = (
   <AILabel className="ai-label-container">

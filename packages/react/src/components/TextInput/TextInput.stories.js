@@ -140,11 +140,13 @@ Default.argTypes = {
   ...sharedArgTypes,
 };
 
-export const Fluid = () => (
-  <FluidForm>
-    <TextInput type="text" labelText="Text input label" id="text-input-1" />
-  </FluidForm>
-);
+export const Fluid = () => {
+  return (
+    <FluidForm>
+      <TextInput type="text" labelText="Text input label" id="text-input-1" />
+    </FluidForm>
+  );
+};
 
 export const ReadOnly = () => {
   return (
