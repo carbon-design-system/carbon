@@ -18,10 +18,15 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Table of Contents
 
-- [Default state](#default-state)
+- [Select](#select)
+  - [Default state](#default-state)
   - [Empty default option](#empty-default-option)
   - [First option default](#first-option-default)
   - [Custom option default](#custom-option-default)
+  - [Inline](#inline)
+  - [Skeleton](#skeleton)
+  - [AI Label](#ai-label)
+  - [Skeleton](#skeleton)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -126,7 +131,7 @@ desired option.
 </Select>
 ```
 
-#### Inline:
+## Inline
 
 <Canvas
   of={SelectStories.Inline}
@@ -138,7 +143,7 @@ desired option.
   ]}
 />
 
-#### Skeleton:
+## Skeleton
 
 <Canvas
   of={SelectStories.Skeleton}
@@ -150,7 +155,7 @@ desired option.
   ]}
 />
 
-#### AI Label:
+## AI Label
 
 <Canvas
   of={SelectStories.withAILabel}
@@ -158,18 +163,6 @@ desired option.
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(SelectStories.withAILabel),
-    },
-  ]}
-/>
-
-#### With Layer:
-
-<Canvas
-  of={SelectStories._WithLayer}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(SelectStories._WithLayer),
     },
   ]}
 />

@@ -8,19 +8,26 @@
 import React from 'react';
 import PaginationNav from '../PaginationNav';
 import './styles.scss';
+import mdx from './PaginationNav.mdx';
 
 export default {
   title: 'Components/PaginationNav',
   component: PaginationNav,
   subcomponents: {},
-  parameters: {},
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = (args) => (
-  <div style={{ width: '800px' }}>
-    <PaginationNav {...args} />
-  </div>
-);
+export const Default = (args) => {
+  return (
+    <div style={{ width: '800px' }}>
+      <PaginationNav {...args} />
+    </div>
+  );
+};
 
 Default.args = {
   size: 'lg',

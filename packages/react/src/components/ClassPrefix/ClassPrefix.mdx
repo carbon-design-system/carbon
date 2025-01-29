@@ -25,15 +25,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 The `ClassPrefix` component is used to change the prefix in the classes used by
 components in Carbon.
 
-<Canvas
-  of={ClassPrefixStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ClassPrefixStories.Default),
-    },
-  ]}
-/>
+<Canvas of={ClassPrefixStories.Default} />
 
 By default, the prefix used by components is `cds`. However, you can change this
 prefix in Sass and coordinate that change to React using the `ClassPrefix`

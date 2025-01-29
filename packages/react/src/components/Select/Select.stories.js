@@ -100,7 +100,9 @@ Inline.args = {
   inline: true,
 };
 
-export const Skeleton = () => <SelectSkeleton />;
+export const Skeleton = () => {
+  return <SelectSkeleton />;
+};
 
 export const _WithLayer = (args) => (
   <WithLayer>
@@ -127,56 +129,58 @@ _WithLayer.argTypes = {
   },
 };
 
-const aiLabel = (
-  <AILabel className="ai-label-container">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
+export const withAILabel = (args) => {
+  const aiLabel = (
+    <AILabel className="ai-label-container">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <AILabelActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </AILabelActions>
+      </AILabelContent>
+    </AILabel>
+  );
 
-export const withAILabel = (args) => (
-  <div>
-    <Select
-      id="select-1"
-      labelText="Select an option"
-      helperText="Optional helper text"
-      decorator={aiLabel}
-      {...args}>
-      <SelectItem value="" text="" />
-      <SelectItem
-        value="An example option that is really long to show what should be done to handle long text"
-        text="An example option that is really long to show what should be done to handle long text"
-      />
-      <SelectItem value="Option 2" text="Option 2" />
-      <SelectItem value="Option 3" text="Option 3" />
-      <SelectItem value="Option 4" text="Option 4" />
-    </Select>
-  </div>
-);
+  return (
+    <div>
+      <Select
+        id="select-1"
+        labelText="Select an option"
+        helperText="Optional helper text"
+        decorator={aiLabel}
+        {...args}>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </Select>
+    </div>
+  );
+};
 
 withAILabel.argTypes = {
   inline: {

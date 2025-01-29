@@ -25,15 +25,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 The `IdPrefix` component is used to change the prefix applied to the
 automatically generated `id` attributes placed on certain DOM elements.
 
-<Canvas
-  of={IdPrefixStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(IdPrefixStories.Default),
-    },
-  ]}
-/>
+<Canvas of={IdPrefixStories.Default} />
 
 This component is intended to be used in limited cases, primarily only if you
 have id conflicts when using v10 and v11 packages at the same time during
@@ -54,8 +46,6 @@ export default function MyApp() {
   );
 }
 ```
-
-
 
 ## Component API
 
