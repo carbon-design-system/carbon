@@ -200,44 +200,8 @@ class CDSOverflowMenu
         ?.setAttribute('toolbar-action', '');
     }
 
-    // if (changedProperties.has('breadcrumb')) {
-    //   const { breadcrumb } = this;
-    //   button?.setAttribute('breadcrumb', String(Boolean(breadcrumb)));
-
-    // }
-
     super.updated(changedProperties);
   }
-
-  //   firstUpdated() {
-  //   const tooltip = this?.shadowRoot?.querySelector(`${prefix}-tooltip`);
-  //   console.log(tooltip);
-
-  //   if (this.breadcrumb && tooltip && tooltip.shadowRoot) {
-  //     const span = tooltip?.shadowRoot?.querySelector('span');
-  //     console.log(span);
-  //     if (span) {
-  //       span.style.inlineSize = '1.125rem'; // Change the color on hover
-  //       span.style.blockSize = '1.125rem';
-  //       span.style.minBlockSize = '1.125rem';
-  //       span.style.outline = 'none';
-  //     }
-  //     // Add listeners to the tooltip element
-  //     tooltip.addEventListener('mouseover', () => {
-  //       const span = tooltip?.shadowRoot?.querySelector('span');
-  //       console.log(span);
-  //       if (span) {
-  //         span.style.outline = 'none'; // Change the color on hover
-  //       }
-  //     });
-  //     tooltip.addEventListener('mouseout', () => {
-  //       const span = tooltip.shadowRoot?.querySelector('span');
-  //       if (span) {
-  //         span.style.outline = 'none'; // Reset the color
-  //       }
-  //     });
-  //   }
-  // }
 
   render() {
     return html`${super.render()} `;
