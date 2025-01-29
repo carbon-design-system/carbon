@@ -40,6 +40,7 @@ const incompleteIcon = (props) => (
     width={16}
     height={16}
     fill="none"
+    aria-hidden="true"
     {...props}>
     <path
       fill="#fff"
