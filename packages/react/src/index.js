@@ -337,3 +337,4 @@ export {
 } from './components/ChatButton';
 
 export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';
+export { ShapeIndicator as unstable__ShapeIndicator } from './components/ShapeIndicator';
