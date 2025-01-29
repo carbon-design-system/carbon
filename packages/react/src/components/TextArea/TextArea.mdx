@@ -1,4 +1,6 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import * as TextAreaStories from './TextArea.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -12,7 +14,46 @@ import { ArgTypes, Meta } from '@storybook/blocks';
 
 ## Table of Contents
 
+- [Tag](#tag)
+  - [Overview](#overview)
+  - [Skeleton](#skeleton)
+  - [AI Label](#ai-label)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
 ## Overview
+
+<Canvas
+  of={TextAreaStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TextAreaStories.Default),
+    },
+  ]}
+/>
+
+## Skeleton
+<Canvas
+  of={TextAreaStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TextAreaStories.Skeleton),
+    },
+  ]}
+/>
+
+## AI Label
+<Canvas
+  of={TextAreaStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TextAreaStories.withAILabel),
+    },
+  ]}
+/>
 
 ## Component API
 

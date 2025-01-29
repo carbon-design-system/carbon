@@ -20,17 +20,19 @@ export default {
   },
 };
 
-export const Default = (args) => (
-  <div style={{ width: args.defaultWidth }}>
-    <PasswordInput
-      {...args}
-      id="text-input-1"
-      labelText="Text input label"
-      helperText="Optional help text"
-      autoComplete="true"
-    />
-  </div>
-);
+export const Default = (args) => {
+  return (
+    <div style={{ width: args.defaultWidth }}>
+      <PasswordInput
+        {...args}
+        id="text-input-1"
+        labelText="Text input label"
+        helperText="Optional help text"
+        autoComplete="true"
+      />
+    </div>
+  );
+};
 
 Default.args = {
   defaultWidth: 300,
