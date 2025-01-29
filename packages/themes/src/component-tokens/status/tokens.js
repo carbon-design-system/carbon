@@ -2,7 +2,9 @@ import {
   red50,
   red60,
   orange40,
+  orange60,
   yellow30,
+  yellow60,
   purple50,
   purple60,
   green40,
@@ -29,11 +31,21 @@ export const statusOrange = {
   g100: orange40,
 };
 
+export const statusOrangeOutline = {
+  whiteTheme: orange60,
+  g10: orange60,
+};
+
 export const statusYellow = {
   whiteTheme: yellow30,
   g10: yellow30,
   g90: yellow30,
   g100: yellow30,
+};
+
+export const statusYellowOutline = {
+  whiteTheme: yellow60,
+  g10: yellow60,
 };
 
 export const statusPurple = {

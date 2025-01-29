@@ -1282,7 +1282,15 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "status-orange-outline",
+          "type": "color",
+        },
+        Object {
           "name": "status-yellow",
+          "type": "color",
+        },
+        Object {
+          "name": "status-yellow-outline",
           "type": "color",
         },
         Object {
