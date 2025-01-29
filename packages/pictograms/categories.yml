@@ -36,6 +36,22 @@ categories:
       - ai-governance--model
       - ai-governance--model-tuned
       - ai-governance--prompt
+      - ai--ethics
+      - ai--explainability
+      - ai--privacy
+      - ai--robustness
+      - ai--transparency
+      - ai--trust
+      - decision-velocity
+      - intelligence
+      - machine--learning--01
+      - machine--learning--02
+      - machine--learning--03
+      - machine--learning--04
+      - machine--learning--05
+      - machine--learning--06
+      - machine--learning--model
+      - technical-owner
   - name: Blockchain
     members:
       - connected--ecosystem
@@ -59,6 +75,7 @@ categories:
       - fire--alarm
       - fire--extinguisher
       - id--badge
+      - intelligent-infrastructure
       - no--smoking
       - office
       - recycle--bin
@@ -87,6 +104,8 @@ categories:
       - bucharest--national-theatre
       - bucharest--romanian-athenaeum
       - budapest
+      - budapest--corvin7
+      - budapest--hungarian-auto-club
       - budapest--lab-skyline
       - budapest--citadella
       - cairo--giza-plateau
@@ -593,6 +612,7 @@ categories:
       - application
       - art--tools--01
       - birthday--cake
+      - code--explanation
       - content--design
       - cupcake
       - design-and-development--01
@@ -772,8 +792,10 @@ categories:
       - enterprise--design--thinking--01
       - enterprise--design--thinking--02
       - eye
+      - ibm--ibv
       - ibm--ix
       - ibm--z
+      - ibm--z-os-container-platform
       - ibm--z--partition
       - progress
       - world--community--grid
@@ -822,23 +844,6 @@ categories:
       - iot--munich
       - solve
       - transform--01
-  - name: Learning
-    members:
-      - ai--ethics
-      - ai--explainability
-      - ai--privacy
-      - ai--robustness
-      - ai--transparency
-      - ai--trust
-      - decision-velocity
-      - intelligence
-      - machine--learning--01
-      - machine--learning--02
-      - machine--learning--03
-      - machine--learning--04
-      - machine--learning--05
-      - machine--learning--06
-      - technical-owner
   - name: Life Science
     members:
       - cell
@@ -917,9 +922,11 @@ categories:
   - name: Manufacturing
     members:
       - delivery--truck
+      - emissions
       - factory
       - forklift
       - ibm--rpa
+      - pipeline
       - robot
       - robotics
       - tools
@@ -1173,6 +1180,7 @@ categories:
   - name: Transportation
     members:
       - airplane
+      - airport
       - automobile
       - bicycle
       - bus
@@ -1181,9 +1189,11 @@ categories:
       - engine
       - fuel
       - luggage
+      - road
       - spaceship
       - steering--wheel
       - train
+      - tunnel
   - name: Watson
     members:
       - alchemy--data--news
@@ -1245,6 +1255,7 @@ categories:
       - moon--full
       - night--clear
       - overcast
+      - raindrop
       - rainy
       - rainy--heavy
       - snow
@@ -1265,11 +1276,13 @@ categories:
       - library
       - liquids
       - literature
+      - lockers
       - loop--hearing
       - metal-can
       - plastics
       - silence
       - station--hydration
+      - toilet
       - trash--burnable
       - trash--non-burnable
       - waste--electronic
