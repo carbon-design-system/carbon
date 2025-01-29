@@ -12,7 +12,7 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 
-interface TableSelectAllProps {
+export interface TableSelectAllProps {
   /**
    * Specify the aria label for the underlying input control
    * node

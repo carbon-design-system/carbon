@@ -12,7 +12,7 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import Button from '../Button';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface HeaderGlobalActionProps {
+export interface HeaderGlobalActionProps {
   /**
    * Required props for the accessibility label of the button
    */
@@ -66,7 +66,7 @@ const HeaderGlobalAction: React.FC<HeaderGlobalActionProps> = React.forwardRef(
       tooltipAlignment,
       ...rest
     },
-    ref
+    ref: React.Ref<HTMLButtonElement>
   ) {
     const prefix = usePrefix();
     const className = cx({
