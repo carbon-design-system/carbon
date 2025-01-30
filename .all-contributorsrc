@@ -1763,6 +1763,15 @@
         "a11y",
         "review"
       ]
+    },
+    {
+      "login": "nchevsky",
+      "name": "Nick Chevsky",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3987849?v=4",
+      "profile": "https://github.com/nchevsky",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

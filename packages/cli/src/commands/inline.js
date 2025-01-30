@@ -124,6 +124,7 @@ async function inlineSassDependencies(
       await replace({
         files: file.path,
         from: REPLACE_REGEX,
+        glob: { windowsPathsNoEscape: true },
         to(_, match) {
           return `@import '${
             isWin ? relativeImportPath.replace('\\', '/') : relativeImportPath
