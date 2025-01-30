@@ -20,7 +20,7 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { SideNavContext } from './SideNav';
 
-interface SideNavMenuProps {
+export interface SideNavMenuProps {
   /**
    * An optional CSS class to apply to the component.
    */
