@@ -1,4 +1,6 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import * as TimePickerStories from './TimePicker.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -12,7 +14,22 @@ import { ArgTypes, Meta } from '@storybook/blocks';
 
 ## Table of Contents
 
+- [TimePicker](#timePicker)
+    - [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
 ## Overview
+
+<Canvas
+  of={TimePickerStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TimePickerStories.Default),
+    },
+  ]}
+/>
 
 ## Component API
 

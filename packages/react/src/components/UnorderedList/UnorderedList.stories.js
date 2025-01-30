@@ -9,14 +9,7 @@ import React from 'react';
 
 import ListItem from '../ListItem';
 import UnorderedList from '../UnorderedList';
-
-const props = {
-  regular: () => {
-    return {
-      isExpressive: false,
-    };
-  },
-};
+import mdx from './UnorderedList.mdx';
 
 export default {
   title: 'Components/UnorderedList',
@@ -24,15 +17,22 @@ export default {
   subcomponents: {
     ListItem,
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = (args) => (
-  <UnorderedList {...args}>
-    <ListItem>Unordered List level 1</ListItem>
-    <ListItem>Unordered List level 1</ListItem>
-    <ListItem>Unordered List level 1</ListItem>
-  </UnorderedList>
-);
+export const Default = (args) => {
+  return (
+    <UnorderedList {...args}>
+      <ListItem>Unordered List level 1</ListItem>
+      <ListItem>Unordered List level 1</ListItem>
+      <ListItem>Unordered List level 1</ListItem>
+    </UnorderedList>
+  );
+};
 
 Default.args = {
   isExpressive: false,
@@ -47,6 +47,13 @@ Default.argTypes = {
 };
 
 export const Nested = () => {
+  const props = {
+    regular: () => {
+      return {
+        isExpressive: false,
+      };
+    },
+  };
   const regularProps = props.regular();
 
   return (
