@@ -21,6 +21,7 @@ import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 import uniqueId from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
+import Link from '../Link';
 
 export type TreeNodeProps = {
   /**
@@ -169,7 +170,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
         } as TreeNodeProps);
       }
     });
-    const isActive = active === id;
+    const isActive = active === id || (href && window.location.pathname === new URL(href, window.location.origin).pathname);
     const isSelected = selected.includes(id);
     const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
       [`${prefix}--tree-node--active`]: isActive,
@@ -367,7 +368,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       if (href) {
         return (
           <li role="none">
-            <a
+            <Link
               {...treeNodeProps}
               ref={setRefs}
               href={!disabled ? href : undefined}>
@@ -378,7 +379,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
                 {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
                 {label}
               </div>
-            </a>
+            </Link>
           </li>
         );
       } else {
@@ -398,7 +399,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     if (href) {
       return (
         <li role="none" className={`${prefix}--tree-node-link-parent`}>
-          <a
+          <Link
             {...treeNodeProps}
             aria-expanded={!!expanded}
             ref={setRefs}
@@ -421,7 +422,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
                 {label}
               </span>
             </div>
-          </a>
+          </Link>
           <ul
             id={`${id}-subtree`}
             role="group"

@@ -88,9 +88,10 @@
     cursor: not-allowed;
   }
 
-  a.#{$prefix}--tree-node__label,
-  a.#{$prefix}--tree-node {
+  // Overrides link styling
+  li a.#{$prefix}--tree-node.#{$prefix}--link {
     text-decoration: none;
+    color: $text-secondary;
   }
 
   li.#{$prefix}--tree-node-link-parent {

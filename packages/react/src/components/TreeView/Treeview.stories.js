@@ -107,7 +107,7 @@ const nodes = [
                 id: '5-6',
                 value: 'Resources',
                 label: 'Resources',
-                href: '?path=/story/components-treeview--with-links',
+                href: 'http://localhost:3001/iframe.html?globals=&id=components-treeview--with-links&viewMode=story',
                 renderIcon: Document,
               },
             ],
