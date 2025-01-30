@@ -15,11 +15,6 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 
-const checkboxEvents = {
-  className: 'some-class',
-  labelText: 'Checkbox label',
-};
-
 export default {
   title: 'Components/Checkbox',
   component: Checkbox,

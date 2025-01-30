@@ -294,7 +294,6 @@ export const withAILabel = (args) => {
       </AILabelContent>
     </AILabel>
   );
-
   return (
     <Stack gap={7} className="form-example">
       <Form aria-label="sample form" className="ai-label-form">
