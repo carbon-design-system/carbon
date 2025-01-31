@@ -80,9 +80,7 @@ export const Inline = {
 
 export const PairedWithIcon = {
   args: defaultArgs,
-  parameters: {
-    controls: { exclude: /(.*?)/ },
-  },
+  argTypes: controls,
   render: ({ disabled, href, size, onClick }) => html`
     <cds-link
       ?disabled="${disabled}"
