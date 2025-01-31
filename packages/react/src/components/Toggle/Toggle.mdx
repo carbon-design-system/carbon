@@ -1,4 +1,6 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import * as ToggleStories from './Toggle.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -12,7 +14,61 @@ import { ArgTypes, Meta } from '@storybook/blocks';
 
 ## Table of Contents
 
+- [Toggle](#toggle)
+    - [Overview](#overview)
+    - [Small Toggle](#small-toggle)
+    - [Skeleton](#skeleton)
+    - [With Accessible Labels](#with-accessible-lables)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
 ## Overview
+
+<Canvas
+  of={ToggleStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ToggleStories.Default),
+    },
+  ]}
+/>
+
+## Small Toggle
+
+<Canvas
+  of={ToggleStories.SmallToggle}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ToggleStories.SmallToggle),
+    },
+  ]}
+/>
+
+## Skeleton
+
+<Canvas
+  of={ToggleStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ToggleStories.Skeleton),
+    },
+  ]}
+/>
+
+## With Accessible Labels
+
+<Canvas
+  of={ToggleStories.WithAccessibleLabels}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ToggleStories.WithAccessibleLabels),
+    },
+  ]}
+/>
 
 ## Component API
 
