@@ -9,7 +9,7 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import Download16 from '@carbon/icons/lib/download/16.js';
+import ArrowRight16 from '@carbon/icons/lib/arrow--right/16.js';
 import { LINK_SIZE } from './link';
 
 const defaultArgs = {
@@ -41,7 +41,19 @@ const controls = {
 };
 
 export const Default = {
-  render: () => html` <cds-link href="#"> Link </cds-link> `,
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({ disabled, href, inline, size, visited, onClick }) => html`
+    <cds-link
+      ?disabled="${disabled}"
+      href="${ifDefined(href)}"
+      size="${ifDefined(size)}"
+      ?inline="${inline}"
+      ?visited="${visited}"
+      @click="${onClick}">
+      Link
+    </cds-link>
+  `,
 };
 
 export const Inline = {
@@ -68,32 +80,14 @@ export const Inline = {
 
 export const PairedWithIcon = {
   args: defaultArgs,
-  parameters: {
-    controls: { exclude: /(.*?)/ },
-  },
+  argTypes: controls,
   render: ({ disabled, href, size, onClick }) => html`
     <cds-link
       ?disabled="${disabled}"
       href="${ifDefined(href)}"
       size="${ifDefined(size)}"
       @click="${onClick}">
-      Download ${Download16({ slot: 'icon' })}
-    </cds-link>
-  `,
-};
-
-export const Playground = {
-  argTypes: controls,
-  args: defaultArgs,
-  render: ({ disabled, href, inline, size, visited, onClick }) => html`
-    <cds-link
-      ?disabled="${disabled}"
-      href="${ifDefined(href)}"
-      size="${ifDefined(size)}"
-      ?inline="${inline}"
-      ?visited="${visited}"
-      @click="${onClick}">
-      Link
+      Carbon Docs ${ArrowRight16({ slot: 'icon' })}
     </cds-link>
   `,
 };
