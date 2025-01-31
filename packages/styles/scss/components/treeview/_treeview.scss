@@ -88,6 +88,22 @@
     cursor: not-allowed;
   }
 
+  // Overrides link styling
+  li a.#{$prefix}--tree-node.#{$prefix}--link {
+    color: $text-secondary;
+    text-decoration: none;
+  }
+
+  li.#{$prefix}--tree-node-link-parent {
+    display: flex;
+    flex-direction: column;
+    background-color: $layer-01;
+
+    > .#{$prefix}--tree-node__children {
+      padding-inline-start: $spacing-05;
+    }
+  }
+
   .#{$prefix}--tree-node__label {
     @include type-style('body-compact-01');
 

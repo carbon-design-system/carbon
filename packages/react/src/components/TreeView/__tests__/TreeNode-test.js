@@ -206,6 +206,20 @@ describe('TreeNode - handleClick', () => {
     });
     expect(onClick).toHaveBeenCalled(); // Ensure the rest.onClick handler was triggered
   });
+
+  it('should support specifying the href', () => {
+    render(
+      <TreeNode
+        id="node-1"
+        label="Test Node"
+        disabled={false}
+        href="/test"
+        selected={[]}
+        data-testid="linked-node"
+      />
+    );
+    expect(screen.getByTestId('linked-node')).toHaveAttribute('href', '/test');
+  });
 });
 
 describe('TreeNode - handleKeyDown', () => {
