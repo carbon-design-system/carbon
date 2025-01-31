@@ -121,6 +121,22 @@ export const WithIcons = (args) => (
 
 WithIcons.argTypes = { ...sharedArgTypes };
 
+export const WithNestedMenu = (args) => (
+  <MenuButton label="Actions" {...args}>
+    <MenuItem label="Save" shortcut="⌘S" />
+    <MenuItem label="Save as" shortcut="⌥⌘S" />
+    <MenuItem label="Export as">
+      <MenuItem label="PDF" />
+      <MenuItem label="JPG" />
+      <MenuItem label="PNG" />
+    </MenuItem>
+    <MenuItemDivider />
+    <MenuItem label="Delete" kind="danger" />
+  </MenuButton>
+);
+
+WithNestedMenu.argTypes = { ...sharedArgTypes };
+
 export const WithMenuAlignment = () => (
   <>
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
