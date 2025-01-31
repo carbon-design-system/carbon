@@ -1,0 +1,35 @@
+{
+  "name": "@carbon/react",
+  "targets": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [
+        "{projectRoot}/es",
+        "{projectRoot}/lib",
+        "{projectRoot}/icons/**/*",
+        "{projectRoot}/scss/**/*",
+        "{projectRoot}/index.scss"
+      ],
+      "inputs": [
+        "{projectRoot}/**/*.ts",
+        "{projectRoot}/**/*.tsx",
+        "{projectRoot}/**/*.scss",
+        "{projectRoot}/**/*.json",
+        "{projectRoot}/package.json",
+
+        "{workspaceRoot}/packages/typescript-config-carbon/**/*",
+        "{workspaceRoot}/packages/feature-flags/**/*",
+        "{workspaceRoot}/packages/motion/**/*",
+        "{workspaceRoot}/packages/layout/**/*",
+        "{workspaceRoot}/packages/colors/**/*",
+        "{workspaceRoot}/packages/icon-helpers/**/*",
+        "{workspaceRoot}/packages/grid/**/*",
+        "{workspaceRoot}/packages/type/**/*",
+        "{workspaceRoot}/packages/themes/**/*",
+        "{workspaceRoot}/packages/styles/**/*",
+        "{workspaceRoot}/packages/icons/**/*",
+        "{workspaceRoot}/packages/icons-react/**/*"
+      ]
+    }
+  }
+}
