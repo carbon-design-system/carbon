@@ -24,11 +24,11 @@ $css--plex: true !default;
   animation: none;
 }
 
-:host(#{$prefix}-loading[type='small']) {
+:host(#{$prefix}-loading[small]) {
   @extend .#{$prefix}--loading--small;
 }
 
-:host(#{$prefix}-loading[inactive]) {
+:host(#{$prefix}-loading:not([active])) {
   @extend .#{$prefix}--loading--stop;
 }
 
