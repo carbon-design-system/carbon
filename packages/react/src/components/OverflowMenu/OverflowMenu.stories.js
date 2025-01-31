@@ -24,12 +24,14 @@ export default {
   },
 };
 
-export const RenderCustomIcon = () => (
-  <OverflowMenu flipped={document?.dir === 'rtl'} renderIcon={Filter}>
-    <OverflowMenuItem itemText="Filter A" />
-    <OverflowMenuItem itemText="Filter B" />
-  </OverflowMenu>
-);
+export const RenderCustomIcon = () => {
+  return (
+    <OverflowMenu flipped={document?.dir === 'rtl'} renderIcon={Filter}>
+      <OverflowMenuItem itemText="Filter A" />
+      <OverflowMenuItem itemText="Filter B" />
+    </OverflowMenu>
+  );
+};
 
 export const Default = (args) => (
   <OverflowMenu aria-label="overflow-menu" {...args}>

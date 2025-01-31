@@ -1,5 +1,6 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as OrderedListStories from './OrderedList.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -16,7 +17,15 @@ import * as OrderedListStories from './OrderedList.stories';
 ## Overview
 
 <div style={{ paddingLeft: '15px' }}>
-  <Canvas of={OrderedListStories.Default} />
+  <Canvas
+    of={OrderedListStories.Default}
+    additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(OrderedListStories.Default),
+      },
+    ]}
+  />
 </div>
 
 ## Component API

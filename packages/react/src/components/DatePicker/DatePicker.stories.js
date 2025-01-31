@@ -293,7 +293,9 @@ export const RangeWithCalendarWithLayer = (args) => (
 
 RangeWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
 
-export const Skeleton = () => <DatePickerSkeleton range />;
+export const Skeleton = () => {
+  return <DatePickerSkeleton range />;
+};
 
 const aiLabel = (
   <AILabel className="ai-label-container">

@@ -35,7 +35,7 @@ const defaultTranslations = {
 /**
  * Message ids that will be passed to translateWithId().
  */
-type TranslationKey = keyof typeof defaultTranslations;
+export type TranslationKey = keyof typeof defaultTranslations;
 
 const propMappingFunction = (deprecatedValue) => {
   const mapping = {

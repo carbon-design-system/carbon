@@ -157,4 +157,25 @@ describe('AILabelActions', () => {
 
     expect(screen.getByText('View details')).toBeInTheDocument();
   });
+  describe('Labels and kind prop', () => {
+    it('should use empty label for inline kind', () => {
+      render(<AILabel kind="inline" aiText="AI" textLabel="Text goes here" />);
+      expect(screen.getByRole('button')).toHaveAttribute('aria-label', '');
+    });
+
+    it('should set aria-label when kind is default', () => {
+      render(<AILabel aiText="AI" />);
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'AI Show information'
+      );
+    });
+
+    it('should let visible text serve as accessible name in inline mode', () => {
+      render(<AILabel kind="inline" aiText="AI" textLabel="Text goes here" />);
+      expect(
+        screen.getByRole('button', { name: 'AI Text goes here' })
+      ).toBeInTheDocument();
+    });
+  });
 });

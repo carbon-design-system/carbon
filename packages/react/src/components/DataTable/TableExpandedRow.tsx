@@ -12,7 +12,7 @@ import TableCell from './TableCell';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
 
-interface TableExpandedRowProps extends ReactAttr<HTMLTableRowElement> {
+export interface TableExpandedRowProps extends ReactAttr<HTMLTableRowElement> {
   /**
    * The width of the expanded row's internal cell
    */
