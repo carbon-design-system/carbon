@@ -170,7 +170,11 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
         } as TreeNodeProps);
       }
     });
-    const isActive = active === id || (href && window.location.pathname === new URL(href, window.location.origin).pathname);
+    const isActive =
+      active === id ||
+      (href &&
+        window.location.pathname ===
+          new URL(href, window.location.origin).pathname);
     const isSelected = selected.includes(id);
     const treeNodeClasses = classNames(className, `${prefix}--tree-node`, {
       [`${prefix}--tree-node--active`]: isActive,
