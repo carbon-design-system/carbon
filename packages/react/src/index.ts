@@ -189,6 +189,7 @@ export * from './components/Tooltip/DefinitionTooltip';
 export * from './components/Theme';
 export * from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';
+export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';
 
 /* prop's interface exports */
 
@@ -606,5 +607,3 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';
-
-export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';
