@@ -608,3 +608,4 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';
 
 export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';
+export { ShapeIndicator as unstable__ShapeIndicator } from './components/ShapeIndicator';

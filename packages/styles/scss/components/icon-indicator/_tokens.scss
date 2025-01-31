@@ -60,6 +60,29 @@ $status-orange: (
   ),
 ) !default;
 
+// status-orange-outline
+$status-orange-outline: (
+  fallback: map.get(status.$status-orange-outline, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(status.$status-orange-outline, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(status.$status-orange-outline, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(status.$status-orange, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(status.$status-orange, g-100),
+    ),
+  ),
+) !default;
+
 // status-yellow
 $status-yellow: (
   fallback: map.get(status.$status-yellow, white-theme),
@@ -71,6 +94,29 @@ $status-yellow: (
     (
       theme: themes.$g10,
       value: map.get(status.$status-yellow, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(status.$status-yellow, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(status.$status-yellow, g-100),
+    ),
+  ),
+) !default;
+
+// status-yellow-outline
+$status-yellow-outline: (
+  fallback: map.get(status.$status-yellow-outline, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(status.$status-yellow-outline, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(status.$status-yellow-outline, g-10),
     ),
     (
       theme: themes.$g90,
@@ -179,7 +225,9 @@ $status-gray: (
 $status-tokens: (
   status-red: $status-red,
   status-orange: $status-orange,
+  status-orange-outline: $status-orange-outline,
   status-yellow: $status-yellow,
+  status-yellow-outline: $status-yellow-outline,
   status-green: $status-green,
   status-blue: $status-blue,
   status-purple: $status-purple,
@@ -189,7 +237,15 @@ $status-tokens: (
 // Generate CSS custom properties for each token
 $status-red: component-tokens.get-var($status-red, 'status-red');
 $status-orange: component-tokens.get-var($status-orange, 'status-orange');
+$status-orange-outline: component-tokens.get-var(
+  $status-orange-outline,
+  'status-orange-outline'
+);
 $status-yellow: component-tokens.get-var($status-yellow, 'status-yellow');
+$status-yellow-outline: component-tokens.get-var(
+  $status-yellow-outline,
+  'status-yellow-outline'
+);
 $status-green: component-tokens.get-var($status-green, 'status-green');
 $status-blue: component-tokens.get-var($status-blue, 'status-blue');
 $status-purple: component-tokens.get-var($status-purple, 'status-purple');
