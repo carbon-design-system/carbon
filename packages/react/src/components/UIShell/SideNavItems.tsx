@@ -11,7 +11,7 @@ import React from 'react';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface SideNavItemsProps {
+export interface SideNavItemsProps {
   /**
    * Provide a single icon as the child to `SideNavIcon` to render in the
    * container
