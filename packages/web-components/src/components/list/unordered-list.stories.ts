@@ -8,7 +8,7 @@
  */
 
 import { html } from 'lit';
-import storyDocs from './list.mdx';
+import storyDocs from './unordered-list.mdx';
 import './index';
 
 const defaultArgs = {

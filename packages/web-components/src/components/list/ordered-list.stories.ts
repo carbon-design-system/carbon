@@ -1,14 +1,14 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { html } from 'lit';
-import storyDocs from './list.mdx';
+import storyDocs from './ordered-list.mdx';
 import './index';
 
 const defaultArgs = {
@@ -30,7 +30,7 @@ const controls = {
 
 export const Default = {
   render: () =>
-    html`<cds-ordered-list native>
+    html`<cds-ordered-list>
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>Ordered List level 1</cds-list-item>
@@ -98,14 +98,14 @@ export const Playground = {
   args: defaultArgs,
   argTypes: controls,
   render: ({ isExpressive, native }) => html`
-    <cds-ordered-list ?isExpressive="${isExpressive}" ?native="${native}">
+    <cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
       <cds-list-item>
         Ordered List level 1
-        <cds-ordered-list ?isExpressive="${isExpressive}" ?native="${native}">
+        <cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
           <cds-list-item>Ordered List level 2</cds-list-item>
           <cds-list-item>
             Ordered List level 2
-            <cds-ordered-list ?isExpressive="${isExpressive}" ?native="${native}">
+            <cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
               <cds-list-item>Ordered List level 2</cds-list-item>
               <cds-list-item>Ordered List level 2</cds-list-item>
             </cds-ordered-list>

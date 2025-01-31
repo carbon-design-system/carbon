@@ -16,6 +16,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 /**
  * Ordered list.
+ *
+ * @element cds-ordered-list
  */
 @customElement(`${prefix}-ordered-list`)
 class CDSOrderedList extends CDSUnorderedList {
