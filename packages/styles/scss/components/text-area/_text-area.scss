@@ -235,6 +235,7 @@
   }
 
   .#{$prefix}--text-area__label-wrapper {
+    position: relative;
     display: flex;
     justify-content: space-between;
     inline-size: 100%;
