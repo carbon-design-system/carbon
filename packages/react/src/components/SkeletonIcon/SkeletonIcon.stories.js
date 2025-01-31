@@ -7,29 +7,36 @@
 
 import React from 'react';
 import SkeletonIcon from '.';
-
-const propsSkeleton = {
-  style: {
-    margin: '50px',
-  },
-};
-
-const propsSkeleton2 = {
-  style: {
-    margin: '50px',
-    width: '24px',
-    height: '24px',
-  },
-};
+import mdx from './SkeletonIcon.mdx';
 
 export default {
   title: 'Components/Skeleton/SkeletonIcon',
   component: SkeletonIcon,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = () => (
-  <>
-    <SkeletonIcon {...propsSkeleton} />
-    <SkeletonIcon {...propsSkeleton2} />
-  </>
-);
+export const Default = () => {
+  const propsSkeleton = {
+    style: {
+      margin: '50px',
+    },
+  };
+
+  const propsSkeleton2 = {
+    style: {
+      margin: '50px',
+      width: '24px',
+      height: '24px',
+    },
+  };
+  return (
+    <>
+      <SkeletonIcon {...propsSkeleton} />
+      <SkeletonIcon {...propsSkeleton2} />
+    </>
+  );
+};

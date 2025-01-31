@@ -67,6 +67,7 @@ export const Default = (args) => {
     </ComboButton>
   );
 };
+
 Default.args = { ...sharedArgs };
 Default.argTypes = { ...sharedArgTypes };
 
@@ -88,78 +89,84 @@ export const ExperimentalAutoAlign = (args) => (
 
 ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
 
-export const WithDanger = (args) => (
-  <ComboButton label="Primary action" {...args}>
-    <MenuItem label="Second action with a long label description" />
-    <MenuItem label="Third action" />
-    <MenuItem label="Fourth action" />
-    <MenuItemDivider />
-    <MenuItem label="Danger action" kind="danger" />
-  </ComboButton>
-);
+export const WithDanger = (args) => {
+  return (
+    <ComboButton label="Primary action" {...args}>
+      <MenuItem label="Second action with a long label description" />
+      <MenuItem label="Third action" />
+      <MenuItem label="Fourth action" />
+      <MenuItemDivider />
+      <MenuItem label="Danger action" kind="danger" />
+    </ComboButton>
+  );
+};
 
 WithDanger.argTypes = { ...sharedArgTypes };
 
-export const WithIcons = (args) => (
-  <ComboButton label="Save record" {...args}>
-    <MenuItem label="Save as a copy" renderIcon={Copy} />
-    <MenuItem label="Export" renderIcon={Export} />
-  </ComboButton>
-);
+export const WithIcons = (args) => {
+  return (
+    <ComboButton label="Save record" {...args}>
+      <MenuItem label="Save as a copy" renderIcon={Copy} />
+      <MenuItem label="Export" renderIcon={Export} />
+    </ComboButton>
+  );
+};
 
 WithIcons.argTypes = { ...sharedArgTypes };
 
-export const WithMenuAlignment = () => (
-  <>
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <ComboButton label="Bottom" menuAlignment="bottom">
-        <MenuItem label="Second action with a long label description" />
-        <MenuItem label="Third action" />
-        <MenuItem label="Fourth action" disabled />
-      </ComboButton>
+export const WithMenuAlignment = () => {
+  return (
+    <>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <ComboButton label="Bottom" menuAlignment="bottom">
+          <MenuItem label="Second action with a long label description" />
+          <MenuItem label="Third action" />
+          <MenuItem label="Fourth action" disabled />
+        </ComboButton>
 
-      <ComboButton label="Bottom start" menuAlignment="bottom-start">
-        <MenuItem label="Second action with a long label description" />
-        <MenuItem label="Third action" />
-        <MenuItem label="Fourth action" disabled />
-      </ComboButton>
+        <ComboButton label="Bottom start" menuAlignment="bottom-start">
+          <MenuItem label="Second action with a long label description" />
+          <MenuItem label="Third action" />
+          <MenuItem label="Fourth action" disabled />
+        </ComboButton>
 
-      <ComboButton label="Bottom end" menuAlignment="bottom-end">
-        <MenuItem label="Second action with a long label description" />
-        <MenuItem label="Third action" />
-        <MenuItem label="Fourth action" disabled />
-      </ComboButton>
-    </div>
+        <ComboButton label="Bottom end" menuAlignment="bottom-end">
+          <MenuItem label="Second action with a long label description" />
+          <MenuItem label="Third action" />
+          <MenuItem label="Fourth action" disabled />
+        </ComboButton>
+      </div>
 
-    <div
-      style={{
-        display: 'flex',
-        marginTop: '15rem',
-        justifyContent: 'space-between',
-      }}>
-      <ComboButton label="Top" menuAlignment="top" tooltipAlignment="bottom">
-        <MenuItem label="Second action with a long label description" />
-        <MenuItem label="Third action" />
-        <MenuItem label="Fourth action" disabled />
-      </ComboButton>
+      <div
+        style={{
+          display: 'flex',
+          marginTop: '15rem',
+          justifyContent: 'space-between',
+        }}>
+        <ComboButton label="Top" menuAlignment="top" tooltipAlignment="bottom">
+          <MenuItem label="Second action with a long label description" />
+          <MenuItem label="Third action" />
+          <MenuItem label="Fourth action" disabled />
+        </ComboButton>
 
-      <ComboButton
-        label="Top start"
-        menuAlignment="top-start"
-        tooltipAlignment="bottom">
-        <MenuItem label="Second action with a long label description" />
-        <MenuItem label="Third action" />
-        <MenuItem label="Fourth action" disabled />
-      </ComboButton>
+        <ComboButton
+          label="Top start"
+          menuAlignment="top-start"
+          tooltipAlignment="bottom">
+          <MenuItem label="Second action with a long label description" />
+          <MenuItem label="Third action" />
+          <MenuItem label="Fourth action" disabled />
+        </ComboButton>
 
-      <ComboButton
-        label="Top end"
-        menuAlignment="top-end"
-        tooltipAlignment="bottom">
-        <MenuItem label="Second action with a long label description" />
-        <MenuItem label="Third action" />
-        <MenuItem label="Fourth action" disabled />
-      </ComboButton>
-    </div>
-  </>
-);
+        <ComboButton
+          label="Top end"
+          menuAlignment="top-end"
+          tooltipAlignment="bottom">
+          <MenuItem label="Second action with a long label description" />
+          <MenuItem label="Third action" />
+          <MenuItem label="Fourth action" disabled />
+        </ComboButton>
+      </div>
+    </>
+  );
+};

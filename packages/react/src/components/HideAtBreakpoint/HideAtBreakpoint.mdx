@@ -1,0 +1,32 @@
+import { Canvas, ArgTypes, Story, Meta } from '@storybook/blocks';
+import * as HideAtBreakpoint from './HideAtBreakpoint.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# Hide At Breakpoint
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/HideAtBreakpoint)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas
+  of={HideAtBreakpoint.HideAtBreakpoint}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(HideAtBreakpoint.HideAtBreakpoint),
+    },
+  ]}
+/>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/HideAtBreakpoint/HideAtBreakpoint.mdx).

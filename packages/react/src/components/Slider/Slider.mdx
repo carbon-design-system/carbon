@@ -1,5 +1,6 @@
 import { ArgTypes, Story, Canvas, Meta } from '@storybook/blocks';
 import * as SliderStories from './Slider.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -15,19 +16,78 @@ import * as SliderStories from './Slider.stories';
 
 - [Slider](#slider)
   - [Overview](#overview)
-  - [Component API](#component-api)
-  - [Feedback](#feedback)
+  - [Controlled Slider](#controlled-slider)
+  - [Skeleton](#skeleton)
+  - [Slider With Customer](#slider-with-customer)
+  - [Slider With Hidden Inputs](#slider-with-customer)
+  - [Two Handle Skeleton](#two-handle-skeleton)
+  - [Two Handle Slider](#two-handle-slider)
+  - [Two Handle Slider With Hidden Inputs](#two-handle-slider-with-hidden-inputs)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
 ## Overview
 
 Sliders provide a visual indication of adjustable content, where the user can
 increase or decrease the value by moving the handle along a horizontal track.
 
-<Canvas of={SliderStories.Default} />
+<Canvas
+  of={SliderStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.Default),
+    },
+  ]}
+/>
 
-## Component API
+## Controlled Slider
 
-<ArgTypes />
+<Canvas
+  of={SliderStories.ControlledSlider}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.ControlledSlider),
+    },
+  ]}
+/>
+
+## Skeleton
+
+<Canvas
+  of={SliderStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.Skeleton),
+    },
+  ]}
+/>
+
+## Slider With Customer
+
+<Canvas
+  of={SliderStories.SliderWithCustomValueLabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.SliderWithCustomValueLabel),
+    },
+  ]}
+/>
+
+## Slider With Hidden Inputs
+
+<Canvas
+  of={SliderStories.SliderWithHiddenInputs}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.SliderWithHiddenInputs),
+    },
+  ]}
+/>
 
 ### `step` Prop
 
@@ -44,7 +104,45 @@ bound of the range in addition to the `value` prop, which specifies the lower
 bound. When in two handle mode, both `value` and `valueUpper` are provided as
 keys to `onChange` function prop that is passed to the component.
 
-<Canvas of={SliderStories.Default} />
+## Two Handle Skeleton
+
+<Canvas
+  of={SliderStories.TwoHandleSkeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.TwoHandleSkeleton),
+    },
+  ]}
+/>
+
+## Two Handle Slider
+
+<Canvas
+  of={SliderStories.TwoHandleSlider}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.TwoHandleSlider),
+    },
+  ]}
+/>
+
+## Two Handle Slider With Hidden Inputs
+
+<Canvas
+  of={SliderStories.TwoHandleSliderWithHiddenInputs}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SliderStories.TwoHandleSliderWithHiddenInputs),
+    },
+  ]}
+/>
+
+## Component API
+
+<ArgTypes />
 
 ## Feedback
 

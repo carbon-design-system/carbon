@@ -1,0 +1,37 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/blocks';
+import * as ProgressBarStories from './ProgressBar.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# ProgressBar
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/ProgressBar)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+  <Canvas
+    of={ProgressBarStories.Default}
+    additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(ProgressBarStories.Default),
+      },
+    ]}
+  />
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/ProgressBar.mdx).

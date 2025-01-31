@@ -26,13 +26,15 @@ export default {
   ],
 };
 
-export const FloatingStyles = (args) => (
-  <ComboButton menuAlignment={args.menuAlignment} label="Primary action">
-    <MenuItem label="Second action with a long label description" />
-    <MenuItem label="Third action" />
-    <MenuItem label="Fourth action" disabled />
-  </ComboButton>
-);
+export const FloatingStyles = (args) => {
+  return (
+    <ComboButton menuAlignment={args.menuAlignment} label="Primary action">
+      <MenuItem label="Second action with a long label description" />
+      <MenuItem label="Third action" />
+      <MenuItem label="Fourth action" disabled />
+    </ComboButton>
+  );
+};
 
 FloatingStyles.args = {
   menuAlignment: 'bottom',

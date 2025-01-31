@@ -1,4 +1,6 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import * as SearchStories from './Search.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -12,7 +14,48 @@ import { ArgTypes, Meta } from '@storybook/blocks';
 
 ## Table of Contents
 
+- [Search](#search)
+  - [Overview](#overview)
+  - [Disabled](#disabled)
+  - [Expandable](#expandable)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
 ## Overview
+
+<Canvas
+  of={SearchStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SearchStories.Default),
+    },
+  ]}
+/>
+
+## Disabled
+
+<Canvas
+  of={SearchStories.Disabled}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SearchStories.Disabled),
+    },
+  ]}
+/>
+
+## Expandable
+
+<Canvas
+  of={SearchStories.Expandable}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SearchStories.Expandable),
+    },
+  ]}
+/>
 
 ## Component API
 

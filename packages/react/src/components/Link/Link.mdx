@@ -14,7 +14,10 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [Link](#link)
+  - [Overview](#overview)
+  - [Inline](#inline)
+  - [Accessible Link with Icon](#accessible-link-with-icon)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -32,6 +35,18 @@ links, which should be used sparingly.
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(LinkStories.Default),
+    },
+  ]}
+/>
+
+## Inline
+
+<Canvas
+  of={LinkStories.Inline}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(LinkStories.Inline),
     },
   ]}
 />

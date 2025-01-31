@@ -19,6 +19,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 - [Overview](#overview)
+- [Icon Only](#icon-only)
+- [Icon Only With Layer](#icon-only-with-layer)
+- [With Layer](#with-layer)
 - [Component API](#component-api)
   - [ContentSwitcher `className`](#contentswitcher-classname)
   - [ContentSwitcher `light`](#contentswitcher-light)
@@ -49,6 +52,26 @@ Create Switch components for each section in the content switcher.
     },
   ]}
 />
+
+## Icon Only
+
+<Canvas
+  of={ContentSwitcherStories.IconOnly}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ContentSwitcherStories.IconOnly),
+    },
+  ]}
+/>
+
+## Icon Only With Layer
+
+<Canvas of={ContentSwitcherStories.IconOnlyWithLayer} />
+
+## With Layer
+
+<Canvas of={ContentSwitcherStories._WithLayer} />
 
 ## Component API
 

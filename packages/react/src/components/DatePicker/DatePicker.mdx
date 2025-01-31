@@ -22,6 +22,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   - [Simple DatePicker](#simple-datepicker)
   - [Range Datepicker](#range-datepicker)
   - [Skeleton state](#skeleton-state)
+  - [AI label](#ai-label)
 - [Component API](#component-api)
   - [DatePicker `appendTo`](#datepicker-appendto)
   - [DatePicker `className`](#datepicker-classname)
@@ -47,7 +48,15 @@ picker is best to use. Each picker’s format can be customized depending on
 location or need. The `DatePicker` component expects a `DatePickerInput` as a
 child.
 
-<Canvas of={DatePickerStories.Default} />
+<Canvas
+  of={DatePickerStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DatePickerStories.Default),
+    },
+  ]}
+/>
 
 ### Simple DatePicker
 
@@ -104,6 +113,17 @@ You can use the `DatePickerSkeleton` component to render a skeleton variant of a
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(DatePickerStories.Skeleton),
+    },
+  ]}
+/>
+
+### AI label
+<Canvas
+  of={DatePickerStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DatePickerStories.withAILabel),
     },
   ]}
 />

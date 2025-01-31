@@ -9,12 +9,12 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [Form](#form)
-  - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
+  - [AI Label](#with-ai-label)
   - [Accessibility Considerations](#accessibility-considerations)
     - [Accessible Name](#accessible-name)
-  - [Component API](#component-api)
-  - [Feedback](#feedback)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
@@ -40,6 +40,18 @@ suit their needs.
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(FormStories.Default),
+    },
+  ]}
+/>
+
+## With AI label
+
+<Canvas
+  of={FormStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FormStories.withAILabel),
     },
   ]}
 />

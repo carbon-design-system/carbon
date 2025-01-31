@@ -25,7 +25,6 @@ export const Default = () => {
     const prefix = usePrefix();
     return <p>The current prefix is: {prefix}</p>;
   }
-
   return (
     <>
       <ExampleComponent />

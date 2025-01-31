@@ -1,4 +1,6 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import * as StructuredListStories from './StructuredList.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -12,7 +14,35 @@ import { ArgTypes, Meta } from '@storybook/blocks';
 
 ## Table of Contents
 
+- [StructuredList](#structuredList)
+  - [Overview](#overview)
+  - [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
 ## Overview
+
+<Canvas
+  of={StructuredListStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(StructuredListStories.Default),
+    },
+  ]}
+/>
+
+## Skeleton
+
+<Canvas
+  of={StructuredListStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(StructuredListStories.Skeleton),
+    },
+  ]}
+/>
 
 ## Component API
 

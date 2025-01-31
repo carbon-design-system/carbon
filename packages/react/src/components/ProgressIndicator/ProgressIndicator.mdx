@@ -12,17 +12,16 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/progress-indicator/accessibility)
 
-## Table of Contents
-
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 ## Table of Contents
 
 - [ProgressIndicator](#progressindicator)
-  - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
-  - [Component API](#component-api)
-  - [Feedback](#feedback)
+  - [Interactive](#interactive)
+  - [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
@@ -34,6 +33,28 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(ProgressIndicatorStories.Default),
+    },
+  ]}
+/>
+
+## Interactive
+<Canvas
+  of={ProgressIndicatorStories.Interactive}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ProgressIndicatorStories.Interactive),
+    },
+  ]}
+/>
+
+## Skeleton
+<Canvas
+  of={ProgressIndicatorStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ProgressIndicatorStories.Skeleton),
     },
   ]}
 />

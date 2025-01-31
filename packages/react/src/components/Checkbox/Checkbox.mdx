@@ -15,8 +15,12 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Skeleton state](#skeleton-state)
+- [Checkbox](#Checkbox)
+  - [Overview](#overview)
+  - [Horizontal](#horizontal)
+  - [Single](#single)
+  - [Skeleton state](#skeleton-state)
+  - [AI Label](#With-ai-label)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -53,6 +57,30 @@ function ExampleComponent() {
 }
 ```
 
+## Horizontal
+
+<Canvas
+  of={CheckboxStories.Horizontal}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.Horizontal),
+    },
+  ]}
+/>
+
+## Single
+
+<Canvas
+  of={CheckboxStories.Single}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.Single),
+    },
+  ]}
+/>
+
 ## Skeleton state
 
 You can use the `CheckboxSkeleton` component to render a skeleton variant of a
@@ -69,10 +97,21 @@ fetched from an external resource like an API.
   ]}
 />
 
+## With AI label
+
+<Canvas
+  of={CheckboxStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.withAILabel),
+    },
+  ]}
+/>
+
 ## Component API
 
 <ArgTypes />
-
 ### Checkbox defaultChecked
 
 You can use the `defaultChecked` prop to specify weather a checkbox is checked
