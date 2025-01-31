@@ -21,7 +21,7 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: $spacing-08;
+    inset-inline-end: $spacing-09;
   }
 
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
@@ -54,7 +54,7 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--select__invalid-icon--warning {
-    inset-inline-end: $spacing-07;
+    inset-inline-end: $spacing-09;
   }
 }
 
@@ -87,6 +87,6 @@ $css--plex: true !default;
 :host(#{$prefix}-select[invalid]) {
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
-    inset-inline-end: $spacing-10;
+    inset-inline-end: $spacing-09;
   }
 }
