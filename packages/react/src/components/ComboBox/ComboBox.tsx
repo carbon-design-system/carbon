@@ -843,6 +843,9 @@ const ComboBox = forwardRef(
 
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
       setIsFocused(evt.type === 'focus');
+      if (!inputRef.current?.value && evt.type === 'blur') {
+        selectItem(null);
+      }
     };
 
     const readOnlyEventHandlers = readOnly
@@ -1006,6 +1009,15 @@ const ComboBox = forwardRef(
                     event.preventDownshiftDefault = true;
                     if (isOpen) {
                       toggleMenu();
+                    }
+                  }
+                  if (!inputValue && highlightedIndex == -1) {
+                    if (event.key == 'Enter') {
+                      if (!event.currentTarget.value) {
+                        if (!isOpen) toggleMenu();
+                        selectItem(null);
+                        event.preventDownshiftDefault = true;
+                      }
                     }
                   }
                   if (typeahead && event.key === 'Tab') {
