@@ -80,7 +80,6 @@ $popover-caret-height: custom-property.get-var(
   // Container
   .#{$prefix}--popover-container {
     display: inline-block;
-    block-size: fit-content;
   }
 
   // Do not set position: relative on autoAlign popovers.
