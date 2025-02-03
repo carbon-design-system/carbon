@@ -52,7 +52,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
    * Specify whether a auto align functionality should be applied
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoAlign = false;
 
   /**
    * The number in milliseconds to determine how long the tooltip should remain.
@@ -67,7 +67,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
       feedback,
       feedbackTimeout,
       align,
-      autoalign,
+      autoAlign,
     } = this;
 
     let classes = `${prefix}--copy-btn`;
@@ -79,7 +79,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
     return html`
       <cds-copy
         ?disabled=${disabled}
-        ?autoalign=${autoalign}
+        ?autoalign=${autoAlign}
         feedback=${feedback}
         feedback-timeout=${feedbackTimeout}
         button-class-name=${classes}

@@ -41,7 +41,7 @@ const controls = {
     description: 'Specify how the toggletip should align with the button',
     options: tooltipAlignments,
   },
-  autoalign: {
+  autoAlign: {
     control: 'boolean',
     description: 'Specify how the toggletip should align with the button',
   },
@@ -67,11 +67,11 @@ const meta: Meta = {
     onClick,
     iconDescription,
     align,
-    autoalign,
+    autoAlign,
   }) => html`
     <cds-copy-button
       align="${align}"
-      ?autoalign="${autoalign}"
+      ?autoalign="${autoAlign}"
       feedback="${ifDefined(feedbackText)}"
       feedback-timeout="${ifDefined(feedbackTimeout)}"
       @click="${onClick}">
@@ -82,12 +82,6 @@ const meta: Meta = {
 };
 
 export const Default = {
-  parameters: {
-    controls: { exclude: /(.*?)/ },
-  },
-};
-
-export const Playground = {
   argTypes: controls,
 };
 
