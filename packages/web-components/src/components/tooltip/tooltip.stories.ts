@@ -89,6 +89,22 @@ export const Default = {
   `,
 };
 
+export const Test = {
+  render: () => html`
+    <cds-tooltip align="bottom">
+      <button
+        class="sb-tooltip-trigger"
+        role="button"
+        aria-labelledby="content">
+        ${Information16()}
+      </button>
+      <cds-tooltip-content id="content">
+        gfsghfsfsgggggghgsghsghgtuurutcxcrtstshgstsyststshsststststtstsffsfsgssjdstysyhgwtjyrkjgrutrwqtwyfyhygfhyiijfioyfdsrtkwjiutwjhqgwiyusrqjfterhtwgyqurtwu
+      </cds-tooltip-content>
+    </cds-tooltip>
+  `,
+};
+
 export const Alignment = {
   render: () => html`
     <cds-tooltip align="bottom-left">

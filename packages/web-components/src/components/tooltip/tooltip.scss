@@ -39,7 +39,9 @@
   }
 }
 
-:host(#{prefix}-tooltip-content) {
+:host(#{$prefix}-tooltip-content) {
+  word-break: break-word;
+
   ::slotted(.#{$prefix}-tooltip-content) {
     @extend .#{$prefix}--tooltip-content;
   }
