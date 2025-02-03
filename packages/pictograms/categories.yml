@@ -43,6 +43,7 @@ categories:
       - ai--transparency
       - ai--trust
       - decision-velocity
+      - ibm--granite
       - intelligence
       - machine--learning--01
       - machine--learning--02
@@ -121,9 +122,12 @@ categories:
       - dublin--brewery
       - dublin--castle
       - ecuador--quito
+      - ehningen--tech-campus-01
+      - ehningen--tech-campus-02
       - hamburg--philharmone
       - hong-kong--cityscape
       - hong-kong
+      - ibm--one-madison-avenue
       - ibm--uk-labs-hursley
       - japan--mt-fuji
       - kochi-houseboat
@@ -155,6 +159,7 @@ categories:
       - paris--pompidou-center
       - peru--machu-picchu
       - portland--building
+      - poughkeepsie--bridge
       - prague--charles-bridge-tower
       - prague--dancing-house--01
       - prague--dancing-house--02
@@ -172,6 +177,7 @@ categories:
       - shanghai--skyline
       - singapore
       - stockholm
+      - stuttgart--tv-tower
       - taipei--bubble-tea
       - tel-aviv
       - tokyo--cherry-blossom
@@ -802,6 +808,7 @@ categories:
   - name: Industry
     members:
       - agriculture
+      - b2b-commerce
       - bulldozer
       - cargo--crane
       - cargo--ship
@@ -904,6 +911,7 @@ categories:
       - tennis--net
       - tennis--racquet
       - tree
+      - waving-hand
       - whistle
       - yoga--01
       - yoga--02
@@ -999,6 +1007,9 @@ categories:
       - user--mask
       - user--profile
       - user--search
+  - name: Quantum
+    members:
+      - qiskit
   - name: Red Hat
     members:
       - build-applications-anywhere
@@ -1230,6 +1241,7 @@ categories:
       - visual--recognition
       - watson--logo
       - watsonx--ai
+      - watsonx--assistant
       - watsonx--code-assistant
       - watsonx--code-assistant-for-z
       - watsonx--code-assistant-for-z-refactor
