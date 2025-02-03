@@ -21,6 +21,9 @@ import { classMap } from 'lit/directives/class-map.js';
  */
 @customElement(`${prefix}-breadcrumb-link`)
 class CDSBreadcrumbLink extends CDSLink {
+  /**
+   * indicates that this breadcrumb item represents the current item
+   */
   @property({ type: String, attribute: 'aria-current' })
   ariaCurrent;
 
