@@ -25,7 +25,7 @@ export function useLayer() {
   };
 }
 
-interface LayerBaseProps {
+export interface LayerBaseProps {
   /**
    * Provide child elements to be rendered inside of `Theme`
    */
