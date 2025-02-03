@@ -1970,7 +1970,7 @@ __metadata:
   dependencies:
     "@carbon/icon-build-helpers": "npm:^1.33.0"
     "@carbon/icon-helpers": "npm:^10.54.0"
-    "@carbon/pictograms": "npm:^12.45.0"
+    "@carbon/pictograms": "npm:^12.45.1"
     "@ibm/telemetry-js": "npm:^1.5.0"
     prop-types: "npm:^15.7.2"
     rimraf: "npm:^6.0.0"
@@ -1979,7 +1979,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms@npm:^12.45.0, @carbon/pictograms@workspace:packages/pictograms":
+"@carbon/pictograms@npm:^12.45.1, @carbon/pictograms@workspace:packages/pictograms":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
