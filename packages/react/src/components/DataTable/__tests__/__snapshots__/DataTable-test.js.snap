@@ -575,7 +575,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           class="cds--overflow-menu__wrapper"
         >
           <span
-            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
+            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--auto-align cds--autoalign cds--popover--top cds--tooltip cds--icon-tooltip"
           >
             <div
               class="cds--tooltip-trigger__wrapper"
@@ -617,12 +617,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             >
               <span
                 class="cds--popover-content cds--tooltip-content"
+                style="position: fixed; left: 0px; top: 0px; visibility: visible; transform: translate(0px, 0px);"
               >
                 Settings
+                <span
+                  class="cds--popover-caret cds--popover--auto-align"
+                />
               </span>
-              <span
-                class="cds--popover-caret"
-              />
             </span>
           </span>
         </span>
@@ -1012,7 +1013,7 @@ exports[`DataTable renders as expected - Component API should render and match s
           class="cds--overflow-menu__wrapper"
         >
           <span
-            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
+            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--auto-align cds--autoalign cds--popover--top cds--tooltip cds--icon-tooltip"
           >
             <div
               class="cds--tooltip-trigger__wrapper"
@@ -1054,12 +1055,13 @@ exports[`DataTable renders as expected - Component API should render and match s
             >
               <span
                 class="cds--popover-content cds--tooltip-content"
+                style="position: fixed; left: 0px; top: 0px; visibility: visible; transform: translate(0px, 0px);"
               >
                 Settings
+                <span
+                  class="cds--popover-caret cds--popover--auto-align"
+                />
               </span>
-              <span
-                class="cds--popover-caret"
-              />
             </span>
           </span>
         </span>
