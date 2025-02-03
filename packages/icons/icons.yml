@@ -1595,7 +1595,7 @@
     - asset
   sizes:
     - 32
-- name: asset--movement
+- name: asset-movement
   friendly_name: Asset movement
   aliases:
     - asset
