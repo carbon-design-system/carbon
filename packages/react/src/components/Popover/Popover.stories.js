@@ -351,9 +351,9 @@ export const ExperimentalAutoAlignBoundary = () => {
 };
 
 export const Test = () => {
-  const [open, setOpen] = useState();
-  const align = document?.dir === 'rtl' ? 'bottom-right' : 'bottom-left';
-  const alignTwo = document?.dir === 'rtl' ? 'bottom-left' : 'bottom-right';
+  const [open, setOpen] = useState(false);
+  const align = document?.dir === 'rtl' ? 'bottom-end' : 'bottom-start';
+
   return (
     <div style={{ display: 'flex', gap: '8rem' }}>
       <OverflowMenu
