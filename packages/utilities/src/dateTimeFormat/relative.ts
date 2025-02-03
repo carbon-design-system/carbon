@@ -50,7 +50,7 @@ export function format(
     return rtf.format(weeks * -1, 'weeks');
   }
 
-  if (Math.abs(months) < 12) {
+  if (Math.abs(days) < 365) {
     return rtf.format(months * -1, 'months');
   }
 

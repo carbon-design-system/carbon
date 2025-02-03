@@ -26,7 +26,7 @@ async function snapshot(page, context) {
    * This configuration overrides any global setting for `widths` in .percy.yml or otherwise.
    * See https://github.com/carbon-design-system/carbon/issues/14779
    */
-  const widths = context.themes === 'white' ? [1366, 360] : [1366];
+  const widths = context.theme === 'white' ? [1366, 360] : [1366];
 
   if (process.env.ENABLE_LOCAL_SNAPSHOTS) {
     expect(await page.screenshot()).toMatchSnapshot(`${id}.png`);

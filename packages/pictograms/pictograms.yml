@@ -483,6 +483,12 @@
   friendly_name: Availability
   aliases:
     - availability
+- name: b2b-commerce
+  friendly_name: B2B commerce
+  aliases:
+    - business
+    - b2b commerce
+    - business-to-business
 - name: baby--bottle
   friendly_name: Baby bottle
   aliases:
@@ -2640,6 +2646,24 @@
   aliases:
     - efficient
     - cloud
+- name: ehningen--tech-campus-01
+  friendly_name: Ehningen Tech Campus 01
+  aliases:
+    - IBM
+    - campus
+    - technology
+    - Ehningen
+    - Germany
+    - lab
+- name: ehningen--tech-campus-02
+  friendly_name: Ehningen Tech Campus 02
+  aliases:
+    - IBM
+    - campus
+    - technology
+    - Ehningen
+    - Germany
+    - lab    
 - name: electric
   friendly_name: Electric
   aliases:
@@ -3974,11 +3998,29 @@
   friendly_name: IBM Cloud
   aliases:
     - IBM cloud
+- name: ibm--granite
+  friendly_name: IBM® Granite™
+  aliases:
+    - Foundation model
+    - code
+    - model
+    - decoder-only
+    - code generative
+    - base model
+    - instruct model
+    - llm
+    - bpe
 - name: ibm--ix
   friendly_name: IBM iX®
   aliases:
     - IBM iX®
     - IBM
+- name: ibm--one-madison-avenue
+  friendly_name: IBM® One Madison Avenue
+  aliases:
+    - One Madison Avenue
+    - One Madison
+    - OMA
 - name: ibm--rpa
   friendly_name: IBM RPA
   aliases:
@@ -3995,9 +4037,9 @@
     - United Kingdom
     - UK
 - name: ibm--z
-  friendly_name: IBM Z®
+  friendly_name: IBM® Z®
   aliases:
-    - IBM Z®
+    - IBM Z
     - IBM
 - name: ibm--z--partition
   friendly_name: IBM Z® partition
@@ -5623,6 +5665,13 @@
     - city
     - cities
     - Pacific northwest
+- name: poughkeepsie--bridge
+  friendly_name: Poughkeepsie Bridge
+  aliases:
+    - Poughkeepsie
+    - POK
+    - bridge
+    - span
 - name: power
   friendly_name: Power
   aliases:
@@ -5828,6 +5877,18 @@
     - qr code
     - code
     - ID
+- name: qiskit
+  friendly_name: Qiskit
+  aliases:
+    - Qiskit
+    - Qiskit Runtime
+    - Qiskit SDK
+    - SDK
+    - Runtime
+    - Primitives
+    - Quantum
+    - Quantum software
+    - Quantum systems
 - name: quantum
   friendly_name: Quantum
   aliases:
@@ -6959,6 +7020,14 @@
   friendly_name: Streamline operations
   aliases:
     - streamline operations
+- name: stuttgart--tv-tower
+  friendly_name: Stuttgart TV tower
+  aliases:
+    - TV tower
+    - Stuttgart
+    - Germany
+    - city
+    - landmark
 - name: subsecond
   friendly_name: Subsecond
   aliases:
@@ -8063,6 +8132,13 @@
     - AI
     - data
     - workload
+- name: watsonx--assistant
+  friendly_name: IBM® watsonx™ Assistant
+  aliases:
+    - IBM watsonx
+    - platform
+    - AI
+    - data
 - name: watsonx--code-assistant
   friendly_name: IBM® watsonx™ Code Assistant
   aliases:
@@ -8118,6 +8194,17 @@
     - responsible workflow
     - transparent workflow
     - explainability
+- name: waving-hand
+  friendly_name: Waving hand
+  aliases:
+    - hand
+    - wave
+    - waving
+    - hello
+    - goodbye
+    - hi
+    - bye
+    - greeting
 - name: weather
   friendly_name: Weather
   aliases:

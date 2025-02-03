@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import getDisplayName from '../../prop-types/tools/getDisplayName';
 
-interface BaseSwitcherProps {
+export interface BaseSwitcherProps {
   /**
    * expects to receive <SwitcherItem />
    */

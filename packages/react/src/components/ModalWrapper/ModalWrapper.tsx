@@ -14,7 +14,7 @@ import { ButtonKinds } from '../Button';
 import { noopFn } from '../../internal/noopFn';
 import { keys, match } from '../../internal/keyboard';
 
-interface ModalWrapperProps {
+export interface ModalWrapperProps {
   buttonTriggerClassName?: string;
   buttonTriggerText?: ReactNode;
   children?: ReactNode;

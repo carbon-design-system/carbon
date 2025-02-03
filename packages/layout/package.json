@@ -1,7 +1,7 @@
 {
   "name": "@carbon/layout",
   "description": "Layout helpers for digital and software products using the Carbon Design System",
-  "version": "11.28.0",
+  "version": "11.29.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -33,7 +33,7 @@
     "@carbon/cli": "^11.23.0",
     "@carbon/cli-reporter": "^10.7.0",
     "@carbon/scss-generator": "^10.19.0",
-    "@carbon/test-utils": "^10.34.0",
+    "@carbon/test-utils": "^10.35.0",
     "core-js": "^3.16.0",
     "rimraf": "^6.0.0"
   },
