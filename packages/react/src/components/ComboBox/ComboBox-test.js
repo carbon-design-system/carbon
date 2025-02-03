@@ -764,5 +764,17 @@ describe('ComboBox', () => {
 
       expect(input).toHaveDisplayValue('Apple');
     });
+
+    it('should remove input and enter new conditions', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} typeahead />);
+
+      const input = screen.getByRole('combobox');
+      user.click(input);
+
+      await user.keyboard('[Enter]');
+
+      expect(input).toHaveDisplayValue('');
+    });
   });
 });
