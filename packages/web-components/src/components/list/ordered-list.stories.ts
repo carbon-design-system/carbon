@@ -13,7 +13,7 @@ import './index';
 
 const defaultArgs = {
   isExpressive: false,
-  native: true,
+  native: false,
 };
 
 const controls = {
@@ -29,8 +29,10 @@ const controls = {
 };
 
 export const Default = {
-  render: () =>
-    html`<cds-ordered-list>
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({ isExpressive, native }) =>
+    html`<cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>Ordered List level 1</cds-list-item>
@@ -48,14 +50,16 @@ export const Default = {
 };
 
 export const NativeListStyles = {
-  render: () =>
-    html`<cds-ordered-list native>
+  args: { ...defaultArgs, native: true },
+  argTypes: controls,
+  render: ({ isExpressive, native }) =>
+    html`<cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>
         Ordered List level 1
-        <cds-ordered-list native>
+        <cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
           <cds-list-item>Ordered List level 2</cds-list-item>
           <cds-list-item>Ordered List level 2</cds-list-item>
           <cds-list-item>Ordered List level 2</cds-list-item>
@@ -74,15 +78,19 @@ export const NativeListStyles = {
 };
 
 export const Nested = {
-  render: () =>
-    html`<cds-ordered-list>
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({ isExpressive, native }) =>
+    html`<cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
       <cds-list-item>
         Ordered List level 1
-        <cds-ordered-list native>
+        <cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
           <cds-list-item>Ordered List level 2</cds-list-item>
           <cds-list-item>
             Ordered List level 2
-            <cds-ordered-list native>
+            <cds-ordered-list
+              ?is-expressive="${isExpressive}"
+              ?native="${native}">
               <cds-list-item>Ordered List level 3</cds-list-item>
               <cds-list-item>Ordered List level 3</cds-list-item>
             </cds-ordered-list>
@@ -92,41 +100,6 @@ export const Nested = {
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>Ordered List level 1</cds-list-item>
     </cds-ordered-list>`,
-};
-
-export const Playground = {
-  args: defaultArgs,
-  argTypes: controls,
-  render: ({ isExpressive, native }) => html`
-    <cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
-      <cds-list-item>
-        Ordered List level 1
-        <cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
-          <cds-list-item>Ordered List level 2</cds-list-item>
-          <cds-list-item>
-            Ordered List level 2
-            <cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
-              <cds-list-item>Ordered List level 2</cds-list-item>
-              <cds-list-item>Ordered List level 2</cds-list-item>
-            </cds-ordered-list>
-          </cds-list-item>
-        </cds-ordered-list>
-      </cds-list-item>
-      <cds-list-item>Ordered List level 1</cds-list-item>
-      <cds-list-item>Ordered List level 1</cds-list-item>
-      <cds-list-item>Ordered List level 1</cds-list-item>
-      <cds-list-item>Ordered List level 1</cds-list-item>
-      <cds-list-item>Ordered List level 1</cds-list-item>
-      <cds-list-item>Ordered List level 1</cds-list-item>
-      <cds-list-item>Ordered List level 1</cds-list-item>
-      <cds-list-item>Ordered List level 1</cds-list-item>
-      <cds-list-item>Ordered List level 1</cds-list-item>
-      <cds-list-item>Ordered List level 1</cds-list-item>
-      <cds-list-item>Ordered List level 1</cds-list-item>
-      <cds-list-item>Ordered List level 1</cds-list-item>
-    </cds-ordered-list>
-  </cds-ordered-list>
-  `,
 };
 
 const meta = {
