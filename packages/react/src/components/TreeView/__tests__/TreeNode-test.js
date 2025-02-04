@@ -222,6 +222,22 @@ describe('TreeNode - handleClick', () => {
   });
 });
 
+it('should support specifying the href for parent nodes', () => {
+  const onToggle = jest.fn();
+
+  const { getByText } = render(
+    <TreeNode
+      id="parent-node"
+      label="Parent Node"
+      href="/test"
+      selected={[]}
+      data-testid="parent-linked-node">
+      <TreeNode id="child1" label="Child Node 1" disabled={false} />
+    </TreeNode>
+  );
+  expect(screen.getByTestId('parent-linked-node')).toHaveAttribute('href', '/test');
+});
+
 describe('TreeNode - handleKeyDown', () => {
   const onToggle = jest.fn();
   const onClick = jest.fn();
