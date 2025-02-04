@@ -17,35 +17,35 @@ const nodes = [
     id: '1',
     value: 'Artificial intelligence',
     label: <span>Artificial intelligence</span>,
-    href: '#artificial-intelligence',
+    href: '/artificial-intelligence',
     renderIcon: Document,
   },
   {
     id: '2',
     value: 'Blockchain',
     label: 'Blockchain',
-    href: '#blockchain',
+    href: '/blockchain',
     renderIcon: Document,
   },
   {
     id: '3',
     value: 'Business automation',
     label: 'Business automation',
-    href: '#business-automation',
+    href: '/business-automation',
     renderIcon: Folder,
     children: [
       {
         id: '3-1',
         value: 'Business process automation',
         label: 'Business process automation',
-        href: '#business-process-automation',
+        href: '/business-process-automation',
         renderIcon: Document,
       },
       {
         id: '3-2',
         value: 'Business process mapping',
         label: 'Business process mapping',
-        href: '#business-process-mapping',
+        href: '/business-process-mapping',
         renderIcon: Document,
       },
     ],
@@ -54,14 +54,14 @@ const nodes = [
     id: '4',
     value: 'Business operations',
     label: 'Business operations',
-    href: '#business-operations',
+    href: '/business-operations',
     renderIcon: Document,
   },
   {
     id: '5',
     value: 'Cloud computing',
     label: 'Cloud computing',
-    href: '#cloud-computing',
+    href: '/cloud-computing',
     isExpanded: true,
     renderIcon: Folder,
     children: [
@@ -69,21 +69,21 @@ const nodes = [
         id: '5-1',
         value: 'Containers',
         label: 'Containers',
-        href: '#containers',
+        href: '/containers',
         renderIcon: Document,
       },
       {
         id: '5-2',
         value: 'Databases',
         label: 'Databases',
-        href: '#databases',
+        href: '/databases',
         renderIcon: Document,
       },
       {
         id: '5-3',
         value: 'DevOps',
         label: 'DevOps',
-        href: '#devops',
+        href: '/devops',
         isExpanded: true,
         renderIcon: Folder,
         children: [
@@ -91,14 +91,14 @@ const nodes = [
             id: '5-4',
             value: 'Solutions',
             label: 'Solutions',
-            href: '#solutions',
+            href: '/solutions',
             renderIcon: Document,
           },
           {
             id: '5-5',
             value: 'Case studies',
             label: 'Case studies',
-            href: '#case-studies',
+            href: '/case-studies',
             isExpanded: true,
             renderIcon: Folder,
             children: [
@@ -106,7 +106,7 @@ const nodes = [
                 id: '5-6',
                 value: 'Resources',
                 label: 'Resources',
-                href: '#resources',
+                href: '/resources',
                 renderIcon: Document,
               },
             ],
@@ -119,21 +119,21 @@ const nodes = [
     id: '6',
     value: 'Data & Analytics',
     label: 'Data & Analytics',
-    href: '#data-analytics',
+    href: '/data-analytics',
     renderIcon: Folder,
     children: [
       {
         id: '6-1',
         value: 'Big data',
         label: 'Big data',
-        href: '#big-data',
+        href: '/big-data',
         renderIcon: Document,
       },
       {
         id: '6-2',
         value: 'Business intelligence',
         label: 'Business intelligence',
-        href: '#business-intelligence',
+        href: '/business-intelligence',
         renderIcon: Document,
       },
     ],
@@ -142,7 +142,7 @@ const nodes = [
     id: '7',
     value: 'Models',
     label: 'Models',
-    href: '#models',
+    href: '/models',
     isExpanded: true,
     disabled: true,
     renderIcon: Folder,
@@ -151,21 +151,21 @@ const nodes = [
         id: '7-1',
         value: 'Audit',
         label: 'Audit',
-        href: '#audit',
+        href: '/audit',
         renderIcon: Document,
       },
       {
         id: '7-2',
         value: 'Monthly data',
         label: 'Monthly data',
-        href: '#monthly-data',
+        href: '/monthly-data',
         renderIcon: Document,
       },
       {
         id: '8',
         value: 'Data warehouse',
         label: 'Data warehouse',
-        href: '#data-warehouse',
+        href: '/data-warehouse',
         isExpanded: true,
         renderIcon: Folder,
         children: [
@@ -173,14 +173,14 @@ const nodes = [
             id: '8-1',
             value: 'Report samples',
             label: 'Report samples',
-            href: '#report-samples',
+            href: '/report-samples',
             renderIcon: Document,
           },
           {
             id: '8-2',
             value: 'Sales performance',
             label: 'Sales performance',
-            href: '#sales-performance',
+            href: '/sales-performance',
             renderIcon: Document,
           },
         ],
@@ -200,6 +200,7 @@ function renderTree({ nodes, expanded, withIcons = false, withLinks = false }) {
         renderIcon={withIcons ? renderIcon : null}
         href={withLinks ? href : null}
         isExpanded={expanded ?? isExpanded}
+        onClick={withLinks ? (event) => event.preventDefault() : null} // This is so that we only simulate links within the storybook
         {...nodeProps}>
         {renderTree({ nodes: children, expanded, withIcons, withLinks })}
       </TreeNode>
@@ -624,7 +625,7 @@ export const WithLinks = () => {
       <TreeView
         label="Tree View"
         hideLabel
-        active='1'
+        active="1"
         selected={['1']}
         onSelect={(event, node) => setCurrentPage(node.value)}>
         {renderTree({ nodes, withLinks: true })}
