@@ -616,10 +616,15 @@ export const WithIcons = () => {
 };
 
 export const WithLinks = () => {
-  const [currentPage, setCurrentPage] = React.useState(window.location.pathname);
+  const [currentPage, setCurrentPage] = React.useState(
+    window.location.pathname
+  );
   return (
     <div id="page-body">
-      <TreeView label="Tree View" hideLabel onSelect={() => setCurrentPage(window.location.pathname)}>
+      <TreeView
+        label="Tree View"
+        hideLabel
+        onSelect={() => setCurrentPage(window.location.pathname)}>
         {renderTree({ nodes, withLinks: true })}
       </TreeView>
       <main>

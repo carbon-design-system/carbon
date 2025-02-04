@@ -235,7 +235,10 @@ it('should support specifying the href for parent nodes', () => {
       <TreeNode id="child1" label="Child Node 1" disabled={false} />
     </TreeNode>
   );
-  expect(screen.getByTestId('parent-linked-node')).toHaveAttribute('href', '/test');
+  expect(screen.getByTestId('parent-linked-node')).toHaveAttribute(
+    'href',
+    '/test'
+  );
 });
 
 describe('TreeNode - handleKeyDown', () => {

@@ -311,7 +311,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
         event.preventDefault();
         navigate(href);
       }
-    }
+    };
 
     useEffect(() => {
       /**
