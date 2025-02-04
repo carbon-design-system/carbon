@@ -23,7 +23,7 @@ export default {
 
 export const Default = () => {
   function DemoComponent() {
-    const [shouldThrowError, setShouldThrowError] = useState(false);
+    const [shouldThrowError, setShouldThrowError] = React.useState(false);
 
     function onClick() {
       setShouldThrowError(!shouldThrowError);

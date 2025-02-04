@@ -214,7 +214,7 @@ export const SliderWithCustomValueLabel = () => {
 };
 
 export const ControlledSlider = () => {
-  const [val, setVal] = useState(87);
+  const [val, setVal] = React.useState(87);
   return (
     <>
       <button
