@@ -24,8 +24,12 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  */
 @customElement(`${prefix}-ai-label`)
 export default class CDSAILabel extends CDSToggleTip {
+  /**
+   * @deprecated the slot string will be renamed to "decorator"
+   */
   @property({ reflect: true })
   slot = 'ai-label';
+
   /**
    * Specify the correct translation of the AI text
    */
