@@ -8,7 +8,6 @@
 import React, { useState, useRef } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-
 import ComboBox from '../ComboBox';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
