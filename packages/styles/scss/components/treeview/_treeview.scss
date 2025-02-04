@@ -91,7 +91,7 @@
   // Overrides link styling
   li a.#{$prefix}--tree-node {
     text-decoration: none;
-  
+
     &:not(.cds--tree-node--disabled) {
       color: $text-secondary;
     }
