@@ -1,5 +1,6 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as SkeletonTextStories from './SkeletonText.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -13,9 +14,19 @@ import * as SkeletonTextStories from './SkeletonText.stories';
 
 ## Overview
 
-<Canvas of={SkeletonTextStories.Default} />
+<Canvas
+  of={SkeletonTextStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SkeletonTextStories.Default),
+    },
+  ]}
+/>
 
 ## Component API
+
+w
 
 <ArgTypes />
 

@@ -2129,6 +2129,7 @@ Map {
       ],
     },
     "TableRow": Object {
+      "$$typeof": Symbol(react.forward_ref),
       "propTypes": Object {
         "className": Object {
           "type": "string",
@@ -2137,6 +2138,7 @@ Map {
           "type": "bool",
         },
       },
+      "render": [Function],
     },
     "TableSelectAll": Object {
       "propTypes": Object {
@@ -4225,6 +4227,9 @@ Map {
       },
       "enterDelayMs": Object {
         "type": "number",
+      },
+      "href": Object {
+        "type": "string",
       },
       "isSelected": Object {
         "type": "bool",
@@ -7834,7 +7839,6 @@ Map {
         "type": "oneOf",
       },
       "aria-label": Object {
-        "isRequired": true,
         "type": "string",
       },
       "children": Object {
@@ -8225,6 +8229,7 @@ Map {
     ],
   },
   "TableRow" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -8233,6 +8238,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "TableSelectAll" => Object {
     "propTypes": Object {
@@ -10985,6 +10991,48 @@ Map {
         "type": "bool",
       },
     },
+  },
+  "unstable__IconIndicator" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "failed",
+            "caution-major",
+            "caution-minor",
+            "undefined",
+            "succeeded",
+            "normal",
+            "in-progress",
+            "incomplete",
+            "not-started",
+            "pending",
+            "unknown",
+            "informative",
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOf",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            16,
+            20,
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
   },
   "unstable__Slug" => Object {
     "$$typeof": Symbol(react.forward_ref),
