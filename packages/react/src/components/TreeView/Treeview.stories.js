@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Document, Folder } from '@carbon/icons-react';
 import { default as TreeView, TreeNode } from './';
@@ -17,39 +17,36 @@ const nodes = [
     id: '1',
     value: 'Artificial intelligence',
     label: <span>Artificial intelligence</span>,
+    href: '/artificial-intelligence',
     renderIcon: Document,
   },
   {
     id: '2',
     value: 'Blockchain',
     label: 'Blockchain',
+    href: '/blockchain',
     renderIcon: Document,
   },
   {
     id: '3',
     value: 'Business automation',
     label: 'Business automation',
+    href: '/business-automation',
     renderIcon: Folder,
     children: [
       {
         id: '3-1',
         value: 'Business process automation',
         label: 'Business process automation',
+        href: '/business-process-automation',
         renderIcon: Document,
       },
       {
         id: '3-2',
         value: 'Business process mapping',
         label: 'Business process mapping',
+        href: '/business-process-mapping',
         renderIcon: Document,
-        children: [
-          {
-            id: '3-21',
-            value: 'Business process mapping2',
-            label: 'Business process mapping2',
-            renderIcon: Document,
-          },
-        ],
       },
     ],
   },
@@ -57,13 +54,14 @@ const nodes = [
     id: '4',
     value: 'Business operations',
     label: 'Business operations',
+    href: '/business-operations',
     renderIcon: Document,
   },
   {
     id: '5',
     value: 'Cloud computing',
     label: 'Cloud computing',
-    href: 'https://carbondesignsystem.com/',
+    href: '/cloud-computing',
     isExpanded: true,
     renderIcon: Folder,
     children: [
@@ -71,20 +69,21 @@ const nodes = [
         id: '5-1',
         value: 'Containers',
         label: 'Containers',
+        href: '/containers',
         renderIcon: Document,
       },
       {
         id: '5-2',
         value: 'Databases',
         label: 'Databases',
-        href: 'https://carbondesignsystem.com/',
+        href: '/databases',
         renderIcon: Document,
       },
       {
         id: '5-3',
         value: 'DevOps',
         label: 'DevOps',
-        href: 'https://carbondesignsystem.com/',
+        href: '/devops',
         isExpanded: true,
         renderIcon: Folder,
         children: [
@@ -92,14 +91,14 @@ const nodes = [
             id: '5-4',
             value: 'Solutions',
             label: 'Solutions',
-            href: 'https://carbondesignsystem.com/',
+            href: '/solutions',
             renderIcon: Document,
           },
           {
             id: '5-5',
             value: 'Case studies',
             label: 'Case studies',
-            href: 'https://carbondesignsystem.com/',
+            href: '/case-studies',
             isExpanded: true,
             renderIcon: Folder,
             children: [
@@ -107,7 +106,7 @@ const nodes = [
                 id: '5-6',
                 value: 'Resources',
                 label: 'Resources',
-                href: 'http://localhost:3001/iframe.html?globals=&id=components-treeview--with-links&viewMode=story',
+                href: '/resources',
                 renderIcon: Document,
               },
             ],
@@ -120,18 +119,21 @@ const nodes = [
     id: '6',
     value: 'Data & Analytics',
     label: 'Data & Analytics',
+    href: '/data-analytics',
     renderIcon: Folder,
     children: [
       {
         id: '6-1',
         value: 'Big data',
         label: 'Big data',
+        href: '/big-data',
         renderIcon: Document,
       },
       {
         id: '6-2',
         value: 'Business intelligence',
         label: 'Business intelligence',
+        href: '/business-intelligence',
         renderIcon: Document,
       },
     ],
@@ -140,6 +142,7 @@ const nodes = [
     id: '7',
     value: 'Models',
     label: 'Models',
+    href: '/models',
     isExpanded: true,
     disabled: true,
     renderIcon: Folder,
@@ -148,18 +151,21 @@ const nodes = [
         id: '7-1',
         value: 'Audit',
         label: 'Audit',
+        href: '/audit',
         renderIcon: Document,
       },
       {
         id: '7-2',
         value: 'Monthly data',
         label: 'Monthly data',
+        href: '/monthly-data',
         renderIcon: Document,
       },
       {
         id: '8',
         value: 'Data warehouse',
         label: 'Data warehouse',
+        href: '/data-warehouse',
         isExpanded: true,
         renderIcon: Folder,
         children: [
@@ -167,12 +173,14 @@ const nodes = [
             id: '8-1',
             value: 'Report samples',
             label: 'Report samples',
+            href: '/report-samples',
             renderIcon: Document,
           },
           {
             id: '8-2',
             value: 'Sales performance',
             label: 'Sales performance',
+            href: '/sales-performance',
             renderIcon: Document,
           },
         ],
@@ -607,11 +615,19 @@ export const WithIcons = () => {
   );
 };
 
-export const WithLinks = () => (
-  <TreeView label="Tree View">
-    {renderTree({ nodes, withLinks: true })}
-  </TreeView>
-);
+export const WithLinks = () => {
+  const [currentPage, setCurrentPage] = React.useState(window.location.pathname);
+  return (
+    <div id="page-body">
+      <TreeView label="Tree View" hideLabel onSelect={() => setCurrentPage(window.location.pathname)}>
+        {renderTree({ nodes, withLinks: true })}
+      </TreeView>
+      <main>
+        <h3>The current page is: {currentPage}</h3>
+      </main>
+    </div>
+  );
+};
 
 export const WithControlledExpansion = () => {
   const nodes = [
