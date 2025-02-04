@@ -110,7 +110,7 @@ export const Default = () => {
         <NumberInput
           className="some-class"
           id="number-input-1"
-          label="Number Input"
+          labelText="Number Input"
           min={0}
           max={100}
           value={50}

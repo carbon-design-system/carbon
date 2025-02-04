@@ -14,6 +14,7 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { action } from '@storybook/addon-actions';
 import mdx from './ComboBox.mdx';
 
 const items = [
@@ -43,7 +44,6 @@ const items = [
     text: 'Option 5',
   },
 ];
-
 export default {
   title: 'Components/ComboBox',
   component: ComboBox,
@@ -315,10 +315,37 @@ export const withAILabel = (args) => {
       </AILabelContent>
     </AILabel>
   );
+  const items = [
+    {
+      id: 'option-0',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'option-1',
+      text: 'Option 1',
+    },
+    {
+      id: 'option-2',
+      text: 'Option 2',
+    },
+    {
+      id: 'option-3',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'option-4',
+      text: 'Option 4',
+    },
+    {
+      id: 'option-5',
+      text: 'Option 5',
+    },
+  ];
   return (
     <div style={{ width: 300 }}>
       <ComboBox
-        onChange={() => {}}
+        onChange={action('onChange')}
         id="carbon-combobox"
         items={items}
         itemToString={(item) => (item ? item.text : '')}

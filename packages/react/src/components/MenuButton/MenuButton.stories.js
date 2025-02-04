@@ -48,16 +48,14 @@ const sharedArgTypes = {
 };
 
 export const Default = (args) => {
-  const onClick = action('onClick (MenuItem)');
-
   return (
-    <MenuButton {...args}>
+    <MenuButton {...args} onClick={action('onClick')} label="Actions">
       <MenuItem
         label="First action with a long label description"
-        onClick={onClick}
+        onClick={action('onClick')}
       />
-      <MenuItem label="Second action" onClick={onClick} />
-      <MenuItem label="Third action" onClick={onClick} disabled />
+      <MenuItem label="Second action" onClick={action('onClick')} />
+      <MenuItem label="Third action" onClick={action('onClick')} disabled />
     </MenuButton>
   );
 };

@@ -28,11 +28,6 @@ export default {
   },
 };
 
-const sharedArgs = {
-  onClick: action('onClick'),
-  label: 'Primary action',
-};
-
 const sharedArgTypes = {
   children: {
     table: {
@@ -52,23 +47,24 @@ const sharedArgTypes = {
 };
 
 export const Default = (args) => {
-  const onClick = action('onClick (MenuItem)');
-
   return (
-    <ComboButton {...args}>
+    <ComboButton {...args} onClick={action('onClick')} label="Primary action">
       <MenuItem
         label="Second action with a long label description"
-        onClick={onClick}
+        onClick={action('onClick')}
       />
-      <MenuItem label="Third action" onClick={onClick} />
-      <MenuItem label="Fourth action" disabled onClick={onClick} />
+      <MenuItem label="Third action" onClick={action('onClick')} />
+      <MenuItem label="Fourth action" disabled onClick={action('onClick')} />
       <MenuItemDivider />
-      <MenuItem label="Danger action" kind="danger" onClick={onClick} />
+      <MenuItem
+        label="Danger action"
+        kind="danger"
+        onClick={action('onClick')}
+      />
     </ComboButton>
   );
 };
 
-Default.args = { ...sharedArgs };
 Default.argTypes = { ...sharedArgTypes };
 
 export const ExperimentalAutoAlign = (args) => (
