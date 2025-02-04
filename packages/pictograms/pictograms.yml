@@ -192,6 +192,13 @@
     - fly
     - transportation
     - plane
+- name: airport
+  friendly_name: Airport
+  aliases:
+    - airport
+    - airplane
+    - aviation
+    - fly
 - name: alarm
   friendly_name: Alarm
   aliases:
@@ -731,11 +738,38 @@
     - Hungary
     - chain-bridge
 - name: budapest--citadella
-  friendly_name: budapest--citadella
-  aliases: []
+  friendly_name: Budapest Citadella
+  aliases:
+    - Budapest
+    - Hungary
+    - citadella
+- name: budapest--corvin7
+  friendly_name: Budapest Corvin7
+  aliases:
+    - Budapest
+    - Hungary
+    - IBM Studios Budapest
+    - IBM Budapest Lab
+    - Budapest lab
+    - Budapest Corvin7
+    - Corvin7
+    - Budapest headquarters
+- name: budapest--hungarian-auto-club
+  friendly_name: Budapest Hungarian Auto Club
+  aliases:
+    - Budapest
+    - Hungary
+    - IBM Studios Budapest
+    - Budapest iconic buildings
+    - Hungarian Auto Club building
+    - Magyar Autóklub
 - name: budapest--lab-skyline
-  friendly_name: budapest--lab-skyline
-  aliases: []
+  friendly_name: Budapest Lab skyline
+  aliases:
+    - Budapest
+    - Hungary
+    - Budapest Lab
+    - lab skyline
 - name: bug--virus--malware
   friendly_name: Bug Virus Malware
   aliases:
@@ -1742,6 +1776,14 @@
   aliases:
     - code
     - cloud
+- name: code--explanation
+  friendly_name: Code explanation
+  aliases:
+    - Code explanation
+    - Code
+    - AI
+    - watsonx
+    - watsonx Code Assistant
 - name: code--syntax
   friendly_name: Code syntax
   aliases:
@@ -2663,7 +2705,7 @@
     - technology
     - Ehningen
     - Germany
-    - lab    
+    - lab
 - name: electric
   friendly_name: Electric
   aliases:
@@ -2715,6 +2757,13 @@
     - emergency exit
     - emergency
     - workplace
+- name: emissions
+  friendly_name: Greenhouse gas emissions
+  aliases:
+    - CO2
+    - carbon dioxide
+    - emissions
+    - greenhouse gas
 - name: employee--insights
   friendly_name: Employee insights
   aliases:
@@ -3998,6 +4047,14 @@
   friendly_name: IBM Cloud
   aliases:
     - IBM cloud
+- name: ibm--ibv
+  friendly_name: IBM Institute for Business Value
+  aliases:
+    - IBM IBV
+    - IBV
+    - Institute for Business Value
+    - Thought Leadership
+    - IBV study
 - name: ibm--granite
   friendly_name: IBM® Granite™
   aliases:
@@ -4080,6 +4137,16 @@
     - tower
     - Linux
     - single frame
+    - IBM Z
+- name: ibm--z-os-container-platform
+  friendly_name: IBM z/OS Container platform
+  aliases:
+    - z/OS
+    - Container
+    - Container platform
+    - Cloud
+    - Hybrid cloud
+    - Kubernetes
     - IBM Z
 - name: ibm--z16
   friendly_name: IBM z16
@@ -4242,6 +4309,14 @@
     - brain
     - learning
     - learn
+- name: intelligent-infrastructure
+  friendly_name: Intelligent assets, facilities and infrastructure
+  aliases:
+    - facilities
+    - smart buildings
+    - intelligent assets
+    - infrastructure
+    - buildings
 - name: intercom
   friendly_name: Intercom
   aliases:
@@ -4538,6 +4613,13 @@
     - locked
     - network
     - security
+- name: lockers
+  friendly_name: Lockers
+  aliases:
+    - Lockers
+    - storage lockers
+    - storage compartment
+    - storage cabinets
 - name: london
   friendly_name: London
   aliases:
@@ -4635,6 +4717,16 @@
     - learning
     - learn
     - ML
+- name: machine--learning--model
+  friendly_name: Machine learning model
+  aliases:
+    - machine learning
+    - model
+    - ML
+    - learning
+    - learn
+    - AI
+    - artificial intelligence
 - name: madrid--cathedral
   friendly_name: Madrid cathedral
   aliases:
@@ -5602,6 +5694,15 @@
     - prescription
     - rx
     - healthcare
+- name: pipeline
+  friendly_name: Pipeline
+  aliases:
+    - pipe
+    - pipeline
+    - flow
+    - tube
+    - gas
+    - water pipe
 - name: planning--analytics
   friendly_name: Planning analytics
   aliases:
@@ -5946,6 +6047,16 @@
     - sprint
     - win
     - speed
+- name: raindrop
+  friendly_name: Raindrop
+  aliases:
+    - rain
+    - drop
+    - water
+    - precipitation
+    - precip
+    - drizzle
+    - road
 - name: rainy
   friendly_name: Rainy
   aliases:
@@ -6215,6 +6326,15 @@
     - Rio
     - sugarloaf
     - Rio de Janeiro
+- name: road
+  friendly_name: Road
+  aliases:
+    - road
+    - highway
+    - traffic
+    - street
+    - route
+    - tunnel
 - name: robot
   friendly_name: Robot
   aliases:
@@ -7004,6 +7124,10 @@
     - strategy
     - business
     - plan
+    - football
+    - fantasy football
+    - play
+    - diagram
 - name: streaming-data
   friendly_name: Streaming data
   aliases:
@@ -7485,6 +7609,13 @@
   aliases:
     - toggle
     - controls
+- name: toilet
+  friendly_name: Toilet
+  aliases:
+    - Toilet
+    - bathroom
+    - restroom
+    - WC
 - name: tokyo--cherry-blossom
   friendly_name: Tokyo cherry blossom
   aliases:
@@ -7751,6 +7882,13 @@
     - trusted
     - user
     - security
+- name: tunnel
+  friendly_name: Tunnel
+  aliases:
+    - tunnel
+    - underpass
+    - arch
+    - cave
 - name: two-person-lift
   friendly_name: Two person lift
   aliases:
