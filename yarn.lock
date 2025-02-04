@@ -2011,6 +2011,7 @@ __metadata:
     "@figma/code-connect": "npm:^1.2.4"
     "@floating-ui/react": "npm:^0.26.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
+    "@reach/router": "npm:^1.3.4"
     "@rollup/plugin-babel": "npm:^6.0.0"
     "@rollup/plugin-commonjs": "npm:^28.0.0"
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
@@ -2028,6 +2029,7 @@ __metadata:
     "@storybook/react": "npm:^8.4.7"
     "@storybook/react-webpack5": "npm:^8.4.7"
     "@storybook/theming": "npm:^8.4.7"
+    "@types/reach__router": "npm:^1"
     "@types/react-is": "npm:~18.3.1"
     autoprefixer: "npm:^10.4.0"
     babel-loader: "npm:^9.0.0"
@@ -5581,6 +5583,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@reach/router@npm:^1.3.4":
+  version: 1.3.4
+  resolution: "@reach/router@npm:1.3.4"
+  dependencies:
+    create-react-context: "npm:0.3.0"
+    invariant: "npm:^2.2.3"
+    prop-types: "npm:^15.6.1"
+    react-lifecycles-compat: "npm:^3.0.4"
+  peerDependencies:
+    react: 15.x || 16.x || 16.4.0-alpha.0911da3
+    react-dom: 15.x || 16.x || 16.4.0-alpha.0911da3
+  checksum: 10/4e0a5f5c9d94f3d7113188c0377d4c654c10f455904e3a66a442dc3c6ee257f8e782b95440574c1417525f6a886b37a3d861dc369a73d9537746dd60051615f9
+  languageName: node
+  linkType: hard
+
 "@rollup/plugin-alias@npm:^5.1.0":
   version: 5.1.0
   resolution: "@rollup/plugin-alias@npm:5.1.0"
@@ -7270,6 +7287,15 @@ __metadata:
   version: 1.2.4
   resolution: "@types/range-parser@npm:1.2.4"
   checksum: 10/b7c0dfd5080a989d6c8bb0b6750fc0933d9acabeb476da6fe71d8bdf1ab65e37c136169d84148034802f48378ab94e3c37bb4ef7656b2bec2cb9c0f8d4146a95
+  languageName: node
+  linkType: hard
+
+"@types/reach__router@npm:^1":
+  version: 1.3.15
+  resolution: "@types/reach__router@npm:1.3.15"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: 10/2f5da90e0a821b41da13ea4ff15f1aada8a5e4ce549103b409fd6647a410e75df0ded61f729ceb70700e4b835ffcac940356ce301208a2d49ff1c082349f9eaa
   languageName: node
   linkType: hard
 
@@ -10917,6 +10943,19 @@ __metadata:
     crc-32: "npm:^1.2.0"
     readable-stream: "npm:^3.4.0"
   checksum: 10/1099559283b86e8a55390228b57ff4d57a74cac6aa8086aa4730f84317c9f93e914aeece115352f2d706a9df7ed75327ffacd86cfe23f040aef821231b528e76
+  languageName: node
+  linkType: hard
+
+"create-react-context@npm:0.3.0":
+  version: 0.3.0
+  resolution: "create-react-context@npm:0.3.0"
+  dependencies:
+    gud: "npm:^1.0.0"
+    warning: "npm:^4.0.3"
+  peerDependencies:
+    prop-types: ^15.0.0
+    react: ^0.14.0 || ^15.0.0 || ^16.0.0
+  checksum: 10/3ae9d5af6a36993c5b9928967b4258e8d327373def6fb5964cebfcb00e6dce48297317adb9346bb8fad7eed35e6b39f3dbbac8b6ab29015de48d7ee60774f665
   languageName: node
   linkType: hard
 
@@ -15116,6 +15155,13 @@ __metadata:
     js-yaml: "npm:^3.8.1"
     toml: "npm:^2.3.2"
   checksum: 10/3d8520da4b3a5a1d4181b71c211332a8c546fbf73d0d9f17979d8af81c4cc26e81b32b0a7cdf3c0ffbd98a51c65304256c499251ec7ae0c615594856e90ee2fc
+  languageName: node
+  linkType: hard
+
+"gud@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "gud@npm:1.0.0"
+  checksum: 10/3e2eb37cf794364077c18f036d6aa259c821c7fd188f2b7935cb00d589d82a41e0ebb1be809e1a93679417f62f1ad0513e745c3cf5329596e489aef8c5e5feae
   languageName: node
   linkType: hard
 
@@ -22654,7 +22700,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -22956,6 +23002,13 @@ __metadata:
   version: 18.3.1
   resolution: "react-is@npm:18.3.1"
   checksum: 10/d5f60c87d285af24b1e1e7eaeb123ec256c3c8bdea7061ab3932e3e14685708221bf234ec50b21e10dd07f008f1b966a2730a0ce4ff67905b3872ff2042aec22
+  languageName: node
+  linkType: hard
+
+"react-lifecycles-compat@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "react-lifecycles-compat@npm:3.0.4"
+  checksum: 10/c66b9c98c15cd6b0d0a4402df5f665e8cc7562fb7033c34508865bea51fd7b623f7139b5b7e708515d3cd665f264a6a9403e1fa7e6d61a05759066f5e9f07783
   languageName: node
   linkType: hard
 
@@ -27753,6 +27806,15 @@ __metadata:
   dependencies:
     makeerror: "npm:1.0.12"
   checksum: 10/ad7a257ea1e662e57ef2e018f97b3c02a7240ad5093c392186ce0bcf1f1a60bbadd520d073b9beb921ed99f64f065efb63dfc8eec689a80e569f93c1c5d5e16c
+  languageName: node
+  linkType: hard
+
+"warning@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "warning@npm:4.0.3"
+  dependencies:
+    loose-envify: "npm:^1.0.0"
+  checksum: 10/e7842aff036e2e07ce7a6cc3225e707775b969fe3d0577ad64bd24660e3a9ce3017f0b8c22a136566dcd3a151f37b8ed1ccee103b3bd82bd8a571bf80b247bc4
   languageName: node
   linkType: hard
 
