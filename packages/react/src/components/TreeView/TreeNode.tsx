@@ -21,7 +21,7 @@ import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 import uniqueId from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
-import Link from '../Link';
+import { navigate } from '@reach/router';
 
 export type TreeNodeProps = {
   /**
@@ -112,7 +112,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       defaultIsExpanded,
       label,
       onNodeFocusEvent,
-      onSelect: onNodeSelect,
+      onSelect,
       onToggle,
       onTreeSelect,
       renderIcon: Icon,
@@ -294,6 +294,25 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       onNodeFocusEvent?.(event);
     }
 
+    /**
+     * Handles the selecting the node
+     * If the node has an onSelect function defined, then it calls that
+     * For example use on activating a side panel
+     * Otherwise, if the node has a link, then it navigates to that href
+     *
+     * @param {*} event select event
+     * @param {TreeNodeProps} node
+     */
+    const onNodeSelect = (event, node?: TreeNodeProps) => {
+      if (onSelect) {
+        onSelect(event, node);
+      }
+      if (href) {
+        event.preventDefault();
+        navigate(href);
+      }
+    }
+
     useEffect(() => {
       /**
        * Negative margin shifts node to align with the left side boundary of the
@@ -368,7 +387,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       if (href) {
         return (
           <li role="none">
-            <Link
+            <a
               {...treeNodeProps}
               ref={setRefs}
               href={!disabled ? href : undefined}>
@@ -379,7 +398,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
                 {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
                 {label}
               </div>
-            </Link>
+            </a>
           </li>
         );
       } else {
@@ -399,7 +418,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     if (href) {
       return (
         <li role="none" className={`${prefix}--tree-node-link-parent`}>
-          <Link
+          <a
             {...treeNodeProps}
             aria-expanded={!!expanded}
             ref={setRefs}
@@ -422,7 +441,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
                 {label}
               </span>
             </div>
-          </Link>
+          </a>
           <ul
             id={`${id}-subtree`}
             role="group"
