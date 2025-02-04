@@ -33,6 +33,17 @@ test.describe('@avt TreeView', () => {
     await expect(page).toHaveNoACViolations('components-treeview--with-icons');
   });
 
+  test('@avt-advanced-states with-links', async ({ page }) => {
+    await visitStory(page, {
+      component: 'TreeView',
+      id: 'components-treeview--with-links',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('components-treeview--with-links');
+  });
+
   test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'TreeView',

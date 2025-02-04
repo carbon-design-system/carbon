@@ -9624,6 +9624,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "href": Object {
+        "type": "string",
+      },
       "id": Object {
         "type": "string",
       },
@@ -9713,6 +9716,9 @@ Map {
         },
         "disabled": Object {
           "type": "bool",
+        },
+        "href": Object {
+          "type": "string",
         },
         "id": Object {
           "type": "string",
