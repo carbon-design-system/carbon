@@ -57,6 +57,7 @@ export default {
         disable: true,
       },
     },
+    onChange: { action: 'onChange' },
   },
   parameters: {
     docs: {
@@ -115,7 +116,7 @@ const sharedArgTypes = {
     },
   },
   onChange: {
-    action: 'changed',
+    action: 'onChange',
   },
   onToggleClick: {
     action: 'clicked',
@@ -191,6 +192,7 @@ export const Default = (args) => {
         itemToString={(item) => (item ? item.text : '')}
         titleText="ComboBox title"
         helperText="Combobox helper text"
+        onChange={action('onChange')}
         {...args}
       />
     </div>
