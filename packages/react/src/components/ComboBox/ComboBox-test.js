@@ -33,7 +33,7 @@ const ControlledComboBox = ({ controlledItem }) => {
   const [onChangeCallCount, setOnChangeCallCount] = useState(0);
   const controlledOnChange = ({ selectedItem }) => {
     setValue(selectedItem);
-    setOnChangeCallCount(onChangeCallCount + 1);
+    setOnChangeCallCount((prevCount) => prevCount + 1);
   };
 
   return (
