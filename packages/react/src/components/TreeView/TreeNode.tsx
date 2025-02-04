@@ -21,7 +21,6 @@ import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 import uniqueId from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
-import { navigate } from '@reach/router';
 
 export type TreeNodeProps = {
   /**
@@ -112,7 +111,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       defaultIsExpanded,
       label,
       onNodeFocusEvent,
-      onSelect,
+      onSelect: onNodeSelect,
       onToggle,
       onTreeSelect,
       renderIcon: Icon,
@@ -293,25 +292,6 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       }
       onNodeFocusEvent?.(event);
     }
-
-    /**
-     * Handles the selecting the node
-     * If the node has an onSelect function defined, then it calls that
-     * For example use on activating a side panel
-     * Otherwise, if the node has a link, then it navigates to that href
-     *
-     * @param {*} event select event
-     * @param {TreeNodeProps} node
-     */
-    const onNodeSelect = (event, node?: TreeNodeProps) => {
-      if (onSelect) {
-        onSelect(event, node);
-      }
-      if (href) {
-        event.preventDefault();
-        navigate(href);
-      }
-    };
 
     useEffect(() => {
       /**
