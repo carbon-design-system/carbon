@@ -26,7 +26,10 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@b6a472f63d85b9c78a3ac5e89422239fc15e9b3c # v3.28.1
         with:
-          languages: javascript
+          languages: javascript-typescript
+          config: |
+            paths-ignore:
+              - 'packages/cli/src/component/templates/**'
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@b6a472f63d85b9c78a3ac5e89422239fc15e9b3c # v3.28.1
