@@ -18,7 +18,6 @@ import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 
 import mdx from './DatePicker.mdx';
-import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/DatePicker',
