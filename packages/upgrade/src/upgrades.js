@@ -369,6 +369,66 @@ export const upgrades = [
         },
       },
       {
+        name: 'enable-v12-tile-radio-icons',
+        description: `
+          Wrap RadioTile components with FeatureFlags enableV12TileRadioIcons
+          
+          Transforms:
+          
+          1. TileGroup with RadioTile:
+          <TileGroup>
+            <RadioTile>...</RadioTile>
+          </TileGroup>
+          
+          Into:
+          <FeatureFlags enableV12TileRadioIcons>
+            <TileGroup>
+              <RadioTile>...</RadioTile>
+            </TileGroup>
+          </FeatureFlags>
+      
+          2. Standalone RadioTile:
+          <RadioTile>...</RadioTile>
+          
+          Into:
+          <FeatureFlags enableV12TileRadioIcons>
+            <RadioTile>...</RadioTile>
+          </FeatureFlags>
+        `,
+
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'enable-v12-tile-radio-icons.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                    '**/dist/**',
+                    '**/build/**',
+                    '**/*.d.ts',
+                    '**/coverage/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            parser: 'tsx', // Enable parsing of TSX files
+          });
+        },
+      },
+      {
         name: 'refactor-to-callout',
         description:
           'Rewrites imports and usages of StaticNotification to Callout',
@@ -393,6 +453,64 @@ export const upgrades = [
             transform,
             paths,
             verbose: options.verbose,
+          });
+        },
+      },
+      {
+        name: 'enable-v12-tile-default-icons',
+        description: `
+          Wrap Tile and TileGroup components with FeatureFlags enableV12TileDefaultIcons
+      
+          Transforms:
+          1. TileGroup with Tiles:
+          <TileGroup>
+            <Tile>...</Tile>
+          </TileGroup>
+      
+          Into:
+          <FeatureFlags enableV12TileDefaultIcons>
+            <TileGroup>
+              <Tile>...</Tile>
+            </TileGroup>
+          </FeatureFlags>
+      
+          2. Standalone Tile:
+          <Tile>...</Tile>
+      
+          Into:
+          <FeatureFlags enableV12TileDefaultIcons>
+            <Tile>...</Tile>
+          </FeatureFlags>
+        `,
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'enable-v12-tile-default-icons.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                    '**/dist/**',
+                    '**/build/**',
+                    '**/*.d.ts',
+                    '**/coverage/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            parser: 'tsx', // Enable parsing of TSX files
           });
         },
       },
