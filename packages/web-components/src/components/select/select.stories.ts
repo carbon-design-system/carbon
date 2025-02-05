@@ -68,8 +68,8 @@ const args = {
   inline: false,
   invalid: false,
   invalidText: 'Error message',
-  labelText: 'Select an option',
-  placeholder: 'Choose an option',
+  labelText: 'Select',
+  placeholder: '',
   size: INPUT_SIZE.MEDIUM,
   readOnly: false,
   warn: false,
@@ -160,6 +160,7 @@ export const Default = {
       warnText,
       value,
       children = html`
+        <cds-select-item value=""></cds-select-item>
         <cds-select-item-group label="Category 1">
           <cds-select-item value="all">Option 1</cds-select-item>
           <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
@@ -220,6 +221,7 @@ export const Inline = {
       warnText,
       value,
       children = html`
+        <cds-select-item value=""></cds-select-item>
         <cds-select-item-group label="Category 1">
           <cds-select-item value="all">Option 1</cds-select-item>
           <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
@@ -291,6 +293,7 @@ export const WithAILabel = {
       warnText,
       value,
       children = html`
+        <cds-select-item value=""></cds-select-item>
         <cds-select-item-group label="Category 1">
           <cds-select-item value="all">Option 1</cds-select-item>
           <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
@@ -355,6 +358,7 @@ export const WithLayer = {
       warnText,
       value,
       children = html`
+        <cds-select-item value=""></cds-select-item>
         <cds-select-item-group label="Category 1">
           <cds-select-item value="all">Option 1</cds-select-item>
           <cds-select-item value="cloudFoundry">Option 2</cds-select-item>

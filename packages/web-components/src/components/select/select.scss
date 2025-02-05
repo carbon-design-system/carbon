@@ -11,6 +11,10 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/select';
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/utilities/convert' as *;
+
+$divider-width: 1px;
 
 :host(#{$prefix}-select) {
   @extend .#{$prefix}--select;
@@ -27,6 +31,23 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
   ::slotted(#{$prefix}-slug:not([revert-active])) {
     transform: translateY(-50%);
+  }
+
+  ::slotted(#{$prefix}-ai-label) {
+    &::before,
+    &::after {
+      position: absolute;
+      background-color: $border-subtle-01;
+      block-size: to-rem(16px);
+      content: '';
+      inline-size: to-rem(1px);
+      inset-inline-start: calc(#{$spacing-06} - #{$divider-width});
+    }
+
+    &::before {
+      display: var(--#{$prefix}-show-before);
+      inset-inline-start: calc(-#{$spacing-03} - #{$divider-width});
+    }
   }
 }
 

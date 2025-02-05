@@ -478,7 +478,10 @@ class CDSSelect extends FormMixin(LitElement) {
         ${this._renderItems(this)}
       </select>
       ${ChevronDown16({ class: `${prefix}--select__arrow` })}
-      <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>
+      <slot
+        name="ai-label"
+        style="--${prefix}-show-before: ${warn || invalid ? 'block' : 'none'}"
+        @slotchange=${handleAILabelSlotChange}></slot>
       <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
       ${!invalid
         ? undefined
