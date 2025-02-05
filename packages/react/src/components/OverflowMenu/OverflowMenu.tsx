@@ -719,6 +719,7 @@ class OverflowMenu extends React.Component<
             aria-haspopup
             aria-expanded={open}
             aria-controls={open ? menuBodyId : undefined}
+            autoAlign={true}
             className={overflowMenuClasses}
             onClick={this.handleClick}
             id={id}
