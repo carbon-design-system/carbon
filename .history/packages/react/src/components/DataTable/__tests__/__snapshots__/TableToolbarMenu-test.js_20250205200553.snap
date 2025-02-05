@@ -45,13 +45,13 @@ exports[`TableToolbarMenu renders as expected - Component API should render 1`] 
       >
         <span
           class="cds--popover-content cds--tooltip-content"
-          style="position: fixed; left: 0px; top: 0px; visibility: visible; transform: translate(0px, 0px);"
+                style="position: fixed; left: 0px; top: 0px; visibility: visible; transform: translate(0px, 0px);"
         >
           Add
           <span
             class="cds--popover-caret cds--popover--auto-align"
           />
-        </span>
+          </span>
       </span>
     </span>
   </span>
