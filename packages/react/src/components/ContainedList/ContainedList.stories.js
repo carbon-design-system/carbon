@@ -25,8 +25,6 @@ import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import Tag from '../Tag';
 
-import { usePrefix } from '../../internal/usePrefix';
-
 import mdx from './ContainedList.mdx';
 
 import ContainedList, { ContainedListItem } from '.';
@@ -295,7 +293,7 @@ export const _WithLayer = () => {
 };
 
 export const UsageExamples = () => {
-  const prefix = usePrefix();
+  const prefix = 'cds';
 
   return (
     <>
