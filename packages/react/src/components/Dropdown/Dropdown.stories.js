@@ -193,8 +193,7 @@ export const Default = (args) => {
         id="default"
         titleText="Dropdown label"
         helperText="This is some helper text"
-        initialSelectedItem={items[1]}
-        label="Option 1"
+        label="Choose an option"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         {...args}
