@@ -23,6 +23,7 @@ import '../layer';
 import '../ai-label';
 import '../icon-button';
 import '../../../.storybook/templates/with-layer';
+import styles from './select-story.scss?lit';
 
 const content = html`
   <div slot="body-text">
@@ -293,6 +294,9 @@ export const WithAILabel = {
       warnText,
       value,
       children = html`
+        <style>
+          ${styles}
+        </style>
         <cds-select-item value=""></cds-select-item>
         <cds-select-item-group label="Category 1">
           <cds-select-item value="all">Option 1</cds-select-item>
