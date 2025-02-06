@@ -246,7 +246,6 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         type="checkbox"
         part="input"
         class="${`${prefix}--checkbox`}"
-        aria-checked="${indeterminate ? 'mixed' : String(Boolean(checked))}"
         aria-readonly="${String(Boolean(readonly))}"
         .checked="${checked}"
         ?disabled="${disabled}"

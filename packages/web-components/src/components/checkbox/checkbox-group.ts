@@ -195,7 +195,7 @@ class CDSCheckboxGroup extends LitElement {
         class="${fieldsetClasses}"
         ?data-invalid=${invalid}
         ?disabled=${disabled}
-        aria-readonly=${readonly}
+        aria-disabled=${readonly}
         ?aria-labelledby=${ariaLabelledBy || legendId}
         ?aria-describedby=${!invalid && !warn && helper ? helperId : undefined}
         orientation=${orientation}>
