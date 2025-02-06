@@ -18,6 +18,7 @@ module.exports = {
     '!**/*.stories.js',
     '!**/*-test.e2e.js',
   ],
+  testPathIgnorePatterns: ['packages/web-components/*'],
   transformIgnorePatterns: ['<rootDir>/node_modules/(?!lodash-es)'],
   moduleNameMapper: {
     // This is a temporary workaround from moving to Jest v28. In this update,
