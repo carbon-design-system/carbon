@@ -93,10 +93,6 @@ class CDSCopy extends CDSIconButton {
   connectedCallback() {
     this.closeOnActivation = false;
 
-    this.align = this.align || 'bottom';
-
-    this.autoalign = this.autoalign || false;
-
     this.addEventListener('click', this._handleClickButton);
 
     super.connectedCallback();
