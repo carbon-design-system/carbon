@@ -102,7 +102,7 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
 }
 
 #{$prefix}-selectable-tile {
-  margin-block-end: 1rem;
+  margin-block-end: $spacing-05;
 }
 
 .ai-label-selectable-tile-container #{$prefix}-tile-group > div {
@@ -118,5 +118,5 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
   #{$prefix}-tile-group
   #{$prefix}-selectable-tile {
   block-size: 200px;
-  margin-inline-end: 1rem;
+  margin-inline-end: $spacing-05;
 }
