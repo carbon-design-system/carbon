@@ -616,6 +616,12 @@ export const WithIcons = () => {
   );
 };
 
+export const LinksMainMessage = (currentPage) => (
+  <main>
+    <h3>The current page is: {currentPage}</h3>
+  </main>
+);
+
 export const WithLinks = () => {
   const [currentPage, setCurrentPage] = React.useState(
     'Artificial Intelligence'
@@ -630,9 +636,7 @@ export const WithLinks = () => {
         onSelect={(event, node) => setCurrentPage(node.value)}>
         {renderTree({ nodes, withLinks: true })}
       </TreeView>
-      <main>
-        <h3>The current page is: {currentPage}</h3>
-      </main>
+      <LinksMainMessage currentPage={currentPage} />
     </div>
   );
 };
