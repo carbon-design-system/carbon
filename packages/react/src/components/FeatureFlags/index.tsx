@@ -61,6 +61,7 @@ function FeatureFlags({
     'enable-treeview-controllable': enableTreeviewControllable,
     'enable-experimental-focus-wrap-without-sentinels':
       enableExperimentalFocusWrapWithoutSentinels,
+    'enable-dialog-element': enableDialogElement,
     'enable-v12-dynamic-floating-styles': enableV12DynamicFloatingStyles,
     ...flags,
   };
@@ -110,6 +111,7 @@ FeatureFlags.propTypes = {
   enableV12Overflowmenu: PropTypes.bool,
   enableTreeviewControllable: PropTypes.bool,
   enableExperimentalFocusWrapWithoutSentinels: PropTypes.bool,
+  enableDialogElement: PropTypes.bool,
   enableV12DynamicFloatingStyles: PropTypes.bool,
 };
 

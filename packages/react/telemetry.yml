@@ -327,6 +327,7 @@ collect:
         - tilePadding
         # FeatureFlags
         - enableExperimentalFocusWrapWithoutSentinels
+        - enableDialogElement
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu

@@ -32,6 +32,7 @@ import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
+import { unstable__Dialog as Dialog } from '../Dialog/index';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 
@@ -279,9 +280,9 @@ const Modal = React.forwardRef(function Modal(
     [`${prefix}--btn--loading`]: loadingStatus !== 'inactive',
   });
   const loadingActive = loadingStatus !== 'inactive';
-  const focusTrapWithoutSentinels = useFeatureFlag(
-    'enable-experimental-focus-wrap-without-sentinels'
-  );
+  const isDialog =
+    useFeatureFlag('enable-experimental-focus-wrap-without-sentinels') ||
+    useFeatureFlag('enable-dialog-element');
 
   function isCloseButton(element: Element) {
     return (
@@ -303,18 +304,6 @@ const Modal = React.forwardRef(function Modal(
         !isCloseButton(evt.target as Element)
       ) {
         onRequestSubmit(evt);
-      }
-
-      if (
-        focusTrapWithoutSentinels &&
-        match(evt, keys.Tab) &&
-        innerModal.current
-      ) {
-        wrapFocusWithoutSentinels({
-          containerNode: innerModal.current,
-          currentActiveNode: evt.target,
-          event: evt as any,
-        });
       }
     }
   }
@@ -611,12 +600,13 @@ const Modal = React.forwardRef(function Modal(
       level={0}
       onKeyDown={handleKeyDown}
       onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
-      onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
+      // onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
+      onBlur={handleBlur}
       className={modalClasses}
       role="presentation"
       ref={ref}>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      {!focusTrapWithoutSentinels && (
+      {!isDialog && (
         <span
           ref={startTrap}
           tabIndex={0}
@@ -627,7 +617,7 @@ const Modal = React.forwardRef(function Modal(
       )}
       {modalBody}
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      {!focusTrapWithoutSentinels && (
+      {!isDialog && (
         <span
           ref={endTrap}
           tabIndex={0}
