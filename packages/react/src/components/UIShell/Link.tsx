@@ -11,26 +11,32 @@ import React, {
   type ForwardedRef,
   forwardRef,
   type WeakValidationMap,
-  type Ref,
 } from 'react';
 import deprecate from '../../prop-types/deprecate';
-import { type PolymorphicProps } from '../../types/common';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
 // Note: Maybe we should use `as` instead of `element`? `as` appears to be
 // standard and is used in other places in this project.
 
-type LinkBaseProps<E extends ElementType> = {
+export interface LinkBaseProps {
   /**
    * @deprecated Use `as` instead
    */
-  element?: E | undefined;
-  ref?: Ref<E>;
-};
+  element?: undefined;
+  ref?: React.RefObject<any>;
+}
 
-export type LinkProps<E extends ElementType> = PolymorphicProps<
-  E,
-  LinkBaseProps<E>
->;
+// export type LinkProps<E extends ElementType> = PolymorphicProps<
+//   E,
+//   LinkBaseProps<E>
+// >;
+
+export type LinkProps<T extends React.ElementType> =
+  PolymorphicComponentPropWithRef<T, LinkBaseProps>;
+
+type LinkComponent = <T extends React.ElementType = 'a'>(
+  props: LinkProps<T>
+) => React.ReactElement | any;
 
 function LinkRenderFunction<E extends ElementType = 'a'>(
   {
@@ -53,12 +59,12 @@ function LinkRenderFunction<E extends ElementType = 'a'>(
  * in their own components to support use-cases like `react-router` or
  * `@reach/router`
  */
-const Link = forwardRef(LinkRenderFunction) as (<E extends ElementType = 'a'>(
-  props: LinkProps<E>
-) => JSX.Element) & {
+const Link: LinkComponent & {
   displayName?: string;
   propTypes?: WeakValidationMap<LinkProps<any>>;
-};
+} = forwardRef(LinkRenderFunction) as <E extends ElementType = 'a'>(
+  props: LinkProps<E>
+) => JSX.Element;
 
 const LinkPropTypes = {
   /**
