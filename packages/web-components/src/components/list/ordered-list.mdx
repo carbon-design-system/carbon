@@ -1,5 +1,8 @@
-import { ArgTypes, Markdown } from '@storybook/blocks';
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as OrderedListStories from './ordered-list.stories';
+
+<Meta of={OrderedListStories} />
 
 # List
 
@@ -46,27 +49,15 @@ import '@carbon/web-components/es/components/list/index.js';
   <cds-list-item>Ordered List level 1</cds-list-item>
   <cds-list-item>Ordered List level 1</cds-list-item>
 </cds-ordered-list>
-
-<h3>cds-unordered-list</h3>
-
-<cds-unordered-list>
-  <cds-list-item>
-    Unordered List level 1
-    <cds-unordered-list>
-      <cds-list-item>Unordered List level 2</cds-list-item>
-      <cds-list-item>
-        Unordered List level 2
-        <cds-unordered-list>
-          <cds-list-item>Unordered List level 2</cds-list-item>
-          <cds-list-item>Unordered List level 2</cds-list-item>
-        </cds-unordered-list>
-      </cds-list-item>
-    </cds-unordered-list>
-  </cds-list-item>
-  <cds-list-item>Unordered List level 1</cds-list-item>
-  <cds-list-item>Unordered List level 1</cds-list-item>
-</cds-unordered-list>
 ```
+
+## `<cds-ordered-list>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-ordered-list native>`) and `false` means not setting the attribute (e.g.
+`<cds-ordered-list>` without `native` attribute).
+
+<ArgTypes of="cds-ordered-list" />
 
 ## `<cds-list-item>` attributes and properties
 
