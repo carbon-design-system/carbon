@@ -1016,14 +1016,16 @@ const ComboBox = forwardRef(
                       toggleMenu();
                     }
                   }
-                  if (!inputValue && highlightedIndex == -1) {
-                    if (event.key == 'Enter') {
-                      if (!event.currentTarget.value) {
-                        if (!isOpen) toggleMenu();
-                        selectItem(null);
-                        event.preventDownshiftDefault = true;
-                      }
-                    }
+                  if (
+                    !inputValue &&
+                    highlightedIndex == -1 &&
+                    event.key == 'Enter'
+                  ) {
+                    if (!isOpen) toggleMenu();
+                    selectItem(null);
+                    event.preventDownshiftDefault = true;
+                    if (event.currentTarget.ariaExpanded === 'false')
+                      openMenu();
                   }
                   if (typeahead && event.key === 'Tab') {
                     //  event.preventDefault();

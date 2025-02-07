@@ -91,9 +91,7 @@ test.describe('@avt ComboBox', () => {
     await expect(menu).toBeHidden();
     await expect(combobox).toBeFocused();
     await page.keyboard.press('Enter');
-    // Expect to be hidden if no highlight or text in combobox.
-    await expect(menu).toBeHidden();
-    await page.keyboard.press('Space');
+    await expect(menu).toBeVisible();
     // Expect focus to be retained when no initial selected item after Enter
     await expect(combobox).toBeFocused();
     await page.keyboard.press('ArrowDown');
