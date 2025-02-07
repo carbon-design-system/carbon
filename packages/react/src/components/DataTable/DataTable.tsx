@@ -520,7 +520,6 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       : translationKeys.expandAll;
     return {
       ...rest,
-      ariaLabel: t(translationKey), // TODO: remove in v12
       'aria-label': t(translationKey),
       // Provide a string of all the expanded row id's, separated by a space.
       'aria-controls': rowIds.map((id) => `expanded-row-${id}`).join(' '),
@@ -588,7 +587,6 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       // handler
       onExpand: composeEventHandlers([this.handleOnExpandRow(row.id), onClick]),
       isExpanded: row.isExpanded,
-      ariaLabel: t(translationKey), // TODO remove in v12
       'aria-label': t(translationKey),
       'aria-controls': `expanded-row-${row.id}`,
       isSelected: row.isSelected,
@@ -649,7 +647,6 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
         ]),
         id: `${this.getTablePrefix()}__select-row-${row.id}`,
         name: `select-row-${this.instanceId}`,
-        ariaLabel: t(translationKey), // TODO remove in v12
         'aria-label': t(translationKey),
         disabled: row.disabled,
         radio: this.props.radio,
@@ -670,7 +667,6 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
 
     return {
       ...rest,
-      ariaLabel: t(translationKey), // TODO remove in v12
       'aria-label': t(translationKey),
       checked,
       id: `${this.getTablePrefix()}__select-all`,
