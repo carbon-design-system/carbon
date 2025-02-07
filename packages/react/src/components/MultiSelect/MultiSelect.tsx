@@ -429,10 +429,12 @@ const MultiSelect = React.forwardRef(
       clearSelection,
     } = useSelection({
       disabled,
+      // @ts-ignore
       initialSelectedItems,
       onChange,
       selectedItems: selected,
       selectAll,
+      // @ts-ignore
       filteredItems,
     });
 

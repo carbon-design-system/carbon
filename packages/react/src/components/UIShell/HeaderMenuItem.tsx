@@ -65,7 +65,7 @@ const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
     return (
       <li className={className} role={role}>
         <Link
-          {...rest}
+          {...(rest as LinkProps<E>)}
           aria-current={ariaCurrent}
           className={linkClassName}
           ref={ref}
