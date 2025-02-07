@@ -267,7 +267,7 @@ const Modal = React.forwardRef(function Modal(
   const button = useRef<HTMLButtonElement>(null);
   const secondaryButton = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const innerModal = useRef<HTMLDivElement>(null);
+  const innerModal = useRef<HTMLDialogElement>(null);
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
   const [isScrollable, setIsScrollable] = useState(false);
@@ -294,9 +294,9 @@ const Modal = React.forwardRef(function Modal(
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
     evt.stopPropagation();
     if (open) {
-      if (match(evt, keys.Escape)) {
-        onRequestClose(evt);
-      }
+      // if (match(evt, keys.Escape)) {
+      //   onRequestClose(evt);
+      // }
 
       if (
         match(evt, keys.Enter) &&
@@ -308,37 +308,37 @@ const Modal = React.forwardRef(function Modal(
     }
   }
 
-  function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
-    const target = evt.target as Node;
-    evt.stopPropagation();
-    if (
-      !preventCloseOnClickOutside &&
-      !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
-      innerModal.current &&
-      !innerModal.current.contains(target)
-    ) {
-      onRequestClose(evt);
-    }
-  }
+  // function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
+  //   const target = evt.target as Node;
+  //   evt.stopPropagation();
+  //   if (
+  //     !preventCloseOnClickOutside &&
+  //     !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
+  //     innerModal.current &&
+  //     !innerModal.current.contains(target)
+  //   ) {
+  //     onRequestClose(evt);
+  //   }
+  // }
 
-  function handleBlur({
-    target: oldActiveNode,
-    relatedTarget: currentActiveNode,
-  }: React.FocusEvent<HTMLDivElement>) {
-    if (open && currentActiveNode && oldActiveNode) {
-      const { current: bodyNode } = innerModal;
-      const { current: startTrapNode } = startTrap;
-      const { current: endTrapNode } = endTrap;
-      wrapFocus({
-        bodyNode,
-        startTrapNode,
-        endTrapNode,
-        currentActiveNode,
-        oldActiveNode,
-        selectorsFloatingMenus,
-      });
-    }
-  }
+  // function handleBlur({
+  //   target: oldActiveNode,
+  //   relatedTarget: currentActiveNode,
+  // }: React.FocusEvent<HTMLDivElement>) {
+  //   if (open && currentActiveNode && oldActiveNode) {
+  //     const { current: bodyNode } = innerModal;
+  //     const { current: startTrapNode } = startTrap;
+  //     const { current: endTrapNode } = endTrap;
+  //     wrapFocus({
+  //       bodyNode,
+  //       startTrapNode,
+  //       endTrapNode,
+  //       currentActiveNode,
+  //       oldActiveNode,
+  //       selectorsFloatingMenus,
+  //     });
+  //   }
+  // }
 
   const onSecondaryButtonClick = onSecondarySubmit
     ? onSecondarySubmit
@@ -348,7 +348,7 @@ const Modal = React.forwardRef(function Modal(
     `${prefix}--modal`,
     {
       [`${prefix}--modal-tall`]: !passiveModal,
-      'is-visible': open,
+      // 'is-visible': open,
       [`${prefix}--modal--danger`]: danger,
       [`${prefix}--modal--slug`]: slug,
       [`${prefix}--modal--decorator`]: decorator,
@@ -361,9 +361,9 @@ const Modal = React.forwardRef(function Modal(
     [`${prefix}--modal-container--full-width`]: isFullWidth,
   });
 
-  const contentClasses = classNames(`${prefix}--modal-content`, {
-    [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
-  });
+  // const contentClasses = classNames(`${prefix}--modal-content`, {
+  //   [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
+  // });
 
   const footerClasses = classNames(`${prefix}--modal-footer`, {
     [`${prefix}--modal-footer--three-button`]:
@@ -380,7 +380,7 @@ const Modal = React.forwardRef(function Modal(
   const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
 
   const hasScrollingContentProps =
-    hasScrollingContent || isScrollable
+    (hasScrollingContent || isScrollable) && !isDialog
       ? {
           tabIndex: 0,
           role: 'region',
@@ -398,78 +398,78 @@ const Modal = React.forwardRef(function Modal(
     alertDialogProps['aria-describedby'] = modalBodyId;
   }
 
-  useEffect(() => {
-    return () => {
-      toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
-    };
-  }, [prefix]);
+  // useEffect(() => {
+  //   return () => {
+  //     toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+  //   };
+  // }, [prefix]);
 
-  useEffect(() => {
-    toggleClass(
-      document.body,
-      `${prefix}--body--with-modal-open`,
-      open ?? false
-    );
-  }, [open, prefix]);
+  // useEffect(() => {
+  //   toggleClass(
+  //     document.body,
+  //     `${prefix}--body--with-modal-open`,
+  //     open ?? false
+  //   );
+  // }, [open, prefix]);
 
-  useEffect(() => {
-    if (!open && launcherButtonRef) {
-      setTimeout(() => {
-        launcherButtonRef?.current?.focus();
-      });
-    }
-  }, [open, launcherButtonRef]);
+  // useEffect(() => {
+  //   if (!open && launcherButtonRef) {
+  //     setTimeout(() => {
+  //       launcherButtonRef?.current?.focus();
+  //     });
+  //   }
+  // }, [open, launcherButtonRef]);
 
-  useEffect(() => {
-    const initialFocus = (focusContainerElement: HTMLElement | null) => {
-      const containerElement = focusContainerElement || innerModal.current;
-      const primaryFocusElement = containerElement
-        ? containerElement.querySelector<HTMLElement | SVGElement>(
-            danger ? `.${prefix}--btn--secondary` : selectorPrimaryFocus
-          )
-        : null;
+  // useEffect(() => {
+  //   const initialFocus = (focusContainerElement: HTMLElement | null) => {
+  //     const containerElement = focusContainerElement || innerModal.current;
+  //     const primaryFocusElement = containerElement
+  //       ? containerElement.querySelector<HTMLElement | SVGElement>(
+  //           danger ? `.${prefix}--btn--secondary` : selectorPrimaryFocus
+  //         )
+  //       : null;
 
-      if (primaryFocusElement) {
-        return primaryFocusElement;
-      }
+  //     if (primaryFocusElement) {
+  //       return primaryFocusElement;
+  //     }
 
-      return button && button.current;
-    };
+  //     return button && button.current;
+  //   };
 
-    const focusButton = (focusContainerElement: HTMLElement | null) => {
-      const target = initialFocus(focusContainerElement);
-      if (target !== null) {
-        target.focus();
-      }
-    };
+  //   const focusButton = (focusContainerElement: HTMLElement | null) => {
+  //     const target = initialFocus(focusContainerElement);
+  //     if (target !== null) {
+  //       target.focus();
+  //     }
+  //   };
 
-    if (open) {
-      focusButton(innerModal.current);
-    }
-  }, [open, selectorPrimaryFocus, danger, prefix]);
+  //   if (open) {
+  //     focusButton(innerModal.current);
+  //   }
+  // }, [open, selectorPrimaryFocus, danger, prefix]);
 
-  useIsomorphicEffect(() => {
-    if (contentRef.current) {
-      setIsScrollable(
-        contentRef.current.scrollHeight > contentRef.current.clientHeight
-      );
-    }
+  // useIsomorphicEffect(() => {
+  //   if (contentRef.current) {
+  //     setIsScrollable(
+  //       contentRef.current.scrollHeight > contentRef.current.clientHeight
+  //     );
+  //   }
 
-    function handler() {
-      if (contentRef.current) {
-        setIsScrollable(
-          contentRef.current.scrollHeight > contentRef.current.clientHeight
-        );
-      }
-    }
+  // function handler() {
+  //   if (contentRef.current) {
+  //     setIsScrollable(
+  //       contentRef.current.scrollHeight > contentRef.current.clientHeight
+  //     );
+  //   }
+  // }
 
-    const debouncedHandler = debounce(handler, 200);
-    window.addEventListener('resize', debouncedHandler);
-    return () => {
-      debouncedHandler.cancel();
-      window.removeEventListener('resize', debouncedHandler);
-    };
-  }, []);
+  // const debouncedHandler = debounce(handler, 200);
+  // window.addEventListener('resize', debouncedHandler);
+  // return () => {
+  //   debouncedHandler.cancel();
+  //   window.removeEventListener('resize', debouncedHandler);
+  // };
+  // }, []);
 
   // AILabel always size `sm`
   let normalizedDecorator = React.isValidElement(slug ?? decorator)
@@ -507,9 +507,10 @@ const Modal = React.forwardRef(function Modal(
   );
 
   const modalBody = (
-    <div
+    <Dialog
+      open={open}
       ref={innerModal}
-      role="dialog"
+      // role="dialog"
       {...alertDialogProps}
       className={containerClasses}
       aria-label={ariaLabel}
@@ -591,7 +592,7 @@ const Modal = React.forwardRef(function Modal(
           </Button>
         </ButtonSet>
       )}
-    </div>
+    </Dialog>
   );
 
   return (
@@ -599,9 +600,9 @@ const Modal = React.forwardRef(function Modal(
       {...rest}
       level={0}
       onKeyDown={handleKeyDown}
-      onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
+      onClick={rest?.onClick}
       // onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
-      onBlur={handleBlur}
+      // onBlur={handleBlur}
       className={modalClasses}
       role="presentation"
       ref={ref}>

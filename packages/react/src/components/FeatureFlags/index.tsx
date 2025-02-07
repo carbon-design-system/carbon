@@ -28,6 +28,7 @@ export interface FeatureFlagsProps {
   enableV12Overflowmenu?: boolean;
   enableTreeviewControllable?: boolean;
   enableExperimentalFocusWrapWithoutSentinels?: boolean;
+  enableDialogElement?: boolean;
   enableV12DynamicFloatingStyles?: boolean;
 }
 /**
@@ -49,6 +50,7 @@ function FeatureFlags({
   enableV12Overflowmenu = false,
   enableTreeviewControllable = false,
   enableExperimentalFocusWrapWithoutSentinels = false,
+  enableDialogElement = false,
   enableV12DynamicFloatingStyles = false,
 }: FeatureFlagsProps): JSX.Element {
   const parentScope = useContext(FeatureFlagContext);
