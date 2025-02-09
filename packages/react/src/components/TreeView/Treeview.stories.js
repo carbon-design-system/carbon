@@ -616,7 +616,7 @@ export const WithIcons = () => {
   );
 };
 
-const TreeViewWithLinks = React.memo(({setCurrentPage}) => {
+const TreeViewWithLinks = React.memo(({ setCurrentPage }) => {
   return (
     <TreeView
       label="Tree View"
@@ -642,7 +642,7 @@ export const WithLinks = () => {
       </main>
     </div>
   );
-}
+};
 
 export const WithControlledExpansion = () => {
   const nodes = [
