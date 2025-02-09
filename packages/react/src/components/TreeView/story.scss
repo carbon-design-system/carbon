@@ -10,4 +10,8 @@
 
 #page-body {
   display: flex;
+
+  main {
+    flex: 1;
+  }
 }
