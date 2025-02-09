@@ -616,26 +616,33 @@ export const WithIcons = () => {
   );
 };
 
+const TreeViewWithLinks = React.memo(({setCurrentPage}) => {
+  return (
+    <TreeView
+      label="Tree View"
+      hideLabel
+      active="1"
+      selected={['1']}
+      onSelect={(event, node) => setCurrentPage(node.value)}>
+      {renderTree({ nodes, withLinks: true })}
+    </TreeView>
+  );
+});
+
 export const WithLinks = () => {
   const [currentPage, setCurrentPage] = React.useState(
     'Artificial Intelligence'
   );
+
   return (
     <div id="page-body">
-      <TreeView
-        label="Tree View"
-        hideLabel
-        active="1"
-        selected={['1']}
-        onSelect={(event, node) => setCurrentPage(node.value)}>
-        {renderTree({ nodes, withLinks: true })}
-      </TreeView>
+      <TreeViewWithLinks setCurrentPage={setCurrentPage} />
       <main>
         <h3>The current page is: {currentPage}</h3>
       </main>
     </div>
   );
-};
+}
 
 export const WithControlledExpansion = () => {
   const nodes = [
