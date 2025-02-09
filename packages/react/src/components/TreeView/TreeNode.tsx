@@ -204,9 +204,6 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     function handleClick(event: React.MouseEvent) {
       event.stopPropagation();
       if (!disabled) {
-        if (href) {
-          currentNode.current?.click();
-        }
         onTreeSelect?.(event, { id, label, value });
         onNodeSelect?.(event, { id, label, value });
         rest?.onClick?.(event as React.MouseEvent<HTMLElement>);
@@ -279,6 +276,9 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       }
       if (matches(event, [keys.Enter, keys.Space])) {
         event.preventDefault();
+        if (href) {
+          currentNode.current?.click();
+        }
         handleClick(event);
       }
       rest?.onKeyDown?.(event);
