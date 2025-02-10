@@ -133,7 +133,6 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     onExpand?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     [key: string]: unknown;
   }) => {
-    ariaLabel: string; // TODO Remove in v12
     ['aria-label']: string;
     isExpanded: boolean;
     onExpand: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -144,7 +143,6 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
-    ariaLabel: string; // TODO Remove in v12
     ['aria-label']: string;
     disabled: boolean | undefined;
     isExpanded?: boolean;
@@ -165,7 +163,6 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
-    ariaLabel: string;
     'aria-label': string;
     checked?: boolean | undefined;
     disabled?: boolean | undefined;
