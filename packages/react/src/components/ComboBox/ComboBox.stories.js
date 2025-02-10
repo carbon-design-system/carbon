@@ -378,8 +378,6 @@ export const _fullyControlled = (args) => {
   );
 };
 
-
-
 _fullyControlled.argTypes = { ...sharedArgTypes };
 
 AutocompleteWithTypeahead.argTypes = {
