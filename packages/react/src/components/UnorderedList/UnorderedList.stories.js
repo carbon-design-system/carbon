@@ -26,13 +26,25 @@ export default {
   },
 };
 
-export const Default = () => (
-  <UnorderedList>
+export const Default = (args) => (
+  <UnorderedList {...args}>
     <ListItem>Unordered List level 1</ListItem>
     <ListItem>Unordered List level 1</ListItem>
     <ListItem>Unordered List level 1</ListItem>
   </UnorderedList>
 );
+
+Default.args = {
+  isExpressive: false,
+};
+
+Default.argTypes = {
+  isExpressive: {
+    control: {
+      type: 'boolean',
+    },
+  },
+};
 
 export const Nested = () => {
   const regularProps = props.regular();
@@ -59,23 +71,3 @@ export const Nested = () => {
 };
 
 Nested.storyName = 'nested';
-
-export const Playground = (args) => (
-  <UnorderedList {...args}>
-    <ListItem>Unordered List level 1</ListItem>
-    <ListItem>Unordered List level 1</ListItem>
-    <ListItem>Unordered List level 1</ListItem>
-  </UnorderedList>
-);
-
-Playground.args = {
-  isExpressive: false,
-};
-
-Playground.argTypes = {
-  isExpressive: {
-    control: {
-      type: 'boolean',
-    },
-  },
-};

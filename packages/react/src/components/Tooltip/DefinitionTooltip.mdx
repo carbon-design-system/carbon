@@ -1,5 +1,6 @@
 import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import * as DefinitionTooltipStories from './DefinitionTooltip.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -34,7 +35,15 @@ The `DefinitionTooltip` is made up of two parts: a term and the tooltip itself.
 You can customize the contents of the tooltip through the `definition` prop. You
 can customize the term by providing your own `children` to this component.
 
-<Canvas of={DefinitionTooltipStories.Default} />
+<Canvas
+  of={DefinitionTooltipStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DefinitionTooltipStories.Default),
+    },
+  ]}
+/>
 
 ### Customizing the content of a definition tooltip
 

@@ -40,7 +40,11 @@ export default {
   },
 };
 
-export const Default = () => <Link href="#">Link</Link>;
+export const Default = (args) => (
+  <Link href="#" {...args}>
+    Link
+  </Link>
+);
 
 export const Inline = () => (
   <>
@@ -64,14 +68,11 @@ export const Inline = () => (
   </>
 );
 
-export const PairedWithIcon = () => (
-  <Link href="#" renderIcon={() => <ArrowRight aria-label="Arrow Right" />}>
+export const PairedWithIcon = (args) => (
+  <Link
+    href="#"
+    renderIcon={() => <ArrowRight aria-label="Arrow Right" />}
+    {...args}>
     Carbon Docs
-  </Link>
-);
-
-export const Playground = (args) => (
-  <Link href="#" {...args}>
-    Link
   </Link>
 );

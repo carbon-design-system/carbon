@@ -8,7 +8,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ComposedModal, { ModalBody } from './ComposedModal';
 import { ModalHeader } from './ModalHeader';
@@ -376,7 +376,7 @@ describe('ComposedModal', () => {
     );
 
     expect(
-      screen.getByRole('button', { name: 'AI - Show information' })
+      screen.getByRole('button', { name: 'AI Show information' })
     ).toBeInTheDocument();
     spy.mockRestore();
   });
@@ -395,5 +395,36 @@ describe('ComposedModal', () => {
     const modal = screen.getByRole('dialog');
     await userEvent.click(modal);
     expect(onClick).toHaveBeenCalled();
+  });
+
+  it('should close when clicked on outside background layer', async () => {
+    const onClose = jest.fn();
+    render(
+      <ComposedModal open onClose={onClose}>
+        <ModalBody>This is the modal body content</ModalBody>
+      </ComposedModal>
+    );
+    const backgroundLayer = screen.getByRole('presentation');
+    await userEvent.click(backgroundLayer);
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('should NOT close when clicked inside dialog window, dragged outside and released mouse button', async () => {
+    const onClose = jest.fn();
+    render(
+      <ComposedModal open onClose={onClose}>
+        <ModalBody data-testid="modal-body-1">
+          This is the modal body content
+        </ModalBody>
+      </ComposedModal>
+    );
+
+    const modalBody = screen.getByTestId('modal-body-1');
+    const backgroundLayer = screen.getByRole('presentation');
+
+    fireEvent.mouseDown(modalBody, { target: modalBody });
+    fireEvent.click(backgroundLayer, { target: backgroundLayer });
+
+    expect(onClose).not.toHaveBeenCalled();
   });
 });

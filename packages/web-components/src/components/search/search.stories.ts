@@ -117,7 +117,7 @@ export const Expandable = {
       <cds-search
         size="lg"
         expandable
-        close-button-assistive-text="Clear search input"
+        close-button-label-text="Clear search input"
         label-text="Search"
         placeholder="Find your items"
         type="text"></cds-search>
@@ -173,7 +173,7 @@ export const Playground = {
     return html`
       <cds-search
         autocomplete="${autoComplete}"
-        close-button-assistive-text="${ifDefined(closeButtonLabelText)}"
+        close-button-label-text="${ifDefined(closeButtonLabelText)}"
         color-scheme="${ifDefined(colorScheme)}"
         ?disabled="${disabled}"
         label-text="${ifDefined(labelText)}"

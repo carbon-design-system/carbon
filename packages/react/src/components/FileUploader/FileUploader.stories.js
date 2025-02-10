@@ -32,26 +32,6 @@ export default {
   },
 };
 
-export const Default = () => {
-  return (
-    <div className="cds--file__container">
-      <FileUploader
-        labelTitle="Upload files"
-        labelDescription="Max file size is 500 MB. Only .jpg files are supported."
-        buttonLabel="Add file"
-        buttonKind="primary"
-        size="md"
-        filenameStatus="edit"
-        accept={['.jpg', '.png']}
-        multiple={true}
-        disabled={false}
-        iconDescription="Delete file"
-        name=""
-      />
-    </div>
-  );
-};
-
 export const _FileUploaderItem = (args) => {
   return (
     <FileUploaderItem
@@ -177,14 +157,14 @@ export const Skeleton = () => (
   </div>
 );
 
-export const Playground = (args) => {
+export const Default = (args) => {
   return (
     <div className="cds--file__container">
       <FileUploader {...args} />
     </div>
   );
 };
-Playground.args = {
+Default.args = {
   labelTitle: 'Upload files',
   labelDescription: 'Max file size is 500 MB. Only .jpg files are supported.',
   buttonLabel: 'Add file',
@@ -197,7 +177,7 @@ Playground.args = {
   iconDescription: 'Delete file',
   name: '',
 };
-Playground.argTypes = {
+Default.argTypes = {
   onChange: { action: 'onChange' },
   onClick: { action: 'onClick' },
   onDelete: { action: 'onDelete' },

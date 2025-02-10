@@ -17,6 +17,7 @@
 @use './components/button/tokens' as button;
 @use './components/notification/tokens' as notification;
 @use './components/tag/tokens' as tag;
+@use './components/icon-indicator/tokens' as icon-indicator;
 
 /// Specify a Map of zones where the key will be used as part of the selector
 /// and the value will be a map used to emit CSS Custom Properties for all color
@@ -31,7 +32,8 @@ $zones: (
 $-components: (
   button.$button-tokens,
   notification.$notification-tokens,
-  tag.$tag-tokens
+  tag.$tag-tokens,
+  icon-indicator.$status-tokens
 );
 
 @each $name, $theme in $zones {

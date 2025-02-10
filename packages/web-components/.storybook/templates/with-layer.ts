@@ -11,7 +11,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import Layers from '@carbon/icons/lib/layers/16.js';
 import { prefix } from '../../src/globals/settings';
-
+import '../../src/components/layer/index.js';
 import styles from './with-layer.scss?lit';
 
 /**

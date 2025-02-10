@@ -896,8 +896,10 @@ export interface ActionableNotificationProps
   onCloseButtonClick?(event: MouseEvent): void;
 
   /**
-   * By default, this value is "alertdialog". You can also provide an alternate
-   * role if it makes sense from from an accessibility perspective.
+   * Provide an accessible role to be used. Defaults to `alertdialog`. Any other
+   * value will disable the wrapping of focus. To remain accessible, additional
+   * work is required. See the storybook docs for more info:
+   * https://react.carbondesignsystem.com/?path=/docs/components-notifications-actionable--overview#using-the-role-prop
    */
   role?: string;
 
@@ -959,7 +961,7 @@ export function ActionableNotification({
   );
 
   useIsomorphicEffect(() => {
-    if (hasFocus) {
+    if (hasFocus && role === 'alertdialog') {
       const button = document.querySelector(
         'button.cds--actionable-notification__action-button'
       ) as HTMLButtonElement;
@@ -971,7 +973,12 @@ export function ActionableNotification({
     target: oldActiveNode,
     relatedTarget: currentActiveNode,
   }) {
-    if (isOpen && currentActiveNode && oldActiveNode) {
+    if (
+      isOpen &&
+      currentActiveNode &&
+      oldActiveNode &&
+      role === 'alertdialog'
+    ) {
       const { current: bodyNode } = innerModal;
       const { current: startTrapNode } = startTrap;
       const { current: endTrapNode } = endTrap;
@@ -986,7 +993,12 @@ export function ActionableNotification({
   }
 
   function handleKeyDown(event) {
-    if (isOpen && match(event, keys.Tab) && ref.current) {
+    if (
+      isOpen &&
+      match(event, keys.Tab) &&
+      ref.current &&
+      role === 'alertdialog'
+    ) {
       wrapFocusWithoutSentinels({
         containerNode: ref.current,
         currentActiveNode: event.target,
@@ -1178,8 +1190,10 @@ ActionableNotification.propTypes = {
   onCloseButtonClick: PropTypes.func,
 
   /**
-   * By default, this value is "alertdialog". You can also provide an alternate
-   * role if it makes sense from the accessibility-side.
+   * Provide an accessible role to be used. Defaults to `alertdialog`. Any other
+   * value will disable the wrapping of focus. To remain accessible, additional
+   * work is required. See the storybook docs for more info:
+   * https://react.carbondesignsystem.com/?path=/docs/components-notifications-actionable--overview#using-the-role-prop
    */
   role: PropTypes.string,
 

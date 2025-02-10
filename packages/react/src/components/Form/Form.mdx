@@ -1,5 +1,6 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as FormStories from './Form.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -33,7 +34,15 @@ The `Form` component is configurable to fit various use cases and layouts. It is
 purposely simple out of the box, and users are responsible for configuring it to
 suit their needs.
 
-<Canvas of={FormStories.Default} />
+<Canvas
+  of={FormStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FormStories.Default),
+    },
+  ]}
+/>
 
 ## Accessibility Considerations
 

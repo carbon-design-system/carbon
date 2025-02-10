@@ -43,14 +43,14 @@ export default {
     ),
   ],
 };
-export const Default = () => {
+export const Default = (args) => {
   const definition =
     'Uniform Resource Locator; the address of a resource (such as a document or website) on the Internet.';
   return (
     <p>
       Custom domains direct requests for your apps in this Cloud Foundry
       organization to a{' '}
-      <DefinitionTooltip openOnHover definition={definition}>
+      <DefinitionTooltip openOnHover definition={definition} {...args}>
         URL
       </DefinitionTooltip>{' '}
       that you own. A custom domain can be a shared domain, a shared subdomain,
@@ -59,25 +59,14 @@ export const Default = () => {
   );
 };
 
-const PlaygroundStory = (props) => {
-  return (
-    <p>
-      This sentence contains a{' '}
-      <DefinitionTooltip {...props}>definition tooltip</DefinitionTooltip>.
-    </p>
-  );
-};
-
-export const Playground = PlaygroundStory.bind({});
-
-Playground.args = {
+Default.args = {
   align: 'bottom-left',
   defaultOpen: false,
   definition: 'Example definition',
   openOnHover: true,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   align: {
     options: [
       'top',

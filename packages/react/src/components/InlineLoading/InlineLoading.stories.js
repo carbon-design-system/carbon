@@ -20,14 +20,6 @@ export default {
   },
 };
 
-export const Default = () => (
-  <InlineLoading
-    status="active"
-    iconDescription="Loading"
-    description="Loading data..."
-  />
-);
-
 export const UxExample = () => {
   function MockSubmission({ children }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -85,14 +77,14 @@ export const UxExample = () => {
   );
 };
 
-export const Playground = (args) => <InlineLoading {...args} />;
+export const Default = (args) => <InlineLoading {...args} />;
 
-Playground.args = {
+Default.args = {
   description: 'Loading',
   iconDescription: 'Loading data...',
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   className: {
     table: {
       disable: true,

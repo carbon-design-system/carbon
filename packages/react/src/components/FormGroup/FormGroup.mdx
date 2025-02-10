@@ -1,5 +1,6 @@
 import { ArgTypes, Story, Canvas, Meta } from '@storybook/blocks';
 import * as FormGroupStories from './FormGroup.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -22,7 +23,15 @@ import * as FormGroupStories from './FormGroup.stories';
 
 ## Overview
 
-<Canvas of={FormGroupStories.Default} />
+<Canvas
+  of={FormGroupStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FormGroupStories.Default),
+    },
+  ]}
+/>
 
 ## Component API
 

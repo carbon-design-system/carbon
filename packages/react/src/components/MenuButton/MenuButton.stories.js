@@ -29,21 +29,51 @@ export default {
   },
 };
 
-export const Default = () => (
-  <MenuButton label="Actions">
-    <MenuItem label="First action" />
-    <MenuItem label="Second action that is a longer item to test overflow and title." />
-    <MenuItem label="Third action" disabled />
-  </MenuButton>
-);
-export const ExperimentalAutoAlign = () => (
+const sharedArgTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  menuTarget: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const Default = (args) => {
+  const onClick = action('onClick (MenuItem)');
+
+  return (
+    <MenuButton {...args}>
+      <MenuItem
+        label="First action with a long label description"
+        onClick={onClick}
+      />
+      <MenuItem label="Second action" onClick={onClick} />
+      <MenuItem label="Third action" onClick={onClick} disabled />
+    </MenuButton>
+  );
+};
+
+Default.args = { label: 'Actions' };
+
+Default.argTypes = { ...sharedArgTypes };
+
+export const ExperimentalAutoAlign = (args) => (
   <div style={{ width: '5000px', height: '5000px' }}>
     <div
       style={{
         position: 'absolute',
         bottom: '20px',
       }}>
-      <MenuButton label="Actions">
+      <MenuButton label="Actions" {...args}>
         <MenuItem label="First action" />
         <MenuItem label="Second action that is a longer item to test overflow and title." />
         <MenuItem label="Third action" disabled />
@@ -51,8 +81,11 @@ export const ExperimentalAutoAlign = () => (
     </div>
   </div>
 );
-export const WithDanger = () => (
-  <MenuButton label="Actions">
+
+ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
+
+export const WithDanger = (args) => (
+  <MenuButton label="Actions" {...args}>
     <MenuItem label="First action" />
     <MenuItem label="Second action" />
     <MenuItem label="Third action" />
@@ -61,8 +94,10 @@ export const WithDanger = () => (
   </MenuButton>
 );
 
-export const WithDividers = () => (
-  <MenuButton label="Actions">
+WithDanger.argTypes = { ...sharedArgTypes };
+
+export const WithDividers = (args) => (
+  <MenuButton label="Actions" {...args}>
     <MenuItem label="Create service request" />
     <MenuItem label="Create work order" />
     <MenuItemDivider />
@@ -74,13 +109,17 @@ export const WithDividers = () => (
   </MenuButton>
 );
 
-export const WithIcons = () => (
-  <MenuButton label="Add">
+WithDividers.argTypes = { ...sharedArgTypes };
+
+export const WithIcons = (args) => (
+  <MenuButton label="Add" {...args}>
     <MenuItem label="Asset" renderIcon={Asset} />
     <MenuItem label="User" renderIcon={User} />
     <MenuItem label="User group" renderIcon={Group} />
   </MenuButton>
 );
+
+WithIcons.argTypes = { ...sharedArgTypes };
 
 export const WithMenuAlignment = () => (
   <>
@@ -130,40 +169,3 @@ export const WithMenuAlignment = () => (
     </div>
   </>
 );
-
-export const Playground = (args) => {
-  const onClick = action('onClick (MenuItem)');
-
-  return (
-    <MenuButton {...args}>
-      <MenuItem
-        label="First action with a long label description"
-        onClick={onClick}
-      />
-      <MenuItem label="Second action" onClick={onClick} />
-      <MenuItem label="Third action" onClick={onClick} disabled />
-    </MenuButton>
-  );
-};
-
-Playground.args = {
-  label: 'Actions',
-};
-
-Playground.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  menuTarget: {
-    table: {
-      disable: true,
-    },
-  },
-};

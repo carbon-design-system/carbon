@@ -14,7 +14,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import debounce from 'lodash.debounce';
+import { debounce } from 'es-toolkit/compat';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableContext } from './TableContext';
 import { useWindowEvent } from '../../internal/useEvent';

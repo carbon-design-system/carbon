@@ -1,5 +1,6 @@
 import { ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import * as TreeViewStories from './Treeview.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -19,7 +20,19 @@ TreeView is a component that allows users to navigate through a hierarchy of
 items. It is used to display nested lists of items that can be expanded or
 collapsed to show and hide additional items.
 
-<Canvas of={TreeViewStories.Default} />
+<Canvas
+  of={TreeViewStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(
+          TreeViewStories.Default,
+          "import { Document, Folder } from '@carbon/icons-react';"
+        ),
+    },
+  ]}
+/>
 
 ## With Controlled Expansion
 
@@ -27,14 +40,38 @@ The `expanded` prop can be used to control the expansion state of the TreeView.
 The `isExpanded` prop can be used to determine if an individual tree node is
 expanded or collapsed.
 
-<Canvas of={TreeViewStories.WithControlledExpansion} />
+<Canvas
+  of={TreeViewStories.WithControlledExpansion}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(
+          TreeViewStories.WithControlledExpansion,
+          "import { Document, Folder } from '@carbon/icons-react';"
+        ),
+    },
+  ]}
+/>
 
 ## With Custom Icons
 
 The `renderIcon` prop can be used to customize the icons of each node in the
 TreeView.
 
-<Canvas of={TreeViewStories.WithIcons} />
+<Canvas
+  of={TreeViewStories.WithIcons}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(
+          TreeViewStories.WithIcons,
+          "import { Document, Folder } from '@carbon/icons-react';"
+        ),
+    },
+  ]}
+/>
 
 ## Component API
 

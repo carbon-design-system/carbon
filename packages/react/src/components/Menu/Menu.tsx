@@ -31,7 +31,7 @@ import { canUseDOM } from '../../internal/environment';
 
 const spacing = 8; // distance to keep to window edges, in px
 
-interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
+export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * The ref of the containing element, used for positioning and alignment of the menu
    */

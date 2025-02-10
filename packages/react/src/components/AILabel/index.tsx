@@ -127,7 +127,7 @@ const propMappingFunction = (deprecatedValue) => {
   return mapPopoverAlignProp(deprecatedValue);
 };
 
-interface AILabelProps {
+export interface AILabelProps {
   AILabelContent?: React.ReactNode;
   aiText?: string;
   aiTextLabel?: string;
@@ -190,8 +190,10 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
 
     const ariaLabelText =
       !aiTextLabel && !textLabel
-        ? `${aiText} - ${slugLabel || ariaLabel}`
-        : `${aiText} - ${aiTextLabel || textLabel}`;
+        ? `${aiText} ${slugLabel || ariaLabel}`
+        : `${aiText} ${aiTextLabel || textLabel}`;
+
+    const isSmallIcon = ['xs', '2xs', 'mini'].includes(size);
 
     return (
       <div className={aiLabelClasses} ref={ref} id={id}>
@@ -205,10 +207,14 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
             <Undo />
           </IconButton>
         ) : (
-          <Toggletip align={align} autoAlign={autoAlign} {...rest}>
+          <Toggletip
+            align={align}
+            autoAlign={autoAlign}
+            alignmentAxisOffset={isSmallIcon ? -24 : 0}
+            {...rest}>
             <ToggletipButton
               className={aiLabelButtonClasses}
-              label={ariaLabelText}>
+              label={kind === 'inline' ? '' : ariaLabelText}>
               <span className={`${prefix}--ai-label__text`}>{aiText}</span>
               {kind === 'inline' && (aiTextLabel || textLabel) && (
                 <span className={`${prefix}--ai-label__additional-text`}>

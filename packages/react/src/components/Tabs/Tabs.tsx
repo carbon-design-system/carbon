@@ -8,7 +8,7 @@
 import { ChevronLeft, ChevronRight } from '@carbon/icons-react';
 import { breakpoints } from '@carbon/layout';
 import cx from 'classnames';
-import debounce from 'lodash.debounce';
+import { debounce } from 'es-toolkit/compat';
 import PropTypes from 'prop-types';
 import React, {
   useCallback,
@@ -367,7 +367,7 @@ export interface TabListProps extends DivAttributes {
    * Provide an accessible label to be read when a user interacts with this
    * component
    */
-  'aria-label': string;
+  'aria-label'?: string;
 
   /**
    * Provide child elements to be rendered inside `ContentTabs`.
@@ -778,7 +778,7 @@ TabList.propTypes = {
    * Provide an accessible label to be read when a user interacts with this
    * component
    */
-  'aria-label': PropTypes.string.isRequired,
+  'aria-label': PropTypes.string,
 
   /**
    * Provide child elements to be rendered inside `ContentTabs`.

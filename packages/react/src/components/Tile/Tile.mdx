@@ -1,6 +1,7 @@
 import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import * as TileStories from './Tile.stories';
 import * as TileFeatureFlagStories from './Tile.featureflag.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -16,31 +17,88 @@ import * as TileFeatureFlagStories from './Tile.featureflag.stories';
 
 ## Overview
 
-<Canvas of={TileStories.Default} />
+<Canvas
+  of={TileStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TileStories.Default),
+    },
+  ]}
+/>
 
 ## Clickable
 
-<Canvas of={TileStories.Clickable} />
+<Canvas
+  of={TileStories.Clickable}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TileStories.Clickable),
+    },
+  ]}
+/>
 
 ## Expandable
 
-<Canvas of={TileStories.Expandable} />
+<Canvas
+  of={TileStories.Expandable}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TileStories.Expandable),
+    },
+  ]}
+/>
 
 ## Expandable with Interactive
 
-<Canvas of={TileStories.ExpandableWithInteractive} />
+<Canvas
+  of={TileStories.ExpandableWithInteractive}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(TileStories.ExpandableWithInteractive),
+    },
+  ]}
+/>
 
 ## Multi Select
 
-<Canvas of={TileStories.Selectable} />
+<Canvas
+  of={TileStories.Selectable}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TileStories.Selectable),
+    },
+  ]}
+/>
 
 ## Multi Select
 
-<Canvas of={TileStories.MultiSelect} />
+<Canvas
+  of={TileStories.MultiSelect}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TileStories.MultiSelect),
+    },
+  ]}
+/>
 
 ## Radio
 
-<Canvas of={TileStories.Radio} />
+<Canvas
+  of={TileStories.Radio}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TileStories.Radio),
+    },
+  ]}
+/>
 
 ## Experimental Improved Contrast
 
