@@ -53,7 +53,7 @@ export const Default = (args) => {
       <DefinitionTooltip openOnHover definition={definition} {...args}>
         URL
       </DefinitionTooltip>{' '}
-      hat you own. A custom domain can be a shared domain, a shared subdomain,
+      that you own. A custom domain can be a shared domain, a shared subdomain,
       or a shared domain and host.
     </p>
   );

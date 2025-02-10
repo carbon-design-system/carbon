@@ -381,8 +381,6 @@ export const Popover: PopoverComponent = React.forwardRef(
             caretRef.current.style.insetInlineEnd = caretPadding
               ? `${caretPadding}px`
               : '16px';
-          } else {
-            caretRef.current.style.insetInlineEnd = 'auto';
           }
 
           // Ensure the static side gets unset when flipping to other placements' axes.
