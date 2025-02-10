@@ -1,0 +1,68 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as OrderedListStories from './ordered-list.stories';
+
+<Meta of={OrderedListStories} />
+
+# List
+
+Represents a list.
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/list)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/list)
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/list/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['list'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<h3>cds-ordered-list</h3>
+
+<cds-ordered-list>
+  <cds-list-item>
+    Ordered List level 1
+    <cds-ordered-list>
+      <cds-list-item>Ordered List level 2</cds-list-item>
+      <cds-list-item>
+        Ordered List level 2
+        <cds-ordered-list>
+          <cds-list-item>Ordered List level 2</cds-list-item>
+          <cds-list-item>Ordered List level 2</cds-list-item>
+        </cds-ordered-list>
+      </cds-list-item>
+    </cds-ordered-list>
+  </cds-list-item>
+  <cds-list-item>Ordered List level 1</cds-list-item>
+  <cds-list-item>Ordered List level 1</cds-list-item>
+</cds-ordered-list>
+```
+
+## `<cds-ordered-list>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-ordered-list native>`) and `false` means not setting the attribute (e.g.
+`<cds-ordered-list>` without `native` attribute).
+
+<ArgTypes of="cds-ordered-list" />
+
+## `<cds-list-item>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-list nested>`) and `false` means not setting the attribute (e.g.
+`<cds-list>` without `nested` attribute).
+
+<ArgTypes of="cds-list-item" />

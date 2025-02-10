@@ -457,6 +457,64 @@ export const upgrades = [
         },
       },
       {
+        name: 'enable-v12-tile-default-icons',
+        description: `
+          Wrap Tile and TileGroup components with FeatureFlags enableV12TileDefaultIcons
+      
+          Transforms:
+          1. TileGroup with Tiles:
+          <TileGroup>
+            <Tile>...</Tile>
+          </TileGroup>
+      
+          Into:
+          <FeatureFlags enableV12TileDefaultIcons>
+            <TileGroup>
+              <Tile>...</Tile>
+            </TileGroup>
+          </FeatureFlags>
+      
+          2. Standalone Tile:
+          <Tile>...</Tile>
+      
+          Into:
+          <FeatureFlags enableV12TileDefaultIcons>
+            <Tile>...</Tile>
+          </FeatureFlags>
+        `,
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'enable-v12-tile-default-icons.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                    '**/dist/**',
+                    '**/build/**',
+                    '**/*.d.ts',
+                    '**/coverage/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            parser: 'tsx', // Enable parsing of TSX files
+          });
+        },
+      },
+      {
         name: 'ibm-products-update-http-errors',
         description:
           'Rewrites HttpError403, HttpError404, HttpErrorOther to FullPageError',

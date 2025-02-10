@@ -599,6 +599,8 @@ categories:
           - logo--vmware
           - logo--vmware--alt
           - logo--vue
+          - logo--git
+          - logo--red-hat-ai-instructlab-on-ibm-cloud
       - name: IBM
         members:
           - bee
@@ -717,7 +719,11 @@ categories:
           - ibm--aspera
           - ibm--bluepay
           - ibm--cloudant
+          - ibm-consulting-advantage--agent
+          - ibm-consulting-advantage--application
+          - ibm-consulting-advantage--assistant
           - ibm--content-services
+          - ibm--databand
           - ibm--data-power
           - ibm--data-product-exchange
           - ibm--data-replication
@@ -1421,6 +1427,7 @@ categories:
           - API--1
           - app
           - application
+          - avro
           - badge
           - book
           - CAD
@@ -1860,6 +1867,7 @@ categories:
           - switch-layer-2
           - switch-layer-3
           - sysplex--distributor
+          - spyre-accelerator
           - tcp-ip-service
           - terminal--3270
           - tsq
@@ -2317,20 +2325,24 @@ categories:
           - array--numbers
           - array--objects
           - array--strings
+          - array
           - asset
           - asset--confirm
           - asset--digital-twin
           - asset--view
+          - asset-movement
           - at
           - audio-console
           - augmented-reality
           - barcode
           - battery--charging
           - battery--empty
+          - battery--error
           - battery--full
           - battery--half
           - battery--low
           - battery--quarter
+          - battery--warning
           - blog
           - bluetooth
           - bluetooth--off
@@ -2347,6 +2359,7 @@ categories:
           - camera
           - camera--action
           - cell-tower
+          - channels
           - chat-bot
           - chip
           - cloud--download
@@ -2361,7 +2374,9 @@ categories:
           - connection--send
           - connection--two-way
           - cookie
+          - create-link
           - debug
+          - delivery-settings
           - deployment-pattern
           - deployment-policy
           - desk--adjustable
@@ -2394,6 +2409,7 @@ categories:
           - iot--platform
           - keyboard
           - keyboard--off
+          - kiosk-device
           - laptop
           - location--current
           - mail--all
@@ -2411,6 +2427,7 @@ categories:
           - mobile--session
           - mobile--view
           - mobile--view-orientation
+          - multiuser-device
           - object
           - outage
           - password
@@ -2436,6 +2453,7 @@ categories:
           - tablet--landscape
           - terminal
           - transmission-lte
+          - trigger
           - USB
           - voicemail
           - VPN
