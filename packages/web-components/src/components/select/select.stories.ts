@@ -162,15 +162,13 @@ export const Default = {
       value,
       children = html`
         <cds-select-item value=""></cds-select-item>
-        <cds-select-item-group label="Category 1">
-          <cds-select-item value="all">Option 1</cds-select-item>
-          <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
-        </cds-select-item-group>
-        <cds-select-item-group label="Category 2">
-          <cds-select-item value="staging">Option 3</cds-select-item>
-          <cds-select-item value="dea">Option 4</cds-select-item>
-          <cds-select-item value="router">Option 5</cds-select-item>
-        </cds-select-item-group>
+        <cds-select-item value="all"
+          >An example option that is really long to show what should be done to
+          handle long text</cds-select-item
+        >
+        <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+        <cds-select-item value="staging">Option 3</cds-select-item>
+        <cds-select-item value="dea">Option 4</cds-select-item>
       `,
       onInput,
     } = args ?? {};
@@ -219,19 +217,13 @@ export const Inline = {
       size,
       readOnly,
       warn,
-      warnText,
       value,
       children = html`
         <cds-select-item value=""></cds-select-item>
-        <cds-select-item-group label="Category 1">
-          <cds-select-item value="all">Option 1</cds-select-item>
-          <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
-        </cds-select-item-group>
-        <cds-select-item-group label="Category 2">
-          <cds-select-item value="staging">Option 3</cds-select-item>
-          <cds-select-item value="dea">Option 4</cds-select-item>
-          <cds-select-item value="router">Option 5</cds-select-item>
-        </cds-select-item-group>
+        <cds-select-item value="all">Option 1</cds-select-item>
+        <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+        <cds-select-item value="staging">Option 3</cds-select-item>
+        <cds-select-item value="dea">Option 4</cds-select-item>
       `,
       onInput,
     } = args ?? {};
@@ -250,7 +242,6 @@ export const Inline = {
           size="${ifDefined(size)}"
           ?readonly="${readOnly}"
           ?warn="${warn}"
-          warn-text="${ifDefined(warnText)}"
           value="${ifDefined(value)}"
           @cds-select-selected="${ifDefined(onInput)}">
           ${children}
@@ -298,15 +289,13 @@ export const WithAILabel = {
           ${styles}
         </style>
         <cds-select-item value=""></cds-select-item>
-        <cds-select-item-group label="Category 1">
-          <cds-select-item value="all">Option 1</cds-select-item>
-          <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
-        </cds-select-item-group>
-        <cds-select-item-group label="Category 2">
-          <cds-select-item value="staging">Option 3</cds-select-item>
-          <cds-select-item value="dea">Option 4</cds-select-item>
-          <cds-select-item value="router">Option 5</cds-select-item>
-        </cds-select-item-group>
+        <cds-select-item value="all"
+          >An example option that is really long to show what should be done to
+          handle long text</cds-select-item
+        >
+        <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+        <cds-select-item value="staging">Option 3</cds-select-item>
+        <cds-select-item value="dea">Option 4</cds-select-item>
       `,
       onInput,
     } = args ?? {};
@@ -363,15 +352,11 @@ export const WithLayer = {
       value,
       children = html`
         <cds-select-item value=""></cds-select-item>
-        <cds-select-item-group label="Category 1">
-          <cds-select-item value="all">Option 1</cds-select-item>
-          <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
-        </cds-select-item-group>
-        <cds-select-item-group label="Category 2">
-          <cds-select-item value="staging">Option 3</cds-select-item>
-          <cds-select-item value="dea">Option 4</cds-select-item>
-          <cds-select-item value="router">Option 5</cds-select-item>
-        </cds-select-item-group>
+        <cds-select-item value="all"
+          >An example option that is really long to show what should be done to
+          handle long text</cds-select-item
+        >
+        <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
       `,
       onInput,
     } = args ?? {};

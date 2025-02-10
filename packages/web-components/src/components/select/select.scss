@@ -70,12 +70,8 @@ $divider-width: 1px;
     margin-block-start: 0.8125rem;
   }
 
-  select {
-    padding-inline-end: 3.5rem;
-  }
-
   .#{$prefix}--select__invalid-icon--warning {
-    inset-inline-end: $spacing-09;
+    inset-inline-end: $spacing-08;
   }
 }
 
