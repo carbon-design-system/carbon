@@ -225,9 +225,11 @@ Toggletip.propTypes = {
   ]),
 
   /**
-   * Will add padding value to arrow in case of bottom-left, bottom-right or top-left, top-right
+   * **Experimental**: Specify padding between the caret and the popover edge.
+   * This helps avoid the caret visually separating from Popovers with rounded
+   * corners when aligned bottom-start, bottom-end, top-start, or top-end.
    */
-  arrowPadding: PropTypes.number,
+  caretPadding: PropTypes.number,
 
   /**
    * Provide a custom element or component to render the top-level node for the

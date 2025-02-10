@@ -9467,14 +9467,14 @@ Map {
         ],
         "type": "oneOf",
       },
-      "arrowPadding": Object {
-        "type": "number",
-      },
       "as": Object {
         "type": "elementType",
       },
       "autoAlign": Object {
         "type": "bool",
+      },
+      "caretPadding": Object {
+        "type": "number",
       },
       "children": Object {
         "type": "node",

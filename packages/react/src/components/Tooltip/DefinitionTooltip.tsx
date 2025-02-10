@@ -114,8 +114,7 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
       onFocus={() => {
         setOpen(true);
       }}
-      open={isOpen}
-      arrowPadding={16}>
+      open={isOpen}>
       <button
         {...rest}
         className={cx(`${prefix}--definition-term`, triggerClassName)}
