@@ -776,5 +776,39 @@ describe('ComboBox', () => {
 
       expect(input).toHaveDisplayValue('');
     });
+
+    it('should open the menu and select null when Enter is pressed with no input and no highlighted item', async () => {
+      const onInputChange = jest.fn();
+
+      render(<ComboBox {...mockProps} onInputChange={onInputChange} />);
+
+      await userEvent.type(findInputNode(), 'apple');
+      expect(findInputNode()).toHaveDisplayValue('apple');
+      await userEvent.keyboard('[Enter]');
+
+      // Delete the selected item
+      await userEvent.keyboard('[Backspace]');
+      await userEvent.keyboard('[Backspace]');
+      await userEvent.keyboard('[Backspace]');
+      await userEvent.keyboard('[Backspace]');
+      await userEvent.keyboard('[Backspace]');
+      // check for an empty value
+      expect(findInputNode()).toHaveDisplayValue('');
+
+      // blur
+      await userEvent.keyboard('[Tab]');
+      assertMenuClosed(mockProps);
+
+      // open the menu
+      await userEvent.click(findInputNode());
+      assertMenuOpen(mockProps);
+
+      // check if the `li` item are all false
+      for (let i = 0; i < mockProps.items.length; i++) {
+        const item = findMenuItemNode(i);
+        console.log({ item });
+        expect(item).toHaveAttribute('aria-selected', 'false');
+      }
+    });
   });
 });
