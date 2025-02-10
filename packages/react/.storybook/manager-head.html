@@ -136,4 +136,51 @@
   mark[class*='css-'] {
     color: #0f62fe;
   }
+
+  .sidebar-link {
+    /* Take up the whole button's click area. */
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: start;
+
+    /* Copied from SB. For left, we do 22px (padding) + 14px (icon) + 6px (gap). */
+    padding-left: 42px;
+    padding-top: 5px;
+    padding-bottom: 4px;
+
+    /* Copied from SB. Typography. */
+    font-size: 14px;
+    text-decoration: none;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+
+    /* Copied from SB. Interaction. */
+    cursor: pointer;
+    color: inherit;
+  }
+
+  .sidebar-link svg {
+    position: absolute;
+    left: 21px;
+    top: 6px;
+    height: 16px;
+    width: 16px;
+    background-color: #f6f9fc;
+    color: black;
+  }
+  .sidebar-link:hover svg {
+    background-color: #e4f2fc;
+  }
+
+  .invisible {
+    /* This one is just so that the parent div reserves enough space for overflowing text. */
+    visibility: hidden;
+    font-size: 14px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    padding-top: 2px;
+  }
 </style>

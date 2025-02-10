@@ -7,8 +7,14 @@
 
 import { addons } from '@storybook/manager-api';
 import theme from './theme';
+import SidebarLabelWrapper from './components/SidebarLabelWrapper';
+
+export const sidebar = {
+  renderLabel: (item) => SidebarLabelWrapper({ item }),
+};
 
 addons.setConfig({
+  sidebar,
   theme,
 });
 
