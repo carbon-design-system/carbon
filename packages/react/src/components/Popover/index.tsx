@@ -367,8 +367,8 @@ export const Popover: PopoverComponent & {
           bottom: 'top',
           left: 'right',
         }[placement.split('-')[0]];
-        
-         caretRef.current.style.cssText = '';
+
+        caretRef.current.style.cssText = '';
 
         if (centerOffset == 0) {
           caretRef.current.style.left = x != null ? `${x}px` : '';
