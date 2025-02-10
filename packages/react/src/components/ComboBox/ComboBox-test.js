@@ -16,7 +16,7 @@ import {
   generateGenericItem,
   cognateItems,
   waitForPosition,
-  findMenuItemNode
+  findMenuItemNode,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
 import { AILabel } from '../AILabel';
@@ -807,7 +807,6 @@ describe('ComboBox', () => {
       // check if the `li` item are all false
       for (let i = 0; i < mockProps.items.length; i++) {
         const item = findMenuItemNode(i);
-        console.log({ item });
         expect(item).toHaveAttribute('aria-selected', 'false');
       }
     });
