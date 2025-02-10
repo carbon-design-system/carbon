@@ -16,6 +16,7 @@ import {
   generateGenericItem,
   cognateItems,
   waitForPosition,
+  findMenuItemNode
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
 import { AILabel } from '../AILabel';
