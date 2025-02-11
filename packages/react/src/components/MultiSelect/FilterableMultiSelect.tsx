@@ -55,10 +55,10 @@ import { useSelection } from '../../internal/Selection';
 import {
   useFloating,
   flip,
+  hide,
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
 import { TranslateWithId } from '../../types/common';
 
 const {
