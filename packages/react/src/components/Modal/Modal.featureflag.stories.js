@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import Modal from './Modal';
+import Modal from './';
 import Button from '../Button';
 import Select from '../Select';
 import MultiSelect from '../MultiSelect';

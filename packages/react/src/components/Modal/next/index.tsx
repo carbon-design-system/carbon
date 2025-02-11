@@ -338,10 +338,7 @@ const Modal = React.forwardRef(function Modal(
 
   // AILabel always size `sm`
   let normalizedDecorator = React.isValidElement(decorator) ? decorator : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
+  if (normalizedDecorator && normalizedDecorator['type'] === 'AILabel') {
     normalizedDecorator = React.cloneElement(
       normalizedDecorator as React.ReactElement<any>,
       {
@@ -379,7 +376,6 @@ const Modal = React.forwardRef(function Modal(
       aria-modal="true"
       tabIndex={-1}>
       <div className={`${prefix}--modal-header`}>
-        {passiveModal && modalButton}
         {modalLabel && (
           <Text
             as="h2"
@@ -401,7 +397,7 @@ const Modal = React.forwardRef(function Modal(
         ) : (
           ''
         )}
-        {!passiveModal && modalButton}
+        {modalButton}
       </div>
       <Layer ref={contentRef} id={modalBodyId}>
         {children}
