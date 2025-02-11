@@ -63,3 +63,6 @@ packages/upgrade/**/*.output.tsx
 
 # Accessibility Verification Testing
 **/.avt/**
+
+# CODEOWNERS
+CODEOWNERS
