@@ -73,6 +73,19 @@ const controls = {
   },
 };
 
+const singleControls = {
+  ...controls,
+  indeterminate: {
+    control: 'boolean',
+    description: 'Specify whether the Checkbox is in an indeterminate state',
+  },
+  defaultChecked: {
+    control: 'boolean',
+    description:
+      'Specify whether the underlying input should be checked by default',
+  },
+};
+
 export const Default = {
   args: defaultArgs,
   argTypes: controls,
@@ -109,19 +122,44 @@ export const Default = {
   `,
 };
 
-export const Skeleton = {
+export const Horizontal = {
   args: defaultArgs,
   argTypes: controls,
-  render: () => html`
-    <fieldset class="${prefix}--fieldset">
-      <cds-checkbox-skeleton>${checkboxLabel}</cds-checkbox-skeleton>
-    </fieldset>
+  render: ({
+    disabled,
+    readonly,
+    onChange,
+    helperText,
+    invalid,
+    invalidText,
+    legendText,
+    warn,
+    warnText,
+  }) => html`
+    <cds-checkbox-group
+      legend-text="Group label"
+      helper-text="${helperText}"
+      ?disabled="${disabled}"
+      ?invalid="${invalid}"
+      invalid-text="${invalidText}"
+      legend-text="${legendText}"
+      orientation="horizontal"
+      ?readonly="${readonly}"
+      ?warn="${warn}"
+      warn-text="${warnText}">
+      <cds-checkbox @cds-checkbox-changed="${onChange}"
+        >${checkboxLabel}</cds-checkbox
+      >
+      <cds-checkbox @cds-checkbox-changed="${onChange}"
+        >${checkboxLabel}</cds-checkbox
+      >
+    </cds-checkbox-group>
   `,
 };
 
 export const Single = {
   args: defaultArgs,
-  argTypes: controls,
+  argTypes: singleControls,
   render: () => html`
     <cds-checkbox helper-text="Helper text goes here"
       >${checkboxLabel}</cds-checkbox
@@ -136,6 +174,16 @@ export const Single = {
     >
     <br /><br />
     <cds-checkbox readonly>${checkboxLabel}</cds-checkbox>
+  `,
+};
+
+export const Skeleton = {
+  args: defaultArgs,
+  argTypes: singleControls,
+  render: () => html`
+    <fieldset class="${prefix}--fieldset">
+      <cds-checkbox-skeleton>${checkboxLabel}</cds-checkbox-skeleton>
+    </fieldset>
   `,
 };
 
