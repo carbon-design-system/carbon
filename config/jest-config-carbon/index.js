@@ -47,6 +47,7 @@ module.exports = {
     'examples',
     '/umd/',
     '/vendor/',
+    'packages/web-components/',
   ],
   transformIgnorePatterns: [
     '/build/',
