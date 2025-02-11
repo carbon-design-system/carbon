@@ -6,7 +6,8 @@ coverage:
     patch:
       default:
         informational: true
-
+ignore:
+  - "../packages/web-components/**"
 component_management:
   default_rules: # default rules that will be inherited by all components
     statuses:
