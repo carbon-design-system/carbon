@@ -6,19 +6,14 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useRef, useEffect, useState, ReactNode } from 'react';
+import React, { useRef, useState, ReactNode } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
-import toggleClass from '../../../tools/toggleClass';
 import Button from '../../Button';
 import ButtonSet from '../../ButtonSet';
 import InlineLoading from '../../InlineLoading';
 import { Layer } from '../../Layer';
 import requiredIfGivenPropIsTruthy from '../../../prop-types/requiredIfGivenPropIsTruthy';
-import wrapFocus, {
-  wrapFocusWithoutSentinels,
-  elementOrParentIsFloatingMenu,
-} from '../../../internal/wrapFocus';
 import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../../internal/useIsomorphicEffect';
 import { useId } from '../../../internal/useId';
@@ -29,9 +24,6 @@ import { noopFn } from '../../../internal/noopFn';
 import { Text } from '../../Text';
 import { ReactAttr } from '../../../types/common';
 import { InlineLoadingStatus } from '../../InlineLoading/InlineLoading';
-import { useFeatureFlag } from '../../FeatureFlags';
-import { composeEventHandlers } from '../../../tools/events';
-import deprecate from '../../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../../Dialog/index';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
@@ -44,13 +36,7 @@ export interface ModalSecondaryButton {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface ModalProps extends ReactAttr<HTMLDivElement> {
-  /**
-   * Specify whether the Modal is displaying an alert, error or warning
-   * Should go hand in hand with the danger prop.
-   */
-  alert?: boolean;
-
+export interface BaseModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * Required props for the accessibility label of the header
    */
@@ -167,11 +153,6 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   open?: boolean;
 
   /**
-   * Specify whether the modal should be button-less
-   */
-  passiveModal?: boolean;
-
-  /**
    * Prevent closing on click outside of modal
    */
   preventCloseOnClickOutside?: boolean;
@@ -219,6 +200,38 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   size?: ModalSize;
 }
 
+// passive modals can not use `alert`
+interface PassiveModal extends BaseModalProps {
+  /**
+   * Specify whether the modal should be button-less
+   */
+  passiveModal?: true;
+
+  /**
+   * Specify whether the Modal is displaying an alert, error or warning. Should
+   * go hand in hand with the `danger` prop. This changes the `role` to
+   * `alertdialog` and cannot be used with passive modals.
+   */
+  alert?: never;
+}
+
+// non passive modals can optionally set `alert`
+interface NonPassiveModal extends BaseModalProps {
+  /**
+   * Specify whether the modal should be button-less
+   */
+  passiveModal?: false;
+
+  /**
+   * Specify whether the Modal is displaying an alert, error or warning. Should
+   * go hand in hand with the `danger` prop. This changes the `role` to
+   * `alertdialog` and cannot be used with passive modals.
+   */
+  alert?: boolean;
+}
+
+type ModalProps = PassiveModal | NonPassiveModal;
+
 const Modal = React.forwardRef(function Modal(
   {
     'aria-label': ariaLabelProp,
@@ -261,8 +274,6 @@ const Modal = React.forwardRef(function Modal(
   const secondaryButton = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const innerModal = useRef<HTMLDialogElement>(null);
-  const startTrap = useRef<HTMLSpanElement>(null);
-  const endTrap = useRef<HTMLSpanElement>(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const modalInstanceId = `modal-${useId()}`;
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
@@ -313,6 +324,10 @@ const Modal = React.forwardRef(function Modal(
     [`${prefix}--modal-container--full-width`]: isFullWidth,
   });
 
+  const contentClasses = classNames(`${prefix}--modal-content`, {
+    [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
+  });
+
   const footerClasses = classNames(`${prefix}--modal-footer`, {
     [`${prefix}--modal-footer--three-button`]:
       Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
@@ -326,126 +341,48 @@ const Modal = React.forwardRef(function Modal(
   const ariaLabel =
     modalLabelStr || ariaLabelProp || modalAriaLabel || modalHeadingStr;
   const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
+  const hasScrollingContentProps =
+    hasScrollingContent || isScrollable
+      ? {
+          tabIndex: 0,
+          role: 'region',
+          'aria-label': ariaLabel,
+          'aria-labelledby': getAriaLabelledBy,
+        }
+      : {};
+  useIsomorphicEffect(() => {
+    if (contentRef.current) {
+      setIsScrollable(
+        contentRef.current.scrollHeight > contentRef.current.clientHeight
+      );
+    }
 
-  const alertDialogProps: ReactAttr<HTMLDialogElement> = {};
-  if (alert && passiveModal) {
-    alertDialogProps.role = 'alert';
-  }
-  if (alert && !passiveModal) {
-    alertDialogProps.role = 'alertdialog';
-    alertDialogProps['aria-describedby'] = modalBodyId;
-  }
-
-  // AILabel always size `sm`
-  let normalizedDecorator = React.isValidElement(decorator) ? decorator : null;
-  if (normalizedDecorator && normalizedDecorator['type'] === 'AILabel') {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'sm',
+    function handler() {
+      if (contentRef.current) {
+        setIsScrollable(
+          contentRef.current.scrollHeight > contentRef.current.clientHeight
+        );
       }
-    );
-  }
+    }
 
-  const modalButton = (
-    <div className={`${prefix}--modal-close-button`}>
-      <IconButton
-        className={modalCloseButtonClass}
-        label={closeButtonLabel}
-        onClick={onRequestClose}
-        aria-label={closeButtonLabel}
-        align="left"
-        ref={button}>
-        <Close
-          size={20}
-          aria-hidden="true"
-          tabIndex="-1"
-          className={`${modalCloseButtonClass}__icon`}
-        />
-      </IconButton>
-    </div>
-  );
+    const debouncedHandler = debounce(handler, 200);
+    window.addEventListener('resize', debouncedHandler);
+    return () => {
+      debouncedHandler.cancel();
+      window.removeEventListener('resize', debouncedHandler);
+    };
+  }, []);
 
-  const modalBody = (
-    <Dialog
-      open={open}
-      ref={innerModal}
-      {...alertDialogProps}
-      className={containerClasses}
-      aria-label={ariaLabel}
-      aria-modal="true"
-      tabIndex={-1}>
-      <div className={`${prefix}--modal-header`}>
-        {modalLabel && (
-          <Text
-            as="h2"
-            id={modalLabelId}
-            className={`${prefix}--modal-header__label`}>
-            {modalLabel}
-          </Text>
-        )}
-        <Text
-          as="h2"
-          id={modalHeadingId}
-          className={`${prefix}--modal-header__heading`}>
-          {modalHeading}
-        </Text>
-        {decorator ? (
-          <div className={`${prefix}--modal--inner__decorator`}>
-            {normalizedDecorator}
-          </div>
-        ) : (
-          ''
-        )}
-        {modalButton}
-      </div>
-      <Layer ref={contentRef} id={modalBodyId}>
-        {children}
-      </Layer>
-      {!passiveModal && (
-        <ButtonSet className={footerClasses} aria-busy={loadingActive}>
-          {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
-            ? secondaryButtons.map(
-                ({ buttonText, onClick: onButtonClick }, i) => (
-                  <Button
-                    key={`${buttonText}-${i}`}
-                    kind="secondary"
-                    onClick={onButtonClick}>
-                    {buttonText}
-                  </Button>
-                )
-              )
-            : secondaryButtonText && (
-                <Button
-                  disabled={loadingActive}
-                  kind="secondary"
-                  onClick={onSecondaryButtonClick}
-                  ref={secondaryButton}>
-                  {secondaryButtonText}
-                </Button>
-              )}
-          <Button
-            className={primaryButtonClass}
-            kind={danger ? 'danger' : 'primary'}
-            disabled={loadingActive || primaryButtonDisabled}
-            onClick={onRequestSubmit}
-            ref={button}>
-            {loadingStatus === 'inactive' ? (
-              primaryButtonText
-            ) : (
-              <InlineLoading
-                status={loadingStatus}
-                description={loadingDescription}
-                iconDescription={loadingIconDescription}
-                className={`${prefix}--inline-loading--btn`}
-                onSuccess={onLoadingSuccess}
-              />
-            )}
-          </Button>
-        </ButtonSet>
-      )}
-    </Dialog>
-  );
+  // alertdialog is the only permitted aria role for a native dialog element
+  // https://www.w3.org/TR/html-aria/#docconformance:~:text=Role%3A-,alertdialog,-.%20(dialog%20is
+  const isAlertDialog = alert && !passiveModal;
+
+  // When the decorator is a react element, like AILabel, it should always be given `size='sm'`
+  const normalizedDecorator = React.isValidElement(decorator)
+    ? React.cloneElement(decorator as React.ReactElement<any>, {
+        size: 'sm',
+      })
+    : decorator;
 
   return (
     <Layer
@@ -456,7 +393,103 @@ const Modal = React.forwardRef(function Modal(
       className={modalClasses}
       role="presentation"
       ref={ref}>
-      {modalBody}
+      <Dialog
+        open={open}
+        ref={innerModal}
+        role={isAlertDialog ? 'alertdialog' : ''}
+        aria-describedby={isAlertDialog ? modalBodyId : ''}
+        className={containerClasses}
+        aria-label={ariaLabel}
+        aria-modal="true">
+        <div className={`${prefix}--modal-header`}>
+          {modalLabel && (
+            <Text
+              as="h2"
+              id={modalLabelId}
+              className={`${prefix}--modal-header__label`}>
+              {modalLabel}
+            </Text>
+          )}
+          <Text
+            as="h2"
+            id={modalHeadingId}
+            className={`${prefix}--modal-header__heading`}>
+            {modalHeading}
+          </Text>
+          {decorator ? (
+            <div className={`${prefix}--modal--inner__decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
+          <div className={`${prefix}--modal-close-button`}>
+            <IconButton
+              className={modalCloseButtonClass}
+              label={closeButtonLabel}
+              onClick={onRequestClose}
+              aria-label={closeButtonLabel}
+              align="left"
+              ref={button}>
+              <Close
+                size={20}
+                aria-hidden="true"
+                tabIndex="-1"
+                className={`${modalCloseButtonClass}__icon`}
+              />
+            </IconButton>
+          </div>
+        </div>
+        <Layer
+          ref={contentRef}
+          id={modalBodyId}
+          className={contentClasses}
+          {...hasScrollingContentProps}>
+          {children}
+        </Layer>
+        {!passiveModal && (
+          <ButtonSet className={footerClasses} aria-busy={loadingActive}>
+            {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
+              ? secondaryButtons.map(
+                  ({ buttonText, onClick: onButtonClick }, i) => (
+                    <Button
+                      key={`${buttonText}-${i}`}
+                      kind="secondary"
+                      onClick={onButtonClick}>
+                      {buttonText}
+                    </Button>
+                  )
+                )
+              : secondaryButtonText && (
+                  <Button
+                    disabled={loadingActive}
+                    kind="secondary"
+                    onClick={onSecondaryButtonClick}
+                    ref={secondaryButton}>
+                    {secondaryButtonText}
+                  </Button>
+                )}
+            <Button
+              className={primaryButtonClass}
+              kind={danger ? 'danger' : 'primary'}
+              disabled={loadingActive || primaryButtonDisabled}
+              onClick={onRequestSubmit}
+              ref={button}>
+              {loadingStatus === 'inactive' ? (
+                primaryButtonText
+              ) : (
+                <InlineLoading
+                  status={loadingStatus}
+                  description={loadingDescription}
+                  iconDescription={loadingIconDescription}
+                  className={`${prefix}--inline-loading--btn`}
+                  onSuccess={onLoadingSuccess}
+                />
+              )}
+            </Button>
+          </ButtonSet>
+        )}
+      </Dialog>
     </Layer>
   );
 });
@@ -593,7 +626,19 @@ Modal.propTypes = {
   /**
    * Specify whether the modal should be button-less
    */
-  passiveModal: PropTypes.bool,
+  passiveModal: function (props, propName, componentName) {
+    if (props.passiveModal && props.alert) {
+      return new Error(
+        'Invalid prop `' +
+          propName +
+          '` supplied to' +
+          ' `' +
+          componentName +
+          '`. alert cannot be used with passive modals.'
+      );
+    }
+    return null;
+  },
 
   /**
    * Prevent closing on click outside of modal

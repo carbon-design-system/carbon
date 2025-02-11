@@ -75,7 +75,7 @@ const unstable__Dialog = React.forwardRef(
           if (modal) {
             localRef.current.showModal();
           } else {
-            localRef.current.open = true;
+            localRef.current.show();
           }
         } else {
           localRef.current.close();
