@@ -230,7 +230,7 @@ interface NonPassiveModal extends BaseModalProps {
   alert?: boolean;
 }
 
-type ModalProps = PassiveModal | NonPassiveModal;
+export type ModalProps = PassiveModal | NonPassiveModal;
 
 const Modal = React.forwardRef(function Modal(
   {
