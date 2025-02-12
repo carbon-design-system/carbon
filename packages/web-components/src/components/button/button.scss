@@ -110,7 +110,8 @@ $css--plex: true !default;
     &.#{$prefix}--btn--icon-only {
       padding-block-start: 0;
 
-      &.#{$prefix}--btn--selected {
+      &.#{$prefix}--btn--selected,
+      &.#{$prefix}--btn--expressive {
         padding: $spacing-03;
       }
     }
