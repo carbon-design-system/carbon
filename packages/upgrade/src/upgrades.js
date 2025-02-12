@@ -332,6 +332,53 @@ export const upgrades = [
         },
       },
       {
+        name: 'slug-prop-to-decorator-prop',
+        description: `
+          Replace slug prop with decorator
+          
+          Transforms:
+          <Component slug="value">
+            content
+          </Component>
+      
+          Into:
+          <Component decorator="value">
+            content
+          </Component>
+        `,
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'slug-prop-to-decorator-prop.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                    '**/dist/**',
+                    '**/build/**',
+                    '**/*.d.ts',
+                    '**/coverage/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            parser: 'tsx',
+          });
+        },
+      },
+      {
         name: 'refactor-light-to-layer',
         description: `
           Refactor 'light' prop usage to instead wrap components with Layer
