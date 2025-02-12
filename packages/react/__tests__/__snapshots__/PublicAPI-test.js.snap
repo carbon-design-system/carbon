@@ -10862,6 +10862,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "enableCounter": Object {
+        "type": "bool",
+      },
       "id": Object {
         "isRequired": true,
         "type": "string",
@@ -10878,6 +10881,9 @@ Map {
       "labelText": Object {
         "isRequired": true,
         "type": "node",
+      },
+      "maxCount": Object {
+        "type": "number",
       },
       "onChange": Object {
         "type": "func",
