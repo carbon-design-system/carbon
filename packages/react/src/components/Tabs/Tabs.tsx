@@ -854,7 +854,7 @@ export interface TabListVerticalProps extends DivAttributes {
    * Provide an accessible label to be read when a user interacts with this
    * component
    */
-  'aria-label': string;
+  'aria-label'?: string;
 
   /**
    * Provide child elements to be rendered inside `ContentTabs`.
@@ -1068,7 +1068,7 @@ TabListVertical.propTypes = {
    * Provide an accessible label to be read when a user interacts with this
    * component
    */
-  'aria-label': PropTypes.string.isRequired,
+  'aria-label': PropTypes.string,
 
   /**
    * Provide child elements to be rendered inside `ContentTabs`.
