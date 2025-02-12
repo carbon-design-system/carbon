@@ -7282,6 +7282,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-is@npm:~18.3.1":
+  version: 18.3.1
+  resolution: "@types/react-is@npm:18.3.1"
+  dependencies:
+    "@types/react": "npm:^18"
+  checksum: 10/ccb79d6e196a5232cde8ccb255ec97e062801a3dafeff3816130fb5ad6b9a87f7c0806ab35bc00890a229773228ef217d0390839b68c705d3add2f798b5fcf82
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:~18.3.0":
   version: 18.3.1
   resolution: "@types/react@npm:18.3.1"
@@ -9633,7 +9642,7 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.0.0"
     "@testing-library/react": "npm:^16.0.0"
     "@testing-library/user-event": "npm:^14.4.3"
-    "@types/react-is": "npm:~18.3.0"
+    "@types/react-is": "npm:~18.3.1"
     accessibility-checker: "npm:^3.1.79"
     all-contributors-cli: "npm:^6.19.0"
     cross-env: "npm:^7.0.0"
