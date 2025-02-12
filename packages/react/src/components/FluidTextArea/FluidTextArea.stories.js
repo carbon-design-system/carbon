@@ -155,14 +155,16 @@ export const DefaultWithLayers = () => (
 const ToggleTip = (
   <>
     <ToggletipLabel>Text Area label</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
+    <span role="presentation">
+      <Toggletip align="top-left">
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>Additional field information here.</p>
+        </ToggletipContent>
+      </Toggletip>
+    </span>
   </>
 );
 
