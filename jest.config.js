@@ -18,6 +18,7 @@ module.exports = {
     '!**/*.stories.js',
     '!**/*-test.e2e.js',
   ],
+  coveragePathIgnorePatterns: ['packages/web-components/*'],
   testPathIgnorePatterns: ['packages/web-components/*'],
   transformIgnorePatterns: ['<rootDir>/node_modules/(?!lodash-es)'],
   moduleNameMapper: {
