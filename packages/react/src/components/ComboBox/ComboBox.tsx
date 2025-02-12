@@ -46,8 +46,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { useFloating, flip, autoUpdate } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
+import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
 
@@ -783,8 +782,9 @@ const ComboBox = forwardRef(
           onChange({ selectedItem: newSelectedItem });
         }
         if (
-          type === useCombobox.stateChangeTypes.FunctionSelectItem ||
-          type === useCombobox.stateChangeTypes.InputKeyDownEnter
+          (type === useCombobox.stateChangeTypes.FunctionSelectItem ||
+            type === useCombobox.stateChangeTypes.InputKeyDownEnter) &&
+          !isEqual(selectedItemProp, newSelectedItem) // Only fire if there's an actual change
         ) {
           onChange({ selectedItem: newSelectedItem });
         }

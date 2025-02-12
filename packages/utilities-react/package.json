@@ -15,6 +15,7 @@
   "files": [
     "es",
     "lib",
+    "types",
     "telemetry.yml"
   ],
   "keywords": [
@@ -41,7 +42,7 @@
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0"
   },
   "devDependencies": {
-    "esbuild": "^0.24.0",
+    "esbuild": "^0.25.0",
     "rimraf": "^6.0.0",
     "typescript": "^5.7.3",
     "typescript-config-carbon": "^0.4.0"

@@ -621,6 +621,40 @@ describe('ComboBox', () => {
         'cds--list-box__menu-item--highlighted'
       );
     });
+
+    it('should pass defined selectedItem to onChange when item is selected', async () => {
+      render(<ComboBox {...mockProps} />);
+
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+
+      await openMenu();
+      await userEvent.click(screen.getAllByRole('option')[0]);
+
+      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+      expect(mockProps.onChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          selectedItem: expect.anything(),
+        })
+      );
+
+      const call = mockProps.onChange.mock.calls[0][0];
+      expect(call.selectedItem).toBeDefined();
+      expect(call.selectedItem).toEqual(mockProps.items[0]);
+    });
+
+    it('should never pass undefined as selectedItem to onChange', async () => {
+      render(<ComboBox {...mockProps} />);
+
+      for (let i = 0; i < mockProps.items.length; i++) {
+        await openMenu();
+        await userEvent.click(screen.getAllByRole('option')[i]);
+
+        const call = mockProps.onChange.mock.calls[i][0];
+        expect(call.selectedItem).toBeDefined();
+        expect(call.selectedItem).not.toBeUndefined();
+        expect(call.selectedItem).toEqual(mockProps.items[i]);
+      }
+    });
   });
 
   describe('ComboBox autocomplete', () => {
