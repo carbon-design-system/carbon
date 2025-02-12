@@ -15,14 +15,16 @@ import styles from './list.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
- * Ordered list.
+ * Unordered list.
+ *
+ * @element cds-unordered-list
  */
 @customElement(`${prefix}-unordered-list`)
 class CDSUnorderedList extends LitElement {
   /**
    * `true` if expressive theme enabled.
    */
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'is-expressive' })
   isExpressive = false;
 
   connectedCallback() {
