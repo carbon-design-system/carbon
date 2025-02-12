@@ -15,7 +15,7 @@ import React, {
   WeakValidationMap,
 } from 'react';
 import cx from 'classnames';
-import Link, { LinkProps, LinkPropTypes } from './Link';
+import Link, { LinkPropTypes } from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';

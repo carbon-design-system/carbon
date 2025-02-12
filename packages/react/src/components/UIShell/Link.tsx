@@ -6,7 +6,11 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { type ElementType, type WeakValidationMap } from 'react';
+import React, {
+  ForwardedRef,
+  type ElementType,
+  type WeakValidationMap,
+} from 'react';
 import deprecate from '../../prop-types/deprecate';
 import { PolymorphicRef } from '../../internal/PolymorphicProps';
 import { PolymorphicProps } from '../../types/common';
@@ -20,7 +24,7 @@ export interface LinkBaseProps {
    * @deprecated Use `as` instead
    */
   element?: undefined;
-  ref?: React.RefObject<any>;
+  ref?: ForwardedRef<ElementType>;
 }
 
 export type LinkProps<E extends React.ElementType> = PolymorphicProps<
