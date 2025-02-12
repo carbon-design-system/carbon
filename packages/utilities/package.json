@@ -15,6 +15,7 @@
   "files": [
     "es",
     "lib",
+    "types",
     "telemetry.yml"
   ],
   "keywords": [
