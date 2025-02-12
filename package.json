@@ -75,8 +75,8 @@
     "lint-staged": "^15.0.0",
     "nx": "^20.2.1",
     "prettier": "^3.3.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "rimraf": "^5.0.0",
     "stylelint": "^16.0.0"
   },

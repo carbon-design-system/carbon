@@ -36,6 +36,23 @@ categories:
       - ai-governance--model
       - ai-governance--model-tuned
       - ai-governance--prompt
+      - ai--ethics
+      - ai--explainability
+      - ai--privacy
+      - ai--robustness
+      - ai--transparency
+      - ai--trust
+      - decision-velocity
+      - ibm--granite
+      - intelligence
+      - machine--learning--01
+      - machine--learning--02
+      - machine--learning--03
+      - machine--learning--04
+      - machine--learning--05
+      - machine--learning--06
+      - machine--learning--model
+      - technical-owner
   - name: Blockchain
     members:
       - connected--ecosystem
@@ -59,6 +76,7 @@ categories:
       - fire--alarm
       - fire--extinguisher
       - id--badge
+      - intelligent-infrastructure
       - no--smoking
       - office
       - recycle--bin
@@ -87,6 +105,8 @@ categories:
       - bucharest--national-theatre
       - bucharest--romanian-athenaeum
       - budapest
+      - budapest--corvin7
+      - budapest--hungarian-auto-club
       - budapest--lab-skyline
       - budapest--citadella
       - cairo--giza-plateau
@@ -102,9 +122,12 @@ categories:
       - dublin--brewery
       - dublin--castle
       - ecuador--quito
+      - ehningen--tech-campus-01
+      - ehningen--tech-campus-02
       - hamburg--philharmone
       - hong-kong--cityscape
       - hong-kong
+      - ibm--one-madison-avenue
       - ibm--uk-labs-hursley
       - japan--mt-fuji
       - kochi-houseboat
@@ -136,6 +159,7 @@ categories:
       - paris--pompidou-center
       - peru--machu-picchu
       - portland--building
+      - poughkeepsie--bridge
       - prague--charles-bridge-tower
       - prague--dancing-house--01
       - prague--dancing-house--02
@@ -153,6 +177,7 @@ categories:
       - shanghai--skyline
       - singapore
       - stockholm
+      - stuttgart--tv-tower
       - taipei--bubble-tea
       - tel-aviv
       - tokyo--cherry-blossom
@@ -593,6 +618,7 @@ categories:
       - application
       - art--tools--01
       - birthday--cake
+      - code--explanation
       - content--design
       - cupcake
       - design-and-development--01
@@ -772,14 +798,17 @@ categories:
       - enterprise--design--thinking--01
       - enterprise--design--thinking--02
       - eye
+      - ibm--ibv
       - ibm--ix
       - ibm--z
+      - ibm--z-os-container-platform
       - ibm--z--partition
       - progress
       - world--community--grid
   - name: Industry
     members:
       - agriculture
+      - b2b-commerce
       - bulldozer
       - cargo--crane
       - cargo--ship
@@ -822,23 +851,6 @@ categories:
       - iot--munich
       - solve
       - transform--01
-  - name: Learning
-    members:
-      - ai--ethics
-      - ai--explainability
-      - ai--privacy
-      - ai--robustness
-      - ai--transparency
-      - ai--trust
-      - decision-velocity
-      - intelligence
-      - machine--learning--01
-      - machine--learning--02
-      - machine--learning--03
-      - machine--learning--04
-      - machine--learning--05
-      - machine--learning--06
-      - technical-owner
   - name: Life Science
     members:
       - cell
@@ -899,6 +911,7 @@ categories:
       - tennis--net
       - tennis--racquet
       - tree
+      - waving-hand
       - whistle
       - yoga--01
       - yoga--02
@@ -917,9 +930,11 @@ categories:
   - name: Manufacturing
     members:
       - delivery--truck
+      - emissions
       - factory
       - forklift
       - ibm--rpa
+      - pipeline
       - robot
       - robotics
       - tools
@@ -992,6 +1007,9 @@ categories:
       - user--mask
       - user--profile
       - user--search
+  - name: Quantum
+    members:
+      - qiskit
   - name: Red Hat
     members:
       - build-applications-anywhere
@@ -1173,6 +1191,7 @@ categories:
   - name: Transportation
     members:
       - airplane
+      - airport
       - automobile
       - bicycle
       - bus
@@ -1181,9 +1200,11 @@ categories:
       - engine
       - fuel
       - luggage
+      - road
       - spaceship
       - steering--wheel
       - train
+      - tunnel
   - name: Watson
     members:
       - alchemy--data--news
@@ -1220,6 +1241,7 @@ categories:
       - visual--recognition
       - watson--logo
       - watsonx--ai
+      - watsonx--assistant
       - watsonx--code-assistant
       - watsonx--code-assistant-for-z
       - watsonx--code-assistant-for-z-refactor
@@ -1245,6 +1267,7 @@ categories:
       - moon--full
       - night--clear
       - overcast
+      - raindrop
       - rainy
       - rainy--heavy
       - snow
@@ -1265,11 +1288,13 @@ categories:
       - library
       - liquids
       - literature
+      - lockers
       - loop--hearing
       - metal-can
       - plastics
       - silence
       - station--hydration
+      - toilet
       - trash--burnable
       - trash--non-burnable
       - waste--electronic
