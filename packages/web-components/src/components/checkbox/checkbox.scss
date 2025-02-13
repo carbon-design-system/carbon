@@ -68,6 +68,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-checkbox-group) {
   display: flex;
+  inline-size: 100%;
 }
 
 :host(#{$prefix}-checkbox-group) .#{$prefix}--checkbox-group--slug,
@@ -89,4 +90,11 @@ $css--plex: true !default;
 :host(#{$prefix}-checkbox[ai-label]) ::slotted(#{$prefix}-ai-label),
 :host(#{$prefix}-checkbox[ai-label]) ::slotted(#{$prefix}-slug) {
   align-self: center;
+}
+
+:host(#{$prefix}-checkbox-group)
+  .#{$prefix}--checkbox-group--horizontal
+  ::slotted(#{$prefix}-checkbox) {
+  flex: none;
+  margin-inline-end: $spacing-05;
 }
