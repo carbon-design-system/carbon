@@ -611,6 +611,17 @@ const ComboBox = forwardRef(
           }
 
           case InputKeyDownEnter:
+            if (
+              highlightedIndex === -1 &&
+              !allowCustomValue &&
+              state.selectedItem
+            ) {
+              return {
+                ...changes,
+                selectedItem: null,
+                inputValue: state.inputValue,
+              };
+            }
             if (allowCustomValue) {
               setInputValue(inputValue);
               setHighlightedIndex(changes.selectedItem);
