@@ -32,10 +32,6 @@ export type LinkProps<E extends React.ElementType> = PolymorphicProps<
   LinkBaseProps
 >;
 
-// type LinkComponent = <T extends React.ElementType = 'a'>(
-//   props: LinkProps<T> | HeaderMenuItemBaseProps
-// ) => React.ReactElement | any;
-
 export interface LinkComponent {
   <E extends ElementType = 'a'>(
     props: LinkProps<E> | HeaderMenuItemBaseProps
