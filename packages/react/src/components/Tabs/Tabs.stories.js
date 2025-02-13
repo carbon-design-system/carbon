@@ -204,6 +204,7 @@ export const DismissableWithIcons = ({ contained }) => {
     {
       label: 'Dashboard',
       panel: <TabPanel key={0}>Dashboard</TabPanel>,
+      badgeIndicator: 'new notifications',
     },
     {
       label: 'Monitoring',
@@ -261,7 +262,11 @@ export const DismissableWithIcons = ({ contained }) => {
         onTabCloseRequest={handleCloseTabRequest}>
         <TabList contained={contained}>
           {renderedTabs.map((tab, index) => (
-            <Tab key={index} disabled={tab.disabled} renderIcon={icons[index]}>
+            <Tab
+              key={index}
+              disabled={tab.disabled}
+              renderIcon={icons[index]}
+              badgeIndicator={tab.badgeIndicator}>
               {tab.label}
             </Tab>
           ))}
@@ -279,7 +284,9 @@ export const WithIcons = () => {
         <Tab renderIcon={Dashboard}>Dashboard</Tab>
         <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
         <Tab renderIcon={Activity}>Activity</Tab>
-        <Tab renderIcon={IbmWatsonDiscovery}>Analyze</Tab>
+        <Tab renderIcon={IbmWatsonDiscovery} badgeIndicator="new notification">
+          Analyze
+        </Tab>
         <Tab disabled renderIcon={Settings}>
           Settings
         </Tab>
@@ -308,6 +315,87 @@ export const WithIcons = () => {
         <TabPanel>Tab Panel 5</TabPanel>
       </TabPanels>
     </Tabs>
+  );
+};
+
+export const WithBadgeIndicator = () => {
+  return (
+    <>
+      <Tabs>
+        <TabList activation="manual">
+          <Tab renderIcon={Dashboard}>Dashboard</Tab>
+          <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
+          <Tab renderIcon={Activity} badgeIndicator="new notification">
+            Activity
+          </Tab>
+          <Tab renderIcon={IbmWatsonDiscovery}>Analyze</Tab>
+          <Tab disabled renderIcon={Settings}>
+            Settings
+          </Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>
+            <form style={{ margin: '2em' }}>
+              <legend className={`cds--label`}>Validation example</legend>
+              <Checkbox id="cb" labelText="Accept privacy policy" />
+              <Button
+                style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                type="submit">
+                Submit
+              </Button>
+              <TextInput
+                type="text"
+                labelText="Text input label"
+                helperText="Optional help text"
+                id="text-input-1"
+              />
+            </form>
+          </TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+        </TabPanels>
+      </Tabs>
+
+      <br />
+      <Tabs>
+        <TabList activation="manual">
+          <Tab renderIcon={Dashboard}>Dashboard</Tab>
+          <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
+          <Tab renderIcon={Activity}>Activity</Tab>
+          <Tab renderIcon={IbmWatsonDiscovery} badgeIndicator="new fdsa">
+            Analyze
+          </Tab>
+          <Tab disabled renderIcon={Settings}>
+            Settings
+          </Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>
+            <form style={{ margin: '2em' }}>
+              <legend className={`cds--label`}>Validation example</legend>
+              <Checkbox id="cb" labelText="Accept privacy policy" />
+              <Button
+                style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                type="submit">
+                Submit
+              </Button>
+              <TextInput
+                type="text"
+                labelText="Text input label"
+                helperText="Optional help text"
+                id="text-input-1"
+              />
+            </form>
+          </TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </>
   );
 };
 
@@ -358,7 +446,7 @@ export const Icon20Only = () => {
         <IconTab label="Activity">
           <Activity size={20} aria-label="Activity" />
         </IconTab>
-        <IconTab label="Notification">
+        <IconTab label="Notification" badgeIndicator="new notifications">
           <Notification size={20} aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
@@ -385,7 +473,7 @@ export const IconOnly = () => {
         <IconTab label="Activity">
           <Activity aria-label="Activity" />
         </IconTab>
-        <IconTab label="Notification">
+        <IconTab label="Notification" badgeIndicator="new notifications">
           <Notification aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
@@ -445,7 +533,9 @@ export const ContainedWithIcons = () => {
     <Tabs>
       <TabList contained>
         <Tab renderIcon={Dashboard}>Dashboard</Tab>
-        <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
+        <Tab renderIcon={CloudMonitoring} badgeIndicator="new notifications">
+          Monitoring
+        </Tab>
         <Tab renderIcon={Activity}>Activity</Tab>
         <Tab renderIcon={IbmWatsonDiscovery}>Analyze</Tab>
         <Tab disabled renderIcon={Settings}>
@@ -533,7 +623,10 @@ export const ContainedWithSecondaryLabelsAndIcons = () => {
         <Tab renderIcon={Restart} disabled secondaryLabel="(0/7)">
           Remediate
         </Tab>
-        <Tab renderIcon={Dashboard} secondaryLabel="(4/12)">
+        <Tab
+          renderIcon={Dashboard}
+          badgeIndicator="new notifications"
+          secondaryLabel="(4/12)">
           Assets
         </Tab>
         <Tab renderIcon={CloudMonitoring} secondaryLabel="(1/23)">

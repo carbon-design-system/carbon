@@ -519,6 +519,7 @@ export const HeaderWActionsAndRightPanel = () => (
         </HeaderGlobalAction>
         <HeaderGlobalAction
           aria-label="Notifications"
+          badgeCount={4}
           isActive
           onClick={action('notification click')}>
           <Notification size={20} />

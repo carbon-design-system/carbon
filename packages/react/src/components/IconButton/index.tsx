@@ -183,11 +183,12 @@ const IconButton = React.forwardRef(function IconButton(
     [`${prefix}--icon-tooltip--disabled`]: disabled,
   });
 
-  if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
-    console.warn(
-      "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
-    );
-  }
+  // remove because it contradicts ui-shell HeaderGlobalAction button?
+  // if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
+  //   console.warn(
+  //     "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
+  //   );
+  // }
   const badgeId = useId('badge-indicator');
 
   return (

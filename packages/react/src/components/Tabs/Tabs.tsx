@@ -16,6 +16,7 @@ import React, {
   useRef,
   useEffect,
   forwardRef,
+  createContext,
   type ReactNode,
   type MouseEvent,
   type KeyboardEvent,
@@ -43,6 +44,7 @@ import { Close } from '@carbon/icons-react';
 import { useEvent } from '../../internal/useEvent';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
+import BadgeIndicator from '../BadgeIndicator';
 
 const verticalTabHeight = 64;
 
@@ -1144,6 +1146,11 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
   as?: keyof ReactHTML | ComponentType;
 
   /**
+   * **Experimental**: Display an empty dot badge on the Tab and provide a string to describe it for screen readers
+   */
+  badgeIndicator?: string;
+
+  /**
    * Provide child elements to be rendered inside `Tab`.
    */
   children?: ReactNode;
@@ -1191,6 +1198,7 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
 const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
   {
     as = 'button',
+    badgeIndicator: badgeIndicatorDescription,
     children,
     className: customClassName,
     disabled,
@@ -1216,8 +1224,10 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
   const ref = useMergedRefs([forwardRef, tabRef]);
   const [ignoreHover, setIgnoreHover] = useState(false);
   const id = `${baseId}-tab-${index}`;
+  const badgeId = useId('badge-indicator');
   const panelId = `${baseId}-tabpanel-${index}`;
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+  const isIconTab = React.useContext(IconTabContext);
 
   const isEllipsisActive = (element: any) => {
     setIsEllipsisApplied(element.offsetHeight < element.scrollHeight);
@@ -1402,6 +1412,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
         aria-controls={panelId}
         aria-disabled={disabled}
         aria-selected={selectedIndex === index}
+        aria-describedby={badgeIndicatorDescription && badgeId}
         ref={ref}
         id={id}
         role="tab"
@@ -1441,6 +1452,14 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
             {secondaryLabel}
           </Text>
         )}
+        {(Icon || isIconTab) && badgeIndicatorDescription && (
+          <>
+            <BadgeIndicator />
+            <span id={badgeId} hidden>
+              {badgeIndicatorDescription}
+            </span>
+          </>
+        )}
       </BaseComponent>
       {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
       {DismissIcon}
@@ -1453,6 +1472,11 @@ Tab.propTypes = {
    */
   // @ts-expect-error: Invalid prop type derivation
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+
+  /**
+   * **Experimental**: Display an empty dot badge on the Tab and provide a string to describe it for screen readers
+   */
+  badgeIndicator: PropTypes.string,
 
   /**
    * Provide child elements to be rendered inside `Tab`.
@@ -1504,6 +1528,8 @@ Tab.propTypes = {
  * IconTab
  */
 
+const IconTabContext = createContext(false);
+
 export interface IconTabProps extends DivAttributes {
   /**
    * Provide an icon to be rendered inside `IconTab` as the visual label for Tab.
@@ -1553,22 +1579,28 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(function IconTab(
 ) {
   const prefix = usePrefix();
 
+  const hasSize20 =
+    React.isValidElement(children) && children.props?.size === 20;
+
   const classNames = cx(
     `${prefix}--tabs__nav-item--icon-only`,
-    customClassName
+    customClassName,
+    { [`${prefix}--tabs__nav-item--icon-only__20`]: hasSize20 }
   );
   return (
-    <Tooltip
-      align="bottom"
-      defaultOpen={defaultOpen}
-      className={`${prefix}--icon-tooltip`}
-      enterDelayMs={enterDelayMs}
-      label={label}
-      leaveDelayMs={leaveDelayMs}>
-      <Tab className={classNames} ref={ref} {...rest}>
-        {children}
-      </Tab>
-    </Tooltip>
+    <IconTabContext.Provider value={true}>
+      <Tooltip
+        align="bottom"
+        defaultOpen={defaultOpen}
+        className={`${prefix}--icon-tooltip`}
+        enterDelayMs={enterDelayMs}
+        label={label}
+        leaveDelayMs={leaveDelayMs}>
+        <Tab className={classNames} ref={ref} {...rest}>
+          {children}
+        </Tab>
+      </Tooltip>
+    </IconTabContext.Provider>
   );
 });
 
