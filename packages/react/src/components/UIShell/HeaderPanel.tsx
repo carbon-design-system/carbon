@@ -19,7 +19,7 @@ import { keys, match } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
-interface HeaderPanelProps {
+export interface HeaderPanelProps {
   /**
    * Specify whether focus and blur listeners are added. They are by default.
    */

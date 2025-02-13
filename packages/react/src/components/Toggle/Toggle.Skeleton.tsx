@@ -10,7 +10,7 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface ToggleSkeletonProps {
+export interface ToggleSkeletonProps {
   'aria-label'?: string;
   className?: string;
 }

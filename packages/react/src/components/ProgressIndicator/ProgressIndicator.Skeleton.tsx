@@ -26,7 +26,7 @@ function Step() {
   );
 }
 
-interface ProgressIndicatorSkeletonProps {
+export interface ProgressIndicatorSkeletonProps {
   /**
    * Specify an optional className to add.
    */

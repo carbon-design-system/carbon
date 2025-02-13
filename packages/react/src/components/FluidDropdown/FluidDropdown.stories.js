@@ -105,7 +105,6 @@ const sharedArgTypes = {
 export const Default = (args) => (
   <div style={{ width: args.defaultWidth }}>
     <FluidDropdown
-      initialSelectedItem={items[2]}
       id="default"
       titleText="Label"
       label="Choose an option"

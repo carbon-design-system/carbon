@@ -81,7 +81,7 @@ function useToggletip() {
   return useContext(ToggletipContext);
 }
 
-interface ToggletipProps<E extends ElementType> {
+export interface ToggletipProps<E extends ElementType> {
   align?: PopoverAlignment;
   alignmentAxisOffset?: number;
   as?: E;
@@ -257,7 +257,7 @@ Toggletip.propTypes = {
   defaultOpen: PropTypes.bool,
 };
 
-interface ToggletipButtonBaseProps {
+export interface ToggletipButtonBaseProps {
   children?: ReactNode;
   className?: string;
   label?: string;
@@ -328,7 +328,7 @@ ToggletipButton.propTypes = {
 
 ToggletipButton.displayName = 'ToggletipButton';
 
-interface ToggletipContentProps {
+export interface ToggletipContentProps {
   children?: ReactNode;
   className?: string;
 }
@@ -348,7 +348,8 @@ const ToggletipContent = React.forwardRef<
     <PopoverContent
       className={customClassName}
       {...toggletip?.contentProps}
-      ref={ref}>
+      ref={ref}
+      aria-live="polite">
       <div className={`${prefix}--toggletip-content`}>{children}</div>
     </PopoverContent>
   );
@@ -370,7 +371,7 @@ ToggletipContent.displayName = 'ToggletipContent';
 
 export { ToggletipContent };
 
-interface ToggleTipActionsProps {
+export interface ToggleTipActionsProps {
   children?: ReactNode;
   className?: string;
 }

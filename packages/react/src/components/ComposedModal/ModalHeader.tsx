@@ -16,7 +16,7 @@ import { Close } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
 
-type DivProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'>;
+export type DivProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'>;
 export interface ModalHeaderProps extends DivProps {
   /**
    * Provide an optional function to be called when the close button is
