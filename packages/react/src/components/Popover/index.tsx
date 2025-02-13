@@ -25,12 +25,12 @@ import { mapPopoverAlignProp } from '../../tools/createPropAdapter';
 import {
   useFloating,
   flip,
+  hide,
   autoUpdate,
   arrow,
   offset,
   type Boundary,
 } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
 import {
   PolymorphicComponentPropWithRef,
