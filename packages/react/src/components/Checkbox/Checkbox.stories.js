@@ -20,11 +20,6 @@ const checkboxEvents = {
   labelText: 'Checkbox label',
 };
 
-const fieldsetCheckboxProps = () => ({
-  className: 'some-class',
-  legendText: 'Group label',
-});
-
 export default {
   title: 'Components/Checkbox',
   component: Checkbox,
@@ -146,7 +141,7 @@ const sharedArgTypes = {
 };
 
 export const Default = (args) => (
-  <CheckboxGroup {...fieldsetCheckboxProps()} {...args}>
+  <CheckboxGroup className="some-class" legendText="Group label" {...args}>
     <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
     <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
   </CheckboxGroup>
@@ -162,7 +157,8 @@ export const Horizontal = (args) => {
   return (
     <CheckboxGroup
       orientation="horizontal"
-      {...fieldsetCheckboxProps()}
+      className="some-class"
+      legendText="Group label"
       helperText="Helper text goes here"
       {...args}>
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
@@ -204,7 +200,9 @@ export const Single = () => {
   );
 };
 
-export const Skeleton = () => <CheckboxSkeleton />;
+export const Skeleton = () => {
+  return <CheckboxSkeleton />;
+};
 
 const AILabelFunc = (kind) => (
   <AILabel className="ai-label-container" kind={kind}>

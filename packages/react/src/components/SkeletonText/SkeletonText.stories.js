@@ -22,7 +22,9 @@ export default {
   },
 };
 
-export const Default = (args) => <SkeletonText {...args} />;
+export const Default = (args) => {
+  return <SkeletonText {...args} />;
+};
 
 Default.args = {
   heading: false,

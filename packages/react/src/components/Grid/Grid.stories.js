@@ -36,14 +36,18 @@ export default {
   ],
 };
 
-export const Default = (args) => (
-  <Grid {...args}>
-    <Column sm={4} />
-    <Column sm={4} />
-    <Column sm={4} />
-    <Column sm={4} />
-  </Grid>
-);
+export const Default = (args) => {
+  // Grab the style from here to see the visual example
+  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
+  return (
+    <Grid {...args}>
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
+    </Grid>
+  );
+};
 
 Default.args = {
   as: 'div',
@@ -82,6 +86,8 @@ Default.argTypes = {
 };
 
 export const Narrow = () => {
+  // Grab the style from here to see the visual example
+  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
   return (
     <Grid narrow>
       <Column sm={4} />
@@ -93,6 +99,8 @@ export const Narrow = () => {
 };
 
 export const Condensed = () => {
+  // Grab the style from here to see the visual example
+  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
   return (
     <Grid condensed>
       <Column sm={4} />
@@ -103,46 +111,56 @@ export const Condensed = () => {
   );
 };
 
-export const FullWidth = () => (
-  <Grid fullWidth>
-    <Column sm={4} />
-    <Column sm={4} />
-    <Column sm={4} />
-    <Column sm={4} />
-  </Grid>
-);
+export const FullWidth = () => {
+  // Grab the style from here to see the visual example
+  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
+  return (
+    <Grid fullWidth>
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
+    </Grid>
+  );
+};
 
-export const Responsive = () => (
-  <Grid>
-    <Column sm={2} md={4} lg={6}>
-      <p>Small: Span 2 of 4</p>
-      <p>Medium: Span 4 of 8</p>
-      <p>Large: Span 6 of 16</p>
-    </Column>
-    <Column sm={2} md={2} lg={3}>
-      <p>Small: Span 2 of 4</p>
-      <p>Medium: Span 2 of 8</p>
-      <p>Large: Span 3 of 16</p>
-    </Column>
-    <Column sm={0} md={2} lg={3}>
-      <p>Small: Span 0 of 4</p>
-      <p>Medium: Span 2 of 8</p>
-      <p>Large: Span 3 of 16</p>
-    </Column>
-    <Column sm={0} md={0} lg={4}>
-      <p>Small: Span 0 of 4</p>
-      <p>Medium: Span 0 of 8</p>
-      <p>Large: Span 4 of 16</p>
-    </Column>
-    <Column sm="25%" md="50%" lg="75%">
-      <p>Small: Span 25%</p>
-      <p>Medium: Span 50%</p>
-      <p>Large: Span 75%</p>
-    </Column>
-  </Grid>
-);
+export const Responsive = () => {
+  // Grab the style from here to see the visual example
+  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
+  return (
+    <Grid>
+      <Column sm={2} md={4} lg={6}>
+        <p>Small: Span 2 of 4</p>
+        <p>Medium: Span 4 of 8</p>
+        <p>Large: Span 6 of 16</p>
+      </Column>
+      <Column sm={2} md={2} lg={3}>
+        <p>Small: Span 2 of 4</p>
+        <p>Medium: Span 2 of 8</p>
+        <p>Large: Span 3 of 16</p>
+      </Column>
+      <Column sm={0} md={2} lg={3}>
+        <p>Small: Span 0 of 4</p>
+        <p>Medium: Span 2 of 8</p>
+        <p>Large: Span 3 of 16</p>
+      </Column>
+      <Column sm={0} md={0} lg={4}>
+        <p>Small: Span 0 of 4</p>
+        <p>Medium: Span 0 of 8</p>
+        <p>Large: Span 4 of 16</p>
+      </Column>
+      <Column sm="25%" md="50%" lg="75%">
+        <p>Small: Span 25%</p>
+        <p>Medium: Span 50%</p>
+        <p>Large: Span 75%</p>
+      </Column>
+    </Grid>
+  );
+};
 
 export const Subgrid = () => {
+  // Grab the style from here to see the visual example
+  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
   return (
     <>
       <Grid>
@@ -239,6 +257,8 @@ export const Subgrid = () => {
 };
 
 export const MixedGutterModes = () => {
+  // Grab the style from here to see the visual example
+  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
   return (
     <>
       <Grid>
@@ -306,51 +326,59 @@ export const MixedGutterModes = () => {
   );
 };
 
-export const GridStartEnd = () => (
-  <Grid>
-    <Column
-      sm={{ span: 1, start: 4 }}
-      md={{ span: 2, start: 7 }}
-      lg={{ span: 4, start: 13 }}>
-      span, start
-    </Column>
-    <Column
-      sm={{ span: 2, end: 5 }}
-      md={{ span: 4, end: 9 }}
-      lg={{ span: 8, end: 17 }}>
-      span, end
-    </Column>
-    <Column
-      sm={{ start: 1, end: 4 }}
-      md={{ start: 3, end: 9 }}
-      lg={{ start: 5, end: 17 }}>
-      start, end
-    </Column>
-  </Grid>
-);
+export const GridStartEnd = () => {
+  // Grab the style from here to see the visual example
+  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
+  return (
+    <Grid>
+      <Column
+        sm={{ span: 1, start: 4 }}
+        md={{ span: 2, start: 7 }}
+        lg={{ span: 4, start: 13 }}>
+        span, start
+      </Column>
+      <Column
+        sm={{ span: 2, end: 5 }}
+        md={{ span: 4, end: 9 }}
+        lg={{ span: 8, end: 17 }}>
+        span, end
+      </Column>
+      <Column
+        sm={{ start: 1, end: 4 }}
+        md={{ start: 3, end: 9 }}
+        lg={{ start: 5, end: 17 }}>
+        start, end
+      </Column>
+    </Grid>
+  );
+};
 
-export const Offset = () => (
-  <Grid>
-    <Column
-      sm={{ span: 1, offset: 3 }}
-      md={{ span: 2, offset: 6 }}
-      lg={{ span: 4, offset: 12 }}
-    />
-    <Column
-      sm={{ span: 2, offset: 2 }}
-      md={{ span: 4, offset: 4 }}
-      lg={{ span: 8, offset: 8 }}
-    />
-    <Column
-      sm={{ span: 3, offset: 1 }}
-      md={{ span: 6, offset: 2 }}
-      lg={{ span: 12, offset: 4 }}
-    />
-    <Column sm={{ span: 4 }} md={{ span: 8 }} lg={{ span: 16 }} />
-    <Column
-      sm={{ span: '25%', offset: 1 }}
-      md={{ span: '50%', offset: 2 }}
-      lg={{ span: '75%', offset: 4 }}
-    />
-  </Grid>
-);
+export const Offset = () => {
+  // Grab the style from here to see the visual example
+  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
+  return (
+    <Grid>
+      <Column
+        sm={{ span: 1, offset: 3 }}
+        md={{ span: 2, offset: 6 }}
+        lg={{ span: 4, offset: 12 }}
+      />
+      <Column
+        sm={{ span: 2, offset: 2 }}
+        md={{ span: 4, offset: 4 }}
+        lg={{ span: 8, offset: 8 }}
+      />
+      <Column
+        sm={{ span: 3, offset: 1 }}
+        md={{ span: 6, offset: 2 }}
+        lg={{ span: 12, offset: 4 }}
+      />
+      <Column sm={{ span: 4 }} md={{ span: 8 }} lg={{ span: 16 }} />
+      <Column
+        sm={{ span: '25%', offset: 1 }}
+        md={{ span: '50%', offset: 2 }}
+        lg={{ span: '75%', offset: 4 }}
+      />
+    </Grid>
+  );
+};

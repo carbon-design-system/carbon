@@ -43,17 +43,49 @@ what is in rendered inside of `Tab` and `TabPanel`.
 
 ### Line Tabs
 
-<Canvas of={TabsStories.Default} />
+<Canvas
+  of={TabsStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.Default),
+    },
+  ]}
+/>
 
 ### Contained Tabs
 
-<Canvas of={TabsStories.Contained} />
+<Canvas
+  of={TabsStories.Contained}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.Contained),
+    },
+  ]}
+/>
 
 ### Icon Tabs
 
-<Canvas of={TabsStories.IconOnly} />
+<Canvas
+  of={TabsStories.IconOnly}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.IconOnly),
+    },
+  ]}
+/>
 
-<Canvas of={TabsStories.Icon20Only} />
+<Canvas
+  of={TabsStories.Icon20Only}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.Icon20Only),
+    },
+  ]}
+/>
 
 ### Dismissable Tabs
 
@@ -175,11 +207,27 @@ return (
 
 And there you have it! Working dismissable tabs.
 
-<Canvas of={TabsStories.Dismissable} />
+<Canvas
+  of={TabsStories.Dismissable}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.Dismissable),
+    },
+  ]}
+/>
 
 ### Vertical tabs
 
-<Canvas of={TabsStories.Vertical} />
+<Canvas
+  of={TabsStories.Vertical}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.Vertical),
+    },
+  ]}
+/>
 
 ## Component API
 

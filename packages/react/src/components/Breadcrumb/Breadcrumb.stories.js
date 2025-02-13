@@ -71,4 +71,6 @@ BreadcrumbWithOverflowMenu.argTypes = {
   ...sharedArgTypes,
 };
 
-export const Skeleton = () => <BreadcrumbSkeleton />;
+export const Skeleton = () => {
+  return <BreadcrumbSkeleton />;
+};

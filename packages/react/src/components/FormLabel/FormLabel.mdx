@@ -1,6 +1,7 @@
 import { ArgTypes, Story, Canvas, Meta } from '@storybook/blocks';
 import Tooltip from '../Tooltip';
 import * as FormLabelStories from './FormLabel.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -23,7 +24,15 @@ import * as FormLabelStories from './FormLabel.stories';
 
 ## Overview
 
-<Canvas of={FormLabelStories.Default} />
+<Canvas
+  of={FormLabelStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FormLabelStories.Default),
+    },
+  ]}
+/>
 
 ## Component API
 

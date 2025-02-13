@@ -10,7 +10,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
-interface BaseSwitcherItemProps {
+export interface BaseSwitcherItemProps {
   /**
    * Specify the text content for the link
    */
@@ -64,17 +64,17 @@ interface BaseSwitcherItemProps {
   rel?: string;
 }
 
-interface SwitcherItemWithAriaLabel extends BaseSwitcherItemProps {
+export interface SwitcherItemWithAriaLabel extends BaseSwitcherItemProps {
   'aria-label': string;
   'aria-labelledby'?: never;
 }
 
-interface SwitcherItemWithAriaLabelledBy extends BaseSwitcherItemProps {
+export interface SwitcherItemWithAriaLabelledBy extends BaseSwitcherItemProps {
   'aria-label'?: never;
   'aria-labelledby': string;
 }
 
-type SwitcherItemProps =
+export type SwitcherItemProps =
   | SwitcherItemWithAriaLabel
   | SwitcherItemWithAriaLabelledBy;
 

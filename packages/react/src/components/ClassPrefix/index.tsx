@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { PropsWithChildren } from 'react';
 import { PrefixContext } from '../../internal/usePrefix';
 
-interface ClassPrefixProps {
+export interface ClassPrefixProps {
   /**
    *   The value used to prefix the CSS selectors
    *   used by Carbon components.

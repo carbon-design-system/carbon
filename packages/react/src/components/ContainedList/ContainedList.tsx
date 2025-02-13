@@ -15,7 +15,7 @@ import ContainedListItem from './ContainedListItem';
 
 const variants = ['on-page', 'disclosed'] as const;
 
-interface ContainedListType extends React.FC<ContainedListProps> {
+export interface ContainedListType extends React.FC<ContainedListProps> {
   ContainedListItem: typeof ContainedListItem;
 }
 

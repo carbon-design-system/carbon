@@ -155,20 +155,52 @@ const sharedArgTypes = {
   },
 };
 
-export const Default = (args) => (
-  <div style={{ width: 400 }}>
-    <Dropdown
-      id="default"
-      titleText="Dropdown label"
-      helperText="This is some helper text"
-      initialSelectedItem={items[1]}
-      label="Option 1"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...args}
-    />
-  </div>
-);
+export const Default = (args) => {
+  const items = [
+    {
+      text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+    },
+    {
+      text: 'Option 1',
+    },
+    {
+      text: 'Option 2',
+    },
+    {
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      text: 'Option 4',
+    },
+    {
+      text: 'Option 5',
+    },
+    {
+      text: 'Option 6',
+    },
+    {
+      text: 'Option 7',
+    },
+    {
+      text: 'Option 8',
+    },
+  ];
+
+  return (
+    <div style={{ width: 400 }}>
+      <Dropdown
+        id="default"
+        titleText="Dropdown label"
+        helperText="This is some helper text"
+        label="Choose an option"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        {...args}
+      />
+    </div>
+  );
+};
 
 Default.args = {
   ...sharedArgs,
@@ -178,43 +210,77 @@ Default.argTypes = {
   ...sharedArgTypes,
 };
 
-export const ExperimentalAutoAlign = (args) => (
-  <div style={{ width: 400 }}>
-    <div style={{ height: 300 }}></div>
-    <Dropdown
-      autoAlign={true}
-      id="default"
-      titleText="Dropdown label"
-      helperText="This is some helper text"
-      initialSelectedItem={items[1]}
-      label="Option 1"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      direction="top"
-      {...args}
-    />
-    <div style={{ height: 800 }}></div>
-  </div>
-);
+export const ExperimentalAutoAlign = (args) => {
+  return (
+    <div style={{ width: 400 }}>
+      <div style={{ height: 300 }}></div>
+      <Dropdown
+        autoAlign={true}
+        id="default"
+        titleText="Dropdown label"
+        helperText="This is some helper text"
+        initialSelectedItem={items[1]}
+        label="Option 1"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        direction="top"
+        {...args}
+      />
+      <div style={{ height: 800 }}></div>
+    </div>
+  );
+};
 
 ExperimentalAutoAlign.argTypes = {
   ...sharedArgTypes,
 };
 
-export const Inline = (args) => (
-  <div style={{ width: 600 }}>
-    <Dropdown
-      id="inline"
-      titleText="Inline dropdown label"
-      initialSelectedItem={items[1]}
-      label="Option 1"
-      type="inline"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...args}
-    />
-  </div>
-);
+export const Inline = (args) => {
+  const items = [
+    {
+      text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+    },
+    {
+      text: 'Option 1',
+    },
+    {
+      text: 'Option 2',
+    },
+    {
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      text: 'Option 4',
+    },
+    {
+      text: 'Option 5',
+    },
+    {
+      text: 'Option 6',
+    },
+    {
+      text: 'Option 7',
+    },
+    {
+      text: 'Option 8',
+    },
+  ];
+  return (
+    <div style={{ width: 600 }}>
+      <Dropdown
+        id="inline"
+        titleText="Inline dropdown label"
+        initialSelectedItem={items[1]}
+        label="Option 1"
+        type="inline"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        {...args}
+      />
+    </div>
+  );
+};
 
 Inline.argTypes = {
   ...sharedArgTypes,
@@ -266,11 +332,13 @@ InlineWithLayer.argTypes = {
   ...sharedArgTypes,
 };
 
-export const Skeleton = () => (
-  <div style={{ width: 300 }}>
-    <DropdownSkeleton />
-  </div>
-);
+export const Skeleton = () => {
+  return (
+    <div style={{ width: 300 }}>
+      <DropdownSkeleton />
+    </div>
+  );
+};
 
 const aiLabel = (
   <AILabel className="ai-label-container">

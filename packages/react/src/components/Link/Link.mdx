@@ -1,5 +1,6 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as LinkStories from './Link.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -25,7 +26,15 @@ interactive elements, too many links will clutter a page and make it difficult
 for users to identify their next steps. This is especially true for inline
 links, which should be used sparingly.
 
-<Canvas of={LinkStories.Default} />
+<Canvas
+  of={LinkStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(LinkStories.Default),
+    },
+  ]}
+/>
 
 ## Accessible Link with Icon
 
@@ -33,7 +42,15 @@ If the text of your link doesn't correspond to the action represented by the
 icon, consider incorporating an `aria-label` for the icon. This will ensure that
 visually impaired users can comprehend the outcome of clicking the link.
 
-<Canvas of={LinkStories.PairedWithIcon} />
+<Canvas
+  of={LinkStories.PairedWithIcon}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(LinkStories.PairedWithIcon),
+    },
+  ]}
+/>
 
 ## Component API
 

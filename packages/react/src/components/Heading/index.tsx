@@ -17,7 +17,7 @@ type SectionBaseProps = {
   level?: HeadingLevel;
 };
 
-type SectionProps<E extends ElementType> = PolymorphicProps<
+export type SectionProps<E extends ElementType> = PolymorphicProps<
   E,
   SectionBaseProps
 >;

@@ -8,3 +8,4 @@ snapshot:
 discovery:
   allowed-hostnames:
     - 1.www.s81c.com
+  network-idle-timeout: 1000

@@ -12,7 +12,7 @@ import SideNavLinkText from './SideNavLinkText';
 import Link from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface SideNavMenuItemProps extends ComponentProps<typeof Link> {
+export interface SideNavMenuItemProps extends ComponentProps<typeof Link> {
   /**
    * Specify the children to be rendered inside of the `SideNavMenuItem`
    */

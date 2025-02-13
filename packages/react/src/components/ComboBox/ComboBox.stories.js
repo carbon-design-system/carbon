@@ -8,7 +8,6 @@
 import React, { useState, useRef } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-
 import ComboBox from '../ComboBox';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -347,7 +346,7 @@ export const _fullyControlled = (args) => {
       text: 'Option 3',
     },
   ];
-  const [value, setValue] = useState(options[0]);
+  const [value, setValue] = React.useState(options[0]);
   const onChange = ({ selectedItem }) => {
     setValue(selectedItem);
   };

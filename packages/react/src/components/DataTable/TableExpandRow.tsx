@@ -13,7 +13,7 @@ import TableCell from './TableCell';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableRowProps } from './TableRow';
 
-interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
+export interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
   /**
    * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow
    */
