@@ -31,24 +31,9 @@ const controls = {
     control: 'boolean',
     description: `Specify whether the component should be active, or not.`,
   },
-  inactive: {
-    description:
-      ' The `inactive` property will be deprecated in the next major release. Please use `active` instead.',
-    control: false,
-  },
   description: {
     control: 'text',
     description: `Specify a description that would be used to best describe the loading state.`,
-  },
-  assistiveText: {
-    control: false,
-    description:
-      ' The `assistiveText` property will be deprecated in the next major release. Please use `description` instead.',
-  },
-  type: {
-    control: false,
-    description:
-      ' The `type` property will be deprecated in the next major release. Please use `small` instead.',
   },
   small: {
     control: 'boolean',
