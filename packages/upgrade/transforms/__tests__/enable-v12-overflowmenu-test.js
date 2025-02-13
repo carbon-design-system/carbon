@@ -13,7 +13,7 @@ const { defineTest } = require('jscodeshift/dist/testUtils');
 defineTest(
   __dirname,
   'enable-v12-overflowmenu',
-  { wrap: 'true' },
+  { wrapWithFeatureFlag: 'true' },
   'enable-v12-overflowmenu'
 );
 
@@ -21,6 +21,6 @@ defineTest(
 defineTest(
   __dirname,
   'enable-v12-overflowmenu',
-  { wrap: 'false' },
+  { wrapWithFeatureFlag: 'false' },
   'enable-v12-overflowmenu-nowrap'
 );

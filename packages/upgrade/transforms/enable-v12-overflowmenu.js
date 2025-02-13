@@ -25,12 +25,10 @@ const MENU_ITEM_PROPS_MAP = {
 const EVENT_HANDLERS = new Set(['onClick']);
 
 function transform(fileInfo, api, options) {
-  // console.log('Transform options:', options);
   const { jscodeshift: j } = api;
   const root = j(fileInfo.source);
   const printOptions = options.printOptions || defaultOptions;
-  const shouldWrapWithFlags = options.wrap !== false;
-  //  console.log('Wrap option:', options.params?.wrap, shouldWrapWithFlags);
+  const shouldWrapWithFlags = options.wrapWithFeatureFlag !== false;
   const overflowMenuElements = root
     .find(j.JSXElement, {
       openingElement: { name: { name: 'OverflowMenu' } },

@@ -337,7 +337,7 @@ export const upgrades = [
           Updates OverflowMenu components to v12 with optional FeatureFlags wrapping:
           1. Migrates to new API (OverflowMenuItem -> MenuItem)
           2. Updates props (itemText -> label, etc)
-          3. Optional FeatureFlags wrapping (--wrap=false to disable)
+          3. Optional FeatureFlags wrapping (--wrapWithFeatureFlag=false to disable)
        
           Example:
           Before:  <OverflowMenu aria-label="menu"><OverflowMenuItem itemText="Option" /></OverflowMenu>
@@ -369,9 +369,8 @@ export const upgrades = [
             transform,
             paths,
             verbose: options.verbose,
-            wrap: options.wrap, // Pass wrap in parserConfig
+            wrapWithFeatureFlag: options.wrapWithFeatureFlag,
           });
-          console.log('Run options wrap:', options.wrap);
         },
       },
       {
