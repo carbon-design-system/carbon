@@ -8,7 +8,12 @@
 /* eslint-disable storybook/story-exports */
 
 import React, { useEffect, useState } from 'react';
-import { unstable__Dialog as Dialog } from './';
+import {
+  unstable__Dialog as Dialog,
+  DialogHeader,
+  DialogControls,
+  DialogCloseButton,
+} from './';
 import Button from '../Button';
 import { action } from '@storybook/addon-actions';
 
@@ -48,6 +53,11 @@ export const Default = ({ open: _open, ...args }) => {
         Toggle open
       </Button>
       <Dialog onRequestClose={handleCloseEvent} open={open} {...args}>
+        <DialogHeader>
+          <DialogControls>
+            <DialogCloseButton onClick={handleCloseClick} />
+          </DialogControls>
+        </DialogHeader>
         <p>
           Elit hic at labore culpa itaque fugiat. Consequuntur iure autem autem
           officiis dolores facilis nulla earum! Neque quia nemo sequi assumenda

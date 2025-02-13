@@ -101,11 +101,6 @@
     min-block-size: $spacing-09;
   }
 
-  .#{$prefix}--dialog__content {
-    padding: $spacing-05;
-    block-size: 100%;
-  }
-
   .#{$prefix}--dialog--modal {
     border: 1px solid transparent;
   }
