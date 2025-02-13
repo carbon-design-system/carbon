@@ -95,7 +95,7 @@ type TooltipComponent = <T extends React.ElementType = typeof Popover>(
 const Tooltip: TooltipComponent = React.forwardRef(
   <T extends React.ElementType = typeof Popover>(
     {
-      as,
+      as: BaseComponent = Popover as T,
       align = 'top',
       className: customClassName,
       children,
@@ -117,7 +117,6 @@ const Tooltip: TooltipComponent = React.forwardRef(
     const id = useId('tooltip');
     const prefix = usePrefix();
     const child = React.Children.only(children);
-    const BaseComponent = as || Popover;
 
     const triggerProps = {
       onFocus: () => !focusByMouse && setOpen(true),
@@ -254,7 +253,8 @@ const Tooltip: TooltipComponent = React.forwardRef(
     }, [isDragging, onDragStop]);
 
     return (
-      <BaseComponent
+      <Popover
+        as={BaseComponent as React.ElementType}
         ref={ref}
         {...rest}
         align={align}
@@ -280,7 +280,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
           role="tooltip">
           {label || description}
         </PopoverContent>
-      </BaseComponent>
+      </Popover>
     );
   }
 );
