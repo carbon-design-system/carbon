@@ -135,7 +135,8 @@ export interface IconButtonProps
    * Provide the label to be rendered inside of the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
    * This means that if you have text in the child node it will not be
-   * announced to the screen reader.
+   * announced to the screen reader. If using the badgeCount = 0 then provide a
+   * label with describing there is a new notification.
    */
   label: ReactNode;
 
@@ -187,7 +188,7 @@ const IconButton = React.forwardRef(function IconButton(
       "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
     );
   }
-  const id = badgeCount ? useId('badge-indicator') : undefined;
+  const badgeId = useId('badge-indicator');
 
   return (
     <Tooltip
@@ -212,11 +213,11 @@ const IconButton = React.forwardRef(function IconButton(
           },
           className
         )}
-        aria-describedby={id}>
+        aria-describedby={badgeCount && badgeId}>
         {children}
         {badgeCount !== undefined && (
           <BadgeIndicator
-            id={id}
+            id={badgeId}
             count={badgeCount > 0 ? badgeCount : undefined}></BadgeIndicator>
         )}
       </ButtonBase>
