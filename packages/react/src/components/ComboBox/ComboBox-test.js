@@ -622,6 +622,25 @@ describe('ComboBox', () => {
       );
     });
 
+    it('should clear input when closing with chevron if input does not match any item and allowCustomValue is false', async () => {
+      render(<ComboBox {...mockProps} allowCustomValue={false} />);
+
+      // First type something that doesn't match any item
+      await userEvent.type(findInputNode(), 'xyz');
+
+      // Menu should be open at this point
+      assertMenuOpen(mockProps);
+
+      // Click the chevron/toggle button to close
+      await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+
+      // Menu should be closed
+      assertMenuClosed();
+
+      // Input should be cleared
+      expect(findInputNode()).toHaveDisplayValue('');
+    });
+
     it('should pass defined selectedItem to onChange when item is selected', async () => {
       render(<ComboBox {...mockProps} />);
 
