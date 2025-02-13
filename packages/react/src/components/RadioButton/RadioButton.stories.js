@@ -41,31 +41,6 @@ export default {
   },
 };
 
-export const Default = () => {
-  return (
-    <RadioButtonGroup
-      legendText="Group label"
-      name="radio-button-default-group">
-      <RadioButton
-        labelText="Radio button label"
-        value="radio-1"
-        id="radio-1"
-      />
-      <RadioButton
-        labelText="Radio button label"
-        value="radio-2"
-        id="radio-2"
-      />
-      <RadioButton
-        labelText="Radio button label"
-        value="radio-3"
-        id="radio-3"
-        disabled
-      />
-    </RadioButtonGroup>
-  );
-};
-
 export const Vertical = () => {
   return (
     <RadioButtonGroup
@@ -205,11 +180,11 @@ export const withAILabel = {
   ),
 };
 
-export const Playground = (args) => {
+export const Default = (args) => {
   return (
     <RadioButtonGroup
       legendText="Radio Button group"
-      name="radio-button-playground-group"
+      name="radio-button-default-group"
       {...args}>
       <RadioButton
         labelText="Radio button label"
@@ -230,7 +205,7 @@ export const Playground = (args) => {
   );
 };
 
-Playground.args = {
+Default.args = {
   defaultSelected: 'radio-2',
   helperText: 'Helper text',
   invalidText: 'Invalid selection',
@@ -238,7 +213,7 @@ Playground.args = {
   warnText: 'Please notice the warning',
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   defaultSelected: {
     description: 'Specify the `<RadioButton>` to be selected by default',
     options: ['radio-1', 'radio-2', 'radio-3'],

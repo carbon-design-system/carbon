@@ -26,12 +26,12 @@ import { ErrorBoundaryContext } from './ErrorBoundaryContext';
  * Reference:
  * https://reactjs.org/docs/error-boundaries.html#introducing-error-boundaries
  */
-interface ErrorBoundaryProps {
+export interface ErrorBoundaryProps {
   children?: ReactNode;
   fallback?: ReactNode;
 }
 
-interface ErrorBoundaryState {
+export interface ErrorBoundaryState {
   hasError: boolean;
 }
 

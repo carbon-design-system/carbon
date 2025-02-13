@@ -50,7 +50,7 @@ const Demo = () => (
   </VStack>
 );
 
-export const Playground = (args) => {
+export const Default = (args) => {
   return (
     <VStack gap={10}>
       <h1>Layout demo</h1>

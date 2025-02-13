@@ -42,9 +42,21 @@
     align-items: center;
     margin: 0;
     block-size: convert.to-rem(16px);
-    inline-size: auto;
     inset-block-start: convert.to-rem(13px);
-    inset-inline-start: $spacing-05;
+
+    // For the main label
+    &:not(.#{$prefix}--text-area__label-counter) {
+      inline-size: auto;
+      inset-inline-end: auto;
+      inset-inline-start: $spacing-05;
+    }
+
+    // For the counter
+    &.#{$prefix}--text-area__label-counter {
+      inline-size: auto;
+      inset-inline-end: $spacing-05;
+      inset-inline-start: auto;
+    }
   }
 
   .#{$prefix}--text-area--fluid .#{$prefix}--label::-webkit-scrollbar,

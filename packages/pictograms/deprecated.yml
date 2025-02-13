@@ -3,8 +3,6 @@ deprecated:
     reason: This icon has been replaced by ibm--z16--multi-frame
   - name: ibm--z-and-linuxone-single-frame
     reason: This icon has been replaced by ibm--z16--single-frame
-  - name: ibm--z
-    reason: This icon should no longer be used
   - name: ibm--z--partition
     reason: This icon should no longer be used
   - name: watson--logo

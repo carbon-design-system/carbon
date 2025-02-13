@@ -248,7 +248,7 @@ describe('Table', () => {
         <Table experimentalAutoAlign>
           <TableHead>
             <TableRow>
-              <TableHeader>Header1</TableHeader>
+              <TableHeader isSortable={true}>Header1</TableHeader>
             </TableRow>
           </TableHead>
           <TableBody>

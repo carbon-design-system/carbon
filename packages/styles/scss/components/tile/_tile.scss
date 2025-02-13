@@ -15,6 +15,7 @@
 @use '../../type' as *;
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/button-reset';
+@use '../../utilities/convert';
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
@@ -131,8 +132,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
     .#{$prefix}--tile--disabled-icon {
     position: absolute;
-    inset-block-end: layout.density('padding-inline');
-    inset-inline-end: layout.density('padding-inline');
+    block-size: convert.to-rem(20px);
+    inline-size: convert.to-rem(20px);
+    inset-block-end: convert.to-rem(12px);
+    inset-inline-end: convert.to-rem(12px);
   }
 
   .#{$prefix}--tile--clickable .#{$prefix}--tile--icon {

@@ -1721,7 +1721,9 @@
       "name": "Zoë Gathercole",
       "avatar_url": "https://avatars.githubusercontent.com/u/56911544?v=4",
       "profile": "https://github.com/Zoe-Gathercole",
-      "contributions": ["code"]
+      "contributions": [
+        "code"
+      ]
     },
     {
       "login": "ashna000",
@@ -1737,6 +1739,36 @@
       "name": "Zach Tindall",
       "avatar_url": "https://avatars.githubusercontent.com/u/1724822?v=4",
       "profile": "https://github.com/a88zach",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "vsvsv",
+      "name": "Vsevolod Platunov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9214692?v=4",
+      "profile": "https://github.com/vsvsv",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "heloiselui",
+      "name": "Heloise Lui",
+      "avatar_url": "https://avatars.githubusercontent.com/u/71858203?v=4",
+      "profile": "https://github.com/heloiselui",
+      "contributions": [
+        "code",
+        "doc",
+        "a11y",
+        "review"
+      ]
+    },
+    {
+      "login": "enricobguedes",
+      "name": "enricobguedes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45374536?v=4",
+      "profile": "https://github.com/enricobguedes",
       "contributions": [
         "code"
       ]

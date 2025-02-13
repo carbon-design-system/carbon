@@ -25,9 +25,9 @@ import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 
 type ToggletipLabelProps<E extends ElementType> = {
-  as?: E | undefined;
+  as?: E;
   children?: ReactNode;
-  className?: string | undefined;
+  className?: string;
 };
 
 /**
@@ -81,13 +81,14 @@ function useToggletip() {
   return useContext(ToggletipContext);
 }
 
-interface ToggletipProps<E extends ElementType> {
-  align?: PopoverAlignment | undefined;
-  as?: E | undefined;
-  autoAlign?: boolean | undefined;
-  className?: string | undefined;
+export interface ToggletipProps<E extends ElementType> {
+  align?: PopoverAlignment;
+  alignmentAxisOffset?: number;
+  as?: E;
+  autoAlign?: boolean;
+  className?: string;
   children?: ReactNode;
-  defaultOpen?: boolean | undefined;
+  defaultOpen?: boolean;
 }
 
 /**
@@ -224,6 +225,11 @@ Toggletip.propTypes = {
   ]),
 
   /**
+   * Provide an offset value for alignment axis.
+   */
+  alignmentAxisOffset: PropTypes.number,
+
+  /**
    * Provide a custom element or component to render the top-level node for the
    * component.
    */
@@ -251,10 +257,10 @@ Toggletip.propTypes = {
   defaultOpen: PropTypes.bool,
 };
 
-interface ToggletipButtonBaseProps {
+export interface ToggletipButtonBaseProps {
   children?: ReactNode;
-  className?: string | undefined;
-  label?: string | undefined;
+  className?: string;
+  label?: string;
 }
 
 export type ToggleTipButtonProps<T extends React.ElementType> =
@@ -264,6 +270,7 @@ export type ToggleTipButtonProps<T extends React.ElementType> =
  * `ToggletipButton` controls the visibility of the Toggletip through mouse
  * clicks and keyboard interactions.
  */
+
 export const ToggletipButton = React.forwardRef(function ToggletipButton<
   T extends React.ElementType,
 >(
@@ -321,9 +328,9 @@ ToggletipButton.propTypes = {
 
 ToggletipButton.displayName = 'ToggletipButton';
 
-interface ToggletipContentProps {
+export interface ToggletipContentProps {
   children?: ReactNode;
-  className?: string | undefined;
+  className?: string;
 }
 
 /**
@@ -341,7 +348,8 @@ const ToggletipContent = React.forwardRef<
     <PopoverContent
       className={customClassName}
       {...toggletip?.contentProps}
-      ref={ref}>
+      ref={ref}
+      aria-live="polite">
       <div className={`${prefix}--toggletip-content`}>{children}</div>
     </PopoverContent>
   );
@@ -363,9 +371,9 @@ ToggletipContent.displayName = 'ToggletipContent';
 
 export { ToggletipContent };
 
-interface ToggleTipActionsProps {
+export interface ToggleTipActionsProps {
   children?: ReactNode;
-  className?: string | undefined;
+  className?: string;
 }
 
 /**

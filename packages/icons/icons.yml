@@ -416,6 +416,20 @@
     - Plex
   sizes:
     - 32
+- name: ai-business-impact-assessment
+  friendly_name: AI business impact assessment
+  aliases:
+    - automation
+    - artificial intelligence
+    - business
+    - impact
+    - metrics
+    - performance
+    - assistant
+    - enterprise
+    - watsonx
+  sizes:
+    - 32
 - name: ai-financial-sustainability-check
   friendly_name: AI Financial Sustainability Check
   aliases:
@@ -1286,6 +1300,15 @@
     - action
   sizes:
     - 32
+- name: array
+  friendly_name: Array
+  aliases:
+    - array
+    - array data structure
+    - data
+    - structure
+  sizes:
+    - 32
 - name: array--booleans
   friendly_name: Array of booleans
   aliases:
@@ -1572,6 +1595,16 @@
     - asset
   sizes:
     - 32
+- name: asset-movement
+  friendly_name: Asset movement
+  aliases:
+    - asset
+    - movement
+    - export
+    - import
+    - document
+  sizes:
+    - 32
 - name: asterisk
   friendly_name: Asterisk
   aliases:
@@ -1666,6 +1699,17 @@
     - memory
     - resources
     - cloud
+  sizes:
+    - 32
+- name: avro
+  friendly_name: Avro
+  aliases:
+    - avro
+    - apache avro
+    - remote
+    - procedure
+    - data
+    - framework
   sizes:
     - 32
 - name: awake
@@ -1839,6 +1883,19 @@
     - empty battery
     - battery indicator
     - technology
+- name: battery--error
+  friendly_name: Battery error
+  sizes:
+    - 32
+  aliases:
+    - charging
+    - power
+    - battery error
+    - error
+    - fail
+    - technology
+    - battery indicator
+    - battery
 - name: battery--full
   friendly_name: Battery full
   sizes:
@@ -1886,6 +1943,18 @@
     - power
     - battery quarter
     - quartery battery
+    - technology
+    - battery indicator
+    - battery
+- name: battery--warning
+  friendly_name: Battery warning
+  sizes:
+    - 32
+  aliases:
+    - charging
+    - power
+    - battery warning
+    - warn
     - technology
     - battery indicator
     - battery
@@ -2527,6 +2596,21 @@
     - travel
     - public
     - bus
+  sizes:
+    - 32
+- name: business-metrics
+  friendly_name: Business metrics
+  aliases:
+    - automation
+    - artificial intelligence
+    - business
+    - impact
+    - metrics
+    - meter
+    - performance
+    - assistant
+    - enterprise
+    - watsonx
   sizes:
     - 32
 - name: business-processes
@@ -3337,6 +3421,21 @@
     - change catalog
     - edit
     - edit catalog
+  sizes:
+    - 32
+- name: channels
+  friendly_name: Channels
+  aliases:
+    - channels
+    - communication
+    - communicate
+    - pathway
+    - connections
+    - exchange
+    - data
+    - AS2
+    - SFTP
+    - FTP
   sizes:
     - 32
 - name: character--decimal
@@ -5702,6 +5801,14 @@
     - variable
   sizes:
     - 32
+- name: create-link
+  friendly_name: Create link
+  aliases:
+    - create
+    - add
+    - create link
+  sizes:
+    - 32
 - name: credentials
   friendly_name: Credentials
   aliases:
@@ -6736,6 +6843,19 @@
     - van
     - shipping
     - ecommerce
+  sizes:
+    - 32
+- name: delivery-settings
+  friendly_name: Delivery settings
+  aliases:
+    - delivery
+    - settings
+    - send
+    - document
+    - messages
+    - policies
+    - timeouts
+    - configurations
   sizes:
     - 32
 - name: demo
@@ -10402,11 +10522,55 @@
     - storage
   sizes:
     - 32
+- name: ibm-consulting-advantage--agent
+  friendly_name: IBM Consulting Advantage Agent
+  aliases:
+    - prompt based agent
+    - AI agent
+    - chat agent
+    - prompt
+    - AI
+    - consulting
+    - agent
+  sizes:
+    - 32
+- name: ibm-consulting-advantage--application
+  friendly_name: IBM Consulting Advantage Application
+  aliases:
+    - software applications
+    - assets
+    - packages
+    - software
+    - application
+    - consulting
+  sizes:
+    - 32
+- name: ibm-consulting-advantage--assistant
+  friendly_name: IBM Consulting Advantage Assistant
+  aliases:
+    - chat assistant, AI assistant, prompt based assistant
+    - AI assistant
+    - prompt based assistant
+    - assistant
+    - chat
+    - consulting
+  sizes:
+    - 32
 - name: ibm--content-services
   friendly_name: IBM® Content Services
   aliases:
     - content management
     - SaaS
+  sizes:
+    - 32
+- name: ibm--databand
+  friendly_name: IBM Databand®
+  aliases:
+    - databand
+    - observability
+    - software
+    - data
+    - IBM Databand
   sizes:
     - 32
 - name: ibm--data-power
@@ -13646,6 +13810,16 @@
     - unavailable
   sizes:
     - 32
+- name: kiosk-device
+  friendly_name: Kiosk device
+  aliases:
+    - kiosk
+    - shared
+    - shared device
+    - device
+    - customer-facing
+  sizes:
+    - 32
 - name: kubelet
   friendly_name: Kubelet
   aliases:
@@ -14773,6 +14947,19 @@
     - avatar
     - tag
     - identification
+- name: logo--git
+  friendly_name: Logo Git
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
 - name: logo--github
   friendly_name: Logo GitHub
   sizes:
@@ -15019,6 +15206,19 @@
   friendly_name: Logo React
   aliases:
     - brand - emblem - logotype - symbol - id - avatar - tag - identification
+  sizes:
+    - 32
+- name: logo--red-hat-ai-instructlab-on-ibm-cloud
+  friendly_name: Logo Red Hat AI InstructLab® on IBM Cloud®
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--red-hat-ansible
@@ -16209,6 +16409,15 @@
     - film
     - format
     - compression
+  sizes:
+    - 32
+- name: multiuser-device
+  friendly_name: Multiuser device
+  aliases:
+    - shared device
+    - device
+    - shared
+    - multiuser
   sizes:
     - 32
 - name: music
@@ -21245,6 +21454,18 @@
     - grow
   sizes:
     - 32
+- name: spyre-accelerator
+  friendly_name: Spyre accelerator
+  aliases:
+    - Spyre
+    - Accelerator
+    - Z
+    - Inferencing
+    - AI
+    - system
+    - chip
+  sizes:
+    - 32
 - name: SQL
   friendly_name: SQL
   aliases:
@@ -23505,6 +23726,19 @@
     - triangle
     - shape
     - geometry
+  sizes:
+    - 32
+- name: trigger
+  friendly_name: Trigger
+  aliases:
+    - trigger
+    - listener
+    - integration
+    - runtime
+    - events
+    - execute
+    - service
+    - action
   sizes:
     - 32
 - name: trophy

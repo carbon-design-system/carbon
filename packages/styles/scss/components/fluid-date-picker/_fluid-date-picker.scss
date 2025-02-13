@@ -399,7 +399,11 @@
     border-inline-start-color: $border-subtle;
   }
 
-  // Slug styles
+  // AI Label styles
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker-input__wrapper--decorator
+    .#{$prefix}--date-picker-input-inner-wrapper--decorator
+    > *,
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker-input__wrapper--slug
     .#{$prefix}--ai-label,
@@ -439,6 +443,15 @@
     border-block-end-color: $ai-border-strong;
   }
 
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker-input__wrapper--decorator
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker-input__wrapper--decorator
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker--fluid--warn
+    .#{$prefix}--date-picker-input__wrapper--decorator
+    .#{$prefix}--date-picker__input,
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker-input__wrapper--slug
     .#{$prefix}--date-picker__input,

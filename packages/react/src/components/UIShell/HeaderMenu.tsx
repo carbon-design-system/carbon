@@ -22,7 +22,7 @@ import { composeEventHandlers } from '../../tools/events';
  * help manage focus state of its children.
  */
 
-interface HeaderMenuProps {
+export interface HeaderMenuProps {
   /**
    * Required props for the accessibility label of the menu
    */

@@ -84,7 +84,11 @@ const BreadcrumbItem: ForwardRefReturn<HTMLLIElement, BreadcrumbItemProps> =
               {children}
             </Link>
           ) : (
-            <Text className={`${prefix}--link`}>{children}</Text>
+            <Text
+              aria-current={ariaCurrent || isCurrentPage}
+              className={`${prefix}--link`}>
+              {children}
+            </Text>
           )}
         </li>
       );

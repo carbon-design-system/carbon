@@ -19,7 +19,7 @@ import wrapFocus, {
   wrapFocusWithoutSentinels,
   elementOrParentIsFloatingMenu,
 } from '../../internal/wrapFocus';
-import debounce from 'lodash.debounce';
+import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -264,7 +264,7 @@ const Modal = React.forwardRef(function Modal(
 ) {
   const prefix = usePrefix();
   const button = useRef<HTMLButtonElement>(null);
-  const secondaryButton = useRef();
+  const secondaryButton = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const innerModal = useRef<HTMLDivElement>(null);
   const startTrap = useRef<HTMLSpanElement>(null);

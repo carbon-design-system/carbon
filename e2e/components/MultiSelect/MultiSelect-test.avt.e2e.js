@@ -88,6 +88,9 @@ test.describe('@avt MultiSelect', () => {
     const toggleButton = page.getByRole('combobox', {
       expanded: false,
     });
+    const toggleButtonExpanded = page.getByRole('combobox', {
+      expanded: true,
+    });
     const selection = page.getByRole('button', {
       name: 'Clear all selected items',
     });
@@ -100,11 +103,22 @@ test.describe('@avt MultiSelect', () => {
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('ArrowDown');
     await expect(menu).toBeVisible();
+    // Expect focus to be on 1st item in menu after Arrow Down
+    // when there is no initial selected item
+    await expect(
+      page.getByRole('option', {
+        name: 'An example option that is really long to show what should be done to handle long text',
+      })
+    ).toHaveClass(
+      'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
+    );
     // Close with Escape, retain focus, and open with Enter
     await page.keyboard.press('Escape');
     await expect(menu).toBeHidden();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
+    // Expect focus to be retained when no initial selected item after Enter
+    await expect(toggleButtonExpanded).toBeFocused();
     await expect(menu).toBeVisible();
     // Close with Escape, retain focus, and open with Spacebar
     await page.keyboard.press('Escape');
@@ -143,7 +157,23 @@ test.describe('@avt MultiSelect', () => {
         name: 'An example option that is really long to show what should be done to handle long text',
         selected: true,
       })
-    ).toBeVisible();
+    ).toHaveClass(
+      'cds--list-box__menu-item cds--list-box__menu-item--active cds--list-box__menu-item--highlighted'
+    );
+    // Close with Escape, retain focus, and open with Arrow Down
+    await page.keyboard.press('Escape');
+    await expect(menu).toBeHidden();
+    await expect(toggleButton).toBeFocused();
+    await page.keyboard.press('ArrowDown');
+    // On Arrow Down, selected item should be focused
+    await expect(
+      page.getByRole('option', {
+        name: 'An example option that is really long to show what should be done to handle long text',
+        selected: true,
+      })
+    ).toHaveClass(
+      'cds--list-box__menu-item cds--list-box__menu-item--active cds--list-box__menu-item--highlighted'
+    );
     // move to second option
     await page.keyboard.press('ArrowDown');
     await expect(

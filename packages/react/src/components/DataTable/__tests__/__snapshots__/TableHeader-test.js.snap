@@ -18,6 +18,9 @@ exports[`TableHeader renders as expected - Component API should render 1`] = `
               class="cds--table-header-label"
             >
               Header
+              <div
+                class="cds--table-header-label--decorator-inner"
+              />
             </div>
           </th>
         </tr>

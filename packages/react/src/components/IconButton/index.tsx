@@ -65,7 +65,7 @@ const propMappingFunction = (deprecatedValue) => {
   return mapping[deprecatedValue];
 };
 
-interface IconButtonProps
+export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Specify how the trigger should align with the tooltip
@@ -76,6 +76,11 @@ interface IconButtonProps
    * **Experimental**: Will attempt to automatically align the tooltip
    */
   autoAlign?: boolean;
+
+  /**
+   * Optionally specify an href for your IconButton to become an `<a>` element
+   */
+  href?: string;
 
   /**
    * Provide an icon or asset to be rendered inside of the IconButton
@@ -252,6 +257,11 @@ IconButton.propTypes = {
    * **Experimental**: Will attempt to automatically align the tooltip
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * Optionally specify an href for your IconButton to become an `<a>` element
+   */
+  href: PropTypes.string,
 
   /**
    * Provide an icon or asset to be rendered inside of the IconButton

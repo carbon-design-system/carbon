@@ -55,10 +55,10 @@ import { useSelection } from '../../internal/Selection';
 import {
   useFloating,
   flip,
+  hide,
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
 import { TranslateWithId } from '../../types/common';
 
 const {
@@ -159,7 +159,7 @@ export interface FilterableMultiSelectProps<ItemType>
   /**
    * Default sorter is assigned if not provided.
    */
-  filterItems(
+  filterItems?(
     items: readonly ItemType[],
     extra: {
       inputValue: string | null;
@@ -472,7 +472,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
-      [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
       [`${prefix}--list-box__wrapper--slug`]: slug,
       [`${prefix}--list-box__wrapper--decorator`]: decorator,
       [`${prefix}--autoalign`]: autoAlign,
@@ -610,6 +609,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
       case InputKeyDownArrowDown:
         if (InputKeyDownArrowDown === type && !isOpen) {
           setIsOpen(true);
+          return {
+            ...changes,
+            highlightedIndex: 0,
+          };
         }
         if (highlightedIndex > -1) {
           const itemArray = document.querySelectorAll(

@@ -1973,6 +1973,17 @@ Map {
         },
       },
     },
+    "TableDecoratorRow": Object {
+      "displayName": "TableDecoratorRow",
+      "propTypes": Object {
+        "className": Object {
+          "type": "string",
+        },
+        "decorator": Object {
+          "type": "node",
+        },
+      },
+    },
     "TableExpandHeader": Object {
       "propTypes": Object {
         "aria-controls": Object {
@@ -2118,6 +2129,7 @@ Map {
       ],
     },
     "TableRow": Object {
+      "$$typeof": Symbol(react.forward_ref),
       "propTypes": Object {
         "className": Object {
           "type": "string",
@@ -2126,6 +2138,7 @@ Map {
           "type": "bool",
         },
       },
+      "render": [Function],
     },
     "TableSelectAll": Object {
       "propTypes": Object {
@@ -4214,6 +4227,9 @@ Map {
       },
       "enterDelayMs": Object {
         "type": "number",
+      },
+      "href": Object {
+        "type": "string",
       },
       "isSelected": Object {
         "type": "bool",
@@ -7448,6 +7464,9 @@ Map {
   },
   "SliderSkeleton" => Object {
     "propTypes": Object {
+      "ariaLabel": Object {
+        "type": "string",
+      },
       "className": Object {
         "type": "string",
       },
@@ -7456,6 +7475,9 @@ Map {
       },
       "twoHandles": Object {
         "type": "bool",
+      },
+      "unstable_ariaLabelHandleUpper": Object {
+        "type": "string",
       },
     },
   },
@@ -7817,7 +7839,6 @@ Map {
         "type": "oneOf",
       },
       "aria-label": Object {
-        "isRequired": true,
         "type": "string",
       },
       "children": Object {
@@ -7868,7 +7889,6 @@ Map {
         "type": "oneOf",
       },
       "aria-label": Object {
-        "isRequired": true,
         "type": "string",
       },
       "children": Object {
@@ -8052,6 +8072,17 @@ Map {
       },
     },
   },
+  "TableDecoratorRow" => Object {
+    "displayName": "TableDecoratorRow",
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "decorator": Object {
+        "type": "node",
+      },
+    },
+  },
   "TableExpandHeader" => Object {
     "propTypes": Object {
       "aria-controls": Object {
@@ -8197,6 +8228,7 @@ Map {
     ],
   },
   "TableRow" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -8205,6 +8237,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "TableSelectAll" => Object {
     "propTypes": Object {
@@ -9433,6 +9466,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "alignmentAxisOffset": Object {
+        "type": "number",
       },
       "as": Object {
         "type": "elementType",
@@ -10825,6 +10861,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "enableCounter": Object {
+        "type": "bool",
+      },
       "id": Object {
         "isRequired": true,
         "type": "string",
@@ -10841,6 +10880,9 @@ Map {
       "labelText": Object {
         "isRequired": true,
         "type": "node",
+      },
+      "maxCount": Object {
+        "type": "number",
       },
       "onChange": Object {
         "type": "func",
@@ -10954,6 +10996,48 @@ Map {
         "type": "bool",
       },
     },
+  },
+  "unstable__IconIndicator" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "failed",
+            "caution-major",
+            "caution-minor",
+            "undefined",
+            "succeeded",
+            "normal",
+            "in-progress",
+            "incomplete",
+            "not-started",
+            "pending",
+            "unknown",
+            "informative",
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOf",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            16,
+            20,
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
   },
   "unstable__Slug" => Object {
     "$$typeof": Symbol(react.forward_ref),

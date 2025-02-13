@@ -180,6 +180,29 @@ describe('Dropdown', () => {
     });
   });
 
+  it('should not open on arrowUp', async () => {
+    let mockProps1 = { ...mockProps };
+    const ref = React.createRef();
+    render(<Dropdown {...mockProps1} readOnly={false} ref={ref} />);
+
+    const button = screen.getByRole('combobox');
+
+    if (button) {
+      assertMenuClosed();
+      // ArrowUp should not open the menu
+      fireEvent.keyDown(button, { key: 'ArrowUp' });
+      assertMenuClosed();
+      // ArrowDown should open the menu
+      fireEvent.keyDown(button, { key: 'ArrowDown' });
+      assertMenuOpen(mockProps1);
+      // ArrowUp is allowed now that the menu is open
+      fireEvent.keyDown(button, { key: 'ArrowUp' });
+      assertMenuOpen(mockProps1);
+    }
+
+    mockProps.onChange.mockClear();
+  });
+
   it('should respect readOnly prop', async () => {
     let onChange = jest.fn();
     let onKeyDown = jest.fn();

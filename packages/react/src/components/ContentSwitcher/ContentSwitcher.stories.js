@@ -11,7 +11,12 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import ContentSwitcher from './ContentSwitcher';
 import { Switch, IconSwitch } from '../Switch';
 import mdx from './ContentSwitcher.mdx';
-import { TableOfContents, Workspace, ViewMode_2 } from '@carbon/icons-react';
+import {
+  TableOfContents,
+  Workspace,
+  ViewMode_2,
+  Icon,
+} from '@carbon/icons-react';
 
 export default {
   title: 'Components/ContentSwitcher',
@@ -34,23 +39,46 @@ export default {
   },
 };
 
-export const Default = () => (
-  <ContentSwitcher onChange={() => {}}>
+const sharedArgTypes = {
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+  },
+};
+
+export const Default = (args) => (
+  <ContentSwitcher {...args}>
     <Switch name="one" text="First section" />
-    <Switch name="two">Second section</Switch>
+    <Switch name="two" text="Second section" />
     <Switch name="three" text="Third section" />
   </ContentSwitcher>
 );
 
-export const _WithLayer = () => (
+Default.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const _WithLayer = (args) => (
   <WithLayer>
-    <ContentSwitcher onChange={() => {}}>
+    <ContentSwitcher onChange={() => {}} {...args}>
       <Switch name="one" text="First section" />
       <Switch name="two" text="Second section" />
       <Switch name="three" text="Third section" />
     </ContentSwitcher>
   </WithLayer>
 );
+
+_WithLayer.argTypes = {
+  ...sharedArgTypes,
+};
 
 export const IconOnly = (args) => (
   <ContentSwitcher onChange={() => {}} {...args}>
@@ -65,6 +93,10 @@ export const IconOnly = (args) => (
     </IconSwitch>
   </ContentSwitcher>
 );
+
+IconOnly.argTypes = {
+  ...sharedArgTypes,
+};
 
 export const IconOnlyWithLayer = (args) => (
   <WithLayer>
@@ -82,29 +114,6 @@ export const IconOnlyWithLayer = (args) => (
   </WithLayer>
 );
 
-export const Playground = (args) => (
-  <ContentSwitcher {...args}>
-    <Switch name="one" text="First section" />
-    <Switch name="two" text="Second section" />
-    <Switch name="three" text="Third section" />
-  </ContentSwitcher>
-);
-
-Playground.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  onChange: {
-    action: 'onChange',
-  },
-  size: {
-    options: ['sm', 'md', 'lg'],
-  },
+IconOnlyWithLayer.argTypes = {
+  ...sharedArgTypes,
 };

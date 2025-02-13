@@ -8,6 +8,7 @@ import React, {
   type ReactNode,
   type ReactElement,
   type RefObject,
+  type MutableRefObject,
   useMemo,
   isValidElement,
 } from 'react';
@@ -16,7 +17,7 @@ import PropTypes from 'prop-types';
 import { Layer } from '../Layer';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
-import debounce from 'lodash.debounce';
+import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
@@ -257,6 +258,8 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     const button = useRef<HTMLButtonElement>(null);
     const startSentinel = useRef<HTMLButtonElement>(null);
     const endSentinel = useRef<HTMLButtonElement>(null);
+    const onMouseDownTarget: MutableRefObject<Node | null> =
+      useRef<Node | null>(null);
     const focusTrapWithoutSentinels = useFeatureFlag(
       'enable-experimental-focus-wrap-without-sentinels'
     );
@@ -299,14 +302,21 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       onKeyDown?.(event);
     }
 
+    function handleOnMouseDown(evt: React.MouseEvent<HTMLDivElement>) {
+      const target = evt.target as Node;
+      onMouseDownTarget.current = target;
+    }
+
     function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
       const target = evt.target as Node;
+      const mouseDownTarget = onMouseDownTarget.current as Node;
       evt.stopPropagation();
       if (
         !preventCloseOnClickOutside &&
         !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
         innerModal.current &&
-        !innerModal.current.contains(target)
+        !innerModal.current.contains(target) &&
+        !innerModal.current.contains(mouseDownTarget)
       ) {
         closeModal(evt);
       }
@@ -457,6 +467,10 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         aria-hidden={!open}
         onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
         onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
+        onMouseDown={composeEventHandlers([
+          rest?.onMouseDown,
+          handleOnMouseDown,
+        ])}
         onKeyDown={handleKeyDown}
         className={modalClass}>
         <div

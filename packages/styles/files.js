@@ -100,6 +100,8 @@ const files = [
   'scss/components/fluid-text-input/_index.scss',
   'scss/components/fluid-time-picker/_fluid-time-picker.scss',
   'scss/components/fluid-time-picker/_index.scss',
+  'scss/components/icon-indicator/_icon-indicator.scss',
+  'scss/components/icon-indicator/_index.scss',
   'scss/components/inline-loading/_index.scss',
   'scss/components/inline-loading/_inline-loading.scss',
   'scss/components/link/_index.scss',

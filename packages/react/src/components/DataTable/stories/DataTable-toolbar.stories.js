@@ -47,8 +47,21 @@ export default {
   },
 };
 
-export const Default = () => (
-  <DataTable rows={rows} headers={headers}>
+const sharedArgTypes = {
+  size: {
+    options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    control: { type: 'select' },
+  },
+  useZebraStyles: {
+    control: { type: 'boolean' },
+  },
+  isSortable: { control: { type: 'boolean' } },
+  persistent: { control: { type: 'boolean' } },
+  radio: { table: { disable: true } },
+};
+
+export const Default = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
@@ -105,8 +118,10 @@ export const Default = () => (
   </DataTable>
 );
 
-export const PersistentToolbar = () => (
-  <DataTable rows={rows} headers={headers}>
+Default.argTypes = { ...sharedArgTypes };
+
+export const PersistentToolbar = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
@@ -163,8 +178,10 @@ export const PersistentToolbar = () => (
   </DataTable>
 );
 
-export const SmallPersistentToolbar = () => (
-  <DataTable rows={rows} headers={headers}>
+PersistentToolbar.argTypes = { ...sharedArgTypes };
+
+export const SmallPersistentToolbar = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
@@ -224,8 +241,10 @@ export const SmallPersistentToolbar = () => (
   </DataTable>
 );
 
-export const WithOverflowMenu = () => (
-  <DataTable rows={rows} headers={headers}>
+SmallPersistentToolbar.argTypes = { ...sharedArgTypes };
+
+export const WithOverflowMenu = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
@@ -286,85 +305,9 @@ export const WithOverflowMenu = () => (
   </DataTable>
 );
 
-export const Playground = (args) => (
-  <DataTable rows={rows} headers={headers} {...args}>
-    {({
-      rows,
-      headers,
-      getHeaderProps,
-      getRowProps,
-      getTableProps,
-      getToolbarProps,
-      onInputChange,
-    }) => (
-      <TableContainer title="DataTable" description="With overflow menu">
-        <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
-          <TableToolbarContent>
-            <TableToolbarSearch
-              onChange={(evt) => {
-                action('TableToolbarSearch - onChange')(evt);
-                onInputChange(evt);
-              }}
-            />
-            <TableToolbarMenu>
-              <TableToolbarAction onClick={action('Action 1 Click')}>
-                Action 1
-              </TableToolbarAction>
-              <TableToolbarAction onClick={action('Action 2 Click')}>
-                Action 2
-              </TableToolbarAction>
-              <TableToolbarAction onClick={action('Action 3 Click')}>
-                Action 3
-              </TableToolbarAction>
-            </TableToolbarMenu>
-            <Button onClick={action('Button click')}>Primary Button</Button>
-          </TableToolbarContent>
-        </TableToolbar>
-        <Table {...getTableProps()} aria-label="sample table">
-          <TableHead>
-            <TableRow>
-              {headers.map((header) => (
-                <TableHeader key={header.key} {...getHeaderProps({ header })}>
-                  {header.header}
-                </TableHeader>
-              ))}
-              <TableHeader />
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id} {...getRowProps({ row })}>
-                {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
-                ))}
-                <TableCell className="cds--table-column-menu">
-                  <OverflowMenu size="sm" flipped>
-                    <OverflowMenuItem itemText="Stop app" />
-                    <OverflowMenuItem itemText="Restart app" />
-                    <OverflowMenuItem itemText="Rename app" />
-                  </OverflowMenu>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    )}
-  </DataTable>
-);
-
-Playground.argTypes = {
-  size: {
-    options: ['xs', 'sm', 'md', 'lg', 'xl'],
-    control: { type: 'select' },
-  },
-  useZebraStyles: {
-    control: { type: 'boolean' },
-  },
-  isSortable: { control: { type: 'boolean' } },
-  persistent: { control: { type: 'boolean' } },
+WithOverflowMenu.argTypes = {
+  ...sharedArgTypes,
   overflowMenuOnHover: {
     control: { type: 'boolean' },
   },
-  radio: { table: { disable: true } },
 };

@@ -57,6 +57,9 @@ test.describe('@avt ComboBox', () => {
     const clearButton = page.getByRole('button', {
       name: 'Clear selected item',
     });
+    const exampleOption = page.getByRole('option', {
+      name: 'An example option that is really long to show what should be done to handle long text',
+    });
     const optionOne = page.getByRole('option', {
       name: 'An example option that is really long to show what should be done to handle long text',
     });
@@ -71,6 +74,11 @@ test.describe('@avt ComboBox', () => {
     await expect(combobox).toBeFocused();
     await page.keyboard.press('ArrowDown');
     await expect(menu).toBeVisible();
+    // Expect focus to be on 1st item in menu after Arrow Down
+    // when there is no initial selected item
+    await expect(exampleOption).toHaveClass(
+      'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
+    );
     // Close with Escape, retain focus, and open with Spacebar
     await page.keyboard.press('Escape');
     await expect(menu).toBeHidden();
@@ -84,6 +92,8 @@ test.describe('@avt ComboBox', () => {
     await expect(combobox).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(menu).toBeVisible();
+    // Expect focus to be retained when no initial selected item after Enter
+    await expect(combobox).toBeFocused();
     await page.keyboard.press('ArrowDown');
     // Navigation inside the menu
     // move to first option
@@ -101,7 +111,13 @@ test.describe('@avt ComboBox', () => {
     await expect(combobox).toBeFocused();
     await expect(menu).toBeHidden();
     await expect(clearButton).toBeVisible();
+    // Expect focus to be on selected item when opening with Arrow Down
+    await page.keyboard.press('ArrowDown');
+    await expect(exampleOption).toHaveClass(
+      'cds--list-box__menu-item cds--list-box__menu-item--active cds--list-box__menu-item--highlighted'
+    );
     // should only clear selection when escape is pressed when the menu is closed
+    await page.keyboard.press('Escape');
     await page.keyboard.press('Escape');
     await expect(clearButton).toBeHidden();
     await expect(combobox).toHaveValue('');
