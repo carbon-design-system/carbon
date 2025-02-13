@@ -12,183 +12,6 @@ import { default as TreeView, TreeNode } from './';
 import mdx from './TreeView.mdx';
 import './story.scss';
 
-const nodes = [
-  {
-    id: '1',
-    value: 'Artificial intelligence',
-    label: <span>Artificial intelligence</span>,
-    href: '/artificial-intelligence',
-    renderIcon: Document,
-  },
-  {
-    id: '2',
-    value: 'Blockchain',
-    label: 'Blockchain',
-    href: '/blockchain',
-    renderIcon: Document,
-  },
-  {
-    id: '3',
-    value: 'Business automation',
-    label: 'Business automation',
-    href: '/business-automation',
-    renderIcon: Folder,
-    children: [
-      {
-        id: '3-1',
-        value: 'Business process automation',
-        label: 'Business process automation',
-        href: '/business-process-automation',
-        renderIcon: Document,
-      },
-      {
-        id: '3-2',
-        value: 'Business process mapping',
-        label: 'Business process mapping',
-        href: '/business-process-mapping',
-        renderIcon: Document,
-      },
-    ],
-  },
-  {
-    id: '4',
-    value: 'Business operations',
-    label: 'Business operations',
-    href: '/business-operations',
-    renderIcon: Document,
-  },
-  {
-    id: '5',
-    value: 'Cloud computing',
-    label: 'Cloud computing',
-    href: '/cloud-computing',
-    isExpanded: true,
-    renderIcon: Folder,
-    children: [
-      {
-        id: '5-1',
-        value: 'Containers',
-        label: 'Containers',
-        href: '/containers',
-        renderIcon: Document,
-      },
-      {
-        id: '5-2',
-        value: 'Databases',
-        label: 'Databases',
-        href: '/databases',
-        renderIcon: Document,
-      },
-      {
-        id: '5-3',
-        value: 'DevOps',
-        label: 'DevOps',
-        href: '/devops',
-        isExpanded: true,
-        renderIcon: Folder,
-        children: [
-          {
-            id: '5-4',
-            value: 'Solutions',
-            label: 'Solutions',
-            href: '/solutions',
-            renderIcon: Document,
-          },
-          {
-            id: '5-5',
-            value: 'Case studies',
-            label: 'Case studies',
-            href: '/case-studies',
-            isExpanded: true,
-            renderIcon: Folder,
-            children: [
-              {
-                id: '5-6',
-                value: 'Resources',
-                label: 'Resources',
-                href: '/resources',
-                renderIcon: Document,
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: '6',
-    value: 'Data & Analytics',
-    label: 'Data & Analytics',
-    href: '/data-analytics',
-    renderIcon: Folder,
-    children: [
-      {
-        id: '6-1',
-        value: 'Big data',
-        label: 'Big data',
-        href: '/big-data',
-        renderIcon: Document,
-      },
-      {
-        id: '6-2',
-        value: 'Business intelligence',
-        label: 'Business intelligence',
-        href: '/business-intelligence',
-        renderIcon: Document,
-      },
-    ],
-  },
-  {
-    id: '7',
-    value: 'Models',
-    label: 'Models',
-    href: '/models',
-    isExpanded: true,
-    disabled: true,
-    renderIcon: Folder,
-    children: [
-      {
-        id: '7-1',
-        value: 'Audit',
-        label: 'Audit',
-        href: '/audit',
-        renderIcon: Document,
-      },
-      {
-        id: '7-2',
-        value: 'Monthly data',
-        label: 'Monthly data',
-        href: '/monthly-data',
-        renderIcon: Document,
-      },
-      {
-        id: '8',
-        value: 'Data warehouse',
-        label: 'Data warehouse',
-        href: '/data-warehouse',
-        isExpanded: true,
-        renderIcon: Folder,
-        children: [
-          {
-            id: '8-1',
-            value: 'Report samples',
-            label: 'Report samples',
-            href: '/report-samples',
-            renderIcon: Document,
-          },
-          {
-            id: '8-2',
-            value: 'Sales performance',
-            label: 'Sales performance',
-            href: '/sales-performance',
-            renderIcon: Document,
-          },
-        ],
-      },
-    ],
-  },
-];
-
 function renderTree({ nodes, expanded, withIcons = false, withLinks = false }) {
   if (!nodes) {
     return;
@@ -617,6 +440,183 @@ export const WithIcons = () => {
 };
 
 const TreeViewWithLinks = React.memo(({ setCurrentPage }) => {
+  const nodes = [
+    {
+      id: '1',
+      value: 'Artificial intelligence',
+      label: <span>Artificial intelligence</span>,
+      href: '/artificial-intelligence',
+      renderIcon: Document,
+    },
+    {
+      id: '2',
+      value: 'Blockchain',
+      label: 'Blockchain',
+      href: '/blockchain',
+      renderIcon: Document,
+    },
+    {
+      id: '3',
+      value: 'Business automation',
+      label: 'Business automation',
+      href: '/business-automation',
+      renderIcon: Folder,
+      children: [
+        {
+          id: '3-1',
+          value: 'Business process automation',
+          label: 'Business process automation',
+          href: '/business-process-automation',
+          renderIcon: Document,
+        },
+        {
+          id: '3-2',
+          value: 'Business process mapping',
+          label: 'Business process mapping',
+          href: '/business-process-mapping',
+          renderIcon: Document,
+        },
+      ],
+    },
+    {
+      id: '4',
+      value: 'Business operations',
+      label: 'Business operations',
+      href: '/business-operations',
+      renderIcon: Document,
+    },
+    {
+      id: '5',
+      value: 'Cloud computing',
+      label: 'Cloud computing',
+      href: '/cloud-computing',
+      isExpanded: true,
+      renderIcon: Folder,
+      children: [
+        {
+          id: '5-1',
+          value: 'Containers',
+          label: 'Containers',
+          href: '/containers',
+          renderIcon: Document,
+        },
+        {
+          id: '5-2',
+          value: 'Databases',
+          label: 'Databases',
+          href: '/databases',
+          renderIcon: Document,
+        },
+        {
+          id: '5-3',
+          value: 'DevOps',
+          label: 'DevOps',
+          href: '/devops',
+          isExpanded: true,
+          renderIcon: Folder,
+          children: [
+            {
+              id: '5-4',
+              value: 'Solutions',
+              label: 'Solutions',
+              href: '/solutions',
+              renderIcon: Document,
+            },
+            {
+              id: '5-5',
+              value: 'Case studies',
+              label: 'Case studies',
+              href: '/case-studies',
+              isExpanded: true,
+              renderIcon: Folder,
+              children: [
+                {
+                  id: '5-6',
+                  value: 'Resources',
+                  label: 'Resources',
+                  href: '/resources',
+                  renderIcon: Document,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: '6',
+      value: 'Data & Analytics',
+      label: 'Data & Analytics',
+      href: '/data-analytics',
+      renderIcon: Folder,
+      children: [
+        {
+          id: '6-1',
+          value: 'Big data',
+          label: 'Big data',
+          href: '/big-data',
+          renderIcon: Document,
+        },
+        {
+          id: '6-2',
+          value: 'Business intelligence',
+          label: 'Business intelligence',
+          href: '/business-intelligence',
+          renderIcon: Document,
+        },
+      ],
+    },
+    {
+      id: '7',
+      value: 'Models',
+      label: 'Models',
+      href: '/models',
+      isExpanded: true,
+      disabled: true,
+      renderIcon: Folder,
+      children: [
+        {
+          id: '7-1',
+          value: 'Audit',
+          label: 'Audit',
+          href: '/audit',
+          renderIcon: Document,
+        },
+        {
+          id: '7-2',
+          value: 'Monthly data',
+          label: 'Monthly data',
+          href: '/monthly-data',
+          renderIcon: Document,
+        },
+        {
+          id: '8',
+          value: 'Data warehouse',
+          label: 'Data warehouse',
+          href: '/data-warehouse',
+          isExpanded: true,
+          renderIcon: Folder,
+          children: [
+            {
+              id: '8-1',
+              value: 'Report samples',
+              label: 'Report samples',
+              href: '/report-samples',
+              renderIcon: Document,
+            },
+            {
+              id: '8-2',
+              value: 'Sales performance',
+              label: 'Sales performance',
+              href: '/sales-performance',
+              renderIcon: Document,
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
   return (
     <TreeView
       label="Tree View"
