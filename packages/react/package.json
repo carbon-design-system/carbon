@@ -131,7 +131,7 @@
     "storybook-addon-accessibility-checker": "^3.1.61-rc.3",
     "stream-browserify": "^3.0.0",
     "style-loader": "^4.0.0",
-    "typescript-config-carbon": "^0.3.0",
+    "typescript-config-carbon": "^0.4.0",
     "webpack": "^5.65.0",
     "webpack-dev-server": "^5.0.0"
   },
