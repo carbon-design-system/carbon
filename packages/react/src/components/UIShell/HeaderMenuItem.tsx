@@ -15,11 +15,12 @@ import React, {
   WeakValidationMap,
 } from 'react';
 import cx from 'classnames';
-import Link, { LinkProps, LinkPropTypes } from './Link';
+import Link, { LinkPropTypes } from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
-export type HeaderMenuItemProps<E extends ElementType> = LinkProps<E> & {
+export interface HeaderMenuItemBaseProps {
   className?: string | undefined;
   isActive?: boolean | undefined;
   isCurrentPage?: boolean | undefined;
@@ -27,7 +28,10 @@ export type HeaderMenuItemProps<E extends ElementType> = LinkProps<E> & {
   children: ReactNode;
   role?: ComponentProps<'li'>['role'];
   tabIndex?: number | undefined;
-};
+}
+
+export type HeaderMenuItemProps<E extends ElementType = 'a'> =
+  PolymorphicComponentPropWithRef<E, HeaderMenuItemBaseProps>;
 
 export interface HeaderMenuItemComponent {
   <E extends ElementType = 'a'>(

@@ -156,7 +156,7 @@ export interface FilterableMultiSelectProps<ItemType>
   /**
    * Default sorter is assigned if not provided.
    */
-  filterItems(
+  filterItems?(
     items: readonly ItemType[],
     extra: {
       inputValue: string | null;

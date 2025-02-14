@@ -46,6 +46,7 @@
   "peerDependencies": {
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
     "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
+    "react-is": "^18.3.1 || ^19.0.0",
     "sass": "^1.33.0"
   },
   "dependencies": {
@@ -64,7 +65,6 @@
     "invariant": "^2.2.3",
     "prop-types": "^15.7.2",
     "react-fast-compare": "^3.2.2",
-    "react-is": "^18.3.1",
     "tabbable": "^6.2.0",
     "use-resize-observer": "^6.0.0",
     "window-or-global": "^1.0.1"
@@ -119,6 +119,7 @@
     "prop-types": "^15.7.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-is": "^18.3.1",
     "remark-gfm": "^4.0.0",
     "requestanimationframe": "^0.0.23",
     "rimraf": "^6.0.0",
