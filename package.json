@@ -22,7 +22,7 @@
     "format": "prettier --cache --write '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
     "lint": "eslint actions config packages www",
-    "lint:styles": "stylelint '**/*.scss' --fix --report-needless-disables --report-invalid-scope-disables",
+    "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
     "telemetry:config": "lerna run telemetry:config",
     "test": "cross-env BABEL_ENV=test jest",
@@ -126,7 +126,7 @@
     ],
     "**/*.scss": [
       "yarn prettier --cache --write",
-      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input --fix"
+      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
     ],
     "!(*sass).md": [
       "yarn prettier --cache --write"
