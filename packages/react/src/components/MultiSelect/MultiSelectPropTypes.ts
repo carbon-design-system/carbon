@@ -62,11 +62,7 @@ export interface MultiSelectSortingProps<ItemType> {
    * Provide a compare function that is used to determine the ordering of
    * options. See 'sortItems' for more control.
    */
-  compareItems?(
-    item1: ItemType,
-    item2: ItemType,
-    options: SharedOptions
-  ): number;
+  compareItems?(item1: string, item2: string, options: SharedOptions): number;
 
   /**
    * Provide a method that sorts all options in the control. Overriding this
