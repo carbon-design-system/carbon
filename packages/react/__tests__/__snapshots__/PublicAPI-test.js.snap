@@ -4252,6 +4252,9 @@ Map {
       "leaveDelayMs": Object {
         "type": "number",
       },
+      "rel": Object {
+        "type": "string",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -4261,6 +4264,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "target": Object {
+        "type": "string",
       },
       "wrapperClasses": Object {
         "type": "string",
