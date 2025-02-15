@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,7 +28,7 @@ type ToggletipLabelProps<E extends ElementType> = {
   as?: E;
   children?: ReactNode;
   className?: string;
-};
+} & Omit<React.ComponentPropsWithoutRef<E>, 'as' | 'children' | 'className'>;
 
 /**
  * Used to render the label for a Toggletip
@@ -37,12 +37,15 @@ export function ToggletipLabel<E extends ElementType>({
   as: BaseComponent = 'span' as E,
   children,
   className: customClassName,
+  ...rest
 }: ToggletipLabelProps<E>) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--toggletip-label`, customClassName);
   const BaseComponentAsAny = BaseComponent as any;
   return (
-    <BaseComponentAsAny className={className}>{children}</BaseComponentAsAny>
+    <BaseComponentAsAny className={className} {...rest}>
+      {children}
+    </BaseComponentAsAny>
   );
 }
 
