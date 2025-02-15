@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -328,6 +328,40 @@ describe('ComboBox', () => {
       );
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
+    });
+
+    it('should not revert to initialSelectedItem after clearing selection in uncontrolled mode', async () => {
+      // Render a non-fully controlled `ComboBox` using `initialSelectedItem`.
+      render(
+        <ComboBox {...mockProps} initialSelectedItem={mockProps.items[0]} />
+      );
+      await waitForPosition();
+      // Verify that the input initially displays `initialSelectedItem`.
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
+
+      // Simulate clearing the selection by clicking the clear button.
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Clear selected item' })
+      );
+      // After clearing, the input should be empty rather than reverting to
+      // `initialSelectedItem`.
+      expect(findInputNode()).toHaveDisplayValue('');
+    });
+
+    it('should ignore updates to initialSelectedItem after initial render in uncontrolled mode', async () => {
+      // Render a non-fully controlled `ComboBox` using `initialSelectedItem`.
+      const { rerender } = render(
+        <ComboBox {...mockProps} initialSelectedItem={mockProps.items[0]} />
+      );
+      await waitForPosition();
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
+
+      // Rerender the component with a different `initialSelectedItem`.
+      rerender(
+        <ComboBox {...mockProps} initialSelectedItem={mockProps.items[2]} />
+      );
+      // The displayed value should still be the one from the first render.
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
   });
 
