@@ -10,6 +10,10 @@ import React, { PropsWithChildren } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { ForwardRefReturn } from '../../types/common';
+import SideNav from '../UIShell/SideNav';
+import SideNavItems from '../UIShell/SideNavItems';
+import { SideNavMenu } from '../UIShell';
+import SideNavMenuItem from '../../../lib/components/UIShell/SideNavMenuItem';
 
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -52,6 +56,12 @@ const Breadcrumb: ForwardRefReturn<HTMLElement, BreadcrumbProps> =
         ref={ref}
         {...rest}>
         <ol className={className}>{children}</ol>
+        {/* <SideNavItems> */}
+        <SideNavMenu title="Large menu" large>
+          <SideNavMenuItem as="section">Menu 1</SideNavMenuItem>
+          <SideNavMenuItem as="div">Menu 2</SideNavMenuItem>
+        </SideNavMenu>
+        {/* </SideNavItems> */}
       </nav>
     );
   });

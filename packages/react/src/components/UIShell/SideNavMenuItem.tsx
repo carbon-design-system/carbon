@@ -6,13 +6,17 @@
  */
 
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, { WeakValidationMap } from 'prop-types';
 import React, { ElementType, ForwardedRef, Ref, ComponentProps } from 'react';
 import SideNavLinkText from './SideNavLinkText';
 import Link from './Link';
 import { usePrefix } from '../../internal/usePrefix';
+import {
+  PolymorphicComponentPropWithRef,
+  PolymorphicRef,
+} from '../../internal/PolymorphicProps';
 
-export type SideNavMenuItemProps = ComponentProps<typeof Link> & {
+export interface SideNavMenuItemBaseProps {
   /**
    * Specify the children to be rendered inside of the `SideNavMenuItem`
    */
@@ -34,23 +38,32 @@ export type SideNavMenuItemProps = ComponentProps<typeof Link> & {
    * Optionally provide an href for the underlying li`
    */
   href?: string;
+}
 
-  /**
-   * Optional component to render instead of default Link
-   */
-  as?: ElementType;
-};
+export interface SideNavMenuItemComponent {
+  <E extends ElementType = typeof Link>(
+    props: SideNavMenuItemProps<E>
+  ): JSX.Element | null;
+  displayName?: string;
+  propTypes?: WeakValidationMap<SideNavMenuItemProps<any>>;
+}
 
-const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
-  function SideNavMenuItem(props, ref: ForwardedRef<HTMLElement>) {
-    const prefix = usePrefix();
-    const {
+export type SideNavMenuItemProps<T extends ElementType> =
+  PolymorphicComponentPropWithRef<T, SideNavMenuItemBaseProps>;
+
+const SideNavMenuItem: SideNavMenuItemComponent = React.forwardRef(
+  <T extends ElementType = typeof Link>(
+    {
       children,
       className: customClassName,
-      as: Component = Link,
+      as,
       isActive,
       ...rest
-    } = props;
+    }: SideNavMenuItemProps<T>,
+    ref?: PolymorphicRef<T>
+  ) => {
+    const prefix = usePrefix();
+    const Component = as || Link;
     const className = cx(`${prefix}--side-nav__menu-item`, customClassName);
     const linkClassName = cx({
       [`${prefix}--side-nav__link`]: true,
@@ -68,7 +81,7 @@ const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
       </li>
     );
   }
-);
+) as SideNavMenuItemComponent;
 
 SideNavMenuItem.displayName = 'SideNavMenuItem';
 SideNavMenuItem.propTypes = {
