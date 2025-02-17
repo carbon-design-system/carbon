@@ -16,6 +16,7 @@ import {
   generateGenericItem,
   cognateItems,
   waitForPosition,
+  findMenuItemNode,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
 import { AILabel } from '../AILabel';
@@ -622,6 +623,25 @@ describe('ComboBox', () => {
       );
     });
 
+    it('should clear input when closing with chevron if input does not match any item and allowCustomValue is false', async () => {
+      render(<ComboBox {...mockProps} allowCustomValue={false} />);
+
+      // First type something that doesn't match any item
+      await userEvent.type(findInputNode(), 'xyz');
+
+      // Menu should be open at this point
+      assertMenuOpen(mockProps);
+
+      // Click the chevron/toggle button to close
+      await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+
+      // Menu should be closed
+      assertMenuClosed();
+
+      // Input should be cleared
+      expect(findInputNode()).toHaveDisplayValue('');
+    });
+
     it('should pass defined selectedItem to onChange when item is selected', async () => {
       render(<ComboBox {...mockProps} />);
 
@@ -797,6 +817,51 @@ describe('ComboBox', () => {
       await user.keyboard('[Tab]');
 
       expect(input).toHaveDisplayValue('Apple');
+    });
+
+    it('should remove input and enter new conditions', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} typeahead />);
+
+      const input = screen.getByRole('combobox');
+      user.click(input);
+
+      await user.keyboard('[Enter]');
+
+      expect(input).toHaveDisplayValue('');
+    });
+
+    it('should open the menu and select null when Enter is pressed with no input and no highlighted item', async () => {
+      const onInputChange = jest.fn();
+
+      render(<ComboBox {...mockProps} onInputChange={onInputChange} />);
+
+      await userEvent.type(findInputNode(), 'apple');
+      expect(findInputNode()).toHaveDisplayValue('apple');
+      await userEvent.keyboard('[Enter]');
+
+      // Delete the selected item
+      await userEvent.keyboard('[Backspace]');
+      await userEvent.keyboard('[Backspace]');
+      await userEvent.keyboard('[Backspace]');
+      await userEvent.keyboard('[Backspace]');
+      await userEvent.keyboard('[Backspace]');
+      // check for an empty value
+      expect(findInputNode()).toHaveDisplayValue('');
+
+      // blur
+      await userEvent.keyboard('[Tab]');
+      assertMenuClosed(mockProps);
+
+      // open the menu
+      await userEvent.click(findInputNode());
+      assertMenuOpen(mockProps);
+
+      // check if the `li` item are all false
+      for (let i = 0; i < mockProps.items.length; i++) {
+        const item = findMenuItemNode(i);
+        expect(item).toHaveAttribute('aria-selected', 'false');
+      }
     });
   });
 });

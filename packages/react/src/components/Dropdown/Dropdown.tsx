@@ -47,10 +47,10 @@ import { useId } from '../../internal/useId';
 import {
   useFloating,
   flip,
+  hide,
   autoUpdate,
   size as floatingSize,
 } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
 
 const { ItemMouseMove, MenuMouseLeave } =
