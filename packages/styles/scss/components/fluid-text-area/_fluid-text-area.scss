@@ -89,6 +89,14 @@
     min-block-size: convert.to-rem(64px);
     outline: none;
   }
+  .#{$prefix}--text-area--fluid {
+    .#{$prefix}--toggletip-button {
+      padding: $spacing-02;
+      margin-inline-start: -$spacing-02;
+      min-block-size: 24px;
+      min-inline-size: 24px;
+    }
+  }
 
   .#{$prefix}--text-area--fluid .#{$prefix}--form__helper-text {
     display: none;
