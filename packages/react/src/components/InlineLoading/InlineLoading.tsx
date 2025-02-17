@@ -120,7 +120,7 @@ const InlineLoading = ({
     <div
       className={loadingClasses}
       {...rest}
-      aria-live={'assertive' || rest['aria-live']}>
+      aria-live={rest['aria-live'] ?? 'assertive'}>
       {loadingAnimation}
       {description && loadingText}
     </div>
