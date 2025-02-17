@@ -161,6 +161,7 @@ class CDSOverflowMenu
       }
       const { _menuBody: menuBody } = this;
       if (menuBody) {
+        menuBody.setAttribute('breadcrumb', String(Boolean(this.breadcrumb)));
         menuBody.open = open;
 
         const tooltipContent = this.querySelector(
