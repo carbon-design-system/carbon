@@ -104,7 +104,7 @@ const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
   return (
     <SideNavItem large={large}>
       <Link
-        {...rest}
+        {...(rest as LinkProps<E>)}
         className={className}
         ref={ref}
         tabIndex={
