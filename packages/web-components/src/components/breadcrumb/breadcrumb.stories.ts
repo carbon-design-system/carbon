@@ -22,7 +22,7 @@ import OverflowMenuHorizontal16 from '@carbon/icons/lib/overflow-menu--horizonta
 
 const args = {
   ariaLabel: '',
-  classes: '',
+  className: '',
   noTrailingSlash: false,
 };
 
@@ -32,7 +32,7 @@ const argTypes = {
     description: 'Specify the label for the breadcrumb container.',
     name: 'aria-label',
   },
-  classes: {
+  className: {
     control: 'text',
     description:
       'Specify an optional className to be applied to the container node.',
@@ -48,11 +48,11 @@ export const Default = {
   args,
   argTypes,
   render: (args) => {
-    const { ariaLabel, classes, noTrailingSlash } = args ?? {};
+    const { ariaLabel, className, noTrailingSlash } = args ?? {};
     return html`
       <cds-breadcrumb
         ?no-trailing-slash="${noTrailingSlash}"
-        class="${classes}"
+        class="${className}"
         aria-label="${ariaLabel}">
         <cds-breadcrumb-item>
           <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
@@ -75,11 +75,11 @@ export const BreadcrumbWithOverflowMenu = {
   args,
   argTypes,
   render: (args) => {
-    const { ariaLabel, classes, noTrailingSlash } = args ?? {};
+    const { ariaLabel, className, noTrailingSlash } = args ?? {};
     return html`
       <cds-breadcrumb
         ?no-trailing-slash="${noTrailingSlash}"
-        class="${classes}"
+        class="${className}"
         aria-label="${ariaLabel}">
         <cds-breadcrumb-item>
           <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
@@ -110,9 +110,9 @@ export const BreadcrumbWithOverflowMenu = {
     `;
   },
 };
-const skeletonArgs = { classes: '' };
+const skeletonArgs = { className: '' };
 const skeletonArgTypes = {
-  classes: {
+  className: {
     control: 'text',
     description:
       'Specify an optional className to be applied to the container node.',
@@ -123,9 +123,9 @@ export const Skeleton = {
   args: skeletonArgs,
   argTypes: skeletonArgTypes,
   render: (args) => {
-    const { classes } = args ?? {};
+    const { className } = args ?? {};
     return html`
-      <cds-breadcrumb-skeleton class="${classes}"> </cds-breadcrumb-skeleton>
+      <cds-breadcrumb-skeleton class="${className}"> </cds-breadcrumb-skeleton>
     `;
   },
 };
