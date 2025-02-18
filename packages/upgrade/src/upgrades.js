@@ -332,6 +332,48 @@ export const upgrades = [
         },
       },
       {
+        name: 'enable-v12-overflowmenu',
+        description: `
+          Updates OverflowMenu components to v12 with optional FeatureFlags wrapping:
+          1. Migrates to new API (OverflowMenuItem -> MenuItem)
+          2. Updates props (itemText -> label, etc)
+          3. Optional FeatureFlags wrapping (--wrapWithFeatureFlag=false to disable)
+       
+          Example:
+          Before:  <OverflowMenu aria-label="menu"><OverflowMenuItem itemText="Option" /></OverflowMenu>
+          After:   <FeatureFlags enableV12Overflowmenu>
+                    <OverflowMenu label="menu"><MenuItem label="Option" /></OverflowMenu>
+                   </FeatureFlags>
+        `,
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'enable-v12-overflowmenu.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.{js,jsx,ts,tsx}'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            wrapWithFeatureFlag: options.wrapWithFeatureFlag,
+          });
+        },
+      },
+      {
         name: 'slug-prop-to-decorator-prop',
         description: `
           Replace slug prop with decorator
