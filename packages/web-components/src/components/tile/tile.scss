@@ -172,6 +172,10 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-expandable-tile:not([with-interactive]):focus-within) {
+  @include focus-outline('outline');
+}
+
 :host(#{$prefix}-expandable-tile:not([with-interactive])) {
   .#{$prefix}--tile__chevron {
     border: none;

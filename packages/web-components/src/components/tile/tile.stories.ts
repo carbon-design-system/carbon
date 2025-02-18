@@ -13,6 +13,7 @@ import View16 from '@carbon/icons/lib/view/16.js';
 import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
 import Folders16 from '@carbon/icons/lib/folders/16.js';
 import ArrowRight16 from '@carbon/icons/lib/arrow--right/16.js';
+import Launch16 from '@carbon/icons/lib/launch/16.js';
 import './index';
 import '../ai-label';
 import '../icon-button';
@@ -103,7 +104,7 @@ export const clickableWithCustomIcon = {
   render: ({ disabled }) => html`
     <cds-clickable-tile ?disabled=${disabled} href="https://www.carbondesignsystem.com/">
       Clickable tile
-      ${FolderOpen16({ slot: 'icon' })}
+      ${Launch16({ slot: 'icon' })}
       </cds-clickable-tile>
       </cds-clickable-tile>
     </sb-template-layers>
@@ -131,19 +132,21 @@ export const expandable = {
       }
     };
     return html`
-      <cds-expandable-tile
-        ?expanded="${expanded}"
-        @cds-expandable-tile-beingchanged=${handleBeforeChanged}
-        @cds-expandable-tile-changed=${onChange}>
-        <cds-tile-above-the-fold-content
-          slot="above-the-fold-content"
-          style="height: 200px">
-          Above the fold content here
-        </cds-tile-above-the-fold-content>
-        <cds-tile-below-the-fold-content style="height: 300px">
-          Below the fold content here
-        </cds-tile-below-the-fold-content>
-      </cds-expandable-tile>
+      <div style="width: 400px">
+        <cds-expandable-tile
+          ?expanded="${expanded}"
+          @cds-expandable-tile-beingchanged=${handleBeforeChanged}
+          @cds-expandable-tile-changed=${onChange}>
+          <cds-tile-above-the-fold-content
+            slot="above-the-fold-content"
+            style="height: 200px">
+            Above the fold content here
+          </cds-tile-above-the-fold-content>
+          <cds-tile-below-the-fold-content style="height: 300px">
+            Below the fold content here
+          </cds-tile-below-the-fold-content>
+        </cds-expandable-tile>
+      </div>
     `;
   },
 };
@@ -157,24 +160,26 @@ export const ExpandableWithInteractive = {
       }
     };
     return html`
-      <cds-expandable-tile
-        with-interactive
-        ?expanded="${expanded}"
-        @cds-expandable-tile-beingchanged=${handleBeforeChanged}
-        @cds-expandable-tile-changed=${onChange}>
-        <cds-tile-above-the-fold-content
-          slot="above-the-fold-content"
-          style="height: 200px; width: 200px">
-          Above the fold content here
-          <div style="padding-top:1rem;">
-            <cds-button>Example</cds-button>
-          </div>
-        </cds-tile-above-the-fold-content>
-        <cds-tile-below-the-fold-content style="height: 200px; width: 200px">
-          Below the fold content here
-          <cds-text-input></cds-text-input>
-        </cds-tile-below-the-fold-content>
-      </cds-expandable-tile>
+      <div style="width: 400px">
+        <cds-expandable-tile
+          with-interactive
+          ?expanded="${expanded}"
+          @cds-expandable-tile-beingchanged=${handleBeforeChanged}
+          @cds-expandable-tile-changed=${onChange}>
+          <cds-tile-above-the-fold-content
+            slot="above-the-fold-content"
+            style="height: 200px; width: 200px">
+            Above the fold content here
+            <div style="padding-top:1rem;">
+              <cds-button>Example</cds-button>
+            </div>
+          </cds-tile-above-the-fold-content>
+          <cds-tile-below-the-fold-content style="height: 200px; width: 200px">
+            Below the fold content here
+            <cds-text-input></cds-text-input>
+          </cds-tile-below-the-fold-content>
+        </cds-expandable-tile>
+      </div>
     `;
   },
 };
