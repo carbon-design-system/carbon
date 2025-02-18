@@ -188,10 +188,12 @@ export const FixedSideNav = () => (
       aria-label="Side navigation">
       <SideNavItems>
         <SideNavMenu title="L0 menu">
-          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+          <SideNavMenuItem as="div" href="https://www.carbondesignsystem.com/">
             L0 menu item
           </SideNavMenuItem>
-          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+          <SideNavMenuItem
+            as="section"
+            href="https://www.carbondesignsystem.com/">
             L0 menu item
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">

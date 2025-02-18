@@ -54,12 +54,6 @@ const Breadcrumb: ForwardRefReturn<HTMLElement, BreadcrumbProps> =
         ref={ref}
         {...rest}>
         <ol className={className}>{children}</ol>
-        {/* <SideNavItems> */}
-        <SideNavMenu title="Large menu" large>
-          <SideNavMenuItem as="a">Menu 1</SideNavMenuItem>
-          <SideNavMenuItem as="div">Menu 2</SideNavMenuItem>
-        </SideNavMenu>
-        {/* </SideNavItems> */}
       </nav>
     );
   });
