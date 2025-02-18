@@ -18,6 +18,7 @@ $css--plex: true !default;
 
 .#{$prefix}--menu-item {
   @include type-style('body-short-01');
+
   display: grid;
   align-items: center;
   block-size: 2rem;
@@ -27,6 +28,7 @@ $css--plex: true !default;
   grid-template-columns: 1fr max-content;
   padding-inline: $spacing-05;
   transition: background-color $duration-fast-01 motion(standard, productive);
+
   &:focus {
     @include focus-outline('outline');
   }

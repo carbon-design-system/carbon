@@ -1,5 +1,5 @@
 {
-  "name": "@carbon/web-components1",
+  "name": "@carbon/web-components",
   "description": "Web components for the Carbon Design System",
   "version": "2.23.0",
   "license": "Apache-2.0",
@@ -70,6 +70,7 @@
     "@carbon/styles": "^1.75.0",
     "@floating-ui/dom": "^1.6.3",
     "@ibm/telemetry-js": "^1.5.0",
+    "@lit/context": "^1.1.1",
     "flatpickr": "4.6.13",
     "lit": "^3.1.0",
     "lodash-es": "^4.17.21",
