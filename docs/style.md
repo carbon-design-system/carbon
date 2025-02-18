@@ -1112,3 +1112,7 @@ test('Public API', async () => {
   `);
 });
 ```
+
+You can run `yarn test -u` from the root to update the snapshot and include it
+in your pull request for review. This helps core reviewers to determine if api
+changes are being made in a backwards compatible way to avoid breaking changes.

@@ -57,7 +57,7 @@ export interface ButtonBaseProps
   /**
    * Optionally specify an href for your Button to become an `<a>` element
    */
-  href?: string;
+  href?: React.AnchorHTMLAttributes<HTMLAnchorElement>['href'];
 
   /**
    * If specifying the `renderIcon` prop, provide a description for that icon that can
@@ -83,6 +83,11 @@ export interface ButtonBaseProps
     : ButtonKind;
 
   /**
+   * Optionally specify a `rel` when using an `<a>` element.
+   */
+  rel?: React.AnchorHTMLAttributes<HTMLAnchorElement>['rel'];
+
+  /**
    * Optional prop to allow overriding the icon rendering.
    * Can be a React component class
    */
@@ -92,6 +97,11 @@ export interface ButtonBaseProps
    * Specify the size of the button, from the following list of sizes:
    */
   size?: ButtonSize;
+
+  /**
+   * Optionally specify a `target` when using an `<a>` element.
+   */
+  target?: React.AnchorHTMLAttributes<HTMLAnchorElement>['target'];
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
@@ -329,6 +339,11 @@ const Button: ButtonComponent = React.forwardRef(
   onMouseLeave: PropTypes.func,
 
   /**
+   * Optionally specify a `rel` when using an `<a>` element.
+   */
+  rel: PropTypes.string,
+
+  /**
    * Optional prop to allow overriding the icon rendering.
    * Can be a React component class
    */
@@ -348,6 +363,11 @@ const Button: ButtonComponent = React.forwardRef(
    * Optional prop to specify the tabIndex of the Button
    */
   tabIndex: PropTypes.number,
+
+  /**
+   * Optionally specify a `target` when using an `<a>` element.
+   */
+  target: PropTypes.string,
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.

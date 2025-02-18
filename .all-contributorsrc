@@ -1763,6 +1763,15 @@
         "a11y",
         "review"
       ]
+    },
+    {
+      "login": "enricobguedes",
+      "name": "enricobguedes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45374536?v=4",
+      "profile": "https://github.com/enricobguedes",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
