@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,22 +12,28 @@ import React, {
   useEffect,
   useRef,
   useState,
+  type RefObject,
 } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 import { ForwardRefReturn, ReactAttr } from '../../types/common';
 
-function useIsTruncated(ref) {
+const useIsTruncated = <T extends HTMLElement>(
+  ref: RefObject<T>,
+  deps: any[] = []
+) => {
   const [isTruncated, setIsTruncated] = useState(false);
 
   useEffect(() => {
     const element = ref.current;
-    const { offsetWidth, scrollWidth } = element;
-    setIsTruncated(offsetWidth < scrollWidth);
-  }, [ref, setIsTruncated]);
+
+    if (element) {
+      setIsTruncated(element.offsetWidth < element.scrollWidth);
+    }
+  }, [ref, ...deps]);
 
   return isTruncated;
-}
+};
 
 export interface ListBoxMenuItemProps extends ReactAttr<HTMLLIElement> {
   /**
@@ -74,18 +80,27 @@ export type ListBoxMenuItemComponent = ForwardRefReturn<
  */
 const ListBoxMenuItem = React.forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
   function ListBoxMenuItem(
-    {
-      children,
-      isActive = false,
-      isHighlighted = false,
-      title,
-      ...rest
-    }: ListBoxMenuItemProps,
+    { children, isActive = false, isHighlighted = false, title, ...rest },
     forwardedRef: ListBoxMenuItemForwardedRef
   ) {
     const prefix = usePrefix();
-    const ref = useRef(null);
-    const isTruncated = useIsTruncated(forwardedRef?.menuItemOptionRef || ref);
+    const localRef = useRef<HTMLDivElement>(null);
+
+    // Try to get a RefObject from `forwardedRef.menuItemOptionRef`.
+    // If it's a callback ref (or not provided), fall back to `localRef`.
+    let menuItemOptionRef: React.RefObject<HTMLDivElement> = localRef;
+    if (
+      forwardedRef &&
+      typeof forwardedRef !== 'function' &&
+      forwardedRef.menuItemOptionRef
+    ) {
+      const candidate = forwardedRef.menuItemOptionRef;
+      if (typeof candidate !== 'function') {
+        menuItemOptionRef = candidate;
+      }
+    }
+
+    const isTruncated = useIsTruncated(menuItemOptionRef, [children]);
     const className = cx(`${prefix}--list-box__menu-item`, {
       [`${prefix}--list-box__menu-item--active`]: isActive,
       [`${prefix}--list-box__menu-item--highlighted`]: isHighlighted,
@@ -98,7 +113,7 @@ const ListBoxMenuItem = React.forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
         title={isTruncated ? title : undefined}>
         <div
           className={`${prefix}--list-box__menu-item__option`}
-          ref={forwardedRef?.menuItemOptionRef || ref}>
+          ref={menuItemOptionRef}>
           {children}
         </div>
       </li>
