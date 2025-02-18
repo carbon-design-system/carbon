@@ -51,6 +51,6 @@
     "svg-parser": "^2.0.4",
     "svgo": "^1.1.1",
     "svgson": "^5.2.1",
-    "typescript-config-carbon": "^0.3.0"
+    "typescript-config-carbon": "^0.4.0"
   }
 }

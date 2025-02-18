@@ -15,7 +15,7 @@ import React, {
   WeakValidationMap,
 } from 'react';
 import cx from 'classnames';
-import Link, { LinkPropTypes } from './Link';
+import Link, { LinkProps, LinkPropTypes } from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
@@ -69,7 +69,7 @@ const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
     return (
       <li className={className} role={role}>
         <Link
-          {...rest}
+          {...(rest as LinkProps<E>)}
           aria-current={ariaCurrent}
           className={linkClassName}
           ref={ref}
