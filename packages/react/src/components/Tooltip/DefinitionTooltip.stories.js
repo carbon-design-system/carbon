@@ -120,11 +120,7 @@ export const WithLargeText = (args) => {
     <p>
       Custom domains direct requests for your apps in this Cloud Foundry
       organization to a{' '}
-      <DefinitionTooltip
-        openOnHover
-        autoAlign
-        definition={definition}
-        {...args}>
+      <DefinitionTooltip openOnHover definition={definition} {...args}>
         URL that you own. A custom domain can be a shared domain,
       </DefinitionTooltip>{' '}
       a shared subdomain, or a shared domain and host.
