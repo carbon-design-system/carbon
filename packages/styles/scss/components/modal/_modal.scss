@@ -29,18 +29,6 @@
   $enable-dialog-element: false
 ) {
   .#{$prefix}--modal {
-    position: fixed;
-    z-index: z('modal');
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: $overlay;
-    block-size: 100vh;
-    content: '';
-    inline-size: 100vw;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-
     // For modals using the native dialog element, the modal visibility is handled
     // by the Dialog styles.
     @if not(
@@ -50,6 +38,17 @@
         $enable-dialog-element
     )
     {
+      position: fixed;
+      z-index: z('modal');
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $overlay;
+      block-size: 100vh;
+      content: '';
+      inline-size: 100vw;
+      inset-block-start: 0;
+      inset-inline-start: 0;
       opacity: 0;
       transition:
         opacity $duration-moderate-02 motion(exit, expressive),

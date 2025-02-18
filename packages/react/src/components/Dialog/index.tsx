@@ -21,7 +21,13 @@ export interface DialogProps extends ReactAttr<HTMLDialogElement> {
   children?: React.ReactNode;
 
   /**
-   * Specifies whether the dialog is modal or non-modal
+   * Specify an optional className to be applied to the modal root node
+   */
+  className?: string;
+
+  /**
+   * Specifies whether the dialog is modal or non-modal. This cannot be changed
+   * while open=true
    */
   modal?: boolean;
 
@@ -58,6 +64,7 @@ export const unstable__Dialog = React.forwardRef(
   (
     {
       children,
+      className,
       modal,
       onCancel = noopFn,
       onClick = noopFn,
@@ -118,9 +125,13 @@ export const unstable__Dialog = React.forwardRef(
     return (
       <dialog
         {...rest}
-        className={cx(`${prefix}--dialog`, {
-          [`${prefix}--dialog--modal`]: modal,
-        })}
+        className={cx(
+          `${prefix}--dialog`,
+          {
+            [`${prefix}--dialog--modal`]: modal,
+          },
+          className
+        )}
         ref={ref}
         onCancel={onCancel}
         onClick={handleClick}
@@ -140,7 +151,13 @@ unstable__Dialog.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Modal specifies whether the Dialog is modal or non-modal
+   * Specify an optional className to be applied to the modal root node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Modal specifies whether the Dialog is modal or non-modal. This cannot be
+   * changed while open=true
    */
   modal: PropTypes.bool,
 

@@ -110,7 +110,7 @@ export const DialogRefactor = () => {
               shared domain, a shared subdomain, or a shared domain and host.
             </p>
             <TextInput
-              data-modal-primary-focus
+              autofocus="true"
               id="text-input-1"
               labelText="Domain name"
               placeholder="e.g. github.com"

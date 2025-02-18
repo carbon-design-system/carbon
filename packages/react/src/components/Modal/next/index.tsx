@@ -395,12 +395,12 @@ const Modal = React.forwardRef(function Modal(
       ref={ref}>
       <Dialog
         open={open}
+        modal
         ref={innerModal}
         role={isAlertDialog ? 'alertdialog' : ''}
         aria-describedby={isAlertDialog ? modalBodyId : ''}
         className={containerClasses}
-        aria-label={ariaLabel}
-        aria-modal="true">
+        aria-label={ariaLabel}>
         <div className={`${prefix}--modal-header`}>
           {modalLabel && (
             <Text
