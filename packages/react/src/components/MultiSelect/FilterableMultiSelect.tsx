@@ -38,10 +38,7 @@ import {
   type MultiSelectSortingProps,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
-import ListBox, {
-  ListBoxMenuIconTranslationKey,
-  PropTypes as ListBoxPropTypes,
-} from '../ListBox';
+import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import { defaultItemToString } from './tools/itemToString';
@@ -376,6 +373,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     clearSelection,
   } = useSelection({
     disabled,
+    // TODO: remove @ts-ignore when type is fixed,
+    // see https://github.com/carbon-design-system/carbon/issues/18575
+    // @ts-ignore
     initialSelectedItems,
     onChange,
     selectedItems: selected,
