@@ -2235,9 +2235,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/web-components@workspace:packages/web-components":
+"@carbon/web-components1@workspace:packages/web-components":
   version: 0.0.0-use.local
-  resolution: "@carbon/web-components@workspace:packages/web-components"
+  resolution: "@carbon/web-components1@workspace:packages/web-components"
   dependencies:
     "@carbon/icon-helpers": "npm:10.47.0"
     "@carbon/icons": "npm:^11.55.0"
