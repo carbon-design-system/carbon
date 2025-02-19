@@ -23,21 +23,20 @@ function addSelectionToRow(j, path) {
     );
   }
 }
-//function to remove the last checkmark cell
+// Function to remove the last checkmark cell
 function removeLastCheckmarkCell(j, path) {
   const checkmarkCells = j(path)
     .find(j.JSXElement, {
       openingElement: { name: { name: 'StructuredListCell' } },
     })
-    .filter((cellPath) => {
-      return (
+    .filter(
+      (cellPath) =>
         j(cellPath)
           .find(j.JSXElement, {
             openingElement: { name: { name: 'CheckmarkFilled' } },
           })
           .size() > 0
-      );
-    });
+    );
 
   if (checkmarkCells.size() > 0) {
     checkmarkCells.at(-1).remove();
@@ -85,15 +84,17 @@ function transform(fileInfo, api, options) {
       },
     })
     .forEach((path) => {
-      // Add selection to direct StructuredListRows
-      j(path)
-        .find(j.JSXElement, {
-          openingElement: { name: { name: 'StructuredListRow' } },
-        })
-        .forEach((rowPath) => {
+      // Add selection to direct StructuredListRows and remove last checkmark cell
+      const rows = j(path).find(j.JSXElement, {
+        openingElement: { name: { name: 'StructuredListRow' } },
+      });
+
+      if (rows.size() > 0) {
+        rows.forEach((rowPath) => {
           addSelectionToRow(j, rowPath);
           removeLastCheckmarkCell(j, rowPath);
         });
+      }
 
       // Handle function-generated rows
       j(path)
@@ -111,14 +112,15 @@ function transform(fileInfo, api, options) {
                 return name === functionName;
               })
               .forEach((funcPath) => {
-                j(funcPath)
-                  .find(j.JSXElement, {
-                    openingElement: { name: { name: 'StructuredListRow' } },
-                  })
-                  .forEach((rowPath) => {
+                const rowsInFunction = j(funcPath).find(j.JSXElement, {
+                  openingElement: { name: { name: 'StructuredListRow' } },
+                });
+                if (rowsInFunction.size() > 0) {
+                  rowsInFunction.forEach((rowPath) => {
                     addSelectionToRow(j, rowPath);
                     removeLastCheckmarkCell(j, rowPath);
                   });
+                }
               });
           }
         });
