@@ -112,10 +112,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
    * Position of the Menu .
    */
   @property()
-  position: [
-    Number | (Number | null | undefined)[],
-    Number | (Number | null | undefined)[],
-  ] = [-1, -1];
+  position = [-1, -1];
   /**
    * Size attribute .
    */
@@ -140,12 +137,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
    * Position of the Menu in X axis .
    */
   @property()
-  x: Number | Number[] = 0;
+  x: number | number[] = 0;
   /**
    * Position of the Menu in Y axis .
    */
   @property()
-  y: Number | Number[] = 0;
+  y: number | number[] = 0;
 
   /**
    * Provide an optional function to be called when the Menu should be closed.
@@ -410,9 +407,9 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     const pos = this._calculatePosition();
     if (this.isRtl) {
       this.style.insetInlineStart = `initial`;
-      this.style.insetInlineEnd = `${this.x[0]}px`;
+      this.style.insetInlineEnd = `${pos[0]}px`;
     } else {
-      this.style.insetInlineStart = `${this.x[1]}px`;
+      this.style.insetInlineStart = `${pos[0]}px`;
       this.style.insetInlineEnd = `initial`;
     }
     this.style.insetBlockStart = `${pos[1]}px`;
@@ -423,7 +420,6 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       this.onClose();
     }
   };
-  _handleClose = (e: KeyboardEvent) => {};
   _newContextCreate = () => {
     this.context = {
       ...this.context,
