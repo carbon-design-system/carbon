@@ -5,7 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../feature-flags' as *;
 @use '../config';
+@use 'sass:string';
+@use 'sass:map';
 
 // prettier-ignore
 @forward '@carbon/type' show
@@ -90,3 +93,24 @@
     custom-property-prefix: config.$prefix,
   )
 );
+
+// output type custom properties used by non-fluid type-style below
+/// @access public
+/// @group @carbon/type
+@mixin emit-type-custom-properties() {
+  @each $name, $token in type.$tokens {
+    @if string.slice($name, 1, 5) != 'fluid' {
+      @each $property, $value in $token {
+        @if $property != 'breakpoints' {
+          --#{config.$prefix}-#{$name}-#{$property}: #{$value};
+        }
+      }
+    }
+  }
+}
+
+@if config.$css--emit-type-custom-props == true {
+  :root {
+    @include emit-type-custom-properties();
+  }
+}
