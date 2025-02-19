@@ -273,12 +273,3 @@ export const MultipleBodySections = () => (
     </StructuredListBody>
   </StructuredListWrapper>
 );
-
-
-
-
-
-
-
-
-

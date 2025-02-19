@@ -23,7 +23,7 @@ function addSelectionToRow(j, path) {
     );
   }
 }
-
+//function to remove the last checkmark cell
 function removeLastCheckmarkCell(j, path) {
   const checkmarkCells = j(path)
     .find(j.JSXElement, {
