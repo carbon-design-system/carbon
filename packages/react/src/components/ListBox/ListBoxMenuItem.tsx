@@ -8,31 +8,73 @@
 import cx from 'classnames';
 import React, {
   ForwardedRef,
+  forwardRef,
   ReactNode,
   useEffect,
   useRef,
   useState,
-  type RefObject,
+  type MutableRefObject,
+  type Ref,
 } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 import { ForwardRefReturn, ReactAttr } from '../../types/common';
 
+/**
+ * Combines multiple refs (forwarded and local) into a single ref.
+ *
+ * @template T
+ * @param - One or more refs to combine.
+ * @returns A combined ref that points to the same node.
+ */
+const useCombinedRefs = <T,>(...refs: (Ref<T> | undefined)[]) => {
+  const targetRef = useRef<T>(null);
+
+  useEffect(() => {
+    refs.forEach((ref) => {
+      if (!ref) return;
+
+      if (typeof ref === 'function') {
+        ref(targetRef.current);
+      } else {
+        (ref as MutableRefObject<T | null>).current = targetRef.current;
+      }
+    });
+  }, [refs]);
+
+  return targetRef;
+};
+
+/**
+ * Determines if the content of an element is truncated.
+ *
+ * This hook combines the forwarded ref with a local ref so that there's always
+ * a valid ref to inspect. It then checks if the element's content is truncated
+ * by comparing its `offsetWidth` with its `scrollWidth`.
+ *
+ * @template T
+ * @param - A forwarded ref to an HTML element.
+ * @param - Dependency array to re-run the truncation check.
+ * @returns An object containing the truncation state and the combined ref.
+ */
 const useIsTruncated = <T extends HTMLElement>(
-  ref: RefObject<T>,
+  forwardedRef?: Ref<T>,
   deps: any[] = []
 ) => {
+  const ref = useCombinedRefs(forwardedRef);
   const [isTruncated, setIsTruncated] = useState(false);
 
   useEffect(() => {
     const element = ref.current;
 
     if (element) {
-      setIsTruncated(element.offsetWidth < element.scrollWidth);
+      const { offsetWidth, scrollWidth } = element;
+
+      setIsTruncated(offsetWidth < scrollWidth);
     }
   }, [ref, ...deps]);
 
-  return isTruncated;
+  return { isTruncated, ref };
 };
 
 export interface ListBoxMenuItemProps extends ReactAttr<HTMLLIElement> {
@@ -64,7 +106,7 @@ export interface ListBoxMenuItemProps extends ReactAttr<HTMLLIElement> {
 
 export type ListBoxMenuItemForwardedRef =
   | (ForwardedRef<HTMLLIElement> & {
-      menuItemOptionRef?: React.Ref<HTMLDivElement>;
+      menuItemOptionRef?: Ref<HTMLDivElement>;
     })
   | null;
 
@@ -78,29 +120,26 @@ export type ListBoxMenuItemComponent = ForwardRefReturn<
  * name, alongside any classes for any corresponding states, for a generic list
  * box menu item.
  */
-const ListBoxMenuItem = React.forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
-  function ListBoxMenuItem(
+const ListBoxMenuItem = forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
+  (
     { children, isActive = false, isHighlighted = false, title, ...rest },
-    forwardedRef: ListBoxMenuItemForwardedRef
-  ) {
+    forwardedRef
+  ) => {
     const prefix = usePrefix();
-    const localRef = useRef<HTMLDivElement>(null);
 
-    // Try to get a RefObject from `forwardedRef.menuItemOptionRef`.
-    // If it's a callback ref (or not provided), fall back to `localRef`.
-    let menuItemOptionRef: React.RefObject<HTMLDivElement> = localRef;
-    if (
-      forwardedRef &&
-      typeof forwardedRef !== 'function' &&
-      forwardedRef.menuItemOptionRef
-    ) {
-      const candidate = forwardedRef.menuItemOptionRef;
-      if (typeof candidate !== 'function') {
-        menuItemOptionRef = candidate;
-      }
-    }
+    const menuItemOptionRefProp =
+      forwardedRef && typeof forwardedRef !== 'function'
+        ? (
+            forwardedRef as MutableRefObject<HTMLLIElement | null> & {
+              menuItemOptionRef?: Ref<HTMLDivElement>;
+            }
+          ).menuItemOptionRef
+        : undefined;
 
-    const isTruncated = useIsTruncated(menuItemOptionRef, [children]);
+    const { isTruncated, ref: menuItemOptionRef } = useIsTruncated(
+      menuItemOptionRefProp,
+      [children]
+    );
     const className = cx(`${prefix}--list-box__menu-item`, {
       [`${prefix}--list-box__menu-item--active`]: isActive,
       [`${prefix}--list-box__menu-item--highlighted`]: isHighlighted,
