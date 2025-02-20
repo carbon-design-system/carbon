@@ -536,13 +536,7 @@ describe('FilterableMultiSelect', () => {
           item ? (
             <span className="test-element" data-testid="custom-id-item">
               {item.text}{' '}
-              {/*
-              // TODO: Should `alt` be changed to `aria-label`? There appears to
-              // be an accessibility issue with this component.
-              // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/img_role#description
-              // https://dequeuniversity.com/rules/axe/4.10/role-img-alt?application=axe-linter
-              */}
-              <span role="img" alt="fire">
+              <span role="img" aria-label="fire">
                 {' '}
                 🔥
               </span>
