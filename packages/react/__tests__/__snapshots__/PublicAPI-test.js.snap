@@ -4231,8 +4231,14 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "dropShadow": Object {
+        "type": "bool",
+      },
       "enterDelayMs": Object {
         "type": "number",
+      },
+      "highContrast": Object {
+        "type": "bool",
       },
       "href": Object {
         "type": "string",
@@ -9587,8 +9593,14 @@ Map {
       "description": Object {
         "type": "node",
       },
+      "dropShadow": Object {
+        "type": "bool",
+      },
       "enterDelayMs": Object {
         "type": "number",
+      },
+      "highContrast": Object {
+        "type": "bool",
       },
       "label": Object {
         "type": "node",
