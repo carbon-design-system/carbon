@@ -158,7 +158,7 @@ export function Toggletip<E extends ElementType = 'span'>({
     }
   };
 
-  // If the `Toggletip` is the last focusable item in the tab order, it shoudl also close when the browser window loses focus  (#12922)
+  // If the `Toggletip` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
   useWindowEvent('blur', () => {
     if (open) {
       actions.close();

@@ -821,7 +821,7 @@ describe('ComboBox', () => {
 
       expect(document.activeElement).not.toBe(input);
     });
-    it('should suggest best matching typeahread suggestion and complete it in Tab key press', async () => {
+    it('should suggest best matching typeahead suggestion and complete it in Tab key press', async () => {
       const user = userEvent.setup();
       render(<ComboBox {...mockProps} typeahead />);
 

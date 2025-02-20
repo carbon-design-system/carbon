@@ -351,7 +351,7 @@ export const WithInlineLoading = () => {
 
     await fakePromise();
 
-    setDescription('Submited!');
+    setDescription('Submitted!');
     setStatus('finished');
   };
 

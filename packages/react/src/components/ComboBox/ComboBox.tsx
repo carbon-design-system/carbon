@@ -366,7 +366,7 @@ export interface ComboBoxProps<ItemType>
   titleText?: ReactNode;
 
   /**
-   * **Experimental**: will enable autcomplete and typeahead for the input field
+   * **Experimental**: will enable autocomplete and typeahead for the input field
    */
   typeahead?: boolean;
 
@@ -1371,7 +1371,7 @@ ComboBox.propTypes = {
   translateWithId: PropTypes.func,
 
   /**
-   * **Experimental**: will enable autcomplete and typeahead for the input field
+   * **Experimental**: will enable autocomplete and typeahead for the input field
    */
   typeahead: PropTypes.bool,
 
