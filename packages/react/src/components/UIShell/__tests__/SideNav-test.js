@@ -153,7 +153,7 @@ describe('SideNav', () => {
     expect(screen.getByTestId('child')).toHaveTextContent('Collapsed');
   });
 
-  it('should not pass isSideNavExpanded to non-CarbsideNav children', () => {
+  it('should not pass isSideNavExpanded to non-CarbonSideNav children', () => {
     const NonCarbonChild = () => <div data-testid="non-carbon-child" />;
     render(
       <SideNav aria-label="test" expanded>
