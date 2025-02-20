@@ -427,7 +427,7 @@ const MultiSelect = React.forwardRef(
       selectedItems: controlledSelectedItems,
       onItemChange,
       clearSelection,
-    } = useSelection<ItemType>({
+    } = useSelection({
       disabled,
       initialSelectedItems,
       onChange,
