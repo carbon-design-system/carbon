@@ -6,7 +6,6 @@
  */
 
 import React, { useCallback, useEffect, useState, useRef } from 'react';
-import PropTypes from 'prop-types';
 import isEqual from 'react-fast-compare';
 
 const callOnChangeHandler = <ItemType,>({
@@ -56,9 +55,7 @@ export const useSelection = <ItemType,>({
   const selectedItems = isControlled ? controlledItems! : uncontrolledItems;
   const onItemChange = useCallback(
     (item: ItemType) => {
-      if (disabled) {
-        return;
-      }
+      if (disabled) return;
 
       // Assert special properties (e.g., `disabled`, `isSelectAll`, etc.) are
       // `any` since those properties aren’t part of the generic type.
@@ -120,9 +117,8 @@ export const useSelection = <ItemType,>({
   );
 
   const clearSelection = useCallback(() => {
-    if (disabled) {
-      return;
-    }
+    if (disabled) return;
+
     callOnChangeHandler<ItemType>({
       isControlled,
       isMounted: isMounted.current,
@@ -156,32 +152,29 @@ export const useSelection = <ItemType,>({
   };
 };
 
-interface SelectionRenderProps {
+interface SelectionRenderProps<ItemType> {
   clearSelection: () => void;
-  onItemChange: (item: any) => void;
-  selectedItems: any[];
+  onItemChange: (item: ItemType) => void;
+  selectedItems: ItemType[];
 }
 
-interface SelectionProps {
-  children?: (renderProps: SelectionRenderProps) => React.ReactNode;
+interface SelectionProps<ItemType> {
+  children?: (renderProps: SelectionRenderProps<ItemType>) => React.ReactNode;
   disabled?: boolean;
-  initialSelectedItems: any[];
-  onChange?: (state: { selectedItems: any[] }) => void;
-  render?: (renderProps: SelectionRenderProps) => React.ReactNode;
+  initialSelectedItems: ItemType[];
+  onChange?: (state: { selectedItems: ItemType[] }) => void;
+  render?: (renderProps: SelectionRenderProps<ItemType>) => React.ReactNode;
 }
 
-export const Selection = ({
+export const Selection = <ItemType,>({
   children,
   disabled,
   initialSelectedItems,
   onChange,
   render,
-}: SelectionProps) => {
-  // Initialize state with the provided initial selected items
-  const [selectedItems, setSelectedItems] =
-    useState<any[]>(initialSelectedItems);
+}: SelectionProps<ItemType>) => {
+  const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
 
-  // Whenever the selectedItems change, call the onChange callback
   useEffect(() => {
     if (onChange) {
       onChange({ selectedItems });
@@ -193,7 +186,7 @@ export const Selection = ({
     setSelectedItems([]);
   }, [disabled]);
 
-  const handleSelectItem = useCallback((item: any) => {
+  const handleSelectItem = useCallback((item: ItemType) => {
     setSelectedItems((prev) => prev.concat(item));
   }, []);
 
@@ -202,14 +195,16 @@ export const Selection = ({
   }, []);
 
   const handleOnItemChange = useCallback(
-    (item: any) => {
+    (item: ItemType) => {
       if (disabled) return;
+
       let selectedIndex: number | undefined;
       selectedItems.forEach((selectedItem, index) => {
         if (isEqual(selectedItem, item)) {
           selectedIndex = index;
         }
       });
+
       if (typeof selectedIndex === 'undefined') {
         handleSelectItem(item);
       } else {
@@ -219,7 +214,7 @@ export const Selection = ({
     [disabled, selectedItems, handleSelectItem, handleRemoveItem]
   );
 
-  const renderProps: SelectionRenderProps = {
+  const renderProps: SelectionRenderProps<ItemType> = {
     clearSelection: handleClearSelection,
     onItemChange: handleOnItemChange,
     selectedItems,
