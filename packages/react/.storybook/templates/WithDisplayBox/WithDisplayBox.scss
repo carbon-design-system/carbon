@@ -1,0 +1,72 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+@use '../prefix' as *;
+
+$block-class: #{$prefix}--display-box;
+
+$indicator-width: $spacing-02;
+$indicator-height: $spacing-04;
+
+/**
+  Adds a box indicating the extent of the available space to the displayed component
+*/
+.#{$block-class} {
+  display: inline-block;
+  color: $text-helper;
+  margin-block-start: $spacing-09; /* provides space in docs */
+  max-inline-size: 100%;
+  padding-block-start: $spacing-05; /* space for the indicators */
+}
+
+.#{$block-class}__story {
+  inline-size: var(--container-width, 400);
+  max-inline-size: 100%;
+}
+
+.#{$block-class}__indicator {
+  position: relative;
+  border-block-end: 1px solid $text-helper;
+  inline-size: 100%;
+  inset-block-start: 0;
+  margin-block: $spacing-05;
+  white-space: nowrap;
+  @include type-style('helper-text-01');
+}
+
+.#{$block-class}__message {
+  inset-block-end: $spacing-02;
+}
+
+.sb-main-centered .#{$block-class}__message {
+  inset-inline-start: 50%;
+  min-inline-size: 100vh;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.#{$block-class}__indicator--left,
+.#{$block-class}__indicator--right {
+  position: absolute;
+  block-size: 0;
+  border-block-start: $indicator-height solid $text-helper;
+  border-inline-end: $indicator-width solid transparent;
+  border-inline-start: $indicator-width solid transparent;
+  inline-size: 0;
+  inset-block-end: calc(-1 * $indicator-height);
+}
+
+.#{$block-class}__indicator--left {
+  inset-inline-start: calc(-1 * $indicator-width);
+}
+
+.#{$block-class}__indicator--right {
+  inset-inline-end: calc(-1 * $indicator-width);
+}
