@@ -14,7 +14,7 @@ import React, {
   MouseEventHandler,
   PropsWithChildren,
 } from 'react';
-import { debounce } from 'es-toolkit/dist/compat';
+import { debounce } from 'es-toolkit/compat';
 import classnames from 'classnames';
 import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
