@@ -1,0 +1,247 @@
+/**
+ * Copyright IBM Corp. 2016, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import React, { useCallback, useEffect, useState, useRef } from 'react';
+import PropTypes from 'prop-types';
+import isEqual from 'react-fast-compare';
+
+const callOnChangeHandler = <ItemType,>({
+  isControlled,
+  isMounted,
+  onChangeHandlerControlled,
+  onChangeHandlerUncontrolled,
+  selectedItems,
+}: {
+  isControlled: boolean;
+  isMounted: boolean;
+  onChangeHandlerControlled?: (data: { selectedItems: ItemType[] }) => void;
+  onChangeHandlerUncontrolled: (selectedItems: ItemType[]) => void;
+  selectedItems: ItemType[];
+}) => {
+  if (isControlled) {
+    if (isMounted && onChangeHandlerControlled) {
+      onChangeHandlerControlled({ selectedItems });
+    }
+  } else {
+    onChangeHandlerUncontrolled(selectedItems);
+  }
+};
+
+interface UseSelectionProps<ItemType> {
+  disabled?: boolean;
+  filteredItems?: ItemType[];
+  initialSelectedItems?: ItemType[];
+  onChange?: (data: { selectedItems: ItemType[] }) => void;
+  selectAll?: boolean;
+  selectedItems?: ItemType[];
+}
+
+export const useSelection = <ItemType,>({
+  disabled,
+  onChange,
+  initialSelectedItems = [],
+  selectedItems: controlledItems,
+  selectAll = false,
+  filteredItems = [],
+}: UseSelectionProps<ItemType>) => {
+  const isMounted = useRef(false);
+  const savedOnChange = useRef(onChange);
+  const [uncontrolledItems, setUncontrolledItems] =
+    useState(initialSelectedItems);
+  const isControlled = !!controlledItems;
+  const selectedItems = isControlled ? controlledItems! : uncontrolledItems;
+  const onItemChange = useCallback(
+    (item: ItemType) => {
+      if (disabled) {
+        return;
+      }
+
+      // Assert special properties (e.g., `disabled`, `isSelectAll`, etc.) are
+      // `any` since those properties aren’t part of the generic type.
+      const allSelectableItems = filteredItems.filter(
+        (item) => !(item as any)?.disabled
+      );
+      const disabledItemCount = filteredItems.filter(
+        (item) => (item as any)?.disabled
+      ).length;
+
+      let newSelectedItems: ItemType[];
+
+      // deselect all on click to All/indeterminate option
+      if ((item as any)?.isSelectAll && selectedItems.length > 0) {
+        newSelectedItems = [];
+      }
+      // select all options
+      else if ((item as any)?.isSelectAll && selectedItems.length === 0) {
+        newSelectedItems = allSelectableItems;
+      } else {
+        let selectedIndex: number | undefined;
+        selectedItems.forEach((selectedItem, index) => {
+          if (isEqual(selectedItem, item)) {
+            // TODO: Should this functionality be changed so that the loop stops
+            // iterating after finding a match? If not, should the loop be
+            // iterated in reverse? Either way, seems like there's a more
+            // performant way to do this.
+            selectedIndex = index;
+          }
+        });
+
+        if (typeof selectedIndex === 'undefined') {
+          newSelectedItems = selectedItems.concat(item);
+          // checking if all items are selected then We should select mark the 'select All' option as well
+          if (
+            selectAll &&
+            filteredItems.length - 1 ===
+              newSelectedItems.length + disabledItemCount
+          ) {
+            newSelectedItems = allSelectableItems;
+          }
+        } else {
+          newSelectedItems = removeAtIndex(selectedItems, selectedIndex);
+          newSelectedItems = newSelectedItems.filter(
+            (item) => !(item as any)?.isSelectAll
+          );
+        }
+      }
+
+      callOnChangeHandler<ItemType>({
+        isControlled,
+        isMounted: isMounted.current,
+        onChangeHandlerControlled: savedOnChange.current,
+        onChangeHandlerUncontrolled: setUncontrolledItems,
+        selectedItems: newSelectedItems,
+      });
+    },
+    [disabled, selectedItems, filteredItems, selectAll, isControlled]
+  );
+
+  const clearSelection = useCallback(() => {
+    if (disabled) {
+      return;
+    }
+    callOnChangeHandler<ItemType>({
+      isControlled,
+      isMounted: isMounted.current,
+      onChangeHandlerControlled: savedOnChange.current,
+      onChangeHandlerUncontrolled: setUncontrolledItems,
+      selectedItems: [],
+    });
+  }, [disabled, isControlled]);
+
+  useEffect(() => {
+    savedOnChange.current = onChange;
+  }, [onChange]);
+
+  useEffect(() => {
+    if (isMounted.current && savedOnChange.current && !isControlled) {
+      savedOnChange.current({ selectedItems });
+    }
+  }, [isControlled, selectedItems]);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  return {
+    clearSelection,
+    onItemChange,
+    selectedItems,
+  };
+};
+
+interface SelectionRenderProps {
+  clearSelection: () => void;
+  onItemChange: (item: any) => void;
+  selectedItems: any[];
+}
+
+interface SelectionProps {
+  children?: (renderProps: SelectionRenderProps) => React.ReactNode;
+  disabled?: boolean;
+  initialSelectedItems: any[];
+  onChange?: (state: { selectedItems: any[] }) => void;
+  render?: (renderProps: SelectionRenderProps) => React.ReactNode;
+}
+
+export const Selection = ({
+  children,
+  disabled,
+  initialSelectedItems,
+  onChange,
+  render,
+}: SelectionProps) => {
+  // Initialize state with the provided initial selected items
+  const [selectedItems, setSelectedItems] =
+    useState<any[]>(initialSelectedItems);
+
+  // Whenever the selectedItems change, call the onChange callback
+  useEffect(() => {
+    if (onChange) {
+      onChange({ selectedItems });
+    }
+  }, [selectedItems, onChange]);
+
+  const handleClearSelection = useCallback(() => {
+    if (disabled) return;
+    setSelectedItems([]);
+  }, [disabled]);
+
+  const handleSelectItem = useCallback((item: any) => {
+    setSelectedItems((prev) => prev.concat(item));
+  }, []);
+
+  const handleRemoveItem = useCallback((index: number) => {
+    setSelectedItems((prev) => removeAtIndex(prev, index));
+  }, []);
+
+  const handleOnItemChange = useCallback(
+    (item: any) => {
+      if (disabled) return;
+      let selectedIndex: number | undefined;
+      selectedItems.forEach((selectedItem, index) => {
+        if (isEqual(selectedItem, item)) {
+          selectedIndex = index;
+        }
+      });
+      if (typeof selectedIndex === 'undefined') {
+        handleSelectItem(item);
+      } else {
+        handleRemoveItem(selectedIndex);
+      }
+    },
+    [disabled, selectedItems, handleSelectItem, handleRemoveItem]
+  );
+
+  const renderProps: SelectionRenderProps = {
+    clearSelection: handleClearSelection,
+    onItemChange: handleOnItemChange,
+    selectedItems,
+  };
+
+  if (typeof render !== 'undefined') {
+    return <>{render(renderProps)}</>;
+  }
+
+  if (typeof children !== 'undefined') {
+    return <>{children(renderProps)}</>;
+  }
+
+  return null;
+};
+
+/**
+ * Generic utility for safely removing an element at a given index from an
+ * array.
+ */
+const removeAtIndex = <ItemType,>(array: ItemType[], index: number) => {
+  const result = array.slice();
+  result.splice(index, 1);
+  return result;
+};
