@@ -444,7 +444,7 @@ class CDSMultiSelect extends CDSDropdown {
   /**
    * The CSS class list for multi-select listbox
    */
-  protected get _classes() {
+  protected get _classes(): any {
     const {
       disabled,
       size,

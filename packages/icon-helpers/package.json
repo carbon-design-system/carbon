@@ -38,7 +38,7 @@
   "devDependencies": {
     "@carbon/cli": "^11.23.0",
     "rimraf": "^6.0.0",
-    "typescript-config-carbon": "^0.3.0"
+    "typescript-config-carbon": "^0.4.0"
   },
   "sideEffects": false,
   "dependencies": {
