@@ -68,7 +68,7 @@ function CSSGrid<T extends React.ElementType>({
 
 CSSGrid.propTypes = {
   /**
-   * Specify grid aligment. Default is center
+   * Specify grid alignment. Default is center
    */
   align: PropTypes.oneOf(['start', 'center', 'end']),
 

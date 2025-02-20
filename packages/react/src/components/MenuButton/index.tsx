@@ -241,7 +241,7 @@ MenuButton.propTypes = {
   kind: PropTypes.oneOf(validButtonKinds),
 
   /**
-   * Provide the label to be renderd on the trigger button.
+   * Provide the label to be rendered on the trigger button.
    */
   label: PropTypes.string.isRequired,
 
