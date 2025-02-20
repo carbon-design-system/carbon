@@ -110,7 +110,7 @@ describe('Dropdown', () => {
     expect(screen.getByText(1)).toBeInTheDocument();
   });
 
-  it('should render when defaulItemtoString passed with null value', async () => {
+  it('should render when defaultItemToString passed with null value', async () => {
     let mockProps2 = { ...mockProps, label: [] };
     const { container } = render(<Dropdown {...mockProps2} />);
     const labelElement = screen.queryByText('shankar');

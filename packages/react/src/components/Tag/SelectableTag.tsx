@@ -28,7 +28,7 @@ export interface SelectableTagBaseProps {
   disabled?: boolean;
 
   /**
-   * Specify the id for the selectabletag.
+   * Specify the id for the selectable tag.
    */
   id?: string;
 

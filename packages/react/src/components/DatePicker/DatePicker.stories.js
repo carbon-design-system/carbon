@@ -177,7 +177,7 @@ export const Default = ({ readOnly, ...args }) => {
 Default.argTypes = {
   ...sharedArgTypes,
   datePickerType: {
-    options: ['sigle', 'simple', 'range'],
+    options: ['single', 'simple', 'range'],
     control: { type: 'select' },
   },
 };
