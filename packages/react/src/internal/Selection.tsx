@@ -76,18 +76,11 @@ export const useSelection = <ItemType,>({
       else if ((item as any)?.isSelectAll && selectedItems.length === 0) {
         newSelectedItems = allSelectableItems;
       } else {
-        let selectedIndex: number | undefined;
-        selectedItems.forEach((selectedItem, index) => {
-          if (isEqual(selectedItem, item)) {
-            // TODO: Should this functionality be changed so that the loop stops
-            // iterating after finding a match? If not, should the loop be
-            // iterated in reverse? Either way, seems like there's a more
-            // performant way to do this.
-            selectedIndex = index;
-          }
-        });
+        const selectedIndex = selectedItems.findLastIndex((selectedItem) =>
+          isEqual(selectedItem, item)
+        );
 
-        if (typeof selectedIndex === 'undefined') {
+        if (selectedIndex === -1) {
           newSelectedItems = selectedItems.concat(item);
           // checking if all items are selected then We should select mark the 'select All' option as well
           if (
