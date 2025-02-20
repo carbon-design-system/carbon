@@ -80,7 +80,7 @@ export interface IconButtonProps
   /**
    * Optionally specify an href for your IconButton to become an `<a>` element
    */
-  href?: string;
+  href?: React.AnchorHTMLAttributes<HTMLAnchorElement>['href'];
 
   /**
    * Provide an icon or asset to be rendered inside of the IconButton
@@ -147,9 +147,19 @@ export interface IconButtonProps
   leaveDelayMs?: number;
 
   /**
+   * Optionally specify a `rel` when using an `<a>` element.
+   */
+  rel?: React.AnchorHTMLAttributes<HTMLAnchorElement>['rel'];
+
+  /**
    * Specify the size of the Button. Defaults to `md`.
    */
   size?: ButtonSize;
+
+  /**
+   * Optionally specify a `target` when using an `<a>` element.
+   */
+  target?: React.AnchorHTMLAttributes<HTMLAnchorElement>['target'];
 
   /**
    * Specify an optional className to be added to your Tooltip wrapper
@@ -341,9 +351,19 @@ IconButton.propTypes = {
   leaveDelayMs: PropTypes.number,
 
   /**
+   * Optionally specify a `rel` when using an `<a>` element.
+   */
+  rel: PropTypes.string,
+
+  /**
    * Specify the size of the Button. Defaults to `md`.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Optionally specify a `target` when using an `<a>` element.
+   */
+  target: PropTypes.string,
 
   /**
    * Specify an optional className to be added to your Tooltip wrapper
