@@ -1,21 +1,21 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, {
-  useCallback,
-  useContext,
-  useState,
   FocusEvent,
   ForwardedRef,
+  isValidElement,
   MouseEvent,
   ReactNode,
+  useCallback,
+  useContext,
   useEffect,
   useMemo,
-  ReactElement,
+  useState,
 } from 'react';
 import {
   useSelect,
@@ -610,11 +610,13 @@ const Dropdown = React.forwardRef(
 
     return (
       <div className={wrapperClasses} {...other}>
-        {titleText && (
+        {isValidElement(titleText) ? (
+          <div className={titleClasses}>{titleText}</div>
+        ) : titleText ? (
           <label className={titleClasses} {...getLabelProps()}>
             {titleText}
           </label>
-        )}
+        ) : null}
         <ListBox
           onFocus={handleFocus}
           onBlur={handleFocus}

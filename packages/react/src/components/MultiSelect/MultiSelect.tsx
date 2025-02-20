@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,11 +17,12 @@ import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   ForwardedRef,
-  useContext,
-  useState,
-  useMemo,
+  isValidElement,
   ReactNode,
+  useContext,
   useLayoutEffect,
+  useMemo,
+  useState,
 } from 'react';
 import ListBox, {
   ListBoxSize,
@@ -737,15 +738,18 @@ const MultiSelect = React.forwardRef(
 
     return (
       <div className={wrapperClasses}>
-        <label className={titleClasses} {...getLabelProps()}>
-          {titleText && titleText}
-          {selectedItems.length > 0 && (
-            <span className={`${prefix}--visually-hidden`}>
-              {clearSelectionDescription} {selectedItems.length}{' '}
-              {itemsSelectedText},{clearSelectionText}
-            </span>
-          )}
-        </label>
+        {isValidElement(titleText) ? (
+          <div className={titleClasses}>{titleText}</div>
+        ) : titleText ? (
+          <label className={titleClasses} {...getLabelProps()}>
+            {selectedItems.length > 0 && (
+              <span className={`${prefix}--visually-hidden`}>
+                {clearSelectionDescription} {selectedItems.length}{' '}
+                {itemsSelectedText},{clearSelectionText}
+              </span>
+            )}
+          </label>
+        ) : null}
         <ListBox
           onFocus={isFluid ? handleFocus : undefined}
           onBlur={isFluid ? handleFocus : undefined}
