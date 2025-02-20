@@ -675,6 +675,67 @@ describe('ComboBox', () => {
         expect(call.selectedItem).toEqual(mockProps.items[i]);
       }
     });
+    it('should clear selection if input does not match any item and there is already a selected item', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} />);
+
+      // First select an item
+      await openMenu();
+      await user.click(screen.getAllByRole('option')[0]);
+
+      expect(findInputNode()).toHaveDisplayValue('Item 0');
+      expect(mockProps.onChange).toHaveBeenCalledWith({
+        selectedItem: mockProps.items[0],
+      });
+
+      // Clear input and type something that doesn't match
+      await user.clear(findInputNode());
+      await user.type(findInputNode(), 'xyz');
+      await user.keyboard('[Enter]');
+      // Selection should be cleared
+
+      expect(mockProps.onChange).toHaveBeenLastCalledWith({
+        selectedItem: null,
+      });
+
+      expect(findInputNode()).toHaveDisplayValue('xyz');
+    });
+
+    it('should not clear selection if no item was previously selected', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} />);
+
+      // Type something that doesn't match any item
+      await user.type(findInputNode(), 'xyz');
+      await user.keyboard('[Enter]');
+
+      // No onChange should be called since there was no selection to clear
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+      expect(findInputNode()).toHaveDisplayValue('xyz');
+    });
+
+    it('should keep selection when allowCustomValue is true even if input does not match', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} allowCustomValue />);
+
+      // First select an item
+      await openMenu();
+      await user.click(screen.getAllByRole('option')[0]);
+      expect(findInputNode()).toHaveDisplayValue('Item 0');
+
+      // Type something that doesn't match
+      await user.clear(findInputNode());
+      await user.type(findInputNode(), 'xyz');
+      await user.keyboard('[Enter]');
+
+      // Selection should not be cleared with allowCustomValue
+      expect(mockProps.onChange).toHaveBeenLastCalledWith({
+        selectedItem: null,
+        inputValue: 'xyz',
+      });
+
+      expect(findInputNode()).toHaveDisplayValue('xyz');
+    });
   });
 
   describe('ComboBox autocomplete', () => {
