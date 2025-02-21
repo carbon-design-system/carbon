@@ -45,6 +45,7 @@ const ButtonBase = React.forwardRef(function ButtonBase<
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--sm`]: size === 'sm' && !isExpressive, // TODO: V12 - Remove this class
     [`${prefix}--btn--md`]: size === 'md' && !isExpressive, // TODO: V12 - Remove this class
+    [`${prefix}--btn--lg`]: size === 'lg' && !isExpressive, // TODO: V12 - Remove this class
     [`${prefix}--btn--xl`]: size === 'xl', // TODO: V12 - Remove this class
     [`${prefix}--btn--2xl`]: size === '2xl', // TODO: V12 - Remove this class
     [`${prefix}--layout--size-${size}`]: size,
