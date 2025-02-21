@@ -425,6 +425,16 @@ export interface TabListProps extends DivAttributes {
 }
 type TabElement = HTMLElement & { disabled?: boolean };
 
+const TRANSITIONAL_ELEMENT = Symbol.for('react.transitional.element');
+
+function isTransitionalElement(value: any): value is React.ReactElement {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    value.$$typeof === TRANSITIONAL_ELEMENT
+  );
+}
+
 function TabList({
   activation = 'automatic',
   'aria-label': label,
@@ -737,7 +747,7 @@ function TabList({
         onKeyDown={onKeyDown}
         onBlur={handleBlur}>
         {React.Children.map(children, (child, index) => {
-          return !isElement(child) ? null : (
+          return !isElement(child) && !isTransitionalElement(child) ? null : (
             <TabContext.Provider
               value={{
                 index,
