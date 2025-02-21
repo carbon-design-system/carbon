@@ -12,10 +12,14 @@ import { Canvas, ArgTypes, Meta } from '@storybook/blocks';
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [Notification](#Notification)
+    - [Overview](#overview)
+    - [ActionableNotification](#ActionableNotification)
+    - [InlineNotification & ToastNotification](#InlineNotification-and-ToastNotification)
 - [Component API](#component-api)
 - [Actionable](#actionable)
-- [References](#references)
+- [Inline](#inline)
+- [Toast](#toast)
 - [Feedback](#feedback)
 
 ## Overview
@@ -33,7 +37,7 @@ InlineNotification, you can use the `inline` prop. If `actionButtonLabel` is not
 provided, an action button will not be rendered. This component grabs and traps
 focus until the action is acted upon or the notification is dismissed.
 
-### InlineNotification & ToastNotification
+### InlineNotification and ToastNotification
 
 `InlineNotification` and `ToastNotification` can not contain interactive
 elements or rich text. These are announced by screenreaders when rendered. They

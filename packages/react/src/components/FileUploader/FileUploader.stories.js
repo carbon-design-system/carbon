@@ -10,6 +10,7 @@
 import React from 'react';
 import ExampleDropContainerApp from './stories/drop-container';
 import ExampleDropContainerAppSingle from './stories/drag-and-drop-single';
+import mdx from './FileUploader.mdx';
 
 import {
   default as FileUploader,
@@ -29,6 +30,11 @@ export default {
     FileUploaderSkeleton,
     FileUploaderItem,
     FileUploaderDropContainer,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 
@@ -110,16 +116,18 @@ _FileUploaderItem.argTypes = {
   },
 };
 
-export const _FileUploaderDropContainer = () => (
-  <FileUploaderDropContainer
-    labelText="Drag and drop files here or click to upload"
-    multiple={true}
-    accept={['image/jpeg', 'image/png']}
-    disabled={false}
-    name=""
-    tabIndex={0}
-  />
-);
+export const _FileUploaderDropContainer = () => {
+  return (
+    <FileUploaderDropContainer
+      labelText="Drag and drop files here or click to upload"
+      multiple={true}
+      accept={['image/jpeg', 'image/png']}
+      disabled={false}
+      name=""
+      tabIndex={0}
+    />
+  );
+};
 
 export const DragAndDropUploadContainerExampleApplication = (args) =>
   ExampleDropContainerApp(args);
@@ -151,11 +159,13 @@ DragAndDropUploadSingleContainerExampleApplication.argTypes = {
   onChange: { action: 'onChange' },
 };
 
-export const Skeleton = () => (
-  <div style={{ width: '500px' }}>
-    <FileUploaderSkeleton />
-  </div>
-);
+export const Skeleton = () => {
+  return (
+    <div style={{ width: '500px' }}>
+      <FileUploaderSkeleton />
+    </div>
+  );
+};
 
 export const Default = (args) => {
   return (
@@ -164,6 +174,7 @@ export const Default = (args) => {
     </div>
   );
 };
+
 Default.args = {
   labelTitle: 'Upload files',
   labelDescription: 'Max file size is 500 MB. Only .jpg files are supported.',
