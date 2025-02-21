@@ -13,6 +13,19 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/tag/accessibility)
 
+## Table of Contents
+
+- [Tag](#tag)
+  - [Overview](#overview)
+  - [Read Only](#read-only)
+  - [Dismissible](#dismissible)
+  - [Selectable](#selectable)
+  - [Operational](#operational)
+  - [AI Label](#ai-label)
+  - [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
 ## Overview
 
 Tags can be used to categorize items. Use short labels for easy scanning. Use
@@ -49,7 +62,7 @@ When to use:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TagStories.ReadOnly),
+      onClick: () => stackblitzPrefillConfig(InteractiveTagStories.Dismissible),
     },
   ]}
 />
@@ -244,3 +257,13 @@ when AI is present in the component.
     },
   ]}
 />
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Tag/Tag.tsx).

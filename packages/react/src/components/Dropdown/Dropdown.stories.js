@@ -211,6 +211,36 @@ Default.argTypes = {
 };
 
 export const ExperimentalAutoAlign = (args) => {
+  const items = [
+    {
+      text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+    },
+    {
+      text: 'Option 1',
+    },
+    {
+      text: 'Option 2',
+    },
+    {
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      text: 'Option 4',
+    },
+    {
+      text: 'Option 5',
+    },
+    {
+      text: 'Option 6',
+    },
+    {
+      text: 'Option 7',
+    },
+    {
+      text: 'Option 8',
+    },
+  ];
   return (
     <div style={{ width: 400 }}>
       <div style={{ height: 300 }}></div>
@@ -340,52 +370,84 @@ export const Skeleton = () => {
   );
 };
 
-const aiLabel = (
-  <AILabel className="ai-label-container">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
+export const withAILabel = (args) => {
+  const aiLabel = (
+    <AILabel className="ai-label-container">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <AILabelActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </AILabelActions>
+      </AILabelContent>
+    </AILabel>
+  );
+  const items = [
+    {
+      text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+    },
+    {
+      text: 'Option 1',
+    },
+    {
+      text: 'Option 2',
+    },
+    {
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      text: 'Option 4',
+    },
+    {
+      text: 'Option 5',
+    },
+    {
+      text: 'Option 6',
+    },
+    {
+      text: 'Option 7',
+    },
+    {
+      text: 'Option 8',
+    },
+  ];
 
-export const withAILabel = (args) => (
-  <div style={{ width: 400 }}>
-    <Dropdown
-      id="default"
-      titleText="Dropdown title"
-      helperText="This is some helper text"
-      initialSelectedItem={items[1]}
-      label="Option 1"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      decorator={aiLabel}
-      {...args}
-    />
-  </div>
-);
+  return (
+    <div style={{ width: 400 }}>
+      <Dropdown
+        id="default"
+        titleText="Dropdown title"
+        helperText="This is some helper text"
+        initialSelectedItem={items[1]}
+        label="Option 1"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        decorator={aiLabel}
+        {...args}
+      />
+    </div>
+  );
+};
 
 withAILabel.argTypes = {
   ...sharedArgTypes,
