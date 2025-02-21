@@ -46,8 +46,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { useFloating, flip, autoUpdate } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
+import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
 
@@ -367,7 +366,7 @@ export interface ComboBoxProps<ItemType>
   titleText?: ReactNode;
 
   /**
-   * **Experimental**: will enable autcomplete and typeahead for the input field
+   * **Experimental**: will enable autocomplete and typeahead for the input field
    */
   typeahead?: boolean;
 
@@ -612,6 +611,17 @@ const ComboBox = forwardRef(
           }
 
           case InputKeyDownEnter:
+            if (
+              highlightedIndex === -1 &&
+              !allowCustomValue &&
+              state.selectedItem
+            ) {
+              return {
+                ...changes,
+                selectedItem: null,
+                inputValue: state.inputValue,
+              };
+            }
             if (allowCustomValue) {
               setInputValue(inputValue);
               setHighlightedIndex(changes.selectedItem);
@@ -626,6 +636,17 @@ const ComboBox = forwardRef(
             }
           case FunctionToggleMenu:
           case ToggleButtonClick:
+            if (
+              !changes.isOpen &&
+              state.inputValue &&
+              highlightedIndex === -1 &&
+              !allowCustomValue
+            ) {
+              return {
+                ...changes,
+                inputValue: '', // Clear the input
+              };
+            }
             if (changes.isOpen && !changes.selectedItem) {
               return { ...changes };
             }
@@ -783,8 +804,9 @@ const ComboBox = forwardRef(
           onChange({ selectedItem: newSelectedItem });
         }
         if (
-          type === useCombobox.stateChangeTypes.FunctionSelectItem ||
-          type === useCombobox.stateChangeTypes.InputKeyDownEnter
+          (type === useCombobox.stateChangeTypes.FunctionSelectItem ||
+            type === useCombobox.stateChangeTypes.InputKeyDownEnter) &&
+          !isEqual(selectedItemProp, newSelectedItem) // Only fire if there's an actual change
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
@@ -843,6 +865,9 @@ const ComboBox = forwardRef(
 
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
       setIsFocused(evt.type === 'focus');
+      if (!inputRef.current?.value && evt.type === 'blur') {
+        selectItem(null);
+      }
     };
 
     const readOnlyEventHandlers = readOnly
@@ -969,8 +994,13 @@ const ComboBox = forwardRef(
                     // Since `onChange` does not normally fire when the menu is closed, we should
                     // manually fire it when `allowCustomValue` is provided, the menu is closing,
                     // and there is a value.
-                    if (allowCustomValue && isOpen && inputValue) {
-                      onChange({ selectedItem, inputValue });
+                    if (
+                      allowCustomValue &&
+                      isOpen &&
+                      inputValue &&
+                      highlightedIndex === -1
+                    ) {
+                      onChange({ selectedItem: null, inputValue });
                     }
 
                     event.preventDownshiftDefault = true;
@@ -1007,6 +1037,17 @@ const ComboBox = forwardRef(
                     if (isOpen) {
                       toggleMenu();
                     }
+                  }
+                  if (
+                    !inputValue &&
+                    highlightedIndex == -1 &&
+                    event.key == 'Enter'
+                  ) {
+                    if (!isOpen) toggleMenu();
+                    selectItem(null);
+                    event.preventDownshiftDefault = true;
+                    if (event.currentTarget.ariaExpanded === 'false')
+                      openMenu();
                   }
                   if (typeahead && event.key === 'Tab') {
                     //  event.preventDefault();
@@ -1330,7 +1371,7 @@ ComboBox.propTypes = {
   translateWithId: PropTypes.func,
 
   /**
-   * **Experimental**: will enable autcomplete and typeahead for the input field
+   * **Experimental**: will enable autocomplete and typeahead for the input field
    */
   typeahead: PropTypes.bool,
 

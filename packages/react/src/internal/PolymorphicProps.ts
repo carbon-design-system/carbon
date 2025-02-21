@@ -15,7 +15,7 @@ export type PolymorphicComponentProp<
 export type PolymorphicRef<C extends React.ElementType> =
   React.ComponentPropsWithRef<C>['ref'];
 
-// This is a new type utitlity with ref!
+// This is a new type utility with ref!
 export type PolymorphicComponentPropWithRef<
   C extends React.ElementType,
   Props = {},

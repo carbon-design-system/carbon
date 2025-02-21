@@ -37,7 +37,7 @@ const aiLabelIcon = html` <svg
  */
 @customElement(`${prefix}-clickable-tile`)
 class CDSClickableTile extends CDSLink {
-  protected get _classes() {
+  protected get _classes(): any {
     const { colorScheme, disabled, hasRoundedCorners, aiLabel, slug } = this;
     return classMap({
       [`${prefix}--link`]: true,

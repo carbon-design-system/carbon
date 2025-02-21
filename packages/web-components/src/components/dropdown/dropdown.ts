@@ -673,7 +673,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * The CSS class list for dropdown listbox
    */
-  protected get _classes() {
+  protected get _classes(): any {
     const { disabled, size, type, invalid, open, warn } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
 
