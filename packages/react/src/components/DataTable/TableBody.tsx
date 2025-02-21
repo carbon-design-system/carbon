@@ -18,7 +18,7 @@ export interface TableBodyProps extends ReactAttr<HTMLTableSectionElement> {
 
 const TableBody = ({ children, className, ...rest }: TableBodyProps) => (
   <tbody
-    aria-live={'polite' || rest['aria-live']}
+    aria-live={rest['aria-live'] ?? 'polite'}
     className={className}
     {...rest}>
     {children}

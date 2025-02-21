@@ -16,7 +16,9 @@ import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import CDSCheckbox from './checkbox';
 import styles from './checkbox.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { CHECKBOX_ORIENTATION } from './defs';
 
+export { CHECKBOX_ORIENTATION };
 /**
  * Check box.
  *
@@ -71,6 +73,12 @@ class CDSCheckboxGroup extends LitElement {
   legendText;
 
   /**
+   * Provide the orientation for how the checkbox should be displayed
+   */
+  @property({ type: String, reflect: true, attribute: 'orientation' })
+  orientation = CHECKBOX_ORIENTATION.VERTICAL;
+
+  /**
    * Whether the CheckboxGroup should be read-only
    */
   @property({ type: Boolean, reflect: true })
@@ -119,7 +127,7 @@ class CDSCheckboxGroup extends LitElement {
   updated(changedProperties) {
     const { selectorCheckbox } = this.constructor as typeof CDSCheckboxGroup;
     const checkboxes = this.querySelectorAll(selectorCheckbox);
-    ['disabled', 'readonly'].forEach((name) => {
+    ['disabled', 'readonly', 'orientation'].forEach((name) => {
       if (changedProperties.has(name)) {
         const { [name as keyof CDSCheckboxGroup]: value } = this;
         // Propagate the property to descendants until `:host-context()` gets supported in all major browsers
@@ -149,6 +157,7 @@ class CDSCheckboxGroup extends LitElement {
       invalidText,
       legendId,
       legendText,
+      orientation,
       readonly,
       warn,
       warnText,
@@ -177,6 +186,8 @@ class CDSCheckboxGroup extends LitElement {
       [`${prefix}--checkbox-group--invalid`]: !readonly && invalid,
       [`${prefix}--checkbox-group--warning`]: showWarning,
       [`${prefix}--checkbox-group--slug`]: hasAILabel,
+      [`${prefix}--checkbox-group--${orientation}`]:
+        orientation === 'horizontal',
     });
 
     return html`
@@ -184,9 +195,10 @@ class CDSCheckboxGroup extends LitElement {
         class="${fieldsetClasses}"
         ?data-invalid=${invalid}
         ?disabled=${disabled}
-        aria-readonly=${readonly}
+        aria-disabled=${readonly}
         ?aria-labelledby=${ariaLabelledBy || legendId}
-        ?aria-describedby=${!invalid && !warn && helper ? helperId : undefined}>
+        ?aria-describedby=${!invalid && !warn && helper ? helperId : undefined}
+        orientation=${orientation}>
         <legend class="${prefix}--label" id=${legendId || ariaLabelledBy}>
           ${legendText}
           <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>

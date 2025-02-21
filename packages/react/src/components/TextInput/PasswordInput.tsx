@@ -21,7 +21,7 @@ type ExcludedAttributes = 'size';
 export interface PasswordInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
   /**
-   * Provide a custom className that is applied directly to the underlyling `<input>` node
+   * Provide a custom className that is applied directly to the underlying `<input>` node
    */
   className?: string;
 
