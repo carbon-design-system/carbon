@@ -56,6 +56,14 @@ describe('Breadcrumb', () => {
     );
   });
 
+  it('should respect size prop', () => {
+    const { container } = render(<Breadcrumb size="sm" />);
+
+    expect(container.firstChild.firstChild).toHaveClass(
+      `${prefix}--breadcrumb--sm`
+    );
+  });
+
   it('should accept a `className` for outermost DOM node', () => {
     const { container } = render(<Breadcrumb className="test" />);
 
