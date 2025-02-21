@@ -366,7 +366,7 @@ export interface ComboBoxProps<ItemType>
   titleText?: ReactNode;
 
   /**
-   * **Experimental**: will enable autcomplete and typeahead for the input field
+   * **Experimental**: will enable autocomplete and typeahead for the input field
    */
   typeahead?: boolean;
 
@@ -611,6 +611,17 @@ const ComboBox = forwardRef(
           }
 
           case InputKeyDownEnter:
+            if (
+              highlightedIndex === -1 &&
+              !allowCustomValue &&
+              state.selectedItem
+            ) {
+              return {
+                ...changes,
+                selectedItem: null,
+                inputValue: state.inputValue,
+              };
+            }
             if (allowCustomValue) {
               setInputValue(inputValue);
               setHighlightedIndex(changes.selectedItem);
@@ -1360,7 +1371,7 @@ ComboBox.propTypes = {
   translateWithId: PropTypes.func,
 
   /**
-   * **Experimental**: will enable autcomplete and typeahead for the input field
+   * **Experimental**: will enable autocomplete and typeahead for the input field
    */
   typeahead: PropTypes.bool,
 

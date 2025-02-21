@@ -51,6 +51,17 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   ]}
 />
 
+#### With Custom Icon
+<Canvas
+  of={TileStories.ClickableWithCustomIcon}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TileStories.ClickableWithCustomIcon),
+    },
+  ]}
+/>
+
 ## Expandable
 
 <Canvas

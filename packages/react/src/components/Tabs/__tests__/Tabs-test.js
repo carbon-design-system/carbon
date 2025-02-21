@@ -583,7 +583,7 @@ describe('Tab', () => {
 
     expect(
       screen.getAllByLabelText('Press delete to remove Tab Label 1 tab')[0]
-    ).not.toHaveClass(`${prefix}--visaully-hidden`);
+    ).not.toHaveClass(`${prefix}--visually-hidden`);
   });
 
   it('should render close icon and renderIcon when dismissable and icon supplied', () => {
@@ -604,7 +604,7 @@ describe('Tab', () => {
 
     expect(
       screen.getAllByLabelText('Press delete to remove Tab Label 1 tab')[0]
-    ).not.toHaveClass(`${prefix}--visaully-hidden`);
+    ).not.toHaveClass(`${prefix}--visually-hidden`);
     expect(screen.getByTestId('svg')).toBeInTheDocument();
     // eslint-disable-next-line testing-library/no-node-access
     expect(screen.getByTestId('svg').parentElement).toHaveClass(
@@ -767,7 +767,7 @@ describe('TabPanel', () => {
     expect(screen.getByText('Tab Panel 1')).toHaveClass('custom-class');
   });
 
-  it('should recieve focus if there is no interactive content', () => {
+  it('should receive focus if there is no interactive content', () => {
     render(
       <Tabs>
         <TabList aria-label="List of tabs">
@@ -786,7 +786,7 @@ describe('TabPanel', () => {
     expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '-1');
   });
 
-  it('should not recieve focus if there is interactive content', () => {
+  it('should not receive focus if there is interactive content', () => {
     render(
       <Tabs>
         <TabList aria-label="List of tabs">
