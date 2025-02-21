@@ -7,7 +7,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
-# Button
+# Buttons
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Button)
 &nbsp;|&nbsp;
@@ -19,11 +19,15 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
-- [Overview](#overview)
-- [Danger Buttons](#danger-buttons)
-- [Icon-only Buttons](#icon-only-buttons)
-- [Set of Buttons](#set-of-buttons)
-- [Skeleton state](#skeleton-state)
+- [Buttons](#Buttons)
+  - [Overview](#overview)
+  - [Secondary Button](#secondary)
+  - [Tertiary Button](#tertiary)
+  - [Ghost Button](#ghost)
+  - [Danger Button](#danger-button)
+  - [Icon-only Buttons](#icon-only-buttons)
+  - [Set of Buttons](#set-of-buttons)
+  - [Skeleton state](#skeleton-state)
 - [Component API](#component-api)
   - [Button `as`](#button-as)
   - [Button `className`](#button-classname)
@@ -58,6 +62,8 @@ user interacts with it.
     },
   ]}
 />
+
+## Secondary
 <Canvas
   of={ButtonStories.Secondary}
   additionalActions={[
@@ -67,6 +73,8 @@ user interacts with it.
     },
   ]}
 />
+
+## Tertiary
 <Canvas
   of={ButtonStories.Tertiary}
   additionalActions={[
@@ -76,6 +84,8 @@ user interacts with it.
     },
   ]}
 />
+
+## Ghost
 <Canvas
   of={ButtonStories.Ghost}
   additionalActions={[
@@ -86,7 +96,7 @@ user interacts with it.
   ]}
 />
 
-## Danger Buttons
+## Danger Button
 
 The danger button has three different styles: primary, tertiary, and ghost.
 Determining which danger button style to use will depend on the level of
