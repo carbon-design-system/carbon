@@ -368,7 +368,7 @@ const MultiSelect = React.forwardRef(
     const [inputFocused, setInputFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(open || false);
     const [prevOpenProp, setPrevOpenProp] = useState(open);
-    const [topItems, setTopItems] = useState([]);
+    const [topItems, setTopItems] = useState<ItemType[]>([]);
     const [itemsCleared, setItemsCleared] = useState(false);
 
     const enableFloatingStyles =
@@ -430,16 +430,10 @@ const MultiSelect = React.forwardRef(
       clearSelection,
     } = useSelection({
       disabled,
-      // TODO: remove @ts-ignore when type is fixed,
-      // see https://github.com/carbon-design-system/carbon/issues/18575
-      // @ts-ignore
       initialSelectedItems,
       onChange,
       selectedItems: selected,
       selectAll,
-      // TODO: remove @ts-ignore when type is fixed,
-      // see https://github.com/carbon-design-system/carbon/issues/18575
-      // @ts-ignore
       filteredItems,
     });
 
@@ -464,8 +458,8 @@ const MultiSelect = React.forwardRef(
           ''
         );
       },
-      selectedItem: controlledSelectedItems,
-      items: filteredItems as ItemType[],
+      selectedItem: controlledSelectedItems as ItemType,
+      items: filteredItems,
       isItemDisabled(item, _index) {
         return (item as any)?.disabled;
       },

@@ -654,7 +654,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 <input
                   class="cds--checkbox"
                   id="data-table-7__select-all"
-                  name="select-all"
+                  name="select-all-7"
                   type="checkbox"
                 />
                 <label

@@ -267,8 +267,8 @@ categories:
 
 ### Manual Patch Release
 
-Occassionaly we need to do an off-cycle patch release to fix some broken
-functionality that was inadvertedly published in a previous release. In such
+Occasionally we need to do an off-cycle patch release to fix some broken
+functionality that was inadvertently published in a previous release. In such
 cases, follow these steps below to ensure a proper patch release:
 
 - [ ] Go to your local version of the monorepo
@@ -345,7 +345,7 @@ cases, follow these steps below to ensure a proper patch release:
   Note:
 
   - Do NOT do this for the <kbd>carbon-components</kbd> package.
-  - You need to use the individual generatied version number for the package
+  - You need to use the individual generated version number for the package
     here, not the released github tag version.
   - Ensure you log into the npm cli as `carbon-bot` to avoid auth issues
 
@@ -493,7 +493,7 @@ For instance:
 
 - `eslint-config-carbon` needs a new major
 - All other packages should only be bumped as a new patch
-- The tag for the release should remain at the curent major `v11.x`, and not be
+- The tag for the release should remain at the current major `v11.x`, and not be
   bumped to `v12.x`
 
 To do this, packages must be versioned manually.
