@@ -470,7 +470,7 @@ export const withToggletipLabel = () => {
         items={[]}
         titleText={
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <ToggletipLabel>Toggletip label</ToggletipLabel>
+            <ToggletipLabel>Dropdown title</ToggletipLabel>
             <Toggletip>
               <ToggletipButton label="Show information">
                 <Information />

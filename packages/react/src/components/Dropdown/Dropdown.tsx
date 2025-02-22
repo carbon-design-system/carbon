@@ -608,15 +608,15 @@ const Dropdown = React.forwardRef(
       return React.isValidElement(element) ? element : null;
     }, [slug, decorator]);
 
+    const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
+
     return (
       <div className={wrapperClasses} {...other}>
-        {isValidElement(titleText) ? (
-          <div className={titleClasses}>{titleText}</div>
-        ) : titleText ? (
-          <label className={titleClasses} {...getLabelProps()}>
+        {titleText && (
+          <label className={titleClasses} {...labelProps}>
             {titleText}
           </label>
-        ) : null}
+        )}
         <ListBox
           onFocus={handleFocus}
           onBlur={handleFocus}

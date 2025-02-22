@@ -17,12 +17,12 @@ import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   ForwardedRef,
-  isValidElement,
-  ReactNode,
   useContext,
-  useLayoutEffect,
-  useMemo,
   useState,
+  useMemo,
+  ReactNode,
+  useLayoutEffect,
+  isValidElement,
 } from 'react';
 import ListBox, {
   ListBoxSize,
@@ -730,20 +730,19 @@ const MultiSelect = React.forwardRef(
       [enableFloatingStyles, getMenuProps, refs.setFloating]
     );
 
+    const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
+
     return (
       <div className={wrapperClasses}>
-        {isValidElement(titleText) ? (
-          <div className={titleClasses}>{titleText}</div>
-        ) : titleText ? (
-          <label className={titleClasses} {...getLabelProps()}>
-            {selectedItems.length > 0 && (
-              <span className={`${prefix}--visually-hidden`}>
-                {clearSelectionDescription} {selectedItems.length}{' '}
-                {itemsSelectedText},{clearSelectionText}
-              </span>
-            )}
-          </label>
-        ) : null}
+        <label className={titleClasses} {...labelProps}>
+          {titleText && titleText}
+          {selectedItems.length > 0 && (
+            <span className={`${prefix}--visually-hidden`}>
+              {clearSelectionDescription} {selectedItems.length}{' '}
+              {itemsSelectedText},{clearSelectionText}
+            </span>
+          )}
+        </label>
         <ListBox
           onFocus={isFluid ? handleFocus : undefined}
           onBlur={isFluid ? handleFocus : undefined}

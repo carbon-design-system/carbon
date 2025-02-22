@@ -612,7 +612,7 @@ export const withToggletipLabel = (args) => {
         id="carbon-multiselect-example"
         titleText={
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <ToggletipLabel>Toggletip label</ToggletipLabel>
+            <ToggletipLabel>Multiselect title</ToggletipLabel>
             <Toggletip>
               <ToggletipButton label="Show information">
                 <Information />
