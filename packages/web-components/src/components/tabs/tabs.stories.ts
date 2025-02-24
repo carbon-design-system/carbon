@@ -12,13 +12,6 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { TABS_TYPE } from './tabs';
 import styles from './tabs-story.scss?lit';
 import { prefix } from '../../globals/settings';
-import Add16 from '@carbon/icons/lib/add/16.js';
-import Notification16 from '@carbon/icons/lib/notification/16.js';
-// @ts-ignore
-import Home16 from '@carbon/icons/lib/home/16.js';
-// @ts-ignore
-import Settings16 from '@carbon/icons/lib/settings/16.js';
-import '../badge-indicator/index';
 import '../button';
 import '../checkbox';
 import './index';
@@ -205,39 +198,6 @@ export const skeleton = {
       <cds-tab-skeleton></cds-tab-skeleton>
       <cds-tab-skeleton></cds-tab-skeleton>
     </cds-tabs-skeleton>
-  `,
-};
-export const withIconAndBadgenikhil = {
-  render: () => html`
-    <style>
-      ${styles}
-    </style>
-    <cds-tabs value="notifications">
-      <cds-tab id="tab-add" target="panel-add" value="add">
-        Add ${Add16({ slot: 'icon' })}
-      </cds-tab>
-      <cds-tab
-        id="tab-notifications"
-        target="panel-notifications"
-        value="notifications">
-        Notifications ${Notification16({ slot: 'icon' })}
-        <cds-badge-indicator
-          slot="badge-indicator"
-          count="5"></cds-badge-indicator>
-      </cds-tab>
-    </cds-tabs>
-    <div class="${prefix}-ce-demo-devenv--tab-panels">
-      <div id="panel-add" role="tabpanel" aria-labelledby="tab-add" hidden>
-        Add panel content
-      </div>
-      <div
-        id="panel-notifications"
-        role="tabpanel"
-        aria-labelledby="tab-notifications"
-        hidden>
-        Notifications panel content
-      </div>
-    </div>
   `,
 };
 
