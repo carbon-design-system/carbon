@@ -44,9 +44,7 @@ export const Default = (args) => (
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
     </BreadcrumbItem>
-    <BreadcrumbItem href="#" isCurrentPage>
-      Breadcrumb 2
-    </BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 4</BreadcrumbItem>
   </Breadcrumb>
