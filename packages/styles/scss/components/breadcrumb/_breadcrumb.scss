@@ -139,7 +139,9 @@
     box-shadow: none;
   }
 
-  .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu__icon {
+  .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu
+    .#{$prefix}--overflow-menu__icon {
     position: relative;
     fill: $link-primary;
     transform: translateY(4px);
