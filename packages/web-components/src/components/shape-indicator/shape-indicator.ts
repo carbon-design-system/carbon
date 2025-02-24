@@ -88,16 +88,13 @@ class CDSShapeIndicator extends LitElement {
   kind!: SHAPE_INDICATOR_KIND;
 
   render() {
-    const Shape = shapeMap[this.kind];
+    const shape = shapeMap[this.kind];
 
-    if (!Shape) {
+    if (!shape) {
       return null;
     }
 
-    return html`
-      ${typeof Shape.render === 'function' ? Shape.render() : Shape()}
-      ${this.label}
-    `;
+    return html` ${shape()} ${this.label} `;
   }
 
   /**
