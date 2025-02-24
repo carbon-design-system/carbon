@@ -5,6 +5,9 @@ interface OverflowHandlerOptions {
   maxVisible?: number;
   onChange: (visibleItems: HTMLElement[], hiddenItems: HTMLElement[]) => void;
   dimension?: 'width' | 'height';
+  // Optional callbacks to override default styling behavior
+  onVisible?: (visibleItems: HTMLElement[]) => void;
+  onHidden?: (hiddenItems: HTMLElement[]) => void;
 }
 
 interface OverflowHandler {
@@ -18,6 +21,8 @@ function createOverflowHandler({
   maxVisible,
   onChange,
   dimension = 'width',
+  onVisible,
+  onHidden,
 }: OverflowHandlerOptions): OverflowHandler {
   // Error handling
   if (!(container instanceof HTMLElement)) {
@@ -36,9 +41,10 @@ function createOverflowHandler({
     throw new Error('maxVisible must be a positive integer');
   }
 
+  // Helper function to get an element's dimension (width or height)
   function getDimension(el: HTMLElement): number {
-    // If the element is hidden, temporarily set display to inline-block
     const originalDisplay = el.style.display;
+    // If the element is hidden, temporarily set its display to inline-block to measure it
     if (!el.offsetParent && getComputedStyle(el).display === 'none') {
       el.style.display = 'inline-block';
     }
@@ -49,20 +55,16 @@ function createOverflowHandler({
 
   // Update which items are visible vs hidden based on container size
   function update() {
-    // Get available size from the container
     const containerSize =
       dimension === 'width' ? container.clientWidth : container.clientHeight;
-
-    // Precompute sizes for each item to minimize layout thrashing
-    const sizes = items.map((item) => getDimension(item));
+    const sizes = items.map(getDimension);
     const totalSize = sizes.reduce((sum, size) => sum + size, 0);
-
     let visibleItems: HTMLElement[] = [];
     let hiddenItems: HTMLElement[] = [];
 
-    // If all items fit, no overflow handling is required
+    // If all items fit, apply maxVisible if set. otherwise, all items are visible.
     if (totalSize <= containerSize) {
-      visibleItems = maxVisible ? items.slice(0, maxVisible) : items.slice();
+      visibleItems = maxVisible ? items.slice(0, maxVisible) : [...items];
       hiddenItems = maxVisible ? items.slice(maxVisible) : [];
     } else {
       const available = containerSize - offsetSize;
@@ -81,21 +83,20 @@ function createOverflowHandler({
       }
     }
 
-    visibleItems.forEach((item) => {
-      item.style.removeProperty('display');
-    });
-    hiddenItems.forEach((item) => {
-      item.style.display = 'none';
-    });
-
+    // Apply custom styling if callbacks are provided. otherwise, apply default styling.
+    onVisible
+      ? onVisible(visibleItems)
+      : visibleItems.forEach((item) => item.style.removeProperty('display'));
+    onHidden
+      ? onHidden(hiddenItems)
+      : hiddenItems.forEach((item) => (item.style.display = 'none'));
     onChange(visibleItems, hiddenItems);
   }
 
   requestAnimationFrame(update);
-
-  const resizeObserver = new ResizeObserver(() => {
-    requestAnimationFrame(update);
-  });
+  const resizeObserver = new ResizeObserver(() =>
+    requestAnimationFrame(update)
+  );
   resizeObserver.observe(container);
 
   return {
