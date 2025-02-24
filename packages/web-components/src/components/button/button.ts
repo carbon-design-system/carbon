@@ -313,10 +313,14 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               ping="${ifDefined(ping)}"
               rel="${ifDefined(rel)}"
               target="${ifDefined(target)}"
-              type="${ifDefined(type)}">
+              type="${ifDefined(type)}"
+              aria-describedby="badge-indicator">
               <slot @slotchange="${handleSlotChange}"></slot>
               <slot name="icon" @slotchange="${handleSlotChange}"></slot>
             </a>
+            <slot id="badge-indicator" name="badge-indicator"
+              ><slot> </slot
+            ></slot>
           `;
     }
 
@@ -358,6 +362,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               </span>
               <span class="${prefix}--popover-caret"></span>
             </span>
+            <slot id="badge-indicator" name="badge-indicator"><slot>
           </span>
         `
       : html`
@@ -367,7 +372,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             class="${classes}"
             ?autofocus="${autofocus}"
             ?disabled="${disabled}"
-            type="${ifDefined(type)}">
+            type="${ifDefined(type)}"
+            aria-describedby="badge-indicator">
             ${isDanger
               ? html`<span class="${prefix}--visually-hidden"
                   >${dangerDescription}</span
@@ -376,6 +382,9 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             <slot @slotchange="${handleSlotChange}"></slot>
             <slot name="icon" @slotchange="${handleSlotChange}"></slot>
           </button>
+          <slot id="badge-indicator" name="badge-indicator"
+            ><slot> </slot
+          ></slot>
         `;
   }
 

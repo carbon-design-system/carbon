@@ -10,8 +10,11 @@
 import { html } from 'lit';
 import './index';
 import '../button/index';
+import '../badge-indicator/index';
 import { ICON_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
 import Edit16 from '@carbon/icons/lib/edit/16.js';
+import Notification16 from '@carbon/icons/lib/notification/16.js';
+
 import { ICON_BUTTON_SIZE } from './defs';
 import { BUTTON_KIND } from '../button/defs';
 
@@ -103,7 +106,7 @@ const argTypes = {
 export const Default = {
   render: () => {
     return html`
-      <cds-icon-button>
+      <cds-icon-button href="https://www.example.com">
         ${Edit16({ slot: 'icon' })}
         <span slot="tooltip-content">label</span>
       </cds-icon-button>
@@ -139,6 +142,34 @@ export const Playground = {
         size=${size}>
         ${Edit16({ slot: 'icon' })}
         <span slot="tooltip-content">${label}</span>
+      </cds-icon-button>
+    `;
+  },
+};
+
+export const withBadgeIndicator = {
+  render: () => {
+    return html`
+      <cds-icon-button kind="ghost" size="lg" href="https://www.example.com">
+        ${Notification16({ slot: 'icon' })}
+        <span slot="tooltip-content">label</span>
+        <cds-badge-indicator
+          slot="badge-indicator"
+          count="243124312"></cds-badge-indicator>
+      </cds-icon-button>
+
+      <cds-icon-button kind="ghost" size="lg">
+        ${Notification16({ slot: 'icon' })}
+        <span slot="tooltip-content">label</span>
+        <cds-badge-indicator
+          slot="badge-indicator"
+          count="10"></cds-badge-indicator>
+      </cds-icon-button>
+
+      <cds-icon-button kind="ghost" size="lg">
+        ${Notification16({ slot: 'icon' })}
+        <span slot="tooltip-content">label</span>
+        <cds-badge-indicator slot="badge-indicator"></cds-badge-indicator>
       </cds-icon-button>
     `;
   },

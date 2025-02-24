@@ -49,7 +49,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
   protected _handleSlotChange({ target }: Event) {
     // Retrieve content of the slot to use for aria-label.
     const content = (target as HTMLSlotElement).assignedNodes();
-    this.tabTitle = content[0].textContent;
+    this.tabTitle = content[0]?.textContent;
   }
 
   connectedCallback() {
@@ -74,9 +74,11 @@ export default class CDSTab extends CDSContentSwitcherItem {
         aria-label="${tabTitle}"
         tabindex="${selected ? 0 : -1}"
         ?disabled="${disabled}"
-        aria-selected="${Boolean(selected)}">
+        aria-selected="${Boolean(selected)}"
+        aria-describedby="badge-indicator">
         <slot @slotchange="${handleSlotChange}"></slot>
       </a>
+      <slot id="badge-indicator" name="badge-indicator"><slot> </slot></slot>
     `;
   }
 

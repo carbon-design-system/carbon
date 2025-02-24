@@ -12,6 +12,7 @@ import { html } from 'lit';
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
 import Add16 from '@carbon/icons/lib/add/16.js';
+import '../badge-indicator/index';
 import {
   BUTTON_KIND,
   BUTTON_TYPE,
@@ -298,6 +299,16 @@ export const IconButton = {
       type="${type}"
       @click="${onClick}">
       ${Add16({ slot: 'icon' })}
+    </cds-button>`,
+};
+
+export const withBadgeIndicator = {
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({}) =>
+    html` <cds-button kind="ghost" tooltip-text="Icon Description">
+      ${Add16({ slot: 'icon' })}
+      <cds-badge-indicator slot="badge-indicator"></cds-badge-indicator>
     </cds-button>`,
 };
 
