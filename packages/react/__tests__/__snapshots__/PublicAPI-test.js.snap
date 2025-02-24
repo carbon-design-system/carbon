@@ -11098,7 +11098,7 @@ Map {
         "isRequired": true,
         "type": "string",
       },
-      "size": Object {
+      "textSize": Object {
         "args": Array [
           Array [
             12,
