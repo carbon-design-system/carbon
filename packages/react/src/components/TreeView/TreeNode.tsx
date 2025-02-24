@@ -21,8 +21,6 @@ import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 import uniqueId from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
-import { useId } from '../../internal/useId';
-import BadgeIndicator from '../BadgeIndicator';
 
 export type TreeNodeProps = {
   /**
@@ -30,10 +28,6 @@ export type TreeNodeProps = {
    * The ID of the active node in the tree
    */
   active?: string | number;
-  /**
-   * **Experimental**: Display an empty dot badge on the Tab and provide a string to describe it for screen readers
-   */
-  badgeIndicator?: string;
   /**
    * Specify the children of the TreeNode
    */
@@ -104,7 +98,6 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
   (
     {
       active,
-      badgeIndicator: badgeIndicatorDescription,
       children,
       className,
       depth: propDepth,
@@ -133,7 +126,6 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
     );
 
     const { current: id } = useRef(nodeId || uniqueId());
-    const badgeId = useId('badge-indicator');
 
     const controllableExpandedState = useControllableState({
       value: isExpanded,
@@ -337,32 +329,17 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
 
     if (!children) {
       return (
-        <li
-          {...treeNodeProps}
-          ref={setRefs}
-          aria-describedby={badgeIndicatorDescription && badgeId}>
+        <li {...treeNodeProps} ref={setRefs}>
           <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
             {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
             {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
             {label}
-            {Icon && badgeIndicatorDescription && (
-              <>
-                <BadgeIndicator />
-                <span id={badgeId} hidden>
-                  {badgeIndicatorDescription}
-                </span>
-              </>
-            )}
           </div>
         </li>
       );
     }
     return (
-      <li
-        {...treeNodeProps}
-        aria-expanded={!!expanded}
-        ref={setRefs}
-        aria-describedby={badgeIndicatorDescription && badgeId}>
+      <li {...treeNodeProps} aria-expanded={!!expanded} ref={setRefs}>
         <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
           {/* https://github.com/carbon-design-system/carbon/pull/6008#issuecomment-675738670 */}
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
@@ -378,14 +355,6 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
             {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
             {label}
           </span>
-          {Icon && badgeIndicatorDescription && (
-            <>
-              <BadgeIndicator />
-              <span id={badgeId} hidden>
-                {badgeIndicatorDescription}
-              </span>
-            </>
-          )}
         </div>
         <ul
           role="group"
@@ -405,11 +374,6 @@ TreeNode.propTypes = {
    * The ID of the active node in the tree
    */
   active: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /**
-   * **Experimental**: Display an empty dot badge on the Tab and provide a string to describe it for screen readers
-   */
-  badgeIndicator: PropTypes.string,
 
   /**
    * Specify the children of the TreeNode
