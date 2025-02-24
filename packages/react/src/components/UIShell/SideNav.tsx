@@ -280,13 +280,13 @@ SideNav.propTypes = {
   defaultExpanded: PropTypes.bool,
 
   /**
-   * Specify the duration in milliseconds to delay before displaying the sidenavigation
+   * Specify the duration in milliseconds to delay before displaying the side navigation
    */
   enterDelayMs: PropTypes.number,
 
   /**
    * If `true`, the SideNav will be expanded, otherwise it will be collapsed.
-   * Using this prop causes SideNav to become a controled component.
+   * Using this prop causes SideNav to become a controlled component.
    */
   expanded: PropTypes.bool,
 
@@ -340,7 +340,7 @@ SideNav.propTypes = {
 
   /**
    * Provide a custom function for translating all message ids within this
-   * component. This function will take in two arguments: the mesasge Id and the
+   * component. This function will take in two arguments: the message Id and the
    * state of the component. From this, you should return a string representing
    * the label you want displayed or read by screen readers.
    */

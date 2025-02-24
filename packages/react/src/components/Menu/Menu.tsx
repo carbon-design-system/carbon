@@ -300,7 +300,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       },
     };
 
-    // Avoid that the Menu render incorrectly when the postion is set in the right side of the screen
+    // Avoid that the Menu render incorrectly when the position is set in the right side of the screen
     if (
       actionButtonWidth &&
       actionButtonWidth < axes.x.size &&
@@ -339,7 +339,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       menuAlignment === 'top-end' ||
       menuAlignment === 'top-start';
 
-    // If the tooltip is not visible in the top, switch to the bototm
+    // If the tooltip is not visible in the top, switch to the bottom
     if (
       typeof options[0] === 'number' &&
       topAlignment &&
