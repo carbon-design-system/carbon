@@ -8,7 +8,7 @@
  */
 import { html } from 'lit';
 import './index';
-import { SHAPE_INDICATOR_KIND } from './shape-indicator';
+import { SHAPE_INDICATOR_KIND } from './defs';
 
 const kinds = [
   'failed',
