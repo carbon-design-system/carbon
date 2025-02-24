@@ -228,11 +228,9 @@ Toggletip.propTypes = {
   ]),
 
   /**
-   * **Experimental**: Specify padding between the caret and the popover edge.
-   * This helps avoid the caret visually separating from Popovers with rounded
-   * corners when aligned bottom-start, bottom-end, top-start, or top-end.
+   * Provide an offset value for alignment axis.
    */
-  caretPadding: PropTypes.number,
+  alignmentAxisOffset: PropTypes.number,
 
   /**
    * Provide a custom element or component to render the top-level node for the

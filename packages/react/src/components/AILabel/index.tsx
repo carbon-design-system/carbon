@@ -210,7 +210,7 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
           <Toggletip
             align={align}
             autoAlign={autoAlign}
-            caretPadding={24}
+            alignmentAxisOffset={isSmallIcon ? -24 : 0}
             {...rest}>
             <ToggletipButton
               className={aiLabelButtonClasses}

@@ -103,13 +103,6 @@ export interface PopoverBaseProps {
   align?: PopoverAlignment;
 
   /**
-   * **Experimental**: Specify padding between the caret and the popover edge.
-   * This helps avoid the caret visually separating from Popovers with rounded
-   * corners when aligned bottom-start, bottom-end, top-start, or top-end.
-   *   */
-  caretPadding?: number;
-
-  /**
    * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
    */
   autoAlign?: boolean;
@@ -188,7 +181,7 @@ export const Popover: PopoverComponent & {
     highContrast = false,
     onRequestClose,
     open,
-    caretPadding,
+    alignmentAxisOffset,
     ...rest
   }: PopoverProps<E>,
   forwardRef: PolymorphicRef<E>
@@ -274,7 +267,14 @@ export const Popover: PopoverComponent & {
 
           // Middleware order matters, arrow should be last
           middleware: [
-            offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
+            offset(
+              !isTabTip
+                ? {
+                    alignmentAxis: alignmentAxisOffset,
+                    mainAxis: popoverDimensions?.current?.offset,
+                  }
+                : 0
+            ),
             autoAlign &&
               flip({
                 fallbackPlacements: align.includes('bottom')
@@ -313,7 +313,6 @@ export const Popover: PopoverComponent & {
               }),
             arrow({
               element: caretRef,
-              padding: caretPadding,
             }),
             autoAlign && hide(),
           ],
@@ -359,7 +358,7 @@ export const Popover: PopoverComponent & {
         middlewareData.arrow &&
         caretRef?.current
       ) {
-        const { x, y, centerOffset } = middlewareData.arrow;
+        const { x, y } = middlewareData.arrow;
 
         const staticSide = {
           top: 'bottom',
@@ -368,16 +367,8 @@ export const Popover: PopoverComponent & {
           left: 'right',
         }[placement.split('-')[0]];
 
-        caretRef.current.style.cssText = '';
-
-        if (centerOffset == 0) {
-          caretRef.current.style.left = x != null ? `${x}px` : '';
-          caretRef.current.style.top = y != null ? `${y}px` : '';
-        } else if (placement.includes('end')) {
-          caretRef.current.style.insetInlineEnd = caretPadding
-            ? `${caretPadding}px`
-            : '16px';
-        }
+        caretRef.current.style.left = x != null ? `${x}px` : '';
+        caretRef.current.style.top = y != null ? `${y}px` : '';
 
         // Ensure the static side gets unset when flipping to other placements' axes.
         caretRef.current.style.right = '';
