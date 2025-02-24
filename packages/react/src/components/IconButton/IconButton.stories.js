@@ -98,11 +98,12 @@ Default.argTypes = {
 };
 
 export const withBadgeIndicator = (props) => {
-  const { badgeCount } = props;
+  const { badgeCount, disabled } = props;
   return (
     <div style={{ margin: '3rem' }}>
       <IconButton
         badgeCount={badgeCount}
+        disabled={disabled}
         label="Notification"
         kind="ghost"
         size="lg"

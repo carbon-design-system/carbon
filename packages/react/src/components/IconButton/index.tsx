@@ -239,7 +239,7 @@ const IconButton = React.forwardRef(function IconButton(
         )}
         aria-describedby={badgeCount && badgeId}>
         {children}
-        {badgeCount !== undefined && (
+        {!disabled && badgeCount !== undefined && (
           <BadgeIndicator
             id={badgeId}
             count={badgeCount > 0 ? badgeCount : undefined}></BadgeIndicator>

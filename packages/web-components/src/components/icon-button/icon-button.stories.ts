@@ -14,7 +14,6 @@ import '../badge-indicator/index';
 import { ICON_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
 import Edit16 from '@carbon/icons/lib/edit/16.js';
 import Notification16 from '@carbon/icons/lib/notification/16.js';
-
 import { ICON_BUTTON_SIZE } from './defs';
 import { BUTTON_KIND } from '../button/defs';
 
@@ -49,6 +48,7 @@ const args = {
   kind: BUTTON_KIND.PRIMARY,
   label: 'Custom label',
   size: ICON_BUTTON_SIZE.MEDIUM,
+  badgeCount: 4,
 };
 
 const argTypes = {
@@ -56,6 +56,11 @@ const argTypes = {
     control: 'select',
     description: 'Specify how the trigger should align with the tooltip.',
     options: tooltipAlignments,
+  },
+  badgeCount: {
+    control: 'number',
+    description:
+      'The count prop for "cds-badge-indicator" when slotted into the button',
   },
   closeOnActivation: {
     control: 'boolean',
@@ -106,7 +111,7 @@ const argTypes = {
 export const Default = {
   render: () => {
     return html`
-      <cds-icon-button href="https://www.example.com">
+      <cds-icon-button>
         ${Edit16({ slot: 'icon' })}
         <span slot="tooltip-content">label</span>
       </cds-icon-button>
@@ -148,28 +153,21 @@ export const Playground = {
 };
 
 export const withBadgeIndicator = {
-  render: () => {
+  args,
+  argTypes,
+  render: ({ badgeCount, disabled }) => {
     return html`
-      <cds-icon-button kind="ghost" size="lg" href="https://www.example.com">
+      <cds-icon-button
+        kind="ghost"
+        size="lg"
+        href="https://www.example.com"
+        ?disabled=${disabled}>
         ${Notification16({ slot: 'icon' })}
         <span slot="tooltip-content">label</span>
-        <cds-badge-indicator
-          slot="badge-indicator"
-          count="243124312"></cds-badge-indicator>
-      </cds-icon-button>
-
-      <cds-icon-button kind="ghost" size="lg">
-        ${Notification16({ slot: 'icon' })}
-        <span slot="tooltip-content">label</span>
-        <cds-badge-indicator
-          slot="badge-indicator"
-          count="10"></cds-badge-indicator>
-      </cds-icon-button>
-
-      <cds-icon-button kind="ghost" size="lg">
-        ${Notification16({ slot: 'icon' })}
-        <span slot="tooltip-content">label</span>
-        <cds-badge-indicator slot="badge-indicator"></cds-badge-indicator>
+        ${badgeCount > 0
+          ? html` <cds-badge-indicator
+              count=${badgeCount}></cds-badge-indicator>`
+          : html`<cds-badge-indicator></cds-badge-indicator>`}
       </cds-icon-button>
     `;
   },

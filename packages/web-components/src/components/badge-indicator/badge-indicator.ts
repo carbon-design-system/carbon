@@ -27,6 +27,12 @@ class CDSBadgeIndicator extends LitElement {
   @property({ type: Number })
   count;
 
+  /**
+   * The shadow slot the badge-indicator should be in.
+   */
+  @property({ reflect: true })
+  slot = 'badge-indicator';
+
   render() {
     const displayCount = this.count && this.count > 999 ? '999+' : this.count;
     return html`${displayCount}`;

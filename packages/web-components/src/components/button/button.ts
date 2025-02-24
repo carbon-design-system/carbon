@@ -228,8 +228,9 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   tooltipPosition = BUTTON_TOOLTIP_POSITION.TOP;
 
   /**
-   * Specify the direction of the tooltip for icon-only buttons.
-   * Can be either top, right, bottom, or left.
+   * Specify the text to be rendered in the tooltip. If using
+   * "cds-badge-indicator" with no count prop then the text
+   * should include describing there is a new notification.
    */
   @property({ reflect: true, attribute: 'tooltip-text' })
   tooltipText!: string;
@@ -318,9 +319,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               <slot @slotchange="${handleSlotChange}"></slot>
               <slot name="icon" @slotchange="${handleSlotChange}"></slot>
             </a>
-            <slot id="badge-indicator" name="badge-indicator"
-              ><slot> </slot
-            ></slot>
+            ${!disabled &&
+            html`<slot id="badge-indicator" name="badge-indicator"></slot>`}
           `;
     }
 
@@ -351,7 +351,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               ?autofocus="${autofocus}"
               ?disabled="${disabled}"
               type="${ifDefined(type)}"
-              aria-label="${ifDefined(tooltipText)}">
+              aria-label="${ifDefined(tooltipText)}"
+              aria-describedby="badge-indicator">
               <slot @slotchange="${handleSlotChange}"></slot>
               <slot name="icon" @slotchange="${handleSlotChange}"></slot>
             </button>
@@ -362,7 +363,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               </span>
               <span class="${prefix}--popover-caret"></span>
             </span>
-            <slot id="badge-indicator" name="badge-indicator"><slot>
+            ${!disabled &&
+            html`<slot id="badge-indicator" name="badge-indicator"></slot>`}
           </span>
         `
       : html`
@@ -382,9 +384,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             <slot @slotchange="${handleSlotChange}"></slot>
             <slot name="icon" @slotchange="${handleSlotChange}"></slot>
           </button>
-          <slot id="badge-indicator" name="badge-indicator"
-            ><slot> </slot
-          ></slot>
+          ${!disabled &&
+          html`<slot id="badge-indicator" name="badge-indicator"></slot>`}
         `;
   }
 
