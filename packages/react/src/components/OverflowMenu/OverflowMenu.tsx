@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,7 @@ import FloatingMenu, {
   DIRECTION_BOTTOM,
   DIRECTION_TOP,
 } from '../../internal/FloatingMenu';
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { matches as keyCodeMatches, keys } from '../../internal/keyboard';
 
 import ClickListener from '../../internal/ClickListener';
@@ -92,11 +92,6 @@ interface Offset {
   top?: number | null | undefined;
   left?: number | null | undefined;
 }
-
-type IconProps = {
-  className?: string;
-  'aria-label'?: string;
-};
 
 export interface OverflowMenuProps {
   /**
@@ -195,7 +190,7 @@ export interface OverflowMenuProps {
   /**
    * Function called to override icon rendering.
    */
-  renderIcon?: ComponentType<IconProps>;
+  renderIcon?: React.ElementType;
 
   /**
    * Specify a CSS selector that matches the DOM element that should

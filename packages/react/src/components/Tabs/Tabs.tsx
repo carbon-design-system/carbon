@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -1179,7 +1179,7 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
    * Optional prop to render an icon next to the label.
    * Can be a React component class
    */
-  renderIcon?: ComponentType<{ size: number }>;
+  renderIcon?: React.ElementType;
 
   /**
    * An optional label to render under the primary tab label.

@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2019, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, {
   useEffect,
   useRef,
@@ -7,7 +14,6 @@ import React, {
   type KeyboardEvent,
   type HTMLAttributes,
   type ChangeEvent,
-  type ComponentType,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -173,7 +179,7 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
   /**
    * Optional prop to allow overriding the icon rendering.
    */
-  renderIcon?: ComponentType<{ className?: string }>;
+  renderIcon?: React.ElementType;
 
   /**
    * Specify the function to run when the ClickableTile is clicked
