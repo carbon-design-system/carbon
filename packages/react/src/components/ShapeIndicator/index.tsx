@@ -90,9 +90,9 @@ interface ShapeIndicatorProps {
   label: string;
 
   /**
-   * Specify the size of the Shape Indicator. Defaults to 12.
+   * Specify the text size of the Shape Indicator. Defaults to 12.
    */
-  size?: 12 | 14;
+  textSize?: 12 | 14;
 }
 
 export const ShapeIndicator = React.forwardRef(function ShapeIndicatorContent(
@@ -100,14 +100,14 @@ export const ShapeIndicator = React.forwardRef(function ShapeIndicatorContent(
     className: customClassName,
     kind,
     label,
-    size = 12,
+    textSize = 12,
     ...rest
   }: ShapeIndicatorProps,
   ref: React.Ref<HTMLDivElement>
 ) {
   const prefix = usePrefix();
   const classNames = cx(`${prefix}--shape-indicator`, customClassName, {
-    [`${prefix}--shape-indicator--14`]: size == 14,
+    [`${prefix}--shape-indicator--14`]: textSize == 14,
   });
 
   const ShapeForKind = shapeTypes[kind];
@@ -142,9 +142,9 @@ ShapeIndicator.propTypes = {
   label: PropTypes.string.isRequired,
 
   /**
-   * Specify the size of the Shape Indicator. Defaults to 12.
+   * Specify the text size of the Shape Indicator. Defaults to 12.
    */
-  size: PropTypes.oneOf([12, 14]),
+  textSize: PropTypes.oneOf([12, 14]),
 };
 
 export default ShapeIndicator;

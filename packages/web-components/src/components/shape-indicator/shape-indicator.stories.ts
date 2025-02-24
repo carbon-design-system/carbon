@@ -36,7 +36,7 @@ export const Default = {
           <cds-shape-indicator
             kind="${kind}"
             label="${kind}"
-            size=${14}></cds-shape-indicator>
+            text-size=${14}></cds-shape-indicator>
         `
       )}
     </div>
@@ -46,14 +46,14 @@ export const Default = {
 const defaultArgs = {
   label: 'Custom label',
   kind: SHAPE_INDICATOR_KIND.FAILED,
-  size: 12,
+  textSize: 12,
 };
 
 const controls = {
-  size: {
+  textSize: {
     control: 'select',
     description:
-      'Specify the size of the Shape Indicator. Currently supports either 12 (default) or 14 sizes.',
+      'Specify the "text-size" of the Shape Indicator. Currently supports either 12 (default) or 14 sizes.',
     options: [12, 14],
   },
   label: {
@@ -70,10 +70,10 @@ const controls = {
 export const Playground = {
   argTypes: controls,
   args: defaultArgs,
-  render: ({ label, size, kind }) =>
+  render: ({ label, textSize, kind }) =>
     html` <cds-shape-indicator
       kind="${kind}"
-      size="${size}"
+      text-size="${textSize}"
       label="${label}"></cds-shape-indicator>`,
 };
 

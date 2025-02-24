@@ -33,7 +33,7 @@ export const Default = () => {
       {ShapeIndicatorKinds.map((type) => (
         <>
           <ShapeIndicator kind={type} label={type} />
-          <ShapeIndicator kind={type} label={type} size={14} />
+          <ShapeIndicator kind={type} label={type} textSize={14} />
         </>
       ))}
     </div>
@@ -49,7 +49,7 @@ export const Playground = PlaygroundStory.bind({});
 Playground.args = {
   label: 'Custom label',
   kind: 'failed',
-  size: 16,
+  textSize: 12,
 };
 
 Playground.argTypes = {
@@ -64,10 +64,10 @@ Playground.argTypes = {
     },
     options: ShapeIndicatorKinds,
   },
-  size: {
+  textSize: {
     control: {
       type: 'select',
     },
-    options: [16, 20],
+    options: [12, 14],
   },
 };

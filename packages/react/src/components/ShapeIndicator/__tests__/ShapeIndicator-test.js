@@ -15,8 +15,8 @@ describe('ShapeIndicator', () => {
     expect(screen.getByText('label')).toBeInTheDocument();
   });
 
-  it('should update with size prop', () => {
-    render(<ShapeIndicator kind="failed" label="label" size={14} />);
+  it('should update with textSize prop', () => {
+    render(<ShapeIndicator kind="failed" label="label" textSize={14} />);
     expect(screen.getByText('label')).toHaveClass('cds--shape-indicator--14');
   });
 

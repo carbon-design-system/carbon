@@ -12,7 +12,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--shape-indicator;
 }
 
-:host(#{$prefix}-shape-indicator[size='14']) {
+:host(#{$prefix}-shape-indicator[text-size='14']) {
   @extend .#{$prefix}--shape-indicator--14;
 }
 
