@@ -70,9 +70,11 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   private _checkBadgeWarning() {
-    const hasBadgeIndicator =
-      this.querySelector('cds-badge-indicator') !== null;
-    if (hasBadgeIndicator && (this.kind !== 'ghost' || this.size !== 'lg')) {
+    const hasBadgeIndicator = this.querySelector(`${prefix}-badge-indicator`);
+    if (
+      hasBadgeIndicator &&
+      (this.kind !== BUTTON_KIND.GHOST || this.size !== BUTTON_SIZE.LARGE)
+    ) {
       console.warn(
         `The badge indicator must be used with kind='ghost' and size='lg'`
       );
