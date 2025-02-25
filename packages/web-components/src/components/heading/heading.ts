@@ -3,15 +3,16 @@ import { property, customElement } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import styles from './heading.scss?lit';
 import { HeadingLevel } from './defs';
+import { prefix } from '../../globals/settings';
 
-@customElement('cds-section')
+@customElement(`${prefix}-section`)
 class CDSSection extends LitElement {
   @property({ type: Number }) level?: HeadingLevel;
   private _currentLevel: HeadingLevel = 1;
 
   private getParentLevel(): HeadingLevel {
     const parentSection = this.parentElement?.closest(
-      'cds-section'
+      `${prefix}-section`
     ) as CDSSection;
     return parentSection ? parentSection.getCurrentLevel() : 1;
   }
@@ -32,14 +33,14 @@ class CDSSection extends LitElement {
   }
 }
 
-@customElement('cds-heading')
+@customElement(`${prefix}-heading`)
 class CDSHeading extends LitElement {
   static styles = styles;
   private level: HeadingLevel = 1;
 
   connectedCallback() {
     super.connectedCallback();
-    const section = this.closest('cds-section') as CDSSection;
+    const section = this.closest(`${prefix}-section`) as CDSSection;
     this.level = section ? section.getCurrentLevel() : 1;
   }
 
