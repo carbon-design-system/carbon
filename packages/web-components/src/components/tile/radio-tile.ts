@@ -16,19 +16,14 @@ import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
- * Single-selectable tile.
+ * Radio tile.
  *
  * @element cds-radio-tile
  * @fires cds-radio-tile-selected
- *   The name of the custom event fired after this selectable tile changes its selected state.
+ *   The name of the custom event fired after this radio tile changes its selected state.
  */
 @customElement(`${prefix}-radio-tile`)
 class CDSRadioTile extends SelectableTile {
-  /**
-   * The `type` attribute of the `<input>`.
-   */
-  protected _inputType = 'radio';
-
   /**
    * Handles `change` event on the `<input>` in the shadow DOM.
    */
@@ -48,42 +43,58 @@ class CDSRadioTile extends SelectableTile {
     );
   }
 
+  protected _handleKeydown = (event: KeyboardEvent) => {
+    if (event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault();
+    }
+  };
+
   render() {
     const {
       colorScheme,
       checkmarkLabel,
+      disabled,
+      hasRoundedCorners,
       name,
       selected,
       value,
-      _inputType: inputType,
       _handleChange: handleChange,
+      _handleKeydown: handleKeydown,
+      _hasAILabel: hasAILabel,
     } = this;
     const classes = classMap({
       [`${prefix}--tile`]: true,
       [`${prefix}--tile--selectable`]: true,
+      [`${prefix}--tile--radio`]: true,
+      [`${prefix}--tile--disabled`]: disabled,
       [`${prefix}--tile--is-selected`]: selected,
       [`${prefix}--tile--${colorScheme}`]: colorScheme,
+      [`${prefix}--tile--slug-rounded`]: hasAILabel && hasRoundedCorners,
     });
+
     return html`
       <input
-        type="${inputType}"
+        type="radio"
         id="input"
         class="${prefix}--tile-input"
-        tabindex="-1"
+        ?disabled="${disabled}"
+        tabindex="${selected ? 0 : -1}"
         name="${ifDefined(name)}"
         value="${ifDefined(value)}"
         .checked=${selected}
-        @change=${handleChange} />
-      <label for="input" class="${classes}" tabindex="0">
-        <div class="${prefix}--tile__checkmark">
-          ${CheckmarkFilled16({
-            children: !checkmarkLabel
-              ? undefined
-              : svg`<title>${checkmarkLabel}</title>`,
-          })}
-        </div>
+        @change=${!disabled ? handleChange : undefined}
+        @keydown="${!disabled ? handleKeydown : undefined}" />
+      <label part="label" for="input" class="${classes}">
+        ${CheckmarkFilled16({
+          children: !checkmarkLabel
+            ? undefined
+            : svg`<title>${checkmarkLabel}</title>`,
+          class: `${prefix}--tile__checkmark`,
+        })}
         <div class="${prefix}--tile-content"><slot></slot></div>
       </label>
+      <slot name="decorator"></slot>
+      <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
     `;
   }
 

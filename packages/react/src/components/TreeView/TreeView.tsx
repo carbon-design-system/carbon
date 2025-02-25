@@ -299,7 +299,7 @@ const TreeView: TreeViewComponent = ({
             ) {
               return NodeFilter.FILTER_REJECT;
             }
-            if (node.matches(`li.${prefix}--tree-node`)) {
+            if (node.matches(`.${prefix}--tree-node`)) {
               return NodeFilter.FILTER_ACCEPT;
             }
             return NodeFilter.FILTER_SKIP;
