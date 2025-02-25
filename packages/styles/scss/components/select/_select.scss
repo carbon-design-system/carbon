@@ -218,12 +218,20 @@
     color: $text-primary;
     inline-size: auto;
     padding-inline: $spacing-03 $spacing-07;
+
+    &:hover {
+      background-color: $field-hover;
+    }
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input:focus,
   .#{$prefix}--select--inline .#{$prefix}--select-input:focus option,
   .#{$prefix}--select--inline .#{$prefix}--select-input:focus optgroup {
     background-color: $background;
+
+    &:hover {
+      background-color: $field-hover;
+    }
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
@@ -264,6 +272,11 @@
 
   .#{$prefix}--select--readonly .#{$prefix}--select__arrow {
     fill: $icon-disabled;
+  }
+
+  .#{$prefix}--select--readonly.#{$prefix}--select--inline
+    .#{$prefix}--select-input:hover {
+    background-color: transparent;
   }
 
   // Skeleton State
