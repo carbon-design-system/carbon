@@ -57,9 +57,9 @@ describe('Breadcrumb', () => {
   });
 
   it('should respect size prop', () => {
-    const { container } = render(<Breadcrumb size="sm" />);
+    render(<Breadcrumb size="sm" />);
 
-    expect(container.firstChild.firstChild).toHaveClass(
+    expect(screen.getByRole('list')).toHaveClass(
       `${prefix}--breadcrumb--sm`
     );
   });
