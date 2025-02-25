@@ -173,6 +173,29 @@ export default {
   },
 };
 
+export const Test = () => {
+  return (
+    <SideNavItems>
+      <SideNavMenuItem
+        as="button"
+        onClick={() => {
+          console.log('Button clicked');
+          window.location.href = 'https://www.carbondesignsystem.com/';
+        }}>
+        L0 menu item
+      </SideNavMenuItem>
+      <SideNavLink
+        as="button"
+        onClick={() => {
+          console.log('Button clicked');
+          window.location.href = 'https://www.carbondesignsystem.com/';
+        }}>
+        L0 menu item
+      </SideNavLink>
+    </SideNavItems>
+  );
+};
+
 export const FixedSideNav = () => (
   <>
     <Header aria-label="IBM Platform Name">
@@ -188,12 +211,10 @@ export const FixedSideNav = () => (
       aria-label="Side navigation">
       <SideNavItems>
         <SideNavMenu title="L0 menu">
-          <SideNavMenuItem as="div" href="https://www.carbondesignsystem.com/">
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
             L0 menu item
           </SideNavMenuItem>
-          <SideNavMenuItem
-            as="section"
-            href="https://www.carbondesignsystem.com/">
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
             L0 menu item
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -224,7 +245,7 @@ export const FixedSideNav = () => (
             L0 menu item
           </SideNavMenuItem>
         </SideNavMenu>
-        <SideNavLink href="https://www.carbondesignsystem.com/">
+        <SideNavLink as="button" href="https://www.carbondesignsystem.com/">
           L0 link
         </SideNavLink>
         <SideNavLink href="https://www.carbondesignsystem.com/">
