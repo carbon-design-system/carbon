@@ -54,7 +54,7 @@ types of changes you can expect to occur as a consumer of that package. We'll
 try to highlight common changes in code and the corresponding `semver` bump that
 you can expect for the package when it is updated.
 
-## `carbon-components-react`, `@carbon/react`
+## `@carbon/react`
 
 ### Changes
 
@@ -288,3 +288,12 @@ where possible to minimize the impact of the change.
 unless absolutely necessary_ and instead use more stable
 [relative queries focused on accessible roles](https://testing-library.com/docs/queries/about#priority)
 or HTML5 and ARIA semantics for selecting elements for testing.**
+
+### Public API Snapshot
+
+The entire public api of `@carbon/react` is tracked in one file by iterating
+over all PropTypes and storing the output in a snapshot file. When adding,
+removing, or updating PropTypes, run `yarn test -u` from the root to update the
+snapshot and include it in your pull request for review. This helps core
+reviewers to determine if api changes are being made in a backwards compatible
+way to avoid breaking changes.

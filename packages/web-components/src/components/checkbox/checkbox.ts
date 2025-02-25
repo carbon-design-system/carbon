@@ -168,6 +168,12 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   warnText = false;
 
   /**
+   * Specify whether the underlying input should be checked by default
+   */
+  @property({ type: Boolean })
+  defaultChecked;
+
+  /**
    * Handles `slotchange` event.
    */
   protected _handleSlotChange({ target }: Event) {
@@ -222,6 +228,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
       value,
       warn,
       warnText,
+      defaultChecked,
       _handleChange: handleChange,
       _handleClick: handleClick,
     } = this;
@@ -246,9 +253,8 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         type="checkbox"
         part="input"
         class="${`${prefix}--checkbox`}"
-        aria-checked="${indeterminate ? 'mixed' : String(Boolean(checked))}"
         aria-readonly="${String(Boolean(readonly))}"
-        .checked="${checked}"
+        .checked="${checked ? checked : defaultChecked}"
         ?disabled="${disabled}"
         .indeterminate="${indeterminate}"
         name="${ifDefined(name)}"
