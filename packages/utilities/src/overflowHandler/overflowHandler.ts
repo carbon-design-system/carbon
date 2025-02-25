@@ -1,16 +1,59 @@
-interface OverflowHandlerOptions {
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * Options for initializing an overflow handler.
+ */
+export interface OverflowHandlerOptions {
+  /**
+   * The container element that holds the items.
+   */
   container: HTMLElement;
+  /**
+   * Array of item elements that will be managed by the overflow handler.
+   */
   items: HTMLElement[];
+  /**
+   * The size offset value used when calculating overflow.
+   */
   offsetSize: number;
+  /**
+   * Maximum number of visible items. If provided, only this number of items will be shown.
+   */
   maxVisible?: number;
+  /**
+   * Callback function invoked when the visible and hidden items change.
+   * @param visibleItems - The array of items that are currently visible.
+   * @param hiddenItems - The array of items that are currently hidden.
+   */
   onChange: (visibleItems: HTMLElement[], hiddenItems: HTMLElement[]) => void;
+  /**
+   * The dimension to consider for overflow calculations. Defaults to 'width'.
+   */
   dimension?: 'width' | 'height';
-  // Optional callbacks to override default styling behavior
+  /**
+   * Optional callback to override the default behavior for styling visible items.
+   * @param visibleItems - The array of items that are currently visible.
+   */
   onVisible?: (visibleItems: HTMLElement[]) => void;
+  /**
+   * Optional callback to override the default behavior for styling hidden items.
+   * @param hiddenItems - The array of items that are currently hidden.
+   */
   onHidden?: (hiddenItems: HTMLElement[]) => void;
 }
 
-interface OverflowHandler {
+/**
+ * Represents an instance of an overflow handler.
+ */
+export interface OverflowHandler {
+  /**
+   * Disconnects the overflow handler, cleaning up any event listeners or resources.
+   */
   disconnect: () => void;
 }
 
