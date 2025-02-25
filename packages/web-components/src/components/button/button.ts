@@ -69,6 +69,20 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     }
   }
 
+  private _checkBadgeWarning() {
+    const hasBadgeIndicator =
+      this.querySelector('cds-badge-indicator') !== null;
+    if (hasBadgeIndicator && (this.kind !== 'ghost' || this.size !== 'lg')) {
+      console.warn(
+        `The badge indicator must be used with kind='ghost' and size='lg'`
+      );
+    }
+  }
+  updated(changedProperties) {
+    super.updated?.(changedProperties);
+    this._checkBadgeWarning();
+  }
+
   @HostListener('mouseover')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleOver = () => {
