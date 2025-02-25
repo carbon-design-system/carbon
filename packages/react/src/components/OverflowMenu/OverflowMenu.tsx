@@ -188,7 +188,7 @@ export interface OverflowMenuProps {
   open?: boolean;
 
   /**
-   * Function called to override icon rendering.
+   * A component used to render an icon.
    */
   renderIcon?: React.ElementType;
 
@@ -353,7 +353,7 @@ class OverflowMenu extends React.Component<
     open: PropTypes.bool,
 
     /**
-     * Function called to override icon rendering.
+     * A component used to render an icon.
      */
     renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 

@@ -177,7 +177,7 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
   href?: string;
 
   /**
-   * Optional prop to allow overriding the icon rendering.
+   * A component used to render an icon.
    */
   renderIcon?: React.ElementType;
 
@@ -361,8 +361,7 @@ ClickableTile.propTypes = {
   rel: PropTypes.string,
 
   /**
-   * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   // @ts-expect-error: Invalid derived prop type, seemingly no real solution.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

@@ -169,8 +169,7 @@ export interface NotificationButtonProps
   notificationType?: 'toast' | 'inline' | 'actionable';
 
   /**
-   * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: React.ElementType;
 }
@@ -240,8 +239,7 @@ NotificationButton.propTypes = {
   notificationType: PropTypes.oneOf(['toast', 'inline', 'actionable']),
 
   /**
-   * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 

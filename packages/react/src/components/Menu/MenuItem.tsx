@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -77,7 +77,7 @@ export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
   ) => void;
 
   /**
-   * Only applicable if the parent menu is in `basic` mode. Sets the menu item's icon.
+   * A component used to render an icon.
    */
   renderIcon?: FC;
 
@@ -322,7 +322,7 @@ MenuItem.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Only applicable if the parent menu is in `basic` mode. Sets the menu item's icon.
+   * A component used to render an icon.
    */
   // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

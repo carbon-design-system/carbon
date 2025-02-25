@@ -1176,8 +1176,7 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
   renderButton?(): ReactNode;
 
   /**
-   * Optional prop to render an icon next to the label.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: React.ElementType;
 
@@ -1479,24 +1478,23 @@ Tab.propTypes = {
    */
   onKeyDown: PropTypes.func,
 
-  /*
+  /**
    * An optional parameter to allow overriding the anchor rendering.
    * Useful for using Tab along with react-router or other client
    * side router libraries.
-   **/
+   */
   renderButton: PropTypes.func,
 
   /**
-   * Optional prop to render an icon next to the label.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   // @ts-expect-error: Invalid prop type derivation
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
-  /*
+  /**
    * An optional label to render under the primary tab label.
-  /* This prop is only useful for contained tabs
-   **/
+   * Only useful for contained tabs.
+   */
   secondaryLabel: PropTypes.string,
 };
 
