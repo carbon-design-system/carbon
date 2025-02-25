@@ -30,9 +30,13 @@ import {
   View,
   FolderOpen,
   Folders,
+  Information,
 } from '@carbon/icons-react';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
+import { Tooltip } from '../Tooltip';
+
+import mdx from './Tile.mdx';
 
 export default {
   title: 'Components/Tile',
@@ -51,6 +55,16 @@ export default {
       table: {
         disable: true,
       },
+    },
+    slug: {
+      table: {
+        disable: true,
+      },
+    },
+  },
+  parameters: {
+    docs: {
+      page: mdx,
     },
   },
 };
@@ -140,11 +154,7 @@ export const ClickableWithLayer = () => (
 
 export const Selectable = (args) => {
   return (
-    <SelectableTile
-      id="selectable-tile-1"
-      name="tiles"
-      value="selectable"
-      {...args}>
+    <SelectableTile id="selectable-tile-1" {...args}>
       Selectable
     </SelectableTile>
   );
@@ -251,66 +261,72 @@ export const RadioWithLayer = () => (
   </WithLayer>
 );
 
-export const Expandable = () => (
-  <div style={{ width: '400px' }}>
-    <ExpandableTile
-      id="expandable-tile-1"
-      tileCollapsedIconText="Interact to Expand tile"
-      tileExpandedIconText="Interact to Collapse tile">
-      <TileAboveTheFoldContent>
-        <div style={{ height: '200px' }}>Above the fold content here</div>
-      </TileAboveTheFoldContent>
-      <TileBelowTheFoldContent>
-        <div style={{ height: '400px' }}>Below the fold content here</div>
-      </TileBelowTheFoldContent>
-    </ExpandableTile>
-  </div>
-);
+export const Expandable = () => {
+  return (
+    <div style={{ width: '400px' }}>
+      <ExpandableTile
+        id="expandable-tile-1"
+        tileCollapsedIconText="Interact to Expand tile"
+        tileExpandedIconText="Interact to Collapse tile">
+        <TileAboveTheFoldContent>
+          <div style={{ height: '200px' }}>Above the fold content here</div>
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent>
+          <div style={{ height: '400px' }}>Below the fold content here</div>
+        </TileBelowTheFoldContent>
+      </ExpandableTile>
+    </div>
+  );
+};
 
-export const ExpandableWithInteractive = () => (
-  <div style={{ width: '400px' }}>
-    <ExpandableTile
-      onClick={() => console.log('click')}
-      id="expandable-tile-1"
-      tileCollapsedIconText="Interact to Expand tile"
-      tileExpandedIconText="Interact to Collapse tile">
-      <TileAboveTheFoldContent>
-        <div style={{ height: '200px', width: '200px' }}>
-          Above the fold content here
-          <div style={{ paddingTop: '1rem' }}>
-            <Button>Example</Button>
+export const ExpandableWithInteractive = () => {
+  return (
+    <div style={{ width: '400px' }}>
+      <ExpandableTile
+        onClick={() => console.log('click')}
+        id="expandable-tile-1"
+        tileCollapsedIconText="Interact to Expand tile"
+        tileExpandedIconText="Interact to Collapse tile">
+        <TileAboveTheFoldContent>
+          <div style={{ height: '200px', width: '200px' }}>
+            Above the fold content here
+            <div style={{ paddingTop: '1rem' }}>
+              <Button>Example</Button>
+            </div>
           </div>
-        </div>
-      </TileAboveTheFoldContent>
-      <TileBelowTheFoldContent>
-        <div style={{ height: '200px', width: '200px' }}>
-          Below the fold content here
-          <TextInput id="test2" invalidText="A valid value is required" />
-        </div>
-      </TileBelowTheFoldContent>
-    </ExpandableTile>
-  </div>
-);
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent>
+          <div style={{ height: '200px', width: '200px' }}>
+            Below the fold content here
+            <TextInput id="test2" invalidText="A valid value is required" />
+          </div>
+        </TileBelowTheFoldContent>
+      </ExpandableTile>
+    </div>
+  );
+};
 
-export const ExpandableWithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: '400px' }}>
-        <ExpandableTile
-          id={`expandable-tile-${layer}`}
-          tileCollapsedIconText="Interact to Expand tile"
-          tileExpandedIconText="Interact to Collapse tile">
-          <TileAboveTheFoldContent>
-            <div style={{ height: '100px' }}>Above the fold content here</div>
-          </TileAboveTheFoldContent>
-          <TileBelowTheFoldContent>
-            <div style={{ height: '200px' }}>Below the fold content here</div>
-          </TileBelowTheFoldContent>
-        </ExpandableTile>
-      </div>
-    )}
-  </WithLayer>
-);
+export const ExpandableWithLayer = () => {
+  return (
+    <WithLayer>
+      {(layer) => (
+        <div style={{ width: '400px' }}>
+          <ExpandableTile
+            id={`expandable-tile-${layer}`}
+            tileCollapsedIconText="Interact to Expand tile"
+            tileExpandedIconText="Interact to Collapse tile">
+            <TileAboveTheFoldContent>
+              <div style={{ height: '100px' }}>Above the fold content here</div>
+            </TileAboveTheFoldContent>
+            <TileBelowTheFoldContent>
+              <div style={{ height: '200px' }}>Below the fold content here</div>
+            </TileBelowTheFoldContent>
+          </ExpandableTile>
+        </div>
+      )}
+    </WithLayer>
+  );
+};
 
 const aiLabel = (
   <AILabel className="ai-label-container">
@@ -350,15 +366,15 @@ export const withAILabel = {
         type: 'boolean',
       },
     },
-    slug: {
+    decorator: {
       description:
-        '**Experimental**: Provide an `AILabel` component to be rendered inside the component',
+        '**Experimental**: Provide a `decorator` component to be rendered inside the component',
     },
   },
   render: (args) => (
     <>
       <div className="ai-label-tile-container">
-        <Tile slug={aiLabel} id="tile-1" {...args}>
+        <Tile decorator={aiLabel} id="tile-1" {...args}>
           <h4>Title</h4>
           <p>
             Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
@@ -377,7 +393,7 @@ export const withAILabel = {
         </Tile>
         <ClickableTile
           href="https://www.carbondesignsystem.com/"
-          slug
+          decorator
           id="tile-click"
           renderIcon={ArrowRight}
           {...args}>
@@ -402,7 +418,7 @@ export const withAILabel = {
           id="expandable-tile-1"
           tileCollapsedIconText="Interact to Expand tile"
           tileExpandedIconText="Interact to Collapse tile"
-          slug={aiLabel}
+          decorator={aiLabel}
           {...args}>
           <TileAboveTheFoldContent>
             <h4>Title</h4>
@@ -441,7 +457,7 @@ export const withAILabel = {
             <SelectableTile
               className="ai-label-selectable-tile"
               id="selectable-tile-1"
-              slug={aiLabel}
+              decorator={aiLabel}
               {...args}>
               Option 1
             </SelectableTile>
@@ -449,7 +465,7 @@ export const withAILabel = {
           <div>
             <SelectableTile
               className="ai-label-selectable-tile"
-              slug={aiLabel}
+              decorator={aiLabel}
               id="selectable-tile-2"
               {...args}>
               Option 2
@@ -458,7 +474,7 @@ export const withAILabel = {
           <div>
             <SelectableTile
               className="ai-label-selectable-tile"
-              slug={aiLabel}
+              decorator={aiLabel}
               id="selectable-tile-3"
               {...args}>
               Option 3
@@ -478,7 +494,7 @@ export const withAILabel = {
             className="ai-label-radio-tile"
             id="radio-tile-1"
             value="standard"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...args}>
             Option 1
           </RadioTile>
@@ -486,7 +502,7 @@ export const withAILabel = {
             className="ai-label-radio-tile"
             id="radio-tile-2"
             value="default-selected"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...args}>
             Option 2
           </RadioTile>
@@ -494,11 +510,12 @@ export const withAILabel = {
             className="ai-label-radio-tile"
             id="radio-tile-3"
             value="selected"
-            slug={aiLabel}
+            decorator={aiLabel}
             {...args}>
             Option 3
           </RadioTile>
         </TileGroup>
+        <br />
       </div>
     </>
   ),

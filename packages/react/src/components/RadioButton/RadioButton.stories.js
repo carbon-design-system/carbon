@@ -41,31 +41,6 @@ export default {
   },
 };
 
-export const Default = () => {
-  return (
-    <RadioButtonGroup
-      legendText="Group label"
-      name="radio-button-default-group">
-      <RadioButton
-        labelText="Radio button label"
-        value="radio-1"
-        id="radio-1"
-      />
-      <RadioButton
-        labelText="Radio button label"
-        value="radio-2"
-        id="radio-2"
-      />
-      <RadioButton
-        labelText="Radio button label"
-        value="radio-3"
-        id="radio-3"
-        disabled
-      />
-    </RadioButtonGroup>
-  );
-};
-
 export const Vertical = () => {
   return (
     <RadioButtonGroup
@@ -97,39 +72,39 @@ export const Skeleton = () => {
   return <RadioButtonSkeleton />;
 };
 
-const AILabelFunc = (kind) => (
-  <AILabel className="ai-label-container" kind={kind}>
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
+export const withAILabel = () => {
+  const AILabelFunc = (kind) => (
+    <AILabel className="ai-label-container" kind={kind}>
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <AILabelActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </AILabelActions>
+      </AILabelContent>
+    </AILabel>
+  );
 
-export const withAILabel = {
-  render: () => (
+  return (
     <div className="ai-label-check-radio-container">
       <RadioButtonGroup
         decorator={AILabelFunc('default')}
@@ -202,14 +177,14 @@ export const withAILabel = {
         />
       </RadioButtonGroup>
     </div>
-  ),
+  );
 };
 
-export const Playground = (args) => {
+export const Default = (args) => {
   return (
     <RadioButtonGroup
       legendText="Radio Button group"
-      name="radio-button-playground-group"
+      name="radio-button-default-group"
       {...args}>
       <RadioButton
         labelText="Radio button label"
@@ -230,7 +205,7 @@ export const Playground = (args) => {
   );
 };
 
-Playground.args = {
+Default.args = {
   defaultSelected: 'radio-2',
   helperText: 'Helper text',
   invalidText: 'Invalid selection',
@@ -238,7 +213,7 @@ Playground.args = {
   warnText: 'Please notice the warning',
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   defaultSelected: {
     description: 'Specify the `<RadioButton>` to be selected by default',
     options: ['radio-1', 'radio-2', 'radio-3'],

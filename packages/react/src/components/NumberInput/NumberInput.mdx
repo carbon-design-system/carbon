@@ -1,5 +1,6 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as NumberInputStories from './NumberInput.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -13,18 +14,48 @@ import * as NumberInputStories from './NumberInput.stories';
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Skeleton state](#skeleton-state)
+- [NumberInput](#overview)
+  - [Overview](#overview)
+  - [Skeleton state](#skeleton-state)
+  - [AI Label](#ai-label)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
 ## Overview
 
-<Canvas of={NumberInputStories.Playground} />
+<Canvas
+  of={NumberInputStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(NumberInputStories.Default),
+    },
+  ]}
+/>
 
-## Skeleton State
+## Skeleton state
 
-<Canvas of={NumberInputStories.Skeleton} />
+<Canvas
+  of={NumberInputStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(NumberInputStories.Skeleton),
+    },
+  ]}
+/>
+
+## AI Label
+
+<Canvas
+  of={NumberInputStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(NumberInputStories.withAILabel),
+    },
+  ]}
+/>
 
 ## Component API
 

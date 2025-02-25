@@ -73,6 +73,32 @@ describe('Tag', () => {
       // requirement
       expect(accessibilityLabel).toEqual(expect.stringContaining('Close tag'));
     });
+
+    it('should respect decorator prop', () => {
+      render(
+        <DismissibleTag
+          type="red"
+          title="Close tag"
+          text="Tag content"
+          decorator={<AILabel aiText="AI" />}
+        />
+      );
+      expect(screen.getByText('AI')).toBeInTheDocument();
+    });
+
+    it('should respect deprecated slug prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      render(
+        <DismissibleTag
+          type="red"
+          title="Close tag"
+          text="Tag content"
+          slug={<AILabel aiText="AI" />}
+        />
+      );
+      expect(screen.getByText('AI')).toBeInTheDocument();
+      spy.mockRestore();
+    });
   });
 
   it('should allow for a custom label', () => {
@@ -90,12 +116,16 @@ describe('Tag', () => {
     expect(screen.getByTestId('test')).toBeInTheDocument();
   });
 
-  it('should respect slug prop', () => {
-    render(<Tag type="red" slug={<AILabel />} />);
+  it('should respect decorator prop', () => {
+    render(<Tag type="red" decorator={<AILabel aiText="AI" />} />);
+    expect(screen.getByText('AI')).toBeInTheDocument();
+  });
 
-    expect(
-      screen.getByRole('button', { name: 'AI - Show information' })
-    ).toBeInTheDocument();
+  it('should respect deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(<Tag type="red" slug={<AILabel aiText="AI" />} />);
+    expect(screen.getByText('AI')).toBeInTheDocument();
+    spy.mockRestore();
   });
 
   describe('Selectable Tag', () => {

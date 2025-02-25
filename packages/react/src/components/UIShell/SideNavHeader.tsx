@@ -11,7 +11,7 @@ import React from 'react';
 import SideNavIcon from './SideNavIcon';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface SideNavHeaderProps {
+export interface SideNavHeaderProps {
   /**
    * The child nodes to be rendered
    */

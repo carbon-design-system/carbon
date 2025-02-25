@@ -16,40 +16,28 @@ export default {
   },
 };
 
-export const Default = () => (
-  <div style={{ width: '400px' }}>
-    <FluidSearch
-      size="lg"
-      labelText="Search"
-      closeButtonLabelText="Clear search input"
-      id="fluid-search-1"
-      placeholder="Prompt text"
-    />
-  </div>
-);
-
 export const Skeleton = () => (
   <div style={{ width: '400px' }}>
     <FluidSearchSkeleton />
   </div>
 );
 
-export const Playground = (args) => (
-  <div style={{ width: args.playgroundWidth }}>
+export const Default = (args) => (
+  <div style={{ width: args.defaultWidth }}>
     <FluidSearch {...args} />
   </div>
 );
 
-Playground.args = {
-  playgroundWidth: 400,
+Default.args = {
+  defaultWidth: 400,
   closeButtonLabelText: 'Clear search input',
   disabled: false,
   labelText: 'Search',
   placeholder: 'Prompt text',
 };
 
-Playground.argTypes = {
-  playgroundWidth: {
+Default.argTypes = {
+  defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
   className: {

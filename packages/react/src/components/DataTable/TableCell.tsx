@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
 
-interface TableCellProps extends ReactAttr<HTMLTableCellElement> {
+export interface TableCellProps extends ReactAttr<HTMLTableCellElement> {
   /**
    * Pass in children that will be embedded in the table header label
    */
@@ -29,7 +29,7 @@ interface TableCellProps extends ReactAttr<HTMLTableCellElement> {
   /**
    * Specify if the table cell is in an AI column
    */
-  hasSlugHeader?: boolean;
+  hasAILabelHeader?: boolean;
 
   /**
    * The id of the matching th node in the table head. Addresses a11y concerns outlined here: https://www.ibm.com/able/guidelines/ci162/info_and_relationships.html and https://www.w3.org/TR/WCAG20-TECHS/H43
@@ -38,11 +38,11 @@ interface TableCellProps extends ReactAttr<HTMLTableCellElement> {
 }
 
 const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
-  ({ children, className, hasSlugHeader, colSpan, ...rest }, ref) => {
+  ({ children, className, hasAILabelHeader, colSpan, ...rest }, ref) => {
     const prefix = usePrefix();
 
     const tableCellClassNames = classNames(className, {
-      [`${prefix}--table-cell--column-slug`]: hasSlugHeader,
+      [`${prefix}--table-cell--column-slug`]: hasAILabelHeader,
     });
     return (
       <td

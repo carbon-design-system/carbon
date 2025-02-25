@@ -21,6 +21,7 @@ import TableBody from './TableBody';
 import TableCell from './TableCell';
 import TableContainer from './TableContainer';
 import TableExpandHeader from './TableExpandHeader';
+import TableDecoratorRow from './TableDecoratorRow';
 import TableExpandRow from './TableExpandRow';
 import TableExpandedRow from './TableExpandedRow';
 import TableHead from './TableHead';
@@ -46,6 +47,7 @@ DataTable.TableBatchActions = TableBatchActions;
 DataTable.TableBody = TableBody;
 DataTable.TableCell = TableCell;
 DataTable.TableContainer = TableContainer;
+DataTable.TableDecoratorRow = TableDecoratorRow;
 DataTable.TableExpandHeader = TableExpandHeader;
 DataTable.TableExpandRow = TableExpandRow;
 DataTable.TableExpandedRow = TableExpandedRow;
@@ -77,6 +79,7 @@ export {
   TableBody,
   TableCell,
   TableContainer,
+  TableDecoratorRow,
   TableExpandHeader,
   TableExpandRow,
   TableExpandedRow,

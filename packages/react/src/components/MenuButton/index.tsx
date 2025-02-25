@@ -70,7 +70,7 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
   /**
    * Experimental property. Specify how the menu should align with the button element
    */
-  menuAlignment: MenuAlignment;
+  menuAlignment?: MenuAlignment;
 
   /**
    * Specify the size of the button and menu.
@@ -241,14 +241,13 @@ MenuButton.propTypes = {
   kind: PropTypes.oneOf(validButtonKinds),
 
   /**
-   * Provide the label to be renderd on the trigger button.
+   * Provide the label to be rendered on the trigger button.
    */
   label: PropTypes.string.isRequired,
 
   /**
    * Experimental property. Specify how the menu should align with the button element
    */
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   menuAlignment: PropTypes.oneOf([
     'top',
     'top-start',

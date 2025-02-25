@@ -19,7 +19,7 @@ const tests = [
   ['weeks', 1, 60 * 60 * 24 * 7],
   ['weeks', 3, 60 * 60 * 24 * 7],
   ['months', 1, 60 * 60 * 24 * 7 * 4],
-  ['months', 11, 60 * 60 * 24 * 7 * 4],
+  ['months', 12, 60 * 60 * 24 * 7 * 4],
   ['years', 1, 60 * 60 * 24 * 365],
   ['years', 2, 60 * 60 * 24 * 365],
 ];
@@ -27,6 +27,18 @@ const tests = [
 describe(locale, () => {
   styles.forEach((style) => {
     describe(style, () => {
+      const nowFormatted = new Intl.RelativeTimeFormat(locale, {
+        style,
+        numeric: 'auto',
+      }).format(0, 'seconds');
+      test(`-30 seconds → ${nowFormatted}`, () => {
+        const actualOutput = relative.format(Date.now() - 1000 * 30, {
+          locale,
+        });
+
+        expect(actualOutput).toBe(nowFormatted);
+      });
+
       const rtf = new Intl.RelativeTimeFormat(locale, { style });
 
       tests.forEach(([unit, unitsPassed, secondsInUnit]) => {

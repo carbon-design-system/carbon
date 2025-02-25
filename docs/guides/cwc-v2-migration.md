@@ -76,7 +76,6 @@ For Carbon v11 migration guidance, see their
 ### button
 
 - New `cds-button-set` component
-- `danger-primary` new option for `kind` property
 - `size` now accepts `xs`, `sm`, `md`, `lg`, and `xl`, instead of `''`, `sm`,
   `lg`, `field`
 - `tooltip-text` can add a tooltip component that appears on hover

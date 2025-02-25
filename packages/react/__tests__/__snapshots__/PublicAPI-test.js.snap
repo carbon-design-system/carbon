@@ -439,6 +439,9 @@ Map {
       "onMouseLeave": Object {
         "type": "func",
       },
+      "rel": Object {
+        "type": "string",
+      },
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -469,6 +472,9 @@ Map {
       },
       "tabIndex": Object {
         "type": "number",
+      },
+      "target": Object {
+        "type": "string",
       },
       "tooltipAlignment": Object {
         "args": Array [
@@ -613,6 +619,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "defaultChecked": Object {
         "type": "bool",
       },
@@ -648,9 +657,7 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "title": Object {
         "type": "string",
       },
@@ -670,6 +677,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "decorator": Object {
+        "type": "node",
       },
       "helperText": Object {
         "type": "node",
@@ -699,9 +709,7 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "warn": Object {
         "type": "bool",
       },
@@ -739,6 +747,19 @@ Map {
       },
       "clicked": Object {
         "type": "bool",
+      },
+      "decorator": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "bool",
+            },
+            Object {
+              "type": "node",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "disabled": Object {
         "type": "bool",
@@ -1250,6 +1271,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "direction": Object {
         "args": Array [
           Array [
@@ -1360,9 +1384,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "titleText": Object {
         "type": "node",
       },
@@ -1957,6 +1979,17 @@ Map {
         },
       },
     },
+    "TableDecoratorRow": Object {
+      "displayName": "TableDecoratorRow",
+      "propTypes": Object {
+        "className": Object {
+          "type": "string",
+        },
+        "decorator": Object {
+          "type": "node",
+        },
+      },
+    },
     "TableExpandHeader": Object {
       "propTypes": Object {
         "aria-controls": Object {
@@ -2102,6 +2135,7 @@ Map {
       ],
     },
     "TableRow": Object {
+      "$$typeof": Symbol(react.forward_ref),
       "propTypes": Object {
         "className": Object {
           "type": "string",
@@ -2110,6 +2144,7 @@ Map {
           "type": "bool",
         },
       },
+      "render": [Function],
     },
     "TableSelectAll": Object {
       "propTypes": Object {
@@ -2864,6 +2899,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -2896,9 +2934,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "tagTitle": Object {
         "type": "string",
       },
@@ -3214,6 +3250,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "expanded": Object {
         "type": "bool",
       },
@@ -3230,9 +3269,7 @@ Map {
       "onKeyUp": Object {
         "type": "func",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "tabIndex": Object {
         "type": "number",
       },
@@ -3542,6 +3579,9 @@ Map {
       "compareItems": Object {
         "type": "func",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "direction": Object {
         "args": Array [
           Array [
@@ -3756,9 +3796,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "sortItems": Object {
         "type": "func",
       },
@@ -4193,8 +4231,17 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "dropShadow": Object {
+        "type": "bool",
+      },
       "enterDelayMs": Object {
         "type": "number",
+      },
+      "highContrast": Object {
+        "type": "bool",
+      },
+      "href": Object {
+        "type": "string",
       },
       "isSelected": Object {
         "type": "bool",
@@ -4217,6 +4264,9 @@ Map {
       "leaveDelayMs": Object {
         "type": "number",
       },
+      "rel": Object {
+        "type": "string",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -4226,6 +4276,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "target": Object {
+        "type": "string",
       },
       "wrapperClasses": Object {
         "type": "string",
@@ -4849,6 +4902,9 @@ Map {
       "danger": Object {
         "type": "bool",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "hasScrollingContent": Object {
         "type": "bool",
       },
@@ -4964,9 +5020,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
     },
     "render": [Function],
   },
@@ -5222,6 +5276,9 @@ Map {
         "compareItems": Object {
           "type": "func",
         },
+        "decorator": Object {
+          "type": "node",
+        },
         "direction": Object {
           "args": Array [
             Array [
@@ -5436,9 +5493,7 @@ Map {
           ],
           "type": "oneOf",
         },
-        "slug": Object {
-          "type": "node",
-        },
+        "slug": [Function],
         "sortItems": Object {
           "type": "func",
         },
@@ -5475,6 +5530,9 @@ Map {
       },
       "compareItems": Object {
         "type": "func",
+      },
+      "decorator": Object {
+        "type": "node",
       },
       "direction": Object {
         "args": Array [
@@ -5563,9 +5621,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "sortItems": Object {
         "type": "func",
       },
@@ -6251,6 +6307,55 @@ Map {
       "autoAlign": Object {
         "type": "bool",
       },
+      "autoAlignBoundary": Object {
+        "args": Array [
+          Array [
+            Object {
+              "args": Array [
+                Array [
+                  "clippingAncestors",
+                ],
+              ],
+              "type": "oneOf",
+            },
+            Object {
+              "type": "elementType",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "elementType",
+                },
+              ],
+              "type": "arrayOf",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "height": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "width": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "x": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "y": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "exact",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "caret": Object {
         "type": "bool",
       },
@@ -6604,6 +6709,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -6623,9 +6731,7 @@ Map {
       "required": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "tabIndex": Object {
         "type": "number",
       },
@@ -6812,6 +6918,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "defaultValue": Object {
         "type": "any",
       },
@@ -6860,9 +6969,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "warn": Object {
         "type": "bool",
       },
@@ -6977,6 +7084,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -7000,9 +7110,7 @@ Map {
       "selected": Object {
         "type": "bool",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "tabIndex": Object {
         "type": "number",
       },
@@ -7374,6 +7482,9 @@ Map {
   },
   "SliderSkeleton" => Object {
     "propTypes": Object {
+      "ariaLabel": Object {
+        "type": "string",
+      },
       "className": Object {
         "type": "string",
       },
@@ -7382,6 +7493,9 @@ Map {
       },
       "twoHandles": Object {
         "type": "bool",
+      },
+      "unstable_ariaLabelHandleUpper": Object {
+        "type": "string",
       },
     },
   },
@@ -7743,7 +7857,6 @@ Map {
         "type": "oneOf",
       },
       "aria-label": Object {
-        "isRequired": true,
         "type": "string",
       },
       "children": Object {
@@ -7794,7 +7907,6 @@ Map {
         "type": "oneOf",
       },
       "aria-label": Object {
-        "isRequired": true,
         "type": "string",
       },
       "children": Object {
@@ -7978,6 +8090,17 @@ Map {
       },
     },
   },
+  "TableDecoratorRow" => Object {
+    "displayName": "TableDecoratorRow",
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "decorator": Object {
+        "type": "node",
+      },
+    },
+  },
   "TableExpandHeader" => Object {
     "propTypes": Object {
       "aria-controls": Object {
@@ -8123,6 +8246,7 @@ Map {
     ],
   },
   "TableRow" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -8131,6 +8255,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "TableSelectAll" => Object {
     "propTypes": Object {
@@ -8423,6 +8548,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -8454,9 +8582,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
       "title": [Function],
       "type": Object {
         "args": Array [
@@ -9007,13 +9133,14 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "decorator": Object {
+        "type": "node",
+      },
       "hasRoundedCorners": Object {
         "type": "bool",
       },
       "light": [Function],
-      "slug": Object {
-        "type": "node",
-      },
+      "slug": [Function],
     },
     "render": [Function],
   },
@@ -9358,6 +9485,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "alignmentAxisOffset": Object {
+        "type": "number",
+      },
       "as": Object {
         "type": "elementType",
       },
@@ -9469,8 +9599,14 @@ Map {
       "description": Object {
         "type": "node",
       },
+      "dropShadow": Object {
+        "type": "bool",
+      },
       "enterDelayMs": Object {
         "type": "number",
+      },
+      "highContrast": Object {
+        "type": "bool",
       },
       "label": Object {
         "type": "node",
@@ -9510,6 +9646,9 @@ Map {
       },
       "disabled": Object {
         "type": "bool",
+      },
+      "href": Object {
+        "type": "string",
       },
       "id": Object {
         "type": "string",
@@ -9600,6 +9739,9 @@ Map {
         },
         "disabled": Object {
           "type": "bool",
+        },
+        "href": Object {
+          "type": "string",
         },
         "id": Object {
           "type": "string",
@@ -10615,6 +10757,9 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "warn": Object {
         "type": "bool",
       },
@@ -10690,6 +10835,9 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "rows": Object {
         "type": "number",
       },
@@ -10743,6 +10891,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "enableCounter": Object {
+        "type": "bool",
+      },
       "id": Object {
         "isRequired": true,
         "type": "string",
@@ -10760,6 +10911,9 @@ Map {
         "isRequired": true,
         "type": "node",
       },
+      "maxCount": Object {
+        "type": "number",
+      },
       "onChange": Object {
         "type": "func",
       },
@@ -10768,6 +10922,9 @@ Map {
       },
       "placeholder": Object {
         "type": "string",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "value": Object {
         "args": Array [
@@ -10820,6 +10977,9 @@ Map {
         "isRequired": true,
         "type": "node",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "warn": Object {
         "type": "bool",
       },
@@ -10866,6 +11026,48 @@ Map {
         "type": "bool",
       },
     },
+  },
+  "unstable__IconIndicator" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "failed",
+            "caution-major",
+            "caution-minor",
+            "undefined",
+            "succeeded",
+            "normal",
+            "in-progress",
+            "incomplete",
+            "not-started",
+            "pending",
+            "unknown",
+            "informative",
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOf",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            16,
+            20,
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
   },
   "unstable__Slug" => Object {
     "$$typeof": Symbol(react.forward_ref),

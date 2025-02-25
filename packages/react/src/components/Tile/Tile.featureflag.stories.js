@@ -337,9 +337,9 @@ export const _WithAILabel = {
         type: 'boolean',
       },
     },
-    slug: {
+    decorator: {
       description:
-        '**Experimental**: Provide an `AILabel` component to be rendered inside the component',
+        '**Experimental**: Provide a `decorator` component to be rendered inside the component',
     },
   },
   render: (args) => (
@@ -353,7 +353,7 @@ export const _WithAILabel = {
           className="ai-label-radio-tile"
           id="radio-tile-4"
           value="standard"
-          slug={aiLabel}
+          decorator={aiLabel}
           {...args}>
           Option 1
         </RadioTile>
@@ -361,7 +361,7 @@ export const _WithAILabel = {
           className="ai-label-radio-tile"
           id="radio-tile-5"
           value="default-selected"
-          slug={aiLabel}
+          decorator={aiLabel}
           {...args}>
           Option 2
         </RadioTile>
@@ -369,7 +369,7 @@ export const _WithAILabel = {
           className="ai-label-radio-tile"
           id="radio-tile-6"
           value="selected"
-          slug={aiLabel}
+          decorator={aiLabel}
           {...args}>
           Option 3
         </RadioTile>

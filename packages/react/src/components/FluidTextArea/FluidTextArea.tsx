@@ -118,6 +118,11 @@ export interface FluidTextAreaProps {
    *  Provide the text that is displayed when the control is in warning state
    */
   warnText?: React.ReactNode;
+
+  /**
+   * Whether or not the component is readonly
+   */
+  readOnly?: boolean;
 }
 
 const FluidTextArea: React.FC<FluidTextAreaProps> = ({
@@ -243,6 +248,11 @@ FluidTextArea.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Whether or not the component is readonly
+   */
+  readOnly: PropTypes.bool,
 };
 
 export default FluidTextArea;

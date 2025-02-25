@@ -14,10 +14,16 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { default as TextArea, TextAreaSkeleton } from './';
 import { Tooltip } from '../Tooltip';
+import mdx from './TextArea.mdx';
 
 export default {
   title: 'Components/TextArea',
   component: TextArea,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
   subcomponents: {
     TextAreaSkeleton,
   },
@@ -35,74 +41,7 @@ export default {
   },
 };
 
-export const Default = () => (
-  <TextArea
-    labelText="Text Area label"
-    helperText="Optional helper text"
-    rows={4}
-    id="text-area-1"
-  />
-);
-
-export const _WithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <TextArea
-        labelText="Text Area label"
-        helperText="Optional helper text"
-        rows={4}
-        id={`text-area-${layer}`}
-      />
-    )}
-  </WithLayer>
-);
-
-const aiLabel = (
-  <AILabel className="ai-label-container">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
-
-export const withAILabel = () => (
-  <TextArea
-    labelText="Text Area label"
-    helperText="Optional helper text"
-    rows={4}
-    id="text-area-5"
-    decorator={aiLabel}
-  />
-);
-
-export const Skeleton = () => <TextAreaSkeleton />;
-
-export const Playground = (args) => <TextArea {...args} id="text-area-1" />;
-
-Playground.argTypes = {
+const sharedArgTypes = {
   className: {
     control: false,
   },
@@ -186,7 +125,15 @@ Playground.argTypes = {
   },
 };
 
-Playground.args = {
+export const Default = (args) => {
+  return <TextArea {...args} id="text-area-1" />;
+};
+
+Default.argTypes = {
+  ...sharedArgTypes,
+};
+
+Default.args = {
   enableCounter: true,
   helperText: 'TextArea helper text',
   labelText: 'TextArea label',
@@ -200,4 +147,69 @@ Playground.args = {
   rows: 4,
   warn: false,
   warnText: 'This is a warning message.',
+};
+
+export const _WithLayer = () => (
+  <WithLayer>
+    {(layer) => (
+      <TextArea
+        labelText="Text Area label"
+        helperText="Optional helper text"
+        rows={4}
+        id={`text-area-${layer}`}
+      />
+    )}
+  </WithLayer>
+);
+
+export const withAILabel = (args) => {
+  const aiLabel = (
+    <AILabel className="ai-label-container">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <AILabelActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </AILabelActions>
+      </AILabelContent>
+    </AILabel>
+  );
+
+  return (
+    <TextArea
+      labelText="Text Area label"
+      helperText="Optional helper text"
+      rows={4}
+      id="text-area-5"
+      decorator={aiLabel}
+      {...args}
+    />
+  );
+};
+
+withAILabel.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const Skeleton = () => {
+  return <TextAreaSkeleton />;
 };

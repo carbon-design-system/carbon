@@ -4,6 +4,7 @@ import { InlineNotification } from '../Notification';
 import CodeSnippet from '../CodeSnippet';
 import * as ModalStories from './Modal.stories';
 import './Modal.stories.scss';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -19,6 +20,7 @@ import './Modal.stories.scss';
 
 ## Table of Contents
 
+- [Modal](#modal)
 - [Overview](#overview)
 - [Component API](#component-api)
 - [Opening/closing modal](#openingclosing-modal)
@@ -42,7 +44,19 @@ the modal body content. You can also use `modalLabel`, `modalHeading`,
 `secondaryButtonText` and `primaryButtonText` props to change the corresponding
 text.
 
-<Canvas of={ModalStories.WithStateManager} />
+<Canvas
+  of={ModalStories.WithStateManager}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(
+          ModalStories.WithStateManager,
+          "import ReactDOM from 'react-dom';"
+        ),
+    },
+  ]}
+/>
 
 ## Component API
 

@@ -119,6 +119,7 @@
 
     .#{$prefix}--btn__icon {
       position: static;
+      align-self: center;
       margin-inline-start: $spacing-03;
     }
 

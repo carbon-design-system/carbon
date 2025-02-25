@@ -59,75 +59,7 @@ export default {
   },
 };
 
-export const Default = () => (
-  <FluidTextArea
-    labelText="Text Area label"
-    placeholder="Placeholder text"
-    id="text-area-1"
-  />
-);
-
-export const DefaultWithLayers = () => (
-  <WithLayer>
-    {(layer) => (
-      <FluidTextArea
-        labelText="Text Area label"
-        placeholder="Placeholder text"
-        id={`text-area-${layer}`}
-      />
-    )}
-  </WithLayer>
-);
-
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Text Area label</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
-
-export const DefaultWithTooltip = () => (
-  <FluidTextArea labelText={ToggleTip} placeholder="Placeholder text" />
-);
-
-export const Skeleton = () => (
-  <div style={{ width: '300px' }}>
-    <FluidTextAreaSkeleton />
-  </div>
-);
-
-export const Playground = (args) => (
-  <div style={{ width: args.playgroundWidth }}>
-    <FluidTextArea {...args} />
-  </div>
-);
-
-Playground.args = {
-  playgroundWidth: 300,
-  className: 'test-class',
-  placeholder: 'Placeholder text',
-  invalid: false,
-  invalidText:
-    'Error message that is really long can wrap to more lines but should not be excessively long.',
-  disabled: false,
-  enableCounter: false,
-  labelText: 'Text Area label',
-  maxCount: 500,
-  warn: false,
-  warnText: 'This is a warning message.',
-};
-
-Playground.argTypes = {
-  playgroundWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
+const sharedArgTypes = {
   className: {
     control: {
       type: 'text',
@@ -179,3 +111,67 @@ Playground.argTypes = {
     },
   },
 };
+
+export const Default = (args) => (
+  <div style={{ width: args.defaultWidth }}>
+    <FluidTextArea {...args} />
+  </div>
+);
+
+Default.args = {
+  defaultWidth: 300,
+  className: 'test-class',
+  placeholder: 'Placeholder text',
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  disabled: false,
+  enableCounter: false,
+  labelText: 'Text Area label',
+  maxCount: 500,
+  warn: false,
+  warnText: 'This is a warning message.',
+};
+
+Default.argTypes = {
+  ...sharedArgTypes,
+  defaultWidth: {
+    control: { type: 'range', min: 300, max: 800, step: 50 },
+  },
+};
+
+export const DefaultWithLayers = () => (
+  <WithLayer>
+    {(layer) => (
+      <FluidTextArea
+        labelText="Text Area label"
+        placeholder="Placeholder text"
+        id={`text-area-${layer}`}
+      />
+    )}
+  </WithLayer>
+);
+
+const ToggleTip = (
+  <>
+    <ToggletipLabel>Text Area label</ToggletipLabel>
+    <Toggletip align="top-left">
+      <ToggletipButton label="Show information">
+        <Information />
+      </ToggletipButton>
+      <ToggletipContent>
+        <p>Additional field information here.</p>
+      </ToggletipContent>
+    </Toggletip>
+  </>
+);
+
+export const DefaultWithTooltip = () => (
+  <FluidTextArea labelText={ToggleTip} placeholder="Placeholder text" />
+);
+
+export const Skeleton = () => (
+  <div style={{ width: '300px' }}>
+    <FluidTextAreaSkeleton />
+  </div>
+);

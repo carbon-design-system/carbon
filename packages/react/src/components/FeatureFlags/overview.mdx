@@ -64,11 +64,7 @@ time.
 ```jsx
 import { unstable_FeatureFlags as FeatureFlags } from '@carbon/react';
 
-<FeatureFlags
-  flags={{
-    'enable-v12-tile-default-icons': true,
-    'enable-a-second-feature-flag': true,
-  }}>
+<FeatureFlags enableV12TileDefaultIcons="true" enableASecondFeatureFlag="true">
   <Tile />
 </FeatureFlags>;
 ```
@@ -86,7 +82,7 @@ import App from './App';
 const root = createRoot(document.getElementById('root'));
 root.render(
   <StrictMode>
-    <FeatureFlags flags={{ 'enable-v12-tile-default-icons': true }}>
+    <FeatureFlags enableV12TileDefaultIcons="true">
       <App />
     </FeatureFlags>
   </StrictMode>

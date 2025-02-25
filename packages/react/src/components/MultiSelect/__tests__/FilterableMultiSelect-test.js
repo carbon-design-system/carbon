@@ -250,6 +250,7 @@ describe('FilterableMultiSelect', () => {
   });
 
   it('should respect slug prop', async () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(
       <FilterableMultiSelect {...mockProps} slug={<AILabel />} />
     );
@@ -257,6 +258,18 @@ describe('FilterableMultiSelect', () => {
 
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--slug`
+    );
+    spy.mockRestore();
+  });
+
+  it('should respect decorator prop', async () => {
+    const { container } = render(
+      <FilterableMultiSelect {...mockProps} decorator={<AILabel />} />
+    );
+    await waitForPosition();
+
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--list-box__wrapper--decorator`
     );
   });
 

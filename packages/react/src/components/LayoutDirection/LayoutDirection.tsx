@@ -15,7 +15,7 @@ interface LayoutDirectionContextValue {
   direction: Direction;
 }
 
-interface LayoutDirectionProps {
+export interface LayoutDirectionProps {
   /**
    * Customize the element type used to render the outermost node
    */

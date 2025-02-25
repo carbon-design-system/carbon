@@ -278,6 +278,7 @@ categories:
           - add--filled
           - add--large
           - apps
+          - arrange
           - arrow--down
           - arrow--down-left
           - arrow--down-right
@@ -302,6 +303,7 @@ categories:
           - close--outline
           - down-to-bottom
           - draggable
+          - fragments
           - home
           - menu
           - notification-counter
@@ -309,7 +311,9 @@ categories:
           - overflow-menu--vertical
           - page--first
           - page--last
+          - pipelines
           - select--window
+          - stickies
           - subtract
           - subtract--alt
           - subtract--filled
@@ -599,6 +603,8 @@ categories:
           - logo--vmware
           - logo--vmware--alt
           - logo--vue
+          - logo--git
+          - logo--red-hat-ai-instructlab-on-ibm-cloud
       - name: IBM
         members:
           - bee
@@ -646,6 +652,7 @@ categories:
       - name: AI
         members:
           - AI
+          - ai-business-impact-assessment
           - ai-governance--lifecycle
           - ai-governance--tracked
           - ai-governance--untracked
@@ -653,6 +660,7 @@ categories:
           - ai-label
           - ai-launch
           - ai-recommend
+          - business-metrics
           - ibm--granite
           - ibm-watson--discovery
           - ibm-watson--orders
@@ -712,10 +720,15 @@ categories:
           - ibm--aiops-insights
           - ibm--api-connect
           - ibm--app-connect-enterprise
+          - ibm--application-and-discovery-delivery-intelligence
           - ibm--aspera
           - ibm--bluepay
           - ibm--cloudant
+          - ibm-consulting-advantage--agent
+          - ibm-consulting-advantage--application
+          - ibm-consulting-advantage--assistant
           - ibm--content-services
+          - ibm--databand
           - ibm--data-power
           - ibm--data-product-exchange
           - ibm--data-replication
@@ -754,6 +767,7 @@ categories:
           - ibm--lqe
           - ibm--machine-learning-for-zos
           - ibm--match-360
+          - ibm--maximo-application-suite
           - ibm--mq
           - ibm--open-enterprise-languages
           - ibm--openshift-container-platform-on-vpc-for-regulated-industries
@@ -769,6 +783,7 @@ categories:
           - ibm--streamsets
           - ibm--telehealth
           - ibm--tenet
+          - ibm--test-accelerator-for-z
           - ibm--toolchain
           - ibm--turbonomic
           - ibm--unstructured-data-processor
@@ -792,6 +807,7 @@ categories:
           - ibm-cloud--direct-link-2--connect
           - ibm-cloud--direct-link-2--dedicated
           - ibm-cloud--direct-link-2--dedicated-hosting
+          - ibm-cloud--essential-security-and-observability-services
           - ibm-cloud--event-notification
           - ibm-cloud--event-streams
           - ibm-cloud--for-education
@@ -857,6 +873,7 @@ categories:
           - ibm-watson--studio
           - ibm-watson--text-to-speech
           - ibm-watson--tone-analyzer
+          - ibm-watsonx--code-assistant-for-enterprise-java-applications
           - ibm-watsonx--code-assistant-for-z-validation-assistant
           - ibm-z--cloud-mod-stack
           - ibm-z--environments-dev-sec-ops
@@ -870,6 +887,8 @@ categories:
           - infrastructure--classic
           - load-balancer--vpc
           - mysql
+          - power-enterprise-pools-metered-capacity-integration
+          - power-virtual-server-disaster-recovery-automation
           - scis--control-tower
           - scis--transparent-supply
           - virtual-private-cloud--alt
@@ -907,6 +926,7 @@ categories:
           - drink--02
           - enterprise
           - finance
+          - financial-assets
           - fish
           - fish--multiple
           - fragile
@@ -1299,6 +1319,7 @@ categories:
           - double-integer
           - downstream
           - driver-analysis
+          - emissions-management
           - factor
           - flow
           - flow--connection
@@ -1340,6 +1361,7 @@ categories:
           - network--4
           - network--4--reference
           - nominal
+          - null-sign
           - ordinal
           - parent-child
           - parameter
@@ -1419,6 +1441,7 @@ categories:
           - API--1
           - app
           - application
+          - avro
           - badge
           - book
           - CAD
@@ -1858,6 +1881,7 @@ categories:
           - switch-layer-2
           - switch-layer-3
           - sysplex--distributor
+          - spyre-accelerator
           - tcp-ip-service
           - terminal--3270
           - tsq
@@ -2315,20 +2339,24 @@ categories:
           - array--numbers
           - array--objects
           - array--strings
+          - array
           - asset
           - asset--confirm
           - asset--digital-twin
           - asset--view
+          - asset-movement
           - at
           - audio-console
           - augmented-reality
           - barcode
           - battery--charging
           - battery--empty
+          - battery--error
           - battery--full
           - battery--half
           - battery--low
           - battery--quarter
+          - battery--warning
           - blog
           - bluetooth
           - bluetooth--off
@@ -2345,6 +2373,7 @@ categories:
           - camera
           - camera--action
           - cell-tower
+          - channels
           - chat-bot
           - chip
           - cloud--download
@@ -2359,7 +2388,9 @@ categories:
           - connection--send
           - connection--two-way
           - cookie
+          - create-link
           - debug
+          - delivery-settings
           - deployment-pattern
           - deployment-policy
           - desk--adjustable
@@ -2392,6 +2423,7 @@ categories:
           - iot--platform
           - keyboard
           - keyboard--off
+          - kiosk-device
           - laptop
           - location--current
           - mail--all
@@ -2409,6 +2441,7 @@ categories:
           - mobile--session
           - mobile--view
           - mobile--view-orientation
+          - multiuser-device
           - object
           - outage
           - password
@@ -2434,6 +2467,7 @@ categories:
           - tablet--landscape
           - terminal
           - transmission-lte
+          - trigger
           - USB
           - voicemail
           - VPN

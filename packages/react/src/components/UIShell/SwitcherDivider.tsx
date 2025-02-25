@@ -3,7 +3,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface SwitcherDividerProps {
+export interface SwitcherDividerProps {
   /**
    * Optionally provide a custom class to apply to the underlying `<li>` node
    */

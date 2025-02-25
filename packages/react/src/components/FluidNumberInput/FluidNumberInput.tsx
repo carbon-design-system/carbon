@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
-import { NumberInput } from '../NumberInput';
+import { NumberInput, NumberInputProps } from '../NumberInput';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
@@ -115,6 +115,11 @@ export interface FluidNumberInputProps {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: React.ReactNode;
+
+  /**
+   * Whether or not the component is readonly
+   */
+  readOnly?: boolean;
 }
 
 const FluidNumberInput: React.FC<FluidNumberInputProps> = React.forwardRef<
@@ -234,6 +239,11 @@ FluidNumberInput.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Whether or not the component is readonly
+   */
+  readOnly: PropTypes.bool,
 };
 
 export default FluidNumberInput;

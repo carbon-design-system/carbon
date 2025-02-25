@@ -124,6 +124,16 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
     if (newStart !== oldStart) {
       this._handleUserInitiatedChangeStart(newStart);
     }
+    // reset focus to forward button if it reaches the beginning
+    if (this.page === 1) {
+      const { selectorForwardButton } = this
+        .constructor as typeof CDSPagination;
+      (
+        this.shadowRoot?.querySelector(
+          `[button-class-name*=${selectorForwardButton}]`
+        ) as HTMLElement
+      ).focus();
+    }
   }
 
   /**
@@ -135,6 +145,16 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
     const newStart = oldStart + pageSize;
     if (newStart < (totalItems == null ? Infinity : totalItems)) {
       this._handleUserInitiatedChangeStart(newStart);
+    }
+    // reset focus to previous button if it reaches the end
+    if (this.page === this.totalPages) {
+      const { selectorPreviousButton } = this
+        .constructor as typeof CDSPagination;
+      (
+        this.shadowRoot?.querySelector(
+          `[button-class-name*=${selectorPreviousButton}]`
+        ) as HTMLElement
+      ).focus();
     }
   }
 
@@ -468,6 +488,20 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    */
   static get selectorPageSizesSelect() {
     return `${prefix}-select`;
+  }
+
+  /**
+   * A selector that will return the previous button.
+   */
+  static get selectorPreviousButton() {
+    return `${prefix}--pagination__button--backward`;
+  }
+
+  /**
+   * A selector that will return the forward button.
+   */
+  static get selectorForwardButton() {
+    return `${prefix}--pagination__button--forward`;
   }
 
   /**

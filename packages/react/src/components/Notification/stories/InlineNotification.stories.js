@@ -30,16 +30,9 @@ export default {
   },
 };
 
-export const Default = () => (
-  <InlineNotification
-    title="Notification title"
-    subtitle="Subtitle text goes here"
-  />
-);
+export const Default = (args) => <InlineNotification {...args} />;
 
-export const Playground = (args) => <InlineNotification {...args} />;
-
-Playground.argTypes = {
+Default.argTypes = {
   actionButtonLabel: {
     table: {
       disable: true,
@@ -77,7 +70,7 @@ Playground.argTypes = {
     },
   },
 };
-Playground.args = {
+Default.args = {
   title: 'Notification title',
   subtitle: 'Subtitle text goes here',
 };

@@ -14,7 +14,7 @@ import React, {
   MouseEventHandler,
   PropsWithChildren,
 } from 'react';
-import debounce from 'lodash.debounce';
+import { debounce } from 'es-toolkit/compat';
 import classnames from 'classnames';
 import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
@@ -62,7 +62,8 @@ const propMappingFunction = (deprecatedValue) => {
   return mapping[deprecatedValue];
 };
 
-interface CopyProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface CopyProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Specify how the trigger should align with the tooltip
    */

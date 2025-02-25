@@ -78,7 +78,12 @@ export const Nested = () => {
         <MenuItem label="Level 1" />
         <MenuItem label="Level 1" />
         <MenuItem label="Level 1">
-          <MenuItem label="Level 2" />
+          <MenuItem label="Level 2">
+            <MenuItem label="Level 3" />
+            <MenuItem label="Level 3">
+              <MenuItem label="Level 4" />
+            </MenuItem>
+          </MenuItem>
           <MenuItem label="Level 2" />
           <MenuItem label="Level 2" />
         </MenuItem>
@@ -160,7 +165,7 @@ export const FloatingStyles = () => {
   );
 };
 
-export const Playground = (args) => {
+export const Default = (args) => {
   return (
     <OverflowMenu {...args}>
       <MenuItem label="Stop app" />
@@ -173,11 +178,11 @@ export const Playground = (args) => {
   );
 };
 
-Playground.args = {
+Default.args = {
   label: 'Options',
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   children: {
     table: {
       disable: true,

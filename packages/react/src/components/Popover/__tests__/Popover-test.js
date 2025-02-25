@@ -9,6 +9,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import userEvent from '@testing-library/user-event';
+import { waitForPosition } from '../../ListBox/test-helpers';
 
 const prefix = 'cds';
 
@@ -68,6 +69,44 @@ describe('Popover', () => {
       // NOTE: the popover should render popover-content as the first child and
       // popover-caret as the second child
       expect(screen.getByTestId('test').firstChild).toHaveClass('test');
+    });
+
+    it('should have default caret height', async () => {
+      render(
+        <Popover
+          open
+          align="bottom"
+          data-testid="test"
+          autoAlign
+          className="test ai-label">
+          <button type="button">Settings</button>
+          <PopoverContent className="test"></PopoverContent>
+        </Popover>
+      );
+
+      await waitForPosition();
+      const caretContainer =
+        screen.getByTestId('test').lastChild.lastChild.firstChild;
+      expect(caretContainer).toHaveStyle({ left: '0px', top: '-6px' });
+    });
+
+    it('should change caret height in case of ai-label', async () => {
+      render(
+        <Popover
+          open
+          align="bottom"
+          data-testid="test"
+          autoAlign
+          className="test ai-label">
+          <button type="button">Settings</button>
+          <PopoverContent className="test ai-label"></PopoverContent>
+        </Popover>
+      );
+
+      await waitForPosition();
+      const caretContainer =
+        screen.getByTestId('test').lastChild.lastChild.firstChild;
+      expect(caretContainer).toHaveStyle({ left: '0px', top: '-7px' });
     });
 
     it('should forward additional props on the outermost element', () => {

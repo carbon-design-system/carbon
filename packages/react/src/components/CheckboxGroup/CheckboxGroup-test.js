@@ -150,7 +150,8 @@ describe('CheckboxGroup', () => {
     );
   });
 
-  it('should respect slug prop', () => {
+  it('should respect deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(
       <CheckboxGroup
         className="some-class"
@@ -160,10 +161,26 @@ describe('CheckboxGroup', () => {
     );
 
     expect(container.firstChild).toHaveClass(`${prefix}--checkbox-group--slug`);
+    spy.mockRestore();
   });
+
+  it('should respect decorator prop', () => {
+    const { container } = render(
+      <CheckboxGroup
+        className="some-class"
+        legendText="Checkbox heading"
+        decorator={<AILabel />}
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--checkbox-group--decorator`
+    );
+  });
+
   it('should render checkboxes horizontally', () => {
     const { container } = render(
-      <CheckboxGroup orientation="horizontal" legendText="test-horizental-prop">
+      <CheckboxGroup orientation="horizontal" legendText="test-horizontal-prop">
         <Checkbox labelText="Checkbox label 1" id="checkbox-label-1" />
         <Checkbox labelText="Checkbox label 2" id="checkbox-label-2" />
         <Checkbox labelText="Checkbox label 3" id="checkbox-label-3" />

@@ -20,20 +20,12 @@ export default {
   },
 };
 
-export const Default = () => (
-  <InlineLoading
-    status="active"
-    iconDescription="Loading"
-    description="Loading data..."
-  />
-);
-
 export const UxExample = () => {
   function MockSubmission({ children }) {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [success, setSuccess] = useState(false);
-    const [description, setDescription] = useState('Submitting...');
-    const [ariaLive, setAriaLive] = useState('off');
+    const [isSubmitting, setIsSubmitting] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
+    const [description, setDescription] = React.useState('Submitting...');
+    const [ariaLive, setAriaLive] = React.useState('off');
     const handleSubmit = () => {
       setIsSubmitting(true);
       setAriaLive('assertive');
@@ -85,14 +77,14 @@ export const UxExample = () => {
   );
 };
 
-export const Playground = (args) => <InlineLoading {...args} />;
+export const Default = (args) => <InlineLoading {...args} />;
 
-Playground.args = {
+Default.args = {
   description: 'Loading',
   iconDescription: 'Loading data...',
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   className: {
     table: {
       disable: true,

@@ -89,6 +89,9 @@ release team will need to do the following:
 
 ```bash
 git checkout main
+```
+
+```bash
 git pull upstream main
 ```
 
@@ -105,6 +108,9 @@ chore(release): v11.2.0-rc.0
 
 ```bash
 git tag -a v11.2.0-rc.0 -m 'v11.2.0-rc.0'
+```
+
+```bash
 git push upstream v11.2.0-rc.0
 ```
 
@@ -139,6 +145,9 @@ this stage, the release team will do the following:
 
 ```bash
 git checkout main
+```
+
+```bash
 git pull upstream main
 ```
 
@@ -155,6 +164,9 @@ chore(release): v11.10.0
 
 ```bash
 git tag -a v11.2.0 -m 'v11.2.0'
+```
+
+```bash
 git push upstream v11.2.0
 ```
 
@@ -255,8 +267,8 @@ categories:
 
 ### Manual Patch Release
 
-Occassionaly we need to do an off-cycle patch release to fix some broken
-functionality that was inadvertedly published in a previous release. In such
+Occasionally we need to do an off-cycle patch release to fix some broken
+functionality that was inadvertently published in a previous release. In such
 cases, follow these steps below to ensure a proper patch release:
 
 - [ ] Go to your local version of the monorepo
@@ -264,7 +276,7 @@ cases, follow these steps below to ensure a proper patch release:
 - [ ] Checkout to the tag of the release you want to publish a patch for (most
       likely the latest release tag, to find the previous release, view the
       [tag list](https://github.com/carbon-design-system/carbon/tags)).
-      `git checkout release/vX.Y.Z`
+      `git checkout vX.Y.Z`
 - [ ] Create a new release branch with the intended version to be released.
       Should be the same release that we previously checked out to incremented
       by +0.0.1 to account for a new patch version.
@@ -292,7 +304,13 @@ cases, follow these steps below to ensure a proper patch release:
 
   ```bash
   git add -A
+  ```
+
+  ```bash
   git commit -m 'chore(release): vX.Y.Z'
+  ```
+
+  ```bash
   git push --set-upstream origin release/vX.Y.Z
   ```
 
@@ -310,7 +328,10 @@ cases, follow these steps below to ensure a proper patch release:
 
     ```bash
     git tag -a vX.Y.Z -m 'vX.Y.Z'
-    git push upstream vX.Y.Z
+    ```
+
+    ```bash
+    git push upstream refs/tags/vX.Y.Z
     ```
 
 - [ ] Verify that your push triggered a release action
@@ -324,8 +345,9 @@ cases, follow these steps below to ensure a proper patch release:
   Note:
 
   - Do NOT do this for the <kbd>carbon-components</kbd> package.
-  - You need to use the individual generatied version number for the package
+  - You need to use the individual generated version number for the package
     here, not the released github tag version.
+  - Ensure you log into the npm cli as `carbon-bot` to avoid auth issues
 
 - [ ] for each package (replace <kbd>carbon-components-react</kbd> with the
       package name):
@@ -404,7 +426,13 @@ yarn lerna version patch \
 
 ```bash
 git add -A
+```
+
+```bash
 git commit -m 'chore(release): vX.Y.Z'
+```
+
+```bash
 git push --set-upstream origin release/vX.Y.Z
 ```
 
@@ -417,6 +445,9 @@ git push --set-upstream origin release/vX.Y.Z
 
 ```bash
 git checkout v10
+```
+
+```bash
 git pull upstream v10
 ```
 
@@ -436,6 +467,9 @@ chore(release): v10.59.1
 
 ```bash
 git tag -a vX.Y.Z -m 'vX.Y.Z'
+```
+
+```bash
 git push upstream vX.Y.Z
 ```
 
@@ -459,7 +493,7 @@ For instance:
 
 - `eslint-config-carbon` needs a new major
 - All other packages should only be bumped as a new patch
-- The tag for the release should remain at the curent major `v11.x`, and not be
+- The tag for the release should remain at the current major `v11.x`, and not be
   bumped to `v12.x`
 
 To do this, packages must be versioned manually.
@@ -500,9 +534,21 @@ environment as long as you have push access to the repo.
 
 ```bash
 git checkout main
+```
+
+```bash
 git pull upstream main
+```
+
+```bash
 git checkout -b `release/vX.Y.Z`
+```
+
+```bash
 yarn install
+```
+
+```bash
 yarn build
 ```
 
@@ -514,7 +560,13 @@ yarn build
 
 ```bash
 git add .
+```
+
+```bash
 git commit -m "chore(release): vX.Y.Z"
+```
+
+```bash
 git push
 ```
 
@@ -550,6 +602,8 @@ package which does not contain a compiled stylesheet.
 
 To fix, re-apply the `latest` tag to `v10.x` instead of `v11.x`. Any
 non-versioned unpkg links should now resolve to `carbon-components@v10.x` again.
+
+- Ensure you log into the npm cli as `carbon-bot` to avoid auth issues.
 
 ```bash
 npm dist-tag add carbon-components@10.X.Y latest

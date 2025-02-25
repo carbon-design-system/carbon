@@ -125,8 +125,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * Specify the message read by screen readers for the danger button variant
    */
-  @property({ reflect: true, attribute: 'danger-descriptor' })
-  dangerDescriptor;
+  @property({ reflect: true, attribute: 'danger-description' })
+  dangerDescription;
 
   /**
    * `true` if the button should be disabled.
@@ -244,7 +244,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     const {
       autofocus,
       buttonClassName,
-      dangerDescriptor,
+      dangerDescription,
       disabled,
       download,
       href,
@@ -270,6 +270,9 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     let defaultClasses = {
       [`${prefix}--btn`]: true,
       [`${prefix}--btn--${kind}`]: kind,
+      [`${prefix}--btn--danger--tertiary`]:
+        kind === BUTTON_KIND.DANGER_TERTIARY,
+      [`${prefix}--btn--danger--ghost`]: kind === BUTTON_KIND.DANGER_GHOST,
       [`${prefix}--btn--disabled`]: disabled,
       [`${prefix}--btn--icon-only`]: hasIcon && !hasMainContent,
       [`${prefix}--btn--${size}`]: size,
@@ -367,7 +370,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             type="${ifDefined(type)}">
             ${isDanger
               ? html`<span class="${prefix}--visually-hidden"
-                  >${dangerDescriptor}</span
+                  >${dangerDescription}</span
                 >`
               : ``}
             <slot @slotchange="${handleSlotChange}"></slot>

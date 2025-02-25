@@ -13,6 +13,8 @@ import RadioButton from '../RadioButton';
 import Button from '../Button';
 import { Stack } from '../Stack';
 
+import mdx from './FormGroup.mdx';
+
 export default {
   title: 'Components/FormGroup',
   component: FormGroup,
@@ -38,45 +40,34 @@ export default {
       },
     },
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = () => (
-  <FormGroup style={{ maxWidth: '400px' }} legendText="FormGroup Legend">
-    <Stack gap={7}>
-      <TextInput id="one" labelText="First Name" />
-      <TextInput id="two" labelText="Last Name" />
-      <RadioButtonGroup
-        legendText="Radio button heading"
-        name="formgroup-default-radio-button-group"
-        defaultSelected="radio-1">
-        <RadioButton labelText="Option 1" value="radio-1" id="radio-1" />
-        <RadioButton labelText="Option 2" value="radio-2" id="radio-2" />
-        <RadioButton labelText="Option 3" value="radio-3" id="radio-3" />
-      </RadioButtonGroup>
-      <Button>Submit</Button>
-    </Stack>
-  </FormGroup>
-);
+export const Default = (args) => {
+  return (
+    <FormGroup style={{ maxWidth: '400px' }} {...args}>
+      <Stack gap={7}>
+        <TextInput id="one" labelText="First Name" />
+        <TextInput id="two" labelText="Last Name" />
+        <RadioButtonGroup
+          legendText="Radio button heading"
+          name="formgroup-default-radio-button-group"
+          defaultSelected="radio-1">
+          <RadioButton labelText="Option 1" value="radio-1" id="radio-1" />
+          <RadioButton labelText="Option 2" value="radio-2" id="radio-2" />
+          <RadioButton labelText="Option 3" value="radio-3" id="radio-3" />
+        </RadioButtonGroup>
+        <Button>Submit</Button>
+      </Stack>
+    </FormGroup>
+  );
+};
 
-export const Playground = (args) => (
-  <FormGroup style={{ maxWidth: '400px' }} {...args}>
-    <Stack gap={7}>
-      <TextInput id="one" labelText="First Name" />
-      <TextInput id="two" labelText="Last Name" />
-      <RadioButtonGroup
-        legendText="Radio button heading"
-        name="formgroup-playground-radio-button-group"
-        defaultSelected="radio-1">
-        <RadioButton labelText="Option 1" value="radio-1" id="radio-1" />
-        <RadioButton labelText="Option 2" value="radio-2" id="radio-2" />
-        <RadioButton labelText="Option 3" value="radio-3" id="radio-3" />
-      </RadioButtonGroup>
-      <Button>Submit</Button>
-    </Stack>
-  </FormGroup>
-);
-
-Playground.argTypes = {
+Default.argTypes = {
   legendId: {
     control: {
       type: 'text',
@@ -99,7 +90,7 @@ Playground.argTypes = {
   },
 };
 
-Playground.args = {
+Default.args = {
   legendId: 'form-group-1',
   legendText: 'FormGroup Legend',
   message: false,

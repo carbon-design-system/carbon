@@ -2,6 +2,7 @@ import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
 import * as ContentSwitcherStories from './ContentSwitcher.stories.js';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -18,6 +19,9 @@ import * as ContentSwitcherStories from './ContentSwitcher.stories.js';
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 - [Overview](#overview)
+- [Icon Only](#icon-only)
+- [Icon Only With Layer](#icon-only-with-layer)
+- [With Layer](#with-layer)
 - [Component API](#component-api)
   - [ContentSwitcher `className`](#contentswitcher-classname)
   - [ContentSwitcher `light`](#contentswitcher-light)
@@ -39,7 +43,35 @@ Content switchers allow users to toggle between two or more content sections
 within the same space on screen. Only one content section is shown at a time.
 Create Switch components for each section in the content switcher.
 
-<Canvas of={ContentSwitcherStories.Playground} />
+<Canvas
+  of={ContentSwitcherStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ContentSwitcherStories.Default),
+    },
+  ]}
+/>
+
+## Icon Only
+
+<Canvas
+  of={ContentSwitcherStories.IconOnly}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ContentSwitcherStories.IconOnly),
+    },
+  ]}
+/>
+
+## Icon Only With Layer
+
+<Canvas of={ContentSwitcherStories.IconOnlyWithLayer} />
+
+## With Layer
+
+<Canvas of={ContentSwitcherStories._WithLayer} />
 
 ## Component API
 

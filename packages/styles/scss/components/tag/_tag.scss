@@ -413,9 +413,17 @@
     border-color: currentColor;
   }
 
+  .#{$prefix}--tag--filter .#{$prefix}--tag__decorator > *,
   .#{$prefix}--tag--filter .#{$prefix}--ai-label,
   .#{$prefix}--tag--filter .#{$prefix}--slug {
     min-inline-size: convert.to-rem(32.14px);
+  }
+
+  // Decorator styles
+  .#{$prefix}--tag
+    .#{$prefix}--tag__decorator:not(:has(.#{$prefix}--ai-label)) {
+    block-size: 1rem;
+    text-align: center;
   }
 
   // Windows HCM fix

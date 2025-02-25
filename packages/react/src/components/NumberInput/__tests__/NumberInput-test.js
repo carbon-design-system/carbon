@@ -39,22 +39,22 @@ describe('NumberInput', () => {
     expect(container.firstChild).toHaveClass('custom-class');
   });
 
-  it('should set `min` on the underyling <input>', () => {
+  it('should set `min` on the underlying <input>', () => {
     render(<NumberInput label="test-label" id="test" min={0} />);
     expect(screen.getByLabelText('test-label')).toHaveAttribute('min', '0');
   });
 
-  it('should set `max` on the underyling <input>', () => {
+  it('should set `max` on the underlying <input>', () => {
     render(<NumberInput label="test-label" id="test" max={10} />);
     expect(screen.getByLabelText('test-label')).toHaveAttribute('max', '10');
   });
 
-  it('should set `step` on the underyling <input>', () => {
+  it('should set `step` on the underlying <input>', () => {
     render(<NumberInput label="test-label" id="test" step={5} />);
     expect(screen.getByLabelText('test-label')).toHaveAttribute('step', '5');
   });
 
-  it('should set `disabled` on the underyling <input>', () => {
+  it('should set `disabled` on the underlying <input>', () => {
     render(<NumberInput label="test-label" id="test" disabled />);
     expect(screen.getByLabelText('test-label')).toBeDisabled();
   });
@@ -75,7 +75,7 @@ describe('NumberInput', () => {
     );
 
     expect(
-      screen.getByRole('button', { name: 'AI - Show information' })
+      screen.getByRole('button', { name: 'AI Show information' })
     ).toBeInTheDocument();
   });
 
@@ -84,7 +84,7 @@ describe('NumberInput', () => {
     render(<NumberInput label="test-label" id="test" slug={<AILabel />} />);
 
     expect(
-      screen.getByRole('button', { name: 'AI - Show information' })
+      screen.getByRole('button', { name: 'AI Show information' })
     ).toBeInTheDocument();
     spy.mockRestore();
   });

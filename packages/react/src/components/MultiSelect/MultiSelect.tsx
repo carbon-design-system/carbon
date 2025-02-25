@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -49,10 +49,10 @@ import { noopFn } from '../../internal/noopFn';
 import {
   useFloating,
   flip,
+  hide,
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
 
 const {
@@ -127,6 +127,11 @@ export interface MultiSelectProps<ItemType>
    * Specify the text that should be read for screen readers to clear selection.
    */
   clearSelectionText?: string;
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `MultiSelect` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -260,6 +265,7 @@ export interface MultiSelectProps<ItemType>
   size?: ListBoxSize;
 
   /**
+   * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
    */
   slug?: ReactNode;
@@ -296,6 +302,7 @@ const MultiSelect = React.forwardRef(
     {
       autoAlign = false,
       className: containerClassName,
+      decorator,
       id,
       items,
       itemToElement,
@@ -360,7 +367,7 @@ const MultiSelect = React.forwardRef(
     const [inputFocused, setInputFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(open || false);
     const [prevOpenProp, setPrevOpenProp] = useState(open);
-    const [topItems, setTopItems] = useState([]);
+    const [topItems, setTopItems] = useState<ItemType[]>([]);
     const [itemsCleared, setItemsCleared] = useState(false);
 
     const enableFloatingStyles =
@@ -450,8 +457,8 @@ const MultiSelect = React.forwardRef(
           ''
         );
       },
-      selectedItem: controlledSelectedItems,
-      items: filteredItems as ItemType[],
+      selectedItem: controlledSelectedItems as ItemType,
+      items: filteredItems,
       isItemDisabled(item, _index) {
         return (item as any)?.disabled;
       },
@@ -496,9 +503,20 @@ const MultiSelect = React.forwardRef(
             setItemsCleared(false);
             setIsOpenWrapper(true);
           }
+          if (match(e, keys.ArrowDown) && selectedItems.length === 0) {
+            setInputFocused(false);
+            setIsFocused(false);
+          }
+          if (match(e, keys.Escape) && isOpen) {
+            setInputFocused(true);
+          }
+          if (match(e, keys.Enter) && isOpen) {
+            setInputFocused(true);
+          }
         }
       },
     });
+
     const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
 
     const selectedItems = selectedItem as ItemType[];
@@ -535,9 +553,8 @@ const MultiSelect = React.forwardRef(
           inline && invalid,
         [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
         [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
-        [`${prefix}--list-box__wrapper--fluid--focus`]:
-          !isOpen && isFluid && isFocused,
         [`${prefix}--list-box__wrapper--slug`]: slug,
+        [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
     );
     const titleClasses = cx(`${prefix}--label`, {
@@ -679,12 +696,20 @@ const MultiSelect = React.forwardRef(
         }
       : {};
 
-    // Slug is always size `mini`
-    let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'AILabel') {
-      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size: 'mini',
-      });
+    // AILabel always size `mini`
+    let normalizedDecorator = React.isValidElement(slug ?? decorator)
+      ? (slug ?? decorator)
+      : null;
+    if (
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel'
+    ) {
+      normalizedDecorator = React.cloneElement(
+        normalizedDecorator as React.ReactElement<any>,
+        {
+          size: 'mini',
+        }
+      );
     }
 
     const itemsSelectedText =
@@ -773,7 +798,15 @@ const MultiSelect = React.forwardRef(
                 translateWithId={translateWithId}
               />
             </button>
-            {normalizedSlug}
+            {slug ? (
+              normalizedDecorator
+            ) : decorator ? (
+              <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
+                {normalizedDecorator}
+              </div>
+            ) : (
+              ''
+            )}
           </div>
           <ListBox.Menu {...menuProps}>
             {isOpen &&
@@ -885,6 +918,11 @@ MultiSelect.propTypes = {
    * declaring function with `useCallback` to prevent unnecessary re-renders.
    */
   compareItems: PropTypes.func,
+
+  /**
+   * **Experimental**: Provide a decorator component to be rendered inside the `MultiSelect` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -1019,10 +1057,10 @@ MultiSelect.propTypes = {
    */
   size: ListBoxPropTypes.ListBoxSize,
 
-  /**
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
-   */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
+  ),
 
   /**
    * Provide a method that sorts all options in the control. Overriding this

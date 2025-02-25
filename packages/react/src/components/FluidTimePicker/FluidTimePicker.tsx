@@ -52,6 +52,11 @@ export interface FluidTimePickerProps extends FluidTextInputProps {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: React.ReactNode;
+
+  /**
+   * Specify if the component is readonly
+   */
+  readOnly?: boolean;
 }
 
 const FluidTimePicker = React.forwardRef<
@@ -66,12 +71,12 @@ const FluidTimePicker = React.forwardRef<
     invalidText,
     warn,
     warnText,
+    readOnly,
     ...other
   },
   ref
 ) {
   const prefix = usePrefix();
-
   const classNames = classnames(className, {
     [`${prefix}--time-picker--fluid`]: true,
     [`${prefix}--time-picker--equal-width`]:
@@ -92,19 +97,36 @@ const FluidTimePicker = React.forwardRef<
 
   const error = invalid || warn;
 
+  const childrenWithProps = () => {
+    if (disabled) {
+      return React.Children.toArray(children).map((child) =>
+        React.cloneElement(child as React.ReactElement, {
+          disabled: true,
+        })
+      );
+    }
+    if (readOnly) {
+      return React.Children.toArray(children).map((child) =>
+        React.cloneElement(child as React.ReactElement, {
+          readOnly: true,
+        })
+      );
+    }
+    return children;
+  };
+
   return (
     <div className={classNames}>
       <div className={`${prefix}--time-picker--fluid__wrapper`}>
         <div className={`${prefix}--time-picker__input`}>
-          <FluidTextInput ref={ref} {...other} />
+          <FluidTextInput
+            ref={ref}
+            readOnly={readOnly}
+            disabled={disabled}
+            {...other}
+          />
         </div>
-        {disabled
-          ? React.Children.toArray(children).map((child) => {
-              return React.cloneElement(child as React.ReactElement, {
-                disabled,
-              });
-            })
-          : children}
+        {childrenWithProps()}
       </div>
       {error && <hr className={`${prefix}--time-picker__divider`} />}
       {error && (
@@ -164,6 +186,11 @@ FluidTimePicker.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Whether or not the component is readonly
+   */
+  readOnly: PropTypes.bool,
 };
 
 export default FluidTimePicker;

@@ -54,6 +54,12 @@
     transition: opacity $duration-fast-01 motion(standard, productive);
   }
 
+  .#{$prefix}--select--readonly .#{$prefix}--select-input__wrapper::before {
+    background-color: $border-subtle !important; /* stylelint-disable-line declaration-no-important */
+    opacity: 1 !important; /* stylelint-disable-line declaration-no-important */
+    transition: none;
+  }
+
   .#{$prefix}--time-picker--fluid__wrapper
     .#{$prefix}--select-input__wrapper::after {
     inset-inline-end: 0;

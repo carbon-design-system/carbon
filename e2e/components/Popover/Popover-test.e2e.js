@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
 const { snapshot } = require('../../test-utils/snapshot');
 const { snapshotStory, visitStory } = require('../../test-utils/storybook');
@@ -18,7 +18,7 @@ test.describe('Popover', () => {
       test('Popover @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Popover',
-          id: 'components-popover--playground',
+          id: 'components-popover--default',
           theme,
         });
       });
@@ -27,78 +27,6 @@ test.describe('Popover', () => {
         await snapshotStory(page, {
           component: 'Popover',
           id: 'components-popover--tab-tip',
-          theme,
-        });
-      });
-      // test experimental autoAlign
-      test('popover - expermental autoAlign scroll to left @vrt', async ({
-        page,
-      }) => {
-        await visitStory(page, {
-          component: 'popover',
-          story: 'experimental-auto-align',
-          theme,
-        });
-        await page.evaluate(() => {
-          window.scrollBy(-500, 0); // Scroll 500px to the left
-        });
-        await snapshot(page, {
-          component: 'popover',
-          story: 'experimental-auto-align-left',
-          theme,
-        });
-      });
-
-      test('popover - expermental autoAlign scroll to right @vrt', async ({
-        page,
-      }) => {
-        await visitStory(page, {
-          component: 'popover',
-          story: 'experimental-auto-align',
-          theme,
-        });
-        await page.evaluate(() => {
-          window.scrollBy(500, 0); // Scroll 500px to the right
-        });
-        await snapshot(page, {
-          component: 'popover',
-          story: 'experimental-auto-align-right',
-          theme,
-        });
-      });
-
-      test('popover - expermental autoAlign scroll to top @vrt', async ({
-        page,
-      }) => {
-        await visitStory(page, {
-          component: 'popover',
-          story: 'experimental-auto-align',
-          theme,
-        });
-        await page.evaluate(() => {
-          window.scrollBy(0, -350); // Scroll 350px to the top
-        });
-        await snapshot(page, {
-          component: 'popover',
-          story: 'experimental-auto-align-top',
-          theme,
-        });
-      });
-
-      test('popover - expermental autoAlign scroll to bottom @vrt', async ({
-        page,
-      }) => {
-        await visitStory(page, {
-          component: 'popover',
-          story: 'experimental-auto-align',
-          theme,
-        });
-        await page.evaluate(() => {
-          window.scrollBy(0, 350); // Scroll 350px to the bottom
-        });
-        await snapshot(page, {
-          component: 'popover',
-          story: 'experimental-auto-align-bottom',
           theme,
         });
       });
