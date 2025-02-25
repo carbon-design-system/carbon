@@ -88,7 +88,7 @@ export interface IconButtonProps
   /**
    * Optionally specify an href for your IconButton to become an `<a>` element
    */
-  href?: string;
+  href?: React.AnchorHTMLAttributes<HTMLAnchorElement>['href'];
 
   /**
    * Provide an icon or asset to be rendered inside of the IconButton
@@ -116,9 +116,19 @@ export interface IconButtonProps
   disabled?: boolean;
 
   /**
+   * Specify whether a drop shadow should be rendered on the tooltip
+   */
+  dropShadow?: boolean;
+
+  /**
    * Specify the duration in milliseconds to delay before displaying the tooltip
    */
   enterDelayMs?: number;
+
+  /**
+   * Render the tooltip using the high-contrast theme
+   */
+  highContrast?: boolean;
 
   /**
    * Specify whether the IconButton is currently selected
@@ -146,9 +156,19 @@ export interface IconButtonProps
   leaveDelayMs?: number;
 
   /**
+   * Optionally specify a `rel` when using an `<a>` element.
+   */
+  rel?: React.AnchorHTMLAttributes<HTMLAnchorElement>['rel'];
+
+  /**
    * Specify the size of the Button. Defaults to `md`.
    */
   size?: ButtonSize;
+
+  /**
+   * Optionally specify a `target` when using an `<a>` element.
+   */
+  target?: React.AnchorHTMLAttributes<HTMLAnchorElement>['target'];
 
   /**
    * Specify an optional className to be added to your Tooltip wrapper
@@ -166,7 +186,9 @@ const IconButton = React.forwardRef(function IconButton(
     closeOnActivation = true,
     defaultOpen = false,
     disabled,
+    dropShadow = false,
     enterDelayMs = 100,
+    highContrast = true,
     kind,
     label,
     leaveDelayMs = 100,
@@ -197,7 +219,9 @@ const IconButton = React.forwardRef(function IconButton(
       closeOnActivation={closeOnActivation}
       className={tooltipClasses}
       defaultOpen={defaultOpen}
+      dropShadow={dropShadow}
       enterDelayMs={enterDelayMs}
+      highContrast={highContrast}
       label={label}
       leaveDelayMs={leaveDelayMs}>
       <ButtonBase
@@ -313,6 +337,11 @@ IconButton.propTypes = {
   defaultOpen: PropTypes.bool,
 
   /**
+   * Specify whether a drop shadow should be rendered on the tooltip
+   */
+  dropShadow: PropTypes.bool,
+
+  /**
    * Specify whether the Button should be disabled, or not
    */
   disabled: PropTypes.bool,
@@ -325,8 +354,12 @@ IconButton.propTypes = {
   /**
    * Specify whether the IconButton is currently selected
    */
-
   isSelected: PropTypes.bool,
+
+  /**
+   * Render the tooltip using the high-contrast theme
+   */
+  highContrast: PropTypes.bool,
 
   /**
    * Specify the type of button to be used as the base for the IconButton
@@ -347,9 +380,19 @@ IconButton.propTypes = {
   leaveDelayMs: PropTypes.number,
 
   /**
+   * Optionally specify a `rel` when using an `<a>` element.
+   */
+  rel: PropTypes.string,
+
+  /**
    * Specify the size of the Button. Defaults to `md`.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Optionally specify a `target` when using an `<a>` element.
+   */
+  target: PropTypes.string,
 
   /**
    * Specify an optional className to be added to your Tooltip wrapper

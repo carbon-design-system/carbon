@@ -88,6 +88,25 @@
     cursor: not-allowed;
   }
 
+  // Overrides link styling
+  li a.#{$prefix}--tree-node {
+    text-decoration: none;
+
+    &:not(.cds--tree-node--disabled) {
+      color: $text-secondary;
+    }
+  }
+
+  li.#{$prefix}--tree-node-link-parent {
+    display: flex;
+    flex-direction: column;
+    background-color: $layer-01;
+
+    > .#{$prefix}--tree-node__children {
+      padding-inline-start: $spacing-05;
+    }
+  }
+
   .#{$prefix}--tree-node__label {
     @include type-style('body-compact-01');
 

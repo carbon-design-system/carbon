@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -49,10 +49,10 @@ import { noopFn } from '../../internal/noopFn';
 import {
   useFloating,
   flip,
+  hide,
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
 
 const {
@@ -367,7 +367,7 @@ const MultiSelect = React.forwardRef(
     const [inputFocused, setInputFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(open || false);
     const [prevOpenProp, setPrevOpenProp] = useState(open);
-    const [topItems, setTopItems] = useState([]);
+    const [topItems, setTopItems] = useState<ItemType[]>([]);
     const [itemsCleared, setItemsCleared] = useState(false);
 
     const enableFloatingStyles =
@@ -457,8 +457,8 @@ const MultiSelect = React.forwardRef(
           ''
         );
       },
-      selectedItem: controlledSelectedItems,
-      items: filteredItems as ItemType[],
+      selectedItem: controlledSelectedItems as ItemType,
+      items: filteredItems,
       isItemDisabled(item, _index) {
         return (item as any)?.disabled;
       },

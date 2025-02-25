@@ -531,6 +531,8 @@
     //-----------------------------
     // Icon Item
     //-----------------------------
+    &.#{$prefix}--tabs__icon--default,
+    &.#{$prefix}--tabs__icon--lg,
     &.#{$prefix}--tabs__icon--default .#{$prefix}--tab--list,
     &.#{$prefix}--tabs__icon--lg .#{$prefix}--tab--list {
       overflow-x: visible;
