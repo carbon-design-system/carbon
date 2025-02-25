@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -358,6 +358,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   ref: ForwardedRef<HTMLDivElement>
 ) {
   const { isFluid } = useContext(FormContext);
+  const isFirstRender = useRef(true);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
   const [prevOpen, setPrevOpen] = useState<boolean>(!!open);
@@ -521,8 +522,16 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
   }
 
   useEffect(() => {
-    onMenuChange?.(isOpen);
-  }, [isOpen, onMenuChange]);
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+
+      if (open) {
+        onMenuChange?.(isOpen);
+      }
+    } else {
+      onMenuChange?.(isOpen);
+    }
+  }, [isOpen, onMenuChange, open]);
 
   const {
     getToggleButtonProps,
