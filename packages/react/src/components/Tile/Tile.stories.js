@@ -154,11 +154,7 @@ export const ClickableWithLayer = () => (
 
 export const Selectable = (args) => {
   return (
-    <SelectableTile
-      id="selectable-tile-1"
-      name="tiles"
-      value="selectable"
-      {...args}>
+    <SelectableTile id="selectable-tile-1" {...args}>
       Selectable
     </SelectableTile>
   );

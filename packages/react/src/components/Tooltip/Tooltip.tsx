@@ -64,9 +64,19 @@ interface TooltipBaseProps {
   description?: React.ReactNode;
 
   /**
+   * Specify whether a drop shadow should be rendered
+   */
+  dropShadow?: boolean;
+
+  /**
    * Specify the duration in milliseconds to delay before displaying the tooltip
    */
   enterDelayMs?: number;
+
+  /**
+   * Render the component using the high-contrast theme
+   */
+  highContrast?: boolean;
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
@@ -105,6 +115,8 @@ const Tooltip: TooltipComponent = React.forwardRef(
       leaveDelayMs = 300,
       defaultOpen = false,
       closeOnActivation = false,
+      dropShadow = false,
+      highContrast = true,
       ...rest
     }: TooltipProps<T>,
     ref: PolymorphicRef<T>
@@ -232,6 +244,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
       }
     }, [isPointerIntersecting, leaveDelayMs, setOpen]);
 
+
     useNoInteractiveChildren(
       tooltipRef,
       'The Tooltip component must have no interactive content rendered by the' +
@@ -259,8 +272,8 @@ const Tooltip: TooltipComponent = React.forwardRef(
         {...rest}
         align={align}
         className={cx(`${prefix}--tooltip`, customClassName)}
-        dropShadow={false}
-        highContrast
+        dropShadow={dropShadow}
+        highContrast={highContrast}
         onKeyDown={onKeyDown}
         onMouseLeave={onMouseLeave}
         open={open}>
@@ -350,9 +363,19 @@ const Tooltip: TooltipComponent = React.forwardRef(
   description: PropTypes.node,
 
   /**
+   * Specify whether a drop shadow should be rendered
+   */
+  dropShadow: PropTypes.bool,
+
+  /**
    * Specify the duration in milliseconds to delay before displaying the tooltip
    */
   enterDelayMs: PropTypes.number,
+
+  /**
+   * Render the component using the high-contrast theme
+   */
+  highContrast: PropTypes.bool,
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use

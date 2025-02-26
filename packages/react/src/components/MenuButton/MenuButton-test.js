@@ -131,7 +131,7 @@ describe('MenuButton', () => {
       spy.mockRestore();
     });
 
-    it('warns when MenuItemRadioGoup is used in children', async () => {
+    it('warns when MenuItemRadioGroup is used in children', async () => {
       const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       render(
