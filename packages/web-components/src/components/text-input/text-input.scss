@@ -34,28 +34,14 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-text-input[show-password-visibility-toggle]) {
+:host(#{$prefix}-text-input[show-password-visibility-toggle])
   .#{$prefix}--text-input {
-    padding-inline-end: $spacing-08;
-  }
+  padding-inline-end: $spacing-08;
+}
 
-  &[size='sm'] {
-    .#{$prefix}--text-input__invalid-icon {
-      inset-inline-end: $spacing-07;
-    }
-  }
-
-  &[size='md'] {
-    .#{$prefix}--text-input__invalid-icon {
-      inset-inline-end: $spacing-07;
-    }
-  }
-
-  &[size='lg'] {
-    .#{$prefix}--text-input__invalid-icon {
-      inset-inline-end: $spacing-07;
-    }
-  }
+:host(#{$prefix}-text-input[show-password-visibility-toggle])
+  .#{$prefix}--text-input__invalid-icon {
+  inset-inline-end: $spacing-08;
 }
 
 :host(#{$prefix}-text-input[warn]),
