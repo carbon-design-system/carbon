@@ -32,9 +32,13 @@ const ControlledComboBox = ({ controlledItem }) => {
   const items = generateItems(5, generateGenericItem);
   const [value, setValue] = useState(controlledItem || items[0]);
   const [onChangeCallCount, setOnChangeCallCount] = useState(0);
+  const [onInputChangeCallCount, setOnInputChangeCallCount] = useState(0);
   const controlledOnChange = ({ selectedItem }) => {
     setValue(selectedItem);
     setOnChangeCallCount((prevCount) => prevCount + 1);
+  };
+  const controlledOnInputChange = () => {
+    setOnInputChangeCallCount((prevCount) => prevCount + 1);
   };
 
   return (
@@ -44,11 +48,13 @@ const ControlledComboBox = ({ controlledItem }) => {
         items={items}
         selectedItem={value}
         onChange={controlledOnChange}
+        onInputChange={controlledOnInputChange}
         placeholder="Filter..."
         type="default"
       />
       <div>value: {value?.label || 'none'}</div>
       <div>onChangeCallCount: {onChangeCallCount}</div>
+      <div>onInputChangeCallCount: {onInputChangeCallCount}</div>
       <button onClick={() => setValue(items[3])}>Choose item 3</button>
       <button onClick={() => setValue(null)}>reset</button>
     </div>
@@ -181,6 +187,13 @@ describe('ComboBox', () => {
         text: 'Construct',
       },
     });
+  });
+
+  it('should not call onChange or onInputChange on initial render', () => {
+    const onInputChange = jest.fn();
+    render(<ComboBox {...mockProps} onInputChange={onInputChange} />);
+    expect(onInputChange).not.toHaveBeenCalled();
+    expect(mockProps.onChange).not.toHaveBeenCalled();
   });
 
   it('capture filter text event onInputChange', async () => {
@@ -370,6 +383,16 @@ describe('ComboBox', () => {
       render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
+    });
+    it('should not call onChange or onInputChange on initial render', () => {
+      render(<ControlledComboBox />);
+      expect(screen.getByText('onChangeCallCount: 0')).toBeInTheDocument();
+      expect(screen.getByText('onInputChangeCallCount: 0')).toBeInTheDocument();
+    });
+    it('should call onInputChange when input changes', async () => {
+      render(<ControlledComboBox />);
+      await userEvent.type(findInputNode(), 'Item 2');
+      expect(screen.getByText('onInputChangeCallCount: 6')).toBeInTheDocument();
     });
 
     it('should display selected item using a string type for the `selectedItem` prop', async () => {
