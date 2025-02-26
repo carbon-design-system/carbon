@@ -233,7 +233,7 @@
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
-    background-color: $field;
+    background-color: $background;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
