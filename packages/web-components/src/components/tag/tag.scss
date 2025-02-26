@@ -13,18 +13,26 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/tag/index' as *;
 @use '@carbon/styles/scss/layout' as *;
 
-:host(#{$prefix}-tag) {
+:host(#{$prefix}-tag),
+:host(#{$prefix}-dismissible-tag) {
   @extend .#{$prefix}--tag;
+}
+
+:host(#{$prefix}-tag),
+:host(#{$prefix}-tag-skeleton),
+:host(#{$prefix}-dismissible-tag) {
   @extend .#{$prefix}--layout--size-md;
 
   @include emit-layout-tokens();
   // tag overrides layout tokens
-  --cds-layout-size-height-xs: 1.125rem;
-  --cds-layout-size-height-sm: 1.125rem;
-  --cds-layout-size-height-md: 1.5rem;
+  --cds-layout-size-height-xs: rem(18px);
+  --cds-layout-size-height-sm: rem(18px);
+  --cds-layout-size-height-md: rem(24px);
+  --cds-layout-size-height-lg: rem(32px);
 }
 
-:host(#{$prefix}-tag[size='sm']) {
+:host(#{$prefix}-tag[size='sm']),
+:host(#{$prefix}-tag-skeleton[size='sm']) {
   @extend .#{$prefix}--tag--sm;
   @extend .#{$prefix}--layout--size-sm;
 
@@ -33,6 +41,11 @@ $css--plex: true !default;
     inline-size: rem(18px);
     margin-inline-start: rem(5px);
   }
+}
+
+:host(#{$prefix}-tag[size='lg']),
+:host(#{$prefix}-tag-skeleton[size='lg']) {
+  @extend .#{$prefix}--layout--size-lg;
 }
 
 :host(#{$prefix}-tag[type='red']) {
@@ -117,10 +130,6 @@ $css--plex: true !default;
 }
 
 // Skeleton state
-:host(#{$prefix}-tag.#{$prefix}--skeleton) {
-  @include skeleton;
-
-  overflow: hidden;
-
-  inline-size: rem(60px);
+:host(#{$prefix}-tag-skeleton) {
+  @extend .#{$prefix}--skeleton;
 }

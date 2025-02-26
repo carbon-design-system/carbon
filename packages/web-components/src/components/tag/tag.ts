@@ -98,6 +98,8 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
 
   /**
    * Text to show on filter tag "clear" buttons. Corresponds to the attribute with the same name
+   *
+   * @deprecated The `title` property has been deprecated and will be removed in the next major version. Use cds-dismissible-tag instead.
    */
   @property({ type: String, reflect: true })
   title = 'Clear filter';
@@ -113,6 +115,8 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
 
   /**
    * Determine if is a filter/chip
+   *
+   * @deprecated The `filter` property has been deprecated and will be removed in the next major version. Use cds-dismissible-tag instead.
    */
   @property({ type: Boolean, reflect: true })
   filter = false;

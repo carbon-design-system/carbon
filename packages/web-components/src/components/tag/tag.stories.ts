@@ -49,8 +49,9 @@ const actions = html`
 `;
 
 const sizes = {
-  [`Medium size (${TAG_SIZE.MEDIUM})`]: TAG_SIZE.MEDIUM,
-  [`Small size (${TAG_SIZE.SMALL})`]: TAG_SIZE.SMALL,
+  [`sm`]: TAG_SIZE.SMALL,
+  [`md`]: TAG_SIZE.MEDIUM,
+  [`lg`]: TAG_SIZE.LARGE,
 };
 
 const types = [
@@ -87,7 +88,7 @@ const controls = {
   size: {
     control: 'select',
     description:
-      'Specify the size of the Tag. Currently supports either sm or "md" (default) sizes.',
+      'Specify the size of the Tag. Currently supports either `sm`, `md` (default) or `lg` sizes.',
     options: sizes,
   },
   title: {
@@ -99,6 +100,23 @@ const controls = {
     description: 'Specify the type of the Tag.',
     options: types,
   },
+};
+
+export const Dismissible = {
+  render: () =>
+    html`${types.map(
+      (e) =>
+        html`<cds-dismissible-tag filter type="${e}"
+          >Tag content</cds-dismissible-tag
+        >`
+    )}`,
+};
+
+export const Skeleton = {
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({ size }) =>
+    html`<cds-tag-skeleton size="${size}">Tag content</cds-tag-skeleton>`,
 };
 
 export const Default = {
@@ -134,21 +152,6 @@ export const WithAILabel = {
           ${content}${actions}</cds-ai-label
         >
       </cds-tag>`,
-};
-
-export const Playground = {
-  argTypes: controls,
-  args: defaultArgs,
-  render: ({ filter, size, type, title, disabled }) => html`
-    <cds-tag
-      ?filter="${filter}"
-      size="${size}"
-      type="${type}"
-      title="${title}"
-      ?disabled="${disabled}">
-      Tag content
-    </cds-tag>
-  `,
 };
 
 const meta = {
