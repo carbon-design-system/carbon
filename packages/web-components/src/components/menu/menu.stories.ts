@@ -89,11 +89,11 @@ export const Default = {
   },
   args,
   argTypes,
-  render: () => {
+  render: ({ open, size }) => {
     const itemlist = ['None', 'Overline', 'Line-through', 'Underline'];
     const subitemlist = ['None', 'Product team', 'Organization', 'Company'];
     return html`
-      <cds-menu>
+      <cds-menu ?open=${open} size=${size}>
         <cds-menu-item label="Share with" .renderIcon=${FolderShared16}>
           <cds-menu-item-radio-group
             label="Share with list"

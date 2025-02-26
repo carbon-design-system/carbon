@@ -124,7 +124,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   /**
    * Size attribute .
    */
-  @property()
+  @property({ attribute: true })
   size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
   /**
    * Deprecated: Menus now always support both icons as well as selectable items and nesting. The mode of this menu. Defaults to full. full supports nesting and selectable menu items, but no icons. basic supports icons but no nesting or selectable menu items.
@@ -133,11 +133,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
    */
   @property()
   mode;
-  /**
-   * Size of the Menu .
-   */
-  @property()
-  menuSize;
+
   /**
    * Specify how the menu should align with the button element
    */
@@ -173,7 +169,6 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     this.isRtl = this.direction === 'rtl';
     this.isRoot = this.context.isRoot;
 
-    this.menuSize = this.isRoot ? this.size : this.context.size;
     if (this.isChild) {
       this._newContextCreate();
     }
@@ -188,12 +183,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     }, 100);
   }
   render() {
+    const menuSize = this.isRoot ? this.size : this.context.size;
     const {
       open,
       className,
       menuAlignment,
       label,
-      menuSize,
       position,
       _handleKeyDown: handleKeyDown,
     } = this;
