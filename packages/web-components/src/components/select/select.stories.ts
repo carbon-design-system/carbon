@@ -220,6 +220,7 @@ export const Inline = {
       size,
       readOnly,
       warn,
+      warnText,
       value,
       children,
       onInput,
@@ -239,6 +240,7 @@ export const Inline = {
           size="${ifDefined(size)}"
           ?readonly="${readOnly}"
           ?warn="${warn}"
+          warn-text="${ifDefined(warnText)}"
           value="${ifDefined(value)}"
           @cds-select-selected="${ifDefined(onInput)}">
           ${children}

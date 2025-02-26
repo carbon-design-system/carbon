@@ -168,6 +168,12 @@
     fill: $support-error;
   }
 
+  .#{$prefix}--select-input--inline__wrapper[data-invalid] {
+    .#{$prefix}--select__invalid-icon {
+      fill: $support-error;
+    }
+  }
+
   .#{$prefix}--select__invalid-icon--warning {
     fill: $support-warning;
   }
