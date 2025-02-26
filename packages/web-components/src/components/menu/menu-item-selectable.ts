@@ -12,7 +12,8 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import Checkmark16 from '@carbon/icons/lib/checkmark/16';
+import { consume } from '@lit/context';
+import { MenuContext } from './menu-context';
 /**
  * Menu Item.
  *
@@ -20,6 +21,8 @@ import Checkmark16 from '@carbon/icons/lib/checkmark/16';
  */
 @customElement(`${prefix}-menu-item-selectable`)
 class CDSmenuItemSelectable extends LitElement {
+  @consume({ context: MenuContext })
+  context;
   /**
    * Label for the menu item selectable.
    */
@@ -36,21 +39,31 @@ class CDSmenuItemSelectable extends LitElement {
    */
   onChange?;
 
+  /**
+   * Sets the menu item's icon.
+   */
+  @property()
+  renderIcon?: () => void;
+
   _handleClick = (e) => {
     this.selected = !this.selected;
     if (this.onChange) {
       this.onChange(e);
     }
   };
+  firstUpdated(): void {
+    this.context.updateFromChild?.({ hasSelectableItems: true });
+  }
   render() {
     const { label, selected, _handleClick: handleClick } = this;
+
     return html`
       <cds-menu-item
         label="${label}"
         class="${prefix}--menu-item-selectable--selected"
         role="menuitemcheckbox"
         aria-checked="${selected}"
-        .renderIcon="${selected ? Checkmark16 : undefined}"
+        .renderIcon=${this.renderIcon || undefined}
         .onClick="${handleClick}"></cds-menu-item>
     `;
   }

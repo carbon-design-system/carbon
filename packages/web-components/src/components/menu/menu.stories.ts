@@ -9,6 +9,20 @@
 
 import { html } from 'lit';
 import './index';
+import FolderShared16 from '@carbon/icons/lib/folder--shared/16.js';
+import Cut16 from '@carbon/icons/lib/cut/16.js';
+import Copy16 from '@carbon/icons/lib/copy/16.js';
+//import TrashCan16 from '@carbon/icons/lib/trash-can/16.js';
+import TextItalic16 from '@carbon/icons/lib/text--italic/16.js';
+import TextBold16 from '@carbon/icons/lib/text--bold/16.js';
+import Paste16 from '@carbon/icons/lib/paste/16.js';
+import CDSMenu from './menu';
+import MDXContent from './menu.mdx';
+import CDSmenuItem from './menu-item';
+import CDSmenuItemSelectable from './menu-item-selectable';
+import CDSmenuItemGroup from './menu-item-group';
+import CDSmenuItemRadioGroup from './menu-item-radio-group';
+import CDSmenuItemDivider from './menu-item-divider';
 
 const args = {
   size: 'sm',
@@ -28,11 +42,13 @@ const argTypes = {
     control: 'text',
     description: 'Specify how the menu should align with the button element',
   },
-  mode: {
-    description: `The mode of this menu. Defaults to full. full supports nesting and selectable menu items, but no icons. basic supports icons but no nesting or selectable menu items.
-    This prop is not intended for use and will be set by the respective implementation (like useContextMenu, MenuButton, and ComboButton).
-    'full'
-    'basic'`,
+  onClose: {
+    action: 'menu closed',
+    description: `Provide an optional function to be called when the Menu should be closed.`,
+  },
+  onOpen: {
+    action: 'menu opned',
+    description: `Provide an optional function to be called when the Menu is opened.`,
   },
   open: {
     control: 'boolean',
@@ -46,38 +62,73 @@ const argTypes = {
     'lg'`,
     options: ['xs', 'sm', 'md', 'lg'],
   },
+  x: {
+    control: 'number',
+    description: `Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2]).`,
+  },
+  y: {
+    control: 'number',
+    description: `Specify the y position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([y1, y2])`,
+  },
 };
 
 export const Default = {
-  args: {},
-  argTypes: {},
+  title: 'Components/Menu',
+  component: CDSMenu,
+  subcomponents: {
+    CDSmenuItem,
+    CDSmenuItemSelectable,
+    CDSmenuItemGroup,
+    CDSmenuItemRadioGroup,
+    CDSmenuItemDivider,
+  },
+  parameters: {
+    docs: {
+      page: MDXContent,
+    },
+  },
+  args,
+  argTypes,
   render: () => {
     const itemlist = ['None', 'Overline', 'Line-through', 'Underline'];
     const subitemlist = ['None', 'Product team', 'Organization', 'Company'];
     return html`
       <cds-menu>
-        <cds-menu-item label="Share with">
+        <cds-menu-item label="Share with" .renderIcon=${FolderShared16}>
           <cds-menu-item-radio-group
             label="Share with list"
             .items="${subitemlist}"
             selectedItem="None"></cds-menu-item-radio-group>
         </cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
-        <cds-menu-item label="Cut" shortcut="⌘X"></cds-menu-item>
-        <cds-menu-item label="Copy" shortcut="⌘C"></cds-menu-item>
-        <cds-menu-item label="Paste" shortcut="⌘V" disabled></cds-menu-item>
+        <cds-menu-item
+          label="Cut"
+          shortcut="⌘X"
+          .renderIcon=${Cut16}></cds-menu-item>
+        <cds-menu-item
+          label="Copy"
+          shortcut="⌘C"
+          .renderIcon=${Copy16}></cds-menu-item>
+        <cds-menu-item
+          label="Paste"
+          shortcut="⌘V"
+          disabled
+          .renderIcon=${Paste16}></cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-group>
           <cds-menu-item-selectable
             label="Bold"
-            selected></cds-menu-item-selectable>
-          <cds-menu-item-selectable label="Italic"></cds-menu-item-selectable>
+            .renderIcon=${TextBold16}></cds-menu-item-selectable>
+          <cds-menu-item-selectable
+            label="Italic"
+            .renderIcon=${TextItalic16}></cds-menu-item-selectable>
         </cds-menu-item-group>
-        <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-radio-group
           label="samples"
           .items="${itemlist}"
           selectedItem="None"></cds-menu-item-radio-group>
+        <cds-menu-item-divider></cds-menu-item-divider>
+
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item
           label="Delete"
@@ -87,47 +138,7 @@ export const Default = {
     `;
   },
 };
-export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const { className, label, menuAlignment, mode, open, size } = args;
-    const itemlist = ['None', 'Overline', 'Line-through', 'Underline'];
-    const subitemlist = ['None', 'Product team', 'Organization', 'Company'];
-    return html`<cds-menu
-      className="${className}"
-      label="${label}"
-      menuAlignment="${menuAlignment}"
-      mode="${mode}"
-      open="${open}"
-      size="${size}">
-      <cds-menu-item label="Share with">
-        <cds-menu-item-radio-group
-          label="Share with list"
-          .items="${subitemlist}"
-          selectedItem="None"></cds-menu-item-radio-group>
-      </cds-menu-item>
-      <cds-menu-item-divider></cds-menu-item-divider>
-      <cds-menu-item label="Cut" shortcut="⌘X"></cds-menu-item>
-      <cds-menu-item label="Copy" shortcut="⌘C"></cds-menu-item>
-      <cds-menu-item label="Paste" shortcut="⌘V" disabled></cds-menu-item>
-      <cds-menu-item-divider></cds-menu-item-divider>
-      <cds-menu-item-group>
-        <cds-menu-item-selectable
-          label="Bold"
-          selected></cds-menu-item-selectable>
-        <cds-menu-item-selectable label="Italic"></cds-menu-item-selectable>
-      </cds-menu-item-group>
-      <cds-menu-item-divider></cds-menu-item-divider>
-      <cds-menu-item-radio-group
-        label="samples"
-        .items="${itemlist}"
-        selectedItem="None"></cds-menu-item-radio-group>
-      <cds-menu-item-divider></cds-menu-item-divider>
-      <cds-menu-item label="Delete" shortcut="⌫" kind="danger"></cds-menu-item>
-    </cds-menu>`;
-  },
-};
+
 const meta = {
   title: 'Components/Menu',
 };

@@ -12,8 +12,9 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import Checkmark16 from '@carbon/icons/lib/checkmark/16';
 import { ChangeEventHandler } from 'react';
+import { consume } from '@lit/context';
+import { MenuContext } from './menu-context';
 
 /**
  * Menu Item.
@@ -22,6 +23,10 @@ import { ChangeEventHandler } from 'react';
  */
 @customElement(`${prefix}-menu-item-radio-group`)
 class CDSmenuItemRadioGroup extends LitElement {
+  // @provide({ context: MenuContext })
+  @consume({ context: MenuContext })
+  context;
+
   /**
    * Label for the menu item radio group.
    */
@@ -50,6 +55,10 @@ class CDSmenuItemRadioGroup extends LitElement {
   @property()
   onChange?: ChangeEventHandler;
 
+  firstUpdated(): void {
+    this.context.updateFromChild?.({ hasSelectableItems: true });
+  }
+
   _handleClick = (item, e) => {
     this.selectedItem = item;
     if (this.onChange) {
@@ -74,7 +83,6 @@ class CDSmenuItemRadioGroup extends LitElement {
                 label="${itemToString(item)}"
                 role="menuitemradio"
                 aria-checked="${item === selectedItem}"
-                .renderIcon="${item === selectedItem ? Checkmark16 : ''}"
                 .onClick="${(e) => {
                   handleClick(item, e);
                 }}"></cds-menu-item>

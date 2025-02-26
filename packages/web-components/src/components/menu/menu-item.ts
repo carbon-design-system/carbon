@@ -15,8 +15,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import { classMap } from 'lit/directives/class-map.js';
 import CaretLeft16 from '@carbon/icons/lib/caret--left/16';
 import CaretRight16 from '@carbon/icons/lib/caret--right/16';
-import { consume, provide } from '@lit/context';
+import { consume } from '@lit/context';
 import { MenuContext } from './menu-context';
+import Checkmark16 from '@carbon/icons/lib/checkmark/16';
 
 /**
  * Menu Item.
@@ -25,7 +26,6 @@ import { MenuContext } from './menu-context';
  */
 @customElement(`${prefix}-menu-item`)
 class CDSmenuItem extends LitElement {
-  @provide({ context: MenuContext })
   @consume({ context: MenuContext })
   context;
   // @provide({ context: MenuContext })
@@ -55,7 +55,7 @@ class CDSmenuItem extends LitElement {
   @property({ type: String })
   shortcut;
   /**
-   * ICON type to be rendered for the menu item.
+   * Sets the menu item's icon.
    */
   @property()
   renderIcon?: () => void;
@@ -124,13 +124,28 @@ class CDSmenuItem extends LitElement {
   @property()
   onKeyDown?: (e: KeyboardEvent) => void;
 
+  @property({ attribute: 'aria-checked' })
+
   /**
    * Provide an optional function to be called when the MenuItem is clicked.
    */
   @property()
   onClick?: (event: KeyboardEvent | MouseEvent) => void;
 
+  checkForIcon() {
+    if (this.renderIcon) {
+      //this.context.updateFromChild?.({ hasIcons: true },this);
+      // if(!this.context.hasIcons)
+      this.parentElement?.shadowRoot
+        ?.querySelector(`.${prefix}--menu`)
+        ?.classList.add(`${prefix}--menu--with-icons`);
+    } else {
+      // this.hasIcon=false;
+    }
+  }
+
   firstUpdated() {
+    this.checkForIcon();
     this.hasChildren = this.childNodes.length > 0;
     this.isDisabled = this.disabled && !this.hasChildren;
     this.direction = document.dir;
@@ -141,6 +156,7 @@ class CDSmenuItem extends LitElement {
     }, 100);
     this._registerSubMenuItems();
   }
+
   render() {
     const {
       label,
@@ -163,9 +179,11 @@ class CDSmenuItem extends LitElement {
       [`${prefix}--menu-item`]: true,
       [`${prefix}--menu-item--disabled`]: isDisabled,
       [`${prefix}--menu-item--danger`]: isDanger,
+      // [`${prefix}--menu-item--with-icon`]:!this.hasIcon
     });
     return html`
       <li
+        part="menuitem"
         role="menuitem"
         tabindex="0"
         class="${menuItemClasses}"
@@ -176,8 +194,14 @@ class CDSmenuItem extends LitElement {
         @mouseenter="${hasChildren ? handleMouseEnter : undefined}"
         @mouseleave="${hasChildren ? handleMouseLeave : undefined}"
         @keydown="${handleKeyDown}">
+        <div className="${prefix}--menu-item__selection-icon">
+          ${this.getAttribute('aria-checked') === 'true'
+            ? Checkmark16()
+            : undefined}
+        </div>
+
         <div class="${prefix}--menu-item__icon">
-          ${renderIcon ? renderIcon() : html``}
+          ${renderIcon ? html`${renderIcon()}` : html``}
         </div>
         <div class="${prefix}--menu-item__label">${label}</div>
         ${shortcut &&

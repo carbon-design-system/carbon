@@ -14,14 +14,15 @@ import styles from './menu.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { classMap } from 'lit/directives/class-map.js';
-import { consume, provide } from '@lit/context';
 import { MenuContext, menuDefaultState } from './menu-context';
 import CDSmenuItem from './menu-item';
+import { provide } from '@lit/context';
 
 /**
  * Menu.
  *
  * @element cds-menu
+ * @deprecated Menus now always support both icons as well as selectable items and nesting.
  */
 type activeItemType = {
   item: CDSmenuItem;
@@ -30,8 +31,15 @@ type activeItemType = {
 @customElement(`${prefix}-menu`)
 class CDSMenu extends HostListenerMixin(LitElement) {
   @provide({ context: MenuContext })
-  @consume({ context: MenuContext, subscribe: true })
-  context = menuDefaultState;
+  context = {
+    ...menuDefaultState,
+    updateFromChild: (updatedItem) => {
+      this.context = {
+        ...this.context,
+        ...updatedItem,
+      };
+    },
+  };
 
   readonly spacing: number = 8; // distance to keep to window edges, in px
   /**
@@ -119,10 +127,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   @property()
   size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
   /**
-   * Mode attribute .
+   * Deprecated: Menus now always support both icons as well as selectable items and nesting. The mode of this menu. Defaults to full. full supports nesting and selectable menu items, but no icons. basic supports icons but no nesting or selectable menu items.
+
+    This prop is not intended for use and will be set by the respective implementation (like useContextMenu, MenuButton, and ComboButton).
    */
   @property()
-  mode: 'full' | 'basic' = 'full';
+  mode;
   /**
    * Size of the Menu .
    */
@@ -147,8 +157,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   /**
    * Provide an optional function to be called when the Menu should be closed.
    */
-  @property()
-  onClose?: () => void;
+
+  @property({ type: Function }) onClose?: () => void;
+  /**
+   * Provide an optional function to be called when the Menu should be opened.
+   */
+  @property({ type: Function }) onOpen?: () => void;
 
   updated(changedProperties) {
     if (changedProperties.has('open') && this.open) {
@@ -158,11 +172,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   firstUpdated() {
     this.isRtl = this.direction === 'rtl';
     this.isRoot = this.context.isRoot;
-    if (this.context.mode === 'basic' && !this.isRoot) {
-      throw new Error(
-        'Nested menus are not supported when the menu is in "basic" mode.'
-      );
-    }
+
     this.menuSize = this.isRoot ? this.size : this.context.size;
     if (this.isChild) {
       this._newContextCreate();
@@ -196,6 +206,8 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       [`${prefix}--menu--open`]: open,
       [`${prefix}--menu--shown`]: position[0] >= 0 && position[1] >= 0,
       [`${prefix}--menu--with-icons`]: this.context.hasIcons,
+      [`${prefix}--menu--with-selectable-items`]:
+        this.context.hasSelectableItems,
     });
     return html`
       <ul
@@ -414,17 +426,16 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     }
     this.style.insetBlockStart = `${pos[1]}px`;
     this.position = pos;
+
+    this.onOpen?.();
   };
   _handleClose = () => {
-    if (this.onClose) {
-      this.onClose();
-    }
+    this.onClose?.();
   };
   _newContextCreate = () => {
     this.context = {
       ...this.context,
       isRoot: false,
-      mode: this.mode,
       size: this.size,
       requestCloseRoot: this.isRoot
         ? this._handleClose

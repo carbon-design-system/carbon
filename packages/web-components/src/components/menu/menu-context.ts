@@ -10,8 +10,8 @@
 import { createContext } from '@lit/context';
 export type StateType = {
   isRoot: boolean;
-  mode: 'full' | 'basic';
   hasIcons: boolean;
+  hasSelectableItems: boolean;
   size: 'xs' | 'sm' | 'md' | 'lg' | null;
   items: any[];
   requestCloseRoot: (e: KeyboardEvent) => void;
@@ -19,8 +19,8 @@ export type StateType = {
 
 export const menuDefaultState: StateType = {
   isRoot: true,
-  mode: 'full',
   hasIcons: true,
+  hasSelectableItems: false,
   size: null,
   items: [],
   requestCloseRoot: () => {},
