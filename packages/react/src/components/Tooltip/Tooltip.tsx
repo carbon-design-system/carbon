@@ -244,7 +244,6 @@ const Tooltip: TooltipComponent = React.forwardRef(
       }
     }, [isPointerIntersecting, leaveDelayMs, setOpen]);
 
-
     useNoInteractiveChildren(
       tooltipRef,
       'The Tooltip component must have no interactive content rendered by the' +
