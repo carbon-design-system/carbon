@@ -1,0 +1,39 @@
+import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
+import * as ErrorBoundaryStories from './ErrorBoundary.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# Error Boundary
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/ErrorBoundary)
+
+## Table of Contents
+
+- [Error Boundary](#error-boundary)
+  - [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas
+  of={ErrorBoundaryStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ErrorBoundaryStories.Default),
+    },
+  ]}
+/>
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/ErrorBoundary/ErrorBoundary.mdx).
+

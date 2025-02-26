@@ -75,7 +75,7 @@ describe('Table', () => {
     });
   });
 
-  describe('with overfow menu', () => {
+  describe('with overflow menu', () => {
     it('should set the visible overflow menu class with `overflowMenuOnHover`', () => {
       const { rerender } = render(<Table />);
       expect(screen.getByRole('table')).not.toHaveClass(

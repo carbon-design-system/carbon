@@ -13,7 +13,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16.js';
 import ErrorFilled16 from '@carbon/icons/lib/error--filled/16.js';
 import { prefix } from '../../globals/settings';
-import LOADING_TYPE from '../loading/types';
 import getLoadingIcon from '../loading/loading-icon';
 import { INLINE_LOADING_STATE } from './defs';
 import styles from './inline-loading.scss?lit';
@@ -60,7 +59,7 @@ class CDSInlineLoading extends LitElement {
       });
       return html`
         <div class="${classes}">
-          ${getLoadingIcon({ assistiveText, type: LOADING_TYPE.SMALL })}
+          ${getLoadingIcon({ description: assistiveText, small: true })}
         </div>
       `;
     }
