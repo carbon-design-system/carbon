@@ -64,12 +64,6 @@ $divider-width: 1px;
 }
 
 :host(#{$prefix}-select[inline][warn]) {
-  .#{$prefix}--form__helper-text,
-  .#{$prefix}--label {
-    align-self: flex-start;
-    margin-block-start: 0.8125rem;
-  }
-
   .#{$prefix}--select__invalid-icon--warning {
     inset-inline-end: $spacing-08;
   }

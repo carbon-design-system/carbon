@@ -200,14 +200,6 @@
     align-items: center;
   }
 
-  .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--label,
-  .#{$prefix}--select--inline.#{$prefix}--select--invalid
-    .#{$prefix}--form__helper-text {
-    align-self: flex-start;
-    // Offset label text margin
-    margin-block-start: convert.to-rem(13px);
-  }
-
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
     margin-block-end: 0;
     margin-inline-start: $spacing-03;
