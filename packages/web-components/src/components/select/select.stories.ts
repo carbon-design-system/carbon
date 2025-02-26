@@ -69,13 +69,23 @@ const args = {
   inline: false,
   invalid: false,
   invalidText: 'Error message',
-  labelText: 'Select',
+  labelText: 'Select an option',
   placeholder: '',
   size: INPUT_SIZE.MEDIUM,
   readOnly: false,
   warn: false,
   warnText: 'Warning message',
   value: '',
+  children: html`
+    <cds-select-item value=""></cds-select-item>
+    <cds-select-item value="all"
+      >An example option that is really long to show what should be done to
+      handle long text</cds-select-item
+    >
+    <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+    <cds-select-item value="staging">Option 3</cds-select-item>
+    <cds-select-item value="dea">Option 4</cds-select-item>
+  `,
 };
 
 const argTypes = {
@@ -141,6 +151,8 @@ const argTypes = {
   },
 };
 
+// const optionsEl = ;
+
 export const Default = {
   args,
   argTypes,
@@ -160,16 +172,7 @@ export const Default = {
       warn,
       warnText,
       value,
-      children = html`
-        <cds-select-item value=""></cds-select-item>
-        <cds-select-item value="all"
-          >An example option that is really long to show what should be done to
-          handle long text</cds-select-item
-        >
-        <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
-        <cds-select-item value="staging">Option 3</cds-select-item>
-        <cds-select-item value="dea">Option 4</cds-select-item>
-      `,
+      children,
       onInput,
     } = args ?? {};
     return html`
@@ -218,13 +221,7 @@ export const Inline = {
       readOnly,
       warn,
       value,
-      children = html`
-        <cds-select-item value=""></cds-select-item>
-        <cds-select-item value="all">Option 1</cds-select-item>
-        <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
-        <cds-select-item value="staging">Option 3</cds-select-item>
-        <cds-select-item value="dea">Option 4</cds-select-item>
-      `,
+      children,
       onInput,
     } = args ?? {};
     return html`
@@ -284,19 +281,7 @@ export const WithAILabel = {
       warn,
       warnText,
       value,
-      children = html`
-        <style>
-          ${styles}
-        </style>
-        <cds-select-item value=""></cds-select-item>
-        <cds-select-item value="all"
-          >An example option that is really long to show what should be done to
-          handle long text</cds-select-item
-        >
-        <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
-        <cds-select-item value="staging">Option 3</cds-select-item>
-        <cds-select-item value="dea">Option 4</cds-select-item>
-      `,
+      children,
       onInput,
     } = args ?? {};
 
@@ -350,14 +335,7 @@ export const WithLayer = {
       warn,
       warnText,
       value,
-      children = html`
-        <cds-select-item value=""></cds-select-item>
-        <cds-select-item value="all"
-          >An example option that is really long to show what should be done to
-          handle long text</cds-select-item
-        >
-        <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
-      `,
+      children,
       onInput,
     } = args ?? {};
 
