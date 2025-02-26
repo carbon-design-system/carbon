@@ -6360,7 +6360,6 @@ Map {
         "type": "func",
       },
       "open": Object {
-        "isRequired": true,
         "type": "bool",
       },
     },

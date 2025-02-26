@@ -152,7 +152,7 @@ export interface PopoverBaseProps {
   /**
    * Specify whether the component is currently open or closed
    */
-  open: boolean;
+  open?: boolean;
 }
 
 export type PopoverProps<E extends React.ElementType> =
@@ -610,7 +610,7 @@ Popover.propTypes = {
   /**
    * Specify whether the component is currently open or closed
    */
-  open: PropTypes.bool.isRequired,
+  open: PropTypes.bool,
 };
 
 export type PopoverContentProps = React.HTMLAttributes<HTMLSpanElement>;
