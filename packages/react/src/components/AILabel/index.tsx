@@ -127,7 +127,7 @@ const propMappingFunction = (deprecatedValue) => {
   return mapPopoverAlignProp(deprecatedValue);
 };
 
-interface AILabelProps {
+export interface AILabelProps {
   AILabelContent?: React.ReactNode;
   aiText?: string;
   aiTextLabel?: string;
@@ -214,7 +214,7 @@ export const AILabel = React.forwardRef<HTMLDivElement, AILabelProps>(
             {...rest}>
             <ToggletipButton
               className={aiLabelButtonClasses}
-              label={ariaLabelText}>
+              label={kind === 'inline' ? '' : ariaLabelText}>
               <span className={`${prefix}--ai-label__text`}>{aiText}</span>
               {kind === 'inline' && (aiTextLabel || textLabel) && (
                 <span className={`${prefix}--ai-label__additional-text`}>

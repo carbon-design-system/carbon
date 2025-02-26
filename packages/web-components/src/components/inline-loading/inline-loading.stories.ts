@@ -35,11 +35,6 @@ const getControls = ({ disableControl }) => {
       control: disableControl || 'text',
       description: 'Specify the description for the inline loading text.',
     },
-    assistiveText: {
-      control: disableControl || 'text',
-      description:
-        'The `assistiveText` property will be deprecated in the next major release. Please use `iconDescription` instead.',
-    },
     iconDescription: {
       control: disableControl || 'text',
       description:

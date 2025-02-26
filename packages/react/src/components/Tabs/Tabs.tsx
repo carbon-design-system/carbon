@@ -854,7 +854,7 @@ export interface TabListVerticalProps extends DivAttributes {
    * Provide an accessible label to be read when a user interacts with this
    * component
    */
-  'aria-label': string;
+  'aria-label'?: string;
 
   /**
    * Provide child elements to be rendered inside `ContentTabs`.
@@ -1068,7 +1068,7 @@ TabListVertical.propTypes = {
    * Provide an accessible label to be read when a user interacts with this
    * component
    */
-  'aria-label': PropTypes.string.isRequired,
+  'aria-label': PropTypes.string,
 
   /**
    * Provide child elements to be rendered inside `ContentTabs`.
@@ -1183,7 +1183,7 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
 
   /**
    * An optional label to render under the primary tab label.
-   * Only useful for conained tabs.
+   * Only useful for contained tabs.
    */
   secondaryLabel?: string;
 }
@@ -1346,7 +1346,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
 
   const hasIcon = Icon ?? dismissable;
 
-  // should only happen for vertical variation, so no dissimisamble icon is needed here
+  // should only happen for vertical variation, so no dismissable icon is needed here
   if (isEllipsisApplied) {
     return (
       <Tooltip
@@ -1495,7 +1495,7 @@ Tab.propTypes = {
 
   /*
    * An optional label to render under the primary tab label.
-  /* This prop is only useful for conained tabs
+  /* This prop is only useful for contained tabs
    **/
   secondaryLabel: PropTypes.string,
 };

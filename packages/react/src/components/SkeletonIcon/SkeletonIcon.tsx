@@ -9,7 +9,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface SkeletonIconProps {
+export interface SkeletonIconProps {
   /**
    * Specify an optional className to add.
    */

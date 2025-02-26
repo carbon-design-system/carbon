@@ -18,10 +18,10 @@ import { usePrefix } from '../../internal/usePrefix';
 import {
   useFloating,
   flip,
+  hide,
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
 import mergeRefs from '../../tools/mergeRefs';
 import { MenuAlignment } from '../MenuButton';
@@ -35,7 +35,7 @@ const defaultTranslations = {
 /**
  * Message ids that will be passed to translateWithId().
  */
-type TranslationKey = keyof typeof defaultTranslations;
+export type TranslationKey = keyof typeof defaultTranslations;
 
 const propMappingFunction = (deprecatedValue) => {
   const mapping = {

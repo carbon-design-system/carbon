@@ -156,7 +156,7 @@ describe('Search', () => {
 
       // will have 1 button which is the close button
       expect(screen.getAllByRole('button').length).toBe(1);
-      // search icon not tabbable if not exandable
+      // search icon not tabbable if not expandable
       expect(screen.getByRole('searchbox')).not.toHaveAttribute(
         'tabIndex',
         '-1'

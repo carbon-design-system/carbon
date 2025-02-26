@@ -214,7 +214,7 @@ export interface OverflowMenuProps {
   innerRef?: React.Ref<any>;
 }
 
-interface OverflowMenuState {
+export interface OverflowMenuState {
   open: boolean;
   prevOpen?: boolean;
   hasMountedTrigger: boolean;

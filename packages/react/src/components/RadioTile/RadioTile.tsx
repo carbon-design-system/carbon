@@ -85,7 +85,7 @@ export interface RadioTileProps {
 
   /**
    * @deprecated please use `decorator` instead.
-   * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioTile` component
    */
   slug?: React.ReactNode;
 
