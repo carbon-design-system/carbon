@@ -3,7 +3,6 @@
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
- *
  */
 'use strict';
 
@@ -24,69 +23,19 @@ function transform(fileInfo, api, options) {
   const root = j(fileInfo.source);
   const printOptions = options.printOptions || defaultOptions;
 
-  // Find all row generator functions regardless of name
-  transformRowGeneratorFunctions(j, root);
+  // Track function names used inside StructuredListWrapper
+  const functionsUsedInWrappers = new Set();
 
-  // Process all wrappers with selection prop
-  transformSelectionWrappers(j, root);
+  // First pass: Find all wrappers and identify functions used within them
+  findFunctionsUsedInWrappers(j, root, functionsUsedInWrappers);
+
+  // Second pass: Process identified functions and wrappers
+  transformSelectionWrappers(j, root, functionsUsedInWrappers);
 
   return root.toSource(printOptions);
 }
 
-function transformRowGeneratorFunctions(j, root) {
-  // Process regular function declarations
-  processNodesThatGenerateRows(j, root, root.find(j.FunctionDeclaration));
-
-  // Process arrow functions in variable declarations
-  root
-    .find(j.VariableDeclarator)
-    .filter((decl) => {
-      // Check if it's an arrow function
-      return (
-        decl.node.init && decl.node.init.type === 'ArrowFunctionExpression'
-      );
-    })
-    .forEach((func) => {
-      processNodeIfGeneratesRows(j, func);
-    });
-}
-
-function processNodesThatGenerateRows(j, root, collection) {
-  collection.forEach((func) => {
-    processNodeIfGeneratesRows(j, func);
-  });
-}
-
-function processNodeIfGeneratesRows(j, func) {
-  // Check if function contains a map that generates StructuredListRow
-  const containsRowMap =
-    j(func)
-      .find(j.CallExpression, {
-        callee: { property: { name: 'map' } },
-      })
-      .filter((mapCall) => {
-        return (
-          j(mapCall)
-            .find(j.JSXElement, {
-              openingElement: { name: { name: STRUCTURED_LIST_ROW } },
-            })
-            .size() > 0
-        );
-      })
-      .size() > 0;
-
-  if (containsRowMap) {
-    // Find and transform all rows in map callbacks inside this function
-    j(func)
-      .find(j.JSXElement, {
-        openingElement: { name: { name: STRUCTURED_LIST_ROW } },
-      })
-      .forEach((row) => transformRow(j, row));
-  }
-}
-
-function transformSelectionWrappers(j, root) {
-  // Find all wrappers with selection prop
+function findFunctionsUsedInWrappers(j, root, functionsUsedInWrappers) {
   root
     .find(j.JSXElement, {
       openingElement: {
@@ -99,62 +48,86 @@ function transformSelectionWrappers(j, root) {
       },
     })
     .forEach((wrapper) => {
-      // Find and transform direct rows in wrapper
-      j(wrapper)
-        .find(j.JSXElement, {
-          openingElement: { name: { name: STRUCTURED_LIST_ROW } },
-        })
-        .forEach((row) => transformRow(j, row));
-
-      // Find all function calls that might be generators
+      // Find all function calls within this wrapper
       j(wrapper)
         .find(j.JSXExpressionContainer)
         .find(j.CallExpression)
         .forEach((call) => {
-          // If it's a direct call to a function (not a method like map)
+          // If it's a direct call to a function
           if (call.node.callee.type === 'Identifier') {
             const funcName = call.node.callee.name;
-
-            // Find any function declaration with this name
-            root
-              .find(j.FunctionDeclaration)
-              .filter((func) => func.node.id && func.node.id.name === funcName)
-              .forEach((func) => {
-                // Transform all rows inside that function
-                j(func)
-                  .find(j.JSXElement, {
-                    openingElement: { name: { name: STRUCTURED_LIST_ROW } },
-                  })
-                  .forEach((row) => transformRow(j, row));
-              });
-
-            // Also check for variable declarations (for arrow functions)
-            root
-              .find(j.VariableDeclarator, { id: { name: funcName } })
-              .forEach((func) => {
-                // Transform all rows inside that function
-                j(func)
-                  .find(j.JSXElement, {
-                    openingElement: { name: { name: STRUCTURED_LIST_ROW } },
-                  })
-                  .forEach((row) => transformRow(j, row));
-              });
+            functionsUsedInWrappers.add(funcName);
           }
         });
     });
 }
 
-function transformRow(j, row) {
-  // Add selection prop to all rows (except those with head prop)
-  const hasHeadProp = row.node.openingElement.attributes.some(
-    (attr) => attr.type === 'JSXAttribute' && attr.name.name === ATTR_HEAD
-  );
+function transformSelectionWrappers(j, root, functionsUsedInWrappers) {
+  transformIdentifiedFunctions(j, root, functionsUsedInWrappers);
 
+  // Then transform the wrappers themselves
+  root
+    .find(j.JSXElement, {
+      openingElement: {
+        name: { name: STRUCTURED_LIST_WRAPPER },
+        attributes: (attrs) =>
+          attrs.some(
+            (attr) =>
+              attr.type === 'JSXAttribute' && attr.name.name === ATTR_SELECTION
+          ),
+      },
+    })
+    .forEach((wrapper) => {
+      // Transform direct rows in wrapper
+      j(wrapper)
+        .find(j.JSXElement, {
+          openingElement: { name: { name: STRUCTURED_LIST_ROW } },
+        })
+        .forEach((row) => transformRow(j, row));
+    });
+}
+
+function transformIdentifiedFunctions(j, root, functionsUsedInWrappers) {
+  if (functionsUsedInWrappers.size === 0) return;
+
+  // Process regular function declarations
+  root
+    .find(j.FunctionDeclaration)
+    .filter(
+      (func) => func.node.id && functionsUsedInWrappers.has(func.node.id.name)
+    )
+    .forEach((func) => processNodeIfGeneratesRows(j, func));
+
+  // Process arrow functions in variable declarations
+  root
+    .find(j.VariableDeclarator)
+    .filter((decl) => {
+      // Must be named function in our set and be an arrow function
+      return (
+        decl.node.id &&
+        functionsUsedInWrappers.has(decl.node.id.name) &&
+        decl.node.init &&
+        decl.node.init.type === 'ArrowFunctionExpression'
+      );
+    })
+    .forEach((func) => processNodeIfGeneratesRows(j, func));
+}
+
+function processNodeIfGeneratesRows(j, func) {
+  // Find all StructuredListRow elements inside this function
+  j(func)
+    .find(j.JSXElement, {
+      openingElement: { name: { name: STRUCTURED_LIST_ROW } },
+    })
+    .forEach((row) => transformRow(j, row));
+}
+
+function transformRow(j, row) {
+  // Add selection prop to all rows if missing
   const hasSelectionProp = row.node.openingElement.attributes.some(
     (attr) => attr.type === 'JSXAttribute' && attr.name.name === ATTR_SELECTION
   );
 
-  // Add selection prop if it's missing
   if (!hasSelectionProp) {
     row.node.openingElement.attributes.push(
       j.jsxAttribute(j.jsxIdentifier(ATTR_SELECTION))
@@ -162,6 +135,10 @@ function transformRow(j, row) {
   }
 
   // Only remove CheckmarkFilled cells from non-head rows
+  const hasHeadProp = row.node.openingElement.attributes.some(
+    (attr) => attr.type === 'JSXAttribute' && attr.name.name === ATTR_HEAD
+  );
+
   if (!hasHeadProp) {
     // Filter out cells with CheckmarkFilled
     row.node.children = row.node.children.filter((child) => {
