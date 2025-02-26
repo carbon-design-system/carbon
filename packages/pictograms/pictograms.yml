@@ -217,8 +217,8 @@
     - warning
     - alert
     - sound
-- name: albatros
-  friendly_name: Albatros
+- name: albatross
+  friendly_name: Albatross
   aliases:
     - quantum
     - processor
@@ -227,7 +227,7 @@
     - family
     - backend
     - system
-    - albatros
+    - albatross
 - name: alchemy--data--news
   friendly_name: Alchemy data news
   aliases:
@@ -4351,7 +4351,7 @@
   aliases:
     - z/os package manager
     - IBM
-- name: ibm--z-and-cloud-moderninzation-stack-provisioning
+- name: ibm--z-and-cloud-modernization-stack-provisioning
   friendly_name: IBM Z® and Cloud Modernization Stack Provisioning
   aliases:
     - z
