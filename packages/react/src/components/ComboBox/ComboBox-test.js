@@ -330,7 +330,7 @@ describe('ComboBox', () => {
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
     });
 
-    it('should not revert to initialSelectedItem after clearing selection in uncontrolled mode', async () => {
+    it('should not revert to `initialSelectedItem` after clearing selection in uncontrolled mode', async () => {
       // Render a non-fully controlled `ComboBox` using `initialSelectedItem`.
       render(
         <ComboBox {...mockProps} initialSelectedItem={mockProps.items[0]} />
@@ -348,7 +348,7 @@ describe('ComboBox', () => {
       expect(findInputNode()).toHaveDisplayValue('');
     });
 
-    it('should ignore updates to initialSelectedItem after initial render in uncontrolled mode', async () => {
+    it('should ignore updates to `initialSelectedItem` after initial render in uncontrolled mode', async () => {
       // Render a non-fully controlled `ComboBox` using `initialSelectedItem`.
       const { rerender } = render(
         <ComboBox {...mockProps} initialSelectedItem={mockProps.items[0]} />
