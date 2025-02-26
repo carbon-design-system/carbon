@@ -59,9 +59,7 @@ describe('Breadcrumb', () => {
   it('should respect size prop', () => {
     render(<Breadcrumb size="sm" />);
 
-    expect(screen.getByRole('list')).toHaveClass(
-      `${prefix}--breadcrumb--sm`
-    );
+    expect(screen.getByRole('list')).toHaveClass(`${prefix}--breadcrumb--sm`);
   });
 
   it('should accept a `className` for outermost DOM node', () => {
