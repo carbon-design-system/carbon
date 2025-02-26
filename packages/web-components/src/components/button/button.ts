@@ -335,8 +335,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               <slot @slotchange="${handleSlotChange}"></slot>
               <slot name="icon" @slotchange="${handleSlotChange}"></slot>
             </a>
-            ${!disabled &&
-            html`<slot id="badge-indicator" name="badge-indicator"></slot>`}
+            ${html`<slot id="badge-indicator" name="badge-indicator"></slot>` ??
+            !disabled}
           `;
     }
 
@@ -379,8 +379,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               </span>
               <span class="${prefix}--popover-caret"></span>
             </span>
-            ${!disabled &&
-            html`<slot id="badge-indicator" name="badge-indicator"></slot>`}
+            ${html`<slot id="badge-indicator" name="badge-indicator"></slot>` ??
+            !disabled}
           </span>
         `
       : html`
@@ -400,8 +400,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             <slot @slotchange="${handleSlotChange}"></slot>
             <slot name="icon" @slotchange="${handleSlotChange}"></slot>
           </button>
-          ${!disabled &&
-          html`<slot id="badge-indicator" name="badge-indicator"></slot>`}
+          ${html`<slot id="badge-indicator" name="badge-indicator"></slot>` ??
+          !disabled}
         `;
   }
 

@@ -48,7 +48,6 @@ const args = {
   kind: BUTTON_KIND.PRIMARY,
   label: 'Custom label',
   size: ICON_BUTTON_SIZE.MEDIUM,
-  badgeCount: 4,
 };
 
 const argTypes = {
@@ -56,11 +55,6 @@ const argTypes = {
     control: 'select',
     description: 'Specify how the trigger should align with the tooltip.',
     options: tooltipAlignments,
-  },
-  badgeCount: {
-    control: 'number',
-    description:
-      'The count prop for "cds-badge-indicator" when slotted into the button',
   },
   closeOnActivation: {
     control: 'boolean',
@@ -153,8 +147,18 @@ export const Playground = {
 };
 
 export const withBadgeIndicator = {
-  args,
-  argTypes,
+  argTypes: {
+    badgeCount: {
+      control: 'number',
+      description:
+        'The count prop for "cds-badge-indicator" when slotted into the button',
+    },
+    ...argTypes,
+  },
+  args: {
+    badgeCount: 4,
+    ...args,
+  },
   render: ({ badgeCount, disabled }) => {
     return html`
       <cds-icon-button

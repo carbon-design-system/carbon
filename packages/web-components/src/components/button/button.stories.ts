@@ -66,18 +66,12 @@ const defaultArgs = {
   kind: BUTTON_KIND.PRIMARY,
   tooltipAlignment: BUTTON_TOOLTIP_ALIGNMENT.CENTER,
   tooltipPosition: BUTTON_TOOLTIP_POSITION.TOP,
-  badgeCount: 4,
 };
 
 const controls = {
   buttonClassName: {
     control: 'text',
     description: 'Specify an optional className to be added to your Button',
-  },
-  badgeCount: {
-    control: 'number',
-    description:
-      'The count prop for "cds-badge-indicator" when slotted into the button',
   },
   dangerDescription: {
     control: 'text',
@@ -309,10 +303,23 @@ export const IconButton = {
 };
 
 export const iconButtonWithBadge = {
-  argTypes: controls,
-  args: defaultArgs,
-  render: ({ badgeCount }) =>
-    html` <cds-button kind="ghost" tooltip-text="Icon Description">
+  argTypes: {
+    badgeCount: {
+      control: 'number',
+      description:
+        'The count prop for "cds-badge-indicator" when slotted into the button',
+    },
+    ...controls,
+  },
+  args: {
+    badgeCount: 4,
+    ...defaultArgs,
+  },
+  render: ({ badgeCount, disabled }) =>
+    html` <cds-button
+      kind="ghost"
+      ?disabled="${disabled}"
+      tooltip-text="Icon Description">
       ${Add16({ slot: 'icon' })}
       ${badgeCount > 0
         ? html` <cds-badge-indicator count=${badgeCount}></cds-badge-indicator>`
