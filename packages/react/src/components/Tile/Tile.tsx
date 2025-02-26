@@ -46,7 +46,7 @@ export interface TileProps extends HTMLAttributes<HTMLDivElement> {
 
   /**
    * **Experimental**: Specify if the `Tile` component should be rendered with rounded corners. Only valid
-   * when `slug` prop is present
+   * when an AILabel is present
    */
   hasRoundedCorners?: boolean;
 
@@ -112,7 +112,7 @@ Tile.propTypes = {
 
   /**
    * **Experimental**: Specify if the `Tile` component should be rendered with rounded corners. Only valid
-   * when `slug` prop is present
+   * when an AILabel is present
    */
   hasRoundedCorners: PropTypes.bool,
 

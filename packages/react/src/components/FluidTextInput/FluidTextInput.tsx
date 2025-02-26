@@ -50,6 +50,16 @@ export interface FluidTextInputProps {
   isPassword?: boolean;
 
   /**
+   * Max character count allowed for the textInput. This is needed in order for enableCounter to display
+   */
+  maxCount?: number;
+
+  /**
+   * Specify whether to display the character counter
+   */
+  enableCounter?: boolean;
+
+  /**
    * Provide the text that will be read by a screen reader when visiting this
    * control
    */
@@ -146,6 +156,16 @@ FluidTextInput.propTypes = {
    * Specify whether the control is a password input
    */
   isPassword: PropTypes.bool,
+
+  /**
+   * Max character count allowed for the textInput. This is needed in order for enableCounter to display
+   */
+  maxCount: PropTypes.number,
+
+  /**
+   * Specify whether to display the character counter
+   */
+  enableCounter: PropTypes.bool,
 
   /**
    * Provide the text that will be read by a screen reader when visiting this

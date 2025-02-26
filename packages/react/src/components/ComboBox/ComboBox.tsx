@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -46,8 +46,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { useFloating, flip, autoUpdate } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
+import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
 
@@ -101,30 +100,33 @@ const autocompleteCustomFilter = ({
 
 const getInputValue = <ItemType,>({
   initialSelectedItem,
-  inputValue,
   itemToString,
   selectedItem,
   prevSelectedItem,
 }: {
   initialSelectedItem?: ItemType | null;
-  inputValue: string;
   itemToString: ItemToStringHandler<ItemType>;
   selectedItem?: ItemType | null;
   prevSelectedItem?: ItemType | null;
 }) => {
-  if (selectedItem) {
+  // If there's a current selection (even if it's an object or string), use it.
+  if (selectedItem !== null && typeof selectedItem !== 'undefined') {
     return itemToString(selectedItem);
   }
 
-  if (initialSelectedItem) {
+  // On the very first render (when no previous value exists), use
+  // `initialSelectedItem`.
+  if (
+    typeof prevSelectedItem === 'undefined' &&
+    initialSelectedItem !== null &&
+    typeof initialSelectedItem !== 'undefined'
+  ) {
     return itemToString(initialSelectedItem);
   }
 
-  if (!selectedItem && prevSelectedItem) {
-    return '';
-  }
-
-  return inputValue || '';
+  // Otherwise (i.e., after the user has cleared the selection), return an empty
+  // string.
+  return '';
 };
 
 const findHighlightedIndex = <ItemType,>(
@@ -367,7 +369,7 @@ export interface ComboBoxProps<ItemType>
   titleText?: ReactNode;
 
   /**
-   * **Experimental**: will enable autcomplete and typeahead for the input field
+   * **Experimental**: will enable autocomplete and typeahead for the input field
    */
   typeahead?: boolean;
 
@@ -464,7 +466,6 @@ const ComboBox = forwardRef(
     const [inputValue, setInputValue] = useState(
       getInputValue({
         initialSelectedItem,
-        inputValue: '',
         itemToString,
         selectedItem: selectedItemProp,
       })
@@ -513,7 +514,6 @@ const ComboBox = forwardRef(
       if (prevSelectedItemProp.current !== selectedItemProp) {
         const currentInputValue = getInputValue({
           initialSelectedItem,
-          inputValue,
           itemToString,
           selectedItem: selectedItemProp,
           prevSelectedItem: prevSelectedItemProp.current,
@@ -612,6 +612,17 @@ const ComboBox = forwardRef(
           }
 
           case InputKeyDownEnter:
+            if (
+              highlightedIndex === -1 &&
+              !allowCustomValue &&
+              state.selectedItem
+            ) {
+              return {
+                ...changes,
+                selectedItem: null,
+                inputValue: state.inputValue,
+              };
+            }
             if (allowCustomValue) {
               setInputValue(inputValue);
               setHighlightedIndex(changes.selectedItem);
@@ -626,6 +637,17 @@ const ComboBox = forwardRef(
             }
           case FunctionToggleMenu:
           case ToggleButtonClick:
+            if (
+              !changes.isOpen &&
+              state.inputValue &&
+              highlightedIndex === -1 &&
+              !allowCustomValue
+            ) {
+              return {
+                ...changes,
+                inputValue: '', // Clear the input
+              };
+            }
             if (changes.isOpen && !changes.selectedItem) {
               return { ...changes };
             }
@@ -783,8 +805,9 @@ const ComboBox = forwardRef(
           onChange({ selectedItem: newSelectedItem });
         }
         if (
-          type === useCombobox.stateChangeTypes.FunctionSelectItem ||
-          type === useCombobox.stateChangeTypes.InputKeyDownEnter
+          (type === useCombobox.stateChangeTypes.FunctionSelectItem ||
+            type === useCombobox.stateChangeTypes.InputKeyDownEnter) &&
+          !isEqual(selectedItemProp, newSelectedItem) // Only fire if there's an actual change
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
@@ -843,6 +866,9 @@ const ComboBox = forwardRef(
 
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
       setIsFocused(evt.type === 'focus');
+      if (!inputRef.current?.value && evt.type === 'blur') {
+        selectItem(null);
+      }
     };
 
     const readOnlyEventHandlers = readOnly
@@ -1012,6 +1038,17 @@ const ComboBox = forwardRef(
                     if (isOpen) {
                       toggleMenu();
                     }
+                  }
+                  if (
+                    !inputValue &&
+                    highlightedIndex == -1 &&
+                    event.key == 'Enter'
+                  ) {
+                    if (!isOpen) toggleMenu();
+                    selectItem(null);
+                    event.preventDownshiftDefault = true;
+                    if (event.currentTarget.ariaExpanded === 'false')
+                      openMenu();
                   }
                   if (typeahead && event.key === 'Tab') {
                     //  event.preventDefault();
@@ -1335,7 +1372,7 @@ ComboBox.propTypes = {
   translateWithId: PropTypes.func,
 
   /**
-   * **Experimental**: will enable autcomplete and typeahead for the input field
+   * **Experimental**: will enable autocomplete and typeahead for the input field
    */
   typeahead: PropTypes.bool,
 
