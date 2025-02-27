@@ -16,7 +16,18 @@ $css--plex: true !default;
 
 :host(#{$prefix}-menu) {
   position: fixed;
+  --grid-template: 1rem 1fr max-content;
+  --display-icon-item: none;
+  --display-selection-icon: none;
 }
+.#{$prefix}--menu--with-icons {
+  --grid-template: 1rem 1rem 1fr max-content;
+  --display-icon-item: flex;
+}
+.#{$prefix}--menu--with-selectable-items {
+  --display-selection-icon: flex;
+}
+
 .#{$prefix}--menu {
   @include component-reset;
   @include box-shadow;

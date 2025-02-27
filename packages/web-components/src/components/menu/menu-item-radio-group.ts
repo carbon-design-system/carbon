@@ -23,7 +23,6 @@ import { MenuContext } from './menu-context';
  */
 @customElement(`${prefix}-menu-item-radio-group`)
 class CDSmenuItemRadioGroup extends LitElement {
-  // @provide({ context: MenuContext })
   @consume({ context: MenuContext })
   context;
 
@@ -56,7 +55,7 @@ class CDSmenuItemRadioGroup extends LitElement {
   onChange?: ChangeEventHandler;
 
   firstUpdated(): void {
-    this.context.updateFromChild?.({ hasSelectableItems: true });
+    this.context.updateFromChild({ hasSelectableItems: true });
   }
 
   _handleClick = (item, e) => {

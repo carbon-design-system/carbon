@@ -16,7 +16,7 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import { classMap } from 'lit/directives/class-map.js';
 import { MenuContext, menuDefaultState } from './menu-context';
 import CDSmenuItem from './menu-item';
-import { provide } from '@lit/context';
+import { consume, provide } from '@lit/context';
 
 /**
  * Menu.
@@ -31,6 +31,7 @@ type activeItemType = {
 @customElement(`${prefix}-menu`)
 class CDSMenu extends HostListenerMixin(LitElement) {
   @provide({ context: MenuContext })
+  @consume({ context: MenuContext })
   context = {
     ...menuDefaultState,
     updateFromChild: (updatedItem) => {
@@ -77,7 +78,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   /**
    * class for the menu.
    */
-  @property({ type: String })
+  @property({ type: String, attribute: true })
   className = '';
   /**
    * Parent state.
@@ -165,6 +166,14 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       this._handleOpen();
     }
   }
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('icon-detect', () => {
+      this.shadowRoot
+        ?.querySelector('.cds--menu')
+        ?.classList.add(`${prefix}--menu--with-icons`);
+    });
+  }
   firstUpdated() {
     this.isRtl = this.direction === 'rtl';
     this.isRoot = this.context.isRoot;
@@ -200,7 +209,6 @@ class CDSMenu extends HostListenerMixin(LitElement) {
         menuAlignment && menuAlignment.slice(0, 3) === 'top',
       [`${prefix}--menu--open`]: open,
       [`${prefix}--menu--shown`]: position[0] >= 0 && position[1] >= 0,
-      [`${prefix}--menu--with-icons`]: this.context.hasIcons,
       [`${prefix}--menu--with-selectable-items`]:
         this.context.hasSelectableItems,
     });

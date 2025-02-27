@@ -93,8 +93,12 @@ export const Default = {
     const itemlist = ['None', 'Overline', 'Line-through', 'Underline'];
     const subitemlist = ['None', 'Product team', 'Organization', 'Company'];
     return html`
-      <cds-menu ?open=${open} size=${size}>
+      <cds-menu ?open=${open} size=${size} menuAlignment="bottom">
         <cds-menu-item label="Share with" .renderIcon=${FolderShared16}>
+          <cds-menu-item
+            label="Copy"
+            shortcut="⌘C"
+            .renderIcon=${Copy16}></cds-menu-item>
           <cds-menu-item-radio-group
             label="Share with list"
             .items="${subitemlist}"
@@ -114,21 +118,26 @@ export const Default = {
           shortcut="⌘V"
           disabled
           .renderIcon=${Paste16}></cds-menu-item>
+        <cds-menu-item-selectable
+          label="Italic"
+          shortcut="⌘I"
+          .renderIcon=${TextItalic16}></cds-menu-item-selectable>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-group>
           <cds-menu-item-selectable
             label="Bold"
+            shortcut="⌘B"
             .renderIcon=${TextBold16}></cds-menu-item-selectable>
           <cds-menu-item-selectable
             label="Italic"
+            shortcut="⌘I"
             .renderIcon=${TextItalic16}></cds-menu-item-selectable>
         </cds-menu-item-group>
+        <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-radio-group
           label="samples"
           .items="${itemlist}"
           selectedItem="None"></cds-menu-item-radio-group>
-        <cds-menu-item-divider></cds-menu-item-divider>
-
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item
           label="Delete"

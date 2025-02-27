@@ -75,19 +75,7 @@ $supported-sizes: (
   display: var(--child-icon-property, none);
 }
 
-.#{$prefix}--menu--with-icons > .#{$prefix}--menu-item,
-.#{$prefix}--menu--with-icons
-  > .#{$prefix}--menu-item-group
-  > ul
-  > .#{$prefix}--menu-item,
-.#{$prefix}--menu--with-icons
-  > .#{$prefix}--menu-item-radio-group
-  > ul
-  > .#{$prefix}--menu-item {
-  grid-template-columns: 1rem 1fr max-content;
-}
-
-.#{$prefix}--menu-item--disabled {
+.#{$prefix}--menu-item--disabled * {
   color: $text-disabled;
   cursor: not-allowed;
 }
@@ -119,60 +107,12 @@ $supported-sizes: (
 .#{$prefix}--menu-item__selection-icon {
   display: none;
 }
-
-:host-context(.#{$prefix}--menu--with-icons) > {
-  .#{$prefix}--menu-item,
-  .#{$prefix}--menu--with-icons
-    > .#{$prefix}--menu-item-group
-    > ul
-    > .#{$prefix}--menu-item,
-  > .#{$prefix}--menu-item-radio-group > ul > .#{$prefix}--menu-item {
-    grid-template-columns: 1rem 1fr max-content;
+.#{$prefix}--menu-item {
+  grid-template-columns: var(--grid-template);
+  .#{$prefix}--menu-item__icon {
+    display: var(--display-icon-item);
   }
-}
-
-:host-context(.#{$prefix}--menu--with-selectable-items) {
-  .#{$prefix}--menu-item,
-  .#{$prefix}--menu-item-group > ul > .#{$prefix}--menu-item,
-  .#{$prefix}--menu-item-radio-group > ul > .#{$prefix}--menu-item {
-    grid-template-columns: 1rem 1fr max-content;
-  }
-}
-
-:host-context(.#{$prefix}--menu--with-icons) {
-  > .#{$prefix}--menu-item > .#{$prefix}--menu-item__icon,
-  > .#{$prefix}--menu-item-group
-    > ul
-    > .#{$prefix}--menu-item
-    > .#{$prefix}--menu-item__icon,
-  > .#{$prefix}--menu-item-radio-group
-    > ul
-    > .#{$prefix}--menu-item
-    > .#{$prefix}--menu-item__icon {
-    display: flex;
-  }
-}
-
-:host-context(.#{$prefix}--menu--with-selectable-items) {
-  > .#{$prefix}--menu-item > .#{$prefix}--menu-item__selection-icon,
-  > .#{$prefix}--menu-item-group
-    > ul
-    > .#{$prefix}--menu-item
-    > .#{$prefix}--menu-item__selection-icon,
-  > .#{$prefix}--menu-item-radio-group
-    > ul
-    > .#{$prefix}--menu-item
-    > .#{$prefix}--menu-item__selection-icon {
-    display: flex;
-  }
-}
-
-:host-context(
-    .#{$prefix}--menu--with-icons.#{$prefix}--menu--with-selectable-items
-  ) {
-  > .#{$prefix}--menu-item,
-  > .#{$prefix}--menu-item-group > ul > .#{$prefix}--menu-item,
-  > .#{$prefix}--menu-item-radio-group > ul > .#{$prefix}--menu-item {
-    grid-template-columns: 1rem 1rem 1fr max-content;
+  .#{$prefix}--menu-item__selection-icon {
+    display: var(--display-selection-icon);
   }
 }

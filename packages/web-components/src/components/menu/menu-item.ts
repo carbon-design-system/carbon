@@ -28,9 +28,6 @@ import Checkmark16 from '@carbon/icons/lib/checkmark/16';
 class CDSmenuItem extends LitElement {
   @consume({ context: MenuContext })
   context;
-  // @provide({ context: MenuContext })
-  // @consume({ context: MenuContext, subscribe: true })
-  // contextChild;
 
   readonly hoverIntentDelay = 150; // in ms
   hoverIntentTimeout;
@@ -132,20 +129,20 @@ class CDSmenuItem extends LitElement {
   @property()
   onClick?: (event: KeyboardEvent | MouseEvent) => void;
 
-  checkForIcon() {
+  async dispatchIconDetect() {
     if (this.renderIcon) {
-      //this.context.updateFromChild?.({ hasIcons: true },this);
-      // if(!this.context.hasIcons)
-      this.parentElement?.shadowRoot
-        ?.querySelector(`.${prefix}--menu`)
-        ?.classList.add(`${prefix}--menu--with-icons`);
-    } else {
-      // this.hasIcon=false;
+      await undefined; // this is used to replace setTimeout with 0 time out, which is much fater.
+      this.dispatchEvent(
+        new CustomEvent('icon-detect', {
+          bubbles: true, // Allows event to bubble up the DOM
+          composed: true, // Allows event to cross shadow DOM boundary
+        })
+      );
     }
   }
 
   firstUpdated() {
-    this.checkForIcon();
+    this.dispatchIconDetect();
     this.hasChildren = this.childNodes.length > 0;
     this.isDisabled = this.disabled && !this.hasChildren;
     this.direction = document.dir;
@@ -153,7 +150,7 @@ class CDSmenuItem extends LitElement {
     this.isDanger = this.kind === 'danger';
     setTimeout(() => {
       this.childElements = Object.values(this.children);
-    }, 100);
+    });
     this._registerSubMenuItems();
   }
 
@@ -181,6 +178,10 @@ class CDSmenuItem extends LitElement {
       [`${prefix}--menu-item--danger`]: isDanger,
       // [`${prefix}--menu-item--with-icon`]:!this.hasIcon
     });
+    const menuClassName = this.context.hasSelectableItems
+      ? `${prefix}--menu--with-selectable-items`
+      : '';
+
     return html`
       <li
         part="menuitem"
@@ -194,7 +195,7 @@ class CDSmenuItem extends LitElement {
         @mouseenter="${hasChildren ? handleMouseEnter : undefined}"
         @mouseleave="${hasChildren ? handleMouseLeave : undefined}"
         @keydown="${handleKeyDown}">
-        <div className="${prefix}--menu-item__selection-icon">
+        <div class="${prefix}--menu-item__selection-icon">
           ${this.getAttribute('aria-checked') === 'true'
             ? Checkmark16()
             : undefined}
@@ -204,15 +205,18 @@ class CDSmenuItem extends LitElement {
           ${renderIcon ? html`${renderIcon()}` : html``}
         </div>
         <div class="${prefix}--menu-item__label">${label}</div>
-        ${shortcut &&
-        !hasChildren &&
-        html` <div class="${prefix}--menu-item__shortcut">${shortcut}</div> `}
+        ${shortcut && !hasChildren
+          ? html`
+              <div class="${prefix}--menu-item__shortcut">${shortcut}</div>
+            `
+          : html``}
         ${hasChildren
           ? html`
               <div class="${prefix}--menu-item__shortcut">
                 ${isRtl ? CaretLeft16() : CaretRight16()}
               </div>
               <cds-menu
+                className=${menuClassName}
                 .isChild="${hasChildren}"
                 label="${label}"
                 .open="${submenuOpen}"

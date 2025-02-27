@@ -45,14 +45,18 @@ class CDSmenuItemSelectable extends LitElement {
   @property()
   renderIcon?: () => void;
 
+  @property()
+  shortcut;
+
   _handleClick = (e) => {
     this.selected = !this.selected;
     if (this.onChange) {
       this.onChange(e);
     }
   };
+
   firstUpdated(): void {
-    this.context.updateFromChild?.({ hasSelectableItems: true });
+    this.context.updateFromChild({ hasSelectableItems: true });
   }
   render() {
     const { label, selected, _handleClick: handleClick } = this;
@@ -62,6 +66,7 @@ class CDSmenuItemSelectable extends LitElement {
         label="${label}"
         class="${prefix}--menu-item-selectable--selected"
         role="menuitemcheckbox"
+        shortcut=${this.shortcut}
         aria-checked="${selected}"
         .renderIcon=${this.renderIcon || undefined}
         .onClick="${handleClick}"></cds-menu-item>
