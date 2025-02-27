@@ -199,7 +199,7 @@ movement, it can be moved from "experimental" status to be "stable".
       - [ ] Snapshot every storybook story
       - [ ] Snapshot important discrete states (open, selected, enabled,
             autoAlign etc.) by setting controls/args on a story
-    - [ ] Accessibility Verifiction Tests (AVT) are present in
+    - [ ] Accessibility Verification Tests (AVT) are present in
           `e2e/components/ComponentName/ComponentName-test.avt.e2e.js` that:
       - [ ] Ensure every story `.toBeAccessible()`
       - [ ] Ensure important discrete states (open, selected, etc.) are covered
