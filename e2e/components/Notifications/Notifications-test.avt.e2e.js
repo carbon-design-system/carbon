@@ -257,4 +257,15 @@ test.describe('@avt Notifications', () => {
     });
     await expect(page).toHaveNoACViolations('Notifications toast');
   });
+
+  test('@avt-advanced-states callout', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Notifications',
+      id: 'components-notifications-callout--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Notifications callout');
+  });
 });

@@ -11,7 +11,7 @@ import {
   InlineNotification,
   ToastNotification,
   ActionableNotification,
-  unstable__Callout as Callout,
+  Callout,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 
