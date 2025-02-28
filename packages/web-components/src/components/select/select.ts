@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property, query, queryAll } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
@@ -56,6 +56,18 @@ class CDSSelect extends FormMixin(LitElement) {
    */
   @query('select')
   private _selectNode!: HTMLSelectElement;
+
+  /**
+   * Input node of `select` element
+   */
+  @query('#input')
+  private _inputNode!: HTMLInputElement;
+
+  /**
+   * Select all <option> nodes with `selected` attribute
+   */
+  @queryAll(`.${prefix}--select-option[selected]`)
+  private _selectedOptionNodes!: HTMLOptionElement[];
 
   /**
    * Handles `oninput` event on the `<input>`.
@@ -346,12 +358,28 @@ class CDSSelect extends FormMixin(LitElement) {
       const { value, _placeholderItemValue: placeholderItemValue } = this;
       // Ensures setting the `value` after rendering child `<option>`s/`<optgroup>`s when there is a change in `value`,
       // given reflecting `value` requires child `<option>`s/`<optgroup>`s being there beforehand
-      this._selectNode.value = !value ? placeholderItemValue : value;
+
+      const lastOption =
+        this._selectedOptionNodes?.[this._selectedOptionNodes?.length - 1]?.[
+          'value'
+        ];
+
+      if (value) {
+        this._selectNode.value = value;
+      } else if (lastOption) {
+        this._selectNode.value = lastOption;
+      } else {
+        this._selectNode.value = placeholderItemValue;
+      }
     }
 
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
 
     if (label) {
+      if ((label as HTMLSlotElement).assignedNodes()?.length) {
+        this._inputNode?.classList.add(`${prefix}--select-input-has--ai-label`);
+      }
+
       label?.classList.toggle(
         `${prefix}--slug--revert`,
         this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
@@ -443,15 +471,17 @@ class CDSSelect extends FormMixin(LitElement) {
                 disabled
                 hidden
                 class="${prefix}--select-option"
-                value="${placeholderItemValue}"
-                selected>
+                value="${placeholderItemValue}">
                 ${placeholder}
               </option>
             `}
         ${this._renderItems(this)}
       </select>
       ${ChevronDown16({ class: `${prefix}--select__arrow` })}
-      <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>
+      <slot
+        name="ai-label"
+        style="--${prefix}-show-before: ${warn || invalid ? 'block' : 'none'}"
+        @slotchange=${handleAILabelSlotChange}></slot>
       <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
       ${!invalid
         ? undefined
@@ -471,20 +501,17 @@ class CDSSelect extends FormMixin(LitElement) {
             </label>`
           : null}
         ${inline
-          ? html`<div class="${prefix}--select-input--inline__wrapper">
-              <div
-                class="${prefix}--select-input__wrapper"
-                ?data-invalid="${invalid}">
-                ${input}
-              </div>
-              ${errorText}
+          ? html`<div
+              class="${prefix}--select-input--inline__wrapper"
+              ?data-invalid="${invalid}">
+              <div class="${prefix}--select-input__wrapper">${input}</div>
             </div>`
           : html`<div
               class="${prefix}--select-input__wrapper"
               ?data-invalid="${invalid}">
               ${input}
             </div> `}
-        ${!inline && errorText ? errorText : supplementalText}
+        ${errorText ? errorText : supplementalText}
       </div>
     `;
   }
