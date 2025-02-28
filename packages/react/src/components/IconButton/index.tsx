@@ -152,9 +152,9 @@ export interface IconButtonProps
   rel?: React.AnchorHTMLAttributes<HTMLAnchorElement>['rel'];
 
   /**
-   * Specify the size of the Button. Defaults to `md`.
+   * Specify the size of the Button.
    */
-  size?: ButtonSize;
+  size?: Extract<ButtonSize, 'sm' | 'md' | 'lg'>;
 
   /**
    * Optionally specify a `target` when using an `<a>` element.
@@ -356,7 +356,7 @@ IconButton.propTypes = {
   rel: PropTypes.string,
 
   /**
-   * Specify the size of the Button. Defaults to `md`.
+   * Specify the size of the Button.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
