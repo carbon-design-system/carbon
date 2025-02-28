@@ -212,7 +212,7 @@ export const Danger = {
         tooltip-alignment="${tooltipAlignment}"
         tooltip-position="${tooltipPosition}"
         type="${type}">
-        Tertiary Danger Button
+        Danger tertiary button
       </cds-button>
       <cds-button
         button-class-name="${buttonClassName}"
@@ -227,7 +227,7 @@ export const Danger = {
         tooltip-alignment="${tooltipAlignment}"
         tooltip-position="${tooltipPosition}"
         type="${type}">
-        Ghost Danger Button
+        Danger ghost button
       </cds-button>`,
 };
 
