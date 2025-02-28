@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -34,7 +34,7 @@ export interface TableToolbarMenuProps
   menuOptionsClass?: string;
 
   /**
-   * Optional prop to allow overriding the default menu icon
+   * A component used to render an icon.
    */
   renderIcon?: any;
 }
@@ -90,7 +90,7 @@ TableToolbarMenu.propTypes = {
   menuOptionsClass: PropTypes.string,
 
   /**
-   * Optional prop to allow overriding the default menu icon
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
