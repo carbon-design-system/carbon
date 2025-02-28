@@ -55,6 +55,17 @@ test.describe('@avt Button', () => {
     await expect(page).toHaveNoACViolations('Button-icon-button');
   });
 
+  test('@avt-advanced-states icon-button with badge', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Button',
+      id: 'components-button--icon-button-with-badge',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Button-icon-button-with-badge');
+  });
+
   test('@avt-advanced-states secondary', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',

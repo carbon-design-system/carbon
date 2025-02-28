@@ -409,6 +409,13 @@
     box-shadow: none;
   }
 
+  // badge indicator
+
+  .#{$prefix}--btn--sm .#{$prefix}--badge-indicator {
+    margin-block-start: $spacing-02;
+    margin-inline-end: $spacing-02;
+  }
+
   // Windows HCM fix
   .#{$prefix}--btn:focus {
     @include high-contrast-mode('focus');
