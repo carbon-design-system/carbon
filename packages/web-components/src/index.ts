@@ -116,6 +116,7 @@ export { default as CDSSelect } from './components/select/select';
 export { default as CDSSelectItem } from './components/select/select-item';
 export { default as CDSSelectItemGroup } from './components/select/select-item-group';
 export { default as CDSSelectSkeleton } from './components/select/select-skeleton';
+export { default as CDSShapeIndicator } from './components/shape-indicator/shape-indicator';
 export { default as CDSSkeletonIcon } from './components/skeleton-icon/skeleton-icon';
 export { default as CDSSkeletonPlaceholder } from './components/skeleton-placeholder/skeleton-placeholder';
 export { default as CDSSkeletonText } from './components/skeleton-text/skeleton-text';
