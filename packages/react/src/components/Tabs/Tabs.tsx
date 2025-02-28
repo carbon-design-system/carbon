@@ -15,7 +15,9 @@ import React, {
   useState,
   useRef,
   useEffect,
+  useMemo,
   forwardRef,
+  createContext,
   type ReactNode,
   type MouseEvent,
   type KeyboardEvent,
@@ -43,6 +45,7 @@ import { Close } from '@carbon/icons-react';
 import { useEvent } from '../../internal/useEvent';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
+import BadgeIndicator from '../BadgeIndicator';
 
 const verticalTabHeight = 64;
 
@@ -1211,6 +1214,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
     onTabCloseRequest,
   } = React.useContext(TabsContext);
   const { index, hasSecondaryLabel, contained } = React.useContext(TabContext);
+  const { badgeIndicator } = React.useContext(IconTabContext) || {};
   const dismissIconRef = useRef<HTMLButtonElement>(null);
   const tabRef = useRef<HTMLElement>(null);
   const ref = useMergedRefs([forwardRef, tabRef]);
@@ -1441,6 +1445,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
             {secondaryLabel}
           </Text>
         )}
+        {!disabled && badgeIndicator && <BadgeIndicator />}
       </BaseComponent>
       {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
       {DismissIcon}
@@ -1504,7 +1509,15 @@ Tab.propTypes = {
  * IconTab
  */
 
+const IconTabContext = createContext<{ badgeIndicator?: boolean } | false>(
+  false
+);
+
 export interface IconTabProps extends DivAttributes {
+  /**
+   * **Experimental**: Display an empty dot badge on the Tab.
+   */
+  badgeIndicator?: boolean;
   /**
    * Provide an icon to be rendered inside `IconTab` as the visual label for Tab.
    */
@@ -1529,7 +1542,8 @@ export interface IconTabProps extends DivAttributes {
    * Provide the label to be rendered inside the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
    * This means that if you have text in the child node it will not be
-   * announced to the screen reader.
+   * announced to the screen reader. If using the badgeIndicator then provide a
+   * label with describing that there is a new notification.
    */
   label: ReactNode;
 
@@ -1541,6 +1555,7 @@ export interface IconTabProps extends DivAttributes {
 
 const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(function IconTab(
   {
+    badgeIndicator,
     children,
     className: customClassName,
     defaultOpen = false,
@@ -1552,27 +1567,38 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(function IconTab(
   ref
 ) {
   const prefix = usePrefix();
+  const value = useMemo(() => ({ badgeIndicator }), [badgeIndicator]);
+
+  const hasSize20 =
+    React.isValidElement(children) && children.props?.size === 20;
 
   const classNames = cx(
     `${prefix}--tabs__nav-item--icon-only`,
-    customClassName
+    customClassName,
+    { [`${prefix}--tabs__nav-item--icon-only__20`]: hasSize20 }
   );
   return (
-    <Tooltip
-      align="bottom"
-      defaultOpen={defaultOpen}
-      className={`${prefix}--icon-tooltip`}
-      enterDelayMs={enterDelayMs}
-      label={label}
-      leaveDelayMs={leaveDelayMs}>
-      <Tab className={classNames} ref={ref} {...rest}>
-        {children}
-      </Tab>
-    </Tooltip>
+    <IconTabContext.Provider value={value}>
+      <Tooltip
+        align="bottom"
+        defaultOpen={defaultOpen}
+        className={`${prefix}--icon-tooltip`}
+        enterDelayMs={enterDelayMs}
+        label={label}
+        leaveDelayMs={leaveDelayMs}>
+        <Tab className={classNames} ref={ref} {...rest}>
+          {children}
+        </Tab>
+      </Tooltip>
+    </IconTabContext.Provider>
   );
 });
 
 IconTab.propTypes = {
+  /**
+   * **Experimental**: Display an empty dot badge on the Tab.
+   */
+  badgeIndicator: PropTypes.bool,
   /**
    * Provide an icon to be rendered inside `IconTab` as the visual label for Tab.
    */
@@ -1597,7 +1623,8 @@ IconTab.propTypes = {
    * Provide the label to be rendered inside the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
    * This means that if you have text in the child node it will not be
-   * announced to the screen reader.
+   * announced to the screen reader. If using the badgeIndicator then provide a
+   * label with describing that there is a new notification.
    */
   label: PropTypes.node.isRequired,
 
