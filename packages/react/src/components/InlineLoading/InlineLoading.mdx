@@ -1,6 +1,7 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import InlineLoading from '../InlineLoading';
 import * as InlineLoadingStories from './InlineLoading.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -14,9 +15,32 @@ import * as InlineLoadingStories from './InlineLoading.stories';
 
 ## Table of Contents
 
+- [InlineLoading](#inlineloading)
+  - [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
 ## Overview
 
-<Canvas of={InlineLoadingStories.Default} />
+<Canvas
+  of={InlineLoadingStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(InlineLoadingStories.Default),
+    },
+  ]}
+/>
+
+<Canvas
+  of={InlineLoadingStories.UxExample}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(InlineLoadingStories.UxExample),
+    },
+  ]}
+/>
 
 ## Component API
 

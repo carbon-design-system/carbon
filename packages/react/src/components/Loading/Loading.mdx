@@ -1,6 +1,7 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import Loading from '../Loading';
 import * as LoadingStories from './Loading.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -14,9 +15,22 @@ import * as LoadingStories from './Loading.stories';
 
 ## Table of Contents
 
+- [Loading](#loading)
+  - [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
 ## Overview
 
-<Canvas of={LoadingStories.Default} />
+<Canvas
+  of={LoadingStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(LoadingStories.Default),
+    },
+  ]}
+/>
 
 ## Component API
 

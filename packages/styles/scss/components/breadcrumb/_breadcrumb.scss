@@ -30,11 +30,23 @@
     }
   }
 
+  .#{$prefix}--breadcrumb--sm {
+    @include type-style('label-01');
+  }
+
+  .#{$prefix}--breadcrumb .#{$prefix}--link {
+    font: inherit;
+  }
+
   .#{$prefix}--breadcrumb-item {
     position: relative;
     display: flex;
     align-items: center;
     margin-inline-end: $spacing-03;
+  }
+
+  .#{$prefix}--breadcrumb--sm .#{$prefix}--breadcrumb-item {
+    margin-inline-end: $spacing-02;
   }
 
   .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
@@ -49,6 +61,10 @@
     color: $text-primary;
     content: '/';
     margin-inline-start: $spacing-03;
+  }
+
+  .#{$prefix}--breadcrumb--sm .#{$prefix}--breadcrumb-item::after {
+    margin-inline-start: $spacing-02;
   }
 
   .#{$prefix}--breadcrumb--no-trailing-slash
@@ -107,6 +123,12 @@
     }
   }
 
+  .#{$prefix}--breadcrumb--sm
+    .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu {
+    inline-size: $spacing-05;
+  }
+
   .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu:hover::after {
     opacity: 1;
   }
@@ -117,7 +139,9 @@
     box-shadow: none;
   }
 
-  .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu__icon {
+  .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu
+    .#{$prefix}--overflow-menu__icon {
     position: relative;
     fill: $link-primary;
     transform: translateY(4px);

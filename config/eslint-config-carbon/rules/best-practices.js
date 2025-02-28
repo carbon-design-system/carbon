@@ -7,7 +7,7 @@
 
 'use strict';
 
-export default {
+module.exports = {
   rules: {
     // @see https://eslint.org/docs/rules/curly
     curly: 'error',

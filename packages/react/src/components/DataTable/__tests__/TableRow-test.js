@@ -7,7 +7,7 @@
 
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { Table, TableBody, TableRow } from '../';
+import { Table, TableBody, TableCell, TableRow } from '../';
 
 describe('TableRow', () => {
   it('should support a custom className on the outermost element', () => {
@@ -33,5 +33,25 @@ describe('TableRow', () => {
       'data-testid',
       'test'
     );
+  });
+
+  it('should forward refs to the rendered Tablerow element', () => {
+    let tr = null;
+    const ref = jest.fn((node) => {
+      tr = node;
+    });
+    const { container } = render(
+      <Table>
+        <TableBody>
+          <TableRow ref={ref} data-testid="tr" className="custom-class">
+            <TableCell />
+          </TableRow>
+        </TableBody>
+      </Table>
+    );
+    expect(ref).toHaveBeenCalled();
+    expect(tr).not.toBeNull();
+    expect(tr).toEqual(container.querySelector('tr'));
+    expect(tr).toHaveClass('custom-class');
   });
 });

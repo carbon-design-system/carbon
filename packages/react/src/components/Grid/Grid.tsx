@@ -22,7 +22,7 @@ function Grid<T extends React.ElementType>(props: GridProps<T>) {
 
 Grid.propTypes = {
   /**
-   * Specify grid aligment. Default is center
+   * Specify grid alignment. Default is center
    */
   align: PropTypes.oneOf(['start', 'center', 'end']),
 

@@ -80,13 +80,10 @@ describe('Tag', () => {
           type="red"
           title="Close tag"
           text="Tag content"
-          decorator={<AILabel />}
+          decorator={<AILabel aiText="AI" />}
         />
       );
-
-      expect(
-        screen.getByRole('button', { name: 'AI Show information' })
-      ).toBeInTheDocument();
+      expect(screen.getByText('AI')).toBeInTheDocument();
     });
 
     it('should respect deprecated slug prop', () => {
@@ -96,13 +93,10 @@ describe('Tag', () => {
           type="red"
           title="Close tag"
           text="Tag content"
-          slug={<AILabel />}
+          slug={<AILabel aiText="AI" />}
         />
       );
-
-      expect(
-        screen.getByRole('button', { name: 'AI Show information' })
-      ).toBeInTheDocument();
+      expect(screen.getByText('AI')).toBeInTheDocument();
       spy.mockRestore();
     });
   });
@@ -123,20 +117,14 @@ describe('Tag', () => {
   });
 
   it('should respect decorator prop', () => {
-    render(<Tag type="red" decorator={<AILabel />} />);
-
-    expect(
-      screen.getByRole('button', { name: 'AI Show information' })
-    ).toBeInTheDocument();
+    render(<Tag type="red" decorator={<AILabel aiText="AI" />} />);
+    expect(screen.getByText('AI')).toBeInTheDocument();
   });
 
   it('should respect deprecated slug prop', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    render(<Tag type="red" slug={<AILabel />} />);
-
-    expect(
-      screen.getByRole('button', { name: 'AI Show information' })
-    ).toBeInTheDocument();
+    render(<Tag type="red" slug={<AILabel aiText="AI" />} />);
+    expect(screen.getByText('AI')).toBeInTheDocument();
     spy.mockRestore();
   });
 

@@ -1,7 +1,9 @@
 import React, {
   ElementType,
+  ForwardedRef,
   forwardRef,
   HTMLAttributeAnchorTarget,
+  KeyboardEvent,
 } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -10,7 +12,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
-interface BaseSwitcherItemProps {
+export interface BaseSwitcherItemProps {
   /**
    * Specify the text content for the link
    */
@@ -64,17 +66,17 @@ interface BaseSwitcherItemProps {
   rel?: string;
 }
 
-interface SwitcherItemWithAriaLabel extends BaseSwitcherItemProps {
+export interface SwitcherItemWithAriaLabel extends BaseSwitcherItemProps {
   'aria-label': string;
   'aria-labelledby'?: never;
 }
 
-interface SwitcherItemWithAriaLabelledBy extends BaseSwitcherItemProps {
+export interface SwitcherItemWithAriaLabelledBy extends BaseSwitcherItemProps {
   'aria-label'?: never;
   'aria-labelledby': string;
 }
 
-type SwitcherItemProps =
+export type SwitcherItemProps =
   | SwitcherItemWithAriaLabel
   | SwitcherItemWithAriaLabelledBy;
 
@@ -131,14 +133,14 @@ const SwitcherItem = forwardRef<ElementType, SwitcherItemProps>(
     return (
       <li className={classNames}>
         <Link
-          onKeyDown={(evt) => {
+          onKeyDown={(evt: KeyboardEvent<HTMLAnchorElement>) => {
             setTabFocus(evt);
             onKeyDown(evt);
           }}
           href={href}
           target={target}
           rel={rel}
-          ref={forwardRef}
+          ref={forwardRef as ForwardedRef<HTMLAnchorElement | any>}
           {...rest}
           className={linkClassName}
           tabIndex={tabIndex}

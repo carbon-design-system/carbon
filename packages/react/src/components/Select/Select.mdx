@@ -1,8 +1,8 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
-
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
 import Select from './';
-
 import SelectItem from '../SelectItem';
+import * as SelectStories from './Select.stories'
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -18,10 +18,15 @@ import SelectItem from '../SelectItem';
 
 ## Table of Contents
 
-- [Default state](#default-state)
+- [Select](#select)
+  - [Default state](#default-state)
   - [Empty default option](#empty-default-option)
   - [First option default](#first-option-default)
   - [Custom option default](#custom-option-default)
+  - [Inline](#inline)
+  - [Skeleton](#skeleton)
+  - [AI Label](#ai-label)
+  - [Skeleton](#skeleton)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -34,6 +39,16 @@ Depending on the use case, this defaulted behavior can be modified to be a
 prefilled selection to the first option in the list, which is typically shown in
 alphabetical order, or the prefilled selection could be a frequent or commonly
 used option that is on the list.
+
+<Canvas
+  of={SelectStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SelectStories.Default),
+    },
+  ]}
+/>
 
 ### Empty default option
 
@@ -115,6 +130,42 @@ desired option.
   <SelectItem value="option-3" text="Option 3" />
 </Select>
 ```
+
+## Inline
+
+<Canvas
+  of={SelectStories.Inline}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SelectStories.Inline),
+    },
+  ]}
+/>
+
+## Skeleton
+
+<Canvas
+  of={SelectStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SelectStories.Skeleton),
+    },
+  ]}
+/>
+
+## AI Label
+
+<Canvas
+  of={SelectStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SelectStories.withAILabel),
+    },
+  ]}
+/>
 
 ## Component API
 

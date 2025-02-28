@@ -63,7 +63,7 @@ const sortDirections: { [key: string]: 'none' | 'ascending' | 'descending' } = {
   [sortStates.DESC]: 'descending',
 };
 
-interface TableHeaderProps
+export interface TableHeaderProps
   extends ReactAttr<HTMLTableCellElement & HTMLButtonElement>,
     TranslateWithId<
       TableHeaderTranslationKey,
