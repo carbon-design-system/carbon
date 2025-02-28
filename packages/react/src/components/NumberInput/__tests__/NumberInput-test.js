@@ -449,4 +449,28 @@ describe('NumberInput', () => {
       })
     );
   });
+
+  it('should increment and decrement decimal numbers without floating-point precision errors', async () => {
+    render(
+      <NumberInput
+        label="NumberInput label"
+        id="number-input"
+        min={0}
+        value={15.01}
+        step={1}
+        max={100}
+        translateWithId={translateWithId}
+      />
+    );
+
+    const input = screen.getByLabelText('NumberInput label');
+
+    expect(input).toHaveValue(15.01);
+
+    await userEvent.click(screen.getByLabelText('increment'));
+    expect(input).toHaveValue(16.01);
+
+    await userEvent.click(screen.getByLabelText('decrement'));
+    expect(input).toHaveValue(15.01);
+  });
 });
