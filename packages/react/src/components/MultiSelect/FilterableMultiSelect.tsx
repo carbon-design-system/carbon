@@ -680,7 +680,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     event?: KeyboardEvent<Element> | MouseEvent<HTMLButtonElement>
   ) {
     const value = textInput.current?.value;
-    if (value?.length === 1 || (event && match(event, keys.Escape))) {
+    if (
+      value?.length === 1 ||
+      (event && 'key' in event && match(event, keys.Escape))
+    ) {
       setInputValue('');
     } else {
       setInputValue(value ?? '');
