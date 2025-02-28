@@ -119,9 +119,21 @@ export const Skeleton = {
     html`<cds-tag-skeleton size="${size}">Tag content</cds-tag-skeleton>`,
 };
 
-export const Default = {
-  render: () =>
-    html`${types.map((e) => html`<cds-tag type="${e}">Tag content</cds-tag>`)}`,
+const ReadOnlyArgs = {
+  disabled: false,
+  size: TAG_SIZE.MEDIUM,
+};
+
+export const ReadOnly = {
+  argTypes: controls,
+  args: ReadOnlyArgs,
+  render: ({ size, disabled }) =>
+    html`${types.map(
+      (e) =>
+        html`<cds-tag type="${e}" size="${size}" ?disabled="${disabled}"
+          >Tag content</cds-tag
+        >`
+    )}`,
 };
 
 export const WithAILabel = {
