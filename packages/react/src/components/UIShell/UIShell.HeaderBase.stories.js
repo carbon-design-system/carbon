@@ -614,3 +614,25 @@ HeaderWActionsAndSwitcher.argTypes = {
     description: 'Optional prop to display the HeaderPanel.',
   },
 };
+
+export const Test = () => (
+  <Header aria-label="IBM Platform Name">
+    <HeaderGlobalBar>
+      <HeaderGlobalAction
+        aria-label="High contrast false and shadow"
+        tooltipAlignment="end"
+        tooltipHighContrast={false}
+        tooltipDropShadow>
+        <Search size={20} />
+      </HeaderGlobalAction>
+      <HeaderGlobalAction
+        aria-label="Notifications"
+        tooltipHighContrast={false}>
+        <Notification size={20} />
+      </HeaderGlobalAction>
+      <HeaderGlobalAction aria-label="App Switcher" tooltipAlignment="end">
+        <SwitcherIcon size={20} />
+      </HeaderGlobalAction>
+    </HeaderGlobalBar>
+  </Header>
+);
