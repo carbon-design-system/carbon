@@ -3,25 +3,18 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": [
-          "build"
-        ]
+        "cacheableOperations": ["build"]
       }
     }
   },
   "targetDefaults": {
     "clean": {
-      "dependsOn": [
-        "^clean"
-      ]
+      "dependsOn": ["^clean"]
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "{projectRoot}/packages/react/es, packages/react/lib"
-      ]
+      "dependsOn": ["^build"],
+      "cache": true,
+      "inputs": ["default"]
     }
   },
   "nxCloudId": "6757024dd78ff71eb4eebb5f"
