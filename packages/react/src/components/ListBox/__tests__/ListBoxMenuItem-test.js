@@ -28,4 +28,18 @@ describe('ListBoxMenuItem', () => {
     const { container } = render(<ListBox.MenuItem data-testid="test" />);
     expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
+
+  it('should forward `menuItemOptionRef` to the inner `div` element', () => {
+    let innerDivNode = null;
+    const menuItemOptionRefCallback = jest.fn((node) => {
+      innerDivNode = node;
+    });
+    const forwardedRef = { menuItemOptionRef: menuItemOptionRefCallback };
+    const { container } = render(<ListBox.MenuItem ref={forwardedRef} />);
+    const expectedDiv = container.querySelector(
+      '.cds--list-box__menu-item__option'
+    );
+
+    expect(innerDivNode).toBe(expectedDiv);
+  });
 });
