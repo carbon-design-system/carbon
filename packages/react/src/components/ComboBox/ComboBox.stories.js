@@ -361,6 +361,32 @@ export const withAILabel = (args) => {
 
 withAILabel.argTypes = { ...sharedArgTypes };
 
+export const _test = (args) => {
+  const [invalidText, setInvalidText] = useState('');
+
+  return (
+    <div style={{ width: 300 }}>
+      <ComboBox
+        helperText="Combobox helper text"
+        id="carbon-combobox"
+        itemToString={(item) => item?.text ?? ''}
+        invalid={!!invalidText}
+        invalidText={invalidText}
+        items={[
+          { id: 'option-1', text: 'Option 1' },
+          { id: 'option-2', text: 'Option 2' },
+          { id: 'option-3', text: 'Option 3' },
+        ]}
+        onChange={({ selectedItem }) => {
+          setInvalidText(selectedItem?.id === 'option-1' ? 'Invalid' : '');
+        }}
+        onToggleClick={() => {}}
+        titleText="ComboBox title"
+      />
+    </div>
+  );
+};
+
 export const _fullyControlled = (args) => {
   const options = [
     {
