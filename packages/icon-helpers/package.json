@@ -4,6 +4,7 @@
   "version": "10.55.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "module": "es/index.js",
   "repository": {
     "type": "git",
