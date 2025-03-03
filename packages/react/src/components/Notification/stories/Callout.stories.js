@@ -23,6 +23,13 @@ export default {
     lowContrast: false,
     statusIconDescription: 'notification',
   },
+  argTypes: {
+    children: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Default = (args) => (

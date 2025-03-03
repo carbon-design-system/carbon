@@ -424,8 +424,8 @@ describe('Callout', () => {
 
   it('allows interactive elements as children', () => {
     render(
-      <Callout title="Notification title">
-        <button>Sample text</button>
+      <Callout title="Notification title" titleId="interactive-test">
+        <button aria-describedby="interactive-test">Sample text</button>
       </Callout>
     );
     // eslint-disable-next-line testing-library/prefer-presence-queries
@@ -441,7 +441,7 @@ describe('Callout', () => {
     // eslint-disable-next-line testing-library/prefer-presence-queries
     expect(screen.queryByText(/A title/i)).toBeInTheDocument();
     expect(screen.queryByText(/A subtitle/i)).toBeInTheDocument();
-    expect(container.getElementById('aTitleID')).toBeInTheDocument();
+    expect(screen.queryByText(/A title/i)).toHaveAttribute('id', 'aTitleID');
   });
 
   it('enforces aria-describedby on interactive children elements', () => {
