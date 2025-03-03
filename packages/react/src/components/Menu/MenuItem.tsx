@@ -77,7 +77,7 @@ export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
   ) => void;
 
   /**
-   * Only applicable if the parent menu is in `basic` mode. Sets the menu item's icon.
+   * Sets the menu item's icon.
    */
   renderIcon?: FC;
 
@@ -216,17 +216,12 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       }
     }, [direction]);
 
-    const iconsAllowed =
-      context.state.mode === 'basic' ||
-      rest.role === 'menuitemcheckbox' ||
-      rest.role === 'menuitemradio';
-
     useEffect(() => {
-      if (iconsAllowed && IconElement && !context.state.hasIcons) {
+      if (IconElement && !context.state.hasIcons) {
         // @ts-ignore - TODO: Should we be passing payload?
         context.dispatch({ type: 'enableIcons' });
       }
-    }, [iconsAllowed, IconElement, context.state.hasIcons, context]);
+    }, [IconElement, context.state.hasIcons, context]);
 
     useEffect(() => {
       Object.keys(floatingStyles).forEach((style) => {
@@ -253,8 +248,11 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           {...getReferenceProps()}>
+          <div className={`${prefix}--menu-item__selection-icon`}>
+            {rest['aria-checked'] && <Checkmark />}
+          </div>
           <div className={`${prefix}--menu-item__icon`}>
-            {iconsAllowed && IconElement && <IconElement />}
+            {IconElement && <IconElement />}
           </div>
           <Text
             as="div"
@@ -322,7 +320,7 @@ MenuItem.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Only applicable if the parent menu is in `basic` mode. Sets the menu item's icon.
+   * Sets the menu item's icon.
    */
   // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
@@ -362,13 +360,6 @@ export const MenuItemSelectable = forwardRef<
   const prefix = usePrefix();
   const context = useContext(MenuContext);
 
-  if (context.state.mode === 'basic') {
-    warning(
-      false,
-      'MenuItemSelectable is not supported when the menu is in "basic" mode.'
-    );
-  }
-
   const [checked, setChecked] = useControllableState({
     value: selected,
     onChange,
@@ -380,11 +371,11 @@ export const MenuItemSelectable = forwardRef<
   }
 
   useEffect(() => {
-    if (!context.state.hasIcons) {
+    if (!context.state.hasSelectableItems) {
       // @ts-ignore - TODO: Should we be passing payload?
-      context.dispatch({ type: 'enableIcons' });
+      context.dispatch({ type: 'enableSelectableItems' });
     }
-  }, [context.state.hasIcons, context]);
+  }, [context.state.hasSelectableItems, context]);
 
   const classNames = cx(className, `${prefix}--menu-item-selectable--selected`);
 
@@ -396,7 +387,6 @@ export const MenuItemSelectable = forwardRef<
       className={classNames}
       role="menuitemcheckbox"
       aria-checked={checked}
-      renderIcon={checked ? Checkmark : undefined}
       onClick={handleClick}
     />
   );
@@ -538,13 +528,6 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
   const prefix = usePrefix();
   const context = useContext(MenuContext);
 
-  if (context.state.mode === 'basic') {
-    warning(
-      false,
-      'MenuItemRadioGroup is not supported when the menu is in "basic" mode.'
-    );
-  }
-
   const [selection, setSelection] = useControllableState({
     value: selectedItem,
     onChange,
@@ -556,11 +539,11 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
   }
 
   useEffect(() => {
-    if (!context.state.hasIcons) {
+    if (!context.state.hasSelectableItems) {
       // @ts-ignore - TODO: Should we be passing payload?
-      context.dispatch({ type: 'enableIcons' });
+      context.dispatch({ type: 'enableSelectableItems' });
     }
-  }, [context.state.hasIcons, context]);
+  }, [context.state.hasSelectableItems, context]);
 
   const classNames = cx(className, `${prefix}--menu-item-radio-group`);
 
@@ -573,7 +556,6 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
             label={itemToString(item)}
             role="menuitemradio"
             aria-checked={item === selection}
-            renderIcon={item === selection ? Checkmark : undefined}
             onClick={(e) => {
               handleClick(item, e);
             }}

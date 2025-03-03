@@ -23,7 +23,7 @@ import { createPortal } from 'react-dom';
 import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
-import { warning } from '../../internal/warning.js';
+import deprecate from '../../prop-types/deprecate';
 
 import { MenuContext, menuReducer } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
@@ -57,6 +57,7 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   menuAlignment?: string;
 
   /**
+   * @deprecated Menus now always support both icons as well as selectable items and nesting.
    * The mode of this menu. Defaults to full.
    * `full` supports nesting and selectable menu items, but no icons.
    * `basic` supports icons but no nesting or selectable menu items.
@@ -110,7 +111,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     containerRef,
     label,
     menuAlignment,
-    mode = 'full',
+    mode,
     onClose,
     onOpen,
     open,
@@ -132,19 +133,11 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
   const isRoot = context.state.isRoot;
 
-  if (context.state.mode === 'basic' && !isRoot) {
-    warning(
-      false,
-      'Nested menus are not supported when the menu is in "basic" mode.'
-    );
-  }
-
   const menuSize = isRoot ? size : context.state.size;
 
   const [childState, childDispatch] = useReducer(menuReducer, {
     ...context.state,
     isRoot: false,
-    mode,
     size,
     requestCloseRoot: isRoot ? handleClose : context.state.requestCloseRoot,
   });
@@ -424,6 +417,8 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       [`${prefix}--menu--shown`]:
         (open && !legacyAutoalign) || (position[0] >= 0 && position[1] >= 0),
       [`${prefix}--menu--with-icons`]: childContext.state.hasIcons,
+      [`${prefix}--menu--with-selectable-items`]:
+        childContext.state.hasSelectableItems,
       [`${prefix}--autoalign`]: !legacyAutoalign,
     }
   );
@@ -474,13 +469,17 @@ Menu.propTypes = {
   menuAlignment: PropTypes.string,
 
   /**
+   * **Deprecated**: Menus now always support both icons as well as selectable items and nesting.
    * The mode of this menu. Defaults to full.
    * `full` supports nesting and selectable menu items, but no icons.
    * `basic` supports icons but no nesting or selectable menu items.
    *
    * **This prop is not intended for use and will be set by the respective implementation (like useContextMenu, MenuButton, and ComboButton).**
    */
-  mode: PropTypes.oneOf(['full', 'basic']),
+  mode: deprecate(
+    PropTypes.oneOf(['full', 'basic']),
+    'Menus now always support both icons as well as selectable items and nesting.'
+  ),
 
   /**
    * Provide an optional function to be called when the Menu should be closed.
