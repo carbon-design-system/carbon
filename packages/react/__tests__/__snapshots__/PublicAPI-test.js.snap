@@ -11078,6 +11078,47 @@ Map {
     },
     "render": [Function],
   },
+  "unstable__ShapeIndicator" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "failed",
+            "critical",
+            "high",
+            "medium",
+            "low",
+            "cautious",
+            "undefined",
+            "stable",
+            "informative",
+            "incomplete",
+            "draft",
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOf",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "textSize": Object {
+        "args": Array [
+          Array [
+            12,
+            14,
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
+  },
   "unstable__Slug" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
