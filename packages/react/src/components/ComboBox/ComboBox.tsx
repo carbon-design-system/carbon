@@ -551,12 +551,6 @@ const ComboBox = forwardRef(
       savedOnInputChange.current = onInputChange;
     }, [onInputChange]);
 
-    useEffect(() => {
-      if (savedOnInputChange.current) {
-        savedOnInputChange.current(inputValue);
-      }
-    }, [inputValue]);
-
     const handleSelectionClear = () => {
       if (textInput?.current) {
         textInput.current.focus();
@@ -797,7 +791,7 @@ const ComboBox = forwardRef(
           }
         }
       },
-      onStateChange: ({ type, selectedItem: newSelectedItem }) => {
+      onStateChange: ({ type, selectedItem: newSelectedItem, inputValue }) => {
         if (
           type === useCombobox.stateChangeTypes.ItemClick &&
           !isEqual(selectedItemProp, newSelectedItem)
@@ -810,6 +804,12 @@ const ComboBox = forwardRef(
           !isEqual(selectedItemProp, newSelectedItem) // Only fire if there's an actual change
         ) {
           onChange({ selectedItem: newSelectedItem });
+        }
+        if (
+          type === useCombobox.stateChangeTypes.InputChange &&
+          savedOnInputChange.current
+        ) {
+          savedOnInputChange.current(inputValue || '');
         }
       },
       initialSelectedItem: initialSelectedItem,
