@@ -358,7 +358,7 @@ export const Icon20Only = () => {
         <IconTab label="Activity">
           <Activity size={20} aria-label="Activity" />
         </IconTab>
-        <IconTab label="Notification">
+        <IconTab label="New Notifications" badgeIndicator>
           <Notification size={20} aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
@@ -385,7 +385,7 @@ export const IconOnly = () => {
         <IconTab label="Activity">
           <Activity aria-label="Activity" />
         </IconTab>
-        <IconTab label="Notification">
+        <IconTab label="New Notifications" badgeIndicator>
           <Notification aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
