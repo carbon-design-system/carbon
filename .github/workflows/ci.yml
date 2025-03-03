@@ -297,7 +297,7 @@ jobs:
 
   merge-playwright-reports:
     # Merge reports after *-runner jobs, even if some shards have failed
-    if: ${{ !cancelled() }}
+    if: ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() }}
     needs: [vrt-runner, avt-runner]
 
     runs-on: ubuntu-latest
