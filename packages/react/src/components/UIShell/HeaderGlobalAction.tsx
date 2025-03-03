@@ -17,33 +17,50 @@ export interface HeaderGlobalActionProps {
    * Required props for the accessibility label of the button
    */
   'aria-label'?: string;
+
   /**
    * Required props for the accessibility label of the button
    */
   'aria-labelledby'?: string;
+
   /**
    * Provide a custom icon for this global action
    */
   children: ReactNode;
+
   /**
    * Optionally provide a custom class name that is applied to the underlying
    * button
    */
   className?: string;
+
   /**
    * Specify whether the action is currently active
    */
   isActive?: boolean;
+
   /**
    * Optionally provide an onClick handler that is called when the underlying
    * button fires it's onclick event
    */
   onClick?: () => void;
+
   /**
    * Specify the alignment of the tooltip to the icon-only button.
    * Can be one of: start, center, or end.
    */
   tooltipAlignment?: 'start' | 'center' | 'end';
+
+  /**
+   * Enable drop shadow for tooltips for icon-only buttons.
+   */
+  tooltipDropShadow?: boolean;
+
+  /**
+   * Render the tooltip using the high-contrast theme
+   * Default is true
+   */
+  tooltipHighContrast?: boolean;
 }
 
 /**
@@ -62,6 +79,8 @@ const HeaderGlobalAction: React.FC<HeaderGlobalActionProps> = React.forwardRef(
       children,
       className: customClassName,
       onClick,
+      tooltipHighContrast = true,
+      tooltipDropShadow,
       isActive,
       tooltipAlignment,
       ...rest
@@ -89,6 +108,8 @@ const HeaderGlobalAction: React.FC<HeaderGlobalActionProps> = React.forwardRef(
         iconDescription={ariaLabel}
         tooltipPosition="bottom"
         tooltipAlignment={tooltipAlignment}
+        tooltipDropShadow={tooltipDropShadow}
+        tooltipHighContrast={tooltipHighContrast}
         ref={ref}>
         {children}
       </Button>
@@ -129,6 +150,17 @@ HeaderGlobalAction.propTypes = {
    * Can be one of: start, center, or end.
    */
   tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Enable drop shadow for tooltips for icon-only buttons.
+   */
+  tooltipDropShadow: PropTypes.bool,
+
+  /**
+   * Render the tooltip using the high-contrast theme
+   * Default is true
+   */
+  tooltipHighContrast: PropTypes.bool,
 };
 
 HeaderGlobalAction.displayName = 'HeaderGlobalAction';
