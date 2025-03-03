@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, { useEffect, useRef, useState } from 'react';
+import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
@@ -17,7 +18,14 @@ import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
-import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import {
+  Toggletip,
+  ToggletipActions,
+  ToggletipButton,
+  ToggletipContent,
+  ToggletipLabel,
+} from '../Toggletip';
+import Link from '../Link';
 
 export default {
   title: 'Components/MultiSelect',
@@ -214,6 +222,33 @@ const sharedArgTypes = {
 };
 
 export const Default = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
   return (
     <div
       style={{
@@ -237,6 +272,33 @@ Default.args = { ...sharedArgs };
 Default.argTypes = { ...sharedArgTypes };
 
 export const WithInitialSelectedItems = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
   return (
     <div
       style={{
@@ -258,6 +320,33 @@ export const WithInitialSelectedItems = (args) => {
 };
 
 export const Filterable = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
   return (
     <div
       style={{
@@ -514,3 +603,40 @@ export const ExperimentalAutoAlign = (args) => {
 };
 
 ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
+
+export const withToggletipLabel = (args) => {
+  return (
+    <div>
+      <MultiSelect
+        label="Multiselect Label"
+        id="carbon-multiselect-example"
+        titleText={
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <ToggletipLabel>Multiselect title</ToggletipLabel>
+            <Toggletip>
+              <ToggletipButton label="Show information">
+                <Information />
+              </ToggletipButton>
+              <ToggletipContent>
+                <p>
+                  Lorem ipsum dolor sit amet, di os consectetur adipiscing elit,
+                  sed do eiusmod tempor incididunt ut fsil labore et dolore
+                  magna aliqua.
+                </p>
+                <ToggletipActions>
+                  <Link href="#">Link action</Link>
+                  <Button size="sm">Button</Button>
+                </ToggletipActions>
+              </ToggletipContent>
+            </Toggletip>
+          </div>
+        }
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+    </div>
+  );
+};

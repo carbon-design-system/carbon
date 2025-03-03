@@ -15,16 +15,6 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 
-const checkboxEvents = {
-  className: 'some-class',
-  labelText: 'Checkbox label',
-};
-
-const fieldsetCheckboxProps = () => ({
-  className: 'some-class',
-  legendText: 'Group label',
-});
-
 export default {
   title: 'Components/Checkbox',
   component: Checkbox,
@@ -146,7 +136,7 @@ const sharedArgTypes = {
 };
 
 export const Default = (args) => (
-  <CheckboxGroup {...fieldsetCheckboxProps()} {...args}>
+  <CheckboxGroup className="some-class" legendText="Group label" {...args}>
     <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
     <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
   </CheckboxGroup>
@@ -162,7 +152,8 @@ export const Horizontal = (args) => {
   return (
     <CheckboxGroup
       orientation="horizontal"
-      {...fieldsetCheckboxProps()}
+      className="some-class"
+      legendText="Group label"
       helperText="Helper text goes here"
       {...args}>
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
@@ -177,6 +168,10 @@ Horizontal.args = { ...sharedArgs };
 Horizontal.argTypes = { ...sharedArgTypes };
 
 export const Single = () => {
+  const checkboxEvents = {
+    className: 'some-class',
+    labelText: 'Checkbox label',
+  };
   return (
     <>
       <Checkbox
@@ -204,76 +199,83 @@ export const Single = () => {
   );
 };
 
-export const Skeleton = () => <CheckboxSkeleton />;
+export const Skeleton = () => {
+  return <CheckboxSkeleton />;
+};
 
-const AILabelFunc = (kind) => (
-  <AILabel className="ai-label-container" kind={kind}>
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
+export const withAILabel = (args) => {
+  const AILabelFunc = (kind) => (
+    <AILabel className="ai-label-container" kind={kind}>
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <AILabelActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </AILabelActions>
+      </AILabelContent>
+    </AILabel>
+  );
 
-export const withAILabel = (args) => (
-  <div className="ai-label-check-radio-container">
-    <CheckboxGroup legendText="Group Label" decorator={AILabelFunc()} {...args}>
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
-    </CheckboxGroup>
-
-    <CheckboxGroup legendText="Group Label" {...args}>
-      <Checkbox
-        labelText={`Checkbox label`}
-        id="checkbox-label-4"
+  return (
+    <div className="ai-label-check-radio-container">
+      <CheckboxGroup
+        legendText="Group Label"
         decorator={AILabelFunc()}
-      />
-      <Checkbox
-        labelText={`Checkbox label`}
-        id="checkbox-label-5"
-        decorator={AILabelFunc()}
-      />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-6" />
-    </CheckboxGroup>
+        {...args}>
+        <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+        <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+        <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
+      </CheckboxGroup>
 
-    <CheckboxGroup legendText="Group Label" {...args}>
-      <Checkbox
-        labelText={`Checkbox label`}
-        id="checkbox-label-7"
-        decorator={AILabelFunc('inline')}
-      />
-      <Checkbox
-        labelText={`Checkbox label`}
-        id="checkbox-label-8"
-        decorator={AILabelFunc('inline')}
-      />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-9" />
-    </CheckboxGroup>
-  </div>
-);
+      <CheckboxGroup legendText="Group Label" {...args}>
+        <Checkbox
+          labelText={`Checkbox label`}
+          id="checkbox-label-4"
+          decorator={AILabelFunc()}
+        />
+        <Checkbox
+          labelText={`Checkbox label`}
+          id="checkbox-label-5"
+          decorator={AILabelFunc()}
+        />
+        <Checkbox labelText={`Checkbox label`} id="checkbox-label-6" />
+      </CheckboxGroup>
+
+      <CheckboxGroup legendText="Group Label" {...args}>
+        <Checkbox
+          labelText={`Checkbox label`}
+          id="checkbox-label-7"
+          decorator={AILabelFunc('inline')}
+        />
+        <Checkbox
+          labelText={`Checkbox label`}
+          id="checkbox-label-8"
+          decorator={AILabelFunc('inline')}
+        />
+        <Checkbox labelText={`Checkbox label`} id="checkbox-label-9" />
+      </CheckboxGroup>
+    </div>
+  );
+};
 
 withAILabel.args = {
   invalid: false,

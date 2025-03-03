@@ -12,7 +12,7 @@ import React, { type ChangeEventHandler, forwardRef } from 'react';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface SideNavSwitcherProps {
+export interface SideNavSwitcherProps {
   /**
    * Provide an optional class to be applied to the containing node
    */

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { default as Tag } from '.';
 import { default as SelectableTag } from './SelectableTag';
 import { default as OperationalTag } from './OperationalTag';
@@ -47,7 +47,7 @@ export const Selectable = (args) => {
     },
   ];
 
-  const [selectedTags, setSelectedTags] = useState([
+  const [selectedTags, setSelectedTags] = React.useState([
     {
       id: 2,
       text: 'Tag content 1',
@@ -123,8 +123,8 @@ Selectable.argTypes = {
 };
 
 export const Operational = (args) => {
-  const [open, setOpen] = useState(false);
-  const [openHighContrast, setOpenHighContrast] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [openHighContrast, setOpenHighContrast] = React.useState(false);
 
   return (
     <>
@@ -227,11 +227,11 @@ export const Operational = (args) => {
             {...args}
           />
           <PopoverContent className="popover-content">
-            <Text as="p">Tag 1 name</Text>
-            <Text as="p">Tag 2 name</Text>
-            <Text as="p">Tag 3 name</Text>
-            <Text as="p">Tag 4 name</Text>
-            <Text as="p">Tag 5 name</Text>
+            <p>Tag 1 name</p>
+            <p>Tag 2 name</p>
+            <p>Tag 3 name</p>
+            <p>Tag 4 name</p>
+            <p>Tag 5 name</p>
           </PopoverContent>
         </Popover>
 
@@ -380,7 +380,7 @@ export const Dismissible = (args) => {
     },
   ];
 
-  const [renderedTags, setRenderedTags] = useState(tags);
+  const [renderedTags, setRenderedTags] = React.useState(tags);
 
   const handleClose = (removedTag) => {
     const newTags = renderedTags.filter((tag) => tag !== removedTag);

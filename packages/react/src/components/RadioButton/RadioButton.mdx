@@ -1,5 +1,6 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as RadioButtonStories from './RadioButton.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -13,7 +14,10 @@ import * as RadioButtonStories from './RadioButton.stories';
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [RadioButton](#radiobutton)
+  - [Overview](#overview)
+  - [Vertical](#vertical)
+  - [Skeleton](#skeleton)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -27,7 +31,48 @@ rendered individually, it is recommended they be rendered as children components
 of the `RadioButtonGroup` parent component to maintain their proper controlled
 states.
 
-<Canvas of={RadioButtonStories.Default} />
+<Canvas
+  of={RadioButtonStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(RadioButtonStories.Default),
+    },
+  ]}
+/>
+
+## Vertical
+<Canvas
+  of={RadioButtonStories.Vertical}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(RadioButtonStories.Vertical),
+    },
+  ]}
+/>
+
+## Skeleton
+<Canvas
+  of={RadioButtonStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(RadioButtonStories.Skeleton),
+    },
+  ]}
+/>
+
+## AI Label
+<Canvas
+  of={RadioButtonStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(RadioButtonStories.withAILabel),
+    },
+  ]}
+/>
 
 ## Component API
 

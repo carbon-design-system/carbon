@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { PropsWithChildren, ReactNode } from 'react';
 import { IdPrefixContext } from '../../internal/useIdPrefix';
 
-type IdPrefixProps = {
+export type IdPrefixProps = {
   children?: ReactNode;
 
   /**

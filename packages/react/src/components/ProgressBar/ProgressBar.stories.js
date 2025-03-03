@@ -8,20 +8,29 @@
 import React, { useState, useEffect } from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import mdx from './ProgressBar.mdx';
 
 import ProgressBar from './';
 
 export default {
   title: 'Components/ProgressBar',
   component: ProgressBar,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
-const DefaultStory = (args) => (
-  <ProgressBar
-    label="Progress bar label"
-    helperText="Optional helper text"
-    {...args}
-  />
-);
+
+const DefaultStory = (args) => {
+  return (
+    <ProgressBar
+      label="Progress bar label"
+      helperText="Optional helper text"
+      {...args}
+    />
+  );
+};
 
 export const Default = DefaultStory.bind({});
 

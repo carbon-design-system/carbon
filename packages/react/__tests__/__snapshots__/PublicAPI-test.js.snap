@@ -324,6 +324,15 @@ Map {
       "noTrailingSlash": Object {
         "type": "bool",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
     "render": [Function],
   },
@@ -439,6 +448,9 @@ Map {
       "onMouseLeave": Object {
         "type": "func",
       },
+      "rel": Object {
+        "type": "string",
+      },
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -469,6 +481,9 @@ Map {
       },
       "tabIndex": Object {
         "type": "number",
+      },
+      "target": Object {
+        "type": "string",
       },
       "tooltipAlignment": Object {
         "args": Array [
@@ -2129,6 +2144,7 @@ Map {
       ],
     },
     "TableRow": Object {
+      "$$typeof": Symbol(react.forward_ref),
       "propTypes": Object {
         "className": Object {
           "type": "string",
@@ -2137,6 +2153,7 @@ Map {
           "type": "bool",
         },
       },
+      "render": [Function],
     },
     "TableSelectAll": Object {
       "propTypes": Object {
@@ -4223,8 +4240,14 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "dropShadow": Object {
+        "type": "bool",
+      },
       "enterDelayMs": Object {
         "type": "number",
+      },
+      "highContrast": Object {
+        "type": "bool",
       },
       "href": Object {
         "type": "string",
@@ -4250,6 +4273,9 @@ Map {
       "leaveDelayMs": Object {
         "type": "number",
       },
+      "rel": Object {
+        "type": "string",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -4259,6 +4285,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "target": Object {
+        "type": "string",
       },
       "wrapperClasses": Object {
         "type": "string",
@@ -7837,7 +7866,6 @@ Map {
         "type": "oneOf",
       },
       "aria-label": Object {
-        "isRequired": true,
         "type": "string",
       },
       "children": Object {
@@ -7888,7 +7916,6 @@ Map {
         "type": "oneOf",
       },
       "aria-label": Object {
-        "isRequired": true,
         "type": "string",
       },
       "children": Object {
@@ -8228,6 +8255,7 @@ Map {
     ],
   },
   "TableRow" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -8236,6 +8264,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "TableSelectAll" => Object {
     "propTypes": Object {
@@ -9579,8 +9608,14 @@ Map {
       "description": Object {
         "type": "node",
       },
+      "dropShadow": Object {
+        "type": "bool",
+      },
       "enterDelayMs": Object {
         "type": "number",
+      },
+      "highContrast": Object {
+        "type": "bool",
       },
       "label": Object {
         "type": "node",
@@ -9620,6 +9655,9 @@ Map {
       },
       "disabled": Object {
         "type": "bool",
+      },
+      "href": Object {
+        "type": "string",
       },
       "id": Object {
         "type": "string",
@@ -9710,6 +9748,9 @@ Map {
         },
         "disabled": Object {
           "type": "bool",
+        },
+        "href": Object {
+          "type": "string",
         },
         "id": Object {
           "type": "string",
@@ -10859,6 +10900,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "enableCounter": Object {
+        "type": "bool",
+      },
       "id": Object {
         "isRequired": true,
         "type": "string",
@@ -10875,6 +10919,9 @@ Map {
       "labelText": Object {
         "isRequired": true,
         "type": "node",
+      },
+      "maxCount": Object {
+        "type": "number",
       },
       "onChange": Object {
         "type": "func",

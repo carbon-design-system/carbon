@@ -547,7 +547,7 @@ export const WithStateManager = () => {
     renderLauncher: LauncherContent,
     children: ModalContent,
   }) => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = React.useState(false);
     return (
       <>
         {!ModalContent || typeof document === 'undefined'
@@ -561,7 +561,7 @@ export const WithStateManager = () => {
     );
   };
 
-  const button = useRef();
+  const button = React.useRef();
 
   return (
     <ModalStateManager

@@ -16,8 +16,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [Overview](#overview)
-- [Component API](#component-api)
-- [downshiftProps](#combobox-downshiftprops)
+- [downshiftProps](#combobox-uses-downshift)
 - [Placeholder and labeling](#placeholders-and-labeling)
 - [initialSelectedItem](#initialselecteditem)
 - [selectedItem](#selecteditem)
@@ -26,6 +25,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 - [shouldFilterItem](#shouldfilteritem)
 - [allowCustomValue](#allowcustomvalue)
 - [With Layer](#with-layer)
+- [Component API](#component-api)
 - [Feedback](#feedback)
 
 ## Overview
@@ -33,11 +33,15 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 A combobox allows the user to make a selection from a predefined list of options
 and is typically used when there are a large amount of options to choose from.
 
-<Canvas of={ComboBoxStories.Default} />
-
-## Component API
-
-<ArgTypes />
+<Canvas
+  of={ComboBoxStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboBoxStories.Default),
+    },
+  ]}
+/>
 
 ## Disabled
 
@@ -80,6 +84,18 @@ arrow keys can still be used to navigate through filtered options.
 
 When combined with the `allowCustomValue` prop, the ComboBox supports both
 custom values and typeahead suggestions.
+
+#### Autocomplete with typeahead:
+
+<Canvas
+  of={ComboBoxStories.AutocompleteWithTypeahead}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboBoxStories.AutocompleteWithTypeahead),
+    },
+  ]}
+/>
 
 ### Combobox `downshiftActions`
 
@@ -143,7 +159,15 @@ const items = ['Option 1', 'Option 2', 'Option 3']
 
 You can use `selectedItem` for a fully controlled component.
 
-<Canvas of={ComboBoxStories._fullyControlled} />
+<Canvas
+  of={ComboBoxStories._fullyControlled}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboBoxStories._fullyControlled),
+    },
+  ]}
+/>
 
 ```jsx
 const options = [
@@ -280,10 +304,35 @@ callback.
 ```js
 {selectedItem: undefined, inputValue: 'Apple'}
 ```
+<Canvas
+  of={ComboBoxStories.AllowCustomValue}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboBoxStories.AllowCustomValue),
+    },
+  ]}
+/>
+
+## With AI Label
+
+<Canvas
+  of={ComboBoxStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboBoxStories.withAILabel),
+    },
+  ]}
+/>
 
 ## With Layer
 
 <Canvas of={ComboBoxStories._WithLayer} />
+
+## Component API
+
+<ArgTypes />
 
 ## Feedback
 
