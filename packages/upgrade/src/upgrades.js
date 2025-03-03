@@ -664,6 +664,79 @@ export const upgrades = [
           });
         },
       },
+      {
+        name: 'enable-v12-structured-list-visible-icons',
+        description: `
+        Updates selectable StructuredList components with new v12 selection pattern.
+        https://react.carbondesignsystem.com/?path=/story/components-structuredlist-feature-flag--selection
+    
+        Key Changes:
+        • Replaces checkmark icons with radio buttons
+        • Moves selection indicators to first column (previously last column)
+        • Makes radio buttons always visible (not just on hover)
+        • Identifies StructuredListWrapper components with the selection prop
+        • Automatically adds selection prop to all child StructuredListRow components
+        
+    
+        Transforms:
+        Before migration:
+          <StructuredListWrapper selection>
+            <StructuredListRow>
+              <StructuredListCell>Content</StructuredListCell>
+              <StructuredListCell><CheckmarkFilled /></StructuredListCell>
+            </StructuredListRow>
+          </StructuredListWrapper>
+    
+        After migration:
+          <StructuredListWrapper selection>
+            <StructuredListRow selection>
+              <StructuredListCell>Content</StructuredListCell>
+            </StructuredListRow>
+          </StructuredListWrapper>
+      `,
+        messageConfig: {
+          name: 'StructuredList',
+          nextSteps: [
+            '⚠️ IMPORTANT: Additional SASS Changes Required!',
+            'This migration requires enabling "enable-v12-structured-list-visible-icons" SASS feature flag in your stylesheet.',
+            '$enable-v12-structured-list-visible-icons: true',
+            '📚 For detailed instructions on enabling SASS feature flags, visit:',
+            'https://react.carbondesignsystem.com/iframe.html?args=size%3Amini&viewMode=docs&id=getting-started-feature-flags--overview&globals=#turning-on-feature-flags-in-sass',
+            '',
+          ],
+        },
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'enable-v12-structured-list-visible-icons.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                    '**/dist/**',
+                    '**/build/**',
+                    '**/*.d.ts',
+                    '**/coverage/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            parser: 'tsx',
+          });
+        },
+      },
     ],
   },
   {

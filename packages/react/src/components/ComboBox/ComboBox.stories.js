@@ -384,6 +384,7 @@ export const _fullyControlled = (args) => {
   return (
     <div>
       <ComboBox
+        {...args}
         onChange={onChange}
         id="carbon-combobox"
         items={options}
@@ -391,7 +392,6 @@ export const _fullyControlled = (args) => {
         itemToString={(item) => (item ? item.text : '')}
         titleText="Fully Controlled ComboBox title"
         helperText="Combobox helper text"
-        {...args}
       />
       <div
         style={{
@@ -409,32 +409,6 @@ export const _fullyControlled = (args) => {
 };
 
 _fullyControlled.argTypes = { ...sharedArgTypes };
-
-export const _fullyControlled2 = () => {
-  const [selectedItem, setSelectedItem] = useState(null);
-
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-        width: '256px',
-      }}>
-      <ComboBox
-        id="carbon-combobox"
-        items={['1', '2', '3']}
-        onChange={({ selectedItem }) => setSelectedItem(selectedItem)}
-        selectedItem={selectedItem}
-        titleText="Fully Controlled ComboBox title"
-      />
-      <Button kind="danger" onClick={() => setSelectedItem(null)} size="md">
-        Reset
-      </Button>
-      <p>Selected value: {`${selectedItem}`}</p>
-    </div>
-  );
-};
 
 AutocompleteWithTypeahead.argTypes = {
   onChange: { action: 'onChange' },
