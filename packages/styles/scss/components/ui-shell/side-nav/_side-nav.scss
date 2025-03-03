@@ -329,6 +329,7 @@
   // Side-nav > Link
   //----------------------------------------------------------------------------
   a.#{$prefix}--side-nav__link,
+  button.#{$prefix}--side-nav__link,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item,
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu-title[aria-expanded='true']
@@ -348,11 +349,13 @@
       outline $duration-fast-02;
   }
 
-  .#{$prefix}--side-nav__item--large a.#{$prefix}--side-nav__link {
+  .#{$prefix}--side-nav__item--large a.#{$prefix}--side-nav__link,
+  .#{$prefix}--side-nav__item--large button.#{$prefix}--side-nav__link {
     block-size: mini-units(6);
   }
 
   a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
+  button.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
   .#{$prefix}--side-nav
     a.#{$prefix}--header__menu-item
     .#{$prefix}--text-truncate-end {
@@ -366,24 +369,32 @@
   }
 
   a.#{$prefix}--side-nav__link:focus,
+  button.#{$prefix}--side-nav__link:focus,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
     @include focus-outline('outline');
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page'],
-  a.#{$prefix}--side-nav__link--current {
+  a.#{$prefix}--side-nav__link--current,
+  button.#{$prefix}--side-nav__link[aria-current='page'],
+  button.#{$prefix}--side-nav__link--current {
     background-color: $background-selected;
     font-weight: 600;
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page']
     .#{$prefix}--side-nav__link-text,
-  a.#{$prefix}--side-nav__link--current .#{$prefix}--side-nav__link-text {
+  a.#{$prefix}--side-nav__link--current .#{$prefix}--side-nav__link-text,
+  button.#{$prefix}--side-nav__link[aria-current='page']
+    .#{$prefix}--side-nav__link-text,
+  button.#{$prefix}--side-nav__link--current .#{$prefix}--side-nav__link-text {
     color: $text-primary;
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page']::before,
-  a.#{$prefix}--side-nav__link--current::before {
+  a.#{$prefix}--side-nav__link--current::before,
+  button.#{$prefix}--side-nav__link[aria-current='page']::before,
+  button.#{$prefix}--side-nav__link--current::before {
     position: absolute;
     background-color: $border-interactive;
     content: '';
@@ -392,6 +403,14 @@
     inset-inline-start: 0;
   }
 
+  // Button reset styles
+  button.#{$prefix}--side-nav__link {
+    border: none;
+    background: none;
+    cursor: pointer;
+    inline-size: 100%;
+    text-align: start;
+  }
   //----------------------------------------------------------------------------
   // Side-nav > Icons
   //----------------------------------------------------------------------------
