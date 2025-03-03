@@ -21,21 +21,21 @@ test.describe('ShapeIndicator', () => {
           theme,
         });
       });
-    });
 
-    test('shape indicator text size 14 @vrt', async ({ page }) => {
-      await visitStory(page, {
-        component: 'ShapeIndicator',
-        id: 'experimental-statusindicators-unstable-shapeindicator--default',
-        theme,
-        args: {
-          textSize: '14',
-        },
-      });
-      await snapshot(page, {
-        component: 'ShapeIndicator',
-        id: 'experimental-statusindicators-unstable-shapeindicator--default',
-        theme,
+      test('shape indicator text size 14 @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'ShapeIndicator',
+          id: 'experimental-statusindicators-unstable-shapeindicator--default',
+          theme,
+          args: {
+            textSize: '14',
+          },
+        });
+        await snapshot(page, {
+          component: 'ShapeIndicator',
+          id: 'experimental-statusindicators-unstable-shapeindicator--default',
+          theme,
+        });
       });
     });
   });
