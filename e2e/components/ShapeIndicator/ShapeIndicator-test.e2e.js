@@ -8,7 +8,8 @@
 'use strict';
 const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+const { snapshot } = require('../../test-utils/snapshot');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('ShapeIndicator', () => {
   themes.forEach((theme) => {
@@ -19,6 +20,22 @@ test.describe('ShapeIndicator', () => {
           id: 'experimental-statusindicators-unstable-shapeindicator--default',
           theme,
         });
+      });
+    });
+
+    test('shape indicator text size 14 @vrt', async ({ page }) => {
+      await visitStory(page, {
+        component: 'ShapeIndicator',
+        id: 'experimental-statusindicators-unstable-shapeindicator--default',
+        theme,
+        args: {
+          textSize: '14',
+        },
+      });
+      await snapshot(page, {
+        component: 'ShapeIndicator',
+        id: 'experimental-statusindicators-unstable-shapeindicator--default',
+        theme,
       });
     });
   });

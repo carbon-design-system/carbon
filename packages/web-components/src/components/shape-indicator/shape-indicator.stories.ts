@@ -1,14 +1,13 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import { html } from 'lit';
 import './index';
-import { SHAPE_INDICATOR_KIND } from './defs';
 
 const kinds = [
   'failed',
@@ -24,28 +23,7 @@ const kinds = [
   'draft',
 ];
 
-export const Default = {
-  render: () => html`
-    <div
-      style="display: grid; grid-template-columns: auto auto; column-gap: 1rem; row-gap: .5rem; width: fit-content">
-      ${kinds.map(
-        (kind) => html`
-          <cds-shape-indicator
-            kind="${kind}"
-            label="${kind}"></cds-shape-indicator>
-          <cds-shape-indicator
-            kind="${kind}"
-            label="${kind}"
-            text-size=${14}></cds-shape-indicator>
-        `
-      )}
-    </div>
-  `,
-};
-
 const defaultArgs = {
-  label: 'Custom label',
-  kind: SHAPE_INDICATOR_KIND.FAILED,
   textSize: 12,
 };
 
@@ -67,14 +45,57 @@ const controls = {
   },
 };
 
-export const Playground = {
+export const Default = {
   argTypes: controls,
   args: defaultArgs,
-  render: ({ label, textSize, kind }) =>
-    html` <cds-shape-indicator
-      kind="${kind}"
-      text-size="${textSize}"
-      label="${label}"></cds-shape-indicator>`,
+  render: ({ label, textSize }) => html`
+    <div style="display: flex; flex-flow: column; row-gap: .5rem;">
+      <cds-shape-indicator
+        kind="failed"
+        label=${label || 'Failed'}
+        text-size=${textSize}></cds-shape-indicator>
+      <cds-shape-indicator
+        kind="critical"
+        label=${label || 'Critical'}
+        text-size=${textSize}></cds-shape-indicator>
+      <cds-shape-indicator
+        kind="high"
+        label=${label || 'High'}
+        text-size=${textSize}></cds-shape-indicator>
+      <cds-shape-indicator
+        kind="medium"
+        label=${label || 'Medium'}
+        text-size=${textSize}></cds-shape-indicator>
+      <cds-shape-indicator
+        kind="low"
+        label=${label || 'Low'}
+        text-size=${textSize}></cds-shape-indicator>
+      <cds-shape-indicator
+        kind="cautious"
+        label=${label || 'Cautious'}
+        text-size=${textSize}></cds-shape-indicator>
+      <cds-shape-indicator
+        kind="undefined"
+        label=${label || 'Undefined'}
+        text-size=${textSize}></cds-shape-indicator>
+      <cds-shape-indicator
+        kind="stable"
+        label=${label || 'Stable'}
+        text-size=${textSize}></cds-shape-indicator>
+      <cds-shape-indicator
+        kind="informative"
+        label=${label || 'Informative'}
+        text-size=${textSize}></cds-shape-indicator>
+      <cds-shape-indicator
+        kind="incomplete"
+        label=${label || 'Incomplete'}
+        text-size=${textSize}></cds-shape-indicator>
+      <cds-shape-indicator
+        kind="draft"
+        label=${label || 'Draft'}
+        text-size=${textSize}></cds-shape-indicator>
+    </div>
+  `,
 };
 
 const meta = {

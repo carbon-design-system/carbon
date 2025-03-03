@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,6 @@
 
 import React from 'react';
 import ShapeIndicator from '.';
-import { ShapeIndicatorKinds } from './index';
 import mdx from './ShapeIndicator.mdx';
 
 export default {
@@ -20,49 +19,41 @@ export default {
   },
 };
 
-export const Default = () => {
+export const Default = (props) => {
   return (
     <div
       style={{
-        display: 'grid',
-        gridTemplateColumns: 'auto auto',
-        columnGap: '1rem',
-        rowGap: '0.5rem',
-        width: 'fit-content',
+        display: 'flex',
+        flexFlow: 'column',
+        rowGap: '.5rem',
       }}>
-      {ShapeIndicatorKinds.map((type) => (
-        <>
-          <ShapeIndicator kind={type} label={type} />
-          <ShapeIndicator kind={type} label={type} textSize={14} />
-        </>
-      ))}
+      <ShapeIndicator kind="failed" label="Failed" {...props} />
+      <ShapeIndicator kind="critical" label="Critical" {...props} />
+      <ShapeIndicator kind="high" label="High" {...props} />
+      <ShapeIndicator kind="medium" label="Medium" {...props} />
+      <ShapeIndicator kind="low" label="Low" {...props} />
+      <ShapeIndicator kind="cautious" label="Cautious" {...props} />
+      <ShapeIndicator kind="undefined" label="Undefined" {...props} />
+      <ShapeIndicator kind="stable" label="Stable" {...props} />
+      <ShapeIndicator kind="informative" label="Informative" {...props} />
+      <ShapeIndicator kind="incomplete" label="Incomplete" {...props} />
+      <ShapeIndicator kind="draft" label="Draft" {...props} />
     </div>
   );
 };
 
-const PlaygroundStory = (props) => {
-  return <ShapeIndicator {...props} />;
-};
-
-export const Playground = PlaygroundStory.bind({});
-
-Playground.args = {
-  label: 'Custom label',
-  kind: 'failed',
+Default.args = {
   textSize: 12,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   label: {
     control: {
       type: 'text',
     },
   },
   kind: {
-    control: {
-      type: 'select',
-    },
-    options: ShapeIndicatorKinds,
+    control: false,
   },
   textSize: {
     control: {
