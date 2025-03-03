@@ -668,7 +668,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       checked,
       id: `${this.getTablePrefix()}__select-all`,
       indeterminate,
-      name: 'select-all',
+      name: `select-all-${this.instanceId}`,
       onSelect: composeEventHandlers([this.handleSelectAll, onClick]),
     };
   };

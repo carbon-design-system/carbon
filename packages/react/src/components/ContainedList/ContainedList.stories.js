@@ -25,8 +25,6 @@ import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import Tag from '../Tag';
 
-import { usePrefix } from '../../internal/usePrefix';
-
 import mdx from './ContainedList.mdx';
 
 import ContainedList, { ContainedListItem } from '.';
@@ -80,22 +78,24 @@ Default.args = {
   size: 'lg',
 };
 
-export const Disclosed = () => (
-  <>
-    <ContainedList label="List title" kind="disclosed">
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-    </ContainedList>
-    <ContainedList label="List title" kind="disclosed">
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-    </ContainedList>
-  </>
-);
+export const Disclosed = () => {
+  return (
+    <>
+      <ContainedList label="List title" kind="disclosed">
+        <ContainedListItem>List item</ContainedListItem>
+        <ContainedListItem>List item</ContainedListItem>
+        <ContainedListItem>List item</ContainedListItem>
+        <ContainedListItem>List item</ContainedListItem>
+      </ContainedList>
+      <ContainedList label="List title" kind="disclosed">
+        <ContainedListItem>List item</ContainedListItem>
+        <ContainedListItem>List item</ContainedListItem>
+        <ContainedListItem>List item</ContainedListItem>
+        <ContainedListItem>List item</ContainedListItem>
+      </ContainedList>
+    </>
+  );
+};
 
 export const WithInteractiveItems = () => {
   const onClick = action('onClick (ContainedListItem)');
@@ -245,49 +245,55 @@ export const WithInteractiveItemsAndActions = () => {
   );
 };
 
-export const WithListTitleDecorators = () => (
-  <ContainedList
-    label={
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
-        <span>List title</span>
-        <Tag size="sm" role="status" aria-label="4 items in list">
-          4
-        </Tag>
-      </div>
-    }
-    kind="on-page">
-    <ContainedListItem>List item</ContainedListItem>
-    <ContainedListItem>List item</ContainedListItem>
-    <ContainedListItem>List item</ContainedListItem>
-    <ContainedListItem>List item</ContainedListItem>
-  </ContainedList>
-);
-
-export const WithIcons = () => (
-  <ContainedList label="List title" kind="on-page">
-    <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
-    <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
-    <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
-    <ContainedListItem renderIcon={Fish}>List item</ContainedListItem>
-  </ContainedList>
-);
-
-export const _WithLayer = () => (
-  <WithLayer>
-    <ContainedList label="List title" kind="on-page">
+export const WithListTitleDecorators = () => {
+  return (
+    <ContainedList
+      label={
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
+          <span>List title</span>
+          <Tag size="sm" role="status" aria-label="4 items in list">
+            4
+          </Tag>
+        </div>
+      }
+      kind="on-page">
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
     </ContainedList>
-  </WithLayer>
-);
+  );
+};
+
+export const WithIcons = () => {
+  return (
+    <ContainedList label="List title" kind="on-page">
+      <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
+      <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
+      <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
+      <ContainedListItem renderIcon={Fish}>List item</ContainedListItem>
+    </ContainedList>
+  );
+};
+
+export const _WithLayer = () => {
+  return (
+    <WithLayer>
+      <ContainedList label="List title" kind="on-page">
+        <ContainedListItem>List item</ContainedListItem>
+        <ContainedListItem>List item</ContainedListItem>
+      </ContainedList>
+    </WithLayer>
+  );
+};
 
 export const UsageExamples = () => {
-  const prefix = usePrefix();
+  const prefix = 'cds';
 
   return (
     <>

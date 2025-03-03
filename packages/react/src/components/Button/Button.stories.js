@@ -12,8 +12,6 @@ import { default as Button, ButtonSkeleton } from '../Button';
 import ButtonSet from '../ButtonSet';
 import mdx from './Button.mdx';
 import './button-story.scss';
-import { composeStories } from '@storybook/react';
-import * as stories from '../Breadcrumb/Breadcrumb.stories';
 
 export default {
   title: 'Components/Button',
@@ -89,11 +87,11 @@ export const Danger = (args) => {
       </Button>
       &nbsp;
       <Button kind="danger--tertiary" {...args}>
-        Tertiary Danger Button
+        Danger tertiary button
       </Button>
       &nbsp;
       <Button kind="danger--ghost" {...args}>
-        Ghost Danger Button
+        Danger ghost button
       </Button>
     </>
   );
