@@ -26,6 +26,10 @@ export { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT };
 @customElement(`${prefix}-icon-button`)
 class CDSIconButton extends CDSButton {
   /**
+   * Checks if a badge indicator is being used with incorrect properties
+   */
+
+  /**
    * Specify how the trigger should align with the tooltip
    */
   @property({ reflect: true, type: String })
@@ -68,6 +72,7 @@ class CDSIconButton extends CDSButton {
   size = 'md';
 
   updated(changedProperties) {
+    super.updated?.(changedProperties);
     if (changedProperties) {
       this.shadowRoot
         ?.querySelector(`${prefix}-tooltip`)

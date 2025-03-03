@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Edit } from '@carbon/icons-react';
+import { Edit, Notification } from '@carbon/icons-react';
 import React from 'react';
 import { IconButton } from '../IconButton';
 import mdx from './IconButton.mdx';
@@ -95,4 +95,25 @@ Default.argTypes = {
     },
     options: ['primary', 'secondary', 'ghost', 'tertiary'],
   },
+};
+
+export const withBadgeIndicator = (props) => {
+  const { badgeCount, disabled } = props;
+  return (
+    <div style={{ margin: '3rem' }}>
+      <IconButton
+        badgeCount={badgeCount}
+        disabled={disabled}
+        label="Notification"
+        kind="ghost"
+        size="lg"
+        autoAlign>
+        <Notification />
+      </IconButton>
+    </div>
+  );
+};
+
+withBadgeIndicator.args = {
+  badgeCount: 4,
 };
