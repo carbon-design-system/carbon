@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,7 +19,6 @@ import React, {
   type ReactNode,
   type MouseEvent,
   type KeyboardEvent,
-  type SyntheticEvent,
   type HTMLAttributes,
   type RefObject,
   type ComponentType,
@@ -303,7 +302,7 @@ TabsVertical.propTypes = {
  * given a count of the total items and the current index
  */
 function getNextIndex(
-  event: SyntheticEvent,
+  event: KeyboardEvent,
   total: number,
   index: number
 ): number {
@@ -330,7 +329,7 @@ function getNextIndex(
  * given a count of the total items and the current index
  */
 function getNextIndexVertical(
-  event: SyntheticEvent,
+  event: KeyboardEvent,
   total: number,
   index: number
 ): number {
