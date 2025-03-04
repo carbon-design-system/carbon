@@ -2877,6 +2877,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "isRequired": true,
         "type": "node",
