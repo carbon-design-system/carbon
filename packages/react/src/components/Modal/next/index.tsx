@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -81,11 +81,6 @@ export interface BaseModalProps extends ReactAttr<HTMLDivElement> {
    * Specify whether or not the Modal content should have any inner padding.
    */
   isFullWidth?: boolean;
-
-  /**
-   * Provide a ref to return focus to once the modal is closed.
-   */
-  launcherButtonRef?: any; // TODO FIXME
 
   /**
    * Specify the description for the loading text
@@ -260,7 +255,6 @@ const Modal = React.forwardRef(function Modal(
     closeButtonLabel = 'Close',
     preventCloseOnClickOutside = false,
     isFullWidth,
-    launcherButtonRef,
     loadingStatus = 'inactive',
     loadingDescription,
     loadingIconDescription,
@@ -548,16 +542,6 @@ Modal.propTypes = {
    * Specify whether or not the Modal content should have any inner padding.
    */
   isFullWidth: PropTypes.bool,
-
-  /**
-   * Provide a ref to return focus to once the modal is closed.
-   */
-  launcherButtonRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({
-      current: PropTypes.any,
-    }),
-  ]),
 
   /**
    * Specify the description for the loading text
