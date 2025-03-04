@@ -46,4 +46,14 @@ describe('SideNavMenuItem', () => {
     );
     expect(ref).toHaveBeenCalledWith(screen.getByRole('link'));
   });
+
+  it('should support custom elements with the `as` prop', () => {
+    render(
+      <SideNavMenuItem as="button" data-testid="sidenav-menuitem">
+        Menu Item Text
+      </SideNavMenuItem>
+    );
+    const menuItem = screen.getByTestId('sidenav-menuitem');
+    expect(menuItem.tagName).toBe('BUTTON');
+  });
 });

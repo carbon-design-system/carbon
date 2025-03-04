@@ -10,6 +10,8 @@ import React, { PropsWithChildren } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { ForwardRefReturn } from '../../types/common';
+import { SideNavMenu } from '../UIShell';
+import SideNavMenuItem from '../UIShell/SideNavMenuItem';
 
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   /**
