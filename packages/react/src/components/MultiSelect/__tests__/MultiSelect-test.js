@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,9 +24,18 @@ import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
 const waitForPosition = () => act(async () => {});
+
 describe('MultiSelect', () => {
+  let mockProps;
   beforeEach(() => {
     jest.mock('../../../internal/deprecateFieldOnObject');
+    mockProps = {
+      id: 'test-multiselect',
+      initialSelectedItems: [],
+      items: generateItems(5, generateGenericItem),
+      label: 'Test label',
+      onChange: jest.fn(),
+    };
   });
 
   describe.skip('automated accessibility tests', () => {
@@ -924,5 +933,23 @@ describe('MultiSelect', () => {
 
     expect(result).toBe('');
     expect(mockItemToString).not.toHaveBeenCalled();
+  });
+
+  it('should add label props when `titleText` is a string', () => {
+    render(<MultiSelect {...mockProps} titleText="MultiSelect Title" />);
+
+    const label = screen.getByText('MultiSelect Title').closest('label');
+
+    expect(label).toHaveAttribute('id');
+  });
+
+  it('should not add label props when `titleText` is an element', () => {
+    render(
+      <MultiSelect {...mockProps} titleText={<span>MultiSelect Title</span>} />
+    );
+
+    const label = screen.getByText('MultiSelect Title').closest('label');
+
+    expect(label).not.toHaveAttribute('id');
   });
 });
