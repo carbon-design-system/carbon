@@ -9,6 +9,16 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import {
+  Copy,
+  Cut,
+  FolderShared,
+  Paste,
+  TextBold,
+  TextItalic,
+  TrashCan,
+} from '@carbon/icons-react';
+
+import {
   Menu,
   MenuItem,
   MenuItemSelectable,
@@ -49,7 +59,7 @@ export const Default = (args) => {
 
   return (
     <Menu {...args} target={target} x={document?.dir === 'rtl' ? 250 : 0}>
-      <MenuItem label="Share with">
+      <MenuItem label="Share with" renderIcon={FolderShared}>
         <MenuItemRadioGroup
           label="Share with"
           items={['None', 'Product team', 'Organization', 'Company']}
@@ -58,17 +68,40 @@ export const Default = (args) => {
         />
       </MenuItem>
       <MenuItemDivider />
-      <MenuItem label="Cut" shortcut="⌘X" onClick={itemOnClick} />
-      <MenuItem label="Copy" shortcut="⌘C" onClick={itemOnClick} />
-      <MenuItem label="Paste" shortcut="⌘V" disabled onClick={itemOnClick} />
+      <MenuItem
+        label="Cut"
+        shortcut="⌘X"
+        onClick={itemOnClick}
+        renderIcon={Cut}
+      />
+      <MenuItem
+        label="Copy"
+        shortcut="⌘C"
+        onClick={itemOnClick}
+        renderIcon={Copy}
+      />
+      <MenuItem
+        label="Paste"
+        shortcut="⌘V"
+        disabled
+        onClick={itemOnClick}
+        renderIcon={Paste}
+      />
       <MenuItemDivider />
       <MenuItemGroup label="Font style">
         <MenuItemSelectable
           label="Bold"
+          shortcut="⌘B"
           defaultSelected
           onChange={selectableOnChange}
+          renderIcon={TextBold}
         />
-        <MenuItemSelectable label="Italic" onChange={selectableOnChange} />
+        <MenuItemSelectable
+          label="Italic"
+          shortcut="⌘I"
+          onChange={selectableOnChange}
+          renderIcon={TextItalic}
+        />
       </MenuItemGroup>
       <MenuItemDivider />
       <MenuItemRadioGroup
@@ -83,6 +116,7 @@ export const Default = (args) => {
         shortcut="⌫"
         kind="danger"
         onClick={itemOnClick}
+        renderIcon={TrashCan}
       />
     </Menu>
   );
