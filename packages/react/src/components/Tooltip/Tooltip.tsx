@@ -19,7 +19,6 @@ import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
-import { useMergedRefs } from '../../internal/useMergedRefs';
 
 /**
  * Event types that trigger a "drag" to stop.
@@ -123,7 +122,6 @@ const Tooltip: TooltipComponent = React.forwardRef(
     ref?: PolymorphicRef<T>
   ) => {
     const tooltipRef = useRef<HTMLSpanElement>(null);
-    // const mergedRef = useMergedRefs([tooltipRef, ref ?? null]);
     const [open, setOpen] = useDelayedState(defaultOpen);
     const [isDragging, setIsDragging] = useState(false);
     const [focusByMouse, setFocusByMouse] = useState(false);
