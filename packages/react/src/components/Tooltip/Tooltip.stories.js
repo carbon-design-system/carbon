@@ -63,22 +63,6 @@ export const Default = () => {
   );
 };
 
-export const Test = () => {
-  const label =
-    'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
-  return (
-    <Tooltip
-      as="section"
-      align="bottom"
-      label={label}
-      closeOnActivation={false}>
-      <button className="sb-tooltip-trigger" type="button">
-        <Help />
-      </button>
-    </Tooltip>
-  );
-};
-
 Default.argTypes = {
   align: {
     options: [
