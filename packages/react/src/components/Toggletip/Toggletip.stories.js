@@ -87,6 +87,30 @@ export const ExperimentalAutoAlign = () => {
   );
 };
 
+export const Test = (controls) => {
+  const { align } = controls;
+  return (
+    <>
+      <ToggletipLabel>Toggletip label</ToggletipLabel>
+      <Toggletip as="section" align={align}>
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <ToggletipActions>
+            <Link href="#">Link action</Link>
+            <Button size="sm">Button</Button>
+          </ToggletipActions>
+        </ToggletipContent>
+      </Toggletip>
+    </>
+  );
+};
+
 const DefaultStory = (controls) => {
   const { align } = controls;
   return (

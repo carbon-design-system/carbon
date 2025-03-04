@@ -82,6 +82,15 @@ describe('Toggletip', () => {
     expect(container.firstChild).not.toHaveClass(`${prefix}--popover--open`);
   });
 
+  it('should render with custom element using as prop', () => {
+    const CustomElement = forwardRef((props, ref) => (
+      <div data-testid="custom-toggletip" ref={ref} {...props} />
+    ));
+
+    render(<Toggletip as={CustomElement}>Content</Toggletip>);
+    expect(screen.getByTestId('custom-toggletip')).toBeInTheDocument();
+  });
+
   describe('Component API', () => {
     it('should support custom elements with the `as` prop', () => {
       const CustomComponent = forwardRef((props, ref) => {
