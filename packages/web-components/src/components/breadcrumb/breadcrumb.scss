@@ -36,6 +36,14 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-breadcrumb[size='sm']) ::slotted(#{$prefix}-breadcrumb-item) {
+  margin-inline-end: $spacing-02;
+
+  &::after {
+    margin-inline-start: $spacing-02;
+  }
+}
+
 :host(#{$prefix}-breadcrumb-overflow-menu) {
   position: relative;
   block-size: rem(18px);
@@ -70,6 +78,11 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-breadcrumb-item[size='sm'])
+  ::slotted(#{$prefix}-breadcrumb-overflow-menu) {
+  inline-size: $spacing-05;
+}
+
 :host(#{$prefix}-breadcrumb-overflow-menu[open]) {
   background: transparent;
   box-shadow: none;
@@ -92,6 +105,10 @@ $css--plex: true !default;
 
 :host(#{$prefix}-breadcrumb-link) {
   outline: none;
+
+  .#{$prefix}--link {
+    font: inherit;
+  }
 
   // Re-define the ruleset so this wins over `.#{$prefix}--link:visited`, etc.
   .#{$prefix}--link--disabled {

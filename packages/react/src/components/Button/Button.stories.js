@@ -87,11 +87,11 @@ export const Danger = (args) => {
       </Button>
       &nbsp;
       <Button kind="danger--tertiary" {...args}>
-        Tertiary Danger Button
+        Danger tertiary button
       </Button>
       &nbsp;
       <Button kind="danger--ghost" {...args}>
-        Ghost Danger Button
+        Danger ghost button
       </Button>
     </>
   );
