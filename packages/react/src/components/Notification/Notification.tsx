@@ -1316,21 +1316,23 @@ export function Callout({
     [`${prefix}--actionable-notification--hide-close-button`]: true,
   });
 
-  const ref = useRef(null);
+  const childrenContainer = useRef(null);
   useInteractiveChildrenNeedDescription(
-    ref,
+    childrenContainer,
     `interactive child node(s) should have an \`aria-describedby\` property with a value matching the value of \`titleId\``
   );
 
   return (
-    <div ref={ref} {...rest} className={containerClassName}>
+    <div {...rest} className={containerClassName}>
       <div className={`${prefix}--actionable-notification__details`}>
         <NotificationIcon
           notificationType="inline"
           kind={kind}
           iconDescription={statusIconDescription || `${kind} icon`}
         />
-        <div className={`${prefix}--actionable-notification__text-wrapper`}>
+        <div
+          ref={childrenContainer}
+          className={`${prefix}--actionable-notification__text-wrapper`}>
           {title && (
             <Text
               as="div"
