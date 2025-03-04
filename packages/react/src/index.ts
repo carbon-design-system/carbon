@@ -189,7 +189,6 @@ export * from './components/Tooltip/DefinitionTooltip';
 export * from './components/Theme';
 export * from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';
-export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';
 
 /* prop's interface exports */
 
