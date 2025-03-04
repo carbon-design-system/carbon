@@ -12,6 +12,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/menu' as *;
 @import './menu-variables';
 
 :host(#{$prefix}-menu) {
@@ -29,18 +30,9 @@ $css--plex: true !default;
 }
 
 .#{$prefix}--menu {
-  @include component-reset;
-  @include box-shadow;
+  @extend .#{$prefix}--menu;
 
-  position: fixed;
-  z-index: z('modal');
-  padding: $spacing-02 0;
-  background-color: $layer;
-  max-inline-size: 18rem;
-  min-inline-size: 10rem;
-  opacity: 0;
   overflow-y: auto;
-  visibility: hidden;
 
   &--shown {
     opacity: 1;

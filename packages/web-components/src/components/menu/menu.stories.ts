@@ -118,10 +118,6 @@ export const Default = {
           shortcut="⌘V"
           disabled
           .renderIcon=${Paste16}></cds-menu-item>
-        <cds-menu-item-selectable
-          label="Italic"
-          shortcut="⌘I"
-          .renderIcon=${TextItalic16}></cds-menu-item-selectable>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-group>
           <cds-menu-item-selectable
