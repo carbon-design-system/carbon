@@ -19,7 +19,6 @@ import React, {
   type FunctionComponent,
   type MouseEvent,
 } from 'react';
-import { focus } from '../../internal/focus';
 import { keys, match } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -193,7 +192,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
     onChange(clearedEvt);
     onClear();
     setHasContent(false);
-    focus(inputRef);
+    inputRef.current?.focus();
   }
 
   function handleChange(event) {
