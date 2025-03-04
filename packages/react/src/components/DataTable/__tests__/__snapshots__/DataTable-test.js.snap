@@ -10,20 +10,20 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
     >
       <h4
         class="cds--data-table-header__title"
-        id="tc-:r7g:-title"
+        id="tc-:r71:-title"
       >
         DataTable with selection
       </h4>
       <p
         class="cds--data-table-header__description"
-        id="tc-:r7g:-description"
+        id="tc-:r71:-description"
       />
     </div>
     <div
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:r7g:-title"
+        aria-labelledby="tc-:r71:-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -188,20 +188,20 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
     >
       <h4
         class="cds--data-table-header__title"
-        id="tc-:r77:-title"
+        id="tc-:r6o:-title"
       >
         DataTable with selection
       </h4>
       <p
         class="cds--data-table-header__description"
-        id="tc-:r77:-description"
+        id="tc-:r6o:-description"
       />
     </div>
     <div
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:r77:-title"
+        aria-labelledby="tc-:r6o:-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -366,13 +366,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
     >
       <h4
         class="cds--data-table-header__title"
-        id="tc-:r2k:-title"
+        id="tc-:r2e:-title"
       >
         DataTable with selection
       </h4>
       <p
         class="cds--data-table-header__description"
-        id="tc-:r2k:-description"
+        id="tc-:r2e:-description"
       />
     </div>
     <section
@@ -575,7 +575,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           class="cds--overflow-menu__wrapper"
         >
           <span
-            class="cds--popover-container cds--popover--caret cds--popover--drop-shadow cds--popover--bottom cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
+            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
           >
             <div
               class="cds--tooltip-trigger__wrapper"
@@ -583,7 +583,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-:r2s:"
+                aria-labelledby="tooltip-:r2m:"
                 class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost"
                 title="Settings"
                 type="button"
@@ -612,7 +612,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-:r2s:"
+              id="tooltip-:r2m:"
               role="tooltip"
             >
               <span
@@ -638,7 +638,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:r2k:-title"
+        aria-labelledby="tc-:r2e:-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -815,13 +815,13 @@ exports[`DataTable renders as expected - Component API should render and match s
     >
       <h4
         class="cds--data-table-header__title"
-        id="tc-:re:-title"
+        id="tc-:rd:-title"
       >
         DataTable with toolbar
       </h4>
       <p
         class="cds--data-table-header__description"
-        id="tc-:re:-description"
+        id="tc-:rd:-description"
       />
     </div>
     <section
@@ -1012,7 +1012,7 @@ exports[`DataTable renders as expected - Component API should render and match s
           class="cds--overflow-menu__wrapper"
         >
           <span
-            class="cds--popover-container cds--popover--caret cds--popover--drop-shadow cds--popover--bottom cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
+            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
           >
             <div
               class="cds--tooltip-trigger__wrapper"
@@ -1020,7 +1020,7 @@ exports[`DataTable renders as expected - Component API should render and match s
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-:rl:"
+                aria-labelledby="tooltip-:rk:"
                 class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost"
                 title="Settings"
                 type="button"
@@ -1049,7 +1049,7 @@ exports[`DataTable renders as expected - Component API should render and match s
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-:rl:"
+              id="tooltip-:rk:"
               role="tooltip"
             >
               <span
@@ -1075,7 +1075,7 @@ exports[`DataTable renders as expected - Component API should render and match s
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:re:-title"
+        aria-labelledby="tc-:rd:-title"
         class="cds--data-table cds--data-table--lg cds--data-table--visible-overflow-menu"
       >
         <thead>

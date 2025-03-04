@@ -19,6 +19,7 @@ import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
 /**
  * Event types that trigger a "drag" to stop.
@@ -105,7 +106,7 @@ type TooltipComponent = <T extends React.ElementType = typeof Popover>(
 const Tooltip: TooltipComponent = React.forwardRef(
   <T extends React.ElementType = typeof Popover>(
     {
-      as: BaseComponent = Popover as T,
+      as,
       align = 'top',
       className: customClassName,
       children,
@@ -119,9 +120,10 @@ const Tooltip: TooltipComponent = React.forwardRef(
       highContrast = true,
       ...rest
     }: TooltipProps<T>,
-    ref: PolymorphicRef<T>
+    ref?: PolymorphicRef<T>
   ) => {
     const tooltipRef = useRef<HTMLSpanElement>(null);
+    // const mergedRef = useMergedRefs([tooltipRef, ref ?? null]);
     const [open, setOpen] = useDelayedState(defaultOpen);
     const [isDragging, setIsDragging] = useState(false);
     const [focusByMouse, setFocusByMouse] = useState(false);
@@ -265,8 +267,8 @@ const Tooltip: TooltipComponent = React.forwardRef(
     }, [isDragging, onDragStop]);
 
     return (
-      <Popover
-        as={BaseComponent as React.ElementType}
+      <Popover<any>
+        as={as}
         ref={ref}
         {...rest}
         align={align}
