@@ -11,29 +11,29 @@ const { themes } = require('../../test-utils/env');
 const { snapshot } = require('../../test-utils/snapshot');
 const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
-test.describe('IconIndicator', () => {
+test.describe('ShapeIndicator', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
-      test('icon indicator @vrt', async ({ page }) => {
+      test('shape indicator @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'IconIndicator',
-          id: 'experimental-statusindicators-unstable-iconindicator--default',
+          component: 'ShapeIndicator',
+          id: 'experimental-statusindicators-unstable-shapeindicator--default',
           theme,
         });
       });
 
-      test('icon indicator size 20 @vrt', async ({ page }) => {
+      test('shape indicator text size 14 @vrt', async ({ page }) => {
         await visitStory(page, {
-          component: 'IconIndicator',
-          id: 'experimental-statusindicators-unstable-iconindicator--default',
+          component: 'ShapeIndicator',
+          id: 'experimental-statusindicators-unstable-shapeindicator--default',
           theme,
           args: {
-            size: '20',
+            textSize: '14',
           },
         });
         await snapshot(page, {
-          component: 'IconIndicator',
-          id: 'experimental-statusindicators-unstable-iconindicator--default',
+          component: 'ShapeIndicator',
+          id: 'experimental-statusindicators-unstable-shapeindicator--default',
           theme,
         });
       });
