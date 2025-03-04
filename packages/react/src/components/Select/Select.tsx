@@ -170,20 +170,25 @@ const Select = React.forwardRef(function Select(
   const { isFluid } = useContext(FormContext);
   const [isFocused, setIsFocused] = useState(false);
   const selectInstanceId = useId();
-  //Set the Title of default value from the values set
+  // Set the Title of the default value from the values set
   const defaultOption = React.Children.toArray(children).find(
     (child) =>
       React.isValidElement(child) && child.props?.value === other?.defaultValue
   );
-  //If the value set does not contain any default Title value specified
-  //Consider the first value in the set as Title value
-  const firstOptionInSet = React.Children.toArray(children).filter((child) =>
+
+  // If the value set does not contain any default Title value specified,
+  // consider the first value in the set as the Title value
+  const firstOptionInSet = React.Children.toArray(children).find((child) =>
     React.isValidElement(child)
-  )[0];
-  const [title, setTitle] = useState(
-    defaultOption?.props?.value || firstOptionInSet?.props?.value
   );
 
+  // Initialize the title with the defaultOption or the firstOptionInSet's value
+  const [title, setTitle] = useState(
+    (React.isValidElement(defaultOption) && defaultOption.props?.value) ||
+      (React.isValidElement(firstOptionInSet) &&
+        firstOptionInSet.props?.value) ||
+      ''
+  );
   const selectClasses = classNames({
     [`${prefix}--select`]: true,
     [`${prefix}--select--inline`]: inline,
