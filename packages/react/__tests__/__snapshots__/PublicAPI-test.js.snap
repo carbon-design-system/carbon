@@ -9580,6 +9580,7 @@ Map {
     },
   },
   "Tooltip" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "align": Object {
         "args": Array [
@@ -9639,6 +9640,7 @@ Map {
         "type": "number",
       },
     },
+    "render": [Function],
   },
   "TreeNode" => Object {
     "$$typeof": Symbol(react.forward_ref),
