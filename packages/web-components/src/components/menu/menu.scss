@@ -1,0 +1,58 @@
+//
+// Copyright IBM Corp. 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/menu' as *;
+@import './menu-variables';
+
+:host(#{$prefix}-menu) {
+  position: fixed;
+  --grid-template: 1rem 1fr max-content;
+  --display-icon-item: none;
+  --display-selection-icon: none;
+}
+.#{$prefix}--menu--with-icons {
+  --grid-template: 1rem 1rem 1fr max-content;
+  --display-icon-item: flex;
+}
+.#{$prefix}--menu--with-selectable-items {
+  --display-selection-icon: flex;
+}
+
+.#{$prefix}--menu {
+  @extend .#{$prefix}--menu;
+
+  overflow-y: auto;
+
+  &--shown {
+    opacity: 1;
+  }
+
+  &--open {
+    visibility: visible;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  &--with-icons {
+    min-inline-size: 12rem;
+  }
+  &:not(.#{$prefix}--menu--open) .#{$prefix}--menu--open {
+    visibility: hidden;
+  }
+}
+.#{$prefix}--menu--with-icons {
+  min-inline-size: 12rem;
+}
