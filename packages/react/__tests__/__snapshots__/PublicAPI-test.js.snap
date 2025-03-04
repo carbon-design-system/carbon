@@ -324,6 +324,15 @@ Map {
       "noTrailingSlash": Object {
         "type": "bool",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
     "render": [Function],
   },
