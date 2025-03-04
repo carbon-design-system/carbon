@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -62,8 +62,8 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
     }
   };
 
-  _handleFormdata(event: Event) {
-    const { formData } = event as any; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
+  _handleFormdata(event: FormDataEvent) {
+    const { formData } = event;
     const { disabled, name, value } = this;
     if (
       !disabled &&
