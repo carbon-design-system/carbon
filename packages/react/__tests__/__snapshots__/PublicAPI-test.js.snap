@@ -495,6 +495,12 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tooltipDropShadow": Object {
+        "type": "bool",
+      },
+      "tooltipHighContrast": Object {
+        "type": "bool",
+      },
       "tooltipPosition": Object {
         "args": Array [
           Array [
@@ -4072,6 +4078,12 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "tooltipDropShadow": Object {
+        "type": "bool",
+      },
+      "tooltipHighContrast": Object {
+        "type": "bool",
       },
     },
     "render": [Function],
