@@ -10,7 +10,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/styles/scss/components/overflow-menu/overflow-menu' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
@@ -63,6 +64,18 @@ $css--plex: true !default;
 
 :host(#{$prefix}-overflow-menu-body) {
   @extend .#{$prefix}--overflow-menu-options;
+
+  &::after {
+    position: absolute;
+    display: block;
+    background-color: $layer;
+    content: '';
+    transition: background-color $duration-fast-02 motion(entrance, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
 }
 
 :host(#{$prefix}-overflow-menu-body[direction='top']) {
@@ -109,4 +122,50 @@ $css--plex: true !default;
 
 :host(#{$prefix}-overflow-menu-item[divider]) {
   @extend .#{$prefix}--overflow-menu--divider;
+}
+
+:host(#{$prefix}-overflow-menu[breadcrumb]) {
+  background: none;
+  block-size: 1.125rem;
+  box-shadow: none;
+  inline-size: 1.25rem;
+  min-block-size: 1.125rem;
+
+  #{$prefix}-tooltip button {
+    position: relative;
+    block-size: 1.125rem;
+    inline-size: 1.25rem;
+    min-block-size: 1.125rem;
+    padding-inline: 0;
+  }
+
+  :hover,
+  :active,
+  :focus {
+    box-sizing: border-box;
+    background: none;
+    box-shadow: none;
+  }
+}
+
+:host(#{$prefix}-overflow-menu[breadcrumb]) {
+  ::slotted([slot='icon']) {
+    transform: translateY(4px);
+  }
+}
+
+$caret-size: convert.to-rem(7px);
+
+:host(#{$prefix}-overflow-menu-body[breadcrumb='true']) {
+  &::after {
+    margin: 0 auto;
+    background: transparent;
+    block-size: 0;
+    border-block-end: $caret-size solid $field;
+    border-inline-end: $caret-size solid transparent;
+    border-inline-start: $caret-size solid transparent;
+    inline-size: 0;
+    inset-block-start: -$caret-size;
+    inset-inline-start: $caret-size * 2;
+  }
 }
