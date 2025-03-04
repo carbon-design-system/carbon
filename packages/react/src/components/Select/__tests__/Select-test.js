@@ -75,6 +75,16 @@ describe('Select', () => {
       expect(screen.getByText('Option 2')).toHaveAttribute('selected');
     });
 
+    it('should show SelectItem text as title', () => {
+      render(
+        <Select id="select" labelText="Select">
+          <SelectItem text="Option 1" value="option-1" />
+          <SelectItem text="Option 2" value="option-2" />
+        </Select>
+      );
+      expect(screen.getByLabelText('Select').title).toEqual('Option 1');
+    });
+
     it('should respect disabled prop', () => {
       render(<Select id="select" labelText="Select" disabled />);
 

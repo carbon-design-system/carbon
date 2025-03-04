@@ -1790,6 +1790,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Bhas-kar",
+      "name": "Kanchi Bhaskar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/183294521?v=4",
+      "profile": "https://github.com/Bhas-kar",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"
