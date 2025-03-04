@@ -172,7 +172,8 @@ const Select = React.forwardRef(function Select(
   const selectInstanceId = useId();
   //Set the Title of default value from the values set
   const defaultOption = React.Children.toArray(children).find(
-    (child) => child.props?.value === other?.defaultValue
+    (child) =>
+      React.isValidElement(child) && child.props?.value === other?.defaultValue
   );
   //If the value set does not contain any default Title value specified
   //Consider the first value in the set as Title value
