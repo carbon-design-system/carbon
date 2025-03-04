@@ -8,13 +8,30 @@
 'use strict';
 const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+const { snapshot } = require('../../test-utils/snapshot');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('IconIndicator', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
       test('icon indicator @vrt', async ({ page }) => {
         await snapshotStory(page, {
+          component: 'IconIndicator',
+          id: 'experimental-statusindicators-unstable-iconindicator--default',
+          theme,
+        });
+      });
+
+      test('icon indicator size 20 @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'IconIndicator',
+          id: 'experimental-statusindicators-unstable-iconindicator--default',
+          theme,
+          args: {
+            size: '20',
+          },
+        });
+        await snapshot(page, {
           component: 'IconIndicator',
           id: 'experimental-statusindicators-unstable-iconindicator--default',
           theme,

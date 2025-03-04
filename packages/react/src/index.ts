@@ -158,6 +158,8 @@ export {
 export * from './components/Popover';
 export * from './components/ProgressBar';
 export { AILabel, AILabelContent, AILabelActions } from './components/AILabel';
+export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';
+export { ShapeIndicator as unstable__ShapeIndicator } from './components/ShapeIndicator';
 // Keep until V12
 export {
   AILabel as unstable__Slug,
@@ -189,7 +191,7 @@ export * from './components/Tooltip/DefinitionTooltip';
 export * from './components/Theme';
 export * from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';
-export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';
+
 
 /* prop's interface exports */
 
