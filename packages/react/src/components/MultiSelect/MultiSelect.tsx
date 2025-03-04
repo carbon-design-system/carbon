@@ -22,6 +22,7 @@ import React, {
   useMemo,
   ReactNode,
   useLayoutEffect,
+  isValidElement,
 } from 'react';
 import ListBox, {
   ListBoxSize,
@@ -729,9 +730,11 @@ const MultiSelect = React.forwardRef(
       [enableFloatingStyles, getMenuProps, refs.setFloating]
     );
 
+    const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
+
     return (
       <div className={wrapperClasses}>
-        <label className={titleClasses} {...getLabelProps()}>
+        <label className={titleClasses} {...labelProps}>
           {titleText && titleText}
           {selectedItems.length > 0 && (
             <span className={`${prefix}--visually-hidden`}>
