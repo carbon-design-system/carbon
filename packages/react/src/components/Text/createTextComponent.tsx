@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { Text, TextProps } from './Text';
+import React, { type ElementType } from 'react';
+import { Text, TextProps } from '.';
 
 /**
  * Create a text component wrapper for a given text node type. Useful for
@@ -14,17 +14,17 @@ import { Text, TextProps } from './Text';
  * @param {string} element
  * @param {string} displayName
  */
-export function createTextComponent(
-  element: React.ElementType,
+export const createTextComponent = (
+  element: ElementType,
   displayName: string
-) {
-  function TextWrapper(props: TextProps<React.ElementType>) {
+) => {
+  const TextWrapper = (props: TextProps<ElementType>) => {
     return <Text as={element} {...props} />;
-  }
+  };
 
   if (__DEV__) {
     TextWrapper.displayName = displayName;
   }
 
   return TextWrapper;
-}
+};
