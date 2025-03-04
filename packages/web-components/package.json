@@ -15,7 +15,7 @@
     "custom-elements.json",
     "dist/**/*",
     "es/**/*",
-    "es-components/**/*",
+    "es-custom/**/*",
     "lib/**/*",
     "scss/**/*",
     "telemetry.yml"
@@ -41,7 +41,7 @@
     },
     "./es": "./es/index.js",
     "./es/": "./es/",
-    "./es-components/*": "./es-components/*",
+    "./es-custom/*": "./es-custom/*",
     "./lib/": "./lib/",
     "./dist/": "./dist/",
     "./scss/": "./scss/",
