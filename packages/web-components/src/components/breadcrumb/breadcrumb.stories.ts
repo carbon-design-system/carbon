@@ -14,16 +14,27 @@ import './breadcrumb-link';
 import './breadcrumb-overflow-menu';
 import '../overflow-menu/overflow-menu-body';
 import '../overflow-menu/overflow-menu-item';
+import '../overflow-menu/index';
 import './breadcrumb-skeleton';
+import { BREADCRUMB_SIZE } from './defs';
 
 import { prefix } from '../../globals/settings';
 
 import OverflowMenuHorizontal16 from '@carbon/icons/lib/overflow-menu--horizontal/16.js';
 
+const sizes = {
+  [`Small size (${BREADCRUMB_SIZE.SMALL})`]: BREADCRUMB_SIZE.SMALL,
+  [`Medium size (${BREADCRUMB_SIZE.MEDIUM})`]: BREADCRUMB_SIZE.MEDIUM,
+};
 const args = {
   ariaLabel: '',
   className: '',
   noTrailingSlash: false,
+  size: {
+    control: 'select',
+    description: 'Specify the size of the Accordion.',
+    options: sizes,
+  },
 };
 
 const argTypes = {
@@ -42,18 +53,24 @@ const argTypes = {
     description:
       'Optional prop to omit the trailing slash for the breadcrumbs.',
   },
+  size: {
+    control: 'select',
+    description: 'Specify the size of the Accordion.',
+    options: sizes,
+  },
 };
 
 export const Default = {
   args,
   argTypes,
   render: (args) => {
-    const { ariaLabel, className, noTrailingSlash } = args ?? {};
+    const { ariaLabel, className, noTrailingSlash, size } = args ?? {};
     return html`
       <cds-breadcrumb
         ?no-trailing-slash="${noTrailingSlash}"
         class="${className}"
-        aria-label="${ariaLabel}">
+        aria-label="${ariaLabel}"
+        size="${size}">
         <cds-breadcrumb-item>
           <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
         </cds-breadcrumb-item>
@@ -61,10 +78,18 @@ export const Default = {
           <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
-          <cds-breadcrumb-link href="#">Breadcrumb 3</cds-breadcrumb-link>
+          <cds-breadcrumb-overflow-menu>
+            <cds-overflow-menu-body>
+              <cds-overflow-menu-item>Breadcrumb 3</cds-overflow-menu-item>
+              <cds-overflow-menu-item>Breadcrumb 4</cds-overflow-menu-item>
+            </cds-overflow-menu-body>
+          </cds-breadcrumb-overflow-menu>
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
-          <cds-breadcrumb-link>Breadcrumb 4</cds-breadcrumb-link>
+          <cds-breadcrumb-link href="/#">Breadcrumb 5</cds-breadcrumb-link>
+        </cds-breadcrumb-item>
+        <cds-breadcrumb-item>
+          <cds-breadcrumb-link>Breadcrumb 6</cds-breadcrumb-link>
         </cds-breadcrumb-item>
       </cds-breadcrumb>
     `;
@@ -75,12 +100,13 @@ export const BreadcrumbWithOverflowMenu = {
   args,
   argTypes,
   render: (args) => {
-    const { ariaLabel, className, noTrailingSlash } = args ?? {};
+    const { ariaLabel, className, noTrailingSlash, size } = args ?? {};
     return html`
       <cds-breadcrumb
         ?no-trailing-slash="${noTrailingSlash}"
         class="${className}"
-        aria-label="${ariaLabel}">
+        aria-label="${ariaLabel}"
+        size="${size}">
         <cds-breadcrumb-item>
           <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
         </cds-breadcrumb-item>

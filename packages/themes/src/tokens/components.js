@@ -99,7 +99,9 @@ export const status = TokenGroup.create({
   tokens: [
     'status-red',
     'status-orange',
+    'status-orange-outline',
     'status-yellow',
+    'status-yellow-outline',
     'status-purple',
     'status-green',
     'status-blue',
