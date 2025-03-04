@@ -1,13 +1,16 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import FloatingMenu, {
+import {
   DIRECTION_BOTTOM,
   DIRECTION_TOP,
+  FloatingMenu,
+  type MenuDirection,
+  type MenuOffset,
 } from '../../internal/FloatingMenu';
 import React, { ComponentType } from 'react';
 import { matches as keyCodeMatches, keys } from '../../internal/keyboard';
@@ -54,13 +57,12 @@ const triggerButtonPositionFactors = {
   [DIRECTION_BOTTOM]: -1,
 };
 
-/**
- * @param {Element} menuBody The menu body with the menu arrow.
- * @param {string} direction The floating menu direction.
- * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
- * @private
- */
-export const getMenuOffset = (menuBody, direction, trigger, flip) => {
+export const getMenuOffset: MenuOffset = (
+  menuBody,
+  direction,
+  trigger,
+  flip
+) => {
   const triggerButtonPositionProp = triggerButtonPositionProps[direction];
   const triggerButtonPositionFactor = triggerButtonPositionFactors[direction];
   if (__DEV__) {
@@ -82,16 +84,10 @@ export const getMenuOffset = (menuBody, direction, trigger, flip) => {
         top: 0,
       };
     }
-
     default:
-      break;
+      return { left: 0, top: 0 };
   }
 };
-
-interface Offset {
-  top?: number | null | undefined;
-  left?: number | null | undefined;
-}
 
 type IconProps = {
   className?: string;
@@ -124,7 +120,7 @@ export interface OverflowMenuProps {
   /**
    * The menu direction.
    */
-  direction?: string;
+  direction?: MenuDirection;
 
   /**
    * `true` if the menu alignment should be flipped.
@@ -160,12 +156,12 @@ export interface OverflowMenuProps {
   /**
    * The adjustment in position applied to the floating menu.
    */
-  menuOffset?: Offset | (() => void);
+  menuOffset?: MenuOffset;
 
   /**
    * The adjustment in position applied to the floating menu.
    */
-  menuOffsetFlip?: Offset | (() => void);
+  menuOffsetFlip?: MenuOffset;
 
   /**
    * The class to apply to the menu options
@@ -391,10 +387,10 @@ class OverflowMenu extends React.Component<
 
   /**
    * The element ref of the tooltip's trigger button.
-   * @type {React.RefObject<Element>}
+   * @type {React.RefObject<HTMLElement>}
    * @private
    */
-  _triggerRef = React.createRef();
+  _triggerRef = React.createRef<HTMLElement>();
 
   componentDidUpdate(_, prevState) {
     const { onClose = noopFn } = this.props;
