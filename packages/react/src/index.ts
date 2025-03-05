@@ -192,7 +192,6 @@ export * from './components/Theme';
 export * from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';
 
-
 /* prop's interface exports */
 
 //accordion
@@ -373,6 +372,9 @@ export type { SectionProps } from './components/Heading/index';
 export type { IconSkeletonProps } from './components/Icon/Icon.Skeleton';
 export type { IconButtonProps } from './components/IconButton/index';
 
+// icon indicator
+export type { IconIndicatorProps } from './components/IconIndicator/index';
+
 //idprefix
 export type { IdPrefixProps } from './components/IdPrefix/index';
 
@@ -482,6 +484,9 @@ export type { SelectProps } from './components/Select/Select';
 export type { SelectSkeletonProps } from './components/Select/Select.Skeleton';
 export type { SelectItemProps } from './components/SelectItem/SelectItem';
 export type { SelectItemGroupProps } from './components/SelectItemGroup/SelectItemGroup';
+
+// shape indicator
+export type { ShapeIndicatorProps } from './components/ShapeIndicator/index';
 
 //skeleton items
 export type { SkeletonIconProps } from './components/SkeletonIcon/SkeletonIcon';
