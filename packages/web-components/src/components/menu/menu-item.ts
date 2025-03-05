@@ -129,8 +129,11 @@ class CDSmenuItem extends LitElement {
   @property()
   onClick?: (event: KeyboardEvent | MouseEvent) => void;
 
+  private hasSubmenu = false;
+  private hasRenderIcon = false;
+
   async dispatchIconDetect() {
-    if (this.renderIcon) {
+    if (this.hasRenderIcon) {
       await undefined; // this is used to replace setTimeout with 0 time out, which is much fater.
       this.dispatchEvent(
         new CustomEvent('icon-detect', {
@@ -142,9 +145,11 @@ class CDSmenuItem extends LitElement {
   }
 
   firstUpdated() {
+    this.hasSubmenu = !!this.querySelector('[slot="submenu"]');
+    this.hasRenderIcon = !!this.querySelector('[slot="render-icon"]');
     this.dispatchIconDetect();
     this.hasChildren = this.childNodes.length > 0;
-    this.isDisabled = this.disabled && !this.hasChildren;
+    this.isDisabled = this.disabled && !this.hasSubmenu;
     this.direction = document.dir;
     this.isRtl = this.direction === 'rtl';
     this.isDanger = this.kind === 'danger';
@@ -176,7 +181,6 @@ class CDSmenuItem extends LitElement {
       [`${prefix}--menu-item`]: true,
       [`${prefix}--menu-item--disabled`]: isDisabled,
       [`${prefix}--menu-item--danger`]: isDanger,
-      // [`${prefix}--menu-item--with-icon`]:!this.hasIcon
     });
     const menuClassName = this.context.hasSelectableItems
       ? `${prefix}--menu--with-selectable-items`
@@ -189,11 +193,11 @@ class CDSmenuItem extends LitElement {
         tabindex="0"
         class="${menuItemClasses}"
         aria-disabled="${isDisabled ?? undefined}"
-        aria-haspopup="${hasChildren ?? undefined}"
-        aria-expanded="${hasChildren ? submenuOpen : undefined}"
+        aria-haspopup="${this.hasSubmenu ?? undefined}"
+        aria-expanded="${this.hasSubmenu ? submenuOpen : undefined}"
         @click="${handleClick}"
-        @mouseenter="${hasChildren ? handleMouseEnter : undefined}"
-        @mouseleave="${hasChildren ? handleMouseLeave : undefined}"
+        @mouseenter="${this.hasSubmenu ? handleMouseEnter : undefined}"
+        @mouseleave="${this.hasSubmenu ? handleMouseLeave : undefined}"
         @keydown="${handleKeyDown}">
         <div class="${prefix}--menu-item__selection-icon">
           ${this.getAttribute('aria-checked') === 'true'
@@ -202,28 +206,30 @@ class CDSmenuItem extends LitElement {
         </div>
 
         <div class="${prefix}--menu-item__icon">
-          ${renderIcon ? html`${renderIcon()}` : html``}
+          <slot name="render-icon"></slot>
         </div>
         <div class="${prefix}--menu-item__label">${label}</div>
-        ${shortcut && !hasChildren
+        ${shortcut && !this.hasSubmenu
           ? html`
               <div class="${prefix}--menu-item__shortcut">${shortcut}</div>
             `
           : html``}
-        ${hasChildren
+        ${this.hasSubmenu
           ? html`
               <div class="${prefix}--menu-item__shortcut">
                 ${isRtl ? CaretLeft16() : CaretRight16()}
               </div>
               <cds-menu
                 className=${menuClassName}
-                .isChild="${hasChildren}"
+                ?isChild="${this.hasSubmenu}"
                 label="${label}"
                 .open="${submenuOpen}"
                 .onClose="${closeSubmenu}"
                 .x="${boundaries.x}"
                 .y="${boundaries.y}">
-                ${childElements}
+                <slot
+                  name="submenu"
+                  @slotchange="${this.handleSlotChange}"></slot>
               </cds-menu>
             `
           : html``}
@@ -233,7 +239,7 @@ class CDSmenuItem extends LitElement {
 
   _handleClick = (e: MouseEvent | KeyboardEvent): void => {
     if (!this.isDisabled) {
-      if (this.hasChildren) {
+      if (this.hasSubmenu) {
         this._openSubmenu();
       } else {
         if (this.onClick) {
@@ -323,7 +329,7 @@ class CDSmenuItem extends LitElement {
     )?.focus();
   };
   _handleKeyDown = (e: KeyboardEvent) => {
-    if (this.hasChildren && e.key === 'ArrowRight') {
+    if (this.hasSubmenu && e.key === 'ArrowRight') {
       this._openSubmenu();
       setTimeout(() => {
         this.submenuEntry.focus();
