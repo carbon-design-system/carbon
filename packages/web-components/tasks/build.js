@@ -168,6 +168,7 @@ build().catch((error) => {
   process.exit(1);
 });
 
+// TODO: remove and add scoped elements!
 async function postBuild() {
   const sourceDir = path.resolve(__dirname, '../es');
 
