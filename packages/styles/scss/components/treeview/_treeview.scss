@@ -110,7 +110,6 @@
   .#{$prefix}--tree-node__label {
     @include type-style('body-compact-01');
 
-    position: relative;
     display: flex;
     flex: 1;
     align-items: center;
@@ -247,16 +246,5 @@
 
   .#{$prefix}--tree--xs .#{$prefix}--tree-parent-node__toggle {
     margin-block-start: 0;
-  }
-
-  // badge indicator
-  .#{$prefix}--tree-node .#{$prefix}--badge-indicator {
-    inset-inline-end: unset;
-    margin-block-start: $spacing-02;
-    margin-inline-start: convert.to-rem(36px);
-  }
-
-  .#{$prefix}--tree-leaf-node .#{$prefix}--badge-indicator {
-    margin-inline-start: convert.to-rem(20px);
   }
 }

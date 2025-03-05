@@ -369,14 +369,6 @@
       padding-inline-end: calc($spacing-09 - 1px);
     }
 
-    &.#{$prefix}--tabs--dismissable
-      .#{$prefix}--tabs__nav-item
-      .#{$prefix}--badge-indicator {
-      inset-inline-end: unset;
-      margin-block-start: $spacing-02;
-      margin-inline-start: $spacing-05;
-    }
-
     //-----------------------------
     // Icon
     //-----------------------------
