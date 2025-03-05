@@ -109,6 +109,17 @@ export interface ButtonBaseProps
   tooltipAlignment?: ButtonTooltipAlignment;
 
   /**
+   * Enable drop shadow for tooltips for icon-only buttons.
+   */
+  tooltipDropShadow?: boolean;
+
+  /**
+   * Enable high-contrast theme for tooltips on icon-only buttons.
+   * Defaults to true.
+   */
+  tooltipHighContrast?: boolean;
+
+  /**
    * Specify the direction of the tooltip for icon-only buttons.
    * Can be either top, right, bottom, or left.
    */
@@ -145,6 +156,8 @@ const Button: ButtonComponent = React.forwardRef(
       autoAlign = false,
       children,
       hasIconOnly = false,
+      tooltipHighContrast = true,
+      tooltipDropShadow = false,
       iconDescription,
       kind = 'primary',
       onBlur,
@@ -200,6 +213,8 @@ const Button: ButtonComponent = React.forwardRef(
           label={iconDescription}
           kind={kind}
           size={size}
+          highContrast={tooltipHighContrast}
+          dropShadow={tooltipDropShadow}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           onFocus={onFocus}
@@ -372,6 +387,17 @@ const Button: ButtonComponent = React.forwardRef(
    * Can be one of: start, center, or end.
    */
   tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Enable drop shadow for tooltips for icon-only buttons.
+   */
+  tooltipDropShadow: PropTypes.bool,
+
+  /**
+   * Enable high-contrast theme for tooltips for icon-only buttons.
+   * Defaults to true.
+   */
+  tooltipHighContrast: PropTypes.bool,
 
   /**
    * Specify the direction of the tooltip for icon-only buttons.

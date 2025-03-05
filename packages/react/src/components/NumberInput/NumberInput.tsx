@@ -9,13 +9,14 @@ import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
+  FC,
+  MouseEvent,
+  ReactElement,
   ReactNode,
   useContext,
+  useEffect,
   useRef,
   useState,
-  useEffect,
-  FC,
-  ReactElement,
 } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
@@ -352,27 +353,37 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     const Icon = normalizedProps.icon as any;
 
-    function handleStepperClick(event, direction) {
+    const getDecimalPlaces = (num: number) => {
+      const parts = num.toString().split('.');
+
+      return parts[1] ? parts[1].length : 0;
+    };
+
+    const handleStepperClick = (
+      event: MouseEvent<HTMLButtonElement>,
+      direction: 'up' | 'down'
+    ) => {
       if (inputRef.current) {
         const currentValue = Number(inputRef.current.value);
-        let newValue =
+        const rawValue =
           direction === 'up' ? currentValue + step : currentValue - step;
-        if (min !== undefined) {
-          newValue = Math.max(newValue, min);
-        }
-        if (max !== undefined) {
-          newValue = Math.min(newValue, max);
-        }
-        const currentInputValue = inputRef.current
-          ? inputRef.current.value
-          : '';
+        const precision = Math.max(
+          getDecimalPlaces(currentValue),
+          getDecimalPlaces(step)
+        );
+        const floatValue = parseFloat(rawValue.toFixed(precision));
+        const newValue =
+          typeof min !== 'undefined' && typeof max !== 'undefined'
+            ? Math.min(Math.max(floatValue, min), max)
+            : floatValue;
         const state = {
           value:
-            allowEmpty && currentInputValue === '' && step === 0
+            allowEmpty && inputRef.current.value === '' && step === 0
               ? ''
               : newValue,
-          direction: direction,
+          direction,
         };
+
         setValue(state.value);
 
         if (onChange) {
@@ -383,7 +394,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           onClick(event, state);
         }
       }
-    }
+    };
 
     // AILabel always size `mini`
     let normalizedDecorator = React.isValidElement(slug ?? decorator)

@@ -493,8 +493,7 @@ export const SelectableTile = React.forwardRef<
     className
   );
 
-  // TODO: rename to handleClick when handleClick prop is deprecated
-  function handleOnClick(evt) {
+  function handleClick(evt) {
     evt.preventDefault();
     evt?.persist?.();
     if (
@@ -509,8 +508,7 @@ export const SelectableTile = React.forwardRef<
     onChange(evt, isSelected, id);
   }
 
-  // TODO: rename to handleKeyDown when handleKeyDown prop is deprecated
-  function handleOnKeyDown(evt) {
+  function handleKeyDown(evt) {
     evt?.persist?.();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
@@ -552,10 +550,10 @@ export const SelectableTile = React.forwardRef<
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
       className={classes}
-      onClick={!disabled ? handleOnClick : undefined}
+      onClick={!disabled ? handleClick : undefined}
       role="checkbox"
       aria-checked={isSelected}
-      onKeyDown={!disabled ? handleOnKeyDown : undefined}
+      onKeyDown={!disabled ? handleKeyDown : undefined}
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={!disabled ? tabIndex : undefined}
       ref={ref}
