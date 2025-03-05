@@ -12,9 +12,15 @@ import './breadcrumb';
 import './breadcrumb-item';
 import './breadcrumb-link';
 import './breadcrumb-overflow-menu';
+import '../overflow-menu/overflow-menu-body';
+import '../overflow-menu/overflow-menu-item';
 import '../overflow-menu/index';
 import './breadcrumb-skeleton';
 import { BREADCRUMB_SIZE } from './defs';
+
+import { prefix } from '../../globals/settings';
+
+import OverflowMenuHorizontal16 from '@carbon/icons/lib/overflow-menu--horizontal/16.js';
 
 const sizes = {
   [`Small size (${BREADCRUMB_SIZE.SMALL})`]: BREADCRUMB_SIZE.SMALL,
@@ -22,8 +28,13 @@ const sizes = {
 };
 const args = {
   ariaLabel: '',
-  classes: '',
+  className: '',
   noTrailingSlash: false,
+  size: {
+    control: 'select',
+    description: 'Specify the size of the Accordion.',
+    options: sizes,
+  },
 };
 
 const argTypes = {
@@ -32,7 +43,7 @@ const argTypes = {
     description: 'Specify the label for the breadcrumb container.',
     name: 'aria-label',
   },
-  classes: {
+  className: {
     control: 'text',
     description:
       'Specify an optional className to be applied to the container node.',
@@ -50,9 +61,16 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => {
+  args,
+  argTypes,
+  render: (args) => {
+    const { ariaLabel, className, noTrailingSlash, size } = args ?? {};
     return html`
-      <cds-breadcrumb>
+      <cds-breadcrumb
+        ?no-trailing-slash="${noTrailingSlash}"
+        class="${className}"
+        aria-label="${ariaLabel}"
+        size="${size}">
         <cds-breadcrumb-item>
           <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
         </cds-breadcrumb-item>
@@ -63,7 +81,7 @@ export const Default = {
           <cds-breadcrumb-link href="#">Breadcrumb 3</cds-breadcrumb-link>
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
-          <cds-breadcrumb-link>Breadcrumb 4</cds-breadcrumb-link>
+          <cds-breadcrumb-link>Breadcrumb 6</cds-breadcrumb-link>
         </cds-breadcrumb-item>
       </cds-breadcrumb>
     `;
@@ -74,11 +92,11 @@ export const BreadcrumbWithOverflowMenu = {
   args,
   argTypes,
   render: (args) => {
-    const { ariaLabel, classes, noTrailingSlash, size } = args ?? {};
+    const { ariaLabel, className, noTrailingSlash, size } = args ?? {};
     return html`
       <cds-breadcrumb
         ?no-trailing-slash="${noTrailingSlash}"
-        class="${classes}"
+        class="${className}"
         aria-label="${ariaLabel}"
         size="${size}">
         <cds-breadcrumb-item>
@@ -88,54 +106,44 @@ export const BreadcrumbWithOverflowMenu = {
           <cds-breadcrumb-link href="/#">Breadcrumb 2</cds-breadcrumb-link>
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
-          <cds-breadcrumb-overflow-menu>
+          <cds-overflow-menu breadcrumb>
+            ${OverflowMenuHorizontal16({
+              class: `${prefix}--overflow-menu__icon`,
+              slot: 'icon',
+            })}
+            <span slot="tooltip-content"> Options </span>
             <cds-overflow-menu-body>
               <cds-overflow-menu-item>Breadcrumb 3</cds-overflow-menu-item>
               <cds-overflow-menu-item>Breadcrumb 4</cds-overflow-menu-item>
             </cds-overflow-menu-body>
-          </cds-breadcrumb-overflow-menu>
+          </cds-overflow-menu>
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
           <cds-breadcrumb-link href="/#">Breadcrumb 5</cds-breadcrumb-link>
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
-          <cds-breadcrumb-link>Breadcrumb 6</cds-breadcrumb-link>
+          <cds-breadcrumb-link is-currentpage>Breadcrumb 6</cds-breadcrumb-link>
         </cds-breadcrumb-item>
       </cds-breadcrumb>
     `;
   },
 };
-
-export const Skeleton = {
-  render: () => {
-    return html` <cds-breadcrumb-skeleton> </cds-breadcrumb-skeleton> `;
+const skeletonArgs = { className: '' };
+const skeletonArgTypes = {
+  className: {
+    control: 'text',
+    description:
+      'Specify an optional className to be applied to the container node.',
   },
 };
 
-export const Playground = {
-  args,
-  argTypes,
+export const Skeleton = {
+  args: skeletonArgs,
+  argTypes: skeletonArgTypes,
   render: (args) => {
-    const { ariaLabel, classes, noTrailingSlash, size } = args ?? {};
+    const { className } = args ?? {};
     return html`
-      <cds-breadcrumb
-        ?no-trailing-slash="${noTrailingSlash}"
-        class="${classes}"
-        aria-label="${ariaLabel}"
-        size="${size}">
-        <cds-breadcrumb-item>
-          <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
-        </cds-breadcrumb-item>
-        <cds-breadcrumb-item>
-          <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-        </cds-breadcrumb-item>
-        <cds-breadcrumb-item>
-          <cds-breadcrumb-link href="#">Breadcrumb 3</cds-breadcrumb-link>
-        </cds-breadcrumb-item>
-        <cds-breadcrumb-item>
-          <cds-breadcrumb-link>Breadcrumb 4</cds-breadcrumb-link>
-        </cds-breadcrumb-item>
-      </cds-breadcrumb>
+      <cds-breadcrumb-skeleton class="${className}"> </cds-breadcrumb-skeleton>
     `;
   },
 };
