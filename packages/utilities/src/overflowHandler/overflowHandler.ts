@@ -6,25 +6,137 @@
  */
 
 /**
+ * Calculates the size (width or height) of a given HTML element.
+ *
+ * This function performs an expensive calculation by temporarily changing the
+ * display style of the element if it is not currently visible. It then uses
+ * `getBoundingClientRect` to retrieve the size of the element.
+ *
+ * @param el - The HTML element whose size is to be calculated.
+ * @param dimension - The dimension to measure ('width' or 'height').
+ * @returns The size of the element in pixels. Returns 0 if the element is not provided.
+ */
+export function getSize(
+  el: HTMLElement,
+  dimension: 'width' | 'height'
+): number {
+  if (!el) return 0;
+  const originalDisplay = el.style.display;
+  if (!el.offsetParent && getComputedStyle(el).display === 'none') {
+    el.style.display = 'inline-block';
+  }
+  const size = el.getBoundingClientRect()[dimension];
+  el.style.display = originalDisplay;
+  return size;
+}
+
+/**
+ * Options for updating the overflow handler.
+ * Determines which items should be visible and which should be hidden
+ * based on the container size, item sizes, and other constraints.
+ */
+export interface UpdateOverflowHandlerOptions {
+  /** The container element that holds the items. */
+  container: HTMLElement;
+  /** An array of item elements to be managed for overflow. */
+  items: HTMLElement[];
+  /** An element that represents the offset, which can be shown or hidden based on overflow. Identified by `data-offset` attribute. */
+  offset: HTMLElement;
+  /** An array of sizes corresponding to each item in the `items` array. */
+  sizes: number[];
+  /** An array of sizes corresponding to each item in the fixed items array. */
+  fixedSizes: number[];
+  /** The size of the offset element. */
+  offsetSize: number;
+  /** The maximum number of items that can be visible at once. If undefined, all items can be visible. */
+  maxVisibleItems?: number;
+  /** The dimension to consider for overflow, either 'width' or 'height'. */
+  dimension: 'width' | 'height';
+  /** A callback function that is called when the visible or hidden items change. */
+  onChange: (visibleItems: HTMLElement[], hiddenItems: HTMLElement[]) => void;
+  /** An array of previously hidden items to compare against the new hidden items. */
+  previousHiddenItems?: HTMLElement[];
+}
+
+/**
+ * Updates the overflow handler by determining which items should be visible and which should be hidden.
+ *
+ * @param options - Configuration options for updating the overflow handler.
+ * @returns An array of hidden items after the update.
+ */
+export function updateOverflowHandler({
+  container,
+  items,
+  offset,
+  sizes,
+  fixedSizes,
+  offsetSize,
+  maxVisibleItems,
+  dimension,
+  onChange,
+  previousHiddenItems = [],
+}: UpdateOverflowHandlerOptions): HTMLElement[] {
+  const containerSize =
+    dimension === 'width' ? container.clientWidth : container.clientHeight;
+
+  let visibleItems: HTMLElement[] = [];
+  let hiddenItems: HTMLElement[] = [];
+
+  const totalSize = sizes.reduce((sum, size) => sum + size, 0);
+  const totalFixedSize = fixedSizes.reduce((sum, size) => sum + size, 0);
+
+  if (totalSize + totalFixedSize <= containerSize) {
+    visibleItems = maxVisibleItems
+      ? items.slice(0, maxVisibleItems)
+      : [...items];
+    hiddenItems = maxVisibleItems ? items.slice(maxVisibleItems) : [];
+  } else {
+    const available = containerSize - offsetSize;
+    let accumulated = 0;
+
+    for (let i = 0; i < items.length; i++) {
+      const size = sizes[i];
+      if (
+        accumulated + size + totalFixedSize <= available &&
+        (!maxVisibleItems || visibleItems.length < maxVisibleItems)
+      ) {
+        visibleItems.push(items[i]);
+        accumulated += size;
+      } else {
+        hiddenItems.push(items[i]);
+      }
+    }
+  }
+
+  if (
+    previousHiddenItems.length === hiddenItems.length &&
+    previousHiddenItems.every((item, index) => item === hiddenItems[index])
+  ) {
+    return previousHiddenItems;
+  }
+
+  visibleItems.forEach((item) => item.removeAttribute('data-hidden'));
+  hiddenItems.forEach((item) => item.setAttribute('data-hidden', ''));
+
+  if (offset) {
+    offset.toggleAttribute('data-hidden', hiddenItems.length === 0);
+  }
+  onChange(visibleItems, hiddenItems);
+  return hiddenItems;
+}
+
+/**
  * Options for initializing an overflow handler.
  */
 export interface OverflowHandlerOptions {
   /**
-   * The container element that holds the items.
+   * The container element that holds the items. along with offset item
    */
   container: HTMLElement;
   /**
-   * Array of item elements that will be managed by the overflow handler.
-   */
-  items: HTMLElement[];
-  /**
-   * The size offset value used when calculating overflow.
-   */
-  offsetSize: number;
-  /**
    * Maximum number of visible items. If provided, only this number of items will be shown.
    */
-  maxVisible?: number;
+  maxVisibleItems?: number;
   /**
    * Callback function invoked when the visible and hidden items change.
    * @param visibleItems - The array of items that are currently visible.
@@ -35,16 +147,6 @@ export interface OverflowHandlerOptions {
    * The dimension to consider for overflow calculations. Defaults to 'width'.
    */
   dimension?: 'width' | 'height';
-  /**
-   * Optional callback to override the default behavior for styling visible items.
-   * @param visibleItems - The array of items that are currently visible.
-   */
-  onVisible?: (visibleItems: HTMLElement[]) => void;
-  /**
-   * Optional callback to override the default behavior for styling hidden items.
-   * @param hiddenItems - The array of items that are currently hidden.
-   */
-  onHidden?: (hiddenItems: HTMLElement[]) => void;
 }
 
 /**
@@ -57,90 +159,64 @@ export interface OverflowHandler {
   disconnect: () => void;
 }
 
-function createOverflowHandler({
+export function createOverflowHandler({
   container,
-  items,
-  offsetSize,
-  maxVisible,
+  maxVisibleItems,
   onChange,
   dimension = 'width',
-  onVisible,
-  onHidden,
 }: OverflowHandlerOptions): OverflowHandler {
   // Error handling
   if (!(container instanceof HTMLElement)) {
     throw new Error('container must be an HTMLElement');
   }
-  if (!Array.isArray(items)) {
-    throw new Error('items must be an array of HTMLElements');
-  }
   if (typeof onChange !== 'function') {
     throw new Error('onChange must be a function');
   }
   if (
-    maxVisible !== undefined &&
-    (!Number.isInteger(maxVisible) || maxVisible <= 0)
+    maxVisibleItems !== undefined &&
+    (!Number.isInteger(maxVisibleItems) || maxVisibleItems <= 0)
   ) {
-    throw new Error('maxVisible must be a positive integer');
+    throw new Error('maxVisibleItems must be a positive integer');
   }
 
-  // Helper function to get an element's dimension (width or height)
-  function getDimension(el: HTMLElement): number {
-    const originalDisplay = el.style.display;
-    // If the element is hidden, temporarily set its display to inline-block to measure it
-    if (!el.offsetParent && getComputedStyle(el).display === 'none') {
-      el.style.display = 'inline-block';
-    }
-    const size = el.getBoundingClientRect()[dimension];
-    el.style.display = originalDisplay;
-    return size;
-  }
+  const children = Array.from(container.children) as HTMLElement[];
+  const offset = children.find((item) =>
+    item.hasAttribute('data-offset')
+  ) as HTMLElement;
+  const fixedItems = children.filter((item) =>
+    item.hasAttribute('data-fixed')
+  ) as HTMLElement[];
+  const items = children.filter(
+    (item) => item !== offset && !fixedItems.includes(item)
+  );
 
-  // Update which items are visible vs hidden based on container size
+  const fixedSizes = fixedItems.map((item) => getSize(item, dimension));
+  const sizes = items.map((item) => getSize(item, dimension));
+  const offsetSize = getSize(offset, dimension);
+
+  let previousHiddenItems: HTMLElement[] = [];
+
   function update() {
-    const containerSize =
-      dimension === 'width' ? container.clientWidth : container.clientHeight;
-    const sizes = items.map(getDimension);
-    const totalSize = sizes.reduce((sum, size) => sum + size, 0);
-    let visibleItems: HTMLElement[] = [];
-    let hiddenItems: HTMLElement[] = [];
-
-    // If all items fit, apply maxVisible if set. otherwise, all items are visible.
-    if (totalSize <= containerSize) {
-      visibleItems = maxVisible ? items.slice(0, maxVisible) : [...items];
-      hiddenItems = maxVisible ? items.slice(maxVisible) : [];
-    } else {
-      const available = containerSize - offsetSize;
-      let accumulated = 0;
-      for (let i = 0; i < items.length; i++) {
-        const size = sizes[i];
-        if (
-          accumulated + size <= available &&
-          (!maxVisible || visibleItems.length < maxVisible)
-        ) {
-          visibleItems.push(items[i]);
-          accumulated += size;
-        } else {
-          hiddenItems.push(items[i]);
-        }
-      }
-    }
-
-    // Apply custom styling if callbacks are provided. otherwise, apply default styling.
-    onVisible
-      ? onVisible(visibleItems)
-      : visibleItems.forEach((item) => item.style.removeProperty('display'));
-    onHidden
-      ? onHidden(hiddenItems)
-      : hiddenItems.forEach((item) => (item.style.display = 'none'));
-    onChange(visibleItems, hiddenItems);
+    previousHiddenItems = updateOverflowHandler({
+      container,
+      items,
+      offset,
+      sizes,
+      fixedSizes,
+      offsetSize,
+      maxVisibleItems,
+      dimension,
+      onChange,
+      previousHiddenItems,
+    });
   }
 
-  requestAnimationFrame(update);
   const resizeObserver = new ResizeObserver(() =>
     requestAnimationFrame(update)
   );
   resizeObserver.observe(container);
+
+  requestAnimationFrame(update); // Initial update
 
   return {
     disconnect() {
@@ -148,5 +224,3 @@ function createOverflowHandler({
     },
   };
 }
-
-export { createOverflowHandler };
