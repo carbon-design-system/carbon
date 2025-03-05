@@ -10,8 +10,10 @@
 import { html } from 'lit';
 import './index';
 import '../button/index';
+import '../badge-indicator/index';
 import { ICON_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
 import Edit16 from '@carbon/icons/lib/edit/16.js';
+import Notification16 from '@carbon/icons/lib/notification/16.js';
 import { ICON_BUTTON_SIZE } from './defs';
 import { BUTTON_KIND } from '../button/defs';
 
@@ -139,6 +141,37 @@ export const Playground = {
         size=${size}>
         ${Edit16({ slot: 'icon' })}
         <span slot="tooltip-content">${label}</span>
+      </cds-icon-button>
+    `;
+  },
+};
+
+export const withBadgeIndicator = {
+  argTypes: {
+    badgeCount: {
+      control: 'number',
+      description:
+        'The count prop for "cds-badge-indicator" when slotted into the button',
+    },
+    ...argTypes,
+  },
+  args: {
+    badgeCount: 4,
+    ...args,
+  },
+  render: ({ badgeCount, disabled }) => {
+    return html`
+      <cds-icon-button
+        kind="ghost"
+        size="lg"
+        href="https://www.example.com"
+        ?disabled=${disabled}>
+        ${Notification16({ slot: 'icon' })}
+        <span slot="tooltip-content">label</span>
+        ${badgeCount > 0
+          ? html` <cds-badge-indicator
+              count=${badgeCount}></cds-badge-indicator>`
+          : html`<cds-badge-indicator></cds-badge-indicator>`}
       </cds-icon-button>
     `;
   },
