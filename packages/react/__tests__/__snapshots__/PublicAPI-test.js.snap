@@ -4240,6 +4240,9 @@ Map {
       "autoAlign": Object {
         "type": "bool",
       },
+      "badgeCount": Object {
+        "type": "number",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4948,7 +4951,23 @@ Map {
               "args": Array [
                 Object {
                   "current": Object {
-                    "type": "any",
+                    "args": Array [
+                      Array [
+                        Object {
+                          "type": "any",
+                        },
+                        Object {
+                          "args": Array [
+                            Array [
+                              null,
+                            ],
+                          ],
+                          "type": "oneOf",
+                        },
+                      ],
+                    ],
+                    "isRequired": true,
+                    "type": "oneOfType",
                   },
                 },
               ],
@@ -9580,6 +9599,7 @@ Map {
     },
   },
   "Tooltip" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "align": Object {
         "args": Array [
@@ -9639,6 +9659,7 @@ Map {
         "type": "number",
       },
     },
+    "render": [Function],
   },
   "TreeNode" => Object {
     "$$typeof": Symbol(react.forward_ref),
