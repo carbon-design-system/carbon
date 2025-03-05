@@ -388,10 +388,8 @@ export const HeaderBaseWActionsRightPanel = {
             ${Notification20({ slot: 'icon' })}
             ${badgeCount > 0
               ? html`<cds-badge-indicator
-                  count="${badgeCount}"
-                  slot="badge-indicator"></cds-badge-indicator>`
-              : html`<cds-badge-indicator
-                  slot="badge-indicator"></cds-badge-indicator>`}
+                  count=${badgeCount}></cds-badge-indicator>`
+              : html`<cds-badge-indicator></cds-badge-indicator>`}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
