@@ -148,9 +148,7 @@ const Select = React.forwardRef(function Select(
     labelText = 'Select',
     disabled = false,
     children,
-    // reserved for use with Pagination component
     noLabel = false,
-    // eslint-disable-next-line no-unused-vars
     hideLabel = false,
     invalid = false,
     invalidText = '',
@@ -170,7 +168,8 @@ const Select = React.forwardRef(function Select(
   const { isFluid } = useContext(FormContext);
   const [isFocused, setIsFocused] = useState(false);
   const selectInstanceId = useId();
-  // Set the Title of the default value from the values set
+
+  // Find the text of the default selected option
   const defaultOption = React.Children.toArray(children).find(
     (child) =>
       React.isValidElement(child) && child.props?.value === other?.defaultValue
@@ -182,11 +181,11 @@ const Select = React.forwardRef(function Select(
     React.isValidElement(child)
   );
 
-  // Initialize the title with the defaultOption or the firstOptionInSet's value
+  // Initialize the title with the `text` prop
   const [title, setTitle] = useState(
-    (React.isValidElement(defaultOption) && defaultOption.props?.value) ||
+    (React.isValidElement(defaultOption) && defaultOption.props?.text) ||
       (React.isValidElement(firstOptionInSet) &&
-        firstOptionInSet.props?.value) ||
+        firstOptionInSet.props?.text) ||
       ''
   );
   const selectClasses = classNames({
@@ -250,7 +249,8 @@ const Select = React.forwardRef(function Select(
   };
 
   const handleChange = (evt) => {
-    setTitle(evt?.target?.value);
+    const selectedOption = evt?.target?.options[evt.target.selectedIndex];
+    setTitle(selectedOption?.text);
   };
 
   const readOnlyEventHandlers = {
