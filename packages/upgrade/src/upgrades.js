@@ -332,6 +332,95 @@ export const upgrades = [
         },
       },
       {
+        name: 'enable-v12-overflowmenu',
+        description: `
+          Updates OverflowMenu components to v12 with optional FeatureFlags wrapping:
+          1. Migrates to new API (OverflowMenuItem -> MenuItem)
+          2. Updates props (itemText -> label, etc)
+          3. Optional FeatureFlags wrapping (--wrapWithFeatureFlag=false to disable)
+       
+          Example:
+          Before:  <OverflowMenu aria-label="menu"><OverflowMenuItem itemText="Option" /></OverflowMenu>
+          After:   <FeatureFlags enableV12Overflowmenu>
+                    <OverflowMenu label="menu"><MenuItem label="Option" /></OverflowMenu>
+                   </FeatureFlags>
+        `,
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'enable-v12-overflowmenu.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.{js,jsx,ts,tsx}'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            wrapWithFeatureFlag: options.wrapWithFeatureFlag,
+          });
+        },
+      },
+      {
+        name: 'slug-prop-to-decorator-prop',
+        description: `
+          Replace slug prop with decorator
+          
+          Transforms:
+          <Component slug="value">
+            content
+          </Component>
+      
+          Into:
+          <Component decorator="value">
+            content
+          </Component>
+        `,
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'slug-prop-to-decorator-prop.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                    '**/dist/**',
+                    '**/build/**',
+                    '**/*.d.ts',
+                    '**/coverage/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            parser: 'tsx',
+          });
+        },
+      },
+      {
         name: 'refactor-light-to-layer',
         description: `
           Refactor 'light' prop usage to instead wrap components with Layer
@@ -572,6 +661,79 @@ export const upgrades = [
             transform,
             paths,
             verbose: options.verbose,
+          });
+        },
+      },
+      {
+        name: 'enable-v12-structured-list-visible-icons',
+        description: `
+        Updates selectable StructuredList components with new v12 selection pattern.
+        https://react.carbondesignsystem.com/?path=/story/components-structuredlist-feature-flag--selection
+    
+        Key Changes:
+        • Replaces checkmark icons with radio buttons
+        • Moves selection indicators to first column (previously last column)
+        • Makes radio buttons always visible (not just on hover)
+        • Identifies StructuredListWrapper components with the selection prop
+        • Automatically adds selection prop to all child StructuredListRow components
+        
+    
+        Transforms:
+        Before migration:
+          <StructuredListWrapper selection>
+            <StructuredListRow>
+              <StructuredListCell>Content</StructuredListCell>
+              <StructuredListCell><CheckmarkFilled /></StructuredListCell>
+            </StructuredListRow>
+          </StructuredListWrapper>
+    
+        After migration:
+          <StructuredListWrapper selection>
+            <StructuredListRow selection>
+              <StructuredListCell>Content</StructuredListCell>
+            </StructuredListRow>
+          </StructuredListWrapper>
+      `,
+        messageConfig: {
+          name: 'StructuredList',
+          nextSteps: [
+            '⚠️ IMPORTANT: Additional SASS Changes Required!',
+            'This migration requires enabling "enable-v12-structured-list-visible-icons" SASS feature flag in your stylesheet.',
+            '$enable-v12-structured-list-visible-icons: true',
+            '📚 For detailed instructions on enabling SASS feature flags, visit:',
+            'https://react.carbondesignsystem.com/iframe.html?args=size%3Amini&viewMode=docs&id=getting-started-feature-flags--overview&globals=#turning-on-feature-flags-in-sass',
+            '',
+          ],
+        },
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'enable-v12-structured-list-visible-icons.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                    '**/dist/**',
+                    '**/build/**',
+                    '**/*.d.ts',
+                    '**/coverage/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            parser: 'tsx',
           });
         },
       },

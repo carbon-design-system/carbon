@@ -1,4 +1,6 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas} from '@storybook/blocks';
+import * as LayoutStories from './Layout.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -33,7 +35,7 @@ layout context's intent.
 If a component is outside a layout context or `props.size` / `props.density`
 isn't set, it will fall back to its default rendering.
 
-Components that are explicitely passed a `size` to are unaffected by the layout
+Components that are explicitly passed a `size` to are unaffected by the layout
 context. Example:
 
 ```jsx
@@ -53,6 +55,16 @@ context. Example:
   </Layout>
 </div>
 ```
+
+<Canvas
+  of={LayoutStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(LayoutStories.Default),
+    },
+  ]}
+/>
 
 ### LayoutConstraint
 

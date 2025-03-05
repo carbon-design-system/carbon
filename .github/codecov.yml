@@ -6,7 +6,6 @@ coverage:
     patch:
       default:
         informational: true
-
 component_management:
   default_rules: # default rules that will be inherited by all components
     statuses:

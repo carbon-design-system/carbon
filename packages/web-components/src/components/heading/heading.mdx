@@ -1,0 +1,53 @@
+import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as HeadingStories from './heading.stories';
+
+<Meta of={HeadingStories} />
+
+# Heading
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/heading)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/heading)
+
+For people using screen readers, headings in HTML are one of the most common
+ways to navigate a page. Correctly using headings and levels helps with
+understanding a page and its hierarchy and can be used to jump between sections
+on a page.
+
+Normally, in a component you would have to specify the heading level manually.
+This can become problematic if your component is used in various parts of a page
+where the heading level needs to be different.
+
+To help address this, the `Heading` component will automatically infer the
+appropriate heading level without you having to manually specify it. To do this,
+you use the `Section` component for each section of your page. Every `Heading`
+component in that `Section` will use the correct heading level.
+
+## Getting started
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/heading/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['heading'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-heading>h1</cds-heading>
+```
+
+## Component Details
+
+### `<cds-heading>`
+<ArgTypes of="cds-heading" />
+
+### `<cds-section>`
+Properties:
+- `level`: Optional number (1-6) to explicitly set heading level for the section. If not provided, level is automatically determined based on nesting.

@@ -166,6 +166,13 @@
       ]
     },
     {
+      "login": "preetibansalui",
+      "name": "Preeti Bansal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/146315451?v=4",
+      "profile": "https://github.com/preetibansalui",
+      "contributions": ["code", "a11y"]
+    },
+    {
       "login": "erifsx",
       "name": "Eric Marcoux",
       "avatar_url": "https://avatars3.githubusercontent.com/u/997572?v=4",
@@ -1762,6 +1769,26 @@
         "doc",
         "a11y",
         "review"
+      ]
+    },
+    {
+      "login": "Tweakified",
+      "name": "Daniel Smith",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58192912?v=4",
+      "profile": "https://github.com/Tweakified",
+      "contributions": [
+        "code",
+        "a11y",
+        "doc"
+      ]
+    },
+    {
+      "login": "enricobguedes",
+      "name": "enricobguedes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45374536?v=4",
+      "profile": "https://github.com/enricobguedes",
+      "contributions": [
+        "code"
       ]
     }
   ],

@@ -278,6 +278,7 @@ categories:
           - add--filled
           - add--large
           - apps
+          - arrange
           - arrow--down
           - arrow--down-left
           - arrow--down-right
@@ -302,6 +303,7 @@ categories:
           - close--outline
           - down-to-bottom
           - draggable
+          - fragments
           - home
           - menu
           - notification-counter
@@ -309,7 +311,9 @@ categories:
           - overflow-menu--vertical
           - page--first
           - page--last
+          - pipelines
           - select--window
+          - stickies
           - subtract
           - subtract--alt
           - subtract--filled
@@ -716,6 +720,7 @@ categories:
           - ibm--aiops-insights
           - ibm--api-connect
           - ibm--app-connect-enterprise
+          - ibm--application-and-discovery-delivery-intelligence
           - ibm--aspera
           - ibm--bluepay
           - ibm--cloudant
@@ -762,6 +767,7 @@ categories:
           - ibm--lqe
           - ibm--machine-learning-for-zos
           - ibm--match-360
+          - ibm--maximo-application-suite
           - ibm--mq
           - ibm--open-enterprise-languages
           - ibm--openshift-container-platform-on-vpc-for-regulated-industries
@@ -777,6 +783,7 @@ categories:
           - ibm--streamsets
           - ibm--telehealth
           - ibm--tenet
+          - ibm--test-accelerator-for-z
           - ibm--toolchain
           - ibm--turbonomic
           - ibm--unstructured-data-processor
@@ -800,6 +807,7 @@ categories:
           - ibm-cloud--direct-link-2--connect
           - ibm-cloud--direct-link-2--dedicated
           - ibm-cloud--direct-link-2--dedicated-hosting
+          - ibm-cloud--essential-security-and-observability-services
           - ibm-cloud--event-notification
           - ibm-cloud--event-streams
           - ibm-cloud--for-education
@@ -865,6 +873,7 @@ categories:
           - ibm-watson--studio
           - ibm-watson--text-to-speech
           - ibm-watson--tone-analyzer
+          - ibm-watsonx--code-assistant-for-enterprise-java-applications
           - ibm-watsonx--code-assistant-for-z-validation-assistant
           - ibm-z--cloud-mod-stack
           - ibm-z--environments-dev-sec-ops
@@ -878,6 +887,8 @@ categories:
           - infrastructure--classic
           - load-balancer--vpc
           - mysql
+          - power-enterprise-pools-metered-capacity-integration
+          - power-virtual-server-disaster-recovery-automation
           - scis--control-tower
           - scis--transparent-supply
           - virtual-private-cloud--alt
@@ -915,6 +926,7 @@ categories:
           - drink--02
           - enterprise
           - finance
+          - financial-assets
           - fish
           - fish--multiple
           - fragile
@@ -1307,6 +1319,7 @@ categories:
           - double-integer
           - downstream
           - driver-analysis
+          - emissions-management
           - factor
           - flow
           - flow--connection
@@ -1348,6 +1361,7 @@ categories:
           - network--4
           - network--4--reference
           - nominal
+          - null-sign
           - ordinal
           - parent-child
           - parameter

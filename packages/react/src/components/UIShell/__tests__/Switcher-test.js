@@ -124,7 +124,7 @@ describe('Switcher', () => {
       expect(document.activeElement).toBe(secondLink);
     });
 
-    it('should focus the next valid index when moving backword', async () => {
+    it('should focus the next valid index when moving backward', async () => {
       render(renderSwitcher());
 
       const items = screen.getAllByRole('listitem');
