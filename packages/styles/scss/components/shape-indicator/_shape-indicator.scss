@@ -1,0 +1,92 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../colors' as *;
+@use '../icon-indicator/tokens' as *;
+
+/// shape-indicator styles
+/// @access public
+/// @group tag
+@mixin shape-indicator {
+  .#{$prefix}--shape-indicator {
+    @include type-style('helper-text-01');
+
+    display: flex;
+    color: $text-secondary;
+  }
+
+  .#{$prefix}--shape-indicator svg {
+    align-self: center;
+    margin-inline-end: $spacing-03;
+  }
+
+  .#{$prefix}--shape-indicator--14 {
+    @include type-style('body-compact-01');
+  }
+
+  .#{$prefix}--shape-indicator--failed {
+    fill: $status-red;
+  }
+
+  .#{$prefix}--shape-indicator--critical {
+    fill: $status-red;
+  }
+
+  .#{$prefix}--shape-indicator--high {
+    fill: $status-red;
+  }
+
+  .#{$prefix}--shape-indicator--medium {
+    fill: $status-orange;
+
+    path:first-of-type {
+      fill: $status-orange-outline;
+    }
+  }
+
+  .#{$prefix}--shape-indicator--low {
+    fill: $status-yellow;
+
+    path:nth-of-type(2) {
+      fill: $status-yellow-outline;
+    }
+  }
+
+  .#{$prefix}--shape-indicator--cautious {
+    fill: $status-yellow;
+
+    path:first-of-type {
+      fill: $status-yellow-outline;
+    }
+  }
+
+  .#{$prefix}--shape-indicator--undefined {
+    fill: $status-purple;
+  }
+
+  .#{$prefix}--shape-indicator--stable {
+    fill: $status-green;
+  }
+
+  .#{$prefix}--shape-indicator--informative {
+    fill: $status-blue;
+  }
+
+  .#{$prefix}--shape-indicator--incomplete {
+    path:nth-of-type(2) {
+      fill: $status-blue;
+    }
+  }
+
+  .#{$prefix}--shape-indicator--draft {
+    fill: $status-gray;
+  }
+}
