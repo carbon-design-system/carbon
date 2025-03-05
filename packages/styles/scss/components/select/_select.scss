@@ -248,7 +248,10 @@
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input
-    ~ .#{$prefix}--select__invalid-icon {
+    ~ .#{$prefix}--select__invalid-icon,
+  .#{$prefix}--select--inline.#{$prefix}--select--warning
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon--warning {
     inset-inline-end: $spacing-07;
   }
 

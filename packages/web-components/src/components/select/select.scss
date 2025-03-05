@@ -63,12 +63,6 @@ $divider-width: 1px;
   pointer-events: none;
 }
 
-:host(#{$prefix}-select[inline][warn]) {
-  .#{$prefix}--select__invalid-icon--warning {
-    inset-inline-end: $spacing-08;
-  }
-}
-
 :host(#{$prefix}-select[pagination]) {
   .#{$prefix}--label {
     margin: 0;

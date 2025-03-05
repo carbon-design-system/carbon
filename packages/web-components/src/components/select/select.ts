@@ -504,7 +504,11 @@ class CDSSelect extends FormMixin(LitElement) {
           ? html`<div
               class="${prefix}--select-input--inline__wrapper"
               ?data-invalid="${invalid}">
-              <div class="${prefix}--select-input__wrapper">${input}</div>
+              <div
+                class="${prefix}--select-input__wrapper"
+                ?data-invalid="${invalid}">
+                ${input}
+              </div>
             </div>`
           : html`<div
               class="${prefix}--select-input__wrapper"
