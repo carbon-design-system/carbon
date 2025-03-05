@@ -607,5 +607,6 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';
 
+// status indicators
 export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';
 export { ShapeIndicator as unstable__ShapeIndicator } from './components/ShapeIndicator';
