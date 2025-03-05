@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2019, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, {
   useEffect,
   useRef,
@@ -488,8 +495,7 @@ export const SelectableTile = React.forwardRef<
     className
   );
 
-  // TODO: rename to handleClick when handleClick prop is deprecated
-  function handleOnClick(evt) {
+  function handleClick(evt) {
     evt.preventDefault();
     evt?.persist?.();
     if (
@@ -507,8 +513,7 @@ export const SelectableTile = React.forwardRef<
     clickHandler(evt);
   }
 
-  // TODO: rename to handleKeyDown when handleKeyDown prop is deprecated
-  function handleOnKeyDown(evt) {
+  function handleKeyDown(evt) {
     evt?.persist?.();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
@@ -550,10 +555,10 @@ export const SelectableTile = React.forwardRef<
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
       className={classes}
-      onClick={!disabled ? handleOnClick : undefined}
+      onClick={!disabled ? handleClick : undefined}
       role="checkbox"
       aria-checked={isSelected}
-      onKeyDown={!disabled ? handleOnKeyDown : undefined}
+      onKeyDown={!disabled ? handleKeyDown : undefined}
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={!disabled ? tabIndex : undefined}
       ref={ref}
