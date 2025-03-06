@@ -151,6 +151,7 @@ const config = {
                 path.resolve(__dirname, '..', 'node_modules'),
                 path.resolve(__dirname, '..', '..', '..', 'node_modules'),
               ],
+              quietDeps: true,
             },
             warnRuleAsWarning: true,
             sourceMap: true,
