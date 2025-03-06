@@ -363,7 +363,7 @@ export const HeaderBaseWActionsRightPanel = {
     badgeCount: {
       control: 'number',
       description:
-        'Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0. Must be used with size="lg" and kind="ghost"',
+        ' **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0. Must be used with size="lg" and kind="ghost"',
     },
   },
   args: {
