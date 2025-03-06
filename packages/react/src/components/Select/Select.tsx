@@ -169,25 +169,16 @@ const Select = React.forwardRef(function Select(
   const [isFocused, setIsFocused] = useState(false);
   const selectInstanceId = useId();
 
-  // Find the text of the default selected option
-  const defaultOption = React.Children.toArray(children).find(
-    (child) =>
-      React.isValidElement(child) && child.props?.value === other?.defaultValue
+  // Convert children to an array of valid elements once
+  const validChildren = React.Children.toArray(children).filter(React.isValidElement);
+  // Find the default option based on the specified defaultValue
+  const defaultOption = validChildren.find(
+    (child) => child.props?.value === other?.defaultValue
   );
-
-  // If the value set does not contain any default Title value specified,
-  // consider the first value in the set as the Title value
-  const firstOptionInSet = React.Children.toArray(children).find((child) =>
-    React.isValidElement(child)
-  );
-
-  // Initialize the title with the `text` prop
-  const [title, setTitle] = useState(
-    (React.isValidElement(defaultOption) && defaultOption.props?.text) ||
-      (React.isValidElement(firstOptionInSet) &&
-        firstOptionInSet.props?.text) ||
-      ''
-  );
+  // Use the default option's text if available; otherwise, fallback to the first option's text
+  const initialTitle = defaultOption?.props?.text || validChildren[0]?.props?.text || '';
+  
+  const [title, setTitle] = useState(initialTitle);
   const selectClasses = classNames({
     [`${prefix}--select`]: true,
     [`${prefix}--select--inline`]: inline,
