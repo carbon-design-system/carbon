@@ -25,15 +25,15 @@
 /// @group page-header
 @mixin page-header {
   .#{$prefix}--page-header {
-    border: 1px solid rebeccapurple;
+    border: 1px solid rebeccapurple; /* stylelint-disable-line */
   }
   .#{$prefix}--page-header__breadcrumb-bar {
-    border: 1px solid blue;
+    border: 1px solid blue; /* stylelint-disable-line */
   }
   .#{$prefix}--page-header__content {
-    border: 1px solid red;
+    border: 1px solid red; /* stylelint-disable-line */
   }
   .#{$prefix}--page-header__tab-bar {
-    border: 1px solid green;
+    border: 1px solid green; /* stylelint-disable-line */
   }
 }
