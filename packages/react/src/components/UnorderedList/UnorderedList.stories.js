@@ -27,23 +27,9 @@ export default {
 export const Default = (args) => {
   return (
     <UnorderedList {...args}>
-      <ListItem>nikhil</ListItem>
-      <ListItem>
-        hello
-        <UnorderedList nested>
-          <ListItem>Unordered List level 1</ListItem>
-          <ListItem>Unordered List level 1</ListItem>
-          <ListItem>Unordered List level 1</ListItem>
-        </UnorderedList>
-      </ListItem>
-      <ListItem>
-        hello2
-        <UnorderedList nested>
-          <ListItem>Unordered List level 1</ListItem>
-          <ListItem>Unordered List level 1</ListItem>
-          <ListItem>Unordered List level 1</ListItem>
-        </UnorderedList>
-      </ListItem>
+      <ListItem>Unordered List level 1</ListItem>
+      <ListItem>Unordered List level 1</ListItem>
+      <ListItem>Unordered List level 1</ListItem>
     </UnorderedList>
   );
 };
