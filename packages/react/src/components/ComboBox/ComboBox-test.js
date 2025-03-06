@@ -30,7 +30,6 @@ const prefix = 'cds';
 
 const ControlledComboBox = ({ controlledItem }) => {
   const items = generateItems(5, generateGenericItem);
-  console.log(items[3]);
   const [value, setValue] = useState(controlledItem || items[0]);
   const [onChangeCallCount, setOnChangeCallCount] = useState(0);
   const [onInputChangeCallCount, setOnInputChangeCallCount] = useState(0);
