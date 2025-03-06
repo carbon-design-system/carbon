@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,7 +22,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-unordered-list`)
 class CDSUnorderedList extends LitElement {
   /**
-   * Specify whether this ordered list is expressive or not
+   * `true` if expressive theme enabled.
    */
   @property({ type: Boolean, reflect: true, attribute: 'is-expressive' })
   isExpressive = false;
