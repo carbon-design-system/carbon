@@ -171,14 +171,21 @@ const Select = React.forwardRef(function Select(
   const [isFocused, setIsFocused] = useState(false);
   const selectInstanceId = useId();
 
-  // Convert children to an array of valid elements once
-  const validChildren = React.Children.toArray(children).filter((child) =>
-    React.isValidElement(child)
+  interface SelectItemProps {
+    value: any;
+    text: string;
+  }
+  // Convert children to an array of valid elements once using type narrowing
+  const validChildren = React.Children.toArray(children).filter(
+    (child): child is React.ReactElement<SelectItemProps> =>
+      React.isValidElement<SelectItemProps>(child)
   );
+
   // Find the default option based on the specified defaultValue
   const defaultOption = validChildren.find(
     (child) => child.props?.value === other?.defaultValue
   );
+
   // Use the default option's text if available; otherwise, fallback to the first option's text
   const initialTitle =
     defaultOption?.props?.text || validChildren[0]?.props?.text || '';
