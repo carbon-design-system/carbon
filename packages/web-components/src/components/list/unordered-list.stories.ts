@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,8 +23,10 @@ const controls = {
 };
 
 export const Default = {
-  render: ({ isexpressive }) =>
-    html`<cds-unordered-list ?isexpressive="${isexpressive}">
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({ isExpressive }) =>
+    html`<cds-unordered-list ?is-expressive="${isExpressive}">
       <cds-list-item>Unordered List level 1</cds-list-item>
       <cds-list-item>Unordered List level 1</cds-list-item>
       <cds-list-item>Unordered List level 1</cds-list-item>
@@ -32,15 +34,30 @@ export const Default = {
 };
 
 export const Nested = {
-  render: () =>
-    html`<cds-unordered-list>
+  args: {
+    ...defaultArgs,
+    nested: true,
+  },
+  argTypes: {
+    ...controls,
+    nested: {
+      control: 'boolean',
+      description: 'Specify whether to use nested styling for child lists.',
+    },
+  },
+  render: ({ isExpressive, nested }) =>
+    html`<cds-unordered-list ?is-expressive="${isExpressive}">
       <cds-list-item>
         Unordered List level 1
-        <cds-unordered-list>
+        <cds-unordered-list
+          ?is-expressive="${isExpressive}"
+          ?nested="${nested}">
           <cds-list-item>Unordered List level 2</cds-list-item>
           <cds-list-item>
             Unordered List level 2
-            <cds-unordered-list>
+            <cds-unordered-list
+              ?is-expressive="${isExpressive}"
+              ?nested="${nested}">
               <cds-list-item>Unordered List level 3</cds-list-item>
               <cds-list-item>Unordered List level 3</cds-list-item>
             </cds-unordered-list>
@@ -53,20 +70,32 @@ export const Nested = {
 };
 
 export const Playground = {
-  args: defaultArgs,
-  argTypes: controls,
-
-  render: ({ isExpressive }) => html`
-    <cds-unordered-list ?isExpressive="${isExpressive}">
+  args: {
+    ...defaultArgs,
+    nested: false,
+  },
+  argTypes: {
+    ...controls,
+    nested: {
+      control: 'boolean',
+      description: 'Specify whether to use nested styling for child lists.',
+    },
+  },
+  render: ({ isExpressive, nested }) => html`
+    <cds-unordered-list ?is-expressive="${isExpressive}">
       <cds-list-item>
         Unordered List level 1
-        <cds-unordered-list ?isExpressive="${isExpressive}">
+        <cds-unordered-list
+          ?is-expressive="${isExpressive}"
+          ?nested="${nested}">
           <cds-list-item>Unordered List level 2</cds-list-item>
           <cds-list-item>
             Unordered List level 2
-            <cds-unordered-list ?isExpressive="${isExpressive}">
-              <cds-list-item>Unordered List level 2</cds-list-item>
-              <cds-list-item>Unordered List level 2</cds-list-item>
+            <cds-unordered-list
+              ?is-expressive="${isExpressive}"
+              ?nested="${nested}">
+              <cds-list-item>Unordered List level 3</cds-list-item>
+              <cds-list-item>Unordered List level 3</cds-list-item>
             </cds-unordered-list>
           </cds-list-item>
         </cds-unordered-list>
