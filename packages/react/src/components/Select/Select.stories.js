@@ -17,7 +17,6 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './Select.mdx';
-import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/Select',
@@ -83,11 +82,14 @@ export const Inline = (args) => {
       <Select
         inline
         id="select-1"
-        labelText="Select"
+        labelText="Select an option"
         helperText="Optional helper text"
         {...args}>
         <SelectItem value="" text="" />
-        <SelectItem value="Option 1" text="Option 1" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
         <SelectItem value="Option 2" text="Option 2" />
         <SelectItem value="Option 3" text="Option 3" />
         <SelectItem value="Option 4" text="Option 4" />
