@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/components/tooltip/index' as *;
 @use '@carbon/styles/scss/components/tag/index' as *;
 @use '@carbon/styles/scss/components/tag/mixins' as *;
 @use '@carbon/styles/scss/layout' as *;
@@ -18,6 +19,29 @@ $css--plex: true !default;
 :host(#{$prefix}-tag),
 :host(#{$prefix}-dismissible-tag) {
   @extend .#{$prefix}--tag;
+}
+
+:host(#{$prefix}-dismissible-tag) {
+  display: none;
+  padding-block: 0;
+  padding-inline-end: 0;
+}
+
+:host(#{$prefix}-dismissible-tag[open]) {
+  display: inline-flex;
+}
+
+:host(#{$prefix}-dismissible-tag) #{$prefix}-tooltip {
+  @extend .#{$prefix}--icon-tooltip;
+  @extend .#{$prefix}--tag-label-tooltip;
+}
+
+:host(#{$prefix}-dismissible-tag) .#{$prefix}--tag__close-icon {
+  @extend .#{$prefix}--tag__close-icon;
+}
+
+:host(#{$prefix}-dismissible-tag) ::slotted([slot='icon']) {
+  @extend .#{$prefix}--tag__custom-icon;
 }
 
 :host(#{$prefix}-tag),

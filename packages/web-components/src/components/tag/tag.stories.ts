@@ -104,12 +104,17 @@ const controls = {
 
 export const Dismissible = {
   render: () =>
-    html`${types.map(
-      (e) =>
-        html`<cds-dismissible-tag filter type="${e}"
-          >Tag content</cds-dismissible-tag
-        >`
-    )}`,
+    html` <cds-dismissible-tag filter type="red">
+        ${Asleep16({ slot: 'icon' })} Tag content with a long text description
+      </cds-dismissible-tag>
+      ${types
+        .slice(1)
+        .map(
+          (e) =>
+            html`<cds-dismissible-tag filter type="${e}"
+              >${Asleep16({ slot: 'icon' })} Tag content</cds-dismissible-tag
+            >`
+        )}`,
 };
 
 export const Skeleton = {
@@ -128,12 +133,17 @@ export const ReadOnly = {
   argTypes: controls,
   args: ReadOnlyArgs,
   render: ({ size, disabled }) =>
-    html`${types.map(
-      (e) =>
-        html`<cds-tag type="${e}" size="${size}" ?disabled="${disabled}"
-          >Tag content</cds-tag
-        >`
-    )}`,
+    html` <cds-tag type="red" size="${size}" ?disabled="${disabled}">
+        Tag content with a long text description
+      </cds-tag>
+      ${types
+        .slice(1)
+        .map(
+          (e) =>
+            html`<cds-tag type="${e}" size="${size}" ?disabled="${disabled}"
+              >Tag content</cds-tag
+            >`
+        )}`,
 };
 
 export const WithAILabel = {
