@@ -169,7 +169,7 @@ $css--plex: true !default;
       background: $focus;
       block-size: 1px;
       content: '';
-      inline-size: 0.8rem;
+      inline-size: convert.to-rem(12px);
       inset-block-end: 2px;
       opacity: 0;
       transition: opacity $duration-fast-01 motion(standard, productive);
