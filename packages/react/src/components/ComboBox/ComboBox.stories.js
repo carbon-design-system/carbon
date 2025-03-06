@@ -384,6 +384,7 @@ export const _fullyControlled = (args) => {
   return (
     <div>
       <ComboBox
+        {...args}
         onChange={onChange}
         id="carbon-combobox"
         items={options}
@@ -391,7 +392,6 @@ export const _fullyControlled = (args) => {
         itemToString={(item) => (item ? item.text : '')}
         titleText="Fully Controlled ComboBox title"
         helperText="Combobox helper text"
-        {...args}
       />
       <div
         style={{
