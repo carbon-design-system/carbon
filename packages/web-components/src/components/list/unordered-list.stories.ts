@@ -23,8 +23,8 @@ const controls = {
 };
 
 export const Default = {
-  render: () =>
-    html`<cds-unordered-list>
+  render: ({ isexpressive }) =>
+    html`<cds-unordered-list ?isexpressive="${isexpressive}">
       <cds-list-item>Unordered List level 1</cds-list-item>
       <cds-list-item>Unordered List level 1</cds-list-item>
       <cds-list-item>Unordered List level 1</cds-list-item>

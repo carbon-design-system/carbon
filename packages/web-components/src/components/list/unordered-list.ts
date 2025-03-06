@@ -22,18 +22,33 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-unordered-list`)
 class CDSUnorderedList extends LitElement {
   /**
-   * `true` if expressive theme enabled.
+   * Specify whether this ordered list is expressive or not
    */
   @property({ type: Boolean, reflect: true, attribute: 'is-expressive' })
   isExpressive = false;
 
+  /**
+   * Specify whether the list is nested, or not
+   */
+  @property({ type: Boolean, reflect: true })
+  nested = false;
+
   connectedCallback() {
-    // Uses attribute for lookup from child
-    if (
-      this.closest(
-        (this.constructor as typeof CDSUnorderedList).selectorListItem
-      )
-    ) {
+    // Auto-detect nesting if 'nested' attribute isn't explicitly set
+    if (!this.hasAttribute('nested')) {
+      // Check if this list is inside a list item
+      if (
+        this.closest(
+          (this.constructor as typeof CDSUnorderedList).selectorListItem
+        )
+      ) {
+        this.nested = true;
+        this.setAttribute('slot', 'nested');
+      } else {
+        this.nested = false;
+        this.removeAttribute('slot');
+      }
+    } else if (this.nested) {
       this.setAttribute('slot', 'nested');
     } else {
       this.removeAttribute('slot');
@@ -44,7 +59,7 @@ class CDSUnorderedList extends LitElement {
   render() {
     const classes = classMap({
       [`${prefix}--list--unordered`]: true,
-      [`${prefix}--list--nested`]: this.getAttribute('slot') === 'nested',
+      [`${prefix}--list--nested`]: this.nested,
       [`${prefix}--list--expressive`]: this.isExpressive,
     });
     return html`
