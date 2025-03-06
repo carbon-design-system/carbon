@@ -148,7 +148,9 @@ const Select = React.forwardRef(function Select(
     labelText = 'Select',
     disabled = false,
     children,
+    // reserved for use with Pagination component
     noLabel = false,
+    // eslint-disable-next-line no-unused-vars
     hideLabel = false,
     invalid = false,
     invalidText = '',
