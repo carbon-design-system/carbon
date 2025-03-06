@@ -157,6 +157,34 @@ describe('Button', () => {
       expect(screen.getByLabelText('test')).toHaveClass('cds--btn--icon-only');
     });
 
+    it('should support badge indicator', () => {
+      render(
+        <Button
+          renderIcon={Add}
+          hasIconOnly
+          iconDescription="test"
+          badgeCount={12}
+          kind="ghost"
+          size="lg"
+        />
+      );
+      expect(screen.getByText('12')).toBeInTheDocument();
+    });
+
+    it('should support badge indicator and truncate', () => {
+      render(
+        <Button
+          renderIcon={Add}
+          hasIconOnly
+          iconDescription="test"
+          badgeCount={1200}
+          kind="ghost"
+          size="lg"
+        />
+      );
+      expect(screen.getByText('999+')).toBeInTheDocument();
+    });
+
     it('should support rendering as a custom element with the `as` prop', () => {
       function CustomComponent(props) {
         return <div data-testid="custom-component" {...props} />;
