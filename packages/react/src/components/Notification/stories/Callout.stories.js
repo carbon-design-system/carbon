@@ -11,7 +11,7 @@ import { Link } from '../../Link';
 import mdx from '../Notification.mdx';
 
 export default {
-  title: 'Callout',
+  title: 'Components/Notifications/Callout',
   component: Callout,
   parameters: {
     docs: {
