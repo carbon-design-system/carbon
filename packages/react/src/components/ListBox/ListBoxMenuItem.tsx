@@ -19,62 +19,40 @@ import React, {
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 import { ForwardRefReturn, ReactAttr } from '../../types/common';
-
-/**
- * Combines multiple refs (forwarded and local) into a single ref.
- *
- * @template T
- * @param - One or more refs to combine.
- * @returns A combined ref that points to the same node.
- */
-const useCombinedRefs = <T,>(...refs: (Ref<T> | undefined)[]) => {
-  const targetRef = useRef<T>(null);
-
-  useEffect(() => {
-    refs.forEach((ref) => {
-      if (!ref) return;
-
-      if (typeof ref === 'function') {
-        ref(targetRef.current);
-      } else {
-        (ref as MutableRefObject<T | null>).current = targetRef.current;
-      }
-    });
-  }, [refs]);
-
-  return targetRef;
-};
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
 /**
  * Determines if the content of an element is truncated.
  *
- * This hook combines the forwarded ref with a local ref so that there's always
- * a valid ref to inspect. It then checks if the element's content is truncated
- * by comparing its `offsetWidth` with its `scrollWidth`.
+ * Merges a forwarded ref with a local ref to check the element's dimensions.
  *
  * @template T
- * @param - A forwarded ref to an HTML element.
- * @param - Dependency array to re-run the truncation check.
- * @returns An object containing the truncation state and the combined ref.
+ * @param forwardedRef - A ref passed from the parent component.
+ * @param deps - Dependencies to re-run the truncation check.
+ * @returns An object containing the truncation state and the merged ref.
  */
 const useIsTruncated = <T extends HTMLElement>(
   forwardedRef?: Ref<T>,
   deps: any[] = []
 ) => {
-  const ref = useCombinedRefs(forwardedRef);
+  const localRef = useRef<T>(null);
+  const mergedRef = useMergedRefs([
+    ...(forwardedRef ? [forwardedRef] : []),
+    localRef,
+  ]);
   const [isTruncated, setIsTruncated] = useState(false);
 
   useEffect(() => {
-    const element = ref.current;
+    const element = localRef.current;
 
     if (element) {
       const { offsetWidth, scrollWidth } = element;
 
       setIsTruncated(offsetWidth < scrollWidth);
     }
-  }, [ref, ...deps]);
+  }, [localRef, ...deps]);
 
-  return { isTruncated, ref };
+  return { isTruncated, ref: mergedRef };
 };
 
 export interface ListBoxMenuItemProps extends ReactAttr<HTMLLIElement> {
