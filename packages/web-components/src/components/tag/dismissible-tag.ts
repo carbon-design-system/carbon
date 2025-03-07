@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import Close16 from '@carbon/icons/lib/close/16.js';
 import { prefix } from '../../globals/settings';
@@ -15,6 +15,8 @@ import FocusMixin from '../../globals/mixins/focus';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TAG_SIZE, TAG_TYPE } from './defs';
+import CDSTag from '../tag/tag';
+import '../tooltip/index';
 import styles from './tag.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -23,11 +25,11 @@ export { TAG_SIZE, TAG_TYPE };
 /**
  * Tag.
  *
- * @fires cds-tag-beingclosed - The custom event fired as the element is being closed
- * @fires cds-tag-closed - The custom event fired after the element has been closed
+ * @fires cds-dismissible-tag-beingclosed - The custom event fired as the element is being closed
+ * @fires cds-dismissible-tag-closed - The custom event fired after the element has been closed
  */
-@customElement(`${prefix}-tag`)
-class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
+@customElement(`${prefix}-dismissible-tag`)
+class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
   @query('button')
   protected _buttonNode!: HTMLButtonElement;
 
@@ -39,12 +41,13 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
       .assignedNodes()
       .filter((elem) =>
         (elem as HTMLElement).matches !== undefined
-          ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSTag).aiLabelItem
+          ? // remove reference of slug in v12
+            (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSDismissibleTag).aiLabelItem
             ) ||
             // remove reference of slug in v12
             (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSTag).slugItem
+              (this.constructor as typeof CDSDismissibleTag).slugItem
             )
           : false
       );
@@ -63,7 +66,7 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @HostListener('shadowRoot:click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleClick = (event: MouseEvent) => {
+  protected _handleClick = (event: MouseEvent) => {
     if (event.composedPath().indexOf(this._buttonNode!) >= 0) {
       if (this.disabled) {
         event.stopPropagation();
@@ -79,7 +82,7 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
         if (
           this.dispatchEvent(
             new CustomEvent(
-              (this.constructor as typeof CDSTag).eventBeforeClose,
+              (this.constructor as typeof CDSDismissibleTag).eventBeforeClose,
               init
             )
           )
@@ -87,7 +90,7 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
           this.open = false;
           this.dispatchEvent(
             new CustomEvent(
-              (this.constructor as typeof CDSTag).eventClose,
+              (this.constructor as typeof CDSDismissibleTag).eventClose,
               init
             )
           );
@@ -98,8 +101,6 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
 
   /**
    * Text to show on filter tag "clear" buttons. Corresponds to the attribute with the same name
-   *
-   * @deprecated The `title` property has been deprecated and will be removed in the next major version. Use cds-dismissible-tag instead.
    */
   @property({ type: String, reflect: true })
   title = 'Clear filter';
@@ -115,8 +116,6 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
 
   /**
    * Determine if is a filter/chip
-   *
-   * @deprecated The `filter` property has been deprecated and will be removed in the next major version. Use cds-dismissible-tag instead.
    */
   @property({ type: Boolean, reflect: true })
   filter = false;
@@ -140,24 +139,30 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   type = TAG_TYPE.GRAY;
 
   render() {
-    const {
-      disabled,
-      filter,
-      _handleAILabelSlotChange: handleAILabelSlotChange,
-      title,
-    } = this;
+    const { disabled, _handleAILabelSlotChange: handleAILabelSlotChange } =
+      this;
     return html`
       <slot name="icon"></slot>
-      <slot></slot>
-      <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>
-      <slot name="slug" @slotchange="${handleAILabelSlotChange}"></slot>
-      ${filter
-        ? html`
-            <button class="${prefix}--tag__close-icon" ?disabled=${disabled}>
-              ${Close16({ 'aria-label': title })}
-            </button>
-          `
-        : ``}
+      <div class="${prefix}--interactive--tag-children">
+        <slot></slot>
+        <slot name="decorator" @slotchange="${handleAILabelSlotChange}"></slot>
+        <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>
+        <slot name="slug" @slotchange="${handleAILabelSlotChange}"></slot>
+
+        <cds-tooltip align="bottom" enter-delay-ms=${0}>
+          <button
+            class="sb-tooltip-trigger"
+            role="button"
+            aria-labelledby="content"
+            class="${prefix}--tag__close-icon"
+            ?disabled=${disabled}>
+            ${Close16()}
+          </button>
+          <cds-tooltip-content id="content">
+            Tooltip alignment
+          </cds-tooltip-content>
+        </cds-tooltip>
+      </div>
     `;
   }
 
@@ -182,17 +187,17 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
    * Cancellation of this event stops the user-initiated action of closing this tag.
    */
   static get eventBeforeClose() {
-    return `${prefix}-tag-beingclosed`;
+    return `${prefix}-dismissible-tag-beingclosed`;
   }
 
   /**
    * The name of the custom event fired after this tag is closed upon a user gesture.
    */
   static get eventClose() {
-    return `${prefix}-tag-closed`;
+    return `${prefix}-dismissible-tag-closed`;
   }
 
   static styles = styles; // `styles` here is a `CSSResult` generated by custom Vite loader
 }
 
-export default CDSTag;
+export default CDSDismissibleTag;

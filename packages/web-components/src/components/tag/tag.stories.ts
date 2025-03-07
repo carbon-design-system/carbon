@@ -49,8 +49,9 @@ const actions = html`
 `;
 
 const sizes = {
-  [`Medium size (${TAG_SIZE.MEDIUM})`]: TAG_SIZE.MEDIUM,
-  [`Small size (${TAG_SIZE.SMALL})`]: TAG_SIZE.SMALL,
+  [`sm`]: TAG_SIZE.SMALL,
+  [`md`]: TAG_SIZE.MEDIUM,
+  [`lg`]: TAG_SIZE.LARGE,
 };
 
 const types = [
@@ -87,7 +88,7 @@ const controls = {
   size: {
     control: 'select',
     description:
-      'Specify the size of the Tag. Currently supports either sm or "md" (default) sizes.',
+      'Specify the size of the Tag. Currently supports either `sm`, `md` (default) or `lg` sizes.',
     options: sizes,
   },
   title: {
@@ -101,9 +102,48 @@ const controls = {
   },
 };
 
-export const Default = {
+export const Dismissible = {
   render: () =>
-    html`${types.map((e) => html`<cds-tag type="${e}">Tag content</cds-tag>`)}`,
+    html` <cds-dismissible-tag filter type="red">
+        ${Asleep16({ slot: 'icon' })} Tag content with a long text description
+      </cds-dismissible-tag>
+      ${types
+        .slice(1)
+        .map(
+          (e) =>
+            html`<cds-dismissible-tag filter type="${e}"
+              >${Asleep16({ slot: 'icon' })} Tag content</cds-dismissible-tag
+            >`
+        )}`,
+};
+
+export const Skeleton = {
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({ size }) =>
+    html`<cds-tag-skeleton size="${size}">Tag content</cds-tag-skeleton>`,
+};
+
+const ReadOnlyArgs = {
+  disabled: false,
+  size: TAG_SIZE.MEDIUM,
+};
+
+export const ReadOnly = {
+  argTypes: controls,
+  args: ReadOnlyArgs,
+  render: ({ size, disabled }) =>
+    html` <cds-tag type="red" size="${size}" ?disabled="${disabled}">
+        Tag content with a long text description
+      </cds-tag>
+      ${types
+        .slice(1)
+        .map(
+          (e) =>
+            html`<cds-tag type="${e}" size="${size}" ?disabled="${disabled}"
+              >Tag content</cds-tag
+            >`
+        )}`,
 };
 
 export const WithAILabel = {
@@ -134,21 +174,6 @@ export const WithAILabel = {
           ${content}${actions}</cds-ai-label
         >
       </cds-tag>`,
-};
-
-export const Playground = {
-  argTypes: controls,
-  args: defaultArgs,
-  render: ({ filter, size, type, title, disabled }) => html`
-    <cds-tag
-      ?filter="${filter}"
-      size="${size}"
-      type="${type}"
-      title="${title}"
-      ?disabled="${disabled}">
-      Tag content
-    </cds-tag>
-  `,
 };
 
 const meta = {
