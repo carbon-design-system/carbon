@@ -7,6 +7,7 @@
 
 import React, { useState } from 'react';
 import { render, screen, within, fireEvent, act } from '@testing-library/react';
+import { useCombobox } from 'downshift';
 import userEvent from '@testing-library/user-event';
 import {
   findListBoxNode,
@@ -492,6 +493,40 @@ describe('ComboBox', () => {
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue('');
       expect(mockProps.onChange).toHaveBeenCalled();
+    });
+    it('should call onChange when downshiftProps onStateChange is provided', async () => {
+      const downshiftProps = {
+        onStateChange: jest.fn(),
+      };
+      render(
+        <ComboBox
+          {...mockProps}
+          selectedItem={mockProps.items[0]}
+          downshiftProps={downshiftProps}
+        />
+      );
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+      expect(downshiftProps.onStateChange).not.toHaveBeenCalled();
+      await openMenu();
+      expect(downshiftProps.onStateChange).toHaveBeenCalledTimes(1);
+      await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
+      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+      expect(downshiftProps.onStateChange).toHaveBeenCalledTimes(3);
+      expect(downshiftProps.onStateChange).toHaveBeenNthCalledWith(2, {
+        selectedItem: {
+          id: 'id-2',
+          label: 'Item 2',
+          value: 2,
+        },
+        type: useCombobox.stateChangeTypes.ItemClick,
+      });
+      expect(downshiftProps.onStateChange).toHaveBeenLastCalledWith({
+        selectedItem: undefined,
+        type: useCombobox.stateChangeTypes.FunctionSetHighlightedIndex,
+      });
+      expect(
+        screen.getByRole('combobox', { value: 'Item 2' })
+      ).toBeInTheDocument();
     });
   });
 
