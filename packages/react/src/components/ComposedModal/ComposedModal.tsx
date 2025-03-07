@@ -25,7 +25,6 @@ import toggleClass from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
   elementOrParentIsFloatingMenu,
-  wrapFocusWithoutSentinels,
 } from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
@@ -288,19 +287,6 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         event.stopPropagation();
         if (match(event, keys.Escape)) {
           closeModal(event);
-        }
-
-        if (
-          enableDialogElement &&
-          open &&
-          match(event, keys.Tab) &&
-          innerModal.current
-        ) {
-          wrapFocusWithoutSentinels({
-            containerNode: innerModal.current,
-            currentActiveNode: event.target,
-            event: event,
-          });
         }
       }
 
