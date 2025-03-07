@@ -4403,6 +4403,9 @@ Map {
   "IconTab" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "badgeIndicator": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },

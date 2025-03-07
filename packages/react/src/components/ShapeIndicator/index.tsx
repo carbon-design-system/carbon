@@ -73,7 +73,7 @@ const shapeTypes = {
 
 export type ShapeIndicatorKind = (typeof ShapeIndicatorKinds)[number];
 
-interface ShapeIndicatorProps {
+export interface ShapeIndicatorProps {
   /**
    * Specify an optional className to add.
    */
