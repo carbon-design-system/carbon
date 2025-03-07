@@ -45,7 +45,7 @@ export default {
   ],
 };
 
-export const FocusWrapWithoutSentinels = (args) => {
+export const EnableDialogElement = (args) => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -84,7 +84,7 @@ export const FocusWrapWithoutSentinels = (args) => {
   );
 };
 
-FocusWrapWithoutSentinels.argTypes = {
+EnableDialogElement.argTypes = {
   children: {
     table: {
       disable: true,

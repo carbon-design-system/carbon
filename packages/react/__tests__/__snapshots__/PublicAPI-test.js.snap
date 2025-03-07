@@ -9941,6 +9941,9 @@ Map {
       "children": Object {
         "type": "node",
       },
+      "enableDialogElement": Object {
+        "type": "bool",
+      },
       "enableExperimentalFocusWrapWithoutSentinels": Object {
         "type": "bool",
       },
