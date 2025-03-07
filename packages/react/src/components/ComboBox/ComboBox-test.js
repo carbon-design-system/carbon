@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,6 +7,7 @@
 
 import React, { useState } from 'react';
 import { render, screen, within, fireEvent, act } from '@testing-library/react';
+import { useCombobox } from 'downshift';
 import userEvent from '@testing-library/user-event';
 import {
   findListBoxNode,
@@ -329,6 +330,40 @@ describe('ComboBox', () => {
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
     });
+
+    it('should not revert to `initialSelectedItem` after clearing selection in uncontrolled mode', async () => {
+      // Render a non-fully controlled `ComboBox` using `initialSelectedItem`.
+      render(
+        <ComboBox {...mockProps} initialSelectedItem={mockProps.items[0]} />
+      );
+      await waitForPosition();
+      // Verify that the input initially displays `initialSelectedItem`.
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
+
+      // Simulate clearing the selection by clicking the clear button.
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Clear selected item' })
+      );
+      // After clearing, the input should be empty rather than reverting to
+      // `initialSelectedItem`.
+      expect(findInputNode()).toHaveDisplayValue('');
+    });
+
+    it('should ignore updates to `initialSelectedItem` after initial render in uncontrolled mode', async () => {
+      // Render a non-fully controlled `ComboBox` using `initialSelectedItem`.
+      const { rerender } = render(
+        <ComboBox {...mockProps} initialSelectedItem={mockProps.items[0]} />
+      );
+      await waitForPosition();
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
+
+      // Rerender the component with a different `initialSelectedItem`.
+      rerender(
+        <ComboBox {...mockProps} initialSelectedItem={mockProps.items[2]} />
+      );
+      // The displayed value should still be the one from the first render.
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
+    });
   });
 
   describe('provided `selectedItem`', () => {
@@ -458,6 +493,40 @@ describe('ComboBox', () => {
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue('');
       expect(mockProps.onChange).toHaveBeenCalled();
+    });
+    it('should call onChange when downshiftProps onStateChange is provided', async () => {
+      const downshiftProps = {
+        onStateChange: jest.fn(),
+      };
+      render(
+        <ComboBox
+          {...mockProps}
+          selectedItem={mockProps.items[0]}
+          downshiftProps={downshiftProps}
+        />
+      );
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+      expect(downshiftProps.onStateChange).not.toHaveBeenCalled();
+      await openMenu();
+      expect(downshiftProps.onStateChange).toHaveBeenCalledTimes(1);
+      await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
+      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+      expect(downshiftProps.onStateChange).toHaveBeenCalledTimes(3);
+      expect(downshiftProps.onStateChange).toHaveBeenNthCalledWith(2, {
+        selectedItem: {
+          id: 'id-2',
+          label: 'Item 2',
+          value: 2,
+        },
+        type: useCombobox.stateChangeTypes.ItemClick,
+      });
+      expect(downshiftProps.onStateChange).toHaveBeenLastCalledWith({
+        selectedItem: undefined,
+        type: useCombobox.stateChangeTypes.FunctionSetHighlightedIndex,
+      });
+      expect(
+        screen.getByRole('combobox', { value: 'Item 2' })
+      ).toBeInTheDocument();
     });
   });
 
@@ -675,6 +744,67 @@ describe('ComboBox', () => {
         expect(call.selectedItem).toEqual(mockProps.items[i]);
       }
     });
+    it('should clear selection if input does not match any item and there is already a selected item', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} />);
+
+      // First select an item
+      await openMenu();
+      await user.click(screen.getAllByRole('option')[0]);
+
+      expect(findInputNode()).toHaveDisplayValue('Item 0');
+      expect(mockProps.onChange).toHaveBeenCalledWith({
+        selectedItem: mockProps.items[0],
+      });
+
+      // Clear input and type something that doesn't match
+      await user.clear(findInputNode());
+      await user.type(findInputNode(), 'xyz');
+      await user.keyboard('[Enter]');
+      // Selection should be cleared
+
+      expect(mockProps.onChange).toHaveBeenLastCalledWith({
+        selectedItem: null,
+      });
+
+      expect(findInputNode()).toHaveDisplayValue('xyz');
+    });
+
+    it('should not clear selection if no item was previously selected', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} />);
+
+      // Type something that doesn't match any item
+      await user.type(findInputNode(), 'xyz');
+      await user.keyboard('[Enter]');
+
+      // No onChange should be called since there was no selection to clear
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+      expect(findInputNode()).toHaveDisplayValue('xyz');
+    });
+
+    it('should keep selection when allowCustomValue is true even if input does not match', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} allowCustomValue />);
+
+      // First select an item
+      await openMenu();
+      await user.click(screen.getAllByRole('option')[0]);
+      expect(findInputNode()).toHaveDisplayValue('Item 0');
+
+      // Type something that doesn't match
+      await user.clear(findInputNode());
+      await user.type(findInputNode(), 'xyz');
+      await user.keyboard('[Enter]');
+
+      // Selection should not be cleared with allowCustomValue
+      expect(mockProps.onChange).toHaveBeenLastCalledWith({
+        selectedItem: null,
+        inputValue: 'xyz',
+      });
+
+      expect(findInputNode()).toHaveDisplayValue('xyz');
+    });
   });
 
   describe('ComboBox autocomplete', () => {
@@ -760,7 +890,7 @@ describe('ComboBox', () => {
 
       expect(document.activeElement).not.toBe(input);
     });
-    it('should suggest best matching typeahread suggestion and complete it in Tab key press', async () => {
+    it('should suggest best matching typeahead suggestion and complete it in Tab key press', async () => {
       const user = userEvent.setup();
       render(<ComboBox {...mockProps} typeahead />);
 

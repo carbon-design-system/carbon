@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,6 +22,7 @@ import React, {
   useMemo,
   ReactNode,
   useLayoutEffect,
+  isValidElement,
 } from 'react';
 import ListBox, {
   ListBoxSize,
@@ -367,7 +368,7 @@ const MultiSelect = React.forwardRef(
     const [inputFocused, setInputFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(open || false);
     const [prevOpenProp, setPrevOpenProp] = useState(open);
-    const [topItems, setTopItems] = useState([]);
+    const [topItems, setTopItems] = useState<ItemType[]>([]);
     const [itemsCleared, setItemsCleared] = useState(false);
 
     const enableFloatingStyles =
@@ -429,16 +430,10 @@ const MultiSelect = React.forwardRef(
       clearSelection,
     } = useSelection({
       disabled,
-      // TODO: remove @ts-ignore when type is fixed,
-      // see https://github.com/carbon-design-system/carbon/issues/18575
-      // @ts-ignore
       initialSelectedItems,
       onChange,
       selectedItems: selected,
       selectAll,
-      // TODO: remove @ts-ignore when type is fixed,
-      // see https://github.com/carbon-design-system/carbon/issues/18575
-      // @ts-ignore
       filteredItems,
     });
 
@@ -463,8 +458,8 @@ const MultiSelect = React.forwardRef(
           ''
         );
       },
-      selectedItem: controlledSelectedItems,
-      items: filteredItems as ItemType[],
+      selectedItem: controlledSelectedItems as ItemType,
+      items: filteredItems,
       isItemDisabled(item, _index) {
         return (item as any)?.disabled;
       },
@@ -735,9 +730,11 @@ const MultiSelect = React.forwardRef(
       [enableFloatingStyles, getMenuProps, refs.setFloating]
     );
 
+    const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
+
     return (
       <div className={wrapperClasses}>
-        <label className={titleClasses} {...getLabelProps()}>
+        <label className={titleClasses} {...labelProps}>
           {titleText && titleText}
           {selectedItems.length > 0 && (
             <span className={`${prefix}--visually-hidden`}>
