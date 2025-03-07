@@ -1,0 +1,39 @@
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
+import * as PageHeaderStories from './PageHeader.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# PageHeader
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/PageHeader)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/page-header/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/page-header/accessibility)
+
+## Table of Contents
+
+## Overview
+
+The page header is a large family of components.
+
+<Canvas
+  of={PageHeaderStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(PageHeaderStories.Default),
+    },
+  ]}
+/>
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/PageHeader/PageHeader.mdx).
