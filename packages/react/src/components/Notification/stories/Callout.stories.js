@@ -11,7 +11,7 @@ import { Link } from '../../Link';
 import mdx from '../Notification.mdx';
 
 export default {
-  title: 'Experimental/unstable__Callout',
+  title: 'Components/Notifications/Callout',
   component: Callout,
   parameters: {
     docs: {
@@ -23,11 +23,22 @@ export default {
     lowContrast: false,
     statusIconDescription: 'notification',
   },
+  argTypes: {
+    children: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
-// export const Default = () => (
-//   <Callout title="Notification title" subtitle="Subtitle text goes here" />
-// );
+export const Default = (args) => (
+  <Callout
+    title="Notification title"
+    subtitle="Subtitle text goes here"
+    {...args}
+  />
+);
 
 export const WithInteractiveElements = () => (
   <Callout
@@ -42,14 +53,6 @@ export const WithInteractiveElements = () => (
       </Link>
     </div>
   </Callout>
-);
-
-export const Default = (args) => (
-  <Callout
-    title="Notification title"
-    subtitle="Subtitle text goes here"
-    {...args}
-  />
 );
 
 Default.argTypes = {
