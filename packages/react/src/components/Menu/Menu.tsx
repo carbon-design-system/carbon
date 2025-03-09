@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,7 +21,7 @@ import React, {
 import { createPortal } from 'react-dom';
 
 import { keys, match } from '../../internal/keyboard';
-import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useMergeRefs } from '@floating-ui/react';
 import { usePrefix } from '../../internal/usePrefix';
 import { warning } from '../../internal/warning.js';
 
@@ -156,7 +156,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }, [childState, childDispatch]);
 
   const menu = useRef<HTMLUListElement>(null);
-  const ref = useMergedRefs<HTMLUListElement>([forwardRef, menu]);
+  const ref = useMergeRefs([forwardRef, menu]);
 
   const [position, setPosition] = useState([-1, -1]);
   const focusableItems = childContext.state.items.filter(

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -35,7 +35,7 @@ import { useControllableState } from '../../internal/useControllableState';
 import { useEffectOnce } from '../../internal/useEffectOnce';
 import { useId } from '../../internal/useId';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useMergeRefs } from '@floating-ui/react';
 import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match, matches } from '../../internal/keyboard';
@@ -1217,7 +1217,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
   const { badgeIndicator } = React.useContext(IconTabContext) || {};
   const dismissIconRef = useRef<HTMLButtonElement>(null);
   const tabRef = useRef<HTMLElement>(null);
-  const ref = useMergedRefs([forwardRef, tabRef]);
+  const ref = useMergeRefs([forwardRef, tabRef]);
   const [ignoreHover, setIgnoreHover] = useState(false);
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
@@ -1657,7 +1657,7 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
   ) {
     const prefix = usePrefix();
     const panel = useRef<HTMLDivElement>(null);
-    const ref = useMergedRefs([forwardRef, panel]);
+    const ref = useMergeRefs([forwardRef, panel]);
 
     const [tabIndex, setTabIndex] = useState(0);
     const [interactiveContent, setInteractiveContent] = useState(false);

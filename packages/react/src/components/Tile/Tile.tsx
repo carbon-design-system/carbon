@@ -9,12 +9,13 @@ import React, {
   useEffect,
   useRef,
   useState,
-  type ReactNode,
-  type MouseEvent,
-  type KeyboardEvent,
-  type HTMLAttributes,
+  type ButtonHTMLAttributes,
   type ChangeEvent,
   type ComponentType,
+  type HTMLAttributes,
+  type KeyboardEvent,
+  type MouseEvent,
+  type ReactNode,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -36,7 +37,7 @@ import {
   getInteractiveContent,
   getRoleContent,
 } from '../../internal/useNoInteractiveChildren';
-import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useMergeRefs } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { useId } from '../../internal/useId';
 import { Text } from '../Text';
@@ -785,7 +786,7 @@ export const ExpandableTile = React.forwardRef<
   const chevronInteractiveRef = useRef<HTMLButtonElement>(null);
   const tileContent = useRef<HTMLDivElement>(null);
   const tile = useRef<HTMLElement>(null);
-  const ref = useMergedRefs([forwardRef, tile]);
+  const ref = useMergeRefs([forwardRef, tile]);
   const prefix = usePrefix();
 
   if (expanded !== prevExpanded) {
@@ -948,11 +949,7 @@ export const ExpandableTile = React.forwardRef<
   }
 
   return interactive ? (
-    <div
-      // @ts-expect-error: Needlesly strict & deep typing for the element type
-      ref={ref}
-      className={interactiveClassNames}
-      {...rest}>
+    <div ref={ref} className={interactiveClassNames} {...rest}>
       <div ref={tileContent}>
         {slug ? (
           normalizedDecorator
@@ -988,12 +985,11 @@ export const ExpandableTile = React.forwardRef<
   ) : (
     <button
       type="button"
-      // @ts-expect-error: Needlesly strict & deep typing for the element type
       ref={ref}
       className={classNames}
       aria-expanded={isExpanded}
       title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
-      {...rest}
+      {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
       onKeyUp={composeEventHandlers([onKeyUp, handleKeyUp])}
       onClick={composeEventHandlers([onClick, handleClick])}
       tabIndex={tabIndex}>

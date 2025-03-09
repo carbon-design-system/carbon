@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,7 +24,7 @@ import { keys, match } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
-import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useMergeRefs } from '@floating-ui/react';
 import deprecate from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 
@@ -152,7 +152,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const inputRef = useRef<HTMLInputElement>(null);
-  const ref = useMergedRefs<HTMLInputElement>([forwardRef, inputRef]);
+  const ref = useMergeRefs([forwardRef, inputRef]);
   const expandButtonRef = useRef<HTMLDivElement>(null);
   const inputId = useId('search-input');
   const uniqueId = id || inputId;
