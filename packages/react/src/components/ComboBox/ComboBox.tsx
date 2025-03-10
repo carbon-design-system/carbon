@@ -50,8 +50,6 @@ import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
 
-// TODO: Is there supposed to be handling for `InputKeyDownEscape` in this
-// component?
 const {
   InputBlur,
   InputKeyDownEnter,
