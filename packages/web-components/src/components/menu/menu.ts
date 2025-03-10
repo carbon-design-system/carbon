@@ -110,7 +110,6 @@ class CDSMenu extends HostListenerMixin(LitElement) {
    */
   @property({ type: String })
   direction = 'ltr';
-
   /**
    * Open value for the menu .
    */
@@ -234,8 +233,9 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     e.stopPropagation();
     // if the user presses escape or this is a submenu
     // and the user presses ArrowLeft, close it
+
     if (e.key === 'Escape' || (!isRoot && e.key === 'ArrowLeft')) {
-      this._handleClose(e);
+      this.dispatchCloseEvent(e);
     } else {
       this._focusItem(e);
     }
@@ -442,7 +442,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       );
     }
   };
-  _handleClose = (e) => {
+  dispatchCloseEvent = (e) => {
     const init = {
       bubbles: true,
       cancelable: true,
@@ -466,9 +466,6 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       ...this.context,
       isRoot: false,
       size: this.size,
-      requestCloseRoot: this.isRoot
-        ? this._handleClose
-        : this.context.requestCloseRoot,
     };
   };
   _registerMenuItems = () => {

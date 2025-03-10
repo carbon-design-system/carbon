@@ -141,6 +141,11 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
     }
     this.setAttribute('role', 'menuitem');
     this.setAttribute('tabindex', '0');
+
+    this.addEventListener(`${prefix}-menu-closed`, (e) => {
+      this.focus();
+      this._closeSubmenu();
+    });
   }
 
   updated(_changedProperties: PropertyValues): void {
@@ -196,7 +201,7 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
         <slot name="render-icon"></slot>
       </div>
       <div class="${prefix}--menu-item__label">${label}</div>
-      ${shortcut
+      ${shortcut && !this.hasSubmenu
         ? html` <div class="${prefix}--menu-item__shortcut">${shortcut}</div> `
         : html``}
       ${this.hasSubmenu
@@ -209,7 +214,6 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
               ?isChild="${this.hasSubmenu}"
               label="${label}"
               .open="${submenuOpen}"
-              .onClose="${this._closeSubmenu}"
               .x="${boundaries.x}"
               .y="${boundaries.y}">
               <slot name="submenu"></slot>
@@ -222,6 +226,8 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
   _handleClick = (e: MouseEvent | KeyboardEvent): void => {
     if (this.hasSubmenu) {
       this._openSubmenu();
+    } else {
+      this.click();
     }
   };
   _handleMouseEnter = () => {
@@ -259,7 +265,7 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
             'slot[name="submenu"]'
           ) as HTMLSlotElement;
 
-          const item = submenuSlot.assignedElements?.()?.[0];
+          const item = submenuSlot?.assignedElements?.()?.[0];
           if (item) {
             switch (item.tagName) {
               case 'CDS-MENU-ITEM-RADIO-GROUP':
@@ -303,14 +309,13 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
     )?.focus();
   };
   _handleKeyDown = (e: KeyboardEvent) => {
-    if (this.hasSubmenu && e.key === 'ArrowRight') {
+    if (this.hasSubmenu && ['ArrowRight', 'Enter', ' '].includes(e.key)) {
       this._openSubmenu();
       setTimeout(() => {
         this.submenuEntry.focus();
       });
       e.stopPropagation();
-    }
-    if (e.key === 'Enter' || e.key === 'Space') {
+    } else if (e.key === 'Enter' || e.key === ' ') {
       this._handleClick(e);
     }
     if (this.onKeyDown) {
