@@ -57,6 +57,12 @@
       inset-inline-end: $spacing-05;
       inset-inline-start: auto;
     }
+    .#{$prefix}--toggletip-button {
+      padding: $spacing-02;
+      margin-inline-start: -$spacing-02;
+      min-block-size: $spacing-06;
+      min-inline-size: $spacing-06;
+    }
   }
 
   .#{$prefix}--text-area--fluid .#{$prefix}--label::-webkit-scrollbar,
