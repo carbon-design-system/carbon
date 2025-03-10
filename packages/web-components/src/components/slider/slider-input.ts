@@ -188,17 +188,13 @@ class CDSSliderInput extends FocusMixin(LitElement) {
    * The value.
    */
   @property({ type: Number })
-  value: number | string = '';
+  value;
 
   /**
    * true` if the input should be readonly.
    */
   @property({ type: Boolean, reflect: true })
   readonly = false;
-
-  static properties = {
-    invalidActive: { type: Boolean },
-  };
 
   render() {
     const {
