@@ -809,7 +809,18 @@ const ComboBox = forwardRef(
           }
         }
       },
+      initialSelectedItem: initialSelectedItem,
+      inputId: id,
+      stateReducer,
+      isItemDisabled(item, _index) {
+        return (item as any)?.disabled;
+      },
+      ...downshiftProps,
       onStateChange: ({ type, selectedItem: newSelectedItem }) => {
+        downshiftProps?.onStateChange?.({
+          type,
+          selectedItem: newSelectedItem,
+        });
         if (
           type === useCombobox.stateChangeTypes.ItemClick &&
           !isEqual(selectedItemProp, newSelectedItem)
@@ -824,13 +835,6 @@ const ComboBox = forwardRef(
           onChange({ selectedItem: newSelectedItem });
         }
       },
-      initialSelectedItem: initialSelectedItem,
-      inputId: id,
-      stateReducer,
-      isItemDisabled(item, _index) {
-        return (item as any)?.disabled;
-      },
-      ...downshiftProps,
     });
 
     useEffect(() => {
