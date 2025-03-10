@@ -10,20 +10,20 @@
 import { createContext } from '@lit/context';
 export type StateType = {
   isRoot: boolean;
-  hasIcons: boolean;
   hasSelectableItems: boolean;
   size: 'xs' | 'sm' | 'md' | 'lg' | null;
   items: any[];
   requestCloseRoot: (e: KeyboardEvent) => void;
+  updateFromChild: (item: {}) => void;
 };
 
 export const menuDefaultState: StateType = {
   isRoot: true,
-  hasIcons: true,
   hasSelectableItems: false,
   size: null,
   items: [],
   requestCloseRoot: () => {},
+  updateFromChild: () => {},
 };
 
 export const MenuContext = createContext<StateType>('myData');

@@ -15,8 +15,9 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/components/menu' as *;
 
-.#{$prefix}--menu-item {
+:host(#{$prefix}-menu-item) {
   @include type-style('body-short-01');
 
   display: grid;
@@ -29,16 +30,18 @@ $css--plex: true !default;
   padding-inline: $spacing-05;
   transition: background-color $duration-fast-01 motion(standard, productive);
 
-  &:focus {
-    @include focus-outline('outline');
-  }
-
   svg {
     color: $icon-secondary;
   }
 }
+:host(#{$prefix}-menu-item:focus) {
+  @include focus-outline('outline');
+}
+:host(#{$prefix}-menu-item-divider) {
+  @extend .#{$prefix}--menu-item-divider;
+}
 
-.#{$prefix}--menu-item:hover {
+:host(#{$prefix}-menu-item:hover) {
   background-color: $layer-hover;
   color: $text-primary;
 
@@ -47,20 +50,6 @@ $css--plex: true !default;
   }
 }
 
-$supported-sizes: (
-  'xs': 1.5rem,
-  'sm': 2rem,
-  'md': 2.5rem,
-  'lg': 3rem,
-);
-
-@each $size, $value in $supported-sizes {
-  :host-context(.#{$prefix}--menu--#{$size}) {
-    .#{$prefix}--menu-item {
-      block-size: $value;
-    }
-  }
-}
 .#{$prefix}--menu-item__label {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -75,104 +64,38 @@ $supported-sizes: (
   display: var(--child-icon-property, none);
 }
 
-.#{$prefix}--menu--with-icons > .#{$prefix}--menu-item,
-.#{$prefix}--menu--with-icons
-  > .#{$prefix}--menu-item-group
-  > ul
-  > .#{$prefix}--menu-item,
-.#{$prefix}--menu--with-icons
-  > .#{$prefix}--menu-item-radio-group
-  > ul
-  > .#{$prefix}--menu-item {
-  grid-template-columns: 1rem 1fr max-content;
-}
-
-.#{$prefix}--menu-item--disabled {
+:host(.#{$prefix}--menu-item--disabled) * {
   color: $text-disabled;
   cursor: not-allowed;
 }
 
-.#{$prefix}--menu-item--disabled:hover,
-.#{$prefix}--menu-item--disabled.#{$prefix}--menu-item--danger:hover {
+:host(.#{$prefix}--menu-item--disabled:hover),
+:host(.#{$prefix}--menu-item--disabled.#{$prefix}--menu-item--danger:hover) {
   background-color: $layer;
   color: $text-disabled;
 }
-.#{$prefix}--menu-item--danger:focus,
-.#{$prefix}--menu-item--danger:hover {
+
+:host(.#{$prefix}--menu-item--danger:hover),
+:host(.#{$prefix}--menu-item--danger:focus) {
   background-color: button-tokens.$button-danger-primary;
   color: $text-on-color;
 }
-// MenuItemDivider
 
-.#{$prefix}--menu-item-divider {
-  display: block;
-  background-color: $border-subtle;
-  block-size: to-rem(1px);
-  inline-size: 100%;
-  margin-block: $spacing-02;
-}
-.#{$prefix}--menu-item-group > ul,
-.#{$prefix}--menu-item-radio-group > ul {
-  @include component-reset;
-}
 .#{$prefix}--menu-item__icon,
 .#{$prefix}--menu-item__selection-icon {
   display: none;
 }
 
-:host-context(.#{$prefix}--menu--with-icons) > {
-  .#{$prefix}--menu-item,
-  .#{$prefix}--menu--with-icons
-    > .#{$prefix}--menu-item-group
-    > ul
-    > .#{$prefix}--menu-item,
-  > .#{$prefix}--menu-item-radio-group > ul > .#{$prefix}--menu-item {
-    grid-template-columns: 1rem 1fr max-content;
+:host(#{$prefix}-menu-item) {
+  grid-template-columns: var(--grid-template);
+  .#{$prefix}--menu-item__icon {
+    display: var(--display-icon-item);
   }
 }
-
-:host-context(.#{$prefix}--menu--with-selectable-items) {
-  .#{$prefix}--menu-item,
-  .#{$prefix}--menu-item-group > ul > .#{$prefix}--menu-item,
-  .#{$prefix}--menu-item-radio-group > ul > .#{$prefix}--menu-item {
-    grid-template-columns: 1rem 1fr max-content;
-  }
+.#{$prefix}--menu-item__selection-icon {
+  display: var(--display-selection-icon);
 }
 
-:host-context(.#{$prefix}--menu--with-icons) {
-  > .#{$prefix}--menu-item > .#{$prefix}--menu-item__icon,
-  > .#{$prefix}--menu-item-group
-    > ul
-    > .#{$prefix}--menu-item
-    > .#{$prefix}--menu-item__icon,
-  > .#{$prefix}--menu-item-radio-group
-    > ul
-    > .#{$prefix}--menu-item
-    > .#{$prefix}--menu-item__icon {
-    display: flex;
-  }
-}
-
-:host-context(.#{$prefix}--menu--with-selectable-items) {
-  > .#{$prefix}--menu-item > .#{$prefix}--menu-item__selection-icon,
-  > .#{$prefix}--menu-item-group
-    > ul
-    > .#{$prefix}--menu-item
-    > .#{$prefix}--menu-item__selection-icon,
-  > .#{$prefix}--menu-item-radio-group
-    > ul
-    > .#{$prefix}--menu-item
-    > .#{$prefix}--menu-item__selection-icon {
-    display: flex;
-  }
-}
-
-:host-context(
-    .#{$prefix}--menu--with-icons.#{$prefix}--menu--with-selectable-items
-  ) {
-  > .#{$prefix}--menu-item,
-  > .#{$prefix}--menu-item-group > ul > .#{$prefix}--menu-item,
-  > .#{$prefix}--menu-item-radio-group > ul > .#{$prefix}--menu-item {
-    grid-template-columns: 1rem 1rem 1fr max-content;
-  }
+span[slot='render-icon'] {
+  display: flex;
 }

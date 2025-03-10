@@ -12,24 +12,27 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/menu' as *;
 @import './menu-variables';
 
 :host(#{$prefix}-menu) {
   position: fixed;
+  --grid-template: 1rem 1fr max-content;
+  --display-icon-item: none;
+  --display-selection-icon: none;
 }
-.#{$prefix}--menu {
-  @include component-reset;
-  @include box-shadow;
+.#{$prefix}--menu--with-icons {
+  --grid-template: 1rem 1rem 1fr max-content;
+  --display-icon-item: flex;
+}
+.#{$prefix}--menu--with-selectable-items {
+  --display-selection-icon: flex;
+}
 
-  position: fixed;
-  z-index: z('modal');
-  padding: $spacing-02 0;
-  background-color: $layer;
-  max-inline-size: 18rem;
-  min-inline-size: 10rem;
-  opacity: 0;
+.#{$prefix}--menu {
+  @extend .#{$prefix}--menu;
+
   overflow-y: auto;
-  visibility: hidden;
 
   &--shown {
     opacity: 1;
@@ -52,4 +55,19 @@ $css--plex: true !default;
 }
 .#{$prefix}--menu--with-icons {
   min-inline-size: 12rem;
+}
+
+$supported-sizes: (
+  'xs': 1.5rem,
+  'sm': 2rem,
+  'md': 2.5rem,
+  'lg': 3rem,
+);
+
+@each $size, $value in $supported-sizes {
+  .#{$prefix}--menu--#{$size} {
+    ::slotted(#{$prefix}-menu-item) {
+      block-size: $value;
+    }
+  }
 }

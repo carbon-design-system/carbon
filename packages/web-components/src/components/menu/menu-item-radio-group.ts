@@ -12,7 +12,6 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { ChangeEventHandler } from 'react';
 import { consume } from '@lit/context';
 import { MenuContext } from './menu-context';
 
@@ -23,7 +22,6 @@ import { MenuContext } from './menu-context';
  */
 @customElement(`${prefix}-menu-item-radio-group`)
 class CDSmenuItemRadioGroup extends LitElement {
-  // @provide({ context: MenuContext })
   @consume({ context: MenuContext })
   context;
 
@@ -50,19 +48,41 @@ class CDSmenuItemRadioGroup extends LitElement {
   @property()
   itemToString?: (item: Array<String | number>) => String;
   /**
-   * Provide an optional function to be called when the selection state changes.
+   * The name of the custom event fired when the selection state changes.
    */
-  @property()
-  onChange?: ChangeEventHandler;
+  static get eventOnChange() {
+    return `${prefix}-item-changed`;
+  }
 
   firstUpdated(): void {
-    this.context.updateFromChild?.({ hasSelectableItems: true });
+    this.context.updateFromChild({ hasSelectableItems: true });
   }
 
   _handleClick = (item, e) => {
     this.selectedItem = item;
-    if (this.onChange) {
-      this.onChange(e);
+
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: {
+        triggeredBy: e.target,
+      },
+    };
+    if (
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSmenuItemRadioGroup).eventOnChange,
+          init
+        )
+      )
+    ) {
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSmenuItemRadioGroup).eventOnChange,
+          init
+        )
+      );
     }
   };
   render() {
@@ -83,7 +103,7 @@ class CDSmenuItemRadioGroup extends LitElement {
                 label="${itemToString(item)}"
                 role="menuitemradio"
                 aria-checked="${item === selectedItem}"
-                .onClick="${(e) => {
+                @click="${(e) => {
                   handleClick(item, e);
                 }}"></cds-menu-item>
             `

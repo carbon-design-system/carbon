@@ -12,7 +12,7 @@ import './index';
 import FolderShared16 from '@carbon/icons/lib/folder--shared/16.js';
 import Cut16 from '@carbon/icons/lib/cut/16.js';
 import Copy16 from '@carbon/icons/lib/copy/16.js';
-//import TrashCan16 from '@carbon/icons/lib/trash-can/16.js';
+import TrashCan16 from '@carbon/icons/lib/trash-can/16.js';
 import TextItalic16 from '@carbon/icons/lib/text--italic/16.js';
 import TextBold16 from '@carbon/icons/lib/text--bold/16.js';
 import Paste16 from '@carbon/icons/lib/paste/16.js';
@@ -93,47 +93,43 @@ export const Default = {
     const itemlist = ['None', 'Overline', 'Line-through', 'Underline'];
     const subitemlist = ['None', 'Product team', 'Organization', 'Company'];
     return html`
-      <cds-menu ?open=${open} size=${size}>
-        <cds-menu-item label="Share with" .renderIcon=${FolderShared16}>
+      <cds-menu ?open=${open} size=${size} menuAlignment="bottom" class="test">
+        <cds-menu-item label="Share with">
+          ${FolderShared16({ slot: 'render-icon' })}
           <cds-menu-item-radio-group
+            slot="submenu"
             label="Share with list"
             .items="${subitemlist}"
             selectedItem="None"></cds-menu-item-radio-group>
         </cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
-        <cds-menu-item
-          label="Cut"
-          shortcut="⌘X"
-          .renderIcon=${Cut16}></cds-menu-item>
-        <cds-menu-item
-          label="Copy"
-          shortcut="⌘C"
-          .renderIcon=${Copy16}></cds-menu-item>
-        <cds-menu-item
-          label="Paste"
-          shortcut="⌘V"
-          disabled
-          .renderIcon=${Paste16}></cds-menu-item>
+        <cds-menu-item label="Cut" shortcut="⌘X">
+          ${Cut16({ slot: 'render-icon' })}</cds-menu-item
+        >
+        <cds-menu-item label="Copy" shortcut="⌘C"
+          >${Copy16({ slot: 'render-icon' })}</cds-menu-item
+        >
+        <cds-menu-item label="Paste" shortcut="⌘V" disabled
+          >${Paste16({ slot: 'render-icon' })}</cds-menu-item
+        >
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-group>
-          <cds-menu-item-selectable
-            label="Bold"
-            .renderIcon=${TextBold16}></cds-menu-item-selectable>
-          <cds-menu-item-selectable
-            label="Italic"
-            .renderIcon=${TextItalic16}></cds-menu-item-selectable>
+          <cds-menu-item-selectable label="Bold" shortcut="⌘B"
+            >${TextBold16({ slot: 'render-icon' })}</cds-menu-item-selectable
+          >
+          <cds-menu-item-selectable label="Italic" shortcut="⌘I"
+            >${TextItalic16({ slot: 'render-icon' })}</cds-menu-item-selectable
+          >
         </cds-menu-item-group>
+        <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item-radio-group
           label="samples"
           .items="${itemlist}"
           selectedItem="None"></cds-menu-item-radio-group>
         <cds-menu-item-divider></cds-menu-item-divider>
-
-        <cds-menu-item-divider></cds-menu-item-divider>
-        <cds-menu-item
-          label="Delete"
-          shortcut="⌫"
-          kind="danger"></cds-menu-item>
+        <cds-menu-item label="Delete" shortcut="⌫" kind="danger">
+          ${TrashCan16({ slot: 'render-icon' })}</cds-menu-item
+        >
       </cds-menu>
     `;
   },
