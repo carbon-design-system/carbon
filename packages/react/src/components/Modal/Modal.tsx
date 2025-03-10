@@ -1,12 +1,18 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import React, { useRef, useEffect, useState, ReactNode } from 'react';
+import PropTypes, { type Validator } from 'prop-types';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+  type Ref,
+} from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
@@ -98,7 +104,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * Provide a ref to return focus to once the modal is closed.
    */
-  launcherButtonRef?: any; // TODO FIXME
+  launcherButtonRef?: Ref<HTMLButtonElement>;
 
   /**
    * Specify the description for the loading text
@@ -426,7 +432,9 @@ const Modal = React.forwardRef(function Modal(
   useEffect(() => {
     if (!open && launcherButtonRef) {
       setTimeout(() => {
-        launcherButtonRef?.current?.focus();
+        if ('current' in launcherButtonRef) {
+          launcherButtonRef.current?.focus();
+        }
       });
     }
   }, [open, launcherButtonRef]);
@@ -701,9 +709,17 @@ Modal.propTypes = {
   launcherButtonRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({
-      current: PropTypes.any,
+      current: PropTypes.oneOfType([
+        // `PropTypes.instanceOf(HTMLButtonElement)` alone won't work because
+        // `HTMLButtonElement` is not defined in the test environment even
+        // though `testEnvironment` is set to `jsdom`.
+        typeof HTMLButtonElement !== 'undefined'
+          ? PropTypes.instanceOf(HTMLButtonElement)
+          : PropTypes.any,
+        PropTypes.oneOf([null]),
+      ]).isRequired,
     }),
-  ]),
+  ]) as Validator<Ref<HTMLButtonElement>>,
 
   /**
    * Specify the description for the loading text
