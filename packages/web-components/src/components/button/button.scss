@@ -100,9 +100,22 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-button[kind='ghost']:hover) .#{$prefix}--btn--ghost,
-:host(#{$prefix}-button[kind='ghost']) .#{$prefix}--btn--ghost:active {
-  outline: none;
+:host(#{$prefix}-button[kind='ghost']) {
+  .#{$prefix}--btn--ghost {
+    &:hover,
+    &:active {
+      outline: none;
+    }
+
+    &.#{$prefix}--btn--icon-only {
+      padding-block-start: 0;
+
+      &.#{$prefix}--btn--selected,
+      &.#{$prefix}--btn--expressive {
+        padding: $spacing-03;
+      }
+    }
+  }
 }
 
 :host(#{$prefix}-button-set),

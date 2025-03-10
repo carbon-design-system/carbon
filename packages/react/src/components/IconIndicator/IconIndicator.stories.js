@@ -20,49 +20,42 @@ export default {
   },
 };
 
-export const Default = () => {
+export const Default = (props) => {
   return (
     <div
       style={{
-        display: 'grid',
-        gridTemplateColumns: 'auto auto',
-        columnGap: '1rem',
-        rowGap: '0.5rem',
-        width: 'fit-content',
+        display: 'flex',
+        flexFlow: 'column',
+        rowGap: '.5rem',
       }}>
-      {IconIndicatorKinds.map((type) => (
-        <>
-          <IconIndicator kind={type} label={type} />
-          <IconIndicator kind={type} label={type} size={20} />
-        </>
-      ))}
+      <IconIndicator kind="failed" label="Failed" {...props} />
+      <IconIndicator kind="caution-major" label="Caution major" {...props} />
+      <IconIndicator kind="caution-minor" label="Caution minor" {...props} />
+      <IconIndicator kind="undefined" label="Undefined" {...props} />
+      <IconIndicator kind="succeeded" label="Succeeded" {...props} />
+      <IconIndicator kind="normal" label="Normal" {...props} />
+      <IconIndicator kind="in-progress" label="In progress" {...props} />
+      <IconIndicator kind="incomplete" label="Incomplete" {...props} />
+      <IconIndicator kind="not-started" label="Not started" {...props} />
+      <IconIndicator kind="pending" label="Pending" {...props} />
+      <IconIndicator kind="unknown" label="Unknown" {...props} />
+      <IconIndicator kind="informative" label="Informative" {...props} />
     </div>
   );
 };
 
-const PlaygroundStory = (props) => {
-  return <IconIndicator {...props} />;
-};
-
-export const Playground = PlaygroundStory.bind({});
-
-Playground.args = {
-  label: 'Custom label',
-  kind: 'failed',
+Default.args = {
   size: 16,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   label: {
     control: {
       type: 'text',
     },
   },
   kind: {
-    control: {
-      type: 'select',
-    },
-    options: IconIndicatorKinds,
+    control: false,
   },
   size: {
     control: {

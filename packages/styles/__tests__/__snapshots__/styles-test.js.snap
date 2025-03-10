@@ -113,6 +113,16 @@ Array [
     "relativePath": "scss/components/aspect-ratio",
   },
   Object {
+    "filepath": "scss/components/badge-indicator/_badge-indicator.scss",
+    "importPath": "@carbon/styles/scss/components/badge-indicator/badge-indicator",
+    "relativePath": "scss/components/badge-indicator/badge-indicator",
+  },
+  Object {
+    "filepath": "scss/components/badge-indicator/_index.scss",
+    "importPath": "@carbon/styles/scss/components/badge-indicator",
+    "relativePath": "scss/components/badge-indicator",
+  },
+  Object {
     "filepath": "scss/components/breadcrumb/_breadcrumb.scss",
     "importPath": "@carbon/styles/scss/components/breadcrumb/breadcrumb",
     "relativePath": "scss/components/breadcrumb/breadcrumb",
