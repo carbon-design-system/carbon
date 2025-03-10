@@ -7,17 +7,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit';
+import { LitElement, PropertyValues, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { classMap } from 'lit/directives/class-map.js';
 import CaretLeft16 from '@carbon/icons/lib/caret--left/16';
 import CaretRight16 from '@carbon/icons/lib/caret--right/16';
 import { consume } from '@lit/context';
 import { MenuContext } from './menu-context';
 import Checkmark16 from '@carbon/icons/lib/checkmark/16';
+import HostListener from '../../globals/decorators/host-listener';
+import HostListenerMixin from '../../globals/mixins/host-listener';
+import FocusMixin from '../../globals/mixins/focus';
+import { MENU_ITEM_KIND } from './defs';
+
+export { MENU_ITEM_KIND };
 
 /**
  * Menu Item.
@@ -25,7 +30,7 @@ import Checkmark16 from '@carbon/icons/lib/checkmark/16';
  * @element cds-menu-item
  */
 @customElement(`${prefix}-menu-item`)
-class CDSmenuItem extends LitElement {
+class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
   @consume({ context: MenuContext })
   context;
 
@@ -37,11 +42,6 @@ class CDSmenuItem extends LitElement {
   @property({ type: String })
   label;
   /**
-   * Children - Sub menu items.
-   */
-  @property({ type: Array })
-  childElements: Element[] | undefined;
-  /**
    * Child context.
    */
   @property()
@@ -51,11 +51,6 @@ class CDSmenuItem extends LitElement {
    */
   @property({ type: String })
   shortcut;
-  /**
-   * Sets the menu item's icon.
-   */
-  @property()
-  renderIcon?: () => void;
   /**
    * Disabled property for the menu item.
    */
@@ -95,12 +90,8 @@ class CDSmenuItem extends LitElement {
    * Checks if document direction is rtl.
    */
   @property()
-  kind: 'default' | 'danger' = 'default';
-  /**
-   * check if the menu item has children or not.
-   */
-  @property({ type: String })
-  hasChildren;
+  kind = MENU_ITEM_KIND.DEFAULT;
+
   /**
    * check if the menu item kind is Danger.
    */
@@ -121,16 +112,11 @@ class CDSmenuItem extends LitElement {
   @property()
   onKeyDown?: (e: KeyboardEvent) => void;
 
-  @property({ attribute: 'aria-checked' })
-
-  /**
-   * Provide an optional function to be called when the MenuItem is clicked.
-   */
-  @property()
-  onClick?: (event: KeyboardEvent | MouseEvent) => void;
-
   private hasSubmenu = false;
   private hasRenderIcon = false;
+
+  @property({ attribute: 'aria-checked' })
+  ariaChecked: string | null = 'false';
 
   async dispatchIconDetect() {
     if (this.hasRenderIcon) {
@@ -148,92 +134,100 @@ class CDSmenuItem extends LitElement {
     this.hasSubmenu = !!this.querySelector('[slot="submenu"]');
     this.hasRenderIcon = !!this.querySelector('[slot="render-icon"]');
     this.dispatchIconDetect();
-    this.hasChildren = this.childNodes.length > 0;
     this.isDisabled = this.disabled && !this.hasSubmenu;
     this.direction = document.dir;
     this.isRtl = this.direction === 'rtl';
     this.isDanger = this.kind === 'danger';
-    setTimeout(() => {
-      this.childElements = Object.values(this.children);
-    });
     this._registerSubMenuItems();
+
+    if (this.isDisabled) {
+      this.setAttribute('aria-disabled', this.isDisabled);
+    } else {
+      this.removeAttribute('aria-disabled');
+    }
+    if (this.hasSubmenu) {
+      this.setAttribute('aria-haspopup', this.hasSubmenu + '');
+    } else {
+      this.removeAttribute('aria-haspopup');
+    }
+    this.setAttribute('role', 'menuitem');
+    this.setAttribute('tabindex', '0');
+  }
+
+  updated(_changedProperties: PropertyValues): void {
+    if (_changedProperties.has('submenuOpen')) {
+      if (this.hasSubmenu) {
+        this.setAttribute('aria-expanded', this.submenuOpen + '');
+      } else {
+        this.removeAttribute('aria-expanded');
+      }
+    }
+
+    if (this.isDisabled)
+      this.classList.toggle(`${prefix}--menu-item--disabled`);
+    if (this.isDanger) this.classList.toggle(`${prefix}--menu-item--danger`);
+  }
+
+  @HostListener('click', { capture: true })
+  private handleClick(event: MouseEvent) {
+    this._handleClick(event);
+  }
+
+  @HostListener('mouseenter')
+  private handleMouseEnter() {
+    if (this.hasSubmenu) {
+      this._handleMouseEnter();
+    }
+  }
+
+  @HostListener('mouseleave')
+  private handleMouseLeave() {
+    if (this.hasSubmenu) {
+      this._handleMouseLeave();
+    }
+  }
+
+  @HostListener('keydown')
+  private handleKeyDown(event: KeyboardEvent) {
+    this._handleKeyDown(event);
   }
 
   render() {
-    const {
-      label,
-      shortcut,
-      renderIcon,
-      isDisabled,
-      hasChildren,
-      submenuOpen,
-      _handleClick: handleClick,
-      _handleMouseEnter: handleMouseEnter,
-      _handleMouseLeave: handleMouseLeave,
-      _handleKeyDown: handleKeyDown,
-      _closeSubmenu: closeSubmenu,
-      isDanger,
-      boundaries,
-      childElements,
-      isRtl,
-    } = this;
-    const menuItemClasses = classMap({
-      [`${prefix}--menu-item`]: true,
-      [`${prefix}--menu-item--disabled`]: isDisabled,
-      [`${prefix}--menu-item--danger`]: isDanger,
-    });
+    const { label, shortcut, submenuOpen, isDanger, boundaries, isRtl } = this;
+
     const menuClassName = this.context.hasSelectableItems
       ? `${prefix}--menu--with-selectable-items`
       : '';
 
     return html`
-      <li
-        part="menuitem"
-        role="menuitem"
-        tabindex="0"
-        class="${menuItemClasses}"
-        aria-disabled="${isDisabled ?? undefined}"
-        aria-haspopup="${this.hasSubmenu ?? undefined}"
-        aria-expanded="${this.hasSubmenu ? submenuOpen : undefined}"
-        @click="${handleClick}"
-        @mouseenter="${this.hasSubmenu ? handleMouseEnter : undefined}"
-        @mouseleave="${this.hasSubmenu ? handleMouseLeave : undefined}"
-        @keydown="${handleKeyDown}">
-        <div class="${prefix}--menu-item__selection-icon">
-          ${this.getAttribute('aria-checked') === 'true'
-            ? Checkmark16()
-            : undefined}
-        </div>
+      <div class="${prefix}--menu-item__selection-icon">
+        ${this.ariaChecked === 'true' ? Checkmark16() : undefined}
+      </div>
 
-        <div class="${prefix}--menu-item__icon">
-          <slot name="render-icon"></slot>
-        </div>
-        <div class="${prefix}--menu-item__label">${label}</div>
-        ${shortcut && !this.hasSubmenu
-          ? html`
-              <div class="${prefix}--menu-item__shortcut">${shortcut}</div>
-            `
-          : html``}
-        ${this.hasSubmenu
-          ? html`
-              <div class="${prefix}--menu-item__shortcut">
-                ${isRtl ? CaretLeft16() : CaretRight16()}
-              </div>
-              <cds-menu
-                className=${menuClassName}
-                ?isChild="${this.hasSubmenu}"
-                label="${label}"
-                .open="${submenuOpen}"
-                .onClose="${closeSubmenu}"
-                .x="${boundaries.x}"
-                .y="${boundaries.y}">
-                <slot
-                  name="submenu"
-                  @slotchange="${this.handleSlotChange}"></slot>
-              </cds-menu>
-            `
-          : html``}
-      </li>
+      <div class="${prefix}--menu-item__icon">
+        <slot name="render-icon"></slot>
+      </div>
+      <div class="${prefix}--menu-item__label">${label}</div>
+      ${shortcut
+        ? html` <div class="${prefix}--menu-item__shortcut">${shortcut}</div> `
+        : html``}
+      ${this.hasSubmenu
+        ? html`
+            <div class="${prefix}--menu-item__shortcut">
+              ${isRtl ? CaretLeft16() : CaretRight16()}
+            </div>
+            <cds-menu
+              className=${menuClassName}
+              ?isChild="${this.hasSubmenu}"
+              label="${label}"
+              .open="${submenuOpen}"
+              .onClose="${this._closeSubmenu}"
+              .x="${boundaries.x}"
+              .y="${boundaries.y}">
+              <slot name="submenu"></slot>
+            </cds-menu>
+          `
+        : html``}
     `;
   }
 
@@ -241,10 +235,6 @@ class CDSmenuItem extends LitElement {
     if (!this.isDisabled) {
       if (this.hasSubmenu) {
         this._openSubmenu();
-      } else {
-        if (this.onClick) {
-          this.onClick(e);
-        }
       }
     }
   };
@@ -279,13 +269,17 @@ class CDSmenuItem extends LitElement {
     const observer = new MutationObserver((mutationsList) => {
       for (const mutation of mutationsList) {
         if (mutation.type === 'childList') {
-          const item = this.childElements?.length && this.childElements[0];
+          const submenuSlot = this.shadowRoot?.querySelector(
+            'slot[name="submenu"]'
+          ) as HTMLSlotElement;
+
+          const item = submenuSlot.assignedElements?.()?.[0];
           if (item) {
             switch (item.tagName) {
               case 'CDS-MENU-ITEM-RADIO-GROUP':
-                this.submenuEntry = item.shadowRoot
-                  ?.querySelector(`${prefix}-menu-item`)
-                  ?.shadowRoot?.querySelector(`.${prefix}--menu-item`);
+                this.submenuEntry = item.shadowRoot?.querySelector(
+                  `${prefix}-menu-item`
+                );
                 break;
               case 'CDS-MENU-ITEM-GROUP': {
                 const slotElements = item.shadowRoot
@@ -296,17 +290,11 @@ class CDSmenuItem extends LitElement {
                   slotElements[0].shadowRoot?.querySelector(
                     `${prefix}-menu-item`
                   );
-                this.submenuEntry =
-                  firstElement &&
-                  firstElement.shadowRoot?.querySelector(
-                    `.${prefix}--menu-item`
-                  );
+                this.submenuEntry = firstElement;
                 break;
               }
               case 'CDS-MENU-ITEM':
-                this.submenuEntry = item.shadowRoot?.querySelector(
-                  `.${prefix}--menu-itemz`
-                );
+                this.submenuEntry = item;
                 break;
             }
           }

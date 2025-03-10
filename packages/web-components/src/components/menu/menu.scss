@@ -56,3 +56,18 @@ $css--plex: true !default;
 .#{$prefix}--menu--with-icons {
   min-inline-size: 12rem;
 }
+
+$supported-sizes: (
+  'xs': 1.5rem,
+  'sm': 2rem,
+  'md': 2.5rem,
+  'lg': 3rem,
+);
+
+@each $size, $value in $supported-sizes {
+  .#{$prefix}--menu--#{$size} {
+    ::slotted(#{$prefix}-menu-item) {
+      block-size: $value;
+    }
+  }
+}

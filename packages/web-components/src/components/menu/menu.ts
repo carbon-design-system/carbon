@@ -17,6 +17,9 @@ import { classMap } from 'lit/directives/class-map.js';
 import { MenuContext, menuDefaultState } from './menu-context';
 import CDSmenuItem from './menu-item';
 import { consume, provide } from '@lit/context';
+import { MENU_SIZE } from './defs';
+
+export { MENU_SIZE };
 
 /**
  * Menu.
@@ -54,6 +57,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
    */
   @state()
   items: Element[] | undefined = [];
+
   /**
    * Active list Items.
    */
@@ -126,7 +130,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
    * Size attribute .
    */
   @property({ attribute: true })
-  size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
+  size = MENU_SIZE.SMALL;
   /**
    * Deprecated: Menus now always support both icons as well as selectable items and nesting. The mode of this menu. Defaults to full. full supports nesting and selectable menu items, but no icons. basic supports icons but no nesting or selectable menu items.
 
@@ -152,15 +156,17 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   y: number | number[] = 0;
 
   /**
-   * Provide an optional function to be called when the Menu should be closed.
+   * The name of the custom event fired when the the Menu should be closed.
    */
-
-  @property({ type: Function }) onClose?: () => void;
+  static get eventOnClose() {
+    return `${prefix}-menu-closed`;
+  }
   /**
-   * Provide an optional function to be called when the Menu should be opened.
+   * The name of the custom event fired when the the Menu should be opened.
    */
-  @property({ type: Function }) onOpen?: () => void;
-
+  static get eventOnOpen() {
+    return `${prefix}-menu-opened`;
+  }
   updated(changedProperties) {
     if (changedProperties.has('open') && this.open) {
       this._handleOpen();
@@ -228,15 +234,13 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     e.stopPropagation();
     // if the user presses escape or this is a submenu
     // and the user presses ArrowLeft, close it
-    if (
-      (e.key === 'Escape' || (!isRoot && e.key === 'ArrowLeft')) &&
-      this.onClose
-    ) {
-      this._handleClose();
+    if (e.key === 'Escape' || (!isRoot && e.key === 'ArrowLeft')) {
+      this._handleClose(e);
     } else {
       this._focusItem(e);
     }
   };
+
   _focusItem = (e: KeyboardEvent | undefined) => {
     let currentItem: number;
     if (document.activeElement?.tagName !== 'CDS-MENU') {
@@ -247,18 +251,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
         ) {
           let shadowRootActiveEl =
             this._findActiveElementInShadowRoot(document);
-          return (
-            shadowRootActiveEl ===
-            activeItem.item.shadowRoot?.querySelector(`.${prefix}--menu-item`)
-          );
+          return shadowRootActiveEl === activeItem.item;
         } else {
           let shadowRootActiveEl =
             this._findActiveElementInShadowRoot(document);
           if (activeItem.parent.tagName === 'CDS-MENU-ITEM-SELECTABLE') {
-            return (
-              shadowRootActiveEl ===
-              activeItem.item.shadowRoot?.querySelector(`.${prefix}--menu-item`)
-            );
+            return shadowRootActiveEl === activeItem.item;
           } else {
             return activeItem.parent.contains(document.activeElement);
           }
@@ -289,19 +287,18 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     }
 
     if (indexToFocus !== currentItem) {
-      const nodeToFocus = this.activeitems[indexToFocus].item;
-      (
-        nodeToFocus?.shadowRoot?.querySelector(
-          `.${prefix}--menu-item`
-        ) as HTMLLIElement
-      )?.focus();
+      this.activeitems[indexToFocus]?.item?.focus();
     }
   };
   _findActiveElementInShadowRoot = (shadowRoot) => {
     if (shadowRoot === null) return null;
 
     let activeElement = shadowRoot.activeElement;
-    while (activeElement && activeElement.shadowRoot) {
+    while (
+      activeElement &&
+      activeElement.shadowRoot &&
+      activeElement.shadowRoot.activeElement
+    ) {
       activeElement = activeElement.shadowRoot.activeElement;
     }
     return activeElement;
@@ -430,10 +427,39 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     this.style.insetBlockStart = `${pos[1]}px`;
     this.position = pos;
 
-    this.onOpen?.();
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+    };
+    if (
+      this.dispatchEvent(
+        new CustomEvent((this.constructor as typeof CDSMenu).eventOnOpen, init)
+      )
+    ) {
+      this.dispatchEvent(
+        new CustomEvent((this.constructor as typeof CDSMenu).eventOnOpen, init)
+      );
+    }
   };
-  _handleClose = () => {
-    this.onClose?.();
+  _handleClose = (e) => {
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: {
+        triggeredBy: e.target,
+      },
+    };
+    if (
+      this.dispatchEvent(
+        new CustomEvent((this.constructor as typeof CDSMenu).eventOnClose, init)
+      )
+    ) {
+      this.dispatchEvent(
+        new CustomEvent((this.constructor as typeof CDSMenu).eventOnClose, init)
+      );
+    }
   };
   _newContextCreate = () => {
     this.context = {
@@ -446,7 +472,14 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     };
   };
   _registerMenuItems = () => {
-    const items = this.shadowRoot?.querySelector('slot')?.assignedElements();
+    let items;
+    if (this.isChild) {
+      items = (
+        this.querySelector('slot[name="submenu"]') as HTMLSlotElement
+      ).assignedElements();
+    } else {
+      items = this.shadowRoot?.querySelector('slot')?.assignedElements();
+    }
     this.items = items?.filter((item) => {
       if (item.tagName === 'CDS-MENU-ITEM') {
         return !(item as CDSmenuItem).disabled;
@@ -488,6 +521,16 @@ class CDSMenu extends HostListenerMixin(LitElement) {
           });
           break;
         }
+        case 'CDS-MENU-ITEM-SELECTABLE': {
+          activeItem = {
+            item: item.shadowRoot?.querySelector(
+              `${prefix}-menu-item`
+            ) as CDSmenuItem,
+            parent: item as HTMLElement,
+          };
+          this.activeitems = [...this.activeitems, activeItem];
+          break;
+        }
         default: {
           activeItem = {
             item: item as CDSmenuItem,
@@ -497,11 +540,8 @@ class CDSMenu extends HostListenerMixin(LitElement) {
         }
       }
     });
-    const activeEl =
-      this.activeitems[0]?.item.shadowRoot?.querySelector(
-        `.${prefix}--menu-item`
-      ) ?? document.activeElement;
-    (activeEl as HTMLLIElement).focus();
+    const activeEl = this.activeitems[0]?.item ?? document.activeElement;
+    activeEl.focus();
   };
   static styles = styles; // `styles` here is a `CSSResult` generated by custom Vite loader
 }
