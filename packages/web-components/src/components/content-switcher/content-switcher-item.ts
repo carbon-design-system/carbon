@@ -96,7 +96,6 @@ export default class CDSContentSwitcherItem extends FocusMixin(LitElement) {
     if (changedProperties) {
       this.shadowRoot
         ?.querySelector(`${prefix}-tooltip`)
-        ?.shadowRoot?.querySelector(`.${prefix}--tooltip`)
         ?.classList.add(`${prefix}--icon-tooltip`);
     }
   }
