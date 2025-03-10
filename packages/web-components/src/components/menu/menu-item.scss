@@ -64,13 +64,13 @@ $css--plex: true !default;
   display: var(--child-icon-property, none);
 }
 
-:host(.#{$prefix}--menu-item--disabled) * {
+:host([aria-disabled='true']) * {
   color: $text-disabled;
   cursor: not-allowed;
 }
 
-:host(.#{$prefix}--menu-item--disabled:hover),
-:host(.#{$prefix}--menu-item--disabled.#{$prefix}--menu-item--danger:hover) {
+:host([aria-disabled='true']:hover),
+:host([aria-disabled='true'].#{$prefix}--menu-item--danger:hover) {
   background-color: $layer;
   color: $text-disabled;
 }

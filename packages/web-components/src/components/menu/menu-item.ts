@@ -56,11 +56,7 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @property({ type: Boolean })
   disabled;
-  /**
-   * Whether the menu item is disabled or not.
-   */
-  @property({ type: Boolean })
-  isDisabled;
+
   /**
    * Whether the menu submen for an item is open or not.
    */
@@ -93,12 +89,6 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
   kind = MENU_ITEM_KIND.DEFAULT;
 
   /**
-   * check if the menu item kind is Danger.
-   */
-  @property({ type: Boolean })
-  isDanger;
-
-  /**
    * Menu boundaries.
    */
   @property()
@@ -112,14 +102,15 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
   @property()
   onKeyDown?: (e: KeyboardEvent) => void;
 
-  private hasSubmenu = false;
-  private hasRenderIcon = false;
+  @property()
+  hasSubmenu = false;
 
   @property({ attribute: 'aria-checked' })
   ariaChecked: string | null = 'false';
 
   async dispatchIconDetect() {
-    if (this.hasRenderIcon) {
+    const hasRenderIcon = !!this.querySelector('[slot="render-icon"]');
+    if (hasRenderIcon) {
       await undefined; // this is used to replace setTimeout with 0 time out, which is much fater.
       this.dispatchEvent(
         new CustomEvent('icon-detect', {
@@ -132,16 +123,14 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
 
   firstUpdated() {
     this.hasSubmenu = !!this.querySelector('[slot="submenu"]');
-    this.hasRenderIcon = !!this.querySelector('[slot="render-icon"]');
+
     this.dispatchIconDetect();
-    this.isDisabled = this.disabled && !this.hasSubmenu;
     this.direction = document.dir;
     this.isRtl = this.direction === 'rtl';
-    this.isDanger = this.kind === 'danger';
     this._registerSubMenuItems();
 
-    if (this.isDisabled) {
-      this.setAttribute('aria-disabled', this.isDisabled);
+    if (this.disabled && !this.hasSubmenu) {
+      this.setAttribute('aria-disabled', this.disabled);
     } else {
       this.removeAttribute('aria-disabled');
     }
@@ -163,9 +152,8 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
       }
     }
 
-    if (this.isDisabled)
-      this.classList.toggle(`${prefix}--menu-item--disabled`);
-    if (this.isDanger) this.classList.toggle(`${prefix}--menu-item--danger`);
+    if (this.kind === MENU_ITEM_KIND.DANGER)
+      this.classList.toggle(`${prefix}--menu-item--danger`);
   }
 
   @HostListener('click', { capture: true })
@@ -193,7 +181,7 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   render() {
-    const { label, shortcut, submenuOpen, isDanger, boundaries, isRtl } = this;
+    const { label, shortcut, submenuOpen, boundaries, isRtl } = this;
 
     const menuClassName = this.context.hasSelectableItems
       ? `${prefix}--menu--with-selectable-items`
@@ -232,10 +220,8 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   _handleClick = (e: MouseEvent | KeyboardEvent): void => {
-    if (!this.isDisabled) {
-      if (this.hasSubmenu) {
-        this._openSubmenu();
-      }
+    if (this.hasSubmenu) {
+      this._openSubmenu();
     }
   };
   _handleMouseEnter = () => {
