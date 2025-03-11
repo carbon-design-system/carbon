@@ -16,13 +16,14 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/menu' as *;
+@use '@carbon/styles/scss/utilities/component-reset';
 
 :host(#{$prefix}-menu-item) {
   @include type-style('body-short-01');
 
   display: grid;
   align-items: center;
-  block-size: 2rem;
+  block-size: $spacing-07;
   color: $text-secondary;
   column-gap: $spacing-03;
   cursor: pointer;
@@ -47,6 +48,12 @@ $css--plex: true !default;
 
   svg {
     color: $icon-primary;
+  }
+}
+:host(#{$prefix}-menu-item-group),
+:host(#{$prefix}-menu-item-radio-group) {
+  > ul {
+    @include component-reset.reset;
   }
 }
 

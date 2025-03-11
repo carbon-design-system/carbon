@@ -142,7 +142,7 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
     this.setAttribute('role', 'menuitem');
     this.setAttribute('tabindex', '0');
 
-    this.addEventListener(`${prefix}-menu-closed`, (e) => {
+    this.addEventListener(`${prefix}-menu-closed`, () => {
       this.focus();
       this._closeSubmenu();
     });
@@ -162,26 +162,26 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   @HostListener('click', { capture: true })
-  private handleClick(event: MouseEvent) {
+  handleClick(event: MouseEvent) {
     this._handleClick(event);
   }
 
   @HostListener('mouseenter')
-  private handleMouseEnter() {
+  handleMouseEnter() {
     if (this.hasSubmenu) {
       this._handleMouseEnter();
     }
   }
 
   @HostListener('mouseleave')
-  private handleMouseLeave() {
+  handleMouseLeave() {
     if (this.hasSubmenu) {
       this._handleMouseLeave();
     }
   }
 
   @HostListener('keydown')
-  private handleKeyDown(event: KeyboardEvent) {
+  handleKeyDown(event: KeyboardEvent) {
     this._handleKeyDown(event);
   }
 
@@ -226,7 +226,7 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
   _handleClick = (e: MouseEvent | KeyboardEvent): void => {
     if (this.hasSubmenu) {
       this._openSubmenu();
-    } else {
+    } else if (e.type === 'keydown') {
       this.click();
     }
   };
