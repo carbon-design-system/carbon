@@ -11,10 +11,10 @@ import PropTypes from 'prop-types';
 import React, { useState, useRef } from 'react';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
-import { equals } from '../../tools/array';
 import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
+import isEqual from 'react-fast-compare';
 
 type ExcludedAttributes = 'id' | 'onChange';
 
@@ -245,7 +245,7 @@ const Pagination = React.forwardRef(function Pagination(
     setPrevControlledPageSize(controlledPageSize);
   }
 
-  if (!equals(controlledPageSizes, prevPageSizes)) {
+  if (!isEqual(controlledPageSizes, prevPageSizes)) {
     const pageSizes = mapPageSizesToObject(controlledPageSizes);
 
     const hasPageSize = pageSizes.find((size) => {

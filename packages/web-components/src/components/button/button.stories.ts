@@ -12,6 +12,7 @@ import { html } from 'lit';
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
 import Add16 from '@carbon/icons/lib/add/16.js';
+import '../badge-indicator/index';
 import {
   BUTTON_KIND,
   BUTTON_TYPE,
@@ -212,7 +213,7 @@ export const Danger = {
         tooltip-alignment="${tooltipAlignment}"
         tooltip-position="${tooltipPosition}"
         type="${type}">
-        Tertiary Danger Button
+        Danger tertiary button
       </cds-button>
       <cds-button
         button-class-name="${buttonClassName}"
@@ -227,7 +228,7 @@ export const Danger = {
         tooltip-alignment="${tooltipAlignment}"
         tooltip-position="${tooltipPosition}"
         type="${type}">
-        Ghost Danger Button
+        Danger ghost button
       </cds-button>`,
 };
 
@@ -298,6 +299,31 @@ export const IconButton = {
       type="${type}"
       @click="${onClick}">
       ${Add16({ slot: 'icon' })}
+    </cds-button>`,
+};
+
+export const iconButtonWithBadge = {
+  argTypes: {
+    badgeCount: {
+      control: 'number',
+      description:
+        'The count prop for "cds-badge-indicator" when slotted into the button',
+    },
+    ...controls,
+  },
+  args: {
+    badgeCount: 4,
+    ...defaultArgs,
+  },
+  render: ({ badgeCount, disabled }) =>
+    html` <cds-button
+      kind="ghost"
+      ?disabled="${disabled}"
+      tooltip-text="Icon Description">
+      ${Add16({ slot: 'icon' })}
+      ${badgeCount > 0
+        ? html` <cds-badge-indicator count=${badgeCount}></cds-badge-indicator>`
+        : html`<cds-badge-indicator></cds-badge-indicator>`}
     </cds-button>`,
 };
 

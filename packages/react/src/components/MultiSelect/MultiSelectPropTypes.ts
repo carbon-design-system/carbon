@@ -46,14 +46,14 @@ interface SharedOptions {
   locale: string;
 }
 
+interface CompareItems {
+  (itemA: string, itemB: string, options: SharedOptions): number;
+}
+
 export interface SortItemsOptions<ItemType>
   extends SharedOptions,
     DownshiftTypedProps<ItemType> {
-  compareItems(
-    item1: ItemType,
-    item2: ItemType,
-    options: SharedOptions
-  ): number;
+  compareItems: CompareItems;
   selectedItems: ItemType[];
 }
 
@@ -62,11 +62,7 @@ export interface MultiSelectSortingProps<ItemType> {
    * Provide a compare function that is used to determine the ordering of
    * options. See 'sortItems' for more control.
    */
-  compareItems?(
-    item1: ItemType,
-    item2: ItemType,
-    options: SharedOptions
-  ): number;
+  compareItems?: CompareItems;
 
   /**
    * Provide a method that sorts all options in the control. Overriding this
