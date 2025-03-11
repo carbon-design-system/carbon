@@ -20,6 +20,7 @@ $css--plex: true !default;
   --grid-template: 1rem 1fr max-content;
   --display-icon-item: none;
   --display-selection-icon: none;
+  --block-size-value: $spacing-07;
 }
 .#{$prefix}--menu--with-icons {
   --grid-template: 1rem 1rem 1fr max-content;
@@ -57,17 +58,15 @@ $css--plex: true !default;
   min-inline-size: 12rem;
 }
 
-$supported-sizes: (
-  'xs': 1.5rem,
-  'sm': 2rem,
-  'md': 2.5rem,
-  'lg': 3rem,
-);
-
-@each $size, $value in $supported-sizes {
-  .#{$prefix}--menu--#{$size} {
-    ::slotted(#{$prefix}-menu-item) {
-      block-size: $value;
-    }
-  }
+.#{$prefix}--menu--xs {
+  --block-size-value: 1.5rem;
+}
+.#{$prefix}--menu--sm {
+  --block-size-value: 2rem;
+}
+.#{$prefix}--menu--md {
+  --block-size-value: 2.5rem;
+}
+.#{$prefix}--menu--lg {
+  --block-size-value: 3rem;
 }

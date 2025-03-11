@@ -12,8 +12,6 @@ export type StateType = {
   isRoot: boolean;
   hasSelectableItems: boolean;
   size: 'xs' | 'sm' | 'md' | 'lg' | null;
-  items: any[];
-  requestCloseRoot: (e: KeyboardEvent) => void;
   updateFromChild: (item: {}) => void;
 };
 
@@ -21,8 +19,6 @@ export const menuDefaultState: StateType = {
   isRoot: true,
   hasSelectableItems: false,
   size: null,
-  items: [],
-  requestCloseRoot: () => {},
   updateFromChild: () => {},
 };
 

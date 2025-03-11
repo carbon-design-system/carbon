@@ -94,6 +94,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-menu-item) {
+  block-size: var(--block-size-value);
   grid-template-columns: var(--grid-template);
   .#{$prefix}--menu-item__icon {
     display: var(--display-icon-item);

@@ -41,11 +41,6 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   @property({ type: String })
   label;
   /**
-   * Child context.
-   */
-  @property()
-  childContext;
-  /**
    * Shortcut for the menu item.
    */
   @property({ type: String })
@@ -139,7 +134,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
       this.setAttribute('role', 'menuitem');
     }
 
-    this.setAttribute('tabindex', '0');
+    if (!this.disabled) this.setAttribute('tabindex', '0');
 
     this.addEventListener(`${prefix}-menu-closed`, () => {
       this.focus();
@@ -155,7 +150,6 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
         this.removeAttribute('aria-expanded');
       }
     }
-
     if (this.kind === MENU_ITEM_KIND.DANGER)
       this.classList.toggle(`${prefix}--menu-item--danger`);
   }
@@ -210,6 +204,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
             </div>
             <cds-menu
               className=${menuClassName}
+              size=${this.parentElement?.getAttribute('size')}
               ?isChild="${this.hasSubmenu}"
               label="${label}"
               .open="${submenuOpen}"

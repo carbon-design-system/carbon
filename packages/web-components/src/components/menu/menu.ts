@@ -27,10 +27,12 @@ export { MENU_SIZE };
  * @element cds-menu
  * @deprecated Menus now always support both icons as well as selectable items and nesting.
  */
+
 type activeItemType = {
   item: CDSmenuItem;
   parent: HTMLElement | null;
 };
+
 @customElement(`${prefix}-menu`)
 class CDSMenu extends HostListenerMixin(LitElement) {
   @provide({ context: MenuContext })
@@ -46,11 +48,6 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   };
 
   readonly spacing: number = 8; // distance to keep to window edges, in px
-  /**
-   * Parent state.
-   */
-  @property()
-  stateParent = {};
 
   /**
    * Items.
@@ -63,27 +60,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
    */
   @state()
   activeitems: activeItemType[] = [];
-  /**
-   * Items.
-   */
-  @property()
-  itemsChild: any[] = [];
 
-  /**
-   * Parent state.
-   */
-  @property({ type: HTMLElement })
-  containerRef;
   /**
    * Label for the menu.
    */
   @property({ type: String })
   label;
-  /**
-   * class for the menu.
-   */
-  @property({ type: String, attribute: true })
-  className = '';
   /**
    * Parent state.
    */
@@ -186,29 +168,21 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     if (this.isChild) {
       this._newContextCreate();
     }
-    // Getting the width from the parent container element - controlled
-    if (this.containerRef) {
-      const { width: w } = this.containerRef.getBoundingClientRect();
-      this.actionButtonWidth = w;
-    }
     await this.updateComplete;
     this._registerMenuItems();
     this._setActiveItems();
   }
   render() {
-    const menuSize = this.isRoot ? this.size : this.context.size;
     const {
       open,
-      className,
       menuAlignment,
       label,
       position,
       _handleKeyDown: handleKeyDown,
     } = this;
     const menuClasses = classMap({
-      [`${className}`]: true,
       [`${prefix}--menu`]: true,
-      [`${prefix}--menu--${menuSize}`]: true,
+      [`${prefix}--menu--${this.size}`]: this.size,
       [`${prefix}--menu--box-shadow-top`]:
         menuAlignment && menuAlignment.slice(0, 3) === 'top',
       [`${prefix}--menu--open`]: open,
