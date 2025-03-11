@@ -774,7 +774,22 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     clearTimeout(this.dragCooldownTimeout as number);
     super.disconnectedCallback();
   }
-
+  updated() {
+    const sliderfilledTrack = this?.shadowRoot?.querySelector(
+      `.${prefix}--slider__filled-track`
+    ) as HTMLElement;
+    if (sliderfilledTrack) {
+      if (this.unstable_valueUpper || this.unstable_valueUpper === '') {
+        sliderfilledTrack.style.transform = this.unstable_valueUpper
+          ? `translate(${this._rate * 100}%, -50%) scaleX(${this._rateUpper - this._rate})`
+          : `translate(0%, -50%) scaleX(${this._rate})`;
+      } else {
+        sliderfilledTrack.style.transform = this.unstable_valueUpper
+          ? `translate(${this._rate * 100}%, -50%) scaleX(${this._rateUpper - this._rate})`
+          : `translate(0%, -50%) scaleX(${this._rate})`;
+      }
+    }
+  }
   shouldUpdate(changedProperties) {
     const inputs = this.querySelectorAll(
       (this.constructor as typeof CDSSlider).selectorInput
@@ -967,23 +982,9 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             : html``}
           <div id="track" class="${prefix}--slider__track"></div>
           ${unstable_valueUpper || unstable_valueUpper === ''
-            ? html`
-                <div
-                  class="${prefix}--slider__filled-track"
-                  style="transform: ${unstable_valueUpper
-                    ? `translate(${rate * 100}%, -50%) scaleX(${
-                        rateUpper - rate
-                      })`
-                    : `translate(0%, -50%) scaleX(${rate})`}"></div>
-              `
+            ? html` <div class="${prefix}--slider__filled-track"></div> `
             : html` <div class="${prefix}-ce--slider__filled-track-container">
-                <div
-                  class="${prefix}--slider__filled-track"
-                  style="transform: ${unstable_valueUpper
-                    ? `translate(${rate * 100}%, -50%) scaleX(${
-                        rateUpper - rate
-                      })`
-                    : `translate(0%, -50%) scaleX(${rate})`}"></div>
+                <div class="${prefix}--slider__filled-track"></div>
               </div>`}
         </div>
         <span class="${prefix}--slider__range-label">
