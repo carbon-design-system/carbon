@@ -6,14 +6,15 @@
  */
 
 /**
- * Use the local `localCompare` with the `numeric` option to sort two,
- * potentially alpha-numeric, strings in a list of items.
+ * Use the locale `localeCompare` with the `numeric` option to sort two
+ * alpha-numeric strings.
  *
- * @param {ItemType} itemA
- * @param {ItemType} itemB
- * @param {object} options
- * @param {string} options.locale
- * @returns {number}
+ * @param {string} itemA - The first string to compare.
+ * @param {string} itemB - The second string to compare.
+ * @param {object} options - Options for comparing.
+ * @param {string} options.locale - The locale to use for comparison.
+ * @returns {number} A negative number if itemA comes before itemB, a positive
+ *   number if itemA comes after itemB, or 0 if they are equal.
  */
 export const defaultCompareItems = (itemA, itemB, { locale }) =>
   itemA.localeCompare(itemB, locale, {
