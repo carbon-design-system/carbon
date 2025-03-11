@@ -19,7 +19,6 @@ import { MenuContext } from './menu-context';
 import Checkmark16 from '@carbon/icons/lib/checkmark/16';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import FocusMixin from '../../globals/mixins/focus';
 import { MENU_ITEM_KIND } from './defs';
 
 export { MENU_ITEM_KIND };
@@ -30,7 +29,7 @@ export { MENU_ITEM_KIND };
  * @element cds-menu-item
  */
 @customElement(`${prefix}-menu-item`)
-class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
+class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   @consume({ context: MenuContext })
   context;
 
@@ -106,7 +105,7 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
   hasSubmenu = false;
 
   @property({ attribute: 'aria-checked' })
-  ariaChecked: string | null = 'false';
+  ariaChecked: string | null = this.getAttribute('selected') ?? 'false';
 
   async dispatchIconDetect() {
     const hasRenderIcon = !!this.querySelector('[slot="render-icon"]');
@@ -139,7 +138,12 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
     } else {
       this.removeAttribute('aria-haspopup');
     }
-    this.setAttribute('role', 'menuitem');
+    if (this.closest(`${prefix}-menu-item-radio-group`)) {
+      this.setAttribute('role', 'menuitemradio');
+    } else {
+      this.setAttribute('role', 'menuitem');
+    }
+
     this.setAttribute('tabindex', '0');
 
     this.addEventListener(`${prefix}-menu-closed`, () => {
@@ -269,9 +273,7 @@ class CDSmenuItem extends HostListenerMixin(FocusMixin(LitElement)) {
           if (item) {
             switch (item.tagName) {
               case 'CDS-MENU-ITEM-RADIO-GROUP':
-                this.submenuEntry = item.shadowRoot?.querySelector(
-                  `${prefix}-menu-item`
-                );
+                this.submenuEntry = item.querySelector(`${prefix}-menu-item`);
                 break;
               case 'CDS-MENU-ITEM-GROUP': {
                 const slotElements = item.shadowRoot

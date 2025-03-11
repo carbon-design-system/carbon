@@ -179,7 +179,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
         ?.classList.add(`${prefix}--menu--with-icons`);
     });
   }
-  firstUpdated() {
+  async firstUpdated() {
     this.isRtl = this.direction === 'rtl';
     this.isRoot = this.context.isRoot;
 
@@ -191,10 +191,9 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       const { width: w } = this.containerRef.getBoundingClientRect();
       this.actionButtonWidth = w;
     }
-    setTimeout(() => {
-      this._registerMenuItems();
-      this._setActiveItems();
-    }, 100);
+    await this.updateComplete;
+    this._registerMenuItems();
+    this._setActiveItems();
   }
   render() {
     const menuSize = this.isRoot ? this.size : this.context.size;
@@ -489,9 +488,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       let activeItem: activeItemType;
       switch (item.tagName) {
         case 'CDS-MENU-ITEM-RADIO-GROUP': {
-          let slotElements = item.shadowRoot?.querySelectorAll(
-            `${prefix}-menu-item`
-          );
+          let slotElements = item.querySelectorAll(`${prefix}-menu-item`);
           if (slotElements?.length) {
             for (const entry of slotElements.entries()) {
               activeItem = {

@@ -90,17 +90,16 @@ export const Default = {
   args,
   argTypes,
   render: ({ open, size }) => {
-    const itemlist = ['None', 'Overline', 'Line-through', 'Underline'];
-    const subitemlist = ['None', 'Product team', 'Organization', 'Company'];
     return html`
-      <cds-menu ?open=${open} size=${size} menuAlignment="bottom" class="test">
+      <cds-menu ?open=${open} size=${size} menuAlignment="bottom">
         <cds-menu-item label="Share with">
           ${FolderShared16({ slot: 'render-icon' })}
-          <cds-menu-item-radio-group
-            slot="submenu"
-            label="Share with list"
-            .items="${subitemlist}"
-            selectedItem="None"></cds-menu-item-radio-group>
+          <cds-menu-item-radio-group slot="submenu" label="Share with list">
+            <cds-menu-item label="None"></cds-menu-item>
+            <cds-menu-item label="Product team"></cds-menu-item>
+            <cds-menu-item label="Organization"></cds-menu-item>
+            <cds-menu-item label="Company"></cds-menu-item>
+          </cds-menu-item-radio-group>
         </cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item label="Cut" shortcut="⌘X">
@@ -122,10 +121,12 @@ export const Default = {
           >
         </cds-menu-item-group>
         <cds-menu-item-divider></cds-menu-item-divider>
-        <cds-menu-item-radio-group
-          label="samples"
-          .items="${itemlist}"
-          selectedItem="None"></cds-menu-item-radio-group>
+        <cds-menu-item-radio-group label="samples">
+          <cds-menu-item label="None"></cds-menu-item>
+          <cds-menu-item selected="true" label="Overline"></cds-menu-item>
+          <cds-menu-item label="Line-through"></cds-menu-item>
+          <cds-menu-item label="Underline"></cds-menu-item>
+        </cds-menu-item-radio-group>
         <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item label="Delete" shortcut="⌫" kind="danger">
           ${TrashCan16({ slot: 'render-icon' })}</cds-menu-item

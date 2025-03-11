@@ -56,57 +56,29 @@ class CDSmenuItemRadioGroup extends LitElement {
 
   firstUpdated(): void {
     this.context.updateFromChild({ hasSelectableItems: true });
+
+    this.addEventListener(`click`, (e) => {
+      this.selectedItem = e.target;
+    });
   }
 
-  _handleClick = (item, e) => {
-    this.selectedItem = item;
-
-    const init = {
-      bubbles: true,
-      cancelable: true,
-      composed: true,
-      detail: {
-        triggeredBy: e.target,
-      },
-    };
-    if (
-      this.dispatchEvent(
-        new CustomEvent(
-          (this.constructor as typeof CDSmenuItemRadioGroup).eventOnChange,
-          init
-        )
-      )
-    ) {
-      this.dispatchEvent(
-        new CustomEvent(
-          (this.constructor as typeof CDSmenuItemRadioGroup).eventOnChange,
-          init
-        )
-      );
+  protected updated(_changedProperties): void {
+    if (_changedProperties.has('selectedItem')) {
+      this.querySelectorAll(`${prefix}-menu-item`).forEach((item) => {
+        if (item === this.selectedItem) {
+          item.setAttribute('aria-checked', 'true');
+        } else {
+          item.setAttribute('aria-checked', 'false');
+        }
+      });
     }
-  };
+  }
+
   render() {
-    const defaultItemToString = (item) => item.toString();
-    const {
-      label,
-      items,
-      itemToString = defaultItemToString,
-      selectedItem,
-      _handleClick: handleClick,
-    } = this;
+    const { label } = this;
     return html`
       <ul role="group" aria-label="${label}">
-        ${items.map(
-          (item) => html`
-            <cds-menu-item
-              label="${itemToString(item)}"
-              role="menuitemradio"
-              aria-checked="${item === selectedItem}"
-              @click="${(e) => {
-                handleClick(item, e);
-              }}"></cds-menu-item>
-          `
-        )}
+        <slot></slot>
       </ul>
     `;
   }
