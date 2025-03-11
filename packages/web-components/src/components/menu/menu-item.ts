@@ -95,11 +95,6 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     x: number | [number, number];
     y: number | [number, number];
   } = { x: -1, y: -1 };
-  /**
-   * Checks if document direction is rtl.
-   */
-  @property()
-  onKeyDown?: (e: KeyboardEvent) => void;
 
   @property()
   hasSubmenu = false;
@@ -319,9 +314,6 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
       e.stopPropagation();
     } else if (e.key === 'Enter' || e.key === ' ') {
       this._handleClick(e);
-    }
-    if (this.onKeyDown) {
-      this.onKeyDown(e);
     }
   };
 
