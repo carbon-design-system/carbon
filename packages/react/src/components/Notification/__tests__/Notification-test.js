@@ -343,8 +343,7 @@ describe('ActionableNotification', () => {
   });
 });
 
-// TODO: Remove StaticNotification tests when Callout moves to stable OR in
-// v12, whichever is first. Ensure test parity on Callout.
+// TODO: Remove StaticNotification tests when StaticNotification is removed (v12)
 describe('StaticNotification', () => {
   it('logs a deprecation notice when used', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
@@ -363,10 +362,6 @@ describe('StaticNotification', () => {
 });
 
 describe('Callout', () => {
-  // children?: ReactNode;
-  // lowContrast?: boolean;
-  // statusIconDescription?: string;
-
   it('should place the `className` prop on the outermost DOM node', () => {
     const { container } = render(<Callout className="test" />);
     expect(container.firstChild).toHaveClass('test');
