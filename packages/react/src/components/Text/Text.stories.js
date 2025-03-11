@@ -77,6 +77,7 @@ export const SetTextDirection = () => {
         }
         return 'auto';
       }}>
+      {/* // TODO: These radio buttons don't work. */}
       <RadioButtonGroup
         legendText={legendText}
         name="radio-button-group"
@@ -123,6 +124,7 @@ export const UsageExamples = () => {
         <Text>{rtlText}</Text>
       </Button>
       <div style={{ width: 400 }}>
+        {/* // TODO: This dropdown doesn't work. */}
         <Dropdown
           id="default"
           titleText="Using <Text> with `itemToElement`"

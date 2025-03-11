@@ -62,6 +62,14 @@ test.describe('Button', () => {
         });
       });
 
+      test('icon button with badge indicator @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Button',
+          id: 'components-button--icon-button-with-badge',
+          theme,
+        });
+      });
+
       test('set of buttons @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Button',

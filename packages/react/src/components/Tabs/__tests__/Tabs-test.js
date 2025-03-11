@@ -7,8 +7,10 @@ import {
   TabPanels,
   TabList,
   TabListVertical,
+  IconTab,
 } from '../Tabs';
 import { act } from 'react';
+import { Notification } from '@carbon/icons-react';
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -233,6 +235,28 @@ describe('Tab', () => {
     expect(screen.getByTestId('svg').parentElement).toHaveClass(
       'cds--tabs__nav-item--icon'
     );
+  });
+  it('should render badge indicator when badgeIndicator prop is true', () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <IconTab
+            badgeIndicator
+            data-testid="icon-tab-with-badge"
+            label="New Notifications">
+            <Notification size={20} aria-label="Notification" />
+          </IconTab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Icon Tab Panel</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    // Get the icon tab
+    const iconTab = screen.getByTestId('icon-tab-with-badge');
+    const badgeIndicator = iconTab.querySelector(`.${prefix}--badge-indicator`);
+    expect(badgeIndicator).not.toBeNull();
   });
 
   it('should call onClick from props if provided', async () => {
