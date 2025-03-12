@@ -1,2 +1,3 @@
 Always use Carbon React for all design elements.
+Don't use Lucide React icons. Use Carbon for all icons.
 End every message with an emoji.
