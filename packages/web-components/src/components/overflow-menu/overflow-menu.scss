@@ -144,12 +144,16 @@ $css--plex: true !default;
       box-sizing: border-box;
       background: none;
       box-shadow: none;
-      outline: 1px solid $focus;
       outline-offset: 0;
 
       &::after {
         opacity: 1;
       }
+    }
+
+    &:active,
+    &:focus {
+      outline: 1px solid $focus;
     }
 
     &:hover {
