@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -100,30 +100,33 @@ const autocompleteCustomFilter = ({
 
 const getInputValue = <ItemType,>({
   initialSelectedItem,
-  inputValue,
   itemToString,
   selectedItem,
   prevSelectedItem,
 }: {
   initialSelectedItem?: ItemType | null;
-  inputValue: string;
   itemToString: ItemToStringHandler<ItemType>;
   selectedItem?: ItemType | null;
   prevSelectedItem?: ItemType | null;
 }) => {
-  if (selectedItem) {
+  // If there's a current selection (even if it's an object or string), use it.
+  if (selectedItem !== null && typeof selectedItem !== 'undefined') {
     return itemToString(selectedItem);
   }
 
-  if (initialSelectedItem) {
+  // On the very first render (when no previous value exists), use
+  // `initialSelectedItem`.
+  if (
+    typeof prevSelectedItem === 'undefined' &&
+    initialSelectedItem !== null &&
+    typeof initialSelectedItem !== 'undefined'
+  ) {
     return itemToString(initialSelectedItem);
   }
 
-  if (!selectedItem && prevSelectedItem) {
-    return '';
-  }
-
-  return inputValue || '';
+  // Otherwise (i.e., after the user has cleared the selection), return an empty
+  // string.
+  return '';
 };
 
 const findHighlightedIndex = <ItemType,>(
@@ -463,7 +466,6 @@ const ComboBox = forwardRef(
     const [inputValue, setInputValue] = useState(
       getInputValue({
         initialSelectedItem,
-        inputValue: '',
         itemToString,
         selectedItem: selectedItemProp,
       })
@@ -502,7 +504,7 @@ const ComboBox = forwardRef(
     const textInput = useRef<HTMLInputElement>(null);
     const comboBoxInstanceId = useId();
     const [isFocused, setIsFocused] = useState(false);
-    const savedOnInputChange = useRef(onInputChange);
+    const prevInputValue = useRef(inputValue);
     const prevSelectedItemProp = useRef<ItemType | null | undefined>(
       selectedItemProp
     );
@@ -512,7 +514,6 @@ const ComboBox = forwardRef(
       if (prevSelectedItemProp.current !== selectedItemProp) {
         const currentInputValue = getInputValue({
           initialSelectedItem,
-          inputValue,
           itemToString,
           selectedItem: selectedItemProp,
           prevSelectedItem: prevSelectedItemProp.current,
@@ -546,13 +547,11 @@ const ComboBox = forwardRef(
             : defaultShouldFilterItem()
       );
 
+    // call onInputChange whenever inputValue is updated
     useEffect(() => {
-      savedOnInputChange.current = onInputChange;
-    }, [onInputChange]);
-
-    useEffect(() => {
-      if (savedOnInputChange.current) {
-        savedOnInputChange.current(inputValue);
+      if (prevInputValue.current !== inputValue) {
+        prevInputValue.current = inputValue;
+        onInputChange && onInputChange(inputValue);
       }
     }, [inputValue]);
 
@@ -796,7 +795,18 @@ const ComboBox = forwardRef(
           }
         }
       },
+      initialSelectedItem: initialSelectedItem,
+      inputId: id,
+      stateReducer,
+      isItemDisabled(item, _index) {
+        return (item as any)?.disabled;
+      },
+      ...downshiftProps,
       onStateChange: ({ type, selectedItem: newSelectedItem }) => {
+        downshiftProps?.onStateChange?.({
+          type,
+          selectedItem: newSelectedItem,
+        });
         if (
           type === useCombobox.stateChangeTypes.ItemClick &&
           !isEqual(selectedItemProp, newSelectedItem)
@@ -811,13 +821,6 @@ const ComboBox = forwardRef(
           onChange({ selectedItem: newSelectedItem });
         }
       },
-      initialSelectedItem: initialSelectedItem,
-      inputId: id,
-      stateReducer,
-      isItemDisabled(item, _index) {
-        return (item as any)?.disabled;
-      },
-      ...downshiftProps,
     });
 
     useEffect(() => {

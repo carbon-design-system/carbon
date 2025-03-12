@@ -22,8 +22,12 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 const navigationDirectionForKey = {
   ArrowUp: NAVIGATION_DIRECTION.BACKWARD,
   Up: NAVIGATION_DIRECTION.BACKWARD, // IE
+  ArrowLeft: NAVIGATION_DIRECTION.BACKWARD,
+  Left: NAVIGATION_DIRECTION.BACKWARD, // IE
   ArrowDown: NAVIGATION_DIRECTION.FORWARD,
   Down: NAVIGATION_DIRECTION.FORWARD, // IE
+  ArrowRight: NAVIGATION_DIRECTION.FORWARD,
+  Right: NAVIGATION_DIRECTION.FORWARD, // IE
 };
 
 /**
@@ -43,6 +47,10 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
     const { eventCurrentRadioTileSelection } = this
       .constructor as typeof CDSTileGroup;
 
+    if (target.matches(`${prefix}-ai-label`)) {
+      return;
+    }
+
     if (!currentRadioSelection) {
       this.currentRadioSelection = target;
     } else if (currentRadioSelection !== target) {
@@ -61,32 +69,6 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
     );
   }
 
-  private _handleSelectableClick(event) {
-    const { target } = event;
-    const { currentSelections } = this;
-    const { eventCurrentSelectableTilesSelection } = this
-      .constructor as typeof CDSTileGroup;
-
-    if (!currentSelections.includes(target)) {
-      currentSelections.push(target);
-    } else {
-      currentSelections.splice(currentSelections.indexOf(target), 1);
-    }
-    (target as HTMLElement).toggleAttribute('selected');
-
-    this.dispatchEvent(
-      new CustomEvent(eventCurrentSelectableTilesSelection, {
-        bubbles: true,
-        composed: true,
-        detail: {
-          currentSelections,
-        },
-      })
-    );
-    event.stopPropagation();
-    event.preventDefault();
-  }
-
   /**
    * Click listener to ensure selectability.
    *
@@ -97,8 +79,6 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
   private _handleTileSelect(event: Event) {
     if (this.radioTiles.length) {
       this._handleRadioClick(event);
-    } else {
-      this._handleSelectableClick(event);
     }
   }
 
@@ -176,6 +156,10 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
     const { radioTiles, selectableTiles } = this;
     const navigationDirection = navigationDirectionForKey[key];
 
+    if ((target as HTMLElement)?.matches(`${prefix}-ai-label`)) {
+      return;
+    }
+
     const tiles = radioTiles.length ? radioTiles : selectableTiles;
     const currentIndex = [...tiles].findIndex((e) => e == target);
     const nextIndex = currentIndex + navigationDirection;
@@ -206,6 +190,9 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleFocus = (event: KeyboardEvent) => {
     const { relatedTarget, target } = event as any;
+    if ((target as HTMLElement)?.matches(`${prefix}-ai-label`)) {
+      return;
+    }
 
     if (this.radioTiles.length) {
       if (!this.currentRadioSelection) {
@@ -255,6 +242,11 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
       this.radioTiles = this.querySelectorAll(
         (this.constructor as typeof CDSTileGroup).selectorRadioTile
       );
+      this.radioTiles.forEach((tile) => {
+        if (tile.selected) {
+          this.currentRadioSelection = tile;
+        }
+      });
     }
 
     if (!this.selectableTiles) {

@@ -348,7 +348,7 @@ export const Manual = () => {
   );
 };
 
-export const Icon20Only = () => {
+export const Icon20Only = (args) => {
   return (
     <Tabs>
       <TabList iconSize="lg">
@@ -358,7 +358,7 @@ export const Icon20Only = () => {
         <IconTab label="Activity">
           <Activity size={20} aria-label="Activity" />
         </IconTab>
-        <IconTab label="Notification">
+        <IconTab label="New Notifications" {...args}>
           <Notification size={20} aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
@@ -375,7 +375,16 @@ export const Icon20Only = () => {
   );
 };
 
-export const IconOnly = () => {
+Icon20Only.argTypes = {
+  badgeIndicator: {
+    description: '**Experimental**: Display an empty dot badge on the Tab.',
+    control: {
+      type: 'boolean',
+    },
+  },
+};
+
+export const IconOnly = (args) => {
   return (
     <Tabs>
       <TabList iconSize="default">
@@ -385,7 +394,7 @@ export const IconOnly = () => {
         <IconTab label="Activity">
           <Activity aria-label="Activity" />
         </IconTab>
-        <IconTab label="Notification">
+        <IconTab label="New Notifications" {...args}>
           <Notification aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
@@ -400,6 +409,15 @@ export const IconOnly = () => {
       </TabPanels>
     </Tabs>
   );
+};
+
+IconOnly.argTypes = {
+  badgeIndicator: {
+    description: '**Experimental**: Display an empty dot badge on the Tab.',
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 export const Contained = () => {
