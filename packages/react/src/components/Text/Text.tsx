@@ -26,10 +26,18 @@ type TextComponent = <T extends React.ElementType = 'span'>(
   props: TextProps<T>
 ) => React.ReactElement | any;
 
-const Text: TextComponent = React.forwardRef(
-  <T extends React.ElementType = 'span'>(
-    { as, children, dir = 'auto', ...rest }: TextProps<T>,
-    ref?: PolymorphicRef<T>
+const TextBase = React.forwardRef(
+  (
+    {
+      as,
+      children,
+      dir = 'auto',
+      ...rest
+    }: TextBaseProps & {
+      as?: React.ElementType;
+      dir?: 'auto' | 'ltr' | 'rtl';
+    } & React.HTMLAttributes<HTMLSpanElement>,
+    ref: React.Ref<HTMLSpanElement>
   ) => {
     // TODO: Update with context typing once its been converted to TS
     const context = useContext<any>(TextDirectionContext);
@@ -72,7 +80,7 @@ const Text: TextComponent = React.forwardRef(
     );
   }
 );
-
+const Text = TextBase as TextComponent;
 (Text as React.FC).propTypes = {
   /**
    * Provide a custom element type used to render the outermost node

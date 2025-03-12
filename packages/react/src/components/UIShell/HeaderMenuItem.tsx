@@ -38,6 +38,7 @@ export interface HeaderMenuItemComponent {
 }
 
 const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
+  //@ts-ignore
   function HeaderMenuItemRenderFunction<E extends ElementType = 'a'>(
     {
       className,
@@ -49,7 +50,7 @@ const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
       tabIndex = 0,
       ...rest
     }: HeaderMenuItemProps<E>,
-    ref: ForwardedRef<ElementType>
+    ref: ForwardedRef<E>
   ) {
     const prefix = usePrefix();
     if (isCurrentPage) {
@@ -64,8 +65,8 @@ const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
     });
     return (
       <li className={className} role={role}>
-        <Link
-          {...rest}
+        <Link<E>
+          {...(rest as LinkProps<E>)}
           aria-current={ariaCurrent}
           className={linkClassName}
           ref={ref}

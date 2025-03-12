@@ -17,9 +17,9 @@ export function useNoInteractiveChildren(
       const node = ref.current ? getInteractiveContent(ref.current) : false;
 
       if (node) {
-        throw new Error(
-          `Error: ${message}.\n\nInstead found: ${node.outerHTML}`
-        );
+        const errorMessage = `Error: ${message}.\n\nInstead found: ${node.outerHTML}`;
+        console.error(errorMessage);
+        throw new Error(errorMessage);
       }
     });
   }

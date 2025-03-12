@@ -76,7 +76,7 @@ export interface SideNavLinkComponent {
   displayName?: string;
   propTypes?: PropTypes.WeakValidationMap<SideNavLinkProps<any>>;
 }
-
+//@ts-ignore
 const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
   E extends ElementType = 'a',
 >(
@@ -103,8 +103,8 @@ const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
 
   return (
     <SideNavItem large={large}>
-      <Link
-        {...rest}
+      <Link<E>
+        {...(rest as LinkProps<E>)}
         className={className}
         ref={ref}
         tabIndex={

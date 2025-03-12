@@ -121,8 +121,13 @@ type TagComponent = <T extends React.ElementType = 'div'>(
     | DismissibleTagBaseProps
 ) => React.ReactElement | any;
 
-const Tag: TagComponent = React.forwardRef(
-  <T extends React.ElementType = 'div'>(
+const TagBase = React.forwardRef<
+  any,
+  TagBaseProps & {
+    as?: React.ElementType;
+  } & React.HTMLAttributes<HTMLDivElement>
+>(
+  (
     {
       children,
       className,
@@ -138,11 +143,22 @@ const Tag: TagComponent = React.forwardRef(
       as: BaseComponent,
       slug,
       ...other
-    }: TagProps<T>,
-    forwardRef: PolymorphicRef<T>
+    },
+    forwardRef
   ) => {
     const prefix = usePrefix();
-    const tagRef = useRef<HTMLElement>();
+    const tagRef = useRef<HTMLElement>(null);
+    if (filter) {
+      console.warn(
+        'The `filter` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
+      );
+    }
+
+    if (onClose) {
+      console.warn(
+        'The `onClose` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
+      );
+    }
     const ref = useMergeRefs([forwardRef, tagRef]);
     const tagId = id || `tag-${useId()}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
@@ -303,7 +319,7 @@ const Tag: TagComponent = React.forwardRef(
     );
   }
 );
-
+const Tag = TagBase as TagComponent;
 (Tag as React.FC).propTypes = {
   /**
    * Provide an alternative tag or component to use instead of the default

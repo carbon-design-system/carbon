@@ -136,6 +136,11 @@ function Tabs({
   onTabCloseRequest,
 }: TabsProps) {
   const baseId = useId('ccs');
+  if (dismissable && !onTabCloseRequest) {
+    console.error(
+      'dismissable property specified without also providing an onTabCloseRequest property.'
+    );
+  }
   // The active index is used to track the element which has focus in our tablist
   const [activeIndex, setActiveIndex] = useState(defaultSelectedIndex);
   // The selected index is used for the tab/panel pairing which is "visible"

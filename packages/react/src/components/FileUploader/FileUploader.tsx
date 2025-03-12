@@ -265,7 +265,7 @@ const FileUploader = React.forwardRef(
     );
   }
 ) as {
-  <ItemType>(props: FileUploaderProps): ReactElement<any>;
+  <ItemType>(props: FileUploaderProps): React.ReactElement<any>;
   propTypes?: any;
   contextTypes?: any;
   defaultProps?: any;
