@@ -31,6 +31,7 @@ const args = {
   size: null,
   disableSelection: false,
   selectionMode: 'automatic',
+  selectedIndex: 0,
 };
 
 const argTypes = {
@@ -66,7 +67,14 @@ export const Default = {
   args,
   argTypes,
   render: (args) => {
-    const { value, disableSelection, onSelect = noop, size } = args ?? {};
+    const {
+      value,
+      disableSelection,
+      onSelect = noop,
+      size,
+      selectionMode,
+      selectedIndex,
+    } = args ?? {};
     const handleBeforeSelected = (event: CustomEvent) => {
       if (disableSelection) {
         event.preventDefault();
@@ -78,6 +86,8 @@ export const Default = {
         value="all"
         @cds-content-switcher-beingselected="${handleBeforeSelected}"
         @cds-content-switcher-selected="${onSelect}"
+        selectionMode="${selectionMode}"
+        selectedIndex="${selectedIndex}"
         size="${size}">
         <cds-content-switcher-item value="all">
           First section

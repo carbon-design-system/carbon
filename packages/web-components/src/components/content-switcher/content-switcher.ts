@@ -103,12 +103,8 @@ export default class CDSContentSwitcher extends LitElement {
     const items = this.querySelectorAll(
       (this.constructor as typeof CDSContentSwitcher).selectorItemEnabled
     );
-    // console.log({ items });
-    // console.log('currentItem', currentItem);
     const currentIndex = indexOf(items, currentItem);
-    // console.log({ currentIndex });
     const nextIndex = capIndex(currentIndex + direction, items.length);
-    // console.log({ nextIndex });
     return nextIndex === currentIndex ? null : items[nextIndex];
   }
 
@@ -147,24 +143,12 @@ export default class CDSContentSwitcher extends LitElement {
     item: CDSContentSwitcherItem,
     interactionType: 'mouse' | 'keyboard'
   ) {
-    // console.log(
-    //   '!item.disabled',
-    //   item.disabled,
-    //   'item.value',
-    //   item.value,
-    //   'this.value',
-    //   this.value,
-    //   'interactionType',
-    //   interactionType
-    // );
     if (
       (!item.disabled && item.value !== this.value) ||
       (this.selectionMode === 'manual' &&
         interactionType === 'keyboard' &&
         !item.disabled)
     ) {
-      console.log('_handleUserInitiatedSelectItem inside if');
-
       const init = {
         bubbles: true,
         composed: true,
@@ -217,8 +201,6 @@ export default class CDSContentSwitcher extends LitElement {
     interactionType: 'mouse' | 'keyboard'
   ) {
     if (this.selectionMode === 'manual' && interactionType === 'keyboard') {
-      console.log('this.selectedIndex', this.selectedIndex);
-      console.log('itemToSelect.index', itemToSelect.index);
       // In manual mode, only focus the item without changing the selection
       this.selectedIndex = itemToSelect.index;
 
@@ -283,7 +265,7 @@ export default class CDSContentSwitcher extends LitElement {
    * Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to 'automatic'
    */
   @property()
-  selectionMode = 'manual';
+  selectionMode = 'automatic';
 
   /**
    * Content switcher size.
