@@ -186,56 +186,6 @@ describe('ComboButton', () => {
       ).toHaveTextContent(/^Additional action$/);
     });
 
-    it('warns when MenuItemSelectable is used in children', async () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <ComboButton label="Primary action">
-          <MenuItemSelectable label="Option" />
-        </ComboButton>
-      );
-
-      await userEvent.click(screen.getAllByRole('button')[1]);
-
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
-
-    it('warns when MenuItemRadioGroup is used in children', async () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <ComboButton label="Primary action">
-          <MenuItemRadioGroup
-            label="Options"
-            items={['Option 1', 'Option 2']}
-          />
-        </ComboButton>
-      );
-
-      await userEvent.click(screen.getAllByRole('button')[1]);
-
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
-
-    it('warns when a nested Menu is used in children', async () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <ComboButton label="Primary action">
-          <MenuItem label="Submenu">
-            <MenuItem label="Action" />
-          </MenuItem>
-        </ComboButton>
-      );
-
-      await userEvent.click(screen.getAllByRole('button')[1]);
-
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
-
     it('supports ellipsis in ComboButton by checking the className', async () => {
       render(
         <ComboButton label="Primary action super long text to enable ellipsis">

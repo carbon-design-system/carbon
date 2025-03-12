@@ -324,6 +324,15 @@ Map {
       "noTrailingSlash": Object {
         "type": "bool",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
     "render": [Function],
   },
@@ -485,6 +494,12 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "tooltipDropShadow": Object {
+        "type": "bool",
+      },
+      "tooltipHighContrast": Object {
+        "type": "bool",
       },
       "tooltipPosition": Object {
         "args": Array [
@@ -2868,6 +2883,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "isRequired": true,
         "type": "node",
@@ -4061,6 +4079,12 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tooltipDropShadow": Object {
+        "type": "bool",
+      },
+      "tooltipHighContrast": Object {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },
@@ -4215,6 +4239,9 @@ Map {
       "align": [Function],
       "autoAlign": Object {
         "type": "bool",
+      },
+      "badgeCount": Object {
+        "type": "number",
       },
       "children": Object {
         "type": "node",
@@ -4376,6 +4403,9 @@ Map {
   "IconTab" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "badgeIndicator": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4628,15 +4658,7 @@ Map {
       "menuAlignment": Object {
         "type": "string",
       },
-      "mode": Object {
-        "args": Array [
-          Array [
-            "full",
-            "basic",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "mode": [Function],
       "onClose": Object {
         "type": "func",
       },
@@ -4924,7 +4946,23 @@ Map {
               "args": Array [
                 Object {
                   "current": Object {
-                    "type": "any",
+                    "args": Array [
+                      Array [
+                        Object {
+                          "type": "any",
+                        },
+                        Object {
+                          "args": Array [
+                            Array [
+                              null,
+                            ],
+                          ],
+                          "type": "oneOf",
+                        },
+                      ],
+                    ],
+                    "isRequired": true,
+                    "type": "oneOfType",
                   },
                 },
               ],
@@ -5843,6 +5881,7 @@ Map {
     },
   },
   "OperationalTag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -5897,6 +5936,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "OrderedList" => Object {
     "propTypes": Object {
@@ -9556,6 +9596,7 @@ Map {
     },
   },
   "Tooltip" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "align": Object {
         "args": Array [
@@ -9615,6 +9656,7 @@ Map {
         "type": "number",
       },
     },
+    "render": [Function],
   },
   "TreeNode" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -11062,6 +11104,47 @@ Map {
           Array [
             16,
             20,
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__ShapeIndicator" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "failed",
+            "critical",
+            "high",
+            "medium",
+            "low",
+            "cautious",
+            "undefined",
+            "stable",
+            "informative",
+            "incomplete",
+            "draft",
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOf",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "textSize": Object {
+        "args": Array [
+          Array [
+            12,
+            14,
           ],
         ],
         "type": "oneOf",
