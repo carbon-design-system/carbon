@@ -1,38 +1,46 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode, useContext } from 'react';
-import { TextDir } from './TextDirection';
-import { TextDirectionContext } from './TextDirectionContext';
+import React, {
+  Children,
+  forwardRef,
+  useContext,
+  type ElementType,
+  type FC,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
 import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
+import { TextDirectionContext, type TextDir } from '.';
 
 export interface TextBaseProps {
-  dir?: TextDir | undefined;
+  dir?: TextDir;
   children?: ReactNode;
 }
 
-export type TextProps<T extends React.ElementType> =
-  PolymorphicComponentPropWithRef<T, TextBaseProps>;
+export type TextProps<T extends ElementType> = PolymorphicComponentPropWithRef<
+  T,
+  TextBaseProps
+>;
 
-type TextComponent = <T extends React.ElementType = 'span'>(
-  props: TextProps<T>
-) => React.ReactElement | any;
+type TextComponent = <T extends ElementType = 'span'>(
+  props: TextProps<T> & { ref?: PolymorphicRef<T> }
+) => ReactElement | null;
 
-const Text: TextComponent = React.forwardRef(
-  <T extends React.ElementType = 'span'>(
+export const Text = forwardRef(
+  <T extends ElementType = 'span'>(
     { as, children, dir = 'auto', ...rest }: TextProps<T>,
     ref?: PolymorphicRef<T>
   ) => {
-    // TODO: Update with context typing once its been converted to TS
-    const context = useContext<any>(TextDirectionContext);
+    const context = useContext(TextDirectionContext);
     const textProps: { dir?: TextDir } = {};
     const BaseComponent = as ?? 'span';
     const value = {
@@ -71,9 +79,9 @@ const Text: TextComponent = React.forwardRef(
       </TextDirectionContext.Provider>
     );
   }
-);
+) as TextComponent;
 
-(Text as React.FC).propTypes = {
+(Text as FC).propTypes = {
   /**
    * Provide a custom element type used to render the outermost node
    */
@@ -95,12 +103,12 @@ const Text: TextComponent = React.forwardRef(
   dir: PropTypes.oneOf(['ltr', 'rtl', 'auto']),
 };
 
-function getTextFromChildren(children: ReactNode) {
+const getTextFromChildren = (children: ReactNode) => {
   if (typeof children === 'string') {
     return children;
   }
 
-  const text = React.Children.map(children, (child) => {
+  const text = Children.map(children, (child) => {
     if (typeof child === 'string') {
       return child;
     }
@@ -114,6 +122,4 @@ function getTextFromChildren(children: ReactNode) {
   }
 
   return text;
-}
-
-export { Text };
+};

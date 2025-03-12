@@ -3,6 +3,7 @@
 packages/*/build/
 packages/*/examples/*/build/
 es
+es-custom
 lib
 dist
 umd

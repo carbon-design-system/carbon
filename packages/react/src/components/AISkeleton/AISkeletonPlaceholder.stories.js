@@ -16,6 +16,6 @@ export default {
   component: AISkeletonPlaceholder,
 };
 
-export const _AISkeletonPlaceholder = () => (
-  <AISkeletonPlaceholder className="test" />
-);
+export const _AISkeletonPlaceholder = () => {
+  return <AISkeletonPlaceholder className="test" />;
+};
