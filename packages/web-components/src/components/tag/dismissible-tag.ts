@@ -8,8 +8,9 @@
  */
 
 import { html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property, state, query } from 'lit/decorators.js';
 import Close16 from '@carbon/icons/lib/close/16.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListener from '../../globals/decorators/host-listener';
@@ -60,6 +61,16 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
   }
 
   /**
+   * Handles `slotchange` event.
+   */
+  protected _handleIconSlotChange({ target }: Event) {
+    const hasIcon = (target as HTMLSlotElement).assignedNodes();
+
+    this._hasCustomIcon = Boolean(hasIcon.length > 0);
+    this.requestUpdate();
+  }
+
+  /**
    * Handles `click` event on this element.
    *
    * @param event The event.
@@ -103,7 +114,7 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
    * Text to show on filter tag "clear" buttons. Corresponds to the attribute with the same name
    */
   @property({ type: String, reflect: true })
-  title = 'Clear filter';
+  title = 'Dismiss';
 
   /**
    * `true` if the tag should be disabled
@@ -111,8 +122,10 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  @property({ type: Boolean })
-  hasCustomIcon = false;
+  /**
+   * `true` if there is a custom icon.
+   */
+  protected _hasCustomIcon = false;
 
   /**
    * Determine if is a filter/chip
@@ -129,8 +142,26 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
   /**
    * The size of the tag.
    */
-  @property({ reflect: true })
+  @property({ type: String, reflect: true })
   size = TAG_SIZE.MEDIUM;
+
+  /**
+   * Provide a custom `title` to be inserted in the tag.
+   */
+  @property({ type: String, attribute: 'tag-title', reflect: true })
+  tagTitle = '';
+
+  /**
+   * Provide text to be rendered inside of a the tag.
+   */
+  @property({ type: String, reflect: true })
+  text = '';
+
+  /**
+   * true if the tag text has ellipsis applied
+   */
+  @state()
+  _hasEllipsisApplied = false;
 
   /**
    * The type of the tag.
@@ -138,17 +169,44 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
   @property({ reflect: true })
   type = TAG_TYPE.GRAY;
 
+  updated() {
+    const textContainer = this.shadowRoot?.querySelector('.cds--tag__label');
+    if (!textContainer) return;
+
+    this._hasEllipsisApplied =
+      textContainer.scrollWidth > textContainer.clientWidth;
+  }
+
   render() {
-    const { disabled, _handleAILabelSlotChange: handleAILabelSlotChange } =
-      this;
+    const {
+      disabled,
+      _hasCustomIcon: hasCustomIcon,
+      _handleAILabelSlotChange: handleAILabelSlotChange,
+      _handleIconSlotChange: handleIconSlotChange,
+      _hasEllipsisApplied: hasEllipsisApplied,
+      tagTitle,
+      text,
+      title,
+    } = this;
+
+    const contentClasses = classMap({
+      [`${prefix}--interactive--tag-children`]: true,
+      [`${prefix}--dismissible-tag--custom-icon`]: hasCustomIcon,
+    });
+
+    const dismissLabel = `Dismiss "${text}"`;
+
     return html`
-      <slot name="icon"></slot>
-      <div class="${prefix}--interactive--tag-children">
-        <slot></slot>
+      <slot name="icon" @slotchange="${handleIconSlotChange}"></slot>
+      <div class=${contentClasses}>
+        <span
+          title="${tagTitle ? tagTitle : text}"
+          class="${prefix}--tag__label">
+          ${text}
+        </span>
         <slot name="decorator" @slotchange="${handleAILabelSlotChange}"></slot>
         <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>
         <slot name="slug" @slotchange="${handleAILabelSlotChange}"></slot>
-
         <cds-tooltip align="bottom" enter-delay-ms=${0}>
           <button
             class="sb-tooltip-trigger"
@@ -159,7 +217,7 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
             ${Close16()}
           </button>
           <cds-tooltip-content id="content">
-            Tooltip alignment
+            ${hasEllipsisApplied ? dismissLabel : title}
           </cds-tooltip-content>
         </cds-tooltip>
       </div>

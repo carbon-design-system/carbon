@@ -163,6 +163,11 @@ $css--plex: true !default;
   @extend .#{$prefix}--tag__custom-icon;
 }
 
+:host(#{$prefix}-dismissible-tag)
+  .#{$prefix}--interactive--tag-children.#{$prefix}--dismissible-tag--custom-icon {
+  max-inline-size: 11.5rem;
+}
+
 :host(#{$prefix}-tag[filter][disabled]) {
   .#{$prefix}--tag__close-icon {
     cursor: not-allowed;

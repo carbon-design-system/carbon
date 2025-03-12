@@ -103,18 +103,69 @@ const controls = {
 };
 
 export const Dismissible = {
-  render: () =>
-    html` <cds-dismissible-tag filter type="red">
-        ${Asleep16({ slot: 'icon' })} Tag content with a long text description
-      </cds-dismissible-tag>
-      ${types
-        .slice(1)
-        .map(
-          (e) =>
-            html`<cds-dismissible-tag filter type="${e}"
-              >${Asleep16({ slot: 'icon' })} Tag content</cds-dismissible-tag
-            >`
-        )}`,
+  render: () => {
+    const tags = [
+      {
+        type: 'red',
+        text: 'Tag content with a long text description',
+        tagTitle: 'Provide a custom title to the tag',
+      },
+      {
+        type: 'magenta',
+        text: 'Tag content 1',
+      },
+      {
+        type: 'purple',
+        text: 'Tag content 2',
+      },
+      {
+        type: 'blue',
+        text: 'Tag content 3',
+      },
+      {
+        type: 'cyan',
+        text: 'Tag content 4',
+      },
+      {
+        type: 'teal',
+        text: 'Tag content 5',
+      },
+      {
+        type: 'green',
+        text: 'Tag content 6',
+      },
+      {
+        type: 'gray',
+        text: 'Tag content 7',
+      },
+      {
+        type: 'cool-gray',
+        text: 'Tag content 8',
+      },
+      {
+        type: 'warm-gray',
+        text: 'Tag content 9',
+      },
+      {
+        type: 'high-contrast',
+        text: 'Tag content 10',
+      },
+      {
+        type: 'outline',
+        text: 'Tag content 11',
+      },
+    ];
+
+    return html` ${tags.map(
+      (tag) =>
+        html`<cds-dismissible-tag
+          text="${tag.text}"
+          tag-title="${tag.tagTitle}"
+          type="${tag.type}"
+          >${Asleep16({ slot: 'icon' })} Tag content</cds-dismissible-tag
+        >`
+    )}`;
+  },
 };
 
 export const Skeleton = {

@@ -63,7 +63,7 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @HostListener('shadowRoot:click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleClick = (event: MouseEvent) => {
+  protected _handleClick = (event: MouseEvent) => {
     if (event.composedPath().indexOf(this._buttonNode!) >= 0) {
       if (this.disabled) {
         event.stopPropagation();
@@ -110,9 +110,6 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  @property({ type: Boolean })
-  hasCustomIcon = false;
-
   /**
    * Determine if is a filter/chip
    *
@@ -144,11 +141,16 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
       disabled,
       filter,
       _handleAILabelSlotChange: handleAILabelSlotChange,
+      size,
       title,
     } = this;
+
     return html`
-      <slot name="icon"></slot>
-      <slot></slot>
+      ${size !== TAG_SIZE.SMALL ? html`<slot name="icon"></slot>` : ''}
+      <span class="${prefix}--tag__label">
+        <slot></slot>
+      </span>
+      <slot name="decorator" @slotchange="${handleAILabelSlotChange}"></slot>
       <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>
       <slot name="slug" @slotchange="${handleAILabelSlotChange}"></slot>
       ${filter
