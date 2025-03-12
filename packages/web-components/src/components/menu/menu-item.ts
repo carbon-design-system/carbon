@@ -8,7 +8,7 @@
  */
 
 import { LitElement, PropertyValues, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -56,29 +56,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
    */
   @property({ type: Boolean })
   submenuOpen = false;
-  /**
-   * Whether the menu submen for an item is open or not.
-   */
-  @property({ type: Array })
-  submenuList;
-  /**
-   * Entrypoint.
-   */
-  @property()
-  submenuEntry;
-  /**
-   * Document direction.
-   */
-  @property({ type: String })
-  direction = 'ltr';
-  /**
-   * Checks if document direction is rtl.
-   */
-  @property({ type: Boolean })
-  isRtl = false;
-  /**
-   * Checks if document direction is rtl.
-   */
+
   @property()
   kind = MENU_ITEM_KIND.DEFAULT;
 
@@ -91,11 +69,24 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     y: number | [number, number];
   } = { x: -1, y: -1 };
 
-  @property()
-  hasSubmenu = false;
-
   @property({ attribute: 'aria-checked' })
   ariaChecked: string | null = this.getAttribute('selected') ?? 'false';
+
+  /**
+   * Entrypoint.
+   */
+  @state()
+  submenuEntry;
+  /**
+   * Checks if document direction is rtl.
+   */
+  @state()
+  isRtl = false;
+  /**
+   * Checks if document direction is rtl.
+   */
+  @state()
+  hasSubmenu = false;
 
   async dispatchIconDetect() {
     const hasRenderIcon = !!this.querySelector('[slot="render-icon"]');
@@ -110,14 +101,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     }
   }
 
-  firstUpdated() {
-    this.hasSubmenu = !!this.querySelector('[slot="submenu"]');
-
-    this.dispatchIconDetect();
-    this.direction = document.dir;
-    this.isRtl = this.direction === 'rtl';
-    this._registerSubMenuItems();
-
+  private _updateAttributes() {
     if (this.disabled && !this.hasSubmenu) {
       this.setAttribute('aria-disabled', this.disabled);
     } else {
@@ -135,6 +119,16 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     }
 
     if (!this.disabled) this.setAttribute('tabindex', '0');
+  }
+
+  firstUpdated() {
+    this.hasSubmenu = !!this.querySelector('[slot="submenu"]');
+
+    this.dispatchIconDetect();
+    this.isRtl = document.dir === 'rtl';
+    this._registerSubMenuItems();
+
+    this._updateAttributes();
 
     this.addEventListener(`${prefix}-menu-closed`, () => {
       this.focus();
@@ -143,12 +137,10 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   }
 
   updated(_changedProperties: PropertyValues): void {
-    if (_changedProperties.has('submenuOpen')) {
-      if (this.hasSubmenu) {
-        this.setAttribute('aria-expanded', this.submenuOpen + '');
-      } else {
-        this.removeAttribute('aria-expanded');
-      }
+    if (this.hasSubmenu) {
+      this.setAttribute('aria-expanded', this.hasSubmenu + '');
+    } else {
+      this.removeAttribute('aria-expanded');
     }
     if (this.kind === MENU_ITEM_KIND.DANGER)
       this.classList.toggle(`${prefix}--menu-item--danger`);
