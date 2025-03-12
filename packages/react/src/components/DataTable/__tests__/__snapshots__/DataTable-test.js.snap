@@ -14,10 +14,6 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
       >
         DataTable with selection
       </h4>
-      <p
-        class="cds--data-table-header__description"
-        id="tc-:r7g:-description"
-      />
     </div>
     <div
       class="cds--data-table-content"
@@ -192,10 +188,6 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
       >
         DataTable with selection
       </h4>
-      <p
-        class="cds--data-table-header__description"
-        id="tc-:r77:-description"
-      />
     </div>
     <div
       class="cds--data-table-content"
@@ -370,10 +362,6 @@ exports[`DataTable behaves as expected selection should render and match snapsho
       >
         DataTable with selection
       </h4>
-      <p
-        class="cds--data-table-header__description"
-        id="tc-:r2k:-description"
-      />
     </div>
     <section
       aria-label="data table toolbar"
@@ -819,10 +807,6 @@ exports[`DataTable renders as expected - Component API should render and match s
       >
         DataTable with toolbar
       </h4>
-      <p
-        class="cds--data-table-header__description"
-        id="tc-:re:-description"
-      />
     </div>
     <section
       aria-label="data table toolbar"

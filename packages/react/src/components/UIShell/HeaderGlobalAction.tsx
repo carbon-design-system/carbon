@@ -105,6 +105,8 @@ const HeaderGlobalAction: React.FC<HeaderGlobalActionProps> = React.forwardRef(
         onClick={onClick}
         type="button"
         hasIconOnly
+        size="lg"
+        kind="ghost"
         iconDescription={ariaLabel}
         tooltipPosition="bottom"
         tooltipAlignment={tooltipAlignment}

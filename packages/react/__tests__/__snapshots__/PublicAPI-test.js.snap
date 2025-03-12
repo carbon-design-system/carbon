@@ -4403,6 +4403,9 @@ Map {
   "IconTab" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "badgeIndicator": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4655,15 +4658,7 @@ Map {
       "menuAlignment": Object {
         "type": "string",
       },
-      "mode": Object {
-        "args": Array [
-          Array [
-            "full",
-            "basic",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "mode": [Function],
       "onClose": Object {
         "type": "func",
       },
@@ -5886,6 +5881,7 @@ Map {
     },
   },
   "OperationalTag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -5940,6 +5936,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "OrderedList" => Object {
     "propTypes": Object {
