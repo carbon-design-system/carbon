@@ -12,7 +12,7 @@ import { CodeSnippet } from '../../CodeSnippet';
 import mdx from './StaticNotification.mdx';
 
 export default {
-  title: 'Experimental/unstable__StaticNotification',
+  title: 'Deprecated/unstable__StaticNotification',
   component: StaticNotification,
   parameters: {
     docs: {
