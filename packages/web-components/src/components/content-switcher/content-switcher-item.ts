@@ -30,13 +30,6 @@ export default class CDSContentSwitcherItem extends FocusMixin(LitElement) {
   disabled = false;
 
   /**
-   * The index of your Switch in your ContentSwitcher that is used for event handlers.
-   * Reserved for usage in ContentSwitcher
-   */
-  @property({ type: Number })
-  index = 0;
-
-  /**
    * `true` to hide the divider at the left.
    *
    * @private
@@ -100,7 +93,6 @@ export default class CDSContentSwitcherItem extends FocusMixin(LitElement) {
   leaveDelayMs = 100;
 
   updated(changedProperties) {
-    // console.log('selected', this.selected);
     if (changedProperties) {
       this.shadowRoot
         ?.querySelector(`${prefix}-tooltip`)

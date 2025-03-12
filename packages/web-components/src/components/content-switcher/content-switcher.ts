@@ -202,12 +202,9 @@ export default class CDSContentSwitcher extends LitElement {
   ) {
     if (this.selectionMode === 'manual' && interactionType === 'keyboard') {
       // In manual mode, only focus the item without changing the selection
-      this.selectedIndex = itemToSelect.index;
-
       Promise.resolve().then(() => {
         itemToSelect.focus();
       });
-      // itemToSelect.selected = false;
 
       return;
     }
@@ -233,17 +230,13 @@ export default class CDSContentSwitcher extends LitElement {
         (itemToSelect as Element).closest(selectorItem)!
       );
       const nextIndex = index < 0 ? index : index + 1;
-      // if (this.selectionMode === 'manual') {
-      //   itemToSelect.selected = false;
-      //   itemToSelect.focus();
-      // }
 
       forEach(this.querySelectorAll(selectorItem), (elem, i) => {
         // Specifies child `<cds-content-switcher-item>` to hide its divider instead of using CSS,
         // until `:host-context()` gets supported in all major browsers
-        if (i) {
-          (elem as CDSContentSwitcherItem).index = i;
-        }
+        // if (i) {
+        //   (elem as CDSContentSwitcherItem).index = i;
+        // }
         (elem as CDSContentSwitcherItem).hideDivider = i === nextIndex;
       });
     });
@@ -283,6 +276,7 @@ export default class CDSContentSwitcher extends LitElement {
     this._updateSelectedItemFromIndex();
   }
 
+  // Validate a selected index for the initially selected content
   _updateSelectedItemFromIndex() {
     const { selectorItemEnabled } = this
       .constructor as typeof CDSContentSwitcher;
@@ -329,23 +323,6 @@ export default class CDSContentSwitcher extends LitElement {
 
     this._updateSelectedItemFromValue(changedProperties);
   }
-
-  // updated(changedProperties) {
-  //   if (changedProperties.has('selectedIndex')) {
-  //     this._updateSelectedItemFromIndex();
-  //   }
-  //   if (changedProperties.has('value')) {
-  //     const { selectorItem } = this.constructor as typeof CDSContentSwitcher;
-  //     forEach(this.querySelectorAll(selectorItem), (elem) => {
-  //       (elem as CDSContentSwitcherItem).selected =
-  //         (elem as CDSContentSwitcherItem).value === this.value;
-  //     });
-  //   }
-  //   const { selectorIconItem } = this.constructor as typeof CDSContentSwitcher;
-  //   if (this.querySelector(selectorIconItem)) {
-  //     this.iconOnly = true;
-  //   }
-  // }
 
   _handleSlotchange() {
     const { selectorItemSelected } = this
