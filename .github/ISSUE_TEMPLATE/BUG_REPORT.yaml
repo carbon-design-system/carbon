@@ -15,13 +15,12 @@ body:
     id: package
     attributes:
       label: Package
-      description: Which package(s) are you using?
+      description: Which package(s) are you using? You can select more than one.
       multiple: true
       options:
         - '@carbon/react'
+        - '@carbon/web-components'
         - '@carbon/styles'
-        - 'carbon-components'
-        - 'carbon-components-react'
         - '@carbon/colors'
         - '@carbon/elements'
         - '@carbon/grid'
@@ -35,8 +34,6 @@ body:
         - '@carbon/themes'
         - '@carbon/type'
         - '@carbon/upgrade'
-        - '@carbon/web-components'
-        - 'carbon-components-svelte'
     validations:
       required: true
   - type: dropdown
