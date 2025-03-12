@@ -234,9 +234,6 @@ export default class CDSContentSwitcher extends LitElement {
       forEach(this.querySelectorAll(selectorItem), (elem, i) => {
         // Specifies child `<cds-content-switcher-item>` to hide its divider instead of using CSS,
         // until `:host-context()` gets supported in all major browsers
-        // if (i) {
-        //   (elem as CDSContentSwitcherItem).index = i;
-        // }
         (elem as CDSContentSwitcherItem).hideDivider = i === nextIndex;
       });
     });
