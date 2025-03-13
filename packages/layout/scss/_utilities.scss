@@ -28,7 +28,7 @@
 /// @group @carbon/layout
 @function key-by-index($map, $index) {
   $keys: map.keys($map);
-  @return nth($keys, $index);
+  @return list.nth($keys, $index);
 }
 
 /// Pass in a map, and get the last one in the list back
