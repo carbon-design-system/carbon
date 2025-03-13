@@ -7,14 +7,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
-import Close16 from '@carbon/icons/lib/close/16.js';
+import { html, LitElement } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TAG_SIZE, TAG_TYPE } from './defs';
+import './tag';
+import '../tooltip/index';
 import styles from './tag.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -23,39 +24,11 @@ export { TAG_SIZE, TAG_TYPE };
 /**
  * Tag.
  *
- * @fires cds-dismissible-tag-beingclosed - The custom event fired as the element is being closed
- * @fires cds-dismissible-tag-closed - The custom event fired after the element has been closed
+ * @fires cds-selectable-tag-beforeselected - The custom event fired as the element is being selected
+ * @fires cds-selectable-tag-selected - The custom event fired after the element has been selected
  */
-@customElement(`${prefix}-dismissible-tag`)
-class CDSDismissibleTag extends HostListenerMixin(FocusMixin(LitElement)) {
-  @query('button')
-  protected _buttonNode!: HTMLButtonElement;
-
-  /**
-   * Handles `slotchange` event.
-   */
-  protected _handleAILabelSlotChange({ target }: Event) {
-    const hasContent = (target as HTMLSlotElement)
-      .assignedNodes()
-      .filter((elem) =>
-        (elem as HTMLElement).matches !== undefined
-          ? (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSDismissibleTag).aiLabelItem
-            ) ||
-            // remove reference of slug in v12
-            (elem as HTMLElement).matches(
-              (this.constructor as typeof CDSDismissibleTag).slugItem
-            )
-          : false
-      );
-    if (hasContent.length > 0) {
-      (hasContent[0] as HTMLElement).setAttribute('tag', `${this.type}`);
-      (hasContent[0] as HTMLElement).setAttribute('size', 'sm');
-      (hasContent[0] as HTMLElement).setAttribute('kind', 'inline');
-    }
-    this.requestUpdate();
-  }
-
+@customElement(`${prefix}-selectable-tag`)
+class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * Handles `click` event on this element.
    *
@@ -64,10 +37,43 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(LitElement)) {
   @HostListener('shadowRoot:click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = (event: MouseEvent) => {
-    if (event.composedPath().indexOf(this._buttonNode!) >= 0) {
+    if (this.disabled) {
+      event.stopPropagation();
+    } else {
+      const init = {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        detail: {
+          triggeredBy: event.target,
+        },
+      };
+      if (
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSSelectableTag).eventBeforeSelected,
+            init
+          )
+        )
+      ) {
+        this.selected = !this.selected;
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSSelectableTag).eventSelected,
+            init
+          )
+        );
+      }
+    }
+  };
+
+  @HostListener('shadowRoot:keydown')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
       if (this.disabled) {
         event.stopPropagation();
-      } else if (this.open) {
+      } else {
         const init = {
           bubbles: true,
           cancelable: true,
@@ -79,15 +85,15 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(LitElement)) {
         if (
           this.dispatchEvent(
             new CustomEvent(
-              (this.constructor as typeof CDSDismissibleTag).eventBeforeClose,
+              (this.constructor as typeof CDSSelectableTag).eventBeforeSelected,
               init
             )
           )
         ) {
-          this.open = false;
+          this.selected = !this.selected;
           this.dispatchEvent(
             new CustomEvent(
-              (this.constructor as typeof CDSDismissibleTag).eventClose,
+              (this.constructor as typeof CDSSelectableTag).eventSelected,
               init
             )
           );
@@ -97,98 +103,97 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(LitElement)) {
   };
 
   /**
-   * Text to show on filter tag "clear" buttons. Corresponds to the attribute with the same name
-   */
-  @property({ type: String, reflect: true })
-  title = 'Clear filter';
-
-  /**
    * `true` if the tag should be disabled
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  @property({ type: Boolean })
-  hasCustomIcon = false;
-
   /**
-   * Determine if is a filter/chip
+   * Specify the state of the selectable tag.
    */
   @property({ type: Boolean, reflect: true })
-  filter = false;
-
-  /**
-   * `true` if the tag should be open.
-   */
-  @property({ type: Boolean, reflect: true })
-  open = true;
+  selected = false;
 
   /**
    * The size of the tag.
    */
-  @property({ reflect: true })
+  @property({ type: String, reflect: true })
   size = TAG_SIZE.MEDIUM;
 
   /**
-   * The type of the tag.
+   * Provide text to be rendered inside of a the tag.
    */
-  @property({ reflect: true })
-  type = TAG_TYPE.GRAY;
+  @property({ type: String, reflect: true })
+  text = '';
+
+  /**
+   * true if the tag text has ellipsis applied
+   */
+  @state()
+  _hasEllipsisApplied = false;
+
+  updated() {
+    const textContainer = this.shadowRoot
+      ?.querySelector(`${prefix}-tag`)
+      ?.shadowRoot?.querySelector(`.${prefix}--tag__label`);
+    if (!textContainer) return;
+
+    this._hasEllipsisApplied =
+      textContainer.scrollWidth > textContainer.clientWidth;
+  }
 
   render() {
     const {
       disabled,
-      filter,
-      _handleAILabelSlotChange: handleAILabelSlotChange,
-      title,
+      selected,
+      size,
+      text,
+      _hasEllipsisApplied: hasEllipsisApplied,
     } = this;
-    return html`
-      <slot name="icon"></slot>
-      <slot></slot>
-      <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>
-      <slot name="slug" @slotchange="${handleAILabelSlotChange}"></slot>
-      ${filter
-        ? html`
-            <button class="${prefix}--tag__close-icon" ?disabled=${disabled}>
-              ${Close16({ 'aria-label': title })}
-            </button>
-          `
-        : ``}
-    `;
+
+    return html` ${hasEllipsisApplied
+      ? html` <cds-tooltip align="bottom" enter-delay-ms=${0}>
+          <cds-tag
+            ?aria-pressed="${selected}"
+            size="${size}"
+            ?disabled="${disabled}">
+            <slot name="icon" slot="icon"></slot>
+            ${text}
+            <slot name="decorator" slot="decorator"></slot>
+            <slot name="ai-label" slot="ai-label"></slot>
+            <slot name="slug" slot="slug"></slot>
+          </cds-tag>
+          <cds-tooltip-content id="content"> ${text} </cds-tooltip-content>
+        </cds-tooltip>`
+      : html`
+          <cds-tag
+            ?aria-pressed="${selected}"
+            size="${size}"
+            ?disabled="${disabled}">
+            <slot name="icon" slot="icon"></slot>
+            ${text}
+            <slot name="decorator" slot="decorator"></slot>
+            <slot name="ai-label" slot="ai-label"></slot>
+            <slot name="slug" slot="slug"></slot>
+          </cds-tag>
+        `}`;
   }
 
   /**
-   * A selector that will return the slug item.
-   *
-   * remove in v12
+   * The name of the custom event before this tag is selected.
    */
-  static get slugItem() {
-    return `${prefix}-slug`;
+  static get eventBeforeSelected() {
+    return `${prefix}-selectable-tag-beingselected`;
   }
 
   /**
-   * A selector that will return the AI Label item.
+   * The name of the custom event fired after this tag is selected.
    */
-  static get aiLabelItem() {
-    return `${prefix}-ai-label`;
-  }
-
-  /**
-   * The name of the custom event fired before this tag is being closed upon a user gesture.
-   * Cancellation of this event stops the user-initiated action of closing this tag.
-   */
-  static get eventBeforeClose() {
-    return `${prefix}-dismissible-tag-beingclosed`;
-  }
-
-  /**
-   * The name of the custom event fired after this tag is closed upon a user gesture.
-   */
-  static get eventClose() {
-    return `${prefix}-dismissible-tag-closed`;
+  static get eventSelected() {
+    return `${prefix}-selectable-tag-selected`;
   }
 
   static styles = styles; // `styles` here is a `CSSResult` generated by custom Vite loader
 }
 
-export default CDSDismissibleTag;
+export default CDSSelectableTag;

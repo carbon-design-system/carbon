@@ -15,6 +15,7 @@ import Folders16 from '@carbon/icons/lib/folders/16.js';
 import Asleep16 from '@carbon/icons/lib/asleep/16.js';
 import './index';
 import '../ai-label';
+import '../button';
 import '../icon-button';
 
 const content = html`
@@ -103,7 +104,9 @@ const controls = {
 };
 
 export const Dismissible = {
-  render: () => {
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({ size }) => {
     const tags = [
       {
         type: 'red',
@@ -156,15 +159,18 @@ export const Dismissible = {
       },
     ];
 
-    return html` ${tags.map(
-      (tag) =>
-        html`<cds-dismissible-tag
-          text="${tag.text}"
-          tag-title="${tag.tagTitle}"
-          type="${tag.type}"
-          >${Asleep16({ slot: 'icon' })} Tag content</cds-dismissible-tag
-        >`
-    )}`;
+    return html` <cds-button>Reset</cds-button>
+      <br />
+      ${tags.map(
+        (tag) =>
+          html`<cds-dismissible-tag
+            text="${tag.text}"
+            tag-title="${tag.tagTitle}"
+            type="${tag.type}"
+            size="${size}"
+            >${Asleep16({ slot: 'icon' })} Tag content</cds-dismissible-tag
+          >`
+      )}`;
   },
 };
 
@@ -173,6 +179,41 @@ export const Skeleton = {
   args: defaultArgs,
   render: ({ size }) =>
     html`<cds-tag-skeleton size="${size}">Tag content</cds-tag-skeleton>`,
+};
+
+export const Selectable = {
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({ size }) => {
+    const tags = [
+      {
+        id: 1,
+        text: 'Tag content with a long text description',
+      },
+      {
+        id: 2,
+        text: 'Tag content 1',
+      },
+      {
+        id: 3,
+        text: 'Tag content 2',
+      },
+      {
+        id: 4,
+        text: 'Tag content 3',
+      },
+    ];
+
+    return html`${tags.map(
+      (tag) =>
+        html`<cds-selectable-tag
+          id="${tag.id}"
+          text="${tag.text}"
+          size="${size}"
+          >${Asleep16({ slot: 'icon' })}</cds-selectable-tag
+        >`
+    )}`;
+  },
 };
 
 const ReadOnlyArgs = {

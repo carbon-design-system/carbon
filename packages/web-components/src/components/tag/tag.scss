@@ -10,6 +10,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/components/tooltip/index' as *;
 @use '@carbon/styles/scss/components/tag/index' as *;
@@ -19,6 +20,32 @@ $css--plex: true !default;
 :host(#{$prefix}-tag),
 :host(#{$prefix}-dismissible-tag) {
   @extend .#{$prefix}--tag;
+}
+
+// not working -- need to figure this one out
+// :host(#{$prefix}-tag:not(:first-child)),
+// :host(#{$prefix}-dismissible-tag):not(:first-child),
+// :host(#{$prefix}-selectable-tag):not(:first-child) {
+//   margin-inline-start: 0;
+// }
+
+:host(#{$prefix}-tag),
+:host(#{$prefix}-dismissible-tag) {
+  border: 0;
+}
+
+:host(#{$prefix}-tag[has-custom-icon]),
+:host(#{$prefix}-dismissible-tag[has-custom-icon]),
+:host(#{$prefix}-selectable-tag[has-custom-icon]) {
+  padding-inline-start: $spacing-02;
+}
+
+:host(#{$prefix}-selectable-tag) #{$prefix}-tag {
+  @extend .#{$prefix}--tag--selectable;
+}
+
+:host(#{$prefix}-selectable-tag[selected]) #{$prefix}-tag {
+  @extend .#{$prefix}--tag--selectable-selected;
 }
 
 :host(#{$prefix}-dismissible-tag) {
@@ -58,6 +85,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-tag[size='sm']),
+:host(#{$prefix}-dismissible-tag[size='sm']),
 :host(#{$prefix}-tag-skeleton[size='sm']) {
   @extend .#{$prefix}--tag--sm;
   @extend .#{$prefix}--layout--size-sm;
@@ -70,8 +98,18 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-tag[size='lg']),
+:host(#{$prefix}-dismissible-tag[size='lg']),
 :host(#{$prefix}-tag-skeleton[size='lg']) {
   @extend .#{$prefix}--layout--size-lg;
+  @extend .#{$prefix}--tag--lg;
+
+  padding-inline: $spacing-04;
+}
+
+:host(#{$prefix}-tag[size='lg'][has-custom-icon]),
+:host(#{$prefix}-dismissible-tag[size='lg'][has-custom-icon]),
+:host(#{$prefix}-tag-skeleton[size='lg'][has-custom-icon]) {
+  padding-inline-start: $spacing-03;
 }
 
 :host(#{$prefix}-dismissible-tag[type='red']),
@@ -159,12 +197,13 @@ $css--plex: true !default;
   display: inline-flex;
 }
 
-:host(#{$prefix}-tag) ::slotted([slot='icon']) {
+:host(#{$prefix}-tag) ::slotted([slot='icon']),
+:host(#{$prefix}-dismissible-tag) ::slotted([slot='icon']) {
   @extend .#{$prefix}--tag__custom-icon;
 }
 
-:host(#{$prefix}-dismissible-tag)
-  .#{$prefix}--interactive--tag-children.#{$prefix}--dismissible-tag--custom-icon {
+:host(#{$prefix}-dismissible-tag[has-custom-icon])
+  .#{$prefix}--interactive--tag-children {
   max-inline-size: 11.5rem;
 }
 

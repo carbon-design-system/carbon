@@ -10,3 +10,4 @@
 import './tag';
 import './dismissible-tag';
 import './tag-skeleton';
+import './selectable-tag';

@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import Close16 from '@carbon/icons/lib/close/16.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
@@ -57,6 +57,16 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   /**
+   * Handles `slotchange` event.
+   */
+  protected _handleIconSlotChange({ target }: Event) {
+    const hasIcon = (target as HTMLSlotElement).assignedNodes();
+
+    this.hasCustomIcon = Boolean(hasIcon.length > 0);
+    this.requestUpdate();
+  }
+
+  /**
    * Handles `click` event on this element.
    *
    * @param event The event.
@@ -101,7 +111,7 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
    *
    * @deprecated The `title` property has been deprecated and will be removed in the next major version. Use cds-dismissible-tag instead.
    */
-  @property({ type: String, reflect: true })
+  @property({ type: String })
   title = 'Clear filter';
 
   /**
@@ -117,6 +127,12 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @property({ type: Boolean, reflect: true })
   filter = false;
+
+  /**
+   * `true` if there is a custom icon.
+   */
+  @property({ type: Boolean, attribute: 'has-custom-icon', reflect: true })
+  hasCustomIcon = false;
 
   /**
    * `true` if the tag should be open.
@@ -136,17 +152,45 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   @property({ reflect: true })
   type = TAG_TYPE.GRAY;
 
+  /**
+   * true if the tag text has ellipsis applied
+   */
+  @state()
+  _hasEllipsisApplied = false;
+
+  updated() {
+    const textContainer = this.shadowRoot?.querySelector(
+      `.${prefix}--tag__label`
+    );
+    if (!textContainer || this._hasEllipsisApplied === true) return;
+
+    this._hasEllipsisApplied =
+      textContainer.scrollWidth > textContainer.clientWidth;
+
+    const root = this.getRootNode();
+    // Check if the root is a shadow root and get its host
+    if (root instanceof ShadowRoot) {
+      if (root.host.tagName.toLowerCase() === `${prefix}-selectable-tag`) {
+        this.setAttribute('role', 'button');
+        this.tabIndex = this.disabled ? -1 : 0;
+      }
+    }
+  }
+
   render() {
     const {
       disabled,
       filter,
       _handleAILabelSlotChange: handleAILabelSlotChange,
+      _handleIconSlotChange: handleIconSlotChange,
       size,
       title,
     } = this;
 
     return html`
-      ${size !== TAG_SIZE.SMALL ? html`<slot name="icon"></slot>` : ''}
+      ${size !== TAG_SIZE.SMALL
+        ? html`<slot name="icon" @slotchange="${handleIconSlotChange}"></slot>`
+        : ''}
       <span class="${prefix}--tag__label">
         <slot></slot>
       </span>
