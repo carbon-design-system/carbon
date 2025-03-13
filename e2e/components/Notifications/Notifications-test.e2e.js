@@ -37,6 +37,14 @@ test.describe('Notifications', () => {
           theme,
         });
       });
+
+      test('callout @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Callout',
+          id: 'components-notifications-callout--default',
+          theme,
+        });
+      });
     });
   });
 });

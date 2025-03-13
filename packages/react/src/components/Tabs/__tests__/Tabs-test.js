@@ -7,8 +7,10 @@ import {
   TabPanels,
   TabList,
   TabListVertical,
+  IconTab,
 } from '../Tabs';
 import { act } from 'react';
+import { Notification } from '@carbon/icons-react';
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -233,6 +235,28 @@ describe('Tab', () => {
     expect(screen.getByTestId('svg').parentElement).toHaveClass(
       'cds--tabs__nav-item--icon'
     );
+  });
+  it('should render badge indicator when badgeIndicator prop is true', () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <IconTab
+            badgeIndicator
+            data-testid="icon-tab-with-badge"
+            label="New Notifications">
+            <Notification size={20} aria-label="Notification" />
+          </IconTab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Icon Tab Panel</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    // Get the icon tab
+    const iconTab = screen.getByTestId('icon-tab-with-badge');
+    const badgeIndicator = iconTab.querySelector(`.${prefix}--badge-indicator`);
+    expect(badgeIndicator).not.toBeNull();
   });
 
   it('should call onClick from props if provided', async () => {
@@ -583,7 +607,7 @@ describe('Tab', () => {
 
     expect(
       screen.getAllByLabelText('Press delete to remove Tab Label 1 tab')[0]
-    ).not.toHaveClass(`${prefix}--visaully-hidden`);
+    ).not.toHaveClass(`${prefix}--visually-hidden`);
   });
 
   it('should render close icon and renderIcon when dismissable and icon supplied', () => {
@@ -604,7 +628,7 @@ describe('Tab', () => {
 
     expect(
       screen.getAllByLabelText('Press delete to remove Tab Label 1 tab')[0]
-    ).not.toHaveClass(`${prefix}--visaully-hidden`);
+    ).not.toHaveClass(`${prefix}--visually-hidden`);
     expect(screen.getByTestId('svg')).toBeInTheDocument();
     // eslint-disable-next-line testing-library/no-node-access
     expect(screen.getByTestId('svg').parentElement).toHaveClass(
@@ -767,7 +791,7 @@ describe('TabPanel', () => {
     expect(screen.getByText('Tab Panel 1')).toHaveClass('custom-class');
   });
 
-  it('should recieve focus if there is no interactive content', () => {
+  it('should receive focus if there is no interactive content', () => {
     render(
       <Tabs>
         <TabList aria-label="List of tabs">
@@ -786,7 +810,7 @@ describe('TabPanel', () => {
     expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '-1');
   });
 
-  it('should not recieve focus if there is interactive content', () => {
+  it('should not receive focus if there is interactive content', () => {
     render(
       <Tabs>
         <TabList aria-label="List of tabs">

@@ -551,6 +551,20 @@ need to do anything in `@carbon/styles` side.
 
 ## Maintainers
 
+### Public API Snapshot
+
+The entire public api of `@carbon/react` is tracked in one file by iterating
+over all PropTypes and storing the output in a snapshot file. When adding,
+removing, or updating PropTypes, run `yarn test -u` from the root to update the
+snapshot and include it in your pull request for review. This helps core
+reviewers to determine if api changes are being made in a backwards compatible
+way to avoid breaking changes.
+
+Snapshots for web components can be found in their respective component
+directories. To test or update snapshots, run `yarn test` or
+`yarn test:updateSnaphots`. These commands must be run from the
+`packages/web-components` directory.
+
 ### Working with icons and pictograms
 
 We get work submitted by the IBM Brand team, along with other designers at IBM,

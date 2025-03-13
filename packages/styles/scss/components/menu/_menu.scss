@@ -98,14 +98,6 @@
     }
   }
 
-  .#{$prefix}--menu-item__icon {
-    display: none;
-  }
-
-  .#{$prefix}--menu--with-icons .#{$prefix}--menu-item__icon {
-    display: flex;
-  }
-
   .#{$prefix}--menu-item__label {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -121,6 +113,11 @@
     @include component-reset.reset;
   }
 
+  .#{$prefix}--menu-item__icon,
+  .#{$prefix}--menu-item__selection-icon {
+    display: none;
+  }
+
   .#{$prefix}--menu--with-icons > .#{$prefix}--menu-item,
   .#{$prefix}--menu--with-icons
     > .#{$prefix}--menu-item-group
@@ -129,8 +126,59 @@
   .#{$prefix}--menu--with-icons
     > .#{$prefix}--menu-item-radio-group
     > ul
+    > .#{$prefix}--menu-item,
+  .#{$prefix}--menu--with-selectable-items > .#{$prefix}--menu-item,
+  .#{$prefix}--menu--with-selectable-items
+    > .#{$prefix}--menu-item-group
+    > ul
+    > .#{$prefix}--menu-item,
+  .#{$prefix}--menu--with-selectable-items
+    > .#{$prefix}--menu-item-radio-group
+    > ul
     > .#{$prefix}--menu-item {
     grid-template-columns: 1rem 1fr max-content;
+  }
+
+  .#{$prefix}--menu--with-icons
+    > .#{$prefix}--menu-item
+    > .#{$prefix}--menu-item__icon,
+  .#{$prefix}--menu--with-icons
+    > .#{$prefix}--menu-item-group
+    > ul
+    > .#{$prefix}--menu-item
+    > .#{$prefix}--menu-item__icon,
+  .#{$prefix}--menu--with-icons
+    > .#{$prefix}--menu-item-radio-group
+    > ul
+    > .#{$prefix}--menu-item
+    > .#{$prefix}--menu-item__icon,
+  .#{$prefix}--menu--with-selectable-items
+    > .#{$prefix}--menu-item
+    > .#{$prefix}--menu-item__selection-icon,
+  .#{$prefix}--menu--with-selectable-items
+    > .#{$prefix}--menu-item-group
+    > ul
+    > .#{$prefix}--menu-item
+    > .#{$prefix}--menu-item__selection-icon,
+  .#{$prefix}--menu--with-selectable-items
+    > .#{$prefix}--menu-item-radio-group
+    > ul
+    > .#{$prefix}--menu-item
+    > .#{$prefix}--menu-item__selection-icon {
+    display: flex;
+  }
+
+  .#{$prefix}--menu--with-icons.#{$prefix}--menu--with-selectable-items
+    > .#{$prefix}--menu-item,
+  .#{$prefix}--menu--with-icons.#{$prefix}--menu--with-selectable-items
+    > .#{$prefix}--menu-item-group
+    > ul
+    > .#{$prefix}--menu-item,
+  .#{$prefix}--menu--with-icons.#{$prefix}--menu--with-selectable-items
+    > .#{$prefix}--menu-item-radio-group
+    > ul
+    > .#{$prefix}--menu-item {
+    grid-template-columns: 1rem 1rem 1fr max-content;
   }
 
   .#{$prefix}--menu-item--disabled {

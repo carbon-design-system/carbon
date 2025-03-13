@@ -25,12 +25,12 @@ import { mapPopoverAlignProp } from '../../tools/createPropAdapter';
 import {
   useFloating,
   flip,
+  hide,
   autoUpdate,
   arrow,
   offset,
   type Boundary,
 } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
 import {
   PolymorphicComponentPropWithRef,
@@ -451,7 +451,7 @@ export const Popover: PopoverComponent & {
           // For a popover, there isn't an explicit trigger component, it's just the first child that's
           // passed in which should *not* be PopoverContent.
           // For a toggletip there is a specific trigger component, ToggletipButton.
-          // In either of these caes we want to set this as the reference node for floating-ui autoAlign
+          // In either of these cases we want to set this as the reference node for floating-ui autoAlign
           // positioning.
           if (
             (enableFloatingStyles &&
