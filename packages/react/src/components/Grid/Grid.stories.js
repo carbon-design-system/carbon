@@ -98,16 +98,6 @@ export const Narrow = () => {
   );
 };
 
-export const TestGrid = () => {
-  // Grab the style from here to see the visual example
-  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
-  return (
-    <Grid src="test">
-      <button>Button</button>
-    </Grid>
-  );
-};
-
 export const Condensed = () => {
   // Grab the style from here to see the visual example
   // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
