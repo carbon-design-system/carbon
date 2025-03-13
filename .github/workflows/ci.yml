@@ -207,7 +207,9 @@ jobs:
           URL: 'http://localhost:3000'
         timeout-minutes: 3
       - name: Run VRT
-        if: github.repository == 'carbon-design-system/carbon'
+        if:
+          ${{ github.repository == 'carbon-design-system/carbon' &&
+          github.event.pull_request.draft == false }}
         env:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
           PERCY_PARALLEL_TOTAL: 4
@@ -216,7 +218,7 @@ jobs:
       - name: Dry run VRT on draft PRs
         if:
           ${{ github.repository == 'carbon-design-system/carbon' &&
-          github.event.pull_request.draft == false && github.base_ref != 'main'
+          github.event.pull_request.draft != false && github.base_ref != 'main'
           }}
         env:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
