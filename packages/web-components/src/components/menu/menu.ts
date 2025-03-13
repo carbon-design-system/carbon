@@ -194,8 +194,9 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       <ul
         class="${menuClasses}"
         aria-label="${label}"
-        tabindex="1"
-        @keydown="${handleKeyDown}">
+        tabindex="-1"
+        @keydown="${handleKeyDown}"
+        role="menu">
         <slot></slot>
       </ul>
     `;

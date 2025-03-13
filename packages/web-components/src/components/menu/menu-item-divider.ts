@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit';
+import { LitElement } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';

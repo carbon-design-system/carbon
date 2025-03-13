@@ -59,7 +59,6 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
 
   @property()
   kind = MENU_ITEM_KIND.DEFAULT;
-
   /**
    * Menu boundaries.
    */
@@ -114,11 +113,12 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     }
     if (this.closest(`${prefix}-menu-item-radio-group`)) {
       this.setAttribute('role', 'menuitemradio');
-    } else {
+      this.setAttribute('aria-checked', this.ariaChecked + '');
+    } else if (!this.getAttribute('role')) {
       this.setAttribute('role', 'menuitem');
     }
 
-    if (!this.disabled) this.setAttribute('tabindex', '0');
+    this.setAttribute('tabindex', '-1');
   }
 
   firstUpdated() {
