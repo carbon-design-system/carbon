@@ -175,7 +175,7 @@ export default class CDSContentSwitcher extends LitElement {
    * @param direction `-1` to navigate backward, `1` to navigate forward.
    */
   protected _navigate(direction: number) {
-    const { selectorItemSelected, selectorItemFocused } = this
+    const { selectorItemFocused } = this
       .constructor as typeof CDSContentSwitcher;
     const nextItem = this._getNextItem(
       this.querySelector(selectorItemFocused) as CDSContentSwitcherItem,
