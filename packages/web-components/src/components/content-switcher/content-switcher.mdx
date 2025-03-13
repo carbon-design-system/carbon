@@ -45,6 +45,47 @@ import '@carbon/web-components/es/components/content-switcher/index.js';
 </cds-content-switcher>
 ```
 
+### ContentSwitcher `selectedIndex`
+
+This prop allows you to specify which `ContentSwitcher` index you would like to
+be selected on initial render. This number defaults to `0`.
+
+```html
+<cds-content-switcher selectedIndex="{2}">
+  <cds-content-switcher-item value="all">Option 1</cds-content-switcher-item>
+  <cds-content-switcher-item value="cloudFoundry"
+    >Option 2</cds-content-switcher-item
+  >
+  <cds-content-switcher-item value="staging"
+    >Option 3</cds-content-switcher-item
+  >
+  <cds-content-switcher-item value="dea">Option 4</cds-content-switcher-item>
+  <cds-content-switcher-item value="router">Option 5</cds-content-switcher-item>
+</cds-content-switcher>
+```
+
+### ContentSwitcher `selectionMode`
+
+By default, when a `ContentSwitcher` is focused and an arrow key is pressed, the
+selection is updated immediately and the `onChange` is fired. However, sometimes
+you may want to only change the `selectedIndex` once a selection has been made.
+To do this, you can set the `selectionMode` to `manual`, and the `onChange` will
+only fire when a selection is made.
+
+```html
+<cds-content-switcher selectionMode="manual">
+  <cds-content-switcher-item value="all">Option 1</cds-content-switcher-item>
+  <cds-content-switcher-item value="cloudFoundry"
+    >Option 2</cds-content-switcher-item
+  >
+  <cds-content-switcher-item value="staging"
+    >Option 3</cds-content-switcher-item
+  >
+  <cds-content-switcher-item value="dea">Option 4</cds-content-switcher-item>
+  <cds-content-switcher-item value="router">Option 5</cds-content-switcher-item>
+</cds-content-switcher>
+```
+
 ## `<cds-content-switcher>` attributes, properties and events
 
 <ArgTypes of="cds-content-switcher" />

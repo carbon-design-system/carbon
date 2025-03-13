@@ -27,7 +27,7 @@ const sizes = {
 };
 
 const args = {
-  value: '',
+  value: 'all',
   size: null,
   disableSelection: false,
   selectionMode: 'automatic',
@@ -58,7 +58,10 @@ const argTypes = {
     control: 'boolean',
     description: `Disable user-initiated selection change (Call event.preventDefault() in ${prefix}-content-switcher-beingselected event)`,
   },
-  onSelect: {
+  onBeforeSelect: {
+    action: `${prefix}-content-switcher-beingselected`,
+  },
+  onChange: {
     action: `${prefix}-content-switcher-selected`,
   },
 };
@@ -70,12 +73,14 @@ export const Default = {
     const {
       value,
       disableSelection,
-      onSelect = noop,
+      onBeforeSelect = noop,
+      onChange = noop,
       size,
       selectionMode,
       selectedIndex,
     } = args ?? {};
     const handleBeforeSelected = (event: CustomEvent) => {
+      onBeforeSelect(event);
       if (disableSelection) {
         event.preventDefault();
       }
@@ -83,9 +88,9 @@ export const Default = {
 
     return html`
       <cds-content-switcher
-        value="all"
+        value="${ifDefined(value)}"
         @cds-content-switcher-beingselected="${handleBeforeSelected}"
-        @cds-content-switcher-selected="${onSelect}"
+        @cds-content-switcher-selected="${onChange}"
         selectionMode="${selectionMode}"
         selectedIndex="${selectedIndex}"
         size="${size}">
@@ -97,12 +102,6 @@ export const Default = {
         </cds-content-switcher-item>
         <cds-content-switcher-item value="staging">
           Third section
-        </cds-content-switcher-item>
-        <cds-content-switcher-item value="4section">
-          4 section
-        </cds-content-switcher-item>
-        <cds-content-switcher-item value="5section">
-          5 section
         </cds-content-switcher-item>
       </cds-content-switcher>
     `;
