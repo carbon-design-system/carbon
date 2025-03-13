@@ -30,10 +30,6 @@ const args = {
 };
 
 const argTypes = {
-  className: {
-    control: 'text',
-    description: 'classNameAdditional CSS class names.',
-  },
   label: {
     control: 'text',
     description: 'A label describing the Menu.',
@@ -41,14 +37,6 @@ const argTypes = {
   menuAlignment: {
     control: 'text',
     description: 'Specify how the menu should align with the button element',
-  },
-  onClose: {
-    action: 'menu closed',
-    description: `Provide an optional function to be called when the Menu should be closed.`,
-  },
-  onOpen: {
-    action: 'menu opned',
-    description: `Provide an optional function to be called when the Menu is opened.`,
   },
   open: {
     control: 'boolean',

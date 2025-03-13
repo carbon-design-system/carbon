@@ -59,6 +59,29 @@ class CDSmenuItemRadioGroup extends LitElement {
 
     this.addEventListener(`click`, (e) => {
       this.selectedItem = e.target;
+      const init = {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        detail: {
+          triggeredBy: e.target,
+        },
+      };
+      if (
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSmenuItemRadioGroup).eventOnChange,
+            init
+          )
+        )
+      ) {
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSmenuItemRadioGroup).eventOnChange,
+            init
+          )
+        );
+      }
     });
   }
 
