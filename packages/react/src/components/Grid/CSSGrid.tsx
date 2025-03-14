@@ -77,6 +77,11 @@ const CSSGrid = React.forwardRef(
 
 CSSGrid.propTypes = {
   /**
+   * Provide a custom element to render instead of the default <div>
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+
+  /**
    * Specify grid alignment. Default is center
    */
   align: PropTypes.oneOf(['start', 'center', 'end']),

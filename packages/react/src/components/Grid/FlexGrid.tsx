@@ -47,6 +47,11 @@ const FlexGrid = React.forwardRef(
 
 FlexGrid.propTypes = {
   /**
+   * Provide a custom element to render instead of the default <div>
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+
+  /**
    * Pass in content that will be rendered within the `FlexGrid`
    */
   children: PropTypes.node,
