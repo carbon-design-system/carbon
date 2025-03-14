@@ -25,7 +25,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   - [Tertiary Button](#tertiary)
   - [Ghost Button](#ghost)
   - [Danger Button](#danger-button)
-  - [Icon-only Buttons](#icon-only-buttons)
+  - [Icon-only Button](#icon-only-button)
   - [Set of Buttons](#set-of-buttons)
   - [Skeleton state](#skeleton-state)
 - [Component API](#component-api)
@@ -103,8 +103,8 @@ Determining which danger button style to use will depend on the level of
 emphasis you want to give to the danger action. Destructive actions that are
 considered a required or primary step in a workflow should use the primary
 danger button style. However, if a destructive action is just one of several
-actions a user could choose from, then a lower emphasis style like the tertiary
-danger button or the ghost danger button may be more appropriate.
+actions a user could choose from, then a lower emphasis style like the danger
+tertiary button or the danger ghost button may be more appropriate.
 
 <Canvas
   of={ButtonStories.Danger}
@@ -116,7 +116,7 @@ danger button or the ghost danger button may be more appropriate.
   ]}
 />
 
-## Icon-only Buttons
+## Icon-only Button
 
 Icon buttons allow users to take actions, and make choices, with a single tap.
 Icon buttons can take the form of Primary, Secondary, Tertiary, and Ghost but
@@ -256,7 +256,7 @@ variant, check out the
     <Button kind="secondary">Secondary</Button>
     <Button kind="tertiary">Tertiary </Button>
     <Button kind="danger">Danger</Button>
-    <Button kind="danger--tertiary">Danger Tertiary</Button>
+    <Button kind="danger--tertiary">Danger tertiary</Button>
     <Button kind="danger--ghost">Danger Ghost</Button>
     <Button kind="ghost">Ghost</Button>
   </div>
@@ -267,8 +267,8 @@ variant, check out the
 <Button kind="secondary">Secondary</Button>
 <Button kind="tertiary">Tertiary</Button>
 <Button kind="danger">Danger</Button>
-<Button kind="danger--tertiary">Danger Tertiary</Button>
-<Button kind="danger--ghost">Danger Ghost</Button>
+<Button kind="danger--tertiary">Danger tertiary</Button>
+<Button kind="danger--ghost">Danger ghost</Button>
 <Button kind="ghost">Ghost</Button>
 ```
 
@@ -285,7 +285,7 @@ import { Add, TrashCan } from '@carbon/react/icons';
 Once the icons are imported, you can pass them directly in to the `Button`
 component. Keep in mind, you will also need to add an `iconDescription` to help
 with screen-reader support if you use the `renderIcon` prop. If you are trying
-to render icon-only buttons, please refer to the section on the
+to render an icon-only button, please refer to the section on the
 [hasIconOnly](#button-hasicononly) prop
 
 <Unstyled>

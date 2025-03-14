@@ -7,6 +7,7 @@
 
 import React, { useState } from 'react';
 import { render, screen, within, fireEvent, act } from '@testing-library/react';
+import { useCombobox } from 'downshift';
 import userEvent from '@testing-library/user-event';
 import {
   findListBoxNode,
@@ -30,11 +31,17 @@ const prefix = 'cds';
 
 const ControlledComboBox = ({ controlledItem }) => {
   const items = generateItems(5, generateGenericItem);
-  const [value, setValue] = useState(controlledItem || items[0]);
+  const [value, setValue] = useState(
+    typeof controlledItem !== 'undefined' ? controlledItem : items[0]
+  );
   const [onChangeCallCount, setOnChangeCallCount] = useState(0);
+  const [onInputChangeCallCount, setOnInputChangeCallCount] = useState(0);
   const controlledOnChange = ({ selectedItem }) => {
     setValue(selectedItem);
     setOnChangeCallCount((prevCount) => prevCount + 1);
+  };
+  const controlledOnInputChange = () => {
+    setOnInputChangeCallCount((prevCount) => prevCount + 1);
   };
 
   return (
@@ -44,11 +51,13 @@ const ControlledComboBox = ({ controlledItem }) => {
         items={items}
         selectedItem={value}
         onChange={controlledOnChange}
+        onInputChange={controlledOnInputChange}
         placeholder="Filter..."
         type="default"
       />
-      <div>value: {value?.label || 'none'}</div>
+      <div data-testid="selected-item">{value?.label || 'none'}</div>
       <div>onChangeCallCount: {onChangeCallCount}</div>
+      <div>onInputChangeCallCount: {onInputChangeCallCount}</div>
       <button onClick={() => setValue(items[3])}>Choose item 3</button>
       <button onClick={() => setValue(null)}>reset</button>
     </div>
@@ -183,13 +192,74 @@ describe('ComboBox', () => {
     });
   });
 
-  it('capture filter text event onInputChange', async () => {
-    const onInputChange = jest.fn();
-    render(<ComboBox {...mockProps} onInputChange={onInputChange} />);
+  describe('onInputChange', () => {
+    let onInputChange;
+    beforeEach(() => {
+      onInputChange = jest.fn();
+    });
+    it('should not call onChange or onInputChange on initial render', () => {
+      render(<ComboBox {...mockProps} onInputChange={onInputChange} />);
+      expect(onInputChange).not.toHaveBeenCalled();
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+    });
 
-    await userEvent.type(findInputNode(), 'something');
+    it('capture filter text event onInputChange', async () => {
+      render(<ComboBox {...mockProps} onInputChange={onInputChange} />);
+      await userEvent.type(findInputNode(), 'something');
+      expect(onInputChange).toHaveBeenCalledWith('something');
+    });
 
-    expect(onInputChange).toHaveBeenCalledWith('something');
+    it('should call onInputChange when option is selected from dropdown', async () => {
+      render(<ComboBox {...mockProps} onInputChange={onInputChange} />);
+      await openMenu();
+      expect(onInputChange).not.toHaveBeenCalled();
+      await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
+      expect(onInputChange).toHaveBeenCalledWith('Item 2');
+    });
+
+    it('should call onInputChange when option is cleared with button', async () => {
+      render(
+        <ComboBox
+          {...mockProps}
+          initialSelectedItem={mockProps.items[0]}
+          onInputChange={onInputChange}
+        />
+      );
+      expect(onInputChange).not.toHaveBeenCalled();
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Clear selected item' })
+      );
+      expect(onInputChange).toHaveBeenCalledWith('');
+    });
+
+    it('should not call onInputChange when combobox is interacted with but input value does not change', async () => {
+      render(
+        <ComboBox
+          {...mockProps}
+          initialSelectedItem={mockProps.items[0]}
+          onInputChange={onInputChange}
+        />
+      );
+      expect(onInputChange).not.toHaveBeenCalled();
+      await openMenu();
+      await userEvent.click(screen.getByRole('option', { name: 'Item 0' }));
+      expect(onInputChange).not.toHaveBeenCalled();
+    });
+
+    it('should call onInputChange when custom value is entered into combobox', async () => {
+      render(
+        <ComboBox
+          {...mockProps}
+          initialSelectedItem={mockProps.items[0]}
+          onInputChange={onInputChange}
+        />
+      );
+      await userEvent.clear(findInputNode());
+      expect(onInputChange).toHaveBeenCalledWith('');
+      await userEvent.type(findInputNode(), 'custom value');
+      await userEvent.keyboard('[Enter]');
+      expect(onInputChange).toHaveBeenCalledWith('custom value');
+    });
   });
 
   it('should render custom item components', async () => {
@@ -307,6 +377,44 @@ describe('ComboBox', () => {
     );
   });
 
+  it('should yield highlighted item as `selectedItem` when pressing Enter with an unmodified input value', async () => {
+    render(<ControlledComboBox controlledItem={null} />);
+
+    const input = findInputNode();
+
+    expect(screen.getByTestId('selected-item').textContent).toBe('none');
+
+    await userEvent.click(input);
+    await userEvent.type(input, 'Item 1');
+    await userEvent.keyboard('{Enter}');
+
+    expect(screen.getByTestId('selected-item').textContent).toBe('Item 1');
+
+    await userEvent.type(input, '{backspace}');
+    await userEvent.type(input, '1');
+    await userEvent.keyboard('{Enter}');
+
+    expect(screen.getByTestId('selected-item').textContent).toBe('Item 1');
+  });
+
+  it('should yield highlighted item as `selectedItem` when pressing Enter with a modified input value', async () => {
+    render(<ControlledComboBox controlledItem={null} />);
+    const input = findInputNode();
+
+    expect(screen.getByTestId('selected-item').textContent).toBe('none');
+
+    await userEvent.click(input);
+    await userEvent.type(input, 'Item 2');
+    await userEvent.keyboard('{Enter}');
+
+    expect(screen.getByTestId('selected-item').textContent).toBe('Item 2');
+
+    await userEvent.type(input, '{backspace}');
+    await userEvent.keyboard('{Enter}');
+
+    expect(screen.getByTestId('selected-item').textContent).toBe('Item 0');
+  });
+
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', async () => {
       render(
@@ -371,6 +479,35 @@ describe('ComboBox', () => {
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
+    it('should not call onChange or onInputChange on initial render', () => {
+      render(<ControlledComboBox />);
+      expect(screen.getByText('onChangeCallCount: 0')).toBeInTheDocument();
+      expect(screen.getByText('onInputChangeCallCount: 0')).toBeInTheDocument();
+    });
+    it('should call onInputChange when input changes', async () => {
+      render(<ControlledComboBox />);
+      await userEvent.type(findInputNode(), 'Item 2');
+      expect(screen.getByText('onInputChangeCallCount: 6')).toBeInTheDocument();
+    });
+    it('should call onInputChange when external state managing selectedItem is updated', async () => {
+      render(<ControlledComboBox />);
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Choose item 3' })
+      );
+      expect(screen.getByText('onInputChangeCallCount: 1')).toBeInTheDocument();
+    });
+    it('should not call onChange or onInputChange when external state managing selectedItem is updated to same value', async () => {
+      render(
+        <ControlledComboBox
+          controlledItem={{ id: 'id-3', label: 'Item 3', value: 3 }}
+        />
+      );
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Choose item 3' })
+      );
+      expect(screen.getByText('onChangeCallCount: 0')).toBeInTheDocument();
+      expect(screen.getByText('onInputChangeCallCount: 0')).toBeInTheDocument();
+    });
 
     it('should display selected item using a string type for the `selectedItem` prop', async () => {
       // Replace the 'items' property in mockProps with a list of strings
@@ -409,7 +546,7 @@ describe('ComboBox', () => {
       await openMenu();
       await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
       expect(screen.getByText('onChangeCallCount: 1')).toBeInTheDocument();
-      expect(screen.getByText('value: Item 2')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('Item 2');
       expect(
         screen.getByRole('combobox', { value: 'Item 2' })
       ).toBeInTheDocument();
@@ -424,7 +561,7 @@ describe('ComboBox', () => {
         screen.getByRole('button', { name: 'Clear selected item' })
       );
       expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
-      expect(screen.getByText('value: none')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('none');
       expect(findInputNode()).toHaveDisplayValue('');
     });
     it('should update and call `onChange` once when selection is cleared from the combobox after an external update is made, and the external state managing selectedItem is updated', async () => {
@@ -439,7 +576,7 @@ describe('ComboBox', () => {
         screen.getByRole('button', { name: 'Clear selected item' })
       );
       expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
-      expect(screen.getByText('value: none')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('none');
       expect(findInputNode()).toHaveDisplayValue('');
     });
     it('should update and call `onChange` when a combination of external and combobox selections are made', async () => {
@@ -450,17 +587,17 @@ describe('ComboBox', () => {
       );
       expect(screen.getByText('onChangeCallCount: 1')).toBeInTheDocument();
       expect(findInputNode()).toHaveDisplayValue('Item 3');
-      expect(screen.getByText('value: Item 3')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('Item 3');
       await openMenu();
       await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
       expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
       expect(findInputNode()).toHaveDisplayValue('Item 2');
-      expect(screen.getByText('value: Item 2')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('Item 2');
       await userEvent.click(
         screen.getByRole('button', { name: 'Clear selected item' })
       );
       expect(screen.getByText('onChangeCallCount: 3')).toBeInTheDocument();
-      expect(screen.getByText('value: none')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('none');
       expect(findInputNode()).toHaveDisplayValue('');
     });
     it('should update and call `onChange` once when selection is updated externally', async () => {
@@ -479,7 +616,7 @@ describe('ComboBox', () => {
       await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
       await userEvent.click(screen.getByRole('button', { name: 'reset' }));
       expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
-      expect(screen.getByText('value: none')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('none');
       expect(findInputNode()).toHaveDisplayValue('');
     });
     it('should clear selected item when `selectedItem` is updated to `null` externally', async () => {
@@ -492,6 +629,40 @@ describe('ComboBox', () => {
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue('');
       expect(mockProps.onChange).toHaveBeenCalled();
+    });
+    it('should call onChange when downshiftProps onStateChange is provided', async () => {
+      const downshiftProps = {
+        onStateChange: jest.fn(),
+      };
+      render(
+        <ComboBox
+          {...mockProps}
+          selectedItem={mockProps.items[0]}
+          downshiftProps={downshiftProps}
+        />
+      );
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+      expect(downshiftProps.onStateChange).not.toHaveBeenCalled();
+      await openMenu();
+      expect(downshiftProps.onStateChange).toHaveBeenCalledTimes(1);
+      await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
+      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+      expect(downshiftProps.onStateChange).toHaveBeenCalledTimes(3);
+      expect(downshiftProps.onStateChange).toHaveBeenNthCalledWith(2, {
+        selectedItem: {
+          id: 'id-2',
+          label: 'Item 2',
+          value: 2,
+        },
+        type: useCombobox.stateChangeTypes.ItemClick,
+      });
+      expect(downshiftProps.onStateChange).toHaveBeenLastCalledWith({
+        selectedItem: undefined,
+        type: useCombobox.stateChangeTypes.FunctionSetHighlightedIndex,
+      });
+      expect(
+        screen.getByRole('combobox', { value: 'Item 2' })
+      ).toBeInTheDocument();
     });
   });
 

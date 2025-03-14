@@ -27,9 +27,12 @@ import classNames from 'classnames';
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
 import ClickListener from '../../internal/ClickListener';
-import FloatingMenu, {
+import {
   DIRECTION_BOTTOM,
   DIRECTION_TOP,
+  FloatingMenu,
+  type MenuDirection,
+  type MenuOffset,
 } from '../../internal/FloatingMenu';
 import { matches as keyCodeMatches, keys } from '../../internal/keyboard';
 import { noopFn } from '../../internal/noopFn';
@@ -83,11 +86,11 @@ const triggerButtonPositionFactors = {
  * @returns The adjustment of the floating menu position, upon the position of
  *          the menu arrow.
  */
-export const getMenuOffset = (
-  menuBody: HTMLElement,
-  direction: string,
-  trigger: HTMLElement | null,
-  flip: boolean
+export const getMenuOffset: MenuOffset = (
+  menuBody,
+  direction,
+  trigger,
+  flip
 ) => {
   const triggerButtonPositionProp = triggerButtonPositionProps[direction];
   const triggerButtonPositionFactor = triggerButtonPositionFactors[direction];
@@ -111,14 +114,9 @@ export const getMenuOffset = (
       };
     }
     default:
-      break;
+      return { left: 0, top: 0 };
   }
 };
-
-interface Offset {
-  top?: number | null;
-  left?: number | null;
-}
 
 export interface OverflowMenuProps {
   /**
@@ -146,7 +144,7 @@ export interface OverflowMenuProps {
   /**
    * The menu direction.
    */
-  direction?: string;
+  direction?: MenuDirection;
 
   /**
    * `true` if the menu alignment should be flipped.
@@ -182,12 +180,12 @@ export interface OverflowMenuProps {
   /**
    * The adjustment in position applied to the floating menu.
    */
-  menuOffset?: Offset | (() => void);
+  menuOffset?: MenuOffset;
 
   /**
    * The adjustment in position applied to the floating menu.
    */
-  menuOffsetFlip?: Offset | (() => void);
+  menuOffsetFlip?: MenuOffset;
 
   /**
    * The class to apply to the menu options
@@ -644,8 +642,8 @@ OverflowMenu.propTypes = {
    */
   menuOffset: PropTypes.oneOfType([
     PropTypes.shape({
-      top: PropTypes.number,
-      left: PropTypes.number,
+      top: PropTypes.number.isRequired,
+      left: PropTypes.number.isRequired,
     }),
     PropTypes.func,
   ]),
@@ -655,8 +653,8 @@ OverflowMenu.propTypes = {
    */
   menuOffsetFlip: PropTypes.oneOfType([
     PropTypes.shape({
-      top: PropTypes.number,
-      left: PropTypes.number,
+      top: PropTypes.number.isRequired,
+      left: PropTypes.number.isRequired,
     }),
     PropTypes.func,
   ]),
