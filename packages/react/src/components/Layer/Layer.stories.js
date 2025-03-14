@@ -97,6 +97,26 @@ export const UseLayer = () => {
   );
 };
 
+export const Test1 = () => {
+  function ExampleComponent() {
+    const { level } = useLayer();
+    return (
+      <div style={{ padding: '1rem', background: 'var(--cds-layer)' }}>
+        The current layer level is: {level}
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <ExampleComponent />
+      <Layer as="section">
+        <ExampleComponent />
+      </Layer>
+    </>
+  );
+};
+
 UseLayer.story = {
   name: 'useLayer',
 };
