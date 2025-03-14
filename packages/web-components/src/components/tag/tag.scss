@@ -44,6 +44,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--tag--selectable;
 }
 
+:host(#{$prefix}-operational-tag) #{$prefix}-tag {
+  @extend .#{$prefix}--tag--operational;
+}
+
 :host(#{$prefix}-selectable-tag[selected]) #{$prefix}-tag {
   @extend .#{$prefix}--tag--selectable-selected;
 }
@@ -112,51 +116,61 @@ $css--plex: true !default;
   padding-inline-start: $spacing-03;
 }
 
+:host(#{$prefix}-operational-tag[type='red']) #{$prefix}-tag,
 :host(#{$prefix}-dismissible-tag[type='red']),
 :host(#{$prefix}-tag[type='red']) {
   @extend .#{$prefix}--tag--red;
 }
 
+:host(#{$prefix}-operational-tag[type='magenta']) #{$prefix}-tag,
 :host(#{$prefix}-dismissible-tag[type='magenta']),
 :host(#{$prefix}-tag[type='magenta']) {
   @extend .#{$prefix}--tag--magenta;
 }
 
+:host(#{$prefix}-operational-tag[type='purple']) #{$prefix}-tag,
 :host(#{$prefix}-dismissible-tag[type='purple']),
 :host(#{$prefix}-tag[type='purple']) {
   @extend .#{$prefix}--tag--purple;
 }
 
+:host(#{$prefix}-operational-tag[type='blue']) #{$prefix}-tag,
 :host(#{$prefix}-dismissible-tag[type='blue']),
 :host(#{$prefix}-tag[type='blue']) {
   @extend .#{$prefix}--tag--blue;
 }
 
+:host(#{$prefix}-operational-tag[type='cyan']) #{$prefix}-tag,
 :host(#{$prefix}-dismissible-tag[type='cyan']),
 :host(#{$prefix}-tag[type='cyan']) {
   @extend .#{$prefix}--tag--cyan;
 }
 
+:host(#{$prefix}-operational-tag[type='teal']) #{$prefix}-tag,
 :host(#{$prefix}-dismissible-tag[type='teal']),
 :host(#{$prefix}-tag[type='teal']) {
   @extend .#{$prefix}--tag--teal;
 }
 
+:host(#{$prefix}-operational-tag[type='green']) #{$prefix}-tag,
 :host(#{$prefix}-dismissible-tag[type='green']),
 :host(#{$prefix}-tag[type='green']) {
   @extend .#{$prefix}--tag--green;
 }
 
+:host(#{$prefix}-operational-tag[type='gray']) #{$prefix}-tag,
 :host(#{$prefix}-dismissible-tag[type='gray']),
 :host(#{$prefix}-tag[type='gray']) {
   @extend .#{$prefix}--tag--gray;
 }
 
+:host(#{$prefix}-operational-tag[type='cool-gray']) #{$prefix}-tag,
 :host(#{$prefix}-dismissible-tag[type='cool-gray']),
 :host(#{$prefix}-tag[type='cool-gray']) {
   @extend .#{$prefix}--tag--cool-gray;
 }
 
+:host(#{$prefix}-operational-tag[type='warn-gray']) #{$prefix}-tag,
 :host(#{$prefix}-dismissible-tag[type='warn-gray']),
 :host(#{$prefix}-tag[type='warm-gray']) {
   @extend .#{$prefix}--tag--warm-gray;

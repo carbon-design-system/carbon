@@ -170,7 +170,11 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
     const root = this.getRootNode();
     // Check if the root is a shadow root and get its host
     if (root instanceof ShadowRoot) {
-      if (root.host.tagName.toLowerCase() === `${prefix}-selectable-tag`) {
+      const parent = root.host.tagName.toLowerCase();
+      if (
+        parent === `${prefix}-selectable-tag` ||
+        parent === `${prefix}-operational-tag`
+      ) {
         this.setAttribute('role', 'button');
         this.tabIndex = this.disabled ? -1 : 0;
       }

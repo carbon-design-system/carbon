@@ -216,6 +216,85 @@ export const Selectable = {
   },
 };
 
+export const Operational = {
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({ size }) => {
+    const tags = [
+      {
+        type: 'red',
+        text: 'Tag content with a long text description',
+      },
+      {
+        type: 'magenta',
+        text: 'Tag content',
+      },
+      {
+        type: 'purple',
+        text: 'Tag content',
+      },
+      {
+        type: 'blue',
+        text: 'Tag content',
+      },
+      {
+        type: 'cyan',
+        text: 'Tag content',
+      },
+      {
+        type: 'teal',
+        text: 'Tag content',
+      },
+      {
+        type: 'green',
+        text: 'Tag content',
+      },
+      {
+        type: 'gray',
+        text: 'Tag content',
+      },
+      {
+        type: 'cool-gray',
+        text: 'Tag content',
+      },
+      {
+        type: 'warm-gray',
+        text: 'Tag content',
+      },
+    ];
+
+    return html`
+      <div
+        aria-label="Operational tags"
+        role="group"
+        style="margin-bottom:1rem">
+        ${tags.map(
+          (tag) =>
+            html`<cds-operational-tag
+              type=${tag.type}
+              text="${tag.text}"
+              size="${size}"
+              >${Asleep16({ slot: 'icon' })}</cds-operational-tag
+            >`
+        )}
+      </div>
+      <h4>Interactive examples</h4>
+      <div
+        id="operational-tag"
+        style="display:flex; justify-content:flex-start; margin-top:1rem"
+        aria-label="Operational tags with Popover"
+        role="group">
+        <cds-operational-tag text="Tag content">
+          ${Asleep16({ slot: 'icon' })}
+        </cds-operational-tag>
+        <cds-operational-tag text="Tag content">
+          ${Asleep16({ slot: 'icon' })}
+        </cds-operational-tag>
+      </div>
+    `;
+  },
+};
+
 const ReadOnlyArgs = {
   disabled: false,
   size: TAG_SIZE.MEDIUM,
