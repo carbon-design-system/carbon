@@ -14,6 +14,7 @@ import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
 import Folders16 from '@carbon/icons/lib/folders/16.js';
 import Asleep16 from '@carbon/icons/lib/asleep/16.js';
 import './index';
+import '../popover';
 import '../ai-label';
 import '../button';
 import '../icon-button';
@@ -284,12 +285,37 @@ export const Operational = {
         style="display:flex; justify-content:flex-start; margin-top:1rem"
         aria-label="Operational tags with Popover"
         role="group">
-        <cds-operational-tag text="Tag content">
-          ${Asleep16({ slot: 'icon' })}
-        </cds-operational-tag>
-        <cds-operational-tag text="Tag content">
-          ${Asleep16({ slot: 'icon' })}
-        </cds-operational-tag>
+        <cds-popover open>
+          <div class="playground-trigger">
+            <cds-operational-tag text="Tag content">
+              ${Asleep16({ slot: 'icon' })}
+            </cds-operational-tag>
+          </div>
+          <cds-popover-content>
+            <p>Tag 1 name</p>
+            <p>Tag 2 name</p>
+            <p>Tag 3 name</p>
+            <p>Tag 4 name</p>
+            <p>Tag 5 name</p>
+          </cds-popover-content>
+        </cds-popover>
+
+        <cds-popover open>
+          <div class="playground-trigger">
+            <cds-operational-tag text="Tag content">
+              ${Asleep16({ slot: 'icon' })}
+            </cds-operational-tag>
+          </div>
+          <cds-popover-content>
+            <div style="display:flex; flex-direction: column; padding:1rem">
+              <cds-tag type="blue">Tag 1 name</cds-tag>
+              <cds-tag type="blue">Tag 2 name</cds-tag>
+              <cds-tag type="blue">Tag 3 name</cds-tag>
+              <cds-tag type="blue">Tag 4 name</cds-tag>
+              <cds-tag type="blue">Tag 5 name</cds-tag>
+            </div>
+          </cds-popover-content>
+        </cds-popover>
       </div>
     `;
   },
