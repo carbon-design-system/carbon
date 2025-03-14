@@ -150,13 +150,15 @@ function FileUploaderDropContainer({
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const files = [...(event.target.files ?? [])];
-    const addedFiles = validateFiles(files);
+    const filesToValidate = multiple ? files : [files[0]];
+    const addedFiles = validateFiles(filesToValidate);
     return onAddFiles(event, { addedFiles });
   }
 
   function handleDrop(event: React.DragEvent<HTMLDivElement>) {
     const files = [...event.dataTransfer.files];
-    const addedFiles = validateFiles(files);
+    const filesToValidate = multiple ? files : [files[0]];
+    const addedFiles = validateFiles(filesToValidate);
     return onAddFiles(event, { addedFiles });
   }
 
