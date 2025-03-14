@@ -259,6 +259,3 @@ DialogCloseButton.propTypes = {
    */
   onClick: PropTypes.func,
 };
-
-// export { unstable__Dialog };
-// export default unstable__Dialog;

@@ -99,10 +99,6 @@
     min-block-size: $spacing-09;
   }
 
-  // .#{$prefix}--dialog--modal {
-  //   border: 1px solid transparent;
-  // }
-
   /* Transition the :backdrop when the dialog modal is promoted to the top layer */
   .#{$prefix}--dialog::backdrop {
     background-color: $overlay;
