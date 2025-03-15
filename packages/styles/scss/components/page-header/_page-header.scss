@@ -1,0 +1,39 @@
+//
+// Copyright IBM Corp. 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+// @use '../../motion' as *;
+// @use '../../spacing' as *;
+// @use '../../theme' as *;
+// @use '../../type' as *;
+// @use '../../layer' as *;
+// @use '../../utilities/box-shadow' as *;
+// @use '../../utilities/button-reset';
+// @use '../../utilities/component-reset';
+// @use '../../utilities/focus-outline' as *;
+// @use '../../utilities/high-contrast-mode' as *;
+// @use '../../utilities/convert';
+// @use '../../utilities/z-index' as *;
+// @use '../../utilities/custom-property';
+
+/// Page header styles
+/// @access public
+/// @group page-header
+@mixin page-header {
+  .#{$prefix}--page-header {
+    border: 1px solid rebeccapurple; /* stylelint-disable-line */
+  }
+  .#{$prefix}--page-header__breadcrumb-bar {
+    border: 1px solid blue; /* stylelint-disable-line */
+  }
+  .#{$prefix}--page-header__content {
+    border: 1px solid red; /* stylelint-disable-line */
+  }
+  .#{$prefix}--page-header__tab-bar {
+    border: 1px solid green; /* stylelint-disable-line */
+  }
+}
