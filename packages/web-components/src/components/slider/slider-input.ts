@@ -45,31 +45,77 @@ class CDSSliderInput extends FocusMixin(LitElement) {
    * Handles `change` event to fire a normalized custom event.
    */
   private _handleChange({ target }: Event) {
-    this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof CDSSliderInput).eventChange, {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: Number((target as HTMLInputElement).value),
-        },
-      })
-    );
+    const min = Number(this.min);
+    const max = Number(this.max);
+    const intermediate = this.value;
+    const newValue = (target as HTMLInputElement).value;
+    const newValueNumber = Number(newValue);
+    if (newValueNumber >= min && newValueNumber <= max && newValue !== '') {
+      this.value = newValueNumber;
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSSliderInput).eventChange,
+          {
+            bubbles: true,
+            composed: true,
+            detail: {
+              value: this.value,
+              intermediate,
+            },
+          }
+        )
+      );
+    } else {
+      this.invalid = newValue === '';
+      this.warn =
+        (newValueNumber < min || newValueNumber > max) && newValue !== '';
+      const intermediate = this.value;
+      if (newValue !== '') {
+        this.value = newValueNumber < min ? min : max;
+      } else {
+        this.value = '';
+      }
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSSliderInput).eventChange,
+          {
+            bubbles: true,
+            composed: true,
+            detail: {
+              value: this.value,
+              intermediate,
+            },
+          }
+        )
+      );
+    }
   }
 
   /**
    * Handles `input` event to fire a normalized custom event.
    */
   private _handleInput({ target }: Event) {
-    this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof CDSSliderInput).eventChange, {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: Number((target as HTMLInputElement).value),
-          intermediate: true,
-        },
-      })
-    );
+    const newValue = (target as HTMLInputElement).value;
+    if (newValue) {
+      this.value = Number(newValue);
+      this.invalid = false;
+      if (this.value >= Number(this.min) && this.value <= Number(this.max)) {
+        this.warn = false;
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSSliderInput).eventChange,
+            {
+              bubbles: true,
+              composed: true,
+              detail: {
+                value: this.value,
+                intermediate: true,
+              },
+            }
+          )
+        );
+      }
+    }
   }
 
   /**
@@ -142,7 +188,7 @@ class CDSSliderInput extends FocusMixin(LitElement) {
    * The value.
    */
   @property({ type: Number })
-  value!: number;
+  value;
 
   /**
    * true` if the input should be readonly.
@@ -164,7 +210,6 @@ class CDSSliderInput extends FocusMixin(LitElement) {
       _handleChange: handleChange,
       _handleInput: handleInput,
     } = this;
-
     const classes = classMap({
       [`${prefix}--text-input`]: true,
       [`${prefix}--slider-text-input`]: true,
@@ -179,7 +224,6 @@ class CDSSliderInput extends FocusMixin(LitElement) {
     const warnIcon = WarningAltFilled16({
       class: `${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`,
     });
-
     return html`
       <input
         ?disabled="${disabled}"
