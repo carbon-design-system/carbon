@@ -108,8 +108,13 @@ $css--plex: true !default;
 :host(#{$prefix}-breadcrumb-link) {
   outline: none;
 
+  .#{$prefix}--link:visited,
   .#{$prefix}--link {
     font: inherit;
+
+    &:active {
+      color: $text-primary;
+    }
   }
 
   // Re-define the ruleset so this wins over `.#{$prefix}--link:visited`, etc.
