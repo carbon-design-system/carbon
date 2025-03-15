@@ -1,0 +1,199 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2019, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { html, LitElement } from 'lit';
+import { property, state } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
+import FocusMixin from '../../globals/mixins/focus';
+import HostListener from '../../globals/decorators/host-listener';
+import HostListenerMixin from '../../globals/mixins/host-listener';
+import { TAG_SIZE, TAG_TYPE } from './defs';
+import './tag';
+import '../tooltip/index';
+import styles from './tag.scss?lit';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+
+export { TAG_SIZE, TAG_TYPE };
+
+/**
+ * Tag.
+ *
+ * @fires cds-selectable-tag-beforeselected - The custom event fired as the element is being selected
+ * @fires cds-selectable-tag-selected - The custom event fired after the element has been selected
+ */
+@customElement(`${prefix}-selectable-tag`)
+class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
+  /**
+   * Handles `click` event on this element.
+   *
+   * @param event The event.
+   */
+  @HostListener('shadowRoot:click')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleClick = (event: MouseEvent) => {
+    if (this.disabled) {
+      event.stopPropagation();
+    } else {
+      const init = {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        detail: {
+          triggeredBy: event.target,
+        },
+      };
+      if (
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSSelectableTag).eventBeforeSelected,
+            init
+          )
+        )
+      ) {
+        this.selected = !this.selected;
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSSelectableTag).eventSelected,
+            init
+          )
+        );
+      }
+    }
+  };
+
+  @HostListener('shadowRoot:keydown')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      if (this.disabled) {
+        event.stopPropagation();
+      } else {
+        const init = {
+          bubbles: true,
+          cancelable: true,
+          composed: true,
+          detail: {
+            triggeredBy: event.target,
+          },
+        };
+        if (
+          this.dispatchEvent(
+            new CustomEvent(
+              (this.constructor as typeof CDSSelectableTag).eventBeforeSelected,
+              init
+            )
+          )
+        ) {
+          this.selected = !this.selected;
+          this.dispatchEvent(
+            new CustomEvent(
+              (this.constructor as typeof CDSSelectableTag).eventSelected,
+              init
+            )
+          );
+        }
+      }
+    }
+  };
+
+  /**
+   * `true` if the tag should be disabled
+   */
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
+
+  /**
+   * Specify the state of the selectable tag.
+   */
+  @property({ type: Boolean, reflect: true })
+  selected = false;
+
+  /**
+   * The size of the tag.
+   */
+  @property({ type: String, reflect: true })
+  size = TAG_SIZE.MEDIUM;
+
+  /**
+   * Provide text to be rendered inside of a the tag.
+   */
+  @property({ type: String, reflect: true })
+  text = '';
+
+  /**
+   * true if the tag text has ellipsis applied
+   */
+  @state()
+  _hasEllipsisApplied = false;
+
+  updated() {
+    const textContainer = this.shadowRoot
+      ?.querySelector(`${prefix}-tag`)
+      ?.shadowRoot?.querySelector(`.${prefix}--tag__label`);
+    if (!textContainer) return;
+
+    this._hasEllipsisApplied =
+      textContainer.scrollWidth > textContainer.clientWidth;
+  }
+
+  render() {
+    const {
+      disabled,
+      selected,
+      size,
+      text,
+      _hasEllipsisApplied: hasEllipsisApplied,
+    } = this;
+
+    return html` ${hasEllipsisApplied
+      ? html` <cds-tooltip align="bottom" enter-delay-ms=${0}>
+          <cds-tag
+            ?aria-pressed="${selected}"
+            size="${size}"
+            ?disabled="${disabled}">
+            <slot name="icon" slot="icon"></slot>
+            ${text}
+            <slot name="decorator" slot="decorator"></slot>
+            <slot name="ai-label" slot="ai-label"></slot>
+            <slot name="slug" slot="slug"></slot>
+          </cds-tag>
+          <cds-tooltip-content id="content"> ${text} </cds-tooltip-content>
+        </cds-tooltip>`
+      : html`
+          <cds-tag
+            ?aria-pressed="${selected}"
+            size="${size}"
+            ?disabled="${disabled}">
+            <slot name="icon" slot="icon"></slot>
+            ${text}
+            <slot name="decorator" slot="decorator"></slot>
+            <slot name="ai-label" slot="ai-label"></slot>
+            <slot name="slug" slot="slug"></slot>
+          </cds-tag>
+        `}`;
+  }
+
+  /**
+   * The name of the custom event before this tag is selected.
+   */
+  static get eventBeforeSelected() {
+    return `${prefix}-selectable-tag-beingselected`;
+  }
+
+  /**
+   * The name of the custom event fired after this tag is selected.
+   */
+  static get eventSelected() {
+    return `${prefix}-selectable-tag-selected`;
+  }
+
+  static styles = styles; // `styles` here is a `CSSResult` generated by custom Vite loader
+}
+
+export default CDSSelectableTag;

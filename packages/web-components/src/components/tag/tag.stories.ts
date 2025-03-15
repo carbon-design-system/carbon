@@ -14,7 +14,9 @@ import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
 import Folders16 from '@carbon/icons/lib/folders/16.js';
 import Asleep16 from '@carbon/icons/lib/asleep/16.js';
 import './index';
+import '../popover';
 import '../ai-label';
+import '../button';
 import '../icon-button';
 
 const content = html`
@@ -49,8 +51,9 @@ const actions = html`
 `;
 
 const sizes = {
-  [`Medium size (${TAG_SIZE.MEDIUM})`]: TAG_SIZE.MEDIUM,
-  [`Small size (${TAG_SIZE.SMALL})`]: TAG_SIZE.SMALL,
+  [`sm`]: TAG_SIZE.SMALL,
+  [`md`]: TAG_SIZE.MEDIUM,
+  [`lg`]: TAG_SIZE.LARGE,
 };
 
 const types = [
@@ -87,7 +90,7 @@ const controls = {
   size: {
     control: 'select',
     description:
-      'Specify the size of the Tag. Currently supports either sm or "md" (default) sizes.',
+      'Specify the size of the Tag. Currently supports either `sm`, `md` (default) or `lg` sizes.',
     options: sizes,
   },
   title: {
@@ -101,9 +104,243 @@ const controls = {
   },
 };
 
-export const Default = {
-  render: () =>
-    html`${types.map((e) => html`<cds-tag type="${e}">Tag content</cds-tag>`)}`,
+export const Dismissible = {
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({ size }) => {
+    const tags = [
+      {
+        type: 'red',
+        text: 'Tag content with a long text description',
+        tagTitle: 'Provide a custom title to the tag',
+      },
+      {
+        type: 'magenta',
+        text: 'Tag content 1',
+      },
+      {
+        type: 'purple',
+        text: 'Tag content 2',
+      },
+      {
+        type: 'blue',
+        text: 'Tag content 3',
+      },
+      {
+        type: 'cyan',
+        text: 'Tag content 4',
+      },
+      {
+        type: 'teal',
+        text: 'Tag content 5',
+      },
+      {
+        type: 'green',
+        text: 'Tag content 6',
+      },
+      {
+        type: 'gray',
+        text: 'Tag content 7',
+      },
+      {
+        type: 'cool-gray',
+        text: 'Tag content 8',
+      },
+      {
+        type: 'warm-gray',
+        text: 'Tag content 9',
+      },
+      {
+        type: 'high-contrast',
+        text: 'Tag content 10',
+      },
+      {
+        type: 'outline',
+        text: 'Tag content 11',
+      },
+    ];
+
+    return html` <cds-button>Reset</cds-button>
+      <br />
+      ${tags.map(
+        (tag) =>
+          html`<cds-dismissible-tag
+            text="${tag.text}"
+            tag-title="${tag.tagTitle}"
+            type="${tag.type}"
+            size="${size}"
+            >${Asleep16({ slot: 'icon' })} Tag content</cds-dismissible-tag
+          >`
+      )}`;
+  },
+};
+
+export const Skeleton = {
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({ size }) =>
+    html`<cds-tag-skeleton size="${size}">Tag content</cds-tag-skeleton>`,
+};
+
+export const Selectable = {
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({ size }) => {
+    const tags = [
+      {
+        id: 1,
+        text: 'Tag content with a long text description',
+      },
+      {
+        id: 2,
+        text: 'Tag content 1',
+      },
+      {
+        id: 3,
+        text: 'Tag content 2',
+      },
+      {
+        id: 4,
+        text: 'Tag content 3',
+      },
+    ];
+
+    return html`${tags.map(
+      (tag) =>
+        html`<cds-selectable-tag
+          id="${tag.id}"
+          text="${tag.text}"
+          size="${size}"
+          >${Asleep16({ slot: 'icon' })}</cds-selectable-tag
+        >`
+    )}`;
+  },
+};
+
+export const Operational = {
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({ size }) => {
+    const tags = [
+      {
+        type: 'red',
+        text: 'Tag content with a long text description',
+      },
+      {
+        type: 'magenta',
+        text: 'Tag content',
+      },
+      {
+        type: 'purple',
+        text: 'Tag content',
+      },
+      {
+        type: 'blue',
+        text: 'Tag content',
+      },
+      {
+        type: 'cyan',
+        text: 'Tag content',
+      },
+      {
+        type: 'teal',
+        text: 'Tag content',
+      },
+      {
+        type: 'green',
+        text: 'Tag content',
+      },
+      {
+        type: 'gray',
+        text: 'Tag content',
+      },
+      {
+        type: 'cool-gray',
+        text: 'Tag content',
+      },
+      {
+        type: 'warm-gray',
+        text: 'Tag content',
+      },
+    ];
+
+    return html`
+      <div
+        aria-label="Operational tags"
+        role="group"
+        style="margin-bottom:1rem">
+        ${tags.map(
+          (tag) =>
+            html`<cds-operational-tag
+              type=${tag.type}
+              text="${tag.text}"
+              size="${size}"
+              >${Asleep16({ slot: 'icon' })}</cds-operational-tag
+            >`
+        )}
+      </div>
+      <h4>Interactive examples</h4>
+      <div
+        id="operational-tag"
+        style="display:flex; justify-content:flex-start; margin-top:1rem"
+        aria-label="Operational tags with Popover"
+        role="group">
+        <cds-popover open>
+          <div class="playground-trigger">
+            <cds-operational-tag text="Tag content">
+              ${Asleep16({ slot: 'icon' })}
+            </cds-operational-tag>
+          </div>
+          <cds-popover-content>
+            <p>Tag 1 name</p>
+            <p>Tag 2 name</p>
+            <p>Tag 3 name</p>
+            <p>Tag 4 name</p>
+            <p>Tag 5 name</p>
+          </cds-popover-content>
+        </cds-popover>
+
+        <cds-popover open>
+          <div class="playground-trigger">
+            <cds-operational-tag text="Tag content">
+              ${Asleep16({ slot: 'icon' })}
+            </cds-operational-tag>
+          </div>
+          <cds-popover-content>
+            <div style="display:flex; flex-direction: column; padding:1rem">
+              <cds-tag type="blue">Tag 1 name</cds-tag>
+              <cds-tag type="blue">Tag 2 name</cds-tag>
+              <cds-tag type="blue">Tag 3 name</cds-tag>
+              <cds-tag type="blue">Tag 4 name</cds-tag>
+              <cds-tag type="blue">Tag 5 name</cds-tag>
+            </div>
+          </cds-popover-content>
+        </cds-popover>
+      </div>
+    `;
+  },
+};
+
+const ReadOnlyArgs = {
+  disabled: false,
+  size: TAG_SIZE.MEDIUM,
+};
+
+export const ReadOnly = {
+  argTypes: controls,
+  args: ReadOnlyArgs,
+  render: ({ size, disabled }) =>
+    html` <cds-tag type="red" size="${size}" ?disabled="${disabled}">
+        Tag content with a long text description
+      </cds-tag>
+      ${types
+        .slice(1)
+        .map(
+          (e) =>
+            html`<cds-tag type="${e}" size="${size}" ?disabled="${disabled}"
+              >Tag content</cds-tag
+            >`
+        )}`,
 };
 
 export const WithAILabel = {
@@ -134,21 +371,6 @@ export const WithAILabel = {
           ${content}${actions}</cds-ai-label
         >
       </cds-tag>`,
-};
-
-export const Playground = {
-  argTypes: controls,
-  args: defaultArgs,
-  render: ({ filter, size, type, title, disabled }) => html`
-    <cds-tag
-      ?filter="${filter}"
-      size="${size}"
-      type="${type}"
-      title="${title}"
-      ?disabled="${disabled}">
-      Tag content
-    </cds-tag>
-  `,
 };
 
 const meta = {
