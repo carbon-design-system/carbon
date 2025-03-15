@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,7 +24,7 @@ export interface TableBatchActionProps
   iconDescription?: string;
 
   /**
-   * Optional function to render your own icon in the underlying button
+   * A component used to render an icon.
    */
   renderIcon?: React.ElementType;
 }
@@ -61,7 +61,7 @@ TableBatchAction.propTypes = {
   },
 
   /**
-   * Optional function to render your own icon in the underlying button
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };

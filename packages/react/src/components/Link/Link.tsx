@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -51,8 +51,7 @@ export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   inline?: boolean;
 
   /**
-   * @description Optional prop to render an icon next to the link.
-   *   Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: ComponentType;
 
@@ -168,8 +167,7 @@ const Link: LinkComponent = React.forwardRef(
   inline: PropTypes.bool,
 
   /**
-   * Optional prop to render an icon next to the link.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
