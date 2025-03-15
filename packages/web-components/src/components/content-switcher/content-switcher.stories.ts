@@ -27,15 +27,27 @@ const sizes = {
 };
 
 const args = {
-  value: '',
+  value: 'all',
   size: null,
   disableSelection: false,
+  selectionMode: 'automatic',
+  selectedIndex: 0,
 };
 
 const argTypes = {
   value: {
     control: 'text',
     description: 'The value of the selected item (value)',
+  },
+  selectedIndex: {
+    control: 'number',
+    description: 'Specify a selected index for the initially selected content',
+  },
+  selectionMode: {
+    control: 'select',
+    options: ['automatic', 'manual'],
+    description:
+      'Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to `automatic`',
   },
   size: {
     control: 'select',
@@ -49,25 +61,51 @@ const argTypes = {
   onBeforeSelect: {
     action: `${prefix}-content-switcher-beingselected`,
   },
-  onSelect: {
+  onChange: {
     action: `${prefix}-content-switcher-selected`,
   },
 };
 
 export const Default = {
-  render: () => html`
-    <cds-content-switcher value="all">
-      <cds-content-switcher-item value="all">
-        First section
-      </cds-content-switcher-item>
-      <cds-content-switcher-item value="cloudFoundry">
-        Second section
-      </cds-content-switcher-item>
-      <cds-content-switcher-item value="staging">
-        Third section
-      </cds-content-switcher-item>
-    </cds-content-switcher>
-  `,
+  args,
+  argTypes,
+  render: (args) => {
+    const {
+      value,
+      disableSelection,
+      onBeforeSelect = noop,
+      onChange = noop,
+      size,
+      selectionMode,
+      selectedIndex,
+    } = args ?? {};
+    const handleBeforeSelected = (event: CustomEvent) => {
+      onBeforeSelect(event);
+      if (disableSelection) {
+        event.preventDefault();
+      }
+    };
+
+    return html`
+      <cds-content-switcher
+        value="${ifDefined(value)}"
+        @cds-content-switcher-beingselected="${handleBeforeSelected}"
+        @cds-content-switcher-selected="${onChange}"
+        selectionMode="${selectionMode}"
+        selectedIndex="${selectedIndex}"
+        size="${size}">
+        <cds-content-switcher-item value="all">
+          First section
+        </cds-content-switcher-item>
+        <cds-content-switcher-item value="cloudFoundry">
+          Second section
+        </cds-content-switcher-item>
+        <cds-content-switcher-item value="staging">
+          Third section
+        </cds-content-switcher-item>
+      </cds-content-switcher>
+    `;
+  },
 };
 
 export const IconOnly = {
@@ -126,44 +164,6 @@ export const WithLayer = {
       </cds-content-switcher>
     </sb-template-layers>
   `,
-};
-
-export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const {
-      value,
-      disableSelection,
-      onBeforeSelect = noop,
-      onSelect = noop,
-      size,
-    } = args ?? {};
-    const handleBeforeSelected = (event: CustomEvent) => {
-      onBeforeSelect(event);
-      if (disableSelection) {
-        event.preventDefault();
-      }
-    };
-
-    return html`
-      <cds-content-switcher
-        value="${ifDefined(value)}"
-        @cds-content-switcher-beingselected="${handleBeforeSelected}"
-        @cds-content-switcher-selected="${onSelect}"
-        size="${size}">
-        <cds-content-switcher-item value="all">
-          First section
-        </cds-content-switcher-item>
-        <cds-content-switcher-item value="cloudFoundry">
-          Second section
-        </cds-content-switcher-item>
-        <cds-content-switcher-item value="staging">
-          Third section
-        </cds-content-switcher-item>
-      </cds-content-switcher>
-    `;
-  },
 };
 
 const meta = {
