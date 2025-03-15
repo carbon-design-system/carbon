@@ -4658,15 +4658,7 @@ Map {
       "menuAlignment": Object {
         "type": "string",
       },
-      "mode": Object {
-        "args": Array [
-          Array [
-            "full",
-            "basic",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "mode": [Function],
       "onClose": Object {
         "type": "func",
       },
@@ -9940,6 +9932,9 @@ Map {
     "propTypes": Object {
       "children": Object {
         "type": "node",
+      },
+      "enableDialogElement": Object {
+        "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": Object {
         "type": "bool",
