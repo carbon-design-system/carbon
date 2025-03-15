@@ -9,73 +9,82 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import { PolymorphicProps } from '../../types/common';
 import { GridSettings, useGridSettings } from './GridContext';
 import { GridComponent, GridProps } from './GridTypes';
+import {
+  PolymorphicComponentPropWithRef,
+  PolymorphicRef,
+} from '../../internal/PolymorphicProps';
 
-function CSSGrid<T extends React.ElementType>({
-  align,
-  as: BaseComponent = 'div' as T,
-  children,
-  className: customClassName,
-  condensed = false,
-  fullWidth = false,
-  narrow = false,
-  ...rest
-}: GridProps<T>) {
-  const prefix = usePrefix();
-  const { subgrid } = useGridSettings();
-  let mode: SubgridMode = 'wide';
-  if (narrow) {
-    mode = 'narrow';
-  } else if (condensed) {
-    mode = 'condensed';
-  }
+const CSSGrid = React.forwardRef(
+  <T extends React.ElementType = 'div'>(
+    {
+      align,
+      as,
+      children,
+      className: customClassName,
+      condensed = false,
+      fullWidth = false,
+      narrow = false,
+      ...rest
+    }: GridProps<T>,
+    ref?: PolymorphicRef<T>
+  ) => {
+    const prefix = usePrefix();
+    const { subgrid } = useGridSettings();
+    let mode: SubgridMode = 'wide';
+    if (narrow) {
+      mode = 'narrow';
+    } else if (condensed) {
+      mode = 'condensed';
+    }
 
-  if (subgrid) {
+    if (subgrid) {
+      return (
+        <GridSettings mode="css-grid" subgrid>
+          <Subgrid
+            ref={ref}
+            as={as}
+            className={customClassName}
+            mode={mode}
+            {...rest}>
+            {children}
+          </Subgrid>
+        </GridSettings>
+      );
+    }
+
+    const className = cx(customClassName, {
+      [`${prefix}--css-grid`]: true,
+      [`${prefix}--css-grid--condensed`]: mode === 'condensed',
+      [`${prefix}--css-grid--narrow`]: mode === 'narrow',
+      [`${prefix}--css-grid--full-width`]: fullWidth,
+      [`${prefix}--css-grid--start`]: align === 'start',
+      [`${prefix}--css-grid--end`]: align === 'end',
+    });
+
+    // cast as any to let TypeScript allow passing in attributes to base component
+    const BaseComponent = as || 'div';
     return (
       <GridSettings mode="css-grid" subgrid>
-        <Subgrid
-          as={BaseComponent}
-          className={customClassName}
-          mode={mode}
-          {...rest}>
+        <BaseComponent className={className} ref={ref} {...rest}>
           {children}
-        </Subgrid>
+        </BaseComponent>
       </GridSettings>
     );
   }
-
-  const className = cx(customClassName, {
-    [`${prefix}--css-grid`]: true,
-    [`${prefix}--css-grid--condensed`]: mode === 'condensed',
-    [`${prefix}--css-grid--narrow`]: mode === 'narrow',
-    [`${prefix}--css-grid--full-width`]: fullWidth,
-    [`${prefix}--css-grid--start`]: align === 'start',
-    [`${prefix}--css-grid--end`]: align === 'end',
-  });
-
-  // cast as any to let TypeScript allow passing in attributes to base component
-  const BaseComponentAsAny: any = BaseComponent;
-  return (
-    <GridSettings mode="css-grid" subgrid>
-      <BaseComponentAsAny className={className} {...rest}>
-        {children}
-      </BaseComponentAsAny>
-    </GridSettings>
-  );
-}
+) as GridComponent;
 
 CSSGrid.propTypes = {
-  /**
-   * Specify grid alignment. Default is center
-   */
-  align: PropTypes.oneOf(['start', 'center', 'end']),
-
   /**
    * Provide a custom element to render instead of the default <div>
    */
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+
+  /**
+   * Specify grid alignment. Default is center
+   */
+  align: PropTypes.oneOf(['start', 'center', 'end']),
 
   /**
    * Pass in content that will be rendered within the `Grid`
@@ -124,28 +133,35 @@ interface SubgridBaseProps {
   mode?: SubgridMode;
 }
 
-type SubgridProps = PolymorphicProps<any, SubgridBaseProps>;
+type SubgridProps<T extends React.ElementType = 'div'> =
+  PolymorphicComponentPropWithRef<T, SubgridBaseProps>;
 
-const Subgrid = ({
-  as: BaseComponent = 'div',
-  className: customClassName,
-  children,
-  mode,
-  ...rest
-}: SubgridProps) => {
-  const prefix = usePrefix();
-  const className = cx(customClassName, {
-    [`${prefix}--subgrid`]: true,
-    [`${prefix}--subgrid--condensed`]: mode === 'condensed',
-    [`${prefix}--subgrid--narrow`]: mode === 'narrow',
-    [`${prefix}--subgrid--wide`]: mode === 'wide',
-  });
-  return (
-    <BaseComponent {...rest} className={className}>
-      {children}
-    </BaseComponent>
-  );
-};
+const Subgrid = React.forwardRef(
+  <T extends React.ElementType = 'div'>(
+    {
+      as,
+      className: customClassName,
+      children,
+      mode,
+      ...rest
+    }: SubgridProps<T>,
+    ref?: PolymorphicRef<T>
+  ) => {
+    const prefix = usePrefix();
+    const className = cx(customClassName, {
+      [`${prefix}--subgrid`]: true,
+      [`${prefix}--subgrid--condensed`]: mode === 'condensed',
+      [`${prefix}--subgrid--narrow`]: mode === 'narrow',
+      [`${prefix}--subgrid--wide`]: mode === 'wide',
+    });
+    const BaseComponent = as || 'div';
+    return (
+      <BaseComponent {...rest} ref={ref} className={className}>
+        {children}
+      </BaseComponent>
+    );
+  }
+);
 
 Subgrid.propTypes = {
   /**
