@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -34,7 +34,7 @@ import {
 import { CaretRight, CaretLeft, Checkmark } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
-import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useMergeRefs } from '@floating-ui/react';
 import { usePrefix } from '../../internal/usePrefix';
 import { warning } from '../../internal/warning.js';
 
@@ -130,11 +130,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const context = useContext(MenuContext);
 
     const menuItem = useRef<HTMLLIElement>(null);
-    const ref = useMergedRefs<HTMLLIElement>([
-      forwardRef,
-      menuItem,
-      refs.setReference,
-    ]);
+    const ref = useMergeRefs([forwardRef, menuItem, refs.setReference]);
 
     const hasChildren = Boolean(children);
 

@@ -1,9 +1,10 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import React, {
   useRef,
   type ForwardedRef,
@@ -20,7 +21,7 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
-import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useMergeRefs } from '@floating-ui/react';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useDelayedState } from '../../internal/useDelayedState';
 import { breakpoints } from '@carbon/layout';
@@ -90,7 +91,7 @@ function SideNavRenderFunction(
     useDelayedState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
   const sideNavRef = useRef<HTMLDivElement>(null);
-  const navRef = useMergedRefs([sideNavRef, ref]);
+  const navRef = useMergeRefs([sideNavRef, ref]);
 
   const handleToggle: typeof onToggle = (event, value = !expanded) => {
     if (!controlled) {
