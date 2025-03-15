@@ -51,8 +51,7 @@ const ButtonBase = React.forwardRef(function ButtonBase<
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--expressive`]: isExpressive,
-    [`${prefix}--btn--icon-only`]:
-      hasIconOnly && !className?.includes(`${prefix}--btn--icon-only`),
+    [`${prefix}--btn--icon-only`]: hasIconOnly,
     [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
   });
 
