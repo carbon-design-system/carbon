@@ -505,9 +505,12 @@ export const SelectableTile = React.forwardRef<
     ) {
       return;
     }
-    setIsSelected(!isSelected);
+    setIsSelected((prevSelected) => {
+      const newSelected = !prevSelected;
+      onChange(evt, newSelected, id);
+      return newSelected;
+    });
     clickHandler(evt);
-    onChange(evt, isSelected, id);
   }
 
   function handleKeyDown(evt) {
