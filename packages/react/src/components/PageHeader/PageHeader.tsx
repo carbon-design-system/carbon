@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+import React, { ComponentType } from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -76,12 +76,26 @@ PageHeaderBreadcrumbBar.displayName = 'PageHeaderBreadcrumbBar';
 interface PageHeaderContentProps {
   children?: React.ReactNode;
   className?: string;
+  icon?: React.ReactNode;
+  title: string;
+  subTitle?: string;
+  contextualActions?: React.ReactNode;
+  pageActions?: React.ReactNode;
 }
 const PageHeaderContent = React.forwardRef<
   HTMLDivElement,
   PageHeaderContentProps
 >(function PageHeaderContent(
-  { className, children, ...other }: PageHeaderContentProps,
+  {
+    className,
+    children,
+    title,
+    subTitle,
+    icon,
+    contextualActions,
+    pageActions,
+    ...other
+  }: PageHeaderContentProps,
   ref
 ) {
   const prefix = usePrefix();
@@ -93,8 +107,39 @@ const PageHeaderContent = React.forwardRef<
   );
   return (
     <div className={classNames} ref={ref} {...other}>
-      <p>page header content</p>
-      {children}
+      <div className={`${prefix}--page-header__content__title-wrapper`}>
+        <div className={`${prefix}--page-header__content__start`}>
+          <div className={`${prefix}--page-header__content__title-container`}>
+            {icon && (
+              <div className={`${prefix}--page-header__content__icon`}>
+                {icon}
+              </div>
+            )}
+            <div className={`${prefix}--page-header__content__title`}>
+              {title}{' '}
+            </div>
+          </div>
+          {contextualActions && (
+            <div
+              className={`${prefix}--page-header__content__contextual-actions`}>
+              {contextualActions}
+            </div>
+          )}
+        </div>
+        <div className={`${prefix}--page-header__content__end`}>
+          {pageActions && (
+            <div className={`${prefix}--page-header__content__page-actions`}>
+              {pageActions}
+            </div>
+          )}
+        </div>
+      </div>
+      {subTitle && (
+        <div className={`${prefix}--page-header__content__sub-title`}>
+          {subTitle}
+        </div>
+      )}{' '}
+      <div className={`${prefix}--page-header__content__body`}>{children}</div>
     </div>
   );
 });

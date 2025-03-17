@@ -7,9 +7,9 @@
 
 @use '../../config' as *;
 // @use '../../motion' as *;
-// @use '../../spacing' as *;
+@use '../../spacing' as *;
 // @use '../../theme' as *;
-// @use '../../type' as *;
+@use '../../type' as *;
 // @use '../../layer' as *;
 // @use '../../utilities/box-shadow' as *;
 // @use '../../utilities/button-reset';
@@ -31,7 +31,48 @@
     border: 1px solid blue; /* stylelint-disable-line */
   }
   .#{$prefix}--page-header__content {
+    padding: $spacing-06 0;
     border: 1px solid red; /* stylelint-disable-line */
+
+    .#{$prefix}--page-header__content__title-wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .#{$prefix}--page-header__content__start {
+      display: flex;
+      gap: $spacing-05;
+    }
+
+    .#{$prefix}--page-header__content__title-container {
+      display: flex;
+    }
+
+    .#{$prefix}--page-header__content__contextual-actions {
+      display: flex;
+      gap: $spacing-05;
+    }
+
+    .#{$prefix}--page-header__content__title {
+      @include type-style('productive-heading-04');
+    }
+
+    .#{$prefix}--page-header__content__icon {
+      margin-inline-end: $spacing-05;
+    }
+
+    .#{$prefix}--page-header__content__page-actions {
+      display: flex;
+      gap: $spacing-05;
+    }
+
+    .#{$prefix}--page-header__content__sub-title {
+      @include type-style('productive-heading-03');
+    }
+
+    .#{$prefix}--page-header__content__body {
+      @include type-style('body-01');
+    }
   }
   .#{$prefix}--page-header__tab-bar {
     border: 1px solid green; /* stylelint-disable-line */
