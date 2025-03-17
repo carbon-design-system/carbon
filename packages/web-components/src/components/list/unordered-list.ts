@@ -30,25 +30,16 @@ class CDSUnorderedList extends LitElement {
   /**
    * Specify whether the list is nested, or not
    */
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   nested = false;
 
   connectedCallback() {
-    // Auto-detect nesting if 'nested' attribute isn't explicitly set
-    if (!this.hasAttribute('nested')) {
-      // Check if this list is inside a list item
-      if (
-        this.closest(
-          (this.constructor as typeof CDSUnorderedList).selectorListItem
-        )
-      ) {
-        this.nested = true;
-        this.setAttribute('slot', 'nested');
-      } else {
-        this.nested = false;
-        this.removeAttribute('slot');
-      }
-    } else if (this.nested) {
+    if (
+      this.closest(
+        (this.constructor as typeof CDSUnorderedList).selectorListItem
+      ) ||
+      this.nested
+    ) {
       this.setAttribute('slot', 'nested');
     } else {
       this.removeAttribute('slot');
@@ -59,7 +50,8 @@ class CDSUnorderedList extends LitElement {
   render() {
     const classes = classMap({
       [`${prefix}--list--unordered`]: true,
-      [`${prefix}--list--nested`]: this.nested,
+      [`${prefix}--list--nested`]:
+        this.getAttribute('slot') === 'nested' || this.nested,
       [`${prefix}--list--expressive`]: this.isExpressive,
     });
     return html`

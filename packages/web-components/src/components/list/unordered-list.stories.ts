@@ -23,20 +23,8 @@ const controls = {
 };
 
 export const Default = {
-  args: defaultArgs,
-  argTypes: controls,
-  render: ({ isExpressive }) =>
-    html`<cds-unordered-list ?is-expressive="${isExpressive}">
-      <cds-list-item>Unordered List level 1</cds-list-item>
-      <cds-list-item>Unordered List level 1</cds-list-item>
-      <cds-list-item>Unordered List level 1</cds-list-item>
-    </cds-unordered-list>`,
-};
-
-export const Nested = {
   args: {
     ...defaultArgs,
-    nested: true,
   },
   argTypes: {
     ...controls,
@@ -46,18 +34,23 @@ export const Nested = {
     },
   },
   render: ({ isExpressive, nested }) =>
-    html`<cds-unordered-list ?is-expressive="${isExpressive}">
+    html`<cds-unordered-list ?is-expressive="${isExpressive}" ?nested=${nested}>
+      <cds-list-item>Unordered List level 1</cds-list-item>
+      <cds-list-item>Unordered List level 1</cds-list-item>
+      <cds-list-item>Unordered List level 1</cds-list-item>
+    </cds-unordered-list>`,
+};
+
+export const Nested = {
+  render: () =>
+    html`<cds-unordered-list>
       <cds-list-item>
         Unordered List level 1
-        <cds-unordered-list
-          ?is-expressive="${isExpressive}"
-          ?nested="${nested}">
+        <cds-unordered-list>
           <cds-list-item>Unordered List level 2</cds-list-item>
           <cds-list-item>
             Unordered List level 2
-            <cds-unordered-list
-              ?is-expressive="${isExpressive}"
-              ?nested="${nested}">
+            <cds-unordered-list>
               <cds-list-item>Unordered List level 3</cds-list-item>
               <cds-list-item>Unordered List level 3</cds-list-item>
             </cds-unordered-list>
