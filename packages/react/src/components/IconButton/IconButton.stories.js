@@ -37,16 +37,9 @@ export default {
 };
 
 const DefaultStory = (props) => {
-  const { align, defaultOpen, disabled, kind, label, size } = props;
   return (
     <div style={{ margin: '3rem' }}>
-      <IconButton
-        align={align}
-        defaultOpen={defaultOpen}
-        disabled={disabled}
-        kind={kind}
-        label={label}
-        size={size}>
+      <IconButton {...props}>
         <Edit />
       </IconButton>
     </div>

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -59,7 +59,7 @@ export type SideNavLinkProps<E extends ElementType> = LinkProps<E> & {
   large?: boolean;
 
   /**
-   * Provide an icon to render in the side navigation link. Should be a React class.
+   * A component used to render an icon.
    */
   renderIcon?: ComponentType;
 
@@ -156,7 +156,7 @@ SideNavLink.propTypes = {
   large: PropTypes.bool,
 
   /**
-   * Provide an icon to render in the side navigation link. Should be a React class.
+   * A component used to render an icon.
    */
   // @ts-expect-error - PropTypes are unable to cover this case.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

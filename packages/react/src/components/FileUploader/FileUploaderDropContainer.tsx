@@ -204,7 +204,7 @@ function FileUploaderDropContainer({
         className={dropareaClasses}
         ref={innerRef}
         onKeyDown={(evt) => {
-          if (matches(evt as unknown as Event, [keys.Enter, keys.Space])) {
+          if (matches(evt, [keys.Enter, keys.Space])) {
             evt.preventDefault();
             inputRef.current?.click();
           }

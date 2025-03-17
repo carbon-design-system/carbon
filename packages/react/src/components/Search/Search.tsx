@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -95,8 +95,7 @@ export interface SearchProps extends InputPropsBase {
   placeholder?: string;
 
   /**
-   * Rendered icon for the Search.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: ComponentType | FunctionComponent;
 
@@ -357,8 +356,7 @@ Search.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-   * Rendered icon for the Search.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

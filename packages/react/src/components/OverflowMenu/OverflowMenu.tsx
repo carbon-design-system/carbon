@@ -213,7 +213,7 @@ export interface OverflowMenuProps {
   open?: boolean;
 
   /**
-   * Function called to override icon rendering.
+   * A component used to render an icon.
    */
   renderIcon?: ElementType;
 
@@ -695,7 +695,7 @@ OverflowMenu.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * Function called to override icon rendering.
+   * A component used to render an icon.
    */
   // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

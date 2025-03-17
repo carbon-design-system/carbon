@@ -78,4 +78,31 @@ describe('IconButton', () => {
     );
     expect(ref).toHaveBeenCalledWith(screen.getByTestId('icon-button'));
   });
+
+  it('should set aria-pressed="true" if props.isSelected="true" and props.kind="ghost" ', () => {
+    const { rerender } = render(
+      <IconButton label="edit" kind="ghost" isSelected={true}>
+        <Edit />
+      </IconButton>
+    );
+    expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  it('should set aria-pressed="false" if props.isSelected="false" and props.kind="ghost" ', () => {
+    const { rerender } = render(
+      <IconButton label="edit" kind="ghost" isSelected={false}>
+        <Edit />
+      </IconButton>
+    );
+    expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'false');
+  });
+
+  it('should not set aria-pressed if props.isSelected is provided but props.kind is not "ghost" ', () => {
+    const { rerender } = render(
+      <IconButton label="edit" kind="primary" isSelected={true}>
+        <Edit />
+      </IconButton>
+    );
+    expect(screen.getByRole('button')).not.toHaveAttribute('aria-pressed');
+  });
 });
