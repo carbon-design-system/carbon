@@ -230,13 +230,9 @@ const IconButton = React.forwardRef(function IconButton(
         kind={kind}
         ref={ref}
         size={size}
-        className={classNames(
-          `${prefix}--btn--icon-only`,
-          {
-            [`${prefix}--btn--selected`]: isSelected,
-          },
-          className
-        )}
+        isSelected={isSelected}
+        hasIconOnly
+        className={className}
         aria-describedby={badgeCount && badgeId}>
         {children}
         {!disabled && badgeCount !== undefined && (
