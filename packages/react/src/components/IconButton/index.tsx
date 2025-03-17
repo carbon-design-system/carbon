@@ -161,9 +161,9 @@ export interface IconButtonProps
   rel?: React.AnchorHTMLAttributes<HTMLAnchorElement>['rel'];
 
   /**
-   * Specify the size of the Button. Defaults to `md`.
+   * Specify the size of the Button.
    */
-  size?: ButtonSize;
+  size?: Extract<ButtonSize, 'sm' | 'md' | 'lg'>;
 
   /**
    * Optionally specify a `target` when using an `<a>` element.
@@ -230,13 +230,9 @@ const IconButton = React.forwardRef(function IconButton(
         kind={kind}
         ref={ref}
         size={size}
-        className={classNames(
-          `${prefix}--btn--icon-only`,
-          {
-            [`${prefix}--btn--selected`]: isSelected,
-          },
-          className
-        )}
+        isSelected={isSelected}
+        hasIconOnly
+        className={className}
         aria-describedby={badgeCount && badgeId}>
         {children}
         {!disabled && badgeCount !== undefined && (
@@ -385,7 +381,7 @@ IconButton.propTypes = {
   rel: PropTypes.string,
 
   /**
-   * Specify the size of the Button. Defaults to `md`.
+   * Specify the size of the Button.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
