@@ -111,19 +111,6 @@ export const Condensed = () => {
   );
 };
 
-export const Test2 = () => {
-  // Grab the style from here to see the visual example
-  // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss
-  return (
-    <Grid condensed as="section">
-      <Column sm={4} />
-      <Column sm={4} />
-      <Column sm={4} />
-      <Column sm={4} />
-    </Grid>
-  );
-};
-
 export const FullWidth = () => {
   // Grab the style from here to see the visual example
   // https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/Grid.stories.scss

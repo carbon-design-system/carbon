@@ -418,36 +418,6 @@ export const Default = (args) => {
   );
 };
 
-export const Test1 = (args) => {
-  // Grab the style from here to see the visual example
-  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
-  function DemoContent({ children }) {
-    return (
-      <div className="outside">
-        <div className="inside">{children}</div>
-      </div>
-    );
-  }
-  return (
-    <FlexGrid {...args} as="section">
-      <Row>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>1/4</DemoContent>
-        </Column>
-      </Row>
-    </FlexGrid>
-  );
-};
-
 Default.args = {
   as: 'div',
   fullWidth: false,
