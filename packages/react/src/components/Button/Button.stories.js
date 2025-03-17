@@ -7,13 +7,11 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Add } from '@carbon/icons-react';
+import { Add, Notification } from '@carbon/icons-react';
 import { default as Button, ButtonSkeleton } from '../Button';
 import ButtonSet from '../ButtonSet';
 import mdx from './Button.mdx';
 import './button-story.scss';
-import { composeStories } from '@storybook/react';
-import * as stories from '../Breadcrumb/Breadcrumb.stories';
 
 export default {
   title: 'Components/Button',
@@ -89,11 +87,11 @@ export const Danger = (args) => {
       </Button>
       &nbsp;
       <Button kind="danger--tertiary" {...args}>
-        Tertiary Danger Button
+        Danger tertiary button
       </Button>
       &nbsp;
       <Button kind="danger--ghost" {...args}>
-        Ghost Danger Button
+        Danger ghost button
       </Button>
     </>
   );
@@ -116,6 +114,28 @@ export const IconButton = (args) => (
     {...args}
   />
 );
+
+export const IconButtonWithBadge = (args) => {
+  const { badgeCount } = args;
+
+  return (
+    <Button
+      kind="ghost"
+      size="lg"
+      badgeCount={badgeCount}
+      hasIconOnly
+      renderIcon={Notification}
+      iconDescription="Notification"
+      onClick={action('onClick')}
+      autoAlign
+      {...args}
+    />
+  );
+};
+
+IconButtonWithBadge.args = {
+  badgeCount: 4,
+};
 
 export const SetOfButtons = (args) => {
   return (

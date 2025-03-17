@@ -97,11 +97,7 @@ describe('Button', () => {
   ])(
     'should set the expected classes for the button of kind: `%s`',
     (kind, className) => {
-      render(
-        <Button className={className} kind={kind}>
-          test
-        </Button>
-      );
+      render(<Button kind={kind}>test</Button>);
       expect(screen.getByText('test')).toHaveClass(className);
     }
   );
@@ -115,11 +111,7 @@ describe('Button', () => {
   ])(
     'should set the expected classes for the button of size: `%s`',
     (size, className) => {
-      render(
-        <Button className={className} size={size}>
-          test
-        </Button>
-      );
+      render(<Button size={size}>test</Button>);
       expect(screen.getByText('test')).toHaveClass(className);
     }
   );
@@ -155,6 +147,34 @@ describe('Button', () => {
     it('should set the icon-only class', () => {
       render(<Button hasIconOnly iconDescription="test" renderIcon={Add} />);
       expect(screen.getByLabelText('test')).toHaveClass('cds--btn--icon-only');
+    });
+
+    it('should support badge indicator', () => {
+      render(
+        <Button
+          renderIcon={Add}
+          hasIconOnly
+          iconDescription="test"
+          badgeCount={12}
+          kind="ghost"
+          size="lg"
+        />
+      );
+      expect(screen.getByText('12')).toBeInTheDocument();
+    });
+
+    it('should support badge indicator and truncate', () => {
+      render(
+        <Button
+          renderIcon={Add}
+          hasIconOnly
+          iconDescription="test"
+          badgeCount={1200}
+          kind="ghost"
+          size="lg"
+        />
+      );
+      expect(screen.getByText('999+')).toBeInTheDocument();
     });
 
     it('should support rendering as a custom element with the `as` prop', () => {

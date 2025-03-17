@@ -1,4 +1,6 @@
-import { Meta } from '@storybook/blocks';
+import { Meta, Canvas } from '@storybook/blocks';
+import * as DropdownFeatureflagStories from './Dropdown.featureflag.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta title="Components/Dropdown/Feature Flag" name="Flag details" />
 
@@ -38,3 +40,12 @@ includes both the dynamic positioning styles and collision detection.
   />
 </FeatureFlags>
 ```
+<Canvas
+  of={DropdownFeatureflagStories.FloatingStyles}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DropdownFeatureflagStories.FloatingStyles),
+    },
+  ]}
+/>
