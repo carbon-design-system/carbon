@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -1182,6 +1182,29 @@ describe('Slider', () => {
         mouseDown(upperThumb, { clientX: 10 });
         mouseMove(container.firstChild, { clientX: 1000 });
         expect(onRelease).not.toHaveBeenCalled();
+      });
+
+      it("should round the slider's value when using small step values", async () => {
+        renderTwoHandleSlider({
+          value: 0,
+          min: 0,
+          max: 1,
+          step: 0.1,
+          onChange,
+        });
+        const leftHandle = screen.getAllByRole('slider')[0];
+
+        await userEvent.click(leftHandle);
+        await userEvent.keyboard('{ArrowRight}');
+        await userEvent.keyboard('{ArrowRight}');
+        await userEvent.keyboard('{ArrowRight}');
+
+        // Retrieve the last call to `onChange`.
+        const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1][0];
+
+        // Assert that the value was correctly correctly (i.e., not
+        // 0.30000000000000004).
+        expect(lastCall.value).toBe(0.3);
       });
     });
   });

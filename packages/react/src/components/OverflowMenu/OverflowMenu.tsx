@@ -12,7 +12,7 @@ import {
   type MenuDirection,
   type MenuOffset,
 } from '../../internal/FloatingMenu';
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { matches as keyCodeMatches, keys } from '../../internal/keyboard';
 
 import ClickListener from '../../internal/ClickListener';
@@ -87,11 +87,6 @@ export const getMenuOffset: MenuOffset = (
     default:
       return { left: 0, top: 0 };
   }
-};
-
-type IconProps = {
-  className?: string;
-  'aria-label'?: string;
 };
 
 export interface OverflowMenuProps {
@@ -189,9 +184,9 @@ export interface OverflowMenuProps {
   open?: boolean;
 
   /**
-   * Function called to override icon rendering.
+   * A component used to render an icon.
    */
-  renderIcon?: ComponentType<IconProps>;
+  renderIcon?: React.ElementType;
 
   /**
    * Specify a CSS selector that matches the DOM element that should
@@ -354,7 +349,7 @@ class OverflowMenu extends React.Component<
     open: PropTypes.bool,
 
     /**
-     * Function called to override icon rendering.
+     * A component used to render an icon.
      */
     renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 

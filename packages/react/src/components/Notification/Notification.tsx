@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,8 +9,6 @@ import PropTypes from 'prop-types';
 import React, {
   type ReactNode,
   type MouseEvent,
-  type ComponentType,
-  type FunctionComponent,
   type ButtonHTMLAttributes,
   type HTMLAttributes,
   useEffect,
@@ -171,12 +169,9 @@ export interface NotificationButtonProps
   notificationType?: 'toast' | 'inline' | 'actionable';
 
   /**
-   * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
+   * A component used to render an icon.
    */
-  renderIcon?:
-    | ComponentType<{ className?: string; name?: string }>
-    | FunctionComponent<{ className?: string; name?: string }>;
+  renderIcon?: React.ElementType;
 }
 
 export function NotificationButton({
@@ -244,8 +239,7 @@ NotificationButton.propTypes = {
   notificationType: PropTypes.oneOf(['toast', 'inline', 'actionable']),
 
   /**
-   * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 

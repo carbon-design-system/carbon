@@ -31,7 +31,9 @@ const prefix = 'cds';
 
 const ControlledComboBox = ({ controlledItem }) => {
   const items = generateItems(5, generateGenericItem);
-  const [value, setValue] = useState(controlledItem || items[0]);
+  const [value, setValue] = useState(
+    typeof controlledItem !== 'undefined' ? controlledItem : items[0]
+  );
   const [onChangeCallCount, setOnChangeCallCount] = useState(0);
   const [onInputChangeCallCount, setOnInputChangeCallCount] = useState(0);
   const controlledOnChange = ({ selectedItem }) => {
@@ -53,7 +55,7 @@ const ControlledComboBox = ({ controlledItem }) => {
         placeholder="Filter..."
         type="default"
       />
-      <div>value: {value?.label || 'none'}</div>
+      <div data-testid="selected-item">{value?.label || 'none'}</div>
       <div>onChangeCallCount: {onChangeCallCount}</div>
       <div>onInputChangeCallCount: {onInputChangeCallCount}</div>
       <button onClick={() => setValue(items[3])}>Choose item 3</button>
@@ -375,6 +377,44 @@ describe('ComboBox', () => {
     );
   });
 
+  it('should yield highlighted item as `selectedItem` when pressing Enter with an unmodified input value', async () => {
+    render(<ControlledComboBox controlledItem={null} />);
+
+    const input = findInputNode();
+
+    expect(screen.getByTestId('selected-item').textContent).toBe('none');
+
+    await userEvent.click(input);
+    await userEvent.type(input, 'Item 1');
+    await userEvent.keyboard('{Enter}');
+
+    expect(screen.getByTestId('selected-item').textContent).toBe('Item 1');
+
+    await userEvent.type(input, '{backspace}');
+    await userEvent.type(input, '1');
+    await userEvent.keyboard('{Enter}');
+
+    expect(screen.getByTestId('selected-item').textContent).toBe('Item 1');
+  });
+
+  it('should yield highlighted item as `selectedItem` when pressing Enter with a modified input value', async () => {
+    render(<ControlledComboBox controlledItem={null} />);
+    const input = findInputNode();
+
+    expect(screen.getByTestId('selected-item').textContent).toBe('none');
+
+    await userEvent.click(input);
+    await userEvent.type(input, 'Item 2');
+    await userEvent.keyboard('{Enter}');
+
+    expect(screen.getByTestId('selected-item').textContent).toBe('Item 2');
+
+    await userEvent.type(input, '{backspace}');
+    await userEvent.keyboard('{Enter}');
+
+    expect(screen.getByTestId('selected-item').textContent).toBe('Item 0');
+  });
+
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', async () => {
       render(
@@ -506,7 +546,7 @@ describe('ComboBox', () => {
       await openMenu();
       await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
       expect(screen.getByText('onChangeCallCount: 1')).toBeInTheDocument();
-      expect(screen.getByText('value: Item 2')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('Item 2');
       expect(
         screen.getByRole('combobox', { value: 'Item 2' })
       ).toBeInTheDocument();
@@ -521,7 +561,7 @@ describe('ComboBox', () => {
         screen.getByRole('button', { name: 'Clear selected item' })
       );
       expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
-      expect(screen.getByText('value: none')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('none');
       expect(findInputNode()).toHaveDisplayValue('');
     });
     it('should update and call `onChange` once when selection is cleared from the combobox after an external update is made, and the external state managing selectedItem is updated', async () => {
@@ -536,7 +576,7 @@ describe('ComboBox', () => {
         screen.getByRole('button', { name: 'Clear selected item' })
       );
       expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
-      expect(screen.getByText('value: none')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('none');
       expect(findInputNode()).toHaveDisplayValue('');
     });
     it('should update and call `onChange` when a combination of external and combobox selections are made', async () => {
@@ -547,17 +587,17 @@ describe('ComboBox', () => {
       );
       expect(screen.getByText('onChangeCallCount: 1')).toBeInTheDocument();
       expect(findInputNode()).toHaveDisplayValue('Item 3');
-      expect(screen.getByText('value: Item 3')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('Item 3');
       await openMenu();
       await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
       expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
       expect(findInputNode()).toHaveDisplayValue('Item 2');
-      expect(screen.getByText('value: Item 2')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('Item 2');
       await userEvent.click(
         screen.getByRole('button', { name: 'Clear selected item' })
       );
       expect(screen.getByText('onChangeCallCount: 3')).toBeInTheDocument();
-      expect(screen.getByText('value: none')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('none');
       expect(findInputNode()).toHaveDisplayValue('');
     });
     it('should update and call `onChange` once when selection is updated externally', async () => {
@@ -576,7 +616,7 @@ describe('ComboBox', () => {
       await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
       await userEvent.click(screen.getByRole('button', { name: 'reset' }));
       expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
-      expect(screen.getByText('value: none')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('none');
       expect(findInputNode()).toHaveDisplayValue('');
     });
     it('should clear selected item when `selectedItem` is updated to `null` externally', async () => {
