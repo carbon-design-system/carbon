@@ -610,29 +610,39 @@ const ComboBox = forwardRef(
           }
 
           case InputKeyDownEnter:
-            if (
-              highlightedIndex === -1 &&
-              !allowCustomValue &&
-              state.selectedItem
-            ) {
-              return {
-                ...changes,
-                selectedItem: null,
-                inputValue: state.inputValue,
-              };
-            }
-            if (allowCustomValue) {
-              setInputValue(inputValue);
-              setHighlightedIndex(changes.selectedItem);
-              if (onChange) {
-                onChange({ selectedItem: changes.selectedItem, inputValue });
+            if (!allowCustomValue) {
+              const highlightedIndex = indexToHighlight(inputValue);
+              const matchingItem = items[highlightedIndex];
+
+              if (matchingItem) {
+                // Prevent matching items that are marked as `disabled` from
+                // being selected.
+                if ((matchingItem as any).disabled) {
+                  return state;
+                }
+
+                // Select the matching item.
+                return {
+                  ...changes,
+                  selectedItem: matchingItem,
+                  inputValue: itemToString(matchingItem),
+                };
               }
-              return changes;
-            } else if (changes.selectedItem && !allowCustomValue) {
-              return changes;
-            } else {
-              return { ...changes, isOpen: true };
+
+              // If no matching item is found and there is an existing
+              // selection, clear the selection.
+              if (state.selectedItem !== null) {
+                return {
+                  ...changes,
+                  selectedItem: null,
+                  inputValue,
+                };
+              }
             }
+
+            // For `allowCustomValue` or if no matching item is found, keep the
+            // menu open.
+            return { ...changes, isOpen: true };
           case FunctionToggleMenu:
           case ToggleButtonClick:
             if (

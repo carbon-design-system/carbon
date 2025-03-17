@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,7 +21,6 @@ import React, {
   type ReactNode,
   type MouseEvent,
   type KeyboardEvent,
-  type SyntheticEvent,
   type HTMLAttributes,
   type RefObject,
   type ComponentType,
@@ -306,7 +305,7 @@ TabsVertical.propTypes = {
  * given a count of the total items and the current index
  */
 function getNextIndex(
-  event: SyntheticEvent,
+  event: KeyboardEvent,
   total: number,
   index: number
 ): number {
@@ -333,7 +332,7 @@ function getNextIndex(
  * given a count of the total items and the current index
  */
 function getNextIndexVertical(
-  event: SyntheticEvent,
+  event: KeyboardEvent,
   total: number,
   index: number
 ): number {
@@ -1179,10 +1178,9 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
   renderButton?(): ReactNode;
 
   /**
-   * Optional prop to render an icon next to the label.
-   * Can be a React component class
+   * A component used to render an icon.
    */
-  renderIcon?: ComponentType<{ size: number }>;
+  renderIcon?: React.ElementType;
 
   /**
    * An optional label to render under the primary tab label.
@@ -1484,24 +1482,23 @@ Tab.propTypes = {
    */
   onKeyDown: PropTypes.func,
 
-  /*
+  /**
    * An optional parameter to allow overriding the anchor rendering.
    * Useful for using Tab along with react-router or other client
    * side router libraries.
-   **/
+   */
   renderButton: PropTypes.func,
 
   /**
-   * Optional prop to render an icon next to the label.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   // @ts-expect-error: Invalid prop type derivation
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
-  /*
+  /**
    * An optional label to render under the primary tab label.
-  /* This prop is only useful for contained tabs
-   **/
+   * Only useful for contained tabs.
+   */
   secondaryLabel: PropTypes.string,
 };
 
