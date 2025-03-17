@@ -93,7 +93,7 @@ class CDSmenuItemSelectable extends LitElement {
         @click="${handleClick}">
         <slot slot="render-icon" name="render-icon"></slot>
 
-        ></cds-menu-item
+        </cds-menu-item
       >
     `;
   }
