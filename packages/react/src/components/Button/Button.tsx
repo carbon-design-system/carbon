@@ -205,6 +205,14 @@ const Button: ButtonComponent = React.forwardRef(
       }
 
       return (
+        // @ts-expect-error - `IconButton` does not support all `size`s that
+        // `Button` supports.
+        //
+        // TODO: What should be done here?
+        // 1. Should the `IconButton` not be rendered if the `size` is not
+        //    supported?
+        // 2. Should an error be thrown?
+        // 3. Something else?
         <IconButton
           {...rest}
           ref={ref}
