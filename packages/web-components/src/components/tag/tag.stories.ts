@@ -160,7 +160,16 @@ export const Dismissible = {
       },
     ];
 
-    return html` <cds-button>Reset</cds-button>
+    const resetTags = () => {
+      const dismissibleTags = document.querySelectorAll('cds-dismissible-tag');
+      console.log('dismissibleTags', dismissibleTags);
+      const tags = [...dismissibleTags];
+      tags.map((tag) => tag?.setAttribute('open', 'true'));
+    };
+
+    return html` <div style="margin-bottom: 3rem">
+        <cds-button @click="${resetTags}">Reset</cds-button>
+      </div>
       <br />
       ${tags.map(
         (tag) =>
@@ -221,6 +230,14 @@ export const Operational = {
   argTypes: controls,
   args: defaultArgs,
   render: ({ size }) => {
+    const togglePopover1 = () => {
+      document.querySelector('#popover-1')?.toggleAttribute('open');
+    };
+
+    const togglePopover2 = () => {
+      document.querySelector('#popover-2')?.toggleAttribute('open');
+    };
+
     const tags = [
       {
         type: 'red',
@@ -285,24 +302,26 @@ export const Operational = {
         style="display:flex; justify-content:flex-start; margin-top:1rem"
         aria-label="Operational tags with Popover"
         role="group">
-        <cds-popover open>
+        <cds-popover id="popover-1" highContrast>
           <div class="playground-trigger">
-            <cds-operational-tag text="Tag content">
+            <cds-operational-tag @click="${togglePopover1}" text="Tag content">
               ${Asleep16({ slot: 'icon' })}
             </cds-operational-tag>
           </div>
-          <cds-popover-content>
-            <p>Tag 1 name</p>
-            <p>Tag 2 name</p>
-            <p>Tag 3 name</p>
-            <p>Tag 4 name</p>
-            <p>Tag 5 name</p>
+          <cds-popover-content class="popover-content">
+            <div style="line-height: 0; padding: 1rem">
+              <p style="font-size: 14px">Tag 1 name</p>
+              <p style="font-size: 14px">Tag 2 name</p>
+              <p style="font-size: 14px">Tag 3 name</p>
+              <p style="font-size: 14px">Tag 4 name</p>
+              <p style="font-size: 14px">Tag 5 name</p>
+            </div>
           </cds-popover-content>
         </cds-popover>
 
-        <cds-popover open>
+        <cds-popover id="popover-2">
           <div class="playground-trigger">
-            <cds-operational-tag text="Tag content">
+            <cds-operational-tag @click="${togglePopover2}" text="Tag content">
               ${Asleep16({ slot: 'icon' })}
             </cds-operational-tag>
           </div>
