@@ -139,7 +139,11 @@ const PageHeaderContent = React.forwardRef<
           {subTitle}
         </div>
       )}{' '}
-      <div className={`${prefix}--page-header__content__body`}>{children}</div>
+      {children && (
+        <div className={`${prefix}--page-header__content__body`}>
+          {children}
+        </div>
+      )}
     </div>
   );
 });
@@ -164,7 +168,7 @@ const PageHeaderTabBar = React.forwardRef<
   const prefix = usePrefix();
   const classNames = classnames(
     {
-      [`${prefix}--page-header__content`]: true,
+      [`${prefix}--page-header__tab-bar`]: true,
     },
     className
   );

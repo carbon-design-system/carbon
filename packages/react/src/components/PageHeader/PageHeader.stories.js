@@ -100,6 +100,7 @@ export const BreadcrumbBar = (args) => (
 
 export const Content = (args) => (
   <PageHeader.Root>
+    <PageHeader.BreadcrumbBar />
     <PageHeader.Content
       title="hello"
       subTitle="subTitle"
@@ -107,6 +108,7 @@ export const Content = (args) => (
       contextualActions={
         <>
           <Dropdown
+            style={{ paddingRight: '1rem' }}
             className="dropdown"
             hideLabel
             id="default"
@@ -144,20 +146,9 @@ export const Content = (args) => (
       pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
       Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
     </PageHeader.Content>
+    <PageHeader.TabBar />
   </PageHeader.Root>
 );
-
-// Content.args = {
-//   // flipped: document?.dir === 'rtl',
-//   // focusTrap: false,
-//   // open: false,
-// };
-
-// Content.argTypes = {
-//   title: {
-//     control: 'string'
-//   }
-// }
 
 export const TabBar = (args) => (
   <PageHeader.Root>
