@@ -162,7 +162,6 @@ export const Dismissible = {
 
     const resetTags = () => {
       const dismissibleTags = document.querySelectorAll('cds-dismissible-tag');
-      console.log('dismissibleTags', dismissibleTags);
       const tags = [...dismissibleTags];
       tags.map((tag) => tag?.setAttribute('open', 'true'));
     };
@@ -230,12 +229,19 @@ export const Operational = {
   argTypes: controls,
   args: defaultArgs,
   render: ({ size }) => {
-    const togglePopover1 = () => {
-      document.querySelector('#popover-1')?.toggleAttribute('open');
-    };
-
-    const togglePopover2 = () => {
-      document.querySelector('#popover-2')?.toggleAttribute('open');
+    const togglePopover = (e) => {
+      if (e instanceof PointerEvent) {
+        const popoverElement = (e.target as HTMLElement)?.parentElement
+          ?.parentElement;
+        popoverElement?.toggleAttribute('open');
+      }
+      if (e instanceof KeyboardEvent) {
+        if (e.key === ' ' || e.key === 'Enter') {
+          const popoverElement = (e.target as HTMLElement)?.parentElement
+            ?.parentElement;
+          popoverElement?.toggleAttribute('open');
+        }
+      }
     };
 
     const tags = [
@@ -302,9 +308,12 @@ export const Operational = {
         style="display:flex; justify-content:flex-start; margin-top:1rem"
         aria-label="Operational tags with Popover"
         role="group">
-        <cds-popover id="popover-1" highContrast>
+        <cds-popover highContrast>
           <div class="playground-trigger">
-            <cds-operational-tag @click="${togglePopover1}" text="Tag content">
+            <cds-operational-tag
+              @click="${togglePopover}"
+              @keydown="${togglePopover}"
+              text="Tag content">
               ${Asleep16({ slot: 'icon' })}
             </cds-operational-tag>
           </div>
@@ -319,9 +328,12 @@ export const Operational = {
           </cds-popover-content>
         </cds-popover>
 
-        <cds-popover id="popover-2">
+        <cds-popover>
           <div class="playground-trigger">
-            <cds-operational-tag @click="${togglePopover2}" text="Tag content">
+            <cds-operational-tag
+              @click="${togglePopover}"
+              @keydown="${togglePopover}"
+              text="Tag content">
               ${Asleep16({ slot: 'icon' })}
             </cds-operational-tag>
           </div>
