@@ -811,6 +811,9 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           this._dragging = false;
         }
       }
+      if (changedProperties.has('invalid')) {
+        input.invalid = this.invalid;
+      }
       if (input) {
         if (
           (this.unstable_valueUpper || this.unstable_valueUpper === '') &&
