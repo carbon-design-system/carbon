@@ -1,17 +1,15 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const glob = require('fast-glob');
-const fs = require('fs-extra');
-const path = require('path');
-const { createLogger } = require('../logger');
-const { createJson, createMarkdown } = require('./sassdoc/tools');
+import glob from 'fast-glob';
+import fs from 'fs-extra';
+import path from 'path';
+import { createLogger } from '../logger.js';
+import { createJson, createMarkdown } from './sassdoc/tools.js';
 
 const logger = createLogger('sassdoc');
 
@@ -59,32 +57,31 @@ async function sassdoc({
   logger.stop();
 }
 
-module.exports = {
-  command: 'sassdoc <glob>',
-  desc: 'generate sassdoc as markdown',
-  builder(yargs) {
-    yargs.positional('glob', {
-      type: 'string',
-      describe: 'glob pattern for files to check',
-    });
+export const builder = (yargs) => {
+  yargs.positional('glob', {
+    type: 'string',
+    describe: 'glob pattern for files to check',
+  });
 
-    yargs.options({
-      i: {
-        alias: 'ignore',
-        describe: 'provide a glob pattern of files to ignore',
-        type: 'string',
-      },
-      j: {
-        alias: 'json',
-        describe: 'output as json file',
-        type: 'boolean',
-      },
-      o: {
-        alias: 'output',
-        describe: 'specify the directory in which the files are output',
-        type: 'string',
-      },
-    });
-  },
-  handler: sassdoc,
+  yargs.options({
+    i: {
+      alias: 'ignore',
+      describe: 'provide a glob pattern of files to ignore',
+      type: 'string',
+    },
+    j: {
+      alias: 'json',
+      describe: 'output as json file',
+      type: 'boolean',
+    },
+    o: {
+      alias: 'output',
+      describe: 'specify the directory in which the files are output',
+      type: 'string',
+    },
+  });
 };
+
+export const command = 'sassdoc <glob>';
+export const desc = 'generate sassdoc as markdown';
+export const handler = sassdoc;

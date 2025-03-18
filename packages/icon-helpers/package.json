@@ -37,7 +37,7 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
-    "@carbon/cli": "^11.24.0",
+    "@carbon/cli": "11.25.0",
     "rimraf": "^6.0.0",
     "typescript-config-carbon": "^0.5.0"
   },

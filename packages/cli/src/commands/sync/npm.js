@@ -1,14 +1,12 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const fs = require('fs-extra');
-const path = require('path');
+import fs from 'fs-extra';
+import path from 'path';
 
 const defaultIgnorePatterns = [
   '**/__mocks__/**',
@@ -17,7 +15,7 @@ const defaultIgnorePatterns = [
   '**/tasks/**',
 ];
 
-function run({ packagePaths }) {
+export default async function run({ packagePaths }) {
   return Promise.all(
     packagePaths.map(async ({ packagePath }) => {
       const ignorePath = path.join(packagePath, '.npmignore');
@@ -37,7 +35,4 @@ function run({ packagePaths }) {
   );
 }
 
-module.exports = {
-  name: 'npm',
-  run,
-};
+export const name = 'npm';

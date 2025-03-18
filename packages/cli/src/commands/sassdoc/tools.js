@@ -1,15 +1,13 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const prettier = require('prettier2');
-const sassdoc = require('sassdoc');
-const toc = require('markdown-toc');
+import prettier from 'prettier2';
+import sassdoc from 'sassdoc';
+import toc from 'markdown-toc';
 
 const prettierOptions = {
   parser: 'markdown',
@@ -39,7 +37,7 @@ const slugify = (title) => {
  * @param {object} config - configuration object
  * @returns {object} json object
  */
-async function createJson(sourceDir, config) {
+export async function createJson(sourceDir, config) {
   config = config || {};
 
   return sassdoc.parse(sourceDir, config).then(
@@ -308,13 +306,6 @@ ${item.example[0].code}
     });
   }
 
-  // if (item.since && item.since.length) {
-  //   metadata.push({
-  //     key: 'Since',
-  //     value: item.since[0].version,
-  //   });
-  // }
-
   if (item.link && item.link.length) {
     let subbullets = '';
 
@@ -353,7 +344,7 @@ ${item.example[0].code}
  * @param {object} config - configuration object
  * @returns {string} markdown
  */
-async function createMarkdown(sourceDir, config) {
+export async function createMarkdown(sourceDir, config) {
   config = config || {};
 
   return sassdoc.parse(sourceDir, config).then(
@@ -398,8 +389,3 @@ async function createMarkdown(sourceDir, config) {
     }
   );
 }
-
-module.exports = {
-  createJson,
-  createMarkdown,
-};

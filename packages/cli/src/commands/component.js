@@ -1,18 +1,16 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const { paramCase } = require('change-case');
-const fs = require('fs-extra');
-const { prompt } = require('enquirer');
-const path = require('path');
-const { loadTemplates } = require('../component');
-const { createLogger } = require('../logger');
+import { paramCase } from 'change-case';
+import fs from 'fs-extra';
+import inquirer from 'inquirer';
+import path from 'path';
+import { loadTemplates } from '../component/index.js';
+import { createLogger } from '../logger.js';
 
 const logger = createLogger('component');
 
@@ -64,7 +62,7 @@ async function component() {
   ];
 
   clearConsole();
-  const answers = await prompt(questions);
+  const answers = await inquirer.prompt(questions);
 
   logger.start('Generating component...');
 
@@ -123,8 +121,6 @@ async function component() {
   logger.stop();
 }
 
-module.exports = {
-  command: 'component',
-  desc: '[EXPERIMENTAL] Scaffold a component in React',
-  handler: component,
-};
+export const command = 'component';
+export const desc = '[EXPERIMENTAL] Scaffold a component in React';
+export const handler = component;

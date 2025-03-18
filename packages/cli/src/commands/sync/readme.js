@@ -1,18 +1,16 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const fs = require('fs-extra');
-const path = require('path');
-const prettier = require('prettier2');
-const prettierConfig = require('prettier-config-carbon');
-const createRemark = require('remark');
-const monorepo = require('./remark/remark-monorepo');
+import fs from 'fs-extra';
+import path from 'path';
+import prettier from 'prettier2';
+import prettierConfig from 'prettier-config-carbon';
+import createRemark from 'remark';
+import monorepo from './remark/remark-monorepo.js';
 
 const packageDenyList = new Set([
   'carbon-components',
@@ -21,7 +19,7 @@ const packageDenyList = new Set([
   '@carbon/styles',
 ]);
 
-function run({ root, packagePaths }) {
+export default async function run({ root, packagePaths }) {
   const remark = createRemark().use(monorepo, {
     root: root.directory,
   });
@@ -61,7 +59,4 @@ function process(remark, cwd, contents) {
   });
 }
 
-module.exports = {
-  name: 'readme',
-  run,
-};
+export const name = 'readme';

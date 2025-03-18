@@ -1,17 +1,15 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import path from 'path';
+import fs from 'fs-extra';
+import { pascalCase } from 'change-case';
 
-const path = require('path');
-const fs = require('fs-extra');
-const { pascalCase } = require('change-case');
-
-function formatGlobals(string) {
+export function formatGlobals(string) {
   const mappings = string.split(',').map((mapping) => {
     return mapping.split('=');
   });
@@ -24,7 +22,7 @@ function formatGlobals(string) {
   );
 }
 
-function formatDependenciesIntoGlobals(dependencies) {
+export function formatDependenciesIntoGlobals(dependencies) {
   return Object.keys(dependencies).reduce((acc, key) => {
     const parts = key.split('/').map((identifier, i) => {
       if (i === 0) {
@@ -40,7 +38,7 @@ function formatDependenciesIntoGlobals(dependencies) {
   }, {});
 }
 
-async function findPackageFolder(entrypoint) {
+export async function findPackageFolder(entrypoint) {
   let packageFolder = entrypoint;
 
   while (packageFolder !== '/' && path.dirname(packageFolder) !== '/') {
@@ -54,9 +52,3 @@ async function findPackageFolder(entrypoint) {
 
   return packageFolder;
 }
-
-module.exports = {
-  formatGlobals,
-  formatDependenciesIntoGlobals,
-  findPackageFolder,
-};

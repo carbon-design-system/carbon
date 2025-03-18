@@ -1,15 +1,11 @@
 #!/usr/bin/env node
 
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-/* eslint-disable no-console */
-
-'use strict';
 
 // Inspired by Create React App
 // https://github.com/facebook/create-react-app/blob/next/packages/create-react-app/index.js
@@ -21,11 +17,12 @@ process.on('unhandledRejection', (error) => {
   console.error(error);
 });
 
-var chalk = require('chalk');
+import chalk from 'chalk';
+import main from '../src/cli.js'; // Assuming cli.js is the path to the file
 
-var currentNodeVersion = process.versions.node;
-var semver = currentNodeVersion.split('.');
-var major = semver[0];
+const currentNodeVersion = process.versions.node;
+const semver = currentNodeVersion.split('.');
+const major = semver[0];
 
 if (major < 8) {
   console.error(
@@ -37,8 +34,6 @@ if (major < 8) {
   );
   process.exit(1);
 }
-
-var main = require('../src/cli');
 
 main(process).catch((error) => {
   console.error(error);

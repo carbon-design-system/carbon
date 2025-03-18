@@ -5,11 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import chalk from 'chalk';
 
-const chalk = require('chalk');
-
-class ConsoleReporter {
+export class ConsoleReporter {
   constructor({
     stderr = process.stderr,
     stdin = process.stdin,
@@ -53,7 +51,6 @@ class ConsoleReporter {
   }
 }
 
-module.exports = {
-  ConsoleReporter,
-  reporter: new ConsoleReporter(),
-};
+const reporter = new ConsoleReporter();
+
+export default reporter;
