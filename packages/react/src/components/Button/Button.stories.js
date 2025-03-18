@@ -64,7 +64,6 @@ export const Default = (args) => {
   return (
     <Stack gap={7}>
       <Button {...args}>Button</Button>
-
       <Button renderIcon={Add} {...args}>
         Button
       </Button>
@@ -78,7 +77,6 @@ export const Secondary = (args) => {
       <Button kind="secondary" {...args}>
         Button
       </Button>
-
       <Button kind="secondary" renderIcon={Add} {...args}>
         Button
       </Button>
@@ -92,7 +90,6 @@ export const Tertiary = (args) => {
       <Button kind="tertiary" {...args}>
         Button
       </Button>
-
       <Button kind="tertiary" renderIcon={Add} {...args}>
         Button
       </Button>
@@ -124,7 +121,6 @@ export const Ghost = (args) => {
       <Button kind="ghost" {...args}>
         Button
       </Button>
-
       <Button kind="ghost" renderIcon={Add} {...args}>
         Button
       </Button>
