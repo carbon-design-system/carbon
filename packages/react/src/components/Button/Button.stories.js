@@ -74,17 +74,29 @@ export const Default = (args) => {
 
 export const Secondary = (args) => {
   return (
-    <Button kind="secondary" {...args}>
-      Button
-    </Button>
+    <Stack gap={7}>
+      <Button kind="secondary" {...args}>
+        Button
+      </Button>
+
+      <Button kind="secondary" renderIcon={Add} {...args}>
+        Button
+      </Button>
+    </Stack>
   );
 };
 
 export const Tertiary = (args) => {
   return (
-    <Button kind="tertiary" {...args}>
-      Button
-    </Button>
+    <Stack gap={7}>
+      <Button kind="tertiary" {...args}>
+        Button
+      </Button>
+
+      <Button kind="tertiary" renderIcon={Add} {...args}>
+        Button
+      </Button>
+    </Stack>
   );
 };
 
@@ -108,9 +120,15 @@ export const Danger = (args) => {
 
 export const Ghost = (args) => {
   return (
-    <Button kind="ghost" {...args}>
-      Button
-    </Button>
+    <Stack gap={7}>
+      <Button kind="ghost" {...args}>
+        Button
+      </Button>
+
+      <Button kind="ghost" renderIcon={Add} {...args}>
+        Button
+      </Button>
+    </Stack>
   );
 };
 
