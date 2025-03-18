@@ -8,9 +8,12 @@
 import * as FeatureFlags from '@carbon/feature-flags';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { forwardRef, type ElementType, type ReactElement } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import { PolymorphicProps } from '../../types/common';
+import {
+  PolymorphicComponentPropWithRef,
+  PolymorphicRef,
+} from '../../internal/PolymorphicProps';
 import { useGridSettings } from './GridContext';
 
 type ColumnSpanPercent = '25%' | '50%' | '75%' | '100%';
@@ -87,36 +90,40 @@ export interface ColumnBaseProps {
   span?: ColumnSpan;
 }
 
-export type ColumnProps<T extends React.ElementType> = PolymorphicProps<
-  T,
-  ColumnBaseProps
->;
+export type ColumnProps<T extends ElementType> =
+  PolymorphicComponentPropWithRef<T, ColumnBaseProps>;
 
-export interface ColumnComponent {
-  <T extends React.ElementType>(
-    props: ColumnProps<T>,
-    context?: any
-  ): React.ReactElement<any, any> | null;
+// Define the ColumnComponent interface with both the function type and static properties
+interface ColumnComponentType {
+  <T extends ElementType = 'div'>(
+    props: ColumnProps<T> & { ref?: PolymorphicRef<T> }
+  ): ReactElement | null;
+  propTypes: PropTypes.InferProps<any>;
 }
 
-function Column<T extends React.ElementType>({
-  as: BaseComponent = 'div' as T,
-  children,
-  className: customClassName,
-  sm,
-  md,
-  lg,
-  xlg,
-  max,
-  ...rest
-}: ColumnProps<T>) {
+const ColumnWithForwardRef = <T extends ElementType = 'div'>(
+  {
+    as,
+    children,
+    className: customClassName,
+    sm,
+    md,
+    lg,
+    xlg,
+    max,
+    ...rest
+  }: ColumnProps<T>,
+  ref: PolymorphicRef<T>
+) => {
   const { mode } = useGridSettings();
   const prefix = usePrefix();
+  const BaseComponent = as ?? 'div';
 
   if (mode === 'css-grid') {
     return (
       <CSSGridColumn
         as={BaseComponent}
+        ref={ref}
         className={customClassName}
         sm={sm}
         md={md}
@@ -137,14 +144,15 @@ function Column<T extends React.ElementType>({
     [`${prefix}--col`]: columnClassName.length === 0,
   });
 
-  // cast as any to let TypeScript allow passing in attributes to base component
-  const BaseComponentAsAny: any = BaseComponent;
   return (
-    <BaseComponentAsAny className={className} {...rest}>
+    <BaseComponent className={className} ref={ref} {...rest}>
       {children}
-    </BaseComponentAsAny>
+    </BaseComponent>
   );
-}
+};
+
+// Cast to ColumnComponentType to allow propTypes assignment
+const Column = forwardRef(ColumnWithForwardRef) as ColumnComponentType;
 
 const percentSpanType = PropTypes.oneOf(['25%', '50%', '75%', '100%']);
 
@@ -500,4 +508,4 @@ function getClassNameForSpan(
   return classNames.join('');
 }
 
-export default Column as ColumnComponent;
+export default Column;
