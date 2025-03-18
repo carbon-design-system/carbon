@@ -22,11 +22,11 @@ const args = {
   invalidText: 'Invalid time format',
   labelText: 'Select a time',
   placeholder: 'hh:mm',
-  readonly: false,
+  readOnly: false,
   size: 'md',
   value: '',
-  warn: false,
-  warnText: 'This is a warning message.',
+  warning: false,
+  warningText: 'This is a warning message.',
   maxLength: 5,
   type: 'text',
 };
@@ -56,9 +56,9 @@ const argTypes = {
     control: 'text',
     description: 'Placeholder text (placeholder)',
   },
-  readonly: {
+  readOnly: {
     control: 'boolean',
-    description: 'Read only (readonly)',
+    description: 'Read only (readOnly)',
   },
   size: {
     options: ['sm', 'md', 'lg'],
@@ -69,13 +69,13 @@ const argTypes = {
     control: 'text',
     description: 'Value (value)',
   },
-  warn: {
+  warning: {
     control: 'boolean',
-    description: 'Warn (warn)',
+    description: 'Warning (warning)',
   },
-  warnText: {
+  warningText: {
     control: 'text',
-    description: 'Warn text (warn-text)',
+    description: 'Warn text (warning-text)',
   },
   maxLength: {
     control: 'number',
@@ -97,54 +97,50 @@ export const Default = {
     invalidText,
     labelText,
     placeholder,
-    readonly,
+    readOnly,
     size,
     value,
-    warn,
-    warnText,
+    warning,
+    warningText,
     maxLength,
     type,
   }) => html`
-    <cds-form-item>
-      <cds-time-picker
-        id="time-picker"
-        ?hide-label="${hideLabel}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label-text="${ifDefined(labelText)}"
-        placeholder="${ifDefined(placeholder)}"
-        ?readonly="${readonly}"
+    <cds-time-picker
+      id="time-picker"
+      ?hide-label="${hideLabel}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label-text="${ifDefined(labelText)}"
+      placeholder="${ifDefined(placeholder)}"
+      ?readonly="${readOnly}"
+      ?disabled="${disabled}"
+      size="${ifDefined(size)}"
+      value="${ifDefined(value)}"
+      ?warning="${warning}"
+      max-length="${ifDefined(maxLength)}"
+      type="${ifDefined(type)}"
+      warning-text="${ifDefined(warningText)}">
+      <cds-time-picker-select
+        default-value="AM"
+        id="time-picker-select-1"
         ?disabled="${disabled}"
-        size="${ifDefined(size)}"
-        value="${ifDefined(value)}"
-        ?warning="${warn}"
-        max-length="${ifDefined(maxLength)}"
-        type="${ifDefined(type)}"
-        warning-text="${ifDefined(warnText)}">
-        <cds-time-picker-select
-          default-value="AM"
-          id="time-picker-select-1"
-          ?disabled="${disabled}"
-          aria-label="Select AM/PM"
-          slot="time-picker-select">
-          <cds-select-item value="AM" selected="true">AM</cds-select-item>
-          <cds-select-item value="PM">PM</cds-select-item>
-        </cds-time-picker-select>
-        <cds-time-picker-select
-          default-value="Time zone 1"
-          id="time-picker-select-2"
-          ?disabled="${disabled}"
-          aria-label="Select timezone"
-          slot="time-picker-select">
-          <cds-select-item value="Time zone 1" text="Time zone 1"
-            >Time zone 1</cds-select-item
-          >
-          <cds-select-item value="Time zone 2" text="Time zone 2" selected
-            >Time zone 2</cds-select-item
-          >
-        </cds-time-picker-select>
-      </cds-time-picker>
-    </cds-form-item>
+        aria-label="Select AM/PM">
+        <cds-select-item value="AM" selected="true">AM</cds-select-item>
+        <cds-select-item value="PM">PM</cds-select-item>
+      </cds-time-picker-select>
+      <cds-time-picker-select
+        default-value="Time zone 1"
+        id="time-picker-select-2"
+        ?disabled="${disabled}"
+        aria-label="Select timezone">
+        <cds-select-item value="Time zone 1" text="Time zone 1"
+          >Time zone 1</cds-select-item
+        >
+        <cds-select-item value="Time zone 2" text="Time zone 2" selected
+          >Time zone 2</cds-select-item
+        >
+      </cds-time-picker-select>
+    </cds-time-picker>
   `,
 };
 
@@ -158,16 +154,14 @@ export const WithLayer = {
         <cds-time-picker-select
           id="time-picker-select-1"
           default-value="AM"
-          aria-label="Select AM/PM"
-          slot="time-picker-select">
+          aria-label="Select AM/PM">
           <cds-select-item value="AM">AM</cds-select-item>
           <cds-select-item value="PM" selected>PM</cds-select-item>
         </cds-time-picker-select>
         <cds-time-picker-select
           id="time-picker-select-2"
           aria-label="Select timezone"
-          default-value="Time zone 1"
-          slot="time-picker-select">
+          default-value="Time zone 1">
           <cds-select-item value="Time zone 1" text="Time zone 1"
             >Time zone 1</cds-select-item
           >

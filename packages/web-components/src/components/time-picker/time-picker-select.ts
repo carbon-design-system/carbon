@@ -50,10 +50,10 @@ class CDSTimePickerSelect extends FormMixin(LitElement) {
   defaultValue = '';
 
   /**
-   * Controls the readonly state of the select
+   * Controls the readOnly state of the select
    */
   @property({ type: Boolean, reflect: true })
-  readonly = false;
+  readOnly = false;
 
   /**
    * Specify whether the control is disabled
@@ -192,16 +192,9 @@ class CDSTimePickerSelect extends FormMixin(LitElement) {
       size,
       id,
       value,
-      readonly,
+      readOnly,
       _handleInput: handleInput,
     } = this;
-    const selectClasses = classMap({
-      [`${prefix}--select`]: true,
-      [`${prefix}--time-picker__select`]: true,
-      [`${prefix}--select--disabled`]: disabled,
-      [`${prefix}--select--readonly`]: readonly,
-      [`${prefix}--select-input--${size}`]: size,
-    });
 
     const inputClasses = classMap({
       [`${prefix}--select-input`]: true,
@@ -209,19 +202,17 @@ class CDSTimePickerSelect extends FormMixin(LitElement) {
     });
 
     return html`
-      <div class="${selectClasses}">
-        <select
-          id="${ifDefined(id)}"
-          class="${inputClasses}"
-          aria-readonly="${String(Boolean(this.readonly))}"
-          ?disabled="${disabled}"
-          aria-label="${ifDefined(ariaLabel)}"
-          .value="${ifDefined(value)}"
-          @input="${handleInput}">
-          ${this._renderItems()}
-        </select>
-        ${ChevronDown16({ class: `${prefix}--select__arrow` })}
-      </div>
+      <select
+        id="${ifDefined(id)}"
+        class="${inputClasses}"
+        aria-readonly="${String(Boolean(readOnly))}"
+        ?disabled="${disabled}"
+        aria-label="${ifDefined(ariaLabel)}"
+        .value="${ifDefined(value)}"
+        @input="${handleInput}">
+        ${this._renderItems()} aria-hidden="true"
+      </select>
+      ${ChevronDown16({ class: `${prefix}--select__arrow` })}
     `;
   }
   static get eventSelect() {

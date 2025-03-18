@@ -19,7 +19,6 @@ import { prefix } from '../../globals/settings';
 import styles from './time-picker.scss?lit';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { TIME_PICKER_SIZE } from './defs';
-import '../select/select';
 
 /**
  * Time Picker component.
@@ -52,82 +51,12 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
     );
   }
 
-  protected _handleClick(event: MouseEvent) {
-    if (!this.disabled && !this.readonly) {
-      this.dispatchEvent(
-        new CustomEvent('click', {
-          bubbles: true,
-          composed: true,
-          detail: { event },
-        })
-      );
-    }
-  }
-
-  protected _handleBlur(event: FocusEvent) {
-    if (!this.disabled) {
-      this.dispatchEvent(
-        new CustomEvent('blur', {
-          bubbles: true,
-          composed: true,
-          detail: { event },
-        })
-      );
-    }
-  }
-
-  /**
-   * Propagates properties to child elements
-   * @param elements The elements to update with current properties
-   */
-  protected propagatePropertiesToChildren(elements: Element[]) {
-    elements.forEach((element) => {
-      if (element.tagName.toLowerCase() === `${prefix}-time-picker-select`) {
-        // Propagate properties to children
-        if (this.disabled) {
-          element.setAttribute('disabled', '');
-        } else {
-          element.removeAttribute('disabled');
-        }
-
-        if (this.readonly) {
-          element.setAttribute('readonly', '');
-        } else {
-          element.removeAttribute('readonly');
-        }
-
-        if (this.size) {
-          element.setAttribute('size', this.size);
-        }
-      }
-    });
-  }
-
   /**
    * Handle slotchange event for time-picker-select slot
    * to propagate properties to child elements
    */
-  protected _handleSlotChange(event: Event) {
-    const slot = event.target as HTMLSlotElement;
-    const elements = slot.assignedElements();
-    this.propagatePropertiesToChildren(elements);
-  }
-
-  /**
-   * Updates the properties of child elements
-   * This is called whenever readonly or disabled properties change
-   */
-  protected updateChildProperties() {
-    // Use a small timeout to ensure DOM is ready
-    setTimeout(() => {
-      const slot = this.shadowRoot?.querySelector(
-        'slot[name="time-picker-select"]'
-      );
-      if (slot && slot instanceof HTMLSlotElement) {
-        const elements = slot.assignedElements();
-        this.propagatePropertiesToChildren(elements);
-      }
-    }, 0);
+  protected _handleSlotChange() {
+    this.requestUpdate();
   }
 
   _handleFormdata(event: Event) {
@@ -196,7 +125,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
    * Specify whether the control should be read-only
    */
   @property({ type: Boolean, reflect: true })
-  readonly = false;
+  readOnly = false;
 
   /**
    * Specify the maximum length of the input value
@@ -268,15 +197,13 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
       warningText,
       labelText,
       placeholder,
-      readonly,
+      readOnly,
       maxLength,
       pattern,
       size,
       type,
       value,
       _handleInput: handleInput,
-      _handleClick: handleClick,
-      _handleBlur: handleBlur,
       _handleSlotChange: handleSlotChange,
     } = this;
 
@@ -290,7 +217,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--time-picker`]: true,
       [`${prefix}--time-picker--invalid`]: invalid,
       [`${prefix}--time-picker--warning`]: warning,
-      [`${prefix}--time-picker--readonly`]: readonly,
+      [`${prefix}--time-picker--readonly`]: readOnly,
       [`${prefix}--time-picker--${size}`]: size,
       ...(className && { [className]: true }),
     });
@@ -318,12 +245,10 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
               name="${ifNonEmpty(this.name)}"
               pattern="${ifNonEmpty(pattern)}"
               placeholder="${ifNonEmpty(placeholder)}"
-              ?readonly="${readonly}"
+              ?readonly="${readOnly}"
               type="${ifNonEmpty(type)}"
               .value="${value}"
-              @input="${handleInput}"
-              @click="${handleClick}"
-              @blur="${handleBlur}" />
+              @input="${handleInput}" />
             ${invalid || warning
               ? html`
                   <div class="${prefix}--time-picker__error__icon">
@@ -338,9 +263,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
                 `
               : null}
           </div>
-          <slot
-            name="time-picker-select"
-            @slotchange="${handleSlotChange}"></slot>
+          <slot @slotchange="${handleSlotChange}"></slot>
         </div>
         ${invalid || warning
           ? html`
@@ -353,17 +276,26 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
     `;
   }
   updated(changedProperties) {
-    super.updated && super.updated(changedProperties);
+    super.updated(changedProperties);
 
-    // Propagate properties to children whenever readonly or disabled changes
-    if (
-      changedProperties.has('readonly') ||
-      changedProperties.has('disabled') ||
-      changedProperties.has('size')
-    ) {
-      this.updateChildProperties();
-    }
+    const { selectorTimePickerSelect } = this
+      .constructor as typeof CDSTimePicker;
+    const timePickerSelects = this.querySelectorAll(selectorTimePickerSelect);
+
+    ['disabled', 'readOnly', 'size'].forEach((name) => {
+      if (changedProperties.has(name)) {
+        const { [name as keyof CDSTimePicker]: value } = this;
+        // Propagate the property to descendants
+        timePickerSelects.forEach((elem: any) => {
+          elem[name] = value;
+        });
+      }
+    });
   }
+  static get selectorTimePickerSelect() {
+    return `${prefix}-time-picker-select`;
+  }
+
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,

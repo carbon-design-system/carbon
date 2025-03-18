@@ -19,8 +19,21 @@ $css--plex: true !default;
   @include emit-layout-tokens();
 }
 
+:host(#{$prefix}-time-picker-select) {
+  @extend .#{$prefix}--select;
+  @extend .#{$prefix}--time-picker__select;
+}
+
 :host(#{$prefix}-time-picker-select) .#{$prefix}--select {
-  inline-size: auto;
+  inline-size: 100%;
+}
+
+:host(#{$prefix}-time-picker-select[disabled]) {
+  @extend .#{$prefix}--select--disabled;
+}
+
+:host(#{$prefix}-time-picker-select[readonly]) {
+  @extend .#{$prefix}--select--readonly;
 }
 
 :host(#{$prefix}-time-picker-select[readonly]) select {
