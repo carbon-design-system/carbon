@@ -123,7 +123,6 @@ const ColumnWithForwardRef = <T extends ElementType = 'div'>(
     return (
       <CSSGridColumn
         as={BaseComponent}
-        ref={ref}
         className={customClassName}
         sm={sm}
         md={md}
