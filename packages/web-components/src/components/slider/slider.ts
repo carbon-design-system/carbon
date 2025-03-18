@@ -887,6 +887,24 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       [`${prefix}--slider--disabled`]: disabled,
       [`${prefix}--slider--readonly`]: readonly,
     });
+    const thumbLowerClasses = classMap({
+      [`${prefix}--icon-tooltip`]:
+        unstable_valueUpper || unstable_valueUpper === '',
+      [`${prefix}--slider__thumb-wrapper`]:
+        unstable_valueUpper || unstable_valueUpper === '',
+      [`${prefix}--slider__thumb-wrapper--lower`]:
+        unstable_valueUpper || unstable_valueUpper === '',
+      [`${prefix}--slider__thumb`]: !(
+        unstable_valueUpper || unstable_valueUpper === ''
+      ),
+      [`${prefix}--slider__thumb-disabled`]: disabled,
+    });
+    const thumbUpperClasses = classMap({
+      [`${prefix}--icon-tooltip`]: true,
+      [`${prefix}--slider__thumb-wrapper`]: true,
+      [`${prefix}--slider__thumb-wrapper--upper`]: true,
+      [`${prefix}--slider__thumb-disabled`]: disabled,
+    });
     return html`
       <label class="${labelClasses}" @click="${handleClickLabel}">
         <slot name="label-text">${labelText}</slot>
@@ -908,9 +926,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           role="presentation">
           <div
             id="thumb"
-            class="${unstable_valueUpper || unstable_valueUpper === ''
-              ? `${prefix}--icon-tooltip ${prefix}--slider__thumb-wrapper ${prefix}--slider__thumb-wrapper--lower`
-              : `${prefix}--slider__thumb`}"
+            class="${thumbLowerClasses}"
             role="slider"
             tabindex="${!readonly ? 0 : -1}"
             aria-valuemax="${max}"
@@ -948,7 +964,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             ? html`
                 <div
                   id="thumb-upper"
-                  class="${prefix}--icon-tooltip ${prefix}--slider__thumb-wrapper ${prefix}--slider__thumb-wrapper--upper"
+                  class="${thumbUpperClasses}"
                   role="slider"
                   tabindex="${!readonly ? 0 : -1}"
                   aria-valuemax="${max}"

@@ -63,3 +63,6 @@ $css--plex: true !default;
   .#{$prefix}--slider__thumb-icon--focus {
   display: block;
 }
+.#{$prefix}--slider__thumb-disabled {
+  pointer-events: none;
+}
