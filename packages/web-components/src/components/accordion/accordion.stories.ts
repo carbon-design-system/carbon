@@ -105,6 +105,66 @@ export const Default = {
   },
 };
 
+export const Controlled = {
+  // This story doesn't accept any args.
+  args: {},
+  argTypes: {},
+  render: () => {
+    const toggleItems = (isOpen) => {
+      document.querySelectorAll('cds-accordion-item').forEach((item) => {
+        if (isOpen) {
+          item.setAttribute('open', '');
+        } else {
+          item.removeAttribute('open');
+        }
+      });
+    };
+    return html`
+      <cds-button @click=${() => toggleItems(true)}
+        >Click to expand all</cds-button
+      >
+      <cds-button @click=${() => toggleItems(false)}
+        >Click to collapse all</cds-button
+      >
+
+      <cds-accordion>
+        <cds-accordion-item title="Section 1 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </cds-accordion-item>
+        <cds-accordion-item title="Section 2 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </cds-accordion-item>
+        <cds-accordion-item title="Section 3 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </cds-accordion-item>
+        <cds-accordion-item title="Section 4 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </cds-accordion-item>
+      </cds-accordion>
+    `;
+  },
+};
+
 export const Skeleton = {
   args: {
     alignment: args['alignment'],

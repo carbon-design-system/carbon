@@ -1,4 +1,6 @@
-import { Meta } from '@storybook/blocks';
+import { Meta, Canvas } from '@storybook/blocks';
+import * as ComboBoxFeatureflagStories from './ComboBox.featureflag.stories.js';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta title="Components/ComboBox/Feature Flag" name="Flag details" />
 
@@ -37,3 +39,13 @@ includes both the dynamic positioning styles and collision detection.
   />
 </FeatureFlags>
 ```
+
+<Canvas
+  of={ComboBoxFeatureflagStories.FloatingStyles}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboBoxFeatureflagStories.FloatingStyles),
+    },
+  ]}
+/>

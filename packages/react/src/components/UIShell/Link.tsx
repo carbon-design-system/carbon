@@ -7,32 +7,42 @@
 
 import PropTypes from 'prop-types';
 import React, {
+  ForwardedRef,
   type ElementType,
-  type ForwardedRef,
-  forwardRef,
   type WeakValidationMap,
-  type Ref,
 } from 'react';
 import deprecate from '../../prop-types/deprecate';
-import { type PolymorphicProps } from '../../types/common';
+import { PolymorphicRef } from '../../internal/PolymorphicProps';
+import { PolymorphicProps } from '../../types/common';
+import { HeaderMenuItemBaseProps } from './HeaderMenuItem';
 
 // Note: Maybe we should use `as` instead of `element`? `as` appears to be
 // standard and is used in other places in this project.
 
-type LinkBaseProps<E extends ElementType> = {
+export interface LinkBaseProps {
   /**
    * @deprecated Use `as` instead
    */
-  element?: E | undefined;
-  ref?: Ref<E>;
-};
+  element?: undefined;
+  ref?: ForwardedRef<ElementType>;
+}
 
-export type LinkProps<E extends ElementType> = PolymorphicProps<
+export type LinkProps<E extends React.ElementType> = PolymorphicProps<
   E,
-  LinkBaseProps<E>
+  LinkBaseProps
 >;
 
-function LinkRenderFunction<E extends ElementType = 'a'>(
+export interface LinkComponent {
+  <E extends ElementType = 'a'>(
+    props: LinkProps<E> | HeaderMenuItemBaseProps
+  ): JSX.Element | null;
+  displayName?: string;
+  propTypes?: WeakValidationMap<LinkProps<any>>;
+}
+
+export const Link: LinkComponent = React.forwardRef(function LinkRenderFunction<
+  E extends ElementType = 'a',
+>(
   {
     element,
     as: BaseComponent,
@@ -41,24 +51,17 @@ function LinkRenderFunction<E extends ElementType = 'a'>(
     isSideNavExpanded: _isSideNavExpanded,
     ...rest
   }: LinkProps<E>,
-  ref: ForwardedRef<E>
+  ref: PolymorphicRef<E>
 ) {
   const BaseComponentAsAny = (BaseComponent ?? element ?? 'a') as any;
   return <BaseComponentAsAny ref={ref} {...rest} />;
-}
-
+}) as LinkComponent;
 /**
  * Link is a custom component that allows us to supporting rendering elements
  * other than `a` in our markup. The goal is to allow users to support passing
  * in their own components to support use-cases like `react-router` or
  * `@reach/router`
  */
-const Link = forwardRef(LinkRenderFunction) as (<E extends ElementType = 'a'>(
-  props: LinkProps<E>
-) => JSX.Element) & {
-  displayName?: string;
-  propTypes?: WeakValidationMap<LinkProps<any>>;
-};
 
 const LinkPropTypes = {
   /**

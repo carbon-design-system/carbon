@@ -1280,6 +1280,14 @@
     - math
   sizes:
     - 32
+- name: arrange
+  friendly_name: Arrange
+  aliases:
+    - center
+    - align
+    - navigation
+  sizes:
+    - 32
 - name: arrange--horizontal
   friendly_name: Arrange horizontal
   aliases:
@@ -8248,6 +8256,14 @@
     - mail
   sizes:
     - 32
+- name: emissions-management
+  friendly_name: Emissions management
+  aliases:
+    - emissions management
+    - sustainability
+    - graph with sapling
+  sizes:
+    - 32
 - name: encryption
   friendly_name: Encryption
   aliases:
@@ -8931,6 +8947,15 @@
     - business
   sizes:
     - 32
+- name: financial-assets
+  friendly_name: Financial assets
+  aliases:
+    - financial portfolio
+    - sustainability
+    - money
+    - business
+  sizes:
+    - 32
 - name: fingerprint-recognition
   friendly_name: Fingerprint recognition
   aliases:
@@ -9500,6 +9525,15 @@
     - packaging
     - handling
     - commerce
+  sizes:
+    - 32
+- name: fragments
+  friendly_name: Fragments
+  aliases:
+    - StreamSets
+    - pipeline
+    - puzzle
+    - navigation
   sizes:
     - 32
 - name: friendship
@@ -10488,6 +10522,17 @@
     - Integration tool
   sizes:
     - 32
+- name: ibm--application-and-discovery-delivery-intelligence
+  friendly_name: IBM® Application Discovery and Delivery Intelligence (ADDI)
+  aliases:
+    - ADDI
+    - z/OS
+    - Z software
+    - Z analytics
+    - watsonx Code Assistant for Z
+    - Application modernization
+  sizes:
+    - 32
 - name: ibm--aspera
   friendly_name: IBM Aspera®
   aliases:
@@ -11160,6 +11205,22 @@
     - bullseye
   sizes:
     - 32
+- name: ibm--maximo-application-suite
+  friendly_name: IBM® Maximo® Application Suite
+  aliases:
+    - asset
+    - maximo
+    - max
+    - suite
+    - application
+    - app
+    - management
+    - monitor
+    - cloud-based
+    - operations
+    - maintenance
+  sizes:
+    - 32
 - name: ibm--open-enterprise-languages
   friendly_name: IBM® Open Enterprise Languages
   aliases:
@@ -11325,6 +11386,17 @@
   friendly_name: Unassigned
   aliases:
     - IBM Tenet
+  sizes:
+    - 32
+- name: ibm--test-accelerator-for-z
+  friendly_name: IBM® Test Accelerator for Z
+  aliases:
+    - test
+    - accelerator
+    - z/OS
+    - DevOps
+    - Z
+    - Automation
   sizes:
     - 32
 - name: ibm--toolchain
@@ -11651,6 +11723,21 @@
     - hybrid environment
     - linked boxes
     - boxes
+  sizes:
+    - 32
+- name: ibm-cloud--essential-security-and-observability-services
+  friendly_name: IBM Cloud Essential Security and Observability Services
+  aliases:
+    - cloud
+    - security
+    - observability
+    - logging
+    - log
+    - monitor
+    - activity
+    - event
+    - track
+    - essential
   sizes:
     - 32
 - name: ibm-cloud--event-notification
@@ -12721,6 +12808,20 @@
     - AI code recommendation
     - enterprise
     - application
+  sizes:
+    - 32
+- name: ibm-watsonx--code-assistant-for-enterprise-java-applications
+  friendly_name: IBM watsonx™ Code Assistant for Enterprise Java Applications
+  aliases:
+    - IBM watsonx Code Assistant for Enterprise Java Applications
+    - end-to-end application lifecycle
+    - developer
+    - code
+    - code generation
+    - generative AI
+    - application modernization
+    - automation
+    - productivity
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z
@@ -16925,6 +17026,18 @@
     - alert
   sizes:
     - 32
+- name: null-sign
+  friendly_name: Null sign
+  aliases:
+    - data
+    - data type
+    - data management
+    - cloud pak for data
+    - data&ai
+    - information
+    - data quality
+  sizes:
+    - 32
 - name: number--0
   friendly_name: Number 0
   sizes:
@@ -18311,6 +18424,14 @@
     - accordion document
   sizes:
     - 32
+- name: pipelines
+  friendly_name: Pipelines
+  aliases:
+    - pipelines
+    - navigation
+    - flow
+  sizes:
+    - 32
 - name: plane
   friendly_name: Plane
   aliases:
@@ -18567,6 +18688,34 @@
     - controls
   sizes:
     - 16
+    - 32
+- name: power-enterprise-pools-metered-capacity-integration
+  friendly_name: IBM® Power® Enterprise Pools Metered Capacity Integration
+  aliases:
+    - IBM Power Enterprise Pools Metered Capacity Integration
+    - cloud
+    - optimization
+    - on-premise service
+    - integration
+    - power
+  sizes:
+    - 32
+- name: power-virtual-server-disaster-recovery-automation
+  friendly_name: IBM® Power® Virtual Server Disaster Recovery Automation
+  aliases:
+    - IBM Power Virtual Server Disaster Recovery Automation
+    - disaster recovery
+    - high availability
+    - DRA
+    - DRA for Power Virtual Server
+    - Disaster Recovery for Power Virtual Server
+    - Power Virtual Server
+    - PowerVS
+    - Power
+    - DR for PowerVS
+    - Power Virtual Server Disaster Recovery Automation
+    - PowerVS DRA
+  sizes:
     - 32
 - name: PPT
   friendly_name: PPT
@@ -21661,6 +21810,14 @@
     - healthcare
     - medical
     - instruments
+  sizes:
+    - 32
+- name: stickies
+  friendly_name: Stickies
+  aliases:
+    - notes
+    - comment
+    - canvas
   sizes:
     - 32
 - name: stop

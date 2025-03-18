@@ -8,6 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import Pagination from './Pagination';
+import mdx from './Pagination.mdx';
 
 const props = () => ({
   disabled: false,
@@ -37,9 +38,16 @@ export default {
     size: 'md',
   },
   decorators: [(story) => <div style={{ maxWidth: '800px' }}>{story()}</div>],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = (args) => <Pagination {...args} />;
+export const Default = (args) => {
+  return <Pagination {...args} />;
+};
 
 Default.args = {
   backwardText: 'Previous page',
