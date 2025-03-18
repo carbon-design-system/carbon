@@ -166,3 +166,5 @@ export { default as CDSSwitcher } from './components/ui-shell/switcher';
 export { default as CDSSwitcherItem } from './components/ui-shell/switcher-item';
 export { default as CDSSwitcherDivider } from './components/ui-shell/switcher-divider';
 export { default as CDSStack } from './components/stack/stack';
+export { default as CDSTimePicker } from './components/time-picker/time-picker';
+export { default as CDSTimePickerSelect } from './components/time-picker/time-picker-select';
