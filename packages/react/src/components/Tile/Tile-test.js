@@ -482,6 +482,25 @@ describe('Tile', () => {
     expect(tile).not.toHaveClass(`${prefix}--tile--is-selected`);
   });
 
+  it('SelectableTile Should call onChange with correct values', async () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      <SelectableTile id="selectable-tile-1" onChange={onChange}>
+        Option 1
+      </SelectableTile>
+    );
+    const tile = container.firstChild;
+    await userEvent.click(tile);
+    expect(onChange).toHaveBeenCalled();
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'click',
+      }),
+      true,
+      'selectable-tile-1'
+    );
+  });
+
   it('should call onKeyDown', async () => {
     const onKeyUp = jest.fn();
     render(<ExpandableTile onKeyUp={onKeyUp}>Test Content</ExpandableTile>);

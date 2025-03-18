@@ -32,7 +32,8 @@ class CDSOrderedList extends CDSUnorderedList {
     const classes = classMap({
       [`${prefix}--list--ordered`]: !this.native,
       [`${prefix}--list--ordered--native`]: this.native,
-      [`${prefix}--list--nested`]: this.getAttribute('slot') === 'nested',
+      [`${prefix}--list--nested`]:
+        this.getAttribute('slot') === 'nested' || this.nested,
       [`${prefix}--list--expressive`]: this.isExpressive,
     });
     return html`

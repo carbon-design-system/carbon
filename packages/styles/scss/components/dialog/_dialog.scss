@@ -18,16 +18,14 @@
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
-@use '../../utilities/z-index' as *;
 
 /// Dialog styles
 /// @access public
 /// @group dialog
 @mixin dialog {
   .#{$prefix}--dialog {
-    /* size */
     padding: 0;
-    border: 1px solid $border-subtle-01;
+    border: none;
     background-color: $layer;
     color: $text-primary;
     inline-size: 48rem;
@@ -99,15 +97,6 @@
     overflow: visible;
     inline-size: 100%;
     min-block-size: $spacing-09;
-  }
-
-  .#{$prefix}--dialog__content {
-    padding: $spacing-05;
-    block-size: 100%;
-  }
-
-  .#{$prefix}--dialog--modal {
-    border: 1px solid transparent;
   }
 
   /* Transition the :backdrop when the dialog modal is promoted to the top layer */
