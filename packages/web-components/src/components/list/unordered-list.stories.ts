@@ -13,6 +13,7 @@ import './index';
 
 const defaultArgs = {
   isExpressive: false,
+  nested: false,
 };
 
 const controls = {
@@ -60,43 +61,6 @@ export const Nested = {
       <cds-list-item>Unordered List level 1</cds-list-item>
       <cds-list-item>Unordered List level 1</cds-list-item>
     </cds-unordered-list>`,
-};
-
-export const Playground = {
-  args: {
-    ...defaultArgs,
-    nested: false,
-  },
-  argTypes: {
-    ...controls,
-    nested: {
-      control: 'boolean',
-      description: 'Specify whether to use nested styling for child lists.',
-    },
-  },
-  render: ({ isExpressive, nested }) => html`
-    <cds-unordered-list ?is-expressive="${isExpressive}">
-      <cds-list-item>
-        Unordered List level 1
-        <cds-unordered-list
-          ?is-expressive="${isExpressive}"
-          ?nested="${nested}">
-          <cds-list-item>Unordered List level 2</cds-list-item>
-          <cds-list-item>
-            Unordered List level 2
-            <cds-unordered-list
-              ?is-expressive="${isExpressive}"
-              ?nested="${nested}">
-              <cds-list-item>Unordered List level 3</cds-list-item>
-              <cds-list-item>Unordered List level 3</cds-list-item>
-            </cds-unordered-list>
-          </cds-list-item>
-        </cds-unordered-list>
-      </cds-list-item>
-      <cds-list-item>Unordered List level 1</cds-list-item>
-      <cds-list-item>Unordered List level 1</cds-list-item>
-    </cds-unordered-list>
-  `,
 };
 
 const meta = {
