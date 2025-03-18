@@ -94,7 +94,7 @@ export type ColumnProps<T extends ElementType> =
   PolymorphicComponentPropWithRef<T, ColumnBaseProps>;
 
 // Define the ColumnComponent interface with both the function type and static properties
-interface ColumnComponentType {
+interface ColumnComponent {
   <T extends ElementType = 'div'>(
     props: ColumnProps<T> & { ref?: PolymorphicRef<T> }
   ): ReactElement | null;
@@ -151,7 +151,7 @@ const ColumnWithForwardRef = <T extends ElementType = 'div'>(
 };
 
 // Cast to ColumnComponentType to allow propTypes assignment
-const Column = forwardRef(ColumnWithForwardRef) as ColumnComponentType;
+const Column = forwardRef(ColumnWithForwardRef) as ColumnComponent;
 
 const percentSpanType = PropTypes.oneOf(['25%', '50%', '75%', '100%']);
 
@@ -507,4 +507,4 @@ function getClassNameForSpan(
   return classNames.join('');
 }
 
-export default Column;
+export default Column as ColumnComponent;
