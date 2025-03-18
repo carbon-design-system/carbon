@@ -690,6 +690,12 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   warnText = '';
 
   /**
+   * Checks whether the input field is hidden or not
+   */
+  @property({ type: Boolean, attribute: 'hide-text-input', reflect: true })
+  hideTextInput = false;
+
+  /**
    * The snapping step of the value.
    */
   @property({ type: Number, reflect: true })
@@ -813,6 +819,9 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       }
       if (changedProperties.has('invalid')) {
         input.invalid = this.invalid;
+      }
+      if (changedProperties.has('hideTextInput')) {
+        input.hideTextInput = this.hideTextInput;
       }
       if (input) {
         if (

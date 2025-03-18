@@ -18,7 +18,6 @@ import '../../../.storybook/templates/with-layer';
 const args = {
   ariaLabelInput: 'Lower bound',
   disabled: false,
-  hideTextInput: false,
   labelText: 'Slider (must be an increment of 5)',
   invalid: false,
   invalidText: 'Invalid message goes here',
@@ -35,7 +34,6 @@ const args = {
 const argsTwohandle = {
   ariaLabelInput: 'Lower bound',
   disabled: false,
-  hideTextInput: false,
   labelText: 'Slider label',
   invalid: false,
   invalidText: 'Invalid message goes here',
@@ -261,14 +259,14 @@ export const WithLayer = {
   },
 };
 
-export const TwoHandleSlider = {
-  args: argsTwohandle,
+export const SliderWithHiddenInputs = {
+  args,
   argTypes,
   render: (args) => {
     const {
       ariaLabelInput,
       disabled,
-      hideTextInput,
+      hideTextInput = true,
       invalid,
       invalidText,
       inputType,
@@ -280,6 +278,124 @@ export const TwoHandleSlider = {
       name,
       readOnly,
       required,
+      step,
+      stepMultiplier,
+      warn,
+      warnText,
+      value,
+      onChange,
+    } = args || {};
+    return html`
+      <cds-form-item>
+        <cds-slider
+          ?disabled="${disabled}"
+          ?hide-text-input="${hideTextInput}"
+          ?invalid="${invalid}"
+          invalid-text="${ifDefined(invalidText)}"
+          label-text="${labelText}"
+          max="${ifDefined(max)}"
+          min="${ifDefined(min)}"
+          max-label="${ifDefined(maxLabel)}"
+          min-label="${ifDefined(minLabel)}"
+          ?readonly="${ifDefined(readOnly)}"
+          step="${ifDefined(step)}"
+          step-multiplier="${ifDefined(stepMultiplier)}"
+          ?warn="${warn}"
+          warn-text="${warnText}"
+          value="${ifDefined(value)}"
+          @cds-slider-changed="${onChange}">
+          <cds-slider-input
+            aria-label="${ifDefined(ariaLabelInput)}"
+            type="${ifDefined(inputType)}"
+            ?required="${ifDefined(required)}"
+            ?name="${ifDefined(name)}"></cds-slider-input>
+        </cds-slider>
+      </cds-form-item>
+    `;
+  },
+};
+
+export const TwoHandleSlider = {
+  args: argsTwohandle,
+  argTypes,
+  render: (args) => {
+    const {
+      ariaLabelInput,
+      disabled,
+      hideTextInput = false,
+      invalid,
+      invalidText,
+      inputType,
+      labelText,
+      max,
+      min,
+      maxLabel,
+      minLabel,
+      name,
+      readOnly,
+      required,
+      step,
+      stepMultiplier,
+      warn,
+      warnText,
+      value,
+      unstable_valueUpper,
+      unstable_nameUpper,
+      unstable_ariaLabelInputUpper,
+    } = args || {};
+    return html`
+      <cds-form-item>
+        <cds-slider
+          ?disabled="${disabled}"
+          ?hide-text-input="${hideTextInput}"
+          label-text="${labelText}"
+          max="${max}"
+          min="${min}"
+          step="${step}"
+          step-multiplier="${ifDefined(stepMultiplier)}"
+          value="${value}"
+          value-upper="${unstable_valueUpper}"
+          max-label="${ifDefined(maxLabel)}"
+          min-label="${ifDefined(minLabel)}"
+          ?readonly="${ifDefined(readOnly)}"
+          ?invalid="${invalid}"
+          invalid-text="${ifDefined(invalidText)}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
+          <cds-slider-input
+            aria-label="${ifDefined(ariaLabelInput)}"
+            name="${ifDefined(name)}"
+            type="${ifDefined(inputType)}"
+            id="lower"
+            slot="lower-input"></cds-slider-input>
+          <cds-slider-input
+            aria-label="${ifDefined(unstable_ariaLabelInputUpper)}"
+            name="${ifDefined(unstable_nameUpper)}"
+            type="${ifDefined(inputType)}"
+            id="upper"></cds-slider-input>
+        </cds-slider>
+      </cds-form-item>
+    `;
+  },
+};
+export const TwoHandleSliderWithHiddenInputs = {
+  args: argsTwohandle,
+  argTypes,
+  render: (args) => {
+    const {
+      ariaLabelInput,
+      disabled,
+      hideTextInput = true,
+      invalid,
+      invalidText,
+      inputType,
+      labelText,
+      max,
+      min,
+      maxLabel,
+      minLabel,
+      name,
+      readOnly,
       step,
       stepMultiplier,
       warn,
@@ -343,7 +459,7 @@ export const Playground = {
     const {
       ariaLabelInput,
       disabled,
-      hideTextInput,
+      hideTextInput = false,
       invalid,
       invalidText,
       inputType,
@@ -381,13 +497,11 @@ export const Playground = {
           warn-text="${warnText}"
           value="${ifDefined(value)}"
           @cds-slider-changed="${onChange}">
-          ${!hideTextInput
-            ? html`<cds-slider-input
-                aria-label="${ifDefined(ariaLabelInput)}"
-                type="${ifDefined(inputType)}"
-                ?required="${ifDefined(required)}"
-                ?name="${ifDefined(name)}"></cds-slider-input>`
-            : null}
+          <cds-slider-input
+            aria-label="${ifDefined(ariaLabelInput)}"
+            type="${ifDefined(inputType)}"
+            ?required="${ifDefined(required)}"
+            ?name="${ifDefined(name)}"></cds-slider-input>
         </cds-slider>
       </cds-form-item>
     `;

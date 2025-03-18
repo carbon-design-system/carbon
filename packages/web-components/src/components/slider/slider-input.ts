@@ -137,6 +137,12 @@ class CDSSliderInput extends FocusMixin(LitElement) {
   warn = false;
 
   /**
+   * true to specify if the control should display warn icon and text.
+   */
+  @property({ type: Boolean })
+  hideTextInput = false;
+
+  /**
    * The maximum value.
    */
   @property({ type: Number, reflect: true })
@@ -199,6 +205,7 @@ class CDSSliderInput extends FocusMixin(LitElement) {
   render() {
     const {
       disabled,
+      hideTextInput,
       max,
       min,
       readonly,
@@ -225,20 +232,24 @@ class CDSSliderInput extends FocusMixin(LitElement) {
       class: `${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`,
     });
     return html`
-      <input
-        ?disabled="${disabled}"
-        ?data-invalid="${invalid}"
-        type="${ifDefined(type)}"
-        class="${classes}"
-        max="${max}"
-        min="${min}"
-        ?readonly="${ifDefined(readonly)}"
-        step="${step}"
-        .value="${value}"
-        @change="${handleChange}"
-        @input="${handleInput}" />
-      ${invalid ? html`${invalidIcon}` : null}
-      ${warn ? html`${warnIcon}` : null}
+      ${!hideTextInput
+        ? html`
+            <input
+              ?disabled="${disabled}"
+              ?data-invalid="${invalid}"
+              type="${ifDefined(type)}"
+              class="${classes}"
+              max="${max}"
+              min="${min}"
+              ?readonly="${ifDefined(readonly)}"
+              step="${step}"
+              .value="${value}"
+              @change="${handleChange}"
+              @input="${handleInput}" />
+            ${invalid ? html`${invalidIcon}` : null}
+            ${warn ? html`${warnIcon}` : null}
+          `
+        : null}
     `;
   }
 
