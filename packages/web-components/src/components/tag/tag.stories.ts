@@ -100,7 +100,7 @@ export const Dismissible = {
   args: {
     ...defaultArgs,
   },
-  render: ({ size, text }) => {
+  render: ({ disabled, size, text }) => {
     const tags = [
       {
         type: 'red',
@@ -165,6 +165,7 @@ export const Dismissible = {
       ${tags.map(
         (tag) =>
           html`<cds-dismissible-tag
+            ?disabled="${disabled}"
             text="${text || tag.text}"
             tag-title="${tag.tagTitle}"
             type="${tag.type}"
@@ -202,7 +203,7 @@ export const Selectable = {
   args: {
     ...defaultArgs,
   },
-  render: ({ size, text }) => {
+  render: ({ disabled, size, text }) => {
     const tags = [
       {
         id: 1,
@@ -226,6 +227,7 @@ export const Selectable = {
       ${tags.map(
         (tag) =>
           html`<cds-selectable-tag
+            ?disabled="${disabled}"
             id="${tag.id}"
             text="${text || tag.text}"
             size="${size}"
@@ -247,7 +249,7 @@ export const Operational = {
   args: {
     ...defaultArgs,
   },
-  render: ({ size, text }) => {
+  render: ({ disabled, size, text }) => {
     const togglePopover = (e) => {
       if (e instanceof PointerEvent) {
         const popoverElement = (e.target as HTMLElement)?.parentElement
@@ -314,6 +316,7 @@ export const Operational = {
         ${tags.map(
           (tag) =>
             html`<cds-operational-tag
+              ?disabled="${disabled}"
               type=${tag.type}
               text="${text || tag.text}"
               size="${size}"
@@ -332,7 +335,8 @@ export const Operational = {
             <cds-operational-tag
               @click="${togglePopover}"
               @keydown="${togglePopover}"
-              text="Tag content">
+              ?disabled="${disabled}"
+              text="${text || `Tag content`}">
               ${Asleep16({ slot: 'icon' })}
             </cds-operational-tag>
           </div>
@@ -352,7 +356,8 @@ export const Operational = {
             <cds-operational-tag
               @click="${togglePopover}"
               @keydown="${togglePopover}"
-              text="Tag content">
+              ?disabled="${disabled}"
+              text="${text || `Tag content`}">
               ${Asleep16({ slot: 'icon' })}
             </cds-operational-tag>
           </div>
