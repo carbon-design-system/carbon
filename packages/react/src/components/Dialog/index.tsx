@@ -21,9 +21,32 @@ export interface DialogProps extends ReactAttr<HTMLDialogElement> {
   children?: React.ReactNode;
 
   /**
-   * Specifies whether the dialog is modal or non-modal
+   * Specify an optional className to be applied to the modal root node
+   */
+  className?: string;
+
+  /**
+   * Specifies whether the dialog is modal or non-modal. This cannot be changed
+   * while open=true
    */
   modal?: boolean;
+
+  /**
+   * Specify a handler for the dialog's cancel event.
+   * The browser fires this event when the user presses the Esc key and is cancelable.
+   */
+  onCancel?: React.ReactEventHandler<HTMLDialogElement>;
+
+  /**
+   * Specify a click handler applied to the dialog.
+   */
+  onClick?: React.ReactEventHandler<HTMLDialogElement>;
+
+  /**
+   * Specify a handler the dialog's close event.
+   * The browser fires this event after the dialog has closed.
+   */
+  onClose?: React.ReactEventHandler<HTMLDialogElement>;
 
   /**
    * Specify a handler for closing Dialog.
@@ -37,84 +60,83 @@ export interface DialogProps extends ReactAttr<HTMLDialogElement> {
   open?: boolean;
 }
 
-const unstable__Dialog = React.forwardRef(
+export const unstable__Dialog = React.forwardRef(
   (
     {
       children,
+      className,
       modal,
+      onCancel = noopFn,
+      onClick = noopFn,
+      onClose = noopFn,
       onRequestClose = noopFn,
       open = false,
       ...rest
     }: DialogProps,
-    ref
+    forwardRef
   ) => {
-    const backupRef = useRef(null);
-    const localRef = (ref ?? backupRef) as MutableRefObject<HTMLDialogElement>;
-
     const prefix = usePrefix();
 
-    const handleClose = (ev) => {
-      if (onRequestClose) {
-        onRequestClose(ev);
-      }
-    };
+    // This component needs access to a ref, placed on the dialog, to call the
+    // various imperative dialog functions (show(), close(), etc.).
+    // If the parent component has not passed a ref for forwardRef, forwardRef
+    // will be null. A "backup" ref is needed to ensure the dialog's instance
+    // methods can always be called within this component.
+    const backupRef = useRef(null);
+    const ref = (forwardRef ??
+      backupRef) as MutableRefObject<HTMLDialogElement>;
 
-    const handleCancel = () => {
-      localRef.current?.close();
-    };
-
-    const handleBackdropClick = (ev) => {
-      if (ev.target === localRef.current) {
-        localRef.current?.close();
+    // Clicks on the backdrop of an open modal dialog should request the consuming component to close
+    // the dialog. Clicks elsewhere, or on non-modal dialogs should not request
+    // to close the dialog.
+    function handleModalBackdropClick(e) {
+      if (open && modal && e.target === ref.current) {
+        onRequestClose(e);
       }
-    };
+    }
+
+    function handleClick(e) {
+      handleModalBackdropClick(e);
+
+      // onClick should always be called, no matter if the target is a modal
+      // dialog, modal dialog backdrop, or non-modal dialog.
+      onClick(e);
+    }
 
     useEffect(() => {
-      if (localRef.current) {
+      if (ref.current) {
         if (open) {
           if (modal) {
-            localRef.current.showModal();
+            // Display the dialog as a modal, over the top of any other dialogs
+            // that might be present. Everything outside the dialog are inert
+            // with interactions outside the dialog being blocked.
+            ref.current.showModal();
           } else {
-            localRef.current.open = true;
+            // Display the dialog modelessly, i.e. still allowing interaction
+            // with content outside of the dialog.
+            ref.current.show();
           }
         } else {
-          localRef.current.close();
+          ref.current.close();
         }
       }
-    }, [localRef, modal, open]);
+    }, [modal, open]);
 
     return (
-      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
       <dialog
         {...rest}
-        className={cx(`${prefix}--dialog`, {
-          [`${prefix}--dialog--modal`]: modal,
-        })}
-        ref={localRef}
-        onCancel={handleCancel}
-        onClick={handleBackdropClick}
-        onClose={handleClose}>
-        <div className={`${prefix}--dialog__header`}>
-          <div className={`${prefix}--dialog__header-controls`}>
-            <IconButton
-              kind="ghost"
-              className={`${prefix}--dialog__close`}
-              label="Close"
-              onClick={handleCancel}
-              title="Close"
-              aria-label="Close"
-              align="left">
-              <Close
-                size={20}
-                aria-hidden="true"
-                tabIndex="-1"
-                className={`${prefix}--icon__close`}
-              />
-            </IconButton>
-          </div>
-        </div>
-
-        <div className={`${prefix}--dialog__content`}>{children}</div>
+        className={cx(
+          `${prefix}--dialog`,
+          {
+            [`${prefix}--dialog--modal`]: modal,
+          },
+          className
+        )}
+        ref={ref}
+        onCancel={onCancel}
+        onClick={handleClick}
+        onClose={onClose}>
+        {children}
       </dialog>
     );
   }
@@ -129,7 +151,13 @@ unstable__Dialog.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Modal specifies whether the Dialog is modal or non-modal
+   * Specify an optional className to be applied to the modal root node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Modal specifies whether the Dialog is modal or non-modal. This cannot be
+   * changed while open=true
    */
   modal: PropTypes.bool,
 
@@ -145,5 +173,89 @@ unstable__Dialog.propTypes = {
   open: PropTypes.bool,
 };
 
-export { unstable__Dialog };
-export default unstable__Dialog;
+export interface DialogHeaderProps extends ReactAttr<HTMLDivElement> {
+  /**
+   * Provide the contents to be rendered inside of this component
+   */
+  children?: React.ReactNode;
+}
+export const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
+  ({ children, ...rest }, ref) => {
+    const prefix = usePrefix();
+    return (
+      <div className={`${prefix}--dialog__header`} ref={ref} {...rest}>
+        {children}
+      </div>
+    );
+  }
+);
+DialogHeader.propTypes = {
+  /**
+   * Provide the contents to be rendered inside of this component
+   */
+  children: PropTypes.node,
+};
+
+export interface DialogControlsProps extends ReactAttr<HTMLDivElement> {
+  /**
+   * Provide the contents to be rendered inside of this component
+   */
+  children?: React.ReactNode;
+}
+export const DialogControls = React.forwardRef<
+  HTMLDivElement,
+  DialogControlsProps
+>(({ children, ...rest }, ref) => {
+  const prefix = usePrefix();
+  return (
+    // @ts-ignore
+    <div className={`${prefix}--dialog__header-controls`} ref={ref} {...rest}>
+      {children}
+    </div>
+  );
+});
+DialogControls.propTypes = {
+  /**
+   * Provide children to be rendered inside of this component
+   */
+  children: PropTypes.node,
+};
+
+export interface DialogCloseButtonProps extends ReactAttr<HTMLDivElement> {
+  /**
+   * Specify a click handler applied to the IconButton
+   */
+  onClick?: React.MouseEventHandler;
+}
+export const DialogCloseButton = React.forwardRef<
+  HTMLDivElement,
+  DialogCloseButtonProps
+>(({ onClick, ...rest }, ref) => {
+  const prefix = usePrefix();
+  return (
+    // @ts-ignore
+    <IconButton
+      kind="ghost"
+      className={`${prefix}--dialog__close`}
+      label="Close"
+      title="Close"
+      aria-label="Close"
+      align="left"
+      onClick={onClick}
+      {...rest}>
+      <Close
+        size={20}
+        aria-hidden="true"
+        tabIndex="-1"
+        className={`${prefix}--icon__close`}
+      />
+    </IconButton>
+  );
+});
+
+DialogCloseButton.propTypes = {
+  /**
+   * Specify a click handler applied to the IconButton
+   */
+  onClick: PropTypes.func,
+};

@@ -4,7 +4,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
-- [Dev Sprint Plannning](#dev-sprint-plannning)
+- [Dev Sprint Planning](#dev-sprint-planning)
   - [Process](#process)
     - [Dev Sprint Planning Meeting](#dev-sprint-planning-meeting)
       - [Previous to meeting](#previous-to-meeting)
@@ -22,7 +22,7 @@ the sprint in order to prepare for the next upcoming sprint. The purpose is to
 determine the work items that will be completed in the following sprint and who
 is responsible for each of these work items.
 
-## Dev Sprint Plannning
+## Dev Sprint Planning
 
 Participating developers in the Design System take turns leading the sprint
 planning sessions in a rotational matter per sprint as defined in the

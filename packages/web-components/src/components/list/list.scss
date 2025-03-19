@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -34,16 +34,16 @@ $css--plex: true !default;
     counter-reset: item;
   }
 
-  &:not(.#{$prefix}--list--nested) ::slotted(#{$prefix}-list-item) {
-    position: relative;
-  }
-
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
-    ::slotted(#{$prefix}-list-item)::before {
-    position: absolute;
-    content: counter(item) '.';
-    counter-increment: item;
-    inset-inline-start: rem(-24px);
+    ::slotted(#{$prefix}-list-item) {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: counter(item) '.';
+      counter-increment: item;
+      inset-inline-start: rem(-24px);
+    }
   }
 }
 
@@ -69,12 +69,14 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-unordered-list[slot='nested'])
+:host(#{$prefix}-unordered-list[nested]),
+:host(#{$prefix}-unordered-list[slot='nested']) {
   ::slotted(#{$prefix}-list-item)::before {
-  // ▪ square
-  content: '\0025AA';
-  // offset to account for smaller ▪ vs –
-  inset-inline-start: calc(-1 * #{$spacing-04});
+    // ▪ square
+    content: '\0025AA';
+    // offset to account for smaller ▪ vs –
+    inset-inline-start: calc(-1 * #{$spacing-04});
+  }
 }
 
 :host(#{$prefix}-list-item) {
