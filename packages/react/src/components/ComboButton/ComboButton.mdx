@@ -1,4 +1,6 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import * as ComboButtonStories from './ComboButton.stories.js'
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -29,6 +31,40 @@ disclosed list next to the primary action. These additional actions must be
 </ComboButton>
 ```
 
+<Canvas
+  of={ComboButtonStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboButtonStories.Default),
+    },
+  ]}
+/>
+
+## With Icons
+
+<Canvas
+  of={ComboButtonStories.WithIcons}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboButtonStories.WithIcons),
+    },
+  ]}
+/>
+
+## With Danger
+
+<Canvas
+  of={ComboButtonStories.WithDanger}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboButtonStories.WithDanger),
+    },
+  ]}
+/>
+
 ## Menu Alignment (experimental)
 
 The `menuAlignment` prop enables you to define the placement of the Menu in
@@ -41,6 +77,27 @@ to display the Menu in case the provided `menuAlignment` obscures it.
 
 We encourage you to play around in the Storybook Default stories to better
 understand the `menuAlignment` prop.
+
+<Canvas
+  of={ComboButtonStories.WithMenuAlignment}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboButtonStories.WithMenuAlignment),
+    },
+  ]}
+/>
+
+## Experimental Auto Align
+<Canvas
+  of={ComboButtonStories.ExperimentalAutoAlign}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboButtonStories.ExperimentalAutoAlign),
+    },
+  ]}
+/>
 
 ## Component API
 
