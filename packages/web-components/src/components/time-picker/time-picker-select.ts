@@ -210,9 +210,11 @@ class CDSTimePickerSelect extends FormMixin(LitElement) {
         aria-label="${ifDefined(ariaLabel)}"
         .value="${ifDefined(value)}"
         @input="${handleInput}">
-        ${this._renderItems()} aria-hidden="true"
+        ${this._renderItems()}
       </select>
-      ${ChevronDown16({ class: `${prefix}--select__arrow` })}
+      ${ChevronDown16({ class: `${prefix}--select__arrow`,
+        "aria-hidden": "true"
+      })}
     `;
   }
   static get eventSelect() {
