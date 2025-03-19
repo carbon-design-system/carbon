@@ -51,11 +51,11 @@ export default {
   ],
 };
 
-export const Default = () => {
+export const Default = (args) => {
   const label =
     'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
-    <Tooltip align="bottom" label={label} closeOnActivation={false}>
+    <Tooltip label={label} closeOnActivation={false} {...args}>
       <button className="sb-tooltip-trigger" type="button">
         <Help />
       </button>
