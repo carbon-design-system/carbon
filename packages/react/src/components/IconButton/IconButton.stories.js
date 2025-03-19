@@ -110,3 +110,13 @@ export const withBadgeIndicator = (props) => {
 withBadgeIndicator.args = {
   badgeCount: 4,
 };
+withBadgeIndicator.parameters = {
+  controls: {
+    exclude: ['size', 'kind'],
+  },
+};
+Default.parameters = {
+  controls: {
+    exclude: ['badgeCount'],
+  },
+};
