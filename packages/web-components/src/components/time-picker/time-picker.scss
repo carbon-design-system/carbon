@@ -14,6 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/time-picker/index';
 @use '@carbon/styles/scss/components/select';
 @use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/convert' as convert;
 
 :host(#{$prefix}-time-picker) {
   @include emit-layout-tokens();
@@ -38,4 +39,12 @@ $css--plex: true !default;
 
 :host(#{$prefix}-time-picker-select[readonly]) select {
   pointer-events: none;
+}
+
+:host(#{$prefix}-time-picker-select) select {
+  margin: 0;
+  inline-size: auto;
+  line-height: 1;
+  min-inline-size: auto;
+  padding-inline-end: convert.to-rem(48px);
 }
