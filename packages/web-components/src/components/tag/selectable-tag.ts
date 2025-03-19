@@ -30,13 +30,10 @@ export { TAG_SIZE, TAG_TYPE };
 @customElement(`${prefix}-selectable-tag`)
 class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
-   * Handles `click` event on this element.
-   *
-   * @param event The event.
+   * Custom events to be triggered
+   * @param event Event object
    */
-  @HostListener('shadowRoot:click')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleClick = (event: MouseEvent) => {
+  protected triggerEvents = (event) => {
     if (this.disabled) {
       event.stopPropagation();
     } else {
@@ -67,38 +64,22 @@ class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
     }
   };
 
+  /**
+   * Handles `click` event on this element.
+   *
+   * @param event The event.
+   */
+  @HostListener('shadowRoot:click')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleClick = (event: MouseEvent) => {
+    this.triggerEvents(event);
+  };
+
   @HostListener('shadowRoot:keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Enter' || event.key === ' ') {
-      if (this.disabled) {
-        event.stopPropagation();
-      } else {
-        const init = {
-          bubbles: true,
-          cancelable: true,
-          composed: true,
-          detail: {
-            triggeredBy: event.target,
-          },
-        };
-        if (
-          this.dispatchEvent(
-            new CustomEvent(
-              (this.constructor as typeof CDSSelectableTag).eventBeforeSelected,
-              init
-            )
-          )
-        ) {
-          this.selected = !this.selected;
-          this.dispatchEvent(
-            new CustomEvent(
-              (this.constructor as typeof CDSSelectableTag).eventSelected,
-              init
-            )
-          );
-        }
-      }
+      this.triggerEvents(event);
     }
   };
 
@@ -130,16 +111,19 @@ class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
    * true if the tag text has ellipsis applied
    */
   @state()
-  _hasEllipsisApplied = false;
+  protected _hasEllipsisApplied = false;
 
-  updated() {
+  async firstUpdated() {
+    await this.updateComplete;
+
     const textContainer = this.shadowRoot
       ?.querySelector(`${prefix}-tag`)
       ?.shadowRoot?.querySelector(`.${prefix}--tag__label`);
     if (!textContainer) return;
 
-    this._hasEllipsisApplied =
-      textContainer.scrollWidth > textContainer.clientWidth;
+    const hasEllipsis = textContainer.scrollWidth > textContainer.clientWidth;
+
+    this._hasEllipsisApplied = hasEllipsis;
   }
 
   render() {
@@ -152,7 +136,7 @@ class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
     } = this;
 
     return html` ${hasEllipsisApplied
-      ? html` <cds-tooltip align="bottom" enter-delay-ms=${0}>
+      ? html` <cds-tooltip align="bottom" keyboard-only leave-delay-ms=${0}>
           <cds-tag
             ?aria-pressed="${selected}"
             size="${size}"

@@ -22,12 +22,18 @@ $css--plex: true !default;
   @extend .#{$prefix}--tag;
 }
 
-// not working -- need to figure this one out
-// :host(#{$prefix}-tag:not(:first-child)),
-// :host(#{$prefix}-dismissible-tag):not(:first-child),
-// :host(#{$prefix}-selectable-tag):not(:first-child) {
-//   margin-inline-start: 0;
-// }
+:host(#{$prefix}-selectable-tag),
+:host(#{$prefix}-operational-tag) {
+  display: inline-block;
+  inline-size: fit-content;
+}
+
+:host(#{$prefix}-tag:not(:first-child)),
+:host(#{$prefix}-dismissible-tag:not(:first-child)),
+:host(#{$prefix}-selectable-tag:not(:first-child)) #{$prefix}-tag,
+:host(#{$prefix}-operational-tag:not(:first-child)) #{$prefix}-tag {
+  margin-inline-start: 0;
+}
 
 :host(#{$prefix}-tag),
 :host(#{$prefix}-dismissible-tag) {
@@ -35,8 +41,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-tag[has-custom-icon]),
-:host(#{$prefix}-dismissible-tag[has-custom-icon]),
-:host(#{$prefix}-selectable-tag[has-custom-icon]) {
+:host(#{$prefix}-dismissible-tag[has-custom-icon]) {
   padding-inline-start: $spacing-02;
 }
 

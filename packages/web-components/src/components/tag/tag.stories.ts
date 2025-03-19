@@ -169,7 +169,6 @@ export const Dismissible = {
     return html` <div style="margin-bottom: 3rem">
         <cds-button @click="${resetTags}">Reset</cds-button>
       </div>
-      <br />
       ${tags.map(
         (tag) =>
           html`<cds-dismissible-tag
@@ -213,15 +212,17 @@ export const Selectable = {
       },
     ];
 
-    return html`${tags.map(
-      (tag) =>
-        html`<cds-selectable-tag
-          id="${tag.id}"
-          text="${tag.text}"
-          size="${size}"
-          >${Asleep16({ slot: 'icon' })}</cds-selectable-tag
-        >`
-    )}`;
+    return html` <div aria-label="Selectable tags" role="group">
+      ${tags.map(
+        (tag) =>
+          html`<cds-selectable-tag
+            id="${tag.id}"
+            text="${tag.text}"
+            size="${size}"
+            >${Asleep16({ slot: 'icon' })}
+          </cds-selectable-tag>`
+      )}
+    </div>`;
   },
 };
 
@@ -298,8 +299,8 @@ export const Operational = {
               type=${tag.type}
               text="${tag.text}"
               size="${size}"
-              >${Asleep16({ slot: 'icon' })}</cds-operational-tag
-            >`
+              >${Asleep16({ slot: 'icon' })}
+            </cds-operational-tag>`
         )}
       </div>
       <h4>Interactive examples</h4>
