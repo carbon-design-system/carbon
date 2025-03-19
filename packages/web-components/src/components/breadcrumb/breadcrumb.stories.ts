@@ -106,7 +106,7 @@ export const BreadcrumbWithOverflowMenu = {
           <cds-breadcrumb-link href="/#">Breadcrumb 2</cds-breadcrumb-link>
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
-          <cds-overflow-menu breadcrumb>
+          <cds-overflow-menu breadcrumb align="bottom">
             ${OverflowMenuHorizontal16({
               class: `${prefix}--overflow-menu__icon`,
               slot: 'icon',
