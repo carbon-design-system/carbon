@@ -113,7 +113,7 @@ class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
   @state()
   protected _hasEllipsisApplied = false;
 
-  async firstUpdated() {
+  async updated() {
     await this.updateComplete;
 
     const textContainer = this.shadowRoot

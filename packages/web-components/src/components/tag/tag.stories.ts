@@ -73,8 +73,6 @@ const types = [
 
 const defaultArgs = {
   disabled: false,
-  filter: false,
-  title: 'Clear filter',
   size: TAG_SIZE.MEDIUM,
 };
 
@@ -83,31 +81,26 @@ const controls = {
     control: 'boolean',
     description: 'Specify if the Tag is disabled',
   },
-  filter: {
-    control: 'boolean',
-    description: 'Determine if Tag is a filter/chip',
-  },
   size: {
     control: 'select',
     description:
       'Specify the size of the Tag. Currently supports either `sm`, `md` (default) or `lg` sizes.',
     options: sizes,
   },
-  title: {
-    control: 'text',
-    description: 'Text to show on clear filters',
-  },
-  type: {
-    control: 'select',
-    description: 'Specify the type of the Tag.',
-    options: types,
-  },
 };
 
 export const Dismissible = {
-  argTypes: controls,
-  args: defaultArgs,
-  render: ({ size }) => {
+  argTypes: {
+    ...controls,
+    text: {
+      control: 'text',
+      description: 'Provide text to be rendered inside of a the tag.',
+    },
+  },
+  args: {
+    ...defaultArgs,
+  },
+  render: ({ size, text }) => {
     const tags = [
       {
         type: 'red',
@@ -172,7 +165,7 @@ export const Dismissible = {
       ${tags.map(
         (tag) =>
           html`<cds-dismissible-tag
-            text="${tag.text}"
+            text="${text || tag.text}"
             tag-title="${tag.tagTitle}"
             type="${tag.type}"
             size="${size}"
@@ -183,16 +176,33 @@ export const Dismissible = {
 };
 
 export const Skeleton = {
-  argTypes: controls,
-  args: defaultArgs,
+  argTypes: {
+    size: {
+      control: 'select',
+      description:
+        'Specify the size of the Tag. Currently supports either `sm`, `md` (default) or `lg` sizes.',
+      options: sizes,
+    },
+  },
+  args: {
+    size: TAG_SIZE.MEDIUM,
+  },
   render: ({ size }) =>
     html`<cds-tag-skeleton size="${size}">Tag content</cds-tag-skeleton>`,
 };
 
 export const Selectable = {
-  argTypes: controls,
-  args: defaultArgs,
-  render: ({ size }) => {
+  argTypes: {
+    ...controls,
+    text: {
+      control: 'text',
+      description: 'Provide text to be rendered inside of a the tag.',
+    },
+  },
+  args: {
+    ...defaultArgs,
+  },
+  render: ({ size, text }) => {
     const tags = [
       {
         id: 1,
@@ -217,7 +227,7 @@ export const Selectable = {
         (tag) =>
           html`<cds-selectable-tag
             id="${tag.id}"
-            text="${tag.text}"
+            text="${text || tag.text}"
             size="${size}"
             >${Asleep16({ slot: 'icon' })}
           </cds-selectable-tag>`
@@ -227,9 +237,17 @@ export const Selectable = {
 };
 
 export const Operational = {
-  argTypes: controls,
-  args: defaultArgs,
-  render: ({ size }) => {
+  argTypes: {
+    ...controls,
+    text: {
+      control: 'text',
+      description: 'Provide text to be rendered inside of a the tag.',
+    },
+  },
+  args: {
+    ...defaultArgs,
+  },
+  render: ({ size, text }) => {
     const togglePopover = (e) => {
       if (e instanceof PointerEvent) {
         const popoverElement = (e.target as HTMLElement)?.parentElement
@@ -297,7 +315,7 @@ export const Operational = {
           (tag) =>
             html`<cds-operational-tag
               type=${tag.type}
-              text="${tag.text}"
+              text="${text || tag.text}"
               size="${size}"
               >${Asleep16({ slot: 'icon' })}
             </cds-operational-tag>`
@@ -353,23 +371,42 @@ export const Operational = {
   },
 };
 
-const ReadOnlyArgs = {
-  disabled: false,
-  size: TAG_SIZE.MEDIUM,
-};
-
 export const ReadOnly = {
-  argTypes: controls,
-  args: ReadOnlyArgs,
-  render: ({ size, disabled }) =>
-    html` <cds-tag type="red" size="${size}" ?disabled="${disabled}">
+  argTypes: {
+    ...controls,
+    title: {
+      control: 'text',
+      description: 'Text to show on clear filters',
+    },
+    filter: {
+      control: 'boolean',
+      description: 'Determine if `Tag` is a filter/chip',
+    },
+  },
+  args: {
+    ...defaultArgs,
+    filter: false,
+    title: 'Clear filters',
+  },
+  render: ({ filter, title, size, disabled }) =>
+    html` <cds-tag
+        type="red"
+        ?filter="${filter}"
+        title="${title}"
+        size="${size}"
+        ?disabled="${disabled}">
         Tag content with a long text description
       </cds-tag>
       ${types
         .slice(1)
         .map(
           (e) =>
-            html`<cds-tag type="${e}" size="${size}" ?disabled="${disabled}"
+            html`<cds-tag
+              type="${e}"
+              ?filter="${filter}"
+              title="${title}"
+              size="${size}"
+              ?disabled="${disabled}"
               >Tag content</cds-tag
             >`
         )}`,
