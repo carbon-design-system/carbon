@@ -212,8 +212,9 @@ class CDSTimePickerSelect extends FormMixin(LitElement) {
         @input="${handleInput}">
         ${this._renderItems()}
       </select>
-      ${ChevronDown16({ class: `${prefix}--select__arrow`,
-        "aria-hidden": "true"
+      ${ChevronDown16({
+        class: `${prefix}--select__arrow`,
+        'aria-hidden': 'true',
       })}
     `;
   }
