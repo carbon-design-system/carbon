@@ -22,23 +22,6 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-list-item`)
 class CDSListItem extends LitElement {
   /**
-   * `true` if there is slotted nested child list.
-   */
-  private _hasNestedChild = false;
-
-  /**
-   * Handles `slotchange` event for the `<slot>` for the nested child list.
-   *
-   * @param event The event.
-   * @param event.target The event target.
-   */
-  private _handleSlotChangeNested({ target }: Event) {
-    this._hasNestedChild =
-      (target as HTMLSlotElement).assignedNodes().length > 0;
-    this.requestUpdate();
-  }
-
-  /**
    * `true` if this list item is a child of a nested list.
    * `<cds-ordered-list>` or `<cds-unordered-list>` automatically sets this property.
    */
@@ -62,17 +45,9 @@ class CDSListItem extends LitElement {
   }
 
   render() {
-    const {
-      _hasNestedChild: hasNestedChild,
-      _handleSlotChangeNested: handleSlotChangeNested,
-    } = this;
     return html`
       <slot></slot>
-      <div
-        ?hidden="${!hasNestedChild}"
-        class="${prefix}-ce--list__item__nested-child">
-        <slot name="nested" @slotchange="${handleSlotChangeNested}"></slot>
-      </div>
+      <slot name="nested"></slot>
     `;
   }
 
