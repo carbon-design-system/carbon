@@ -163,11 +163,9 @@
   .#{$prefix}--tree-parent-node__toggle {
     display: flex;
     align-items: center;
-    align-self: flex-start;
     border: 0;
     block-size: convert.to-rem(24px);
     inline-size: convert.to-rem(24px);
-    margin-block-start: $spacing-02;
     margin-inline: -$spacing-02 $spacing-02;
     padding-inline-start: $spacing-02;
 
@@ -191,9 +189,7 @@
   }
 
   .#{$prefix}--tree-node__icon {
-    align-self: flex-start;
     fill: $icon-secondary;
-    margin-block-start: convert.to-rem(1px);
     margin-inline: $spacing-03 $spacing-03;
     min-block-size: 1rem;
     min-inline-size: 1rem;

@@ -130,8 +130,8 @@ describe('@carbon/styles/scss/type', () => {
     const { stylesheet } = css.parse(result.css.toString());
     const [rule] = stylesheet.rules;
     for (const declaration of rule.declarations) {
-      expect(declaration.property).toEqual(
-        expect.stringContaining('--custom-')
+      expect(declaration.value).toEqual(
+        expect.stringContaining('var(--custom-')
       );
     }
   });

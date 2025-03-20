@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -58,20 +58,21 @@ export type TableExpandHeaderPropsBase = {
 
 export type TableExpandHeaderPropsWithToggle = Omit<
   TableExpandHeaderPropsBase,
-  'ariaLabel' | 'aria-label' | 'enableToggle' | 'onExpand'
+  'aria-label' | 'enableToggle' | 'onExpand'
 > & {
   enableToggle: true;
-  ariaLabel: string;
   ['aria-label']: string;
   onExpand(event: React.MouseEvent<HTMLButtonElement>): void;
 };
 
 export type TableExpandHeaderPropsWithExpando = Omit<
   TableExpandHeaderPropsBase,
-  'ariaLabel' | 'aria-label' | 'enableExpando' | 'onExpand'
+  'aria-label' | 'enableExpando' | 'onExpand'
 > & {
+  /**
+   * @deprecated The enableExpando prop is being replaced by `enableToggle`
+   */
   enableExpando: true;
-  ariaLabel: string;
   ['aria-label']: string;
   onExpand(event: React.MouseEvent<HTMLButtonElement>): void;
 };

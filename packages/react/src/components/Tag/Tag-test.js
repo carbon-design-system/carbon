@@ -292,4 +292,9 @@ describe('Tag', () => {
     expect(spy).toHaveBeenCalled();
     spy.mockRestore();
   });
+  it('supports a ref on the underlying button element', () => {
+    const ref = jest.fn();
+    render(<OperationalTag type="red" text="Test Tag" ref={ref} />);
+    expect(ref).toHaveBeenCalledWith(expect.any(HTMLButtonElement));
+  });
 });

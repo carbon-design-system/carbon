@@ -3837,6 +3837,7 @@ Map {
     "render": [Function],
   },
   "FlexGrid" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
         "args": Array [
@@ -3867,6 +3868,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "FluidForm" => Object {
     "propTypes": Object {
@@ -4240,6 +4242,9 @@ Map {
       "autoAlign": Object {
         "type": "bool",
       },
+      "badgeCount": Object {
+        "type": "number",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4400,6 +4405,9 @@ Map {
   "IconTab" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "badgeIndicator": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4652,15 +4660,7 @@ Map {
       "menuAlignment": Object {
         "type": "string",
       },
-      "mode": Object {
-        "args": Array [
-          Array [
-            "full",
-            "basic",
-          ],
-        ],
-        "type": "oneOf",
-      },
+      "mode": [Function],
       "onClose": Object {
         "type": "func",
       },
@@ -4948,7 +4948,23 @@ Map {
               "args": Array [
                 Object {
                   "current": Object {
-                    "type": "any",
+                    "args": Array [
+                      Array [
+                        Object {
+                          "type": "any",
+                        },
+                        Object {
+                          "args": Array [
+                            Array [
+                              null,
+                            ],
+                          ],
+                          "type": "oneOf",
+                        },
+                      ],
+                    ],
+                    "isRequired": true,
+                    "type": "oneOfType",
                   },
                 },
               ],
@@ -5867,6 +5883,7 @@ Map {
     },
   },
   "OperationalTag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -5921,6 +5938,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "OrderedList" => Object {
     "propTypes": Object {
@@ -9580,6 +9598,7 @@ Map {
     },
   },
   "Tooltip" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "align": Object {
         "args": Array [
@@ -9639,6 +9658,7 @@ Map {
         "type": "number",
       },
     },
+    "render": [Function],
   },
   "TreeNode" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -9914,6 +9934,9 @@ Map {
     "propTypes": Object {
       "children": Object {
         "type": "node",
+      },
+      "enableDialogElement": Object {
+        "type": "bool",
       },
       "enableExperimentalFocusWrapWithoutSentinels": Object {
         "type": "bool",

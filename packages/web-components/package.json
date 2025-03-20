@@ -1,7 +1,7 @@
 {
   "name": "@carbon/web-components",
   "description": "Web components for the Carbon Design System",
-  "version": "2.24.0",
+  "version": "2.25.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -15,6 +15,7 @@
     "custom-elements.json",
     "dist/**/*",
     "es/**/*",
+    "es-custom/**/*",
     "lib/**/*",
     "scss/**/*",
     "telemetry.yml"
@@ -40,6 +41,7 @@
     },
     "./es": "./es/index.js",
     "./es/": "./es/",
+    "./es-custom/*": "./es-custom/*",
     "./lib/": "./lib/",
     "./dist/": "./dist/",
     "./scss/": "./scss/",
@@ -63,9 +65,10 @@
     "wca": "web-component-analyzer analyze src --outFile custom-elements.json"
   },
   "dependencies": {
-    "@carbon/styles": "^1.76.0",
+    "@carbon/styles": "^1.77.0",
     "@floating-ui/dom": "^1.6.3",
     "@ibm/telemetry-js": "^1.5.0",
+    "@lit/context": "^1.1.1",
     "flatpickr": "4.6.13",
     "lit": "^3.1.0",
     "lodash-es": "^4.17.21",
@@ -73,7 +76,7 @@
   },
   "devDependencies": {
     "@carbon/icon-helpers": "10.47.0",
-    "@carbon/icons": "^11.56.0",
+    "@carbon/icons": "^11.57.0",
     "@carbon/layout": "^11.30.0",
     "@carbon/motion": "^11.25.0",
     "@juggle/resize-observer": "^3.4.0",
