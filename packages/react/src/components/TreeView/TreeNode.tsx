@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -79,8 +79,7 @@ export type TreeNodeProps = {
    */
   onTreeSelect?: (event: React.MouseEvent, node?: TreeNodeProps) => void;
   /**
-   * Optional prop to allow each node to have an associated icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: ComponentType | FunctionComponent;
   /**
@@ -535,8 +534,7 @@ TreeNode.propTypes = {
   onTreeSelect: PropTypes.func,
 
   /**
-   * Optional prop to allow each node to have an associated icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   // @ts-ignore
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
