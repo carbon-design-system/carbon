@@ -21,7 +21,7 @@ import mdx from './Dialog.mdx';
 export default {
   title: 'Experimental/unstable_Dialog',
   component: Dialog,
-  // includeStories: [],
+  includeStories: [],
   parameters: {
     docs: {
       page: mdx,
