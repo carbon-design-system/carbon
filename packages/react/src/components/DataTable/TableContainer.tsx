@@ -12,6 +12,7 @@ import { ReactAttr } from '../../types/common';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { TableContext } from './TableContext';
+import { Heading, Section } from '../Heading';
 
 export interface TableContainerProps
   extends Omit<ReactAttr<HTMLDivElement>, 'title'> {
@@ -63,15 +64,15 @@ const TableContainer = ({
 
   return (
     <TableContext.Provider value={value}>
-      <div {...rest} className={tableContainerClasses}>
+      <Section {...rest} className={tableContainerClasses}>
         {(title || description) && (
           <div className={`${prefix}--data-table-header`}>
             {title && (
-              <h4
+              <Heading
                 className={`${prefix}--data-table-header__title`}
                 id={titleId}>
                 {title}
-              </h4>
+              </Heading>
             )}
             {description && (
               <p
@@ -83,7 +84,7 @@ const TableContainer = ({
           </div>
         )}
         {children}
-      </div>
+      </Section>
     </TableContext.Provider>
   );
 };
