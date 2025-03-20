@@ -504,7 +504,7 @@ const ComboBox = forwardRef(
     const textInput = useRef<HTMLInputElement>(null);
     const comboBoxInstanceId = useId();
     const [isFocused, setIsFocused] = useState(false);
-    const savedOnInputChange = useRef(onInputChange);
+    const prevInputValue = useRef(inputValue);
     const prevSelectedItemProp = useRef<ItemType | null | undefined>(
       selectedItemProp
     );
@@ -547,13 +547,11 @@ const ComboBox = forwardRef(
             : defaultShouldFilterItem()
       );
 
+    // call onInputChange whenever inputValue is updated
     useEffect(() => {
-      savedOnInputChange.current = onInputChange;
-    }, [onInputChange]);
-
-    useEffect(() => {
-      if (savedOnInputChange.current) {
-        savedOnInputChange.current(inputValue);
+      if (prevInputValue.current !== inputValue) {
+        prevInputValue.current = inputValue;
+        onInputChange && onInputChange(inputValue);
       }
     }, [inputValue]);
 
@@ -612,29 +610,39 @@ const ComboBox = forwardRef(
           }
 
           case InputKeyDownEnter:
-            if (
-              highlightedIndex === -1 &&
-              !allowCustomValue &&
-              state.selectedItem
-            ) {
-              return {
-                ...changes,
-                selectedItem: null,
-                inputValue: state.inputValue,
-              };
-            }
-            if (allowCustomValue) {
-              setInputValue(inputValue);
-              setHighlightedIndex(changes.selectedItem);
-              if (onChange) {
-                onChange({ selectedItem: changes.selectedItem, inputValue });
+            if (!allowCustomValue) {
+              const highlightedIndex = indexToHighlight(inputValue);
+              const matchingItem = items[highlightedIndex];
+
+              if (matchingItem) {
+                // Prevent matching items that are marked as `disabled` from
+                // being selected.
+                if ((matchingItem as any).disabled) {
+                  return state;
+                }
+
+                // Select the matching item.
+                return {
+                  ...changes,
+                  selectedItem: matchingItem,
+                  inputValue: itemToString(matchingItem),
+                };
               }
-              return changes;
-            } else if (changes.selectedItem && !allowCustomValue) {
-              return changes;
-            } else {
-              return { ...changes, isOpen: true };
+
+              // If no matching item is found and there is an existing
+              // selection, clear the selection.
+              if (state.selectedItem !== null) {
+                return {
+                  ...changes,
+                  selectedItem: null,
+                  inputValue,
+                };
+              }
             }
+
+            // For `allowCustomValue` or if no matching item is found, keep the
+            // menu open.
+            return { ...changes, isOpen: true };
           case FunctionToggleMenu:
           case ToggleButtonClick:
             if (
@@ -797,7 +805,18 @@ const ComboBox = forwardRef(
           }
         }
       },
+      initialSelectedItem: initialSelectedItem,
+      inputId: id,
+      stateReducer,
+      isItemDisabled(item, _index) {
+        return (item as any)?.disabled;
+      },
+      ...downshiftProps,
       onStateChange: ({ type, selectedItem: newSelectedItem }) => {
+        downshiftProps?.onStateChange?.({
+          type,
+          selectedItem: newSelectedItem,
+        });
         if (
           type === useCombobox.stateChangeTypes.ItemClick &&
           !isEqual(selectedItemProp, newSelectedItem)
@@ -812,13 +831,6 @@ const ComboBox = forwardRef(
           onChange({ selectedItem: newSelectedItem });
         }
       },
-      initialSelectedItem: initialSelectedItem,
-      inputId: id,
-      stateReducer,
-      isItemDisabled(item, _index) {
-        return (item as any)?.disabled;
-      },
-      ...downshiftProps,
     });
 
     useEffect(() => {

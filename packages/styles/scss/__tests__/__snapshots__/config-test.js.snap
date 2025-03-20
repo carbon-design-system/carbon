@@ -4,7 +4,7 @@ exports[`@carbon/styles/scss/config Public API 1`] = `
 Object {
   "css--body": true,
   "css--default-type": true,
-  "css--emit-type-custom-props": true,
+  "css--emit-type-custom-props": false,
   "css--font-face": true,
   "css--reset": true,
   "flex-grid-columns": 16,

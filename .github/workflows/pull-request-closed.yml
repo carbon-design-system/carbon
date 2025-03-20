@@ -1,5 +1,5 @@
 # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#force-deleting-cache-entries
-name: Pull resquest closed
+name: Pull request closed
 on:
   pull_request:
     types:
@@ -16,7 +16,7 @@ jobs:
           echo "Fetching list of cache keys"
           cacheKeysForPR=$(gh actions-cache list -R $REPO -B $BRANCH -L 100 | cut -f 1 )
 
-          ## Setting this to not fail the workflow while deleting cache keys. 
+          ## Setting this to not fail the workflow while deleting cache keys.
           set +e
           echo "Deleting caches..."
           for cacheKey in $cacheKeysForPR
@@ -30,6 +30,8 @@ jobs:
           BRANCH: refs/pull/${{ github.event.pull_request.number }}/merge
   if_merged:
     if: github.event.pull_request.merged == true
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     steps:
       - name: Comment the schedule release
