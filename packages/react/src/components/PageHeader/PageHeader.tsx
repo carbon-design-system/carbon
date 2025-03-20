@@ -4,7 +4,14 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { ComponentType, useLayoutEffect, useState, useRef } from 'react';
+import React, {
+  type ComponentType,
+  type FunctionComponent,
+  useLayoutEffect,
+  useState,
+  useRef,
+} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
@@ -75,13 +82,34 @@ PageHeaderBreadcrumbBar.displayName = 'PageHeaderBreadcrumbBar';
  * PageHeaderContent
  * -----------------
  */
-interface PageHeaderContentProps {
+export interface PageHeaderContentProps {
+  /**
+   * Provide child elements to be rendered inside PageHeaderContent.
+   */
   children?: React.ReactNode;
+  /**
+   * Specify an optional className to be added to your PageHeaderContent
+   */
   className?: string;
-  icon?: React.ReactNode;
+  /**
+   * Provide an optional icon to render in front of the PageHeaderContent's title.
+   */
+  renderIcon?: ComponentType | FunctionComponent;
+  /**
+   * The PageHeaderContent's title
+   */
   title: string;
+  /**
+   * The PageHeaderContent's subTitle
+   */
   subTitle?: string;
+  /**
+   * The PageHeaderContent's contextualActions
+   */
   contextualActions?: React.ReactNode;
+  /**
+   * The PageHeaderContent's pageActions
+   */
   pageActions?: React.ReactNode;
 }
 const PageHeaderContent = React.forwardRef<
@@ -93,7 +121,7 @@ const PageHeaderContent = React.forwardRef<
     children,
     title,
     subTitle,
-    icon,
+    renderIcon: IconElement,
     contextualActions,
     pageActions,
     ...other
@@ -124,9 +152,9 @@ const PageHeaderContent = React.forwardRef<
       <div className={`${prefix}--page-header__content__title-wrapper`}>
         <div className={`${prefix}--page-header__content__start`}>
           <div className={`${prefix}--page-header__content__title-container`}>
-            {icon && (
+            {IconElement && (
               <div className={`${prefix}--page-header__content__icon`}>
-                {icon}
+                <IconElement />
               </div>
             )}
 
@@ -177,6 +205,38 @@ const PageHeaderContent = React.forwardRef<
   );
 });
 PageHeaderContent.displayName = 'PageHeaderContent';
+
+PageHeaderContent.propTypes = {
+  /**
+   * Provide child elements to be rendered inside PageHeaderContent.
+   */
+  children: PropTypes.node,
+  /**
+   * Specify an optional className to be added to your PageHeaderContent
+   */
+  className: PropTypes.string,
+  /**
+   * Provide an optional icon to render in front of the PageHeaderContent's title.
+   */
+  // @ts-expect-error: PropTypes are not expressive enough to cover this case
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  /**
+   * The PageHeaderContent's title
+   */
+  title: PropTypes.string.isRequired,
+  /**
+   * The PageHeaderContent's subTitle
+   */
+  subTitle: PropTypes.string,
+  /**
+   * The PageHeaderContent's contextualActions
+   */
+  contextualActions: PropTypes.node,
+  /**
+   * The PageHeaderContent's pageActions
+   */
+  pageActions: PropTypes.node,
+};
 
 /**
  * ----------------

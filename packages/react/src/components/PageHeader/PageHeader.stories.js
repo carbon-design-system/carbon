@@ -31,6 +31,8 @@ import {
 } from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
 
+const BeeIcon = () => <Bee size={32} />;
+
 const dropdownItems = [
   {
     text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
@@ -102,9 +104,9 @@ export const Content = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content
-      title="This is a really long title with a lot of text to trigger the definition tooltip and more and more"
-      subTitle="subTitle"
-      icon={<Bee size={32} />}
+      title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+      subTitle="Subtitle"
+      renderIcon={BeeIcon}
       pageActions={
         <>
           <ContentSwitcher onChange={() => {}}>
@@ -137,9 +139,9 @@ export const ContentWithContextualActions = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content
-      title="This is a really long title with a lot of text to trigger the definition tooltip and more and more"
-      subTitle="subTitle"
-      icon={<Bee size={32} />}
+      title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+      subTitle="Subtitle"
+      renderIcon={BeeIcon}
       contextualActions={
         <>
           <Dropdown
@@ -176,10 +178,9 @@ export const ContentWithContextualActions = (args) => (
         </>
       }
       {...args}>
-      Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-      Massa elementum class enim malesuada lacinia hendrerit enim erat
-      pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-      Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
     </PageHeader.Content>
     <PageHeader.TabBar />
   </PageHeader.Root>
