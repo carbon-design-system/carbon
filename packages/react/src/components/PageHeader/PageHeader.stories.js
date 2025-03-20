@@ -102,7 +102,42 @@ export const Content = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content
-      title="hello"
+      title="This is a really long title with a lot of text to trigger the definition tooltip and more and more"
+      subTitle="subTitle"
+      icon={<Bee size={32} />}
+      pageActions={
+        <>
+          <ContentSwitcher onChange={() => {}}>
+            <IconSwitch name="one" text="Table of Contents">
+              <TableOfContents />
+            </IconSwitch>
+            <IconSwitch name="two" text="Workspace Test">
+              <Workspace />
+            </IconSwitch>
+            <IconSwitch name="three" text="View Mode">
+              <ViewMode_2 />
+            </IconSwitch>
+          </ContentSwitcher>
+          <Button kind="primary" size="md">
+            Button
+          </Button>
+        </>
+      }
+      {...args}>
+      Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+      Massa elementum class enim malesuada lacinia hendrerit enim erat
+      pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+      Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+    </PageHeader.Content>
+    <PageHeader.TabBar />
+  </PageHeader.Root>
+);
+
+export const ContentWithContextualActions = (args) => (
+  <PageHeader.Root>
+    <PageHeader.BreadcrumbBar />
+    <PageHeader.Content
+      title="This is a really long title with a lot of text to trigger the definition tooltip and more and more"
       subTitle="subTitle"
       icon={<Bee size={32} />}
       contextualActions={

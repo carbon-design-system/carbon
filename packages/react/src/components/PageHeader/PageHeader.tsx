@@ -4,9 +4,11 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useLayoutEffect, useState, useRef } from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { Text } from '../Text';
+import { DefinitionTooltip } from '../Tooltip';
 
 /**
  * ----------
@@ -105,6 +107,18 @@ const PageHeaderContent = React.forwardRef<
     },
     className
   );
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+
+  const isEllipsisActive = (element: any) => {
+    setIsEllipsisApplied(element.offsetHeight < element.scrollHeight);
+    return element.offsetHeight < element.scrollHeight;
+  };
+
+  useLayoutEffect(() => {
+    isEllipsisActive(titleRef.current);
+  }, [title]);
+
   return (
     <div className={classNames} ref={ref} {...other}>
       <div className={`${prefix}--page-header__content__title-wrapper`}>
@@ -115,9 +129,24 @@ const PageHeaderContent = React.forwardRef<
                 {icon}
               </div>
             )}
-            <div className={`${prefix}--page-header__content__title`}>
-              {title}{' '}
-            </div>
+
+            {isEllipsisApplied ? (
+              <DefinitionTooltip definition={title}>
+                <Text
+                  ref={titleRef}
+                  as="h4"
+                  className={`${prefix}--page-header__content__title`}>
+                  {title}
+                </Text>
+              </DefinitionTooltip>
+            ) : (
+              <Text
+                ref={titleRef}
+                as="h4"
+                className={`${prefix}--page-header__content__title`}>
+                {title}
+              </Text>
+            )}
           </div>
           {contextualActions && (
             <div
@@ -135,10 +164,10 @@ const PageHeaderContent = React.forwardRef<
         </div>
       </div>
       {subTitle && (
-        <div className={`${prefix}--page-header__content__sub-title`}>
+        <Text as="h3" className={`${prefix}--page-header__content__sub-title`}>
           {subTitle}
-        </div>
-      )}{' '}
+        </Text>
+      )}
       {children && (
         <div className={`${prefix}--page-header__content__body`}>
           {children}

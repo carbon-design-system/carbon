@@ -17,7 +17,7 @@
 // @use '../../utilities/component-reset';
 // @use '../../utilities/focus-outline' as *;
 // @use '../../utilities/high-contrast-mode' as *;
-// @use '../../utilities/convert';
+@use '../../utilities/convert';
 // @use '../../utilities/z-index' as *;
 // @use '../../utilities/custom-property';
 
@@ -42,6 +42,7 @@
 
       display: flex;
       justify-content: space-between;
+      gap: $spacing-05;
     }
 
     .#{$prefix}--page-header__content__start {
@@ -60,6 +61,19 @@
 
     .#{$prefix}--page-header__content__title {
       @include type-style('productive-heading-04');
+
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      max-inline-size: convert.to-rem(640px);
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
+
+    &:has(.#{$prefix}--page-header__content__contextual-actions)
+      .#{$prefix}--page-header__content__title {
+      -webkit-line-clamp: 1;
     }
 
     .#{$prefix}--page-header__content__icon {
@@ -87,14 +101,8 @@
       .#{$prefix}--page-header__content__body {
       margin-block-start: $spacing-05;
     }
-
-    // we can check if there contextual actions, but we actually don't have any way of knowing
-    // when they are below the title or inline
-    &:has(.#{$prefix}--page-header__content__contextual-actions)
-      .#{$prefix}--page-header__content__body {
-      color: green; /* stylelint-disable-line */
-    }
   }
+
   .#{$prefix}--page-header__tab-bar {
     border: 1px solid green; /* stylelint-disable-line */
   }
