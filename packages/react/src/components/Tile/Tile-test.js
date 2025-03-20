@@ -499,6 +499,17 @@ describe('Tile', () => {
       true,
       'selectable-tile-1'
     );
+    // should de-select when user press enter key on selected tile.
+    tile.focus();
+    await userEvent.keyboard('[Enter]');
+    expect(onChange).toHaveBeenCalled();
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'keydown',
+      }),
+      false,
+      'selectable-tile-1'
+    );
   });
 
   it('should call onKeyDown', async () => {
