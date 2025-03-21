@@ -24,7 +24,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-button-set`)
 class CDSButtonSet extends CDSButtonSetBase {
   /**
-   * `true` if the button should have input focus when the page loads.
+   * `true` if the Button should be stacked, or not. Only applies to the button-set variant.
    */
   @property({ type: Boolean, reflect: true })
   stacked = false;
