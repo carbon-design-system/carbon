@@ -55,11 +55,13 @@ export const Default = (args) => {
   const label =
     'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
-    <Tooltip label={label} closeOnActivation={false} {...args}>
-      <button className="sb-tooltip-trigger" type="button">
-        <Help />
-      </button>
-    </Tooltip>
+    <div style={{ padding: '9rem' }}>
+      <Tooltip label={label} closeOnActivation={false} {...args}>
+        <button className="sb-tooltip-trigger" type="button">
+          <Help />
+        </button>
+      </Tooltip>
+    </div>
   );
 };
 
@@ -132,8 +134,10 @@ export const ExperimentalAutoAlign = () => {
 
 export const Duration = () => {
   return (
-    <Tooltip label="Label one" enterDelayMs={0} leaveDelayMs={300}>
-      <Button>This button has a tooltip</Button>
-    </Tooltip>
+    <div style={{ padding: '5rem' }}>
+      <Tooltip label="Label one" enterDelayMs={0} leaveDelayMs={300}>
+        <Button>This button has a tooltip</Button>
+      </Tooltip>
+    </div>
   );
 };
