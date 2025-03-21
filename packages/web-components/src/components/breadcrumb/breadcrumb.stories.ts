@@ -30,11 +30,7 @@ const args = {
   ariaLabel: '',
   className: '',
   noTrailingSlash: false,
-  size: {
-    control: 'select',
-    description: 'Specify the size of the Accordion.',
-    options: sizes,
-  },
+  size: BREADCRUMB_SIZE.MEDIUM,
 };
 
 const argTypes = {
@@ -72,7 +68,7 @@ export const Default = {
         aria-label="${ariaLabel}"
         size="${size}">
         <cds-breadcrumb-item>
-          <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
+          <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
           <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
@@ -81,7 +77,7 @@ export const Default = {
           <cds-breadcrumb-link href="#">Breadcrumb 3</cds-breadcrumb-link>
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
-          <cds-breadcrumb-link>Breadcrumb 6</cds-breadcrumb-link>
+          <cds-breadcrumb-link href="#">Breadcrumb 4</cds-breadcrumb-link>
         </cds-breadcrumb-item>
       </cds-breadcrumb>
     `;
@@ -100,10 +96,10 @@ export const BreadcrumbWithOverflowMenu = {
         aria-label="${ariaLabel}"
         size="${size}">
         <cds-breadcrumb-item>
-          <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
+          <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
-          <cds-breadcrumb-link href="/#">Breadcrumb 2</cds-breadcrumb-link>
+          <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
           <cds-overflow-menu breadcrumb align="bottom">
@@ -119,7 +115,7 @@ export const BreadcrumbWithOverflowMenu = {
           </cds-overflow-menu>
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
-          <cds-breadcrumb-link href="/#">Breadcrumb 5</cds-breadcrumb-link>
+          <cds-breadcrumb-link href="#">Breadcrumb 5</cds-breadcrumb-link>
         </cds-breadcrumb-item>
         <cds-breadcrumb-item>
           <cds-breadcrumb-link is-currentpage>Breadcrumb 6</cds-breadcrumb-link>

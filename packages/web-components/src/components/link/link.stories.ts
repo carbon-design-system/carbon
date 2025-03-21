@@ -14,7 +14,7 @@ import { LINK_SIZE } from './link';
 
 const defaultArgs = {
   disabled: false,
-  href: 'https://example.com',
+  href: '#',
   inline: false,
   size: LINK_SIZE.MEDIUM,
   visited: false,
