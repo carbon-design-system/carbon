@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { Add, Notification } from '@carbon/icons-react';
 import { default as Button, ButtonSkeleton } from '../Button';
 import ButtonSet from '../ButtonSet';
+import { Stack } from '../Stack';
 import mdx from './Button.mdx';
 import './button-story.scss';
 
@@ -60,22 +61,39 @@ export default {
 };
 
 export const Default = (args) => {
-  return <Button {...args}>Button</Button>;
+  return (
+    <Stack gap={7}>
+      <Button {...args}>Button</Button>
+      <Button renderIcon={Add} {...args}>
+        Button
+      </Button>
+    </Stack>
+  );
 };
 
 export const Secondary = (args) => {
   return (
-    <Button kind="secondary" {...args}>
-      Button
-    </Button>
+    <Stack gap={7}>
+      <Button kind="secondary" {...args}>
+        Button
+      </Button>
+      <Button kind="secondary" renderIcon={Add} {...args}>
+        Button
+      </Button>
+    </Stack>
   );
 };
 
 export const Tertiary = (args) => {
   return (
-    <Button kind="tertiary" {...args}>
-      Button
-    </Button>
+    <Stack gap={7}>
+      <Button kind="tertiary" {...args}>
+        Button
+      </Button>
+      <Button kind="tertiary" renderIcon={Add} {...args}>
+        Button
+      </Button>
+    </Stack>
   );
 };
 
@@ -99,9 +117,14 @@ export const Danger = (args) => {
 
 export const Ghost = (args) => {
   return (
-    <Button kind="ghost" {...args}>
-      Button
-    </Button>
+    <Stack gap={7}>
+      <Button kind="ghost" {...args}>
+        Button
+      </Button>
+      <Button kind="ghost" renderIcon={Add} {...args}>
+        Button
+      </Button>
+    </Stack>
   );
 };
 

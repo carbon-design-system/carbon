@@ -113,7 +113,8 @@ const controls = {
   },
   stacked: {
     control: 'boolean',
-    description: 'Specify whether the button set should display vertically.',
+    description:
+      'Specify whether the sutton should be stacked. Only applies to the button-set variant.',
   },
   tooltipAlignment: {
     control: 'radio',
@@ -381,7 +382,7 @@ export const SetOfButtons = {
     tooltipPosition,
     type,
   }) =>
-    html`<cds-button-set .stacked="${stacked}">
+    html`<cds-button-set ?stacked="${stacked}">
       <cds-button
         .button-class-name="${buttonClassName}"
         .danger-description="${dangerDescription}"
