@@ -25,6 +25,12 @@ export { INLINE_LOADING_STATE };
  *
  * @element cds-inline-loading
  */
+/**
+ * Lnline loading spinner.
+ *
+ * @element cds-inline-loading
+ * @fires cds-inline-loading-onsuccess The custom event fired when inline-loading has finished status
+ */
 @customElement(`${prefix}-inline-loading`)
 class CDSInlineLoading extends LitElement {
   /**
