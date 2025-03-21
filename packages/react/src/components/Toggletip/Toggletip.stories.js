@@ -89,7 +89,7 @@ export const ExperimentalAutoAlign = () => {
 
 export const Default = (args) => {
   return (
-    <>
+    <div style={{ padding: '3rem' }}>
       <ToggletipLabel>Toggletip label</ToggletipLabel>
       <Toggletip {...args}>
         <ToggletipButton label="Show information">
@@ -106,7 +106,7 @@ export const Default = (args) => {
           </ToggletipActions>
         </ToggletipContent>
       </Toggletip>
-    </>
+    </div>
   );
 };
 
