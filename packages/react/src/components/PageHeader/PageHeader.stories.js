@@ -19,7 +19,9 @@ import { ContentSwitcher } from '../ContentSwitcher';
 import { IconSwitch } from '../Switch';
 import { Button } from '../Button';
 import { Grid, Column } from '../Grid';
-import stockimage from './_story-assets/2x1.jpg';
+import { breakpoints } from '@carbon/layout';
+import image1 from './_story-assets/2x1.jpg';
+import image2 from './_story-assets/3x2.jpg';
 
 import {
   Bee,
@@ -173,7 +175,17 @@ export const ContentWithHeroImage = (args) => (
           </Column>
           <Column lg={8} md={4} sm={0}>
             <PageHeader.HeroImage>
-              <img src={stockimage}></img>
+              <picture>
+                <source
+                  srcset={image1}
+                  media={`(min-width: ${breakpoints.lg.width}`}
+                />
+                <source
+                  srcset={image2}
+                  media={`(max-width: ${breakpoints.lg.width}`}
+                />
+                <img src={image1} alt="a default image" />
+              </picture>
             </PageHeader.HeroImage>
           </Column>
         </Grid>

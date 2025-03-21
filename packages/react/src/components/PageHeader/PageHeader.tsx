@@ -268,8 +268,6 @@ const PageHeaderHeroImage = React.forwardRef<
   const lgMediaQuery = `(min-width: ${breakpoints.lg.width})`;
   const isLg = useMatchMedia(lgMediaQuery);
 
-  console.log('isMd', isLg);
-
   return (
     <AspectRatio className={classNames} {...other} ratio={isLg ? '2x1' : '3x2'}>
       {children}
