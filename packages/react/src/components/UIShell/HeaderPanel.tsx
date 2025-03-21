@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ import React, {
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
-import { useMergeRefs } from '@floating-ui/react';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
 export interface HeaderPanelProps {
   /**
@@ -68,7 +68,7 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
   ) {
     const prefix = usePrefix();
     const headerPanelReference = useRef<HTMLDivElement>(null);
-    const headerPanelRef = useMergeRefs([headerPanelReference, ref]);
+    const headerPanelRef = useMergedRefs([headerPanelReference, ref]);
 
     const controlled = useRef(expanded !== undefined).current;
     const [expandedState, setExpandedState] = useState(expanded);

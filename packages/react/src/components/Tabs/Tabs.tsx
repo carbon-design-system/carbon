@@ -34,7 +34,7 @@ import { useControllableState } from '../../internal/useControllableState';
 import { useEffectOnce } from '../../internal/useEffectOnce';
 import { useId } from '../../internal/useId';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-import { useMergeRefs } from '@floating-ui/react';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match, matches } from '../../internal/keyboard';
@@ -1215,7 +1215,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
   const { badgeIndicator } = React.useContext(IconTabContext) || {};
   const dismissIconRef = useRef<HTMLButtonElement>(null);
   const tabRef = useRef<HTMLElement>(null);
-  const ref = useMergeRefs([forwardRef, tabRef]);
+  const ref = useMergedRefs([forwardRef, tabRef]);
   const [ignoreHover, setIgnoreHover] = useState(false);
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
@@ -1654,7 +1654,7 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
   ) {
     const prefix = usePrefix();
     const panel = useRef<HTMLDivElement>(null);
-    const ref = useMergeRefs([forwardRef, panel]);
+    const ref = useMergedRefs([forwardRef, panel]);
 
     const [tabIndex, setTabIndex] = useState(0);
     const [interactiveContent, setInteractiveContent] = useState(false);

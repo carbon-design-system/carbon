@@ -15,6 +15,7 @@ import React, {
   type KeyboardEvent,
   type MouseEvent,
   type ReactNode,
+  type Ref,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -36,7 +37,7 @@ import {
   getInteractiveContent,
   getRoleContent,
 } from '../../internal/useNoInteractiveChildren';
-import { useMergeRefs } from '@floating-ui/react';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 import { useId } from '../../internal/useId';
 import { Text } from '../Text';
@@ -791,7 +792,7 @@ export const ExpandableTile = React.forwardRef<
   const chevronInteractiveRef = useRef<HTMLButtonElement>(null);
   const tileContent = useRef<HTMLDivElement>(null);
   const tile = useRef<HTMLElement>(null);
-  const ref = useMergeRefs([forwardRef, tile]);
+  const ref = useMergedRefs([forwardRef, tile]);
   const prefix = usePrefix();
 
   if (expanded !== prevExpanded) {
@@ -954,7 +955,10 @@ export const ExpandableTile = React.forwardRef<
   }
 
   return interactive ? (
-    <div ref={ref} className={interactiveClassNames} {...rest}>
+    <div
+      ref={ref as Ref<HTMLDivElement>}
+      className={interactiveClassNames}
+      {...rest}>
       <div ref={tileContent}>
         {slug ? (
           normalizedDecorator
@@ -990,7 +994,7 @@ export const ExpandableTile = React.forwardRef<
   ) : (
     <button
       type="button"
-      ref={ref}
+      ref={ref as Ref<HTMLButtonElement>}
       className={classNames}
       aria-expanded={isExpanded}
       title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}

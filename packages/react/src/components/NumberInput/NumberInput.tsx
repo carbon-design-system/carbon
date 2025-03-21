@@ -18,7 +18,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { useMergeRefs } from '@floating-ui/react';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
@@ -255,7 +255,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const [prevControlledValue, setPrevControlledValue] =
       useState(controlledValue);
     const inputRef = useRef<HTMLInputElement>(null);
-    const ref = useMergeRefs([forwardRef, inputRef]);
+    const ref = useMergedRefs([forwardRef, inputRef]);
     const numberInputClasses = cx({
       [`${prefix}--number`]: true,
       [`${prefix}--number--helpertext`]: true,

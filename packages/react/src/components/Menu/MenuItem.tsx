@@ -34,7 +34,7 @@ import {
 import { CaretRight, CaretLeft, Checkmark } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
-import { useMergeRefs } from '@floating-ui/react';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { warning } from '../../internal/warning.js';
 
@@ -130,7 +130,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const context = useContext(MenuContext);
 
     const menuItem = useRef<HTMLLIElement>(null);
-    const ref = useMergeRefs([forwardRef, menuItem, refs.setReference]);
+    const ref = useMergedRefs([forwardRef, menuItem, refs.setReference]);
 
     const hasChildren = Boolean(children);
 

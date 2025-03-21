@@ -8,7 +8,7 @@
 import React, { useRef, forwardRef, ReactNode } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
-import { useMergeRefs } from '@floating-ui/react';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import getDisplayName from '../../prop-types/tools/getDisplayName';
@@ -43,7 +43,7 @@ type SwitcherProps = SwitcherWithAriaLabel | SwitcherWithAriaLabelledBy;
 const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
   function Switcher(props, forwardRef) {
     const switcherRef = useRef<HTMLUListElement>(null);
-    const ref = useMergeRefs([switcherRef, forwardRef]);
+    const ref = useMergedRefs([switcherRef, forwardRef]);
 
     const prefix = usePrefix();
     const {

@@ -23,7 +23,7 @@ import { keys, match } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
-import { useMergeRefs } from '@floating-ui/react';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import deprecate from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 
@@ -150,7 +150,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const inputRef = useRef<HTMLInputElement>(null);
-  const ref = useMergeRefs([forwardRef, inputRef]);
+  const ref = useMergedRefs([forwardRef, inputRef]);
   const expandButtonRef = useRef<HTMLDivElement>(null);
   const inputId = useId('search-input');
   const uniqueId = id || inputId;

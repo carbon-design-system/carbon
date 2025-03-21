@@ -1,15 +1,14 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
-import { useMergeRefs } from '@floating-ui/react';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
 export interface InlineCheckboxProps {
   /*
@@ -93,7 +92,7 @@ const InlineCheckbox = React.forwardRef<HTMLInputElement, InlineCheckboxProps>(
     } = props;
     const prefix = usePrefix();
     const inputRef = useRef<HTMLInputElement>(null);
-    const ref = useMergeRefs([inputRef, forwardRef]);
+    const ref = useMergedRefs([inputRef, forwardRef]);
 
     const inputProps: React.InputHTMLAttributes<HTMLInputElement> & {
       ref: React.Ref<HTMLInputElement>;

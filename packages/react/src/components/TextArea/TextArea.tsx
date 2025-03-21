@@ -7,11 +7,12 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  ReactNode,
-  useState,
+  forwardRef,
   useContext,
-  useRef,
   useEffect,
+  useRef,
+  useState,
+  type ReactNode,
 } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
@@ -20,7 +21,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useAnnouncer } from '../../internal/useAnnouncer';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-import { useMergeRefs } from '@floating-ui/react';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
@@ -161,7 +162,11 @@ export interface TextAreaProps
   counterMode?: 'character' | 'word';
 }
 
-const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
+// TODO: This type was added to prevent the formatter from changing the
+// indentation of this entire function. Delete it in a future pull request.
+type TTextArea = HTMLTextAreaElement;
+
+const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
   const {
     className,
     decorator,
@@ -193,7 +198,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const textAreaInstanceId = useId();
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const ref = useMergeRefs([forwardRef, textareaRef]);
+  const ref = useMergedRefs([forwardRef, textareaRef]);
 
   function getInitialTextCount(): number {
     const targetValue =

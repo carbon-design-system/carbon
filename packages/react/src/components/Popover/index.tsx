@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ import React, {
   type ElementType,
 } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-import { useMergeRefs } from '@floating-ui/react';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { type PolymorphicProps } from '../../types/common';
 import { useWindowEvent } from '../../internal/useEvent';
@@ -389,7 +389,7 @@ export const Popover: PopoverComponent & {
     caret,
   ]);
 
-  const ref = useMergeRefs([forwardRef, popover]);
+  const ref = useMergedRefs([forwardRef, popover]);
   const currentAlignment = autoAlign && placement !== align ? placement : align;
   const className = cx(
     {
@@ -441,9 +441,6 @@ export const Popover: PopoverComponent & {
         className:
           isTabTip && item?.type === 'button' ? tabTipClasses : className || '',
 
-        // TODO: What should be done with this comment since `useMergedRefs`
-        // has been deleted?
-        //
         // With cloneElement, if you pass a `ref`, it overrides the original ref.
         // https://react.dev/reference/react/cloneElement#parameters
         // The block below works around this and ensures that the original ref is still
@@ -625,7 +622,7 @@ function PopoverContentRenderFunction(
 ) {
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
-  const ref = useMergeRefs([setFloating, forwardRef]);
+  const ref = useMergedRefs([setFloating, forwardRef]);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
   return (

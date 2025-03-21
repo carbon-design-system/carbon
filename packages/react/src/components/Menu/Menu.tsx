@@ -21,7 +21,7 @@ import React, {
 import { createPortal } from 'react-dom';
 
 import { keys, match } from '../../internal/keyboard';
-import { useMergeRefs } from '@floating-ui/react';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 
@@ -149,7 +149,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }, [childState, childDispatch]);
 
   const menu = useRef<HTMLUListElement>(null);
-  const ref = useMergeRefs([forwardRef, menu]);
+  const ref = useMergedRefs([forwardRef, menu]);
 
   const [position, setPosition] = useState([-1, -1]);
   const focusableItems = childContext.state.items.filter(
