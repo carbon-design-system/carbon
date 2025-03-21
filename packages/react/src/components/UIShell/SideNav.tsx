@@ -212,7 +212,7 @@ function SideNavRenderFunction(
     };
   }
 
-  useWindowEvent('keydown', (event: Event) => {
+  useWindowEvent('keydown', (event) => {
     const focusedElement = document.activeElement;
 
     if (

@@ -11,7 +11,6 @@ import React, {
   useState,
   type ButtonHTMLAttributes,
   type ChangeEvent,
-  type ComponentType,
   type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
@@ -179,9 +178,9 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
   href?: string;
 
   /**
-   * Optional prop to allow overriding the icon rendering.
+   * A component used to render an icon.
    */
-  renderIcon?: ComponentType<{ className?: string }>;
+  renderIcon?: React.ElementType;
 
   /**
    * Specify the function to run when the ClickableTile is clicked
@@ -363,8 +362,7 @@ ClickableTile.propTypes = {
   rel: PropTypes.string,
 
   /**
-   * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   // @ts-expect-error: Invalid derived prop type, seemingly no real solution.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
@@ -506,24 +504,31 @@ export const SelectableTile = React.forwardRef<
     ) {
       return;
     }
-    setIsSelected(!isSelected);
+    setIsSelected((prevSelected) => {
+      const newSelected = !prevSelected;
+      onChange(evt, newSelected, id);
+      return newSelected;
+    });
     clickHandler(evt);
-    onChange(evt, isSelected, id);
   }
 
   function handleKeyDown(evt) {
     evt?.persist?.();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
-      setIsSelected(!isSelected);
-      onChange(evt, isSelected, id);
+      setIsSelected((prevSelected) => {
+        const newSelected = !prevSelected;
+        onChange(evt, newSelected, id);
+        return newSelected;
+      });
     }
     keyDownHandler(evt);
   }
 
   function handleChange(event) {
-    setIsSelected(event.target.checked);
-    onChange(event, isSelected, id);
+    const newSelected = event.target.checked;
+    setIsSelected(newSelected);
+    onChange(event, newSelected, id);
   }
 
   if (selected !== prevSelected) {

@@ -22,7 +22,7 @@ import * as FeatureFlags from '@carbon/feature-flags';
 import ReactDOM from 'react-dom';
 import window from 'window-or-global';
 import { keys, match } from '../internal/keyboard';
-import OptimizedResize from './OptimizedResize';
+import { OptimizedResize } from './OptimizedResize';
 import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
 import { PrefixContext } from './usePrefix';
 import { warning } from './warning';
@@ -46,8 +46,8 @@ interface RefPosition {
 }
 
 export interface Offset {
-  top?: number;
-  left?: number;
+  top: number;
+  left: number;
 }
 
 interface Container {
@@ -234,7 +234,7 @@ export const FloatingMenu = ({
   flipped,
   focusTrap,
   menuDirection = DIRECTION_BOTTOM,
-  menuOffset = {},
+  menuOffset = { top: 0, left: 0 },
   menuRef: externalMenuRef,
   onPlace,
   selectorPrimaryFocus,
@@ -399,7 +399,7 @@ export const FloatingMenu = ({
     });
 
     return () => {
-      resizeHandler.release();
+      resizeHandler.remove();
     };
   }, [
     triggerRef,
