@@ -24,11 +24,6 @@ export { INLINE_LOADING_STATE };
  * Lnline loading spinner.
  *
  * @element cds-inline-loading
- */
-/**
- * Lnline loading spinner.
- *
- * @element cds-inline-loading
  * @fires cds-inline-loading-onsuccess The custom event fired when inline-loading has finished status
  */
 @customElement(`${prefix}-inline-loading`)
@@ -73,14 +68,14 @@ class CDSInlineLoading extends LitElement {
     };
 
     if (status === INLINE_LOADING_STATE.FINISHED) {
-    setTimeout(() => {
-          this.dispatchEvent(
-            new CustomEvent(
-              (this.constructor as typeof CDSInlineLoading).eventOnSuccess,
-              init
-            )
-          );
-        }, this.successDelay);
+      setTimeout(() => {
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSInlineLoading).eventOnSuccess,
+            init
+          )
+        );
+      }, this.successDelay);
 
       return CheckmarkFilled16({
         class: `${prefix}--inline-loading__checkmark-container`,

@@ -51,10 +51,6 @@ const getControls = ({ disableControl }) => {
       description:
         'Provide an optional handler to be invoked when is successful',
     },
-    successDelay: {
-      control: disableControl,
-      description: 'Provide a delay for the setTimeout for success',
-    },
   };
 };
 
