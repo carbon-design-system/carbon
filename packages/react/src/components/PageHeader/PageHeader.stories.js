@@ -11,12 +11,15 @@ import {
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
   PageHeaderTabBar,
+  PageHeaderHeroImage,
 } from '../PageHeader';
 import { Dropdown } from '../Dropdown';
 import { Tag } from '../Tag';
 import { ContentSwitcher } from '../ContentSwitcher';
 import { IconSwitch } from '../Switch';
 import { Button } from '../Button';
+import { Grid, Column } from '../Grid';
+import stockimage from './_story-assets/2x1.jpg';
 
 import {
   Bee,
@@ -107,24 +110,6 @@ export const Content = (args) => (
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
       subTitle="Subtitle"
       renderIcon={BeeIcon}
-      pageActions={
-        <>
-          <ContentSwitcher onChange={() => {}}>
-            <IconSwitch name="one" text="Table of Contents">
-              <TableOfContents />
-            </IconSwitch>
-            <IconSwitch name="two" text="Workspace Test">
-              <Workspace />
-            </IconSwitch>
-            <IconSwitch name="three" text="View Mode">
-              <ViewMode_2 />
-            </IconSwitch>
-          </ContentSwitcher>
-          <Button kind="primary" size="md">
-            Button
-          </Button>
-        </>
-      }
       {...args}>
       Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
       Massa elementum class enim malesuada lacinia hendrerit enim erat
@@ -136,6 +121,85 @@ export const Content = (args) => (
 );
 
 export const ContentWithContextualActions = (args) => (
+  <PageHeader.Root>
+    <PageHeader.BreadcrumbBar />
+    <PageHeader.Content
+      title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+      subTitle="Subtitle"
+      renderIcon={BeeIcon}
+      contextualActions={
+        <>
+          <Dropdown
+            style={{ paddingRight: '1rem' }}
+            className="dropdown"
+            hideLabel
+            id="default"
+            items={dropdownItems}
+            itemToString={(item) => (item ? item.text : '')}
+            label="This is an example label"
+            titleText="This is an example title"
+          />
+          <Tag className="tag" type="blue" size="lg">
+            Moop
+          </Tag>
+        </>
+      }
+      {...args}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
+    </PageHeader.Content>
+    <PageHeader.TabBar />
+  </PageHeader.Root>
+);
+
+export const ContentWithHeroImage = (args) => (
+  <Grid>
+    <Column lg={16} md={8} sm={4}>
+      <PageHeader.Root>
+        <Grid>
+          <Column lg={8} md={4} sm={4}>
+            <PageHeader.BreadcrumbBar />
+            <PageHeader.Content
+              title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+              subTitle="Subtitle"
+              renderIcon={BeeIcon}
+              {...args}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex.
+            </PageHeader.Content>
+          </Column>
+          <Column lg={8} md={4} sm={0}>
+            <PageHeader.HeroImage>
+              <img src={stockimage}></img>
+            </PageHeader.HeroImage>
+          </Column>
+        </Grid>
+        <PageHeader.TabBar />
+      </PageHeader.Root>
+    </Column>
+  </Grid>
+);
+
+ContentWithHeroImage.decorators = [
+  (Story) => (
+    <>
+      <style>
+        {`
+          .sb-show-main.sb-main-padded {
+            padding-left: 0;
+            padding-right: 0;
+          }
+        `}
+      </style>
+      <Story />
+    </>
+  ),
+];
+
+export const ContentWithContextualActionsAndPageActions = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content
@@ -197,5 +261,6 @@ export const DirectExports = (args) => (
     <PageHeaderBreadcrumbBar />
     <PageHeaderContent />
     <PageHeaderTabBar />
+    <PageHeaderHeroImage />
   </PageHeaderDirect>
 );

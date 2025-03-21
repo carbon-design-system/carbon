@@ -14,8 +14,11 @@ import React, {
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { breakpoints } from '@carbon/layout';
+import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
 import { DefinitionTooltip } from '../Tooltip';
+import { AspectRatio } from '../AspectRatio';
 
 /**
  * ----------
@@ -240,6 +243,43 @@ PageHeaderContent.propTypes = {
 
 /**
  * ----------------
+ * PageHeaderHeroImage
+ * ----------------
+ */
+interface PageHeaderHeroImageProps {
+  children?: React.ReactNode;
+  className?: string;
+}
+const PageHeaderHeroImage = React.forwardRef<
+  HTMLDivElement,
+  PageHeaderHeroImageProps
+>(function PageHeaderHeroImage(
+  { className, children, ...other }: PageHeaderHeroImageProps,
+  ref
+) {
+  const prefix = usePrefix();
+  const classNames = classnames(
+    {
+      [`${prefix}--page-header__hero-image`]: true,
+    },
+    className
+  );
+
+  const lgMediaQuery = `(min-width: ${breakpoints.lg.width})`;
+  const isLg = useMatchMedia(lgMediaQuery);
+
+  console.log('isMd', isLg);
+
+  return (
+    <AspectRatio className={classNames} {...other} ratio={isLg ? '2x1' : '3x2'}>
+      {children}
+    </AspectRatio>
+  );
+});
+PageHeaderHeroImage.displayName = 'PageHeaderHeroImage';
+
+/**
+ * ----------------
  * PageHeaderTabBar
  * ----------------
  */
@@ -284,6 +324,9 @@ BreadcrumbBar.displayName = 'PageHeaderBreadcrumbBar';
 const Content = PageHeaderContent;
 Content.displayName = 'PageHeaderContent';
 
+const HeroImage = PageHeaderHeroImage;
+HeroImage.displayName = 'PageHeaderHeroImage';
+
 const TabBar = PageHeaderTabBar;
 TabBar.displayName = 'PageHeaderTabBar';
 
@@ -292,16 +335,19 @@ export {
   PageHeader,
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
+  PageHeaderHeroImage,
   PageHeaderTabBar,
   // namespaced
   Root,
   BreadcrumbBar,
   Content,
+  HeroImage,
   TabBar,
 };
 export type {
   PageHeaderProps,
   PageHeaderBreadcrumbBarProps,
   PageHeaderContentProps,
+  PageHeaderHeroImageProps,
   PageHeaderTabBarProps,
 };

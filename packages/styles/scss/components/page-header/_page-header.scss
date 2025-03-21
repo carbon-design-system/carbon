@@ -95,12 +95,19 @@
       @include type-style('body-01');
 
       margin-block-start: $spacing-03;
+      max-inline-size: convert.to-rem(640px);
     }
 
     &:not(:has(.#{$prefix}--page-header__content__sub-title))
       .#{$prefix}--page-header__content__body {
       margin-block-start: $spacing-05;
     }
+  }
+
+  .#{$prefix}--page-header__hero-image {
+    // have to take closer at how to scale down the image without imposing
+    // set width and height
+    overflow: hidden;
   }
 
   .#{$prefix}--page-header__tab-bar {
