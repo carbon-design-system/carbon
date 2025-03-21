@@ -73,15 +73,7 @@ class CDSInlineLoading extends LitElement {
     };
 
     if (status === INLINE_LOADING_STATE.FINISHED) {
-      if (
-        this.dispatchEvent(
-          new CustomEvent(
-            (this.constructor as typeof CDSInlineLoading).eventOnSuccess,
-            init
-          )
-        )
-      ) {
-        setTimeout(() => {
+    setTimeout(() => {
           this.dispatchEvent(
             new CustomEvent(
               (this.constructor as typeof CDSInlineLoading).eventOnSuccess,
@@ -89,7 +81,6 @@ class CDSInlineLoading extends LitElement {
             )
           );
         }, this.successDelay);
-      }
 
       return CheckmarkFilled16({
         class: `${prefix}--inline-loading__checkmark-container`,
