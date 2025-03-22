@@ -12,6 +12,11 @@
  */
 export enum TAG_SIZE {
   /**
+   * Large size.
+   */
+  LARGE = 'lg',
+
+  /**
    * Medium size (default).
    */
   MEDIUM = 'md',
