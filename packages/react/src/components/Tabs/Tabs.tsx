@@ -31,7 +31,6 @@ import { Grid } from '../Grid';
 import { isElement } from 'react-is';
 import { Tooltip } from '../Tooltip';
 import { useControllableState } from '../../internal/useControllableState';
-import { useEffectOnce } from '../../internal/useEffectOnce';
 import { useId } from '../../internal/useId';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
@@ -601,7 +600,7 @@ function TabList({
     }
   }
 
-  useEffectOnce(() => {
+  useEffect(() => {
     const tab = tabs.current[selectedIndex];
     if (scrollIntoView && tab) {
       tab.scrollIntoView({
@@ -609,7 +608,7 @@ function TabList({
         inline: 'nearest',
       });
     }
-  });
+  }, []);
 
   useEffect(() => {
     //adding 1 in calculation for firefox support
@@ -627,7 +626,7 @@ function TabList({
     }
   }, [scrollLeft, children, dismissable, isScrollable]);
 
-  useEffectOnce(() => {
+  useEffect(() => {
     if (tabs.current[selectedIndex]?.disabled) {
       const activeTabs = tabs.current.filter((tab) => {
         return !tab.disabled;
@@ -638,7 +637,7 @@ function TabList({
         setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
-  });
+  }, []);
 
   useIsomorphicEffect(() => {
     if (ref.current) {
@@ -941,7 +940,7 @@ function TabListVertical({
     }
   }
 
-  useEffectOnce(() => {
+  useEffect(() => {
     if (tabs.current[selectedIndex]?.disabled) {
       const activeTabs = tabs.current.filter((tab) => {
         return !tab.disabled;
@@ -952,7 +951,7 @@ function TabListVertical({
         setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
-  });
+  }, []);
 
   useEffect(() => {
     function handler() {
@@ -1666,7 +1665,7 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
       [`${prefix}--tab-content--interactive`]: interactiveContent,
     });
 
-    useEffectOnce(() => {
+    useEffect(() => {
       if (!panel.current) {
         return;
       }
@@ -1676,7 +1675,7 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
         setInteractiveContent(true);
         setTabIndex(-1);
       }
-    });
+    }, []);
 
     // tabindex should only be 0 if no interactive content in children
     useEffect(() => {
