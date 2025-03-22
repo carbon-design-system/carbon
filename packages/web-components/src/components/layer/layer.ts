@@ -14,7 +14,7 @@ import { prefix } from '../../globals/settings';
 import styles from './layer.scss?lit';
 
 /**
- * Layer level constants to match React implementation
+ * Layer level constants
  */
 export const MIN_LEVEL = 0;
 export const MAX_LEVEL = 2;
