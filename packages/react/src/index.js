@@ -114,6 +114,7 @@ export { NumberInput, NumberInputSkeleton } from './components/NumberInput';
 export { OrderedList } from './components/OrderedList';
 export { OverflowMenu } from './components/OverflowMenu';
 export { OverflowMenuItem } from './components/OverflowMenuItem';
+export * as unstable__PageHeader from './components/PageHeader';
 export { Pagination } from './components/Pagination';
 export { PaginationNav } from './components/PaginationNav';
 export {

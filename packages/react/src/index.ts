@@ -57,6 +57,7 @@ export * from './components/NumberInput';
 export * from './components/OrderedList';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
+export * as unstable__PageHeader from './components/PageHeader';
 export * from './components/Pagination';
 export * from './components/Pagination/Pagination.Skeleton';
 export * from './components/PaginationNav';
@@ -446,6 +447,14 @@ export type { OrderedListProps } from './components/OrderedList/OrderedList';
 //overflow menu
 export type { OverflowMenuProps } from './components/OverflowMenu/OverflowMenu';
 export type { OverflowMenuItemProps } from './components/OverflowMenuItem/OverflowMenuItem';
+
+//page header
+export type {
+  PageHeaderProps,
+  PageHeaderBreadcrumbBarProps,
+  PageHeaderContentProps,
+  PageHeaderTabBarProps,
+} from './components/PageHeader';
 
 //pagination
 export type { PaginationProps } from './components/Pagination/Pagination';
