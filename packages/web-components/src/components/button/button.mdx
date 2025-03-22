@@ -1,4 +1,4 @@
-import { ArgTypes, Canvas, Meta, Unstyled } from '@storybook/blocks';
+import { ArgTypes, Canvas, Markdown, Meta, Unstyled } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import Add16 from '@carbon/icons/lib/add/16.js';
 import * as ButtonStories from './button.stories';
@@ -30,6 +30,7 @@ import * as ButtonStories from './button.stories';
   - [Button `tooltip-alignment`](#button-tooltip-alignment)
   - [Button `tooltip-position`](#button-tooltip-position)
   - [Button Set `stacked`](#button-set-stacked)
+- [CDN](#cdn)
 - [References](#references)
 - [Feedback](#feedback)
 
@@ -422,6 +423,8 @@ arrange your two `button` elements vertically
   <cds-button kind="primary">Primary button</cds-button>
 </cds-button-set>
 ```
+
+<Markdown>{`${cdnJs({ components: ['button'] })}`}</Markdown>
 
 ## References
 

@@ -1,4 +1,4 @@
-import { ArgTypes, Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as AILabelStories from './ai-label.stories';
 
@@ -19,6 +19,7 @@ import * as AILabelStories from './ai-label.stories';
   - [AILabel `aiTextLabel`](#ai-label-ai-text-label)
   - [AILabel `kind`](#ai-label-kind)
   - [AILabel `revertActive`](#ai-label-revertactive)
+- [CDN](#cdn)
 - [Feedback](#feedback)
 
 ## Overview
@@ -154,6 +155,8 @@ element to the AI-generated state. For an example, please take a look at the
 [Form Group With AI Label](https://web-components.carbondesignsystem.com/?path=/story/components-form-group--with-ai-label)
 with the `revert` control set to true or take a look at the example story
 [source code](https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/form-group/form-group.stories.ts).
+
+<Markdown>{`${cdnJs({ components: ['ai-label'] })}`}</Markdown>
 
 ## Feedback
 

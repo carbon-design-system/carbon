@@ -1,4 +1,4 @@
-import { ArgTypes, Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as BreadcrumbStories from './breadcrumb.stories';
 
@@ -18,7 +18,7 @@ import * as BreadcrumbStories from './breadcrumb.stories';
 - [Breadcrumb with `OverflowMenu`](#breadcrumb-with-overflow-menu)
 - [Skeleton state](#skeleton-state)
 - [Component API](#component-api)
-- [References](#references)
+- [CDN](#cdn)
 - [Feedback](#feedback)
 
 ## Overview
@@ -79,6 +79,8 @@ current page.
   </cds-breadcrumb-item>
 </breadcrumb>
 ```
+
+<Markdown>{`${cdnJs({ components: ['breadcrumb'] })}`}</Markdown>
 
 ## Feedback
 

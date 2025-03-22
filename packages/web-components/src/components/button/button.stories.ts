@@ -160,10 +160,10 @@ export const Default = {
     html`<cds-button
       .button-class-name="${buttonClassName}"
       .danger-description="${dangerDescription}"
-      .disabled="${disabled}"
+      ?disabled="${disabled}"
       .href="${href}"
-      .isExpressive="${isExpressive}"
-      .isSelected="${isSelected}"
+      ?isExpressive="${isExpressive}"
+      ?isSelected="${isSelected}"
       .kind="${kind}"
       .link-role="${linkRole}"
       .size="${size}"
@@ -193,10 +193,10 @@ export const Danger = {
     html`<cds-button
         .button-class-name="${buttonClassName}"
         .danger-description="${dangerDescription}"
-        .disabled="${disabled}"
+        ?disabled="${disabled}"
         .href="${href}"
-        .isExpressive="${isExpressive}"
-        .isSelected="${isSelected}"
+        ?isExpressive="${isExpressive}"
+        ?isSelected="${isSelected}"
         kind="danger"
         .link-role="${linkRole}"
         .size="${size}"
@@ -208,10 +208,10 @@ export const Danger = {
       <cds-button
         .button-class-name="${buttonClassName}"
         .danger-description="${dangerDescription}"
-        .disabled="${disabled}"
+        ?disabled="${disabled}"
         .href="${href}"
-        .isExpressive="${isExpressive}"
-        .isSelected="${isSelected}"
+        ?isExpressive="${isExpressive}"
+        ?isSelected="${isSelected}"
         kind="danger-tertiary"
         .link-role="${linkRole}"
         .size="${size}"
@@ -223,10 +223,10 @@ export const Danger = {
       <cds-button
         .button-class-name="${buttonClassName}"
         .danger-description="${dangerDescription}"
-        .disabled="${disabled}"
+        ?disabled="${disabled}"
         .href="${href}"
-        .isExpressive="${isExpressive}"
-        .isSelected="${isSelected}"
+        ?isExpressive="${isExpressive}"
+        ?isSelected="${isSelected}"
         kind="danger-ghost"
         .link-role="${linkRole}"
         .size="${size}"
@@ -256,10 +256,10 @@ export const Ghost = {
     html`<cds-button
       .button-class-name="${buttonClassName}"
       .danger-description="${dangerDescription}"
-      .disabled="${disabled}"
+      ?disabled="${disabled}"
       .href="${href}"
-      .isExpressive="${isExpressive}"
-      .isSelected="${isSelected}"
+      ?isExpressive="${isExpressive}"
+      ?isSelected="${isSelected}"
       kind="ghost"
       .link-role="${linkRole}"
       .size="${size}"
@@ -291,10 +291,10 @@ export const IconButton = {
     html`<cds-button
       .button-class-name="${buttonClassName}"
       .danger-description="${dangerDescription}"
-      .disabled="${disabled}"
+      ?disabled="${disabled}"
       .href="${href}"
-      .isExpressive="${isExpressive}"
-      .isSelected="${isSelected}"
+      ?isExpressive="${isExpressive}"
+      ?isSelected="${isSelected}"
       kind="${kind}"
       .link-role="${linkRole}"
       .size="${size}"
@@ -351,10 +351,10 @@ export const Secondary = {
     html`<cds-button
       .button-class-name="${buttonClassName}"
       .danger-description="${dangerDescription}"
-      .disabled="${disabled}"
+      ?disabled="${disabled}"
       .href="${href}"
-      .isExpressive="${isExpressive}"
-      .isSelected="${isSelected}"
+      ?isExpressive="${isExpressive}"
+      ?isSelected="${isSelected}"
       kind="secondary"
       .link-role="${linkRole}"
       .size="${size}"
@@ -386,10 +386,10 @@ export const SetOfButtons = {
       <cds-button
         .button-class-name="${buttonClassName}"
         .danger-description="${dangerDescription}"
-        .disabled="${disabled}"
+        ?disabled="${disabled}"
         .href="${href}"
-        .isExpressive="${isExpressive}"
-        .isSelected="${isSelected}"
+        ?isExpressive="${isExpressive}"
+        ?isSelected="${isSelected}"
         kind="secondary"
         .link-role="${linkRole}"
         .size="${size}"
@@ -401,10 +401,10 @@ export const SetOfButtons = {
       <cds-button
         .button-class-name="${buttonClassName}"
         .danger-description="${dangerDescription}"
-        .disabled="${disabled}"
+        ?disabled="${disabled}"
         .href="${href}"
-        .isExpressive="${isExpressive}"
-        .isSelected="${isSelected}"
+        ?isExpressive="${isExpressive}"
+        ?isSelected="${isSelected}"
         kind="primary"
         .link-role="${linkRole}"
         .size="${size}"
@@ -417,9 +417,10 @@ export const SetOfButtons = {
 };
 
 export const Skeleton = {
-  render: () =>
-    html`<cds-button-skeleton> </cds-button-skeleton>
-      <cds-button-skeleton> </cds-button-skeleton>`,
+  render: () => html`
+    <cds-button-skeleton></cds-button-skeleton>
+    <cds-button-skeleton></cds-button-skeleton>
+  `,
 };
 
 export const Tertiary = {
@@ -441,10 +442,10 @@ export const Tertiary = {
     html`<cds-button
       .button-class-name="${buttonClassName}"
       .danger-description="${dangerDescription}"
-      .disabled="${disabled}"
+      ?disabled="${disabled}"
       .href="${href}"
-      .isExpressive="${isExpressive}"
-      .isSelected="${isSelected}"
+      ?isExpressive="${isExpressive}"
+      ?isSelected="${isSelected}"
       kind="tertiary"
       .link-role="${linkRole}"
       .size="${size}"
