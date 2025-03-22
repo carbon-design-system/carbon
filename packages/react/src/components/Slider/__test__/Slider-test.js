@@ -108,7 +108,7 @@ describe('Slider', () => {
       expect(screen.getByText('Warning message')).toBeInTheDocument();
     });
 
-    it('should be able to apply a invalid state', () => {
+    it('should be able to apply an invalid state', () => {
       renderSlider({
         invalid: true,
         ariaLabelInput: inputAriaValue,
@@ -618,13 +618,29 @@ describe('Slider', () => {
       [lowerInput, upperInput].forEach((elem) => expect(elem).toBeDisabled());
     });
 
-    // @todo depends on what we want for warn in a two handle scenario.
-    // @see https://github.com/carbon-design-system/carbon/pull/14297#issuecomment-1690593533
-    it.todo('should be able to apply a warning state');
+    it('should be able to apply a warning state', () => {
+      renderTwoHandleSlider({
+        warn: true,
+        warnText: 'Warning message',
+        value: initialValueLower,
+        unstable_valueUpper: initialValueUpper,
+        min: 0,
+        max: 100,
+      });
+      expect(screen.getByText('Warning message')).toBeInTheDocument();
+    });
 
-    // @todo depends on what we want for invalid in a two handle scenario.
-    // @see https://github.com/carbon-design-system/carbon/pull/14297#issuecomment-1690593533
-    it.todo('should be able to apply a invalid state');
+    it('should be able to apply an invalid state', () => {
+      renderTwoHandleSlider({
+        invalid: true,
+        invalidText: 'Error message',
+        value: initialValueLower,
+        unstable_valueUpper: initialValueUpper,
+        min: 0,
+        max: 100,
+      });
+      expect(screen.getByText('Error message')).toBeInTheDocument();
+    });
 
     it('should be able to set value via props', () => {
       renderTwoHandleSlider({
