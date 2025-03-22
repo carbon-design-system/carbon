@@ -899,6 +899,7 @@ Map {
     },
   },
   "Column" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
         "args": Array [
@@ -1246,6 +1247,7 @@ Map {
         "type": "oneOfType",
       },
     },
+    "render": [Function],
   },
   "ColumnHang" => Object {
     "propTypes": Object {
