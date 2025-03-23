@@ -38,7 +38,7 @@ import { keys, matches, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
-import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
+import { wrapFocus, wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { useFeatureFlag } from '../FeatureFlags';
 import { warning } from '../../internal/warning';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
