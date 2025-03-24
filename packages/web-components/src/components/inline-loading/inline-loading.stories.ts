@@ -65,7 +65,6 @@ export const Default = {
     description,
     status,
     iconDescription,
-    onSuccess = noop,
   }) => {
     return html`
       <cds-inline-loading
