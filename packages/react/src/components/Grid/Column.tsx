@@ -145,7 +145,6 @@ const Column = React.forwardRef(function Column<
     [`${prefix}--col`]: columnClassName.length === 0,
   });
 
-  // cast as any to let TypeScript allow passing in attributes to base component
   return (
     <BaseComponent className={className} ref={ref} {...rest}>
       {children}
