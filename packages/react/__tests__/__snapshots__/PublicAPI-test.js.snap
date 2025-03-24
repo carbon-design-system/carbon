@@ -11123,6 +11123,44 @@ Map {
     },
     "Content": Object {
       "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "contextualActions": Object {
+          "type": "node",
+        },
+        "pageActions": Object {
+          "type": "node",
+        },
+        "renderIcon": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "func",
+              },
+              Object {
+                "type": "object",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "subTitle": Object {
+          "type": "string",
+        },
+        "title": Object {
+          "isRequired": true,
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "HeroImage": Object {
+      "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },
     "PageHeader": Object {
@@ -11134,6 +11172,44 @@ Map {
       "render": [Function],
     },
     "PageHeaderContent": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "contextualActions": Object {
+          "type": "node",
+        },
+        "pageActions": Object {
+          "type": "node",
+        },
+        "renderIcon": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "func",
+              },
+              Object {
+                "type": "object",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "subTitle": Object {
+          "type": "string",
+        },
+        "title": Object {
+          "isRequired": true,
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "PageHeaderHeroImage": Object {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },
