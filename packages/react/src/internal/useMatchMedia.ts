@@ -8,14 +8,7 @@
 import { useState, useEffect } from 'react';
 import { canUseDOM } from './environment';
 
-// TODO: When can support for `addListener` be removed?
-/**
- * Listens to changes in a media query's evaluation.
- *
- * This hook handles both the modern `addEventListener` method and the legacy
- * `addListener` method for attaching event listeners, ensuring compatibility
- * with many browsers.
- */
+/** Listens to changes in a media query and returns whether it matches. */
 export const useMatchMedia = (mediaQuery: string) => {
   const [matches, setMatches] = useState(() => {
     if (canUseDOM) {
@@ -26,26 +19,18 @@ export const useMatchMedia = (mediaQuery: string) => {
   });
 
   useEffect(() => {
-    const listener = (event: MediaQueryListEvent | MediaQueryList) => {
+    const listener = (event: MediaQueryListEvent) => {
       setMatches(event.matches);
     };
 
     const mediaQueryList = window.matchMedia(mediaQuery);
 
-    if (mediaQueryList.addEventListener) {
-      mediaQueryList.addEventListener('change', listener);
-    } else {
-      mediaQueryList.addListener(listener);
-    }
+    mediaQueryList.addEventListener('change', listener);
 
     setMatches(mediaQueryList.matches);
 
     return () => {
-      if (mediaQueryList.removeEventListener) {
-        mediaQueryList.removeEventListener('change', listener);
-      } else {
-        mediaQueryList.removeListener(listener);
-      }
+      mediaQueryList.removeEventListener('change', listener);
     };
   }, [mediaQuery]);
 
