@@ -85,7 +85,7 @@ PageHeaderBreadcrumbBar.displayName = 'PageHeaderBreadcrumbBar';
  * PageHeaderContent
  * -----------------
  */
-export interface PageHeaderContentProps {
+interface PageHeaderContentProps {
   /**
    * Provide child elements to be rendered inside PageHeaderContent.
    */
