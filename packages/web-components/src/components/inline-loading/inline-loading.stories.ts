@@ -72,7 +72,6 @@ export const Default = {
         success-delay=${2000}
         assistive-text=${assistiveText}
         icon-description=${iconDescription}
-        @cds-inline-loading-onsuccess=${onSuccess}
         }>
         ${description}
       </cds-inline-loading>
