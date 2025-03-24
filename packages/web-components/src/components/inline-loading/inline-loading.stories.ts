@@ -45,11 +45,9 @@ const getControls = ({ disableControl }) => {
       description: 'Specify the loading status.',
       options: states,
     },
-    onSuccess: {
+    successDelay: {
       control: disableControl,
-      action: `${prefix}-inline-loading-onsuccess`,
-      description:
-        'Provide an optional handler to be invoked when is successful',
+      description: 'Provide a delay for the setTimeout for success',
     },
   };
 };
@@ -60,12 +58,7 @@ export const Default = {
   parameters: {
     percy: { skip: true },
   },
-  render: ({
-    assistiveText,
-    description,
-    status,
-    iconDescription,
-  }) => {
+  render: ({ assistiveText, description, status, iconDescription }) => {
     return html`
       <cds-inline-loading
         status="${status}"
