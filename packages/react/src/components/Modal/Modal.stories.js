@@ -1,26 +1,24 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
 import Modal from './Modal';
 import Button from '../Button';
 import Select from '../Select';
-import MultiSelect from '../MultiSelect';
-import { Checkbox as CheckboxIcon, Information } from '@carbon/icons-react';
+import { MultiSelect } from '../MultiSelect';
+import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
 import { Popover, PopoverContent } from '../Popover';
 import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import ComboBox from '../ComboBox';
 import mdx from './Modal.mdx';
-import { MenuButton } from '../MenuButton';
-import { MenuItem } from '../Menu';
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -32,7 +30,6 @@ import TextArea from '../TextArea';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/Modal',

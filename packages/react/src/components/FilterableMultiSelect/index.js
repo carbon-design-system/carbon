@@ -1,1 +1,0 @@
-export { FilterableMultiSelect } from '../MultiSelect';
