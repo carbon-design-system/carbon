@@ -129,13 +129,23 @@ function getTsCompilerOptions() {
 }
 
 function getRollupConfig(input, rootDir, outDir) {
+  // In rare cases, dependencies need to be included in the output bundle.
+  // This increases bundle size considerably and should be avoided.
+  // Including dependencies in the output bundle is one way to avoid issues with
+  // modules that are problematic in consumers' bundlers. esm-only modules,
+  // modules using package.json keys like `exports` that are not well supported
+  // in older toolchains (webpack, jest, etc.), etc.
+  const internals = ['es-toolkit'];
+
   return {
     input,
     // Mark dependencies listed in `package.json` as external so that they are
     // not included in the output bundle.
     external: [
       ...Object.keys(packageJson.peerDependencies),
-      ...Object.keys(packageJson.dependencies),
+      ...Object.keys(packageJson.dependencies).filter(
+        (dep) => !internals.includes(dep) // Omit internals
+      ),
       ...Object.keys(packageJson.devDependencies),
     ].map((name) => {
       // Transform the name of each dependency into a regex so that imports from

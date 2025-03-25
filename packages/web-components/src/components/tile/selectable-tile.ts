@@ -10,7 +10,6 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html, svg } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import Checkbox16 from '@carbon/icons/lib/checkbox/16.js';
 import CheckboxCheckedFilled16 from '@carbon/icons/lib/checkbox--checked--filled/16.js';
 import { prefix } from '../../globals/settings';
@@ -18,7 +17,6 @@ import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss?lit';
-import HostListener from '../../globals/decorators/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
@@ -105,24 +103,38 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   /**
+   * Listener function for click interaction.
+   *
+   */
+  private _handleClick = () => {
+    this.selected = !this.selected; // Toggle selection
+    const { eventChange } = this.constructor as typeof CDSSelectableTile;
+    this.dispatchEvent(
+      new CustomEvent(eventChange, {
+        bubbles: true,
+        composed: true,
+        detail: {
+          selected: this.selected,
+        },
+      })
+    );
+  };
+
+  /**
    * Listener function for keyboard interaction.
    *
    * @param event to get the key pressed
    */
-  @HostListener('keydown')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleKeydown = (event: KeyboardEvent) => {
+  protected _handleKeydown = (event: KeyboardEvent) => {
     const { key } = event;
-
     if (
-      key === ' ' ||
-      (key === 'Enter' &&
-        !(event.target as HTMLElement)?.matches(
-          (this.constructor as typeof CDSSelectableTile).aiLabelItem
-        ) &&
-        !(event.target as HTMLElement)?.matches(
-          (this.constructor as typeof CDSSelectableTile).slugItem
-        ))
+      (key === ' ' || key === 'Enter') &&
+      !(event.target as HTMLElement)?.matches(
+        (this.constructor as typeof CDSSelectableTile).aiLabelItem
+      ) &&
+      !(event.target as HTMLElement)?.matches(
+        (this.constructor as typeof CDSSelectableTile).slugItem
+      )
     ) {
       this.selected = !this.selected;
     }
@@ -141,6 +153,12 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   colorScheme = TILE_COLOR_SCHEME.REGULAR;
 
   /**
+   * `true` if the seletable tile should be disabled.
+   */
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
+
+  /**
    * Specify if the `SeletableTile` component should be rendered with rounded corners.
    * Only valid when `ai-label` prop is present
    */
@@ -148,6 +166,8 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   hasRoundedCorners = false;
 
   /**
+   * @deprecated
+   *
    * The form name.
    */
   @property()
@@ -160,6 +180,8 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   selected = false;
 
   /**
+   * @deprecated
+   *
    * The form value.
    */
   @property()
@@ -176,40 +198,44 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   render() {
     const {
       colorScheme,
-      hasRoundedCorners: hasRoundedCorners,
+      disabled,
+      hasRoundedCorners,
       name,
       selected,
       value,
-      _inputType: inputType,
       _handleChange: handleChange,
       _hasAILabel: hasAILabel,
     } = this;
     const classes = classMap({
       [`${prefix}--tile`]: true,
+      [`${prefix}--tile--disabled`]: disabled,
       [`${prefix}--tile--selectable`]: true,
       [`${prefix}--tile--is-selected`]: selected,
       [`${prefix}--tile--${colorScheme}`]: colorScheme,
       [`${prefix}--tile--slug-rounded`]: hasAILabel && hasRoundedCorners,
     });
     return html`
-      <input
-        type="${inputType}"
-        id="input"
-        class="${prefix}--tile-input"
-        tabindex="-1"
-        name="${ifDefined(name)}"
-        value="${ifDefined(value)}"
-        .checked=${selected}
-        @change=${handleChange} />
-      <label for="input" class="${classes}" tabindex="0">
-        <div
+      <div
+        class=${classes}
+        role="checkbox"
+        aria-checked=${selected}
+        @change=${handleChange}
+        tabindex=${!disabled ? 0 : undefined}
+        name=${name}
+        value=${value}
+        @click=${!disabled ? this._handleClick : undefined}
+        @keydown=${this._handleKeydown}>
+        <span
           class="${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent">
           ${this._renderIcon()}
-        </div>
-        <div class="${prefix}--tile-content"><slot></slot></div>
-      </label>
-      <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
-      <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
+        </span>
+        <label class="${prefix}--tile-content">
+          <slot></slot>
+        </label>
+        <slot name="decorator"></slot>
+        <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
+        <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
+      </div>
     `;
   }
 

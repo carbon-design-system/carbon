@@ -1,21 +1,21 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, {
-  useCallback,
-  useContext,
-  useState,
   FocusEvent,
   ForwardedRef,
+  isValidElement,
   MouseEvent,
   ReactNode,
+  useCallback,
+  useContext,
   useEffect,
   useMemo,
-  ReactElement,
+  useState,
 } from 'react';
 import {
   useSelect,
@@ -47,10 +47,10 @@ import { useId } from '../../internal/useId';
 import {
   useFloating,
   flip,
+  hide,
   autoUpdate,
   size as floatingSize,
 } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
 
 const { ItemMouseMove, MenuMouseLeave } =
@@ -608,10 +608,12 @@ const Dropdown = React.forwardRef(
       return React.isValidElement(element) ? element : null;
     }, [slug, decorator]);
 
+    const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
+
     return (
       <div className={wrapperClasses} {...other}>
         {titleText && (
-          <label className={titleClasses} {...getLabelProps()}>
+          <label className={titleClasses} {...labelProps}>
             {titleText}
           </label>
         )}

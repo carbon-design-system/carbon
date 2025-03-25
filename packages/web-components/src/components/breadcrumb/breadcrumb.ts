@@ -11,9 +11,9 @@ import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import { BREADCRUMB_SIZE } from './defs';
 import styles from './breadcrumb.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
 /**
  * Breadcrumb.
  *
@@ -27,6 +27,27 @@ class CDSBreadcrumb extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'no-trailing-slash' })
   noTrailingSlash = false;
 
+  /**
+   * Specify the size of the Breadcrumb. Currently
+   * supports the following: `sm` & `md` (default: 'md')
+   */
+  @property()
+  size = BREADCRUMB_SIZE.MEDIUM;
+
+  /**
+   * Handles `slotchange` event.
+   */
+  private _handleSlotChange({ target }: Event) {
+    const items = (target as HTMLSlotElement)
+      .assignedNodes()
+      .filter(
+        (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+      );
+    items.forEach((item) => {
+      (item as HTMLElement).setAttribute('size', this.size);
+    });
+  }
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'navigation');
@@ -38,10 +59,11 @@ class CDSBreadcrumb extends LitElement {
     const classes = classMap({
       [`${prefix}--breadcrumb`]: true,
       [`${prefix}--breadcrumb--no-trailing-slash`]: this.noTrailingSlash,
+      [`${prefix}--breadcrumb--sm`]: this.size === BREADCRUMB_SIZE.SMALL,
     });
     return html`
       <ol class="${classes}">
-        <slot></slot>
+        <slot @slotchange="${this._handleSlotChange}"></slot>
       </ol>
     `;
   }

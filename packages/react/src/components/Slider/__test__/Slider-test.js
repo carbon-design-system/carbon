@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -972,6 +972,30 @@ describe('Slider', () => {
       expect(onChange).not.toHaveBeenCalled();
     });
 
+    it('should allow upper handle to reach `max` when `max` is not divisible by `step`', () => {
+      const { mouseDown, mouseMove, mouseUp } = fireEvent;
+      const { container } = renderTwoHandleSlider({
+        value: 0,
+        unstable_valueUpper: 400,
+        min: 0,
+        max: 435,
+        step: 50,
+        onChange,
+      });
+      const upperHandle = screen.getAllByRole('slider')[1];
+
+      // Simulate dragging the upper handle far to the right.
+      mouseDown(upperHandle, { clientX: 10 });
+      mouseMove(container.firstChild, { clientX: 1000 });
+      mouseUp(upperHandle);
+
+      // `onChange` should be called with the upper value equal to `max`.
+      expect(onChange).toHaveBeenLastCalledWith({
+        value: 0,
+        valueUpper: 435,
+      });
+    });
+
     describe('Error handling, expected behavior from event handlers', () => {
       it('handles non-number typed into input field', async () => {
         const { type, tab } = userEvent;
@@ -1182,6 +1206,31 @@ describe('Slider', () => {
         mouseDown(upperThumb, { clientX: 10 });
         mouseMove(container.firstChild, { clientX: 1000 });
         expect(onRelease).not.toHaveBeenCalled();
+      });
+
+      it("should round the slider's value when using small step values", async () => {
+        const { keyboard, click } = userEvent;
+
+        renderTwoHandleSlider({
+          value: 0,
+          min: 0,
+          max: 1,
+          step: 0.1,
+          onChange,
+        });
+        const leftHandle = screen.getAllByRole('slider')[0];
+
+        await click(leftHandle);
+        await keyboard('{ArrowRight}');
+        await keyboard('{ArrowRight}');
+        await keyboard('{ArrowRight}');
+
+        // Retrieve the last call to `onChange`.
+        const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1][0];
+
+        // Assert that the value was updated correctly (i.e., not
+        // 0.30000000000000004).
+        expect(lastCall.value).toBe(0.3);
       });
     });
   });

@@ -22,10 +22,10 @@ export default {
 
 export const UxExample = () => {
   function MockSubmission({ children }) {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [success, setSuccess] = useState(false);
-    const [description, setDescription] = useState('Submitting...');
-    const [ariaLive, setAriaLive] = useState('off');
+    const [isSubmitting, setIsSubmitting] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
+    const [description, setDescription] = React.useState('Submitting...');
+    const [ariaLive, setAriaLive] = React.useState('off');
     const handleSubmit = () => {
       setIsSubmitting(true);
       setAriaLive('assertive');

@@ -61,6 +61,6 @@ test.describe('@avt Select', () => {
     await expect(select).toHaveValue('');
     // Select Option 4
     await select.selectOption('Option 4');
-    await expect(select).toHaveValue('Option 4');
+    await expect(select).toHaveValue('option-4');
   });
 });

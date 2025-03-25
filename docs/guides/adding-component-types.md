@@ -142,7 +142,9 @@ the repository. There is an issue tracking curring status of this effort,
   probably not public.
 - The entire Public API is snapshotted, you can
   [search the snapshot here](https://github.com/carbon-design-system/carbon/blob/main/packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap).
-  If it's not included there, it's not part of the public API.
+  If it's not included there, it's not part of the public API. When PropTypes
+  are updated you can regenerate these snapshots by running `yarn test -u` at
+  the root of the project.
 
 ### Should components have both prototypes and ts interface?
 

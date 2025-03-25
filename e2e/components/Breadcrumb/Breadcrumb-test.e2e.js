@@ -38,6 +38,22 @@ test.describe('breadcrumb', () => {
           theme,
         });
       });
+
+      test('breadcrumb size sm with overflow menu @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'breadcrumb',
+          story: 'breadcrumb-with-overflow-menu',
+          theme,
+          args: {
+            size: 'sm',
+          },
+        });
+        await snapshot(page, {
+          component: 'breadcrumb',
+          story: 'breadcrumb-with-overflow-menu',
+          theme,
+        });
+      });
     });
   });
 });

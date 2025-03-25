@@ -17,56 +17,61 @@ export default {
   tags: ['!autodocs'],
   decorators: [
     (Story) => (
-      <WithFeatureFlags>
+      <WithFeatureFlags
+        flags={{
+          'enable-v12-dynamic-floating-styles': true,
+        }}>
         <Story />
       </WithFeatureFlags>
     ),
   ],
 };
 
-const items = [
-  {
-    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-  },
-  {
-    text: 'Option 1',
-  },
-  {
-    text: 'Option 2',
-  },
-  {
-    text: 'Option 3 - a disabled item',
-    disabled: true,
-  },
-  {
-    text: 'Option 4',
-  },
-  {
-    text: 'Option 5',
-  },
-  {
-    text: 'Option 6',
-  },
-  {
-    text: 'Option 7',
-  },
-  {
-    text: 'Option 8',
-  },
-];
+export const FloatingStyles = (args) => {
+  const items = [
+    {
+      text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+    },
+    {
+      text: 'Option 1',
+    },
+    {
+      text: 'Option 2',
+    },
+    {
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      text: 'Option 4',
+    },
+    {
+      text: 'Option 5',
+    },
+    {
+      text: 'Option 6',
+    },
+    {
+      text: 'Option 7',
+    },
+    {
+      text: 'Option 8',
+    },
+  ];
 
-export const FloatingStyles = (args) => (
-  <Dropdown
-    id="default"
-    titleText="Dropdown label"
-    helperText="This is some helper text"
-    initialSelectedItem={items[1]}
-    label="Option 1"
-    items={items}
-    itemToString={(item) => (item ? item.text : '')}
-    {...args}
-  />
-);
+  return (
+    <Dropdown
+      id="default"
+      titleText="Dropdown label"
+      helperText="This is some helper text"
+      initialSelectedItem={items[1]}
+      label="Option 1"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      {...args}
+    />
+  );
+};
 
 FloatingStyles.args = {
   direction: 'bottom',

@@ -7,7 +7,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { classMap } from 'lit/directives/class-map.js';
 import { html } from 'lit';
+import { property } from 'lit/decorators.js';
 import { BUTTON_KIND } from './defs';
 import styles from './button.scss?lit';
 import { prefix } from '../../globals/settings';
@@ -21,6 +23,12 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  */
 @customElement(`${prefix}-button-set`)
 class CDSButtonSet extends CDSButtonSetBase {
+  /**
+   * `true` if the Button should be stacked, or not. Only applies to the button-set variant.
+   */
+  @property({ type: Boolean, reflect: true })
+  stacked = false;
+
   /**
    * Handler for @slotchange, set the first cds-button to kind secondary and primary for the remaining ones
    *
@@ -54,7 +62,13 @@ class CDSButtonSet extends CDSButtonSetBase {
   }
 
   render() {
-    return html` <slot @slotchange="${this._handleSlotChange}"></slot> `;
+    const { stacked } = this;
+    const defaultClasses = {
+      [`${prefix}--btn-set--stacked`]: stacked,
+    };
+    const classes = classMap(defaultClasses);
+
+    return html`<slot class="${classes} @slotchange="${this._handleSlotChange}"></slot>`;
   }
   /**
    * A selector that will return the child items.

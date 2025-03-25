@@ -266,6 +266,35 @@ $popover-caret-height: custom-property.get-var(
     transform: translate($popover-offset, calc(100% + $popover-offset));
   }
 
+  .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    inset-inline-start: auto;
+  }
+
+  .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    inset-block-end: 0;
+    inset-inline-end: auto;
+    inset-inline-start: 0;
+    transform: translate(50%, calc($popover-offset));
+  }
+
+  .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    inset-block-end: 0;
+    inset-inline-end: auto;
+    inset-inline-start: 0;
+    transform: translate(50%, calc(-1 * $popover-offset));
+  }
+
   [dir='rtl']
     .#{$prefix}--popover--bottom-right:not(.#{$prefix}--popover--auto-align)
     > .#{$prefix}--popover

@@ -128,3 +128,17 @@ describe('defaultSortItems', () => {
     ]);
   });
 });
+
+describe('defaultCompareItems', () => {
+  it('should return a negative number if the first string comes before the second', () => {
+    expect(defaultCompareItems('a', 'b', { locale: 'en' })).toBeLessThan(0);
+  });
+
+  it('should return a positive number if the first string comes after the second', () => {
+    expect(defaultCompareItems('z', 'y', { locale: 'en' })).toBeGreaterThan(0);
+  });
+
+  it('should return 0 if both strings are equal', () => {
+    expect(defaultCompareItems('same', 'same', { locale: 'en' })).toEqual(0);
+  });
+});

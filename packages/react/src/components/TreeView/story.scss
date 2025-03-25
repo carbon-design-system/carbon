@@ -7,3 +7,11 @@
 .cds--tree {
   inline-size: 20rem;
 }
+
+#page-body {
+  display: flex;
+
+  main {
+    flex: 1;
+  }
+}

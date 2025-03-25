@@ -115,7 +115,7 @@ describe('CodeSnippet', () => {
         {inline}
       </CodeSnippet>
     );
-    // note: outtermost component is a Tooltip
+    // note: outermost component is a Tooltip
     expect(screen.getByTestId('code-5')).toHaveClass('custom-class');
   });
 

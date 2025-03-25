@@ -54,6 +54,8 @@ class CDSTile extends LitElement {
 
   /**
    * The color scheme.
+   *
+   * @deprecated
    */
   @property({ attribute: 'color-scheme', reflect: true })
   colorScheme = TILE_COLOR_SCHEME.REGULAR;
@@ -66,14 +68,6 @@ class CDSTile extends LitElement {
   hasRoundedCorners = false;
 
   updated() {
-    const anchorTag = this.querySelector('a');
-
-    if (anchorTag) {
-      anchorTag?.classList.add(`${prefix}--link`);
-      anchorTag.before(document.createElement('br'));
-      anchorTag.before(document.createElement('br'));
-    }
-
     if (this._hasAILabel) {
       this.setAttribute('ai-label', '');
     } else {
@@ -83,14 +77,15 @@ class CDSTile extends LitElement {
 
   render() {
     return html` <slot></slot
-      ><slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot
+      ><slot name="decorator" @slotchange="${this._handleSlotChange}"></slot>
+      <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot
       ><slot name="slug" @slotchange="${this._handleSlotChange}"></slot>`;
   }
 
   /**
    * A selector that will return the slug item.
    *
-   * remove in v12
+   * TODO: remove in v12
    */
   static get slugItem() {
     return `${prefix}-slug`;

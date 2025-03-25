@@ -505,7 +505,7 @@ export const HeaderWSideNav = () => (
 
 HeaderWSideNav.storyName = 'Header w/ SideNav';
 
-export const HeaderWActionsAndRightPanel = () => (
+export const HeaderWActionsAndRightPanel = (args) => (
   <>
     <Header aria-label="IBM Platform Name">
       <HeaderName href="#" prefix="IBM">
@@ -519,6 +519,7 @@ export const HeaderWActionsAndRightPanel = () => (
         </HeaderGlobalAction>
         <HeaderGlobalAction
           aria-label="Notifications"
+          badgeCount={args.badgeCount}
           isActive
           onClick={action('notification click')}>
           <Notification size={20} />
@@ -537,6 +538,20 @@ export const HeaderWActionsAndRightPanel = () => (
 );
 
 HeaderWActionsAndRightPanel.storyName = 'Header w/ Actions and Right Panel';
+
+HeaderWActionsAndRightPanel.argTypes = {
+  badgeCount: {
+    description:
+      ' **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0. Must be used with size="lg" and kind="ghost"',
+    control: {
+      type: 'number',
+    },
+  },
+};
+
+HeaderWActionsAndRightPanel.args = {
+  badgeCount: 4,
+};
 
 export const HeaderWActionsAndSwitcher = (args) => (
   <HeaderContainer

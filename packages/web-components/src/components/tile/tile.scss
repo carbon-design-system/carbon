@@ -11,8 +11,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
 @use '@carbon/styles/scss/motion' as *;
+@use '../link/link';
 @use '@carbon/styles/scss/components/tile/index' as *;
-@use '@carbon/styles/scss/components/link/index' as *;
 @use '@carbon/styles/scss/components/form/index' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/theme' as *;
@@ -45,6 +45,10 @@ $css--plex: true !default;
 
   .#{$prefix}--link--disabled {
     display: block;
+    padding: density('padding-inline');
+    background-color: $layer;
+    color: $text-disabled;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--tile {
@@ -64,10 +68,12 @@ $css--plex: true !default;
     }
   }
 
-  &:hover {
-    .#{$prefix}--tile--clickable {
-      color: inherit;
-    }
+  .#{$prefix}--link__icon {
+    display: block;
+  }
+
+  ::slotted([slot='icon']) {
+    @extend .#{$prefix}--tile--icon;
   }
 
   ::slotted(#{$prefix}-ai-label),
@@ -79,10 +85,15 @@ $css--plex: true !default;
 :host(#{$prefix}-radio-tile) {
   @include emit-layout-tokens();
 
+  position: relative;
   display: block;
 
   margin-block-end: $spacing-03;
   outline: none;
+
+  .#{$prefix}--tile {
+    block-size: 100%;
+  }
 }
 
 :host(#{$prefix}-selectable-tile) {
@@ -90,8 +101,12 @@ $css--plex: true !default;
 
   position: relative;
 
-  display: content;
+  display: block;
   outline: none;
+
+  .#{$prefix}--tile {
+    block-size: 100%;
+  }
 
   .#{$prefix}--tile__chevron {
     @extend .#{$prefix}--tile__chevron;
@@ -107,8 +122,9 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-radio-tile) ::slotted(:not([slot])),
 :host(#{$prefix}-clickable-tile) ::slotted(*),
-:host(#{$prefix}-selectable-tile) ::slotted(*) {
+:host(#{$prefix}-selectable-tile) ::slotted(:not([slot])) {
   position: relative;
   z-index: 1;
   cursor: pointer;
@@ -118,6 +134,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--tile;
   @extend .#{$prefix}--tile--expandable;
   @include emit-layout-tokens();
+
+  ::slotted(#{$prefix}-tile-above-the-fold-content) {
+    display: block;
+  }
 
   ::slotted(#{$prefix}-tile-below-the-fold-content) {
     @extend .#{$prefix}--tile-content__below-the-fold;
@@ -152,6 +172,10 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-expandable-tile:not([with-interactive]):focus-within) {
+  @include focus-outline('outline');
+}
+
 :host(#{$prefix}-expandable-tile:not([with-interactive])) {
   .#{$prefix}--tile__chevron {
     border: none;
@@ -170,7 +194,8 @@ $css--plex: true !default;
 :host(#{$prefix}-tile[ai-label]),
 :host(#{$prefix}-expandable-tile[ai-label]),
 :host(#{$prefix}-clickable-tile[ai-label]) .#{$prefix}--tile,
-:host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile {
+:host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile,
+:host(#{$prefix}-radio-tile[ai-label]) .#{$prefix}--tile {
   @include ai-popover-gradient('default', 0, 'layer');
 
   border: 1px solid transparent;
@@ -182,7 +207,9 @@ $css--plex: true !default;
 :host(#{$prefix}-tile),
 :host(#{$prefix}-expandable-tile),
 :host(#{$prefix}-clickable-tile),
-:host(#{$prefix}-selectable-tile) {
+:host(#{$prefix}-selectable-tile),
+:host(#{$prefix}-radio-tile) {
+  ::slotted([slot='decorator']),
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     position: absolute;
@@ -191,15 +218,21 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-radio-tile[selected]) ::slotted([slot='decorator']),
+:host(#{$prefix}-radio-tile[selected]) ::slotted(#{$prefix}-ai-label),
+:host(#{$prefix}-selectable-tile) ::slotted([slot='decorator']),
 :host(#{$prefix}-selectable-tile) ::slotted(#{$prefix}-ai-label),
 :host(#{$prefix}-selectable-tile) ::slotted(#{$prefix}-slug) {
   inset-inline-end: $spacing-08;
+  transition: inset-inline-end $duration-fast-02 motion(standard, productive);
 }
 
 :host(#{$prefix}-expandable-tile[ai-label]):hover {
   @include ai-popover-gradient('default', 0, 'layer');
 }
 
+:host(#{$prefix}-radio-tile[ai-label]) .#{$prefix}--tile::before,
+:host(#{$prefix}-radio-tile[ai-label]) .#{$prefix}--tile::after,
 :host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile::before,
 :host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile::after,
 :host(#{$prefix}-clickable-tile[ai-label]) .#{$prefix}--tile::before {
@@ -214,6 +247,7 @@ $css--plex: true !default;
   transition: opacity $duration-fast-02 motion(standard, productive);
 }
 
+:host(#{$prefix}-radio-tile[ai-label]) .#{$prefix}--tile::before,
 :host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile::before,
 :host(#{$prefix}-clickable-tile[ai-label]) .#{$prefix}--tile::before {
   @include ai-popover-gradient('hover', 0, 'layer');
@@ -221,11 +255,13 @@ $css--plex: true !default;
   box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
 }
 
+:host(#{$prefix}-radio-tile[ai-label]) .#{$prefix}--tile:hover::before,
 :host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile:hover::before,
 :host(#{$prefix}-clickable-tile[ai-label]) .#{$prefix}--tile:hover::before {
   opacity: 1;
 }
 
+:host(#{$prefix}-radio-tile[ai-label]) .#{$prefix}--tile--is-selected,
 :host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile--is-selected {
   border: 1px solid $layer-selected-inverse;
   .#{$prefix}--tile__checkmark {
@@ -233,6 +269,7 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-radio-tile[ai-label]),
 :host(#{$prefix}-selectable-tile[ai-label])
   .#{$prefix}--tile--is-selected::after {
   @include ai-popover-gradient('selected', 0, 'layer');
@@ -247,7 +284,8 @@ $css--plex: true !default;
 :host(#{$prefix}-tile[ai-label][has-rounded-corners]),
 :host(#{$prefix}-expandable-tile[ai-label][has-rounded-corners]),
 :host(#{$prefix}-clickable-tile[ai-label][has-rounded-corners]),
-:host(#{$prefix}-selectable-tile[ai-label][has-rounded-corners]) {
+:host(#{$prefix}-selectable-tile[ai-label][has-rounded-corners]),
+:host(#{$prefix}-radio-tile[ai-label][has-rounded-corners]) {
   @extend .#{$prefix}--tile--slug-rounded;
 
   .#{$prefix}--tile__chevron {

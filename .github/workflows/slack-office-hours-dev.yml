@@ -14,6 +14,8 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # v2.0.0
         with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
           payload: |
             {
               "username": "Carbon Design System",
@@ -68,7 +70,7 @@ jobs:
                       "emoji": true
                     },
                     "value": "click_me_123",
-                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10408799",
+                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10482832",
                     "action_id": "button-action"
                   }
                 },
@@ -95,9 +97,6 @@ jobs:
                 }
               ]
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
   post-reminder-to-carbon-web-components:
     name: Post dev reminder to carbon-web-components
@@ -107,6 +106,8 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # v2.0.0
         with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
           payload: |
             {
               "username": "Carbon Design System",
@@ -161,7 +162,7 @@ jobs:
                       "emoji": true
                     },
                     "value": "click_me_123",
-                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10408799",
+                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10482832",
                     "action_id": "button-action"
                   }
                 },
@@ -188,9 +189,6 @@ jobs:
                 }
               ]
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
   post-reminder-to-carbon-ibmproducts-pal-dev:
     name: Post dev reminder to ibmproducts-pal-dev
@@ -200,6 +198,8 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # v2.0.0
         with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
           payload: |
             {
               "username": "Carbon Design System",
@@ -254,7 +254,7 @@ jobs:
                       "emoji": true
                     },
                     "value": "click_me_123",
-                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10408799",
+                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10482832",
                     "action_id": "button-action"
                   }
                 },
@@ -281,6 +281,3 @@ jobs:
                 }
               ]
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

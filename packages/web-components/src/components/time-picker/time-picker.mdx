@@ -1,0 +1,55 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as TimePicker from './time-picker.stories';
+
+<Meta of={TimePicker} />
+
+# TimePicker
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/time-picker)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/time-picker)
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/time-picker/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['time-picker'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-time-picker
+  label-text="Select a time"
+  placeholder="hh:mm"
+  <cds-time-picker-select id="time-picker-select-1" aria-label="Select AM/PM" slot="time-picker-select">
+    <cds-select-item value="AM">AM</cds-select-item>
+    <cds-select-item value="PM" selected>PM</cds-select-item>
+  </cds-time-picker-select>
+  <cds-time-picker-select id="time-picker-select-2" aria-label="Select timezone" slot="time-picker-select">
+    <cds-select-item value="Time zone 1">Time zone 1</cds-select-item>
+    <cds-select-item value="Time zone 2" selected>Time zone 2</cds-select-item>
+  </cds-time-picker-select>
+</cds-time-picker>
+```
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-time-picker hideLabel>`) and `false` means not setting the attribute (e.g.
+`<cds-time-picker>` without `hideLabel` attribute).
+
+## `<cds-time-picker>` attributes and properties
+
+<ArgTypes of="cds-time-picker"/>
+
+## `<cds-time-picker-select>` attributes and properties
+
+<ArgTypes of="cds-time-picker-select"/>

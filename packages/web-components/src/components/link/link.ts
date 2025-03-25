@@ -61,7 +61,7 @@ class CDSLink extends FocusMixin(LitElement) {
   /**
    * The CSS class list for the link node.
    */
-  protected get _classes() {
+  protected get _classes(): any {
     const { disabled, size, inline, visited, _hasIcon } = this;
     return classMap({
       [`${prefix}--link`]: true,

@@ -33,6 +33,10 @@ const sharedArgTypes = {
       disable: true,
     },
   },
+  size: {
+    options: ['sm', 'md'],
+    control: { type: 'select' },
+  },
 };
 
 export const Default = (args) => (
@@ -50,6 +54,10 @@ Default.argTypes = {
   ...sharedArgTypes,
 };
 
+Default.argTypes = {
+  ...sharedArgTypes,
+};
+
 export const BreadcrumbWithOverflowMenu = (args) => (
   <Breadcrumb noTrailingSlash {...args}>
     <BreadcrumbItem>
@@ -57,7 +65,7 @@ export const BreadcrumbWithOverflowMenu = (args) => (
     </BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
     <BreadcrumbItem data-floating-menu-container>
-      <OverflowMenu aria-label="Overflow menu in a breadcrumb">
+      <OverflowMenu align="bottom" aria-label="Overflow menu in a breadcrumb">
         <OverflowMenuItem itemText="Breadcrumb 3" />
         <OverflowMenuItem itemText="Breadcrumb 4" />
       </OverflowMenu>

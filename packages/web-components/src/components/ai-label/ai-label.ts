@@ -13,7 +13,7 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSToggleTip from '../toggle-tip/toggletip';
 import styles from './ai-label.scss?lit';
-import Undo16 from '@carbon/icons/lib/undo/16';
+import Undo16 from '@carbon/icons/lib/undo/16.js';
 import { AI_LABEL_SIZE, AI_LABEL_KIND } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -24,8 +24,12 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  */
 @customElement(`${prefix}-ai-label`)
 export default class CDSAILabel extends CDSToggleTip {
+  /**
+   * @deprecated the slot string will be renamed to "decorator"
+   */
   @property({ reflect: true })
   slot = 'ai-label';
+
   /**
    * Specify the correct translation of the AI text
    */

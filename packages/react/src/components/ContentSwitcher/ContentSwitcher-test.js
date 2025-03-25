@@ -103,7 +103,7 @@ describe('ContentSwitcher - RTL', () => {
       });
     });
 
-    it('should selected initally selected index based on prop', () => {
+    it('should selected initially selected index based on prop', () => {
       render(
         <ContentSwitcher
           onChange={() => {}}

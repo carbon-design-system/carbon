@@ -14,6 +14,14 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Table of Contents
 
+- [TreeView](#TreeView)
+  - [Overview](#overview)
+  - [With Controlled Expansion](#with-controlled-expansion)
+  - [With Custom Icons](#with-custom-icons)
+  - [Temp](#temp)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
 ## Overview
 
 TreeView is a component that allows users to navigate through a hierarchy of
@@ -67,6 +75,22 @@ TreeView.
       onClick: () =>
         stackblitzPrefillConfig(
           TreeViewStories.WithIcons,
+          "import { Document, Folder } from '@carbon/icons-react';"
+        ),
+    },
+  ]}
+/>
+
+## Temp
+
+<Canvas
+  of={TreeViewStories.Temp}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(
+          TreeViewStories.Temp,
           "import { Document, Folder } from '@carbon/icons-react';"
         ),
     },

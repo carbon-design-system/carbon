@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ import { ReactAttr } from '../../types/common';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { TableContext } from './TableContext';
+import { Heading, Section } from '../Heading';
 
 export interface TableContainerProps
   extends Omit<ReactAttr<HTMLDivElement>, 'title'> {
@@ -63,21 +64,27 @@ const TableContainer = ({
 
   return (
     <TableContext.Provider value={value}>
-      <div {...rest} className={tableContainerClasses}>
-        {title && (
+      <Section {...rest} className={tableContainerClasses}>
+        {(title || description) && (
           <div className={`${prefix}--data-table-header`}>
-            <h4 className={`${prefix}--data-table-header__title`} id={titleId}>
-              {title}
-            </h4>
-            <p
-              className={`${prefix}--data-table-header__description`}
-              id={descriptionId}>
-              {description}
-            </p>
+            {title && (
+              <Heading
+                className={`${prefix}--data-table-header__title`}
+                id={titleId}>
+                {title}
+              </Heading>
+            )}
+            {description && (
+              <p
+                className={`${prefix}--data-table-header__description`}
+                id={descriptionId}>
+                {description}
+              </p>
+            )}
           </div>
         )}
         {children}
-      </div>
+      </Section>
     </TableContext.Provider>
   );
 };

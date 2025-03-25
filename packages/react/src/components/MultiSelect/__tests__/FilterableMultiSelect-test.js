@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -536,7 +536,7 @@ describe('FilterableMultiSelect', () => {
           item ? (
             <span className="test-element" data-testid="custom-id-item">
               {item.text}{' '}
-              <span role="img" alt="fire">
+              <span role="img" aria-label="fire">
                 {' '}
                 🔥
               </span>
@@ -921,5 +921,54 @@ describe('FilterableMultiSelect', () => {
     expect(combobox.closest(`.${prefix}--list-box`)).toHaveClass(
       `${prefix}--multi-select--filterable--input-focused`
     );
+  });
+
+  it('should call `onMenuChange` exactly once on mount when `open` prop is provided', async () => {
+    render(<FilterableMultiSelect {...mockProps} open />);
+    await waitForPosition();
+
+    expect(mockProps.onMenuChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onMenuChange).toHaveBeenCalledWith(true);
+  });
+
+  it('should not re-trigger `onMenuChange` on re-render if `open` prop remains unchanged', async () => {
+    const { rerender } = render(<FilterableMultiSelect {...mockProps} open />);
+    await waitForPosition();
+
+    // Initially called once on mount.
+    expect(mockProps.onMenuChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onMenuChange).toHaveBeenCalledWith(true);
+
+    // Rerender with the same open prop value.
+    rerender(<FilterableMultiSelect {...mockProps} open />);
+    await waitForPosition();
+
+    // The callback should not be called again.
+    expect(mockProps.onMenuChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not call `onMenuChange` on mount when uncontrolled', async () => {
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    // Since uncontrolled mode only fires on interactions, expect no call on
+    // mount.
+    expect(mockProps.onMenuChange).not.toHaveBeenCalled();
+  });
+
+  it('should call `onMenuChange` when user interactions trigger state changes', async () => {
+    render(<FilterableMultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    // Open the menu by clicking the combobox.
+    await userEvent.click(screen.getByRole('combobox'));
+    expect(mockProps.onMenuChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onMenuChange).toHaveBeenCalledWith(true);
+    mockProps.onMenuChange.mockClear();
+
+    // Close the menu by clicking outside of it.
+    await userEvent.click(document.body);
+    expect(mockProps.onMenuChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onMenuChange).toHaveBeenCalledWith(false);
   });
 });

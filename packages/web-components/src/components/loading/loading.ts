@@ -21,19 +21,40 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  *
  * @element cds-loading
  */
+
 @customElement(`${prefix}-loading`)
 class CDSLoading extends LitElement {
   /**
-   * The assistive text for the spinner icon.
+   * @deprecated The 'assistive-text' property will be deprecated in the next major release. Please use `description` instead.
    */
   @property({ attribute: 'assistive-text' })
-  assistiveText = 'Loading';
-
+  get assistiveText() {
+    return this.description;
+  }
+  set assistiveText(value) {
+    this.description = value;
+  }
   /**
-   * Spinner type.
+   * Specify a description that would be used to best describe the loading state
+   */
+  @property({ reflect: true })
+  description = 'Loading';
+  /**
+   *
+   * @deprecated The 'type' property will be deprecated in the next major release. Please use `small` instead.
    */
   @property()
-  type = LOADING_TYPE.REGULAR;
+  get type() {
+    return this.small ? LOADING_TYPE.SMALL : LOADING_TYPE.REGULAR;
+  }
+  set type(value) {
+    this.small = value == LOADING_TYPE.SMALL;
+  }
+  /**
+   * Specify whether you would like the small variant of <Loading>
+   */
+  @property({ type: Boolean, reflect: true })
+  small = false;
 
   /**
    * `true` if overlay should be applied.
@@ -44,17 +65,34 @@ class CDSLoading extends LitElement {
   /**
    * `true` if spinner should stop.
    */
+
+  /**
+   *
+   * @deprecated The 'inactive' property will be deprecated in the next major release. Please use `active` instead.
+   */
   @property({ type: Boolean, reflect: true })
-  inactive = false;
+  get inactive(): boolean {
+    return !this.active;
+  }
+
+  set inactive(value: boolean) {
+    this.active = !value;
+  }
+  /**
+   * Specify whether you want the loading indicator to be spinning or not
+   */
+  @property({ type: Boolean, reflect: true })
+  active = false;
 
   render() {
-    const { inactive, assistiveText, type, overlay } = this;
+    const { active, description, small, overlay } = this;
+
     const innerClasses = classMap({
       [`${prefix}--loading`]: true,
-      [`${prefix}--loading--stop`]: inactive,
-      [`${prefix}--loading--small`]: type === LOADING_TYPE.SMALL,
+      [`${prefix}--loading--stop`]: !active,
+      [`${prefix}--loading--small`]: small,
     });
-    const icon = getLoadingIcon({ assistiveText, type });
+    const icon = getLoadingIcon({ description, small });
     return overlay ? html`<div class="${innerClasses}">${icon}</div>` : icon;
   }
 

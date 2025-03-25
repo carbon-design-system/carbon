@@ -14,6 +14,13 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Table of Contents
 
+- [OrderedList](#OrderedList)
+- [Overview](#overview)
+- [Native List Styles](#native-list-styles)
+- [Nested](#nested)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
 ## Overview
 
 <div style={{ paddingLeft: '15px' }}>
@@ -23,6 +30,34 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
       {
         title: 'Open in Stackblitz',
         onClick: () => stackblitzPrefillConfig(OrderedListStories.Default),
+      },
+    ]}
+  />
+</div>
+
+## Native List Styles
+
+<div style={{ paddingLeft: '15px' }}>
+  <Canvas
+    of={OrderedListStories.NativeListStyles}
+    additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(OrderedListStories.NativeListStyles),
+      },
+    ]}
+  />
+</div>
+
+## Nested
+
+<div style={{ paddingLeft: '15px' }}>
+  <Canvas
+    of={OrderedListStories.Nested}
+    additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(OrderedListStories.Nested),
       },
     ]}
   />

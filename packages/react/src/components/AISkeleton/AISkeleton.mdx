@@ -1,0 +1,69 @@
+import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
+import * as AISkeletonStories from './AISkeletonIcon.stories';
+import * as AISkeletonPlaceholderStories from './AISkeletonPlaceholder.stories';
+import * as AISkeletonTextStories from './AISkeletonText.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+
+<Meta isTemplate />
+
+# AI Skeleton
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/AISkeleton)
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [AI Skeleton Icon](#ai-skeleton-icon)
+  - [AI Skeleton Placeholder](#ai-skeleton-placeholder)
+  - [AI Skeleton Text](#ai-skeleton-text)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+#### AI Skeleton Icon
+
+<Canvas
+  of={AISkeletonStories._AISkeletonIcon}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(AISkeletonStories._AISkeletonIcon),
+    },
+  ]}
+/>
+
+#### AI Skeleton Placeholder
+
+<Canvas
+  of={AISkeletonPlaceholderStories._AISkeletonPlaceholder}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(AISkeletonPlaceholderStories._AISkeletonPlaceholder),
+    },
+  ]}
+/>
+
+#### AI Skeleton Text
+
+<Canvas
+  of={AISkeletonTextStories._AISkeletonText}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(AISkeletonTextStories._AISkeletonText),
+    },
+  ]}
+/>
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/AISkeleton.mdx).

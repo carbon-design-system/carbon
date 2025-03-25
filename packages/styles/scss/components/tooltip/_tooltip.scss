@@ -35,7 +35,6 @@ $tooltip-padding-inline: custom-property.get-var(
     @include type.type-style('body-01');
 
     padding: $tooltip-padding-block $tooltip-padding-inline;
-    color: theme.$text-inverse;
     max-inline-size: convert.to-rem(288px);
   }
 }
@@ -64,6 +63,8 @@ $tooltip-padding-inline: custom-property.get-var(
 
     padding: convert.to-rem(8px) convert.to-rem(16px);
     max-inline-size: convert.to-rem(176px);
+    text-wrap: auto;
+    word-break: break-word;
   }
 }
 

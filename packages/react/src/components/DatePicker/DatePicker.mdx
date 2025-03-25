@@ -22,6 +22,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   - [Simple DatePicker](#simple-datepicker)
   - [Range Datepicker](#range-datepicker)
   - [Skeleton state](#skeleton-state)
+  - [AI label](#ai-label)
 - [Component API](#component-api)
   - [DatePicker `appendTo`](#datepicker-appendto)
   - [DatePicker `className`](#datepicker-classname)
@@ -104,6 +105,17 @@ You can use the `DatePickerSkeleton` component to render a skeleton variant of a
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(DatePickerStories.Skeleton),
+    },
+  ]}
+/>
+
+### AI label
+<Canvas
+  of={DatePickerStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DatePickerStories.withAILabel),
     },
   ]}
 />

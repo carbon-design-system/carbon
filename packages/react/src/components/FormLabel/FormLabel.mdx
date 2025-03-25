@@ -16,7 +16,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
-- [Overview](#overview)
+- [FormLabel](#formLabel)
+  - [Overview](#overview)
+  - [With Toggletip](#with-toggletip)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -24,15 +26,11 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Overview
 
-<Canvas
-  of={FormLabelStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FormLabelStories.Default),
-    },
-  ]}
-/>
+<Canvas of={FormLabelStories.Default} />
+
+#### With Toggletip
+
+<Canvas of={FormLabelStories.WithToggletip} />
 
 ## Component API
 

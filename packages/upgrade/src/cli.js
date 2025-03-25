@@ -41,6 +41,11 @@ export async function main({ argv, cwd }) {
       default: false,
       describe: 'optionally include additional logs, useful for debugging',
       type: 'boolean',
+    })
+    .option('wrapWithFeatureFlag', {
+      default: true,
+      describe: 'wrap the migration with a feature flag',
+      type: 'boolean',
     });
 
   // $0: the default command
@@ -75,14 +80,19 @@ export async function main({ argv, cwd }) {
       );
     },
     run(async (args) => {
-      const { verbose, migration, write, paths } = args;
+      const { verbose, migration, write, paths, wrapWithFeatureFlag } = args;
       const options = {
         cwd: cwd(),
         verbose,
         write,
         migration,
         paths,
+        wrapWithFeatureFlag,
       };
+      console.log(
+        'CLI options wrapWithFeatureFlag:',
+        options.wrapWithFeatureFlag
+      );
       await migrate(options, upgrades);
     })
   );

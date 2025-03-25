@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,9 +24,18 @@ import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
 const waitForPosition = () => act(async () => {});
+
 describe('MultiSelect', () => {
+  let mockProps;
   beforeEach(() => {
     jest.mock('../../../internal/deprecateFieldOnObject');
+    mockProps = {
+      id: 'test-multiselect',
+      initialSelectedItems: [],
+      items: generateItems(5, generateGenericItem),
+      label: 'Test label',
+      onChange: jest.fn(),
+    };
   });
 
   describe.skip('automated accessibility tests', () => {
@@ -735,8 +744,8 @@ describe('MultiSelect', () => {
       //select all the items
       await userEvent.click(screen.getByText('Select all'));
       //open the dropdown to check
-      const dropwdownNode = screen.getByRole('combobox');
-      await userEvent.click(dropwdownNode);
+      const dropdownNode = screen.getByRole('combobox');
+      await userEvent.click(dropdownNode);
       // Check if all items are selected
       const options = screen.getAllByRole('option');
       options.forEach((option) => {
@@ -745,7 +754,7 @@ describe('MultiSelect', () => {
 
       //clear the selection
       await userEvent.click(screen.getByText('Clear'));
-      await userEvent.click(dropwdownNode);
+      await userEvent.click(dropdownNode);
       //check if all items are cleared
       const items = screen.getAllByRole('option');
       items.forEach((option) => {
@@ -766,8 +775,8 @@ describe('MultiSelect', () => {
       );
 
       // The selected items should match what's passed into selectedItems
-      const dropwdownNode = screen.getByRole('combobox');
-      await userEvent.click(dropwdownNode);
+      const dropdownNode = screen.getByRole('combobox');
+      await userEvent.click(dropdownNode);
       expect(screen.getAllByRole('option')[0]).toHaveAttribute(
         'aria-selected',
         'true'
@@ -924,5 +933,23 @@ describe('MultiSelect', () => {
 
     expect(result).toBe('');
     expect(mockItemToString).not.toHaveBeenCalled();
+  });
+
+  it('should add label props when `titleText` is a string', () => {
+    render(<MultiSelect {...mockProps} titleText="MultiSelect Title" />);
+
+    const label = screen.getByText('MultiSelect Title').closest('label');
+
+    expect(label).toHaveAttribute('id');
+  });
+
+  it('should not add label props when `titleText` is an element', () => {
+    render(
+      <MultiSelect {...mockProps} titleText={<span>MultiSelect Title</span>} />
+    );
+
+    const label = screen.getByText('MultiSelect Title').closest('label');
+
+    expect(label).not.toHaveAttribute('id');
   });
 });

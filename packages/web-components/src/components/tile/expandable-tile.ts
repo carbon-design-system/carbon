@@ -177,6 +177,7 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
       </button>
       <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
       <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
+      <slot name="decorator"></slot>
       <div id="content" class="${prefix}--tile-content">
         <div><slot name="above-the-fold-content"></slot></div>
         <div

@@ -78,7 +78,12 @@ export const Nested = () => {
         <MenuItem label="Level 1" />
         <MenuItem label="Level 1" />
         <MenuItem label="Level 1">
-          <MenuItem label="Level 2" />
+          <MenuItem label="Level 2">
+            <MenuItem label="Level 3" />
+            <MenuItem label="Level 3">
+              <MenuItem label="Level 4" />
+            </MenuItem>
+          </MenuItem>
           <MenuItem label="Level 2" />
           <MenuItem label="Level 2" />
         </MenuItem>

@@ -26,12 +26,14 @@ export default {
   },
 };
 
-export const Default = (args) => (
-  <Slider
-    {...args}
-    labelText={`Slider (must be an increment of ${args.step})`}
-  />
-);
+export const Default = (args) => {
+  return (
+    <Slider
+      {...args}
+      labelText={`Slider (must be an increment of ${args.step})`}
+    />
+  );
+};
 
 Default.argTypes = {
   ariaLabelInput: {
@@ -172,43 +174,47 @@ Default.args = {
   warnText: 'Warning message goes here',
 };
 
-export const SliderWithHiddenInputs = () => (
-  <Slider
-    labelText="Slider label"
-    value={50}
-    min={0}
-    max={100}
-    step={1}
-    stepMultiplier={10}
-    noValidate
-    invalidText="Invalid message goes here"
-    hideTextInput={true}
-  />
-);
+export const SliderWithHiddenInputs = () => {
+  return (
+    <Slider
+      labelText="Slider label"
+      value={50}
+      min={0}
+      max={100}
+      step={1}
+      stepMultiplier={10}
+      noValidate
+      invalidText="Invalid message goes here"
+      hideTextInput={true}
+    />
+  );
+};
 
-export const SliderWithCustomValueLabel = () => (
-  <Slider
-    labelText="Slider label with low/medium/high"
-    value={50}
-    min={0}
-    max={100}
-    stepMultiplier={50}
-    step={1}
-    noValidate
-    hideTextInput
-    formatLabel={(val) => {
-      if (val < 25) {
-        return 'Low';
-      } else if (val > 75) {
-        return 'High';
-      }
-      return 'Medium';
-    }}
-  />
-);
+export const SliderWithCustomValueLabel = () => {
+  return (
+    <Slider
+      labelText="Slider label with low/medium/high"
+      value={50}
+      min={0}
+      max={100}
+      stepMultiplier={50}
+      step={1}
+      noValidate
+      hideTextInput
+      formatLabel={(val) => {
+        if (val < 25) {
+          return 'Low';
+        } else if (val > 75) {
+          return 'High';
+        }
+        return 'Medium';
+      }}
+    />
+  );
+};
 
 export const ControlledSlider = () => {
-  const [val, setVal] = useState(87);
+  const [val, setVal] = React.useState(87);
   return (
     <>
       <button
@@ -263,37 +269,45 @@ export const ControlledSliderWithLayer = () => {
   );
 };
 
-export const TwoHandleSlider = () => (
-  <Slider
-    ariaLabelInput="Lower bound"
-    unstable_ariaLabelInputUpper="Upper bound"
-    labelText="Slider label"
-    value={10}
-    unstable_valueUpper={90}
-    min={0}
-    max={100}
-    step={1}
-    stepMultiplier={10}
-    invalidText="Invalid message goes here"
-  />
-);
+export const TwoHandleSlider = () => {
+  return (
+    <Slider
+      ariaLabelInput="Lower bound"
+      unstable_ariaLabelInputUpper="Upper bound"
+      labelText="Slider label"
+      value={10}
+      unstable_valueUpper={90}
+      min={0}
+      max={100}
+      step={1}
+      stepMultiplier={10}
+      invalidText="Invalid message goes here"
+    />
+  );
+};
 
-export const TwoHandleSliderWithHiddenInputs = () => (
-  <Slider
-    ariaLabelInput="Lower bound"
-    unstable_ariaLabelInputUpper="Upper bound"
-    labelText="Slider label"
-    value={10}
-    unstable_valueUpper={90}
-    min={0}
-    max={100}
-    step={1}
-    stepMultiplier={10}
-    invalidText="Invalid message goes here"
-    hideTextInput={true}
-  />
-);
+export const TwoHandleSliderWithHiddenInputs = () => {
+  return (
+    <Slider
+      ariaLabelInput="Lower bound"
+      unstable_ariaLabelInputUpper="Upper bound"
+      labelText="Slider label"
+      value={10}
+      unstable_valueUpper={90}
+      min={0}
+      max={100}
+      step={1}
+      stepMultiplier={10}
+      invalidText="Invalid message goes here"
+      hideTextInput={true}
+    />
+  );
+};
 
-export const Skeleton = () => <SliderSkeleton />;
+export const Skeleton = () => {
+  return <SliderSkeleton />;
+};
 
-export const TwoHandleSkeleton = () => <SliderSkeleton twoHandles={true} />;
+export const TwoHandleSkeleton = () => {
+  return <SliderSkeleton twoHandles={true} />;
+};

@@ -22,49 +22,51 @@ export interface TableRowProps extends ReactAttr<HTMLTableRowElement> {
   isSelected?: boolean;
 }
 
-const TableRow = (props: TableRowProps) => {
-  const prefix = usePrefix();
+const TableRow = React.forwardRef<HTMLTableCellElement, TableRowProps>(
+  (props, ref) => {
+    const prefix = usePrefix();
 
-  let rowHasAILabel;
-  if (props?.children) {
-    React.Children.toArray(props.children).map((child: any) => {
-      if (
-        child.type?.displayName === 'TableSlugRow' ||
-        child.type?.displayName === 'TableDecoratorRow'
-      ) {
+    let rowHasAILabel;
+    if (props?.children) {
+      React.Children.toArray(props.children).map((child: any) => {
         if (
-          child.props.slug ||
-          child.props.decorator?.type.displayName === 'AILabel'
+          child.type?.displayName === 'TableSlugRow' ||
+          child.type?.displayName === 'TableDecoratorRow'
         ) {
-          rowHasAILabel = true;
+          if (
+            child.props.slug ||
+            child.props.decorator?.type.displayName === 'AILabel'
+          ) {
+            rowHasAILabel = true;
+          }
         }
-      }
+      });
+    }
+    // Remove unnecessary props if provided to this component, these are
+    // only useful in `TableExpandRow`
+    const className = cx(props.className, {
+      [`${prefix}--data-table--selected`]: props.isSelected,
+      [`${prefix}--data-table--slug-row ${prefix}--data-table--ai-label-row`]:
+        rowHasAILabel,
     });
+
+    const {
+      ariaLabel,
+      'aria-label': ariaLabelAlt,
+      'aria-controls': ariaControls,
+      onExpand,
+      isExpanded,
+      isSelected,
+      ...cleanProps
+    } = props as any;
+
+    if (className) {
+      cleanProps.className = className;
+    }
+
+    return <tr ref={ref} {...cleanProps} />;
   }
-  // Remove unnecessary props if provided to this component, these are
-  // only useful in `TableExpandRow`
-  const className = cx(props.className, {
-    [`${prefix}--data-table--selected`]: props.isSelected,
-    [`${prefix}--data-table--slug-row ${prefix}--data-table--ai-label-row`]:
-      rowHasAILabel,
-  });
-
-  const {
-    ariaLabel,
-    'aria-label': ariaLabelAlt,
-    'aria-controls': ariaControls,
-    onExpand,
-    isExpanded,
-    isSelected,
-    ...cleanProps
-  } = props as any;
-
-  if (className) {
-    cleanProps.className = className;
-  }
-
-  return <tr {...cleanProps} />;
-};
+);
 
 TableRow.propTypes = {
   /**

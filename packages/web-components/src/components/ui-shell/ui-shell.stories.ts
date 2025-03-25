@@ -24,7 +24,7 @@ import '../modal/modal';
 import '../button/button';
 import styles from './ui-shell-story.scss?lit';
 import { prefix } from '../../globals/settings';
-
+import '../badge-indicator/index';
 const linksHref = 'https://www.carbondesignsystem.com/';
 
 const StoryContent = ({ useResponsiveOffset = true }) => {
@@ -359,7 +359,17 @@ export const HeaderBaseWActions = {
 
 export const HeaderBaseWActionsRightPanel = {
   name: 'Header Base w/ Actions and Right Panel',
-  render: () =>
+  argTypes: {
+    badgeCount: {
+      control: 'number',
+      description:
+        ' **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0. Must be used with size="lg" and kind="ghost"',
+    },
+  },
+  args: {
+    badgeCount: 4,
+  },
+  render: ({ badgeCount }) =>
     html` <style>
         ${styles}
       </style>
@@ -376,6 +386,10 @@ export const HeaderBaseWActionsRightPanel = {
             aria-label="Notification"
             tooltip-text="Notification">
             ${Notification20({ slot: 'icon' })}
+            ${badgeCount > 0
+              ? html`<cds-badge-indicator
+                  count=${badgeCount}></cds-badge-indicator>`
+              : html`<cds-badge-indicator></cds-badge-indicator>`}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"

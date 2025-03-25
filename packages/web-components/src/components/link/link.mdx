@@ -15,6 +15,14 @@ import * as LinkStories from './link.stories';
 Represents a link. Provided for convenience purpose, you can alternatively use
 `<a class="cds--link">` with Carbon style in place in light DOM.
 
+## Overview
+
+Links are used as navigational elements and can be used on their own or inline
+with text. They provide a lightweight option for navigation but like other
+interactive elements, too many links will clutter a page and make it difficult
+for users to identify their next steps. This is especially true for inline
+links, which should be used sparingly.
+
 ## Getting started
 
 Here's a quick example to get you started.
@@ -36,7 +44,9 @@ import '@carbon/web-components/es/components/list/index.js';
 
 ## Paired with icon
 
-Import the desired icon and incorporate with the link text:
+If the text of your link doesn't correspond to the action represented by the
+icon, consider incorporating an `aria-label` for the icon. This will ensure that
+visually impaired users can comprehend the outcome of clicking the link.
 
 ```javascript
 import Download16 from '@carbon/icons/lib/download/16.js';

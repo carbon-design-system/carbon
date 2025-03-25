@@ -16,8 +16,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [Overview](#overview)
-- [Component API](#component-api)
-- [downshiftProps](#combobox-downshiftprops)
+- [downshiftProps](#combobox-uses-downshift)
 - [Placeholder and labeling](#placeholders-and-labeling)
 - [initialSelectedItem](#initialselecteditem)
 - [selectedItem](#selecteditem)
@@ -26,6 +25,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 - [shouldFilterItem](#shouldfilteritem)
 - [allowCustomValue](#allowcustomvalue)
 - [With Layer](#with-layer)
+- [Component API](#component-api)
 - [Feedback](#feedback)
 
 ## Overview
@@ -42,10 +42,6 @@ and is typically used when there are a large amount of options to choose from.
     },
   ]}
 />
-
-## Component API
-
-<ArgTypes />
 
 ## Disabled
 
@@ -88,6 +84,18 @@ arrow keys can still be used to navigate through filtered options.
 
 When combined with the `allowCustomValue` prop, the ComboBox supports both
 custom values and typeahead suggestions.
+
+#### Autocomplete with typeahead:
+
+<Canvas
+  of={ComboBoxStories.AutocompleteWithTypeahead}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboBoxStories.AutocompleteWithTypeahead),
+    },
+  ]}
+/>
 
 ### Combobox `downshiftActions`
 
@@ -296,10 +304,35 @@ callback.
 ```js
 {selectedItem: undefined, inputValue: 'Apple'}
 ```
+<Canvas
+  of={ComboBoxStories.AllowCustomValue}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboBoxStories.AllowCustomValue),
+    },
+  ]}
+/>
+
+## With AI Label
+
+<Canvas
+  of={ComboBoxStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ComboBoxStories.withAILabel),
+    },
+  ]}
+/>
 
 ## With Layer
 
 <Canvas of={ComboBoxStories._WithLayer} />
+
+## Component API
+
+<ArgTypes />
 
 ## Feedback
 

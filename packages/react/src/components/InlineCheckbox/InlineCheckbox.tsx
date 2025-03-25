@@ -181,7 +181,7 @@ InlineCheckbox.propTypes = {
   id: PropTypes.string.isRequired,
 
   /**
-   * Specify whether the control is in an indterminate state
+   * Specify whether the control is in an indeterminate state
    */
   indeterminate: PropTypes.bool,
 

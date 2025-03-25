@@ -18,10 +18,10 @@ import { usePrefix } from '../../internal/usePrefix';
 import {
   useFloating,
   flip,
+  hide,
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
 import mergeRefs from '../../tools/mergeRefs';
 import { MenuAlignment } from '../MenuButton';
@@ -235,7 +235,6 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           ref={refs.setFloating}
           id={id}
           label={t('carbon.combo-button.additional-actions')}
-          mode="basic"
           size={size}
           open={open}
           onClose={handleClose}>

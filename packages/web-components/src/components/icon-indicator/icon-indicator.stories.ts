@@ -26,25 +26,6 @@ const kinds = [
   'informative',
 ];
 
-export const Default = {
-  render: () => html`
-    <div
-      style="display: grid; grid-template-columns: auto auto; column-gap: 1rem; row-gap: .5rem; width: fit-content">
-      ${kinds.map(
-        (kind) => html`
-          <cds-icon-indicator
-            kind="${kind}"
-            label="${kind}"></cds-icon-indicator>
-          <cds-icon-indicator
-            kind="${kind}"
-            label="${kind}"
-            size=${20}></cds-icon-indicator>
-        `
-      )}
-    </div>
-  `,
-};
-
 const defaultArgs = {
   label: 'Custom label',
   kind: ICON_INDICATOR_KIND.FAILED,
@@ -69,14 +50,61 @@ const controls = {
   },
 };
 
-export const Playground = {
+export const Default = {
   argTypes: controls,
   args: defaultArgs,
-  render: ({ label, size, kind }) =>
-    html` <cds-icon-indicator
-      kind="${kind}"
-      size="${size}"
-      label="${label}"></cds-icon-indicator>`,
+  render: ({ label, size }) => html`
+    <div style="display: flex; flex-flow: column; row-gap: .5rem;">
+      <cds-icon-indicator
+        kind="failed"
+        label=${label || 'Failed'}
+        size=${size}></cds-icon-indicator>
+      <cds-icon-indicator
+        kind="caution-major"
+        label=${label || 'Caution major'}
+        size=${size}></cds-icon-indicator>
+      <cds-icon-indicator
+        kind="caution-minor"
+        label=${label || 'Caution minor'}
+        size=${size}></cds-icon-indicator>
+      <cds-icon-indicator
+        kind="undefined"
+        label=${label || 'Undefined'}
+        size=${size}></cds-icon-indicator>
+      <cds-icon-indicator
+        kind="succeeded"
+        label=${label || 'Succeeded'}
+        size=${size}></cds-icon-indicator>
+      <cds-icon-indicator
+        kind="normal"
+        label=${label || 'Normal'}
+        size=${size}></cds-icon-indicator>
+      <cds-icon-indicator
+        kind="in-progress"
+        label=${label || 'In progress'}
+        size=${size}></cds-icon-indicator>
+      <cds-icon-indicator
+        kind="incomplete"
+        label=${label || 'Incomplete'}
+        size=${size}></cds-icon-indicator>
+      <cds-icon-indicator
+        kind="not-started"
+        label=${label || 'Not started'}
+        size=${size}></cds-icon-indicator>
+      <cds-icon-indicator
+        kind="pending"
+        label=${label || 'Pending'}
+        size=${size}></cds-icon-indicator>
+      <cds-icon-indicator
+        kind="unknown"
+        label=${label || 'Unknown'}
+        size=${size}></cds-icon-indicator>
+      <cds-icon-indicator
+        kind="informative"
+        label=${label || 'Informative'}
+        size=${size}></cds-icon-indicator>
+    </div>
+  `,
 };
 
 const meta = {

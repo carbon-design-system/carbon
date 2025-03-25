@@ -312,7 +312,7 @@ describe('PasswordInput', () => {
       );
     });
 
-    it('should call onTogglePasswordVisibility when visiblity button is clicked', async () => {
+    it('should call onTogglePasswordVisibility when visibility button is clicked', async () => {
       render(<PasswordInput id="input-1" labelText="PasswordInput label" />);
 
       expect(screen.getByText('Show password')).toBeInTheDocument();

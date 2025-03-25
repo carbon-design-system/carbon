@@ -23,24 +23,28 @@ export default {
   },
 };
 
-export const Interactive = () => (
-  <ProgressIndicator currentIndex={1} onChange={() => alert('Clicked')}>
-    <ProgressStep
-      label="Click me"
-      description="Step 1: Register a onChange event"
-    />
-    <ProgressStep
-      label="Really long label"
-      description="The progress indicator will listen for clicks on the steps"
-    />
-    <ProgressStep
-      label="Third step"
-      description="The progress indicator will listen for clicks on the steps"
-    />
-  </ProgressIndicator>
-);
+export const Interactive = () => {
+  return (
+    <ProgressIndicator currentIndex={1} onChange={() => alert('Clicked')}>
+      <ProgressStep
+        label="Click me"
+        description="Step 1: Register a onChange event"
+      />
+      <ProgressStep
+        label="Really long label"
+        description="The progress indicator will listen for clicks on the steps"
+      />
+      <ProgressStep
+        label="Third step"
+        description="The progress indicator will listen for clicks on the steps"
+      />
+    </ProgressIndicator>
+  );
+};
 
-export const Skeleton = () => <ProgressIndicatorSkeleton />;
+export const Skeleton = () => {
+  return <ProgressIndicatorSkeleton />;
+};
 
 export const Default = (args) => (
   <ProgressIndicator {...args}>

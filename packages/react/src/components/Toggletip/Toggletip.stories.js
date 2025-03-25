@@ -87,12 +87,11 @@ export const ExperimentalAutoAlign = () => {
   );
 };
 
-const DefaultStory = (controls) => {
-  const { align } = controls;
+export const Default = (args) => {
   return (
     <>
       <ToggletipLabel>Toggletip label</ToggletipLabel>
-      <Toggletip align={align}>
+      <Toggletip {...args}>
         <ToggletipButton label="Show information">
           <Information />
         </ToggletipButton>
@@ -110,8 +109,6 @@ const DefaultStory = (controls) => {
     </>
   );
 };
-
-export const Default = DefaultStory.bind({});
 
 Default.argTypes = {
   align: {

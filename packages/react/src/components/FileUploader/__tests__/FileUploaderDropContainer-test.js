@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -82,7 +82,11 @@ describe('FileUploaderDropContainer', () => {
   it('should call `onAddFiles` when a file is selected', async () => {
     const onAddFiles = jest.fn();
     const { container } = render(
-      <FileUploaderDropContainer onAddFiles={onAddFiles} {...requiredProps} />
+      <FileUploaderDropContainer
+        multiple
+        onAddFiles={onAddFiles}
+        {...requiredProps}
+      />
     );
 
     const input = container.querySelector('input');
@@ -104,8 +108,9 @@ describe('FileUploaderDropContainer', () => {
     const onAddFiles = jest.fn();
     const { container } = render(
       <FileUploaderDropContainer
-        onAddFiles={onAddFiles}
         accept={['.txt']}
+        multiple
+        onAddFiles={onAddFiles}
         {...requiredProps}
       />
     );
@@ -143,8 +148,9 @@ describe('FileUploaderDropContainer', () => {
     const onAddFiles = jest.fn();
     const { container } = render(
       <FileUploaderDropContainer
-        onAddFiles={onAddFiles}
         accept={['.jpeg']}
+        multiple
+        onAddFiles={onAddFiles}
         {...requiredProps}
       />
     );
@@ -177,8 +183,9 @@ describe('FileUploaderDropContainer', () => {
     const onAddFiles = jest.fn();
     const { container } = render(
       <FileUploaderDropContainer
-        onAddFiles={onAddFiles}
         accept={['.txt', '.a_a', '.b-b', '.a-b_c']}
+        multiple
+        onAddFiles={onAddFiles}
         pattern=".[0-9a-z-_]+$"
         {...requiredProps}
       />
@@ -229,6 +236,7 @@ describe('FileUploaderDropContainer', () => {
     const { container } = render(
       <FileUploaderDropContainer
         accept={['.png']}
+        multiple
         onAddFiles={onAddFiles}
         {...requiredProps}
       />
@@ -496,5 +504,32 @@ describe('FileUploaderDropContainer', () => {
 
     dropArea.dispatchEvent(dropEvent);
     expect(handleDrop).not.toHaveBeenCalled();
+  });
+
+  it('should only emit one file when multiple files are dropped and `multiple` is false', () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer
+        onAddFiles={onAddFiles}
+        multiple={false}
+        {...requiredProps}
+      />
+    );
+    const dropArea = container.firstChild;
+    const files = [
+      new File(['content'], 'file1.txt', { type: 'text/plain' }),
+      new File(['content'], 'file2.txt', { type: 'text/plain' }),
+    ];
+    const dropEvent = {
+      dataTransfer: { files },
+      preventDefault: jest.fn(),
+      stopPropagation: jest.fn(),
+    };
+
+    fireEvent.drop(dropArea, dropEvent);
+
+    expect(onAddFiles).toHaveBeenCalledWith(expect.anything(), {
+      addedFiles: [files[0]],
+    });
   });
 });

@@ -169,9 +169,28 @@ const Select = React.forwardRef(function Select(
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const [isFocused, setIsFocused] = useState(false);
-  const [title, setTitle] = useState('');
   const selectInstanceId = useId();
 
+  interface SelectItemProps {
+    value: any;
+    text: string;
+  }
+  // Convert children to an array of valid elements once using type narrowing
+  const validChildren = React.Children.toArray(children).filter(
+    (child): child is React.ReactElement<SelectItemProps> =>
+      React.isValidElement<SelectItemProps>(child)
+  );
+
+  // Find the default option based on the specified defaultValue
+  const defaultOption = validChildren.find(
+    (child) => child.props?.value === other?.defaultValue
+  );
+
+  // Use the default option's text if available; otherwise, fallback to the first option's text
+  const initialTitle =
+    defaultOption?.props?.text || validChildren[0]?.props?.text || '';
+
+  const [title, setTitle] = useState(initialTitle);
   const selectClasses = classNames({
     [`${prefix}--select`]: true,
     [`${prefix}--select--inline`]: inline,
@@ -233,7 +252,8 @@ const Select = React.forwardRef(function Select(
   };
 
   const handleChange = (evt) => {
-    setTitle(evt?.target?.value);
+    const selectedOption = evt?.target?.options[evt.target.selectedIndex];
+    setTitle(selectedOption?.text);
   };
 
   const readOnlyEventHandlers = {

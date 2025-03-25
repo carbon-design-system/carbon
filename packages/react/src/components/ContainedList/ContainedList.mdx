@@ -14,12 +14,18 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
-## Table of Contents
-
 - [Overview](#overview)
   - [Search](#search)
-    - [Expandable Search:](#expandable-search)
-    - [Persistent Search:](#persistent-search)
+    - [Expandable Search](#expandable-search)
+    - [Persistent Search](#persistent-search)
+    - [Usage Examples](#usage-examples)
+    - [Disclosed](#disclosed)
+    - [With Actions](#with-actions)
+    - [With Icons](#with-icons)
+    - [With Interactive Items](#with-interactive-items)
+    - [With Interactive Items and Actions](#with-interactive-items-and-actions)
+    - [With List Title Decorators](#with-list-title-decorators)
+    - [With Layer](#with-layer)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -48,7 +54,7 @@ do not support passing in the `ExpandableSearch` within the title action prop
 while passing in the `Search` component as a child at the same time. If this
 happens, the `ExpandableSearch` in the title will override any other `Search`
 passed in as a child. To prevent this potential conflict, we have added
-funtionality to support both designs and both use cases. Please see
+functionality to support both designs and both use cases. Please see
 [Persistent Search](#persistent-search) docs below.
 
 ```js
@@ -168,6 +174,94 @@ export const WithPersistentSearch = () => {
     },
   ]}
 />
+
+#### Usage Examples:
+
+<Canvas
+  of={ContainedListStories.UsageExamples}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ContainedListStories.UsageExamples),
+    },
+  ]}
+/>
+
+#### Disclosed:
+
+<Canvas
+  of={ContainedListStories.Disclosed}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ContainedListStories.Disclosed),
+    },
+  ]}
+/>
+
+#### With Actions:
+
+<Canvas
+  of={ContainedListStories.WithActions}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ContainedListStories.WithActions),
+    },
+  ]}
+/>
+
+#### With Icons:
+
+<Canvas
+  of={ContainedListStories.WithIcons}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ContainedListStories.WithIcons),
+    },
+  ]}
+/>
+
+#### With Interactive Items:
+
+<Canvas
+  of={ContainedListStories.WithInteractiveItems}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ContainedListStories.WithInteractiveItems),
+    },
+  ]}
+/>
+
+#### With Interactive Items and Actions:
+
+<Canvas
+  of={ContainedListStories.WithInteractiveItemsAndActions}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ContainedListStories.WithInteractiveItemsAndActions),
+    },
+  ]}
+/>
+
+#### With List Title Decorators:
+
+<Canvas
+  of={ContainedListStories.WithListTitleDecorators}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ContainedListStories.WithListTitleDecorators),
+    },
+  ]}
+/>
+
+#### With Layer:
+
+<Canvas of={ContainedListStories._WithLayer} />
 
 ## Component API
 

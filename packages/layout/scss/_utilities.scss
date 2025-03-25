@@ -4,6 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+@use 'sass:map';
 
 /// Map deep get
 /// @author Hugo Giraudel
@@ -27,7 +28,7 @@
 /// @group @carbon/layout
 @function key-by-index($map, $index) {
   $keys: map.keys($map);
-  @return nth($keys, $index);
+  @return list.nth($keys, $index);
 }
 
 /// Pass in a map, and get the last one in the list back
@@ -37,5 +38,5 @@
 /// @group @carbon/layout
 @function last-map-item($map) {
   $total-length: list.length($map);
-  @return map-get($map, carbon--key-by-index($map, $total-length));
+  @return map.get($map, carbon--key-by-index($map, $total-length));
 }

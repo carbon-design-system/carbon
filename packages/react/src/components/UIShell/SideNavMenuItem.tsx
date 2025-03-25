@@ -12,7 +12,7 @@ import SideNavLinkText from './SideNavLinkText';
 import Link from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 
-export interface SideNavMenuItemProps extends ComponentProps<typeof Link> {
+export type SideNavMenuItemProps = ComponentProps<typeof Link> & {
   /**
    * Specify the children to be rendered inside of the `SideNavMenuItem`
    */
@@ -39,7 +39,7 @@ export interface SideNavMenuItemProps extends ComponentProps<typeof Link> {
    * Optional component to render instead of default Link
    */
   as?: ElementType;
-}
+};
 
 const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
   function SideNavMenuItem(props, ref: ForwardedRef<HTMLElement>) {
@@ -73,6 +73,11 @@ const SideNavMenuItem = React.forwardRef<HTMLElement, SideNavMenuItemProps>(
 SideNavMenuItem.displayName = 'SideNavMenuItem';
 SideNavMenuItem.propTypes = {
   /**
+   * Optional component to render instead of default Link
+   */
+  as: PropTypes.elementType as PropTypes.Validator<React.ElementType>,
+
+  /**
    * Specify the children to be rendered inside of the `SideNavMenuItem`
    */
   children: PropTypes.node,
@@ -93,11 +98,6 @@ SideNavMenuItem.propTypes = {
    * `aria-current="page"`, as well.
    */
   isActive: PropTypes.bool,
-
-  /**
-   * Optional component to render instead of default Link
-   */
-  as: PropTypes.elementType,
 };
 
 export default SideNavMenuItem;

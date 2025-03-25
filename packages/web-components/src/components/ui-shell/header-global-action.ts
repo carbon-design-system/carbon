@@ -10,7 +10,11 @@
 import { LitElement } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { BUTTON_TOOLTIP_POSITION } from '../button/button';
+import {
+  BUTTON_TOOLTIP_POSITION,
+  BUTTON_KIND,
+  BUTTON_SIZE,
+} from '../button/button';
 import CDSButton from '../button/button';
 import HostListener from '../../globals/decorators/host-listener';
 import styles from './header.scss?lit';
@@ -52,6 +56,8 @@ class CDSHeaderGlobalAction extends CDSButton {
 
   connectedCallback() {
     this.tooltipPosition = BUTTON_TOOLTIP_POSITION.BOTTOM;
+    this.kind = BUTTON_KIND.GHOST;
+    this.size = BUTTON_SIZE.LARGE;
     super.connectedCallback();
   }
 

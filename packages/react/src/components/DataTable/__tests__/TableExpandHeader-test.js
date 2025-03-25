@@ -190,7 +190,7 @@ describe('TableExpandHeader', () => {
           },
           {
             id: 'd0d95500fccef68dd1e7cb36f381984d340e9a81657b00e578ef175b195d4983',
-            value: 'Sewcond',
+            value: 'Second',
             timestamp: '2022-06-06T12:57:27',
           },
           {

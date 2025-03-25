@@ -1,4 +1,7 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import  * as IconButtonStories from './IconButton.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
 
 <Meta isTemplate />
 
@@ -37,6 +40,15 @@ function ExampleComponent() {
   );
 }
 ```
+<Canvas
+  of={IconButtonStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(IconButtonStories.Default),
+    },
+  ]}
+/>
 
 ## Kind
 

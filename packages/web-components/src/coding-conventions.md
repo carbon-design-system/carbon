@@ -11,7 +11,7 @@
     - [Defining (default) component options](#defining-default-component-options)
     - [Component variants with different options](#component-variants-with-different-options)
       - [Areas to make them configurable as component options](#areas-to-make-them-configurable-as-component-options)
-      - [Areas where component optinos are _not_ applied](#areas-where-component-optinos-are-_not_-applied)
+      - [Areas where component options are _not_ applied](#areas-where-component-options-are-not-applied)
     - [Creating inherited components](#creating-inherited-components)
   - [Polymorphism with static properties](#polymorphism-with-static-properties)
   - [Custom events](#custom-events)
@@ -45,13 +45,13 @@ For that purpose, we add TSDoc comments to the following:
 
 - All classes
 - All properties/methods (including private properties), only exception here is
-  one being overriden
+  one being overridden
 - All type definitions (e.g. `interface`, `enum`)
 
 ## No kitchen-sink "base" class and using mix-in
 
-We strive to avoid kitchen-sink "base" class, for the sake of maintenability and
-avoiding code bloat. Toward that goal, we use mix-in classes. Instead of
+We strive to avoid kitchen-sink "base" class, for the sake of maintainability
+and avoiding code bloat. Toward that goal, we use mix-in classes. Instead of
 manipulating prototype, we simply use ECMAScript class feature
 ([Subclass Factory Pattern](https://github.com/justinfagnani/proposal-mixins#subclass-factory-pattern)),
 which is, something like:
@@ -146,14 +146,14 @@ class which overrides static properties of component options.
 | CSS selectors/classes used in imperative DOM API calls (Doing so allows overriding `.render()` method) | `selectorNonSelectedItem`                          | An exception is where `lit-element`'s `@query` decorator is applicable |
 | [Custom event](#custom-events) names                                                                   | `eventBeforeSelect`                                |                                                                        |
 
-#### Areas where component optinos are _not_ applied
+#### Areas where component options are _not_ applied
 
 - CSS classes used in template (Should be done by overriding `.render()` method)
 
 ### Creating inherited components
 
 This codebase intends to support the components being inherited, to some extent.
-e.g. Compoennts with different options described above. To support that, it's
+e.g. Components with different options described above. To support that, it's
 easier for all properties/methods exposed as `protected`, but it exposes a risk
 of the component internals being poked around. The current guideline for using
 `protected` is the following:
@@ -282,7 +282,7 @@ importing the corresponding modules. It may not be desirable in two scenarios:
 ## Propagating misc attributes from shadow host to an element in shadow DOM
 
 Some components, e.g. `<cds-button>`, simply represent the content in shadow
-DOM, e.g. `<button>` in it. It's sometimes desiable for applications to have
+DOM, e.g. `<button>` in it. It's sometimes desirable for applications to have
 control of attributes in `<button>`, for example, adding `data-` attributes
 there.
 

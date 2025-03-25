@@ -68,6 +68,7 @@ const args = {
   maxCount: '100',
   placeholder: 'Placeholder text',
   playgroundWidth: 300,
+  showPasswordVisibilityToggle: false,
   size: INPUT_SIZE.MEDIUM,
   readonly: false,
   type: 'text',
@@ -128,6 +129,11 @@ const argTypes = {
       max: 800,
       step: 50,
     },
+  },
+  showPasswordVisibilityToggle: {
+    control: 'boolean',
+    description:
+      'Show password visibility toggle (show-password-visibility-toggle)',
   },
   size: {
     control: 'select',
@@ -228,6 +234,7 @@ export const Playground = {
     placeholder,
     playgroundWidth,
     readonly,
+    showPasswordVisibilityToggle,
     size,
     type,
     value,
@@ -248,6 +255,9 @@ export const Playground = {
         max-count="${ifDefined(maxCount)}"
         placeholder="${ifDefined(placeholder)}"
         ?readonly="${ifDefined(readonly)}"
+        ?show-password-visibility-toggle="${ifDefined(
+          showPasswordVisibilityToggle
+        )}"
         size="${ifDefined(size)}"
         type="${ifDefined(type)}"
         value="${ifDefined(value)}"

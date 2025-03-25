@@ -1,66 +1,150 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
+import cx from 'classnames';
+import PropTypes, { WeakValidationMap } from 'prop-types';
 import React, {
-  type ElementType,
-  type ForwardedRef,
+  AnchorHTMLAttributes,
+  AriaAttributes,
+  ComponentType,
+  ElementType,
+  HTMLAttributeAnchorTarget,
   forwardRef,
-  type Ref,
-  type JSX,
 } from 'react';
-import deprecate from '../../prop-types/deprecate';
-import { type PolymorphicProps } from '../../types/common';
+import { usePrefix } from '../../internal/usePrefix';
+import { PolymorphicProps } from '../../types/common';
+import {
+  PolymorphicComponentPropWithRef,
+  PolymorphicRef,
+} from '../../internal/PolymorphicProps';
 
-// Note: Maybe we should use `as` instead of `element`? `as` appears to be
-// standard and is used in other places in this project.
-
-type LinkBaseProps<E extends ElementType> = {
+export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
-   * @deprecated Use `as` instead
+   * @description Indicates the element that represents the
+   *   current item within a container or set of related
+   *   elements.
    */
-  element?: E | undefined;
-  ref?: Ref<E>;
-};
+  'aria-current'?: AriaAttributes['aria-current'];
 
-export type LinkProps<E extends ElementType> = PolymorphicProps<
-  E,
-  LinkBaseProps<E>
->;
+  /**
+   * @description Provide a custom className to be applied to
+   *   the containing `<a>` node.
+   */
+  className?: string;
 
-function LinkRenderFunction<E extends ElementType = 'a'>(
-  {
-    element,
-    as: BaseComponent,
-    // Captured here to prevent it from being passed into the created element.
-    // See https://github.com/carbon-design-system/carbon/issues/3970
-    isSideNavExpanded: _isSideNavExpanded,
-    ...rest
-  }: LinkProps<E>,
-  ref: ForwardedRef<E>
-) {
-  const BaseComponentAsAny = (BaseComponent ?? element ?? 'a') as any;
-  return <BaseComponentAsAny ref={ref} {...rest} />;
+  /**
+   * @description Specify if the control should be disabled, or not.
+   */
+  disabled?: boolean;
+
+  /**
+   * @description Provide the `href` attribute for the `<a>` node.
+   */
+  href?: string;
+
+  /**
+   * @description Specify whether you want the inline version of this control.
+   */
+  inline?: boolean;
+
+  /**
+   * A component used to render an icon.
+   */
+  renderIcon?: ComponentType;
+
+  /**
+   * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * @description Specify the target attribute for the `<a>` node.
+   */
+  target?: HTMLAttributeAnchorTarget;
+
+  /**
+   * Specify whether you want the link to receive visited styles after the link has been clicked
+   */
+  visited?: boolean;
 }
 
-/**
- * Link is a custom component that allows us to supporting rendering elements
- * other than `a` in our markup. The goal is to allow users to support passing
- * in their own components to support use-cases like `react-router` or
- * `@reach/router`
- */
-const Link = forwardRef(LinkRenderFunction) as (<E extends ElementType = 'a'>(
-  props: LinkProps<E>
-) => JSX.Element) & {
+export type LinkProps<T extends ElementType = 'a'> =
+  PolymorphicComponentPropWithRef<T, LinkBaseProps>;
+
+// Define the component type
+type LinkComponent = (<T extends ElementType = 'a'>(
+  props: LinkProps<T>
+) => React.ReactElement | null) & {
   displayName?: string;
-  propTypes?: PropTypes.WeakValidationMap<LinkProps<any>>;
+  propTypes?: WeakValidationMap<any>;
 };
 
-const LinkPropTypes = {
+// Create a non-generic wrapper for forwardRef
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link<
+  T extends ElementType = 'a',
+>(
+  {
+    as,
+    children,
+    className: customClassName,
+    href,
+    disabled = false,
+    inline = false,
+    visited = false,
+    renderIcon: Icon,
+    size,
+    target,
+    ...rest
+  }: LinkProps<T>,
+  ref: PolymorphicRef<T>
+) {
+  const prefix = usePrefix();
+  const className = cx(`${prefix}--link`, customClassName, {
+    [`${prefix}--link--disabled`]: disabled,
+    [`${prefix}--link--inline`]: inline,
+    [`${prefix}--link--visited`]: visited,
+    [`${prefix}--link--${size}`]: size,
+  });
+  const rel = target === '_blank' ? 'noopener' : undefined;
+  const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
+    className: as ? undefined : className,
+    rel,
+    target,
+  };
+
+  // Reference for disabled links:
+  // https://www.scottohara.me/blog/2021/05/28/disabled-links.html
+  if (!disabled) {
+    linkProps.href = href;
+  } else {
+    linkProps.role = 'link';
+    linkProps['aria-disabled'] = true;
+  }
+
+  const Component = (as ?? 'a') as ElementType;
+
+  return (
+    <Component
+      ref={ref}
+      className={as ? customClassName : className}
+      {...linkProps}
+      {...rest}>
+      {children}
+      {!inline && Icon && (
+        <div className={`${prefix}--link__icon`}>
+          <Icon />
+        </div>
+      )}
+    </Component>
+  );
+}) as LinkComponent; // Type assertion here to ensure the component has the correct type
+
+Link.displayName = 'Link';
+Link.propTypes = {
   /**
    * Provide a custom element or component to render the top-level node for the
    * component.
@@ -68,26 +152,44 @@ const LinkPropTypes = {
   as: PropTypes.elementType,
 
   /**
-   * The base element to use to build the link. Defaults to `a`, can also accept
-   * alternative tag names or custom components like `Link` from `react-router`.
-   * @deprecated Use `as` instead
-   *
+   * Provide the content for the Link
    */
-  element: deprecate(
-    PropTypes.elementType,
-    'The `element` prop for `Link` has been deprecated. Please use `as` ' +
-      'instead. This will be removed in the next major release.'
-  ),
+  children: PropTypes.node,
 
   /**
-   * Property to indicate if the side nav container is open (or not). Use to
-   * keep local state and styling in step with the SideNav expansion state.
+   * Provide a custom className to be applied to the containing `<a>` node
    */
-  isSideNavExpanded: PropTypes.bool,
+  className: PropTypes.string,
+
+  /**
+   * Specify if the control should be disabled, or not
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Provide the `href` attribute for the `<a>` node
+   */
+  href: PropTypes.string,
+
+  /**
+   * Specify whether you want the inline version of this control
+   */
+  inline: PropTypes.bool,
+
+  /**
+   * A component used to render an icon.
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify whether you want the link to receive visited styles after the link has been clicked
+   */
+  visited: PropTypes.bool,
 };
 
-Link.displayName = 'Link';
-Link.propTypes = LinkPropTypes;
-
-export { LinkPropTypes };
 export default Link;

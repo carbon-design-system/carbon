@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -45,9 +45,9 @@ export interface ChatButtonProps
    * Specify the kind of `ChatButton` you want to create
    */
   kind?: ChatButtonKind;
+
   /**
-   * Optional prop to specify an icon to be rendered.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: ComponentType | FunctionComponent;
   /**
@@ -149,8 +149,7 @@ ChatButton.propTypes = {
   ]),
 
   /**
-   * Optional prop to specify an icon to be rendered.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 

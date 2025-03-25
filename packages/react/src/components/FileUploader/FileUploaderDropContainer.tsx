@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -150,13 +150,15 @@ function FileUploaderDropContainer({
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const files = [...(event.target.files ?? [])];
-    const addedFiles = validateFiles(files);
+    const filesToValidate = multiple ? files : [files[0]];
+    const addedFiles = validateFiles(filesToValidate);
     return onAddFiles(event, { addedFiles });
   }
 
   function handleDrop(event: React.DragEvent<HTMLDivElement>) {
     const files = [...event.dataTransfer.files];
-    const addedFiles = validateFiles(files);
+    const filesToValidate = multiple ? files : [files[0]];
+    const addedFiles = validateFiles(filesToValidate);
     return onAddFiles(event, { addedFiles });
   }
 
@@ -202,7 +204,7 @@ function FileUploaderDropContainer({
         className={dropareaClasses}
         ref={innerRef}
         onKeyDown={(evt) => {
-          if (matches(evt as unknown as Event, [keys.Enter, keys.Space])) {
+          if (matches(evt, [keys.Enter, keys.Space])) {
             evt.preventDefault();
             inputRef.current?.click();
           }

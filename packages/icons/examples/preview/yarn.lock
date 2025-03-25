@@ -643,7 +643,7 @@ __metadata:
     "@carbon/styles": "link:../../../styles"
     change-case: "npm:^4.1.1"
     next: "npm:^14.2.10"
-    prismjs: "npm:^1.20.0"
+    prismjs: "npm:^1.30.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     sass: "npm:^1.36.0"
@@ -1106,10 +1106,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prismjs@npm:^1.20.0":
-  version: 1.29.0
-  resolution: "prismjs@npm:1.29.0"
-  checksum: 8/007a8869d4456ff8049dc59404e32d5666a07d99c3b0e30a18bd3b7676dfa07d1daae9d0f407f20983865fd8da56de91d09cb08e6aa61f5bc420a27c0beeaf93
+"prismjs@npm:^1.30.0":
+  version: 1.30.0
+  resolution: "prismjs@npm:1.30.0"
+  checksum: 10/6b48a2439a82e5c6882f48ebc1564c3890e16463ba17ac10c3ad4f62d98dea5b5c915b172b63b83023a70ad4f5d7be3e8a60304420db34a161fae69dd4e3e2da
   languageName: node
   linkType: hard
 

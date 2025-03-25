@@ -1,0 +1,44 @@
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+:host(#{$prefix}-heading) {
+  display: block;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-block-end: 0;
+    margin-block-start: 0;
+    margin-inline-end: 0;
+    margin-inline-start: 0;
+    unicode-bidi: isolate;
+  }
+
+  h1 {
+    @include type-style('heading-06');
+  }
+
+  h2 {
+    @include type-style('heading-05');
+  }
+
+  h3 {
+    @include type-style('heading-04');
+  }
+
+  h4 {
+    @include type-style('heading-03');
+  }
+
+  h5 {
+    @include type-style('heading-02');
+  }
+
+  h6 {
+    @include type-style('heading-01');
+  }
+}

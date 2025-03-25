@@ -14,7 +14,10 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [RadioButton](#radiobutton)
+  - [Overview](#overview)
+  - [Vertical](#vertical)
+  - [Skeleton](#skeleton)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -34,6 +37,39 @@ states.
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(RadioButtonStories.Default),
+    },
+  ]}
+/>
+
+## Vertical
+<Canvas
+  of={RadioButtonStories.Vertical}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(RadioButtonStories.Vertical),
+    },
+  ]}
+/>
+
+## Skeleton
+<Canvas
+  of={RadioButtonStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(RadioButtonStories.Skeleton),
+    },
+  ]}
+/>
+
+## AI Label
+<Canvas
+  of={RadioButtonStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(RadioButtonStories.withAILabel),
     },
   ]}
 />
