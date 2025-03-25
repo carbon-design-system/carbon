@@ -46,8 +46,8 @@ interface RefPosition {
 }
 
 export interface Offset {
-  top?: number;
-  left?: number;
+  top: number;
+  left: number;
 }
 
 interface Container {
@@ -234,7 +234,7 @@ export const FloatingMenu = ({
   flipped,
   focusTrap,
   menuDirection = DIRECTION_BOTTOM,
-  menuOffset = {},
+  menuOffset = { top: 0, left: 0 },
   menuRef: externalMenuRef,
   onPlace,
   selectorPrimaryFocus,

@@ -19,9 +19,28 @@ import styles from './overflow-menu.scss?lit';
  * Overflow menu item.
  *
  * @element cds-overflow-menu-item
+ * @fires cds-overflow-menu-item-clicked - The custom event fired when an overflow menu item is clicked.
  */
 @customElement(`${prefix}-overflow-menu-item`)
 class CDSOverflowMenuItem extends FocusMixin(LitElement) {
+  /**
+   * Handles `click` event on this element.
+   */
+  private _handleClick(event: Event) {
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSOverflowMenuItem).itemClicked,
+        {
+          bubbles: true,
+          composed: true,
+          detail: {
+            evt: event,
+          },
+        }
+      )
+    );
+  }
+
   /**
    * `true` if the action is danger.
    */
@@ -60,13 +79,15 @@ class CDSOverflowMenuItem extends FocusMixin(LitElement) {
   }
 
   render() {
+    const { _handleClick: handleClick } = this;
     return this.href
       ? html`
           <a
             class="${prefix}--overflow-menu-options__btn"
             ?disabled=${this.disabled}
             href="${this.href}"
-            tabindex="-1">
+            tabindex="-1"
+            @click="${handleClick}">
             <div class="${prefix}--overflow-menu-options__option-content">
               <slot></slot>
             </div>
@@ -76,12 +97,20 @@ class CDSOverflowMenuItem extends FocusMixin(LitElement) {
           <button
             class="${prefix}--overflow-menu-options__btn"
             ?disabled=${this.disabled}
-            tabindex="-1">
+            tabindex="-1"
+            @click="${handleClick}">
             <div class="${prefix}--overflow-menu-options__option-content">
               <slot></slot>
             </div>
           </button>
         `;
+  }
+
+  /**
+   * The name of the custom event fired when the item is clicked.
+   */
+  static get itemClicked() {
+    return `${prefix}-overflow-menu-item-clicked`;
   }
 
   static shadowRootOptions = {
