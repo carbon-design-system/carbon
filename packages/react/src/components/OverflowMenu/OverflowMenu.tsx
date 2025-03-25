@@ -41,6 +41,7 @@ import deprecate from '../../prop-types/deprecate';
 import mergeRefs from '../../tools/mergeRefs';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { IconButton } from '../IconButton';
+import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -400,7 +401,10 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     }) => {
       const enabledIndices = Children.toArray(children).reduce<number[]>(
         (acc, curr, i) => {
-          if (isValidElement(curr) && !curr.props.disabled) {
+          if (
+            isValidElement<OverflowMenuItemProps>(curr) &&
+            !curr.props.disabled
+          ) {
             acc.push(i);
           }
           return acc;
@@ -501,15 +505,17 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
 
     const childrenWithProps = Children.toArray(children).map((child, index) => {
       if (isValidElement(child)) {
-        const childElement = child as ReactElement;
-        return cloneElement(childElement, {
-          closeMenu: childElement.props.closeMenu || closeMenuAndFocus,
+        // Explicitly type the props to access closeMenu property
+        const childProps = child.props as { closeMenu?: () => void };
+
+        return cloneElement(child, {
+          closeMenu: childProps.closeMenu || closeMenuAndFocus,
           handleOverflowMenuItemFocus,
           ref: (el: HTMLElement) => {
             menuItemRefs.current[index] = el;
           },
           index,
-        });
+        } as any); // Using 'any' here to bypass type checking on the new props
       }
       return null;
     });
@@ -529,7 +535,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     const wrappedMenuBody = (
       <FloatingMenu
         focusTrap={focusTrap}
-        triggerRef={triggerRef}
+        triggerRef={triggerRef as React.RefObject<HTMLElement>}
         menuDirection={direction}
         menuOffset={flipped ? menuOffsetFlip : menuOffset}
         menuRef={bindMenuBody}
@@ -697,7 +703,6 @@ OverflowMenu.propTypes = {
   /**
    * A component used to render an icon.
    */
-  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**

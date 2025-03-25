@@ -15,6 +15,7 @@ import React, {
   useRef,
   useState,
   MutableRefObject,
+  ReactElement,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
@@ -160,11 +161,14 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
         return React.cloneElement(node, {
           active,
           depth: depth + 1,
-          disabled: disabled || node.props.disabled,
+          disabled:
+            disabled || (node as ReactElement<TreeNodeProps>).props.disabled,
           onTreeSelect,
           onNodeFocusEvent,
           selected,
-          tabIndex: (!node.props.disabled && -1) || null,
+          tabIndex:
+            (!(node as ReactElement<TreeNodeProps>).props.disabled && -1) ||
+            null,
         } as TreeNodeProps);
       }
     });

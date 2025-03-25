@@ -189,7 +189,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a ref to return focus to once the modal is closed.
    */
-  launcherButtonRef?: RefObject<HTMLButtonElement>;
+  launcherButtonRef?: RefObject<HTMLButtonElement | null>;
 
   /**
    * Specify an optional handler for closing modal.
@@ -573,7 +573,6 @@ ComposedModal.propTypes = {
   /**
    * Provide a ref to return focus to once the modal is closed.
    */
-  // @ts-expect-error: Invalid derived type
   launcherButtonRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({

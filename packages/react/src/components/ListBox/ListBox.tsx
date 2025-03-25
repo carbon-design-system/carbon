@@ -113,7 +113,7 @@ const ListBox: ListBoxComponent = React.forwardRef(function ListBox(
     isOpen,
     ...rest
   }: ListBoxProps,
-  ref: React.LegacyRef<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>
 ) {
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);

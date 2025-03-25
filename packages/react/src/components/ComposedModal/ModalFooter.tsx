@@ -298,7 +298,6 @@ ModalFooter.propTypes = {
   /**
    * The `ref` callback for the primary button.
    */
-  // @ts-expect-error: Invalid derived type
   inputref: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({

@@ -34,7 +34,7 @@ interface TooltipBaseProps {
   /**
    * Pass in the child to which the tooltip will be applied
    */
-  children?: React.ReactElement;
+  children?: React.ReactElement<any>;
 
   /**
    * Specify an optional className to be applied to the container node

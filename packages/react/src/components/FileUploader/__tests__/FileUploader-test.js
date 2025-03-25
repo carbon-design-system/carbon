@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { act, render } from '@testing-library/react';
-import { getByLabel, getByText } from '@carbon/test-utils/dom';
+import { render, act, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import FileUploader from '../';
 import React from 'react';
-import { Simulate } from 'react-dom/test-utils';
 import { uploadFiles } from '../test-helpers';
 
 const iconDescription = 'test description';
@@ -29,66 +28,57 @@ describe('FileUploader', () => {
     expect(container.firstChild).toHaveClass('test');
   });
 
-  it('should not update the label by default when selecting files', () => {
+  it('should not update the label by default when selecting files', async () => {
     const { container } = render(
       <FileUploader {...requiredProps} buttonLabel="upload" />
     );
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const input = container.querySelector('input');
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    const label = getByText(container, 'upload');
 
-    expect(label).toBeInstanceOf(HTMLElement);
-    act(() => {
-      uploadFiles(input, [
-        new File(['test'], 'test.png', { type: 'image/png' }),
-      ]);
-    });
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    expect(getByText(container, 'upload')).toBeInstanceOf(HTMLElement);
+    const input = container.querySelector('input');
+    const file = new File(['test'], 'test.png', { type: 'image/png' });
+
+    const uploadButton = screen.getByRole('button', { name: 'upload' });
+    expect(uploadButton).toBeInTheDocument();
+
+    await userEvent.upload(input, file);
+
+    // Verify button label remains unchanged after upload
+    expect(screen.getByRole('button', { name: 'upload' })).toBeInTheDocument();
   });
 
-  it('should clear all uploaded files when `clearFiles` is called on a ref', () => {
+  it('should clear all uploaded files when `clearFiles` is called on a ref', async () => {
     const ref = React.createRef();
     const { container } = render(<FileUploader {...requiredProps} ref={ref} />);
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+
     const input = container.querySelector('input');
-
     const filename = 'test.png';
-    act(() => {
-      uploadFiles(input, [new File(['test'], filename, { type: 'image/png' })]);
-    });
+    const file = new File(['test'], filename, { type: 'image/png' });
 
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    expect(getByText(container, filename)).toBeInstanceOf(HTMLElement);
-    act(() => {
+    await userEvent.upload(input, file);
+
+    expect(screen.getByText(filename)).toBeInTheDocument();
+
+    await act(async () => {
       ref.current.clearFiles();
     });
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    expect(getByText(container, filename)).not.toBeInstanceOf(HTMLElement);
+
+    expect(screen.queryByText(filename)).not.toBeInTheDocument();
   });
 
-  it('should synchronize the filename status state when its prop changes', () => {
-    const container = document.createElement('div');
-    render(<FileUploader {...requiredProps} filenameStatus="edit" />, {
-      container,
-    });
+  it('should synchronize the filename status state when its prop changes', async () => {
+    const { container, rerender } = render(
+      <FileUploader {...requiredProps} filenameStatus="edit" />
+    );
 
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
-    act(() => {
-      uploadFiles(input, [
-        new File(['test'], 'test.png', { type: 'image/png' }),
-      ]);
-    });
+    const file = new File(['test'], 'test.png', { type: 'image/png' });
 
-    const edit = getByLabel(container, iconDescription);
+    await userEvent.upload(input, file);
 
-    render(<FileUploader {...requiredProps} filenameStatus="complete" />, {
-      container,
-    });
+    const edit = screen.getByLabelText(`${iconDescription} - test.png`);
 
-    const complete = getByLabel(container, iconDescription);
+    rerender(<FileUploader {...requiredProps} filenameStatus="complete" />);
+
+    const complete = screen.getByLabelText(iconDescription);
     expect(edit).not.toEqual(complete);
   });
   it('should disable file input when `disabled` prop is true', () => {
@@ -108,7 +98,7 @@ describe('FileUploader', () => {
       expect(button).toHaveClass(`cds--btn--${kind}`);
     });
   });
-  it('should trigger `onDelete` when a file is removed', () => {
+  it('should trigger `onDelete` when a file is removed', async () => {
     const onDelete = jest.fn();
     const { container } = render(
       <FileUploader
@@ -117,37 +107,30 @@ describe('FileUploader', () => {
         onDelete={onDelete}
       />
     );
+
     const input = container.querySelector('input');
+    const file = new File(['test'], 'test.png', { type: 'image/png' });
 
-    act(() => {
-      uploadFiles(input, [
-        new File(['test'], 'test.png', { type: 'image/png' }),
-      ]);
-    });
+    await userEvent.upload(input, file);
 
-    const removeFileButton = getByLabel(
-      container,
+    const removeFileButton = screen.getByLabelText(
       'test description - test.png'
     );
 
-    act(() => {
-      Simulate.click(removeFileButton);
-    });
+    await userEvent.click(removeFileButton);
 
     expect(onDelete).toHaveBeenCalledTimes(1);
   });
-  it('should trigger `onChange` when files are selected', () => {
+  it('should trigger `onChange` when files are selected', async () => {
     const onChange = jest.fn();
     const { container } = render(
       <FileUploader {...requiredProps} onChange={onChange} />
     );
-    const input = container.querySelector('input');
 
-    act(() => {
-      uploadFiles(input, [
-        new File(['test'], 'test.png', { type: 'image/png' }),
-      ]);
-    });
+    const input = container.querySelector('input');
+    const file = new File(['test'], 'test.png', { type: 'image/png' });
+
+    await userEvent.upload(input, file);
 
     expect(onChange).toHaveBeenCalledTimes(1);
   });

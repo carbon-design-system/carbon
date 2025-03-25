@@ -12,7 +12,7 @@ import React, {
   forwardRef,
   type ReactNode,
   ElementType,
-  WeakValidationMap,
+  type JSX,
 } from 'react';
 import cx from 'classnames';
 import Link, { LinkProps, LinkPropTypes } from './Link';
@@ -38,10 +38,11 @@ export interface HeaderMenuItemComponent {
     props: HeaderMenuItemProps<E> & { ref?: ForwardedRef<ElementType> }
   ): JSX.Element | null;
   displayName?: string;
-  propTypes?: WeakValidationMap<HeaderMenuItemProps<any>>;
+  propTypes?: PropTypes.WeakValidationMap<HeaderMenuItemProps<any>>;
 }
 
 const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
+  //@ts-ignore
   function HeaderMenuItemRenderFunction<E extends ElementType = 'a'>(
     {
       className,
@@ -53,7 +54,7 @@ const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
       tabIndex = 0,
       ...rest
     }: HeaderMenuItemProps<E>,
-    ref: ForwardedRef<ElementType>
+    ref: ForwardedRef<E>
   ) {
     const prefix = usePrefix();
     if (isCurrentPage) {
@@ -68,7 +69,7 @@ const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
     });
     return (
       <li className={className} role={role}>
-        <Link
+        <Link<E>
           {...(rest as LinkProps<E>)}
           aria-current={ariaCurrent}
           className={linkClassName}

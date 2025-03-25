@@ -35,10 +35,25 @@ type TextComponent = <T extends ElementType = 'span'>(
   props: TextProps<T> & { ref?: PolymorphicRef<T> }
 ) => ReactElement | null;
 
+<<<<<<< HEAD
+const TextBase = React.forwardRef(
+  (
+    {
+      as,
+      children,
+      dir = 'auto',
+      ...rest
+    }: TextBaseProps & {
+      as?: React.ElementType;
+      dir?: 'auto' | 'ltr' | 'rtl';
+    } & React.HTMLAttributes<HTMLSpanElement>,
+    ref: React.Ref<HTMLSpanElement>
+=======
 export const Text = forwardRef(
   <T extends ElementType = 'span'>(
     { as, children, dir = 'auto', ...rest }: TextProps<T>,
     ref?: PolymorphicRef<T>
+>>>>>>> upstream/main
   ) => {
     const context = useContext(TextDirectionContext);
     const textProps: { dir?: TextDir } = {};
@@ -79,9 +94,15 @@ export const Text = forwardRef(
       </TextDirectionContext.Provider>
     );
   }
+<<<<<<< HEAD
+);
+const Text = TextBase as TextComponent;
+(Text as React.FC).propTypes = {
+=======
 ) as TextComponent;
 
 (Text as FC).propTypes = {
+>>>>>>> upstream/main
   /**
    * Provide a custom element type used to render the outermost node
    */

@@ -108,7 +108,7 @@
     "globby": "^14.0.2",
     "is-port-reachable": "^3.1.0",
     "null-loader": "^4.0.0",
-    "prop-types": "^15.7.2",
+    "prop-types": "^15.8.1",
     "read-package-up": "^11.0.0",
     "remark-gfm": "^4.0.0",
     "rimraf": "^6.0.0",

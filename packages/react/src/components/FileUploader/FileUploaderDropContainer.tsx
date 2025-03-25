@@ -76,7 +76,7 @@ export interface FileUploaderDropContainerProps
   /**
    * Ref to pass to the inner button element
    */
-  innerRef?: React.LegacyRef<HTMLButtonElement>;
+  innerRef?: React.Ref<HTMLButtonElement>;
 
   /**
    * @deprecated The `role` prop for `FileUploaderButton` has been deprecated since it now renders a button element by default, and has an implicit role of button.
