@@ -30,6 +30,7 @@ export const Default = (args) => {
   return (
     <Slider
       {...args}
+      hideTextInput={true}
       labelText={`Slider (must be an increment of ${args.step})`}
     />
   );

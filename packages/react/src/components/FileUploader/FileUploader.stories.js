@@ -45,7 +45,7 @@ export const _FileUploaderItem = (args) => {
       errorSubject="File size exceeds limit"
       iconDescription="Delete file"
       invalid={false}
-      name="README.md"
+      name="This is a very long filename which will be displayed in a tooltip"
       status="edit"
       size="md"
       {...args}
