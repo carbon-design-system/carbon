@@ -16,6 +16,7 @@ export default {
   parameters: {
     controls: {
       hideNoControlsWarning: true,
+      exclude: ['badgeCount'],
     },
     docs: {
       page: mdx,
@@ -109,10 +110,5 @@ withBadgeIndicator.args = {
 withBadgeIndicator.parameters = {
   controls: {
     exclude: ['size', 'kind'],
-  },
-};
-Default.parameters = {
-  controls: {
-    exclude: ['badgeCount'],
   },
 };
