@@ -111,6 +111,11 @@ const controls = {
       'Specify the size of the button, from the following list of sizes:',
     options: sizes,
   },
+  stacked: {
+    control: 'boolean',
+    description:
+      'Specify whether the Button should be stacked, or not. Only applies to the button-set variant.',
+  },
   tooltipAlignment: {
     control: 'radio',
     description:
@@ -372,11 +377,12 @@ export const SetOfButtons = {
     isSelected,
     linkRole,
     size,
+    stacked,
     tooltipAlignment,
     tooltipPosition,
     type,
   }) =>
-    html` <cds-button-set>
+    html` <cds-button-set .stacked="${stacked}">
       <cds-button
         button-class-name="${buttonClassName}"
         danger-description="${dangerDescription}"
