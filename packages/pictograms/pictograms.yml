@@ -110,6 +110,21 @@
     - sow
     - hand
     - soil
+- name: ahmadabad--jama-masiid
+  friendly_name: Ahmadabad Jama Masjid
+  aliases:
+    - Ahmadabad
+    - Jama Masjid
+    - Mahatma Gandhi
+    - India
+- name: ahmadabad--sabarmati-ashram
+  friendly_name: Ahmadabad Sabarmati-Ashram
+  aliases:
+    - Ahmadabad
+    - Jama Masjid
+    - Mahatma Gandhi
+    - India
+    - Sabarmati-Ashram
 - name: ai
   friendly_name: AI
   aliases:
@@ -3551,6 +3566,13 @@
     - gear
     - settings
     - machinery
+- name: geodesic-montreal-biosphere
+  friendly_name: Geodesic Montreal Biosphere
+  aliases:
+    - Montreal
+    - Canada
+    - geodesic
+    - biosoophere
 - name: geographic-flexibility
   friendly_name: Geographic flexibility
   aliases:
@@ -4240,6 +4262,66 @@
   friendly_name: IBM Cloud
   aliases:
     - IBM cloud
+- name: ibm--elm
+  friendly_name: IBM® Engineering Lifecycle Management
+  aliases:
+    - engineering lifecycle management
+    - IBM
+- name: ibm--elm-dcc
+  friendly_name: IBM® Engineering Lifecycle Management Data Collection Component
+  aliases:
+    - engineering lifecycle management data collection component
+    - IBM
+- name: ibm--elm-insights
+  friendly_name: IBM® Engineering Lifecycle Management Insights
+  aliases:
+    - engineering lifecycle management insights
+    - IBM
+- name: ibm--elm-method-composer
+  friendly_name: IBM® Engineering Lifecycle Management Method Composer
+  aliases:
+    - engineering lifecycle management method composer
+    - IBM
+- name: ibm--elm-publishing
+  friendly_name: IBM® Engineering Lifecycle Management Publishing
+  aliases:
+    - engineering lifecycle management publishing
+    - IBM
+- name: ibm--engineering-requirement-doors
+  friendly_name: IBM® Engineering Requirement DOORS
+  aliases:
+    - engineering requirement doors
+    - IBM
+- name: ibm--engineering-systems-design-rhapsody
+  friendly_name: IBM® Engineering Systems Design Rhapsody
+  aliases:
+    - engineering systems design rhapsody
+    - IBM
+- name: ibm--engineering-systems-design-rhapsody--model-manager
+  friendly_name: IBM® Engineering System Design Rhapsody-Model Manager
+  aliases:
+    - engineering system design rhapsody model manager
+    - IBM
+- name: ibm--engineering-test-management
+  friendly_name: IBM® Engineering Test Management
+  aliases:
+    - engineering test management
+    - IBM
+- name: ibm--engineering-workflow-management
+  friendly_name: IBM® Engineering Workflow Management
+  aliases:
+    - engineering workflow management
+    - IBM
+- name: ibm--elm-gcm
+  friendly_name: IBM® Engineering Lifecycle Management Global Configuration Management
+  aliases:
+    - engineering lifecycle management global configuration management
+    - IBM
+- name: ibm--elm-reporting
+  friendly_name: IBM® Engineering Lifecycle Management Reporting
+  aliases:
+    - engineering lifecycle management reporting
+    - IBM
 - name: ibm--ibv
   friendly_name: IBM Institute for Business Value
   aliases:
@@ -4364,11 +4446,11 @@
     - z open enterprise languages
     - IBM
 - name: ibm--z16
-  friendly_name: IBM z16
+  friendly_name: IBM z16®
   aliases:
     - IBM z16
 - name: ibm--z16--multi-frame
-  friendly_name: IBM z16 multi-frame
+  friendly_name: IBM z16® multi-frame
   aliases:
     - linuxone
     - z
@@ -4378,7 +4460,7 @@
     - multi-frame
     - ibm z
 - name: ibm--z16--plus-cloud
-  friendly_name: IBM z16 plus cloud
+  friendly_name: IBM z16® plus cloud
   aliases:
     - z16
     - ibm z
@@ -4387,7 +4469,7 @@
     - cloud infrastructure
     - hybrid cloud
 - name: ibm--z16--single-frame
-  friendly_name: IBM z16 single frame
+  friendly_name: IBM z16® single frame
   aliases:
     - linuxone
     - z
@@ -4396,6 +4478,32 @@
     - linux
     - single frame
     - ibm z
+- name: ibm--z17
+  friendly_name: IBM® z17
+  aliases:
+    - Z
+    - z17
+    - data storage
+    - hardware
+    - hybrid cloud
+- name: ibm--z17--multi-frame
+  friendly_name: IBM® z17 multi-frame
+  aliases:
+    - Z
+    - z17
+    - data storage
+    - hardware
+    - hybrid cloud
+    - multi-frame
+- name: ibm--z17--single-frame
+  friendly_name: IBM® z17 single-frame
+  aliases:
+    - Z
+    - z17
+    - data storage
+    - hardware
+    - hybrid cloud
+    - single-frame
 - name: id--badge
   friendly_name: ID badge
   aliases:
@@ -4625,6 +4733,12 @@
   friendly_name: Keep your own key
   aliases:
     - keep your own key
+- name: key--lifecycle
+  friendly_name: Key lifecycle
+  aliases:
+    - Key
+    - lifecycle
+    - lifecycle management
 - name: key--users
   friendly_name: Key users
   aliases:
@@ -4635,6 +4749,17 @@
   friendly_name: Keyboard
   aliases:
     - keyboard
+- name: keystores
+  friendly_name: Keystores
+  aliases:
+    - Keystores
+    - Key rings
+    - Key groups
+- name: keystores--external
+  friendly_name: External keystores
+  aliases:
+    - external keystores
+    - keystore cloud
 - name: knows--dark--data
   friendly_name: Knows dark data
   aliases:
@@ -4681,6 +4806,13 @@
     - native
     - cloud
     - container
+- name: landing-page
+  friendly_name: Landing page
+  aliases:
+    - website
+    - landing page
+    - web page
+    - digital marketing
 - name: language--01
   friendly_name: Language 01
   aliases:
@@ -5091,6 +5223,13 @@
     - expand
     - expansion
     - growth
+- name: mcgill-university--morrice-hall
+  friendly_name: Mcgill University Morrice Hall
+  aliases:
+    - Montreal
+    - Canada
+    - McGill University
+    - Morrice Hall
 - name: medal--01
   friendly_name: Medal 01
   aliases:
@@ -5307,6 +5446,13 @@
     - tracking
     - track
     - RFID
+- name: montreal--olympic-stadium
+  friendly_name: Montreal Olympic Stadium
+  aliases:
+    - Montreal
+    - Canada
+    - olympic
+    - stadium
 - name: moon--full
   friendly_name: Full moon
   aliases:
@@ -7130,6 +7276,13 @@
     - snow
     - weather
     - holiday
+- name: social--tile
+  friendly_name: Social tile
+  aliases:
+    - social tile
+    - social
+    - digital marketing
+    - social media campaign
 - name: social--work--01
   friendly_name: Social work 01
   aliases:
@@ -7222,6 +7375,10 @@
     - speedometer
     - time
     - dashboard
+- name: sponsor-user-program
+  friendly_name: Sponsor user program
+  aliases:
+    - sponsor user program
 - name: sports
   friendly_name: Sports
   aliases:
@@ -7715,6 +7872,13 @@
     - reel
     - disk
     - disc
+- name: tape--storage--02
+  friendly_name: Tape storage 02
+  aliases:
+    - tape
+    - storage
+    - data
+    - disc
 - name: target
   friendly_name: Target
   aliases:
@@ -8093,6 +8257,11 @@
     - workplace
     - community
     - learning
+- name: transaction-data
+  friendly_name: Transaction data
+  aliases:
+    - transaction data
+    - transactional data
 - name: transactional--blockchain
   friendly_name: Transactional blockchain
   aliases:
@@ -8443,6 +8612,13 @@
     - vancouver
     - city
     - cities
+- name: vault
+  friendly_name: Vault
+  aliases:
+    - vault
+    - safe
+    - Tresor
+    - Secrets
 - name: venezuela--national-pantheon-of-venezuela
   friendly_name: Venezuela National Pantheon of Venezuela
   aliases:
@@ -8712,6 +8888,14 @@
   aliases:
     - weather
     - forecast
+- name: web--banners
+  friendly_name: Web banners
+  aliases:
+    - digital banners
+    - banners
+    - web page
+    - landing page
+    - digital marketing
 - name: web--developer
   friendly_name: Web developer
   aliases:
