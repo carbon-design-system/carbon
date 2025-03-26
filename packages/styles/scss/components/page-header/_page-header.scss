@@ -109,7 +109,10 @@
   }
 
   .#{$prefix}--page-header__hero-image {
+    display: flex;
     overflow: hidden;
+    align-items: center;
+    block-size: 100%;
   }
 
   .#{$prefix}--page-header__tab-bar {
