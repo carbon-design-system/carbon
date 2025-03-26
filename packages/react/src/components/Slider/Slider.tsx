@@ -299,12 +299,6 @@ export interface SliderProps
   warnText?: React.ReactNode;
 }
 
-interface CalcValueProps {
-  clientX?: number;
-  value?: number;
-  useRawValue?: boolean;
-}
-
 interface CalcLeftPercentProps {
   clientX?: number;
   value?: number;
@@ -1042,65 +1036,67 @@ class Slider extends PureComponent<SliderProps> {
     return 0;
   };
 
-  calcSteppedValuePercent = ({ leftPercent, range }) => {
-    const { step = 1 } = this.props;
-    const totalSteps = range / step;
+  /**
+   * Calculates the discrete value (snapped to the nearest step) along
+   * with the corresponding handle position percentage.
+   */
+  calcDiscreteValueAndPercent = ({
+    leftPercent,
+  }: {
+    /** The percentage representing the position on the track. */
+    leftPercent: number;
+  }) => {
+    const { step = 1, min, max } = this.props;
+    const numSteps =
+      Math.floor((max - min) / step) + ((max - min) % step === 0 ? 1 : 2);
+    /** Index of the step that corresponds to `leftPercent`. */
+    const stepIndex = Math.round(leftPercent * (numSteps - 1));
+    const discreteValue =
+      stepIndex === numSteps - 1 ? max : min + step * stepIndex;
+    /** Percentage corresponding to the step index. */
+    const discretePercent = stepIndex / (numSteps - 1);
 
-    let steppedValue = Math.round(leftPercent * totalSteps) * step;
-    const steppedPercent = this.clamp(steppedValue / range, 0, 1);
-
-    steppedValue = this.clamp(
-      steppedValue + this.props.min,
-      this.props.min,
-      this.props.max
-    );
-
-    return [steppedValue, steppedPercent];
+    return { discreteValue, discretePercent };
   };
 
   /**
-   * Calculates a new Slider `value` and `left` (thumb offset) given a `clientX`,
-   * `value`, or neither of those.
-   * - If `clientX` is specified, it will be used in
-   *   conjunction with the Slider's bounding rectangle to calculate the new
-   *   values.
-   * - If `clientX` is not specified and `value` is, it will be used to
-   *   calculate new values as though it were the current value of the Slider.
-   * - If neither `clientX` nor `value` are specified, `this.props.value` will
-   *   be used to calculate the new values as though it were the current value
-   *   of the Slider.
-   *
-   * @param {object} params
-   * @param {number} [params.clientX] Optional clientX value expected to be from
-   *   an event fired by one of the Slider's `DRAG_EVENT_TYPES` events.
-   * @param {number} [params.value] Optional value use during calculations if
-   *   clientX is not provided.
-   * @param {boolean} [params.useRawValue=false] `true` to use the given value as-is.
+   * Calculates the slider's value and handle position based on either a
+   * mouse/touch event or an explicit value.
    */
-  calcValue = ({ clientX, value, useRawValue = false }: CalcValueProps) => {
+  calcValue = ({
+    clientX,
+    value,
+    useRawValue,
+  }: {
+    /** The x-coordinate from a mouse/touch event. */
+    clientX?: number;
+    /** Value to base the calculations on (if no `clientX`). */
+    value?: number;
+    /** Whether to bypass the stepping logic and use the raw value. */
+    useRawValue?: boolean;
+  }) => {
     const range = this.props.max - this.props.min;
-
-    // @todo solve for rtl.
-    const leftPercent = this.calcLeftPercent({
+    const leftPercentRaw = this.calcLeftPercent({
       clientX,
       value,
       range,
     });
+    /** `leftPercentRaw` clamped between 0 and 1. */
+    const leftPercent = Math.min(1, Math.max(0, leftPercentRaw));
 
     if (useRawValue) {
-      // Adjusts only for min/max of thumb position
       return {
         value,
-        left: Math.min(1, Math.max(0, leftPercent)) * 100,
+        left: leftPercent * 100,
       };
     }
 
-    const [steppedValue, steppedPercent] = this.calcSteppedValuePercent({
-      leftPercent,
-      range,
-    });
+    // Use the discrete value and percentage for snapping.
+    const { discreteValue, discretePercent } = this.calcDiscreteValueAndPercent(
+      { leftPercent }
+    );
 
-    return { value: steppedValue, left: steppedPercent * 100 };
+    return { value: discreteValue, left: discretePercent * 100 };
   };
 
   calcDistanceToHandle = (handle: HandlePosition, clientX) => {

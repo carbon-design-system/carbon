@@ -2,18 +2,18 @@
 
 exports[`DataTable behaves as expected selection -- radio buttons should not have select-all checkbox 1`] = `
 <div>
-  <div
+  <section
     class="cds--data-table-container"
   >
     <div
       class="cds--data-table-header"
     >
-      <h4
+      <h2
         class="cds--data-table-header__title"
         id="tc-:r7g:-title"
       >
         DataTable with selection
-      </h4>
+      </h2>
     </div>
     <div
       class="cds--data-table-content"
@@ -170,24 +170,24 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 </div>
 `;
 
 exports[`DataTable behaves as expected selection -- radio buttons should render 1`] = `
 <div>
-  <div
+  <section
     class="cds--data-table-container"
   >
     <div
       class="cds--data-table-header"
     >
-      <h4
+      <h2
         class="cds--data-table-header__title"
         id="tc-:r77:-title"
       >
         DataTable with selection
-      </h4>
+      </h2>
     </div>
     <div
       class="cds--data-table-content"
@@ -344,24 +344,24 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 </div>
 `;
 
 exports[`DataTable behaves as expected selection should render and match snapshot 1`] = `
 <div>
-  <div
+  <section
     class="cds--data-table-container"
   >
     <div
       class="cds--data-table-header"
     >
-      <h4
+      <h2
         class="cds--data-table-header__title"
         id="tc-:r2k:-title"
       >
         DataTable with selection
-      </h4>
+      </h2>
     </div>
     <section
       aria-label="data table toolbar"
@@ -788,25 +788,25 @@ exports[`DataTable behaves as expected selection should render and match snapsho
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 </div>
 `;
 
 exports[`DataTable renders as expected - Component API should render and match snapshot 1`] = `
 <div>
-  <div
+  <section
     class="cds--data-table-container"
     data-testid="test-id"
   >
     <div
       class="cds--data-table-header"
     >
-      <h4
+      <h2
         class="cds--data-table-header__title"
         id="tc-:re:-title"
       >
         DataTable with toolbar
-      </h4>
+      </h2>
     </div>
     <section
       aria-label="data table toolbar"
@@ -1120,6 +1120,6 @@ exports[`DataTable renders as expected - Component API should render and match s
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 </div>
 `;

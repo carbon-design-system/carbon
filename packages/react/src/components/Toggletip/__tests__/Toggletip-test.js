@@ -18,7 +18,6 @@ import userEvent from '@testing-library/user-event';
 
 describe('Toggletip', () => {
   describe('accessibility', () => {
-    test.todo('accessibility-checker');
     it('should have no Axe violations', async () => {
       const { container } = render(
         <Toggletip data-testid="toggletip">test</Toggletip>
