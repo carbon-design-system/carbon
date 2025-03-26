@@ -247,7 +247,13 @@ PageHeaderContent.propTypes = {
  * ----------------
  */
 interface PageHeaderHeroImageProps {
+  /**
+   * Provide child elements to be rendered inside PageHeaderHeroImage.
+   */
   children?: React.ReactNode;
+  /**
+   * Specify an optional className to be added to your PageHeaderHeroImage
+   */
   className?: string;
 }
 const PageHeaderHeroImage = React.forwardRef<
@@ -275,6 +281,16 @@ const PageHeaderHeroImage = React.forwardRef<
   );
 });
 PageHeaderHeroImage.displayName = 'PageHeaderHeroImage';
+PageHeaderHeroImage.propTypes = {
+  /**
+   * Provide child elements to be rendered inside PageHeaderHeroImage.
+   */
+  children: PropTypes.node,
+  /**
+   * Specify an optional className to be added to your PageHeaderHeroImage
+   */
+  className: PropTypes.string,
+};
 
 /**
  * ----------------

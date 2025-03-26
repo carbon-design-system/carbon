@@ -71,10 +71,11 @@ const dropdownItems = [
 
 export default {
   title: 'Patterns/unstable__PageHeader',
-  component: PageHeaderContent,
+  component: PageHeader,
   subcomponents: {
     PageHeaderBreadcrumbBar,
     PageHeaderContent,
+    PageHeaderHeroImage,
     PageHeaderTabBar,
   },
   // uncomment includeStories before merging so the stories aren't visible in prod
