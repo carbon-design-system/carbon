@@ -89,8 +89,8 @@ $css--plex: true !default;
   // tag overrides layout tokens
   --cds-layout-size-height-xs: 1.125rem;
   --cds-layout-size-height-sm: 1.125rem;
-  --cds-layout-size-height-md: $spacing-06;
-  --cds-layout-size-height-lg: $spacing-07;
+  --cds-layout-size-height-md: 1.5rem;
+  --cds-layout-size-height-lg: 2rem;
 }
 
 :host(#{$prefix}-tag[size='sm']),
@@ -121,68 +121,71 @@ $css--plex: true !default;
   padding-inline-start: $spacing-03;
 }
 
-:host(#{$prefix}-operational-tag[type='red']) #{$prefix}-tag,
-:host(#{$prefix}-dismissible-tag[type='red']),
-:host(#{$prefix}-tag[type='red']) {
+:host(#{$prefix}-operational-tag[type='red']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='red']:not([disabled])),
+:host(#{$prefix}-tag[type='red']:not([disabled])) {
   @extend .#{$prefix}--tag--red;
 }
 
-:host(#{$prefix}-operational-tag[type='magenta']) #{$prefix}-tag,
-:host(#{$prefix}-dismissible-tag[type='magenta']),
-:host(#{$prefix}-tag[type='magenta']) {
+:host(#{$prefix}-operational-tag[type='magenta']:not([disabled]))
+  #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='magenta']:not([disabled])),
+:host(#{$prefix}-tag[type='magenta']:not([disabled])) {
   @extend .#{$prefix}--tag--magenta;
 }
 
-:host(#{$prefix}-operational-tag[type='purple']) #{$prefix}-tag,
-:host(#{$prefix}-dismissible-tag[type='purple']),
-:host(#{$prefix}-tag[type='purple']) {
+:host(#{$prefix}-operational-tag[type='purple']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='purple']:not([disabled])),
+:host(#{$prefix}-tag[type='purple']:not([disabled])) {
   @extend .#{$prefix}--tag--purple;
 }
 
-:host(#{$prefix}-operational-tag[type='blue']) #{$prefix}-tag,
-:host(#{$prefix}-dismissible-tag[type='blue']),
-:host(#{$prefix}-tag[type='blue']) {
+:host(#{$prefix}-operational-tag[type='blue']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='blue']:not([disabled])),
+:host(#{$prefix}-tag[type='blue']:not([disabled])) {
   @extend .#{$prefix}--tag--blue;
 }
 
-:host(#{$prefix}-operational-tag[type='cyan']) #{$prefix}-tag,
-:host(#{$prefix}-dismissible-tag[type='cyan']),
-:host(#{$prefix}-tag[type='cyan']) {
+:host(#{$prefix}-operational-tag[type='cyan']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='cyan']:not([disabled])),
+:host(#{$prefix}-tag[type='cyan']:not([disabled])) {
   @extend .#{$prefix}--tag--cyan;
 }
 
-:host(#{$prefix}-operational-tag[type='teal']) #{$prefix}-tag,
-:host(#{$prefix}-dismissible-tag[type='teal']),
-:host(#{$prefix}-tag[type='teal']) {
+:host(#{$prefix}-operational-tag[type='teal']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='teal']:not([disabled])),
+:host(#{$prefix}-tag[type='teal']:not([disabled])) {
   @extend .#{$prefix}--tag--teal;
 }
 
-:host(#{$prefix}-operational-tag[type='green']) #{$prefix}-tag,
-:host(#{$prefix}-dismissible-tag[type='green']),
-:host(#{$prefix}-tag[type='green']) {
+:host(#{$prefix}-operational-tag[type='green']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='green']:not([disabled])),
+:host(#{$prefix}-tag[type='green']:not([disabled])) {
   @extend .#{$prefix}--tag--green;
 }
 
-:host(#{$prefix}-operational-tag[type='gray']) #{$prefix}-tag,
-:host(#{$prefix}-dismissible-tag[type='gray']),
-:host(#{$prefix}-tag[type='gray']) {
+:host(#{$prefix}-operational-tag[type='gray']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='gray']:not([disabled])),
+:host(#{$prefix}-tag[type='gray']:not([disabled])) {
   @extend .#{$prefix}--tag--gray;
 }
 
-:host(#{$prefix}-operational-tag[type='cool-gray']) #{$prefix}-tag,
-:host(#{$prefix}-dismissible-tag[type='cool-gray']),
-:host(#{$prefix}-tag[type='cool-gray']) {
+:host(#{$prefix}-operational-tag[type='cool-gray']:not([disabled]))
+  #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='cool-gray']:not([disabled])),
+:host(#{$prefix}-tag[type='cool-gray']:not([disabled])) {
   @extend .#{$prefix}--tag--cool-gray;
 }
 
-:host(#{$prefix}-operational-tag[type='warn-gray']) #{$prefix}-tag,
-:host(#{$prefix}-dismissible-tag[type='warn-gray']),
-:host(#{$prefix}-tag[type='warm-gray']) {
+:host(#{$prefix}-operational-tag[type='warn-gray']:not([disabled]))
+  #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='warn-gray']:not([disabled])),
+:host(#{$prefix}-tag[type='warm-gray']:not([disabled])) {
   @extend .#{$prefix}--tag--warm-gray;
 }
 
-:host(#{$prefix}-dismissible-tag[type='high-contrast']),
-:host(#{$prefix}-tag[type='high-contrast']) {
+:host(#{$prefix}-dismissible-tag[type='high-contrast']:not([disabled])),
+:host(#{$prefix}-tag[type='high-contrast']:not([disabled])) {
   @include tag-theme(
     $background-inverse,
     $text-inverse,
@@ -190,8 +193,8 @@ $css--plex: true !default;
   );
 }
 
-:host(#{$prefix}-dismissible-tag[type='outline']),
-:host(#{$prefix}-tag[type='outline']) {
+:host(#{$prefix}-dismissible-tag[type='outline']:not([disabled])),
+:host(#{$prefix}-tag[type='outline']:not([disabled])) {
   @include tag-theme($background, $text-primary, $layer-hover);
 
   outline: 1px solid $background-inverse;
@@ -226,6 +229,7 @@ $css--plex: true !default;
   max-inline-size: 11.5rem;
 }
 
+:host(#{$prefix}-dismissible-tag[disabled]),
 :host(#{$prefix}-tag[filter][disabled]) {
   .#{$prefix}--tag__close-icon {
     cursor: not-allowed;
@@ -235,6 +239,32 @@ $css--plex: true !default;
       background-color: transparent;
     }
   }
+}
+
+:host(#{$prefix}-operational-tag[disabled]) #{$prefix}-tag,
+:host(#{$prefix}-selectable-tag[disabled]) #{$prefix}-tag {
+  border: 1px solid $border-disabled;
+  background-color: $layer;
+  color: $text-disabled;
+
+  &:hover {
+    background-color: $layer;
+    cursor: not-allowed;
+  }
+}
+
+:host(#{$prefix}-dismissible-tag[disabled]),
+:host(#{$prefix}-tag[disabled]) {
+  @extend .#{$prefix}--tag--disabled;
+
+  // border: 1px solid $border-disabled;
+  // background-color: $layer;
+  // color: $text-disabled;
+
+  // &:hover {
+  //   background-color: $layer;
+  //   cursor: not-allowed;
+  // }
 }
 
 // Skeleton state

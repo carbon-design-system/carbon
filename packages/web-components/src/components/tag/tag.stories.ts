@@ -208,18 +208,22 @@ export const Selectable = {
       {
         id: 1,
         text: 'Tag content with a long text description',
+        selected: false,
       },
       {
         id: 2,
         text: 'Tag content 1',
+        selected: true,
       },
       {
         id: 3,
         text: 'Tag content 2',
+        selected: false,
       },
       {
         id: 4,
         text: 'Tag content 3',
+        selected: false,
       },
     ];
 
@@ -228,6 +232,7 @@ export const Selectable = {
         (tag) =>
           html`<cds-selectable-tag
             ?disabled="${disabled}"
+            ?selected="${tag.selected}"
             id="${tag.id}"
             text="${text || tag.text}"
             size="${size}"
