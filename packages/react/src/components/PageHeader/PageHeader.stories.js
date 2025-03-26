@@ -22,8 +22,7 @@ export default {
     PageHeaderContent,
     PageHeaderTabBar,
   },
-  // uncomment includeStories before merging so the stories aren't visible in prod
-  // includeStories: [],
+  includeStories: [],
   argTypes: {
     children: {
       control: false, // ReactNode props don't work in the controls pane
