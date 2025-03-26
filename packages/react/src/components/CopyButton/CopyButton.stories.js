@@ -21,12 +21,12 @@ export default {
 };
 
 export const Default = (args) => {
-  return <CopyButton {...args} />;
+  return (
+    <div style={{ padding: '4rem' }}>
+      <CopyButton {...args} />
+    </div>
+  );
 };
-
-Default.decorators = [
-  (story) => <div style={{ padding: '4rem' }}>{story()}</div>,
-];
 
 Default.argTypes = {
   className: {
