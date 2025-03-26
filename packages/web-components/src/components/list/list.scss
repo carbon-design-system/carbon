@@ -69,12 +69,14 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-unordered-list[slot='nested'])
+:host(#{$prefix}-unordered-list[nested]),
+:host(#{$prefix}-unordered-list[slot='nested']) {
   ::slotted(#{$prefix}-list-item)::before {
-  // ▪ square
-  content: '\0025AA';
-  // offset to account for smaller ▪ vs –
-  inset-inline-start: calc(-1 * #{$spacing-04});
+    // ▪ square
+    content: '\0025AA';
+    // offset to account for smaller ▪ vs –
+    inset-inline-start: calc(-1 * #{$spacing-04});
+  }
 }
 
 :host(#{$prefix}-list-item) {

@@ -24,7 +24,7 @@ export default {
 export const Default = (args) => {
   return (
     <div style={{ width: '800px' }}>
-      <PaginationNav {...args} />
+      <PaginationNav totalItems={25} {...args} />
     </div>
   );
 };
