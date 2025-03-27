@@ -83,6 +83,12 @@
   friendly_name: Agile
   aliases:
     - agile
+- name: agile--coaching
+  friendly_name: Agile coaching
+  aliases:
+    - agile
+    - coaching
+    - mentoring
 - name: agility
   friendly_name: Agility
   aliases:
@@ -4268,7 +4274,8 @@
     - engineering lifecycle management
     - IBM
 - name: ibm--elm-dcc
-  friendly_name: IBM® Engineering Lifecycle Management Data Collection Component
+  friendly_name:
+    IBM® Engineering Lifecycle Management Data Collection Component
   aliases:
     - engineering lifecycle management data collection component
     - IBM
@@ -4313,7 +4320,8 @@
     - engineering workflow management
     - IBM
 - name: ibm--elm-gcm
-  friendly_name: IBM® Engineering Lifecycle Management Global Configuration Management
+  friendly_name:
+    IBM® Engineering Lifecycle Management Global Configuration Management
   aliases:
     - engineering lifecycle management global configuration management
     - IBM
