@@ -92,8 +92,8 @@ const ExampleDropContainerApp = (props) => {
     }, rand + 1000);
   };
 
-  const onAddFilesButton = (event) => {
-    const file = event.target.files;
+  const onAddFilesButton = (event, { addedFiles }) => {
+    const file = addedFiles;
 
     const newFile = [
       {
