@@ -45,6 +45,8 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
+      - name: Update telemetry.yml
+        run: yarn run telemetry:config
       - name: Create preminor release
         if: ${{ github.event.inputs.type == 'preminor' }}
         run: |

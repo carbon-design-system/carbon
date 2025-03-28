@@ -63,6 +63,14 @@ export {
   ErrorBoundaryContext,
 } from './components/ErrorBoundary';
 export {
+  FeatureFlags,
+  useFeatureFlag,
+  useFeatureFlags,
+  FeatureFlags as unstable_FeatureFlags, // this export can be removed in v12
+  useFeatureFlag as unstable_useFeatureFlag, // this export can be removed in v12
+  useFeatureFlags as unstable_useFeatureFlags, // this export can be removed in v12
+} from './components/FeatureFlags';
+export {
   FileUploader,
   Filename,
   FileUploaderButton,
@@ -235,11 +243,6 @@ export {
 } from './components/UIShell';
 
 // Experimental
-export {
-  FeatureFlags as unstable_FeatureFlags,
-  useFeatureFlag as unstable_useFeatureFlag,
-  useFeatureFlags as unstable_useFeatureFlags,
-} from './components/FeatureFlags';
 export {
   FluidComboBox as unstable__FluidComboBox,
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,

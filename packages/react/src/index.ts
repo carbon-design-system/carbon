@@ -33,6 +33,14 @@ export * from './components/DatePickerInput';
 export * from './components/Dropdown';
 export * from './components/ErrorBoundary';
 export * from './components/ExpandableSearch';
+export {
+  FeatureFlags,
+  useFeatureFlag,
+  useFeatureFlags,
+  FeatureFlags as unstable_FeatureFlags, // this export can be removed in v12
+  useFeatureFlag as unstable_useFeatureFlag, // this export can be removed in v12
+  useFeatureFlags as unstable_useFeatureFlags, // this export can be removed in v12
+} from './components/FeatureFlags';
 export * from './components/FileUploader';
 export * from './components/FilterableMultiSelect';
 export * from './components/FluidForm';
@@ -98,13 +106,7 @@ export * from './components/Toggletip';
 export * from './components/TreeView';
 export * from './components/UIShell';
 export * from './components/UnorderedList';
-
 // Experimental
-export {
-  FeatureFlags as unstable_FeatureFlags,
-  useFeatureFlag as unstable_useFeatureFlag,
-  useFeatureFlags as unstable_useFeatureFlags,
-} from './components/FeatureFlags';
 export {
   FluidComboBox as unstable__FluidComboBox,
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
