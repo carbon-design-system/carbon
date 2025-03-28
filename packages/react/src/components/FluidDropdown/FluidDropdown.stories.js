@@ -169,7 +169,7 @@ const aiLabel = (
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
+        <h2 className="ai-label-heading">84%</h2>
         <p className="secondary bold">Confidence score</p>
         <p className="secondary">
           Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
