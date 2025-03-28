@@ -453,6 +453,7 @@ export type {
   PageHeaderProps,
   PageHeaderBreadcrumbBarProps,
   PageHeaderContentProps,
+  PageHeaderHeroImageProps,
   PageHeaderTabBarProps,
 } from './components/PageHeader';
 
