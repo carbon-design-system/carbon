@@ -65,12 +65,11 @@ export function useControllableState({
     if (controlled.current === false && controlledValue) {
       warning(
         false,
-        'A component is changing an uncontrolled %s component to be controlled. ' +
+        `A component is changing an uncontrolled ${name} component to be controlled. ` +
           'This is likely caused by the value changing to a defined value ' +
           'from undefined. Decide between using a controlled or uncontrolled ' +
           'value for the lifetime of the component. ' +
-          'More info: https://reactjs.org/link/controlled-components',
-        name
+          'More info: https://reactjs.org/link/controlled-components'
       );
     }
 
@@ -79,12 +78,11 @@ export function useControllableState({
     if (controlled.current === true && !controlledValue) {
       warning(
         false,
-        'A component is changing a controlled %s component to be uncontrolled. ' +
+        `A component is changing a controlled ${name} component to be uncontrolled. ` +
           'This is likely caused by the value changing to an undefined value ' +
           'from a defined one. Decide between using a controlled or ' +
           'uncontrolled value for the lifetime of the component. ' +
-          'More info: https://reactjs.org/link/controlled-components',
-        name
+          'More info: https://reactjs.org/link/controlled-components'
       );
     }
   }, [name, value]);

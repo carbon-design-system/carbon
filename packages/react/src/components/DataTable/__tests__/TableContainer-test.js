@@ -43,7 +43,7 @@ describe('TableContainer', () => {
       );
 
       const headerEl = container.querySelector('[class*="data-table-header"]');
-      const titleEl = headerEl.querySelector('h4');
+      const titleEl = headerEl.querySelector('h2');
       const descriptionEl = headerEl.querySelector('p');
 
       expect(headerEl).toBeInTheDocument();
@@ -82,7 +82,7 @@ describe('TableContainer', () => {
       );
 
       const headerEl = container.querySelector('[class*="data-table-header"]');
-      const titleEl = headerEl.querySelector('h4');
+      const titleEl = headerEl.querySelector('h2');
       const descriptionEl = headerEl.querySelector('p');
 
       expect(headerEl).toBeInTheDocument();

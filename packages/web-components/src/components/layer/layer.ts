@@ -14,6 +14,14 @@ import { prefix } from '../../globals/settings';
 import styles from './layer.scss?lit';
 
 /**
+ * Layer level constants
+ */
+export const MIN_LEVEL = 0;
+export const MAX_LEVEL = 2;
+export const levels = ['zero', 'one', 'two'];
+export type LayerLevel = 0 | 1 | 2;
+
+/**
  * Basic layer
  *
  * @element cds-layer
@@ -40,10 +48,11 @@ class CDSLayer extends LitElement {
     }
 
     this.layers.forEach((item) => {
-      (item as HTMLElement).setAttribute(
-        'level',
-        ((this.level + 1) % 3).toString()
+      const nextLevel = Math.max(
+        MIN_LEVEL,
+        Math.min(this.level + 1, MAX_LEVEL)
       );
+      (item as HTMLElement).setAttribute('level', nextLevel.toString());
     });
 
     this.dispatchEvent(

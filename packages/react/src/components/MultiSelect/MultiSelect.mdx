@@ -1,6 +1,7 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 
 import * as MultiSelect from './MultiSelect.stories';
+import { Filterable } from './MultiSelect.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
@@ -89,15 +90,14 @@ const options = [
 ### Filtering
 
 The `FilterableMultiSelect` component allows for filtering the list of
-selectable items to a subset. The `FilterableMultiSelect` component allows for
-filtering the list of selectable items to a subset.
+selectable items to a subset.
 
 <Canvas
-  of={MultiSelect.Filterable}
+  of={Filterable}
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(MultiSelect.Filterable),
+      onClick: () => stackblitzPrefillConfig(Filterable),
     },
   ]}
 />
