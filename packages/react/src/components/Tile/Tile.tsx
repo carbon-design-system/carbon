@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2019, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, {
   useEffect,
   useRef,
@@ -7,7 +14,6 @@ import React, {
   type KeyboardEvent,
   type HTMLAttributes,
   type ChangeEvent,
-  type ComponentType,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -46,7 +52,7 @@ export interface TileProps extends HTMLAttributes<HTMLDivElement> {
 
   /**
    * **Experimental**: Specify if the `Tile` component should be rendered with rounded corners. Only valid
-   * when `slug` prop is present
+   * when an AILabel is present
    */
   hasRoundedCorners?: boolean;
 
@@ -112,7 +118,7 @@ Tile.propTypes = {
 
   /**
    * **Experimental**: Specify if the `Tile` component should be rendered with rounded corners. Only valid
-   * when `slug` prop is present
+   * when an AILabel is present
    */
   hasRoundedCorners: PropTypes.bool,
 
@@ -171,9 +177,9 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
   href?: string;
 
   /**
-   * Optional prop to allow overriding the icon rendering.
+   * A component used to render an icon.
    */
-  renderIcon?: ComponentType<{ className?: string }>;
+  renderIcon?: React.ElementType;
 
   /**
    * Specify the function to run when the ClickableTile is clicked
@@ -355,8 +361,7 @@ ClickableTile.propTypes = {
   rel: PropTypes.string,
 
   /**
-   * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   // @ts-expect-error: Invalid derived prop type, seemingly no real solution.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
@@ -488,8 +493,7 @@ export const SelectableTile = React.forwardRef<
     className
   );
 
-  // TODO: rename to handleClick when handleClick prop is deprecated
-  function handleOnClick(evt) {
+  function handleClick(evt) {
     evt.preventDefault();
     evt?.persist?.();
     if (
@@ -499,25 +503,31 @@ export const SelectableTile = React.forwardRef<
     ) {
       return;
     }
-    setIsSelected(!isSelected);
+    setIsSelected((prevSelected) => {
+      const newSelected = !prevSelected;
+      onChange(evt, newSelected, id);
+      return newSelected;
+    });
     clickHandler(evt);
-    onChange(evt, isSelected, id);
   }
 
-  // TODO: rename to handleKeyDown when handleKeyDown prop is deprecated
-  function handleOnKeyDown(evt) {
+  function handleKeyDown(evt) {
     evt?.persist?.();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
-      setIsSelected(!isSelected);
-      onChange(evt, isSelected, id);
+      setIsSelected((prevSelected) => {
+        const newSelected = !prevSelected;
+        onChange(evt, newSelected, id);
+        return newSelected;
+      });
     }
     keyDownHandler(evt);
   }
 
   function handleChange(event) {
-    setIsSelected(event.target.checked);
-    onChange(event, isSelected, id);
+    const newSelected = event.target.checked;
+    setIsSelected(newSelected);
+    onChange(event, newSelected, id);
   }
 
   if (selected !== prevSelected) {
@@ -547,10 +557,10 @@ export const SelectableTile = React.forwardRef<
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
       className={classes}
-      onClick={!disabled ? handleOnClick : undefined}
+      onClick={!disabled ? handleClick : undefined}
       role="checkbox"
       aria-checked={isSelected}
-      onKeyDown={!disabled ? handleOnKeyDown : undefined}
+      onKeyDown={!disabled ? handleKeyDown : undefined}
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={!disabled ? tabIndex : undefined}
       ref={ref}

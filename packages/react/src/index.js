@@ -106,13 +106,15 @@ export {
   InlineNotification,
   NotificationActionButton,
   NotificationButton,
-  Callout as unstable__Callout,
-  Callout as unstable__StaticNotification,
+  Callout,
+  Callout as unstable__Callout, // TODO remove when telemetry shows zero usage, or in v12
+  Callout as unstable__StaticNotification, // TODO remove when telemetry shows zero usage, or in v12
 } from './components/Notification';
 export { NumberInput, NumberInputSkeleton } from './components/NumberInput';
 export { OrderedList } from './components/OrderedList';
 export { OverflowMenu } from './components/OverflowMenu';
 export { OverflowMenuItem } from './components/OverflowMenuItem';
+export * as unstable__PageHeader from './components/PageHeader';
 export { Pagination } from './components/Pagination';
 export { PaginationNav } from './components/PaginationNav';
 export {
@@ -337,3 +339,4 @@ export {
 } from './components/ChatButton';
 
 export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';
+export { ShapeIndicator as unstable__ShapeIndicator } from './components/ShapeIndicator';

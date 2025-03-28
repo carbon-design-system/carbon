@@ -12,9 +12,10 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Setting a custom level](#setting-a-custom-level)
-- [Get the current layer](#get-the-current-layer)
+- [Layer](#layer)
+  - [Overview](#overview)
+  - [Setting a custom level](#setting-a-custom-level)
+  - [Get the current layer](#get-the-current-layer)
 - [Component API](#component-api)
   - [Layer as](#layer-as)
 - [Feedback](#feedback)
@@ -71,6 +72,16 @@ To do this, you can use the `level` prop:
   </Layer>
 </Layer>
 ```
+
+<Canvas
+  of={LayerStories.CustomLevel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(LayerStories.CustomLevel),
+    },
+  ]}
+/>
 
 ## Get the current layer
 

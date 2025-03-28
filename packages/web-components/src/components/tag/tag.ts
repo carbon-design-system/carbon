@@ -22,7 +22,7 @@ export { TAG_SIZE, TAG_TYPE };
 
 /**
  * Tag.
- *
+ * @element cds-tag
  * @fires cds-tag-beingclosed - The custom event fired as the element is being closed
  * @fires cds-tag-closed - The custom event fired after the element has been closed
  */

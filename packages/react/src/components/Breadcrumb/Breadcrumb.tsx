@@ -26,6 +26,12 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
    * Optional prop to omit the trailing slash for the breadcrumbs
    */
   noTrailingSlash?: boolean;
+
+  /**
+   * Specify the size of the Breadcrumb. Currently
+   * supports the following: `sm` & `md` (default: 'md')
+   */
+  size?: 'sm' | 'md';
 }
 
 const Breadcrumb: ForwardRefReturn<HTMLElement, BreadcrumbProps> =
@@ -35,6 +41,7 @@ const Breadcrumb: ForwardRefReturn<HTMLElement, BreadcrumbProps> =
       children,
       className: customClassNameNav,
       noTrailingSlash,
+      size,
       ...rest
     }: PropsWithChildren<BreadcrumbProps>,
     ref: React.Ref<HTMLElement>
@@ -43,6 +50,7 @@ const Breadcrumb: ForwardRefReturn<HTMLElement, BreadcrumbProps> =
     const className = cx({
       [`${prefix}--breadcrumb`]: true,
       [`${prefix}--breadcrumb--no-trailing-slash`]: noTrailingSlash,
+      [`${prefix}--breadcrumb--sm`]: size === 'sm',
     });
 
     return (
@@ -77,6 +85,11 @@ Breadcrumb.propTypes = {
    * Optional prop to omit the trailing slash for the breadcrumbs
    */
   noTrailingSlash: PropTypes.bool,
+
+  /**
+   * Specify the size of the Breadcrumb. Currently supports the following:
+   */
+  size: PropTypes.oneOf(['sm', 'md']),
 };
 
 export default Breadcrumb;

@@ -1,16 +1,11 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {
-  type ComponentType,
-  type FunctionComponent,
-  useRef,
-  useEffect,
-} from 'react';
+import React, { useEffect, useRef, type ElementType } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
@@ -69,9 +64,9 @@ interface OverflowMenuProps {
   menuAlignment?: 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end';
 
   /**
-   * Optionally provide a custom icon to be rendered on the trigger button.
+   * A component used to render an icon.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ElementType;
 
   /**
    * Specify the size of the menu, from a list of available sizes.
@@ -276,7 +271,7 @@ OverflowMenu.propTypes = {
   ]),
 
   /**
-   * Optionally provide a custom icon to be rendered on the trigger button.
+   * A component used to render an icon.
    */
   // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
