@@ -437,11 +437,15 @@ const Modal = React.forwardRef(function Modal(
     if (!enableDialogElement) {
       const initialFocus = (focusContainerElement: HTMLElement | null) => {
         const containerElement = focusContainerElement || innerModal.current;
-        const primaryFocusElement = containerElement
-          ? containerElement.querySelector<HTMLElement | SVGElement>(
-              danger ? `.${prefix}--btn--secondary` : selectorPrimaryFocus
-            )
-          : null;
+        const primaryFocusElement =
+          containerElement &&
+          (containerElement.querySelector<HTMLElement | SVGElement>(
+            selectorPrimaryFocus
+          ) ||
+            (danger &&
+              containerElement.querySelector<HTMLElement | SVGElement>(
+                `.${prefix}--btn--secondary`
+              )));
 
         if (primaryFocusElement) {
           return primaryFocusElement;
