@@ -171,8 +171,8 @@ export function Toggletip<E extends ElementType = 'span'>({
     }
   });
 
-  useWindowEvent('click', (event) => {
-    if (open && ref.current && !ref.current.contains(event.target as Node)) {
+  useWindowEvent('click', ({ target }) => {
+    if (open && target instanceof Node && !ref.current?.contains(target)) {
       actions.close();
     }
   });
