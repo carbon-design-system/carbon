@@ -103,15 +103,15 @@ interface PageHeaderContentProps {
    */
   title: string;
   /**
-   * The PageHeaderContent's subTitle
+   * The PageHeaderContent's subtitle
    */
-  subTitle?: string;
+  subtitle?: string;
   /**
-   * The PageHeaderContent's contextualActions
+   * The PageHeaderContent's contextual actions
    */
   contextualActions?: React.ReactNode;
   /**
-   * The PageHeaderContent's pageActions
+   * The PageHeaderContent's page actions
    */
   pageActions?: React.ReactNode;
 }
@@ -123,7 +123,7 @@ const PageHeaderContent = React.forwardRef<
     className,
     children,
     title,
-    subTitle,
+    subtitle,
     renderIcon: IconElement,
     contextualActions,
     pageActions,
@@ -141,13 +141,13 @@ const PageHeaderContent = React.forwardRef<
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-  const isEllipsisActive = (element: any) => {
+  const isEllipsisActive = (element: HTMLHeadingElement) => {
     setIsEllipsisApplied(element.offsetHeight < element.scrollHeight);
     return element.offsetHeight < element.scrollHeight;
   };
 
   useLayoutEffect(() => {
-    isEllipsisActive(titleRef.current);
+    titleRef.current && isEllipsisActive(titleRef.current);
   }, [title]);
 
   return (
@@ -194,9 +194,9 @@ const PageHeaderContent = React.forwardRef<
           )}
         </div>
       </div>
-      {subTitle && (
-        <Text as="h3" className={`${prefix}--page-header__content__sub-title`}>
-          {subTitle}
+      {subtitle && (
+        <Text as="h3" className={`${prefix}--page-header__content__subtitle`}>
+          {subtitle}
         </Text>
       )}
       {children && (
@@ -228,15 +228,15 @@ PageHeaderContent.propTypes = {
    */
   title: PropTypes.string.isRequired,
   /**
-   * The PageHeaderContent's subTitle
+   * The PageHeaderContent's subtitle
    */
-  subTitle: PropTypes.string,
+  subtitle: PropTypes.string,
   /**
-   * The PageHeaderContent's contextualActions
+   * The PageHeaderContent's contextual actions
    */
   contextualActions: PropTypes.node,
   /**
-   * The PageHeaderContent's pageActions
+   * The PageHeaderContent's page actions
    */
   pageActions: PropTypes.node,
 };

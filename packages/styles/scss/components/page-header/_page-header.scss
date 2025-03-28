@@ -88,7 +88,7 @@
     gap: $spacing-05;
   }
 
-  .#{$prefix}--page-header__content__sub-title {
+  .#{$prefix}--page-header__content__subtitle {
     @include type-style('productive-heading-03');
 
     margin-block-start: $spacing-05;

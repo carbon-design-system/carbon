@@ -108,10 +108,10 @@ describe('PageHeader', () => {
       expect(icon).toBeInTheDocument();
     });
 
-    it('should render a sub-title', () => {
-      render(<PageHeader.Content title="title" subTitle="subTitle" />);
+    it('should render a subtitle', () => {
+      render(<PageHeader.Content title="title" subtitle="subtitle" />);
 
-      expect(screen.getByText('subTitle')).toBeInTheDocument();
+      expect(screen.getByText('subtitle')).toBeInTheDocument();
     });
 
     it('should render children', () => {

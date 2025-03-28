@@ -111,7 +111,7 @@ export const Content = (args) => (
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content
       title="Page header content title with an extra long title that turns into a definition tooltip that creates a title with an ellipsis."
-      subTitle="Subtitle"
+      subtitle="Subtitle"
       {...args}>
       Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
       Massa elementum class enim malesuada lacinia hendrerit enim erat
@@ -127,7 +127,7 @@ export const ContentWithIcon = (args) => (
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-      subTitle="Subtitle"
+      subtitle="Subtitle"
       renderIcon={BeeIcon}
       {...args}>
       Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
@@ -144,7 +144,7 @@ export const ContentWithContextualActions = (args) => (
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-      subTitle="Subtitle"
+      subtitle="Subtitle"
       contextualActions={
         <>
           <Dropdown
@@ -180,7 +180,7 @@ export const ContentWithHeroImage = (args) => (
             <PageHeader.BreadcrumbBar />
             <PageHeader.Content
               title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-              subTitle="Subtitle"
+              subtitle="Subtitle"
               {...args}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -235,7 +235,7 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-      subTitle="Subtitle"
+      subtitle="Subtitle"
       contextualActions={
         <>
           <Dropdown
