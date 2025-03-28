@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -255,7 +255,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const [prevControlledValue, setPrevControlledValue] =
       useState(controlledValue);
     const inputRef = useRef<HTMLInputElement>(null);
-    const ref = useMergedRefs<HTMLInputElement>([forwardRef, inputRef]);
+    const ref = useMergedRefs([forwardRef, inputRef]);
     const numberInputClasses = cx({
       [`${prefix}--number`]: true,
       [`${prefix}--number--helpertext`]: true,
