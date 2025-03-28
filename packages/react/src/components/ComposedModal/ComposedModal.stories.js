@@ -1,22 +1,21 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import ComposedModal, { ModalBody } from './ComposedModal';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
-import MultiSelect from '../MultiSelect';
+import { MultiSelect } from '../MultiSelect';
 import Dropdown from '../Dropdown';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import Button from '../Button';
-import { Information } from '@carbon/icons-react';
 import {
   StructuredListWrapper,
   StructuredListHead,

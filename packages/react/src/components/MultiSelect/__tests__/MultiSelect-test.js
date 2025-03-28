@@ -19,7 +19,7 @@ import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 import { AILabel } from '../../AILabel';
 import Button from '../../Button';
 import ButtonSet from '../../ButtonSet';
-import MultiSelect from '../';
+import { MultiSelect } from '../';
 import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
@@ -464,7 +464,7 @@ describe('MultiSelect', () => {
             item ? (
               <span className="test-element">
                 {item.text}{' '}
-                <span role="img" alt="fire">
+                <span role="img" aria-label="fire">
                   {' '}
                   🔥
                 </span>

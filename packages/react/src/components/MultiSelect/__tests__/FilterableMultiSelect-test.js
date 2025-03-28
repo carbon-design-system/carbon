@@ -9,7 +9,7 @@ import React from 'react';
 import { act, render, screen } from '@testing-library/react';
 import { getByText } from '@carbon/test-utils/dom';
 import userEvent from '@testing-library/user-event';
-import FilterableMultiSelect from '../FilterableMultiSelect';
+import { FilterableMultiSelect } from '../';
 import {
   assertMenuOpen,
   assertMenuClosed,
