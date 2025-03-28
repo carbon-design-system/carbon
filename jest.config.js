@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,4 +31,8 @@ module.exports = {
     nanoid: require.resolve('nanoid'),
   },
   reporters: ['default', 'jest-junit'],
+
+  // This is a temporary workaround until Jest supports Prettier 3 (and ESM)
+  // @see https://jestjs.io/docs/configuration#prettierpath-string
+  prettierPath: require.resolve('prettier2'),
 };
