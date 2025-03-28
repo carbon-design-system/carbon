@@ -20,7 +20,13 @@ export default {
   },
 };
 
-export const Default = (args) => <CopyButton {...args} />;
+export const Default = (args) => {
+  return (
+    <div style={{ padding: '4rem' }}>
+      <CopyButton {...args} />
+    </div>
+  );
+};
 
 Default.argTypes = {
   className: {
