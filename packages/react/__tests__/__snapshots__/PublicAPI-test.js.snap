@@ -2915,6 +2915,7 @@ Map {
     },
   },
   "DismissibleTag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -2984,6 +2985,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "Dropdown" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -6816,6 +6818,7 @@ Map {
     },
   },
   "SelectableTag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -6862,6 +6865,7 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "SelectableTile" => Object {
     "$$typeof": Symbol(react.forward_ref),
