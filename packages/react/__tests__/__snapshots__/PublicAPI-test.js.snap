@@ -10895,7 +10895,7 @@ Map {
           ],
           "type": "oneOfType",
         },
-        "subTitle": Object {
+        "subtitle": Object {
           "type": "string",
         },
         "title": Object {
@@ -10953,7 +10953,7 @@ Map {
           ],
           "type": "oneOfType",
         },
-        "subTitle": Object {
+        "subtitle": Object {
           "type": "string",
         },
         "title": Object {
