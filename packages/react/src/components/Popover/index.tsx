@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,17 +9,16 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import React, {
-  useRef,
-  useMemo,
   useEffect,
+  useMemo,
+  useRef,
+  type ElementType,
   type ForwardedRef,
   type WeakValidationMap,
-  type ElementType,
 } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
-import { type PolymorphicProps } from '../../types/common';
 import { useWindowEvent } from '../../internal/useEvent';
 import { mapPopoverAlignProp } from '../../tools/createPropAdapter';
 import {
@@ -36,6 +35,7 @@ import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
+import { ToggletipButton } from '../Toggletip';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -454,10 +454,8 @@ export const Popover: PopoverComponent & {
           // In either of these cases we want to set this as the reference node for floating-ui autoAlign
           // positioning.
           if (
-            (enableFloatingStyles &&
-              (item?.type as any)?.displayName !== 'PopoverContent') ||
-            (enableFloatingStyles &&
-              (item?.type as any)?.displayName === 'ToggletipButton')
+            (enableFloatingStyles && item?.type !== PopoverContent) ||
+            (enableFloatingStyles && item?.type === ToggletipButton)
           ) {
             // Set the reference element for floating-ui
             refs.setReference(node);

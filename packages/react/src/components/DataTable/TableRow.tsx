@@ -1,15 +1,16 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { Children, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
+import { AILabel, TableDecoratorRow, TableSlugRow } from '../..';
 
 export interface TableRowProps extends ReactAttr<HTMLTableRowElement> {
   /**
@@ -28,15 +29,11 @@ const TableRow = React.forwardRef<HTMLTableCellElement, TableRowProps>(
 
     let rowHasAILabel;
     if (props?.children) {
-      React.Children.toArray(props.children).map((child: any) => {
-        if (
-          child.type?.displayName === 'TableSlugRow' ||
-          child.type?.displayName === 'TableDecoratorRow'
-        ) {
-          if (
-            child.props.slug ||
-            child.props.decorator?.type.displayName === 'AILabel'
-          ) {
+      Children.toArray(props.children).map((child) => {
+        if (!isValidElement(child)) return;
+
+        if (child.type === TableSlugRow || child.type === TableDecoratorRow) {
+          if (child.props.slug || child.props.decorator?.type === AILabel) {
             rowHasAILabel = true;
           }
         }

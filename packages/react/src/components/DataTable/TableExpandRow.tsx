@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,11 +7,17 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { type MouseEventHandler, type PropsWithChildren } from 'react';
+import React, {
+  Children,
+  isValidElement,
+  type MouseEventHandler,
+  type PropsWithChildren,
+} from 'react';
 import { ChevronRight } from '@carbon/icons-react';
 import TableCell from './TableCell';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableRowProps } from './TableRow';
+import { AILabel, TableDecoratorRow, TableSlugRow } from '../..';
 
 export interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
   /**
@@ -75,15 +81,11 @@ const TableExpandRow = React.forwardRef(
 
     // We need to put the AILabel and Decorator before the expansion arrow and all other table cells after the arrow.
     let rowHasAILabel;
-    const decorator = React.Children.toArray(children).map((child: any) => {
-      if (
-        child.type?.displayName === 'TableSlugRow' ||
-        child.type?.displayName === 'TableDecoratorRow'
-      ) {
-        if (
-          child.props.slug ||
-          child.props.decorator?.type.displayName === 'AILabel'
-        ) {
+    const decorator = Children.toArray(children).map((child) => {
+      if (!isValidElement(child)) return;
+
+      if (child.type === TableSlugRow || child.type === TableDecoratorRow) {
+        if (child.props.slug || child.props.decorator?.type === AILabel) {
           rowHasAILabel = true;
         }
 

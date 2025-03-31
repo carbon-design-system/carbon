@@ -1,12 +1,16 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { HTMLAttributes, ReactElement } from 'react';
+import React, {
+  isValidElement,
+  type HTMLAttributes,
+  type ReactElement,
+} from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { LayoutConstraint } from '../Layout';
@@ -14,6 +18,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
+import { IconSwitch } from '../Switch';
 
 export interface SwitchEventHandlersParams {
   index?: number;
@@ -207,7 +212,7 @@ export default class ContentSwitcher extends React.Component<
     } = this.props;
 
     const isIconOnly = React.Children?.map(children, (child) => {
-      return (child as JSX.Element).type.displayName === 'IconSwitch';
+      return isValidElement(child) ? child.type === IconSwitch : null;
     })?.every((val) => val === true);
 
     const classes = classNames(`${prefix}--content-switcher`, className, {

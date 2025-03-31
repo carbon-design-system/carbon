@@ -6,16 +6,18 @@
  */
 
 import React, {
-  FocusEvent,
-  ForwardedRef,
+  cloneElement,
   isValidElement,
-  MouseEvent,
-  ReactNode,
   useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
+  type FocusEvent,
+  type ForwardedRef,
+  type MouseEvent,
+  type ReactElement,
+  type ReactNode,
 } from 'react';
 import {
   useSelect,
@@ -52,6 +54,8 @@ import {
   size as floatingSize,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const { ItemMouseMove, MenuMouseLeave } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
@@ -598,15 +602,11 @@ const Dropdown = React.forwardRef(
     );
 
     // AILabel is always size `mini`
-    const normalizedDecorator = useMemo(() => {
-      let element = slug ?? decorator;
-      if (element && element['type']?.displayName === 'AILabel') {
-        return React.cloneElement(element as React.ReactElement<any>, {
-          size: 'mini',
-        });
-      }
-      return React.isValidElement(element) ? element : null;
-    }, [slug, decorator]);
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini' })
+      : null;
 
     const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
 
