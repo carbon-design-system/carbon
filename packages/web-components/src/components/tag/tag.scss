@@ -89,8 +89,8 @@ $css--plex: true !default;
   // tag overrides layout tokens
   --cds-layout-size-height-xs: 1.125rem;
   --cds-layout-size-height-sm: 1.125rem;
-  --cds-layout-size-height-md: 1.5rem;
-  --cds-layout-size-height-lg: 2rem;
+  --cds-layout-size-height-md: #{$spacing-06};
+  --cds-layout-size-height-lg: #{$spacing-07};
 }
 
 :host(#{$prefix}-tag[size='sm']),
