@@ -54,10 +54,6 @@ const argTypes = {
     options: sizes,
     description: 'Button size (size)',
   },
-  disableSelection: {
-    control: 'boolean',
-    description: `Disable user-initiated selection change (Call event.preventDefault() in ${prefix}-content-switcher-beingselected event)`,
-  },
   onBeforeSelect: {
     action: `${prefix}-content-switcher-beingselected`,
   },
