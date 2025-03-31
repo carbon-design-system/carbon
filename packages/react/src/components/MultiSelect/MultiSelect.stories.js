@@ -354,7 +354,7 @@ export const Filterable = (args) => {
       }}>
       <FilterableMultiSelect
         id="carbon-multiselect-example-3"
-        titleText="Multiselect title"
+        titleText="FilterableMultiSelect title"
         helperText="This is helper text"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
