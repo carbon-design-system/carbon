@@ -660,14 +660,12 @@ import { warning } from '../../internal/warning';
 let didWarnAboutDeprecation = false;
 
 function SomeComponent() {
-  if (__DEV__) {
-    warning(
-      didWarnAboutDeprecation,
-      'The `SomeComponent` component has been deprecated and will be removed ' +
-        'in the next major release of `carbon-components-react`'
-    );
-    didWarnAboutDeprecation = true;
-  }
+  warning(
+    didWarnAboutDeprecation,
+    'The `SomeComponent` component has been deprecated and will be removed ' +
+      'in the next major release of `carbon-components-react`'
+  );
+  didWarnAboutDeprecation = true;
 }
 ```
 

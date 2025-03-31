@@ -11,7 +11,7 @@ import PasswordInput from './PasswordInput';
 import TextInput, { type TextInputProps } from './TextInput';
 import { type TextInputSkeletonProps } from './TextInput.Skeleton';
 
-if (__DEV__) {
+if (process.env.NODE_ENV !== 'production') {
   deprecateFieldOnObject(
     TextInput,
     'ControlledPasswordInput',
