@@ -256,15 +256,6 @@ $css--plex: true !default;
 :host(#{$prefix}-dismissible-tag[disabled]),
 :host(#{$prefix}-tag[disabled]) {
   @extend .#{$prefix}--tag--disabled;
-
-  // border: 1px solid $border-disabled;
-  // background-color: $layer;
-  // color: $text-disabled;
-
-  // &:hover {
-  //   background-color: $layer;
-  //   cursor: not-allowed;
-  // }
 }
 
 // Skeleton state
