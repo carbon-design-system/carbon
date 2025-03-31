@@ -260,7 +260,7 @@ export const FloatingMenu = ({
 
       if (!menuBody) {
         warning(
-          menuBody,
+          !!menuBody,
           'The DOM node for menu body for calculating its position is not available. Skipping...'
         );
 

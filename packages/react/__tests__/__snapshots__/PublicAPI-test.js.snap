@@ -3308,6 +3308,35 @@ Map {
     },
     "render": [Function],
   },
+  "FeatureFlags" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "enableDialogElement": Object {
+        "type": "bool",
+      },
+      "enableExperimentalFocusWrapWithoutSentinels": Object {
+        "type": "bool",
+      },
+      "enableTreeviewControllable": Object {
+        "type": "bool",
+      },
+      "enableV12DynamicFloatingStyles": Object {
+        "type": "bool",
+      },
+      "enableV12Overflowmenu": Object {
+        "type": "bool",
+      },
+      "enableV12TileDefaultIcons": Object {
+        "type": "bool",
+      },
+      "enableV12TileRadioIcons": Object {
+        "type": "bool",
+      },
+      "flags": [Function],
+    },
+  },
   "FileUploader" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -11027,6 +11056,8 @@ Map {
   "unstable_useFeatureFlags" => Object {},
   "unstable_useLayoutDirection" => Object {},
   "useContextMenu" => Object {},
+  "useFeatureFlag" => Object {},
+  "useFeatureFlags" => Object {},
   "useIdPrefix" => Object {},
   "useLayer" => Object {},
   "usePrefersDarkScheme" => Object {},
