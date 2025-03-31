@@ -46,7 +46,7 @@ export default {
 };
 
 export const Default = (args) => {
-  return <Pagination {...args} />;
+  return <Pagination pageSizes={[10, 20, 30, 40, 50]} {...args} />;
 };
 
 Default.args = {
