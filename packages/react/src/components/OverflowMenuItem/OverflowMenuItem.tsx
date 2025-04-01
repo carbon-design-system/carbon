@@ -126,7 +126,7 @@ const OverflowMenuItem: OverflowMenuItemComponent = React.forwardRef(
 
     if (__DEV__) {
       warning(
-        closeMenu,
+        !!closeMenu,
         '`<OverflowMenuItem>` detected missing `closeMenu` prop. ' +
           '`closeMenu` is required to let `<OverflowMenu>` close the menu upon actions on `<OverflowMenuItem>`. ' +
           'Please make sure `<OverflowMenuItem>` is a direct child of `<OverflowMenu>.'
