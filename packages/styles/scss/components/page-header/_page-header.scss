@@ -6,17 +6,18 @@
 //
 
 @use '../../config' as *;
+@use '../../breakpoint' as *;
 // @use '../../motion' as *;
-// @use '../../spacing' as *;
+@use '../../spacing' as *;
 // @use '../../theme' as *;
-// @use '../../type' as *;
+@use '../../type' as *;
 // @use '../../layer' as *;
 // @use '../../utilities/box-shadow' as *;
 // @use '../../utilities/button-reset';
 // @use '../../utilities/component-reset';
 // @use '../../utilities/focus-outline' as *;
 // @use '../../utilities/high-contrast-mode' as *;
-// @use '../../utilities/convert';
+@use '../../utilities/convert';
 // @use '../../utilities/z-index' as *;
 // @use '../../utilities/custom-property';
 
@@ -31,8 +32,89 @@
     border: 1px solid blue; /* stylelint-disable-line */
   }
   .#{$prefix}--page-header__content {
+    margin: $spacing-06 0;
     border: 1px solid red; /* stylelint-disable-line */
   }
+
+  .#{$prefix}--page-header__content__title-wrapper {
+    @include breakpoint-down(md) {
+      flex-direction: column;
+    }
+
+    display: flex;
+    justify-content: space-between;
+    gap: $spacing-05;
+  }
+
+  .#{$prefix}--page-header__content__start {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-05;
+  }
+
+  .#{$prefix}--page-header__content__title-container {
+    display: flex;
+  }
+
+  .#{$prefix}--page-header__content__contextual-actions {
+    display: flex;
+  }
+
+  .#{$prefix}--page-header__content__title {
+    @include type-style('productive-heading-04');
+
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    max-inline-size: convert.to-rem(640px);
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+
+  .#{$prefix}--page-header__content:has(
+      .#{$prefix}--page-header__content__contextual-actions
+    )
+    .#{$prefix}--page-header__content__title {
+    -webkit-line-clamp: 1;
+  }
+
+  .#{$prefix}--page-header__content__icon {
+    margin-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--page-header__content__page-actions {
+    display: flex;
+    gap: $spacing-05;
+  }
+
+  .#{$prefix}--page-header__content__subtitle {
+    @include type-style('productive-heading-03');
+
+    margin-block-start: $spacing-05;
+  }
+
+  .#{$prefix}--page-header__content__body {
+    @include type-style('body-01');
+
+    margin-block-start: $spacing-03;
+    max-inline-size: convert.to-rem(640px);
+  }
+
+  .#{$prefix}--page-header__content:not(
+      :has(.#{$prefix}--page-header__content__sub-title)
+    )
+    .#{$prefix}--page-header__content__body {
+    margin-block-start: $spacing-05;
+  }
+
+  .#{$prefix}--page-header__hero-image {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    block-size: 100%;
+  }
+
   .#{$prefix}--page-header__tab-bar {
     border: 1px solid green; /* stylelint-disable-line */
   }
