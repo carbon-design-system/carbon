@@ -155,7 +155,7 @@ const ControlledPasswordInput = React.forwardRef(
   ) {
     const prefix = usePrefix();
     const controlledPasswordInstanceId = useId();
-    if (__DEV__) {
+    if (process.env.NODE_ENV !== 'production') {
       warning(
         didWarnAboutDeprecation,
         '`<TextInput.ControlledPasswordInput>` has been deprecated in favor of `<TextInput.PasswordInput />` and will be removed in the next major release of `carbon-components-react`'

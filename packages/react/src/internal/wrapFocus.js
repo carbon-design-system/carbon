@@ -101,7 +101,7 @@ function wrapFocusWithoutSentinels({
 }) {
   if (
     ['blur', 'focusout', 'focusin', 'focus'].includes(event.type) &&
-    __DEV__
+    process.env.NODE_ENV !== 'production'
   ) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {

@@ -40,7 +40,7 @@ const component = template(
       }
     );
 
-    if (__DEV__) {
+    if (process.env.NODE_ENV !== "production") {
       %%moduleName%%.propTypes = iconPropTypes;
     }
   `,
@@ -51,7 +51,7 @@ const component = template(
 
 const deprecatedBlock = template(
   `
-    if (__DEV__) {
+    if (process.env.NODE_ENV !== "production") {
       if (!%%check%%) {
         %%check%% = true;
         console.warn(%%warning%%);
