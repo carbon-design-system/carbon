@@ -21,8 +21,9 @@ import ButtonSet from '../ButtonSet';
 import InlineLoading from '../InlineLoading';
 import { Layer } from '../Layer';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import wrapFocus, {
+import {
   elementOrParentIsFloatingMenu,
+  wrapFocus,
 } from '../../internal/wrapFocus';
 import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
@@ -316,10 +317,11 @@ const Modal = React.forwardRef(function Modal(
   }
 
   function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
-    const target = evt.target as Node;
+    const { target } = evt;
     evt.stopPropagation();
     if (
       !preventCloseOnClickOutside &&
+      target instanceof Node &&
       !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
       innerModal.current &&
       !innerModal.current.contains(target)
@@ -332,7 +334,11 @@ const Modal = React.forwardRef(function Modal(
     target: oldActiveNode,
     relatedTarget: currentActiveNode,
   }: React.FocusEvent<HTMLDivElement>) {
-    if (open && currentActiveNode && oldActiveNode) {
+    if (
+      open &&
+      oldActiveNode instanceof HTMLElement &&
+      currentActiveNode instanceof HTMLElement
+    ) {
       const { current: bodyNode } = innerModal;
       const { current: startTrapNode } = startTrap;
       const { current: endTrapNode } = endTrap;

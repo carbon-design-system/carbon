@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2021, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, {
   useRef,
   useEffect,
@@ -23,8 +30,9 @@ import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
 import toggleClass from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import wrapFocus, {
+import {
   elementOrParentIsFloatingMenu,
+  wrapFocus,
 } from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
@@ -299,11 +307,12 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     }
 
     function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
-      const target = evt.target as Node;
-      const mouseDownTarget = onMouseDownTarget.current as Node;
+      const { target } = evt;
+      const mouseDownTarget = onMouseDownTarget.current;
       evt.stopPropagation();
       if (
         !preventCloseOnClickOutside &&
+        target instanceof Node &&
         !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
         innerModal.current &&
         !innerModal.current.contains(target) &&
@@ -327,9 +336,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           endTrapNode: endSentinelNode,
           currentActiveNode,
           oldActiveNode,
-          selectorsFloatingMenus: selectorsFloatingMenus?.filter(
-            Boolean
-          ) as string[],
+          selectorsFloatingMenus: selectorsFloatingMenus?.filter(Boolean),
         });
       }
     }
