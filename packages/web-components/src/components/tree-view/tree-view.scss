@@ -1,0 +1,113 @@
+//
+// Copyright IBM Corp. 2025, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/components/treeview/index' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/utilities/focus-outline' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+:host(#{$prefix}-tree-view) {
+  display: block;
+}
+
+:host(#{$prefix}-tree-node) {
+  @extend .#{$prefix}--tree-node;
+
+  display: list-item;
+  .#{$prefix}--tree-node__label {
+    box-sizing: inherit;
+  }
+
+  .#{$prefix}--tree-node__hidden {
+    display: none;
+  }
+
+  .#{$prefix}--tree-parent-node__toggle {
+    box-sizing: inherit;
+  }
+}
+
+:host(#{$prefix}-tree-node:focus-visible) {
+  outline: none;
+  .#{$prefix}--tree-node__label {
+    @include focus-outline('outline');
+  }
+}
+
+:host(#{$prefix}-tree-node[parent]) {
+  @extend .#{$prefix}--tree-node-link-parent;
+}
+
+:host(#{$prefix}-tree-node:not([parent])) {
+  @extend .#{$prefix}--tree-leaf-node;
+
+  .#{$prefix}--tree-node__label {
+    padding-block: to-rem(7px);
+  }
+}
+
+:host(#{$prefix}-tree-node[has-icon]:not([parent])) {
+  padding-inline-start: $spacing-07;
+}
+
+:host(#{$prefix}-tree-node[has-icon]) {
+  padding-inline-start: $spacing-03;
+
+  .#{$prefix}--tree-parent-node__toggle {
+    margin-inline-end: 0;
+  }
+}
+
+:host(#{$prefix}-tree-node[has-icon][parent]) {
+  padding-inline-start: $spacing-05;
+}
+
+:host(#{$prefix}-tree-node[selected]) {
+  @extend .#{$prefix}--tree-node--selected;
+}
+
+:host(#{$prefix}-tree-node[active]) {
+  @extend .#{$prefix}--tree-node--active;
+}
+
+:host(#{$prefix}-tree-node[disabled]) {
+  @extend .#{$prefix}--tree-node--disabled;
+}
+
+:host(#{$prefix}-tree-node) ::slotted([slot='icon']) {
+  @extend .#{$prefix}--tree-node__icon;
+}
+
+:host(#{$prefix}-tree-node[has-icon]) ::slotted(#{$prefix}-tree-node) {
+  margin-inline-start: $spacing-03;
+}
+
+:host(#{$prefix}-tree-node[size='xs']) {
+  .#{$prefix}--tree-node__label {
+    min-block-size: to-rem(24px);
+  }
+  .#{$prefix}--tree-parent-node__toggle {
+    margin-block-start: 0;
+  }
+}
+
+:host(#{$prefix}-tree-node[size='xs']:not([parent])) {
+  .#{$prefix}--tree-node__label {
+    padding: 0;
+  }
+}
+
+:host(#{$prefix}-tree-node[href]) {
+  a {
+    color: unset;
+    inline-size: 100%;
+    text-decoration: none;
+  }
+}
