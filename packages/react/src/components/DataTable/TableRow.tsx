@@ -10,7 +10,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
-import { AILabel, TableDecoratorRow, TableSlugRow } from '../..';
+import TableSlugRow from './TableSlugRow';
+import TableDecoratorRow from './TableDecoratorRow';
+import { AILabel } from '../AILabel';
 
 export interface TableRowProps extends ReactAttr<HTMLTableRowElement> {
   /**

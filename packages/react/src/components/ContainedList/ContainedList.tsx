@@ -12,7 +12,7 @@ import { LayoutConstraint } from '../Layout';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import ContainedListItem from './ContainedListItem';
-import { Search } from '../..';
+import { Search } from '../Search';
 
 const variants = ['on-page', 'disclosed'] as const;
 

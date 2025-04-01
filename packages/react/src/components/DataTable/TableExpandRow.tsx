@@ -17,7 +17,9 @@ import { ChevronRight } from '@carbon/icons-react';
 import TableCell from './TableCell';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableRowProps } from './TableRow';
-import { AILabel, TableDecoratorRow, TableSlugRow } from '../..';
+import TableSlugRow from './TableSlugRow';
+import TableDecoratorRow from './TableDecoratorRow';
+import { AILabel } from '../AILabel';
 
 export interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
   /**
