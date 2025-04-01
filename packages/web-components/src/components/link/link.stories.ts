@@ -14,7 +14,7 @@ import { LINK_SIZE } from './link';
 
 const defaultArgs = {
   disabled: false,
-  href: 'https://example.com',
+  href: '#',
   inline: false,
   size: LINK_SIZE.MEDIUM,
   visited: false,
@@ -46,8 +46,8 @@ export const Default = {
   render: ({ disabled, href, inline, size, visited, onClick }) => html`
     <cds-link
       ?disabled="${disabled}"
-      href="${ifDefined(href)}"
-      size="${ifDefined(size)}"
+      .href="${ifDefined(href)}"
+      .size="${ifDefined(size)}"
       ?inline="${inline}"
       ?visited="${visited}"
       @click="${onClick}">
@@ -84,8 +84,8 @@ export const PairedWithIcon = {
   render: ({ disabled, href, size, onClick }) => html`
     <cds-link
       ?disabled="${disabled}"
-      href="${ifDefined(href)}"
-      size="${ifDefined(size)}"
+      .href="${ifDefined(href)}"
+      .size="${ifDefined(size)}"
       @click="${onClick}">
       Carbon Docs ${ArrowRight16({ slot: 'icon' })}
     </cds-link>
