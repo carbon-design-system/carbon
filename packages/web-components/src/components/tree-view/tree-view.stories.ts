@@ -13,13 +13,12 @@ import { TREE_SIZE } from './defs';
 import Document16 from '@carbon/icons/lib/document/16.js';
 import Folder16 from '@carbon/icons/lib/folder/16.js';
 import styles from './tree-view-story.scss?lit';
+import CDSTreeNode from './tree-node';
 
 const sizes = {
   [`Small size (${TREE_SIZE.SMALL})`]: TREE_SIZE.SMALL,
   [`XS size (${TREE_SIZE.EXTRA_SMALL})`]: TREE_SIZE.EXTRA_SMALL,
 };
-
-console.log(sizes);
 
 const defaultArgs = {
   label: 'Tree View',
@@ -154,6 +153,66 @@ export const withIcons = {
           <cds-tree-node label="Sales performance">
             ${Document16({ slot: 'icon' })}
           </cds-tree-node>
+        </cds-tree-node>
+      </cds-tree-node>
+    </cds-tree-view>
+  `,
+};
+
+function expandAll() {
+  document.querySelectorAll('cds-tree-node').forEach((node) => {
+    (node as CDSTreeNode).isExpanded = true;
+  });
+}
+
+function collapseAll() {
+  document.querySelectorAll('cds-tree-node').forEach((node) => {
+    (node as CDSTreeNode).isExpanded = false;
+  });
+}
+
+export const withControlledExpansion = {
+  argTypes: controls,
+  args: defaultArgs,
+
+  render: ({ hideLabel, label, size }) => html`
+    <style>
+      ${styles}
+    </style>
+    <div style="margin-bottom: 1rem">
+      <button type="button" @click="${() => expandAll()}">Expand All</button>
+      <button type="button" @click="${() => collapseAll()}">
+        Collapse All
+      </button>
+    </div>
+    <cds-tree-view ?hide-label=${hideLabel} label=${label} size="${size}">
+      <cds-tree-node label="Artificial intelligence"></cds-tree-node>
+      <cds-tree-node label="Blockchain"></cds-tree-node>
+      <cds-tree-node label="Business automation">
+        <cds-tree-node label="Business process automation"></cds-tree-node>
+        <cds-tree-node label="Business process mapping"></cds-tree-node>
+      </cds-tree-node>
+      <cds-tree-node label="Business operations"></cds-tree-node>
+      <cds-tree-node label="Cloud computing" is-expanded>
+        <cds-tree-node label="Containers"></cds-tree-node>
+        <cds-tree-node label="Databases"></cds-tree-node>
+        <cds-tree-node label="DevOps">
+          <cds-tree-node label="Solutions"></cds-tree-node>
+          <cds-tree-node label="Case studies">
+            <cds-tree-node label="Resources"></cds-tree-node>
+          </cds-tree-node>
+        </cds-tree-node>
+      </cds-tree-node>
+      <cds-tree-node label="Data & Analytics" is-expanded>
+        <cds-tree-node label="Big data"> </cds-tree-node>
+        <cds-tree-node label="Business Intelligence"> </cds-tree-node>
+      </cds-tree-node>
+      <cds-tree-node label="Models" is-expanded disabled>
+        <cds-tree-node label="Audit"> </cds-tree-node>
+        <cds-tree-node label="Monthly data"> </cds-tree-node>
+        <cds-tree-node label="Data warehouse" is-expanded>
+          <cds-tree-node label="Report samples"> </cds-tree-node>
+          <cds-tree-node label="Sales performance"> </cds-tree-node>
         </cds-tree-node>
       </cds-tree-node>
     </cds-tree-view>
