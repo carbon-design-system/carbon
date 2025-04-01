@@ -1,55 +1,121 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as CheckboxStories from './checkbox.stories';
 
 <Meta of={CheckboxStories} />
 
-# Check box
+# Checkbox
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/checkbox)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/checkbox)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/checkbox/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/checkbox/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/checkbox)
+## Table of Contents
 
-Check box in `carbon-web-components` represents a combination of a check box and
-its label.
+- [Overview](#overview)
+- [Horizontal](#horizontal)
+- [Single](#single)
+- [Skeleton state](#skeleton-state)
+- [AI Label](#With-ai-label)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+You can build a checkbox using the `checkbox` in combination with a
+`<cds-checkbox-group>` element to group controls and `legend-text` attribute for
+the label.
 
-### JS (via import)
+<Canvas of={CheckboxStories.Default} />
 
-```javascript
-import '@carbon/web-components/es/components/checkbox/index.js';
+### Controlled example
+
+You can also use a controlled checkbox component driven by state:
+
+```jsx
+function ExampleComponent() {
+  const [isChecked, setIsChecked] = useState(false);
+  return (
+    <Checkbox
+      id="checkbox"
+      labelText="checkbox"
+      checked={isChecked}
+      onChange={(_, { checked }) => setIsChecked(checked)}
+    />
+  );
+}
 ```
 
-<Markdown>{`${cdnJs({ components: ['checkbox'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+## Horizontal
 
-### HTML
+<Canvas of={CheckboxStories.Horizontal} />
 
-```html
-<cds-checkbox>Lorem Ipsum</cds-checkbox>
+## Single
+
+<Canvas of={CheckboxStories.Single} />
+
+## Skeleton state
+
+You can use the `CheckboxSkeleton` component to render a skeleton variant of a
+checkbox. This is useful to display while content in your checkbox is being
+fetched from an external resource like an API.
+
+<Canvas of={CheckboxStories.Skeleton} />
+
+## With AI label
+
+<Canvas of={CheckboxStories.WithAILabel} />
+
+## Component API
+
+<ArgTypes />
+### Checkbox defaultChecked
+
+You can use the `defaultChecked` prop to specify weather a checkbox is checked
+by default or not on page load.
+
+```jsx
+<Checkbox defaultChecked labelText={`Checkbox label`} id="checkbox-label-1" />
+<Checkbox defaultChecked labelText={`Checkbox label`} id="checkbox-label-2" />
 ```
 
-Use `cds-checkbox-group` when handling multiple checkboxes
+### Checkbox id
 
-```html
-<cds-checkbox-group legend-text="Group label">
-  <cds-checkbox>Lorem Ipsum 0</cds-checkbox>
-  <cds-checkbox>Lorem Ipsum 1</cds-checkbox>
-</cds-checkbox-group>
+The `id` should be used to provide each checkbox input with a unique id and is a
+required prop.
+
+```jsx
+<Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+<Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
 ```
 
-## `<cds-checkbox>` attributes, properties and events
+### Checkbox labelText
 
-Unlike regular checkbox, `<cds-checkbox>` does _not_ fire `change` event. Please
-use `cds-checkbox-changed` event instead.
+The `labelText` should be used to provide a label that describes the checkbox
+input that is being exposed to the user and is a required prop.
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-checkbox checked>`) and `false` means not setting the attribute (e.g.
-`<cds-checkbox>` without `checked` attribute).
+```jsx
+<Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+<Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+```
+
+### Checkbox onChange
+
+You can use the `onChange` prop to pass in a custom function for event handling.
+This prop receives three arguments: a boolean, the checkbox id, and the dom
+event.
+
+```jsx
+<Checkbox onChange={()=>{}} labelText={`Checkbox label`} id="checkbox-label-1" />
+<Checkbox onChange={()=>{}} labelText={`Checkbox label`} id="checkbox-label-2" />
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/checkbox/checkbox.mdx).
 
 <ArgTypes of="cds-checkbox" />
