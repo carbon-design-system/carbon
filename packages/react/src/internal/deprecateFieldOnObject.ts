@@ -1,17 +1,23 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import { warning } from '../internal/warning';
 
-const didWarnAboutDeprecation = {};
+export const deprecateFieldOnObject = <T extends { displayName?: string }>(
+  object: T,
+  field: string,
+  Component: { displayName?: string; name?: string },
+  message?: string
+) => {
+  const didWarnAboutDeprecation: Record<string, boolean> = {};
 
-function deprecateFieldOnObject(object, field, Component, message) {
   Object.defineProperty(object, field, {
     enumerable: true,
-    get() {
+    get: () => {
       if (!didWarnAboutDeprecation[field]) {
         warning(
           false,
@@ -27,6 +33,4 @@ function deprecateFieldOnObject(object, field, Component, message) {
       return Component;
     },
   });
-}
-
-export { deprecateFieldOnObject };
+};
