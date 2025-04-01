@@ -489,7 +489,7 @@ export const Popover: PopoverComponent & {
 
 // Note: this displayName is temporarily set so that Storybook ArgTable
 // correctly displays the name of this component
-if (__DEV__) {
+if (process.env.NODE_ENV !== 'production') {
   Popover.displayName = 'Popover';
 }
 

@@ -22,7 +22,7 @@ export const createTextComponent = (
     return <Text as={element} {...props} />;
   };
 
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
     TextWrapper.displayName = displayName;
   }
 

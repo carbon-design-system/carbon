@@ -10,24 +10,25 @@ import { noopFn } from './noopFn';
 /**
  * Logs a warning.
  *
- * The warning is only logged if the condition is not met and  `__DEV__` is
- * truthy.
+ * The warning is only logged if the condition is not met and
+ * `process.env.NODE_ENV !== 'production'` is truthy.
  *
  * @param condition - Condition to evaluate.
  * @param message - Warning message.
  * @throws Error if no `message` is provided.
  */
-export const warning: (condition: boolean, message: string) => void = __DEV__
-  ? (condition, message) => {
-      if (typeof message === 'undefined') {
-        throw new Error(
-          '`warning(condition, message)` requires a warning ' +
-            'format argument'
-        );
-      }
+export const warning: (condition: boolean, message: string) => void =
+  process.env.NODE_ENV !== 'production'
+    ? (condition, message) => {
+        if (typeof message === 'undefined') {
+          throw new Error(
+            '`warning(condition, message)` requires a warning ' +
+              'format argument'
+          );
+        }
 
-      if (!condition) {
-        console.warn('Warning: ' + message);
+        if (!condition) {
+          console.warn('Warning: ' + message);
+        }
       }
-    }
-  : noopFn;
+    : noopFn;
