@@ -19,7 +19,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-ai-label-action-button
  */
 @customElement(`${prefix}-ai-label-action-button`)
-export default class CDSAILabelActionButton extends CDSButton {
+class CDSAILabelActionButton extends CDSButton {
   /**
    * The shadow slot this ai-label-action should be in.
    */
@@ -28,3 +28,5 @@ export default class CDSAILabelActionButton extends CDSButton {
 
   static styles = styles;
 }
+
+export default CDSAILabelActionButton;
