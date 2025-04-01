@@ -23,7 +23,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-ai-label
  */
 @customElement(`${prefix}-ai-label`)
-export default class CDSAILabel extends CDSToggleTip {
+class CDSAILabel extends CDSToggleTip {
   /**
    * @deprecated the slot string will be renamed to "decorator"
    */
@@ -146,3 +146,5 @@ export default class CDSAILabel extends CDSToggleTip {
 
   static styles = styles;
 }
+
+export default CDSAILabel;
