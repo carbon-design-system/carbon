@@ -64,9 +64,9 @@ export const Default = {
     return html`
       <cds-breadcrumb
         ?no-trailing-slash="${noTrailingSlash}"
-        class="${className}"
-        aria-label="${ariaLabel}"
-        size="${size}">
+        .class="${className}"
+        .aria-label="${ariaLabel}"
+        .size="${size}">
         <cds-breadcrumb-item>
           <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
         </cds-breadcrumb-item>
@@ -92,9 +92,9 @@ export const BreadcrumbWithOverflowMenu = {
     return html`
       <cds-breadcrumb
         ?no-trailing-slash="${noTrailingSlash}"
-        class="${className}"
-        aria-label="${ariaLabel}"
-        size="${size}">
+        .class="${className}"
+        .aria-label="${ariaLabel}"
+        .size="${size}">
         <cds-breadcrumb-item>
           <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
         </cds-breadcrumb-item>
@@ -139,7 +139,7 @@ export const Skeleton = {
   render: (args) => {
     const { className } = args ?? {};
     return html`
-      <cds-breadcrumb-skeleton class="${className}"> </cds-breadcrumb-skeleton>
+      <cds-breadcrumb-skeleton .class="${className}"> </cds-breadcrumb-skeleton>
     `;
   },
 };
