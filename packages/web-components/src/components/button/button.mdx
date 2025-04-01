@@ -99,19 +99,20 @@ content is being loaded.
 
 <ArgTypes of="cds-button" />
 
-Additional props passed into `button` will be forwarded along to the underlying
-button element.
+Additional attributes passed into `button` will be forwarded along to the
+underlying button element.
 
 ### Button `href`
 
-This prop allows you to specify an address to navigate to on click. This will
-change the underlying `Button` element to be rendered as an `a` anchor element.
+This attribute allows you to specify an address to navigate to on click. This
+will change the underlying `Button` element to be rendered as an `a` anchor
+element.
 
 <Unstyled>
   <cds-button href="https://www.carbondesignsystem.com">Navigate</cds-button>
 </Unstyled>
 
-```jsx
+```html
 <cds-button href="https://www.carbondesignsystem.com">Navigate</cds-button>
 ```
 
@@ -135,14 +136,14 @@ variant, check out the
   </div>
 </Unstyled>
 
-```jsx
-    <cds-button>Primary</cds-button>
-    <cds-button kind="secondary">Secondary</cds-button>
-    <cds-button kind="tertiary">Tertiary </cds-button>
-    <cds-button kind="danger">Danger</cds-button>
-    <cds-button kind="danger-tertiary">Danger tertiary</cds-button>
-    <cds-button kind="danger-ghost">Danger Ghost</cds-button>
-    <cds-button kind="ghost">Ghost</cds-button>
+```html
+<cds-button>Primary</cds-button>
+<cds-button kind="secondary">Secondary</cds-button>
+<cds-button kind="tertiary">Tertiary </cds-button>
+<cds-button kind="danger">Danger</cds-button>
+<cds-button kind="danger-tertiary">Danger tertiary</cds-button>
+<cds-button kind="danger-ghost">Danger Ghost</cds-button>
+<cds-button kind="ghost">Ghost</cds-button>
 ```
 
 ### Button `size`
@@ -156,7 +157,7 @@ renders as `lg`.
 <cds-button size="xl">Button</cds-button>
 <cds-button size="2xl">Button</cds-button>
 
-```jsx
+```html
 <cds-button>Button</cds-button>
 <cds-button size="sm">Button</cds-button>
 <cds-button size="md">Button</cds-button>

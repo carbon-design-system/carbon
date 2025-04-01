@@ -37,17 +37,15 @@ The `AI Label` itself is a button that acts as a `toggle-tip` trigger. To
 construct the contents of the `AI Label` callout, you can place the desired
 elements as a child of `cds-ai-label`, like so:
 
-```jsx
-<cds-ai-label>
-  {Content Here}
-</cds-ai-label>
+```html
+<cds-ai-label>Content Here</cds-ai-label>
 ```
 
 The `AI Label` also supports the rendering of an action bar at the bottom of the
 callout. To achieve this, you can add a set of actions as children of
 `AI Label`.
 
-```jsx
+```html
 <cds-ai-label>
   {Content Here}
   <cds-icon-button kind="ghost" slot="actions" size="lg">

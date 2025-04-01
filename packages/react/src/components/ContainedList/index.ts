@@ -11,7 +11,7 @@ import ContainedListItem from './ContainedListItem';
 
 ContainedList.ContainedListItem = ContainedListItem;
 
-if (__DEV__) {
+if (process.env.NODE_ENV !== 'production') {
   deprecateFieldOnObject(ContainedList, 'ContainedListItem', ContainedListItem);
 }
 export { ContainedListItem };
