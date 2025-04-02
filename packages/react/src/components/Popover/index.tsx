@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -202,8 +202,8 @@ export const Popover: PopoverComponent & {
     }
   });
 
-  useWindowEvent('click', (event: Event) => {
-    if (open && !popover?.current?.contains(event.target as Node)) {
+  useWindowEvent('click', ({ target }) => {
+    if (open && target instanceof Node && !popover.current?.contains(target)) {
       onRequestClose?.();
     }
   });
