@@ -63,7 +63,7 @@ application's react tree. Multiple feature flags can be configured at the same
 time.
 
 ```jsx
-import { unstable_FeatureFlags as FeatureFlags } from '@carbon/react';
+import { FeatureFlags } from '@carbon/react';
 
 <FeatureFlags enableV12TileDefaultIcons="true" enableASecondFeatureFlag="true">
   <Tile />
@@ -77,7 +77,7 @@ entire app, or only certain pages/routes/sections of your application.
 ```jsx
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { unstable_FeatureFlags as FeatureFlags } from '@carbon/react';
+import { FeatureFlags } from '@carbon/react';
 import App from './App';
 
 const root = createRoot(document.getElementById('root'));
