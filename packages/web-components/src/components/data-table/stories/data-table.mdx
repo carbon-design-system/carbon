@@ -1,27 +1,17 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
+
+<Meta isTemplate />
 
 # Data table
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/data-table)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/data-table)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/data-table/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/data-table/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/data-table)
-
-Data table in `@carbon/web-components` focuses on primitives that constructs
-table UI, consisting of the following:
-
-| Tag                       | Description     | HTML tag counterpart |
-| ------------------------- | --------------- | -------------------- |
-| `<cds-table>`             | The container   | N/A                  |
-| `<cds-table>`             | The table       | `<table>`            |
-| `<cds-table-head>`        | The header      | `<thead>`            |
-| `<cds-table-header-row>`  | The header row  | `<tr>` in `<thead>`  |
-| `<cds-table-header-cell>` | The header cell | `<th>`               |
-| `<cds-table-body>`        | The header body | `<tbody>`            |
-| `<cds-table-row>`         | The header row  | `<tr>` in `<tbody>`  |
-| `<cds-table-cell>`        | The header cell | `<td>`               |
+<Canvas id="components-datatable-basic--default" />
 
 ## Table of Contents
 
@@ -38,26 +28,18 @@ table UI, consisting of the following:
 - [Toolbar](#toolbar)
 - [Skeleton](#skeleton)
 - [Attributes, properties, and events](#attributes-properties-and-events)
-
+- [CDN](#cdn)
 - [Feedback](#feedback)
 
 ## Getting started
 
-Here's a quick example to get you started.
+You can implement a data table in your project by importing the `data-table`
+component and using it along with any additional table components that you need.
 
-### JS (via import)
-
-```javascript
-import '@carbon/web-components/es/components/data-table/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['data-table'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-Here is an example of a basic data table with a header row with two columns, and
-three regular rows:
+The `data-table` component needs two additional elements to be provided:
+`cds-table-row` and `cds-table-head`. The `cds-table-row` element is the data
+you would like to display in the rows of your table, whereas `cds-table-head`
+specifies which table column headings should be displayed.
 
 ```html
 <cds-table>
@@ -84,7 +66,7 @@ three regular rows:
 </cds-table>
 ```
 
-After rendering a `DataTable` component using the code snippet above, you can
+After rendering a `data-table` component using the code snippet above, you can
 optionally add any number of features including sorting, row expansion,
 filtering, row selection, batch actions.
 
@@ -92,6 +74,194 @@ For more information, see each usage section below for the functionality that
 you're interested in. If you want to see a full list of the arguments passed
 into your render prop, visit the
 [render props](#attributes-properties-and-events) section.
+
+## Sorting
+
+In order to sort the rows in your data table, you will need to pass in the
+`is-sortable` prop to the `<cds-table>` component.
+
+<Canvas id="components-datatable-sorting--default" />
+
+Optionally, you can pass in `is-sortable` to each `<cds-table-header-cell>` that
+you want to be sorted, or not sorted. This is useful if you only want to enable
+sorting on some table column headers, but not all.
+
+```html
+<cds-table-header-cell is-sortable> ... </cds-table-header-cell>
+```
+
+### Programmatic sorting
+
+You can also change the sort status of the table by querying the specific
+`<cds-table-header-cell>` you would like to sort.
+
+```js
+// sorting the first column
+document
+  .querySelectorAll('cds-table-header-cell')[0]
+  .shadowRoot.querySelector('button')
+  .click();
+```
+
+### Custom sorting
+
+If the default sorting logic doesn't match your use-case, you can use a custom
+sort method with `<cds-table>`.
+
+`sortRow` is a method that takes in the values of two cells, in addition to some
+info, and should return -1, 0, or 1 as a result (mirroring the native sort
+behavior in JavaScript).
+
+The component uses a default `Intl.Collator` object created with the current set
+locale to sort the rows. The default sorting row function uses this collator,
+and as such it is needed in the custom sorting function.
+
+As a result, `customSortRow` function would take on the following shape:
+
+```js
+customSortRow(lhs, rhs, collator) {
+  if (typeof lhs === 'number' && typeof rhs === 'number') {
+    return lhs - rhs;
+  }
+  return collator.compare(lhs, rhs);
+}
+
+document.querySelector('cds-table').customSortRow = customSortRow;
+```
+
+## Expansion
+
+The `<cds-table>` component supports row-level expansion when using the
+`expandable` attribute. Setting the attribute will apply the `expandable`
+attribute to every row. In order to make a row be expandable, it is necessary
+for the row to have a `<cds-table-expanded-row>` component directly following
+it.
+
+<Canvas id="components-datatable-expansion--default" />
+
+In case you'd like a button to expand all the rows at once, you can use the
+`batch-expansion` attribute in `<cds-table>`.
+
+In case you only want to set specific rows to be expandable, be sure to set the
+`expandable` prop only on that specific `<cds-table-row>` component, and have
+its adjacent sibling `<cds-table-expanded-row>` directly following it.
+
+### Programmatic expansion
+
+You can programmatically trigger a row expansion by querying the desired row as
+such:
+
+```js
+document
+  .querySelectorAll('cds-table-row')[0]
+  .shadowRoot.querySelector('.cds--table-expand__button')
+  .click();
+```
+
+## Selection
+
+The `data-table` component supports row selection when used with the
+`TableSelectAll` and `TableSelectRow` components.
+
+<Canvas id="components-datatable-selection--default" />
+
+In the example above, `TableSelectAll` is placed before all other headers. You
+should use `getSelectionProps` on `TableSelectAll` to enable selecting all rows
+in the table.
+
+`TableSelectRow` is also used in this example, and is placed before all the
+cells in a row. It also uses `getSelectionProps` props, but also takes in the
+current `row` in order to retrieve selection state about the given row.
+
+You can access all the selected rows through the `selectedRows` property passed
+into your `render` prop function.
+
+#### Programmatic selection
+
+You can use either of the following actions from your `render` prop function to
+update the selection status of a row:
+
+- `selectAll`: invoking this will toggle the selection of all rows, either by
+  making all selected or de-selecting all rows
+- `selectRow`: invoking this will toggle the selection of a specific row. Takes
+  in a valid row id as an argument
+
+## Filtering
+
+Filtering in a `DataTable` is provided through usage of the `TableToolbar` and
+the `TableToolbarSearch` component. Any input entered through
+`TableToolbarSearch` will be used when the `filterRows` prop is applied
+
+By default `filterRows` is provided through our default implementation. However,
+you can provide your own method if needed.
+
+<Canvas id="components-datatable-filtering--default" />
+
+In order to integrate filtering into your data table, you will need to provide
+the `onInputChange` function provided to you from `DataTable`'s render prop and
+pass it to the `onChange` prop of `TableToolbarSearch` in your `TableToolbar`
+component.
+
+### Multiple filters with batch updates
+
+The filtering story shows an example of how to implement the
+[batch filtering](https://carbondesignsystem.com/patterns/filtering/#multiple-filters-with-batch-updates)
+pattern.
+
+To implement this in your own project you should copy the
+[TableToolbarFilter](https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/DataTable/stories/examples/TableToolbarFilter.tsx)
+example component into your code. Then import and use it inside
+`TableToolbarContent`:
+
+```jsx
+<TableToolbarFilter
+  onApplyFilter={handleTableFilter}
+  onResetFilter={handleOnResetFilter}
+/>
+```
+
+You can write the code to handle the filters in the same file where you have
+your DataTable with your data. Use the code below as a template and then
+customize it as needed. Make sure to replace "YOUR_DATA" with the initial data
+you want to pass into the DataTable.
+
+```jsx
+const [renderedRows, setRenderedRows] = useState(YOUR_DATA);
+
+const handleTableFilter = (selectedCheckboxes) => {
+  setRenderedRows([]);
+
+  for (let i = 0; i < selectedCheckboxes.length; i++) {
+    // Filter the items inside the rows list
+    const filteredRows = YOUR_DATA.filter((row) => {
+      return Object.values(row).some((value) =>
+        String(value)
+          .toLowerCase()
+          .includes(selectedCheckboxes[i].toLowerCase())
+      );
+    });
+
+    setRenderedRows((prevData) => {
+      // Filter out duplicate rows
+      const uniqueRows = filteredRows.filter((row) => {
+        return !prevData.some((prevRow) => {
+          return Object.keys(row).every((key) => {
+            return row[key] === prevRow[key];
+          });
+        });
+      });
+      return [...prevData, ...uniqueRows];
+    });
+  }
+};
+
+const handleOnResetFilter = () => {
+  setRenderedRows(rows);
+};
+```
+
+<Markdown>{`${cdnJs({ components: ['data-table'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### Table header
 
@@ -149,132 +319,8 @@ component as such:
 </cds-table>
 ```
 
-This requires the table to be of `size="xl"` to accommodate the content properly.
-
-## Sorting
-
-In order to sort the rows in your data table, you will need to pass in the
-`is-sortable` prop to the `<cds-table>` component.
-
-Optionally, you can pass in `is-sortable` to each `<cds-table-header-cell>` that
-you want to be sorted, or not sorted. This is useful if you only want to enable
-sorting on some table column headers, but not all.
-
-```html
-<cds-table is-sortable> ... </cds-table>
-```
-
-### Programmatic sorting
-
-You can also change the sort status of the table by querying the specific
-`<cds-table-header-cell>` you would like to sort.
-
-```js
-// sorting the first column
-document
-  .querySelectorAll('cds-table-header-cell')[0]
-  .shadowRoot.querySelector('button')
-  .click();
-```
-
-### Custom sorting
-
-If the default sorting logic doesn't match your use-case, you can provide a
-custom sort method as a `customSortRow` prop to `<cds-table>`.
-
-`sortRow` is a method that takes in the values of two cells, in addition to some
-info, and should return -1, 0, or 1 as a result (mirroring the native sort
-behavior in JavaScript).
-
-The component uses a default `Intl.Collator` object created with the current set
-locale to sort the rows. The default sorting row function uses this collator,
-and as such it is needed in the custom sorting function.
-
-As a result, `customSortRow` function would take on the following shape:
-
-```js
-  customSortRow(lhs, rhs, collator) {
-    if (typeof lhs === 'number' && typeof rhs === 'number') {
-      return lhs - rhs;
-    }
-    return collator.compare(lhs, rhs);
-  }
-
-  document.querySelector('cds-table').customSortRow = customSortRow;
-```
-
-If you would like to use a different locale for collator comparisons, you can
-change the `locale` property and it will be updated accordingly. In case a
-different collator is needed, you can create a new object and pass it in as
-such:
-
-```js
-  document.querySelector('cds-table').collator = // new collator here;
-```
-
-## Expansion
-
-The `<cds-table>` component supports row-level expansion when using the
-`expandable` prop. Setting the prop will apply the `expandable` prop to every
-row. This is useful when every row can be expandable. In order to make a row be
-expandable, it is necessary for the row to have a `<cds-table-expanded-row>`
-component directly following it.
-
-```html
-<cds-table expandable>
-  <cds-table-head>
-    <cds-table-header-row>
-      <cds-table-header-cell>Name</cds-table-header-cell>
-      <cds-table-header-cell>Status</cds-table-header-cell>
-    </cds-table-header-row>
-  </cds-table-head>
-  <cds-table-body>
-    <cds-table-row>
-      <cds-table-cell>Load Balancer 1</cds-table-cell>
-      <cds-table-cell>Disabled</cds-table-cell>
-    </cds-table-row>
-    <cds-table-expanded-row>
-      <h6>Expandable row content</h6>
-      <div>Description here</div>
-    </cds-table-expanded-row>
-    <cds-table-row>
-      <cds-table-cell>Load Balancer 2</cds-table-cell>
-      <cds-table-cell>Starting</cds-table-cell>
-    </cds-table-row>
-    <cds-table-expanded-row>
-      <h6>Expandable row content</h6>
-      <div>Description here</div>
-    </cds-table-expanded-row>
-    <cds-table-row>
-      <cds-table-cell>Load Balancer 3</cds-table-cell>
-      <cds-table-cell>Active</cds-table-cell>
-    </cds-table-row>
-    <cds-table-expanded-row>
-      <h6>Expandable row content</h6>
-      <div>Description here</div>
-    </cds-table-expanded-row>
-  </cds-table-body>
-</cds-table>
-```
-
-In case you'd like a button to expand all the rows at once, you can use the
-`batch-expansion` prop in `<cds-table>`.
-
-In case you only want to set specific rows to be expandable, be sure to set the
-`expandable` prop only on that specific `<cds-table-row>` component, and have
-its adjacent sibling `<cds-table-expanded-row>` directly following it.
-
-### Programmatic expansion
-
-You can programmatically trigger a row expansion by querying the desired row as
-such:
-
-```js
-document
-  .querySelectorAll('cds-table-row')[0]
-  .shadowRoot.querySelector('.cds--table-expand__button')
-  .click();
-```
+This requires the table to be of `size="xl"` to accommodate the content
+properly.
 
 ## Selection
 
