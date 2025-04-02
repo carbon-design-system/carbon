@@ -87,11 +87,13 @@ export const ExperimentalAutoAlign = () => {
   );
 };
 
+// Note: autoAlign is used here only to make tooltips visible in StackBlitz,
+// autoAlign is experimental and not part of the actual implementation.
 export const Default = (args) => {
   return (
-    <div style={{ padding: '3rem' }}>
+    <>
       <ToggletipLabel>Toggletip label</ToggletipLabel>
-      <Toggletip {...args}>
+      <Toggletip autoAlign {...args}>
         <ToggletipButton label="Show information">
           <Information />
         </ToggletipButton>
@@ -106,7 +108,7 @@ export const Default = (args) => {
           </ToggletipActions>
         </ToggletipContent>
       </Toggletip>
-    </div>
+    </>
   );
 };
 
