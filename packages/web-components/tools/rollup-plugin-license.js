@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -43,7 +41,7 @@ export default function rollupPluginLicense({
 
       this.parse(contents, {
         onComment(block, text) {
-          if (block && /(@license|copyright)/i.test(text)) {
+          if (block && /copyright/i.test(text)) {
             if (!licensesForPackages[name]) {
               licensesForPackages[name] = text.trim().replace(/^[*!]\s*/, '');
             }
