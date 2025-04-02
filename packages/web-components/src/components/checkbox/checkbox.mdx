@@ -30,24 +30,6 @@ the label.
 
 <Canvas of={CheckboxStories.Default} />
 
-### Controlled example
-
-You can also use a controlled checkbox component driven by state:
-
-```jsx
-function ExampleComponent() {
-  const [isChecked, setIsChecked] = useState(false);
-  return (
-    <Checkbox
-      id="checkbox"
-      labelText="checkbox"
-      checked={isChecked}
-      onChange={(_, { checked }) => setIsChecked(checked)}
-    />
-  );
-}
-```
-
 ## Horizontal
 
 <Canvas of={CheckboxStories.Horizontal} />
@@ -70,52 +52,52 @@ fetched from an external resource like an API.
 
 ## Component API
 
-<ArgTypes />
-### Checkbox defaultChecked
+<ArgTypes of="cds-checkbox" />
 
-You can use the `defaultChecked` prop to specify weather a checkbox is checked
-by default or not on page load.
+### Checkbox `checked`
 
-```jsx
-<Checkbox defaultChecked labelText={`Checkbox label`} id="checkbox-label-1" />
-<Checkbox defaultChecked labelText={`Checkbox label`} id="checkbox-label-2" />
+You can use the `checked` attribute to specify weather a checkbox is checked by
+default or not on page load.
+
+```html
+<cds-checkbox checked=""></cds-checkbox>
 ```
 
-### Checkbox id
+### Checkbox `id`
 
-The `id` should be used to provide each checkbox input with a unique id and is a
-required prop.
+The `id` should be used to provide each checkbox input with a unique id.
 
-```jsx
-<Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
-<Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+```html
+<cds-checkbox id="checkbox"></cds-checkbox>
 ```
 
-### Checkbox labelText
+### Checkbox `label-text`
 
-The `labelText` should be used to provide a label that describes the checkbox
-input that is being exposed to the user and is a required prop.
+The `label-text` should be used to provide a label that describes the checkbox
+input that is being exposed to the user.
 
-```jsx
-<Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
-<Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+```html
+<cds-checkbox label-text="Checkbox label"></cds-checkbox>
 ```
 
-### Checkbox onChange
+### Checkbox `onChange`
 
-You can use the `onChange` prop to pass in a custom function for event handling.
-This prop receives three arguments: a boolean, the checkbox id, and the dom
-event.
+You can use the `cds-checkbox-changed` custom event to call a custom function
+for event handling.
 
-```jsx
-<Checkbox onChange={()=>{}} labelText={`Checkbox label`} id="checkbox-label-1" />
-<Checkbox onChange={()=>{}} labelText={`Checkbox label`} id="checkbox-label-2" />
+```javascript
+document.addEventListener('cds-checkbox-changed', (event) => {
+  const { currentTarget } = event;
+  const { detail } = event as CustomEvent;
+  const { evt } = detail;
+  console.log('checkbox clicked', currentTarget, evt);
+});
 ```
+
+<Markdown>{`${cdnJs({ components: ['checkbox'] })}`}</Markdown>
 
 ## Feedback
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
 [GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/checkbox/checkbox.mdx).
-
-<ArgTypes of="cds-checkbox" />

@@ -107,6 +107,12 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   hideLabel = false;
 
   /**
+   * Specify a custom id for the checkbox
+   */
+  @property({ reflect: true })
+  id = '';
+
+  /**
    * Specify whether the Checkbox is in an indeterminate state
    */
   @property({ type: Boolean, reflect: true })
@@ -218,6 +224,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
       disabled,
       helperText,
       hideLabel,
+      id,
       indeterminate,
       invalid,
       invalidText,
@@ -249,7 +256,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
     });
     return html`
       <input
-        id="checkbox"
+        id="${ifDefined(id)}"
         type="checkbox"
         part="input"
         class="${`${prefix}--checkbox`}"
