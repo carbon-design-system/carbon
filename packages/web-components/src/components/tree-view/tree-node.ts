@@ -29,6 +29,7 @@ class CDSTreeNode extends LitElement {
    * Handles `slotchange` event.
    */
   private _handleSlotChange({ target }: Event) {
+    const { depth, disabled } = this;
     const items = (target as HTMLSlotElement)
       .assignedNodes()
       .filter(
@@ -38,8 +39,8 @@ class CDSTreeNode extends LitElement {
       );
 
     items.forEach((item) => {
-      (item as CDSTreeNode).depth = this.depth + 1;
-      (item as CDSTreeNode).disabled = this.disabled;
+      (item as CDSTreeNode).depth = depth + 1;
+      (item as CDSTreeNode).disabled = disabled;
     });
 
     this._hasChildren = items.length > 0;
@@ -57,20 +58,21 @@ class CDSTreeNode extends LitElement {
   }
 
   private _handleStyles = () => {
+    const { depth, _hasChildren: hasChildren, _hasIcon: hasIcon } = this;
     const calcOffset = () => {
-      if (this._hasChildren && this._hasIcon) {
-        return this.depth + 1 + this.depth * 0.5;
+      if (hasChildren && hasIcon) {
+        return depth + 1 + depth * 0.5;
       }
 
-      if (this._hasChildren) {
-        return this.depth + 1;
+      if (hasChildren) {
+        return depth + 1;
       }
 
-      if (this._hasIcon) {
-        return this.depth + 2 + this.depth * 0.5;
+      if (hasIcon) {
+        return depth + 2 + depth * 0.5;
       }
 
-      return this.depth + 2.5;
+      return depth + 2.5;
     };
     const label = this.shadowRoot!.querySelector(
       `.${prefix}--tree-node__label`
@@ -81,12 +83,20 @@ class CDSTreeNode extends LitElement {
     }
   };
 
-  _handleToggleClick = () => {
-    if (!this.disabled) {
-      this.isExpanded = !this.isExpanded;
-      if (this.hasAttribute('aria-expanded')) {
-        this.setAttribute('aria-expanded', String(this.isExpanded));
-      }
+  _handleClick = (event) => {
+    event.preventDefault();
+  };
+
+  _handleToggleClick = (event) => {
+    const { disabled, href } = this;
+    if (disabled) return;
+    event.stopPropagation();
+    if (href) {
+      event.preventDefault();
+    }
+    this.isExpanded = !this.isExpanded;
+    if (this.hasAttribute('aria-expanded')) {
+      this.setAttribute('aria-expanded', String(this.isExpanded));
     }
   };
 
@@ -103,13 +113,14 @@ class CDSTreeNode extends LitElement {
   disabled = false;
 
   /**
-   * depth property
+   * **Note:** this is controlled by the parent TreeView component, do not set manually.
+   * TreeNode depth to determine spacing
    */
   @property({ reflect: true })
   depth = 0;
 
   /**
-   * is expanded property
+   * Specify if the TreeNode is expanded (only applicable to parent nodes)
    */
   @property({ type: Boolean, attribute: 'is-expanded' })
   isExpanded = false;
@@ -121,10 +132,10 @@ class CDSTreeNode extends LitElement {
   href;
 
   /**
-   * Optional: The URL the TreeNode is linking to
+   * Rendered label for the TreeNode
    */
   @property({})
-  label;
+  label!: string;
 
   /**
    * sets if tree node is selected
@@ -144,36 +155,67 @@ class CDSTreeNode extends LitElement {
       (node) => node.getAttribute('slot') === 'icon'
     );
 
-    if (!this.hasAttribute('role')) {
+    if (!this.hasAttribute('role') && !this.href) {
       this.setAttribute('role', 'treeitem');
     }
 
-    if (!this.hasAttribute('aria-owns')) {
-      this.setAttribute(
-        'aria-owns',
-        String(this._hasChildren ? `subtree` : undefined)
-      );
+    if (!this.hasAttribute('aria-owns') && !this.href && this._hasChildren) {
+      this.setAttribute('aria-owns', 'subtree');
     }
 
-    if (this._hasChildren) {
+    if (this._hasChildren && !this.href) {
       this.setAttribute('aria-expanded', String(this.isExpanded));
     }
+
+    if (!this.hasAttribute('aria-label')) {
+      this.setAttribute('aria-label', this.label);
+    }
+  }
+
+  private _dispatchSelectedEvent(value) {
+    const { eventSelected } = this.constructor as typeof CDSTreeNode;
+    this.dispatchEvent(
+      new CustomEvent(eventSelected, {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value,
+        },
+      })
+    );
+  }
+
+  private _dispatchToggledEvent(value, expanded) {
+    const { eventToggled } = this.constructor as typeof CDSTreeNode;
+    this.dispatchEvent(
+      new CustomEvent(eventToggled, {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value,
+          expanded: expanded,
+        },
+      })
+    );
   }
 
   updated(changedProperties) {
     if (changedProperties.has('depth')) {
       this._handleStyles();
     }
-    if (changedProperties.has('selected')) {
+    if (changedProperties.has('selected') && !this.href) {
       this.setAttribute(
         'aria-selected',
         String(
           !this.href ? (this.disabled ? undefined : this.selected) : undefined
         )
       );
+      if (this.selected) {
+        this._dispatchSelectedEvent(this.label);
+      }
     }
 
-    if (changedProperties.has('active')) {
+    if (changedProperties.has('active') && !this.href) {
       this.setAttribute(
         'aria-current',
         String(
@@ -188,6 +230,10 @@ class CDSTreeNode extends LitElement {
 
     if (changedProperties.has('disabled')) {
       this.setAttribute('aria-disabled', String(this.disabled));
+    }
+
+    if (changedProperties.has('isExpanded')) {
+      this._dispatchToggledEvent(this.label, this.isExpanded);
     }
   }
 
@@ -207,6 +253,16 @@ class CDSTreeNode extends LitElement {
       toggleClasses += `${prefix}--tree-parent-node__toggle-icon--expanded`;
     }
 
+    const linkClasses = classMap({
+      [`${prefix}--tree-node`]: true,
+      [`${prefix}--tree-node--active`]: this.active,
+      [`${prefix}--tree-node--disabled`]: disabled,
+      [`${prefix}--tree-node--selected`]: this.selected,
+      [`${prefix}--tree-node--with-icon`]: this._hasIcon,
+      [`${prefix}--tree-leaf-node`]: !this._hasChildren,
+      [`${prefix}--tree-parent-node`]: this._hasChildren,
+    });
+
     const subTreeClasses = classMap({
       [`${prefix}--tree-node__children`]: true,
       [`${prefix}--tree-node__hidden`]: !isExpanded,
@@ -216,15 +272,26 @@ class CDSTreeNode extends LitElement {
       ${!hasChildren
         ? html`
             ${href
-              ? html`<a href=${!disabled ? href : undefined}>
-                  <div class="${prefix}--tree-node__label">
+              ? html`<a
+                  class=${linkClasses}
+                  href=${!disabled ? href : undefined}
+                  role="treeitem"
+                  ?aria-disabled=${disabled}
+                  ?aria-owns=${this._hasChildren && 'subtree'}
+                  aria-current=${!this.href
+                    ? this.active || undefined
+                    : this.active
+                      ? 'page'
+                      : undefined}
+                  @click=${this._handleClick}>
+                  <div id="label" class="${prefix}--tree-node__label">
                     <slot
                       name="icon"
                       @slotchange=${handleIconSlotChange}></slot>
                     ${label}
                   </div>
                 </a>`
-              : html` <div class="${prefix}--tree-node__label">
+              : html` <div id="label" class="${prefix}--tree-node__label">
                   <slot name="icon" @slotchange=${handleIconSlotChange}></slot>
                   ${label}
                 </div>`}
@@ -232,9 +299,12 @@ class CDSTreeNode extends LitElement {
         : html`
             ${href
               ? html` <a
+                    role="treeitem"
+                    class=${linkClasses}
                     aria-expanded=${!!isExpanded}
-                    href=${!disabled ? href : undefined}>
-                    <div class="${prefix}--tree-node__label">
+                    href=${!disabled ? href : undefined}
+                    @click=${this._handleClick}>
+                    <div id="label" class="${prefix}--tree-node__label">
                       <span
                         class="${prefix}--tree-parent-node__toggle"
                         ?disabled=${disabled}
@@ -252,7 +322,7 @@ class CDSTreeNode extends LitElement {
                   <ul id="subtree" role="group" class="${subTreeClasses}">
                     <slot @slotchange=${handleSlotChange}></slot>
                   </ul>`
-              : html`<div class="${prefix}--tree-node__label">
+              : html`<div id="label" class="${prefix}--tree-node__label">
                     <span
                       class="${prefix}--tree-parent-node__toggle"
                       ?disabled=${disabled}
@@ -271,6 +341,20 @@ class CDSTreeNode extends LitElement {
                   </ul>`}
           `}
     `;
+  }
+
+  /**
+   * The name of the custom event fired when node is selected.
+   */
+  static get eventSelected() {
+    return `${prefix}-tree-node-selected`;
+  }
+
+  /**
+   * The name of the custom event fired when a node is toggled
+   */
+  static get eventToggled() {
+    return `${prefix}-tree-node-toggled`;
   }
 
   static styles = styles; // `styles` here is a `CSSResult` generated by custom Vite loader

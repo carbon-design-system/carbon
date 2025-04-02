@@ -4,6 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+@use '@carbon/styles/scss/type' as *;
 
 /* stylelint-disable */
 cds-tree-view {
@@ -15,5 +16,12 @@ cds-tree-view {
 
   main {
     flex: 1;
+  }
+
+  h3 {
+    @include type-style('heading-04');
+
+    margin: 0;
+    padding: 0;
   }
 }

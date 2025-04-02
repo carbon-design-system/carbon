@@ -47,17 +47,22 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
   @HostListener('click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _click = ({ target }) => {
+    const element = (target as CDSTreeNode).href
+      ? target.shadowRoot.querySelector('a')
+      : (target as CDSTreeNode);
     if ((target as CDSTreeNode).disabled) return;
 
     if ((target as CDSTreeNode).matches(CDSTreeView.selectorTreeNode)) {
       (target as CDSTreeNode).selected = true;
       (target as CDSTreeNode).active = true;
+      element.setAttribute('tabindex', '0');
     }
 
     this.querySelectorAll(CDSTreeView.selectorTreeNode).forEach((node) => {
       if (node !== target) {
         (node as CDSTreeNode).selected = false;
         (node as CDSTreeNode).active = false;
+        element.setAttribute('tabindex', '-1');
       }
     });
   };
@@ -129,13 +134,18 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
     }
   };
 
-  private _setInitialFocus() {
+  private async _setInitialFocus() {
+    await this.updateComplete;
+
     const nodes = this.querySelectorAll(CDSTreeView.selectorTreeNode);
     if (nodes.length > 0) {
       const selectedNode =
         Array.from(nodes).find((node) => (node as CDSTreeNode).selected) ||
         nodes[0];
-      selectedNode.setAttribute('tabindex', '0');
+      const element = (selectedNode as CDSTreeNode).href
+        ? (selectedNode as CDSTreeNode).shadowRoot!.querySelector('a')
+        : selectedNode;
+      (element as CDSTreeNode).setAttribute('tabindex', '0');
     }
   }
 
