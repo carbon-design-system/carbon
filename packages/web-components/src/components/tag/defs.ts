@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -11,6 +9,11 @@
  * Tag size.
  */
 export enum TAG_SIZE {
+  /**
+   * Large size.
+   */
+  LARGE = 'lg',
+
   /**
    * Medium size (default).
    */

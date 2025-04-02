@@ -17,7 +17,7 @@ export default function isRequiredOneOf(propTypes) {
     (propType) =>
     (props, propName, componentName, ...rest) => {
       if (
-        __DEV__ &&
+        process.env.NODE_ENV !== 'production' &&
         names.every((name) => typeof props[name] === 'undefined')
       ) {
         return new Error(
