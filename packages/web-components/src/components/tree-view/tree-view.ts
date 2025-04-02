@@ -74,9 +74,7 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
     const nodes = Array.from(
       this.querySelectorAll(CDSTreeView.selectorTreeNode)
     ).filter(
-      (node) =>
-        (node as CDSTreeNode).checkVisibility() &&
-        !node.hasAttribute('disabled')
+      (node) => node.checkVisibility() && !node.hasAttribute('disabled')
     );
 
     const currentIndex = nodes.findIndex(
@@ -129,7 +127,7 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
     if (nextIndex !== currentIndex) {
       nodes.forEach((node) => node.setAttribute('tabindex', '-1'));
       nodes[nextIndex].setAttribute('tabindex', '0');
-      (nodes[nextIndex] as HTMLElement).focus();
+      (nodes[nextIndex] as CDSTreeNode).focus();
       event.preventDefault();
     }
   };

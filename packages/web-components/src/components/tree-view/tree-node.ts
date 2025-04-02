@@ -57,6 +57,9 @@ class CDSTreeNode extends LitElement {
     this.requestUpdate();
   }
 
+  /**
+   * Handles style updates based on depth
+   */
   private _handleStyles = () => {
     const { depth, _hasChildren: hasChildren, _hasIcon: hasIcon } = this;
     const calcOffset = () => {
