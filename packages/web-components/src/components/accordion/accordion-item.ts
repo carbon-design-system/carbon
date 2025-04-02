@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -47,8 +45,6 @@ const observeResize = (observer: ResizeObserver, elem: Element) => {
  *   The custom event fired before this accordion item is being toggled upon a user gesture.
  *   Cancellation of this event stops the user-initiated action of toggling this accordion item.
  * @fires cds-accordion-item-toggled - The custom event fired after this accordion item is toggled upon a user gesture.
- * @csspart expando The expando button.
- * @csspart expando-icon The expando icon.
  * @csspart title The title.
  * @csspart content The content.
  */

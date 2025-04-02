@@ -94,7 +94,7 @@ export const getMenuOffset: MenuOffset = (
 ) => {
   const triggerButtonPositionProp = triggerButtonPositionProps[direction];
   const triggerButtonPositionFactor = triggerButtonPositionFactors[direction];
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
     invariant(
       triggerButtonPositionProp && triggerButtonPositionFactor,
       '[OverflowMenu] wrong floating menu direction: `%s`',

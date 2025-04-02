@@ -27,6 +27,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   - [DatePicker `appendTo`](#datepicker-appendto)
   - [DatePicker `className`](#datepicker-classname)
   - [DatePicker `dateFormat`](#datepicker-dateformat)
+  - [DatePicker `parseDate`](#datepicker-parsedate)
   - [DatePicker `datePickerType`](#datepicker-datepickertype)
   - [DatePicker `light`](#datepicker-light)
   - [DatePicker `locale`](#datepicker-locale)
@@ -110,6 +111,7 @@ You can use the `DatePickerSkeleton` component to render a skeleton variant of a
 />
 
 ### AI label
+
 <Canvas
   of={DatePickerStories.withAILabel}
   additionalActions={[
@@ -151,7 +153,11 @@ a custom class name for layout.
 You can use the `dateFormat` prop to change how the selected date is displayed
 in the input. For a complete list of supported date formatting tokens, please
 see the Flatpickr
-[documentation](https://flatpickr.js.org/formatting/#date-formatting-tokens)
+[documentation](https://flatpickr.js.org/formatting/#date-formatting-tokens).
+
+When configuring `dateFormat`, a `parseDate` function can be specified to modify
+the date correction behavior that is sometimes undesirable due to
+[oddities in how the native date methods work](https://github.com/carbon-design-system/carbon/issues/15432#issuecomment-1967447677).
 
 <DatePicker datePickerType="single" dateFormat="Y-m-d">
   <DatePickerInput
@@ -166,6 +172,19 @@ see the Flatpickr
   <DatePickerInput placeholder="mm/dd/yyyy" />
 </DatePicker>
 ```
+
+### DatePicker `parseDate`
+
+Most often used when configuring `dateFormat`, a `parseDate` function can be
+specified to modify the date correction behavior that is sometimes undesirable
+due to
+[oddities in how the native date methods work](https://github.com/carbon-design-system/carbon/issues/15432#issuecomment-1967447677).
+
+The specified `parseDate` function will be called before the date is actually
+set. It's called with a date parameter, the input value, that should be parsed
+and return a valid date string. The
+[internal/default implementation](https://github.com/search?q=repo%3Acarbon-design-system%2Fcarbon+symbol%3AparseDate+language%3ATSX&type=code&l=TSX)
+can be copied and used as a starting point.
 
 ### DatePicker `datePickerType`
 
