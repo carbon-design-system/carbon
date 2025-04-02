@@ -229,9 +229,7 @@ export const Skeleton = {
     },
   },
   render: () => html`
-    <cds-code-snippet-skeleton
-      type="single"
-      style="margin-bottom: 8px"></cds-code-snippet-skeleton>
+    <cds-code-snippet-skeleton type="single"></cds-code-snippet-skeleton>
     <cds-code-snippet-skeleton type="multi"></cds-code-snippet-skeleton>
   `,
 };
