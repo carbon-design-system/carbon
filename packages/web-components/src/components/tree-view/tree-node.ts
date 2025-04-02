@@ -83,10 +83,6 @@ class CDSTreeNode extends LitElement {
     }
   };
 
-  _handleClick = (event) => {
-    event.preventDefault();
-  };
-
   _handleToggleClick = (event) => {
     const { disabled, href } = this;
     if (disabled) return;
@@ -142,6 +138,12 @@ class CDSTreeNode extends LitElement {
    */
   @property({ type: Boolean, reflect: true })
   selected = false;
+
+  /**
+   * when adding an href to control the click functionality
+   */
+  @property({ type: Function })
+  onClick?: (event: Event) => void;
 
   connectedCallback() {
     super.connectedCallback();
@@ -246,6 +248,7 @@ class CDSTreeNode extends LitElement {
       isExpanded,
       href,
       label,
+      onClick,
       _hasChildren: hasChildren,
       _handleSlotChange: handleSlotChange,
       _handleIconSlotChange: handleIconSlotChange,
@@ -286,7 +289,7 @@ class CDSTreeNode extends LitElement {
                     : this.active
                       ? 'page'
                       : undefined}
-                  @click=${this._handleClick}>
+                  @click=${onClick}>
                   <div id="label" class="${prefix}--tree-node__label">
                     <slot
                       name="icon"
@@ -306,7 +309,7 @@ class CDSTreeNode extends LitElement {
                     class=${linkClasses}
                     aria-expanded=${!!isExpanded}
                     href=${!disabled ? href : undefined}
-                    @click=${this._handleClick}>
+                    @click=${onClick}>
                     <div id="label" class="${prefix}--tree-node__label">
                       <span
                         class="${prefix}--tree-parent-node__toggle"

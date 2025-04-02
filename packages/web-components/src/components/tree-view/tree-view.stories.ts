@@ -217,9 +217,6 @@ export const withControlledExpansion = {
 
 @customElement(`tree-view-example`)
 export class TreeViewExample extends LitElement {
-  /**
-   * `true` if there is helper text content.
-   */
   //@ts-ignore
   @state()
   currentPage = 'Artifical intelligence';
@@ -240,63 +237,107 @@ export class TreeViewExample extends LitElement {
             label="Artificial intelligence"
             href="/artificial-intelligence"
             selected
-            active></cds-tree-node>
-          <cds-tree-node label="Blockchain" href="/blockchain"></cds-tree-node>
+            active
+            .onClick=${(event) => event.preventDefault()}></cds-tree-node>
+          <cds-tree-node
+            label="Blockchain"
+            href="/blockchain"
+            .onClick=${(event) => event.preventDefault()}></cds-tree-node>
           <cds-tree-node
             label="Business automation"
-            href="/business-automation">
+            href="/business-automation"
+            .onClick=${(event) => event.preventDefault()}>
             <cds-tree-node
               label="Business process automation"
-              href="/business-process-automation"></cds-tree-node>
+              href="/business-process-automation"
+              .onClick=${(event) => event.preventDefault()}></cds-tree-node>
             <cds-tree-node
               label="Business process mapping"
-              href="/business-process-mapping"></cds-tree-node>
+              href="/business-process-mapping"
+              .onClick=${(event) => event.preventDefault()}></cds-tree-node>
           </cds-tree-node>
           <cds-tree-node
             label="Business operations"
-            href="/business-operations"></cds-tree-node>
+            href="/business-operations"
+            .onClick=${(event) => event.preventDefault()}></cds-tree-node>
           <cds-tree-node
             label="Cloud computing"
             href="/cloud-computing"
-            is-expanded>
+            is-expanded
+            .onClick=${(event) => event.preventDefault()}>
             <cds-tree-node
               label="Containers"
-              href="/containers"></cds-tree-node>
-            <cds-tree-node label="Databases" href="/databases"></cds-tree-node>
-            <cds-tree-node label="DevOps" href="/devops">
+              href="/containers"
+              .onClick=${(event) => event.preventDefault()}></cds-tree-node>
+            <cds-tree-node
+              label="Databases"
+              href="/databases"
+              .onClick=${(event) => event.preventDefault()}></cds-tree-node>
+            <cds-tree-node
+              label="DevOps"
+              href="/devops"
+              .onClick=${(event) => event.preventDefault()}>
               <cds-tree-node
                 label="Solutions"
-                href="/solutions"></cds-tree-node>
-              <cds-tree-node label="Case studies" href="/case-studies">
+                href="/solutions"
+                .onClick=${(event) => event.preventDefault()}></cds-tree-node>
+              <cds-tree-node
+                label="Case studies"
+                href="/case-studies"
+                .onClick=${(event) => event.preventDefault()}>
                 <cds-tree-node
                   label="Resources"
-                  href="/resources"></cds-tree-node>
+                  href="/resources"
+                  .onClick=${(event) => event.preventDefault()}></cds-tree-node>
               </cds-tree-node>
             </cds-tree-node>
           </cds-tree-node>
           <cds-tree-node
             label="Data & Analytics"
             href="/data-analytics"
-            is-expanded>
-            <cds-tree-node label="Big data" href="/big-data"> </cds-tree-node>
+            is-expanded
+            .onClick=${(event) => event.preventDefault()}>
+            <cds-tree-node
+              label="Big data"
+              href="/big-data"
+              .onClick=${(event) => event.preventDefault()}>
+            </cds-tree-node>
             <cds-tree-node
               label="Business Intelligence"
-              href="/business-intelligence">
+              href="/business-intelligence"
+              .onClick=${(event) => event.preventDefault()}>
             </cds-tree-node>
           </cds-tree-node>
-          <cds-tree-node label="Models" is-expanded disabled href="/models">
-            <cds-tree-node label="Audit" href="/audit"> </cds-tree-node>
-            <cds-tree-node label="Monthly data" href="/monthly-data">
+          <cds-tree-node
+            label="Models"
+            is-expanded
+            disabled
+            href="/models"
+            .onClick=${(event) => event.preventDefault()}>
+            <cds-tree-node
+              label="Audit"
+              href="/audit"
+              .onClick=${(event) => event.preventDefault()}>
+            </cds-tree-node>
+            <cds-tree-node
+              label="Monthly data"
+              href="/monthly-data"
+              .onClick=${(event) => event.preventDefault()}>
             </cds-tree-node>
             <cds-tree-node
               label="Data warehouse"
               is-expanded
-              href="/data-warehouse">
-              <cds-tree-node label="Report samples" href="/report-samples">
+              href="/data-warehouse"
+              .onClick=${(event) => event.preventDefault()}>
+              <cds-tree-node
+                label="Report samples"
+                href="/report-samples"
+                .onClick=${(event) => event.preventDefault()}>
               </cds-tree-node>
               <cds-tree-node
                 label="Sales performance"
-                href="/sales-performance">
+                href="/sales-performance"
+                .onClick=${(event) => event.preventDefault()}>
               </cds-tree-node>
             </cds-tree-node>
           </cds-tree-node>
