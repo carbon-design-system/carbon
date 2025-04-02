@@ -114,7 +114,7 @@ const controls = {
   stacked: {
     control: 'boolean',
     description:
-      'Specify whether the Button should be stacked, or not. Only applies to the button-set variant.',
+      'Specify whether the sutton should be stacked. Only applies to the button-set variant.',
   },
   tooltipAlignment: {
     control: 'radio',
@@ -157,19 +157,19 @@ export const Default = {
     tooltipPosition,
     type,
   }) =>
-    html` <cds-button
-      button-class-name="${buttonClassName}"
-      danger-description="${dangerDescription}"
+    html`<cds-button
+      .button-class-name="${buttonClassName}"
+      .danger-description="${dangerDescription}"
       ?disabled="${disabled}"
-      href="${href}"
+      .href="${href}"
       ?isExpressive="${isExpressive}"
       ?isSelected="${isSelected}"
-      kind="${kind}"
-      link-role="${linkRole}"
-      size="${size}"
-      tooltip-alignment="${tooltipAlignment}"
-      tooltip-position="${tooltipPosition}"
-      type="${type}">
+      .kind="${kind}"
+      .link-role="${linkRole}"
+      .size="${size}"
+      .tooltip-alignment="${tooltipAlignment}"
+      .tooltip-position="${tooltipPosition}"
+      .type="${type}">
       Button
     </cds-button>`,
 };
@@ -190,49 +190,49 @@ export const Danger = {
     tooltipPosition,
     type,
   }) =>
-    html` <cds-button
-        button-class-name="${buttonClassName}"
-        danger-description="${dangerDescription}"
+    html`<cds-button
+        .button-class-name="${buttonClassName}"
+        .danger-description="${dangerDescription}"
         ?disabled="${disabled}"
-        href="${href}"
+        .href="${href}"
         ?isExpressive="${isExpressive}"
         ?isSelected="${isSelected}"
         kind="danger"
-        link-role="${linkRole}"
-        size="${size}"
-        tooltip-alignment="${tooltipAlignment}"
-        tooltip-position="${tooltipPosition}"
-        type="${type}">
+        .link-role="${linkRole}"
+        .size="${size}"
+        .tooltip-alignment="${tooltipAlignment}"
+        .tooltip-position="${tooltipPosition}"
+        .type="${type}">
         Button
       </cds-button>
       <cds-button
-        button-class-name="${buttonClassName}"
-        danger-description="${dangerDescription}"
+        .button-class-name="${buttonClassName}"
+        .danger-description="${dangerDescription}"
         ?disabled="${disabled}"
-        href="${href}"
+        .href="${href}"
         ?isExpressive="${isExpressive}"
         ?isSelected="${isSelected}"
         kind="danger-tertiary"
-        link-role="${linkRole}"
-        size="${size}"
-        tooltip-alignment="${tooltipAlignment}"
-        tooltip-position="${tooltipPosition}"
-        type="${type}">
+        .link-role="${linkRole}"
+        .size="${size}"
+        .tooltip-alignment="${tooltipAlignment}"
+        .tooltip-position="${tooltipPosition}"
+        .type="${type}">
         Danger tertiary button
       </cds-button>
       <cds-button
-        button-class-name="${buttonClassName}"
-        danger-description="${dangerDescription}"
+        .button-class-name="${buttonClassName}"
+        .danger-description="${dangerDescription}"
         ?disabled="${disabled}"
-        href="${href}"
+        .href="${href}"
         ?isExpressive="${isExpressive}"
         ?isSelected="${isSelected}"
         kind="danger-ghost"
-        link-role="${linkRole}"
-        size="${size}"
-        tooltip-alignment="${tooltipAlignment}"
-        tooltip-position="${tooltipPosition}"
-        type="${type}">
+        .link-role="${linkRole}"
+        .size="${size}"
+        .tooltip-alignment="${tooltipAlignment}"
+        .tooltip-position="${tooltipPosition}"
+        .type="${type}">
         Danger ghost button
       </cds-button>`,
 };
@@ -253,19 +253,19 @@ export const Ghost = {
     tooltipPosition,
     type,
   }) =>
-    html` <cds-button
-      button-class-name="${buttonClassName}"
-      danger-description="${dangerDescription}"
+    html`<cds-button
+      .button-class-name="${buttonClassName}"
+      .danger-description="${dangerDescription}"
       ?disabled="${disabled}"
-      href="${href}"
+      .href="${href}"
       ?isExpressive="${isExpressive}"
       ?isSelected="${isSelected}"
       kind="ghost"
-      link-role="${linkRole}"
-      size="${size}"
-      tooltip-alignment="${tooltipAlignment}"
-      tooltip-position="${tooltipPosition}"
-      type="${type}">
+      .link-role="${linkRole}"
+      .size="${size}"
+      .tooltip-alignment="${tooltipAlignment}"
+      .tooltip-position="${tooltipPosition}"
+      .type="${type}">
       Button
     </cds-button>`,
 };
@@ -288,20 +288,20 @@ export const IconButton = {
     type,
     onClick,
   }) =>
-    html` <cds-button
-      button-class-name="${buttonClassName}"
-      danger-description="${dangerDescription}"
+    html`<cds-button
+      .button-class-name="${buttonClassName}"
+      .danger-description="${dangerDescription}"
       ?disabled="${disabled}"
-      href="${href}"
+      .href="${href}"
       ?isExpressive="${isExpressive}"
       ?isSelected="${isSelected}"
       kind="${kind}"
-      link-role="${linkRole}"
-      size="${size}"
-      tooltip-alignment="${tooltipAlignment}"
+      .link-role="${linkRole}"
+      .size="${size}"
+      .tooltip-alignment="${tooltipAlignment}"
       tooltip-position="${tooltipPosition}"
       tooltip-text="Icon Description"
-      type="${type}"
+      .type="${type}"
       @click="${onClick}">
       ${Add16({ slot: 'icon' })}
     </cds-button>`,
@@ -321,13 +321,13 @@ export const iconButtonWithBadge = {
     ...defaultArgs,
   },
   render: ({ badgeCount, disabled }) =>
-    html` <cds-button
+    html`<cds-button
       kind="ghost"
       ?disabled="${disabled}"
       tooltip-text="Icon Description">
       ${Add16({ slot: 'icon' })}
       ${badgeCount > 0
-        ? html` <cds-badge-indicator count=${badgeCount}></cds-badge-indicator>`
+        ? html`<cds-badge-indicator count=${badgeCount}></cds-badge-indicator>`
         : html`<cds-badge-indicator></cds-badge-indicator>`}
     </cds-button>`,
 };
@@ -348,19 +348,19 @@ export const Secondary = {
     tooltipPosition,
     type,
   }) =>
-    html` <cds-button
-      button-class-name="${buttonClassName}"
-      danger-description="${dangerDescription}"
+    html`<cds-button
+      .button-class-name="${buttonClassName}"
+      .danger-description="${dangerDescription}"
       ?disabled="${disabled}"
-      href="${href}"
+      .href="${href}"
       ?isExpressive="${isExpressive}"
       ?isSelected="${isSelected}"
       kind="secondary"
-      link-role="${linkRole}"
-      size="${size}"
-      tooltip-alignment="${tooltipAlignment}"
-      tooltip-position="${tooltipPosition}"
-      type="${type}">
+      .link-role="${linkRole}"
+      .size="${size}"
+      .tooltip-alignment="${tooltipAlignment}"
+      .tooltip-position="${tooltipPosition}"
+      .type="${type}">
       Button
     </cds-button>`,
 };
@@ -382,44 +382,45 @@ export const SetOfButtons = {
     tooltipPosition,
     type,
   }) =>
-    html` <cds-button-set .stacked="${stacked}">
+    html`<cds-button-set ?stacked="${stacked}">
       <cds-button
-        button-class-name="${buttonClassName}"
-        danger-description="${dangerDescription}"
+        .button-class-name="${buttonClassName}"
+        .danger-description="${dangerDescription}"
         ?disabled="${disabled}"
-        href="${href}"
+        .href="${href}"
         ?isExpressive="${isExpressive}"
         ?isSelected="${isSelected}"
         kind="secondary"
-        link-role="${linkRole}"
-        size="${size}"
-        tooltip-alignment="${tooltipAlignment}"
-        tooltip-position="${tooltipPosition}"
-        type="${type}">
+        .link-role="${linkRole}"
+        .size="${size}"
+        .tooltip-alignment="${tooltipAlignment}"
+        .tooltip-position="${tooltipPosition}"
+        .type="${type}">
         Secondary button
       </cds-button>
       <cds-button
-        button-class-name="${buttonClassName}"
-        danger-description="${dangerDescription}"
+        .button-class-name="${buttonClassName}"
+        .danger-description="${dangerDescription}"
         ?disabled="${disabled}"
-        href="${href}"
+        .href="${href}"
         ?isExpressive="${isExpressive}"
         ?isSelected="${isSelected}"
         kind="primary"
-        link-role="${linkRole}"
-        size="${size}"
-        tooltip-alignment="${tooltipAlignment}"
-        tooltip-position="${tooltipPosition}"
-        type="${type}">
-        Primary button </cds-button
-      ><cds-button-set></cds-button-set
-    ></cds-button-set>`,
+        .link-role="${linkRole}"
+        .size="${size}"
+        .tooltip-alignment="${tooltipAlignment}"
+        .tooltip-position="${tooltipPosition}"
+        .type="${type}">
+        Primary button</cds-button
+      ></cds-button-set
+    >`,
 };
 
 export const Skeleton = {
-  render: () =>
-    html` <cds-button-skeleton> </cds-button-skeleton>
-      <cds-button-skeleton> </cds-button-skeleton>`,
+  render: () => html`
+    <cds-button-skeleton></cds-button-skeleton>
+    <cds-button-skeleton></cds-button-skeleton>
+  `,
 };
 
 export const Tertiary = {
@@ -438,19 +439,19 @@ export const Tertiary = {
     tooltipPosition,
     type,
   }) =>
-    html` <cds-button
-      button-class-name="${buttonClassName}"
-      danger-description="${dangerDescription}"
+    html`<cds-button
+      .button-class-name="${buttonClassName}"
+      .danger-description="${dangerDescription}"
       ?disabled="${disabled}"
-      href="${href}"
+      .href="${href}"
       ?isExpressive="${isExpressive}"
       ?isSelected="${isSelected}"
       kind="tertiary"
-      link-role="${linkRole}"
-      size="${size}"
-      tooltip-alignment="${tooltipAlignment}"
-      tooltip-position="${tooltipPosition}"
-      type="${type}">
+      .link-role="${linkRole}"
+      .size="${size}"
+      .tooltip-alignment="${tooltipAlignment}"
+      .tooltip-position="${tooltipPosition}"
+      .type="${type}">
       Button
     </cds-button>`,
 };

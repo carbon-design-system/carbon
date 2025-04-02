@@ -1,4 +1,4 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Markdown, Meta, Unstyled } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import Add16 from '@carbon/icons/lib/add/16.js';
 import * as ButtonStories from './button.stories';
@@ -7,11 +7,32 @@ import * as ButtonStories from './button.stories';
 
 # Button
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/button)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/button)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/button/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/button/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/button)
+## Table of Contents
+
+- [Overview](#overview)
+- [Secondary Button](#secondary)
+- [Tertiary Button](#tertiary)
+- [Ghost Button](#ghost)
+- [Danger Button](#danger-button)
+- [Icon-only Button](#icon-only-button)
+- [Set of Buttons](#set-of-buttons)
+- [Skeleton state](#skeleton-state)
+- [Component API](#component-api)
+  - [Button `href`](#button-href)
+  - [Button `kind`](#button-kind)
+  - [Button `size`](#button-size)
+  - [Button `tooltip-alignment`](#button-tooltip-alignment)
+  - [Button `tooltip-position`](#button-tooltip-position)
+  - [Button Set `stacked`](#button-set-stacked)
+- [CDN](#cdn)
+- [References](#references)
+- [Feedback](#feedback)
 
 ## Overview
 
@@ -20,30 +41,19 @@ communicate calls to action to the user and allow users to interact with pages
 in a variety of ways. `Button` labels express what action will occur when the
 user interacts with it.
 
-## Getting started
+<Canvas of={ButtonStories.Default} />
 
-Here's a quick example to get you started.
+## Secondary
 
-### JS (via import)
+<Canvas of={ButtonStories.Secondary} />
 
-```javascript
-import '@carbon/web-components/es/components/button/index.js';
-```
+## Tertiary
 
-### SCSS (must include with JS import)
+<Canvas of={ButtonStories.Tertiary} />
 
-```css
-@use '@carbon/styles/scss/components/button';
-```
+## Ghost
 
-<Markdown>{`${cdnJs({ components: ['button'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-button href="https://www.ibm.com"> Button </cds-button>
-```
+<Canvas of={ButtonStories.Ghost} />
 
 ## Danger Button
 
@@ -55,73 +65,378 @@ danger button style. However, if a destructive action is just one of several
 actions a user could choose from, then a lower emphasis style like the danger
 tertiary button or the danger ghost button may be more appropriate.
 
-```html
-<cds-button type="danger" href="https://www.ibm.com"> Button </cds-button>
-```
+<Canvas of={ButtonStories.Danger} />
 
 ## Icon-only Button
 
 Icon buttons allow users to take actions, and make choices, with a single tap.
-Icon buttons can take the form of any of the seven types (Primary, Secondary,
-Tertiary, Danger, Danger tertiary, Danger ghost and Ghost) but most commonly
-will be styled as primary or ghost buttons.
+Icon buttons can take the form of Primary, Secondary, Tertiary, and Ghost but
+most commonly will be styled as primary or ghost buttons. Icon only buttons do
+not support Danger, Danger tertiary, or Danger ghost.
 
-Our Storybook example also shows off the Tooltip feature, explained later.
+<Canvas of={ButtonStories.IconButton} />
 
-````html
-import Add16 from '@carbon/icons/lib/add/16.js';
+## Set of Buttons
 
-<cds-button> ${Add16({ slot: 'icon' })} </cds-button>``` ## Set of Buttons You
-can wrap two `Button` elements in a `ButtonSet` when an action required by the
-user has more than one option. Always use a negative action button (secondary)
-paired with a positive action button (primary) in that order. Negative action
-buttons will be on the left. Positive action buttons should be on the right.
-When these two types buttons are paired in the correct order, they will
-automatically space themselves apart. ```html
-<cds-button-set>
-  <cds-button href="https://www.ibm.com"> Secondary 1</cds-button>
-  <cds-button href="https://www.ibm.com"> Primary 2</cds-button>
-</cds-button-set>
-````
+You can wrap two `button` elements in a `button-set` when an action required by
+the user has more than one option. Always use a negative action button
+(secondary) paired with a positive action button (primary) in that order.
+Negative action buttons will be on the left. Positive action buttons should be
+on the right. When these two types buttons are paired in the correct order, they
+will automatically space themselves apart.
 
-## Skeleton
+<Canvas of={ButtonStories.SetOfButtons} />
 
-For the skeleton variation, utilize `<cds-button-skeleton>`.
+## Skeleton state
 
-```html
-<cds-button-skeleton size="sm"> </cds-button-skeleton>
-```
+You can use the `ButtonSkeleton` component to render a skeleton variant of a
+button. This is useful to display on initial page load to indicate to users that
+content is being loaded.
+
+<Canvas of={ButtonStories.Skeleton} />
 
 ## Component API
 
+<ArgTypes of="cds-button" />
+
+Additional attributes passed into `button` will be forwarded along to the
+underlying button element.
+
+### Button `href`
+
+This attribute allows you to specify an address to navigate to on click. This
+will change the underlying `Button` element to be rendered as an `a` anchor
+element.
+
+<Unstyled>
+  <cds-button href="https://www.carbondesignsystem.com">Navigate</cds-button>
+</Unstyled>
+
+```html
+<cds-button href="https://www.carbondesignsystem.com">Navigate</cds-button>
+```
+
+### Button `kind`
+
+Carbon has seven types of buttons, `primary`, `secondary`, `tertiary`, `ghost`,
+`danger`, `danger-tertiary`, and `danger-ghost`. If no `kind` is specified, a
+`primary` button will be rendered. For more information on when to use each
+variant, check out the
+[design documentation](https://www.carbondesignsystem.com/components/button/usage#overview)
+
+<Unstyled>
+  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <cds-button>Primary</cds-button>
+    <cds-button kind="secondary">Secondary</cds-button>
+    <cds-button kind="tertiary">Tertiary </cds-button>
+    <cds-button kind="danger">Danger</cds-button>
+    <cds-button kind="danger-tertiary">Danger tertiary</cds-button>
+    <cds-button kind="danger-ghost">Danger Ghost</cds-button>
+    <cds-button kind="ghost">Ghost</cds-button>
+  </div>
+</Unstyled>
+
+```html
+<cds-button>Primary</cds-button>
+<cds-button kind="secondary">Secondary</cds-button>
+<cds-button kind="tertiary">Tertiary </cds-button>
+<cds-button kind="danger">Danger</cds-button>
+<cds-button kind="danger-tertiary">Danger tertiary</cds-button>
+<cds-button kind="danger-ghost">Danger Ghost</cds-button>
+<cds-button kind="ghost">Ghost</cds-button>
+```
+
 ### Button `size`
 
-This attribute specifies which size the `Button` should be rendered at. Valid
-values are `sm`, `md`, `lg`, `xl` and `2xl`. If no `size` is specified, it
+This attribute specifies at which size the `button` should be rendered. Valid
+values are `sm`, `md`, `lg`, `xl`, and `2xl`. If no size is specified, it
 renders as `lg`.
 
-### Button `tooltipAlignment`
+<cds-button>Button</cds-button> <cds-button size="sm">Button</cds-button>
+<cds-button size="md">Button</cds-button>
+<cds-button size="xl">Button</cds-button>
+<cds-button size="2xl">Button</cds-button>
+
+```html
+<cds-button>Button</cds-button>
+<cds-button size="sm">Button</cds-button>
+<cds-button size="md">Button</cds-button>
+<cds-button size="xl">Button</cds-button>
+<cds-button size="2xl">Button</cds-button>
+```
+
+### Button `tooltip-alignment`
 
 The `tooltip-alignment` attribute is used to change where the tooltip text and
-caret is rendered in relation to the `Button`. Accepted options are `start`,
+caret is rendered in relation to the `button`. Accepted options are `start`,
 `center`, and `end`. The default alignment is `center`.
 
-### Button `tooltipPosition`
+<cds-button
+  tooltip-text="Add to selection"
+  tooltip-alignment="start">
+
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
+<cds-button
+  tooltip-text="Add to selection">
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
+<cds-button
+  tooltip-text="Add to selection"
+  tooltip-alignment="end">
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
+
+```html
+<cds-button tooltip-text="Add to selection" tooltip-alignment="start">
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path
+      d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
+<cds-button tooltip-text="Add to selection">
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path
+      d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
+<cds-button tooltip-text="Add to selection" tooltip-alignment="end">
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path
+      d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
+```
+
+### Button `tooltip-position`
 
 When using an icon-only button, you may be in a situation where you need to
 change where the tooltip is positioned on the screen. `tooltip-position` takes
 in a position and will render the tooltip accordingly. Accepted options are
 `top`, `bottom`, `left`, and `right`. The default is position is `top`.
 
-### ButtonSet `stacked`
+<cds-button
+  tooltip-text="Icon Description"
+  kind="primary"
+  tooltip-position="top">
 
-By passing in `stacked` to the `cds-button-set` component, you can arrange your
-two `Button` elements vertically
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
+<cds-button
+  tooltip-text="Icon Description"
+  kind="primary"
+  tooltip-position="right">
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
+<cds-button
+  tooltip-text="Icon Description"
+  kind="primary"
+  tooltip-position="bottom">
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
+<cds-button
+  tooltip-text="Icon Description"
+  kind="primary"
+  tooltip-position="left">
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
 
-## `<cds-button>` attributes and properties
+```html
+<cds-button tooltip-text="Add" kind="primary" tooltip-position="top">
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path
+      d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
+<cds-button tooltip-text="Add" kind="primary" tooltip-position="right">
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path
+      d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
+<cds-button tooltip-text="Add" kind="primary" tooltip-position="bottom">
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path
+      d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
+<cds-button tooltip-text="Add" kind="primary" tooltip-position="left">
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    aria-hidden="true"
+    width="16"
+    height="16"
+    viewBox="0 0 32 32"
+    slot="icon">
+    <path
+      d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+  </svg>
+</cds-button>
+```
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-button autofocus>`) and `false` means not setting the attribute (e.g.
-`<cds-button>` without `autofocus` attribute).
+### Button Set `stacked`
 
-<ArgTypes of="cds-button" />
+By using the `stacked` attribute with the `button-set` component, you can
+arrange your two `button` elements vertically
+
+<cds-button-set stacked="">
+  <cds-button kind="secondary">Secondary button</cds-button>
+  <cds-button kind="primary">Primary button</cds-button>
+</cds-button-set>
+
+```html
+<cds-button-set stacked="">
+  <cds-button kind="secondary">Secondary button</cds-button>
+  <cds-button kind="primary">Primary button</cds-button>
+</cds-button-set>
+```
+
+<Markdown>{`${cdnJs({ components: ['button'] })}`}</Markdown>
+
+## References
+
+[MDN: ARIA button role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role)
+
+[W3: Role attribute](https://www.w3.org/WAI/PF/HTML/wiki/RoleAttribute)
+
+[W3: ARIA button role example](https://www.w3.org/TR/2016/WD-wai-aria-practices-1.1-20160317/examples/button/button.html)
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/button/button.mdx)
