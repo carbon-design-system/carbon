@@ -47,23 +47,14 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
   @HostListener('click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _click = ({ target }) => {
-    const element = (target as CDSTreeNode).href
-      ? target.shadowRoot.querySelector('a')
-      : (target as CDSTreeNode);
     if ((target as CDSTreeNode).disabled) return;
 
-    if ((target as CDSTreeNode).matches(CDSTreeView.selectorTreeNode)) {
-      (target as CDSTreeNode).selected = true;
-      (target as CDSTreeNode).active = true;
-      element.setAttribute('tabindex', '0');
-    }
-
-    this.querySelectorAll(CDSTreeView.selectorTreeNode).forEach((node) => {
-      if (node !== target) {
-        (node as CDSTreeNode).selected = false;
-        (node as CDSTreeNode).active = false;
-        element.setAttribute('tabindex', '-1');
-      }
+    const nodes = this.querySelectorAll(CDSTreeView.selectorTreeNode);
+    nodes.forEach((node) => {
+      const isTarget = node === target;
+      (node as CDSTreeNode).selected = isTarget;
+      (node as CDSTreeNode).active = isTarget;
+      (node as CDSTreeNode).setAttribute('tabindex', isTarget ? '0' : '-1');
     });
   };
 
@@ -144,6 +135,17 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
         ? (selectedNode as CDSTreeNode).shadowRoot!.querySelector('a')
         : selectedNode;
       (element as CDSTreeNode).setAttribute('tabindex', '0');
+    }
+  }
+  connectedCallback() {
+    super.connectedCallback();
+
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'tree');
+    }
+
+    if (!this.hasAttribute('aria-label')) {
+      this.setAttribute('aria-label', this.label);
     }
   }
 
