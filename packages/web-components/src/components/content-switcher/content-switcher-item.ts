@@ -22,7 +22,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-content-switcher-item
  */
 @customElement(`${prefix}-content-switcher-item`)
-export default class CDSContentSwitcherItem extends FocusMixin(LitElement) {
+class CDSContentSwitcherItem extends FocusMixin(LitElement) {
   /**
    * `true` if this content switcher item should be disabled.
    */
@@ -156,5 +156,8 @@ export default class CDSContentSwitcherItem extends FocusMixin(LitElement) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
+
   static styles = styles;
 }
+
+export default CDSContentSwitcherItem;
