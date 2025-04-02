@@ -187,14 +187,13 @@ export const MultilineWithLayer = {
     "@babel/runtime": "^7.10.0",
     "@commitlint/cli": "^8.3.5",
 `;
-    // prettier-ignore
     return html`
-  <sb-template-layers>
-  <cds-code-snippet
-      type="multi" tooltip-content="Copy to Clipboard">${children}
-    </cds-code-snippet>
-  </sb-template-layers>
-`;
+      <sb-template-layers>
+        <cds-code-snippet type="multi" tooltip-content="Copy to Clipboard"
+          >${children}
+        </cds-code-snippet>
+      </sb-template-layers>
+    `;
   },
 };
 
