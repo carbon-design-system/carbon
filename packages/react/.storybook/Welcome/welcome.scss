@@ -1,16 +1,28 @@
+//
+// Copyright IBM Corp. 2021, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/colors';
 
 .container-welcome {
+  // TODO: https://github.com/carbon-design-system/carbon/issues/18891
   /* stylelint-disable-next-line declaration-no-important */
   padding: 0 !important;
 }
 
 .welcome__container {
   position: fixed;
+  /* stylelint-disable-next-line csstools/use-logical */
   top: 0;
+  /* stylelint-disable-next-line csstools/use-logical */
   left: 0;
+  /* stylelint-disable-next-line csstools/use-logical */
   width: 100vw;
+  /* stylelint-disable-next-line csstools/use-logical */
   height: 100vh;
   padding: 3rem;
 }
@@ -28,10 +40,12 @@
 .welcome__link,
 .welcome__link:hover,
 .welcome__link.cds--link:visited {
+  /* stylelint-disable-next-line csstools/use-logical */
   margin-top: 1rem;
   color: colors.$blue-40;
 }
 
 .welcome__link:first-child {
+  /* stylelint-disable-next-line csstools/use-logical */
   margin-top: 2rem;
 }
