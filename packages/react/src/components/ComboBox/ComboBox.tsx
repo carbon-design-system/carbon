@@ -9,24 +9,26 @@ import cx from 'classnames';
 import { useCombobox, UseComboboxProps, UseComboboxActions } from 'downshift';
 import PropTypes from 'prop-types';
 import React, {
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  useCallback,
   useContext,
   useEffect,
-  useState,
-  useRef,
   useMemo,
-  forwardRef,
-  useCallback,
-  type ReactNode,
+  useRef,
+  useState,
   type ComponentType,
+  type FocusEvent,
   type ForwardedRef,
-  type ReactElement,
-  type RefAttributes,
+  type InputHTMLAttributes,
+  type KeyboardEvent,
+  type MouseEvent,
   type PropsWithChildren,
   type PropsWithRef,
-  type InputHTMLAttributes,
-  type MouseEvent,
-  type KeyboardEvent,
-  type FocusEvent,
+  type ReactElement,
+  type ReactNode,
+  type RefAttributes,
 } from 'react';
 import { Text } from '../Text';
 import {
@@ -49,6 +51,8 @@ import { FormContext } from '../FluidForm';
 import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const {
   InputBlur,
@@ -744,20 +748,11 @@ const ComboBox = forwardRef(
     const ItemToElement = itemToElement;
 
     // AILabel always size `mini`
-    let normalizedDecorator = React.isValidElement(slug ?? decorator)
-      ? (slug ?? decorator)
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'mini' })
       : null;
-    if (
-      normalizedDecorator &&
-      normalizedDecorator['type']?.displayName === 'AILabel'
-    ) {
-      normalizedDecorator = React.cloneElement(
-        normalizedDecorator as React.ReactElement<any>,
-        {
-          size: 'mini',
-        }
-      );
-    }
 
     const {
       // Prop getters
