@@ -180,7 +180,7 @@ export const Skeleton = {
   argTypes: singleControls,
   render: () => html`
     <fieldset class="${prefix}--fieldset">
-      <cds-checkbox-skeleton>${checkboxLabel}</cds-checkbox-skeleton>
+      <cds-checkbox-skeleton></cds-checkbox-skeleton>
     </fieldset>
   `,
 };

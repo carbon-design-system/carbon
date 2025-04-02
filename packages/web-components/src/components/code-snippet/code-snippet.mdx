@@ -1,4 +1,4 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as CodeSnippetStories from './code-snippet.stories';
 
@@ -6,81 +6,69 @@ import * as CodeSnippetStories from './code-snippet.stories';
 
 # Code snippet
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/code-snippet)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/code-snippet)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/code-snippet/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/code-snippet/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/code-snippet)
+## Table of Contents
 
-Code snippets are small blocks of reusable code that can be inserted in a code
-file.
+- [Overview](#overview)
+- [Inline](#inline)
+- [Multi-line](#multi-line)
+- [Single-line](#single-line)
+- [Skeleton state](#skeleton-state)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+Code snippets are strings or small blocks of reusable code that are copyable.
 
-### JS (via import)
-
-```javascript
-import '@carbon/web-components/es/components/code-snippet/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['code-snippet'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-code-snippet>
-  node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis,
-  veritatis voluptate id incidunt molestiae officia possimus, quasi itaque
-  alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae
-  laboriosam!
-</cds-code-snippet>
-```
-
-## Single line
-
-The Terminal style is for single-line.
-
-```html
-<cds-code-snippet>
-  node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis,
-  veritatis voluptate id incidunt molestiae officia possimus, quasi itaque
-  alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae
-  laboriosam!
-</cds-code-snippet>
-```
-
-## Multi line
-
-The Code style is for larger, multi-line code snippets.
-
-```html
-<cds-code-snippet type="multi">
-  node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis,
-  veritatis voluptate id incidunt molestiae officia possimus, quasi itaque
-  alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae
-  laboriosam!
-</cds-code-snippet>
-```
+<Canvas of={CodeSnippetStories.Inline} />
 
 ## Inline
 
-The Inline style is for code used within a block of text.
+Inline code snippets are used for distinguishing a symbol, variable, function
+name or similar small piece of code from its surrounding text.
 
-```html
-<cds-code-snippet type="inline"> node -v </cds-code-snippet>
-```
+<Canvas of={CodeSnippetStories.Inline} />
 
-## Skeleton
+## Multi-line
 
-For the skeleton variation, utilize `<cds-code-snippet-skeleton>`.
+Multiple line code snippets are used for displaying code with more than one
+line. They're shown in a block and useful for showing classes, functions, blocks
+of styles and the like. There is an option to wrap the lines displayed if the
+lines are longer than the container.
 
-```html
-<cds-code-snippet-skeleton type="single"></cds-code-snippet-skeleton>
-```
+<Canvas of={CodeSnippetStories.Multiline} />
 
-## `<cds-code-snippet>` attributes and properties
+## Single-line
+
+Single line code snippets are used when showing code that fits on one line
+without wrapping. Useful for calling out terminal commands, function
+invocations, expressions etc.
+
+<Canvas of={CodeSnippetStories.Singleline} />
+
+## Skeleton state
+
+You can use the `cds-code-snippet-skeleton` component to render a skeleton
+variant of an code snippet. This is useful to display while content in your code
+snippet is being fetched from an external resource like an API.
+
+<Canvas of={CodeSnippetStories.Skeleton} />
+
+## Component API
 
 <ArgTypes of="cds-code-snippet" />
+
+<Markdown>{`${cdnJs({ components: ['code-snippet'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/code-snippet/code-snippet.mdx)
