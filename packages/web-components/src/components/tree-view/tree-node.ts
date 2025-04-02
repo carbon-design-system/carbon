@@ -203,13 +203,16 @@ class CDSTreeNode extends LitElement {
     if (changedProperties.has('depth')) {
       this._handleStyles();
     }
-    if (changedProperties.has('selected') && !this.href) {
-      this.setAttribute(
-        'aria-selected',
-        String(
-          !this.href ? (this.disabled ? undefined : this.selected) : undefined
-        )
-      );
+    if (changedProperties.has('selected')) {
+      if (!this.href) {
+        this.setAttribute(
+          'aria-selected',
+          String(
+            !this.href ? (this.disabled ? undefined : this.selected) : undefined
+          )
+        );
+      }
+
       if (this.selected) {
         this._dispatchSelectedEvent(this.label);
       }
