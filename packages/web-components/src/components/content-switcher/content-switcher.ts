@@ -114,7 +114,10 @@ export default class CDSContentSwitcher extends LitElement {
    */
   protected _handleClick({ target }: MouseEvent) {
     const currentItem = this._getCurrentItem(target as HTMLElement);
-    this._handleUserInitiatedSelectItem(currentItem as CDSContentSwitcherItem);
+    this._handleUserInitiatedSelectItem(
+      currentItem as CDSContentSwitcherItem,
+      'mouse'
+    );
   }
 
   /**
@@ -134,8 +137,16 @@ export default class CDSContentSwitcher extends LitElement {
    *
    * @param [item] The content switcher item user wants to select.
    */
-  protected _handleUserInitiatedSelectItem(item: CDSContentSwitcherItem) {
-    if (!item.disabled && item.value !== this.value) {
+  protected _handleUserInitiatedSelectItem(
+    item: CDSContentSwitcherItem,
+    interactionType?: 'mouse' | 'keyboard' | undefined
+  ) {
+    if (
+      (!item.disabled && item.value !== this.value) ||
+      (this.selectionMode === 'manual' &&
+        interactionType === 'keyboard' &&
+        !item.disabled)
+    ) {
       const init = {
         bubbles: true,
         composed: true,
@@ -149,7 +160,7 @@ export default class CDSContentSwitcher extends LitElement {
         cancelable: true,
       });
       if (this.dispatchEvent(beforeSelectEvent)) {
-        this._selectionDidChange(item);
+        this._selectionDidChange(item, interactionType);
         const afterSelectEvent = new CustomEvent(constructor.eventSelect, init);
         this.dispatchEvent(afterSelectEvent);
       }
@@ -162,14 +173,17 @@ export default class CDSContentSwitcher extends LitElement {
    * @param direction `-1` to navigate backward, `1` to navigate forward.
    */
   protected _navigate(direction: number) {
-    const { selectorItemSelected } = this
+    const { selectorItemFocused } = this
       .constructor as typeof CDSContentSwitcher;
     const nextItem = this._getNextItem(
-      this.querySelector(selectorItemSelected) as CDSContentSwitcherItem,
+      this.querySelector(selectorItemFocused) as CDSContentSwitcherItem,
       direction
     );
     if (nextItem) {
-      this._handleUserInitiatedSelectItem(nextItem as CDSContentSwitcherItem);
+      this._handleUserInitiatedSelectItem(
+        nextItem as CDSContentSwitcherItem,
+        'keyboard'
+      );
       this.requestUpdate();
     }
   }
@@ -179,7 +193,20 @@ export default class CDSContentSwitcher extends LitElement {
    *
    * @param itemToSelect A content switcher item.
    */
-  protected _selectionDidChange(itemToSelect: CDSContentSwitcherItem) {
+
+  protected _selectionDidChange(
+    itemToSelect: CDSContentSwitcherItem,
+    interactionType: 'mouse' | 'keyboard' | undefined
+  ) {
+    if (this.selectionMode === 'manual' && interactionType === 'keyboard') {
+      // In manual mode, only focus the item without changing the selection
+      Promise.resolve().then(() => {
+        itemToSelect.focus();
+      });
+
+      return;
+    }
+
     this.value = itemToSelect.value;
     forEach(
       this.querySelectorAll(
@@ -201,6 +228,7 @@ export default class CDSContentSwitcher extends LitElement {
         (itemToSelect as Element).closest(selectorItem)!
       );
       const nextIndex = index < 0 ? index : index + 1;
+
       forEach(this.querySelectorAll(selectorItem), (elem, i) => {
         // Specifies child `<cds-content-switcher-item>` to hide its divider instead of using CSS,
         // until `:host-context()` gets supported in all major browsers
@@ -216,6 +244,18 @@ export default class CDSContentSwitcher extends LitElement {
   value = '';
 
   /**
+   * Specify a selected index for the initially selected content
+   */
+  @property({ type: Number })
+  selectedIndex = 0;
+
+  /**
+   * Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to 'automatic'
+   */
+  @property()
+  selectionMode = 'automatic';
+
+  /**
    * Content switcher size.
    */
   @property({ reflect: true })
@@ -227,19 +267,56 @@ export default class CDSContentSwitcher extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'icon' })
   iconOnly = false;
 
-  shouldUpdate(changedProperties) {
-    if (changedProperties.has('value')) {
+  firstUpdated() {
+    this._updateSelectedItemFromIndex();
+  }
+
+  // Validate a selected index for the initially selected content
+  _updateSelectedItemFromIndex() {
+    const { selectorItemEnabled } = this
+      .constructor as typeof CDSContentSwitcher;
+    const items = this.querySelectorAll(selectorItemEnabled);
+    if (
+      items.length > 0 &&
+      this.selectedIndex >= 0 &&
+      this.selectedIndex < items.length
+    ) {
+      const itemToSelect = items[this.selectedIndex] as CDSContentSwitcherItem;
+      this._selectionDidChange(
+        itemToSelect,
+        this.selectionMode === 'manual' ? 'keyboard' : 'mouse'
+      );
+    }
+  }
+
+  _updateSelectedItemFromValue(changedProps) {
+    if (changedProps.has('value')) {
       const { selectorItem } = this.constructor as typeof CDSContentSwitcher;
       forEach(this.querySelectorAll(selectorItem), (elem) => {
         (elem as CDSContentSwitcherItem).selected =
           (elem as CDSContentSwitcherItem).value === this.value;
       });
     }
-    const { selectorIconItem } = this.constructor as typeof CDSContentSwitcher;
-    if (this.querySelector(selectorIconItem)) {
-      this.iconOnly = true;
+  }
+
+  shouldUpdate(changedProperties) {
+    if (changedProperties.has('iconOnly')) {
+      const { selectorIconItem } = this
+        .constructor as typeof CDSContentSwitcher;
+      if (this.querySelector(selectorIconItem)) {
+        this.iconOnly = true;
+      }
     }
+
     return true;
+  }
+
+  updated(changedProperties) {
+    if (changedProperties.has('selectedIndex')) {
+      this._updateSelectedItemFromIndex();
+    }
+
+    this._updateSelectedItemFromValue(changedProperties);
   }
 
   _handleSlotchange() {
@@ -282,6 +359,13 @@ export default class CDSContentSwitcher extends LitElement {
    */
   static get selectorItemSelected() {
     return `${prefix}-content-switcher-item[selected]`;
+  }
+
+  /**
+   * A selector that will return focused items.
+   */
+  static get selectorItemFocused() {
+    return `${prefix}-content-switcher-item:focus`;
   }
 
   /**

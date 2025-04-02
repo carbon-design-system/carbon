@@ -206,7 +206,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   }
 
   protected _selectionDidChange(itemToSelect: CDSTab) {
-    super._selectionDidChange(itemToSelect);
+    super._selectionDidChange(itemToSelect, undefined);
     this._assistiveStatusText = this.selectedItemAssistiveText;
   }
 
