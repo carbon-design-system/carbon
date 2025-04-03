@@ -131,6 +131,12 @@ class CDSTreeNode extends LitElement {
   href;
 
   /**
+   * Specify the TreeNode's ID. Must be unique in the DOM and is used for props.active, props.selected and aria-owns
+   */
+  @property({})
+  id = Math.random().toString(16).slice(2);
+
+  /**
    * Rendered label for the TreeNode
    */
   @property({})
@@ -164,8 +170,8 @@ class CDSTreeNode extends LitElement {
       this.setAttribute('role', 'treeitem');
     }
 
-    if (!this.hasAttribute('aria-owns') && !this.href && this._hasChildren) {
-      this.setAttribute('aria-owns', 'subtree');
+    if (!this.hasAttribute('aria-owns') && this._hasChildren && !this.href) {
+      this.setAttribute('aria-owns', `subtree-id-${this.id}`);
     }
 
     if (this._hasChildren && !this.href) {
@@ -250,6 +256,7 @@ class CDSTreeNode extends LitElement {
       disabled,
       isExpanded,
       href,
+      id,
       label,
       onClick,
       _hasChildren: hasChildren,
@@ -287,7 +294,6 @@ class CDSTreeNode extends LitElement {
                   href=${!disabled ? href : undefined}
                   role="treeitem"
                   ?aria-disabled=${disabled}
-                  ?aria-owns=${hasChildren && 'subtree'}
                   aria-current=${!this.href
                     ? this.active || undefined
                     : this.active
@@ -313,6 +319,7 @@ class CDSTreeNode extends LitElement {
                     role="treeitem"
                     class=${linkClasses}
                     aria-expanded=${!!isExpanded}
+                    aria-owns="subtree-id-${id}"
                     href=${!disabled ? href : undefined}
                     tabindex=${disabled ? -1 : undefined}
                     @click=${onClick}>
@@ -331,7 +338,7 @@ class CDSTreeNode extends LitElement {
                       </span>
                     </div>
                   </a>
-                  <ul id="subtree" role="group" class="${subTreeClasses}">
+                  <ul id="subtree-id-${id} role="group" class="${subTreeClasses}">
                     <slot @slotchange=${handleSlotChange}></slot>
                   </ul>`
               : html`<div id="label" class="${prefix}--tree-node__label">
@@ -348,7 +355,10 @@ class CDSTreeNode extends LitElement {
                       ${label}
                     </span>
                   </div>
-                  <ul id="subtree" role="group" class="${subTreeClasses}">
+                  <ul
+                    id="subtree-id-${id}"
+                    role="group"
+                    class="${subTreeClasses}">
                     <slot @slotchange=${handleSlotChange}></slot>
                   </ul>`}
           `}

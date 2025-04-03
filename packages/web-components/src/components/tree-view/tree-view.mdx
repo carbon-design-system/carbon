@@ -1,0 +1,54 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as TreeViewStories from './tree-view.stories';
+
+<Meta of={TreeViewStories} />
+
+# Tree View
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/tree-view)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tree-view/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tree-view/accessibility)
+
+## Table of Contents
+
+- [TreeView](#TreeView)
+  - [Overview](#overview)
+  - [With Controlled Expansion](#with-controlled-expansion)
+  - [With Custom Icons](#with-custom-icons)
+  - [Temp](#temp)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+TreeView is a component that allows users to navigate through a hierarchy of
+items. It is used to display nested lists of items that can be expanded or
+collapsed to show and hide additional items.
+
+<Canvas of={TreeViewStories.Default} />
+
+## With Controlled Expansion
+
+The `is-expanded` prop can be used to determine if an individual tree node is
+expanded or collapsed.
+
+<Canvas of={TreeViewStories.withControlledExpansion} />
+
+## With Custom Icons
+
+The icon `slot` can be used to customize the icons of each tree node.
+
+<Canvas of={TreeViewStories.withIcons} />
+
+## Component API
+
+<ArgTypes of="cds-tree-view" />
+<ArgTypes of="cds-tree-node" />
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/tree-view/tree-view.mdx).

@@ -52,12 +52,15 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
     const nodes = this.querySelectorAll(CDSTreeView.selectorTreeNode);
     nodes.forEach((node) => {
       const isTarget = node === target;
-      const element = (node as CDSTreeNode).href
-        ? node.shadowRoot?.querySelector('a')
-        : node;
+      const isLink = (node as CDSTreeNode).hasAttribute('href');
+      const element = isLink ? node.shadowRoot?.querySelector('a') : node;
       (node as CDSTreeNode).selected = isTarget;
       (node as CDSTreeNode).active = isTarget;
-      (element as CDSTreeNode).setAttribute('tabindex', isTarget ? '0' : '-1');
+      if (!isTarget) {
+        isLink
+          ? (element as CDSTreeNode).setAttribute('tabindex', '-1')
+          : (element as CDSTreeNode).removeAttribute('tabindex');
+      } else (element as CDSTreeNode).setAttribute('tabindex', '0');
     });
   };
 
