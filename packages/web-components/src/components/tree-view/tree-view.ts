@@ -52,9 +52,12 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
     const nodes = this.querySelectorAll(CDSTreeView.selectorTreeNode);
     nodes.forEach((node) => {
       const isTarget = node === target;
+      const element = (node as CDSTreeNode).href
+        ? node.shadowRoot?.querySelector('a')
+        : node;
       (node as CDSTreeNode).selected = isTarget;
       (node as CDSTreeNode).active = isTarget;
-      (node as CDSTreeNode).setAttribute('tabindex', isTarget ? '0' : '-1');
+      (element as CDSTreeNode).setAttribute('tabindex', isTarget ? '0' : '-1');
     });
   };
 
@@ -68,8 +71,16 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
       (node) => node.checkVisibility() && !node.hasAttribute('disabled')
     );
 
-    const currentIndex = nodes.findIndex(
-      (node) => node.getAttribute('tabindex') === '0'
+    const allNodes = Array.from(
+      this.querySelectorAll(CDSTreeView.selectorTreeNode)
+    ).filter((node) => !node.hasAttribute('disabled'));
+
+    const withLinks = (nodes[0] as CDSTreeNode).href;
+
+    const currentIndex = nodes.findIndex((node) =>
+      withLinks
+        ? node.shadowRoot?.querySelector('a')!.getAttribute('tabindex') === '0'
+        : node.getAttribute('tabindex') === '0'
     );
 
     let nextIndex = currentIndex;
@@ -90,7 +101,7 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
       case 'Enter':
       case ' ':
         event.preventDefault();
-        nodes.forEach((node) => {
+        allNodes.forEach((node) => {
           (node as CDSTreeNode).selected = false;
           (node as CDSTreeNode).active = false;
         });
@@ -117,9 +128,18 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
     }
 
     if (nextIndex !== currentIndex) {
-      nodes.forEach((node) => node.setAttribute('tabindex', '-1'));
-      nodes[nextIndex].setAttribute('tabindex', '0');
-      (nodes[nextIndex] as CDSTreeNode).focus();
+      nodes.forEach((node) => {
+        if (!withLinks) {
+          node.removeAttribute('tabindex');
+        } else {
+          node.shadowRoot?.querySelector('a')!.setAttribute('tabindex', '-1');
+        }
+      });
+      const element = withLinks
+        ? (nodes[nextIndex] as CDSTreeNode).shadowRoot!.querySelector('a')
+        : nodes[nextIndex];
+      (element as CDSTreeNode).setAttribute('tabindex', '0');
+      (element as CDSTreeNode).focus();
       event.preventDefault();
     }
   };

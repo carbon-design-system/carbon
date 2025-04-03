@@ -253,8 +253,9 @@ class CDSTreeNode extends LitElement {
       label,
       onClick,
       _hasChildren: hasChildren,
-      _handleSlotChange: handleSlotChange,
       _handleIconSlotChange: handleIconSlotChange,
+      _handleSlotChange: handleSlotChange,
+      _handleToggleClick: handleToggleClick,
     } = this;
 
     let toggleClasses = `${prefix}--tree-parent-node__toggle-icon`;
@@ -286,12 +287,13 @@ class CDSTreeNode extends LitElement {
                   href=${!disabled ? href : undefined}
                   role="treeitem"
                   ?aria-disabled=${disabled}
-                  ?aria-owns=${this._hasChildren && 'subtree'}
+                  ?aria-owns=${hasChildren && 'subtree'}
                   aria-current=${!this.href
                     ? this.active || undefined
                     : this.active
                       ? 'page'
                       : undefined}
+                  tabindex=${disabled ? -1 : undefined}
                   @click=${onClick}>
                   <div id="label" class="${prefix}--tree-node__label">
                     <slot
@@ -312,12 +314,13 @@ class CDSTreeNode extends LitElement {
                     class=${linkClasses}
                     aria-expanded=${!!isExpanded}
                     href=${!disabled ? href : undefined}
+                    tabindex=${disabled ? -1 : undefined}
                     @click=${onClick}>
                     <div id="label" class="${prefix}--tree-node__label">
                       <span
                         class="${prefix}--tree-parent-node__toggle"
                         ?disabled=${disabled}
-                        @click=${this._handleToggleClick}>
+                        @click=${handleToggleClick}>
                         ${CaretDown16({ class: toggleClasses })}
                       </span>
                       <span class="${prefix}--tree-node__label__details">
@@ -335,7 +338,7 @@ class CDSTreeNode extends LitElement {
                     <span
                       class="${prefix}--tree-parent-node__toggle"
                       ?disabled=${disabled}
-                      @click=${this._handleToggleClick}>
+                      @click=${handleToggleClick}>
                       ${CaretDown16({ class: toggleClasses })}
                     </span>
                     <span class="${prefix}--tree-node__label__details">
