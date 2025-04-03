@@ -105,9 +105,10 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
         break;
       case 'ArrowLeft':
         if (!nodes[currentIndex].hasAttribute('parent')) {
-          nextIndex = nodes.findIndex(
+          const temp = nodes.findIndex(
             (node) => node === nodes[currentIndex].parentElement
           );
+          nextIndex = temp === -1 ? currentIndex : temp;
         } else {
           (nodes[currentIndex] as CDSTreeNode).isExpanded = false;
           nodes[currentIndex].setAttribute('aria-expanded', 'false');
