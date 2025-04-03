@@ -38,12 +38,20 @@
 
   .#{$prefix}--page-header__content__title-wrapper {
     @include breakpoint-down(md) {
+      // flex-direction: column;
+      display: flex;
       flex-direction: column;
+      grid-gap: $spacing-05;
     }
 
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
+    // gap: $spacing-05;
+    display: grid;
     gap: $spacing-05;
+    grid-template-columns: auto minmax(8rem, 1fr);
+    margin-block-end: 1rem;
+    min-block-size: 40px;
   }
 
   .#{$prefix}--page-header__content__start {
@@ -85,7 +93,13 @@
 
   .#{$prefix}--page-header__content__page-actions {
     display: flex;
-    gap: $spacing-05;
+    justify-content: right;
+    // gap: $spacing-05;
+
+    @include breakpoint-down('md') {
+      justify-content: left;
+      margin-block-start: 0;
+    }
   }
 
   .#{$prefix}--page-header__content__subtitle {
@@ -108,10 +122,15 @@
     margin-block-start: $spacing-05;
   }
 
+  [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
+
   .#{$prefix}--page-header__hero-image {
     display: flex;
     overflow: hidden;
     align-items: center;
+    justify-content: end;
     block-size: 100%;
   }
 

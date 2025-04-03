@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
+import { Add } from '@carbon/icons-react';
 import { unstable__PageHeader as PageHeader } from '../../';
 import {
   PageHeader as PageHeaderDirect,
@@ -230,6 +231,89 @@ ContentWithHeroImage.decorators = [
   ),
 ];
 
+const pageActionItems = (
+  <>
+    <ContentSwitcher onChange={() => {}}>
+      <IconSwitch name="one" text="Table of Contents">
+        <TableOfContents />
+      </IconSwitch>
+      <IconSwitch name="two" text="Workspace Test">
+        <Workspace />
+      </IconSwitch>
+      <IconSwitch name="three" text="View Mode">
+        <ViewMode_2 />
+      </IconSwitch>
+    </ContentSwitcher>
+    <Button kind="primary" renderIcon={Add} size="md">
+      Primary action
+    </Button>
+  </>
+);
+
+const pageActionButtonItems = [
+  {
+    id: 'action1',
+    label: 'action 1',
+    body: (
+      <Button
+        renderIcon={AiGenerate}
+        iconDescription="Icon Description 1"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+  },
+  {
+    id: 'action2',
+    label: 'action 2',
+    body: (
+      <Button
+        renderIcon={Activity}
+        iconDescription="Icon Description 2"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+  },
+  {
+    id: 'action3',
+    label: 'action 3',
+    body: (
+      <Button
+        renderIcon={Activity}
+        iconDescription="Icon Description 3"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+  },
+  {
+    id: 'action4',
+    label: 'action 4',
+    body: (
+      <Button
+        renderIcon={Activity}
+        iconDescription="Icon Description 4"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+  },
+  {
+    id: 'action5',
+    label: 'action 5',
+    body: (
+      <Button kind="primary" renderIcon={Add} size="md">
+        Primary action
+      </Button>
+    ),
+  },
+];
+
 export const ContentWithContextualActionsAndPageActions = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar />
@@ -253,24 +337,7 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
           </Tag>
         </>
       }
-      pageActions={
-        <>
-          <ContentSwitcher onChange={() => {}}>
-            <IconSwitch name="one" text="Table of Contents">
-              <TableOfContents />
-            </IconSwitch>
-            <IconSwitch name="two" text="Workspace Test">
-              <Workspace />
-            </IconSwitch>
-            <IconSwitch name="three" text="View Mode">
-              <ViewMode_2 />
-            </IconSwitch>
-          </ContentSwitcher>
-          <Button kind="primary" size="md">
-            Button
-          </Button>
-        </>
-      }
+      pageActions={pageActionButtonItems}
       {...args}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim

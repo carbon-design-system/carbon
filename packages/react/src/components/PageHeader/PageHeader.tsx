@@ -7,9 +7,11 @@
 import React, {
   type ComponentType,
   type FunctionComponent,
+  useEffect,
   useLayoutEffect,
   useState,
   useRef,
+  isValidElement,
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -17,8 +19,11 @@ import { usePrefix } from '../../internal/usePrefix';
 import { breakpoints } from '@carbon/layout';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
+import { MenuButton } from '../MenuButton';
+import { MenuItem } from '../Menu';
 import { DefinitionTooltip } from '../Tooltip';
 import { AspectRatio } from '../AspectRatio';
+import { createOverflowHandler } from '@carbon/utilities/es/overflowHandler';
 
 /**
  * ----------
@@ -139,7 +144,10 @@ const PageHeaderContent = React.forwardRef<
     className
   );
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef<HTMLDivElement>(null);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+  const [hiddenItems, setHiddenItems] = useState([]);
 
   const isEllipsisActive = (element: HTMLHeadingElement) => {
     setIsEllipsisApplied(element.offsetHeight < element.scrollHeight);
@@ -149,6 +157,19 @@ const PageHeaderContent = React.forwardRef<
   useLayoutEffect(() => {
     titleRef.current && isEllipsisActive(titleRef.current);
   }, [title]);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    console.log('clientWidth', containerRef.current.clientWidth);
+    createOverflowHandler({
+      container: containerRef.current,
+      // exclude the hidden menu button from children
+      maxVisibleItems: containerRef.current.children.length - 1,
+      onChange: (visible, _) => {
+        setHiddenItems(pageActions?.slice(visible.length));
+      },
+    });
+  }, []);
 
   return (
     <div className={classNames} ref={ref} {...other}>
@@ -186,13 +207,39 @@ const PageHeaderContent = React.forwardRef<
             </div>
           )}
         </div>
-        <div className={`${prefix}--page-header__content__end`}>
-          {pageActions && (
-            <div className={`${prefix}--page-header__content__page-actions`}>
-              {pageActions}
-            </div>
-          )}
-        </div>
+        {pageActions && (
+          <div
+            className={`${prefix}--page-header__content__page-actions`}
+            ref={containerRef}>
+            {pageActions && (
+              <>
+                {isValidElement(pageActions) && pageActions}
+                {Array.isArray(pageActions) && (
+                  <>
+                    {pageActions.map((action) => (
+                      <div key={action.id} className="action">
+                        {action.body}
+                      </div>
+                    ))}
+                    <span data-offset data-hidden ref={offsetRef}>
+                      <MenuButton
+                        menuAlignment="bottom-end"
+                        label="actions"
+                        size="md"
+                        ref={offsetRef}>
+                        {hiddenItems &&
+                          hiddenItems.length > 0 &&
+                          hiddenItems.map((item) => (
+                            <MenuItem key={item.id} label={item.label} />
+                          ))}
+                      </MenuButton>
+                    </span>
+                  </>
+                )}
+              </>
+            )}
+          </div>
+        )}
       </div>
       {subtitle && (
         <Text as="h3" className={`${prefix}--page-header__content__subtitle`}>
@@ -238,7 +285,7 @@ PageHeaderContent.propTypes = {
   /**
    * The PageHeaderContent's page actions
    */
-  pageActions: PropTypes.node,
+  pageActions: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
 };
 
 /**
