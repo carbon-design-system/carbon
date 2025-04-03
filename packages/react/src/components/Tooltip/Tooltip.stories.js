@@ -132,12 +132,12 @@ export const ExperimentalAutoAlign = () => {
   );
 };
 
+// Note: autoAlign is used here only to make tooltips visible in StackBlitz,
+// autoAlign is experimental and not part of the actual implementation.
 export const Duration = () => {
   return (
-    <div style={{ padding: '5rem' }}>
-      <Tooltip label="Label one" enterDelayMs={0} leaveDelayMs={300}>
-        <Button>This button has a tooltip</Button>
-      </Tooltip>
-    </div>
+    <Tooltip autoAlign label="Label one" enterDelayMs={0} leaveDelayMs={300}>
+      <Button>This button has a tooltip</Button>
+    </Tooltip>
   );
 };
