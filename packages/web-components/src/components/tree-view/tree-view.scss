@@ -19,6 +19,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-tree-node) {
   display: list-item;
+  box-sizing: border-box;
   .#{$prefix}--tree-node__label {
     box-sizing: inherit;
   }
