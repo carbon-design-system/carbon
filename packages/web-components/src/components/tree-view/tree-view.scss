@@ -109,7 +109,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-tree-node:not([href])[size='xs']) {
   .#{$prefix}--tree-node__label {
-    min-block-size: to-rem(24px);
+    min-block-size: $spacing-06;
   }
   .#{$prefix}--tree-parent-node__toggle {
     margin-block-start: 0;

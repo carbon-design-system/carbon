@@ -12,7 +12,7 @@ import './index';
 import { TREE_SIZE } from './defs';
 import Document16 from '@carbon/icons/lib/document/16.js';
 import Folder16 from '@carbon/icons/lib/folder/16.js';
-import styles from './tree-view-story.scss?lit';
+import '../button/index';
 
 const sizes = {
   [`Small size (${TREE_SIZE.SMALL})`]: TREE_SIZE.SMALL,
@@ -42,10 +42,10 @@ const controls = {
 export const Default = {
   argTypes: controls,
   args: defaultArgs,
+  decorators: [
+    (story) => html` <div style="inline-size: 20rem">${story()}</div> `,
+  ],
   render: ({ hideLabel, label, size }) => html`
-    <style>
-      ${styles}
-    </style>
     <cds-tree-view ?hide-label=${hideLabel} label=${label} size="${size}">
       <cds-tree-node label="Artificial intelligence"></cds-tree-node>
       <cds-tree-node label="Blockchain"></cds-tree-node>
@@ -81,10 +81,10 @@ export const Default = {
 };
 
 export const withIcons = {
+  decorators: [
+    (story) => html` <div style="inline-size: 20rem">${story()}</div> `,
+  ],
   render: () => html`
-    <style>
-      ${styles}
-    </style>
     <cds-tree-view label="Tree View">
       <cds-tree-node label="Artificial intelligence">
         ${Document16({ slot: 'icon' })}
@@ -157,28 +157,28 @@ export const withIcons = {
 };
 
 export const withControlledExpansion = {
+  decorators: [
+    (story) => html` <div style="inline-size: 20rem">${story()}</div> `,
+  ],
   render: () => html`
-    <style>
-      ${styles}
-    </style>
     <script>
+      const tree = document.querySelector('cds-tree-view[controlled]');
       function expandAll() {
-        document.querySelectorAll('cds-tree-node').forEach((node) => {
+        tree.querySelectorAll('cds-tree-node').forEach((node) => {
           node.isExpanded = true;
         });
       }
-
       function collapseAll() {
-        document.querySelectorAll('cds-tree-node').forEach((node) => {
+        tree.querySelectorAll('cds-tree-node').forEach((node) => {
           node.isExpanded = false;
         });
       }
     </script>
-    <div style="margin-bottom: 1rem">
-      <button type="button" onclick="expandAll()">Expand All</button>
-      <button type="button" onclick="collapseAll()">Collapse All</button>
+    <div style="margin-block-end: 1rem">
+      <cds-button onclick="expandAll()">Expand All</cds-button>
+      <cds-button onclick="collapseAll()">Collapse All</cds-button>
     </div>
-    <cds-tree-view label="Tree View">
+    <cds-tree-view controlled label="Tree View">
       <cds-tree-node label="Artificial intelligence"></cds-tree-node>
       <cds-tree-node label="Blockchain"></cds-tree-node>
       <cds-tree-node label="Business automation">
@@ -214,17 +214,14 @@ export const withControlledExpansion = {
 
 export const withLinks = {
   render: () => html`
-    <style>
-      ${styles}
-    </style>
     <script>
       document.addEventListener('cds-tree-node-selected', (e) => {
         document.querySelector('h3').innerText =
           'The current page is: ' + e.detail.value;
       });
     </script>
-    <div id="page-body">
-      <cds-tree-view hide-label label="Tree view">
+    <div id="page-body" style="display: flex">
+      <cds-tree-view hide-label label="Tree view" style="inline-size: 20rem">
         <cds-tree-node
           label="Artificial intelligence"
           href="/artificial-intelligence"
@@ -334,7 +331,7 @@ export const withLinks = {
           </cds-tree-node>
         </cds-tree-node>
       </cds-tree-view>
-      <main>
+      <main style="flex: 1">
         <h3>The current page is: Artifical Intelligence</h3>
       </main>
     </div>

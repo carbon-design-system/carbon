@@ -14,12 +14,11 @@ import * as TreeViewStories from './tree-view.stories';
 
 ## Table of Contents
 
-- [TreeView](#TreeView)
-  - [Overview](#overview)
-  - [With Controlled Expansion](#with-controlled-expansion)
-  - [With Custom Icons](#with-custom-icons)
-  - [Temp](#temp)
+- [Overview](#overview)
+- [With Controlled Expansion](#with-controlled-expansion)
+- [With Custom Icons](#with-custom-icons)
 - [Component API](#component-api)
+- [CDN](#cdn)
 - [Feedback](#feedback)
 
 ## Overview
@@ -35,6 +34,9 @@ collapsed to show and hide additional items.
 The `is-expanded` prop can be used to determine if an individual tree node is
 expanded or collapsed.
 
+> The `controlled` attribute used here is for this example only, and is not part
+> of the component API. Any valid DOM selector can be used.
+
 <Canvas of={TreeViewStories.withControlledExpansion} />
 
 ## With Custom Icons
@@ -47,6 +49,8 @@ The icon `slot` can be used to customize the icons of each tree node.
 
 <ArgTypes of="cds-tree-view" />
 <ArgTypes of="cds-tree-node" />
+
+<Markdown>{`${cdnJs({ components: ['tree-view'] })}`}</Markdown>
 ## Feedback
 
 Help us improve this component by providing feedback, asking questions on Slack,
