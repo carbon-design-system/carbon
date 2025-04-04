@@ -214,5 +214,6 @@ class CDSTreeView extends HostListenerMixin(LitElement) {
   }
 
   static styles = styles;
+}
 
 export default CDSTreeView;
