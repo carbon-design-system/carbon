@@ -114,6 +114,16 @@ export const IconOnlyWithLayer = (args) => (
   </WithLayer>
 );
 
+export const lowContrast = (args) => (
+  <ContentSwitcher {...args} lowContrast>
+    <Switch name="one" text="First section" />
+    <Switch name="two" text="Second section" />
+    <Switch name="three" text="Third section" />
+  </ContentSwitcher>
+);
+lowContrast.argTypes = {
+  ...sharedArgTypes,
+};
 IconOnlyWithLayer.argTypes = {
   ...sharedArgTypes,
 };

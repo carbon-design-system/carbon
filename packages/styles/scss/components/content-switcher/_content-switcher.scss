@@ -15,6 +15,7 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/layout';
+@use './_tokens' as *;
 
 @mixin content-switcher {
   .#{$prefix}--content-switcher {
@@ -233,7 +234,6 @@
   }
 
   // Windows HCM fix
-
   .#{$prefix}--content-switcher-btn:focus {
     @include high-contrast-mode('focus');
   }
@@ -354,5 +354,56 @@
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-btn[disabled]:hover::before {
     background-color: $border-subtle;
+  }
+
+  // Low contrast selected state styling
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
+    background-color: $content-switcher-selected;
+    color: $text-primary;
+
+    &::after {
+      transform: scaleY(0);
+      background-color: transparent;
+    }
+  }
+
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:first-child,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:last-child {
+    border: convert.to-rem(1px) solid $border-inverse;
+    border-radius: convert.to-rem(4px);
+  }
+
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
+    .#{$prefix}--content-switcher__icon {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn {
+    background-color: $content-switcher-background;
+    border: convert.to-rem(1px) solid $border-strong;
+    color: $text-secondary;
+
+    .#{$prefix}--content-switcher__icon {
+      fill: $icon-secondary;
+    }
+  }
+
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:first-child {
+    border-end-start-radius: convert.to-rem(4px);
+    border-start-start-radius: convert.to-rem(4px);
+  }
+
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:last-child {
+    border-end-end-radius: convert.to-rem(4px);
+    border-start-end-radius: convert.to-rem(4px);
   }
 }
