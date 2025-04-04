@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { type OverflowMenuProps } from './OverflowMenu';
 
@@ -16,15 +16,15 @@ import { createClassWrapper } from '../../internal/createClassWrapper';
 
 const OverflowMenuV11 = createClassWrapper(OverflowMenuComponent);
 
-const OverflowMenu = (props: OverflowMenuProps) => {
+const OverflowMenu = forwardRef((props: OverflowMenuProps, ref) => {
   const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
 
   return enableV12OverflowMenu ? (
-    <OverflowMenuV12 {...props} />
+    <OverflowMenuV12 {...props} ref={ref} />
   ) : (
-    <OverflowMenuV11 {...props} />
+    <OverflowMenuV11 {...props} ref={ref} />
   );
-};
+});
 
 OverflowMenu.displayName = 'OverflowMenu';
 
