@@ -343,8 +343,7 @@ describe('ActionableNotification', () => {
   });
 });
 
-// TODO: Remove StaticNotification tests when Callout moves to stable OR in
-// v12, whichever is first. Ensure test parity on Callout.
+// TODO: Remove StaticNotification tests when StaticNotification is removed (v12)
 describe('StaticNotification', () => {
   it('logs a deprecation notice when used', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
@@ -363,6 +362,83 @@ describe('StaticNotification', () => {
 });
 
 describe('Callout', () => {
+  it('should place the `className` prop on the outermost DOM node', () => {
+    const { container } = render(<Callout className="test" />);
+    expect(container.firstChild).toHaveClass('test');
+  });
+
+  it('calls `onActionButtonClick` when action button is clicked', async () => {
+    const onActionButtonClick = jest.fn();
+    render(
+      <Callout
+        title="Notification title"
+        actionButtonLabel="action-button"
+        onActionButtonClick={onActionButtonClick}
+      />
+    );
+
+    const closeButton = screen.queryByRole('button', {
+      name: 'action-button',
+      hidden: true,
+    });
+    await userEvent.click(closeButton);
+    expect(onActionButtonClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('interpolates matching className based on kind prop', () => {
+    const { rerender, container } = render(
+      <Callout title="Notification title" />
+    );
+    const kinds = ['info', 'warning'];
+    kinds.forEach((kind) => {
+      rerender(<Callout title="Notification title" kind={kind} />);
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--actionable-notification--${kind}`
+      );
+    });
+  });
+
+  it('places low contrast class based on lowContrast prop', () => {
+    const { container } = render(
+      <Callout title="Notification title" lowContrast />
+    );
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--actionable-notification--low-contrast`
+    );
+  });
+
+  it('allows non-interactive elements as children', () => {
+    render(
+      <Callout title="Notification title">
+        <p>Sample text</p>
+      </Callout>
+    );
+    // eslint-disable-next-line testing-library/prefer-presence-queries
+    expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
+  });
+
+  it('allows interactive elements as children', () => {
+    render(
+      <Callout title="Notification title" titleId="interactive-test">
+        <button aria-describedby="interactive-test">Sample text</button>
+      </Callout>
+    );
+    // eslint-disable-next-line testing-library/prefer-presence-queries
+    expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
+  });
+
+  it('supports `title`, `subtitle`, `titleId` props', () => {
+    const { container } = render(
+      <Callout title="A title" subtitle="A subtitle" titleId="aTitleID">
+        <p>Sample text</p>
+      </Callout>
+    );
+    // eslint-disable-next-line testing-library/prefer-presence-queries
+    expect(screen.queryByText(/A title/i)).toBeInTheDocument();
+    expect(screen.queryByText(/A subtitle/i)).toBeInTheDocument();
+    expect(screen.queryByText(/A title/i)).toHaveAttribute('id', 'aTitleID');
+  });
+
   it('enforces aria-describedby on interactive children elements', () => {
     const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
 

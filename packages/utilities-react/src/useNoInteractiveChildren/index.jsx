@@ -11,7 +11,7 @@ export function useNoInteractiveChildren(
   ref,
   message = 'component should have no interactive child nodes'
 ) {
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       const node = ref.current ? getInteractiveContent(ref.current) : false;
@@ -29,7 +29,7 @@ export function useInteractiveChildrenNeedDescription(
   ref,
   message = `interactive child node(s) should have an \`aria-describedby\` property`
 ) {
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       const node = ref.current ? getInteractiveContent(ref.current) : false;

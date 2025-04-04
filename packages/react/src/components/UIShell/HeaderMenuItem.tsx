@@ -12,14 +12,15 @@ import React, {
   forwardRef,
   type ReactNode,
   ElementType,
-  type JSX,
+  WeakValidationMap,
 } from 'react';
 import cx from 'classnames';
 import Link, { LinkProps, LinkPropTypes } from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
-export type HeaderMenuItemProps<E extends ElementType> = LinkProps<E> & {
+export interface HeaderMenuItemBaseProps {
   className?: string | undefined;
   isActive?: boolean | undefined;
   isCurrentPage?: boolean | undefined;
@@ -27,18 +28,20 @@ export type HeaderMenuItemProps<E extends ElementType> = LinkProps<E> & {
   children: ReactNode;
   role?: ComponentProps<'li'>['role'];
   tabIndex?: number | undefined;
-};
+}
+
+export type HeaderMenuItemProps<E extends ElementType = 'a'> =
+  PolymorphicComponentPropWithRef<E, HeaderMenuItemBaseProps>;
 
 export interface HeaderMenuItemComponent {
   <E extends ElementType = 'a'>(
     props: HeaderMenuItemProps<E> & { ref?: ForwardedRef<ElementType> }
   ): JSX.Element | null;
   displayName?: string;
-  propTypes?: PropTypes.WeakValidationMap<HeaderMenuItemProps<any>>;
+  propTypes?: WeakValidationMap<HeaderMenuItemProps<any>>;
 }
 
 const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
-  //@ts-ignore
   function HeaderMenuItemRenderFunction<E extends ElementType = 'a'>(
     {
       className,
@@ -50,7 +53,7 @@ const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
       tabIndex = 0,
       ...rest
     }: HeaderMenuItemProps<E>,
-    ref: ForwardedRef<E>
+    ref: ForwardedRef<ElementType>
   ) {
     const prefix = usePrefix();
     if (isCurrentPage) {
@@ -65,7 +68,7 @@ const HeaderMenuItem: HeaderMenuItemComponent = forwardRef(
     });
     return (
       <li className={className} role={role}>
-        <Link<E>
+        <Link
           {...(rest as LinkProps<E>)}
           aria-current={ariaCurrent}
           className={linkClassName}

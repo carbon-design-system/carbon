@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2022, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import './FlexGrid.stories.scss';
 import React from 'react';
 import { FlexGrid, Row, Column } from './';
@@ -402,6 +409,36 @@ export const Default = (args) => {
     <FlexGrid {...args}>
       <Row>
         <Column>
+          <DemoContent>1/4</DemoContent>
+        </Column>
+        <Column>
+          <DemoContent>1/4</DemoContent>
+        </Column>
+        <Column>
+          <DemoContent>1/4</DemoContent>
+        </Column>
+        <Column>
+          <DemoContent>1/4</DemoContent>
+        </Column>
+      </Row>
+    </FlexGrid>
+  );
+};
+
+export const Test1 = (args) => {
+  // Grab the style from here to see the visual example
+  //https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Grid/FlexGrid.stories.scss
+  function DemoContent({ children }) {
+    return (
+      <div className="outside">
+        <div className="inside">{children}</div>
+      </div>
+    );
+  }
+  return (
+    <FlexGrid {...args} as="section">
+      <Row>
+        <Column as="section">
           <DemoContent>1/4</DemoContent>
         </Column>
         <Column>

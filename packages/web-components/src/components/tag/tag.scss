@@ -9,22 +9,93 @@ $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/components/tooltip/index' as *;
 @use '@carbon/styles/scss/components/tag/index' as *;
+@use '@carbon/styles/scss/components/tag/mixins' as *;
 @use '@carbon/styles/scss/layout' as *;
 
-:host(#{$prefix}-tag) {
+:host(#{$prefix}-tag),
+:host(#{$prefix}-dismissible-tag) {
   @extend .#{$prefix}--tag;
+}
+
+:host(#{$prefix}-selectable-tag),
+:host(#{$prefix}-operational-tag) {
+  display: inline-block;
+  inline-size: fit-content;
+}
+
+:host(#{$prefix}-tag:not(:first-child)),
+:host(#{$prefix}-dismissible-tag:not(:first-child)),
+:host(#{$prefix}-selectable-tag:not(:first-child)) #{$prefix}-tag,
+:host(#{$prefix}-operational-tag:not(:first-child)) #{$prefix}-tag {
+  margin-inline-start: 0;
+}
+
+:host(#{$prefix}-tag),
+:host(#{$prefix}-dismissible-tag) {
+  border: 0;
+}
+
+:host(#{$prefix}-tag[has-custom-icon]),
+:host(#{$prefix}-dismissible-tag[has-custom-icon]) {
+  padding-inline-start: $spacing-02;
+}
+
+:host(#{$prefix}-selectable-tag) #{$prefix}-tag {
+  @extend .#{$prefix}--tag--selectable;
+}
+
+:host(#{$prefix}-operational-tag) #{$prefix}-tag {
+  @extend .#{$prefix}--tag--operational;
+}
+
+:host(#{$prefix}-selectable-tag[selected]) #{$prefix}-tag {
+  @extend .#{$prefix}--tag--selectable-selected;
+}
+
+:host(#{$prefix}-dismissible-tag) {
+  display: none;
+  padding-block: 0;
+  padding-inline-end: 0;
+}
+
+:host(#{$prefix}-dismissible-tag[open]) {
+  display: inline-flex;
+}
+
+:host(#{$prefix}-dismissible-tag) #{$prefix}-tooltip {
+  @extend .#{$prefix}--icon-tooltip;
+  @extend .#{$prefix}--tag-label-tooltip;
+}
+
+:host(#{$prefix}-dismissible-tag) .#{$prefix}--tag__close-icon {
+  @extend .#{$prefix}--tag__close-icon;
+}
+
+:host(#{$prefix}-dismissible-tag) ::slotted([slot='icon']) {
+  @extend .#{$prefix}--tag__custom-icon;
+}
+
+:host(#{$prefix}-tag),
+:host(#{$prefix}-tag-skeleton),
+:host(#{$prefix}-dismissible-tag) {
   @extend .#{$prefix}--layout--size-md;
 
   @include emit-layout-tokens();
   // tag overrides layout tokens
   --cds-layout-size-height-xs: 1.125rem;
   --cds-layout-size-height-sm: 1.125rem;
-  --cds-layout-size-height-md: 1.5rem;
+  --cds-layout-size-height-md: #{$spacing-06};
+  --cds-layout-size-height-lg: #{$spacing-07};
 }
 
-:host(#{$prefix}-tag[size='sm']) {
+:host(#{$prefix}-tag[size='sm']),
+:host(#{$prefix}-dismissible-tag[size='sm']),
+:host(#{$prefix}-tag-skeleton[size='sm']) {
   @extend .#{$prefix}--tag--sm;
   @extend .#{$prefix}--layout--size-sm;
 
@@ -35,52 +106,99 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-tag[type='red']) {
+:host(#{$prefix}-tag[size='lg']),
+:host(#{$prefix}-dismissible-tag[size='lg']),
+:host(#{$prefix}-tag-skeleton[size='lg']) {
+  @extend .#{$prefix}--layout--size-lg;
+  @extend .#{$prefix}--tag--lg;
+
+  padding-inline: $spacing-04;
+}
+
+:host(#{$prefix}-tag[size='lg'][has-custom-icon]),
+:host(#{$prefix}-dismissible-tag[size='lg'][has-custom-icon]),
+:host(#{$prefix}-tag-skeleton[size='lg'][has-custom-icon]) {
+  padding-inline-start: $spacing-03;
+}
+
+:host(#{$prefix}-operational-tag[type='red']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='red']:not([disabled])),
+:host(#{$prefix}-tag[type='red']:not([disabled])) {
   @extend .#{$prefix}--tag--red;
 }
 
-:host(#{$prefix}-tag[type='magenta']) {
+:host(#{$prefix}-operational-tag[type='magenta']:not([disabled]))
+  #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='magenta']:not([disabled])),
+:host(#{$prefix}-tag[type='magenta']:not([disabled])) {
   @extend .#{$prefix}--tag--magenta;
 }
 
-:host(#{$prefix}-tag[type='purple']) {
+:host(#{$prefix}-operational-tag[type='purple']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='purple']:not([disabled])),
+:host(#{$prefix}-tag[type='purple']:not([disabled])) {
   @extend .#{$prefix}--tag--purple;
 }
 
-:host(#{$prefix}-tag[type='blue']) {
+:host(#{$prefix}-operational-tag[type='blue']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='blue']:not([disabled])),
+:host(#{$prefix}-tag[type='blue']:not([disabled])) {
   @extend .#{$prefix}--tag--blue;
 }
 
-:host(#{$prefix}-tag[type='cyan']) {
+:host(#{$prefix}-operational-tag[type='cyan']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='cyan']:not([disabled])),
+:host(#{$prefix}-tag[type='cyan']:not([disabled])) {
   @extend .#{$prefix}--tag--cyan;
 }
 
-:host(#{$prefix}-tag[type='teal']) {
+:host(#{$prefix}-operational-tag[type='teal']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='teal']:not([disabled])),
+:host(#{$prefix}-tag[type='teal']:not([disabled])) {
   @extend .#{$prefix}--tag--teal;
 }
 
-:host(#{$prefix}-tag[type='green']) {
+:host(#{$prefix}-operational-tag[type='green']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='green']:not([disabled])),
+:host(#{$prefix}-tag[type='green']:not([disabled])) {
   @extend .#{$prefix}--tag--green;
 }
 
-:host(#{$prefix}-tag[type='gray']) {
+:host(#{$prefix}-operational-tag[type='gray']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='gray']:not([disabled])),
+:host(#{$prefix}-tag[type='gray']:not([disabled])) {
   @extend .#{$prefix}--tag--gray;
 }
 
-:host(#{$prefix}-tag[type='cool-gray']) {
+:host(#{$prefix}-operational-tag[type='cool-gray']:not([disabled]))
+  #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='cool-gray']:not([disabled])),
+:host(#{$prefix}-tag[type='cool-gray']:not([disabled])) {
   @extend .#{$prefix}--tag--cool-gray;
 }
 
-:host(#{$prefix}-tag[type='warm-gray']) {
+:host(#{$prefix}-operational-tag[type='warn-gray']:not([disabled]))
+  #{$prefix}-tag,
+:host(#{$prefix}-dismissible-tag[type='warn-gray']:not([disabled])),
+:host(#{$prefix}-tag[type='warm-gray']:not([disabled])) {
   @extend .#{$prefix}--tag--warm-gray;
 }
 
-:host(#{$prefix}-tag[type='high-contrast']) {
-  @extend .#{$prefix}--tag--high-contrast;
+:host(#{$prefix}-dismissible-tag[type='high-contrast']:not([disabled])),
+:host(#{$prefix}-tag[type='high-contrast']:not([disabled])) {
+  @include tag-theme(
+    $background-inverse,
+    $text-inverse,
+    $background-inverse-hover
+  );
 }
 
-:host(#{$prefix}-tag[type='outline']) {
-  @extend .#{$prefix}--tag--outline;
+:host(#{$prefix}-dismissible-tag[type='outline']:not([disabled])),
+:host(#{$prefix}-tag[type='outline']:not([disabled])) {
+  @include tag-theme($background, $text-primary, $layer-hover);
+
+  outline: 1px solid $background-inverse;
+  outline-offset: -1px;
 }
 
 :host(#{$prefix}-tag[disabled]) {
@@ -101,10 +219,17 @@ $css--plex: true !default;
   display: inline-flex;
 }
 
-:host(#{$prefix}-tag) ::slotted([slot='icon']) {
+:host(#{$prefix}-tag) ::slotted([slot='icon']),
+:host(#{$prefix}-dismissible-tag) ::slotted([slot='icon']) {
   @extend .#{$prefix}--tag__custom-icon;
 }
 
+:host(#{$prefix}-dismissible-tag[has-custom-icon])
+  .#{$prefix}--interactive--tag-children {
+  max-inline-size: 11.5rem;
+}
+
+:host(#{$prefix}-dismissible-tag[disabled]),
 :host(#{$prefix}-tag[filter][disabled]) {
   .#{$prefix}--tag__close-icon {
     cursor: not-allowed;
@@ -116,11 +241,24 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-operational-tag[disabled]) #{$prefix}-tag,
+:host(#{$prefix}-selectable-tag[disabled]) #{$prefix}-tag {
+  border: 1px solid $border-disabled;
+  background-color: $layer;
+  color: $text-disabled;
+
+  &:hover {
+    background-color: $layer;
+    cursor: not-allowed;
+  }
+}
+
+:host(#{$prefix}-dismissible-tag[disabled]),
+:host(#{$prefix}-tag[disabled]) {
+  @extend .#{$prefix}--tag--disabled;
+}
+
 // Skeleton state
-:host(#{$prefix}-tag.#{$prefix}--skeleton) {
-  @include skeleton;
-
-  overflow: hidden;
-
-  inline-size: rem(60px);
+:host(#{$prefix}-tag-skeleton) {
+  @extend .#{$prefix}--skeleton;
 }

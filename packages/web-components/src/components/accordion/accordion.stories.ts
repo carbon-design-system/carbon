@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -62,9 +60,8 @@ const argTypes = {
 };
 
 export const Default = {
-  // This story doesn't accept any args.
-  args: {},
-  argTypes: {},
+  args,
+  argTypes,
   render: () => {
     return html`
       <cds-accordion>
@@ -105,69 +102,32 @@ export const Default = {
   },
 };
 
-export const Skeleton = {
-  args: {
-    alignment: args['alignment'],
-    isFlush: args['isFlush'],
-  },
-  argTypes: {
-    alignment: argTypes['alignment'],
-    isFlush: argTypes['isFlush'],
-  },
-  decorators: [
-    (story) => {
-      return html`<div style="width: 500px">${story()}</div>`;
-    },
-  ],
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
-  render: (args) => {
-    const { alignment, isFlush } = args ?? {};
+export const Controlled = {
+  // This story doesn't accept any args.
+  args: {},
+  argTypes: {},
+  render: () => {
     return html`
-      <cds-accordion-skeleton alignment="${alignment}" ?isFlush="${isFlush}">
-      </cds-accordion-skeleton>
-    `;
-  },
-};
+      <script>
+        const toggleItems = (isOpen) => {
+          document
+            .querySelectorAll('cds-accordion-item[controlled]')
+            .forEach((item) => {
+              if (isOpen) {
+                item.setAttribute('open', '');
+              } else {
+                item.removeAttribute('open');
+              }
+            });
+        };
+      </script>
+      <cds-button onclick="toggleItems(true)">Click to expand all</cds-button>
+      <cds-button onclick="toggleItems(false)"
+        >Click to collapse all</cds-button
+      >
 
-const noop = () => {};
-
-export const Playground = {
-  args,
-  argTypes,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
-  render: (args) => {
-    const {
-      disabled,
-      disableToggle,
-      onBeforeToggle = noop,
-      onToggle = noop,
-      size,
-      alignment,
-      isFlush,
-    } = args ?? {};
-    const handleBeforeToggle = (event: CustomEvent) => {
-      onBeforeToggle(event);
-      if (disableToggle) {
-        event.preventDefault();
-      }
-    };
-
-    return html`
-      <cds-accordion
-        @cds-accordion-item-beingtoggled="${handleBeforeToggle}"
-        @cds-accordion-item-toggled="${onToggle}"
-        size="${size}"
-        alignment="${alignment}"
-        ?isFlush="${isFlush}">
-        <cds-accordion-item ?disabled="${disabled}" title="Section 1 title">
+      <cds-accordion>
+        <cds-accordion-item controlled title="Section 1 title">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -175,7 +135,7 @@ export const Playground = {
             aliquip ex ea commodo consequat.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item ?disabled="${disabled}" title="Section 2 title">
+        <cds-accordion-item controlled title="Section 2 title">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -183,13 +143,15 @@ export const Playground = {
             aliquip ex ea commodo consequat.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item ?disabled="${disabled}" title="Section 3 title">
-          <cds-button>This is a button.</cds-button>
+        <cds-accordion-item controlled title="Section 3 title">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
         </cds-accordion-item>
-        <cds-accordion-item ?disabled="${disabled}">
-          <span slot="title">
-            <span> Section 4 title (<em>the title can be a node</em>) </span>
-          </span>
+        <cds-accordion-item controlled title="Section 4 title">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -199,6 +161,18 @@ export const Playground = {
         </cds-accordion-item>
       </cds-accordion>
     `;
+  },
+};
+
+export const Skeleton = {
+  decorators: [(story) => html`<div style="width: 500px">${story()}</div>`],
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: () => {
+    return html`<cds-accordion-skeleton></cds-accordion-skeleton>`;
   },
 };
 

@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -92,7 +90,6 @@ class CDSCopy extends CDSIconButton {
 
   connectedCallback() {
     this.closeOnActivation = false;
-    this.align = 'bottom';
 
     this.addEventListener('click', this._handleClickButton);
 

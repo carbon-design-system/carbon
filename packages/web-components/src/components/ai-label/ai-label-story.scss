@@ -1,6 +1,4 @@
 /**
-* @license
-*
 * Copyright IBM Corp. 2019, 2024
 *
 * This source code is licensed under the Apache-2.0 license found in the
@@ -41,7 +39,9 @@ p {
   color: $text-secondary;
 }
 
-h1 {
+.ai-label-heading {
+  font-size: 2.625rem;
+  font-weight: 300;
   margin-block-end: $spacing-05;
 }
 
@@ -54,64 +54,6 @@ hr {
 
 div #{$prefix}-selectable-tile::-moz-list-bullet {
   margin-block-end: $spacing-05;
-}
-
-.ai-label-tile-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-
-  #{$prefix}-expandable-tile,
-  #{$prefix}-selectable-tile,
-  #{$prefix}-clickable-tile,
-  #{$prefix}-tile {
-    margin-block-end: $spacing-09;
-    margin-inline-end: $spacing-09;
-    max-inline-size: 320px;
-  }
-
-  #{$prefix}-expandable-tile,
-  #{$prefix}-selectable-tile .tile-container,
-  #{$prefix}-clickable-tile .tile-container,
-  #{$prefix}-tile {
-    padding-block-end: 90px;
-  }
-}
-
-.ai-label-tile-container h4 {
-  margin-block-end: $spacing-05;
-}
-
-.ai-label-tile-container .ai-data {
-  display: flex;
-  padding: $spacing-05 0;
-  margin-block-start: $spacing-05;
-}
-
-.ai-label-tile-container .data-container {
-  inline-size: 126px;
-}
-
-.ai-label-tile-container .data-container:first-of-type {
-  margin-inline-end: $spacing-05;
-}
-
-.ai-label-tile-container p {
-  @include type-style('body-01');
-}
-
-.ai-label-tile-container .data-container p {
-  @include type-style('label-02');
-}
-
-.ai-label-tile-container #{$prefix}-tile-below-the-fold-content {
-  padding-block-start: $spacing-05;
-}
-
-.ai-label-tile-container #{$prefix}-tile-below-the-fold-content p {
-  @include type-style('label-01');
-
-  margin: $spacing-03 0 50px;
 }
 
 #{$prefix}-radio-button-group:not(:first-of-type),

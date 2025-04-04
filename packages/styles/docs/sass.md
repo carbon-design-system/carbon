@@ -592,9 +592,9 @@ context and _should_ (but don't have to) be set on the css properties their
 names suggest (e.g. `height: var(--cds-layout-size-height);`). Note that these
 css custom properties are not set if a component is not within a layout context,
 so you'll need to provide a fallback. This should be the component's default
-styling and can still rely on the layout tokens by explicitely defining the
-step. For example, a component that, by default, should have a height of `md`
-but participate in layout contexts could be built in the following way:
+styling and can still rely on the layout tokens by explicitly defining the step.
+For example, a component that, by default, should have a height of `md` but
+participate in layout contexts could be built in the following way:
 
 ```scss
 .my-component {
@@ -605,7 +605,7 @@ but participate in layout contexts could be built in the following way:
 }
 ```
 
-In order to make your component support different layout modes explicitely via
+In order to make your component support different layout modes explicitly via
 props, you can pass the layout sizes directly on your component as well.
 Example:
 

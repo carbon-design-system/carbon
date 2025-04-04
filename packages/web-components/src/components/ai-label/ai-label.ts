@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -13,7 +11,7 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSToggleTip from '../toggle-tip/toggletip';
 import styles from './ai-label.scss?lit';
-import Undo16 from '@carbon/icons/lib/undo/16';
+import Undo16 from '@carbon/icons/lib/undo/16.js';
 import { AI_LABEL_SIZE, AI_LABEL_KIND } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -23,9 +21,13 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-ai-label
  */
 @customElement(`${prefix}-ai-label`)
-export default class CDSAILabel extends CDSToggleTip {
+class CDSAILabel extends CDSToggleTip {
+  /**
+   * @deprecated the slot string will be renamed to "decorator"
+   */
   @property({ reflect: true })
   slot = 'ai-label';
+
   /**
    * Specify the correct translation of the AI text
    */
@@ -142,3 +144,5 @@ export default class CDSAILabel extends CDSToggleTip {
 
   static styles = styles;
 }
+
+export default CDSAILabel;

@@ -209,7 +209,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
 
   const datePickerInputHelperId = !helperText
     ? undefined
-    : `detepicker-input-helper-text-${datePickerInputInstanceId}`;
+    : `datepicker-input-helper-text-${datePickerInputInstanceId}`;
 
   const inputProps: any = {
     ...rest,

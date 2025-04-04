@@ -13,29 +13,29 @@ import React, {
   useMemo,
   useEffect,
   type ForwardedRef,
+  type WeakValidationMap,
   type ElementType,
-  type JSX,
 } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { type PolymorphicProps } from '../../types/common';
-import type {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
 import { useWindowEvent } from '../../internal/useEvent';
 import { mapPopoverAlignProp } from '../../tools/createPropAdapter';
 import {
   useFloating,
   flip,
+  hide,
   autoUpdate,
   arrow,
   offset,
   type Boundary,
 } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
+import {
+  PolymorphicComponentPropWithRef,
+  PolymorphicRef,
+} from '../../internal/PolymorphicProps';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -155,16 +155,19 @@ export interface PopoverBaseProps {
   open: boolean;
 }
 
-export type PopoverProps<E extends ElementType> = PolymorphicProps<
-  E,
-  PopoverBaseProps
->;
+export type PopoverProps<E extends React.ElementType> =
+  PolymorphicComponentPropWithRef<E, PopoverBaseProps>;
 
 export type PopoverComponent = <E extends React.ElementType = 'span'>(
-  props: PolymorphicComponentPropWithRef<E, PopoverBaseProps>
-) => React.ReactElement | null;
+  props: PopoverProps<E>
+) => React.ReactElement | any;
 
-function PopoverRenderFunction<E extends ElementType = 'span'>(
+export const Popover: PopoverComponent & {
+  displayName?: string;
+  propTypes?: WeakValidationMap<PopoverProps<any>>;
+} = React.forwardRef(function PopoverRenderFunction<
+  E extends ElementType = 'span',
+>(
   {
     isTabTip,
     align: initialAlign = isTabTip ? 'bottom-start' : 'bottom',
@@ -180,7 +183,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
     open,
     alignmentAxisOffset,
     ...rest
-  }: PolymorphicComponentPropWithRef<E, PopoverBaseProps>,
+  }: PopoverProps<E>,
   forwardRef: PolymorphicRef<E>
 ) {
   const prefix = usePrefix();
@@ -448,7 +451,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
           // For a popover, there isn't an explicit trigger component, it's just the first child that's
           // passed in which should *not* be PopoverContent.
           // For a toggletip there is a specific trigger component, ToggletipButton.
-          // In either of these caes we want to set this as the reference node for floating-ui autoAlign
+          // In either of these cases we want to set this as the reference node for floating-ui autoAlign
           // positioning.
           if (
             (enableFloatingStyles &&
@@ -473,7 +476,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
     }
   });
 
-  const BaseComponentAsAny = BaseComponent as any;
+  const BaseComponentAsAny = BaseComponent as React.ElementType;
 
   return (
     <PopoverContext.Provider value={value}>
@@ -482,25 +485,15 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       </BaseComponentAsAny>
     </PopoverContext.Provider>
   );
-}
-
-const _Popover = React.forwardRef(
-  // Cast this to something loose so TypeScript won't try to unify the generic
-  // function with the built‐in non‐generic ForwardRefRenderFunction<Ref, Props>
-  PopoverRenderFunction as unknown as React.ForwardRefRenderFunction<any, any>
-);
-
-// Cast the result of _Popover back to our polymorphic PopoverComponent type,
-// which should get intellisense working as expected
-export const Popover = _Popover as unknown as PopoverComponent;
+}) as PopoverComponent;
 
 // Note: this displayName is temporarily set so that Storybook ArgTable
 // correctly displays the name of this component
-if (__DEV__) {
-  (Popover as React.FunctionComponent).displayName = 'Popover';
+if (process.env.NODE_ENV !== 'production') {
+  Popover.displayName = 'Popover';
 }
 
-(Popover as React.FunctionComponent).propTypes = {
+Popover.propTypes = {
   /**
    * Specify how the popover should align with the trigger element
    */

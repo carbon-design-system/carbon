@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import TreeNode from '../TreeNode';
@@ -206,6 +213,39 @@ describe('TreeNode - handleClick', () => {
     });
     expect(onClick).toHaveBeenCalled(); // Ensure the rest.onClick handler was triggered
   });
+
+  it('should support specifying the href', () => {
+    render(
+      <TreeNode
+        id="node-1"
+        label="Test Node"
+        disabled={false}
+        href="/test"
+        selected={[]}
+        data-testid="linked-node"
+      />
+    );
+    expect(screen.getByTestId('linked-node')).toHaveAttribute('href', '/test');
+  });
+});
+
+it('should support specifying the href for parent nodes', () => {
+  const onToggle = jest.fn();
+
+  const { getByText } = render(
+    <TreeNode
+      id="parent-node"
+      label="Parent Node"
+      href="/test"
+      selected={[]}
+      data-testid="parent-linked-node">
+      <TreeNode id="child1" label="Child Node 1" disabled={false} />
+    </TreeNode>
+  );
+  expect(screen.getByTestId('parent-linked-node')).toHaveAttribute(
+    'href',
+    '/test'
+  );
 });
 
 describe('TreeNode - handleKeyDown', () => {

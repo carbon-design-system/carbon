@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,7 +15,6 @@ import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
 import { DefinitionTooltip } from '../Tooltip';
 import { isEllipsisActive } from './isEllipsisActive';
-import { useMergeRefs } from '@floating-ui/react';
 import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
@@ -23,6 +22,7 @@ import {
 import { SelectableTagBaseProps, SelectableTagProps } from './SelectableTag';
 import { OperationalTagBaseProps } from './OperationalTag';
 import { DismissibleTagBaseProps } from './DismissibleTag';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
 export const TYPES = {
   red: 'Red',
@@ -82,8 +82,7 @@ export interface TagBaseProps {
   onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 
   /**
-   * Optional prop to render a custom icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: React.ElementType;
 
@@ -121,13 +120,8 @@ type TagComponent = <T extends React.ElementType = 'div'>(
     | DismissibleTagBaseProps
 ) => React.ReactElement | any;
 
-const TagBase = React.forwardRef<
-  any,
-  TagBaseProps & {
-    as?: React.ElementType;
-  } & React.HTMLAttributes<HTMLDivElement>
->(
-  (
+const Tag: TagComponent = React.forwardRef(
+  <T extends React.ElementType = 'div'>(
     {
       children,
       className,
@@ -143,23 +137,12 @@ const TagBase = React.forwardRef<
       as: BaseComponent,
       slug,
       ...other
-    },
-    forwardRef
+    }: TagProps<T>,
+    forwardRef: PolymorphicRef<T>
   ) => {
     const prefix = usePrefix();
-    const tagRef = useRef<HTMLElement>(null);
-    if (filter) {
-      console.warn(
-        'The `filter` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
-      );
-    }
-
-    if (onClose) {
-      console.warn(
-        'The `onClose` prop for Tag has been deprecated and will be removed in the next major version. Use DismissibleTag instead.'
-      );
-    }
-    const ref = useMergeRefs([forwardRef, tagRef]);
+    const tagRef = useRef<HTMLElement>();
+    const ref = useMergedRefs([forwardRef, tagRef]);
     const tagId = id || `tag-${useId()}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
@@ -319,7 +302,7 @@ const TagBase = React.forwardRef<
     );
   }
 );
-const Tag = TagBase as TagComponent;
+
 (Tag as React.FC).propTypes = {
   /**
    * Provide an alternative tag or component to use instead of the default
@@ -369,8 +352,7 @@ const Tag = TagBase as TagComponent;
   ),
 
   /**
-   * Optional prop to render a custom icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
