@@ -9,7 +9,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CaretDown16 from '@carbon/icons/lib/caret--down/16.js';
 
@@ -20,6 +20,10 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * Tree node.
  *
  * @element cds-tree-node
+ * @fires eventSelected
+ *   The name of the custom event fired when node is selected.
+ * @fires eventToggled
+ *   The name of the custom event fired when a node is toggled.
  */
 @customElement(`${prefix}-tree-node`)
 class CDSTreeNode extends LitElement {
@@ -29,7 +33,7 @@ class CDSTreeNode extends LitElement {
    * Handles `slotchange` event.
    */
   private _handleSlotChange({ target }: Event) {
-    const { depth, disabled } = this;
+    const { _depth: depth, disabled } = this;
     const items = (target as HTMLSlotElement)
       .assignedNodes()
       .filter(
@@ -39,7 +43,7 @@ class CDSTreeNode extends LitElement {
       );
 
     items.forEach((item) => {
-      (item as CDSTreeNode).depth = depth + 1;
+      (item as CDSTreeNode)._depth = depth + 1;
       (item as CDSTreeNode).disabled = disabled;
     });
 
@@ -61,7 +65,11 @@ class CDSTreeNode extends LitElement {
    * Handles style updates based on depth
    */
   private _handleStyles = () => {
-    const { depth, _hasChildren: hasChildren, _hasIcon: hasIcon } = this;
+    const {
+      _depth: depth,
+      _hasChildren: hasChildren,
+      _hasIcon: hasIcon,
+    } = this;
     const calcOffset = () => {
       if (hasChildren && hasIcon) {
         return depth + 1 + depth * 0.5;
@@ -115,8 +123,8 @@ class CDSTreeNode extends LitElement {
    * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * TreeNode depth to determine spacing
    */
-  @property({ reflect: true })
-  depth = 0;
+  @state()
+  private _depth = 0;
 
   /**
    * Specify if the TreeNode is expanded (only applicable to parent nodes)
@@ -211,7 +219,7 @@ class CDSTreeNode extends LitElement {
   }
 
   updated(changedProperties) {
-    if (changedProperties.has('depth')) {
+    if (changedProperties.has('_depth')) {
       this._handleStyles();
     }
     if (changedProperties.has('selected')) {
