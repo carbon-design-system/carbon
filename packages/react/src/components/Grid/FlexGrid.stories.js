@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2022, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import './FlexGrid.stories.scss';
 import React from 'react';
 import { FlexGrid, Row, Column } from './';

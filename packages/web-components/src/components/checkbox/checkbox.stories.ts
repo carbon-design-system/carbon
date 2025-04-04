@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -182,7 +180,7 @@ export const Skeleton = {
   argTypes: singleControls,
   render: () => html`
     <fieldset class="${prefix}--fieldset">
-      <cds-checkbox-skeleton>${checkboxLabel}</cds-checkbox-skeleton>
+      <cds-checkbox-skeleton></cds-checkbox-skeleton>
     </fieldset>
   `,
 };
