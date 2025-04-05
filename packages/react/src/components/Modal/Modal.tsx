@@ -267,7 +267,7 @@ const Modal = React.forwardRef(function Modal(
     slug,
     ...rest
   }: ModalProps,
-  ref: React.LegacyRef<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>
 ) {
   const prefix = usePrefix();
   const button = useRef<HTMLButtonElement>(null);

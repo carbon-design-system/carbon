@@ -84,9 +84,7 @@ describe('<OverflowMenuV2 />', () => {
 
     const button = screen.getByRole('button', { name: /options/i });
 
-    await act(async () => {
-      await userEvent.click(button);
-    });
+    await userEvent.click(button);
 
     const stopAppMenuItem = await screen.findByRole('menuitem', {
       name: /Stop app/i,

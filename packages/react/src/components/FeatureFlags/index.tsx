@@ -17,6 +17,7 @@ import React, {
   useRef,
   useState,
   ReactNode,
+  type JSX,
 } from 'react';
 import deprecate from '../../prop-types/deprecate';
 

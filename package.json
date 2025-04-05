@@ -30,13 +30,13 @@
     "postinstall": "husky"
   },
   "resolutions": {
-    "@types/react": "~18.3.0",
-    "@types/prop-types": "15.7.13",
+    "@types/react": "~19.0.0",
+    "@types/prop-types": "^15.7.14",
     "ast-types": "^0.14.0",
     "node-sass": "^9.0.0",
-    "react": "~18.3.0",
-    "react-dom": "~18.3.0",
-    "react-is": "~18.3.0",
+    "react": "~19.0.0",
+    "react-dom": "~19.0.0",
+    "react-is": "~19.0.0",
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch"
   },
   "devDependencies": {
@@ -58,7 +58,8 @@
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/react-is": "~18.3.1",
+    "@types/prop-types": "^15.7.13",
+    "@types/react-is": "^19.0.0",
     "accessibility-checker": "^4.0.1",
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^7.0.0",
@@ -74,8 +75,8 @@
     "lerna": "^8.0.0",
     "lint-staged": "^15.0.0",
     "prettier": "^3.3.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "rimraf": "^5.0.0",
     "stylelint": "^16.0.0"
   },

@@ -23,7 +23,8 @@ type ExcludedAttributes =
   | 'role'
   | 'id'
   | 'size'
-  | 'onClick';
+  | 'onClick'
+  | 'onToggle';
 
 export interface ToggleProps
   extends Omit<

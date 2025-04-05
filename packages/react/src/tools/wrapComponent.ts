@@ -27,7 +27,9 @@ const wrapComponent = <T extends HTMLTagName>({
   name,
   className: getClassName,
   type,
-}: WrapComponentArgs<T>): ((props: ReactAttr<T>) => React.ReactElement) => {
+}: WrapComponentArgs<T>): ((
+  props: ReactAttr<T>
+) => React.ReactElement<any>) => {
   /**
    *
    * @param {{ className?: string, [x: string]: any}} param0
@@ -54,7 +56,7 @@ const wrapComponent = <T extends HTMLTagName>({
     className: PropTypes.string,
   };
 
-  return Component as (props: ReactAttr<T>) => React.ReactElement;
+  return Component as (props: ReactAttr<T>) => React.ReactElement<any>;
 };
 
 export default wrapComponent;

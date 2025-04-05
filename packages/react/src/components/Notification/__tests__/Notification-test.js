@@ -109,7 +109,7 @@ describe('ToastNotification', () => {
     expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
   });
 
-  it('does not allow interactive elements as children', () => {
+  it('does not allow toast notification to have interactive elements as children', () => {
     const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
     expect(() => {
@@ -229,7 +229,7 @@ describe('InlineNotification', () => {
     expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
   });
 
-  it('does not allow interactive elements as children', () => {
+  it('does not allow inline notification to have interactive elements as children', () => {
     const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
     expect(() => {
