@@ -8,7 +8,6 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  ChangeEventHandler,
   ComponentProps,
   FC,
   ForwardedRef,
@@ -338,7 +337,7 @@ export interface MenuItemSelectableProps
   /**
    * Provide an optional function to be called when the selection state changes.
    */
-  onChange?: ChangeEventHandler<HTMLLIElement>;
+  onChange?: (checked: boolean) => void;
 
   /**
    * Controls the state of this option.
@@ -500,7 +499,7 @@ export interface MenuItemRadioGroupProps<Item>
   /**
    * Provide an optional function to be called when the selection changes.
    */
-  onChange?: ChangeEventHandler<HTMLLIElement>;
+  onChange?: (selectedItem: Item) => void;
 
   /**
    * Provide props.selectedItem to control the state of this radio group. Must match the type of props.items.
@@ -527,7 +526,7 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
   const [selection, setSelection] = useControllableState({
     value: selectedItem,
     onChange,
-    defaultValue: defaultSelectedItem,
+    defaultValue: defaultSelectedItem ?? ({} as Item),
   });
 
   function handleClick(item, e) {
