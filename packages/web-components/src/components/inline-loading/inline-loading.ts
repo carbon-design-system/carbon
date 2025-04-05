@@ -22,28 +22,62 @@ export { INLINE_LOADING_STATE };
  * Lnline loading spinner.
  *
  * @element cds-inline-loading
+ * @fires cds-inline-loading-onsuccess The custom event fired when inline-loading has finished status
  */
 @customElement(`${prefix}-inline-loading`)
 class CDSInlineLoading extends LitElement {
   /**
-   * The assistive text for the spinner icon.
+   * @deprecated The 'assistive-text' property will be deprecated in the next major release. Please use `icon-description` instead.
    */
   @property({ attribute: 'assistive-text' })
-  assistiveText = 'Loading';
+  get assistiveText() {
+    return this.iconDescription;
+  }
+  set assistiveText(value) {
+    this.iconDescription = value;
+  }
+  /**
+   * The assistive text for the spinner icon.
+   */
+  @property({ attribute: 'icon-description' })
+  iconDescription = 'Loading';
+
+  /**
+   * Provide a delay for the setTimeout for success
+   */
+  @property({ attribute: 'success-delay' })
+  successDelay = 1500;
 
   /**
    * @returns The template for the status icon.
    */
   private _renderIcon() {
-    const { assistiveText, status } = this;
+    const { iconDescription, status } = this;
     if (status === INLINE_LOADING_STATE.ERROR) {
       return ErrorFilled16({
         class: `${prefix}--inline-loading--error`,
+        children: html`<title>${iconDescription}</title>`,
       });
     }
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+    };
+
     if (status === INLINE_LOADING_STATE.FINISHED) {
+      setTimeout(() => {
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSInlineLoading).eventOnSuccess,
+            init
+          )
+        );
+      }, this.successDelay);
+
       return CheckmarkFilled16({
         class: `${prefix}--inline-loading__checkmark-container`,
+        children: html`<title>${iconDescription}</title>`,
       });
     }
     if (
@@ -57,7 +91,7 @@ class CDSInlineLoading extends LitElement {
       });
       return html`
         <div class="${classes}">
-          ${getLoadingIcon({ description: assistiveText, small: true })}
+          ${getLoadingIcon({ description: iconDescription, small: true })}
         </div>
       `;
     }
@@ -69,6 +103,10 @@ class CDSInlineLoading extends LitElement {
    */
   @property({ reflect: true })
   status = INLINE_LOADING_STATE.ACTIVE;
+
+  static get eventOnSuccess() {
+    return `${prefix}-inline-loading-onsuccess`;
+  }
 
   connectedCallback() {
     if (!this.hasAttribute('aria-live')) {
