@@ -2,81 +2,98 @@
 
 ## Our contribution model
 
-Carbon Design System is an **open source** project at IBM. We pride ourselves in
-open and inclusive design and development. If you're wondering more about our
-contribution process, you're in the right place. First off, thank you for your
-interest! This project is made possible not just by the core Carbon team, but
-also by several community members who have invested their own time to give back
-to the Carbon community.
+Carbon Design System is an **open source** project at IBM. We pride ourselves on
+open and inclusive design and development. If you're curious about our
+contribution process, you're in the right place. Thank you for your interest!
+
+This project is made possible not just by the core Carbon team, but by community
+members who’ve generously contributed their time to give back.
 
 ## Code of conduct
 
-We value all of our community members, and thus want to foster a positive
-contributing environment. Please take a look at our
-[code of conduct](./CODE_OF_CONDUCT.md) before engaging in our workspaces.
+<!--
+TODO:
+- Can this section be deleted? If not, can it be simplified to just a link?
+- Should the Code of Conduct be linked from the README? Seems like everyone,
+  including contributors, should see it there before they get to the
+  contributing docs. If so, having it in the README could be another reason to
+  delete this section.
+-->
+
+We value all community members and aim to foster a positive environment. Please
+review our [Code of conduct](./CODE_OF_CONDUCT.md) before engaging in any
+project spaces.
 
 ## Prerequisites
 
-Before contributing to Carbon, you should make sure you have the following tools
-installed:
+Before contributing, ensure you have these tools installed:
 
-- [Node.js](https://nodejs.org/en/download/) v18 or above here or follow their
-  installation through a package manager
-  [here](https://nodejs.org/en/download/package-manager/))
-  - If you're on macOS, we recommend using
-    [`nvm`](https://github.com/nvm-sh/nvm) to help manage different versions of
-    Node.js [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) as your
-    version manager for Node.
+- [Node.js](https://nodejs.org/en/download/) – Use the version specified in
+  [.nvmrc](../.nvmrc).
+  - On macOS, we recommend using [nvm](https://github.com/nvm-sh/nvm) to manage
+    Node versions.
 - Git
+  <!-- TODO: We link to installers for all of the other tools. Why not Git? -->
 - [Yarn](https://yarnpkg.com/en/docs/install)
-- [WSL](../docs/guides/setup/windows.md) (Windows Only)
+- [WSL](../docs/guides/setup/windows.md) (Windows only)
 
-If you're using Windows, there are some
-[additional steps](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/setup/windows.md)
-you'll need to take.
+If you're on Windows, follow
+[these additional steps](../docs/guides/setup/windows.md).
 
-You'll also need a code editor to make changes to Carbon. There are many to
-choose from but some popular options are
-[VSCode](https://code.visualstudio.com/), [Atom](https://atom.io), and
-[Sublime](https://www.sublimetext.com/).
+You'll also need a code editor. [VS Code](https://code.visualstudio.com/) and
+[Sublime Text](https://www.sublimetext.com/) are popular options.
 
-With that all in place, you're ready to start contributing to Carbon!
+Once these tools are installed, you're ready to contribute!
 
 ## Start contributing
 
-## - Setting up your environment -
+### Setting up your environment
 
-### 1. Fork the repo:
+#### Fork the repository
 
-Go to
-[Carbon's repository on GitHub](https://github.com/carbon-design-system/carbon)
-and click the `Fork` button in the top-right corner. This will create a copy
-repo of Carbon associated with your account.
+<!--
+TODO: Should this entire section be simplified to just include a link to
+GitHub’s fork instructions? These steps are subject to change as GitHub updates
+its UI, as can be seen with the previous set of instructions being outdated. It
+would be more straightforward to just point to the official GitHub documentation
+rather than maintain a separate set of instructions.
 
-### 2. Clone your fork:
+Also, are we expecting people that have zero experience with Git or GitHub to
+contribute to Carbon? If so, it seems like a better use of our time to point the
+user to resources on Git and GitHub, like tutorials (e.g.,
+https://github.com/firstcontributions/first-contributions,
+https://github.com/git-guides, etc.), rather than re-explain basic workflows.
+-->
 
-1.  Go to your [GitHub Repositories](https://github.com/settings/repositories).
-1.  Click on `[your_github_username]/carbon`.
-1.  Click on the `Code` button and copy the URL from the `Clone with SSH`
-    option. It should start with `git@github.com...`
+1. Visit [Carbon’s GitHub repo](https://github.com/carbon-design-system/carbon).
+2. Click the **Fork** button in the top-right corner.
+
+#### Clone your fork
+
+1. Go to https://github.com/<your_github_username>?tab=repositories (replace
+   `<your_github_username>` with your GitHub username).
+2. Click your `carbon` fork.
+3. Click the **Code** button.
+4. Click the **SSH** tab.
+5. Copy the SSH URL.
 
 In your terminal:
 
 ```sh
-git clone git@github.com:[your_github_username]/carbon.git
+git clone git@github.com:<your_github_username>/carbon.git
 cd carbon
 ```
+
+<!--
+TODO: If this doc is going to be linked, whats the point of everything above?
+-->
 
 See [GitHub docs](https://help.github.com/articles/fork-a-repo/) for more
 details.
 
-### 3. Add upstream remotes
+#### Add upstream remote
 
-When you clone your forked repo, running `git remote -v` will show that the
-`origin` is pointing to your forked repo by default.
-
-Now you need to add the `carbon-design-system/carbon` repo as your upstream
-remote branch:
+After cloning your fork, set up the upstream remote:
 
 ```sh
 # Add the upstream remote to your repo
@@ -86,188 +103,190 @@ git remote add upstream git@github.com:carbon-design-system/carbon.git
 git remote -v
 ```
 
-Your terminal should output something like this:
+Expected output:
 
 ```sh
-origin  [your forked repo] (fetch)
-origin  [your forked repo] (push)
-upstream    git@github.com:carbon-design-system/carbon.git (fetch)
-upstream    git@github.com:carbon-design-system/carbon.git (push)
+origin  git@github.com:<your_github_username>/carbon.git (fetch)
+origin  git@github.com:<your_github_username>/carbon.git (push)
+upstream  git@github.com:carbon-design-system/carbon.git (fetch)
+upstream  git@github.com:carbon-design-system/carbon.git (push)
 ```
 
 Great job on getting to this point! Now it's time to code :computer:
 
-## - Setting up your code -
+### Making a contribution
 
-### 1. Find or create an issue
+#### Find or create an issue
 
-Before you start coding, if you have an issue in mind that you'd like to tackle,
-please first [search](https://github.com/IBM/carbon-components/issues) the
-issues to see if a similar issue you'd like to work on has already been
-submitted. If a similar issue has been submitted, assign yourself or ask to be
-assigned to the issue by posting a comment.
+Check the [issues list](https://github.com/carbon-design-system/carbon/issues)
+for anything you'd like to work on. If something exists, comment to claim it or
+assign yourself.
 
-If the issue does not exist, please make a new issue. Issues give us context
-about what you are contributing and expedite the process to getting your
-contributions merged into Carbon. It's a win for everybody :tada:
+No issue yet?
+[Create one](https://github.com/carbon-design-system/carbon/issues/new/choose).
+Issues help us track work and streamline the contribution process.
 
-If you have no idea what you'd like to contribute, take a look at our backlog of
-issues and take your pick! Our issues with the label
-[`good first issue`](https://github.com/carbon-design-system/carbon/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue+%F0%9F%91%8B%22)
-are a great starting point. 👋
+Looking for a good starting point? Try these:
+[Good first issues 👋](https://github.com/carbon-design-system/carbon/issues?q=label%3A%22good%20first%20issue%20%F0%9F%91%8B%22)
 
-### 2. Work in a branch
+#### Create a working branch
 
-When contributing to Carbon, your work should always be done in a branch off of
-your repo, this is also how you will submit your pull request when your work is
-done.
-
-To create a new branch, ensure you are in your forked branch in your terminal
-and run:
+Before making any changes, create a branch from `main` to keep your work
+organized and separate from the main codebase. This makes it easier to manage
+your changes and submit them as a pull request (PR) later.
 
 ```sh
 git pull origin main
-git checkout -b {your-branch-name}
+git checkout -b <your_branch_name>
 ```
 
-### 3. Build and start the development server
+#### Build and start the development server
 
-From the root directory of your fork, run:
+From the root directory, run the following commands:
 
 ```sh
-# To install the project's dependencies
+# Install the project's dependencies.
 yarn install
 
-# To build the project:
+# Build the project.
 yarn build
 ```
 
-To get your development server running and to start coding, you'll need to
-navigate to the package in which you will be working. For example, if you plan
-on contributing to our React components, you can enter in your command line
-`cd packages/react` and then run:
+To start coding, navigate to the package you'll be working on. For example, if
+contributing to React components (i.e., `@carbon/react`), run the following
+commands:
 
 ```sh
+# Navigate to the React components package.
+cd packages/react
 
+# Start the Storybook development server.
 yarn storybook
 ```
 
-This will start a development server where you can see any changes you are
-making to components in our react components Storybook.
+> [!NOTE]  
+> The command to start the development server differs between packages. Check
+> the `scripts` section in the `package.json` of the package you're working on
+> to find the correct command.
 
-The command to start the server will differ depending on which package you are
-working within. To find out which command you'll need to run, you can check the
-`scripts` in the package's `package.json`.
+<!-- TODO: Should this next paragraph be deleted? -->
 
-Once it's done building, you can edit source code or create new components. The
-system is set up to automatically bundle your changes/additions. Visit
-http://localhost:9000 to see the changes happen on the fly.
+Once the development server is running, you can edit the source code or create
+new components. The system automatically bundles your changes. Visit
+http://localhost:3000 to see your changes live.
 
-For information about our coding style, such as how we name our classes and our
-file structure, go to our
-[developer handbook](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#coding-style)
+Refer to the [developer handbook](../docs/developer-handbook.md#coding-style)
+for guidance on coding style (e.g., naming conventions, file structure).
 
-### 4. Test your JavaScript code
+#### Test
 
-If you're contributing to our JavaScript code, test your changes by running our
-test commands:
+If you're working on JavaScript or TypeScript code, test your changes by running
+the following command:
 
 ```sh
 yarn test
 ```
 
-For more extensive testing information, see our
-[developer handbook](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#common-tasks)
+<!--
+TODO: There are no more detailed testing instructions in the common tasks
+section. Why is it linked here?
+-->
 
-### 5. Add yourself to the contributor list
+For more detailed testing instructions, see the
+[developer handbook](../docs/developer-handbook.md#common-tasks).
 
-We want to make sure everyone is recognized for their contributions to Carbon!
-To add yourself to the `all-contributors` table in the README, you'll need to
-run the following commands from the root of the repo:
+#### Add yourself to the contributor list
 
-```sh
-# Add new contributor <username>, who made a contribution of type <contribution>
-yarn all-contributors add <username> <contribution>
-# Example:
-yarn all-contributors add tw15egan code,doc
-```
-
-Then, you'll need to generate the updated `all-contributors` table by running
+To ensure you are recognized for your contributions, add yourself to the
+Contributors table in the [README](../README.md#contributors) by running the
+following commands:
 
 ```sh
+yarn all-contributors add <your_github_username> <contribution>
 yarn all-contributors generate
 ```
 
-### 6. Make a pull request
+Visit https://allcontributors.org/docs/en/cli/usage#all-contributors-add for
+more details.
 
-When you're at a good stopping place and you're ready for feedback from other
-contributors and maintainers, **push your commits to your fork**:
+#### Create a pull request
 
-To do so, go to your terminal and run:
+<!--
+TODO: Should this section be replaced with a link to GitHub's PR docs.
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
+-->
 
-```sh
-git add -A
-git commit -m "YOUR  COMMIT MESSAGE HERE"
-```
-
-#### Commit tip
-
-> **Writing commit messages**
->
-> - `<type>` indicates the type of commit that's being made. This can be:
->   `feat`, `fix`, `perf`, `docs`, `chore`, `style`, `refactor`
-> - `<scope>` The scope could be anything specifying place of the commit change
->   or the thing(s) that changed.
->
-> **Commit message format:**
-
-For more information about how to write your commit message, view our commit
-conventions detailed in a our
-[developer handbook](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#commit-conventions).
-
-After your changes are committed, run:
+When you're ready for submit your changes for review, commit and push your
+changes. Make sure to include a descriptive commit message that follows the
+conventions listed in the
+[developer handbook](../docs/developer-handbook.md#commit-conventions).
 
 ```sh
-git push -u origin { YOUR_BRANCH_NAME }
+git add --all
+git commit -m "<your_commit_message>"
+git push -u origin <your_branch_name>
 ```
 
-In your browser, navigate to
-[carbon-design-system/carbon-](https://github.com/carbon-design-system/carbon)
-and click the button that reads `Compare & pull request`
+Then create a PR to the main Carbon repo:
 
-Write a title and description then click `Create pull request`
+1. Navigate to
+   [carbon-design-system/carbon](https://github.com/carbon-design-system/carbon)
+   in your browser.
+2. Click **Compare & pull request**.
+3. Update the title if necessary.
+4. Fill in the description.
+5. Click **Create pull request**.
 
-- [How to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request)
+<!--
+TODO: Should this link be removed? Asking because the pull request template
+guides the user through writing a good description.
+-->
 
-### 9. Updating a pull request
+See
+[How to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request)
+for tips on writing a good PR description.
 
-Stay up to date with the activity in your pull request. Maintainers from the
-Design System team will be reviewing your work and making comments, asking
-questions and suggesting changes to be made before they merge your code.
+#### Update a pull request
 
-When you need to make a change, use the same method detailed above except you no
-longer need to run `git push -u origin { YOUR_BRANCH_NAME }` just `git push`.
+<!--
+TODO: Doesn't seem like it should need to be explained how to update a pull
+request. This process should be documented in the GitHub docs.
+-->
 
-Once all revisions to your pull request are complete, someone from Design
-Systems will squash and merge your commits for you.
+Stay up to date with activity in your PR. Maintainers will review your work,
+make comments, ask questions, and suggest changes.
+
+When you need to make a change, use the same method detailed in the previous
+section to make additional commits on your branch. Once you push those changes
+to your fork on GitHub, the PR will automatically update with your new commits.
+
+Once the changes are complete and your PR is approved, a maintainer will merge
+your changes.
 
 ## FAQ
 
 ### Who can contribute?
 
-Anyone! We mean it. The one and only requirement is you'll need a
-[public GitHub account](https://github.com/join), as all our assets live on
-GitHub.
+Anyone! The only requirement is a public GitHub account as all our assets live
+on GitHub. Sign up on https://github.com.
 
 - **Development:** If coding is your thing, you can help us by contributing bug
-  fixes or community components. Checkout our
-  [Developer Handbook](../docs/developer-handbook.md) to get your dev
-  environment set up, read up on our best practices and more.
-- **Design:** Design contributions can vary from visual assets, UX interactions,
-  motion design, Sketch kit bug fixes and more.
-- **Content:** Our documentation is just as important as our design and code
-  assets. Whether it's updating our current docs, or adding new
-  [patterns](./patterns), anyone can contribute to our
+  fixes or community components. Check out our
+  [Developer Handbook](../docs/developer-handbook.md) for setup and best
+  practices.
+  <!--
+  TODO: Are non-maintainers allowed to contribute design guidance? That seems to
+  be what this point is implying.
+  -->
+  <!-- TODO: Should 'Sketch kit' be 'Figma kit'? -->
+- **Design:** Contribute visual assets, UX interactions, motion design, Sketch
+  kit fixes, and more.
+  <!--
+  TODO: ./patterns doesn't exist. Can this point be deleted? If not, what should
+  be done here?
+  -->
+- **Content:** Whether updating docs or adding new [patterns](./patterns),
+  anyone can contribute to our contributions to our
   [website content](https://github.com/carbon-design-system/carbon-website).
 - **Research:** Carbon is made up of developers and designers, but
   unfortunately, no dedicated researchers. If you're a researcher and have
@@ -275,45 +294,67 @@ GitHub.
   right place. This kind of contribution is most effective if coupled with
   design and development forces, which would be presented in a GitHub issue and
   subsequent PR.
+  <!--
+  TODO: Is the part about 'no dedicated researchers' actually true? I attended
+  an internal Carbon event either last year or the year before where the amount
+  of research that went into new and existing features was discussed. Something
+  on the order of thousands of hours was saved by conducting user research and
+  aligning component implementations with user needs. Alternatively, should the
+  following point be used instead?
+  -->
+  <!--
+  - **Research:** If you have findings to improve the Carbon user experience,
+    share them—ideally with supporting design and development details in a GitHub
+    issue and subsequent PR.
+  -->
+
+<!--
+TODO: Isn't that what this entire doc is about? What's the point of this
+section?
+-->
 
 ### What is the contribution process?
 
-1. **Issue:** Check repo for an _existing_ issue related to your contribution
-   first. If none exist, open a new issue. Be sure to check the right repo.
-   (i.e. Don't open an issue for website documentation in the `carbon`
-   monorepo.) We reserve the right to close any issues that haven't been filled
-   out properly according to the issue template.
-2. **Development environment:** If you haven't already, fork and clone whichever
-   repo you want to contribute to. Then, create a new branch and add your
-   contribution in it. Checkout our
-   [Developer Handbook](../docs/developer-handbook.md) to read up on our best
-   coding practices and proper commit messages.
-3. **Pull request:** Submit a PR. Be sure to fill out the template properly.
-4. **Developer Certificate of Origin:** In order to contribute any code, we need
-   you to sign a Developer Certificate of Origin (DCO). Code doesn't just mean
-   "components"; if you're contributing to our website docs, you're contributing
-   code. Sign the
+1. **Issue:** Check for an existing issue related to your contribution. If none
+   exists, open a new issue (make sure you use the correct repo; for example,
+   don’t open an issue for website docs in the `carbon` monorepo). We may close
+   issues not following the template.
+2. **Development environment:** Fork and clone the repo, create a new branch,
+   and add your contribution. Refer to our
+   [Developer Handbook](../docs/developer-handbook.md) for coding practices and
+   commit guidelines.
+3. **Pull request:** Submit a PR and fill out the template properly.
+4. **Developer Certificate of Origin:** To contribute any code, sign a Developer
+   Certificate of Origin (DCO). This applies even to website docs. Sign the
    [DCO](https://github.com/carbon-design-system/carbon-dco/blob/main/dco.md) by
-   making a comment in the PR you just made.
-5. **Approval:** Get PR approved by design and developers, or make any necessary
-   changes for approval. This process may be quick or take a few iterations of
-   feedback-update.
-6. **Documentation:** After design and dev have approved and merged PR, update
-   any website documentation if necessary. One of the best examples for this is
-   if you're contributing to component work which has website documentation
-   related to your contribution.
+   commenting in your PR.
+5. **Approval:** Get your PR approved by designers and developers, or update it
+   as needed. This process may involve a few iterations.
+6. **Documentation:** After your PR is merged, update any relevant website
+   documentation if necessary.
 
-Here are some contribution quick tips:
+Tips:
 
-- **Do** check repos for existing issues.
-- **Do** fill out the required template for contributions entirely; this
-  pertains to both issues and PRs.
-- **Do** add or update tests for any contributions that require it.
-- **Do** follow existing coding and writing styles.
-- **Do** follow proper commit messages syntax.
-- **Do not** branch off another branch.
-- **Do not** include unrelated changes in the same PR.
-- **Do not** create one massive PR if it can be broken up into smaller PRs.
+:white_check_mark: Do:
+
+- Check for existing issues before creating a new one.
+- Fill out the issue and PR templates completely.
+- Write tests for your code changes if applicable. This helps ensure your
+  contribution doesn't break existing functionality.
+- Follow the contribution guidelines and coding style outlined in the
+  [Developer Handbook](../docs/developer-handbook.md).
+
+:no_entry_sign: Don’t:
+
+- Branch off of another branch.
+- Mix unrelated changes in the same PR.
+- Submit massive PRs if the changes can be broken down into smaller ones.
+
+<!--
+TODO: Is this section necessary? Other than the Gatsby theme, it's basically
+saying 'you can contribute to nearly anything in this repo' which is implied by
+the fact that it's an open source project.
+-->
 
 ### What projects can I contribute to?
 
@@ -333,50 +374,45 @@ Here are some contribution quick tips:
 - [`@carbon/themes`](https://github.com/carbon-design-system/carbon/tree/main/packages/themes)
 - [`@carbon/type`](https://github.com/carbon-design-system/carbon/tree/main/packages/type)
 
-And more! You can view a complete list of our packages
+And more! See a complete list
 [here](https://github.com/carbon-design-system/carbon/tree/main/packages).
 
-### Besides some of the obvious contributions mentioned above, how else can I contribute?
+### How else can I contribute?
 
-Great question! Contribution does not require creating or maintaining our
-assets. Here are some other ways you can contribute, which don't require much
-work:
+Great question! You can contribute without directly creating or maintaining
+assets:
 
-- **Join our slack community and interact with other users.** We have hundreds
-  of users world wide, and quite a small team in comparison. While we try our
-  best to answer questions on slack, it's not always possible to answer
-  everything. One of the easiest ways to help us it to jump in on slack
-  conversations if there's something you know the answer to! Some of our most
-  popular slack channels include `#carbon-react`, `#carbon-web-components`,
-  `#carbon-design-system`, `#carbon-ng`, `#carbon-vue`, `#carbon-announcements`.
-- **Report bugs.** Even if you don't have the time to contribute a bug fix,
-  opening an issue alone makes a big difference! Be sure to completely fill out
-  the issue template to best help us understand what is going wrong.
+<!--
+TODO: Are these the internal Slack channels? If so, why are they listed here?
+-->
 
-### If I'm contributing code, am I required to contribute it for all frameworks?
+- **Join our Slack community:** Engage with hundreds of users in channels like
+  `#carbon-react`, `#carbon-web-components`, `#carbon-design-system`,
+  `#carbon-ng`, `#carbon-vue`, and `#carbon-announcements`.
+- **Report bugs:** Even if you can’t submit a fix, opening a well-documented
+  issue makes a big difference.
 
-If you've been working with Carbon for a while, you know that we have code
-assets in multiple frameworks. While the core team only maintains the React and
-Web Component implementations, we work closely with the other framework teams to
-maintain parity. If you're contributing a bug fix in a framework other than
-React for a component which also exists in the React and Web Components version,
-you can either contribute a fix for the that version as well or open an issue so
-that we can update the component accordingly.
+### Do I need to submit code for every framework?
 
-### How can I test-drive components or provide a bug reproduction?
+While the core team maintains the React and Web Component implementations, other
+framework teams work to maintain parity. If you fix a bug in one framework for a
+component that exists in multiple frameworks, either submit a fix for the other
+versions or open an issue so we can update them.
 
-There are some fantastic tools out there today that provide a near fully-fledged
-development environment in the browser. These are incredibly helpful for trying
-out simple configurations or providing working code demonstrating bugs or
-problems with the libraries.
+### How can I test components or share a bug reproduction?
 
-We've created a few templates, housed in the repo, that can be used on these
-services:
+<!--
+TODO: Should
+`[Carbon Design System Sandboxes](https://github.com/carbon-design-system/sandboxes)`
+be somewhere in here? If so, should it be its own thing or should it replace one
+or both of the `Stackblitz` and `Codesandbox` sections below?
+-->
+
+Use in-browser development environments:
 
 #### Stackblitz
 
-- [`@carbon/react` template](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/examples/vite?file=src%2FApp.jsx),
-  supporting faster sass compilation and react component usage
+- [`@carbon/react` template](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/examples/vite?file=src%2FApp.jsx)
 
 #### Codesandbox
 
