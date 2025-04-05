@@ -6,7 +6,9 @@
  */
 
 // @ts-check
-/* eslint-disable jsdoc/check-tag-names */
+
+// TODO: https://github.com/carbon-design-system/carbon/issues/19004
+// /* eslint-disable jsdoc/check-tag-names */
 
 import { useEffect, useRef } from 'react';
 

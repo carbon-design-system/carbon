@@ -28,10 +28,10 @@ yarn run build
 yarn run test
 ```
 
-### Lints and fixes files
+### Lint code
 
 ```
-yarn run lint
+yarn lint
 ```
 
 ### Customize configuration
