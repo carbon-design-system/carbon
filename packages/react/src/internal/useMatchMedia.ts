@@ -6,17 +6,15 @@
  */
 
 import { useState, useEffect } from 'react';
-import { canUseDOM } from './environment';
 
-/** Listens to changes in a media query and returns whether it matches. */
-export const useMatchMedia = (mediaQuery: string) => {
-  const [matches, setMatches] = useState(() => {
-    if (canUseDOM) {
-      const mediaQueryList = window.matchMedia(mediaQuery);
-      return mediaQueryList.matches;
-    }
-    return false;
-  });
+/**
+ * Listens to changes in a media query and returns whether it matches.
+ * @param mediaQuery - The media query to listen to. For example, `(min-width: 600px)`.
+ * @param defaultState - The initial state to return before the media query is evaluated. Defaults to `false`.
+ * @returns Whether the media query matches.
+ */
+export const useMatchMedia = (mediaQuery: string, defaultState = false) => {
+  const [matches, setMatches] = useState(defaultState);
 
   useEffect(() => {
     const listener = (event: MediaQueryListEvent) => {
