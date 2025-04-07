@@ -3657,6 +3657,14 @@
     - currency
     - money
     - finance
+- name: global--currency--02
+  friendly_name: Global currency 02
+  aliases:
+    - currency
+    - global
+    - money
+    - worldwide
+    - finance
 - name: global--exchange
   friendly_name: Global exchange
   aliases:
@@ -3665,14 +3673,6 @@
     - exchange
     - currency
     - money
-    - finance
-- name: global--currency--02
-  friendly_name: Global currency 02
-  aliases:
-    - currency
-    - global
-    - money
-    - worldwide
     - finance
 - name: global--finance--euro
   friendly_name: Global finance Euro
@@ -4274,10 +4274,14 @@
     - engineering lifecycle management
     - IBM
 - name: ibm--elm-dcc
-  friendly_name:
-    IBM® Engineering Lifecycle Management Data Collection Component
+  friendly_name: IBM® Engineering Lifecycle Management Data Collection Component
   aliases:
     - engineering lifecycle management data collection component
+    - IBM
+- name: ibm--elm-gcm
+  friendly_name: IBM® Engineering Lifecycle Management Global Configuration Management
+  aliases:
+    - engineering lifecycle management global configuration management
     - IBM
 - name: ibm--elm-insights
   friendly_name: IBM® Engineering Lifecycle Management Insights
@@ -4293,6 +4297,11 @@
   friendly_name: IBM® Engineering Lifecycle Management Publishing
   aliases:
     - engineering lifecycle management publishing
+    - IBM
+- name: ibm--elm-reporting
+  friendly_name: IBM® Engineering Lifecycle Management Reporting
+  aliases:
+    - engineering lifecycle management reporting
     - IBM
 - name: ibm--engineering-requirement-doors
   friendly_name: IBM® Engineering Requirement DOORS
@@ -4319,25 +4328,6 @@
   aliases:
     - engineering workflow management
     - IBM
-- name: ibm--elm-gcm
-  friendly_name:
-    IBM® Engineering Lifecycle Management Global Configuration Management
-  aliases:
-    - engineering lifecycle management global configuration management
-    - IBM
-- name: ibm--elm-reporting
-  friendly_name: IBM® Engineering Lifecycle Management Reporting
-  aliases:
-    - engineering lifecycle management reporting
-    - IBM
-- name: ibm--ibv
-  friendly_name: IBM Institute for Business Value
-  aliases:
-    - IBM IBV
-    - IBV
-    - Institute for Business Value
-    - Thought Leadership
-    - IBV study
 - name: ibm--granite
   friendly_name: IBM® Granite™
   aliases:
@@ -4350,6 +4340,14 @@
     - instruct model
     - llm
     - bpe
+- name: ibm--ibv
+  friendly_name: IBM Institute for Business Value
+  aliases:
+    - IBM IBV
+    - IBV
+    - Institute for Business Value
+    - Thought Leadership
+    - IBV study
 - name: ibm--ix
   friendly_name: IBM iX®
   aliases:
@@ -4401,6 +4399,13 @@
     - converge
     - continuous
     - deploy
+- name: ibm--z-and-cloud-modernization-stack-provisioning
+  friendly_name: IBM Z® and Cloud Modernization Stack Provisioning
+  aliases:
+    - z
+    - cloud
+    - modernization stack provisioning
+    - IBM
 - name: ibm--z-and-linuxone-multi-frame
   friendly_name: IBM Z® and LinuxONE multi-frame
   aliases:
@@ -4426,6 +4431,11 @@
   aliases:
     - IBM Z Open Automation Utilities
     - ZOAU
+- name: ibm--z-open-enterprise-languages
+  friendly_name: IBM Z® Open Enterprise Languages
+  aliases:
+    - z open enterprise languages
+    - IBM
 - name: ibm--z-os-container-platform
   friendly_name: IBM z/OS Container platform
   aliases:
@@ -4440,18 +4450,6 @@
   friendly_name: IBM z/OS® Package Manager
   aliases:
     - z/os package manager
-    - IBM
-- name: ibm--z-and-cloud-modernization-stack-provisioning
-  friendly_name: IBM Z® and Cloud Modernization Stack Provisioning
-  aliases:
-    - z
-    - cloud
-    - modernization stack provisioning
-    - IBM
-- name: ibm--z-open-enterprise-languages
-  friendly_name: IBM Z® Open Enterprise Languages
-  aliases:
-    - z open enterprise languages
     - IBM
 - name: ibm--z16
   friendly_name: IBM z16®
@@ -4641,7 +4639,7 @@
     - learning
     - learn
 - name: intelligent-infrastructure
-  friendly_name: Intelligent assets, facilities and infrastructure
+  friendly_name: 'Intelligent assets, facilities and infrastructure'
   aliases:
     - facilities
     - smart buildings
@@ -5560,7 +5558,7 @@
 - name: mumbai
   friendly_name: Mumbai
   aliases:
-    - Mumbai, India
+    - 'Mumbai, India'
 - name: munich
   friendly_name: Munich
   aliases:
@@ -6434,12 +6432,6 @@
     - q q
     - plot
     - chart
-- name: qr-code
-  friendly_name: QR code
-  aliases:
-    - qr code
-    - code
-    - ID
 - name: qiskit
   friendly_name: Qiskit
   aliases:
@@ -6452,6 +6444,12 @@
     - Quantum
     - Quantum software
     - Quantum systems
+- name: qr-code
+  friendly_name: QR code
+  aliases:
+    - qr code
+    - code
+    - ID
 - name: quantum
   friendly_name: Quantum
   aliases:
