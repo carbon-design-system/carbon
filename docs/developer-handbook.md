@@ -660,7 +660,7 @@ import { warning } from '../../internal/warning';
 let didWarnAboutDeprecation = false;
 
 function SomeComponent() {
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
     warning(
       didWarnAboutDeprecation,
       'The `SomeComponent` component has been deprecated and will be removed ' +
@@ -670,6 +670,10 @@ function SomeComponent() {
   }
 }
 ```
+
+_Note: even though warning() has a process.env.NODE_ENV condition internal to
+itself, an additional one is needed above to ensure `didWarnAboutDeprecation` is
+not modified in non-development environments._
 
 _Note: if available, you should add a closing sentence specifying what component
 to use instead, or share a link for more information. This may look like:_

@@ -831,14 +831,3 @@ export const WithControlledExpansion = () => {
     </>
   );
 };
-
-export const Temp = () => {
-  return (
-    <TreeView label="Tree View">
-      <TreeNode label="Enabled">
-        <TreeNode label="Disabled" disabled />
-      </TreeNode>
-      <TreeNode label="Disabled" disabled></TreeNode>
-    </TreeView>
-  );
-};

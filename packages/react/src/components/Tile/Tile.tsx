@@ -9,11 +9,13 @@ import React, {
   useEffect,
   useRef,
   useState,
-  type ReactNode,
-  type MouseEvent,
-  type KeyboardEvent,
-  type HTMLAttributes,
+  type ButtonHTMLAttributes,
   type ChangeEvent,
+  type HTMLAttributes,
+  type KeyboardEvent,
+  type MouseEvent,
+  type ReactNode,
+  type Ref,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -954,8 +956,7 @@ export const ExpandableTile = React.forwardRef<
 
   return interactive ? (
     <div
-      // @ts-expect-error: Needlesly strict & deep typing for the element type
-      ref={ref}
+      ref={ref as Ref<HTMLDivElement>}
       className={interactiveClassNames}
       {...rest}>
       <div ref={tileContent}>
@@ -993,12 +994,11 @@ export const ExpandableTile = React.forwardRef<
   ) : (
     <button
       type="button"
-      // @ts-expect-error: Needlesly strict & deep typing for the element type
-      ref={ref}
+      ref={ref as Ref<HTMLButtonElement>}
       className={classNames}
       aria-expanded={isExpanded}
       title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
-      {...rest}
+      {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
       onKeyUp={composeEventHandlers([onKeyUp, handleKeyUp])}
       onClick={composeEventHandlers([onClick, handleClick])}
       tabIndex={tabIndex}>
