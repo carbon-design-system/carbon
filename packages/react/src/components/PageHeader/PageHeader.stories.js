@@ -254,6 +254,7 @@ const pageActionButtonItems = [
   {
     id: 'action1',
     label: 'action 1',
+    onClick: () => console.log(`Action 1`),
     body: (
       <Button
         renderIcon={AiGenerate}
@@ -267,6 +268,7 @@ const pageActionButtonItems = [
   {
     id: 'action2',
     label: 'action 2',
+    onClick: () => console.log(`Action 2`),
     body: (
       <Button
         renderIcon={Activity}
@@ -280,6 +282,7 @@ const pageActionButtonItems = [
   {
     id: 'action3',
     label: 'action 3',
+    onClick: () => console.log(`Action 3`),
     body: (
       <Button
         renderIcon={Activity}
@@ -293,6 +296,7 @@ const pageActionButtonItems = [
   {
     id: 'action4',
     label: 'action 4',
+    onClick: () => console.log(`Action 4`),
     body: (
       <Button
         renderIcon={Activity}
@@ -306,6 +310,7 @@ const pageActionButtonItems = [
   {
     id: 'primary-action',
     label: 'Primary action',
+    onClick: () => console.log(`Primary action`),
     body: (
       <Button kind="primary" renderIcon={Add} size="md">
         Primary action

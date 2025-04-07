@@ -122,7 +122,7 @@ interface PageHeaderContentProps {
   /**
    *  The PageHeaderContent's page actions collabpsible Menu button label
    */
-  menuButtonLabel: string;
+  menuButtonLabel?: string;
 }
 const PageHeaderContent = React.forwardRef<
   HTMLDivElement,
@@ -152,7 +152,7 @@ const PageHeaderContent = React.forwardRef<
   const containerRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef<HTMLDivElement>(null);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
-  const [hiddenItems, setHiddenItems] = useState([]);
+  const [hiddenItems, setHiddenItems] = useState<any[]>([]);
 
   const isEllipsisActive = (element: HTMLHeadingElement) => {
     setIsEllipsisApplied(element.offsetHeight < element.scrollHeight);
@@ -236,7 +236,11 @@ const PageHeaderContent = React.forwardRef<
                           hiddenItems
                             .reverse()
                             .map((item) => (
-                              <MenuItem key={item.id} label={item.label} />
+                              <MenuItem
+                                key={item.id}
+                                label={item.label}
+                                onClick={item.onClick}
+                              />
                             ))}
                       </MenuButton>
                     </span>
