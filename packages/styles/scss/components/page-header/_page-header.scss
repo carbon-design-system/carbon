@@ -38,20 +38,16 @@
 
   .#{$prefix}--page-header__content__title-wrapper {
     @include breakpoint-down(md) {
-      // flex-direction: column;
       display: flex;
       flex-direction: column;
       grid-gap: $spacing-05;
     }
 
-    // display: flex;
-    // justify-content: space-between;
-    // gap: $spacing-05;
     display: grid;
     gap: $spacing-05;
     grid-template-columns: auto minmax(min-content, 1fr);
     margin-block-end: 1rem;
-    min-block-size: 40px;
+    min-block-size: convert.to-rem(40px);
   }
 
   .#{$prefix}--page-header__content__start {
@@ -94,7 +90,6 @@
   .#{$prefix}--page-header__content__page-actions {
     display: flex;
     justify-content: right;
-    // gap: $spacing-05;
 
     @include breakpoint-down('md') {
       justify-content: left;

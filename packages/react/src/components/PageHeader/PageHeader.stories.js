@@ -304,8 +304,8 @@ const pageActionButtonItems = [
     ),
   },
   {
-    id: 'action5',
-    label: 'action 5',
+    id: 'primary-action',
+    label: 'Primary action',
     body: (
       <Button kind="primary" renderIcon={Add} size="md">
         Primary action

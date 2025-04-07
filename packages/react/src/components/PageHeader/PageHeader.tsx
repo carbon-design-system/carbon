@@ -119,6 +119,10 @@ interface PageHeaderContentProps {
    * The PageHeaderContent's page actions
    */
   pageActions?: React.ReactNode;
+  /**
+   *  The PageHeaderContent's page actions collabpsible Menu button label
+   */
+  menuButtonLabel: string;
 }
 const PageHeaderContent = React.forwardRef<
   HTMLDivElement,
@@ -132,6 +136,7 @@ const PageHeaderContent = React.forwardRef<
     renderIcon: IconElement,
     contextualActions,
     pageActions,
+    menuButtonLabel = 'Menu button',
     ...other
   }: PageHeaderContentProps,
   ref
@@ -159,8 +164,7 @@ const PageHeaderContent = React.forwardRef<
   }, [title]);
 
   useEffect(() => {
-    if (!containerRef.current) return;
-    console.log('clientWidth', containerRef.current.clientWidth);
+    if (!containerRef.current || !Array.isArray(pageActions)) return;
     createOverflowHandler({
       container: containerRef.current,
       // exclude the hidden menu button from children
@@ -224,14 +228,16 @@ const PageHeaderContent = React.forwardRef<
                     <span data-offset data-hidden ref={offsetRef}>
                       <MenuButton
                         menuAlignment="bottom-end"
-                        label="Menu button"
+                        label={menuButtonLabel}
                         size="md"
                         ref={offsetRef}>
                         {hiddenItems &&
                           hiddenItems.length > 0 &&
-                          hiddenItems.map((item) => (
-                            <MenuItem key={item.id} label={item.label} />
-                          ))}
+                          hiddenItems
+                            .reverse()
+                            .map((item) => (
+                              <MenuItem key={item.id} label={item.label} />
+                            ))}
                       </MenuButton>
                     </span>
                   </>
@@ -286,6 +292,10 @@ PageHeaderContent.propTypes = {
    * The PageHeaderContent's page actions
    */
   pageActions: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+  /**
+   * The PageHeaderContent's collapsible Menu button label
+   */
+  menuButtonLabel: PropTypes.string,
 };
 
 /**
