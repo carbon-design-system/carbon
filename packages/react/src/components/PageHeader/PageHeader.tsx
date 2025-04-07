@@ -224,7 +224,7 @@ const PageHeaderContent = React.forwardRef<
                     <span data-offset data-hidden ref={offsetRef}>
                       <MenuButton
                         menuAlignment="bottom-end"
-                        label="actions"
+                        label="Menu button"
                         size="md"
                         ref={offsetRef}>
                         {hiddenItems &&

@@ -49,7 +49,7 @@
     // gap: $spacing-05;
     display: grid;
     gap: $spacing-05;
-    grid-template-columns: auto minmax(8rem, 1fr);
+    grid-template-columns: auto minmax(min-content, 1fr);
     margin-block-end: 1rem;
     min-block-size: 40px;
   }
@@ -100,6 +100,11 @@
       justify-content: left;
       margin-block-start: 0;
     }
+  }
+
+  .#{$prefix}--page-header__content__page-actions
+    .#{$prefix}--menu-button__trigger:not(.#{$prefix}--btn--ghost) {
+    min-inline-size: 0;
   }
 
   .#{$prefix}--page-header__content__subtitle {
