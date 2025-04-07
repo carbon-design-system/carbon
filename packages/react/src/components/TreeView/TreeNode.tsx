@@ -15,12 +15,15 @@ import React, {
   useRef,
   useState,
   MutableRefObject,
+  useLayoutEffect,
+  useCallback,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 import uniqueId from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
+import { Tooltip } from '../Tooltip';
 
 export type TreeNodeProps = {
   /**
@@ -97,6 +100,60 @@ export type TreeNodeProps = {
   href?: string;
 } & Omit<React.LiHTMLAttributes<HTMLElement>, 'onSelect'>;
 
+const extractTextContent = (node: React.ReactNode): string => {
+  if (node === null || node === undefined) return '';
+  if (typeof node === 'string') return node;
+  if (typeof node === 'number') return String(node);
+  if (typeof node === 'boolean') return String(node);
+
+  if (Array.isArray(node)) {
+    return node.map(extractTextContent).join('');
+  }
+
+  if (React.isValidElement(node)) {
+    const children = node.props.children;
+    return extractTextContent(children);
+  }
+
+  return '';
+};
+
+const useEllipsisCheck = (label: React.ReactNode) => {
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+  const labelTextRef = useRef<HTMLSpanElement>(null);
+
+  const checkEllipsis = useCallback(() => {
+    const element = labelTextRef.current;
+    if (!element) return;
+
+    const isVisible = element.offsetParent !== null && element.offsetWidth > 0;
+
+    if (isVisible) {
+      const isTextTruncated = element.scrollWidth > element.offsetWidth;
+      setIsEllipsisApplied(isTextTruncated);
+    } else {
+      requestAnimationFrame(checkEllipsis);
+    }
+  }, []);
+
+  useEffect(() => {
+    const timerId = setTimeout(checkEllipsis, 50);
+    // Resize listener
+    window.addEventListener('resize', checkEllipsis);
+
+    return () => {
+      clearTimeout(timerId);
+      window.removeEventListener('resize', checkEllipsis);
+    };
+  }, [checkEllipsis]);
+
+  return {
+    labelTextRef,
+    isEllipsisApplied,
+    tooltipText: extractTextContent(label),
+  };
+};
+
 const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
   (
     {
@@ -124,6 +181,8 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     // These are provided by the parent TreeView component
     const depth = propDepth as number;
     const selected = propSelected as (string | number)[];
+    const { labelTextRef, isEllipsisApplied, tooltipText } =
+      useEllipsisCheck(label);
 
     const enableTreeviewControllable = useFeatureFlag(
       'enable-treeview-controllable'
@@ -144,6 +203,31 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     const currentNode = useRef<HTMLElement | null>(null);
     const currentNodeLabel = useRef<HTMLDivElement>(null);
     const prefix = usePrefix();
+
+    const renderLabelText = () => {
+      const labelElement = (
+        <span
+          ref={labelTextRef}
+          className={`${prefix}--tree-node__label__text`}>
+          {label}
+        </span>
+      );
+
+      if (isEllipsisApplied && tooltipText) {
+        return (
+          <Tooltip autoAlign label={tooltipText}>
+            <button
+              type="button"
+              className={`${prefix}--tree-node__label__text-button`}
+              onClick={(e) => e.stopPropagation()}>
+              {labelElement}
+            </button>
+          </Tooltip>
+        );
+      }
+
+      return labelElement;
+    };
 
     const setRefs = (element: HTMLElement | null) => {
       currentNode.current = element;
@@ -375,7 +459,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
                 ref={currentNodeLabel}>
                 {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
                 {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-                {label}
+                {renderLabelText()}
               </div>
             </a>
           </li>
@@ -388,7 +472,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
               ref={currentNodeLabel}>
               {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
               {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-              {label}
+              {renderLabelText()}
             </div>
           </li>
         );
@@ -417,7 +501,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
               <span className={`${prefix}--tree-node__label__details`}>
                 {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
                 {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-                {label}
+                {renderLabelText()}
               </span>
             </div>
           </a>
@@ -447,7 +531,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
             <span className={`${prefix}--tree-node__label__details`}>
               {/* @ts-ignore - TS cannot be sure `className` exists on Icon props */}
               {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
-              {label}
+              {renderLabelText()}
             </span>
           </div>
           <ul

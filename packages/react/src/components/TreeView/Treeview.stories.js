@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { Document, Folder } from '@carbon/icons-react';
 import { default as TreeView, TreeNode } from './';
 import mdx from './TreeView.mdx';
+
 import './story.scss';
 
 function renderTree({ nodes, expanded, withIcons = false, withLinks = false }) {
@@ -83,7 +84,8 @@ export const Default = (args) => {
     {
       id: '2',
       value: 'Blockchain',
-      label: 'Blockchain',
+      label:
+        'Blocrtificial intelligencertificial intelligencertificial intelligencertificial intelligencertificial intelligencertificial intelligencertificial intelligencertificial intelligencertificial intelligencertificial intelligencekchain',
       renderIcon: Document,
     },
     {
@@ -95,7 +97,8 @@ export const Default = (args) => {
         {
           id: '3-1',
           value: 'Business process automation',
-          label: 'Business process automation',
+          label:
+            'Business process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automationusiness process automation',
           renderIcon: Document,
         },
         {

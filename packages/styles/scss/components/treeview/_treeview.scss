@@ -248,3 +248,27 @@
     margin-block-start: 0;
   }
 }
+// Ensure text truncation works properly
+.#{$prefix}--tree-node__label__text {
+  display: block;
+  overflow: hidden;
+  max-inline-size: 12rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{$prefix}--tree-node__label__text-button {
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  inline-size: 100%;
+  text-align: start;
+}
+
+// Separate rule for focus state to avoid nesting
+.#{$prefix}--tree-node__label__text-button:focus {
+  outline: 2px solid $focus;
+  outline-offset: -2px;
+}
