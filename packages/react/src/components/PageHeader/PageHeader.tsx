@@ -300,12 +300,16 @@ PageHeaderHeroImage.propTypes = {
 interface PageHeaderTabBarProps {
   children?: React.ReactNode;
   className?: string;
+  /**
+   * The tabs to render - pass Carbon's Tabs component directly
+   */
+  tabs?: React.ReactNode;
 }
 const PageHeaderTabBar = React.forwardRef<
   HTMLDivElement,
   PageHeaderTabBarProps
 >(function PageHeaderTabBar(
-  { className, children, ...other }: PageHeaderTabBarProps,
+  { className, children, tabs, ...other }: PageHeaderTabBarProps,
   ref
 ) {
   const prefix = usePrefix();
@@ -317,8 +321,9 @@ const PageHeaderTabBar = React.forwardRef<
   );
   return (
     <div className={classNames} ref={ref} {...other}>
-      <p>page header tab bar</p>
-      {children}
+      {tabs && (
+        <div className={`${prefix}--page-header__tab-bar__tabs`}>{tabs}</div>
+      )}
     </div>
   );
 });

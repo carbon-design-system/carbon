@@ -20,6 +20,7 @@ import { breakpoints } from '@carbon/layout';
 import { Bee } from '@carbon/icons-react';
 
 const prefix = 'cds';
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 
 describe('PageHeader', () => {
   describe('export configuration', () => {
@@ -226,6 +227,36 @@ describe('PageHeader', () => {
   });
 
   describe('PageHeader.TabBar component api', () => {
+    beforeEach(() => {
+      // Reset modules to ensure clean state
+      jest.resetModules();
+
+      // Mock the useMatchMedia hook
+      jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+
+      // Also mock window.matchMedia directly
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn().mockImplementation((query) => ({
+          matches: false,
+          media: query,
+          onchange: null,
+          addListener: jest.fn(),
+          removeListener: jest.fn(),
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        })),
+      });
+
+      // Mock console.error to prevent test failures from expected errors
+      jest.spyOn(console, 'error').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      // Clean up all mocks
+      jest.restoreAllMocks();
+    });
     it('should render', () => {
       const { container } = render(<PageHeader.TabBar />);
       expect(container.firstChild).toBeInTheDocument();
@@ -236,6 +267,38 @@ describe('PageHeader', () => {
         <PageHeader.TabBar className="custom-class" />
       );
       expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should render tabs when provided', () => {
+      const { container } = render(
+        <PageHeader.TabBar
+          tabs={
+            <Tabs>
+              <TabList aria-label="List of tabs">
+                <Tab>Tab 1</Tab>
+                <Tab>Tab 2</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>Tab Panel 1</TabPanel>
+                <TabPanel>Tab Panel 2</TabPanel>
+              </TabPanels>
+            </Tabs>
+          }
+        />
+      );
+
+      expect(
+        container.querySelector(`.${prefix}--page-header__tab-bar__tabs`)
+      ).toBeInTheDocument();
+      expect(container.querySelector(`.${prefix}--tabs`)).toBeInTheDocument();
+    });
+
+    it('should not render the tabs wrapper when no tabs are provided', () => {
+      const { container } = render(<PageHeader.TabBar />);
+      const tabsWrapper = container.querySelector(
+        `.${prefix}--page-header__tab-bar__tabs`
+      );
+      expect(tabsWrapper).not.toBeInTheDocument();
     });
   });
 });
