@@ -79,7 +79,8 @@ export default {
     PageHeaderHeroImage,
     PageHeaderTabBar,
   },
-  includeStories: [],
+  // uncomment includeStories before merging so the stories aren't visible in prod
+  // includeStories: [],
   argTypes: {
     children: {
       control: false, // ReactNode props don't work in the controls pane
@@ -193,11 +194,11 @@ export const ContentWithHeroImage = (args) => (
               <picture>
                 <source
                   srcset={image1}
-                  media={`(min-width: ${breakpoints.lg.width}`}
+                  media={`(min-width: ${breakpoints.lg.width})`}
                 />
                 <source
                   srcset={image2}
-                  media={`(max-width: ${breakpoints.lg.width}`}
+                  media={`(max-width: ${breakpoints.lg.width})`}
                 />
                 <img
                   src={image1}
