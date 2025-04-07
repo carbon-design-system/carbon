@@ -116,17 +116,17 @@
     - sow
     - hand
     - soil
-- name: ahmadabad--jama-masiid
-  friendly_name: Ahmadabad Jama Masjid
+- name: ahmedabad--jama-masiid
+  friendly_name: Ahmedabad Jama Masjid
   aliases:
-    - Ahmadabad
+    - Ahmedabad
     - Jama Masjid
     - Mahatma Gandhi
     - India
 - name: ahmadabad--sabarmati-ashram
-  friendly_name: Ahmadabad Sabarmati-Ashram
+  friendly_name: Ahmedabad Sabarmati-Ashram
   aliases:
-    - Ahmadabad
+    - Ahmedabad
     - Jama Masjid
     - Mahatma Gandhi
     - India
