@@ -540,4 +540,28 @@ describe('TreeView', () => {
     expect(node2).toHaveClass(`${prefix}--tree-node--selected`);
     expect(node3).not.toHaveClass(`${prefix}--tree-node--selected`);
   });
+  it('should select nodes correctly when ctrl+A is pressed', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <TreeView multiselect label="Tree View">
+        <TreeNode data-testid="Node 1" label="Node 1" />
+        <TreeNode data-testid="Node 2" label="Node 2" />
+        <TreeNode data-testid="Node 3" label="Node 3" />
+      </TreeView>
+    );
+
+    const node1 = screen.getByTestId('Node 1');
+    const node2 = screen.getByTestId('Node 2');
+    const node3 = screen.getByTestId('Node 3');
+
+    await user.click(node1);
+    expect(node1).toHaveFocus();
+
+    await user.keyboard('[ControlLeft>]A');
+
+    expect(node1).toHaveClass(`${prefix}--tree-node--selected`);
+    expect(node2).toHaveClass(`${prefix}--tree-node--selected`);
+    expect(node3).toHaveClass(`${prefix}--tree-node--selected`);
+  });
 });
