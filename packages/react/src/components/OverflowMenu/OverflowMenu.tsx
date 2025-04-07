@@ -41,6 +41,7 @@ import deprecate from '../../prop-types/deprecate';
 import mergeRefs from '../../tools/mergeRefs';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { IconButton } from '../IconButton';
+import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -400,7 +401,10 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     }) => {
       const enabledIndices = Children.toArray(children).reduce<number[]>(
         (acc, curr, i) => {
-          if (isValidElement(curr) && !curr.props.disabled) {
+          if (
+            React.isValidElement<OverflowMenuItemProps>(curr) &&
+            !curr.props.disabled
+          ) {
             acc.push(i);
           }
           return acc;
