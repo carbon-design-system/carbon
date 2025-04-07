@@ -2008,6 +2008,7 @@ __metadata:
     "@carbon/styles": "npm:^1.79.0-rc.0"
     "@carbon/test-utils": "npm:^10.35.0"
     "@carbon/themes": "npm:^11.50.0-rc.0"
+    "@carbon/utilities": "npm:^0.5.0"
     "@figma/code-connect": "npm:^1.2.4"
     "@floating-ui/react": "npm:^0.27.4"
     "@ibm/telemetry-js": "npm:^1.5.0"
