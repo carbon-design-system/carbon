@@ -440,7 +440,8 @@ function DatePickerIcon({ datePickerType, invalid, warn }) {
     <Calendar
       className={`${prefix}--date-picker__icon`}
       role="img"
-      aria-hidden="true"></Calendar>
+      aria-hidden="true"
+      size="1rem"></Calendar>
   );
 }
 

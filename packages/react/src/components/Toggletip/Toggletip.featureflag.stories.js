@@ -40,7 +40,7 @@ export const FloatingStyles = (args) => {
       <ToggletipLabel>Toggletip label</ToggletipLabel>
       <Toggletip align={args.align} defaultOpen>
         <ToggletipButton label="Show information">
-          <Information />
+          <Information size="1rem" />
         </ToggletipButton>
         <ToggletipContent>
           <p>

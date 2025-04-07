@@ -202,7 +202,7 @@ export function NotificationButton({
       aria-label={deprecatedAriaLabel || ariaLabel}
       title={deprecatedAriaLabel || ariaLabel}
       className={buttonClassName}>
-      {IconTag && <IconTag className={iconClassName} name={name} />}
+      {IconTag && <IconTag size="1rem" className={iconClassName} name={name} />}
     </button>
   );
 }
@@ -287,7 +287,7 @@ function NotificationIcon({
   return (
     <IconForKind
       className={`${prefix}--${notificationType}-notification__icon`}
-      size={20}>
+      size={'1rem'}>
       <title>{iconDescription}</title>
     </IconForKind>
   );

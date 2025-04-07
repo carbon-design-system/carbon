@@ -411,7 +411,7 @@ const Pagination = React.forwardRef(function Pagination(
             aria-label={backwardText}
             onClick={decrementPage}
             ref={backBtnRef}>
-            <CaretLeft />
+            <CaretLeft size="1rem" />
           </IconButton>
           <IconButton
             align="top-end"
@@ -422,7 +422,7 @@ const Pagination = React.forwardRef(function Pagination(
             aria-label={forwardText}
             onClick={incrementPage}
             ref={forwardBtnRef}>
-            <CaretRight />
+            <CaretRight size="1rem" />
           </IconButton>
         </div>
       </div>

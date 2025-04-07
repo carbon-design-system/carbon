@@ -59,7 +59,9 @@ export const Default = (args) => {
 
   return (
     <Menu {...args} target={target} x={document?.dir === 'rtl' ? 250 : 0}>
-      <MenuItem label="Share with" renderIcon={FolderShared}>
+      <MenuItem
+        label="Share with"
+        renderIcon={() => <FolderShared size="1rem" />}>
         <MenuItemRadioGroup
           label="Share with"
           items={['None', 'Product team', 'Organization', 'Company']}
@@ -72,20 +74,20 @@ export const Default = (args) => {
         label="Cut"
         shortcut="⌘X"
         onClick={itemOnClick}
-        renderIcon={Cut}
+        renderIcon={() => <Cut size="1rem" />}
       />
       <MenuItem
         label="Copy"
         shortcut="⌘C"
         onClick={itemOnClick}
-        renderIcon={Copy}
+        renderIcon={() => <Copy size="1rem" />}
       />
       <MenuItem
         label="Paste"
         shortcut="⌘V"
         disabled
         onClick={itemOnClick}
-        renderIcon={Paste}
+        renderIcon={() => <Paste size="1rem" />}
       />
       <MenuItemDivider />
       <MenuItemGroup label="Font style">
@@ -94,13 +96,13 @@ export const Default = (args) => {
           shortcut="⌘B"
           defaultSelected
           onChange={selectableOnChange}
-          renderIcon={TextBold}
+          renderIcon={() => <TextBold size="1rem" />}
         />
         <MenuItemSelectable
           label="Italic"
           shortcut="⌘I"
           onChange={selectableOnChange}
-          renderIcon={TextItalic}
+          renderIcon={() => <TextItalic size="1rem" />}
         />
       </MenuItemGroup>
       <MenuItemDivider />
@@ -116,7 +118,7 @@ export const Default = (args) => {
         shortcut="⌫"
         kind="danger"
         onClick={itemOnClick}
-        renderIcon={TrashCan}
+        renderIcon={() => <TrashCan size="1rem" />}
       />
     </Menu>
   );

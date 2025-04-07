@@ -526,13 +526,13 @@ const aiLabel = (
       </div>
       <AILabelActions>
         <IconButton kind="ghost" label="View">
-          <View />
+          <View size="1rem" />
         </IconButton>
         <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
+          <FolderOpen size="1rem" />
         </IconButton>
         <IconButton kind="ghost" label="Folders">
-          <Folders />
+          <Folders size="1rem" />
         </IconButton>
         <Button>View details</Button>
       </AILabelActions>
@@ -615,7 +615,7 @@ export const withToggletipLabel = (args) => {
             <ToggletipLabel>Multiselect title</ToggletipLabel>
             <Toggletip>
               <ToggletipButton label="Show information">
-                <Information />
+                <Information size="1rem" />
               </ToggletipButton>
               <ToggletipContent>
                 <p>
