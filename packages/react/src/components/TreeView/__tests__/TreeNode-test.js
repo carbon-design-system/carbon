@@ -11,6 +11,7 @@ import TreeNode from '../TreeNode';
 import TreeView from '../TreeView';
 import { keys } from '../../../internal/keyboard';
 import { ArrowDown } from '@carbon/icons-react';
+const prefix = 'cds';
 
 describe('TreeNode Component', () => {
   it('should handle forwarded refs correctly when forwardRef is a function', () => {
@@ -78,7 +79,7 @@ describe('TreeNode Component', () => {
 
   it('calculates the correct offset for parent node with icon', () => {
     const depth = 1;
-    const { getByText } = render(
+    const { container, getByText } = render(
       <TreeNode
         id="parent"
         label="Parent Node"
@@ -96,7 +97,8 @@ describe('TreeNode Component', () => {
     expect(treeNode).toBeInTheDocument();
 
     const offset = depth + 1 + depth * 0.5;
-    expect(treeNode.parentElement).toHaveStyle({
+    const nodeLabel = container.querySelector(`.${prefix}--tree-node__label`);
+    expect(nodeLabel).toHaveStyle({
       marginInlineStart: `-${offset}rem`,
       paddingInlineStart: `${offset}rem`,
     });
@@ -104,7 +106,7 @@ describe('TreeNode Component', () => {
 
   it('calculates the correct offset for leaf node with icon', () => {
     const depth = 1;
-    const { getByText } = render(
+    const { container, getByText } = render(
       <TreeNode
         id="parent"
         label="Parent Node"
@@ -120,7 +122,11 @@ describe('TreeNode Component', () => {
     expect(treeNode).toBeInTheDocument();
 
     const offset = depth + 2 + depth * 0.5;
-    expect(treeNode).toHaveStyle({
+
+    const treeNodeLabel = container.querySelector(
+      `.${prefix}--tree-node__label`
+    );
+    expect(treeNodeLabel).toHaveStyle({
       marginInlineStart: `-${offset}rem`,
       paddingInlineStart: `${offset}rem`,
     });
