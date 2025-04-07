@@ -233,8 +233,6 @@ const tabs = [
     ),
   },
 ];
-
-// Function to create tab component
 const TabComponent = () => (
   <Tabs onTabCloseRequest={() => {}}>
     <TabList>

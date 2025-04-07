@@ -16,11 +16,10 @@ import {
 } from '../PageHeader';
 import * as hooks from '../../internal/useMatchMedia';
 import { breakpoints } from '@carbon/layout';
-
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 import { Bee } from '@carbon/icons-react';
 
 const prefix = 'cds';
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 
 describe('PageHeader', () => {
   describe('export configuration', () => {
@@ -228,13 +227,8 @@ describe('PageHeader', () => {
 
   describe('PageHeader.TabBar component api', () => {
     beforeEach(() => {
-      // Reset modules to ensure clean state
       jest.resetModules();
-
-      // Mock the useMatchMedia hook
-      jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
-
-      // Also mock window.matchMedia directly
+      // mock window.matchMedia directly
       Object.defineProperty(window, 'matchMedia', {
         writable: true,
         value: jest.fn().mockImplementation((query) => ({
@@ -249,12 +243,10 @@ describe('PageHeader', () => {
         })),
       });
 
-      // Mock console.error to prevent test failures from expected errors
       jest.spyOn(console, 'error').mockImplementation(() => {});
     });
 
     afterEach(() => {
-      // Clean up all mocks
       jest.restoreAllMocks();
     });
     it('should render', () => {
