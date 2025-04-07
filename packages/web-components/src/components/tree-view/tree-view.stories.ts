@@ -15,8 +15,8 @@ import Folder16 from '@carbon/icons/lib/folder/16.js';
 import '../button/index';
 
 const sizes = {
-  [`Small size (${TREE_SIZE.SMALL})`]: TREE_SIZE.SMALL,
   [`XS size (${TREE_SIZE.EXTRA_SMALL})`]: TREE_SIZE.EXTRA_SMALL,
+  [`Small size (${TREE_SIZE.SMALL})`]: TREE_SIZE.SMALL,
 };
 
 const defaultArgs = {
@@ -47,6 +47,68 @@ export const Default = {
   ],
   render: ({ hideLabel, label, size }) => html`
     <cds-tree-view ?hide-label=${hideLabel} label=${label} size="${size}">
+      <cds-tree-node label="Artificial intelligence"></cds-tree-node>
+      <cds-tree-node label="Blockchain"></cds-tree-node>
+      <cds-tree-node label="Business automation">
+        <cds-tree-node label="Business process automation"></cds-tree-node>
+        <cds-tree-node label="Business process mapping"></cds-tree-node>
+      </cds-tree-node>
+      <cds-tree-node label="Business operations"></cds-tree-node>
+      <cds-tree-node label="Cloud computing" is-expanded>
+        <cds-tree-node label="Containers"></cds-tree-node>
+        <cds-tree-node label="Databases"></cds-tree-node>
+        <cds-tree-node label="DevOps">
+          <cds-tree-node label="Solutions"></cds-tree-node>
+          <cds-tree-node label="Case studies">
+            <cds-tree-node label="Resources"></cds-tree-node>
+          </cds-tree-node>
+        </cds-tree-node>
+      </cds-tree-node>
+      <cds-tree-node label="Data & Analytics" is-expanded>
+        <cds-tree-node label="Big data"> </cds-tree-node>
+        <cds-tree-node label="Business Intelligence"> </cds-tree-node>
+      </cds-tree-node>
+      <cds-tree-node label="Models" is-expanded disabled>
+        <cds-tree-node label="Audit"> </cds-tree-node>
+        <cds-tree-node label="Monthly data"> </cds-tree-node>
+        <cds-tree-node label="Data warehouse" is-expanded>
+          <cds-tree-node label="Report samples"> </cds-tree-node>
+          <cds-tree-node label="Sales performance"> </cds-tree-node>
+        </cds-tree-node>
+      </cds-tree-node>
+    </cds-tree-view>
+  `,
+};
+
+export const withControlledExpansion = {
+  decorators: [
+    (story) => html` <div style="inline-size: 20rem">${story()}</div> `,
+  ],
+  render: () => html`
+    <script>
+      function expandAll() {
+        document
+          .querySelector('cds-tree-view[controlled]')
+          .querySelectorAll('cds-tree-node')
+          .forEach((node) => {
+            node.isExpanded = true;
+          });
+      }
+
+      function collapseAll() {
+        document
+          .querySelector('cds-tree-view[controlled]')
+          .querySelectorAll('cds-tree-node')
+          .forEach((node) => {
+            node.isExpanded = false;
+          });
+      }
+    </script>
+    <div style="margin-block-end: 1rem">
+      <cds-button onclick="expandAll()">Expand All</cds-button>
+      <cds-button onclick="collapseAll()">Collapse All</cds-button>
+    </div>
+    <cds-tree-view controlled label="Tree View">
       <cds-tree-node label="Artificial intelligence"></cds-tree-node>
       <cds-tree-node label="Blockchain"></cds-tree-node>
       <cds-tree-node label="Business automation">
@@ -156,72 +218,22 @@ export const withIcons = {
   `,
 };
 
-export const withControlledExpansion = {
-  decorators: [
-    (story) => html` <div style="inline-size: 20rem">${story()}</div> `,
-  ],
-  render: () => html`
-    <script>
-      const tree = document.querySelector('cds-tree-view[controlled]');
-      function expandAll() {
-        tree.querySelectorAll('cds-tree-node').forEach((node) => {
-          node.isExpanded = true;
-        });
-      }
-      function collapseAll() {
-        tree.querySelectorAll('cds-tree-node').forEach((node) => {
-          node.isExpanded = false;
-        });
-      }
-    </script>
-    <div style="margin-block-end: 1rem">
-      <cds-button onclick="expandAll()">Expand All</cds-button>
-      <cds-button onclick="collapseAll()">Collapse All</cds-button>
-    </div>
-    <cds-tree-view controlled label="Tree View">
-      <cds-tree-node label="Artificial intelligence"></cds-tree-node>
-      <cds-tree-node label="Blockchain"></cds-tree-node>
-      <cds-tree-node label="Business automation">
-        <cds-tree-node label="Business process automation"></cds-tree-node>
-        <cds-tree-node label="Business process mapping"></cds-tree-node>
-      </cds-tree-node>
-      <cds-tree-node label="Business operations"></cds-tree-node>
-      <cds-tree-node label="Cloud computing" is-expanded>
-        <cds-tree-node label="Containers"></cds-tree-node>
-        <cds-tree-node label="Databases"></cds-tree-node>
-        <cds-tree-node label="DevOps">
-          <cds-tree-node label="Solutions"></cds-tree-node>
-          <cds-tree-node label="Case studies">
-            <cds-tree-node label="Resources"></cds-tree-node>
-          </cds-tree-node>
-        </cds-tree-node>
-      </cds-tree-node>
-      <cds-tree-node label="Data & Analytics" is-expanded>
-        <cds-tree-node label="Big data"> </cds-tree-node>
-        <cds-tree-node label="Business Intelligence"> </cds-tree-node>
-      </cds-tree-node>
-      <cds-tree-node label="Models" is-expanded disabled>
-        <cds-tree-node label="Audit"> </cds-tree-node>
-        <cds-tree-node label="Monthly data"> </cds-tree-node>
-        <cds-tree-node label="Data warehouse" is-expanded>
-          <cds-tree-node label="Report samples"> </cds-tree-node>
-          <cds-tree-node label="Sales performance"> </cds-tree-node>
-        </cds-tree-node>
-      </cds-tree-node>
-    </cds-tree-view>
-  `,
-};
-
 export const withLinks = {
   render: () => html`
     <script>
-      document.addEventListener('cds-tree-node-selected', (e) => {
-        document.querySelector('h3').innerText =
-          'The current page is: ' + e.detail.value;
-      });
+      document
+        .querySelector('cds-tree-view[links]')
+        .addEventListener('cds-tree-node-selected', (e) => {
+          document.querySelector('h3').innerText =
+            'The current page is: ' + e.detail.value;
+        });
     </script>
     <div id="page-body" style="display: flex">
-      <cds-tree-view hide-label label="Tree view" style="inline-size: 20rem">
+      <cds-tree-view
+        links
+        hide-label
+        label="Tree view"
+        style="inline-size: 20rem">
         <cds-tree-node
           label="Artificial intelligence"
           href="/artificial-intelligence"
