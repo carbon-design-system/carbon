@@ -248,7 +248,7 @@
     margin-block-start: 0;
   }
 }
-// Ensure text truncation works properly
+// Ensure text truncation works properly - no wrapping
 .#{$prefix}--tree-node__label__text {
   display: block;
   overflow: hidden;
