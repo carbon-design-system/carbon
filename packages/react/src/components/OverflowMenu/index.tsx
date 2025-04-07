@@ -7,7 +7,7 @@
 
 import React, { forwardRef } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
-import { type OverflowMenuProps } from './OverflowMenu';
+import type { OverflowMenuProps } from './OverflowMenu';
 
 import { OverflowMenu as OverflowMenuV12 } from './next';
 
@@ -16,15 +16,20 @@ import { createClassWrapper } from '../../internal/createClassWrapper';
 
 const OverflowMenuV11 = createClassWrapper(OverflowMenuComponent);
 
-const OverflowMenu = forwardRef((props: OverflowMenuProps, ref) => {
-  const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
+const OverflowMenu = forwardRef<HTMLDivElement, OverflowMenuProps>(
+  (props, ref) => {
+    const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
 
-  return enableV12OverflowMenu ? (
-    <OverflowMenuV12 {...props} ref={ref} />
-  ) : (
-    <OverflowMenuV11 {...props} ref={ref} />
-  );
-});
+    return enableV12OverflowMenu ? (
+      <OverflowMenuV12 {...props} ref={ref} />
+    ) : (
+      <OverflowMenuV11
+        {...props}
+        ref={ref as React.LegacyRef<HTMLButtonElement>}
+      />
+    );
+  }
+);
 
 OverflowMenu.displayName = 'OverflowMenu';
 
