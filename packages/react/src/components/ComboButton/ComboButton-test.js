@@ -1,10 +1,11 @@
-/* eslint-disable testing-library/no-node-access */
 /**
  * Copyright IBM Corp. 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+/* eslint-disable testing-library/no-node-access */
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
