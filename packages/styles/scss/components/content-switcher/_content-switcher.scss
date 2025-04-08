@@ -387,7 +387,9 @@
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn {
     background-color: $content-switcher-background;
-    border: convert.to-rem(1px) solid $border-strong;
+    border: none; /* Reset all borders first */
+    border-block-start: convert.to-rem(1px) solid $border-strong; /* Top border only */
+    border-block-end: convert.to-rem(1px) solid $border-strong; /* Bottom border only */
     color: $text-secondary;
 
     .#{$prefix}--content-switcher__icon {
@@ -405,5 +407,80 @@
     .#{$prefix}--content-switcher-btn:last-child {
     border-end-end-radius: convert.to-rem(4px);
     border-start-end-radius: convert.to-rem(4px);
+  }
+  // dashes
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn::before {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    background-color: $border-strong;
+    block-size: convert.to-rem(16px);
+    content: '';
+    inline-size: convert.to-rem(1px);
+    inset-inline-start: 0;
+  }
+
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
+    + .#{$prefix}--content-switcher-btn::before {
+    background-color: transparent;
+  }
+
+  //hover state
+
+  // Basic hover state - low contrast
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:hover {
+    color: $text-primary;
+    cursor: pointer;
+  }
+
+  // Hover and active states - low contrast
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:hover,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:active {
+    z-index: 3;
+    background-color: $content-switcher-background-hover;
+    color: $text-primary;
+  }
+
+  // Hover state for the icon - low contrast
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:hover
+    .#{$prefix}--content-switcher__icon,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:focus
+    .#{$prefix}--content-switcher__icon {
+    fill: $icon-primary;
+  }
+
+  // Hover state for the divider dashes - low contrast
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:hover::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:hover
+    + .#{$prefix}--content-switcher-btn::before {
+    background-color: transparent;
+  }
+
+  // Preserve selected state styles even when hovering
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:hover,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:active {
+    background-color: $content-switcher-selected; // Keep using the selected background
+    color: $text-primary; // Keep using the selected text color
+    // Any other properties that need to be preserved
+  }
+
+  // Ensure icon color doesn't change on hover when selected
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:hover
+    .#{$prefix}--content-switcher__icon {
+    fill: $icon-primary; // Keep using the selected icon color
   }
 }
