@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -260,7 +260,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -340,7 +340,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -381,7 +381,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -419,21 +419,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">360x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">170x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">155x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -448,7 +448,7 @@
 &nbsp;
 import { TokenGroup } from './TokenGroup';
 &nbsp;
-const color = <span class="cstat-no" title="statement not covered" >TokenGroup.create({</span>
+const color = TokenGroup.create({
   name: 'Color',
   properties: [],
   tokens: [
@@ -528,7 +528,7 @@ const color = <span class="cstat-no" title="statement not covered" >TokenGroup.c
   ],
 });
 &nbsp;
-const type = <span class="cstat-no" title="statement not covered" >TokenGroup.create({</span>
+const type = TokenGroup.create({
   name: 'Type',
   properties: [],
   tokens: [
@@ -569,7 +569,7 @@ const type = <span class="cstat-no" title="statement not covered" >TokenGroup.cr
   ],
 });
 &nbsp;
-const layout = <span class="cstat-no" title="statement not covered" >TokenGroup.create({</span>
+const layout = TokenGroup.create({
   name: 'Layout',
   properties: [],
   tokens: [
@@ -607,21 +607,21 @@ const layout = <span class="cstat-no" title="statement not covered" >TokenGroup.
   ],
 });
 &nbsp;
-export const v10 = <span class="cstat-no" title="statement not covered" >[</span>
-  ...color.getTokens().map(<span class="fstat-no" title="function not covered" >(t</span>oken) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return {</span>
+export const v10 = [
+  ...color.getTokens().map((token) =&gt; {
+    return {
       name: token.name,
       type: 'color',
     };
   }),
-  ...type.getTokens().map(<span class="fstat-no" title="function not covered" >(t</span>oken) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return {</span>
+  ...type.getTokens().map((token) =&gt; {
+    return {
       name: token.name,
       type: 'type',
     };
   }),
-  ...layout.getTokens().map(<span class="fstat-no" title="function not covered" >(t</span>oken) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return {</span>
+  ...layout.getTokens().map((token) =&gt; {
+    return {
       name: token.name,
       type: 'layout',
     };
@@ -634,7 +634,7 @@ export const v10 = <span class="cstat-no" title="statement not covered" >[</span
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-08T18:27:08.516Z
+                at 2025-04-08T19:43:50.080Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>14/20</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>14/20</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -138,23 +138,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -167,7 +165,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -206,21 +206,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 &nbsp;
-export const fast01 = <span class="cstat-no" title="statement not covered" >'70ms';</span>
-export const fast02 = <span class="cstat-no" title="statement not covered" >'110ms';</span>
-export const moderate01 = <span class="cstat-no" title="statement not covered" >'150ms';</span>
-export const moderate02 = <span class="cstat-no" title="statement not covered" >'240ms';</span>
-export const slow01 = <span class="cstat-no" title="statement not covered" >'400ms';</span>
-export const slow02 = <span class="cstat-no" title="statement not covered" >'700ms';</span>
+export const fast01 = '70ms';
+export const fast02 = '110ms';
+export const moderate01 = '150ms';
+export const moderate02 = '240ms';
+export const slow01 = '400ms';
+export const slow02 = '700ms';
 // V11 Tokens
-export const durationFast01 = <span class="cstat-no" title="statement not covered" >fast01;</span>
-export const durationFast02 = <span class="cstat-no" title="statement not covered" >fast02;</span>
-export const durationModerate01 = <span class="cstat-no" title="statement not covered" >moderate01;</span>
-export const durationModerate02 = <span class="cstat-no" title="statement not covered" >moderate02;</span>
-export const durationSlow01 = <span class="cstat-no" title="statement not covered" >slow01;</span>
-export const durationSlow02 = <span class="cstat-no" title="statement not covered" >slow02;</span>
+export const durationFast01 = fast01;
+export const durationFast02 = fast02;
+export const durationModerate01 = moderate01;
+export const durationModerate02 = moderate02;
+export const durationSlow01 = slow01;
+export const durationSlow02 = slow02;
 &nbsp;
-export const unstable_tokens = <span class="cstat-no" title="statement not covered" >[</span>
+export const unstable_tokens = [
   'fast01',
   'fast02',
   'moderate01',
@@ -235,7 +235,7 @@ export const unstable_tokens = <span class="cstat-no" title="statement not cover
   'durationSlow02',
 ];
 &nbsp;
-export const easings = <span class="cstat-no" title="statement not covered" >{</span>
+export const easings = {
   standard: {
     productive: 'cubic-bezier(0.2, 0, 0.38, 0.9)',
     expressive: 'cubic-bezier(0.4, 0.14, 0.3, 1)',
@@ -274,7 +274,7 @@ export function <span class="fstat-no" title="function not covered" >motion(</sp
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-08T18:27:08.516Z
+                at 2025-04-08T19:43:50.080Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
