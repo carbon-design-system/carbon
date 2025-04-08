@@ -2915,6 +2915,7 @@ Map {
     },
   },
   "DismissibleTag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -2984,6 +2985,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "Dropdown" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -3307,6 +3309,35 @@ Map {
       },
     },
     "render": [Function],
+  },
+  "FeatureFlags" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "enableDialogElement": Object {
+        "type": "bool",
+      },
+      "enableExperimentalFocusWrapWithoutSentinels": Object {
+        "type": "bool",
+      },
+      "enableTreeviewControllable": Object {
+        "type": "bool",
+      },
+      "enableV12DynamicFloatingStyles": Object {
+        "type": "bool",
+      },
+      "enableV12Overflowmenu": Object {
+        "type": "bool",
+      },
+      "enableV12TileDefaultIcons": Object {
+        "type": "bool",
+      },
+      "enableV12TileRadioIcons": Object {
+        "type": "bool",
+      },
+      "flags": [Function],
+    },
   },
   "FileUploader" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -6816,6 +6847,7 @@ Map {
     },
   },
   "SelectableTag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -6862,6 +6894,7 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "SelectableTile" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -10862,6 +10895,132 @@ Map {
     },
     "render": [Function],
   },
+  "unstable__PageHeader" => Object {
+    "BreadcrumbBar": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Content": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "contextualActions": Object {
+          "type": "node",
+        },
+        "pageActions": Object {
+          "type": "node",
+        },
+        "renderIcon": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "func",
+              },
+              Object {
+                "type": "object",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "subtitle": Object {
+          "type": "string",
+        },
+        "title": Object {
+          "isRequired": true,
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "HeroImage": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "PageHeader": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "PageHeaderBreadcrumbBar": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "PageHeaderContent": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "contextualActions": Object {
+          "type": "node",
+        },
+        "pageActions": Object {
+          "type": "node",
+        },
+        "renderIcon": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "func",
+              },
+              Object {
+                "type": "object",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "subtitle": Object {
+          "type": "string",
+        },
+        "title": Object {
+          "isRequired": true,
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "PageHeaderHeroImage": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "PageHeaderTabBar": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Root": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "TabBar": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+  },
   "unstable__ShapeIndicator" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -10993,6 +11152,8 @@ Map {
   "unstable_useFeatureFlags" => Object {},
   "unstable_useLayoutDirection" => Object {},
   "useContextMenu" => Object {},
+  "useFeatureFlag" => Object {},
+  "useFeatureFlags" => Object {},
   "useIdPrefix" => Object {},
   "useLayer" => Object {},
   "usePrefersDarkScheme" => Object {},

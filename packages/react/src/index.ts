@@ -33,6 +33,14 @@ export * from './components/DatePickerInput';
 export * from './components/Dropdown';
 export * from './components/ErrorBoundary';
 export * from './components/ExpandableSearch';
+export {
+  FeatureFlags,
+  useFeatureFlag,
+  useFeatureFlags,
+  FeatureFlags as unstable_FeatureFlags, // this export can be removed in v12
+  useFeatureFlag as unstable_useFeatureFlag, // this export can be removed in v12
+  useFeatureFlags as unstable_useFeatureFlags, // this export can be removed in v12
+} from './components/FeatureFlags';
 export * from './components/FileUploader';
 export * from './components/FilterableMultiSelect';
 export * from './components/FluidForm';
@@ -57,6 +65,7 @@ export * from './components/NumberInput';
 export * from './components/OrderedList';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
+export * as unstable__PageHeader from './components/PageHeader';
 export * from './components/Pagination';
 export * from './components/Pagination/Pagination.Skeleton';
 export * from './components/PaginationNav';
@@ -97,13 +106,7 @@ export * from './components/Toggletip';
 export * from './components/TreeView';
 export * from './components/UIShell';
 export * from './components/UnorderedList';
-
 // Experimental
-export {
-  FeatureFlags as unstable_FeatureFlags,
-  useFeatureFlag as unstable_useFeatureFlag,
-  useFeatureFlags as unstable_useFeatureFlags,
-} from './components/FeatureFlags';
 export {
   FluidComboBox as unstable__FluidComboBox,
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
@@ -446,6 +449,15 @@ export type { OrderedListProps } from './components/OrderedList/OrderedList';
 //overflow menu
 export type { OverflowMenuProps } from './components/OverflowMenu/OverflowMenu';
 export type { OverflowMenuItemProps } from './components/OverflowMenuItem/OverflowMenuItem';
+
+//page header
+export type {
+  PageHeaderProps,
+  PageHeaderBreadcrumbBarProps,
+  PageHeaderContentProps,
+  PageHeaderHeroImageProps,
+  PageHeaderTabBarProps,
+} from './components/PageHeader';
 
 //pagination
 export type { PaginationProps } from './components/Pagination/Pagination';

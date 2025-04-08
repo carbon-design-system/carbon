@@ -133,7 +133,7 @@ export const wrapFocusWithoutSentinels = ({
 
   if (
     ['blur', 'focusout', 'focusin', 'focus'].includes(event.type) &&
-    __DEV__
+    process.env.NODE_ENV !== 'production'
   ) {
     // TODO: Why do the hooks rules need to be ignored here? Is it not possible
     // to put the condition in the `useEffect` instead of outside of it?

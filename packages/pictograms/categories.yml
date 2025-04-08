@@ -91,6 +91,8 @@ categories:
   - name: Cities
     members:
       - amsterdam--canal
+      - ahmedabad--jama-masjid
+      - ahmedabad--sabarmati-ashram
       - amsterdam--farm
       - amsterdam--windmill
       - argentina--obelisk
@@ -129,6 +131,7 @@ categories:
       - ecuador--quito
       - ehningen--tech-campus-01
       - ehningen--tech-campus-02
+      - geodesic-montreal-biosphere
       - hamburg--philharmone
       - hong-kong--cityscape
       - hong-kong
@@ -142,11 +145,13 @@ categories:
       - madrid--cathedral
       - madrid--skyscrapers
       - madrid--statue
+      - mcgill-university--morrice-hall
       - melbourne
       - mexico-city--angel-of-independence
       - mexico-city--museo-soumaya
       - milan--duomo-di-milano
       - milan--skyscrapers
+      - montreal--olympic-stadium
       - moscow
       - mumbai
       - munich
@@ -605,9 +610,12 @@ categories:
       - ibm--z-and-linuxone-single-frame
       - ibm--z-and-linuxone-multi-frame
       - ibm--z16
-      - ibm--z16--single-frame
-      - ibm--z16--multi-frame
       - ibm--z16--plus-cloud
+      - ibm--z16--multi-frame
+      - ibm--z16--single-frame
+      - ibm--z17
+      - ibm--z17--multi-frame
+      - ibm--z17--single-frame
       - infrastructure-security
       - it--infrastructure-software
       - mainframe-qualities-of-service
@@ -623,10 +631,12 @@ categories:
       - storage--product
       - storage--systems
       - tape--storage
+      - tape--storage--02
       - virtualization
       - zero-trust
   - name: Design and development
     members:
+      - agile--coaching
       - app--developer
       - application
       - art--tools--01
@@ -643,16 +653,19 @@ categories:
       - idea
       - ideate
       - inner-source
+      - landing-page
       - motion
       - organization
       - overview
       - path
       - pattern
+      - social--tile
       - universal-experiences
       - user--experience-design
       - user--insights
       - user--interface
       - visual--design
+      - web--banners
       - web--developer
       - windows
   - name: Device interaction
@@ -1034,6 +1047,7 @@ categories:
       - renew--team
       - resilience--02
       - sap--successfactors
+      - sponsor-user-program
       - team--alignment
       - teammates
       - transparency-and-trust--01
@@ -1125,6 +1139,9 @@ categories:
       - govern--users--and--identities
       - high--risk--users
       - identity--trust--assessment
+      - key--lifecycle
+      - keystores
+      - keystores--external
       - lock--01
       - lock--02
       - locked--network--01
@@ -1149,6 +1166,7 @@ categories:
       - unify--endpoint--management
       - unlock--01
       - unlock--02
+      - vault
   - name: Status
     members:
       - question
@@ -1211,6 +1229,18 @@ categories:
       - cics--vsam-recovery-for-z-os
       - cics--vsam-transparency-for-z-os
       - developer-z-os
+      - ibm--elm
+      - ibm--elm-dcc
+      - ibm--elm-gcm
+      - ibm--elm-insights
+      - ibm--elm-method-composer
+      - ibm--elm-publishing
+      - ibm--elm-reporting
+      - ibm--engineering-requirement-doors
+      - ibm--engineering-systems-design-rhapsody--model-manager
+      - ibm--engineering-systems-design-rhapsody
+      - ibm--engineering-test-management
+      - ibm--engineering-workflow-management
       - ibm--z-open-automation-utilities
       - systems-devops--analyze
       - systems-devops--build
@@ -1222,6 +1252,7 @@ categories:
       - systems-devops--provision
       - systems-devops--release
       - systems-devops--test
+      - transaction-data
   - name: Third-party logos
     members:
       - slack
