@@ -26,7 +26,7 @@
     "sync": "carbon-cli sync",
     "telemetry:config": "lerna run telemetry:config",
     "test": "cross-env BABEL_ENV=test jest --coverage",
-    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
+    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js --coverage",
     "postinstall": "husky"
   },
   "resolutions": {

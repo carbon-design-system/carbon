@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -112,36 +112,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">82x</span>
-<span class="cline-any cline-yes">77x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright IBM Corp. 2016, 2023
@@ -152,24 +152,24 @@
 &nbsp;
 import { warning } from '../internal/warning';
 &nbsp;
-const didWarnAboutDeprecation = {};
+const didWarnAboutDeprecation = <span class="cstat-no" title="statement not covered" >{};</span>
 &nbsp;
-export default function deprecate(propType, message) {
-  function checker(props, propName, componentName, ...rest) {
-    if (props[propName] === undefined) {
-      return;
+export default function <span class="fstat-no" title="function not covered" >deprecate(</span>propType, message) {
+  function <span class="fstat-no" title="function not covered" >checker(</span>props, propName, componentName, ...rest) {
+<span class="cstat-no" title="statement not covered" >    if (props[propName] === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
     }
 &nbsp;
-    if (
+<span class="cstat-no" title="statement not covered" >    if (</span>
       !didWarnAboutDeprecation[componentName] ||
       !didWarnAboutDeprecation[componentName][propName]
     ) {
-      didWarnAboutDeprecation[componentName] = {
+<span class="cstat-no" title="statement not covered" >      didWarnAboutDeprecation[componentName] = {</span>
         ...didWarnAboutDeprecation[componentName],
         [propName]: true,
       };
 &nbsp;
-      warning(
+<span class="cstat-no" title="statement not covered" >      warning(</span>
         false,
         message ||
           `The prop \`${propName}\` has been deprecated for the ` +
@@ -178,10 +178,10 @@ export default function deprecate(propType, message) {
       );
     }
 &nbsp;
-    return propType(props, propName, componentName, ...rest);
+<span class="cstat-no" title="statement not covered" >    return propType(props, propName, componentName, ...rest);</span>
   }
 &nbsp;
-  return checker;
+<span class="cstat-no" title="statement not covered" >  return checker;</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -190,7 +190,7 @@ export default function deprecate(propType, message) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-07T21:03:23.179Z
+                at 2025-04-08T18:06:35.883Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -137,18 +137,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -159,21 +154,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -194,13 +194,13 @@ import normalize from '../tools/normalize';
  * Currently, it's being used as a way to normalize the incoming data that we
  * are receiving for rows
  */
-const getDerivedStateFromProps = (props, prevState) =&gt; {
-  const { rowIds, rowsById, cellsById } = normalize(
+const getDerivedStateFromProps = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(p</span>rops, prevState) =&gt; {</span>
+  const { rowIds, rowsById, cellsById } = <span class="cstat-no" title="statement not covered" >normalize(</span>
     props.rows,
     props.headers,
     prevState
   );
-  const state = {
+  const state = <span class="cstat-no" title="statement not covered" >{</span>
     rowIds,
     rowsById,
     cellsById,
@@ -216,21 +216,21 @@ const getDerivedStateFromProps = (props, prevState) =&gt; {
     shouldShowBatchActions: prevState.shouldShowBatchActions || false,
   };
 &nbsp;
-  if (prevState.sortDirection &amp;&amp; prevState.sortHeaderKey) {
-    const { rowIds } = getSortedState(
+<span class="cstat-no" title="statement not covered" >  if (prevState.sortDirection &amp;&amp; prevState.sortHeaderKey) {</span>
+    const { rowIds } = <span class="cstat-no" title="statement not covered" >getSortedState(</span>
       props,
       state,
       prevState.sortHeaderKey,
       prevState.sortDirection
     );
-    state.rowIds = rowIds;
+<span class="cstat-no" title="statement not covered" >    state.rowIds = rowIds;</span>
   }
 &nbsp;
-  state.isExpandedAll = state.rowIds.every((id) =&gt; {
-    return state.rowsById[id].isExpanded === true;
+<span class="cstat-no" title="statement not covered" >  state.isExpandedAll = state.rowIds.every(<span class="fstat-no" title="function not covered" >(i</span>d) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return state.rowsById[id].isExpanded === true;</span>
   });
 &nbsp;
-  return state;
+<span class="cstat-no" title="statement not covered" >  return state;</span>
 };
 &nbsp;
 export default getDerivedStateFromProps;
@@ -241,7 +241,7 @@ export default getDerivedStateFromProps;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-07T21:03:23.179Z
+                at 2025-04-08T18:06:35.883Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

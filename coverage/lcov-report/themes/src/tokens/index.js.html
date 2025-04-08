@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -151,18 +151,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">695x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">70x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -170,8 +162,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">370x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -180,7 +180,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">170x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -188,14 +188,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">120x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -219,27 +219,27 @@ import { v10 } from './v10';
 &nbsp;
 export { Token, TokenFormat, TokenGroup, TokenSet, group, set };
 &nbsp;
-const v11 = [
+const v11 = <span class="cstat-no" title="statement not covered" >[</span>
   // Base color tokens
-  ...group.getTokens().map((token) =&gt; {
-    return {
+  ...group.getTokens().map(<span class="fstat-no" title="function not covered" >(t</span>oken) =&gt; {
+<span class="cstat-no" title="statement not covered" >    return {</span>
       name: token.name,
       type: 'color',
     };
   }),
 &nbsp;
   // Contextual tokens
-  ...contextual.getTokens().map((token) =&gt; {
-    return {
+  ...contextual.getTokens().map(<span class="fstat-no" title="function not covered" >(t</span>oken) =&gt; {
+<span class="cstat-no" title="statement not covered" >    return {</span>
       name: token.name,
       type: 'color',
     };
   }),
 &nbsp;
   // Component tokens
-  ...Object.values(components).flatMap((group) =&gt; {
-    return group.getTokens().map((token) =&gt; {
-      return {
+  ...Object.values(components).flatMap(<span class="fstat-no" title="function not covered" >(g</span>roup) =&gt; {
+<span class="cstat-no" title="statement not covered" >    return group.getTokens().map(<span class="fstat-no" title="function not covered" >(t</span>oken) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      return {</span>
         name: token.name,
         type: 'color',
       };
@@ -247,23 +247,23 @@ const v11 = [
   }),
 &nbsp;
   // Typography
-  ...type.getTokens().map((token) =&gt; {
-    return {
+  ...type.getTokens().map(<span class="fstat-no" title="function not covered" >(t</span>oken) =&gt; {
+<span class="cstat-no" title="statement not covered" >    return {</span>
       name: token.name,
       type: 'type',
     };
   }),
 &nbsp;
   // Layout (spacing)
-  ...layout.getTokens().map((token) =&gt; {
-    return {
+  ...layout.getTokens().map(<span class="fstat-no" title="function not covered" >(t</span>oken) =&gt; {
+<span class="cstat-no" title="statement not covered" >    return {</span>
       name: token.name,
       type: 'layout',
     };
   }),
 ];
 &nbsp;
-export const unstable_metadata = {
+export const unstable_metadata = <span class="cstat-no" title="statement not covered" >{</span>
   v11,
   v10,
 };
@@ -274,7 +274,7 @@ export const unstable_metadata = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-07T21:03:23.179Z
+                at 2025-04-08T18:06:35.883Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

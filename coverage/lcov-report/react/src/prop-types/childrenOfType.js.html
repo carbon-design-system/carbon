@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/10</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/10</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -127,22 +127,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -151,7 +151,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -173,22 +173,22 @@ import getDisplayName from './tools/getDisplayName';
  *
  * This prop validator also supports chaining through `isRequired`
  */
-const childrenOfType = (expectedChildType) =&gt; {
-  const expectedDisplayName = getDisplayName(
+const childrenOfType = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>xpectedChildType) =&gt; {</span>
+  const expectedDisplayName = <span class="cstat-no" title="statement not covered" >getDisplayName(</span>
     // Support both React elements and components by using `type` if it exists
     expectedChildType.type || expectedChildType
   );
-  const validate = (props, propName, componentName) =&gt; {
-    Children.forEach(props[propName], (child) =&gt; {
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (!child) {
+  const validate = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(p</span>rops, propName, componentName) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    Children.forEach(props[propName], <span class="fstat-no" title="function not covered" >(c</span>hild) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (!child) {</span>
 <span class="cstat-no" title="statement not covered" >        return;</span>
       }
-      const childDisplayName = getDisplayName(child.type);
-      if (
+      const childDisplayName = <span class="cstat-no" title="statement not covered" >getDisplayName(child.type);</span>
+<span class="cstat-no" title="statement not covered" >      if (</span>
         child.type !== expectedChildType.type &amp;&amp;
         child.type !== expectedChildType
       ) {
-        throw new Error(
+<span class="cstat-no" title="statement not covered" >        throw new Error(</span>
           `Invalid prop \`children\` of type \`${childDisplayName}\` ` +
             `supplied to \`${componentName}\`, expected each child to be a ` +
             `\`${expectedDisplayName}\` component.`
@@ -197,7 +197,7 @@ const childrenOfType = (expectedChildType) =&gt; {
     });
   };
 &nbsp;
-  return createChainableTypeChecker(validate);
+<span class="cstat-no" title="statement not covered" >  return createChainableTypeChecker(validate);</span>
 };
 &nbsp;
 export default childrenOfType;
@@ -208,7 +208,7 @@ export default childrenOfType;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-07T21:03:23.179Z
+                at 2025-04-08T18:06:35.883Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
