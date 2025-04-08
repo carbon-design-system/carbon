@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>14/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>4/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">86.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>13/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -107,33 +107,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright IBM Corp. 2018, 2023
@@ -142,34 +142,34 @@
  * LICENSE file in the root directory of this source tree.
  */
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >print(</span>block) {
-<span class="cstat-no" title="statement not covered" >  return Object.keys(block).reduce(<span class="fstat-no" title="function not covered" >(a</span>cc, key, index) =&gt; {</span>
+export function print(block) {
+  return Object.keys(block).reduce((acc, key, index) =&gt; {
     // Short-circuit on the foreign key 'breakpoints'. This is used in our
     // tokens for fluid type and should not be printed. In the future, we should
     // tie this to media query outputs.
-<span class="cstat-no" title="statement not covered" >    if (key === 'breakpoints') {</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (key === 'breakpoints') {
 <span class="cstat-no" title="statement not covered" >      return acc;</span>
     }
 &nbsp;
-    const property = <span class="cstat-no" title="statement not covered" >`${paramCase(key)}: ${block[key]};`;</span>
-<span class="cstat-no" title="statement not covered" >    if (index === 0) {</span>
-<span class="cstat-no" title="statement not covered" >      return property;</span>
+    const property = `${paramCase(key)}: ${block[key]};`;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (index === 0) {
+      return property;
     }
 <span class="cstat-no" title="statement not covered" >    return acc + '\n' + property;</span>
   }, '');
 }
 &nbsp;
-function <span class="fstat-no" title="function not covered" >paramCase(</span>string) {
-  let result = <span class="cstat-no" title="statement not covered" >'';</span>
-<span class="cstat-no" title="statement not covered" >  for (let i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; string.length; i++) {</span>
-    const character = <span class="cstat-no" title="statement not covered" >string[i];</span>
-<span class="cstat-no" title="statement not covered" >    if (character === character.toUpperCase()) {</span>
-<span class="cstat-no" title="statement not covered" >      result += '-' + character.toLowerCase();</span>
-<span class="cstat-no" title="statement not covered" >      continue;</span>
+function paramCase(string) {
+  let result = '';
+  for (let i = 0; i &lt; string.length; i++) {
+    const character = string[i];
+    if (character === character.toUpperCase()) {
+      result += '-' + character.toLowerCase();
+      continue;
     }
-<span class="cstat-no" title="statement not covered" >    result += character;</span>
+    result += character;
   }
-<span class="cstat-no" title="statement not covered" >  return result;</span>
+  return result;
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -178,7 +178,7 @@ function <span class="fstat-no" title="function not covered" >paramCase(</span>s
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-08T19:48:17.643Z
+                at 2025-04-08T19:52:45.086Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
