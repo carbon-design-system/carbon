@@ -15,7 +15,6 @@ import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
 import { DefinitionTooltip } from '../Tooltip';
 import { isEllipsisActive } from './isEllipsisActive';
-import { useMergeRefs } from '@floating-ui/react';
 import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
@@ -23,6 +22,7 @@ import {
 import { SelectableTagBaseProps, SelectableTagProps } from './SelectableTag';
 import { OperationalTagBaseProps } from './OperationalTag';
 import { DismissibleTagBaseProps } from './DismissibleTag';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
 export const TYPES = {
   red: 'Red',
@@ -142,7 +142,7 @@ const Tag: TagComponent = React.forwardRef(
   ) => {
     const prefix = usePrefix();
     const tagRef = useRef<HTMLElement>();
-    const ref = useMergeRefs([forwardRef, tagRef]);
+    const ref = useMergedRefs([forwardRef, tagRef]);
     const tagId = id || `tag-${useId()}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 

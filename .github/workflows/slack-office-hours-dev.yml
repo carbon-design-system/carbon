@@ -190,8 +190,8 @@ jobs:
               ]
             }
 
-  post-reminder-to-carbon-ibmproducts-pal-dev:
-    name: Post dev reminder to ibmproducts-pal-dev
+  post-reminder-to-carbon-for-ibmproducts:
+    name: Post dev reminder to carbon-for-ibmproducts
     runs-on: ubuntu-latest
     steps:
       - name: Send custom JSON data to Slack workflow
@@ -204,7 +204,7 @@ jobs:
             {
               "username": "Carbon Design System",
               "icon_url": "https://user-images.githubusercontent.com/3360588/192045905-5d9705af-92e2-4432-805e-15db98571e8b.png",
-              "channel": "#ibmproducts-pal-dev",
+              "channel": "#carbon-for-ibmproducts",
               "text": "Join us for Carbon Developer Office Hours!",
               "blocks": [
                 {

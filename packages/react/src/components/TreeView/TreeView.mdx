@@ -62,7 +62,7 @@ expanded or collapsed.
   ]}
 />
 
-## With Custom Icons
+## With Icons
 
 The `renderIcon` prop can be used to customize the icons of each node in the
 TreeView.
@@ -81,20 +81,12 @@ TreeView.
   ]}
 />
 
-## Temp
+## With Links
+
+The `href` prop can be used with click handling on each node of the TreeView.
 
 <Canvas
-  of={TreeViewStories.Temp}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(
-          TreeViewStories.Temp,
-          "import { Document, Folder } from '@carbon/icons-react';"
-        ),
-    },
-  ]}
+  of={TreeViewStories.WithLinks}
 />
 
 ## Component API

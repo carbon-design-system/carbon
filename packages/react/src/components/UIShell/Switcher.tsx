@@ -1,11 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-/**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -49,10 +43,7 @@ type SwitcherProps = SwitcherWithAriaLabel | SwitcherWithAriaLabelledBy;
 const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
   function Switcher(props, forwardRef) {
     const switcherRef = useRef<HTMLUListElement>(null);
-    const ref = useMergedRefs<HTMLUListElement | null>([
-      switcherRef,
-      forwardRef,
-    ]);
+    const ref = useMergedRefs([switcherRef, forwardRef]);
 
     const prefix = usePrefix();
     const {
@@ -143,10 +134,7 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
     );
 
     return (
-      <ul
-        ref={ref as React.RefObject<HTMLUListElement>}
-        className={className}
-        {...accessibilityLabel}>
+      <ul ref={ref} className={className} {...accessibilityLabel}>
         {childrenWithProps}
       </ul>
     );
