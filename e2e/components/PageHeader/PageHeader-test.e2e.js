@@ -11,24 +11,27 @@ const { themes } = require('../../test-utils/env');
 const { snapshot } = require('../../test-utils/snapshot');
 const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
+// TODO update once stories are visible
 test.describe('PageHeader', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
-      test('page header @vrt', async ({ page }) => {
+      test.skip('page header @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'PageHeader',
           id: 'patterns-unstable-pageheader--content',
           theme,
         });
       });
-      test('page header with contextual actions @vrt', async ({ page }) => {
+      test.skip('page header with contextual actions @vrt', async ({
+        page,
+      }) => {
         await snapshotStory(page, {
           component: 'PageHeader',
           id: 'patterns-unstable-pageheader--content-with-contextual-actions',
           theme,
         });
       });
-      test('page header with contextual actions and page actions @vrt', async ({
+      test.skip('page header with contextual actions and page actions @vrt', async ({
         page,
       }) => {
         await snapshotStory(page, {
@@ -37,14 +40,14 @@ test.describe('PageHeader', () => {
           theme,
         });
       });
-      test('page header with hero image @vrt', async ({ page }) => {
+      test.skip('page header with hero image @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'PageHeader',
           id: 'patterns-unstable-pageheader--content-with-hero-image',
           theme,
         });
       });
-      test('page header with icon @vrt', async ({ page }) => {
+      test.skip('page header with icon @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'PageHeader',
           id: 'patterns-unstable-pageheader--content-with-icon',
