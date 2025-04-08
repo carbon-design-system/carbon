@@ -1,7 +1,7 @@
 {
   "name": "examples-nextjs",
   "private": true,
-  "version": "0.79.0",
+  "version": "0.80.0-rc.0",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -9,7 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@carbon/react": "^1.79.0",
+    "@carbon/react": "^1.80.0-rc.0",
     "next": "14.2.25",
     "react": "18.3.1",
     "react-dom": "18.3.1"
