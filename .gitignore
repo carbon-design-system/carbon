@@ -41,7 +41,6 @@ pids
 
 # Coverage directory used by tools like istanbul, also includes default junit
 # output file
-coverage
 /junit.xml
 
 # Dependency directory
