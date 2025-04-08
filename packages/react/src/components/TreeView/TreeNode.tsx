@@ -12,7 +12,6 @@ import React, {
   useEffect,
   useRef,
   useState,
-  MutableRefObject,
   useCallback,
   type ComponentType,
   type FunctionComponent,
