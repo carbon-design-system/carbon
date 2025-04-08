@@ -21,7 +21,7 @@ jobs:
 
       - name: npm install, make test-coverage
         run: |
-          yarn install --immutable
+          yarn install
           yarn test
 
       - name: Coveralls
