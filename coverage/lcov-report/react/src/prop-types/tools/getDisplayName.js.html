@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/10</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -108,34 +108,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">75x</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">67x</span>
-<span class="cline-any cline-yes">58x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -146,34 +146,34 @@
  * LICENSE file in the root directory of this source tree.
  */
 &nbsp;
-const cachedDisplayNames = new WeakMap();
+const cachedDisplayNames = <span class="cstat-no" title="statement not covered" >new WeakMap();</span>
 &nbsp;
 /**
  * `getDisplayName` is a utility function for getting a name from a given
  * component type. It supports names from React elements, Stateless Functional
  * Components, and Class-based Components
  */
-const getDisplayName = (type) =&gt; {
-  if (typeof type === 'string') {
-    return type;
+const getDisplayName = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(t</span>ype) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  if (typeof type === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >    return type;</span>
   }
 &nbsp;
-  if (cachedDisplayNames.has(type)) {
-    return cachedDisplayNames.get(type);
+<span class="cstat-no" title="statement not covered" >  if (cachedDisplayNames.has(type)) {</span>
+<span class="cstat-no" title="statement not covered" >    return cachedDisplayNames.get(type);</span>
   }
 &nbsp;
   let displayName;
 &nbsp;
-  if (typeof type.displayName === 'string') {
-    displayName = type.displayName;
+<span class="cstat-no" title="statement not covered" >  if (typeof type.displayName === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >    displayName = type.displayName;</span>
   }
-  if (!displayName) {
-    displayName = type.name || <span class="branch-1 cbranch-no" title="branch not covered" >'Unknown';</span>
+<span class="cstat-no" title="statement not covered" >  if (!displayName) {</span>
+<span class="cstat-no" title="statement not covered" >    displayName = type.name || 'Unknown';</span>
   }
 &nbsp;
-  cachedDisplayNames.set(type, displayName);
+<span class="cstat-no" title="statement not covered" >  cachedDisplayNames.set(type, displayName);</span>
 &nbsp;
-  return displayName;
+<span class="cstat-no" title="statement not covered" >  return displayName;</span>
 };
 &nbsp;
 export default getDisplayName;
@@ -184,7 +184,7 @@ export default getDisplayName;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-08T19:43:50.080Z
+                at 2025-04-08T19:48:17.643Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

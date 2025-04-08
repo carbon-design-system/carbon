@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.45% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/22</span>
+                <span class='fraction'>0/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">35% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/20</span>
+                <span class='fraction'>0/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.45% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/22</span>
+                <span class='fraction'>0/22</span>
             </div>
         
             
@@ -223,14 +223,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -274,8 +274,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -285,7 +285,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -294,8 +294,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Copyright IBM Corp. 2016, 2023
@@ -340,14 +340,14 @@ import { useIdPrefix } from './useIdPrefix';
 // compilation warnings/errors.
 // https://github.com/webpack/webpack/issues/14814
 // https://github.com/mui/material-ui/issues/41190
-const _React = { ...React };
+const _React = <span class="cstat-no" title="statement not covered" >{ ...React };</span>
 &nbsp;
-const instanceId = setupGetInstanceId();
-const useIsomorphicLayoutEffect = canUseDOM ? useLayoutEffect : useEffect;
+const instanceId = <span class="cstat-no" title="statement not covered" >setupGetInstanceId();</span>
+const useIsomorphicLayoutEffect = <span class="cstat-no" title="statement not covered" >canUseDOM ? useLayoutEffect : useEffect;</span>
 &nbsp;
-let serverHandoffCompleted = false;
+let serverHandoffCompleted = <span class="cstat-no" title="statement not covered" >false;</span>
 &nbsp;
-const defaultId = 'id';
+const defaultId = <span class="cstat-no" title="statement not covered" >'id';</span>
 &nbsp;
 /**
  * Generate a unique ID for React &lt;=17 with an optional prefix prepended to it.
@@ -390,10 +390,10 @@ export function <span class="fstat-no" title="function not covered" >useCompatib
  * @param {string} [prefix]
  * @returns {string}
  */
-function useReactId(prefix = defaultId) {
-  const contextPrefix = useIdPrefix();
-  return `${
-    contextPrefix ? <span class="branch-0 cbranch-no" title="branch not covered" >`${contextPrefix}-` </span>: ``
+function <span class="fstat-no" title="function not covered" >useReactId(</span>prefix = <span class="branch-0 cbranch-no" title="branch not covered" >defaultId)</span> {
+  const contextPrefix = <span class="cstat-no" title="statement not covered" >useIdPrefix();</span>
+<span class="cstat-no" title="statement not covered" >  return `${</span>
+    contextPrefix ? `${contextPrefix}-` : ``
   }${prefix}-${_React.useId()}`;
 }
 &nbsp;
@@ -402,7 +402,7 @@ function useReactId(prefix = defaultId) {
  * slightly less performant (requiring a double render) implementation for
  * earlier React versions.
  */
-export const useId = _React.useId ? useReactId : <span class="branch-1 cbranch-no" title="branch not covered" >useCompatibleId;</span>
+export const useId = <span class="cstat-no" title="statement not covered" >_React.useId ? useReactId : useCompatibleId;</span>
 &nbsp;
 /**
  * Generate a unique id if a given `id` is not provided
@@ -410,9 +410,9 @@ export const useId = _React.useId ? useReactId : <span class="branch-1 cbranch-n
  * @param {string|undefined} id
  * @returns {string}
  */
-export function useFallbackId(id) {
-  const fallback = useId();
-  return id ?? fallback;
+export function <span class="fstat-no" title="function not covered" >useFallbackId(</span>id) {
+  const fallback = <span class="cstat-no" title="statement not covered" >useId();</span>
+<span class="cstat-no" title="statement not covered" >  return id ?? fallback;</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -421,7 +421,7 @@ export function useFallbackId(id) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-08T19:43:50.080Z
+                at 2025-04-08T19:48:17.643Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
