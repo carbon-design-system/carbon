@@ -372,10 +372,14 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           getDecimalPlaces(step)
         );
         const floatValue = parseFloat(rawValue.toFixed(precision));
-        const newValue =
-          typeof min !== 'undefined' && typeof max !== 'undefined'
-            ? Math.min(Math.max(floatValue, min), max)
-            : floatValue;
+        let newValue = floatValue;
+        if (typeof min !== 'undefined') {
+          newValue = Math.max(newValue, min);
+        }
+        if (typeof max !== 'undefined') {
+          newValue = Math.min(newValue, max);
+        }
+
         const state = {
           value:
             allowEmpty && inputRef.current.value === '' && step === 0
