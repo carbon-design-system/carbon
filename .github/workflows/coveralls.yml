@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: 16.x
         env:
-          YARN_IGNORE_NODE: 1
+          YARN_IGNORE_NODE=1
 
       - name: npm install, make test-coverage
         run: |
