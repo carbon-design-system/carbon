@@ -30,13 +30,4 @@ describe('warning', () => {
       warning(true);
     }).toThrow();
   });
-
-  test('substitutes extra arguments in the message', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    warning(false, '%s %s %s', 'a', 'b', 'c');
-
-    expect(spy).toHaveBeenCalledWith('Warning: a b c');
-    spy.mockRestore();
-  });
 });

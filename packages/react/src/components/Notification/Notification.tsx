@@ -1436,7 +1436,7 @@ let didWarnAboutDeprecation = false;
 export const StaticNotification: React.FC<StaticNotificationProps> = (
   props
 ) => {
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
     warning(
       didWarnAboutDeprecation,
       '`StaticNotification` has been renamed to `Callout`.' +

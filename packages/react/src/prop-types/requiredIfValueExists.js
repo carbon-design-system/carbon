@@ -14,7 +14,12 @@ export default function requiredIfValueExists(propType) {
     const { [propName]: onChange, value, readOnly } = props;
     const exists = onChange !== undefined;
     const valueExists = value !== undefined;
-    if (__DEV__ && !exists && valueExists && !readOnly) {
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      !exists &&
+      valueExists &&
+      !readOnly
+    ) {
       return new Error(
         `You provided a value prop to \`${componentName}\` without an \`onChange\` handler. ` +
           'This will render a read-only field. ' +
