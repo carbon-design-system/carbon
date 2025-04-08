@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -9,13 +7,15 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { TILE_COLOR_SCHEME } from './tile';
 import View16 from '@carbon/icons/lib/view/16.js';
 import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
 import Folders16 from '@carbon/icons/lib/folders/16.js';
+import ArrowRight16 from '@carbon/icons/lib/arrow--right/16.js';
+import Launch16 from '@carbon/icons/lib/launch/16.js';
 import './index';
 import '../ai-label';
 import '../icon-button';
+import '../link';
 import storyDocs from './tile.mdx';
 import styles from './tile-story.scss?lit';
 import '../../../.storybook/templates/with-layer';
@@ -23,7 +23,7 @@ import '../../../.storybook/templates/with-layer';
 const content = html`
   <div slot="body-text">
     <p class="secondary">AI Explained</p>
-    <h1>84%</h1>
+    <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
       Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
@@ -51,155 +51,78 @@ const actions = html`
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
-const colorSchemes = {
-  [`Regular`]: null,
-  [`Light (${TILE_COLOR_SCHEME.LIGHT})`]: TILE_COLOR_SCHEME.LIGHT,
-};
-
-const defaultArgs = {
-  checkmarkLabel: '',
-  colorScheme: null,
-  name: 'selectable-tile',
-  value: '',
-  onInput: 'input',
-};
-
-const colorSchemeControl = {
-  colorScheme: {
-    control: 'select',
-    description: 'Color scheme (color-scheme)',
-    options: colorSchemes,
+const defaultControls = {
+  args: {
+    disabled: false,
   },
-};
-
-const defaultHref = {
-  href: 'https://example.com',
-};
-
-const hrefControl = {
-  href: {
-    control: 'text',
-    description: 'Href for clickable UI (href)',
-  },
-};
-
-const radioControls = {
-  checkmarkLabel: {
-    control: 'text',
-    description: 'Label text for the checkmark icon (checkmark-label)',
-  },
-  ...colorSchemeControl,
-  name: {
-    control: 'text',
-    description: 'Name (name)',
-  },
-  value: {
-    control: 'text',
-    description: 'Value (value)',
-  },
-  onInput: {
-    action: `input`,
-    table: {
-      disable: true,
+  argTypes: {
+    disabled: {
+      control: 'boolean',
     },
   },
 };
 
-const multiSelectableControls = {
-  ...radioControls,
-  selected: {
-    control: 'boolean',
-    description: 'Selected (selected)',
-  },
+export const Default = {
+  render: () => html`
+    <cds-tile>
+      Default tile
+      <br />
+      <br />
+      <cds-link href="https://carbondesignsystem.com">Link</cds-link>
+    </cds-tile>
+  `,
 };
 
-const expandableArgs = {
-  colorScheme: null,
-  expanded: false,
-  disableChange: false,
-  onBeforeChange: 'cds-expandable-tile-beingchanged',
-  onChange: 'cds-expandable-tile-changed',
-};
-
-const expandableControls = {
-  ...colorSchemeControl,
-  expanded: {
-    control: 'boolean',
-    description: 'Expanded (expanded)',
-  },
-  disableChange: {
-    control: 'boolean',
-    description:
-      'Disable user-initiated change in expanded state (Call event.preventDefault() in cds-expandable-tile-beingchanged event)',
-  },
-  onBeforeChange: {
-    action: 'cds-expandable-tile-beingchanged',
-    table: {
-      disable: true,
-    },
-  },
-  onChange: {
-    action: 'cds-expandable-tile-changed',
-    table: {
-      disable: true,
-    },
-  },
+export const DefaultWithLayer = {
+  render: () => html`
+    <sb-template-layers>
+      <cds-tile>
+        Default layer
+        <br />
+        <br />
+        <cds-link href="https://carbondesignsystem.com">Link</cds-link>
+      </cds-tile>
+    </sb-template-layers>
+  `,
 };
 
 export const clickable = {
-  args: defaultHref,
-  argTypes: hrefControl,
-  render: ({ href }) => html`
-    <cds-clickable-tile href="${ifDefined(href)}">
+  ...defaultControls,
+  render: ({ disabled }) => html`
+    <cds-clickable-tile
+      ?disabled="${disabled}"
+      href="https://www.carbondesignsystem.com/">
       Clickable tile
     </cds-clickable-tile>
   `,
 };
 
+export const clickableWithCustomIcon = {
+  ...defaultControls,
+  render: ({ disabled }) => html`
+    <cds-clickable-tile ?disabled=${disabled} href="https://www.carbondesignsystem.com/">
+      Clickable tile
+      ${Launch16({ slot: 'icon' })}
+      </cds-clickable-tile>
+      </cds-clickable-tile>
+    </sb-template-layers>
+    </cds-clickable-tile>
+    </sb-template-layers>
+  `,
+};
+
 export const ClickableWithLayer = {
-  args: defaultHref,
-  argTypes: hrefControl,
-  render: ({ href }) => html`
+  render: () => html`
     <sb-template-layers>
-      <cds-clickable-tile href="${ifDefined(href)}">
+      <cds-clickable-tile href="https://www.carbondesignsystem.com/">
         Clickable tile
       </cds-clickable-tile>
     </sb-template-layers>
   `,
 };
 
-export const Default = {
-  argTypes: colorSchemeControl,
-  render: ({ colorScheme }) => html`
-    <cds-tile color-scheme="${ifDefined(colorScheme)}">
-      Default tile
-      <a href="https://example.com">Link</a>
-    </cds-tile>
-  `,
-};
-
-export const DefaultWithLayer = {
-  argTypes: colorSchemeControl,
-  render: ({ colorScheme }) => html`
-    <sb-template-layers>
-      <cds-tile color-scheme="${ifDefined(colorScheme)}">
-        Default layer
-        <a href="https://example.com">Link</a>
-      </cds-tile>
-    </sb-template-layers>
-  `,
-};
-
 export const expandable = {
-  args: expandableArgs,
-  argTypes: expandableControls,
-  render: ({
-    colorScheme,
-    expanded,
-    disableChange,
-    onBeforeChange,
-    onChange,
-  }) => {
+  render: ({ expanded, disableChange, onBeforeChange, onChange }) => {
     const handleBeforeChanged = (event: CustomEvent) => {
       onBeforeChange(event);
       if (disableChange) {
@@ -207,83 +130,8 @@ export const expandable = {
       }
     };
     return html`
-      <cds-expandable-tile
-        color-scheme="${ifDefined(colorScheme)}"
-        ?expanded="${expanded}"
-        @cds-expandable-tile-beingchanged=${handleBeforeChanged}
-        @cds-expandable-tile-changed=${onChange}>
-        <cds-tile-above-the-fold-content
-          slot="above-the-fold-content"
-          style="height: 200px">
-          Above the fold content here
-        </cds-tile-above-the-fold-content>
-        <cds-tile-below-the-fold-content style="height: 300px">
-          Below the fold content here
-        </cds-tile-below-the-fold-content>
-      </cds-expandable-tile>
-    `;
-  },
-};
-
-export const ExpandableWithInteractive = {
-  args: expandableArgs,
-  argTypes: expandableControls,
-  render: ({
-    colorScheme,
-    expanded,
-    disableChange,
-    onBeforeChange,
-    onChange,
-  }) => {
-    const handleBeforeChanged = (event: CustomEvent) => {
-      onBeforeChange(event);
-      if (disableChange) {
-        event.preventDefault();
-      }
-    };
-    return html`
-      <cds-expandable-tile
-        with-interactive
-        color-scheme="${ifDefined(colorScheme)}"
-        ?expanded="${expanded}"
-        @cds-expandable-tile-beingchanged=${handleBeforeChanged}
-        @cds-expandable-tile-changed=${onChange}>
-        <cds-tile-above-the-fold-content
-          slot="above-the-fold-content"
-          style="height: 200px">
-          Above the fold content here
-          <div style="padding-top:1rem;">
-            <cds-button>Example</cds-button>
-          </div>
-        </cds-tile-above-the-fold-content>
-        <cds-tile-below-the-fold-content style="height: 300px">
-          Below the fold content here
-          <cds-text-input></cds-text-input>
-        </cds-tile-below-the-fold-content>
-      </cds-expandable-tile>
-    `;
-  },
-};
-
-export const ExpandableWithLayer = {
-  render: ({
-    colorScheme,
-    expanded,
-    disableChange,
-    onBeforeChange,
-    onChange,
-  }) => {
-    const handleBeforeChanged = (event: CustomEvent) => {
-      onBeforeChange(event);
-      if (disableChange) {
-        event.preventDefault();
-      }
-    };
-    return html`
-      <sb-template-layers>
+      <div style="width: 400px">
         <cds-expandable-tile
-          style="width:400px"
-          color-scheme="${ifDefined(colorScheme)}"
           ?expanded="${expanded}"
           @cds-expandable-tile-beingchanged=${handleBeforeChanged}
           @cds-expandable-tile-changed=${onChange}>
@@ -296,48 +144,112 @@ export const ExpandableWithLayer = {
             Below the fold content here
           </cds-tile-below-the-fold-content>
         </cds-expandable-tile>
+      </div>
+    `;
+  },
+};
+
+export const ExpandableWithInteractive = {
+  render: ({ expanded, disableChange, onBeforeChange, onChange }) => {
+    const handleBeforeChanged = (event: CustomEvent) => {
+      onBeforeChange(event);
+      if (disableChange) {
+        event.preventDefault();
+      }
+    };
+    return html`
+      <div style="width: 400px">
+        <cds-expandable-tile
+          with-interactive
+          ?expanded="${expanded}"
+          @cds-expandable-tile-beingchanged=${handleBeforeChanged}
+          @cds-expandable-tile-changed=${onChange}>
+          <cds-tile-above-the-fold-content
+            slot="above-the-fold-content"
+            style="height: 200px; width: 200px">
+            Above the fold content here
+            <div style="padding-top:1rem;">
+              <cds-button>Example</cds-button>
+            </div>
+          </cds-tile-above-the-fold-content>
+          <cds-tile-below-the-fold-content style="height: 200px; width: 200px">
+            Below the fold content here
+            <cds-text-input></cds-text-input>
+          </cds-tile-below-the-fold-content>
+        </cds-expandable-tile>
+      </div>
+    `;
+  },
+};
+
+export const ExpandableWithLayer = {
+  render: ({ expanded, disableChange, onBeforeChange, onChange }) => {
+    const handleBeforeChanged = (event: CustomEvent) => {
+      onBeforeChange(event);
+      if (disableChange) {
+        event.preventDefault();
+      }
+    };
+    return html`
+      <sb-template-layers>
+        <cds-expandable-tile
+          style="width:400px"
+          ?expanded="${expanded}"
+          @cds-expandable-tile-beingchanged=${handleBeforeChanged}
+          @cds-expandable-tile-changed=${onChange}>
+          <cds-tile-above-the-fold-content
+            slot="above-the-fold-content"
+            style="height: 100px">
+            Above the fold content here
+          </cds-tile-above-the-fold-content>
+          <cds-tile-below-the-fold-content style="height: 200px">
+            Below the fold content here
+          </cds-tile-below-the-fold-content>
+        </cds-expandable-tile>
       </sb-template-layers>
     `;
   },
 };
 
 export const MultiSelect = {
-  args: defaultArgs,
-  argTypes: multiSelectableControls,
+  ...defaultControls,
   render: ({
     checkmarkLabel,
-    colorScheme,
+    disabled,
     name,
     selected,
     value,
     onInput,
   }) => html`
+    <style>
+      ${styles}
+    </style>
     <cds-tile-group>
       <cds-selectable-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
-        color-scheme="${ifDefined(colorScheme)}"
         name="${ifDefined(name)}"
         ?selected="${selected}"
         value="${ifDefined(value)}"
-        @input="${onInput}">
+        @input="${onInput}"
+        ?disabled=${disabled}>
         Option 1
       </cds-selectable-tile>
       <cds-selectable-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
-        color-scheme="${ifDefined(colorScheme)}"
         name="${ifDefined(name)}"
         ?selected="${selected}"
         value="${ifDefined(value)}"
-        @input="${onInput}">
+        @input="${onInput}"
+        ?disabled=${disabled}>
         Option 2
       </cds-selectable-tile>
       <cds-selectable-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
-        color-scheme="${ifDefined(colorScheme)}"
         name="${ifDefined(name)}"
         ?selected="${selected}"
         value="${ifDefined(value)}"
-        @input="${onInput}">
+        @input="${onInput}"
+        ?disabled=${disabled}>
         Option 3
       </cds-selectable-tile>
     </cds-tile-group>
@@ -345,33 +257,30 @@ export const MultiSelect = {
 };
 
 export const Radio = {
-  args: defaultArgs,
-  argTypes: radioControls,
-  render: ({ checkmarkLabel, colorScheme, name, value, onInput }) => html`
+  ...defaultControls,
+  render: ({ checkmarkLabel, disabled, name, value }) => html`
     <cds-tile-group>
       <legend slot="legend">Radio tile group</legend>
       <cds-radio-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
-        color-scheme="${ifDefined(colorScheme)}"
         name="${ifDefined(name)}"
         value="${ifDefined(value)}"
-        @input="${onInput}">
+        ?disabled=${disabled}>
         Option 1
       </cds-radio-tile>
       <cds-radio-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
-        color-scheme="${ifDefined(colorScheme)}"
         name="${ifDefined(name)}"
         value="${ifDefined(value)}"
-        @input="${onInput}">
+        ?disabled=${disabled}
+        selected>
         Option 2
       </cds-radio-tile>
       <cds-radio-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
-        color-scheme="${ifDefined(colorScheme)}"
         name="${ifDefined(name)}"
         value="${ifDefined(value)}"
-        @input="${onInput}">
+        ?disabled=${disabled}>
         Option 3
       </cds-radio-tile>
     </cds-tile-group>
@@ -383,23 +292,23 @@ export const RadioWithLayer = {
     <sb-template-layers>
       <cds-tile-group>
         <legend slot="legend">Radio tile group</legend>
-        <cds-radio-tile name="option-1a"> Option 1 </cds-radio-tile>
-        <cds-radio-tile name="option-2a"> Option 2 </cds-radio-tile>
+        <cds-radio-tile name="options"> Option 1 </cds-radio-tile>
+        <cds-radio-tile name="options" selected> Option 2 </cds-radio-tile>
       </cds-tile-group>
     </sb-template-layers>
   `,
 };
 
 export const Selectable = {
-  render: () => html`
-    <cds-selectable-tile> Default tile </cds-selectable-tile>
+  ...defaultControls,
+  render: (args) => html`
+    <cds-selectable-tile ?disabled=${args.disabled}>
+      Selectable
+    </cds-selectable-tile>
   `,
 };
 
 export const WithAILabel = {
-  args: {
-    hasRoundedCorners: false,
-  },
   argTypes: {
     hasRoundedCorners: {
       control: 'boolean',
@@ -429,7 +338,7 @@ export const WithAILabel = {
               </div>
             </div>
           </div>
-          <cds-ai-label alignment="bottom-left">
+          <cds-ai-label alignment="bottom-left" slot="decorator">
             ${content}${actions}</cds-ai-label
           >
         </cds-tile>
@@ -438,6 +347,7 @@ export const WithAILabel = {
           href="https://example.com"
           ai-label
           ?has-rounded-corners="${hasRoundedCorners}">
+          ${ArrowRight16({ slot: 'icon' })}
           <div class="tile-container">
             <h4>Title</h4>
             <p>
@@ -456,29 +366,6 @@ export const WithAILabel = {
             </div>
           </div>
         </cds-clickable-tile>
-
-        <cds-selectable-tile ?has-rounded-corners="${hasRoundedCorners}">
-          <div class="tile-container">
-            <h4>Title</h4>
-            <p>
-              Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
-              at consectetur turpis mauris gravida penatibus.
-            </p>
-            <div class="ai-data">
-              <div class="data-container">
-                <p>Data Quality</p>
-                <h3>85%</h3>
-              </div>
-              <div class="data-container">
-                <p>Label text</p>
-                <h3>16%</h3>
-              </div>
-            </div>
-          </div>
-          <cds-ai-label alignment="bottom-left">
-            ${content}${actions}</cds-ai-label
-          >
-        </cds-selectable-tile>
 
         <cds-expandable-tile
           with-interactive
@@ -513,7 +400,68 @@ export const WithAILabel = {
             ${content}${actions}</cds-ai-label
           >
         </cds-expandable-tile>
-      </div>`;
+      </div>
+      <div class="ai-label-selectable-tile-container">
+        <cds-tile-group>
+          <legend slot="legend">Selectable tile group</legend>
+          <div>
+            <cds-selectable-tile ?has-rounded-corners="${hasRoundedCorners}">
+              <span>Option 1</span>
+              <cds-ai-label alignment="bottom-left">
+                ${content}${actions}</cds-ai-label
+              >
+            </cds-selectable-tile>
+
+            <cds-selectable-tile ?has-rounded-corners="${hasRoundedCorners}">
+              <span>Option 2</span>
+              <cds-ai-label alignment="bottom-left">
+                ${content}${actions}</cds-ai-label
+              >
+            </cds-selectable-tile>
+
+            <cds-selectable-tile ?has-rounded-corners="${hasRoundedCorners}">
+              <span>Option 3</span>
+              <cds-ai-label alignment="bottom-left">
+                ${content}${actions}</cds-ai-label
+              >
+            </cds-selectable-tile>
+          </div>
+        </cds-tile-group>
+      </div>
+      <div class="ai-label-selectable-tile-container">
+        <cds-tile-group>
+          <legend slot="legend">Radio tile group</legend>
+          <div>
+            <cds-radio-tile
+              name="options"
+              ?has-rounded-corners="${hasRoundedCorners}">
+              <span>Option 1</span>
+              <cds-ai-label alignment="bottom-left">
+                ${content}${actions}</cds-ai-label
+              >
+            </cds-radio-tile>
+
+            <cds-radio-tile
+              name="options"
+              selected
+              ?has-rounded-corners="${hasRoundedCorners}">
+              <span>Option 2</span>
+              <cds-ai-label alignment="bottom-left">
+                ${content}${actions}</cds-ai-label
+              >
+            </cds-radio-tile>
+
+            <cds-radio-tile
+              name="options"
+              ?has-rounded-corners="${hasRoundedCorners}">
+              <span>Option 3</span>
+              <cds-ai-label alignment="bottom-left">
+                ${content}${actions}</cds-ai-label
+              >
+            </cds-radio-tile>
+          </div>
+        </cds-tile-group>
+      </div> `;
   },
 };
 

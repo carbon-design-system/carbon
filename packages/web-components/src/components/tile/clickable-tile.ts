@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -15,21 +13,7 @@ import CDSLink from '../link/link';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-// To Do: Replace with an an icon from `@carbon/icons`
-// since the hollow AI Label in `ClickableTile` is not interactive
-const aiLabelIcon = html` <svg
-  class="${prefix}--tile--slug-icon"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg">
-  <rect x="0.5" y="0.5" width="23" height="23" />
-  <path
-    d="M13.2436 16H11.5996L10.9276 13.864H7.95164L7.29164 16H5.68364L8.49164 7.624H10.4596L13.2436 16ZM10.5436 12.508L9.46364 9.064H9.40364L8.33564 12.508H10.5436ZM17.9341 16H14.1301V14.728H15.2341V8.896H14.1301V7.624H17.9341V8.896H16.8181V14.728H17.9341V16Z"
-    fill="#161616" />
-</svg>`;
+import AILabel24 from '@carbon/icons/lib/ai-label/24.js';
 /**
  * Clickable tile.
  *
@@ -37,7 +21,7 @@ const aiLabelIcon = html` <svg
  */
 @customElement(`${prefix}-clickable-tile`)
 class CDSClickableTile extends CDSLink {
-  protected get _classes() {
+  protected get _classes(): any {
     const { colorScheme, disabled, hasRoundedCorners, aiLabel, slug } = this;
     return classMap({
       [`${prefix}--link`]: true,
@@ -51,6 +35,8 @@ class CDSClickableTile extends CDSLink {
 
   /**
    * The color scheme.
+   *
+   * @default
    */
   @property({ attribute: 'color-scheme', reflect: true })
   colorScheme = TILE_COLOR_SCHEME.REGULAR;
@@ -68,7 +54,7 @@ class CDSClickableTile extends CDSLink {
   @property({ type: Boolean, attribute: 'has-rounded-corners' })
   hasRoundedCorners = false;
 
-  @property({ type: Boolean })
+  @property({ type: Boolean, attribute: 'ai-label' })
   aiLabel = false;
 
   /**
@@ -96,7 +82,11 @@ class CDSClickableTile extends CDSLink {
    */
   protected _renderInner() {
     return html`
-      ${super._renderInner()} ${this.aiLabel || this.slug ? aiLabelIcon : ''}
+      ${super._renderInner()}
+      ${this.aiLabel || this.slug
+        ? AILabel24({ class: `${prefix}--tile--ai-label-icon` })
+        : ''}
+      <slot name="decorator"></slot>
     `;
   }
 

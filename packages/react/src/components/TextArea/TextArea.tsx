@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,11 +7,12 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  ReactNode,
-  useState,
+  forwardRef,
   useContext,
-  useRef,
   useEffect,
+  useRef,
+  useState,
+  type ReactNode,
 } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
@@ -161,7 +162,11 @@ export interface TextAreaProps
   counterMode?: 'character' | 'word';
 }
 
-const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
+// TODO: This type was added to prevent the formatter from changing the
+// indentation of this entire function. Delete it in a future pull request.
+type TTextArea = HTMLTextAreaElement;
+
+const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
   const {
     className,
     decorator,
@@ -193,9 +198,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const textAreaInstanceId = useId();
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const ref = useMergedRefs([forwardRef, textareaRef]) as
-    | React.LegacyRef<HTMLTextAreaElement>
-    | undefined;
+  const ref = useMergedRefs([forwardRef, textareaRef]);
 
   function getInitialTextCount(): number {
     const targetValue =
@@ -352,6 +355,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
 
   const counterClasses = classNames(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--text-area__label-counter`]: true,
   });
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {

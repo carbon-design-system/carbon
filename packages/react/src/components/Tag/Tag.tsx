@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,7 +15,6 @@ import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
 import { DefinitionTooltip } from '../Tooltip';
 import { isEllipsisActive } from './isEllipsisActive';
-import { useMergeRefs } from '@floating-ui/react';
 import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
@@ -23,6 +22,7 @@ import {
 import { SelectableTagBaseProps, SelectableTagProps } from './SelectableTag';
 import { OperationalTagBaseProps } from './OperationalTag';
 import { DismissibleTagBaseProps } from './DismissibleTag';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
 export const TYPES = {
   red: 'Red',
@@ -82,8 +82,7 @@ export interface TagBaseProps {
   onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 
   /**
-   * Optional prop to render a custom icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: React.ElementType;
 
@@ -143,7 +142,7 @@ const Tag: TagComponent = React.forwardRef(
   ) => {
     const prefix = usePrefix();
     const tagRef = useRef<HTMLElement>();
-    const ref = useMergeRefs([forwardRef, tagRef]);
+    const ref = useMergedRefs([forwardRef, tagRef]);
     const tagId = id || `tag-${useId()}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
@@ -353,8 +352,7 @@ const Tag: TagComponent = React.forwardRef(
   ),
 
   /**
-   * Optional prop to render a custom icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 

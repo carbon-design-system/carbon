@@ -14,7 +14,7 @@ import React, {
   useCallback,
 } from 'react';
 import classNames from 'classnames';
-import useResizeObserver from 'use-resize-observer/polyfilled';
+import useResizeObserver from 'use-resize-observer';
 import { ChevronDown } from '@carbon/icons-react';
 import Copy from '../Copy';
 import Button from '../Button';
@@ -41,7 +41,7 @@ export type DeprecatedCodeSnippetAlignment =
   | 'right-bottom'
   | 'right-top';
 
-export type NewCodeSnippetAlignmnet =
+export type NewCodeSnippetAlignment =
   | 'top'
   | 'bottom'
   | 'left'
@@ -57,7 +57,7 @@ export type NewCodeSnippetAlignmnet =
 
 export type CodeSnippetAlignment =
   | DeprecatedCodeSnippetAlignment
-  | NewCodeSnippetAlignmnet;
+  | NewCodeSnippetAlignment;
 const propMappingFunction = (deprecatedValue) => {
   const mapping = {
     'top-left': 'top-start',

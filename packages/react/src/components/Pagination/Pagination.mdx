@@ -1,4 +1,7 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import * as PaginationStories from './Pagination.stories';
+import Pagination from '../Pagination';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -12,7 +15,60 @@ import { ArgTypes, Meta } from '@storybook/blocks';
 
 ## Table of Contents
 
+- [Pagination](#Pagination)
+  - [Overview](#overview)
+  - [Multiple pagination components](#multiple-pagination-components)
+  - [Pagination unknown pages](#pagination-unknown-pages)
+  - [Pagination with custom page sizes label](#pagination-with-custom-page-sizes-label)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
 ## Overview
+
+  <Canvas
+    of={PaginationStories.Default}
+    additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(PaginationStories.Default),
+      },
+    ]}
+  />
+
+## Multiple pagination components
+  <Canvas
+    of={PaginationStories.MultiplePaginationComponents}
+    additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(PaginationStories.MultiplePaginationComponents),
+      },
+    ]}
+  />
+
+## Pagination unknown pages
+
+  <Canvas
+    of={PaginationStories.PaginationUnknownPages}
+    additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(PaginationStories.PaginationUnknownPages),
+      },
+    ]}
+  />
+
+## Pagination with custom page sizes label
+
+    <Canvas
+    of={PaginationStories.PaginationWithCustomPageSizesLabel}
+    additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(PaginationStories.PaginationWithCustomPageSizesLabel),
+      },
+    ]}
+  />
 
 ## Component API
 

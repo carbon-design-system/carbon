@@ -7,8 +7,9 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
+const { snapshot } = require('../../test-utils/snapshot');
 const { snapshotStory } = require('../../test-utils/storybook');
 
 test.describe('Tabs', () => {
@@ -52,6 +53,15 @@ test.describe('Tabs', () => {
           id: 'components-tabs--icon-20-only',
           theme,
         });
+
+        // Focus the tab to invoke the tooltip and snapshot it
+        await page.keyboard.press('Tab');
+        await expect(page.getByRole('tab', { name: 'Activity' })).toBeFocused();
+        await snapshot(page, {
+          theme,
+          component: 'Tabs',
+          id: 'components-tabs--icon-20-only | focused',
+        });
       });
 
       test('icon only @vrt', async ({ page }) => {
@@ -59,6 +69,15 @@ test.describe('Tabs', () => {
           component: 'Tabs',
           id: 'components-tabs--icon-only',
           theme,
+        });
+
+        // Focus the tab to invoke the tooltip and snapshot it
+        await page.keyboard.press('Tab');
+        await expect(page.getByRole('tab', { name: 'Activity' })).toBeFocused();
+        await snapshot(page, {
+          theme,
+          component: 'Tabs',
+          id: 'components-tabs--icon-only | focused',
         });
       });
 

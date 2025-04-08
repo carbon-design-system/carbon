@@ -14,6 +14,14 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Table of Contents
 
+- [TreeView](#TreeView)
+  - [Overview](#overview)
+  - [With Controlled Expansion](#with-controlled-expansion)
+  - [With Custom Icons](#with-custom-icons)
+  - [Temp](#temp)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
 ## Overview
 
 TreeView is a component that allows users to navigate through a hierarchy of
@@ -54,7 +62,7 @@ expanded or collapsed.
   ]}
 />
 
-## With Custom Icons
+## With Icons
 
 The `renderIcon` prop can be used to customize the icons of each node in the
 TreeView.
@@ -71,6 +79,14 @@ TreeView.
         ),
     },
   ]}
+/>
+
+## With Links
+
+The `href` prop can be used with click handling on each node of the TreeView.
+
+<Canvas
+  of={TreeViewStories.WithLinks}
 />
 
 ## Component API

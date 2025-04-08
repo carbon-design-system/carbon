@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -177,6 +175,7 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
       </button>
       <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
       <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
+      <slot name="decorator"></slot>
       <div id="content" class="${prefix}--tile-content">
         <div><slot name="above-the-fold-content"></slot></div>
         <div

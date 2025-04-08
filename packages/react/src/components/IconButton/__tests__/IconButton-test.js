@@ -20,6 +20,35 @@ describe('IconButton', () => {
     expect(screen.getByLabelText('edit')).toBeInTheDocument();
   });
 
+  it('should support badge indicator', () => {
+    render(
+      <IconButton label="edit" badgeCount={12} kind="ghost" size="lg">
+        <Edit />
+      </IconButton>
+    );
+    expect(screen.getByText('12')).toBeInTheDocument();
+  });
+
+  it('should throw warning if using badge indicator improperly', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(
+      <IconButton label="edit" badgeCount={12}>
+        <Edit />
+      </IconButton>
+    );
+    expect(screen.getByText('12')).toBeInTheDocument();
+    spy.mockRestore();
+  });
+
+  it('should support badge indicator and truncate', () => {
+    render(
+      <IconButton label="edit" badgeCount={1200} kind="ghost" size="lg">
+        <Edit />
+      </IconButton>
+    );
+    expect(screen.getByText('999+')).toBeInTheDocument();
+  });
+
   it('should support data-testid on the <button> element', () => {
     render(
       <IconButton label="edit" data-testid="icon-button">
@@ -48,5 +77,32 @@ describe('IconButton', () => {
       </IconButton>
     );
     expect(ref).toHaveBeenCalledWith(screen.getByTestId('icon-button'));
+  });
+
+  it('should set aria-pressed="true" if props.isSelected="true" and props.kind="ghost" ', () => {
+    const { rerender } = render(
+      <IconButton label="edit" kind="ghost" isSelected={true}>
+        <Edit />
+      </IconButton>
+    );
+    expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  it('should set aria-pressed="false" if props.isSelected="false" and props.kind="ghost" ', () => {
+    const { rerender } = render(
+      <IconButton label="edit" kind="ghost" isSelected={false}>
+        <Edit />
+      </IconButton>
+    );
+    expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'false');
+  });
+
+  it('should not set aria-pressed if props.isSelected is provided but props.kind is not "ghost" ', () => {
+    const { rerender } = render(
+      <IconButton label="edit" kind="primary" isSelected={true}>
+        <Edit />
+      </IconButton>
+    );
+    expect(screen.getByRole('button')).not.toHaveAttribute('aria-pressed');
   });
 });

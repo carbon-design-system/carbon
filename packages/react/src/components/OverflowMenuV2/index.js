@@ -15,7 +15,7 @@ import { OverflowMenu } from '../OverflowMenu';
 let didWarnAboutDeprecation = false;
 
 function OverflowMenuV2(props) {
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
     warning(
       didWarnAboutDeprecation,
       '`<OverflowMenuV2>` is deprecated and will be removed in the next major version. Use `<OverflowMenu>` with the `enable-v12-overflowmenu` feature flag instead.'

@@ -1,0 +1,109 @@
+//
+// Copyright IBM Corp. 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/components/menu' as *;
+@use '@carbon/styles/scss/utilities/component-reset';
+
+:host(#{$prefix}-menu-item) {
+  @include type-style('body-short-01');
+
+  display: grid;
+  align-items: center;
+  block-size: $spacing-07;
+  color: $text-secondary;
+  column-gap: $spacing-03;
+  cursor: pointer;
+  grid-template-columns: 1fr max-content;
+  padding-inline: $spacing-05;
+  transition: background-color $duration-fast-01 motion(standard, productive);
+
+  svg {
+    color: $icon-secondary;
+  }
+}
+:host(#{$prefix}-menu-item:focus) {
+  @include focus-outline('outline');
+}
+:host(#{$prefix}-menu-item-divider) {
+  @extend .#{$prefix}--menu-item-divider;
+}
+
+:host(#{$prefix}-menu-item:hover) {
+  background-color: $layer-hover;
+  color: $text-primary;
+
+  svg {
+    color: $icon-primary;
+  }
+}
+:host(#{$prefix}-menu-item-group),
+:host(#{$prefix}-menu-item-radio-group) {
+  > ul {
+    @include component-reset.reset;
+  }
+}
+
+.#{$prefix}--menu-item__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{$prefix}--menu-item__shortcut {
+  display: flex;
+}
+
+.#{$prefix}--menu-item__icon {
+  display: var(--child-icon-property, none);
+}
+
+:host([aria-disabled='true']) * {
+  color: $text-disabled;
+  cursor: not-allowed;
+}
+
+:host([aria-disabled='true']:hover),
+:host([aria-disabled='true'].#{$prefix}--menu-item--danger:hover) {
+  background-color: $layer;
+  color: $text-disabled;
+}
+
+:host(.#{$prefix}--menu-item--danger:hover),
+:host(.#{$prefix}--menu-item--danger:focus) {
+  background-color: button-tokens.$button-danger-primary;
+  color: $text-on-color;
+}
+
+.#{$prefix}--menu-item__icon,
+.#{$prefix}--menu-item__selection-icon {
+  display: none;
+}
+
+:host(#{$prefix}-menu-item) {
+  block-size: var(--block-size-value);
+  grid-template-columns: var(--grid-template);
+  .#{$prefix}--menu-item__icon {
+    display: var(--display-icon-item);
+  }
+}
+.#{$prefix}--menu-item__selection-icon {
+  display: var(--display-selection-icon);
+}
+
+span[slot='render-icon'] {
+  display: flex;
+}

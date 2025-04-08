@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -14,6 +12,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './copy-button.scss?lit';
+import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../copy/copy';
 
 /**
@@ -42,13 +41,32 @@ class CDSCopyButton extends FocusMixin(LitElement) {
   feedback = 'Copied!';
 
   /**
+   * How the tooltip is aligned to the trigger button.
+   */
+  @property({ reflect: true })
+  align = POPOVER_ALIGNMENT.BOTTOM;
+
+  /**
+   * Specify whether a auto align functionality should be applied
+   */
+  @property({ type: Boolean, reflect: true })
+  autoAlign = false;
+
+  /**
    * The number in milliseconds to determine how long the tooltip should remain.
    */
   @property({ type: Number, attribute: 'feedback-timeout' })
   feedbackTimeout = 2000;
 
   render() {
-    const { buttonClassName, disabled, feedback, feedbackTimeout } = this;
+    const {
+      buttonClassName,
+      disabled,
+      feedback,
+      feedbackTimeout,
+      align,
+      autoAlign,
+    } = this;
 
     let classes = `${prefix}--copy-btn`;
 
@@ -59,9 +77,11 @@ class CDSCopyButton extends FocusMixin(LitElement) {
     return html`
       <cds-copy
         ?disabled=${disabled}
+        ?autoalign=${autoAlign}
         feedback=${feedback}
         feedback-timeout=${feedbackTimeout}
-        button-class-name=${classes}>
+        button-class-name=${classes}
+        align=${align}>
         ${Copy16({ slot: 'icon', class: `${prefix}--snippet__icon` })}
         <slot slot="tooltip-content"></slot>
       </cds-copy>

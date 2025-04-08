@@ -1,4 +1,4 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as LinkStories from './link.stories';
 
@@ -6,52 +6,51 @@ import * as LinkStories from './link.stories';
 
 # Link
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/link)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/link)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/link/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/link/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/link)
+## Table of Contents
 
-Represents a link. Provided for convenience purpose, you can alternatively use
-`<a class="cds--link">` with Carbon style in place in light DOM.
+- [Overview](#overview)
+- [Inline](#inline)
+- [Accessible Link with Icon](#accessible-link-with-icon)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+Links are used as navigational elements and can be used on their own or inline
+with text. They provide a lightweight option for navigation but like other
+interactive elements, too many links will clutter a page and make it difficult
+for users to identify their next steps. This is especially true for inline
+links, which should be used sparingly.
 
-### JS (via import)
+<Canvas of={LinkStories.Default} />
 
-```javascript
-import '@carbon/web-components/es/components/list/index.js';
-```
+## Inline
 
-<Markdown>{`${cdnJs({ components: ['list'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+<Canvas of={LinkStories.Inline} />
 
-### HTML
+## Accessible Link with Icon
 
-```html
-<cds-link href="https://www.ibm.com"> Link </cds-link>
-```
+If the text of your link doesn't correspond to the action represented by the
+icon, consider incorporating an `aria-label` for the icon. This will ensure that
+visually impaired users can comprehend the outcome of clicking the link.
 
-## Paired with icon
+<Canvas of={LinkStories.PairedWithIcon} />
 
-Import the desired icon and incorporate with the link text:
-
-```javascript
-import Download16 from '@carbon/icons/lib/download/16.js';
-
-function App() {
-  return html`<cds-link href="https://www.ibm.com">
-    Download ${Download16({ slot: 'icon' })}</cds-link
-  >`;
-}
-```
-
-## `<cds-link>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-link disabled>`) and `false` means not setting the attribute (e.g.
-`<cds-link>` without `disabled` attribute).
+## Component API
 
 <ArgTypes of="cds-link" />
+
+<Markdown>{`${cdnJs({ components: ['link'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/link/link.mdx).

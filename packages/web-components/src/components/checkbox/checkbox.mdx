@@ -1,55 +1,105 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as CheckboxStories from './checkbox.stories';
 
 <Meta of={CheckboxStories} />
 
-# Check box
+# Checkbox
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/checkbox)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/checkbox)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/checkbox/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/checkbox/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/checkbox)
+## Table of Contents
 
-Check box in `carbon-web-components` represents a combination of a check box and
-its label.
+- [Overview](#overview)
+- [Horizontal](#horizontal)
+- [Single](#single)
+- [Skeleton state](#skeleton-state)
+- [AI Label](#With-ai-label)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+You can build a checkbox using the `checkbox` in combination with a
+`<cds-checkbox-group>` element to group controls and `legend-text` attribute for
+the label.
 
-### JS (via import)
+<Canvas of={CheckboxStories.Default} />
+
+## Horizontal
+
+<Canvas of={CheckboxStories.Horizontal} />
+
+## Single
+
+<Canvas of={CheckboxStories.Single} />
+
+## Skeleton state
+
+You can use the `cds-checkbox-skeleton` component to render a skeleton variant
+of a checkbox. This is useful to display while content in your checkbox is being
+fetched from an external resource like an API.
+
+<Canvas of={CheckboxStories.Skeleton} />
+
+## With AI label
+
+<Canvas of={CheckboxStories.WithAILabel} />
+
+## Component API
+
+<ArgTypes of="cds-checkbox" />
+
+### Checkbox `checked`
+
+You can use the `checked` attribute to specify weather a checkbox is checked by
+default or not on page load.
+
+```html
+<cds-checkbox checked=""></cds-checkbox>
+```
+
+### Checkbox `id`
+
+The `id` attribute should be used to provide each checkbox input with a unique
+id.
+
+```html
+<cds-checkbox id="checkbox"></cds-checkbox>
+```
+
+### Checkbox `label-text`
+
+The `label-text` attribute should be used to provide a label that describes the
+checkbox input that is being exposed to the user.
+
+```html
+<cds-checkbox label-text="Checkbox label"></cds-checkbox>
+```
+
+### Checkbox `onChange`
+
+You can use the `cds-checkbox-changed` custom event to call a custom function
+for event handling.
 
 ```javascript
-import '@carbon/web-components/es/components/checkbox/index.js';
+document.addEventListener('cds-checkbox-changed', (event) => {
+  const { currentTarget } = event;
+  const { detail } = event as CustomEvent;
+  const { evt } = detail;
+  console.log('checkbox clicked', currentTarget, evt);
+});
 ```
 
 <Markdown>{`${cdnJs({ components: ['checkbox'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
 
-### HTML
+## Feedback
 
-```html
-<cds-checkbox>Lorem Ipsum</cds-checkbox>
-```
-
-Use `cds-checkbox-group` when handling multiple checkboxes
-
-```html
-<cds-checkbox-group legend-text="Group label">
-  <cds-checkbox>Lorem Ipsum 0</cds-checkbox>
-  <cds-checkbox>Lorem Ipsum 1</cds-checkbox>
-</cds-checkbox-group>
-```
-
-## `<cds-checkbox>` attributes, properties and events
-
-Unlike regular checkbox, `<cds-checkbox>` does _not_ fire `change` event. Please
-use `cds-checkbox-changed` event instead.
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-checkbox checked>`) and `false` means not setting the attribute (e.g.
-`<cds-checkbox>` without `checked` attribute).
-
-<ArgTypes of="cds-checkbox" />
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/checkbox/checkbox.mdx).
