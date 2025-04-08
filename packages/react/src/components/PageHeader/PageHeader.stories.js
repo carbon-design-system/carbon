@@ -437,7 +437,7 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
 export const TabBar = (args) => {
   return (
     <PageHeader.Root>
-      <PageHeaderTabBar tabs={TabComponent()} />
+      <PageHeader.TabBar tabs={TabComponent()} />
     </PageHeader.Root>
   );
 };
