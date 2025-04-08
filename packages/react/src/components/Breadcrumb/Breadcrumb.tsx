@@ -1,15 +1,14 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { PropsWithChildren } from 'react';
+import React, { forwardRef } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
-import { ForwardRefReturn } from '../../types/common';
 
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -34,35 +33,32 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   size?: 'sm' | 'md';
 }
 
-const Breadcrumb: ForwardRefReturn<HTMLElement, BreadcrumbProps> =
-  React.forwardRef(function Breadcrumb(
-    {
-      'aria-label': ariaLabel,
-      children,
-      className: customClassNameNav,
-      noTrailingSlash,
-      size,
-      ...rest
-    }: PropsWithChildren<BreadcrumbProps>,
-    ref: React.Ref<HTMLElement>
-  ) {
-    const prefix = usePrefix();
-    const className = cx({
-      [`${prefix}--breadcrumb`]: true,
-      [`${prefix}--breadcrumb--no-trailing-slash`]: noTrailingSlash,
-      [`${prefix}--breadcrumb--sm`]: size === 'sm',
-    });
-
-    return (
-      <nav
-        className={customClassNameNav}
-        aria-label={ariaLabel ? ariaLabel : 'Breadcrumb'}
-        ref={ref}
-        {...rest}>
-        <ol className={className}>{children}</ol>
-      </nav>
-    );
+const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>((props, ref) => {
+  const {
+    'aria-label': ariaLabel,
+    children,
+    className: customClassNameNav,
+    noTrailingSlash,
+    size,
+    ...rest
+  } = props;
+  const prefix = usePrefix();
+  const className = cx({
+    [`${prefix}--breadcrumb`]: true,
+    [`${prefix}--breadcrumb--no-trailing-slash`]: noTrailingSlash,
+    [`${prefix}--breadcrumb--sm`]: size === 'sm',
   });
+
+  return (
+    <nav
+      className={customClassNameNav}
+      aria-label={ariaLabel ? ariaLabel : 'Breadcrumb'}
+      ref={ref}
+      {...rest}>
+      <ol className={className}>{children}</ol>
+    </nav>
+  );
+});
 
 Breadcrumb.displayName = 'Breadcrumb';
 Breadcrumb.propTypes = {
