@@ -26,6 +26,8 @@ import React, {
   type ComponentType,
   type HTMLElementType,
   type ElementType,
+  isValidElement,
+  ReactElement,
 } from 'react';
 import { Grid } from '../Grid';
 import { isElement } from 'react-is';
@@ -1577,7 +1579,8 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(function IconTab(
   const value = useMemo(() => ({ badgeIndicator }), [badgeIndicator]);
 
   const hasSize20 =
-    React.isValidElement(children) && children.props?.size === 20;
+    isValidElement(children) &&
+    (children as ReactElement<{ size?: number }>).props.size === 20;
 
   const classNames = cx(
     `${prefix}--tabs__nav-item--icon-only`,

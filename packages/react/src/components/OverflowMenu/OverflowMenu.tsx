@@ -12,6 +12,7 @@ import React, {
   isValidElement,
   KeyboardEvent,
   MouseEvent,
+  RefObject,
   useCallback,
   useContext,
   useEffect,
@@ -275,7 +276,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     const prevOpenProp = useRef(openProp);
     const prevOpenState = useRef(open);
     /** The element ref of the tooltip's trigger button. */
-    const triggerRef = useRef<HTMLButtonElement>(null);
+    const triggerRef = useRef<HTMLButtonElement | null>(null);
 
     // Sync open prop changes.
     useEffect(() => {
@@ -385,14 +386,14 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
      * item index and direction to move.
      */
     const handleOverflowMenuItemFocus = ({
-      currentIndex,
+      currentIndex = 0,
       direction,
     }: {
       /**
        * The index of the currently focused overflow menu item in the list of
        * overflow menu items
        */
-      currentIndex: number;
+      currentIndex?: number;
       /**
        * Number denoting the direction to move focus (1 for forwards, -1 for
        * backwards).
@@ -505,7 +506,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
 
     const childrenWithProps = Children.toArray(children).map((child, index) => {
       if (isValidElement(child)) {
-        const childElement = child as ReactElement;
+        const childElement = child as ReactElement<OverflowMenuItemProps>;
         return cloneElement(childElement, {
           closeMenu: childElement.props.closeMenu || closeMenuAndFocus,
           handleOverflowMenuItemFocus,
@@ -533,7 +534,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     const wrappedMenuBody = (
       <FloatingMenu
         focusTrap={focusTrap}
-        triggerRef={triggerRef}
+        triggerRef={triggerRef as RefObject<HTMLElement>}
         menuDirection={direction}
         menuOffset={flipped ? menuOffsetFlip : menuOffset}
         menuRef={bindMenuBody}
@@ -701,7 +702,6 @@ OverflowMenu.propTypes = {
   /**
    * A component used to render an icon.
    */
-  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
