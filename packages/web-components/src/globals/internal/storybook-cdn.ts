@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -36,16 +34,9 @@ function _renderScript(components, tag) {
  */
 export const cdnJs = ({ components }) => {
   return `
-### JS (via CDN)
+## CDN
 
- > NOTE: Only one version of artifacts should be used. Mixing versions will cause rendering issues.
-
- \`\`\`html
- // SPECIFIC VERSION (available starting v2.0.0)
- ${_renderScript(components, `version/v${packageJson.version}`)}
- \`\`\`
-
- #### Right-to-left (RTL) versions
+This component is also available via CDN.
 
  \`\`\`html
  // SPECIFIC VERSION (available starting v2.0.0)

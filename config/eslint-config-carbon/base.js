@@ -39,7 +39,4 @@ module.exports = {
     jest: true,
     jasmine: true,
   },
-  globals: {
-    __DEV__: true,
-  },
 };
