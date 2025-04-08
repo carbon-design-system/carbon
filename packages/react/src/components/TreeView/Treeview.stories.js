@@ -9,6 +9,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Document, Folder } from '@carbon/icons-react';
 import { default as TreeView, TreeNode } from './';
+import { Button } from '../Button/index';
 import mdx from './TreeView.mdx';
 import './story.scss';
 
@@ -820,25 +821,11 @@ export const WithControlledExpansion = () => {
   return (
     <>
       <div style={{ marginBottom: '1rem' }}>
-        <button type="button" onClick={() => setExpanded(true)}>
-          expand all
-        </button>
-        <button type="button" onClick={() => setExpanded(false)}>
-          collapse all
-        </button>
+        <Button onClick={() => setExpanded(true)}>Expand all</Button>
+        &nbsp;
+        <Button onClick={() => setExpanded(false)}>Collapse all</Button>
       </div>
       <TreeView label="Tree View">{renderTree({ nodes, expanded })}</TreeView>
     </>
-  );
-};
-
-export const Temp = () => {
-  return (
-    <TreeView label="Tree View">
-      <TreeNode label="Enabled">
-        <TreeNode label="Disabled" disabled />
-      </TreeNode>
-      <TreeNode label="Disabled" disabled></TreeNode>
-    </TreeView>
   );
 };

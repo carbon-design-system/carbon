@@ -1,7 +1,5 @@
 /**
- * @license
- *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,6 +11,7 @@ import './index';
 
 const defaultArgs = {
   isExpressive: false,
+  nested: false,
 };
 
 const controls = {
@@ -23,8 +22,18 @@ const controls = {
 };
 
 export const Default = {
-  render: () =>
-    html`<cds-unordered-list>
+  args: {
+    ...defaultArgs,
+  },
+  argTypes: {
+    ...controls,
+    nested: {
+      control: 'boolean',
+      description: 'Specify whether to use nested styling for child lists.',
+    },
+  },
+  render: ({ isExpressive, nested }) =>
+    html`<cds-unordered-list ?is-expressive="${isExpressive}" ?nested=${nested}>
       <cds-list-item>Unordered List level 1</cds-list-item>
       <cds-list-item>Unordered List level 1</cds-list-item>
       <cds-list-item>Unordered List level 1</cds-list-item>
@@ -50,31 +59,6 @@ export const Nested = {
       <cds-list-item>Unordered List level 1</cds-list-item>
       <cds-list-item>Unordered List level 1</cds-list-item>
     </cds-unordered-list>`,
-};
-
-export const Playground = {
-  args: defaultArgs,
-  argTypes: controls,
-
-  render: ({ isExpressive }) => html`
-    <cds-unordered-list ?isExpressive="${isExpressive}">
-      <cds-list-item>
-        Unordered List level 1
-        <cds-unordered-list ?isExpressive="${isExpressive}">
-          <cds-list-item>Unordered List level 2</cds-list-item>
-          <cds-list-item>
-            Unordered List level 2
-            <cds-unordered-list ?isExpressive="${isExpressive}">
-              <cds-list-item>Unordered List level 2</cds-list-item>
-              <cds-list-item>Unordered List level 2</cds-list-item>
-            </cds-unordered-list>
-          </cds-list-item>
-        </cds-unordered-list>
-      </cds-list-item>
-      <cds-list-item>Unordered List level 1</cds-list-item>
-      <cds-list-item>Unordered List level 1</cds-list-item>
-    </cds-unordered-list>
-  `,
 };
 
 const meta = {

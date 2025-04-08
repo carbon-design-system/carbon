@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -32,7 +30,8 @@ class CDSOrderedList extends CDSUnorderedList {
     const classes = classMap({
       [`${prefix}--list--ordered`]: !this.native,
       [`${prefix}--list--ordered--native`]: this.native,
-      [`${prefix}--list--nested`]: this.getAttribute('slot') === 'nested',
+      [`${prefix}--list--nested`]:
+        this.getAttribute('slot') === 'nested' || this.nested,
       [`${prefix}--list--expressive`]: this.isExpressive,
     });
     return html`

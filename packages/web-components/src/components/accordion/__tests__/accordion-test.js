@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -29,7 +27,7 @@ describe('cds-accordion', function () {
   it('should render', async () => {
     const el = await fixture(accordion);
 
-    await expect(el).dom.to.equalSnapshot();
+    expect(el).dom.to.equalSnapshot();
   });
 
   describe('automated verification testing', () => {
