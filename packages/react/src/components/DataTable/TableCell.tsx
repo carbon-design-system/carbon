@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
 
-interface TableCellProps extends ReactAttr<HTMLTableCellElement> {
+export interface TableCellProps extends ReactAttr<HTMLTableCellElement> {
   /**
    * Pass in children that will be embedded in the table header label
    */

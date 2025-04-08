@@ -11,33 +11,39 @@ import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { GridSettings } from './GridContext';
 import { GridComponent, GridProps } from './GridTypes';
+import { PolymorphicRef } from '../../internal/PolymorphicProps';
 
-function FlexGrid<T extends React.ElementType>({
-  as: BaseComponent = 'div' as T,
-  condensed = false,
-  narrow = false,
-  fullWidth = false,
-  className: containerClassName,
-  children,
-  ...rest
-}: GridProps<T>) {
-  const prefix = usePrefix();
-  const className = cx(containerClassName, {
-    [`${prefix}--grid`]: true,
-    [`${prefix}--grid--condensed`]: condensed,
-    [`${prefix}--grid--narrow`]: narrow,
-    [`${prefix}--grid--full-width`]: fullWidth,
-  });
-  // cast as any to let TypeScript allow passing in attributes to base component
-  const BaseComponentAsAny: any = BaseComponent;
-  return (
-    <GridSettings mode="flexbox" subgrid={false}>
-      <BaseComponentAsAny className={className} {...rest}>
-        {children}
-      </BaseComponentAsAny>
-    </GridSettings>
-  );
-}
+const FlexGrid = React.forwardRef(
+  <T extends React.ElementType = 'div'>(
+    {
+      as,
+      condensed = false,
+      narrow = false,
+      fullWidth = false,
+      className: containerClassName,
+      children,
+      ...rest
+    }: GridProps<T>,
+    ref?: PolymorphicRef<T>
+  ) => {
+    const prefix = usePrefix();
+    const className = cx(containerClassName, {
+      [`${prefix}--grid`]: true,
+      [`${prefix}--grid--condensed`]: condensed,
+      [`${prefix}--grid--narrow`]: narrow,
+      [`${prefix}--grid--full-width`]: fullWidth,
+    });
+    // cast as any to let TypeScript allow passing in attributes to base component
+    const BaseComponent = as || 'div';
+    return (
+      <GridSettings mode="flexbox" subgrid={false}>
+        <BaseComponent className={className} ref={ref} {...rest}>
+          {children}
+        </BaseComponent>
+      </GridSettings>
+    );
+  }
+);
 
 FlexGrid.propTypes = {
   /**

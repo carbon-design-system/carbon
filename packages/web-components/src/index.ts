@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -116,6 +114,7 @@ export { default as CDSSelect } from './components/select/select';
 export { default as CDSSelectItem } from './components/select/select-item';
 export { default as CDSSelectItemGroup } from './components/select/select-item-group';
 export { default as CDSSelectSkeleton } from './components/select/select-skeleton';
+export { default as CDSShapeIndicator } from './components/shape-indicator/shape-indicator';
 export { default as CDSSkeletonIcon } from './components/skeleton-icon/skeleton-icon';
 export { default as CDSSkeletonPlaceholder } from './components/skeleton-placeholder/skeleton-placeholder';
 export { default as CDSSkeletonText } from './components/skeleton-text/skeleton-text';
@@ -166,3 +165,8 @@ export { default as CDSSwitcher } from './components/ui-shell/switcher';
 export { default as CDSSwitcherItem } from './components/ui-shell/switcher-item';
 export { default as CDSSwitcherDivider } from './components/ui-shell/switcher-divider';
 export { default as CDSStack } from './components/stack/stack';
+export { default as CDSTimePicker } from './components/time-picker/time-picker';
+export { default as CDSTimePickerSelect } from './components/time-picker/time-picker-select';
+export { default as CDSTreeView } from './components/tree-view/tree-view';
+export { default as CDSTreeNode } from './components/tree-view/tree-node';
+export { default as CDSHeading } from './components/heading/heading';

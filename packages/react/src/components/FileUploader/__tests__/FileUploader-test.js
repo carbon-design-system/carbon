@@ -50,38 +50,22 @@ describe('FileUploader', () => {
 
   it('should clear all uploaded files when `clearFiles` is called on a ref', () => {
     const ref = React.createRef();
-    const onClick = jest.fn();
-    let requiredProps1 = {
-      ...requiredProps,
-      filenameStatus: 'edit',
-    };
-    const fileUpload = render(
-      <FileUploader {...requiredProps1} ref={ref} onClick={onClick} />
-    );
+    const { container } = render(<FileUploader {...requiredProps} ref={ref} />);
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const input = fileUpload.container.querySelector('input');
+    const input = container.querySelector('input');
 
     const filename = 'test.png';
     act(() => {
       uploadFiles(input, [new File(['test'], filename, { type: 'image/png' })]);
     });
-    expect(getByText(fileUpload.container, filename)).toBeInstanceOf(
-      HTMLElement
-    );
 
-    const onDelete = jest.fn();
-    const description = 'test-description';
-    // eslint-disable-next-line testing-library/render-result-naming-convention
-
-    let removeFile = getByLabel(
-      fileUpload.container,
-      'test description - test.png'
-    );
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    expect(getByText(container, filename)).toBeInstanceOf(HTMLElement);
     act(() => {
-      Simulate.click(removeFile);
+      ref.current.clearFiles();
     });
-
-    expect(onClick).toHaveBeenCalledTimes(1);
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    expect(getByText(container, filename)).not.toBeInstanceOf(HTMLElement);
   });
 
   it('should synchronize the filename status state when its prop changes', () => {

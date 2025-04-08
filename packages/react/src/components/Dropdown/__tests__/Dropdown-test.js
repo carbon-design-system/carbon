@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -110,7 +110,7 @@ describe('Dropdown', () => {
     expect(screen.getByText(1)).toBeInTheDocument();
   });
 
-  it('should render when defaulItemtoString passed with null value', async () => {
+  it('should render when defaultItemToString passed with null value', async () => {
     let mockProps2 = { ...mockProps, label: [] };
     const { container } = render(<Dropdown {...mockProps2} />);
     const labelElement = screen.queryByText('shankar');
@@ -178,6 +178,29 @@ describe('Dropdown', () => {
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
     });
+  });
+
+  it('should not open on arrowUp', async () => {
+    let mockProps1 = { ...mockProps };
+    const ref = React.createRef();
+    render(<Dropdown {...mockProps1} readOnly={false} ref={ref} />);
+
+    const button = screen.getByRole('combobox');
+
+    if (button) {
+      assertMenuClosed();
+      // ArrowUp should not open the menu
+      fireEvent.keyDown(button, { key: 'ArrowUp' });
+      assertMenuClosed();
+      // ArrowDown should open the menu
+      fireEvent.keyDown(button, { key: 'ArrowDown' });
+      assertMenuOpen(mockProps1);
+      // ArrowUp is allowed now that the menu is open
+      fireEvent.keyDown(button, { key: 'ArrowUp' });
+      assertMenuOpen(mockProps1);
+    }
+
+    mockProps.onChange.mockClear();
   });
 
   it('should respect readOnly prop', async () => {
@@ -434,5 +457,21 @@ describe('Test useEffect ', () => {
     );
     await waitForPosition();
     assertMenuClosed();
+  });
+
+  it('should add label props when `titleText` is a string', () => {
+    render(<Dropdown {...mockProps} titleText="Dropdown Title" />);
+
+    const label = screen.getByText('Dropdown Title').closest('label');
+
+    expect(label).toHaveAttribute('id');
+  });
+
+  it('should not add label props when `titleText` is an element', () => {
+    render(<Dropdown {...mockProps} titleText={<span>Dropdown Title</span>} />);
+
+    const label = screen.getByText('Dropdown Title').closest('label');
+
+    expect(label).not.toHaveAttribute('id');
   });
 });

@@ -21,6 +21,14 @@ test.describe('TreeView', () => {
           theme,
         });
       });
+
+      test('treeview-links @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'TreeView',
+          id: 'components-treeview--with-links',
+          theme,
+        });
+      });
     });
   });
 });

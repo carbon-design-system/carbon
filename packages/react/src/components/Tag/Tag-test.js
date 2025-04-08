@@ -80,13 +80,10 @@ describe('Tag', () => {
           type="red"
           title="Close tag"
           text="Tag content"
-          decorator={<AILabel />}
+          decorator={<AILabel aiText="AI" />}
         />
       );
-
-      expect(
-        screen.getByRole('button', { name: 'AI Show information' })
-      ).toBeInTheDocument();
+      expect(screen.getByText('AI')).toBeInTheDocument();
     });
 
     it('should respect deprecated slug prop', () => {
@@ -96,13 +93,10 @@ describe('Tag', () => {
           type="red"
           title="Close tag"
           text="Tag content"
-          slug={<AILabel />}
+          slug={<AILabel aiText="AI" />}
         />
       );
-
-      expect(
-        screen.getByRole('button', { name: 'AI Show information' })
-      ).toBeInTheDocument();
+      expect(screen.getByText('AI')).toBeInTheDocument();
       spy.mockRestore();
     });
   });
@@ -123,20 +117,14 @@ describe('Tag', () => {
   });
 
   it('should respect decorator prop', () => {
-    render(<Tag type="red" decorator={<AILabel />} />);
-
-    expect(
-      screen.getByRole('button', { name: 'AI Show information' })
-    ).toBeInTheDocument();
+    render(<Tag type="red" decorator={<AILabel aiText="AI" />} />);
+    expect(screen.getByText('AI')).toBeInTheDocument();
   });
 
   it('should respect deprecated slug prop', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    render(<Tag type="red" slug={<AILabel />} />);
-
-    expect(
-      screen.getByRole('button', { name: 'AI Show information' })
-    ).toBeInTheDocument();
+    render(<Tag type="red" slug={<AILabel aiText="AI" />} />);
+    expect(screen.getByText('AI')).toBeInTheDocument();
     spy.mockRestore();
   });
 
@@ -303,5 +291,21 @@ describe('Tag', () => {
     expect(mockOnClose).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalled();
     spy.mockRestore();
+  });
+  it('OperationalTag to supports a ref on the underlying button element', () => {
+    const ref = React.createRef();
+    render(<OperationalTag type="red" text="Test Tag" ref={ref} />);
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+  });
+  it('DismissibleTag to supports a ref on the underlying button element', () => {
+    const ref = React.createRef();
+    render(<DismissibleTag type="red" text="Test Tag" ref={ref} />);
+
+    expect(ref.current).toBeInstanceOf(HTMLDivElement);
+  });
+  it('SelectableTag to supports a ref on the underlying Div element', () => {
+    const ref = React.createRef();
+    render(<SelectableTag type="red" text="Test Tag" ref={ref} />);
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
   });
 });

@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -16,6 +14,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 /**
  * Overflow menu in breadcrumb.
+ *
+ * @deprecated use `cds-overflow-menu` instead with the `breadcrumb` property
  *
  * @element cds-breadcrumb-overflow-menu
  */

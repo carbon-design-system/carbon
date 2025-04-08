@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -61,7 +59,7 @@ class CDSLink extends FocusMixin(LitElement) {
   /**
    * The CSS class list for the link node.
    */
-  protected get _classes() {
+  protected get _classes(): any {
     const { disabled, size, inline, visited, _hasIcon } = this;
     return classMap({
       [`${prefix}--link`]: true,

@@ -56,7 +56,7 @@ const iconTypes = {
 
 export type IconIndicatorKind = (typeof IconIndicatorKinds)[number];
 
-interface IconIndicatorProps {
+export interface IconIndicatorProps {
   /**
    * Specify an optional className to add.
    */

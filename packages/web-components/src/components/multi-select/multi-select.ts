@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -444,7 +442,7 @@ class CDSMultiSelect extends CDSDropdown {
   /**
    * The CSS class list for multi-select listbox
    */
-  protected get _classes() {
+  protected get _classes(): any {
     const {
       disabled,
       size,

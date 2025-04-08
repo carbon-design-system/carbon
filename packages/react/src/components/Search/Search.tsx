@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,7 +19,6 @@ import React, {
   type FunctionComponent,
   type MouseEvent,
 } from 'react';
-import { focus } from '../../internal/focus';
 import { keys, match } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -96,8 +95,7 @@ export interface SearchProps extends InputPropsBase {
   placeholder?: string;
 
   /**
-   * Rendered icon for the Search.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: ComponentType | FunctionComponent;
 
@@ -152,7 +150,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const inputRef = useRef<HTMLInputElement>(null);
-  const ref = useMergedRefs<HTMLInputElement>([forwardRef, inputRef]);
+  const ref = useMergedRefs([forwardRef, inputRef]);
   const expandButtonRef = useRef<HTMLDivElement>(null);
   const inputId = useId('search-input');
   const uniqueId = id || inputId;
@@ -193,7 +191,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
     onChange(clearedEvt);
     onClear();
     setHasContent(false);
-    focus(inputRef);
+    inputRef.current?.focus();
   }
 
   function handleChange(event) {
@@ -358,8 +356,7 @@ Search.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-   * Rendered icon for the Search.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

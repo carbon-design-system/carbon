@@ -48,6 +48,7 @@ in the Carbon monorepo.
 | -------------------------------------------------- | ------------------------------------------------------------------------------------ | ------- | --------------- | --------- |
 | `enable-experimental-tile-contrast`                | Enable the improved styling for tiles that provides better contrast                  | `false` |                 | ✅        |
 | `enable-experimental-focus-wrap-without-sentinels` | Enable the new focus wrap behavior that doesn't use sentinel nodes                   | `false` | ✅              |           |
+| `enable-dialog-element`                            | Enable components to utilize the native dialog element                               | `false` | ✅              | ✅        |
 | `enable-treeview-controllable`                     | Enable the new TreeView controllable API                                             | `false` | ✅              |           |
 | `enable-v12-tile-default-icons`                    | Enable default icons for Tile components                                             | `false` | ✅              |           |
 | `enable-v12-overflowmenu`                          | Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents             | `false` | ✅              |           |
@@ -62,7 +63,7 @@ application's react tree. Multiple feature flags can be configured at the same
 time.
 
 ```jsx
-import { unstable_FeatureFlags as FeatureFlags } from '@carbon/react';
+import { FeatureFlags } from '@carbon/react';
 
 <FeatureFlags enableV12TileDefaultIcons="true" enableASecondFeatureFlag="true">
   <Tile />
@@ -76,7 +77,7 @@ entire app, or only certain pages/routes/sections of your application.
 ```jsx
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { unstable_FeatureFlags as FeatureFlags } from '@carbon/react';
+import { FeatureFlags } from '@carbon/react';
 import App from './App';
 
 const root = createRoot(document.getElementById('root'));

@@ -81,7 +81,7 @@ function calculateCuts(
   };
 }
 
-interface DirectionButtonProps {
+export interface DirectionButtonProps {
   /**
    * The direction this button represents ("forward" or "backward").
    */
@@ -125,7 +125,7 @@ function DirectionButton({
   );
 }
 
-interface PaginationItemProps
+export interface PaginationItemProps
   extends TranslateWithId<
     'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
   > {
@@ -175,7 +175,7 @@ function PaginationItem({
   );
 }
 
-interface PaginationOverflowProps
+export interface PaginationOverflowProps
   extends TranslateWithId<
     'carbon.pagination-nav.item' | 'carbon.pagination-nav.active'
   > {
@@ -279,7 +279,7 @@ function PaginationOverflow({
   return null;
 }
 
-interface PaginationNavProps
+export interface PaginationNavProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'onChange'>,
     TranslateWithId<TranslationKey> {
   /**

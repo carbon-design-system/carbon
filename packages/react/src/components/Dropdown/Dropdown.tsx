@@ -1,21 +1,21 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, {
-  useCallback,
-  useContext,
-  useState,
   FocusEvent,
   ForwardedRef,
+  isValidElement,
   MouseEvent,
   ReactNode,
+  useCallback,
+  useContext,
   useEffect,
   useMemo,
-  ReactElement,
+  useState,
 } from 'react';
 import {
   useSelect,
@@ -47,10 +47,10 @@ import { useId } from '../../internal/useId';
 import {
   useFloating,
   flip,
+  hide,
   autoUpdate,
   size as floatingSize,
 } from '@floating-ui/react';
-import { hide } from '@floating-ui/dom';
 import { useFeatureFlag } from '../FeatureFlags';
 
 const { ItemMouseMove, MenuMouseLeave } =
@@ -461,6 +461,7 @@ const Dropdown = React.forwardRef(
       [`${prefix}--dropdown--invalid`]: invalid,
       [`${prefix}--dropdown--warning`]: showWarning,
       [`${prefix}--dropdown--open`]: isOpen,
+      [`${prefix}--dropdown--focus`]: isFocused,
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--disabled`]: disabled,
       [`${prefix}--dropdown--light`]: light,
@@ -489,8 +490,6 @@ const Dropdown = React.forwardRef(
         [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
         [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
         [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
-        [`${prefix}--list-box__wrapper--fluid--focus`]:
-          isFluid && isFocused && !isOpen,
         [`${prefix}--list-box__wrapper--slug`]: slug,
         [`${prefix}--list-box__wrapper--decorator`]: decorator,
       }
@@ -518,7 +517,7 @@ const Dropdown = React.forwardRef(
       ) : null;
 
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
-      setIsFocused(evt.type === 'focus' ? true : false);
+      setIsFocused(evt.type === 'focus' && !selectedItem ? true : false);
     };
 
     const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
@@ -548,7 +547,18 @@ const Dropdown = React.forwardRef(
             }, 3000)
           );
         }
-        if (toggleButtonProps.onKeyDown) {
+        if (['ArrowDown'].includes(evt.key)) {
+          setIsFocused(false);
+        }
+        if (['Enter'].includes(evt.key) && !selectedItem && !isOpen) {
+          setIsFocused(true);
+        }
+
+        // For Dropdowns the arrow up key is only allowed if the Dropdown is open
+        if (
+          toggleButtonProps.onKeyDown &&
+          (evt.key !== 'ArrowUp' || (isOpen && evt.key === 'ArrowUp'))
+        ) {
           toggleButtonProps.onKeyDown(evt);
         }
       },
@@ -598,10 +608,12 @@ const Dropdown = React.forwardRef(
       return React.isValidElement(element) ? element : null;
     }, [slug, decorator]);
 
+    const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
+
     return (
       <div className={wrapperClasses} {...other}>
         {titleText && (
-          <label className={titleClasses} {...getLabelProps()}>
+          <label className={titleClasses} {...labelProps}>
             {titleText}
           </label>
         )}

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { PolymorphicProps } from '../../types/common';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
 export interface GridBaseProps {
   /**
@@ -36,14 +36,13 @@ export interface GridBaseProps {
   narrow?: boolean;
 }
 
-export type GridProps<T extends React.ElementType> = PolymorphicProps<
-  T,
-  GridBaseProps
->;
+export type GridProps<T extends React.ElementType> =
+  PolymorphicComponentPropWithRef<T, GridBaseProps>;
 
 export interface GridComponent {
-  <T extends React.ElementType>(
-    props: GridProps<T>,
-    context?: any
-  ): React.ReactElement<any, any> | null;
+  <T extends React.ElementType = 'div'>(
+    props: GridProps<T>
+  ): React.ReactElement | null;
+  displayName?: string;
+  propTypes?: React.WeakValidationMap<GridProps<any>>;
 }
