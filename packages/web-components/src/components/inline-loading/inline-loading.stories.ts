@@ -9,15 +9,12 @@
 
 import { html } from 'lit';
 import { INLINE_LOADING_STATE } from './inline-loading';
-import { prefix } from '../../globals/settings';
 
 const states = {
-  [`Inactive (${INLINE_LOADING_STATE.INACTIVE})`]:
-    INLINE_LOADING_STATE.INACTIVE,
-  [`Active (${INLINE_LOADING_STATE.ACTIVE})`]: INLINE_LOADING_STATE.ACTIVE,
-  [`Finished (${INLINE_LOADING_STATE.FINISHED})`]:
-    INLINE_LOADING_STATE.FINISHED,
-  [`Failed (${INLINE_LOADING_STATE.ERROR})`]: INLINE_LOADING_STATE.ERROR,
+  [`${INLINE_LOADING_STATE.INACTIVE}`]: INLINE_LOADING_STATE.INACTIVE,
+  [`${INLINE_LOADING_STATE.ACTIVE}`]: INLINE_LOADING_STATE.ACTIVE,
+  [`${INLINE_LOADING_STATE.FINISHED}`]: INLINE_LOADING_STATE.FINISHED,
+  [`${INLINE_LOADING_STATE.ERROR}`]: INLINE_LOADING_STATE.ERROR,
 };
 
 const noop = () => {};
@@ -98,7 +95,10 @@ export const UxExample = {
 
       // Instead of making a real request, we mock it with a timer
       setTimeout(() => {
-        loadingElem && loadingElem.setAttribute('status', 'finished');
+        if (loadingElem) {
+          loadingElem.setAttribute('status', 'finished');
+          loadingElem.innerHTML = 'Submitted!';
+        }
 
         // To make submittable again, we reset the state after a bit so the user gets completion feedback
         setTimeout(() => {
@@ -107,7 +107,10 @@ export const UxExample = {
           submit && ((submit as HTMLElement).style.display = 'block');
 
           cancel && (cancel.disabled = false);
-          loadingElem && loadingElem.setAttribute('aria-live', 'off');
+          if (loadingElem) {
+            loadingElem.setAttribute('aria-live', 'off');
+            loadingElem.innerHTML = 'Submitting';
+          }
         }, 1500);
       }, 2000);
     };
