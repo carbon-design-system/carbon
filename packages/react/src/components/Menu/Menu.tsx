@@ -29,6 +29,8 @@ import { MenuContext, menuReducer } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
 import { canUseDOM } from '../../internal/environment';
 
+import { Theme, useTheme } from '../Theme';
+
 const spacing = 8; // distance to keep to window edges, in px
 
 export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
@@ -50,6 +52,11 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
    * A label describing the Menu.
    */
   label: string;
+
+  /**
+   * Specify if the component should match the current theme
+   */
+  matchTheme?: boolean;
 
   /**
    * Specify how the menu should align with the button element
@@ -110,6 +117,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     className,
     containerRef,
     label,
+    matchTheme = false,
     menuAlignment,
     mode,
     onClose,
@@ -132,6 +140,8 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const context = useContext(MenuContext);
 
   const isRoot = context.state.isRoot;
+
+  const { theme } = useTheme();
 
   const menuSize = isRoot ? size : context.state.size;
 
@@ -423,7 +433,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
   );
 
-  const rendered = (
+  const renderedMenu = (
     <MenuContext.Provider value={childContext}>
       <ul
         {...rest}
@@ -437,6 +447,12 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
         {children}
       </ul>
     </MenuContext.Provider>
+  );
+
+  const rendered = matchTheme ? (
+    <Theme theme={theme}>{renderedMenu}</Theme>
+  ) : (
+    renderedMenu
   );
 
   if (!target) {
@@ -462,6 +478,11 @@ Menu.propTypes = {
    */
   // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   label: PropTypes.string,
+
+  /**
+   * Specify if the component should match the current theme
+   */
+  matchTheme: PropTypes.bool,
 
   /**
    * Specify how the menu should align with the button element
