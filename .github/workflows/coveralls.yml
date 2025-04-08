@@ -19,7 +19,7 @@ jobs:
 
       - name: npm install, make test-coverage
         run: |
-          yarn install --frozen-lockfile
+          yarn install --immutable
           yarn test
 
       - name: Coveralls
