@@ -310,34 +310,6 @@
     inline-size: convert.to-rem(32px);
   }
 
-  // fix expanded parent separating border length
-  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
-    td.#{$prefix}--table-expand
-    + td::after {
-    position: absolute;
-    background-color: $layer-accent;
-    block-size: convert.to-rem(1px);
-    content: '';
-    inline-size: convert.to-rem(8px);
-    inset-block-end: convert.to-rem(-1px);
-    inset-inline-start: 0;
-  }
-
-  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
-    td.#{$prefix}--table-expand
-    + td::after,
-  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
-    td.#{$prefix}--table-expand
-    + td::after {
-    background-color: $layer-hover;
-  }
-
-  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected
-    td.#{$prefix}--table-expand
-    + td::after {
-    display: none;
-  }
-
   //----------------------------------------------------------------------------
   //ZEBRA
   //----------------------------------------------------------------------------
