@@ -10,14 +10,14 @@ import React, {
   cloneElement,
   forwardRef,
   isValidElement,
-  KeyboardEvent,
-  MouseEvent,
   useCallback,
   useContext,
   useEffect,
   useRef,
   useState,
   type ElementType,
+  type KeyboardEvent,
+  type MouseEvent,
   type ReactElement,
   type ReactNode,
   type Ref,
@@ -26,7 +26,7 @@ import { OverflowMenuVertical } from '@carbon/icons-react';
 import classNames from 'classnames';
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
-import ClickListener from '../../internal/ClickListener';
+import { ClickListener } from '../../internal/ClickListener';
 import {
   DIRECTION_BOTTOM,
   DIRECTION_TOP,
@@ -369,11 +369,12 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
     };
 
-    const handleClickOutside = (evt: MouseEvent<Document>) => {
+    const handleClickOutside = (evt: globalThis.MouseEvent) => {
       if (
         open &&
         (!menuBodyRef.current ||
-          !menuBodyRef.current.contains(evt.target as Node))
+          (evt.target instanceof Node &&
+            !menuBodyRef.current.contains(evt.target)))
       ) {
         closeMenu();
       }

@@ -98,7 +98,7 @@
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
       background: transparent;
-      color: $text-on-color-disabled;
+      color: $text-disabled;
       outline: none;
     }
   }
@@ -140,7 +140,7 @@
     &.#{$prefix}--btn--disabled:focus {
       border-color: transparent;
       background: transparent;
-      color: $text-on-color-disabled;
+      color: $text-disabled;
       outline: none;
     }
 
@@ -274,7 +274,7 @@
       &.#{$prefix}--btn--disabled:hover,
       &.#{$prefix}--btn--disabled:focus {
         background: transparent;
-        color: $text-on-color-disabled;
+        color: $text-disabled;
         outline: none;
       }
     }

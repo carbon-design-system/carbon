@@ -6,7 +6,14 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useState, useRef, MouseEvent } from 'react';
+import React, {
+  useLayoutEffect,
+  useState,
+  useRef,
+  MouseEvent,
+  forwardRef,
+  ForwardedRef,
+} from 'react';
 import classNames from 'classnames';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -15,7 +22,7 @@ import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
-
+import mergeRefs from '../../tools/mergeRefs';
 export interface SelectableTagBaseProps {
   /**
    * Provide a custom className that is applied to the containing <span>
@@ -69,88 +76,94 @@ export type SelectableTagProps<T extends React.ElementType> = PolymorphicProps<
   SelectableTagBaseProps
 >;
 
-const SelectableTag = <T extends React.ElementType>({
-  className,
-  disabled,
-  id,
-  renderIcon,
-  onChange,
-  onClick,
-  selected = false,
-  size,
-  text,
-  ...other
-}: SelectableTagProps<T>) => {
-  const prefix = usePrefix();
-  const tagRef = useRef<HTMLButtonElement>(null);
-  const tagId = id || `tag-${useId()}`;
-  const [selectedTag, setSelectedTag] = useState(selected);
-  const tagClasses = classNames(`${prefix}--tag--selectable`, className, {
-    [`${prefix}--tag--selectable-selected`]: selectedTag,
-  });
-  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+const SelectableTag = forwardRef(
+  <T extends React.ElementType>(
+    {
+      className,
+      disabled,
+      id,
+      renderIcon,
+      onChange,
+      onClick,
+      selected = false,
+      size,
+      text,
+      ...other
+    }: SelectableTagProps<T>,
+    forwardRef: ForwardedRef<HTMLButtonElement>
+  ) => {
+    const prefix = usePrefix();
+    const tagRef = useRef<HTMLButtonElement>(null);
+    const tagId = id || `tag-${useId()}`;
+    const [selectedTag, setSelectedTag] = useState(selected);
+    const tagClasses = classNames(`${prefix}--tag--selectable`, className, {
+      [`${prefix}--tag--selectable-selected`]: selectedTag,
+    });
+    const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-  useLayoutEffect(() => {
-    const newElement = tagRef.current?.getElementsByClassName(
-      `${prefix}--tag__label`
-    )[0];
-    setIsEllipsisApplied(isEllipsisActive(newElement));
-  }, [prefix, tagRef]);
+    useLayoutEffect(() => {
+      const newElement = tagRef.current?.getElementsByClassName(
+        `${prefix}--tag__label`
+      )[0];
+      setIsEllipsisApplied(isEllipsisActive(newElement));
+    }, [prefix, tagRef]);
 
-  const tooltipClasses = classNames(
-    `${prefix}--icon-tooltip`,
-    `${prefix}--tag-label-tooltip`
-  );
+    const tooltipClasses = classNames(
+      `${prefix}--icon-tooltip`,
+      `${prefix}--tag-label-tooltip`
+    );
+    const combinedRef = mergeRefs(tagRef, forwardRef);
 
-  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-    setSelectedTag(!selectedTag);
-    onChange?.(!selectedTag);
-    onClick?.(e);
-  };
+    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+      setSelectedTag(!selectedTag);
+      onChange?.(!selectedTag);
+      onClick?.(e);
+    };
 
-  if (isEllipsisApplied) {
+    if (isEllipsisApplied) {
+      return (
+        <Tooltip
+          label={text}
+          align="bottom"
+          className={tooltipClasses}
+          leaveDelayMs={0}
+          onMouseEnter={() => false}>
+          <Tag
+            aria-pressed={selectedTag !== false}
+            ref={combinedRef}
+            size={size}
+            renderIcon={renderIcon}
+            disabled={disabled}
+            className={tagClasses}
+            id={tagId}
+            onClick={handleClick}
+            {...other}>
+            <Text title={text} className={`${prefix}--tag__label`}>
+              {text}
+            </Text>
+          </Tag>
+        </Tooltip>
+      );
+    }
+
     return (
-      <Tooltip
-        label={text}
-        align="bottom"
-        className={tooltipClasses}
-        leaveDelayMs={0}
-        onMouseEnter={() => false}>
-        <Tag
-          aria-pressed={selectedTag !== false}
-          ref={tagRef}
-          size={size}
-          renderIcon={renderIcon}
-          disabled={disabled}
-          className={tagClasses}
-          id={tagId}
-          onClick={handleClick}
-          {...other}>
-          <Text title={text} className={`${prefix}--tag__label`}>
-            {text}
-          </Text>
-        </Tag>
-      </Tooltip>
+      <Tag
+        aria-pressed={selectedTag !== false}
+        ref={combinedRef}
+        size={size}
+        renderIcon={renderIcon}
+        disabled={disabled}
+        className={tagClasses}
+        id={tagId}
+        onClick={handleClick}
+        {...other}>
+        <Text title={text} className={`${prefix}--tag__label`}>
+          {text}
+        </Text>
+      </Tag>
     );
   }
-
-  return (
-    <Tag
-      aria-pressed={selectedTag !== false}
-      ref={tagRef}
-      size={size}
-      renderIcon={renderIcon}
-      disabled={disabled}
-      className={tagClasses}
-      id={tagId}
-      onClick={handleClick}
-      {...other}>
-      <Text title={text} className={`${prefix}--tag__label`}>
-        {text}
-      </Text>
-    </Tag>
-  );
-};
+);
 
 SelectableTag.propTypes = {
   /**
