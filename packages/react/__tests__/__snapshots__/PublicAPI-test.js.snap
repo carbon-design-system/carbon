@@ -4688,6 +4688,9 @@ Map {
       "label": Object {
         "type": "string",
       },
+      "matchTheme": Object {
+        "type": "bool",
+      },
       "menuAlignment": Object {
         "type": "string",
       },
@@ -4780,6 +4783,9 @@ Map {
       "label": Object {
         "isRequired": true,
         "type": "string",
+      },
+      "matchTheme": Object {
+        "type": "bool",
       },
       "menuAlignment": Object {
         "args": Array [
