@@ -28,8 +28,10 @@ export function format(
   const years = Math.floor(days / 365);
 
   if (Math.abs(seconds) < 60) {
-    // TODO: localize
-    return 'just now';
+    return new Intl.RelativeTimeFormat(options?.locale, {
+      numeric: 'auto',
+      style: options?.style ?? 'long',
+    }).format(0, 'seconds');
   }
 
   if (Math.abs(minutes) < 60) {
@@ -48,7 +50,7 @@ export function format(
     return rtf.format(weeks * -1, 'weeks');
   }
 
-  if (Math.abs(months) < 12) {
+  if (Math.abs(days) < 365) {
     return rtf.format(months * -1, 'months');
   }
 

@@ -14,7 +14,7 @@ test.describe('@avt Menu', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Menu',
-      id: 'components-menu--playground',
+      id: 'components-menu--default',
       globals: {
         theme: 'white',
       },
@@ -25,7 +25,7 @@ test.describe('@avt Menu', () => {
   test.fixme('@avt-keyboard-nav Menu', async ({ page }) => {
     await visitStory(page, {
       component: 'Menu',
-      id: 'components-menu--playground',
+      id: 'components-menu--default',
       globals: {
         theme: 'white',
       },

@@ -12,8 +12,10 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack workflow
         id: slack
-        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
+        uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # v2.0.0
         with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
           payload: |
             {
               "username": "Carbon Design System",
@@ -68,7 +70,7 @@ jobs:
                       "emoji": true
                     },
                     "value": "click_me_123",
-                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10408799",
+                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10482832",
                     "action_id": "button-action"
                   }
                 },
@@ -95,9 +97,6 @@ jobs:
                 }
               ]
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
   post-reminder-to-carbon-web-components:
     name: Post dev reminder to carbon-web-components
@@ -105,8 +104,10 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack workflow
         id: slack
-        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
+        uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # v2.0.0
         with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
           payload: |
             {
               "username": "Carbon Design System",
@@ -161,7 +162,7 @@ jobs:
                       "emoji": true
                     },
                     "value": "click_me_123",
-                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10408799",
+                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10482832",
                     "action_id": "button-action"
                   }
                 },
@@ -188,23 +189,22 @@ jobs:
                 }
               ]
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
-  post-reminder-to-carbon-ibmproducts-pal-dev:
-    name: Post dev reminder to ibmproducts-pal-dev
+  post-reminder-to-carbon-for-ibmproducts:
+    name: Post dev reminder to carbon-for-ibmproducts
     runs-on: ubuntu-latest
     steps:
       - name: Send custom JSON data to Slack workflow
         id: slack
-        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
+        uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # v2.0.0
         with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
           payload: |
             {
               "username": "Carbon Design System",
               "icon_url": "https://user-images.githubusercontent.com/3360588/192045905-5d9705af-92e2-4432-805e-15db98571e8b.png",
-              "channel": "#ibmproducts-pal-dev",
+              "channel": "#carbon-for-ibmproducts",
               "text": "Join us for Carbon Developer Office Hours!",
               "blocks": [
                 {
@@ -254,7 +254,7 @@ jobs:
                       "emoji": true
                     },
                     "value": "click_me_123",
-                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10408799",
+                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10482832",
                     "action_id": "button-action"
                   }
                 },
@@ -281,6 +281,3 @@ jobs:
                 }
               ]
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

@@ -1,6 +1,7 @@
 import { ArgTypes, Story, Canvas, Meta } from '@storybook/blocks';
 import Tooltip from '../Tooltip';
 import * as FormLabelStories from './FormLabel.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -15,7 +16,9 @@ import * as FormLabelStories from './FormLabel.stories';
 
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
-- [Overview](#overview)
+- [FormLabel](#formLabel)
+  - [Overview](#overview)
+  - [With Toggletip](#with-toggletip)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -24,6 +27,10 @@ import * as FormLabelStories from './FormLabel.stories';
 ## Overview
 
 <Canvas of={FormLabelStories.Default} />
+
+#### With Toggletip
+
+<Canvas of={FormLabelStories.WithToggletip} />
 
 ## Component API
 

@@ -63,6 +63,14 @@ export {
   ErrorBoundaryContext,
 } from './components/ErrorBoundary';
 export {
+  FeatureFlags,
+  useFeatureFlag,
+  useFeatureFlags,
+  FeatureFlags as unstable_FeatureFlags, // this export can be removed in v12
+  useFeatureFlag as unstable_useFeatureFlag, // this export can be removed in v12
+  useFeatureFlags as unstable_useFeatureFlags, // this export can be removed in v12
+} from './components/FeatureFlags';
+export {
   FileUploader,
   Filename,
   FileUploaderButton,
@@ -106,13 +114,15 @@ export {
   InlineNotification,
   NotificationActionButton,
   NotificationButton,
-  Callout as unstable__Callout,
-  Callout as unstable__StaticNotification,
+  Callout,
+  Callout as unstable__Callout, // TODO remove when telemetry shows zero usage, or in v12
+  Callout as unstable__StaticNotification, // TODO remove when telemetry shows zero usage, or in v12
 } from './components/Notification';
 export { NumberInput, NumberInputSkeleton } from './components/NumberInput';
 export { OrderedList } from './components/OrderedList';
 export { OverflowMenu } from './components/OverflowMenu';
 export { OverflowMenuItem } from './components/OverflowMenuItem';
+export * as unstable__PageHeader from './components/PageHeader';
 export { Pagination } from './components/Pagination';
 export { PaginationNav } from './components/PaginationNav';
 export {
@@ -234,11 +244,6 @@ export {
 
 // Experimental
 export {
-  FeatureFlags as unstable_FeatureFlags,
-  useFeatureFlag as unstable_useFeatureFlag,
-  useFeatureFlags as unstable_useFeatureFlags,
-} from './components/FeatureFlags';
-export {
   FluidComboBox as unstable__FluidComboBox,
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
 } from './components/FluidComboBox';
@@ -335,3 +340,6 @@ export {
   ChatButton as unstable__ChatButton,
   ChatButtonSkeleton as unstable__ChatButtonSkeleton,
 } from './components/ChatButton';
+
+export { IconIndicator as unstable__IconIndicator } from './components/IconIndicator';
+export { ShapeIndicator as unstable__ShapeIndicator } from './components/ShapeIndicator';

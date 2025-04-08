@@ -11,13 +11,13 @@ import {
   InlineNotification,
   ToastNotification,
   ActionableNotification,
+  Callout,
 } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 const sharedNotificationProps = {
   title: figma.string('Title text'),
   subtitle: figma.string('Message text'),
-  caption: figma.string('Time text'), //only used on toast
   kind: figma.enum('Status', {
     Info: 'info',
     Success: 'success',
@@ -32,46 +32,43 @@ const sharedNotificationProps = {
     true: false,
     false: true,
   }),
-  inline: figma.enum('Type', {
-    'Inline short': true,
-    'Inline long': true,
-  }),
-  button: figma.nestedProps('Button', {
-    // currently grabbing the text from the icon button not the action button
-    // tracking here https://github.com/figma/code-connect/issues/11
-    actionButtonLabel: figma.string('Button text'),
-  }),
-  // this doesn't work
-  // button: figma.nestedProps('Notification action button item', {
-  //   actionButtonItem: figma.nestedProps('Button', {
-  //     actionButtonLabel: figma.string('Button text'),
-  //   }),
-  // }),
 };
 
+// Inline
+figma.connect(
+  InlineNotification,
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=4179-105911&t=nJ89fkK549fgCUuf-4',
+  {
+    variant: { Actionable: 'False' },
+    props: sharedNotificationProps,
+    example: ({ title, kind, subtitle, hideCloseButton, lowContrast }) => (
+      <InlineNotification
+        title={title}
+        kind={kind}
+        subtitle={subtitle}
+        hideCloseButton={hideCloseButton}
+        lowContrast={lowContrast}
+      />
+    ),
+  }
+);
+
+// Inline - actionable
 figma.connect(
   ActionableNotification,
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4179-105911&mode=design&t=WhsTspVnawA9vgXk-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=4179-105911&t=nJ89fkK549fgCUuf-4',
   {
     variant: { Actionable: 'True' },
     props: sharedNotificationProps,
-    example: ({
-      title,
-      kind,
-      subtitle,
-      hideCloseButton,
-      lowContrast,
-      inline,
-      button,
-    }) => (
+    example: ({ title, kind, subtitle, hideCloseButton, lowContrast }) => (
       <ActionableNotification
-        inline={inline}
+        inline
         kind={kind}
         title={title}
         subtitle={subtitle}
         hideCloseButton={hideCloseButton}
         lowContrast={lowContrast}
-        actionButtonLabel={button.actionButtonLabel}
+        actionButtonLabel="Action"
         onActionButtonClick={() => myFunction()}
         onClose={() => myFunction()}
         onCloseButtonClick={() => myFunction()}
@@ -80,55 +77,99 @@ figma.connect(
   }
 );
 
-figma.connect(
-  InlineNotification,
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4179-105911&mode=design&t=lJU3KHSU1pTpZ32z-4',
-  {
-    variant: { Type: 'Inline short' },
-
-    props: sharedNotificationProps,
-    example: ({ title, kind, subtitle, hideCloseButton, lowContrast }) => (
-      <InlineNotification
-        title={title}
-        kind={kind}
-        subtitle={subtitle}
-        hideCloseButton={hideCloseButton}
-        lowContrast={lowContrast}
-      />
-    ),
-  }
-);
-
-figma.connect(
-  InlineNotification,
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4179-105911&mode=design&t=lJU3KHSU1pTpZ32z-4',
-  {
-    variant: { Type: 'Inline long' },
-    props: sharedNotificationProps,
-    example: ({ title, kind, subtitle, hideCloseButton, lowContrast }) => (
-      <InlineNotification
-        title={title}
-        kind={kind}
-        subtitle={subtitle}
-        hideCloseButton={hideCloseButton}
-        lowContrast={lowContrast}
-      />
-    ),
-  }
-);
-
+// Toast
 figma.connect(
   ToastNotification,
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4179-105911&mode=design&t=WhsTspVnawA9vgXk-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=84336-35011&t=nJ89fkK549fgCUuf-4',
   {
-    variant: { Type: 'Toast' },
-    props: sharedNotificationProps,
-    example: ({ title, kind, subtitle, caption, lowContrast }) => (
+    variant: { Actionable: 'False' },
+    props: {
+      title: figma.string('Title text'),
+      subtitle: figma.string('Message text'),
+      caption: figma.string('Time text'),
+      kind: figma.enum('Status', {
+        Info: 'info',
+        Success: 'success',
+        Warning: 'warning',
+        Error: 'error',
+      }),
+      hideCloseButton: figma.boolean('Close', {
+        true: false,
+        false: true,
+      }),
+      lowContrast: figma.boolean('High contrast', {
+        true: false,
+        false: true,
+      }),
+    },
+    example: ({
+      title,
+      kind,
+      subtitle,
+      caption,
+      lowContrast,
+      hideCloseButton,
+    }) => (
       <ToastNotification
         kind={kind}
         title={title}
         subtitle={subtitle}
         caption={caption}
+        hideCloseButton={hideCloseButton}
+        lowContrast={lowContrast}
+      />
+    ),
+  }
+);
+
+// Toast -- actionable
+figma.connect(
+  ActionableNotification,
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=84336-35011&t=nJ89fkK549fgCUuf-4',
+  {
+    variant: { Actionable: 'True' },
+    props: sharedNotificationProps,
+    example: ({ title, kind, subtitle, hideCloseButton, lowContrast }) => (
+      <ActionableNotification
+        kind={kind}
+        title={title}
+        subtitle={subtitle}
+        hideCloseButton={hideCloseButton}
+        lowContrast={lowContrast}
+        actionButtonLabel="Action"
+        onActionButtonClick={() => myFunction()}
+        onClose={() => myFunction()}
+        onCloseButtonClick={() => myFunction()}
+      />
+    ),
+  }
+);
+
+// Callout
+figma.connect(
+  Callout,
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=84336-36580&t=nJ89fkK549fgCUuf-4',
+  {
+    props: {
+      title: figma.boolean('Title', {
+        true: figma.string('Title text'),
+        false: '',
+      }),
+      subtitle: figma.string('Message text'),
+      kind: figma.enum('Status', {
+        Info: 'info',
+        Warning: 'warning',
+      }),
+      lowContrast: figma.boolean('High contrast', {
+        true: false,
+        false: true,
+      }),
+    },
+    example: ({ title, kind, subtitle, lowContrast }) => (
+      <Callout
+        title={title}
+        kind={kind}
+        subtitle={subtitle}
         lowContrast={lowContrast}
       />
     ),

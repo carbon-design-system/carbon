@@ -15,7 +15,7 @@ import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 
-interface SwitchEventHandlersParams {
+export interface SwitchEventHandlersParams {
   index?: number;
   name?: string | number;
   text?: string;
@@ -54,7 +54,7 @@ export interface ContentSwitcherProps
   selectedIndex: number;
 
   /**
-   * Choose whether or not to automatically change selection on focus
+   * Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to 'automatic'
    */
   selectionMode?: 'automatic' | 'manual';
 
@@ -64,7 +64,7 @@ export interface ContentSwitcherProps
   size: 'sm' | 'md' | 'lg';
 }
 
-interface ContentSwitcherState {
+export interface ContentSwitcherState {
   selectedIndex?: number;
 }
 
@@ -115,7 +115,7 @@ export default class ContentSwitcher extends React.Component<
     selectedIndex: PropTypes.number,
 
     /**
-     * Choose whether or not to automatically change selection on focus
+     * Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to 'automatic'
      */
     selectionMode: PropTypes.oneOf(['automatic', 'manual']),
 

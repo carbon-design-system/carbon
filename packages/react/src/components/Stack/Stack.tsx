@@ -86,7 +86,7 @@ const Stack = React.forwardRef<React.ReactNode, StackProps>(
       [`${prefix}--stack-${orientation}`]: true,
       [`${prefix}--stack-scale-${gap}`]: typeof gap === 'number',
     });
-    const style = {};
+    const style = { ...rest.style };
 
     if (typeof gap === 'string') {
       style[`--${prefix}-stack-gap`] = gap;

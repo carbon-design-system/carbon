@@ -4,6 +4,7 @@ on:
     branches:
       - main
   pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
     branches:
       - main
   merge_group:
@@ -18,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
-          node-version: '20.x'
+          node-version-file: '.nvmrc'
       - name: Run yarn dedupe
         run: yarn dedupe --check
 
@@ -29,10 +30,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
-          node-version: '20.x'
+          node-version-file: '.nvmrc'
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -44,10 +45,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
-          node-version: '20.x'
+          node-version-file: '.nvmrc'
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -61,11 +62,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
-          node-version: '20.x'
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4.1.2
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -87,19 +88,49 @@ jobs:
       - name: Run tests
         run: yarn test --ci --collectCoverage
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4.6.0
+        uses: codecov/codecov-action@0565863a31f2c772f9f0395002a31e3f06189574 # v5.4.0
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  web-components-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        if: github.event_name != 'merge_group'
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable --immutable-cache
+      - name: Build web-components project
+        run:
+          yarn lerna run build --scope='@carbon/web-components'
+          --include-dependencies
+      - name: Run tests
+        run: |
+          cd packages/web-components
+          yarn test
   e2e:
     name: 'test:e2e'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
-          node-version: '20.x'
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4.1.2
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -141,11 +172,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
-          node-version: '20.x'
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4.1.2
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -176,12 +207,24 @@ jobs:
           URL: 'http://localhost:3000'
         timeout-minutes: 3
       - name: Run VRT
-        if: github.repository == 'carbon-design-system/carbon'
+        if:
+          ${{ github.repository == 'carbon-design-system/carbon' &&
+          github.event.pull_request.draft == false }}
         env:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
           PERCY_PARALLEL_TOTAL: 4
         run: |
           yarn percy exec --parallel -- yarn playwright test --project chromium --grep @vrt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
+      - name: Dry run VRT on draft PRs
+        if:
+          ${{ github.repository == 'carbon-design-system/carbon' &&
+          github.event.pull_request.draft != false && github.base_ref != 'main'
+          }}
+        env:
+          PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
+          PERCY_PARALLEL_TOTAL: 4
+        run: |
+          yarn percy exec --parallel -- yarn playwright test --project chromium --grep @vrt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}" --dry-run
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload blob report to GitHub Actions Artifacts
@@ -210,11 +253,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
-          node-version: '20.x'
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4.1.2
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -269,17 +312,18 @@ jobs:
 
   merge-playwright-reports:
     # Merge reports after *-runner jobs, even if some shards have failed
-    if: ${{ !cancelled() }}
+    if:
+      ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() }}
     needs: [vrt-runner, avt-runner]
 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
-          node-version: '20.x'
-      - uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4.1.2
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         if: github.event_name != 'merge_group'
         id: cache
         with:

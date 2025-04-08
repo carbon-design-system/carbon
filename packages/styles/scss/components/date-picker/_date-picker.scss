@@ -190,7 +190,11 @@
     inline-size: convert.to-rem(143.5px);
   }
 
-  // Styles for `Slug` rendered inside `DatePickerInput`
+  // Styles for `AILabel` rendered inside `DatePickerInput`
+  .#{$prefix}--date-picker-input__wrapper--decorator
+    .#{$prefix}--date-picker-input-inner-wrapper--decorator
+    > *,
+  .#{$prefix}--date-picker-input__wrapper--slug .#{$prefix}--ai-label,
   .#{$prefix}--date-picker-input__wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
@@ -198,8 +202,32 @@
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--date-picker-input__wrapper--decorator
+    .#{$prefix}--date-picker-input-inner-wrapper--decorator:not(
+      :has(.#{$prefix}--ai-label)
+    )
+    > * {
+    block-size: 1rem;
+  }
+
+  .#{$prefix}--date-picker-input__wrapper--decorator
+    .#{$prefix}--date-picker__input:has(
+      ~ .#{$prefix}--date-picker-input-inner-wrapper--decorator
+        .#{$prefix}--ai-label
+    ):not(
+      :has(
+          ~ .#{$prefix}--date-picker-input-inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
   .#{$prefix}--date-picker-input__wrapper--slug
-    .#{$prefix}--date-picker__input:not(:has(~ .#{$prefix}--slug--revert)) {
+    .#{$prefix}--date-picker__input:has(~ .#{$prefix}--ai-label):not(
+      :has(~ .#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--date-picker-input__wrapper--slug
+    .#{$prefix}--date-picker__input:has(~ .#{$prefix}--slug):not(
+      :has(~ .#{$prefix}--slug--revert)
+    ) {
     @include ai-gradient;
 
     padding-inline-end: $spacing-10;

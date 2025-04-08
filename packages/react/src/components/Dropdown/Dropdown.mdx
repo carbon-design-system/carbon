@@ -2,6 +2,7 @@ import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
 import * as DropdownStories from './Dropdown.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -19,7 +20,9 @@ import * as DropdownStories from './Dropdown.stories';
 
 - [Overview](#overview)
   - [Inline dropdown](#inline-dropdown)
+  - [Experimental Auto Align](#experimental-auto-align)
   - [Skeleton state](#skeleton-state)
+  - [AI label](#ai-label)
 - [Component API](#component-api)
   - [Dropdown `direction`](#dropdown-direction)
   - [Dropdown `downshiftProps`](#dropdown-downshiftprops)
@@ -43,14 +46,41 @@ Dropdowns present a list of options from which a user can select one option, or
 several. A selected option can represent a value in a form, or can be used as an
 action to filter or sort existing content.
 
-<Canvas of={DropdownStories.Default} />
+<Canvas
+  of={DropdownStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DropdownStories.Default),
+    },
+  ]}
+/>
 
-### Inline dropdown
+### Inline Dropdown
 
 You can place a `Dropdown` inline with other content by using the `inline`
 variant
 
-<Canvas of={DropdownStories.Inline} />
+<Canvas
+  of={DropdownStories.Inline}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DropdownStories.Inline),
+    },
+  ]}
+/>
+
+### Experimental Auto Align
+<Canvas
+  of={DropdownStories.ExperimentalAutoAlign}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DropdownStories.ExperimentalAutoAlign),
+    },
+  ]}
+/>
 
 ### Skeleton state
 
@@ -58,7 +88,26 @@ You can use the `DropdownSkeleton` component to render a skeleton variant of a
 `Dropdown`. This is useful to display on initial page load or when data needs to
 be fetched from an external API.
 
-<Canvas of={DropdownStories.Skeleton} />
+<Canvas
+  of={DropdownStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DropdownStories.Skeleton),
+    },
+  ]}
+/>
+
+### AI label
+<Canvas
+  of={DropdownStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(DropdownStories.withAILabel),
+    },
+  ]}
+/>
 
 ## Component API
 

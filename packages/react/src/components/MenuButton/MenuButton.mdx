@@ -1,4 +1,6 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import * as MenuButtonStories from "./MenuButton.stories.js"
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -8,7 +10,14 @@ import { ArgTypes, Meta } from '@storybook/blocks';
 
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
-- [Overview](#overview)
+- [MenuButton](#menubutton)
+  - [Overview](#overview)
+  - [With Danger](#with-danger)
+  - [With Dividers](#with-dividers)
+  - [With Icons](#with-icons)
+- [Menu Alignment](#menu-alignment)
+  - [menuTarget Prop](#menutarget-prop)
+  - [Experimental Auto Align](#experimental-auto-align)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -27,6 +36,51 @@ passed as `props.label`.
   <MenuItem label="Third action" />
 </MenuButton>
 ```
+<Canvas
+  of={MenuButtonStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.Default),
+    },
+  ]}
+/>
+
+#### With Danger
+
+<Canvas
+  of={MenuButtonStories.WithDanger}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.WithDanger),
+    },
+  ]}
+/>
+
+#### With Dividers
+
+<Canvas
+  of={MenuButtonStories.WithDividers}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.WithDividers),
+    },
+  ]}
+/>
+
+#### With Icons
+
+<Canvas
+  of={MenuButtonStories.WithIcons}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.WithIcons),
+    },
+  ]}
+/>
 
 ## Menu Alignment
 
@@ -38,16 +92,40 @@ If it seems your specified `menuAlignment` isn't working, it's because we
 prioritize ensuring the Menu remains visible. We calculate the optimal position
 to display the Menu in case the provided `menuAlignment` obscures it.
 
-We encourage you to play around in the Storybook playground to better understand
-the `menuAlignment` prop.
+We encourage you to play around in the Storybook Default stories to better
+understand the `menuAlignment` prop.
 
+<Canvas
+  of={MenuButtonStories.WithMenuAlignment}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.WithMenuAlignment),
+    },
+  ]}
+/>
 
 ## menuTarget Prop
 
-The `menuTarget` prop specifies where the `Menu` should render, which is particularly useful when using `MenuButton` inside a modal. By default, the menu renders in `document.body`, but this can disrupt focus order in modals or other components with focus management.
+The `menuTarget` prop specifies where the `Menu` should render, which is
+particularly useful when using `MenuButton` inside a modal. By default, the menu
+renders in `document.body`, but this can disrupt focus order in modals or other
+components with focus management.
 
-Pass the `menuTarget` prop to render the `Menu` inside the modal or any specific element where you want it to render:
+Pass the `menuTarget` prop to render the `Menu` inside the modal or any specific
+element where you want it to render:
 
+## Experimental Auto Align
+
+<Canvas
+  of={MenuButtonStories.ExperimentalAutoAlign}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.ExperimentalAutoAlign),
+    },
+  ]}
+/>
 
 ## Component API
 

@@ -83,21 +83,6 @@ describe('Menu', () => {
       expect(document.querySelector('.custom-class')).toBeInTheDocument();
       document.body.removeChild(el);
     });
-
-    it('warns about nested menus in basic mode', async () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <Menu open mode="basic">
-          <MenuItem label="Submenu">
-            <MenuItem label="Item" />
-          </MenuItem>
-        </Menu>
-      );
-      await waitForPosition();
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
   });
 
   describe('Submenu behavior', () => {
@@ -224,38 +209,9 @@ describe('MenuItem', () => {
 
       expect(screen.getByText('item')).toBeInTheDocument();
     });
-
-    it('warns about MenuItemSelectable in basic mode', () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <Menu open mode="basic">
-          <MenuItemSelectable label="Option" />
-        </Menu>
-      );
-
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
-
-    it('warns about MenuItemRadioGroup in basic mode', () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <Menu open mode="basic">
-          <MenuItemRadioGroup
-            label="Options"
-            items={['Option 1', 'Option 2']}
-          />
-        </Menu>
-      );
-
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
   });
 
-  it('should call onChange once', async () => {
+  it('should call MenuItemRadioGroup onChange once', async () => {
     const onChange = jest.fn();
 
     render(
@@ -277,5 +233,34 @@ describe('MenuItem', () => {
     await userEvent.click(screen.getByTitle('Menu'));
     await userEvent.click(screen.getByTitle('Item 1'));
     expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call MenuItemSelectable onChange once with correct value', async () => {
+    const onChange = jest.fn();
+
+    const { rerender } = render(
+      <Menu open label="Menu">
+        <MenuItemSelectable
+          label="Item 1"
+          onChange={onChange}
+          selected={false}
+        />
+      </Menu>
+    );
+
+    await userEvent.click(screen.getByTitle('Item 1'));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledWith(true);
+
+    onChange.mockClear();
+    rerender(
+      <Menu open label="Menu">
+        <MenuItemSelectable label="Item 1" onChange={onChange} selected />
+      </Menu>
+    );
+
+    await userEvent.click(screen.getByTitle('Item 1'));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledWith(false);
   });
 });

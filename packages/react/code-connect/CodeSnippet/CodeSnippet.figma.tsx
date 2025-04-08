@@ -22,10 +22,13 @@ figma.connect(
       tooltip: figma.nestedProps('Tooltip content', {
         text: figma.textContent('Tooltip text'),
       }),
+      disabled: figma.enum('State', {
+        Disabled: true,
+      }),
     },
-    example: ({ codeSnippet, tooltip }) => {
+    example: ({ codeSnippet, tooltip, disabled }) => {
       return (
-        <CodeSnippet type="inline" feedback={tooltip.text}>
+        <CodeSnippet type="inline" feedback={tooltip.text} disabled={disabled}>
           {codeSnippet.text}
         </CodeSnippet>
       );
@@ -42,10 +45,16 @@ figma.connect(
       codeSnippet: figma.nestedProps('Code snippet', {
         text: figma.textContent('node -v'),
       }),
+      disabled: figma.enum('State', {
+        Disabled: true,
+      }),
     },
-    example: ({ codeSnippet }) => {
+    example: ({ codeSnippet, disabled }) => {
       return (
-        <CodeSnippet type="inline" feedback="Copied to clipboard">
+        <CodeSnippet
+          type="inline"
+          feedback="Copied to clipboard"
+          disabled={disabled}>
           {codeSnippet.text}
         </CodeSnippet>
       );
@@ -60,10 +69,16 @@ figma.connect(
   {
     props: {
       children: figma.textContent('$ npm install --save carbon-components'),
+      disabled: figma.enum('State', {
+        Disabled: true,
+      }),
     },
-    example: ({ children }) => {
+    example: ({ children, disabled }) => {
       return (
-        <CodeSnippet type="single" feedback="Copied to clipboard">
+        <CodeSnippet
+          type="single"
+          feedback="Copied to clipboard"
+          disabled={disabled}>
           {children}
         </CodeSnippet>
       );
@@ -83,12 +98,16 @@ figma.connect(
         false: true,
       }),
       expanded: figma.boolean('Expanded'),
+      disabled: figma.enum('State', {
+        Disabled: true,
+      }),
     },
-    example: ({ hideCopyButton }) => (
+    example: ({ hideCopyButton, disabled }) => (
       <CodeSnippet
         type="multi"
         feedback="Copied to clipboard"
-        hideCopyButton={hideCopyButton}>
+        hideCopyButton={hideCopyButton}
+        disabled={disabled}>
         Code sample here
       </CodeSnippet>
     ),

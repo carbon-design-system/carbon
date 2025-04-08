@@ -7,9 +7,16 @@
 
 'use strict';
 
-export default {
+module.exports = {
   rules: {
     // @see https://eslint.org/docs/rules/curly
     curly: 'error',
+    'no-restricted-globals': [
+      'error',
+      {
+        name: '__DEV__',
+        message: "Use process.env.NODE_ENV !== 'production' instead",
+      },
+    ],
   },
 };

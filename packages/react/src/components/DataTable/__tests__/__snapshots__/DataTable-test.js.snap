@@ -2,28 +2,24 @@
 
 exports[`DataTable behaves as expected selection -- radio buttons should not have select-all checkbox 1`] = `
 <div>
-  <div
+  <section
     class="cds--data-table-container"
   >
     <div
       class="cds--data-table-header"
     >
-      <h4
+      <h2
         class="cds--data-table-header__title"
-        id="tc-:r71:-title"
+        id="tc-:r7g:-title"
       >
         DataTable with selection
-      </h4>
-      <p
-        class="cds--data-table-header__description"
-        id="tc-:r71:-description"
-      />
+      </h2>
     </div>
     <div
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:r71:-title"
+        aria-labelledby="tc-:r7g:-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -35,6 +31,9 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 class="cds--table-header-label"
               >
                 Field A
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
             <th
@@ -44,6 +43,9 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 class="cds--table-header-label"
               >
                 Field B
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
           </tr>
@@ -168,34 +170,30 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 </div>
 `;
 
 exports[`DataTable behaves as expected selection -- radio buttons should render 1`] = `
 <div>
-  <div
+  <section
     class="cds--data-table-container"
   >
     <div
       class="cds--data-table-header"
     >
-      <h4
+      <h2
         class="cds--data-table-header__title"
-        id="tc-:r6o:-title"
+        id="tc-:r77:-title"
       >
         DataTable with selection
-      </h4>
-      <p
-        class="cds--data-table-header__description"
-        id="tc-:r6o:-description"
-      />
+      </h2>
     </div>
     <div
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:r6o:-title"
+        aria-labelledby="tc-:r77:-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -207,6 +205,9 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 class="cds--table-header-label"
               >
                 Field A
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
             <th
@@ -216,6 +217,9 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 class="cds--table-header-label"
               >
                 Field B
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
           </tr>
@@ -340,28 +344,24 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 </div>
 `;
 
 exports[`DataTable behaves as expected selection should render and match snapshot 1`] = `
 <div>
-  <div
+  <section
     class="cds--data-table-container"
   >
     <div
       class="cds--data-table-header"
     >
-      <h4
+      <h2
         class="cds--data-table-header__title"
-        id="tc-:r2e:-title"
+        id="tc-:r2k:-title"
       >
         DataTable with selection
-      </h4>
-      <p
-        class="cds--data-table-header__description"
-        id="tc-:r2e:-description"
-      />
+      </h2>
     </div>
     <section
       aria-label="data table toolbar"
@@ -571,8 +571,8 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-:r2m:"
-                class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost"
+                aria-labelledby="tooltip-:r2t:"
+                class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
                 title="Settings"
                 type="button"
               >
@@ -600,7 +600,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-:r2m:"
+              id="tooltip-:r2t:"
               role="tooltip"
             >
               <span
@@ -626,7 +626,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:r2e:-title"
+        aria-labelledby="tc-:r2k:-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -642,7 +642,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 <input
                   class="cds--checkbox"
                   id="data-table-7__select-all"
-                  name="select-all"
+                  name="select-all-7"
                   type="checkbox"
                 />
                 <label
@@ -664,6 +664,9 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 class="cds--table-header-label"
               >
                 Field A
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
             <th
@@ -673,6 +676,9 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 class="cds--table-header-label"
               >
                 Field B
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
           </tr>
@@ -782,29 +788,25 @@ exports[`DataTable behaves as expected selection should render and match snapsho
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 </div>
 `;
 
 exports[`DataTable renders as expected - Component API should render and match snapshot 1`] = `
 <div>
-  <div
+  <section
     class="cds--data-table-container"
     data-testid="test-id"
   >
     <div
       class="cds--data-table-header"
     >
-      <h4
+      <h2
         class="cds--data-table-header__title"
-        id="tc-:rd:-title"
+        id="tc-:re:-title"
       >
         DataTable with toolbar
-      </h4>
-      <p
-        class="cds--data-table-header__description"
-        id="tc-:rd:-description"
-      />
+      </h2>
     </div>
     <section
       aria-label="data table toolbar"
@@ -1002,8 +1004,8 @@ exports[`DataTable renders as expected - Component API should render and match s
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-:rk:"
-                class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost"
+                aria-labelledby="tooltip-:rm:"
+                class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
                 title="Settings"
                 type="button"
               >
@@ -1031,7 +1033,7 @@ exports[`DataTable renders as expected - Component API should render and match s
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-:rk:"
+              id="tooltip-:rm:"
               role="tooltip"
             >
               <span
@@ -1057,7 +1059,7 @@ exports[`DataTable renders as expected - Component API should render and match s
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-:rd:-title"
+        aria-labelledby="tc-:re:-title"
         class="cds--data-table cds--data-table--lg cds--data-table--visible-overflow-menu"
       >
         <thead>
@@ -1069,6 +1071,9 @@ exports[`DataTable renders as expected - Component API should render and match s
                 class="cds--table-header-label"
               >
                 Field A
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
             <th
@@ -1078,6 +1083,9 @@ exports[`DataTable renders as expected - Component API should render and match s
                 class="cds--table-header-label"
               >
                 Field B
+                <div
+                  class="cds--table-header-label--decorator-inner"
+                />
               </div>
             </th>
           </tr>
@@ -1112,6 +1120,6 @@ exports[`DataTable renders as expected - Component API should render and match s
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 </div>
 `;

@@ -113,6 +113,16 @@ Array [
     "relativePath": "scss/components/aspect-ratio",
   },
   Object {
+    "filepath": "scss/components/badge-indicator/_badge-indicator.scss",
+    "importPath": "@carbon/styles/scss/components/badge-indicator/badge-indicator",
+    "relativePath": "scss/components/badge-indicator/badge-indicator",
+  },
+  Object {
+    "filepath": "scss/components/badge-indicator/_index.scss",
+    "importPath": "@carbon/styles/scss/components/badge-indicator",
+    "relativePath": "scss/components/badge-indicator",
+  },
+  Object {
     "filepath": "scss/components/breadcrumb/_breadcrumb.scss",
     "importPath": "@carbon/styles/scss/components/breadcrumb/breadcrumb",
     "relativePath": "scss/components/breadcrumb/breadcrumb",
@@ -406,6 +416,16 @@ Array [
     "filepath": "scss/components/fluid-time-picker/_index.scss",
     "importPath": "@carbon/styles/scss/components/fluid-time-picker",
     "relativePath": "scss/components/fluid-time-picker",
+  },
+  Object {
+    "filepath": "scss/components/icon-indicator/_icon-indicator.scss",
+    "importPath": "@carbon/styles/scss/components/icon-indicator/icon-indicator",
+    "relativePath": "scss/components/icon-indicator/icon-indicator",
+  },
+  Object {
+    "filepath": "scss/components/icon-indicator/_index.scss",
+    "importPath": "@carbon/styles/scss/components/icon-indicator",
+    "relativePath": "scss/components/icon-indicator",
   },
   Object {
     "filepath": "scss/components/inline-loading/_index.scss",

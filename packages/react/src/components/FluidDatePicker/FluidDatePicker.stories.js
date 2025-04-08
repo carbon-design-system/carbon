@@ -25,142 +25,14 @@ export default {
   },
 };
 
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Label</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
-
-export const Simple = () => (
-  <div style={{ width: '288px' }}>
-    <FluidDatePicker datePickerType="simple">
-      <FluidDatePickerInput
-        placeholder="mm/dd/yyyy"
-        labelText={ToggleTip}
-        id="date-picker-simple"
-      />
-    </FluidDatePicker>
-  </div>
-);
-
-export const Single = () => (
-  <div style={{ width: '288px' }}>
-    <FluidDatePicker datePickerType="single">
-      <FluidDatePickerInput
-        style={{ width: '288px' }}
-        placeholder="mm/dd/yyyy"
-        labelText={ToggleTip}
-        id="date-picker-single"
-      />
-    </FluidDatePicker>
-  </div>
-);
-
-export const RangeWithCalendar = () => {
-  return (
-    <div style={{ width: '288px' }}>
-      <FluidDatePicker datePickerType="range">
-        <FluidDatePickerInput
-          id="date-picker-input-id-start"
-          placeholder="mm/dd/yyyy"
-          labelText={ToggleTip}
-          size="md"
-        />
-        <FluidDatePickerInput
-          id="date-picker-input-id-finish"
-          placeholder="mm/dd/yyyy"
-          labelText="End date"
-          size="md"
-        />
-      </FluidDatePicker>
-    </div>
-  );
-};
-
-export const Skeleton = () => (
-  <div style={{ width: '300px' }}>
-    <FluidDatePickerSkeleton
-      datePickerType="simple"
-      labelText="Label"
-      placeholder="Placeholder text"
-      id="input-1"
-    />
-    <br />
-    <br />
-    <FluidDatePickerSkeleton
-      datePickerType="single"
-      labelText="Label"
-      placeholder="Placeholder text"
-      id="input-2"
-    />
-    <br />
-    <br />
-    <FluidDatePickerSkeleton
-      datePickerType="range"
-      labelText="Label"
-      placeholder="Placeholder text"
-      id="input-3"
-    />
-  </div>
-);
-
-export const Playground = (args) => {
-  const { invalid, invalidText, warn, warnText, disabled } = args;
-  return (
-    <div style={{ width: '288px' }}>
-      <FluidDatePicker
-        datePickerType="range"
-        invalid={invalid}
-        invalidText={invalidText}
-        warn={warn}
-        warnText={warnText}>
-        <FluidDatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          id="date-picker-range-1"
-          disabled={disabled}
-        />
-        <FluidDatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="End date"
-          id="date-picker-range-2"
-          disabled={disabled}
-        />
-      </FluidDatePicker>
-      <br />
-      <br />
-      <FluidDatePicker datePickerType="single">
-        <FluidDatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          id="date-picker-single"
-          invalid={invalid}
-          invalidText={invalidText}
-          disabled={disabled}
-          warn={warn}
-          warnText={warnText}
-        />
-      </FluidDatePicker>
-    </div>
-  );
-};
-
-Playground.args = {
+const sharedArgs = {
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
-Playground.argTypes = {
+const sharedArgTypes = {
   appendTo: {
     table: {
       disable: true,
@@ -225,6 +97,12 @@ Playground.argTypes = {
       category: 'DatePickerInput',
     },
   },
+  readOnly: {
+    control: { type: 'boolean' },
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
   invalid: {
     control: { type: 'boolean' },
     table: {
@@ -256,3 +134,103 @@ Playground.argTypes = {
     },
   },
 };
+
+const ToggleTip = (
+  <>
+    <ToggletipLabel>Label</ToggletipLabel>
+    <Toggletip align="top-left">
+      <ToggletipButton label="Show information">
+        <Information />
+      </ToggletipButton>
+      <ToggletipContent>
+        <p>Additional field information here.</p>
+      </ToggletipContent>
+    </Toggletip>
+  </>
+);
+
+export const Simple = (args) => (
+  <div style={{ width: '288px' }}>
+    <FluidDatePicker datePickerType="simple" {...args}>
+      <FluidDatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText={ToggleTip}
+        id="date-picker-simple"
+        {...args}
+      />
+    </FluidDatePicker>
+  </div>
+);
+
+Simple.args = { ...sharedArgs };
+Simple.argTypes = { ...sharedArgTypes };
+
+export const Single = (args) => (
+  <div style={{ width: '288px' }}>
+    <FluidDatePicker datePickerType="single" {...args}>
+      <FluidDatePickerInput
+        style={{ width: '288px' }}
+        placeholder="mm/dd/yyyy"
+        labelText={ToggleTip}
+        id="date-picker-single"
+        {...args}
+      />
+    </FluidDatePicker>
+  </div>
+);
+
+Single.args = { ...sharedArgs };
+Single.argTypes = { ...sharedArgTypes };
+
+export const RangeWithCalendar = (args) => {
+  return (
+    <div style={{ width: '288px' }}>
+      <FluidDatePicker datePickerType="range" {...args}>
+        <FluidDatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText={ToggleTip}
+          size="md"
+          {...args}
+        />
+        <FluidDatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+          size="md"
+          {...args}
+        />
+      </FluidDatePicker>
+    </div>
+  );
+};
+
+RangeWithCalendar.args = { ...sharedArgs };
+RangeWithCalendar.argTypes = { ...sharedArgTypes };
+
+export const Skeleton = () => (
+  <div style={{ width: '300px' }}>
+    <FluidDatePickerSkeleton
+      datePickerType="simple"
+      labelText="Label"
+      placeholder="Placeholder text"
+      id="input-1"
+    />
+    <br />
+    <br />
+    <FluidDatePickerSkeleton
+      datePickerType="single"
+      labelText="Label"
+      placeholder="Placeholder text"
+      id="input-2"
+    />
+    <br />
+    <br />
+    <FluidDatePickerSkeleton
+      datePickerType="range"
+      labelText="Label"
+      placeholder="Placeholder text"
+      id="input-3"
+    />
+  </div>
+);

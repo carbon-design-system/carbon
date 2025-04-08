@@ -20,10 +20,10 @@ jobs:
         with:
           repository: carbon-design-system/design-language-website
           ref: master
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
-          node-version: '20.x'
+          node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
       - name: Update dependencies
         run: |
@@ -39,7 +39,7 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@5e914681df9dc83aa4e4905692ca88beb2f9e91f # v7.0.5
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
         with:
           branch: 'release/update-carbon-deps'
           commit-message: 'chore(release): update carbon deps'
@@ -62,10 +62,10 @@ jobs:
         with:
           repository: carbon-design-system/gatsby-theme-carbon
           ref: main
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
-          node-version: '20.x'
+          node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
       - name: Update dependencies
         run: |
@@ -82,7 +82,7 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@5e914681df9dc83aa4e4905692ca88beb2f9e91f # v7.0.5
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
         with:
           branch: 'release/update-carbon-deps'
           commit-message: 'chore(release): update carbon deps'

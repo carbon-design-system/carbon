@@ -4,6 +4,7 @@ exports[`@carbon/styles/scss/config Public API 1`] = `
 Object {
   "css--body": true,
   "css--default-type": true,
+  "css--emit-type-custom-props": false,
   "css--font-face": true,
   "css--reset": true,
   "flex-grid-columns": 16,
@@ -41,5 +42,6 @@ Object {
   "prefix": "cds",
   "use-akamai-cdn": false,
   "use-flexbox-grid": false,
+  "use-per-family-plex": false,
 }
 `;

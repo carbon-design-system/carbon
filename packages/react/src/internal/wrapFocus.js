@@ -1,11 +1,10 @@
 /**
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import findLast from 'lodash.findlast';
 import { useEffect } from 'react';
 import {
   DOCUMENT_POSITION_BROAD_PRECEDING,
@@ -62,10 +61,9 @@ function wrapFocus({
       currentActiveNode === startTrapNode ||
       comparisonResult & DOCUMENT_POSITION_BROAD_PRECEDING
     ) {
-      const tabbable = findLast(
-        bodyNode.querySelectorAll(selectorTabbable),
-        (elem) => Boolean(elem.offsetParent)
-      );
+      const tabbable = [...bodyNode.querySelectorAll(selectorTabbable)]
+        .reverse()
+        .find((elem) => Boolean(elem.offsetParent));
       if (tabbable) {
         tabbable.focus();
       } else if (bodyNode !== oldActiveNode) {
@@ -94,7 +92,7 @@ function wrapFocus({
  * @param {object} options The options.
  * @param {Node|null} options.containerNode
  * @param {EventTarget} options.currentActiveNode The DOM node that has focus.
- * @param {KeyboardEvent} options.event The DOM event
+ * @param {React.KeyboardEvent} options.event The DOM event
  */
 function wrapFocusWithoutSentinels({
   containerNode,
@@ -103,7 +101,7 @@ function wrapFocusWithoutSentinels({
 }) {
   if (
     ['blur', 'focusout', 'focusin', 'focus'].includes(event.type) &&
-    __DEV__
+    process.env.NODE_ENV !== 'production'
   ) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {

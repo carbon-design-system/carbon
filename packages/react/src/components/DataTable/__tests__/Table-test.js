@@ -75,7 +75,7 @@ describe('Table', () => {
     });
   });
 
-  describe('with overfow menu', () => {
+  describe('with overflow menu', () => {
     it('should set the visible overflow menu class with `overflowMenuOnHover`', () => {
       const { rerender } = render(<Table />);
       expect(screen.getByRole('table')).not.toHaveClass(
@@ -248,7 +248,7 @@ describe('Table', () => {
         <Table experimentalAutoAlign>
           <TableHead>
             <TableRow>
-              <TableHeader>Header1</TableHeader>
+              <TableHeader isSortable={true}>Header1</TableHeader>
             </TableRow>
           </TableHead>
           <TableBody>

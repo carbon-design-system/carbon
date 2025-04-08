@@ -1,5 +1,6 @@
 import { Story, Canvas, ArgTypes, Meta } from '@storybook/blocks';
 import * as GridStories from './Grid.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -7,7 +8,7 @@ import * as GridStories from './Grid.stories';
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Grid)
 &nbsp;|&nbsp;
-[Usage guidelines](https://www.carbondesignsystem.com/guidelines/2x-grid/overview)
+[Usage guidelines](https://carbondesignsystem.com/elements/2x-grid/overview/)
 
 {/* prettier-ignore-start */}
 
@@ -36,7 +37,7 @@ import * as GridStories from './Grid.stories';
 {/* prettier-ignore-end */}
 
 Carbon's grid components help developers use the
-[2x Grid](https://www.carbondesignsystem.com/guidelines/2x-grid/overview). The
+[2x Grid](https://carbondesignsystem.com/elements/2x-grid/overview/). The
 project provides `Grid` and `Column` components which can be used to build a
 variety of layouts. You can import these components from `@carbon/react`:
 
@@ -44,7 +45,15 @@ variety of layouts. You can import these components from `@carbon/react`:
 import { Grid, Column } from '@carbon/react';
 ```
 
-<Canvas of={GridStories.Default} />
+<Canvas
+  of={GridStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(GridStories.Default),
+    },
+  ]}
+/>
 
 ## Overview
 
@@ -87,7 +96,15 @@ You can pair up multiple breakpoint props to specify how many columns the
 we will use the `sm`, `md`, and `lg` prop to specify how many columns the
 `Column` components should span at the small, medium, and large breakpoints.
 
-<Canvas of={GridStories.Default} />
+<Canvas
+  of={GridStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(GridStories.Default),
+    },
+  ]}
+/>
 
 ### Debugging
 
@@ -115,15 +132,39 @@ or the `narrow` prop to enable the narrow grid with a 16px gutter.
 
 ### Full width grid
 
-<Canvas of={GridStories.FullWidth} />
+<Canvas
+  of={GridStories.FullWidth}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(GridStories.FullWidth),
+    },
+  ]}
+/>
 
 ### Condensed grid
 
-<Canvas of={GridStories.Condensed} />
+<Canvas
+  of={GridStories.Condensed}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(GridStories.Condensed),
+    },
+  ]}
+/>
 
 ### Narrow grid
 
-<Canvas of={GridStories.Narrow} />
+<Canvas
+  of={GridStories.Narrow}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(GridStories.Narrow),
+    },
+  ]}
+/>
 
 ## Subgrid
 
@@ -135,7 +176,15 @@ properly configured for the subgrid to inherit. Additionally, wrapping subgrids
 in a `Column` enables you to define responsive parameters for the column (`sm`,
 `md`, etc) that the subgrid will inherit and be bound to.
 
-<Canvas of={GridStories.Subgrid} />
+<Canvas
+  of={GridStories.Subgrid}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(GridStories.Subgrid),
+    },
+  ]}
+/>
 
 For more specialized grid implementations you may want to disable the automatic
 subgrid definition. To achieve this you can wrap your nested `Grid` in
@@ -160,7 +209,15 @@ pass in `condensed` to a nested `Grid` (subgrid) to enable a certain gutter mode
 for only that subgrid. This can be useful when you need to mix-and-match certain
 gutter modes to achieve a particular layout.
 
-<Canvas of={GridStories.MixedGutterModes} />
+<Canvas
+  of={GridStories.MixedGutterModes}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(GridStories.MixedGutterModes),
+    },
+  ]}
+/>
 
 ## Auto columns
 
@@ -176,7 +233,15 @@ grid's `grid-template-columns` property. This declares that there should be
 The values of these custom properties can be changed to modify the default
 behavior of columns.
 
-<Canvas of={GridStories.Responsive} />
+<Canvas
+  of={GridStories.Responsive}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(GridStories.Responsive),
+    },
+  ]}
+/>
 
 ## Offset columns
 
@@ -195,7 +260,15 @@ breakpoint. At the medium breakpoint, it will be offset by two columns.
 <Column sm={2} md={{ span: 4, offset: 2 }} />
 ```
 
-<Canvas of={GridStories.Offset} />
+<Canvas
+  of={GridStories.Offset}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(GridStories.Offset),
+    },
+  ]}
+/>
 
 ## Component API
 

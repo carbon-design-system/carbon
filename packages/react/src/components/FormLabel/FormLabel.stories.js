@@ -14,27 +14,26 @@ import { ActionableNotification } from '../Notification';
 import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import './form-label-stories.scss';
 
+import mdx from './FormLabel.mdx';
+
 export default {
   title: 'Components/FormLabel',
   component: FormLabel,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = () => <FormLabel>Form label</FormLabel>;
+export const Default = () => {
+  return <FormLabel>Form label</FormLabel>;
+};
 
-export const WithTooltip = (controls) => {
+export const WithToggletip = (controls) => {
   const { align } = controls;
   return (
     <>
-      <div className="form-wrapper">
-        <FormLabel>Form label with Tooltip</FormLabel>
-        <Tooltip
-          align="bottom"
-          label="This can be used to provide more information about a field.">
-          <button className="cds--tooltip__trigger" type="button">
-            <Information />
-          </button>
-        </Tooltip>
-      </div>
       <div className="form-wrapper">
         <FormLabel>Form label with Toggletip</FormLabel>
         <Toggletip align={align}>

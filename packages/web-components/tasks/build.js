@@ -22,8 +22,9 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import path from 'path';
 import postcss from 'postcss';
 import typescript from '@rollup/plugin-typescript';
+import fs from 'fs-extra';
 
-import * as packageJson from '../package.json' assert { type: 'json' };
+import * as packageJson from '../package.json' with { type: 'json' };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -91,6 +92,8 @@ async function build() {
       sourcemap: true,
     });
   }
+
+  await postBuild();
 }
 
 const banner = `/**
@@ -164,3 +167,27 @@ build().catch((error) => {
   console.log(error);
   process.exit(1);
 });
+
+// TODO: remove and add scoped elements!
+async function postBuild() {
+  const sourceDir = path.resolve(__dirname, '../es');
+
+  if (sourceDir) {
+    const targetDir = path.resolve(__dirname, '../es-custom');
+
+    // Copy `es` directory to `es-custom`
+    await fs.copy(sourceDir, targetDir);
+
+    // Find all files in the `es-custom` directory
+    const files = await globby([`${targetDir}/**/*`], { onlyFiles: true });
+
+    // Replace "cds" with "cds-custom" in all files
+    await Promise.all(
+      files.map(async (file) => {
+        const content = await fs.promises.readFile(file, 'utf8');
+        const updatedContent = content.replace(/cds/g, 'cds-custom');
+        await fs.promises.writeFile(file, updatedContent);
+      })
+    );
+  }
+}

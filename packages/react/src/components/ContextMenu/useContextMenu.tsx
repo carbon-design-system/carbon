@@ -9,12 +9,11 @@ import { useEffect, useState } from 'react';
 
 type TriggerType = Element | Document | Window | React.RefObject<Element>;
 
-interface ContextMenuProps {
+export interface ContextMenuProps {
   open: boolean;
   x: number;
   y: number;
   onClose: () => void;
-  mode: string;
 }
 
 /**
@@ -62,7 +61,6 @@ function useContextMenu(trigger: TriggerType = document): ContextMenuProps {
     x: position[0],
     y: position[1],
     onClose,
-    mode: 'full',
   };
 }
 

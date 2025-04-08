@@ -200,7 +200,7 @@ const TableToolbarSearch = ({
   const onChange = (e) => {
     setValue(e.target.value);
     if (onChangeProp) {
-      onChangeProp(e);
+      onChangeProp(e, e.target.value);
     }
   };
 

@@ -12,37 +12,41 @@ import { Canvas, ArgTypes, Meta } from '@storybook/blocks';
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [Notification](#Notification)
+    - [Overview](#overview)
+    - [ActionableNotification](#ActionableNotification)
+    - [InlineNotification & ToastNotification](#InlineNotification-and-ToastNotification)
 - [Component API](#component-api)
 - [Actionable](#actionable)
-- [References](#references)
+- [Inline](#inline)
+- [Toast](#toast)
 - [Feedback](#feedback)
 
 ## Overview
 
 There are 4 different types of notification components:
 `ActionableNotification`, `InlineNotification`, `ToastNotification`, and
-`unstable__Callout`.
+`Callout`.
 
 ### ActionableNotification
 
 `ActionableNotification` should be used when user action is required. It can
 include an action, other interactive elements or rich text. It uses Toast-like
 styling by default, but if you'd like it to be visually similar to an
-InlineNotifcation, you can use the `inline` prop. If `actionButtonLabel` is not
+InlineNotification, you can use the `inline` prop. If `actionButtonLabel` is not
 provided, an action button will not be rendered. This component grabs and traps
 focus until the action is acted upon or the notification is dismissed.
 
-### InlineNotification & ToastNotification
+### InlineNotification and ToastNotification
 
 `InlineNotification` and `ToastNotification` can not contain interactive
 elements or rich text. These are announced by screenreaders when rendered. They
 don't grab focus. Use them to provide the user with an alert, status, or log.
 
-### unstable\_\_Callout (previously StaticNotification)
+### Callout (previously StaticNotification)
 
-`unstable__Callout` is non-modal and should only be used inline with content on
-the initial render of the page or modal because it will not be announced to
+`Callout` is non-modal and should only be used inline with content on the
+initial render of the page or modal because it will not be announced to
 screenreader users like the other notification components.
 
 As such, this should not be used for real-time notifications or notifications
@@ -63,15 +67,36 @@ an `aria-describedby` on the interactive element with a value that matches the
 
 ## Actionable
 
-<Canvas id="components-notifications-actionable--playground" />
+<Canvas id="components-notifications-actionable--default" />
+
+### Using the `role` prop
+
+ActionableNotification's `role` prop allows you to provide a different
+`aria-role` than the default, `alertdialog`.
+
+This prop should be used with caution as it will disable the focus wrapping
+required for `alertdialog` . Before using this prop, consider using `Callout`
+instead.
+
+For ActionableNotification to remain accessible when using this prop, you'll be
+responsible for implementing a strategy to fulfill the needs of a screenreader
+user. Two viable options include:
+
+- Rendering notifications into an existing region that can immediately be
+  navigated to via a hotkey. Once the user navigates there and takes an action
+  or gets to the last focusable element, focus returns from the region to the
+  element previously focused before they entered the region.
+- Collecting notifications in a persistent place in the app (a "drawer" or "side
+  panel") and announcing to the user how they can navigate to that place to
+  review all notifications and optionally take action on it.
 
 ## Inline
 
-<Canvas id="components-notifications-inline--playground" />
+<Canvas id="components-notifications-inline--default" />
 
 ## Toast
 
-<Canvas id="components-notifications-toast--playground" />
+<Canvas id="components-notifications-toast--default" />
 
 ## Feedback
 

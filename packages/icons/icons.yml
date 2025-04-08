@@ -416,6 +416,20 @@
     - Plex
   sizes:
     - 32
+- name: ai-business-impact-assessment
+  friendly_name: AI business impact assessment
+  aliases:
+    - automation
+    - artificial intelligence
+    - business
+    - impact
+    - metrics
+    - performance
+    - assistant
+    - enterprise
+    - watsonx
+  sizes:
+    - 32
 - name: ai-financial-sustainability-check
   friendly_name: AI Financial Sustainability Check
   aliases:
@@ -1266,6 +1280,14 @@
     - math
   sizes:
     - 32
+- name: arrange
+  friendly_name: Arrange
+  aliases:
+    - center
+    - align
+    - navigation
+  sizes:
+    - 32
 - name: arrange--horizontal
   friendly_name: Arrange horizontal
   aliases:
@@ -1284,6 +1306,15 @@
     - sort
     - objects
     - action
+  sizes:
+    - 32
+- name: array
+  friendly_name: Array
+  aliases:
+    - array
+    - array data structure
+    - data
+    - structure
   sizes:
     - 32
 - name: array--booleans
@@ -1572,6 +1603,16 @@
     - asset
   sizes:
     - 32
+- name: asset-movement
+  friendly_name: Asset movement
+  aliases:
+    - asset
+    - movement
+    - export
+    - import
+    - document
+  sizes:
+    - 32
 - name: asterisk
   friendly_name: Asterisk
   aliases:
@@ -1666,6 +1707,17 @@
     - memory
     - resources
     - cloud
+  sizes:
+    - 32
+- name: avro
+  friendly_name: Avro
+  aliases:
+    - avro
+    - apache avro
+    - remote
+    - procedure
+    - data
+    - framework
   sizes:
     - 32
 - name: awake
@@ -1839,6 +1891,19 @@
     - empty battery
     - battery indicator
     - technology
+- name: battery--error
+  friendly_name: Battery error
+  sizes:
+    - 32
+  aliases:
+    - charging
+    - power
+    - battery error
+    - error
+    - fail
+    - technology
+    - battery indicator
+    - battery
 - name: battery--full
   friendly_name: Battery full
   sizes:
@@ -1886,6 +1951,18 @@
     - power
     - battery quarter
     - quartery battery
+    - technology
+    - battery indicator
+    - battery
+- name: battery--warning
+  friendly_name: Battery warning
+  sizes:
+    - 32
+  aliases:
+    - charging
+    - power
+    - battery warning
+    - warn
     - technology
     - battery indicator
     - battery
@@ -2527,6 +2604,21 @@
     - travel
     - public
     - bus
+  sizes:
+    - 32
+- name: business-metrics
+  friendly_name: Business metrics
+  aliases:
+    - automation
+    - artificial intelligence
+    - business
+    - impact
+    - metrics
+    - meter
+    - performance
+    - assistant
+    - enterprise
+    - watsonx
   sizes:
     - 32
 - name: business-processes
@@ -3337,6 +3429,21 @@
     - change catalog
     - edit
     - edit catalog
+  sizes:
+    - 32
+- name: channels
+  friendly_name: Channels
+  aliases:
+    - channels
+    - communication
+    - communicate
+    - pathway
+    - connections
+    - exchange
+    - data
+    - AS2
+    - SFTP
+    - FTP
   sizes:
     - 32
 - name: character--decimal
@@ -5702,6 +5809,14 @@
     - variable
   sizes:
     - 32
+- name: create-link
+  friendly_name: Create link
+  aliases:
+    - create
+    - add
+    - create link
+  sizes:
+    - 32
 - name: credentials
   friendly_name: Credentials
   aliases:
@@ -6736,6 +6851,19 @@
     - van
     - shipping
     - ecommerce
+  sizes:
+    - 32
+- name: delivery-settings
+  friendly_name: Delivery settings
+  aliases:
+    - delivery
+    - settings
+    - send
+    - document
+    - messages
+    - policies
+    - timeouts
+    - configurations
   sizes:
     - 32
 - name: demo
@@ -8128,6 +8256,14 @@
     - mail
   sizes:
     - 32
+- name: emissions-management
+  friendly_name: Emissions management
+  aliases:
+    - emissions management
+    - sustainability
+    - graph with sapling
+  sizes:
+    - 32
 - name: encryption
   friendly_name: Encryption
   aliases:
@@ -8811,6 +8947,15 @@
     - business
   sizes:
     - 32
+- name: financial-assets
+  friendly_name: Financial assets
+  aliases:
+    - financial portfolio
+    - sustainability
+    - money
+    - business
+  sizes:
+    - 32
 - name: fingerprint-recognition
   friendly_name: Fingerprint recognition
   aliases:
@@ -9380,6 +9525,15 @@
     - packaging
     - handling
     - commerce
+  sizes:
+    - 32
+- name: fragments
+  friendly_name: Fragments
+  aliases:
+    - StreamSets
+    - pipeline
+    - puzzle
+    - navigation
   sizes:
     - 32
 - name: friendship
@@ -10368,6 +10522,17 @@
     - Integration tool
   sizes:
     - 32
+- name: ibm--application-and-discovery-delivery-intelligence
+  friendly_name: IBM® Application Discovery and Delivery Intelligence (ADDI)
+  aliases:
+    - ADDI
+    - z/OS
+    - Z software
+    - Z analytics
+    - watsonx Code Assistant for Z
+    - Application modernization
+  sizes:
+    - 32
 - name: ibm--aspera
   friendly_name: IBM Aspera®
   aliases:
@@ -10402,11 +10567,55 @@
     - storage
   sizes:
     - 32
+- name: ibm-consulting-advantage--agent
+  friendly_name: IBM Consulting Advantage Agent
+  aliases:
+    - prompt based agent
+    - AI agent
+    - chat agent
+    - prompt
+    - AI
+    - consulting
+    - agent
+  sizes:
+    - 32
+- name: ibm-consulting-advantage--application
+  friendly_name: IBM Consulting Advantage Application
+  aliases:
+    - software applications
+    - assets
+    - packages
+    - software
+    - application
+    - consulting
+  sizes:
+    - 32
+- name: ibm-consulting-advantage--assistant
+  friendly_name: IBM Consulting Advantage Assistant
+  aliases:
+    - chat assistant, AI assistant, prompt based assistant
+    - AI assistant
+    - prompt based assistant
+    - assistant
+    - chat
+    - consulting
+  sizes:
+    - 32
 - name: ibm--content-services
   friendly_name: IBM® Content Services
   aliases:
     - content management
     - SaaS
+  sizes:
+    - 32
+- name: ibm--databand
+  friendly_name: IBM Databand®
+  aliases:
+    - databand
+    - observability
+    - software
+    - data
+    - IBM Databand
   sizes:
     - 32
 - name: ibm--data-power
@@ -10996,6 +11205,22 @@
     - bullseye
   sizes:
     - 32
+- name: ibm--maximo-application-suite
+  friendly_name: IBM® Maximo® Application Suite
+  aliases:
+    - asset
+    - maximo
+    - max
+    - suite
+    - application
+    - app
+    - management
+    - monitor
+    - cloud-based
+    - operations
+    - maintenance
+  sizes:
+    - 32
 - name: ibm--open-enterprise-languages
   friendly_name: IBM® Open Enterprise Languages
   aliases:
@@ -11161,6 +11386,17 @@
   friendly_name: Unassigned
   aliases:
     - IBM Tenet
+  sizes:
+    - 32
+- name: ibm--test-accelerator-for-z
+  friendly_name: IBM® Test Accelerator for Z
+  aliases:
+    - test
+    - accelerator
+    - z/OS
+    - DevOps
+    - Z
+    - Automation
   sizes:
     - 32
 - name: ibm--toolchain
@@ -11487,6 +11723,21 @@
     - hybrid environment
     - linked boxes
     - boxes
+  sizes:
+    - 32
+- name: ibm-cloud--essential-security-and-observability-services
+  friendly_name: IBM Cloud Essential Security and Observability Services
+  aliases:
+    - cloud
+    - security
+    - observability
+    - logging
+    - log
+    - monitor
+    - activity
+    - event
+    - track
+    - essential
   sizes:
     - 32
 - name: ibm-cloud--event-notification
@@ -12557,6 +12808,20 @@
     - AI code recommendation
     - enterprise
     - application
+  sizes:
+    - 32
+- name: ibm-watsonx--code-assistant-for-enterprise-java-applications
+  friendly_name: IBM watsonx™ Code Assistant for Enterprise Java Applications
+  aliases:
+    - IBM watsonx Code Assistant for Enterprise Java Applications
+    - end-to-end application lifecycle
+    - developer
+    - code
+    - code generation
+    - generative AI
+    - application modernization
+    - automation
+    - productivity
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z
@@ -13644,6 +13909,16 @@
     - write
     - 'off'
     - unavailable
+  sizes:
+    - 32
+- name: kiosk-device
+  friendly_name: Kiosk device
+  aliases:
+    - kiosk
+    - shared
+    - shared device
+    - device
+    - customer-facing
   sizes:
     - 32
 - name: kubelet
@@ -14773,6 +15048,19 @@
     - avatar
     - tag
     - identification
+- name: logo--git
+  friendly_name: Logo Git
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
 - name: logo--github
   friendly_name: Logo GitHub
   sizes:
@@ -15019,6 +15307,19 @@
   friendly_name: Logo React
   aliases:
     - brand - emblem - logotype - symbol - id - avatar - tag - identification
+  sizes:
+    - 32
+- name: logo--red-hat-ai-instructlab-on-ibm-cloud
+  friendly_name: Logo Red Hat AI InstructLab® on IBM Cloud®
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--red-hat-ansible
@@ -16211,6 +16512,15 @@
     - compression
   sizes:
     - 32
+- name: multiuser-device
+  friendly_name: Multiuser device
+  aliases:
+    - shared device
+    - device
+    - shared
+    - multiuser
+  sizes:
+    - 32
 - name: music
   friendly_name: Music
   aliases:
@@ -16714,6 +17024,18 @@
     - interface
     - counter
     - alert
+  sizes:
+    - 32
+- name: null-sign
+  friendly_name: Null sign
+  aliases:
+    - data
+    - data type
+    - data management
+    - cloud pak for data
+    - data&ai
+    - information
+    - data quality
   sizes:
     - 32
 - name: number--0
@@ -18102,6 +18424,14 @@
     - accordion document
   sizes:
     - 32
+- name: pipelines
+  friendly_name: Pipelines
+  aliases:
+    - pipelines
+    - navigation
+    - flow
+  sizes:
+    - 32
 - name: plane
   friendly_name: Plane
   aliases:
@@ -18358,6 +18688,34 @@
     - controls
   sizes:
     - 16
+    - 32
+- name: power-enterprise-pools-metered-capacity-integration
+  friendly_name: IBM® Power® Enterprise Pools Metered Capacity Integration
+  aliases:
+    - IBM Power Enterprise Pools Metered Capacity Integration
+    - cloud
+    - optimization
+    - on-premise service
+    - integration
+    - power
+  sizes:
+    - 32
+- name: power-virtual-server-disaster-recovery-automation
+  friendly_name: IBM® Power® Virtual Server Disaster Recovery Automation
+  aliases:
+    - IBM Power Virtual Server Disaster Recovery Automation
+    - disaster recovery
+    - high availability
+    - DRA
+    - DRA for Power Virtual Server
+    - Disaster Recovery for Power Virtual Server
+    - Power Virtual Server
+    - PowerVS
+    - Power
+    - DR for PowerVS
+    - Power Virtual Server Disaster Recovery Automation
+    - PowerVS DRA
+  sizes:
     - 32
 - name: PPT
   friendly_name: PPT
@@ -21245,6 +21603,18 @@
     - grow
   sizes:
     - 32
+- name: spyre-accelerator
+  friendly_name: Spyre accelerator
+  aliases:
+    - Spyre
+    - Accelerator
+    - Z
+    - Inferencing
+    - AI
+    - system
+    - chip
+  sizes:
+    - 32
 - name: SQL
   friendly_name: SQL
   aliases:
@@ -21440,6 +21810,14 @@
     - healthcare
     - medical
     - instruments
+  sizes:
+    - 32
+- name: stickies
+  friendly_name: Stickies
+  aliases:
+    - notes
+    - comment
+    - canvas
   sizes:
     - 32
 - name: stop
@@ -23505,6 +23883,19 @@
     - triangle
     - shape
     - geometry
+  sizes:
+    - 32
+- name: trigger
+  friendly_name: Trigger
+  aliases:
+    - trigger
+    - listener
+    - integration
+    - runtime
+    - events
+    - execute
+    - service
+    - action
   sizes:
     - 32
 - name: trophy

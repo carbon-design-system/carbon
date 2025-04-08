@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -18,6 +16,7 @@ import Download16 from '@carbon/icons/lib/download/16.js';
 // @ts-ignore
 import Settings16 from '@carbon/icons/lib/settings/16.js';
 import '../index';
+import '../../icon-indicator/index';
 import storyDocs from './data-table.mdx';
 
 const sizes = {
@@ -186,9 +185,11 @@ export const Default = {
           <cds-table-cell>3000</cds-table-cell>
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Kevin's VM Groups</cds-table-cell>
-          <cds-table-cell
-            ><cds-link disabled>Disabled</cds-link></cds-table-cell
-          >
+          <cds-table-cell>
+            <cds-icon-indicator
+              kind="failed"
+              label="Failed"></cds-icon-indicator>
+          </cds-table-cell>
         </cds-table-row>
         <cds-table-row selection-name="1">
           <cds-table-cell>Load Balancer 1</cds-table-cell>
@@ -196,7 +197,11 @@ export const Default = {
           <cds-table-cell>443</cds-table-cell>
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Maureen's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+          <cds-table-cell
+            ><cds-icon-indicator
+              kind="succeeded"
+              label="Succeeded"></cds-icon-indicator
+          ></cds-table-cell>
         </cds-table-row>
         <cds-table-row selection-name="2">
           <cds-table-cell>Load Balancer 2</cds-table-cell>
@@ -204,7 +209,11 @@ export const Default = {
           <cds-table-cell>80</cds-table-cell>
           <cds-table-cell>DNS delegation</cds-table-cell>
           <cds-table-cell>Andrew's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+          <cds-table-cell
+            ><cds-icon-indicator
+              kind="in-progress"
+              label="in-progress"></cds-icon-indicator
+          ></cds-table-cell>
         </cds-table-row>
         <cds-table-row selection-name="3">
           <cds-table-cell>Load Balancer 6</cds-table-cell>
@@ -213,8 +222,10 @@ export const Default = {
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Marc's VM Groups</cds-table-cell>
           <cds-table-cell
-            ><cds-link disabled>Disabled</cds-link></cds-table-cell
-          >
+            ><cds-icon-indicator
+              kind="failed"
+              label="Failed"></cds-icon-indicator
+          ></cds-table-cell>
         </cds-table-row>
         <cds-table-row selection-name="4">
           <cds-table-cell>Load Balancer 4</cds-table-cell>
@@ -222,7 +233,11 @@ export const Default = {
           <cds-table-cell>443</cds-table-cell>
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Mel's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+          <cds-table-cell
+            ><cds-icon-indicator
+              kind="succeeded"
+              label="Succeeded"></cds-icon-indicator
+          ></cds-table-cell>
         </cds-table-row>
         <cds-table-row selection-name="5">
           <cds-table-cell>Load Balancer 5</cds-table-cell>
@@ -230,7 +245,11 @@ export const Default = {
           <cds-table-cell>80</cds-table-cell>
           <cds-table-cell>DNS delegation</cds-table-cell>
           <cds-table-cell>Ronja's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+          <cds-table-cell
+            ><cds-icon-indicator
+              kind="in-progress"
+              label="in-progress"></cds-icon-indicator
+          ></cds-table-cell>
         </cds-table-row>
       </cds-table-body>
     </cds-table>
@@ -308,8 +327,10 @@ export const Playground = {
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Kevin's VM Groups</cds-table-cell>
           <cds-table-cell
-            ><cds-link disabled>Disabled</cds-link></cds-table-cell
-          >
+            ><cds-icon-indicator
+              kind="failed"
+              label="Failed"></cds-icon-indicator
+          ></cds-table-cell>
         </cds-table-row>
         <cds-table-expanded-row>
           <h6>Expandable row content</h6>
@@ -321,7 +342,11 @@ export const Playground = {
           <cds-table-cell>443</cds-table-cell>
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Maureen's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+          <cds-table-cell
+            ><cds-icon-indicator
+              kind="succeeded"
+              label="Succeeded"></cds-icon-indicator
+          ></cds-table-cell>
         </cds-table-row>
         <cds-table-expanded-row>
           <h6>Expandable row content</h6>
@@ -333,7 +358,11 @@ export const Playground = {
           <cds-table-cell>80</cds-table-cell>
           <cds-table-cell>DNS delegation</cds-table-cell>
           <cds-table-cell>Andrew's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+          <cds-table-cell
+            ><cds-icon-indicator
+              kind="in-progress"
+              label="in-progress"></cds-icon-indicator
+          ></cds-table-cell>
         </cds-table-row>
         <cds-table-expanded-row>
           <h6>Expandable row content</h6>
@@ -346,8 +375,10 @@ export const Playground = {
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Marc's VM Groups</cds-table-cell>
           <cds-table-cell
-            ><cds-link disabled>Disabled</cds-link></cds-table-cell
-          >
+            ><cds-icon-indicator
+              kind="failed"
+              label="Failed"></cds-icon-indicator
+          ></cds-table-cell>
         </cds-table-row>
         <cds-table-expanded-row>
           <h6>Expandable row content</h6>
@@ -359,7 +390,11 @@ export const Playground = {
           <cds-table-cell>443</cds-table-cell>
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Mel's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+          <cds-table-cell
+            ><cds-icon-indicator
+              kind="succeeded"
+              label="Succeeded"></cds-icon-indicator
+          ></cds-table-cell>
         </cds-table-row>
         <cds-table-expanded-row>
           <h6>Expandable row content</h6>
@@ -371,7 +406,11 @@ export const Playground = {
           <cds-table-cell>80</cds-table-cell>
           <cds-table-cell>DNS delegation</cds-table-cell>
           <cds-table-cell>Ronja's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+          <cds-table-cell
+            ><cds-icon-indicator
+              kind="in-progress"
+              label="in-progress"></cds-icon-indicator
+          ></cds-table-cell>
         </cds-table-row>
         <cds-table-expanded-row>
           <h6>Expandable row content</h6>

@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -69,6 +67,22 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     }
   }
 
+  private _checkBadgeWarning() {
+    const hasBadgeIndicator = this.querySelector(`${prefix}-badge-indicator`);
+    if (
+      hasBadgeIndicator &&
+      (this.kind !== BUTTON_KIND.GHOST || this.size !== BUTTON_SIZE.LARGE)
+    ) {
+      console.warn(
+        `The badge indicator must be used with kind='ghost' and size='lg'`
+      );
+    }
+  }
+  updated(changedProperties) {
+    super.updated?.(changedProperties);
+    this._checkBadgeWarning();
+  }
+
   @HostListener('mouseover')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleOver = () => {
@@ -125,8 +139,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * Specify the message read by screen readers for the danger button variant
    */
-  @property({ reflect: true, attribute: 'danger-descriptor' })
-  dangerDescriptor;
+  @property({ reflect: true, attribute: 'danger-description' })
+  dangerDescription;
 
   /**
    * `true` if the button should be disabled.
@@ -228,8 +242,9 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   tooltipPosition = BUTTON_TOOLTIP_POSITION.TOP;
 
   /**
-   * Specify the direction of the tooltip for icon-only buttons.
-   * Can be either top, right, bottom, or left.
+   * Specify the text to be rendered in the tooltip. If using
+   * "cds-badge-indicator" with no count prop then the text
+   * should include describing there is a new notification.
    */
   @property({ reflect: true, attribute: 'tooltip-text' })
   tooltipText!: string;
@@ -244,7 +259,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     const {
       autofocus,
       buttonClassName,
-      dangerDescriptor,
+      dangerDescription,
       disabled,
       download,
       href,
@@ -270,6 +285,9 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     let defaultClasses = {
       [`${prefix}--btn`]: true,
       [`${prefix}--btn--${kind}`]: kind,
+      [`${prefix}--btn--danger--tertiary`]:
+        kind === BUTTON_KIND.DANGER_TERTIARY,
+      [`${prefix}--btn--danger--ghost`]: kind === BUTTON_KIND.DANGER_GHOST,
       [`${prefix}--btn--disabled`]: disabled,
       [`${prefix}--btn--icon-only`]: hasIcon && !hasMainContent,
       [`${prefix}--btn--${size}`]: size,
@@ -310,10 +328,13 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               ping="${ifDefined(ping)}"
               rel="${ifDefined(rel)}"
               target="${ifDefined(target)}"
-              type="${ifDefined(type)}">
+              type="${ifDefined(type)}"
+              aria-describedby="badge-indicator">
               <slot @slotchange="${handleSlotChange}"></slot>
               <slot name="icon" @slotchange="${handleSlotChange}"></slot>
             </a>
+            ${html`<slot id="badge-indicator" name="badge-indicator"></slot>` ??
+            !disabled}
           `;
     }
 
@@ -344,7 +365,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               ?autofocus="${autofocus}"
               ?disabled="${disabled}"
               type="${ifDefined(type)}"
-              aria-label="${ifDefined(tooltipText)}">
+              aria-label="${ifDefined(tooltipText)}"
+              aria-describedby="badge-indicator">
               <slot @slotchange="${handleSlotChange}"></slot>
               <slot name="icon" @slotchange="${handleSlotChange}"></slot>
             </button>
@@ -355,6 +377,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               </span>
               <span class="${prefix}--popover-caret"></span>
             </span>
+            ${html`<slot id="badge-indicator" name="badge-indicator"></slot>` ??
+            !disabled}
           </span>
         `
       : html`
@@ -364,15 +388,18 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             class="${classes}"
             ?autofocus="${autofocus}"
             ?disabled="${disabled}"
-            type="${ifDefined(type)}">
+            type="${ifDefined(type)}"
+            aria-describedby="badge-indicator">
             ${isDanger
               ? html`<span class="${prefix}--visually-hidden"
-                  >${dangerDescriptor}</span
+                  >${dangerDescription}</span
                 >`
               : ``}
             <slot @slotchange="${handleSlotChange}"></slot>
             <slot name="icon" @slotchange="${handleSlotChange}"></slot>
           </button>
+          ${html`<slot id="badge-indicator" name="badge-indicator"></slot>` ??
+          !disabled}
         `;
   }
 
@@ -380,7 +407,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
-  static styles = styles; // `styles` here is a `CSSResult` generated by custom Vite loader
+  static styles = styles;
 }
 
 export default CDSButton;

@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -25,6 +23,10 @@ export { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT };
  */
 @customElement(`${prefix}-icon-button`)
 class CDSIconButton extends CDSButton {
+  /**
+   * Checks if a badge indicator is being used with incorrect properties
+   */
+
   /**
    * Specify how the trigger should align with the tooltip
    */
@@ -68,6 +70,7 @@ class CDSIconButton extends CDSButton {
   size = 'md';
 
   updated(changedProperties) {
+    super.updated?.(changedProperties);
     if (changedProperties) {
       this.shadowRoot
         ?.querySelector(`${prefix}-tooltip`)

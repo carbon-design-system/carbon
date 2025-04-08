@@ -33,6 +33,10 @@ $css--plex: true !default;
   .#{$prefix}--btn {
     flex-grow: 1;
     max-inline-size: 100%;
+
+    &:not(:focus) {
+      box-shadow: to-rem(-1px) to-rem(-1px) 0 0 $button-separator;
+    }
   }
 }
 
@@ -49,6 +53,7 @@ $css--plex: true !default;
 :host(#{$prefix}-button[pagination]),
 :host(#{$prefix}-modal-footer-button[pagination]) {
   .#{$prefix}--btn {
+    padding: 0;
     border: none;
     border-inline-start: 1px solid $border-subtle;
     transition: none;
@@ -99,9 +104,34 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-button[kind='ghost']:hover) .#{$prefix}--btn--ghost,
-:host(#{$prefix}-button[kind='ghost']) .#{$prefix}--btn--ghost:active {
-  outline: none;
+:host(#{$prefix}-button[kind='ghost']) {
+  .#{$prefix}--btn--ghost {
+    &:hover,
+    &:active {
+      outline: none;
+    }
+
+    &.#{$prefix}--btn--icon-only {
+      padding-block-start: 0;
+
+      &.#{$prefix}--btn--selected,
+      &.#{$prefix}--btn--expressive {
+        padding: $spacing-03;
+      }
+    }
+
+    &:not(:focus) {
+      box-shadow: none;
+    }
+  }
+}
+
+:host(#{$prefix}-button[kind='danger-ghost']) {
+  .#{$prefix}--btn--danger-ghost {
+    &:not(:focus) {
+      box-shadow: none;
+    }
+  }
 }
 
 :host(#{$prefix}-button-set),

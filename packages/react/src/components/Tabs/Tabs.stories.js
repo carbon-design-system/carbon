@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Tabs,
   TabsVertical,
@@ -32,7 +32,7 @@ import {
   Activity,
   CloudMonitoring,
   Settings,
-  Search,
+  IbmWatsonDiscovery,
   Notification,
   Chat,
   Task,
@@ -64,38 +64,69 @@ export default {
   },
 };
 
-export const Default = () => (
-  <Tabs>
-    <TabList aria-label="List of tabs">
-      <Tab>Dashboard</Tab>
-      <Tab>Monitoring</Tab>
-      <Tab>Activity</Tab>
-      <Tab disabled>Settings</Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>
-        <form style={{ margin: '2em' }}>
-          <legend className={`cds--label`}>Validation example</legend>
-          <Checkbox id="cb" labelText="Accept privacy policy" />
-          <Button
-            style={{ marginTop: '1rem', marginBottom: '1rem' }}
-            type="submit">
-            Submit
-          </Button>
-          <TextInput
-            type="text"
-            labelText="Text input label"
-            helperText="Optional help text"
-            id="text-input-1"
-          />
-        </form>
-      </TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-    </TabPanels>
-  </Tabs>
-);
+export const Default = (args) => {
+  return (
+    <Tabs onTabCloseRequest={() => {}}>
+      <TabList {...args}>
+        <Tab>Dashboard</Tab>
+        <Tab>Monitoring</Tab>
+        <Tab>Activity</Tab>
+        <Tab>Settings</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+Default.args = {
+  contained: false,
+  dismissable: false,
+  scrollDebounceWait: 200,
+};
+
+Default.argTypes = {
+  activation: {
+    control: { type: 'select' },
+    options: ['automatic', 'manual'],
+  },
+  contained: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  dismissable: {
+    control: false,
+  },
+  iconSize: {
+    control: { type: 'select' },
+    options: ['default', 'lg'],
+  },
+  leftOverflowButtonProps: {
+    control: {
+      type: 'object',
+    },
+  },
+  rightOverflowButtonProps: {
+    control: {
+      type: 'object',
+    },
+  },
+  scrollDebounceWait: {
+    control: {
+      type: 'number',
+    },
+  },
+  scrollIntoView: {
+    control: {
+      type: 'boolean',
+    },
+  },
+};
 
 export const Dismissable = () => {
   const tabs = [
@@ -117,9 +148,9 @@ export const Dismissable = () => {
       disabled: true,
     },
   ];
-  const [renderedTabs, setRenderedTabs] = useState(tabs);
+  const [renderedTabs, setRenderedTabs] = React.useState(tabs);
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const handleTabChange = (evt) => {
     setSelectedIndex(evt.selectedIndex);
@@ -155,7 +186,7 @@ export const Dismissable = () => {
         onChange={handleTabChange}
         dismissable
         onTabCloseRequest={handleCloseTabRequest}>
-        <TabList aria-label="List of tabs">
+        <TabList>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled}>
               {tab.label}
@@ -188,9 +219,9 @@ export const DismissableWithIcons = ({ contained }) => {
       disabled: true,
     },
   ];
-  const [renderedTabs, setRenderedTabs] = useState(tabs);
+  const [renderedTabs, setRenderedTabs] = React.useState(tabs);
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const handleTabChange = (evt) => {
     setSelectedIndex(evt.selectedIndex);
@@ -228,7 +259,7 @@ export const DismissableWithIcons = ({ contained }) => {
         onChange={handleTabChange}
         dismissable
         onTabCloseRequest={handleCloseTabRequest}>
-        <TabList aria-label="List of tabs" contained={contained}>
+        <TabList contained={contained}>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled} renderIcon={icons[index]}>
               {tab.label}
@@ -241,141 +272,21 @@ export const DismissableWithIcons = ({ contained }) => {
   );
 };
 
-export const WithIcons = () => (
-  <Tabs>
-    <TabList activation="manual" aria-label="List of tabs">
-      <Tab renderIcon={Dashboard}>Dashboard</Tab>
-      <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
-      <Tab renderIcon={Activity}>Activity</Tab>
-      <Tab renderIcon={Search}>Analyze</Tab>
-      <Tab disabled renderIcon={Settings}>
-        Settings
-      </Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>
-        <form style={{ margin: '2em' }}>
-          <legend className={`cds--label`}>Validation example</legend>
-          <Checkbox id="cb" labelText="Accept privacy policy" />
-          <Button
-            style={{ marginTop: '1rem', marginBottom: '1rem' }}
-            type="submit">
-            Submit
-          </Button>
-          <TextInput
-            type="text"
-            labelText="Text input label"
-            helperText="Optional help text"
-            id="text-input-1"
-          />
-        </form>
-      </TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-      <TabPanel>Tab Panel 5</TabPanel>
-    </TabPanels>
-  </Tabs>
-);
-
-export const Manual = () => (
-  <Tabs>
-    <TabList activation="manual" aria-label="List of tabs">
-      <Tab>Dashboard</Tab>
-      <Tab>Monitoring</Tab>
-      <Tab title="Tab label 4">Activity</Tab>
-      <Tab>Analyze</Tab>
-      <Tab disabled>Settings</Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>
-        <form style={{ margin: '2em' }}>
-          <legend className={`cds--label`}>Validation example</legend>
-          <Checkbox id="cb" labelText="Accept privacy policy" />
-          <Button
-            style={{ marginTop: '1rem', marginBottom: '1rem' }}
-            type="submit">
-            Submit
-          </Button>
-          <TextInput
-            type="text"
-            labelText="Text input label"
-            helperText="Optional help text"
-            id="text-input-1"
-          />
-        </form>
-      </TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-      <TabPanel>Tab Panel 5</TabPanel>
-    </TabPanels>
-  </Tabs>
-);
-
-export const Icon20Only = () => (
-  <Tabs>
-    <TabList iconSize="lg" aria-label="List of tabs">
-      <IconTab label="Analyze" disabled>
-        <Search size={20} aria-label="Analyze" />
-      </IconTab>
-      <IconTab label="Activity">
-        <Activity size={20} aria-label="Activity" />
-      </IconTab>
-      <IconTab label="Notification">
-        <Notification size={20} aria-label="Notification" />
-      </IconTab>
-      <IconTab label="Chat">
-        <Chat size={20} aria-label="Chat" />
-      </IconTab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-    </TabPanels>
-  </Tabs>
-);
-
-export const IconOnly = () => (
-  <Tabs>
-    <TabList aria-label="List of tabs">
-      <IconTab label="Analyze" disabled>
-        <Search aria-label="Analyze" />
-      </IconTab>
-      <IconTab label="Activity">
-        <Activity aria-label="Activity" />
-      </IconTab>
-      <IconTab label="Notification">
-        <Notification aria-label="Notification" />
-      </IconTab>
-      <IconTab label="Chat">
-        <Chat aria-label="Chat" />
-      </IconTab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-    </TabPanels>
-  </Tabs>
-);
-
-export const Contained = () => (
-  <Tabs>
-    <TabList aria-label="List of tabs" contained>
-      <Tab>Dashboard</Tab>
-      <Tab>Monitoring</Tab>
-      <Tab>Activity</Tab>
-      <Tab>Analyze</Tab>
-      <Tab disabled>Settings</Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>
-        <Layer>
+export const WithIcons = () => {
+  return (
+    <Tabs>
+      <TabList activation="manual">
+        <Tab renderIcon={Dashboard}>Dashboard</Tab>
+        <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
+        <Tab renderIcon={Activity}>Activity</Tab>
+        <Tab renderIcon={IbmWatsonDiscovery}>Analyze</Tab>
+        <Tab disabled renderIcon={Settings}>
+          Settings
+        </Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>
           <form style={{ margin: '2em' }}>
             <legend className={`cds--label`}>Validation example</legend>
             <Checkbox id="cb" labelText="Accept privacy policy" />
@@ -388,32 +299,31 @@ export const Contained = () => (
               type="text"
               labelText="Text input label"
               helperText="Optional help text"
+              id="text-input-1"
             />
           </form>
-        </Layer>
-      </TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-      <TabPanel>Tab Panel 5</TabPanel>
-    </TabPanels>
-  </Tabs>
-);
+        </TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+        <TabPanel>Tab Panel 5</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
 
-export const ContainedWithIcons = () => (
-  <Tabs>
-    <TabList aria-label="List of tabs" contained>
-      <Tab renderIcon={Dashboard}>Dashboard</Tab>
-      <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
-      <Tab renderIcon={Activity}>Activity</Tab>
-      <Tab renderIcon={Search}>Analyze</Tab>
-      <Tab disabled renderIcon={Settings}>
-        Settings
-      </Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>
-        <Layer>
+export const Manual = () => {
+  return (
+    <Tabs>
+      <TabList activation="manual">
+        <Tab>Dashboard</Tab>
+        <Tab>Monitoring</Tab>
+        <Tab title="Tab label 4">Activity</Tab>
+        <Tab>Analyze</Tab>
+        <Tab disabled>Settings</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>
           <form style={{ margin: '2em' }}>
             <legend className={`cds--label`}>Validation example</legend>
             <Checkbox id="cb" labelText="Accept privacy policy" />
@@ -426,205 +336,364 @@ export const ContainedWithIcons = () => (
               type="text"
               labelText="Text input label"
               helperText="Optional help text"
+              id="text-input-1"
             />
           </form>
-        </Layer>
-      </TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-      <TabPanel>Tab Panel 5</TabPanel>
-    </TabPanels>
-  </Tabs>
-);
+        </TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+        <TabPanel>Tab Panel 5</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
 
-export const ContainedWithSecondaryLabels = () => (
-  <Tabs>
-    <TabList aria-label="List of tabs" contained>
-      <Tab secondaryLabel="(21/25)">Engage</Tab>
-      <Tab secondaryLabel="(12/16)">Analyze</Tab>
-      <Tab secondaryLabel="(0/7)">Remediate</Tab>
-      <Tab secondaryLabel="(4/12)">Assets</Tab>
-      <Tab disabled secondaryLabel="(0/10)">
-        Monitoring
-      </Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>
-        <Layer>
-          <form style={{ margin: '2em' }}>
-            <legend className={`cds--label`}>Validation example</legend>
-            <Checkbox id="cb" labelText="Accept privacy policy" />
-            <Button
-              style={{ marginTop: '1rem', marginBottom: '1rem' }}
-              type="submit">
-              Submit
-            </Button>
-            <TextInput
-              type="text"
-              labelText="Text input label"
-              helperText="Optional help text"
-            />
-          </form>
-        </Layer>
-      </TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-      <TabPanel>Tab Panel 5</TabPanel>
-    </TabPanels>
-  </Tabs>
-);
+export const Icon20Only = (args) => {
+  return (
+    <Tabs>
+      <TabList iconSize="lg">
+        <IconTab label="Analyze" disabled>
+          <IbmWatsonDiscovery size={20} aria-label="Analyze" />
+        </IconTab>
+        <IconTab label="Activity">
+          <Activity size={20} aria-label="Activity" />
+        </IconTab>
+        <IconTab label="New Notifications" {...args}>
+          <Notification size={20} aria-label="Notification" />
+        </IconTab>
+        <IconTab label="Chat">
+          <Chat size={20} aria-label="Chat" />
+        </IconTab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
 
-export const ContainedWithSecondaryLabelsAndIcons = () => (
-  <Tabs>
-    <TabList aria-label="List of tabs" contained>
-      <Tab renderIcon={Task} secondaryLabel="(21/25">
-        Engage
-      </Tab>
-      <Tab renderIcon={Search} secondaryLabel="(12/16)">
-        Analyze
-      </Tab>
-      <Tab renderIcon={Restart} disabled secondaryLabel="(0/7)">
-        Remediate
-      </Tab>
-      <Tab renderIcon={Dashboard} secondaryLabel="(4/12)">
-        Assets
-      </Tab>
-      <Tab renderIcon={CloudMonitoring} secondaryLabel="(1/23)">
-        Monitoring
-      </Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>
-        <Layer>
-          <form style={{ margin: '2em' }}>
-            <legend className={`cds--label`}>Validation example</legend>
-            <Checkbox id="cb" labelText="Accept privacy policy" />
-            <Button
-              style={{ marginTop: '1rem', marginBottom: '1rem' }}
-              type="submit">
-              Submit
-            </Button>
-            <TextInput
-              type="text"
-              labelText="Text input label"
-              helperText="Optional help text"
-            />
-          </form>
-        </Layer>
-      </TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-      <TabPanel>Tab Panel 5</TabPanel>
-    </TabPanels>
-  </Tabs>
-);
+Icon20Only.argTypes = {
+  badgeIndicator: {
+    description: '**Experimental**: Display an empty dot badge on the Tab.',
+    control: {
+      type: 'boolean',
+    },
+  },
+};
 
-export const ContainedFullWidth = () => (
-  <Grid condensed>
-    <Column lg={16} md={8} sm={4}>
-      <Tabs>
-        <TabList aria-label="List of tabs" contained fullWidth>
-          <Tab>TLS</Tab>
-          <Tab>Origin</Tab>
-          <Tab disabled>Rate limiting</Tab>
-          <Tab>WAF</Tab>
-          <Tab>IP Firewall</Tab>
-          <Tab>Firewall rules</Tab>
-          <Tab>Range</Tab>
-          <Tab>Mutual TLS</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>Tab Panel 1</TabPanel>
-          <TabPanel>
-            <Layer>
-              <form style={{ margin: '2em' }}>
-                <legend className={`cds--label`}>Validation example</legend>
-                <Checkbox id="cb" labelText="Accept privacy policy" />
-                <Button
-                  style={{ marginTop: '1rem', marginBottom: '1rem' }}
-                  type="submit">
-                  Submit
-                </Button>
-                <TextInput
-                  type="text"
-                  labelText="Text input label"
-                  helperText="Optional help text"
-                />
-              </form>
-            </Layer>
-          </TabPanel>
-          <TabPanel>Tab Panel 3</TabPanel>
-          <TabPanel>Tab Panel 4</TabPanel>
-          <TabPanel>Tab Panel 5</TabPanel>
-          <TabPanel>Tab Panel 6</TabPanel>
-          <TabPanel>Tab Panel 7</TabPanel>
-          <TabPanel>Tab Panel 8</TabPanel>
-        </TabPanels>
-      </Tabs>
-    </Column>
-  </Grid>
-);
+export const IconOnly = (args) => {
+  return (
+    <Tabs>
+      <TabList iconSize="default">
+        <IconTab label="Analyze" disabled>
+          <IbmWatsonDiscovery aria-label="Analyze" />
+        </IconTab>
+        <IconTab label="Activity">
+          <Activity aria-label="Activity" />
+        </IconTab>
+        <IconTab label="New Notifications" {...args}>
+          <Notification aria-label="Notification" />
+        </IconTab>
+        <IconTab label="Chat">
+          <Chat aria-label="Chat" />
+        </IconTab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
 
-export const Vertical = ({ ...args }) => (
-  <TabsVertical {...args}>
-    <TabListVertical aria-label="List of tabs">
-      <Tab>Dashboard</Tab>
-      <Tab>
-        Extra long label that will go two lines then truncate when it goes
-        beyond the Tab length
-      </Tab>
-      <Tab>Activity</Tab>
-      <Tab>Analyze</Tab>
-      <Tab>Investigate </Tab>
-      <Tab>Learn</Tab>
-      <Tab disabled>Settings</Tab>
-    </TabListVertical>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>
-        <Layer>
-          <form style={{ margin: '2em' }}>
-            <Stack gap={7}>
-              <TextInput id="one" labelText="First Name" />
-              <TextInput id="three" labelText="Middle Initial" />
-              <TextInput id="two" labelText="Last Name" />
-              <RadioButtonGroup
-                legendText="Radio button heading"
-                name="formgroup-default-radio-button-group"
-                defaultSelected="radio-1">
-                <RadioButton
-                  labelText="Option 1"
-                  value="radio-1"
-                  id="radio-1"
-                />
-                <RadioButton
-                  labelText="Option 2"
-                  value="radio-2"
-                  id="radio-2"
-                />
-                <RadioButton
-                  labelText="Option 3"
-                  value="radio-3"
-                  id="radio-3"
-                />
-              </RadioButtonGroup>
-              <Checkbox labelText={`Checkbox one`} id="checkbox-label-1" />
-              <Checkbox labelText={`Checkbox two`} id="checkbox-label-2" />
-              <Button>Submit</Button>
-            </Stack>
-          </form>
-        </Layer>
-      </TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-      <TabPanel>Tab Panel 5</TabPanel>
-      <TabPanel>Tab Panel 6</TabPanel>
-      <TabPanel>Tab Panel 7</TabPanel>
-    </TabPanels>
-  </TabsVertical>
-);
+IconOnly.argTypes = {
+  badgeIndicator: {
+    description: '**Experimental**: Display an empty dot badge on the Tab.',
+    control: {
+      type: 'boolean',
+    },
+  },
+};
+
+export const Contained = () => {
+  return (
+    <Tabs>
+      <TabList contained>
+        <Tab>Dashboard</Tab>
+        <Tab>Monitoring</Tab>
+        <Tab>Activity</Tab>
+        <Tab>Analyze</Tab>
+        <Tab disabled>Settings</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>
+          <Layer>
+            <form style={{ margin: '2em' }}>
+              <legend className={`cds--label`}>Validation example</legend>
+              <Checkbox id="cb" labelText="Accept privacy policy" />
+              <Button
+                style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                type="submit">
+                Submit
+              </Button>
+              <TextInput
+                type="text"
+                labelText="Text input label"
+                helperText="Optional help text"
+              />
+            </form>
+          </Layer>
+        </TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+        <TabPanel>Tab Panel 5</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+export const ContainedWithIcons = () => {
+  return (
+    <Tabs>
+      <TabList contained>
+        <Tab renderIcon={Dashboard}>Dashboard</Tab>
+        <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
+        <Tab renderIcon={Activity}>Activity</Tab>
+        <Tab renderIcon={IbmWatsonDiscovery}>Analyze</Tab>
+        <Tab disabled renderIcon={Settings}>
+          Settings
+        </Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>
+          <Layer>
+            <form style={{ margin: '2em' }}>
+              <legend className={`cds--label`}>Validation example</legend>
+              <Checkbox id="cb" labelText="Accept privacy policy" />
+              <Button
+                style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                type="submit">
+                Submit
+              </Button>
+              <TextInput
+                type="text"
+                labelText="Text input label"
+                helperText="Optional help text"
+              />
+            </form>
+          </Layer>
+        </TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+        <TabPanel>Tab Panel 5</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+export const ContainedWithSecondaryLabels = () => {
+  return (
+    <Tabs>
+      <TabList contained>
+        <Tab secondaryLabel="(21/25)">Engage</Tab>
+        <Tab secondaryLabel="(12/16)">Analyze</Tab>
+        <Tab secondaryLabel="(0/7)">Remediate</Tab>
+        <Tab secondaryLabel="(4/12)">Assets</Tab>
+        <Tab disabled secondaryLabel="(0/10)">
+          Monitoring
+        </Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>
+          <Layer>
+            <form style={{ margin: '2em' }}>
+              <legend className={`cds--label`}>Validation example</legend>
+              <Checkbox id="cb" labelText="Accept privacy policy" />
+              <Button
+                style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                type="submit">
+                Submit
+              </Button>
+              <TextInput
+                type="text"
+                labelText="Text input label"
+                helperText="Optional help text"
+              />
+            </form>
+          </Layer>
+        </TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+        <TabPanel>Tab Panel 5</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+export const ContainedWithSecondaryLabelsAndIcons = () => {
+  return (
+    <Tabs>
+      <TabList contained>
+        <Tab renderIcon={Task} secondaryLabel="(21/25">
+          Engage
+        </Tab>
+        <Tab renderIcon={IbmWatsonDiscovery} secondaryLabel="(12/16)">
+          Analyze
+        </Tab>
+        <Tab renderIcon={Restart} disabled secondaryLabel="(0/7)">
+          Remediate
+        </Tab>
+        <Tab renderIcon={Dashboard} secondaryLabel="(4/12)">
+          Assets
+        </Tab>
+        <Tab renderIcon={CloudMonitoring} secondaryLabel="(1/23)">
+          Monitoring
+        </Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>
+          <Layer>
+            <form style={{ margin: '2em' }}>
+              <legend className={`cds--label`}>Validation example</legend>
+              <Checkbox id="cb" labelText="Accept privacy policy" />
+              <Button
+                style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                type="submit">
+                Submit
+              </Button>
+              <TextInput
+                type="text"
+                labelText="Text input label"
+                helperText="Optional help text"
+              />
+            </form>
+          </Layer>
+        </TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+        <TabPanel>Tab Panel 5</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+export const ContainedFullWidth = () => {
+  return (
+    <Grid condensed>
+      <Column lg={16} md={8} sm={4}>
+        <Tabs>
+          <TabList contained fullWidth>
+            <Tab>TLS</Tab>
+            <Tab>Origin</Tab>
+            <Tab disabled>Rate limiting</Tab>
+            <Tab>WAF</Tab>
+            <Tab>IP Firewall</Tab>
+            <Tab>Firewall rules</Tab>
+            <Tab>Range</Tab>
+            <Tab>Mutual TLS</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>
+              <Layer>
+                <form style={{ margin: '2em' }}>
+                  <legend className={`cds--label`}>Validation example</legend>
+                  <Checkbox id="cb" labelText="Accept privacy policy" />
+                  <Button
+                    style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                    type="submit">
+                    Submit
+                  </Button>
+                  <TextInput
+                    type="text"
+                    labelText="Text input label"
+                    helperText="Optional help text"
+                  />
+                </form>
+              </Layer>
+            </TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+            <TabPanel>Tab Panel 4</TabPanel>
+            <TabPanel>Tab Panel 5</TabPanel>
+            <TabPanel>Tab Panel 6</TabPanel>
+            <TabPanel>Tab Panel 7</TabPanel>
+            <TabPanel>Tab Panel 8</TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Column>
+    </Grid>
+  );
+};
+
+export const Vertical = (args) => {
+  return (
+    <TabsVertical {...args}>
+      <TabListVertical>
+        <Tab>Dashboard</Tab>
+        <Tab>
+          Extra long label that will go two lines then truncate when it goes
+          beyond the Tab length
+        </Tab>
+        <Tab>Activity</Tab>
+        <Tab>Analyze</Tab>
+        <Tab>Investigate </Tab>
+        <Tab>Learn</Tab>
+        <Tab disabled>Settings</Tab>
+      </TabListVertical>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>
+          <Layer>
+            <form style={{ margin: '2em' }}>
+              <Stack gap={7}>
+                <TextInput id="one" labelText="First Name" />
+                <TextInput id="three" labelText="Middle Initial" />
+                <TextInput id="two" labelText="Last Name" />
+                <RadioButtonGroup
+                  legendText="Radio button heading"
+                  name="formgroup-default-radio-button-group"
+                  defaultSelected="radio-1">
+                  <RadioButton
+                    labelText="Option 1"
+                    value="radio-1"
+                    id="radio-1"
+                  />
+                  <RadioButton
+                    labelText="Option 2"
+                    value="radio-2"
+                    id="radio-2"
+                  />
+                  <RadioButton
+                    labelText="Option 3"
+                    value="radio-3"
+                    id="radio-3"
+                  />
+                </RadioButtonGroup>
+                <Checkbox labelText={`Checkbox one`} id="checkbox-label-1" />
+                <Checkbox labelText={`Checkbox two`} id="checkbox-label-2" />
+                <Button>Submit</Button>
+              </Stack>
+            </form>
+          </Layer>
+        </TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+        <TabPanel>Tab Panel 5</TabPanel>
+        <TabPanel>Tab Panel 6</TabPanel>
+        <TabPanel>Tab Panel 7</TabPanel>
+      </TabPanels>
+    </TabsVertical>
+  );
+};
 
 Vertical.args = {
   height: '',
@@ -654,68 +723,4 @@ export const Skeleton = () => {
       <TabsSkeleton />
     </div>
   );
-};
-
-export const Playground = ({ dismissable, ...args }) => (
-  <Tabs dismissable={dismissable} onTabCloseRequest={() => {}}>
-    <TabList aria-label="List of tabs" {...args}>
-      <Tab>Dashboard</Tab>
-      <Tab>Monitoring</Tab>
-      <Tab>Activity</Tab>
-      <Tab>Settings</Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-    </TabPanels>
-  </Tabs>
-);
-
-Playground.args = {
-  contained: false,
-  dismissable: false,
-  scrollDebounceWait: 200,
-};
-
-Playground.argTypes = {
-  activation: {
-    control: { type: 'select' },
-    options: ['automatic', 'manual'],
-  },
-  contained: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  dismissable: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  iconSize: {
-    control: { type: 'select' },
-    options: ['default', 'lg'],
-  },
-  leftOverflowButtonProps: {
-    control: {
-      type: 'object',
-    },
-  },
-  rightOverflowButtonProps: {
-    control: {
-      type: 'object',
-    },
-  },
-  scrollDebounceWait: {
-    control: {
-      type: 'number',
-    },
-  },
-  scrollIntoView: {
-    control: {
-      type: 'boolean',
-    },
-  },
 };

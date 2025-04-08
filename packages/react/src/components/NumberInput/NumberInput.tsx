@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,12 +9,14 @@ import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
+  FC,
+  MouseEvent,
+  ReactElement,
   ReactNode,
   useContext,
+  useEffect,
   useRef,
   useState,
-  useEffect,
-  FC,
 } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
@@ -62,6 +64,11 @@ export interface NumberInputProps
    * Specify an optional className to be applied to the wrapper node
    */
   className?: string;
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `TextInput` component
+   */
+  decorator?: ReactNode;
 
   /**
    * Optional starting value for uncontrolled state
@@ -171,6 +178,7 @@ export interface NumberInputProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
+   * @deprecated please use `decorator` instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component
    */
   slug?: ReactNode;
@@ -201,6 +209,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const {
       allowEmpty = false,
       className: customClassName,
+      decorator,
       disabled = false,
       disableWheel: disableWheelProp = false,
       defaultValue = 0,
@@ -246,7 +255,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const [prevControlledValue, setPrevControlledValue] =
       useState(controlledValue);
     const inputRef = useRef<HTMLInputElement>(null);
-    const ref = useMergedRefs<HTMLInputElement>([forwardRef, inputRef]);
+    const ref = useMergedRefs([forwardRef, inputRef]);
     const numberInputClasses = cx({
       [`${prefix}--number`]: true,
       [`${prefix}--number--helpertext`]: true,
@@ -279,6 +288,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const wrapperClasses = cx(`${prefix}--number__input-wrapper`, {
       [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
       [`${prefix}--number__input-wrapper--slug`]: slug,
+      [`${prefix}--number__input-wrapper--decorator`]: decorator,
     });
     const iconClasses = cx({
       [`${prefix}--number__invalid`]:
@@ -343,27 +353,37 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     const Icon = normalizedProps.icon as any;
 
-    function handleStepperClick(event, direction) {
+    const getDecimalPlaces = (num: number) => {
+      const parts = num.toString().split('.');
+
+      return parts[1] ? parts[1].length : 0;
+    };
+
+    const handleStepperClick = (
+      event: MouseEvent<HTMLButtonElement>,
+      direction: 'up' | 'down'
+    ) => {
       if (inputRef.current) {
         const currentValue = Number(inputRef.current.value);
-        let newValue =
+        const rawValue =
           direction === 'up' ? currentValue + step : currentValue - step;
-        if (min !== undefined) {
-          newValue = Math.max(newValue, min);
-        }
-        if (max !== undefined) {
-          newValue = Math.min(newValue, max);
-        }
-        const currentInputValue = inputRef.current
-          ? inputRef.current.value
-          : '';
+        const precision = Math.max(
+          getDecimalPlaces(currentValue),
+          getDecimalPlaces(step)
+        );
+        const floatValue = parseFloat(rawValue.toFixed(precision));
+        const newValue =
+          typeof min !== 'undefined' && typeof max !== 'undefined'
+            ? Math.min(Math.max(floatValue, min), max)
+            : floatValue;
         const state = {
           value:
-            allowEmpty && currentInputValue === '' && step === 0
+            allowEmpty && inputRef.current.value === '' && step === 0
               ? ''
               : newValue,
-          direction: direction,
+          direction,
         };
+
         setValue(state.value);
 
         if (onChange) {
@@ -374,20 +394,31 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           onClick(event, state);
         }
       }
-    }
+    };
 
-    // Slug is always size `mini`
-    let normalizedSlug;
-    if (slug && slug['type']?.displayName === 'AILabel') {
-      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-        size: 'mini',
-      });
+    // AILabel always size `mini`
+    let normalizedDecorator = React.isValidElement(slug ?? decorator)
+      ? (slug ?? decorator)
+      : null;
+    if (
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel'
+    ) {
+      normalizedDecorator = React.cloneElement(
+        normalizedDecorator as React.ReactElement<any>,
+        {
+          size: 'mini',
+        }
+      );
     }
 
     // Need to update the internal value when the revert button is clicked
     let isRevertActive;
-    if (slug && slug['type']?.displayName === 'AILabel') {
-      isRevertActive = normalizedSlug.props.revertActive;
+    if (
+      normalizedDecorator &&
+      normalizedDecorator['type']?.displayName === 'AILabel'
+    ) {
+      isRevertActive = (normalizedDecorator as ReactElement).props.revertActive;
     }
 
     useEffect(() => {
@@ -449,7 +480,16 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               type="number"
               value={value}
             />
-            {normalizedSlug}
+            {slug ? (
+              normalizedDecorator
+            ) : decorator ? (
+              <div
+                className={`${prefix}--number__input-inner-wrapper--decorator`}>
+                {normalizedDecorator}
+              </div>
+            ) : (
+              ''
+            )}
             {Icon ? <Icon className={iconClasses} /> : null}
             {!hideSteppers && (
               <div className={`${prefix}--number__controls`}>
@@ -504,6 +544,11 @@ NumberInput.propTypes = {
    * Specify an optional className to be applied to the wrapper node
    */
   className: PropTypes.string,
+
+  /**
+   * **Experimental**: Provide a `decorator` component to be rendered inside the `NumberInput` component
+   */
+  decorator: PropTypes.node,
 
   /**
    * Optional starting value for uncontrolled state
@@ -610,7 +655,11 @@ NumberInput.propTypes = {
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `NumberInput` component
    */
-  slug: PropTypes.node,
+  slug: deprecate(
+    PropTypes.node,
+    'The `slug` prop for `NumberInput` is no longer needed and has ' +
+      'been deprecated in v11 in favor of the new `decorator` prop. It will be moved in the next major release.'
+  ),
 
   /**
    * Specify how much the values should increase/decrease upon clicking on up/down button

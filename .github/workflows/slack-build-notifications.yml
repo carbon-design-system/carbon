@@ -24,8 +24,10 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack
         id: slack-success
-        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
+        uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # v2.0.0
         with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
           payload: |
             {
               "username": "Workflow succeeded ✅",
@@ -33,17 +35,16 @@ jobs:
               "channel": "#carbon-system-notifications",
               "text": "The ${{ github.event.workflow.name }} workflow succeeded: ${{ github.event.workflow_run.url }}"
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
   on-failure:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
       - name: Send custom JSON data to Slack
         id: slack-failure
-        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
+        uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # v2.0.0
         with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
           payload: |
             {
               "username": "Workflow failed 🚫",
@@ -51,6 +52,3 @@ jobs:
               "channel": "#carbon-system-notifications",
               "text": "The ${{ github.event.workflow.name }} workflow failed: ${{ github.event.workflow_run.url }}"
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

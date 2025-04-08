@@ -2,6 +2,7 @@ import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
 import * as TabsStories from './Tabs.stories';
 import { Grid, Column } from '../Grid';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -17,19 +18,27 @@ import { Grid, Column } from '../Grid';
 
 ## Table of Contents
 
-- [Overview](#overview)
+ - [Tabs](#tabs)
+  - [Overview](#overview)
   - [Line Tabs](#line-tabs)
   - [Contained Tabs](#contained-tabs)
-  - [Icon Tabs](#icon-tabs)
+  - [Contained Full Width](#contained-full-width)
+  - [Contained With Icons](#contained-with-icons)
+  - [Contained With Second Labels](#contained-with-second-labels)
+  - [Contained With Second Labels and Icons](#contained-with-second-labels-and-icons)
+  - [Icon Tabs Only](#icon-tabs-only)
   - [Dismissable Tabs](#dismissable-tabs)
+  - [Manual](#manual)
+  - [Skeleton](#skeleton)
+  - [With Icons](#with-icons)
   - [Vertical Tabs](#vertical-tabs)
-- [Component API](#component-api)
   - [Tab - tab activation modes](#tab---tab-activation-modes)
   - [Tabs and the Grid - fullWidth prop](#tabs-and-the-grid---fullwidth-prop)
 - [V11](#v11)
   - [Tabs composition](#tabs-composition)
   - [Various updates](#various-updates)
   - [Max width](#max-width)
+- [Component API](#component-api)
 - [Feedback](#feedback)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
@@ -42,17 +51,97 @@ what is in rendered inside of `Tab` and `TabPanel`.
 
 ### Line Tabs
 
-<Canvas of={TabsStories.Default} />
+<Canvas
+  of={TabsStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.Default),
+    },
+  ]}
+/>
 
 ### Contained Tabs
 
-<Canvas of={TabsStories.Contained} />
+<Canvas
+  of={TabsStories.Contained}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.Contained),
+    },
+  ]}
+/>
 
-### Icon Tabs
+### Contained Full Width
 
-<Canvas of={TabsStories.IconOnly} />
+<Canvas
+  of={TabsStories.ContainedFullWidth}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.ContainedFullWidth),
+    },
+  ]}
+/>
 
-<Canvas of={TabsStories.Icon20Only} />
+### Contained With Icons
+
+<Canvas
+  of={TabsStories.ContainedWithIcons}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.ContainedWithIcons),
+    },
+  ]}
+/>
+
+### Contained With Second Labels
+
+<Canvas
+  of={TabsStories.ContainedWithSecondaryLabels}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.ContainedWithSecondaryLabels),
+    },
+  ]}
+/>
+
+### Contained With Second Labels and Icons
+
+<Canvas
+  of={TabsStories.ContainedWithSecondaryLabelsAndIcons}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.ContainedWithSecondaryLabelsAndIcons),
+    },
+  ]}
+/>
+
+### Icon Tabs Only
+
+<Canvas
+  of={TabsStories.IconOnly}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.IconOnly),
+    },
+  ]}
+/>
+
+<Canvas
+  of={TabsStories.Icon20Only}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.Icon20Only),
+    },
+  ]}
+/>
 
 ### Dismissable Tabs
 
@@ -174,16 +263,74 @@ return (
 
 And there you have it! Working dismissable tabs.
 
-<Canvas of={TabsStories.Dismissable} />
+<Canvas
+  of={TabsStories.Dismissable}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.Dismissable),
+    },
+  ]}
+/>
+
+Dismissable With Icons: 
+
+<Canvas
+  of={TabsStories.DismissableWithIcons}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.DismissableWithIcons),
+    },
+  ]}
+/>
+### Manual
+
+<Canvas
+  of={TabsStories.Manual}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.Manual),
+    },
+  ]}
+/>
+
+### Skeleton
+
+<Canvas
+  of={TabsStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.Skeleton),
+    },
+  ]}
+/>
+
+### With Icons
+
+<Canvas
+  of={TabsStories.WithIcons}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.WithIcons),
+    },
+  ]}
+/>
 
 ### Vertical tabs
 
-<Canvas of={TabsStories.Vertical} />
-
-## Component API
-
-<ArgTypes />
-
+<Canvas
+  of={TabsStories.Vertical}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TabsStories.Vertical),
+    },
+  ]}
+/>
 ### Tab - tab activation modes
 
 **Tabs With Automatic Activation**: A tabs widget where tabs are automatically
@@ -366,7 +513,7 @@ Or, to have 5 tabs and each tab span exactly three columns:
 ### Tabs composition
 
 Tabs got a big revamp in v11! Tabs are now more composable than ever before,
-meaning that you have the flexibity and control on your end to make them look
+meaning that you have the flexibility and control on your end to make them look
 and act how you want. The biggest difference is that the Tab label and the Tab
 content are now separate components.
 
@@ -445,6 +592,10 @@ some style rules:
   max-width: 10rem;
 }
 ```
+
+## Component API
+
+<ArgTypes />
 
 ## Feedback
 

@@ -48,7 +48,7 @@ WithLayer.propTypes = {
    * Can be either a node or a function that receives the layer
    * index as a parameter and returns the child for that layer.
    */
-  children: PropTypes.oneOf([PropTypes.node, PropTypes.func]),
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 };
 
 export { WithLayer };

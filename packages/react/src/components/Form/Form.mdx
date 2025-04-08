@@ -1,5 +1,6 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as FormStories from './Form.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -8,12 +9,12 @@ import * as FormStories from './Form.stories';
 ## Table of Contents
 
 - [Form](#form)
-  - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
+  - [AI Label](#with-ai-label)
   - [Accessibility Considerations](#accessibility-considerations)
     - [Accessible Name](#accessible-name)
-  - [Component API](#component-api)
-  - [Feedback](#feedback)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
@@ -33,14 +34,34 @@ The `Form` component is configurable to fit various use cases and layouts. It is
 purposely simple out of the box, and users are responsible for configuring it to
 suit their needs.
 
-<Canvas of={FormStories.Default} />
+<Canvas
+  of={FormStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FormStories.Default),
+    },
+  ]}
+/>
+
+## With AI label
+
+<Canvas
+  of={FormStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(FormStories.withAILabel),
+    },
+  ]}
+/>
 
 ## Accessibility Considerations
 
 ### Accessible Name
 
 To comply with accessibility requirements, make sure to supply the component
-with an accessible name by providing eiher the `aria-label`, `aria-labelledby`
+with an accessible name by providing either the `aria-label`, `aria-labelledby`
 or `title` attribute. Read more on the accessible naming rule
 [here](https://able.ibm.com/rules/archives/latest/doc/en-US/aria_accessiblename_exists.html).
 

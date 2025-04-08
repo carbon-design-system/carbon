@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,8 +9,6 @@ import PropTypes from 'prop-types';
 import React, {
   type ReactNode,
   type MouseEvent,
-  type ComponentType,
-  type FunctionComponent,
   type ButtonHTMLAttributes,
   type HTMLAttributes,
   useEffect,
@@ -43,6 +41,7 @@ import { noopFn } from '../../internal/noopFn';
 import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { useFeatureFlag } from '../FeatureFlags';
 import { warning } from '../../internal/warning';
+import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -170,12 +169,9 @@ export interface NotificationButtonProps
   notificationType?: 'toast' | 'inline' | 'actionable';
 
   /**
-   * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
+   * A component used to render an icon.
    */
-  renderIcon?:
-    | ComponentType<{ className?: string; name?: string }>
-    | FunctionComponent<{ className?: string; name?: string }>;
+  renderIcon?: React.ElementType;
 }
 
 export function NotificationButton({
@@ -243,8 +239,7 @@ NotificationButton.propTypes = {
   notificationType: PropTypes.oneOf(['toast', 'inline', 'actionable']),
 
   /**
-   * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
@@ -895,8 +890,10 @@ export interface ActionableNotificationProps
   onCloseButtonClick?(event: MouseEvent): void;
 
   /**
-   * By default, this value is "alertdialog". You can also provide an alternate
-   * role if it makes sense from from an accessibility perspective.
+   * Provide an accessible role to be used. Defaults to `alertdialog`. Any other
+   * value will disable the wrapping of focus. To remain accessible, additional
+   * work is required. See the storybook docs for more info:
+   * https://react.carbondesignsystem.com/?path=/docs/components-notifications-actionable--overview#using-the-role-prop
    */
   role?: string;
 
@@ -958,7 +955,7 @@ export function ActionableNotification({
   );
 
   useIsomorphicEffect(() => {
-    if (hasFocus) {
+    if (hasFocus && role === 'alertdialog') {
       const button = document.querySelector(
         'button.cds--actionable-notification__action-button'
       ) as HTMLButtonElement;
@@ -970,7 +967,12 @@ export function ActionableNotification({
     target: oldActiveNode,
     relatedTarget: currentActiveNode,
   }) {
-    if (isOpen && currentActiveNode && oldActiveNode) {
+    if (
+      isOpen &&
+      currentActiveNode &&
+      oldActiveNode &&
+      role === 'alertdialog'
+    ) {
       const { current: bodyNode } = innerModal;
       const { current: startTrapNode } = startTrap;
       const { current: endTrapNode } = endTrap;
@@ -985,7 +987,12 @@ export function ActionableNotification({
   }
 
   function handleKeyDown(event) {
-    if (isOpen && match(event, keys.Tab) && ref.current) {
+    if (
+      isOpen &&
+      match(event, keys.Tab) &&
+      ref.current &&
+      role === 'alertdialog'
+    ) {
       wrapFocusWithoutSentinels({
         containerNode: ref.current,
         currentActiveNode: event.target,
@@ -1177,8 +1184,10 @@ ActionableNotification.propTypes = {
   onCloseButtonClick: PropTypes.func,
 
   /**
-   * By default, this value is "alertdialog". You can also provide an alternate
-   * role if it makes sense from the accessibility-side.
+   * Provide an accessible role to be used. Defaults to `alertdialog`. Any other
+   * value will disable the wrapping of focus. To remain accessible, additional
+   * work is required. See the storybook docs for more info:
+   * https://react.carbondesignsystem.com/?path=/docs/components-notifications-actionable--overview#using-the-role-prop
    */
   role: PropTypes.string,
 
@@ -1203,6 +1212,30 @@ ActionableNotification.propTypes = {
  * ==================
  */
 
+/**
+ * Deprecated callout kind values.
+ * @deprecated Use NewKindProps instead.
+ */
+export type DeprecatedKindProps =
+  | 'error'
+  | 'info'
+  | 'info-square'
+  | 'success'
+  | 'warning'
+  | 'warning-alt';
+
+export type NewKindProps = 'warning' | 'info';
+
+export type KindProps = DeprecatedKindProps | NewKindProps;
+
+const propMappingFunction = (deprecatedValue) => {
+  const mapping = {
+    error: 'warning', // only redirect error -> warning
+    success: 'info', // only redirect success -> info
+  };
+  return mapping[deprecatedValue];
+};
+
 export interface CalloutProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Pass in the action button label that will be rendered within the ActionableNotification.
@@ -1222,13 +1255,7 @@ export interface CalloutProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify what state the notification represents
    */
-  kind?:
-    | 'error'
-    | 'info'
-    | 'info-square'
-    | 'success'
-    | 'warning'
-    | 'warning-alt';
+  kind?: KindProps;
 
   /**
    * Specify whether you are using the low contrast variant of the Callout.
@@ -1270,11 +1297,12 @@ export function Callout({
   subtitle,
   statusIconDescription,
   className,
-  kind = 'error',
+  kind = 'info',
   lowContrast,
   ...rest
 }: CalloutProps) {
   const prefix = usePrefix();
+
   const containerClassName = cx(className, {
     [`${prefix}--actionable-notification`]: true,
     [`${prefix}--actionable-notification--low-contrast`]: lowContrast,
@@ -1282,21 +1310,23 @@ export function Callout({
     [`${prefix}--actionable-notification--hide-close-button`]: true,
   });
 
-  const ref = useRef(null);
+  const childrenContainer = useRef(null);
   useInteractiveChildrenNeedDescription(
-    ref,
+    childrenContainer,
     `interactive child node(s) should have an \`aria-describedby\` property with a value matching the value of \`titleId\``
   );
 
   return (
-    <div ref={ref} {...rest} className={containerClassName}>
+    <div {...rest} className={containerClassName}>
       <div className={`${prefix}--actionable-notification__details`}>
         <NotificationIcon
           notificationType="inline"
           kind={kind}
           iconDescription={statusIconDescription || `${kind} icon`}
         />
-        <div className={`${prefix}--actionable-notification__text-wrapper`}>
+        <div
+          ref={childrenContainer}
+          className={`${prefix}--actionable-notification__text-wrapper`}>
           {title && (
             <Text
               as="div"
@@ -1348,14 +1378,18 @@ Callout.propTypes = {
   /**
    * Specify what state the notification represents
    */
-  kind: PropTypes.oneOf([
-    'error',
-    'info',
-    'info-square',
-    'success',
-    'warning',
-    'warning-alt',
-  ]),
+  kind: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'error',
+      'info',
+      'info-square',
+      'success',
+      'warning',
+      'warning-alt',
+    ]),
+    ['warning', 'info'],
+    propMappingFunction
+  ),
 
   /**
    * Specify whether you are using the low contrast variant of the Callout.
@@ -1402,7 +1436,7 @@ let didWarnAboutDeprecation = false;
 export const StaticNotification: React.FC<StaticNotificationProps> = (
   props
 ) => {
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
     warning(
       didWarnAboutDeprecation,
       '`StaticNotification` has been renamed to `Callout`.' +

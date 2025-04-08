@@ -81,14 +81,14 @@ export default (config) => (fp) => {
     if (inputTo === target && fp.selectedDates[1]) {
       // Using getTime() enables the ability to more readily compare the date currently
       // selected in the calendar and the date currently in the value of the input
-      const withoutTime = (date) => date.setHours(0, 0, 0, 0);
+      const withoutTime = (date) => date?.setHours(0, 0, 0, 0);
       const selectedToDate = withoutTime(new Date(fp.selectedDates[1]));
       const currentValueToDate = withoutTime(
         parseDateWithFormat(inputTo.value)
       );
 
       // The date should only be set if both dates are valid dates, and they don't match.
-      // When they don't match, this indiciates that the date selected in the calendar is stale,
+      // When they don't match, this indicates that the date selected in the calendar is stale,
       // and the current value in the input should be set for the calendar to update.
       if (
         selectedToDate &&
@@ -104,8 +104,8 @@ export default (config) => (fp) => {
       }
     }
 
-    const isValidDate = (date) => date.toString() !== 'Invalid Date';
-    // save end date in calendar inmediately after it's been written down
+    const isValidDate = (date) => date?.toString() !== 'Invalid Date';
+    // save end date in calendar immediately after it's been written down
     if (inputTo === target && fp.selectedDates.length === 1 && inputTo.value) {
       if (isValidDate(parseDateWithFormat(inputTo.value))) {
         fp.setDate(

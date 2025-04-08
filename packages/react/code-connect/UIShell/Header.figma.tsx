@@ -19,7 +19,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   Header,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2213-17092&t=A3oys5odsvKkcDFA-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=92123-1663&t=UFUf7yvv8SJyoEK1-4',
   {
     props: {
       prefix: figma.boolean('Site prefix', {

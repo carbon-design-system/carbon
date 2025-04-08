@@ -1,25 +1,41 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getByText, isElementVisible } from '@carbon/test-utils/dom';
-import { act, render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
-import MultiSelect from '../';
-import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
-import userEvent from '@testing-library/user-event';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
+import { generateGenericItem, generateItems } from '../../ListBox/test-helpers';
+import { getByText, isElementVisible } from '@carbon/test-utils/dom';
+
 import { AILabel } from '../../AILabel';
 import Button from '../../Button';
 import ButtonSet from '../../ButtonSet';
+import MultiSelect from '../';
+import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
 const waitForPosition = () => act(async () => {});
+
 describe('MultiSelect', () => {
+  let mockProps;
   beforeEach(() => {
     jest.mock('../../../internal/deprecateFieldOnObject');
+    mockProps = {
+      id: 'test-multiselect',
+      initialSelectedItems: [],
+      items: generateItems(5, generateGenericItem),
+      label: 'Test label',
+      onChange: jest.fn(),
+    };
   });
 
   describe.skip('automated accessibility tests', () => {
@@ -586,6 +602,7 @@ describe('MultiSelect', () => {
     });
 
     it('should respect slug prop', async () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       const { container } = render(
@@ -595,6 +612,25 @@ describe('MultiSelect', () => {
 
       expect(container.firstChild).toHaveClass(
         `${prefix}--list-box__wrapper--slug`
+      );
+      spy.mockRestore();
+    });
+
+    it('should respect decorator prop', async () => {
+      const items = generateItems(4, generateGenericItem);
+      const label = 'test-label';
+      const { container } = render(
+        <MultiSelect
+          id="test"
+          label={label}
+          items={items}
+          decorator={<AILabel />}
+        />
+      );
+      await waitForPosition();
+
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--list-box__wrapper--decorator`
       );
     });
 
@@ -708,8 +744,8 @@ describe('MultiSelect', () => {
       //select all the items
       await userEvent.click(screen.getByText('Select all'));
       //open the dropdown to check
-      const dropwdownNode = screen.getByRole('combobox');
-      await userEvent.click(dropwdownNode);
+      const dropdownNode = screen.getByRole('combobox');
+      await userEvent.click(dropdownNode);
       // Check if all items are selected
       const options = screen.getAllByRole('option');
       options.forEach((option) => {
@@ -718,7 +754,7 @@ describe('MultiSelect', () => {
 
       //clear the selection
       await userEvent.click(screen.getByText('Clear'));
-      await userEvent.click(dropwdownNode);
+      await userEvent.click(dropdownNode);
       //check if all items are cleared
       const items = screen.getAllByRole('option');
       items.forEach((option) => {
@@ -739,8 +775,8 @@ describe('MultiSelect', () => {
       );
 
       // The selected items should match what's passed into selectedItems
-      const dropwdownNode = screen.getByRole('combobox');
-      await userEvent.click(dropwdownNode);
+      const dropdownNode = screen.getByRole('combobox');
+      await userEvent.click(dropdownNode);
       expect(screen.getAllByRole('option')[0]).toHaveAttribute(
         'aria-selected',
         'true'
@@ -781,5 +817,139 @@ describe('MultiSelect', () => {
         'true'
       );
     });
+  });
+
+  it('should prevent default behavior for ArrowDown, ArrowUp, Space, and Enter keys', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+
+    render(<MultiSelect id="test" label={label} items={items} />);
+
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    const keysToTest = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
+
+    for (const key of keysToTest) {
+      const event = new KeyboardEvent('keydown', {
+        key,
+        bubbles: true,
+        cancelable: true,
+      });
+
+      const preventDefaultMock = jest.fn();
+      Object.defineProperty(event, 'preventDefault', {
+        value: preventDefaultMock,
+        writable: true,
+      });
+
+      // Wrap the event dispatch in act(...)
+      await act(async () => {
+        combobox.dispatchEvent(event);
+      });
+
+      expect(preventDefaultMock).toHaveBeenCalled();
+    }
+  });
+
+  it('should focus the element if mergedRef.current is defined', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const mergedRef = React.createRef(); // No TypeScript type annotation needed here
+
+    render(
+      <MultiSelect id="test" label={label} items={items} ref={mergedRef} />
+    );
+
+    // Wait for mergedRef to be defined (i.e., after component mounts)
+    await waitFor(() => expect(mergedRef.current).toBeDefined());
+
+    // Wrap the action of focusing inside `act()`
+    await act(async () => {
+      if (mergedRef.current) {
+        mergedRef.current.focus();
+      }
+    });
+
+    // Verify that the element is focused
+    if (mergedRef.current) {
+      expect(mergedRef.current).toHaveFocus();
+    }
+  });
+
+  it('should not throw an error when slug is not defined', () => {
+    render(<MultiSelect id="test" label="Test Label" items={[]} />);
+
+    const combobox = screen.getByRole('combobox');
+    expect(combobox).toBeInTheDocument();
+  });
+  it('should call preventDefault for select access keys when readonly is true', () => {
+    const mockPreventDefault = jest.fn();
+    render(
+      <MultiSelect id="test" label="Test Label" items={[]} readOnly={true} />
+    );
+    const combobox = screen.getByRole('combobox');
+    expect(combobox).toBeInTheDocument();
+    combobox.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        mockPreventDefault();
+      }
+    });
+    fireEvent.keyDown(combobox, { key: 'Enter' });
+    expect(mockPreventDefault).toHaveBeenCalled();
+  });
+
+  it('should return a comma-separated string for an array of items', () => {
+    const mockItems = [{ value: 'item1' }, { value: 'item2' }];
+    const mockItemToString = jest.fn((item) => item.value);
+
+    const selectProps = {
+      stateReducer: jest.fn(),
+      isOpen: false,
+      itemToString: (filteredItems) =>
+        Array.isArray(filteredItems)
+          ? filteredItems.map((item) => mockItemToString(item)).join(', ')
+          : '',
+    };
+    const result = selectProps.itemToString(mockItems);
+    expect(result).toBe('item1, item2');
+    expect(mockItemToString).toHaveBeenCalledTimes(2);
+  });
+
+  it('should return an empty string for non-array input', () => {
+    const mockItemToString = jest.fn();
+
+    const selectProps = {
+      stateReducer: jest.fn(),
+      isOpen: false,
+      itemToString: (filteredItems) =>
+        Array.isArray(filteredItems)
+          ? filteredItems.map((item) => mockItemToString(item)).join(', ')
+          : '',
+    };
+
+    const result = selectProps.itemToString(null);
+
+    expect(result).toBe('');
+    expect(mockItemToString).not.toHaveBeenCalled();
+  });
+
+  it('should add label props when `titleText` is a string', () => {
+    render(<MultiSelect {...mockProps} titleText="MultiSelect Title" />);
+
+    const label = screen.getByText('MultiSelect Title').closest('label');
+
+    expect(label).toHaveAttribute('id');
+  });
+
+  it('should not add label props when `titleText` is an element', () => {
+    render(
+      <MultiSelect {...mockProps} titleText={<span>MultiSelect Title</span>} />
+    );
+
+    const label = screen.getByText('MultiSelect Title').closest('label');
+
+    expect(label).not.toHaveAttribute('id');
   });
 });

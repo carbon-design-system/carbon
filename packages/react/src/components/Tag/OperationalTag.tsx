@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,8 @@ import React, {
   useState,
   ReactNode,
   useRef,
+  forwardRef,
+  ForwardedRef,
 } from 'react';
 import classNames from 'classnames';
 import { useId } from '../../internal/useId';
@@ -21,6 +23,7 @@ import Tag, { SIZES } from './Tag';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
+import mergeRefs from '../../tools/mergeRefs';
 
 const TYPES = {
   red: 'Red',
@@ -52,8 +55,7 @@ export interface OperationalTagBaseProps {
   id?: string;
 
   /**
-   * Optional prop to render a custom icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: React.ElementType;
   onClick?: MouseEventHandler;
@@ -80,77 +82,83 @@ export type OperationalTagProps<T extends React.ElementType> = PolymorphicProps<
   OperationalTagBaseProps
 >;
 
-const OperationalTag = <T extends React.ElementType>({
-  className,
-  disabled,
-  id,
-  renderIcon,
-  size,
-  text,
-  type = 'gray',
-  ...other
-}: OperationalTagProps<T>) => {
-  const prefix = usePrefix();
-  const tagRef = useRef<HTMLElement>();
-  const tagId = id || `tag-${useId()}`;
-  const tagClasses = classNames(`${prefix}--tag--operational`, className);
-  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+const OperationalTag = forwardRef(
+  <T extends React.ElementType>(
+    {
+      className,
+      disabled,
+      id,
+      renderIcon,
+      size,
+      text,
+      type = 'gray',
+      ...other
+    }: OperationalTagProps<T>,
+    forwardRef: ForwardedRef<HTMLButtonElement>
+  ) => {
+    const prefix = usePrefix();
+    const tagRef = useRef<HTMLButtonElement>(null);
+    const tagId = id || `tag-${useId()}`;
+    const tagClasses = classNames(`${prefix}--tag--operational`, className);
+    const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-  useLayoutEffect(() => {
-    const newElement = tagRef.current?.getElementsByClassName(
-      `${prefix}--tag__label`
-    )[0];
+    useLayoutEffect(() => {
+      const newElement = tagRef.current?.getElementsByClassName(
+        `${prefix}--tag__label`
+      )[0];
 
-    setIsEllipsisApplied(isEllipsisActive(newElement));
-  }, [prefix, tagRef]);
+      setIsEllipsisApplied(isEllipsisActive(newElement));
+    }, [prefix, tagRef]);
 
-  const tooltipClasses = classNames(
-    `${prefix}--icon-tooltip`,
-    `${prefix}--tag-label-tooltip`
-  );
+    const tooltipClasses = classNames(
+      `${prefix}--icon-tooltip`,
+      `${prefix}--tag-label-tooltip`
+    );
+    const combinedRef = mergeRefs(tagRef, forwardRef);
 
-  if (isEllipsisApplied) {
+    if (isEllipsisApplied) {
+      return (
+        <Tooltip
+          label={text}
+          align="bottom"
+          className={tooltipClasses}
+          leaveDelayMs={0}
+          onMouseEnter={() => false}
+          closeOnActivation>
+          <Tag
+            ref={combinedRef}
+            type={type}
+            size={size}
+            renderIcon={renderIcon}
+            disabled={disabled}
+            className={tagClasses}
+            id={tagId}
+            {...other}>
+            <Text title={text} className={`${prefix}--tag__label`}>
+              {text}
+            </Text>
+          </Tag>
+        </Tooltip>
+      );
+    }
+
     return (
-      <Tooltip
-        label={text}
-        align="bottom"
-        className={tooltipClasses}
-        leaveDelayMs={0}
-        onMouseEnter={() => false}
-        closeOnActivation>
-        <Tag
-          ref={tagRef}
-          type={type}
-          size={size}
-          renderIcon={renderIcon}
-          disabled={disabled}
-          className={tagClasses}
-          id={tagId}
-          {...other}>
-          <Text title={text} className={`${prefix}--tag__label`}>
-            {text}
-          </Text>
-        </Tag>
-      </Tooltip>
+      <Tag
+        ref={combinedRef}
+        type={type}
+        size={size}
+        renderIcon={renderIcon}
+        disabled={disabled}
+        className={tagClasses}
+        id={tagId}
+        {...other}>
+        <Text title={text} className={`${prefix}--tag__label`}>
+          {text}
+        </Text>
+      </Tag>
     );
   }
-
-  return (
-    <Tag
-      ref={tagRef}
-      type={type}
-      size={size}
-      renderIcon={renderIcon}
-      disabled={disabled}
-      className={tagClasses}
-      id={tagId}
-      {...other}>
-      <Text title={text} className={`${prefix}--tag__label`}>
-        {text}
-      </Text>
-    </Tag>
-  );
-};
+);
 
 OperationalTag.propTypes = {
   /**
@@ -169,8 +177,7 @@ OperationalTag.propTypes = {
   id: PropTypes.string,
 
   /**
-   * Optional prop to render a custom icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 

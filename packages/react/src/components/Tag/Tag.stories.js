@@ -8,6 +8,7 @@
 import React from 'react';
 import { default as Tag } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
+import DismissibleTag from '../Tag/DismissibleTag';
 import { Asleep, View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -184,69 +185,71 @@ Skeleton.argTypes = {
   },
 };
 
-const aiLabel = (
-  <AILabel className="slug-container">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
+export const withAILabel = () => {
+  const aiLabel = (
+    <AILabel className="ai-label-container">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h2 className="ai-label-heading">84%</h2>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <AILabelActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </AILabelActions>
+      </AILabelContent>
+    </AILabel>
+  );
 
-export const withAILabel = () => (
-  <div style={{ marginBottom: '4rem' }}>
-    <Tag slug={aiLabel} className="some-class" type="red" title="Clear Filter">
-      {'Tag'}
-    </Tag>
+  return (
+    <div style={{ marginBottom: '4rem' }}>
+      <Tag
+        decorator={aiLabel}
+        className="some-class"
+        type="red"
+        title="Clear Filter">
+        {'Tag'}
+      </Tag>
 
-    <Tag
-      filter
-      slug={aiLabel}
-      className="some-class"
-      type="purple"
-      title="Clear Filter">
-      {'Tag'}
-    </Tag>
+      <DismissibleTag
+        decorator={aiLabel}
+        className="some-class"
+        type="purple"
+        title="Clear Filter"
+        text="Tag"></DismissibleTag>
 
-    <Tag
-      renderIcon={Asleep}
-      slug={aiLabel}
-      className="some-class"
-      type="blue"
-      title="Clear Filter">
-      {'Tag'}
-    </Tag>
+      <Tag
+        renderIcon={Asleep}
+        decorator={aiLabel}
+        className="some-class"
+        type="blue"
+        title="Clear Filter">
+        {'Tag'}
+      </Tag>
 
-    <Tag
-      filter
-      renderIcon={Asleep}
-      slug={aiLabel}
-      className="some-class"
-      type="green"
-      title="Clear Filter">
-      {'Tag'}
-    </Tag>
-  </div>
-);
+      <DismissibleTag
+        renderIcon={Asleep}
+        decorator={aiLabel}
+        className="some-class"
+        type="green"
+        title="Clear Filter"
+        text="Tag"></DismissibleTag>
+    </div>
+  );
+};

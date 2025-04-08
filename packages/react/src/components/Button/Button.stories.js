@@ -7,9 +7,10 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Add } from '@carbon/icons-react';
+import { Add, Notification } from '@carbon/icons-react';
 import { default as Button, ButtonSkeleton } from '../Button';
 import ButtonSet from '../ButtonSet';
+import { Stack } from '../Stack';
 import mdx from './Button.mdx';
 import './button-story.scss';
 
@@ -60,22 +61,39 @@ export default {
 };
 
 export const Default = (args) => {
-  return <Button {...args}>Button</Button>;
+  return (
+    <Stack gap={7}>
+      <Button {...args}>Button</Button>
+      <Button renderIcon={Add} {...args}>
+        Button
+      </Button>
+    </Stack>
+  );
 };
 
 export const Secondary = (args) => {
   return (
-    <Button kind="secondary" {...args}>
-      Button
-    </Button>
+    <Stack gap={7}>
+      <Button kind="secondary" {...args}>
+        Button
+      </Button>
+      <Button kind="secondary" renderIcon={Add} {...args}>
+        Button
+      </Button>
+    </Stack>
   );
 };
 
 export const Tertiary = (args) => {
   return (
-    <Button kind="tertiary" {...args}>
-      Button
-    </Button>
+    <Stack gap={7}>
+      <Button kind="tertiary" {...args}>
+        Button
+      </Button>
+      <Button kind="tertiary" renderIcon={Add} {...args}>
+        Button
+      </Button>
+    </Stack>
   );
 };
 
@@ -87,11 +105,11 @@ export const Danger = (args) => {
       </Button>
       &nbsp;
       <Button kind="danger--tertiary" {...args}>
-        Tertiary Danger Button
+        Danger tertiary button
       </Button>
       &nbsp;
       <Button kind="danger--ghost" {...args}>
-        Ghost Danger Button
+        Danger ghost button
       </Button>
     </>
   );
@@ -99,9 +117,14 @@ export const Danger = (args) => {
 
 export const Ghost = (args) => {
   return (
-    <Button kind="ghost" {...args}>
-      Button
-    </Button>
+    <Stack gap={7}>
+      <Button kind="ghost" {...args}>
+        Button
+      </Button>
+      <Button kind="ghost" renderIcon={Add} {...args}>
+        Button
+      </Button>
+    </Stack>
   );
 };
 
@@ -114,6 +137,28 @@ export const IconButton = (args) => (
     {...args}
   />
 );
+
+export const IconButtonWithBadge = (args) => {
+  const { badgeCount } = args;
+
+  return (
+    <Button
+      kind="ghost"
+      size="lg"
+      badgeCount={badgeCount}
+      hasIconOnly
+      renderIcon={Notification}
+      iconDescription="Notification"
+      onClick={action('onClick')}
+      autoAlign
+      {...args}
+    />
+  );
+};
+
+IconButtonWithBadge.args = {
+  badgeCount: 4,
+};
 
 export const SetOfButtons = (args) => {
   return (
@@ -128,10 +173,12 @@ export const SetOfButtons = (args) => {
   );
 };
 
-export const Skeleton = () => (
-  <div>
-    <ButtonSkeleton />
-    &nbsp;
-    <ButtonSkeleton size="sm" />
-  </div>
-);
+export const Skeleton = () => {
+  return (
+    <div>
+      <ButtonSkeleton />
+      &nbsp;
+      <ButtonSkeleton size="sm" />
+    </div>
+  );
+};

@@ -1,5 +1,6 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/blocks';
 import * as PopoverStories from './Popover.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -14,7 +15,12 @@ import * as PopoverStories from './Popover.stories';
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [Popover](#Popover)
+  - [Overview](#overview)
+  - [Visibility](#Visibility)
+  - [Alignment](#Alignment)
+  - [Appearance](#Appearance)
+  - [Test](#Test)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -54,6 +60,16 @@ function CustomComponent() {
 }
 ```
 
+<Canvas
+  of={PopoverStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(PopoverStories.Default),
+    },
+  ]}
+/>
+
 ## Visibility
 
 The `open` prop allows you to control the visibility of the `Popover`. This is
@@ -67,7 +83,15 @@ clicks outside of a popover will close the popover. This is achieved by using
 state in conjunction with the callback prop to set `open` to false when
 `onRequestClose` is called.
 
-<Canvas of={PopoverStories.TabTip} />
+  <Canvas
+    of={PopoverStories.TabTip}
+    additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(PopoverStories.TabTip),
+      },
+    ]}
+  />
 
 ## Alignment
 
@@ -88,6 +112,36 @@ or right edges of the popover.
 If you are using `align="left"` or `align="right"`, you can use `top` or
 `bottom` to control this alignment.
 
+  <Canvas
+      of={PopoverStories.ExperimentalAutoAlign}
+      additionalActions={[
+        {
+          title: 'Open in Stackblitz',
+          onClick: () => stackblitzPrefillConfig(PopoverStories.ExperimentalAutoAlign),
+        },
+      ]}
+  />
+
+  <Canvas
+      of={PopoverStories.ExperimentalAutoAlignBoundary}
+      additionalActions={[
+        {
+          title: 'Open in Stackblitz',
+          onClick: () => stackblitzPrefillConfig(PopoverStories.ExperimentalAutoAlignBoundary),
+        },
+      ]}
+  />
+
+    <Canvas
+    of={PopoverStories.TabTipExperimentalAutoAlign}
+    additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(PopoverStories.TabTipExperimentalAutoAlign),
+      },
+    ]}
+  />
+
 ## Appearance
 
 The `Popover` component has several props which you can use to customize its
@@ -97,6 +151,18 @@ appearance, including:
   beside the trigger element
 - `dropShadow`: to display a drop shadow on the popover content
 - `highContrast`: to display a high contrast variant of the popover
+
+## Test
+
+  <Canvas
+    of={PopoverStories.Test}
+    additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(PopoverStories.Test),
+      },
+    ]}
+  />
 
 ## Component API
 

@@ -8,6 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import Pagination from './Pagination';
+import mdx from './Pagination.mdx';
 
 const props = () => ({
   disabled: false,
@@ -37,61 +38,18 @@ export default {
     size: 'md',
   },
   decorators: [(story) => <div style={{ maxWidth: '800px' }}>{story()}</div>],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = (args) => <Pagination {...props()} {...args} />;
-
-export const MultiplePaginationComponents = (args) => {
-  return (
-    <div>
-      <Pagination {...props()} {...args} />
-      <Pagination {...props()} {...args} />
-    </div>
-  );
+export const Default = (args) => {
+  return <Pagination pageSizes={[10, 20, 30, 40, 50]} {...args} />;
 };
 
-MultiplePaginationComponents.storyName = 'Multiple Pagination components';
-
-export const PaginationWithCustomPageSizesLabel = (args) => {
-  return (
-    <div>
-      <Pagination
-        {...props()}
-        pageSizes={[
-          { text: 'Ten', value: 10 },
-          { text: 'Twenty', value: 20 },
-          { text: 'Thirty', value: 30 },
-          { text: 'Forty', value: 40 },
-          { text: 'Fifty', value: 50 },
-        ]}
-        {...args}
-      />
-    </div>
-  );
-};
-
-PaginationWithCustomPageSizesLabel.storyName =
-  'Pagination with custom page sizes label';
-
-export const PaginationUnknownPages = (args) => {
-  return (
-    <div>
-      <Pagination
-        {...props()}
-        pagesUnknown={true}
-        totalItems={undefined}
-        page={1}
-        {...args}
-      />
-    </div>
-  );
-};
-
-PaginationUnknownPages.storyName = 'Unknown pages and items';
-
-export const Playground = (args) => <Pagination {...args} />;
-
-Playground.args = {
+Default.args = {
   backwardText: 'Previous page',
   forwardText: 'Next page',
   disabled: false,
@@ -107,7 +65,7 @@ Playground.args = {
   totalItems: 103,
 };
 
-Playground.argTypes = {
+Default.argTypes = {
   className: {
     control: false,
   },
@@ -187,3 +145,51 @@ Playground.argTypes = {
     },
   },
 };
+
+export const MultiplePaginationComponents = (args) => {
+  return (
+    <div>
+      <Pagination {...props()} {...args} />
+      <Pagination {...props()} {...args} />
+    </div>
+  );
+};
+
+MultiplePaginationComponents.storyName = 'Multiple Pagination components';
+
+export const PaginationWithCustomPageSizesLabel = (args) => {
+  return (
+    <div>
+      <Pagination
+        {...props()}
+        pageSizes={[
+          { text: 'Ten', value: 10 },
+          { text: 'Twenty', value: 20 },
+          { text: 'Thirty', value: 30 },
+          { text: 'Forty', value: 40 },
+          { text: 'Fifty', value: 50 },
+        ]}
+        {...args}
+      />
+    </div>
+  );
+};
+
+PaginationWithCustomPageSizesLabel.storyName =
+  'Pagination with custom page sizes label';
+
+export const PaginationUnknownPages = (args) => {
+  return (
+    <div>
+      <Pagination
+        {...props()}
+        pagesUnknown={true}
+        totalItems={undefined}
+        page={1}
+        {...args}
+      />
+    </div>
+  );
+};
+
+PaginationUnknownPages.storyName = 'Unknown pages and items';

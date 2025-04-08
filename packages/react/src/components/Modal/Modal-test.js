@@ -368,7 +368,21 @@ describe('Modal', () => {
     expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
   });
 
+  it('should respect decorator prop', () => {
+    const { container } = render(
+      <Modal
+        danger
+        primaryButtonText="Danger button text"
+        data-testid="modal-5"
+        decorator={<AILabel />}
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(`${prefix}--modal--decorator`);
+  });
+
   it('should respect slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(
       <Modal
         danger
@@ -379,6 +393,87 @@ describe('Modal', () => {
     );
 
     expect(container.firstChild).toHaveClass(`${prefix}--modal--slug`);
+    spy.mockRestore();
+  });
+
+  it('should set correct focus if data-modal-primary-focus is used', () => {
+    render(
+      <Modal
+        open
+        id="custom-modal-id"
+        data-testid="modal-4"
+        loadingStatus="active"
+        loadingDescription="loading..."
+        primaryButtonText="Save"
+        secondaryButtonText="Cancel">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          data-testid="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByTestId('text-input-1')).toHaveFocus();
+  });
+
+  it('should set correct focus on a danger modal if data-modal-primary-focus is used', () => {
+    render(
+      <Modal
+        open
+        danger
+        id="custom-modal-id"
+        data-testid="modal-4"
+        loadingStatus="active"
+        loadingDescription="loading..."
+        primaryButtonText="Save"
+        secondaryButtonText="Cancel">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          data-testid="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByTestId('text-input-1')).toHaveFocus();
+  });
+
+  it('should set focus on secondary button if danger modal is used', () => {
+    render(
+      <Modal
+        open
+        danger
+        id="custom-modal-id"
+        data-testid="modal-4"
+        primaryButtonText="Save"
+        secondaryButtonText="Cancel">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          id="text-input-1"
+          data-testid="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByText('Cancel')).toHaveFocus();
   });
 });
 

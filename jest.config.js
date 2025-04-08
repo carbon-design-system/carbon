@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,9 @@ module.exports = {
     '!**/*.stories.js',
     '!**/*-test.e2e.js',
   ],
+  coveragePathIgnorePatterns: ['packages/web-components/*'],
+  testPathIgnorePatterns: ['packages/web-components/*'],
+  transformIgnorePatterns: ['<rootDir>/node_modules/(?!lodash-es)'],
   moduleNameMapper: {
     // This is a temporary workaround from moving to Jest v28. In this update,
     // certain dependencies are only providing ESM through exports and so we use
@@ -28,4 +31,8 @@ module.exports = {
     nanoid: require.resolve('nanoid'),
   },
   reporters: ['default', 'jest-junit'],
+
+  // This is a temporary workaround until Jest supports Prettier 3 (and ESM)
+  // @see https://jestjs.io/docs/configuration#prettierpath-string
+  prettierPath: require.resolve('prettier2'),
 };

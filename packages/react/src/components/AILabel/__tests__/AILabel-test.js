@@ -46,7 +46,7 @@ describe('AILabel', () => {
       const wrapper = render(<AILabel kind="inline" textLabel="Test text" />);
 
       const additionalTextSpan = wrapper.container.querySelector(
-        `.${prefix}--slug__additional-text`
+        `.${prefix}--ai-label__additional-text`
       );
       expect(additionalTextSpan).toBeInTheDocument();
       expect(additionalTextSpan).toHaveTextContent('Test text');
@@ -56,7 +56,7 @@ describe('AILabel', () => {
       const wrapper = render(<AILabel textLabel="Test text" />);
 
       const additionalTextSpan = wrapper.container.querySelector(
-        `.${prefix}--slug__additional-text`
+        `.${prefix}--ai-label__additional-text`
       );
       expect(additionalTextSpan).not.toBeInTheDocument();
     });
@@ -89,14 +89,14 @@ describe('AILabel', () => {
       render(<AILabel kind="inline" />);
 
       expect(screen.getByRole('button')).toHaveClass(
-        `${prefix}--slug__button--inline`
+        `${prefix}--ai-label__button--inline`
       );
     });
 
     it('should respect revertActive prop', () => {
       const { container } = render(<AILabel revertActive />);
 
-      expect(container.firstChild).toHaveClass(`${prefix}--slug--revert`);
+      expect(container.firstChild).toHaveClass(`${prefix}--ai-label--revert`);
       expect(container.firstChild.firstChild).toHaveClass(
         `${prefix}--icon-tooltip`
       );
@@ -112,7 +112,7 @@ describe('AILabel', () => {
       render(<AILabel size="xl" />);
 
       expect(screen.getByRole('button')).toHaveClass(
-        `${prefix}--slug__button--xl`
+        `${prefix}--ai-label__button--xl`
       );
     });
   });
@@ -156,5 +156,26 @@ describe('AILabelActions', () => {
     );
 
     expect(screen.getByText('View details')).toBeInTheDocument();
+  });
+  describe('Labels and kind prop', () => {
+    it('should use empty label for inline kind', () => {
+      render(<AILabel kind="inline" aiText="AI" textLabel="Text goes here" />);
+      expect(screen.getByRole('button')).toHaveAttribute('aria-label', '');
+    });
+
+    it('should set aria-label when kind is default', () => {
+      render(<AILabel aiText="AI" />);
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'AI Show information'
+      );
+    });
+
+    it('should let visible text serve as accessible name in inline mode', () => {
+      render(<AILabel kind="inline" aiText="AI" textLabel="Text goes here" />);
+      expect(
+        screen.getByRole('button', { name: 'AI Text goes here' })
+      ).toBeInTheDocument();
+    });
   });
 });

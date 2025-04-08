@@ -20,11 +20,11 @@ export default {
   },
 };
 
-export const Default = () => <CopyButton />;
+// Note: autoAlign is used here only to make tooltips visible in StackBlitz,
+// autoAlign is experimental and not part of the actual implementation.
+export const Default = (args) => <CopyButton autoAlign {...args} />;
 
-export const Playground = (args) => <CopyButton {...args} />;
-
-Playground.argTypes = {
+Default.argTypes = {
   className: {
     table: {
       disable: true,

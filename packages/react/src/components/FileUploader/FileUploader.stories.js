@@ -10,6 +10,7 @@
 import React from 'react';
 import ExampleDropContainerApp from './stories/drop-container';
 import ExampleDropContainerAppSingle from './stories/drag-and-drop-single';
+import mdx from './FileUploader.mdx';
 
 import {
   default as FileUploader,
@@ -30,26 +31,11 @@ export default {
     FileUploaderItem,
     FileUploaderDropContainer,
   },
-};
-
-export const Default = () => {
-  return (
-    <div className="cds--file__container">
-      <FileUploader
-        labelTitle="Upload files"
-        labelDescription="Max file size is 500 MB. Only .jpg files are supported."
-        buttonLabel="Add file"
-        buttonKind="primary"
-        size="md"
-        filenameStatus="edit"
-        accept={['.jpg', '.png']}
-        multiple={true}
-        disabled={false}
-        iconDescription="Delete file"
-        name=""
-      />
-    </div>
-  );
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const _FileUploaderItem = (args) => {
@@ -130,16 +116,18 @@ _FileUploaderItem.argTypes = {
   },
 };
 
-export const _FileUploaderDropContainer = () => (
-  <FileUploaderDropContainer
-    labelText="Drag and drop files here or click to upload"
-    multiple={true}
-    accept={['image/jpeg', 'image/png']}
-    disabled={false}
-    name=""
-    tabIndex={0}
-  />
-);
+export const _FileUploaderDropContainer = () => {
+  return (
+    <FileUploaderDropContainer
+      labelText="Drag and drop files here or click to upload"
+      multiple={true}
+      accept={['image/jpeg', 'image/png']}
+      disabled={false}
+      name=""
+      tabIndex={0}
+    />
+  );
+};
 
 export const DragAndDropUploadContainerExampleApplication = (args) =>
   ExampleDropContainerApp(args);
@@ -171,20 +159,23 @@ DragAndDropUploadSingleContainerExampleApplication.argTypes = {
   onChange: { action: 'onChange' },
 };
 
-export const Skeleton = () => (
-  <div style={{ width: '500px' }}>
-    <FileUploaderSkeleton />
-  </div>
-);
+export const Skeleton = () => {
+  return (
+    <div style={{ width: '500px' }}>
+      <FileUploaderSkeleton />
+    </div>
+  );
+};
 
-export const Playground = (args) => {
+export const Default = (args) => {
   return (
     <div className="cds--file__container">
       <FileUploader {...args} />
     </div>
   );
 };
-Playground.args = {
+
+Default.args = {
   labelTitle: 'Upload files',
   labelDescription: 'Max file size is 500 MB. Only .jpg files are supported.',
   buttonLabel: 'Add file',
@@ -197,7 +188,7 @@ Playground.args = {
   iconDescription: 'Delete file',
   name: '',
 };
-Playground.argTypes = {
+Default.argTypes = {
   onChange: { action: 'onChange' },
   onClick: { action: 'onClick' },
   onDelete: { action: 'onDelete' },

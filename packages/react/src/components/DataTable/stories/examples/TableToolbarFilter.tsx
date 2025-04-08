@@ -38,10 +38,7 @@ interface TableToolbarFilterProps {
   /**
    * Provide an optional hook that is called each time the input is updated
    */
-  onChange?: (
-    event: '' | ChangeEvent<HTMLInputElement>,
-    value?: string
-  ) => void;
+  onChange?: (event: '' | ChangeEvent<HTMLInputElement>) => void;
 
   /**
    * Provide an function that is called when the apply button is clicked

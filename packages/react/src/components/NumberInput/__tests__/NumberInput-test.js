@@ -39,22 +39,22 @@ describe('NumberInput', () => {
     expect(container.firstChild).toHaveClass('custom-class');
   });
 
-  it('should set `min` on the underyling <input>', () => {
+  it('should set `min` on the underlying <input>', () => {
     render(<NumberInput label="test-label" id="test" min={0} />);
     expect(screen.getByLabelText('test-label')).toHaveAttribute('min', '0');
   });
 
-  it('should set `max` on the underyling <input>', () => {
+  it('should set `max` on the underlying <input>', () => {
     render(<NumberInput label="test-label" id="test" max={10} />);
     expect(screen.getByLabelText('test-label')).toHaveAttribute('max', '10');
   });
 
-  it('should set `step` on the underyling <input>', () => {
+  it('should set `step` on the underlying <input>', () => {
     render(<NumberInput label="test-label" id="test" step={5} />);
     expect(screen.getByLabelText('test-label')).toHaveAttribute('step', '5');
   });
 
-  it('should set `disabled` on the underyling <input>', () => {
+  it('should set `disabled` on the underlying <input>', () => {
     render(<NumberInput label="test-label" id="test" disabled />);
     expect(screen.getByLabelText('test-label')).toBeDisabled();
   });
@@ -69,12 +69,24 @@ describe('NumberInput', () => {
     expect(screen.getByLabelText('test-label')).toHaveValue(5);
   });
 
-  it('should respect slug prop', () => {
+  it('should respect decorator prop', () => {
+    render(
+      <NumberInput label="test-label" id="test" decorator={<AILabel />} />
+    );
+
+    expect(
+      screen.getByRole('button', { name: 'AI Show information' })
+    ).toBeInTheDocument();
+  });
+
+  it('should respect the deprecated slug prop', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     render(<NumberInput label="test-label" id="test" slug={<AILabel />} />);
 
     expect(
-      screen.getByRole('button', { name: 'AI - Show information' })
+      screen.getByRole('button', { name: 'AI Show information' })
     ).toBeInTheDocument();
+    spy.mockRestore();
   });
 
   it('should allow an empty string as input to the underlying <input>', () => {
@@ -436,5 +448,29 @@ describe('NumberInput', () => {
         value: '',
       })
     );
+  });
+
+  it('should increment and decrement decimal numbers without floating-point precision errors', async () => {
+    render(
+      <NumberInput
+        label="NumberInput label"
+        id="number-input"
+        min={0}
+        value={15.01}
+        step={1}
+        max={100}
+        translateWithId={translateWithId}
+      />
+    );
+
+    const input = screen.getByLabelText('NumberInput label');
+
+    expect(input).toHaveValue(15.01);
+
+    await userEvent.click(screen.getByLabelText('increment'));
+    expect(input).toHaveValue(16.01);
+
+    await userEvent.click(screen.getByLabelText('decrement'));
+    expect(input).toHaveValue(15.01);
   });
 });

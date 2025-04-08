@@ -1,4 +1,6 @@
 import { ArgTypes, Meta } from '@storybook/blocks';
+import Menu from '../Menu';
+import * as MenuStories from './Menu.stories';
 
 <Meta isTemplate />
 
@@ -50,7 +52,7 @@ where we pass `[x, x + width]` and `[y, y + height]` of the trigger button. This
 way, the `Menu` is able to automatically determine its ideal position on the
 screen (which side to open at and in which direction) while always staying
 visually attached to the trigger. Each `MenuItem` that has `children` and
-therfore a submenu uses the same approach under the hood to correctly position
+therefore a submenu uses the same approach under the hood to correctly position
 the submenu.
 
 ## Subcomponents
@@ -64,7 +66,7 @@ as `disabled`. If it triggers a destructive action, you can pass it
 `kind="danger"` to highlight it specially on hover and focus.
 
 ```jsx
-<Menu>
+<Menu open>
   <MenuItem label="Copy" shortcut="⌘C" />
   <MenuItem label="Paste" shortcut="⌘V" disabled />
   <MenuItem label="Delete" kind="danger" />
@@ -75,13 +77,13 @@ In order to render a submenu, you can pass any of the above mentioned
 subcomponents as `children` of a `MenuItem`.
 
 ```jsx
-<Menu>
+<Menu open>
   <MenuItem label="Open" />
   <MenuItem label="Save" />
   <MenuItem label="Import">
-    <MenuItem label="Image">
-    <MenuItem label="Movie">
-    <MenuItem label="Text">
+    <MenuItem label="Image" />
+    <MenuItem label="Movie" />
+    <MenuItem label="Text" />
   </MenuItem>
 </Menu>
 ```
@@ -92,7 +94,7 @@ The `MenuItemDivider` renders a thin dividing line, visually separating menu
 items. Use this to enhance grouping of related items.
 
 ```jsx
-<Menu>
+<Menu open>
   <MenuItem label="Cut" />
   <MenuItem label="Copy" />
   <MenuItem label="Paste" />
@@ -107,7 +109,7 @@ You can logically group multiple menu items by wrapping them inside a
 `MenuItemGroup`. This doesn't affect the visual rendering but can tremendously
 improve the experience for assistive technology users. You'll always want to use
 a `MenuItemGroup` if you have multiple
-[`MenuItemSelectable`](#menuitemselectable) that are relatd to each other.
+[`MenuItemSelectable`](#menuitemselectable) that are related to each other.
 
 ### MenuItemSelectable
 
@@ -117,7 +119,7 @@ related to each other, you'll want to wrap them in a `MenuItemGroup` for
 improved accessibility.
 
 ```jsx
-<Menu>
+<Menu open>
   <MenuItemGroup label="Font style">
     <MenuItemSelectable label="Bold" selected />
     <MenuItemSelectable label="Italic" />
@@ -132,7 +134,7 @@ can be selected at a time. The component automatically wraps itself in a
 `MenuItemGroup`, so you won't have to nest it manually.
 
 ```jsx
-<Menu>
+<Menu open>
   <MenuItemRadioGroup
     label="Font family"
     items={['Sans', 'Serif', 'Mono']}

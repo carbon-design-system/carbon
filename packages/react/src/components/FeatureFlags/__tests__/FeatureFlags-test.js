@@ -226,6 +226,7 @@ describe('FeatureFlags', () => {
       enableTreeviewControllable: false,
     });
   });
+
   it('should handle boolean props and flags object with no overlapping keys', () => {
     const checkFlags = jest.fn();
     const checkFlag = jest.fn();
@@ -267,6 +268,7 @@ describe('FeatureFlags', () => {
       enableExperimentalFocusWrapWithoutSentinels: true,
     });
   });
+
   it('should handle boolean props correctly when no flags object is provided', () => {
     const checkFlags = jest.fn();
     const checkFlag = jest.fn();
@@ -306,6 +308,330 @@ describe('FeatureFlags', () => {
     expect(checkFlag).toHaveBeenLastCalledWith({
       enableV12Overflowmenu: true,
       enableTreeviewControllable: false,
+    });
+  });
+
+  describe('should support a prop for each feature flag', () => {
+    it('enable-v12-tile-default-icons - enableV12TileDefaultIcons', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableV12TileDefaultIcons = useFeatureFlag(
+          'enable-v12-tile-default-icons'
+        );
+
+        checkFlags({
+          enableV12TileDefaultIcons: featureFlags.enabled(
+            'enable-v12-tile-default-icons'
+          ),
+        });
+
+        checkFlag({
+          enableV12TileDefaultIcons,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12TileDefaultIcons: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12TileDefaultIcons: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableV12TileDefaultIcons>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12TileDefaultIcons: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12TileDefaultIcons: true,
+      });
+    });
+
+    it('enable-v12-tile-radio-icons - enableV12TileRadioIcons', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableV12TileRadioIcons = useFeatureFlag(
+          'enable-v12-tile-radio-icons'
+        );
+
+        checkFlags({
+          enableV12TileRadioIcons: featureFlags.enabled(
+            'enable-v12-tile-radio-icons'
+          ),
+        });
+
+        checkFlag({
+          enableV12TileRadioIcons,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12TileRadioIcons: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12TileRadioIcons: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableV12TileRadioIcons>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12TileRadioIcons: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12TileRadioIcons: true,
+      });
+    });
+
+    it('enable-v12-overflowmenu - enableV12Overflowmenu', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableV12Overflowmenu = useFeatureFlag('enable-v12-overflowmenu');
+
+        checkFlags({
+          enableV12Overflowmenu: featureFlags.enabled(
+            'enable-v12-overflowmenu'
+          ),
+        });
+
+        checkFlag({
+          enableV12Overflowmenu,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12Overflowmenu: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12Overflowmenu: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableV12Overflowmenu>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12Overflowmenu: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12Overflowmenu: true,
+      });
+    });
+
+    it('enable-treeview-controllable - enableTreeviewControllable', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableTreeviewControllable = useFeatureFlag(
+          'enable-treeview-controllable'
+        );
+
+        checkFlags({
+          enableTreeviewControllable: featureFlags.enabled(
+            'enable-treeview-controllable'
+          ),
+        });
+
+        checkFlag({
+          enableTreeviewControllable,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableTreeviewControllable: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableTreeviewControllable: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableTreeviewControllable>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableTreeviewControllable: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableTreeviewControllable: true,
+      });
+    });
+
+    it('enable-experimental-focus-wrap-without-sentinels - enableExperimentalFocusWrapWithoutSentinels', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableExperimentalFocusWrapWithoutSentinels = useFeatureFlag(
+          'enable-experimental-focus-wrap-without-sentinels'
+        );
+
+        checkFlags({
+          enableExperimentalFocusWrapWithoutSentinels: featureFlags.enabled(
+            'enable-experimental-focus-wrap-without-sentinels'
+          ),
+        });
+
+        checkFlag({
+          enableExperimentalFocusWrapWithoutSentinels,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableExperimentalFocusWrapWithoutSentinels: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableExperimentalFocusWrapWithoutSentinels: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableExperimentalFocusWrapWithoutSentinels: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableExperimentalFocusWrapWithoutSentinels: true,
+      });
+    });
+
+    it('enable-v12-dynamic-floating-styles - enableV12DynamicFloatingStyles', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableV12DynamicFloatingStyles = useFeatureFlag(
+          'enable-v12-dynamic-floating-styles'
+        );
+
+        checkFlags({
+          enableV12DynamicFloatingStyles: featureFlags.enabled(
+            'enable-v12-dynamic-floating-styles'
+          ),
+        });
+
+        checkFlag({
+          enableV12DynamicFloatingStyles,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12DynamicFloatingStyles: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12DynamicFloatingStyles: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableV12DynamicFloatingStyles>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12DynamicFloatingStyles: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12DynamicFloatingStyles: true,
+      });
     });
   });
 });

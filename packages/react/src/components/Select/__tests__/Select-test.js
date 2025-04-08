@@ -75,6 +75,16 @@ describe('Select', () => {
       expect(screen.getByText('Option 2')).toHaveAttribute('selected');
     });
 
+    it('should show SelectItem text as title', () => {
+      render(
+        <Select id="select" labelText="Select">
+          <SelectItem text="Option 1" value="option-1" />
+          <SelectItem text="Option 2" value="option-2" />
+        </Select>
+      );
+      expect(screen.getByLabelText('Select').title).toEqual('Option 1');
+    });
+
     it('should respect disabled prop', () => {
       render(<Select id="select" labelText="Select" disabled />);
 
@@ -242,12 +252,24 @@ describe('Select', () => {
     });
 
     it('should respect slug prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       const { container } = render(
         <Select id="select" labelText="Select" slug={<AILabel />} />
       );
 
       expect(container.firstChild.firstChild).toHaveClass(
         `${prefix}--select--slug`
+      );
+      spy.mockRestore();
+    });
+
+    it('should respect decorator prop', () => {
+      const { container } = render(
+        <Select id="select" labelText="Select" decorator={<AILabel />} />
+      );
+
+      expect(container.firstChild.firstChild).toHaveClass(
+        `${prefix}--select--decorator`
       );
     });
   });
@@ -360,7 +382,10 @@ describe('Select', () => {
     it('should have no Accessibility Checker violations', async () => {
       const { container } = render(
         <main>
-          <Select id="select" labelText="Select">
+          <Select
+            id="select"
+            labelText="Select an option"
+            aria-label="Select an option">
             <SelectItem value="option-1" text="Option 1" />
             <SelectItem value="option-2" text="Option 2" />
           </Select>

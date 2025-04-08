@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, { WeakValidationMap } from 'prop-types';
 import React, {
   type ElementType,
   useContext,
@@ -23,12 +23,13 @@ import { useWindowEvent } from '../../internal/useEvent';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
 type ToggletipLabelProps<E extends ElementType> = {
-  as?: E | undefined;
+  as?: E;
   children?: ReactNode;
-  className?: string | undefined;
-};
+  className?: string;
+} & Omit<React.ComponentPropsWithoutRef<E>, 'as' | 'children' | 'className'>;
 
 /**
  * Used to render the label for a Toggletip
@@ -37,12 +38,15 @@ export function ToggletipLabel<E extends ElementType>({
   as: BaseComponent = 'span' as E,
   children,
   className: customClassName,
+  ...rest
 }: ToggletipLabelProps<E>) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--toggletip-label`, customClassName);
   const BaseComponentAsAny = BaseComponent as any;
   return (
-    <BaseComponentAsAny className={className}>{children}</BaseComponentAsAny>
+    <BaseComponentAsAny className={className} {...rest}>
+      {children}
+    </BaseComponentAsAny>
   );
 }
 
@@ -81,14 +85,17 @@ function useToggletip() {
   return useContext(ToggletipContext);
 }
 
-interface ToggletipProps<E extends ElementType> {
-  align?: PopoverAlignment | undefined;
-  as?: E | undefined;
-  autoAlign?: boolean | undefined;
-  className?: string | undefined;
+export interface ToggletipBaseProps {
+  align?: PopoverAlignment;
+  alignmentAxisOffset?: number;
+  autoAlign?: boolean;
+  className?: string;
   children?: ReactNode;
-  defaultOpen?: boolean | undefined;
+  defaultOpen?: boolean;
 }
+
+export type ToggletipProps<T extends ElementType> =
+  PolymorphicComponentPropWithRef<T, ToggletipBaseProps>;
 
 /**
  * Used as a container for the button and content of a toggletip. This component
@@ -157,7 +164,7 @@ export function Toggletip<E extends ElementType = 'span'>({
     }
   };
 
-  // If the `Toggletip` is the last focusable item in the tab order, it shoudl also close when the browser window loses focus  (#12922)
+  // If the `Toggletip` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
   useWindowEvent('blur', () => {
     if (open) {
       actions.close();
@@ -224,6 +231,11 @@ Toggletip.propTypes = {
   ]),
 
   /**
+   * Provide an offset value for alignment axis.
+   */
+  alignmentAxisOffset: PropTypes.number,
+
+  /**
    * Provide a custom element or component to render the top-level node for the
    * component.
    */
@@ -251,10 +263,10 @@ Toggletip.propTypes = {
   defaultOpen: PropTypes.bool,
 };
 
-interface ToggletipButtonBaseProps {
+export interface ToggletipButtonBaseProps {
   children?: ReactNode;
-  className?: string | undefined;
-  label?: string | undefined;
+  className?: string;
+  label?: string;
 }
 
 export type ToggleTipButtonProps<T extends React.ElementType> =
@@ -264,6 +276,7 @@ export type ToggleTipButtonProps<T extends React.ElementType> =
  * `ToggletipButton` controls the visibility of the Toggletip through mouse
  * clicks and keyboard interactions.
  */
+
 export const ToggletipButton = React.forwardRef(function ToggletipButton<
   T extends React.ElementType,
 >(
@@ -321,9 +334,9 @@ ToggletipButton.propTypes = {
 
 ToggletipButton.displayName = 'ToggletipButton';
 
-interface ToggletipContentProps {
+export interface ToggletipContentProps {
   children?: ReactNode;
-  className?: string | undefined;
+  className?: string;
 }
 
 /**
@@ -341,7 +354,8 @@ const ToggletipContent = React.forwardRef<
     <PopoverContent
       className={customClassName}
       {...toggletip?.contentProps}
-      ref={ref}>
+      ref={ref}
+      aria-live="polite">
       <div className={`${prefix}--toggletip-content`}>{children}</div>
     </PopoverContent>
   );
@@ -363,9 +377,9 @@ ToggletipContent.displayName = 'ToggletipContent';
 
 export { ToggletipContent };
 
-interface ToggleTipActionsProps {
+export interface ToggleTipActionsProps {
   children?: ReactNode;
-  className?: string | undefined;
+  className?: string;
 }
 
 /**

@@ -13,8 +13,10 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack workflow
         id: slack
-        uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
+        uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d # v2.0.0
         with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
           payload: |
             {
               "username": "Carbon Design System",
@@ -50,7 +52,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Carbon Design Office Hours* is a weekly opportunity to discuss topics like these and to get help from the Carbon design team. Before sharing during office hours, we recommend sending your design files to us before the meeting, providing actual content in UI examples, and having design iterations or research on hand to help us give you actionable and constructive feedback."
+                    "text": "*Carbon Design Office Hours* is a bi-weekly opportunity on Tuesdays at 10:00 am ET to discuss topics like these and to get help from the Carbon design team. Before sharing during office hours, we recommend sending your design files to us before the meeting, providing actual content in UI examples, and having design iterations or research on hand to help us give you actionable and constructive feedback."
                   }
                 },
                 {
@@ -97,6 +99,3 @@ jobs:
                 }
               ]
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

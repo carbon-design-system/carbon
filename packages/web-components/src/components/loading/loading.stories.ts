@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -18,24 +16,26 @@ const types = {
 
 const defaultArgs = {
   inactive: false,
+  active: true,
   assistiveText: 'Loading',
+  description: 'Loading',
   type: null,
   withOverlay: false,
+  small: false,
 };
 
 const controls = {
-  inactive: {
+  active: {
     control: 'boolean',
-    description: `Specify whether the component should be inactive, or not.`,
+    description: `Specify whether the component should be active, or not.`,
   },
-  assistiveText: {
+  description: {
     control: 'text',
     description: `Specify a description that would be used to best describe the loading state.`,
   },
-  type: {
-    control: 'radio',
-    options: types,
-    description: `Specify the spinner type.`,
+  small: {
+    control: 'boolean',
+    description: 'Specify whether you would like the small variant of',
   },
   withOverlay: {
     control: 'boolean',
@@ -44,17 +44,24 @@ const controls = {
 };
 
 export const Default = {
-  render: () => html` <cds-loading></cds-loading> `,
-};
-
-export const Playground = {
   args: defaultArgs,
   argTypes: controls,
-  render: ({ inactive, assistiveText, type, withOverlay }) => html`
+  render: ({
+    active,
+    inactive,
+    assistiveText,
+    description,
+    type,
+    withOverlay,
+    small,
+  }) => html`
     <cds-loading
       ?inactive=${inactive}
+      ?active=${active}
+      description=${description}
       assistive-text=${assistiveText}
       type=${ifDefined(type)}
+      ?small=${small}
       ?overlay=${withOverlay}></cds-loading>
   `,
 };

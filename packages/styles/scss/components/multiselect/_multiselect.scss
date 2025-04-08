@@ -148,6 +148,25 @@
   }
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted::before,
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted::before {
+    position: absolute;
+    border: 2px solid $focus;
+    block-size: 100%;
+    border-block-start: 1px solid $focus;
+    content: '';
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted,
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted {
+    @include focus-outline('reset');
+  }
+
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--selected
     .#{$prefix}--text-input,
   .#{$prefix}--multi-select.#{$prefix}--multi-select--selected
     .#{$prefix}--list-box__field {
@@ -201,7 +220,7 @@
 
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly
     .#{$prefix}--tag--filter {
-    box-shadow: 0 0 0 1px $background-inverse;
+    box-shadow: 0 0 0 1px $border-subtle;
   }
 
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly

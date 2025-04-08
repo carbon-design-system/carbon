@@ -1,6 +1,4 @@
 /**
-* @license
-*
 * Copyright IBM Corp. 2019, 2024
 *
 * This source code is licensed under the Apache-2.0 license found in the
@@ -54,8 +52,8 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
   }
 
   #{$prefix}-expandable-tile,
-  #{$prefix}-selectable-tile .tile-container,
-  #{$prefix}-clickable-tile .tile-container,
+  #{$prefix}-selectable-tile::part(link),
+  #{$prefix}-clickable-tile::part(link),
   #{$prefix}-tile {
     padding-block-end: 90px;
   }
@@ -63,6 +61,10 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
 
 .ai-label-tile-container h4 {
   margin-block-end: $spacing-05;
+}
+
+.ai-label-tile-container .bold {
+  font-weight: 600;
 }
 
 .ai-label-tile-container .ai-data {
@@ -97,7 +99,22 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
   margin: $spacing-03 0 50px;
 }
 
-#{$prefix}-radio-button-group:not(:first-of-type),
-#{$prefix}-checkbox-group:not(:first-of-type) {
-  margin-block-start: $spacing-07;
+#{$prefix}-selectable-tile {
+  margin-block-end: $spacing-05;
+}
+
+.ai-label-selectable-tile-container #{$prefix}-tile-group > div {
+  display: flex;
+}
+
+.ai-label-selectable-tile-container #{$prefix}-tile-group > div > * {
+  inline-size: 33%;
+}
+
+.ai-label-selectable-tile-container #{$prefix}-tile-group #{$prefix}-radio-tile,
+.ai-label-selectable-tile-container
+  #{$prefix}-tile-group
+  #{$prefix}-selectable-tile {
+  block-size: 200px;
+  margin-inline-end: $spacing-05;
 }

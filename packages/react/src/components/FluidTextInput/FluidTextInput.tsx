@@ -50,6 +50,16 @@ export interface FluidTextInputProps {
   isPassword?: boolean;
 
   /**
+   * Max character count allowed for the textInput. This is needed in order for enableCounter to display
+   */
+  maxCount?: number;
+
+  /**
+   * Specify whether to display the character counter
+   */
+  enableCounter?: boolean;
+
+  /**
    * Provide the text that will be read by a screen reader when visiting this
    * control
    */
@@ -85,6 +95,11 @@ export interface FluidTextInputProps {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: React.ReactNode;
+
+  /**
+   * Whether or not the component is readonly
+   */
+  readOnly?: boolean;
 }
 
 const FluidTextInput = React.forwardRef<HTMLInputElement, FluidTextInputProps>(
@@ -143,6 +158,16 @@ FluidTextInput.propTypes = {
   isPassword: PropTypes.bool,
 
   /**
+   * Max character count allowed for the textInput. This is needed in order for enableCounter to display
+   */
+  maxCount: PropTypes.number,
+
+  /**
+   * Specify whether to display the character counter
+   */
+  enableCounter: PropTypes.bool,
+
+  /**
    * Provide the text that will be read by a screen reader when visiting this
    * control
    */
@@ -179,6 +204,11 @@ FluidTextInput.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * Whether or not the component is readonly
+   */
+  readOnly: PropTypes.bool,
 };
 
 export default FluidTextInput;

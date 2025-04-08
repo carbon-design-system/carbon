@@ -9,14 +9,7 @@ import React from 'react';
 
 import ListItem from '../ListItem';
 import UnorderedList from '../UnorderedList';
-
-const props = {
-  regular: () => {
-    return {
-      isExpressive: false,
-    };
-  },
-};
+import mdx from './UnorderedList.mdx';
 
 export default {
   title: 'Components/UnorderedList',
@@ -24,17 +17,43 @@ export default {
   subcomponents: {
     ListItem,
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = () => (
-  <UnorderedList>
-    <ListItem>Unordered List level 1</ListItem>
-    <ListItem>Unordered List level 1</ListItem>
-    <ListItem>Unordered List level 1</ListItem>
-  </UnorderedList>
-);
+export const Default = (args) => {
+  return (
+    <UnorderedList {...args}>
+      <ListItem>Unordered List level 1</ListItem>
+      <ListItem>Unordered List level 1</ListItem>
+      <ListItem>Unordered List level 1</ListItem>
+    </UnorderedList>
+  );
+};
+
+Default.args = {
+  isExpressive: false,
+};
+
+Default.argTypes = {
+  isExpressive: {
+    control: {
+      type: 'boolean',
+    },
+  },
+};
 
 export const Nested = () => {
+  const props = {
+    regular: () => {
+      return {
+        isExpressive: false,
+      };
+    },
+  };
   const regularProps = props.regular();
 
   return (
@@ -59,23 +78,3 @@ export const Nested = () => {
 };
 
 Nested.storyName = 'nested';
-
-export const Playground = (args) => (
-  <UnorderedList {...args}>
-    <ListItem>Unordered List level 1</ListItem>
-    <ListItem>Unordered List level 1</ListItem>
-    <ListItem>Unordered List level 1</ListItem>
-  </UnorderedList>
-);
-
-Playground.args = {
-  isExpressive: false,
-};
-
-Playground.argTypes = {
-  isExpressive: {
-    control: {
-      type: 'boolean',
-    },
-  },
-};

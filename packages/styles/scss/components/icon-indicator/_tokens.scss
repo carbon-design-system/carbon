@@ -1,0 +1,252 @@
+//
+// Copyright IBM Corp. 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:color';
+@use 'sass:map';
+@use '../../config';
+@use '../../colors';
+@use '../../themes';
+@use '../../theme' as *;
+@use '../../utilities/component-tokens';
+@use '@carbon/themes/scss/component-tokens' as status;
+
+// status-red
+$status-red: (
+  fallback: map.get(status.$status-red, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(status.$status-red, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(status.$status-red, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(status.$status-red, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(status.$status-red, g-100),
+    ),
+  ),
+) !default;
+
+// status-orange
+$status-orange: (
+  fallback: map.get(status.$status-orange, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(status.$status-orange, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(status.$status-orange, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(status.$status-orange, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(status.$status-orange, g-100),
+    ),
+  ),
+) !default;
+
+// status-orange-outline
+$status-orange-outline: (
+  fallback: map.get(status.$status-orange-outline, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(status.$status-orange-outline, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(status.$status-orange-outline, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(status.$status-orange, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(status.$status-orange, g-100),
+    ),
+  ),
+) !default;
+
+// status-yellow
+$status-yellow: (
+  fallback: map.get(status.$status-yellow, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(status.$status-yellow, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(status.$status-yellow, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(status.$status-yellow, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(status.$status-yellow, g-100),
+    ),
+  ),
+) !default;
+
+// status-yellow-outline
+$status-yellow-outline: (
+  fallback: map.get(status.$status-yellow-outline, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(status.$status-yellow-outline, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(status.$status-yellow-outline, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(status.$status-yellow, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(status.$status-yellow, g-100),
+    ),
+  ),
+) !default;
+
+// status-green
+$status-green: (
+  fallback: map.get(status.$status-green, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(status.$status-green, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(status.$status-green, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(status.$status-green, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(status.$status-green, g-100),
+    ),
+  ),
+) !default;
+
+// status-blue
+$status-blue: (
+  fallback: map.get(status.$status-blue, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(status.$status-blue, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(status.$status-blue, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(status.$status-blue, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(status.$status-blue, g-100),
+    ),
+  ),
+) !default;
+
+// status-purple
+$status-purple: (
+  fallback: map.get(status.$status-purple, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(status.$status-purple, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(status.$status-purple, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(status.$status-purple, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(status.$status-purple, g-100),
+    ),
+  ),
+) !default;
+
+// status-gray
+$status-gray: (
+  fallback: map.get(status.$status-gray, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(status.$status-gray, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(status.$status-gray, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(status.$status-gray, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(status.$status-gray, g-100),
+    ),
+  ),
+) !default;
+
+// Add to $status-tokens map
+$status-tokens: (
+  status-red: $status-red,
+  status-orange: $status-orange,
+  status-orange-outline: $status-orange-outline,
+  status-yellow: $status-yellow,
+  status-yellow-outline: $status-yellow-outline,
+  status-green: $status-green,
+  status-blue: $status-blue,
+  status-purple: $status-purple,
+  status-gray: $status-gray,
+);
+
+// Generate CSS custom properties for each token
+$status-red: component-tokens.get-var($status-red, 'status-red');
+$status-orange: component-tokens.get-var($status-orange, 'status-orange');
+$status-orange-outline: component-tokens.get-var(
+  $status-orange-outline,
+  'status-orange-outline'
+);
+$status-yellow: component-tokens.get-var($status-yellow, 'status-yellow');
+$status-yellow-outline: component-tokens.get-var(
+  $status-yellow-outline,
+  'status-yellow-outline'
+);
+$status-green: component-tokens.get-var($status-green, 'status-green');
+$status-blue: component-tokens.get-var($status-blue, 'status-blue');
+$status-purple: component-tokens.get-var($status-purple, 'status-purple');
+$status-gray: component-tokens.get-var($status-gray, 'status-gray');

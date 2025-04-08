@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,7 +18,6 @@ import userEvent from '@testing-library/user-event';
 
 describe('Toggletip', () => {
   describe('accessibility', () => {
-    test.todo('accessibility-checker');
     it('should have no Axe violations', async () => {
       const { container } = render(
         <Toggletip data-testid="toggletip">test</Toggletip>
@@ -80,6 +79,15 @@ describe('Toggletip', () => {
     );
     expect(container.firstChild).not.toHaveClass(`${prefix}--toggletip--open`);
     expect(container.firstChild).not.toHaveClass(`${prefix}--popover--open`);
+  });
+
+  it('should render with custom element using as prop', () => {
+    const CustomElement = forwardRef((props, ref) => (
+      <div data-testid="custom-toggletip" ref={ref} {...props} />
+    ));
+
+    render(<Toggletip as={CustomElement}>Content</Toggletip>);
+    expect(screen.getByTestId('custom-toggletip')).toBeInTheDocument();
   });
 
   describe('Component API', () => {
@@ -150,9 +158,40 @@ describe('Toggletip', () => {
       expect(container.firstChild).not.toHaveClass(`${prefix}--popover--open`);
     });
 
-    it.todo(
-      'should return to the trigger button if the menu is closed while focus is still inside the menu'
-    );
+    it('should return to the trigger button if the menu is closed while focus is still inside the menu', () => {
+      // Render a `Toggletip` that is open by default
+      render(
+        <Toggletip defaultOpen>
+          <ToggletipButton>Toggle</ToggletipButton>
+          <ToggletipContent>
+            {/* A focusable element inside the toggletip content */}
+            <button>Inside Button</button>
+          </ToggletipContent>
+        </Toggletip>
+      );
+
+      // Move focus into the `Toggletip` content (simulate user interaction).
+      const insideButton = screen.getByRole('button', {
+        name: 'Inside Button',
+      });
+      insideButton.focus();
+      expect(document.activeElement).toBe(insideButton);
+
+      // Simulate pressing the Escape key from within the menu
+      fireEvent.keyDown(insideButton, {
+        key: 'Escape',
+        code: 'Escape',
+        charCode: 27,
+      });
+
+      // After the Escape key press, the `Toggletip` should close and focus should
+      // return to the trigger button. The trigger button uses a default
+      // `aria-label` of 'Show information' when rendered as a `button`.
+      const triggerButton = screen.getByRole('button', {
+        name: 'Show information',
+      });
+      expect(document.activeElement).toBe(triggerButton);
+    });
 
     it('should not close when the menu itself is clicked', async () => {
       const { container } = render(

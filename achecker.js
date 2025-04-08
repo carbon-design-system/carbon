@@ -10,16 +10,18 @@
 const path = require('path');
 
 module.exports = {
-  ruleArchive: '17June2024',
+  ruleArchive: 'versioned',
   policies: ['Custom_Ruleset'],
   failLevels: ['violation'],
-  reportLevels: [
-    'violation',
-    'potentialviolation',
-    'recommendation',
-    'potentialrecommendation',
-    'manual',
-  ],
+  reportLevels: !process.env.CI
+    ? ['violation']
+    : [
+        'violation',
+        'potentialviolation',
+        'recommendation',
+        'potentialrecommendation',
+        'manual',
+      ],
   outputFormat: ['json'],
   outputFolder: path.join('.avt', 'reports'),
   baselineFolder: path.join('.avt', 'baseline'),

@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -14,6 +12,7 @@ import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
 import Folders16 from '@carbon/icons/lib/folders/16.js';
 import '../ai-label/index';
 import './index';
+import { CHECKBOX_ORIENTATION } from './defs';
 
 const checkboxLabel = 'Checkbox label';
 
@@ -26,6 +25,7 @@ const defaultArgs = {
   readonly: false,
   warn: false,
   warnText: 'Warn message goes here',
+  orientation: 'vertical',
 };
 
 const controls = {
@@ -34,7 +34,7 @@ const controls = {
     description: 'Specify whether the checkbox should be disabled.',
   },
   helperText: {
-    control: 'textNullable',
+    control: 'text',
     description: 'Provide text for the form group for additional help.',
   },
   invalid: {
@@ -42,13 +42,18 @@ const controls = {
     description: 'Specify whether the form group is currently invalid.',
   },
   invalidText: {
-    control: 'textNullable',
+    control: 'text',
     description:
       'Provide the text that is displayed when the form group is in an invalid state.',
   },
   legendText: {
-    control: 'textNullable',
+    control: 'text',
     description: 'Provide the text to be rendered inside of the fieldset.',
+  },
+  orientation: {
+    control: 'select',
+    description: 'Provide how checkbox should be displayed.',
+    options: CHECKBOX_ORIENTATION,
   },
   readonly: {
     control: 'boolean',
@@ -60,30 +65,99 @@ const controls = {
       'Specify whether the form group is currently in warning state.',
   },
   warnText: {
-    control: 'textNullable',
+    control: 'text',
     description:
       'Provide the text that is displayed when the form group is in warning state.',
   },
 };
 
+const singleControls = {
+  ...controls,
+  indeterminate: {
+    control: 'boolean',
+    description: 'Specify whether the Checkbox is in an indeterminate state',
+  },
+  defaultChecked: {
+    control: 'boolean',
+    description:
+      'Specify whether the underlying input should be checked by default',
+  },
+};
+
 export const Default = {
-  render: () => html`
-    <cds-checkbox-group legend-text="Group label">
-      <cds-checkbox>${checkboxLabel}</cds-checkbox>
-      <cds-checkbox>${checkboxLabel}</cds-checkbox>
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    disabled,
+    readonly,
+    onChange,
+    helperText,
+    invalid,
+    invalidText,
+    legendText,
+    orientation,
+    warn,
+    warnText,
+  }) => html`
+    <cds-checkbox-group
+      legend-text="Group label"
+      helper-text="${helperText}"
+      ?disabled="${disabled}"
+      ?invalid="${invalid}"
+      invalid-text="${invalidText}"
+      legend-text="${legendText}"
+      orientation="${orientation}"
+      ?readonly="${readonly}"
+      ?warn="${warn}"
+      warn-text="${warnText}">
+      <cds-checkbox @cds-checkbox-changed="${onChange}"
+        >${checkboxLabel}</cds-checkbox
+      >
+      <cds-checkbox @cds-checkbox-changed="${onChange}"
+        >${checkboxLabel}</cds-checkbox
+      >
     </cds-checkbox-group>
   `,
 };
 
-export const Skeleton = {
-  render: () => html`
-    <fieldset class="${prefix}--fieldset">
-      <cds-checkbox-skeleton>${checkboxLabel}</cds-checkbox-skeleton>
-    </fieldset>
+export const Horizontal = {
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    disabled,
+    readonly,
+    onChange,
+    helperText,
+    invalid,
+    invalidText,
+    legendText,
+    warn,
+    warnText,
+  }) => html`
+    <cds-checkbox-group
+      legend-text="Group label"
+      helper-text="${helperText}"
+      ?disabled="${disabled}"
+      ?invalid="${invalid}"
+      invalid-text="${invalidText}"
+      legend-text="${legendText}"
+      orientation="horizontal"
+      ?readonly="${readonly}"
+      ?warn="${warn}"
+      warn-text="${warnText}">
+      <cds-checkbox @cds-checkbox-changed="${onChange}"
+        >${checkboxLabel}</cds-checkbox
+      >
+      <cds-checkbox @cds-checkbox-changed="${onChange}"
+        >${checkboxLabel}</cds-checkbox
+      >
+    </cds-checkbox-group>
   `,
 };
 
 export const Single = {
+  args: defaultArgs,
+  argTypes: singleControls,
   render: () => html`
     <cds-checkbox helper-text="Helper text goes here"
       >${checkboxLabel}</cds-checkbox
@@ -101,10 +175,20 @@ export const Single = {
   `,
 };
 
+export const Skeleton = {
+  args: defaultArgs,
+  argTypes: singleControls,
+  render: () => html`
+    <fieldset class="${prefix}--fieldset">
+      <cds-checkbox-skeleton></cds-checkbox-skeleton>
+    </fieldset>
+  `,
+};
+
 const content = html`
   <div slot="body-text">
     <p class="secondary">AI Explained</p>
-    <h1>84%</h1>
+    <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
       Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
@@ -133,53 +217,6 @@ const actions = html`
 `;
 
 export const WithAILabel = {
-  render: () => html`
-    <div style="width: 400px">
-      <cds-checkbox-group legend-text="Group label">
-        <cds-ai-label alignment="bottom-left">
-          ${content}${actions}</cds-ai-label
-        >
-        <cds-checkbox>Checkbox label</cds-checkbox>
-        <cds-checkbox>Checkbox label</cds-checkbox>
-        <cds-checkbox>Checkbox label</cds-checkbox>
-      </cds-checkbox-group>
-
-      <cds-checkbox-group legend-text="Group label">
-        <cds-checkbox>
-          Checkbox label
-          <cds-ai-label alignment="bottom-left">
-            ${content}${actions}</cds-ai-label
-          >
-        </cds-checkbox>
-        <cds-checkbox>
-          Checkbox label
-          <cds-ai-label alignment="bottom-left">
-            ${content}${actions}</cds-ai-label
-          >
-        </cds-checkbox>
-        <cds-checkbox>Checkbox label</cds-checkbox>
-      </cds-checkbox-group>
-
-      <cds-checkbox-group legend-text="Group label">
-        <cds-checkbox>
-          Checkbox label
-          <cds-ai-label alignment="bottom-left" kind="inline">
-            ${content}${actions}
-          </cds-ai-label>
-        </cds-checkbox>
-        <cds-checkbox>
-          Checkbox label
-          <cds-ai-label alignment="bottom-left" kind="inline">
-            ${content}${actions}
-          </cds-ai-label>
-        </cds-checkbox>
-        <cds-checkbox>Checkbox label</cds-checkbox>
-      </cds-checkbox-group>
-    </div>
-  `,
-};
-
-export const Playground = {
   args: defaultArgs,
   argTypes: controls,
   render: ({
@@ -189,29 +226,79 @@ export const Playground = {
     helperText,
     invalid,
     invalidText,
-    legendText,
+    orientation,
     warn,
     warnText,
   }) => html`
-    <cds-checkbox-group
+    <div style="width: 400px">
+      <cds-checkbox-group
+      legend-text="Group label"
       helper-text="${helperText}"
       ?disabled="${disabled}"
       ?invalid="${invalid}"
       invalid-text="${invalidText}"
-      legend-text="${legendText}"
+      orientation="${orientation}"
       ?readonly="${readonly}"
       ?warn="${warn}"
       warn-text="${warnText}">
-      <cds-checkbox checked @cds-checkbox-changed="${onChange}"
-        >Checkbox label</cds-checkbox
-      >
-      <cds-checkbox @cds-checkbox-changed="${onChange}"
-        >Checkbox label</cds-checkbox
-      >
-      <cds-checkbox disabled @cds-checkbox-changed="${onChange}"
-        >Checkbox label</cds-checkbox
-      >
-    </cds-checkbox-group>
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}</cds-ai-label
+        >
+        <cds-checkbox @cds-checkbox-changed="${onChange}">Checkbox label</cds-checkbox>
+        <cds-checkbox @cds-checkbox-changed="${onChange}">Checkbox label</cds-checkbox>
+        <cds-checkbox @cds-checkbox-changed="${onChange}">Checkbox label</cds-checkbox>
+      </cds-checkbox-group>
+      <br></br>
+      <cds-checkbox-group 
+      legend-text="Group label"
+      helper-text="${helperText}"
+      ?disabled="${disabled}"
+      ?invalid="${invalid}"
+      invalid-text="${invalidText}"
+      orientation="${orientation}"
+      ?readonly="${readonly}"
+      ?warn="${warn}"
+      warn-text="${warnText}">
+        <cds-checkbox @cds-checkbox-changed="${onChange}">
+          Checkbox label
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
+        </cds-checkbox>
+        <cds-checkbox @cds-checkbox-changed="${onChange}">
+          Checkbox label
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}</cds-ai-label
+          >
+        </cds-checkbox>
+        <cds-checkbox @cds-checkbox-changed="${onChange}">Checkbox label</cds-checkbox>
+      </cds-checkbox-group>
+       <br></br>
+      <cds-checkbox-group 
+      legend-text="Group label"
+      helper-text="${helperText}"
+      ?disabled="${disabled}"
+      ?invalid="${invalid}"
+      invalid-text="${invalidText}"
+      orientation="${orientation}"
+      ?readonly="${readonly}"
+      ?warn="${warn}"
+      warn-text="${warnText}">
+        <cds-checkbox @cds-checkbox-changed="${onChange}">
+          Checkbox label
+          <cds-ai-label alignment="bottom-left" kind="inline">
+            ${content}${actions}
+          </cds-ai-label>
+        </cds-checkbox>
+        <cds-checkbox @cds-checkbox-changed="${onChange}">
+          Checkbox label
+          <cds-ai-label alignment="bottom-left" kind="inline">
+            ${content}${actions}
+          </cds-ai-label>
+        </cds-checkbox>
+        <cds-checkbox @cds-checkbox-changed="${onChange}">Checkbox label</cds-checkbox>
+      </cds-checkbox-group>
+    </div>
   `,
 };
 

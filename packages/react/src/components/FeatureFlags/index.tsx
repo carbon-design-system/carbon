@@ -20,7 +20,7 @@ import React, {
 } from 'react';
 import deprecate from '../../prop-types/deprecate';
 
-interface FeatureFlagsProps {
+export interface FeatureFlagsProps {
   children?: ReactNode;
   flags?: Record<string, boolean>;
   enableV12TileDefaultIcons?: boolean;
@@ -28,6 +28,8 @@ interface FeatureFlagsProps {
   enableV12Overflowmenu?: boolean;
   enableTreeviewControllable?: boolean;
   enableExperimentalFocusWrapWithoutSentinels?: boolean;
+  enableDialogElement?: boolean;
+  enableV12DynamicFloatingStyles?: boolean;
 }
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
@@ -48,6 +50,8 @@ function FeatureFlags({
   enableV12Overflowmenu = false,
   enableTreeviewControllable = false,
   enableExperimentalFocusWrapWithoutSentinels = false,
+  enableDialogElement = false,
+  enableV12DynamicFloatingStyles = false,
 }: FeatureFlagsProps): JSX.Element {
   const parentScope = useContext(FeatureFlagContext);
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
@@ -59,6 +63,8 @@ function FeatureFlags({
     'enable-treeview-controllable': enableTreeviewControllable,
     'enable-experimental-focus-wrap-without-sentinels':
       enableExperimentalFocusWrapWithoutSentinels,
+    'enable-dialog-element': enableDialogElement,
+    'enable-v12-dynamic-floating-styles': enableV12DynamicFloatingStyles,
     ...flags,
   };
   const [scope, updateScope] = useState(() => {
@@ -107,6 +113,8 @@ FeatureFlags.propTypes = {
   enableV12Overflowmenu: PropTypes.bool,
   enableTreeviewControllable: PropTypes.bool,
   enableExperimentalFocusWrapWithoutSentinels: PropTypes.bool,
+  enableDialogElement: PropTypes.bool,
+  enableV12DynamicFloatingStyles: PropTypes.bool,
 };
 
 /**
@@ -156,8 +164,7 @@ function useChangedValue<T>(
  */
 function useFeatureFlag(flag) {
   const scope = useContext(FeatureFlagContext);
-  //updated to return false for undefined flags
-  return scope.enabled(flag) ?? false;
+  return scope.enabled(flag);
 }
 
 /**

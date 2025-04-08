@@ -3,10 +3,11 @@ import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { Add, TrashCan } from '@carbon/icons-react';
 import * as ButtonStories from './Button.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
-# Button
+# Buttons
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Button)
 &nbsp;|&nbsp;
@@ -18,11 +19,15 @@ import * as ButtonStories from './Button.stories';
 
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
-- [Overview](#overview)
-- [Danger Buttons](#danger-buttons)
-- [Icon-only Buttons](#icon-only-buttons)
-- [Set of Buttons](#set-of-buttons)
-- [Skeleton state](#skeleton-state)
+- [Buttons](#Buttons)
+  - [Overview](#overview)
+  - [Secondary Button](#secondary)
+  - [Tertiary Button](#tertiary)
+  - [Ghost Button](#ghost)
+  - [Danger Button](#danger-button)
+  - [Icon-only Button](#icon-only-button)
+  - [Set of Buttons](#set-of-buttons)
+  - [Skeleton state](#skeleton-state)
 - [Component API](#component-api)
   - [Button `as`](#button-as)
   - [Button `className`](#button-classname)
@@ -48,31 +53,88 @@ communicate calls to action to the user and allow users to interact with pages
 in a variety of ways. `Button` labels express what action will occur when the
 user interacts with it.
 
-<Canvas of={ButtonStories.Default} />
-<Canvas of={ButtonStories.Secondary} />
-<Canvas of={ButtonStories.Tertiary} />
-<Canvas of={ButtonStories.Ghost} />
+<Canvas
+  of={ButtonStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ButtonStories.Default),
+    },
+  ]}
+/>
 
-## Danger Buttons
+## Secondary
+
+<Canvas
+  of={ButtonStories.Secondary}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ButtonStories.Secondary),
+    },
+  ]}
+/>
+
+## Tertiary
+
+<Canvas
+  of={ButtonStories.Tertiary}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ButtonStories.Tertiary),
+    },
+  ]}
+/>
+
+## Ghost
+
+<Canvas
+  of={ButtonStories.Ghost}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ButtonStories.Ghost),
+    },
+  ]}
+/>
+
+## Danger Button
 
 The danger button has three different styles: primary, tertiary, and ghost.
 Determining which danger button style to use will depend on the level of
 emphasis you want to give to the danger action. Destructive actions that are
 considered a required or primary step in a workflow should use the primary
 danger button style. However, if a destructive action is just one of several
-actions a user could choose from, then a lower emphasis style like the tertiary
-danger button or the ghost danger button may be more appropriate.
+actions a user could choose from, then a lower emphasis style like the danger
+tertiary button or the danger ghost button may be more appropriate.
 
-<Canvas of={ButtonStories.Danger} />
+<Canvas
+  of={ButtonStories.Danger}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ButtonStories.Danger),
+    },
+  ]}
+/>
 
-## Icon-only Buttons
+## Icon-only Button
 
 Icon buttons allow users to take actions, and make choices, with a single tap.
 Icon buttons can take the form of Primary, Secondary, Tertiary, and Ghost but
 most commonly will be styled as primary or ghost buttons. Icon only buttons do
 not support Danger, Danger tertiary, or Danger ghost.
 
-<Canvas of={ButtonStories.IconButton} />
+<Canvas
+  of={ButtonStories.IconButton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ButtonStories.IconButton),
+    },
+  ]}
+/>
 
 ## Set of Buttons
 
@@ -83,7 +145,15 @@ Negative action buttons will be on the left. Positive action buttons should be
 on the right. When these two types buttons are paired in the correct order, they
 will automatically space themselves apart.
 
-<Canvas of={ButtonStories.SetOfButtons} />
+<Canvas
+  of={ButtonStories.SetOfButtons}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ButtonStories.SetOfButtons),
+    },
+  ]}
+/>
 
 ## Skeleton state
 
@@ -91,7 +161,15 @@ You can use the `ButtonSkeleton` component to render a skeleton variant of a
 button. This is useful to display on initial page load to indicate to users that
 content is being loaded.
 
-<Canvas of={ButtonStories.Skeleton} />
+<Canvas
+  of={ButtonStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ButtonStories.Skeleton),
+    },
+  ]}
+/>
 
 ## Component API
 
@@ -181,7 +259,7 @@ variant, check out the
     <Button kind="secondary">Secondary</Button>
     <Button kind="tertiary">Tertiary </Button>
     <Button kind="danger">Danger</Button>
-    <Button kind="danger--tertiary">Danger Tertiary</Button>
+    <Button kind="danger--tertiary">Danger tertiary</Button>
     <Button kind="danger--ghost">Danger Ghost</Button>
     <Button kind="ghost">Ghost</Button>
   </div>
@@ -192,8 +270,8 @@ variant, check out the
 <Button kind="secondary">Secondary</Button>
 <Button kind="tertiary">Tertiary</Button>
 <Button kind="danger">Danger</Button>
-<Button kind="danger--tertiary">Danger Tertiary</Button>
-<Button kind="danger--ghost">Danger Ghost</Button>
+<Button kind="danger--tertiary">Danger tertiary</Button>
+<Button kind="danger--ghost">Danger ghost</Button>
 <Button kind="ghost">Ghost</Button>
 ```
 
@@ -210,7 +288,7 @@ import { Add, TrashCan } from '@carbon/react/icons';
 Once the icons are imported, you can pass them directly in to the `Button`
 component. Keep in mind, you will also need to add an `iconDescription` to help
 with screen-reader support if you use the `renderIcon` prop. If you are trying
-to render icon-only buttons, please refer to the section on the
+to render an icon-only button, please refer to the section on the
 [hasIconOnly](#button-hasicononly) prop
 
 <Unstyled>
@@ -271,9 +349,9 @@ an element appear as a button control to a screen reader. Check out the
 
 ### Button `size`
 
-This prop specifies which size the `Button` should be rendered at. Valid values
-are `sm`, `md`, `lg`, `xl`, and `2xl`. If no `size` is specified, it renders as
-`lg`.
+This attribute specifies at which size the `button` should be rendered. Valid
+values are `sm`, `md`, `lg`, `xl`, and `2xl`. If no size is specified, it
+renders as `lg`.
 
 <Button>Submit</Button> <Button size="sm">Submit</Button> <Button size="md">
   Submit
@@ -375,4 +453,3 @@ By passing in `stacked` to the `ButtonSet` component, you can arrange your two
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
 [GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Button/Button.mdx)
--->

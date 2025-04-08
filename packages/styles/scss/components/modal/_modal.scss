@@ -7,6 +7,7 @@
 
 @use '../button';
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../breakpoint' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
@@ -23,34 +24,57 @@
 /// Modal styles
 /// @access public
 /// @group modal
-@mixin modal {
+@mixin modal(
+  $enable-experimental-focus-wrap-without-sentinels: false,
+  $enable-dialog-element: false
+) {
   .#{$prefix}--modal {
-    position: fixed;
-    z-index: z('modal');
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: $overlay;
-    block-size: 100vh;
-    content: '';
-    inline-size: 100vw;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    opacity: 0;
-    transition:
-      opacity $duration-moderate-02 motion(exit, expressive),
-      visibility 0ms linear $duration-moderate-02;
-    visibility: hidden;
-
-    &.is-visible {
-      opacity: 1;
+    // For modals using the native dialog element, the modal visibility is handled
+    // by the Dialog styles.
+    @if not(
+      enabled('enable-experimental-focus-wrap-without-sentinels') or
+        $enable-experimental-focus-wrap-without-sentinels or
+        enabled('enable-dialog-element') or
+        $enable-dialog-element
+    )
+    {
+      position: fixed;
+      z-index: z('modal');
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $overlay;
+      block-size: 100vh;
+      content: '';
+      inline-size: 100vw;
+      inset-block-start: 0;
+      inset-inline-start: 0;
+      opacity: 0;
       transition:
-        opacity $duration-moderate-02 motion(entrance, expressive),
-        visibility 0ms linear;
-      visibility: inherit;
+        opacity $duration-moderate-02 motion(exit, expressive),
+        visibility 0ms linear $duration-moderate-02;
+      visibility: hidden;
+    }
 
-      @media screen and (prefers-reduced-motion: reduce) {
-        transition: none;
+    // For modals using the native dialog element, the modal visibility is handled
+    // by the Dialog styles.
+    @if not(
+      enabled('enable-experimental-focus-wrap-without-sentinels') or
+        $enable-experimental-focus-wrap-without-sentinels or
+        enabled('enable-dialog-element') or
+        $enable-dialog-element
+    )
+    {
+      &.is-visible {
+        opacity: 1;
+        transition:
+          opacity $duration-moderate-02 motion(entrance, expressive),
+          visibility 0ms linear;
+        visibility: inherit;
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
     }
 
@@ -297,6 +321,9 @@
     margin: 0;
     block-size: convert.to-rem(64px);
     max-inline-size: none;
+  }
+
+  .#{$prefix}--modal-footer .#{$prefix}--btn:not(.#{$prefix}--skeleton) {
     padding-block: calc($spacing-05 - convert.to-rem(2px)) $spacing-07;
   }
 
@@ -362,12 +389,15 @@
     margin: 0;
   }
 
-  // Slug styles
-  .#{$prefix}--modal--slug.#{$prefix}--modal {
+  // AIlabel styles
+  .#{$prefix}--modal--slug.#{$prefix}--modal,
+  .#{$prefix}--modal--decorator:has(.#{$prefix}--ai-label).#{$prefix}--modal {
     background-color: $ai-overlay;
   }
 
-  .#{$prefix}--modal--slug .#{$prefix}--modal-container {
+  .#{$prefix}--modal--slug .#{$prefix}--modal-container,
+  .#{$prefix}--modal--decorator:has(.#{$prefix}--ai-label)
+    .#{$prefix}--modal-container {
     @include ai-popover-gradient('default', 0, 'layer');
 
     border: 1px solid transparent;
@@ -378,6 +408,8 @@
   }
 
   .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container:has(.#{$prefix}--modal-footer),
+  .#{$prefix}--modal--decorator:has(.#{$prefix}--ai-label)
     .#{$prefix}--modal-container:has(.#{$prefix}--modal-footer) {
     @include ai-popover-gradient('default', 64px, 'layer');
 
@@ -388,6 +420,8 @@
   }
 
   .#{$prefix}--modal--slug
+    .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content,
+  .#{$prefix}--modal--decorator
     .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content {
     mask-image: linear-gradient(
         to bottom,
@@ -401,6 +435,27 @@
   }
 
   .#{$prefix}--modal-header
+    > .#{$prefix}--modal--inner__decorator:has(
+      + .#{$prefix}--modal-close-button
+    )
+    > *,
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal-close-button
+    ~ .#{$prefix}--modal--inner__decorator
+    > *,
+  .#{$prefix}--modal--decorator
+    .#{$prefix}--modal-container-body
+    > .#{$prefix}--modal--inner__decorator
+    > *,
+  .#{$prefix}--modal-header
+    > .#{$prefix}--ai-label:has(+ .#{$prefix}--modal-close-button),
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal-close-button
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container-body
+    > .#{$prefix}--ai-label,
+  .#{$prefix}--modal-header
     > .#{$prefix}--slug:has(+ .#{$prefix}--modal-close-button),
   .#{$prefix}--modal-header
     > .#{$prefix}--modal-close-button
@@ -413,9 +468,21 @@
     inset-inline-end: convert.to-rem(48px);
   }
 
-  .#{$prefix}--modal--slug
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal--inner__decorator:not(:has(.#{$prefix}--ai-label))
+    > * {
+    inset-block-start: 1rem;
+  }
+
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal--inner__decorator:has(.#{$prefix}--ai-label--revert)
+    > * {
+    inset-block-start: 1.475rem;
+  }
+
+  .#{$prefix}--modal--decorator
     .#{$prefix}--modal-content--overflow-indicator::before,
-  .#{$prefix}--modal--slug .#{$prefix}--modal-content--overflow-indicator {
+  .#{$prefix}--modal--decorator .#{$prefix}--modal-content--overflow-indicator {
     display: none;
   }
 

@@ -79,9 +79,16 @@
     .#{$prefix}--toggle__switch,
   .#{$prefix}--toggle:not(.#{$prefix}--toggle--disabled):active
     .#{$prefix}--toggle__switch {
-    box-shadow:
-      0 0 0 1px $focus-inset,
-      0 0 0 3px $focus;
+    &::after {
+      display: block;
+      border: 2px solid $focus;
+      border-radius: convert.to-rem(16px);
+      block-size: calc(100% + convert.to-rem(6px));
+      content: '';
+      inline-size: calc(100% + convert.to-rem(6px));
+      margin-block-start: convert.to-rem(-3px);
+      margin-inline-start: convert.to-rem(-3px);
+    }
   }
 
   .#{$prefix}--toggle__switch--checked {
