@@ -186,39 +186,36 @@ Skeleton.argTypes = {
 };
 
 export const withAILabel = () => {
-  const aiLabel = () => {
-    return (
-      <AILabel className="ai-label-container">
-        <AILabelContent>
-          <div>
-            <p className="secondary">AI Explained</p>
-            <h2 className="ai-label-heading">84%</h2>
-            <p className="secondary bold">Confidence score</p>
-            <p className="secondary">
-              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut fsil labore et dolore magna
-              aliqua.
-            </p>
-            <hr />
-            <p className="secondary">Model type</p>
-            <p className="bold">Foundation model</p>
-          </div>
-          <AILabelActions>
-            <IconButton kind="ghost" label="View">
-              <View />
-            </IconButton>
-            <IconButton kind="ghost" label="Open Folder">
-              <FolderOpen />
-            </IconButton>
-            <IconButton kind="ghost" label="Folders">
-              <Folders />
-            </IconButton>
-            <Button>View details</Button>
-          </AILabelActions>
-        </AILabelContent>
-      </AILabel>
-    );
-  };
+  const aiLabel = (
+    <AILabel className="ai-label-container">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h2 className="ai-label-heading">84%</h2>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <AILabelActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </AILabelActions>
+      </AILabelContent>
+    </AILabel>
+  );
 
   return (
     <div style={{ marginBottom: '4rem' }}>
