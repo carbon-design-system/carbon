@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1744142258355" clover="3.2.0">
-  <project timestamp="1744142258355" name="All files">
+<coverage generated="1744144611894" clover="3.2.0">
+  <project timestamp="1744144611894" name="All files">
     <metrics statements="19294" coveredstatements="376" conditionals="1608" coveredconditionals="85" methods="5067" coveredmethods="66" elements="25969" coveredelements="527" complexity="0" loc="19294" ncloc="19294" packages="253" files="568" classes="568"/>
     <package name="carbon-components-react.src">
       <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
