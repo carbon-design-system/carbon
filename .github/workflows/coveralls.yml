@@ -1,5 +1,5 @@
 
-on: ["push", "pull_request", "merge"]
+on: ["push", "pull_request"]
 
 name: Test Coveralls
 
