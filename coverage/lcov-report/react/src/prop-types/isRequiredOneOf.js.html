@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -115,13 +115,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">200x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">206x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -129,10 +129,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">200x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -152,14 +152,14 @@
  *   The new prop type checkers that checks if one of the given props exist,
  *   in addition to the original type checkings.
  */
-export default function isRequiredOneOf(propTypes) {
-  const names = Object.keys(propTypes);
+export default function <span class="fstat-no" title="function not covered" >isRequiredOneOf(</span>propTypes) {
+  const names = <span class="cstat-no" title="statement not covered" >Object.keys(propTypes);</span>
   const checker =
-    (propType) =&gt;
-    (props, propName, componentName, ...rest) =&gt; {
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    (p</span>ropType) =&gt;</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    (p</span>rops, propName, componentName, ...rest) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (</span>
         process.env.NODE_ENV !== 'production' &amp;&amp;
-        names.every((name) =&gt; typeof props[name] === 'undefined')
+        names.every(<span class="fstat-no" title="function not covered" >(n</span>ame) =&gt; <span class="cstat-no" title="statement not covered" >typeof props[name] === 'undefined')</span>
       ) {
 <span class="cstat-no" title="statement not covered" >        return new Error(</span>
           `${componentName} requires one of the following props: ${names.join(
@@ -167,10 +167,10 @@ export default function isRequiredOneOf(propTypes) {
           )}`
         );
       }
-      return propType(props, propName, componentName, ...rest);
+<span class="cstat-no" title="statement not covered" >      return propType(props, propName, componentName, ...rest);</span>
     };
-  return names.reduce(
-    (o, name) =&gt; ({
+<span class="cstat-no" title="statement not covered" >  return names.reduce(</span>
+<span class="fstat-no" title="function not covered" >    (o</span>, name) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
       ...o,
       [name]: checker(propTypes[name]),
     }),
@@ -184,7 +184,7 @@ export default function isRequiredOneOf(propTypes) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-08T19:52:45.086Z
+                at 2025-04-08T19:57:38.081Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
