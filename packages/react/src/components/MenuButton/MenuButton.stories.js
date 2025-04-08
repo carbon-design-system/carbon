@@ -9,11 +9,13 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { MenuItem, MenuItemDivider } from '../Menu';
+import { Theme } from '../Theme';
 
 import { Asset, User, Group } from '@carbon/react/icons';
 
 import { MenuButton } from './';
 import mdx from './MenuButton.mdx';
+import '../Theme/Theme-story.scss';
 
 export default {
   title: 'Components/MenuButton',
@@ -124,6 +126,22 @@ export const WithIcons = (args) => {
 };
 
 WithIcons.argTypes = { ...sharedArgTypes };
+
+export const WithMatchedTheme = (args) => {
+  return (
+    <Theme theme="g100">
+      <section class="theme-section">
+        <MenuButton label="Add" {...args}>
+          <MenuItem label="Asset" renderIcon={Asset} />
+          <MenuItem label="User" renderIcon={User} />
+          <MenuItem label="User group" renderIcon={Group} />
+        </MenuButton>
+      </section>
+    </Theme>
+  );
+};
+
+WithMatchedTheme.argTypes = { ...sharedArgTypes };
 
 export const WithNestedMenu = (args) => (
   <MenuButton label="Actions" {...args}>
