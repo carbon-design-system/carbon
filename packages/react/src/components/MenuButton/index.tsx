@@ -83,6 +83,11 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
   tabIndex?: number;
 
   /**
+   * Specify if the component should match the current theme
+   */
+  matchTheme?: boolean;
+
+  /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
   menuTarget?: Element;
@@ -99,6 +104,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       size = 'lg',
       menuAlignment = 'bottom',
       tabIndex = 0,
+      matchTheme = false,
       menuTarget,
       ...rest
     },
@@ -218,6 +224,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
         </Button>
         <Menu
           containerRef={triggerRef}
+          matchTheme={matchTheme}
           menuAlignment={menuAlignment}
           className={menuClasses}
           ref={refs.setFloating}
@@ -261,6 +268,11 @@ MenuButton.propTypes = {
    * Provide the label to be rendered on the trigger button.
    */
   label: PropTypes.string.isRequired,
+
+  /**
+   * Specify if the MenuButton component should match the current theme
+   */
+  matchTheme: PropTypes.bool,
 
   /**
    * Experimental property. Specify how the menu should align with the button element
