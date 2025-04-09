@@ -197,16 +197,7 @@ const TreeView: TreeViewComponent = ({
 
   function handleKeyDown(event) {
     event.stopPropagation();
-    if (
-      matches(event, [
-        keys.ArrowUp,
-        keys.ArrowDown,
-        keys.Home,
-        keys.End,
-        // @ts-ignore - `matches` doesn't like the object syntax without missing properties
-        { code: 'KeyA' },
-      ])
-    ) {
+    if (matches(event, [keys.ArrowUp, keys.ArrowDown, keys.Home, keys.End])) {
       event.preventDefault();
     }
 
