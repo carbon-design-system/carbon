@@ -13,7 +13,6 @@ import React, {
   useMemo,
   useRef,
   type ElementType,
-  type ForwardedRef,
   type WeakValidationMap,
 } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';

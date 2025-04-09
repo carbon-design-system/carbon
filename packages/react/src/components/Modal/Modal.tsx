@@ -8,11 +8,9 @@
 import PropTypes, { type Validator } from 'prop-types';
 import React, {
   cloneElement,
-  isValidElement,
   useEffect,
   useRef,
   useState,
-  type ReactElement,
   type ReactNode,
   type Ref,
 } from 'react';

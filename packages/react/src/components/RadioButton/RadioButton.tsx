@@ -6,13 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, {
-  cloneElement,
-  isValidElement,
-  useRef,
-  type ReactElement,
-  type ReactNode,
-} from 'react';
+import React, { cloneElement, useRef, type ReactNode } from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';

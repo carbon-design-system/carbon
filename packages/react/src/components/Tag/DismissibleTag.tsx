@@ -8,11 +8,11 @@
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
-  isValidElement,
+  forwardRef,
   useLayoutEffect,
   useRef,
   useState,
-  type ReactElement,
+  type ForwardedRef,
   type ReactNode,
 } from 'react';
 import classNames from 'classnames';

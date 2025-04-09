@@ -16,7 +16,6 @@ import React, {
   type FocusEvent,
   type ForwardedRef,
   type MouseEvent,
-  type ReactElement,
   type ReactNode,
 } from 'react';
 import {

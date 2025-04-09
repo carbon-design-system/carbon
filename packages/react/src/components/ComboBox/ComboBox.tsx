@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import React, {
   cloneElement,
   forwardRef,
-  isValidElement,
   useCallback,
   useContext,
   useEffect,

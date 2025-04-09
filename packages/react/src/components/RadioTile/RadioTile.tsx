@@ -12,7 +12,7 @@ import {
 } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { cloneElement, isValidElement, type ReactElement } from 'react';
+import React, { cloneElement } from 'react';
 import { keys, matches } from '../../internal/keyboard';
 import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';

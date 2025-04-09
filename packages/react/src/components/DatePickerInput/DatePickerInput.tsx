@@ -10,10 +10,8 @@ import cx from 'classnames';
 import PropTypes, { ReactElementLike, ReactNodeArray } from 'prop-types';
 import React, {
   cloneElement,
-  isValidElement,
   useContext,
   type ForwardedRef,
-  type ReactElement,
   type ReactNode,
 } from 'react';
 import { usePrefix } from '../../internal/usePrefix';

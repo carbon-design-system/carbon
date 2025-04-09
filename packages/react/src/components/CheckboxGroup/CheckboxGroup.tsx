@@ -6,12 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, {
-  cloneElement,
-  isValidElement,
-  type ReactElement,
-  type ReactNode,
-} from 'react';
+import React, { cloneElement, type ReactNode } from 'react';
 import cx from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';

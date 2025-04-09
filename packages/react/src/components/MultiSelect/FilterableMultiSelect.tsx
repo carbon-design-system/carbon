@@ -20,7 +20,6 @@ import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
-  isValidElement,
   useContext,
   useEffect,
   useLayoutEffect,

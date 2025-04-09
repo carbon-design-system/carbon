@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React, {
   cloneElement,
   createContext,
-  isValidElement,
   useRef,
   useState,
   type ReactElement,

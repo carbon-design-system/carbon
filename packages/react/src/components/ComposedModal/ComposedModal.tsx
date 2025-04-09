@@ -7,7 +7,6 @@
 
 import React, {
   cloneElement,
-  isValidElement,
   useEffect,
   useRef,
   useState,

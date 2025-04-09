@@ -10,14 +10,12 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
-  isValidElement,
   useContext,
   useEffect,
   useRef,
   useState,
   type FC,
   type MouseEvent,
-  type ReactElement,
   type ReactNode,
 } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';

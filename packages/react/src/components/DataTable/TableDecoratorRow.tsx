@@ -7,12 +7,7 @@
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, {
-  cloneElement,
-  isValidElement,
-  type ReactElement,
-  type ReactNode,
-} from 'react';
+import React, { cloneElement, type ReactNode } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { AILabel } from '../AILabel';

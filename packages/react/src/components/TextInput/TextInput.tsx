@@ -8,12 +8,10 @@
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
-  isValidElement,
   useContext,
   useEffect,
   useRef,
   useState,
-  type ReactElement,
   type ReactNode,
 } from 'react';
 import classNames from 'classnames';

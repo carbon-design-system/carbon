@@ -23,7 +23,6 @@ import React, {
   useMemo,
   useState,
   type ForwardedRef,
-  type ReactElement,
   type ReactNode,
 } from 'react';
 import ListBox, {
