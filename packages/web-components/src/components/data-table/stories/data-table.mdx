@@ -71,19 +71,18 @@ optionally add any number of features including sorting, row expansion,
 filtering, row selection, batch actions.
 
 For more information, see each usage section below for the functionality that
-you're interested in. If you want to see a full list of the arguments passed
-into your render prop, visit the
-[render props](#attributes-properties-and-events) section.
+you're interested in. If you want to see a full list of options, visit the
+[attributes, properties, and events](#attributes-properties-and-events) section.
 
 ## Sorting
 
-In order to sort the rows in your data table, you will need to pass in the
-`is-sortable` prop to the `<cds-table>` component.
+In order to sort the rows in your data table, you will need to use the
+`is-sortable` attribute in the `<cds-table>` component.
 
 <Canvas id="components-datatable-sorting--default" />
 
-Optionally, you can pass in `is-sortable` to each `<cds-table-header-cell>` that
-you want to be sorted, or not sorted. This is useful if you only want to enable
+Optionally, you can add `is-sortable` to each `<cds-table-header-cell>` that you
+want to be sorted, or not sorted. This is useful if you only want to enable
 sorting on some table column headers, but not all.
 
 ```html
@@ -116,7 +115,7 @@ The component uses a default `Intl.Collator` object created with the current set
 locale to sort the rows. The default sorting row function uses this collator,
 and as such it is needed in the custom sorting function.
 
-As a result, `customSortRow` function would take on the following shape:
+For example, this `customSortRow` function would take on the following shape:
 
 ```js
 customSortRow(lhs, rhs, collator) {
@@ -595,10 +594,6 @@ document.querySelector('cds-table-skeleton').headers = customHeaders;
 ```
 
 ## Attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-table is-sortable>`) and `false` means not setting the attribute (e.g.
-`<cds-table>` without `is-sortable` attribute).
 
 ### `<cds-table>`
 
