@@ -356,7 +356,7 @@ export const FloatingMenu = ({
 
     focusTarget.focus();
 
-    if (focusTarget === menuBody && __DEV__) {
+    if (focusTarget === menuBody) {
       warning(
         focusableNode === null,
         'Floating Menus must have at least a programmatically focusable child. This can be accomplished by adding tabIndex="-1" to the content element.'

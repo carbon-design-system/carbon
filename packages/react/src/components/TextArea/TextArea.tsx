@@ -8,12 +8,11 @@
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
-  isValidElement,
+  forwardRef,
   useContext,
   useEffect,
   useRef,
   useState,
-  type ReactElement,
   type ReactNode,
 } from 'react';
 import classNames from 'classnames';
@@ -166,7 +165,11 @@ export interface TextAreaProps
   counterMode?: 'character' | 'word';
 }
 
-const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
+// TODO: This type was added to prevent the formatter from changing the
+// indentation of this entire function. Delete it in a future pull request.
+type TTextArea = HTMLTextAreaElement;
+
+const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
   const {
     className,
     decorator,
@@ -198,9 +201,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const textAreaInstanceId = useId();
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const ref = useMergedRefs([forwardRef, textareaRef]) as
-    | React.LegacyRef<HTMLTextAreaElement>
-    | undefined;
+  const ref = useMergedRefs([forwardRef, textareaRef]);
 
   function getInitialTextCount(): number {
     const targetValue =

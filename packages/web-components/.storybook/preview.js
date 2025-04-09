@@ -13,6 +13,8 @@ import { breakpoints } from '@carbon/layout';
 import theme from './theme';
 import './templates/with-layer';
 
+import './_container.scss';
+
 setCustomElementsManifest(customElements);
 
 export const globalTypes = {
@@ -125,8 +127,14 @@ export const parameters = {
     sort: 'alpha',
     hideNoControlsWarning: true,
   },
+  darkMode: {
+    current: 'light',
+  },
   docs: {
     theme,
+    source: {
+      excludeDecorators: true,
+    },
   },
   viewport: {
     viewports: {

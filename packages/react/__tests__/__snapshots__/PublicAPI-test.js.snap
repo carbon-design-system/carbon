@@ -2915,6 +2915,7 @@ Map {
     },
   },
   "DismissibleTag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -2984,6 +2985,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "Dropdown" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -6845,6 +6847,7 @@ Map {
     },
   },
   "SelectableTag" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -6891,6 +6894,7 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "SelectableTile" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -10898,6 +10902,52 @@ Map {
     },
     "Content": Object {
       "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "contextualActions": Object {
+          "type": "node",
+        },
+        "pageActions": Object {
+          "type": "node",
+        },
+        "renderIcon": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "func",
+              },
+              Object {
+                "type": "object",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "subtitle": Object {
+          "type": "string",
+        },
+        "title": Object {
+          "isRequired": true,
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "HeroImage": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+      },
       "render": [Function],
     },
     "PageHeader": Object {
@@ -10910,6 +10960,52 @@ Map {
     },
     "PageHeaderContent": Object {
       "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "contextualActions": Object {
+          "type": "node",
+        },
+        "pageActions": Object {
+          "type": "node",
+        },
+        "renderIcon": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "func",
+              },
+              Object {
+                "type": "object",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "subtitle": Object {
+          "type": "string",
+        },
+        "title": Object {
+          "isRequired": true,
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "PageHeaderHeroImage": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+      },
       "render": [Function],
     },
     "PageHeaderTabBar": Object {

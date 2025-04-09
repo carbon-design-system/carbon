@@ -259,7 +259,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const [prevControlledValue, setPrevControlledValue] =
       useState(controlledValue);
     const inputRef = useRef<HTMLInputElement>(null);
-    const ref = useMergedRefs<HTMLInputElement>([forwardRef, inputRef]);
+    const ref = useMergedRefs([forwardRef, inputRef]);
     const numberInputClasses = cx({
       [`${prefix}--number`]: true,
       [`${prefix}--number--helpertext`]: true,

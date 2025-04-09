@@ -8,11 +8,9 @@
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
-  isValidElement,
   useLayoutEffect,
   useRef,
   useState,
-  type ReactElement,
   type ReactNode,
 } from 'react';
 import classNames from 'classnames';
@@ -23,7 +21,6 @@ import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
 import { DefinitionTooltip } from '../Tooltip';
 import { isEllipsisActive } from './isEllipsisActive';
-import { useMergeRefs } from '@floating-ui/react';
 import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
@@ -31,6 +28,7 @@ import {
 import { SelectableTagBaseProps } from './SelectableTag';
 import { OperationalTagBaseProps } from './OperationalTag';
 import { DismissibleTagBaseProps } from './DismissibleTag';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
@@ -152,7 +150,7 @@ const Tag: TagComponent = React.forwardRef(
   ) => {
     const prefix = usePrefix();
     const tagRef = useRef<HTMLElement>();
-    const ref = useMergeRefs([forwardRef, tagRef]);
+    const ref = useMergedRefs([forwardRef, tagRef]);
     const tagId = id || `tag-${useId()}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 

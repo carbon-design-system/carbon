@@ -25,6 +25,7 @@ import { Close } from '@carbon/icons-react';
 import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
+import mergeRefs from '../../tools/mergeRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
@@ -97,101 +98,107 @@ export type DismissibleTagProps<T extends React.ElementType> = PolymorphicProps<
   DismissibleTagBaseProps
 >;
 
-const DismissibleTag = <T extends React.ElementType>({
-  className,
-  decorator,
-  disabled,
-  id,
-  renderIcon,
-  title = 'Dismiss',
-  onClose,
-  slug,
-  size,
-  text,
-  tagTitle,
-  type,
-  ...other
-}: DismissibleTagProps<T>) => {
-  const prefix = usePrefix();
-  const tagLabelRef = useRef<HTMLDivElement>(null);
-  const tagId = id || `tag-${useId()}`;
-  const tagClasses = classNames(`${prefix}--tag--filter`, className);
-  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+const DismissibleTag = forwardRef(
+  <T extends React.ElementType>(
+    {
+      className,
+      decorator,
+      disabled,
+      id,
+      renderIcon,
+      title = 'Dismiss',
+      onClose,
+      slug,
+      size,
+      text,
+      tagTitle,
+      type,
+      ...other
+    }: DismissibleTagProps<T>,
+    forwardRef: ForwardedRef<HTMLDivElement>
+  ) => {
+    const prefix = usePrefix();
+    const tagLabelRef = useRef<HTMLDivElement>(null);
+    const tagId = id || `tag-${useId()}`;
+    const tagClasses = classNames(`${prefix}--tag--filter`, className);
+    const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-  useLayoutEffect(() => {
-    const newElement = tagLabelRef.current?.getElementsByClassName(
-      `${prefix}--tag__label`
-    )[0];
-    setIsEllipsisApplied(isEllipsisActive(newElement));
-  }, [prefix, tagLabelRef]);
-  const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (onClose) {
-      event.stopPropagation();
-      onClose(event);
-    }
-  };
+    useLayoutEffect(() => {
+      const newElement = tagLabelRef.current?.getElementsByClassName(
+        `${prefix}--tag__label`
+      )[0];
+      setIsEllipsisApplied(isEllipsisActive(newElement));
+    }, [prefix, tagLabelRef]);
+    const combinedRef = mergeRefs(tagLabelRef, forwardRef);
+    const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (onClose) {
+        event.stopPropagation();
+        onClose(event);
+      }
+    };
 
-  const candidate = slug ?? decorator;
-  const candidateIsAILabel = isComponentElement(candidate, AILabel);
-  const normalizedDecorator = candidateIsAILabel
-    ? cloneElement(candidate, { size: 'sm', kind: 'inline' })
-    : null;
+    const candidate = slug ?? decorator;
+    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(candidate, { size: 'sm', kind: 'inline' })
+      : null;
 
-  const tooltipClasses = classNames(
-    `${prefix}--icon-tooltip`,
-    `${prefix}--tag-label-tooltip`
-  );
+    const tooltipClasses = classNames(
+      `${prefix}--icon-tooltip`,
+      `${prefix}--tag-label-tooltip`
+    );
 
-  // Removing onClick from the spread operator
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { onClick, ...otherProps } = other;
+    // Removing onClick from the spread operator
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { onClick, ...otherProps } = other;
 
-  const dismissLabel = `Dismiss "${text}"`;
+    const dismissLabel = `Dismiss "${text}"`;
 
-  return (
-    <Tag
-      ref={tagLabelRef}
-      type={type}
-      size={size}
-      renderIcon={renderIcon}
-      disabled={disabled}
-      className={tagClasses}
-      id={tagId}
-      {...otherProps}>
-      <div className={`${prefix}--interactive--tag-children`}>
-        <Text
-          title={tagTitle ? tagTitle : text}
-          className={`${prefix}--tag__label`}>
-          {text}
-        </Text>
-        {slug ? (
-          normalizedDecorator
-        ) : decorator ? (
-          <div className={`${prefix}--tag__decorator`}>
-            {normalizedDecorator}
-          </div>
-        ) : (
-          ''
-        )}
-        <Tooltip
-          label={isEllipsisApplied ? dismissLabel : title}
-          align="bottom"
-          className={tooltipClasses}
-          leaveDelayMs={0}
-          closeOnActivation>
-          <button
-            type="button"
-            className={`${prefix}--tag__close-icon`}
-            onClick={handleClose}
-            disabled={disabled}
-            aria-label={title}>
-            <Close />
-          </button>
-        </Tooltip>
-      </div>
-    </Tag>
-  );
-};
+    return (
+      <Tag
+        ref={combinedRef}
+        type={type}
+        size={size}
+        renderIcon={renderIcon}
+        disabled={disabled}
+        className={tagClasses}
+        id={tagId}
+        {...otherProps}>
+        <div className={`${prefix}--interactive--tag-children`}>
+          <Text
+            title={tagTitle ? tagTitle : text}
+            className={`${prefix}--tag__label`}>
+            {text}
+          </Text>
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div className={`${prefix}--tag__decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
+          <Tooltip
+            label={isEllipsisApplied ? dismissLabel : title}
+            align="bottom"
+            className={tooltipClasses}
+            leaveDelayMs={0}
+            closeOnActivation>
+            <button
+              type="button"
+              className={`${prefix}--tag__close-icon`}
+              onClick={handleClose}
+              disabled={disabled}
+              aria-label={title}>
+              <Close />
+            </button>
+          </Tooltip>
+        </div>
+      </Tag>
+    );
+  }
+);
 DismissibleTag.propTypes = {
   /**
    * Provide a custom className that is applied to the containing <span>
