@@ -38,6 +38,7 @@ pids
 # Editor
 .DS_Store
 *.swp
+.history/*
 .idea
 .vscode
 
