@@ -45,7 +45,10 @@
 
     display: grid;
     gap: $spacing-05;
-    grid-template-columns: auto minmax(min-content, 1fr);
+    grid-template-columns: auto minmax(
+        var(--pageheader-title-grid-width, 0),
+        1fr
+      );
     margin-block-end: 1rem;
     min-block-size: convert.to-rem(40px);
   }

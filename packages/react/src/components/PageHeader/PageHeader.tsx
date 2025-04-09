@@ -160,6 +160,16 @@ const PageHeaderContent = React.forwardRef<
   };
 
   useLayoutEffect(() => {
+    if (offsetRef.current) {
+      const width = offsetRef.current.offsetWidth;
+      document.documentElement.style.setProperty(
+        '--pageheader-title-grid-width',
+        `${width}px`
+      );
+    }
+  }, [hiddenItems]);
+
+  useLayoutEffect(() => {
     titleRef.current && isEllipsisActive(titleRef.current);
   }, [title]);
 
@@ -229,8 +239,7 @@ const PageHeaderContent = React.forwardRef<
                       <MenuButton
                         menuAlignment="bottom-end"
                         label={menuButtonLabel}
-                        size="md"
-                        ref={offsetRef}>
+                        size="md">
                         {hiddenItems &&
                           hiddenItems.length > 0 &&
                           hiddenItems
