@@ -1,26 +1,19 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import ClickListener from '../ClickListener';
-
 import { render } from '@testing-library/react';
+import React, { forwardRef } from 'react';
+import { ClickListener } from '../ClickListener';
 
 describe('ClickListener', () => {
   let onClickOutside;
-  let handleRefSpy;
 
   beforeEach(() => {
     onClickOutside = jest.fn();
-    handleRefSpy = jest.spyOn(ClickListener.prototype, 'handleRef');
-  });
-
-  afterEach(() => {
-    handleRefSpy.mockRestore();
   });
 
   describe('renders as expected - Component API', () => {
@@ -56,17 +49,14 @@ describe('ClickListener', () => {
 
     it('should not overwrite any children function refs', () => {
       const mockRef = jest.fn();
-      class Child extends React.Component {
-        render() {
-          return <div />;
-        }
-      }
+      const Child = forwardRef((props, ref) => <div ref={ref} {...props} />);
+
       render(
         <ClickListener onClickOutside={onClickOutside}>
           <Child ref={mockRef} />
         </ClickListener>
       );
-      expect(handleRefSpy).toHaveBeenCalledTimes(1);
+
       expect(mockRef).toHaveBeenCalledTimes(1);
     });
   });
