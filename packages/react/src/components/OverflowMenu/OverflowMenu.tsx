@@ -26,7 +26,6 @@ import { OverflowMenuVertical } from '@carbon/icons-react';
 import classNames from 'classnames';
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
-import { ClickListener } from '../../internal/ClickListener';
 import {
   DIRECTION_BOTTOM,
   DIRECTION_TOP,
@@ -41,6 +40,7 @@ import deprecate from '../../prop-types/deprecate';
 import mergeRefs from '../../tools/mergeRefs';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { IconButton } from '../IconButton';
+import { useOutsideClick } from '../../internal/useOutsideClick';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -275,6 +275,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     const prevOpenState = useRef(open);
     /** The element ref of the tooltip's trigger button. */
     const triggerRef = useRef<HTMLButtonElement>(null);
+    const wrapperRef = useRef<HTMLSpanElement>(null);
 
     // Sync open prop changes.
     useEffect(() => {
@@ -298,6 +299,16 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
       prevOpenState.current = open;
     }, [open, onClose]);
+
+    useOutsideClick(wrapperRef, ({ target }) => {
+      if (
+        open &&
+        (!menuBodyRef.current ||
+          (target instanceof Node && !menuBodyRef.current.contains(target)))
+      ) {
+        closeMenu();
+      }
+    });
 
     const focusMenuEl = useCallback(() => {
       if (triggerRef.current) {
@@ -366,17 +377,6 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
 
         // Stop the esc keypress from bubbling out and closing something it shouldn't
         evt.stopPropagation();
-      }
-    };
-
-    const handleClickOutside = (evt: globalThis.MouseEvent) => {
-      if (
-        open &&
-        (!menuBodyRef.current ||
-          (evt.target instanceof Node &&
-            !menuBodyRef.current.contains(evt.target)))
-      ) {
-        closeMenu();
       }
     };
 
@@ -545,10 +545,11 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     );
 
     return (
-      <ClickListener onClickOutside={handleClickOutside}>
+      <>
         <span
           className={`${prefix}--overflow-menu__wrapper`}
-          aria-owns={open ? menuBodyId : undefined}>
+          aria-owns={open ? menuBodyId : undefined}
+          ref={wrapperRef}>
           <IconButton
             {...other}
             type="button"
@@ -569,7 +570,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
           </IconButton>
           {open && hasMountedTrigger && wrappedMenuBody}
         </span>
-      </ClickListener>
+      </>
     );
   }
 );
