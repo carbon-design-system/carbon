@@ -41,7 +41,7 @@ const capIndex = (index: number, length: number) => {
  * @fires cds-content-switcher-selected - The custom event fired after a a content switcher item is selected upon a user gesture.
  */
 @customElement(`${prefix}-content-switcher`)
-export default class CDSContentSwitcher extends LitElement {
+class CDSContentSwitcher extends LitElement {
   /**
    * Handles `mouseover`/`mouseout` events on `<slot>`.
    *
@@ -317,3 +317,5 @@ export default class CDSContentSwitcher extends LitElement {
 
   static styles = styles;
 }
+
+export default CDSContentSwitcher;

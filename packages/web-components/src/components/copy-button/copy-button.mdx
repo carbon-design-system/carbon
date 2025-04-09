@@ -1,42 +1,38 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as CopyButtonStories from './copy-button.stories';
 
 <Meta of={CopyButtonStories} />
 
-# Copy button
+# CopyButton
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/copy-button)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/copy-button)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/patterns/common-actions/#copy)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/copy-button)
+## Table of Contents
 
-Copy button provides the interface of copy button and its feedback tooltip. No
-actual copy is performed, but application can listen to `click` event of
-`<cds-copy-button>` and interact with the clipboard.
+- [Overview](#overview)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+The copy button should be accompanied by a tooltip. Tooltip feedback text should
+be concise and describe the action taken when the user clicks the copy button.
+By default we display the text “Copied!”.
 
-### JS (via import)
+<Canvas of={CopyButtonStories.Default} />
 
-```javascript
-import '@carbon/web-components/es/components/copy-button/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['copy-button'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-copy-button feedback="Copied!" feedback-timeout="2000">
-  Copy to Clipboard
-</cds-copy-button>
-```
-
-## `<cds-copy-button>` attributes and properties
+## Component API
 
 <ArgTypes of="cds-copy-button" />
+
+<Markdown>{`${cdnJs({ components: ['copy-button'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback through, asking questions
+on Slack, or updating this file on GitHub
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/copy-button/copy-button.mdx).
