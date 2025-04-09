@@ -38,7 +38,7 @@ import { noopFn } from '../../internal/noopFn';
 import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import mergeRefs from '../../tools/mergeRefs';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { setupGetInstanceId } from '../../tools/setupGetInstanceId';
 import { IconButton } from '../IconButton';
 import { useOutsideClick } from '../../internal/useOutsideClick';
 
