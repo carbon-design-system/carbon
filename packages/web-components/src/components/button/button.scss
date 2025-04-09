@@ -119,6 +119,18 @@ $css--plex: true !default;
         padding: $spacing-03;
       }
     }
+
+    &:not(:focus) {
+      box-shadow: none;
+    }
+  }
+}
+
+:host(#{$prefix}-button[kind='danger-ghost']) {
+  .#{$prefix}--btn--danger-ghost {
+    &:not(:focus) {
+      box-shadow: none;
+    }
   }
 }
 

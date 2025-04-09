@@ -245,12 +245,18 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   rows: Array<Omit<DataTableRow<ColTypes>, 'cells'>>;
   size?: DataTableSize;
   sortRow?: (
-    cellA: DataTableCell<any>,
-    cellB: DataTableCell<any>,
+    cellA: any,
+    cellB: any,
     sortRowOptions: {
       sortDirection: DataTableSortState;
       sortStates: Record<DataTableSortState, DataTableSortState>;
       locale: string;
+      key: string;
+      compare: (
+        a: number | string,
+        b: number | string,
+        locale?: string
+      ) => number;
     }
   ) => number;
   stickyHeader?: boolean;
