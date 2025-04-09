@@ -429,8 +429,6 @@
     background-color: transparent;
   }
 
-  //hover state
-
   // Basic hover state - low contrast
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn:hover {
@@ -482,5 +480,75 @@
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:hover
     .#{$prefix}--content-switcher__icon {
     fill: $icon-primary; // Keep using the selected icon color
+  }
+
+  // Unselected: disabled state for low contrast
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:disabled {
+    background-color: $content-switcher-background;
+    border-block-start: convert.to-rem(1px) solid $border-disabled;
+    border-block-end: convert.to-rem(1px) solid $border-disabled;
+    color: $text-disabled;
+
+    &:hover {
+      cursor: not-allowed;
+      background-color: $content-switcher-background;
+    }
+
+    .#{$prefix}--content-switcher__icon {
+      fill: $icon-disabled;
+    }
+  }
+
+  // First and last child special cases for disabled state
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:disabled:first-child,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:disabled:last-child {
+    border-color: $border-disabled;
+  }
+
+  // Selected: disabled state for low contrast
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled {
+    background-color: $content-switcher-selected;
+    border: convert.to-rem(1px) solid $border-disabled;
+    color: $text-disabled;
+
+    &:hover {
+      background-color: $content-switcher-selected;
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--content-switcher__icon {
+      fill: $icon-disabled;
+    }
+  }
+
+  // Ensure divider doesn't show when disabled
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:disabled::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:disabled
+    + .#{$prefix}--content-switcher-btn::before {
+    background-color: $border-disabled;
+  }
+
+  // Completely hide dividers (dashes) for disabled buttons
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:disabled::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:disabled
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:disabled
+    + .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before {
+    background-color: transparent; // Make divider transparent instead of just changing color
+    display: none; // To ensure it's completely hidden
   }
 }
