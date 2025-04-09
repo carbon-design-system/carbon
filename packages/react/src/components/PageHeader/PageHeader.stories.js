@@ -12,6 +12,7 @@ import {
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
   PageHeaderTabBar,
+  PageHeaderContentText,
   PageHeaderHeroImage,
 } from '../PageHeader';
 import { Dropdown } from '../Dropdown';
@@ -114,10 +115,12 @@ export const Content = (args) => (
       title="Page header content title with an extra long title that turns into a definition tooltip that creates a title with an ellipsis."
       subtitle="Subtitle"
       {...args}>
-      Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-      Massa elementum class enim malesuada lacinia hendrerit enim erat
-      pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-      Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+      <PageHeader.ContentText>
+        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+        Massa elementum class enim malesuada lacinia hendrerit enim erat
+        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+      </PageHeader.ContentText>
     </PageHeader.Content>
     <PageHeader.TabBar />
   </PageHeader.Root>
@@ -131,10 +134,12 @@ export const ContentWithIcon = (args) => (
       subtitle="Subtitle"
       renderIcon={BeeIcon}
       {...args}>
-      Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-      Massa elementum class enim malesuada lacinia hendrerit enim erat
-      pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-      Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+      <PageHeader.ContentText>
+        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+        Massa elementum class enim malesuada lacinia hendrerit enim erat
+        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+      </PageHeader.ContentText>
     </PageHeader.Content>
     <PageHeader.TabBar />
   </PageHeader.Root>
@@ -164,9 +169,12 @@ export const ContentWithContextualActions = (args) => (
         </>
       }
       {...args}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
+      <PageHeader.ContentText>
+        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+        Massa elementum class enim malesuada lacinia hendrerit enim erat
+        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+      </PageHeader.ContentText>
     </PageHeader.Content>
     <PageHeader.TabBar />
   </PageHeader.Root>
@@ -183,10 +191,12 @@ export const ContentWithHeroImage = (args) => (
               title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
               subtitle="Subtitle"
               {...args}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex.
+              <PageHeader.ContentText>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex.
+              </PageHeader.ContentText>
             </PageHeader.Content>
           </Column>
           <Column lg={8} md={4} sm={0}>
@@ -344,9 +354,11 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
       }
       pageActions={pageActionButtonItems}
       {...args}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
+      <PageHeader.ContentText>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
+      </PageHeader.ContentText>
     </PageHeader.Content>
     <PageHeader.TabBar />
   </PageHeader.Root>

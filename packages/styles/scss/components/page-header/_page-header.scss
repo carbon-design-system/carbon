@@ -63,6 +63,11 @@
     display: flex;
   }
 
+  .#{$prefix}--page-header__content__title-container
+    .#{$prefix}--definition-term {
+    border-block-end: none;
+  }
+
   .#{$prefix}--page-header__content__contextual-actions {
     display: flex;
   }

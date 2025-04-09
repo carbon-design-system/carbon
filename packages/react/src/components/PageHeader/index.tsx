@@ -8,12 +8,14 @@ export {
   PageHeader,
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
+  PageHeaderContentText,
   PageHeaderTabBar,
   PageHeaderHeroImage,
   //
   Root,
   BreadcrumbBar,
   Content,
+  ContentText,
   TabBar,
   HeroImage,
 } from './PageHeader';
@@ -21,6 +23,7 @@ export type {
   PageHeaderProps,
   PageHeaderBreadcrumbBarProps,
   PageHeaderContentProps,
+  PageHeaderContentTextProps,
   PageHeaderTabBarProps,
   PageHeaderHeroImageProps,
 } from './PageHeader';

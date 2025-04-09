@@ -265,11 +265,7 @@ const PageHeaderContent = React.forwardRef<
           {subtitle}
         </Text>
       )}
-      {children && (
-        <div className={`${prefix}--page-header__content__body`}>
-          {children}
-        </div>
-      )}
+      {children}
     </div>
   );
 });
@@ -309,6 +305,52 @@ PageHeaderContent.propTypes = {
    * The PageHeaderContent's collapsible Menu button label
    */
   menuButtonLabel: PropTypes.string,
+};
+
+/**
+ * ----------------
+ * PageHeaderContentText
+ * ----------------
+ */
+interface PageHeaderContentTextProps {
+  /**
+   * Provide child elements to be rendered inside PageHeaderContentText.
+   */
+  children?: React.ReactNode;
+  /**
+   * Specify an optional className to be added to your PageHeaderContentText
+   */
+  className?: string;
+}
+const PageHeaderContentText = React.forwardRef<
+  HTMLDivElement,
+  PageHeaderContentTextProps
+>(function PageHeaderContentText(
+  { className, children, ...other }: PageHeaderContentTextProps,
+  ref
+) {
+  const prefix = usePrefix();
+
+  const classNames = classnames(
+    {
+      [`${prefix}--page-header__content__body`]: true,
+    },
+    className
+  );
+
+  return <div className={classNames}>{children}</div>;
+});
+
+PageHeaderContentText.displayName = 'PageHeaderContentText';
+PageHeaderContentText.propTypes = {
+  /**
+   * Provide child elements to be rendered inside PageHeaderContentText.
+   */
+  children: PropTypes.node,
+  /**
+   * Specify an optional className to be added to your PageHeaderContentText
+   */
+  className: PropTypes.string,
 };
 
 /**
@@ -408,6 +450,9 @@ BreadcrumbBar.displayName = 'PageHeaderBreadcrumbBar';
 const Content = PageHeaderContent;
 Content.displayName = 'PageHeaderContent';
 
+const ContentText = PageHeaderContentText;
+Content.displayName = 'PageHeaderContentText';
+
 const HeroImage = PageHeaderHeroImage;
 HeroImage.displayName = 'PageHeaderHeroImage';
 
@@ -419,12 +464,14 @@ export {
   PageHeader,
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
+  PageHeaderContentText,
   PageHeaderHeroImage,
   PageHeaderTabBar,
   // namespaced
   Root,
   BreadcrumbBar,
   Content,
+  ContentText,
   HeroImage,
   TabBar,
 };
@@ -432,6 +479,7 @@ export type {
   PageHeaderProps,
   PageHeaderBreadcrumbBarProps,
   PageHeaderContentProps,
+  PageHeaderContentTextProps,
   PageHeaderHeroImageProps,
   PageHeaderTabBarProps,
 };
