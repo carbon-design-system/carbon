@@ -616,19 +616,6 @@ class Slider extends PureComponent<SliderProps> {
   }
 
   /**
-   * Synonymous to ECMA2017+ `Math.clamp`.
-   *
-   * @param {number} val
-   * @param {number} min
-   * @param {number} max
-   *
-   * @returns `val` if `max>=val>=min`; `min` if `val<min`; `max` if `val>max`.
-   */
-  clamp(val, min, max) {
-    return Math.max(min, Math.min(val, max));
-  }
-
-  /**
    * Rounds a given value to the nearest step defined by the slider's `step`
    * prop.
    *

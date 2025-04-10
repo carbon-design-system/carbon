@@ -36,6 +36,22 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
     expect(ul).toBe(null);
   });
 
+  it('should forward a ref', () => {
+    const ref = React.createRef();
+    render(
+      <OverflowMenu ref={ref}>
+        <MenuItem label="item" className="test-child">
+          one
+        </MenuItem>
+        <MenuItem label="item" className="test-child">
+          two
+        </MenuItem>
+      </OverflowMenu>
+    );
+
+    expect(ref.current).toBeInstanceOf(HTMLDivElement);
+  });
+
   it('should be in an open state after trigger is clicked', async () => {
     render(
       <OverflowMenu>
