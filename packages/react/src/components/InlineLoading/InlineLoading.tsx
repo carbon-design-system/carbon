@@ -108,9 +108,9 @@ const InlineLoading = ({
         </CheckmarkFilled>
       );
     }
-    if (status === 'inactive' || status === 'active') {
+    if (status === 'active') {
       if (!iconDescription) {
-        iconLabel = status === 'active' ? 'loading' : 'not loading';
+        iconLabel = 'loading';
       }
       return (
         <Loading
@@ -119,6 +119,16 @@ const InlineLoading = ({
           withOverlay={false}
           active={status === 'active'}
         />
+      );
+    }
+    if (status === 'inactive') {
+      if (!iconDescription) {
+        iconLabel = 'not loading';
+      }
+      return (
+        <title className={`${prefix}--inline-loading__inactive-status`}>
+          {iconLabel}
+        </title>
       );
     }
     return undefined;

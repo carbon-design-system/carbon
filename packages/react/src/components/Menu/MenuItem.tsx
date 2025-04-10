@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,6 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  ChangeEventHandler,
   ComponentProps,
   FC,
   ForwardedRef,
@@ -130,11 +129,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const context = useContext(MenuContext);
 
     const menuItem = useRef<HTMLLIElement>(null);
-    const ref = useMergedRefs<HTMLLIElement>([
-      forwardRef,
-      menuItem,
-      refs.setReference,
-    ]);
+    const ref = useMergedRefs([forwardRef, menuItem, refs.setReference]);
 
     const hasChildren = Boolean(children);
 
@@ -342,7 +337,7 @@ export interface MenuItemSelectableProps
   /**
    * Provide an optional function to be called when the selection state changes.
    */
-  onChange?: ChangeEventHandler<HTMLLIElement>;
+  onChange?: (checked: boolean) => void;
 
   /**
    * Controls the state of this option.
@@ -504,7 +499,7 @@ export interface MenuItemRadioGroupProps<Item>
   /**
    * Provide an optional function to be called when the selection changes.
    */
-  onChange?: ChangeEventHandler<HTMLLIElement>;
+  onChange?: (selectedItem: Item) => void;
 
   /**
    * Provide props.selectedItem to control the state of this radio group. Must match the type of props.items.
@@ -531,7 +526,7 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
   const [selection, setSelection] = useControllableState({
     value: selectedItem,
     onChange,
-    defaultValue: defaultSelectedItem,
+    defaultValue: defaultSelectedItem ?? ({} as Item),
   });
 
   function handleClick(item, e) {

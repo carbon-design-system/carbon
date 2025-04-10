@@ -1,0 +1,64 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as TreeViewStories from './tree-view.stories';
+
+<Meta of={TreeViewStories} />
+
+# Tree View
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/tree-view)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tree-view/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tree-view/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [With Controlled Expansion](#with-controlled-expansion)
+- [With Custom Icons](#with-custom-icons)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+TreeView is a component that allows users to navigate through a hierarchy of
+items. It is used to display nested lists of items that can be expanded or
+collapsed to show and hide additional items.
+
+<Canvas of={TreeViewStories.Default} />
+
+## With Controlled Expansion
+
+The `is-expanded` prop can be used to determine if an individual tree node is
+expanded or collapsed.
+
+> The `controlled` attribute used here is for this example only, and is not part
+> of the component API. Any valid DOM selector can be used.
+
+<Canvas of={TreeViewStories.withControlledExpansion} />
+
+## With Icons
+
+The icon `slot` can be used to customize the icons of each tree node.
+
+<Canvas of={TreeViewStories.withIcons} />
+
+## With Links
+
+The `href` prop can be used with click handling on each of the tree nodes.
+
+<Canvas of={TreeViewStories.withLinks} />
+
+## Component API
+
+<ArgTypes of="cds-tree-view" />
+<ArgTypes of="cds-tree-node" />
+
+<Markdown>{`${cdnJs({ components: ['tree-view'] })}`}</Markdown>
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/tree-view/tree-view.mdx).
