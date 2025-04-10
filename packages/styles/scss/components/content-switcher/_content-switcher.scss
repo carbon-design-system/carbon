@@ -15,7 +15,7 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/layout';
-@use './_tokens' as *;
+@use './tokens' as *;
 
 @mixin content-switcher {
   .#{$prefix}--content-switcher {
@@ -24,8 +24,12 @@
 
     display: flex;
     justify-content: space-evenly;
+    border-radius: convert.to-rem(4px);
+    background-color: $background;
     block-size: layout.size('height');
     inline-size: 100%;
+    outline: 1px solid $border-inverse;
+    outline-offset: -1px;
   }
 
   .#{$prefix}--content-switcher-btn {
@@ -122,7 +126,7 @@
     border-end-start-radius: convert.to-rem(4px);
     border-inline-start: convert.to-rem(1px) solid $border-inverse;
     border-start-start-radius: convert.to-rem(4px);
-
+    // border-radius: convert.to-rem(4px);
     &:disabled {
       border-color: $border-disabled;
       color: $text-disabled;
@@ -134,7 +138,7 @@
     border-end-end-radius: convert.to-rem(4px);
     border-inline-end: convert.to-rem(1px) solid $border-inverse;
     border-start-end-radius: convert.to-rem(4px);
-
+    // border-radius: convert.to-rem(4px);
     &:disabled {
       border-color: $border-disabled;
       color: $text-disabled;
@@ -148,6 +152,7 @@
   .#{$prefix}--content-switcher
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:last-child {
     border: 0;
+    border-radius: convert.to-rem(4px);
   }
 
   .#{$prefix}--content-switcher-btn::before {
@@ -241,6 +246,7 @@
   // Icon Only overrides
   .#{$prefix}--content-switcher--icon-only {
     justify-content: flex-start;
+    inline-size: fit-content;
   }
 
   .#{$prefix}--content-switcher--icon-only
@@ -268,14 +274,14 @@
     border-start-end-radius: convert.to-rem(4px);
   }
 
-  .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:last-child
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
-  .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:first-child
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
-    border-color: $background;
-  }
+  // .#{$prefix}--content-switcher--icon-only
+  //   .#{$prefix}--content-switcher-popover__wrapper:last-child
+  //   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
+  // .#{$prefix}--content-switcher--icon-only
+  //   .#{$prefix}--content-switcher-popover__wrapper:first-child
+  //   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
+  //   border-color: $background;
+  // }
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn {
     // accounts for the larger icon sizes to keep the switcher at 48px
@@ -357,14 +363,28 @@
   }
 
   // Low contrast selected state styling
+  .#{$prefix}--content-switcher--low-contrast {
+    background-color: $content-switcher-background;
+    outline: 1px solid $border-strong;
+  }
+  .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
+    .#{$prefix}--content-switcher-btn:first-child {
+    border-color: $border-strong;
+  }
+
+  .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
+    .#{$prefix}--content-switcher-btn:last-child {
+    border-color: $border-strong;
+  }
+
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
     background-color: $content-switcher-selected;
     color: $text-primary;
 
     &::after {
-      transform: scaleY(0);
       background-color: transparent;
+      transform: scaleY(0);
     }
   }
 
@@ -378,36 +398,70 @@
     border-radius: convert.to-rem(4px);
   }
 
-  .#{$prefix}--content-switcher--low-contrast
+  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:last-child
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
+  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:first-child
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
+    border-color: $border-inverse;
+  }
+
+  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:last-child
+    .#{$prefix}--content-switcher-btn,
+  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:first-child
+    .#{$prefix}--content-switcher-btn {
+    border-color: $border-strong;
+  }
+
+  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-btn
+    svg {
+    fill: $icon-secondary;
+  }
+
+  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
-    .#{$prefix}--content-switcher__icon {
+    svg {
     fill: $icon-primary;
   }
 
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn {
-    background-color: $content-switcher-background;
     border: none; /* Reset all borders first */
-    border-block-start: convert.to-rem(1px) solid $border-strong; /* Top border only */
+    background-color: $content-switcher-background;
     border-block-end: convert.to-rem(1px) solid $border-strong; /* Bottom border only */
+    border-block-start: convert.to-rem(1px) solid $border-strong; /* Top border only */
     color: $text-secondary;
 
-    .#{$prefix}--content-switcher__icon {
-      fill: $icon-secondary;
-    }
+    // .#{$prefix}--content-switcher__icon {
+    //   fill: $icon-secondary;
+    // }
   }
 
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:first-child {
-    border-end-start-radius: convert.to-rem(4px);
-    border-start-start-radius: convert.to-rem(4px);
-  }
+  // .#{$prefix}--content-switcher--low-contrast
+  //   .#{$prefix}--content-switcher-btn:first-child {
+  //   border-end-start-radius: convert.to-rem(4px);
+  //   border-start-start-radius: convert.to-rem(4px);
+  // }
 
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:last-child {
-    border-end-end-radius: convert.to-rem(4px);
-    border-start-end-radius: convert.to-rem(4px);
-  }
+  // .#{$prefix}--content-switcher--low-contrast
+  //   .#{$prefix}--content-switcher-btn:last-child {
+  //   border-end-end-radius: convert.to-rem(4px);
+  //   border-start-end-radius: convert.to-rem(4px);
+  // }
+
+  // .#{$prefix}--content-switcher--low-contrast:not(
+  //     .#{$prefix}--content-switcher--icon-only
+  //   )
+  //   .#{$prefix}--content-switcher-btn:last-child {
+  //   border-end-end-radius: convert.to-rem(4px);
+  //   border-inline-end: convert.to-rem(1px) solid $border-strong;
+  //   border-start-end-radius: convert.to-rem(4px);
+  // }
+
   // dashes
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn::before {
@@ -449,10 +503,10 @@
   // Hover state for the icon - low contrast
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn:hover
-    .#{$prefix}--content-switcher__icon,
+    svg,
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn:focus
-    .#{$prefix}--content-switcher__icon {
+    svg {
     fill: $icon-primary;
   }
 
@@ -470,32 +524,35 @@
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:hover,
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:active {
-    background-color: $content-switcher-selected; // Keep using the selected background
-    color: $text-primary; // Keep using the selected text color
+    // Keep using the selected background
+    background-color: $content-switcher-selected;
+    // Keep using the selected text color
+    color: $text-primary;
     // Any other properties that need to be preserved
   }
 
   // Ensure icon color doesn't change on hover when selected
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:hover
-    .#{$prefix}--content-switcher__icon {
-    fill: $icon-primary; // Keep using the selected icon color
+    svg {
+    // Keep using the selected icon color
+    fill: $icon-primary;
   }
 
   // Unselected: disabled state for low contrast
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn:disabled {
     background-color: $content-switcher-background;
-    border-block-start: convert.to-rem(1px) solid $border-disabled;
     border-block-end: convert.to-rem(1px) solid $border-disabled;
+    border-block-start: convert.to-rem(1px) solid $border-disabled;
     color: $text-disabled;
 
     &:hover {
-      cursor: not-allowed;
       background-color: $content-switcher-background;
+      cursor: not-allowed;
     }
 
-    .#{$prefix}--content-switcher__icon {
+    svg {
       fill: $icon-disabled;
     }
   }
@@ -511,8 +568,8 @@
   // Selected: disabled state for low contrast
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled {
-    background-color: $content-switcher-selected;
     border: convert.to-rem(1px) solid $border-disabled;
+    background-color: $content-switcher-selected;
     color: $text-disabled;
 
     &:hover {
@@ -520,7 +577,7 @@
       cursor: not-allowed;
     }
 
-    .#{$prefix}--content-switcher__icon {
+    svg {
       fill: $icon-disabled;
     }
   }
@@ -548,7 +605,9 @@
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn:disabled
     + .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before {
-    background-color: transparent; // Make divider transparent instead of just changing color
-    display: none; // To ensure it's completely hidden
+    // To ensure it's completely hidden
+    display: none;
+    // Make divider transparent instead of just changing color
+    background-color: transparent;
   }
 }

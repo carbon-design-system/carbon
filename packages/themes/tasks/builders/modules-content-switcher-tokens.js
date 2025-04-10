@@ -19,19 +19,21 @@ function buildThemesFile() {
   const imports = [t.SassModule('sass:map')];
 
   const variables = Object.entries(contentSwitcherTokens).flatMap(
-    ([key, statusToken]) => {
+    ([key, contentSwitcherToken]) => {
       return [
         t.Newline(),
         t.Assignment({
           id: t.Identifier(paramCase(key)),
           init: t.SassMap({
-            properties: Object.entries(statusToken).map(([token, value]) => {
-              const id = TokenFormat.convert({
-                name: token,
-                format: TokenFormat.formats.scss,
-              });
-              return t.SassMapProperty(t.Identifier(id), primitive(value));
-            }),
+            properties: Object.entries(contentSwitcherToken).map(
+              ([token, value]) => {
+                const id = TokenFormat.convert({
+                  name: token,
+                  format: TokenFormat.formats.scss,
+                });
+                return t.SassMapProperty(t.Identifier(id), primitive(value));
+              }
+            ),
           }),
           default: true,
         }),
