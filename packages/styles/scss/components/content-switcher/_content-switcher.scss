@@ -367,12 +367,16 @@
     background-color: $content-switcher-background;
     outline: 1px solid $border-strong;
   }
-  .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
+  .#{$prefix}--content-switcher--low-contrast:not(
+      .#{$prefix}--content-switcher--icon-only
+    )
     .#{$prefix}--content-switcher-btn:first-child {
     border-color: $border-strong;
   }
 
-  .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
+  .#{$prefix}--content-switcher--low-contrast:not(
+      .#{$prefix}--content-switcher--icon-only
+    )
     .#{$prefix}--content-switcher-btn:last-child {
     border-color: $border-strong;
   }
