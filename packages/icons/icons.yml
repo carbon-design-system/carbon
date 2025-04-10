@@ -6841,18 +6841,6 @@
     - ecommerce
   sizes:
     - 32
-- name: delivery-truck
-  friendly_name: Delivery truck
-  aliases:
-    - truck
-    - delivery
-    - transportation
-    - shopping
-    - van
-    - shipping
-    - ecommerce
-  sizes:
-    - 32
 - name: delivery-settings
   friendly_name: Delivery settings
   aliases:
@@ -6864,6 +6852,18 @@
     - policies
     - timeouts
     - configurations
+  sizes:
+    - 32
+- name: delivery-truck
+  friendly_name: Delivery truck
+  aliases:
+    - truck
+    - delivery
+    - transportation
+    - shopping
+    - van
+    - shipping
+    - ecommerce
   sizes:
     - 32
 - name: demo
@@ -10567,55 +10567,11 @@
     - storage
   sizes:
     - 32
-- name: ibm-consulting-advantage--agent
-  friendly_name: IBM Consulting Advantage Agent
-  aliases:
-    - prompt based agent
-    - AI agent
-    - chat agent
-    - prompt
-    - AI
-    - consulting
-    - agent
-  sizes:
-    - 32
-- name: ibm-consulting-advantage--application
-  friendly_name: IBM Consulting Advantage Application
-  aliases:
-    - software applications
-    - assets
-    - packages
-    - software
-    - application
-    - consulting
-  sizes:
-    - 32
-- name: ibm-consulting-advantage--assistant
-  friendly_name: IBM Consulting Advantage Assistant
-  aliases:
-    - chat assistant, AI assistant, prompt based assistant
-    - AI assistant
-    - prompt based assistant
-    - assistant
-    - chat
-    - consulting
-  sizes:
-    - 32
 - name: ibm--content-services
   friendly_name: IBM® Content Services
   aliases:
     - content management
     - SaaS
-  sizes:
-    - 32
-- name: ibm--databand
-  friendly_name: IBM Databand®
-  aliases:
-    - databand
-    - observability
-    - software
-    - data
-    - IBM Databand
   sizes:
     - 32
 - name: ibm--data-power
@@ -10644,6 +10600,16 @@
   aliases:
     - data
     - replication
+  sizes:
+    - 32
+- name: ibm--databand
+  friendly_name: IBM Databand®
+  aliases:
+    - databand
+    - observability
+    - software
+    - data
+    - IBM Databand
   sizes:
     - 32
 - name: ibm--datastage
@@ -11193,18 +11159,6 @@
     - Match 360
   sizes:
     - 32
-- name: ibm--mq
-  friendly_name: IBM® MQ
-  aliases:
-    - middleware
-    - messaging
-    - queuing
-    - message delivery
-    - circles
-    - dial
-    - bullseye
-  sizes:
-    - 32
 - name: ibm--maximo-application-suite
   friendly_name: IBM® Maximo® Application Suite
   aliases:
@@ -11219,6 +11173,18 @@
     - cloud-based
     - operations
     - maintenance
+  sizes:
+    - 32
+- name: ibm--mq
+  friendly_name: IBM® MQ
+  aliases:
+    - middleware
+    - messaging
+    - queuing
+    - message delivery
+    - circles
+    - dial
+    - bullseye
   sizes:
     - 32
 - name: ibm--open-enterprise-languages
@@ -12350,6 +12316,40 @@
     - AI
     - AIOps
     - app
+  sizes:
+    - 32
+- name: ibm-consulting-advantage--agent
+  friendly_name: IBM Consulting Advantage Agent
+  aliases:
+    - prompt based agent
+    - AI agent
+    - chat agent
+    - prompt
+    - AI
+    - consulting
+    - agent
+  sizes:
+    - 32
+- name: ibm-consulting-advantage--application
+  friendly_name: IBM Consulting Advantage Application
+  aliases:
+    - software applications
+    - assets
+    - packages
+    - software
+    - application
+    - consulting
+  sizes:
+    - 32
+- name: ibm-consulting-advantage--assistant
+  friendly_name: IBM Consulting Advantage Assistant
+  aliases:
+    - 'chat assistant, AI assistant, prompt based assistant'
+    - AI assistant
+    - prompt based assistant
+    - assistant
+    - chat
+    - consulting
   sizes:
     - 32
 - name: ibm-devops--control
@@ -18415,6 +18415,14 @@
     - pin filled
   sizes:
     - 32
+- name: pipelines
+  friendly_name: Pipelines
+  aliases:
+    - pipelines
+    - navigation
+    - flow
+  sizes:
+    - 32
 - name: plan
   friendly_name: Plan
   aliases:
@@ -18422,14 +18430,6 @@
     - floorplan
     - map
     - accordion document
-  sizes:
-    - 32
-- name: pipelines
-  friendly_name: Pipelines
-  aliases:
-    - pipelines
-    - navigation
-    - flow
   sizes:
     - 32
 - name: plane
