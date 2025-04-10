@@ -25,6 +25,7 @@ import deprecate from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { Text } from '../Text';
 import { TranslateWithId } from '../../types/common';
+import { clamp } from '../../internal/clamp';
 
 export const translationIds = {
   'increment.number': 'increment.number',
@@ -372,13 +373,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           getDecimalPlaces(step)
         );
         const floatValue = parseFloat(rawValue.toFixed(precision));
-        let newValue = floatValue;
-        if (typeof min !== 'undefined') {
-          newValue = Math.max(newValue, min);
-        }
-        if (typeof max !== 'undefined') {
-          newValue = Math.min(newValue, max);
-        }
+        const newValue = clamp(floatValue, min, max);
 
         const state = {
           value:
