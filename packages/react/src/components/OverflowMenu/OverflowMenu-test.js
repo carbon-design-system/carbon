@@ -26,6 +26,17 @@ describe('OverflowMenu', () => {
       expect(screen.getByRole('button')).toHaveClass('extra-class');
     });
 
+    it('should forward ref', () => {
+      const ref = React.createRef();
+      render(
+        <OverflowMenu open ref={ref} aria-label="Overflow menu">
+          <OverflowMenuItem itemText="one" />
+          <OverflowMenuItem itemText="two" />
+        </OverflowMenu>
+      );
+      expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+    });
+
     it('should spread extra props on the button element', () => {
       render(
         <OverflowMenu
