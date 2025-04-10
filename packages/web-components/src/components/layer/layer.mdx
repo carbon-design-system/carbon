@@ -36,11 +36,15 @@ import '@carbon/web-components/es/components/layer/index.js';
 
 ### HTML
 
-Here we define a custom test class to define a custom padding.
+Here we define a custom test class to define a custom padding and background using tokens, which must be imported via Sass.
 
 ```css
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+
 .example-layer-test-component {
-  padding: 1rem;
+  padding: spacing.$spacing-05;
+  background: theme.$layer;
 }
 ```
 
