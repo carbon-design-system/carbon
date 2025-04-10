@@ -498,7 +498,7 @@ const ComboBox = forwardRef(
         prevInputLengthRef.current = inputValue.length;
       }
     }, [typeahead, inputValue, items, itemToString, autocompleteCustomFilter]);
-
+    const isManualClearingRef = useRef(false);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
@@ -611,32 +611,44 @@ const ComboBox = forwardRef(
 
           case InputKeyDownEnter:
             if (!allowCustomValue) {
-              const highlightedIndex = indexToHighlight(inputValue);
-              const matchingItem = items[highlightedIndex];
+              if (state.highlightedIndex !== -1) {
+                const filteredList = filterItems(
+                  items,
+                  itemToString,
+                  inputValue
+                );
+                const highlightedItem = filteredList[state.highlightedIndex];
 
-              if (matchingItem) {
-                // Prevent matching items that are marked as `disabled` from
-                // being selected.
-                if ((matchingItem as any).disabled) {
-                  return state;
+                if (highlightedItem && !(highlightedItem as any).disabled) {
+                  return {
+                    ...changes,
+                    selectedItem: highlightedItem,
+                    inputValue: itemToString(highlightedItem),
+                  };
+                }
+              } else {
+                const autoIndex = indexToHighlight(inputValue);
+                if (autoIndex !== -1) {
+                  const matchingItem = items[autoIndex];
+
+                  if (matchingItem && !(matchingItem as any).disabled) {
+                    return {
+                      ...changes,
+                      selectedItem: matchingItem,
+                      inputValue: itemToString(matchingItem),
+                    };
+                  }
                 }
 
-                // Select the matching item.
-                return {
-                  ...changes,
-                  selectedItem: matchingItem,
-                  inputValue: itemToString(matchingItem),
-                };
-              }
-
-              // If no matching item is found and there is an existing
-              // selection, clear the selection.
-              if (state.selectedItem !== null) {
-                return {
-                  ...changes,
-                  selectedItem: null,
-                  inputValue,
-                };
+                // If no matching item is found and there is an existing
+                // selection, clear the selection.
+                if (state.selectedItem !== null) {
+                  return {
+                    ...changes,
+                    selectedItem: null,
+                    inputValue,
+                  };
+                }
               }
             }
 
@@ -817,16 +829,21 @@ const ComboBox = forwardRef(
           type,
           selectedItem: newSelectedItem,
         });
+        if (isManualClearingRef.current) {
+          return;
+        }
         if (
           type === useCombobox.stateChangeTypes.ItemClick &&
-          !isEqual(selectedItemProp, newSelectedItem)
+          !isEqual(selectedItemProp, newSelectedItem) &&
+          newSelectedItem !== undefined
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
         if (
           (type === useCombobox.stateChangeTypes.FunctionSelectItem ||
             type === useCombobox.stateChangeTypes.InputKeyDownEnter) &&
-          !isEqual(selectedItemProp, newSelectedItem) // Only fire if there's an actual change
+          !isEqual(selectedItemProp, newSelectedItem) &&
+          newSelectedItem !== undefined
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
@@ -1094,7 +1111,14 @@ const ComboBox = forwardRef(
             {inputValue && (
               <ListBoxSelection
                 clearSelection={() => {
+                  isManualClearingRef.current = true;
+                  setInputValue('');
+                  onChange({ selectedItem: null });
                   selectItem(null);
+                  setTimeout(() => {
+                    isManualClearingRef.current = false;
+                  }, 0);
+                  handleSelectionClear();
                 }}
                 translateWithId={translateWithId}
                 disabled={disabled || readOnly}

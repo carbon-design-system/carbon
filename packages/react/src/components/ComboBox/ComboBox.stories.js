@@ -15,6 +15,7 @@ import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import mdx from './ComboBox.mdx';
+import { disable } from '@carbon/feature-flags';
 
 const items = [
   {
@@ -360,6 +361,40 @@ export const withAILabel = (args) => {
 };
 
 withAILabel.argTypes = { ...sharedArgTypes };
+
+export const UndefinedChecksTesting = () => {
+  const [selectedItem, setSelectedItem] = useState('');
+  const filterItems = (menu) => {
+    return menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase());
+  };
+  return (
+    <div style={{ width: 300 }}>
+      <ComboBox
+        onChange={(event) => {
+          console.log(event);
+          setSelectedItem(event.selectedItem);
+        }}
+        selectedItem={selectedItem}
+        id="carbon-combobox"
+        items={['Apple', 'Orange', 'Banana', 'Pineapple', 'Raspberry', 'Lime']}
+        titleText="ComboBox title"
+        helperText="Combobox helper text"
+      />
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
+        {' '}
+        <Button onClick={() => setSelectedItem(null)}>Reset</Button>
+        <Button onClick={() => setSelectedItem('Apple')}>Apple</Button>
+        <Button onClick={() => setSelectedItem('Orange')}>Orange</Button>
+        <Button onClick={() => setSelectedItem('Pineapple')}>Pineapple</Button>
+      </div>
+    </div>
+  );
+};
 
 export const _fullyControlled = (args) => {
   const options = [
