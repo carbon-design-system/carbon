@@ -33,6 +33,10 @@ $css--plex: true !default;
   .#{$prefix}--btn {
     flex-grow: 1;
     max-inline-size: 100%;
+
+    &:not(:focus) {
+      box-shadow: to-rem(-1px) to-rem(-1px) 0 0 $button-separator;
+    }
   }
 }
 
@@ -114,6 +118,18 @@ $css--plex: true !default;
       &.#{$prefix}--btn--expressive {
         padding: $spacing-03;
       }
+    }
+
+    &:not(:focus) {
+      box-shadow: none;
+    }
+  }
+}
+
+:host(#{$prefix}-button[kind='danger-ghost']) {
+  .#{$prefix}--btn--danger-ghost {
+    &:not(:focus) {
+      box-shadow: none;
     }
   }
 }

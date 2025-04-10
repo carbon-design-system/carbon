@@ -1772,6 +1772,15 @@
       ]
     },
     {
+      "login": "nchevsky",
+      "name": "Nick Chevsky",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3987849?v=4",
+      "profile": "https://github.com/nchevsky",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "Tweakified",
       "name": "Daniel Smith",
       "avatar_url": "https://avatars.githubusercontent.com/u/58192912?v=4",
@@ -1787,6 +1796,15 @@
       "name": "enricobguedes",
       "avatar_url": "https://avatars.githubusercontent.com/u/45374536?v=4",
       "profile": "https://github.com/enricobguedes",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "gdelory",
+      "name": "Guillaume Delory",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9974707?v=4",
+      "profile": "https://github.com/gdelory",
       "contributions": [
         "code"
       ]

@@ -46,8 +46,8 @@ interface RefPosition {
 }
 
 export interface Offset {
-  top?: number;
-  left?: number;
+  top: number;
+  left: number;
 }
 
 interface Container {
@@ -234,7 +234,7 @@ export const FloatingMenu = ({
   flipped,
   focusTrap,
   menuDirection = DIRECTION_BOTTOM,
-  menuOffset = {},
+  menuOffset = { top: 0, left: 0 },
   menuRef: externalMenuRef,
   onPlace,
   selectorPrimaryFocus,
@@ -260,7 +260,7 @@ export const FloatingMenu = ({
 
       if (!menuBody) {
         warning(
-          menuBody,
+          !!menuBody,
           'The DOM node for menu body for calculating its position is not available. Skipping...'
         );
 
@@ -356,7 +356,7 @@ export const FloatingMenu = ({
 
     focusTarget.focus();
 
-    if (focusTarget === menuBody && __DEV__) {
+    if (focusTarget === menuBody) {
       warning(
         focusableNode === null,
         'Floating Menus must have at least a programmatically focusable child. This can be accomplished by adding tabIndex="-1" to the content element.'

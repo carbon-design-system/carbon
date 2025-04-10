@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -187,14 +185,13 @@ export const MultilineWithLayer = {
     "@babel/runtime": "^7.10.0",
     "@commitlint/cli": "^8.3.5",
 `;
-    // prettier-ignore
     return html`
-  <sb-template-layers>
-  <cds-code-snippet
-      type="multi" tooltip-content="Copy to Clipboard">${children}
-    </cds-code-snippet>
-  </sb-template-layers>
-`;
+      <sb-template-layers>
+        <cds-code-snippet type="multi" tooltip-content="Copy to Clipboard"
+          >${children}
+        </cds-code-snippet>
+      </sb-template-layers>
+    `;
   },
 };
 
@@ -229,9 +226,7 @@ export const Skeleton = {
     },
   },
   render: () => html`
-    <cds-code-snippet-skeleton
-      type="single"
-      style="margin-bottom: 8px"></cds-code-snippet-skeleton>
+    <cds-code-snippet-skeleton type="single"></cds-code-snippet-skeleton>
     <cds-code-snippet-skeleton type="multi"></cds-code-snippet-skeleton>
   `,
 };
