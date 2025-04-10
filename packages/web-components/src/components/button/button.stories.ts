@@ -153,34 +153,20 @@ export const Default = {
     type,
   }) =>
     html` <cds-button
-        button-class-name="${buttonClassName}"
-        danger-description="${dangerDescription}"
-        ?disabled="${disabled}"
-        href="${href}"
-        ?isExpressive="${isExpressive}"
-        ?isSelected="${isSelected}"
-        kind="${kind}"
-        link-role="${linkRole}"
-        size="${size}"
-        tooltip-alignment="${tooltipAlignment}"
-        tooltip-position="${tooltipPosition}"
-        type="${type}">
-        Button </cds-button
-      ><br /><br /><cds-button
-        button-class-name="${buttonClassName}"
-        danger-description="${dangerDescription}"
-        ?disabled="${disabled}"
-        href="${href}"
-        ?isExpressive="${isExpressive}"
-        ?isSelected="${isSelected}"
-        kind="${kind}"
-        link-role="${linkRole}"
-        size="${size}"
-        tooltip-alignment="${tooltipAlignment}"
-        tooltip-position="${tooltipPosition}"
-        type="${type}">
-        Button
-      </cds-button>`,
+      button-class-name="${buttonClassName}"
+      danger-description="${dangerDescription}"
+      ?disabled="${disabled}"
+      href="${href}"
+      ?isExpressive="${isExpressive}"
+      ?isSelected="${isSelected}"
+      kind="${kind}"
+      link-role="${linkRole}"
+      size="${size}"
+      tooltip-alignment="${tooltipAlignment}"
+      tooltip-position="${tooltipPosition}"
+      type="${type}">
+      Button
+    </cds-button>`,
 };
 
 export const Danger = {
