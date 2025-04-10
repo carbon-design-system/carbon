@@ -1,0 +1,74 @@
+/**
+ * Copyright IBM Corp. 2019, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { html, LitElement } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
+import HostListener from '../../globals/decorators/host-listener';
+import HostListenerMixin from '../../globals/mixins/host-listener';
+import CDSPopover from '../popover/popover';
+import { POPOVER_ALIGNMENT } from '../popover/defs';
+import '../popover/index';
+import styles from './tooltip.scss?lit';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+
+/**
+ * Definition tooltip.
+ *
+ * @element cds-definition-tooltip
+ */
+@customElement(`${prefix}-definition-tooltip`)
+class CDSDefinitionTooltip extends HostListenerMixin(LitElement) {
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  @property({ reflect: true, type: POPOVER_ALIGNMENT })
+  align = 'bottom';
+
+  /**
+   * Will auto-align Definition Tooltip. This prop is currently experimental and is subject to future changes.
+   */
+  @property({ type: Boolean, reflect: true })
+  autoalign = false;
+
+  /**
+   * Specify whether the tooltip should be open when it first renders
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'default-open' })
+  defaultOpen = false;
+
+  /**
+   * Specifies whether or not the `DefinitionTooltip` should open on hover or not
+   */
+  @property({ reflect: true, type: Boolean })
+  openOnHover = false;
+
+  connectedCallback() {
+    if (this.hasAttribute('default-open')) {
+      this.setAttribute('highContrast', '');
+    }
+  }
+
+  render() {
+    const { align } = this;
+
+    return html`
+      <cds-popover highContrast dropShadow=${false} align=${align} open>
+        <button class="${prefix}--definition-term">
+          <slot></slot>
+        </button>
+        <cds-popover-content>
+          <slot name="definition"></slot>
+        </cds-popover-content>
+      </cds-popover>
+    `;
+  }
+
+  static styles = styles;
+}
+
+export default CDSDefinitionTooltip;
