@@ -229,7 +229,8 @@ export interface OverflowMenuProps {
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * The ref to the HTML element that should receive focus when the OverflowMenu opens
+   * The ref to the overflow menu's trigger button element.
+   * @deprecated Use the standard React `ref` prop instead.
    */
   innerRef?: Ref<any>;
 }
@@ -258,6 +259,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       renderIcon: IconElement = OverflowMenuVertical,
       selectorPrimaryFocus = '[data-floating-menu-primary-focus]',
       size = 'md',
+      innerRef,
       ...other
     },
     ref
@@ -543,6 +545,9 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         })}
       </FloatingMenu>
     );
+    const combinedRef = innerRef
+      ? mergeRefs(triggerRef, innerRef, ref)
+      : mergeRefs(triggerRef, ref);
 
     return (
       <>
@@ -559,7 +564,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
             className={overflowMenuClasses}
             onClick={handleClick}
             id={id}
-            ref={mergeRefs(triggerRef, ref)}
+            ref={combinedRef}
             size={size}
             label={iconDescription}
             kind="ghost">
