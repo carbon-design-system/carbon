@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,16 +7,16 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
-import { ForwardRefReturn, ReactAttr } from '../../types/common';
+import { ForwardRefReturn } from '../../types/common';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
 type ExcludedAttributes = 'id' | 'value';
 
 export interface TimePickerProps
-  extends Omit<ReactAttr<HTMLInputElement>, ExcludedAttributes> {
+  extends Omit<HTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
   /**
    * Pass in the children that will be rendered next to the form control
    */
