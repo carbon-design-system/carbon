@@ -47,3 +47,7 @@
 .sb-definition-tooltip p {
   @include type.type-style('body-short-02');
 }
+
+.cds--tooltip-content {
+  overflow-wrap: break-word;
+}
