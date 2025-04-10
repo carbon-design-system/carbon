@@ -14,5 +14,5 @@
  *
  * @returns `val` if `max>=val>=min`; `min` if `val<min`; `max` if `val>max`.
  */
-const clamp = (value: number, min?: number, max?: number) =>
+export const clamp = (value: number, min?: number, max?: number) =>
   Math.min(max ?? Infinity, Math.max(min ?? -Infinity, value));
