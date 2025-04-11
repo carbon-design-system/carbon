@@ -11,7 +11,7 @@ import remarkGfm from 'remark-gfm';
 import fs from 'fs';
 import glob from 'fast-glob';
 import path from 'path';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import react from '@vitejs/plugin-react';
 
 // We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
 // MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
@@ -25,6 +25,9 @@ const storyGlobs = [
   '../src/**/next/*.mdx',
   '../src/**/*-story.js',
 ];
+
+const getAbsolutePath = (packageName) =>
+  path.dirname(require.resolve(path.join(packageName, 'package.json')));
 
 const stories = glob
   .sync(storyGlobs, {
@@ -65,6 +68,7 @@ const stories = glob
     }
     return true;
   });
+
 const config = {
   addons: [
     {
@@ -73,13 +77,12 @@ const config = {
         actions: true,
         backgrounds: false,
         controls: true,
-        docs: true,
+        docs: false,
         toolbars: true,
         viewport: true,
       },
     },
     '@storybook/addon-storysource',
-    '@storybook/addon-webpack5-compiler-babel',
     /**
      * For now, the storybook-addon-accessibility-checker fork replaces the @storybook/addon-a11y.
      * Eventually they plan to attempt to get this back into the root addon with the storybook team.
@@ -98,80 +101,63 @@ const config = {
       },
     },
   ],
+  core: {
+    builder: '@storybook/builder-vite',
+  },
   features: {
     previewCsfV3: true,
     buildStoriesJson: true,
   },
   framework: {
-    name: '@storybook/react-webpack5',
+    name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
   stories,
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
+  async viteFinal(config) {
+    // Merge custom configuration into the default config
+    const { mergeConfig } = await import('vite');
 
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.s?css$/,
-      sideEffects: true,
-      use: [
-        {
-          loader:
-            process.env.NODE_ENV === 'production'
-              ? MiniCssExtractPlugin.loader
-              : 'style-loader',
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 2,
-            sourceMap: true,
+    return mergeConfig(config, {
+      // Add dependencies to pre-optimization
+      define: {
+        __DEV__: JSON.stringify(process.env.NODE_ENV === 'development'),
+      },
+      esbuild: {
+        include: /\.[jt]sx?$/,
+        exclude: [],
+        loader: 'tsx',
+      },
+      optimizeDeps: {
+        esbuildOptions: {
+          loader: {
+            '.js': 'jsx',
           },
         },
-        {
-          loader: 'postcss-loader',
-          options: {
-            postcssOptions: {
-              plugins: [
-                require('autoprefixer')({
-                  overrideBrowserslist: ['last 1 version'],
-                }),
-              ],
-            },
-            sourceMap: true,
-          },
-        },
-        {
-          loader: 'sass-loader',
-          options: {
-            implementation: require('sass'),
-            sassOptions: {
-              includePaths: [
-                path.resolve(__dirname, '..', 'node_modules'),
-                path.resolve(__dirname, '..', '..', '..', 'node_modules'),
-              ],
-              // quietDeps: true,
-            },
-            warnRuleAsWarning: true,
-            sourceMap: true,
-          },
-        },
+      },
+      plugins: [
+        react({
+          // babel: {
+          // presets: ['babel-preset-carbon'],
+          // This instructs Vite to use Babel for the necessary transforms,
+          // babelrc: true,
+          // configFile: true,
+          // },
+        }),
       ],
+      resolve: {
+        preserveSymlinks: true,
+      },
     });
-    if (process.env.NODE_ENV === 'production') {
-      config.plugins.push(
-        new MiniCssExtractPlugin({
-          filename: '[name].[contenthash].css',
-        })
-      );
-    }
-    return config;
   },
+
   docs: {
     autodocs: true,
     defaultName: 'Overview',
   },
+  logLevel: 'debug',
 };
 
 export default config;
