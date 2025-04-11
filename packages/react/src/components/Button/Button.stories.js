@@ -130,7 +130,7 @@ export const Ghost = (args) => {
 
 export const IconButton = (args) => (
   <Button
-    renderIcon={Add}
+    renderIcon={() => <Add size="1rem" />}
     iconDescription="Icon Description"
     hasIconOnly
     onClick={action('onClick')}
@@ -147,7 +147,7 @@ export const IconButtonWithBadge = (args) => {
       size="lg"
       badgeCount={badgeCount}
       hasIconOnly
-      renderIcon={Notification}
+      renderIcon={() => <Notification size="1rem" />}
       iconDescription="Notification"
       onClick={action('onClick')}
       autoAlign

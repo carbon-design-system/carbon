@@ -67,7 +67,7 @@ export const ExperimentalAutoAlign = () => {
         <ToggletipLabel>Toggletip label</ToggletipLabel>
         <Toggletip align="bottom" autoAlign defaultOpen>
           <ToggletipButton label="Show information">
-            <Information ref={ref} />
+            <Information size="1rem" ref={ref} />
           </ToggletipButton>
           <ToggletipContent>
             <p>
@@ -95,7 +95,7 @@ export const Default = (args) => {
       <ToggletipLabel>Toggletip label</ToggletipLabel>
       <Toggletip autoAlign {...args}>
         <ToggletipButton label="Show information">
-          <Information />
+          <Information size="1rem" />
         </ToggletipButton>
         <ToggletipContent>
           <p>

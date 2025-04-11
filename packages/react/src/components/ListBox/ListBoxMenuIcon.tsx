@@ -48,7 +48,7 @@ const ListBoxMenuIcon: ListBoxMenuIconComponent = ({
   const description = isOpen ? t('close.menu') : t('open.menu');
   return (
     <div className={className}>
-      <ChevronDown name="chevron--down" aria-label={description}>
+      <ChevronDown name="chevron--down" aria-label={description} size="1rem">
         <title>{description}</title>
       </ChevronDown>
     </div>

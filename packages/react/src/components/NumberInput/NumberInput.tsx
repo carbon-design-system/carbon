@@ -501,7 +501,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   tabIndex={-1}
                   title={decrementNumLabel || iconDescription}
                   type="button">
-                  <Subtract className="down-icon" />
+                  <Subtract size="1rem" className="down-icon" />
                 </button>
                 <div className={`${prefix}--number__rule-divider`} />
                 <button
@@ -512,7 +512,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   tabIndex={-1}
                   title={incrementNumLabel || iconDescription}
                   type="button">
-                  <Add className="up-icon" />
+                  <Add size="1rem" className="up-icon" />
                 </button>
                 <div className={`${prefix}--number__rule-divider`} />
               </div>

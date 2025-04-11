@@ -307,7 +307,7 @@ const Select = React.forwardRef(function Select(
           ref={ref}>
           {children}
         </select>
-        <ChevronDown className={`${prefix}--select__arrow`} />
+        <ChevronDown className={`${prefix}--select__arrow`} size="1rem" />
         {invalid && (
           <WarningFilled className={`${prefix}--select__invalid-icon`} />
         )}

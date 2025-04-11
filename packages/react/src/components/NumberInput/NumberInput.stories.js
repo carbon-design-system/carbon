@@ -127,13 +127,13 @@ export const withAILabel = (args) => {
         </div>
         <AILabelActions>
           <IconButton kind="ghost" label="View">
-            <View />
+            <View size="1rem" />
           </IconButton>
           <IconButton kind="ghost" label="Open Folder">
-            <FolderOpen />
+            <FolderOpen size="1rem" />
           </IconButton>
           <IconButton kind="ghost" label="Folders">
-            <Folders />
+            <Folders size="1rem" />
           </IconButton>
           <Button>View details</Button>
         </AILabelActions>

@@ -59,7 +59,7 @@ export const Default = (args) => {
   return (
     <Tooltip autoAlign label={label} closeOnActivation={false} {...args}>
       <button className="sb-tooltip-trigger" type="button">
-        <Help />
+        <Help size="1rem" />
       </button>
     </Tooltip>
   );

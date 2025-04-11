@@ -226,7 +226,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           onClick={handleTriggerClick}
           onMouseDown={handleTriggerMousedown}
           aria-controls={open ? id : undefined}>
-          <ChevronDown />
+          <ChevronDown size="1rem" />
         </IconButton>
         <Menu
           containerRef={containerRef}

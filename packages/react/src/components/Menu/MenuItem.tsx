@@ -244,7 +244,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           onKeyDown={handleKeyDown}
           {...getReferenceProps()}>
           <div className={`${prefix}--menu-item__selection-icon`}>
-            {rest['aria-checked'] && <Checkmark />}
+            {rest['aria-checked'] && <Checkmark size="1rem" />}
           </div>
           <div className={`${prefix}--menu-item__icon`}>
             {IconElement && <IconElement />}
@@ -261,7 +261,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           {hasChildren && (
             <>
               <div className={`${prefix}--menu-item__shortcut`}>
-                {rtl ? <CaretLeft /> : <CaretRight />}
+                {rtl ? <CaretLeft size="1rem" /> : <CaretRight size="1rem" />}
               </div>
               <Menu
                 label={label}

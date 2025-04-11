@@ -41,7 +41,7 @@ export const Default = (args) => {
   return (
     <div style={{ margin: '3rem' }}>
       <IconButton {...args}>
-        <Edit />
+        <Edit size="1rem" />
       </IconButton>
     </div>
   );
