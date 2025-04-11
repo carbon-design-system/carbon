@@ -27,6 +27,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import deprecate from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
+import { noopFn } from '../../internal/noopFn';
 
 type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
 export interface SearchProps extends InputPropsBase {
@@ -186,25 +187,29 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
       inputRef.current.value = '';
     }
 
-    const syntheticEvent: ChangeEvent<HTMLInputElement> = {
-      target: inputRef.current as HTMLInputElement,
-      currentTarget: inputRef.current as HTMLInputElement,
-      bubbles: false,
-      cancelable: false,
-      defaultPrevented: false,
-      eventPhase: 0,
-      isTrusted: false,
-      nativeEvent: {} as Event,
-      persist: () => {},
-      preventDefault: () => {},
-      isDefaultPrevented: () => false,
-      stopPropagation: () => {},
-      isPropagationStopped: () => false,
-      timeStamp: Date.now(),
-      type: 'change',
-    };
+    if (inputRef.current) {
+      const inputTarget = Object.assign({}, inputRef.current, { value: '' });
+      const syntheticEvent: ChangeEvent<HTMLInputElement> = {
+        bubbles: false,
+        cancelable: false,
+        currentTarget: inputRef.current,
+        defaultPrevented: false,
+        eventPhase: 0,
+        isDefaultPrevented: () => false,
+        isPropagationStopped: () => false,
+        isTrusted: false,
+        nativeEvent: new Event('change'),
+        persist: noopFn,
+        preventDefault: noopFn,
+        stopPropagation: noopFn,
+        target: inputTarget,
+        timeStamp: 0,
+        type: 'change',
+      };
 
-    onChange(syntheticEvent);
+      onChange(syntheticEvent);
+    }
+
     onClear();
     setHasContent(false);
     inputRef.current?.focus();
