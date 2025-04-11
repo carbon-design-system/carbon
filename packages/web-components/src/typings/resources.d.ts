@@ -1,4 +1,3 @@
-import type { JSX } from 'react';
 /**
  * Copyright IBM Corp. 2019, 2021
  *
