@@ -11,7 +11,6 @@ import React, {
   useLayoutEffect,
   useState,
   useRef,
-  isValidElement,
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -281,17 +280,21 @@ const PageHeaderContentPageActions = React.forwardRef<
   );
   const containerRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef<HTMLDivElement>(null);
+  const [menuButtonVisibility, setMenuButtonVisibility] = useState(false);
   const [hiddenItems, setHiddenItems] = useState<any[]>([]);
 
+  // need to set the grid columns width based on the menu button's width
+  // to avoid overlapping when resizing
   useLayoutEffect(() => {
-    if (offsetRef.current) {
+    if (menuButtonVisibility && offsetRef.current) {
+      console.log('hello');
       const width = offsetRef.current.offsetWidth;
       document.documentElement.style.setProperty(
         '--pageheader-title-grid-width',
         `${width}px`
       );
     }
-  }, [hiddenItems]);
+  }, [menuButtonVisibility]);
 
   useEffect(() => {
     if (!containerRef.current || !Array.isArray(pageActions)) return;
@@ -299,8 +302,12 @@ const PageHeaderContentPageActions = React.forwardRef<
       container: containerRef.current,
       // exclude the hidden menu button from children
       maxVisibleItems: containerRef.current.children.length - 1,
-      onChange: (visible, _) => {
+      onChange: (visible, hidden) => {
         setHiddenItems(pageActions?.slice(visible.length));
+
+        if (hidden.length > 0) {
+          setMenuButtonVisibility(true);
+        }
       },
     });
   }, []);
@@ -309,7 +316,6 @@ const PageHeaderContentPageActions = React.forwardRef<
     <div className={classNames} ref={containerRef}>
       {pageActions && (
         <>
-          {isValidElement(pageActions) && pageActions}
           {Array.isArray(pageActions) && (
             <>
               {pageActions.map((action) => (
