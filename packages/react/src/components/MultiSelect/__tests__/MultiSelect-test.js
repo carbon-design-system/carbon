@@ -952,4 +952,117 @@ describe('MultiSelect', () => {
 
     expect(label).not.toHaveAttribute('id');
   });
+
+  it('should show indeterminate state after adding new items when all items were previously selected', async () => {
+    // Initial test items with "select all" option
+    const initialItems = [
+      {
+        id: 'downshift-1-item-0',
+        text: 'Editor',
+      },
+      {
+        id: 'downshift-1-item-1',
+        text: 'Owner',
+      },
+      {
+        id: 'downshift-1-item-2',
+        text: 'Uploader',
+      },
+      {
+        id: 'select-all',
+        text: 'All roles',
+        isSelectAll: true,
+      },
+    ];
+
+    // Setup the test component
+    const TestComponent = () => {
+      const [items, setItems] = useState(initialItems);
+
+      function addItems() {
+        setItems((prevItems) => {
+          const now = Date.now();
+          return [
+            ...prevItems,
+            {
+              id: `item-added-via-button-1${now}`,
+              text: `item-added-via-button-1${now}`,
+            },
+            {
+              id: `item-added-via-button-2${now}`,
+              text: `item-added-via-button-2${now}`,
+            },
+          ];
+        });
+      }
+
+      return (
+        <>
+          <MultiSelect
+            id="test-multiselect"
+            titleText="Multiselect title"
+            label="test-label"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+          />
+          <Button id="add-items" onClick={addItems}>
+            Add Items
+          </Button>
+        </>
+      );
+    };
+
+    render(<TestComponent />);
+    await waitForPosition();
+
+    // Open the dropdown
+    const labelNode = screen.getByRole('combobox');
+    await userEvent.click(labelNode);
+
+    // Click the "All roles" option to select all items
+    await userEvent.click(screen.getByText('All roles'));
+
+    // Verify all options are selected
+    const initialOptions = screen.getAllByRole('option');
+    initialOptions.forEach((option) => {
+      expect(option).toHaveAttribute('aria-selected', 'true');
+    });
+
+    // Close the dropdown
+    await userEvent.click(document.body);
+
+    // Add new items
+    await userEvent.click(screen.getByText('Add Items'));
+
+    // Open the dropdown again
+    await userEvent.click(labelNode);
+
+    // Get the "Select All" checkbox element
+    const selectAllOption = screen.getByText('All roles').closest('li');
+    const selectAllCheckbox = selectAllOption.querySelector(
+      'input[type="checkbox"]'
+    );
+
+    // Verify the "Select All" checkbox is in an indeterminate state
+    expect(selectAllCheckbox).toHaveProperty('indeterminate', true);
+
+    // Verify only original items are selected, not the new ones
+    const updatedOptions = screen.getAllByRole('option');
+    expect(updatedOptions.length).toBe(initialOptions.length + 2); // 2 new items added
+
+    // First items should be selected (original items)
+    initialOptions.forEach((option) => {
+      expect(option).toHaveAttribute('aria-selected', 'true');
+    });
+
+    // Last two items should not be selected (new items)
+    expect(updatedOptions[updatedOptions.length - 2]).toHaveAttribute(
+      'aria-selected',
+      'false'
+    );
+    expect(updatedOptions[updatedOptions.length - 1]).toHaveAttribute(
+      'aria-selected',
+      'false'
+    );
+  });
 });

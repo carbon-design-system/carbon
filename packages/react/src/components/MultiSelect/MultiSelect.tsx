@@ -822,9 +822,15 @@ const MultiSelect = React.forwardRef(
                     .length > 0;
 
                 const isIndeterminate =
-                  selectedItems.length !== 0 &&
                   item['isSelectAll'] &&
-                  !isChecked;
+                  selectedItems.some(
+                    (selected: any) => !selected.isSelectAll
+                  ) &&
+                  selectedItems.filter((selected: any) => !selected.isSelectAll)
+                    .length <
+                    filteredItems.filter(
+                      (item: any) => !item.isSelectAll && !item.disabled
+                    ).length;
 
                 const itemProps = getItemProps({
                   item,
