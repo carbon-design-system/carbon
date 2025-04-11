@@ -12,12 +12,13 @@ import React, {
   useContext,
   useRef,
   useState,
-  type HTMLAttributes,
-  type ReactNode,
-  type KeyboardEvent,
+  type ChangeEvent,
   type ComponentType,
   type FunctionComponent,
+  type HTMLAttributes,
+  type KeyboardEvent,
   type MouseEvent,
+  type ReactNode,
 } from 'react';
 import { keys, match } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
@@ -73,7 +74,7 @@ export interface SearchProps extends InputPropsBase {
   /**
    * Optional callback called when the search value changes.
    */
-  onChange?(e: { target: HTMLInputElement; type: 'change' }): void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 
   /**
    * Optional callback called when the search value is cleared.
@@ -185,20 +186,35 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
       inputRef.current.value = '';
     }
 
-    const inputTarget = Object.assign({}, inputRef.current, { value: '' });
-    const clearedEvt = { target: inputTarget, type: 'change' } as const;
+    const syntheticEvent: ChangeEvent<HTMLInputElement> = {
+      target: inputRef.current as HTMLInputElement,
+      currentTarget: inputRef.current as HTMLInputElement,
+      bubbles: false,
+      cancelable: false,
+      defaultPrevented: false,
+      eventPhase: 0,
+      isTrusted: false,
+      nativeEvent: {} as Event,
+      persist: () => {},
+      preventDefault: () => {},
+      isDefaultPrevented: () => false,
+      stopPropagation: () => {},
+      isPropagationStopped: () => false,
+      timeStamp: Date.now(),
+      type: 'change',
+    };
 
-    onChange(clearedEvt);
+    onChange(syntheticEvent);
     onClear();
     setHasContent(false);
     inputRef.current?.focus();
   }
 
-  function handleChange(event) {
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setHasContent(event.target.value !== '');
   }
 
-  function handleKeyDown(event: KeyboardEvent) {
+  function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (match(event, keys.Escape)) {
       event.stopPropagation();
       if (inputRef.current?.value) {
