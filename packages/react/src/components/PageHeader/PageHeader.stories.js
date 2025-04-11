@@ -5,12 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
+import { Add } from '@carbon/icons-react';
 import { unstable__PageHeader as PageHeader } from '../../';
 import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
   PageHeaderTabBar,
+  PageHeaderContentText,
   PageHeaderHeroImage,
 } from '../PageHeader';
 import { Dropdown } from '../Dropdown';
@@ -78,7 +80,8 @@ export default {
     PageHeaderHeroImage,
     PageHeaderTabBar,
   },
-  includeStories: [],
+  // uncomment includeStories before merging so the stories aren't visible in prod
+  // includeStories: [],
   argTypes: {
     children: {
       control: false, // ReactNode props don't work in the controls pane
@@ -112,10 +115,12 @@ export const Content = (args) => (
       title="Page header content title with an extra long title that turns into a definition tooltip that creates a title with an ellipsis."
       subtitle="Subtitle"
       {...args}>
-      Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-      Massa elementum class enim malesuada lacinia hendrerit enim erat
-      pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-      Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+      <PageHeader.ContentText>
+        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+        Massa elementum class enim malesuada lacinia hendrerit enim erat
+        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+      </PageHeader.ContentText>
     </PageHeader.Content>
     <PageHeader.TabBar />
   </PageHeader.Root>
@@ -129,10 +134,12 @@ export const ContentWithIcon = (args) => (
       subtitle="Subtitle"
       renderIcon={BeeIcon}
       {...args}>
-      Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-      Massa elementum class enim malesuada lacinia hendrerit enim erat
-      pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-      Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+      <PageHeader.ContentText>
+        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+        Massa elementum class enim malesuada lacinia hendrerit enim erat
+        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+      </PageHeader.ContentText>
     </PageHeader.Content>
     <PageHeader.TabBar />
   </PageHeader.Root>
@@ -162,9 +169,12 @@ export const ContentWithContextualActions = (args) => (
         </>
       }
       {...args}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
+      <PageHeader.ContentText>
+        Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
+        Massa elementum class enim malesuada lacinia hendrerit enim erat
+        pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
+        Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
+      </PageHeader.ContentText>
     </PageHeader.Content>
     <PageHeader.TabBar />
   </PageHeader.Root>
@@ -181,10 +191,12 @@ export const ContentWithHeroImage = (args) => (
               title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
               subtitle="Subtitle"
               {...args}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex.
+              <PageHeader.ContentText>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex.
+              </PageHeader.ContentText>
             </PageHeader.Content>
           </Column>
           <Column lg={8} md={4} sm={0}>
@@ -192,11 +204,11 @@ export const ContentWithHeroImage = (args) => (
               <picture>
                 <source
                   srcset={image1}
-                  media={`(min-width: ${breakpoints.lg.width}`}
+                  media={`(min-width: ${breakpoints.lg.width})`}
                 />
                 <source
                   srcset={image2}
-                  media={`(max-width: ${breakpoints.lg.width}`}
+                  media={`(max-width: ${breakpoints.lg.width})`}
                 />
                 <img
                   src={image1}
@@ -229,6 +241,94 @@ ContentWithHeroImage.decorators = [
   ),
 ];
 
+const pageActionItems = (
+  <>
+    <ContentSwitcher onChange={() => {}}>
+      <IconSwitch name="one" text="Table of Contents">
+        <TableOfContents />
+      </IconSwitch>
+      <IconSwitch name="two" text="Workspace Test">
+        <Workspace />
+      </IconSwitch>
+      <IconSwitch name="three" text="View Mode">
+        <ViewMode_2 />
+      </IconSwitch>
+    </ContentSwitcher>
+    <Button kind="primary" renderIcon={Add} size="md">
+      Primary action
+    </Button>
+  </>
+);
+
+const pageActionButtonItems = [
+  {
+    id: 'action1',
+    label: 'action 1',
+    onClick: () => console.log(`Action 1`),
+    body: (
+      <Button
+        renderIcon={AiGenerate}
+        iconDescription="Icon Description 1"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+  },
+  {
+    id: 'action2',
+    label: 'action 2',
+    onClick: () => console.log(`Action 2`),
+    body: (
+      <Button
+        renderIcon={Activity}
+        iconDescription="Icon Description 2"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+  },
+  {
+    id: 'action3',
+    label: 'action 3',
+    onClick: () => console.log(`Action 3`),
+    body: (
+      <Button
+        renderIcon={Activity}
+        iconDescription="Icon Description 3"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+  },
+  {
+    id: 'action4',
+    label: 'action 4',
+    onClick: () => console.log(`Action 4`),
+    body: (
+      <Button
+        renderIcon={Activity}
+        iconDescription="Icon Description 4"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+  },
+  {
+    id: 'primary-action',
+    label: 'Primary action',
+    onClick: () => console.log(`Primary action`),
+    body: (
+      <Button kind="primary" renderIcon={Add} size="md">
+        Primary action
+      </Button>
+    ),
+  },
+];
+
 export const ContentWithContextualActionsAndPageActions = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar />
@@ -253,27 +353,16 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
         </>
       }
       pageActions={
-        <>
-          <ContentSwitcher onChange={() => {}}>
-            <IconSwitch name="one" text="Table of Contents">
-              <TableOfContents />
-            </IconSwitch>
-            <IconSwitch name="two" text="Workspace Test">
-              <Workspace />
-            </IconSwitch>
-            <IconSwitch name="three" text="View Mode">
-              <ViewMode_2 />
-            </IconSwitch>
-          </ContentSwitcher>
-          <Button kind="primary" size="md">
-            Button
-          </Button>
-        </>
+        <PageHeader.ContentPageActions
+          menuButtonLabel="Actions"
+          pageActions={pageActionButtonItems}></PageHeader.ContentPageActions>
       }
       {...args}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
+      <PageHeader.ContentText>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
+      </PageHeader.ContentText>
     </PageHeader.Content>
     <PageHeader.TabBar />
   </PageHeader.Root>
