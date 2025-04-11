@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,13 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { type MouseEventHandler, useRef, ReactNode } from 'react';
+import React, {
+  cloneElement,
+  useRef,
+  type MouseEventHandler,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
 import {
   ArrowUp as Arrow,
   ArrowsVertical as Arrows,
@@ -18,6 +24,7 @@ import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { TranslateWithId, ReactAttr } from '../../types/common';
 import { DataTableSortState } from './state/sortStates';
+import { AILabel } from '../AILabel';
 
 const defaultScope = 'col';
 
@@ -156,21 +163,14 @@ const TableHeader = React.forwardRef(function TableHeader(
   const AILableRef = useRef<HTMLInputElement>(null);
 
   let colHasAILabel;
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
-    : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
+  const candidate = slug ?? decorator;
+  let normalizedDecorator = React.isValidElement(candidate) ? candidate : null;
+  if (normalizedDecorator?.type === AILabel) {
     colHasAILabel = true;
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'mini',
-        ref: AILableRef,
-      }
-    );
+    normalizedDecorator = cloneElement(normalizedDecorator as ReactElement, {
+      size: 'mini',
+      ref: AILableRef,
+    });
   }
 
   const headerLabelClassNames = classNames({
