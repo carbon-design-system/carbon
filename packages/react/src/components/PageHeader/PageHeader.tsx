@@ -287,7 +287,6 @@ const PageHeaderContentPageActions = React.forwardRef<
   // to avoid overlapping when resizing
   useLayoutEffect(() => {
     if (menuButtonVisibility && offsetRef.current) {
-      console.log('hello');
       const width = offsetRef.current.offsetWidth;
       document.documentElement.style.setProperty(
         '--pageheader-title-grid-width',
