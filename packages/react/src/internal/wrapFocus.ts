@@ -7,13 +7,25 @@
 
 import { useEffect } from 'react';
 import { tabbable } from 'tabbable';
-import {
-  // TODO: Should the `DOCUMENT` constants be put into this file since they are
-  // only used here?
-  DOCUMENT_POSITION_BROAD_FOLLOWING,
-  DOCUMENT_POSITION_BROAD_PRECEDING,
-  selectorTabbable,
-} from './keyboard/navigation';
+import { selectorTabbable } from './keyboard/navigation';
+
+/**
+ * A flag `node.compareDocumentPosition(target)` returns that indicates
+ * `target` is located earlier than `node` in the document or `target` contains `node`.
+ */
+const DOCUMENT_POSITION_BROAD_PRECEDING =
+  typeof Node !== 'undefined'
+    ? Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS
+    : 0;
+
+/**
+ * A flag `node.compareDocumentPosition(target)` returns that indicates
+ * `target` is located later than `node` in the document or `node` contains `target`.
+ */
+const DOCUMENT_POSITION_BROAD_FOLLOWING =
+  typeof Node !== 'undefined'
+    ? Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY
+    : 0;
 
 /**
  * Checks whether the given node or one of its ancestors matches any of the
@@ -131,20 +143,16 @@ export const wrapFocusWithoutSentinels = ({
 }) => {
   if (!containerNode) return;
 
-  if (
-    ['blur', 'focusout', 'focusin', 'focus'].includes(event.type) &&
-    process.env.NODE_ENV !== 'production'
-  ) {
-    // TODO: Why do the hooks rules need to be ignored here? Is it not possible
-    // to put the condition in the `useEffect` instead of outside of it?
-    //
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
+  useEffect(() => {
+    if (
+      ['blur', 'focusout', 'focusin', 'focus'].includes(event.type) &&
+      process.env.NODE_ENV !== 'production'
+    ) {
       throw new Error(
         `Error: wrapFocusWithoutSentinels(...) called in unsupported ${event.type} event.\n\nCall wrapFocusWithoutSentinels(...) from onKeyDown instead.`
       );
-    }, []);
-  }
+    }
+  }, []);
 
   // Use `tabbable` to get the focusable elements in tab order.
   // `selectorTabbable` returns elements in DOM order which is why it's not
