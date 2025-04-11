@@ -172,6 +172,13 @@ const Button: ButtonComponent = React.forwardRef(
       ...rest
     } = props;
 
+    if (ButtonImageElement && !children && !iconDescription) {
+      console.error(
+        'Button: renderIcon property specified without also providing an iconDescription property. ' +
+          'This may impact accessibility for screen reader users.'
+      );
+    }
+
     const handleClick = (evt: React.MouseEvent) => {
       // Prevent clicks on the tooltip from triggering the button click event
       if (evt.target === tooltipRef.current) {

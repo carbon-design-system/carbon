@@ -12,6 +12,7 @@ import { default as TreeView, TreeNode } from './';
 import { Button } from '../Button/index';
 import mdx from './TreeView.mdx';
 import './story.scss';
+import TextInput from '../TextInput';
 
 function renderTree({ nodes, expanded, withIcons = false, withLinks = false }) {
   if (!nodes) {

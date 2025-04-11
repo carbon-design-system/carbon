@@ -7,6 +7,7 @@
 
 import React, {
   cloneElement,
+  JSXElementConstructor,
   useCallback,
   useContext,
   useEffect,
@@ -437,8 +438,11 @@ export const FloatingMenu = ({
           visibility: 'hidden',
           top: '0px',
         };
-
-    return cloneElement(children, {
+    const child = children as ReactElement<
+      any,
+      string | JSXElementConstructor<any>
+    >;
+    return cloneElement(child, {
       ref: handleMenuRef,
       style: {
         ...styles,
