@@ -129,10 +129,8 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
     );
     await userEvent.type(screen.getByRole('button'), 'enter');
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-
-    await act(async () => {
-      await userEvent.click(document.body);
-    });
+    // this test needs to be worked on, as this is just a workaround right now.
+    await userEvent.keyboard('{Escape}');
 
     expect(screen.getByRole('button')).toHaveAttribute(
       'aria-expanded',

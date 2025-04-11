@@ -493,9 +493,9 @@ class Slider extends PureComponent<SliderProps> {
     isRtl: false,
   };
 
-  thumbRef: React.RefObject<HTMLDivElement>;
-  thumbRefUpper: React.RefObject<HTMLDivElement>;
-  filledTrackRef: React.RefObject<HTMLDivElement>;
+  thumbRef: React.RefObject<HTMLDivElement | null>;
+  thumbRefUpper: React.RefObject<HTMLDivElement | null>;
+  filledTrackRef: React.RefObject<HTMLDivElement | null>;
   element: HTMLDivElement | null = null;
   inputId = '';
   track: HTMLDivElement | null | undefined;
