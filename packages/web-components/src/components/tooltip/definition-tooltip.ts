@@ -6,11 +6,11 @@
  */
 
 import { html, LitElement } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import CDSPopover from '../popover/popover';
+// import CDSPopover from '../popover/popover';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../popover/index';
 import styles from './tooltip.scss?lit';
@@ -44,21 +44,67 @@ class CDSDefinitionTooltip extends HostListenerMixin(LitElement) {
   /**
    * Specifies whether or not the `DefinitionTooltip` should open on hover or not
    */
-  @property({ reflect: true, type: Boolean })
+  @property({ reflect: true, type: Boolean, attribute: 'open-on-hover' })
   openOnHover = false;
 
+  @state()
+  open = false;
+
   connectedCallback() {
+    super.connectedCallback();
+
     if (this.hasAttribute('default-open')) {
-      this.setAttribute('highContrast', '');
+      this.open = true;
     }
   }
 
+  _handleBlur() {
+    this.open = false;
+  }
+
+  _handleMouseDown() {
+    this.open = !this.open;
+  }
+
+  _handleKeyDown(event: KeyboardEvent) {
+    const { key } = event;
+
+    if (this.open && (key === 'Esc' || key === 'Escape')) {
+      event.stopPropagation();
+      this.open = false;
+    }
+  }
+
+  _handleHover() {
+    if (this.openOnHover && !this.open) {
+      this.open = true;
+    } else {
+      this.open = false;
+    }
+  }
+
+  _handleFocus() {
+    this.open = true;
+  }
+
   render() {
-    const { align } = this;
+    const { align, open } = this;
 
     return html`
-      <cds-popover highContrast dropShadow=${false} align=${align} open>
-        <button class="${prefix}--definition-term">
+      <cds-popover
+        @mouseenter=${this._handleHover}
+        @mouseleave=${this._handleHover}
+        highContrast
+        dropShadow=${false}
+        align=${align}
+        .open=${open}>
+        <button
+          @focus=${this._handleFocus}
+          @blur=${this._handleBlur}
+          @mousedown=${this._handleMouseDown}
+          @keydown=${this._handleKeyDown}
+          aria-expanded=${open}
+          class="${prefix}--definition-term">
           <slot></slot>
         </button>
         <cds-popover-content>
