@@ -1,13 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
-import type { MouseEvent } from 'react';
+import React, { type MouseEvent } from 'react';
 import isEqual from 'react-fast-compare';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
 import { getNextSortState } from './state/sorting';
@@ -159,7 +158,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     [key: string]: unknown;
   };
   getSelectionProps: (getSelectionPropsArgs?: {
-    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    onClick?: (e: MouseEvent<HTMLInputElement, globalThis.MouseEvent>) => void;
     row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
@@ -621,18 +620,17 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
    * Gets the props associated with selection for a header or a row, where
    * applicable. Most often used to indicate selection status of the table or
    * for a specific row.
-   *
-   * @param {object} [row] an optional row that we want to access the props for
-   * @param {Function} row.onClick
-   * @param {object} row.row
-   * @returns {object}
    */
   getSelectionProps = (
-    { onClick, row, ...rest } = {} as {
-      onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-      row: DataTableRow<ColTypes>;
-      [key: string]: unknown;
-    }
+    // TODO: `row` is required per the type definition. Why does the default
+    // value not include it? The fact that it lacks it makes it seem like it's
+    // unnecessary. Further, there's an `if` statement that checks for it below.
+    // Again, why is that necessary if it's required?
+    { onClick, row, ...rest } = {} as NonNullable<
+      Parameters<
+        DataTableRenderProps<RowType, ColTypes>['getSelectionProps']
+      >[0]
+    >
   ) => {
     const { translateWithId: t = translateWithId } = this.props;
 
