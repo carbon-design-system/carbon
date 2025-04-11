@@ -352,7 +352,11 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
           </Tag>
         </>
       }
-      pageActions={pageActionButtonItems}
+      pageActions={
+        <PageHeader.ContentPageActions
+          menuButtonLabel="Actions"
+          pageActions={pageActionButtonItems}></PageHeader.ContentPageActions>
+      }
       {...args}>
       <PageHeader.ContentText>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

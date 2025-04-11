@@ -119,10 +119,6 @@ interface PageHeaderContentProps {
    * The PageHeaderContent's page actions
    */
   pageActions?: React.ReactNode;
-  /**
-   *  The PageHeaderContent's page actions collabpsible Menu button label
-   */
-  menuButtonLabel?: string;
 }
 const PageHeaderContent = React.forwardRef<
   HTMLDivElement,
@@ -136,7 +132,6 @@ const PageHeaderContent = React.forwardRef<
     renderIcon: IconElement,
     contextualActions,
     pageActions,
-    menuButtonLabel = 'Menu button',
     ...other
   }: PageHeaderContentProps,
   ref
@@ -149,10 +144,7 @@ const PageHeaderContent = React.forwardRef<
     className
   );
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const offsetRef = useRef<HTMLDivElement>(null);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
-  const [hiddenItems, setHiddenItems] = useState<any[]>([]);
 
   const isEllipsisActive = (element: HTMLHeadingElement) => {
     setIsEllipsisApplied(element.offsetHeight < element.scrollHeight);
@@ -160,30 +152,8 @@ const PageHeaderContent = React.forwardRef<
   };
 
   useLayoutEffect(() => {
-    if (offsetRef.current) {
-      const width = offsetRef.current.offsetWidth;
-      document.documentElement.style.setProperty(
-        '--pageheader-title-grid-width',
-        `${width}px`
-      );
-    }
-  }, [hiddenItems]);
-
-  useLayoutEffect(() => {
     titleRef.current && isEllipsisActive(titleRef.current);
   }, [title]);
-
-  useEffect(() => {
-    if (!containerRef.current || !Array.isArray(pageActions)) return;
-    createOverflowHandler({
-      container: containerRef.current,
-      // exclude the hidden menu button from children
-      maxVisibleItems: containerRef.current.children.length - 1,
-      onChange: (visible, _) => {
-        setHiddenItems(pageActions?.slice(visible.length));
-      },
-    });
-  }, []);
 
   return (
     <div className={classNames} ref={ref} {...other}>
@@ -221,44 +191,7 @@ const PageHeaderContent = React.forwardRef<
             </div>
           )}
         </div>
-        {pageActions && (
-          <div
-            className={`${prefix}--page-header__content__page-actions`}
-            ref={containerRef}>
-            {pageActions && (
-              <>
-                {isValidElement(pageActions) && pageActions}
-                {Array.isArray(pageActions) && (
-                  <>
-                    {pageActions.map((action) => (
-                      <div key={action.id} className="action">
-                        {action.body}
-                      </div>
-                    ))}
-                    <span data-offset data-hidden ref={offsetRef}>
-                      <MenuButton
-                        menuAlignment="bottom-end"
-                        label={menuButtonLabel}
-                        size="md">
-                        {hiddenItems &&
-                          hiddenItems.length > 0 &&
-                          hiddenItems
-                            .reverse()
-                            .map((item) => (
-                              <MenuItem
-                                key={item.id}
-                                label={item.label}
-                                onClick={item.onClick}
-                              />
-                            ))}
-                      </MenuButton>
-                    </span>
-                  </>
-                )}
-              </>
-            )}
-          </div>
-        )}
+        {pageActions}
       </div>
       {subtitle && (
         <Text as="h3" className={`${prefix}--page-header__content__subtitle`}>
@@ -300,11 +233,134 @@ PageHeaderContent.propTypes = {
   /**
    * The PageHeaderContent's page actions
    */
-  pageActions: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+  pageActions: PropTypes.node,
+};
+
+/**
+ * ----------------
+ * PageHeaderContentPageActions
+ * ----------------
+ */
+interface PageHeaderContentPageActionsProps {
+  /**
+   * Provide child elements to be rendered inside PageHeaderContentPageActions.
+   */
+  children?: React.ReactNode;
+  /**
+   * Specify an optional className to be added to your PageHeaderContentPageActions
+   */
+  className?: string;
+  /**
+   *  The PageHeaderContent's page actions collabpsible Menu button label
+   */
+  menuButtonLabel?: string;
+  /**
+   * The PageHeaderContent's page actions
+   */
+  pageActions?: React.ReactNode;
+}
+const PageHeaderContentPageActions = React.forwardRef<
+  HTMLDivElement,
+  PageHeaderContentPageActionsProps
+>(function PageHeaderContentPageActions(
+  {
+    className,
+    children,
+    menuButtonLabel = 'Actions',
+    pageActions,
+    ...other
+  }: PageHeaderContentPageActionsProps,
+  ref
+) {
+  const prefix = usePrefix();
+  const classNames = classnames(
+    {
+      [`${prefix}--page-header__content__page-actions`]: true,
+    },
+    className
+  );
+  const containerRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef<HTMLDivElement>(null);
+  const [hiddenItems, setHiddenItems] = useState<any[]>([]);
+
+  useLayoutEffect(() => {
+    if (offsetRef.current) {
+      const width = offsetRef.current.offsetWidth;
+      document.documentElement.style.setProperty(
+        '--pageheader-title-grid-width',
+        `${width}px`
+      );
+    }
+  }, [hiddenItems]);
+
+  useEffect(() => {
+    if (!containerRef.current || !Array.isArray(pageActions)) return;
+    createOverflowHandler({
+      container: containerRef.current,
+      // exclude the hidden menu button from children
+      maxVisibleItems: containerRef.current.children.length - 1,
+      onChange: (visible, _) => {
+        setHiddenItems(pageActions?.slice(visible.length));
+      },
+    });
+  }, []);
+
+  return (
+    <div className={classNames} ref={containerRef}>
+      {pageActions && (
+        <>
+          {isValidElement(pageActions) && pageActions}
+          {Array.isArray(pageActions) && (
+            <>
+              {pageActions.map((action) => (
+                <div key={action.id} className="action">
+                  {action.body}
+                </div>
+              ))}
+              <span data-offset data-hidden ref={offsetRef}>
+                <MenuButton
+                  menuAlignment="bottom-end"
+                  label={menuButtonLabel}
+                  size="md">
+                  {hiddenItems &&
+                    hiddenItems.length > 0 &&
+                    hiddenItems
+                      .reverse()
+                      .map((item) => (
+                        <MenuItem
+                          key={item.id}
+                          label={item.label}
+                          onClick={item.onClick}
+                        />
+                      ))}
+                </MenuButton>
+              </span>
+            </>
+          )}
+        </>
+      )}
+    </div>
+  );
+});
+
+PageHeaderContentPageActions.displayName = 'PageHeaderContentPageActions';
+PageHeaderContentPageActions.propTypes = {
+  /**
+   * Provide child elements to be rendered inside PageHeaderContentPageActions.
+   */
+  children: PropTypes.node,
+  /**
+   * Specify an optional className to be added to your PageHeaderContentPageActions
+   */
+  className: PropTypes.string,
   /**
    * The PageHeaderContent's collapsible Menu button label
    */
   menuButtonLabel: PropTypes.string,
+  /**
+   * The PageHeaderContent's page actions
+   */
+  pageActions: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
 };
 
 /**
@@ -450,6 +506,9 @@ BreadcrumbBar.displayName = 'PageHeaderBreadcrumbBar';
 const Content = PageHeaderContent;
 Content.displayName = 'PageHeaderContent';
 
+const ContentPageActions = PageHeaderContentPageActions;
+Content.displayName = 'PageHeaderContentPageActions';
+
 const ContentText = PageHeaderContentText;
 Content.displayName = 'PageHeaderContentText';
 
@@ -464,6 +523,7 @@ export {
   PageHeader,
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
+  PageHeaderContentPageActions,
   PageHeaderContentText,
   PageHeaderHeroImage,
   PageHeaderTabBar,
@@ -471,6 +531,7 @@ export {
   Root,
   BreadcrumbBar,
   Content,
+  ContentPageActions,
   ContentText,
   HeroImage,
   TabBar,
@@ -479,6 +540,7 @@ export type {
   PageHeaderProps,
   PageHeaderBreadcrumbBarProps,
   PageHeaderContentProps,
+  PageHeaderContentPageActionsProps,
   PageHeaderContentTextProps,
   PageHeaderHeroImageProps,
   PageHeaderTabBarProps,
