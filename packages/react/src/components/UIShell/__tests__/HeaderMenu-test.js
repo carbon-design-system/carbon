@@ -140,4 +140,28 @@ describe('HeaderMenu', () => {
       'false'
     );
   });
+
+  it('should close after clicking redirect menu', async () => {
+    const { container } = render(
+      <HeaderMenu aria-label="test-aria" menuLinkName="test-link">
+        <HeaderMenuItem key={'menu'} href="/">
+          test
+        </HeaderMenuItem>
+      </HeaderMenu>
+    );
+
+    // clicks to open container/menu
+    await userEvent.click(container.firstChild);
+    expect(container.firstChild.firstChild).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+
+    // clicks on actual submenu to go to href / link
+    await userEvent.click(container.firstChild.firstChild);
+    expect(container.firstChild.firstChild).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+  });
 });
