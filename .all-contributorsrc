@@ -170,7 +170,10 @@
       "name": "Preeti Bansal",
       "avatar_url": "https://avatars.githubusercontent.com/u/146315451?v=4",
       "profile": "https://github.com/preetibansalui",
-      "contributions": ["code", "a11y"]
+      "contributions": [
+        "code",
+        "a11y"
+      ]
     },
     {
       "login": "erifsx",
@@ -1817,6 +1820,15 @@
       "contributions": [
         "code",
         "doc"
+      ]
+    },
+    {
+      "login": "warrenmblood",
+      "name": "Warren Blood",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69060697?v=4",
+      "profile": "https://github.com/warrenmblood",
+      "contributions": [
+        "code"
       ]
     }
   ],
