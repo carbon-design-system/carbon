@@ -183,7 +183,7 @@ const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
     light,
     placeholder = '',
     enableCounter = false,
-    maxCount = undefined,
+    maxCount,
     counterMode = 'character',
     warn = false,
     warnText = '',
@@ -432,6 +432,7 @@ const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
   const ariaAnnouncement = useAnnouncer(
     textCount,
     maxCount,
+    counterMode === 'word' ? 'word' : undefined,
     counterMode === 'word' ? 'words' : undefined
   );
   useEffect(() => {

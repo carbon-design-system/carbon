@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,7 +26,7 @@ describe('useAnnouncer', () => {
     let value = null;
 
     function TestComponent() {
-      value = useAnnouncer(9, 10, 'words');
+      value = useAnnouncer(9, 10, 'word', 'words');
       return null;
     }
 
@@ -38,7 +38,7 @@ describe('useAnnouncer', () => {
     let value = null;
 
     function TestComponent() {
-      value = useAnnouncer(10, 10, 'words');
+      value = useAnnouncer(10, 10, 'word', 'words');
       return null;
     }
 
@@ -50,7 +50,7 @@ describe('useAnnouncer', () => {
     let value = null;
 
     function TestComponent() {
-      value = useAnnouncer(10, 10, 'characters');
+      value = useAnnouncer(10, 10, 'character', 'characters');
       return null;
     }
 
