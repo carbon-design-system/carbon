@@ -30,8 +30,8 @@
     "provenance": true
   },
   "scripts": {
-    "build:es": "esbuild ./src/**/!(*-test).{js,ts,jsx,tsx} --minify --outdir=es --target=es2020 --format=esm",
-    "build:cjs": "esbuild ./src/**/!(*-test).{js,ts,jsx,tsx} --minify --outdir=lib --target=es2020 --format=cjs",
+    "build:es": "esbuild ./src/**/!(*-test).{js,ts,jsx,tsx} --minify --outdir=es --target=es2020 --format=esm --define:process=process",
+    "build:cjs": "esbuild ./src/**/!(*-test).{js,ts,jsx,tsx} --minify --outdir=lib --target=es2020 --format=cjs --define:process=process",
     "build:types": "tsc",
     "build": "yarn build:es & yarn build:cjs & yarn build:types",
     "watch": "yarn build:es --watch & yarn build:cjs --watch",
