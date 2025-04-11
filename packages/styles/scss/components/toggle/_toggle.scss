@@ -81,13 +81,11 @@
     .#{$prefix}--toggle__switch {
     &::after {
       display: block;
-      border: 2px solid $focus;
       border-radius: convert.to-rem(16px);
-      block-size: calc(100% + convert.to-rem(6px));
+      block-size: 100%;
       content: '';
-      inline-size: calc(100% + convert.to-rem(6px));
-      margin-block-start: convert.to-rem(-3px);
-      margin-inline-start: convert.to-rem(-3px);
+      outline: 2px solid $focus;
+      outline-offset: 1px;
     }
   }
 
