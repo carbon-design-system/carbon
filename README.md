@@ -333,6 +333,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/Bhas-kar"><img src="https://avatars.githubusercontent.com/u/183294521?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kanchi Bhaskar</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Bhas-kar" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=Bhas-kar" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/maisonsmd"><img src="https://avatars.githubusercontent.com/u/16435155?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Son H. Mai (Mason)</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=maisonsmd" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/warrenmblood"><img src="https://avatars.githubusercontent.com/u/69060697?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Warren Blood</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=warrenmblood" title="Code">💻</a></td>
   </tr>
 </table>
