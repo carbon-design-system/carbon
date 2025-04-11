@@ -12,8 +12,7 @@ import { action } from '@storybook/addon-actions';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import mdx from './MultiSelect.mdx';
 
-import MultiSelect from '.';
-import FilterableMultiSelect from './FilterableMultiSelect';
+import { FilterableMultiSelect, MultiSelect } from '.';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';

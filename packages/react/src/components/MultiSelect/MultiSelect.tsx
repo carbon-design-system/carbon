@@ -298,7 +298,7 @@ export interface MultiSelectProps<ItemType>
   warnText?: ReactNode;
 }
 
-const MultiSelect = React.forwardRef(
+export const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
       autoAlign = false,
@@ -1120,5 +1120,3 @@ MultiSelect.propTypes = {
    */
   warnText: PropTypes.node,
 };
-
-export default MultiSelect as MultiSelectComponent;
