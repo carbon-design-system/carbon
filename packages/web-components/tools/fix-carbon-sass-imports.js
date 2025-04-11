@@ -40,6 +40,7 @@ modulesMap.forEach((localModuleIndex, packageName) => {
   );
   const [fixedPath] = relativePath.split('/@carbon/');
   if (localModuleContents.includes(fixedPath)) {
+    // eslint-disable-next-line no-console
     console.log(
       `Skipping ${localModuleIndex} as it already has the correct path`
     );
