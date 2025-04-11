@@ -9,12 +9,13 @@ import { CaretDown } from '@carbon/icons-react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  ComponentType,
-  FunctionComponent,
   useEffect,
   useRef,
   useState,
-  MutableRefObject,
+  type ComponentType,
+  type FunctionComponent,
+  type MouseEvent,
+  type MutableRefObject,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
@@ -133,10 +134,17 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
 
     const controllableExpandedState = useControllableState({
       value: isExpanded,
-      onChange: onToggle,
-      defaultValue: defaultIsExpanded,
+      onChange: (newValue: boolean) => {
+        onToggle?.(undefined as unknown as MouseEvent, {
+          id,
+          isExpanded: newValue,
+          label,
+          value,
+        });
+      },
+      defaultValue: defaultIsExpanded ?? false,
     });
-    const uncontrollableExpandedState = useState(isExpanded);
+    const uncontrollableExpandedState = useState(isExpanded ?? false);
     const [expanded, setExpanded] = enableTreeviewControllable
       ? controllableExpandedState
       : uncontrollableExpandedState;
@@ -328,7 +336,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
 
       if (!enableTreeviewControllable) {
         // sync props and state
-        setExpanded(isExpanded);
+        setExpanded(isExpanded ?? false);
       }
     }, [
       children,
