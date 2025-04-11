@@ -2926,6 +2926,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "dismissTooltipLabel": Object {
+        "type": "string",
+      },
       "id": Object {
         "type": "string",
       },
