@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,7 +33,7 @@
 // lower, `useCompatibleId` is used.
 
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import setupGetInstanceId from '../tools/setupGetInstanceId';
+import { setupGetInstanceId } from '../tools/setupGetInstanceId';
 import { canUseDOM } from './environment';
 import { useIdPrefix } from './useIdPrefix';
 
