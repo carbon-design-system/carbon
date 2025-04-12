@@ -10,7 +10,7 @@ import cx from 'classnames';
 import PropTypes, { Validator } from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import { ReactAttr } from '../../types/common';
 

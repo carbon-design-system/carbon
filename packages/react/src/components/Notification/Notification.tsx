@@ -15,7 +15,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import cx from 'classnames';
 import {
   Close,

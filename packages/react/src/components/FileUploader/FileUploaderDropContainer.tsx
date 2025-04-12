@@ -12,7 +12,7 @@ import { keys, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { ReactAttr } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 

@@ -36,7 +36,7 @@ import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
 import { enable } from '@carbon/feature-flags';
 
