@@ -14,13 +14,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
-
-export interface SwitchEventHandlersParams {
-  index?: number;
-  name?: string | number;
-  text?: string;
-  key?: string | number;
-}
+import type { SwitchEventHandlersParams } from '../Switch/Switch';
 
 export interface ContentSwitcherProps
   extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
