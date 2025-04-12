@@ -26,6 +26,17 @@ describe('OverflowMenu', () => {
       expect(screen.getByRole('button')).toHaveClass('extra-class');
     });
 
+    it('should forward ref', () => {
+      const ref = React.createRef();
+      render(
+        <OverflowMenu open ref={ref} aria-label="Overflow menu">
+          <OverflowMenuItem itemText="one" />
+          <OverflowMenuItem itemText="two" />
+        </OverflowMenu>
+      );
+      expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+    });
+
     it('should spread extra props on the button element', () => {
       render(
         <OverflowMenu
@@ -401,5 +412,30 @@ describe('OverflowMenu', () => {
     fireEvent.keyDown(menu, { key: 'Escape', code: 'Escape' });
     expect(button).not.toHaveClass('cds--overflow-menu--open');
     expect(button).toHaveFocus();
+  });
+  describe('Ref handling', () => {
+    it('should support both standard ref and innerRef', () => {
+      const standardRef = React.createRef();
+      const innerRef = React.createRef();
+
+      render(
+        <OverflowMenu
+          ref={standardRef}
+          innerRef={innerRef}
+          aria-label="Overflow menu"
+          data-testid="overflow-menu">
+          <OverflowMenuItem itemText="Option 1" />
+          <OverflowMenuItem itemText="Option 2" />
+        </OverflowMenu>
+      );
+      const buttonElement = screen.getByRole('button');
+      expect(standardRef.current).not.toBeNull();
+      expect(innerRef.current).not.toBeNull();
+      expect(standardRef.current).toBe(buttonElement);
+      expect(innerRef.current).toBe(buttonElement);
+
+      // Verify both refs point to the same element & not null
+      expect(standardRef.current).toBe(innerRef.current);
+    });
   });
 });

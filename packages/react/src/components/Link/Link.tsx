@@ -78,8 +78,14 @@ type LinkComponent = <T extends React.ElementType = 'a'>(
   props: LinkProps<T>
 ) => React.ReactElement | any;
 
-const Link: LinkComponent = React.forwardRef(
-  <T extends React.ElementType = 'a'>(
+// First create the component with basic types
+const LinkBase = React.forwardRef<
+  any,
+  LinkBaseProps & {
+    as?: ElementType;
+  } & React.AnchorHTMLAttributes<HTMLAnchorElement>
+>(
+  (
     {
       as: BaseComponent,
       children,
@@ -92,8 +98,8 @@ const Link: LinkComponent = React.forwardRef(
       size,
       target,
       ...rest
-    }: LinkProps<T>,
-    ref: PolymorphicRef<T>
+    },
+    ref
   ) => {
     const prefix = usePrefix();
     const className = cx(`${prefix}--link`, customClassName, {
@@ -132,6 +138,7 @@ const Link: LinkComponent = React.forwardRef(
     );
   }
 );
+const Link = LinkBase as LinkComponent;
 
 (Link as React.FC).displayName = 'Link';
 (Link as React.FC).propTypes = {

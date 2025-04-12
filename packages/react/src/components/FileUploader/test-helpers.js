@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Simulate } from 'react-dom/test-utils';
+import { fireEvent } from '@testing-library/dom';
 
 /**
  * A helper with standardizing behavior around selecting and clearing files with
@@ -35,7 +35,7 @@ export function uploadFiles(input, files = []) {
   });
 
   // Simulate the change event with the given options
-  Simulate.change(input, {
+  fireEvent.change(input, {
     target: {
       files,
     },

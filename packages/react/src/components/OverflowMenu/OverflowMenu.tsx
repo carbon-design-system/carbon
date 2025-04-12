@@ -10,6 +10,7 @@ import React, {
   cloneElement,
   forwardRef,
   isValidElement,
+  RefObject,
   useCallback,
   useContext,
   useEffect,
@@ -26,7 +27,6 @@ import { OverflowMenuVertical } from '@carbon/icons-react';
 import classNames from 'classnames';
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
-import { ClickListener } from '../../internal/ClickListener';
 import {
   DIRECTION_BOTTOM,
   DIRECTION_TOP,
@@ -41,6 +41,8 @@ import deprecate from '../../prop-types/deprecate';
 import mergeRefs from '../../tools/mergeRefs';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { IconButton } from '../IconButton';
+import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
+import { useOutsideClick } from '../../internal/useOutsideClick';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -229,7 +231,8 @@ export interface OverflowMenuProps {
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * The ref to the HTML element that should receive focus when the OverflowMenu opens
+   * The ref to the overflow menu's trigger button element.
+   * @deprecated Use the standard React `ref` prop instead.
    */
   innerRef?: Ref<any>;
 }
@@ -258,6 +261,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       renderIcon: IconElement = OverflowMenuVertical,
       selectorPrimaryFocus = '[data-floating-menu-primary-focus]',
       size = 'md',
+      innerRef,
       ...other
     },
     ref
@@ -274,7 +278,8 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     const prevOpenProp = useRef(openProp);
     const prevOpenState = useRef(open);
     /** The element ref of the tooltip's trigger button. */
-    const triggerRef = useRef<HTMLButtonElement>(null);
+    const triggerRef = useRef<HTMLButtonElement | null>(null);
+    const wrapperRef = useRef<HTMLSpanElement | null>(null);
 
     // Sync open prop changes.
     useEffect(() => {
@@ -298,6 +303,16 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
       prevOpenState.current = open;
     }, [open, onClose]);
+
+    useOutsideClick(wrapperRef, ({ target }) => {
+      if (
+        open &&
+        (!menuBodyRef.current ||
+          (target instanceof Node && !menuBodyRef.current.contains(target)))
+      ) {
+        closeMenu();
+      }
+    });
 
     const focusMenuEl = useCallback(() => {
       if (triggerRef.current) {
@@ -369,30 +384,19 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
     };
 
-    const handleClickOutside = (evt: globalThis.MouseEvent) => {
-      if (
-        open &&
-        (!menuBodyRef.current ||
-          (evt.target instanceof Node &&
-            !menuBodyRef.current.contains(evt.target)))
-      ) {
-        closeMenu();
-      }
-    };
-
     /**
      * Focuses the next enabled overflow menu item given the currently focused
      * item index and direction to move.
      */
     const handleOverflowMenuItemFocus = ({
-      currentIndex,
+      currentIndex = 0,
       direction,
     }: {
       /**
        * The index of the currently focused overflow menu item in the list of
        * overflow menu items
        */
-      currentIndex: number;
+      currentIndex?: number;
       /**
        * Number denoting the direction to move focus (1 for forwards, -1 for
        * backwards).
@@ -401,7 +405,10 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     }) => {
       const enabledIndices = Children.toArray(children).reduce<number[]>(
         (acc, curr, i) => {
-          if (isValidElement(curr) && !curr.props.disabled) {
+          if (
+            React.isValidElement<OverflowMenuItemProps>(curr) &&
+            !curr.props.disabled
+          ) {
             acc.push(i);
           }
           return acc;
@@ -502,7 +509,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
 
     const childrenWithProps = Children.toArray(children).map((child, index) => {
       if (isValidElement(child)) {
-        const childElement = child as ReactElement;
+        const childElement = child as ReactElement<OverflowMenuItemProps>;
         return cloneElement(childElement, {
           closeMenu: childElement.props.closeMenu || closeMenuAndFocus,
           handleOverflowMenuItemFocus,
@@ -530,7 +537,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     const wrappedMenuBody = (
       <FloatingMenu
         focusTrap={focusTrap}
-        triggerRef={triggerRef}
+        triggerRef={triggerRef as RefObject<HTMLElement>}
         menuDirection={direction}
         menuOffset={flipped ? menuOffsetFlip : menuOffset}
         menuRef={bindMenuBody}
@@ -543,12 +550,16 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         })}
       </FloatingMenu>
     );
+    const combinedRef = innerRef
+      ? mergeRefs(triggerRef, innerRef, ref)
+      : mergeRefs(triggerRef, ref);
 
     return (
-      <ClickListener onClickOutside={handleClickOutside}>
+      <>
         <span
           className={`${prefix}--overflow-menu__wrapper`}
-          aria-owns={open ? menuBodyId : undefined}>
+          aria-owns={open ? menuBodyId : undefined}
+          ref={wrapperRef}>
           <IconButton
             {...other}
             type="button"
@@ -558,7 +569,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
             className={overflowMenuClasses}
             onClick={handleClick}
             id={id}
-            ref={mergeRefs(triggerRef, ref)}
+            ref={combinedRef}
             size={size}
             label={iconDescription}
             kind="ghost">
@@ -569,7 +580,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
           </IconButton>
           {open && hasMountedTrigger && wrappedMenuBody}
         </span>
-      </ClickListener>
+      </>
     );
   }
 );
@@ -698,7 +709,6 @@ OverflowMenu.propTypes = {
   /**
    * A component used to render an icon.
    */
-  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**

@@ -37,7 +37,7 @@ export interface ContentSwitcherProps
   /**
    * Pass in Switch components to be rendered in the ContentSwitcher
    */
-  children?: ReactElement[];
+  children?: ReactElement<any>[];
 
   /**
    * Specify an optional className to be added to the container node
@@ -142,7 +142,7 @@ export const ContentSwitcher = ({
         setSelectedIndex(nextIndex);
         focusSwitch(nextIndex);
 
-        if (isValidElement(child)) {
+        if (isValidElement<SwitchEventHandlersParams>(child)) {
           onChange({
             ...data,
             index: nextIndex,

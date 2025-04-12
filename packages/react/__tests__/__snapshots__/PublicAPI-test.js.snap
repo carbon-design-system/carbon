@@ -5772,7 +5772,8 @@ Map {
     },
   },
   "OverflowMenu" => Object {
-    "displayName": "OverflowMenu",
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "OverflowMenuItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
