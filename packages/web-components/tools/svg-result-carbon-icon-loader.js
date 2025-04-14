@@ -14,7 +14,13 @@ const createSVGResultFromCarbonIcon = require('./svg-result-carbon-icon');
  * @returns {string} The massaged module content.
  */
 function svgResultCarbonIconLoader() {
-  const descriptor = require(this.resourcePath); // eslint-disable-line global-require
+  // TODO: `global-require` was deprecated. Should the alternative in
+  // https://eslint.org/docs/latest/rules/global-require be used, or should the
+  // directive be deleted?
+  // https://github.com/carbon-design-system/carbon/issues/18991
+  const descriptor = require(
+    this.resourcePath
+  ); /* // eslint-disable-line global-require */
   return `
     import { svg } from 'lit';
     import spread from '${path.resolve(
