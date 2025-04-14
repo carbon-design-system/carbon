@@ -732,6 +732,33 @@ const MultiSelect = React.forwardRef(
 
     const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
 
+    function getSelectionStats(
+      selectedItems: any[],
+      filteredItems: any[]
+    ): {
+      hasIndividualSelections: boolean;
+      nonSelectAllSelectedCount: number;
+      totalSelectableCount: number;
+    } {
+      const hasIndividualSelections = selectedItems.some(
+        (selected) => !selected.isSelectAll
+      );
+
+      const nonSelectAllSelectedCount = selectedItems.filter(
+        (selected) => !selected.isSelectAll
+      ).length;
+
+      const totalSelectableCount = filteredItems.filter(
+        (item) => !item.isSelectAll && !item.disabled
+      ).length;
+
+      return {
+        hasIndividualSelections,
+        nonSelectAllSelectedCount,
+        totalSelectableCount,
+      };
+    }
+
     return (
       <div className={wrapperClasses}>
         <label className={titleClasses} {...labelProps}>
@@ -821,16 +848,16 @@ const MultiSelect = React.forwardRef(
                   selectedItems.filter((selected) => isEqual(selected, item))
                     .length > 0;
 
+                const {
+                  hasIndividualSelections,
+                  nonSelectAllSelectedCount,
+                  totalSelectableCount,
+                } = getSelectionStats(selectedItems, filteredItems);
+
                 const isIndeterminate =
                   item['isSelectAll'] &&
-                  selectedItems.some(
-                    (selected: any) => !selected.isSelectAll
-                  ) &&
-                  selectedItems.filter((selected: any) => !selected.isSelectAll)
-                    .length <
-                    filteredItems.filter(
-                      (item: any) => !item.isSelectAll && !item.disabled
-                    ).length;
+                  hasIndividualSelections &&
+                  nonSelectAllSelectedCount < totalSelectableCount;
 
                 const itemProps = getItemProps({
                   item,
