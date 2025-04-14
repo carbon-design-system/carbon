@@ -59,6 +59,11 @@ export interface OverflowMenuItemProps
   isDelete?: boolean;
 
   /**
+   * accepts a ref to the button element
+   */
+  ref?: (element: HTMLElement) => void;
+
+  /**
    * `true` to require the title attribute.
    */
   requireTitle?: boolean;
