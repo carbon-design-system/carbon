@@ -358,7 +358,6 @@ Search.propTypes = {
   /**
    * A component used to render an icon.
    */
-  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**

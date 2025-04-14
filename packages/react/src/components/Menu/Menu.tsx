@@ -35,7 +35,7 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * The ref of the containing element, used for positioning and alignment of the menu
    */
-  containerRef?: RefObject<HTMLDivElement>;
+  containerRef?: RefObject<HTMLDivElement | null>;
   /**
    * A collection of MenuItems to be rendered within this Menu.
    */
