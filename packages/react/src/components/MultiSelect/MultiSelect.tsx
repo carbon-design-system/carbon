@@ -23,6 +23,7 @@ import React, {
   ReactNode,
   useLayoutEffect,
   isValidElement,
+  useCallback,
 } from 'react';
 import ListBox, {
   ListBoxSize,
@@ -732,32 +733,35 @@ const MultiSelect = React.forwardRef(
 
     const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
 
-    function getSelectionStats(
-      selectedItems: any[],
-      filteredItems: any[]
-    ): {
-      hasIndividualSelections: boolean;
-      nonSelectAllSelectedCount: number;
-      totalSelectableCount: number;
-    } {
-      const hasIndividualSelections = selectedItems.some(
-        (selected) => !selected.isSelectAll
-      );
+    const getSelectionStats = useCallback(
+      (
+        selectedItems: any[],
+        filteredItems: any[]
+      ): {
+        hasIndividualSelections: boolean;
+        nonSelectAllSelectedCount: number;
+        totalSelectableCount: number;
+      } => {
+        const hasIndividualSelections = selectedItems.some(
+          (selected) => !selected.isSelectAll
+        );
 
-      const nonSelectAllSelectedCount = selectedItems.filter(
-        (selected) => !selected.isSelectAll
-      ).length;
+        const nonSelectAllSelectedCount = selectedItems.filter(
+          (selected) => !selected.isSelectAll
+        ).length;
 
-      const totalSelectableCount = filteredItems.filter(
-        (item) => !item.isSelectAll && !item.disabled
-      ).length;
+        const totalSelectableCount = filteredItems.filter(
+          (item) => !item.isSelectAll && !item.disabled
+        ).length;
 
-      return {
-        hasIndividualSelections,
-        nonSelectAllSelectedCount,
-        totalSelectableCount,
-      };
-    }
+        return {
+          hasIndividualSelections,
+          nonSelectAllSelectedCount,
+          totalSelectableCount,
+        };
+      },
+      [selectedItems, filteredItems]
+    );
 
     return (
       <div className={wrapperClasses}>
