@@ -181,7 +181,13 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       }
 
       if (match(e, keys.Enter) || match(e, keys.Space)) {
-        handleClick(e);
+        e.target.addEventListener(
+          'keyup',
+          (e) => {
+            handleClick(e as unknown as React.KeyboardEvent<HTMLLIElement>);
+          },
+          { once: true }
+        );
       }
 
       if (rest.onKeyDown) {
