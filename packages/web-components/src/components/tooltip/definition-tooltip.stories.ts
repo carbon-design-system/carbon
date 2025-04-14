@@ -6,10 +6,8 @@
  */
 
 import { html } from 'lit';
-// Below path will be there when an application installs `@carbon/web-components` package.
-// In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
-// @ts-ignore
 import './index';
+import styles from './tooltip-story.scss?lit';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 
 const tooltipAlignments = {
@@ -64,15 +62,15 @@ export const Default = {
     <p>
       Custom domains direct requests for your apps in this Cloud Foundry
       organization to a
-    </p>
-    <cds-definition-tooltip
-      align=${align}
-      ?open-on-hover=${openOnHover}
-      ?default-open=${defaultOpen}>
-      <span slot="definition">${definition}</span>
-      URL
-    </cds-definition-tooltip>
-    <p>
+      <span style="display: inline-block;">
+        <cds-definition-tooltip
+          align=${align}
+          ?open-on-hover=${openOnHover}
+          ?default-open=${defaultOpen}>
+          <span slot="definition">${definition}</span>
+          URL
+        </cds-definition-tooltip>
+      </span>
       that you own. A custom domain can be a shared domain, a shared subdomain,
       or a shared domain and host.
     </p>
@@ -82,7 +80,12 @@ const meta = {
   title: 'Components/Defintion tooltip',
   decorators: [
     (story) =>
-      html`<div class="sb-tooltip-story"><style></style>${story()}</div>`,
+      html` <div class="sb-tooltip-story sb-definition-tooltip">
+        <style>
+          ${styles}
+        </style>
+        ${story()}
+      </div>`,
   ],
 };
 
