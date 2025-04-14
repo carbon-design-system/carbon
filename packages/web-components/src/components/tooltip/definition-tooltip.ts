@@ -8,9 +8,6 @@
 import { html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import HostListener from '../../globals/decorators/host-listener';
-import HostListenerMixin from '../../globals/mixins/host-listener';
-// import CDSPopover from '../popover/popover';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../popover/index';
 import styles from './tooltip.scss?lit';
@@ -22,7 +19,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-definition-tooltip
  */
 @customElement(`${prefix}-definition-tooltip`)
-class CDSDefinitionTooltip extends HostListenerMixin(LitElement) {
+class CDSDefinitionTooltip extends LitElement {
   /**
    * Specify how the trigger should align with the tooltip
    */
