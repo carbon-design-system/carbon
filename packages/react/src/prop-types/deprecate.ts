@@ -14,9 +14,7 @@ type PropValidator = (
   ...rest: any[]
 ) => any;
 
-const warningCache: {
-  [componentName: string]: { [propName: string]: boolean } | undefined;
-} = {};
+const warningCache = new Map<string, Set<string>>();
 
 /**
  * Wraps a prop-type validator with a deprecation warning.
@@ -37,12 +35,14 @@ export const deprecate = (
       return;
     }
 
-    if (!warningCache[componentName]) {
-      warningCache[componentName] = {};
+    if (!warningCache.has(componentName)) {
+      warningCache.set(componentName, new Set());
     }
 
-    if (!warningCache[componentName][propName]) {
-      warningCache[componentName][propName] = true;
+    const warnedProps = warningCache.get(componentName);
+
+    if (warnedProps && !warnedProps.has(propName)) {
+      warnedProps.add(propName);
       warning(
         false,
         message ||

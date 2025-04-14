@@ -80,4 +80,25 @@ describe('deprecate', () => {
 
     expect(result).toEqual(returnVal);
   });
+
+  it('should handle `__proto__` as component and prop name without prototype pollution', () => {
+    const checker = deprecate(mockPropType);
+    const maliciousArgs = [{ __proto__: true }, '__proto__', '__proto__'];
+    const standardProtoProps = Object.getOwnPropertyNames(Object.prototype);
+
+    // Execute the checker with malicious args twice to ensure the warning is
+    // only issued once.
+    checker(...maliciousArgs);
+    expect(warning).toHaveBeenCalledTimes(1);
+    expect(mockPropType).toHaveBeenCalledTimes(1);
+
+    checker(...maliciousArgs);
+    expect(warning).toHaveBeenCalledTimes(1);
+    expect(mockPropType).toHaveBeenCalledTimes(2);
+
+    // After calling with '__proto__' keys, make sure Object.prototype has not
+    // been polluted.
+    const currentProtoProps = Object.getOwnPropertyNames(Object.prototype);
+    expect(currentProtoProps.sort()).toEqual(standardProtoProps.sort());
+  });
 });
