@@ -6,16 +6,17 @@
  */
 
 import React, {
-  FocusEvent,
-  ForwardedRef,
   isValidElement,
-  MouseEvent,
-  ReactNode,
   useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
+  type FocusEvent,
+  type ForwardedRef,
+  type HTMLAttributes,
+  type MouseEvent,
+  type ReactNode,
 } from 'react';
 import {
   useSelect,
@@ -42,7 +43,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { TranslateWithId, ReactAttr } from '../../types/common';
+import { TranslateWithId } from '../../types/common';
 import { useId } from '../../internal/useId';
 import {
   useFloating,
@@ -83,7 +84,7 @@ export interface OnChangeData<ItemType> {
 }
 
 export interface DropdownProps<ItemType>
-  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes>,
+  extends Omit<HTMLAttributes<HTMLDivElement>, ExcludedAttributes>,
     TranslateWithId<ListBoxMenuIconTranslationKey>,
     React.RefAttributes<HTMLDivElement> {
   /**

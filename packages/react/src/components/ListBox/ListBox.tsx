@@ -1,18 +1,23 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import cx from 'classnames';
-import React, { type KeyboardEvent, type MouseEvent, useContext } from 'react';
+import React, {
+  useContext,
+  type HTMLAttributes,
+  type KeyboardEvent,
+  type MouseEvent,
+} from 'react';
 import PropTypes from 'prop-types';
 import deprecate from '../../prop-types/deprecate';
 import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { ForwardRefReturn, ReactAttr } from '../../types/common';
+import { ForwardRefReturn } from '../../types/common';
 
 const handleOnKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
   if (event.keyCode === 27) {
@@ -28,7 +33,7 @@ const handleClick = (event: MouseEvent<HTMLDivElement>) => {
 type ExcludedAttributes = 'onKeyDown' | 'onKeyPress' | 'ref';
 
 export interface ListBoxProps
-  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
+  extends Omit<HTMLAttributes<HTMLDivElement>, ExcludedAttributes> {
   /**
    * Specify whether the ListBox is currently disabled
    */

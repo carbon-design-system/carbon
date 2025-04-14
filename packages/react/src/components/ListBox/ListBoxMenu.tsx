@@ -1,20 +1,20 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ForwardedRef } from 'react';
+import React, { type ForwardedRef, type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
 import ListBoxMenuItem from './ListBoxMenuItem';
-import { ForwardRefReturn, ReactAttr } from '../../types/common';
+import { ForwardRefReturn } from '../../types/common';
 
 type ExcludedAttributes = 'id';
 
 export interface ListBoxMenuProps
-  extends Omit<ReactAttr<HTMLUListElement>, ExcludedAttributes> {
+  extends Omit<HTMLAttributes<HTMLUListElement>, ExcludedAttributes> {
   children?: any;
 
   /**

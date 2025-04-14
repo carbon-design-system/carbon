@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,12 +7,12 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import React, { useRef, type HTMLAttributes } from 'react';
 import TableCell from './TableCell';
 import { usePrefix } from '../../internal/usePrefix';
-import { ReactAttr } from '../../types/common';
 
-export interface TableExpandedRowProps extends ReactAttr<HTMLTableRowElement> {
+export interface TableExpandedRowProps
+  extends HTMLAttributes<HTMLTableRowElement> {
   /**
    * The width of the expanded row's internal cell
    */

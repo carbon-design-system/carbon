@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { type HTMLAttributes } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { View, ViewOff, WarningFilled } from '@carbon/icons-react';
@@ -14,13 +14,12 @@ import { warning } from '../../internal/warning';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
-import { ReactAttr } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 
 let didWarnAboutDeprecation = false;
 
 export interface ControlledPasswordInputProps
-  extends ReactAttr<HTMLInputElement> {
+  extends HTMLAttributes<HTMLInputElement> {
   /**
    * Provide a custom className that is applied directly to the underlying
    * `<input>` node
