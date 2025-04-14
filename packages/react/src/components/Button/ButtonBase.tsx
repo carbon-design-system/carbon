@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { type JSX } from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';

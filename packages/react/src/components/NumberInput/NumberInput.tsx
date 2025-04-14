@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,6 +25,7 @@ import deprecate from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { Text } from '../Text';
 import { TranslateWithId } from '../../types/common';
+import { clamp } from '../../internal/clamp';
 
 export const translationIds = {
   'increment.number': 'increment.number',
@@ -255,7 +256,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const [prevControlledValue, setPrevControlledValue] =
       useState(controlledValue);
     const inputRef = useRef<HTMLInputElement>(null);
-    const ref = useMergedRefs<HTMLInputElement>([forwardRef, inputRef]);
+    const ref = useMergedRefs([forwardRef, inputRef]);
     const numberInputClasses = cx({
       [`${prefix}--number`]: true,
       [`${prefix}--number--helpertext`]: true,
@@ -372,10 +373,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           getDecimalPlaces(step)
         );
         const floatValue = parseFloat(rawValue.toFixed(precision));
-        const newValue =
-          typeof min !== 'undefined' && typeof max !== 'undefined'
-            ? Math.min(Math.max(floatValue, min), max)
-            : floatValue;
+        const newValue = clamp(floatValue, min, max);
+
         const state = {
           value:
             allowEmpty && inputRef.current.value === '' && step === 0
@@ -418,7 +417,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       normalizedDecorator &&
       normalizedDecorator['type']?.displayName === 'AILabel'
     ) {
-      isRevertActive = (normalizedDecorator as ReactElement).props.revertActive;
+      isRevertActive = (normalizedDecorator as ReactElement<any>).props
+        .revertActive;
     }
 
     useEffect(() => {

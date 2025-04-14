@@ -54,9 +54,6 @@ export default class ClickListener extends React.Component {
   }
 
   handleRef(el) {
-    const { children } = this.props;
-    this.element = el;
-
     /**
      * One important note, `children.ref` corresponds to a `ref` prop passed in
      * directly to the child, not necessarily a `ref` defined in the component.
@@ -66,14 +63,32 @@ export default class ClickListener extends React.Component {
      *   <Child ref={targetedRefHere} />
      * </ClickListener>
      */
-    if (children.ref && typeof children.ref === 'function') {
-      children.ref(el);
-    }
+    this.element = el;
   }
 
   render() {
-    return React.cloneElement(this.props.children, {
-      ref: this.handleRef,
-    });
+    const { children } = this.props;
+    const childProps = { ref: this.handleRef };
+
+    // Create a new ref callback that calls both our ref and the child's ref
+    if (React.isValidElement(children) && children.props.ref) {
+      const originalRef = children.props.ref;
+      childProps.ref = (el) => {
+        this.handleRef(el);
+
+        // Handle different types of refs
+        if (typeof originalRef === 'function') {
+          originalRef(el);
+        } else if (
+          originalRef &&
+          typeof originalRef === 'object' &&
+          'current' in originalRef
+        ) {
+          originalRef.current = el;
+        }
+      };
+    }
+
+    return React.cloneElement(children, childProps);
   }
 }
