@@ -417,7 +417,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       normalizedDecorator &&
       normalizedDecorator['type']?.displayName === 'AILabel'
     ) {
-      isRevertActive = (normalizedDecorator as ReactElement).props.revertActive;
+      isRevertActive = (normalizedDecorator as ReactElement<any>).props
+        .revertActive;
     }
 
     useEffect(() => {

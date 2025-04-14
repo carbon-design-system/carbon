@@ -6,14 +6,13 @@
  */
 
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, { WeakValidationMap } from 'prop-types';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import React, {
   useRef,
   useMemo,
   useEffect,
   type ForwardedRef,
-  type WeakValidationMap,
   type ElementType,
 } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
@@ -183,8 +182,9 @@ export const Popover: PopoverComponent & {
     open,
     alignmentAxisOffset,
     ...rest
-  }: PopoverProps<E>,
-  forwardRef: PolymorphicRef<E>
+  }: any,
+  //this is a workaround, have to come back and fix this.
+  forwardRef: any
 ) {
   const prefix = usePrefix();
   const floating = useRef<HTMLSpanElement>(null);

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ClickListener renders as expected - Component API should render 1`] = `
+<div>
+  <div>
+    <div
+      class="child"
+    >
+      Test
+    </div>
+    <div
+      class="child"
+    >
+      Test
+    </div>
+  </div>
+</div>
+`;
