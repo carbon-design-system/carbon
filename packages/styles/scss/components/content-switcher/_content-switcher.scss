@@ -368,8 +368,7 @@
     color: $text-primary;
 
     &::after {
-      background-color: transparent;
-      transform: scaleY(0);
+      background-color: $content-switcher-selected;
     }
   }
 
@@ -425,6 +424,10 @@
 
     &:focus {
       border: 0;
+    }
+
+    &::after {
+      background-color: $content-switcher-selected;
     }
 
     .#{$prefix}--content-switcher__icon {
