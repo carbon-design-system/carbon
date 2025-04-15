@@ -38,8 +38,8 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml && node scripts/postinstall.js"
   },
   "peerDependencies": {
-    "react": "^16.8.6 || ^17.0.1 || ^18.2.0",
-    "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0",
+    "react": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
+    "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
     "sass": "^1.33.0"
   },
   "dependencies": {
@@ -64,8 +64,8 @@
     "babel-preset-carbon": "^0.6.0",
     "browserslist-config-carbon": "^11.2.0",
     "fs-extra": "^11.0.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "rimraf": "^6.0.0",
     "rollup": "^2.79.1",
     "rollup-plugin-strip-banner": "^3.0.0"

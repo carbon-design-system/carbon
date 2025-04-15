@@ -28,7 +28,7 @@ import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
-import toggleClass from '../../tools/toggleClass';
+import { toggleClass } from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
   elementOrParentIsFloatingMenu,
@@ -196,7 +196,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a ref to return focus to once the modal is closed.
    */
-  launcherButtonRef?: RefObject<HTMLButtonElement>;
+  launcherButtonRef?: RefObject<HTMLButtonElement | null>;
 
   /**
    * Specify an optional handler for closing modal.
@@ -580,7 +580,6 @@ ComposedModal.propTypes = {
   /**
    * Provide a ref to return focus to once the modal is closed.
    */
-  // @ts-expect-error: Invalid derived type
   launcherButtonRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({

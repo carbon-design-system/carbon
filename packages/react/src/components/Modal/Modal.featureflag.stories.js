@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import Modal from './';
 import Button from '../Button';
 import Select from '../Select';
-import MultiSelect from '../MultiSelect';
+import { MultiSelect } from '../MultiSelect';
 import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
