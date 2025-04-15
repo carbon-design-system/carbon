@@ -835,7 +835,7 @@ const ComboBox = forwardRef(
         if (
           type === useCombobox.stateChangeTypes.ItemClick &&
           !isEqual(selectedItemProp, newSelectedItem) &&
-          newSelectedItem !== undefined
+          typeof newSelectedItem !== 'undefined'
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
