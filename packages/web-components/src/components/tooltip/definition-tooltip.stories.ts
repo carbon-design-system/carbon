@@ -41,7 +41,7 @@ const controls = {
   openOnHover: {
     control: 'boolean',
     description:
-      'Specifies whether or not the defintion tooltip should open on hover or not',
+      'Specifies whether the defintion tooltip should open on hover or not',
   },
   defaultOpen: {
     control: 'boolean',

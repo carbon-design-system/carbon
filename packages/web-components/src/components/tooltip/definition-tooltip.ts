@@ -39,7 +39,7 @@ class CDSDefinitionTooltip extends LitElement {
   defaultOpen = false;
 
   /**
-   * Specifies whether or not the `DefinitionTooltip` should open on hover or not
+   * Specifies whether the `DefinitionTooltip` should open on hover or not
    */
   @property({ reflect: true, type: Boolean, attribute: 'open-on-hover' })
   openOnHover = false;
@@ -55,15 +55,15 @@ class CDSDefinitionTooltip extends LitElement {
     }
   }
 
-  _handleBlur() {
+  protected _handleBlur() {
     this.open = false;
   }
 
-  _handleMouseDown() {
+  protected _handleMouseDown() {
     this.open = !this.open;
   }
 
-  _handleKeyDown(event: KeyboardEvent) {
+  protected _handleKeyDown(event: KeyboardEvent) {
     const { key } = event;
 
     if (this.open && (key === 'Esc' || key === 'Escape')) {
@@ -72,7 +72,7 @@ class CDSDefinitionTooltip extends LitElement {
     }
   }
 
-  _handleHover() {
+  protected _handleHover() {
     if (this.openOnHover && !this.open) {
       this.open = true;
     } else {
@@ -80,7 +80,7 @@ class CDSDefinitionTooltip extends LitElement {
     }
   }
 
-  _handleFocus() {
+  protected _handleFocus() {
     this.open = true;
   }
 
