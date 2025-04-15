@@ -1972,6 +1972,23 @@ Map {
     },
     "TableCell": Object {
       "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "colSpan": Object {
+          "type": "number",
+        },
+        "hasAILabelHeader": Object {
+          "type": "bool",
+        },
+        "headers": Object {
+          "type": "string",
+        },
+      },
       "render": [Function],
     },
     "TableContainer": Object {
@@ -7888,6 +7905,23 @@ Map {
   },
   "TableCell" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "colSpan": Object {
+        "type": "number",
+      },
+      "hasAILabelHeader": Object {
+        "type": "bool",
+      },
+      "headers": Object {
+        "type": "string",
+      },
+    },
     "render": [Function],
   },
   "TableContainer" => Object {
