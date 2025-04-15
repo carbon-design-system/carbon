@@ -54,13 +54,20 @@ Default.argTypes = {
   align: {
     options: [
       'top',
-      'top-left',
-      'top-right',
+      'top-start',
+      'top-end',
+
       'bottom',
-      'bottom-left',
-      'bottom-right',
+      'bottom-start',
+      'bottom-end',
+
       'left',
+      'left-end',
+      'left-start',
+
       'right',
+      'right-end',
+      'right-start',
     ],
   },
   ariaLabel: {

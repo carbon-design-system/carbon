@@ -44,6 +44,7 @@ import { IconButton } from '../IconButton';
 import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 import { useOutsideClick } from '../../internal/useOutsideClick';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { PopoverAlignment } from '../Popover';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -121,6 +122,8 @@ export const getMenuOffset: MenuOffset = (
   }
 };
 
+// TODO: Replace this code when align mapping is consolidated.
+// https://github.com/carbon-design-system/carbon/pull/19081
 const propMappingFunction = (deprecatedValue) => {
   const mapping = {
     'top-left': 'top-start',
@@ -135,44 +138,11 @@ const propMappingFunction = (deprecatedValue) => {
   return mapping[deprecatedValue];
 };
 
-type IconProps = {
-  className?: string;
-  'aria-label'?: string;
-};
-
-export type DeprecatedOverflowMenuAlignment =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'left-bottom'
-  | 'left-top'
-  | 'right-bottom'
-  | 'right-top';
-
-export type NewOverflowMenuAlignment =
-  | 'top'
-  | 'bottom'
-  | 'left'
-  | 'right'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left-end'
-  | 'left-start'
-  | 'right-end'
-  | 'right-start';
-
-export type OverflowMenuAlignment =
-  | DeprecatedOverflowMenuAlignment
-  | NewOverflowMenuAlignment;
-
 export interface OverflowMenuProps {
   /**
    * Specify how the trigger tooltip should be aligned.
    */
-  align?: OverflowMenuAlignment;
+  align?: PopoverAlignment;
 
   /**
    * Specify a label to be read by screen readers on the container node
