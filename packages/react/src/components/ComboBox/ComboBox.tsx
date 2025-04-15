@@ -843,7 +843,7 @@ const ComboBox = forwardRef(
           (type === useCombobox.stateChangeTypes.FunctionSelectItem ||
             type === useCombobox.stateChangeTypes.InputKeyDownEnter) &&
           !isEqual(selectedItemProp, newSelectedItem) &&
-          newSelectedItem !== undefined
+          typeof newSelectedItem !== 'undefined'
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
