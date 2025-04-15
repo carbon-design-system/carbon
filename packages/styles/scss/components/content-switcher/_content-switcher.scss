@@ -498,11 +498,22 @@
     svg {
     fill: $icon-secondary;
   }
+  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-btn[disabled]
+    svg {
+    fill: $icon-disabled;
+  }
 
   .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
     svg {
     fill: $icon-primary;
+  }
+
+  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected[disabled]
+    svg {
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
