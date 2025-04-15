@@ -15,8 +15,6 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
-import PasswordInput from './PasswordInput';
-import ControlledPasswordInput from './ControlledPasswordInput';
 import { deprecate } from '../../prop-types/deprecate';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
@@ -411,8 +409,6 @@ const TextInput = React.forwardRef(function TextInput(
 });
 
 TextInput.displayName = 'TextInput';
-(TextInput as any).PasswordInput = PasswordInput;
-(TextInput as any).ControlledPasswordInput = ControlledPasswordInput;
 TextInput.propTypes = {
   /**
    * Specify an optional className to be applied to the `<input>` node
