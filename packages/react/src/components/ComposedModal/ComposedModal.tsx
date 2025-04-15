@@ -40,6 +40,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
+import { warning } from '../../internal/warning';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -269,11 +270,16 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     const onMouseDownTarget: MutableRefObject<Node | null> =
       useRef<Node | null>(null);
 
-    // The native dialog element handles focus, so enableDialogElement must be
-    // off for focusTrapWithoutSentinels to have any effect.
     const enableDialogElement = useFeatureFlag('enable-dialog-element');
     const focusTrapWithoutSentinels = useFeatureFlag(
       'enable-experimental-focus-wrap-without-sentinels'
+    );
+    warning(
+      !(focusTrapWithoutSentinels && enableDialogElement),
+      '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
+        '`enableDialogElement` feature flags are enabled. The native dialog ' +
+        'element handles focus, so `enableDialogElement` must be off for ' +
+        '`focusTrapWithoutSentinels` to have any effect.'
     );
 
     // Keep track of modal open/close state
