@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,12 +33,3 @@ export interface TranslateWithId<MID = string, ARGS = Record<string, unknown>> {
    */
   translateWithId?(messageId: MID, args?: ARGS): string;
 }
-
-/**
- * Alias of TranslateWithId. Will be removed in v12
- * @deprecated Use TranslateWithId instead
- */
-export type InternationalProps<
-  MID = string,
-  ARGS = Record<string, unknown>,
-> = TranslateWithId<MID, ARGS>;
