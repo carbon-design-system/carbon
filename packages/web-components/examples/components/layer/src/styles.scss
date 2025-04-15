@@ -1,9 +1,15 @@
 @use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/spacing';
 
 :root {
   @include theme.theme(themes.$white);
   background-color: var(--cds-background);
   color: var(--cds-text-primary);
+}
+
+.example-layer-test-component {
+  padding: spacing.$spacing-05;
+  background: theme.$layer;
 }

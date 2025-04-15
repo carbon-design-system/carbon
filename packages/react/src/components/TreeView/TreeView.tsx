@@ -7,7 +7,13 @@
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef, useState, type SyntheticEvent } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  type JSX,
+  type SyntheticEvent,
+} from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
@@ -197,16 +203,7 @@ const TreeView: TreeViewComponent = ({
 
   function handleKeyDown(event) {
     event.stopPropagation();
-    if (
-      matches(event, [
-        keys.ArrowUp,
-        keys.ArrowDown,
-        keys.Home,
-        keys.End,
-        // @ts-ignore - `matches` doesn't like the object syntax without missing properties
-        { code: 'KeyA' },
-      ])
-    ) {
+    if (matches(event, [keys.ArrowUp, keys.ArrowDown, keys.Home, keys.End])) {
       event.preventDefault();
     }
 
@@ -344,7 +341,7 @@ const TreeView: TreeViewComponent = ({
         aria-multiselectable={multiselect || undefined}
         className={treeClasses}
         onKeyDown={handleKeyDown}
-        ref={treeRootRef as unknown as React.RefObject<HTMLUListElement>}
+        ref={treeRootRef as unknown as React.RefObject<HTMLUListElement | null>}
         role="tree">
         {nodesWithProps}
       </ul>
