@@ -15,7 +15,6 @@ import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import mdx from './ComboBox.mdx';
-import { disable } from '@carbon/feature-flags';
 
 const items = [
   {
