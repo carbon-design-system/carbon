@@ -140,6 +140,10 @@ export {
   FluidTextInputSkeleton as unstable__FluidTextInputSkeleton,
 } from './components/FluidTextInput';
 export {
+  FluidNumberInput as unstable__FluidNumberInput,
+  FluidNumberInputSkeleton as unstable__FluidNumberInputSkeleton,
+} from './components/FluidNumberInput';
+export {
   FluidTimePicker as unstable__FluidTimePicker,
   FluidTimePickerSkeleton as unstable__FluidTimePickerSkeleton,
 } from './components/FluidTimePicker';
