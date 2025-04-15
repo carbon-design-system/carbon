@@ -7,7 +7,7 @@
 
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
-import React from 'react';
+import React, { ReactElement, ReactNode, type JSX } from 'react';
 import PropTypes from 'prop-types';
 import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
@@ -162,7 +162,7 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
 
   static contextType = PrefixContext;
 
-  _subMenus: React.RefObject<HTMLUListElement> = React.createRef();
+  _subMenus: React.RefObject<HTMLUListElement | null> = React.createRef();
   private items: Array<HTMLElement | null> = [];
   private menuButtonRef: HTMLElement | null = null;
 
@@ -292,15 +292,26 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
       ...rest
     } = this.props;
 
-    const hasActiveDescendant = (childrenArg) =>
-      React.Children.toArray(childrenArg).some(
-        (child) =>
-          React.isValidElement(child) && // This is the type guard
-          (child.props.isActive ||
-            child.props.isCurrentPage ||
-            (Array.isArray(child.props.children) &&
-              hasActiveDescendant(child.props.children)))
-      );
+    const hasActiveDescendant = (childrenArg: ReactNode) =>
+      React.Children.toArray(childrenArg).some((child) => {
+        if (!React.isValidElement(child)) {
+          return false;
+        }
+
+        // Explicitly type the element to access props safely
+        const element = child as ReactElement<{
+          isActive?: boolean;
+          isCurrentPage?: boolean;
+          children?: ReactNode;
+        }>;
+
+        return (
+          element.props.isActive ||
+          element.props.isCurrentPage ||
+          (Array.isArray(element.props.children) &&
+            hasActiveDescendant(element.props.children))
+        );
+      });
 
     const accessibilityLabel = {
       'aria-label': ariaLabel,

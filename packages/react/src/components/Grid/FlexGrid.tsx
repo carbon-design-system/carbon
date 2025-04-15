@@ -10,11 +10,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { GridSettings } from './GridContext';
-import { GridComponent, GridProps } from './GridTypes';
+import { GridComponent, GridBaseProps } from './GridTypes';
 import { PolymorphicRef } from '../../internal/PolymorphicProps';
 
-const FlexGrid = React.forwardRef(
-  <T extends React.ElementType = 'div'>(
+const FlexGrid = React.forwardRef<
+  any,
+  GridBaseProps & {
+    as?: React.ElementType;
+  } & React.HTMLAttributes<HTMLDivElement>
+>(
+  (
     {
       as,
       condensed = false,
@@ -23,8 +28,8 @@ const FlexGrid = React.forwardRef(
       className: containerClassName,
       children,
       ...rest
-    }: GridProps<T>,
-    ref?: PolymorphicRef<T>
+    },
+    ref
   ) => {
     const prefix = usePrefix();
     const className = cx(containerClassName, {
