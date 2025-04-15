@@ -54,6 +54,8 @@ describe('Toggletip', () => {
     expect(container.firstChild).not.toHaveClass(`${prefix}--toggletip--open`);
     expect(container.firstChild).not.toHaveClass(`${prefix}--popover--open`);
   });
+  // TODO: Should these close tests be moved inside of `Toggletip Closing
+  // Behavior`?
   it('should close on Escape', async () => {
     const { container } = render(
       <Toggletip data-testid="toggletip" defaultOpen>
@@ -242,6 +244,12 @@ describe('Toggletip', () => {
       });
     });
 
+    // TODO: There is ToggletipLabel-test.js. Should this describe block be
+    // deleted or should that file be deleted? Doesn't seem like both should be
+    // necessary. Same applies to the following describe blocks:
+    // - ToggletipButton
+    // - ToggletipContent
+    // - ToggletipActions
     describe('ToggletipLabel', () => {
       it('should render with custom element using as prop', () => {
         const CustomElement = forwardRef((props, ref) => (
@@ -480,6 +488,37 @@ describe('Toggletip', () => {
           'aria-expanded',
           'true'
         );
+      });
+
+      it('should stop propagation of Escape key press when `Toggletip` is open', async () => {
+        const { keyboard } = userEvent;
+        const onKeyDown = jest.fn();
+
+        render(
+          <div onKeyDown={onKeyDown}>
+            <Toggletip defaultOpen>
+              <ToggletipButton>Toggle</ToggletipButton>
+              <ToggletipContent>
+                <button>Action</button>
+              </ToggletipContent>
+            </Toggletip>
+          </div>
+        );
+
+        const actionButton = screen.getByText('Action');
+        const toggleButton = screen.getByText('Toggle');
+
+        expect(toggleButton).toHaveAttribute('aria-expanded', 'true');
+
+        actionButton.focus();
+        expect(toggleButton).toHaveAttribute('aria-expanded', 'true');
+
+        await keyboard('{Escape}');
+        expect(onKeyDown).not.toHaveBeenCalled();
+        expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
+
+        await keyboard('{Escape}');
+        expect(onKeyDown).toHaveBeenCalledTimes(1);
       });
     });
   });
