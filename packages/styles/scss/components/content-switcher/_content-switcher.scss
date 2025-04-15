@@ -16,6 +16,7 @@
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/layout';
 @use './tokens' as *;
+@use '../button/tokens' as *;
 
 @mixin content-switcher {
   .#{$prefix}--content-switcher {
@@ -25,11 +26,17 @@
     display: flex;
     justify-content: space-evenly;
     border-radius: convert.to-rem(4px);
-    background-color: $background;
+    background-color: transparent;
     block-size: layout.size('height');
     inline-size: 100%;
     outline: 1px solid $border-inverse;
-    outline-offset: -1px;
+    outline-offset: convert.to-rem(-1px);
+  }
+
+  .#{$prefix}--content-switcher:has(
+      .#{$prefix}--content-switcher-btn:disabled
+    ) {
+    outline-color: $border-disabled;
   }
 
   .#{$prefix}--content-switcher-btn {
@@ -139,7 +146,7 @@
     border-end-end-radius: convert.to-rem(4px);
     border-inline-end: convert.to-rem(1px) solid $border-inverse;
     border-start-end-radius: convert.to-rem(4px);
-    // border-radius: convert.to-rem(4px);
+
     &:disabled {
       border-color: $border-disabled;
       color: $text-disabled;
@@ -225,7 +232,7 @@
     color: $text-inverse;
 
     &:disabled {
-      background-color: $layer-selected-disabled;
+      background-color: $button-disabled;
       color: $text-disabled;
     }
 
@@ -256,6 +263,11 @@
     border-end-start-radius: convert.to-rem(4px);
     border-inline-start: convert.to-rem(1px) solid $border-inverse;
     border-start-start-radius: convert.to-rem(4px);
+
+    &:disabled {
+      border-color: $border-disabled;
+      color: $text-disabled;
+    }
   }
 
   .#{$prefix}--content-switcher--icon-only
@@ -264,7 +276,7 @@
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:last-child
     .#{$prefix}--content-switcher--selected[disabled] {
-    border-color: $layer-selected-disabled;
+    border-color: $button-disabled;
   }
 
   .#{$prefix}--content-switcher--icon-only
@@ -273,6 +285,11 @@
     border-end-end-radius: convert.to-rem(4px);
     border-inline-end: convert.to-rem(1px) solid $border-inverse;
     border-start-end-radius: convert.to-rem(4px);
+
+    &:disabled {
+      border-color: $border-disabled;
+      color: $text-disabled;
+    }
   }
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn {
@@ -314,7 +331,6 @@
   .#{$prefix}--content-switcher-popover__wrapper:focus-within
     + .#{$prefix}--content-switcher-popover__wrapper
     .#{$prefix}--content-switcher-btn::before,
-  .#{$prefix}--content-switcher-btn:hover::before,
   .#{$prefix}--content-switcher-popover__wrapper:not(
       .#{$prefix}--content-switcher-popover--disabled
     ):hover
@@ -325,11 +341,6 @@
     + .#{$prefix}--content-switcher-popover__wrapper
     .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
-  }
-
-  .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-btn[disabled] {
-    border-color: $border-inverse;
   }
 
   .#{$prefix}--content-switcher--icon-only
@@ -361,14 +372,71 @@
   }
 
   .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
-    background-color: $content-switcher-selected;
-    @include type-style('heading-compact-01');
+    .#{$prefix}--content-switcher-btn {
+    background-color: $content-switcher-background;
+    border-block-end: convert.to-rem(1px) solid $border-strong; /* Bottom border only */
+    border-block-start: convert.to-rem(1px) solid $border-strong; /* Top border only */
+    color: $text-secondary;
 
-    color: $text-primary;
+    &:focus {
+      border: 0;
+    }
+
+    &:hover {
+      color: $text-primary;
+      cursor: pointer;
+    }
+
+    &:hover,
+    &:active {
+      z-index: 3;
+      background-color: $content-switcher-background-hover;
+      color: $text-primary;
+    }
+
+    &::before {
+      background-color: $border-strong;
+    }
 
     &::after {
       background-color: $content-switcher-selected;
+    }
+
+    &:disabled {
+      border-color: $border-disabled;
+      background-color: transparent;
+      color: $text-disabled;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher--selected
+    ):not(:focus):not(:disabled) {
+    &:first-child,
+    &:last-child {
+      border-color: $border-strong;
+    }
+  }
+
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
+    @include type-style('heading-compact-01');
+
+    background-color: $content-switcher-selected;
+    color: $text-primary;
+
+    &:disabled {
+      border-color: $border-disabled;
+      color: $text-disabled;
+    }
+
+    &:disabled::before {
+      background-color: transparent;
     }
   }
 
@@ -385,23 +453,45 @@
     }
   }
 
-  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:last-child
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
-  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:first-child
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
-    border-color: $border-inverse;
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:focus::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:focus
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:hover::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:hover
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher--selected
+    + .#{$prefix}--content-switcher-btn::before {
+    background-color: transparent;
   }
 
-  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:last-child
-    .#{$prefix}--content-switcher-btn,
-  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:first-child
-    .#{$prefix}--content-switcher-btn {
-    border-color: $border-strong;
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:disabled::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:disabled:hover
+    + .#{$prefix}--content-switcher-btn:disabled::before {
+    background-color: $border-disabled;
   }
+
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled:hover
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:disabled:hover
+    + .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before {
+    background-color: transparent;
+  }
+
+  // low contrast icons
 
   .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-btn
@@ -415,181 +505,30 @@
     fill: $icon-primary;
   }
 
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn {
-    background-color: $content-switcher-background;
-    border-block-end: convert.to-rem(1px) solid $border-strong; /* Bottom border only */
-    border-block-start: convert.to-rem(1px) solid $border-strong; /* Top border only */
-    color: $text-secondary;
-
-    &:focus {
-      border: 0;
-    }
-
-    &::after {
-      background-color: $content-switcher-selected;
-    }
-
-    .#{$prefix}--content-switcher__icon {
-      fill: $icon-secondary;
-    }
-  }
-
-  .#{$prefix}--content-switcher--low-contrast:not(
-      .#{$prefix}--content-switcher--icon-only
-    )
-    .#{$prefix}--content-switcher-btn:last-child {
-    border-end-end-radius: convert.to-rem(4px);
-    border-inline-end: convert.to-rem(1px) solid $border-strong;
-    border-start-end-radius: convert.to-rem(4px);
-  }
-
-  // dashes
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn::before {
-    position: absolute;
-    z-index: 2;
-    display: block;
-    background-color: $border-strong;
-    block-size: convert.to-rem(16px);
-    content: '';
-    inline-size: convert.to-rem(1px);
-    inset-inline-start: 0;
-  }
-
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before,
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
-    + .#{$prefix}--content-switcher-btn::before {
-    background-color: transparent;
-  }
-
-  // Basic hover state - low contrast
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:hover {
-    color: $text-primary;
-    cursor: pointer;
-  }
-
-  // Hover and active states - low contrast
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:hover,
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:active {
-    z-index: 3;
-    background-color: $content-switcher-background-hover;
-    color: $text-primary;
-  }
-
-  // Hover state for the icon - low contrast
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:hover
-    svg,
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:focus
-    svg {
-    fill: $icon-primary;
-  }
-
-  // Hover state for the divider dashes - low contrast
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:hover::before,
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:hover
-    + .#{$prefix}--content-switcher-btn::before {
-    background-color: transparent;
-  }
-
-  // Preserve selected state styles even when hovering
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:hover,
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:active {
-    // Keep using the selected background
-    background-color: $content-switcher-selected;
-    // Keep using the selected text color
-    color: $text-primary;
-    // Any other properties that need to be preserved
-  }
-
-  // Ensure icon color doesn't change on hover when selected
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:hover
-    svg {
-    // Keep using the selected icon color
-    fill: $icon-primary;
-  }
-
-  // Unselected: disabled state for low contrast
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:disabled {
-    background-color: $content-switcher-background;
-    border-block-end: convert.to-rem(1px) solid $border-disabled;
-    border-block-start: convert.to-rem(1px) solid $border-disabled;
-    color: $text-disabled;
-
-    &:hover {
-      background-color: $content-switcher-background;
-      cursor: not-allowed;
-    }
-
-    svg {
-      fill: $icon-disabled;
-    }
-  }
-
-  // First and last child special cases for disabled state
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:disabled:first-child,
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:disabled:last-child {
-    border-color: $border-disabled;
-  }
-
-  // Selected: disabled state for low contrast
-  .#{$prefix}--content-switcher--low-contrast
+  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled {
-    border: convert.to-rem(1px) solid $border-disabled;
-    background-color: $content-switcher-selected;
+    border-color: $border-disabled;
     color: $text-disabled;
-
-    &:hover {
-      background-color: $content-switcher-selected;
-      cursor: not-allowed;
-    }
-
-    svg {
-      fill: $icon-disabled;
-    }
   }
 
-  // Ensure divider doesn't show when disabled
   .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:disabled::before,
+    .#{$prefix}--content-switcher-btn:focus::before,
   .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:disabled
-    + .#{$prefix}--content-switcher-btn::before {
-    background-color: $border-disabled;
-  }
-
-  // Completely hide dividers (dashes) for disabled buttons
+    .#{$prefix}--content-switcher-popover__wrapper:focus-within
+    + .#{$prefix}--content-switcher-popover__wrapper
+    .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:disabled::before,
+    .#{$prefix}--content-switcher-popover__wrapper:not(
+      .#{$prefix}--content-switcher-popover--disabled
+    ):hover
+    + .#{$prefix}--content-switcher-popover__wrapper
+    .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:disabled
-    + .#{$prefix}--content-switcher-btn::before,
+    .#{$prefix}--content-switcher--selected::before,
   .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled::before,
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled
-    + .#{$prefix}--content-switcher-btn::before,
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:disabled
-    + .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected::before {
-    // To ensure it's completely hidden
-    display: none;
-    // Make divider transparent instead of just changing color
+    .#{$prefix}--content-switcher-popover--selected
+    + .#{$prefix}--content-switcher-popover__wrapper
+    .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
   }
 }
