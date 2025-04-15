@@ -19,6 +19,7 @@ import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
 import { DefinitionTooltip } from '../Tooltip';
 import { AspectRatio } from '../AspectRatio';
+import { Tabs } from '../Tabs/Tabs';
 
 /**
  * ----------
@@ -300,16 +301,12 @@ PageHeaderHeroImage.propTypes = {
 interface PageHeaderTabBarProps {
   children?: React.ReactNode;
   className?: string;
-  /**
-   * The tabs to render - pass Carbon's Tabs component directly
-   */
-  tabs?: React.ReactNode;
 }
 const PageHeaderTabBar = React.forwardRef<
   HTMLDivElement,
   PageHeaderTabBarProps
 >(function PageHeaderTabBar(
-  { className, children, tabs, ...other }: PageHeaderTabBarProps,
+  { className, children, ...other }: PageHeaderTabBarProps,
   ref
 ) {
   const prefix = usePrefix();
@@ -321,13 +318,38 @@ const PageHeaderTabBar = React.forwardRef<
   );
   return (
     <div className={classNames} ref={ref} {...other}>
-      {tabs && (
-        <div className={`${prefix}--page-header__tab-bar__tabs`}>{tabs}</div>
-      )}
+      {children}
     </div>
   );
 });
 PageHeaderTabBar.displayName = 'PageHeaderTabBar';
+
+interface PageHeaderTabsProps extends React.ComponentProps<typeof Tabs> {
+  children?: React.ReactNode;
+  className?: string;
+}
+
+const PageHeaderTabs = React.forwardRef<HTMLDivElement, PageHeaderTabsProps>(
+  function PageHeaderTabs(
+    { className, children, ...other }: PageHeaderTabsProps,
+    ref
+  ) {
+    const prefix = usePrefix();
+    const classNames = classnames(
+      {
+        [`${prefix}--page-header__tab-bar__tabs`]: true,
+      },
+      className
+    );
+
+    return (
+      <div className={classNames} ref={ref}>
+        <Tabs {...other}>{children}</Tabs>
+      </div>
+    );
+  }
+);
+PageHeaderTabs.displayName = 'PageHeaderTabs';
 
 /**
  * -------
@@ -349,6 +371,9 @@ HeroImage.displayName = 'PageHeaderHeroImage';
 const TabBar = PageHeaderTabBar;
 TabBar.displayName = 'PageHeaderTabBar';
 
+const PageHeaderTabComponent = PageHeaderTabs;
+PageHeaderTabComponent.displayName = 'PageHeader.Tabs';
+
 export {
   // direct exports
   PageHeader,
@@ -356,12 +381,14 @@ export {
   PageHeaderContent,
   PageHeaderHeroImage,
   PageHeaderTabBar,
+  PageHeaderTabs,
   // namespaced
   Root,
   BreadcrumbBar,
   Content,
   HeroImage,
   TabBar,
+  PageHeaderTabComponent as Tabs,
 };
 export type {
   PageHeaderProps,
@@ -369,4 +396,5 @@ export type {
   PageHeaderContentProps,
   PageHeaderHeroImageProps,
   PageHeaderTabBarProps,
+  PageHeaderTabsProps,
 };

@@ -12,6 +12,7 @@ import {
   PageHeaderContent,
   PageHeaderTabBar,
   PageHeaderHeroImage,
+  PageHeaderTabs,
 } from '../PageHeader';
 import { Dropdown } from '../Dropdown';
 import { Tag } from '../Tag';
@@ -78,6 +79,7 @@ export default {
     PageHeaderContent,
     PageHeaderHeroImage,
     PageHeaderTabBar,
+    PageHeaderTabs,
   },
   // includeStories: [],
   argTypes: {
@@ -233,24 +235,23 @@ const tabs = [
     ),
   },
 ];
-const TabComponent = () => (
-  <Tabs onTabCloseRequest={() => {}}>
-    <TabList>
-      {tabs.map((tab, index) => (
-        <Tab key={index} disabled={tab.disabled}>
-          {tab.label}
-        </Tab>
-      ))}
-    </TabList>
-    <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
-  </Tabs>
-);
 
 export const Default = (args) => (
   <PageHeader.Root {...args}>
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content />
-    <PageHeader.TabBar tabs={TabComponent()} />
+    <PageHeader.TabBar>
+      <PageHeader.Tabs onTabCloseRequest={() => {}}>
+        <TabList>
+          {tabs.map((tab, index) => (
+            <Tab key={index} disabled={tab.disabled}>
+              {tab.label}
+            </Tab>
+          ))}
+        </TabList>
+        <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
+      </PageHeader.Tabs>
+    </PageHeader.TabBar>
   </PageHeader.Root>
 );
 
@@ -272,7 +273,18 @@ export const Content = (args) => (
       pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
       Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
     </PageHeader.Content>
-    <PageHeader.TabBar tabs={TabComponent()} />
+    <PageHeader.TabBar>
+      <PageHeader.Tabs onTabCloseRequest={() => {}}>
+        <TabList>
+          {tabs.map((tab, index) => (
+            <Tab key={index} disabled={tab.disabled}>
+              {tab.label}
+            </Tab>
+          ))}
+        </TabList>
+        <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
+      </PageHeader.Tabs>
+    </PageHeader.TabBar>
   </PageHeader.Root>
 );
 
@@ -289,7 +301,18 @@ export const ContentWithIcon = (args) => (
       pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
       Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
     </PageHeader.Content>
-    <PageHeader.TabBar tabs={TabComponent()} />
+    <PageHeader.TabBar>
+      <PageHeader.Tabs onTabCloseRequest={() => {}}>
+        <TabList>
+          {tabs.map((tab, index) => (
+            <Tab key={index} disabled={tab.disabled}>
+              {tab.label}
+            </Tab>
+          ))}
+        </TabList>
+        <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
+      </PageHeader.Tabs>
+    </PageHeader.TabBar>
   </PageHeader.Root>
 );
 
@@ -321,7 +344,18 @@ export const ContentWithContextualActions = (args) => (
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
     </PageHeader.Content>
-    <PageHeader.TabBar tabs={TabComponent()} />
+    <PageHeader.TabBar>
+      <PageHeader.Tabs onTabCloseRequest={() => {}}>
+        <TabList>
+          {tabs.map((tab, index) => (
+            <Tab key={index} disabled={tab.disabled}>
+              {tab.label}
+            </Tab>
+          ))}
+        </TabList>
+        <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
+      </PageHeader.Tabs>
+    </PageHeader.TabBar>
   </PageHeader.Root>
 );
 
@@ -362,7 +396,18 @@ export const ContentWithHeroImage = (args) => (
             </PageHeader.HeroImage>
           </Column>
         </Grid>
-        <PageHeader.TabBar tabs={TabComponent()} />
+        <PageHeader.TabBar>
+          <PageHeader.Tabs onTabCloseRequest={() => {}}>
+            <TabList>
+              {tabs.map((tab, index) => (
+                <Tab key={index} disabled={tab.disabled}>
+                  {tab.label}
+                </Tab>
+              ))}
+            </TabList>
+            <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
+          </PageHeader.Tabs>
+        </PageHeader.TabBar>
       </PageHeader.Root>
     </Column>
   </Grid>
@@ -430,14 +475,36 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
     </PageHeader.Content>
-    <PageHeader.TabBar tabs={TabComponent()} />
+    <PageHeader.TabBar>
+      <PageHeader.Tabs onTabCloseRequest={() => {}}>
+        <TabList>
+          {tabs.map((tab, index) => (
+            <Tab key={index} disabled={tab.disabled}>
+              {tab.label}
+            </Tab>
+          ))}
+        </TabList>
+        <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
+      </PageHeader.Tabs>
+    </PageHeader.TabBar>
   </PageHeader.Root>
 );
 
 export const TabBar = (args) => {
   return (
     <PageHeader.Root>
-      <PageHeaderTabBar tabs={TabComponent()} />
+      <PageHeader.TabBar {...args}>
+        <PageHeader.Tabs onTabCloseRequest={() => {}}>
+          <TabList>
+            {tabs.map((tab, index) => (
+              <Tab key={index} disabled={tab.disabled}>
+                {tab.label}
+              </Tab>
+            ))}
+          </TabList>
+          <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
+        </PageHeader.Tabs>
+      </PageHeader.TabBar>
     </PageHeader.Root>
   );
 };
@@ -446,6 +513,17 @@ export const DirectExports = (args) => (
   <PageHeaderDirect {...args}>
     <PageHeaderBreadcrumbBar />
     <PageHeaderContent />
-    <PageHeaderTabBar tabs={TabComponent()} />
+    <PageHeaderTabBar>
+      <PageHeaderTabs onTabCloseRequest={() => {}}>
+        <TabList>
+          {tabs.map((tab, index) => (
+            <Tab key={index} disabled={tab.disabled}>
+              {tab.label}
+            </Tab>
+          ))}
+        </TabList>
+        <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
+      </PageHeaderTabs>
+    </PageHeaderTabBar>
   </PageHeaderDirect>
 );
