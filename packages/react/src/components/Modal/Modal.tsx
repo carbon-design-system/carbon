@@ -15,7 +15,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
-import toggleClass from '../../tools/toggleClass';
+import { toggleClass } from '../../tools/toggleClass';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import InlineLoading from '../InlineLoading';
@@ -267,7 +267,7 @@ const Modal = React.forwardRef(function Modal(
     slug,
     ...rest
   }: ModalProps,
-  ref: React.LegacyRef<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>
 ) {
   const prefix = usePrefix();
   const button = useRef<HTMLButtonElement>(null);
