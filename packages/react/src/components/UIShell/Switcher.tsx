@@ -5,13 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, forwardRef, ReactNode } from 'react';
+import React, {
+  Children,
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  useRef,
+  type ComponentProps,
+  type ReactNode,
+} from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import getDisplayName from '../../prop-types/tools/getDisplayName';
+import { SwitcherDivider, SwitcherItem } from '.';
 
 export interface BaseSwitcherProps {
   /**
@@ -109,29 +118,30 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
       }
     };
 
-    const childrenWithProps = React.Children.toArray(children).map(
-      (child, index) => {
-        // only setup click handlers if onChange event is passed
-        if (
-          React.isValidElement(child) &&
-          child.type &&
-          getDisplayName(child.type) === 'SwitcherItem'
-        ) {
-          return React.cloneElement(child as React.ReactElement<any>, {
-            handleSwitcherItemFocus,
-            index,
-            key: index,
-            expanded,
-          });
-        }
-
-        return React.cloneElement(child as React.ReactElement<any>, {
+    const childrenWithProps = Children.toArray(children).map((child, index) => {
+      if (
+        isValidElement<ComponentProps<typeof SwitcherItem>>(child) &&
+        child.type === SwitcherItem
+      ) {
+        return cloneElement(child, {
+          handleSwitcherItemFocus,
           index,
           key: index,
           expanded,
         });
       }
-    );
+
+      if (
+        isValidElement<ComponentProps<typeof SwitcherDivider>>(child) &&
+        child.type === SwitcherDivider
+      ) {
+        return cloneElement(child, {
+          key: index,
+        });
+      }
+
+      return child;
+    });
 
     return (
       <ul ref={ref} className={className} {...accessibilityLabel}>
