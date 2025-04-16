@@ -51,12 +51,24 @@ $divider-width: 1px;
   }
 }
 
+:host(#{$prefix}-select[inline]) {
+  @extend .#{$prefix}--select--inline;
+}
+
 :host(#{$prefix}-select[disabled]) {
   @extend .#{$prefix}--select--disabled;
 }
 
 :host(#{$prefix}-select[invalid]) {
   @extend .#{$prefix}--select--invalid;
+}
+
+:host(#{$prefix}-select[warn]) {
+  @extend .#{$prefix}--select--warning;
+}
+
+:host(#{$prefix}-select[slug]) {
+  @extend .#{$prefix}--select--slug;
 }
 
 :host(#{$prefix}-select[readonly]) select {

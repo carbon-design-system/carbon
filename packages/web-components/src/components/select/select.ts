@@ -171,6 +171,7 @@ class CDSSelect extends FormMixin(LitElement) {
       );
 
     this._hasAILabel = Boolean(hasContent);
+    this.setAttribute('slug', `${this._hasAILabel}`);
     (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     this.requestUpdate();
   }
@@ -410,18 +411,7 @@ class CDSSelect extends FormMixin(LitElement) {
       _placeholderItemValue: placeholderItemValue,
       _handleInput: handleInput,
       _handleAILabelSlotChange: handleAILabelSlotChange,
-      _hasAILabel: hasAILabel,
     } = this;
-
-    const selectClasses = classMap({
-      [`${prefix}--select`]: true,
-      [`${prefix}--select--inline`]: inline,
-      [`${prefix}--select--invalid`]: invalid,
-      [`${prefix}--select--warning`]: warn,
-      [`${prefix}--select--disabled`]: disabled,
-      [`${prefix}--select--readonly`]: readonly,
-      [`${prefix}--select--slug`]: hasAILabel,
-    });
 
     const inputClasses = classMap({
       [`${prefix}--select-input`]: true,
@@ -475,7 +465,10 @@ class CDSSelect extends FormMixin(LitElement) {
             `}
         ${this._renderItems(this)}
       </select>
-      ${ChevronDown16({ class: `${prefix}--select__arrow` })}
+      ${ChevronDown16({
+        class: `${prefix}--select__arrow`,
+        'aria-hidden': true,
+      })}
       <slot
         name="ai-label"
         style="--${prefix}-show-before: ${warn || invalid ? 'block' : 'none'}"
@@ -492,29 +485,27 @@ class CDSSelect extends FormMixin(LitElement) {
     `;
 
     return html`
-      <div class="${selectClasses}">
-        ${!hideLabel
-          ? html`<label class="${labelClasses}" for="input">
-              <slot name="label-text"> ${labelText} </slot>
-            </label>`
-          : null}
-        ${inline
-          ? html`<div
-              class="${prefix}--select-input--inline__wrapper"
-              ?data-invalid="${invalid}">
-              <div
-                class="${prefix}--select-input__wrapper"
-                ?data-invalid="${invalid}">
-                ${input}
-              </div>
-            </div>`
-          : html`<div
+      ${!hideLabel
+        ? html`<label class="${labelClasses}" for="input">
+            <slot name="label-text"> ${labelText} </slot>
+          </label>`
+        : null}
+      ${inline
+        ? html`<div
+            class="${prefix}--select-input--inline__wrapper"
+            ?data-invalid="${invalid}">
+            <div
               class="${prefix}--select-input__wrapper"
               ?data-invalid="${invalid}">
               ${input}
-            </div> `}
-        ${errorText ? errorText : supplementalText}
-      </div>
+            </div>
+          </div>`
+        : html`<div
+            class="${prefix}--select-input__wrapper"
+            ?data-invalid="${invalid}">
+            ${input}
+          </div> `}
+      ${errorText ? errorText : supplementalText}
     `;
   }
 
