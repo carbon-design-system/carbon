@@ -19,7 +19,7 @@ import deprecate from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import { useAnnouncer } from '../../internal/useAnnouncer';
+import { getAnnouncement } from '../../internal/getAnnouncement';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useId } from '../../internal/useId';
@@ -429,7 +429,7 @@ const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
 
   const announcerRef = useRef(null);
   const [prevAnnouncement, setPrevAnnouncement] = useState('');
-  const ariaAnnouncement = useAnnouncer(
+  const ariaAnnouncement = getAnnouncement(
     textCount,
     maxCount,
     counterMode === 'word' ? 'word' : undefined,

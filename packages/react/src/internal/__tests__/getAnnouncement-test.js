@@ -7,14 +7,14 @@
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import { useAnnouncer } from '../useAnnouncer';
+import { getAnnouncement } from '../getAnnouncement';
 
-describe('useAnnouncer', () => {
+describe('getAnnouncement', () => {
   it('should emit announcement for characters', () => {
     let value = null;
 
     function TestComponent() {
-      value = useAnnouncer(9, 10);
+      value = getAnnouncement(9, 10);
       return null;
     }
 
@@ -26,7 +26,7 @@ describe('useAnnouncer', () => {
     let value = null;
 
     function TestComponent() {
-      value = useAnnouncer(9, 10, 'word', 'words');
+      value = getAnnouncement(9, 10, 'word', 'words');
       return null;
     }
 
@@ -38,7 +38,7 @@ describe('useAnnouncer', () => {
     let value = null;
 
     function TestComponent() {
-      value = useAnnouncer(10, 10, 'word', 'words');
+      value = getAnnouncement(10, 10, 'word', 'words');
       return null;
     }
 
@@ -50,7 +50,7 @@ describe('useAnnouncer', () => {
     let value = null;
 
     function TestComponent() {
-      value = useAnnouncer(10, 10, 'character', 'characters');
+      value = getAnnouncement(10, 10, 'character', 'characters');
       return null;
     }
 

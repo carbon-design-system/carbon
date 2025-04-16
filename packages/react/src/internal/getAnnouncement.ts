@@ -6,7 +6,7 @@
  */
 
 /** Returns an announcement message when the remaining count is low. */
-export const useAnnouncer = (
+export const getAnnouncement = (
   count: number,
   maxCount?: number,
   singularEntityName = 'character',
