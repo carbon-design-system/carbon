@@ -274,7 +274,7 @@ export const withMenuAlignment = {
 };
 
 const meta = {
-  title: 'Components/MenuButton',
+  title: 'Components/Menu Button',
 };
 
 export default meta;
