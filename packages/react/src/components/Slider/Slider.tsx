@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,6 +30,7 @@ import {
   UpperHandleFocus,
 } from './SliderHandles';
 import { TranslateWithId } from '../../types/common';
+import { clamp } from '../../internal/clamp';
 
 const ThumbWrapper = ({
   hasTooltip = false,
@@ -299,12 +300,6 @@ export interface SliderProps
   warnText?: React.ReactNode;
 }
 
-interface CalcValueProps {
-  clientX?: number;
-  value?: number;
-  useRawValue?: boolean;
-}
-
 interface CalcLeftPercentProps {
   clientX?: number;
   value?: number;
@@ -499,9 +494,9 @@ class Slider extends PureComponent<SliderProps> {
     isRtl: false,
   };
 
-  thumbRef: React.RefObject<HTMLDivElement>;
-  thumbRefUpper: React.RefObject<HTMLDivElement>;
-  filledTrackRef: React.RefObject<HTMLDivElement>;
+  thumbRef: React.RefObject<HTMLDivElement | null>;
+  thumbRefUpper: React.RefObject<HTMLDivElement | null>;
+  filledTrackRef: React.RefObject<HTMLDivElement | null>;
   element: HTMLDivElement | null = null;
   inputId = '';
   track: HTMLDivElement | null | undefined;
@@ -622,33 +617,16 @@ class Slider extends PureComponent<SliderProps> {
   }
 
   /**
-   * Synonymous to ECMA2017+ `Math.clamp`.
+   * Rounds a given value to the nearest step defined by the slider's `step`
+   * prop.
    *
-   * @param {number} val
-   * @param {number} min
-   * @param {number} max
-   *
-   * @returns `val` if `max>=val>=min`; `min` if `val<min`; `max` if `val>max`.
+   * @param value - The value to adjust to the nearest step. Defaults to `0`.
+   * @returns The value rounded to the precision determined by the step.
    */
-  clamp(val, min, max) {
-    return Math.max(min, Math.min(val, max));
-  }
+  nearestStepValue(value = 0) {
+    const decimals = (this.props.step?.toString().split('.')[1] || '').length;
 
-  /**
-   * Takes a value and ensures it fits to the steps of the range
-   * @param value
-   * @returns value of the nearest step
-   */
-  nearestStepValue(value) {
-    const tempInput = document.createElement('input');
-
-    tempInput.type = 'range';
-    tempInput.min = `${this.props.min}`;
-    tempInput.max = `${this.props.max}`;
-    tempInput.step = `${this.props.step}`;
-    tempInput.value = `${value}`;
-
-    return parseFloat(tempInput.value);
+    return Number(value.toFixed(decimals));
   }
 
   /**
@@ -839,7 +817,11 @@ class Slider extends PureComponent<SliderProps> {
           ? this.state.value
           : this.state.valueUpper;
       const { value, left } = this.calcValue({
-        value: this.calcValueForDelta(currentValue, delta, this.props.step),
+        value: this.calcValueForDelta(
+          currentValue ?? this.props.min,
+          delta,
+          this.props.step
+        ),
       });
       this.setValueLeftForHandle(this.state.activeHandle, {
         value: this.nearestStepValue(value),
@@ -1042,65 +1024,67 @@ class Slider extends PureComponent<SliderProps> {
     return 0;
   };
 
-  calcSteppedValuePercent = ({ leftPercent, range }) => {
-    const { step = 1 } = this.props;
-    const totalSteps = range / step;
+  /**
+   * Calculates the discrete value (snapped to the nearest step) along
+   * with the corresponding handle position percentage.
+   */
+  calcDiscreteValueAndPercent = ({
+    leftPercent,
+  }: {
+    /** The percentage representing the position on the track. */
+    leftPercent: number;
+  }) => {
+    const { step = 1, min, max } = this.props;
+    const numSteps =
+      Math.floor((max - min) / step) + ((max - min) % step === 0 ? 1 : 2);
+    /** Index of the step that corresponds to `leftPercent`. */
+    const stepIndex = Math.round(leftPercent * (numSteps - 1));
+    const discreteValue =
+      stepIndex === numSteps - 1 ? max : min + step * stepIndex;
+    /** Percentage corresponding to the step index. */
+    const discretePercent = stepIndex / (numSteps - 1);
 
-    let steppedValue = Math.round(leftPercent * totalSteps) * step;
-    const steppedPercent = this.clamp(steppedValue / range, 0, 1);
-
-    steppedValue = this.clamp(
-      steppedValue + this.props.min,
-      this.props.min,
-      this.props.max
-    );
-
-    return [steppedValue, steppedPercent];
+    return { discreteValue, discretePercent };
   };
 
   /**
-   * Calculates a new Slider `value` and `left` (thumb offset) given a `clientX`,
-   * `value`, or neither of those.
-   * - If `clientX` is specified, it will be used in
-   *   conjunction with the Slider's bounding rectangle to calculate the new
-   *   values.
-   * - If `clientX` is not specified and `value` is, it will be used to
-   *   calculate new values as though it were the current value of the Slider.
-   * - If neither `clientX` nor `value` are specified, `this.props.value` will
-   *   be used to calculate the new values as though it were the current value
-   *   of the Slider.
-   *
-   * @param {object} params
-   * @param {number} [params.clientX] Optional clientX value expected to be from
-   *   an event fired by one of the Slider's `DRAG_EVENT_TYPES` events.
-   * @param {number} [params.value] Optional value use during calculations if
-   *   clientX is not provided.
-   * @param {boolean} [params.useRawValue=false] `true` to use the given value as-is.
+   * Calculates the slider's value and handle position based on either a
+   * mouse/touch event or an explicit value.
    */
-  calcValue = ({ clientX, value, useRawValue = false }: CalcValueProps) => {
+  calcValue = ({
+    clientX,
+    value,
+    useRawValue,
+  }: {
+    /** The x-coordinate from a mouse/touch event. */
+    clientX?: number;
+    /** Value to base the calculations on (if no `clientX`). */
+    value?: number;
+    /** Whether to bypass the stepping logic and use the raw value. */
+    useRawValue?: boolean;
+  }) => {
     const range = this.props.max - this.props.min;
-
-    // @todo solve for rtl.
-    const leftPercent = this.calcLeftPercent({
+    const leftPercentRaw = this.calcLeftPercent({
       clientX,
       value,
       range,
     });
+    /** `leftPercentRaw` clamped between 0 and 1. */
+    const leftPercent = clamp(leftPercentRaw, 0, 1);
 
     if (useRawValue) {
-      // Adjusts only for min/max of thumb position
       return {
         value,
-        left: Math.min(1, Math.max(0, leftPercent)) * 100,
+        left: leftPercent * 100,
       };
     }
 
-    const [steppedValue, steppedPercent] = this.calcSteppedValuePercent({
-      leftPercent,
-      range,
-    });
+    // Use the discrete value and percentage for snapping.
+    const { discreteValue, discretePercent } = this.calcDiscreteValueAndPercent(
+      { leftPercent }
+    );
 
-    return { value: steppedValue, left: steppedPercent * 100 };
+    return { value: discreteValue, left: discretePercent * 100 };
   };
 
   calcDistanceToHandle = (handle: HandlePosition, clientX) => {
@@ -1111,21 +1095,22 @@ class Slider extends PureComponent<SliderProps> {
   };
 
   /**
-   * Given the current value, delta and step, calculate the new value.
+   * Calculates a new slider value based on the current value, a change delta,
+   * and a step.
    *
-   * @param {number} currentValue
-   *   Current value user is moving from.
-   * @param {number} delta
-   *   Movement from the current value. Can be positive or negative.
-   * @param {number} step
-   *   A value determining how much the value should increase/decrease by moving
-   *   the thumb by mouse.
+   * @param currentValue - The starting value from which the slider is moving.
+   * @param delta - The amount to adjust the current value by.
+   * @param step - The step. Defaults to `1`.
+   * @returns The new slider value, rounded to the same number of decimal places
+   *          as the step.
    */
-  calcValueForDelta = (currentValue, delta, step = 1) => {
-    return (
-      (delta > 0 ? Math.floor(currentValue / step) * step : currentValue) +
-      delta
-    );
+  calcValueForDelta = (currentValue: number, delta: number, step = 1) => {
+    const base =
+      delta > 0 ? Math.floor(currentValue / step) * step : currentValue;
+    const newValue = base + delta;
+    const decimals = (step.toString().split('.')[1] || '').length;
+
+    return Number(newValue.toFixed(decimals));
   };
 
   /**

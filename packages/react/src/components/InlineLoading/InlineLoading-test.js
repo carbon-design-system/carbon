@@ -24,8 +24,10 @@ describe('InlineLoading', () => {
 
   it('should render a loader if the status is inactive', () => {
     render(<InlineLoading status="inactive" />);
-
-    expect(screen.getByTitle('not loading')).toBeInTheDocument();
+    expect(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.querySelector('.cds--inline-loading__inactive-status')
+    ).toBeInTheDocument();
   });
 
   it('should render the success state if status is finished', () => {

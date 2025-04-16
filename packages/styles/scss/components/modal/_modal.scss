@@ -7,6 +7,7 @@
 
 @use '../button';
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../breakpoint' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
@@ -23,34 +24,57 @@
 /// Modal styles
 /// @access public
 /// @group modal
-@mixin modal {
+@mixin modal(
+  $enable-experimental-focus-wrap-without-sentinels: false,
+  $enable-dialog-element: false
+) {
   .#{$prefix}--modal {
-    position: fixed;
-    z-index: z('modal');
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: $overlay;
-    block-size: 100vh;
-    content: '';
-    inline-size: 100vw;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    opacity: 0;
-    transition:
-      opacity $duration-moderate-02 motion(exit, expressive),
-      visibility 0ms linear $duration-moderate-02;
-    visibility: hidden;
-
-    &.is-visible {
-      opacity: 1;
+    // For modals using the native dialog element, the modal visibility is handled
+    // by the Dialog styles.
+    @if not(
+      enabled('enable-experimental-focus-wrap-without-sentinels') or
+        $enable-experimental-focus-wrap-without-sentinels or
+        enabled('enable-dialog-element') or
+        $enable-dialog-element
+    )
+    {
+      position: fixed;
+      z-index: z('modal');
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $overlay;
+      block-size: 100vh;
+      content: '';
+      inline-size: 100vw;
+      inset-block-start: 0;
+      inset-inline-start: 0;
+      opacity: 0;
       transition:
-        opacity $duration-moderate-02 motion(entrance, expressive),
-        visibility 0ms linear;
-      visibility: inherit;
+        opacity $duration-moderate-02 motion(exit, expressive),
+        visibility 0ms linear $duration-moderate-02;
+      visibility: hidden;
+    }
 
-      @media screen and (prefers-reduced-motion: reduce) {
-        transition: none;
+    // For modals using the native dialog element, the modal visibility is handled
+    // by the Dialog styles.
+    @if not(
+      enabled('enable-experimental-focus-wrap-without-sentinels') or
+        $enable-experimental-focus-wrap-without-sentinels or
+        enabled('enable-dialog-element') or
+        $enable-dialog-element
+    )
+    {
+      &.is-visible {
+        opacity: 1;
+        transition:
+          opacity $duration-moderate-02 motion(entrance, expressive),
+          visibility 0ms linear;
+        visibility: inherit;
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
     }
 

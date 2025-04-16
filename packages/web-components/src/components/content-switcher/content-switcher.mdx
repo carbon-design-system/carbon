@@ -1,4 +1,4 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as ContentSwitcherStories from './content-switcher.stories';
 
@@ -6,49 +6,120 @@ import * as ContentSwitcherStories from './content-switcher.stories';
 
 # Content switcher
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/content-switcher)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/content-switcher)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/content-switcher/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/content-switcher/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/content-switcher)
+## Table of Contents
 
-Content switcher manipulates the content shown following an exclusive or
-“either/or” pattern. It is used to toggle between two or more content sections
-within the same space on screen. Only one section can be shown at a time.
+- [Overview](#overview)
+- [Icon Only](#icon-only)
+- [Icon Only With Layer](#icon-only-with-layer)
+- [With Layer](#with-layer)
+- [Component API](#component-api)
+  - [ContentSwitcher `onChange`](#contentswitcher-onchange)
+  - [Switch `disabled`](#switch-disabled)
+- [References](#references)
+  - [Accessibility concerns](#accessibility-concerns)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+Content switchers allow users to toggle between two or more content sections
+within the same space on screen. Only one content section is shown at a time.
+Create Switch components for each section in the content switcher.
 
-### JS (via import)
+<Canvas of={ContentSwitcherStories.Default} />
 
-```javascript
-import '@carbon/web-components/es/components/content-switcher/index.js';
-```
+## Icon Only
 
-<Markdown>{`${cdnJs({ components: ['content-switcher'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+<Canvas of={ContentSwitcherStories.IconOnly} />
 
-### HTML
+## Icon Only With Layer
 
-```html
-<cds-content-switcher>
-  <cds-content-switcher-item value="all">Option 1</cds-content-switcher-item>
-  <cds-content-switcher-item value="cloudFoundry" disabled
-    >Option 2</cds-content-switcher-item
-  >
-  <cds-content-switcher-item value="staging"
-    >Option 3</cds-content-switcher-item
-  >
-  <cds-content-switcher-item value="dea">Option 4</cds-content-switcher-item>
-  <cds-content-switcher-item value="router">Option 5</cds-content-switcher-item>
-</cds-content-switcher>
-```
+<Canvas of={ContentSwitcherStories.IconOnlyWithLayer} />
 
-## `<cds-content-switcher>` attributes, properties and events
+## With Layer
+
+<Canvas of={ContentSwitcherStories.WithLayer} />
+
+## Component API
 
 <ArgTypes of="cds-content-switcher" />
 
-## `<cds-content-switcher-item>` attributes and properties
-
 <ArgTypes of="cds-content-switcher-item" />
+
+### ContentSwitcher `onChange`
+
+You can use the `cds-content-switcher-selected` or
+`cds-content-switcher-beingselected` custom events to call a custom function for
+event handling.
+
+```javascript
+document.addEventListener('cds-content-switcher-selected', (event) => {
+  const { currentTarget } = event;
+  const { detail } = event as CustomEvent;
+  const { evt } = detail;
+  console.log('details:', currentTarget, evt);
+});
+```
+
+### Switch `disabled`
+
+You can disable the content switcher items by adding the `disabled` attribute to
+`cds-content-switcher-item` elements directly.
+
+<cds-content-switcher>
+  <cds-content-switcher-item disabled name="one" text="First section">
+    Option 1
+  </cds-content-switcher-item>
+  <cds-content-switcher-item disabled name="two" text="Second section">
+    Option 2
+  </cds-content-switcher-item>
+  <cds-content-switcher-item disabled name="three" text="Third section">
+    Option 3
+  </cds-content-switcher-item>
+</cds-content-switcher>
+
+```html
+<cds-content-switcher>
+  <cds-content-switcher-item disabled name="one" text="First section">
+    Option 1
+  </cds-content-switcher-item>
+  <cds-content-switcher-item disabled name="two" text="Second section">
+    Option 2
+  </cds-content-switcher-item>
+  <cds-content-switcher-item disabled name="three" text="Third section">
+    Option 3
+  </cds-content-switcher-item>
+</cds-content-switcher>
+```
+
+## References
+
+### Accessibility concerns
+
+Each content switcher tab must have a unique title that clearly describes the
+content panel. This is particularly helpful for users of assistive technologies
+so they have the necessary information to efficiently navigate the content.
+
+Content authors need to ensure the content that is added to the tab panel is
+accessible. For example, if you add an image to the panel you need to include
+alternative text to pass accessibility testing.
+
+[W3C WAI-ARIA Tab Design Pattern](https://www.w3.org/TR/wai-aria-practices-1.1/#tabpanel)
+covers the usage of ARIA names, state and roles, as well as the expected
+keyboard interactions.
+
+[Carbon Usage Guidelines](https://www.carbondesignsystem.com/components/content-switcher/usage/)
+
+<Markdown>{`${cdnJs({ components: ['content-switcher'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions, and
+leaving any other comments on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/content-switcher/content-switcher.mdx).

@@ -1,0 +1,50 @@
+//
+// Copyright IBM Corp. 2019, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/time-picker/index';
+@use '@carbon/styles/scss/components/select';
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/convert' as convert;
+
+:host(#{$prefix}-time-picker) {
+  @include emit-layout-tokens();
+}
+
+:host(#{$prefix}-time-picker-select) {
+  @extend .#{$prefix}--select;
+  @extend .#{$prefix}--time-picker__select;
+}
+
+:host(#{$prefix}-time-picker-select) .#{$prefix}--select {
+  inline-size: 100%;
+}
+
+:host(#{$prefix}-time-picker-select[disabled]) {
+  @extend .#{$prefix}--select--disabled;
+}
+
+:host(#{$prefix}-time-picker-select[readonly]) {
+  @extend .#{$prefix}--select--readonly;
+}
+
+:host(#{$prefix}-time-picker-select[readonly]) select {
+  pointer-events: none;
+}
+
+:host(#{$prefix}-time-picker-select) select {
+  margin: 0;
+  inline-size: auto;
+  line-height: 1;
+  min-inline-size: auto;
+  padding-inline-end: convert.to-rem(48px);
+}

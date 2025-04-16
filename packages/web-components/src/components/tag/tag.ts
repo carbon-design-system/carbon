@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -8,7 +6,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import Close16 from '@carbon/icons/lib/close/16.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
@@ -22,7 +20,7 @@ export { TAG_SIZE, TAG_TYPE };
 
 /**
  * Tag.
- *
+ * @element cds-tag
  * @fires cds-tag-beingclosed - The custom event fired as the element is being closed
  * @fires cds-tag-closed - The custom event fired after the element has been closed
  */
@@ -57,13 +55,23 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   /**
+   * Handles `slotchange` event.
+   */
+  protected _handleIconSlotChange({ target }: Event) {
+    const hasIcon = (target as HTMLSlotElement).assignedNodes();
+
+    this.hasCustomIcon = Boolean(hasIcon.length > 0);
+    this.requestUpdate();
+  }
+
+  /**
    * Handles `click` event on this element.
    *
    * @param event The event.
    */
   @HostListener('shadowRoot:click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleClick = (event: MouseEvent) => {
+  protected _handleClick = (event: MouseEvent) => {
     if (event.composedPath().indexOf(this._buttonNode!) >= 0) {
       if (this.disabled) {
         event.stopPropagation();
@@ -98,8 +106,10 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
 
   /**
    * Text to show on filter tag "clear" buttons. Corresponds to the attribute with the same name
+   *
+   * @deprecated The `title` property has been deprecated and will be removed in the next major version. Use cds-dismissible-tag instead.
    */
-  @property({ type: String, reflect: true })
+  @property({ type: String })
   title = 'Clear filter';
 
   /**
@@ -108,14 +118,19 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  @property({ type: Boolean })
-  hasCustomIcon = false;
-
   /**
    * Determine if is a filter/chip
+   *
+   * @deprecated The `filter` property has been deprecated and will be removed in the next major version. Use cds-dismissible-tag instead.
    */
   @property({ type: Boolean, reflect: true })
   filter = false;
+
+  /**
+   * `true` if there is a custom icon.
+   */
+  @property({ type: Boolean, attribute: 'has-custom-icon', reflect: true })
+  hasCustomIcon = false;
 
   /**
    * `true` if the tag should be open.
@@ -135,16 +150,53 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   @property({ reflect: true })
   type = TAG_TYPE.GRAY;
 
+  /**
+   * true if the tag text has ellipsis applied
+   */
+  @state()
+  _hasEllipsisApplied = false;
+
+  updated() {
+    const textContainer = this.shadowRoot?.querySelector(
+      `.${prefix}--tag__label`
+    );
+    if (!textContainer || this._hasEllipsisApplied === true) return;
+
+    this._hasEllipsisApplied =
+      textContainer.scrollWidth > textContainer.clientWidth;
+
+    const root = this.getRootNode();
+    // Check if the root is a shadow root and get its host
+    if (root instanceof ShadowRoot) {
+      const parent = root.host.tagName.toLowerCase();
+      if (
+        parent === `${prefix}-selectable-tag` ||
+        parent === `${prefix}-operational-tag`
+      ) {
+        this.setAttribute('role', 'button');
+        this.tabIndex = this.disabled ? -1 : 0;
+      }
+    }
+  }
+
   render() {
     const {
       disabled,
       filter,
       _handleAILabelSlotChange: handleAILabelSlotChange,
+      _handleIconSlotChange: handleIconSlotChange,
+      size,
       title,
     } = this;
+
     return html`
-      <slot name="icon"></slot>
-      <slot></slot>
+      ${size !== TAG_SIZE.SMALL
+        ? html`<slot name="icon" @slotchange="${handleIconSlotChange}"></slot>`
+        : ''}
+      <span class="${prefix}--tag__label">
+        <slot></slot>
+      </span>
+      <slot name="decorator" @slotchange="${handleAILabelSlotChange}"></slot>
       <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>
       <slot name="slug" @slotchange="${handleAILabelSlotChange}"></slot>
       ${filter

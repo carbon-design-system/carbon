@@ -51,11 +51,13 @@ export default {
   ],
 };
 
-export const Default = () => {
+// Note: autoAlign is used here only to make tooltips visible in StackBlitz,
+// autoAlign is experimental and not part of the actual implementation.
+export const Default = (args) => {
   const label =
     'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
-    <Tooltip align="bottom" label={label} closeOnActivation={false}>
+    <Tooltip autoAlign label={label} closeOnActivation={false} {...args}>
       <button className="sb-tooltip-trigger" type="button">
         <Help />
       </button>
@@ -130,9 +132,11 @@ export const ExperimentalAutoAlign = () => {
   );
 };
 
+// Note: autoAlign is used here only to make tooltips visible in StackBlitz,
+// autoAlign is experimental and not part of the actual implementation.
 export const Duration = () => {
   return (
-    <Tooltip label="Label one" enterDelayMs={0} leaveDelayMs={300}>
+    <Tooltip autoAlign label="Label one" enterDelayMs={0} leaveDelayMs={300}>
       <Button>This button has a tooltip</Button>
     </Tooltip>
   );

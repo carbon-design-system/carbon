@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -68,6 +66,13 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
   leaveDelayMs = 300;
 
   /**
+   * Only open tooltip on keyboard interactions, this is used for interactive tags
+   * (ie. operational-tag, selectable-tag)
+   */
+  @property({ attribute: 'keyboard-only', type: Boolean })
+  keyboardOnly = false;
+
+  /**
    * Specify the size of the tooltip
    */
   @property({ reflect: true })
@@ -86,9 +91,14 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
   toolbarAction = false;
 
   /**
-   * Handles `mouseover` event on this element.
+   * Track if last interaction was a keyboard interaction
    */
-  private _handleHover = async () => {
+  private lastInteractionWasKeyboard = false;
+
+  /**
+   * Handles opening of tooltip
+   */
+  private _showTooltip = async () => {
     window.clearTimeout(this.timeoutId);
     this.timeoutId = window.setTimeout(async () => {
       this.open = true;
@@ -100,6 +110,19 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
         (this.querySelector(selectorTooltipContent) as HTMLElement)?.focus();
       }
     }, this.enterDelayMs);
+  };
+
+  /**
+   * Handles `mouseover` event on this element.
+   */
+  private _handleHover = (event) => {
+    if (this.keyboardOnly) {
+      if (event instanceof FocusEvent && this.lastInteractionWasKeyboard) {
+        this._showTooltip();
+      }
+    } else {
+      this._showTooltip();
+    }
   };
 
   /**
@@ -121,6 +144,7 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
   @HostListener('click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = async () => {
+    this.lastInteractionWasKeyboard = false;
     if (this.closeOnActivation) {
       this._handleHoverOut();
     }
@@ -129,11 +153,19 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
   /**
    * Handles `keydown` event on this element.
    */
-  @HostListener('click')
+  @HostListener('keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = async (event) => {
+    // needed for interactive tags for when the tag is focused from tabbing into it
+    // tooltip is expected to open only from keyboard interaction
+    if (event.key === 'Tab') {
+      this.lastInteractionWasKeyboard = true;
+    }
     if (event.key === ' ' || event.key === 'Enter' || event.key === 'Escape') {
-      this._handleHoverOut();
+      this.lastInteractionWasKeyboard = true;
+      if (this.closeOnActivation) {
+        this._handleHoverOut();
+      }
     }
   };
 
@@ -149,19 +181,23 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
     if (!component[0]) {
       return;
     }
+
     (component[0] as HTMLElement).addEventListener('focus', this._handleHover);
     (component[0] as HTMLElement).addEventListener(
       'focusout',
       this._handleHoverOut
     );
-    (component[0] as HTMLElement).addEventListener(
-      'mouseover',
-      this._handleHover
-    );
-    (component[0] as HTMLElement).addEventListener(
-      'mouseleave',
-      this._handleHoverOut
-    );
+
+    if (!this.keyboardOnly) {
+      (component[0] as HTMLElement).addEventListener(
+        'mouseover',
+        this._handleHover
+      );
+      (component[0] as HTMLElement).addEventListener(
+        'mouseleave',
+        this._handleHoverOut
+      );
+    }
     this.requestUpdate();
   }
 
@@ -172,7 +208,13 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
     if (!this.shadowRoot) {
       this.attachShadow({ mode: 'open' });
     }
+    window.addEventListener('keydown', this._handleKeydown, true);
     super.connectedCallback();
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener('keydown', this._handleKeydown, true);
+    super.disconnectedCallback();
   }
 
   updated(changedProperties) {

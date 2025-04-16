@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,6 +30,7 @@ import { useSavedCallback } from '../../internal/useSavedCallback';
 import { FormContext } from '../FluidForm';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { DateLimit, DateOption } from 'flatpickr/dist/types/options';
+import type { Instance } from 'flatpickr/dist/types/instance';
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((_day, index) => {
@@ -663,16 +664,15 @@ const DatePicker = React.forwardRef(function DatePicker(
       noCalendar: readOnly,
       nextArrow: rightArrowHTML,
       prevArrow: leftArrowHTML,
-      onChange: (...args) => {
-        if (savedOnChange && !readOnly) {
+      onChange: (...args: [Date[], string, Instance]) => {
+        if (!readOnly) {
           savedOnChange(...args);
         }
       },
-
       onReady: onHook,
       onMonthChange: onHook,
       onYearChange: onHook,
-      onOpen: (...args: [any, string, string]) => {
+      onOpen: (...args: [Date[], string, Instance]) => {
         onHook(...args);
         savedOnOpen(...args);
       },

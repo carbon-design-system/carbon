@@ -1,7 +1,5 @@
 /**
- * @license
- *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,20 +10,14 @@ import { prefix } from '../../globals/settings';
 import styles from './layer-story.scss?lit';
 import './index';
 
-const levels = {
-  'First layer': '0',
-  'Second layer': '1',
-  'Third layer': '2',
-};
-
 const defaultArgs = {
   level: '0',
 };
 
 const controls = {
   level: {
-    control: 'radio',
-    options: levels,
+    control: 'select',
+    options: [0, 1, 2],
     description: `Specify the layer level.`,
   },
 };
@@ -49,8 +41,12 @@ export const Default = {
 
 export const CustomLevel = {
   name: 'Custom level',
-  render: () => html`
-    <cds-layer level="0">
+  args: {
+    level: 2,
+  },
+  argTypes: controls,
+  render: ({ level }) => html`
+    <cds-layer level="${level}">
       <div class="example-layer-test-component">Test component</div>
     </cds-layer>
     <style>
@@ -80,24 +76,6 @@ export const UseLayer = {
       </style>
     `;
   },
-};
-
-export const Playground = {
-  args: defaultArgs,
-  argTypes: controls,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
-  render: ({ level }) => html`
-    <cds-layer level="${level}">
-      <div class="example-layer-test-component">Test component</div>
-    </cds-layer>
-    <style>
-      ${styles}
-    </style>
-  `,
 };
 
 const meta = {

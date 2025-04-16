@@ -6,7 +6,7 @@
  */
 
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, { WeakValidationMap } from 'prop-types';
 import React, {
   type ElementType,
   useContext,
@@ -23,6 +23,7 @@ import { useWindowEvent } from '../../internal/useEvent';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
 type ToggletipLabelProps<E extends ElementType> = {
   as?: E;
@@ -84,15 +85,17 @@ function useToggletip() {
   return useContext(ToggletipContext);
 }
 
-export interface ToggletipProps<E extends ElementType> {
+export interface ToggletipBaseProps {
   align?: PopoverAlignment;
   alignmentAxisOffset?: number;
-  as?: E;
   autoAlign?: boolean;
   className?: string;
   children?: ReactNode;
   defaultOpen?: boolean;
 }
+
+export type ToggletipProps<T extends ElementType> =
+  PolymorphicComponentPropWithRef<T, ToggletipBaseProps>;
 
 /**
  * Used as a container for the button and content of a toggletip. This component
@@ -168,8 +171,8 @@ export function Toggletip<E extends ElementType = 'span'>({
     }
   });
 
-  useWindowEvent('click', (event) => {
-    if (open && ref.current && !ref.current.contains(event.target as Node)) {
+  useWindowEvent('click', ({ target }) => {
+    if (open && target instanceof Node && !ref.current?.contains(target)) {
       actions.close();
     }
   });

@@ -236,7 +236,7 @@ function formatAttributes(attrs) {
 function createIconFlatExport(moduleName, descriptor, isDeprecated = false) {
   const deprecatedBlock = isDeprecated
     ? `
-    if (__DEV__) {
+    if (process.env.NODE_ENV !== "production") {
       if (!didWarnAboutDeprecation['${moduleName}']) {
         didWarnAboutDeprecation['${moduleName}'] = true;
         console.warn(
@@ -256,7 +256,7 @@ function createIconEntrypoint(moduleName, descriptor, isDeprecated = false) {
     : '';
   const deprecatedBlock = isDeprecated
     ? `
-    if (__DEV__) {
+    if (process.env.NODE_ENV !== "production") {
       if (!didWarnAboutDeprecation) {
         didWarnAboutDeprecation = true;
         console.warn(

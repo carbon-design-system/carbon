@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -51,8 +51,7 @@ export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   inline?: boolean;
 
   /**
-   * @description Optional prop to render an icon next to the link.
-   *   Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: ComponentType;
 
@@ -79,8 +78,14 @@ type LinkComponent = <T extends React.ElementType = 'a'>(
   props: LinkProps<T>
 ) => React.ReactElement | any;
 
-const Link: LinkComponent = React.forwardRef(
-  <T extends React.ElementType = 'a'>(
+// First create the component with basic types
+const LinkBase = React.forwardRef<
+  any,
+  LinkBaseProps & {
+    as?: ElementType;
+  } & React.AnchorHTMLAttributes<HTMLAnchorElement>
+>(
+  (
     {
       as: BaseComponent,
       children,
@@ -93,8 +98,8 @@ const Link: LinkComponent = React.forwardRef(
       size,
       target,
       ...rest
-    }: LinkProps<T>,
-    ref: PolymorphicRef<T>
+    },
+    ref
   ) => {
     const prefix = usePrefix();
     const className = cx(`${prefix}--link`, customClassName, {
@@ -133,6 +138,7 @@ const Link: LinkComponent = React.forwardRef(
     );
   }
 );
+const Link = LinkBase as LinkComponent;
 
 (Link as React.FC).displayName = 'Link';
 (Link as React.FC).propTypes = {
@@ -168,8 +174,7 @@ const Link: LinkComponent = React.forwardRef(
   inline: PropTypes.bool,
 
   /**
-   * Optional prop to render an icon next to the link.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 

@@ -12,6 +12,10 @@ import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import { useGridSettings } from './GridContext';
+import {
+  PolymorphicComponentPropWithRef,
+  PolymorphicRef,
+} from '../../internal/PolymorphicProps';
 
 type ColumnSpanPercent = '25%' | '50%' | '75%' | '100%';
 
@@ -87,10 +91,8 @@ export interface ColumnBaseProps {
   span?: ColumnSpan;
 }
 
-export type ColumnProps<T extends React.ElementType> = PolymorphicProps<
-  T,
-  ColumnBaseProps
->;
+export type ColumnProps<T extends React.ElementType> =
+  PolymorphicComponentPropWithRef<T, ColumnBaseProps>;
 
 export interface ColumnComponent {
   <T extends React.ElementType>(
@@ -99,52 +101,51 @@ export interface ColumnComponent {
   ): React.ReactElement<any, any> | null;
 }
 
-function Column<T extends React.ElementType>({
-  as: BaseComponent = 'div' as T,
-  children,
-  className: customClassName,
-  sm,
-  md,
-  lg,
-  xlg,
-  max,
-  ...rest
-}: ColumnProps<T>) {
-  const { mode } = useGridSettings();
-  const prefix = usePrefix();
+const Column = React.forwardRef<
+  any,
+  ColumnBaseProps & {
+    as?: React.ElementType;
+  } & React.HTMLAttributes<HTMLDivElement>
+>(
+  (
+    { as, children, className: customClassName, sm, md, lg, xlg, max, ...rest },
+    ref
+  ) => {
+    const { mode } = useGridSettings();
+    const prefix = usePrefix();
+    const BaseComponent = as || 'div';
 
-  if (mode === 'css-grid') {
+    if (mode === 'css-grid') {
+      return (
+        <CSSGridColumn
+          as={BaseComponent}
+          className={customClassName}
+          sm={sm}
+          md={md}
+          lg={lg}
+          xlg={xlg}
+          max={max}
+          {...rest}>
+          {children}
+        </CSSGridColumn>
+      );
+    }
+
+    const columnClassName = getClassNameForFlexGridBreakpoints(
+      [sm, md, lg, xlg, max],
+      prefix
+    );
+    const className = cx(customClassName, columnClassName, {
+      [`${prefix}--col`]: columnClassName.length === 0,
+    });
+
     return (
-      <CSSGridColumn
-        as={BaseComponent}
-        className={customClassName}
-        sm={sm}
-        md={md}
-        lg={lg}
-        xlg={xlg}
-        max={max}
-        {...rest}>
+      <BaseComponent className={className} ref={ref} {...rest}>
         {children}
-      </CSSGridColumn>
+      </BaseComponent>
     );
   }
-
-  const columnClassName = getClassNameForFlexGridBreakpoints(
-    [sm, md, lg, xlg, max],
-    prefix
-  );
-  const className = cx(customClassName, columnClassName, {
-    [`${prefix}--col`]: columnClassName.length === 0,
-  });
-
-  // cast as any to let TypeScript allow passing in attributes to base component
-  const BaseComponentAsAny: any = BaseComponent;
-  return (
-    <BaseComponentAsAny className={className} {...rest}>
-      {children}
-    </BaseComponentAsAny>
-  );
-}
+);
 
 const percentSpanType = PropTypes.oneOf(['25%', '50%', '75%', '100%']);
 
