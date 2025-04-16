@@ -16,7 +16,7 @@ import {
 } from '../PageHeader';
 import * as hooks from '../../internal/useMatchMedia';
 import { breakpoints } from '@carbon/layout';
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
+import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 import { Bee } from '@carbon/icons-react';
 
 const prefix = 'cds';
