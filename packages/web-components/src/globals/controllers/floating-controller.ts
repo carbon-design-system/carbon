@@ -8,7 +8,7 @@
 import { ReactiveController, ReactiveElement } from 'lit';
 import {
   computePosition,
-  flip as flipMiddleWare,
+  flip,
   size,
   offset,
   arrow,
@@ -22,7 +22,7 @@ type FloatingControllerOptions = {
   alignment: string;
 
   arrowElement?: HTMLElement | undefined;
-  flip?: boolean;
+  flipArguments?: object;
   caret?: boolean;
 
   styleElement?: HTMLElement;
@@ -59,7 +59,6 @@ export default class FloatingController implements ReactiveController {
   async setPlacement(options: FloatingControllerOptions = this.options) {
     this.options = options;
     const { trigger, target } = options;
-    // this.cleanup?.();
     this.cleanup = autoUpdate(trigger, target, this.updatePlacement);
   }
 
@@ -77,7 +76,7 @@ export default class FloatingController implements ReactiveController {
       styleElement,
       matchWidth,
       open,
-      flip,
+      flipArguments,
     } = this.options;
 
     const element = styleElement ?? target;
@@ -116,8 +115,8 @@ export default class FloatingController implements ReactiveController {
     }
 
     const middleware = [
+      flip(flipArguments),
       offset(caret ? 10 : 0),
-      ...(flip ? [flipMiddleWare({ fallbackAxisSideDirection: 'start' })] : []),
       ...(caret && arrowElement
         ? [arrow({ element: arrowElement, padding: 15 })]
         : []),

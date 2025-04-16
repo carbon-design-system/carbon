@@ -163,7 +163,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
           target: tooltip as HTMLElement,
           arrowElement: arrowElement as HTMLElement,
           caret: true,
-          flip: true,
+          flipArguments: { fallbackAxisSideDirection: 'start' },
           alignment: this.alignment,
           open: this.open,
         });

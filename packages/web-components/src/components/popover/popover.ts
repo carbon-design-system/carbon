@@ -134,7 +134,7 @@ class CDSPopover extends LitElement {
               ? (arrowElement as HTMLElement)
               : undefined,
           caret: this.caret,
-          flip: true,
+          flipArguments: { fallbackAxisSideDirection: 'start' },
           alignment: this.align,
           open: this.open,
         });
