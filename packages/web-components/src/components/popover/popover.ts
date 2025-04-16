@@ -12,7 +12,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import { prefix } from '../../globals/settings';
 import styles from './popover.scss?lit';
 import CDSPopoverContent from './popover-content';
-import PopoverController from '../../globals/controllers/popover-controller';
+import FloatingUIContoller from '../../globals/controllers/floating-controller';
 
 /**
  * Popover.
@@ -24,7 +24,7 @@ class CDSPopover extends LitElement {
   /**
    * Create popover controller instance
    */
-  private popoverController = new PopoverController(this);
+  private popoverController = new FloatingUIContoller(this);
 
   /**
    * The `<slot>` element in the shadow DOM.
@@ -136,6 +136,7 @@ class CDSPopover extends LitElement {
           caret: this.caret,
           flip: true,
           alignment: this.align,
+          open: this.open,
         });
       }
     }
