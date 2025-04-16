@@ -1,0 +1,154 @@
+name: Version patch
+run-name: patch - ${{ inputs.tag }} by @${{ github.actor }}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        description: 'Specify the tag for this release'
+        default: 'v11.x'
+        type: string
+
+      existing-tag:
+        required: true
+        description:
+          'Specify the pre-existing tag of the release you want to publish a
+          patch for. This will most likely be the latest release tag. For
+          instance, to release v11.80.2, the existing tag would be v11.80.1. To
+          release v11.81.1, the existing tag would be v11.81.0. To find the
+          previous release, view the tag list
+          https://github.com/carbon-design-system/carbon/tags'
+        default: 'v11.x'
+        type: string
+
+      commit-1:
+        required: true
+        description:
+          'Specify the SHA of a commit that should be included in this release.'
+        default: '########################################'
+        type: string
+
+      commit-2:
+        required: false
+        description:
+          'Optionally specify a 2nd commit SHA to be included in the release'
+        default: '########################################'
+        type: string
+
+      commit-3:
+        required: false
+        description:
+          'Optionally specify a 3rd commit SHA to be included in the release'
+        default: '########################################'
+        type: string
+
+      commit-4:
+        required: false
+        description:
+          'Optionally specify a 4th commit SHA to be included in the release'
+        default: '########################################'
+        type: string
+
+      commit-5:
+        required: false
+        description:
+          'Optionally specify a 5th commit SHA to be included in the release.'
+        default: '########################################'
+        type: string
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    if:
+      ${{ github.repository == 'carbon-design-system/carbon' &&
+      github.event.inputs.tag != 'v11.x' && github.event.inputs.existing-tag !=
+      'v11.x' }}
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: '0'
+          fetch-tags: true
+          ref: ${{ github.event.inputs.existing-tag }}
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Create new release branch
+        run: |
+          git checkout -b ${{ github.event.inputs.tag }}
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Cherry pick commit-1
+        if:
+          ${{ github.event.inputs.commit-1 !=
+          '########################################'}}
+        run: |
+          git cherry-pick ${{ github.event.inputs.commit-1 }}
+      - name: Cherry pick commit-2
+        if:
+          ${{ github.event.inputs.commit-2 !=
+          '########################################'}}
+        run: |
+          git cherry-pick ${{ github.event.inputs.commit-2 }}
+      - name: Cherry pick commit-3
+        if:
+          ${{ github.event.inputs.commit-3 !=
+          '########################################'}}
+        run: |
+          git cherry-pick ${{ github.event.inputs.commit-3 }}
+      - name: Cherry pick commit-4
+        if:
+          ${{ github.event.inputs.commit-4 !=
+          '########################################'}}
+        run: |
+          git cherry-pick ${{ github.event.inputs.commit-4 }}
+      - name: Cherry pick commit-5
+        if:
+          ${{ github.event.inputs.commit-5 !=
+          '########################################'}}
+        run: |
+          git cherry-pick ${{ github.event.inputs.commit-5 }}
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+      - name: Update telemetry.yml
+        run: yarn run telemetry:config
+      - name: Create patch release
+        run: |
+          yarn lerna version patch --no-git-tag-version --no-push --yes
+      - name: Create release commit
+        run: |
+          git add -A
+          git commit -m 'chore(release): ${{github.event.inputs.tag}}'
+          git push --set-upstream origin release/${{github.event.inputs.tag}}
+      - name: Log previous 7 commits
+        run: |
+          echo "This should show the new release commit, followed by the cherry-picked commits, followed by the previous release (existing tag), potentially followed by extra unrelated commits if no more than 1 commit was cherry-picked"
+          echo "$(git log -1)"
+          echo "$(git log -2)"
+          echo "$(git log -3)"
+          echo "$(git log -4)"
+          echo "$(git log -5)"
+          echo "$(git log -6)"
+          echo "$(git log -7)"
+      - name: Tag the release commit
+        run: |
+          git tag -a ${{github.event.inputs.tag}} -m '${{github.event.inputs.tag}}'
+      - name: Push the tag upstream
+        run: |
+          git push upstream refs/tags/${{github.event.inputs.tag}}
+      - name: Print manual next steps
+        run: |
+          echo "Verify that this workflow triggered a release action"
+          echo "https://github.com/carbon-design-system/carbon/actions?query=workflow%3ARelease"
