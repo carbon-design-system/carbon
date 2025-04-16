@@ -36,7 +36,7 @@ import {
   ViewMode_2,
 } from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
+import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 
 const BeeIcon = () => <Bee size={32} />;
 
@@ -94,162 +94,24 @@ export default {
   },
 };
 
-const tabs = [
-  {
-    label: 'Tab 1',
-    panel: (
-      <TabPanel key={0}>
-        <p>Tab 1</p>
-        <p>page header demo</p>
-        <p>
-          Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
-          Massa elementum class enim malesuada lacinia hendrerit enim erat
-          pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
-          Nisi molestie primis lorem nascetur sem metus mattis etiam
-          scelerisque. Facilisi himenaeos massa bibendum sapien malesuada
-          dictumst malesuada nisi! Nunc eget sagittis diam urna aliquet duis
-          magna senectus velit ornare etiam per? Pretium himenaeos urna pretium
-          praesent ad libero mi cubilia lobortis dignissim id arcu. Congue
-          hendrerit donec suspendisse. Turpis vehicula ultrices ultricies.
-        </p>
-        <p>
-          Viverra eros urna, sagittis vivamus suspendisse pellentesque porta
-          quisque aliquet. Eu porta augue volutpat etiam sagittis tortor
-          senectus ut, vulputate varius malesuada facilisi. Curae; senectus
-          nulla ornare potenti elit varius leo? Sapien elit potenti neque urna,
-          facilisis proin lorem. Eros, penatibus a faucibus sodales phasellus
-          nisi. Nunc semper lorem mollis nullam metus ut iaculis senectus
-          himenaeos curae;. Natoque orci condimentum turpis nibh porta! Sagittis
-          tincidunt est cursus vitae neque sapien pulvinar scelerisque
-          ridiculus. Scelerisque turpis orci gravida class magna id sit donec
-          porttitor faucibus massa vivamus.
-        </p>
-        <p>
-          Pellentesque urna torquent adipiscing interdum neque porta
-          pellentesque. Orci ridiculus inceptos pulvinar cras? Pellentesque mus
-          maecenas felis hendrerit auctor scelerisque turpis donec justo mollis!
-          Sociosqu lacinia pellentesque dolor nulla. Placerat velit potenti
-          morbi nullam mi in tortor nisl curabitur ante magna suscipit. Porta
-          urna ipsum aenean massa tincidunt pulvinar. Quis porttitor quisque mi
-          nunc vel feugiat nisl libero non posuere mattis et. Mollis
-          pellentesque et leo dictumst torquent. Sem ligula quis egestas tempor
-          facilisi, tortor varius montes congue! Eros taciti tortor ut fusce,
-          commodo condimentum sit vel augue aptent et id.
-        </p>
-        <p>
-          Suspendisse enim sollicitudin blandit blandit! Metus ad vitae
-          venenatis turpis. Porttitor urna mollis semper commodo! Vehicula
-          ridiculus himenaeos justo ut in platea cras facilisis potenti nostra
-          facilisis? Orci habitant, ac himenaeos volutpat. Montes nullam fusce
-          habitasse semper primis et! Iaculis praesent sit platea nam tortor?
-          Penatibus quam tristique tempus vulputate facilisis dapibus dapibus
-          ornare accumsan, urna dictumst. Posuere nascetur feugiat velit felis
-          auctor aenean sociosqu bibendum? Turpis diam enim bibendum curae;
-          viverra a orci dignissim montes ac.
-        </p>
-        <p>
-          Ornare ac ligula accumsan aptent etiam ut auctor ut commodo erat.
-          Convallis ad donec tempus montes lacus volutpat quisque congue.
-          Gravida sodales pellentesque sociis orci ut mauris semper auctor odio
-          nulla. Natoque posuere phasellus consectetur sed semper non aptent!
-          Placerat eros laoreet consectetur eros molestie eros nec nisi vivamus
-          morbi? Torquent cras ultricies ut pretium urna platea nam adipiscing
-          consequat. Iaculis egestas at malesuada id dapibus rhoncus sapien at?
-          Accumsan laoreet per primis elementum metus magnis dis tristique
-          consectetur.
-        </p>
-      </TabPanel>
-    ),
-  },
-  {
-    label: 'Tab 2',
-    panel: (
-      <TabPanel key={1}>
-        <p>Tab 2</p>
-      </TabPanel>
-    ),
-  },
-  {
-    label: 'Tab 3',
-    panel: (
-      <TabPanel key={2}>
-        <p>Tab 3</p>
-      </TabPanel>
-    ),
-    disabled: true,
-  },
-  {
-    label: 'Tab 4',
-    panel: (
-      <TabPanel key={3}>
-        <p>Tab 4</p>
-      </TabPanel>
-    ),
-  },
-  {
-    label: 'Tab 5',
-    panel: (
-      <TabPanel key={4}>
-        <p>Tab 5</p>
-      </TabPanel>
-    ),
-  },
-  {
-    label: 'Tab 6',
-    panel: (
-      <TabPanel key={5}>
-        <p>Tab 6</p>
-      </TabPanel>
-    ),
-  },
-  {
-    label: 'Tab 7',
-    panel: (
-      <TabPanel key={6}>
-        <p>Tab 7</p>
-      </TabPanel>
-    ),
-  },
-  {
-    label: 'Tab 8',
-    panel: (
-      <TabPanel key={7}>
-        <p>Tab 8</p>
-      </TabPanel>
-    ),
-  },
-  {
-    label: 'Tab 9',
-    panel: (
-      <TabPanel key={8}>
-        <p>Tab 9</p>
-      </TabPanel>
-    ),
-  },
-  {
-    label: 'Tab 10',
-    panel: (
-      <TabPanel key={9}>
-        <p>Tab 10</p>
-      </TabPanel>
-    ),
-  },
-];
-
 export const Default = (args) => (
   <PageHeader.Root {...args}>
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content />
     <PageHeader.TabBar>
-      <PageHeader.Tabs onTabCloseRequest={() => {}}>
+      <PageHeader.Tabs>
         <TabList>
-          {tabs.map((tab, index) => (
-            <Tab key={index} disabled={tab.disabled}>
-              {tab.label}
-            </Tab>
-          ))}
+          <Tab>Dashboard</Tab>
+          <Tab>Monitoring</Tab>
+          <Tab>Activity</Tab>
+          <Tab>Settings</Tab>
         </TabList>
-        <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
+        <TabPanels>
+          <TabPanel>Dashboard Tab Panel</TabPanel>
+          <TabPanel>Monitoring Tab Panel</TabPanel>
+          <TabPanel>Activity Tab Panel</TabPanel>
+          <TabPanel>Settings Tab Panel</TabPanel>
+        </TabPanels>
       </PageHeader.Tabs>
     </PageHeader.TabBar>
   </PageHeader.Root>
@@ -273,18 +135,6 @@ export const Content = (args) => (
       pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
       Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
     </PageHeader.Content>
-    <PageHeader.TabBar>
-      <PageHeader.Tabs onTabCloseRequest={() => {}}>
-        <TabList>
-          {tabs.map((tab, index) => (
-            <Tab key={index} disabled={tab.disabled}>
-              {tab.label}
-            </Tab>
-          ))}
-        </TabList>
-        <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
-      </PageHeader.Tabs>
-    </PageHeader.TabBar>
   </PageHeader.Root>
 );
 
@@ -301,18 +151,6 @@ export const ContentWithIcon = (args) => (
       pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
       Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
     </PageHeader.Content>
-    <PageHeader.TabBar>
-      <PageHeader.Tabs onTabCloseRequest={() => {}}>
-        <TabList>
-          {tabs.map((tab, index) => (
-            <Tab key={index} disabled={tab.disabled}>
-              {tab.label}
-            </Tab>
-          ))}
-        </TabList>
-        <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
-      </PageHeader.Tabs>
-    </PageHeader.TabBar>
   </PageHeader.Root>
 );
 
@@ -344,18 +182,6 @@ export const ContentWithContextualActions = (args) => (
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
     </PageHeader.Content>
-    <PageHeader.TabBar>
-      <PageHeader.Tabs onTabCloseRequest={() => {}}>
-        <TabList>
-          {tabs.map((tab, index) => (
-            <Tab key={index} disabled={tab.disabled}>
-              {tab.label}
-            </Tab>
-          ))}
-        </TabList>
-        <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
-      </PageHeader.Tabs>
-    </PageHeader.TabBar>
   </PageHeader.Root>
 );
 
@@ -396,18 +222,6 @@ export const ContentWithHeroImage = (args) => (
             </PageHeader.HeroImage>
           </Column>
         </Grid>
-        <PageHeader.TabBar>
-          <PageHeader.Tabs onTabCloseRequest={() => {}}>
-            <TabList>
-              {tabs.map((tab, index) => (
-                <Tab key={index} disabled={tab.disabled}>
-                  {tab.label}
-                </Tab>
-              ))}
-            </TabList>
-            <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
-          </PageHeader.Tabs>
-        </PageHeader.TabBar>
       </PageHeader.Root>
     </Column>
   </Grid>
@@ -475,18 +289,6 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
     </PageHeader.Content>
-    <PageHeader.TabBar>
-      <PageHeader.Tabs onTabCloseRequest={() => {}}>
-        <TabList>
-          {tabs.map((tab, index) => (
-            <Tab key={index} disabled={tab.disabled}>
-              {tab.label}
-            </Tab>
-          ))}
-        </TabList>
-        <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
-      </PageHeader.Tabs>
-    </PageHeader.TabBar>
   </PageHeader.Root>
 );
 
@@ -494,15 +296,19 @@ export const TabBar = (args) => {
   return (
     <PageHeader.Root>
       <PageHeader.TabBar {...args}>
-        <PageHeader.Tabs onTabCloseRequest={() => {}}>
+        <PageHeader.Tabs>
           <TabList>
-            {tabs.map((tab, index) => (
-              <Tab key={index} disabled={tab.disabled}>
-                {tab.label}
-              </Tab>
-            ))}
+            <Tab>Dashboard</Tab>
+            <Tab>Monitoring</Tab>
+            <Tab>Activity</Tab>
+            <Tab>Settings</Tab>
           </TabList>
-          <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
+          <TabPanels>
+            <TabPanel key={0}>Dashboard Tab Panel</TabPanel>
+            <TabPanel>Monitoring Tab Panel</TabPanel>
+            <TabPanel>Activity Tab Panel</TabPanel>
+            <TabPanel>Settings Tab Panel</TabPanel>
+          </TabPanels>
         </PageHeader.Tabs>
       </PageHeader.TabBar>
     </PageHeader.Root>
@@ -514,15 +320,19 @@ export const DirectExports = (args) => (
     <PageHeaderBreadcrumbBar />
     <PageHeaderContent />
     <PageHeaderTabBar>
-      <PageHeaderTabs onTabCloseRequest={() => {}}>
+      <PageHeaderTabs>
         <TabList>
-          {tabs.map((tab, index) => (
-            <Tab key={index} disabled={tab.disabled}>
-              {tab.label}
-            </Tab>
-          ))}
+          <Tab>Dashboard</Tab>
+          <Tab>Monitoring</Tab>
+          <Tab>Activity</Tab>
+          <Tab>Settings</Tab>
         </TabList>
-        <TabPanels>{tabs.map((tab) => tab.panel)}</TabPanels>
+        <TabPanels>
+          <TabPanel>Dashboard Tab Panel</TabPanel>
+          <TabPanel>Monitoring Tab Panel</TabPanel>
+          <TabPanel>Activity Tab Panel</TabPanel>
+          <TabPanel>Settings Tab Panel</TabPanel>
+        </TabPanels>
       </PageHeaderTabs>
     </PageHeaderTabBar>
   </PageHeaderDirect>

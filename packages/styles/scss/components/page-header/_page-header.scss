@@ -119,6 +119,5 @@
     display: grid;
     padding: 0 $spacing-05;
     border: 1px solid green; /* stylelint-disable-line */
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   }
 }

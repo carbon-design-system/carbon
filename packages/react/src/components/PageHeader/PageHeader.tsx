@@ -19,7 +19,7 @@ import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
 import { DefinitionTooltip } from '../Tooltip';
 import { AspectRatio } from '../AspectRatio';
-import { Tabs } from '../Tabs/Tabs';
+import { Tabs as BaseTabs } from '../Tabs/Tabs';
 
 /**
  * ----------
@@ -324,7 +324,7 @@ const PageHeaderTabBar = React.forwardRef<
 });
 PageHeaderTabBar.displayName = 'PageHeaderTabBar';
 
-interface PageHeaderTabsProps extends React.ComponentProps<typeof Tabs> {
+interface PageHeaderTabsProps extends React.ComponentProps<typeof BaseTabs> {
   children?: React.ReactNode;
   className?: string;
 }
@@ -334,19 +334,7 @@ const PageHeaderTabs = React.forwardRef<HTMLDivElement, PageHeaderTabsProps>(
     { className, children, ...other }: PageHeaderTabsProps,
     ref
   ) {
-    const prefix = usePrefix();
-    const classNames = classnames(
-      {
-        [`${prefix}--page-header__tab-bar__tabs`]: true,
-      },
-      className
-    );
-
-    return (
-      <div className={classNames} ref={ref}>
-        <Tabs {...other}>{children}</Tabs>
-      </div>
-    );
+    return <BaseTabs {...other}>{children}</BaseTabs>;
   }
 );
 PageHeaderTabs.displayName = 'PageHeaderTabs';
@@ -371,8 +359,8 @@ HeroImage.displayName = 'PageHeaderHeroImage';
 const TabBar = PageHeaderTabBar;
 TabBar.displayName = 'PageHeaderTabBar';
 
-const PageHeaderTabComponent = PageHeaderTabs;
-PageHeaderTabComponent.displayName = 'PageHeader.Tabs';
+const Tabs = PageHeaderTabs;
+Tabs.displayName = 'PageHeader.Tabs';
 
 export {
   // direct exports
@@ -388,7 +376,7 @@ export {
   Content,
   HeroImage,
   TabBar,
-  PageHeaderTabComponent as Tabs,
+  Tabs,
 };
 export type {
   PageHeaderProps,

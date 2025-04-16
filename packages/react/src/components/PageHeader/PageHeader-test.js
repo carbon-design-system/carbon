@@ -264,23 +264,6 @@ describe('PageHeader', () => {
       expect(container.firstChild).toBeInTheDocument();
     });
 
-    it('should place className on the wrapper element', () => {
-      const { container } = render(
-        <PageHeader.Tabs className="custom-class">
-          <TabList aria-label="List of tabs">
-            <Tab>Tab 1</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>Tab Panel 1</TabPanel>
-          </TabPanels>
-        </PageHeader.Tabs>
-      );
-      expect(container.firstChild).toHaveClass('custom-class');
-      expect(container.firstChild).toHaveClass(
-        `${prefix}--page-header__tab-bar__tabs`
-      );
-    });
-
     it('should render children within the Tabs component', () => {
       render(
         <PageHeader.Tabs>
@@ -329,9 +312,6 @@ describe('PageHeader', () => {
 
       expect(
         container.querySelector(`.${prefix}--page-header__tab-bar`)
-      ).toBeInTheDocument();
-      expect(
-        container.querySelector(`.${prefix}--page-header__tab-bar__tabs`)
       ).toBeInTheDocument();
       expect(screen.getByText('Tab 1')).toBeInTheDocument();
       expect(screen.getByText('Tab Panel 1')).toBeInTheDocument();
