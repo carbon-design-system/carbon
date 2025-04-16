@@ -32,6 +32,7 @@ import { toggleClass } from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
   elementOrParentIsFloatingMenu,
+  wrapFocusWithoutSentinels,
 } from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
@@ -39,6 +40,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
+import { warning } from '../../internal/warning';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -267,9 +269,18 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     const endSentinel = useRef<HTMLButtonElement>(null);
     const onMouseDownTarget: MutableRefObject<Node | null> =
       useRef<Node | null>(null);
-    const enableDialogElement =
-      // useFeatureFlag('enable-experimental-focus-wrap-without-sentinels') ||
-      useFeatureFlag('enable-dialog-element');
+
+    const enableDialogElement = useFeatureFlag('enable-dialog-element');
+    const focusTrapWithoutSentinels = useFeatureFlag(
+      'enable-experimental-focus-wrap-without-sentinels'
+    );
+    warning(
+      !(focusTrapWithoutSentinels && enableDialogElement),
+      '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
+        '`enableDialogElement` feature flags are enabled. The native dialog ' +
+        'element handles focus, so `enableDialogElement` must be off for ' +
+        '`focusTrapWithoutSentinels` to have any effect.'
+    );
 
     // Keep track of modal open/close state
     // and propagate it to the document.body
@@ -294,6 +305,19 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         event.stopPropagation();
         if (match(event, keys.Escape)) {
           closeModal(event);
+        }
+
+        if (
+          focusTrapWithoutSentinels &&
+          open &&
+          match(event, keys.Tab) &&
+          innerModal.current
+        ) {
+          wrapFocusWithoutSentinels({
+            containerNode: innerModal.current,
+            currentActiveNode: event.target,
+            event: event,
+          });
         }
       }
 
@@ -486,12 +510,14 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
         aria-labelledby={ariaLabelledBy}>
         {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
-        <button
-          type="button"
-          ref={startSentinel}
-          className={`${prefix}--visually-hidden`}>
-          Focus sentinel
-        </button>
+        {!focusTrapWithoutSentinels && (
+          <button
+            type="button"
+            ref={startSentinel}
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </button>
+        )}
         <div ref={innerModal} className={`${prefix}--modal-container-body`}>
           {slug ? (
             normalizedDecorator
@@ -505,12 +531,14 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           {childrenWithProps}
         </div>
         {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
-        <button
-          type="button"
-          ref={endSentinel}
-          className={`${prefix}--visually-hidden`}>
-          Focus sentinel
-        </button>
+        {!focusTrapWithoutSentinels && (
+          <button
+            type="button"
+            ref={endSentinel}
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </button>
+        )}
       </div>
     );
 
@@ -521,7 +549,11 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         role="presentation"
         ref={ref}
         aria-hidden={!open}
-        onBlur={!enableDialogElement ? handleBlur : () => {}}
+        onBlur={
+          !enableDialogElement && !focusTrapWithoutSentinels
+            ? handleBlur
+            : () => {}
+        }
         onClick={composeEventHandlers([rest?.onClick, handleOnClick])}
         onMouseDown={composeEventHandlers([
           rest?.onMouseDown,
