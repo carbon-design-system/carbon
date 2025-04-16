@@ -30,6 +30,7 @@ import {
   UpperHandleFocus,
 } from './SliderHandles';
 import { TranslateWithId } from '../../types/common';
+import { clamp } from '../../internal/clamp';
 
 const ThumbWrapper = ({
   hasTooltip = false,
@@ -1069,7 +1070,7 @@ class Slider extends PureComponent<SliderProps> {
       range,
     });
     /** `leftPercentRaw` clamped between 0 and 1. */
-    const leftPercent = Math.min(1, Math.max(0, leftPercentRaw));
+    const leftPercent = clamp(leftPercentRaw, 0, 1);
 
     if (useRawValue) {
       return {

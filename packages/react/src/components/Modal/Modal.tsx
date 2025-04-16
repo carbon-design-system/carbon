@@ -24,6 +24,7 @@ import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsT
 import {
   elementOrParentIsFloatingMenu,
   wrapFocus,
+  wrapFocusWithoutSentinels,
 } from '../../internal/wrapFocus';
 import { debounce } from 'es-toolkit/compat';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
@@ -40,6 +41,7 @@ import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
 import { unstable__Dialog as Dialog } from '../Dialog/index';
 import { enable } from '@carbon/feature-flags';
+import { warning } from '../../internal/warning';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 
@@ -288,9 +290,17 @@ const Modal = React.forwardRef(function Modal(
   });
   const loadingActive = loadingStatus !== 'inactive';
 
-  const enableDialogElement =
-    useFeatureFlag('enable-experimental-focus-wrap-without-sentinels') ||
-    useFeatureFlag('enable-dialog-element');
+  const focusTrapWithoutSentinels = useFeatureFlag(
+    'enable-experimental-focus-wrap-without-sentinels'
+  );
+  const enableDialogElement = useFeatureFlag('enable-dialog-element');
+  warning(
+    !(focusTrapWithoutSentinels && enableDialogElement),
+    '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
+      '`enableDialogElement` feature flags are enabled. The native dialog ' +
+      'element handles focus, so `enableDialogElement` must be off for ' +
+      '`focusTrapWithoutSentinels` to have any effect.'
+  );
 
   function isCloseButton(element: Element) {
     return (
@@ -312,6 +322,21 @@ const Modal = React.forwardRef(function Modal(
         !isCloseButton(evt.target as Element)
       ) {
         onRequestSubmit(evt);
+      }
+
+      if (
+        focusTrapWithoutSentinels &&
+        !enableDialogElement &&
+        match(evt, keys.Tab) &&
+        innerModal.current
+      ) {
+        wrapFocusWithoutSentinels({
+          containerNode: innerModal.current,
+          currentActiveNode: evt.target,
+          // TODO: Delete type assertion following util rewrite.
+          // https://github.com/carbon-design-system/carbon/pull/18913
+          event: evt as any,
+        });
       }
     }
   }
@@ -636,7 +661,7 @@ const Modal = React.forwardRef(function Modal(
   ) : (
     <>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      {!enableDialogElement && (
+      {!enableDialogElement && !focusTrapWithoutSentinels && (
         <span
           ref={startTrap}
           tabIndex={0}
@@ -731,7 +756,7 @@ const Modal = React.forwardRef(function Modal(
         )}
       </div>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      {!enableDialogElement && (
+      {!enableDialogElement && !focusTrapWithoutSentinels && (
         <span
           ref={endTrap}
           tabIndex={0}
