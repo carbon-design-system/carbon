@@ -310,8 +310,11 @@ const Modal = React.forwardRef(function Modal(
   }
 
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
+    const { target } = evt;
+
     evt.stopPropagation();
-    if (open) {
+
+    if (open && target instanceof HTMLElement) {
       if (match(evt, keys.Escape)) {
         onRequestClose(evt);
       }
@@ -319,7 +322,7 @@ const Modal = React.forwardRef(function Modal(
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
-        !isCloseButton(evt.target as Element)
+        !isCloseButton(target)
       ) {
         onRequestSubmit(evt);
       }
@@ -332,10 +335,8 @@ const Modal = React.forwardRef(function Modal(
       ) {
         wrapFocusWithoutSentinels({
           containerNode: innerModal.current,
-          currentActiveNode: evt.target,
-          // TODO: Delete type assertion following util rewrite.
-          // https://github.com/carbon-design-system/carbon/pull/18913
-          event: evt as any,
+          currentActiveNode: target,
+          event: evt,
         });
       }
     }
