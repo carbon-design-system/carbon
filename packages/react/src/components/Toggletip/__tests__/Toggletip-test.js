@@ -18,7 +18,6 @@ import userEvent from '@testing-library/user-event';
 
 describe('Toggletip', () => {
   describe('accessibility', () => {
-    test.todo('accessibility-checker');
     it('should have no Axe violations', async () => {
       const { container } = render(
         <Toggletip data-testid="toggletip">test</Toggletip>
@@ -80,6 +79,15 @@ describe('Toggletip', () => {
     );
     expect(container.firstChild).not.toHaveClass(`${prefix}--toggletip--open`);
     expect(container.firstChild).not.toHaveClass(`${prefix}--popover--open`);
+  });
+
+  it('should render with custom element using as prop', () => {
+    const CustomElement = forwardRef((props, ref) => (
+      <div data-testid="custom-toggletip" ref={ref} {...props} />
+    ));
+
+    render(<Toggletip as={CustomElement}>Content</Toggletip>);
+    expect(screen.getByTestId('custom-toggletip')).toBeInTheDocument();
   });
 
   describe('Component API', () => {

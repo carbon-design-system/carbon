@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -45,9 +45,9 @@ export interface ChatButtonProps
    * Specify the kind of `ChatButton` you want to create
    */
   kind?: ChatButtonKind;
+
   /**
-   * Optional prop to specify an icon to be rendered.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: ComponentType | FunctionComponent;
   /**
@@ -85,8 +85,15 @@ const ChatButton = React.forwardRef<HTMLButtonElement, ChatButtonProps>(
       kind = 'ghost';
       size = 'sm';
     } else {
-      // Do not allow size larger than `lg`
-      size = allowedSizes.includes(size as ChatButtonSize) ? size : 'lg';
+      // Check if size is valid and warn if not
+      if (size && !allowedSizes.includes(size as ChatButtonSize)) {
+        console.error(
+          `Invalid size "${size}" provided to ChatButton. Size must be one of: ${allowedSizes.join(
+            ', '
+          )}. Defaulting to "lg".`
+        );
+        size = 'lg';
+      }
     }
 
     return (
@@ -142,10 +149,8 @@ ChatButton.propTypes = {
   ]),
 
   /**
-   * Optional prop to specify an icon to be rendered.
-   * Can be a React component class
+   * A component used to render an icon.
    */
-  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**

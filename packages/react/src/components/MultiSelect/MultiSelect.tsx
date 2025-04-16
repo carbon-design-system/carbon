@@ -44,7 +44,6 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
 import Checkbox from '../Checkbox';
-import type { InternationalProps } from '../../types/common';
 import type { TranslateWithId } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 import {
@@ -298,7 +297,7 @@ export interface MultiSelectProps<ItemType>
   warnText?: ReactNode;
 }
 
-const MultiSelect = React.forwardRef(
+export const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
       autoAlign = false,
@@ -885,7 +884,7 @@ type MultiSelectComponentProps<ItemType> = React.PropsWithChildren<
 interface MultiSelectComponent {
   <ItemType>(
     props: MultiSelectComponentProps<ItemType>
-  ): React.ReactElement | null;
+  ): React.ReactElement<any> | null;
 }
 
 MultiSelect.displayName = 'MultiSelect';
@@ -945,7 +944,9 @@ MultiSelect.propTypes = {
    * change, and in some cases they can not be shimmed by Carbon to shield you
    * from potentially breaking changes.
    */
-  downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
+  downshiftProps: PropTypes.object as PropTypes.Validator<
+    UseSelectProps<unknown>
+  >,
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -1118,5 +1119,3 @@ MultiSelect.propTypes = {
    */
   warnText: PropTypes.node,
 };
-
-export default MultiSelect as MultiSelectComponent;

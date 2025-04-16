@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,12 +9,14 @@ import { CaretDown } from '@carbon/icons-react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  ComponentType,
-  FunctionComponent,
   useEffect,
   useRef,
   useState,
-  MutableRefObject,
+  ReactElement,
+  type ComponentType,
+  type FunctionComponent,
+  type MouseEvent,
+  type MutableRefObject,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
@@ -79,8 +81,7 @@ export type TreeNodeProps = {
    */
   onTreeSelect?: (event: React.MouseEvent, node?: TreeNodeProps) => void;
   /**
-   * Optional prop to allow each node to have an associated icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   renderIcon?: ComponentType | FunctionComponent;
   /**
@@ -134,10 +135,17 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
 
     const controllableExpandedState = useControllableState({
       value: isExpanded,
-      onChange: onToggle,
-      defaultValue: defaultIsExpanded,
+      onChange: (newValue: boolean) => {
+        onToggle?.(undefined as unknown as MouseEvent, {
+          id,
+          isExpanded: newValue,
+          label,
+          value,
+        });
+      },
+      defaultValue: defaultIsExpanded ?? false,
     });
-    const uncontrollableExpandedState = useState(isExpanded);
+    const uncontrollableExpandedState = useState(isExpanded ?? false);
     const [expanded, setExpanded] = enableTreeviewControllable
       ? controllableExpandedState
       : uncontrollableExpandedState;
@@ -161,11 +169,14 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
         return React.cloneElement(node, {
           active,
           depth: depth + 1,
-          disabled: disabled || node.props.disabled,
+          disabled:
+            disabled || (node as ReactElement<TreeNodeProps>).props.disabled,
           onTreeSelect,
           onNodeFocusEvent,
           selected,
-          tabIndex: (!node.props.disabled && -1) || null,
+          tabIndex:
+            (!(node as ReactElement<TreeNodeProps>).props.disabled && -1) ||
+            null,
         } as TreeNodeProps);
       }
     });
@@ -329,7 +340,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
 
       if (!enableTreeviewControllable) {
         // sync props and state
-        setExpanded(isExpanded);
+        setExpanded(isExpanded ?? false);
       }
     }, [
       children,
@@ -535,8 +546,7 @@ TreeNode.propTypes = {
   onTreeSelect: PropTypes.func,
 
   /**
-   * Optional prop to allow each node to have an associated icon.
-   * Can be a React component class
+   * A component used to render an icon.
    */
   // @ts-ignore
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

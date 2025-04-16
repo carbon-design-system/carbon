@@ -10,9 +10,11 @@ import React, { ForwardedRef, ReactNode } from 'react';
 import { ButtonSize } from '../Button';
 import classNames from 'classnames';
 import { Tooltip } from '../Tooltip';
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import ButtonBase from '../Button/ButtonBase';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import BadgeIndicator from '../BadgeIndicator';
 
 export const IconButtonKinds = [
   'primary',
@@ -78,6 +80,12 @@ export interface IconButtonProps
   autoAlign?: boolean;
 
   /**
+   * **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0.
+   * Must be used with size="lg" and kind="ghost"
+   */
+  badgeCount?: number;
+
+  /**
    * Optionally specify an href for your IconButton to become an `<a>` element
    */
   href?: React.AnchorHTMLAttributes<HTMLAnchorElement>['href'];
@@ -137,7 +145,8 @@ export interface IconButtonProps
    * Provide the label to be rendered inside of the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
    * This means that if you have text in the child node it will not be
-   * announced to the screen reader.
+   * announced to the screen reader. If using the badgeCount = 0 then provide a
+   * label with describing there is a new notification.
    */
   label: ReactNode;
 
@@ -152,9 +161,9 @@ export interface IconButtonProps
   rel?: React.AnchorHTMLAttributes<HTMLAnchorElement>['rel'];
 
   /**
-   * Specify the size of the Button. Defaults to `md`.
+   * Specify the size of the Button.
    */
-  size?: ButtonSize;
+  size?: Extract<ButtonSize, 'sm' | 'md' | 'lg'>;
 
   /**
    * Optionally specify a `target` when using an `<a>` element.
@@ -171,6 +180,7 @@ const IconButton = React.forwardRef(function IconButton(
   {
     align,
     autoAlign = false,
+    badgeCount,
     children,
     className,
     closeOnActivation = true,
@@ -195,6 +205,13 @@ const IconButton = React.forwardRef(function IconButton(
     [`${prefix}--icon-tooltip--disabled`]: disabled,
   });
 
+  if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
+    console.warn(
+      "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
+    );
+  }
+  const badgeId = useId('badge-indicator');
+
   return (
     <Tooltip
       align={align}
@@ -213,14 +230,16 @@ const IconButton = React.forwardRef(function IconButton(
         kind={kind}
         ref={ref}
         size={size}
-        className={classNames(
-          `${prefix}--btn--icon-only`,
-          {
-            [`${prefix}--btn--selected`]: isSelected,
-          },
-          className
-        )}>
+        isSelected={isSelected}
+        hasIconOnly
+        className={className}
+        aria-describedby={badgeCount && badgeId}>
         {children}
+        {!disabled && badgeCount !== undefined && (
+          <BadgeIndicator
+            id={badgeId}
+            count={badgeCount > 0 ? badgeCount : undefined}></BadgeIndicator>
+        )}
       </ButtonBase>
     </Tooltip>
   );
@@ -281,6 +300,12 @@ IconButton.propTypes = {
    * **Experimental**: Will attempt to automatically align the tooltip
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * **Experimental**: Display a badge on the button. An empty/dot badge if 0, a numbered badge if > 0.
+   * Must be used with size="lg", kind="ghost" and hasIconOnly=true
+   */
+  badgeCount: PropTypes.number,
 
   /**
    * Optionally specify an href for your IconButton to become an `<a>` element
@@ -356,7 +381,7 @@ IconButton.propTypes = {
   rel: PropTypes.string,
 
   /**
-   * Specify the size of the Button. Defaults to `md`.
+   * Specify the size of the Button.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 

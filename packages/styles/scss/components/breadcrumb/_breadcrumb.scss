@@ -57,6 +57,11 @@
     }
   }
 
+  .#{$prefix}--breadcrumb-item .#{$prefix}--link:active,
+  .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited:active:hover {
+    color: $text-primary;
+  }
+
   .#{$prefix}--breadcrumb-item::after {
     color: $text-primary;
     content: '/';
@@ -96,20 +101,40 @@
   .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu {
     position: relative;
     block-size: convert.to-rem(18px);
-    inline-size: convert.to-rem(20px);
+    inline-size: $spacing-05;
 
     &:focus {
+      border: none;
+      box-shadow: none;
       outline: 1px solid $focus;
+      outline-offset: 0;
     }
 
     &:hover {
       background: transparent;
+
+      &::after {
+        background: $link-primary-hover;
+      }
+    }
+
+    &:active {
+      &::after {
+        background: $text-primary;
+      }
+    }
+
+    &:focus,
+    &:hover {
+      &::after {
+        opacity: 1;
+      }
     }
 
     // Used to mimic link underline
     &::after {
       position: absolute;
-      background: $link-primary-hover;
+      background: $focus;
       block-size: 1px;
       content: '';
       inline-size: convert.to-rem(12px);
@@ -121,16 +146,6 @@
         transition: none;
       }
     }
-  }
-
-  .#{$prefix}--breadcrumb--sm
-    .#{$prefix}--breadcrumb-item
-    .#{$prefix}--overflow-menu {
-    inline-size: $spacing-05;
-  }
-
-  .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu:hover::after {
-    opacity: 1;
   }
 
   .#{$prefix}--breadcrumb-item
@@ -151,6 +166,12 @@
     .#{$prefix}--overflow-menu:hover
     .#{$prefix}--overflow-menu__icon {
     fill: $link-primary-hover;
+  }
+
+  .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu:active
+    .#{$prefix}--overflow-menu__icon {
+    fill: $text-primary;
   }
 
   .#{$prefix}--breadcrumb-menu-options:focus {
@@ -176,17 +197,28 @@
     inset-inline-start: initial;
   }
 
+  .#{$prefix}--breadcrumb
+    .#{$prefix}--overflow-menu.#{$prefix}--btn--icon-only {
+    min-block-size: 1.125rem;
+    padding-inline: 0;
+  }
+
+  .#{$prefix}--breadcrumb--sm
+    .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu {
+    block-size: $spacing-05;
+    inline-size: $spacing-05;
+    min-block-size: $spacing-05;
+    .#{$prefix}--overflow-menu__icon {
+      transform: translateY(3px);
+    }
+  }
+
   // Skeleton State
   .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
     @include skeleton;
 
     block-size: 1rem;
     inline-size: convert.to-rem(100px);
-  }
-
-  .#{$prefix}--breadcrumb
-    .#{$prefix}--overflow-menu.#{$prefix}--btn--icon-only {
-    min-block-size: 1.125rem;
-    padding-inline: 0;
   }
 }

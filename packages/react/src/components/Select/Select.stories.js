@@ -86,13 +86,13 @@ export const Inline = (args) => {
         helperText="Optional helper text"
         {...args}>
         <SelectItem value="" text="" />
-        <SelectItem
-          value="An example option that is really long to show what should be done to handle long text"
-          text="An example option that is really long to show what should be done to handle long text"
-        />
         <SelectItem value="Option 2" text="Option 2" />
         <SelectItem value="Option 3" text="Option 3" />
         <SelectItem value="Option 4" text="Option 4" />
+        <SelectItem value="option-1" text="Option 1" />
+        <SelectItem value="option-2" text="Option 2" />
+        <SelectItem value="option-3" text="Option 3" />
+        <SelectItem value="option-4" text="Option 4" />
       </Select>
     </div>
   );
@@ -119,7 +119,7 @@ export const _WithLayer = (args) => (
           value="An example option that is really long to show what should be done to handle long text"
           text="An example option that is really long to show what should be done to handle long text"
         />
-        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="option-2" text="Option 2" />
       </Select>
     )}
   </WithLayer>
@@ -137,7 +137,7 @@ export const withAILabel = (args) => {
       <AILabelContent>
         <div>
           <p className="secondary">AI Explained</p>
-          <h1>84%</h1>
+          <h2 className="ai-label-heading">84%</h2>
           <p className="secondary bold">Confidence score</p>
           <p className="secondary">
             Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
@@ -176,9 +176,9 @@ export const withAILabel = (args) => {
           value="An example option that is really long to show what should be done to handle long text"
           text="An example option that is really long to show what should be done to handle long text"
         />
-        <SelectItem value="Option 2" text="Option 2" />
-        <SelectItem value="Option 3" text="Option 3" />
-        <SelectItem value="Option 4" text="Option 4" />
+        <SelectItem value="option-2" text="Option 2" />
+        <SelectItem value="option-3" text="Option 3" />
+        <SelectItem value="option-4" text="Option 4" />
       </Select>
     </div>
   );
@@ -203,9 +203,9 @@ export const Default = (args) => {
           value="An example option that is really long to show what should be done to handle long text"
           text="An example option that is really long to show what should be done to handle long text"
         />
-        <SelectItem value="Option 2" text="Option 2" />
-        <SelectItem value="Option 3" text="Option 3" />
-        <SelectItem value="Option 4" text="Option 4" />
+        <SelectItem value="option-2" text="Option 2" />
+        <SelectItem value="option-3" text="Option 3" />
+        <SelectItem value="option-4" text="Option 4" />
       </Select>
     </div>
   );

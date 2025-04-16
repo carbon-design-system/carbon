@@ -1,7 +1,5 @@
 /**
- * @license
- *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,12 +25,18 @@ class CDSUnorderedList extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'is-expressive' })
   isExpressive = false;
 
+  /**
+   * Specify whether the list is nested, or not
+   */
+  @property({ type: Boolean })
+  nested = false;
+
   connectedCallback() {
-    // Uses attribute for lookup from child
     if (
       this.closest(
         (this.constructor as typeof CDSUnorderedList).selectorListItem
-      )
+      ) ||
+      this.nested
     ) {
       this.setAttribute('slot', 'nested');
     } else {
@@ -44,7 +48,8 @@ class CDSUnorderedList extends LitElement {
   render() {
     const classes = classMap({
       [`${prefix}--list--unordered`]: true,
-      [`${prefix}--list--nested`]: this.getAttribute('slot') === 'nested',
+      [`${prefix}--list--nested`]:
+        this.getAttribute('slot') === 'nested' || this.nested,
       [`${prefix}--list--expressive`]: this.isExpressive,
     });
     return html`

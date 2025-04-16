@@ -18,7 +18,6 @@ collect:
         - allowCustomValue
         - allowEmpty
         - aria-controls
-        - aria-current
         - aria-label
         - aria-labelledby
         - ariaLabel
@@ -40,9 +39,11 @@ collect:
         - compareItems
         - condensed
         - contained
+        - count
         - danger
         - dangerDescription
         - datePickerType
+        - decorator
         - defaultChecked
         - defaultExpanded
         - defaultOpen
@@ -57,6 +58,7 @@ collect:
         - disableWheel
         - downshiftActions
         - downshiftProps
+        - dropShadow
         - element
         - enableCounter
         - enterDelayMs
@@ -78,6 +80,7 @@ collect:
         - hideCloseButton
         - hideLabel
         - hidePasswordLabel
+        - highContrast
         - href
         - iconDescription
         - id
@@ -138,6 +141,7 @@ collect:
         - onActionButtonClick
         - onAddFiles
         - onBlur
+        - onCancel
         - onChange
         - onClear
         - onClick
@@ -177,6 +181,7 @@ collect:
         - primaryButtonText
         - radio
         - readOnly
+        - ref
         - rel
         - render
         - renderIcon
@@ -217,6 +222,8 @@ collect:
         - titleId
         - titleText
         - tooltipAlignment
+        - tooltipDropShadow
+        - tooltipHighContrast
         - tooltipPosition
         - totalItems
         - translateWithId
@@ -236,8 +243,6 @@ collect:
         - onHeadingClick
         - renderExpando
         - renderToggle
-        # AccordionSkeleton
-        - count
         # ActionableNotification
         - closeOnEscape
         - hasFocus
@@ -254,6 +259,8 @@ collect:
         - ratio
         # Breadcrumb
         - noTrailingSlash
+        # BreadcrumbItem
+        - aria-current
         # ButtonSet
         - stacked
         # ChatButton
@@ -326,6 +333,7 @@ collect:
         - tileMaxHeight
         - tilePadding
         # FeatureFlags
+        - enableDialogElement
         - enableExperimentalFocusWrapWithoutSentinels
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
@@ -368,7 +376,10 @@ collect:
         # HeaderPanel
         - onHeaderPanelFocus
         # IconButton
+        - badgeCount
         - wrapperClasses
+        # IconTab
+        - badgeIndicator
         # InlineLoading
         - onSuccess
         - successDelay
@@ -445,6 +456,9 @@ collect:
         - onMouseDown
         - requireTitle
         - wrapperClassName
+        # PageHeaderContent
+        - contextualActions
+        - pageActions
         # PageSelector
         - currentPage
         - totalPages
@@ -468,9 +482,8 @@ collect:
         - itemsShown
         - loop
         # Popover
+        - autoAlignBoundary
         - caret
-        - dropShadow
-        - highContrast
         - isTabTip
         # ProgressIndicator
         - currentIndex
@@ -484,6 +497,8 @@ collect:
         - noLabel
         # SelectItem
         - hidden
+        # ShapeIndicator
+        - textSize
         # SideNav
         - addMouseListeners
         - inert
@@ -512,6 +527,7 @@ collect:
         - unstable_valueUpper
         # SliderSkeleton
         - twoHandles
+        - unstable_ariaLabelHandleUpper
         # StructuredListCell
         - noWrap
         # SwitcherItem
@@ -519,7 +535,6 @@ collect:
         # Tab
         - renderButton
         # TableBatchActions
-        - onCancel
         - onSelectAll
         - shouldShowBatchActions
         - totalCount
@@ -527,7 +542,7 @@ collect:
         # TableBody
         - aria-live
         # TableCell
-        - hasSlugHeader
+        - hasAILabelHeader
         # TableExpandHeader
         - enableExpando
         - enableToggle
@@ -573,6 +588,8 @@ collect:
         - labelA
         - labelB
         - toggled
+        # Toggletip
+        - alignmentAxisOffset
         # TreeNode
         - defaultIsExpanded
         - depth
@@ -594,6 +611,7 @@ collect:
         - bottom-left
         - bottom-right
         - bottom-start
+        - center
         - end
         - left
         - left-bottom
@@ -611,14 +629,6 @@ collect:
         - top-left
         - top-right
         - top-start
-        # General - aria-current
-        - date
-        - 'false'
-        - location
-        - page
-        - step
-        - time
-        - 'true'
         # General - buttonKind
         - danger
         - danger--ghost
@@ -643,28 +653,47 @@ collect:
         - bottom
         - top
         # General - kind
+        - caution-major
+        - caution-minor
+        - cautious
+        - critical
         - danger
         - default
         - disclosed
+        - draft
         - error
+        - failed
         - ghost
+        - high
+        - in-progress
+        - incomplete
         - info
         - info-square
+        - informative
         - inline
+        - low
+        - medium
+        - normal
+        - not-started
         - on-page
+        - pending
         - primary
         - secondary
+        - stable
+        - succeeded
         - success
         - tertiary
+        - undefined
+        - unknown
         - warning
         - warning-alt
         # General - labelPosition
         - left
         - right
         # General - level
-        - '0'
-        - '1'
-        - '2'
+        - "0"
+        - "1"
+        - "2"
         # General - loadingStatus
         - active
         - error
@@ -756,6 +785,8 @@ collect:
         - top
         - top-after-reopen
         # General - size
+        - "16"
+        - "20"
         - 2xl
         - 2xs
         - big
@@ -781,20 +812,16 @@ collect:
         - white
         # General - tooltipAlignment
         - bottom
-        - bottom-end
         - bottom-left
         - bottom-right
-        - bottom-start
         - center
         - end
         - left
         - right
         - start
         - top
-        - top-end
         - top-left
         - top-right
-        - top-start
         # General - tooltipPosition
         - bottom
         - left
@@ -833,6 +860,14 @@ collect:
         - 3x4
         - 4x3
         - 9x16
+        # BreadcrumbItem - aria-current
+        - date
+        - "false"
+        - location
+        - page
+        - step
+        - time
+        - "true"
         # ContentSwitcher - selectionMode
         - automatic
         - manual
@@ -853,6 +888,11 @@ collect:
         - actionable
         - inline
         - toast
+        # Popover - autoAlignBoundary
+        - clippingAncestors
+        # ShapeIndicator - textSize
+        - "12"
+        - "14"
         # TableBody - aria-live
         - assertive
         - off

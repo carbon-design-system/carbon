@@ -2,7 +2,7 @@ name: Feature request or enhancement 💡
 description: Suggest an idea for this project.
 title: '[Feature Request]: '
 type: 'enhancement'
-labels: ['type: enhancement 💡', 'status: needs triage 🕵️‍♀️']
+labels: ['type: enhancement 💡', 'status: needs triage :female_detective:']
 body:
   - type: markdown
     attributes:
@@ -41,6 +41,34 @@ body:
       description:
         Provide sample content, references, or audits of solutions solving the
         same problem in other applications/websites.
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package
+      description:
+        Which package(s) does this request apply to? You can select more than
+        one.
+      multiple: true
+      options:
+        - '@carbon/react'
+        - '@carbon/web-components'
+        - '@carbon/styles'
+        - '@carbon/colors'
+        - '@carbon/elements'
+        - '@carbon/grid'
+        - '@carbon/icons'
+        - '@carbon/icons-react'
+        - '@carbon/icons-vue'
+        - '@carbon/layout'
+        - '@carbon/motion'
+        - '@carbon/pictograms'
+        - '@carbon/pictograms-react'
+        - '@carbon/themes'
+        - '@carbon/type'
+        - '@carbon/upgrade'
+        - "I'm not sure"
+    validations:
+      required: true
   - type: input
     id: application
     attributes:

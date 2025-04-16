@@ -7,8 +7,6 @@
 
 'use strict';
 
-global.__DEV__ = true;
-
 jest.setTimeout(20000);
 
 global.requestAnimationFrame = function requestAnimationFrame(callback) {

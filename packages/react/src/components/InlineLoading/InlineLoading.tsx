@@ -108,9 +108,9 @@ const InlineLoading = ({
         </CheckmarkFilled>
       );
     }
-    if (status === 'inactive' || status === 'active') {
+    if (status === 'active') {
       if (!iconDescription) {
-        iconLabel = status === 'active' ? 'loading' : 'not loading';
+        iconLabel = 'loading';
       }
       return (
         <Loading
@@ -121,12 +121,20 @@ const InlineLoading = ({
         />
       );
     }
+    if (status === 'inactive') {
+      if (!iconDescription) {
+        iconLabel = 'not loading';
+      }
+      return (
+        <title className={`${prefix}--inline-loading__inactive-status`}>
+          {iconLabel}
+        </title>
+      );
+    }
     return undefined;
   };
 
-  // TODO: Should this element only be constructed, similar to
-  // `loadingAnimation`, if `description` is specified?
-  const loadingText = (
+  const loadingText = description && (
     <div className={`${prefix}--inline-loading__text`}>{description}</div>
   );
   const loading = getLoading();
@@ -139,7 +147,7 @@ const InlineLoading = ({
       {...rest}
       aria-live={rest['aria-live'] ?? 'assertive'}>
       {loadingAnimation}
-      {description && loadingText}
+      {loadingText}
     </div>
   );
 };

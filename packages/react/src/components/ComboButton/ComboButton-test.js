@@ -1,10 +1,11 @@
-/* eslint-disable testing-library/no-node-access */
 /**
  * Copyright IBM Corp. 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+/* eslint-disable testing-library/no-node-access */
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -184,56 +185,6 @@ describe('ComboButton', () => {
       expect(
         document.querySelector('.cds--menu-item__label')
       ).toHaveTextContent(/^Additional action$/);
-    });
-
-    it('warns when MenuItemSelectable is used in children', async () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <ComboButton label="Primary action">
-          <MenuItemSelectable label="Option" />
-        </ComboButton>
-      );
-
-      await userEvent.click(screen.getAllByRole('button')[1]);
-
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
-
-    it('warns when MenuItemRadioGroup is used in children', async () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <ComboButton label="Primary action">
-          <MenuItemRadioGroup
-            label="Options"
-            items={['Option 1', 'Option 2']}
-          />
-        </ComboButton>
-      );
-
-      await userEvent.click(screen.getAllByRole('button')[1]);
-
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
-    });
-
-    it('warns when a nested Menu is used in children', async () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-      render(
-        <ComboButton label="Primary action">
-          <MenuItem label="Submenu">
-            <MenuItem label="Action" />
-          </MenuItem>
-        </ComboButton>
-      );
-
-      await userEvent.click(screen.getAllByRole('button')[1]);
-
-      expect(spy).toHaveBeenCalled();
-      spy.mockRestore();
     });
 
     it('supports ellipsis in ComboButton by checking the className', async () => {

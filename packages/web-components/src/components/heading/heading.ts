@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { html, LitElement } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';

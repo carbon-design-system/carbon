@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -22,7 +20,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-content-switcher-item
  */
 @customElement(`${prefix}-content-switcher-item`)
-export default class CDSContentSwitcherItem extends FocusMixin(LitElement) {
+class CDSContentSwitcherItem extends FocusMixin(LitElement) {
   /**
    * `true` if this content switcher item should be disabled.
    */
@@ -96,7 +94,6 @@ export default class CDSContentSwitcherItem extends FocusMixin(LitElement) {
     if (changedProperties) {
       this.shadowRoot
         ?.querySelector(`${prefix}-tooltip`)
-        ?.shadowRoot?.querySelector(`.${prefix}--tooltip`)
         ?.classList.add(`${prefix}--icon-tooltip`);
     }
   }
@@ -157,5 +154,8 @@ export default class CDSContentSwitcherItem extends FocusMixin(LitElement) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
+
   static styles = styles;
 }
+
+export default CDSContentSwitcherItem;

@@ -59,6 +59,11 @@ export interface OverflowMenuItemProps
   isDelete?: boolean;
 
   /**
+   * accepts a ref to the button element
+   */
+  ref?: (element: HTMLElement) => void;
+
+  /**
    * `true` to require the title attribute.
    */
   requireTitle?: boolean;
@@ -124,14 +129,12 @@ const OverflowMenuItem: OverflowMenuItemComponent = React.forwardRef(
       }
     }
 
-    if (__DEV__) {
-      warning(
-        closeMenu,
-        '`<OverflowMenuItem>` detected missing `closeMenu` prop. ' +
-          '`closeMenu` is required to let `<OverflowMenu>` close the menu upon actions on `<OverflowMenuItem>`. ' +
-          'Please make sure `<OverflowMenuItem>` is a direct child of `<OverflowMenu>.'
-      );
-    }
+    warning(
+      !!closeMenu,
+      '`<OverflowMenuItem>` detected missing `closeMenu` prop. ' +
+        '`closeMenu` is required to let `<OverflowMenu>` close the menu upon actions on `<OverflowMenuItem>`. ' +
+        'Please make sure `<OverflowMenuItem>` is a direct child of `<OverflowMenu>.'
+    );
 
     const overflowMenuBtnClasses = cx(
       `${prefix}--overflow-menu-options__btn`,
