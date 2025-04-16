@@ -25,6 +25,7 @@ import deprecate from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { Text } from '../Text';
 import { TranslateWithId } from '../../types/common';
+import { clamp } from '../../internal/clamp';
 
 export const translationIds = {
   'increment.number': 'increment.number',
@@ -372,10 +373,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           getDecimalPlaces(step)
         );
         const floatValue = parseFloat(rawValue.toFixed(precision));
-        const newValue =
-          typeof min !== 'undefined' && typeof max !== 'undefined'
-            ? Math.min(Math.max(floatValue, min), max)
-            : floatValue;
+        const newValue = clamp(floatValue, min ?? -Infinity, max ?? Infinity);
+
         const state = {
           value:
             allowEmpty && inputRef.current.value === '' && step === 0
@@ -418,7 +417,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       normalizedDecorator &&
       normalizedDecorator['type']?.displayName === 'AILabel'
     ) {
-      isRevertActive = (normalizedDecorator as ReactElement).props.revertActive;
+      isRevertActive = (normalizedDecorator as ReactElement<any>).props
+        .revertActive;
     }
 
     useEffect(() => {

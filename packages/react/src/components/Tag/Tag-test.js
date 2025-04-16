@@ -292,9 +292,20 @@ describe('Tag', () => {
     expect(spy).toHaveBeenCalled();
     spy.mockRestore();
   });
-  it('supports a ref on the underlying button element', () => {
-    const ref = jest.fn();
+  it('OperationalTag to supports a ref on the underlying button element', () => {
+    const ref = React.createRef();
     render(<OperationalTag type="red" text="Test Tag" ref={ref} />);
-    expect(ref).toHaveBeenCalledWith(expect.any(HTMLButtonElement));
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+  });
+  it('DismissibleTag to supports a ref on the underlying button element', () => {
+    const ref = React.createRef();
+    render(<DismissibleTag type="red" text="Test Tag" ref={ref} />);
+
+    expect(ref.current).toBeInstanceOf(HTMLDivElement);
+  });
+  it('SelectableTag to supports a ref on the underlying Div element', () => {
+    const ref = React.createRef();
+    render(<SelectableTag type="red" text="Test Tag" ref={ref} />);
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
   });
 });

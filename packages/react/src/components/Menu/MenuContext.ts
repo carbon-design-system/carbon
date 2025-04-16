@@ -55,7 +55,7 @@ function menuReducer(state: StateType, action: ActionType) {
 type DispatchFuncProps = {
   type: ActionType['type'];
   payload: {
-    ref: RefObject<HTMLLIElement>;
+    ref: RefObject<HTMLLIElement | null>;
     disabled: boolean;
   };
 };
