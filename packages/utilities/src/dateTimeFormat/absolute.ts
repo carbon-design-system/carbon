@@ -10,10 +10,12 @@ export function formatTime(
   options?: Partial<{
     locale: string;
     style: Intl.DateTimeFormatOptions['timeStyle'];
+    timeZone?: Intl.DateTimeFormatOptions['timeZone'];
   }>
 ): string {
   const dtf = new Intl.DateTimeFormat(options?.locale, {
     timeStyle: options?.style ?? 'short',
+    timeZone: options?.timeZone,
   });
 
   return dtf.format(date);
@@ -24,6 +26,7 @@ export function formatDate(
   options?: Partial<{
     locale: string;
     style: Intl.DateTimeFormatOptions['dateStyle'];
+    timeZone?: Intl.DateTimeFormatOptions['timeZone'];
   }>
 ): string {
   const dtf = new Intl.DateTimeFormat(options?.locale, {
@@ -40,6 +43,7 @@ export function format(
     style: Intl.DateTimeFormatOptions['timeStyle'] | 'tooltip';
     timeStyle: Intl.DateTimeFormatOptions['timeStyle'];
     dateStyle: Intl.DateTimeFormatOptions['dateStyle'];
+    timeZone?: Intl.DateTimeFormatOptions['timeZone'];
   }>
 ) {
   const timeStyle =
@@ -55,6 +59,7 @@ export function format(
   const dtf = new Intl.DateTimeFormat(options?.locale, {
     timeStyle,
     dateStyle,
+    timeZone: options?.timeZone,
   });
 
   return dtf.format(date);
@@ -68,6 +73,7 @@ export function formatRange(
     style: Intl.DateTimeFormatOptions['timeStyle'];
     timeStyle: Intl.DateTimeFormatOptions['timeStyle'] | null;
     dateStyle: Intl.DateTimeFormatOptions['dateStyle'] | null;
+    timeZone?: Intl.DateTimeFormatOptions['timeZone'];
   }>
 ) {
   const timeStyle =
@@ -83,6 +89,7 @@ export function formatRange(
   const dtf = new Intl.DateTimeFormat(options?.locale, {
     timeStyle,
     dateStyle,
+    timeZone: options?.timeZone,
   });
 
   return dtf.formatRange(startDate, endDate);
