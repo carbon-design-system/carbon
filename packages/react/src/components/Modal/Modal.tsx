@@ -332,6 +332,8 @@ const Modal = React.forwardRef(function Modal(
         wrapFocusWithoutSentinels({
           containerNode: innerModal.current,
           currentActiveNode: evt.target,
+          // TODO: Delete type assertion following util rewrite.
+          // https://github.com/carbon-design-system/carbon/pull/18913
           event: evt as any,
         });
       }
