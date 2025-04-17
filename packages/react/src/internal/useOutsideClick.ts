@@ -9,7 +9,7 @@ import { useEffect, useRef, type RefObject } from 'react';
 import { canUseDOM } from './environment';
 import { useWindowEvent } from './useEvent';
 
-export const useOutsideClick = <T extends HTMLElement>(
+export const useOutsideClick = <T extends HTMLElement | null>(
   ref: RefObject<T>,
   callback: (event: MouseEvent) => void
 ) => {
