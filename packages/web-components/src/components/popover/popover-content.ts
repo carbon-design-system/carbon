@@ -63,14 +63,14 @@ class CDSPopoverContent extends LitElement {
   render() {
     if (this.autoalign) {
       return html`
-        <span class="${prefix}--popover-content">
+        <span class="${prefix}--popover-content" part="content">
           <slot> </slot>
           <span class="${prefix}--popover-caret"></span>
         </span>
       `;
     } else {
       return html`
-        <span class="${prefix}--popover-content">
+        <span class="${prefix}--popover-content" part="content">
           <slot> </slot>
         </span>
         <span class="${prefix}--popover-caret"></span>
