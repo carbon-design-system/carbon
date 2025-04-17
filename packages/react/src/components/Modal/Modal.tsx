@@ -309,7 +309,10 @@ const Modal = React.forwardRef(function Modal(
   }
 
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
+    const { target } = evt;
+
     evt.stopPropagation();
+
     if (open) {
       if (match(evt, keys.Escape)) {
         onRequestClose(evt);
@@ -318,7 +321,9 @@ const Modal = React.forwardRef(function Modal(
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
-        !isCloseButton(evt.target as Element)
+        target instanceof Element &&
+        !isCloseButton(target) &&
+        document.activeElement !== button.current
       ) {
         onRequestSubmit(evt);
       }
