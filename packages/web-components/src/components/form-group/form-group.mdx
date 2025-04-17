@@ -1,63 +1,35 @@
-import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as FormGroupStories from './form-group.stories';
 
 <Meta of={FormGroupStories} />
 
-# Form Group
+# Form group
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/form-group)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/master/packages/web-components/src/components/form-group)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/form/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/form/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/form-group)
+## Table of Contents
 
-## Getting started
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
-Here's a quick example to get you started.
+## Overview
 
-### JS (via import)
+<Canvas of={FormGroupStories.Default} />
 
-```javascript
-import '@carbon/web-components/es/components/form-group/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['form-group'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-form-group legend-text="FormGroup Legend">
-  <cds-stack gap="7">
-    <cds-text-input label="First Name"> </cds-text-input>
-    <cds-text-input label="Last Name"> </cds-text-input>
-    <cds-radio-button-group
-      legend-text="Radio button heading"
-      name="radio-button-group"
-      value="radio-1">
-      <cds-radio-button
-        label-text="Option 1"
-        value="radio-1"
-        id="radio-1"></cds-radio-button>
-      <cds-radio-button
-        label-text="Option 2"
-        value="radio-2"
-        id="radio-2"></cds-radio-button>
-      <cds-radio-button
-        label-text="Option 3"
-        value="radio-3"
-        id="radio-3"></cds-radio-button>
-    </cds-radio-button-group>
-    <cds-button>Submit</cds-button>
-  </cds-stack>
-</cds-form-group>
-```
-
-## `<cds-form-group>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-form-group message>`) and `false` means not setting the attribute (e.g.
-`<cds-form-group>` without `message` attribute).
+## Component API
 
 <ArgTypes of="cds-form-group" />
+
+<Markdown>{`${cdnJs({ components: ['form-group'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback through, asking questions
+on Slack, or updating this file on GitHub
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/form-group/form-group.mdx).
