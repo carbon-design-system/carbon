@@ -79,11 +79,6 @@ export interface DialogProps extends ReactAttr<HTMLDialogElement> {
   hasScrollingContent?: boolean;
 
   /**
-   * Specify the size variant.
-   */
-  size?: 'xs' | 'sm' | 'md' | 'lg';
-
-  /**
    * Specify the role of the dialog for accessibility
    * 'dialog' is the default, but 'alertdialog' can be used for important messages requiring user attention
    */
@@ -226,9 +221,7 @@ export const unstable__Dialog = React.forwardRef(
       }
     }, [open, danger, prefix]);
 
-    const containerClasses = cx(`${prefix}--dialog-container`, {
-      [`${prefix}--dialog-container--${size}`]: size,
-    });
+    const containerClasses = cx(`${prefix}--dialog-container`);
 
     useEffect(() => {
       if (ref.current && open && !ariaLabel && !ariaLabelledBy) {
@@ -308,11 +301,6 @@ unstable__Dialog.propTypes = {
    * Specify whether the dialog contains scrolling content
    */
   hasScrollingContent: PropTypes.bool,
-
-  /**
-   * Specify the size variant.
-   */
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Specify the role of the dialog for accessibility
@@ -806,7 +794,6 @@ const Footer = DialogFooter;
 Footer.displayName = 'Dialog.Footer';
 
 // Add composable components to unstable__Dialog
-// Use type assertion to tell TypeScript that we're adding properties
 (unstable__Dialog as DialogComponent).Header = Header;
 (unstable__Dialog as DialogComponent).Controls = Controls;
 (unstable__Dialog as DialogComponent).CloseButton = CloseButton;
@@ -816,5 +803,4 @@ Footer.displayName = 'Dialog.Footer';
 (unstable__Dialog as DialogComponent).Content = Content;
 (unstable__Dialog as DialogComponent).Footer = Footer;
 
-// Create a Dialog namespace for direct access
 export const Dialog = unstable__Dialog as DialogComponent;
