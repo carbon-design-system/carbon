@@ -16,6 +16,7 @@ import { ReactAttr } from '../../types/common';
 import { Text } from '../Text';
 import { Layer } from '../Layer';
 import ButtonSet from '../ButtonSet';
+import { useId } from '../../internal/useId';
 
 /**
  * ----------
@@ -127,6 +128,9 @@ export const unstable__Dialog = React.forwardRef(
     forwardRef
   ) => {
     const prefix = usePrefix();
+    const dialogId = useId();
+    const titleId = `${prefix}--dialog-header__heading--${dialogId}`;
+    const subtitleId = `${prefix}--dialog-header__label--${dialogId}`;
 
     // This component needs access to a ref, placed on the dialog, to call the
     // various imperative dialog functions (show(), close(), etc.).
@@ -186,10 +190,58 @@ export const unstable__Dialog = React.forwardRef(
       };
     }, [modal, open, prefix]);
 
-    // Create a container element for the dialog content with proper classes
+    // Find and set IDs for title and subtitle when dialog opens
+    useEffect(() => {
+      if (ref.current && open) {
+        const title = ref.current.querySelector(
+          `.${prefix}--dialog-header__heading`
+        );
+        const subtitle = ref.current.querySelector(
+          `.${prefix}--dialog-header__label`
+        );
+
+        if (title && !title.id) {
+          title.id = titleId;
+        }
+
+        if (subtitle && !subtitle.id) {
+          subtitle.id = subtitleId;
+        }
+      }
+    }, [open, prefix, titleId, subtitleId]);
+
+    // For danger dialogs, focus the secondary/cancel button
+    useEffect(() => {
+      if (open && ref.current && danger) {
+        setTimeout(() => {
+          if (ref.current) {
+            const secondaryButton = ref.current.querySelector<HTMLElement>(
+              `.${prefix}--btn.${prefix}--btn--secondary`
+            );
+            if (secondaryButton) {
+              secondaryButton.focus();
+            }
+          }
+        }, 0);
+      }
+    }, [open, danger, prefix]);
+
     const containerClasses = cx(`${prefix}--dialog-container`, {
       [`${prefix}--dialog-container--${size}`]: size,
     });
+
+    useEffect(() => {
+      if (ref.current && open && !ariaLabel && !ariaLabelledBy) {
+        const title = ref.current.querySelector(
+          `.${prefix}--dialog-header__heading`
+        );
+
+        // Set aria-labelledby to the title's ID if it exists
+        if (title && title.id) {
+          ref.current.setAttribute('aria-labelledby', title.id);
+        }
+      }
+    }, [open, ariaLabel, ariaLabelledBy, prefix]);
 
     return (
       <dialog
@@ -209,7 +261,7 @@ export const unstable__Dialog = React.forwardRef(
         onClose={onClose}
         role={role}
         aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
+        aria-labelledby={!ariaLabel ? ariaLabelledBy || titleId : undefined}
         aria-describedby={ariaDescribedBy}>
         <div className={containerClasses}>{children}</div>
       </dialog>
@@ -409,16 +461,25 @@ export interface DialogTitleProps extends ReactAttr<HTMLHeadingElement> {
    * Specify an optional className to be applied to the title node
    */
   className?: string;
+
+  /**
+   * Specify an optional id for the title element
+   */
+  id?: string;
 }
 
 export const DialogTitle = React.forwardRef<
   HTMLHeadingElement,
   DialogTitleProps
->(({ children, className, ...rest }, ref) => {
+>(({ children, className, id, ...rest }, ref) => {
   const prefix = usePrefix();
+  const dialogId = useId();
+  const defaultId = `${prefix}--dialog-header__heading--${dialogId}`;
+
   return (
     <Text
       as="h2"
+      id={id || defaultId}
       className={cx(`${prefix}--dialog-header__heading`, className)}
       ref={ref}
       {...rest}>
@@ -439,6 +500,11 @@ DialogTitle.propTypes = {
    * Specify an optional className to be applied to the title node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify an optional id for the title element
+   */
+  id: PropTypes.string,
 };
 
 /**
@@ -456,16 +522,25 @@ export interface DialogSubtitleProps extends ReactAttr<HTMLParagraphElement> {
    * Specify an optional className to be applied to the subtitle node
    */
   className?: string;
+
+  /**
+   * Specify an optional id for the subtitle element
+   */
+  id?: string;
 }
 
 export const DialogSubtitle = React.forwardRef<
   HTMLParagraphElement,
   DialogSubtitleProps
->(({ children, className, ...rest }, ref) => {
+>(({ children, className, id, ...rest }, ref) => {
   const prefix = usePrefix();
+  const dialogId = useId();
+  const defaultId = `${prefix}--dialog-header__label--${dialogId}`;
+
   return (
     <Text
       as="h2"
+      id={id || defaultId}
       className={cx(`${prefix}--dialog-header__label`, className)}
       ref={ref}
       {...rest}>
@@ -486,6 +561,11 @@ DialogSubtitle.propTypes = {
    * Specify an optional className to be applied to the subtitle node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify an optional id for the subtitle element
+   */
+  id: PropTypes.string,
 };
 
 /**

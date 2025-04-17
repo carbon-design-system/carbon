@@ -13,10 +13,6 @@ import {
   DialogHeader,
   DialogControls,
   DialogCloseButton,
-  DialogTitle,
-  DialogSubtitle,
-  DialogBody,
-  DialogFooter,
 } from './';
 import Button from '../Button';
 import TextInput from '../TextInput';
@@ -73,7 +69,11 @@ export const Modal = ({ open: _open, ...args }) => {
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
-      <Dialog {...args} open={open} onRequestClose={handleRequestClose}>
+      <Dialog
+        {...args}
+        open={open}
+        onRequestClose={handleRequestClose}
+        aria-label="Dialog Title">
         <Dialog.Header>
           <Dialog.Subtitle>Configure dialog settings</Dialog.Subtitle>
           <Dialog.Title>Modal Dialog Example</Dialog.Title>
@@ -150,7 +150,11 @@ export const NonModal = ({ open: _open, ...args }) => {
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
-      <Dialog {...args} open={open} onRequestClose={handleRequestClose}>
+      <Dialog
+        {...args}
+        open={open}
+        onRequestClose={handleRequestClose}
+        aria-label="Dialog Title">
         <Dialog.Header>
           <Dialog.Subtitle>Non-modal dialog example Subtitle</Dialog.Subtitle>
           <Dialog.Title>Non-Modal Dialog</Dialog.Title>
@@ -233,7 +237,12 @@ export const PassiveDialog = ({ open: _open, ...args }) => {
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
-      <Dialog {...args} open={open} modal onRequestClose={handleRequestClose}>
+      <Dialog
+        {...args}
+        open={open}
+        modal
+        onRequestClose={handleRequestClose}
+        aria-label="Dialog Title">
         <Dialog.Header>
           <Dialog.Title>Information Message</Dialog.Title>
           <Dialog.Controls>
@@ -282,7 +291,12 @@ export const DangerDialog = ({ open: _open, ...args }) => {
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
-      <Dialog {...args} open={open} onRequestClose={handleRequestClose} danger>
+      <Dialog
+        {...args}
+        open={open}
+        onRequestClose={handleRequestClose}
+        danger
+        aria-label="Dialog Title">
         <Dialog.Header>
           <Dialog.Subtitle>Account resources</Dialog.Subtitle>
           <Dialog.Title>
