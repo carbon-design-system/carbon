@@ -115,6 +115,72 @@ describe('MenuButton', () => {
       expect(screen.getByRole('menu')).toBeInTheDocument();
       expect(screen.getByRole('menuitem')).toHaveTextContent(/^Action$/);
     });
+
+    it('has basic keyboard support', async () => {
+      render(
+        <MenuButton label="Actions">
+          <MenuItem label="Action 1" />
+          <MenuItem label="Action 2" />
+        </MenuButton>
+      );
+
+      expect(document.body).toHaveFocus();
+
+      // Tab to MenuButton.
+      await userEvent.tab();
+      const menuButton = screen.getByRole('button', { name: 'Actions' });
+      expect(menuButton).toHaveFocus();
+
+      // Open the menu.  Focus moves to first MenuItem.
+      await userEvent.keyboard('{Enter}');
+      const menuItem1 = screen.getByRole('menuitem', { name: 'Action 1' });
+      expect(menuItem1).toHaveFocus();
+
+      // Arrow down to second MenuItem.
+      await userEvent.keyboard('{ArrowDown}');
+      const menuItem2 = screen.getByRole('menuitem', { name: 'Action 2' });
+      expect(menuItem2).toHaveFocus();
+
+      // Keyboard click the second MenuItem.  Menu should close, and focus should move back to MenuButton.
+      await userEvent.keyboard('{Enter}');
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(menuButton).toHaveFocus();
+    });
+
+    it('does not steal focus', async () => {
+      render(
+        <>
+          <MenuButton label="Actions">
+            <MenuItem
+              label="Action"
+              onClick={() => {
+                // This focus() should "override" Carbon's behavior to focus the MenuButton.
+                document.querySelector('input')?.focus();
+              }}
+            />
+          </MenuButton>
+          <input />
+        </>
+      );
+
+      expect(document.body).toHaveFocus();
+
+      // Tab to MenuButton.
+      await userEvent.tab();
+      const menuButton = screen.getByRole('button', { name: 'Actions' });
+      expect(menuButton).toHaveFocus();
+
+      // Open the menu.  Focus moves to MenuItem.
+      await userEvent.keyboard('{Enter}');
+      const menuItem = screen.getByRole('menuitem', { name: 'Action' });
+      expect(menuItem).toHaveFocus();
+
+      // Keyboard click the MenuItem.  Menu should close, and focus should move to <input>.
+      await userEvent.keyboard('{Enter}');
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveFocus();
+    });
   });
 
   describe('supports props.menuAlignment', () => {
