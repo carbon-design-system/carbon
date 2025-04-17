@@ -119,7 +119,7 @@ Feature flags can also be enabled via the provided `enable()` mixin
 Codemods are code modification scripts that automate the necessary changes when migrating to new components and APIs. They reduce the manual effort required when adopting new features. Carbon provides codemods to help you enable feature flags and migrate to the new APIs these flags provide.
 
 Some feature flags don't have codemods because:
-- **Style only**: Flags like `enable-experimental-tile-contrast` only affect Sass styles with no changes to the javascript component API, so no code transformation is needed.
+- **Style only**: Flags like `enable-experimental-tile-contrast` only affect Sass styles with no changes to the javascript component API.
 - **Config only**: Flags like `enable-experimental-focus-wrap-without-sentinels`, `enable-dialog-element`, and `enable-treeview-controllable` are configuration options that are enabled in just a few specific places in your application.
 - **App level**: Flags like `enable-v12-dynamic-floating-styles` are designed to be applied at the application level to enable specific behaviors (like floating styles without full autoAlign behavior) and don't require widespread component changes.
 
