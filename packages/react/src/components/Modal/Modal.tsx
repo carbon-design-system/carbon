@@ -564,7 +564,7 @@ const Modal = React.forwardRef(function Modal(
       open={open}
       modal
       ref={innerModal}
-      role={isAlertDialog ? 'alertdialog' : ''}
+      role={isAlertDialog ? 'alertdialog' : 'dialog'}
       aria-describedby={isAlertDialog ? modalBodyId : ''}
       className={containerClasses}
       aria-label={ariaLabel}>

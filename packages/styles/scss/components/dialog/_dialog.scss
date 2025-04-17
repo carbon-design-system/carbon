@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2014, 2024
+// Copyright IBM Corp. 2014, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -18,125 +18,171 @@
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/update_fields_on_layer' as *;
+@use '../../utilities/z-index' as *;
 
 /// Dialog styles
 /// @access public
 /// @group dialog
 @mixin dialog {
   .#{$prefix}--dialog {
+    position: fixed;
+    z-index: z('modal');
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0;
     border: none;
-    background-color: $layer;
-    block-size: fit-content;
+    background-color: transparent;
+    block-size: 100vh;
     color: $text-primary;
-    inline-size: 48rem;
-    max-block-size: 50%;
-    max-inline-size: 100%;
-    opacity: 0;
-    transform: translateY(calc(-1 * #{$spacing-06}));
+    inline-size: 100vw;
+    inset-block-start: 0;
+    inset-inline-start: 0;
 
-    /** opening and closing is used in as allow-discrete is not currently supported wide enough
-     * https://caniuse.com/mdn-css_properties_display_is_transitionable
-     */
-    transition:
-      opacity $duration-moderate-02 motion(exit, expressive),
-      transform $duration-moderate-02 motion(exit, expressive),
-      overlay $duration-moderate-02 motion(exit, expressive) allow-discrete,
-      display $duration-moderate-02 motion(exit, expressive) allow-discrete;
-
-    @media (prefers-reduced-motion) {
-      transition: none;
+    &:not([open]) {
+      display: none;
     }
 
-    @include breakpoint(md) {
-      max-inline-size: 84%;
-    }
-    @include breakpoint(lg) {
-      max-inline-size: 72%;
-    }
-    @include breakpoint(xlg) {
-      max-inline-size: 64%;
-    }
-    @include breakpoint(xlg) {
-      max-inline-size: 60%;
-    }
+    &::backdrop {
+      background-color: $overlay;
+      opacity: 0;
+      transition: opacity $duration-moderate-02 motion(exit, expressive);
 
-    &[open] {
-      opacity: 1;
-      transform: translateY(0);
-
-      transition:
-        opacity $duration-moderate-02 motion(entrance, expressive),
-        transform $duration-moderate-02 motion(entrance, expressive),
-        overlay $duration-moderate-02 motion(entrance, expressive)
-          allow-discrete,
-        display $duration-moderate-02 motion(entrance, expressive)
-          allow-discrete;
-
-      @media (prefers-reduced-motion) {
+      @media screen and (prefers-reduced-motion: reduce) {
         transition: none;
       }
     }
 
-    /** starting style also not supported widely
-    * https://caniuse.com/mdn-css_at-rules_starting-style
-    */
-    /*   Before-open state  */
-    /* Needs to be after the previous dialog[open] rule to take effect,
-    as the specificity is the same */
+    &[open]::backdrop {
+      opacity: 1;
+      transition: opacity $duration-moderate-02 motion(entrance, expressive);
 
-    @starting-style {
-      &[open] {
-        opacity: 0;
-        transform: translateY(calc(-1 * #{$spacing-06}));
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
       }
+    }
+
+    @include update_fields_on_layer;
+  }
+
+  .#{$prefix}--dialog-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: $layer;
+    inline-size: 100%;
+    max-block-size: 100%;
+    max-inline-size: 100%;
+    outline: 3px solid transparent;
+    outline-offset: -3px;
+    transform: translate3d(0, 0, 0);
+    transition: transform $duration-moderate-02 motion(entrance, expressive);
+
+    @include breakpoint(md) {
+      position: static;
+      block-size: auto;
+      inline-size: 84%;
+      max-block-size: 90%;
+    }
+
+    @include breakpoint(lg) {
+      inline-size: 60%;
+      max-block-size: 84%;
+    }
+
+    @include breakpoint(xlg) {
+      inline-size: 48%;
     }
   }
 
   .#{$prefix}--dialog__header {
     position: relative;
-    overflow: visible;
-    inline-size: 100%;
-    min-block-size: $spacing-09;
+    margin-block-end: $spacing-03;
+    padding-block-start: $spacing-05;
+    padding-inline: $spacing-05 $spacing-09;
   }
 
-  /* Transition the :backdrop when the dialog modal is promoted to the top layer */
-  .#{$prefix}--dialog::backdrop {
-    background-color: $overlay;
-    opacity: 0;
-    /* opening and closing is used in as allow-discrete is not currently supported wide enough
-     * https://caniuse.com/mdn-css_properties_display_is_transitionable
-     */
-    transition:
-      background-color $duration-moderate-02 motion(entrance, expressive),
-      opacity $duration-moderate-02 motion(entrance, expressive);
+  .#{$prefix}--dialog-header__label {
+    @include component-reset.reset;
+    @include type-style('label-01');
 
-    @media (prefers-reduced-motion) {
-      transition: none;
+    color: $text-secondary;
+    margin-block-end: $spacing-02;
+  }
+
+  .#{$prefix}--dialog-header__heading {
+    @include component-reset.reset;
+    @include type-style('heading-03');
+
+    color: $text-primary;
+    padding-inline-end: calc(20% - $spacing-09);
+  }
+
+  .#{$prefix}--dialog-content {
+    @include type-style('body-01');
+
+    position: relative;
+    color: $text-primary;
+    font-weight: 400;
+    overflow-y: auto;
+    padding-block: $spacing-03 $spacing-09;
+    padding-inline: $spacing-05 $spacing-05;
+
+    > p {
+      @include type-style('body-01');
+
+      padding-inline-end: calc(20% - $spacing-07);
+    }
+
+    &.#{$prefix}--form--fluid {
+      margin-inline: -$spacing-05 - $spacing-05;
+    }
+
+    &.#{$prefix}--dialog-scroll-content {
+      border-block-end: 2px solid transparent;
+
+      mask-image: linear-gradient(
+          to bottom,
+          $layer calc(100% - 80px),
+          transparent calc(100% - 48px),
+          transparent 100%
+        ),
+        linear-gradient(to left, $layer 0, 16px, transparent 16px),
+        linear-gradient(to right, $layer 0, 2px, transparent 2px),
+        linear-gradient(to top, $layer 0, 2px, transparent 2px);
+
+      > *:last-child {
+        margin-block-end: $spacing-06;
+      }
+
+      &:has(.#{$prefix}--autoalign) {
+        mask-image: none;
+      }
     }
   }
 
-  .#{$prefix}--dialog[open]::backdrop {
-    opacity: 1;
+  .#{$prefix}--dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    block-size: convert.to-rem(64px);
+    margin-block-start: auto;
 
-    transition:
-      background-color $duration-moderate-02 motion(exit, expressive),
-      opacity $duration-moderate-02 motion(exit, expressive);
-
-    @media (prefers-reduced-motion) {
-      transition: none;
+    .#{$prefix}--btn {
+      flex: 0 1 50%;
+      align-items: baseline;
+      margin: 0;
+      block-size: convert.to-rem(64px);
+      max-inline-size: none;
     }
-  }
 
-  /** starting style also not supported widely
-  * https://caniuse.com/mdn-css_at-rules_starting-style
-  */
-  /* This starting-style rule cannot be nested inside the above selector
-because the nesting selector cannot represent pseudo-elements. */
+    .#{$prefix}--btn:not(.#{$prefix}--skeleton) {
+      padding-block: calc($spacing-05 - convert.to-rem(2px)) $spacing-07;
+    }
 
-  @starting-style {
-    .#{$prefix}--dialog[open]::backdrop {
-      opacity: 0;
+    &--three-button .#{$prefix}--btn {
+      flex: 0 1 25%;
+      align-items: flex-start;
     }
   }
 
@@ -144,5 +190,43 @@ because the nesting selector cannot represent pseudo-elements. */
     position: absolute;
     inset-block-start: 0;
     inset-inline-end: 0;
+  }
+
+  .#{$prefix}--dialog__close {
+    padding: convert.to-rem(12px);
+    border: 2px solid transparent;
+    background-color: transparent;
+    block-size: 3rem;
+    cursor: pointer;
+    inline-size: 3rem;
+    transition: background-color $duration-fast-02 motion(standard, productive);
+
+    &:hover {
+      background-color: $layer-hover;
+    }
+
+    &:focus {
+      border-color: $focus;
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--dialog__close::-moz-focus-inner {
+    border: 0;
+  }
+
+  .#{$prefix}--icon__close {
+    block-size: convert.to-rem(20px);
+    fill: $icon-primary;
+    inline-size: convert.to-rem(20px);
+    @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--body--with-modal-open {
+    overflow: hidden;
+  }
+
+  .#{$prefix}--dialog__close:focus {
+    @include high-contrast-mode('focus');
   }
 }

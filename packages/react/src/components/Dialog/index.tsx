@@ -13,7 +13,15 @@ import { Close } from '@carbon/icons-react';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import { ReactAttr } from '../../types/common';
+import { Text } from '../Text';
+import { Layer } from '../Layer';
+import ButtonSet from '../ButtonSet';
 
+/**
+ * ----------
+ * Dialog
+ * ----------
+ */
 export interface DialogProps extends ReactAttr<HTMLDialogElement> {
   /**
    * Provide the contents of the Dialog
@@ -58,6 +66,42 @@ export interface DialogProps extends ReactAttr<HTMLDialogElement> {
    * Specify whether the Dialog is currently open
    */
   open?: boolean;
+
+  /**
+   * Specify whether the Dialog is for dangerous actions
+   */
+  danger?: boolean;
+
+  /**
+   * Specify whether the dialog contains scrolling content
+   */
+  hasScrollingContent?: boolean;
+
+  /**
+   * Specify the size variant.
+   */
+  size?: 'xs' | 'sm' | 'md' | 'lg';
+
+  /**
+   * Specify the role of the dialog for accessibility
+   * 'dialog' is the default, but 'alertdialog' can be used for important messages requiring user attention
+   */
+  role?: 'dialog' | 'alertdialog';
+
+  /**
+   * Specify a label for screen readers
+   */
+  ariaLabel?: string;
+
+  /**
+   * Specify the ID of an element that labels this dialog
+   */
+  ariaLabelledBy?: string;
+
+  /**
+   * Specify the ID of an element that describes this dialog
+   */
+  ariaDescribedBy?: string;
 }
 
 export const unstable__Dialog = React.forwardRef(
@@ -71,6 +115,13 @@ export const unstable__Dialog = React.forwardRef(
       onClose = noopFn,
       onRequestClose = noopFn,
       open = false,
+      danger = false,
+      hasScrollingContent = false,
+      size,
+      role = 'dialog',
+      ariaLabel,
+      ariaLabelledBy,
+      ariaDescribedBy,
       ...rest
     }: DialogProps,
     forwardRef
@@ -122,6 +173,24 @@ export const unstable__Dialog = React.forwardRef(
       }
     }, [modal, open]);
 
+    // Apply body overflow: hidden when modal is open
+    useEffect(() => {
+      if (modal && open) {
+        document.body.classList.add(`${prefix}--body--with-modal-open`);
+      } else {
+        document.body.classList.remove(`${prefix}--body--with-modal-open`);
+      }
+
+      return () => {
+        document.body.classList.remove(`${prefix}--body--with-modal-open`);
+      };
+    }, [modal, open, prefix]);
+
+    // Create a container element for the dialog content with proper classes
+    const containerClasses = cx(`${prefix}--dialog-container`, {
+      [`${prefix}--dialog-container--${size}`]: size,
+    });
+
     return (
       <dialog
         {...rest}
@@ -129,14 +198,20 @@ export const unstable__Dialog = React.forwardRef(
           `${prefix}--dialog`,
           {
             [`${prefix}--dialog--modal`]: modal,
+            [`${prefix}--dialog--danger`]: danger,
+            [`${prefix}--dialog--scrolling`]: hasScrollingContent,
           },
           className
         )}
         ref={ref}
         onCancel={onCancel}
         onClick={handleClick}
-        onClose={onClose}>
-        {children}
+        onClose={onClose}
+        role={role}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}>
+        <div className={containerClasses}>{children}</div>
       </dialog>
     );
   }
@@ -171,8 +246,48 @@ unstable__Dialog.propTypes = {
    * open initial state
    */
   open: PropTypes.bool,
+
+  /**
+   * Specify whether the Dialog is for dangerous actions
+   */
+  danger: PropTypes.bool,
+
+  /**
+   * Specify whether the dialog contains scrolling content
+   */
+  hasScrollingContent: PropTypes.bool,
+
+  /**
+   * Specify the size variant.
+   */
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
+
+  /**
+   * Specify the role of the dialog for accessibility
+   */
+  role: PropTypes.oneOf(['dialog', 'alertdialog']),
+
+  /**
+   * Specify a label for screen readers
+   */
+  ariaLabel: PropTypes.string,
+
+  /**
+   * Specify the ID of an element that labels this dialog
+   */
+  ariaLabelledBy: PropTypes.string,
+
+  /**
+   * Specify the ID of an element that describes this dialog
+   */
+  ariaDescribedBy: PropTypes.string,
 };
 
+/**
+ * -------------
+ * DialogHeader
+ * -------------
+ */
 export interface DialogHeaderProps extends ReactAttr<HTMLDivElement> {
   /**
    * Provide the contents to be rendered inside of this component
@@ -189,6 +304,9 @@ export const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
     );
   }
 );
+
+DialogHeader.displayName = 'DialogHeader';
+
 DialogHeader.propTypes = {
   /**
    * Provide the contents to be rendered inside of this component
@@ -196,6 +314,11 @@ DialogHeader.propTypes = {
   children: PropTypes.node,
 };
 
+/**
+ * ---------------
+ * DialogControls
+ * ---------------
+ */
 export interface DialogControlsProps extends ReactAttr<HTMLDivElement> {
   /**
    * Provide the contents to be rendered inside of this component
@@ -214,6 +337,9 @@ export const DialogControls = React.forwardRef<
     </div>
   );
 });
+
+DialogControls.displayName = 'DialogControls';
+
 DialogControls.propTypes = {
   /**
    * Provide children to be rendered inside of this component
@@ -221,6 +347,11 @@ DialogControls.propTypes = {
   children: PropTypes.node,
 };
 
+/**
+ * -------------------
+ * DialogCloseButton
+ * -------------------
+ */
 export interface DialogCloseButtonProps extends ReactAttr<HTMLDivElement> {
   /**
    * Specify a click handler applied to the IconButton
@@ -242,16 +373,19 @@ export const DialogCloseButton = React.forwardRef<
       aria-label="Close"
       align="left"
       onClick={onClick}
+      ref={ref}
       {...rest}>
       <Close
         size={20}
         aria-hidden="true"
-        tabIndex="-1"
+        tabIndex={-1}
         className={`${prefix}--icon__close`}
       />
     </IconButton>
   );
 });
+
+DialogCloseButton.displayName = 'DialogCloseButton';
 
 DialogCloseButton.propTypes = {
   /**
@@ -259,3 +393,348 @@ DialogCloseButton.propTypes = {
    */
   onClick: PropTypes.func,
 };
+
+/**
+ * ------------
+ * DialogTitle
+ * ------------
+ */
+export interface DialogTitleProps extends ReactAttr<HTMLHeadingElement> {
+  /**
+   * Provide the contents of the DialogTitle
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the title node
+   */
+  className?: string;
+}
+
+export const DialogTitle = React.forwardRef<
+  HTMLHeadingElement,
+  DialogTitleProps
+>(({ children, className, ...rest }, ref) => {
+  const prefix = usePrefix();
+  return (
+    <Text
+      as="h2"
+      className={cx(`${prefix}--dialog-header__heading`, className)}
+      ref={ref}
+      {...rest}>
+      {children}
+    </Text>
+  );
+});
+
+DialogTitle.displayName = 'DialogTitle';
+
+DialogTitle.propTypes = {
+  /**
+   * Provide the contents to be rendered inside of this component
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the title node
+   */
+  className: PropTypes.string,
+};
+
+/**
+ * ---------------
+ * DialogSubtitle
+ * ---------------
+ */
+export interface DialogSubtitleProps extends ReactAttr<HTMLParagraphElement> {
+  /**
+   * Provide the contents of the DialogSubtitle
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the subtitle node
+   */
+  className?: string;
+}
+
+export const DialogSubtitle = React.forwardRef<
+  HTMLParagraphElement,
+  DialogSubtitleProps
+>(({ children, className, ...rest }, ref) => {
+  const prefix = usePrefix();
+  return (
+    <Text
+      as="h2"
+      className={cx(`${prefix}--dialog-header__label`, className)}
+      ref={ref}
+      {...rest}>
+      {children}
+    </Text>
+  );
+});
+
+DialogSubtitle.displayName = 'DialogSubtitle';
+
+DialogSubtitle.propTypes = {
+  /**
+   * Provide the contents to be rendered inside of this component
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the subtitle node
+   */
+  className: PropTypes.string,
+};
+
+/**
+ * -----------
+ * DialogBody
+ * -----------
+ */
+export interface DialogBodyProps extends ReactAttr<HTMLDivElement> {
+  /**
+   * Provide the contents of the DialogBody
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the body node
+   */
+  className?: string;
+
+  /**
+   * Specify whether the content has overflow that should be scrollable
+   */
+  hasScrollingContent?: boolean;
+
+  /**
+   * Specify whether to use the Layer component
+   */
+  useLayer?: boolean;
+}
+
+export const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
+  (
+    { children, className, hasScrollingContent, useLayer = true, ...rest },
+    ref
+  ) => {
+    const prefix = usePrefix();
+    const contentClasses = cx(
+      `${prefix}--dialog-content`,
+      {
+        [`${prefix}--dialog-scroll-content`]: hasScrollingContent,
+      },
+      className
+    );
+
+    // Use IntersectionObserver to detect when content is scrolled
+    const contentRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+      if (!hasScrollingContent && contentRef.current) {
+        // Only set up observer if hasScrollingContent is not explicitly set
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.target.scrollHeight > entry.target.clientHeight) {
+              entry.target.classList.add(`${prefix}--dialog-scroll-content`);
+            } else {
+              entry.target.classList.remove(`${prefix}--dialog-scroll-content`);
+            }
+          },
+          { threshold: [0, 0.5, 1] }
+        );
+
+        observer.observe(contentRef.current);
+        return () => {
+          observer.disconnect();
+        };
+      }
+      return undefined;
+    }, [hasScrollingContent, prefix]);
+
+    const localRef = useRef<HTMLDivElement>(null);
+    // Combine refs
+    const combinedRef = (el: HTMLDivElement) => {
+      // Update both refs
+      if (typeof ref === 'function') {
+        ref(el);
+      } else if (ref) {
+        (ref as React.MutableRefObject<HTMLDivElement>).current = el;
+      }
+      localRef.current = el;
+      contentRef.current = el;
+    };
+
+    if (useLayer) {
+      return (
+        <Layer className={contentClasses} ref={combinedRef} {...rest}>
+          {children}
+        </Layer>
+      );
+    }
+
+    return (
+      <div className={contentClasses} ref={combinedRef} {...rest}>
+        {children}
+      </div>
+    );
+  }
+);
+
+DialogBody.displayName = 'DialogBody';
+
+DialogBody.propTypes = {
+  /**
+   * Provide the contents to be rendered inside of this component
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the body node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether the content has overflow that should be scrollable
+   */
+  hasScrollingContent: PropTypes.bool,
+
+  /**
+   * Specify whether to use the Layer component
+   */
+  useLayer: PropTypes.bool,
+};
+
+/**
+ * -------------
+ * DialogContent (alias for DialogBody)
+ * -------------
+ */
+export const DialogContent = DialogBody;
+DialogContent.displayName = 'DialogContent';
+
+/**
+ * -------------
+ * DialogFooter
+ * -------------
+ */
+export interface DialogFooterProps extends ReactAttr<HTMLDivElement> {
+  /**
+   * Provide the contents of the DialogFooter
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the footer node
+   */
+  className?: string;
+
+  /**
+   * Specify whether to use ButtonSet as a wrapper
+   * Default is true for backward compatibility with Modal
+   */
+  useButtonSet?: boolean;
+}
+
+export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
+  ({ children, className, useButtonSet = true, ...rest }, ref) => {
+    const prefix = usePrefix();
+    const classes = cx(`${prefix}--dialog-footer`, className);
+
+    if (useButtonSet) {
+      return (
+        <ButtonSet className={classes} ref={ref} {...rest}>
+          {children}
+        </ButtonSet>
+      );
+    }
+
+    return (
+      <div className={classes} ref={ref} {...rest}>
+        {children}
+      </div>
+    );
+  }
+);
+
+DialogFooter.displayName = 'DialogFooter';
+
+DialogFooter.propTypes = {
+  /**
+   * Provide the contents to be rendered inside of this component
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the footer node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether to use ButtonSet as a wrapper
+   */
+  useButtonSet: PropTypes.bool,
+};
+
+/**
+ * -------
+ * Types for composable Dialog
+ * -------
+ */
+interface DialogComponent
+  extends React.ForwardRefExoticComponent<
+    DialogProps & React.RefAttributes<HTMLDialogElement>
+  > {
+  Header: typeof DialogHeader;
+  Controls: typeof DialogControls;
+  CloseButton: typeof DialogCloseButton;
+  Title: typeof DialogTitle;
+  Subtitle: typeof DialogSubtitle;
+  Body: typeof DialogBody;
+  Content: typeof DialogContent;
+  Footer: typeof DialogFooter;
+}
+
+/**
+ * -------
+ * Exports
+ * -------
+ */
+const Header = DialogHeader;
+Header.displayName = 'Dialog.Header';
+
+const Controls = DialogControls;
+Controls.displayName = 'Dialog.Controls';
+
+const CloseButton = DialogCloseButton;
+CloseButton.displayName = 'Dialog.CloseButton';
+
+const Title = DialogTitle;
+Title.displayName = 'Dialog.Title';
+
+const Subtitle = DialogSubtitle;
+Subtitle.displayName = 'Dialog.Subtitle';
+
+const Body = DialogBody;
+Body.displayName = 'Dialog.Body';
+
+const Content = DialogContent;
+Content.displayName = 'Dialog.Content';
+
+const Footer = DialogFooter;
+Footer.displayName = 'Dialog.Footer';
+
+// Add composable components to unstable__Dialog
+// Use type assertion to tell TypeScript that we're adding properties
+(unstable__Dialog as DialogComponent).Header = Header;
+(unstable__Dialog as DialogComponent).Controls = Controls;
+(unstable__Dialog as DialogComponent).CloseButton = CloseButton;
+(unstable__Dialog as DialogComponent).Title = Title;
+(unstable__Dialog as DialogComponent).Subtitle = Subtitle;
+(unstable__Dialog as DialogComponent).Body = Body;
+(unstable__Dialog as DialogComponent).Content = Content;
+(unstable__Dialog as DialogComponent).Footer = Footer;
+
+// Create a Dialog namespace for direct access
+export const Dialog = unstable__Dialog as DialogComponent;
