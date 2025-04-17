@@ -170,7 +170,10 @@
       "name": "Preeti Bansal",
       "avatar_url": "https://avatars.githubusercontent.com/u/146315451?v=4",
       "profile": "https://github.com/preetibansalui",
-      "contributions": ["code", "a11y"]
+      "contributions": [
+        "code",
+        "a11y"
+      ]
     },
     {
       "login": "erifsx",
@@ -1772,6 +1775,15 @@
       ]
     },
     {
+      "login": "nchevsky",
+      "name": "Nick Chevsky",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3987849?v=4",
+      "profile": "https://github.com/nchevsky",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "Tweakified",
       "name": "Daniel Smith",
       "avatar_url": "https://avatars.githubusercontent.com/u/58192912?v=4",
@@ -1808,6 +1820,33 @@
       "contributions": [
         "code",
         "doc"
+      ]
+    },
+    {
+      "login": "maisonsmd",
+      "name": "Son H. Mai (Mason)",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16435155?v=4",
+      "profile": "https://github.com/maisonsmd",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "warrenmblood",
+      "name": "Warren Blood",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69060697?v=4",
+      "profile": "https://github.com/warrenmblood",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "vcherneny",
+      "name": "Vlad Cherneny",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11604315?v=4",
+      "profile": "https://github.com/vcherneny",
+      "contributions": [
+        "code"
       ]
     }
   ],

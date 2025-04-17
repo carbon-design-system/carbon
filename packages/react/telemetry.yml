@@ -456,6 +456,9 @@ collect:
         - onMouseDown
         - requireTitle
         - wrapperClassName
+        # PageHeaderContent
+        - contextualActions
+        - pageActions
         # PageSelector
         - currentPage
         - totalPages
