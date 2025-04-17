@@ -113,7 +113,6 @@ export const unstable__Dialog = React.forwardRef(
       open = false,
       danger = false,
       hasScrollingContent = false,
-      size,
       role = 'dialog',
       ariaLabel,
       ariaLabelledBy,
