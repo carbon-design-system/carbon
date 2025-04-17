@@ -40,7 +40,7 @@ import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import mergeRefs from '../../tools/mergeRefs';
 import { setupGetInstanceId } from '../../tools/setupGetInstanceId';
-import { IconButton } from '../IconButton';
+import { IconButton, IconButtonProps } from '../IconButton';
 import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 import { useOutsideClick } from '../../internal/useOutsideClick';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
@@ -123,7 +123,21 @@ export const getMenuOffset: MenuOffset = (
   }
 };
 
-export interface OverflowMenuProps {
+export interface OverflowMenuProps
+  extends Omit<
+    IconButtonProps,
+    | 'type'
+    | 'aria-haspopup'
+    | 'aria-expanded'
+    | 'aria-controls'
+    | 'className'
+    | 'onClick'
+    | 'id'
+    | 'ref'
+    | 'size'
+    | 'label'
+    | 'kind'
+  > {
   /**
    * Specify how the trigger tooltip should be aligned.
    */
