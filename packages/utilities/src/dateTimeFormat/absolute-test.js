@@ -12,6 +12,7 @@ const styles = ['full', 'long', 'medium', 'short'];
 const date = new Date('2016-04-28T19:12:47Z');
 const endDate = new Date('2018-07-01T09:00:02Z');
 const sameDayEndDate = new Date('2016-04-28T21:04:30Z');
+const timeZones = ['UTC', 'America/New_York', 'Asia/Tokyo'];
 
 describe(locale, () => {
   describe('formatTime', () => {
@@ -22,6 +23,23 @@ describe(locale, () => {
       test(`${style} → ${expectedOutput}`, () => {
         const actualOutput = absolute.formatTime(date, { locale, style });
         expect(actualOutput).toBe(expectedOutput);
+      });
+
+      timeZones.forEach((timeZone) => {
+        const dtf = new Intl.DateTimeFormat(locale, {
+          timeStyle: style,
+          timeZone,
+        });
+        const expectedOutput = dtf.format(date);
+
+        test(`${style} with timeZone ${timeZone} → ${expectedOutput}`, () => {
+          const actualOutput = absolute.formatTime(date, {
+            locale,
+            style,
+            timeZone,
+          });
+          expect(actualOutput).toBe(expectedOutput);
+        });
       });
     });
   });
@@ -34,6 +52,23 @@ describe(locale, () => {
       test(`${style} → ${expectedOutput}`, () => {
         const actualOutput = absolute.formatDate(date, { locale, style });
         expect(actualOutput).toBe(expectedOutput);
+      });
+
+      timeZones.forEach((timeZone) => {
+        const dtf = new Intl.DateTimeFormat(locale, {
+          dateStyle: style,
+          timeZone,
+        });
+        const expectedOutput = dtf.format(date);
+
+        test(`${style} with timeZone ${timeZone} → ${expectedOutput}`, () => {
+          const actualOutput = absolute.formatDate(date, {
+            locale,
+            style,
+            timeZone,
+          });
+          expect(actualOutput).toBe(expectedOutput);
+        });
       });
     });
   });
@@ -52,6 +87,26 @@ describe(locale, () => {
           style: timeStyle,
         });
         expect(actualOutput).toBe(expectedOutput);
+      });
+
+      describe('with timeZone', () => {
+        timeZones.forEach((timeZone) => {
+          const dtf = new Intl.DateTimeFormat(locale, {
+            timeStyle,
+            dateStyle: timeStyle,
+            timeZone,
+          });
+          const expectedOutput = dtf.format(date);
+
+          test(`${timeStyle} in ${timeZone} → ${expectedOutput}`, () => {
+            const actualOutput = absolute.format(date, {
+              locale,
+              style: timeStyle,
+              timeZone,
+            });
+            expect(actualOutput).toBe(expectedOutput);
+          });
+        });
       });
 
       describe('manual', () => {
@@ -97,6 +152,26 @@ describe(locale, () => {
           style: dateStyle,
         });
         expect(actualOutput).toBe(expectedOutput);
+      });
+
+      describe('with timeZone', () => {
+        timeZones.forEach((timeZone) => {
+          const dtf = new Intl.DateTimeFormat(locale, {
+            timeStyle: dateStyle,
+            dateStyle,
+            timeZone,
+          });
+          const expectedOutput = dtf.formatRange(date, endDate);
+
+          test(`${dateStyle} in ${timeZone} → ${expectedOutput}`, () => {
+            const actualOutput = absolute.formatRange(date, endDate, {
+              locale,
+              style: dateStyle,
+              timeZone,
+            });
+            expect(actualOutput).toBe(expectedOutput);
+          });
+        });
       });
 
       describe('manual', () => {

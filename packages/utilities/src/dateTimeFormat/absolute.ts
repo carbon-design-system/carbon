@@ -31,6 +31,7 @@ export function formatDate(
 ): string {
   const dtf = new Intl.DateTimeFormat(options?.locale, {
     dateStyle: options?.style ?? 'medium',
+    timeZone: options?.timeZone,
   });
 
   return dtf.format(date);
