@@ -117,10 +117,12 @@ describe('MenuButton', () => {
     });
 
     it('has basic keyboard support', async () => {
+      const onClick = jest.fn();
+
       render(
         <MenuButton label="Actions">
           <MenuItem label="Action 1" />
-          <MenuItem label="Action 2" />
+          <MenuItem label="Action 2" onClick={onClick} />
         </MenuButton>
       );
 
@@ -141,6 +143,7 @@ describe('MenuButton', () => {
       await userEvent.keyboard('{Escape}');
       expect(screen.queryByRole('menu')).not.toBeInTheDocument();
       expect(menuButton).toHaveFocus();
+      expect(onClick).not.toHaveBeenCalled();
 
       // Open the menu with Space.  Focus moves to first MenuItem.
       await userEvent.keyboard(' ');
@@ -157,6 +160,7 @@ describe('MenuButton', () => {
       await userEvent.keyboard('{Enter}');
       expect(screen.queryByRole('menu')).not.toBeInTheDocument();
       expect(menuButton).toHaveFocus();
+      expect(onClick).toHaveBeenCalled();
     });
 
     it('does not steal focus', async () => {
