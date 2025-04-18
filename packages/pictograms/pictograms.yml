@@ -1904,6 +1904,20 @@
     - AI
     - watsonx
     - watsonx Code Assistant
+- name: code--generation
+  friendly_name: Code generation
+  aliases:
+    - AI
+    - Code
+    - Code generation
+    - Chat
+    - Inline
+    - Generate
+    - Natural language
+    - watsonx
+    - watsonx code assistant
+    - Code assistant
+    - IBM Z
 - name: code--generation--chat
   friendly_name: Code generation chat
   aliases:
@@ -1920,20 +1934,6 @@
     - IBM Z
 - name: code--generation--inline
   friendly_name: Code generation inline
-  aliases:
-    - AI
-    - Code
-    - Code generation
-    - Chat
-    - Inline
-    - Generate
-    - Natural language
-    - watsonx
-    - watsonx code assistant
-    - Code assistant
-    - IBM Z
-- name: code--generation
-  friendly_name: Code generation
   aliases:
     - AI
     - Code
@@ -2027,15 +2027,6 @@
   aliases:
     - composer
     - edit
-- name: compost--bin
-  friendly_name: Compost bin
-  aliases:
-    - compost
-    - compost bin
-    - recycle
-    - environment
-    - process
-    - workplace
 - name: compost
   friendly_name: Compost
   aliases:
@@ -2045,6 +2036,15 @@
     - organic
     - trash
     - apple core
+- name: compost--bin
+  friendly_name: Compost bin
+  aliases:
+    - compost
+    - compost bin
+    - recycle
+    - environment
+    - process
+    - workplace
 - name: compute
   friendly_name: Compute
   aliases:
@@ -2305,9 +2305,9 @@
   friendly_name: Crosshairs
   aliases:
     - crosshair
-    - recticle,
+    - 'recticle,'
     - aim
-    - scope,
+    - 'scope,'
     - telescope
     - microscope
 - name: cupcake
@@ -4451,14 +4451,12 @@
     - engineering lifecycle management
     - IBM
 - name: ibm--elm-dcc
-  friendly_name:
-    IBM® Engineering Lifecycle Management Data Collection Component
+  friendly_name: IBM® Engineering Lifecycle Management Data Collection Component
   aliases:
     - engineering lifecycle management data collection component
     - IBM
 - name: ibm--elm-gcm
-  friendly_name:
-    IBM® Engineering Lifecycle Management Global Configuration Management
+  friendly_name: IBM® Engineering Lifecycle Management Global Configuration Management
   aliases:
     - engineering lifecycle management global configuration management
     - IBM
