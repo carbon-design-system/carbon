@@ -29,46 +29,44 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   ]}
 />
 
-This guide demonstrates how to make icons scale using `rem` units, without requiring any changes to the component’s default configuration. In Carbon, icons use a unitless `size` prop, which is interpreted as pixels. This approach is effective for most scenarios, but if your goal is to improve accessibility or ensure that icons respond to changes in the browser’s font-size, using `rem` units offers greater adaptability.
+This guide demonstrates how to make icons scale using `rem` units, without
+requiring any changes to the component’s default configuration. In Carbon, icons
+accept a `size` prop that can be a number or a string. Numbers are unitless and
+interpreted as pixels. This approach is effective for most scenarios, but if
+your goal is to improve accessibility or ensure that icons respond to changes in
+the browser’s font-size, using a string with `rem` units offers greater
+adaptability.
 
 ### Customizing icon size with `rem` units
 
-To create scalable, responsive icons, you can pass a `rem` value to the `size` prop:
+To create scalable, responsive icons, you can pass a `rem` value to the `size`
+prop:
 
 ```jsx
 <Edit size="1rem" />
 ```
 
 <Canvas
-  of={IconsStories.IconWithRemSize}
+  of={IconsStories.WithRelativeSize}
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(IconsStories.IconWithRemSize),
+      onClick: () => stackblitzPrefillConfig(IconsStories.WithRelativeSize),
     },
   ]}
 />
 
 Some components use a `renderIcon` prop to display icons internally.
 
-In these cases, you can still pass a responsive size by using an inline function that returns the icon:
+In these cases, you can still pass a responsive size by using an inline function
+that returns the icon:
 
 ```jsx
-<MenuItem renderIcon={() => <Edit size="1rem" />} />
+<MenuItem renderIcon={(props) => <Edit size="1rem" {...props} />} />
 ```
-
-<Canvas
-  of={IconsStories.IconWithRenderFunction}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(IconsStories.IconWithRenderFunction),
-    },
-  ]}
-/>
 
 ## Feedback
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Icons.mdx).
+[GitHub](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Icons/Icons.mdx).

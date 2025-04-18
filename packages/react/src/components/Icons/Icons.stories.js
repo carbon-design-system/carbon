@@ -19,17 +19,26 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (Story, { args }) => {
+      return (
+        <section className="demo-icon-example">
+          <h2>
+            {args.size} {typeof args.size === 'number' && 'pixel'}{' '}
+            {args.size === 16 && '(default)'}
+            {typeof args.size === 'string' &&
+              args.size.includes('rem') &&
+              '(responsive)'}
+          </h2>
+          <Story />
+        </section>
+      );
+    },
+  ],
 };
 
 export const Default = (args) => {
-  return (
-    <section className="demo-icon-example">
-      <h2>
-        {args.size} pixel {args.size === 16 ? '(default)' : ''}
-      </h2>
-      <Bee {...args} />
-    </section>
-  );
+  return <Bee {...args} />;
 };
 
 Default.args = {
@@ -43,30 +52,16 @@ Default.argTypes = {
   },
 };
 
-export const IconWithRemSize = () => {
+export const WithRelativeSize = (args) => {
   return (
-    <section className="demo-icon-example" style={{ fontSize: '1rem' }}>
-      <h2>1rem (responsive)</h2>
-      <IconButton label="Edit icon" kind="primary">
-        <Edit size="1rem" />
-      </IconButton>
-    </section>
+    <IconButton label="Edit icon" kind="primary">
+      <Edit {...args} />
+    </IconButton>
   );
 };
 
-IconWithRemSize.storyName = 'Icon with relative size';
-
-export const IconWithRenderFunction = () => {
-  return (
-    <section className="demo-icon-example">
-      <h2>Using renderIcon with rem</h2>
-      <IconButton
-        label="Edit icon"
-        kind="primary"
-        renderIcon={() => <Edit size="1rem" />}
-      />
-    </section>
-  );
+WithRelativeSize.args = {
+  size: '1rem',
 };
 
-IconWithRenderFunction.storyName = 'Icon with renderIcon function';
+WithRelativeSize.argTypes = { size: { control: 'text' } };
