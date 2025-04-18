@@ -44,3 +44,8 @@
     @extend .#{$prefix}--tooltip-content;
   }
 }
+
+// Definition tooltip
+:host(#{$prefix}-definition-tooltip) #{$prefix}-popover-content::part(content) {
+  @extend .#{$prefix}--definition-tooltip;
+}

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -77,7 +77,6 @@ export {
   FileUploaderDropContainer,
   FileUploaderItem,
 } from './components/FileUploader';
-export { FilterableMultiSelect } from './components/FilterableMultiSelect';
 export { Form } from './components/Form';
 export { FluidForm } from './components/FluidForm';
 export { FormGroup } from './components/FormGroup';
@@ -107,7 +106,7 @@ export {
 export { MenuButton } from './components/MenuButton';
 export { Modal } from './components/Modal';
 export { ModalWrapper } from './components/ModalWrapper';
-export { MultiSelect } from './components/MultiSelect';
+export { FilterableMultiSelect, MultiSelect } from './components/MultiSelect';
 export {
   ActionableNotification,
   ToastNotification,
