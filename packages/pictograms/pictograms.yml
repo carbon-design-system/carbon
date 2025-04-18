@@ -4451,12 +4451,14 @@
     - engineering lifecycle management
     - IBM
 - name: ibm--elm-dcc
-  friendly_name: IBM® Engineering Lifecycle Management Data Collection Component
+  friendly_name:
+    IBM® Engineering Lifecycle Management Data Collection Component
   aliases:
     - engineering lifecycle management data collection component
     - IBM
 - name: ibm--elm-gcm
-  friendly_name: IBM® Engineering Lifecycle Management Global Configuration Management
+  friendly_name:
+    IBM® Engineering Lifecycle Management Global Configuration Management
   aliases:
     - engineering lifecycle management global configuration management
     - IBM
@@ -4678,7 +4680,7 @@
     - hardware
     - hybrid cloud
     - multi-frame
-- name: ibm--z17-plus-cloud
+- name: ibm--z17--plus-cloud
   friendly_name: IBM® z17 plus cloud
   aliases:
     - Z
@@ -5644,7 +5646,7 @@
     - debit
     - tap
     - swipe
-    - transaction    
+    - transaction
 - name: modernize
   friendly_name: Modernize
   aliases:
@@ -5764,7 +5766,7 @@
     - AI
     - model
     - LLM
-    - chip 
+    - chip
     - Z
     - z17
     - LinuxONE
