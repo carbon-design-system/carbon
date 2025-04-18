@@ -1,47 +1,38 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as InlineLoadingStories from './inline-loading.stories';
 
 <Meta of={InlineLoadingStories} />
 
 # Inline loading
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/inline-loading)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/inline-loading)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/inline-loading/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/inline-loading/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/inline-loading)
+## Table of Contents
 
-Inline loading spinners are used when performing actions. They help notify
-user’s that their action is being processed. The waiting experience is a crucial
-design opportunity. Although it may not be obvious what is occurring on the
-back-end, we can communicate clearly to reassure the user that progress is
-happening.
+- [InlineLoading](#inlineloading)
+  - [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
-It is best practice to use an Inline loading component for any Create, Update,
-or Delete actions. The component provides feedback to the user about the
-progress of the action they took. This could be in a table, after a primary or
-secondary button click, or even in a modal.
+## Overview
 
-## Getting started
+<Canvas of={InlineLoadingStories.Default} />
 
-Here's a quick example to get you started.
+<Canvas of={InlineLoadingStories.UxExample} />
 
-### JS (via import)
-
-```javascript
-import '@carbon/web-components/es/components/inline-loading/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['inline-loading'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-inline-loading status="active">Loading data...</cds-inline-loading>
-```
-
-## `<cds-inline-loading>` attributes, properties and events
+## Component API
 
 <ArgTypes of="cds-inline-loading" />
+
+<Markdown>{`${cdnJs({ components: ['inline-loading'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/InlineLoading/InlineLoading.mdx).
