@@ -12,8 +12,7 @@ import { action } from '@storybook/addon-actions';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import mdx from './MultiSelect.mdx';
 
-import MultiSelect from '.';
-import FilterableMultiSelect from './FilterableMultiSelect';
+import { FilterableMultiSelect, MultiSelect } from '.';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -637,6 +636,54 @@ export const withToggletipLabel = (args) => {
         selectionFeedback="top-after-reopen"
         {...args}
       />
+    </div>
+  );
+};
+
+export const SelectAllWithDynamicItems = () => {
+  const [label, setLabel] = useState('Choose options');
+  const [items, setItems] = useState(itemsWithSelectAll);
+
+  const onChange = (value) => {
+    if (value.selectedItems.length == 1) {
+      setLabel('Option selected');
+    } else if (value.selectedItems.length > 1) {
+      setLabel('Options selected');
+    } else {
+      setLabel('Choose options');
+    }
+  };
+
+  function addItems() {
+    setItems((prevItems) => {
+      const now = Date.now();
+      return [
+        ...prevItems,
+        {
+          id: `item-added-via-button-1${now}`,
+          text: `item-added-via-button-1${now}`,
+        },
+        {
+          id: `item-added-via-button-2${now}`,
+          text: `item-added-via-button-2${now}`,
+        },
+      ];
+    });
+  }
+
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        label={label}
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        onChange={onChange}
+      />
+      <Button onClick={addItems}>Add 2 items to the list</Button>
     </div>
   );
 };

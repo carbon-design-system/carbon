@@ -1,8 +1,8 @@
 import { Meta } from '@storybook/blocks';
 
-<Meta title="Components/Modal/Feature Flag" name="Flag details" />
+<Meta title="Components/Modal/Feature Flags" name="Flag details" />
 
-# Modal
+# Feature Flags for Modal
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Modal)
 &nbsp;|&nbsp;
@@ -10,20 +10,44 @@ import { Meta } from '@storybook/blocks';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/modal/accessibility)
 
+## `enable-experimental-focus-wrap-without-sentinels`
+
+`Modal` supports the `enable-experimental-focus-wrap-without-sentinels` feature
+flag. When enabled, the hidden "sentinel nodes" used for focus wrap are no
+longer emitted to the DOM. These were previously used to mark the beginning and
+end of the area where focus should wrap within.
+
+The new behavior looks at all interactive child nodes and wraps focus based on
+tabbable order of those nodes. The focus direction is determined whether `tab`
+is being pressed (forward) or `shift`+`tab` is being pressed (backwards).
+
+Note: The native dialog element handles focus, so `enable-dialog-element` must
+be off for `enable-experimental-focus-wrap-without-sentinels` to have any
+effect.
+
+### Enabling the flag
+
+To enable the flag, use the `FeatureFlags` component and set the prop:
+
+```js
+<FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+  <Modal ... />
+</FeatureFlags>
+```
+
 ## `enable-dialog-element`
 
-`Modal` supports the `enable-dialog-element` feature flag. This enables a new
-approach internal to the Modal that uses the native `<dialog>` element. With
-this, the browser natively controls the focus wrap behavior. This means that the
-DOM no longer includes the "sentinel nodes" previously needed for the Modal to
-manage focus wrap.
+`Modal` supports the `enable-dialog-element` feature flag. When enabled, Modal
+will use the native `<dialog>` element instead of `role="dialog"`. With the
+`<dialog>` element, the browser natively controls the focus wrap behavior. This
+means that:
 
-`Modal` also supports the `enable-experimental-focus-wrap-without-sentinels`
-feature flag that was implemented previous to the dialog element refactor. In
-Modal, this flag is an alias for the `enable-dialog-element` flag. They do the
-same thing and you only need to use one, preferably `enable-dialog-element`.
+- The DOM no longer includes the "sentinel nodes" previously needed for the
+  Modal to manage focus wrap.
+- `enable-experimental-focus-wrap-without-sentinels` has no effect and can be
+  removed when using `enable-dialog-element`
 
-## Enabling the flag
+### Enabling the flag
 
 To enable the flag, use the `FeatureFlags` component and set the prop:
 
