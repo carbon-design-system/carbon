@@ -322,7 +322,8 @@ const Modal = React.forwardRef(function Modal(
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
-        !isCloseButton(target)
+        !isCloseButton(target) &&
+        document.activeElement !== button.current
       ) {
         onRequestSubmit(evt);
       }
