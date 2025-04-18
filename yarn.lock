@@ -2056,7 +2056,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     react-fast-compare: "npm:^3.2.2"
-    react-is: "npm:^19.0.0"
+    react-is: "npm:^16.13.1 || ^17.0.2 || ^18.3.1 || ^19.0.0"
     remark-gfm: "npm:^4.0.0"
     requestanimationframe: "npm:^0.0.23"
     rimraf: "npm:^6.0.0"
@@ -2077,7 +2077,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
-    react-is: ^18.3.1 || ^19.0.0
+    react-is: ^16.13.1 || ^17.0.2 || ^18.3.1 || ^19.0.0
     sass: ^1.33.0
   languageName: unknown
   linkType: soft
