@@ -131,10 +131,22 @@ describe('MenuButton', () => {
       const menuButton = screen.getByRole('button', { name: 'Actions' });
       expect(menuButton).toHaveFocus();
 
-      // Open the menu.  Focus moves to first MenuItem.
+      // Open the menu with Enter.  Focus moves to first MenuItem.
       await userEvent.keyboard('{Enter}');
+      expect(screen.getByRole('menu')).toBeInTheDocument();
       const menuItem1 = screen.getByRole('menuitem', { name: 'Action 1' });
       expect(menuItem1).toHaveFocus();
+
+      // Close the menu with Escape.  Focus should move back to MenuButton.
+      await userEvent.keyboard('{Escape}');
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(menuButton).toHaveFocus();
+
+      // Open the menu with Space.  Focus moves to first MenuItem.
+      await userEvent.keyboard(' ');
+      expect(screen.getByRole('menu')).toBeInTheDocument();
+      const menuItem1Again = screen.getByRole('menuitem', { name: 'Action 1' });
+      expect(menuItem1Again).toHaveFocus();
 
       // Arrow down to second MenuItem.
       await userEvent.keyboard('{ArrowDown}');
@@ -170,15 +182,29 @@ describe('MenuButton', () => {
       const menuButton = screen.getByRole('button', { name: 'Actions' });
       expect(menuButton).toHaveFocus();
 
-      // Open the menu.  Focus moves to MenuItem.
+      // Open the menu with Enter.  Focus moves to MenuItem.
       await userEvent.keyboard('{Enter}');
       const menuItem = screen.getByRole('menuitem', { name: 'Action' });
       expect(menuItem).toHaveFocus();
 
-      // Keyboard click the MenuItem.  Menu should close, and focus should move to <input>.
+      // Click the MenuItem with Enter.  Menu should close, and focus should move to <input>.
       await userEvent.keyboard('{Enter}');
       expect(screen.queryByRole('menu')).not.toBeInTheDocument();
       const input = screen.getByRole('textbox');
+      expect(input).toHaveFocus();
+
+      // Shift-tab to MenuButton.
+      await userEvent.tab({ shift: true });
+      expect(menuButton).toHaveFocus();
+
+      // Open the menu with Space.  Focus moves to MenuItem.
+      await userEvent.keyboard(' ');
+      const menuItemAgain = screen.getByRole('menuitem', { name: 'Action' });
+      expect(menuItemAgain).toHaveFocus();
+
+      // Click the MenuItem with Space.  Menu should close, and focus should move to <input>.
+      await userEvent.keyboard(' ');
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
       expect(input).toHaveFocus();
     });
   });

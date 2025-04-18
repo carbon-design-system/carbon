@@ -174,25 +174,33 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       }
     }
 
-    function handleKeyDown(e: React.KeyboardEvent<HTMLLIElement>) {
+    // Avoid stray keyup event from MenuButton affecting MenuItem, and vice versa.
+    // Keyboard click is handled differently for <button> vs. <div> and for Enter vs. Space.  See
+    // https://www.stefanjudis.com/today-i-learned/keyboard-button-clicks-with-space-and-enter-behave-differently/.
+    const [pendingKeyboardClick, setPendingKeyboardClick] = useState(false);
+
+    const keyboardClickEvent = (e: KeyboardEvent) =>
+      match(e, keys.Enter) || match(e, keys.Space);
+
+    function handleKeyDown(e: KeyboardEvent<HTMLLIElement>) {
       if (hasChildren && match(e, keys.ArrowRight)) {
         openSubmenu();
         e.stopPropagation();
       }
 
-      if (match(e, keys.Enter) || match(e, keys.Space)) {
-        e.target.addEventListener(
-          'keyup',
-          (e) => {
-            handleClick(e as unknown as React.KeyboardEvent<HTMLLIElement>);
-          },
-          { once: true }
-        );
-      }
+      setPendingKeyboardClick(keyboardClickEvent(e));
 
       if (rest.onKeyDown) {
         rest.onKeyDown(e);
       }
+    }
+
+    function handleKeyUp(e: KeyboardEvent<HTMLLIElement>) {
+      if (pendingKeyboardClick && keyboardClickEvent(e)) {
+        handleClick(e);
+      }
+
+      setPendingKeyboardClick(false);
     }
 
     const classNames = cx(className, `${prefix}--menu-item`, {
@@ -248,6 +256,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           aria-expanded={hasChildren ? submenuOpen : undefined}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
           {...getReferenceProps()}>
           <div className={`${prefix}--menu-item__selection-icon`}>
             {rest['aria-checked'] && <Checkmark />}
