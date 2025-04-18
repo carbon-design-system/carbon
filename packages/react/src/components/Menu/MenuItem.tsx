@@ -175,7 +175,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     }
 
     // Avoid stray keyup event from MenuButton affecting MenuItem, and vice versa.
-    // Keyboard click is handled differently for <button> vs. <div> and for Enter vs. Space.  See
+    // Keyboard click is handled differently for <button> vs. <li> and for Enter vs. Space.  See
     // https://www.stefanjudis.com/today-i-learned/keyboard-button-clicks-with-space-and-enter-behave-differently/.
     const [pendingKeyboardClick, setPendingKeyboardClick] = useState(false);
 

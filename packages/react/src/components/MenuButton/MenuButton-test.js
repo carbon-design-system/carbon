@@ -153,7 +153,7 @@ describe('MenuButton', () => {
       const menuItem2 = screen.getByRole('menuitem', { name: 'Action 2' });
       expect(menuItem2).toHaveFocus();
 
-      // Keyboard click the second MenuItem.  Menu should close, and focus should move back to MenuButton.
+      // Click the second MenuItem with Enter.  Menu should close, and focus should move back to MenuButton.
       await userEvent.keyboard('{Enter}');
       expect(screen.queryByRole('menu')).not.toBeInTheDocument();
       expect(menuButton).toHaveFocus();
