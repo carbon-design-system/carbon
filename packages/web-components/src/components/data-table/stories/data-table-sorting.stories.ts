@@ -55,7 +55,7 @@ export const Default = {
     <cds-table is-sortable>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
-        >With filtering</cds-table-header-description
+        >With sorting</cds-table-header-description
       >
 
       <cds-table-head>
@@ -144,7 +144,7 @@ export const Playground = {
       ?use-zebra-styles="${useZebraStyles}">
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
-        >With filtering</cds-table-header-description
+        >With sorting</cds-table-header-description
       >
 
       <cds-table-head>
