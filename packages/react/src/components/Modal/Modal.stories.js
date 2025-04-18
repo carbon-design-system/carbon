@@ -743,3 +743,87 @@ export const withAILabel = {
     );
   },
 };
+
+export const Test1 = () => {
+  const [showModal, setShowModal] = useState();
+
+  const submit = () => {
+    console.log('*** i was clicked.');
+    setShowModal(false);
+  };
+
+  return (
+    <div>
+      <Button onClick={() => setShowModal(true)}>Click me to show modal</Button>
+      <Modal
+        modalHeading="Double submit bug"
+        open={showModal}
+        secondaryButtonText="Cancel"
+        primaryButtonText="Focus on me and enter"
+        onRequestSubmit={submit}
+        danger
+        shouldSubmitOnEnter>
+        <div>Submit with enter</div>
+      </Modal>
+    </div>
+  );
+};
+
+/**
+ * Simple state manager for modals.
+ */
+const ModalStateManager = ({
+  renderLauncher: LauncherContent,
+  children: ModalContent,
+}) => {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <>
+      {!ModalContent || typeof document === 'undefined'
+        ? null
+        : ReactDOM.createPortal(
+            <ModalContent open={open} setOpen={setOpen} />,
+            document.body
+          )}
+      {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
+    </>
+  );
+};
+
+export const Test2 = () => {
+  const button = React.useRef();
+
+  return (
+    <ModalStateManager
+      renderLauncher={({ setOpen }) => (
+        <Button ref={button} onClick={() => setOpen(true)} kind="danger">
+          Launch danger modal
+        </Button>
+      )}>
+      {({ open, setOpen }) => (
+        <Modal
+          danger
+          launcherButtonRef={button}
+          modalHeading="Delete"
+          primaryButtonText="Delete"
+          secondaryButtonText="Cancel"
+          open={open}
+          onRequestClose={() => setOpen(false)}
+          shouldSubmitOnEnter
+          onRequestSubmit={() => console.log('Delete called.')}>
+          <p style={{ marginBottom: '1rem' }}>
+            Are you sure you want to delete?
+          </p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Confirm deletion"
+            placeholder="Type 'Confirm' to delete"
+            style={{ marginBottom: '1rem' }}
+          />
+        </Modal>
+      )}
+    </ModalStateManager>
+  );
+};
