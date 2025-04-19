@@ -1,26 +1,24 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
 import Modal from './Modal';
 import Button from '../Button';
 import Select from '../Select';
-import MultiSelect from '../MultiSelect';
-import { Checkbox as CheckboxIcon, Information } from '@carbon/icons-react';
+import { MultiSelect } from '../MultiSelect';
+import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
 import { Popover, PopoverContent } from '../Popover';
 import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import ComboBox from '../ComboBox';
 import mdx from './Modal.mdx';
-import { MenuButton } from '../MenuButton';
-import { MenuItem } from '../Menu';
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -32,7 +30,6 @@ import TextArea from '../TextArea';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/Modal',
@@ -745,4 +742,88 @@ export const withAILabel = {
       </div>
     );
   },
+};
+
+export const Test1 = () => {
+  const [showModal, setShowModal] = useState();
+
+  const submit = () => {
+    console.log('*** i was clicked.');
+    setShowModal(false);
+  };
+
+  return (
+    <div>
+      <Button onClick={() => setShowModal(true)}>Click me to show modal</Button>
+      <Modal
+        modalHeading="Double submit bug"
+        open={showModal}
+        secondaryButtonText="Cancel"
+        primaryButtonText="Focus on me and enter"
+        onRequestSubmit={submit}
+        danger
+        shouldSubmitOnEnter>
+        <div>Submit with enter</div>
+      </Modal>
+    </div>
+  );
+};
+
+/**
+ * Simple state manager for modals.
+ */
+const ModalStateManager = ({
+  renderLauncher: LauncherContent,
+  children: ModalContent,
+}) => {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <>
+      {!ModalContent || typeof document === 'undefined'
+        ? null
+        : ReactDOM.createPortal(
+            <ModalContent open={open} setOpen={setOpen} />,
+            document.body
+          )}
+      {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
+    </>
+  );
+};
+
+export const Test2 = () => {
+  const button = React.useRef();
+
+  return (
+    <ModalStateManager
+      renderLauncher={({ setOpen }) => (
+        <Button ref={button} onClick={() => setOpen(true)} kind="danger">
+          Launch danger modal
+        </Button>
+      )}>
+      {({ open, setOpen }) => (
+        <Modal
+          danger
+          launcherButtonRef={button}
+          modalHeading="Delete"
+          primaryButtonText="Delete"
+          secondaryButtonText="Cancel"
+          open={open}
+          onRequestClose={() => setOpen(false)}
+          shouldSubmitOnEnter
+          onRequestSubmit={() => console.log('Delete called.')}>
+          <p style={{ marginBottom: '1rem' }}>
+            Are you sure you want to delete?
+          </p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Confirm deletion"
+            placeholder="Type 'Confirm' to delete"
+            style={{ marginBottom: '1rem' }}
+          />
+        </Modal>
+      )}
+    </ModalStateManager>
+  );
 };
