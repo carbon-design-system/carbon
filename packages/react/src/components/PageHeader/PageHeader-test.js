@@ -16,7 +16,7 @@ import {
 } from '../PageHeader';
 import * as hooks from '../../internal/useMatchMedia';
 import { breakpoints } from '@carbon/layout';
-
+import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 import { Bee } from '@carbon/icons-react';
 
 const prefix = 'cds';
@@ -236,6 +236,85 @@ describe('PageHeader', () => {
         <PageHeader.TabBar className="custom-class" />
       );
       expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should render children', () => {
+      const { container } = render(
+        <PageHeader.TabBar>
+          <div data-testid="test-child">Child content</div>
+        </PageHeader.TabBar>
+      );
+
+      expect(screen.getByTestId('test-child')).toBeInTheDocument();
+    });
+  });
+
+  describe('PageHeader.Tabs component api', () => {
+    it('should render', () => {
+      const { container } = render(
+        <PageHeader.Tabs>
+          <TabList aria-label="List of tabs">
+            <Tab>Tab 1</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+          </TabPanels>
+        </PageHeader.Tabs>
+      );
+      expect(container.firstChild).toBeInTheDocument();
+    });
+
+    it('should render children within the Tabs component', () => {
+      render(
+        <PageHeader.Tabs>
+          <TabList aria-label="List of tabs">
+            <Tab>Tab 1</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+          </TabPanels>
+        </PageHeader.Tabs>
+      );
+
+      expect(screen.getByText('Tab 1')).toBeInTheDocument();
+      expect(screen.getByText('Tab Panel 1')).toBeInTheDocument();
+    });
+
+    it('should forward props to the internal Tabs component', () => {
+      render(
+        <PageHeader.Tabs onTabCloseRequest={() => {}} dismissable>
+          <TabList aria-label="List of tabs">
+            <Tab>Tab 1</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+          </TabPanels>
+        </PageHeader.Tabs>
+      );
+      expect(
+        document.querySelector(`.${prefix}--tabs--dismissable`)
+      ).toBeInTheDocument();
+    });
+
+    it('should work with the TabBar component', () => {
+      const { container } = render(
+        <PageHeader.TabBar>
+          <PageHeader.Tabs>
+            <TabList aria-label="List of tabs">
+              <Tab>Tab 1</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>Tab Panel 1</TabPanel>
+            </TabPanels>
+          </PageHeader.Tabs>
+        </PageHeader.TabBar>
+      );
+
+      expect(
+        container.querySelector(`.${prefix}--page-header__tab-bar`)
+      ).toBeInTheDocument();
+      expect(screen.getByText('Tab 1')).toBeInTheDocument();
+      expect(screen.getByText('Tab Panel 1')).toBeInTheDocument();
     });
   });
 });
