@@ -49,9 +49,6 @@ export const CustomLevel = {
     <cds-layer level="${level}">
       <div class="example-layer-test-component">Test component</div>
     </cds-layer>
-    <style>
-      ${styles}
-    </style>
   `,
 };
 
