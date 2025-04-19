@@ -222,6 +222,12 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   size = 'lg';
 
   /**
+   * Specify the tabIndex of the button.
+   */
+  @property({ type: Number, attribute: 'tab-index', reflect: true })
+  tabIndex = 0;
+
+  /**
    * The link target, if this button is rendered as `<a>`.
    */
   @property({ reflect: true })
@@ -272,6 +278,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       ping,
       rel,
       size,
+      tabIndex,
       target,
       tooltipAlignment,
       tooltipPosition,
@@ -329,6 +336,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               rel="${ifDefined(rel)}"
               target="${ifDefined(target)}"
               type="${ifDefined(type)}"
+              tabindex="${tabIndex}"
               aria-describedby="badge-indicator">
               <slot @slotchange="${handleSlotChange}"></slot>
               <slot name="icon" @slotchange="${handleSlotChange}"></slot>
@@ -364,6 +372,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               class="${classes}"
               ?autofocus="${autofocus}"
               ?disabled="${disabled}"
+              tabindex="${tabIndex}"
               type="${ifDefined(type)}"
               aria-label="${ifDefined(tooltipText)}"
               aria-describedby="badge-indicator">
@@ -388,6 +397,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             class="${classes}"
             ?autofocus="${autofocus}"
             ?disabled="${disabled}"
+            tabindex="${tabIndex}"
             type="${ifDefined(type)}"
             aria-describedby="badge-indicator">
             ${isDanger
