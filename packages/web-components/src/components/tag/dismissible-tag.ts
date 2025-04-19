@@ -100,16 +100,16 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
   };
 
   /**
-   * Text to show on tag "close" buttons
-   */
-  @property({ type: String, reflect: true })
-  title = 'Dismiss';
-
-  /**
    * `true` if the tag should be disabled
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  /**
+   * Provide a custom tooltip label for the dismiss button
+   */
+  @property({ type: String, attribute: 'dismiss-tooltip-label', reflect: true })
+  dismissTooltipLabel?: string;
 
   /**
    * `true` if the tag should be open.
@@ -149,10 +149,12 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
       _hasEllipsisApplied: hasEllipsisApplied,
       tagTitle,
       text,
-      title,
+      dismissTooltipLabel,
     } = this;
 
     const dismissLabel = `Dismiss "${text}"`;
+    const dismissActionLabel =
+      dismissTooltipLabel || (hasEllipsisApplied ? dismissLabel : 'Dismiss');
 
     return html`
       <slot name="icon" @slotchange="${handleIconSlotChange}"></slot>
@@ -169,13 +171,13 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
           <button
             class="sb-tooltip-trigger"
             role="button"
-            aria-labelledby="content"
+            aria-label="${dismissActionLabel}"
             class="${prefix}--tag__close-icon"
             ?disabled=${disabled}>
             ${Close16()}
           </button>
           <cds-tooltip-content id="content">
-            ${hasEllipsisApplied ? dismissLabel : title}
+            ${dismissActionLabel}
           </cds-tooltip-content>
         </cds-tooltip>
       </div>
