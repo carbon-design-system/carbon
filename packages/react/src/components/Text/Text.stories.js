@@ -12,7 +12,7 @@ import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
 import Button from '../Button';
 import Dropdown from '../Dropdown';
-import ContentSwitcher from '../ContentSwitcher';
+import { ContentSwitcher } from '../ContentSwitcher';
 import Switch from '../Switch';
 import { Heading } from '../Heading';
 import mdx from './Text.mdx';

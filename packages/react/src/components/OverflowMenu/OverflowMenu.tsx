@@ -226,7 +226,7 @@ export interface OverflowMenuProps {
   selectorPrimaryFocus?: string;
 
   /**
-   * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the OverflowMenu. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size?: 'sm' | 'md' | 'lg';
 
@@ -718,7 +718,7 @@ OverflowMenu.propTypes = {
   selectorPrimaryFocus: PropTypes.string,
 
   /**
-   * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the OverflowMenu. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
