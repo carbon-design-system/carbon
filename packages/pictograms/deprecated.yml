@@ -11,3 +11,5 @@ deprecated:
       for the Watson brand, which is retired since the watsonx brand launch.
   - name: tokyo--volcano
     reason: This icon has been replaced by japan--mt-fuji
+  - name: telum-ii-chip
+    reason: This icon has been replaced by telum-ii-processor  

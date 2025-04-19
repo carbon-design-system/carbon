@@ -3,7 +3,6 @@ categories:
     members:
       - cloud--download
       - cloud--upload
-      - coupon
       - crop
       - delete
       - do-not
@@ -42,8 +41,19 @@ categories:
       - ai--robustness
       - ai--transparency
       - ai--trust
+      - code--conversion
+      - code--generation--chat
+      - code--generation--inline
+      - code--generation
+      - code--reverse-engineering
+      - data--scientist
       - decision-velocity
+      - ensure-data-quality
       - foundation-model
+      - generate--ai
+      - generate--code
+      - governance
+      - hard--prompt
       - ibm--granite
       - intelligence
       - machine--learning--01
@@ -53,8 +63,12 @@ categories:
       - machine--learning--05
       - machine--learning--06
       - machine--learning--model
+      - multi-model
+      - prompt
+      - spyre-accelerator
       - technical-owner
       - telum-ii-chip
+      - telum-ii-processor
   - name: Blockchain
     members:
       - connected--ecosystem
@@ -77,6 +91,7 @@ categories:
       - escalator--up
       - fire--alarm
       - fire--extinguisher
+      - fire--hose
       - id--badge
       - intelligent-infrastructure
       - no--smoking
@@ -124,6 +139,8 @@ categories:
       - colombia--cathedral-of-las-lajas
       - copenhagen--planetarium
       - copenhagen--snekkja
+      - dallas--reunion-tower
+      - dallas--skyline
       - dubai--palm-islands
       - dubai--skyscraper
       - dublin--brewery
@@ -132,6 +149,7 @@ categories:
       - ehningen--tech-campus-01
       - ehningen--tech-campus-02
       - geodesic-montreal-biosphere
+      - guadalajara--seal
       - hamburg--philharmone
       - hong-kong--cityscape
       - hong-kong
@@ -615,6 +633,7 @@ categories:
       - ibm--z16--single-frame
       - ibm--z17
       - ibm--z17--multi-frame
+      - ibm--z17--plus-cloud
       - ibm--z17--single-frame
       - infrastructure-security
       - it--infrastructure-software
@@ -642,6 +661,7 @@ categories:
       - art--tools--01
       - code--explanation
       - colors
+      - composer-edit
       - content--design
       - design-and-development--01
       - design-and-development--02
@@ -656,9 +676,12 @@ categories:
       - landing-page
       - motion
       - organization
+      - outcome-focused
       - overview
       - path
       - pattern
+      - pilot-test
+      - resourceful
       - social--tile
       - universal-experiences
       - user--experience-design
@@ -789,6 +812,7 @@ categories:
       - dropper
       - eyewash--station
       - first--aid
+      - gastro-health
       - health
       - heart--health
       - hospital
@@ -802,9 +826,10 @@ categories:
       - pills
       - pregnant
       - prescription
-      - stethoscope
+      - social--distancing
       - social--work--01
       - social--work--02
+      - stethoscope
       - telemedicine
       - telemedicine--mobile
       - x-ray--01
@@ -915,6 +940,7 @@ categories:
       - candy
       - cherries
       - cookie
+      - crosshairs
       - cupcake
       - dining
       - hard--ice--cream
@@ -949,6 +975,7 @@ categories:
       - tennis--net
       - tennis--racquet
       - tree
+      - tree--02
       - waving-hand
       - wedding--cake
       - whistle
@@ -1059,6 +1086,7 @@ categories:
   - name: Quantum
     members:
       - albatross
+      - bloch-sphere
       - canary
       - condor
       - eagle
@@ -1100,15 +1128,19 @@ categories:
       - clothes--rack--01
       - clothes--rack--02
       - coat--hanger
+      - coupon
       - credit--card
       - customer--service
       - gift
+      - mobile--pos--01
+      - mobile--pos--02
       - price
       - qr-code
       - receipt
       - retail--sustainable
       - secure--search
       - select--product
+      - sell
       - shirt
       - shop
       - shopping--cart
@@ -1212,6 +1244,7 @@ categories:
       - esg-reporting--02
       - green-it--01
       - green-it--02
+      - incident-reporter
       - sustainability--02
       - sustainability--03
       - sustainability--04
@@ -1272,6 +1305,7 @@ categories:
       - automobile
       - bicycle
       - bus
+      - destination
       - electric--car
       - electric--charge
       - engine
@@ -1358,10 +1392,12 @@ categories:
       - windy
   - name: Workplace
     members:
+      - accessibility
       - bento-box-tray
       - beverage-carton
       - briefcase
       - cardboard
+      - compost
       - do-not-step
       - fountain--drinking
       - glass-bottle
@@ -1372,6 +1408,8 @@ categories:
       - lockers
       - loop--hearing
       - metal-can
+      - no--parking
+      - parking
       - plastic-bottle
       - plastics
       - silence
