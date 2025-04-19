@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,7 +21,7 @@ import { IconButton } from '../IconButton';
 import { mapPopoverAlignProp } from '../../tools/createPropAdapter';
 import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 
 export type AILabelContentProps = React.HTMLAttributes<HTMLSpanElement>;
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,7 @@
 import cx from 'classnames';
 import React, { type KeyboardEvent, type MouseEvent, useContext } from 'react';
 import PropTypes from 'prop-types';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
