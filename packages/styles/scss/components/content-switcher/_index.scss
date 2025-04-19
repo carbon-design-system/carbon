@@ -6,6 +6,11 @@
 //
 
 @forward 'content-switcher';
-@use 'content-switcher';
+@forward 'tokens';
 
+@use '../../theme';
+@use 'content-switcher';
+@use 'tokens';
+
+@include theme.add-component-tokens(tokens.$content-switcher-tokens);
 @include content-switcher.content-switcher;
