@@ -1,12 +1,20 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode, useState } from 'react';
+import React, {
+  cloneElement,
+  isValidElement,
+  useEffect,
+  useState,
+  type ComponentProps,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
 import RadioTile from '../RadioTile';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
@@ -61,37 +69,47 @@ export interface TileGroupProps
   required?: boolean;
 }
 
-const TileGroup = (props) => {
-  const {
-    children,
-    className,
-    defaultSelected,
-    disabled,
-    legend,
-    name,
-    onChange = noopFn,
-    valueSelected,
-    required,
-  } = props;
-
+export const TileGroup = ({
+  children,
+  className,
+  defaultSelected,
+  disabled,
+  legend,
+  name,
+  onChange = noopFn,
+  valueSelected,
+  required,
+}: TileGroupProps) => {
   const prefix = usePrefix();
   const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
-  const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
 
-  /**
-   * prop + state alignment - getDerivedStateFromProps
-   * only update if selected prop changes
-   */
-  if (valueSelected !== prevValueSelected) {
-    setSelected(valueSelected);
-    setPrevValueSelected(valueSelected);
-  }
+  useEffect(() => {
+    if (typeof valueSelected !== 'undefined' && valueSelected !== selected) {
+      setSelected(valueSelected);
+    }
+  }, [valueSelected, selected]);
 
-  const getRadioTilesWithWrappers = (children) => {
-    const traverseAndModifyChildren = (children) => {
-      return React.Children.map(children, (child) => {
+  const handleChange: ComponentProps<typeof RadioTile>['onChange'] = (
+    value,
+    name,
+    evt
+  ) => {
+    if (value !== selected) {
+      setSelected(value);
+      onChange(value, name ?? '', evt);
+    }
+  };
+
+  const hasChildren = (
+    element: ReactElement
+  ): element is ReactElement<{ children: ReactNode }> =>
+    Boolean(element.props && element.props.children);
+
+  const getRadioTilesWithWrappers = (elements: typeof children) => {
+    const traverseAndModifyChildren = (elements: typeof children) => {
+      return React.Children.map(elements, (child) => {
         // If RadioTile found, return it with necessary props
-        if (child?.type === RadioTile) {
+        if (isValidElement(child) && child.type === RadioTile) {
           const { value, ...otherProps } = child.props;
           return (
             <RadioTile
@@ -104,9 +122,9 @@ const TileGroup = (props) => {
               checked={value === selected}
             />
           );
-        } else if (child?.props?.children) {
+        } else if (isValidElement(child) && hasChildren(child)) {
           // If the child is not RadioTile and has children, recheck the children
-          return React.cloneElement(child, {
+          return cloneElement(child, {
             ...child.props,
             children: traverseAndModifyChildren(child.props.children),
           });
@@ -117,32 +135,20 @@ const TileGroup = (props) => {
       });
     };
 
-    return <>{traverseAndModifyChildren(children)}</>;
-  };
-
-  const handleChange = (newSelection, value, evt) => {
-    if (newSelection !== selected) {
-      setSelected(newSelection);
-      onChange(newSelection, name, evt);
-    }
-  };
-
-  const renderLegend = (legend) => {
-    if (legend) {
-      return <legend className={`${prefix}--label`}>{legend}</legend>;
-    }
+    return <>{traverseAndModifyChildren(elements)}</>;
   };
 
   return (
     <fieldset
       className={className ?? `${prefix}--tile-group`}
       disabled={disabled}>
-      {renderLegend(legend)}
+      {legend && <legend className={`${prefix}--label`}>{legend}</legend>}
       <div>{getRadioTilesWithWrappers(children)}</div>
     </fieldset>
   );
 };
 
+TileGroup.displayName = 'TileGroup';
 TileGroup.propTypes = {
   /**
    * Provide a collection of <RadioTile> components to render in the group
@@ -190,7 +196,3 @@ TileGroup.propTypes = {
    */
   valueSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-TileGroup.displayName = 'TileGroup';
-
-export default TileGroup;
