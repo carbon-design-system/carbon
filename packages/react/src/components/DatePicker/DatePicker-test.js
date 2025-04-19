@@ -370,6 +370,27 @@ describe('Simple date picker', () => {
     expect(screen.queryByRole('application')).not.toBeInTheDocument();
   });
 
+  it('should remove the calendar if changed from another type to simple', () => {
+    const { rerender } = render(
+      <DatePicker datePickerType="single">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          labelText="Start date"
+        />
+      </DatePicker>
+    );
+    expect(screen.getByRole('application')).toBeInTheDocument();
+    rerender(
+      <DatePicker datePickerType="simple">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          labelText="Start date"
+        />
+      </DatePicker>
+    );
+    expect(screen.queryByRole('application')).not.toBeInTheDocument();
+  });
+
   describe('react.lazy', () => {
     let cleanup;
     let render;
@@ -466,6 +487,27 @@ describe('Single date picker', () => {
     expect(screen.getByRole('application')).not.toHaveClass('open');
     await userEvent.click(input);
     expect(screen.getByRole('application')).toHaveClass('open');
+  });
+
+  it('should add the calendar if changed from simple type to single', () => {
+    const { rerender } = render(
+      <DatePicker datePickerType="simple">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          labelText="Start date"
+        />
+      </DatePicker>
+    );
+    expect(screen.queryByRole('application')).not.toBeInTheDocument();
+    rerender(
+      <DatePicker datePickerType="single">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          labelText="Start date"
+        />
+      </DatePicker>
+    );
+    expect(screen.getByRole('application')).toBeInTheDocument();
   });
 
   it('should support controlled value', async () => {
@@ -770,5 +812,27 @@ describe('Date picker with minDate and maxDate', () => {
     await userEvent.click(screen.getByLabelText('Start Date'));
     expect(warn).not.toHaveBeenCalled();
     warn.mockRestore();
+  });
+
+  it('should add the calendar if changed from simple type to range', () => {
+    const { rerender } = render(
+      <DatePicker datePickerType="simple">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          labelText="Start date"
+        />
+      </DatePicker>
+    );
+    expect(screen.queryByRole('application')).not.toBeInTheDocument();
+    rerender(
+      <DatePicker datePickerType="range">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          labelText="Start date"
+        />
+        <DatePickerInput id="date-picker-input-id-end" labelText="End date" />
+      </DatePicker>
+    );
+    expect(screen.getByRole('application')).toBeInTheDocument();
   });
 });

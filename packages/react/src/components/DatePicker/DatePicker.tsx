@@ -794,7 +794,14 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [savedOnChange, savedOnOpen, readOnly, closeOnSelect, hasInput]);
+  }, [
+    savedOnChange,
+    savedOnOpen,
+    readOnly,
+    closeOnSelect,
+    hasInput,
+    datePickerType,
+  ]);
 
   // this hook allows consumers to access the flatpickr calendar
   // instance for cases where functions like open() or close()
