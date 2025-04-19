@@ -21,8 +21,9 @@ import ButtonSet from '../ButtonSet';
 import InlineLoading from '../InlineLoading';
 import { Layer } from '../Layer';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import wrapFocus, {
+import {
   elementOrParentIsFloatingMenu,
+  wrapFocus,
   wrapFocusWithoutSentinels,
 } from '../../internal/wrapFocus';
 import { debounce } from 'es-toolkit/compat';
@@ -313,7 +314,7 @@ const Modal = React.forwardRef(function Modal(
 
     evt.stopPropagation();
 
-    if (open) {
+    if (open && target instanceof HTMLElement) {
       if (match(evt, keys.Escape)) {
         onRequestClose(evt);
       }
@@ -321,7 +322,6 @@ const Modal = React.forwardRef(function Modal(
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
-        target instanceof Element &&
         !isCloseButton(target) &&
         document.activeElement !== button.current
       ) {
@@ -336,20 +336,19 @@ const Modal = React.forwardRef(function Modal(
       ) {
         wrapFocusWithoutSentinels({
           containerNode: innerModal.current,
-          currentActiveNode: evt.target,
-          // TODO: Delete type assertion following util rewrite.
-          // https://github.com/carbon-design-system/carbon/pull/18913
-          event: evt as any,
+          currentActiveNode: target,
+          event: evt,
         });
       }
     }
   }
 
   function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
-    const target = evt.target as Node;
+    const { target } = evt;
     evt.stopPropagation();
     if (
       !preventCloseOnClickOutside &&
+      target instanceof Node &&
       !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
       innerModal.current &&
       !innerModal.current.contains(target)
@@ -362,7 +361,11 @@ const Modal = React.forwardRef(function Modal(
     target: oldActiveNode,
     relatedTarget: currentActiveNode,
   }: React.FocusEvent<HTMLDivElement>) {
-    if (open && currentActiveNode && oldActiveNode) {
+    if (
+      open &&
+      oldActiveNode instanceof HTMLElement &&
+      currentActiveNode instanceof HTMLElement
+    ) {
       const { current: bodyNode } = innerModal;
       const { current: startTrapNode } = startTrap;
       const { current: endTrapNode } = endTrap;

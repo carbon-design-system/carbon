@@ -30,8 +30,9 @@ import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
 import { toggleClass } from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import wrapFocus, {
+import {
   elementOrParentIsFloatingMenu,
+  wrapFocus,
   wrapFocusWithoutSentinels,
 } from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
@@ -330,11 +331,12 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     }
 
     function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
-      const target = evt.target as Node;
-      const mouseDownTarget = onMouseDownTarget.current as Node;
+      const { target } = evt;
+      const mouseDownTarget = onMouseDownTarget.current;
       evt.stopPropagation();
       if (
         !preventCloseOnClickOutside &&
+        target instanceof Node &&
         !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
         innerModal.current &&
         !innerModal.current.contains(target) &&
@@ -358,9 +360,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           endTrapNode: endSentinelNode,
           currentActiveNode,
           oldActiveNode,
-          selectorsFloatingMenus: selectorsFloatingMenus?.filter(
-            Boolean
-          ) as string[],
+          selectorsFloatingMenus: selectorsFloatingMenus?.filter(Boolean),
         });
       }
     }

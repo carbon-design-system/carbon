@@ -27,7 +27,7 @@ import { OptimizedResize } from './OptimizedResize';
 import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
 import { PrefixContext } from './usePrefix';
 import { warning } from './warning';
-import wrapFocus, { wrapFocusWithoutSentinels } from './wrapFocus';
+import { wrapFocus, wrapFocusWithoutSentinels } from './wrapFocus';
 
 export const DIRECTION_LEFT = 'left';
 export const DIRECTION_TOP = 'top';
@@ -456,18 +456,22 @@ export const FloatingMenu = ({
   /**
    * Blur handler used when focus trapping is enabled.
    */
-  const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
+  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
+    const { target, relatedTarget } = event;
+
     if (
       menuBodyRef.current &&
       startSentinelRef.current &&
-      endSentinelRef.current
+      endSentinelRef.current &&
+      target instanceof HTMLElement &&
+      relatedTarget instanceof HTMLElement
     ) {
       wrapFocus({
         bodyNode: menuBodyRef.current,
         startTrapNode: startSentinelRef.current,
         endTrapNode: endSentinelRef.current,
-        currentActiveNode: event.relatedTarget as HTMLElement,
-        oldActiveNode: event.target,
+        currentActiveNode: relatedTarget,
+        oldActiveNode: target,
       });
     }
   };
@@ -476,7 +480,11 @@ export const FloatingMenu = ({
    * Keydown handler for focus wrapping when experimental focus trap is enabled.
    */
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (match(event, keys.Tab) && menuBodyRef.current) {
+    if (
+      match(event, keys.Tab) &&
+      menuBodyRef.current &&
+      event.target instanceof HTMLElement
+    ) {
       wrapFocusWithoutSentinels({
         containerNode: menuBodyRef.current,
         currentActiveNode: event.target,
