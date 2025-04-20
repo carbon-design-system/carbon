@@ -11,6 +11,7 @@ import React, {
   isValidElement,
   MouseEvent,
   ReactNode,
+  Ref,
   useCallback,
   useContext,
   useEffect,
@@ -84,8 +85,7 @@ export interface OnChangeData<ItemType> {
 
 export interface DropdownProps<ItemType>
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes>,
-    TranslateWithId<ListBoxMenuIconTranslationKey>,
-    React.RefAttributes<HTMLDivElement> {
+    TranslateWithId<ListBoxMenuIconTranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
@@ -284,7 +284,7 @@ function stateReducer(state, actionAndChanges) {
   }
 }
 
-const Dropdown = React.forwardRef(
+const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps<any>>(
   <ItemType,>(
     {
       autoAlign = false,
@@ -726,14 +726,11 @@ const Dropdown = React.forwardRef(
   }
 );
 
-type DropdownComponentProps<ItemType> = React.PropsWithoutRef<
-  React.PropsWithChildren<DropdownProps<ItemType>> &
-    React.RefAttributes<HTMLButtonElement>
->;
-
-export interface DropdownComponent {
+// Workaround problems with forwardRef() and generics.  In the long term, should stop using forwardRef().
+// See https://stackoverflow.com/questions/58469229/react-with-typescript-generics-while-using-react-forwardref.
+interface DropdownComponent {
   <ItemType>(
-    props: DropdownComponentProps<ItemType>
+    props: DropdownProps<ItemType> & { ref?: Ref<HTMLButtonElement> }
   ): React.ReactElement<any> | null;
 }
 
