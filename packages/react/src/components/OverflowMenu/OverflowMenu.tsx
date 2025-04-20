@@ -43,6 +43,8 @@ import { setupGetInstanceId } from '../../tools/setupGetInstanceId';
 import { IconButton } from '../IconButton';
 import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 import { useOutsideClick } from '../../internal/useOutsideClick';
+import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { PopoverAlignment } from '../Popover';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -120,7 +122,28 @@ export const getMenuOffset: MenuOffset = (
   }
 };
 
+// TODO: Replace this code when align mapping is consolidated.
+// https://github.com/carbon-design-system/carbon/pull/19081
+const propMappingFunction = (deprecatedValue) => {
+  const mapping = {
+    'top-left': 'top-start',
+    'top-right': 'top-end',
+    'bottom-left': 'bottom-start',
+    'bottom-right': 'bottom-end',
+    'left-bottom': 'left-end',
+    'left-top': 'left-start',
+    'right-bottom': 'right-end',
+    'right-top': 'right-start',
+  };
+  return mapping[deprecatedValue];
+};
+
 export interface OverflowMenuProps {
+  /**
+   * Specify how the trigger tooltip should be aligned.
+   */
+  align?: PopoverAlignment;
+
   /**
    * Specify a label to be read by screen readers on the container node
    */
@@ -240,6 +263,7 @@ export interface OverflowMenuProps {
 export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
   (
     {
+      align,
       ['aria-label']: ariaLabel = null,
       ariaLabel: deprecatedAriaLabel,
       children,
@@ -562,6 +586,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
           ref={wrapperRef}>
           <IconButton
             {...other}
+            align={align}
             type="button"
             aria-haspopup
             aria-expanded={open}
@@ -586,6 +611,56 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
 );
 
 OverflowMenu.propTypes = {
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  align: deprecateValuesWithin(
+    PropTypes.oneOf([
+      'top',
+      'top-left', // deprecated use top-start instead
+      'top-right', // deprecated use top-end instead
+
+      'bottom',
+      'bottom-left', // deprecated use bottom-start instead
+      'bottom-right', // deprecated use bottom-end instead
+
+      'left',
+      'left-bottom', // deprecated use left-end instead
+      'left-top', // deprecated use left-start instead
+
+      'right',
+      'right-bottom', // deprecated use right-end instead
+      'right-top', // deprecated use right-start instead
+
+      // new values to match floating-ui
+      'top-start',
+      'top-end',
+      'bottom-start',
+      'bottom-end',
+      'left-end',
+      'left-start',
+      'right-end',
+      'right-start',
+    ]),
+    //allowed prop values
+    [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+    //optional mapper function
+    propMappingFunction
+  ),
+
   /**
    * Specify a label to be read by screen readers on the container node
    */
