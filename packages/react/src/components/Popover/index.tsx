@@ -512,7 +512,6 @@ Popover.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -527,7 +526,6 @@ Popover.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
     mapPopoverAlign
   ),
 

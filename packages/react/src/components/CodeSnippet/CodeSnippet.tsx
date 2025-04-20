@@ -470,7 +470,6 @@ CodeSnippet.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -485,7 +484,6 @@ CodeSnippet.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
     mapPopoverAlign
   ),
 

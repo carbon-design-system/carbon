@@ -298,7 +298,6 @@ OverflowMenu.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -313,7 +312,6 @@ OverflowMenu.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
     mapPopoverAlign
   ),
 
