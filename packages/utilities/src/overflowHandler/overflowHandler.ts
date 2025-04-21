@@ -54,8 +54,6 @@ export interface UpdateOverflowHandlerOptions {
   dimension: 'width' | 'height';
   /** A callback function that is called when the visible or hidden items change. */
   onChange: (visibleItems: HTMLElement[], hiddenItems: HTMLElement[]) => void;
-  /** An array of previously hidden items to compare against the new hidden items. */
-  previousHiddenItems?: HTMLElement[];
 }
 
 /**
@@ -74,7 +72,6 @@ export function updateOverflowHandler({
   maxVisibleItems,
   dimension,
   onChange,
-  previousHiddenItems = [],
 }: UpdateOverflowHandlerOptions): HTMLElement[] {
   const containerSize =
     dimension === 'width' ? container.clientWidth : container.clientHeight;
@@ -91,36 +88,40 @@ export function updateOverflowHandler({
       : [...items];
     hiddenItems = maxVisibleItems ? items.slice(maxVisibleItems) : [];
   } else {
-    const available = containerSize - offsetSize;
+    const available = containerSize - offsetSize - totalFixedSize;
     let accumulated = 0;
+    let breakIndex = items.length;
 
     for (let i = 0; i < items.length; i++) {
       const size = sizes[i];
       if (
-        accumulated + size + totalFixedSize <= available &&
+        accumulated + size <= available &&
         (!maxVisibleItems || visibleItems.length < maxVisibleItems)
       ) {
         visibleItems.push(items[i]);
         accumulated += size;
       } else {
-        hiddenItems.push(items[i]);
+        breakIndex = i;
+        break;
       }
     }
+    hiddenItems = items.slice(breakIndex);
   }
 
-  if (
-    previousHiddenItems.length === hiddenItems.length &&
-    previousHiddenItems.every((item, index) => item === hiddenItems[index])
-  ) {
-    return previousHiddenItems;
-  }
+  // remove data-hidden attribute from all items first
+  items.forEach((item) => item.removeAttribute('data-hidden'));
 
-  visibleItems.forEach((item) => item.removeAttribute('data-hidden'));
+  // set it only on actually hidden items
   hiddenItems.forEach((item) => item.setAttribute('data-hidden', ''));
 
   if (offset) {
-    offset.toggleAttribute('data-hidden', hiddenItems.length === 0);
+    if (hiddenItems.length === 0) {
+      offset.setAttribute('data-hidden', '');
+    } else {
+      offset.removeAttribute('data-hidden');
+    }
   }
+
   onChange(visibleItems, hiddenItems);
   return hiddenItems;
 }
@@ -194,10 +195,8 @@ export function createOverflowHandler({
   const sizes = items.map((item) => getSize(item, dimension));
   const offsetSize = getSize(offset, dimension);
 
-  let previousHiddenItems: HTMLElement[] = [];
-
   function update() {
-    previousHiddenItems = updateOverflowHandler({
+    updateOverflowHandler({
       container,
       items,
       offset,
@@ -207,7 +206,6 @@ export function createOverflowHandler({
       maxVisibleItems,
       dimension,
       onChange,
-      previousHiddenItems,
     });
   }
 
