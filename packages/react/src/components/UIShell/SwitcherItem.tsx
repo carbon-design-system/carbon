@@ -11,6 +11,7 @@ import React, {
   forwardRef,
   HTMLAttributeAnchorTarget,
   KeyboardEvent,
+  MouseEvent,
 } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -46,7 +47,7 @@ export interface BaseSwitcherItemProps {
   /**
    * event handlers
    */
-  onClick?: (event: MouseEvent) => void;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
   /**
    * Specify the tab index of the Link
    */

@@ -1228,7 +1228,7 @@ ComboBox.propTypes = {
    * change, and in some cases they can not be shimmed by Carbon to shield you
    * from potentially breaking changes.
    */
-  downshiftProps: PropTypes.object as React.Validator<
+  downshiftProps: PropTypes.object as PropTypes.Validator<
     UseComboboxProps<unknown>
   >,
 
@@ -1398,7 +1398,7 @@ type ComboboxComponentProps<ItemType> = PropsWithRef<
 >;
 
 export interface ComboBoxComponent {
-  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement | null;
+  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement<any> | null;
 }
 
 export default ComboBox as ComboBoxComponent;
