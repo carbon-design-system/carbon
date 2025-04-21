@@ -20,7 +20,7 @@ export { FORM_ELEMENT_COLOR_SCHEME as TILE_COLOR_SCHEME } from '../../globals/sh
 /**
  * File uploader button .
  *
- * @element cds-file-uploader-container
+ * @element cds-file-uploader-button
  * @fires cds-file-uploader-button-changed The custom event fired when there is a user gesture to select files to upload.
  */
 @customElement(`${prefix}-file-uploader-button`)

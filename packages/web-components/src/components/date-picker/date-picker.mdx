@@ -1,116 +1,214 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as DatePickerStories from './date-picker.stories';
 
 <Meta of={DatePickerStories} />
 
 # Date picker
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/date-picker)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/date-picker)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/date-picker/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/date-picker/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/date-picker)
+## Table of Contents
 
-Date and time pickers allow users to select a single or a range of dates and
-times.
+- [Overview](#overview)
+  - [Simple date picker](#simple-datepicker)
+  - [Range date picker](#range-datepicker)
+  - [Skeleton state](#skeleton-state)
+  - [AI label](#ai-label)
+- [Component API](#component-api)
+  - [Date picker `date-format`](#date-picker-date-format)
+  - [Date picker `kind`](#date-picker-kind)
+  - [Date picker `max-date`](#date-picker-max-date)
+  - [Date picker `min-date`](#date-picker-min-date)
+  - [Date picker `value`](#date-picker-value)
+- [CDN](#cdn)
+- [References](#references)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+Date pickers allow users to select a single or a range of dates. Pickers are
+used to display past, present, or future dates. The kind of date (exact,
+approximate, memorable) you are requesting from the user will determine which
+picker is best to use. Each picker’s format can be customized depending on
+location or need. The `date-picker` component expects a `cds-date-picker-input`
+as a child.
 
-### JS (via import)
+<Canvas of={DatePickerStories.SingleWithCalendar} />
 
-```javascript
-import '@carbon/web-components/es/components/date-picker/index.js';
-```
+### Simple date picker
 
-<Markdown>{`${cdnJs({ components: ['date-picker'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+The simple date input provides the user with only a text field in which they can
+manually input a date. It allows dates to be entered without adding unnecessary
+interactions that come with the calendar menu or a dropdown.
 
-### HTML
+<Canvas of={DatePickerStories.Simple} />
+
+### Range date picker
+
+Calendar pickers default to showing today’s date when opened and only one month
+is shown at a time. Calendar pickers allow users to navigate through months and
+years, however they work best when used for recent or near future dates.
+
+<Canvas of={DatePickerStories.SingleWithCalendar} />
+<Canvas of={DatePickerStories.RangeWithCalendar} />
+
+### Skeleton state
+
+You can use the `cds-date-picker-skeleton` component to render a skeleton
+variant of a date picker. This is useful to display while an initial date range
+in your date picker is being fetched from an external resource like an API.
+
+<Canvas of={DatePickerStories.Skeleton} />
+
+### AI label
+
+<Canvas of={DatePickerStories.WithAILabel} />
+
+## Component API
+
+<ArgTypes of="cds-date-picker" />
+
+<ArgTypes of="cds-date-picker-input" />
+
+### Date picker `date-format`
+
+You can use the `date-format` attribute to change how the selected date is
+displayed in the input. For a complete list of supported date formatting tokens,
+please see the Flatpickr
+[documentation](https://flatpickr.js.org/formatting/#date-formatting-tokens).
+
+<cds-date-picker date-format="Y-m-d">
+  <cds-date-picker-input
+    kind="single"
+    label-text="Date format example"
+    placeholder="yyyy/mm/dd"></cds-date-picker-input>
+</cds-date-picker>
 
 ```html
-<cds-date-picker>
+<cds-date-picker date-format="Y-m-d">
   <cds-date-picker-input
-    label-text="Date Picker label"
-    placeholder="mm/dd/yyyy">
-  </cds-date-picker-input>
+    kind="single"
+    placeholder="yyyy/mm/dd"></cds-date-picker-input>
 </cds-date-picker>
 ```
 
-## Single date picker
+### Date picker `kind`
 
-A single Date Picker consists of an input field and a calendar.
+There are three supported variations of `date-picker` in Carbon.
+
+- `simple` will render a simple text input _without_ a calendar dropdown.
+- `single` will render a a single text input _with_ a calendar dropdown.
+- For `range` , two `cds-date-picker-input` will need to be provided as
+  children.
+
+For `simple` and `single`, set the `kind` attribute of the
+`cds-date-picker-input` component to the desired version.
 
 ```html
 <cds-date-picker>
   <cds-date-picker-input
     kind="single"
-    label-text="Date Picker label"
-    placeholder="mm/dd/yyyy">
-  </cds-date-picker-input>
+    placeholder="mm/dd/yyyy"></cds-date-picker-input>
 </cds-date-picker>
 ```
 
-## Range date picker
-
-A range Date Picker consists of two input fields and a calendar.
+For the `range`, the `kind` attributes should be set to `from` and `to`,
+corresponding to the start and end dates of the range.
 
 ```html
 <cds-date-picker>
   <cds-date-picker-input
     kind="from"
-    label-text="Date Picker label"
-    placeholder="mm/dd/yyyy"
-    size="lg">
+    label-text="Start date"
+    placeholder="mm/dd/yyyy">
   </cds-date-picker-input>
   <cds-date-picker-input
     kind="to"
-    label-text="Date Picker label"
-    placeholder="mm/dd/yyyy"
-    size="lg">
+    label-text="End date"
+    placeholder="mm/dd/yyyy">
   </cds-date-picker-input>
 </cds-date-picker>
 ```
 
-## Skeleton
+### Date picker `max-date`
 
-For the skeleton variation, utilize `<cds-date-picker-input-skeleton>`.
+Limits the date selection to any date before the date specified.
 
-### Simple
-
-```html
-<cds-date-picker-input-skeleton kind="simple"></cds-date-picker-input-skeleton>
-```
-
-### Single
-
-```html
-<cds-date-picker-input-skeleton kind="single"></cds-date-picker-input-skeleton>
-```
-
-### Range
+<cds-date-picker max-date="09/15/2020">
+  <cds-date-picker-input
+    kind="single"
+    label-text="max-date example"
+    placeholder="mm/dd/yyyy"></cds-date-picker-input>
+</cds-date-picker>
 
 ```html
-<div>
-  <cds-date-picker-input-skeleton kind="from"></cds-date-picker-input-skeleton>
-  <cds-date-picker-input-skeleton kind="to"></cds-date-picker-input-skeleton>
-</div>
+<cds-date-picker max-date="09/15/2020">
+  <cds-date-picker-input
+    kind="single"
+    placeholder="mm/dd/yyyy"></cds-date-picker-input>
+</cds-date-picker>
 ```
 
-## `<cds-date-picker>` attributes, properties and events
+### Date picker `min-date`
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-date-picker open>`) and `false` means not setting the attribute (e.g.
-`<cds-date-picker>` without `open` attribute).
+Works similarly to the `min-date` attribute. [See above](#date-picker-max-date).
 
-<ArgTypes of="cds-date-picker" />
+<cds-date-picker min-date="09/15/2025">
+  <cds-date-picker-input
+    kind="single"
+    label-text="min-date example"
+    placeholder="mm/dd/yyyy"></cds-date-picker-input>
+</cds-date-picker>
 
-## `<cds-date-picker-input>` attributes and properties
+```html
+<cds-date-picker min-date="09/15/2025">
+  <cds-date-picker-input
+    kind="single"
+    placeholder="mm/dd/yyyy"></cds-date-picker-input>
+</cds-date-picker>
+```
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-date-picker-input light>`) and `false` means not setting the attribute
-(e.g. `<cds-date-picker-input>` without `light` attribute).
+### Date picker `value`
 
-<ArgTypes of="cds-date-picker-input" />
+By default the date picker will set the current date as its value. If you'd like
+to start this at a different date, you can pass in a date string or date object.
+
+<cds-date-picker>
+  <cds-date-picker-input
+    kind="single"
+    label-text="Value as a date example"
+    placeholder="mm/dd/yyyy"
+    value="04/17/2025"></cds-date-picker-input>
+</cds-date-picker>
+
+```html
+<cds-date-picker>
+  <cds-date-picker-input
+    kind="single"
+    placeholder="mm/dd/yyyy"
+    value="04/17/2025"></cds-date-picker-input>
+</cds-date-picker>
+```
+
+## References
+
+- The date picker component utilizes Flatpickr under the hood. We will pass any
+  extra options down to the FlatPickr instance. For a full list of options,
+  please see the [Flatpickr docs](https://flatpickr.js.org/options/)
+- The `cds-date-picker-input` component takes in similar attributes to the
+  `cds-text-input` component, such as `size` and `placeholder`. For more
+  information on these attributes, check out the
+  [text input](../?path=/docs/components-text-input--overview) page.
+
+<Markdown>{`${cdnJs({ components: ['date-picker'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/date-picker/date-picker.mdx).

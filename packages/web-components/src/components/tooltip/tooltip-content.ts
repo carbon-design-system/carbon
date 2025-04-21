@@ -12,6 +12,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 /**
  * Tooltip content.
+ *
+ * @element cds-tooltip-content
  */
 @customElement(`${prefix}-tooltip-content`)
 class CDSTooltipContent extends CDSPopoverContent {
