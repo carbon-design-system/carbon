@@ -499,6 +499,7 @@ const ComboBox = forwardRef(
       }
     }, [typeahead, inputValue, items, itemToString, autocompleteCustomFilter]);
     const isManualClearingRef = useRef(false);
+    const [isClearing, setIsClearing] = useState(false);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
@@ -508,6 +509,14 @@ const ComboBox = forwardRef(
     const prevSelectedItemProp = useRef<ItemType | null | undefined>(
       selectedItemProp
     );
+    useEffect(() => {
+      isManualClearingRef.current = isClearing;
+
+      // Reset flag after render cycle
+      if (isClearing) {
+        setIsClearing(false);
+      }
+    }, [isClearing]);
 
     // fully controlled combobox: handle changes to selectedItemProp
     useEffect(() => {
@@ -1111,13 +1120,10 @@ const ComboBox = forwardRef(
             {inputValue && (
               <ListBoxSelection
                 clearSelection={() => {
-                  isManualClearingRef.current = true;
+                  setIsClearing(true); // This updates the state which syncs to the ref
                   setInputValue('');
                   onChange({ selectedItem: null });
                   selectItem(null);
-                  setTimeout(() => {
-                    isManualClearingRef.current = false;
-                  }, 0);
                   handleSelectionClear();
                 }}
                 translateWithId={translateWithId}
