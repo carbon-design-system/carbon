@@ -1,7 +1,7 @@
 {
   "name": "examples-light-dark",
   "private": true,
-  "version": "0.78.0",
+  "version": "0.79.0-rc.0",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -9,7 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@carbon/react": "^1.80.0",
+    "@carbon/react": "^1.81.0-rc.0",
     "next": "14.2.25",
     "react": "19.0.0",
     "react-dom": "19.0.0"
