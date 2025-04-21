@@ -5739,6 +5739,7 @@ Map {
   "OverflowMenu" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "align": [Function],
       "aria-label": Object {
         "type": "string",
       },
