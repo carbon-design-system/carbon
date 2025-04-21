@@ -20,10 +20,10 @@ $css--plex: true !default;
   --grid-template: 1fr max-content;
   --display-icon-item: none;
   --display-selection-icon: none;
-  --block-size-value: $spacing-07;
+  --block-size-value: #{$spacing-07};
 }
 .#{$prefix}--menu--with-icons {
-  --grid-template: $spacing-05 1fr max-content;
+  --grid-template: #{$spacing-05} 1fr max-content;
   --display-icon-item: flex;
 }
 .#{$prefix}--menu--with-selectable-items {
@@ -31,7 +31,7 @@ $css--plex: true !default;
 }
 
 .#{$prefix}--menu--with-icons.#{$prefix}--menu--with-selectable-items {
-  --grid-template: $spacing-05 $spacing-05 1fr max-content;
+  --grid-template: #{$spacing-05} #{$spacing-05} 1fr max-content;
 }
 
 .#{$prefix}--menu {
