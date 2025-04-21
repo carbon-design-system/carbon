@@ -22,7 +22,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 export { TAG_SIZE, TAG_TYPE };
 
 /**
- * Tag.
+ * Selectable tag.
+ *
+ * @element cds-selectable-tag
  *
  * @fires cds-selectable-tag-beforeselected - The custom event fired as the element is being selected
  * @fires cds-selectable-tag-selected - The custom event fired after the element has been selected
