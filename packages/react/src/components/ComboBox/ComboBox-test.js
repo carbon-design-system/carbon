@@ -941,6 +941,55 @@ describe('ComboBox', () => {
 
       expect(findInputNode()).toHaveDisplayValue('xyz');
     });
+
+    it('should not fire onChange when selecting the same item repeatedly with mouse', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} />);
+
+      // First selection with mouse - should trigger onChange
+      await openMenu();
+      await user.click(screen.getByRole('option', { name: 'Item 2' }));
+
+      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+      expect(mockProps.onChange).toHaveBeenCalledWith({
+        selectedItem: mockProps.items[2],
+      });
+
+      // Reset mock to check next interaction
+      mockProps.onChange.mockClear();
+
+      // Select the same item again with mouse - should NOT trigger onChange
+      await openMenu();
+      await user.click(screen.getByRole('option', { name: 'Item 2' }));
+
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+      expect(findInputNode()).toHaveDisplayValue('Item 2');
+    });
+
+    it('should not fire onChange when selecting the same item repeatedly with keyboard', async () => {
+      const user = userEvent.setup();
+      render(<ComboBox {...mockProps} />);
+
+      // First keyboard selection - should trigger onChange
+      await openMenu();
+      await user.keyboard('{ArrowDown}{ArrowDown}{ArrowDown}'); // Navigate to Item 2
+      await user.keyboard('{Enter}');
+
+      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+      expect(mockProps.onChange).toHaveBeenCalledWith({
+        selectedItem: mockProps.items[2],
+      });
+
+      mockProps.onChange.mockClear();
+
+      // Select same item again with keyboard - should NOT trigger onChange
+      await openMenu();
+      // No need to navigate again - Item 2 should already be highlighted
+      await user.keyboard('{Enter}');
+
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+      expect(findInputNode()).toHaveDisplayValue('Item 2');
+    });
   });
 
   describe('ComboBox autocomplete', () => {
