@@ -5,40 +5,43 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ReactiveController, LitElement } from 'lit';
+import { ReactiveController, ReactiveElement } from 'lit';
 import {
   computePosition,
   flip,
+  size,
   offset,
   arrow,
   autoUpdate,
   Placement,
 } from '@floating-ui/dom';
 
-type PopoverControllerOptions = {
+type FloatingControllerOptions = {
   target: HTMLElement;
   trigger: HTMLElement;
-  arrowElement?: HTMLElement | undefined;
   alignment: string;
-  flip: boolean;
-  caret: boolean;
+
+  arrowElement?: HTMLElement | undefined;
+  flipArguments?: object;
+  caret?: boolean;
+
+  styleElement?: HTMLElement;
+  matchWidth?: boolean;
+  open: boolean;
 };
 
-interface PopoverElement extends LitElement {
-  open: boolean;
-}
-
-export default class PopoverController implements ReactiveController {
+/**
+ * Controller for positioning the menu using Floating UI.
+ */
+export default class FloatingController implements ReactiveController {
   /**
    * Host component
    */
-  private host!: PopoverElement;
-
+  private host: ReactiveElement;
   /**
    * Floating-ui options to pass to `computePlacement()`
    */
-  private options!: PopoverControllerOptions;
-
+  private options!: FloatingControllerOptions;
   /**
    * cleanup function to stop auto updates
    */
@@ -48,14 +51,14 @@ export default class PopoverController implements ReactiveController {
    * register with host component
    * @param host host component
    */
-  constructor(host: PopoverElement) {
-    (this.host = host).addController(this);
+  constructor(host: ReactiveElement) {
+    this.host = host;
+    host.addController(this);
   }
 
-  async setPlacement(options: PopoverControllerOptions = this.options) {
+  async setPlacement(options: FloatingControllerOptions = this.options) {
     this.options = options;
     const { trigger, target } = options;
-
     this.cleanup = autoUpdate(trigger, target, this.updatePlacement);
   }
 
@@ -64,7 +67,21 @@ export default class PopoverController implements ReactiveController {
   };
 
   async computePlacement() {
-    const { arrowElement, alignment, caret, trigger, target } = this.options;
+    const {
+      arrowElement,
+      alignment,
+      caret,
+      trigger,
+      target,
+      styleElement,
+      matchWidth,
+      open,
+      flipArguments,
+    } = this.options;
+
+    const element = styleElement ?? target;
+
+    if (!element) return;
 
     let shimmedAlign;
     switch (alignment) {
@@ -98,24 +115,39 @@ export default class PopoverController implements ReactiveController {
     }
 
     const middleware = [
-      flip({ fallbackAxisSideDirection: 'start' }),
+      flip(flipArguments),
       offset(caret ? 10 : 0),
       ...(caret && arrowElement
         ? [arrow({ element: arrowElement, padding: 15 })]
         : []),
+      ...(matchWidth && (shimmedAlign === 'bottom' || shimmedAlign === 'top')
+        ? [
+            size({
+              apply({ rects, elements }) {
+                elements.floating.style.width = `${rects.reference.width}px`;
+              },
+            }),
+          ]
+        : [
+            size({
+              apply({ elements }) {
+                elements.floating.style.removeProperty('width');
+              },
+            }),
+          ]),
     ];
 
-    if (this.host.hasAttribute('open')) {
+    if (open) {
       const { x, y, placement, middlewareData, strategy } =
-        await computePosition(trigger, target, {
+        await computePosition(trigger, element, {
           strategy: 'fixed',
           middleware,
           placement: shimmedAlign as Placement,
         });
 
-      target.style.left = `${x}px`;
-      target.style.top = `${y}px`;
-      target.style.position = `${strategy}`;
+      element.style.left = `${x}px`;
+      element.style.top = `${y}px`;
+      element.style.position = `${strategy}`;
 
       if (arrowElement) {
         // @ts-ignore
