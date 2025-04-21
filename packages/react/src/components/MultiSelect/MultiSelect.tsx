@@ -730,7 +730,9 @@ export const MultiSelect = React.forwardRef(
       [enableFloatingStyles, getMenuProps, refs.setFloating]
     );
 
-    const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
+    const labelProps = !isValidElement(titleText)
+      ? getLabelProps()
+      : { id: getLabelProps().id };
 
     const getSelectionStats = useCallback(
       (
