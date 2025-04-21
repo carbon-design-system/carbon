@@ -1,45 +1,43 @@
-import { Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../../globals/internal/storybook-cdn';
 import * as AILabelDataTableStories from './data-table-ai-label.stories';
 
 <Meta of={AILabelDataTableStories} />
 
 # AI Label in DataTable
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/ai-label)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/ai-label)
+&nbsp;|&nbsp;
+[AILabel release status](https://airtable.com/appCAqlGVN8tRUbAp/shr71ZyLlIGORz3Vh/tblHqPusgkK8hIeHo)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/ai-label)
+## Table of Contents
 
-The DataTable supports placing an AI Label in both the column header and row.
+- [Overview](#overview)
+- [AI Label anatomy](#ai-label-anatomy)
+- [Using AI Label in DataTable](#using-ai-label-in-datatable)
+  - [Using as a column header](#using-as-a-column-header)
+  - [Using in a row](#using-in-a-row)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+The `cds-table` component supports placing a `cds-ai-label` in both the column
+header and row.
 
-The `AI Label` itself is a button that acts as a `Toggletip` trigger. To
+<Canvas id={AILabelDataTableStories._AILabelWithExpansion} />
+
+## AI Label anatomy
+
+The `AI Label` itself is a button that acts as a `toggle-tip` trigger. To
 construct the contents of the `AI Label` callout, you can place the desired
-elements as a child of `AI Label` in a div with slot `body-text`, like so:
-
-### JS (via import)
-
-```javascript
-import '@carbon/web-components/es/components/ai-label/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['ai-label'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
+elements as a child of `cds-ai-label`, like so:
 
 ```html
 <cds-ai-label size="mini" alignment="bottom-left">
   <div slot="body-text">{Content Here}</div>
 </cds-ai-label>
 ```
-
-### HTML (with actions)
 
 The `AI Label` also supports the rendering of an action bar at the bottom of the
 callout. To achieve this, you can add elements with `slot="actions"` inside the
@@ -70,7 +68,7 @@ callout. To achieve this, you can add elements with `slot="actions"` inside the
 
 ### Using as a column header
 
-To use a `AI Label` inside a column header, you'll need to add a `ai-label`
+To use a `AI Label` inside a column header, you'll need to add an `cds-ai-label`
 component to the appropriate `cds-table-header-cell`.
 
 ```html
@@ -97,3 +95,11 @@ To use a `AI Label` inside a `DataTable` row, you'll need to pass in your
   ...
 </cds-table-row>
 ```
+
+<Markdown>{`${cdnJs({ components: ['ai-label'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/data-table/stories/data-table-ai-label.mdx).
