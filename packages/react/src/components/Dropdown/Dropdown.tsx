@@ -608,9 +608,10 @@ const Dropdown = React.forwardRef(
       return React.isValidElement(element) ? element : null;
     }, [slug, decorator]);
 
-    const labelProps = !isValidElement(titleText)
-      ? getLabelProps()
-      : { id: getLabelProps().id };
+    const allLabelProps = getLabelProps();
+    const labelProps = isValidElement(titleText)
+      ? { id: allLabelProps.id }
+      : allLabelProps;
 
     return (
       <div className={wrapperClasses} {...other}>
