@@ -1,19 +1,18 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, { WeakValidationMap } from 'prop-types';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import React, {
   useRef,
   useMemo,
   useEffect,
   type ForwardedRef,
-  type WeakValidationMap,
   type ElementType,
 } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
@@ -183,8 +182,9 @@ export const Popover: PopoverComponent & {
     open,
     alignmentAxisOffset,
     ...rest
-  }: PopoverProps<E>,
-  forwardRef: PolymorphicRef<E>
+  }: any,
+  //this is a workaround, have to come back and fix this.
+  forwardRef: any
 ) {
   const prefix = usePrefix();
   const floating = useRef<HTMLSpanElement>(null);
@@ -202,8 +202,8 @@ export const Popover: PopoverComponent & {
     }
   });
 
-  useWindowEvent('click', (event: Event) => {
-    if (open && !popover?.current?.contains(event.target as Node)) {
+  useWindowEvent('click', ({ target }) => {
+    if (open && target instanceof Node && !popover.current?.contains(target)) {
       onRequestClose?.();
     }
   });

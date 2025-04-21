@@ -17,9 +17,9 @@ import { MenuContext } from './menu-context';
 import Checkmark16 from '@carbon/icons/lib/checkmark/16';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { MENU_ITEM_KIND } from './defs';
+import { MENU_ITEM_KIND, MENU_SIZE } from './defs';
 
-export { MENU_ITEM_KIND };
+export { MENU_ITEM_KIND, MENU_SIZE };
 
 /**
  * Menu Item.
@@ -171,7 +171,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   render() {
     const { label, shortcut, submenuOpen, boundaries, isRtl } = this;
 
-    const menuClassName = this.context.hasSelectableItems
+    const menuClassName = this.context?.hasSelectableItems
       ? `${prefix}--menu--with-selectable-items`
       : '';
 
@@ -194,7 +194,8 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
             </div>
             <cds-menu
               className=${menuClassName}
-              size=${this.parentElement?.getAttribute('size')}
+              size=${this.parentElement?.getAttribute('size') ??
+              MENU_SIZE.LARGE}
               ?isChild="${this.hasSubmenu}"
               label="${label}"
               .open="${submenuOpen}"
@@ -259,11 +260,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
                 const slotElements = item.shadowRoot
                   ?.querySelector('slot')
                   ?.assignedElements();
-                const firstElement =
-                  slotElements?.length &&
-                  slotElements[0].shadowRoot?.querySelector(
-                    `${prefix}-menu-item`
-                  );
+                const firstElement = slotElements?.length && slotElements[0];
                 this.submenuEntry = firstElement;
                 break;
               }

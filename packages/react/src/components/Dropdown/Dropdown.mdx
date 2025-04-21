@@ -72,12 +72,14 @@ variant
 />
 
 ### Experimental Auto Align
+
 <Canvas
   of={DropdownStories.ExperimentalAutoAlign}
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(DropdownStories.ExperimentalAutoAlign),
+      onClick: () =>
+        stackblitzPrefillConfig(DropdownStories.ExperimentalAutoAlign),
     },
   ]}
 />
@@ -99,6 +101,7 @@ be fetched from an external API.
 />
 
 ### AI label
+
 <Canvas
   of={DropdownStories.withAILabel}
   additionalActions={[
@@ -312,8 +315,8 @@ const [currentItem, setCurrentItem] = useState(items[4]);
 
 ### Dropdown `size`
 
-There are three sizes of `Dropdown` available: `sm`, `lg` (the default), and
-`xl`.
+There are three sizes of `Dropdown` available: `sm`, `md` (the default), and
+`lg`.
 
 <Dropdown
   items={['Option 1', 'Option 2', 'Option 3']}

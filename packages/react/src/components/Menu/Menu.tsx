@@ -35,7 +35,7 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * The ref of the containing element, used for positioning and alignment of the menu
    */
-  containerRef?: RefObject<HTMLDivElement>;
+  containerRef?: RefObject<HTMLDivElement | null>;
   /**
    * A collection of MenuItems to be rendered within this Menu.
    */
@@ -200,14 +200,8 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
   }
 
-  function handleClose(e: Pick<React.KeyboardEvent<HTMLUListElement>, 'type'>) {
-    if (/^key/.test(e.type)) {
-      window.addEventListener('keyup', returnFocus, { once: true });
-    } else if (e.type === 'click' && menu.current) {
-      menu.current.addEventListener('focusout', returnFocus, { once: true });
-    } else {
-      returnFocus();
-    }
+  function handleClose() {
+    returnFocus();
 
     if (onClose) {
       onClose();
@@ -223,7 +217,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       (match(e, keys.Escape) || (!isRoot && match(e, keys.ArrowLeft))) &&
       onClose
     ) {
-      handleClose(e);
+      handleClose();
     } else {
       focusItem(e);
     }
@@ -264,7 +258,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
   function handleBlur(e: React.FocusEvent<HTMLUListElement>) {
     if (open && onClose && isRoot && !menu.current?.contains(e.relatedTarget)) {
-      handleClose(e);
+      handleClose();
     }
   }
 
