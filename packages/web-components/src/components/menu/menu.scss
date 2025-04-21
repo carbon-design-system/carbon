@@ -23,7 +23,7 @@ $css--plex: true !default;
   --block-size-value: $spacing-07;
 }
 .#{$prefix}--menu--with-icons {
-  --grid-template: 1rem 1fr max-content;
+  --grid-template: $spacing-05 1fr max-content;
   --display-icon-item: flex;
 }
 .#{$prefix}--menu--with-selectable-items {
@@ -31,7 +31,7 @@ $css--plex: true !default;
 }
 
 .#{$prefix}--menu--with-icons.#{$prefix}--menu--with-selectable-items {
-  --grid-template: 1rem 1rem 1fr max-content;
+  --grid-template: $spacing-05 $spacing-05 1fr max-content;
 }
 
 .#{$prefix}--menu {

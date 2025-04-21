@@ -96,28 +96,26 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
   };
 
   updated(changedProperties) {
-    if (
-      changedProperties.has('_open') ||
-      changedProperties.has('menuAlignment')
-    ) {
+    const menu = this.querySelector(`${prefix}-menu`) as CDSMenu;
+  
+    if (changedProperties.has('_open') || changedProperties.has('menuAlignment')) {
       this.updateComplete.then(() => {
-        const menu = this.querySelector(`${prefix}-menu`) as CDSMenu;
+        const styleElement = menu.shadowRoot?.querySelector(`.${prefix}--menu`) as HTMLElement;
+  
         menu.open = this._open;
-        const styleElement = menu.shadowRoot?.querySelector(`.${prefix}--menu`);
-
+  
         this._menuController.setPlacement({
           trigger: this._triggerNode,
           target: menu,
           alignment: this.menuAlignment,
-          styleElement: styleElement as HTMLElement,
+          styleElement,
           matchWidth: true,
           open: this._open,
         });
       });
     }
-
+  
     if (changedProperties.has('size')) {
-      const menu = this.querySelector(`${prefix}-menu`) as CDSMenu;
       menu.setAttribute('size', this.size);
     }
   }
