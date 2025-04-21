@@ -118,6 +118,8 @@ export const withDanger = {
       <cds-menu>
         <cds-menu-item label="First action"></cds-menu-item>
         <cds-menu-item label="Second action"></cds-menu-item>
+        <cds-menu-item label="Third action"></cds-menu-item>
+        <cds-menu-item-divider></cds-menu-item-divider>
         <cds-menu-item label="Danger action" kind="danger"></cds-menu-item>
       </cds-menu>
     </cds-menu-button>
