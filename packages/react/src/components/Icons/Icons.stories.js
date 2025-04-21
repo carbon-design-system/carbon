@@ -53,11 +53,7 @@ Default.argTypes = {
 };
 
 export const WithRelativeSize = (args) => {
-  return (
-    <IconButton label="Edit icon" kind="primary">
-      <Edit {...args} />
-    </IconButton>
-  );
+  return <Edit {...args} />;
 };
 
 WithRelativeSize.args = {
