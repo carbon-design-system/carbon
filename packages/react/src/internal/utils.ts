@@ -22,4 +22,4 @@ export const isComponentElement = <P>(
   element: ReactNode,
   component: ComponentType<P>
 ): element is ReactElement<P> =>
-  isValidElement(element) && element.type === component;
+  isValidElement<P>(element) && element.type === component;

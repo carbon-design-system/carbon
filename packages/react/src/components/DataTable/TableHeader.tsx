@@ -11,7 +11,6 @@ import React, {
   cloneElement,
   useRef,
   type MouseEventHandler,
-  type ReactElement,
   type ReactNode,
 } from 'react';
 import {
@@ -25,6 +24,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { TranslateWithId, ReactAttr } from '../../types/common';
 import { DataTableSortState } from './state/sortStates';
 import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 const defaultScope = 'col';
 
@@ -162,16 +162,12 @@ const TableHeader = React.forwardRef(function TableHeader(
   // AILabel is always size `mini`
   const AILableRef = useRef<HTMLInputElement>(null);
 
-  let colHasAILabel;
   const candidate = slug ?? decorator;
-  let normalizedDecorator = React.isValidElement(candidate) ? candidate : null;
-  if (normalizedDecorator?.type === AILabel) {
-    colHasAILabel = true;
-    normalizedDecorator = cloneElement(normalizedDecorator as ReactElement, {
-      size: 'mini',
-      ref: AILableRef,
-    });
-  }
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const colHasAILabel = candidateIsAILabel;
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'mini', ref: AILableRef })
+    : null;
 
   const headerLabelClassNames = classNames({
     [`${prefix}--table-header-label`]: true,

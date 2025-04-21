@@ -20,6 +20,7 @@ import { TableRowProps } from './TableRow';
 import TableSlugRow from './TableSlugRow';
 import TableDecoratorRow from './TableDecoratorRow';
 import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
   /**
@@ -84,10 +85,14 @@ const TableExpandRow = React.forwardRef(
     // We need to put the AILabel and Decorator before the expansion arrow and all other table cells after the arrow.
     let rowHasAILabel;
     const decorator = Children.toArray(children).map((child) => {
-      if (!isValidElement(child)) return;
+      if (isComponentElement(child, TableSlugRow)) {
+        if (child.props.slug) {
+          rowHasAILabel = true;
+        }
 
-      if (child.type === TableSlugRow || child.type === TableDecoratorRow) {
-        if (child.props.slug || child.props.decorator?.type === AILabel) {
+        return child;
+      } else if (isComponentElement(child, TableDecoratorRow)) {
+        if (isComponentElement(child.props.decorator, AILabel)) {
           rowHasAILabel = true;
         }
 
@@ -95,16 +100,15 @@ const TableExpandRow = React.forwardRef(
       }
     });
 
-    const normalizedChildren = React.Children.toArray(children).map(
-      (child: any) => {
-        if (
-          child.type?.displayName !== 'TableSlugRow' &&
-          child.type?.displayName !== 'TableDecoratorRow'
-        ) {
-          return child;
-        }
+    const normalizedChildren = Children.toArray(children).map((child) => {
+      if (
+        isValidElement(child) &&
+        child.type !== TableSlugRow &&
+        child.type !== TableDecoratorRow
+      ) {
+        return child;
       }
-    );
+    });
 
     const className = cx(
       {
