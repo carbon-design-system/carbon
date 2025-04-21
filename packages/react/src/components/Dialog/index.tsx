@@ -6,7 +6,8 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { MutableRefObject, useEffect, useRef } from 'react';
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { usePrefix } from '../../internal/usePrefix';
 import cx from 'classnames';
 import { Close } from '@carbon/icons-react';
@@ -16,7 +17,9 @@ import { ReactAttr } from '../../types/common';
 import { Text } from '../Text';
 import { Layer } from '../Layer';
 import ButtonSet from '../ButtonSet';
+import Button from '../Button';
 import { useId } from '../../internal/useId';
+import { debounce } from 'es-toolkit/compat';
 
 /**
  * ----------
@@ -171,7 +174,6 @@ export const unstable__Dialog = React.forwardRef(
       }
     }, [modal, open]);
 
-    // Apply body overflow: hidden when modal is open
     useEffect(() => {
       if (modal && open) {
         document.body.classList.add(`${prefix}--body--with-modal-open`);
@@ -575,76 +577,75 @@ export interface DialogBodyProps extends ReactAttr<HTMLDivElement> {
    * Specify whether the content has overflow that should be scrollable
    */
   hasScrollingContent?: boolean;
-
-  /**
-   * Specify whether to use the Layer component
-   */
-  useLayer?: boolean;
 }
 
 export const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
-  (
-    { children, className, hasScrollingContent, useLayer = true, ...rest },
-    ref
-  ) => {
+  ({ children, className, hasScrollingContent, ...rest }, ref) => {
     const prefix = usePrefix();
+    const contentRef = useRef<HTMLDivElement>(null);
+    const [isScrollable, setIsScrollable] = useState(false);
+    const dialogId = useId();
+    const dialogBodyId = `${prefix}--dialog-body--${dialogId}`;
+
+    useIsomorphicEffect(() => {
+      if (contentRef.current) {
+        setIsScrollable(
+          contentRef.current.scrollHeight > contentRef.current.clientHeight
+        );
+      }
+
+      function handler() {
+        if (contentRef.current) {
+          setIsScrollable(
+            contentRef.current.scrollHeight > contentRef.current.clientHeight
+          );
+        }
+      }
+
+      const debouncedHandler = debounce(handler, 200);
+      window.addEventListener('resize', debouncedHandler);
+      return () => {
+        debouncedHandler.cancel();
+        window.removeEventListener('resize', debouncedHandler);
+      };
+    }, []);
+
     const contentClasses = cx(
       `${prefix}--dialog-content`,
       {
-        [`${prefix}--dialog-scroll-content`]: hasScrollingContent,
+        [`${prefix}--dialog-scroll-content`]:
+          hasScrollingContent || isScrollable,
       },
       className
     );
 
-    // Use IntersectionObserver to detect when content is scrolled
-    const contentRef = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-      if (!hasScrollingContent && contentRef.current) {
-        // Only set up observer if hasScrollingContent is not explicitly set
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.target.scrollHeight > entry.target.clientHeight) {
-              entry.target.classList.add(`${prefix}--dialog-scroll-content`);
-            } else {
-              entry.target.classList.remove(`${prefix}--dialog-scroll-content`);
-            }
-          },
-          { threshold: [0, 0.5, 1] }
-        );
+    // Create accessibility props for scrollable content, similar to Modal
+    const hasScrollingContentProps =
+      hasScrollingContent || isScrollable
+        ? {
+            tabIndex: 0,
+            role: 'region',
+          }
+        : {};
 
-        observer.observe(contentRef.current);
-        return () => {
-          observer.disconnect();
-        };
-      }
-      return undefined;
-    }, [hasScrollingContent, prefix]);
-
-    const localRef = useRef<HTMLDivElement>(null);
-    // Combine refs
     const combinedRef = (el: HTMLDivElement) => {
-      // Update both refs
       if (typeof ref === 'function') {
         ref(el);
       } else if (ref) {
         (ref as React.MutableRefObject<HTMLDivElement>).current = el;
       }
-      localRef.current = el;
       contentRef.current = el;
     };
 
-    if (useLayer) {
-      return (
-        <Layer className={contentClasses} ref={combinedRef} {...rest}>
-          {children}
-        </Layer>
-      );
-    }
-
     return (
-      <div className={contentClasses} ref={combinedRef} {...rest}>
+      <Layer
+        ref={combinedRef}
+        id={dialogBodyId}
+        className={contentClasses}
+        {...hasScrollingContentProps}
+        {...rest}>
         {children}
-      </div>
+      </Layer>
     );
   }
 );
@@ -666,11 +667,6 @@ DialogBody.propTypes = {
    * Specify whether the content has overflow that should be scrollable
    */
   hasScrollingContent: PropTypes.bool,
-
-  /**
-   * Specify whether to use the Layer component
-   */
-  useLayer: PropTypes.bool,
 };
 
 /**
@@ -698,18 +694,49 @@ export interface DialogFooterProps extends ReactAttr<HTMLDivElement> {
   className?: string;
 
   /**
-   * Specify whether to use ButtonSet as a wrapper
-   * Default is true for backward compatibility with Modal
+   * Specify a handler for closing dialog (secondary button)
    */
-  useButtonSet?: boolean;
+  onRequestClose?: React.ReactEventHandler<HTMLElement>;
+
+  /**
+   * Specify a handler for submitting dialog (primary button)
+   */
+  onRequestSubmit?: React.ReactEventHandler<HTMLElement>;
+
+  /**
+   * Specify the text for the primary button
+   */
+  primaryButtonText?: React.ReactNode;
+
+  /**
+   * Specify the text for the secondary button
+   */
+  secondaryButtonText?: React.ReactNode;
+
+  /**
+   * Specify whether the Dialog is for dangerous actions
+   */
+  danger?: boolean;
 }
 
 export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
-  ({ children, className, useButtonSet = true, ...rest }, ref) => {
+  (
+    {
+      children,
+      className,
+      onRequestClose,
+      onRequestSubmit,
+      primaryButtonText = 'Save',
+      secondaryButtonText = 'Cancle',
+      danger = false,
+      ...rest
+    },
+    ref
+  ) => {
     const prefix = usePrefix();
     const classes = cx(`${prefix}--dialog-footer`, className);
 
-    if (useButtonSet) {
+    if (children) {
       return (
         <ButtonSet className={classes} ref={ref} {...rest}>
           {children}
@@ -718,31 +745,23 @@ export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
     }
 
     return (
-      <div className={classes} ref={ref} {...rest}>
-        {children}
-      </div>
+      <ButtonSet className={classes} ref={ref} {...rest}>
+        {secondaryButtonText && (
+          <Button kind="secondary" onClick={onRequestClose}>
+            {secondaryButtonText}
+          </Button>
+        )}
+        {primaryButtonText && (
+          <Button
+            kind={danger ? 'danger' : 'primary'}
+            onClick={onRequestSubmit}>
+            {primaryButtonText}
+          </Button>
+        )}
+      </ButtonSet>
     );
   }
 );
-
-DialogFooter.displayName = 'DialogFooter';
-
-DialogFooter.propTypes = {
-  /**
-   * Provide the contents to be rendered inside of this component
-   */
-  children: PropTypes.node,
-
-  /**
-   * Specify an optional className to be applied to the footer node
-   */
-  className: PropTypes.string,
-
-  /**
-   * Specify whether to use ButtonSet as a wrapper
-   */
-  useButtonSet: PropTypes.bool,
-};
 
 /**
  * -------

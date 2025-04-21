@@ -13,7 +13,6 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
@@ -57,10 +56,6 @@
     &[open]::backdrop {
       opacity: 1;
       transition: opacity $duration-moderate-02 motion(entrance, expressive);
-
-      @media screen and (prefers-reduced-motion: reduce) {
-        transition: none;
-      }
     }
 
     @include update_fields_on_layer;
@@ -208,11 +203,8 @@
     &:focus {
       border-color: $focus;
       outline: none;
+      @include high-contrast-mode('focus');
     }
-  }
-
-  .#{$prefix}--dialog__close::-moz-focus-inner {
-    border: 0;
   }
 
   .#{$prefix}--icon__close {
@@ -224,9 +216,5 @@
 
   .#{$prefix}--body--with-modal-open {
     overflow: hidden;
-  }
-
-  .#{$prefix}--dialog__close:focus {
-    @include high-contrast-mode('focus');
   }
 }

@@ -212,6 +212,130 @@ NonModal.args = {
   open: true,
 };
 
+export const WithScrollingContent = ({ open: _open, ...args }) => {
+  const [open, setOpen] = useState(_open);
+
+  function toggleDialog() {
+    setOpen(!open);
+  }
+
+  function closeDialog(e) {
+    console.log('e', e);
+    setOpen(false);
+  }
+
+  function handleRequestClose(e) {
+    console.log('ee', e);
+    action('Dialog onRequestClose');
+    closeDialog(e);
+  }
+
+  useEffect(() => {
+    setOpen(_open);
+  }, [_open]);
+
+  return (
+    <div>
+      <Button type="button" onClick={toggleDialog}>
+        Toggle open
+      </Button>
+      <Dialog
+        {...args}
+        open={open}
+        onRequestClose={handleRequestClose}
+        aria-label="Dialog Title">
+        <Dialog.Header>
+          <Dialog.Subtitle>Configure dialog settings</Dialog.Subtitle>
+          <Dialog.Title>Modal Dialog Example</Dialog.Title>
+          <DialogControls>
+            <DialogCloseButton onClick={closeDialog} />
+          </DialogControls>
+        </Dialog.Header>
+        <Dialog.Body hasScrollingContent>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+            eu nibh odio. Nunc a consequat est, id porttitor sapien. Proin vitae
+            leo vitae orci tincidunt auctor eget eget libero. Ut tincidunt
+            ultricies fringilla. Aliquam erat volutpat. Aenean arcu odio,
+            elementum vel vehicula vitae, porttitor ac lorem. Sed viverra elit
+            ac risus tincidunt fermentum. Ut sollicitudin nibh id risus ornare
+            ornare. Etiam gravida orci ut lectus dictum, quis ultricies felis
+            mollis. Mauris nec commodo est, nec faucibus nibh. Nunc commodo ante
+            quis pretium consectetur. Ut ac nisl vitae mi mattis vulputate a at
+            elit. Nullam porttitor ex eget mi feugiat mattis. Nunc non sodales
+            magna. Proin ornare tellus quis hendrerit egestas. Donec pharetra
+            leo nec molestie sollicitudin.
+          </p>
+          <br></br>
+          <TextInput
+            id="dialog-text-input"
+            labelText="Name"
+            placeholder="Enter your name"
+            style={{ marginBottom: '1rem' }}
+          />
+          <Select
+            id="dialog-select"
+            labelText="Region"
+            defaultValue="us-south"
+            style={{ marginBottom: '1rem' }}>
+            <SelectItem value="us-south" text="US South" />
+            <SelectItem value="us-east" text="US East" />
+          </Select>
+          <p>
+            Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+            autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+            assumenda ratione officia Voluptate beatae eligendi placeat nemo
+            laborum, ratione.
+          </p>
+          <p>
+            Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+            autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+            assumenda ratione officia Voluptate beatae eligendi placeat nemo
+            laborum, ratione.
+          </p>
+          <br></br>
+          <TextInput
+            id="dialog-text-input"
+            labelText="Name"
+            placeholder="Enter your name"
+            style={{ marginBottom: '1rem' }}
+          />
+          <Select
+            id="dialog-select"
+            labelText="Region"
+            defaultValue="us-south"
+            style={{ marginBottom: '1rem' }}>
+            <SelectItem value="us-south" text="US South" />
+            <SelectItem value="us-east" text="US East" />
+          </Select>
+          <p>
+            Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+            autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+            assumenda ratione officia Voluptate beatae eligendi placeat nemo
+            laborum, ratione.
+          </p>
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Button
+            type="button"
+            kind="secondary"
+            onClick={closeDialog}
+            autoFocus>
+            Close
+          </Button>
+          <Button type="button" kind="primary" onClick={closeDialog}>
+            Save
+          </Button>
+        </Dialog.Footer>
+      </Dialog>
+    </div>
+  );
+};
+WithScrollingContent.args = {
+  modal: true,
+  open: true,
+};
+
 export const PassiveDialog = ({ open: _open, ...args }) => {
   const [open, setOpen] = useState(_open);
 
@@ -260,7 +384,6 @@ export const PassiveDialog = ({ open: _open, ...args }) => {
             preventCloseOnClickOutside is not set).
           </p>
         </Dialog.Body>
-        {/* No footer for passive dialog */}
       </Dialog>
     </div>
   );
