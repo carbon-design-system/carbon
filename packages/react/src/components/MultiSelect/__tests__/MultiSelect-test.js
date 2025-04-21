@@ -950,7 +950,7 @@ describe('MultiSelect', () => {
 
     const label = screen.getByText('MultiSelect Title').closest('label');
 
-    expect(label).not.toHaveAttribute('id');
+    expect(label).not.toHaveAttribute('for');
   });
 
   it('should show indeterminate state after adding new items when all items were previously selected', async () => {

@@ -608,7 +608,9 @@ const Dropdown = React.forwardRef(
       return React.isValidElement(element) ? element : null;
     }, [slug, decorator]);
 
-    const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
+    const labelProps = !isValidElement(titleText)
+      ? getLabelProps()
+      : { id: toggleButtonProps['aria-labelledby'] };
 
     return (
       <div className={wrapperClasses} {...other}>

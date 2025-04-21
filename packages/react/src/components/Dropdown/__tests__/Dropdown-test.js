@@ -472,6 +472,6 @@ describe('Test useEffect ', () => {
 
     const label = screen.getByText('Dropdown Title').closest('label');
 
-    expect(label).not.toHaveAttribute('id');
+    expect(label).not.toHaveAttribute('for');
   });
 });
