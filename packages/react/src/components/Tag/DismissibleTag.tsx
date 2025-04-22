@@ -115,7 +115,7 @@ const DismissibleTag = forwardRef(
       text,
       tagTitle,
       type,
-      dismissTooltipLabel,
+      dismissTooltipLabel = text ? `Dismiss "${text}"` : 'Dismiss',
       ...other
     }: DismissibleTagProps<T>,
     forwardRef: ForwardedRef<HTMLDivElement>
@@ -165,11 +165,7 @@ const DismissibleTag = forwardRef(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { onClick, ...otherProps } = other;
 
-    const dismissLabel = `Dismiss "${text}"`;
-
-    const dismissActionLabel = isEllipsisApplied
-      ? dismissTooltipLabel || dismissLabel
-      : title;
+    const dismissActionLabel = isEllipsisApplied ? dismissTooltipLabel : title;
 
     return (
       <Tag
