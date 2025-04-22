@@ -51,6 +51,25 @@ Default.args = {
 };
 
 Default.argTypes = {
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+  },
   ariaLabel: {
     table: {
       disable: true,
