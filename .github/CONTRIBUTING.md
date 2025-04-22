@@ -11,18 +11,7 @@ members who’ve generously contributed their time to give back.
 
 ## Code of conduct
 
-<!--
-TODO:
-- Can this section be deleted? If not, can it be simplified to just a link?
-- Should the Code of Conduct be linked from the README? Seems like everyone,
-  including contributors, should see it there before they get to the
-  contributing docs. If so, having it in the README could be another reason to
-  delete this section.
--->
-
-We value all community members and aim to foster a positive environment. Please
-review our [Code of conduct](./CODE_OF_CONDUCT.md) before engaging in any
-project spaces.
+[Code of conduct](./CODE_OF_CONDUCT.md)
 
 ## Prerequisites
 
@@ -50,45 +39,11 @@ Once these tools are installed, you're ready to contribute!
 
 #### Fork the repository
 
-<!--
-TODO: Should this entire section be simplified to just include a link to
-GitHub’s fork instructions? These steps are subject to change as GitHub updates
-its UI, as can be seen with the previous set of instructions being outdated. It
-would be more straightforward to just point to the official GitHub documentation
-rather than maintain a separate set of instructions.
-
-Also, are we expecting people that have zero experience with Git or GitHub to
-contribute to Carbon? If so, it seems like a better use of our time to point the
-user to resources on Git and GitHub, like tutorials (e.g.,
-https://github.com/firstcontributions/first-contributions,
-https://github.com/git-guides, etc.), rather than re-explain basic workflows.
--->
-
-1. Visit [Carbon’s GitHub repo](https://github.com/carbon-design-system/carbon).
-2. Click the **Fork** button in the top-right corner.
+[Forking a repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo#forking-a-repository)
 
 #### Clone your fork
 
-1. Go to https://github.com/<your_github_username>?tab=repositories (replace
-   `<your_github_username>` with your GitHub username).
-2. Click your `carbon` fork.
-3. Click the **Code** button.
-4. Click the **SSH** tab.
-5. Copy the SSH URL.
-
-In your terminal:
-
-```sh
-git clone git@github.com:<your_github_username>/carbon.git
-cd carbon
-```
-
-<!--
-TODO: If this doc is going to be linked, whats the point of everything above?
--->
-
-See [GitHub docs](https://help.github.com/articles/fork-a-repo/) for more
-details.
+[Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository#cloning-a-repository)
 
 #### Add upstream remote
 
