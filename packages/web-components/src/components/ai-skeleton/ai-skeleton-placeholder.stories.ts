@@ -28,7 +28,7 @@ export const AISkeletonPlaceholder = {
 };
 
 const meta = {
-  title: 'Components/Skeleton/AISkeleton',
+  title: 'Components/Skeleton/AI Skeleton',
 };
 
 export default meta;
