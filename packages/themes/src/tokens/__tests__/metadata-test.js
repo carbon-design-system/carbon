@@ -1234,6 +1234,18 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "content-switcher-selected",
+          "type": "color",
+        },
+        Object {
+          "name": "content-switcher-background",
+          "type": "color",
+        },
+        Object {
+          "name": "content-switcher-background-hover",
+          "type": "color",
+        },
+        Object {
           "name": "notification-background-error",
           "type": "color",
         },
