@@ -18,10 +18,17 @@ Closes #
 
 #### Testing / Reviewing
 
-{{ Add descriptions, steps or a checklist for how reviewers can verify this PR works or not }}
+{{ Add steps or a checklist for how reviewers can verify this PR works or not }}
 
-<!--
-❗ Make sure you've included everything from the PR guide:
+#### Merge Checklist
 
-https://github.com/carbon-design-system/carbon/blob/main/docs/guides/reviewing-pull-requests.md
--->
+As the author of this PR, make sure that you have:
+
+- [ ] Reviewed every line of the diff
+- [ ] Updated documentation and/or storybook examples
+- [ ] Included tests that cover this change
+- [ ] Confirmed that this code is ready for review
+
+The
+[pull request guide](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/reviewing-pull-requests.md)
+has more details for each of these items.
