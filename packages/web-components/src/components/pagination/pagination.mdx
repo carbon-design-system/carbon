@@ -1,58 +1,46 @@
-import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as PaginationStories from './pagination.stories';
 
 <Meta of={PaginationStories} />
 
 # Pagination
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/pagination)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/pagination)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/pagination/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/pagination/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/pagination)
+## Table of Contents
 
-The pagination component is used to switch through multiple pages of items, when
-only a maximum number of items can be displayed per page. Can be used in
-combination with other components like data table.
+- [Overview](#overview)
+- [Multiple pagination components](#multiple-pagination-components)
+- [Pagination with custom page sizes label](#pagination-with-custom-page-sizes-label)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+<Canvas of={PaginationStories.Default} />
 
-### JS (via import)
+## Multiple pagination components
 
-```javascript
-import '@carbon/web-components/es/components/pagination/index.js';
-```
+<Canvas of={PaginationStories.MultiplePaginationComponents} />
 
-<Markdown>{`${cdnJs({ components: ['pagination'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+## Pagination with custom page sizes label
 
-### HTML
+<Canvas of={PaginationStories.PaginationWithCustomPageSizesLabel} />
 
-```html
-<cds-pagination page-size="10" total-items="100">
-  <cds-select-item value="10">10</cds-select-item>
-  <cds-select-item value="20">20</cds-select-item>
-  <cds-select-item value="30">30</cds-select-item>
-  <cds-select-item value="40">40</cds-select-item>
-  <cds-select-item value="50">50</cds-select-item>
-</cds-pagination>
-```
-
-## `<cds-pagination>` attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-pagination at-last-page>`) and `false` means not setting the attribute
-(e.g. `<cds-pagination>` without `at-last-page` attribute).
+## Component API
 
 <ArgTypes of="cds-pagination" />
 
-## `<cds-pages-select>` attributes, properties and events
+<Markdown>{`${cdnJs({ components: ['pagination'] })}`}</Markdown>
 
-<ArgTypes of="cds-pages-select" />
+## Feedback
 
-## `<cds-page-sizes-select>` attributes, properties and events
-
-<ArgTypes of="cds-page-sizes-select" />
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/pagination/pagination.mdx).

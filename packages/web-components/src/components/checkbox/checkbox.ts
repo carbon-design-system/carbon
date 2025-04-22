@@ -108,7 +108,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
    * Specify a custom id for the checkbox
    */
   @property({ reflect: true })
-  id = '';
+  id = 'checkbox';
 
   /**
    * Specify whether the Checkbox is in an indeterminate state
@@ -267,7 +267,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         @change="${handleChange}"
         @click="${handleClick}" />
       <label
-        for="checkbox"
+        for="${ifDefined(id)}"
         part="label"
         class="${labelClasses}"
         title="${ifDefined(title)}">

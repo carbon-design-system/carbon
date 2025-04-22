@@ -1,89 +1,179 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as DropdownStories from './dropdown.stories';
 
 <Meta of={DropdownStories} />
 
 # Dropdown
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/dropdown)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/dropdown)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/dropdown/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/dropdown/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/dropdown)
+## Table of Contents
 
-Dropdown presents a list of options that can be used to filter or sort existing
-content.
+- [Overview](#overview)
+  - [Inline dropdown](#inline-dropdown)
+  - [Skeleton state](#skeleton-state)
+  - [AI label](#ai-label)
+- [Component API](#component-api)
+  - [Dropdown `direction`](#dropdown-direction)
+  - [Dropdown `value`](#dropdown-value)
+  - [Dropdown `size`](#dropdown-size)
+  - [Dropdown `label`](#dropdown-label)
+  - [Dropdown `type`](#dropdown-type)
+- [CDN](#cdn)
+- [References](#references)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+Dropdowns present a list of options from which a user can select one option, or
+several. A selected option can represent a value in a form, or can be used as an
+action to filter or sort existing content.
 
-### JS (via import)
+<Canvas of={DropdownStories.Default} />
 
-```javascript
-import '@carbon/web-components/es/components/dropdown/index.js';
-```
+### Inline Dropdown
 
-<Markdown>{`${cdnJs({ components: ['dropdown'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-dropdown value="bar">
-  <cds-dropdown-item value="foo">Foo</cds-dropdown-item>
-  <cds-dropdown-item value="bar">Bar</cds-dropdown-item>
-  <cds-dropdown-item value="baz">Baz</cds-dropdown-item>
-</cds-dropdown>
-```
-
-## Selection
-
-When user attempts to select a dropdown item, `cds-dropdown-beingselected` event
-fires on `<cds-dropdown>`, which has the following properties in the event
-details:
-
-| Property | Description                               |
-| -------- | ----------------------------------------- |
-| `item`   | The `<cds-dropdown-item>` being selected. |
-
-`cds-dropdown-beingselected` bubbles and is cancelable. Canceling this event
-means canceling change in selection.
-
-## Inline dropdown
-
-You can place a `cds-dropdown` inline with other content by using the inline
+You can place a `cds-dropdown` inline with other content by using the `inline`
 variant
 
-```html
-<cds-dropdown type="inline">
-  <cds-dropdown-item value="foo">Foo</cds-dropdown-item>
-  <cds-dropdown-item value="bar">Bar</cds-dropdown-item>
-  <cds-dropdown-item value="baz">Baz</cds-dropdown-item>
-</cds-dropdown>
-```
+<Canvas of={DropdownStories.Inline} />
 
-## Skeleton
+### Skeleton state
 
-For the skeleton variation, utilize `<cds-dropdown-skeleton>`.
+You can use the `cds-dropdown-skeleton` component to render a skeleton variant
+of a dropdown. This is useful to display on initial page load or when data needs
+to be fetched from an external API.
 
-```html
-<cds-dropdown-skeleton></cds-dropdown-skeleton>
-```
+<Canvas of={DropdownStories.Skeleton} />
 
-## `<cds-dropdown>` attributes, properties and events
+### AI label
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-dropdown open>`) and `false` means not setting the attribute (e.g.
-`<cds-dropdown>` without `open` attribute).
+<Canvas of={DropdownStories.WithAILabel} />
+
+## Component API
+
+## `cds-dropdown`
 
 <ArgTypes of="cds-dropdown" />
 
-## `<cds-dropdown-item>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-dropdown-item disabled>`) and `false` means not setting the attribute
-(e.g. `<cds-dropdown-item>` without `disabled` attribute).
+## `cds-dropdown-item`
 
 <ArgTypes of="cds-dropdown-item" />
+
+### Dropdown `direction`
+
+When a dropdown is near the bottom of a page, you may want to render the menu to
+the top of the screen. To do this, specify `direction="top"`
+
+<cds-dropdown direction="top" label="Select an option...">
+  <cds-dropdown-item value="0">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="1">Option 2</cds-dropdown-item>
+  <cds-dropdown-item value="2">Option 3</cds-dropdown-item>
+</cds-dropdown>
+
+```html
+<cds-dropdown direction="top" label="Select an option...">
+  <cds-dropdown-item value="0">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="1">Option 2</cds-dropdown-item>
+  <cds-dropdown-item value="2">Option 3</cds-dropdown-item>
+</cds-dropdown>
+```
+
+### Dropdown `value`
+
+If you want the dropdown to render with an option already selected, but do not
+want to fully control the component, you can set the dropdown `value` to the
+option you want selected.
+
+<cds-dropdown value="option-0">
+  <cds-dropdown-item value="option-0">Initially selected</cds-dropdown-item>
+  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+</cds-dropdown>
+
+```html
+<cds-dropdown value="option-0">
+  <cds-dropdown-item value="option-0">Initially selected</cds-dropdown-item>
+  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+</cds-dropdown>
+```
+
+### Dropdown `size`
+
+There are three sizes of dropdown available: `sm`, `md` (the default), and `lg`.
+
+<cds-dropdown label="Small [sm]" size="sm" title-text="Dropdown label">
+  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+</cds-dropdown>
+<br />
+<cds-dropdown label="Medium [md]" size="md" title-text="Dropdown label">
+  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+</cds-dropdown>
+<br />
+<cds-dropdown label="Large [lg]" size="lg" title-text="Dropdown label">
+  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+</cds-dropdown>
+
+```html
+<cds-dropdown label="Dropdown label" size="sm" title-text="Small [sm]">
+  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+</cds-dropdown>
+<cds-dropdown label="Dropdown label" size="md" title-text="Medium [md]">
+  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+</cds-dropdown>
+<cds-dropdown label="Dropdown label" size="lg" title-text="Large [lg]">
+  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+</cds-dropdown>
+```
+
+### Dropdown `label`
+
+This is the text that will be used as a label for the dropdown.
+
+```html
+<cds-dropdown label="Dropdown label" size="sm" title-text="Small [sm]">
+  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+</cds-dropdown>
+```
+
+### Dropdown `type`
+
+Sometimes you will need to place a dropdown inline with other content. To do
+that, add `type="inline"` to the dropdown.
+
+<cds-dropdown type="inline" label="Inline" title-text="Dropdown label">
+  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+</cds-dropdown>
+
+```html
+<cds-dropdown type="inline" label="Inline" title-text="Dropdown label">
+  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+</cds-dropdown>
+```
+
+<Markdown>{`${cdnJs({ components: ['dropdown'] })}`}</Markdown>
+
+## References
+
+- [Carbon Usage Guidelines](https://www.carbondesignsystem.com/components/dropdown/usage/)
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/dropdown/dropdown.mdx).

@@ -32,6 +32,7 @@ import React, {
   ReactElement,
   useLayoutEffect,
   useMemo,
+  forwardRef,
 } from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import {
@@ -312,7 +313,7 @@ export interface FilterableMultiSelectProps<ItemType>
   warnText?: ReactNode;
 }
 
-const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
+export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   ItemType,
 >(
   {
@@ -1009,13 +1010,14 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
     </div>
   );
 }) as {
-  <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement;
+  <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement<any>;
   propTypes?: any;
   contextTypes?: any;
   defaultProps?: any;
   displayName?: any;
 };
 
+FilterableMultiSelect.displayName = 'FilterableMultiSelect';
 FilterableMultiSelect.propTypes = {
   /**
    * Deprecated, aria-label is no longer needed
@@ -1213,5 +1215,3 @@ FilterableMultiSelect.propTypes = {
    */
   warnText: PropTypes.node,
 };
-
-export default FilterableMultiSelect;
