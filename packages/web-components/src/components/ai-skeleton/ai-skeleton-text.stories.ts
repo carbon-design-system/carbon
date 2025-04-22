@@ -34,7 +34,7 @@ const argTypes = {
   },
 };
 
-export const Default = {
+export const AISkeletonText = {
   // This story doesn't accept any args.
   args: {},
   argTypes: {},
@@ -68,7 +68,7 @@ export const Playground = {
 };
 
 const meta = {
-  title: 'Experimental/AISkeleton/AISkeletonText',
+  title: 'Components/Skeleton/AISkeleton',
 };
 
 export default meta;

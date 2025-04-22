@@ -8,7 +8,7 @@
 import { html } from 'lit';
 import './ai-skeleton-placeholder';
 
-export const Default = {
+export const AISkeletonPlaceholder = {
   // This story doesn't accept any args.
   args: {},
   argTypes: {},
@@ -24,7 +24,7 @@ export const Default = {
 };
 
 const meta = {
-  title: 'Experimental/AISkeleton/AISkeletonPlaceholder',
+  title: 'Components/Skeleton/AISkeleton',
 };
 
 export default meta;

@@ -8,7 +8,7 @@
 import { html } from 'lit';
 import './ai-skeleton-icon';
 
-export const Default = {
+export const AISkeletonIcon = {
   // This story doesn't accept any args.
   args: {},
   argTypes: {},
@@ -26,7 +26,7 @@ export const Default = {
 };
 
 const meta = {
-  title: 'Experimental/AISkeleton/AISkeletonIcon',
+  title: 'Components/Skeleton/AISkeleton',
 };
 
 export default meta;
