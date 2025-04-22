@@ -87,7 +87,7 @@ export default defineConfig([
       'packages/cli/src/component/templates/**',
 
       // Generated files.
-      'packages/feature-flags/src/generated',
+      '**/generated/',
       'config/typescript-config-carbon/index.js',
 
       // TODO: Delete these ignores.

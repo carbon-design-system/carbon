@@ -19,8 +19,6 @@ css
 # Caches
 .cache
 .eslintcache
-# TODO: Where is Parcel used?
-.parcel-cache
 
 # Logs
 logs
