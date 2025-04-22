@@ -17,6 +17,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 /**
  * Skeleton of tag.
+ *
+ * @element cds-tag-skeleton
  */
 @customElement(`${prefix}-tag-skeleton`)
 export default class CDSTagSkeleton extends LitElement {

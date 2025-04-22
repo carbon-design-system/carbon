@@ -23,7 +23,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 export { TAG_SIZE, TAG_TYPE };
 
 /**
- * Tag.
+ * Dismissible Tag.
+ *
+ * @element cds-dismissible-tag
  *
  * @fires cds-dismissible-tag-beingclosed - The custom event fired as the element is being closed
  * @fires cds-dismissible-tag-closed - The custom event fired after the element has been closed
