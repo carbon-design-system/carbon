@@ -1,10 +1,11 @@
 {
   "name": "@carbon/feature-flags",
   "description": "Build with feature flags in Carbon",
-  "version": "0.25.0",
+  "version": "0.26.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "sass": "index.scss",
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/carbon.git",

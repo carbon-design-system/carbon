@@ -3,7 +3,6 @@ categories:
     members:
       - cloud--download
       - cloud--upload
-      - coupon
       - crop
       - delete
       - do-not
@@ -42,8 +41,19 @@ categories:
       - ai--robustness
       - ai--transparency
       - ai--trust
+      - code--conversion
+      - code--generation--chat
+      - code--generation--inline
+      - code--generation
+      - code--reverse-engineering
+      - data--scientist
       - decision-velocity
+      - ensure-data-quality
       - foundation-model
+      - generate--ai
+      - generate--code
+      - governance
+      - hard--prompt
       - ibm--granite
       - intelligence
       - machine--learning--01
@@ -53,8 +63,12 @@ categories:
       - machine--learning--05
       - machine--learning--06
       - machine--learning--model
+      - multi-model
+      - prompt
+      - spyre-accelerator
       - technical-owner
       - telum-ii-chip
+      - telum-ii-processor
   - name: Blockchain
     members:
       - connected--ecosystem
@@ -77,6 +91,7 @@ categories:
       - escalator--up
       - fire--alarm
       - fire--extinguisher
+      - fire--hose
       - id--badge
       - intelligent-infrastructure
       - no--smoking
@@ -91,6 +106,8 @@ categories:
   - name: Cities
     members:
       - amsterdam--canal
+      - ahmedabad--jama-masjid
+      - ahmedabad--sabarmati-ashram
       - amsterdam--farm
       - amsterdam--windmill
       - argentina--obelisk
@@ -122,6 +139,8 @@ categories:
       - colombia--cathedral-of-las-lajas
       - copenhagen--planetarium
       - copenhagen--snekkja
+      - dallas--reunion-tower
+      - dallas--skyline
       - dubai--palm-islands
       - dubai--skyscraper
       - dublin--brewery
@@ -129,6 +148,8 @@ categories:
       - ecuador--quito
       - ehningen--tech-campus-01
       - ehningen--tech-campus-02
+      - geodesic-montreal-biosphere
+      - guadalajara--seal
       - hamburg--philharmone
       - hong-kong--cityscape
       - hong-kong
@@ -142,11 +163,13 @@ categories:
       - madrid--cathedral
       - madrid--skyscrapers
       - madrid--statue
+      - mcgill-university--morrice-hall
       - melbourne
       - mexico-city--angel-of-independence
       - mexico-city--museo-soumaya
       - milan--duomo-di-milano
       - milan--skyscrapers
+      - montreal--olympic-stadium
       - moscow
       - mumbai
       - munich
@@ -605,9 +628,13 @@ categories:
       - ibm--z-and-linuxone-single-frame
       - ibm--z-and-linuxone-multi-frame
       - ibm--z16
-      - ibm--z16--single-frame
-      - ibm--z16--multi-frame
       - ibm--z16--plus-cloud
+      - ibm--z16--multi-frame
+      - ibm--z16--single-frame
+      - ibm--z17
+      - ibm--z17--multi-frame
+      - ibm--z17--plus-cloud
+      - ibm--z17--single-frame
       - infrastructure-security
       - it--infrastructure-software
       - mainframe-qualities-of-service
@@ -623,15 +650,18 @@ categories:
       - storage--product
       - storage--systems
       - tape--storage
+      - tape--storage--02
       - virtualization
       - zero-trust
   - name: Design and development
     members:
+      - agile--coaching
       - app--developer
       - application
       - art--tools--01
       - code--explanation
       - colors
+      - composer-edit
       - content--design
       - design-and-development--01
       - design-and-development--02
@@ -643,16 +673,22 @@ categories:
       - idea
       - ideate
       - inner-source
+      - landing-page
       - motion
       - organization
+      - outcome-focused
       - overview
       - path
       - pattern
+      - pilot-test
+      - resourceful
+      - social--tile
       - universal-experiences
       - user--experience-design
       - user--insights
       - user--interface
       - visual--design
+      - web--banners
       - web--developer
       - windows
   - name: Device interaction
@@ -776,6 +812,7 @@ categories:
       - dropper
       - eyewash--station
       - first--aid
+      - gastro-health
       - health
       - heart--health
       - hospital
@@ -789,9 +826,10 @@ categories:
       - pills
       - pregnant
       - prescription
-      - stethoscope
+      - social--distancing
       - social--work--01
       - social--work--02
+      - stethoscope
       - telemedicine
       - telemedicine--mobile
       - x-ray--01
@@ -902,6 +940,7 @@ categories:
       - candy
       - cherries
       - cookie
+      - crosshairs
       - cupcake
       - dining
       - hard--ice--cream
@@ -936,6 +975,7 @@ categories:
       - tennis--net
       - tennis--racquet
       - tree
+      - tree--02
       - waving-hand
       - wedding--cake
       - whistle
@@ -1034,6 +1074,7 @@ categories:
       - renew--team
       - resilience--02
       - sap--successfactors
+      - sponsor-user-program
       - team--alignment
       - teammates
       - transparency-and-trust--01
@@ -1045,6 +1086,7 @@ categories:
   - name: Quantum
     members:
       - albatross
+      - bloch-sphere
       - canary
       - condor
       - eagle
@@ -1086,15 +1128,19 @@ categories:
       - clothes--rack--01
       - clothes--rack--02
       - coat--hanger
+      - coupon
       - credit--card
       - customer--service
       - gift
+      - mobile--pos--01
+      - mobile--pos--02
       - price
       - qr-code
       - receipt
       - retail--sustainable
       - secure--search
       - select--product
+      - sell
       - shirt
       - shop
       - shopping--cart
@@ -1125,6 +1171,9 @@ categories:
       - govern--users--and--identities
       - high--risk--users
       - identity--trust--assessment
+      - key--lifecycle
+      - keystores
+      - keystores--external
       - lock--01
       - lock--02
       - locked--network--01
@@ -1149,6 +1198,7 @@ categories:
       - unify--endpoint--management
       - unlock--01
       - unlock--02
+      - vault
   - name: Status
     members:
       - question
@@ -1194,6 +1244,7 @@ categories:
       - esg-reporting--02
       - green-it--01
       - green-it--02
+      - incident-reporter
       - sustainability--02
       - sustainability--03
       - sustainability--04
@@ -1211,6 +1262,18 @@ categories:
       - cics--vsam-recovery-for-z-os
       - cics--vsam-transparency-for-z-os
       - developer-z-os
+      - ibm--elm
+      - ibm--elm-dcc
+      - ibm--elm-gcm
+      - ibm--elm-insights
+      - ibm--elm-method-composer
+      - ibm--elm-publishing
+      - ibm--elm-reporting
+      - ibm--engineering-requirement-doors
+      - ibm--engineering-systems-design-rhapsody--model-manager
+      - ibm--engineering-systems-design-rhapsody
+      - ibm--engineering-test-management
+      - ibm--engineering-workflow-management
       - ibm--z-open-automation-utilities
       - systems-devops--analyze
       - systems-devops--build
@@ -1222,6 +1285,7 @@ categories:
       - systems-devops--provision
       - systems-devops--release
       - systems-devops--test
+      - transaction-data
   - name: Third-party logos
     members:
       - slack
@@ -1241,6 +1305,7 @@ categories:
       - automobile
       - bicycle
       - bus
+      - destination
       - electric--car
       - electric--charge
       - engine
@@ -1327,10 +1392,12 @@ categories:
       - windy
   - name: Workplace
     members:
+      - accessibility
       - bento-box-tray
       - beverage-carton
       - briefcase
       - cardboard
+      - compost
       - do-not-step
       - fountain--drinking
       - glass-bottle
@@ -1341,6 +1408,8 @@ categories:
       - lockers
       - loop--hearing
       - metal-can
+      - no--parking
+      - parking
       - plastic-bottle
       - plastics
       - silence

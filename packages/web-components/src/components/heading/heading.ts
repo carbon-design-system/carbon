@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { html, LitElement } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
@@ -33,9 +40,13 @@ class CDSSection extends LitElement {
   }
 }
 
+/**
+ * The heading component
+ *
+ * @element cds-heading
+ */
 @customElement(`${prefix}-heading`)
 class CDSHeading extends LitElement {
-  static styles = styles;
   private level: HeadingLevel = 1;
 
   connectedCallback() {
@@ -53,6 +64,8 @@ class CDSHeading extends LitElement {
 
     return html`${unsafeHTML(headingElement)}`;
   }
+
+  static styles = styles;
 }
 
 export default CDSHeading;

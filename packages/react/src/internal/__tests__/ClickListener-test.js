@@ -55,19 +55,23 @@ describe('ClickListener', () => {
     });
 
     it('should not overwrite any children function refs', () => {
-      const mockRef = jest.fn();
+      const mockRef = React.createRef();
+      const handleRefSpy = jest.spyOn(ClickListener.prototype, 'handleRef');
+
       class Child extends React.Component {
         render() {
           return <div />;
         }
       }
+
       render(
         <ClickListener onClickOutside={onClickOutside}>
           <Child ref={mockRef} />
         </ClickListener>
       );
+
       expect(handleRefSpy).toHaveBeenCalledTimes(1);
-      expect(mockRef).toHaveBeenCalledTimes(1);
+      expect(mockRef.current).not.toBeNull();
     });
   });
 });

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -35,7 +35,7 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * The ref of the containing element, used for positioning and alignment of the menu
    */
-  containerRef?: RefObject<HTMLDivElement>;
+  containerRef?: RefObject<HTMLDivElement | null>;
   /**
    * A collection of MenuItems to be rendered within this Menu.
    */
@@ -149,7 +149,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }, [childState, childDispatch]);
 
   const menu = useRef<HTMLUListElement>(null);
-  const ref = useMergedRefs<HTMLUListElement>([forwardRef, menu]);
+  const ref = useMergedRefs([forwardRef, menu]);
 
   const [position, setPosition] = useState([-1, -1]);
   const focusableItems = childContext.state.items.filter(
@@ -200,14 +200,8 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
   }
 
-  function handleClose(e: Pick<React.KeyboardEvent<HTMLUListElement>, 'type'>) {
-    if (/^key/.test(e.type)) {
-      window.addEventListener('keyup', returnFocus, { once: true });
-    } else if (e.type === 'click' && menu.current) {
-      menu.current.addEventListener('focusout', returnFocus, { once: true });
-    } else {
-      returnFocus();
-    }
+  function handleClose() {
+    returnFocus();
 
     if (onClose) {
       onClose();
@@ -223,7 +217,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       (match(e, keys.Escape) || (!isRoot && match(e, keys.ArrowLeft))) &&
       onClose
     ) {
-      handleClose(e);
+      handleClose();
     } else {
       focusItem(e);
     }
@@ -264,7 +258,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
   function handleBlur(e: React.FocusEvent<HTMLUListElement>) {
     if (open && onClose && isRoot && !menu.current?.contains(e.relatedTarget)) {
-      handleClose(e);
+      handleClose();
     }
   }
 

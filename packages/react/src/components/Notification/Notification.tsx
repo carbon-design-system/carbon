@@ -416,7 +416,7 @@ export function ToastNotification({
     [`${prefix}--toast-notification--${kind}`]: kind,
   });
 
-  const contentRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   useNoInteractiveChildren(contentRef);
 
   const handleClose = (evt) => {
@@ -1310,7 +1310,7 @@ export function Callout({
     [`${prefix}--actionable-notification--hide-close-button`]: true,
   });
 
-  const childrenContainer = useRef(null);
+  const childrenContainer = useRef<HTMLDivElement>(null);
   useInteractiveChildrenNeedDescription(
     childrenContainer,
     `interactive child node(s) should have an \`aria-describedby\` property with a value matching the value of \`titleId\``

@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -26,7 +24,7 @@ export type LayerLevel = 0 | 1 | 2;
  *
  * @element cds-layer
  * @fires cds-use-layer
- *   The name of the custom event fired when the "use layer" action occurs.
+ *   The custom event that returns the layer level and the layer element.
  * @slot children - The elements contained within the component.
  */
 @customElement(`${prefix}-layer`)
