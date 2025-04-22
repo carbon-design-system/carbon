@@ -43,6 +43,7 @@ Or if you're just using a bundler:
 Or anything else not listed above:
 
 - [Webpack with Sass](https://webpack.js.org/loaders/sass-loader/)
+- [Vite with Sass](https://vite.dev/guide/features.html#css-modules)
 - [Create React App with Sass](https://create-react-app.dev/docs/adding-a-sass-stylesheet/)
 - [Snowpack with Sass](https://www.snowpack.dev/guides/sass/)
 
