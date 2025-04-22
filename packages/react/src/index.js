@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -63,13 +63,20 @@ export {
   ErrorBoundaryContext,
 } from './components/ErrorBoundary';
 export {
+  FeatureFlags,
+  useFeatureFlag,
+  useFeatureFlags,
+  FeatureFlags as unstable_FeatureFlags, // this export can be removed in v12
+  useFeatureFlag as unstable_useFeatureFlag, // this export can be removed in v12
+  useFeatureFlags as unstable_useFeatureFlags, // this export can be removed in v12
+} from './components/FeatureFlags';
+export {
   FileUploader,
   Filename,
   FileUploaderButton,
   FileUploaderDropContainer,
   FileUploaderItem,
 } from './components/FileUploader';
-export { FilterableMultiSelect } from './components/FilterableMultiSelect';
 export { Form } from './components/Form';
 export { FluidForm } from './components/FluidForm';
 export { FormGroup } from './components/FormGroup';
@@ -99,7 +106,7 @@ export {
 export { MenuButton } from './components/MenuButton';
 export { Modal } from './components/Modal';
 export { ModalWrapper } from './components/ModalWrapper';
-export { MultiSelect } from './components/MultiSelect';
+export { FilterableMultiSelect, MultiSelect } from './components/MultiSelect';
 export {
   ActionableNotification,
   ToastNotification,
@@ -114,6 +121,7 @@ export { NumberInput, NumberInputSkeleton } from './components/NumberInput';
 export { OrderedList } from './components/OrderedList';
 export { OverflowMenu } from './components/OverflowMenu';
 export { OverflowMenuItem } from './components/OverflowMenuItem';
+export * as unstable__PageHeader from './components/PageHeader';
 export { Pagination } from './components/Pagination';
 export { PaginationNav } from './components/PaginationNav';
 export {
@@ -234,11 +242,6 @@ export {
 } from './components/UIShell';
 
 // Experimental
-export {
-  FeatureFlags as unstable_FeatureFlags,
-  useFeatureFlag as unstable_useFeatureFlag,
-  useFeatureFlags as unstable_useFeatureFlags,
-} from './components/FeatureFlags';
 export {
   FluidComboBox as unstable__FluidComboBox,
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,

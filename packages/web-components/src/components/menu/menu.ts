@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -95,7 +93,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   /**
    * Open value for the menu .
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   open = true;
   /**
    * Active element in the DOM .
@@ -389,7 +387,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       this._fitValue(ranges.y as number[], 'y') ?? -1,
     ];
   };
-  _handleOpen = () => {
+  _handleOpen = async () => {
     const pos = this._calculatePosition();
     if (this.isRtl) {
       this.style.insetInlineStart = `initial`;
@@ -400,6 +398,10 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     }
     this.style.insetBlockStart = `${pos[1]}px`;
     this.position = pos;
+
+    await this.updateComplete;
+    this._registerMenuItems();
+    this._setActiveItems();
 
     const init = {
       bubbles: true,
@@ -481,9 +483,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
             ?.assignedElements();
           slotElements?.map((el) => {
             activeItem = {
-              item: el.shadowRoot?.querySelector(
-                `${prefix}-menu-item`
-              ) as CDSmenuItem,
+              item: el as CDSmenuItem,
               parent: el as HTMLElement,
             };
             this.activeitems = [...this.activeitems, activeItem];

@@ -7,6 +7,7 @@
 
 import React, {
   cloneElement,
+  JSXElementConstructor,
   useCallback,
   useContext,
   useEffect,
@@ -260,7 +261,7 @@ export const FloatingMenu = ({
 
       if (!menuBody) {
         warning(
-          menuBody,
+          !!menuBody,
           'The DOM node for menu body for calculating its position is not available. Skipping...'
         );
 
@@ -356,7 +357,7 @@ export const FloatingMenu = ({
 
     focusTarget.focus();
 
-    if (focusTarget === menuBody && __DEV__) {
+    if (focusTarget === menuBody) {
       warning(
         focusableNode === null,
         'Floating Menus must have at least a programmatically focusable child. This can be accomplished by adding tabIndex="-1" to the content element.'
@@ -437,8 +438,11 @@ export const FloatingMenu = ({
           visibility: 'hidden',
           top: '0px',
         };
-
-    return cloneElement(children, {
+    const child = children as ReactElement<
+      any,
+      string | JSXElementConstructor<any>
+    >;
+    return cloneElement(child, {
       ref: handleMenuRef,
       style: {
         ...styles,

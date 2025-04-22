@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -51,9 +49,6 @@ export const CustomLevel = {
     <cds-layer level="${level}">
       <div class="example-layer-test-component">Test component</div>
     </cds-layer>
-    <style>
-      ${styles}
-    </style>
   `,
 };
 
