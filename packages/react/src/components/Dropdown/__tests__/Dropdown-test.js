@@ -459,19 +459,34 @@ describe('Test useEffect ', () => {
     assertMenuClosed();
   });
 
-  it('should add label props when `titleText` is a string', () => {
+  it('should add certain label props when `titleText` is a string', () => {
     render(<Dropdown {...mockProps} titleText="Dropdown Title" />);
 
     const label = screen.getByText('Dropdown Title').closest('label');
+    const attributes = Array.from(label.attributes).reduce(
+      (acc, { name, value }) => ({ ...acc, [name]: value }),
+      {}
+    );
 
-    expect(label).toHaveAttribute('id');
+    expect(attributes).toEqual({
+      class: 'cds--label',
+      for: 'downshift-:r2d:-toggle-button',
+      id: 'downshift-:r2d:-label',
+    });
   });
 
-  it('should not add label props when `titleText` is an element', () => {
+  it('should add certain label props when `titleText` is an element', () => {
     render(<Dropdown {...mockProps} titleText={<span>Dropdown Title</span>} />);
 
     const label = screen.getByText('Dropdown Title').closest('label');
+    const attributes = Array.from(label.attributes).reduce(
+      (acc, { name, value }) => ({ ...acc, [name]: value }),
+      {}
+    );
 
-    expect(label).not.toHaveAttribute('id');
+    expect(attributes).toEqual({
+      class: 'cds--label',
+      id: 'downshift-:r2g:-label',
+    });
   });
 });
