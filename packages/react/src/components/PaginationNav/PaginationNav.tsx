@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { TranslateWithId } from '../../types/common';
 import { breakpoints } from '@carbon/layout';
 import { useMatchMedia } from '../../internal/useMatchMedia';
+import { clamp } from '../../internal/clamp';
 
 const translationIds = {
   'carbon.pagination-nav.next': 'Next',
@@ -350,7 +351,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
         numberOfPages = itemsShown === 4 ? itemsShown : 5;
         break;
       case 'sm':
-        numberOfPages = Math.max(4, Math.min(itemsShown, 7));
+        numberOfPages = clamp(itemsShown, 4, 7);
         break;
 
       default:

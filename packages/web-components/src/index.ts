@@ -170,3 +170,4 @@ export { default as CDSTimePickerSelect } from './components/time-picker/time-pi
 export { default as CDSTreeView } from './components/tree-view/tree-view';
 export { default as CDSTreeNode } from './components/tree-view/tree-node';
 export { default as CDSHeading } from './components/heading/heading';
+export { default as CDSMenuButton } from './components/menu-button/menu-button';
