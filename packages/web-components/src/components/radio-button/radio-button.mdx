@@ -1,70 +1,64 @@
-import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as RadioButtonStories from './radio-button.stories';
 
 <Meta of={RadioButtonStories} />
 
 # Radio button
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/radio-button)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/radio-button)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/radio-button/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/radio-button/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/radio-button)
+## Table of Contents
 
-Radio buttons are used when a list of two or more options are mutually
-exclusive, meaning the user must select only one option.
+- [Overview](#overview)
+- [Vertical](#vertical)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+Radio buttons represent a group of mutually exclusive choices, compared to
+checkboxes that allow users to make one or more selections from a group. In use
+cases where only one selection from a group is allowed, use the radio button
+component instead of the checkbox. Though the `cds-radio-button` components may
+be rendered individually, it is recommended they be rendered as children
+components of the `cds-radio-button-group` parent component to maintain their
+proper controlled states.
 
-### JS (via import)
+<Canvas of={RadioButtonStories.Default} />
 
-```javascript
-import '@carbon/web-components/es/components/radio-button/index.js';
-```
+## Vertical
 
-<Markdown>{`${cdnJs({ components: ['radio-button'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-radio-button-group
-  label-position="right"
-  orientation="horizontal"
-  name="radio-group">
-  <cds-radio-button label-text="Radio button" value="all"></cds-radio-button>
-  <cds-radio-button
-    label-text="Radio button"
-    value="cloudFoundry"></cds-radio-button>
-  <cds-radio-button
-    label-text="Radio button"
-    value="staging"></cds-radio-button>
-</cds-radio-button-group>
-```
+<Canvas of={RadioButtonStories.Vertical} />
 
 ## Skeleton
 
-For the skeleton variation, utilize `<cds-radio-button-skeleton>`.
+<Canvas of={RadioButtonStories.Skeleton} />
 
-```html
-<cds-radio-button-skeleton></cds-radio-button-skeleton>
-```
+## AI Label
 
-## `<cds-radio-button-group>` attributes, properties and events
+<Canvas of={RadioButtonStories.WithAILabel} />
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-radio-button-group disabled>`) and `false` means not setting the attribute
-(e.g. `<cds-radio-button-group>` without `disabled` attribute).
+## Component API
 
-<ArgTypes of="cds-radio-button-group" />
+## `cds-radio-button`
 
-## `<cds-radio-button-group>` attributes, properties and events
+<ArgTypes of="cds-radio-button" />
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-radio-button-group disabled>`) and `false` means not setting the attribute
-(e.g. `<cds-radio-button-group>` without `disabled` attribute).
+## `cds-radio-button-group`
 
 <ArgTypes of="cds-radio-button-group" />
+
+<Markdown>{`${cdnJs({ components: ['radio-button'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/radio-button/radio-button.mdx).
