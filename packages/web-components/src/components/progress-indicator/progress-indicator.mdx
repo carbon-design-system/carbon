@@ -1,89 +1,52 @@
-import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as ProgressIndicatorStories from './progress-indicator.stories';
 
 <Meta of={ProgressIndicatorStories} />
 
 # Progress indicator
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/progress-indicator)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/progress-indicator)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/progress-indicator/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/progress-indicator/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/progress-indicator)
+## Table of Contents
 
-Progress indicator is a visual representation of a users progress through a set
-of steps. They guide the user through a number of steps in order to complete a
-specified process.
+- [Overview](#overview)
+- [Interactive](#interactive)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-Use progress indicators to keep the user on track when completing a specific
-task. By dividing the end goal into smaller, sub-tasks, it increases the
-percentage of completeness as each task is completed.
+## Overview
 
-## Getting started
+<Canvas of={ProgressIndicatorStories.Default} />
 
-Here's a quick example to get you started.
+## Interactive
 
-### JS (via import)
-
-```javascript
-import '@carbon/web-components/es/components/progress-indicator/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['progress-indicator'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-progress-indicator>
-  <cds-progress-step
-    label-text="Label"
-    secondary-label-text="Secondary label"
-    state="invalid"></cds-progress-step>
-  <cds-progress-step
-    label-text="Label"
-    secondary-label-text="Secondary label"
-    state="complete"></cds-progress-step>
-  <cds-progress-step
-    label-text="Label"
-    secondary-label-text="Secondary label"
-    state="current"></cds-progress-step>
-  <cds-progress-step
-    disabled
-    label-text="Label"
-    secondary-label-text="Secondary label"></cds-progress-step>
-  <cds-progress-step
-    label-text="Label"
-    secondary-label-text="Secondary label"></cds-progress-step>
-</cds-progress-indicator>
-```
+<Canvas of={ProgressIndicatorStories.Interactive} />
 
 ## Skeleton
 
-For the skeleton variation, utilize `<cds-progress-indicator-skeleton>` and
-`<cds-progress-step-skeleton>`.
+<Canvas of={ProgressIndicatorStories.Skeleton} />
 
-```html
-<cds-progress-indicator-skeleton>
-  <cds-progress-step-skeleton></cds-progress-step-skeleton>
-  <cds-progress-step-skeleton></cds-progress-step-skeleton>
-  <cds-progress-step-skeleton></cds-progress-step-skeleton>
-</cds-progress-indicator-skeleton>
-```
+## Component API
 
-## `<cds-progress-indicator>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-progress-indicator vertical>`) and `false` means not setting the attribute
-(e.g. `<cds-progress-indicator>` without `vertical` attribute).
+## `cds-progress-indicator`
 
 <ArgTypes of="cds-progress-indicator" />
 
-## `<cds-progress-step>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-progress-step disabled>`) and `false` means not setting the attribute
-(e.g. `<cds-progress-step>` without `disabled` attribute).
+## `cds-progress-step`
 
 <ArgTypes of="cds-progress-step" />
+
+<Markdown>{`${cdnJs({ components: ['progress-indicator'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/progress-indicator/progress-indicator.mdx).
