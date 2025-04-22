@@ -7,12 +7,16 @@
 
 import { html } from 'lit';
 import './ai-skeleton-icon';
+import mdx from './ai-skeleton.mdx';
 
 export const AISkeletonIcon = {
   // This story doesn't accept any args.
   args: {},
   argTypes: {},
   parameters: {
+    docs: {
+      page: mdx,
+    },
     percy: {
       skip: true,
     },

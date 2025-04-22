@@ -7,12 +7,16 @@
 
 import { html } from 'lit';
 import './ai-skeleton-placeholder';
+import mdx from './ai-skeleton.mdx';
 
 export const AISkeletonPlaceholder = {
   // This story doesn't accept any args.
   args: {},
   argTypes: {},
   parameters: {
+    docs: {
+      page: mdx,
+    },
     percy: {
       skip: true,
     },
