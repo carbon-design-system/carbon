@@ -115,7 +115,7 @@ export const IconOnlyWithLayer = (args) => (
 );
 
 export const lowContrast = (args) => (
-  <ContentSwitcher {...args} lowContrast>
+  <ContentSwitcher lowContrast {...args}>
     <Switch name="one" text="First section" />
     <Switch name="two" text="Second section" />
     <Switch name="three" text="Third section" />
