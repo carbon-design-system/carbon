@@ -337,6 +337,9 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/warrenmblood"><img src="https://avatars.githubusercontent.com/u/69060697?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Warren Blood</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=warrenmblood" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/vcherneny"><img src="https://avatars.githubusercontent.com/u/11604315?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vlad Cherneny</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=vcherneny" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/jose-biescas"><img src="https://avatars.githubusercontent.com/u/188625806?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jose Biescas</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=jose-biescas" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
