@@ -53,6 +53,6 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=15784-271032&m=dev',
   {
     variant: { State: 'Skeleton' },
-    example: ({ hideLabel }) => <TextInputSkeleton />,
+    example: () => <TextInputSkeleton />,
   }
 );
