@@ -66,9 +66,14 @@ export const Default = {
     `;
   },
 };
+
 export const UxExample = {
   args: defaultArgs,
   argTypes: getControls({ disableControl: true }),
+  decorators: [
+    (story) => html`<div style="display:flex;width:300px">${story()}</div>`,
+  ],
+
   parameters: {
     percy: { skip: true },
   },
@@ -78,7 +83,9 @@ export const UxExample = {
       const cancel = document
         .querySelector('#cancel')
         ?.shadowRoot?.querySelector('button');
-      const loadingElem = document.querySelector('cds-inline-loading');
+      const loadingElem = document.querySelector(
+        'cds-inline-loading[controlled]'
+      );
 
       if (loadingElem) {
         (loadingElem as HTMLElement).style.display = 'inherit';
@@ -113,21 +120,19 @@ export const UxExample = {
       }, 2000);
     };
 
-    return html`<div style="display:flex;width:300px">
-        <cds-button kind="secondary" id="cancel"> Cancel </cds-button>
-        <cds-button @click=${onSubmit} id="submit">Submit</cds-button>
-        <cds-inline-loading
-            style='display:none;margin-left:1rem'
-            success-delay=${2000}
-            icon-description='Submitting'
-            aria-live='off'
-            @cds-inline-loading-onsuccess=${onSuccess}
-            >
-           Submitting
-          </cds-inline-loading>
-       
-       </div></div>
-        `;
+    return html`
+      <cds-button kind="secondary" id="cancel"> Cancel </cds-button>
+      <cds-button @click=${onSubmit} id="submit">Submit</cds-button>
+      <cds-inline-loading
+        controlled
+        style="display:none;margin-left:1rem"
+        success-delay=${2000}
+        icon-description="Submitting"
+        aria-live="off"
+        @cds-inline-loading-onsuccess=${onSuccess}>
+        Submitting
+      </cds-inline-loading>
+    `;
   },
 };
 

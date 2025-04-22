@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,7 +16,7 @@ import { getCellId } from './tools/cells';
 import denormalize from './tools/denormalize';
 import { composeEventHandlers } from '../../tools/events';
 import { defaultFilterRows } from './tools/filter';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { setupGetInstanceId } from '../../tools/setupGetInstanceId';
 import Table from './Table';
 import TableActionList from './TableActionList';
 import TableBatchAction from './TableBatchAction';
@@ -99,8 +99,8 @@ export interface DataTableRow<ColTypes extends any[]> {
 export interface DataTableHeader {
   key: string;
   header: React.ReactNode;
-  slug?: React.ReactElement;
-  decorator?: React.ReactElement;
+  slug?: React.ReactElement<any>;
+  decorator?: React.ReactElement<any>;
 }
 
 export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
@@ -225,7 +225,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   extends TranslateWithId<TranslationKey> {
   children?: (
     renderProps: DataTableRenderProps<RowType, ColTypes>
-  ) => React.ReactElement;
+  ) => React.ReactElement<any>;
   experimentalAutoAlign?: boolean;
   filterRows?: (filterRowsArgs: {
     cellsById: Record<string, DataTableCell<ColTypes>>;
@@ -241,7 +241,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   radio?: boolean;
   render?: (
     renderProps: DataTableRenderProps<RowType, ColTypes>
-  ) => React.ReactElement;
+  ) => React.ReactElement<any>;
   rows: Array<Omit<DataTableRow<ColTypes>, 'cells'>>;
   size?: DataTableSize;
   sortRow?: (
