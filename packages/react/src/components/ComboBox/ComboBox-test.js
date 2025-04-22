@@ -941,104 +941,6 @@ describe('ComboBox', () => {
 
       expect(findInputNode()).toHaveDisplayValue('xyz');
     });
-
-    it('should not fire onChange when selecting the same item repeatedly with mouse', async () => {
-      const user = userEvent.setup();
-      render(<ComboBox {...mockProps} />);
-
-      // First selection with mouse - should trigger onChange
-      await openMenu();
-      await user.click(screen.getByRole('option', { name: 'Item 2' }));
-
-      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
-      expect(mockProps.onChange).toHaveBeenCalledWith({
-        selectedItem: mockProps.items[2],
-      });
-
-      // Reset mock to check next interaction
-      mockProps.onChange.mockClear();
-
-      // Select the same item again with mouse - should NOT trigger onChange
-      await openMenu();
-      await user.click(screen.getByRole('option', { name: 'Item 2' }));
-
-      expect(mockProps.onChange).not.toHaveBeenCalled();
-      expect(findInputNode()).toHaveDisplayValue('Item 2');
-    });
-
-    it('should not fire onChange when selecting the same item repeatedly with keyboard', async () => {
-      const user = userEvent.setup();
-      render(<ComboBox {...mockProps} />);
-
-      // First keyboard selection - should trigger onChange
-      await openMenu();
-      await user.keyboard('{ArrowDown}{ArrowDown}{ArrowDown}'); // Navigate to Item 2
-      await user.keyboard('{Enter}');
-
-      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
-      expect(mockProps.onChange).toHaveBeenCalledWith({
-        selectedItem: mockProps.items[2],
-      });
-
-      mockProps.onChange.mockClear();
-
-      // Select same item again with keyboard - should NOT trigger onChange
-      await openMenu();
-      // No need to navigate again - Item 2 should already be highlighted
-      await user.keyboard('{Enter}');
-
-      expect(mockProps.onChange).not.toHaveBeenCalled();
-      expect(findInputNode()).toHaveDisplayValue('Item 2');
-    });
-
-    it('should not fire onChange when selecting the same item repeatedly with mouse', async () => {
-      const user = userEvent.setup();
-      render(<ComboBox {...mockProps} allowCustomValue />);
-
-      // First selection with mouse - should trigger onChange
-      await openMenu();
-      await user.click(screen.getByRole('option', { name: 'Item 2' }));
-
-      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
-      expect(mockProps.onChange).toHaveBeenCalledWith({
-        selectedItem: mockProps.items[2],
-      });
-
-      // Reset mock to check next interaction
-      mockProps.onChange.mockClear();
-
-      // Select the same item again with mouse - should NOT trigger onChange
-      await openMenu();
-      await user.click(screen.getByRole('option', { name: 'Item 2' }));
-
-      expect(mockProps.onChange).not.toHaveBeenCalled();
-      expect(findInputNode()).toHaveDisplayValue('Item 2');
-    });
-
-    it('should not fire onChange when selecting the same item repeatedly with keyboard', async () => {
-      const user = userEvent.setup();
-      render(<ComboBox {...mockProps} allowCustomValue />);
-
-      // First keyboard selection - should trigger onChange
-      await openMenu();
-      await user.keyboard('{ArrowDown}{ArrowDown}{ArrowDown}'); // Navigate to Item 2
-      await user.keyboard('{Enter}');
-
-      expect(mockProps.onChange).toHaveBeenCalledTimes(1);
-      expect(mockProps.onChange).toHaveBeenCalledWith({
-        selectedItem: mockProps.items[2],
-      });
-
-      mockProps.onChange.mockClear();
-
-      // Select same item again with keyboard - should NOT trigger onChange
-      await openMenu();
-      // No need to navigate again - Item 2 should already be highlighted
-      await user.keyboard('{Enter}');
-
-      expect(mockProps.onChange).not.toHaveBeenCalled();
-      expect(findInputNode()).toHaveDisplayValue('Item 2');
-    });
   });
 
   describe('ComboBox autocomplete', () => {
@@ -1226,6 +1128,582 @@ describe('ComboBox', () => {
         const item = findMenuItemNode(i);
         expect(item).toHaveAttribute('aria-selected', 'false');
       }
+    });
+  });
+
+  describe('ComboBox repeated selection with controlled selectedItem and object items', () => {
+    it('should not fire onChange when selecting the same item repeatedly with mouse', async () => {
+      const user = userEvent.setup();
+
+      // Set up a controlled component that uses state to manage selectedItem
+      const ControlledComboBox = () => {
+        const [selectedItem, setSelectedItem] = useState(null);
+        const [changeCount, setChangeCount] = useState(0);
+        const items = [
+          {
+            id: 'option-0',
+            text: 'An example option that is really long to show what should be done to handle long text',
+          },
+          {
+            id: 'option-1',
+            text: 'Option 1',
+          },
+          {
+            id: 'option-2',
+            text: 'Option 2',
+          },
+          {
+            id: 'option-3',
+            text: 'Option 3 - a disabled item',
+            disabled: true,
+          },
+          {
+            id: 'option-4',
+            text: 'Option 4',
+          },
+          {
+            id: 'option-5',
+            text: 'Option 5',
+          },
+        ];
+
+        const handleChange = ({ selectedItem }) => {
+          setSelectedItem(selectedItem);
+          setChangeCount((prev) => prev + 1);
+        };
+
+        return (
+          <>
+            <ComboBox
+              id="test-combobox"
+              items={items}
+              selectedItem={selectedItem}
+              onChange={handleChange}
+              itemToString={(item) => (item ? item.text : '')}
+              placeholder="Filter..."
+            />
+            <div data-testid="change-count">{changeCount}</div>
+          </>
+        );
+      };
+
+      render(<ControlledComboBox />);
+
+      // First selection - should trigger onChange
+      await openMenu();
+      await user.click(screen.getByRole('option', { name: 'Option 2' }));
+
+      // Verify first selection changed the state
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+
+      // Second selection of the same item - should NOT trigger onChange
+      await openMenu();
+      await user.click(screen.getByRole('option', { name: 'Option 2' }));
+
+      // Should NOT trigger another onChange
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+
+      // Third selection of the same item - should still NOT trigger onChange
+      await openMenu();
+      await user.click(screen.getByRole('option', { name: 'Option 2' }));
+
+      // Should still NOT trigger onChange
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+    });
+
+    it('should not fire onChange when selecting the same item repeatedly with keyboard', async () => {
+      const user = userEvent.setup();
+
+      // Set up a controlled component that uses state to manage selectedItem
+      const ControlledComboBox = () => {
+        const [selectedItem, setSelectedItem] = useState(null);
+        const [changeCount, setChangeCount] = useState(0);
+        const items = [
+          {
+            id: 'option-0',
+            text: 'An example option that is really long to show what should be done to handle long text',
+          },
+          {
+            id: 'option-1',
+            text: 'Option 1',
+          },
+          {
+            id: 'option-2',
+            text: 'Option 2',
+          },
+          {
+            id: 'option-3',
+            text: 'Option 3 - a disabled item',
+            disabled: true,
+          },
+          {
+            id: 'option-4',
+            text: 'Option 4',
+          },
+          {
+            id: 'option-5',
+            text: 'Option 5',
+          },
+        ];
+
+        const handleChange = ({ selectedItem }) => {
+          setSelectedItem(selectedItem);
+          setChangeCount((prev) => prev + 1);
+        };
+
+        return (
+          <>
+            <ComboBox
+              id="test-combobox"
+              items={items}
+              selectedItem={selectedItem}
+              onChange={handleChange}
+              itemToString={(item) => (item ? item.text : '')}
+              placeholder="Filter..."
+            />
+            <div data-testid="change-count">{changeCount}</div>
+          </>
+        );
+      };
+
+      render(<ControlledComboBox />);
+
+      // First selection with keyboard
+      await openMenu();
+      await user.keyboard('{ArrowDown}{ArrowDown}{ArrowDown}'); // Navigate to Option 2
+      await user.keyboard('{Enter}');
+
+      // Verify first selection changed the state
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+
+      // Second selection of same item with keyboard
+      await openMenu();
+      await user.keyboard('{Enter}'); // Option 2 should already be highlighted
+
+      // Should NOT trigger another onChange
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+
+      // Third selection of same item with keyboard
+      await openMenu();
+      await user.keyboard('{Enter}'); // Option 2 should still be highlighted
+
+      // Should still NOT trigger onChange
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+    });
+
+    it('should not fire onChange when selecting the same item repeatedly with mouse, with allowCustomValue', async () => {
+      const user = userEvent.setup();
+
+      // Set up a controlled component with object items and allowCustomValue
+      const ControlledComboBox = () => {
+        const items = [
+          {
+            id: 'option-0',
+            text: 'An example option that is really long to show what should be done to handle long text',
+          },
+          {
+            id: 'option-1',
+            text: 'Option 1',
+          },
+          {
+            id: 'option-2',
+            text: 'Option 2',
+          },
+          {
+            id: 'option-3',
+            text: 'Option 3 - a disabled item',
+            disabled: true,
+          },
+          {
+            id: 'option-4',
+            text: 'Option 4',
+          },
+          {
+            id: 'option-5',
+            text: 'Option 5',
+          },
+        ];
+        const [selectedItem, setSelectedItem] = useState(null);
+        const [changeCount, setChangeCount] = useState(0);
+
+        const handleChange = ({ selectedItem }) => {
+          setSelectedItem(selectedItem);
+          setChangeCount((prev) => prev + 1);
+        };
+
+        const filterItems = ({ item, inputValue }) => {
+          return item.text.toLowerCase().includes(inputValue.toLowerCase());
+        };
+
+        return (
+          <>
+            <ComboBox
+              id="carbon-combobox"
+              items={items}
+              allowCustomValue
+              selectedItem={selectedItem}
+              onChange={handleChange}
+              shouldFilterItem={filterItems}
+              itemToString={(item) => (item ? item.text : '')}
+              titleText="ComboBox title"
+              helperText="Combobox helper text"
+            />
+            <div data-testid="change-count">{changeCount}</div>
+          </>
+        );
+      };
+
+      render(<ControlledComboBox />);
+
+      // First selection with mouse
+      await openMenu();
+      await user.click(screen.getByRole('option', { name: 'Option 2' }));
+
+      // Verify first selection changed the state
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+
+      // Second selection of same item with mouse
+      await openMenu();
+      await user.click(screen.getByRole('option', { name: 'Option 2' }));
+
+      // Should NOT trigger another onChange
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+
+      await user.click(document.body); // Close the menu
+
+      // Third selection of same item with mouse
+      await openMenu();
+      await user.click(screen.getByRole('option', { name: 'Option 2' }));
+
+      // Should still NOT trigger onChange
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+    });
+
+    it('should not fire onChange when selecting the same item repeatedly with keyboard, with allowCustomValue', async () => {
+      const user = userEvent.setup();
+
+      // Set up a controlled component that uses state to manage selectedItem
+      const ControlledComboBox = () => {
+        const [selectedItem, setSelectedItem] = useState(null);
+        const [changeCount, setChangeCount] = useState(0);
+        const items = [
+          {
+            id: 'option-0',
+            text: 'An example option that is really long to show what should be done to handle long text',
+          },
+          {
+            id: 'option-1',
+            text: 'Option 1',
+          },
+          {
+            id: 'option-2',
+            text: 'Option 2',
+          },
+          {
+            id: 'option-3',
+            text: 'Option 3 - a disabled item',
+            disabled: true,
+          },
+          {
+            id: 'option-4',
+            text: 'Option 4',
+          },
+          {
+            id: 'option-5',
+            text: 'Option 5',
+          },
+        ];
+
+        const handleChange = ({ selectedItem }) => {
+          setSelectedItem(selectedItem);
+          setChangeCount((prev) => prev + 1);
+        };
+
+        return (
+          <>
+            <ComboBox
+              id="test-combobox"
+              items={items}
+              allowCustomValue
+              selectedItem={selectedItem}
+              onChange={handleChange}
+              itemToString={(item) => (item ? item.text : '')}
+              placeholder="Filter..."
+            />
+            <div data-testid="change-count">{changeCount}</div>
+          </>
+        );
+      };
+
+      render(<ControlledComboBox />);
+
+      // First selection with keyboard
+      await openMenu();
+      await user.keyboard('{ArrowDown}{ArrowDown}{ArrowDown}'); // Navigate to Option 2
+      await user.keyboard('{Enter}');
+
+      // Verify first selection changed the state
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+
+      // Second selection of same item with keyboard
+      await openMenu();
+      await user.keyboard('{ArrowDown}{ArrowDown}{ArrowDown}');
+      await user.keyboard('{Enter}'); // Option 2 should already be highlighted
+
+      // Should NOT trigger another onChange
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+
+      // Third selection of same item with keyboard
+      await openMenu();
+      await user.keyboard('{Enter}'); // Option 2 should still be highlighted
+
+      // Should still NOT trigger onChange
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+    });
+  });
+
+  describe('ComboBox repeated selection with controlled selectedItem and string items', () => {
+    it('should not fire onChange when selecting the same item repeatedly with mouse', async () => {
+      const user = userEvent.setup();
+
+      // Set up a controlled component that uses state to manage selectedItem
+      const ControlledComboBox = () => {
+        const [selectedItem, setSelectedItem] = useState(null);
+        const [changeCount, setChangeCount] = useState(0);
+        const items = [
+          'An example option that is really long',
+          'Option 1',
+          'Option 2',
+          'Option 3',
+          'Option 4',
+          'Option 5',
+        ];
+
+        const handleChange = ({ selectedItem }) => {
+          setSelectedItem(selectedItem);
+          setChangeCount((prev) => prev + 1);
+        };
+
+        return (
+          <>
+            <ComboBox
+              id="test-combobox"
+              items={items}
+              selectedItem={selectedItem}
+              onChange={handleChange}
+              placeholder="Filter..."
+            />
+            <div data-testid="change-count">{changeCount}</div>
+          </>
+        );
+      };
+
+      render(<ControlledComboBox />);
+
+      // First selection - should trigger onChange
+      await openMenu();
+      await user.click(screen.getByRole('option', { name: 'Option 2' }));
+
+      // Verify first selection changed the state
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+
+      // Second selection of the same item - should NOT trigger onChange
+      await openMenu();
+      await user.click(screen.getByRole('option', { name: 'Option 2' }));
+
+      // Should NOT trigger another onChange
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+    });
+
+    it('should not fire onChange when selecting the same item repeatedly with keyboard', async () => {
+      const user = userEvent.setup();
+
+      // Set up a controlled component that uses state to manage selectedItem
+      const ControlledComboBox = () => {
+        const [selectedItem, setSelectedItem] = useState(null);
+        const [changeCount, setChangeCount] = useState(0);
+        const items = [
+          'An example option that is really long',
+          'Option 1',
+          'Option 2',
+          'Option 3',
+          'Option 4',
+          'Option 5',
+        ];
+
+        const handleChange = ({ selectedItem }) => {
+          setSelectedItem(selectedItem);
+          setChangeCount((prev) => prev + 1);
+        };
+
+        return (
+          <>
+            <ComboBox
+              id="test-combobox"
+              items={items}
+              selectedItem={selectedItem}
+              onChange={handleChange}
+              placeholder="Filter..."
+            />
+            <div data-testid="change-count">{changeCount}</div>
+          </>
+        );
+      };
+
+      render(<ControlledComboBox />);
+
+      // First selection with keyboard
+      await openMenu();
+      await user.keyboard('{ArrowDown}{ArrowDown}{ArrowDown}'); // Navigate to Option 2
+      await user.keyboard('{Enter}');
+
+      // Verify first selection changed the state
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+
+      // Second selection of same item with keyboard
+      await openMenu();
+      await user.keyboard('{Enter}'); // Option 2 should already be highlighted
+
+      // Should NOT trigger another onChange
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+    });
+
+    it('should not fire onChange when selecting the same item repeatedly with mouse, with allowCustomValue', async () => {
+      const user = userEvent.setup();
+
+      // Set up a controlled component with string items and allowCustomValue
+      const ControlledComboBox = () => {
+        const items = [
+          'An example option that is really long',
+          'Option 1',
+          'Option 2',
+          'Option 3',
+          'Option 4',
+          'Option 5',
+        ];
+        const [selectedItem, setSelectedItem] = useState(null);
+        const [changeCount, setChangeCount] = useState(0);
+
+        const handleChange = ({ selectedItem }) => {
+          setSelectedItem(selectedItem);
+          setChangeCount((prev) => prev + 1);
+        };
+
+        const filterItems = ({ item, inputValue }) => {
+          return item.toLowerCase().includes(inputValue.toLowerCase());
+        };
+
+        return (
+          <>
+            <ComboBox
+              id="carbon-combobox"
+              items={items}
+              selectedItem={selectedItem}
+              onChange={handleChange}
+              shouldFilterItem={filterItems}
+              allowCustomValue
+              titleText="ComboBox title"
+              helperText="Combobox helper text"
+            />
+            <div data-testid="change-count">{changeCount}</div>
+          </>
+        );
+      };
+
+      render(<ControlledComboBox />);
+
+      // First selection with mouse
+      await openMenu();
+      await user.click(screen.getByRole('option', { name: 'Option 2' }));
+
+      // Verify first selection changed the state
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+
+      // Second selection of same item with mouse
+      await openMenu();
+      await user.click(screen.getByRole('option', { name: 'Option 2' }));
+
+      // Should NOT trigger another onChange
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+    });
+
+    it('should not fire onChange when selecting the same item repeatedly with keyboard, with allowCustomValue', async () => {
+      const user = userEvent.setup();
+
+      // Set up a controlled component that uses state to manage selectedItem
+      const ControlledComboBox = () => {
+        const [selectedItem, setSelectedItem] = useState(null);
+        const [changeCount, setChangeCount] = useState(0);
+        const items = [
+          'An example option that is really long',
+          'Option 1',
+          'Option 2',
+          'Option 3',
+          'Option 4',
+          'Option 5',
+        ];
+
+        const handleChange = ({ selectedItem }) => {
+          setSelectedItem(selectedItem);
+          setChangeCount((prev) => prev + 1);
+        };
+
+        const filterItems = ({ item, inputValue }) => {
+          return item.toLowerCase().includes(inputValue.toLowerCase());
+        };
+
+        return (
+          <>
+            <ComboBox
+              id="test-combobox"
+              items={items}
+              selectedItem={selectedItem}
+              onChange={handleChange}
+              shouldFilterItem={filterItems}
+              allowCustomValue
+              placeholder="Filter..."
+            />
+            <div data-testid="change-count">{changeCount}</div>
+          </>
+        );
+      };
+
+      render(<ControlledComboBox />);
+
+      // First selection with keyboard
+      await openMenu();
+      await user.keyboard('{ArrowDown}{ArrowDown}{ArrowDown}'); // Navigate to Option 2
+      await user.keyboard('{Enter}');
+
+      // Verify first selection changed the state
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
+
+      // Second selection of same item with keyboard
+      await openMenu();
+      await user.keyboard('{Enter}'); // Option 2 should already be highlighted
+
+      // Should NOT trigger another onChange
+      expect(screen.getByTestId('change-count').textContent).toBe('1');
+      expect(findInputNode()).toHaveDisplayValue('Option 2');
     });
   });
 });
