@@ -171,7 +171,7 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
           <button
             class="sb-tooltip-trigger"
             role="button"
-            aria-label="${dismissActionLabel}"
+            aria-labelledby="content"
             class="${prefix}--tag__close-icon"
             ?disabled=${disabled}>
             ${Close16()}
