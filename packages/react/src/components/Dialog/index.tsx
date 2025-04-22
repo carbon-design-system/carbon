@@ -72,11 +72,6 @@ export interface DialogProps extends ReactAttr<HTMLDialogElement> {
   open?: boolean;
 
   /**
-   * Specify whether the Dialog is for dangerous actions
-   */
-  danger?: boolean;
-
-  /**
    * Specify whether the dialog contains scrolling content
    */
   hasScrollingContent?: boolean;
@@ -114,7 +109,6 @@ export const unstable__Dialog = React.forwardRef(
       onClose = noopFn,
       onRequestClose = noopFn,
       open = false,
-      danger = false,
       hasScrollingContent = false,
       role = 'dialog',
       ariaLabel,
@@ -206,22 +200,6 @@ export const unstable__Dialog = React.forwardRef(
       }
     }, [open, prefix, titleId, subtitleId]);
 
-    // For danger dialogs, focus the secondary/cancel button
-    useEffect(() => {
-      if (open && ref.current && danger) {
-        setTimeout(() => {
-          if (ref.current) {
-            const secondaryButton = ref.current.querySelector<HTMLElement>(
-              `.${prefix}--btn.${prefix}--btn--secondary`
-            );
-            if (secondaryButton) {
-              secondaryButton.focus();
-            }
-          }
-        }, 0);
-      }
-    }, [open, danger, prefix]);
-
     const containerClasses = cx(`${prefix}--dialog-container`);
 
     useEffect(() => {
@@ -244,7 +222,6 @@ export const unstable__Dialog = React.forwardRef(
           `${prefix}--dialog`,
           {
             [`${prefix}--dialog--modal`]: modal,
-            [`${prefix}--dialog--danger`]: danger,
             [`${prefix}--dialog--scrolling`]: hasScrollingContent,
           },
           className
@@ -292,11 +269,6 @@ unstable__Dialog.propTypes = {
    * open initial state
    */
   open: PropTypes.bool,
-
-  /**
-   * Specify whether the Dialog is for dangerous actions
-   */
-  danger: PropTypes.bool,
 
   /**
    * Specify whether the dialog contains scrolling content
@@ -747,7 +719,7 @@ export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
     return (
       <ButtonSet className={classes} ref={ref} {...rest}>
         {secondaryButtonText && (
-          <Button kind="secondary" onClick={onRequestClose}>
+          <Button kind="secondary" onClick={onRequestClose} autoFocus={danger}>
             {secondaryButtonText}
           </Button>
         )}

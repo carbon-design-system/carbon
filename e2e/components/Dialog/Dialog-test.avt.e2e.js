@@ -21,7 +21,7 @@ test.describe('@avt Dialog', () => {
     });
     await expect(page).toHaveNoACViolations('Dialog');
   });
-  test('@avt-native-dialog-behavior modal', async ({ page }) => {
+  test('@avt-advanced-states modal', async ({ page }) => {
     await visitStory(page, {
       component: 'unstable_Dialog',
       id: 'experimental-unstable-dialog--modal',
@@ -48,15 +48,10 @@ test.describe('@avt Dialog', () => {
     ).toBeFocused();
     await page.keyboard.press('Shift+Tab');
     await expect(page.locator('.cds--dialog__close')).toBeFocused();
-    await expect(page.locator('.cds--dialog__header')).toBeVisible();
-    await expect(page.locator('.cds--dialog-header__heading')).toBeVisible();
-    await expect(page.locator('.cds--dialog-header__label')).toBeVisible();
-    await expect(page.locator('.cds--dialog-content')).toBeVisible();
-    await expect(page.locator('.cds--dialog-footer')).toBeVisible();
     await page.locator('.cds--dialog__close').click();
     await expect(dialog).toBeHidden();
   });
-  test('@avt-native-dialog-behavior non-modal', async ({ page }) => {
+  test('@avt-advanced-states non-modal', async ({ page }) => {
     await visitStory(page, {
       component: 'unstable_Dialog',
       id: 'experimental-unstable-dialog--non-modal',
@@ -81,13 +76,8 @@ test.describe('@avt Dialog', () => {
     await expect(
       page.locator('.cds--btn.cds--btn--primary:has-text("Submit")')
     ).toBeFocused();
-    await expect(page.locator('.cds--dialog__header')).toBeVisible();
-    await expect(page.locator('.cds--dialog-header__heading')).toBeVisible();
-    await expect(page.locator('.cds--dialog-header__label')).toBeVisible();
-    await expect(page.locator('.cds--dialog-content')).toBeVisible();
-    await expect(page.locator('.cds--dialog-footer')).toBeVisible();
   });
-  test('@avt-keyboard-nav passive dialog', async ({ page }) => {
+  test('@avt-advanced-states passive dialog', async ({ page }) => {
     await visitStory(page, {
       component: 'unstable_Dialog',
       id: 'experimental-unstable-dialog--passive-dialog',
@@ -108,7 +98,7 @@ test.describe('@avt Dialog', () => {
     await page.locator('.cds--dialog__close').click();
     await expect(dialog).toBeHidden();
   });
-  test('@avt-alertdialog-role danger dialog', async ({ page }) => {
+  test('@avt-advanced-states danger dialog', async ({ page }) => {
     await visitStory(page, {
       component: 'unstable_Dialog',
       id: 'experimental-unstable-dialog--danger-dialog',

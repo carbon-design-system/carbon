@@ -29,6 +29,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['hasScrollingContent', 'modal', 'open'],
+    },
   },
   argTypes: {
     children: {
@@ -105,11 +108,7 @@ export const Modal = ({ open: _open, ...args }) => {
           <br></br>
         </Dialog.Body>
         <Dialog.Footer>
-          <Button
-            type="button"
-            kind="secondary"
-            onClick={closeDialog}
-            autoFocus>
+          <Button type="button" kind="secondary" onClick={closeDialog}>
             Close
           </Button>
           <Button type="button" kind="primary" onClick={closeDialog}>
@@ -192,11 +191,7 @@ export const NonModal = ({ open: _open, ...args }) => {
           </p>
         </Dialog.Body>
         <Dialog.Footer>
-          <Button
-            type="button"
-            kind="secondary"
-            onClick={closeDialog}
-            autoFocus>
+          <Button type="button" kind="secondary" onClick={closeDialog}>
             Cancel
           </Button>
           <Button type="button" kind="primary" onClick={closeDialog}>
@@ -316,11 +311,7 @@ export const WithScrollingContent = ({ open: _open, ...args }) => {
           </p>
         </Dialog.Body>
         <Dialog.Footer>
-          <Button
-            type="button"
-            kind="secondary"
-            onClick={closeDialog}
-            autoFocus>
+          <Button type="button" kind="secondary" onClick={closeDialog}>
             Close
           </Button>
           <Button type="button" kind="primary" onClick={closeDialog}>
@@ -418,7 +409,6 @@ export const DangerDialog = ({ open: _open, ...args }) => {
         {...args}
         open={open}
         onRequestClose={handleRequestClose}
-        danger
         aria-label="Dialog Title">
         <Dialog.Header>
           <Dialog.Subtitle>Account resources</Dialog.Subtitle>
@@ -430,14 +420,10 @@ export const DangerDialog = ({ open: _open, ...args }) => {
           </DialogControls>
         </Dialog.Header>
         <Dialog.Body></Dialog.Body>
-        <Dialog.Footer>
-          <Button type="button" kind="secondary" onClick={closeDialog}>
-            Cancel
-          </Button>
-          <Button type="button" kind="danger" onClick={closeDialog}>
-            Delete
-          </Button>
-        </Dialog.Footer>
+        <Dialog.Footer
+          danger
+          secondaryButtonText="Cancel"
+          primaryButtonText="Delete"></Dialog.Footer>
       </Dialog>
     </div>
   );
