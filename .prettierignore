@@ -64,5 +64,6 @@ packages/upgrade/**/*.output.tsx
 # Accessibility Verification Testing
 **/.avt/**
 
-# CODEOWNERS
+# .github files
 CODEOWNERS
+PULL_REQUEST_TEMPLATE.md
