@@ -1,68 +1,53 @@
-import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as OverflowMenuStories from './overflow-menu.stories';
 
 <Meta of={OverflowMenuStories} />
 
 # Overflow menu
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/overflow-menu)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/overflow-menu)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/overflow-menu/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/overflow-menu/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/overflow-menu)
+## Table of Contents
 
-Overflow menu is used when additional options are available to the user and
-there is a space constraint. Create overflow menu item components for each
-option on the menu.
+- [Overview](#overview)
+- [Render Custom Icon](#render-custom-icon)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+The `cds-overflow-menu` component is a clickable element that contains
+additional options that are available to the user, but there is a space
+constraint.
 
-### JS (via import)
+<Canvas of={OverflowMenuStories.Default} />
 
-```javascript
-import '@carbon/web-components/es/components/overflow-menu/index.js';
-import OverflowMenuVertical16 from '@carbon/icons/lib/overflow-menu--vertical/16.js';
-```
+## Render Custom Icon
 
-<Markdown>{`${cdnJs({ components: ['overflow-menu'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+<Canvas of={OverflowMenuStories.RenderCustomIcon} />
 
-### HTML
-
-```html
-<cds-overflow-menu>
-  ${OverflowMenuVertical16({ class: `${prefix}--overflow-menu__icon`, slot:
-  'icon', })}
-  <span slot="tooltip-content"> Options </span>
-  <cds-overflow-menu-body>
-    <cds-overflow-menu-item>Option 1</cds-overflow-menu-item>
-    <cds-overflow-menu-item>Option 2</cds-overflow-menu-item>
-    <cds-overflow-menu-item>Option 3</cds-overflow-menu-item>
-    <cds-overflow-menu-item>Option 4</cds-overflow-menu-item>
-    <cds-overflow-menu-item>Option 5</cds-overflow-menu-item>
-  </cds-overflow-menu-body>
-</cds-overflow-menu>
-```
-
-## `<cds-overflow-menu>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-overflow-menu open>`) and `false` means not setting the attribute (e.g.
-`<cds-overflow-menu>` without `open` attribute).
+## Component API
 
 <ArgTypes of="cds-overflow-menu" />
 
-## `<cds-overflow-menu-body>` attributes and properties
+## `cds-overflow-menu-body`
 
 <ArgTypes of="cds-overflow-menu-body" />
 
-## `<cds-overflow-menu-item>` attributes, properties, and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-overflow-menu-item disabled>`) and `false` means not setting the attribute
-(e.g. `<cds-overflow-menu-item>` without `disabled` attribute).
+## `cds-overflow-menu-item`
 
 <ArgTypes of="cds-overflow-menu-item" />
+
+<Markdown>{`${cdnJs({ components: ['overflow-menu'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/overflow-menu/overflow-menu.mdx).
