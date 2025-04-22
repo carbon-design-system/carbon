@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -79,7 +77,7 @@ class CDSTextarea extends CDSTextInput {
   render() {
     const { enableCounter, maxCount } = this;
 
-    const textCount = this.value?.length;
+    const textCount = this.value?.length ?? 0;
 
     const invalidIcon = WarningFilled16({
       class: `${prefix}--text-area__invalid-icon`,

@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -22,6 +20,7 @@ export { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT };
 /**
  * Icon Button
  *
+ * @element cds-icon-button
  */
 @customElement(`${prefix}-icon-button`)
 class CDSIconButton extends CDSButton {

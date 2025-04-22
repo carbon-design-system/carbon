@@ -30,6 +30,7 @@ import {
   UpperHandleFocus,
 } from './SliderHandles';
 import { TranslateWithId } from '../../types/common';
+import { clamp } from '../../internal/clamp';
 
 const ThumbWrapper = ({
   hasTooltip = false,
@@ -493,9 +494,9 @@ class Slider extends PureComponent<SliderProps> {
     isRtl: false,
   };
 
-  thumbRef: React.RefObject<HTMLDivElement>;
-  thumbRefUpper: React.RefObject<HTMLDivElement>;
-  filledTrackRef: React.RefObject<HTMLDivElement>;
+  thumbRef: React.RefObject<HTMLDivElement | null>;
+  thumbRefUpper: React.RefObject<HTMLDivElement | null>;
+  filledTrackRef: React.RefObject<HTMLDivElement | null>;
   element: HTMLDivElement | null = null;
   inputId = '';
   track: HTMLDivElement | null | undefined;
@@ -613,19 +614,6 @@ class Slider extends PureComponent<SliderProps> {
     } else {
       this.setState({ valueUpper: undefined, leftUpper: undefined });
     }
-  }
-
-  /**
-   * Synonymous to ECMA2017+ `Math.clamp`.
-   *
-   * @param {number} val
-   * @param {number} min
-   * @param {number} max
-   *
-   * @returns `val` if `max>=val>=min`; `min` if `val<min`; `max` if `val>max`.
-   */
-  clamp(val, min, max) {
-    return Math.max(min, Math.min(val, max));
   }
 
   /**
@@ -1082,7 +1070,7 @@ class Slider extends PureComponent<SliderProps> {
       range,
     });
     /** `leftPercentRaw` clamped between 0 and 1. */
-    const leftPercent = Math.min(1, Math.max(0, leftPercentRaw));
+    const leftPercent = clamp(leftPercentRaw, 0, 1);
 
     if (useRawValue) {
       return {
