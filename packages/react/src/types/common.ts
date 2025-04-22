@@ -29,12 +29,3 @@ export interface TranslateWithId<MID = string, ARGS = Record<string, unknown>> {
    */
   translateWithId?(messageId: MID, args?: ARGS): string;
 }
-
-/**
- * Alias of TranslateWithId. Will be removed in v12
- * @deprecated Use TranslateWithId instead
- */
-export type InternationalProps<
-  MID = string,
-  ARGS = Record<string, unknown>,
-> = TranslateWithId<MID, ARGS>;

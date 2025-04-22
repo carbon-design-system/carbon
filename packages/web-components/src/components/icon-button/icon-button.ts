@@ -20,6 +20,7 @@ export { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT };
 /**
  * Icon Button
  *
+ * @element cds-icon-button
  */
 @customElement(`${prefix}-icon-button`)
 class CDSIconButton extends CDSButton {

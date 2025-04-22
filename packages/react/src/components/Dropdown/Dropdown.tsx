@@ -502,13 +502,9 @@ const Dropdown = React.forwardRef(
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
-    const toggleButtonProps = useMemo(
-      () =>
-        getToggleButtonProps({
-          'aria-label': ariaLabel || deprecatedAriaLabel,
-        }),
-      [getToggleButtonProps, ariaLabel, deprecatedAriaLabel, isOpen]
-    );
+    const toggleButtonProps = getToggleButtonProps({
+      'aria-label': ariaLabel || deprecatedAriaLabel,
+    });
 
     const helper =
       helperText && !isFluid ? (
@@ -609,7 +605,10 @@ const Dropdown = React.forwardRef(
       return React.isValidElement(element) ? element : null;
     }, [slug, decorator]);
 
-    const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
+    const allLabelProps = getLabelProps();
+    const labelProps = isValidElement(titleText)
+      ? { id: allLabelProps.id }
+      : allLabelProps;
 
     return (
       <div className={wrapperClasses} {...other}>
@@ -685,13 +684,6 @@ const Dropdown = React.forwardRef(
                   item,
                   index,
                 });
-                if (
-                  item !== null &&
-                  typeof item === 'object' &&
-                  Object.prototype.hasOwnProperty.call(item, 'id')
-                ) {
-                  itemProps.id = item['id'];
-                }
                 const title =
                   isObject && 'text' in item && itemToElement
                     ? item.text
