@@ -935,22 +935,37 @@ describe('MultiSelect', () => {
     expect(mockItemToString).not.toHaveBeenCalled();
   });
 
-  it('should add label props when `titleText` is a string', () => {
+  it('should add certain label props when `titleText` is a string', () => {
     render(<MultiSelect {...mockProps} titleText="MultiSelect Title" />);
 
     const label = screen.getByText('MultiSelect Title').closest('label');
+    const attributes = Array.from(label.attributes).reduce(
+      (acc, { name, value }) => ({ ...acc, [name]: value }),
+      {}
+    );
 
-    expect(label).toHaveAttribute('id');
+    expect(attributes).toEqual({
+      class: 'cds--label',
+      for: 'downshift-:r5o:-toggle-button',
+      id: 'downshift-:r5o:-label',
+    });
   });
 
-  it('should not add label props when `titleText` is an element', () => {
+  it('should add certain label props when `titleText` is an element', () => {
     render(
       <MultiSelect {...mockProps} titleText={<span>MultiSelect Title</span>} />
     );
 
     const label = screen.getByText('MultiSelect Title').closest('label');
+    const attributes = Array.from(label.attributes).reduce(
+      (acc, { name, value }) => ({ ...acc, [name]: value }),
+      {}
+    );
 
-    expect(label).not.toHaveAttribute('id');
+    expect(attributes).toEqual({
+      class: 'cds--label',
+      id: 'downshift-:r5r:-label',
+    });
   });
 
   it('should show indeterminate state after adding new items when all items were previously selected', async () => {
