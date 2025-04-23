@@ -59,6 +59,8 @@ const {
   InputKeyDownArrowUp,
   InputKeyDownArrowDown,
   MenuMouseLeave,
+  ItemClick,
+  FunctionSelectItem,
 } = useCombobox.stateChangeTypes;
 
 const defaultItemToString = <ItemType,>(item: ItemType | null) => {
@@ -498,7 +500,8 @@ const ComboBox = forwardRef(
         prevInputLengthRef.current = inputValue.length;
       }
     }, [typeahead, inputValue, items, itemToString, autocompleteCustomFilter]);
-
+    const isManualClearingRef = useRef(false);
+    const [isClearing, setIsClearing] = useState(false);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
@@ -508,6 +511,14 @@ const ComboBox = forwardRef(
     const prevSelectedItemProp = useRef<ItemType | null | undefined>(
       selectedItemProp
     );
+    useEffect(() => {
+      isManualClearingRef.current = isClearing;
+
+      // Reset flag after render cycle
+      if (isClearing) {
+        setIsClearing(false);
+      }
+    }, [isClearing]);
 
     // fully controlled combobox: handle changes to selectedItemProp
     useEffect(() => {
@@ -611,32 +622,44 @@ const ComboBox = forwardRef(
 
           case InputKeyDownEnter:
             if (!allowCustomValue) {
-              const highlightedIndex = indexToHighlight(inputValue);
-              const matchingItem = items[highlightedIndex];
+              if (state.highlightedIndex !== -1) {
+                const filteredList = filterItems(
+                  items,
+                  itemToString,
+                  inputValue
+                );
+                const highlightedItem = filteredList[state.highlightedIndex];
 
-              if (matchingItem) {
-                // Prevent matching items that are marked as `disabled` from
-                // being selected.
-                if ((matchingItem as any).disabled) {
-                  return state;
+                if (highlightedItem && !(highlightedItem as any).disabled) {
+                  return {
+                    ...changes,
+                    selectedItem: highlightedItem,
+                    inputValue: itemToString(highlightedItem),
+                  };
+                }
+              } else {
+                const autoIndex = indexToHighlight(inputValue);
+                if (autoIndex !== -1) {
+                  const matchingItem = items[autoIndex];
+
+                  if (matchingItem && !(matchingItem as any).disabled) {
+                    return {
+                      ...changes,
+                      selectedItem: matchingItem,
+                      inputValue: itemToString(matchingItem),
+                    };
+                  }
                 }
 
-                // Select the matching item.
-                return {
-                  ...changes,
-                  selectedItem: matchingItem,
-                  inputValue: itemToString(matchingItem),
-                };
-              }
-
-              // If no matching item is found and there is an existing
-              // selection, clear the selection.
-              if (state.selectedItem !== null) {
-                return {
-                  ...changes,
-                  selectedItem: null,
-                  inputValue,
-                };
+                // If no matching item is found and there is an existing
+                // selection, clear the selection.
+                if (state.selectedItem !== null) {
+                  return {
+                    ...changes,
+                    selectedItem: null,
+                    inputValue,
+                  };
+                }
               }
             }
 
@@ -817,16 +840,15 @@ const ComboBox = forwardRef(
           type,
           selectedItem: newSelectedItem,
         });
-        if (
-          type === useCombobox.stateChangeTypes.ItemClick &&
-          !isEqual(selectedItemProp, newSelectedItem)
-        ) {
-          onChange({ selectedItem: newSelectedItem });
+        if (isManualClearingRef.current) {
+          return;
         }
         if (
-          (type === useCombobox.stateChangeTypes.FunctionSelectItem ||
-            type === useCombobox.stateChangeTypes.InputKeyDownEnter) &&
-          !isEqual(selectedItemProp, newSelectedItem) // Only fire if there's an actual change
+          (type === ItemClick ||
+            type === FunctionSelectItem ||
+            type === InputKeyDownEnter) &&
+          typeof newSelectedItem !== 'undefined' &&
+          !isEqual(selectedItemProp, newSelectedItem)
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
@@ -1094,7 +1116,11 @@ const ComboBox = forwardRef(
             {inputValue && (
               <ListBoxSelection
                 clearSelection={() => {
+                  setIsClearing(true); // This updates the state which syncs to the ref
+                  setInputValue('');
+                  onChange({ selectedItem: null });
                   selectItem(null);
+                  handleSelectionClear();
                 }}
                 translateWithId={translateWithId}
                 disabled={disabled || readOnly}
