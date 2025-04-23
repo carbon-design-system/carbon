@@ -1,53 +1,41 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import * as Toggle from './toggle.stories';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as ToggleStories from './toggle.stories';
 
-<Meta of={Toggle} />
+<Meta of={ToggleStories} />
 
 # Toggle
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/toggle)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/toggle)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/toggle/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/toggle/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/toggle)
+## Table of Contents
 
-Toggle is a control that is used to quickly switch between two possible states.
-Toggles are only used for these binary actions that occur immediately after the
-user “flips” the toggle switch. They are commonly used for “on/off” switches.
+- [Overview](#overview)
+- [Small Toggle](#small-toggle)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-Use `small` property/attribute to make it more compact in size, so they can be
-used in use cases such as data tables.
+## Overview
 
-## Getting started
+<Canvas of={ToggleStories.Default} />
 
-Here's a quick example to get you started.
+## Small Toggle
 
-### JS (via import)
+<Canvas of={ToggleStories.SmallToggle} />
 
-```javascript
-import '@carbon/web-components/es/components/toggle/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['toggle'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-toggle label-a="On" label-text="Toggle" label-b="Off"></cds-toggle>
-```
-
-## Small toggle
-
-```html
-<cds-toggle
-  size="sm"
-  label-a="On"
-  label-text="Toggle"
-  label-b="Off"></cds-toggle>
-```
-
-## `<cds-toggle>` attributes, properties and events
+## Component API
 
 <ArgTypes of="cds-toggle" />
+
+<Markdown>{`${cdnJs({ components: ['toggle'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/toggle/toggle.mdx).
