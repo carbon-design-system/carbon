@@ -59,6 +59,8 @@ const {
   InputKeyDownArrowUp,
   InputKeyDownArrowDown,
   MenuMouseLeave,
+  ItemClick,
+  FunctionSelectItem,
 } = useCombobox.stateChangeTypes;
 
 const defaultItemToString = <ItemType,>(item: ItemType | null) => {
@@ -842,17 +844,11 @@ const ComboBox = forwardRef(
           return;
         }
         if (
-          type === useCombobox.stateChangeTypes.ItemClick &&
-          !isEqual(selectedItemProp, newSelectedItem) &&
-          typeof newSelectedItem !== 'undefined'
-        ) {
-          onChange({ selectedItem: newSelectedItem });
-        }
-        if (
-          (type === useCombobox.stateChangeTypes.FunctionSelectItem ||
-            type === useCombobox.stateChangeTypes.InputKeyDownEnter) &&
-          !isEqual(selectedItemProp, newSelectedItem) &&
-          typeof newSelectedItem !== 'undefined'
+          (type === ItemClick ||
+            type === FunctionSelectItem ||
+            type === InputKeyDownEnter) &&
+          typeof newSelectedItem !== 'undefined' &&
+          !isEqual(selectedItemProp, newSelectedItem)
         ) {
           onChange({ selectedItem: newSelectedItem });
         }
