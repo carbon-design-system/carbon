@@ -29,26 +29,23 @@ test.describe('@avt Dialog', () => {
         theme: 'white',
       },
     });
-    const dialog = page.locator('dialog');
+    const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();
     await expect(dialog).toHaveClass(/cds--dialog cds--dialog--modal/);
-    await expect(page.locator('.cds--dialog__close')).toBeFocused();
-    await expect(dialog).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
     await page.keyboard.press('Tab');
-    await expect(
-      page.locator('.cds--btn.cds--btn--secondary:has-text("Close")')
-    ).toBeFocused();
+    await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
+
     await page.keyboard.press('Tab');
-    await expect(
-      page.locator('.cds--btn.cds--btn--primary:has-text("Save")')
-    ).toBeFocused();
+    await expect(page.getByRole('button', { name: 'Save' })).toBeFocused();
+
     await page.keyboard.press('Shift+Tab');
-    await expect(
-      page.locator('.cds--btn.cds--btn--secondary:has-text("Close")')
-    ).toBeFocused();
+    await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
+
     await page.keyboard.press('Shift+Tab');
-    await expect(page.locator('.cds--dialog__close')).toBeFocused();
-    await page.locator('.cds--dialog__close').click();
+    await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
+
+    await page.getByRole('button', { name: 'Close' }).click();
     await expect(dialog).toBeHidden();
   });
   test('@avt-advanced-states non-modal', async ({ page }) => {
@@ -59,23 +56,18 @@ test.describe('@avt Dialog', () => {
         theme: 'white',
       },
     });
-    const dialog = page.locator('dialog');
+    const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();
     await expect(dialog).toHaveClass(/cds--dialog/);
-    await expect(page.locator('.cds--dialog__close')).toBeFocused();
-    await expect(dialog).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(page.getByRole('textbox', { name: 'Name' })).toBeFocused();
-    await page
-      .locator('.cds--btn.cds--btn--secondary:has-text("Cancel")')
-      .focus();
-    await expect(
-      page.locator('.cds--btn.cds--btn--secondary:has-text("Cancel")')
-    ).toBeFocused();
+
+    page.getByRole('button', { name: 'Cancel' }).focus();
+    await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
+
     await page.keyboard.press('Tab');
-    await expect(
-      page.locator('.cds--btn.cds--btn--primary:has-text("Submit")')
-    ).toBeFocused();
+    await expect(page.getByRole('button', { name: 'Submit' })).toBeFocused();
   });
   test('@avt-advanced-states passive dialog', async ({ page }) => {
     await visitStory(page, {
@@ -87,18 +79,19 @@ test.describe('@avt Dialog', () => {
     });
     const toggleButton = page.getByRole('button', { name: 'Toggle open' });
     await toggleButton.click();
-    const dialog = page.locator('dialog');
+    const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();
     await expect(dialog).toHaveClass(/cds--dialog cds--dialog--modal/);
-    await expect(page.locator('.cds--dialog__close')).toBeFocused();
+    await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
     await page.keyboard.press('Tab');
-    // In dialog the focus circules through the close button and URL
     await page.keyboard.press('Tab');
-    await expect(page.locator('.cds--dialog__close')).toBeFocused();
-    await page.locator('.cds--dialog__close').click();
+    await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
+
+    await page.getByRole('button', { name: 'Close' }).click();
     await expect(dialog).toBeHidden();
   });
-  test('@avt-advanced-states danger dialog', async ({ page }) => {
+
+  test('@avt-alertdialog-role danger dialog', async ({ page }) => {
     await visitStory(page, {
       component: 'unstable_Dialog',
       id: 'experimental-unstable-dialog--danger-dialog',
@@ -108,11 +101,9 @@ test.describe('@avt Dialog', () => {
     });
     const toggleButton = page.getByRole('button', { name: 'Toggle open' });
     await toggleButton.click();
-    const dialog = page.locator('dialog');
+    const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();
     await expect(dialog).toHaveClass(/cds--dialog--danger/);
-    await expect(
-      page.locator('.cds--btn.cds--btn--secondary:has-text("Cancel")')
-    ).toBeFocused();
+    await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
   });
 });
