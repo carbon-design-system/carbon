@@ -1,113 +1,79 @@
-import { ArgTypes, Markdown } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 
 # Notification
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/notification)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/notification)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/notification/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/notification/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/notification)
+## Table of Contents
 
-Notifications are messages that communicate information to the user.
+- [Overview](#overview)
+- [Actionable notification](#actionable-notification)
+- [Inline notification & Toast notification](#inline-notification-and-toast-notification)
+- [Component API](#component-api)
+- [Actionable](#actionable)
+- [Inline](#inline)
+- [Toast](#toast)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+There are 3 different types of notification components:
+`cds-actionable-notification`, `cds-inline-notification`, and
+`cds-toast-notification`.
 
-### JS (via import)
+### Actionable notification
 
-```javascript
-import '@carbon/web-components/es/components/notification/index.js';
-```
+The `cds-actionable-notification` component should be used when user action is
+required. It can include an action, other interactive elements or rich text. It
+uses Toast-like styling by default, but if you'd like it to be visually similar
+to an `cds-inline-notification`, you can use the `inline` attribute. If
+`action-button-label` is not provided, an action button will not be rendered.
+This component grabs and traps focus until the action is acted upon or the
+notification is dismissed.
 
-### SCSS (must include with JS import)
+### Inline notification and Toast notification
 
-```css
-@use '@carbon/styles/scss/components/notification';
-```
+The `cds-inline-notification` and `cds-toast-notification` components cannot
+contain interactive elements or rich text. These are announced by screenreaders
+when rendered. They don't grab focus. Use them to provide the user with an
+alert, status, or log.
 
-<Markdown>{`${cdnJs({ components: ['notification'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+## Actionable
 
-### HTML
+<Canvas id="components-notifications-actionable--default" />
 
-```html
-<cds-inline-notification
-  style="min-width: 30rem; margin-bottom: .5rem"
-  title="Notification title"
-  subtitle="Subtitle text goes here.">
-</cds-inline-notification>
-```
+## Inline
 
-## Actionable notification
+<Canvas id="components-notifications-inline--default" />
 
-Actionable notifications allow for interactive elements within a notification
-styled like an inline or toast notification. Actionable notifications, since
-they require user interaction, take focus when triggered and can be highly
-disruptive to screen readers and keyboard users. With actionable notifications,
-only one action is allowed per notification. This action frequently takes users
-to a flow or page related to the message, where they can resolve the
-notification.
+## Toast
 
-```html
-<cds-actionable-notification
-  kind="error"
-  title="Notification title"
-  subtitle="Subtitle text goes here">
-  <cds-actionable-notification-button slot="action"
-    >Action</cds-actionable-notification-button
-  >
-</cds-actionable-notification>
-```
+<Canvas id="components-notifications-toast--default" />
 
-## Inline notification
+## Component API
 
-Inline notifications show up in task flows, to notify users of the status of an
-action. They usually appear at the top of the primary content area.
-
-```html
-<cds-inline-notification
-  style="min-width: 30rem; margin-bottom: .5rem"
-  title="Notification title"
-  subtitle="Subtitle text goes here.">
-</cds-inline-notification>
-```
-
-## Toast notification
-
-Toasts are a non-modal, time-based window elements used to display short
-messages; they usually appear at the bottom of the screen and disappear after a
-few seconds.
-
-```html
-<cds-toast-notification
-  style="min-width: 30rem; margin-bottom: 0.5rem;"
-  title="Notification title"
-  subtitle="Subtitle text goes here.">
-</cds-toast-notification>
-```
-
-## `<cds-actionable-notification>` attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-actionable-notification open>`) and `false` means not setting the
-attribute (e.g. `<cds-actionable-notification>` without `open` attribute).
+## `cds-actionable-notification`
 
 <ArgTypes of="cds-actionable-notification" />
 
-## `<cds-inline-notification>` attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-inline-notification open>`) and `false` means not setting the attribute
-(e.g. `<cds-inline-notification>` without `open` attribute).
+## `cds-inline-notification`
 
 <ArgTypes of="cds-inline-notification" />
 
-## `<cds-toast-notification>` attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-toast-notification open>`) and `false` means not setting the attribute
-(e.g. `<cds-toast-notification>` without `open` attribute).
+## `cds-toast-notification`
 
 <ArgTypes of="cds-toast-notification" />
+
+<Markdown>{`${cdnJs({ components: ['notification'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/notification/notification.mdx).

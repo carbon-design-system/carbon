@@ -10,12 +10,14 @@ export {
   PageHeaderContent,
   PageHeaderTabBar,
   PageHeaderHeroImage,
+  PageHeaderTabs,
   //
   Root,
   BreadcrumbBar,
   Content,
   TabBar,
   HeroImage,
+  Tabs,
 } from './PageHeader';
 export type {
   PageHeaderProps,
@@ -23,4 +25,5 @@ export type {
   PageHeaderContentProps,
   PageHeaderTabBarProps,
   PageHeaderHeroImageProps,
+  PageHeaderTabsProps,
 } from './PageHeader';

@@ -19,6 +19,7 @@ import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
 import { DefinitionTooltip } from '../Tooltip';
 import { AspectRatio } from '../AspectRatio';
+import { Tabs as BaseTabs } from '../Tabs/Tabs';
 
 /**
  * ----------
@@ -317,12 +318,26 @@ const PageHeaderTabBar = React.forwardRef<
   );
   return (
     <div className={classNames} ref={ref} {...other}>
-      <p>page header tab bar</p>
       {children}
     </div>
   );
 });
 PageHeaderTabBar.displayName = 'PageHeaderTabBar';
+
+interface PageHeaderTabsProps extends React.ComponentProps<typeof BaseTabs> {
+  children?: React.ReactNode;
+  className?: string;
+}
+
+const PageHeaderTabs = React.forwardRef<HTMLDivElement, PageHeaderTabsProps>(
+  function PageHeaderTabs(
+    { className, children, ...other }: PageHeaderTabsProps,
+    ref
+  ) {
+    return <BaseTabs {...other}>{children}</BaseTabs>;
+  }
+);
+PageHeaderTabs.displayName = 'PageHeaderTabs';
 
 /**
  * -------
@@ -344,6 +359,9 @@ HeroImage.displayName = 'PageHeaderHeroImage';
 const TabBar = PageHeaderTabBar;
 TabBar.displayName = 'PageHeaderTabBar';
 
+const Tabs = PageHeaderTabs;
+Tabs.displayName = 'PageHeader.Tabs';
+
 export {
   // direct exports
   PageHeader,
@@ -351,12 +369,14 @@ export {
   PageHeaderContent,
   PageHeaderHeroImage,
   PageHeaderTabBar,
+  PageHeaderTabs,
   // namespaced
   Root,
   BreadcrumbBar,
   Content,
   HeroImage,
   TabBar,
+  Tabs,
 };
 export type {
   PageHeaderProps,
@@ -364,4 +384,5 @@ export type {
   PageHeaderContentProps,
   PageHeaderHeroImageProps,
   PageHeaderTabBarProps,
+  PageHeaderTabsProps,
 };
