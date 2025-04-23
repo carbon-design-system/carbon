@@ -1,117 +1,66 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as MultiSelectStories from './multi-select.stories';
 
 <Meta of={MultiSelectStories} />
 
 # Multi select
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/multi-select)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/multi-select)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/dropdown/usage#multiselect)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/dropdown/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/multi-select)
+## Table of Contents
 
-Multi select is used when user needs to select multiple options from a dropdown.
+- [Overview](#overview)
+- [With initial selected items](#with-initial-selected-items)
+- [Filtering](#filtering)
+- [With layer](#with-layer)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
-The label remains persistent within the dropdown. Once the user chooses an
-option from the list, a number badge will appear to the left of the label
-containing the total number of selected items. Selected options float to the top
-of the list in alphanumeric order.
+## Overview
 
-To clear all selected items from a list, hover over the number badge and click
-the “x” icon next to the value. To help with clarity, a browser tooltip appears
-when the user hovers over the “x” (or close) icon to indicate the click action
-results.
+The `cds-multi-select` component is a variant of the `dropdown` component that
+allows for multiple items to be selected. The `cds-multi-select` component stays
+open while items are being selected.
 
-## Getting started
+<Canvas of={MultiSelectStories.Default} />
 
-Here's a quick example to get you started.
+### With initial selected items
 
-### JS (via import)
+By using the `selected` attribute, `cds-multi-select-item` components can be
+pre-selected.
 
-```javascript
-import '@carbon/web-components/es/components/multi-select/index.js';
-```
+<Canvas of={MultiSelectStories.WithInitialSelectedItems} />
 
-<Markdown>{`${cdnJs({ components: ['multi-select'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+### Filtering
 
-### HTML
+Setting the `filterable` attribute to `true` allows for filtering the list of
+selectable items to a subset.
 
-```html
-<cds-multi-select value="foo,baz">
-  <cds-multi-select-item value="foo">Foo</cds-multi-select-item>
-  <cds-multi-select-item value="bar">Bar</cds-multi-select-item>
-  <cds-multi-select-item value="baz">Baz</cds-multi-select-item>
-</cds-multi-select>
-```
+<Canvas of={MultiSelectStories.Filterable} />
 
-## Filter mode
+### With layer
 
-If you'd like to have a search bar to filter through the dropdown options, you
-can add the `filterable` boolean to the `<cds-multi-select>` component.
+<Canvas of={MultiSelectStories.WithLayer} />
 
-```html
-<cds-multi-select value="foo,baz" filterable>
-  <cds-multi-select-item value="foo">Foo</cds-multi-select-item>
-  <cds-multi-select-item value="bar">Bar</cds-multi-select-item>
-  <cds-multi-select-item value="baz">Baz</cds-multi-select-item>
-</cds-multi-select>
-```
+## Component API
 
-Often you want to render the multi select items from your data. Below is an
-example of [`lit-html`](https://lit-html.polymer-project.org), but similar
-stories apply to React, Angular, Vue, Backbone, Knockout and many others:
-
-```javascript
-html`
-  <cds-multi-select>
-    ${items.map(
-      (item) =>
-        html`
-          <cds-multi-select-item value="${item.value}"
-            >${item.title}</cds-multi-select-item
-          >
-        `
-    )}
-  </cds-multi-select>
-`;
-```
-
-## Selection
-
-When user attempts to change selection in multi select item,
-`cds-multi-select-beingselected` event fires on `<cds-multi-select>`, which has
-the following properties in the event details:
-
-| Property | Description                                                     |
-| -------- | --------------------------------------------------------------- |
-| `item`   | The `<cds-multi-select-item>` whose selection is being changed. |
-
-`cds-multi-select-beingselected` bubbles and is cancelable. Canceling this event
-means canceling change in selection.
-
-## Note on keyboard navigation
-
-Similar to native `<select>`, `<cds-multi-select>` keeps focusing on itself even
-while the menu is open and user is navigating through arrow keys. Given that,
-`<cds-multi-select-item>` does not handle keyboard events by itself.
-`<cds-multi-select>` takes care of handling keyboard events for multi select
-items and updates `<cds-multi-select-item>`.
-
-## `<cds-multi-select>` attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-multi-select open>`) and `false` means not setting the attribute (e.g.
-`<cds-multi-select>` without `open` attribute).
+## `cds-multi-select`
 
 <ArgTypes of="cds-multi-select" />
 
-## `<cds-multi-select-item>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-multi-select-item disabled>`) and `false` means not setting the attribute
-(e.g. `<cds-multi-select-item>` without `disabled` attribute).
+## `cds-multi-select-item`
 
 <ArgTypes of="cds-multi-select-item" />
+
+<Markdown>{`${cdnJs({ components: ['multi-select'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/multi-select/multi-select.mdx).

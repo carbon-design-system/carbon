@@ -1,5 +1,5 @@
-import { Story, ArgTypes, Canvas, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as DefinitionTooltipStories from './definition-tooltip.stories';
 
 <Meta of={DefinitionTooltipStories} />
@@ -12,28 +12,26 @@ import * as DefinitionTooltipStories from './definition-tooltip.stories';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/tooltip/accessibility)
 
-{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
-
 ## Table of Contents
 
 - [Overview](#overview)
   - [Customizing the content of a definition tooltip](#customizing-the-content-of-a-definition-tooltip)
   - [Tooltip alignment](#tooltip-alignment)
 - [Component API](#component-api)
+- [CDN](#cdn)
 - [Feedback](#feedback)
-
-{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
 The `cds-definition-tooltip` component is used to provide additional information
-about a particular term or phrase in text content. It is similar to a `cds-tooltip`
-component but has fewer alignment options and has a slightly different
-interaction pattern.
+about a particular term or phrase in text content. It is similar to a
+`cds-tooltip` component but has fewer alignment options and has a slightly
+different interaction pattern.
 
-The `cds-definition-tooltip` is made up of two parts: a term and the tooltip itself.
-You can customize the contents of the tooltip through the `definition` slot. You
-can customize the term by providing your own slotted content to this component.
+The `cds-definition-tooltip` is made up of two parts: a term and the tooltip
+itself. You can customize the contents of the tooltip through the `definition`
+slot. You can customize the term by providing your own slotted content to this
+component.
 
 <Canvas of={DefinitionTooltipStories.Default} />
 
@@ -49,15 +47,17 @@ available to users of screen reader software.
 
 ### Tooltip alignment
 
-The `align` prop allows you to specify where your content should be placed
+The `align` attribute allows you to specify where your content should be placed
 relative to the tooltip. For example, if you provide `align="top"` to the
-`cds-definition-tooltip` component then the tooltip will render above your component.
-Similarly, if you provide `align="bottom"` then the tooltip will render below
-your component.
+`cds-definition-tooltip` component then the tooltip will render above your
+component. Similarly, if you provide `align="bottom"` then the tooltip will
+render below your component.
 
 ## Component API
 
-<ArgTypes of="cds-definition-tooltip"/>
+<ArgTypes of="cds-definition-tooltip" />
+
+<Markdown>{`${cdnJs({ components: ['definition-tooltip'] })}`}</Markdown>
 
 ## Feedback
 
