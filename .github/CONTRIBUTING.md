@@ -382,3 +382,52 @@ services:
 
 - [`@carbon/react` template](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v11.2.0/examples/codesandbox)
 - [`@carbon/styles` template](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v11.2.0/examples/codesandbox-styles)
+
+## Creating a patch release
+
+Patch releases (e.g., `v11.80.2`) are based on existing release tags and should
+only include specific cherry-picked commits.
+
+### Prepare the release branch
+
+1. Fetch the latest tags:
+   ```sh
+   git fetch --all --tags
+   ```
+2. Create a new release branch from the previous tag (e.g., `v11.80.1`):
+   ```sh
+   git checkout -b release/v11.80.2 v11.80.1
+   ```
+3. Cherry-pick the commits you want to include:
+   ```sh
+   git cherry-pick <commit-sha-1> <commit-sha-2> ...
+   ```
+4. Resolve any merge conflicts if needed, then push the branch:
+   ```sh
+   git push origin release/v11.80.2
+   ```
+
+### Run the Version patch workflow
+
+1. Go to the
+   [Version patch workflow](https://github.com/carbon-design-system/carbon/actions/workflows/version-patch.yml).
+2. Click **Run workflow**.
+3. Provide:
+   - **Tag**: The new version tag (e.g., `v11.80.2`).
+   - **Release branch**: The branch you created (e.g., `release/v11.80.2`).
+
+This workflow will:
+
+- Install dependencies.
+- Create a patch version using `lerna`.
+- Commit the version bump.
+- Tag the commit.
+- Push the tag to the remote repository.
+
+### Verify the release
+
+After the workflow finishes:
+
+- A new tag should appear
+  [in the tag list](https://github.com/carbon-design-system/carbon/tags).
+- A release action should automatically trigger.
