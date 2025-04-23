@@ -6,7 +6,14 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, {
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+  createContext,
+  useContext,
+} from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { usePrefix } from '../../internal/usePrefix';
 import cx from 'classnames';
@@ -20,6 +27,11 @@ import ButtonSet from '../ButtonSet';
 import Button from '../Button';
 import { useId } from '../../internal/useId';
 import { debounce } from 'es-toolkit/compat';
+const DialogContext = createContext<{
+  titleId?: string;
+  subtitleId?: string;
+  dialogId?: string;
+}>({});
 
 /**
  * ----------
@@ -72,15 +84,10 @@ export interface DialogProps extends ReactAttr<HTMLDialogElement> {
   open?: boolean;
 
   /**
-   * Specify whether the dialog contains scrolling content
-   */
-  hasScrollingContent?: boolean;
-
-  /**
    * Specify the role of the dialog for accessibility
    * 'dialog' is the default, but 'alertdialog' can be used for important messages requiring user attention
    */
-  role?: 'dialog' | 'alertdialog';
+  role?: '' | 'alertdialog';
 
   /**
    * Specify a label for screen readers
@@ -109,8 +116,7 @@ export const unstable__Dialog = React.forwardRef(
       onClose = noopFn,
       onRequestClose = noopFn,
       open = false,
-      hasScrollingContent = false,
-      role = 'dialog',
+      role,
       ariaLabel,
       ariaLabelledBy,
       ariaDescribedBy,
@@ -120,6 +126,7 @@ export const unstable__Dialog = React.forwardRef(
   ) => {
     const prefix = usePrefix();
     const dialogId = useId();
+
     const titleId = `${prefix}--dialog-header__heading--${dialogId}`;
     const subtitleId = `${prefix}--dialog-header__label--${dialogId}`;
 
@@ -168,39 +175,12 @@ export const unstable__Dialog = React.forwardRef(
       }
     }, [modal, open]);
 
-    useEffect(() => {
-      if (modal && open) {
-        document.body.classList.add(`${prefix}--body--with-modal-open`);
-      } else {
-        document.body.classList.remove(`${prefix}--body--with-modal-open`);
-      }
-
-      return () => {
-        document.body.classList.remove(`${prefix}--body--with-modal-open`);
-      };
-    }, [modal, open, prefix]);
-
-    // Find and set IDs for title and subtitle when dialog opens
-    useEffect(() => {
-      if (ref.current && open) {
-        const title = ref.current.querySelector(
-          `.${prefix}--dialog-header__heading`
-        );
-        const subtitle = ref.current.querySelector(
-          `.${prefix}--dialog-header__label`
-        );
-
-        if (title && !title.id) {
-          title.id = titleId;
-        }
-
-        if (subtitle && !subtitle.id) {
-          subtitle.id = subtitleId;
-        }
-      }
-    }, [open, prefix, titleId, subtitleId]);
-
     const containerClasses = cx(`${prefix}--dialog-container`);
+    const contextValue = {
+      dialogId,
+      titleId,
+      subtitleId,
+    };
 
     useEffect(() => {
       if (ref.current && open && !ariaLabel && !ariaLabelledBy) {
@@ -216,26 +196,27 @@ export const unstable__Dialog = React.forwardRef(
     }, [open, ariaLabel, ariaLabelledBy, prefix]);
 
     return (
-      <dialog
-        {...rest}
-        className={cx(
-          `${prefix}--dialog`,
-          {
-            [`${prefix}--dialog--modal`]: modal,
-            [`${prefix}--dialog--scrolling`]: hasScrollingContent,
-          },
-          className
-        )}
-        ref={ref}
-        onCancel={onCancel}
-        onClick={handleClick}
-        onClose={onClose}
-        role={role}
-        aria-label={ariaLabel}
-        aria-labelledby={!ariaLabel ? ariaLabelledBy || titleId : undefined}
-        aria-describedby={ariaDescribedBy}>
-        <div className={containerClasses}>{children}</div>
-      </dialog>
+      <DialogContext.Provider value={contextValue}>
+        <dialog
+          {...rest}
+          className={cx(
+            `${prefix}--dialog`,
+            {
+              [`${prefix}--dialog--modal`]: modal,
+            },
+            className
+          )}
+          ref={ref}
+          onCancel={onCancel}
+          onClick={handleClick}
+          onClose={onClose}
+          role={role}
+          aria-label={ariaLabel}
+          aria-labelledby={!ariaLabel ? ariaLabelledBy || titleId : undefined}
+          aria-describedby={ariaDescribedBy}>
+          <div className={containerClasses}>{children}</div>
+        </dialog>
+      </DialogContext.Provider>
     );
   }
 );
@@ -271,11 +252,6 @@ unstable__Dialog.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * Specify whether the dialog contains scrolling content
-   */
-  hasScrollingContent: PropTypes.bool,
-
-  /**
    * Specify the role of the dialog for accessibility
    */
   role: PropTypes.oneOf(['dialog', 'alertdialog']),
@@ -283,12 +259,12 @@ unstable__Dialog.propTypes = {
   /**
    * Specify a label for screen readers
    */
-  ariaLabel: PropTypes.string,
+  'aria-label': PropTypes.string,
 
   /**
    * Specify the ID of an element that labels this dialog
    */
-  ariaLabelledBy: PropTypes.string,
+  'aria-labelledby': PropTypes.string,
 
   /**
    * Specify the ID of an element that describes this dialog
@@ -434,13 +410,14 @@ export const DialogTitle = React.forwardRef<
   DialogTitleProps
 >(({ children, className, id, ...rest }, ref) => {
   const prefix = usePrefix();
-  const dialogId = useId();
-  const defaultId = `${prefix}--dialog-header__heading--${dialogId}`;
+
+  const { titleId } = useContext(DialogContext);
+  const headingId = id || titleId;
 
   return (
     <Text
       as="h2"
-      id={id || defaultId}
+      id={headingId}
       className={cx(`${prefix}--dialog-header__heading`, className)}
       ref={ref}
       {...rest}>
@@ -494,14 +471,15 @@ export const DialogSubtitle = React.forwardRef<
   HTMLParagraphElement,
   DialogSubtitleProps
 >(({ children, className, id, ...rest }, ref) => {
+  console.log('suntitle id', id);
   const prefix = usePrefix();
-  const dialogId = useId();
-  const defaultId = `${prefix}--dialog-header__label--${dialogId}`;
+  const { subtitleId } = useContext(DialogContext);
+  const labelId = id || subtitleId;
 
   return (
     <Text
       as="h2"
-      id={id || defaultId}
+      id={labelId}
       className={cx(`${prefix}--dialog-header__label`, className)}
       ref={ref}
       {...rest}>
@@ -574,6 +552,7 @@ export const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
         }
       }
 
+      console.log('isScrollable', isScrollable);
       const debouncedHandler = debounce(handler, 200);
       window.addEventListener('resize', debouncedHandler);
       return () => {
@@ -591,7 +570,6 @@ export const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
       className
     );
 
-    // Create accessibility props for scrollable content, similar to Modal
     const hasScrollingContentProps =
       hasScrollingContent || isScrollable
         ? {
@@ -643,14 +621,6 @@ DialogBody.propTypes = {
 
 /**
  * -------------
- * DialogContent (alias for DialogBody)
- * -------------
- */
-export const DialogContent = DialogBody;
-DialogContent.displayName = 'DialogContent';
-
-/**
- * -------------
  * DialogFooter
  * -------------
  */
@@ -699,7 +669,7 @@ export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
       onRequestClose,
       onRequestSubmit,
       primaryButtonText = 'Save',
-      secondaryButtonText = 'Cancle',
+      secondaryButtonText = 'Cancel',
       danger = false,
       ...rest
     },
@@ -750,7 +720,7 @@ interface DialogComponent
   Title: typeof DialogTitle;
   Subtitle: typeof DialogSubtitle;
   Body: typeof DialogBody;
-  Content: typeof DialogContent;
+
   Footer: typeof DialogFooter;
 }
 
@@ -777,9 +747,6 @@ Subtitle.displayName = 'Dialog.Subtitle';
 const Body = DialogBody;
 Body.displayName = 'Dialog.Body';
 
-const Content = DialogContent;
-Content.displayName = 'Dialog.Content';
-
 const Footer = DialogFooter;
 Footer.displayName = 'Dialog.Footer';
 
@@ -790,7 +757,6 @@ Footer.displayName = 'Dialog.Footer';
 (unstable__Dialog as DialogComponent).Title = Title;
 (unstable__Dialog as DialogComponent).Subtitle = Subtitle;
 (unstable__Dialog as DialogComponent).Body = Body;
-(unstable__Dialog as DialogComponent).Content = Content;
 (unstable__Dialog as DialogComponent).Footer = Footer;
 
 export const Dialog = unstable__Dialog as DialogComponent;

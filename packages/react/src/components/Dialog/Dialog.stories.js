@@ -8,6 +8,7 @@
 /* eslint-disable storybook/story-exports */
 
 import React, { useEffect, useState } from 'react';
+import { VStack } from '../Stack';
 import {
   unstable__Dialog as Dialog,
   DialogHeader,
@@ -68,7 +69,7 @@ export const Modal = ({ open: _open, ...args }) => {
   }, [_open]);
 
   return (
-    <div>
+    <>
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
@@ -76,36 +77,36 @@ export const Modal = ({ open: _open, ...args }) => {
         {...args}
         open={open}
         onRequestClose={handleRequestClose}
-        aria-label="Dialog Title">
+        aria-labelledby="title">
         <Dialog.Header>
           <Dialog.Subtitle>Configure dialog settings</Dialog.Subtitle>
-          <Dialog.Title>Modal Dialog Example</Dialog.Title>
+          <Dialog.Title id="title">Modal Dialog Example</Dialog.Title>
           <DialogControls>
             <DialogCloseButton onClick={closeDialog} />
           </DialogControls>
         </Dialog.Header>
+
         <Dialog.Body>
-          <p>
-            Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
-            autem officiis dolores facilis nulla earum! Neque quia nemo sequi
-            assumenda ratione officia Voluptate beatae eligendi placeat nemo
-            laborum, ratione.
-          </p>
-          <br></br>
-          <p>
-            Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
-            autem officiis dolores facilis nulla earum! Neque quia nemo sequi
-            assumenda ratione officia Voluptate beatae eligendi placeat nemo
-            laborum, ratione.
-          </p>
-          <br></br>
-          <p>
-            Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
-            autem officiis dolores facilis nulla earum! Neque quia nemo sequi
-            assumenda ratione officia Voluptate beatae eligendi placeat nemo
-            laborum, ratione.
-          </p>
-          <br></br>
+          <VStack>
+            <p>
+              Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+              autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+              assumenda ratione officia Voluptate beatae eligendi placeat nemo
+              laborum, ratione.
+            </p>
+            <p>
+              Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+              autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+              assumenda ratione officia Voluptate beatae eligendi placeat nemo
+              laborum, ratione.
+            </p>
+            <p>
+              Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+              autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+              assumenda ratione officia Voluptate beatae eligendi placeat nemo
+              laborum, ratione.
+            </p>
+          </VStack>
         </Dialog.Body>
         <Dialog.Footer>
           <Button type="button" kind="secondary" onClick={closeDialog}>
@@ -116,7 +117,7 @@ export const Modal = ({ open: _open, ...args }) => {
           </Button>
         </Dialog.Footer>
       </Dialog>
-    </div>
+    </>
   );
 };
 Modal.args = {
@@ -145,7 +146,7 @@ export const NonModal = ({ open: _open, ...args }) => {
   }, [_open]);
 
   return (
-    <div>
+    <>
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
@@ -173,13 +174,8 @@ export const NonModal = ({ open: _open, ...args }) => {
             id="dialog-text-input"
             labelText="Name"
             placeholder="Enter your name"
-            style={{ marginBottom: '1rem' }}
           />
-          <Select
-            id="dialog-select"
-            labelText="Region"
-            defaultValue="us-south"
-            style={{ marginBottom: '1rem' }}>
+          <Select id="dialog-select" labelText="Region" defaultValue="us-south">
             <SelectItem value="us-south" text="US South" />
             <SelectItem value="us-east" text="US East" />
           </Select>
@@ -199,7 +195,7 @@ export const NonModal = ({ open: _open, ...args }) => {
           </Button>
         </Dialog.Footer>
       </Dialog>
-    </div>
+    </>
   );
 };
 NonModal.args = {
@@ -230,7 +226,7 @@ export const WithScrollingContent = ({ open: _open, ...args }) => {
   }, [_open]);
 
   return (
-    <div>
+    <>
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
@@ -247,68 +243,66 @@ export const WithScrollingContent = ({ open: _open, ...args }) => {
           </DialogControls>
         </Dialog.Header>
         <Dialog.Body hasScrollingContent>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            eu nibh odio. Nunc a consequat est, id porttitor sapien. Proin vitae
-            leo vitae orci tincidunt auctor eget eget libero. Ut tincidunt
-            ultricies fringilla. Aliquam erat volutpat. Aenean arcu odio,
-            elementum vel vehicula vitae, porttitor ac lorem. Sed viverra elit
-            ac risus tincidunt fermentum. Ut sollicitudin nibh id risus ornare
-            ornare. Etiam gravida orci ut lectus dictum, quis ultricies felis
-            mollis. Mauris nec commodo est, nec faucibus nibh. Nunc commodo ante
-            quis pretium consectetur. Ut ac nisl vitae mi mattis vulputate a at
-            elit. Nullam porttitor ex eget mi feugiat mattis. Nunc non sodales
-            magna. Proin ornare tellus quis hendrerit egestas. Donec pharetra
-            leo nec molestie sollicitudin.
-          </p>
-          <br></br>
-          <TextInput
-            id="dialog-text-input"
-            labelText="Name"
-            placeholder="Enter your name"
-            style={{ marginBottom: '1rem' }}
-          />
-          <Select
-            id="dialog-select"
-            labelText="Region"
-            defaultValue="us-south"
-            style={{ marginBottom: '1rem' }}>
-            <SelectItem value="us-south" text="US South" />
-            <SelectItem value="us-east" text="US East" />
-          </Select>
-          <p>
-            Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
-            autem officiis dolores facilis nulla earum! Neque quia nemo sequi
-            assumenda ratione officia Voluptate beatae eligendi placeat nemo
-            laborum, ratione.
-          </p>
-          <p>
-            Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
-            autem officiis dolores facilis nulla earum! Neque quia nemo sequi
-            assumenda ratione officia Voluptate beatae eligendi placeat nemo
-            laborum, ratione.
-          </p>
-          <br></br>
-          <TextInput
-            id="dialog-text-input"
-            labelText="Name"
-            placeholder="Enter your name"
-            style={{ marginBottom: '1rem' }}
-          />
-          <Select
-            id="dialog-select"
-            labelText="Region"
-            defaultValue="us-south"
-            style={{ marginBottom: '1rem' }}>
-            <SelectItem value="us-south" text="US South" />
-            <SelectItem value="us-east" text="US East" />
-          </Select>
-          <p>
-            Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
-            autem officiis dolores facilis nulla earum! Neque quia nemo sequi
-            assumenda ratione officia Voluptate beatae eligendi placeat nemo
-            laborum, ratione.
-          </p>
+          <VStack>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+              eu nibh odio. Nunc a consequat est, id porttitor sapien. Proin
+              vitae leo vitae orci tincidunt auctor eget eget libero. Ut
+              tincidunt ultricies fringilla. Aliquam erat volutpat. Aenean arcu
+              odio, elementum vel vehicula vitae, porttitor ac lorem. Sed
+              viverra elit ac risus tincidunt fermentum. Ut sollicitudin nibh id
+              risus ornare ornare. Etiam gravida orci ut lectus dictum, quis
+              ultricies felis mollis. Mauris nec commodo est, nec faucibus nibh.
+              Nunc commodo ante quis pretium consectetur. Ut ac nisl vitae mi
+              mattis vulputate a at elit. Nullam porttitor ex eget mi feugiat
+              mattis. Nunc non sodales magna. Proin ornare tellus quis hendrerit
+              egestas. Donec pharetra leo nec molestie sollicitudin.
+            </p>
+            <br></br>
+            <TextInput
+              id="dialog-text-input"
+              labelText="Name"
+              placeholder="Enter your name"
+            />
+            <Select
+              id="dialog-select"
+              labelText="Region"
+              defaultValue="us-south">
+              <SelectItem value="us-south" text="US South" />
+              <SelectItem value="us-east" text="US East" />
+            </Select>
+            <p>
+              Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+              autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+              assumenda ratione officia Voluptate beatae eligendi placeat nemo
+              laborum, ratione.
+            </p>
+            <p>
+              Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+              autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+              assumenda ratione officia Voluptate beatae eligendi placeat nemo
+              laborum, ratione.
+            </p>
+            <br></br>
+            <TextInput
+              id="dialog-text-input"
+              labelText="Name"
+              placeholder="Enter your name"
+            />
+            <Select
+              id="dialog-select"
+              labelText="Region"
+              defaultValue="us-south">
+              <SelectItem value="us-south" text="US South" />
+              <SelectItem value="us-east" text="US East" />
+            </Select>
+            <p>
+              Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+              autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+              assumenda ratione officia Voluptate beatae eligendi placeat nemo
+              laborum, ratione.
+            </p>
+          </VStack>
         </Dialog.Body>
         <Dialog.Footer>
           <Button type="button" kind="secondary" onClick={closeDialog}>
@@ -319,7 +313,7 @@ export const WithScrollingContent = ({ open: _open, ...args }) => {
           </Button>
         </Dialog.Footer>
       </Dialog>
-    </div>
+    </>
   );
 };
 WithScrollingContent.args = {
@@ -348,7 +342,7 @@ export const PassiveDialog = ({ open: _open, ...args }) => {
   }, [_open]);
 
   return (
-    <div>
+    <>
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
@@ -369,14 +363,14 @@ export const PassiveDialog = ({ open: _open, ...args }) => {
             This is a passive dialog example with no footer buttons. Passive
             dialogs are used for simple notifications or information displays.
           </p>
-          <p style={{ marginTop: '1rem' }}>
+          <p>
             The user can dismiss this dialog by clicking the close button in the
             top-right corner or by clicking outside the dialog (if
             preventCloseOnClickOutside is not set).
           </p>
         </Dialog.Body>
       </Dialog>
-    </div>
+    </>
   );
 };
 
@@ -401,7 +395,7 @@ export const DangerDialog = ({ open: _open, ...args }) => {
   }, [_open]);
 
   return (
-    <div>
+    <>
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
@@ -409,10 +403,10 @@ export const DangerDialog = ({ open: _open, ...args }) => {
         {...args}
         open={open}
         onRequestClose={handleRequestClose}
-        aria-label="Dialog Title">
+        aria-labelledby="title">
         <Dialog.Header>
           <Dialog.Subtitle>Account resources</Dialog.Subtitle>
-          <Dialog.Title>
+          <Dialog.Title id="title">
             Are you sure you want to delete this custom domain?
           </Dialog.Title>
           <DialogControls>
@@ -425,7 +419,7 @@ export const DangerDialog = ({ open: _open, ...args }) => {
           secondaryButtonText="Cancel"
           primaryButtonText="Delete"></Dialog.Footer>
       </Dialog>
-    </div>
+    </>
   );
 };
 DangerDialog.args = {
