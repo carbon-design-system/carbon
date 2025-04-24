@@ -284,7 +284,7 @@ function stateReducer(state, actionAndChanges) {
   }
 }
 
-const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps<any>>(
+const Dropdown = React.forwardRef(
   <ItemType,>(
     {
       autoAlign = false,
