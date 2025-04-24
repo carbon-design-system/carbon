@@ -13,7 +13,10 @@ export const useNoInteractiveChildren = (
 ) => {
   // TODO: Why can't the condition go inside the hook?
   if (process.env.NODE_ENV !== 'production') {
+    // TODO: https://github.com/carbon-design-system/carbon/issues/19005
+    /*
     // eslint-disable-next-line react-hooks/rules-of-hooks
+    */
     useEffect(() => {
       const node = ref.current ? getInteractiveContent(ref.current) : false;
 
@@ -32,7 +35,10 @@ export const useInteractiveChildrenNeedDescription = (
 ) => {
   // TODO: Why can't the condition go inside the hook?
   if (process.env.NODE_ENV !== 'production') {
+    // TODO: https://github.com/carbon-design-system/carbon/issues/19005
+    /*
     // eslint-disable-next-line react-hooks/rules-of-hooks
+    */
     useEffect(() => {
       const node = ref.current ? getInteractiveContent(ref.current) : false;
 

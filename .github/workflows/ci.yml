@@ -53,9 +53,9 @@ jobs:
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable --immutable-cache
-      - name: Lint JavaScript files
+      - name: Lint code
         run: yarn lint
-      - name: Lint Sass files
+      - name: Lint styles
         run: yarn lint:styles
 
   test:
