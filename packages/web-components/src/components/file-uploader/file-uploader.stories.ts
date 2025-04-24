@@ -9,7 +9,6 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import './index';
-import './demo-file-uploader';
 import { FILE_UPLOADER_ITEM_STATE } from './file-uploader-item';
 import { BUTTON_KIND, BUTTON_SIZE } from '../button/button';
 
@@ -114,12 +113,16 @@ const argTypes = {
 export const Default = {
   render: () => {
     return html`
-      <cds-ce-demo-file-uploader
-        accept="image/jpeg"
-        button
-        label-description="Max file size is 500mb. Only .jpg files are supported."
-        label-title="Upload files">
-      </cds-ce-demo-file-uploader>
+      <cds-file-uploader
+        label-title="Upload files"
+        label-description="Max file size is 500 MB. Only .jpg files are supported."
+        multiple>
+        <cds-file-uploader-button
+          accept="image/jpeg"
+          name="default-file-uploader-button">
+          Add file
+        </cds-file-uploader-button>
+      </cds-file-uploader>
     `;
   },
 };
@@ -127,11 +130,28 @@ export const Default = {
 export const DragAndDropUploadContainerExampleApplication = {
   render: () => {
     return html`
-      <cds-ce-demo-file-uploader
-        accept="image/jpeg image/png"
-        label-description="Max file size is 500kb. Supported file types are .jpg and .png."
-        label-title="Upload files">
-      </cds-ce-demo-file-uploader>
+      <cds-file-uploader
+        label-title="Upload files"
+        label-description="Max file size is 500 KB. Supported file types are .jpg and .png."
+        multiple>
+        <cds-file-uploader-drop-container accept="image/jpeg image/png">
+          Drag and drop files here or click to upload
+        </cds-file-uploader-drop-container>
+      </cds-file-uploader>
+    `;
+  },
+};
+
+export const DragAndDropUploadSingleContainerExampleApplication = {
+  render: () => {
+    return html`
+      <cds-file-uploader
+        label-title="Upload a file"
+        label-description="Max file size is 500 KB. Only .jpg files are supported.">
+        <cds-file-uploader-drop-container accept="image/jpeg">
+          Drag and drop a file here or click to upload
+        </cds-file-uploader-drop-container>
+      </cds-file-uploader>
     `;
   },
 };
@@ -139,9 +159,13 @@ export const DragAndDropUploadContainerExampleApplication = {
 export const FileUploaderDropContainer = {
   render: () => {
     return html`
-      <cds-file-uploader-drop-container accept="image/jpeg image/png">
-        Drag and drop files here or click to upload
-      </cds-file-uploader-drop-container>
+      <cds-file-uploader>
+        <cds-file-uploader-drop-container
+          multiple
+          accept="image/jpeg image/png">
+          Drag and drop files here or click to upload
+        </cds-file-uploader-drop-container>
+      </cds-file-uploader>
     `;
   },
 };

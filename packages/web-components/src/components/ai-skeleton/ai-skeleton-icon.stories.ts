@@ -7,12 +7,16 @@
 
 import { html } from 'lit';
 import './ai-skeleton-icon';
+import mdx from './ai-skeleton.mdx';
 
-export const Default = {
+export const AISkeletonIcon = {
   // This story doesn't accept any args.
   args: {},
   argTypes: {},
   parameters: {
+    docs: {
+      page: mdx,
+    },
     percy: {
       skip: true,
     },
@@ -26,7 +30,7 @@ export const Default = {
 };
 
 const meta = {
-  title: 'Experimental/AISkeleton/AISkeletonIcon',
+  title: 'Components/Skeleton/AISkeleton',
 };
 
 export default meta;
