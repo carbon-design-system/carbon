@@ -13,6 +13,7 @@ import React, {
   MouseEvent,
   forwardRef,
   ForwardedRef,
+  useEffect,
 } from 'react';
 import classNames from 'classnames';
 import { useId } from '../../internal/useId';
@@ -100,6 +101,12 @@ const SelectableTag = forwardRef(
       [`${prefix}--tag--selectable-selected`]: selectedTag,
     });
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+
+    useEffect(() => {
+      if (selected !== selectedTag) {
+        setSelectedTag(selected);
+      }
+    }, [selected]);
 
     useLayoutEffect(() => {
       const newElement = tagRef.current?.getElementsByClassName(

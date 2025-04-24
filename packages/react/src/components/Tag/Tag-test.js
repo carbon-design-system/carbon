@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -307,5 +307,20 @@ describe('Tag', () => {
     const ref = React.createRef();
     render(<SelectableTag type="red" text="Test Tag" ref={ref} />);
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+  });
+  it('Controlled selected tag', () => {
+    const ref = React.createRef();
+    const { rerender } = render(
+      <SelectableTag type="red" text="Test Tag" ref={ref} selected={true} />
+    );
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+    expect(selectableTag).toHaveClass(`${prefix}--tag--selectable-selected`);
+
+    rerender(
+      <SelectableTag type="red" text="Test Tag" ref={ref} selected={false} />
+    );
+    expect(selectableTag).container.toHaveClass(
+      `${prefix}--tag--selectable-selected`
+    );
   });
 });
