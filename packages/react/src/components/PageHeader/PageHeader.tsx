@@ -250,7 +250,7 @@ interface PageHeaderContentPageActionsProps {
    */
   className?: string;
   /**
-   *  The PageHeaderContent's page actions collabpsible Menu button label
+   * The PageHeaderContent's page actions collapsible Menu button label
    */
   menuButtonLabel?: string;
   /**
@@ -258,90 +258,92 @@ interface PageHeaderContentPageActionsProps {
    */
   pageActions?: React.ReactNode;
 }
-const PageHeaderContentPageActions = React.forwardRef<
-  HTMLDivElement,
-  PageHeaderContentPageActionsProps
->(
-  ({
-    className,
-    children,
-    menuButtonLabel = 'Actions',
-    pageActions,
-    ...other
-  }: PageHeaderContentPageActionsProps) => {
-    const prefix = usePrefix();
-    const classNames = classnames(
-      {
-        [`${prefix}--page-header__content__page-actions`]: true,
+const PageHeaderContentPageActions = ({
+  className,
+  children,
+  menuButtonLabel = 'Actions',
+  pageActions,
+  ...other
+}: PageHeaderContentPageActionsProps) => {
+  const prefix = usePrefix();
+  const classNames = classnames(
+    {
+      [`${prefix}--page-header__content__page-actions`]: true,
+    },
+    className
+  );
+
+  type pageAction = {
+    id: string;
+    label: string;
+    onClick: () => void;
+  };
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef<HTMLDivElement>(null);
+  const [menuButtonVisibility, setMenuButtonVisibility] = useState(false);
+  const [hiddenItems, setHiddenItems] = useState<pageAction[]>([]);
+
+  // need to set the grid columns width based on the menu button's width
+  // to avoid overlapping when resizing
+  useLayoutEffect(() => {
+    if (menuButtonVisibility && offsetRef.current) {
+      const width = offsetRef.current.offsetWidth;
+      document.documentElement.style.setProperty(
+        '--pageheader-title-grid-width',
+        `${width}px`
+      );
+    }
+  }, [menuButtonVisibility]);
+
+  useEffect(() => {
+    if (!containerRef.current || !Array.isArray(pageActions)) return;
+    createOverflowHandler({
+      container: containerRef.current,
+      // exclude the hidden menu button from children
+      maxVisibleItems: containerRef.current.children.length - 1,
+      onChange: (visible, hidden) => {
+        setHiddenItems(pageActions?.slice(visible.length));
+
+        if (hidden.length > 0) {
+          setMenuButtonVisibility(true);
+        }
       },
-      className
-    );
-    const containerRef = useRef<HTMLDivElement>(null);
-    const offsetRef = useRef<HTMLDivElement>(null);
-    const [menuButtonVisibility, setMenuButtonVisibility] = useState(false);
-    const [hiddenItems, setHiddenItems] = useState<any[]>([]);
+    });
+  }, []);
 
-    // need to set the grid columns width based on the menu button's width
-    // to avoid overlapping when resizing
-    useLayoutEffect(() => {
-      if (menuButtonVisibility && offsetRef.current) {
-        const width = offsetRef.current.offsetWidth;
-        document.documentElement.style.setProperty(
-          '--pageheader-title-grid-width',
-          `${width}px`
-        );
-      }
-    }, [menuButtonVisibility]);
-
-    useEffect(() => {
-      if (!containerRef.current || !Array.isArray(pageActions)) return;
-      createOverflowHandler({
-        container: containerRef.current,
-        // exclude the hidden menu button from children
-        maxVisibleItems: containerRef.current.children.length - 1,
-        onChange: (visible, hidden) => {
-          setHiddenItems(pageActions?.slice(visible.length));
-
-          if (hidden.length > 0) {
-            setMenuButtonVisibility(true);
-          }
-        },
-      });
-    }, []);
-
-    return (
-      <div className={classNames} ref={containerRef}>
-        {pageActions && (
-          <>
-            {Array.isArray(pageActions) && (
-              <>
-                {pageActions.map((action) => (
-                  <div key={action.id} className="action">
-                    {action.body}
-                  </div>
-                ))}
-                <span data-offset data-hidden ref={offsetRef}>
-                  <MenuButton
-                    menuAlignment="bottom-end"
-                    label={menuButtonLabel}
-                    size="md">
-                    {hiddenItems.reverse().map((item) => (
-                      <MenuItem
-                        key={item.id}
-                        label={item.label}
-                        onClick={item.onClick}
-                      />
-                    ))}
-                  </MenuButton>
-                </span>
-              </>
-            )}
-          </>
-        )}
-      </div>
-    );
-  }
-);
+  return (
+    <div className={classNames} ref={containerRef} {...other}>
+      {pageActions && (
+        <>
+          {Array.isArray(pageActions) && (
+            <>
+              {pageActions.map((action) => (
+                <div key={action.id} className="action">
+                  {action.body}
+                </div>
+              ))}
+              <span data-offset data-hidden ref={offsetRef}>
+                <MenuButton
+                  menuAlignment="bottom-end"
+                  label={menuButtonLabel}
+                  size="md">
+                  {[...hiddenItems].reverse().map((item) => (
+                    <MenuItem
+                      key={item.id}
+                      label={item.label}
+                      onClick={item.onClick}
+                    />
+                  ))}
+                </MenuButton>
+              </span>
+            </>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
 
 PageHeaderContentPageActions.displayName = 'PageHeaderContentPageActions';
 PageHeaderContentPageActions.propTypes = {
@@ -378,10 +380,11 @@ interface PageHeaderContentTextProps {
    */
   className?: string;
 }
-const PageHeaderContentText = React.forwardRef<
-  HTMLDivElement,
-  PageHeaderContentTextProps
->(({ className, children, ...other }: PageHeaderContentTextProps) => {
+const PageHeaderContentText = ({
+  className,
+  children,
+  ...other
+}: PageHeaderContentTextProps) => {
   const prefix = usePrefix();
   const classNames = classnames(
     {
@@ -390,8 +393,12 @@ const PageHeaderContentText = React.forwardRef<
     className
   );
 
-  return <div className={classNames}>{children}</div>;
-});
+  return (
+    <div className={classNames} {...other}>
+      {children}
+    </div>
+  );
+};
 
 PageHeaderContentText.displayName = 'PageHeaderContentText';
 PageHeaderContentText.propTypes = {
@@ -420,10 +427,11 @@ interface PageHeaderHeroImageProps {
    */
   className?: string;
 }
-const PageHeaderHeroImage = React.forwardRef<
-  HTMLDivElement,
-  PageHeaderHeroImageProps
->(({ className, children, ...other }: PageHeaderHeroImageProps) => {
+const PageHeaderHeroImage = ({
+  className,
+  children,
+  ...other
+}: PageHeaderHeroImageProps) => {
   const prefix = usePrefix();
   const classNames = classnames(
     {
@@ -440,7 +448,7 @@ const PageHeaderHeroImage = React.forwardRef<
       {children}
     </AspectRatio>
   );
-});
+};
 PageHeaderHeroImage.displayName = 'PageHeaderHeroImage';
 PageHeaderHeroImage.propTypes = {
   /**
