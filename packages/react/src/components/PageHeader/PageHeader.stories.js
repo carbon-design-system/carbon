@@ -14,6 +14,7 @@ import {
   PageHeaderTabBar,
   PageHeaderContentText,
   PageHeaderHeroImage,
+  PageHeaderTabs,
 } from '../PageHeader';
 import { Dropdown } from '../Dropdown';
 import { Tag } from '../Tag';
@@ -37,6 +38,7 @@ import {
   ViewMode_2,
 } from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
+import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 
 const BeeIcon = () => <Bee size={32} />;
 
@@ -79,6 +81,7 @@ export default {
     PageHeaderContent,
     PageHeaderHeroImage,
     PageHeaderTabBar,
+    PageHeaderTabs,
   },
   // uncomment includeStories before merging so the stories aren't visible in prod
   // includeStories: [],
@@ -98,7 +101,22 @@ export const Default = (args) => (
   <PageHeader.Root {...args}>
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content />
-    <PageHeader.TabBar />
+    <PageHeader.TabBar>
+      <PageHeader.Tabs>
+        <TabList>
+          <Tab>Dashboard</Tab>
+          <Tab>Monitoring</Tab>
+          <Tab>Activity</Tab>
+          <Tab>Settings</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Dashboard Tab Panel</TabPanel>
+          <TabPanel>Monitoring Tab Panel</TabPanel>
+          <TabPanel>Activity Tab Panel</TabPanel>
+          <TabPanel>Settings Tab Panel</TabPanel>
+        </TabPanels>
+      </PageHeader.Tabs>
+    </PageHeader.TabBar>
   </PageHeader.Root>
 );
 
@@ -122,7 +140,6 @@ export const Content = (args) => (
         Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
       </PageHeader.ContentText>
     </PageHeader.Content>
-    <PageHeader.TabBar />
   </PageHeader.Root>
 );
 
@@ -141,7 +158,6 @@ export const ContentWithIcon = (args) => (
         Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
       </PageHeader.ContentText>
     </PageHeader.Content>
-    <PageHeader.TabBar />
   </PageHeader.Root>
 );
 
@@ -176,7 +192,6 @@ export const ContentWithContextualActions = (args) => (
         Nisi molestie primis lorem nascetur sem metus mattis etiam scelerisque.
       </PageHeader.ContentText>
     </PageHeader.Content>
-    <PageHeader.TabBar />
   </PageHeader.Root>
 );
 
@@ -219,7 +234,6 @@ export const ContentWithHeroImage = (args) => (
             </PageHeader.HeroImage>
           </Column>
         </Grid>
-        <PageHeader.TabBar />
       </PageHeader.Root>
     </Column>
   </Grid>
@@ -364,21 +378,51 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
       </PageHeader.ContentText>
     </PageHeader.Content>
-    <PageHeader.TabBar />
   </PageHeader.Root>
 );
 
-export const TabBar = (args) => (
-  <PageHeader.Root>
-    <PageHeader.TabBar {...args} />
-  </PageHeader.Root>
-);
+export const TabBar = (args) => {
+  return (
+    <PageHeader.Root>
+      <PageHeader.TabBar {...args}>
+        <PageHeader.Tabs>
+          <TabList>
+            <Tab>Dashboard</Tab>
+            <Tab>Monitoring</Tab>
+            <Tab>Activity</Tab>
+            <Tab>Settings</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel key={0}>Dashboard Tab Panel</TabPanel>
+            <TabPanel>Monitoring Tab Panel</TabPanel>
+            <TabPanel>Activity Tab Panel</TabPanel>
+            <TabPanel>Settings Tab Panel</TabPanel>
+          </TabPanels>
+        </PageHeader.Tabs>
+      </PageHeader.TabBar>
+    </PageHeader.Root>
+  );
+};
 
 export const DirectExports = (args) => (
   <PageHeaderDirect {...args}>
     <PageHeaderBreadcrumbBar />
     <PageHeaderContent />
-    <PageHeaderTabBar />
-    <PageHeaderHeroImage />
+    <PageHeaderTabBar>
+      <PageHeaderTabs>
+        <TabList>
+          <Tab>Dashboard</Tab>
+          <Tab>Monitoring</Tab>
+          <Tab>Activity</Tab>
+          <Tab>Settings</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Dashboard Tab Panel</TabPanel>
+          <TabPanel>Monitoring Tab Panel</TabPanel>
+          <TabPanel>Activity Tab Panel</TabPanel>
+          <TabPanel>Settings Tab Panel</TabPanel>
+        </TabPanels>
+      </PageHeaderTabs>
+    </PageHeaderTabBar>
   </PageHeaderDirect>
 );

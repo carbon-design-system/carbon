@@ -2,6 +2,7 @@
 
 const chalk = require('chalk');
 
+// eslint-disable-next-line no-console
 console.warn(
   chalk.yellow('Warning: ') +
     'the ' +
