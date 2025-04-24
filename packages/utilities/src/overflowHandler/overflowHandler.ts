@@ -122,7 +122,7 @@ export function updateOverflowHandler({
     }
   }
 
-  onChange(visibleItems, hiddenItems);
+  hiddenItems.length && onChange(visibleItems, hiddenItems);
   return hiddenItems;
 }
 

@@ -101,7 +101,7 @@ describe('createOverflowHandler (width)', () => {
       [500, 10, 0], // All items fit
       [400, 8, 2], // Fits first 7 items
       [200, 4, 6], // Fits first 3 items
-      [80, 2, 8],
+      [90, 2, 8],
       [0, 0, 10],
     ])(
       'When container width is %ipx, expect %i visible and %i hidden',
@@ -166,7 +166,7 @@ describe('createOverflowHandler (height)', () => {
       [500, 10, 0],
       [400, 8, 2],
       [200, 4, 6],
-      [80, 2, 8],
+      [90, 2, 8],
       [0, 0, 10],
     ])(
       'When container height is %ipx, expect %i visible and %i hidden',
