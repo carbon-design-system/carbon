@@ -310,16 +310,19 @@ describe('Tag', () => {
   });
   it('Controlled selected tag', () => {
     const ref = React.createRef();
-    const { rerender } = render(
+    const { rerender, container } = render(
       <SelectableTag type="red" text="Test Tag" ref={ref} selected={true} />
     );
+
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
-    expect(selectableTag).toHaveClass(`${prefix}--tag--selectable-selected`);
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--tag--selectable-selected`
+    );
 
     rerender(
       <SelectableTag type="red" text="Test Tag" ref={ref} selected={false} />
     );
-    expect(selectableTag).container.toHaveClass(
+    expect(container.firstChild).not.toHaveClass(
       `${prefix}--tag--selectable-selected`
     );
   });
