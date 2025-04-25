@@ -853,10 +853,18 @@ const DatePicker = React.forwardRef(function DatePicker(
       calendarRef.current.set('inline', inline);
     }
   }, [inline]);
+
   useEffect(() => {
-    //when value prop is set to empty, this clears the flatpicker's calendar instance and text input
-    if (value === '') {
+    // when value prop is set to empty, this clears the flatpickr calendar instance and text input
+    // run if:
+    // 1. value prop is set to an empty value (any falsy value in JS) OR an array with all empty values
+    // 2. flatpickr instance contains values in its selectedDates property so it hasn't already been cleared
+    if (
+      (!value || (Array.isArray(value) && value.every((date) => !date))) &&
+      calendarRef.current?.selectedDates.length
+    ) {
       calendarRef.current?.clear();
+
       if (startInputField.current) {
         startInputField.current.value = '';
       }
