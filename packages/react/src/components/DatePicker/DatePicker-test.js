@@ -350,6 +350,66 @@ describe('DatePicker', () => {
     expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
     warn.mockRestore();
   });
+
+  it('end date in range mode should not retain old value after setting to null', async () => {
+    const DatePickerExample = () => {
+      const resetValues = { fromDate: null, toDate: null };
+      const [dateRange, setDateRange] = useState(resetValues);
+      const onChange = ({ fromDate, toDate }) => {
+        setDateRange({ fromDate, toDate });
+      };
+      return (
+        <>
+          <DatePicker
+            datePickerType="range"
+            onChange={(dates) => {
+              const [start, end] = dates;
+              onChange({ fromDate: start, toDate: end });
+            }}
+            value={
+              dateRange ? [dateRange.fromDate, dateRange.toDate] : [null, null]
+            }>
+            <DatePickerInput
+              id="fromDate"
+              placeholder="mm/dd/yyyy"
+              labelText="FromDate"
+            />
+            <DatePickerInput
+              id="toDate"
+              placeholder="mm/dd/yyyy"
+              labelText="ToDate"
+            />
+          </DatePicker>
+          <button type="button" onClick={() => setDateRange(resetValues)}>
+            reset
+          </button>
+        </>
+      );
+    };
+    render(<DatePickerExample />);
+
+    // populate fromDate and toDate values
+    await userEvent.type(
+      screen.getByLabelText('FromDate'),
+      '01/14/2025{enter}'
+    );
+    await userEvent.type(screen.getByLabelText('ToDate'), '02/10/2025{enter}');
+
+    // reset both values
+    await userEvent.click(screen.getByText('reset'));
+
+    // assert that toDate is empty
+    expect(screen.getByLabelText('ToDate')).toHaveValue('');
+
+    // populate fromDate
+    await userEvent.type(
+      screen.getByLabelText('FromDate'),
+      '01/14/2025{enter}'
+    );
+
+    // assert that toDate is still empty
+    expect(screen.getByLabelText('ToDate')).toHaveValue('');
+  });
 });
 
 describe('Simple date picker', () => {
