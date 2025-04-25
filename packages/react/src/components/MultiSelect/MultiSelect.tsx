@@ -23,6 +23,7 @@ import React, {
   ReactNode,
   useLayoutEffect,
   isValidElement,
+  useCallback,
 } from 'react';
 import ListBox, {
   ListBoxSize,
@@ -44,7 +45,6 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
 import Checkbox from '../Checkbox';
-import type { InternationalProps } from '../../types/common';
 import type { TranslateWithId } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 import {
@@ -298,7 +298,7 @@ export interface MultiSelectProps<ItemType>
   warnText?: ReactNode;
 }
 
-const MultiSelect = React.forwardRef(
+export const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
       autoAlign = false,
@@ -732,6 +732,36 @@ const MultiSelect = React.forwardRef(
 
     const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
 
+    const getSelectionStats = useCallback(
+      (
+        selectedItems: any[],
+        filteredItems: any[]
+      ): {
+        hasIndividualSelections: boolean;
+        nonSelectAllSelectedCount: number;
+        totalSelectableCount: number;
+      } => {
+        const hasIndividualSelections = selectedItems.some(
+          (selected) => !selected.isSelectAll
+        );
+
+        const nonSelectAllSelectedCount = selectedItems.filter(
+          (selected) => !selected.isSelectAll
+        ).length;
+
+        const totalSelectableCount = filteredItems.filter(
+          (item) => !item.isSelectAll && !item.disabled
+        ).length;
+
+        return {
+          hasIndividualSelections,
+          nonSelectAllSelectedCount,
+          totalSelectableCount,
+        };
+      },
+      [selectedItems, filteredItems]
+    );
+
     return (
       <div className={wrapperClasses}>
         <label className={titleClasses} {...labelProps}>
@@ -821,10 +851,16 @@ const MultiSelect = React.forwardRef(
                   selectedItems.filter((selected) => isEqual(selected, item))
                     .length > 0;
 
+                const {
+                  hasIndividualSelections,
+                  nonSelectAllSelectedCount,
+                  totalSelectableCount,
+                } = getSelectionStats(selectedItems, filteredItems);
+
                 const isIndeterminate =
-                  selectedItems.length !== 0 &&
                   item['isSelectAll'] &&
-                  !isChecked;
+                  hasIndividualSelections &&
+                  nonSelectAllSelectedCount < totalSelectableCount;
 
                 const itemProps = getItemProps({
                   item,
@@ -1120,5 +1156,3 @@ MultiSelect.propTypes = {
    */
   warnText: PropTypes.node,
 };
-
-export default MultiSelect as MultiSelectComponent;
