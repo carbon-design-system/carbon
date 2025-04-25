@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -42,7 +42,6 @@ export {
   useFeatureFlags as unstable_useFeatureFlags, // this export can be removed in v12
 } from './components/FeatureFlags';
 export * from './components/FileUploader';
-export * from './components/FilterableMultiSelect';
 export * from './components/FluidForm';
 export * from './components/Form';
 export * from './components/FormGroup';
@@ -140,6 +139,10 @@ export {
   FluidTextInput as unstable__FluidTextInput,
   FluidTextInputSkeleton as unstable__FluidTextInputSkeleton,
 } from './components/FluidTextInput';
+export {
+  FluidNumberInput as unstable__FluidNumberInput,
+  FluidNumberInputSkeleton as unstable__FluidNumberInputSkeleton,
+} from './components/FluidNumberInput';
 export {
   FluidTimePicker as unstable__FluidTimePicker,
   FluidTimePickerSkeleton as unstable__FluidTimePickerSkeleton,

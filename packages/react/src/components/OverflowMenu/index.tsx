@@ -7,14 +7,11 @@
 
 import React, { forwardRef } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
-import type { OverflowMenuProps } from './OverflowMenu';
-
 import { OverflowMenu as OverflowMenuV12 } from './next';
-
-import { OverflowMenu as OverflowMenuComponent } from './OverflowMenu';
-import { createClassWrapper } from '../../internal/createClassWrapper';
-
-const OverflowMenuV11 = createClassWrapper(OverflowMenuComponent);
+import {
+  OverflowMenu as OverflowMenuV11,
+  type OverflowMenuProps,
+} from './OverflowMenu';
 
 const OverflowMenu = forwardRef<HTMLDivElement, OverflowMenuProps>(
   (props, ref) => {
@@ -32,6 +29,7 @@ const OverflowMenu = forwardRef<HTMLDivElement, OverflowMenuProps>(
 );
 
 OverflowMenu.displayName = 'OverflowMenu';
+OverflowMenu.propTypes = OverflowMenuV11.propTypes;
 
 export default OverflowMenu;
 export { OverflowMenu, type OverflowMenuProps };

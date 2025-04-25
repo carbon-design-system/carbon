@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@ import {
   PolymorphicComponentPropWithRef,
   PolymorphicRef,
 } from '../../internal/PolymorphicProps';
+import { clamp } from '../../internal/clamp';
 
 /**
  * A custom hook that will return information about the current layer. A common
@@ -49,26 +50,22 @@ export interface LayerBaseProps {
 export type LayerProps<T extends React.ElementType> =
   PolymorphicComponentPropWithRef<T, LayerBaseProps>;
 
-const Layer = React.forwardRef(
-  <T extends React.ElementType = 'div'>(
-    {
-      as,
-      className: customClassName,
-      children,
-      level: overrideLevel,
-      ...rest
-    }: LayerProps<T>,
-    ref?: PolymorphicRef<T>
+const Layer = React.forwardRef<
+  any,
+  LayerBaseProps & {
+    as?: React.ElementType;
+  } & React.HTMLAttributes<HTMLDivElement>
+>(
+  (
+    { as, className: customClassName, children, level: overrideLevel, ...rest },
+    ref
   ) => {
     const contextLevel = React.useContext(LayerContext);
     const level = overrideLevel ?? contextLevel;
     const prefix = usePrefix();
     const className = cx(`${prefix}--layer-${levels[level]}`, customClassName);
     // The level should be between MIN_LEVEL and MAX_LEVEL
-    const value = Math.max(
-      MIN_LEVEL,
-      Math.min(level + 1, MAX_LEVEL)
-    ) as LayerLevel;
+    const value = clamp(level + 1, MIN_LEVEL, MAX_LEVEL);
 
     const BaseComponent = as || 'div';
 

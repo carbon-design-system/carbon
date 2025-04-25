@@ -103,7 +103,9 @@ const SkeletonText = ({
       <p
         className={skeletonTextClasses}
         key={i}
-        ref={(el) => (refs.current = [...refs.current, el])}
+        ref={(el) => {
+          refs.current = [...refs.current, el];
+        }}
         {...rest}
       />
     );

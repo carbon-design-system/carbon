@@ -1,108 +1,86 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as PopoverStories from './popover.stories';
 
 <Meta of={PopoverStories} />
 
 # Popover
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/popover)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/popover)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/popover/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/popover/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/popover)
+## Table of Contents
 
-Popover is a layer that pops up over all other elements on a page
+- [Overview](#overview)
+- [Visibility](#Visibility)
+- [Alignment](#Alignment)
+- [Appearance](#Appearance)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+The `cds-popover` is a primitive component used to build custom components which
+render over other elements on the page.
 
-### JS (via import)
+The popover component accepts two items as children: a trigger element and a
+`cds-popover-content` which contains the content to be rendered inside of the
+popover.
 
-```javascript
-import '@carbon/web-components/es/components/popover/index.js';
-import Checkbox16 from '@carbon/icons/lib/checkbox/16.js';
-```
+The `open` attribute allows you to control the visibility of the popover. This
+is often tracked in state and is toggled based on the trigger render inside of
+the popover. A trigger must be an interactive element and in most cases it will
+be a `<button />`.
 
-<Markdown>{`${cdnJs({ components: ['popover'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+<Canvas of={PopoverStories.TabTip} />
 
-### HTML
+## Alignment
 
-```html
-<cds-popover open>
-  <div class="playground-trigger">${Checkbox16()}</div>
-  <cds-popover-content>
-    <div class="p-3">
-      <p class="popover-title">Available storage</p>
-      <p class="popover-details">
-        This server has 150 GB of block storage remaining.
-      </p>
-    </div>
-  </cds-popover-content>
-</cds-popover>
-```
+The `align` attribute allows you to specify where your content should be placed
+relative to the popover. For example, if you provide `align="top"` to the
+popover component then the popover will render above your component. Similarly,
+if you provide `align="bottom"` then the popover will render below your
+component.
 
-## HTML (with Tabtip)
+You can also configure the placement of the caret, if it is enabled, by choosing
+between `left` and `right` or `bottom` and `top`, depending on where your
+popover is being rendered.
 
-### JS (via import)
+If you are using `align="top"`, then you can choose between `align="top-left"`
+and `align="top-right"`. These options will place the caret closer to the left
+or right edges of the popover.
 
-```javascript
-import '@carbon/web-components/es/components/popover/index.js';
-import '@carbon/web-components/es/components/form/index.js';
-import '@carbon/web-components/es/components/radio-button/index.js';
-import '@carbon/web-components/es/components/checkbox/index.js';
+If you are using `align="left"` or `align="right"`, you can use `top` or
+`bottom` to control this alignment.
 
-import Settings16 from '@carbon/icons/lib/settings/16.js';
-```
+## Appearance
 
-```html
-<cds-popover open tabTip>
-  <button aria-label="Settings" type="button">${Settings16()}</button>
-  <cds-popover-content>
-    <div class="p-3">
-      <cds-form-item>
-        <cds-radio-button-group
-          legend-text="Row height"
-          name="radio-button-group"
-          value="small"
-          style="align-items: flex-start; flex-direction: column">
-          <cds-radio-button
-            label-text="Small"
-            value="small"
-            id="radio-small"></cds-radio-button>
-          <cds-radio-button
-            label-text="Large"
-            value="large"
-            id="radio-large"></cds-radio-button>
-        </cds-radio-button-group>
-      </cds-form-item>
-      <hr />
-      <fieldset class="${prefix}--fieldset">
-        <legend class="${prefix}--label">Edit columns</legend>
-        <cds-checkbox
-          checked
-          label-text="Name"
-          id="checkbox-label-1"></cds-checkbox>
-        <cds-checkbox
-          checked
-          label-text="Type"
-          id="checkbox-label-2"></cds-checkbox>
-        <cds-checkbox
-          checked
-          label-text="Location"
-          id="checkbox-label-3"></cds-checkbox>
-      </fieldset>
-    </div>
-  </cds-popover-content>
-</cds-popover>
-```
+The popover component has several attributes which you can use to customize its
+appearance, including:
 
-## `<cds-popover>` attributes and properties
+- `caret`: to conditionally display a `caret` or render the popover directly
+  beside the trigger element
+- `dropShadow`: to display a drop shadow on the popover content
+- `highContrast`: to display a high contrast variant of the popover
+
+## Component API
+
+## `cds-popover`
 
 <ArgTypes of="cds-popover" />
 
-## `<cds-popover-content>` attributes and properties
+## `cds-popover-content`
 
 <ArgTypes of="cds-popover-content" />
+
+<Markdown>{`${cdnJs({ components: ['popover'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/popover/popover.mdx).
