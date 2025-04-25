@@ -19,6 +19,8 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
+@use '../../utilities/box-shadow' as *;
+@use '../../layer' as *;
 
 /// Select styles
 /// @access public
@@ -146,6 +148,7 @@
     inset-block-start: 0;
     inset-inline-end: $spacing-05;
     pointer-events: none;
+    transition: transform $duration-fast-01 motion(standard, productive);
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -424,5 +427,99 @@
 
   .#{$prefix}--select__arrow {
     @include high-contrast-mode('icon-fill');
+  }
+
+  // Apply native base styling to <select> elements (experimental feature).
+  // `appearance: base-select` enables native styling for <select>.
+  // Currently has **limited browser support**, primarily in Chromium-based browsers.
+  // See support: https://caniuse.com/mdn-css_properties_appearance_base-select
+
+  .#{$prefix}--select-input {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    appearance: base-select;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--select-input::picker(select) {
+    @include box-shadow();
+
+    position: absolute;
+    z-index: z('dropdown');
+    border: 0;
+    appearance: base-select;
+    inset-inline: 0;
+    overflow-y: auto;
+    transition: max-height $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--select-input::picker-icon {
+    display: none;
+  }
+
+  .#{$prefix}--select-input:open + .#{$prefix}--select__arrow {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--select-input option {
+    @include type-style('body-compact-01');
+
+    position: relative;
+    background-color: $layer;
+    block-size: convert.to-rem(40px);
+    color: $text-secondary;
+    cursor: pointer;
+    padding-inline-end: $spacing-08;
+    padding-inline-start: $spacing-05;
+    transition: background $duration-fast-01 motion(standard, productive);
+    user-select: none;
+
+    &::before {
+      position: absolute;
+      display: block;
+      background: $border-subtle;
+      block-size: 1px;
+      content: '';
+      inline-size: calc(100% - $spacing-07);
+      inset-block-start: 0;
+      inset-inline-start: $spacing-05;
+    }
+
+    &:focus::before {
+      background: transparent;
+    }
+
+    &:hover {
+      background-color: $layer-hover;
+    }
+
+    &:active {
+      background-color: $layer-selected;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    /* stylelint-disable selector-pseudo-element-no-unknown */
+    &::checkmark {
+      position: absolute;
+      content: url('data:image/svg+xml,%3Csvg%20focusable%3D%22false%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%20fill%3D%22currentColor%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2032%2032%22%20aria-hidden%3D%22true%22%20class%3D%22cds--list-box__menu-item__selected-icon%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M13%2024L4%2015%205.414%2013.586%2013%2021.171%2026.586%207.586%2028%209%2013%2024z%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E');
+      inset-block-start: $spacing-04;
+      inset-inline-end: $spacing-05;
+    }
+
+    &:checked {
+      background: $layer-selected;
+    }
+
+    &:checked:hover {
+      background: $layer-selected-hover;
+    }
+  }
+
+  .#{$prefix}--select-input option:first-child:before {
+    display: none;
   }
 }
