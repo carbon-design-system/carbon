@@ -1,136 +1,59 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as TabsStories from './tabs.stories';
 
 <Meta of={TabsStories} />
 
 # Tabs
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/tabs)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/tabs)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tabs/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tabs/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/tabs)
+## Table of Contents
 
-Tabs are used to quickly navigate between views within the same context.
+- [Overview](#overview)
+- [Line Tabs](#line-tabs)
+- [Contained Tabs](#contained-tabs)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+Use tabs to allow users to navigate easily between views within the same
+context. `cds-tabs` are now more composable, meaning that you have more
+flexibility in what is in rendered inside of `cds-tab` and a tab's panel.
 
-### JS (via import)
+### Line Tabs
 
-```javascript
-import '@carbon/web-components/es/components/tabs/index.js';
-```
+<Canvas of={TabsStories.Default} />
 
-### SCSS (must include with JS import)
+### Contained Tabs
 
-```css
-@use '@carbon/styles/scss/components/tabs';
-```
+<Canvas of={TabsStories.Contained} />
 
-<Markdown>{`${cdnJs({ components: ['tabs'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+### Skeleton
 
-### HTML
+<Canvas of={TabsStories.skeleton} />
 
-```html
-<cds-tabs trigger-content="Select an item" value="staging">
-  <cds-tab id="tab-all" target="panel-all" value="all">Option 1</cds-tab>
-  <cds-tab
-    id="tab-cloudFoundry"
-    target="panel-cloudFoundry"
-    disabled
-    value="cloudFoundry"
-    >Option 2</cds-tab
-  >
-  <cds-tab id="tab-staging" target="panel-staging" value="staging"
-    >Option 3</cds-tab
-  >
-  <cds-tab id="tab-dea" target="panel-dea" value="dea">Option 4</cds-tab>
-  <cds-tab id="tab-router" target="panel-router" value="router"
-    >Option 5</cds-tab
-  >
-</cds-tabs>
-<div class="cds-ce-demo-devenv--tab-panels">
-  <div id="panel-all" role="tabpanel" aria-labelledby="tab-all" hidden>
-    <h4>Content for option 1</h4>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </p>
-  </div>
-  <div
-    id="panel-cloudFoundry"
-    role="tabpanel"
-    aria-labelledby="tab-cloudFoundry"
-    hidden>
-    <h4>Content for option 2</h4>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </p>
-  </div>
-  <div id="panel-staging" role="tabpanel" aria-labelledby="tab-staging" hidden>
-    <h4>Content for option 3</h4>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </p>
-  </div>
-  <div id="panel-dea" role="tabpanel" aria-labelledby="tab-dea" hidden>
-    <h4>Content for option 4</h4>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </p>
-  </div>
-  <div id="panel-router" role="tabpanel" aria-labelledby="tab-router" hidden>
-    <h4>Content for option 5</h4>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </p>
-  </div>
-</div>
-```
+## Component API
 
-## Skeleton
-
-For the skeleton variation, utilize `<cds-tabs-skeleton>` and
-`<cds-tab-skeleton>`.
-
-```html
-<cds-tabs-skeleton>
-  <cds-tab-skeleton></cds-tab-skeleton>
-  <cds-tab-skeleton></cds-tab-skeleton>
-  <cds-tab-skeleton></cds-tab-skeleton>
-  <cds-tab-skeleton></cds-tab-skeleton>
-  <cds-tab-skeleton></cds-tab-skeleton>
-</cds-tabs-skeleton>
-```
-
-## `<cds-tabs>` attributes, properties and events
-
-Note: `cds-content-switcher-*` events are not fired from `<cds-tabs>`.
+## `cds-tabs`
 
 <ArgTypes of="cds-tabs" />
 
-## `<cds-tab>` attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-tab disabled>`) and `false` means not setting the attribute (e.g.
-`<cds-tab>` without `disabled` attribute).
+## `cds-tab`
 
 <ArgTypes of="cds-tab" />
+
+<Markdown>{`${cdnJs({ components: ['tabs'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/tabs/tabs.mdx).
