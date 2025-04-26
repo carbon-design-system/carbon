@@ -1,10 +1,10 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots['cds-copy-button should add extra classes via button-class-name'] =
+snapshots['CopyButton should set tabIndex if one is passed via props'] =
   `<cds-copy
   align="bottom"
-  button-class-name="cds--copy-btn extra-class"
+  button-class-name="cds--copy-btn"
   feedback="Copied!"
   feedback-timeout="2000"
   kind="primary"
@@ -17,11 +17,27 @@ snapshots['cds-copy-button should add extra classes via button-class-name'] =
   </slot>
 </cds-copy>
 `;
-/* end snapshot cds-copy-button should add extra classes via button-class-name */
+/* end snapshot CopyButton should set tabIndex if one is passed via props */
 
-snapshots[
-  'cds-copy-button should disable the button when disabled prop is set'
-] = `<cds-copy
+snapshots['Button props should call the click handler'] = `<cds-copy
+  align="bottom"
+  button-class-name="cds--copy-btn"
+  feedback="Copied!"
+  feedback-timeout="2000"
+  kind="primary"
+  size="md"
+  tooltip-alignment=""
+  tooltip-position="top"
+  type="button"
+>
+  <slot slot="tooltip-content">
+  </slot>
+</cds-copy>
+`;
+/* end snapshot Button props should call the click handler */
+
+snapshots['Button props should disable button if disabled prop is passed'] =
+  `<cds-copy
   align="bottom"
   button-class-name="cds--copy-btn"
   disabled=""
@@ -37,28 +53,11 @@ snapshots[
   </slot>
 </cds-copy>
 `;
-/* end snapshot cds-copy-button should disable the button when disabled prop is set */
+/* end snapshot Button props should disable button if disabled prop is passed */
 
-snapshots['cds-copy-button should trigger click handler on button click'] =
-  `<cds-copy
-  align="bottom"
-  button-class-name="cds--copy-btn"
-  feedback="Copied!"
-  feedback-timeout="2000"
-  kind="primary"
-  size="md"
-  tooltip-alignment=""
-  tooltip-position="top"
-  type="button"
->
-  <slot slot="tooltip-content">
-  </slot>
-</cds-copy>
-`;
-/* end snapshot cds-copy-button should trigger click handler on button click */
-
-snapshots['cds-copy-button should show feedback for a limited time'] =
-  `<cds-copy
+snapshots[
+  'Feedback should make the feedback visible for a limited amount of time'
+] = `<cds-copy
   align="bottom"
   button-class-name="cds--copy-btn"
   feedback="Copied!"
@@ -73,11 +72,10 @@ snapshots['cds-copy-button should show feedback for a limited time'] =
   </slot>
 </cds-copy>
 `;
-/* end snapshot cds-copy-button should show feedback for a limited time */
+/* end snapshot Feedback should make the feedback visible for a limited amount of time */
 
-snapshots[
-  'cds-copy-button should render custom feedback message and clear it after timeout'
-] = `<cds-copy
+snapshots['Feedback should be able to specify the feedback message'] =
+  `<cds-copy
   align="bottom"
   button-class-name="cds--copy-btn"
   feedback="Custom feedback message"
@@ -92,10 +90,11 @@ snapshots[
   </slot>
 </cds-copy>
 `;
-/* end snapshot cds-copy-button should render custom feedback message and clear it after timeout */
+/* end snapshot Feedback should be able to specify the feedback message */
 
-snapshots['cds-copy-button should respect custom feedback-timeout prop'] =
-  `<cds-copy
+snapshots[
+  'Feedback should allow users to override default feedback timeout via prop'
+] = `<cds-copy
   align="bottom"
   button-class-name="cds--copy-btn"
   feedback="Copied!"
@@ -110,4 +109,22 @@ snapshots['cds-copy-button should respect custom feedback-timeout prop'] =
   </slot>
 </cds-copy>
 `;
-/* end snapshot cds-copy-button should respect custom feedback-timeout prop */
+/* end snapshot Feedback should allow users to override default feedback timeout via prop */
+
+snapshots['CopyButton should add extra classes via passed button-class-name'] =
+  `<cds-copy
+  align="bottom"
+  button-class-name="cds--copy-btn extra-class"
+  feedback="Copied!"
+  feedback-timeout="2000"
+  kind="primary"
+  size="md"
+  tooltip-alignment=""
+  tooltip-position="top"
+  type="button"
+>
+  <slot slot="tooltip-content">
+  </slot>
+</cds-copy>
+`;
+/* end snapshot CopyButton should add extra classes via passed button-class-name */

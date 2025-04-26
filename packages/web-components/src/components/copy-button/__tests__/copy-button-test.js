@@ -5,50 +5,58 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import '@carbon/web-components/es/components/copy-button/index.js';
+import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 
-describe('cds-copy-button', function () {
-  const iconDescription = 'Copy to clipboard';
+describe('CopyButton', () => {
+  it('should set tabIndex if one is passed via props', async () => {
+    const el = await fixture(html`
+      <cds-copy-button tabindex="2" icon-description="Copy to clipboard">
+      </cds-copy-button>
+    `);
+    expect(el.getAttribute('tabindex')).to.equal('2');
+    expect(el).shadowDom.to.equalSnapshot();
+  });
 
-  it('should add extra classes via button-class-name', async () => {
+  it('should add extra classes via passed button-class-name', async () => {
     const el = await fixture(html`
       <cds-copy-button
         button-class-name="extra-class"
-        icon-description="${iconDescription}"></cds-copy-button>
+        icon-description="Copy to clipboard">
+      </cds-copy-button>
     `);
 
-    // Get the button element inside the shadow DOM of cds-copy
     const button = el.shadowRoot
       ?.querySelector('cds-copy')
       ?.shadowRoot?.querySelector('button');
     expect(button).to.have.class('extra-class');
     expect(el).shadowDom.to.equalSnapshot();
   });
+});
 
-  it('should disable the button when disabled prop is set', async () => {
+describe('Button props', () => {
+  it('should disable button if disabled prop is passed', async () => {
     const el = await fixture(html`
-      <cds-copy-button
-        disabled
-        icon-description="${iconDescription}"></cds-copy-button>
+      <cds-copy-button disabled icon-description="Copy to clipboard">
+      </cds-copy-button>
     `);
 
     const button = el.shadowRoot
       ?.querySelector('cds-copy')
       ?.shadowRoot?.querySelector('button');
-    // Check if the button has the 'disabled' attribute after the prop is set
     expect(button).to.have.attribute('disabled');
     expect(el).shadowDom.to.equalSnapshot();
   });
 
-  it('should trigger click handler on button click', async () => {
+  it('should call the click handler', async () => {
     let clicked = false;
     const el = await fixture(html`
       <cds-copy-button
-        icon-description="${iconDescription}"
+        icon-description="Copy to clipboard"
         @click=${() => {
           clicked = true;
-        }}></cds-copy-button>
+        }}>
+      </cds-copy-button>
     `);
 
     const button = el.shadowRoot
@@ -58,12 +66,13 @@ describe('cds-copy-button', function () {
     expect(clicked).to.be.true;
     expect(el).shadowDom.to.equalSnapshot();
   });
+});
 
-  it('should show feedback for a limited time', async () => {
+describe('Feedback', () => {
+  it('should make the feedback visible for a limited amount of time', async () => {
     const el = await fixture(html`
-      <cds-copy-button
-        feedback="Copied!"
-        feedback-timeout="500"></cds-copy-button>
+      <cds-copy-button feedback="Copied!" feedback-timeout="500">
+      </cds-copy-button>
     `);
 
     const copy = el.shadowRoot.querySelector('cds-copy');
@@ -73,30 +82,27 @@ describe('cds-copy-button', function () {
     const button = copy.shadowRoot.querySelector('button');
     button.click();
 
-    // Wait for the feedback tooltip to appear after the button is clicked
     await waitUntil(() => {
       const tooltip = copy.shadowRoot.querySelector('cds-tooltip-content');
       return tooltip?.textContent?.trim() === 'Copied!';
-    }, 'Expected feedback tooltip to appear');
+    });
 
     await waitUntil(
       () => {
         const tooltip = copy.shadowRoot.querySelector('cds-tooltip-content');
         return tooltip?.textContent?.trim() !== 'Copied!';
       },
-      'Expected feedback tooltip to disappear',
+      'Expected feedback to disappear',
       { timeout: 3000 }
     );
-
     expect(el).shadowDom.to.equalSnapshot();
   });
 
-  it('should render custom feedback message and clear it after timeout', async () => {
+  it('should be able to specify the feedback message', async () => {
     const customFeedback = 'Custom feedback message';
     const el = await fixture(html`
-      <cds-copy-button
-        feedback="${customFeedback}"
-        feedback-timeout="200"></cds-copy-button>
+      <cds-copy-button feedback="${customFeedback}" feedback-timeout="200">
+      </cds-copy-button>
     `);
 
     const copyComponent = el.shadowRoot?.querySelector('cds-copy');
@@ -106,18 +112,18 @@ describe('cds-copy-button', function () {
     const button = copyComponent?.shadowRoot?.querySelector('button');
     button?.click();
 
-    // Wait for the custom feedback message to appear
     await waitUntil(() => {
       const tooltip = copyComponent?.shadowRoot?.querySelector(
         'cds-tooltip-content'
       );
       return tooltip?.textContent?.trim() === customFeedback;
-    }, 'Expected custom feedback to show');
+    });
 
-    const tooltipContent = copyComponent?.shadowRoot?.querySelector(
-      'cds-tooltip-content'
-    );
-    expect(tooltipContent?.textContent?.trim()).to.equal(customFeedback);
+    expect(
+      copyComponent?.shadowRoot
+        ?.querySelector('cds-tooltip-content')
+        ?.textContent?.trim()
+    ).to.equal(customFeedback);
 
     await waitUntil(
       () => {
@@ -126,22 +132,22 @@ describe('cds-copy-button', function () {
         );
         return tooltip?.textContent?.trim() !== customFeedback;
       },
-      'Expected custom feedback to disappear',
+      'Expected feedback to disappear',
       { timeout: 3000 }
     );
 
-    const tooltipAfter = copyComponent?.shadowRoot?.querySelector(
-      'cds-tooltip-content'
-    );
-    expect(tooltipAfter?.textContent?.trim()).to.not.equal(customFeedback);
-
+    expect(
+      copyComponent?.shadowRoot
+        ?.querySelector('cds-tooltip-content')
+        ?.textContent?.trim()
+    ).to.not.equal(customFeedback);
     expect(el).shadowDom.to.equalSnapshot();
   });
 
-  it('should respect custom feedback-timeout prop', async () => {
+  it('should allow users to override default feedback timeout via prop', async () => {
     const customTimeout = 100;
     const el = await fixture(html`
-      <cds-copy-button feedback-timeout="${customTimeout}"></cds-copy-button>
+      <cds-copy-button feedback-timeout="${customTimeout}"> </cds-copy-button>
     `);
 
     const copyComponent = el.shadowRoot?.querySelector('cds-copy');
@@ -151,7 +157,6 @@ describe('cds-copy-button', function () {
     const button = copyComponent?.shadowRoot?.querySelector('button');
     button?.click();
 
-    // Wait for the feedback to appear within the custom timeout
     await waitUntil(
       () => {
         const tooltip = copyComponent?.shadowRoot?.querySelector(
@@ -177,7 +182,6 @@ describe('cds-copy-button', function () {
         timeout: customTimeout + 300,
       }
     );
-
     expect(el).shadowDom.to.equalSnapshot();
   });
 });
