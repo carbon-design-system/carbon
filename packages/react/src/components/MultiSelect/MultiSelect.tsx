@@ -914,7 +914,7 @@ export const MultiSelect = React.forwardRef(
       </div>
     );
   }
-);
+) as MultiSelectComponent;
 
 type MultiSelectComponentProps<ItemType> = React.PropsWithChildren<
   MultiSelectProps<ItemType>
@@ -922,6 +922,8 @@ type MultiSelectComponentProps<ItemType> = React.PropsWithChildren<
   React.RefAttributes<HTMLButtonElement>;
 
 interface MultiSelectComponent {
+  propTypes: Record<string, any>;
+  displayName: string;
   <ItemType>(
     props: MultiSelectComponentProps<ItemType>
   ): React.ReactElement<any> | null;
