@@ -278,6 +278,7 @@ const PageHeaderContentPageActions = ({
     id: string;
     label: string;
     onClick: () => void;
+    body: React.ReactNode;
   };
 
   const containerRef = useRef<HTMLDivElement>(null);

@@ -11042,8 +11042,35 @@ Map {
       },
       "render": [Function],
     },
-    "HeroImage": Object {
-      "$$typeof": Symbol(react.forward_ref),
+    "ContentPageActions": Object {
+      "displayName": "PageHeaderContentPageActions",
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "menuButtonLabel": Object {
+          "type": "string",
+        },
+        "pageActions": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "node",
+              },
+              Object {
+                "type": "array",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+      },
+    },
+    "ContentText": Object {
+      "displayName": "PageHeaderContentText",
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -11052,7 +11079,17 @@ Map {
           "type": "string",
         },
       },
-      "render": [Function],
+    },
+    "HeroImage": Object {
+      "displayName": "PageHeaderHeroImage",
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+      },
     },
     "PageHeader": Object {
       "$$typeof": Symbol(react.forward_ref),
@@ -11100,8 +11137,35 @@ Map {
       },
       "render": [Function],
     },
-    "PageHeaderHeroImage": Object {
-      "$$typeof": Symbol(react.forward_ref),
+    "PageHeaderContentPageActions": Object {
+      "displayName": "PageHeaderContentPageActions",
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "menuButtonLabel": Object {
+          "type": "string",
+        },
+        "pageActions": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "node",
+              },
+              Object {
+                "type": "array",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+      },
+    },
+    "PageHeaderContentText": Object {
+      "displayName": "PageHeaderContentText",
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -11110,7 +11174,17 @@ Map {
           "type": "string",
         },
       },
-      "render": [Function],
+    },
+    "PageHeaderHeroImage": Object {
+      "displayName": "PageHeaderHeroImage",
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+      },
     },
     "PageHeaderTabBar": Object {
       "$$typeof": Symbol(react.forward_ref),
