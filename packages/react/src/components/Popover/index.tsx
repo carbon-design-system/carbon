@@ -277,35 +277,39 @@ export const Popover: PopoverComponent & {
             ),
             autoAlign &&
               flip({
-                fallbackPlacements: align.includes('bottom')
-                  ? [
-                      'bottom',
-                      'bottom-start',
-                      'bottom-end',
-                      'right',
-                      'right-start',
-                      'right-end',
-                      'left',
-                      'left-start',
-                      'left-end',
-                      'top',
-                      'top-start',
-                      'top-end',
-                    ]
-                  : [
-                      'top',
-                      'top-start',
-                      'top-end',
-                      'left',
-                      'left-start',
-                      'left-end',
-                      'right',
-                      'right-start',
-                      'right-end',
-                      'bottom',
-                      'bottom-start',
-                      'bottom-end',
-                    ],
+                fallbackPlacements: isTabTip
+                  ? align.includes('bottom')
+                    ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+                    : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
+                  : align.includes('bottom')
+                    ? [
+                        'bottom',
+                        'bottom-start',
+                        'bottom-end',
+                        'right',
+                        'right-start',
+                        'right-end',
+                        'left',
+                        'left-start',
+                        'left-end',
+                        'top',
+                        'top-start',
+                        'top-end',
+                      ]
+                    : [
+                        'top',
+                        'top-start',
+                        'top-end',
+                        'left',
+                        'left-start',
+                        'left-end',
+                        'right',
+                        'right-start',
+                        'right-end',
+                        'bottom',
+                        'bottom-start',
+                        'bottom-end',
+                      ],
 
                 fallbackStrategy: 'initialPlacement',
                 fallbackAxisSideDirection: 'start',
