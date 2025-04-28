@@ -1,74 +1,59 @@
-import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as SliderStories from './slider.stories';
 
 <Meta of={SliderStories} />
 
 # Slider
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/slider)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/slider)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/slider/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/slider/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/slider)
+## Table of Contents
+
+- [Overview](#overview)
+- [Controlled Slider](#controlled-slider)
+- [Skeleton](#skeleton)
+- [Slider With Customer](#slider-with-customer)
+- [Slider With Hidden Inputs](#slider-with-customer)
+- [Two Handle Skeleton](#two-handle-skeleton)
+- [Two Handle Slider](#two-handle-slider)
+- [Two Handle Slider With Hidden Inputs](#two-handle-slider-with-hidden-inputs)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
 
 Sliders provide a visual indication of adjustable content, where the user can
-move the handle along a horizontal track to increase or decrease the value.
+increase or decrease the value by moving the handle along a horizontal track.
 
-## Getting started
+<Canvas of={SliderStories.Default} />
 
-Here's a quick example to get you started.
+## Controlled Slider
 
-### JS (via import)
-
-```javascript
-import '@carbon/web-components/es/components/slider/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['slider'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-slider
-  label-text="Slider"
-  max="100"
-  min="0"
-  step="1"
-  value="50"></cds-slider>
-```
-
-## With input box
-
-To include an input box, place `<cds-slider-input>` within `<cds-slider>`.
-
-```html
-<cds-slider label-text="Slider" max="100" min="0" step="1" value="50">
-  <cds-slider-input aria-label="Slider value" type="number"></cds-slider-input>
-</cds-slider>
-```
+<Canvas of={SliderStories.ControlledSlider} />
 
 ## Skeleton
 
-For the skeleton variation, utilize `<cds-slider-skeleton>`.
+<Canvas of={SliderStories.Skeleton} />
 
-```html
-<cds-slider-skeleton></cds-slider-skeleton>
-```
+## Component API
 
-## `<cds-slider>` attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-slider disabled>`) and `false` means not setting the attribute (e.g.
-`<cds-slider>` without `disabled` attribute).
+## `cds-slider`
 
 <ArgTypes of="cds-slider" />
 
-## `<cds-slider-input>` attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-slider-input invalid>`) and `false` means not setting the attribute (e.g.
-`<cds-slider-input>` without `invalid` attribute).
+## `cds-slider-input`
 
 <ArgTypes of="cds-slider-input" />
+
+<Markdown>{`${cdnJs({ components: ['slider'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/slider/slider.mdx).
