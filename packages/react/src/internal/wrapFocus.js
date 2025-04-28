@@ -103,7 +103,10 @@ function wrapFocusWithoutSentinels({
     ['blur', 'focusout', 'focusin', 'focus'].includes(event.type) &&
     process.env.NODE_ENV !== 'production'
   ) {
+    // TODO: https://github.com/carbon-design-system/carbon/issues/19005
+    /*
     // eslint-disable-next-line react-hooks/rules-of-hooks
+    */
     useEffect(() => {
       throw new Error(
         `Error: wrapFocusWithoutSentinels(...) called in unsupported ${event.type} event.\n\nCall wrapFocusWithoutSentinels(...) from onKeyDown instead.`

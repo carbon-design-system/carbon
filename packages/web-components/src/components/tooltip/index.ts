@@ -7,3 +7,4 @@
 
 import './tooltip';
 import './tooltip-content';
+import './definition-tooltip';

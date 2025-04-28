@@ -16,10 +16,6 @@ figma.connect(
   {
     props: {
       labelText: figma.string('Label text'),
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
-      }),
       size: figma.enum('Size', {
         Large: 'lg',
         Medium: 'md',
@@ -53,12 +49,6 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=5621-280380&t=BNxiN6zuoeazJ8tv-4',
   {
     variant: { State: 'Skeleton' },
-    props: {
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
-      }),
-    },
-    example: ({ hideLabel }) => <TextInputSkeleton hideLabel={hideLabel} />,
+    example: () => <TextInputSkeleton />,
   }
 );

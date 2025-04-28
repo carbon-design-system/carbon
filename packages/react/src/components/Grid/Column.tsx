@@ -101,56 +101,51 @@ export interface ColumnComponent {
   ): React.ReactElement<any, any> | null;
 }
 
-const Column = React.forwardRef(function Column<
-  T extends React.ElementType = 'div',
+const Column = React.forwardRef<
+  any,
+  ColumnBaseProps & {
+    as?: React.ElementType;
+  } & React.HTMLAttributes<HTMLDivElement>
 >(
-  {
-    as,
-    children,
-    className: customClassName,
-    sm,
-    md,
-    lg,
-    xlg,
-    max,
-    ...rest
-  }: ColumnProps<T>,
-  ref?: PolymorphicRef<T>
-) {
-  const { mode } = useGridSettings();
-  const prefix = usePrefix();
-  const BaseComponent = as || 'div';
+  (
+    { as, children, className: customClassName, sm, md, lg, xlg, max, ...rest },
+    ref
+  ) => {
+    const { mode } = useGridSettings();
+    const prefix = usePrefix();
+    const BaseComponent = as || 'div';
 
-  if (mode === 'css-grid') {
+    if (mode === 'css-grid') {
+      return (
+        <CSSGridColumn
+          as={BaseComponent}
+          className={customClassName}
+          sm={sm}
+          md={md}
+          lg={lg}
+          xlg={xlg}
+          max={max}
+          {...rest}>
+          {children}
+        </CSSGridColumn>
+      );
+    }
+
+    const columnClassName = getClassNameForFlexGridBreakpoints(
+      [sm, md, lg, xlg, max],
+      prefix
+    );
+    const className = cx(customClassName, columnClassName, {
+      [`${prefix}--col`]: columnClassName.length === 0,
+    });
+
     return (
-      <CSSGridColumn
-        as={BaseComponent}
-        className={customClassName}
-        sm={sm}
-        md={md}
-        lg={lg}
-        xlg={xlg}
-        max={max}
-        {...rest}>
+      <BaseComponent className={className} ref={ref} {...rest}>
         {children}
-      </CSSGridColumn>
+      </BaseComponent>
     );
   }
-
-  const columnClassName = getClassNameForFlexGridBreakpoints(
-    [sm, md, lg, xlg, max],
-    prefix
-  );
-  const className = cx(customClassName, columnClassName, {
-    [`${prefix}--col`]: columnClassName.length === 0,
-  });
-
-  return (
-    <BaseComponent className={className} ref={ref} {...rest}>
-      {children}
-    </BaseComponent>
-  );
-});
+);
 
 const percentSpanType = PropTypes.oneOf(['25%', '50%', '75%', '100%']);
 

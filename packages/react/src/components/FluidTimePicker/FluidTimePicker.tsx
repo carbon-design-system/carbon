@@ -100,14 +100,14 @@ const FluidTimePicker = React.forwardRef<
   const childrenWithProps = () => {
     if (disabled) {
       return React.Children.toArray(children).map((child) =>
-        React.cloneElement(child as React.ReactElement, {
+        React.cloneElement(child as React.ReactElement<any>, {
           disabled: true,
         })
       );
     }
     if (readOnly) {
       return React.Children.toArray(children).map((child) =>
-        React.cloneElement(child as React.ReactElement, {
+        React.cloneElement(child as React.ReactElement<any>, {
           readOnly: true,
         })
       );
