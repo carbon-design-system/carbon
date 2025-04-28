@@ -336,6 +336,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/maisonsmd"><img src="https://avatars.githubusercontent.com/u/16435155?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Son H. Mai (Mason)</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=maisonsmd" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/warrenmblood"><img src="https://avatars.githubusercontent.com/u/69060697?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Warren Blood</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=warrenmblood" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/vcherneny"><img src="https://avatars.githubusercontent.com/u/11604315?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vlad Cherneny</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=vcherneny" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/murito"><img src="https://avatars.githubusercontent.com/u/2628140?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Francisco Alcalá</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=murito" title="Code">💻</a></td>
   </tr>
 </table>
 

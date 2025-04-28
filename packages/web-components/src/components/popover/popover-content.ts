@@ -14,7 +14,7 @@ import styles from './popover.scss?lit';
 /**
  * Popover.
  *
- * @element cds-popover
+ * @element cds-popover-content
  */
 @customElement(`${prefix}-popover-content`)
 class CDSPopoverContent extends LitElement {
