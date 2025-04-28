@@ -216,12 +216,14 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   function handleKeyDown(e: React.KeyboardEvent<HTMLUListElement>) {
     e.stopPropagation();
 
-    // if the user presses escape or this is a submenu
-    // and the user presses ArrowLeft, close it
+    // If the user presses escape or tab, or this is a submenu and the user presses ArrowLeft, close it.
     if (
-      (match(e, keys.Escape) || (!isRoot && match(e, keys.ArrowLeft))) &&
+      (match(e, keys.Escape) ||
+        match(e, keys.Tab) ||
+        (!isRoot && match(e, keys.ArrowLeft))) &&
       onClose
     ) {
+      e.preventDefault();
       handleClose();
     } else {
       focusItem(e);
@@ -383,9 +385,12 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     return [fitValue(ranges.x, 'x') ?? -1, fitValue(ranges.y, 'y') ?? -1];
   }
 
+  // When a menu is opened, focus the first item.
   useEffect(() => {
     if (open && focusableItems.length > 0) {
-      focusItem();
+      // setTimeout() necessary for nested menus.  Otherwise, we try to focus before the menu is visible.
+      // Unclear why that happens.
+      setTimeout(focusItem, 0);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, focusableItems]);
