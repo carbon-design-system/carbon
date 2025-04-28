@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2014, 2025
+// Copyright IBM Corp. 2014, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,6 +13,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
@@ -32,8 +33,6 @@
     max-block-size: 50%;
     max-inline-size: 100%;
     opacity: 0;
-    outline: 3px solid transparent;
-    outline-offset: -3px;
     transform: translateY(calc(-1 * #{$spacing-06}));
 
     /** opening and closing is used in as allow-discrete is not currently supported wide enough
@@ -85,6 +84,7 @@
     /*   Before-open state  */
     /* Needs to be after the previous dialog[open] rule to take effect,
     as the specificity is the same */
+
     @starting-style {
       &[open] {
         opacity: 0;
@@ -93,118 +93,14 @@
     }
   }
 
-  .#{$prefix}--dialog-container {
-    display: grid;
-    block-size: 100%;
-    grid-template-columns: 100%;
-    grid-template-rows: auto 1fr auto;
-    inline-size: 100%;
-  }
-
   .#{$prefix}--dialog__header {
     position: relative;
     overflow: visible;
-    grid-column: 1/-1;
-    grid-row: 1/2;
     inline-size: 100%;
-
     min-block-size: $spacing-09;
-
-    padding-block-start: $spacing-05;
-    padding-inline: $spacing-05 $spacing-09;
   }
 
-  .#{$prefix}--dialog-header__label {
-    @include component-reset.reset;
-    @include type-style('label-01');
-
-    color: $text-secondary;
-    margin-block-end: $spacing-02;
-  }
-
-  .#{$prefix}--dialog-header__heading {
-    @include component-reset.reset;
-    @include type-style('heading-03');
-
-    color: $text-primary;
-  }
-
-  .#{$prefix}--dialog__header-controls {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-end: 0;
-  }
-
-  .#{$prefix}--dialog__close {
-    padding: convert.to-rem(12px);
-    border: 2px solid transparent;
-    background-color: transparent;
-    block-size: 3rem;
-    cursor: pointer;
-    inline-size: 3rem;
-    transition: background-color $duration-fast-02 motion(standard, productive);
-
-    &:hover {
-      background-color: $layer-hover;
-    }
-
-    &:focus {
-      border-color: $focus;
-      outline: none;
-    }
-  }
-
-  .#{$prefix}--icon__close {
-    block-size: convert.to-rem(20px);
-    fill: $icon-primary;
-    inline-size: convert.to-rem(20px);
-  }
-
-  .#{$prefix}--dialog-content {
-    @include type-style('body-01');
-
-    position: relative;
-    color: $text-primary;
-    grid-column: 1/-1;
-    grid-row: 2/3;
-    overflow-y: auto;
-
-    padding-block: $spacing-03 $spacing-06;
-    padding-inline: $spacing-05;
-
-    &:focus {
-      @include focus-outline('outline');
-    }
-
-    > p {
-      @include type-style('body-01');
-    }
-  }
-
-  .#{$prefix}--dialog-footer {
-    display: flex;
-    flex: 0 0 auto;
-    justify-content: flex-end;
-    background-color: $layer;
-    block-size: convert.to-rem(64px);
-    grid-column: 1/-1;
-    grid-row: 3/4;
-    margin-block-start: auto;
-
-    .#{$prefix}--btn {
-      flex: 0 1 50%;
-      align-items: baseline;
-      margin: 0;
-      block-size: convert.to-rem(64px);
-      max-inline-size: none;
-    }
-
-    .#{$prefix}--btn:not(.#{$prefix}--skeleton) {
-      padding-block: calc($spacing-05 - convert.to-rem(2px)) $spacing-07;
-    }
-  }
-
-  /* Backdrop styling - unchanged */
+  /* Transition the :backdrop when the dialog modal is promoted to the top layer */
   .#{$prefix}--dialog::backdrop {
     background-color: $overlay;
     opacity: 0;
@@ -236,19 +132,17 @@
   * https://caniuse.com/mdn-css_at-rules_starting-style
   */
   /* This starting-style rule cannot be nested inside the above selector
-  because the nesting selector cannot represent pseudo-elements. */
+because the nesting selector cannot represent pseudo-elements. */
+
   @starting-style {
     .#{$prefix}--dialog[open]::backdrop {
       opacity: 0;
     }
   }
 
-  // High contrast mode
-  .#{$prefix}--icon__close {
-    @include high-contrast-mode('icon-fill');
-  }
-
-  .#{$prefix}--dialog__close:focus {
-    @include high-contrast-mode('focus');
+  .#{$prefix}--dialog__header-controls {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
   }
 }
