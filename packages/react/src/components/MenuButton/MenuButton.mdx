@@ -119,7 +119,7 @@ element where you want it to render:
 When using `menuTarget` with a React ref, you need to use state to capture the ref value.
 This is because React doesn't detect changes to `ref.current` properties for prop updates:
 ```jsx
-// ✅ Correct usage
+// usage
 const containerRef = useRef(null);
 const [target, setTarget] = useState(null);
 useEffect(() => {
@@ -133,14 +133,6 @@ useEffect(() => {
   </MenuButton>
 </div>
 
-
-// Incorrect usage
-const containerRef = useRef(null);
-<div ref={containerRef}>
-  <MenuButton label="Actions" menuTarget={containerRef.current}>
-    <MenuItem label="First action" />
-  </MenuButton>
-</div>
 ```
 
 ## Experimental Auto Align
