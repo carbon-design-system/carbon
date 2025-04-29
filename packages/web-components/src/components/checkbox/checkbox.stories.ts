@@ -122,7 +122,6 @@ export const Horizontal = {
     warnText,
   }) => html`
     <cds-checkbox-group
-      legend-text="Group label"
       helper-text="${helperText}"
       ?disabled="${disabled}"
       ?invalid="${invalid}"
@@ -209,6 +208,7 @@ export const WithAILabel = {
     readonly,
     onChange,
     helperText,
+    legendText,
     invalid,
     invalidText,
     orientation,
@@ -217,7 +217,7 @@ export const WithAILabel = {
   }) => html`
     <div style="width: 400px">
       <cds-checkbox-group
-      legend-text="Group label"
+      legend-text="${legendText}"
       helper-text="${helperText}"
       ?disabled="${disabled}"
       ?invalid="${invalid}"
