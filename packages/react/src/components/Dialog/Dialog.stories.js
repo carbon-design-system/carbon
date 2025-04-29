@@ -11,7 +11,6 @@ import React, { useEffect, useState } from 'react';
 import { VStack } from '../Stack';
 import {
   unstable__Dialog as Dialog,
-  DialogHeader,
   DialogControls,
   DialogCloseButton,
 } from './';
@@ -110,7 +109,7 @@ export const Modal = ({ open: _open, ...args }) => {
         </Dialog.Body>
         <Dialog.Footer>
           <Button type="button" kind="secondary" onClick={closeDialog}>
-            Close
+            Cancel
           </Button>
           <Button type="button" kind="primary" onClick={closeDialog}>
             Save
@@ -359,70 +358,52 @@ export const PassiveDialog = ({ open: _open, ...args }) => {
           </Dialog.Controls>
         </Dialog.Header>
         <Dialog.Body>
-          <p>
-            This is a passive dialog example with no footer buttons. Passive
-            dialogs are used for simple notifications or information displays.
-          </p>
-          <p>
-            The user can dismiss this dialog by clicking the close button in the
-            top-right corner or by clicking outside the dialog (if
-            preventCloseOnClickOutside is not set).
-          </p>
+          <p>You have been successfully signed out</p>
         </Dialog.Body>
       </Dialog>
     </>
   );
 };
 
-export const DangerDialog = ({ open: _open, ...args }) => {
-  const [open, setOpen] = useState(_open);
-
-  function toggleDialog() {
-    setOpen(!open);
-  }
-
-  function closeDialog(e) {
-    setOpen(false);
-  }
-
-  function handleRequestClose(e) {
-    action('Dialog onRequestClose');
-    closeDialog(e);
-  }
-
-  useEffect(() => {
-    setOpen(_open);
-  }, [_open]);
+export const DangerDialog = (args) => {
+  const [open, setOpen] = useState(false);
 
   return (
     <>
-      <Button type="button" onClick={toggleDialog}>
-        Toggle open
-      </Button>
+      <Button onClick={() => setOpen(true)}> Toggle open</Button>
       <Dialog
         {...args}
         open={open}
-        onRequestClose={handleRequestClose}
-        aria-labelledby="title">
+        onRequestClose={() => setOpen(false)}
+        onRequestSubmit={() => {
+          // Perform dangerous action
+          setOpen(false);
+        }}>
         <Dialog.Header>
-          <Dialog.Subtitle>Account resources</Dialog.Subtitle>
-          <Dialog.Title id="title">
-            Are you sure you want to delete this custom domain?
-          </Dialog.Title>
-          <DialogControls>
-            <DialogCloseButton onClick={closeDialog} />
-          </DialogControls>
+          <Dialog.Title>Confirm Deletion</Dialog.Title>
+          <Dialog.Controls>
+            <Dialog.CloseButton onClick={() => setOpen(false)} />
+          </Dialog.Controls>
         </Dialog.Header>
-        <Dialog.Body></Dialog.Body>
+        <Dialog.Body>
+          Are you sure you want to delete this item? This action cannot be
+          undone.
+        </Dialog.Body>
         <Dialog.Footer
           danger
+          primaryButtonText="Delete"
           secondaryButtonText="Cancel"
-          primaryButtonText="Delete"></Dialog.Footer>
+          onRequestClose={() => setOpen(false)}
+          onRequestSubmit={() => {
+            setOpen(false);
+          }}
+        />
       </Dialog>
     </>
   );
 };
+
 DangerDialog.args = {
   modal: true,
-  open: false,
+  danger: true,
 };

@@ -27,10 +27,13 @@ import ButtonSet from '../ButtonSet';
 import Button from '../Button';
 import { useId } from '../../internal/useId';
 import { debounce } from 'es-toolkit/compat';
+import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
+import InlineLoading from '../InlineLoading/InlineLoading';
 const DialogContext = createContext<{
   titleId?: string;
   subtitleId?: string;
   dialogId?: string;
+  isOpen?: boolean;
 }>({});
 
 /**
@@ -38,7 +41,7 @@ const DialogContext = createContext<{
  * Dialog
  * ----------
  */
-export interface DialogProps extends ReactAttr<HTMLDialogElement> {
+interface DialogProps extends ReactAttr<HTMLDialogElement> {
   /**
    * Provide the contents of the Dialog
    */
@@ -105,7 +108,7 @@ export interface DialogProps extends ReactAttr<HTMLDialogElement> {
   ariaDescribedBy?: string;
 }
 
-export const unstable__Dialog = React.forwardRef(
+const unstable__Dialog = React.forwardRef(
   (
     {
       children,
@@ -180,6 +183,7 @@ export const unstable__Dialog = React.forwardRef(
       dialogId,
       titleId,
       subtitleId,
+      isOpen: open,
     };
 
     useEffect(() => {
@@ -277,13 +281,13 @@ unstable__Dialog.propTypes = {
  * DialogHeader
  * -------------
  */
-export interface DialogHeaderProps extends ReactAttr<HTMLDivElement> {
+interface DialogHeaderProps extends ReactAttr<HTMLDivElement> {
   /**
    * Provide the contents to be rendered inside of this component
    */
   children?: React.ReactNode;
 }
-export const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
+const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
   ({ children, ...rest }, ref) => {
     const prefix = usePrefix();
     return (
@@ -308,24 +312,23 @@ DialogHeader.propTypes = {
  * DialogControls
  * ---------------
  */
-export interface DialogControlsProps extends ReactAttr<HTMLDivElement> {
+interface DialogControlsProps extends ReactAttr<HTMLDivElement> {
   /**
    * Provide the contents to be rendered inside of this component
    */
   children?: React.ReactNode;
 }
-export const DialogControls = React.forwardRef<
-  HTMLDivElement,
-  DialogControlsProps
->(({ children, ...rest }, ref) => {
-  const prefix = usePrefix();
-  return (
-    // @ts-ignore
-    <div className={`${prefix}--dialog__header-controls`} ref={ref} {...rest}>
-      {children}
-    </div>
-  );
-});
+const DialogControls = React.forwardRef<HTMLDivElement, DialogControlsProps>(
+  ({ children, ...rest }, ref) => {
+    const prefix = usePrefix();
+    return (
+      // @ts-ignore
+      <div className={`${prefix}--dialog__header-controls`} ref={ref} {...rest}>
+        {children}
+      </div>
+    );
+  }
+);
 
 DialogControls.displayName = 'DialogControls';
 
@@ -341,13 +344,13 @@ DialogControls.propTypes = {
  * DialogCloseButton
  * -------------------
  */
-export interface DialogCloseButtonProps extends ReactAttr<HTMLDivElement> {
+interface DialogCloseButtonProps extends ReactAttr<HTMLDivElement> {
   /**
    * Specify a click handler applied to the IconButton
    */
   onClick?: React.MouseEventHandler;
 }
-export const DialogCloseButton = React.forwardRef<
+const DialogCloseButton = React.forwardRef<
   HTMLDivElement,
   DialogCloseButtonProps
 >(({ onClick, ...rest }, ref) => {
@@ -388,7 +391,7 @@ DialogCloseButton.propTypes = {
  * DialogTitle
  * ------------
  */
-export interface DialogTitleProps extends ReactAttr<HTMLHeadingElement> {
+interface DialogTitleProps extends ReactAttr<HTMLHeadingElement> {
   /**
    * Provide the contents of the DialogTitle
    */
@@ -405,26 +408,25 @@ export interface DialogTitleProps extends ReactAttr<HTMLHeadingElement> {
   id?: string;
 }
 
-export const DialogTitle = React.forwardRef<
-  HTMLHeadingElement,
-  DialogTitleProps
->(({ children, className, id, ...rest }, ref) => {
-  const prefix = usePrefix();
+const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(
+  ({ children, className, id, ...rest }, ref) => {
+    const prefix = usePrefix();
 
-  const { titleId } = useContext(DialogContext);
-  const headingId = id || titleId;
+    const { titleId } = useContext(DialogContext);
+    const headingId = id || titleId;
 
-  return (
-    <Text
-      as="h2"
-      id={headingId}
-      className={cx(`${prefix}--dialog-header__heading`, className)}
-      ref={ref}
-      {...rest}>
-      {children}
-    </Text>
-  );
-});
+    return (
+      <Text
+        as="h2"
+        id={headingId}
+        className={cx(`${prefix}--dialog-header__heading`, className)}
+        ref={ref}
+        {...rest}>
+        {children}
+      </Text>
+    );
+  }
+);
 
 DialogTitle.displayName = 'DialogTitle';
 
@@ -450,7 +452,7 @@ DialogTitle.propTypes = {
  * DialogSubtitle
  * ---------------
  */
-export interface DialogSubtitleProps extends ReactAttr<HTMLParagraphElement> {
+interface DialogSubtitleProps extends ReactAttr<HTMLParagraphElement> {
   /**
    * Provide the contents of the DialogSubtitle
    */
@@ -467,11 +469,10 @@ export interface DialogSubtitleProps extends ReactAttr<HTMLParagraphElement> {
   id?: string;
 }
 
-export const DialogSubtitle = React.forwardRef<
+const DialogSubtitle = React.forwardRef<
   HTMLParagraphElement,
   DialogSubtitleProps
 >(({ children, className, id, ...rest }, ref) => {
-  console.log('suntitle id', id);
   const prefix = usePrefix();
   const { subtitleId } = useContext(DialogContext);
   const labelId = id || subtitleId;
@@ -512,7 +513,7 @@ DialogSubtitle.propTypes = {
  * DialogBody
  * -----------
  */
-export interface DialogBodyProps extends ReactAttr<HTMLDivElement> {
+interface DialogBodyProps extends ReactAttr<HTMLDivElement> {
   /**
    * Provide the contents of the DialogBody
    */
@@ -529,7 +530,7 @@ export interface DialogBodyProps extends ReactAttr<HTMLDivElement> {
   hasScrollingContent?: boolean;
 }
 
-export const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
+const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
   ({ children, className, hasScrollingContent, ...rest }, ref) => {
     const prefix = usePrefix();
     const contentRef = useRef<HTMLDivElement>(null);
@@ -552,7 +553,6 @@ export const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
         }
       }
 
-      console.log('isScrollable', isScrollable);
       const debouncedHandler = debounce(handler, 200);
       window.addEventListener('resize', debouncedHandler);
       return () => {
@@ -624,7 +624,7 @@ DialogBody.propTypes = {
  * DialogFooter
  * -------------
  */
-export interface DialogFooterProps extends ReactAttr<HTMLDivElement> {
+interface DialogFooterProps extends ReactAttr<HTMLDivElement> {
   /**
    * Provide the contents of the DialogFooter
    */
@@ -641,6 +641,12 @@ export interface DialogFooterProps extends ReactAttr<HTMLDivElement> {
   onRequestClose?: React.ReactEventHandler<HTMLElement>;
 
   /**
+   * Specify a handler for the secondary button.
+   * Useful if separate handler from `onRequestClose` is desirable
+   */
+  onSecondarySubmit?: React.ReactEventHandler<HTMLElement>;
+
+  /**
    * Specify a handler for submitting dialog (primary button)
    */
   onRequestSubmit?: React.ReactEventHandler<HTMLElement>;
@@ -651,32 +657,100 @@ export interface DialogFooterProps extends ReactAttr<HTMLDivElement> {
   primaryButtonText?: React.ReactNode;
 
   /**
+   * Specify whether the Button should be disabled, or not
+   */
+  primaryButtonDisabled?: boolean;
+
+  /**
    * Specify the text for the secondary button
    */
   secondaryButtonText?: React.ReactNode;
 
   /**
+   * Specify an array of config objects for secondary buttons
+   */
+  secondaryButtons?: Array<{
+    buttonText: React.ReactNode;
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
+  }>;
+
+  /**
    * Specify whether the Dialog is for dangerous actions
    */
   danger?: boolean;
+
+  /**
+   * Specify loading status
+   */
+  loadingStatus?: InlineLoadingStatus;
+
+  /**
+   * Specify the description for the loading text
+   */
+  loadingDescription?: string;
+
+  /**
+   * Specify the description for the loading icon
+   */
+  loadingIconDescription?: string;
+
+  /**
+   * Specify an optional handler to be invoked when loading is
+   * successful
+   */
+  onLoadingSuccess?: () => void;
 }
 
-export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
+const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
   (
     {
       children,
       className,
-      onRequestClose,
-      onRequestSubmit,
+      onRequestClose = noopFn,
+      onSecondarySubmit,
+      onRequestSubmit = noopFn,
       primaryButtonText = 'Save',
+      primaryButtonDisabled = false,
       secondaryButtonText = 'Cancel',
+      secondaryButtons,
+      loadingStatus = 'inactive',
+      loadingDescription,
+      loadingIconDescription,
+      onLoadingSuccess = noopFn,
       danger = false,
       ...rest
     },
     ref
   ) => {
     const prefix = usePrefix();
-    const classes = cx(`${prefix}--dialog-footer`, className);
+    const button = useRef<HTMLButtonElement>(null);
+    const { isOpen } = useContext(DialogContext);
+    const [secondaryButtonRef, setSecondaryButtonRef] =
+      useState<HTMLButtonElement | null>(null);
+    useEffect(() => {
+      if (danger && secondaryButtonRef) {
+        const focusFrame = requestAnimationFrame(() => {
+          console.log('true');
+          console.log('secondaryButtonRef', secondaryButtonRef);
+          secondaryButtonRef.focus();
+        });
+
+        return () => cancelAnimationFrame(focusFrame);
+      }
+    }, [danger, secondaryButtonRef, isOpen]);
+
+    const classes = cx(`${prefix}--dialog-footer`, className, {
+      [`${prefix}--dialog-footer--three-button`]:
+        Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
+    });
+    const loadingActive = loadingStatus !== 'inactive';
+    const primaryButtonClass = cx({
+      [`${prefix}--btn--loading`]: loadingStatus !== 'inactive',
+    });
+
+    const onSecondaryButtonClick = onSecondarySubmit
+      ? onSecondarySubmit
+      : onRequestClose;
 
     if (children) {
       return (
@@ -687,76 +761,220 @@ export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
     }
 
     return (
-      <ButtonSet className={classes} ref={ref} {...rest}>
-        {secondaryButtonText && (
-          <Button kind="secondary" onClick={onRequestClose} autoFocus={danger}>
-            {secondaryButtonText}
-          </Button>
-        )}
-        {primaryButtonText && (
-          <Button
-            kind={danger ? 'danger' : 'primary'}
-            onClick={onRequestSubmit}>
-            {primaryButtonText}
-          </Button>
-        )}
+      <ButtonSet
+        className={classes}
+        aria-busy={loadingActive}
+        ref={ref}
+        {...rest}>
+        {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
+          ? secondaryButtons.map(
+              ({ buttonText, onClick: onButtonClick }, i) => (
+                <Button
+                  key={`${buttonText}-${i}`}
+                  autoFocus={danger}
+                  kind="secondary"
+                  ref={i === 0 && danger ? setSecondaryButtonRef : undefined}
+                  onClick={onButtonClick}>
+                  {buttonText}
+                </Button>
+              )
+            )
+          : secondaryButtonText && (
+              <Button
+                ref={danger ? setSecondaryButtonRef : undefined}
+                disabled={loadingActive}
+                kind="secondary"
+                autoFocus={danger}
+                onClick={onSecondaryButtonClick}>
+                {secondaryButtonText}
+              </Button>
+            )}
+        <Button
+          className={primaryButtonClass}
+          kind={danger ? 'danger' : 'primary'}
+          disabled={loadingActive || primaryButtonDisabled}
+          onClick={onRequestSubmit}
+          ref={button}>
+          {loadingStatus === 'inactive' ? (
+            primaryButtonText
+          ) : (
+            <InlineLoading
+              status={loadingStatus}
+              description={loadingDescription}
+              iconDescription={loadingIconDescription}
+              className={`${prefix}--inline-loading--btn`}
+              onSuccess={onLoadingSuccess}
+            />
+          )}
+        </Button>
       </ButtonSet>
     );
   }
 );
 
+DialogFooter.displayName = 'DialogFooter';
+
+DialogFooter.propTypes = {
+  /**
+   * Provide the contents to be rendered inside of this component
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the footer node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify a handler for closing dialog.
+   */
+  onRequestClose: PropTypes.func,
+
+  /**
+   * Specify a handler for the secondary button.
+   */
+  onSecondarySubmit: PropTypes.func,
+
+  /**
+   * Specify a handler for submitting dialog.
+   */
+  onRequestSubmit: PropTypes.func,
+
+  /**
+   * Specify the text for the primary button
+   */
+  primaryButtonText: PropTypes.node,
+
+  /**
+   * Specify whether the Button should be disabled, or not
+   */
+  primaryButtonDisabled: PropTypes.bool,
+
+  /**
+   * Specify the text for the secondary button
+   */
+  secondaryButtonText: PropTypes.node,
+
+  /**
+   * Specify an array of config objects for secondary buttons
+   */
+  secondaryButtons: (props, propName, componentName) => {
+    if (props.secondaryButtons) {
+      if (
+        !Array.isArray(props.secondaryButtons) ||
+        props.secondaryButtons.length !== 2
+      ) {
+        return new Error(
+          `${propName} needs to be an array of two button config objects`
+        );
+      }
+
+      const shape = {
+        buttonText: PropTypes.node,
+        onClick: PropTypes.func,
+      };
+
+      props[propName].forEach((secondaryButton) => {
+        PropTypes.checkPropTypes(
+          shape,
+          secondaryButton,
+          propName,
+          componentName
+        );
+      });
+    }
+
+    return null;
+  },
+
+  /**
+   * Specify whether the Dialog is for dangerous actions
+   */
+  danger: PropTypes.bool,
+
+  /**
+   * Specify loading status
+   */
+  loadingStatus: PropTypes.oneOf(['inactive', 'active', 'finished', 'error']),
+
+  /**
+   * Specify the description for the loading text
+   */
+  loadingDescription: PropTypes.string,
+
+  /**
+   * Specify the description for the loading icon
+   */
+  loadingIconDescription: PropTypes.string,
+
+  /**
+   * Provide an optional handler to be invoked when loading is
+   * successful
+   */
+  onLoadingSuccess: PropTypes.func,
+};
 /**
  * -------
- * Types for composable Dialog
+ * Exports
  * -------
  */
-interface DialogComponent
-  extends React.ForwardRefExoticComponent<
-    DialogProps & React.RefAttributes<HTMLDialogElement>
-  > {
+
+type DialogComponentType = typeof unstable__Dialog & {
+  Root: typeof unstable__Dialog;
   Header: typeof DialogHeader;
   Controls: typeof DialogControls;
   CloseButton: typeof DialogCloseButton;
   Title: typeof DialogTitle;
   Subtitle: typeof DialogSubtitle;
   Body: typeof DialogBody;
-
   Footer: typeof DialogFooter;
-}
+};
 
-/**
- * -------
- * Exports
- * -------
- */
-const Header = DialogHeader;
-Header.displayName = 'Dialog.Header';
+const Dialog = unstable__Dialog as DialogComponentType;
 
-const Controls = DialogControls;
-Controls.displayName = 'Dialog.Controls';
+Dialog.Root = unstable__Dialog;
+Dialog.Root.displayName = 'Dialog.Root';
 
-const CloseButton = DialogCloseButton;
-CloseButton.displayName = 'Dialog.CloseButton';
+Dialog.Header = DialogHeader;
+Dialog.Header.displayName = 'Dialog.Header';
 
-const Title = DialogTitle;
-Title.displayName = 'Dialog.Title';
+Dialog.Controls = DialogControls;
+Dialog.Controls.displayName = 'Dialog.Controls';
 
-const Subtitle = DialogSubtitle;
-Subtitle.displayName = 'Dialog.Subtitle';
+Dialog.CloseButton = DialogCloseButton;
+Dialog.CloseButton.displayName = 'Dialog.CloseButton';
 
-const Body = DialogBody;
-Body.displayName = 'Dialog.Body';
+Dialog.Title = DialogTitle;
+Dialog.Title.displayName = 'Dialog.Title';
 
-const Footer = DialogFooter;
-Footer.displayName = 'Dialog.Footer';
+Dialog.Subtitle = DialogSubtitle;
+Dialog.Subtitle.displayName = 'Dialog.Subtitle';
 
-// Add composable components to unstable__Dialog
-(unstable__Dialog as DialogComponent).Header = Header;
-(unstable__Dialog as DialogComponent).Controls = Controls;
-(unstable__Dialog as DialogComponent).CloseButton = CloseButton;
-(unstable__Dialog as DialogComponent).Title = Title;
-(unstable__Dialog as DialogComponent).Subtitle = Subtitle;
-(unstable__Dialog as DialogComponent).Body = Body;
-(unstable__Dialog as DialogComponent).Footer = Footer;
+Dialog.Body = DialogBody;
+Dialog.Body.displayName = 'Dialog.Body';
 
-export const Dialog = unstable__Dialog as DialogComponent;
+Dialog.Footer = DialogFooter;
+Dialog.Footer.displayName = 'Dialog.Footer';
+
+export {
+  Dialog,
+  unstable__Dialog,
+  DialogHeader,
+  DialogControls,
+  DialogCloseButton,
+  DialogTitle,
+  DialogSubtitle,
+  DialogBody,
+  DialogFooter,
+};
+
+export type {
+  DialogProps,
+  DialogHeaderProps,
+  DialogControlsProps,
+  DialogCloseButtonProps,
+  DialogTitleProps,
+  DialogSubtitleProps,
+  DialogBodyProps,
+  DialogFooterProps,
+};
