@@ -3874,6 +3874,15 @@ Map {
       "translateWithId": Object {
         "type": "func",
       },
+      "type": Object {
+        "args": Array [
+          Array [
+            "default",
+            "inline",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "useTitleInItem": Object {
         "type": "bool",
       },
