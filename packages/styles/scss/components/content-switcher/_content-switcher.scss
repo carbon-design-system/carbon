@@ -471,23 +471,6 @@
     }
   }
 
-  // .#{$prefix}--content-switcher--low-contrast:not(
-  //     .#{$prefix}--content-switcher--icon-only
-  //   )
-  //   .#{$prefix}--content-switcher-btn:first-child {
-  //   &:focus {
-  //     box-shadow: inset 0 0 0 convert.to-rem(2px) $focus;
-  //   }
-  // }
-  // .#{$prefix}--content-switcher--low-contrast:not(
-  //     .#{$prefix}--content-switcher--icon-only
-  //   )
-  //   .#{$prefix}--content-switcher-btn:last-child {
-  //   &:focus {
-  //     box-shadow: inset 0 0 0 convert.to-rem(2px) $focus;
-  //   }
-  // }
-
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
     @include type-style('heading-compact-01');
