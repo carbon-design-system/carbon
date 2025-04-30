@@ -1987,7 +1987,6 @@ __metadata:
     "@storybook/addon-docs": "npm:^8.4.7"
     "@storybook/addon-essentials": "npm:^8.4.7"
     "@storybook/addon-links": "npm:^8.4.7"
-    "@storybook/addon-storysource": "npm:^8.4.7"
     "@storybook/addon-webpack5-compiler-babel": "npm:^3.0.3"
     "@storybook/blocks": "npm:^8.4.7"
     "@storybook/manager-api": "npm:^8.4.7"
@@ -2226,7 +2225,6 @@ __metadata:
     "@rollup/pluginutils": "npm:^5.0.0"
     "@storybook/addon-essentials": "npm:^8.4.7"
     "@storybook/addon-links": "npm:^8.4.7"
-    "@storybook/addon-storysource": "npm:^8.4.7"
     "@storybook/blocks": "npm:^8.4.7"
     "@storybook/web-components": "npm:^8.4.7"
     "@storybook/web-components-vite": "npm:^8.4.7"
@@ -5971,19 +5969,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-storysource@npm:^8.4.7":
-  version: 8.5.0
-  resolution: "@storybook/addon-storysource@npm:8.5.0"
-  dependencies:
-    "@storybook/source-loader": "npm:8.5.0"
-    estraverse: "npm:^5.2.0"
-    tiny-invariant: "npm:^1.3.1"
-  peerDependencies:
-    storybook: ^8.5.0
-  checksum: 10/91f4bece6ff4d15a9fb47cd1187b09d89942c06ac6712384935915c612f129b386d3629d28a92189058519be4c732e71fd57a380ac2517cd675a531f0ccdcc02
-  languageName: node
-  linkType: hard
-
 "@storybook/addon-toolbars@npm:8.5.0":
   version: 8.5.0
   resolution: "@storybook/addon-toolbars@npm:8.5.0"
@@ -6407,20 +6392,6 @@ __metadata:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 10/0337497fe4972ad60b1b91843d8912003c5102f140a21ba8b082346808b9fcce204f4d6cc1b9f742a94a8d9442f85c109fdb2d166d0fe5b1c86d971561634401
-  languageName: node
-  linkType: hard
-
-"@storybook/source-loader@npm:8.5.0":
-  version: 8.5.0
-  resolution: "@storybook/source-loader@npm:8.5.0"
-  dependencies:
-    "@storybook/csf": "npm:0.1.12"
-    es-toolkit: "npm:^1.22.0"
-    estraverse: "npm:^5.2.0"
-    prettier: "npm:^3.1.1"
-  peerDependencies:
-    storybook: ^8.5.0
-  checksum: 10/daefc121b4cab55a4fec1dc0922b4e7b6602c2ee39d5c0765589dfafe0c9cf1f7993bd3bb29c3a358a5a2d6554b110549a49ad6d4666eee8d9c4c4409d2735e0
   languageName: node
   linkType: hard
 
@@ -13187,7 +13158,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es-toolkit@npm:^1.22.0, es-toolkit@npm:^1.27.0":
+"es-toolkit@npm:^1.27.0":
   version: 1.29.0
   resolution: "es-toolkit@npm:1.29.0"
   dependenciesMeta:
@@ -23335,7 +23306,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.1.1, prettier@npm:^3.3.3":
+"prettier@npm:^3.3.3":
   version: 3.3.3
   resolution: "prettier@npm:3.3.3"
   bin:
