@@ -29,14 +29,8 @@
     background-color: transparent;
     block-size: layout.size('height');
     inline-size: 100%;
-    outline: 1px solid $border-inverse;
+    outline: convert.to-rem(1px) solid $border-inverse;
     outline-offset: convert.to-rem(-1px);
-  }
-
-  .#{$prefix}--content-switcher:has(
-      .#{$prefix}--content-switcher-btn:not([disabled]):hover
-    ) {
-    background-color: $layer-hover;
   }
 
   .#{$prefix}--content-switcher:has(
@@ -56,7 +50,7 @@
     overflow: hidden;
     border: none;
     margin: 0;
-    background-color: $background;
+    background-color: transparent;
     border-block-end: convert.to-rem(1px) solid $border-inverse;
     border-block-start: convert.to-rem(1px) solid $border-inverse;
     color: $text-secondary;
@@ -68,6 +62,7 @@
     &::after {
       position: absolute;
       display: block;
+      border-radius: convert.to-rem(4px);
       background-color: $layer-selected-inverse;
       block-size: 100%;
       content: '';
@@ -88,16 +83,14 @@
     }
 
     &:focus {
-      z-index: 3;
       border: 0;
+    }
+
+    &:focus::after {
       border-radius: convert.to-rem(4px);
       box-shadow:
         inset 0 0 0 2px $focus,
         inset 0 0 0 3px $focus-inset;
-    }
-
-    &:focus::after {
-      clip-path: inset(3px 3px 3px 3px);
     }
 
     &:hover {
@@ -108,7 +101,6 @@
     &:hover,
     &:active {
       z-index: 3;
-      background-color: transparent;
       color: $text-primary;
     }
 
@@ -128,43 +120,77 @@
     }
   }
 
+  .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher--selected
+    ) {
+    &:focus::before {
+      display: block;
+      border-radius: convert.to-rem(4px);
+      block-size: 100%;
+      box-shadow:
+        inset 0 0 0 convert.to-rem(2px) $focus,
+        inset 0 0 0 convert.to-rem(3px) $focus-inset;
+      content: '';
+      inline-size: 100%;
+    }
+  }
+
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
     .#{$prefix}--content-switcher-btn {
     align-items: center;
     padding: $spacing-03 layout.density('padding-inline');
     inline-size: 100%;
+  }
 
-    &:first-child,
-    &:last-child {
-      &:disabled {
-        box-shadow: none;
-        color: $text-disabled;
-      }
-
-      &:hover {
-        box-shadow: none;
-      }
-
-      &:focus {
-        box-shadow:
-          inset 0 0 0 convert.to-rem(2px) $focus,
-          inset 0 0 0 convert.to-rem(3px) $focus-inset;
-      }
+  .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher--selected
+    ):hover:not([disabled]) {
+    &::before {
+      z-index: 0;
+      display: block;
+      background-color: $layer-hover;
+      block-size: 100%;
+      content: '';
+      inline-size: 100%;
     }
+
+    // First-child hover adjustments
+    &:first-child:not(:focus)::before {
+      border-end-start-radius: convert.to-rem(4px);
+      border-inline-start: convert.to-rem(1px) solid $border-inverse;
+      border-start-start-radius: convert.to-rem(4px);
+    }
+
+    // Last-child hover adjustments
+    &:last-child:not(:focus)::before {
+      border-end-end-radius: convert.to-rem(4px);
+      border-inline-end: convert.to-rem(1px) solid $border-inverse;
+      border-start-end-radius: convert.to-rem(4px);
+    }
+  }
+
+  .#{$prefix}--content-switcher
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher__selected-hovered::before {
+    z-index: 0;
+    background-color: $layer-hover;
+    block-size: 100%;
+    border-block-end: convert.to-rem(1px) solid $border-inverse;
+    border-block-start: convert.to-rem(1px) solid $border-inverse;
+    content: '';
+    inline-size: 100%;
   }
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
     .#{$prefix}--content-switcher-btn:first-child {
     border-end-start-radius: convert.to-rem(4px);
     border-start-start-radius: convert.to-rem(4px);
-    box-shadow: inset convert.to-rem(1px) 0 0 0 $border-inverse;
   }
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
     .#{$prefix}--content-switcher-btn:last-child {
     border-end-end-radius: convert.to-rem(4px);
     border-start-end-radius: convert.to-rem(4px);
-    box-shadow: inset convert.to-rem(-1px) 0 0 0 $border-inverse;
   }
 
   .#{$prefix}--content-switcher
@@ -174,7 +200,10 @@
   .#{$prefix}--content-switcher
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:last-child {
     border: 0;
-    border-radius: convert.to-rem(4px);
+
+    &:disabled {
+      border-radius: convert.to-rem(4px);
+    }
   }
 
   .#{$prefix}--content-switcher-btn::before {
@@ -189,7 +218,9 @@
   }
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
-    .#{$prefix}--content-switcher-btn:first-of-type::before {
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher__selected-hovered
+    ):not(:focus):not(:hover):first-of-type::before {
     display: none;
   }
 
@@ -198,8 +229,12 @@
     + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:hover::before,
   .#{$prefix}--content-switcher-btn:hover
-    + .#{$prefix}--content-switcher-btn::before,
-  .#{$prefix}--content-switcher--selected::before,
+    + .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher__selected-hovered
+    )::before,
+  .#{$prefix}--content-switcher--selected:not(
+      .#{$prefix}--content-switcher__selected-hovered
+    )::before,
   .#{$prefix}--content-switcher--selected
     + .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
@@ -242,7 +277,6 @@
 
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
     z-index: 3;
-    background-color: $layer-selected-inverse;
     color: $text-inverse;
 
     &:disabled {
@@ -274,6 +308,52 @@
   .#{$prefix}--content-switcher--icon-only .#{$prefix}--content-switcher-btn {
     align-items: center;
     padding: 0;
+    background-color: transparent;
+
+    &:focus {
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher__selected-hovered::before {
+    background-color: $layer-hover;
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher--selected
+    ):hover:not([disabled]) {
+    &::before {
+      z-index: -1;
+      display: block;
+      background-color: $layer-hover;
+      block-size: 100%;
+      content: '';
+      inline-size: 100%;
+    }
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:first-child
+    .#{$prefix}--content-switcher-btn:hover:not(:focus):not(
+      [disabled]
+    )::before {
+    border-end-start-radius: convert.to-rem(4px);
+    border-inline-start: convert.to-rem(1px) solid $border-inverse;
+    border-start-start-radius: convert.to-rem(4px);
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:last-child
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher--selected
+    ):hover:not(:focus):not([disabled])::before {
+    border-end-end-radius: convert.to-rem(4px);
+    border-inline-end: convert.to-rem(1px) solid $border-inverse;
+    border-start-end-radius: convert.to-rem(4px);
   }
 
   .#{$prefix}--content-switcher--icon-only
@@ -290,17 +370,11 @@
     &:hover {
       box-shadow: none;
     }
-
-    &:focus {
-      box-shadow:
-        inset 0 0 0 convert.to-rem(2px) $focus,
-        inset 0 0 0 convert.to-rem(3px) $focus-inset;
-    }
   }
 
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:first-child
-    .#{$prefix}--content-switcher-btn:not(:focus) {
+    .#{$prefix}--content-switcher-btn {
     border-end-start-radius: convert.to-rem(4px);
     border-start-start-radius: convert.to-rem(4px);
     box-shadow: inset convert.to-rem(1px) 0 0 0 $border-inverse;
@@ -317,7 +391,7 @@
 
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:last-child
-    .#{$prefix}--content-switcher-btn:not(:focus) {
+    .#{$prefix}--content-switcher-btn {
     border-end-end-radius: convert.to-rem(4px);
     border-start-end-radius: convert.to-rem(4px);
     box-shadow: inset convert.to-rem(-1px) 0 0 0 $border-inverse;
@@ -354,7 +428,9 @@
   // Subtle border overrides
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:first-of-type
-    .#{$prefix}--content-switcher-btn::before {
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher__selected-hovered
+    ):not(:hover):not(:focus)::before {
     display: none;
   }
 
@@ -366,7 +442,9 @@
       .#{$prefix}--content-switcher-popover--disabled
     ):hover
     + .#{$prefix}--content-switcher-popover__wrapper
-    .#{$prefix}--content-switcher-btn::before,
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher__selected-hovered
+    )::before,
   .#{$prefix}--content-switcher--selected::before,
   .#{$prefix}--content-switcher-popover--selected
     + .#{$prefix}--content-switcher-popover__wrapper
@@ -385,7 +463,9 @@
       .#{$prefix}--content-switcher--selected
     ):hover,
   .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover--selected
+    .#{$prefix}--content-switcher--selected:not(
+      .#{$prefix}--content-switcher--selected-hovered
+    )
     + .#{$prefix}--content-switcher-popover--disabled
     .#{$prefix}--content-switcher-btn[disabled]:hover::before {
     background-color: transparent;
@@ -399,32 +479,16 @@
   // Low contrast selected state styling
   .#{$prefix}--content-switcher--low-contrast {
     background-color: $content-switcher-background;
-    outline: 1px solid $border-strong;
-  }
-
-  .#{$prefix}--content-switcher--low-contrast:has(
-      .#{$prefix}--content-switcher-btn:not([disabled]):hover
-    ) {
-    background-color: $content-switcher-background-hover;
+    outline-color: $border-strong;
   }
 
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn {
-    background-color: $content-switcher-background;
     border-block-end: convert.to-rem(1px) solid $border-strong; /* Bottom border only */
     border-block-start: convert.to-rem(1px) solid $border-strong; /* Top border only */
-    color: $text-secondary;
-
-    &:hover,
-    &:active {
-      z-index: 3;
-      background-color: transparent;
-      color: $text-primary;
-    }
 
     &:focus {
-      border: none;
-      box-shadow: inset 0 0 0 convert.to-rem(2px) $focus;
+      border: 0;
     }
 
     &::before {
@@ -446,6 +510,36 @@
     }
   }
 
+  .#{$prefix}--content-switcher--low-contrast:not(
+      .#{$prefix}--content-switcher--icon-only
+    )
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher--selected
+    ):hover:not([disabled]) {
+    &::before {
+      background-color: $content-switcher-background-hover;
+    }
+
+    &:first-child:not(:focus)::before {
+      border-end-start-radius: convert.to-rem(4px);
+      border-inline-start: convert.to-rem(1px) solid $border-strong;
+      border-start-start-radius: convert.to-rem(4px);
+    }
+
+    &:last-child:not(:focus)::before {
+      border-end-end-radius: convert.to-rem(4px);
+      border-inline-end: convert.to-rem(1px) solid $border-strong;
+      border-start-end-radius: convert.to-rem(4px);
+    }
+  }
+
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher__selected-hovered::before {
+    background-color: $content-switcher-background-hover;
+    border-block-end: convert.to-rem(1px) solid $border-strong;
+    border-block-start: convert.to-rem(1px) solid $border-strong;
+  }
+
   .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher:not(
       .#{$prefix}--content-switcher--icon-only
     )
@@ -461,12 +555,11 @@
     }
   }
 
-  .#{$prefix}--content-switcher--low-contrast:not(
-      .#{$prefix}--content-switcher--icon-only
-    )
-    .#{$prefix}--content-switcher-btn {
-    &:first-child:focus,
-    &:last-child:focus {
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher--selected
+    ) {
+    &:focus::before {
       box-shadow: inset 0 0 0 convert.to-rem(2px) $focus;
     }
   }
@@ -475,16 +568,21 @@
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
     @include type-style('heading-compact-01');
 
-    background-color: $content-switcher-selected;
     color: $text-primary;
 
     &::after {
-      border: convert.to-rem(1px) solid $border-inverse;
       border-radius: convert.to-rem(4px);
+      background-color: $content-switcher-selected;
+      box-shadow: inset 0 0 0 convert.to-rem(1px) $border-inverse;
+    }
+
+    &:focus::after {
+      box-shadow: inset 0 0 0 convert.to-rem(2px) $focus;
     }
 
     &:disabled {
       border: convert.to-rem(1px) solid $border-disabled;
+      background-color: $content-switcher-selected;
       color: $text-disabled;
     }
 
@@ -494,30 +592,25 @@
   }
 
   .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:first-child,
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:last-child {
-    &:focus {
-      box-shadow:
-        inset 0 0 0 convert.to-rem(2px) $focus,
-        inset 0 0 0 convert.to-rem(3px) $focus-inset;
-    }
-  }
-
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:focus::before,
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher__selected-hovered
+    ):focus::before,
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn:focus
-    + .#{$prefix}--content-switcher-btn::before,
+    + .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher__selected-hovered
+    )::before,
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn:hover::before,
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn:hover
-    + .#{$prefix}--content-switcher-btn::before,
+    + .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher__selected-hovered
+    )::before,
   .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher--selected::before,
+    .#{$prefix}--content-switcher--selected:not(
+      .#{$prefix}--content-switcher__selected-hovered
+    )::before,
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher--selected
     + .#{$prefix}--content-switcher-btn::before {
@@ -545,6 +638,38 @@
   }
 
   // low contrast icons
+
+  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher--selected
+    ):hover:not([disabled]) {
+    &::before {
+      background-color: $content-switcher-background-hover;
+    }
+  }
+
+  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:first-child
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher--selected
+    ):hover:not([disabled]) {
+    &::before {
+      border-color: $border-strong;
+    }
+
+    &:focus::before {
+      border: none;
+    }
+  }
+
+  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:last-child
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher--selected
+    ):hover:not([disabled])::before {
+    border-color: $border-strong;
+  }
 
   .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:first-of-type
@@ -591,7 +716,9 @@
   }
 
   .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:focus::before,
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher__selected-hovered
+    ):focus::before,
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-popover__wrapper:focus-within
     + .#{$prefix}--content-switcher-popover__wrapper
@@ -601,9 +728,13 @@
       .#{$prefix}--content-switcher-popover--disabled
     ):hover
     + .#{$prefix}--content-switcher-popover__wrapper
-    .#{$prefix}--content-switcher-btn::before,
+    .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher__selected-hovered
+    )::before,
   .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher--selected::before,
+    .#{$prefix}--content-switcher--selected:not(
+      .#{$prefix}--content-switcher__selected-hovered
+    )::before,
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-popover--selected
     + .#{$prefix}--content-switcher-popover__wrapper
