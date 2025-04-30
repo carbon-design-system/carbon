@@ -92,7 +92,6 @@
     "@storybook/addon-docs": "^8.4.7",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-links": "^8.4.7",
-    "@storybook/addon-storysource": "^8.4.7",
     "@storybook/addon-webpack5-compiler-babel": "^3.0.3",
     "@storybook/blocks": "^8.4.7",
     "@storybook/manager-api": "^8.4.7",
