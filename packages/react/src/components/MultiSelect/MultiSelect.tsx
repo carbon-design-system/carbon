@@ -26,9 +26,10 @@ import React, {
   useCallback,
 } from 'react';
 import ListBox, {
-  ListBoxSize,
-  ListBoxType,
-  PropTypes as ListBoxPropTypes,
+  ListBoxSizePropType,
+  ListBoxTypePropType,
+  type ListBoxSize,
+  type ListBoxType,
 } from '../ListBox';
 import {
   MultiSelectSortingProps,
@@ -914,7 +915,7 @@ export const MultiSelect = React.forwardRef(
       </div>
     );
   }
-);
+) as MultiSelectComponent;
 
 type MultiSelectComponentProps<ItemType> = React.PropsWithChildren<
   MultiSelectProps<ItemType>
@@ -922,6 +923,8 @@ type MultiSelectComponentProps<ItemType> = React.PropsWithChildren<
   React.RefAttributes<HTMLButtonElement>;
 
 interface MultiSelectComponent {
+  propTypes: Record<string, any>;
+  displayName: string;
   <ItemType>(
     props: MultiSelectComponentProps<ItemType>
   ): React.ReactElement<any> | null;
@@ -1099,7 +1102,7 @@ MultiSelect.propTypes = {
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
-  size: ListBoxPropTypes.ListBoxSize,
+  size: ListBoxSizePropType,
 
   slug: deprecate(
     PropTypes.node,
@@ -1142,7 +1145,7 @@ MultiSelect.propTypes = {
   /**
    * Specify 'inline' to create an inline multi-select.
    */
-  type: PropTypes.oneOf(['default', 'inline']),
+  type: ListBoxTypePropType,
 
   /**
    * Specify title to show title on hover
