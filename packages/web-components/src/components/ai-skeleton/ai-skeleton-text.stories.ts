@@ -7,6 +7,7 @@
 
 import { html } from 'lit';
 import './ai-skeleton-text';
+import mdx from './ai-skeleton.mdx';
 
 const args = {
   heading: false,
@@ -34,11 +35,14 @@ const argTypes = {
   },
 };
 
-export const Default = {
+export const AISkeletonText = {
   // This story doesn't accept any args.
   args: {},
   argTypes: {},
   parameters: {
+    docs: {
+      page: mdx,
+    },
     percy: {
       skip: true,
     },
@@ -68,7 +72,7 @@ export const Playground = {
 };
 
 const meta = {
-  title: 'Experimental/AISkeleton/AISkeletonText',
+  title: 'Components/Skeleton/AI Skeleton',
 };
 
 export default meta;

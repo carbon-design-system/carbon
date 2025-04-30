@@ -33,10 +33,11 @@ import {
   WarningFilled,
 } from '@carbon/icons-react';
 import ListBox, {
+  ListBoxSizePropType,
+  ListBoxTypePropType,
   type ListBoxMenuIconTranslationKey,
-  ListBoxSize,
-  ListBoxType,
-  PropTypes as ListBoxPropTypes,
+  type ListBoxSize,
+  type ListBoxType,
 } from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
@@ -501,13 +502,9 @@ const Dropdown = React.forwardRef(
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
-    const toggleButtonProps = useMemo(
-      () =>
-        getToggleButtonProps({
-          'aria-label': ariaLabel || deprecatedAriaLabel,
-        }),
-      [getToggleButtonProps, ariaLabel, deprecatedAriaLabel, isOpen]
-    );
+    const toggleButtonProps = getToggleButtonProps({
+      'aria-label': ariaLabel || deprecatedAriaLabel,
+    });
 
     const helper =
       helperText && !isFluid ? (
@@ -608,7 +605,10 @@ const Dropdown = React.forwardRef(
       return React.isValidElement(element) ? element : null;
     }, [slug, decorator]);
 
-    const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
+    const allLabelProps = getLabelProps();
+    const labelProps = isValidElement(titleText)
+      ? { id: allLabelProps.id }
+      : allLabelProps;
 
     return (
       <div className={wrapperClasses} {...other}>
@@ -684,13 +684,6 @@ const Dropdown = React.forwardRef(
                   item,
                   index,
                 });
-                if (
-                  item !== null &&
-                  typeof item === 'object' &&
-                  Object.prototype.hasOwnProperty.call(item, 'id')
-                ) {
-                  itemProps.id = item['id'];
-                }
                 const title =
                   isObject && 'text' in item && itemToElement
                     ? item.text
@@ -734,7 +727,7 @@ type DropdownComponentProps<ItemType> = React.PropsWithoutRef<
 export interface DropdownComponent {
   <ItemType>(
     props: DropdownComponentProps<ItemType>
-  ): React.ReactElement | null;
+  ): React.ReactElement<any> | null;
 }
 
 Dropdown.displayName = 'Dropdown';
@@ -787,7 +780,9 @@ Dropdown.propTypes = {
    * change, and in some cases they can not be shimmed by Carbon to shield you
    * from potentially breaking changes.
    */
-  downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
+  downshiftProps: PropTypes.object as PropTypes.Validator<
+    UseSelectProps<unknown>
+  >,
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -888,7 +883,7 @@ Dropdown.propTypes = {
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
-  size: ListBoxPropTypes.ListBoxSize,
+  size: ListBoxSizePropType,
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
@@ -913,7 +908,7 @@ Dropdown.propTypes = {
   /**
    * The dropdown type, `default` or `inline`
    */
-  type: ListBoxPropTypes.ListBoxType,
+  type: ListBoxTypePropType,
 
   /**
    * Specify whether the control is currently in warning state

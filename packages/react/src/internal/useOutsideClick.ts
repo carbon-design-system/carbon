@@ -9,7 +9,7 @@ import { useEffect, useRef, type RefObject } from 'react';
 import { canUseDOM } from './environment';
 import { useWindowEvent } from './useEvent';
 
-export const useOutsideClick = <T extends HTMLElement>(
+export const useOutsideClick = <T extends HTMLElement | null>(
   ref: RefObject<T>,
   callback: (event: MouseEvent) => void
 ) => {
@@ -23,7 +23,10 @@ export const useOutsideClick = <T extends HTMLElement>(
   // treated as a constant as it will be false when executed in a Node.js
   // environment and true when executed in the browser
   if (canUseDOM) {
+    // TODO: https://github.com/carbon-design-system/carbon/issues/19005
+    /*
     // eslint-disable-next-line react-hooks/rules-of-hooks
+    */
     useWindowEvent('click', (event) => {
       const { target } = event;
 
