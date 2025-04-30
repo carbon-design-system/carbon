@@ -23,7 +23,9 @@ const callOnChangeHandler = <ItemType,>({
 }) => {
   if (isControlled) {
     if (isMounted && onChangeHandlerControlled) {
-      onChangeHandlerControlled({ selectedItems });
+      queueMicrotask(() => {
+        onChangeHandlerControlled({ selectedItems });
+      });
     }
   } else {
     onChangeHandlerUncontrolled(selectedItems);

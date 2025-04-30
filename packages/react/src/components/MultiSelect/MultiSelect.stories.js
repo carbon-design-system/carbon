@@ -270,6 +270,36 @@ export const Default = (args) => {
 Default.args = { ...sharedArgs };
 Default.argTypes = { ...sharedArgTypes };
 
+export const Test = (args) => {
+  const [businessAliases, setBusinessAliases] = useState([
+    'DEV1',
+    'DEV2',
+    'DEV3',
+  ]);
+  const [selectedBusiness, setSelectedBusiness] = useState(['DEV1']);
+
+  function handletOnChange(e) {
+    setSelectedBusiness(e?.selectedItems);
+  }
+  return (
+    <div
+      style={{
+        width: 300,
+      }}>
+      <MultiSelect
+        label="Multiselect Label"
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={businessAliases}
+        itemToString={(item) => item}
+        onChange={handletOnChange}
+        selectedItems={selectedBusiness}
+      />
+    </div>
+  );
+};
+
 export const WithInitialSelectedItems = (args) => {
   const items = [
     {

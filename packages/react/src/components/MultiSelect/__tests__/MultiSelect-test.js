@@ -817,6 +817,18 @@ describe('MultiSelect', () => {
         'true'
       );
     });
+    it('should not throw error on the first time when user select an item', async () => {
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+      render(<ControlledMultiselect />);
+      const dropdownNode = screen.getByRole('combobox');
+      await userEvent.click(dropdownNode);
+      await userEvent.click(screen.getAllByRole('option')[0]);
+
+      expect(errorSpy).not.toHaveBeenCalled();
+      errorSpy.mockRestore();
+    });
   });
 
   it('should prevent default behavior for ArrowDown, ArrowUp, Space, and Enter keys', async () => {
@@ -946,8 +958,8 @@ describe('MultiSelect', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      for: 'downshift-:r5o:-toggle-button',
-      id: 'downshift-:r5o:-label',
+      for: 'downshift-:r61:-toggle-button',
+      id: 'downshift-:r61:-label',
     });
   });
 
@@ -964,7 +976,7 @@ describe('MultiSelect', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      id: 'downshift-:r5r:-label',
+      id: 'downshift-:r64:-label',
     });
   });
 
