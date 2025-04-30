@@ -1972,6 +1972,23 @@ Map {
     },
     "TableCell": Object {
       "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "colSpan": Object {
+          "type": "number",
+        },
+        "hasAILabelHeader": Object {
+          "type": "bool",
+        },
+        "headers": Object {
+          "type": "string",
+        },
+      },
       "render": [Function],
     },
     "TableContainer": Object {
@@ -3856,6 +3873,15 @@ Map {
       },
       "translateWithId": Object {
         "type": "func",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "default",
+            "inline",
+          ],
+        ],
+        "type": "oneOf",
       },
       "useTitleInItem": Object {
         "type": "bool",
@@ -8023,6 +8049,23 @@ Map {
   },
   "TableCell" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "colSpan": Object {
+        "type": "number",
+      },
+      "hasAILabelHeader": Object {
+        "type": "bool",
+      },
+      "headers": Object {
+        "type": "string",
+      },
+    },
     "render": [Function],
   },
   "TableContainer" => Object {
@@ -10135,6 +10178,77 @@ Map {
   },
   "unstable__FluidDatePickerInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "datePickerType": Object {
+        "args": Array [
+          Array [
+            "simple",
+            "single",
+            "range",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "decorator": Object {
+        "type": "node",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "helperText": Object {
+        "type": "node",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "pattern": [Function],
+      "placeholder": Object {
+        "type": "string",
+      },
+      "readOnly": Object {
+        "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "slug": [Function],
+      "type": Object {
+        "type": "string",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
     "render": [Function],
   },
   "unstable__FluidDatePickerSkeleton" => Object {
@@ -11011,11 +11125,19 @@ Map {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },
+    "PageHeaderTabs": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
     "Root": Object {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },
     "TabBar": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Tabs": Object {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },

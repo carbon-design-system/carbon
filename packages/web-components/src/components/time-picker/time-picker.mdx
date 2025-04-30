@@ -1,55 +1,40 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import * as TimePicker from './time-picker.stories';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as TimePickerStories from './time-picker.stories';
 
-<Meta of={TimePicker} />
+<Meta of={TimePickerStories} />
 
-# TimePicker
+# Time Picker
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/time-picker)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/time-picker)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/date-picker/usage#time-picker)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/date-picker/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/time-picker)
+## Table of Contents
 
-## Getting started
+- [Overview](#overview)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-Here's a quick example to get you started.
+## Overview
 
-### JS (via import)
+<Canvas of={TimePickerStories.Default} />
 
-```javascript
-import '@carbon/web-components/es/components/time-picker/index.js';
-```
+## Component API
+
+## `cds-time-picker`
+<ArgTypes of="cds-time-picker" />
+
+## `cds-time-picker-select`
+<ArgTypes of="cds-time-picker-select" />
 
 <Markdown>{`${cdnJs({ components: ['time-picker'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
 
-### HTML
+## Feedback
 
-```html
-<cds-time-picker
-  label-text="Select a time"
-  placeholder="hh:mm"
-  <cds-time-picker-select id="time-picker-select-1" aria-label="Select AM/PM" slot="time-picker-select">
-    <cds-select-item value="AM">AM</cds-select-item>
-    <cds-select-item value="PM" selected>PM</cds-select-item>
-  </cds-time-picker-select>
-  <cds-time-picker-select id="time-picker-select-2" aria-label="Select timezone" slot="time-picker-select">
-    <cds-select-item value="Time zone 1">Time zone 1</cds-select-item>
-    <cds-select-item value="Time zone 2" selected>Time zone 2</cds-select-item>
-  </cds-time-picker-select>
-</cds-time-picker>
-```
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-time-picker hideLabel>`) and `false` means not setting the attribute (e.g.
-`<cds-time-picker>` without `hideLabel` attribute).
-
-## `<cds-time-picker>` attributes and properties
-
-<ArgTypes of="cds-time-picker"/>
-
-## `<cds-time-picker-select>` attributes and properties
-
-<ArgTypes of="cds-time-picker-select"/>
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/time-picker/time-picker.mdx).

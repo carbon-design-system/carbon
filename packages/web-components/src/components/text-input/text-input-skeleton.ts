@@ -12,6 +12,8 @@ import { prefix } from '../../globals/settings';
 import styles from './text-input.scss?lit';
 
 /**
+ * @element cds-text-input-skeleton
+ *
  * Skeleton of number input.
  */
 @customElement(`${prefix}-text-input-skeleton`)

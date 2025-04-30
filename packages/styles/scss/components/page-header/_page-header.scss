@@ -116,6 +116,8 @@
   }
 
   .#{$prefix}--page-header__tab-bar {
+    display: grid;
+    padding: 0 $spacing-05;
     border: 1px solid green; /* stylelint-disable-line */
   }
 }

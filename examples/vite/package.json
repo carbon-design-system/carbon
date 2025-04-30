@@ -1,7 +1,7 @@
 {
   "name": "vite",
   "private": true,
-  "version": "0.79.0-rc.0",
+  "version": "0.79.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/react": "^1.81.0-rc.0",
+    "@carbon/react": "^1.81.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
