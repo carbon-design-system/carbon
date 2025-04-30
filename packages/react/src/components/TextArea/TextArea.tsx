@@ -427,7 +427,7 @@ const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
     }
   }
 
-  const announcerRef = useRef(null);
+  const announcerRef = useRef<HTMLSpanElement>(null);
   const [prevAnnouncement, setPrevAnnouncement] = useState('');
   const ariaAnnouncement = useAnnouncer(
     textCount,
