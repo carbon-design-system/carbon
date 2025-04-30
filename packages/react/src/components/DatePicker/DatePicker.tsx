@@ -388,7 +388,7 @@ export interface DatePickerProps {
    * The value of the date value provided to flatpickr, could
    * be a date, a date number, a date string, an array of dates.
    */
-  value?: string | number | (string | number | object)[] | object | undefined;
+  value?: DateOption | DateOption[];
 
   /**
    * Specify whether the control is currently in warning state (Fluid only)
@@ -443,11 +443,12 @@ const DatePicker = React.forwardRef(function DatePicker(
   }, []);
 
   const lastStartValue = useRef('');
+  const calendarRef = useRef<Instance>(null);
 
   interface CalendarCloseEvent {
     selectedDates: Date[];
     dateStr: string;
-    instance: object; //This is `Intance` of flatpicker
+    instance: Instance;
   }
   const [calendarCloseEvent, setCalendarCloseEvent] =
     useState<CalendarCloseEvent | null>(null);
@@ -461,7 +462,7 @@ const DatePicker = React.forwardRef(function DatePicker(
         !startInputField.current.value
       ) {
         startInputField.current.value = lastStartValue.current;
-        calendarRef.current.setDate(
+        calendarRef.current?.setDate(
           [startInputField.current.value, endInputField?.current?.value],
           true,
           calendarRef.current.config.dateFormat
@@ -488,7 +489,6 @@ const DatePicker = React.forwardRef(function DatePicker(
   }, [calendarCloseEvent, handleCalendarClose]);
 
   const endInputField = useRef<HTMLTextAreaElement>(null);
-  const calendarRef: any | undefined = useRef(null);
   const savedOnChange = useSavedCallback(onChange);
 
   const savedOnOpen = useSavedCallback(onOpen);
@@ -623,7 +623,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     const { current: start } = startInputField;
     const { current: end } = endInputField;
-    const flatpickerconfig: any = {
+    const flatpickerConfig: any = {
       inline: inline ?? false,
       onClose: onCalendarClose,
       disableMobile: true,
@@ -678,7 +678,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       },
       onValueUpdate: onHook,
     };
-    const calendar = flatpickr(start, flatpickerconfig);
+    const calendar = flatpickr(start, flatpickerConfig);
 
     calendarRef.current = calendar;
 
@@ -694,12 +694,12 @@ const DatePicker = React.forwardRef(function DatePicker(
         const {
           calendarContainer,
           selectedDateElem: fpSelectedDateElem,
-          todayDateElem: fptodayDateElem,
+          todayDateElem: fpTodayDateElem,
         } = calendar;
         const selectedDateElem =
           calendarContainer.querySelector('.selected') && fpSelectedDateElem;
         const todayDateElem =
-          calendarContainer.querySelector('.today') && fptodayDateElem;
+          calendarContainer.querySelector('.today') && fpTodayDateElem;
         (
           (selectedDateElem ||
             todayDateElem ||
@@ -813,48 +813,48 @@ const DatePicker = React.forwardRef(function DatePicker(
   }));
 
   useEffect(() => {
-    if (calendarRef?.current?.set) {
+    if (calendarRef.current?.set) {
       calendarRef.current.set({ dateFormat });
     }
   }, [dateFormat]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set) {
+    if (calendarRef.current?.set) {
       calendarRef.current.set('minDate', minDate);
     }
   }, [minDate]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set) {
+    if (calendarRef.current?.set) {
       calendarRef.current.set('allowInput', allowInput);
     }
   }, [allowInput]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set) {
+    if (calendarRef.current?.set) {
       calendarRef.current.set('maxDate', maxDate);
     }
   }, [maxDate]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set && disable) {
+    if (calendarRef.current?.set && disable) {
       calendarRef.current.set('disable', disable);
     }
   }, [disable]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set && enable) {
+    if (calendarRef.current?.set && enable) {
       calendarRef.current.set('enable', enable);
     }
   }, [enable]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set && inline) {
+    if (calendarRef.current?.set && inline) {
       calendarRef.current.set('inline', inline);
     }
   }, [inline]);
   useEffect(() => {
-    //when value prop is set to empty, this clears the faltpicker's calendar instance and text input
+    //when value prop is set to empty, this clears the flatpicker's calendar instance and text input
     if (value === '') {
       calendarRef.current?.clear();
       if (startInputField.current) {
@@ -885,10 +885,10 @@ const DatePicker = React.forwardRef(function DatePicker(
     };
 
     const closeCalendar = (event) => {
-      calendarRef.current.close();
+      calendarRef.current?.close();
       // Remove focus from endDate calendar input
       onCalendarClose(
-        calendarRef.current.selectedDates,
+        calendarRef.current?.selectedDates,
         '',
         calendarRef.current,
         { type: 'clickOutside' }
@@ -902,7 +902,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   }, [calendarRef, startInputField, endInputField, onCalendarClose]);
 
   useEffect(() => {
-    if (calendarRef?.current?.set) {
+    if (calendarRef.current?.set) {
       if (value !== undefined) {
         calendarRef.current.setDate(value);
       }
@@ -920,7 +920,7 @@ const DatePicker = React.forwardRef(function DatePicker(
         match(event, keys.Tab) &&
         !event.shiftKey &&
         document.activeElement === endInputField.current &&
-        calendarRef.current.isOpen
+        calendarRef.current?.isOpen
       ) {
         calendarRef.current.close();
         onCalendarClose(
