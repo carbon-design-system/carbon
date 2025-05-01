@@ -14,7 +14,12 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import deprecate from '../../prop-types/deprecate';
-import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
+import {
+  ListBoxSizePropType,
+  ListBoxTypePropType,
+  type ListBoxSize,
+  type ListBoxType,
+} from '.';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ForwardRefReturn } from '../../types/common';
@@ -212,13 +217,13 @@ ListBox.propTypes = {
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
-  size: ListBoxSize,
+  size: ListBoxSizePropType,
 
   /**
    * Specify the "type" of the ListBox. Currently supports either `default` or
    * `inline` as an option.
    */
-  type: ListBoxType,
+  type: ListBoxTypePropType,
 
   /**
    * Specify whether the control is currently in warning state

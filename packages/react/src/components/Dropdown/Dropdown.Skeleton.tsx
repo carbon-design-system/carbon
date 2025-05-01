@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { type HTMLAttributes } from 'react';
 import cx from 'classnames';
-import { ListBoxSize, PropTypes as ListBoxPropTypes } from '../ListBox';
+import { ListBoxSizePropType, type ListBoxSize } from '../ListBox';
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface DropdownSkeletonProps extends HTMLAttributes<HTMLDivElement> {
@@ -68,7 +68,7 @@ DropdownSkeleton.propTypes = {
   /**
    * Specify the size of the ListBox.
    */
-  size: ListBoxPropTypes.ListBoxSize,
+  size: ListBoxSizePropType,
 };
 
 export default DropdownSkeleton;

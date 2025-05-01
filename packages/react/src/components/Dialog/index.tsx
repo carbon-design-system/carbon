@@ -86,7 +86,7 @@ export const unstable__Dialog = React.forwardRef(
     // If the parent component has not passed a ref for forwardRef, forwardRef
     // will be null. A "backup" ref is needed to ensure the dialog's instance
     // methods can always be called within this component.
-    const backupRef = useRef(null);
+    const backupRef = useRef<HTMLDialogElement>(null);
     const ref = (forwardRef ??
       backupRef) as MutableRefObject<HTMLDialogElement>;
 
