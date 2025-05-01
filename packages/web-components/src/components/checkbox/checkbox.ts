@@ -174,7 +174,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   /**
    * Specify whether the underlying input should be checked by default
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, attribute: 'default-checked' })
   defaultChecked;
 
   /**
@@ -210,10 +210,14 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   protected _hasAILabel = false;
 
   updated() {
-    const { _hasAILabel: hasAILabel } = this;
+    const { _hasAILabel: hasAILabel, defaultChecked } = this;
     hasAILabel
       ? this.setAttribute('ai-label', '')
       : this.removeAttribute('ai-label');
+
+    if (defaultChecked) {
+      this.checked = defaultChecked;
+    }
   }
 
   render() {
@@ -259,8 +263,10 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         part="input"
         class="${`${prefix}--checkbox`}"
         aria-readonly="${String(Boolean(readonly))}"
-        .checked="${checked ? checked : defaultChecked}"
+        ?checked="${checked}"
+        ?data-invalid="${invalid}"
         ?disabled="${disabled}"
+        ?defaultChecked="${defaultChecked}"
         .indeterminate="${indeterminate}"
         name="${ifDefined(name)}"
         value="${ifDefined(value)}"
@@ -276,6 +282,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         >
       </label>
       <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
+      <slot name="decorator" @slotchange="${this._handleSlotChange}"></slot>
       <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
       <div class="${prefix}--checkbox__validation-msg">
         ${!readonly && invalid

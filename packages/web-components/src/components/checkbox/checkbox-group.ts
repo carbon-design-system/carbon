@@ -200,6 +200,7 @@ class CDSCheckboxGroup extends LitElement {
         <legend class="${prefix}--label" id=${legendId || ariaLabelledBy}>
           ${legendText}
           <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>
+          <slot name="decorator" @slotchange="${handleSlotChange}"></slot>
           <slot name="slug" @slotchange="${handleSlotChange}"></slot>
         </legend>
         <slot></slot>
