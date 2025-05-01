@@ -263,7 +263,7 @@ const TableHeader = React.forwardRef(function TableHeader(
           {slug ? (
             normalizedDecorator
           ) : decorator ? (
-            <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
+            <div className={`${prefix}--table-header-label--decorator-inner`}>
               {normalizedDecorator}
             </div>
           ) : (
