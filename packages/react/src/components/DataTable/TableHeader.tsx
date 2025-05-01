@@ -260,9 +260,15 @@ const TableHeader = React.forwardRef(function TableHeader(
             size={20}
             className={`${prefix}--table-sort__icon-unsorted`}
           />
-          <div className={`${prefix}--table-header-label--decorator-inner`}>
-            {normalizedDecorator}
-          </div>
+          {slug ? (
+            normalizedDecorator
+          ) : decorator ? (
+            <div className={`${prefix}--list-box__inner-wrapper--decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : (
+            ''
+          )}
         </span>
       </button>
     </th>
