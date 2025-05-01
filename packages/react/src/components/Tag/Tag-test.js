@@ -308,7 +308,7 @@ describe('Tag', () => {
     render(<SelectableTag type="red" text="Test Tag" ref={ref} />);
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
   });
-  it('Controlled selected tag', () => {
+  it('Controlled selectable tag', () => {
     const ref = React.createRef();
     const { rerender, container } = render(
       <SelectableTag type="red" text="Test Tag" ref={ref} selected={true} />
@@ -325,5 +325,17 @@ describe('Tag', () => {
     expect(container.firstChild).not.toHaveClass(
       `${prefix}--tag--selectable-selected`
     );
+  });
+  it('Controlled selectable tag, should call onChange', async () => {
+    const onChange = jest.fn();
+
+    const { container } = render(
+      <SelectableTag text="Tag content" onChange={onChange} selected={true} />
+    );
+
+    const selectableTag = container.firstChild;
+
+    await userEvent.click(selectableTag);
+    expect(onChange).toHaveBeenCalledWith(false);
   });
 });

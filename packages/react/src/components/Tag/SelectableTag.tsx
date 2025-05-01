@@ -24,6 +24,7 @@ import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
 import mergeRefs from '../../tools/mergeRefs';
+import { useControllableState } from '../../internal/useControllableState';
 export interface SelectableTagBaseProps {
   /**
    * Provide a custom className that is applied to the containing <span>
@@ -86,7 +87,7 @@ const SelectableTag = forwardRef(
       renderIcon,
       onChange,
       onClick,
-      selected = false,
+      selected,
       size,
       text,
       ...other
@@ -96,17 +97,15 @@ const SelectableTag = forwardRef(
     const prefix = usePrefix();
     const tagRef = useRef<HTMLButtonElement>(null);
     const tagId = id || `tag-${useId()}`;
-    const [selectedTag, setSelectedTag] = useState(selected);
+    const [selectedTag, setSelectedTag] = useControllableState({
+      value: selected,
+      onChange: onChange,
+      defaultValue: false,
+    });
     const tagClasses = classNames(`${prefix}--tag--selectable`, className, {
       [`${prefix}--tag--selectable-selected`]: selectedTag,
     });
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
-
-    useEffect(() => {
-      if (selected !== selectedTag) {
-        setSelectedTag(selected);
-      }
-    }, [selected]);
 
     useLayoutEffect(() => {
       const newElement = tagRef.current?.getElementsByClassName(
@@ -123,7 +122,6 @@ const SelectableTag = forwardRef(
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
       setSelectedTag(!selectedTag);
-      onChange?.(!selectedTag);
       onClick?.(e);
     };
 
