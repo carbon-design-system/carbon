@@ -78,7 +78,6 @@ const config = {
         viewport: true,
       },
     },
-    '@storybook/addon-storysource',
     '@storybook/addon-webpack5-compiler-babel',
     /**
      * For now, the storybook-addon-accessibility-checker fork replaces the @storybook/addon-a11y.

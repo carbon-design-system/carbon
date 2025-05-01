@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import ButtonBase from '../Button/ButtonBase';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import BadgeIndicator from '../BadgeIndicator';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 export const IconButtonKinds = [
   'primary',
@@ -52,20 +53,6 @@ export type NewIconButtonAlignment =
 export type IconButtonAlignment =
   | DeprecatedIconButtonAlignment
   | NewIconButtonAlignment;
-
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    'top-left': 'top-start',
-    'top-right': 'top-end',
-    'bottom-left': 'bottom-start',
-    'bottom-right': 'bottom-end',
-    'left-bottom': 'left-end',
-    'left-top': 'left-start',
-    'right-bottom': 'right-end',
-    'right-top': 'right-start',
-  };
-  return mapping[deprecatedValue];
-};
 
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -277,7 +264,6 @@ IconButton.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -292,8 +278,7 @@ IconButton.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
-    propMappingFunction
+    mapPopoverAlign
   ),
 
   /**

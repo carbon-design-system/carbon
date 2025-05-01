@@ -1,166 +1,87 @@
-import { ArgTypes, Markdown } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as TileStories from './tile.stories';
+
+<Meta of={TileStories} />
 
 # Tile
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/tile)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/tile)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tile/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tile/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/tile)
+## Table of Contents
 
-Tiles are a highly flexible component for displaying a wide variety of content,
-including informational, getting started, how-to, next steps, and more.
+- [Overview](#overview)
+- [Clickable](#clickable)
+- [Expandable](#expandable)
+- [Expandable with Interactive](#expandable-with-interactive)
+- [Selectable](#selectable)
+- [Radio](#radio)
+- [AI Label](#ai-label)
+- [Experimental Improved Contrast](#experimental-improved-contrast)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-Carbon ships a basic tile structure that responds to the grid. Tiles have no
-pre-set styles for the content within them. You can customize tiles to fit your
-specific use case.
+## Overview
 
-When using a call-to-action (CTA) within a tile, use a secondary button. Primary
-buttons should be reserved for the most important action a user can take on the
-page.
+<Canvas of={TileStories.Default} />
 
-## Getting started
+## Clickable
 
-Here's a quick example to get you started.
+<Canvas of={TileStories.clickable} />
 
-### JS (via import)
+#### With Custom Icon
 
-```javascript
-import '@carbon/web-components/es/components/tile/index.js';
-```
+<Canvas of={TileStories.clickableWithCustomIcon} />
 
-<Markdown>{`${cdnJs({ components: ['tile'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+## Expandable
 
-### HTML
+<Canvas of={TileStories.expandable} />
 
-```html
-<cds-tile>Default tile</cds-tile>
-```
+## Expandable with Interactive
 
-## Read-only tile (default)
+<Canvas of={TileStories.ExpandableWithInteractive} />
 
-Read-only tiles are used to display information to the user, such as features or
-services offered. Read-only tiles are often seen on marketing pages to promote
-content. These tiles can have internal calls-to-action (CTAs), such as a button
-or a link.
+## Selectable
 
-## Clickable tile
-
-Clickable tiles can be used as navigational items, where the entire tile is a
-clickable state, which redirects the user to a new page. Clickable tiles cannot
-contain separate internal CTAs.
-
-```html
-<cds-clickable-tile> Clickable tile </cds-clickable-tile>
-```
-
-## `<cds-clickable-tile>` attributes and properties
-
-<ArgTypes of="cds-clickable-tile" />
-
-## Radio tile
-
-Radio tiles work like a radio button, where the entire tile is a click target.
-Radio tiles may contain internal CTAs (like links to docs) if the internal CTA
-is given its own click target. Radio tiles work well for presenting options to a
-user in a structured manner, such as a set of pricing plans.
-
-```html
-<cds-tile-group>
-  <cds-radio-tile name="selectable-tile"> Single-select Tile </cds-radio-tile>
-  <cds-radio-tile name="selectable-tile"> Single-select Tile </cds-radio-tile>
-  <cds-radio-tile name="selectable-tile"> Single-select Tile </cds-radio-tile>
-</cds-tile-group>
-```
-
-## `<cds-radio-tile>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-radio-tile selected>`) and `false` means not setting the attribute (e.g.
-`<cds-radio-tile>` without `selected` attribute).
-
-<ArgTypes of="cds-radio-tile" />
-
-## Selectable tile
-
-```html
-<cds-selectable-tile name="selectable-tile">
-  Selectable Tile
-</cds-selectable-tile>
-```
-
-## `<cds-selectable-tile>` attributes and properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-selectable-tile selected>`) and `false` means not setting the attribute
-(e.g. `<cds-selectable-tile>` without `selected` attribute).
-
-<ArgTypes of="cds-selectable-tile" />
+<Canvas of={TileStories.Selectable} />
 
 ## Multi Select
 
-```html
-<cds-tile-group>
-  <cds-selectable-tile name="selectable-tile">
-    Selectable Tile 1
-  </cds-selectable-tile>
-  <cds-selectable-tile name="selectable-tile2">
-    Selectable Tile 2
-  </cds-selectable-tile>
-  <cds-selectable-tile name="selectable-tile3">
-    Selectable Tile 3
-  </cds-selectable-tile>
-  <cds-tile-group></cds-tile-group
-></cds-tile-group>
-```
+<Canvas of={TileStories.MultiSelect} />
 
-## Capturing tile selection
+## Radio
 
-If using the `cds-tile-group` component alongside either Radio or Selectable
-tiles, you can capture the events using an event listener for the following
-event names:
+<Canvas of={TileStories.Radio} />
 
-- For radio tiles, capture:
-  - `cds-current-radio-tile-selection`
-- For selectable tiles, capture:
-  - `cds-current-selectable-tile-selections`
+## Component API
 
-```javascript
-document.addEventListener('cds-current-radio-tile-selection', (event) => {
-  // use values from the detail object within the event
-});
-```
+## `cds-tile`
+<ArgTypes of="cds-tile" />
 
-## Expandable tile
+## `cds-clickable-tile`
+<ArgTypes of="cds-clickable-tile" />
 
-Expandable tiles are helpful for hiding/showing larger amounts of content to a
-user. They can only be stacked in a single column, and cannot live in a row or
-horizontal grid. When expanded, tiles push content down the page. Expandable
-tiles may contain internal CTAs (like links to docs) if the internal CTA is
-given its own click target.
-
-```html
-<cds-expandable-tile>
-  <cds-tile-above-the-fold-content
-    slot="above-the-fold-content"
-    style="height: 200px">
-    Above the fold content here
-  </cds-tile-above-the-fold-content>
-  <cds-tile-below-the-fold-content style="height: 300px">
-    Below the fold content here
-  </cds-tile-below-the-fold-content>
-</cds-expandable-tile>
-```
-
-If the desired behavior is expanding only upon clicking the button with the
-caret icon, use the `with-interactive` attribute instead.
-
-## `<cds-expandable-tile>` attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-expandable-tile expanded>`) and `false` means not setting the attribute
-(e.g. `<cds-expandable-tile>` without `expanded` attribute).
-
+## `cds-expandable-tile`
 <ArgTypes of="cds-expandable-tile" />
+
+## `cds-radio-tile`
+<ArgTypes of="cds-radio-tile" />
+
+## `cds-selectable-tile`
+<ArgTypes of="cds-selectable-tile" />
+
+## `cds-tile-group`
+<ArgTypes of="cds-tile-group" />
+
+<Markdown>{`${cdnJs({ components: ['tile'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/tile/tile.mdx).
