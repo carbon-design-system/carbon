@@ -49,10 +49,8 @@ async function changelog({ range }) {
 
   if (copy) {
     clipboard.writeSync(changelog);
-    // eslint-disable-next-line no-console
     console.log('Done!');
   } else {
-    // eslint-disable-next-line no-console
     console.log(changelog);
   }
 }

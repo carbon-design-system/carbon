@@ -66,3 +66,19 @@ body {
   block-size: 100vh;
   inline-size: 100%;
 }
+
+// Following styles are needed to ensure that the Canvas containers render correctly
+.docs-story div div {
+  transform: none;
+}
+
+// Disable stylelint max-nesting-depth
+/* stylelint-disable */
+.sbdocs {
+  &.sbdocs-preview,
+  .docs-story,
+  .docs-story div {
+    overflow: visible;
+  }
+}
+/* stylelint-enable */
