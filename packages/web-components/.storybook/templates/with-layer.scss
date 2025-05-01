@@ -16,9 +16,6 @@
 .#{$prefix}--with-layer__layer {
   position: relative;
   border: 1px dashed colors.$purple-50;
-}
-
-.#{$prefix}--with-layer__layer .#{$prefix}--with-layer__layer {
   background-color: theme.$layer;
   margin-block-start: spacing.$spacing-07;
 }
