@@ -170,46 +170,6 @@ describe('TableHeader', () => {
 
       expect(screen.getByText('id translation')).toBeInTheDocument();
     });
-
-    it('should respect deprecated slug prop', () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-      render(
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableHeader data-testid="test-id" slug={<AILabel />}>
-                Header
-              </TableHeader>
-            </TableRow>
-          </TableHead>
-        </Table>
-      );
-
-      expect(screen.getByTestId('test-id').firstChild).toHaveClass(
-        `${prefix}--table-header-label--slug`
-      );
-      spy.mockRestore();
-    });
-
-    it('should respect decorator prop', () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-      render(
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableHeader data-testid="test-id" decorator={<AILabel />}>
-                Header
-              </TableHeader>
-            </TableRow>
-          </TableHead>
-        </Table>
-      );
-
-      expect(screen.getByTestId('test-id').firstChild).toHaveClass(
-        `${prefix}--table-header-label--decorator`
-      );
-      spy.mockRestore();
-    });
   });
 
   describe('behaves as expected', () => {
