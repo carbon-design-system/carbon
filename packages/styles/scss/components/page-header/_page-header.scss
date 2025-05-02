@@ -113,7 +113,7 @@
   .#{$prefix}--page-header__content__subtitle {
     @include type-style('productive-heading-03');
 
-    margin-block-start: $spacing-05;
+    margin-block-end: $spacing-03;
   }
 
   .#{$prefix}--page-header__content__body {

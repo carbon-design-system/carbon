@@ -108,10 +108,6 @@ interface PageHeaderContentProps {
    */
   title: string;
   /**
-   * The PageHeaderContent's subtitle
-   */
-  subtitle?: string;
-  /**
    * The PageHeaderContent's contextual actions
    */
   contextualActions?: React.ReactNode;
@@ -128,7 +124,6 @@ const PageHeaderContent = React.forwardRef<
     className,
     children,
     title,
-    subtitle,
     renderIcon: IconElement,
     contextualActions,
     pageActions,
@@ -193,11 +188,6 @@ const PageHeaderContent = React.forwardRef<
         </div>
         {pageActions}
       </div>
-      {subtitle && (
-        <Text as="h3" className={`${prefix}--page-header__content__subtitle`}>
-          {subtitle}
-        </Text>
-      )}
       {children}
     </div>
   );
@@ -216,7 +206,6 @@ PageHeaderContent.propTypes = {
   /**
    * Provide an optional icon to render in front of the PageHeaderContent's title.
    */
-
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    * The PageHeaderContent's title
@@ -381,10 +370,15 @@ interface PageHeaderContentTextProps {
    * Specify an optional className to be added to your PageHeaderContentText
    */
   className?: string;
+  /**
+   * The PageHeaderContent's subtitle
+   */
+  subtitle?: string;
 }
 const PageHeaderContentText = ({
   className,
   children,
+  subtitle,
   ...other
 }: PageHeaderContentTextProps) => {
   const prefix = usePrefix();
@@ -397,6 +391,11 @@ const PageHeaderContentText = ({
 
   return (
     <div className={classNames} {...other}>
+      {subtitle && (
+        <Text as="h3" className={`${prefix}--page-header__content__subtitle`}>
+          {subtitle}
+        </Text>
+      )}
       {children}
     </div>
   );
@@ -412,6 +411,10 @@ PageHeaderContentText.propTypes = {
    * Specify an optional className to be added to your PageHeaderContentText
    */
   className: PropTypes.string,
+  /**
+   * The PageHeaderContent's subtitle
+   */
+  subtitle: PropTypes.string,
 };
 
 /**

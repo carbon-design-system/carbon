@@ -117,12 +117,6 @@ describe('PageHeader', () => {
       expect(icon).toBeInTheDocument();
     });
 
-    it('should render a subtitle', () => {
-      render(<PageHeader.Content title="title" subtitle="subtitle" />);
-
-      expect(screen.getByText('subtitle')).toBeInTheDocument();
-    });
-
     it('should render children', () => {
       render(
         <PageHeader.Content title="title">Children content</PageHeader.Content>
@@ -293,6 +287,12 @@ describe('PageHeader', () => {
         <PageHeader.ContentText className="custom-class" />
       );
       expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should render a subtitle', () => {
+      render(<PageHeader.ContentText subtitle="subtitle" />);
+
+      expect(screen.getByText('subtitle')).toBeInTheDocument();
     });
   });
 

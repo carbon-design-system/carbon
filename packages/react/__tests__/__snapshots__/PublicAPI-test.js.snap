@@ -11078,6 +11078,9 @@ Map {
         "className": Object {
           "type": "string",
         },
+        "subtitle": Object {
+          "type": "string",
+        },
       },
     },
     "HeroImage": Object {
@@ -11171,6 +11174,9 @@ Map {
           "type": "node",
         },
         "className": Object {
+          "type": "string",
+        },
+        "subtitle": Object {
           "type": "string",
         },
       },

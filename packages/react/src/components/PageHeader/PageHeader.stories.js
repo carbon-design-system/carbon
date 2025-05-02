@@ -131,9 +131,8 @@ export const Content = (args) => (
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content
       title="Page header content title with an extra long title that turns into a definition tooltip that creates a title with an ellipsis."
-      subtitle="Subtitle"
       {...args}>
-      <PageHeader.ContentText>
+      <PageHeader.ContentText subtitle="Subtitle">
         Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
         Massa elementum class enim malesuada lacinia hendrerit enim erat
         pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
@@ -148,10 +147,9 @@ export const ContentWithIcon = (args) => (
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-      subtitle="Subtitle"
       renderIcon={BeeIcon}
       {...args}>
-      <PageHeader.ContentText>
+      <PageHeader.ContentText subtitle="Subtitle">
         Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
         Massa elementum class enim malesuada lacinia hendrerit enim erat
         pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
@@ -166,7 +164,6 @@ export const ContentWithContextualActions = (args) => (
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-      subtitle="Subtitle"
       contextualActions={
         <>
           <Dropdown
@@ -179,13 +176,10 @@ export const ContentWithContextualActions = (args) => (
             label="This is an example label"
             titleText="This is an example title"
           />
-          <Tag className="tag" type="blue" size="lg">
-            Moop
-          </Tag>
         </>
       }
       {...args}>
-      <PageHeader.ContentText>
+      <PageHeader.ContentText subtitle="Subtitle">
         Neque massa fames auctor maecenas leo. Mollis vehicula per, est justo.
         Massa elementum class enim malesuada lacinia hendrerit enim erat
         pellentesque. Sapien arcu lobortis est erat arcu nibh vehicula congue.
@@ -204,9 +198,8 @@ export const ContentWithHeroImage = (args) => (
             <PageHeader.BreadcrumbBar />
             <PageHeader.Content
               title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-              subtitle="Subtitle"
               {...args}>
-              <PageHeader.ContentText>
+              <PageHeader.ContentText subtitle="Subtitle">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -348,7 +341,6 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
     <PageHeader.BreadcrumbBar />
     <PageHeader.Content
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-      subtitle="Subtitle"
       contextualActions={
         <>
           <Dropdown
@@ -361,9 +353,6 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
             label="This is an example label"
             titleText="This is an example title"
           />
-          <Tag className="tag" type="blue" size="lg">
-            Moop
-          </Tag>
         </>
       }
       pageActions={
@@ -372,7 +361,7 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
           pageActions={pageActionButtonItems}></PageHeader.ContentPageActions>
       }
       {...args}>
-      <PageHeader.ContentText>
+      <PageHeader.ContentText subtitle="Subtitle">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
