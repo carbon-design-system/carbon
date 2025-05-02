@@ -73,3 +73,8 @@ $css--plex: true !default;
     inset-inline-start: 50%;
   }
 }
+.#{$prefix}--slider--readonly {
+  .#{$prefix}--slider__filled-track {
+    background: $border-inverse;
+  }
+}

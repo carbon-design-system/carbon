@@ -196,7 +196,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   private _handleKeydown(event: KeyboardEvent) {
     const eventContainer = (event.target as HTMLElement).id;
     const { key, shiftKey } = event;
-    if (!this.disabled) {
+    if (!this.disabled && !this.readonly) {
       if (key in THUMB_DIRECTION) {
         const {
           max: rawMax,
@@ -320,7 +320,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
         ).id;
       }
     }
-    if (!this.disabled) {
+    if (!this.disabled && !this.readonly) {
       const { _trackNode: trackNode } = this;
       const isRtl =
         trackNode
@@ -944,7 +944,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             aria-valuenow="${value}"
             style="left: ${rate * 100}%"
             @pointerdown="${onDrag}">
-            ${unstable_valueUpper || unstable_valueUpper === ''
+            ${(unstable_valueUpper || unstable_valueUpper === '') && !readonly
               ? html`
                   <div class="${prefix}--slider__thumb--lower">
                     <svg
@@ -970,7 +970,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                 `
               : ``}
           </div>
-          ${unstable_valueUpper || unstable_valueUpper === ''
+          ${(unstable_valueUpper || unstable_valueUpper === '') && !readonly
             ? html`
                 <div
                   id="thumb-upper"
