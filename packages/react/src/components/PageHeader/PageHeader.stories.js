@@ -166,16 +166,9 @@ export const ContentWithContextualActions = (args) => (
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
       contextualActions={
         <>
-          <Dropdown
-            style={{ paddingRight: '1rem' }}
-            className="dropdown"
-            hideLabel
-            id="default"
-            items={dropdownItems}
-            itemToString={(item) => (item ? item.text : '')}
-            label="This is an example label"
-            titleText="This is an example title"
-          />
+          <Tag className="tag" type="blue" size="lg">
+            Moop
+          </Tag>
         </>
       }
       {...args}>
@@ -343,16 +336,9 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
       contextualActions={
         <>
-          <Dropdown
-            style={{ paddingRight: '1rem' }}
-            className="dropdown"
-            hideLabel
-            id="default"
-            items={dropdownItems}
-            itemToString={(item) => (item ? item.text : '')}
-            label="This is an example label"
-            titleText="This is an example title"
-          />
+          <Tag className="tag" type="blue" size="lg">
+            Moop
+          </Tag>
         </>
       }
       pageActions={
