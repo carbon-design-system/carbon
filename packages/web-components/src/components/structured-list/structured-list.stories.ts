@@ -207,41 +207,40 @@ export const Playground = {
   },
 };
 
-export const skeleton = {
+export const Skeleton = {
+  decorators: [(story) => html`<div style="width: 800px">${story()}</div>`],
   parameters: {
     percy: {
       skip: true,
     },
   },
   render: () => html`
-    <div style="width:800px">
-      ${Array.apply(null, Array(2)).map(
-        () => html`
-          <cds-structured-list>
-            <cds-structured-list-head>
-              <cds-structured-list-header-row>
-                ${Array.apply(null, Array(3)).map(
-                  () => html`
-                    <cds-structured-list-header-cell-skeleton>
-                    </cds-structured-list-header-cell-skeleton>
-                  `
-                )}
-              </cds-structured-list-header-row>
-            </cds-structured-list-head>
-            <cds-structured-list-body>
-              ${Array.apply(null, Array(5)).map(
-                () =>
-                  html`<cds-structured-list-row>
-                    <cds-structured-list-cell></cds-structured-list-cell>
-                    <cds-structured-list-cell></cds-structured-list-cell>
-                    <cds-structured-list-cell></cds-structured-list-cell>
-                  </cds-structured-list-row>`
+    ${Array.apply(null, Array(2)).map(
+      () => html`
+        <cds-structured-list>
+          <cds-structured-list-head>
+            <cds-structured-list-header-row>
+              ${Array.apply(null, Array(3)).map(
+                () => html`
+                  <cds-structured-list-header-cell-skeleton>
+                  </cds-structured-list-header-cell-skeleton>
+                `
               )}
-            </cds-structured-list-body>
-          </cds-structured-list>
-        `
-      )}
-    </div>
+            </cds-structured-list-header-row>
+          </cds-structured-list-head>
+          <cds-structured-list-body>
+            ${Array.apply(null, Array(5)).map(
+              () =>
+                html`<cds-structured-list-row>
+                  <cds-structured-list-cell></cds-structured-list-cell>
+                  <cds-structured-list-cell></cds-structured-list-cell>
+                  <cds-structured-list-cell></cds-structured-list-cell>
+                </cds-structured-list-row>`
+            )}
+          </cds-structured-list-body>
+        </cds-structured-list>
+      `
+    )}
   `,
 };
 

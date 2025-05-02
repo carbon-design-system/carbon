@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,12 @@ import cx from 'classnames';
 import React, { type KeyboardEvent, type MouseEvent, useContext } from 'react';
 import PropTypes from 'prop-types';
 import deprecate from '../../prop-types/deprecate';
-import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
+import {
+  ListBoxSizePropType,
+  ListBoxTypePropType,
+  type ListBoxSize,
+  type ListBoxType,
+} from '.';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ForwardRefReturn, ReactAttr } from '../../types/common';
@@ -207,13 +212,13 @@ ListBox.propTypes = {
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
-  size: ListBoxSize,
+  size: ListBoxSizePropType,
 
   /**
    * Specify the "type" of the ListBox. Currently supports either `default` or
    * `inline` as an option.
    */
-  type: ListBoxType,
+  type: ListBoxTypePropType,
 
   /**
    * Specify whether the control is currently in warning state
