@@ -7,11 +7,8 @@
 
 import React from 'react';
 import { Table, TableHead, TableRow, TableHeader } from '../';
-import { AILabel } from '../../AILabel';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-
-const prefix = 'cds';
 
 describe('TableHeader', () => {
   describe('renders as expected - Component API', () => {
