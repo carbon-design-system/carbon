@@ -45,6 +45,7 @@ import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 import { useOutsideClick } from '../../internal/useOutsideClick';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
 import { PopoverAlignment } from '../Popover';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -120,22 +121,6 @@ export const getMenuOffset: MenuOffset = (
     default:
       return { left: 0, top: 0 };
   }
-};
-
-// TODO: Replace this code when align mapping is consolidated.
-// https://github.com/carbon-design-system/carbon/pull/19081
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    'top-left': 'top-start',
-    'top-right': 'top-end',
-    'bottom-left': 'bottom-start',
-    'bottom-right': 'bottom-end',
-    'left-bottom': 'left-end',
-    'left-top': 'left-start',
-    'right-bottom': 'right-end',
-    'right-top': 'right-start',
-  };
-  return mapping[deprecatedValue];
 };
 
 export interface OverflowMenuProps {
@@ -642,7 +627,6 @@ OverflowMenu.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -657,8 +641,7 @@ OverflowMenu.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
-    propMappingFunction
+    mapPopoverAlign
   ),
 
   /**

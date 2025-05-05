@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@ import { LayoutConstraint } from '../Layout';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 
 export type DeprecatedCopyButtonAlignment =
   | 'top-left'
@@ -43,20 +44,6 @@ export type NewCopyButtonAlignment =
 export type CopyButtonAlignment =
   | DeprecatedCopyButtonAlignment
   | NewCopyButtonAlignment;
-
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    'top-left': 'top-start',
-    'top-right': 'top-end',
-    'bottom-left': 'bottom-start',
-    'bottom-right': 'bottom-end',
-    'left-bottom': 'left-end',
-    'left-top': 'left-start',
-    'right-bottom': 'right-end',
-    'right-top': 'right-start',
-  };
-  return mapping[deprecatedValue];
-};
 
 export interface CopyButtonProps extends ButtonProps<'button'> {
   /**
@@ -157,7 +144,6 @@ CopyButton.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -172,8 +158,7 @@ CopyButton.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
-    propMappingFunction
+    mapPopoverAlign
   ),
 
   /**
