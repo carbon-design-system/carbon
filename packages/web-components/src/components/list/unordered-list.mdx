@@ -1,68 +1,47 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as UnorderedListStories from './unordered-list.stories';
 
 <Meta of={UnorderedListStories} />
 
-# List
+# Unordered list
 
-Represents a list.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/list)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/list/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/list/accessibility)
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/list)
-> example implementation.
+## Table of Contents
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/list)
+- [Overview](#overview)
+- [Nested](#Nested)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+<Canvas of={UnorderedListStories.Default} />
 
-### JS (via import)
+## Nested
 
-```javascript
-import '@carbon/web-components/es/components/list/index.js';
-```
+<Canvas of={UnorderedListStories.Nested} />
 
-<Markdown>{`${cdnJs({ components: ['list'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+## Component API
 
-### HTML
-
-```html
-<h3>cds-unordered-list</h3>
-
-<cds-unordered-list>
-  <cds-list-item>
-    Unordered List level 1
-    <cds-unordered-list>
-      <cds-list-item>Unordered List level 2</cds-list-item>
-      <cds-list-item>
-        Unordered List level 2
-        <cds-unordered-list>
-          <cds-list-item>Unordered List level 2</cds-list-item>
-          <cds-list-item>Unordered List level 2</cds-list-item>
-        </cds-unordered-list>
-      </cds-list-item>
-    </cds-unordered-list>
-  </cds-list-item>
-  <cds-list-item>Unordered List level 1</cds-list-item>
-  <cds-list-item>Unordered List level 1</cds-list-item>
-</cds-unordered-list>
-```
-
-## `<cds-unordered-list>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-ordered-list is-expressive>`) and `false` means not setting the attribute
-(e.g. `<cds-ordered-list>` without `is-expressive` attribute).
+## `cds-unordered-list`
 
 <ArgTypes of="cds-unordered-list" />
 
-## `<cds-list-item>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-list nested>`) and `false` means not setting the attribute (e.g.
-`<cds-list>` without `nested` attribute).
+## `cds-list-item`
 
 <ArgTypes of="cds-list-item" />
+
+<Markdown>{`${cdnJs({ components: ['list'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/list/unordered-list.mdx).
