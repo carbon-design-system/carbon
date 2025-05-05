@@ -40,7 +40,7 @@ export type SideNavButtonProps = ComponentProps<typeof Button> & {
 };
 
 const SideNavButton = React.forwardRef<HTMLButtonElement, SideNavButtonProps>(
-  function SideNavButton(props, ref: ForwardedRef<HTMLButtonElement>) {
+  (props, ref) => {
     const isRail = useContext(SideNavContext);
     const {
       children,
