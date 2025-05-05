@@ -58,7 +58,7 @@ const SideNavButton = React.forwardRef<HTMLButtonElement, SideNavButtonProps>(
         <Button className={className} {...rest} onClick={onClick} ref={ref}>
           {children}
           tabIndex=
-          {tabIndex === undefined
+          {typeof tabIndex === 'undefined'
             ? !isSideNavExpanded && !isRail
               ? -1
               : 0
