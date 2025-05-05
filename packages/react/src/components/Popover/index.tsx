@@ -20,7 +20,7 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { type PolymorphicProps } from '../../types/common';
 import { useWindowEvent } from '../../internal/useEvent';
-import { mapPopoverAlignProp } from '../../tools/createPropAdapter';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import {
   useFloating,
   flip,
@@ -82,19 +82,6 @@ export type NewPopoverAlignment =
 
 export type PopoverAlignment = DeprecatedPopoverAlignment | NewPopoverAlignment;
 
-const propMappingFunction = (deprecatedValue) => {
-  const mapping = {
-    'top-left': 'top-start',
-    'top-right': 'top-end',
-    'bottom-left': 'bottom-start',
-    'bottom-right': 'bottom-end',
-    'left-bottom': 'left-end',
-    'left-top': 'left-start',
-    'right-bottom': 'right-end',
-    'right-top': 'right-start',
-  };
-  return mapping[deprecatedValue];
-};
 export interface PopoverBaseProps {
   /**
    * Specify how the popover should align with the trigger element.
@@ -193,7 +180,7 @@ export const Popover: PopoverComponent & {
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
-  let align = mapPopoverAlignProp(initialAlign);
+  let align = mapPopoverAlign(initialAlign);
 
   // If the `Popover` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
   useWindowEvent('blur', () => {
@@ -529,7 +516,6 @@ Popover.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -544,8 +530,7 @@ Popover.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
-    propMappingFunction
+    mapPopoverAlign
   ),
 
   /**
