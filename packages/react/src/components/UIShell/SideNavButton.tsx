@@ -6,11 +6,17 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { ElementType, ForwardedRef, Ref, ComponentProps } from 'react';
-import { usePrefix } from '../../internal/usePrefix';
+import React, {
+  ElementType,
+  ForwardedRef,
+  useContext,
+  Ref,
+  ComponentProps,
+} from 'react';
 import Button from '../Button';
 import SideNavItem from './SideNavItem';
 import cx from 'classnames';
+import { SideNavContext } from './SideNav';
 
 export type SideNavButtonProps = ComponentProps<typeof Button> & {
   /**
@@ -22,23 +28,43 @@ export type SideNavButtonProps = ComponentProps<typeof Button> & {
    * Provide an optional class to be applied to the containing node
    */
   className?: string;
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded?: boolean;
+
+  /**
+   * Optional prop to specify the tabIndex of the button. If undefined, it will be applied default validation
+   */
+  tabIndex?: number;
 };
 
-const SideNavButton = React.forwardRef<HTMLElement, SideNavButtonProps>(
-  function SideNavButton(props, ref: ForwardedRef<HTMLElement>) {
-    const prefix = usePrefix();
-    const { children, className: customClassName, onClick, ...rest } = props;
+const SideNavButton = React.forwardRef<HTMLButtonElement, SideNavButtonProps>(
+  function SideNavButton(props, ref: ForwardedRef<HTMLButtonElement>) {
+    const isRail = useContext(SideNavContext);
+    const {
+      children,
+      className: customClassName,
+      isSideNavExpanded,
+      onClick,
+      tabIndex,
+      ...rest
+    } = props;
     const className = cx({
       [customClassName as string]: !!customClassName,
     });
     return (
       <SideNavItem>
-        <Button
-          className={className}
-          {...rest}
-          onClick={onClick}
-          ref={ref as Ref<ElementType>}>
+        <Button className={className} {...rest} onClick={onClick} ref={ref}>
           {children}
+          tabIndex=
+          {tabIndex === undefined
+            ? !isSideNavExpanded && !isRail
+              ? -1
+              : 0
+            : tabIndex}
         </Button>
       </SideNavItem>
     );
@@ -62,6 +88,17 @@ SideNavButton.propTypes = {
    * is clicked
    */
   onClick: PropTypes.func,
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded: PropTypes.bool,
+
+  /**
+   * Optional prop to specify the tabIndex of the button. If undefined, it will be applied default validation
+   */
+  tabIndex: PropTypes.number,
 };
 
 export default SideNavButton;
