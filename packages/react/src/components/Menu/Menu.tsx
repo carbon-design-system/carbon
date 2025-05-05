@@ -117,7 +117,12 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     open,
     size = 'sm',
     legacyAutoalign = 'true',
+    // TODO: `ssr-friendly` doesn't support ESLint v9.
+    // https://github.com/kopiro/eslint-plugin-ssr-friendly/issues/30
+    // https://github.com/carbon-design-system/carbon/issues/18991
+    /*
     // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+    */
     target = canUseDOM && document.body,
     x = 0,
     y = 0,
@@ -200,14 +205,8 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
   }
 
-  function handleClose(e: Pick<React.KeyboardEvent<HTMLUListElement>, 'type'>) {
-    if (/^key/.test(e.type)) {
-      window.addEventListener('keyup', returnFocus, { once: true });
-    } else if (e.type === 'click' && menu.current) {
-      menu.current.addEventListener('focusout', returnFocus, { once: true });
-    } else {
-      returnFocus();
-    }
+  function handleClose() {
+    returnFocus();
 
     if (onClose) {
       onClose();
@@ -223,7 +222,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       (match(e, keys.Escape) || (!isRoot && match(e, keys.ArrowLeft))) &&
       onClose
     ) {
-      handleClose(e);
+      handleClose();
     } else {
       focusItem(e);
     }
@@ -264,7 +263,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
   function handleBlur(e: React.FocusEvent<HTMLUListElement>) {
     if (open && onClose && isRoot && !menu.current?.contains(e.relatedTarget)) {
-      handleClose(e);
+      handleClose();
     }
   }
 

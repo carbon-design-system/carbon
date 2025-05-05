@@ -364,6 +364,7 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
         <ul
           {...accessibilityLabel}
           ref={this._subMenus}
+          onClick={this.handleOnClick}
           className={`${prefix}--header__menu`}>
           {React.Children.map(children, this._renderMenuItem)}
         </ul>

@@ -1,69 +1,72 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import * as TextInput from './text-input.stories';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as TextInputStories from './text-input.stories';
 
-<Meta of={TextInput} />
+<Meta of={TextInputStories} />
 
 # Text Input
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/input)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/text-input)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/text-input/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/text-input/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/input)
+## Table of Contents
 
-Text fields enable the user to interact with and input data. A single line field
-is used when the input anticipated by the user is a single line of text as
-opposed to a paragraph.
+- [Overview](#overview)
+- [Read Only](#read-only)
+- [Skeleton](#skeleton)
+- [AI Label](#ai-label)
+- [With Layer](#with-layer)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+The `cds-text-input` component enables users to enter free-form text data. The type of text field
+used should reflect the length of the content you expect the user to enter. The
+default text input is for short, one-line content.
 
-### JS (via import)
+<Canvas of={TextInputStories.Default} />
 
-```javascript
-import '@carbon/web-components/es/components/text-input/index.js';
-```
+### Read Only
 
-<Markdown>{`${cdnJs({ components: ['text-input'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+<Canvas of={TextInputStories.ReadOnly} />
 
-### HTML
+### Skeleton
 
-```html
-<cds-text-input
-  label="Text input label"
-  helper-text="Optional help text"
-  invalid-text="Error message">
-</cds-text-input>
-```
+<Canvas of={TextInputStories.Skeleton} />
 
-## Form item
+### AI Label
 
-If the input is part of a form, make sure to import and wrap the input with
-`<cds-form-item>`
+<Canvas of={TextInputStories.WithAILabel} />
 
-```javascript
-import '@carbon/web-components/es/components/form/index.js';
-```
+### With Layer
 
-<Markdown>{`${cdnJs({ components: ['form'] })}`}</Markdown>
+<Canvas of={TextInputStories.WithLayer} />
 
-```html
-<cds-form-item>
-  <cds-text-input
-    label="Text input label"
-    helper-text="Optional help text"
-    invalid-text="Error message">
-  </cds-text-input>
-</cds-form-item>
-```
+### Password Input
 
-## `<cds-text-input>` attributes and properties
+Use `type="password"` and `show-password-visibility-toggle` attributes for a password input.
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-text-input required>`) and `false` means not setting the attribute (e.g.
-`<cds-text-input>` without `required` attribute).
+<Canvas of={TextInputStories.TogglePasswordVisibility} />
+
+## Component API
+
+## `cds-text-input`
 
 <ArgTypes of="cds-text-input" />
+
+## `cds-text-input-skeleton`
+
+<ArgTypes of="cds-text-input-skeleton" />
+
+<Markdown>{`${cdnJs({ components: ['text-input'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/text-input/text-input.mdx).

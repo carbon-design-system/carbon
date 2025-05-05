@@ -94,7 +94,7 @@ want to run:
 | `yarn doctoc`                     | Runs `doctoc` on all files in the `doctoc` directory                                                          |
 | `yarn format`, `yarn format:diff` | Format files using Prettier, check if files have been formatted                                               |
 | `yarn sync`                       | Sync package files across the project                                                                         |
-| `yarn lint`                       | Run eslint on files in the project                                                                            |
+| `yarn lint`                       | Finds and fixes problems in code                                                                              |
 
 In addition, you can use `yarn` to run `bin` files using the `yarn <bin>`
 syntax. For example, if you wanted to use `lerna` to run a script in every

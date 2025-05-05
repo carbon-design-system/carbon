@@ -1839,6 +1839,33 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "vcherneny",
+      "name": "Vlad Cherneny",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11604315?v=4",
+      "profile": "https://github.com/vcherneny",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "murito",
+      "name": "Francisco Alcalá",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2628140?v=4",
+      "profile": "https://github.com/murito",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Code-Suji",
+      "name": "SUJITH C S",
+      "avatar_url": "https://avatars.githubusercontent.com/u/43125517?v=4",
+      "profile": "https://www.linkedin.com/in/sujithcs",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

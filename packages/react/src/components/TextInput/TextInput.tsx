@@ -322,7 +322,7 @@ const TextInput = React.forwardRef(function TextInput(
   );
 
   const { isFluid } = useContext(FormContext);
-  const announcerRef = useRef(null);
+  const announcerRef = useRef<HTMLSpanElement>(null);
   const [prevAnnouncement, setPrevAnnouncement] = useState('');
   const ariaAnnouncement = useAnnouncer(textCount, maxCount);
   useEffect(() => {

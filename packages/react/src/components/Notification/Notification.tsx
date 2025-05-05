@@ -38,7 +38,7 @@ import { keys, matches, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
-import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
+import { wrapFocus, wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { useFeatureFlag } from '../FeatureFlags';
 import { warning } from '../../internal/warning';
 import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
@@ -416,7 +416,7 @@ export function ToastNotification({
     [`${prefix}--toast-notification--${kind}`]: kind,
   });
 
-  const contentRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   useNoInteractiveChildren(contentRef);
 
   const handleClose = (evt) => {
@@ -424,7 +424,7 @@ export function ToastNotification({
       setIsOpen(false);
     }
   };
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   function handleCloseButtonClick(event: MouseEvent) {
     onCloseButtonClick(event);
@@ -683,7 +683,7 @@ export function InlineNotification({
     [`${prefix}--inline-notification--hide-close-button`]: hideCloseButton,
   });
 
-  const contentRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   useNoInteractiveChildren(contentRef);
 
   const handleClose = (evt) => {
@@ -691,7 +691,7 @@ export function InlineNotification({
       setIsOpen(false);
     }
   };
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   function handleCloseButtonClick(event) {
     onCloseButtonClick(event);
@@ -1310,7 +1310,7 @@ export function Callout({
     [`${prefix}--actionable-notification--hide-close-button`]: true,
   });
 
-  const childrenContainer = useRef(null);
+  const childrenContainer = useRef<HTMLDivElement>(null);
   useInteractiveChildrenNeedDescription(
     childrenContainer,
     `interactive child node(s) should have an \`aria-describedby\` property with a value matching the value of \`titleId\``
