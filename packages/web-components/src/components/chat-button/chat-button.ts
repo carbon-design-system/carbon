@@ -18,6 +18,8 @@ export { CHAT_BUTTON_SIZE, CHAT_BUTTON_KIND };
 /**
  * Icon Button
  *
+ * @element cds-chat-button
+ *
  */
 @customElement(`${prefix}-chat-button`)
 class CDSChatButton extends LitElement {
