@@ -2256,7 +2256,7 @@ __metadata:
     temp: "npm:^0.9.0"
     tslib: "npm:^2.6.3"
     typescript-config-carbon: "npm:^0.5.0"
-    vite: "npm:^6.2.3"
+    vite: "npm:^6.3.4"
     web-component-analyzer: "npm:2.0.0"
   languageName: unknown
   linkType: soft
@@ -10635,7 +10635,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     sass: "npm:^1.77.7"
-    vite: "npm:^6.2.3"
+    vite: "npm:^6.3.4"
   languageName: unknown
   linkType: soft
 
@@ -10938,7 +10938,7 @@ __metadata:
   dependencies:
     "@carbon/styles": "npm:^1.80.0"
     sass: "npm:^1.77.7"
-    vite: "npm:^6.2.3"
+    vite: "npm:^6.3.4"
   languageName: unknown
   linkType: soft
 
@@ -12032,7 +12032,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     sass: "npm:^1.77.7"
-    vite: "npm:^6.2.3"
+    vite: "npm:^6.3.4"
   languageName: unknown
   linkType: soft
 
@@ -16508,7 +16508,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     sass: "npm:^1.77.7"
-    vite: "npm:^6.2.3"
+    vite: "npm:^6.3.4"
   languageName: unknown
   linkType: soft
 
@@ -28589,7 +28589,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     sass: "npm:^1.77.7"
-    vite: "npm:^6.2.3"
+    vite: "npm:^6.3.4"
   languageName: unknown
   linkType: soft
 
@@ -28835,9 +28835,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.2.3":
-  version: 6.3.4
-  resolution: "vite@npm:6.3.4"
+"vite@npm:^6.3.4":
+  version: 6.3.5
+  resolution: "vite@npm:6.3.5"
   dependencies:
     esbuild: "npm:^0.25.0"
     fdir: "npm:^6.4.4"
@@ -28886,7 +28886,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/347579b6571e591c1e4f54262e631f02e952e548171af09042aeffb40adfa5c9b43cf05cf115f0961cc553f6b7173fb9c2ee997a688007c01b6e13779d9a2bd4
+  checksum: 10/7bc3a1c5ef79413ad70daeeaf69b76cd1218d16aa18ed8ee08d74648ef17284f4a17c11f5cf42b573b6dc5e3d5f115110b67b1d23c2c699cfe404757764a634a
   languageName: node
   linkType: hard
 
@@ -28899,7 +28899,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     sass: "npm:^1.77.7"
-    vite: "npm:^6.2.3"
+    vite: "npm:^6.3.4"
   languageName: unknown
   linkType: soft
 
