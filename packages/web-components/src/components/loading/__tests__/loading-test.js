@@ -9,7 +9,7 @@ import '@carbon/web-components/es/components/loading/index.js';
 import { LOADING_TYPE } from '@carbon/web-components/es/components/loading/defs.js';
 
 describe('cds-loading', function () {
-  const loadling = html`<cds-loading></cds-loading>`;
+  const loading = html`<cds-loading></cds-loading>`;
   const loadingWithDescription = html`<cds-loading
     description="Custom loading text"></cds-loading>`;
   const loadingWithLabel = html`<cds-loading
@@ -19,13 +19,13 @@ describe('cds-loading', function () {
   const loadingActive = html`<cds-loading active></cds-loading>`;
 
   it('should render', async () => {
-    const el = await fixture(loadling);
+    const el = await fixture(loading);
     expect(el).dom.to.equalSnapshot();
   });
 
   describe('Component API', () => {
     it('should have default description text', async () => {
-      const el = await fixture(loadling);
+      const el = await fixture(loading);
       expect(el.description).to.equal('Loading');
     });
 
@@ -50,7 +50,7 @@ describe('cds-loading', function () {
     });
 
     it('should support type as alias for small property', async () => {
-      const el = await fixture(loadling);
+      const el = await fixture(loading);
       expect(el.type).to.equal(LOADING_TYPE.REGULAR);
 
       el.type = LOADING_TYPE.SMALL;
@@ -61,7 +61,7 @@ describe('cds-loading', function () {
 
   describe('Active state', () => {
     it('should support setting active state', async () => {
-      const el = await fixture(loadling);
+      const el = await fixture(loading);
       expect(el.active).to.be.false;
 
       el.active = true;
@@ -71,7 +71,7 @@ describe('cds-loading', function () {
     });
 
     it('should support inactive as inverse of active property', async () => {
-      const el = await fixture(loadling);
+      const el = await fixture(loading);
       expect(el.inactive).to.be.true;
       expect(el.active).to.be.false;
 
@@ -81,7 +81,7 @@ describe('cds-loading', function () {
     });
 
     it('should reflect active state to attribute', async () => {
-      const el = await fixture(loadling);
+      const el = await fixture(loading);
       expect(el.hasAttribute('active')).to.be.false;
       el.active = true;
       await el.updateComplete;
@@ -89,7 +89,7 @@ describe('cds-loading', function () {
     });
 
     it('should reflect inactive state to attribute', async () => {
-      const el = await fixture(loadling);
+      const el = await fixture(loading);
       expect(el.hasAttribute('inactive')).to.be.true;
       el.inactive = false;
       await el.updateComplete;
@@ -107,7 +107,7 @@ describe('cds-loading', function () {
     });
 
     it('should render without overlay when overlay attribute is not set', async () => {
-      const el = await fixture(loadling);
+      const el = await fixture(loading);
       expect(el.overlay).to.be.false;
       const svgElement = el.shadowRoot.querySelector('svg');
       expect(svgElement).to.exist;
@@ -116,7 +116,7 @@ describe('cds-loading', function () {
 
   describe('SVG structure', () => {
     it('should have correct structure for default loading', async () => {
-      const el = await fixture(loadling);
+      const el = await fixture(loading);
       const svg = el.shadowRoot.querySelector('svg');
       expect(svg).to.exist;
 
@@ -138,7 +138,7 @@ describe('cds-loading', function () {
 
   describe('automated verification testing', () => {
     it('should have no Axe violations', async () => {
-      const el = await fixture(loadling);
+      const el = await fixture(loading);
       await expect(el).to.be.accessible();
     });
 
