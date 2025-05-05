@@ -1,38 +1,46 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as ShapeIndicatorStories from './shape-indicator.stories';
 
 <Meta of={ShapeIndicatorStories} />
 
 # Shape indicator
 
-The shape-indicator component
+## Table of Contents
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/shape-indicator)
-> example implementation.
+- [Overview](#overview)
+  - [Kind](#kind)
+  - [Size](#size)
+  - [Customizing the label](#customizing-the-label)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/shape-indicator)
+## Overview
 
-## Getting started
+<Canvas of={ShapeIndicatorStories.Default} />
 
-Here's a quick example to get you started.
+## Kind
 
-### JS (via import)
+Shape indicators can take the form of failed, critical, high, medium, low,
+cautious, undefined, stable, informative, incomplete, and draft.
 
-```javascript
-import '@carbon/web-components/es/components/shape-indicator/index.js';
-```
+## Size
 
-<Markdown>{`${cdnJs({ components: ['shape-indicator'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+Shape indicators have two text size options 12 and 14. The default is 12.
 
-### HTML
+## Customizing the label
 
-```html
-<cds-shape-indicator kind="failed" text="Failed"></cds-shape-indicator>
-```
+You can set a string to customize the label of the Shape indicator.
 
-## `<cds-shape-indicator>` attributes and properties
+## Component API
 
 <ArgTypes of="cds-shape-indicator" />
+
+<Markdown>{`${cdnJs({ components: ['shape-indicator'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/shape-indicator/shape-indicator.mdx).
