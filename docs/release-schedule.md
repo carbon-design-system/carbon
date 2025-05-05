@@ -31,8 +31,8 @@ default" in the major version indicated in the name. e.g.
 `enable-v12-tile-default-icons`
 
 In theory, if all `enable-v12-*` flags are enabled within your project before
-the v12 release, no changes should need to be made to the affected components when
-updating to v12.
+the v12 release, no changes should need to be made to the affected components
+when updating to v12.
 
 ### Prerelease
 
