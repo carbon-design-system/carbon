@@ -81,6 +81,9 @@ interface TooltipBaseProps {
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
    * `aria-labelledby` and will fully describe the child node that is provided.
+   * If the child already has an `aria-label`, the tooltip will not apply
+   * `aria-labelledby`. If the child has its own `aria-labelledby`, that value
+   * will be kept. Otherwise, the tooltip will use its own ID to label the child.
    * This means that if you have text in the child node, that it will not be
    * announced to the screen reader.
    *
@@ -161,10 +164,38 @@ const Tooltip: TooltipComponent = React.forwardRef(
       return eventHandlers;
     }
 
-    if (label) {
-      triggerProps['aria-labelledby'] = id;
-    } else {
-      triggerProps['aria-describedby'] = id;
+    const hasAriaLabel = child?.props?.['aria-label'];
+    const hasAriaLabelledBy = child?.props?.['aria-labelledby'];
+    const hasAriaDescribedBy = child?.props?.['aria-describedby'];
+    const hasLabel = !!label;
+
+    let labelledBy: string | null | undefined;
+    let describedBy: string | undefined;
+
+    // aria-labelledby logic
+    if (hasAriaLabel) {
+      labelledBy = null; // ignore labelledBy when aria-label is present
+    } else if (hasLabel && hasAriaLabelledBy) {
+      labelledBy = hasAriaLabelledBy;
+    } else if (hasLabel) {
+      labelledBy = id;
+    }
+
+    // aria-describedby logic
+    if (hasAriaLabel) {
+      describedBy = hasAriaDescribedBy; // always show if explicitly passed
+    } else if (hasAriaDescribedBy) {
+      describedBy = hasAriaDescribedBy;
+    } else if (!hasLabel && !hasAriaLabelledBy) {
+      describedBy = id;
+    }
+
+    // apply to triggerProps
+    if (labelledBy !== undefined) {
+      triggerProps['aria-labelledby'] = labelledBy;
+    }
+    if (describedBy !== undefined) {
+      triggerProps['aria-describedby'] = describedBy;
     }
 
     const onKeyDown = useCallback(
