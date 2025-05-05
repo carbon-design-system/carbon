@@ -7,11 +7,9 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  ElementType,
-  ForwardedRef,
   useContext,
-  Ref,
-  ComponentProps,
+  type ComponentProps,
+  type ForwardedRef,
 } from 'react';
 import Button from '../Button';
 import SideNavItem from './SideNavItem';
