@@ -17,7 +17,7 @@ import React, {
 import { keys, match, matches } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
-import uniqueId from '../../tools/uniqueId';
+import { uniqueId } from '../../tools/uniqueId';
 import { useFeatureFlag } from '../FeatureFlags';
 import TreeNode, { TreeNodeProps } from './TreeNode';
 
