@@ -626,6 +626,11 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
     // value not include it? The fact that it lacks it makes it seem like it's
     // unnecessary. Further, there's an `if` statement that checks for it below.
     // Again, why is that necessary if it's required?
+    //
+    // Based on
+    // https://github.com/carbon-design-system/carbon/pull/19105#discussion_r2073736202,
+    // investigate marking `row` as optional when
+    // https://github.com/carbon-design-system/carbon/issues/19177 is addressed.
     { onClick, row, ...rest } = {} as NonNullable<
       Parameters<
         DataTableRenderProps<RowType, ColTypes>['getSelectionProps']
