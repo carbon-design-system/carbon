@@ -134,5 +134,41 @@ describe('ContentSwitcher - RTL', () => {
         'cds--content-switcher--lg'
       );
     });
+
+    it('should apply low-contrast class when lowContrast prop is used', () => {
+      const { container } = render(
+        <ContentSwitcher onChange={() => {}} lowContrast>
+          <Switch name="one" text="First section" />
+          <Switch name="two" text="Second section" />
+          <Switch name="three" text="Third section" />
+        </ContentSwitcher>
+      );
+
+      expect(container.firstChild).toHaveClass(
+        'cds--content-switcher--low-contrast'
+      );
+    });
+
+    it('should work with iconOnly version when lowContrast is used', () => {
+      // Mock the IconSwitch component since it's not provided in the code snippet
+      const IconSwitch = (props) => <Switch {...props} />;
+      IconSwitch.displayName = 'IconSwitch';
+
+      const { container } = render(
+        <ContentSwitcher onChange={() => {}} lowContrast>
+          <IconSwitch name="one" />
+          <IconSwitch name="two" />
+          <IconSwitch name="three" />
+        </ContentSwitcher>
+      );
+
+      // Should have both the low-contrast class and the icon-only class
+      expect(container.firstChild).toHaveClass(
+        'cds--content-switcher--low-contrast'
+      );
+      expect(container.firstChild).toHaveClass(
+        'cds--content-switcher--icon-only'
+      );
+    });
   });
 });
