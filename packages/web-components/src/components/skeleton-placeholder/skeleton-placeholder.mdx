@@ -1,36 +1,34 @@
-import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as SkeletonPlaceholderStories from './skeleton-placeholder.stories';
 
 <Meta of={SkeletonPlaceholderStories} />
 
 # Skeleton placeholder
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/skeleton-placeholder)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/skeleton-placeholder)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/patterns/loading-pattern/#skeleton-states)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/skeleton-placeholder)
+## Table of Contents
 
-## Getting started
+- [Overview](#overview)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-Here's a quick example to get you started.
+## Overview
 
-### JS (via import)
+<Canvas of={SkeletonPlaceholderStories.Default} />
 
-```javascript
-import '@carbon/web-components/es/components/skeleton-placeholder/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['skeleton-placeholder'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-skeleton-placeholder></cds-skeleton-placeholder>
-```
-
-## `<cds-skeleton-placeholder>` attributes, properties and events
+## Component API
 
 <ArgTypes of="cds-skeleton-placeholder" />
+
+<Markdown>{`${cdnJs({ components: ['skeleton-placeholder'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/skeleton-placeholder/skeleton-placeholder.mdx).

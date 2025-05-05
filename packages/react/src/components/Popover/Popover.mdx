@@ -10,8 +10,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 &nbsp;|&nbsp;
 [Usage guidelines](https://www.carbondesignsystem.com/components/popover/usage)
 &nbsp;|&nbsp;
-
-{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+[Accessibility](https://www.carbondesignsystem.com/components/popover/accessibility)
 
 ## Table of Contents
 
@@ -20,17 +19,13 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   - [Visibility](#Visibility)
   - [Alignment](#Alignment)
   - [Appearance](#Appearance)
-  - [Test](#Test)
 - [Component API](#component-api)
 - [Feedback](#feedback)
-
-{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
 `Popover` is a primitive component used to build custom components which render
-over other elements on the page. For example, `Popover` is used to build our
-popover components in Carbon.
+over other elements on the page.
 
 The `Popover` component accepts two items as `children`: a trigger element and a
 `PopoverContent` component which contains the content to be rendered inside of
@@ -83,15 +78,15 @@ clicks outside of a popover will close the popover. This is achieved by using
 state in conjunction with the callback prop to set `open` to false when
 `onRequestClose` is called.
 
-  <Canvas
-    of={PopoverStories.TabTip}
-    additionalActions={[
-      {
-        title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig(PopoverStories.TabTip),
-      },
-    ]}
-  />
+<Canvas
+  of={PopoverStories.TabTip}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(PopoverStories.TabTip),
+    },
+  ]}
+/>
 
 ## Alignment
 
@@ -112,35 +107,38 @@ or right edges of the popover.
 If you are using `align="left"` or `align="right"`, you can use `top` or
 `bottom` to control this alignment.
 
-  <Canvas
-      of={PopoverStories.ExperimentalAutoAlign}
-      additionalActions={[
-        {
-          title: 'Open in Stackblitz',
-          onClick: () => stackblitzPrefillConfig(PopoverStories.ExperimentalAutoAlign),
-        },
-      ]}
-  />
+<Canvas
+  of={PopoverStories.ExperimentalAutoAlign}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(PopoverStories.ExperimentalAutoAlign),
+    },
+  ]}
+/>
 
-  <Canvas
-      of={PopoverStories.ExperimentalAutoAlignBoundary}
-      additionalActions={[
-        {
-          title: 'Open in Stackblitz',
-          onClick: () => stackblitzPrefillConfig(PopoverStories.ExperimentalAutoAlignBoundary),
-        },
-      ]}
-  />
+<Canvas
+  of={PopoverStories.ExperimentalAutoAlignBoundary}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(PopoverStories.ExperimentalAutoAlignBoundary),
+    },
+  ]}
+/>
 
-    <Canvas
-    of={PopoverStories.TabTipExperimentalAutoAlign}
-    additionalActions={[
-      {
-        title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig(PopoverStories.TabTipExperimentalAutoAlign),
-      },
-    ]}
-  />
+<Canvas
+  of={PopoverStories.TabTipExperimentalAutoAlign}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(PopoverStories.TabTipExperimentalAutoAlign),
+    },
+  ]}
+/>
 
 ## Appearance
 
@@ -151,18 +149,6 @@ appearance, including:
   beside the trigger element
 - `dropShadow`: to display a drop shadow on the popover content
 - `highContrast`: to display a high contrast variant of the popover
-
-## Test
-
-  <Canvas
-    of={PopoverStories.Test}
-    additionalActions={[
-      {
-        title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig(PopoverStories.Test),
-      },
-    ]}
-  />
 
 ## Component API
 

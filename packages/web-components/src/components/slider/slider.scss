@@ -12,7 +12,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/slider';
 @use '@carbon/styles/scss/layout' as *;
 
-:host(#{$prefix}-slider) {
+:host(#{$prefix}-slider),
+:host(#{$prefix}-slider-skeleton) {
   outline: none;
   @include emit-layout-tokens();
 
@@ -51,5 +52,11 @@ $css--plex: true !default;
 :host(#{$prefix}-slider-input[readonly]) {
   input {
     background-color: transparent;
+  }
+}
+
+:host(#{$prefix}-slider-skeleton) {
+  .#{$prefix}--slider__thumb {
+    inset-inline-start: 50%;
   }
 }

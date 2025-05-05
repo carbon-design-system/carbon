@@ -23,11 +23,13 @@ import React, {
   ReactNode,
   useLayoutEffect,
   isValidElement,
+  useCallback,
 } from 'react';
 import ListBox, {
-  ListBoxSize,
-  ListBoxType,
-  PropTypes as ListBoxPropTypes,
+  ListBoxSizePropType,
+  ListBoxTypePropType,
+  type ListBoxSize,
+  type ListBoxType,
 } from '../ListBox';
 import {
   MultiSelectSortingProps,
@@ -44,7 +46,6 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
 import Checkbox from '../Checkbox';
-import type { InternationalProps } from '../../types/common';
 import type { TranslateWithId } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 import {
@@ -298,7 +299,7 @@ export interface MultiSelectProps<ItemType>
   warnText?: ReactNode;
 }
 
-const MultiSelect = React.forwardRef(
+export const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
       autoAlign = false,
@@ -730,7 +731,40 @@ const MultiSelect = React.forwardRef(
       [enableFloatingStyles, getMenuProps, refs.setFloating]
     );
 
-    const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
+    const allLabelProps = getLabelProps();
+    const labelProps = isValidElement(titleText)
+      ? { id: allLabelProps.id }
+      : allLabelProps;
+
+    const getSelectionStats = useCallback(
+      (
+        selectedItems: any[],
+        filteredItems: any[]
+      ): {
+        hasIndividualSelections: boolean;
+        nonSelectAllSelectedCount: number;
+        totalSelectableCount: number;
+      } => {
+        const hasIndividualSelections = selectedItems.some(
+          (selected) => !selected.isSelectAll
+        );
+
+        const nonSelectAllSelectedCount = selectedItems.filter(
+          (selected) => !selected.isSelectAll
+        ).length;
+
+        const totalSelectableCount = filteredItems.filter(
+          (item) => !item.isSelectAll && !item.disabled
+        ).length;
+
+        return {
+          hasIndividualSelections,
+          nonSelectAllSelectedCount,
+          totalSelectableCount,
+        };
+      },
+      [selectedItems, filteredItems]
+    );
 
     return (
       <div className={wrapperClasses}>
@@ -821,10 +855,16 @@ const MultiSelect = React.forwardRef(
                   selectedItems.filter((selected) => isEqual(selected, item))
                     .length > 0;
 
+                const {
+                  hasIndividualSelections,
+                  nonSelectAllSelectedCount,
+                  totalSelectableCount,
+                } = getSelectionStats(selectedItems, filteredItems);
+
                 const isIndeterminate =
-                  selectedItems.length !== 0 &&
                   item['isSelectAll'] &&
-                  !isChecked;
+                  hasIndividualSelections &&
+                  nonSelectAllSelectedCount < totalSelectableCount;
 
                 const itemProps = getItemProps({
                   item,
@@ -875,7 +915,7 @@ const MultiSelect = React.forwardRef(
       </div>
     );
   }
-);
+) as MultiSelectComponent;
 
 type MultiSelectComponentProps<ItemType> = React.PropsWithChildren<
   MultiSelectProps<ItemType>
@@ -883,9 +923,11 @@ type MultiSelectComponentProps<ItemType> = React.PropsWithChildren<
   React.RefAttributes<HTMLButtonElement>;
 
 interface MultiSelectComponent {
+  propTypes: Record<string, any>;
+  displayName: string;
   <ItemType>(
     props: MultiSelectComponentProps<ItemType>
-  ): React.ReactElement | null;
+  ): React.ReactElement<any> | null;
 }
 
 MultiSelect.displayName = 'MultiSelect';
@@ -945,7 +987,9 @@ MultiSelect.propTypes = {
    * change, and in some cases they can not be shimmed by Carbon to shield you
    * from potentially breaking changes.
    */
-  downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
+  downshiftProps: PropTypes.object as PropTypes.Validator<
+    UseSelectProps<unknown>
+  >,
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -1058,7 +1102,7 @@ MultiSelect.propTypes = {
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
-  size: ListBoxPropTypes.ListBoxSize,
+  size: ListBoxSizePropType,
 
   slug: deprecate(
     PropTypes.node,
@@ -1101,7 +1145,7 @@ MultiSelect.propTypes = {
   /**
    * Specify 'inline' to create an inline multi-select.
    */
-  type: PropTypes.oneOf(['default', 'inline']),
+  type: ListBoxTypePropType,
 
   /**
    * Specify title to show title on hover
@@ -1118,5 +1162,3 @@ MultiSelect.propTypes = {
    */
   warnText: PropTypes.node,
 };
-
-export default MultiSelect as MultiSelectComponent;

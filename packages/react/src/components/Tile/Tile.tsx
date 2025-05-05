@@ -365,7 +365,6 @@ ClickableTile.propTypes = {
   /**
    * A component used to render an icon.
    */
-  // @ts-expect-error: Invalid derived prop type, seemingly no real solution.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 

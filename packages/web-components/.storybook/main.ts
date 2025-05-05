@@ -39,7 +39,6 @@ const config: StorybookConfig = {
     },
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@storybook/addon-storysource',
     'storybook-addon-accessibility-checker',
   ],
   framework: {

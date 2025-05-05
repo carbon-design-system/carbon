@@ -16,6 +16,7 @@ let _project = null;
 
 export async function get(directory = defaultDirectory) {
   if (!_project) {
+    // eslint-disable-next-line require-atomic-updates
     _project = await Project.detect(directory);
   }
   return _project;
