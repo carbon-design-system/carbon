@@ -416,7 +416,7 @@ export function ToastNotification({
     [`${prefix}--toast-notification--${kind}`]: kind,
   });
 
-  const contentRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   useNoInteractiveChildren(contentRef);
 
   const handleClose = (evt) => {
@@ -424,7 +424,7 @@ export function ToastNotification({
       setIsOpen(false);
     }
   };
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   function handleCloseButtonClick(event: MouseEvent) {
     onCloseButtonClick(event);
@@ -683,7 +683,7 @@ export function InlineNotification({
     [`${prefix}--inline-notification--hide-close-button`]: hideCloseButton,
   });
 
-  const contentRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   useNoInteractiveChildren(contentRef);
 
   const handleClose = (evt) => {
@@ -691,7 +691,7 @@ export function InlineNotification({
       setIsOpen(false);
     }
   };
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   function handleCloseButtonClick(event) {
     onCloseButtonClick(event);
@@ -1310,7 +1310,7 @@ export function Callout({
     [`${prefix}--actionable-notification--hide-close-button`]: true,
   });
 
-  const childrenContainer = useRef(null);
+  const childrenContainer = useRef<HTMLDivElement>(null);
   useInteractiveChildrenNeedDescription(
     childrenContainer,
     `interactive child node(s) should have an \`aria-describedby\` property with a value matching the value of \`titleId\``

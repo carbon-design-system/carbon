@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2014, 2024
+ * Copyright IBM Corp. 2014, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -82,7 +82,7 @@ export const unstable__Dialog = React.forwardRef(
     // If the parent component has not passed a ref for forwardRef, forwardRef
     // will be null. A "backup" ref is needed to ensure the dialog's instance
     // methods can always be called within this component.
-    const backupRef = useRef(null);
+    const backupRef = useRef<HTMLDialogElement>(null);
     const ref = (forwardRef ??
       backupRef) as MutableRefObject<HTMLDialogElement>;
 
