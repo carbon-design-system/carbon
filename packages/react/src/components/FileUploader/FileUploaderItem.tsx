@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
-import uid from '../../tools/uniqueId';
+import { uniqueId } from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
@@ -89,7 +89,7 @@ function FileUploaderItem({
   const textRef = useRef<HTMLParagraphElement>(null);
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
   const prefix = usePrefix();
-  const { current: id } = useRef(uuid || uid());
+  const { current: id } = useRef(uuid || uniqueId());
   const classes = cx(`${prefix}--file__selected-file`, className, {
     [`${prefix}--file__selected-file--invalid`]: invalid,
     [`${prefix}--file__selected-file--md`]: size === 'md',
