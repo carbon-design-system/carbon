@@ -7,7 +7,6 @@
 
 import cx from 'classnames';
 import React, {
-  ForwardedRef,
   forwardRef,
   ReactNode,
   useEffect,
@@ -18,7 +17,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
-import { ForwardRefReturn, ReactAttr } from '../../types/common';
+import { ReactAttr } from '../../types/common';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
 /**
@@ -81,17 +80,6 @@ export interface ListBoxMenuItemProps extends ReactAttr<HTMLLIElement> {
    */
   title?: string;
 }
-
-export type ListBoxMenuItemForwardedRef =
-  | (ForwardedRef<HTMLLIElement> & {
-      menuItemOptionRef?: Ref<HTMLDivElement>;
-    })
-  | null;
-
-export type ListBoxMenuItemComponent = ForwardRefReturn<
-  ListBoxMenuItemForwardedRef,
-  ListBoxMenuItemProps
->;
 
 /**
  * `ListBoxMenuItem` is a helper component for managing the container class
@@ -167,4 +155,4 @@ ListBoxMenuItem.propTypes = {
   title: PropTypes.string,
 };
 
-export default ListBoxMenuItem as ListBoxMenuItemComponent;
+export default ListBoxMenuItem;
