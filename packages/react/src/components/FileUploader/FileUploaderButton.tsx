@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import React, { useRef, useState, type HTMLAttributes } from 'react';
 import { matches, keys } from '../../internal/keyboard';
 import { ButtonKinds } from '../../prop-types/types';
-import uid from '../../tools/uniqueId';
+import { uniqueId } from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { noopFn } from '../../internal/noopFn';
@@ -122,7 +122,7 @@ function FileUploaderButton({
   const prefix = usePrefix();
   const [labelText, setLabelText] = useState(ownerLabelText);
   const [prevOwnerLabelText, setPrevOwnerLabelText] = useState(ownerLabelText);
-  const { current: inputId } = useRef(id || uid());
+  const { current: inputId } = useRef(id || uniqueId());
   const inputNode = useRef<HTMLInputElement>(null);
   const classes = cx(`${prefix}--btn`, className, {
     [`${prefix}--btn--${buttonKind}`]: buttonKind,
