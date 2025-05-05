@@ -23,7 +23,7 @@ export const packageJson: string = `{
   "devDependencies": {
     "@vitejs/plugin-react": "4.0.0",
     "sass": "^1.77.7",
-    "vite": "^6.3.4"
+    "vite": "^6.3.5"
   }
 }`;
 

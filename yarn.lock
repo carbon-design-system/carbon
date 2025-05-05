@@ -2256,7 +2256,7 @@ __metadata:
     temp: "npm:^0.9.0"
     tslib: "npm:^2.6.3"
     typescript-config-carbon: "npm:^0.5.0"
-    vite: "npm:^6.3.4"
+    vite: "npm:^6.3.5"
     web-component-analyzer: "npm:2.0.0"
   languageName: unknown
   linkType: soft
@@ -10495,7 +10495,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     sass: "npm:^1.77.7"
-    vite: "npm:^6.3.4"
+    vite: "npm:^6.3.5"
   languageName: unknown
   linkType: soft
 
@@ -10798,7 +10798,7 @@ __metadata:
   dependencies:
     "@carbon/styles": "npm:^1.80.0"
     sass: "npm:^1.77.7"
-    vite: "npm:^6.3.4"
+    vite: "npm:^6.3.5"
   languageName: unknown
   linkType: soft
 
@@ -11892,7 +11892,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     sass: "npm:^1.77.7"
-    vite: "npm:^6.3.4"
+    vite: "npm:^6.3.5"
   languageName: unknown
   linkType: soft
 
@@ -16356,7 +16356,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     sass: "npm:^1.77.7"
-    vite: "npm:^6.3.4"
+    vite: "npm:^6.3.5"
   languageName: unknown
   linkType: soft
 
@@ -28362,7 +28362,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     sass: "npm:^1.77.7"
-    vite: "npm:^6.3.4"
+    vite: "npm:^6.3.5"
   languageName: unknown
   linkType: soft
 
@@ -28608,7 +28608,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.3.4":
+"vite@npm:^6.3.5":
   version: 6.3.5
   resolution: "vite@npm:6.3.5"
   dependencies:
@@ -28672,7 +28672,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     sass: "npm:^1.77.7"
-    vite: "npm:^6.3.4"
+    vite: "npm:^6.3.5"
   languageName: unknown
   linkType: soft
 
