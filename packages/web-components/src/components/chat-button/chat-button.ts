@@ -16,7 +16,9 @@ import styles from './chat-button.scss?lit';
 export { CHAT_BUTTON_SIZE, CHAT_BUTTON_KIND };
 
 /**
- * Icon Button
+ * Chat Button
+ *
+ * @element cds-chat-button
  *
  */
 @customElement(`${prefix}-chat-button`)
