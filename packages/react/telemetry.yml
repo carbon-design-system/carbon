@@ -172,6 +172,7 @@ collect:
         - orientation
         - overflowMenuOnHover
         - page
+        - pageActions
         - paragraph
         - passiveModal
         - pattern
@@ -457,7 +458,8 @@ collect:
         - wrapperClassName
         # PageHeaderContent
         - contextualActions
-        - pageActions
+        # PageHeaderContentPageActions
+        - menuButtonLabel
         # PageSelector
         - currentPage
         - totalPages
