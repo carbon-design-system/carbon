@@ -172,6 +172,8 @@
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus
     svg {
     fill: $icon-primary;
+
+    @include high-contrast-mode('icon-fill');
   }
 
   .#{$prefix}--text-input--invalid,
