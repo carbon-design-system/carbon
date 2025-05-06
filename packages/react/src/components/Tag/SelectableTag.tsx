@@ -13,7 +13,6 @@ import React, {
   MouseEvent,
   forwardRef,
   ForwardedRef,
-  useEffect,
 } from 'react';
 import classNames from 'classnames';
 import { useId } from '../../internal/useId';
