@@ -11,6 +11,8 @@ import styles from './textarea.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
+ * @element cds-textarea-skeleton
+ *
  * Skeleton of text area.
  */
 @customElement(`${prefix}-textarea-skeleton`)

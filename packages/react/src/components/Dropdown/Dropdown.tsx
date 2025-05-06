@@ -17,6 +17,7 @@ import React, {
   type ForwardedRef,
   type MouseEvent,
   type ReactNode,
+  type Ref,
 } from 'react';
 import {
   useSelect,
@@ -34,10 +35,11 @@ import {
   WarningFilled,
 } from '@carbon/icons-react';
 import ListBox, {
+  ListBoxSizePropType,
+  ListBoxTypePropType,
   type ListBoxMenuIconTranslationKey,
-  ListBoxSize,
-  ListBoxType,
-  PropTypes as ListBoxPropTypes,
+  type ListBoxSize,
+  type ListBoxType,
 } from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
@@ -87,8 +89,7 @@ export interface OnChangeData<ItemType> {
 
 export interface DropdownProps<ItemType>
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes>,
-    TranslateWithId<ListBoxMenuIconTranslationKey>,
-    React.RefAttributes<HTMLDivElement> {
+    TranslateWithId<ListBoxMenuIconTranslationKey> {
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
@@ -504,13 +505,9 @@ const Dropdown = React.forwardRef(
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
-    const toggleButtonProps = useMemo(
-      () =>
-        getToggleButtonProps({
-          'aria-label': ariaLabel || deprecatedAriaLabel,
-        }),
-      [getToggleButtonProps, ariaLabel, deprecatedAriaLabel, isOpen]
-    );
+    const toggleButtonProps = getToggleButtonProps({
+      'aria-label': ariaLabel || deprecatedAriaLabel,
+    });
 
     const helper =
       helperText && !isFluid ? (
@@ -607,7 +604,10 @@ const Dropdown = React.forwardRef(
       ? cloneElement(candidate, { size: 'mini' })
       : null;
 
-    const labelProps = !isValidElement(titleText) ? getLabelProps() : null;
+    const allLabelProps = getLabelProps();
+    const labelProps = isValidElement(titleText)
+      ? { id: allLabelProps.id }
+      : allLabelProps;
 
     return (
       <div className={wrapperClasses} {...other}>
@@ -683,13 +683,6 @@ const Dropdown = React.forwardRef(
                   item,
                   index,
                 });
-                if (
-                  item !== null &&
-                  typeof item === 'object' &&
-                  Object.prototype.hasOwnProperty.call(item, 'id')
-                ) {
-                  itemProps.id = item['id'];
-                }
                 const title =
                   isObject && 'text' in item && itemToElement
                     ? item.text
@@ -725,14 +718,11 @@ const Dropdown = React.forwardRef(
   }
 );
 
-type DropdownComponentProps<ItemType> = React.PropsWithoutRef<
-  React.PropsWithChildren<DropdownProps<ItemType>> &
-    React.RefAttributes<HTMLButtonElement>
->;
-
-export interface DropdownComponent {
+// Workaround problems with forwardRef() and generics.  In the long term, should stop using forwardRef().
+// See https://stackoverflow.com/questions/58469229/react-with-typescript-generics-while-using-react-forwardref.
+interface DropdownComponent {
   <ItemType>(
-    props: DropdownComponentProps<ItemType>
+    props: DropdownProps<ItemType> & { ref?: Ref<HTMLButtonElement> }
   ): React.ReactElement<any> | null;
 }
 
@@ -889,7 +879,7 @@ Dropdown.propTypes = {
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
-  size: ListBoxPropTypes.ListBoxSize,
+  size: ListBoxSizePropType,
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
@@ -914,7 +904,7 @@ Dropdown.propTypes = {
   /**
    * The dropdown type, `default` or `inline`
    */
-  type: ListBoxPropTypes.ListBoxType,
+  type: ListBoxTypePropType,
 
   /**
    * Specify whether the control is currently in warning state
