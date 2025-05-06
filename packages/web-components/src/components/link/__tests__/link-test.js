@@ -17,7 +17,7 @@ describe('cds-link', function () {
   it('should render', async () => {
     const el = await fixture(basicLink);
 
-    expect(el).dom.to.equalSnapshot();
+    await expect(el).dom.to.equalSnapshot();
   });
 
   it('should render an <a> element', async () => {
@@ -25,7 +25,7 @@ describe('cds-link', function () {
     const elA = el.shadowRoot.querySelector('a');
 
     expect(Array.from(elA.classList)).to.contain('cds--link');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should inherit the href property', async () => {
@@ -41,7 +41,7 @@ describe('cds-link', function () {
     );
 
     expect(el).to.have.text(child);
-    expect(el).dom.to.equalSnapshot();
+    await expect(el).dom.to.equalSnapshot();
   });
 
   // Custom classes are not yet supported in the web components version
@@ -53,7 +53,7 @@ describe('cds-link', function () {
     );
 
     expect(Array.from(el.classList)).to.contain('custom-class');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should support being disabled', async () => {
@@ -68,7 +68,7 @@ describe('cds-link', function () {
     expect(el.hasAttribute('disabled'));
     expect(elP).to.exist;
     expect(Array.from(elP.classList)).to.contain('cds--link--disabled');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should support the inline link variant', async () => {
@@ -81,7 +81,7 @@ describe('cds-link', function () {
 
     expect(el.hasAttribute('inline'));
     expect(Array.from(elA.classList)).to.contain('cds--link--inline');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   // Not sure about this one. It will pass no matter what is passed
@@ -97,7 +97,7 @@ describe('cds-link', function () {
 
       expect(el.hasAttribute('size', size));
       expect(Array.from(elA.classList)).to.contain(`cds--link--${size}`);
-      expect(el).shadowDom.to.equalSnapshot();
+      await expect(el).shadowDom.to.equalSnapshot();
     });
   });
 
@@ -112,7 +112,7 @@ describe('cds-link', function () {
 
     expect(elA.hasAttribute('target', '_blank'));
     expect(elA.hasAttribute('rel', 'noopener'));
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 
   it('should receive keyboard focus', async () => {
