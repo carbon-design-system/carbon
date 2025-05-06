@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { gray20, gray20Hover, gray50, white, rgba } from '@carbon/colors';
 const transparent = 'rgba(0, 0, 0, 0)';
 export const contentSwitcherSelected = {
