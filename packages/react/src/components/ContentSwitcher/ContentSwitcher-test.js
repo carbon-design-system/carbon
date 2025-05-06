@@ -135,7 +135,7 @@ describe('ContentSwitcher - RTL', () => {
       );
     });
 
-    it('should apply low-contrast class when lowContrast prop is used', () => {
+    it('should have the correct attributes when lowContrast prop is used', () => {
       const { container } = render(
         <ContentSwitcher onChange={() => {}} lowContrast>
           <Switch name="one" text="First section" />
@@ -144,13 +144,20 @@ describe('ContentSwitcher - RTL', () => {
         </ContentSwitcher>
       );
 
-      expect(container.firstChild).toHaveClass(
-        'cds--content-switcher--low-contrast'
+      const attributes = Array.from(container.firstChild.attributes).reduce(
+        (acc, { name, value }) => ({ ...acc, [name]: value }),
+        {}
       );
+
+      expect(attributes).toEqual({
+        class:
+          'cds--content-switcher cds--content-switcher--low-contrast cds--layout-constraint--size__default-md cds--layout-constraint--size__min-sm cds--layout-constraint--size__max-lg',
+        role: 'tablist',
+      });
     });
 
-    it('should work with iconOnly version when lowContrast is used', () => {
-      // Mock the IconSwitch component since it's not provided in the code snippet
+    it('should have the correct attributes with iconOnly version when lowContrast is used', () => {
+      // Mock the IconSwitch component
       const IconSwitch = (props) => <Switch {...props} />;
       IconSwitch.displayName = 'IconSwitch';
 
@@ -162,13 +169,16 @@ describe('ContentSwitcher - RTL', () => {
         </ContentSwitcher>
       );
 
-      // Should have both the low-contrast class and the icon-only class
-      expect(container.firstChild).toHaveClass(
-        'cds--content-switcher--low-contrast'
+      const attributes = Array.from(container.firstChild.attributes).reduce(
+        (acc, { name, value }) => ({ ...acc, [name]: value }),
+        {}
       );
-      expect(container.firstChild).toHaveClass(
-        'cds--content-switcher--icon-only'
-      );
+
+      expect(attributes).toEqual({
+        class:
+          'cds--content-switcher cds--content-switcher--icon-only cds--content-switcher--low-contrast cds--layout-constraint--size__default-md cds--layout-constraint--size__min-sm cds--layout-constraint--size__max-lg',
+        role: 'tablist',
+      });
     });
   });
 });
