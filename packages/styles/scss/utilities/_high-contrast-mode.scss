@@ -25,6 +25,10 @@
       outline: 1px solid transparent;
     }
 
+    @if ($type == 'bold-border') {
+      border: 2px solid Highlight;
+    }
+
     @if ($type == 'disabled') {
       color: GrayText;
       fill: GrayText;

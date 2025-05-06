@@ -147,6 +147,8 @@
   .#{$prefix}--content-switcher
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:last-child {
     border: 0;
+
+    @include high-contrast-mode('bold-border');
   }
 
   .#{$prefix}--content-switcher-btn::before {
@@ -291,6 +293,8 @@
     .#{$prefix}--content-switcher-btn
     svg {
     fill: $icon-primary;
+
+    @include high-contrast-mode('icon-fill');
   }
 
   .#{$prefix}--content-switcher--icon-only
