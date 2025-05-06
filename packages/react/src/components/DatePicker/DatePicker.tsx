@@ -857,7 +857,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   useEffect(() => {
     // when value prop is manually reset, this clears the flatpickr calendar instance and text input
     // run if both:
-    // 1. value prop is set to a falsy value ("", undefined, null, etc) OR an array with all falsy values
+    // 1. value prop is set to a falsy value ("", undefined, null, etc) OR an array of all falsy values
     // 2. flatpickr instance contains values in its selectedDates property so it hasn't already been cleared
     if (
       (!value || (Array.isArray(value) && value.every((date) => !date))) &&
