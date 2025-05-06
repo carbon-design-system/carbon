@@ -1,0 +1,72 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as MenuButtonStories from './menu-button.stories';
+
+<Meta of={MenuButtonStories} />
+
+# MenuButton
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/menu-button)
+&nbsp;|&nbsp;
+
+## Table of Contents
+
+- [Overview](#overview)
+- [With Danger](#with-danger)
+- [With Dividers](#with-dividers)
+- [With icons](#with-icons)
+- [Menu Alignment](#menu-alignment)
+  - [Experimental Auto Align](#experimental-auto-align)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+A `cds-menu-button` can be used to group a set of actions that are related. These
+actions must be `cds-menu-item` passed as child elements. The trigger buttons's label is
+passed as `label`.
+
+<Canvas of={MenuButtonStories.Default} />
+
+#### With Danger
+
+<Canvas of={MenuButtonStories.withDanger} />
+
+#### With Dividers
+
+<Canvas of={MenuButtonStories.withDividers} />
+
+#### With Icons
+
+<Canvas of={MenuButtonStories.withIcons} />
+
+## Menu Alignment
+
+The `menu-alignment` attribute enables you to define the placement of the menu in
+relation to the menu button. For instance, setting `menu-alignment="top"` on the
+menu button will render the menu above the button.
+
+If it seems your specified `menu-alignment` isn't working, it's because we
+prioritize ensuring the menu remains visible. We calculate the optimal position
+to display the menu in case the provided `menu-alignment` obscures it.
+
+We encourage you to play around in the Storybook Default stories to better
+understand the `menu-alignment` attribute.
+
+<Canvas of={MenuButtonStories.withMenuAlignment} />
+
+## Experimental Auto Align
+
+<Canvas of={MenuButtonStories.ExperimentalAutoAlign} />
+
+## Component API
+
+<ArgTypes of="cds-menu-button" />
+<Markdown>{`${cdnJs({ components: ['menu-button'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/menu-button/menu-button.mdx).

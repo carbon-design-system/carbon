@@ -1,76 +1,48 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import * as TextArea from './textarea.stories';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as TextAreaStories from './textarea.stories';
 
-<Meta of={TextArea} />
+<Meta of={TextAreaStories} />
 
-# Textarea
+# Text Area
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/textarea)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/textarea)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/text-input/usage/#text-area)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/text-input/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/textarea)
+## Table of Contents
 
-Text inputs enable the user to interact with and input content and data. This
-component can be used for long and short form entries.
+- [Overview](#overview)
+- [Skeleton](#skeleton)
+- [AI Label](#ai-label)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-Textarea is a multi-line variant of text input.
+## Overview
 
-## Getting started
-
-Here's a quick example to get you started.
-
-### JS (via import)
-
-```javascript
-import '@carbon/web-components/es/components/textarea/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['textarea'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<cds-textarea placeholder="Optional placeholder text" rows="4" cols="50">
-  <span slot="label-text">Label text</span>
-  <span slot="helper-text">Optional helper text</span>
-  <span slot="validity-message">Something isn't right</span>
-</cds-textarea>
-```
-
-## Form item
-
-If the textarea is part of a form, make sure to import and wrap the textarea
-with `<cds-form-item>`
-
-```javascript
-import '@carbon/web-components/es/components/form/index.js';
-```
-
-```html
-<cds-form-item>
-  <cds-textarea placeholder="Optional placeholder text" rows="4" cols="50">
-    <span slot="label-text">Label text</span>
-    <span slot="helper-text">Optional helper text</span>
-    <span slot="validity-message">Something isn't right</span>
-  </cds-textarea>
-</cds-form-item>
-```
+<Canvas of={TextAreaStories.Default} />
 
 ## Skeleton
 
-For the skeleton variation, utilize `<cds-textarea-skeleton>`.
+<Canvas of={TextAreaStories.skeleton} />
 
-```html
-<cds-textarea-skeleton></cds-textarea-skeleton>
-```
+## AI Label
 
-## `<cds-textarea>` attributes and properties
+<Canvas of={TextAreaStories.WithAILabel} />
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-textarea autofocus>`) and `false` means not setting the attribute (e.g.
-`<cds-textarea>` without `autofocus` attribute).
+## Component API
+
+## `cds-textarea`
 
 <ArgTypes of="cds-textarea" />
+
+<Markdown>{`${cdnJs({ components: ['textarea'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/textarea/textarea.mdx).
