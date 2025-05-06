@@ -285,23 +285,25 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    * Handles `pointerdown` event on the thumb to start dragging.
    */
   private _startDrag(event: PointerEvent) {
-    let eventContainer = (event.target as HTMLElement).id;
-    if (!eventContainer) {
-      const element = (event.target as HTMLInputElement).nodeName;
-      if (element == 'path' || element == 'svg') {
-        eventContainer = (
-          (
-            (event.target as HTMLInputElement).parentElement as HTMLElement
-          ).closest('.cds--slider__thumb-wrapper') as HTMLInputElement
-        ).id;
+    if (!this.readonly && !this.disabled) {
+      let eventContainer = (event.target as HTMLElement).id;
+      if (!eventContainer) {
+        const element = (event.target as HTMLInputElement).nodeName;
+        if (element == 'path' || element == 'svg') {
+          eventContainer = (
+            (
+              (event.target as HTMLInputElement).parentElement as HTMLElement
+            ).closest('.cds--slider__thumb-wrapper') as HTMLInputElement
+          ).id;
+        }
       }
-    }
-    if (eventContainer === 'thumb') {
-      this._dragging = true;
-      this._thumbNode.style.touchAction = 'none';
-    } else {
-      this._draggingUpper = true;
-      this._thumbNodeUpper.style.touchAction = 'none';
+      if (eventContainer === 'thumb') {
+        this._dragging = true;
+        this._thumbNode.style.touchAction = 'none';
+      } else {
+        this._draggingUpper = true;
+        this._thumbNodeUpper.style.touchAction = 'none';
+      }
     }
   }
 
