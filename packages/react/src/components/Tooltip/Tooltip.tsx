@@ -133,6 +133,29 @@ const Tooltip: TooltipComponent = React.forwardRef(
     const prefix = usePrefix();
     const child = React.Children.only(children);
 
+    const {
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
+      'aria-describedby': ariaDescribedBy,
+    } = child?.props ?? {};
+
+    const hasLabel = !!label;
+    const hasAriaLabel = typeof ariaLabel !== 'undefined' && ariaLabel !== null;
+
+    // An `aria-label` takes precedence over `aria-describedby`, but when it's
+    // needed and the user doesn't specify one, the fallback `id` is used.
+    const labelledBy = hasAriaLabel
+      ? null
+      : hasLabel
+        ? (ariaLabelledBy ?? id)
+        : undefined;
+
+    // If `aria-label` is present, use any provided `aria-describedby`.
+    // If not, fallback to child's `aria-describedby` or the tooltip `id` if needed.
+    const describedBy = hasAriaLabel
+      ? ariaDescribedBy
+      : (ariaDescribedBy ?? (!hasLabel && !ariaLabelledBy ? id : undefined));
+
     const triggerProps = {
       onFocus: () => !focusByMouse && setOpen(true),
       onBlur: () => {
@@ -146,6 +169,8 @@ const Tooltip: TooltipComponent = React.forwardRef(
       onMouseDown,
       onMouseMove: onMouseMove,
       onTouchStart: onDragStart,
+      'aria-labelledby': labelledBy,
+      'aria-describedby': describedBy,
     };
 
     function getChildEventHandlers(childProps: any) {
@@ -162,40 +187,6 @@ const Tooltip: TooltipComponent = React.forwardRef(
         };
       });
       return eventHandlers;
-    }
-
-    const hasAriaLabel = child?.props?.['aria-label'];
-    const hasAriaLabelledBy = child?.props?.['aria-labelledby'];
-    const hasAriaDescribedBy = child?.props?.['aria-describedby'];
-    const hasLabel = !!label;
-
-    let labelledBy: string | null | undefined;
-    let describedBy: string | undefined;
-
-    // aria-labelledby logic
-    if (hasAriaLabel) {
-      labelledBy = null; // ignore labelledBy when aria-label is present
-    } else if (hasLabel && hasAriaLabelledBy) {
-      labelledBy = hasAriaLabelledBy;
-    } else if (hasLabel) {
-      labelledBy = id;
-    }
-
-    // aria-describedby logic
-    if (hasAriaLabel) {
-      describedBy = hasAriaDescribedBy; // always show if explicitly passed
-    } else if (hasAriaDescribedBy) {
-      describedBy = hasAriaDescribedBy;
-    } else if (!hasLabel && !hasAriaLabelledBy) {
-      describedBy = id;
-    }
-
-    // apply to triggerProps
-    if (labelledBy !== undefined) {
-      triggerProps['aria-labelledby'] = labelledBy;
-    }
-    if (describedBy !== undefined) {
-      triggerProps['aria-describedby'] = describedBy;
     }
 
     const onKeyDown = useCallback(
