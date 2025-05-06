@@ -22,6 +22,7 @@
     "format": "prettier --cache --write '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
     "lint": "eslint actions config packages www",
+    "lint:fix": "eslint --cache --fix --max-warnings 0 actions config packages www",
     "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
     "telemetry:config": "lerna run telemetry:config",
@@ -51,6 +52,7 @@
     "@carbon/cli": "workspace:packages/cli",
     "@commitlint/cli": "^18.0.0",
     "@commitlint/config-conventional": "^18.0.0",
+    "@eslint/js": "^9.24.0",
     "@percy/cli": "^1.30.4",
     "@percy/playwright": "^1.0.7",
     "@playwright/test": "^1.36.2",
@@ -65,7 +67,7 @@
     "cross-env": "^7.0.0",
     "cross-spawn": "^7.0.0",
     "doctoc": "^2.0.0",
-    "eslint": "^9.0.0",
+    "eslint": "^9.24.0",
     "eslint-plugin-playwright": "^2.0.0",
     "fs-extra": "^11.0.0",
     "glob": "^11.0.0",
@@ -120,9 +122,9 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
+    "**/*.{cjs,js,jsx,mjs,ts,tsx}": [
       "yarn prettier --cache --write",
-      "eslint"
+      "eslint --cache --fix --max-warnings 0 --no-warn-ignored"
     ],
     "**/*.scss": [
       "yarn prettier --cache --write",
