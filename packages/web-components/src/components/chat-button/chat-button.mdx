@@ -1,42 +1,27 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as ChatButtonStories from './chat-button.stories';
 
 <Meta of={ChatButtonStories} />
 
-# Chat Button
+# Chat button
 
-> 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/chat-button)
-> example implementation.
+## Table of Contents
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/chat-button)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+<Canvas of={ChatButtonStories.Default} />
 
-Here's a quick example to get you started.
-
-### JS (via import)
-
-```javascript
-import '@carbon/web-components/es/components/chat-button/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['chat-button'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-```javascript
-import '@carbon/web-components/es/components/chat-button/index.js';
-import Add16 from '@carbon/icons/lib/add/16.js';
-
-function App() {
-  return html`<cds-chat-button>
-    Primary ${Add16({ slot: 'icon' })}
-  </cds-chat-button>`;
-}
-```
-
-## `<cds-chat-button>` attributes and properties
+## Component API
 
 <ArgTypes of="cds-chat-button" />
-````
+
+<Markdown>{`${cdnJs({ components: ['chat-button'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/chat-button/chat-button.mdx).

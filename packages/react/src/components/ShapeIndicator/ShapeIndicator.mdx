@@ -1,4 +1,6 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import * as ShapeIndicatorStories from './ShapeIndicator.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
@@ -12,6 +14,9 @@ import { ArgTypes, Meta } from '@storybook/blocks';
 ## Table of Contents
 
 - [Overview](#overview)
+  - [Kind](#kind)
+  - [Size](#size)
+  - [Customizing the label](#customizing-the-label)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -31,9 +36,20 @@ function ExampleComponent() {
 }
 ```
 
+<Canvas
+  of={ShapeIndicatorStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ShapeIndicatorStories.Default),
+    },
+  ]}
+/>
+
 ## Kind
 
-Shape indicators can take the form of failed, critical, high, medium, low, cautious, undefined, stable, informative, incomplete, and draft.
+Shape indicators can take the form of failed, critical, high, medium, low,
+cautious, undefined, stable, informative, incomplete, and draft.
 
 ## Text Size
 
