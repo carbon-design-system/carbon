@@ -146,7 +146,7 @@ dateTimeFormat.absolute.formatRange(startDate, sameDayEndDate, {
 #### Timezone
 
 For `absolute` functions, you can provide `timeZone` as an optional property.
-This is usefull when (for example) you want to display utc time instead of a
+This is useful when (for example) you want to display utc time instead of a
 local timezone.
 
 ```js
