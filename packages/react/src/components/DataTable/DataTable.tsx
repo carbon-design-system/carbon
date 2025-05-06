@@ -168,7 +168,9 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     [key: string]: unknown;
   };
   getSelectionProps: (options?: {
-    onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+    onClick?: (
+      event: MouseEvent<HTMLInputElement, globalThis.MouseEvent>
+    ) => void;
     row?: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {

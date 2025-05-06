@@ -20,6 +20,8 @@ $css--plex: true !default;
 :host(#{$prefix}-tag),
 :host(#{$prefix}-dismissible-tag) {
   @extend .#{$prefix}--tag;
+
+  box-sizing: border-box;
 }
 
 :host(#{$prefix}-selectable-tag),

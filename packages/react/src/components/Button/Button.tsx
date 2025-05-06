@@ -6,16 +6,11 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import React from 'react';
 import { IconButton, IconButtonKind, IconButtonKinds } from '../IconButton';
-import { composeEventHandlers } from '../../tools/events';
-import { PolymorphicProps } from '../../types/common';
 import { PopoverAlignment } from '../Popover';
 import ButtonBase from './ButtonBase';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
 export const ButtonKinds = [
   'primary',
@@ -150,7 +145,6 @@ const Button: ButtonComponent = React.forwardRef(
     props: ButtonProps<T>,
     ref: React.Ref<unknown>
   ) => {
-    const tooltipRef = useRef(null);
     const {
       as,
       autoAlign = false,
@@ -178,13 +172,6 @@ const Button: ButtonComponent = React.forwardRef(
           'This may impact accessibility for screen reader users.'
       );
     }
-
-    const handleClick = (evt: React.MouseEvent) => {
-      // Prevent clicks on the tooltip from triggering the button click event
-      if (evt.target === tooltipRef.current) {
-        evt.preventDefault();
-      }
-    };
 
     const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
 
@@ -235,7 +222,7 @@ const Button: ButtonComponent = React.forwardRef(
           onFocus={onFocus}
           onBlur={onBlur}
           autoAlign={autoAlign}
-          onClick={composeEventHandlers([onClick, handleClick])}
+          onClick={onClick}
           renderIcon={iconOnlyImage ? null : ButtonImageElement} // avoid doubling the icon.
         >
           {iconOnlyImage ?? children}
