@@ -20,7 +20,7 @@ describe('cds-loading', function () {
 
   it('should render', async () => {
     const el = await fixture(loading);
-    expect(el).dom.to.equalSnapshot();
+    await expect(el).dom.to.equalSnapshot();
   });
 
   describe('Component API', () => {
