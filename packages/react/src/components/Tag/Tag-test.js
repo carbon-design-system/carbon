@@ -310,6 +310,7 @@ describe('Tag', () => {
   });
   it('Controlled selectable tag', () => {
     const ref = React.createRef();
+
     const { rerender } = render(
       <SelectableTag type="red" text="Test Tag" ref={ref} selected={true} />
     );
@@ -336,7 +337,6 @@ describe('Tag', () => {
     );
 
     const selectableTag = screen.getByRole('button', { name: 'Tag content' });
-
     await userEvent.click(selectableTag);
     expect(onChange).toHaveBeenCalledWith(false);
   });
@@ -352,7 +352,6 @@ describe('Tag', () => {
     );
 
     const selectableTag = screen.getByRole('button', { name: 'Tag content' });
-
     expect(selectableTag).toHaveAttribute('aria-pressed', 'true');
   });
   it('Controlled selectable tag should not be be selected by default if defaultSelected is false', () => {
@@ -367,7 +366,6 @@ describe('Tag', () => {
     );
 
     const selectableTag = screen.getByRole('button', { name: 'Tag content' });
-
     expect(selectableTag).toHaveAttribute('aria-pressed', 'false');
   });
 });
