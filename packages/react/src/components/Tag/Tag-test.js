@@ -310,32 +310,64 @@ describe('Tag', () => {
   });
   it('Controlled selectable tag', () => {
     const ref = React.createRef();
-    const { rerender, container } = render(
+    const { rerender } = render(
       <SelectableTag type="red" text="Test Tag" ref={ref} selected={true} />
     );
 
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
-    expect(container.firstChild).toHaveClass(
-      `${prefix}--tag--selectable-selected`
+    expect(screen.getByRole('button', { name: 'Test Tag' })).toHaveAttribute(
+      'aria-pressed',
+      'true'
     );
 
     rerender(
       <SelectableTag type="red" text="Test Tag" ref={ref} selected={false} />
     );
-    expect(container.firstChild).not.toHaveClass(
-      `${prefix}--tag--selectable-selected`
+    expect(screen.getByRole('button', { name: 'Test Tag' })).toHaveAttribute(
+      'aria-pressed',
+      'false'
     );
   });
   it('Controlled selectable tag, should call onChange', async () => {
     const onChange = jest.fn();
 
-    const { container } = render(
+    render(
       <SelectableTag text="Tag content" onChange={onChange} selected={true} />
     );
 
-    const selectableTag = container.firstChild;
+    const selectableTag = screen.getByRole('button', { name: 'Tag content' });
 
     await userEvent.click(selectableTag);
     expect(onChange).toHaveBeenCalledWith(false);
+  });
+  it('Controlled selectable tag should be selected by default if defaultSelected is true', () => {
+    const onChange = jest.fn();
+
+    render(
+      <SelectableTag
+        text="Tag content"
+        onChange={onChange}
+        defaultSelected={true}
+      />
+    );
+
+    const selectableTag = screen.getByRole('button', { name: 'Tag content' });
+
+    expect(selectableTag).toHaveAttribute('aria-pressed', 'true');
+  });
+  it('Controlled selectable tag should not be be selected by default if defaultSelected is false', () => {
+    const onChange = jest.fn();
+
+    render(
+      <SelectableTag
+        text="Tag content"
+        onChange={onChange}
+        defaultSelected={false}
+      />
+    );
+
+    const selectableTag = screen.getByRole('button', { name: 'Tag content' });
+
+    expect(selectableTag).toHaveAttribute('aria-pressed', 'false');
   });
 });

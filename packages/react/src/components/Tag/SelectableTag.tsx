@@ -62,6 +62,11 @@ export interface SelectableTagBaseProps {
   selected?: boolean;
 
   /**
+   * Specify the default state of the selectable tag.
+   */
+  defaultSelected?: boolean;
+
+  /**
    * Specify the size of the Tag. Currently supports either `sm`,
    * `md` (default) or `lg` sizes.
    */
@@ -90,6 +95,7 @@ const SelectableTag = forwardRef(
       selected,
       size,
       text,
+      defaultSelected = false,
       ...other
     }: SelectableTagProps<T>,
     forwardRef: ForwardedRef<HTMLButtonElement>
@@ -100,7 +106,7 @@ const SelectableTag = forwardRef(
     const [selectedTag, setSelectedTag] = useControllableState({
       value: selected,
       onChange: onChange,
-      defaultValue: false,
+      defaultValue: defaultSelected,
     });
     const tagClasses = classNames(`${prefix}--tag--selectable`, className, {
       [`${prefix}--tag--selectable-selected`]: selectedTag,
@@ -205,6 +211,11 @@ SelectableTag.propTypes = {
    * Specify the state of the selectable tag.
    */
   selected: PropTypes.bool,
+
+  /**
+   * Specify the default state of the selectable tag.
+   */
+  defaultSelected: PropTypes.bool,
 
   /**
    * Specify the size of the Tag. Currently supports either `sm`,
