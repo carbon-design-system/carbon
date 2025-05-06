@@ -18,7 +18,7 @@ describe('cds-unordered-list', () => {
     const ul = el.shadowRoot.querySelector('ul');
     expect(ul).to.exist;
 
-    expect(el).dom.to.equalSnapshot();
+    await expect(el).dom.to.equalSnapshot();
   });
 
   it('should render children as expected', async () => {
