@@ -26,7 +26,6 @@
     display: flex;
     justify-content: space-evenly;
     border-radius: convert.to-rem(4px);
-    background-color: transparent;
     block-size: layout.size('height');
     inline-size: 100%;
     outline: convert.to-rem(1px) solid $border-inverse;
@@ -56,7 +55,6 @@
     color: $text-secondary;
     text-align: start;
     text-decoration: none;
-    transition: all $duration-moderate-01 motion(standard, productive);
     white-space: nowrap;
 
     &::after {
@@ -71,11 +69,6 @@
       inset-inline-start: 0;
       transform: scaleY(0);
       transform-origin: bottom;
-      transition: all $duration-moderate-01 motion(standard, productive);
-
-      @media (prefers-reduced-motion: reduce) {
-        transition: none;
-      }
     }
 
     &:disabled::after {
@@ -101,6 +94,7 @@
     &:hover,
     &:active {
       z-index: 3;
+      background-color: $layer-hover;
       color: $text-primary;
     }
 
@@ -112,11 +106,6 @@
       &:hover {
         cursor: not-allowed;
       }
-    }
-
-    &:disabled:first-child,
-    &:disabled:last-child {
-      border-color: $border-disabled;
     }
   }
 
@@ -131,6 +120,19 @@
       content: '';
       inline-size: 100%;
     }
+
+    &:focus::after {
+      background-color: $focus-inset;
+      transform: scaleY(1);
+    }
+
+    &:focus:hover::after {
+      border-radius: 0;
+      background-color: $layer-hover;
+      border-block-end: convert.to-rem(1px) solid $border-inverse;
+      border-block-start: convert.to-rem(1px) solid $border-inverse;
+      box-shadow: none;
+    }
   }
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
@@ -141,54 +143,25 @@
   }
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
-    .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher--selected
-    ):hover:not([disabled]) {
-    &::before {
-      z-index: 0;
-      display: block;
-      background-color: $layer-hover;
-      block-size: 100%;
-      content: '';
-      inline-size: 100%;
-    }
-
-    // First-child hover adjustments
-    &:first-child:not(:focus)::before {
-      border-end-start-radius: convert.to-rem(4px);
-      border-inline-start: convert.to-rem(1px) solid $border-inverse;
-      border-start-start-radius: convert.to-rem(4px);
-    }
-
-    // Last-child hover adjustments
-    &:last-child:not(:focus)::before {
-      border-end-end-radius: convert.to-rem(4px);
-      border-inline-end: convert.to-rem(1px) solid $border-inverse;
-      border-start-end-radius: convert.to-rem(4px);
-    }
-  }
-
-  .#{$prefix}--content-switcher
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher__selected-hovered::before {
-    z-index: 0;
-    background-color: $layer-hover;
-    block-size: 100%;
-    border-block-end: convert.to-rem(1px) solid $border-inverse;
-    border-block-start: convert.to-rem(1px) solid $border-inverse;
-    content: '';
-    inline-size: 100%;
-  }
-
-  .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
     .#{$prefix}--content-switcher-btn:first-child {
     border-end-start-radius: convert.to-rem(4px);
     border-start-start-radius: convert.to-rem(4px);
+    box-shadow: inset convert.to-rem(1px) 0 0 0 $border-inverse;
+
+    &:disabled {
+      box-shadow: none;
+    }
   }
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
     .#{$prefix}--content-switcher-btn:last-child {
     border-end-end-radius: convert.to-rem(4px);
     border-start-end-radius: convert.to-rem(4px);
+    box-shadow: inset convert.to-rem(-1px) 0 0 0 $border-inverse;
+
+    &:disabled {
+      box-shadow: none;
+    }
   }
 
   .#{$prefix}--content-switcher
@@ -199,8 +172,8 @@
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:last-child {
     border: 0;
 
-    &:disabled {
-      border-radius: convert.to-rem(4px);
+    &:disabled::before {
+      display: none;
     }
   }
 
@@ -216,10 +189,8 @@
   }
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
-    .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher__selected-hovered
-    ):not(:focus):not(:hover):first-of-type::before {
-    display: none;
+    .#{$prefix}--content-switcher-btn:first-of-type::before {
+    background-color: transparent;
   }
 
   .#{$prefix}--content-switcher-btn:focus::before,
@@ -227,12 +198,8 @@
     + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:hover::before,
   .#{$prefix}--content-switcher-btn:hover
-    + .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher__selected-hovered
-    )::before,
-  .#{$prefix}--content-switcher--selected:not(
-      .#{$prefix}--content-switcher__selected-hovered
-    )::before,
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--selected::before,
   .#{$prefix}--content-switcher--selected
     + .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
@@ -253,7 +220,6 @@
 
   .#{$prefix}--content-switcher__icon {
     fill: $icon-secondary;
-    transition: fill $duration-fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--content-switcher__icon + span {
@@ -273,9 +239,44 @@
     fill: $icon-primary;
   }
 
+  .#{$prefix}--content-switcher-btn:focus:has(
+      + .#{$prefix}--content-switcher-btn:not(
+          .#{$prefix}--content-switcher--selected
+        ):hover
+    ),
+  .#{$prefix}--content-switcher-btn:not(
+      .#{$prefix}--content-switcher--selected
+    ):hover
+    + .#{$prefix}--content-switcher-btn:focus,
+  .#{$prefix}--content-switcher-btn:hover
+    + .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:has(
+      + .#{$prefix}--content-switcher-btn:hover
+    ) {
+    &::before {
+      z-index: 0;
+      border-radius: 0;
+      block-size: 100%;
+      border-block-end: convert.to-rem(1px) solid $border-inverse;
+      border-block-start: convert.to-rem(1px) solid $border-inverse;
+      box-shadow: inset 0 0 0 convert.to-rem(1px) $layer-hover;
+      content: '';
+      inline-size: 100%;
+    }
+
+    &:not(.#{$prefix}--content-switcher--selected)::after {
+      background-color: $focus-inset;
+      transform: scaleY(1);
+    }
+  }
+
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
     z-index: 3;
     color: $text-inverse;
+
+    &:hover {
+      background-color: transparent;
+    }
 
     &:disabled {
       background-color: $button-disabled;
@@ -306,68 +307,17 @@
   .#{$prefix}--content-switcher--icon-only .#{$prefix}--content-switcher-btn {
     align-items: center;
     padding: 0;
-    background-color: transparent;
+    transition: none;
 
     &:focus {
-      border: none;
       box-shadow: none;
-    }
-  }
-
-  .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher__selected-hovered::before {
-    background-color: $layer-hover;
-  }
-
-  .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper
-    .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher--selected
-    ):hover:not([disabled]) {
-    &::before {
-      z-index: -1;
-      display: block;
-      background-color: $layer-hover;
-      block-size: 100%;
-      content: '';
-      inline-size: 100%;
     }
   }
 
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:first-child
-    .#{$prefix}--content-switcher-btn:hover:not(:focus):not(
-      [disabled]
-    )::before {
-    border-end-start-radius: convert.to-rem(4px);
-    border-inline-start: convert.to-rem(1px) solid $border-inverse;
-    border-start-start-radius: convert.to-rem(4px);
-  }
-
-  .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:last-child
-    .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher--selected
-    ):hover:not(:focus):not([disabled])::before {
-    border-end-end-radius: convert.to-rem(4px);
-    border-inline-end: convert.to-rem(1px) solid $border-inverse;
-    border-start-end-radius: convert.to-rem(4px);
-  }
-
-  .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:first-child
-    .#{$prefix}--content-switcher-btn:not(:focus),
-  .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:last-child
-    .#{$prefix}--content-switcher-btn:not(:focus) {
-    &:disabled {
-      box-shadow: none;
-      color: $text-disabled;
-    }
-
-    &:hover {
-      box-shadow: none;
-    }
+    .#{$prefix}--content-switcher-btn:first-of-type::before {
+    background-color: transparent;
   }
 
   .#{$prefix}--content-switcher--icon-only
@@ -379,20 +329,20 @@
   }
 
   .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:first-child
-    .#{$prefix}--content-switcher--selected[disabled],
-  .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:last-child
-    .#{$prefix}--content-switcher--selected[disabled] {
-    border-color: $button-disabled;
-  }
-
-  .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:last-child
     .#{$prefix}--content-switcher-btn {
     border-end-end-radius: convert.to-rem(4px);
     border-start-end-radius: convert.to-rem(4px);
     box-shadow: inset convert.to-rem(-1px) 0 0 0 $border-inverse;
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:first-child
+    .#{$prefix}--content-switcher-btn[disabled],
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:last-child
+    .#{$prefix}--content-switcher-btn[disabled] {
+    box-shadow: none;
   }
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn {
@@ -408,6 +358,7 @@
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-btn
     svg {
+    z-index: 1;
     fill: $icon-primary;
   }
 
@@ -424,13 +375,6 @@
   }
 
   // Subtle border overrides
-  .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:first-of-type
-    .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher__selected-hovered
-    ):not(:hover):not(:focus)::before {
-    display: none;
-  }
 
   .#{$prefix}--content-switcher-btn:focus::before,
   .#{$prefix}--content-switcher-popover__wrapper:focus-within
@@ -441,8 +385,8 @@
     ):hover
     + .#{$prefix}--content-switcher-popover__wrapper
     .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher__selected-hovered
-    )::before,
+      .#{$prefix}--content-switcher--selected
+    ):not(:focus)::before,
   .#{$prefix}--content-switcher--selected::before,
   .#{$prefix}--content-switcher-popover--selected
     + .#{$prefix}--content-switcher-popover__wrapper
@@ -461,9 +405,7 @@
       .#{$prefix}--content-switcher--selected
     ):hover,
   .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher--selected:not(
-      .#{$prefix}--content-switcher--selected-hovered
-    )
+    .#{$prefix}--content-switcher-popover--selected
     + .#{$prefix}--content-switcher-popover--disabled
     .#{$prefix}--content-switcher-btn[disabled]:hover::before {
     background-color: transparent;
@@ -474,6 +416,43 @@
     background-color: $border-subtle;
   }
 
+  .#{$prefix}--content-switcher-popover__wrapper:has(
+      + .#{$prefix}--content-switcher-popover__wrapper
+        .#{$prefix}--content-switcher-btn:not(
+          .#{$prefix}--content-switcher--selected
+        ):hover
+    )
+    .#{$prefix}--content-switcher-btn:focus,
+  .#{$prefix}--content-switcher-popover__wrapper:not(
+      .#{$prefix}--content-switcher-popover--selected
+    ):hover
+    + .#{$prefix}--content-switcher-popover__wrapper
+    .#{$prefix}--content-switcher-btn:focus,
+  .#{$prefix}--content-switcher-popover__wrapper:hover
+    + .#{$prefix}--content-switcher-popover__wrapper
+    .#{$prefix}--content-switcher--selected,
+  .#{$prefix}--content-switcher-popover--selected:has(
+      + .#{$prefix}--content-switcher-popover__wrapper
+        .#{$prefix}--content-switcher-btn:hover
+    )
+    .#{$prefix}--content-switcher-btn {
+    &::before {
+      z-index: 0;
+      border-radius: 0;
+      block-size: 100%;
+      border-block-end: convert.to-rem(1px) solid $border-inverse;
+      border-block-start: convert.to-rem(1px) solid $border-inverse;
+      box-shadow: inset 0 0 0 convert.to-rem(1px) $layer-hover;
+      content: '';
+      inline-size: 100%;
+    }
+
+    &:not(.#{$prefix}--content-switcher--selected)::after {
+      background-color: $focus-inset;
+      transform: scaleY(1);
+    }
+  }
+
   // Low contrast selected state styling
   .#{$prefix}--content-switcher--low-contrast {
     background-color: $content-switcher-background;
@@ -482,11 +461,11 @@
 
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn {
-    border-block-end: convert.to-rem(1px) solid $border-strong; /* Bottom border only */
-    border-block-start: convert.to-rem(1px) solid $border-strong; /* Top border only */
+    border-color: $border-strong;
 
-    &:focus {
-      border: 0;
+    &:hover,
+    &:active {
+      background-color: $content-switcher-background-hover;
     }
 
     &::before {
@@ -508,57 +487,64 @@
     }
   }
 
-  .#{$prefix}--content-switcher--low-contrast:not(
-      .#{$prefix}--content-switcher--icon-only
-    )
-    .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher--selected
-    ):hover:not([disabled]) {
-    &::before {
-      background-color: $content-switcher-background-hover;
-    }
-
-    &:first-child:not(:focus)::before {
-      border-end-start-radius: convert.to-rem(4px);
-      border-inline-start: convert.to-rem(1px) solid $border-strong;
-      border-start-start-radius: convert.to-rem(4px);
-    }
-
-    &:last-child:not(:focus)::before {
-      border-end-end-radius: convert.to-rem(4px);
-      border-inline-end: convert.to-rem(1px) solid $border-strong;
-      border-start-end-radius: convert.to-rem(4px);
-    }
-  }
-
-  .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher__selected-hovered::before {
-    background-color: $content-switcher-background-hover;
-    border-block-end: convert.to-rem(1px) solid $border-strong;
-    border-block-start: convert.to-rem(1px) solid $border-strong;
-  }
-
-  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher:not(
-      .#{$prefix}--content-switcher--icon-only
-    )
-    .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher--selected
-    ):not(:focus):not(:disabled) {
-    &:first-child {
-      box-shadow: inset convert.to-rem(1px) 0 0 0 $border-strong;
-    }
-
-    &:last-child {
-      box-shadow: inset convert.to-rem(-1px) 0 0 0 $border-strong;
-    }
-  }
-
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn:not(
       .#{$prefix}--content-switcher--selected
     ) {
     &:focus::before {
+      background: transparent;
+    }
+
+    &:focus::after {
+      background-color: $content-switcher-background;
       box-shadow: inset 0 0 0 convert.to-rem(2px) $focus;
+    }
+
+    &:focus:hover::after {
+      border-color: $border-strong;
+      background-color: $content-switcher-background-hover;
+      box-shadow: none;
+    }
+  }
+
+  .#{$prefix}--content-switcher--low-contrast:not(
+      .#{$prefix}--content-switcher--icon-only
+    )
+    .#{$prefix}--content-switcher-btn:first-child {
+    box-shadow: inset convert.to-rem(1px) 0 0 0 $border-strong;
+  }
+
+  .#{$prefix}--content-switcher--low-contrast:not(
+      .#{$prefix}--content-switcher--icon-only
+    )
+    .#{$prefix}--content-switcher-btn:last-child {
+    box-shadow: inset convert.to-rem(-1px) 0 0 0 $border-strong;
+  }
+
+  .#{$prefix}--content-switcher--low-contrast {
+    .#{$prefix}--content-switcher-btn:focus:has(
+        + .#{$prefix}--content-switcher-btn:not(
+            .#{$prefix}--content-switcher--selected
+          ):hover
+      ),
+    .#{$prefix}--content-switcher-btn:not(
+        .#{$prefix}--content-switcher--selected
+      ):hover
+      + .#{$prefix}--content-switcher-btn:focus,
+    .#{$prefix}--content-switcher-btn:hover
+      + .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:has(
+        + .#{$prefix}--content-switcher-btn:hover
+      ) {
+      &::before {
+        border-color: $border-strong;
+        box-shadow: inset 0 0 0 convert.to-rem(1px)
+          $content-switcher-background-hover;
+      }
+
+      &:not(.#{$prefix}--content-switcher--selected)::after {
+        background-color: $content-switcher-background;
+      }
     }
   }
 
@@ -567,6 +553,10 @@
     @include type-style('heading-compact-01');
 
     color: $text-primary;
+
+    &:hover {
+      background-color: transparent;
+    }
 
     &::after {
       border-radius: convert.to-rem(4px);
@@ -580,6 +570,7 @@
 
     &:disabled {
       border: convert.to-rem(1px) solid $border-disabled;
+      border-radius: convert.to-rem(4px);
       background-color: $content-switcher-selected;
       color: $text-disabled;
     }
@@ -590,25 +581,17 @@
   }
 
   .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher__selected-hovered
-    ):focus::before,
+    .#{$prefix}--content-switcher-btn:focus::before,
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn:focus
-    + .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher__selected-hovered
-    )::before,
+    + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn:hover::before,
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher-btn:hover
-    + .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher__selected-hovered
-    )::before,
+    + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher--low-contrast
-    .#{$prefix}--content-switcher--selected:not(
-      .#{$prefix}--content-switcher__selected-hovered
-    )::before,
+    .#{$prefix}--content-switcher--selected::before,
   .#{$prefix}--content-switcher--low-contrast
     .#{$prefix}--content-switcher--selected
     + .#{$prefix}--content-switcher-btn::before {
@@ -638,49 +621,14 @@
   // low contrast icons
 
   .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper
-    .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher--selected
-    ):hover:not([disabled]) {
-    &::before {
-      background-color: $content-switcher-background-hover;
-    }
-  }
-
-  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:first-child
-    .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher--selected
-    ):hover:not([disabled]) {
-    &::before {
-      border-color: $border-strong;
-    }
-
-    &:focus::before {
-      border: none;
-    }
+    .#{$prefix}--content-switcher-btn:not([disabled]) {
+    box-shadow: inset convert.to-rem(1px) 0 0 0 $border-strong;
   }
 
   .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:last-child
-    .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher--selected
-    ):hover:not([disabled])::before {
-    border-color: $border-strong;
-  }
-
-  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:first-of-type
-    .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher--selected
-    ):not(:focus):not(:disabled) {
-    box-shadow: inset convert.to-rem(1px) 0 0 0 $border-strong;
-  }
-  .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-popover__wrapper:last-of-type
-    .#{$prefix}--content-switcher-btn:not(
-      .#{$prefix}--content-switcher--selected
-    ):not(:focus):not(:disabled) {
+    .#{$prefix}--content-switcher-btn:not([disabled]) {
     box-shadow: inset convert.to-rem(-1px) 0 0 0 $border-strong;
   }
 
@@ -713,11 +661,9 @@
     svg {
     fill: $icon-disabled;
   }
-
   .#{$prefix}--content-switcher--low-contrast.#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled {
     border-color: $border-disabled;
-    color: $text-disabled;
   }
 
   .#{$prefix}--content-switcher--low-contrast
@@ -745,5 +691,38 @@
     + .#{$prefix}--content-switcher-popover__wrapper
     .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
+  }
+
+  .#{$prefix}--content-switcher--low-contrast {
+    .#{$prefix}--content-switcher-popover__wrapper:has(
+        + .#{$prefix}--content-switcher-popover__wrapper
+          .#{$prefix}--content-switcher-btn:not(
+            .#{$prefix}--content-switcher--selected
+          ):hover
+      )
+      .#{$prefix}--content-switcher-btn:focus,
+    .#{$prefix}--content-switcher-popover__wrapper:not(
+        .#{$prefix}--content-switcher-popover--selected
+      ):hover
+      + .#{$prefix}--content-switcher-popover__wrapper
+      .#{$prefix}--content-switcher-btn:focus,
+    .#{$prefix}--content-switcher-popover__wrapper:hover
+      + .#{$prefix}--content-switcher-popover__wrapper
+      .#{$prefix}--content-switcher--selected,
+    .#{$prefix}--content-switcher-popover--selected:has(
+        + .#{$prefix}--content-switcher-popover__wrapper
+          .#{$prefix}--content-switcher-btn:hover
+      )
+      .#{$prefix}--content-switcher-btn {
+      &::before {
+        border-color: $border-strong;
+        box-shadow: inset 0 0 0 convert.to-rem(1px)
+          $content-switcher-background-hover;
+      }
+
+      &:not(.#{$prefix}--content-switcher--selected)::after {
+        background-color: $content-switcher-background;
+      }
+    }
   }
 }

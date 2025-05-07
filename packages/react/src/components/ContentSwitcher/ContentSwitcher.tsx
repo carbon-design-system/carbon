@@ -248,31 +248,6 @@ export default class ContentSwitcher extends React.Component<
               selected: index === this.state.selectedIndex,
               ref: this.handleItemRef(index),
               size,
-              onMouseEnter: () => {
-                const { selectedIndex } = this.state;
-                // Check if the hovered index is adjacent to the selected button
-                if (
-                  typeof selectedIndex !== 'undefined' &&
-                  Math.abs(index - selectedIndex) === 1
-                ) {
-                  const selectedBtn = this._switchRefs[selectedIndex];
-                  selectedBtn.classList.add(
-                    `${prefix}--content-switcher__selected-hovered`
-                  );
-                }
-              },
-              onMouseLeave: () => {
-                const { selectedIndex } = this.state;
-                if (
-                  typeof selectedIndex !== 'undefined' &&
-                  Math.abs(index - selectedIndex) === 1
-                ) {
-                  const selectedBtn = this._switchRefs[selectedIndex];
-                  selectedBtn.classList.remove(
-                    `${prefix}--content-switcher__selected-hovered`
-                  );
-                }
-              },
             })
           )}
       </LayoutConstraint>
