@@ -17,6 +17,7 @@ const types = {
 const args = {
   type: null,
   paragraph: true,
+  heading: false,
   lineCount: 3,
   width: '100%',
 };
@@ -26,6 +27,10 @@ const argTypes = {
     control: 'select',
     description: 'Indicate the type of skeleton text, heading or regular.',
     options: types,
+  },
+  heading: {
+    control: 'boolean',
+    description: 'Set to true to use heading style',
   },
   paragraph: {
     control: 'boolean',
@@ -55,11 +60,12 @@ export const Playground = {
   args,
   argTypes,
   render: (args) => {
-    const { type, paragraph, lineCount, width } = args ?? {};
+    const { type, heading, paragraph, lineCount, width } = args ?? {};
     return html`
       <cds-skeleton-text
         type="${ifDefined(type)}"
         ?paragraph="${paragraph}"
+        ?heading="${heading}"
         lineCount="${lineCount}"
         width="${width}">
       </cds-skeleton-text>
