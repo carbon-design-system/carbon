@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,7 +18,7 @@ import {
   ToggletipActions,
 } from '../Toggletip';
 import { IconButton } from '../IconButton';
-import { mapPopoverAlignProp } from '../../tools/createPropAdapter';
+import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
@@ -122,10 +122,6 @@ export type NewAlignment =
   | 'right-start';
 
 export type Alignment = DeprecatedAlignment | NewAlignment;
-
-const propMappingFunction = (deprecatedValue) => {
-  return mapPopoverAlignProp(deprecatedValue);
-};
 
 export interface AILabelProps {
   AILabelContent?: React.ReactNode;
@@ -282,7 +278,6 @@ AILabel.propTypes = {
       'right-end',
       'right-start',
     ]),
-    //allowed prop values
     [
       'top',
       'top-start',
@@ -297,8 +292,7 @@ AILabel.propTypes = {
       'right-start',
       'right-end',
     ],
-    //optional mapper function
-    propMappingFunction
+    mapPopoverAlign
   ),
 
   /**
