@@ -63,6 +63,8 @@
       @media (prefers-reduced-motion: reduce) {
         transition: none;
       }
+
+      @include high-contrast-mode('selected');
     }
 
     &:disabled::after {
@@ -302,6 +304,8 @@
     svg {
     z-index: 1;
     fill: $icon-inverse;
+
+    @include high-contrast-mode('icon-fill-selected');
   }
 
   .#{$prefix}--content-switcher--icon-only.#{$prefix}--content-switcher--sm
