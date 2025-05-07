@@ -11,6 +11,6 @@ describe('cds-checkbox-skeleton', function () {
   it('should render', async () => {
     const skeleton = html`<cds-checkbox-skeleton></cds-checkbox-skeleton>`;
     const el = await fixture(skeleton);
-    expect(el).dom.to.equalSnapshot();
+    await expect(el).dom.to.equalSnapshot();
   });
 });

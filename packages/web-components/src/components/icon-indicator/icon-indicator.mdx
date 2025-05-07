@@ -1,40 +1,51 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as IconIndicatorStories from './icon-indicator.stories';
 
 <Meta of={IconIndicatorStories} />
 
 # Icon indicator
 
-The icon-indicator component is useful for communicating severity level
+## Table of Contents
+
+- [Overview](#overview)
+  - [Kind](#kind)
+  - [Size](#size)
+  - [Customizing the label](#customizing-the-label)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+The `icon-indicator` component is useful for communicating severity level
 information to users. The shapes and colors, communicate severity that enables
 users to quickly assess and identify status and respond accordingly.
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/icon-indicator)
-> example implementation.
+<Canvas of={IconIndicatorStories.Default} />
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/icon-indicator)
+## Kind
 
-## Getting started
+Icon indicators can take the form of failed, caution major, caution minor,
+undefined, succeeded, normal, in-progress incomplete, not started, pending,
+unknown, and informative.
 
-Here's a quick example to get you started.
+## Size
 
-### JS (via import)
+Icon indicators have two size options 16 and 20. The default is 16.
 
-```javascript
-import '@carbon/web-components/es/components/icon-indicator/index.js';
-```
+## Customizing the label
 
-<Markdown>{`${cdnJs({ components: ['icon-indicator'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+You can set a string to customize the label of the Icon indicator.
 
-### HTML
-
-```html
-<cds-icon-indicator kind="failed" text="Failed"></cds-icon-indicator>
-```
-
-## `<cds-icon-indicator>` attributes and properties
+## Component API
 
 <ArgTypes of="cds-icon-indicator" />
+
+<Markdown>{`${cdnJs({ components: ['icon-indicator'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/icon-indicator/icon-indicator.mdx).
