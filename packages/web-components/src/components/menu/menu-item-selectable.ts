@@ -88,9 +88,7 @@ class CDSmenuItemSelectable extends LitElement {
       menuItemSelectable.addEventListener('keydown', this._handleKeydown);
     }
 
-    // this.shadowRoot?.querySelector(`${prefix}-menu-item`)?.addEventListener('keydown', this._handleKeydown);
-
-    this.setAttribute('tabindex', '-1'); // this fixed the arrow key bug
+    this.setAttribute('tabindex', '-1');
     this.context.updateFromChild({ hasSelectableItems: true });
   }
 
