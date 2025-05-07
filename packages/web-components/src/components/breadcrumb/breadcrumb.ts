@@ -29,7 +29,7 @@ class CDSBreadcrumb extends LitElement {
    * Specify the size of the Breadcrumb. Currently
    * supports the following: `sm` & `md` (default: 'md')
    */
-  @property()
+  @property({ type: BREADCRUMB_SIZE, reflect: true, attribute: 'size' })
   size = BREADCRUMB_SIZE.MEDIUM;
 
   /**
@@ -64,6 +64,18 @@ class CDSBreadcrumb extends LitElement {
         <slot @slotchange="${this._handleSlotChange}"></slot>
       </ol>
     `;
+  }
+
+  updated(changedProperties) {
+    if (changedProperties.has('size')) {
+      const items = document
+        .querySelector(`${prefix}-breadcrumb`)
+        ?.querySelectorAll(`${prefix}-breadcrumb-item`);
+      items?.forEach((item) => {
+        const link = item.querySelector(`${prefix}-breadcrumb-link`);
+        link?.setAttribute('size', this.size);
+      });
+    }
   }
 
   static styles = styles;
