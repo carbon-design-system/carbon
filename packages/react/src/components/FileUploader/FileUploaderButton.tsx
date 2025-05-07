@@ -9,12 +9,12 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import { matches, keys } from '../../internal/keyboard';
-import { ButtonKinds } from '../../prop-types/types';
 import { uniqueId } from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { ReactAttr } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
+import { ButtonKinds } from '../Button';
 
 export interface FileUploaderButtonProps
   extends Omit<ReactAttr<HTMLButtonElement>, 'onChange' | 'tabIndex'> {
