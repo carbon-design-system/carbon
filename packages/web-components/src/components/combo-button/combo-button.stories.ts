@@ -6,10 +6,7 @@
  */
 
 import { html } from 'lit';
-import './combo-button';
-import '../menu/index';
-import '../menu/menu-item';
-import '../menu/menu-item-divider';
+import './index';
 import CopyFile16 from '@carbon/icons/lib/copy--file/16';
 import Export16 from '@carbon/icons/lib/export/16';
 
@@ -19,7 +16,7 @@ const args = {
   menuAlignment: 'bottom',
 };
 
-// DOUBLE CHECK ARGS AND ARG TYPES
+// DOUBLE CHECK ARGS AND ARG TYPES -> onClick
 const argTypes = {
   disabled: {
     control: 'boolean',
@@ -41,6 +38,11 @@ const argTypes = {
       'bottom-end',
     ],
   },
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
   size: {
     control: 'radio',
     description: `Specify the size of the button and menu.
@@ -49,25 +51,22 @@ const argTypes = {
 'lg'`,
     options: ['sm', 'md', 'lg'],
   },
-  tabIndex: {
-    control: 'number',
-    description: `Specify the tabIndex of the button.`,
+  tooltipAlignment: {
+    control: 'radio',
+    description: 'Specify how the trigger tooltip should be aligned.',
   },
 };
 
 export const Default = {
   argTypes: argTypes,
   args: args,
-  // render: ({ disabled, label, menuAlignment, onClick, size }) => html`
-  // ADD onClick, tooltipAlignment, translateWithId
-  // DROPDOWN BUTTON NEEDS TO BE A SEPARATE BUTTON
-  render: ({ disabled, label, menuAlignment, size, tabIndex }) => html`
+  render: ({ disabled, label, menuAlignment, size, tooltipAlignment }) => html`
     <cds-combo-button
       label="${label}"
       menu-alignment=${menuAlignment}
       size=${size}
       ?disabled=${disabled}
-      tab-index=${tabIndex}>
+      .tooltip-alignment="${tooltipAlignment}">
       <cds-menu>
         <cds-menu-item
           label="Second action with a long label description"></cds-menu-item>
@@ -83,7 +82,7 @@ export const Default = {
 export const ExperimentalAutoAlign = {
   argTypes: argTypes,
   args: args,
-  render: ({ disabled, label, menuAlignment, size, tabIndex }) => html`
+  render: ({ disabled, label, menuAlignment, size, tooltipAlignment }) => html`
     <div style="width: 5000px; height: 5000px;">
       <div style="position: absolute; bottom: 20px">
         <cds-combo-button
@@ -91,7 +90,7 @@ export const ExperimentalAutoAlign = {
           menu-alignment=${menuAlignment}
           size=${size}
           ?disabled=${disabled}
-          tab-index=${tabIndex}>
+          .tooltip-alignment="${tooltipAlignment}">
           <cds-menu>
             <cds-menu-item
               label="Second action with a long label description"></cds-menu-item>
@@ -107,13 +106,13 @@ export const ExperimentalAutoAlign = {
 export const withDanger = {
   argTypes: argTypes,
   args: args,
-  render: ({ disabled, label, menuAlignment, size, tabIndex }) => html`
+  render: ({ disabled, label, menuAlignment, size, tooltipAlignment }) => html`
     <cds-combo-button
       label="${label}"
       menu-alignment=${menuAlignment}
       size=${size}
       ?disabled=${disabled}
-      tab-index=${tabIndex}>
+      .tooltip-alignment="${tooltipAlignment}">
       <cds-menu>
         <cds-menu-item
           label="Second action with a long label description"></cds-menu-item>
@@ -129,17 +128,17 @@ export const withDanger = {
 export const withIcons = {
   argTypes: argTypes,
   args: {
-    label: 'Save Record',
+    label: 'Save record',
     size: 'lg',
     menuAlignment: 'bottom',
   },
-  render: ({ disabled, label, menuAlignment, size, tabIndex }) => html`
+  render: ({ disabled, label, menuAlignment, size, tooltipAlignment }) => html`
     <cds-combo-button
       label="${label}"
       menu-alignment=${menuAlignment}
       size=${size}
       ?disabled=${disabled}
-      tab-index=${tabIndex}>
+      .tooltip-alignment="${tooltipAlignment}">
       <cds-menu>
         <cds-menu-item label="Save as a copy">
           ${CopyFile16({ slot: 'render-icon' })}
