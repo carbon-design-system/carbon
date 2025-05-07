@@ -12,7 +12,6 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './combo-button.scss?lit';
-
 import '../button/index';
 import '../menu/index';
 import '../icon-button/index';
@@ -21,12 +20,13 @@ import CDSMenu from '../menu/menu';
 import CDSButton from '../button/button';
 import { COMBO_BUTTON_SIZE, COMBO_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
+import { ICON_BUTTON_TOOLTIP_ALIGNMENT } from '../icon-button/defs';
 import FloatingUIController from '../../globals/controllers/floating-controller';
 
 export { COMBO_BUTTON_SIZE, COMBO_BUTTON_TOOLTIP_ALIGNMENT };
 
 /**
- * Menu button.
+ * Combo button.
  * @element cds-combo-button
  */
 @customElement(`${prefix}-combo-button`)
@@ -51,8 +51,8 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
   /**
    * Provide the label to be rendered on the primary action button.
    */
-  @property({ type: String })
-  label;
+  @property()
+  label!: string;
 
   /**
    * Experimental property. Specify how the menu should align with the button element
@@ -76,13 +76,7 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
    * Specify how the trigger tooltip should be aligned.
    */
   @property({ reflect: true, attribute: 'tooltip-alignment' })
-  tooltipAlignment = COMBO_BUTTON_TOOLTIP_ALIGNMENT.CENTER;
-
-  /**
-   * Optional method that takes in a message id and returns an internationalized string.
-   */
-  @property({ type: Function })
-  translateWithId?: (event: Event) => void;
+  tooltipAlignment = ICON_BUTTON_TOOLTIP_ALIGNMENT.TOP;
 
   @HostListener('click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
@@ -119,7 +113,7 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
         menu.open = this._open;
 
         this._menuController.setPlacement({
-          trigger: this._triggerNode,
+          trigger: this,
           target: menu,
           alignment: this.menuAlignment,
           styleElement,
@@ -135,15 +129,14 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
   }
 
   render() {
-    const { size, disabled, tabIndex, label, tooltipAlignment } = this;
+    const { size, disabled, label, tooltipAlignment, menuAlignment } = this;
     return html`
-      <cds-button size=${size} ?disabled=${disabled} tab-index=${tabIndex}>
-        ${label}
-      </cds-button>
+      <cds-button size=${size} ?disabled=${disabled}> ${label} </cds-button>
       <cds-icon-button
         size=${size}
         ?disabled=${disabled}
         align=${tooltipAlignment}
+        menu-alignment=${menuAlignment}
         part="trigger">
         ${ChevronDown16({ slot: 'icon' })}
         <span slot="tooltip-content">Additional actions</span>
