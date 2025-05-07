@@ -16,6 +16,10 @@
       fill: ButtonText;
     }
 
+    @if ($type == 'icon-fill-selected') {
+      fill: HighlightText;
+    }
+
     @if ($type == 'focus') {
       color: Highlight;
       outline: 1px solid Highlight;
@@ -26,7 +30,11 @@
     }
 
     @if ($type == 'bold-border') {
-      border: 2px solid Highlight;
+      border: 2px solid ButtonBorder;
+    }
+
+    @if ($type == 'selected') {
+      background-color: SelectedItem;
     }
 
     @if ($type == 'disabled') {
