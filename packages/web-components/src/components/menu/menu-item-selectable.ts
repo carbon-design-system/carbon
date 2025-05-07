@@ -75,9 +75,31 @@ class CDSmenuItemSelectable extends LitElement {
     }
   };
 
-  firstUpdated(): void {
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('keydown', this._handleKeydown);
+  }
+
+  firstUpdated() {
+    const menuItemSelectable = this.shadowRoot?.querySelector(
+      `${prefix}-menu-item`
+    ) as HTMLElement | null;
+    if (menuItemSelectable) {
+      menuItemSelectable.addEventListener('keydown', this._handleKeydown);
+    }
+
+    // this.shadowRoot?.querySelector(`${prefix}-menu-item`)?.addEventListener('keydown', this._handleKeydown);
+
+    this.setAttribute('tabindex', '-1'); // this fixed the arrow key bug
     this.context.updateFromChild({ hasSelectableItems: true });
   }
+
+  _handleKeydown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      this._handleClick(e);
+    }
+  };
+
   render() {
     const { label, selected, _handleClick: handleClick } = this;
 
