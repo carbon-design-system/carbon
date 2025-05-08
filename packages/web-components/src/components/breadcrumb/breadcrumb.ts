@@ -29,7 +29,7 @@ class CDSBreadcrumb extends LitElement {
    * Specify the size of the Breadcrumb. Currently
    * supports the following: `sm` & `md` (default: 'md')
    */
-  @property({ type: BREADCRUMB_SIZE, reflect: true, attribute: 'size' })
+  @property({ type: BREADCRUMB_SIZE, reflect: true })
   size = BREADCRUMB_SIZE.MEDIUM;
 
   /**
