@@ -341,6 +341,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/mariyageorge01"><img src="https://avatars.githubusercontent.com/u/166684108?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mariya George</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=mariyageorge01" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/sojinantony01"><img src="https://avatars.githubusercontent.com/u/29255847?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sojin antony</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=sojinantony01" title="Code">💻</a></td>
   </tr>
 </table>
 
