@@ -27,10 +27,6 @@ const argTypes = {
     description: 'Indicate the type of skeleton text, heading or regular.',
     options: types,
   },
-  heading: {
-    control: 'boolean',
-    description: 'Set to true to use heading style',
-  },
   paragraph: {
     control: 'boolean',
     description: 'Set this to true to generate multiple lines of text.',
