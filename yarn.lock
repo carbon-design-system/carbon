@@ -2036,7 +2036,6 @@ __metadata:
     style-loader: "npm:^4.0.0"
     tabbable: "npm:^6.2.0"
     typescript-config-carbon: "npm:^0.5.0"
-    use-resize-observer: "npm:^9.1.0"
     webpack: "npm:^5.65.0"
     webpack-dev-server: "npm:^5.0.0"
     window-or-global: "npm:^1.0.1"
