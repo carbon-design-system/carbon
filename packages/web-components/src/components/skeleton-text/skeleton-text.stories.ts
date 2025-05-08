@@ -15,7 +15,6 @@ const types = {
 };
 
 const args = {
-  type: null,
   paragraph: true,
   heading: false,
   lineCount: 3,
