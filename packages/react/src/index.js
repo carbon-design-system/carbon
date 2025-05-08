@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// TODO: What's the purpose of having both this file and
+// packages/react/src/index.ts?
+
 import './feature-flags';
 
 export { Accordion } from './components/Accordion';
