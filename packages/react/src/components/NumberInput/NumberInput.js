@@ -30,15 +30,6 @@ const defaultTranslations = {
   [translationIds['decrement.number']]: 'Decrement number',
 };
 
-const capMin = (min, value) =>
-  isNaN(min) || (!min && min !== 0) || isNaN(value) || (!value && value !== 0)
-    ? value
-    : Math.max(min, value);
-const capMax = (max, value) =>
-  isNaN(max) || (!max && max !== 0) || isNaN(value) || (!value && value !== 0)
-    ? value
-    : Math.min(max, value);
-
 class NumberInput extends Component {
   static propTypes = {
     /**
@@ -221,7 +212,6 @@ class NumberInput extends Component {
     // If `useControlledStateWithValue` feature flag is on, do nothing here.
     // Otherwise, do prop -> state sync with "value capping".
     //// Value capping removed in #8965
-    //// value: capMax(max, capMin(min, value)), (L223)
     return useControlledStateWithValue || prevValue === value
       ? null
       : {
@@ -278,35 +268,63 @@ class NumberInput extends Component {
     }
   };
 
+  getDecimalPlaces = (num) => {
+    const parts = num.toString().split('.');
+    return parts[1] ? parts[1].length : 0;
+  };
+
+  clamp = (num, min, max) => Math.min(max, Math.max(min, num));
+
   handleArrowClick = (evt, direction) => {
     let value =
       typeof this.state.value === 'string'
         ? Number(this.state.value)
         : this.state.value;
-    const { disabled, min, max, step, onChange, onClick } = this.props;
+    const {
+      disabled,
+      min,
+      max,
+      step,
+      onChange,
+      onClick,
+      allowEmpty,
+    } = this.props;
     const conditional =
       direction === 'down'
         ? (min !== undefined && value > min) || min === undefined
         : (max !== undefined && value < max) || max === undefined;
 
     if (!disabled && conditional) {
-      value = direction === 'down' ? value - step : value + step;
-      value = capMax(max, capMin(min, value));
+      const rawValue = direction === 'down' ? value - step : value + step;
+      const precision = Math.max(
+        this.getDecimalPlaces(value),
+        this.getDecimalPlaces(step)
+      );
+      const floatValue = parseFloat(rawValue.toFixed(precision));
+      const newValue = this.clamp(
+        floatValue,
+        min ?? -Infinity,
+        max ?? Infinity
+      );
+
+      const finalValue =
+        allowEmpty && this.state.value === '' && step === 0 ? '' : newValue;
+
       evt.persist();
       evt.imaginaryTarget = this._inputRef;
       this.setState(
         {
-          value,
+          value: finalValue,
         },
         () => {
           //TO-DO v11: update these events to return the same things --> evt, {value, direction}
           if (useControlledStateWithValue) {
-            onClick && onClick(evt, { value, direction });
-            onChange && onChange(evt, { value, direction });
+            onClick && onClick(evt, { finalValue, direction });
+            onChange && onChange(evt, { finalValue, direction });
           } else {
             // value added as a 3rd argument rather than in same obj so it doesn't break in v10
-            onClick && onClick(evt, direction, value);
-            onChange && onChange(evt, direction, value);
+            onClick && onClick(evt, direction, finalValue);
+            onChange && onChange(evt, direction, finalValue);
           }
         }
       );
