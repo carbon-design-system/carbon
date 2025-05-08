@@ -324,6 +324,7 @@ describe('Tag', () => {
     rerender(
       <SelectableTag type="red" text="Test Tag" ref={ref} selected={false} />
     );
+
     expect(screen.getByRole('button', { name: 'Test Tag' })).toHaveAttribute(
       'aria-pressed',
       'false'
