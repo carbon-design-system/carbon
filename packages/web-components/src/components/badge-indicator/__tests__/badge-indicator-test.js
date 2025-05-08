@@ -15,7 +15,7 @@ describe('cds-badge-indicator', function () {
 
   it('should render', async () => {
     const el = await fixture(basicBadgeIndicator);
-    expect(el).dom.to.equalSnapshot();
+    await expect(el).dom.to.equalSnapshot();
   });
 
   it('should set a count', async () => {
