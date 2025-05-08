@@ -102,7 +102,7 @@ HeaderMenuItem.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
+   * If `true` and `aria-current !== 'page'`, applies selected styles to the item and sets `aria-current="true"`.
    */
   isActive: PropTypes.bool,
 
