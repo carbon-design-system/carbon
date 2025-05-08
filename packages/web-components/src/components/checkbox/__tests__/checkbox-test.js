@@ -11,7 +11,7 @@ describe('cds-checkbox', function () {
   it('should render', async () => {
     const checkbox = html`<cds-checkbox>Checkbox Label</cds-checkbox>`;
     const el = await fixture(checkbox);
-    expect(el).dom.to.equalSnapshot();
+    await expect(el).dom.to.equalSnapshot();
   });
 
   it('should set the `id` on the <input> element', async () => {

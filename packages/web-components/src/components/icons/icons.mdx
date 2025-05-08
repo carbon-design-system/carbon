@@ -1,31 +1,23 @@
-import { ArgTypes, Meta } from '@storybook/blocks';
+import { Canvas, Meta } from '@storybook/blocks';
 import * as IconsStories from './icons.stories';
 
 <Meta of={IconsStories} />
 
 # Icons
 
-Icons can be utilized by specifying the icon name and size in the import.
+[Usage guidelines](https://carbondesignsystem.com/elements/icons/usage/)
 
-## Getting started
+## Table of Contents
 
-Here's a quick example to get you started.
+- [Overview](#overview)
+- [Feedback](#feedback)
 
-### JS (via import)
+## Overview
 
-```javascript
-import Add16 from '@carbon/icons/lib/add/16.js';
+<Canvas of={IconsStories.Default} />
 
-function App() {
-  return (
-    html`
-    ${Add16({
-     class: 'test-class',
-     'aria-label': 'add',
-     'aria-describedby': 'id-title-1',
-     children: svg`<title id="id-title-1">add</title>`, })}`
-  );
-```
+## Feedback
 
-Icons library can be found
-[here](https://www.carbondesignsystem.com/guidelines/icons/library).
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/icons/icons.mdx).
