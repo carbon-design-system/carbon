@@ -8,11 +8,30 @@
 @forward './theme/theme' hide theme;
 @use './theme/theme';
 @use './layer/layer-tokens';
+@use './utilities/custom-property';
 
 /// Include the CSS Custom Properties for the active theme or a given theme on
 /// a selector
 @mixin theme($args...) {
   @include theme.theme($args...);
+
+  // If the system has a dark high-contrast theme, then icons need to be displayed in white (or a light color),
+  // and vice-versa.  Otherwise, they become invisible.  Importantly, this must happen regardless of the
+  // Carbon theme setting.  Therefore, we need to override the CSS custom properties set above.
+  // Note that text colors are set automatically by the OS; the problem is only SVG.  See:
+  // - https://github.com/carbon-design-system/carbon/issues/19015
+  // - https://developer.mozilla.org/en-US/docs/Web/CSS/system-color.
+  // - https://carbondesignsystem.com/elements/color/tokens/#icon
+  @media screen and (-ms-high-contrast: active), (forced-colors: active) {
+    @include custom-property.declaration('icon-primary', ButtonText);
+    @include custom-property.declaration('icon-secondary', ButtonText);
+    @include custom-property.declaration('icon-disabled', GrayText);
+    @include custom-property.declaration('icon-on-color-disabled', GrayText);
+
+    // Since icon-inverse is generally used to indicated selected icons, use SelectedItemText.
+    @include custom-property.declaration('icon-inverse', SelectedItemText);
+    @include custom-property.declaration('icon-on-color', SelectedItemText);
+  }
 
   // Note: we need to re-emit the contextual layer tokens as part of the theme
   // mixin. Otherwise, the layer tokens are defined at the :root level and will
