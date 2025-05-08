@@ -63,7 +63,6 @@ export const Playground = {
     const { type, heading, paragraph, lineCount, width } = args ?? {};
     return html`
       <cds-skeleton-text
-        type="${ifDefined(type)}"
         ?paragraph="${paragraph}"
         ?heading="${heading}"
         lineCount="${lineCount}"
