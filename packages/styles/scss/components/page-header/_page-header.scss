@@ -38,19 +38,12 @@
 
   .#{$prefix}--page-header__content__title-wrapper {
     @include breakpoint-down(md) {
-      display: flex;
       flex-direction: column;
-      grid-gap: $spacing-05;
     }
 
-    display: grid;
+    display: flex;
+    justify-content: space-between;
     gap: $spacing-05;
-    grid-template-columns: auto minmax(
-        var(--pageheader-title-grid-width, 0),
-        1fr
-      );
-    margin-block-end: 1rem;
-    min-block-size: convert.to-rem(40px);
   }
 
   .#{$prefix}--page-header__content__start {
@@ -61,11 +54,6 @@
 
   .#{$prefix}--page-header__content__title-container {
     display: flex;
-  }
-
-  .#{$prefix}--page-header__content__title-container
-    .#{$prefix}--definition-term {
-    border-block-end: none;
   }
 
   .#{$prefix}--page-header__content__contextual-actions {
@@ -97,23 +85,13 @@
 
   .#{$prefix}--page-header__content__page-actions {
     display: flex;
-    justify-content: right;
-
-    @include breakpoint-down('md') {
-      justify-content: left;
-      margin-block-start: 0;
-    }
-  }
-
-  .#{$prefix}--page-header__content__page-actions
-    .#{$prefix}--menu-button__trigger:not(.#{$prefix}--btn--ghost) {
-    min-inline-size: 0;
+    gap: $spacing-05;
   }
 
   .#{$prefix}--page-header__content__subtitle {
     @include type-style('productive-heading-03');
 
-    margin-block-end: $spacing-03;
+    margin-block-start: $spacing-05;
   }
 
   .#{$prefix}--page-header__content__body {
@@ -130,15 +108,10 @@
     margin-block-start: $spacing-05;
   }
 
-  [data-hidden]:not([data-fixed]) {
-    display: none;
-  }
-
   .#{$prefix}--page-header__hero-image {
     display: flex;
     overflow: hidden;
     align-items: center;
-    justify-content: end;
     block-size: 100%;
   }
 
