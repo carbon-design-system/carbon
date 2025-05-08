@@ -2,7 +2,7 @@ Closes #
 
 {{short description}}
 
-#### Changelog
+### Changelog
 
 **New**
 
@@ -10,7 +10,7 @@ Closes #
 
 **Changed**
 
-- {{change thing}}
+- {{changed thing}}
 
 **Removed**
 
@@ -18,10 +18,17 @@ Closes #
 
 #### Testing / Reviewing
 
-{{ Add descriptions, steps or a checklist for how reviewers can verify this PR works or not }}
+{{ Add steps or a checklist for how reviewers can verify this PR works or not }}
 
-<!--
-❗ Make sure you've included everything from the PR guide:
+## PR Checklist
 
-https://github.com/carbon-design-system/carbon/blob/main/docs/guides/reviewing-pull-requests.md
--->
+As the author of this PR, before marking ready for review, confirm you:
+
+- [ ] Reviewed every line of the diff
+- [ ] Updated documentation and storybook examples
+- [ ] Wrote passing tests that cover this change
+- [ ] Addressed any impact on accessibility (a11y)
+- [ ] Tested for cross-browser consistency
+- [ ] Validated that this code is ready for review and status checks should pass
+
+More details can be found in the [pull request guide](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/reviewing-pull-requests.md)

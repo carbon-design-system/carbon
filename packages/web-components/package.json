@@ -1,7 +1,7 @@
 {
   "name": "@carbon/web-components",
   "description": "Web components for the Carbon Design System",
-  "version": "2.29.0-rc.0",
+  "version": "2.29.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -65,7 +65,7 @@
     "wca": "web-component-analyzer analyze src --outFile custom-elements.json"
   },
   "dependencies": {
-    "@carbon/styles": "^1.81.0-rc.0",
+    "@carbon/styles": "^1.81.0",
     "@floating-ui/dom": "^1.6.3",
     "@ibm/telemetry-js": "^1.5.0",
     "@lit/context": "^1.1.1",
@@ -76,9 +76,9 @@
   },
   "devDependencies": {
     "@carbon/icon-helpers": "10.47.0",
-    "@carbon/icons": "^11.60.0-rc.0",
-    "@carbon/layout": "^11.34.0-rc.0",
-    "@carbon/motion": "^11.28.0-rc.0",
+    "@carbon/icons": "^11.60.0",
+    "@carbon/layout": "^11.34.0",
+    "@carbon/motion": "^11.28.0",
     "@juggle/resize-observer": "^3.4.0",
     "@mordech/vite-lit-loader": "^0.37.0",
     "@open-wc/testing": "^4.0.0",
