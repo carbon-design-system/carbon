@@ -19,7 +19,6 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-import getDisplayName from '../../prop-types/tools/getDisplayName';
 import { SwitcherDivider, SwitcherItem } from '.';
 
 export interface BaseSwitcherProps {
@@ -79,12 +78,12 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
       currentIndex: number;
       direction: number;
     }) => {
-      const enabledIndices = React.Children.toArray(children).reduce<number[]>(
-        (acc, curr, i) => {
+      const enabledIndices = Children.toArray(children).reduce<number[]>(
+        (acc, child, i) => {
           if (
-            React.isValidElement(curr) &&
-            Object.keys((curr as any).props).length !== 0 &&
-            getDisplayName(curr.type) === 'SwitcherItem'
+            isValidElement<ComponentProps<typeof SwitcherItem>>(child) &&
+            child.type === SwitcherItem &&
+            Object.keys(child.props).length
           ) {
             acc.push(i);
           }

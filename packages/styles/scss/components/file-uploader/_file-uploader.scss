@@ -189,7 +189,11 @@
       .#{$prefix}--file-filename-tooltip {
         inline-size: -webkit-fill-available;
         padding-inline-start: $spacing-05;
-        @document url-prefix() {
+
+        /* This is for targeting styles specific to firefox */
+        /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
+        /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+        @-moz-document url-prefix() {
           inline-size: -moz-available;
         }
       }
@@ -197,7 +201,11 @@
 
     .#{$prefix}--file-filename-tooltip {
       inline-size: -webkit-fill-available;
-      @document url-prefix() {
+
+      /* This is for targeting styles specific to firefox */
+      /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
+      /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+      @-moz-document url-prefix() {
         inline-size: -moz-available;
       }
     }
@@ -217,7 +225,10 @@
       text-overflow: ellipsis;
       white-space: nowrap;
 
-      @document url-prefix() {
+      /* This is for targeting styles specific to firefox */
+      /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
+      /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+      @-moz-document url-prefix() {
         inline-size: -moz-available;
       }
     }

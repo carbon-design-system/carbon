@@ -162,11 +162,9 @@ export interface TextAreaProps
   counterMode?: 'character' | 'word';
 }
 
-// TODO: This type was added to prevent the formatter from changing the
-// indentation of this entire function. Delete it in a future pull request.
-type TTextArea = HTMLTextAreaElement;
+const frFn = forwardRef<HTMLTextAreaElement, TextAreaProps>;
 
-const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
+const TextArea = frFn((props, forwardRef) => {
   const {
     className,
     decorator,
@@ -427,7 +425,7 @@ const TextArea = forwardRef<TTextArea, TextAreaProps>((props, forwardRef) => {
     }
   }
 
-  const announcerRef = useRef(null);
+  const announcerRef = useRef<HTMLSpanElement>(null);
   const [prevAnnouncement, setPrevAnnouncement] = useState('');
   const ariaAnnouncement = useAnnouncer(
     textCount,

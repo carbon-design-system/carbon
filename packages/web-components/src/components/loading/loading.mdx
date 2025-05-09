@@ -1,48 +1,37 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as LoadingStories from './loading.stories';
 
 <Meta of={LoadingStories} />
 
 # Loading
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/loading)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/loading)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/loading/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/loading/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/loading)
+## Table of Contents
 
-Loading spinners are used when retrieving data or performing slow computations,
-and help to notify users that loading is underway. The waiting experience is a
-crucial design opportunity. Although it may not be obvious what is occurring on
-the back-end, we can communicate clearly to reassure the user that progress is
-happening.
+- [Loading](#loading)
+  - [Overview](#overview)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+<Canvas of={LoadingStories.Default} />
 
-### JS (via import)
-
-```javascript
-import '@carbon/web-components/es/components/loading/index.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['loading'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
-
-```html
-<div style="position: relative; padding: 3rem; display: flex;">
-  <cds-loading></cds-loading>
-</div>
-```
-
-## `<cds-loading>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-loading inactive>`) and `false` means not setting the attribute (e.g.
-`<cds-loading>` without `inactive` attribute).
+## Component API
 
 <ArgTypes of="cds-loading" />
+
+<Markdown>{`${cdnJs({ components: ['loading'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/loading/loading.mdx).

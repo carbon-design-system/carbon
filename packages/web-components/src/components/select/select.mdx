@@ -1,72 +1,70 @@
-import { ArgTypes, Meta, Markdown } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as SelectStories from './select.stories';
 
 <Meta of={SelectStories} />
 
 # Select
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/select)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/select)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/select/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/select/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/select)
+## Table of Contents
 
-The select component allows users to choose one option from a list. It is used
-in forms for users to submit data.
+- [Default state](#default-state)
+- [Inline](#inline)
+- [Skeleton](#skeleton)
+- [AI Label](#ai-label)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
-## Getting started
+## Default state
 
-Here's a quick example to get you started.
+Carbon recommends that a select has an empty option selected by default.
+Depending on the use case, this default behavior can be modified to be a
+prefilled selection to the first option in the list, which is typically shown in
+alphabetical order, or the prefilled selection could be a frequent or commonly
+used option that is on the list.
 
-### JS (via import)
+To get a default empty selection on your select, do not use the `placeholder`
+attribute in `cds-select`.
 
-```javascript
-import '@carbon/web-components/es/components/select/index.js';
-```
+<Canvas of={SelectStories.Default} />
 
-<Markdown>{`${cdnJs({ components: ['select'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+## Inline
 
-### HTML
+<Canvas of={SelectStories.Inline} />
 
-```html
-<cds-select
-  helper-text="Optional helper text"
-  label-text="Select"
-  placeholder="Optional placeholder text">
-  <cds-select-item-group label="Category 1">
-    <cds-select-item value="all">Option 1</cds-select-item>
-    <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
-  </cds-select-item-group>
-  <cds-select-item-group label="Category 2">
-    <cds-select-item value="staging">Option 3</cds-select-item>
-    <cds-select-item value="dea">Option 4</cds-select-item>
-    <cds-select-item value="router">Option 5</cds-select-item>
-  </cds-select-item-group>
-</cds-select>
-```
+## Skeleton
 
-## `<cds-select>` attributes, properties and events
+<Canvas of={SelectStories.Skeleton} />
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-select autofocus>`) and `false` means not setting the attribute (e.g.
-`<cds-select>` without `autofocus` attribute).
+## AI Label
+
+<Canvas of={SelectStories.WithAILabel} />
+
+## Component API
+
+## `cds-select`
 
 <ArgTypes of="cds-select" />
 
-## `<cds-select-item-group>` attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-select-item-group disabled>`) and `false` means not setting the attribute
-(e.g. `<cds-select-item-group>` without `disabled` attribute).
+## `cds-select-item-group`
 
 <ArgTypes of="cds-select-item-group" />
 
-## `<cds-select-item>` attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-select-item disabled>`) and `false` means not setting the attribute (e.g.
-`<cds-select-item>` without `disabled` attribute).
+## `cds-select-item`
 
 <ArgTypes of="cds-select-item" />
+
+<Markdown>{`${cdnJs({ components: ['select'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/select/select.mdx).

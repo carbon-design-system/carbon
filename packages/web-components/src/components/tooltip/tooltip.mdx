@@ -1,45 +1,38 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import * as Tooltip from './tooltip.stories';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as TooltipStories from './tooltip.stories';
 
-<Meta of={Tooltip} />
+<Meta of={TooltipStories} />
 
 # Tooltip
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/tooltip)
-> example implementation.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/tooltip)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tooltip/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/accordion/accessibility)
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/tooltip)
+## Table of Contents
 
-You can use the Tooltip component as a wrapper to display a popup for an
+- [Overview](#overview)
+  - [Toggletips vs Tooltips](#toggletips-vs-tooltips)
+  - [Customizing the content of a tooltip](#customizing-the-content-of-a-tooltip)
+  - [Tooltip alignment](#tooltip-alignment)
+  - [Customizing the duration of a tooltip](#customizing-the-duration-of-a-tooltip)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+You can use the `Tooltip` component as a wrapper to display a popup for an
 interactive element that you provide. If you are trying to place interactive
-content inside of the Tooltip itself, consider using Toggletip instead. You can
-provide the interactive element as a child to Tooltip. Tooltips provide
-additional information upon hover or focus. The information should be
-contextual, useful, and nonessential information. Keep tooltips short.
-
-## Getting started
-
-Here's a quick example to get you started.
-
-### JS (via import)
-
-```javascript
-import '@carbon/web-components/es/components/tooltip/index.js';
-import Information16 from '@carbon/icons/lib/information/16.js';
-```
-
-<Markdown>{`${cdnJs({ components: ['tooltip'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
-
-### HTML
+content inside of the `Tooltip` itself, consider using `Toggletip` instead. You
+can provide the interactive element as a child to `Tooltip`, for example:
 
 ```html
-<cds-tooltip align="bottom">
-  <div class="sb-tooltip-trigger" aria-labelledby="content">
-    ${Information16()}
-  </div>
+<cds-tooltip>
+  <button type="button" aria-labelledby="content">X</button>
   <cds-tooltip-content id="content">
     Occasionally, services are updated in a specified time window to ensure no
     down time for customers.
@@ -47,7 +40,14 @@ import Information16 from '@carbon/icons/lib/information/16.js';
 </cds-tooltip>
 ```
 
-## Toggletips vs Tooltips
+`Tooltip` accepts a single child that gets slotted in the `cds-tooltip`. It is
+important that the component you provide renders an interactive element. In
+addition, you can specify the contents of the popup the `cds-tooltip-content`
+component.
+
+<Canvas of={TooltipStories.Default} />
+
+### Toggletips vs Tooltips
 
 Toggletips and tooltips are similar visually and both contain a popover and
 interactive trigger element. The two components differ in the way they are
@@ -57,10 +57,66 @@ information that is not interactive. A toggletip is used on click or enter when
 you need to expose interactive elements, such as button, that a user needs to
 interact with.
 
-### `<cds-tooltip>` attributes and properties
+### Customizing the content of a tooltip
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-tooltip open>`) and `false` means not setting the attribute (e.g.
-`<cds-tooltip>` without `open` attribute).
+The `Tooltip` component supports tooltip customization by passing a child into
+the `cds-tooltip` slot and customization to the tooltip content by using the
+`cds-tooltip-content` component. By adding an `id` to the `cds-tootltip-content`
+and adding an `aria-labelledby` with the same `id` to the child component then
+the `Tooltip` should be accessibility compliant.
 
+It's important that the `cds-tooltip-content` has no interactive content. This
+will cause a violation in the component as the semantics of this content will
+not be accessible to users of screen reader software.
+
+### Tooltip alignment
+
+The `align` attribute allows you to specify where your content should be placed
+relative to the tooltip. For example, if you provide `align="top"` to the
+`Tooltip` component then the tooltip will render above your component.
+Similarly, if you provide `align="bottom"` then the tooltip will render below
+your component.
+
+<Canvas of={TooltipStories.Alignment} />
+
+You can also configure the placement of the caret, if it is enabled, by choosing
+between `left` and `right` or `bottom` and `top`, depending on where your
+tooltip is being rendered.
+
+If you are using `align="top"`, then you can choose between `align="top-left"`
+and `align="top-right"`. These options will place the caret closer to the left
+or right edges of the tooltip.
+
+If you are using `align="left"` or `align="right"`, you can use `top` or
+`bottom` to control this alignment.
+
+### Customizing the duration of a tooltip
+
+You can customize the delay between when a tooltip is invoked and its contents
+are shown. You can also customize the delay between when a tooltip is dismissed
+and its contents are hidden.
+
+<Canvas of={TooltipStories.Duration} />
+
+The `enter-delay-ms` attribute allows you to provide a time, in milliseconds,
+that the component will wait before showing the tooltip. The `leave-delay-ms`
+attribute allows you to provide a time, in milliseconds, that the component will
+wait before hiding the tooltip.
+
+By default, these values are set to 100ms for `enter-delay-ms` and 300ms for
+`leave-delay-ms`.
+
+## Component API
+
+## `cds-tooltip`
 <ArgTypes of="cds-tooltip" />
+## `cds-tooltip-content`
+<ArgTypes of="cds-tooltip-content" />
+
+<Markdown>{`${cdnJs({ components: ['tooltip'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/tooltip/tooltip.mdx).

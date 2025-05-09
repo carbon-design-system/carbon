@@ -15,8 +15,6 @@ import styles from './form-group.scss?lit';
  * The shell UI for file uploader.
  *
  * @element cds-form-group
- * @slot label-title.
- * @slot lebel-description.
  */
 @customElement(`${prefix}-form-group`)
 class CDSFormGroup extends LitElement {
