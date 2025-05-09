@@ -4,36 +4,11 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import React, { useEffect, useRef, useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import { useResizeObserver } from '../useResizeObserver';
-
-const hep = HTMLElement.prototype;
-export const mockHTMLElement = (options) => {
-  const originals = {};
-
-  for (let option in options) {
-    originals[option] = Object.getOwnPropertyDescriptor(hep, option);
-    Object.defineProperty(
-      hep,
-      option,
-      // Ensure we'll be able to restore or delete the property later
-      Object.assign({}, options[option], { configurable: true })
-    );
-  }
-
-  return {
-    mockRestore: () => {
-      for (let option in options) {
-        if (originals[option]) {
-          Object.defineProperty(hep, option, originals[option]);
-        } else {
-          delete hep[option];
-        }
-      }
-    },
-  };
-};
+import { mockHTMLElement } from '../__mocks__/mockHTMLElement';
 
 const sizes = (base) => ({
   offsetWidth: {
@@ -53,15 +28,12 @@ const testSizes = (el, property) => {
     for (let cls of classes) {
       const val = propSizes[cls] ? propSizes[cls] : -1;
       if (val >= 0) {
-        // console.log(property, cls, val);
         return val;
       }
     }
   }
 
   // The test should never get here as all cases should be catered for in setup.
-  // eslint-disable-next-line
-  console.log('testSizes found nothing.', property, el.outerHTML);
   return base;
 };
 
