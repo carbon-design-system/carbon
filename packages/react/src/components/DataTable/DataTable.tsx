@@ -6,7 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { type MouseEvent } from 'react';
+import React, {
+  Component,
+  type ChangeEvent,
+  type MouseEvent,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
 import isEqual from 'react-fast-compare';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
 import { getNextSortState } from './state/sorting';
@@ -58,7 +64,7 @@ const translationKeys = {
  */
 type TranslationKey = (typeof translationKeys)[keyof typeof translationKeys];
 
-const defaultTranslations = {
+const defaultTranslations: Record<TranslationKey, string> = {
   [translationKeys.expandAll]: 'Expand all rows',
   [translationKeys.collapseAll]: 'Collapse all rows',
   [translationKeys.expandRow]: 'Expand current row',
@@ -69,7 +75,9 @@ const defaultTranslations = {
   [translationKeys.unselectRow]: 'Unselect row',
 };
 
-const translateWithId = (id) => defaultTranslations[id];
+const translateWithId: NonNullable<
+  TranslateWithId<TranslationKey>['translateWithId']
+> = (id) => defaultTranslations[id];
 
 export type DataTableSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
@@ -79,10 +87,12 @@ export interface DataTableCell<T> {
   isEditable: boolean;
   isEditing: boolean;
   isValid: boolean;
-  errors: null | Array<Error>;
+  errors: null | Error[];
   info: {
     header: string;
   };
+  hasAILabelHeader?: boolean;
+  hasDecoratorHeader?: boolean;
 }
 
 type DataTableCells<T extends any[]> = { [K in keyof T]: DataTableCell<T[K]> };
@@ -97,22 +107,22 @@ export interface DataTableRow<ColTypes extends any[]> {
 
 export interface DataTableHeader {
   key: string;
-  header: React.ReactNode;
-  slug?: React.ReactElement<any>;
-  decorator?: React.ReactElement<any>;
+  header: ReactNode;
+  slug?: ReactElement;
+  decorator?: ReactElement;
 }
 
 export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
-  headers: Array<DataTableHeader>;
-  rows: Array<DataTableRow<ColTypes> & RowType>;
-  selectedRows: Array<DataTableRow<ColTypes> & RowType>;
+  headers: DataTableHeader[];
+  rows: (DataTableRow<ColTypes> & RowType)[];
+  selectedRows: (DataTableRow<ColTypes> & RowType)[];
 
   // Prop accessors/getters
-  getHeaderProps: (getHeaderPropsArgs: {
+  getHeaderProps: (options: {
     header: DataTableHeader;
     isSortable?: boolean;
     onClick?: (
-      e: React.MouseEvent<HTMLButtonElement>,
+      event: MouseEvent<HTMLButtonElement>,
       sortState: { sortHeaderKey: string; sortDirection: DataTableSortState }
     ) => void;
     [key: string]: unknown;
@@ -120,25 +130,25 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     isSortable: boolean | undefined;
     isSortHeader: boolean;
     key: string;
-    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    onClick: (event: MouseEvent<HTMLButtonElement>) => void;
     sortDirection: DataTableSortState;
     [key: string]: unknown;
   };
-  getExpandHeaderProps: (getExpandHeaderPropsArgs?: {
+  getExpandHeaderProps: (options?: {
     onClick?: (
-      e: React.MouseEvent<HTMLButtonElement>,
+      event: MouseEvent<HTMLButtonElement>,
       expandState: { isExpanded?: boolean }
     ) => void;
-    onExpand?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    onExpand?: (event: MouseEvent<HTMLButtonElement>) => void;
     [key: string]: unknown;
   }) => {
     ['aria-label']: string;
     isExpanded: boolean;
-    onExpand: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    onExpand: (event: MouseEvent<HTMLButtonElement>) => void;
     [key: string]: unknown;
   };
-  getRowProps: (getRowPropsArgs: {
-    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  getRowProps: (options: {
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
@@ -147,19 +157,21 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     isExpanded?: boolean;
     isSelected?: boolean;
     key: string;
-    onExpand: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    onExpand: (event: MouseEvent<HTMLButtonElement>) => void;
     [key: string]: unknown;
   };
-  getExpandedRowProps: (getExpandedRowPropsArgs: {
+  getExpandedRowProps: (options: {
     row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
     ['id']: string;
     [key: string]: unknown;
   };
-  getSelectionProps: (getSelectionPropsArgs?: {
-    onClick?: (e: MouseEvent<HTMLInputElement, globalThis.MouseEvent>) => void;
-    row: DataTableRow<ColTypes>;
+  getSelectionProps: (options?: {
+    onClick?: (
+      event: MouseEvent<HTMLInputElement, globalThis.MouseEvent>
+    ) => void;
+    row?: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
     'aria-label': string;
@@ -168,17 +180,15 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     id: string;
     indeterminate?: boolean;
     name: string;
-    onSelect: (e: React.MouseEvent<HTMLInputElement>) => void;
+    onSelect: (event: MouseEvent<HTMLInputElement>) => void;
     radio?: boolean | undefined;
     [key: string]: unknown;
   };
-  getToolbarProps: (getToolbarPropsArgs?: { [key: string]: unknown }) => {
+  getToolbarProps: (options?: { [key: string]: unknown }) => {
     size: 'sm' | undefined;
     [key: string]: unknown;
   };
-  getBatchActionProps: (getBatchActionPropsArgs?: {
-    [key: string]: unknown;
-  }) => {
+  getBatchActionProps: (options?: { [key: string]: unknown }) => {
     onCancel: () => void;
     onSelectAll?: () => void | undefined;
     shouldShowBatchActions: boolean;
@@ -199,7 +209,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     stickyHeader?: boolean;
     useStaticWidth?: boolean;
   };
-  getCellProps: (getCellPropsArgs: { cell: DataTableCell<ColTypes> }) => {
+  getCellProps: (options: { cell: DataTableCell<ColTypes> }) => {
     [key: string]: unknown;
     hasAILabelHeader?: boolean;
     hasDecoratorHeader?: boolean;
@@ -207,7 +217,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
 
   // Custom event handlers
   onInputChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
+    event: ChangeEvent<HTMLInputElement>,
     defaultValue?: string
   ) => void;
 
@@ -224,29 +234,29 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
   extends TranslateWithId<TranslationKey> {
   children?: (
     renderProps: DataTableRenderProps<RowType, ColTypes>
-  ) => React.ReactElement<any>;
+  ) => ReactElement;
   experimentalAutoAlign?: boolean;
-  filterRows?: (filterRowsArgs: {
+  filterRows?: (options: {
     cellsById: Record<string, DataTableCell<ColTypes>>;
     getCellId: (rowId: string, header: string) => string;
-    headers: Array<DataTableHeader>;
+    headers: DataTableHeader[];
     inputValue: string;
-    rowIds: Array<string>;
-  }) => Array<string>;
-  headers: Array<DataTableHeader>;
+    rowIds: string[];
+  }) => string[];
+  headers: DataTableHeader[];
   isSortable?: boolean;
   locale?: string;
   overflowMenuOnHover?: boolean;
   radio?: boolean;
   render?: (
     renderProps: DataTableRenderProps<RowType, ColTypes>
-  ) => React.ReactElement<any>;
-  rows: Array<Omit<DataTableRow<ColTypes>, 'cells'>>;
+  ) => ReactElement;
+  rows: Omit<DataTableRow<ColTypes>, 'cells'>[];
   size?: DataTableSize;
   sortRow?: (
     cellA: any,
     cellB: any,
-    sortRowOptions: {
+    options: {
       sortDirection: DataTableSortState;
       sortStates: Record<DataTableSortState, DataTableSortState>;
       locale: string;
@@ -266,9 +276,9 @@ export interface DataTableProps<RowType, ColTypes extends any[]>
 interface DataTableState<ColTypes extends any[]> {
   cellsById: Record<string, DataTableCell<ColTypes>>;
   filterInputValue: string | null;
-  initialRowOrder: Array<string>;
+  initialRowOrder: string[];
   isExpandedAll: boolean;
-  rowIds: Array<string>;
+  rowIds: string[];
   rowsById: Record<string, DataTableRow<ColTypes>>;
   shouldShowBatchActions: boolean;
   sortDirection: DataTableSortState;
@@ -285,108 +295,17 @@ interface DataTableState<ColTypes extends any[]> {
  * and updating the state of the single entity will cascade updates to the
  * consumer.
  */
-class DataTable<RowType, ColTypes extends any[]> extends React.Component<
+class DataTable<RowType, ColTypes extends any[]> extends Component<
   DataTableProps<RowType, ColTypes>,
   DataTableState<ColTypes>
 > {
   instanceId: number;
 
-  static propTypes = {
-    /**
-     * Experimental property. Allows table to align cell contents to the top if there is text wrapping in the content. Might have performance issues, intended for smaller tables
-     */
-    experimentalAutoAlign: PropTypes.bool,
-
-    /**
-     * Optional hook to manually control filtering of the rows from the
-     * TableToolbarSearch component
-     */
-    filterRows: PropTypes.func,
-
-    /**
-     * The `headers` prop represents the order in which the headers should
-     * appear in the table. We expect an array of objects to be passed in, where
-     * `key` is the name of the key in a row object, and `header` is the name of
-     * the header.
-     */
-    headers: PropTypes.arrayOf(
-      PropTypes.shape({
-        key: PropTypes.string.isRequired,
-        header: PropTypes.node.isRequired,
-      })
-    ).isRequired,
-
-    /**
-     * Specify whether the table should be able to be sorted by its headers
-     */
-    isSortable: PropTypes.bool,
-
-    /**
-     * Provide a string for the current locale
-     */
-    locale: PropTypes.string,
-
-    /**
-     * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
-     */
-    overflowMenuOnHover: PropTypes.bool,
-
-    /**
-     * Specify whether the control should be a radio button or inline checkbox
-     */
-    radio: PropTypes.bool,
-
-    /**
-     * The `rows` prop is where you provide us with a list of all the rows that
-     * you want to render in the table. The only hard requirement is that this
-     * is an array of objects, and that each object has a unique `id` field
-     * available on it.
-     */
-    rows: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        disabled: PropTypes.bool,
-        isSelected: PropTypes.bool,
-        isExpanded: PropTypes.bool,
-      })
-    ).isRequired,
-
-    /**
-     *  Change the row height of table. Currently supports `xs`, `sm`, `md`, `lg`, and `xl`.
-     */
-    size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
-
-    /**
-     * Optional hook to manually control sorting of the rows.
-     */
-    sortRow: PropTypes.func,
-
-    /**
-     * Specify whether the header should be sticky.
-     * Still experimental: may not work with every combination of table props
-     */
-    stickyHeader: PropTypes.bool,
-
-    /**
-     * Optional method that takes in a message id and returns an
-     * internationalized string. See `DataTable.translationKeys` for all
-     * available message ids.
-     */
-    translateWithId: PropTypes.func,
-
-    /**
-     * `false` If true, will use a width of 'auto' instead of 100%
-     */
-    useStaticWidth: PropTypes.bool,
-
-    /**
-     * `true` to add useZebraStyles striping.
-     */
-    useZebraStyles: PropTypes.bool,
-  };
-
   static translationKeys = Object.values(translationKeys);
 
+  // TODO: Delete these static properties when the components are converted to a
+  // functional component.
+  //
   // Static properties for sub-components
   static Table: typeof Table;
   static TableActionList: typeof TableActionList;
@@ -411,7 +330,11 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
   static TableToolbarSearch: typeof TableToolbarSearch;
   static TableToolbarMenu: typeof TableToolbarMenu;
 
-  constructor(props) {
+  // TODO: Replace with a `type` when this component is converted to a
+  // functional component.
+  private readonly rp!: DataTableRenderProps<RowType, ColTypes>;
+
+  constructor(props: DataTableProps<RowType, ColTypes>) {
     super(props);
     this.state = {
       ...getDerivedStateFromProps(props, {}),
@@ -420,8 +343,8 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
     this.instanceId = getInstanceId();
   }
 
-  // if state needs to be updated then wait for only update after state is finished
-  shouldComponentUpdate(nextProps) {
+  // If state needs to be updated, defer render until after the update completes.
+  shouldComponentUpdate(nextProps: DataTableProps<RowType, ColTypes>) {
     if (this.props !== nextProps) {
       const nextRowIds = nextProps.rows.map((row) => row.id);
       const rowIds = this.props.rows.map((row) => row.id);
@@ -450,26 +373,12 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
   /**
    * Get the props associated with the given header. Mostly used for adding in
    * sorting behavior.
-   *
-   * @param {object} config
-   * @param {string} config.header the header we want the props for
-   * @param {Function} config.onClick a custom click handler for the header
-   * @param {boolean} config.isSortable
-   * @returns {object}
    */
-  getHeaderProps = ({
+  getHeaderProps: (typeof this.rp)['getHeaderProps'] = ({
     header,
     onClick,
     isSortable = this.props.isSortable,
     ...rest
-  }: {
-    header: DataTableHeader;
-    onClick?: (
-      e: React.MouseEvent<HTMLButtonElement>,
-      sortState: { sortHeaderKey: string; sortDirection: DataTableSortState }
-    ) => void;
-    isSortable?: boolean;
-    [key: string]: unknown;
   }) => {
     const { sortDirection, sortHeaderKey } = this.state;
     return {
@@ -497,22 +406,12 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
 
   /**
    * Get the props associated with the given expand header.
-   *
-   * @param {object} config
-   * @param {Function} config.onClick a custom click handler for the expand header
-   * @param {Function} config.onExpand a custom click handler called when header is expanded
-   * @returns {object}
    */
-  getExpandHeaderProps = (
-    { onClick, onExpand, ...rest } = {} as {
-      onClick?: (
-        e: React.MouseEvent<HTMLButtonElement>,
-        expandState: { isExpanded: boolean }
-      ) => void;
-      onExpand?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-      [key: string]: unknown;
-    }
-  ) => {
+  getExpandHeaderProps: (typeof this.rp)['getExpandHeaderProps'] = ({
+    onClick,
+    onExpand,
+    ...rest
+  } = {}) => {
     const { translateWithId: t = translateWithId } = this.props;
     const { isExpandedAll, rowIds, rowsById } = this.state;
     const isExpanded =
@@ -541,42 +440,38 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
 
   /**
    * Decorate consumer's `onClick` event handler with sort parameters
-   *
-   * @param {Function} onClick
-   * @param {object} sortParams
-   * @returns {Function}
    */
-  handleOnHeaderClick = (onClick, sortParams) => {
-    return (e) => onClick(e, sortParams);
+  handleOnHeaderClick = (
+    onClick: (
+      event: MouseEvent<HTMLButtonElement>,
+      sortParams: { sortHeaderKey: string; sortDirection: DataTableSortState }
+    ) => void,
+    sortParams: { sortHeaderKey: string; sortDirection: DataTableSortState }
+  ) => {
+    return (event: MouseEvent<HTMLButtonElement>) => onClick(event, sortParams);
   };
 
   /**
-   * Decorate consumer's `onClick` event handler with sort parameters
-   *
-   * @param {Function} onClick
-   * @param {object} expandParams
-   * @returns {Function}
+   * Decorate consumer's `onClick` event handler with expand parameters
    */
-  handleOnExpandHeaderClick = (onClick, expandParams) => {
-    return (e) => onClick(e, expandParams);
+  handleOnExpandHeaderClick = (
+    onClick: (
+      event: MouseEvent<HTMLButtonElement>,
+      expandParams: { isExpanded: boolean }
+    ) => void,
+    expandParams: { isExpanded: boolean }
+  ) => {
+    return (event: MouseEvent<HTMLButtonElement>) =>
+      onClick(event, expandParams);
   };
 
   /**
    * Get the props associated with the given row. Mostly used for expansion.
-   *
-   * @param {object} config
-   * @param {object} config.row the row we want the props for
-   * @param {Function} config.onClick a custom click handler for the header
-   * @returns {object}
    */
-  getRowProps = ({
+  getRowProps: (typeof this.rp)['getRowProps'] = ({
     row,
     onClick,
     ...rest
-  }: {
-    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    row: DataTableRow<ColTypes>;
-    [key: string]: unknown;
   }) => {
     const { translateWithId: t = translateWithId } = this.props;
     const translationKey = row.isExpanded
@@ -598,17 +493,10 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
 
   /**
    * Get the props associated with an expanded row
-   *
-   * @param {object} config
-   * @param {object} config.row the parent row we want the props for
-   * @returns {object}
    */
-  getExpandedRowProps = ({
+  getExpandedRowProps: (typeof this.rp)['getExpandedRowProps'] = ({
     row,
     ...rest
-  }: {
-    row: DataTableRow<ColTypes>;
-    [key: string]: unknown;
   }) => {
     return {
       ...rest,
@@ -621,22 +509,11 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
    * applicable. Most often used to indicate selection status of the table or
    * for a specific row.
    */
-  getSelectionProps = (
-    // TODO: `row` is required per the type definition. Why does the default
-    // value not include it? The fact that it lacks it makes it seem like it's
-    // unnecessary. Further, there's an `if` statement that checks for it below.
-    // Again, why is that necessary if it's required?
-    //
-    // Based on
-    // https://github.com/carbon-design-system/carbon/pull/19105#discussion_r2073736202,
-    // investigate marking `row` as optional when
-    // https://github.com/carbon-design-system/carbon/issues/19177 is addressed.
-    { onClick, row, ...rest } = {} as NonNullable<
-      Parameters<
-        DataTableRenderProps<RowType, ColTypes>['getSelectionProps']
-      >[0]
-    >
-  ) => {
+  getSelectionProps: (typeof this.rp)['getSelectionProps'] = ({
+    onClick,
+    row,
+    ...rest
+  } = {}) => {
     const { translateWithId: t = translateWithId } = this.props;
 
     // If we're given a row, return the selection state values for that row
@@ -682,12 +559,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
     };
   };
 
-  getToolbarProps = (
-    props = {}
-  ): {
-    size: 'sm' | undefined;
-    [key: string]: unknown;
-  } => {
+  getToolbarProps: (typeof this.rp)['getToolbarProps'] = (props) => {
     const { size } = this.props;
     const isSmall = size === 'xs' || size === 'sm';
     return {
@@ -696,7 +568,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
     };
   };
 
-  getBatchActionProps = (props = {}) => {
+  getBatchActionProps: (typeof this.rp)['getBatchActionProps'] = (props) => {
     const { shouldShowBatchActions } = this.state;
     const totalSelected = this.getSelectedRows().length;
     return {
@@ -708,10 +580,8 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       onCancel: this.handleOnCancel,
     };
   };
-  /**
-   * Helper utility to get the Table Props.
-   */
-  getTableProps = () => {
+
+  getTableProps: (typeof this.rp)['getTableProps'] = () => {
     const {
       useZebraStyles,
       size = 'lg',
@@ -732,10 +602,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
     };
   };
 
-  /**
-   * Helper utility to get the TableContainer Props.
-   */
-  getTableContainerProps = () => {
+  getTableContainerProps: (typeof this.rp)['getTableContainerProps'] = () => {
     const { stickyHeader, useStaticWidth } = this.props;
 
     return {
@@ -746,22 +613,22 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
 
   /**
    * Get the props associated with the given table cell.
-   *
-   * @param {object} config
-   * @param {object} config.cell the cell we want the props for
-   * @returns {object}
    */
-  getCellProps = ({ cell, ...rest }) => {
+  getCellProps: (typeof this.rp)['getCellProps'] = ({
+    cell: { hasAILabelHeader, hasDecoratorHeader },
+    ...rest
+  }) => {
     return {
       ...rest,
-      hasAILabelHeader: cell.hasAILabelHeader,
-      hasDecoratorHeader: cell.hasDecoratorHeader,
+      hasAILabelHeader,
+      hasDecoratorHeader,
     };
   };
 
   /**
    * Helper utility to get all the currently selected rows
-   * @returns {Array<string>} the array of rowIds that are currently selected
+   *
+   * @returns the array of rowIds that are currently selected
    */
   getSelectedRows = () =>
     this.state.rowIds.filter((id) => {
@@ -771,8 +638,9 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
 
   /**
    * Helper utility to get all of the available rows after applying the filter
-   * @returns {Array<string>} the array of rowIds that are currently included through the filter
-   *  */
+   *
+   * @returns the array of rowIds that are currently included through the filter
+   */
   getFilteredRowIds = () => {
     const { filterRows = defaultFilterRows } = this.props;
     const filteredRowIds =
@@ -794,18 +662,20 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
   /**
    * Helper for getting the table prefix for elements that require an
    * `id` attribute that is unique.
-   *
-   * @returns {string}
    */
   getTablePrefix = () => `data-table-${this.instanceId}`;
 
   /**
    * Helper for toggling all selected items in a state. Does not call
    * setState, so use it when setting state.
-   * @param {object} initialState
-   * @returns {object} object to put into this.setState (use spread operator)
+   *
+   * @returns object to put into this.setState (use spread operator)
    */
-  setAllSelectedState = (initialState, isSelected, filteredRowIds) => {
+  setAllSelectedState = (
+    initialState: DataTableState<ColTypes>,
+    isSelected: boolean,
+    filteredRowIds: string[]
+  ): Pick<DataTableState<ColTypes>, 'rowsById'> => {
     const { rowIds } = initialState;
     const isFiltered = rowIds.length != filteredRowIds.length;
     return {
@@ -853,11 +723,8 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
 
   /**
    * Handler for toggling the selection state of a given row.
-   *
-   * @param {string} rowId
-   * @returns {Function}
    */
-  handleOnSelectRow = (rowId) => () => {
+  handleOnSelectRow = (rowId: string) => () => {
     this.setState((state) => {
       const row = state.rowsById[rowId];
       if (this.props.radio) {
@@ -905,11 +772,8 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
 
   /**
    * Handler for toggling the expansion state of a given row.
-   *
-   * @param {string} rowId
-   * @returns {Function}
    */
-  handleOnExpandRow = (rowId) => () => {
+  handleOnExpandRow = (rowId: string) => () => {
     this.setState((state) => {
       const row = state.rowsById[rowId];
       const { isExpandedAll } = state;
@@ -951,10 +815,9 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
   /**
    * Handler for transitioning to the next sort state of the table
    *
-   * @param {string} headerKey the field for the header that we are sorting by
-   * @returns {Function}
+   * @param headerKey - The field for the header that we are sorting by.
    */
-  handleSortBy = (headerKey) => () => {
+  handleSortBy = (headerKey: string) => () => {
     this.setState((state) =>
       getNextSortState(this.props, state, { key: headerKey })
     );
@@ -963,10 +826,11 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
   /**
    * Event handler for transitioning input value state changes for the table
    * filter component.
-   *
-   * @param {Event} event
    */
-  handleOnInputValueChange = (event, defaultValue) => {
+  handleOnInputValueChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    defaultValue?: string
+  ) => {
     if (event.target) {
       this.setState({ filterInputValue: event.target.value });
     }
@@ -994,7 +858,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
             getCellId,
           })
         : rowIds;
-    const renderProps: DataTableRenderProps<RowType, ColTypes> = {
+    const renderProps: typeof this.rp = {
       // Data derived from state
       rows: denormalize(filteredRowIds, rowsById, cellsById),
       headers: this.props.headers,
@@ -1024,11 +888,11 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       radio: this.props.radio,
     };
 
-    if (render !== undefined) {
+    if (typeof render !== 'undefined') {
       return render(renderProps);
     }
 
-    if (children !== undefined) {
+    if (typeof children !== 'undefined') {
       return children(renderProps);
     }
 
@@ -1058,5 +922,99 @@ DataTable.TableToolbarAction = TableToolbarAction;
 DataTable.TableToolbarContent = TableToolbarContent;
 DataTable.TableToolbarSearch = TableToolbarSearch;
 DataTable.TableToolbarMenu = TableToolbarMenu;
+
+DataTable.propTypes = {
+  /**
+   * Experimental property. Allows table to align cell contents to the top if there is text wrapping in the content. Might have performance issues, intended for smaller tables
+   */
+  experimentalAutoAlign: PropTypes.bool,
+
+  /**
+   * Optional hook to manually control filtering of the rows from the
+   * TableToolbarSearch component
+   */
+  filterRows: PropTypes.func,
+
+  /**
+   * The `headers` prop represents the order in which the headers should
+   * appear in the table. We expect an array of objects to be passed in, where
+   * `key` is the name of the key in a row object, and `header` is the name of
+   * the header.
+   */
+  headers: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      header: PropTypes.node.isRequired,
+    })
+  ).isRequired,
+
+  /**
+   * Specify whether the table should be able to be sorted by its headers
+   */
+  isSortable: PropTypes.bool,
+
+  /**
+   * Provide a string for the current locale
+   */
+  locale: PropTypes.string,
+
+  /**
+   * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
+   */
+  overflowMenuOnHover: PropTypes.bool,
+
+  /**
+   * Specify whether the control should be a radio button or inline checkbox
+   */
+  radio: PropTypes.bool,
+
+  /**
+   * The `rows` prop is where you provide us with a list of all the rows that
+   * you want to render in the table. The only hard requirement is that this
+   * is an array of objects, and that each object has a unique `id` field
+   * available on it.
+   */
+  rows: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      disabled: PropTypes.bool,
+      isSelected: PropTypes.bool,
+      isExpanded: PropTypes.bool,
+    })
+  ).isRequired,
+
+  /**
+   *  Change the row height of table. Currently supports `xs`, `sm`, `md`, `lg`, and `xl`.
+   */
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+
+  /**
+   * Optional hook to manually control sorting of the rows.
+   */
+  sortRow: PropTypes.func,
+
+  /**
+   * Specify whether the header should be sticky.
+   * Still experimental: may not work with every combination of table props
+   */
+  stickyHeader: PropTypes.bool,
+
+  /**
+   * Optional method that takes in a message id and returns an
+   * internationalized string. See `DataTable.translationKeys` for all
+   * available message ids.
+   */
+  translateWithId: PropTypes.func,
+
+  /**
+   * `false` If true, will use a width of 'auto' instead of 100%
+   */
+  useStaticWidth: PropTypes.bool,
+
+  /**
+   * `true` to add useZebraStyles striping.
+   */
+  useZebraStyles: PropTypes.bool,
+};
 
 export default DataTable;
