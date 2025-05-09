@@ -613,38 +613,6 @@ export const PassiveModal = () => {
   );
 };
 
-export const Test = () => {
-  return (
-    <>
-      <Modal
-        open
-        modalHeading="This is a large heading that can span 3–4 lines, used to test the footer behavior when zoomed in."
-        primaryButtonText="Submit"
-        secondaryButtonText="Cancel">
-        <p style={{ marginBottom: '1rem' }}>
-          Custom domains direct requests for your apps in this Cloud Foundry
-          organization to a URL that you own. A custom domain can be a shared
-          domain, a shared subdomain, or a shared domain and host.
-        </p>
-        <ComboBox
-          allowCustomValue
-          autoAlign
-          id="carbon-combobox"
-          items={[
-            'Apple',
-            'Orange',
-            'Banana',
-            'Pineapple',
-            'Raspberry',
-            'Lime',
-          ]}
-          titleText="ComboBox Example of Floating ui"
-        />
-      </Modal>
-    </>
-  );
-};
-
 export const WithInlineLoading = () => {
   const [status, setStatus] = useState('inactive');
   const [description, setDescription] = useState('Deleting...');
