@@ -42,6 +42,7 @@ import {
   Switcher as SwitcherIcon,
 } from '@carbon/icons-react';
 import mdx from './UIShell.mdx';
+import SideNavButton from './SideNavButton';
 
 /* eslint-disable react/prop-types */
 const StoryContent = ({ useResponsiveOffset = true }) => {
@@ -228,6 +229,12 @@ export const FixedSideNav = () => (
         <SideNavLink href="https://www.carbondesignsystem.com/">
           L0 link
         </SideNavLink>
+        <SideNavButton
+          onClick={() =>
+            window.open('https://www.carbondesignsystem.com/', '_blank')
+          }>
+          L0 button
+        </SideNavButton>
       </SideNavItems>
     </SideNav>
     <StoryContent useResponsiveOffset={false} />
