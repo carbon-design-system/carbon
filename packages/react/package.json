@@ -68,7 +68,6 @@
     "prop-types": "^15.8.1",
     "react-fast-compare": "^3.2.2",
     "tabbable": "^6.2.0",
-    "use-resize-observer": "^9.1.0",
     "window-or-global": "^1.0.1"
   },
   "devDependencies": {
