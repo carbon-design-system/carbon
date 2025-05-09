@@ -40,6 +40,14 @@ class CDSmenuItemSelectable extends LitElement {
   }
 
   /**
+   * Automatically forwards focus to the first focusable element inside the shadow root (helps with focus styles when wrapped in menu-item-group)
+   */
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
+
+  /**
    * Sets the menu item's icon.
    */
   @property()
