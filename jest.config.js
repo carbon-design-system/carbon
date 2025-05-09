@@ -20,7 +20,7 @@ module.exports = {
   ],
   coveragePathIgnorePatterns: ['packages/web-components/*'],
   testPathIgnorePatterns: ['packages/web-components/*'],
-  transformIgnorePatterns: ['<rootDir>/node_modules/(?!lodash-es)'],
+  transformIgnorePatterns: ['<rootDir>/node_modules/(?!lodash-es|nanoid)'],
   moduleNameMapper: {
     // This is a temporary workaround from moving to Jest v28. In this update,
     // certain dependencies are only providing ESM through exports and so we use
