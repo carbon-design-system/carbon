@@ -7,6 +7,8 @@
 
 import PropTypes from 'prop-types';
 import React, {
+  Children,
+  cloneElement,
   isValidElement,
   useContext,
   useEffect,
@@ -87,7 +89,11 @@ export const ContentSwitcher = ({
   const prefix = useContext(PrefixContext);
 
   const [selectedIndex, setSelectedIndex] = useState(selectedIndexProp);
+
   const prevSelectedIndexRef = useRef(selectedIndexProp);
+  const switchRefs = useRef<HTMLButtonElement[]>([]);
+
+  const childrenArray = Children.toArray(children);
 
   useEffect(() => {
     if (prevSelectedIndexRef.current !== selectedIndexProp) {
@@ -95,8 +101,6 @@ export const ContentSwitcher = ({
       prevSelectedIndexRef.current = selectedIndexProp;
     }
   }, [selectedIndexProp]);
-
-  const switchRefs = useRef<HTMLButtonElement[]>([]);
 
   const handleItemRef = (index: number) => (ref: HTMLButtonElement | null) => {
     if (ref) {
@@ -118,33 +122,31 @@ export const ContentSwitcher = ({
     event && typeof event === 'object' && 'key' in event;
 
   const handleChildChange = (
-    data: SwitchEventHandlersParams &
+    event: SwitchEventHandlersParams &
       (KeyboardEvent<HTMLButtonElement> | MouseEvent<HTMLButtonElement>)
   ) => {
-    if (typeof data.index === 'undefined') return;
+    if (typeof event.index === 'undefined') return;
 
-    const { index } = data;
-    const childrenArray = React.Children.toArray(children);
+    const { index } = event;
 
     if (
-      isKeyboardEvent(data) &&
-      matches(data, [keys.ArrowRight, keys.ArrowLeft])
+      isKeyboardEvent(event) &&
+      matches(event, [keys.ArrowRight, keys.ArrowLeft])
     ) {
-      const nextIndex = getNextIndex(data.key, index, childrenArray.length);
+      const nextIndex = getNextIndex(event.key, index, childrenArray.length);
 
       if (typeof nextIndex !== 'number') return;
 
-      if (selectionMode === 'manual') {
-        focusSwitch(nextIndex);
-      } else {
+      focusSwitch(nextIndex);
+
+      if (selectionMode !== 'manual') {
         const child = childrenArray[nextIndex];
 
         setSelectedIndex(nextIndex);
-        focusSwitch(nextIndex);
 
         if (isValidElement<SwitchEventHandlersParams>(child)) {
           onChange({
-            ...data,
+            ...event,
             index: nextIndex,
             name: child.props.name,
             text: child.props.text,
@@ -154,11 +156,11 @@ export const ContentSwitcher = ({
     } else if (selectedIndex !== index) {
       setSelectedIndex(index);
       focusSwitch(index);
-      onChange(data);
+      onChange(event);
     }
   };
 
-  const isIconOnly = React.Children.toArray(children).every(
+  const isIconOnly = childrenArray.every(
     // TODO: Update this code when
     // https://github.com/carbon-design-system/carbon/pull/18971 is merged.
     (child) =>
@@ -180,19 +182,17 @@ export const ContentSwitcher = ({
       role="tablist"
       onChange={undefined}>
       {children &&
-        React.Children.map(children, (child, index) =>
-          React.cloneElement(child, {
+        Children.map(children, (child, index) =>
+          cloneElement(child, {
             index,
             onClick: composeEventHandlers([
               handleChildChange,
               child.props.onClick,
             ]),
-            // TODO: Should `composeEventHandlers` be used here too?
-            // onKeyDown: composeEventHandlers([
-            //   handleChildChange,
-            //   child.props.onKeyDown,
-            // ]),
-            onKeyDown: handleChildChange,
+            onKeyDown: composeEventHandlers([
+              handleChildChange,
+              child.props.onKeyDown,
+            ]),
             selected: index === selectedIndex,
             ref: handleItemRef(index),
             size,
