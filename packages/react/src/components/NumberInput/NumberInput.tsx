@@ -373,7 +373,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           getDecimalPlaces(step)
         );
         const floatValue = parseFloat(rawValue.toFixed(precision));
-        const newValue = clamp(floatValue, min, max);
+        const newValue = clamp(floatValue, min ?? -Infinity, max ?? Infinity);
 
         const state = {
           value:

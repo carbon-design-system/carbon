@@ -1,15 +1,15 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ForwardedRef } from 'react';
+import React, { forwardRef } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
 import ListBoxMenuItem from './ListBoxMenuItem';
-import { ForwardRefReturn, ReactAttr } from '../../types/common';
+import { ReactAttr } from '../../types/common';
 
 type ExcludedAttributes = 'id';
 
@@ -23,20 +23,14 @@ export interface ListBoxMenuProps
   id: string;
 }
 
-export type ListBoxMenuComponent = ForwardRefReturn<
-  HTMLUListElement,
-  ListBoxMenuProps
->;
+const frFn = forwardRef<HTMLUListElement, ListBoxMenuProps>;
 
 /**
  * `ListBoxMenu` is a simple container node that isolates the `list-box__menu`
  * class into a single component. It is also being used to validate given
  * `children` components.
  */
-const ListBoxMenu: ListBoxMenuComponent = React.forwardRef(function ListBoxMenu(
-  { children, id, ...rest }: ListBoxMenuProps,
-  ref: ForwardedRef<HTMLUListElement>
-) {
+const ListBoxMenu = frFn(({ children, id, ...rest }, ref) => {
   const prefix = usePrefix();
   return (
     <ul

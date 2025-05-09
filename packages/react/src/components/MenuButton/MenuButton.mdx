@@ -115,6 +115,28 @@ components with focus management.
 Pass the `menuTarget` prop to render the `Menu` inside the modal or any specific
 element where you want it to render:
 
+## Managing the `menuTarget` prop with React refs
+Because React does not trigger re-renders when a ref's `.current` value changes,
+you must capture the ref value in state to update the `menuTarget` prop.
+```tsx
+const Component = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [target, setTarget] = useState<HTMLDivElement | undefined>(undefined);
+  useEffect(() => {
+    if (containerRef.current) {
+      setTarget(containerRef.current);
+    }
+  }, []);
+  return (
+    <div ref={containerRef}>
+      <MenuButton label="Actions" menuTarget={target}>
+        <MenuItem label="First action" />
+      </MenuButton>
+    </div>
+  );
+};
+```
+
 ## Experimental Auto Align
 
 <Canvas

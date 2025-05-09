@@ -529,9 +529,12 @@ function TabList({
 
   const tabs = useRef<TabElement[]>([]);
   const debouncedOnScroll = useCallback(() => {
-    return debounce((event) => {
-      setScrollLeft(event.target.scrollLeft);
+    const updateScroll = debounce(() => {
+      if (ref.current) {
+        setScrollLeft(ref.current.scrollLeft);
+      }
     }, scrollDebounceWait);
+    updateScroll();
   }, [scrollDebounceWait]);
 
   function onKeyDown(event: KeyboardEvent) {

@@ -40,9 +40,13 @@ class CDSSection extends LitElement {
   }
 }
 
+/**
+ * The heading component
+ *
+ * @element cds-heading
+ */
 @customElement(`${prefix}-heading`)
 class CDSHeading extends LitElement {
-  static styles = styles;
   private level: HeadingLevel = 1;
 
   connectedCallback() {
@@ -60,6 +64,8 @@ class CDSHeading extends LitElement {
 
     return html`${unsafeHTML(headingElement)}`;
   }
+
+  static styles = styles;
 }
 
 export default CDSHeading;

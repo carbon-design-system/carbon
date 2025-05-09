@@ -44,17 +44,18 @@ For more details on this approach, see the
 [feature flag documentation](https://github.com/carbon-design-system/carbon/blob/main/docs/experimental-code.md)
 in the Carbon monorepo.
 
-| Flag                                               | Description                                                                          | Default | Javascript flag | Sass flag |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------ | ------- | --------------- | --------- |
-| `enable-experimental-tile-contrast`                | Enable the improved styling for tiles that provides better contrast                  | `false` |                 | ✅        |
-| `enable-experimental-focus-wrap-without-sentinels` | Enable the new focus wrap behavior that doesn't use sentinel nodes                   | `false` | ✅              |           |
-| `enable-dialog-element`                            | Enable components to utilize the native dialog element                               | `false` | ✅              | ✅        |
-| `enable-treeview-controllable`                     | Enable the new TreeView controllable API                                             | `false` | ✅              |           |
-| `enable-v12-tile-default-icons`                    | Enable default icons for Tile components                                             | `false` | ✅              |           |
-| `enable-v12-overflowmenu`                          | Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents             | `false` | ✅              |           |
-| `enable-v12-tile-radio-icons`                      | Enable rendering of default icons in the tile components                             | `false` | ✅              | ✅        |
-| `enable-v12-structured-list-visible-icons`         | Enable icon components within StructuredList to always be visible                    | `false` |                 | ✅        |
-| `enable-v12-dynamic-floating-styles`               | Enable dynamic setting of floating styles for components like Popover, Tooltip, etc. | `false` | ✅              |           |
+| Flag                                               | Description                                                                          | Default | Javascript flag | Sass flag | Codemod Available |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------ | ------- | --------------- | --------- | ----------------- |
+| `enable-experimental-tile-contrast`                | Enable the improved styling for tiles that provides better contrast                  | `false` |                 | ✅        | No - Style only   |
+| `enable-experimental-focus-wrap-without-sentinels` | Enable the new focus wrap behavior that doesn't use sentinel nodes                   | `false` | ✅              |           | No - Config only  |
+| `enable-dialog-element`                            | Enable components to utilize the native dialog element                               | `false` | ✅              | ✅        | No - Config only  |
+| `enable-treeview-controllable`                     | Enable the new TreeView controllable API                                             | `false` | ✅              |           | No - Config only  |
+| `enable-v12-tile-default-icons`                    | Enable default icons for Tile components                                             | `false` | ✅              |           | [enable-v12-tile-default-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-tile-default-icons) |
+| `enable-v12-overflowmenu`                          | Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents             | `false` | ✅              |           | [enable-v12-overflowmenu](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-overflowmenu) |
+| `enable-v12-tile-radio-icons`                      | Enable rendering of default icons in the tile components                             | `false` | ✅              | ✅        | [enable-v12-tile-radio-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-tile-radio-icons) |
+| `enable-v12-structured-list-visible-icons`         | Enable icon components within StructuredList to always be visible                    | `false` |                 | ✅        | [enable-v12-structured-list-visible-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-structured-list-visible-icons) |
+| `enable-v12-dynamic-floating-styles`               | Enable dynamic setting of floating styles for components like Popover, Tooltip, etc. | `false` | ✅              |           | No - App level    |
+
 
 ## Turning on feature flags in Javascript/react
 
@@ -90,6 +91,7 @@ root.render(
 );
 ```
 
+
 ## Turning on feature flags in Sass
 
 In Sass, you can enable feature flags in any of your stylesheets. Most often
@@ -112,6 +114,30 @@ Feature flags can also be enabled via the provided `enable()` mixin
 
 @include feature-flags.enable('enable-experimental-tile-contrast');
 ```
+## Using Codemods for Migration
+
+Codemods are code modification scripts that automate the necessary changes when migrating to new components and APIs. They reduce the manual effort required when adopting new features. Carbon provides codemods to help you enable feature flags and migrate to the new APIs these flags provide.
+
+Some feature flags don't have codemods because:
+- **Style only**: Flags like `enable-experimental-tile-contrast` only affect Sass styles with no changes to the javascript component API.
+- **Config only**: Flags like `enable-experimental-focus-wrap-without-sentinels`, `enable-dialog-element`, and `enable-treeview-controllable` are configuration options that are enabled in just a few specific places in your application.
+- **App level**: Flags like `enable-v12-dynamic-floating-styles` are designed to be applied at the application level to enable specific behaviors (like floating styles without full autoAlign behavior) and don't require widespread component changes.
+
+### Using a Codemod
+
+To use a codemod:
+
+```bash
+npx @carbon/upgrade migrate <codemod-name> --write
+```
+
+Example
+
+```bash
+npx @carbon/upgrade migrate enable-v12-overflowmenu --write
+```
+
+For more information on available codemods, see the [@carbon/upgrade](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade/README.md) documentation.
 
 ## FeatureFlags Prop Update
 
