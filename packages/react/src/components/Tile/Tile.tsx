@@ -6,6 +6,7 @@
  */
 
 import React, {
+  cloneElement,
   useEffect,
   useRef,
   useState,
@@ -41,6 +42,8 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 import { useId } from '../../internal/useId';
 import { Text } from '../Text';
+import { AILabel } from '../AILabel';
+import { isComponentElement } from '../../internal';
 
 export interface TileProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
@@ -538,21 +541,11 @@ export const SelectableTile = React.forwardRef<
 
   // AILabel is always size `xs`
   const decoratorRef = useRef<HTMLInputElement>(null);
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'xs', ref: decoratorRef })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'xs',
-        ref: decoratorRef,
-      }
-    );
-  }
 
   return (
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
@@ -938,20 +931,11 @@ export const ExpandableTile = React.forwardRef<
   const belowTheFoldId = useId('expandable-tile-interactive');
 
   // AILabel is always size `xs`
-  let normalizedDecorator = React.isValidElement(slug ?? decorator)
-    ? (slug ?? decorator)
+  const candidate = slug ?? decorator;
+  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(candidate, { size: 'xs' })
     : null;
-  if (
-    normalizedDecorator &&
-    normalizedDecorator['type']?.displayName === 'AILabel'
-  ) {
-    normalizedDecorator = React.cloneElement(
-      normalizedDecorator as React.ReactElement<any>,
-      {
-        size: 'xs',
-      }
-    );
-  }
 
   return interactive ? (
     <div
