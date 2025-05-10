@@ -15,14 +15,14 @@
 @mixin theme($args...) {
   @include theme.theme($args...);
 
-  // If the system has a dark high-contrast theme, then icons need to be displayed in white (or a light color),
-  // and vice-versa.  Otherwise, they become invisible.  Importantly, this must happen regardless of the
-  // Carbon theme setting.  Therefore, we need to override the CSS custom properties set above.
-  // Note that text colors are set automatically by the OS; the problem is only SVG.  See:
+  // If the system is in high-contrast mode, use the system defined colors.  This mostly happens automatically, but
+  // we need to do it manually for icons and selected backgrounds.  Importantly, the custom properties we set here
+  // need to override the CSS custom properties set above.  See:
   // - https://github.com/carbon-design-system/carbon/issues/19015
   // - https://developer.mozilla.org/en-US/docs/Web/CSS/system-color.
   // - https://carbondesignsystem.com/elements/color/tokens/#icon
   @media screen and (-ms-high-contrast: active), (forced-colors: active) {
+    // Icon colors specified by "fill".
     @include custom-property.declaration('icon-primary', ButtonText);
     @include custom-property.declaration('icon-secondary', ButtonText);
     @include custom-property.declaration('icon-interactive', ButtonText);
@@ -36,7 +36,6 @@
     // Some components currently set these values for fill, although unclear if that's valid.
     @include custom-property.declaration('button-disabled', GrayText);
     @include custom-property.declaration('interactive', ButtonText);
-    @include custom-property.declaration('layer-selected-inverse', ButtonText);
     @include custom-property.declaration('link-primary', LinkText);
     @include custom-property.declaration('link-primary-hover', LinkText);
     @include custom-property.declaration('link-secondary', LinkText);
@@ -50,6 +49,17 @@
       SelectedItemText
     );
     @include custom-property.declaration('link-visited', VisitedText);
+
+    // Force a background-color for selected buttons etc., otherwise the user won't know they are selected.
+    @include custom-property.declaration('background-selected', SelectedItem);
+    @include custom-property.declaration(
+      'background-selected-hover',
+      SelectedItem
+    );
+    @include custom-property.declaration(
+      'layer-selected-inverse',
+      SelectedItem
+    );
   }
 
   // Note: we need to re-emit the contextual layer tokens as part of the theme
