@@ -445,8 +445,8 @@
       cursor: not-allowed;
 
       svg {
-        // Note: $icon-disabled maps to the same color as $tab-text-disabled, but in system high contrast mode,
-        // $icon-disabled maps to the ButtonText color, which is necessary for high contrast mode support.
+        // Note: $icon-disabled maps to the same color as $tab-text-disabled, but in high contrast mode, $icon-disabled
+        // maps to the system-defined "GrayText" color, which is better for high contrast mode support.
         fill: $icon-disabled;
       }
 
