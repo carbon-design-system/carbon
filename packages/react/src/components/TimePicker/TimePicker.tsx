@@ -9,7 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { forwardRef, type ForwardRefRenderFunction } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
+import { deprecate } from '../../prop-types/deprecate';
 import { ReactAttr } from '../../types/common';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
