@@ -22,22 +22,22 @@ function WithLayer({ children }) {
   return (
     <Annotation type="layer" text="Layer 1" className={`${prefix}--with-layer`}>
       {renderChild(0)}
-
-      <Annotation
-        type="layer"
-        text="Layer 2"
-        className={`${prefix}--with-layer`}>
-        <Layer>
+      <Layer>
+        <Annotation
+          type="layer"
+          text="Layer 2"
+          className={`${prefix}--with-layer`}>
           {renderChild(1)}
-
-          <Annotation
-            type="layer"
-            text="Layer 3"
-            className={`${prefix}--with-layer`}>
-            <Layer>{renderChild(2)}</Layer>
-          </Annotation>
-        </Layer>
-      </Annotation>
+          <Layer>
+            <Annotation
+              type="layer"
+              text="Layer 3"
+              className={`${prefix}--with-layer`}>
+              {renderChild(2)}
+            </Annotation>
+          </Layer>
+        </Annotation>
+      </Layer>
     </Annotation>
   );
 }
