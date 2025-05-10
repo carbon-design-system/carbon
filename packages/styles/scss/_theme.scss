@@ -25,16 +25,31 @@
   @media screen and (-ms-high-contrast: active), (forced-colors: active) {
     @include custom-property.declaration('icon-primary', ButtonText);
     @include custom-property.declaration('icon-secondary', ButtonText);
+    @include custom-property.declaration('icon-interactive', ButtonText);
     @include custom-property.declaration('icon-disabled', GrayText);
     @include custom-property.declaration('icon-on-color-disabled', GrayText);
 
-    // Since icon-inverse is generally used to indicated selected icons, use SelectedItemText.
+    // Since icon-inverse and icon-on-color are generally used to indicated selected icons, use SelectedItemText.
     @include custom-property.declaration('icon-inverse', SelectedItemText);
     @include custom-property.declaration('icon-on-color', SelectedItemText);
 
-    // Currently there are four components that set fill: $layer-selected-inverse.
-    // Handling it here although it's unclear if that's a valid value for fill.
+    // Some components currently set these values for fill, although unclear if that's valid.
+    @include custom-property.declaration('button-disabled', GrayText);
+    @include custom-property.declaration('interactive', ButtonText);
     @include custom-property.declaration('layer-selected-inverse', ButtonText);
+    @include custom-property.declaration('link-primary', LinkText);
+    @include custom-property.declaration('link-primary-hover', LinkText);
+    @include custom-property.declaration('link-secondary', LinkText);
+    @include custom-property.declaration('link-inverse', SelectedItemText);
+    @include custom-property.declaration(
+      'link-inverse-hover',
+      SelectedItemText
+    );
+    @include custom-property.declaration(
+      'link-inverse-visited',
+      SelectedItemText
+    );
+    @include custom-property.declaration('link-visited', VisitedText);
   }
 
   // Note: we need to re-emit the contextual layer tokens as part of the theme

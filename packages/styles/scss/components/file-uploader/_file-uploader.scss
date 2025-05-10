@@ -347,6 +347,7 @@
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
+    // TODO: Should this be $icon-interactive instead?
     fill: $interactive;
     inline-size: $spacing-06;
 

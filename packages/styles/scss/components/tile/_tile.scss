@@ -214,13 +214,6 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
       @media screen and (prefers-reduced-motion: reduce) {
         transition: none;
       }
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        // `ButtonText` is a CSS2 system color to help improve colors in HCM
-        fill: ButtonText;
-      }
     }
   }
 
@@ -342,13 +335,6 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark svg {
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--tile-content {

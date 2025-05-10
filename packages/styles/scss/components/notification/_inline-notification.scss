@@ -175,7 +175,6 @@
   .#{$prefix}--inline-notification--warning-alt
     .#{$prefix}--inline-notification__icon
     path:first-of-type {
-    // TODO: Doesn't $black-100 break for G90, G100 themes plus dark high contrast system setting?
     fill: $black-100;
     opacity: 1;
   }
