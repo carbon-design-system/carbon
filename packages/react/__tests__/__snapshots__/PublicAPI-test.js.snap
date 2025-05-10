@@ -7465,9 +7465,6 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "style": Object {
-        "type": "object",
-      },
     },
   },
   "SkeletonPlaceholder" => Object {
