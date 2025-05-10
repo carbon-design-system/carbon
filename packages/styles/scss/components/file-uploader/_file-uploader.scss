@@ -412,12 +412,7 @@
   }
 
   // Windows HCM fix
-
   .#{$prefix}--file__selected-file {
     @include high-contrast-mode('outline');
-  }
-
-  .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
-    @include high-contrast-mode('icon-fill');
   }
 }

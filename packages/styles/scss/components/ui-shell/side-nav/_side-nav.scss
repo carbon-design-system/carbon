@@ -542,16 +542,4 @@
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $icon-secondary;
   }
-
-  // Windows HCM fix
-  .#{$prefix}--side-nav__icon > svg,
-  .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item:hover
-    .#{$prefix}--header__menu-arrow,
-  .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item:focus
-    .#{$prefix}--header__menu-arrow,
-  .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
-    @include high-contrast-mode('icon-fill');
-  }
 }

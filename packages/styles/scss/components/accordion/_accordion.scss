@@ -385,12 +385,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
     margin-inline-start: $spacing-05;
   }
 
-  // Windows HCM fix
-  .#{$prefix}--accordion__arrow,
-  .#{$prefix}--accordion__item--active .#{$prefix}--accordion__arrow {
-    @include high-contrast-mode('icon-fill');
-  }
-
   // RTL overrides
   [dir='rtl'] .#{$prefix}--accordion--start .#{$prefix}--accordion__heading {
     padding-inline: layout.density('padding-inline') 0;

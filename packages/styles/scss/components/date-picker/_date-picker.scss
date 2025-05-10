@@ -262,10 +262,4 @@
     block-size: convert.to-rem(14px);
     inline-size: convert.to-rem(75px);
   }
-
-  // Windows HCM fix
-
-  .#{$prefix}--date-picker__icon {
-    @include high-contrast-mode('icon-fill');
-  }
 }

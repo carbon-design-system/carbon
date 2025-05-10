@@ -381,10 +381,4 @@
   .#{$prefix}--search--expandable.#{$prefix}--search--disabled svg {
     fill: $icon-disabled;
   }
-
-  // Windows HCM fix
-  .#{$prefix}--search-close svg,
-  .#{$prefix}--search-magnifier-icon {
-    @include high-contrast-mode('icon-fill');
-  }
 }

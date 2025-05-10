@@ -31,6 +31,10 @@
     // Since icon-inverse is generally used to indicated selected icons, use SelectedItemText.
     @include custom-property.declaration('icon-inverse', SelectedItemText);
     @include custom-property.declaration('icon-on-color', SelectedItemText);
+
+    // Currently there are four components that set fill: $layer-selected-inverse.
+    // Handling it here although it's unclear if that's a valid value for fill.
+    @include custom-property.declaration('layer-selected-inverse', ButtonText);
   }
 
   // Note: we need to re-emit the contextual layer tokens as part of the theme

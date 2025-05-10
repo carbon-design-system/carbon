@@ -175,6 +175,7 @@
   .#{$prefix}--inline-notification--warning-alt
     .#{$prefix}--inline-notification__icon
     path:first-of-type {
+    // TODO: Doesn't $black-100 break for G90, G100 themes plus dark high contrast system setting?
     fill: $black-100;
     opacity: 1;
   }
@@ -315,13 +316,5 @@
   .#{$prefix}--inline-notification__close-button:focus,
   .#{$prefix}--btn.#{$prefix}--btn--ghost.#{$prefix}--inline-notification__action-button:focus {
     @include high-contrast-mode('focus');
-  }
-
-  .#{$prefix}--inline-notification .#{$prefix}--inline-notification__icon {
-    @include high-contrast-mode('icon-fill');
-  }
-  .#{$prefix}--inline-notification
-    .#{$prefix}--inline-notification__close-icon {
-    @include high-contrast-mode('icon-fill');
   }
 }

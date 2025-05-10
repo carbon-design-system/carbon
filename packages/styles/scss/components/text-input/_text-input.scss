@@ -172,8 +172,6 @@
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus
     svg {
     fill: $icon-primary;
-
-    @include high-contrast-mode('icon-fill');
   }
 
   .#{$prefix}--text-input--invalid,
@@ -522,14 +520,6 @@
     )
     > * {
     block-size: 1rem;
-  }
-
-  // Windows HCM fix
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
-    svg,
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover
-    svg {
-    @include high-contrast-mode('icon-fill');
   }
 
   .#{$prefix}--text-input__label-wrapper {
