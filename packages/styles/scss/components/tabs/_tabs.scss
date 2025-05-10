@@ -410,7 +410,7 @@
       }
 
       svg:hover {
-        fill: $text-primary;
+        fill: $icon-primary;
       }
 
       &:hover {
@@ -427,12 +427,12 @@
       + .#{$prefix}--tabs__nav-item--close
       .#{$prefix}--tabs__nav-item--close-icon
       svg {
-      fill: $text-primary;
+      fill: $icon-primary;
     }
 
     .#{$prefix}--tabs__nav-item--close-icon--selected {
       svg {
-        fill: $text-primary;
+        fill: $icon-primary;
       }
     }
 
@@ -445,7 +445,9 @@
       cursor: not-allowed;
 
       svg {
-        fill: $tab-text-disabled;
+        // Note: $icon-disabled maps to the same color as $tab-text-disabled, but in high contrast mode, $icon-disabled
+        // maps to the system-defined "GrayText" color, which is better for high contrast mode support.
+        fill: $icon-disabled;
       }
 
       &:focus,
