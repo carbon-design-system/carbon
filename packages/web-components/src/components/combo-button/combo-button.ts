@@ -46,7 +46,7 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
    * Specify whether the ComboButton should be disabled, or not.
    */
   @property({ type: Boolean, reflect: true })
-  disabled;
+  disabled?;
 
   /**
    * Provide the label to be rendered on the primary action button.
@@ -129,9 +129,12 @@ class CDSComboButton extends HostListenerMixin(LitElement) {
   }
 
   render() {
-    const { size, disabled, label, tooltipAlignment, menuAlignment } = this;
+    const { size, disabled, label, tooltipAlignment, menuAlignment, onClick } =
+      this;
     return html`
-      <cds-button size=${size} ?disabled=${disabled}> ${label} </cds-button>
+      <cds-button size=${size} ?disabled=${disabled} @click=${onClick}>
+        ${label}
+      </cds-button>
       <cds-icon-button
         size=${size}
         ?disabled=${disabled}

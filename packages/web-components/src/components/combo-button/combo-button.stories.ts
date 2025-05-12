@@ -16,7 +16,6 @@ const args = {
   menuAlignment: 'bottom',
 };
 
-// DOUBLE CHECK ARGS AND ARG TYPES -> onClick
 const argTypes = {
   disabled: {
     control: 'boolean',
@@ -24,11 +23,12 @@ const argTypes = {
   },
   label: {
     control: 'text',
-    description: `Provide the label to be rendered on the trigger button.`,
+    description: 'Provide the label to be rendered on the trigger button.',
   },
   menuAlignment: {
     control: 'select',
-    description: `Experimental property. Specify how the menu should align with the button element`,
+    description:
+      'Experimental property. Specify how the menu should align with the button element',
     options: [
       'top',
       'top-start',
@@ -39,9 +39,9 @@ const argTypes = {
     ],
   },
   onClick: {
-    table: {
-      disable: true,
-    },
+    control: true,
+    description:
+      'Provide an optional function to be called when the primary action element is clicked.',
   },
   size: {
     control: 'radio',
@@ -60,20 +60,34 @@ const argTypes = {
 export const Default = {
   argTypes: argTypes,
   args: args,
-  render: ({ disabled, label, menuAlignment, size, tooltipAlignment }) => html`
+  render: ({
+    disabled,
+    label,
+    menuAlignment,
+    size,
+    tooltipAlignment,
+    onClick,
+  }) => html`
     <cds-combo-button
       label="${label}"
       menu-alignment=${menuAlignment}
       size=${size}
       ?disabled=${disabled}
-      .tooltip-alignment="${tooltipAlignment}">
+      .tooltip-alignment="${tooltipAlignment}"
+      .onClick=${onClick}>
       <cds-menu>
         <cds-menu-item
-          label="Second action with a long label description"></cds-menu-item>
-        <cds-menu-item label="Third action"></cds-menu-item>
+          label="Second action with a long label description"
+          .handleClick=${onClick}></cds-menu-item>
+        <cds-menu-item
+          label="Third action"
+          .handleClick=${onClick}></cds-menu-item>
         <cds-menu-item label="Fourth action" disabled></cds-menu-item>
         <cds-menu-item-divider></cds-menu-item-divider>
-        <cds-menu-item label="Danger action" kind="danger"></cds-menu-item>
+        <cds-menu-item
+          label="Danger action"
+          kind="danger"
+          .handleClick=${onClick}></cds-menu-item>
       </cds-menu>
     </cds-combo-button>
   `,
@@ -82,7 +96,14 @@ export const Default = {
 export const ExperimentalAutoAlign = {
   argTypes: argTypes,
   args: args,
-  render: ({ disabled, label, menuAlignment, size, tooltipAlignment }) => html`
+  render: ({
+    disabled,
+    label,
+    menuAlignment,
+    size,
+    tooltipAlignment,
+    onClick,
+  }) => html`
     <div style="width: 5000px; height: 5000px;">
       <div style="position: absolute; bottom: 20px">
         <cds-combo-button
@@ -185,7 +206,10 @@ export const withMenuAlignment = {
 
     <div
       style="display: flex; justify-content: space-between; margin-top: 15rem">
-      <cds-combo-button label="Top" menu-alignment="top">
+      <cds-combo-button
+        label="Top"
+        menu-alignment="top"
+        tooltip-alignment="bottom">
         <cds-menu>
           <cds-menu-item
             label="Second action with a long label description"></cds-menu-item>
@@ -194,7 +218,10 @@ export const withMenuAlignment = {
         </cds-menu>
       </cds-combo-button>
 
-      <cds-combo-button label="Top start" menu-alignment="top-start">
+      <cds-combo-button
+        label="Top start"
+        menu-alignment="top-start"
+        tooltip-alignment="bottom">
         <cds-menu>
           <cds-menu-item
             label="Second action with a long label description"></cds-menu-item>
@@ -203,7 +230,10 @@ export const withMenuAlignment = {
         </cds-menu>
       </cds-combo-button>
 
-      <cds-combo-button label="Top end" menu-alignment="top-end">
+      <cds-combo-button
+        label="Top end"
+        menu-alignment="top-end"
+        tooltip-alignment="bottom">
         <cds-menu>
           <cds-menu-item
             label="Second action with a long label description"></cds-menu-item>
