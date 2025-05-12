@@ -168,7 +168,7 @@ export const NonModal = ({ open: _open, ...args }) => {
             assumenda ratione officia Voluptate beatae eligendi placeat nemo
             laborum, ratione.
           </p>
-          <br></br>
+
           <TextInput
             id="dialog-text-input"
             labelText="Name"
@@ -210,12 +210,10 @@ export const WithScrollingContent = ({ open: _open, ...args }) => {
   }
 
   function closeDialog(e) {
-    console.log('e', e);
     setOpen(false);
   }
 
   function handleRequestClose(e) {
-    console.log('ee', e);
     action('Dialog onRequestClose');
     closeDialog(e);
   }
@@ -257,7 +255,7 @@ export const WithScrollingContent = ({ open: _open, ...args }) => {
               mattis. Nunc non sodales magna. Proin ornare tellus quis hendrerit
               egestas. Donec pharetra leo nec molestie sollicitudin.
             </p>
-            <br></br>
+
             <TextInput
               id="dialog-text-input"
               labelText="Name"
@@ -282,7 +280,7 @@ export const WithScrollingContent = ({ open: _open, ...args }) => {
               assumenda ratione officia Voluptate beatae eligendi placeat nemo
               laborum, ratione.
             </p>
-            <br></br>
+
             <TextInput
               id="dialog-text-input"
               labelText="Name"

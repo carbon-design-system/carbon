@@ -97,10 +97,10 @@
     position: relative;
     overflow: visible;
     inline-size: 100%;
-    margin-block-end: 0.5rem;
+    margin-block-end: $spacing-03;
     min-block-size: $spacing-09;
-    padding-block-start: 1rem;
-    padding-inline: 1rem 3rem;
+    padding-block-start: $spacing-05;
+    padding-inline: $spacing-05 $spacing-09;
   }
 
   /* Transition the :backdrop when the dialog modal is promoted to the top layer */
@@ -179,22 +179,21 @@ because the nesting selector cannot represent pseudo-elements. */
     position: relative;
     grid-column: 1 / -1;
     grid-row: 2 / -2;
-    padding-block: 0.5rem 3rem;
-    padding-inline: 1rem;
+    padding-block: $spacing-03 $spacing-09;
+    padding-inline: $spacing-05;
   }
 
   .#{$prefix}--dialog-scroll-content {
-    border-block-end: 2px solid transparent;
-
+    border-block-end: $spacing-01 solid transparent;
     mask-image: linear-gradient(
         to bottom,
-        $layer calc(100% - 80px),
-        transparent calc(100% - 48px),
+        $layer calc(100% - $spacing-11),
+        transparent calc(100% - $spacing-09),
         transparent 100%
       ),
-      linear-gradient(to left, $layer 0, 16px, transparent 16px),
-      linear-gradient(to right, $layer 0, 2px, transparent 2px),
-      linear-gradient(to top, $layer 0, 2px, transparent 2px);
+      linear-gradient(to left, $layer 0, $spacing-05, transparent $spacing-05),
+      linear-gradient(to right, $layer 0, $spacing-01, transparent $spacing-01),
+      linear-gradient(to top, $layer 0, $spacing-01, transparent $spacing-01);
     max-block-size: 60vh;
     overflow-y: auto;
   }
@@ -210,7 +209,7 @@ because the nesting selector cannot represent pseudo-elements. */
   .#{$prefix}--dialog-footer {
     display: flex;
     justify-content: flex-end;
-    block-size: convert.to-rem(64px);
+    block-size: $spacing-10;
     grid-column: 1/-1;
     grid-row: -1/-1;
     margin-block-start: auto;
@@ -220,7 +219,7 @@ because the nesting selector cannot represent pseudo-elements. */
     flex: 0 1 50%;
     align-items: baseline;
     margin: 0;
-    block-size: convert.to-rem(64px);
+    block-size: $spacing-10;
     max-inline-size: none;
   }
 
@@ -245,7 +244,7 @@ because the nesting selector cannot represent pseudo-elements. */
 
   .#{$prefix}--dialog--danger
     .#{$prefix}--dialog-container:has(.#{$prefix}--dialog-footer) {
-    @include ai-popover-gradient('default', 64px, 'layer');
+    @include ai-popover-gradient('default', $spacing-10, 'layer');
 
     box-shadow:
       inset 0 -80px 0 -16px $layer,
@@ -261,8 +260,8 @@ because the nesting selector cannot represent pseudo-elements. */
         transparent calc(100% - 48px),
         transparent 100%
       ),
-      linear-gradient(to left, $layer 0, 16px, transparent 16px),
-      linear-gradient(to right, $layer 0, 2px, transparent 2px),
-      linear-gradient(to top, $layer 0, 2px, transparent 2px);
+      linear-gradient(to left, $layer 0, $spacing-05, transparent $spacing-05),
+      linear-gradient(to right, $layer 0, $spacing-01, transparent $spacing-01),
+      linear-gradient(to top, $layer 0, $spacing-01, transparent $spacing-01);
   }
 }

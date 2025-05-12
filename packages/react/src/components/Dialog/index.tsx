@@ -730,8 +730,6 @@ const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
     useEffect(() => {
       if (danger && secondaryButtonRef) {
         const focusFrame = requestAnimationFrame(() => {
-          console.log('true');
-          console.log('secondaryButtonRef', secondaryButtonRef);
           secondaryButtonRef.focus();
         });
 
