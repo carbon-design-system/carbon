@@ -263,7 +263,6 @@ function CodeSnippet({
     ref: getCodeRef() as React.RefObject<HTMLElement>,
     onResize: () => {
       if (codeContentRef?.current && type === 'multi') {
-        console.log('resize?');
         const { height } = codeContentRef.current.getBoundingClientRect();
 
         if (
