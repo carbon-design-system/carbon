@@ -8,7 +8,7 @@
 import { html } from 'lit';
 
 const args = {
-  paragraph: true,
+  paragraph: false,
   heading: false,
   lineCount: 3,
   width: '100%',
