@@ -112,6 +112,10 @@
       inline-size: convert.to-rem(10px);
     }
   }
+  // Adjust label spacing for small toggle
+  .#{$prefix}--toggle--small .#{$prefix}--toggle__label {
+    margin-block-start: $spacing-03;
+  }
 
   .#{$prefix}--toggle__appearance--sm
     .#{$prefix}--toggle__switch--checked::before {
