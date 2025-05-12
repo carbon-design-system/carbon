@@ -14,7 +14,7 @@ import React, {
   useCallback,
 } from 'react';
 import classNames from 'classnames';
-import useResizeObserver from 'use-resize-observer';
+import { useResizeObserver } from '../../internal/useResizeObserver';
 import { ChevronDown } from '@carbon/icons-react';
 import Copy from '../Copy';
 import Button from '../Button';
@@ -263,6 +263,7 @@ function CodeSnippet({
     ref: getCodeRef() as React.RefObject<HTMLElement>,
     onResize: () => {
       if (codeContentRef?.current && type === 'multi') {
+        console.log('resize?');
         const { height } = codeContentRef.current.getBoundingClientRect();
 
         if (
