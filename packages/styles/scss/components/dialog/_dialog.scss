@@ -30,11 +30,10 @@
     block-size: fit-content;
     color: $text-primary;
     inline-size: 48rem;
-    max-block-size: 80vh;
     max-inline-size: 100%;
+
     opacity: 0;
     transform: translateY(calc(-1 * #{$spacing-06}));
-
     /** opening and closing is used in as allow-discrete is not currently supported wide enough
      * https://caniuse.com/mdn-css_properties_display_is_transitionable
      */
@@ -121,7 +120,6 @@
 
   .#{$prefix}--dialog[open]::backdrop {
     opacity: 1;
-
     transition:
       background-color $duration-moderate-02 motion(exit, expressive),
       opacity $duration-moderate-02 motion(exit, expressive);
@@ -151,6 +149,7 @@ because the nesting selector cannot represent pseudo-elements. */
 
   .#{$prefix}--dialog-header__label {
     @include component-reset.reset;
+
     @include type-style('label-01');
 
     color: $text-secondary;
@@ -170,17 +169,27 @@ because the nesting selector cannot represent pseudo-elements. */
     position: relative;
     display: grid;
     background-color: $layer;
-    grid-template-columns: 100%;
-    grid-template-rows: auto 1fr auto;
     inline-size: 100%;
+    max-block-size: 100%;
+    @include breakpoint(md) {
+      max-block-size: 90%;
+    }
+    @include breakpoint(lg) {
+      max-block-size: 84%;
+    }
   }
 
   .#{$prefix}--dialog-content {
     position: relative;
-    grid-column: 1 / -1;
-    grid-row: 2 / -2;
+    overflow: auto;
     padding-block: $spacing-03 $spacing-09;
-    padding-inline: $spacing-05;
+    padding-inline: $spacing-05 $spacing-05;
+    @include breakpoint(md) {
+      max-block-size: 70vh;
+    }
+    @include breakpoint(lg) {
+      max-block-size: 64vh;
+    }
   }
 
   .#{$prefix}--dialog-scroll-content {
@@ -194,8 +203,6 @@ because the nesting selector cannot represent pseudo-elements. */
       linear-gradient(to left, $layer 0, $spacing-05, transparent $spacing-05),
       linear-gradient(to right, $layer 0, $spacing-01, transparent $spacing-01),
       linear-gradient(to top, $layer 0, $spacing-01, transparent $spacing-01);
-    max-block-size: 60vh;
-    overflow-y: auto;
   }
 
   .#{$prefix}--dialog-scroll-content > *:last-child {
@@ -210,8 +217,6 @@ because the nesting selector cannot represent pseudo-elements. */
     display: flex;
     justify-content: flex-end;
     block-size: $spacing-10;
-    grid-column: 1/-1;
-    grid-row: -1/-1;
     margin-block-start: auto;
   }
 
@@ -256,8 +261,8 @@ because the nesting selector cannot represent pseudo-elements. */
     .#{$prefix}--dialog-content.#{$prefix}--dialog-scroll-content {
     mask-image: linear-gradient(
         to bottom,
-        $layer calc(100% - 80px),
-        transparent calc(100% - 48px),
+        $layer calc(100% - $spacing-11),
+        transparent calc(100% - $spacing-09),
         transparent 100%
       ),
       linear-gradient(to left, $layer 0, $spacing-05, transparent $spacing-05),
