@@ -56,6 +56,7 @@
       'background-selected-hover',
       SelectedItem
     );
+    @include custom-property.declaration('background-inverse', SelectedItem);
     @include custom-property.declaration(
       'layer-selected-inverse',
       SelectedItem
