@@ -7063,6 +7063,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "defaultSelected": Object {
+        "type": "bool",
+      },
       "disabled": Object {
         "type": "bool",
       },
