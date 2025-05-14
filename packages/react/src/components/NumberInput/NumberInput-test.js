@@ -447,6 +447,34 @@ describe('NumberInput', () => {
         expect(wrapper.find('NumberInput').instance().state.value).toEqual(10);
       });
 
+      it('should increase by the value(decimal) of step', () => {
+        wrapper.setProps({
+          step: 10,
+          value: 0.01,
+        });
+        // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+        expect(wrapper.find('NumberInput').instance().state.value).toEqual(
+          0.01
+        );
+        upArrow.simulate('click');
+        // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+        expect(wrapper.find('NumberInput').instance().state.value).toEqual(
+          10.01
+        );
+        upArrow.simulate('click');
+        expect(wrapper.find('NumberInput').instance().state.value).toEqual(
+          20.01
+        );
+        upArrow.simulate('click');
+        expect(wrapper.find('NumberInput').instance().state.value).toEqual(
+          30.01
+        );
+        upArrow.simulate('click');
+        expect(wrapper.find('NumberInput').instance().state.value).toEqual(
+          40.01
+        );
+      });
+
       it('should decrease by the value of step', () => {
         wrapper.setProps({
           step: 10,
@@ -457,6 +485,26 @@ describe('NumberInput', () => {
         downArrow.simulate('click');
         // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
         expect(wrapper.find('NumberInput').instance().state.value).toEqual(90);
+      });
+
+      it('should decrease by the value(decimal) of step', () => {
+        wrapper.setProps({
+          step: 10,
+          value: 50.01,
+        });
+        // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+        expect(wrapper.find('NumberInput').instance().state.value).toEqual(
+          50.01
+        );
+        downArrow.simulate('click');
+        // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+        expect(wrapper.find('NumberInput').instance().state.value).toEqual(
+          40.01
+        );
+        downArrow.simulate('click');
+        expect(wrapper.find('NumberInput').instance().state.value).toEqual(
+          30.01
+        );
       });
 
       it('should not invoke onClick when down arrow is clicked and value is 0', () => {
