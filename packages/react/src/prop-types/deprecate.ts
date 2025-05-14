@@ -26,8 +26,6 @@ const warningCache = new Map<string, Set<string>>();
  */
 export const deprecate = (
   propType: PropValidator,
-  // TODO: Should this parameter be required? The only place it isn't set is in
-  // the tests for deprecate.
   message?: string
 ): PropValidator => {
   const checker: PropValidator = (props, propName, componentName, ...rest) => {
