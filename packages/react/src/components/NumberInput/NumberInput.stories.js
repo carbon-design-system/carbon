@@ -13,6 +13,7 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './NumberInput.mdx';
+import { NumberFormatter, NumberParser } from '@carbon/utilities';
 
 export default {
   title: 'Components/NumberInput',
@@ -72,6 +73,52 @@ const sharedArgTypes = {
       disable: true,
     },
   },
+};
+
+export const WithTypeOfText = (args) => {
+  /**
+   * The current text value of the input.
+   * Updated as the user types and formatted on blur.
+   */
+  const [inputValue, setInputValue] = React.useState('50');
+
+  /**
+   * The currently parsed number value.
+   * Updated based on the `inputValue` as the user types.
+   */
+  const [numberValue, setNumberValue] = React.useState();
+
+  // Force german locale for testing
+  const parser = new NumberParser('DE', { style: 'decimal' });
+
+  const formatter = new NumberFormatter('DE');
+  // For locale auto detection instead, get the numbering system and pass it to NumberFormatter:
+  // const numberingSystem = parser.getNumberingSystem(inputValue)
+  // const formatter = new NumberFormatter(locale, {...formatOptions, numberingSystem})
+
+  const handleChange = (event, { value }) => {
+    setNumberValue(parser.parse(value));
+    setInputValue(value);
+  };
+
+  const handleBlur = () => {
+    setInputValue(formatter.format(numberValue));
+  };
+
+  return (
+    <NumberInput
+      id="default-number-input"
+      min={-100}
+      max={100}
+      value={inputValue}
+      inputMode="decimal"
+      label="NumberInput label"
+      helperText="Optional helper text."
+      onChange={handleChange}
+      onBlur={handleBlur}
+      {...args}
+    />
+  );
 };
 
 export const Default = (args) => {

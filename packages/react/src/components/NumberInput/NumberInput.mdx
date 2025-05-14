@@ -18,6 +18,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   - [Overview](#overview)
   - [Skeleton state](#skeleton-state)
   - [AI Label](#ai-label)
+  - [Number formatting](#formatting)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -53,6 +54,26 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(NumberInputStories.withAILabel),
+    },
+  ]}
+/>
+
+## Number formatting
+
+Since there are a number of limitations and ux issues surrounding
+`input type="number"`, the input `type` is configurable to be `text` instead.
+When using `type="text"`, provide `pattern` and `inputmode` attributes based on
+the numbers you intend to accept.
+
+Number parsing and formatting helpers available through `@carbon/utilities` can
+be used with `onChange`/`onBlur` to support locale formatting.
+
+<Canvas
+  of={NumberInputStories.WithTypeOfText}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(NumberInputStories.WithTypeOfText),
     },
   ]}
 />

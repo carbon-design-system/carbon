@@ -190,6 +190,11 @@ export interface NumberInputProps
   step?: number;
 
   /**
+   * **Experimental**: Specify if the input should be of type text or number
+   */
+  type?: 'number' | 'text';
+
+  /**
    * Specify the value of the input
    */
   value?: number | string;
@@ -233,6 +238,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       slug,
       step = 1,
       translateWithId: t = (id) => defaultTranslations[id],
+      type = 'number',
       warn = false,
       warnText = '',
       value: controlledValue,
@@ -323,7 +329,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         value:
           allowEmpty && event.target.value === ''
             ? ''
-            : Number(event.target.value),
+            : type === 'text'
+              ? event.target.value
+              : Number(event.target.value),
         direction: value < event.target.value ? 'up' : 'down',
       };
       setValue(state.value);
@@ -477,7 +485,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               pattern="[0-9]*"
               readOnly={readOnly}
               step={step}
-              type="number"
+              type={type}
               value={value}
             />
             {slug ? (
@@ -556,7 +564,7 @@ NumberInput.propTypes = {
   defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   /**
-   * Specify if the wheel functionality for the input should be disabled, or not
+   * Specify if the wheel functionality for the input should be disabled, or no t
    */
   disableWheel: PropTypes.bool,
 
@@ -670,6 +678,11 @@ NumberInput.propTypes = {
    * Provide custom text for the component for each translation id
    */
   translateWithId: PropTypes.func,
+
+  /**
+   * **Experimental**: Specify if the input should be of type text or number
+   */
+  type: PropTypes.oneOf(['number', 'text']),
 
   /**
    * Specify the value of the input
