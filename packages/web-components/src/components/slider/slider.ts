@@ -577,9 +577,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
 
     return html`
       <label class="${labelClasses}" @click="${handleClickLabel}">
-        <slot name="label-text">
-          ${labelText && !hideLabel ? labelText : null}
-        </slot>
+        <slot name="label-text">${labelText}</slot>
       </label>
       <div class="${prefix}--slider-container">
         <span class="${prefix}--slider__range-label">
