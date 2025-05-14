@@ -14,12 +14,8 @@ import React, {
   ElementType,
   HTMLAttributeAnchorTarget,
 } from 'react';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 import { usePrefix } from '../../internal/usePrefix';
-import { PolymorphicProps } from '../../types/common';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
 
 export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
@@ -69,6 +65,11 @@ export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
    * Specify whether you want the link to receive visited styles after the link has been clicked
    */
   visited?: boolean;
+
+  /**
+   * Specify whether you want to use Carbon styles when using the `as` property.
+   */
+  asWithCarbonClasses?: boolean;
 }
 
 export type LinkProps<T extends React.ElementType> =
@@ -88,6 +89,7 @@ const LinkBase = React.forwardRef<
   (
     {
       as: BaseComponent,
+      asWithCarbonClasses = false,
       children,
       className: customClassName,
       href,
@@ -110,7 +112,8 @@ const LinkBase = React.forwardRef<
     });
     const rel = target === '_blank' ? 'noopener' : undefined;
     const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
-      className: BaseComponent ? undefined : className,
+      className:
+        BaseComponent && !asWithCarbonClasses ? customClassName : className,
       rel,
       target,
     };
