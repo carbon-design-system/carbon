@@ -205,7 +205,7 @@ export type CalRef = {
 export interface DatePickerProps {
   /**
    * Flatpickr prop passthrough enables direct date input, and when set to false,
-   * we must clear dates manually by resetting the value prop to empty string making it a controlled input.
+   * we must clear dates manually by resetting the value prop to to a falsy value (such as `""`, `null`, or `undefined`) or an array of all falsy values, making it a controlled input.
    */
   allowInput?: boolean;
 
@@ -853,10 +853,18 @@ const DatePicker = React.forwardRef(function DatePicker(
       calendarRef.current.set('inline', inline);
     }
   }, [inline]);
+
   useEffect(() => {
-    //when value prop is set to empty, this clears the flatpicker's calendar instance and text input
-    if (value === '') {
+    // when value prop is manually reset, this clears the flatpickr calendar instance and text input
+    // run if both:
+    // 1. value prop is set to a falsy value (`""`, `undefined`, `null`, etc) OR an array of all falsy values
+    // 2. flatpickr instance contains values in its `selectedDates` property so it hasn't already been cleared
+    if (
+      (!value || (Array.isArray(value) && value.every((date) => !date))) &&
+      calendarRef.current?.selectedDates.length
+    ) {
       calendarRef.current?.clear();
+
       if (startInputField.current) {
         startInputField.current.value = '';
       }
@@ -974,7 +982,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 DatePicker.propTypes = {
   /**
    * Flatpickr prop passthrough enables direct date input, and when set to false,
-   * we must clear dates manually by resetting the value prop to empty string making it a controlled input.
+   * we must clear dates manually by resetting the value prop to a falsy value (such as `""`, `null`, or `undefined`) or an array of all falsy values, making it a controlled input.
    */
   allowInput: PropTypes.bool,
 
