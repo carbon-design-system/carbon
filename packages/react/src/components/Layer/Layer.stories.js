@@ -10,6 +10,11 @@ import React from 'react';
 import { Layer, useLayer } from '../Layer';
 import mdx from './Layer.mdx';
 
+import Accordion from '../Accordion';
+import AccordionItem from '../AccordionItem';
+import TextInput from '../TextInput';
+import { Stack } from '../Stack';
+
 export default {
   title: 'Components/Layer',
   component: Layer,
@@ -121,4 +126,70 @@ export const UseLayer = () => {
 
 UseLayer.story = {
   name: 'useLayer',
+};
+
+export const Test = () => {
+  function TestComponent() {
+    return (
+      <div
+        style={{
+          padding: '2rem',
+        }}>
+        <Stack gap={6}>
+          <TextInput labelText="Text input" id="text-input-1" type="text" />
+          <Accordion>
+            <AccordionItem title="Accordion 1 title">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </AccordionItem>
+            <AccordionItem title="Accordion 2 title">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </AccordionItem>
+          </Accordion>
+        </Stack>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '50%' }}>
+        <h2>Nested layer components</h2>
+        <p>
+          Layer component doesn't automatically set the background, just changes
+          the components inside
+        </p>
+        <TestComponent />
+        <Layer>
+          <TestComponent />
+          <Layer>
+            <TestComponent />
+          </Layer>
+        </Layer>
+      </div>
+      <div style={{ width: '50%' }}>
+        <h2>Nested layer components withBackground</h2>
+        <p>
+          If you want the Layer component to automatically set the background
+          use the withBackground prop
+        </p>
+        <TestComponent />
+        <Layer withBackground>
+          <TestComponent />
+          <Layer withBackground>
+            <TestComponent />
+          </Layer>
+        </Layer>
+      </div>
+    </div>
+  );
 };
