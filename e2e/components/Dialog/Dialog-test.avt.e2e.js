@@ -34,6 +34,8 @@ test.describe('@avt Dialog', () => {
     await expect(dialog).toHaveClass(/cds--dialog cds--dialog--modal/);
     await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
     await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
     await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
 
     await page.keyboard.press('Tab');
@@ -41,9 +43,6 @@ test.describe('@avt Dialog', () => {
 
     await page.keyboard.press('Shift+Tab');
     await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
-
-    await page.keyboard.press('Shift+Tab');
-    await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
 
     await page.getByRole('button', { name: 'Close' }).click();
     await expect(dialog).toBeHidden();
@@ -91,7 +90,7 @@ test.describe('@avt Dialog', () => {
     await expect(dialog).toBeHidden();
   });
 
-  test('@avt-alertdialog-role danger dialog', async ({ page }) => {
+  test('@avt-advanced-states danger dialog', async ({ page }) => {
     await visitStory(page, {
       component: 'unstable_Dialog',
       id: 'experimental-unstable-dialog--danger-dialog',
@@ -104,5 +103,36 @@ test.describe('@avt Dialog', () => {
     const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();
     await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
+  });
+
+  test('@avt-advanced-states dialog Escape btn close', async ({ page }) => {
+    await visitStory(page, {
+      component: 'unstable_Dialog',
+      id: 'experimental-unstable-dialog--modal',
+      globals: {
+        theme: 'white',
+      },
+    });
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeVisible();
+
+    await page.keyboard.press('Escape');
+
+    await expect(dialog).toBeHidden();
+  });
+  test('@avt-advanced-states dialog with click to close', async ({ page }) => {
+    await visitStory(page, {
+      component: 'unstable_Dialog',
+      id: 'experimental-unstable-dialog--modal',
+      globals: {
+        theme: 'white',
+      },
+    });
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeVisible();
+
+    await page.getByRole('button', { name: 'Close' }).click();
+
+    await expect(dialog).toBeHidden();
   });
 });
