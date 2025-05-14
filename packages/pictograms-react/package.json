@@ -1,7 +1,7 @@
 {
   "name": "@carbon/pictograms-react",
   "description": "React components for pictograms in digital and software products using the Carbon Design System",
-  "version": "11.77.0-rc.0",
+  "version": "11.77.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -39,13 +39,13 @@
     "react": ">=16"
   },
   "dependencies": {
-    "@carbon/icon-helpers": "^10.59.0-rc.0",
+    "@carbon/icon-helpers": "^10.59.0",
     "@ibm/telemetry-js": "^1.5.0",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "^1.38.0-rc.0",
-    "@carbon/pictograms": "^12.51.0-rc.0",
+    "@carbon/icon-build-helpers": "^1.38.0",
+    "@carbon/pictograms": "^12.51.0",
     "rimraf": "^6.0.0"
   },
   "sideEffects": false
