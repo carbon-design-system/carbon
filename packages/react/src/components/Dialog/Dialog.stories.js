@@ -13,6 +13,7 @@ import {
   unstable__Dialog as Dialog,
   DialogControls,
   DialogCloseButton,
+  DialogBody,
 } from './';
 import Button from '../Button';
 import TextInput from '../TextInput';
@@ -85,8 +86,50 @@ export const Modal = ({ open: _open, ...args }) => {
           </DialogControls>
         </Dialog.Header>
 
-        <Dialog.Body>
+        <DialogBody>
           <VStack>
+            <p>
+              Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+              autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+              assumenda ratione officia Voluptate beatae eligendi placeat nemo
+              laborum, ratione.
+            </p>
+            <p>
+              Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+              autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+              assumenda ratione officia Voluptate beatae eligendi placeat nemo
+              laborum, ratione.
+            </p>
+            <TextInput
+              id="dialog-text-input"
+              labelText="Name"
+              placeholder="Enter your name"
+            />
+            <Select
+              id="dialog-select"
+              labelText="Region"
+              defaultValue="us-south">
+              <SelectItem value="us-south" text="US South" />
+              <SelectItem value="us-east" text="US East" />
+            </Select>
+            <p>
+              Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+              autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+              assumenda ratione officia Voluptate beatae eligendi placeat nemo
+              laborum, ratione.
+            </p>
+            <p>
+              Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+              autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+              assumenda ratione officia Voluptate beatae eligendi placeat nemo
+              laborum, ratione.
+            </p>
+            <p>
+              Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
+              autem officiis dolores facilis nulla earum! Neque quia nemo sequi
+              assumenda ratione officia Voluptate beatae eligendi placeat nemo
+              laborum, ratione.
+            </p>
             <p>
               Elit hic at labore culpa itaque fugiat. Consequuntur iure autem
               autem officiis dolores facilis nulla earum! Neque quia nemo sequi
@@ -106,7 +149,7 @@ export const Modal = ({ open: _open, ...args }) => {
               laborum, ratione.
             </p>
           </VStack>
-        </Dialog.Body>
+        </DialogBody>
         <Dialog.Footer>
           <Button type="button" kind="secondary" onClick={closeDialog}>
             Cancel
@@ -374,19 +417,18 @@ export const DangerDialog = (args) => {
         open={open}
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={() => {
-          // Perform dangerous action
           setOpen(false);
         }}>
         <Dialog.Header>
-          <Dialog.Title>Confirm Deletion</Dialog.Title>
+          <Dialog.Subtitle>Account resources</Dialog.Subtitle>
+          <Dialog.Title>
+            Are you sure you want to delete this custom domain?
+          </Dialog.Title>
           <Dialog.Controls>
             <Dialog.CloseButton onClick={() => setOpen(false)} />
           </Dialog.Controls>
         </Dialog.Header>
-        <Dialog.Body>
-          Are you sure you want to delete this item? This action cannot be
-          undone.
-        </Dialog.Body>
+        <Dialog.Body></Dialog.Body>
         <Dialog.Footer
           danger
           primaryButtonText="Delete"

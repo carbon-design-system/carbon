@@ -24,14 +24,15 @@
 /// @group dialog
 @mixin dialog {
   .#{$prefix}--dialog {
+    position: fixed;
     padding: 0;
     border: none;
+    margin: auto;
     background-color: $layer;
-    block-size: fit-content;
     color: $text-primary;
     inline-size: 48rem;
-    max-inline-size: 100%;
-
+    inset: 0;
+    max-block-size: 100%;
     opacity: 0;
     transform: translateY(calc(-1 * #{$spacing-06}));
     /** opening and closing is used in as allow-discrete is not currently supported wide enough
@@ -51,13 +52,10 @@
       max-inline-size: 84%;
     }
     @include breakpoint(lg) {
-      max-inline-size: 72%;
-    }
-    @include breakpoint(xlg) {
-      max-inline-size: 64%;
-    }
-    @include breakpoint(xlg) {
       max-inline-size: 60%;
+    }
+    @include breakpoint(xlg) {
+      max-inline-size: 48%;
     }
 
     &[open] {
@@ -94,7 +92,7 @@
 
   .#{$prefix}--dialog__header {
     position: relative;
-    overflow: visible;
+    grid-area: header;
     inline-size: 100%;
     margin-block-end: $spacing-03;
     min-block-size: $spacing-09;
@@ -161,34 +159,41 @@ because the nesting selector cannot represent pseudo-elements. */
 
     @include type-style('heading-03');
 
+    margin: 0;
     color: $text-primary;
+
     padding-inline-end: calc(20% - $spacing-09);
   }
 
   .#{$prefix}--dialog-container {
-    position: relative;
     display: grid;
     background-color: $layer;
+    grid-template-areas:
+      'header'
+      'content'
+      'footer';
+    grid-template-columns: 100%;
+    grid-template-rows: auto minmax(0, 1fr) auto;
     inline-size: 100%;
-    max-block-size: 100%;
+
     @include breakpoint(md) {
-      max-block-size: 90%;
+      max-block-size: 90vh;
     }
+
     @include breakpoint(lg) {
-      max-block-size: 84%;
+      max-block-size: 84vh;
     }
   }
 
   .#{$prefix}--dialog-content {
     position: relative;
-    overflow: auto;
+    grid-area: content;
+    overflow-y: auto;
     padding-block: $spacing-03 $spacing-09;
     padding-inline: $spacing-05 $spacing-05;
-    @include breakpoint(md) {
-      max-block-size: 70vh;
-    }
-    @include breakpoint(lg) {
-      max-block-size: 64vh;
+
+    &:focus {
+      @include focus-outline('outline');
     }
   }
 
@@ -215,9 +220,10 @@ because the nesting selector cannot represent pseudo-elements. */
 
   .#{$prefix}--dialog-footer {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
     block-size: $spacing-10;
-    margin-block-start: auto;
+    grid-area: footer;
   }
 
   .#{$prefix}--dialog-footer .#{$prefix}--btn {
