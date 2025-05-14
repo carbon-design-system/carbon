@@ -8,19 +8,28 @@ export {
   PageHeader,
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
+  PageHeaderContentPageActions,
+  PageHeaderContentText,
   PageHeaderTabBar,
   PageHeaderHeroImage,
+  PageHeaderTabs,
   //
   Root,
   BreadcrumbBar,
   Content,
+  ContentPageActions,
+  ContentText,
   TabBar,
   HeroImage,
+  Tabs,
 } from './PageHeader';
 export type {
   PageHeaderProps,
   PageHeaderBreadcrumbBarProps,
   PageHeaderContentProps,
+  PageHeaderContentPageActionsProps,
+  PageHeaderContentTextProps,
   PageHeaderTabBarProps,
   PageHeaderHeroImageProps,
+  PageHeaderTabsProps,
 } from './PageHeader';

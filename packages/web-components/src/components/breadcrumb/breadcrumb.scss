@@ -126,6 +126,10 @@ $css--plex: true !default;
     display: none;
   }
 }
+:host(#{$prefix}-breadcrumb-link[size='sm']) {
+  min-inline-size: $spacing-04;
+  text-align: center;
+}
 
 :host(#{$prefix}-breadcrumb-link[aria-current='page']) .#{$prefix}--link {
   color: $text-primary;

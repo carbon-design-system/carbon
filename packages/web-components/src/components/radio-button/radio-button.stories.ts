@@ -165,6 +165,29 @@ export const Default = {
   },
 };
 
+export const Vertical = {
+  render: () => {
+    return html`
+      <cds-radio-button-group
+        legend-text="Group label"
+        name="radio-group"
+        value="radio-1"
+        orientation="vertical">
+        <cds-radio-button
+          label-text="Radio button label"
+          value="radio-1"></cds-radio-button>
+        <cds-radio-button
+          label-text="Radio button label"
+          value="radio-2"></cds-radio-button>
+        <cds-radio-button
+          label-text="Radio button label"
+          value="radio-3"
+          disabledItem></cds-radio-button>
+      </cds-radio-button-group>
+    `;
+  },
+};
+
 export const Skeleton = {
   parameters: {
     percy: {

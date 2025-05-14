@@ -1,68 +1,58 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as OrderedListStories from './ordered-list.stories';
 
 <Meta of={OrderedListStories} />
 
-# List
+# Ordered list
 
-Represents a list.
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/list)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/list/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/list/accessibility)
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/list)
-> example implementation.
+## Table of Contents
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/list)
+- [Overview](#overview)
+- [Native List Styles](#native-list-styles)
+- [Nested](#nested)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
 
-## Getting started
+## Overview
 
-Here's a quick example to get you started.
+<div style={{ paddingLeft: '15px' }}>
+  <Canvas of={OrderedListStories.Default} />
+</div>
 
-### JS (via import)
+## Native List Styles
 
-```javascript
-import '@carbon/web-components/es/components/list/index.js';
-```
+<div style={{ paddingLeft: '15px' }}>
+  <Canvas of={OrderedListStories.NativeListStyles} />
+</div>
 
-<Markdown>{`${cdnJs({ components: ['list'] })}`}</Markdown>
-<Markdown>{`${cdnCss()}`}</Markdown>
+## Nested
 
-### HTML
+<div style={{ paddingLeft: '15px' }}>
+  <Canvas of={OrderedListStories.Nested} />
+</div>
 
-```html
-<h3>cds-ordered-list</h3>
+## Component API
 
-<cds-ordered-list>
-  <cds-list-item>
-    Ordered List level 1
-    <cds-ordered-list>
-      <cds-list-item>Ordered List level 2</cds-list-item>
-      <cds-list-item>
-        Ordered List level 2
-        <cds-ordered-list>
-          <cds-list-item>Ordered List level 2</cds-list-item>
-          <cds-list-item>Ordered List level 2</cds-list-item>
-        </cds-ordered-list>
-      </cds-list-item>
-    </cds-ordered-list>
-  </cds-list-item>
-  <cds-list-item>Ordered List level 1</cds-list-item>
-  <cds-list-item>Ordered List level 1</cds-list-item>
-</cds-ordered-list>
-```
-
-## `<cds-ordered-list>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-ordered-list native>`) and `false` means not setting the attribute (e.g.
-`<cds-ordered-list>` without `native` attribute).
+## `cds-ordered-list`
 
 <ArgTypes of="cds-ordered-list" />
 
-## `<cds-list-item>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-list nested>`) and `false` means not setting the attribute (e.g.
-`<cds-list>` without `nested` attribute).
+## `cds-list-item`
 
 <ArgTypes of="cds-list-item" />
+
+<Markdown>{`${cdnJs({ components: ['list'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/list/ordered-list.mdx).

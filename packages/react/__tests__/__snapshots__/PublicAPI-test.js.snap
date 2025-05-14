@@ -1972,6 +1972,23 @@ Map {
     },
     "TableCell": Object {
       "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "colSpan": Object {
+          "type": "number",
+        },
+        "hasAILabelHeader": Object {
+          "type": "bool",
+        },
+        "headers": Object {
+          "type": "string",
+        },
+      },
       "render": [Function],
     },
     "TableContainer": Object {
@@ -2926,6 +2943,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "dismissTooltipLabel": Object {
+        "type": "string",
+      },
       "id": Object {
         "type": "string",
       },
@@ -3857,6 +3877,15 @@ Map {
       "translateWithId": Object {
         "type": "func",
       },
+      "type": Object {
+        "args": Array [
+          Array [
+            "default",
+            "inline",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "useTitleInItem": Object {
         "type": "bool",
       },
@@ -4064,6 +4093,55 @@ Map {
   },
   "HStack" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "gap": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "args": Array [
+                Array [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                ],
+              ],
+              "type": "oneOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "orientation": Object {
+        "args": Array [
+          Array [
+            "horizontal",
+            "vertical",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
     "render": [Function],
   },
   "Header" => Object {
@@ -5738,6 +5816,141 @@ Map {
   },
   "OverflowMenu" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "align": [Function],
+      "aria-label": Object {
+        "type": "string",
+      },
+      "ariaLabel": [Function],
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "direction": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "flipped": Object {
+        "type": "bool",
+      },
+      "focusTrap": Object {
+        "type": "bool",
+      },
+      "iconClass": Object {
+        "type": "string",
+      },
+      "iconDescription": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "light": [Function],
+      "menuOffset": Object {
+        "args": Array [
+          Array [
+            Object {
+              "args": Array [
+                Object {
+                  "left": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "top": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+            Object {
+              "type": "func",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "menuOffsetFlip": Object {
+        "args": Array [
+          Array [
+            Object {
+              "args": Array [
+                Object {
+                  "left": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                  "top": Object {
+                    "isRequired": true,
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+            Object {
+              "type": "func",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "menuOptionsClass": Object {
+        "type": "string",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onClose": Object {
+        "type": "func",
+      },
+      "onFocus": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "onOpen": Object {
+        "type": "func",
+      },
+      "open": Object {
+        "type": "bool",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "selectorPrimaryFocus": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
     "render": [Function],
   },
   "OverflowMenuItem" => Object {
@@ -6853,6 +7066,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "defaultSelected": Object {
+        "type": "bool",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -7888,6 +8104,23 @@ Map {
   },
   "TableCell" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "colSpan": Object {
+        "type": "number",
+      },
+      "hasAILabelHeader": Object {
+        "type": "bool",
+      },
+      "headers": Object {
+        "type": "string",
+      },
+    },
     "render": [Function],
   },
   "TableContainer" => Object {
@@ -9474,6 +9707,55 @@ Map {
   },
   "VStack" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "gap": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "args": Array [
+                Array [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                ],
+              ],
+              "type": "oneOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "orientation": Object {
+        "args": Array [
+          Array [
+            "horizontal",
+            "vertical",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
     "render": [Function],
   },
   "unstable_FeatureFlags" => Object {
@@ -10000,6 +10282,77 @@ Map {
   },
   "unstable__FluidDatePickerInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "datePickerType": Object {
+        "args": Array [
+          Array [
+            "simple",
+            "single",
+            "range",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "decorator": Object {
+        "type": "node",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "helperText": Object {
+        "type": "node",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "pattern": [Function],
+      "placeholder": Object {
+        "type": "string",
+      },
+      "readOnly": Object {
+        "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "slug": [Function],
+      "type": Object {
+        "type": "string",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
     "render": [Function],
   },
   "unstable__FluidDatePickerSkeleton" => Object {
@@ -10802,8 +11155,49 @@ Map {
       },
       "render": [Function],
     },
+    "ContentPageActions": Object {
+      "displayName": "PageHeaderContentPageActions",
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "menuButtonLabel": Object {
+          "type": "string",
+        },
+        "pageActions": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "node",
+              },
+              Object {
+                "type": "array",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+      },
+    },
+    "ContentText": Object {
+      "displayName": "PageHeaderContentText",
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "subtitle": Object {
+          "type": "string",
+        },
+      },
+    },
     "HeroImage": Object {
-      "$$typeof": Symbol(react.forward_ref),
+      "displayName": "PageHeaderHeroImage",
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -10812,7 +11206,6 @@ Map {
           "type": "string",
         },
       },
-      "render": [Function],
     },
     "PageHeader": Object {
       "$$typeof": Symbol(react.forward_ref),
@@ -10860,8 +11253,49 @@ Map {
       },
       "render": [Function],
     },
+    "PageHeaderContentPageActions": Object {
+      "displayName": "PageHeaderContentPageActions",
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "menuButtonLabel": Object {
+          "type": "string",
+        },
+        "pageActions": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "node",
+              },
+              Object {
+                "type": "array",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+      },
+    },
+    "PageHeaderContentText": Object {
+      "displayName": "PageHeaderContentText",
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "subtitle": Object {
+          "type": "string",
+        },
+      },
+    },
     "PageHeaderHeroImage": Object {
-      "$$typeof": Symbol(react.forward_ref),
+      "displayName": "PageHeaderHeroImage",
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -10870,9 +11304,12 @@ Map {
           "type": "string",
         },
       },
-      "render": [Function],
     },
     "PageHeaderTabBar": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "PageHeaderTabs": Object {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },
@@ -10881,6 +11318,10 @@ Map {
       "render": [Function],
     },
     "TabBar": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Tabs": Object {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },
