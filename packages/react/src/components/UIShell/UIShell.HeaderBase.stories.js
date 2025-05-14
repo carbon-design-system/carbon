@@ -505,37 +505,72 @@ export const HeaderWSideNav = () => (
 
 HeaderWSideNav.storyName = 'Header w/ SideNav';
 
-export const HeaderWActionsAndRightPanel = (args) => (
-  <>
-    <Header aria-label="IBM Platform Name">
-      <HeaderName href="#" prefix="IBM">
-        [Platform]
-      </HeaderName>
-      <HeaderGlobalBar>
-        <HeaderGlobalAction
-          aria-label="Search"
-          onClick={action('search click')}>
-          <Search size={20} />
-        </HeaderGlobalAction>
-        <HeaderGlobalAction
-          aria-label="Notifications"
-          badgeCount={args.badgeCount}
-          isActive
-          onClick={action('notification click')}>
-          <Notification size={20} />
-        </HeaderGlobalAction>
-        <HeaderGlobalAction
-          aria-label="App Switcher"
-          onClick={action('app-switcher click')}
-          tooltipAlignment="end">
-          <SwitcherIcon size={20} />
-        </HeaderGlobalAction>
-      </HeaderGlobalBar>
-      <HeaderPanel expanded />
-    </Header>
-    <StoryContent />
-  </>
-);
+export const HeaderWActionsAndRightPanel = (args) => {
+  // Add state to control panel expansion
+  const [isPanelExpanded, setIsPanelExpanded] = useState(false);
+
+  // Function to toggle panel
+  const togglePanel = () => {
+    setIsPanelExpanded(!isPanelExpanded);
+  };
+
+  // Function to close panel specifically
+  const closePanel = () => {
+    setIsPanelExpanded(false);
+  };
+
+  return (
+    <>
+      <Header aria-label="IBM Platform Name">
+        <HeaderName href="#" prefix="IBM">
+          [Platform]
+        </HeaderName>
+        <HeaderGlobalBar>
+          <HeaderGlobalAction
+            aria-label="Search"
+            onClick={action('search click')}>
+            <Search size={20} />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="Notifications"
+            badgeCount={args.badgeCount}
+            isActive
+            onClick={action('notification click')}>
+            <Notification size={20} />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label={isPanelExpanded ? 'Close panel' : 'Open panel'}
+            isActive={isPanelExpanded}
+            onClick={togglePanel}
+            tooltipAlignment="end"
+            id="switcher-button">
+            <SwitcherIcon size={20} />
+          </HeaderGlobalAction>
+        </HeaderGlobalBar>
+        <HeaderPanel
+          expanded={isPanelExpanded}
+          onHeaderPanelFocus={closePanel}
+          addFocusListeners={true}
+          href="#switcher-button">
+          {/* Add panel content here */}
+          <Switcher aria-label="Switcher Container" expanded={isPanelExpanded}>
+            <SwitcherItem aria-label="Link 1" href="#">
+              Link 1
+            </SwitcherItem>
+            <SwitcherDivider />
+            <SwitcherItem href="#" aria-label="Link 2">
+              Link 2
+            </SwitcherItem>
+            <SwitcherItem href="#" aria-label="Link 3">
+              Link 3
+            </SwitcherItem>
+          </Switcher>
+        </HeaderPanel>
+      </Header>
+      <StoryContent />
+    </>
+  );
+};
 
 HeaderWActionsAndRightPanel.storyName = 'Header w/ Actions and Right Panel';
 
