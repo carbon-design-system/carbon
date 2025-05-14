@@ -215,24 +215,14 @@ class CDSMenu extends HostListenerMixin(LitElement) {
 
   _focusItem = (e: KeyboardEvent | undefined) => {
     let currentItem: number;
+
     if (document.activeElement?.tagName !== 'CDS-MENU') {
-      currentItem = this.activeitems?.findIndex((activeItem) => {
-        if (
-          activeItem.parent === null ||
-          activeItem.parent.tagName === 'CDS-MENU-ITEM-RADIO-GROUP'
-        ) {
-          let shadowRootActiveEl =
-            this._findActiveElementInShadowRoot(document);
-          return shadowRootActiveEl === activeItem.item;
-        } else {
-          let shadowRootActiveEl =
-            this._findActiveElementInShadowRoot(document);
-          if (activeItem.parent.tagName === 'CDS-MENU-ITEM-SELECTABLE') {
-            return shadowRootActiveEl === activeItem.item;
-          } else {
-            return activeItem.parent.contains(document.activeElement);
-          }
-        }
+      const shadowRootActiveEl = this._findActiveElementInShadowRoot(document);
+      currentItem = this.activeitems.findIndex((activeItem) => {
+        return (
+          shadowRootActiveEl == activeItem.item ||
+          activeItem.item.shadowRoot?.activeElement === shadowRootActiveEl
+        );
       });
     } else {
       currentItem = 0;
