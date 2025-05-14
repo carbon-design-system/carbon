@@ -9,9 +9,10 @@ import React, { forwardRef } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import {
   Toggletip,
+  ToggletipActions,
   ToggletipButton,
   ToggletipContent,
-  ToggletipActions,
+  ToggletipLabel,
 } from '..';
 import { Information } from '@carbon/react/icons';
 import userEvent from '@testing-library/user-event';
@@ -244,12 +245,6 @@ describe('Toggletip', () => {
       });
     });
 
-    // TODO: There is ToggletipLabel-test.js. Should this describe block be
-    // deleted or should that file be deleted? Doesn't seem like both should be
-    // necessary. Same applies to the following describe blocks:
-    // - ToggletipButton
-    // - ToggletipContent
-    // - ToggletipActions
     describe('ToggletipLabel', () => {
       it('should render with custom element using as prop', () => {
         const CustomElement = forwardRef((props, ref) => (
@@ -521,5 +516,83 @@ describe('Toggletip', () => {
         expect(onKeyDown).toHaveBeenCalledTimes(1);
       });
     });
+  });
+});
+
+describe('ToggletipActions', () => {
+  it('should support a custom class name with the `className` prop', () => {
+    render(
+      <ToggletipActions className="random-class">Actions</ToggletipActions>
+    );
+
+    const actionsElement = screen.getByText('Actions');
+
+    expect(actionsElement).toHaveClass('random-class');
+  });
+});
+
+describe('ToggletipButton', () => {
+  it('should support a custom class name with the `className` prop', () => {
+    render(<ToggletipButton className="random-button">Button</ToggletipButton>);
+
+    const buttonElement = screen.getByRole('button');
+
+    expect(buttonElement).toHaveClass('random-button');
+  });
+
+  it('should use the `label` prop as the label for the `ToggletipButton`', () => {
+    render(<ToggletipButton label="Custom aria label">Button</ToggletipButton>);
+
+    const buttonElement = screen.getByRole('button');
+
+    expect(buttonElement).toHaveAttribute('aria-label', 'Custom aria label');
+  });
+});
+
+describe('ToggletipContent', () => {
+  it('should support a custom class name with the `className` prop', () => {
+    const { container } = render(
+      <ToggletipContent className="random-content">Content</ToggletipContent>
+    );
+
+    // Since `ToggletipContent` passes the className to the `PopoverContent`,
+    // we check that an element with the custom class is rendered.
+    const contentElement = container.querySelector('.random-content');
+
+    expect(contentElement).toBeInTheDocument();
+  });
+});
+
+describe('ToggletipLabel', () => {
+  it('should support custom elements with the `as` prop', () => {
+    render(
+      <ToggletipLabel as="div" data-testid="toggletip-label">
+        Label Text
+      </ToggletipLabel>
+    );
+
+    const label = screen.getByTestId('toggletip-label');
+
+    expect(label.tagName).toBe('DIV');
+  });
+
+  it('should support a custom class name with the `className` prop', () => {
+    const { container } = render(
+      <ToggletipLabel className="custom-class">Label Text</ToggletipLabel>
+    );
+
+    expect(container.firstChild).toHaveClass('custom-class');
+  });
+
+  it('should forward extra props to the underlying element', () => {
+    render(
+      <ToggletipLabel as="p" data-custom="123">
+        Label Text
+      </ToggletipLabel>
+    );
+
+    const label = screen.getByText('Label Text');
+
+    expect(label).toHaveAttribute('data-custom', '123');
   });
 });

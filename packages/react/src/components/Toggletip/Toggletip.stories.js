@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { Information } from '@carbon/icons-react';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { default as Button } from '../Button';
 import { default as Link } from '../Link';
 import {
@@ -16,7 +16,6 @@ import {
   ToggletipContent,
   ToggletipActions,
 } from '../Toggletip';
-import { Modal } from '../Modal';
 import mdx from './Toggletip.mdx';
 
 export default {
@@ -136,27 +135,6 @@ Default.argTypes = {
       type: 'select',
     },
   },
-};
-
-export const Test = () => {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div>
-      <Button onClick={() => setOpen(true)}>Launch modal</Button>
-      <Modal
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        onRequestSubmit={() => setOpen(false)}>
-        <Toggletip>
-          <ToggletipButton>
-            <Button>this button has a toggletip</Button>
-          </ToggletipButton>
-          <ToggletipContent>test content</ToggletipContent>
-        </Toggletip>
-      </Modal>
-    </div>
-  );
 };
 
 Default.story = {
