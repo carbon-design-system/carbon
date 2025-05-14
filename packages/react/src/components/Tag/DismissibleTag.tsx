@@ -115,7 +115,7 @@ const DismissibleTag = forwardRef(
       text,
       tagTitle,
       type,
-      dismissTooltipLabel = text ? `Dismiss "${text}"` : 'Dismiss tag',
+      dismissTooltipLabel = 'Dismiss tag',
       ...other
     }: DismissibleTagProps<T>,
     forwardRef: ForwardedRef<HTMLDivElement>
