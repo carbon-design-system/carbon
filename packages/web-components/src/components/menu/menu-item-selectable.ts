@@ -40,6 +40,14 @@ class CDSmenuItemSelectable extends LitElement {
   }
 
   /**
+   * Automatically forwards focus to the first focusable element inside the shadow root (helps with focus styles when wrapped in menu-item-group)
+   */
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
+
+  /**
    * Sets the menu item's icon.
    */
   @property()
@@ -75,9 +83,29 @@ class CDSmenuItemSelectable extends LitElement {
     }
   };
 
-  firstUpdated(): void {
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('keydown', this._handleKeydown);
+  }
+
+  firstUpdated() {
+    const menuItemSelectable = this.shadowRoot?.querySelector(
+      `${prefix}-menu-item`
+    ) as HTMLElement | null;
+    if (menuItemSelectable) {
+      menuItemSelectable.addEventListener('keydown', this._handleKeydown);
+    }
+
+    this.setAttribute('tabindex', '-1');
     this.context.updateFromChild({ hasSelectableItems: true });
   }
+
+  _handleKeydown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      this._handleClick(e);
+    }
+  };
+
   render() {
     const { label, selected, _handleClick: handleClick } = this;
 
