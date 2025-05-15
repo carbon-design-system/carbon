@@ -67,7 +67,7 @@ const Layer = React.forwardRef<
       className: customClassName,
       children,
       level: overrideLevel,
-      withBackground,
+      withBackground = false,
       ...rest
     },
     ref
