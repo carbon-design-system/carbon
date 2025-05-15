@@ -10,7 +10,7 @@ import React from 'react';
 import { HeaderMenuItem } from '../';
 
 describe('HeaderMenuItem', () => {
-  it('should set the current class based on isActive', () => {
+  it('should set the current class and aria-current based on isActive', () => {
     render(
       <HeaderMenuItem data-testid="test" isActive>
         test
@@ -19,6 +19,7 @@ describe('HeaderMenuItem', () => {
     expect(screen.getByTestId('test')).toHaveClass(
       'cds--header__menu-item--current'
     );
+    expect(screen.getByTestId('test')).toHaveAttribute('aria-current', 'true');
   });
 
   it('should support a custom `className` prop on the outermost element', () => {
