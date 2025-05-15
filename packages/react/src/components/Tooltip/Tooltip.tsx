@@ -140,7 +140,8 @@ const Tooltip: TooltipComponent = React.forwardRef(
     } = child?.props ?? {};
 
     const hasLabel = !!label;
-    const hasAriaLabel = typeof ariaLabel !== 'undefined' && ariaLabel !== null;
+    const hasAriaLabel =
+      typeof ariaLabel === 'string' ? ariaLabel.trim() !== '' : false;
 
     // An `aria-label` takes precedence over `aria-describedby`, but when it's
     // needed and the user doesn't specify one, the fallback `id` is used.
