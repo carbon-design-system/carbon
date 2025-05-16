@@ -441,13 +441,8 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
           </label>`
         : null;
 
-    const labelText =
-      label && !hideLabel
-        ? html`<label class="${labelClasses}"> ${label} </label>`
-        : null;
-
     const labelWrapper = html`<div class="${prefix}--text-input__label-wrapper">
-      ${labelText} ${counter}
+      <label class="${labelClasses}"> ${label} </label> ${counter}
     </div>`;
 
     const helper = helperText
